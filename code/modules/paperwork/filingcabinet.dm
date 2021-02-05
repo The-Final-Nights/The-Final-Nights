@@ -38,9 +38,11 @@
 				I.forceMove(src)
 
 /obj/structure/filingcabinet/deconstruct(disassembled = TRUE)
-	new /obj/item/stack/sheet/metal(loc, 2)
-	for(var/obj/item/obj in src)
-		obj.forceMove(loc)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		new /obj/item/stack/sheet/iron(loc, 2)
+		for(var/obj/item/I in src)
+			I.forceMove(loc)
+	qdel(src)
 
 /obj/structure/filingcabinet/attackby(obj/item/P, mob/living/user, params)
 	var/list/modifiers = params2list(params)

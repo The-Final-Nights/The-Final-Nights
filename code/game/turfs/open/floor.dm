@@ -81,7 +81,7 @@
 					else
 						ScrapeAway(2, flags = CHANGETURF_INHERIT_AIR)
 					if(prob(33))
-						new /obj/item/stack/sheet/metal(src)
+						new /obj/item/stack/sheet/iron(src)
 				if(2)
 					ScrapeAway(2, flags = CHANGETURF_INHERIT_AIR)
 				if(3)
@@ -90,7 +90,7 @@
 					else
 						break_tile()
 					if(prob(33))
-						new /obj/item/stack/sheet/metal(src)
+						new /obj/item/stack/sheet/iron(src)
 		if(3)
 			if (prob(50))
 				src.break_tile()
