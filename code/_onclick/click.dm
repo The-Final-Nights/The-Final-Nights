@@ -311,10 +311,12 @@
 			if(B)
 				W.melee_attack_chain(src, B, params)
 	else
-	//Standard reach turf to turf or reaching inside storage
-		if(CanReach(A,W))
-			if(W)
-				W.melee_attack_chain(src, A, params)
+		if(W)
+			if(modifiers["right"])
+				var/after_attack_secondary_result = W.afterattack_secondary(A, src, FALSE, params)
+
+				if(after_attack_secondary_result == SECONDARY_ATTACK_CALL_NORMAL)
+					W.afterattack(A, src, FALSE, params)
 			else
 				if(ismob(A))
 					if(isliving(src))
