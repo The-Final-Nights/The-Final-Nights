@@ -44,8 +44,8 @@
 
 /obj/structure/filingcabinet/attackby(obj/item/P, mob/living/user, params)
 	var/list/modifiers = params2list(params)
-	if(P.tool_behaviour == TOOL_WRENCH && LAZYACCESS(modifiers, "right"))
-		to_chat(user, span_notice("You begin to [anchored ? "unwrench" : "wrench"] [src]."))
+	if(P.tool_behaviour == TOOL_WRENCH && LAZYACCESS(modifiers, RIGHT_CLICK))
+		to_chat(user, "<span class='notice'>You begin to [anchored ? "unwrench" : "wrench"] [src].</span>")
 		if(P.use_tool(src, user, 20, volume=50))
 			to_chat(user, span_notice("You successfully [anchored ? "unwrench" : "wrench"] [src]."))
 			set_anchored(!anchored)

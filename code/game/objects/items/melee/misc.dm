@@ -284,8 +284,19 @@
 		return
 	if(!isliving(target))
 		return
-	if (user.a_intent == INTENT_HARM)
-		if(!..())
+	var/list/modifiers = params2list(params)
+
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		..()
+		return
+	if(cooldown_check > world.time)
+		var/wait_desc = get_wait_description()
+		if (wait_desc)
+			to_chat(user, wait_desc)
+		return
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		if (H.check_shields(src, 0, "[user]'s [name]", MELEE_ATTACK))
 			return
 		if(!iscyborg(target))
 			return

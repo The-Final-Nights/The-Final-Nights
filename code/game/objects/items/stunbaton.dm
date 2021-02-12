@@ -194,7 +194,8 @@
 		if(check_martial_counter(L, user))
 			return
 
-	if(user.a_intent != INTENT_HARM)
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(turned_on)
 			if(attack_cooldown_check <= world.time)
 				if(baton_effect(M, user))

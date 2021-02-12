@@ -33,8 +33,18 @@
 		return
 	A.attack_hand(src)
 
-/// Return TRUE to cancel other attack hand effects that respect it.
-/atom/proc/attack_hand(mob/user)
+	if (LAZYACCESS(modifiers, RIGHT_CLICK))
+		var/secondary_result = A.attack_hand_secondary(src, modifiers)
+
+		if (secondary_result == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN || secondary_result == SECONDARY_ATTACK_CONTINUE_CHAIN)
+			return
+		else if (secondary_result != SECONDARY_ATTACK_CALL_NORMAL)
+			CRASH("attack_hand_secondary did not return a SECONDARY_ATTACK_* define.")
+
+	A.attack_hand(src, modifiers)
+
+/// Return TRUE to cancel other attack hand effects that respect it. Modifiers is the assoc list for click info such as if it was a right click.
+/atom/proc/attack_hand(mob/user, modifiers)
 	. = FALSE
 	if(!(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND))
 		add_fingerprint(user)

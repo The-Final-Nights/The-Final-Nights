@@ -340,7 +340,7 @@
 				discipline_slime(M)
 	else
 		if(stat == DEAD && surgeries.len)
-			if(M.a_intent == INTENT_HELP || M.a_intent == INTENT_DISARM)
+			if(!M.combat_mode || LAZYACCESS(modifiers, RIGHT_CLICK))
 				for(var/datum/surgery/S in surgeries)
 					if(S.next_step(M,M.a_intent))
 						return 1
@@ -355,7 +355,8 @@
 
 /mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
 	if(stat == DEAD && surgeries.len)
-		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
+		var/list/modifiers = params2list(params)
+		if(!user.combat_mode || (LAZYACCESS(modifiers, RIGHT_CLICK)))
 			for(var/datum/surgery/S in surgeries)
 				if(S.next_step(user,user.a_intent))
 					return 1

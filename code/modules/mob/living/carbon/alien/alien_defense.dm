@@ -57,15 +57,15 @@ In all, this is a lot like the monkey code. /N
 	. = ..()
 	if(.)	//to allow surgery to return properly.
 		return FALSE
-
 	switch(M.a_intent)
 		if("help")
 			help_shake_act(M)
 		if("grab")
 			grabbedby(M)
 		if ("harm")
-			M.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
-			return TRUE
+			if(LAZYACCESS(modifiers, RIGHT_CLICK))
+				M.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
+				return TRUE
 		if("disarm")
 			M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 			return TRUE

@@ -1536,6 +1536,10 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		if("disarm")
 			disarm(M, H, attacker_style)
 
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		disarm(M, H, attacker_style)
+		return // dont attack after
+
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
 	// Allows you to put in item-specific reactions based on species
 	var/meleemod = 1

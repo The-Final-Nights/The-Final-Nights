@@ -213,7 +213,8 @@
 	if(C.stat)
 		to_chat(user, "<span class='warning'>It would be dishonorable to attack a foe while they cannot retaliate.</span>")
 		return
-	if(user.a_intent == INTENT_DISARM)
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(!wielded)
 			return ..()
 		if(!ishuman(target))

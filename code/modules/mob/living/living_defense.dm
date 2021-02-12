@@ -237,6 +237,14 @@
 
 	if (M.apply_martial_art(src))
 		return TRUE
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		if (M != src)
+			M.disarm(src)
+			return TRUE
+	if (M.combat_mode)
+		if(HAS_TRAIT(M, TRAIT_PACIFISM))
+			to_chat(M, "<span class='warning'>You don't want to hurt anyone!</span>")
+			return FALSE
 
 	switch (M.a_intent)
 		if (INTENT_HARM)
@@ -295,12 +303,13 @@
 				to_chat(L, "<span class='warning'>Your bite misses [src]!</span>")
 	return FALSE
 
-/mob/living/attack_alien(mob/living/carbon/alien/humanoid/M)
-	switch(M.a_intent)
-		if ("help")
-			visible_message("<span class='notice'>[M] caresses [src] with its scythe-like arm.</span>", \
-							"<span class='notice'>[M] caresses you with its scythe-like arm.</span>", null, null, M)
-			to_chat(M, "<span class='notice'>You caress [src] with your scythe-like arm.</span>")
+/mob/living/attack_alien(mob/living/carbon/alien/humanoid/M, modifiers)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
+		return TRUE
+	if(M.combat_mode)
+		if(HAS_TRAIT(M, TRAIT_PACIFISM))
+			to_chat(M, "<span class='warning'>You don't want to hurt anyone!</span>")
 			return FALSE
 		if ("grab")
 			grabbedby(M)

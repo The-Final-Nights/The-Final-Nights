@@ -1938,18 +1938,16 @@
 	var/datum/martial_art/style = mind?.martial_art
 	var/attack_result = FALSE
 	if (style)
-		switch (a_intent)
-			if (INTENT_GRAB)
-				attack_result = style.grab_act(src, target)
-			if (INTENT_HARM)
-				if (HAS_TRAIT(src, TRAIT_PACIFISM))
-					return FALSE
-				attack_result = style.harm_act(src, target)
-			if (INTENT_DISARM)
-				attack_result = style.disarm_act(src, target)
-			if (INTENT_HELP)
-				attack_result = style.help_act(src, target)
-	return attack_result
+		if (is_grab)
+			attack_result = style.grab_act(src, target)
+		if(LAZYACCESS(modifiers, RIGHT_CLICK))
+			attack_result = style.disarm_act(src, target)
+		if(combat_mode)
+			if (HAS_TRAIT(src, TRAIT_PACIFISM))
+				return FALSE
+			attack_result = style.harm_act(src, target)
+		else
+			attack_result = style.help_act(src, target)
 
 //Making a proc for each of these.
 

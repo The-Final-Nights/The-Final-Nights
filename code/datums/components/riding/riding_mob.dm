@@ -182,7 +182,7 @@
 /datum/component/riding/creature/human/proc/on_host_unarmed_melee(mob/living/carbon/human/human_parent, atom/target)
 	SIGNAL_HANDLER
 
-	if(human_parent.a_intent == INTENT_DISARM && (target in human_parent.buckled_mobs))
+	if(LAZYACCESS(modifiers, RIGHT_CLICK) && (target in human_parent.buckled_mobs))
 		force_dismount(target)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 

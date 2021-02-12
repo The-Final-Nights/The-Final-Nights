@@ -68,6 +68,16 @@
 			updatehealth()
 			return TRUE
 
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
+		playsound(src, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+		var/shove_dir = get_dir(M, src)
+		if(!Move(get_step(src, shove_dir), shove_dir))
+			log_combat(M, src, "shoved", "failing to move it")
+			M.visible_message("<span class='danger'>[M.name] shoves [src]!</span>",
+				"<span class='danger'>You shove [src]!</span>", "<span class='hear'>You hear aggressive shuffling!</span>", COMBAT_MESSAGE_RANGE, list(src))
+			to_chat(src, "<span class='userdanger'>You're shoved by [M.name]!</span>")
+
 /**
 *This is used to make certain mobs (pet_bonus == TRUE) emote when pet, make a heart emoji at their location, and give the petter a moodlet.
 *
@@ -104,7 +114,7 @@
 
 /mob/living/simple_animal/attack_alien(mob/living/carbon/alien/humanoid/M)
 	if(..()) //if harm or disarm intent.
-		if(M.a_intent == INTENT_DISARM)
+		if(LAZYACCESS(modifiers, RIGHT_CLICK))
 			playsound(loc, 'sound/weapons/pierce.ogg', 25, TRUE, -1)
 			visible_message("<span class='danger'>[M] [response_disarm_continuous] [name]!</span>", \
 							"<span class='userdanger'>[M] [response_disarm_continuous] you!</span>", null, COMBAT_MESSAGE_RANGE, M)

@@ -431,7 +431,8 @@
 			to_chat(user, "<span class='warning'>[src] are recharging!</span>")
 		return
 
-	if(user.a_intent == INTENT_DISARM)
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		do_disarm(M, user)
 		return
 
