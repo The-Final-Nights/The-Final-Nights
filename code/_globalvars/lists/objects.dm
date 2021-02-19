@@ -13,23 +13,25 @@ GLOBAL_LIST_EMPTY(deliverybeacons)			        //list of all MULEbot delivery beac
 GLOBAL_LIST_EMPTY(deliverybeacontags)			    //list of all tags associated with delivery beacons.
 GLOBAL_LIST_EMPTY(wayfindingbeacons)			    //list of all navigation beacons used by wayfinding pinpointers
 GLOBAL_LIST_EMPTY(nuke_list)
-GLOBAL_LIST_EMPTY(alarmdisplay)				        //list of all machines or programs that can display station alerts
-GLOBAL_LIST_EMPTY(mechpad_list)						//list of all /obj/machinery/mechpad
+GLOBAL_LIST_EMPTY(alarmdisplay)         //list of all machines or programs that can display station alerts
+GLOBAL_LIST_EMPTY(mechpad_list) //list of all /obj/machinery/mechpad
 
-GLOBAL_LIST(chemical_reactions_list)				//list of all /datum/chemical_reaction datums. Used during chemical reactions
-GLOBAL_LIST(chemical_reagents_list)				//list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
-GLOBAL_LIST_EMPTY(tech_list)					//list of all /datum/tech datums indexed by id.
-GLOBAL_LIST_EMPTY(surgeries_list)				//list of all surgeries by name, associated with their path.
-GLOBAL_LIST_EMPTY(crafting_recipes)				//list of all table craft recipes
-GLOBAL_LIST_EMPTY(rcd_list)					//list of Rapid Construction Devices.
-GLOBAL_LIST_EMPTY(apcs_list)					//list of all Area Power Controller machines, separate from machines for powernet speeeeeeed.
-GLOBAL_LIST_EMPTY(tracked_implants)			//list of all current implants that are tracked to work out what sort of trek everyone is on. Sadly not on lavaworld not implemented...
-GLOBAL_LIST_EMPTY(tracked_chem_implants)			//list of implants the prisoner console can track and send inject commands too
-GLOBAL_LIST_EMPTY(poi_list)					//list of points of interest for observe/follow
-GLOBAL_LIST_EMPTY(pinpointer_list)			//list of all pinpointers. Used to change stuff they are pointing to all at once.
-GLOBAL_LIST_EMPTY(zombie_infection_list) 		// A list of all zombie_infection organs, for any mass "animation"
-GLOBAL_LIST_EMPTY(meteor_list)				// List of all meteors.
-GLOBAL_LIST_EMPTY(active_jammers)             // List of active radio jammers
+GLOBAL_LIST(chemical_reactions_list) //list of all /datum/chemical_reaction datums. Used during chemical reactions. Indexed by REACTANT types
+GLOBAL_LIST(chemical_reactions_list_product_index) //list of all /datum/chemical_reaction datums. Used for the reaction lookup UI. Indexed by PRODUCT type
+GLOBAL_LIST(chemical_reagents_list) //list of all /datum/reagent datums indexed by reagent id. Used by chemistry stuff
+GLOBAL_LIST(chemical_reactions_results_lookup_list) //List of all reactions with their associated product and result ids. Used for reaction lookups
+GLOBAL_LIST_EMPTY(tech_list) //list of all /datum/tech datums indexed by id.
+GLOBAL_LIST_EMPTY(surgeries_list) //list of all surgeries by name, associated with their path.
+GLOBAL_LIST_EMPTY(crafting_recipes) //list of all table craft recipes
+GLOBAL_LIST_EMPTY(rcd_list) //list of Rapid Construction Devices.
+GLOBAL_LIST_EMPTY(apcs_list) //list of all Area Power Controller machines, separate from machines for powernet speeeeeeed.
+GLOBAL_LIST_EMPTY(tracked_implants) //list of all current implants that are tracked to work out what sort of trek everyone is on. Sadly not on lavaworld not implemented...
+GLOBAL_LIST_EMPTY(tracked_chem_implants) //list of implants the prisoner console can track and send inject commands too
+GLOBAL_LIST_EMPTY(poi_list) //list of points of interest for observe/follow
+GLOBAL_LIST_EMPTY(pinpointer_list) //list of all pinpointers. Used to change stuff they are pointing to all at once.
+GLOBAL_LIST_EMPTY(zombie_infection_list) // A list of all zombie_infection organs, for any mass "animation"
+GLOBAL_LIST_EMPTY(meteor_list) // List of all meteors.
+GLOBAL_LIST_EMPTY(active_jammers)  // List of active radio jammers
 GLOBAL_LIST_EMPTY(ladders)
 GLOBAL_LIST_EMPTY(trophy_cases)
 ///This is a global list of all signs you can change an existing sign or new sign backing to, when using a pen on them.
