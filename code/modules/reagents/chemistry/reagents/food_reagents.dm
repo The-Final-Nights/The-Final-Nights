@@ -11,18 +11,19 @@
 	name = "Consumable"
 	taste_description = "generic food"
 	taste_mult = 4
+	/// How much nutrition this reagent supplies
 	var/nutriment_factor = 1 * REAGENTS_METABOLISM
 	var/quality = 0	//affects mood, typically higher for mixed drinks with more complex recipes
 
-/datum/reagent/consumable/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	current_cycle++
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_nutrition(nutriment_factor)
+			H.adjust_nutrition(nutriment_factor * REM * delta_time)
 	if(length(reagent_removal_skip_list))
 		return
-	holder.remove_reagent(type, metabolization_rate)
+	holder.remove_reagent(type, metabolization_rate * delta_time)
 
 /datum/reagent/consumable/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume)
 	. = ..()
@@ -55,10 +56,10 @@
 	if(chems.has_reagent(type, 1))
 		mytray.adjustHealth(round(chems.get_reagent_amount(type) * 0.2))
 
-/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M)
-	if(prob(50))
+/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	if(DT_PROB(30, delta_time))
 		M.heal_bodypart_damage(brute = brute_heal, burn = burn_heal)
-		. = 1
+		. = TRUE
 	..()
 
 /datum/reagent/consumable/nutriment/on_new(list/supplied_data)
@@ -105,9 +106,9 @@
 	brute_heal = 1
 	burn_heal = 1
 
-/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(M.satiety < 600)
-		M.satiety += 30
+		M.satiety += 30 * REM * delta_time
 	. = ..()
 
 /// The basic resource of vat growing.
@@ -197,12 +198,12 @@
 /datum/reagent/consumable/sugar/overdose_start(mob/living/M)
 	to_chat(M, "<span class='userdanger'>You go into hyperglycaemic shock! Lay off the twinkies!</span>")
 	M.AdjustSleeping(600)
-	. = 1
+	. = TRUE
 
-/datum/reagent/consumable/sugar/overdose_process(mob/living/M)
-	M.AdjustSleeping(40)
+/datum/reagent/consumable/sugar/overdose_process(mob/living/M, delta_time, times_fired)
+	M.AdjustSleeping(40 * REM * delta_time)
 	..()
-	. = 1
+	. = TRUE
 
 /datum/reagent/consumable/virus_food
 	name = "Virus Food"
@@ -239,28 +240,28 @@
 	taste_description = "hot peppers"
 	taste_mult = 1.5
 
-/datum/reagent/consumable/capsaicin/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/capsaicin/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	var/heating = 0
 	switch(current_cycle)
 		if(1 to 15)
-			heating = 5 * TEMPERATURE_DAMAGE_COEFFICIENT
+			heating = 5
 			if(holder.has_reagent(/datum/reagent/cryostylane))
-				holder.remove_reagent(/datum/reagent/cryostylane, 5)
+				holder.remove_reagent(/datum/reagent/cryostylane, 5 * REM * delta_time)
 			if(isslime(M))
-				heating = rand(5,20)
+				heating = rand(5, 20)
 		if(15 to 25)
-			heating = 10 * TEMPERATURE_DAMAGE_COEFFICIENT
+			heating = 10
 			if(isslime(M))
-				heating = rand(10,20)
+				heating = rand(10, 20)
 		if(25 to 35)
-			heating = 15 * TEMPERATURE_DAMAGE_COEFFICIENT
+			heating = 15
 			if(isslime(M))
-				heating = rand(15,20)
+				heating = rand(15, 20)
 		if(35 to INFINITY)
-			heating = 20 * TEMPERATURE_DAMAGE_COEFFICIENT
+			heating = 20
 			if(isslime(M))
-				heating = rand(20,25)
-	M.adjust_bodytemperature(heating)
+				heating = rand(20, 25)
+	M.adjust_bodytemperature(heating * TEMPERATURE_DAMAGE_COEFFICIENT * REM * delta_time)
 	..()
 
 /datum/reagent/consumable/frostoil
@@ -269,32 +270,32 @@
 	color = "#8BA6E9" // rgb: 139, 166, 233
 	taste_description = "mint"
 
-/datum/reagent/consumable/frostoil/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/frostoil/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	var/cooling = 0
 	switch(current_cycle)
 		if(1 to 15)
-			cooling = -10 * TEMPERATURE_DAMAGE_COEFFICIENT
+			cooling = -10
 			if(holder.has_reagent(/datum/reagent/consumable/capsaicin))
-				holder.remove_reagent(/datum/reagent/consumable/capsaicin, 5)
+				holder.remove_reagent(/datum/reagent/consumable/capsaicin, 5 * REM * delta_time)
 			if(isslime(M))
-				cooling = -rand(5,20)
+				cooling = -rand(5, 20)
 		if(15 to 25)
-			cooling = -20 * TEMPERATURE_DAMAGE_COEFFICIENT
+			cooling = -20
 			if(isslime(M))
-				cooling = -rand(10,20)
+				cooling = -rand(10, 20)
 		if(25 to 35)
-			cooling = -30 * TEMPERATURE_DAMAGE_COEFFICIENT
+			cooling = -30
 			if(prob(1))
 				M.emote("shiver")
 			if(isslime(M))
-				cooling = -rand(15,20)
+				cooling = -rand(15, 20)
 		if(35 to INFINITY)
-			cooling = -40 * TEMPERATURE_DAMAGE_COEFFICIENT
+			cooling = -40
 			if(prob(5))
 				M.emote("shiver")
 			if(isslime(M))
-				cooling = -rand(20,25)
-	M.adjust_bodytemperature(cooling, 50)
+				cooling = -rand(20, 25)
+	M.adjust_bodytemperature(cooling * TEMPERATURE_DAMAGE_COEFFICIENT * REM * delta_time, 50)
 	..()
 
 /datum/reagent/consumable/frostoil/expose_turf(turf/exposed_turf, reac_volume)
@@ -348,9 +349,9 @@
 			if(prob(5))
 				victim.vomit()
 
-/datum/reagent/consumable/condensedcapsaicin/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/condensedcapsaicin/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(!holder.has_reagent(/datum/reagent/consumable/milk))
-		if(prob(10))
+		if(DT_PROB(5, delta_time))
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>")
 	..()
 
@@ -391,26 +392,26 @@
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	taste_description = "mushroom"
 
-/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M)
+/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(!M.slurring)
-		M.slurring = 1
+		M.slurring = 1 * REM * delta_time
 	switch(current_cycle)
 		if(1 to 5)
-			M.Dizzy(5)
-			M.set_drugginess(30)
-			if(prob(10))
+			M.Dizzy(5 * REM * delta_time)
+			M.set_drugginess(30 * REM * delta_time)
+			if(DT_PROB(5, delta_time))
 				M.emote(pick("twitch","giggle"))
 		if(5 to 10)
-			M.Jitter(10)
-			M.Dizzy(10)
-			M.set_drugginess(35)
-			if(prob(20))
+			M.Jitter(10 * REM * delta_time)
+			M.Dizzy(10 * REM * delta_time)
+			M.set_drugginess(35 * REM * delta_time)
+			if(DT_PROB(10, delta_time))
 				M.emote(pick("twitch","giggle"))
 		if (10 to INFINITY)
-			M.Jitter(20)
-			M.Dizzy(20)
-			M.set_drugginess(40)
-			if(prob(30))
+			M.Jitter(20 * REM * delta_time)
+			M.Dizzy(20 * REM * delta_time)
+			M.set_drugginess(40 * REM * delta_time)
+			if(DT_PROB(16, delta_time))
 				M.emote(pick("twitch","giggle"))
 	..()
 
@@ -421,18 +422,18 @@
 	taste_description = "garlic"
 	metabolization_rate = 0.15 * REAGENTS_METABOLISM
 
-/datum/reagent/consumable/garlic/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/garlic/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(isvampire(M)) //incapacitating but not lethal. Unfortunately, vampires cannot vomit.
-		if(prob(min(25,current_cycle)))
+		if(DT_PROB(min(current_cycle/2, 12.5), delta_time))
 			to_chat(M, "<span class='danger'>You can't get the scent of garlic out of your nose! You can barely think...</span>")
 			M.Paralyze(10)
 			M.Jitter(10)
 	else
 		var/obj/item/organ/liver/liver = M.getorganslot(ORGAN_SLOT_LIVER)
 		if(liver && HAS_TRAIT(liver, TRAIT_CULINARY_METABOLISM))
-			if(prob(20)) //stays in the system much longer than sprinkles/banana juice, so heals slower to partially compensate
+			if(DT_PROB(10, delta_time)) //stays in the system much longer than sprinkles/banana juice, so heals slower to partially compensate
 				M.heal_bodypart_damage(brute = 1, burn = 1)
-				. = 1
+				. = TRUE
 	..()
 
 /datum/reagent/consumable/sprinkles
@@ -441,11 +442,11 @@
 	color = "#FF00FF" // rgb: 255, 0, 255
 	taste_description = "childhood whimsy"
 
-/datum/reagent/consumable/sprinkles/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/sprinkles/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	var/obj/item/organ/liver/liver = M.getorganslot(ORGAN_SLOT_LIVER)
 	if(liver && HAS_TRAIT(liver, TRAIT_LAW_ENFORCEMENT_METABOLISM))
-		M.heal_bodypart_damage(brute = 1, burn = 1)
-		. = 1
+		M.heal_bodypart_damage(1 * REM * delta_time, 1 * REM * delta_time, 0)
+		. = TRUE
 	..()
 
 /datum/reagent/consumable/cornoil
@@ -488,8 +489,8 @@
 	color = "#3E4A00" // rgb: 62, 74, 0
 	taste_description = "your imprisonment"
 
-/datum/reagent/consumable/hot_ramen/on_mob_life(mob/living/carbon/M)
-	M.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, M.get_body_temp_normal())
+/datum/reagent/consumable/hot_ramen/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	M.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT * REM * delta_time, 0, M.get_body_temp_normal())
 	..()
 
 /datum/reagent/consumable/hell_ramen
@@ -499,8 +500,8 @@
 	color = "#302000" // rgb: 48, 32, 0
 	taste_description = "wet and cheap noodles on fire"
 
-/datum/reagent/consumable/hell_ramen/on_mob_life(mob/living/carbon/target_mob)
-	target_mob.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT)
+/datum/reagent/consumable/hell_ramen/on_mob_life(mob/living/carbon/target_mob, delta_time, times_fired)
+	target_mob.adjust_bodytemperature(10 * TEMPERATURE_DAMAGE_COEFFICIENT * REM * delta_time)
 	..()
 
 /datum/reagent/consumable/flour
@@ -568,8 +569,8 @@
 	metabolization_rate = 3 * REAGENTS_METABOLISM
 	taste_description = "sweet slime"
 
-/datum/reagent/consumable/corn_syrup/on_mob_life(mob/living/carbon/M)
-	holder.add_reagent(/datum/reagent/consumable/sugar, 3)
+/datum/reagent/consumable/corn_syrup/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	holder.add_reagent(/datum/reagent/consumable/sugar, 3 * REM * delta_time)
 	..()
 
 /datum/reagent/consumable/honey
@@ -590,13 +591,13 @@
 			mytray.adjustWeeds(rand(1,2))
 			mytray.adjustPests(rand(1,2))
 
-/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M)
-	holder.add_reagent(/datum/reagent/consumable/sugar,3)
-	if(prob(55))
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
-		M.adjustOxyLoss(-1*REM, 0)
-		M.adjustToxLoss(-1*REM, 0)
+/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	holder.add_reagent(/datum/reagent/consumable/sugar, 3 * REM * delta_time)
+	if(DT_PROB(33, delta_time))
+		M.adjustBruteLoss(-1, 0)
+		M.adjustFireLoss(-1, 0)
+		M.adjustOxyLoss(-1, 0)
+		M.adjustToxLoss(-1, 0)
 	..()
 
 /datum/reagent/consumable/honey/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume)
@@ -640,11 +641,11 @@
 		exposed_mob.blind_eyes(2)
 		exposed_mob.blur_eyes(5)
 
-/datum/reagent/consumable/tearjuice/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/tearjuice/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	..()
-	if(M.eye_blurry)	//Don't worsen vision if it was otherwise fine
-		M.blur_eyes(4)
-		if(prob(10))
+	if(M.eye_blurry) //Don't worsen vision if it was otherwise fine
+		M.blur_eyes(4 * REM * delta_time)
+		if(DT_PROB(5, delta_time))
 			to_chat(M, "<span class='warning'>Your eyes sting!</span>")
 			M.blind_eyes(2)
 
@@ -656,9 +657,9 @@
 	nutriment_factor = 15 * REAGENTS_METABOLISM
 	color = "#664330" // rgb: 102, 67, 48
 
-/datum/reagent/consumable/nutriment/stabilized/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/nutriment/stabilized/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(M.nutrition > NUTRITION_LEVEL_FULL - 25)
-		M.adjust_nutrition(-3*nutriment_factor)
+		M.adjust_nutrition(-3 * REM * nutriment_factor * delta_time)
 	..()
 
 ////Lavaland Flora Reagents////
@@ -670,11 +671,11 @@
 	color = "#1d043d"
 	taste_description = "bitter mushroom"
 
-/datum/reagent/consumable/entpoly/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/entpoly/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(current_cycle >= 10)
-		M.Unconscious(40, 0)
-		. = 1
-	if(prob(20))
+		M.Unconscious(40 * REM * delta_time, FALSE)
+		. = TRUE
+	if(DT_PROB(10, delta_time))
 		M.losebreath += 4
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2*REM, 150)
 		M.adjustToxLoss(3*REM,0)
@@ -723,10 +724,10 @@
 	nutriment_factor = 3 * REAGENTS_METABOLISM
 	taste_description = "fruity mushroom"
 
-/datum/reagent/consumable/vitfro/on_mob_life(mob/living/carbon/M)
-	if(prob(80))
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
+/datum/reagent/consumable/vitfro/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	if(DT_PROB(55, delta_time))
+		M.adjustBruteLoss(-1, 0)
+		M.adjustFireLoss(-1, 0)
 		. = TRUE
 	..()
 
@@ -755,8 +756,8 @@
 	if(istype(stomach))
 		stomach.adjust_charge(reac_volume * REM * 20)
 
-/datum/reagent/consumable/liquidelectricity/on_mob_life(mob/living/carbon/M)
-	if(prob(25) && !isethereal(M)) //lmao at the newbs who eat energy bars
+/datum/reagent/consumable/liquidelectricity/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	if(DT_PROB(13, delta_time) && !isethereal(M)) //lmao at the newbs who eat energy bars
 		M.electrocute_act(rand(10,15), "Liquid Electricity in their body", 1, SHOCK_NOGLOVES) //the shock is coming from inside the house
 		playsound(M, "sparks", 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	return ..()
@@ -772,11 +773,11 @@
 	taste_description = "sweetness"
 	overdose_threshold = 17
 
-/datum/reagent/consumable/astrotame/overdose_process(mob/living/carbon/M)
+/datum/reagent/consumable/astrotame/overdose_process(mob/living/carbon/M, delta_time, times_fired)
 	if(M.disgust < 80)
-		M.adjust_disgust(10)
+		M.adjust_disgust(10 * REM * delta_time)
 	..()
-	. = 1
+	. = TRUE
 
 /datum/reagent/consumable/secretsauce
 	name = "Secret Sauce"
@@ -816,8 +817,8 @@
 	taste_description = "smoke"
 	overdose_threshold = 15
 
-/datum/reagent/consumable/char/overdose_process(mob/living/M)
-	if(prob(25))
+/datum/reagent/consumable/char/overdose_process(mob/living/M, delta_time, times_fired)
+	if(DT_PROB(13, delta_time))
 		M.say(pick_list_replacements(BOOMER_FILE, "boomer"), forced = /datum/reagent/consumable/char)
 	..()
 	return
