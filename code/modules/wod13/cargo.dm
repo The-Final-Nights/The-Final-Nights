@@ -515,7 +515,7 @@
 
 /obj/item/stack/dollar/Initialize(mapload, new_amount, merge = TRUE, list/mat_override=null, mat_amt=1)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/item/stack/dollar/update_icon_state()
 	var/amount = get_amount()
@@ -548,7 +548,7 @@
 	. = ..()
 	if(amount == 1.3)
 		amount = rand(5, 30)
-		update_icon()
+		update_appearance()
 
 /obj/item/cargo_box
 	name = "cargo box"

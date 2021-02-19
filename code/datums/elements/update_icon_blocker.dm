@@ -1,4 +1,4 @@
-//Prevents calling anything in update_icon() like update_icon_state() or update_overlays()
+//Prevents calling anything in update_appearance() like update_icon_state() or update_overlays()
 
 /datum/element/update_icon_blocker/Attach(datum/target)
 	. = ..()

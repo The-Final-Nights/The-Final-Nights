@@ -332,7 +332,7 @@
 		var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 		if(STR)
 			STR.grid_remove_item(I)
-		update_icon()
+		update_appearance()
 	else
 		to_chat(user, "<span class='warning'>[src] is empty!</span>")
 
@@ -362,7 +362,7 @@
 		new /obj/item/melee/vampirearms/rapier(src)
 	else if(istype(src, /obj/item/storage/belt/vampire/sheathe/sabre))
 		new /obj/item/melee/vampirearms/sabre(src)
-	update_icon()
+	update_appearance()
 
 //end of sheathe code
 

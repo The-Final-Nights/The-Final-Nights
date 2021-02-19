@@ -23,9 +23,9 @@
 		if(istype(I, /obj/item/paper))
 			I.forceMove(src)
 			notices++
-	update_icon()
+	update_appearance()
 
-/obj/structure/noticeboard/update_icon()
+/obj/structure/noticeboard/update_appearance()
 	. = ..()
 	switch(notices)
 		if(0)
@@ -51,7 +51,7 @@
 			if(!user.transferItemToLoc(O, src))
 				return
 			notices++
-			update_icon()
+			update_appearance()
 			to_chat(user, span_notice("You pin the [O] to the noticeboard."))
 		else
 			to_chat(user, span_warning("The notice board is full!"))
@@ -116,7 +116,7 @@
 		user.put_in_hands(item)
 		balloon_alert(user, "removed from board")
 	notices--
-	update_icon()
+	update_appearance()
 
 /obj/structure/noticeboard/deconstruct(disassembled = TRUE)
 	if(!disassembled)
