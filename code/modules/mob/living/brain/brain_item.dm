@@ -227,7 +227,7 @@
 	destroy_all_skillchips()
 	return ..()
 
-/obj/item/organ/brain/on_life()
+/obj/item/organ/brain/on_life(delta_time, times_fired)
 	if(!(iskindred(owner) || iscathayan(owner)))
 		if(damage >= BRAIN_DAMAGE_DEATH) //rip
 			to_chat(owner, span_userdanger("The last spark of life in your brain fizzles out...</span>"))

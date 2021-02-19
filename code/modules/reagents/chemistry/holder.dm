@@ -620,7 +620,32 @@
 		expose_temperature(owner.bodytemperature, 0.25)
 	var/need_mob_update = FALSE
 	for(var/datum/reagent/reagent as anything in cached_reagents)
-		need_mob_update += metabolize_reagent(owner, reagent, delta_time, times_fired, can_overdose, liverless)
+		if(QDELETED(reagent.holder))
+			continue
+
+		if(!owner)
+			owner = reagent.holder.my_atom
+
+		if(owner && reagent)
+			if(owner.reagent_check(reagent, delta_time, times_fired) != TRUE)
+				if(liverless && !reagent.self_consuming) //need to be metabolized
+					continue
+				if(!reagent.metabolizing)
+					reagent.metabolizing = TRUE
+					reagent.on_mob_metabolize(owner)
+				if(can_overdose)
+					if(reagent.overdose_threshold)
+						if(reagent.volume >= reagent.overdose_threshold && !reagent.overdosed)
+							reagent.overdosed = TRUE
+							need_mob_update += reagent.overdose_start(owner)
+							log_game("[key_name(owner)] has started overdosing on [reagent.name] at [reagent.volume] units.")
+					for(var/addiction in reagent.addiction_types)
+						owner.mind?.add_addiction_points(addiction, reagent.addiction_types[addiction] * REAGENTS_METABOLISM)
+
+					if(reagent.overdosed)
+						need_mob_update += reagent.overdose_process(owner, delta_time, times_fired)
+
+				need_mob_update += reagent.on_mob_life(owner, delta_time, times_fired)
 	if(owner && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
 		owner.updatehealth()
 		owner.update_stamina()
