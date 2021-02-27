@@ -123,6 +123,21 @@
 	results = list(/datum/reagent/nitrous_oxide = 5)
 	required_reagents = list(/datum/reagent/ammonia = 2, /datum/reagent/nitrogen = 1, /datum/reagent/oxygen = 2)
 	required_temp = 525
+	optimal_temp = 550
+	overheat_temp = 575
+	temp_exponent_factor = 0.2
+	purity_min = 0.3
+	thermic_constant = 35 //gives a bonus 15C wiggle room
+	rate_up_lim = 25 //Give a chance to pull back
+	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL
+
+/datum/chemical_reaction/nitrous_oxide/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+	. = ..()
+	clear_products(holder, equilibrium.step_target_vol)
+
+/datum/chemical_reaction/nitrous_oxide/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+	return //This is empty because the explosion reaction will occur instead (see pyrotechnics.dm). This is just here to update the lookup ui.
+
 
 //Technically a mutation toxin
 /datum/chemical_reaction/mulligan
@@ -648,7 +663,7 @@
 	required_reagents = list(/datum/reagent/consumable/ice = 1)
 	required_temp = 275
 	optimal_temp = 350
-	overheat_temp = 99999
+	overheat_temp = NO_OVERHEAT
 	optimal_ph_min = 0
 	optimal_ph_max = 14
 	thermic_constant = 0
@@ -664,7 +679,7 @@
 	required_reagents = list(/datum/reagent/ash = 1, /datum/reagent/consumable/ethanol = 1, /datum/reagent/iodine = 1)
 	required_temp = 274
 	optimal_temp = 350
-	overheat_temp = 99999
+	overheat_temp = NO_OVERHEAT
 	optimal_ph_min = 0
 	optimal_ph_max = 14
 	thermic_constant = 0

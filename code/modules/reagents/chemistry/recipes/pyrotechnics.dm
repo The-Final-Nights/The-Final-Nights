@@ -423,6 +423,12 @@
 /datum/chemical_reaction/pyrosium
 	results = list(/datum/reagent/pyrosium = 3)
 	required_reagents = list(/datum/reagent/stable_plasma = 1, /datum/reagent/uranium/radium = 1, /datum/reagent/phosphorus = 1)
+	required_temp = 0
+	optimal_temp = 20
+	overheat_temp = NO_OVERHEAT
+	temp_exponent_factor = 10
+	thermic_constant = 0
+	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_UNIQUE
 
 /datum/chemical_reaction/pyrosium/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
 	holder.chem_temp = 20 // also cools the fuck down
