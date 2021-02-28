@@ -35,8 +35,8 @@
 	var/door_hack_counter = 0
 
 
-/obj/item/clothing/gloves/space_ninja/Touch(atom/A,proximity)
-	if(!candrain || draining)
+/obj/item/clothing/gloves/space_ninja/Touch(atom/A,proximity,modifiers)
+	if(!LAZYACCESS(modifiers, RIGHT_CLICK) || draining)
 		return FALSE
 	if(!ishuman(loc))
 		return FALSE	//Only works while worn
