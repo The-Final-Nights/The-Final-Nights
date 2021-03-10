@@ -26,8 +26,8 @@
 	melee_damage_upper = 15
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
-	attack_sound = 'sound/weapons/punch1.ogg'
-	ventcrawler = VENTCRAWLER_ALWAYS
+	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_vis_effect = ATTACK_EFFECT_CLAW
 	unique_name = TRUE
 	faction = list("rat")
 	///The spell that the rat uses to scrounge up junk.
@@ -87,11 +87,17 @@
 	if(istype(target, /obj/item/food/cheesewedge))
 		cheese_heal(target, MINOR_HEAL, "<span class='green'>You eat [target], restoring some health.</span>")
 
-	else if(istype(target, /obj/item/food/cheesewheel))
-		cheese_heal(target, MEDIUM_HEAL, "<span class='green'>You eat [target], restoring some health.</span>")
-
-	else if(istype(target, /obj/item/food/royalcheese))
-		cheese_heal(target, MAJOR_HEAL, "<span class='green'>You eat [target], revitalizing your royal resolve completely.</span>")
+/mob/living/simple_animal/hostile/regalrat/AttackingTarget()
+	if (DOING_INTERACTION(src, "regalrat"))
+		return
+	. = ..()
+	if (target.reagents && target.is_injectable(src, allowmobs = TRUE))
+		src.visible_message("<span class='warning'>[src] starts licking [target] passionately!</span>","<span class='notice'>You start licking [target]...</span>")
+		if (do_mob(src, target, 2 SECONDS, interaction_key = "regalrat"))
+			target.reagents.add_reagent(/datum/reagent/rat_spit,rand(1,3),no_react = TRUE)
+			to_chat(src, "<span class='notice'>You finish licking [target].</span>")
+	else
+		SEND_SIGNAL(target, COMSIG_RAT_INTERACT, src)
 
 /**
  * Conditionally "eat" cheese object and heal, if injured.

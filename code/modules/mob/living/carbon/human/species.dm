@@ -155,7 +155,8 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 	///Punch-specific attack verb.
 	var/attack_verb = "punch"
-	///
+	/// The visual effect of the attack.
+	var/attack_effect = ATTACK_EFFECT_PUNCH
 	var/sound/attack_sound = 'sound/weapons/punch1.ogg'
 	var/sound/miss_sound = 'sound/weapons/punchmiss.ogg'
 
@@ -1295,8 +1296,10 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	else
 
 		var/atk_verb = user.dna.species.attack_verb
+		var/atk_effect = user.dna.species.attack_effect
 		if(target.body_position == LYING_DOWN)
-			atk_verb = ATTACK_EFFECT_KICK
+			atk_verb = "kick"
+			atk_effect = ATTACK_EFFECT_KICK
 
 		switch(atk_verb)//this code is really stupid but some genius apparently made "claw" and "slash" two attack types but also the same one so it's needed i guess
 			if(ATTACK_EFFECT_KICK)
@@ -1321,7 +1324,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 		var/miss_chance = 100//calculate the odds that a punch misses entirely. considers stamina and brute damage of the puncher. punches miss by default to prevent weird cases
 		if(user.dna.species.punchdamagelow)
-			if(atk_verb == ATTACK_EFFECT_KICK || HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER)) //kicks never miss (provided your species deals more than 0 damage)
+			if(atk_effect == ATTACK_EFFECT_KICK || HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER)) //kicks never miss (provided your species deals more than 0 damage)
 				miss_chance = 0
 			else
 				miss_chance = min((user.dna.species.punchdamagehigh/user.dna.species.punchdamagelow) + user.getStaminaLoss() + (user.getBruteLoss()*0.1), 100) //Tweaked for FN, keeps stamina loss for future non-lethals, but brute damage impact lowered a lot to account for higher health pool and damages.
