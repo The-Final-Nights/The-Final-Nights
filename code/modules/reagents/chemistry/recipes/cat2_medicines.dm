@@ -22,7 +22,7 @@
 	reaction_flags = REACTION_PH_VOL_CONSTANT
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_BRUTE
 
-/datum/chemical_reaction/medicine/helbital/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/helbital/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	explode_fire_vortex(holder, equilibrium, 1, 1, "impure")
 	holder.chem_temp += 2.5
 	var/datum/reagent/helbital = holder.get_reagent(/datum/reagent/medicine/c2/helbital)
@@ -34,11 +34,11 @@
 			holder.chem_temp += 5
 			holder.my_atom.audible_message("<span class='notice'>[icon2html(holder.my_atom, viewers(DEFAULT_MESSAGE_RANGE, src))] The impurity of the reacting helbital is too great causing the [src] to let out a hearty burst of flame, evaporating part of the product!</span>")
 
-/datum/chemical_reaction/medicine/helbital/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/helbital/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	. = ..()//drains product
 	explode_fire_vortex(holder, equilibrium, 2, 2, "overheat", TRUE)
 
-/datum/chemical_reaction/medicine/helbital/reaction_finish(datum/reagents/holder, react_vol)
+/datum/chemical_reaction/medicine/helbital/reaction_finish(datum/reagents/holder, datum/equilibrium/reaction, react_vol)
 	. = ..()
 	var/datum/reagent/helbital = holder.get_reagent(/datum/reagent/medicine/c2/helbital)
 	if(!helbital)
@@ -124,7 +124,7 @@
 	reaction_flags = REACTION_PH_VOL_CONSTANT
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_BURN
 
-/datum/chemical_reaction/medicine/aiuri/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/aiuri/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	. = ..()
 	for(var/mob/living/living_mob in orange(3, get_turf(holder.my_atom)))
 		if(living_mob.flash_act(1, length = 5))
@@ -150,7 +150,7 @@
 	reaction_flags = REACTION_PH_VOL_CONSTANT | REACTION_CLEAR_INVERSE
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_BURN
 
-/datum/chemical_reaction/medicine/hercuri/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/hercuri/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	if(off_cooldown(holder, equilibrium, 2, "hercuri_freeze"))
 		return
 	playsound(holder.my_atom, 'sound/magic/ethereal_exit.ogg', 50, 1)
@@ -181,7 +181,7 @@
 	reaction_flags = REACTION_PH_VOL_CONSTANT
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_OXY
 
-/datum/chemical_reaction/medicine/convermol/reaction_step(datum/equilibrium/reaction, datum/reagents/holder, delta_t, delta_ph, step_reaction_vol)
+/datum/chemical_reaction/medicine/convermol/reaction_step(datum/reagents/holder, datum/equilibrium/reaction, delta_t, delta_ph, step_reaction_vol)
 	. = ..()
 	var/datum/reagent/oxy = holder.has_reagent(/datum/reagent/oxygen)
 	if(oxy)
@@ -196,10 +196,10 @@
 	else
 		explode_shockwave(holder, equilibrium, range, damage = 2)
 
-/datum/chemical_reaction/medicine/convermol/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/convermol/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	. = ..()
 	overheated(holder, equilibrium, impure = TRUE)
-	clear_reactants(holder, vol_added*2)
+	clear_reactants(holder, step_volume_added*2)
 
 
 /datum/chemical_reaction/medicine/tirimol
@@ -222,7 +222,7 @@
 	reaction_flags = REACTION_PH_VOL_CONSTANT
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_OXY
 
-/datum/chemical_reaction/medicine/tirimol/reaction_step(datum/equilibrium/reaction, datum/reagents/holder, delta_t, delta_ph, step_reaction_vol)
+/datum/chemical_reaction/medicine/tirimol/reaction_step(datum/reagents/holder, datum/equilibrium/reaction, delta_t, delta_ph, step_reaction_vol)
 	. = ..()
 	var/datum/reagent/oxy = holder.has_reagent(/datum/reagent/oxygen)
 	if(oxy)
@@ -240,7 +240,7 @@
 	else
 		explode_invert_smoke(holder, equilibrium, 3)
 
-/datum/chemical_reaction/medicine/tirimol/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/tirimol/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	. = ..()
 	overheated(holder, equilibrium, TRUE)
 	clear_reactants(holder, 2)
@@ -268,10 +268,10 @@
 	reaction_flags = REACTION_PH_VOL_CONSTANT | REACTION_CLEAR_INVERSE
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_TOXIN
 
-/datum/chemical_reaction/medicine/seiver/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/seiver/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	if(off_cooldown(holder, equilibrium, 1, "seiver_rads"))
 		return
-	var/modifier = max((100 - holder.chem_temp)*0.025, 0)*vol_added //0 - 5 * volume based off temperature(colder is more)
+	var/modifier = max((100 - holder.chem_temp)*0.025, 0)*step_volume_added //0 - 5 * volume based off temperature(colder is more)
 	radiation_pulse(holder.my_atom, modifier, 0.5, can_contaminate=FALSE) //Please advise on this, I don't have a good handle on the numbers
 
 /datum/chemical_reaction/medicine/multiver
@@ -294,7 +294,7 @@
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_PLANT | REACTION_TAG_TOXIN
 
 //You get nothing! I'm serious about staying under the heating requirements!
-/datum/chemical_reaction/medicine/multiver/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/multiver/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	. = ..()
 	var/datum/reagent/monover = holder.has_reagent(/datum/reagent/inverse/healing/monover)
 	if(monover)
@@ -303,7 +303,7 @@
 		explode_fire_square(holder, equilibrium, 1)
 		holder.my_atom.fire_act(holder.chem_temp, monover.volume)//I'm kinda banking on this setting the thing on fire. If you see this, then it didn't!
 
-/datum/chemical_reaction/medicine/multiver/reaction_step(datum/equilibrium/reaction, datum/reagents/holder, delta_t, delta_ph, step_reaction_vol)
+/datum/chemical_reaction/medicine/multiver/reaction_step(datum/reagents/holder, datum/equilibrium/reaction, delta_t, delta_ph, step_reaction_vol)
 	. = ..()
 	if(delta_ph < 0.35)
 		//normalise delta_ph
@@ -330,7 +330,7 @@
 	reaction_flags = REACTION_PH_VOL_CONSTANT
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_TOXIN
 
-/datum/chemical_reaction/medicine/syriniver/reaction_step(datum/equilibrium/reaction, datum/reagents/holder, delta_t, delta_ph, step_reaction_vol)
+/datum/chemical_reaction/medicine/syriniver/reaction_step(datum/reagents/holder, datum/equilibrium/reaction, delta_t, delta_ph, step_reaction_vol)
 	. = ..()
 	reaction.delta_t = delta_t * delta_ph
 
@@ -353,7 +353,7 @@
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_HEALING | REACTION_TAG_TOXIN
 
 //overheat beats like a heart! (or is it overbeat?)
-/datum/chemical_reaction/medicine/penthrite/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/penthrite/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	. = ..()
 	if(off_cooldown(holder, equilibrium, 1, "lub"))
 		explode_shockwave(holder, equilibrium, 3, 2)
@@ -364,5 +364,5 @@
 	explode_fire_vortex(holder, equilibrium, 1, 1)
 
 //enabling hardmode
-/datum/chemical_reaction/medicine/penthrite/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/medicine/penthrite/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	holder.chem_temp += 15

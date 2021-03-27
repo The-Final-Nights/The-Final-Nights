@@ -41,7 +41,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/plasma_solidification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/plasma_solidification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/stack/sheet/mineral/plasma(location)
@@ -51,7 +51,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/gold_solidification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/gold_solidification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/stack/sheet/mineral/gold(location)
@@ -61,7 +61,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/uranium_solidification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/uranium_solidification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/stack/sheet/mineral/uranium(location)
@@ -76,7 +76,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/soapification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/soapification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/soap/homemade(location)
@@ -87,7 +87,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/omegasoapification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/omegasoapification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/soap/omega(location)
@@ -98,7 +98,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/candlefication/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/candlefication/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/candle(location)
@@ -108,7 +108,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/meatification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/meatification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/food/meat/slab/meatproduct(location)
@@ -131,11 +131,11 @@
 	rate_up_lim = 25 //Give a chance to pull back
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL
 
-/datum/chemical_reaction/nitrous_oxide/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/nitrous_oxide/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	. = ..()
 	clear_products(holder, equilibrium.step_target_vol)
 
-/datum/chemical_reaction/nitrous_oxide/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, vol_added)
+/datum/chemical_reaction/nitrous_oxide/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
 	return //This is empty because the explosion reaction will occur instead (see pyrotechnics.dm). This is just here to update the lookup ui.
 
 
@@ -199,7 +199,7 @@
 	var/level_max = 2
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/mix_virus/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/mix_virus/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in holder.reagent_list
 	if(B?.data)
 		var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
@@ -266,7 +266,7 @@
 	required_reagents = list(/datum/reagent/medicine/synaptizine = 1)
 	required_catalysts = list(/datum/reagent/blood = 1)
 
-/datum/chemical_reaction/mix_virus/rem_virus/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/mix_virus/rem_virus/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in holder.reagent_list
 	if(B?.data)
 		var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
@@ -277,7 +277,7 @@
 	required_reagents = list(/datum/reagent/toxin/formaldehyde = 1)
 	required_catalysts = list(/datum/reagent/blood = 1)
 
-/datum/chemical_reaction/mix_virus/neuter_virus/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/mix_virus/neuter_virus/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/datum/reagent/blood/B = locate(/datum/reagent/blood) in holder.reagent_list
 	if(B?.data)
 		var/datum/disease/advance/D = locate(/datum/disease/advance) in B.data["viruses"]
@@ -299,7 +299,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/foam/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/foam/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	holder.create_foam(/datum/effect_system/foam_spread,2*created_volume,notification="<span class='danger'>The solution spews out foam!</span>")
 
 /datum/chemical_reaction/metalfoam
@@ -307,7 +307,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/metalfoam/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/metalfoam/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	holder.create_foam(/datum/effect_system/foam_spread/metal,5*created_volume,1,"<span class='danger'>The solution spews out a metallic foam!</span>")
 
 /datum/chemical_reaction/smart_foam
@@ -315,7 +315,7 @@
 	mob_react = TRUE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/smart_foam/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/smart_foam/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	holder.create_foam(/datum/effect_system/foam_spread/metal/smart,5*created_volume,1,"<span class='danger'>The solution spews out metallic foam!</span>")
 
 /datum/chemical_reaction/ironfoam
@@ -323,7 +323,7 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/ironfoam/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/ironfoam/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	holder.create_foam(/datum/effect_system/foam_spread/metal,5*created_volume,2,"<span class='danger'>The solution spews out a metallic foam!</span>")
 
 /datum/chemical_reaction/foaming_agent
@@ -443,7 +443,7 @@
 	required_temp = 374
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/life/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/life/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	chemical_mob_spawn(holder, rand(1, round(created_volume, 1)), "Life (hostile)") //defaults to HOSTILE_SPAWN
 
 /datum/chemical_reaction/life_friendly
@@ -451,7 +451,7 @@
 	required_temp = 374
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/life_friendly/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/life_friendly/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	chemical_mob_spawn(holder, rand(1, round(created_volume, 1)), "Life (friendly)", FRIENDLY_SPAWN)
 
 /datum/chemical_reaction/corgium
@@ -459,7 +459,7 @@
 	required_temp = 374
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/corgium/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/corgium/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = rand(1, created_volume), i <= created_volume, i++) // More lulz.
 		new /mob/living/simple_animal/pet/dog/corgi(location)
@@ -475,7 +475,7 @@
 	required_reagents = list(/datum/reagent/monkey_powder = 50, /datum/reagent/water = 1)
 	mix_message = "<span class='danger'>Expands into a brown mass before shaping itself into a monkey!.</span>"
 
-/datum/chemical_reaction/monkey/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/monkey/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/mob/living/carbon/M = holder.my_atom
 	var/location = get_turf(M)
 	if(istype(M, /mob/living/carbon))
@@ -495,7 +495,7 @@
 	required_reagents = list(/datum/reagent/colorful_reagent = 1, /datum/reagent/medicine/omnizine = 1, /datum/reagent/medicine/strange_reagent = 1, /datum/reagent/consumable/nutriment = 1)
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/butterflium/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/butterflium/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = rand(1, created_volume), i <= created_volume, i++)
 		new /mob/living/simple_animal/butterfly(location)
@@ -506,7 +506,7 @@
 	required_temp = 374
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/scream/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/scream/on_reaction(datum/reagents/holdern, datum/equilibrium/reaction, created_volume)
 	playsound(holder.my_atom, pick(list( 'sound/mobs/humanoids/human/scream/malescream_1.ogg', 'sound/mobs/humanoids/human/scream/malescream_2.ogg', 'sound/mobs/humanoids/human/scream/malescream_3.ogg', 'sound/mobs/humanoids/human/scream/malescream_4.ogg', 'sound/mobs/humanoids/human/scream/malescream_5.ogg', 'sound/mobs/humanoids/human/scream/malescream_6.ogg', 'sound/mobs/humanoids/human/scream/femalescream_1.ogg', 'sound/mobs/humanoids/human/scream/femalescream_2.ogg', 'sound/mobs/humanoids/human/scream/femalescream_3.ogg', 'sound/mobs/humanoids/human/scream/femalescream_4.ogg', 'sound/mobs/humanoids/human/scream/femalescream_5.ogg', 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg')), created_volume*5,TRUE)
 
 /datum/chemical_reaction/hair_dye
@@ -552,7 +552,7 @@
 	required_temp = 374 //lazily consistent with soap & other crafted objects generically created with heat.
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/plastic_polymers/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/plastic_polymers/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i in 1 to created_volume)
 		new /obj/item/stack/sheet/plastic(location)
@@ -578,7 +578,7 @@
 	mix_message = "The mixture condenses into a ball."
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/slime_extractification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/slime_extractification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	new /obj/item/slime_extract/grey(location)
 
@@ -587,7 +587,7 @@
 	results = list(/datum/reagent/metalgen = 1)
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/metalgen_imprint/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/metalgen_imprint/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/datum/reagent/metalgen/MM = holder.get_reagent(/datum/reagent/metalgen)
 	for(var/datum/reagent/R in holder.reagent_list)
 		if(R.material && R.volume >= 40)
@@ -635,12 +635,12 @@
 	mob_react = FALSE
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/silver_solidification/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+/datum/chemical_reaction/silver_solidification/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i in 1 to created_volume)
 		new /obj/item/stack/sheet/mineral/silver(location)
 
-//////////////////////////////////// Water ////////////////////////////////////////////////
+////Ice and water
 
 /datum/chemical_reaction/ice
 	results = list(/datum/reagent/consumable/ice = 1.09)//density
@@ -657,6 +657,7 @@
 	purity_min = 0
 	mix_message = "The solution freezes up into ice!"
 	reaction_flags = REACTION_COMPETITIVE
+	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL | REACTION_TAG_DRINK
 
 /datum/chemical_reaction/water
 	results = list(/datum/reagent/water = 0.92)//rough density excahnge
@@ -671,6 +672,7 @@
 	rate_up_lim = 50
 	purity_min = 0
 	mix_message = "The ice melts back into water!"
+	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL | REACTION_TAG_DRINK
 
 ////////////////////////////////////
 
@@ -687,3 +689,83 @@
 	rate_up_lim = 50
 	purity_min = 0
 	mix_message = "The mixture's colors swirl together."
+	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_CHEMICAL
+
+/datum/chemical_reaction/eigenstate
+	results = list(/datum/reagent/eigenstate = 1)
+	required_reagents = list(/datum/reagent/bluespace = 1, /datum/reagent/stable_plasma = 1, /datum/reagent/consumable/caramel = 1)
+	mix_message = "the reaction zaps suddenly!"
+	mix_sound = 'sound/chemistry/bluespace.ogg'
+	//FermiChem vars:
+	required_temp = 350
+	optimal_temp =  600
+	overheat_temp = 650
+	optimal_ph_min = 9
+	optimal_ph_max = 12
+	determin_ph_range = 5
+	temp_exponent_factor = 1.5
+	ph_exponent_factor = 3
+	thermic_constant = 12
+	H_ion_release = -0.05
+	rate_up_lim = 10
+	purity_min = 0.4
+	reaction_flags = REACTION_HEAT_ARBITARY
+	reaction_tags = REACTION_TAG_HARD | REACTION_TAG_UNIQUE | REACTION_TAG_OTHER
+
+/datum/chemical_reaction/eigenstate/reaction_finish(datum/reagents/holder, datum/equilibrium/reaction, react_vol)
+	. = ..()
+	var/turf/open/location = get_turf(holder.my_atom)
+	if(reaction.data["ducts_teleported"] == TRUE) //If we teleported an duct, then we reconnect it at the end
+		for(var/obj/item/stack/ducts/duct in range(location, 3))
+			duct.check_attach_turf(duct.loc)
+
+	var/datum/reagent/eigenstate/eigen = holder.has_reagent(/datum/reagent/eigenstate)
+	if(!eigen)
+		return
+	if(location)
+		eigen.location_created = location
+		eigen.data["location_created"] = location
+
+	do_sparks(5,FALSE,location)
+	playsound(location, 'sound/effects/phasein.ogg', 80, TRUE)
+
+/datum/chemical_reaction/eigenstate/overheated(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
+	. = ..()
+	if(!off_cooldown(holder, equilibrium, 0.5, "eigen"))
+		return
+	var/turf/location = get_turf(holder.my_atom)
+	do_sparks(3,FALSE,location)
+	playsound(location, 'sound/effects/phasein.ogg', 80, TRUE)
+	for(var/mob/living/nearby_mob in range(location, 3))
+		do_sparks(3,FALSE,nearby_mob)
+		do_teleport(nearby_mob, get_turf(holder.my_atom), 3, no_effects=TRUE)
+		nearby_mob.Knockdown(20, TRUE)
+		nearby_mob.add_atom_colour("#cebfff", WASHABLE_COLOUR_PRIORITY)
+		to_chat()
+		do_sparks(3,FALSE,nearby_mob)
+	clear_products(holder, step_volume_added)
+
+/datum/chemical_reaction/eigenstate/overly_impure(datum/reagents/holder, datum/equilibrium/equilibrium, step_volume_added)
+	if(!off_cooldown(holder, equilibrium, 1, "eigen"))
+		return
+	var/turf/location = get_turf(holder.my_atom)
+	do_sparks(3,FALSE,location)
+	holder.chem_temp += 10
+	playsound(location, 'sound/effects/phasein.ogg', 80, TRUE)
+	for(var/obj/machinery/duct/duct in range(location, 3))
+		do_teleport(duct, location, 3, no_effects=TRUE)
+		equilibrium.data["ducts_teleported"] = TRUE //If we teleported a duct - call the process in
+	var/lets_not_go_crazy = 15 //Teleport 15 items at max
+	var/list/items = list()
+	for(var/obj/item/item in range(location, 3))
+		items += item
+	shuffle(items)
+	for(var/obj/item/item in items)
+		do_teleport(item, location, 3, no_effects=TRUE)
+		lets_not_go_crazy -= 1
+		item.add_atom_colour("#c4b3fd", WASHABLE_COLOUR_PRIORITY)
+		if(!lets_not_go_crazy)
+			clear_products(holder, step_volume_added)
+			return
+	clear_products(holder, step_volume_added)
+	holder.my_atom.audible_message("<span class='notice'>[icon2html(holder.my_atom, viewers(DEFAULT_MESSAGE_RANGE, src))] The reaction gives out a fizz, teleporting items everywhere!</span>")

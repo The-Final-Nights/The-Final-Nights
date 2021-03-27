@@ -74,6 +74,13 @@
 	if(H.loc && !isspaceturf(H.loc) && H.dna.features["moth_wings"] != "Burnt Off" && !flying_species) //"flying_species" is exclusive to the potion of flight, which has its flying mechanics. If they want to fly they can use that instead
 		return TRUE
 
+/datum/species/moth/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
+	var/wings = pick(GLOB.moth_wings_list)
+	mutant_bodyparts["wings"] = wings
+	mutant_bodyparts["moth_wings"] = wings
+	human_mob.dna.features["wings"] = wings
+	human_mob.dna.features["moth_wings"] = wings
+	human_mob.update_body()
 
 /datum/species/moth/spec_fully_heal(mob/living/carbon/human/H)
 	. = ..()
