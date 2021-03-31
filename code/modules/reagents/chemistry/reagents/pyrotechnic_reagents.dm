@@ -209,8 +209,10 @@
 	name = "Cryostylane"
 	description = "Comes into existence at 20K. As long as there is sufficient oxygen for it to react with, Cryostylane slowly cools all other reagents in the container 0K."
 	color = "#0000DC"
-	metabolization_rate = 0.5 * REAGENTS_METABOLISM
-	taste_description = "bitterness"
+	ph = 8.6
+	metabolization_rate = 0.05 * REAGENTS_METABOLISM
+	taste_description = "icey bitterness"
+	purity = REAGENT_STANDARD_PURITY
 	self_consuming = TRUE
 	burning_volume = 0.05
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED

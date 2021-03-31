@@ -9,6 +9,8 @@
 	taste_mult = 1.2
 	harmful = TRUE
 	var/toxpwr = 1.5
+	creation_purity = REAGENT_STANDARD_PURITY
+	purity = REAGENT_STANDARD_PURITY
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	var/silent_toxin = FALSE //won't produce a pain message when processed by liver/life() if there isn't another non-silent toxin present.
 
@@ -20,7 +22,7 @@
 
 /datum/reagent/toxin/on_mob_life(mob/living/carbon/M)
 	if(toxpwr)
-		M.adjustToxLoss(toxpwr*REM, 0)
+		M.adjustToxLoss(toxpwr * REM * normalise_creation_purity() * delta_time, 0)
 		. = TRUE
 	..()
 
@@ -154,9 +156,9 @@
 		. = FALSE
 
 	if(.)
-		C.adjustOxyLoss(5, 0)
-		C.losebreath += 2
-		if(prob(20))
+		C.adjustOxyLoss(5 * REM * normalise_creation_purity() * delta_time, 0)
+		C.losebreath += 2 * REM * normalise_creation_purity() * delta_time
+		if(DT_PROB(10, delta_time))
 			C.emote("gasp")
 	..()
 
@@ -285,6 +287,8 @@
 	toxpwr = 0
 	taste_description = "sourness"
 	ph = 11
+	impure_chem = /datum/reagent/impurity/rosenol
+	inverse_chem = null
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/hallucinogens = 18)  //7.2 per 2 seconds
 
@@ -418,20 +422,21 @@
 	toxpwr = 0
 	metabolization_rate = 1.5 * REAGENTS_METABOLISM
 	ph = 11
+	impure_chem = /datum/reagent/impurity/chloralax
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/chloralhydrate/on_mob_life(mob/living/carbon/M)
 	switch(current_cycle)
 		if(1 to 10)
-			M.add_confusion(2)
-			M.drowsyness += 2
+			M.add_confusion(2 * REM * normalise_creation_purity() * delta_time)
+			M.drowsyness += 2 * REM * normalise_creation_purity() * delta_time
 		if(10 to 50)
-			M.Sleeping(40)
-			. = 1
+			M.Sleeping(40 * REM * normalise_creation_purity() * delta_time)
+			. = TRUE
 		if(51 to INFINITY)
-			M.Sleeping(40)
-			M.adjustToxLoss((current_cycle - 50)*REM, 0)
-			. = 1
+			M.Sleeping(40 * REM * normalise_creation_purity() * delta_time)
+			M.adjustToxLoss(1 * (current_cycle - 50) * REM * normalise_creation_purity() * delta_time, 0)
+			. = TRUE
 	..()
 
 /datum/reagent/toxin/fakebeer	//disguised as normal beer for use by emagged brobots
@@ -484,8 +489,8 @@
 	ph = 12.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/mutetoxin/on_mob_life(mob/living/carbon/M)
-	M.silent = max(M.silent, 3)
+/datum/reagent/toxin/mutetoxin/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	M.silent = max(M.silent, 3 * REM * normalise_creation_purity() * delta_time)
 	..()
 
 /datum/reagent/toxin/staminatoxin
@@ -559,6 +564,8 @@
 	color = "#B4004B"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	toxpwr = 1
+	ph = 2.0
+	impure_chem = /datum/reagent/impurity/methanol
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/formaldehyde/on_mob_life(mob/living/carbon/M)
@@ -594,17 +601,18 @@
 	color = "#64916E"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	toxpwr = 0
+	ph = 9
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/opiods = 25)
 
-/datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3*REM, 150)
+/datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * REM * normalise_creation_purity() * delta_time, 150)
 	if(M.toxloss <= 60)
-		M.adjustToxLoss(1*REM, 0)
+		M.adjustToxLoss(1 * REM * normalise_creation_purity() * delta_time, 0)
 	if(current_cycle >= 4)
 		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "smacked out", /datum/mood_event/narcotic_heavy, name)
 	if(current_cycle >= 18)
-		M.Sleeping(40)
+		M.Sleeping(40 * REM * normalise_creation_purity() * delta_time)
 	..()
 	return TRUE
 
@@ -615,6 +623,7 @@
 	color = "#00B4FF"
 	metabolization_rate = 0.125 * REAGENTS_METABOLISM
 	toxpwr = 1.25
+	ph = 9.3
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/cyanide/on_mob_life(mob/living/carbon/M)
@@ -623,7 +632,7 @@
 	if(prob(8))
 		to_chat(M, "<span class='danger'>You feel horrendously weak!</span>")
 		M.Stun(40)
-		M.adjustToxLoss(2*REM, 0)
+		M.adjustToxLoss(2*REM * normalise_creation_purity(), 0)
 	return ..()
 
 /datum/reagent/toxin/bad_food
@@ -644,6 +653,7 @@
 	color = "#C8C8C8"
 	metabolization_rate = 0.4 * REAGENTS_METABOLISM
 	toxpwr = 0
+	ph = 7
 	penetrates_skin = TOUCH|VAPOR
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -750,11 +760,12 @@
 	color = "#7DC3A0"
 	metabolization_rate = 0.125 * REAGENTS_METABOLISM
 	toxpwr = 0.5
+	ph = 6
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/sulfonal/on_mob_life(mob/living/carbon/M)
 	if(current_cycle >= 22)
-		M.Sleeping(40)
+		M.Sleeping(40 * REM * normalise_creation_purity() * delta_time)
 	return ..()
 
 /datum/reagent/toxin/amanitin
@@ -782,12 +793,14 @@
 	color = "#F0FFF0"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	toxpwr = 0
+	ph = 6
+	impure_chem = /datum/reagent/impurity/ipecacide
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/lipolicide/on_mob_life(mob/living/carbon/M)
 	if(M.nutrition <= NUTRITION_LEVEL_STARVING)
-		M.adjustToxLoss(1*REM, 0)
-	M.adjust_nutrition(-3) // making the chef more valuable, one meme trap at a time
+		M.adjustToxLoss(1 * REM * delta_time, 0)
+	M.adjust_nutrition(-3 * REM * normalise_creation_purity() * delta_time) // making the chef more valuable, one meme trap at a time
 	M.overeatduration = 0
 	return ..()
 
@@ -854,6 +867,7 @@
 	color = "#C8C8C8" //RGB: 200, 200, 200
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	toxpwr = 0
+	ph = 11.6
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/heparin/on_mob_metabolize(mob/living/M)
@@ -872,6 +886,7 @@
 	color = "#AC88CA" //RGB: 172, 136, 202
 	metabolization_rate = 0.6 * REAGENTS_METABOLISM
 	toxpwr = 0.5
+	ph = 6.2
 	taste_description = "spinning"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -899,6 +914,7 @@
 	color = "#3C5133"
 	metabolization_rate = 0.08 * REAGENTS_METABOLISM
 	toxpwr = 0.15
+	ph = 8
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/anacea/on_mob_life(mob/living/carbon/M)
@@ -906,7 +922,7 @@
 	if(holder.has_reagent(/datum/reagent/medicine/calomel) || holder.has_reagent(/datum/reagent/medicine/pen_acid))
 		remove_amt = 0.5
 	for(var/datum/reagent/medicine/R in M.reagents.reagent_list)
-		M.reagents.remove_reagent(R.type,remove_amt)
+		M.reagents.remove_reagent(R.type, remove_amt * REM * normalise_creation_purity() * delta_time)
 	return ..()
 
 //ACID
@@ -964,7 +980,7 @@
 	color = "#5050FF"
 	toxpwr = 2
 	acidpwr = 42.0
-	ph = 1.3
+	ph = 0.0
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 // SERIOUSLY
@@ -975,9 +991,9 @@
 		mytray.adjustToxic(round(chems.get_reagent_amount(type) * 3))
 		mytray.adjustWeeds(-rand(1,4))
 
-/datum/reagent/toxin/acid/fluacid/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(current_cycle/15, 0)
-	. = 1
+/datum/reagent/toxin/acid/fluacid/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	M.adjustFireLoss((current_cycle/15) * REM * normalise_creation_purity() * delta_time, 0)
+	. = TRUE
 	..()
 
 /datum/reagent/toxin/acid/nitracid
@@ -986,11 +1002,11 @@
 	color = "#5050FF"
 	toxpwr = 3
 	acidpwr = 5.0
-	ph = 3.3
+	ph = 1.3
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/acid/nitracid/on_mob_life(mob/living/carbon/M)
-	M.adjustFireLoss(volume/10, FALSE) //here you go nervar
+/datum/reagent/toxin/acid/nitracid/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
+	M.adjustFireLoss((volume/10) * REM * normalise_creation_purity() * delta_time, FALSE) //here you go nervar
 	. = TRUE
 	..()
 
@@ -1020,6 +1036,7 @@
 	silent_toxin = TRUE
 	color = "#F0F8FF" // rgb: 240, 248, 255
 	toxpwr = 0
+	ph = 1.7
 	taste_description = "stillness"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -1035,6 +1052,7 @@
 	silent_toxin = TRUE //no point spamming them even more.
 	color = "#AAAAAA77" //RGBA: 170, 170, 170, 77
 	toxpwr = 0
+	ph = 3.1
 	taste_description = "bone hurting"
 	overdose_threshold = 50
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
