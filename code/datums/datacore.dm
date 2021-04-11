@@ -162,6 +162,8 @@
 		"Warehouse" = GLOB.warehouse_positions,
 		"Triad" = GLOB.triad_positions
 	)
+	var/list/heads = GLOB.primogen_council_positions
+
 	for(var/datum/data/record/t in GLOB.data_core.general)
 		var/name = t.fields["name"]
 		var/rank = t.fields["rank"]
@@ -172,7 +174,7 @@
 				if(!manifest_out[department])
 					manifest_out[department] = list()
 				// Append to beginning of list if captain or department head
-				if (rank == "Captain" || (department != "Command" && (rank in GLOB.camarilla_positions)))
+				if (rank == "Prince" || (department != "Command" && (rank in heads)))
 					manifest_out[department] = list(list(
 						"name" = name,
 						"rank" = rank

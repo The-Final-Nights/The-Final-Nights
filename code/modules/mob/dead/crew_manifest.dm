@@ -18,19 +18,18 @@
 
 /datum/crew_manifest/ui_data(mob/user)
 	var/list/positions = list(
-		"Prince" = 0,
-		"Primogen Council" = 0,
-		"Camarilla" = 0,
-		"Chantry" = 0,
-		"Clinic" = 0,
-		"Police" = 0,
-		"Warehouse" = 0,
-		"Giovanni" = 0,
-		"Manor" = 0,
-		"Endron" = 0,
-		"Painted City" = 0,
-		"Amberglade" = 0,
-		"Citizen" = 0
+		"Prince" = list("exceptions" = list(), "open" = 0),
+		"Primogen Council" = list("exceptions" = list(), "open" = 0),
+		"Camarilla" = list("exceptions" = list(), "open" = 0),
+		"Chantry" = list("exceptions" = list(), "open" = 0),
+		"Clinic" = list("exceptions" = list(), "open" = 0),
+		"Police" = list("exceptions" = list(), "open" = 0),
+		"Warehouse" = list("exceptions" = list(), "open" = 0),
+		"Giovanni" = list("exceptions" = list(), "open" = 0),
+		"Manor" = list("exceptions" = list(), "open" = 0),
+		"Endron" = list("exceptions" = list(), "open" = 0),
+		"Painted City"= list("exceptions" = list(), "open" = 0),
+		"Amberglade" = list("exceptions" = list(), "open" = 0)
 	)
 	var/list/departments = list(
 		list("flag" = DEPARTMENT_PRINCE, "name" = "Prince"),
@@ -49,12 +48,18 @@
 	)
 
 	for(var/job in SSjob.occupations)
-		for(var/department in departments)
-			// Check if the job is part of a department using its flag
-			// Will return true for Research Director if the department is Science or Command, for example
-			if(job["departments"] & department["flag"])
-				// Add open positions to current department
-				positions[department["name"]] += (job["total_positions"] - job["current_positions"])
+		// Check if there are additional open positions or if there is no limit
+		if ((job["total_positions"] > 0 && job["total_positions"] > job["current_positions"]) || (job["total_positions"] == -1))
+			for(var/department in departments)
+				// Check if the job is part of a department using its flag
+				// Will return true for Research Director if the department is Science or Command, for example
+				if(job["departments"] & department["flag"])
+					if(job["total_positions"] == -1)
+						// Add job to list of exceptions, meaning it does not have a position limit
+						positions[department["name"]]["exceptions"] += list(job["title"])
+					else
+						// Add open positions to current department
+						positions[department["name"]]["open"] += (job["total_positions"] - job["current_positions"])
 
 	return list(
 		"manifest" = GLOB.data_core.get_manifest(),
