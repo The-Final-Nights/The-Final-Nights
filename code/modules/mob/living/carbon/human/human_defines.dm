@@ -40,7 +40,8 @@
 	///Character's chronological age
 	var/chronological_age = 30
 
-	var/underwear = "Nude"	//Which underwear the player wants
+	//consider updating /mob/living/carbon/human/copy_clothing_prefs() if adding more of these
+	var/underwear = "Nude" //Which underwear the player wants
 	var/underwear_color = "000"
 	var/undershirt = "Nude" //Which undershirt the player wants
 	var/socks = "Nude" //Which socks the player wants
@@ -139,4 +140,3 @@
 
 	///The Examine Panel TGUI.
 	var/datum/examine_panel/tgui = new() //create the datum
-	
