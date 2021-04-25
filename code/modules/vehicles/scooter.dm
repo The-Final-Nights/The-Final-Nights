@@ -253,7 +253,7 @@
 	density = FALSE
 	instability = 12
 	///Stores the shoes associated with the vehicle
-	var/obj/item/clothing/shoes/wheelys/shoes = null
+	var/obj/item/clothing/shoes/sneakers/wheelys/shoes = null
 	///Name of the wheels, for visible messages
 	var/wheel_name = "wheels"
 
