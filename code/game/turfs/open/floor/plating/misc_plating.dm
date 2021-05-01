@@ -321,3 +321,8 @@
 
 /turf/open/floor/plating/sandy_dirt/setup_broken_states()
 	return list("sand_damaged")
+
+/turf/open/floor/plating/elevatorshaft
+	name = "elevator shaft"
+	icon_state = "elevatorshaft"
+	base_icon_state = "elevatorshaft"

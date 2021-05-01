@@ -79,7 +79,9 @@
 
 	uniform = /obj/item/clothing/under/rank/civilian/janitor
 	back = /obj/item/storage/backpack
-	suit = null
+	backpack_contents = list(
+		/obj/item/stack/tile/iron/base = 6,
+)
 	head = null
 	r_hand = /obj/item/mop
 	l_hand = /obj/item/reagent_containers/glass/bucket

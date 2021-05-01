@@ -408,7 +408,7 @@
 	if(prob(50))
 		drop_part(robot_arm, Tsec)
 
-	new /obj/item/stack/tile/plasteel(Tsec, 1)
+	new /obj/item/stack/tile/iron/base(Tsec, 1)
 
 	do_sparks(3, TRUE, src)
 	..()
