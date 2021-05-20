@@ -26,7 +26,12 @@
 	pickup_sound =  'sound/items/handling/screwdriver_pickup.ogg'
 	item_flags = EYE_STAB
 	sharpness = SHARP_POINTY
-	var/random_color = TRUE //if the screwdriver uses random coloring
+	greyscale_config = /datum/greyscale_config/screwdriver
+	greyscale_config_inhand_left = /datum/greyscale_config/screwdriver_inhand_left
+	greyscale_config_inhand_right = /datum/greyscale_config/screwdriver_inhand_right
+	/// If the item should be assigned a random color
+	var/random_color = TRUE
+	/// List of possible random colors
 	var/static/list/screwdriver_colors = list(
 		"blue" = rgb(24, 97, 213),
 		"red" = rgb(255, 0, 0),
@@ -42,6 +47,11 @@
 	return(BRUTELOSS)
 
 /obj/item/screwdriver/Initialize()
+	if(random_color)
+		var/our_color = pick(screwdriver_colors)
+		set_greyscale_colors(list(screwdriver_colors[our_color]))
+		inhand_icon_state = null
+		colored_belt_appearance = mutable_appearance(SSgreyscale.GetColoredIconByType(/datum/greyscale_config/screwdriver_belt, greyscale_colors))
 	. = ..()
 	if(random_color) //random colors!
 		icon_state = "screwdriver"

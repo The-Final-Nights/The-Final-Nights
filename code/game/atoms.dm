@@ -235,6 +235,9 @@
 	if(loc)
 		SEND_SIGNAL(loc, COMSIG_ATOM_CREATED, src) /// Sends a signal that the new atom `src`, has been created at `loc`
 
+	if(greyscale_config && greyscale_colors)
+		update_greyscale()
+
 	//atom color stuff
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
@@ -728,6 +731,32 @@
 	SHOULD_CALL_PARENT(TRUE)
 	. = list()
 	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_OVERLAYS, .)
+
+/// Checks if the colors given are different and if so causes a greyscale icon update
+/// The colors argument can be either a list or the full color string
+/atom/proc/set_greyscale_colors(list/colors, update=TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	if(istype(colors))
+		colors = colors.Join("")
+	if(greyscale_colors == colors)
+		return
+	greyscale_colors = colors
+	if(!greyscale_config)
+		return
+	if(update && greyscale_config && greyscale_colors)
+		update_greyscale()
+
+/// Checks if the greyscale config given is different and if so causes a greyscale icon update
+/atom/proc/set_greyscale_config(new_config, update=TRUE)
+	if(greyscale_config == new_config)
+		return
+	greyscale_config = new_config
+	if(update && greyscale_config && greyscale_colors)
+		update_greyscale()
+
+/// Checks if this atom uses the GAS system and if so updates the icon
+/atom/proc/update_greyscale()
+	icon = SSgreyscale.GetColoredIconByType(greyscale_config, greyscale_colors)
 
 /**
  * An atom we are buckled or is contained within us has tried to move
