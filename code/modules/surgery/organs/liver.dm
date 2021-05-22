@@ -1,12 +1,9 @@
 #define LIVER_DEFAULT_TOX_TOLERANCE 3 //amount of toxins the liver can filter out
-#define LIVER_DEFAULT_TOX_RESISTANCE 1 //lower values lower how harmful toxins are to the liver
-#define LIVER_FAILURE_STAGE_SECONDS 60 //amount of seconds before liver failure reaches a new stage
 #define LIVER_DEFAULT_TOX_LETHALITY 0.005 //lower values lower how harmful toxins are to the liver
+#define LIVER_FAILURE_STAGE_SECONDS 60 //amount of seconds before liver failure reaches a new stage
 /obj/item/organ/liver
 	name = "liver"
 	icon_state = "liver"
-	illegal = TRUE
-	cost = 400
 	w_class = WEIGHT_CLASS_SMALL
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_LIVER
@@ -30,7 +27,7 @@
 	. = ..()
 	// If the liver handles foods like a clown, it honks like a bike horn
 	// Don't think about it too much.
-	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_COMEDY_METABOLISM), PROC_REF(on_add_comedy_metabolism))
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_COMEDY_METABOLISM), .proc/on_add_comedy_metabolism)
 
 /* Signal handler for the liver gaining the TRAIT_COMEDY_METABOLISM trait
  *
@@ -78,34 +75,32 @@
 #define HAS_PAINFUL_TOXIN 2
 
 /obj/item/organ/liver/on_life(delta_time, times_fired)
-	var/mob/living/carbon/C = owner
-	..()	//perform general on_life()
-	if(istype(C))
-		if(!(organ_flags & ORGAN_FAILING) && !HAS_TRAIT(C, TRAIT_NOMETABOLISM))//can't process reagents with a failing liver
+	var/mob/living/carbon/liver_owner = owner
+	..() //perform general on_life()
+	if(istype(liver_owner))
+		if(!(organ_flags & ORGAN_FAILING) && !HAS_TRAIT(liver_owner, TRAIT_NOMETABOLISM))//can't process reagents with a failing liver
 
 			var/provide_pain_message = HAS_NO_TOXIN
-			var/obj/belly = C.getorganslot(ORGAN_SLOT_STOMACH)
+			var/obj/belly = liver_owner.getorganslot(ORGAN_SLOT_STOMACH)
 			if(filterToxins && !HAS_TRAIT(owner, TRAIT_TOXINLOVER))
 				//handle liver toxin filtration
-				for(var/datum/reagent/toxin/T in C.reagents.reagent_list)
-					var/thisamount = C.reagents.get_reagent_amount(T.type)
+				for(var/datum/reagent/toxin/toxin in liver_owner.reagents.reagent_list)
+					var/thisamount = liver_owner.reagents.get_reagent_amount(toxin.type)
 					if(belly)
-						thisamount += belly.reagents.get_reagent_amount(T.type)
+						thisamount += belly.reagents.get_reagent_amount(toxin.type)
 					if (thisamount && thisamount <= toxTolerance * (maxHealth - damage) / maxHealth ) //toxTolerance is effectively multiplied by the % that your liver's health is at
-						C.reagents.remove_reagent(T.type, 0.5 * delta_time)
+						liver_owner.reagents.remove_reagent(toxin.type, 0.5 * delta_time)
 					else
 						damage += (thisamount * toxLethality * delta_time)
 						if(provide_pain_message != HAS_PAINFUL_TOXIN)
-							provide_pain_message = T.silent_toxin ? HAS_SILENT_TOXIN : HAS_PAINFUL_TOXIN
+							provide_pain_message = toxin.silent_toxin ? HAS_SILENT_TOXIN : HAS_PAINFUL_TOXIN
 
 			//metabolize reagents
-			C.reagents.metabolize(C, delta_time, times_fired, can_overdose=TRUE)
+			liver_owner.reagents.metabolize(liver_owner, delta_time, times_fired, can_overdose=TRUE)
 
 			if(provide_pain_message && damage > 10 && DT_PROB(damage/6, delta_time)) //the higher the damage the higher the probability
-				to_chat(C, "<span class='warning'>You feel a dull pain in your abdomen.</span>")
+				to_chat(liver_owner, "<span class='warning'>You feel a dull pain in your abdomen.</span>")
 
-		else //for when our liver's failing
-			C.liver_failure(delta_time, times_fired)
 
 	if(damage > maxHealth)//cap liver damage
 		damage = maxHealth
@@ -175,11 +170,11 @@
 		return
 	switch(failure_time)
 		if(0 to 3 * LIVER_FAILURE_STAGE_SECONDS - 1)
-			examine_list += span_notice("[owner]'s eyes are slightly yellow.")
+			examine_list += "<span class='notice'>[owner]'s eyes are slightly yellow.</span>"
 		if(3 * LIVER_FAILURE_STAGE_SECONDS to 4 * LIVER_FAILURE_STAGE_SECONDS - 1)
-			examine_list += span_notice("[owner]'s eyes are completely yellow, and [owner.p_they()] [owner.p_are()] visibly suffering.")
+			examine_list += "<span class='notice'>[owner]'s eyes are completely yellow, and he is visibly suffering.</span>"
 		if(4 * LIVER_FAILURE_STAGE_SECONDS to INFINITY)
-			examine_list += span_danger("[owner]'s eyes are completely yellow and swelling with pus. [owner.p_they()] [owner.p_do()]n't look like [owner.p_they()] will be alive for much longer.")
+			examine_list += "<span class='danger'>[owner]'s eyes are completely yellow and swelling with pus. [owner.p_they()] don't look like they will be alive for much longer.</span>"
 
 /obj/item/organ/liver/on_death(delta_time, times_fired)
 	. = ..()
@@ -192,16 +187,16 @@
 		CRASH("on_death() called for [src] ([type]) with not-dead owner ([owner])")
 	if((organ_flags & ORGAN_FAILING) && HAS_TRAIT(carbon_owner, TRAIT_NOMETABOLISM))//can't process reagents with a failing liver
 		return
-	for(var/reagent in carbon_owner.reagents.reagent_list)
-		var/datum/reagent/R = reagent
-		R.on_mob_dead(carbon_owner, delta_time)
+	for(var/datum/reagent/chem as anything in carbon_owner.reagents.reagent_list)
+		chem.on_mob_dead(carbon_owner, delta_time)
 
 #undef HAS_SILENT_TOXIN
 #undef HAS_NO_TOXIN
 #undef HAS_PAINFUL_TOXIN
+#undef LIVER_FAILURE_STAGE_SECONDS
 
-/obj/item/organ/liver/get_availability(datum/species/S)
-	return !(TRAIT_NOMETABOLISM in S.inherent_traits)
+/obj/item/organ/liver/get_availability(datum/species/species)
+	return !(TRAIT_NOMETABOLISM in species.inherent_traits)
 
 /obj/item/organ/liver/plasmaman
 	name = "reagent processing crystal"
@@ -224,7 +219,7 @@
 	toxLethality = 1.1 * LIVER_DEFAULT_TOX_LETHALITY
 	maxHealth = STANDARD_ORGAN_THRESHOLD*0.5
 
-	var/emp_vulnerability = 80	//Chance of permanent effects if emp-ed.
+	var/emp_vulnerability = 80 //Chance of permanent effects if emp-ed.
 
 /obj/item/organ/liver/cybernetic/tier2
 	name = "cybernetic liver"
@@ -255,6 +250,4 @@
 	if(prob(emp_vulnerability/severity)) //Chance of permanent effects
 		organ_flags |= ORGAN_SYNTHETIC_EMP //Starts organ faliure - gonna need replacing soon.
 
-#undef LIVER_DEFAULT_TOX_TOLERANCE
-#undef LIVER_DEFAULT_TOX_RESISTANCE
-#undef LIVER_FAILURE_STAGE_SECONDS
+

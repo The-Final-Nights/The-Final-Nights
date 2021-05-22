@@ -13,7 +13,7 @@
 	var/obj/item/cavity_item
 	wound_resistance = 10
 
-/obj/item/bodypart/chest/can_dismember(obj/item/I)
+/obj/item/bodypart/chest/can_dismember(obj/item/item)
 	if(owner.stat < HARD_CRIT || !get_organs())
 		return FALSE
 	return ..()

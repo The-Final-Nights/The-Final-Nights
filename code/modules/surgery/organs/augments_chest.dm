@@ -59,7 +59,7 @@
 	if(reviving)
 		switch(owner.stat)
 			if(UNCONSCIOUS, HARD_CRIT)
-				addtimer(CALLBACK(src, PROC_REF(heal)), 3 SECONDS)
+				addtimer(CALLBACK(src, .proc/heal), 3 SECONDS)
 			else
 				COOLDOWN_START(src, reviver_cooldown, revive_cost)
 				reviving = FALSE
@@ -101,19 +101,19 @@
 		reviver_cooldown += 20 SECONDS
 
 	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		if(H.stat != DEAD && prob(50 / severity) && H.can_heartattack())
-			H.set_heartattack(TRUE)
-			to_chat(H, "<span class='userdanger'>You feel a horrible agony in your chest!</span>")
-			addtimer(CALLBACK(src, PROC_REF(undo_heart_attack)), 600 / severity)
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.stat != DEAD && prob(50 / severity) && human_owner.can_heartattack())
+			human_owner.set_heartattack(TRUE)
+			to_chat(human_owner, "<span class='userdanger'>You feel a horrible agony in your chest!</span>")
+			addtimer(CALLBACK(src, .proc/undo_heart_attack), 600 / severity)
 
 /obj/item/organ/cyberimp/chest/reviver/proc/undo_heart_attack()
-	var/mob/living/carbon/human/H = owner
-	if(!istype(H))
+	var/mob/living/carbon/human/human_owner = owner
+	if(!istype(human_owner))
 		return
-	H.set_heartattack(FALSE)
-	if(H.stat == CONSCIOUS)
-		to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
+	human_owner.set_heartattack(FALSE)
+	if(human_owner.stat == CONSCIOUS)
+		to_chat(human_owner, "<span class='notice'>You feel your heart beating again!</span>")
 
 
 /obj/item/organ/cyberimp/chest/thrusters
@@ -130,14 +130,14 @@
 	var/on = FALSE
 	var/datum/effect_system/trail_follow/ion/ion_trail
 
-/obj/item/organ/cyberimp/chest/thrusters/Insert(mob/living/carbon/M, special = 0)
+/obj/item/organ/cyberimp/chest/thrusters/Insert(mob/living/carbon/thruster_owner, special = 0)
 	. = ..()
 	if(!ion_trail)
 		ion_trail = new
 		ion_trail.auto_process = FALSE
-	ion_trail.set_up(M)
+	ion_trail.set_up(thruster_owner)
 
-/obj/item/organ/cyberimp/chest/thrusters/Remove(mob/living/carbon/M, special = 0)
+/obj/item/organ/cyberimp/chest/thrusters/Remove(mob/living/carbon/thruster_owner, special = 0)
 	if(on)
 		toggle(silent = TRUE)
 	..()
@@ -154,9 +154,9 @@
 		if(allow_thrust(0.01))
 			on = TRUE
 			ion_trail.start()
-			RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(move_react))
+			RegisterSignal(owner, COMSIG_MOVABLE_MOVED, .proc/move_react)
 			owner.add_movespeed_modifier(/datum/movespeed_modifier/jetpack/cybernetic)
-			RegisterSignal(owner, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(pre_move_react))
+			RegisterSignal(owner, COMSIG_MOVABLE_PRE_MOVE, .proc/pre_move_react)
 			if(!silent)
 				to_chat(owner, "<span class='notice'>You turn your thrusters set on.</span>")
 	else
@@ -196,9 +196,34 @@
 	if(!owner)
 		return FALSE
 
-	var/turf/T = get_turf(owner)
-	if(!T) // No more runtimes from being stuck in nullspace.
+	var/turf/owner_turf = get_turf(owner)
+	if(!owner_turf) // No more runtimes from being stuck in nullspace.
 		return FALSE
 
-	ion_trail.generate_effect()
-	return TRUE
+	// Priority 1: use air from environment.
+	var/datum/gas_mixture/environment = owner_turf.return_air()
+	if(environment && environment.return_pressure() > 30)
+		ion_trail.generate_effect()
+		return TRUE
+
+	// Priority 2: use plasma from internal plasma storage.
+	// (just in case someone would ever use this implant system to make cyber-alien ops with jetpacks and taser arms)
+	if(owner.getPlasma() >= num*100)
+		owner.adjustPlasma(-num*100)
+		ion_trail.generate_effect()
+		return TRUE
+
+	// Priority 3: use internals tank.
+	var/datum/gas_mixture/internal_mix = owner.internal.return_air()
+	if(internal_mix && internal_mix.total_moles() > num)
+		var/datum/gas_mixture/removed = internal_mix.remove(num)
+		if(removed.total_moles() > 0.005)
+			owner_turf.assume_air(removed)
+			ion_trail.generate_effect()
+			return TRUE
+		else
+			owner_turf.assume_air(removed)
+			ion_trail.generate_effect()
+
+	toggle(silent = TRUE)
+	return FALSE
