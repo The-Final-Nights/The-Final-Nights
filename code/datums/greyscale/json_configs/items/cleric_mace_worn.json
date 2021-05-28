@@ -1,5 +1,5 @@
 {
-	"default": [
+	"screwdriver": [
 		{
 			"type": "icon_state",
 			"icon_state": "worn_shaft",
