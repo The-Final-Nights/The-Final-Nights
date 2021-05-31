@@ -14,6 +14,12 @@
 
 /datum/greyscale_layer/New(icon_file, list/json_data)
 	color_ids = json_data["color_ids"]
+	for(var/i in color_ids)
+		if(isnum(i))
+			continue
+		if(istext(i) && i[1] == "#")
+			continue
+		CRASH("Color ids must be a color string or positive integer starting from 1, '[i]' is not valid.")
 	blend_mode = blend_modes[lowertext(json_data["blend_mode"])]
 	if(isnull(blend_mode))
 		CRASH("Greyscale config for [icon_file] is missing a blend mode on a layer.")
@@ -23,7 +29,10 @@
 /datum/greyscale_layer/proc/Generate(list/colors, list/render_steps)
 	var/list/processed_colors = list()
 	for(var/i in color_ids)
-		processed_colors += colors[i]
+		if(isnum(i))
+			processed_colors += colors[i]
+		else
+			processed_colors += i
 	return InternalGenerate(processed_colors, render_steps)
 
 /datum/greyscale_layer/proc/InternalGenerate(list/colors)
@@ -57,18 +66,15 @@
 /// A layer created by using another greyscale icon's configuration
 /datum/greyscale_layer/reference
 	layer_type = "reference"
+	var/icon_state
 	var/datum/greyscale_config/reference_config
 
 /datum/greyscale_layer/reference/New(icon_file, list/json_data)
 	. = ..()
+	icon_state = json_data["icon_state"] || ""
 	reference_config = SSgreyscale.configurations[json_data["reference_type"]]
 	if(!reference_config)
 		CRASH("An unknown greyscale configuration was given to a reference layer: [json_data["reference_type"]]")
 
 /datum/greyscale_layer/reference/InternalGenerate(list/colors, list/render_steps)
-	if(render_steps)
-		// We're debugging
-		var/list/debug_data = reference_config.GenerateDebug(colors)
-		render_steps += debug_data["steps"]
-		return debug_data["icon"]
-	return reference_config.Generate(colors)
+	return icon(reference_config.Generate(colors.Join(), render_steps), icon_state)
