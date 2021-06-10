@@ -54,10 +54,10 @@
 
 	var/static/datum/lighting_corner/dummy/dummy_lighting_corner = new
 
-	var/datum/lighting_corner/red_corner = affected_turf.lighting_corner_SW || dummy_lighting_corner
-	var/datum/lighting_corner/green_corner = affected_turf.lighting_corner_SE || dummy_lighting_corner
-	var/datum/lighting_corner/blue_corner = affected_turf.lighting_corner_NW || dummy_lighting_corner
-	var/datum/lighting_corner/alpha_corner = affected_turf.lighting_corner_NE || dummy_lighting_corner
+	var/datum/lighting_corner/cr = myturf.lighting_corner_SW || dummy_lighting_corner
+	var/datum/lighting_corner/cg = myturf.lighting_corner_SE || dummy_lighting_corner
+	var/datum/lighting_corner/cb = myturf.lighting_corner_NW || dummy_lighting_corner
+	var/datum/lighting_corner/ca = myturf.lighting_corner_NE || dummy_lighting_corner
 
 	var/max = max(red_corner.largest_color_luminosity, green_corner.largest_color_luminosity, blue_corner.largest_color_luminosity, alpha_corner.largest_color_luminosity)
 
