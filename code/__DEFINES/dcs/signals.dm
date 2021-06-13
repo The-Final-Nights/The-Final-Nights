@@ -47,6 +47,8 @@
 /// handler for vv_do_topic (usr, href_list)
 #define COMSIG_VV_TOPIC "vv_topic"
 	#define COMPONENT_VV_HANDLED (1<<0)
+/// from datum ui_act (usr, action)
+#define COMSIG_UI_ACT "COMSIG_UI_ACT"
 
 /// fires on the target datum when an element is attached to it (/datum/element)
 #define COMSIG_ELEMENT_ATTACH "element_attach"

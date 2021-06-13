@@ -8,7 +8,7 @@
 
 /turf/proc/lighting_clear_overlay()
 	if (lighting_object)
-		qdel(lighting_object, TRUE)
+		qdel(lighting_object, force=TRUE)
 
 	var/datum/lighting_corner/C
 	var/thing
@@ -21,16 +21,13 @@
 // Builds a lighting object for us, but only if our area is dynamic.
 /turf/proc/lighting_build_overlay()
 	if (lighting_object)
-		qdel(lighting_object,force=TRUE) //Shitty fix for lighting objects persisting after death
+		qdel(lighting_object, force=TRUE) //Shitty fix for lighting objects persisting after death
 
-	var/area/A = loc
-	if (!IS_DYNAMIC_LIGHTING(A) && !light_sources)
+	var/area/our_area = loc
+	if (!IS_DYNAMIC_LIGHTING(our_area) && !light_sources)
 		return
 
-	if (!lighting_corners_initialised)
-		generate_missing_corners()
-
-	new/atom/movable/lighting_object(src)
+	new/datum/lighting_object(src)
 
 	var/thing
 	var/datum/lighting_corner/C
@@ -58,13 +55,14 @@
 			continue
 		L = thing
 		totallums += L.lum_r + L.lum_b + L.lum_g
+	L = lighting_corner_NW
+	if (L)
+		totallums += L.lum_r + L.lum_b + L.lum_g
 
-	totallums /= 12 // 4 corners, each with 3 channels, get the average.
 
 	totallums = (totallums - minlum) / (maxlum - minlum)
 
 	totallums += dynamic_lumcount
-
 	return CLAMP01(totallums)
 
 // Returns a boolean whether the turf is on soft lighting.
@@ -75,7 +73,7 @@
 	if (!lighting_object)
 		return FALSE
 
-	return !(lighting_object.luminosity || dynamic_lumcount)
+	return !(luminosity || dynamic_lumcount)
 
 
 ///Proc to add movable sources of opacity on the turf and let it handle lighting code.
@@ -103,8 +101,7 @@
 			reconsider_lights()
 		return
 	directional_opacity = NONE
-	for(var/am in opacity_sources)
-		var/atom/movable/opacity_source = am
+	for(var/atom/movable/opacity_source as anything in opacity_sources)
 		if(opacity_source.flags_1 & ON_BORDER_1)
 			directional_opacity |= opacity_source.dir
 		else //If fulltile and opaque, then the whole tile blocks view, no need to continue checking.
@@ -123,8 +120,18 @@
 				lighting_clear_overlay()
 
 /turf/proc/generate_missing_corners()
-	if (!IS_DYNAMIC_LIGHTING(src) && !light_sources)
-		return
+	if (!lighting_corner_NE)
+		lighting_corner_NE = new/datum/lighting_corner(src, NORTH|EAST)
+
+	if (!lighting_corner_SE)
+		lighting_corner_SE = new/datum/lighting_corner(src, SOUTH|EAST)
+
+	if (!lighting_corner_SW)
+		lighting_corner_SW = new/datum/lighting_corner(src, SOUTH|WEST)
+
+	if (!lighting_corner_NW)
+		lighting_corner_NW = new/datum/lighting_corner(src, NORTH|WEST)
+
 	lighting_corners_initialised = TRUE
 	if (!corners)
 		corners = list(null, null, null, null)

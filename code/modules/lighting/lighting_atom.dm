@@ -104,17 +104,8 @@
 
 /atom/movable/Moved(atom/OldLoc, Dir)
 	. = ..()
-	var/datum/light_source/L
-	var/thing
-	for (thing in light_sources) // Cycle through the light sources on this atom and tell them to update.
-		L = thing
-		L.source_atom.update_light()
-		if(L.source_atom.parent_multiz_light)
-			L.source_atom.parent_multiz_light.forceMove(get_step_multiz(src, UP))
-			if(!istype(L.source_atom.parent_multiz_light.loc, /turf/open/openspace))
-				qdel(L.source_atom.parent_multiz_light)
-		else if(istype(get_step_multiz(L.source_atom, UP), /turf/open/openspace))
-			L.source_atom.parent_multiz_light = new(get_step_multiz(L.source_atom, UP))
+	for (var/datum/light_source/light as anything in light_sources) // Cycle through the light sources on this atom and tell them to update.
+		light.source_atom.update_light()
 
 
 /atom/proc/flash_lighting_fx(_range = FLASH_LIGHT_RANGE, _power = FLASH_LIGHT_POWER, _color = COLOR_WHITE, _duration = FLASH_LIGHT_DURATION)
