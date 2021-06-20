@@ -48,7 +48,7 @@
 		var/list/prints = sniffed.return_fingerprints()
 		if(prints)
 			for(var/mob/living/carbon/C in GLOB.carbon_list)
-				if(prints[md5(C.dna.uni_identity)])
+				if(prints[md5(C.dna.unique_identity)])
 					possible |= C
 		if(!length(possible))
 			to_chat(user,"<span class='warning'>Despite your best efforts, there are no scents to be found on [sniffed]...</span>")

@@ -160,9 +160,8 @@
 
 	var/list/compiled_list = list()
 
-	for(var/H in GLOB.human_list)
-		var/mob/living/carbon/human/human_to_check = H
-		if(fingerprints[md5(human_to_check.dna.uni_identity)])
+	for(var/mob/living/carbon/human/human_to_check as anything in GLOB.human_list)
+		if(fingerprints[md5(human_to_check.dna.unique_identity)])
 			compiled_list |= human_to_check.real_name
 			compiled_list[human_to_check.real_name] = human_to_check
 

@@ -43,7 +43,7 @@ Bonus
 	if(A.properties["stealth"] >= 5) //only give them bad mutations
 		excludemuts = POSITIVE
 	if(A.properties["stage_rate"] >= 10) //activate dormant mutations more often at around 1.5x the pace
-		symptom_delay_min = 20		
+		symptom_delay_min = 20
 		symptom_delay_max = 40
 	if(A.properties["resistance"] >= 8) //mutadone won't save you now
 		mutadone_proof = (NEGATIVE | MINOR_NEGATIVE)
@@ -58,8 +58,8 @@ Bonus
 		return
 	switch(A.stage)
 		if(4, 5)
-			to_chat(C, "<span class='warning'>[pick("Your skin feels itchy.", "You feel light headed.")]</span>")
-			C.easy_randmut((NEGATIVE | MINOR_NEGATIVE | POSITIVE) - excludemuts, TRUE, TRUE, TRUE, mutadone_proof)
+			to_chat(C, span_warning("[pick("Your skin feels itchy.", "You feel light headed.")]"))
+			C.easy_random_mutate((NEGATIVE | MINOR_NEGATIVE | POSITIVE) - excludemuts, TRUE, TRUE, TRUE, mutadone_proof)
 
 /datum/symptom/genetic_mutation/End(datum/disease/advance/A)
 	if(!..())

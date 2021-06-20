@@ -19,16 +19,16 @@
 	info_list += "<span class='info'>SpiderOS Status: [s_initialized ? "Initialized" : "Disabled"]</span>\n"
 	info_list += "<span class='info'>Current Time: [station_time_timestamp()]</span>\n"
 	//Ninja status
-	info_list += "<span class='info'>Fingerprints: [md5(ninja.dna.uni_identity)]</span>\n"
-	info_list += "<span class='info'>Unique Identity: [ninja.dna.unique_enzymes]</span>\n"
-	info_list += "<span class='info'>Overall Status: [ninja.stat > 1 ? "dead" : "[ninja.health]% healthy"]</span>\n"
-	info_list += "<span class='info'>Nutrition Status: [ninja.nutrition]</span>\n"
-	info_list += "<span class='info'>Oxygen Loss: [ninja.getOxyLoss()]</span>\n"
-	info_list += "<span class='info'>Toxin Levels: [ninja.getToxLoss()]</span>\n"
-	info_list += "<span class='info'>Burn Severity: [ninja.getFireLoss()]</span>\n"
-	info_list += "<span class='info'>Brute Trauma: [ninja.getBruteLoss()]</span>\n"
-	info_list += "<span class='info'>Radiation Levels: [ninja.radiation] rad</span>\n"
-	info_list += "<span class='info'>Body Temperature: [ninja.bodytemperature-T0C] degrees C ([ninja.bodytemperature*1.8-459.67] degrees F)</span>\n"
+	info_list += "[span_info("Fingerprints: [md5(ninja.dna.unique_identity)]")]\n"
+	info_list += "[span_info("Unique Identity: [ninja.dna.unique_enzymes]")]\n"
+	info_list += "[span_info("Overall Status: [ninja.stat > 1 ? "dead" : "[ninja.health]% healthy"]")]\n"
+	info_list += "[span_info("Nutrition Status: [ninja.nutrition]")]\n"
+	info_list += "[span_info("Oxygen Loss: [ninja.getOxyLoss()]")]\n"
+	info_list += "[span_info("Toxin Levels: [ninja.getToxLoss()]")]\n"
+	info_list += "[span_info("Burn Severity: [ninja.getFireLoss()]")]\n"
+	info_list += "[span_info("Brute Trauma: [ninja.getBruteLoss()]")]\n"
+	info_list += "[span_info("Radiation Levels: [ninja.radiation] rad")]\n"
+	info_list += "[span_info("Body Temperature: [ninja.bodytemperature-T0C] degrees C ([ninja.bodytemperature*1.8-459.67] degrees F)")]\n"
 
 	//Diseases
 	if(length(ninja.diseases))
