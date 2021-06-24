@@ -461,10 +461,11 @@
 	else
 		. = ..()
 
-/obj/item/stack/AltClick(mob/living/user)
+/obj/item/stack/attack_hand_secondary(mob/user, modifiers)
 	. = ..()
-	if(isturf(loc)) // to prevent people that are alt clicking a tile to see its content from getting undesidered pop ups
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	if(is_cyborg || !user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY, FALSE, !iscyborg(user)) || zero_amount())
 		return
 	//get amount from user

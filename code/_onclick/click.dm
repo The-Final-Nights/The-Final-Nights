@@ -187,15 +187,9 @@
 			W.melee_attack_chain(src, A, params)
 		else
 			if(ismob(A))
-				if(isliving(src))
-					var/mob/living/L = src
-					if(L.melee_professional)
-						changeNext_move(CLICK_CD_RANGE)
-					else
-						changeNext_move(CLICK_CD_MELEE)
-				else
-					changeNext_move(CLICK_CD_MELEE)
-			UnarmedAttack(A)
+				changeNext_move(CLICK_CD_MELEE)
+
+			UnarmedAttack(A, FALSE, modifiers)
 		return
 
 	//Can't reach anything else in lockers or other weirdness

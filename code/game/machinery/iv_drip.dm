@@ -176,9 +176,11 @@
 	else
 		toggle_mode()
 
-/obj/machinery/iv_drip/AltClick(mob/living/user)
-	if(!user.canUseTopic(src, be_close=TRUE))
+/obj/machinery/iv_drip/attack_hand_secondary(mob/user, modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	if(dripfeed)
 		dripfeed = FALSE
 		to_chat(usr, "<span class='notice'>You loosen the valve to speed up the [src].</span>")
