@@ -720,13 +720,13 @@
 		var/mob/living/carbon/human/H = user
 
 		if(istype(H))
-			var/datum/species/ethereal/eth_species = H.dna?.species
-			if(istype(eth_species))
-				var/datum/species/ethereal/E = H.dna.species
-				if(E.drain_time > world.time)
+			var/obj/item/organ/stomach/maybe_stomach = H.getorganslot(ORGAN_SLOT_STOMACH)
+			if(istype(maybe_stomach, /obj/item/organ/stomach/ethereal))
+				var/obj/item/organ/stomach/ethereal/stomach = maybe_stomach
+				if(stomach.drain_time > world.time)
 					return
-				to_chat(H, "<span class='notice'>You start channeling some power through the [fitting] into your body.</span>")
-				E.drain_time = world.time + LIGHT_DRAIN_TIME
+				to_chat(H, span_notice("You start channeling some power through the [fitting] into your body."))
+				stomach.drain_time = world.time + LIGHT_DRAIN_TIME
 				if(do_after(user, LIGHT_DRAIN_TIME, target = src))
 					var/obj/item/organ/stomach/ethereal/stomach = H.getorganslot(ORGAN_SLOT_STOMACH)
 					if(istype(stomach))
