@@ -170,6 +170,16 @@
 #define ORGAN_SLOT_PARASITE_EGG "parasite_egg"
 #define ORGAN_SLOT_REGENERATIVE_CORE "hivecore"
 
+/// Organ slot external
+#define ORGAN_SLOT_EXTERNAL_TAIL "tail"
+#define ORGAN_SLOT_EXTERNAL_SPINES "spines"
+#define ORGAN_SLOT_EXTERNAL_SNOUT "snout"
+#define ORGAN_SLOT_EXTERNAL_FRILLS "frills"
+#define ORGAN_SLOT_EXTERNAL_HORNS "horns"
+#define ORGAN_SLOT_EXTERNAL_WINGS "wings"
+#define ORGAN_SLOT_EXTERNAL_ANTENNAE "antennae"
+#define ORGAN_SLOT_EXTERNAL_BODYMARKINGS "bodymarkings"
+
 /// Xenomorph organ slots
 #define ORGAN_SLOT_XENO_PLASMAVESSEL "plasma_vessel"
 #define ORGAN_SLOT_XENO_HIVENODE "hive_node"

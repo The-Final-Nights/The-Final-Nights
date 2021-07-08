@@ -163,7 +163,10 @@
 #define TRAIT_TRANSFORM_ACTIVE "active_transform"
 
 #define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
+///When people are floating from zero-grav or something, we can move around freely!
 
+
+#define TRAIT_FREE_FLOAT_MOVEMENT "free_float_movement"
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
 #define TRAIT_DOGWOLF			"dogwolf"
