@@ -1,7 +1,7 @@
 /datum/job/lawyer
 	title = "Lawyer"
 	department_head = list("Head of Personnel")
-	faction = "Station"
+	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
@@ -19,6 +19,9 @@
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
 
 //	display_order = JOB_DISPLAY_ORDER_LAWYER
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE
+
 
 /datum/outfit/job/lawyer
 	name = "Lawyer"

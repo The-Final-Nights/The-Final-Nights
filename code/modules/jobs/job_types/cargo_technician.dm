@@ -1,7 +1,7 @@
 /datum/job/cargo_tech
 	title = "Cargo Technician"
 	department_head = list("Head of Personnel")
-	faction = "Station"
+	faction = FACTION_STATION
 	total_positions = 3
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
@@ -15,6 +15,9 @@
 	paycheck_department = ACCOUNT_CAR
 //	display_order = JOB_DISPLAY_ORDER_CARGO_TECHNICIAN
 	bounty_types = CIV_JOB_RANDOM
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE
+
 
 /datum/outfit/job/cargo_tech
 	name = "Cargo Technician"

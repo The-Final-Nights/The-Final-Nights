@@ -19,7 +19,7 @@
 /datum/antagonist/rev/can_be_owned(datum/mind/new_owner)
 	. = ..()
 	if(.)
-		if(new_owner.assigned_role in GLOB.command_positions)
+		if(new_owner.assigned_role.departments & DEPARTMENT_COMMAND)
 			return FALSE
 		if(new_owner.unconvertable)
 			return FALSE
@@ -402,7 +402,10 @@
 			if (isnull(mind))
 				continue
 
-			if (!(mind.assigned_role in GLOB.command_positions + GLOB.ss13))
+			if (!(mind.assigned_role.departments & (DEPARTMENT_SECURITY|DEPARTMENT_COMMAND)))
+				continue
+
+			if (mind in ex_revs + ex_headrevs)
 				continue
 
 			var/mob/living/carbon/target_body = mind.current

@@ -1,6 +1,9 @@
 #define Z_TURFS(ZLEVEL) block(locate(1,1,ZLEVEL), locate(world.maxx, world.maxy, ZLEVEL))
 #define CULT_POLL_WAIT 2400
 
+/// Returns either the error landmark or the location of the room. Needless to say, if this is used, it means things have gone awry.
+#define GET_ERROR_ROOM ((locate(/obj/effect/landmark/error) in GLOB.landmarks_list) || locate(4,4,1))
+
 /proc/get_area_name(atom/X, format_text = FALSE)
 	var/area/A = isarea(X) ? X : get_area(X)
 	if(!A)
@@ -474,7 +477,7 @@
 	var/mob/living/carbon/human/new_character = new//The mob being spawned.
 	SSjob.SendToLateJoin(new_character)
 
-	G_found.client.prefs.copy_to(new_character)
+	G_found.client.prefs.safe_transfer_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
 	new_character.key = G_found.key
 
@@ -514,7 +517,7 @@
 	deadchat_broadcast("<span class='game'> has arrived at the station at <span class='name'>[A.name]</span>.</span>", "<span class='game'><span class='name'>[character.real_name]</span> ([rank])</span>", follow_target = character, message_type=DEADCHAT_ARRIVALRATTLE)
 	if((!GLOB.announcement_systems.len) || (!character.mind))
 		return
-	if((character.mind.assigned_role == "Cyborg") || (character.mind.assigned_role == character.mind.special_role))
+	if(!(character.mind.assigned_role.job_flags & JOB_ANNOUNCE_ARRIVAL))
 		return
 	// TFN EDIT START: alt job titles
 	var/displayed_rank = rank

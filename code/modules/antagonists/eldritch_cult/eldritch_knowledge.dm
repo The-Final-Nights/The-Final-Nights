@@ -287,11 +287,11 @@
 				var/datum/mind/targeted =  A.find_target()//easy way, i dont feel like copy pasting that entire block of code
 				if(!targeted)
 					break
-				targets["[targeted.current.real_name] the [targeted.assigned_role]"] = targeted.current
-			LH.target = targets[input(user,"Choose your next target","Target") in targets]
-			qdel(A)
-			if(LH.target)
-				to_chat(user,"<span class='warning'>Your new target has been selected, go and sacrifice [LH.target.real_name]!</span>")
+				targets["[targeted.current.real_name] the [targeted.assigned_role.title][is_teammate ? " (ally)" : ""]"] = targeted.current
+			heart.target = targets[input(user,"Choose your next target","Target") in targets]
+			qdel(temp_objective)
+			if(heart.target)
+				to_chat(user,span_warning("Your new target has been selected, go and sacrifice [heart.target.real_name]!"))
 			else
 				to_chat(user,"<span class='warning'>target could not be found for living heart.</span>")
 

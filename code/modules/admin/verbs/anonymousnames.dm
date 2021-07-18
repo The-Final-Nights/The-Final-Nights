@@ -54,7 +54,7 @@
 /proc/anonymous_all_players()
 	var/datum/anonymous_theme/theme = SSticker.anonymousnames
 	for(var/mob/living/player in GLOB.player_list)
-		if(!player.mind || (!ishuman(player) && !issilicon(player)) || !SSjob.GetJob(player.mind.assigned_role))
+		if(!player.mind || (!ishuman(player) && !issilicon(player)) || player.mind.assigned_role.faction != FACTION_STATION)
 			continue
 		if(issilicon(player))
 			player.fully_replace_character_name(player.real_name, theme.anonymous_ai_name(isAI(player)))
@@ -63,10 +63,23 @@
 			randomize_human(player) //do this first so the special name can be given
 			player.fully_replace_character_name(original_name, theme.anonymous_name(player))
 
-/* Datum singleton initialized by the client proc to hold the naming generation */
-/datum/anonymous_theme
-	var/name = "Randomized Names"
-	var/announcement_alert = "A recent bureaucratic error in the Organic Resources Department has resulted in a necessary full recall of all identities and names until further notice."
+/**
+ * restore_all_players: sets all crewmembers on station back to their preference name.
+ *
+ * called when the anonymous theme is removed regardless of extra theming
+ */
+/datum/anonymous_theme/proc/restore_all_players()
+	priority_announce("Names and Identities have been restored.", "Identity Restoration", SSstation.announcer.get_rand_alert_sound())
+	for(var/mob/living/player in GLOB.player_list)
+		if(!player.mind || (!ishuman(player) && !issilicon(player)) || player.mind.assigned_role.faction != FACTION_STATION)
+			continue
+		var/old_name = player.real_name //before restoration
+		if(issilicon(player))
+			player.apply_pref_name("[isAI(player) ? "ai" : "cyborg"]", player.client)
+		else
+			player.client.prefs.sanitize_chosen_prefs() // Just in case they changed unlawfully.
+			player.client.prefs.apply_prefs_to(player) // This is not sound logic, as the prefs may have changed since then.
+			player.fully_replace_character_name(old_name, player.real_name) //this changes IDs and PDAs and whatnot
 
 /**
  * anonymous_name: generates a random name, based off of whatever the round's anonymousnames is set to.
@@ -96,8 +109,11 @@
 	name = "Employees"
 	announcement_alert = "As punishment for this station's poor productivity when compared to neighbor stations, names and identities will be restricted until further notice."
 
-/datum/anonymous_theme/employees/anonymous_name(mob/M)
-	var/is_head_of_staff = (M.mind.assigned_role in GLOB.command_positions)
+/datum/anonymous_theme/employees/announce_to_all_players()
+	priority_announce("As punishment for this station's poor productivity when compared to neighbor stations, names and identities will be restricted until further notice.", "Finance Report", SSstation.announcer.get_rand_alert_sound())
+
+/datum/anonymous_theme/employees/anonymous_name(mob/target)
+	var/is_head_of_staff = target.mind.assigned_role.departments & DEPARTMENT_COMMAND
 	var/name = "[is_head_of_staff ? "Manager" : "Employee"] "
 	for(var/i in 1 to 6)
 		if(prob(30) || i == 1)

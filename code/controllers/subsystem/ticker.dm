@@ -368,7 +368,11 @@ SUBSYSTEM_DEF(ticker)
 		var/mob/dead/new_player/player = i
 		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
 			GLOB.joined_player_list += player.ckey
-			player.create_character(FALSE)
+			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
+			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
+				player.new_player_panel()
+				continue
+			player.create_character(destination)
 		else
 			player.new_player_panel()
 		CHECK_TICK
@@ -382,17 +386,63 @@ SUBSYSTEM_DEF(ticker)
 
 
 /datum/controller/subsystem/ticker/proc/equip_characters()
-	var/captainless=1
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/N = i
-		var/mob/living/carbon/human/player = N.new_character
-		if(istype(player) && player.mind && player.mind.assigned_role)
-			if(player.mind.assigned_role == "Prince")
-				captainless=0
-			if(player.mind.assigned_role != player.mind.special_role)
-				SSjob.EquipRank(N, player.mind.assigned_role, 0)
-				if(CONFIG_GET(flag/roundstart_traits) && ishuman(N.new_character))
-					SSquirks.AssignQuirks(N.new_character, N.client, TRUE)
+	GLOB.security_officer_distribution = decide_security_officer_departments(
+		shuffle(GLOB.new_player_list),
+		shuffle(GLOB.available_depts),
+	)
+
+	var/captainless = TRUE
+
+	var/highest_rank = length(SSjob.chain_of_command) + 1
+	var/list/spare_id_candidates = list()
+	var/mob/dead/new_player/picked_spare_id_candidate
+
+	// Find a suitable player to hold captaincy.
+	for(var/mob/dead/new_player/new_player_mob as anything in GLOB.new_player_list)
+		if(is_banned_from(new_player_mob.ckey, list("Captain")))
+			CHECK_TICK
+			continue
+		if(!ishuman(new_player_mob.new_character))
+			continue
+		var/mob/living/carbon/human/new_player_human = new_player_mob.new_character
+		if(!new_player_human.mind || is_unassigned_job(new_player_human.mind.assigned_role))
+			continue
+		// Keep a rolling tally of who'll get the cap's spare ID vault code.
+		// Check assigned_role's priority and curate the candidate list appropriately.
+		var/player_assigned_role = new_player_human.mind.assigned_role.title
+		var/spare_id_priority = SSjob.chain_of_command[player_assigned_role]
+		if(spare_id_priority)
+			if(spare_id_priority < highest_rank)
+				spare_id_candidates.Cut()
+				spare_id_candidates += new_player_mob
+				highest_rank = spare_id_priority
+			else if(spare_id_priority == highest_rank)
+				spare_id_candidates += new_player_mob
+		CHECK_TICK
+
+	if(length(spare_id_candidates))
+		picked_spare_id_candidate = pick(spare_id_candidates)
+
+	for(var/mob/dead/new_player/new_player_mob as anything in GLOB.new_player_list)
+		if(!isliving(new_player_mob.new_character))
+			CHECK_TICK
+			continue
+		var/mob/living/new_player_living = new_player_mob.new_character
+		if(!new_player_living.mind || is_unassigned_job(new_player_living.mind.assigned_role))
+			CHECK_TICK
+			continue
+		var/datum/job/player_assigned_role = new_player_living.mind.assigned_role
+		if(ishuman(new_player_living) && CONFIG_GET(flag/roundstart_traits))
+			if(new_player_mob.client.prefs.should_be_random_hardcore(player_assigned_role, new_player_living.mind))
+				new_player_mob.client.prefs.hardcore_random_setup(new_player_living)
+			SSquirks.AssignQuirks(new_player_living, new_player_mob.client)
+		if(player_assigned_role.job_flags & JOB_EQUIP_RANK)
+			SSjob.EquipRank(new_player_living, player_assigned_role, new_player_mob.client)
+		if(picked_spare_id_candidate == new_player_mob)
+			captainless = FALSE
+			var/acting_captain = !is_captain_job(player_assigned_role)
+			SSjob.promote_to_captain(new_player_living, acting_captain)
+			OnRoundstart(CALLBACK(GLOBAL_PROC, .proc/minor_announce, player_assigned_role.get_captaincy_announcement(new_player_living)))
 		CHECK_TICK
 	if(captainless)
 		for(var/i in GLOB.new_player_list)
@@ -400,6 +450,31 @@ SUBSYSTEM_DEF(ticker)
 			if(N.new_character)
 				to_chat(N, "<span class='notice'>The Prince is not currently present.</span>")
 			CHECK_TICK
+
+/datum/controller/subsystem/ticker/proc/decide_security_officer_departments(
+	list/new_players,
+	list/departments,
+)
+	var/list/officer_mobs = list()
+	var/list/officer_preferences = list()
+
+	for (var/mob/dead/new_player/new_player_mob as anything in new_players)
+		var/mob/living/carbon/human/character = new_player_mob.new_character
+		if (istype(character) && is_security_officer_job(character.mind?.assigned_role))
+			officer_mobs += character
+
+			var/datum/client_interface/client = GET_CLIENT(new_player_mob)
+			var/preference = client?.prefs?.prefered_security_department || SEC_DEPT_NONE
+			officer_preferences += preference
+
+	var/distribution = get_officer_departments(officer_preferences, departments)
+
+	var/list/output = list()
+
+	for (var/index in 1 to officer_mobs.len)
+		output[REF(officer_mobs[index])] = distribution[index]
+
+	return output
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()

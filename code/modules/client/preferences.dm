@@ -66,27 +66,39 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/uses_glasses_colour = 0
 
 	//character preferences
-	var/slot_randomized					//keeps track of round-to-round randomization of the character slot, prevents overwriting
-	var/slotlocked = 0
-	var/real_name						//our character's name
-	var/gender = MALE					//gender of character (well duh)
-	var/age = 30						//age of character
-	var/total_age = 30
-	var/underwear = "Nude"				//underwear type
-	var/underwear_color = "000"			//underwear color
-	var/undershirt = "Nude"				//undershirt type
-	var/socks = "Nude"					//socks type
-	var/backpack = DBACKPACK				//backpack type
-	var/jumpsuit_style = PREF_SUIT		//suit/skirt
-	var/hairstyle = "Bald"				//Hair type
-	var/hair_color = "#000000"				//Hair color
-	var/facial_hairstyle = "Shaved"	//Face hair type
-	var/facial_hair_color = "#000000"		//Facial hair color
-	var/skin_tone = "caucasian1"		//Skin color
-	var/eye_color = "#000000"				//Eye color
-	var/datum/species/pref_species = new /datum/species/human()	//Mutant race
-	var/list/features = list("mcolor" = "#FFFFFF", "ethcolor" = "#9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain", "moth_antennae" = "Plain", "moth_markings" = "None")
-	var/list/randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SOCKS = TRUE, RANDOM_BACKPACK = TRUE, RANDOM_JUMPSUIT_STYLE = TRUE, RANDOM_HAIRSTYLE = TRUE, RANDOM_HAIR_COLOR = TRUE, RANDOM_FACIAL_HAIRSTYLE = TRUE, RANDOM_FACIAL_HAIR_COLOR = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
+	var/slot_randomized //keeps track of round-to-round randomization of the character slot, prevents overwriting
+	var/slotlocked = FALSE
+	var/real_name //our character's name
+	var/gender = MALE //gender of character (well duh)
+	var/age = 30 //age of character
+	var/underwear = "Nude" //underwear type
+	var/underwear_color = "000" //underwear color
+	var/undershirt = "Nude" //undershirt type
+	var/socks = "Nude" //socks type
+	var/backpack = DBACKPACK //backpack type
+	var/jumpsuit_style = PREF_SUIT //suit/skirt
+	var/hairstyle = "Bald" //Hair type
+	var/hair_color = "000" //Hair color
+	var/facial_hairstyle = "Shaved" //Face hair type
+	var/facial_hair_color = "000" //Facial hair color
+	var/skin_tone = "caucasian1" //Skin color
+	var/eye_color = "000" //Eye color
+	var/datum/species/pref_species = new /datum/species/human() //Mutant race
+	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain", "moth_antennae" = "Plain", "moth_markings" = "None")
+	var/list/randomise = list(
+		RANDOM_UNDERWEAR = TRUE,
+		RANDOM_UNDERWEAR_COLOR = TRUE,
+		RANDOM_UNDERSHIRT = TRUE,
+		RANDOM_SOCKS = TRUE,
+		RANDOM_BACKPACK = TRUE,
+		RANDOM_JUMPSUIT_STYLE = TRUE,
+		RANDOM_HAIRSTYLE = TRUE,
+		RANDOM_HAIR_COLOR = TRUE,
+		RANDOM_FACIAL_HAIRSTYLE = TRUE,
+		RANDOM_FACIAL_HAIR_COLOR = TRUE,
+		RANDOM_SKIN_TONE = TRUE,
+		RANDOM_EYE_COLOR = TRUE,
+		)
 	var/phobia = "spiders"
 	var/list/genders = list(MALE, FEMALE, PLURAL)
 	var/list/custom_names = list()
@@ -134,9 +146,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/menuoptions
 
 	var/action_buttons_screen_locs = list()
-
-	///This var stores the amount of points the owner will get for making it out alive.
-	var/hardcore_survival_score = 0
 
 	///Someone thought we were nice! We get a little heart in OOC until we join the server past the below time (we can keep it until the end of the round otherwise)
 	var/hearted
@@ -330,7 +339,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			return
 	//we couldn't load character data so just randomize the character appearance + name
 	random_species()
-	random_character()		//let's create a random character then - rather than a fat, bald and naked man.
+	randomise_appearance_prefs() //let's create a random character then - rather than a fat, bald and naked man.
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
 	C?.set_macros()
 //	pref_species = new /datum/species/kindred()
@@ -1424,7 +1433,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/width = widthPerColumn
 
 	var/HTML = "<center>"
-	if(SSjob.occupations.len <= 0)
+	if(length(SSjob.joinable_occupations) <= 0)
 		HTML += "The job SSticker is not yet finished creating jobs, please try again later"
 		HTML += "<center><a href='byond://?_src_=prefs;preference=job;task=close'>Done</a></center><br>" // Easier to press up here.
 
@@ -1439,12 +1448,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
 		var/datum/job/lastJob
+		var/datum/job/overflow_role = SSjob.GetJobType(SSjob.overflow_role)
 
-		var/bypass = FALSE
-		if (check_rights_for(user.client, R_ADMIN))
-			bypass = TRUE
-
-		for(var/datum/job/job in sort_list(SSjob.occupations, GLOBAL_PROC_REF(cmp_job_display_asc)))
+		for(var/datum/job/job as anything in sortList(SSjob.joinable_occupations, /proc/cmp_job_display_asc))
 
 			index += 1
 			if((index >= limit) || (job.title in splitJobs))
@@ -1531,7 +1537,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(!renownlowed && !bypass)
 					HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_renownrank] RENOWN RANK REQUIRED\]</font></td></tr>"
 					continue
-			if((job_preferences[SSjob.overflow_role] == JP_LOW) && (rank != SSjob.overflow_role) && !is_banned_from(user.ckey, SSjob.overflow_role))
+			if((job_preferences[overflow_role.title] == JP_LOW) && (rank != overflow_role.title) && !is_banned_from(user.ckey, overflow_role.title))
 				HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 				continue
 			// TFN EDIT START: alt job titles
@@ -1576,8 +1582,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			HTML += "<a class='white' href='byond://?_src_=prefs;preference=job;task=setJobLevel;level=[prefUpperLevel];text=[rank]' oncontextmenu='javascript:return setJobPrefRedirect([prefLowerLevel], \"[rank]\");'>"
 
-			if(rank == SSjob.overflow_role)//Overflow is special
-				if(job_preferences[SSjob.overflow_role] == JP_LOW)
+			if(rank == overflow_role.title)//Overflow is special
+				if(job_preferences[overflow_role.title] == JP_LOW)
 					HTML += "<font color=green>Yes</font>"
 				else
 					HTML += "<font color=red>No</font>"
@@ -1593,7 +1599,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		HTML += "</td'></tr></table>"
 		HTML += "</center></table>"
 
-		var/message = "Be an [SSjob.overflow_role] if preferences unavailable"
+		var/message = "Be an [overflow_role.title] if preferences unavailable"
 		if(joblessrole == BERANDOMJOB)
 			message = "Get random job if preferences unavailable"
 		else if(joblessrole == RETURNTOLOBBY)
@@ -1621,11 +1627,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	return TRUE
 
 /datum/preferences/proc/UpdateJobPreference(mob/user, role, desiredLvl)
-	if(!SSjob || SSjob.occupations.len <= 0)
+	if(!SSjob || length(SSjob.joinable_occupations) <= 0)
 		return
 	var/datum/job/job = SSjob.GetJob(role)
 
-	if(!job)
+	if(!job || !(job.job_flags & JOB_NEW_PLAYER_JOINABLE))
 		user << browse(null, "window=mob_occupation")
 		ShowChoices(user)
 		return
@@ -1633,7 +1639,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if (!isnum(desiredLvl))
 		to_chat(user, "<span class='danger'>UpdateJobPreference - desired level was not a number. Please notify coders!</span>")
 		ShowChoices(user)
-		return
+		CRASH("UpdateJobPreference called with desiredLvl value of [isnull(desiredLvl) ? "null" : desiredLvl]")
 
 	var/jpval = null
 	switch(desiredLvl)
@@ -1644,7 +1650,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(1)
 			jpval = JP_HIGH
 
-	if(role == SSjob.overflow_role)
+	if(job.type == SSjob.overflow_role)
 		if(job_preferences[job.title] == JP_LOW)
 			jpval = null
 		else
@@ -1804,7 +1810,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if("random")
 				switch(joblessrole)
 					if(RETURNTOLOBBY)
-						if(is_banned_from(user.ckey, SSjob.overflow_role))
+						var/datum/job/overflow_role = SSjob.GetJobType(SSjob.overflow_role)
+						if(is_banned_from(user.ckey, overflow_role.title))
 							joblessrole = BERANDOMJOB
 						else
 							joblessrole = BEOVERFLOW
@@ -1930,7 +1937,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("suit")
 					jumpsuit_style = pick(GLOB.jumpsuitlist)
 				if("all")
-					random_character(gender)
+					apply_character_randomization_prefs()
 
 		if("input")
 			if(href_list["preference"] in GLOB.preferences_custom_names)
@@ -3327,38 +3334,34 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	experience_used_on_character += cost
 	return TRUE
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE)
 
-	hardcore_survival_score = 0 //Set to 0 to prevent you getting points from last another time.
+/// Sanitization checks to be performed before using these preferences.
+/datum/preferences/proc/sanitize_chosen_prefs()
+	if(!(pref_species.id in GLOB.roundstart_races) && !(pref_species.id in (CONFIG_GET(keyed_list/roundstart_no_hard_check))))
+		pref_species = new /datum/species/human
+		save_character()
 
-	if((randomise[RANDOM_SPECIES] || randomise[RANDOM_HARDCORE]) && !character_setup)
+	if(CONFIG_GET(flag/humans_need_surnames) && (pref_species.id == SPECIES_HUMAN))
+		var/firstspace = findtext(real_name, " ")
+		var/name_length = length(real_name)
+		if(!firstspace) //we need a surname
+			real_name += " [pick(GLOB.last_names)]"
+		else if(firstspace == name_length)
+			real_name += "[pick(GLOB.last_names)]"
 
-		random_species()
 
-	if((randomise[RANDOM_BODY] || (randomise[RANDOM_BODY_ANTAG] && antagonist) || randomise[RANDOM_HARDCORE]) && !character_setup)
-		slot_randomized = TRUE
-		random_character(gender, antagonist)
+/// Sanitizes the preferences, applies the randomization prefs, and then applies the preference to the human mob.
+/datum/preferences/proc/safe_transfer_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE, is_antag = FALSE)
+	apply_character_randomization_prefs(is_antag)
+	sanitize_chosen_prefs()
+	apply_prefs_to(character, icon_updates)
 
-	if((randomise[RANDOM_NAME] || (randomise[RANDOM_NAME_ANTAG] && antagonist) || randomise[RANDOM_HARDCORE]) && !character_setup)
-		slot_randomized = TRUE
-		real_name = pref_species.random_name(gender)
 
-	if(randomise[RANDOM_HARDCORE] && parent?.mob.mind && !character_setup)
-		if(can_be_random_hardcore())
-			hardcore_random_setup(character, antagonist, is_latejoiner)
-
-	if(roundstart_checks)
-		if(CONFIG_GET(flag/humans_need_surnames) && (pref_species.id == "human"))
-			var/firstspace = findtext(real_name, " ")
-			var/name_length = length(real_name)
-			if(!firstspace)	//we need a surname
-				real_name += " [pick(GLOB.last_names)]"
-			else if(firstspace == name_length)
-				real_name += "[pick(GLOB.last_names)]"
-
+/// Applies the given preferences to a human mob.
+/datum/preferences/proc/apply_prefs_to(mob/living/carbon/human/character, icon_updates = TRUE)
 	character.real_name = real_name
 	character.true_real_name = real_name
-	character.name = character.real_name
+	character.name = real_name
 	character.diablerist = diablerist
 	character.headshot_link = headshot_link // TFN EDIT
 	character.physique = physique
@@ -3504,9 +3507,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/datum/species/chosen_species
 	chosen_species = pref_species.type
-
 	character.dna.features = features.Copy()
-	character.set_species(chosen_species, icon_update = FALSE, pref_load = TRUE)
+	character.set_species(pref_species.type, icon_update = FALSE, pref_load = TRUE)
 	character.dna.real_name = character.real_name
 	if(character.clane)
 		character.clane.on_gain(character)
@@ -3592,14 +3594,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		parent << browse(null, "window=preferences_window")
 		parent << browse(null, "window=preferences_browser")
 
-/datum/preferences/proc/can_be_random_hardcore()
-	if(parent && (parent.mob.mind?.assigned_role in GLOB.command_positions)) //No command staff
+/// Returns whether the parent mob should have the random hardcore settings enabled. Assumes it has a mind.
+/datum/preferences/proc/should_be_random_hardcore(datum/job/job, datum/mind/mind)
+	if(!randomise[RANDOM_HARDCORE])
 		return FALSE
-	for(var/A in parent?.mob.mind?.antag_datums)
-		var/datum/antagonist/antag
+	if(job.departments & DEPARTMENT_COMMAND) //No command staff
+		return FALSE
+	for(var/datum/antagonist/antag as anything in mind.antag_datums)
 		if(antag.get_team()) //No team antags
 			return FALSE
 	return TRUE
+
 
 /datum/preferences/proc/get_default_name(name_id)
 	switch(name_id)

@@ -225,7 +225,12 @@
 ///Subtype of CQC. Only used for the chef.
 /datum/martial_art/cqc/under_siege
 	name = "Close Quarters Cooking"
-	var/list/valid_areas = list(/area/crew_quarters/kitchen)
+	var/list/kitchen_areas
+
+/// Refreshes the valid areas from the cook job singleton, otherwise uses the default kitchen area as a fallback option. See also [/datum/job/cook/New].
+/datum/martial_art/cqc/under_siege/proc/refresh_valid_areas()
+	var/datum/job/cook/cook_job = SSjob.GetJobType(/datum/job/cook)
+	kitchen_areas = cook_job.kitchen_areas.Copy()
 
 ///Prevents use if the cook is not in the kitchen.
 /datum/martial_art/cqc/under_siege/can_use(mob/living/owner) //this is used to make chef CQC only work in kitchen

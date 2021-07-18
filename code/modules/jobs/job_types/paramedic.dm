@@ -1,7 +1,7 @@
 /datum/job/paramedic
 	title = "Paramedic"
 	department_head = list("Chief Medical Officer")
-	faction = "Station"
+	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the chief medical officer"
@@ -20,6 +20,9 @@
 
 //	display_order = JOB_DISPLAY_ORDER_PARAMEDIC
 	bounty_types = CIV_JOB_MED
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE
+
 
 /datum/outfit/job/paramedic
 	name = "Paramedic"

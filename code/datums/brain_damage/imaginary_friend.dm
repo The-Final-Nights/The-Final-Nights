@@ -105,9 +105,7 @@
 	var/gender = pick(MALE, FEMALE)
 	real_name = random_unique_name(gender)
 	name = real_name
-	var/datum/job/sacjob = SSjob.GetJob("Taxi Driver")
-	var/datum/preferences/sacface = client.prefs
-	human_image = get_flat_human_icon(null, sacjob, sacface)
+	human_image = get_flat_human_icon(null, pick(SSjob.joinable_occupations))
 
 /mob/camera/imaginary_friend/proc/Show()
 	if(!client) //nobody home

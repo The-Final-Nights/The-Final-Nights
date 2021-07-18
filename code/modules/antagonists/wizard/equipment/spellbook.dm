@@ -634,13 +634,14 @@
 	. = ..()
 	prepare_spells()
 
-/obj/item/spellbook/proc/prepare_spells()
-	var/entry_types = subtypesof(/datum/spellbook_entry) - /datum/spellbook_entry/item - /datum/spellbook_entry/summon
-	for(var/T in entry_types)
-		var/datum/spellbook_entry/E = new T
-		if(E.IsAvailable())
-			entries |= E
-			categories |= E.category
+/obj/item/spellbook/attack_self(mob/user)
+	if(!owner)
+		to_chat(user, span_notice("You bind the spellbook to yourself."))
+		owner = user
+		return
+	if(user != owner)
+		if(user.mind.special_role == ROLE_WIZARD_APPRENTICE)
+			to_chat(user, "If you got caught sneaking a peek from your teacher's spellbook, you'd likely be expelled from the Wizard Academy. Better not.")
 		else
 			qdel(E)
 	tab = categories[1]

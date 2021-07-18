@@ -295,11 +295,23 @@
 		new /obj/effect/temp_visual/cult/sparks(get_turf(H), H.dir)
 		var/istate = pick("halo1","halo2","halo3","halo4","halo5","halo6")
 		var/mutable_appearance/new_halo_overlay = mutable_appearance('icons/effects/32x64.dmi', istate, -HALO_LAYER)
-		H.overlays_standing[HALO_LAYER] = new_halo_overlay
-		H.apply_overlay(HALO_LAYER)
+		human.overlays_standing[HALO_LAYER] = new_halo_overlay
+		human.apply_overlay(HALO_LAYER)
 
-/datum/team/cult/proc/setup_objectives()
-	//SAC OBJECTIVE , todo: move this to objective internals
+/datum/team/cult/proc/make_image(datum/objective/sacrifice/sac_objective)
+	var/datum/job/job_of_sacrifice = sac_objective.target.assigned_role
+	var/datum/preferences/prefs_of_sacrifice = sac_objective.target.current.client.prefs
+	var/icon/reshape = get_flat_human_icon(null, job_of_sacrifice, prefs_of_sacrifice, list(SOUTH))
+	reshape.Shift(SOUTH, 4)
+	reshape.Shift(EAST, 1)
+	reshape.Crop(7,4,26,31)
+	reshape.Crop(-5,-3,26,30)
+	sac_objective.sac_image = reshape
+
+/datum/objective/sacrifice/find_target(dupe_search_range)
+	if(!istype(team, /datum/team/cult))
+		return
+	var/datum/team/cult/cult = team
 	var/list/target_candidates = list()
 	var/datum/objective/sacrifice/sac_objective = new
 	sac_objective.team = src
@@ -348,7 +360,7 @@
 
 /datum/objective/sacrifice/update_explanation_text()
 	if(target)
-		explanation_text = "Sacrifice [target], the [target.assigned_role] via invoking an Offer rune with [target.p_them()] on it and three acolytes around it."
+		explanation_text = "Sacrifice [target], the [target.assigned_role.title] via invoking an Offer rune with [target.p_them()] on it and three acolytes around it."
 	else
 		explanation_text = "The veil has already been weakened here, proceed to the final objective."
 

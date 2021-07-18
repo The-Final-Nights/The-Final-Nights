@@ -1,7 +1,7 @@
 /datum/job/curator
 	title = "Curator"
 	department_head = list("Head of Personnel")
-	faction = "Station"
+	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
@@ -15,6 +15,11 @@
 	paycheck_department = ACCOUNT_SRV
 
 //	display_order = JOB_DISPLAY_ORDER_CURATOR
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE
+
+	voice_of_god_silence_power = 3
+
 
 /datum/outfit/job/curator
 	name = "Curator"

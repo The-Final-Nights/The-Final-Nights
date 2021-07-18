@@ -136,51 +136,26 @@
 			var/datum/objective/maroon/maroon_objective = new
 			maroon_objective.owner = owner
 			maroon_objective.find_target()
-			add_objective(maroon_objective)
-		else
-			var/datum/objective/assassinate/kill_objective = new
-			kill_objective.owner = owner
-			kill_objective.find_target()
-			add_objective(kill_objective)
-	else
-		if(prob(15) && !(locate(/datum/objective/download) in objectives) && !(owner.assigned_role in list("Research Director", "Scientist", "Roboticist")))
-			var/datum/objective/download/download_objective = new
-			download_objective.owner = owner
-			download_objective.gen_amount_goal()
-			add_objective(download_objective)
-		else
-			var/datum/objective/steal/steal_objective = new
-			steal_objective.owner = owner
-			steal_objective.find_target()
-			add_objective(steal_objective)
+			objectives += maroon_objective
+			return
 
-/datum/antagonist/traitor/proc/forge_single_AI_objective()
-	.=1
-	var/special_pick = rand(1,4)
-	switch(special_pick)
-		if(1)
-			var/datum/objective/block/block_objective = new
-			block_objective.owner = owner
-			add_objective(block_objective)
-		if(2)
-			var/datum/objective/purge/purge_objective = new
-			purge_objective.owner = owner
-			add_objective(purge_objective)
-		if(3)
-			var/datum/objective/robot_army/robot_objective = new
-			robot_objective.owner = owner
-			add_objective(robot_objective)
-		if(4) //Protect and strand a target
-			var/datum/objective/protect/yandere_one = new
-			yandere_one.owner = owner
-			add_objective(yandere_one)
-			yandere_one.find_target()
-			var/datum/objective/maroon/yandere_two = new
-			yandere_two.owner = owner
-			yandere_two.target = yandere_one.target
-			yandere_two.update_explanation_text() // normally called in find_target()
-			add_objective(yandere_two)
-			.=2
+		var/datum/objective/assassinate/kill_objective = new
+		kill_objective.owner = owner
+		kill_objective.find_target()
+		objectives += kill_objective
+		return
+
+	if(prob(DOWNLOAD_PROB) && !(locate(/datum/objective/download) in objectives) && !(owner.assigned_role.departments & DEPARTMENT_SCIENCE))
+		var/datum/objective/download/download_objective = new
+		download_objective.owner = owner
+		download_objective.gen_amount_goal()
+		objectives += download_objective
+		return
+
+	var/datum/objective/steal/steal_objective = new
+	steal_objective.owner = owner
+	steal_objective.find_target()
+	objectives += steal_objective
 
 /datum/antagonist/traitor/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>You are the [owner.special_role].</span>")

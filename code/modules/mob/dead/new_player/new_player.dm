@@ -1,22 +1,21 @@
 #define LINKIFY_READY(string, value) "<a href='byond://?src=[REF(src)];ready=[value]'>[string]</a>"
 
 /mob/dead/new_player
-	var/ready = 0
-	var/late_ready = FALSE
-	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
-
 	flags_1 = NONE
-
 	invisibility = INVISIBILITY_ABSTRACT
-
 	density = FALSE
 	stat = DEAD
 	hud_possible = list()
 
-	var/mob/living/new_character	//for instant transfer once the round is set up
-
-	//Used to make sure someone doesn't get spammed with messages if they're ineligible for roles
+	var/ready = FALSE
+	/// Referenced when you want to delete the new_player later on in the code.
+	var/spawning = FALSE
+	/// For instant transfer once the round is set up
+	var/mob/living/new_character
+	///Used to make sure someone doesn't get spammed with messages if they're ineligible for roles.
 	var/ineligible_for_roles = FALSE
+
+
 
 /mob/dead/new_player/Initialize()
 	if(client && SSticker.state == GAME_STATE_STARTUP)
@@ -316,12 +315,17 @@
 	if (check_rights_for(client, R_ADMIN))
 		bypass = TRUE
 	var/datum/job/job = SSjob.GetJob(rank)
-	if(!job)
+	if(!(job.job_flags & JOB_NEW_PLAYER_JOINABLE))
 		return JOB_UNAVAILABLE_GENERIC
-	if (job.title == "Citizen")
-		return JOB_AVAILABLE
-	if((job.current_positions >= job.total_positions) && (job.total_positions != -1))
-		return JOB_UNAVAILABLE_SLOTFULL
+	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
+		if(is_assistant_job(job))
+			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
+				return JOB_AVAILABLE
+			for(var/datum/job/other_job as anything in SSjob.joinable_occupations)
+				if(other_job.current_positions < other_job.total_positions && other_job != job)
+					return JOB_UNAVAILABLE_SLOTFULL
+		else
+			return JOB_UNAVAILABLE_SLOTFULL
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
 	if(job.whitelisted)
@@ -374,11 +378,6 @@
 		alert(src, "An administrator has disabled late join spawning.")
 		return FALSE
 
-//	if(SSmasquerade.total_level <= 250)
-//		alert(src, "Global Masquerade level is too low!")
-//		return FALSE
-
-	var/arrivals_docked = TRUE
 	if(SSshuttle.arrivals)
 		close_spawn_windows()	//In case we get held up
 		if(SSshuttle.arrivals.damaged && CONFIG_GET(flag/arrivals_shuttle_require_safe_latejoin))
@@ -387,29 +386,42 @@
 
 		if(CONFIG_GET(flag/arrivals_shuttle_require_undocked))
 			SSshuttle.arrivals.RequireUndocked(src)
-		arrivals_docked = SSshuttle.arrivals.mode != SHUTTLE_CALL
 
 	//Remove the player from the join queue if he was in one and reset the timer
 	SSticker.queued_players -= src
 	SSticker.queue_delay = 4
 
-	SSjob.AssignRole(src, rank, 1)
-
-	var/mob/living/character = create_character(TRUE)	//creates the human and transfers vars and mind
-	var/equip = SSjob.EquipRank(character, rank, TRUE)
-	if(isliving(equip))	//Borgs get borged in the equip, so we need to make sure we handle the new mob.
-		character = equip
-
 	var/datum/job/job = SSjob.GetJob(rank)
 
-	if(job && !job.override_latejoin_spawn(character))
-		SSjob.SendToLateJoin(character)
-		if(!arrivals_docked)
-			var/atom/movable/screen/splash/Spl = new(character.client, TRUE)
-			Spl.Fade(TRUE)
-//			character.playsound_local(get_turf(character), 'sound/voice/ApproachingTG.ogg', 25)
+	SSjob.AssignRole(src, job, TRUE)
 
-		character.update_parallax_teleport()
+	mind.late_joiner = TRUE
+	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
+	if(!destination)
+		CRASH("Failed to find a latejoin spawn point.")
+	var/mob/living/character = create_character(destination)
+	if(!character)
+		CRASH("Failed to create a character for latejoin.")
+	transfer_character()
+
+	SSjob.EquipRank(character, job, character.client)
+
+	#define IS_NOT_CAPTAIN 0
+	#define IS_ACTING_CAPTAIN 1
+	#define IS_FULL_CAPTAIN 2
+	var/is_captain = IS_NOT_CAPTAIN
+	// If we already have a captain, are they a "Captain" rank and are we allowing multiple of them to be assigned?
+	if(is_captain_job(job))
+		is_captain = IS_FULL_CAPTAIN
+	// If we don't have an assigned cap yet, check if this person qualifies for some from of captaincy.
+	else if(!SSjob.assigned_captain && ishuman(character) && SSjob.chain_of_command[rank] && !is_banned_from(ckey, list("Captain")))
+		is_captain = IS_ACTING_CAPTAIN
+	if(is_captain != IS_NOT_CAPTAIN)
+		minor_announce(job.get_captaincy_announcement(character))
+		SSjob.promote_to_captain(character, is_captain == IS_ACTING_CAPTAIN)
+	#undef IS_NOT_CAPTAIN
+	#undef IS_ACTING_CAPTAIN
+	#undef IS_FULL_CAPTAIN
 
 	SSticker.minds += character.mind
 	character.client.init_verbs() // init verbs for the late join
@@ -514,86 +526,56 @@
 	popup.set_content(jointext(dat, ""))
 	popup.open(FALSE) // 0 is passed to open so that it doesn't use the onclose() proc
 
-/mob/dead/new_player/proc/create_character(transfer_after)
-	spawning = 1
+/// Creates, assigns and returns the new_character to spawn as. Assumes a valid mind.assigned_role exists.
+/mob/dead/new_player/proc/create_character(atom/destination)
+	spawning = TRUE
 	close_spawn_windows()
 
-	var/mob/living/carbon/human/H = new(loc)
-
-	var/frn = CONFIG_GET(flag/force_random_names)
-	var/admin_anon_names = SSticker.anonymousnames
-	if(!frn)
-		frn = is_banned_from(ckey, "Appearance")
-		if(QDELETED(src))
-			return
-	if(frn)
-		client.prefs.random_character()
-		client.prefs.real_name = client.prefs.pref_species.random_name(gender,1)
-
-	var/is_antag
-	if(mind in GLOB.pre_setup_antags)
-		is_antag = TRUE
-
-	client.prefs.copy_to(H, antagonist = is_antag, is_latejoiner = transfer_after)
-
-	if(admin_anon_names)//overrides random name because it achieves the same effect and is an admin enabled event tool
-		randomize_human(H)
-		H.fully_replace_character_name(null, SSticker.anonymousnames.anonymous_name(H))
-
-	H.dna.update_dna_identity()
-	if(mind)
-		if(transfer_after)
-			mind.late_joiner = TRUE
-		mind.active = FALSE					//we wish to transfer the key manually
+	mind.active = FALSE //we wish to transfer the key manually
+	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
+	if(QDELETED(src) || !client)
+		return // Disconnected while checking for the appearance ban.
+	if(!isAI(spawning_mob)) // Unfortunately there's still snowflake AI code out there.
 		mind.original_character_slot_index = client.prefs.default_slot
-		mind.transfer_to(H)					//won't transfer key since the mind is not active
-		mind.original_character = H
-
-	H.name = real_name
+		mind.transfer_to(spawning_mob) //won't transfer key since the mind is not active
+		mind.set_original_character(spawning_mob)
 	client.init_verbs()
-	. = H
+	. = spawning_mob
 	new_character = .
-	if(transfer_after)
-		transfer_character()
-//	if(client.prefs.archtype)
-//		H.__archetype = new client.prefs.archtype
+
 /mob/dead/new_player/proc/transfer_character()
 	. = new_character
-	if(.)
-		new_character.key = key		//Manually transfer the key to log them in,
-		new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
-		if(ishuman(new_character))
-			var/mob/living/carbon/human/H = new_character
-			if(H.client)
-				H.true_real_name = H.client.prefs.real_name
-				if(H.age < 16)
-					H.add_quirk(/datum/quirk/freerunning)
-					H.add_quirk(/datum/quirk/light_step)
-					H.add_quirk(/datum/quirk/skittish)
-					H.add_quirk(/datum/quirk/pushover)
-				H.create_disciplines()
-				if(iscathayan(H))
-					if(H.mind)
-						H.mind.dharma = new H.client.prefs.dharma_type()
-						H.mind.dharma.level = H.client.prefs.dharma_level
-						H.mind.dharma.Po = H.client.prefs.po_type
-						H.mind.dharma.Hun = H.client.prefs.hun
-						H.mind.dharma.on_gain(H)
-//						H.mind.dharma.initial_skin_color = H.skin_tone
-				var/datum/relationship/R = new ()
-				H.Myself = R
-				R.owner = H
-				R.need_friend = H.client.prefs.friend
-				R.need_enemy = H.client.prefs.enemy
-				R.need_lover = H.client.prefs.lover
-				R.friend_text = H.client.prefs.friend_text
-				R.enemy_text = H.client.prefs.enemy_text
-				R.lover_text = H.client.prefs.lover_text
-				if(HAS_TRAIT(H,TRAIT_POTENT_BLOOD))
-					H.bloodquality = 4
-				R.publish()
-		new_character = null
-		qdel(src)
+	if(!.)
+		return
+	new_character.key = key //Manually transfer the key to log them in,
+	new_character.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+
+	new_character.create_disciplines()
+	if(iscathayan(Hnew_character))
+		if(new_character.mind)
+			new_character.mind.dharma = new new_character.client.prefs.dharma_type()
+			new_character.mind.dharma.level = new_character.client.prefs.dharma_level
+			new_character.mind.dharma.Po = new_character.client.prefs.po_type
+			new_character.mind.dharma.Hun = new_character.client.prefs.hun
+			new_character.mind.dharma.on_gain(new_character)
+	var/datum/relationship/R = new ()
+	new_character.Myself = R
+	R.owner = new_character
+	R.need_friend = new_character.client.prefs.friend
+	R.need_enemy = new_character.client.prefs.enemy
+	R.need_lover = new_character.client.prefs.lover
+	R.friend_text = new_character.client.prefs.friend_text
+	R.enemy_text = new_character.client.prefs.enemy_text
+	R.lover_text = new_character.client.prefs.lover_text
+	if(HAS_TRAIT(new_character,TRAIT_POTENT_BLOOD))
+		new_character.bloodquality = 4
+	R.publish()
+
+	var/area/joined_area = get_area(new_character.loc)
+	if(joined_area)
+		joined_area.on_joining_game(new_character)
+	new_character = null
+	qdel(src)
 
 /mob/dead/new_player/proc/ViewManifest()
 	if(!client)

@@ -1,7 +1,7 @@
 /datum/job/psychologist
 	title = "Psychologist"
 	department_head = list("Head of Personnel","Chief Medical Officer")
-	faction = "Station"
+	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel and the chief medical officer"
@@ -17,6 +17,9 @@
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)
 
 //	display_order = JOB_DISPLAY_ORDER_PSYCHOLOGIST
+
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE
+
 
 /datum/outfit/job/psychologist
 	name = "Psychologist"

@@ -45,7 +45,7 @@
 					var/mob/living/carbon/human/H = L
 					category = "humans"
 					if(H.mind)
-						mob_data["job"] = H.mind.assigned_role
+						mob_data["job"] = H.mind.assigned_role.title
 					else
 						mob_data["job"] = "Unknown"
 					mob_data["species"] = H.dna.species.name
@@ -627,8 +627,8 @@
 
 /proc/printplayer(datum/mind/ply, fleecheck)
 	var/jobtext = ""
-	if(ply.assigned_role)
-		jobtext = " the <b>[ply.assigned_role]</b>"
+	if(!is_unassigned_job(ply.assigned_role))
+		jobtext = " the <b>[ply.assigned_role.title]</b>"
 	var/text = "<b>[ply.key]</b> was <b>[ply.name]</b>[jobtext] and"
 	if(ply.current)
 		if(ply.current.stat == DEAD)

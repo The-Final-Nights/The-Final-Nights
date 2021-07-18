@@ -57,8 +57,9 @@
 	if(family_heirloom)//oh, they have an heirloom? Well you know we have to steal that.
 		objectives_left += "heirloom"
 
-	if(obsessionmind.assigned_role && obsessionmind.assigned_role != "Captain")
-		objectives_left += "jealous"//if they have no coworkers, jealousy will pick someone else on the station. this will never be a free objective, nice.
+	// If they have no coworkers, jealousy will pick someone else on the station. This will never be a free objective.
+	if(!is_captain_job(obsessionmind.assigned_role))
+		objectives_left += "jealous"
 
 	for(var/i in 1 to 3)
 		var/chosen_objective = pick(objectives_left)
@@ -137,7 +138,7 @@
 /datum/objective/assassinate/obsessed/update_explanation_text()
 	..()
 	if(target?.current)
-		explanation_text = "Murder [target.name], the [!target_role_type ? target.assigned_role : target.special_role]."
+		explanation_text = "Murder [target.name], the [!target_role_type ? target.assigned_role.title : target.special_role]."
 	else
 		message_admins("WARNING! [ADMIN_LOOKUPFLW(owner)] obsessed objectives forged without an obsession!")
 		explanation_text = "Free Objective"
@@ -153,54 +154,29 @@
 	else
 		explanation_text = "Free Objective"
 
+
 /datum/objective/assassinate/jealous/proc/find_coworker(datum/mind/oldmind)//returning null = free objective
-	if(!oldmind.assigned_role)
+	if(is_unassigned_job(oldmind.assigned_role))
 		return
 	var/list/viable_coworkers = list()
 	var/list/all_coworkers = list()
-	var/chosen_department
-	var/their_chosen_department
-	//note that command and sillycone are gone because borgs can't be obsessions and the heads have their respective department. Sorry cap, your place is more with centcom or something
-	if(oldmind.assigned_role in GLOB.ss13)
-		chosen_department = "security"
-	if(oldmind.assigned_role in GLOB.ss13)
-		chosen_department = "engineering"
-	if(oldmind.assigned_role in GLOB.ss13)
-		chosen_department = "medical"
-	if(oldmind.assigned_role in GLOB.anarch_positions)
-		chosen_department = "science"
-	if(oldmind.assigned_role in GLOB.ss13)
-		chosen_department = "supply"
-	if(oldmind.assigned_role in GLOB.neutral_positions)
-		chosen_department = "service"
-	for(var/mob/living/carbon/human/H in GLOB.alive_mob_list)
-		if(!H.mind)
+	var/our_departments = oldmind.assigned_role.departments
+	for(var/mob/living/carbon/human/human_alive in GLOB.alive_mob_list)
+		if(!human_alive.mind)
 			continue
-		if(!SSjob.GetJob(H.mind.assigned_role) || H == oldmind.current || H.mind.has_antag_datum(/datum/antagonist/obsessed))
+		if(human_alive == oldmind.current || human_alive.mind.assigned_role.faction != FACTION_STATION || human_alive.mind.has_antag_datum(/datum/antagonist/obsessed))
 			continue //the jealousy target has to have a job, and not be the obsession or obsessed.
-		all_coworkers += H.mind
-		//this won't be called often thankfully.
-		if(H.mind.assigned_role in GLOB.ss13)
-			their_chosen_department = "security"
-		if(H.mind.assigned_role in GLOB.ss13)
-			their_chosen_department = "engineering"
-		if(H.mind.assigned_role in GLOB.ss13)
-			their_chosen_department = "medical"
-		if(H.mind.assigned_role in GLOB.anarch_positions)
-			their_chosen_department = "science"
-		if(H.mind.assigned_role in GLOB.ss13)
-			their_chosen_department = "supply"
-		if(H.mind.assigned_role in GLOB.neutral_positions)
-			their_chosen_department = "service"
-		if(their_chosen_department != chosen_department)
+		all_coworkers += human_alive.mind
+		if(!(our_departments & human_alive.mind.assigned_role.departments))
 			continue
-		viable_coworkers += H.mind
+		viable_coworkers += human_alive.mind
 
-	if(viable_coworkers.len > 0)//find someone in the same department
+	if(length(viable_coworkers))//find someone in the same department
 		target = pick(viable_coworkers)
-	else if(all_coworkers.len > 0)//find someone who works on the station
+	else if(length(all_coworkers))//find someone who works on the station
 		target = pick(all_coworkers)
 	return oldmind
+
 
 /datum/objective/spendtime //spend some time around someone, handled by the obsessed trauma since that ticks
 	name = "spendtime"

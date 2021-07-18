@@ -705,8 +705,7 @@
 /obj/item/clothing/suit/space/hardsuit/clown/mob_can_equip(mob/M, slot)
 	if(!..() || !ishuman(M))
 		return FALSE
-	var/mob/living/carbon/human/H = M
-	if(H.mind.assigned_role == "Clown")
+	if(is_clown_job(M.mind.assigned_role))
 		return TRUE
 	else
 		return FALSE

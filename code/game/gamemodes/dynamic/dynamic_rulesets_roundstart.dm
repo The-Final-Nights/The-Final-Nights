@@ -204,7 +204,7 @@
 	var/mob/M = pick_n_take(candidates)
 	if (M)
 		assigned += M.mind
-		M.mind.assigned_role = ROLE_WIZARD
+		M.mind.set_assigned_role(SSjob.GetJobType(/datum/job/space_wizard))
 		M.mind.special_role = ROLE_WIZARD
 
 	return TRUE
@@ -306,8 +306,8 @@
 			break
 		var/mob/M = pick_n_take(candidates)
 		assigned += M.mind
-		M.mind.assigned_role = "Nuclear Operative"
-		M.mind.special_role = "Nuclear Operative"
+		M.mind.set_assigned_role(SSjob.GetJobType(/datum/job/nuclear_operative))
+		M.mind.special_role = ROLE_NUCLEAR_OPERATIVE
 	return TRUE
 
 /datum/dynamic_ruleset/roundstart/nuclear/execute()
@@ -531,8 +531,8 @@
 				qdel(S)
 				new /obj/machinery/nuclearbomb/syndicate/bananium(T)
 		for(var/datum/mind/V in assigned)
-			V.assigned_role = "Clown Operative"
-			V.special_role = "Clown Operative"
+			V.set_assigned_role(SSjob.GetJobType(/datum/job/clown_operative))
+			V.special_role = ROLE_CLOWN_OPERATIVE
 
 
 //////////////////////////////////////////////

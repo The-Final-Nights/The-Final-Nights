@@ -350,9 +350,18 @@
 		else if(noms.has_quirk(/datum/quirk/pineapple_hater))
 			var/list/pineapple_pizza_liker = pizza_types.Copy()
 			pineapple_pizza_liker -= /obj/item/food/pizza/pineapple
-			pizza_preferences[noms.ckey] = pickweight(pineapple_pizza_liker)
-		else if(noms.mind && noms.mind.assigned_role == "Botanist")
-			pizza_preferences[noms.ckey] = /obj/item/food/pizza/dank
+			pizza_preferences[nommer.ckey] = pickweight(pineapple_pizza_liker)
+		else if(nommer.mind?.assigned_role.title == /datum/job/botanist)
+			pizza_preferences[nommer.ckey] = /obj/item/food/pizza/dank
+		else
+			pizza_preferences[nommer.ckey] = pickweight(pizza_types)
+	if(pizza)
+		//if the pizza isn't our favourite, delete it
+		if(pizza.type != pizza_preferences[nommer.ckey])
+			QDEL_NULL(pizza)
+		else
+			pizza.foodtypes = nommer.dna.species.liked_food //make sure it's our favourite
+			return
 
 	var/obj/item/pizza_type = pizza_preferences[noms.ckey]
 	pizza = new pizza_type (src)
