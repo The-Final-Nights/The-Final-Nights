@@ -217,3 +217,134 @@
 	name = "Flower Worn"
 	icon_file = 'icons/mob/clothing/head/hydroponics.dmi'
 	json_config = 'code/datums/greyscale/json_configs/simple_flower_worn.json'
+
+/datum/greyscale_config/cleric_mace
+	name = "Base Cleric Mace"
+	icon_file = 'icons/obj/items/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace.json'
+
+/datum/greyscale_config/cleric_mace_lefthand
+	name = "Base Held Cleric Mace, Left"
+	icon_file = 'icons/obj/items/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_lefthand.json'
+
+/datum/greyscale_config/cleric_mace_righthand
+	name = "Base Held Cleric Mace, Right"
+	icon_file = 'icons/obj/items/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_righthand.json'
+
+/datum/greyscale_config/cleric_mace_worn
+	name = "Base Worn Cleric Mace"
+	icon_file = 'icons/obj/items/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_worn.json'
+
+/datum/greyscale_config/cleric_mace/gold
+	name = "Gold Cleric Mace"
+	material_skin = /datum/material/gold
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_gold.json'
+
+/datum/greyscale_config/cleric_mace_lefthand/gold
+	name = "Gold Held Cleric Mace, Left"
+	material_skin = /datum/material/gold
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_lefthand_gold.json'
+
+/datum/greyscale_config/cleric_mace_righthand/gold
+	name = "Gold Held Cleric Mace, Right"
+	material_skin = /datum/material/gold
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_righthand_gold.json'
+
+/datum/greyscale_config/cleric_mace_worn/gold
+	name = "Gold Worn Cleric Mace"
+	icon_file = 'icons/obj/items/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_worn_gold.json'
+
+/datum/greyscale_config/beret
+	name = "Beret"
+	icon_file = 'icons/obj/clothing/head/beret.dmi'
+	json_config = 'code/datums/greyscale/json_configs/beret.json'
+
+/datum/greyscale_config/beret/worn
+	name = "Beret Worn"
+	json_config = 'code/datums/greyscale/json_configs/beret_worn.json'
+
+/datum/greyscale_config/beret_badge
+	name = "Beret With Badge"
+	icon_file = 'icons/obj/clothing/head/beret.dmi'
+	json_config = 'code/datums/greyscale/json_configs/beret_badge.json'
+
+/datum/greyscale_config/beret_badge/worn
+	name = "Beret With Badge Worn"
+	json_config = 'code/datums/greyscale/json_configs/beret_badge_worn.json'
+
+/datum/greyscale_config/suspenders
+	name = "Suspenders"
+	icon_file = 'icons/obj/clothing/belts.dmi'
+	json_config = 'code/datums/greyscale/json_configs/suspenders.json'
+
+/datum/greyscale_config/suspenders/worn
+	name = "Worn Suspenders"
+	icon_file = 'icons/mob/clothing/suit.dmi'
+	json_config = 'code/datums/greyscale/json_configs/suspenders_worn.json'
+
+/datum/greyscale_config/giftdeliverybox
+	name = "Gift Box"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverybox.json'
+
+/datum/greyscale_config/giftdeliverycloset
+	name = "Gift Closet"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverycloset.json'
+
+/datum/greyscale_config/giftdeliverycrate
+	name = "Gift Crate"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverycrate.json'
+
+/datum/greyscale_config/giftdeliverypackage5
+	name = "Gift Package 5 (Biggest)"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverypackage5.json'
+
+/datum/greyscale_config/giftdeliverypackage4
+	name = "Gift Package 4"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverypackage4.json'
+
+/datum/greyscale_config/giftdeliverypackage3
+	name = "Gift Package 3"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverypackage3.json'
+
+/datum/greyscale_config/giftdeliverypackage2
+	name = "Gift Package 2"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverypackage2.json'
+
+/datum/greyscale_config/giftdeliverypackage1
+	name = "Gift Package 1 (Smallest)"
+	icon_file = 'icons/obj/storage.dmi'
+	json_config = 'code/datums/greyscale/json_configs/giftdeliverypackage1.json'
+
+/datum/greyscale_config/wrap_paper
+	name = "Wrapping Paper"
+	icon_file = 'icons/obj/stack_objects.dmi'
+	json_config = 'code/datums/greyscale/json_configs/wrap_paper.json'
+
+/datum/greyscale_config/meter
+	name = "Meter"
+	icon_file = 'icons/obj/atmospherics/pipes/meter.dmi'
+	json_config = 'code/datums/greyscale/json_configs/meter.json'
+
+/datum/greyscale_config/thermomachine
+	name = "Thermomachine"
+	icon_file = 'icons/obj/atmospherics/components/thermomachine.dmi'
+	json_config = 'code/datums/greyscale/json_configs/thermomachine.json'
+
+/datum/greyscale_config/janicart_upgrade
+	name = "Janicart Upgrade"
+	icon_file = 'icons/obj/janicart_upgrade.dmi'
+	json_config = 'code/datums/greyscale/json_configs/janicart_upgrade.json'
+
+/datum/greyscale_config/janicart_upgrade/installed
+	json_config = 'code/datums/greyscale/json_configs/janicart_upgrade_installed.json'
