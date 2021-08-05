@@ -17,42 +17,19 @@
 		return
 
 /datum/crew_manifest/ui_data(mob/user)
-	var/list/positions = list(
-		"Camarilla" = 0,
-		"Primogen Council" = 0,
-		"Tremere" = 0,
-		"Anarch" = 0,
-		"Giovanni" = 0,
-		"Clan Tzimisce" = 0,
-		"Law Enforcement" = 0,
-		"Warehouse" = 0,
-		"Triad" = 0
-	)
-	var/list/departments = list(
-		list("flag" = DEPARTMENT_CAMARILLA, "name" = "Camarilla"),
-		list("flag" = DEPARTMENT_PRIMOGEN_COUNCIL, "name" = "Primogen Council"),
-		list("flag" = DEPARTMENT_TREMERE, "name" = "Tremere"),
-		list("flag" = DEPARTMENT_ANARCH, "name" = "Anarch"),
-		list("flag" = DEPARTMENT_GIOVANNI, "name" = "Giovanni"),
-		list("flag" = DEPARTMENT_CLAN_TZIMISCE, "name" = "Clan Tzimisce"),
-		list("flag" = DEPARTMENT_LAW_ENFORCEMENT, "name" = "Law Enforcement"),
-		list("flag" = DEPARTMENT_WAREHOUSE, "name" = "Warehouse"),
-		list("flag" = DEPARTMENT_TRIAD, "name" = "Triad"),
-	)
-
-	for(var/job in SSjob.joinable_occupations)
-		// Check if there are additional open positions or if there is no limit
-		if ((job["total_positions"] > 0 && job["total_positions"] > job["current_positions"]) || (job["total_positions"] == -1))
-			for(var/department in departments)
-				// Check if the job is part of a department using its flag
-				// Will return true for Research Director if the department is Science or Command, for example
-				if(job["departments"] & department["flag"])
-					if(job["total_positions"] == -1)
-						// Add job to list of exceptions, meaning it does not have a position limit
-						positions[department["name"]]["exceptions"] += list(job["title"])
-					else
-						// Add open positions to current department
-						positions[department["name"]]["open"] += (job["total_positions"] - job["current_positions"])
+	var/list/positions = list()
+	for(var/datum/job_department/department as anything in SSjob.joinable_departments)
+		var/open = 0
+		var/list/exceptions = list()
+		for(var/datum/job/job as anything in department.department_jobs)
+			if(job.total_positions == -1)
+				exceptions += job.title
+				continue
+			var/open_slots = job.total_positions - job.current_positions
+			if(open_slots < 1)
+				continue
+			open += open_slots
+		positions[department.department_name] = list("exceptions" = exceptions, "open" = open)
 
 	return list(
 		"manifest" = GLOB.data_core.get_manifest(),

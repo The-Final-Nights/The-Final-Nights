@@ -48,10 +48,17 @@
 
 	var/outfit = null
 
-	var/exp_requirements = 0
+	/// The job's outfit that will be assigned for plasmamen.
+	var/plasmaman_outfit = null
 
-	var/exp_type = ""
-	var/exp_type_department = ""
+	/// Minutes of experience-time required to play in this job. The type is determined by [exp_required_type] and [exp_required_type_department] depending on configs.
+	var/exp_requirements = 0
+	/// Experience required to play this job, if the config is enabled, and `exp_required_type_department` is not enabled with the proper config.
+	var/exp_required_type = ""
+	/// Department experience required to play this job, if the config is enabled.
+	var/exp_required_type_department = ""
+	/// Experience type granted by playing in this job.
+	var/exp_granted_type = ""
 
 	//The amount of good boy points playing this role will earn you towards a higher chance to roll antagonist next round
 	//can be overridden by antag_rep.txt config
@@ -101,7 +108,26 @@
 	var/duty
 	var/v_duty
 
-	/// All values = (JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK)
+	/// Goodies that can be received via the mail system.
+	// this is a weighted list.
+	/// Keep the _job definition for this empty and use /obj/item/mail to define general gifts.
+	var/list/mail_goodies = list()
+
+	/// If this job's mail goodies compete with generic goodies.
+	var/exclusive_mail_goodies = FALSE
+
+	/// Bitfield of departments this job belongs to. These get setup when adding the job into the department, on job datum creation.
+	var/departments_bitflags = NONE
+	/// Lazy list with the departments this job belongs to.
+	var/list/departments_list = null
+
+	///Is this job affected by weird spawns like the ones from station traits
+	var/random_spawns_possible = FALSE
+
+	/// List of family heirlooms this job can get with the family heirloom quirk. List of types.
+	var/list/family_heirlooms
+
+	/// All values = (JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE | JOB_BOLD_SELECT_TEXT)
 	var/job_flags = NONE
 
 	/// Multiplier for general usage of the voice of god.
@@ -447,7 +473,7 @@
 	if(!player_client)
 		return // Disconnected while checking for the appearance ban.
 	if(fully_randomize)
-		if(CONFIG_GET(flag/enforce_human_authority) && (job.departments & DEPARTMENT_COMMAND))
+		if(CONFIG_GET(flag/enforce_human_authority) && (job.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND))
 			if(player_client.prefs.pref_species.id != SPECIES_HUMAN)
 				player_client.prefs.pref_species = new /datum/species/human
 			player_client.prefs.randomise_appearance_prefs(~RANDOMIZE_SPECIES)
@@ -458,7 +484,7 @@
 			fully_replace_character_name(null, GLOB.current_anonymous_theme.anonymous_name(src))
 	else
 		var/is_antag = (player_client.mob.mind in GLOB.pre_setup_antags)
-		if(CONFIG_GET(flag/enforce_human_authority) && (job.departments & DEPARTMENT_COMMAND))
+		if(CONFIG_GET(flag/enforce_human_authority) && (job.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND))
 			player_client.prefs.randomise[RANDOM_SPECIES] = FALSE
 			if(player_client.prefs.pref_species.id != SPECIES_HUMAN)
 				player_client.prefs.pref_species = new /datum/species/human

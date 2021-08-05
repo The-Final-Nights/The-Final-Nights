@@ -22,7 +22,6 @@
 #define DEFAULT_BIBLE_REPLACE(religion) "The Holy Book of [religion]"
 
 #define JOB_DISPLAY_ORDER_DEFAULT 0
-
 #define JOB_DISPLAY_ORDER_CITIZEN 1
 #define JOB_DISPLAY_ORDER_SALUBRI 2
 #define JOB_DISPLAY_ORDER_LASOMBRA 3
@@ -81,8 +80,6 @@
 // If you want to add another setting, make sure to also add it to the if chain in /datum/job_config_type/human_authority/validate_value()
 #define JOB_AUTHORITY_HUMANS_ONLY "HUMANS_ONLY"
 #define JOB_AUTHORITY_NON_HUMANS_ALLOWED "NON_HUMANS_ALLOWED"
-
-#define JOB_DISPLAY_ORDER_DEFAULT 0
 
 // Keys for jobconfig.toml
 #define JOB_CONFIG_PLAYTIME_REQUIREMENTS "Playtime Requirements"

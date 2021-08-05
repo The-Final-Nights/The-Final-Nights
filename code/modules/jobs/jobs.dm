@@ -203,7 +203,6 @@ GLOBAL_LIST_INIT(exp_specialmap, list(
 		), // Ghost roles
 	EXP_TYPE_GHOST = list() // dead people, observers
 ))
-GLOBAL_PROTECT(exp_jobsmap)
 GLOBAL_PROTECT(exp_specialmap)
 
 //this is necessary because antags happen before job datums are handed out, but NOT before they come into existence
