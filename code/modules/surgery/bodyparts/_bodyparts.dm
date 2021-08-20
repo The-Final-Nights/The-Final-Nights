@@ -803,7 +803,7 @@
 	add_overlay(standing)
 
 //Gives you a proper icon appearance for the dismembered limb
-/obj/item/bodypart/proc/get_limb_icon(dropped)
+/obj/item/bodypart/proc/get_limb_icon(dropped, draw_external_organs)
 	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
@@ -873,6 +873,9 @@
 			limb.color = draw_color
 			if(aux_zone)
 				aux.color = draw_color
+
+	if(!draw_external_organs)
+		return
 
 	//Draw external organs like horns and frills
 	for(var/obj/item/organ/external/external_organ in external_organs)
