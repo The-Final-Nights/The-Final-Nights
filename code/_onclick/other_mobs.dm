@@ -29,12 +29,8 @@
 		return
 	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity)
 
-	if(dna?.species?.spec_unarmedattack(src, A)) //Because species like monkeys dont use attack hand
-		return
-	A.attack_hand(src)
-
-	if (LAZYACCESS(modifiers, RIGHT_CLICK))
-		var/secondary_result = A.attack_hand_secondary(src, modifiers)
+	if(!right_click_attack_chain(A, modifiers) && !dna?.species?.spec_unarmedattack(src, A, modifiers)) //Because species like monkeys dont use attack hand
+		A.attack_hand(src, modifiers)
 
 		if (secondary_result == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN || secondary_result == SECONDARY_ATTACK_CONTINUE_CHAIN)
 			return
