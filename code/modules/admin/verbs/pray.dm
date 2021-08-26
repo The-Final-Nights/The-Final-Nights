@@ -51,7 +51,7 @@
 	to_chat(usr, "<span class='info'>You pray to the gods: \"[msg_tmp]\"</span>", confidential = TRUE)
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Prayer") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	//log_admin("HELP: [key_name(src)]: [msg]")
+
 
 /// Used by communications consoles to message CentCom
 /proc/message_centcom(text, mob/sender)
