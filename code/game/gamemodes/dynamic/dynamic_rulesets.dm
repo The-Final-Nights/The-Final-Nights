@@ -184,19 +184,43 @@
 
 /// Checks if candidates are connected and if they are banned or don't want to be the antagonist.
 /datum/dynamic_ruleset/roundstart/trim_candidates()
-	for(var/mob/dead/new_player/P in candidates)
-		if (!P.client || !P.mind) // Are they connected?
-			candidates.Remove(P)
-		else if(!mode.check_age(P.client, minimum_required_age))
-			candidates.Remove(P)
-		else if(P.mind.special_role) // We really don't want to give antag to an antag.
-			candidates.Remove(P)
-		else if(antag_flag_override)
-			if(!(antag_flag_override in P.client.prefs.be_special) || is_banned_from(P.ckey, list(antag_flag_override, ROLE_SYNDICATE)))
-				candidates.Remove(P)
-		else
-			if(!(antag_flag in P.client.prefs.be_special) || is_banned_from(P.ckey, list(antag_flag, ROLE_SYNDICATE)))
-				candidates.Remove(P)
+	for(var/mob/dead/new_player/candidate_player in candidates)
+		var/client/candidate_client = GET_CLIENT(candidate_player)
+		if (!candidate_client || !candidate_player.mind) // Are they connected?
+			candidates.Remove(candidate_player)
+			continue
+
+		if(candidate_client.get_remaining_days(minimum_required_age) > 0)
+			candidates.Remove(candidate_player)
+			continue
+
+		if(candidate_player.mind.special_role) // We really don't want to give antag to an antag.
+			candidates.Remove(candidate_player)
+			continue
+
+		if (!((antag_preference || antag_flag) in candidate_client.prefs.be_special))
+			candidates.Remove(candidate_player)
+			continue
+
+		if (is_banned_from(candidate_player.ckey, list(antag_flag_override || antag_flag, ROLE_SYNDICATE)))
+			candidates.Remove(candidate_player)
+			continue
+
+		// If this ruleset has exclusive_roles set, we want to only consider players who have those
+		// job prefs enabled and are eligible to play that job. Otherwise, continue as before.
+		if(length(exclusive_roles))
+			var/exclusive_candidate = FALSE
+			for(var/role in exclusive_roles)
+				var/datum/job/job = SSjob.GetJob(role)
+
+				if((role in candidate_client.prefs.job_preferences) && SSjob.check_job_eligibility(candidate_player, job, "Dynamic Roundstart TC", add_job_to_log = TRUE))
+					exclusive_candidate = TRUE
+					break
+
+			// If they didn't have any of the required job prefs enabled or were banned from all enabled prefs,
+			// they're not eligible for this antag type.
+			if(!exclusive_candidate)
+				candidates.Remove(candidate_player)
 
 /// Do your checks if the ruleset is ready to be executed here.
 /// Should ignore certain checks if forced is TRUE

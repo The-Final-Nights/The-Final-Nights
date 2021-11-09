@@ -326,6 +326,11 @@
 					return JOB_UNAVAILABLE_SLOTFULL
 		else
 			return JOB_UNAVAILABLE_SLOTFULL
+
+	var/eligibility_check = SSjob.check_job_eligibility(src, job, "Mob IsJobUnavailable")
+	if(eligibility_check != JOB_AVAILABLE)
+		return eligibility_check
+
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
 	if(job.whitelisted)
@@ -393,7 +398,9 @@
 
 	var/datum/job/job = SSjob.GetJob(rank)
 
-	SSjob.AssignRole(src, job, TRUE)
+	if(!SSjob.AssignRole(src, job, TRUE))
+		tgui_alert(usr, "There was an unexpected error putting you into your requested job. If you cannot join with any job, you should contact an admin.")
+		return FALSE
 
 	mind.late_joiner = TRUE
 	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
