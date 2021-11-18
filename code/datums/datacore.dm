@@ -134,10 +134,11 @@
 			manifest_inject(N.new_character, N.client)
 		CHECK_TICK
 
-/datum/datacore/proc/manifest_modify(name, assignment)
+/datum/datacore/proc/manifest_modify(name, assignment, trim)
 	var/datum/data/record/foundrecord = find_record("name", name, GLOB.data_core.general)
 	if(foundrecord)
 		foundrecord.fields["rank"] = assignment
+		foundrecord.fields["trim"] = trim
 
 
 /datum/datacore/proc/get_manifest()
@@ -150,8 +151,9 @@
 	var/list/departments_by_type = SSjob.joinable_departments_by_type
 	for(var/datum/data/record/record as anything in GLOB.data_core.general)
 		var/name = record.fields["name"]
-		var/rank = record.fields["rank"]
-		var/datum/job/job = SSjob.GetJob(rank)
+		var/rank = record.fields["rank"] // user-visible job
+		var/trim = record.fields["trim"] // internal jobs by trim type
+		var/datum/job/job = SSjob.GetJob(trim)
 		if(!job || !(job.job_flags & JOB_CREW_MANIFEST) || !LAZYLEN(job.departments_list)) // In case an unlawful custom rank is added.
 			var/list/misc_list = manifest_out[DEPARTMENT_UNASSIGNED]
 			misc_list[++misc_list.len] = list(
@@ -243,16 +245,16 @@
 		//These records should ~really~ be merged or something
 		//General Record
 		var/datum/data/record/G = new()
-		G.fields["id"]			= id
-		G.fields["name"]		= H.real_name
-		G.fields["rank"]		= assignment
-		G.fields["truerank"] = trueassignment // TFN EDIT: alt job titles
-		G.fields["age"]			= H.age
-		G.fields["species"]	= H.dna.species.name
-		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
-		G.fields["p_stat"]		= "Active"
-		G.fields["m_stat"]		= "Stable"
-		G.fields["gender"]			= H.gender
+		G.fields["id"] = id
+		G.fields["name"] = H.real_name
+		G.fields["rank"] = assignment
+		G.fields["initial_rank"] = assignment
+		G.fields["age"] = H.age
+		G.fields["species"] = H.dna.species.name
+		G.fields["fingerprint"] = md5(H.dna.unique_identity)
+		G.fields["p_stat"] = "Active"
+		G.fields["m_stat"] = "Stable"
+		G.fields["gender"] = H.gender
 		if(H.gender == "male")
 			G.fields["gender"]  = "Male"
 		else if(H.gender == "female")
@@ -294,6 +296,8 @@
 		L.fields["id"] = md5("[H.real_name][assignment]") //surely this should just be id, like the others?
 		L.fields["name"] = H.real_name
 		L.fields["rank"] = assignment
+		L.fields["trim"] = assignment
+		G.fields["initial_rank"] = assignment
 		L.fields["age"] = H.age
 		L.fields["gender"] = H.gender
 		if(H.gender == "male")
