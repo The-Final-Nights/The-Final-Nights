@@ -240,61 +240,16 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		send_message_to_tgs(msg, urgent)
 	GLOB.ahelp_tickets.active_tickets += src
 
-/datum/admin_help/proc/format_embed_discord(message)
-	var/datum/discord_embed/embed = new()
-	embed.title = "Ticket #[id]"
-	embed.description = "<byond://[world.internet_address]:[world.port]>"
-	embed.author = key_name(initiator_ckey)
-	var/round_state
-	switch(SSticker.current_state)
-		if(GAME_STATE_STARTUP, GAME_STATE_PREGAME, GAME_STATE_SETTING_UP)
-			round_state = "Round has not started"
-		if(GAME_STATE_PLAYING)
-			round_state = "Round is ongoing."
-			if(SSshuttle.emergency.getModeStr())
-				round_state += "\n[SSshuttle.emergency.getModeStr()]: [SSshuttle.emergency.getTimerStr()]"
-				if(SSticker.emergency_reason)
-					round_state += ", Shuttle call reason: [SSticker.emergency_reason]"
-		if(GAME_STATE_FINISHED)
-			round_state = "Round has ended"
-	var/list/admin_counts = get_admin_counts(R_BAN)
-	var/stealth_admins = jointext(admin_counts["stealth"], ", ")
-	var/afk_admins = jointext(admin_counts["afk"], ", ")
-	var/other_admins = jointext(admin_counts["noflags"], ", ")
-	var/admin_text = ""
-	var/player_count = "**Total**: [length(GLOB.clients)]"
-	if(stealth_admins)
-		admin_text += "**Stealthed**: [stealth_admins]\n"
-	if(afk_admins)
-		admin_text += "**AFK**: [afk_admins]\n"
-	if(other_admins)
-		admin_text += "**Lacks +BAN**: [other_admins]\n"
-	embed.fields = list(
-		"CKEY" = initiator_ckey,
-		"PLAYERS" = player_count,
-		"ROUND STATE" = round_state,
-		"ROUND ID" = GLOB.round_id,
-		"ROUND TIME" = world.time - SSticker.round_start_time,
-		"MESSAGE" = message,
-		"ADMINS" = admin_text,
-	)
-	if(CONFIG_GET(string/adminhelp_ahelp_link))
-		var/ahelp_link = replacetext(CONFIG_GET(string/adminhelp_ahelp_link), "$RID", GLOB.round_id)
-		ahelp_link = replacetext(ahelp_link, "$TID", id)
-		embed.url = ahelp_link
-	return embed
-
 /datum/admin_help/proc/send_message_to_tgs(message, urgent = FALSE)
 	var/message_to_send = message
 
 	if(urgent)
+		var/extra_message_to_send = "[message] - Requested an admin"
 		var/extra_message = CONFIG_GET(string/urgent_ahelp_message)
+		if(extra_message)
+			extra_message_to_send += " ([extra_message])"
 		to_chat(initiator, span_boldwarning("Notified admins to prioritize your ticket"))
-		var/datum/discord_embed/embed = format_embed_discord(message)
-		embed.content = extra_message
-		embed.footer = "This player requested an admin"
-		send2adminchat_webhook(embed, urgent = TRUE)
-		webhook_sent = WEBHOOK_URGENT
+		send2adminchat_webhook("RELAY: [initiator_ckey] | Ticket #[id]: [extra_message_to_send]")
 	//send it to TGS if nobody is on and tell us how many were on
 	var/admin_number_present = send2tgs_adminless_only(initiator_ckey, "Ticket #[id]: [message_to_send]")
 	log_admin_private("Ticket #[id]: [key_name(initiator)]: [name] - heard by [admin_number_present] non-AFK admins who have +BAN.")
@@ -325,18 +280,17 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	else
 		var/datum/discord_embed/embed = message_or_embed
 		webhook_info["embeds"] = list(embed.convert_to_list())
-		if(embed.content)
-			webhook_info["content"] = embed.content
+	var/list/webhook_info = list()
+	webhook_info["content"] = message_content
 	if(CONFIG_GET(string/adminhelp_webhook_name))
 		webhook_info["username"] = CONFIG_GET(string/adminhelp_webhook_name)
 	if(CONFIG_GET(string/adminhelp_webhook_pfp))
-		webhook_info["avatar_url"] = CONFIG_GET(string/adminhelp_webhook_pfp)
 	// Uncomment when servers are moved to TGS4
 	// send2chat("[initiator_ckey] | [message_content]", "ahelp", TRUE)
 	var/list/headers = list()
 	headers["Content-Type"] = "application/json"
 	var/datum/http_request/request = new()
-	request.prepare(RUSTG_HTTP_METHOD_POST, webhook, json_encode(webhook_info), headers, "tmp/response.json")
+	request.prepare(RUSTG_HTTP_METHOD_POST, CONFIG_GET(string/adminhelp_webhook_url), json_encode(webhook_info), headers, "tmp/response.json")
 	request.begin_async()
 
 /datum/admin_help/Destroy()
@@ -705,7 +659,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 	. = list()
 	.["bannedFromUrgentAhelp"] = is_banned_from(user.ckey, "Urgent Adminhelp")
 	.["urgentAhelpPromptMessage"] = CONFIG_GET(string/urgent_ahelp_user_prompt)
-	var/webhook_url = CONFIG_GET(string/urgent_adminhelp_webhook_url)
+	var/webhook_url = CONFIG_GET(string/adminhelp_webhook_url)
 	if(webhook_url)
 		.["urgentAhelpEnabled"] = TRUE
 
@@ -782,32 +736,6 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 	set name = "Adminhelp"
 	GLOB.admin_help_ui_handler.ui_interact(mob)
 	to_chat(src, span_boldnotice("Adminhelp failing to open or work? <a href='?src=[REF(src)];tguiless_adminhelp=1'>Click here</a>"))
-
-/client/verb/view_latest_ticket()
-	set category = "Admin"
-	set name = "View Latest Ticket"
-
-	if(!current_ticket)
-		// Check if the client had previous tickets, and show the latest one
-		var/list/prev_tickets = list()
-		var/datum/admin_help/last_ticket
-		// Check all resolved tickets for this player
-		for(var/datum/admin_help/resolved_ticket in GLOB.ahelp_tickets.resolved_tickets)
-			if(resolved_ticket.initiator_ckey == ckey) // Initiator is a misnomer, it's always the non-admin player even if an admin bwoinks first
-				prev_tickets += resolved_ticket
-		// Check all closed tickets for this player
-		for(var/datum/admin_help/closed_ticket in GLOB.ahelp_tickets.closed_tickets)
-			if(closed_ticket.initiator_ckey == ckey)
-				prev_tickets += closed_ticket
-		// Take the most recent entry of prev_tickets and open the panel on it
-		if(LAZYLEN(prev_tickets))
-			last_ticket = pop(prev_tickets)
-			last_ticket.player_ticket_panel()
-			return
-
-		// client had no tickets this round
-		to_chat(src, span_warning("You have not had an ahelp ticket this round."))
-		return
 
 	current_ticket.player_ticket_panel()
 
