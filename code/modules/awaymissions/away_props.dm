@@ -95,7 +95,7 @@
 		update_openspace()
 	var/turf/T = get_turf(src)
 	for(var/atom/movable/AM in T)
-		if(!AM.zfalling)
+		if(!AM.currently_z_moving)
 			T.zFall(AM)
 
 /obj/structure/pitgrate/proc/reset_plane()

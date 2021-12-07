@@ -507,7 +507,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 #define ALIGNMENT_NEUT "neutral"
 #define ALIGNMENT_EVIL "evil"
 
-
 // Play time / EXP
 #define PLAYTIME_HARDCORE_RANDOM 120
 #define PLAYTIME_VETERAN 300000 //Playtime is tracked in minutes. 300,000 minutes = 5,000 hours

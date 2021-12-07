@@ -514,71 +514,32 @@
 	var/turf/current_turf = get_turf(src)
 	var/turf/above_turf = SSmapping.get_turf_above(current_turf)
 
-	if(can_zFall(above_turf, 1, current_turf, DOWN)) //Will be fall down if we go up?
-		to_chat(src, "<span class='notice'>You are not Superman.<span>")
+	var/ventcrawling_flag = HAS_TRAIT(src, TRAIT_MOVE_VENTCRAWLING) ? ZMOVE_VENTCRAWLING : 0
+	if(!above_turf)
+		to_chat(src, "<span class='warning'>There's nowhere to go in that direction!</span>")
 		return
 
-	if(zMove(UP, TRUE))
-		to_chat(src, "<span class='notice'>You move upwards.</span>")
+	if(can_z_move(DOWN, above_turf, current_turf, ZMOVE_FALL_FLAGS|ventcrawling_flag)) //Will we fall down if we go up?
+		if(buckled)
+			to_chat(src, "<span class='notice'>[buckled] is is not capable of flight.<span>")
+		else
+			to_chat(src, "<span class='notice'>You are not Superman.<span>")
+		return
+
+	if(zMove(UP, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK|ventcrawling_flag))
+		to_chat(src, span_notice("You move upwards."))
 
 ///Moves a mob down a z level
 /mob/verb/down()
 	set name = "Move Down"
 	set category = "IC"
 
-	if(zMove(DOWN, TRUE))
-		to_chat(src, "<span class='notice'>You move down.</span>")
-
-///Move a mob between z levels, if it's valid to move z's on this turf
-/mob/proc/zMove(dir, feedback = FALSE)
-	if(dir != UP && dir != DOWN)
-		return FALSE
-	if(incapacitated())
-		if(feedback)
-			to_chat(src, "<span class='warning'>You can't do that right now!</span>")
-			return FALSE
-	var/turf/target = get_step_multiz(src, dir)
-	if(!target)
-		if(feedback)
-			to_chat(src, "<span class='warning'>There's nowhere to go in that direction!</span>")
-		return FALSE
-	if(!canZMove(dir, target))
-		if(feedback)
-			to_chat(src, "<span class='warning'>You couldn't move there!</span>")
-		return FALSE
-	forceMove(target)
-	return TRUE
-
-/// Can this mob move between z levels
-/mob/proc/canZMove(direction, turf/target)
+	var/ventcrawling_flag = HAS_TRAIT(src, TRAIT_MOVE_VENTCRAWLING) ? ZMOVE_VENTCRAWLING : 0
+	if(zMove(DOWN, z_move_flags = ZMOVE_FLIGHT_FLAGS|ZMOVE_FEEDBACK|ventcrawling_flag))
+		to_chat(src, span_notice("You move down."))
 	return FALSE
-
-
-/mob/dead/Move()
-	if(!istype(src, /mob/dead))
-		return FALSE
-	if(world.time < move_delay) //do not move anything ahead of this check please
-		return FALSE
-	else
-		next_move_dir_add = 0
-		next_move_dir_sub = 0
-	var/old_move_delay = move_delay
-	move_delay = world.time + world.tick_lag //this is here because Move() can now be called mutiple times per tick
-
-	var/mob/dead/observer/O
-	if(istype(src, /mob/dead/observer))
-		O = src
-
-	var/add_delay = 0.1
-
-	if(O.movement_delay != 0)
-		add_delay = O.movement_delay
-
-	if(old_move_delay + (add_delay*MOVEMENT_DELAY_BUFFER_DELTA) + MOVEMENT_DELAY_BUFFER > world.time)
-		move_delay = old_move_delay + add_delay
-	else
-		move_delay = world.time + add_delay
-
-	..()
-
-	glide_size = (world.icon_size / ceil(add_delay / world.tick_lag))
+/mob/abstract_move(atom/destination)
+	var/turf/new_turf = get_turf(destination)
+	if(is_secret_level(new_turf.z) && !client?.holder)
+		return
+	return ..()

@@ -65,7 +65,10 @@
 	source.movement_type &= ~flag
 	if((trait == TRAIT_MOVE_FLYING || trait == TRAIT_MOVE_FLOATING) && !(source.movement_type & (FLOATING|FLYING)))
 		stop_floating(source)
-	SEND_SIGNAL(source, COMSIG_MOVETYPE_FLAG_DISABLED, flag)
+		var/turf/pitfall = source.loc //Things that don't fly fall in open space.
+		if(istype(pitfall))
+			pitfall.zFall(source)
+	SEND_SIGNAL(source, COMSIG_MOVETYPE_FLAG_DISABLED, flag, old_state)
 
 /// Called when the TRAIT_NO_FLOATING_ANIM trait is added to the movable. Stops it from bobbing up and down.
 /datum/element/movetype_handler/proc/on_no_floating_anim_trait_gain(atom/movable/source, trait)
