@@ -119,27 +119,131 @@
 /mob/living/silicon/pai/Topic(href, href_list)
 	if(..())
 		return
-	var/soft = href_list["software"]
-	var/sub = href_list["sub"]
-	if(soft)
-		screen = soft
-		if(sub)
-			subscreen = text2num(sub)
-		switch(soft)
-			if("buy") // Purchasing new software
-				if(subscreen == 1)
-					var/target = href_list["buy"]
-					if(available_software.Find(target) && !software.Find(target))
-						var/cost = available_software[target]
-						if(ram >= cost)
-							software.Add(target)
-							ram -= cost
-							var/datum/hud/pai/pAIhud = hud_used
-							pAIhud?.update_software_buttons()
-						else
-							temp = "Insufficient RAM available."
-					else
-						temp = "Trunk <TT> \"[target]\"</TT> not found."
+	switch(action)
+		if("buy")
+			if(available_software.Find(params["selection"]) && !software.Find(params["selection"]))
+				/// Cost of the software to purchase
+				var/cost = available_software[params["selection"]]
+				if(ram >= cost)
+					software.Add(params["selection"])
+					ram -= cost
+					var/datum/hud/pai/pAIhud = hud_used
+					pAIhud?.update_software_buttons()
+				else
+					to_chat(usr, span_notice("Insufficient RAM available."))
+			else
+				to_chat(usr, span_notice("Software not found."))
+		if("atmosphere_sensor")
+			if(!holoform)
+				to_chat(usr, span_notice("You must be mobile to do this!"))
+				return FALSE
+			if(!atmos_analyzer)
+				atmos_analyzer = new(src)
+			atmos_analyzer.attack_self(src)
+		if("camera_zoom")
+			aicamera.adjust_zoom(usr)
+		if("change_image")
+			var/newImage = tgui_input_list(usr, "Select your new display image.", "Display Image", sort_list(list("Happy", "Cat", "Extremely Happy", "Face", "Laugh", "Off", "Sad", "Angry", "What", "Sunglasses")))
+			switch(newImage)
+				if(null)
+					card.emotion_icon = "null"
+				if("Extremely Happy")
+					card.emotion_icon = "extremely-happy"
+				else
+					card.emotion_icon = "[lowertext(newImage)]"
+			card.update_appearance()
+		if("check_dna")
+			if(!master_dna)
+				to_chat(src, span_warning("You do not have a master DNA to compare to!"))
+				return FALSE
+			if(iscarbon(card.loc))
+				CheckDNA(card.loc, src) //you should only be able to check when directly in hand, muh immersions?
+			else
+				to_chat(src, span_warning("You are not being carried by anyone!"))
+				return FALSE
+		if("crew_manifest")
+			ai_roster()
+		if("door_jack")
+			if(params["jack"] == "jack")
+				if(hacking_cable?.machine)
+					hackdoor = hacking_cable.machine
+					hackloop()
+			if(params["jack"]  == "cancel")
+				hackdoor = null
+				QDEL_NULL(hacking_cable)
+			if(params["jack"]  == "cable")
+				extendcable()
+		if("encryption_keys")
+			to_chat(src, span_notice("You have [!encryptmod ? "enabled" : "disabled"] encrypted radio frequencies."))
+			encryptmod = !encryptmod
+			radio.subspace_transmission = !radio.subspace_transmission
+		if("host_scan")
+			if(!hostscan)
+				hostscan = new(src)
+			if(params["scan"] == "scan")
+				hostscan()
+			if(params["scan"] == "wounds")
+				hostscan.attack_self(usr)
+			if(params["scan"] == "limbs")
+				hostscan.AltClick(usr)
+		if("internal_gps")
+			if(!internal_gps)
+				internal_gps = new(src)
+			internal_gps.attack_self(src)
+		if("loudness_booster")
+			if(!internal_instrument)
+				internal_instrument = new(src)
+			internal_instrument.interact(src) // Open Instrument
+		if("medical_hud")
+			medHUD = !medHUD
+			if(medHUD)
+				var/datum/atom_hud/med = GLOB.huds[med_hud]
+				med.add_hud_to(src)
+			else
+				var/datum/atom_hud/med = GLOB.huds[med_hud]
+				med.remove_hud_from(src)
+		if("newscaster")
+			newscaster.ui_interact(src)
+		if("pda")
+			if(isnull(aiPDA))
+				return FALSE
+			if(params["pda"] == "power")
+				aiPDA.toff = !aiPDA.toff
+			if(params["pda"] == "silent")
+				aiPDA.silent = !aiPDA.silent
+			if(params["pda"] == "message")
+				cmd_send_pdamesg(usr)
+		if("photography_module")
+			aicamera.toggle_camera_mode(usr)
+		if("printer_module")
+			aicamera.paiprint(usr)
+		if("radio")
+			radio.attack_self(src)
+		if("refresh")
+			if(refresh_spam)
+				return FALSE
+			refresh_spam = TRUE
+			if(params["list"] == "medical")
+				medical_records = GLOB.data_core.get_general_records()
+			if(params["list"] == "security")
+				security_records = GLOB.data_core.get_security_records()
+			ui.send_full_update()
+			addtimer(CALLBACK(src, .proc/refresh_again), 3 SECONDS)
+		if("remote_signaler")
+			signaler.ui_interact(src)
+		if("security_hud")
+			secHUD = !secHUD
+			if(secHUD)
+				var/datum/atom_hud/sec = GLOB.huds[sec_hud]
+				sec.add_hud_to(src)
+			else
+				var/datum/atom_hud/sec = GLOB.huds[sec_hud]
+				sec.remove_hud_from(src)
+		if("universal_translator")
+			if(!languages_granted)
+				grant_all_languages(TRUE, TRUE, TRUE, LANGUAGE_SOFTWARE)
+				languages_granted = TRUE
+	return
 
 
 			if("radio") // Configuring onboard radio
