@@ -31,15 +31,14 @@
 	var/datum/scar/highest_scar
 
 /datum/wound/slash/wound_injury(datum/wound/slash/old_wound = null, attack_direction = null)
+	blood_flow = initial_flow
 	if(old_wound)
 		blood_flow = max(old_wound.blood_flow, initial_flow)
 		if(old_wound.severity > severity && old_wound.highest_scar)
 			set_highest_scar(old_wound.highest_scar)
 			old_wound.clear_highest_scar()
-	else
-		blood_flow = initial_flow
-		if(attack_direction && victim.blood_volume > BLOOD_VOLUME_OKAY)
-			victim.spray_blood(attack_direction, severity)
+	else if(attack_direction && victim.blood_volume > BLOOD_VOLUME_OKAY)
+		victim.spray_blood(attack_direction, severity)
 
 	if(!highest_scar)
 		highest_scar = new
