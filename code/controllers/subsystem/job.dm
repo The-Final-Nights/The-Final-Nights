@@ -34,13 +34,13 @@ SUBSYSTEM_DEF(job)
 	var/list/dynamic_forced_occupations
 
 	/// A list of all jobs associated with the station. These jobs also have various icons associated with them including sechud and card trims.
-	var/list/station_jobs
+	var/list/station_jobs = list()
 	/// A list of all Head of Staff jobs.
-	var/list/head_of_staff_jobs
+	var/list/head_of_staff_jobs = list()
 	/// A list of additional jobs that have various icons associated with them including sechud and card trims.
-	var/list/additional_jobs_with_icons
+	var/list/additional_jobs_with_icons = list()
 	/// A list of jobs associed with Centcom and should use the standard NT Centcom icons.
-	var/list/centcom_jobs
+	var/list/centcom_jobs = list()
 
 	/**
 	 * Keys should be assigned job roles. Values should be >= 1.
@@ -814,19 +814,30 @@ SUBSYSTEM_DEF(job)
 
 /// Builds various lists of jobs based on station, centcom and additional jobs with icons associated with them.
 /datum/controller/subsystem/job/proc/setup_job_lists()
-	station_jobs = list("Assistant", "Captain", "Head of Personnel", "Bartender", "Cook", "Botanist", "Quartermaster", "Cargo Technician", \
-		"Shaft Miner", "Clown", "Mime", "Janitor", "Curator", "Lawyer", "Chaplain", "Chief Engineer", "Station Engineer", \
-		"Atmospheric Technician", "Chief Medical Officer", "Medical Doctor", "Paramedic", "Chemist", "Geneticist", "Virologist", "Psychologist", \
-		"Research Director", "Scientist", "Roboticist", "Head of Security", "Warden", "Detective", "Security Officer", "Prisoner")
+	for(var/datum/job/job as anything in subtypesof(/datum/job))
+		if(initial(job.job_type_flags) & JOB_STATION_JOB)
+			station_jobs |= initial(job.title)
+		if(initial(job.job_type_flags) & JOB_HEAD_JOB)
+			head_of_staff_jobs |= initial(job.title)
 
-	head_of_staff_jobs = list("Head of Personnel", "Chief Engineer", "Chief Medical Officer", "Research Director", "Head of Security", "Captain")
+	additional_jobs_with_icons |= list(
+		JOB_ERT_COMMANDER, JOB_ERT_OFFICER, JOB_ERT_ENGINEER, JOB_ERT_MEDICAL_DOCTOR,
+		JOB_ERT_CLOWN, JOB_ERT_CHAPLAIN, JOB_ERT_JANITOR, JOB_ERT_DEATHSQUAD,
+		JOB_SECURITY_OFFICER_MEDICAL, JOB_SECURITY_OFFICER_ENGINEERING, JOB_SECURITY_OFFICER_SCIENCE, JOB_SECURITY_OFFICER_SUPPLY,
+	)
 
-	additional_jobs_with_icons = list("Emergency Response Team Commander", "Security Response Officer", "Engineering Response Officer", "Medical Response Officer", \
-		"Entertainment Response Officer", "Religious Response Officer", "Janitorial Response Officer", "Death Commando", "Security Officer (Engineering)", \
-		"Security Officer (Cargo)", "Security Officer (Medical)", "Security Officer (Science)")
+	centcom_jobs |= list(
+		JOB_CENTCOM, JOB_CENTCOM_OFFICIAL, JOB_CENTCOM_ADMIRAL, JOB_CENTCOM_COMMANDER, JOB_CENTCOM_VIP,
+		JOB_CENTCOM_BARTENDER, JOB_CENTCOM_CUSTODIAN, JOB_CENTCOM_THUNDERDOME_OVERSEER, JOB_CENTCOM_MEDICAL_DOCTOR,
+		JOB_CENTCOM_RESEARCH_OFFICER, JOB_CENTCOM_SPECIAL_OFFICER, JOB_CENTCOM_PRIVATE_SECURITY,
+	)
 
-	centcom_jobs = list("Central Command","VIP Guest","Custodian","Thunderdome Overseer","CentCom Official","Medical Officer","Research Officer", \
-		"Special Ops Officer","Admiral","CentCom Commander","CentCom Bartender","Private Security Force")
+
+	job_priorities_to_strings = list(
+		"[JP_LOW]" = "Low Priority",
+		"[JP_MEDIUM]" = "Medium Priority",
+		"[JP_HIGH]" = "High Priority",
+	)
 
 /// Blindly assigns the required roles to every player in the dynamic_forced_occupations list.
 /datum/controller/subsystem/job/proc/assign_priority_positions()
