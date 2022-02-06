@@ -45,6 +45,7 @@
 
 	if(!climbable)
 		LoadComponent(/datum/component/leanable, dropping)
+	AddComponent(/datum/component/simple_rotation, ROTATION_NEEDS_ROOM)
 
 /obj/structure/railing/attackby(obj/item/I, mob/living/user, params)
 	..()
@@ -111,21 +112,6 @@
 /obj/structure/railing/corner/CheckExit()
 	return TRUE
 
-/obj/structure/railing/proc/can_be_rotated(mob/user,rotation_type)
-	if(anchored)
-		to_chat(user, "<span class='warning'>[src] cannot be rotated while it is fastened to the floor!</span>")
-		return FALSE
-
-	var/target_dir = turn(dir, rotation_type == ROTATION_CLOCKWISE ? -90 : 90)
-
-	if(!valid_window_location(loc, target_dir, is_fulltile = FALSE)) //Expanded to include rails, as well!
-		to_chat(user, "<span class='warning'>[src] cannot be rotated in that direction!</span>")
-		return FALSE
-	return TRUE
-
 /obj/structure/railing/proc/check_anchored(checked_anchored)
 	if(anchored == checked_anchored)
 		return TRUE
-
-/obj/structure/railing/proc/after_rotation(mob/user,rotation_type)
-	add_fingerprint(user)
