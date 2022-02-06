@@ -541,59 +541,33 @@ update_label()
 	uses_overlays = FALSE
 	registered_age = null
 
-/obj/item/card/id/ert/Initialize()
-	access = get_all_accesses()+get_ert_access("commander")-ACCESS_CHANGE_IDS
-	. = ..()
+/obj/item/card/id/advanced/centcom/ert
+	registered_name = JOB_ERT_COMMANDER
+	trim = /datum/id_trim/centcom/ert/commander
 
-/obj/item/card/id/ert/security
-	registered_name = "Security Response Officer"
-	assignment = "Security Response Officer"
-	icon_state = "ert_security"
+/obj/item/card/id/advanced/centcom/ert/security
+	registered_name = JOB_ERT_OFFICER
+	trim = /datum/id_trim/centcom/ert/security
 
-/obj/item/card/id/ert/security/Initialize()
-	access = get_all_accesses()+get_ert_access("sec")-ACCESS_CHANGE_IDS
-	. = ..()
+/obj/item/card/id/advanced/centcom/ert/engineer
+	registered_name = JOB_ERT_ENGINEER
+	trim = /datum/id_trim/centcom/ert/engineer
 
-/obj/item/card/id/ert/engineer
-	registered_name = "Engineering Response Officer"
-	assignment = "Engineering Response Officer"
-	icon_state = "ert_engineer"
+/obj/item/card/id/advanced/centcom/ert/medical
+	registered_name = JOB_ERT_MEDICAL_DOCTOR
+	trim = /datum/id_trim/centcom/ert/medical
 
-/obj/item/card/id/ert/engineer/Initialize()
-	access = get_all_accesses()+get_ert_access("eng")-ACCESS_CHANGE_IDS
-	. = ..()
+/obj/item/card/id/advanced/centcom/ert/chaplain
+	registered_name = JOB_ERT_CHAPLAIN
+	trim = /datum/id_trim/centcom/ert/chaplain
 
-/obj/item/card/id/ert/medical
-	registered_name = "Medical Response Officer"
-	assignment = "Medical Response Officer"
-	icon_state = "ert_medic"
+/obj/item/card/id/advanced/centcom/ert/janitor
+	registered_name = JOB_ERT_JANITOR
+	trim = /datum/id_trim/centcom/ert/janitor
 
-/obj/item/card/id/ert/medical/Initialize()
-	access = get_all_accesses()+get_ert_access("med")-ACCESS_CHANGE_IDS
-	. = ..()
-
-/obj/item/card/id/ert/chaplain
-	registered_name = "Religious Response Officer"
-	assignment = "Religious Response Officer"
-	icon_state = "ert_chaplain"
-
-/obj/item/card/id/ert/chaplain/Initialize()
-	access = get_all_accesses()+get_ert_access("sec")-ACCESS_CHANGE_IDS
-	. = ..()
-
-/obj/item/card/id/ert/janitor
-	registered_name = "Janitorial Response Officer"
-	assignment = "Janitorial Response Officer"
-	icon_state = "ert_janitor"
-
-/obj/item/card/id/ert/janitor/Initialize()
-	access = get_all_accesses()
-	. = ..()
-
-/obj/item/card/id/ert/clown
-	registered_name = "Entertainment Response Officer"
-	assignment = "Entertainment Response Officer"
-	icon_state = "ert_clown"
+/obj/item/card/id/advanced/centcom/ert/clown
+	registered_name = JOB_ERT_CLOWN
+	trim = /datum/id_trim/centcom/ert/clown
 
 /obj/item/card/id/ert/clown/Initialize()
 	access = get_all_accesses()
@@ -603,10 +577,44 @@ update_label()
 	name = "\improper Death Squad ID"
 	id_type_name = "\improper Death Squad ID"
 	desc = "A Death Squad ID card."
-	icon_state = "deathsquad" //NO NO SIR DEATH SQUADS ARENT A PART OF NANOTRASEN AT ALL
-	registered_name = "Death Commando"
-	assignment = "Death Commando"
-	uses_overlays = FALSE
+	registered_name = JOB_ERT_DEATHSQUAD
+	trim = /datum/id_trim/centcom/deathsquad
+	wildcard_slots = WILDCARD_LIMIT_DEATHSQUAD
+
+/obj/item/card/id/advanced/black/syndicate_command
+	name = "syndicate ID card"
+	desc = "An ID straight from the Syndicate."
+	registered_name = "Syndicate"
+	registered_age = null
+	trim = /datum/id_trim/syndicom
+	wildcard_slots = WILDCARD_LIMIT_SYNDICATE
+
+/obj/item/card/id/advanced/black/syndicate_command/crew_id
+	name = "syndicate ID card"
+	desc = "An ID straight from the Syndicate."
+	registered_name = "Syndicate"
+	trim = /datum/id_trim/syndicom/crew
+
+/obj/item/card/id/advanced/black/syndicate_command/captain_id
+	name = "syndicate captain ID card"
+	desc = "An ID straight from the Syndicate."
+	registered_name = "Syndicate"
+	trim = /datum/id_trim/syndicom/captain
+
+
+/obj/item/card/id/advanced/black/syndicate_command/captain_id/syndie_spare
+	name = "syndicate captain's spare ID"
+	desc = "The spare ID of the Dark Lord himself."
+	registered_name = "Captain"
+	registered_age = null
+
+/obj/item/card/id/advanced/black/syndicate_command/captain_id/syndie_spare/update_label()
+	if(registered_name == "Captain")
+		name = "[initial(name)][(!assignment || assignment == "Captain") ? "" : " ([assignment])"]"
+		update_appearance(UPDATE_ICON)
+		return
+
+	return ..()
 
 /obj/item/card/id/debug
 	name = "\improper Debug ID"

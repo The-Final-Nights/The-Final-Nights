@@ -740,8 +740,10 @@ What a mess.*/
 						if((istype(active1, /datum/data/record) && L.Find(rank)))
 							temp = "<h5>Rank:</h5>"
 							temp += "<ul>"
-							for(var/rank in get_all_jobs())
-								temp += "<li><a href='byond://?src=[REF(src)];choice=Change Rank;rank=[rank]'>[rank]</a></li>"
+							var/list/station_job_templates = SSid_access.station_job_templates
+							for(var/path in station_job_templates)
+								var/rank = station_job_templates[path]
+								temp += "<li><a href='?src=[REF(src)];choice=Change Rank;rank=[path]'>[rank]</a></li>"
 							temp += "</ul>"
 						else
 							alert(usr, "You do not have the required rank to do this!")
@@ -751,9 +753,20 @@ What a mess.*/
 				switch(href_list["choice"])
 					if("Change Rank")
 						if(active1)
-							active1.fields["rank"] = strip_html(href_list["rank"])
-							if(href_list["rank"] in get_all_jobs())
-								active1.fields["real_rank"] = href_list["real_rank"]
+							var/text = strip_html(href_list["rank"])
+							var/path = text2path(text)
+							if(ispath(path))
+								var/rank = SSid_access.station_job_templates[path]
+								if(rank)
+									active1.fields["rank"] = rank
+									active1.fields["trim"] = active1.fields["rank"]
+								else
+									message_admins("Warning: possible href exploit by [key_name(usr)] - attempted to set change a crew member rank to an invalid path: [path]")
+									log_game("Warning: possible href exploit by [key_name(usr)] - attempted to set change a crew member rank to an invalid path: [path]")
+							else if(!isnull(text))
+								message_admins("Warning: possible href exploit by [key_name(usr)] - attempted to set change a crew member rank to an invalid value: [text]")
+								log_game("Warning: possible href exploit by [key_name(usr)] - attempted to set change a crew member rank to an invalid value: [text]")
+
 					if("Change Criminal Status")
 						if(active2)
 							var/old_field = active2.fields["criminal"]
