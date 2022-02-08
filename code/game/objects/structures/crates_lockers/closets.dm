@@ -291,15 +291,51 @@
 							"<span class='hear'>You hear welding.</span>")
 			log_game("[key_name(user)] [welded ? "welded":"unwelded"] closet [src] with [W] at [AREACOORD(src)]")
 			update_appearance()
-	else if(W.tool_behaviour == TOOL_WRENCH && anchorable)
-		if(isinspace() && !anchored)
-			return
-		set_anchored(!anchored)
-		W.play_tool_sound(src, 75)
-		user.visible_message("<span class='notice'>[user] [anchored ? "anchored" : "unanchored"] \the [src] [anchored ? "to" : "from"] the ground.</span>", \
-						"<span class='notice'>You [anchored ? "anchored" : "unanchored"] \the [src] [anchored ? "to" : "from"] the ground.</span>", \
-						"<span class='hear'>You hear a ratchet.</span>")
-	else if(user.a_intent != INTENT_HARM)
+	else if (can_install_electronics && istype(W, /obj/item/electronics/airlock)\
+			&& !secure && !electronics && !locked && (welded || !can_weld_shut) && !broken)
+		user.visible_message(span_notice("[user] installs the electronics into the [src]."),\
+			span_notice("You start to install electronics into the [src]..."))
+		if (!do_after(user, 4 SECONDS, target = src))
+			return FALSE
+		if (electronics || secure)
+			return FALSE
+		if (!user.transferItemToLoc(W, src))
+			return FALSE
+		W.moveToNullspace()
+		to_chat(user, span_notice("You install the electronics."))
+		electronics = W
+		if (electronics.one_access)
+			req_one_access = electronics.accesses
+		else
+			req_access = electronics.accesses
+		secure = TRUE
+		update_appearance()
+	else if (can_install_electronics && W.tool_behaviour == TOOL_SCREWDRIVER\
+			&& (secure || electronics) && !locked && (welded || !can_weld_shut))
+		user.visible_message(span_notice("[user] begins to remove the electronics from the [src]."),\
+			span_notice("You begin to remove the electronics from the [src]..."))
+		var/had_electronics = !!electronics
+		var/was_secure = secure
+		if (!do_after(user, 4 SECONDS, target = src))
+			return FALSE
+		if ((had_electronics && !electronics) || (was_secure && !secure))
+			return FALSE
+		var/obj/item/electronics/airlock/electronics_ref
+		if (!electronics)
+			electronics_ref = new /obj/item/electronics/airlock(loc)
+			gen_access()
+			if (req_one_access.len)
+				electronics_ref.one_access = 1
+				electronics_ref.accesses = req_one_access
+			else
+				electronics_ref.accesses = req_access
+		else
+			electronics_ref = electronics
+			electronics = null
+			electronics_ref.forceMove(drop_location())
+		secure = FALSE
+		update_appearance()
+	else if(!user.a_intent != INTENT_HARM)
 		var/item_is_id = W.GetID()
 		if(!item_is_id)
 			return FALSE
@@ -307,6 +343,18 @@
 			togglelock(user)
 	else
 		return FALSE
+
+/obj/structure/closet/wrench_act_secondary(mob/living/user, obj/item/tool)
+	if(!anchorable)
+		balloon_alert(user, "no anchor bolts!")
+		return TRUE
+	if(isinspace() && !anchored) // We want to prevent anchoring a locker in space, but we should still be able to unanchor it there
+		balloon_alert(user, "nothing to anchor to!")
+		return TRUE
+	set_anchored(!anchored)
+	tool.play_tool_sound(src, 75)
+	user.balloon_alert_to_viewers("[anchored ? "anchored" : "unanchored"]")
+	return TRUE
 
 /obj/structure/closet/proc/after_weld(weld_state)
 	return
