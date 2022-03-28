@@ -18,7 +18,7 @@
 	var/initial_flow
 	/// When we have less than this amount of flow, either from treatment or clotting, we demote to a lower cut or are healed of the wound
 	var/minimum_flow
-	/// How much our blood_flow will naturally decrease per tick, not only do larger cuts bleed more blood faster, they clot slower (higher number = clot quicker, negative = opening up)
+	/// How much our blood_flow will naturally decrease per second, not only do larger cuts bleed more blood faster, they clot slower (higher number = clot quicker, negative = opening up)
 	var/clot_rate
 
 	/// Once the blood flow drops below minimum_flow, we demote it to this type of wound. If there's none, we're all better
@@ -30,13 +30,16 @@
 	/// A bad system I'm using to track the worst scar we earned (since we can demote, we want the biggest our wound has been, not what it was when it was cured (probably moderate))
 	var/datum/scar/highest_scar
 
-/datum/wound/slash/wound_injury(datum/wound/slash/old_wound = null)
-	blood_flow = initial_flow
+/datum/wound/slash/wound_injury(datum/wound/slash/old_wound = null, attack_direction = null)
 	if(old_wound)
 		blood_flow = max(old_wound.blood_flow, initial_flow)
 		if(old_wound.severity > severity && old_wound.highest_scar)
-			highest_scar = old_wound.highest_scar
-			old_wound.highest_scar = null
+			set_highest_scar(old_wound.highest_scar)
+			old_wound.clear_highest_scar()
+	else
+		blood_flow = initial_flow
+		if(attack_direction && victim.blood_volume > BLOOD_VOLUME_OKAY)
+			victim.spray_blood(attack_direction, severity)
 
 	if(!highest_scar)
 		highest_scar = new
@@ -69,7 +72,7 @@
 
 /datum/wound/slash/receive_damage(wounding_type, wounding_dmg, wound_bonus)
 	if(victim.stat != DEAD && wound_bonus != CANT_WOUND && wounding_type == WOUND_SLASH) // can't stab dead bodies to make it bleed faster this way
-		blood_flow += 0.05 * wounding_dmg
+		blood_flow += WOUND_SLASH_DAMAGE_FLOW_COEFF * wounding_dmg
 
 /datum/wound/slash/drag_bleed_amount()
 	// say we have 3 severe cuts with 3 blood flow each, pretty reasonable
@@ -238,7 +241,8 @@
 
 	if(!do_after(user, base_treat_time * self_penalty_mult, target=victim, extra_checks = CALLBACK(src, PROC_REF(still_exists))))
 		return
-	user.visible_message("<span class='green'>[user] stitches up some of the bleeding on [victim].</span>", "<span class='green'>You stitch up some of the bleeding on [user == victim ? "yourself" : "[victim]"].</span>")
+
+	user.visible_message(span_green("[user] stitches up some of the bleeding on [victim]."), span_green("You stitch up some of the bleeding on [user == victim ? "yourself" : "[victim]"]."))
 	var/blood_sutured = I.stop_bleeding / self_penalty_mult
 	blood_flow -= blood_sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn)
@@ -260,7 +264,7 @@
 	severity = WOUND_SEVERITY_MODERATE
 	initial_flow = 2
 	minimum_flow = 0.5
-	clot_rate = 0.06
+	clot_rate = 0.05
 	threshold_minimum = 20
 	threshold_penalty = 10
 	status_effect_type = /datum/status_effect/wound/slash/moderate
@@ -291,9 +295,9 @@
 	occur_text = "is torn open, spraying blood wildly"
 	sound_effect = 'sound/effects/wounds/blood3.ogg'
 	severity = WOUND_SEVERITY_CRITICAL
-	initial_flow = 4.25
-	minimum_flow = 4
-	clot_rate = -0.025 // critical cuts actively get worse instead of better
+	initial_flow = 4
+	minimum_flow = 3.85
+	clot_rate = -0.015 // critical cuts actively get worse instead of better
 	threshold_minimum = 80
 	threshold_penalty = 40
 	demotes_to = /datum/wound/slash/severe

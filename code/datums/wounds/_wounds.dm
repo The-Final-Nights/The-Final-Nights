@@ -146,8 +146,8 @@
 	if(severity == WOUND_SEVERITY_TRIVIAL)
 		return
 
-	if(!(silent || demoted))
-		var/msg = "<span class='danger'>[victim]'s [limb.name] [occur_text]!</span>"
+	if(!silent && !demoted)
+		var/msg = span_danger("[victim]'s [limb.name] [occur_text]!")
 		var/vis_dist = COMBAT_MESSAGE_RANGE
 
 		if(severity != WOUND_SEVERITY_MODERATE)
@@ -158,8 +158,8 @@
 		if(sound_effect)
 			playsound(L.owner, sound_effect, 70 + 20 * severity, TRUE)
 
+	wound_injury(old_wound, attack_direction = attack_direction)
 	if(!demoted)
-		wound_injury(old_wound)
 		second_wind()
 
 /// Remove the wound from whatever it's afflicting, and cleans up whateverstatus effects it had or modifiers it had on interaction times. ignore_limb is used for detachments where we only want to forget the victim
