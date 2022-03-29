@@ -9,6 +9,7 @@
 	pixel_x = -32
 	pixel_y = -32
 	opacity = FALSE
+	plane = ABOVE_GAME_PLANE
 	layer = FLY_LAYER
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -24,15 +25,15 @@
 	if(frames == 0)
 		frames = 1 //We will just assume that by 0 frames, the coder meant "during one frame".
 	var/step = alpha / frames
-	for(var/i = 0, i < frames, i++)
+	for(var/i in 1 to frames)
 		alpha -= step
 		if(alpha < 160)
 			set_opacity(0) //if we were blocking view, we aren't now because we're fading out
 		stoplag()
 
-/obj/effect/particle_effect/smoke/Initialize()
+/obj/effect/particle_effect/smoke/Initialize(mapload)
 	. = ..()
-	create_reagents(500)
+	create_reagents(1000)
 	START_PROCESSING(SSobj, src)
 
 
@@ -42,7 +43,7 @@
 
 /obj/effect/particle_effect/smoke/proc/kill_smoke()
 	STOP_PROCESSING(SSobj, src)
-	INVOKE_ASYNC(src, PROC_REF(fade_out))
+	INVOKE_ASYNC(src, .proc/fade_out)
 	QDEL_IN(src, 10)
 
 /obj/effect/particle_effect/smoke/process()
@@ -54,17 +55,17 @@
 		smoke_mob(L)
 	return TRUE
 
-/obj/effect/particle_effect/smoke/proc/smoke_mob(mob/living/carbon/inhaling_mob)
-	if(!istype(inhaling_mob))
+/obj/effect/particle_effect/smoke/proc/smoke_mob(mob/living/carbon/C)
+	if(!istype(C))
 		return FALSE
 	if(lifetime<1)
 		return FALSE
-	if(inhaling_mob.internal != null || inhaling_mob.has_smoke_protection())
+	if(C.internal != null || C.has_smoke_protection())
 		return FALSE
-	if(inhaling_mob.smoke_delay)
+	if(C.smoke_delay)
 		return FALSE
-	inhaling_mob.smoke_delay++
-	addtimer(CALLBACK(src, PROC_REF(remove_smoke_delay), inhaling_mob), 10)
+	C.smoke_delay++
+	addtimer(CALLBACK(src, .proc/remove_smoke_delay, C), 10)
 	return TRUE
 
 /obj/effect/particle_effect/smoke/proc/remove_smoke_delay(mob/living/carbon/C)
@@ -76,7 +77,7 @@
 	if(!t_loc)
 		return
 	var/list/newsmokes = list()
-	for(var/turf/T in get_adjacent_open_turfs(t_loc))
+	for(var/turf/T in t_loc.get_atmos_adjacent_turfs())
 		var/obj/effect/particle_effect/smoke/foundsmoke = locate() in T //Don't spread smoke where there's already smoke!
 		if(foundsmoke)
 			continue
@@ -95,7 +96,7 @@
 
 	//the smoke spreads rapidly but not instantly
 	for(var/obj/effect/particle_effect/smoke/SM in newsmokes)
-		addtimer(CALLBACK(SM, TYPE_PROC_REF(/obj/effect/particle_effect/smoke, spread_smoke)), 1)
+		addtimer(CALLBACK(SM, /obj/effect/particle_effect/smoke.proc/spread_smoke), 1)
 
 
 /datum/effect_system/smoke_spread
@@ -125,19 +126,26 @@
 /obj/effect/particle_effect/smoke/bad
 	lifetime = 8
 
-/obj/effect/particle_effect/smoke/bad/smoke_mob(mob/living/carbon/inhaling_mob)
+/obj/effect/particle_effect/smoke/bad/Initialize(mapload)
+	. = ..()
+	var/static/list/loc_connections = list(
+		COMSIG_ATOM_ENTERED = .proc/on_entered,
+	)
+	AddElement(/datum/element/connect_loc, loc_connections)
+
+/obj/effect/particle_effect/smoke/bad/smoke_mob(mob/living/carbon/M)
 	. = ..()
 	if(.)
-		inhaling_mob.drop_all_held_items()
-		inhaling_mob.adjustOxyLoss(1)
-		inhaling_mob.emote("cough")
+		M.drop_all_held_items()
+		M.adjustOxyLoss(1)
+		M.emote("cough")
 		return TRUE
 
-/obj/effect/particle_effect/smoke/bad/Crossed(atom/movable/AM, oldloc)
-	. = ..()
-	if(istype(AM, /obj/projectile/beam))
-		var/obj/projectile/beam/B = AM
-		B.damage = (B.damage/2)
+/obj/effect/particle_effect/smoke/bad/proc/on_entered(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	SIGNAL_HANDLER
+	if(istype(arrived, /obj/projectile/beam))
+		var/obj/projectile/beam/beam = arrived
+		beam.damage *= 0.5
 
 /datum/effect_system/smoke_spread/bad
 	effect_type = /obj/effect/particle_effect/smoke/bad
@@ -161,6 +169,25 @@
 /datum/effect_system/smoke_spread/freezing/proc/Chilled(atom/A)
 	if(isopenturf(A))
 		var/turf/open/T = A
+		if(T.air)
+			var/datum/gas_mixture/G = T.air
+			if(!distcheck || get_dist(T, location) < blast) // Otherwise we'll get silliness like people using Nanofrost to kill people through walls with cold air
+				G.temperature = temperature
+			T.air_update_turf(FALSE, FALSE)
+			for(var/obj/effect/hotspot/H in T)
+				qdel(H)
+			var/list/G_gases = G.gases
+			if(G_gases[/datum/gas/plasma])
+				G.assert_gas(/datum/gas/nitrogen)
+				G_gases[/datum/gas/nitrogen][MOLES] += (G_gases[/datum/gas/plasma][MOLES])
+				G_gases[/datum/gas/plasma][MOLES] = 0
+				G.garbage_collect()
+		if (weldvents)
+			for(var/obj/machinery/atmospherics/components/unary/U in T)
+				if(!isnull(U.welded) && !U.welded) //must be an unwelded vent pump or vent scrubber.
+					U.welded = TRUE
+					U.update_appearance()
+					U.visible_message(span_danger("[U] is frozen shut!"))
 		for(var/mob/living/L in T)
 			L.extinguish_mob()
 		for(var/obj/item/Item in T)
@@ -215,7 +242,7 @@
 		for(var/atom/movable/AM in T)
 			if(AM.type == src.type)
 				continue
-			if(T.intact && HAS_TRAIT(AM, TRAIT_T_RAY_VISIBLE))
+			if(T.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(AM, TRAIT_T_RAY_VISIBLE))
 				continue
 			reagents.expose(AM, TOUCH, fraction)
 
@@ -238,20 +265,17 @@
 
 
 /datum/effect_system/smoke_spread/chem
-	var/obj/chemholder
+	/// Evil evil hack so we have something to "hold" our reagents
+	var/atom/movable/chem_holder/chemholder
 	effect_type = /obj/effect/particle_effect/smoke/chem
 
 /datum/effect_system/smoke_spread/chem/New()
 	..()
-	chemholder = new /obj()
-	var/datum/reagents/R = new (500, REAGENT_HOLDER_INSTANT_REACT) //This is a safety for now to prevent smoke generating more smoke as the smoke reagents react in the smoke. This is prevented naturally from happening even if this is off, but I want to be sure that any edge cases are prevented before I get a chance to rework smoke reactions (specifically adding water or reacting away stabilizing agent in the middle of it).
-	chemholder.reagents = R
-	
-	R.my_atom = chemholder
+	chemholder = new()
+	chemholder.create_reagents(1000, NO_REACT)
 
 /datum/effect_system/smoke_spread/chem/Destroy()
-	qdel(chemholder)
-	chemholder = null
+	QDEL_NULL(chemholder)
 	return ..()
 
 /datum/effect_system/smoke_spread/chem/set_up(datum/reagents/carry = null, radius = 1, loca, silent = FALSE)
@@ -318,7 +342,7 @@
 	smoke.start()
 
 /////////////////////////////////////////////
-// Bad Smoke (But Green)
+// Bad Smoke (But Green (and Black))
 /////////////////////////////////////////////
 
 /obj/effect/particle_effect/smoke/bad/green
@@ -328,3 +352,22 @@
 
 /datum/effect_system/smoke_spread/bad/green
 	effect_type = /obj/effect/particle_effect/smoke/bad/green
+
+/obj/effect/particle_effect/smoke/bad/black
+	name = "black smoke"
+	color = "#383838"
+	opaque = FALSE
+
+/datum/effect_system/smoke_spread/bad/black
+	effect_type = /obj/effect/particle_effect/smoke/bad/black
+
+/////////////////////////////////////////////
+// Quick smoke
+/////////////////////////////////////////////
+
+/obj/effect/particle_effect/smoke/quick
+	lifetime = 1
+	opaque = FALSE
+
+/datum/effect_system/smoke_spread/quick
+	effect_type = /obj/effect/particle_effect/smoke/quick
