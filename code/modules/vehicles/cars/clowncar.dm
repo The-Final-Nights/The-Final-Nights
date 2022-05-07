@@ -53,8 +53,8 @@
 /obj/vehicle/sealed/car/clowncar/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()
 	if(prob(33))
-		visible_message("<span class='danger'>[src] spews out a ton of space lube!</span>")
-		new /obj/effect/particle_effect/foam(loc) //YEET
+		visible_message(span_danger("[src] spews out a ton of space lube!"))
+		new /obj/effect/particle_effect/fluid/foam(loc) //YEET
 
 /obj/vehicle/sealed/car/clowncar/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
@@ -114,12 +114,12 @@
 			visible_message("<span class='danger'>[user] presses one of the colorful buttons on [src], and a special banana peel drops out of it.</span>")
 			new /obj/item/grown/bananapeel/specialpeel(loc)
 		if(2)
-			visible_message("<span class='danger'>[user] presses one of the colorful buttons on [src], and unknown chemicals flood out of it.</span>")
-			var/datum/reagents/R = new/datum/reagents(300)
-			R.my_atom = src
-			R.add_reagent(get_random_reagent_id(), 100)
-			var/datum/effect_system/foam_spread/foam = new
-			foam.set_up(200, loc, R)
+			visible_message(span_danger("[user] presses one of the colorful buttons on [src], and unknown chemicals flood out of it."))
+			var/datum/reagents/randomchems = new/datum/reagents(300)
+			randomchems.my_atom = src
+			randomchems.add_reagent(get_random_reagent_id(), 100)
+			var/datum/effect_system/fluid_spread/foam/foam = new
+			foam.set_up(200, loc, randomchems)
 			foam.start()
 		if(3)
 			visible_message("<span class='danger'>[user] presses one of the colorful buttons on [src], and the clown car turns on its singularity disguise system.</span>")
@@ -127,12 +127,12 @@
 			icon_state = "singularity_s1"
 			addtimer(CALLBACK(src, PROC_REF(ResetIcon)), 100)
 		if(4)
-			visible_message("<span class='danger'>[user] presses one of the colorful buttons on [src], and the clown car spews out a cloud of laughing gas.</span>")
-			var/datum/reagents/R = new/datum/reagents(300)
-			R.my_atom = src
-			R.add_reagent(/datum/reagent/consumable/superlaughter, 50)
-			var/datum/effect_system/smoke_spread/chem/smoke = new()
-			smoke.set_up(R, 4)
+			visible_message(span_danger("[user] presses one of the colorful buttons on [src], and the clown car spews out a cloud of laughing gas."))
+			var/datum/reagents/funnychems = new/datum/reagents(300)
+			funnychems.my_atom = src
+			funnychems.add_reagent(/datum/reagent/consumable/superlaughter, 50)
+			var/datum/effect_system/fluid_spread/smoke/chem/smoke = new()
+			smoke.set_up(4, location = src, carry = funnychems)
 			smoke.attach(src)
 			smoke.start()
 		if(5)

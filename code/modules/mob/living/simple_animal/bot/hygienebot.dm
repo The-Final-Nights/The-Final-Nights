@@ -46,11 +46,7 @@
 	prev_access = access_card.access
 
 /mob/living/simple_animal/bot/hygienebot/explode()
-	walk_to(src,0)
-	visible_message("<span class='boldannounce'>[src] blows apart in a foamy explosion!</span>")
-	do_sparks(3, TRUE, src)
-	on = FALSE
-	new /obj/effect/particle_effect/foam(loc)
+	new /obj/effect/particle_effect/fluid/foam(loc)
 
 	..()
 

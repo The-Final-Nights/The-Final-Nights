@@ -164,33 +164,37 @@
 #define FIRE_PRIORITY_VIS			10
 #define FIRE_PRIORITY_GARBAGE		15
 #define FIRE_PRIORITY_DATABASE 16
-#define FIRE_PRIORITY_WET_FLOORS	20
-#define FIRE_PRIORITY_AIR			20
-#define FIRE_PRIORITY_NPC			20
-#define FIRE_PRIORITY_PROCESS		25
-#define FIRE_PRIORITY_THROWING		25
-#define FIRE_PRIORITY_REAGENTS		26
-#define FIRE_PRIORITY_SPACEDRIFT	30
-#define FIRE_PRIORITY_FIELDS		30
-#define FIRE_PRIOTITY_SMOOTHING		35
-#define FIRE_PRIORITY_NETWORKS		40
-#define FIRE_PRIORITY_OBJ			40
-#define FIRE_PRIORITY_ACID			40
-#define FIRE_PRIOTITY_BURNING		40
-#define FIRE_PRIORITY_DEFAULT		50
-#define FIRE_PRIORITY_PARALLAX		65
-#define FIRE_PRIORITY_INSTRUMENTS	80
-#define FIRE_PRIORITY_MOBS			100
-#define FIRE_PRIORITY_TGUI			110
-#define FIRE_PRIORITY_TICKER		200
-#define FIRE_PRIORITY_ATMOS_ADJACENCY	300
-#define FIRE_PRIORITY_STATPANEL		390
-#define FIRE_PRIORITY_CHAT			400
-#define FIRE_PRIORITY_RUNECHAT		410
-#define FIRE_PRIORITY_OVERLAYS		500
-#define FIRE_PRIORITY_EXPLOSIONS	666
-#define FIRE_PRIORITY_TIMER			700
-#define FIRE_PRIORITY_INPUT			1000 // This must always always be the max highest priority. Player input must never be lost.
+#define FIRE_PRIORITY_WET_FLOORS 20
+#define FIRE_PRIORITY_FLUIDS 20
+#define FIRE_PRIORITY_AIR 20
+#define FIRE_PRIORITY_NPC 20
+#define FIRE_PRIORITY_NPC_MOVEMENT 21
+#define FIRE_PRIORITY_NPC_ACTIONS 22
+#define FIRE_PRIORITY_PROCESS 25
+#define FIRE_PRIORITY_THROWING 25
+#define FIRE_PRIORITY_REAGENTS 26
+#define FIRE_PRIORITY_SPACEDRIFT 30
+#define FIRE_PRIOTITY_SMOOTHING 35
+#define FIRE_PRIORITY_NETWORKS 40
+#define FIRE_PRIORITY_OBJ 40
+#define FIRE_PRIORITY_ACID 40
+#define FIRE_PRIOTITY_BURNING 40
+#define FIRE_PRIORITY_DEFAULT 50
+#define FIRE_PRIORITY_PARALLAX 65
+#define FIRE_PRIORITY_INSTRUMENTS 80
+#define FIRE_PRIORITY_MOBS 100
+#define FIRE_PRIORITY_TGUI 110
+#define FIRE_PRIORITY_TICKER 200
+#define FIRE_PRIORITY_STATPANEL 390
+#define FIRE_PRIORITY_CHAT 400
+#define FIRE_PRIORITY_RUNECHAT 410
+#define FIRE_PRIORITY_MOUSE_ENTERED 450
+#define FIRE_PRIORITY_OVERLAYS 500
+#define FIRE_PRIORITY_EXPLOSIONS 666
+#define FIRE_PRIORITY_TIMER 700
+#define FIRE_PRIORITY_SOUND_LOOPS 800
+#define FIRE_PRIORITY_SPEECH_CONTROLLER 900
+#define FIRE_PRIORITY_INPUT 1000 // This must always always be the max highest priority. Player input must never be lost.
 
 
 // SS runlevels
@@ -246,7 +250,7 @@
 
 // Subsystem delta times or tickrates, in seconds. I.e, how many seconds in between each process() call for objects being processed by that subsystem.
 // Only use these defines if you want to access some other objects processing delta_time, otherwise use the delta_time that is sent as a parameter to process()
-#define SSFLUIDS_DT (SSfluids.wait/10)
+#define SSFLUIDS_DT (SSplumbing.wait/10)
 #define SSMACHINES_DT (SSmachines.wait/10)
 #define SSMOBS_DT (SSmobs.wait/10)
 #define SSOBJ_DT (SSobj.wait/10)

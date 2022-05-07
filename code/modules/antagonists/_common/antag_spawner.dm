@@ -69,8 +69,8 @@
 			else
 				to_chat(H, "<span class='warning'>Unable to reach your apprentice! You can either attack the spellbook with the contract to refund your points, or wait and try again later.</span>")
 
-/obj/item/antag_spawner/contract/spawn_antag(client/C, turf/T, kind ,datum/mind/user)
-	new /obj/effect/particle_effect/smoke(T)
+/obj/item/antag_spawner/contract/spawn_antag(client/C, turf/T, kind, datum/mind/user)
+	new /obj/effect/particle_effect/fluid/smoke(T)
 	var/mob/living/carbon/human/M = new/mob/living/carbon/human(T)
 	C.prefs.copy_to(M)
 	M.key = C.key

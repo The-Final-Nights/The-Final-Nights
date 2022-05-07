@@ -563,8 +563,8 @@
 	R.my_atom = src
 	R.add_reagent(/datum/reagent/consumable/ethanol/beer, 100)
 
-	var/datum/effect_system/foam_spread/foam = new
-	foam.set_up(200, get_turf(src), R)
+	var/datum/effect_system/fluid_spread/foam/foam = new
+	foam.set_up(200, location = get_turf(src), carry = R)
 	foam.start()
 	disarm()
 
