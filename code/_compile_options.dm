@@ -30,8 +30,20 @@
 
 #endif //ifdef LEGACY_REFERENCE_TRACKING
 
-#define VISUALIZE_ACTIVE_TURFS	//Highlights atmos active turfs in green
-#define TRACK_MAX_SHARE	//Allows max share tracking, for use in the atmos debugging ui
+/*
+* Enables debug messages for every single reaction step. This is 1 message per 0.5s for a SINGLE reaction. Useful for tracking down bugs/asking me for help in the main reaction handiler (equilibrium.dm).
+*
+* * Requires TESTING to be defined to work.
+*/
+//#define REAGENTS_TESTING
+
+// Displays static object lighting updates
+// Also enables some debug vars on sslighting that can be used to modify
+// How extensively we prune lighting corners to update
+#define VISUALIZE_LIGHT_UPDATES
+
+#define VISUALIZE_ACTIVE_TURFS //Highlights atmos active turfs in green
+#define TRACK_MAX_SHARE //Allows max share tracking, for use in the atmos debugging ui
 #endif //ifdef TESTING
 
 //#define UNIT_TESTS			//If this is uncommented, we do a single run though of the game setup and tear down process with unit tests in between
