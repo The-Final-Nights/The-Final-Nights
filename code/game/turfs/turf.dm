@@ -67,6 +67,17 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	///the holodeck can load onto this turf if TRUE
 	var/holodeck_compatible = FALSE
 
+	/// If this turf contained an RCD'able object (or IS one, for walls)
+	/// but is now destroyed, this will preserve the value.
+	/// See __DEFINES/construction.dm for RCD_MEMORY_*.
+	var/rcd_memory
+	///whether or not this turf forces movables on it to have no gravity (unless they themselves have forced gravity)
+	var/force_no_gravity = FALSE
+
+	/// How pathing algorithm will check if this turf is passable by itself (not including content checks). By default it's just density check.
+	/// WARNING: Currently to use a density shortcircuiting this does not support dense turfs with special allow through function
+	var/pathing_pass_method = TURF_PATHING_PASS_DENSITY
+
 /turf/vv_edit_var(var_name, new_value)
 	var/static/list/banned_edits = list("x", "y", "z")
 	if(var_name in banned_edits)
@@ -308,10 +319,8 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	var/atom/firstbump
 	var/canPassSelf = CanPass(mover, src)
 	if(canPassSelf || (mover.movement_type & PHASING))
-		for(var/i in contents)
-			if(QDELETED(mover))
-				return FALSE		//We were deleted, do not attempt to proceed with movement.
-			if(i == mover || i == mover.loc) // Multi tile objects and moving out of other objects
+		for(var/atom/movable/thing as anything in contents)
+			if(thing == mover || thing == mover.loc) // Multi tile objects and moving out of other objects
 				continue
 			var/atom/movable/thing = i
 			if(!thing.Cross(mover))
@@ -331,31 +340,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		mover.Bump(firstbump)
 		return (mover.movement_type & PHASING)
 	return TRUE
-
-/turf/Exit(atom/movable/mover, atom/newloc)
-	. = ..()
-	if(!. || QDELETED(mover))
-		return FALSE
-	for(var/i in contents)
-		if(i == mover)
-			continue
-		var/atom/movable/thing = i
-		if(!thing.Uncross(mover, newloc))
-			if(thing.flags_1 & ON_BORDER_1)
-				mover.Bump(thing)
-			if(!(mover.movement_type & PHASING))
-				return FALSE
-		if(QDELETED(mover))
-			return FALSE		//We were deleted.
-
-
-/turf/open/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	. = ..()
-	//melting
-	if(isobj(AM))
-		var/obj/O = AM
-		if(O.obj_flags & FROZEN)
-			O.make_unfrozen()
 
 // A proc in case it needs to be recreated or badmins want to change the baseturfs
 /turf/proc/assemble_baseturfs(turf/fake_baseturf_type)

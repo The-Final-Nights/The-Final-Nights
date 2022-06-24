@@ -109,11 +109,11 @@
 	if(directional)
 		RegisterSignal(parent, COMSIG_ATOM_DIR_CHANGE, PROC_REF(on_parent_dir_change))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_parent_moved))
-	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_RANGE, PROC_REF(set_range))
-	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_POWER, PROC_REF(set_power))
-	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_COLOR, PROC_REF(set_color))
-	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_ON, PROC_REF(on_toggle))
-	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_FLAGS, PROC_REF(on_light_flags_change))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_LIGHT_RANGE, PROC_REF(set_range))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_LIGHT_POWER, PROC_REF(set_power))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_LIGHT_COLOR, PROC_REF(set_color))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_LIGHT_ON, PROC_REF(on_toggle))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_LIGHT_FLAGS, PROC_REF(on_light_flags_change))
 	RegisterSignal(parent, COMSIG_ATOM_USED_IN_CRAFT, PROC_REF(on_parent_crafted))
 	var/atom/movable/movable_parent = parent
 	if(movable_parent.light_flags & LIGHT_ATTACHED)
@@ -388,6 +388,8 @@
 			cast_directional_light()
 		add_dynamic_lumi()
 	overlay_lighting_flags |= LIGHTING_ON
+	if(current_holder && current_holder != parent && current_holder != parent_attached_to)
+		RegisterSignal(current_holder, COMSIG_MOVABLE_MOVED, .proc/on_holder_moved)
 	get_new_turfs()
 
 
@@ -398,6 +400,8 @@
 	if(current_holder)
 		remove_dynamic_lumi()
 	overlay_lighting_flags &= ~LIGHTING_ON
+	if(current_holder)
+		UnregisterSignal(current_holder, COMSIG_MOVABLE_MOVED)
 	clean_old_turfs()
 
 

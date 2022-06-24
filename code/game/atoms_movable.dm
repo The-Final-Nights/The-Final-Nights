@@ -1,7 +1,8 @@
 /atom/movable
 	layer = OBJ_LAYER
 	glide_size = 8
-	appearance_flags = TILE_BOUND|PIXEL_SCALE
+	appearance_flags = TILE_BOUND|PIXEL_SCALE|LONG_GLIDE
+
 	var/last_move = null
 	var/last_move_time = 0
 	var/anchored = FALSE
@@ -32,11 +33,27 @@
 	var/pass_flags = NONE
 	/// If false makes [CanPass][/atom/proc/CanPass] call [CanPassThrough][/atom/movable/proc/CanPassThrough] on this type instead of using default behaviour
 	var/generic_canpass = TRUE
-	var/moving_diagonally = 0 //0: not doing a diagonal move. 1 and 2: doing the first/second step of the diagonal move
-	var/atom/movable/moving_from_pull		//attempt to resume grab after moving instead of before.
-	var/list/client_mobs_in_contents // This contains all the client mobs within this container
-	var/list/acted_explosions	//for explosion dodging
-	var/datum/forced_movement/force_moving = null	//handled soley by forced_movement.dm
+	///0: not doing a diagonal move. 1 and 2: doing the first/second step of the diagonal move
+	var/moving_diagonally = 0
+	///attempt to resume grab after moving instead of before.
+	var/atom/movable/moving_from_pull
+	///Holds information about any movement loops currently running/waiting to run on the movable. Lazy, will be null if nothing's going on
+	var/datum/movement_packet/move_packet
+	var/datum/forced_movement/force_moving = null //handled soley by forced_movement.dm
+	/**
+	 * an associative lazylist of relevant nested contents by "channel", the list is of the form: list(channel = list(important nested contents of that type))
+	 * each channel has a specific purpose and is meant to replace potentially expensive nested contents iteration.
+	 * do NOT add channels to this for little reason as it can add considerable memory usage.
+	 */
+	var/list/important_recursive_contents
+	///contains every client mob corresponding to every client eye in this container. lazily updated by SSparallax and is sparse:
+	///only the last container of a client eye has this list assuming no movement since SSparallax's last fire
+	var/list/client_mobs_in_contents
+
+	/// String representing the spatial grid groups we want to be held in.
+	/// acts as a key to the list of spatial grid contents types we exist in via SSspatial_grid.spatial_grid_categories.
+	/// We do it like this to prevent people trying to mutate them and to save memory on holding the lists ourselves
+	var/spatial_grid_key
 
 	/**
 	  * In case you have multiple types, you automatically use the most useful one.
@@ -399,9 +416,19 @@
 	SEND_SIGNAL(src, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, target)
 	glide_size = target
 
-	for(var/m in buckled_mobs)
-		var/mob/buckled_mob = m
+	for(var/mob/buckled_mob as anything in buckled_mobs)
 		buckled_mob.set_glide_size(target)
+
+/**
+ * meant for movement with zero side effects. only use for objects that are supposed to move "invisibly" (like camera mobs or ghosts)
+ * if you want something to move onto a tile with a beartrap or recycler or tripmine or mouse without that object knowing about it at all, use this
+ * most of the time you want forceMove()
+ */
+/atom/movable/proc/abstract_move(atom/new_loc)
+	var/atom/old_loc = loc
+	var/direction = get_dir(old_loc, new_loc)
+	loc = new_loc
+	Moved(old_loc, direction)
 
 ////////////////////////////////////////
 // Here's where we rewrite how byond handles movement except slightly different
@@ -415,8 +442,8 @@
 	if(!direct)
 		direct = get_dir(src, newloc)
 
-	if(set_dir_on_move)
-		setDir(direct)
+	if(set_dir_on_move && dir != direction)
+		setDir(direction)
 
 	if(!loc.Exit(src, newloc))
 		return
@@ -464,7 +491,7 @@
 		return FALSE
 	var/atom/oldloc = loc
 	//Early override for some cases like diagonal movement
-	if(glide_size_override)
+	if(glide_size_override && glide_size != glide_size_override)
 		set_glide_size(glide_size_override)
 
 	if(loc != newloc)
@@ -518,9 +545,6 @@
 			if(moving_diagonally == SECOND_DIAG_STEP)
 				if(!. && set_dir_on_move)
 					setDir(first_step_dir)
-				else if (!inertia_moving)
-					inertia_next_move = world.time + inertia_move_delay
-					newtonian_move(direct)
 			moving_diagonally = 0
 			return
 
@@ -553,12 +577,12 @@
 
 	//glide_size strangely enough can change mid movement animation and update correctly while the animation is playing
 	//This means that if you don't override it late like this, it will just be set back by the movement update that's called when you move turfs.
-	if(glide_size_override)
+	if(glide_size_override && glide_size != glide_size_override)
 		set_glide_size(glide_size_override)
 
 	last_move = direct
 
-	if(set_dir_on_move)
+	if(set_dir_on_move && dir != direct)
 		setDir(direct)
 	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc, direct, glide_size_override)) //movement failed due to buckled mob(s)
 		. = FALSE
@@ -583,15 +607,45 @@
  * * movement_dir is the direction the movement took place. Can be NONE if it was some sort of teleport.
  * * The forced flag indicates whether this was a forced move, which skips many checks of regular movement.
  * * The old_locs is an optional argument, in case the moved movable was present in multiple locations before the movement.
+ * * momentum_change represents whether this movement is due to a "new" force if TRUE or an already "existing" force if FALSE
  **/
-/atom/movable/proc/Moved(atom/old_loc, movement_dir, forced = FALSE, list/old_locs)
+/atom/movable/proc/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
-	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, OldLoc, Dir, Forced)
-	if (!inertia_moving)
-		inertia_next_move = world.time + inertia_move_delay
-		newtonian_move(Dir)
-	if (length(client_mobs_in_contents))
+
+	if (!inertia_moving && momentum_change)
+		newtonian_move(movement_dir)
+	// If we ain't moving diagonally right now, update our parallax
+	// We don't do this all the time because diag movements should trigger one call to this, not two
+	// Waste of cpu time, and it fucks the animate
+	if (!moving_diagonally && client_mobs_in_contents)
 		update_parallax_contents()
+
+	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs, momentum_change)
+
+	if(old_loc)
+		SEND_SIGNAL(old_loc, COMSIG_ATOM_ABSTRACT_EXITED, src, movement_dir)
+	if(loc)
+		SEND_SIGNAL(loc, COMSIG_ATOM_ABSTRACT_ENTERED, src, old_loc, old_locs)
+
+	var/turf/old_turf = get_turf(old_loc)
+	var/turf/new_turf = get_turf(src)
+
+	if (old_turf?.z != new_turf?.z)
+		on_changed_z_level(old_turf, new_turf)
+
+	if(HAS_SPATIAL_GRID_CONTENTS(src))
+		if(old_turf && new_turf && (old_turf.z != new_turf.z \
+			|| GET_SPATIAL_INDEX(old_turf.x) != GET_SPATIAL_INDEX(new_turf.x) \
+			|| GET_SPATIAL_INDEX(old_turf.y) != GET_SPATIAL_INDEX(new_turf.y)))
+
+			SSspatial_grid.exit_cell(src, old_turf)
+			SSspatial_grid.enter_cell(src, new_turf)
+
+		else if(old_turf && !new_turf)
+			SSspatial_grid.exit_cell(src, old_turf)
+
+		else if(new_turf && !old_turf)
+			SSspatial_grid.enter_cell(src, new_turf)
 
 	return TRUE
 
@@ -628,7 +682,148 @@
 		. = TRUE
 		if(QDELETED(A))
 			return
-	A.Bumped(src)
+	bumped_atom.Bumped(src)
+
+/atom/movable/Exited(atom/movable/gone, direction)
+	. = ..()
+
+	if(!LAZYLEN(gone.important_recursive_contents))
+		return
+	var/list/nested_locs = get_nested_locs(src) + src
+	for(var/channel in gone.important_recursive_contents)
+		for(var/atom/movable/location as anything in nested_locs)
+			var/list/recursive_contents = location.important_recursive_contents // blue hedgehog velocity
+			recursive_contents[channel] -= gone.important_recursive_contents[channel]
+			switch(channel)
+				if(RECURSIVE_CONTENTS_CLIENT_MOBS, RECURSIVE_CONTENTS_HEARING_SENSITIVE)
+					if(!length(recursive_contents[channel]))
+						// This relies on a nice property of the linked recursive and gridmap types
+						// They're defined in relation to each other, so they have the same value
+						SSspatial_grid.remove_grid_awareness(location, channel)
+			ASSOC_UNSETEMPTY(recursive_contents, channel)
+			UNSETEMPTY(location.important_recursive_contents)
+
+/atom/movable/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+
+	if(!LAZYLEN(arrived.important_recursive_contents))
+		return
+	var/list/nested_locs = get_nested_locs(src) + src
+	for(var/channel in arrived.important_recursive_contents)
+		for(var/atom/movable/location as anything in nested_locs)
+			LAZYINITLIST(location.important_recursive_contents)
+			var/list/recursive_contents = location.important_recursive_contents // blue hedgehog velocity
+			LAZYINITLIST(recursive_contents[channel])
+			switch(channel)
+				if(RECURSIVE_CONTENTS_CLIENT_MOBS, RECURSIVE_CONTENTS_HEARING_SENSITIVE)
+					if(!length(recursive_contents[channel]))
+						SSspatial_grid.add_grid_awareness(location, channel)
+			recursive_contents[channel] |= arrived.important_recursive_contents[channel]
+
+///allows this movable to hear and adds itself to the important_recursive_contents list of itself and every movable loc its in
+/atom/movable/proc/become_hearing_sensitive(trait_source = TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_HEARING_SENSITIVE, trait_source)
+	if(!HAS_TRAIT(src, TRAIT_HEARING_SENSITIVE))
+		return
+
+	for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+		LAZYINITLIST(location.important_recursive_contents)
+		var/list/recursive_contents = location.important_recursive_contents // blue hedgehog velocity
+		if(!length(recursive_contents[RECURSIVE_CONTENTS_HEARING_SENSITIVE]))
+			SSspatial_grid.add_grid_awareness(location, SPATIAL_GRID_CONTENTS_TYPE_HEARING)
+		recursive_contents[RECURSIVE_CONTENTS_HEARING_SENSITIVE] += list(src)
+
+	var/turf/our_turf = get_turf(src)
+	SSspatial_grid.add_grid_membership(src, our_turf, SPATIAL_GRID_CONTENTS_TYPE_HEARING)
+
+/**
+ * removes the hearing sensitivity channel from the important_recursive_contents list of this and all nested locs containing us if there are no more sources of the trait left
+ * since RECURSIVE_CONTENTS_HEARING_SENSITIVE is also a spatial grid content type, removes us from the spatial grid if the trait is removed
+ *
+ * * trait_source - trait source define or ALL, if ALL, force removes hearing sensitivity. if a trait source define, removes hearing sensitivity only if the trait is removed
+ */
+/atom/movable/proc/lose_hearing_sensitivity(trait_source = TRAIT_GENERIC)
+	if(!HAS_TRAIT(src, TRAIT_HEARING_SENSITIVE))
+		return
+	REMOVE_TRAIT(src, TRAIT_HEARING_SENSITIVE, trait_source)
+	if(HAS_TRAIT(src, TRAIT_HEARING_SENSITIVE))
+		return
+
+	var/turf/our_turf = get_turf(src)
+	/// We get our awareness updated by the important recursive contents stuff, here we remove our membership
+	SSspatial_grid.remove_grid_membership(src, our_turf, SPATIAL_GRID_CONTENTS_TYPE_HEARING)
+
+	for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+		var/list/recursive_contents = location.important_recursive_contents // blue hedgehog velocity
+		recursive_contents[RECURSIVE_CONTENTS_HEARING_SENSITIVE] -= src
+		if(!length(recursive_contents[RECURSIVE_CONTENTS_HEARING_SENSITIVE]))
+			SSspatial_grid.remove_grid_awareness(location, SPATIAL_GRID_CONTENTS_TYPE_HEARING)
+		ASSOC_UNSETEMPTY(recursive_contents, RECURSIVE_CONTENTS_HEARING_SENSITIVE)
+		UNSETEMPTY(location.important_recursive_contents)
+
+///allows this movable to know when it has "entered" another area no matter how many movable atoms its stuffed into, uses important_recursive_contents
+/atom/movable/proc/become_area_sensitive(trait_source = TRAIT_GENERIC)
+	if(!HAS_TRAIT(src, TRAIT_AREA_SENSITIVE))
+		for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+			LAZYADDASSOCLIST(location.important_recursive_contents, RECURSIVE_CONTENTS_AREA_SENSITIVE, src)
+	ADD_TRAIT(src, TRAIT_AREA_SENSITIVE, trait_source)
+
+///removes the area sensitive channel from the important_recursive_contents list of this and all nested locs containing us if there are no more source of the trait left
+/atom/movable/proc/lose_area_sensitivity(trait_source = TRAIT_GENERIC)
+	if(!HAS_TRAIT(src, TRAIT_AREA_SENSITIVE))
+		return
+	REMOVE_TRAIT(src, TRAIT_AREA_SENSITIVE, trait_source)
+	if(HAS_TRAIT(src, TRAIT_AREA_SENSITIVE))
+		return
+
+	for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+		LAZYREMOVEASSOC(location.important_recursive_contents, RECURSIVE_CONTENTS_AREA_SENSITIVE, src)
+
+///propogates ourselves through our nested contents, similar to other important_recursive_contents procs
+///main difference is that client contents need to possibly duplicate recursive contents for the clients mob AND its eye
+/mob/proc/enable_client_mobs_in_contents()
+	for(var/atom/movable/movable_loc as anything in get_nested_locs(src) + src)
+		LAZYINITLIST(movable_loc.important_recursive_contents)
+		var/list/recursive_contents = movable_loc.important_recursive_contents // blue hedgehog velocity
+		if(!length(recursive_contents[RECURSIVE_CONTENTS_CLIENT_MOBS]))
+			SSspatial_grid.add_grid_awareness(movable_loc, SPATIAL_GRID_CONTENTS_TYPE_CLIENTS)
+		LAZYINITLIST(recursive_contents[RECURSIVE_CONTENTS_CLIENT_MOBS])
+		recursive_contents[RECURSIVE_CONTENTS_CLIENT_MOBS] |= src
+
+	var/turf/our_turf = get_turf(src)
+	/// We got our awareness updated by the important recursive contents stuff, now we add our membership
+	SSspatial_grid.add_grid_membership(src, our_turf, SPATIAL_GRID_CONTENTS_TYPE_CLIENTS)
+
+///Clears the clients channel of this mob
+/mob/proc/clear_important_client_contents()
+	var/turf/our_turf = get_turf(src)
+	SSspatial_grid.remove_grid_membership(src, our_turf, SPATIAL_GRID_CONTENTS_TYPE_CLIENTS)
+
+	for(var/atom/movable/movable_loc as anything in get_nested_locs(src) + src)
+		var/list/recursive_contents = movable_loc.important_recursive_contents // blue hedgehog velocity
+		recursive_contents[RECURSIVE_CONTENTS_CLIENT_MOBS] -= src
+		if(!length(recursive_contents[RECURSIVE_CONTENTS_CLIENT_MOBS]))
+			SSspatial_grid.remove_grid_awareness(movable_loc, SPATIAL_GRID_CONTENTS_TYPE_CLIENTS)
+		ASSOC_UNSETEMPTY(recursive_contents, RECURSIVE_CONTENTS_CLIENT_MOBS)
+		UNSETEMPTY(movable_loc.important_recursive_contents)
+
+///called when this movable becomes the parent of a storage component that is currently being viewed by a player. uses important_recursive_contents
+/atom/movable/proc/become_active_storage(datum/component/storage/component_source)
+	if(!HAS_TRAIT(src, TRAIT_ACTIVE_STORAGE))
+		for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+			LAZYADDASSOCLIST(location.important_recursive_contents, RECURSIVE_CONTENTS_ACTIVE_STORAGE, src)
+	ADD_TRAIT(src, TRAIT_ACTIVE_STORAGE, component_source)
+
+///called when this movable's storage component is no longer viewed by any players, unsets important_recursive_contents
+/atom/movable/proc/lose_active_storage(datum/component/storage/component_source)
+	if(!HAS_TRAIT(src, TRAIT_ACTIVE_STORAGE))
+		return
+	REMOVE_TRAIT(src, TRAIT_ACTIVE_STORAGE, component_source)
+	if(HAS_TRAIT(src, TRAIT_ACTIVE_STORAGE))
+		return
+
+	for(var/atom/movable/location as anything in get_nested_locs(src) + src)
+		LAZYREMOVEASSOC(location.important_recursive_contents, RECURSIVE_CONTENTS_ACTIVE_STORAGE, src)
 
 ///Sets the anchored var and returns if it was sucessfully changed or not.
 /atom/movable/proc/set_anchored(anchorvalue)
@@ -660,11 +855,12 @@
 
 /atom/movable/proc/doMove(atom/destination)
 	. = FALSE
+	var/atom/oldloc = loc
+	var/is_multi_tile = bound_width > world.icon_size || bound_height > world.icon_size
 	if(destination)
 		///zMove already handles whether a pull from another movable should be broken.
 		if(pulledby && !currently_z_moving)
 			pulledby.stop_pulling()
-		var/atom/oldloc = loc
 		var/same_loc = oldloc == destination
 		var/area/old_area = get_area(oldloc)
 		var/area/destarea = get_area(destination)
@@ -673,26 +869,33 @@
 		moving_diagonally = 0
 
 		if(!same_loc)
-			if(oldloc)
-				oldloc.Exited(src, destination)
+			if(is_multi_tile && isturf(destination))
+				var/list/new_locs = block(
+					destination,
+					locate(
+						min(world.maxx, destination.x + ROUND_UP(bound_width / 32)),
+						min(world.maxy, destination.y + ROUND_UP(bound_height / 32)),
+						destination.z
+					)
+				)
 				if(old_area && old_area != destarea)
-					old_area.Exited(src, destination)
-			for(var/atom/movable/AM in oldloc)
-				AM.Uncrossed(src)
-			var/turf/oldturf = get_turf(oldloc)
-			var/turf/destturf = get_turf(destination)
-			var/old_z = (oldturf ? oldturf.z : null)
-			var/dest_z = (destturf ? destturf.z : null)
-			if (old_z != dest_z)
-				onTransitZ(old_z, dest_z)
-			destination.Entered(src, oldloc)
-			if(destarea && old_area != destarea)
-				destarea.Entered(src, oldloc)
+					old_area.Exited(src, movement_dir)
+				for(var/atom/left_loc as anything in locs - new_locs)
+					left_loc.Exited(src, movement_dir)
 
-			for(var/atom/movable/AM in destination)
-				if(AM == src)
-					continue
-				AM.Crossed(src, oldloc)
+				for(var/atom/entering_loc as anything in new_locs - locs)
+					entering_loc.Entered(src, movement_dir)
+
+				if(old_area && old_area != destarea)
+					destarea.Entered(src, movement_dir)
+			else
+				if(oldloc)
+					oldloc.Exited(src, movement_dir)
+					if(old_area && old_area != destarea)
+						old_area.Exited(src, movement_dir)
+				destination.Entered(src, oldloc)
+				if(destarea && old_area != destarea)
+					destarea.Entered(src, old_area)
 
 		Moved(oldloc, NONE, TRUE)
 		. = TRUE
@@ -700,10 +903,16 @@
 	//If no destination, move the atom into nullspace (don't do this unless you know what you're doing)
 	else
 		. = TRUE
-		if (loc)
-			var/atom/oldloc = loc
+
+		if (oldloc)
+			loc = null
 			var/area/old_area = get_area(oldloc)
-			oldloc.Exited(src, null)
+			if(is_multi_tile && isturf(oldloc))
+				for(var/atom/old_loc as anything in locs)
+					old_loc.Exited(src, NONE)
+			else
+				oldloc.Exited(src, NONE)
+
 			if(old_area)
 				old_area.Exited(src, null)
 		loc = null
@@ -718,15 +927,18 @@
  * Called whenever an object moves and by mobs when they attempt to move themselves through space
  * And when an object or action applies a force on src, see [newtonian_move][/atom/movable/proc/newtonian_move]
  *
- * Return 0 to have src start/keep drifting in a no-grav area and 1 to stop/not start drifting
+ * Return FALSE to have src start/keep drifting in a no-grav area and TRUE to stop/not start drifting
  *
  * Mobs should return 1 if they should be able to move of their own volition, see [/client/proc/Move]
  *
  * Arguments:
  * * movement_dir - 0 when stopping or any dir when trying to move
  */
-/atom/movable/proc/Process_Spacemove(movement_dir = 0)
-	if(has_gravity(src))
+/atom/movable/proc/Process_Spacemove(movement_dir = 0, continuous_move = FALSE)
+	if(has_gravity())
+		return TRUE
+
+	if(SEND_SIGNAL(src, COMSIG_MOVABLE_SPACEMOVE, movement_dir, continuous_move) & COMSIG_MOVABLE_STOP_SPACEMOVE)
 		return TRUE
 
 	if(pulledby && (pulledby.pulledby != src || moving_from_pull))
@@ -1179,38 +1391,6 @@
 		to_chat(usr, "<span class='notice'>Deadchat now control [src].</span>")
 		log_admin("[key_name(usr)] has added deadchat control to [src]")
 		message_admins("<span class='notice'>[key_name(usr)] has added deadchat control to [src]</span>")
-
-/obj/item/proc/do_pickup_animation(atom/target)
-	set waitfor = FALSE
-	if(!istype(loc, /turf))
-		return
-	var/image/I = image(icon = src, loc = loc, layer = layer + 0.1)
-	I.plane = GAME_PLANE
-	I.transform *= 0.75
-	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	var/turf/T = get_turf(src)
-	var/direction
-	var/to_x = target.base_pixel_x
-	var/to_y = target.base_pixel_y
-
-	if(!QDELETED(T) && !QDELETED(target))
-		direction = get_dir(T, target)
-	if(direction & NORTH)
-		to_y += 32
-	else if(direction & SOUTH)
-		to_y -= 32
-	if(direction & EAST)
-		to_x += 32
-	else if(direction & WEST)
-		to_x -= 32
-	if(!direction)
-		to_y += 16
-	flick_overlay(I, GLOB.clients, 6)
-	var/matrix/M = new
-	M.Turn(pick(-30, 30))
-	animate(I, alpha = 175, pixel_x = to_x, pixel_y = to_y, time = 3, transform = M, easing = CUBIC_EASING)
-	sleep(1)
-	animate(I, alpha = 0, transform = matrix(), time = 1)
 
 /**
 * A wrapper for setDir that should only be able to fail by living mobs.

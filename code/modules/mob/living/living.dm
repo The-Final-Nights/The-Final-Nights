@@ -791,7 +791,7 @@
 		var/mob/living/L = pulledby
 		L.set_pull_offsets(src, pulledby.grab_state)
 
-	if(active_storage && !(CanReach(active_storage.parent,view_only = TRUE)))
+	if(active_storage && !((active_storage.parent in important_recursive_contents?[RECURSIVE_CONTENTS_ACTIVE_STORAGE]) || CanReach(active_storage.parent,view_only = TRUE)))
 		active_storage.close(src)
 
 	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss()*200/maxHealth))
@@ -1228,14 +1228,8 @@
 /mob/living/proc/extinguish_mob()
 	if(!on_fire)
 		return
-	on_fire = FALSE
-	fire_stacks = 0 //If it is not called from set_fire_stacks()
-	for(var/obj/effect/dummy/lighting_obj/moblight/fire/F in src)
-		qdel(F)
-	clear_alert("fire")
-	SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "on_fire")
-	SEND_SIGNAL(src, COMSIG_LIVING_EXTINGUISHED, src)
-	update_fire()
+
+	remove_status_effect(/datum/status_effect/fire_handler/fire_stacks)
 
 /**
  * Adjust the amount of fire stacks on a mob

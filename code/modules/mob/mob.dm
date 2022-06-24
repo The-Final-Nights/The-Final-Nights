@@ -34,6 +34,7 @@
 		for(var/M in observers)
 			var/mob/dead/observe = M
 			observe.reset_perspective(null)
+
 	qdel(hud_used)
 	QDEL_LIST(client_colours)
 	ghostize()

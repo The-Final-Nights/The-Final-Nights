@@ -629,38 +629,36 @@ GLOBAL_LIST_EMPTY(teleportlocs)
  */
 /area/Entered(atom/movable/M)
 	set waitfor = FALSE
-	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, M)
-	SEND_SIGNAL(M, COMSIG_ENTER_AREA, src) //The atom that enters the area
-	if(!isliving(M))
+	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, arrived, old_area)
+
+	if(!arrived.important_recursive_contents?[RECURSIVE_CONTENTS_AREA_SENSITIVE])
+		return
+	for(var/atom/movable/recipient as anything in arrived.important_recursive_contents[RECURSIVE_CONTENTS_AREA_SENSITIVE])
+		SEND_SIGNAL(recipient, COMSIG_ENTER_AREA, src)
+
+	if(!isliving(arrived))
 		return
 
 	var/mob/living/L = M
 	if(!L.ckey)
 		return
 
-	// Ambience goes down here -- make sure to list each area separately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
-//	if(L.client && !L.client.ambience_playing && L.client.prefs.toggles & SOUND_SHIP_AMBIENCE)
-//		L.client.ambience_playing = 1
-	if(L)
-		if(L.client)
-			if(istype(get_area(loc), /area/vtm/northbeach))
-				if(!L.client.ambience_playing)
-					L.client.ambience_playing = 1
-					SEND_SOUND(L, sound('code/modules/wod13/sounds/beach.ogg', repeat = 1, wait = 0, volume = 35, channel = CHANNEL_BUZZ))
-			else if(L.client.ambience_playing)
-				L.client.ambience_playing = 0
-				SEND_SOUND(L, sound(null, channel = CHANNEL_BUZZ))
+	//Ship ambience just loops if turned on.
+	if(L.client?.prefs.toggles & SOUND_SHIP_AMBIENCE)
+		SEND_SOUND(L, sound('sound/ambience/shipambience.ogg', repeat = 1, wait = 0, volume = 35, channel = CHANNEL_BUZZ))
 
-	if(!(L.client && (L.client.prefs.toggles & SOUND_AMBIENCE)))
-		return //General ambience check is below the ship ambience so one can play without the other
+/**
+ * Called when an atom exits an area
+ *
+ * Sends signals COMSIG_AREA_EXITED and COMSIG_EXIT_AREA (to the atom)
+ */
+/area/Exited(atom/movable/gone, direction)
+	SEND_SIGNAL(src, COMSIG_AREA_EXITED, gone, direction)
 
-	if(prob(50))
-		var/sound = pick(ambientsounds)
-
-		if(!L.client.played)
-			SEND_SOUND(L, sound(sound, repeat = 0, wait = 0, volume = 25, channel = CHANNEL_AMBIENCE))
-			L.client.played = TRUE
-			addtimer(CALLBACK(L.client, TYPE_PROC_REF(/client, ResetAmbiencePlayed)), 600)
+	if(!gone.important_recursive_contents?[RECURSIVE_CONTENTS_AREA_SENSITIVE])
+		return
+	for(var/atom/movable/recipient as anything in gone.important_recursive_contents[RECURSIVE_CONTENTS_AREA_SENSITIVE])
+		SEND_SIGNAL(recipient, COMSIG_EXIT_AREA, src)
 
 ///Divides total beauty in the room by roomsize to allow us to get an average beauty per tile.
 /area/proc/update_beauty()
@@ -671,22 +669,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 		beauty = 0
 		return FALSE //Too big
 	beauty = totalbeauty / areasize
-
-
-/**
- * Called when an atom exits an area
- *
- * Sends signals COMSIG_AREA_EXITED and COMSIG_EXIT_AREA (to the atom)
- */
-/area/Exited(atom/movable/M)
-	SEND_SIGNAL(src, COMSIG_AREA_EXITED, M)
-	SEND_SIGNAL(M, COMSIG_EXIT_AREA, src) //The atom that exits the area
-
-/**
- * Reset the played var to false on the client
- */
-/client/proc/ResetAmbiencePlayed()
-	played = FALSE
 
 /**
  * Setup an area (with the given name)
