@@ -117,7 +117,7 @@
 	decrease = max(0, decrease)
 	if((is_wet() & TURF_WET_ICE)) //Ice melts into water!
 		for(var/obj/O in T.contents)
-			O.make_unfrozen()
+			O.unfreeze()
 		add_wet(TURF_WET_WATER, max_time_left())
 		dry(null, TURF_WET_ICE)
 	dry(null, ALL, FALSE, decrease)

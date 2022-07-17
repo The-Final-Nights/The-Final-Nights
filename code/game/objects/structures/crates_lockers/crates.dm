@@ -127,7 +127,7 @@
 	name = "trash cart"
 	icon_state = "trashcart"
 
-/obj/structure/closet/crate/trashcart/Moved()
+/obj/structure/closet/crate/trashcart/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
 	if(has_gravity())
 		playsound(src, 'sound/effects/roll.ogg', 100, TRUE)
