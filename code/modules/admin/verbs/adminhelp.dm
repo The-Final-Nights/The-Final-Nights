@@ -302,7 +302,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	to_chat(initiator,
 		type = MESSAGE_TYPE_ADMINPM,
 		html = span_adminnotice("PM to-<b>Admins</b>: [span_linkify(msg)]"),
-	)
+		confidential = TRUE)
+	SSblackbox.LogAhelp(id, "Ticket Opened", msg, null, initiator.ckey, urgent = urgent)
 
 /datum/admin_help/proc/Reopen()
 	if(state == AHELP_ACTIVE)
