@@ -60,6 +60,7 @@
 		INVOKE_ASYNC(src, PROC_REF(activate))
 	if(radio && (wire_type & WIRE_RADIO_RECEIVE))
 		INVOKE_ASYNC(src, PROC_REF(activate))
+	SEND_SIGNAL(src, COMSIG_ASSEMBLY_PULSED)
 	return TRUE
 
 //Called when this device attempts to act on another device, var/radio determines if it was sent via radio or direct
@@ -73,8 +74,8 @@
 		holder.process_activation(src, 0, 1)
 	return TRUE
 
-// What the device does when turned on
-/obj/item/assembly/proc/activate()
+/// What the device does when turned on
+/obj/item/assembly/proc/activate(mob/activator)
 	if(QDELETED(src) || !secured || (next_activate > world.time))
 		return FALSE
 	next_activate = world.time + 30
