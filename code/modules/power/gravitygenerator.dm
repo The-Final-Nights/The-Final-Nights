@@ -368,9 +368,11 @@ GLOBAL_LIST_EMPTY(gravity_generators)
 /obj/machinery/gravity_generator/main/proc/shake_everyone()
 	var/turf/T = get_turf(src)
 	var/sound/alert_sound = sound('sound/effects/alert.ogg')
-	for(var/i in GLOB.mob_list)
-		var/mob/M = i
-		if(M.z != z && !(SSmapping.level_trait(z, ZTRAITS_STATION) && SSmapping.level_trait(M.z, ZTRAITS_STATION)))
+	for(var/mob/mobs as anything in GLOB.mob_list)
+		var/turf/mob_turf = get_turf(mobs)
+		if(!istype(mob_turf))
+			continue
+		if(!is_valid_z_level(T, mob_turf))
 			continue
 		M.update_gravity(M.mob_has_gravity())
 		if(M.client)

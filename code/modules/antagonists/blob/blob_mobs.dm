@@ -124,13 +124,13 @@
 			notify_ghosts("A controllable spore has been created in \the [get_area(src)].", source = src, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Sentient Spore Created")
 		add_cell_sample()
 
-/mob/living/simple_animal/hostile/blob/blobspore/Life()
-	if(!is_zombie && isturf(src.loc))
+/mob/living/simple_animal/hostile/blob/blobspore/Life(delta_time = SSMOBS_DT, times_fired)
+	if(!is_zombie && isturf(loc))
 		for(var/mob/living/carbon/human/H in view(src,1)) //Only for corpse right next to/on same tile
 			if(!is_weak && H.stat == DEAD)
 				Zombify(H)
 				break
-	if(factory && z != factory.z)
+	if(!is_valid_z_level(get_turf(src), get_turf(factory)))
 		death()
 	return ..()
 
