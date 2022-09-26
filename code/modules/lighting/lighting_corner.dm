@@ -7,7 +7,6 @@
 
 	var/x = 0
 	var/y = 0
-	var/z = 0
 
 	var/turf/master_NE
 	var/turf/master_SE
@@ -36,7 +35,6 @@
 
 	src.x = x + 0.5
 	src.y = y + 0.5
-	src.z = z
 
 	// Alright. We're gonna take a set of coords, and from them do a loop clockwise
 	// To build out the turfs adjacent to us. This is pretty fast
@@ -192,38 +190,3 @@
 		SSlighting.corners_queue -= src
 
 	return ..()
-
-/// Debug proc to aid in understanding how corners work
-/datum/lighting_corner/proc/display(max_lum)
-	if(QDELETED(src))
-		return
-
-	var/turf/draw_to = master_SW || master_NE || master_SE || master_NW
-	var/mutable_appearance/display = mutable_appearance('icons/turf/debug.dmi', "corner_color", LIGHT_DEBUG_LAYER, draw_to, BALLOON_CHAT_PLANE)
-	if(x > draw_to.x)
-		display.pixel_w = 16
-	else
-		display.pixel_w = -16
-	if(y > draw_to.y)
-		display.pixel_z = 16
-	else
-		display.pixel_z = -16
-
-	display.color = rgb(cache_r * 255, cache_g * 255, cache_b * 255)
-
-	draw_to.add_overlay(display)
-
-/datum/lighting_corner/dummy/display()
-	return
-
-/// Makes all lighting corners visible, debug to aid in understanding
-/proc/display_corners()
-	var/list/corners = list()
-	var/max_lum = 0
-	for(var/datum/lighting_corner/corner) // I am so sorry
-		corners += corner
-		max_lum = max(max_lum, corner.largest_color_luminosity)
-
-
-	for(var/datum/lighting_corner/corner as anything in corners)
-		corner.display(max_lum)

@@ -14,4 +14,12 @@
 	};\
 
 
+#define SET_COST(category) \
+	do { \
+		var/cost = TICK_USAGE; \
+		_costs[category] += TICK_DELTA_TO_MS(cost - usage);\
+		_counting[category] += 1; \
+	} while(FALSE); \
+	usage = TICK_USAGE;
 
+#define SET_COST_LINE(...) SET_COST("[__LINE__]")
