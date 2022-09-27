@@ -47,14 +47,17 @@
 
 /obj/structure/ore_box/proc/dump_box_contents()
 	var/drop = drop_location()
+	var/turf/our_turf = get_turf(src)
 	for(var/obj/item/stack/ore/O in src)
 		if(QDELETED(O))
 			continue
 		if(QDELETED(src))
 			break
 		O.forceMove(drop)
+		SET_PLANE(O, PLANE_TO_TRUE(O.plane), our_turf)
 		if(TICK_CHECK)
 			stoplag()
+			our_turf = get_turf(src)
 			drop = drop_location()
 
 /obj/structure/ore_box/ui_interact(mob/user, datum/tgui/ui)
@@ -97,5 +100,6 @@
 	dump_box_contents()
 	qdel(src)
 
-/obj/structure/ore_box/onTransitZ()
-	return
+/// Special override for notify_contents = FALSE.
+/obj/structure/ore_box/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents = FALSE)
+	return ..()

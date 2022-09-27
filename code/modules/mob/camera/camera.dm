@@ -9,7 +9,7 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	see_in_dark = 7
 	invisibility = INVISIBILITY_ABSTRACT // No one can see us
-	sight = SEE_SELF
+	sight = SEE_SELF | SEE_BLACKNESS
 	move_on_shuttle = FALSE
 
 /mob/camera/forceMove(atom/destination)

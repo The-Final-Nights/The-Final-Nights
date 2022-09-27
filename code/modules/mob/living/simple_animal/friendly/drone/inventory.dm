@@ -59,8 +59,7 @@
 
 	I.screen_loc = null // will get moved if inventory is visible
 	I.forceMove(src)
-	I.layer = ABOVE_HUD_LAYER
-	I.plane = ABOVE_HUD_PLANE
+	SET_PLANE_EXPLICIT(I, ABOVE_HUD_PLANE, src)
 
 	switch(slot)
 		if(ITEM_SLOT_HEAD)

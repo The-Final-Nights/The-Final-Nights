@@ -96,11 +96,11 @@
 	if(!(machine_stat & (NOPOWER|BROKEN)))
 		var/state = "[base_icon_state]_[GLOB.news_network.wanted_issue.active ? "wanted" : "normal"]"
 		. += mutable_appearance(icon, state)
-		//. += emissive_appearance(icon, state, src, alpha = src.alpha)
+		. += emissive_appearance(icon, state, src, alpha = src.alpha)
 
 		if(GLOB.news_network.wanted_issue.active && alert)
 			. += mutable_appearance(icon, "[base_icon_state]_alert")
-		//	. += emissive_appearance(icon, "[base_icon_state]_alert", src, alpha = src.alpha,)
+			. += emissive_appearance(icon, "[base_icon_state]_alert", src, alpha = src.alpha,)
 
 	var/hp_percent = obj_integrity * 100 / max_integrity
 	switch(hp_percent)
@@ -108,13 +108,13 @@
 			return
 		if(50 to 75)
 			. += "crack1"
-			//. += emissive_blocker(icon, "crack1", src, alpha = src.alpha)
+			. += emissive_blocker(icon, "crack1", src, alpha = src.alpha)
 		if(25 to 50)
 			. += "crack2"
-			//. += emissive_blocker(icon, "crack2", src, alpha = src.alpha)
+			. += emissive_blocker(icon, "crack2", src, alpha = src.alpha)
 		else
 			. += "crack3"
-			//. += emissive_blocker(icon, "crack3", src, alpha = src.alpha)
+			. += emissive_blocker(icon, "crack3", src, alpha = src.alpha)
 
 /obj/machinery/newscaster/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()

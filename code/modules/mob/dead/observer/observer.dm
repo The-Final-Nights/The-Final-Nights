@@ -648,9 +648,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		ghost_others = client.prefs.ghost_others //A quick update just in case this setting was changed right before calling the proc
 
 	if (!ghostvision)
-		see_invisible = SEE_INVISIBLE_LIVING
+		set_invis_see(SEE_INVISIBLE_LIVING)
 	else
-		see_invisible = SEE_INVISIBLE_OBSERVER
+		set_invis_see(SEE_INVISIBLE_OBSERVER)
 
 
 	updateghostimages()
@@ -905,6 +905,18 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			client.screen = list()
 			hud_used.show_hud(hud_used.hud_version)
 
+
+/mob/dead/observer/proc/cleanup_observe()
+	if(isnull(observetarget))
+		return
+	var/mob/target = observetarget
+	observetarget = null
+	client?.perspective = initial(client.perspective)
+	set_sight(initial(sight))
+	if(target)
+		UnregisterSignal(target, COMSIG_MOVABLE_Z_CHANGED)
+		LAZYREMOVE(target.observers, src)
+
 /mob/dead/observer/verb/observe()
 	set name = "Observe"
 	set category = "Ghost"
@@ -929,13 +941,24 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/dead/observer/proc/do_observe(mob/mob_eye)
 	//Istype so we filter out points of interest that are not mobs
 	if(client && mob_eye && istype(mob_eye))
-		client.eye = mob_eye
+		client.set_eye(mob_eye)
+		client.perspective = EYE_PERSPECTIVE
+		if(is_secret_level(mob_eye.z) && !client?.holder)
+			set_sight(null) //we dont want ghosts to see through walls in secret areas
+		RegisterSignal(mob_eye, COMSIG_MOVABLE_Z_CHANGED, .proc/on_observing_z_changed)
 		if(mob_eye.hud_used)
 			client.screen = list()
 			LAZYINITLIST(mob_eye.observers)
 			mob_eye.observers |= src
 			mob_eye.hud_used.show_hud(mob_eye.hud_used.hud_version, src)
 			observetarget = mob_eye
+/mob/dead/observer/proc/on_observing_z_changed(datum/source, turf/old_turf, turf/new_turf)
+	SIGNAL_HANDLER
+
+	if(is_secret_level(new_turf.z) && !client?.holder)
+		set_sight(null) //we dont want ghosts to see through walls in secret areas
+	else
+		set_sight(initial(sight))
 
 /mob/dead/observer/verb/register_pai_candidate()
 	if(auspex_ghosted)

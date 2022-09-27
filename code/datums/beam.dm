@@ -46,6 +46,10 @@
 	visuals = new beam_type()
 	visuals.icon = icon
 	visuals.icon_state = icon_state
+	visuals.color = beam_color
+	visuals.layer = ABOVE_ALL_MOB_LAYER
+	visuals.vis_flags = VIS_INHERIT_PLANE
+	visuals.update_appearance()
 	Draw()
 	RegisterSignal(origin, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing))
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(redrawing))
@@ -137,6 +141,16 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	anchored = TRUE
 	var/datum/beam/owner
+
+/obj/effect/ebeam/Initialize(mapload, beam_owner)
+	owner = beam_owner
+	return ..()
+
+/obj/effect/ebeam/update_overlays()
+	. = ..()
+	var/mutable_appearance/emmisive = emissive_appearance(icon, icon_state, src)
+	emmisive.transform = transform
+	. += emmisive
 
 /obj/effect/ebeam/Destroy()
 	owner = null

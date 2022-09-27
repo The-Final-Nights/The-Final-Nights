@@ -111,7 +111,6 @@
 			lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
 		else
 			lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
-			sight_flags &= ~SEE_BLACKNESS
 	owner.update_sight()
 
 /obj/item/organ/eyes/night_vision/alien

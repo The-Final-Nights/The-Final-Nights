@@ -57,9 +57,8 @@
 	appearance_flags = RESET_TRANSFORM | TILE_BOUND
 	invisibility = INVISIBILITY_ABSTRACT
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-
-	layer = ATMOS_GROUP_LAYER
-	plane = ATMOS_GROUP_PLANE
+	vis_flags = VIS_INHERIT_PLANE
+	plane = HIGH_GAME_PLANE
 
 /obj/effect/overlay/light_visible
 	name = ""

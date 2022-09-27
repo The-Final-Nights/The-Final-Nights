@@ -131,6 +131,8 @@
 	static_inventory += using
 	robit.interfaceButton = using
 	if(robit.modularInterface)
+		// Just trust me
+		robit.modularInterface.vis_flags |= VIS_INHERIT_PLANE
 		using.vis_contents += robit.modularInterface
 	var/atom/movable/screen/robot/modPC/tabletbutton = using
 	tabletbutton.robot = robit
@@ -225,8 +227,7 @@
 				A.screen_loc = "CENTER[x]:16,SOUTH+[y]:7"
 			else
 				A.screen_loc = "CENTER+[x]:16,SOUTH+[y]:7"
-			A.layer = ABOVE_HUD_LAYER
-			A.plane = ABOVE_HUD_PLANE
+			SET_PLANE_IMPLICIT(A, ABOVE_HUD_PLANE)
 
 			x++
 			if(x == 4)

@@ -37,6 +37,12 @@
 	I.forceMove(src)
 	name = "[initial(name)] ([storedorgan.name])"
 
+/obj/item/autosurgeon/update_overlays()
+	. = ..()
+	if(stored_organ)
+		. += loaded_overlay
+		. += emissive_appearance(icon, loaded_overlay, src)
+
 /obj/item/autosurgeon/organ/attack_self(mob/user)//when the object it used...
 	if(!uses)
 		to_chat(user, "<span class='alert'>[src] has already been used. The tools are dull and won't reactivate.</span>")

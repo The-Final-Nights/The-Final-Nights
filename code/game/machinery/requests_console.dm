@@ -77,15 +77,21 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/requests_console, 30)
 	if(machine_stat & NOPOWER)
 		set_light(0)
 	else
-		set_light(1.4,0.7,"#34D352")//green light
-	if(open)
-		if(!hackState)
-			icon_state="req_comp_open"
-		else
-			icon_state="req_comp_rewired"
-	else if(machine_stat & NOPOWER)
-		if(icon_state != "req_comp_off")
-			icon_state = "req_comp_off"
+		screen_state = "[base_icon_state]0"
+
+	. += mutable_appearance(icon, screen_state)
+	. += emissive_appearance(icon, screen_state, src, alpha = src.alpha)
+
+/obj/machinery/requests_console/Initialize(mapload)
+	. = ..()
+
+	// Init by checking our area, stolen from APC code
+	area = get_area(loc)
+
+	// Naming and department sets
+	if(auto_name) // If autonaming, just pick department and name from the area code.
+		department = "[get_area_name(area, TRUE)]"
+		name = "\improper [department] requests console"
 	else
 		if(emergency || (newmessagepriority == REQ_EXTREME_MESSAGE_PRIORITY))
 			icon_state = "req_comp3"

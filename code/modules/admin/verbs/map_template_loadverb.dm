@@ -14,9 +14,18 @@
 		return
 
 	var/list/preview = list()
-	for(var/S in template.get_affected_turfs(T,centered = TRUE))
-		var/image/item = image('icons/turf/overlays.dmi',S,"greenOverlay")
-		item.plane = ABOVE_LIGHTING_PLANE
+	var/center
+	var/centeralert = tgui_alert(usr,"Center Template.","Template Centering",list("Yes","No"))
+	switch(centeralert)
+		if("Yes")
+			center = TRUE
+		if("No")
+			center = FALSE
+		else
+			return
+	for(var/turf/place_on as anything in template.get_affected_turfs(T,centered = center))
+		var/image/item = image('icons/turf/overlays.dmi', place_on,"greenOverlay")
+		SET_PLANE(item, ABOVE_LIGHTING_PLANE, place_on)
 		preview += item
 	images += preview
 	if(alert(src,"Confirm location.","Template Confirm","Yes","No") == "Yes")

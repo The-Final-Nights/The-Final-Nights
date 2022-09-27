@@ -58,6 +58,10 @@
 
 	///Proximity monitor associated with this atom
 	var/datum/proximity_monitor/proximity_monitor
+	/// Lazylist of all images (hopefully attached to us) to update when we change z levels
+	/// You will need to manage adding/removing from this yourself, but I'll do the updating for you
+	var/list/image/update_on_z
+
 	///Cooldown tick timer for buckle messages
 	var/buckle_message_cooldown = 0
 	///Last fingerprints to touch this atom
@@ -216,7 +220,12 @@
 	flags_1 |= INITIALIZED_1
 
 	if(loc)
-		SEND_SIGNAL(loc, COMSIG_ATOM_CREATED, src) /// Sends a signal that the new atom `src`, has been created at `loc`
+		SEND_SIGNAL(loc, COMSIG_ATOM_INITIALIZED_ON, src) /// Sends a signal that the new atom `src`, has been created at `loc`
+
+	SET_PLANE_IMPLICIT(src, plane)
+
+	if(greyscale_config && greyscale_colors)
+		update_greyscale()
 
 	//atom color stuff
 	if(color)

@@ -23,7 +23,7 @@
 	maxHealth = INFINITY
 	layer = GHOST_LAYER
 	healable = FALSE
-	sight = SEE_SELF
+	sight = SEE_SELF | SEE_BLACKNESS
 	throwforce = 0
 
 	see_in_dark = 8

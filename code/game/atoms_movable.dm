@@ -89,20 +89,48 @@
 	/// Whether this atom should have its dir automatically changed when it moves. Setting this to FALSE allows for things such as directional windows to retain dir on moving without snowflake code all of the place.
 	var/set_dir_on_move = TRUE
 
+/mutable_appearance/emissive_blocker
+
+/mutable_appearance/emissive_blocker/New()
+	. = ..()
+	// Need to do this here because it's overriden by the parent call
+	color = EM_BLOCK_COLOR
+	appearance_flags = EMISSIVE_APPEARANCE_FLAGS
 
 /atom/movable/Initialize(mapload)
 	. = ..()
 	switch(blocks_emissive)
 		if(EMISSIVE_BLOCK_GENERIC)
-			var/mutable_appearance/gen_emissive_blocker = mutable_appearance(icon, icon_state, EMISSIVE_BLOCKER_LAYER, EMISSIVE_BLOCKER_PLANE)
-			gen_emissive_blocker.dir = dir
-			gen_emissive_blocker.alpha = alpha
-			gen_emissive_blocker.appearance_flags |= appearance_flags
-			add_overlay(list(gen_emissive_blocker))
+			var/static/mutable_appearance/emissive_blocker/blocker = new()
+			blocker.icon = icon
+			blocker.icon_state = icon_state
+			blocker.dir = dir
+			blocker.appearance_flags |= appearance_flags
+			blocker.plane = GET_NEW_PLANE(EMISSIVE_PLANE, PLANE_TO_OFFSET(plane))
+			// Ok so this is really cursed, but I want to set with this blocker cheaply while
+			// Still allowing it to be removed from the overlays list later
+			// So I'm gonna flatten it, then insert the flattened overlay into overlays AND the managed overlays list, directly
+			// I'm sorry
+			var/mutable_appearance/flat = blocker.appearance
+			overlays += flat
+			if(managed_overlays)
+				if(islist(managed_overlays))
+					managed_overlays += flat
+				else
+					managed_overlays = list(managed_overlays, flat)
+			else
+				managed_overlays = flat
 		if(EMISSIVE_BLOCK_UNIQUE)
 			render_target = ref(src)
 			em_block = new(src, render_target)
-			add_overlay(list(em_block))
+			overlays += em_block
+			if(managed_overlays)
+				if(islist(managed_overlays))
+					managed_overlays += em_block
+				else
+					managed_overlays = list(managed_overlays, em_block)
+			else
+				managed_overlays = em_block
 	if(opacity)
 		AddElement(/datum/element/light_blocking)
 	switch(light_system)
@@ -150,7 +178,7 @@
 	if(!blocks_emissive)
 		return
 	else if (blocks_emissive == EMISSIVE_BLOCK_GENERIC)
-		var/mutable_appearance/gen_emissive_blocker = mutable_appearance(icon, icon_state, EMISSIVE_BLOCKER_LAYER, EMISSIVE_BLOCKER_PLANE)
+		var/mutable_appearance/gen_emissive_blocker = emissive_blocker(icon, icon_state, src, alpha = src.alpha, appearance_flags = src.appearance_flags)
 		gen_emissive_blocker.dir = dir
 		gen_emissive_blocker.alpha = alpha
 		gen_emissive_blocker.appearance_flags |= appearance_flags
@@ -635,7 +663,8 @@
 	var/turf/new_turf = get_turf(src)
 
 	if (old_turf?.z != new_turf?.z)
-		on_changed_z_level(old_turf, new_turf)
+		var/same_z_layer = (GET_TURF_PLANE_OFFSET(old_turf) == GET_TURF_PLANE_OFFSET(new_turf))
+		on_changed_z_level(old_turf, new_turf, same_z_layer)
 
 	if(HAS_SPATIAL_GRID_CONTENTS(src))
 		if(old_turf && new_turf && (old_turf.z != new_turf.z \
@@ -921,11 +950,37 @@
 				old_area.Exited(src, null)
 		loc = null
 
-/atom/movable/proc/onTransitZ(old_z,new_z)
-	SEND_SIGNAL(src, COMSIG_MOVABLE_Z_CHANGED, old_z, new_z)
-	for (var/item in src) // Notify contents of Z-transition. This can be overridden IF we know the items contents do not care.
-		var/atom/movable/AM = item
-		AM.onTransitZ(old_z,new_z)
+	Moved(oldloc, NONE, TRUE)
+
+/**
+ * Called when a movable changes z-levels.
+ *
+ * Arguments:
+ * * old_turf - The previous turf they were on before.
+ * * new_turf - The turf they have now entered.
+ * * same_z_layer - If their old and new z levels are on the same level of plane offsets or not
+ * * notify_contents - Whether or not to notify the movable's contents that their z-level has changed. NOTE, IF YOU SET THIS, YOU NEED TO MANUALLY SET PLANE OF THE CONTENTS LATER
+ */
+/atom/movable/proc/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents = TRUE)
+	SHOULD_CALL_PARENT(TRUE)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_Z_CHANGED, old_turf, new_turf, same_z_layer)
+
+	// If our turfs are on different z "layers", recalc our planes
+	if(!same_z_layer && !QDELETED(src))
+		SET_PLANE(src, PLANE_TO_TRUE(src.plane), new_turf)
+		// a TON of overlays use planes, and thus require offsets
+		// so we do this. sucks to suck
+		update_appearance()
+
+		// I so much wish this could be somewhere else. alas, no.
+		for(var/image/update in update_on_z)
+			SET_PLANE(update, PLANE_TO_TRUE(update.plane), new_turf)
+
+	if(!notify_contents)
+		return
+
+	for (var/atom/movable/content as anything in src) // Notify contents of Z-transition.
+		content.on_changed_z_level(old_turf, new_turf, same_z_layer)
 
 /**
  * Called whenever an object moves and by mobs when they attempt to move themselves through space

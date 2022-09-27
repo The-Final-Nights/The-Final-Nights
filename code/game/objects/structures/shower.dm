@@ -108,7 +108,23 @@
 		return
 	var/mutable_appearance/water_falling = mutable_appearance('icons/obj/watercloset.dmi', "water", ABOVE_MOB_LAYER)
 	water_falling.color = mix_color_from_reagents(reagents.reagent_list)
+	SET_PLANE_EXPLICIT(water_falling, GAME_PLANE_UPPER, src)
+	switch(dir)
+		if(NORTH)
+			water_falling.pixel_y += pixel_shift
+		if(SOUTH)
+			water_falling.pixel_y -= pixel_shift
+		if(EAST)
+			water_falling.pixel_x += pixel_shift
+		if(WEST)
+			water_falling.pixel_x -= pixel_shift
 	. += water_falling
+
+/obj/machinery/shower/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
+	if(same_z_layer)
+		return ..()
+	update_appearance()
+	return ..()
 
 /obj/machinery/shower/proc/handle_mist()
 	// If there is no mist, and the shower was turned on (on a non-freezing temp): make mist in 5 seconds

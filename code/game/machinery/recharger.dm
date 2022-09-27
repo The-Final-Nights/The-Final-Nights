@@ -180,13 +180,13 @@
 		return
 
 	if(!charging)
-		SSvis_overlays.add_vis_overlay(src, icon, "[base_icon_state]-empty", layer, plane, dir, alpha)
-		SSvis_overlays.add_vis_overlay(src, icon, "[base_icon_state]-empty", EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha)
+		. += mutable_appearance(icon, "[base_icon_state]-empty", alpha = src.alpha)
+		. += emissive_appearance(icon, "[base_icon_state]-empty", src, alpha = src.alpha)
 		return
 	if(using_power)
-		SSvis_overlays.add_vis_overlay(src, icon, "[base_icon_state]-charging", layer, plane, dir, alpha)
-		SSvis_overlays.add_vis_overlay(src, icon, "[base_icon_state]-charging", EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha)
+		. += mutable_appearance(icon, "[base_icon_state]-charging", alpha = src.alpha)
+		. += emissive_appearance(icon, "[base_icon_state]-charging", src, alpha = src.alpha)
 		return
 
-	SSvis_overlays.add_vis_overlay(src, icon, "[base_icon_state]-full", layer, plane, dir, alpha)
-	SSvis_overlays.add_vis_overlay(src, icon, "[base_icon_state]-full", EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha)
+	. += mutable_appearance(icon, "[base_icon_state]-full", alpha = src.alpha)
+	. += emissive_appearance(icon, "[base_icon_state]-full", src, alpha = src.alpha)

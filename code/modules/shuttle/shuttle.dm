@@ -140,10 +140,12 @@
 
 //Debug proc used to highlight bounding area
 /obj/docking_port/proc/highlight(_color = "#f00")
-	SetInvisibility(INVISIBILITY_NONE)
+	invisibility = 0
 	SET_PLANE_IMPLICIT(src, GHOST_PLANE)
-	var/list/coords = return_coords()
-	for(var/turf/T in block(coords[1], coords[2], z, coords[3], coords[4], z))
+	var/list/L = return_coords()
+	var/turf/T0 = locate(L[1],L[2],z)
+	var/turf/T1 = locate(L[3],L[4],z)
+	for(var/turf/T in block(T0,T1))
 		T.color = _color
 		LAZYINITLIST(T.atom_colours)
 		T.maptext = null

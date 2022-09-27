@@ -62,8 +62,8 @@
 	desc = "A wonderful yet fake friend."
 	see_in_dark = 0
 	lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
-	sight = NONE
-	mouse_opacity = MOUSE_OPACITY_OPAQUE
+	sight = SEE_BLACKNESS
+	mouse_opacity = MOUSE_OPACITY_ICON
 	see_invisible = SEE_INVISIBLE_LIVING
 	invisibility = INVISIBILITY_MAXIMUM
 	var/icon/human_image
@@ -174,12 +174,18 @@
 	//speech bubble
 	if(owner.client)
 		var/mutable_appearance/MA = mutable_appearance('icons/mob/talk.dmi', src, "default[say_test(message)]", FLY_LAYER)
+		SET_PLANE_EXPLICIT(MA, ABOVE_GAME_PLANE, src)
 		MA.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 		INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(flick_overlay), MA, list(owner.client), 30)
+		LAZYADD(update_on_z, MA)
+		addtimer(CALLBACK(src, PROC_REF(clear_saypopup), MA), 3.5 SECONDS)
 
 	for(var/mob/M in GLOB.dead_mob_list)
 		var/link = FOLLOW_LINK(M, owner)
 		to_chat(M, "[link] [dead_rendered]")
+
+/mob/camera/imaginary_friend/proc/clear_saypopup(image/say_popup)
+	LAZYREMOVE(update_on_z, say_popup)
 
 /mob/camera/imaginary_friend/Move(NewLoc, Dir = 0)
 	if(world.time < friend_move_delay)

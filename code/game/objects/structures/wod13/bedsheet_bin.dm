@@ -36,12 +36,21 @@ LINEN BINS
 		return
 	if(layer == initial(layer))
 		layer = ABOVE_MOB_LAYER
-		to_chat(user, "<span class='notice'>You cover yourself with [src].</span>")
+		SET_PLANE_IMPLICIT(src, GAME_PLANE_UPPER)
+		to_chat(user, span_notice("You cover yourself with [src]."))
 		pixel_x = 0
 		pixel_y = 0
 	else
 		layer = initial(layer)
-		to_chat(user, "<span class='notice'>You smooth [src] out beneath you.</span>")
+		SET_PLANE_IMPLICIT(src, initial(plane))
+		to_chat(user, span_notice("You smooth [src] out beneath you."))
+	if(user.body_position == LYING_DOWN)    //The player isn't laying down currently
+		dir = user.dir
+	else
+		if(user.dir & WEST)    //The player is rotated to the right, lay the sheet left!
+			dir = WEST
+		else    //The player is rotated to the left, lay the sheet right!
+			dir = EAST
 	add_fingerprint(user)
 	return
 

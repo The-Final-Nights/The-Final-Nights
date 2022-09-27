@@ -167,6 +167,7 @@ GLOBAL_LIST_EMPTY(gravity_generators)
 		if(count <= 3) // Their sprite is the top part of the generator
 			part.density = FALSE
 			part.layer = WALL_OBJ_LAYER
+			SET_PLANE(part, GAME_PLANE_UPPER, our_turf)
 		part.sprite_number = count
 		part.main_part = src
 		parts += part
@@ -407,6 +408,34 @@ GLOBAL_LIST_EMPTY(gravity_generators)
 	if(value != setting)
 		setting = value
 		shake_everyone()
+
+/obj/machinery/gravity_generator/main/proc/blackout()
+	charge_count = 0
+	breaker = FALSE
+	set_power()
+	disable()
+	investigate_log("was turned off by blackout event or a gravity anomaly detonation.", INVESTIGATE_GRAVITY)
+
+/obj/machinery/gravity_generator/main/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
+	. = ..()
+	disable()
+
+/obj/machinery/gravity_generator/main/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
+	. = ..()
+	if(charge_count != 0 && charging_state != POWER_UP)
+		enable()
+
+/obj/machinery/gravity_generator/main/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
+	. = ..()
+	if(same_z_layer)
+		return
+	for(var/obj/machinery/gravity_generator/part as anything in generator_parts)
+		SET_PLANE(part, PLANE_TO_TRUE(part.plane), new_turf)
+
+//prevents shuttles attempting to rotate this since it messes up sprites
+/obj/machinery/gravity_generator/main/shuttleRotate(rotation, params)
+	params = NONE
+	return ..()
 
 // Misc
 

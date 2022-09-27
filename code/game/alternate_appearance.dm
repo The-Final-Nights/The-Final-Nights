@@ -55,13 +55,15 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 	var/atom/target
 	var/image/theImage
 	var/add_ghost_version = FALSE
-	var/ghost_appearance
+	var/datum/atom_hud/alternate_appearance/basic/observers/ghost_appearance
+	uses_global_hud_category = FALSE
 
 /datum/atom_hud/alternate_appearance/basic/New(key, image/I, options = AA_TARGET_SEE_APPEARANCE)
 	..()
 	transfer_overlays = options & AA_MATCH_TARGET_OVERLAYS
 	theImage = I
 	target = I.loc
+	LAZYADD(target.update_on_z, image)
 	if(transfer_overlays)
 		I.copy_overlays(target)
 
@@ -77,6 +79,9 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 
 /datum/atom_hud/alternate_appearance/basic/Destroy()
 	. = ..()
+	LAZYREMOVE(target.update_on_z, image)
+	QDEL_NULL(image)
+	target = null
 	if(ghost_appearance)
 		QDEL_NULL(ghost_appearance)
 
@@ -87,7 +92,8 @@ GLOBAL_LIST_EMPTY(active_alternate_appearances)
 
 /datum/atom_hud/alternate_appearance/basic/remove_from_hud(atom/A)
 	. = ..()
-	A.hud_list -= appearance_key
+	LAZYREMOVE(A.hud_list, appearance_key)
+	A.set_hud_image_inactive(appearance_key)
 	if(. && !QDELETED(src))
 		qdel(src)
 
