@@ -101,9 +101,16 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
+	// Mentor PM
+	if(href_list["mentor_msg"])
+		cmd_mentor_pm(href_list["mentor_msg"], null)
+		return TRUE
+
 	switch(href_list["_src_"])
 		if("holder")
 			hsrc = holder
+		if("mentor")
+			hsrc = mentor_datum
 		if("usr")
 			hsrc = mob
 		if("prefs")
@@ -212,6 +219,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	tgui_panel = new(src)
 
 	GLOB.ahelp_tickets.ClientLogin(src)
+	GLOB.mhelp_tickets.ClientLogin(src)
 	GLOB.interviews.client_login(src)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
 	//Admin Authorisation
@@ -463,6 +471,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	GLOB.directory -= ckey
 	log_access("Logout: [key_name(src)]")
 	GLOB.ahelp_tickets.ClientLogout(src)
+	GLOB.mhelp_tickets.ClientLogout(src)
 	GLOB.interviews.client_logout(src)
 	SSserver_maint.UpdateHubStatus()
 	if(credits)

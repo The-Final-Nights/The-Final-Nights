@@ -22,5 +22,6 @@
 #define MESSAGE_TYPE_MODCHAT "modchat"
 #define MESSAGE_TYPE_EVENTCHAT "eventchat"
 #define MESSAGE_TYPE_ADMINLOG "adminlog"
+#define MESSAGE_TYPE_MENTORLOG "mentorlog"
 #define MESSAGE_TYPE_ATTACKLOG "attacklog"
 #define MESSAGE_TYPE_DEBUG "debug"
