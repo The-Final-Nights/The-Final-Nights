@@ -129,17 +129,18 @@
 /mob/living/attackby(obj/item/I, mob/living/user, params)
 	if(..())
 		return TRUE
-	user.changeNext_move(CLICK_CD_MELEE)
-	SEND_SIGNAL(user, COMSIG_MOB_ATTACKING_MELEE, /*target =*/src, /*item =*/I, /*params =*/params)
-	SEND_SIGNAL(src, COMSIG_MOB_ATTACKED_BY_MELEE, /*attacker =*/user, /*item =*/I, /*params =*/params)
-	return I.attack(src, user)
+	user.changeNext_move(attacking_item.attack_speed)
+	return attacking_item.attack(src, user, params)
 
 /mob/living/attackby_alt(obj/item/weapon, mob/living/user, params)
 	var/result = weapon.attack_alt(src, user, params)
 
 	// Normal attackby updates click cooldown, so we have to make up for it
-	if (result != ALT_ATTACK_CALL_NORMAL)
-		user.changeNext_move(CLICK_CD_MELEE)
+	if (result != SECONDARY_ATTACK_CALL_NORMAL)
+		if(weapon.secondary_attack_speed)
+			user.changeNext_move(weapon.secondary_attack_speed)
+		else
+			user.changeNext_move(weapon.attack_speed)
 
 	return result
 
@@ -198,42 +199,42 @@
 		return
 	if(item_flags & NOBLUDGEON)
 		return
-	user.changeNext_move(CLICK_CD_MELEE)
-	user.do_attack_animation(O)
-	O.attacked_by(src, user)
+	user.changeNext_move(attack_speed)
+	user.do_attack_animation(attacked_atom)
+	attacked_atom.attacked_by(src, user)
 
-/// Called from [/obj/item/proc/attack_obj] and [/obj/item/proc/attack] if the attack succeeds
-/atom/movable/proc/attacked_by()
-	return
+/// Called from [/obj/item/proc/attack_atom] and [/obj/item/proc/attack] if the attack succeeds
+/atom/proc/attacked_by(obj/item/attacking_item, mob/living/user)
+	if(!uses_integrity)
+		CRASH("attacked_by() was called on an object that doesnt use integrity!")
 
-/obj/attacked_by(obj/item/I, mob/living/user)
-	var/meleemod = 1
-	if(ishuman(user))
-		var/mob/living/carbon/human/M = user
-		meleemod = M.dna?.species.meleemod
-	if(I.force)
-		user.visible_message("<span class='danger'>[user] hits [src] with [I]!</span>", \
-					"<span class='danger'>You hit [src] with [I]!</span>", null, COMBAT_MESSAGE_RANGE)
-		//only witnesses close by and the victim see a hit message.
-		log_combat(user, src, "attacked", I)
-	take_damage((I.force*meleemod), I.damtype, MELEE, 1)
+	if(!attacking_item.force)
+		return
 
-/mob/living/attacked_by(obj/item/I, mob/living/user)
-	send_item_attack_message(I, user)
-	if(I.force)
-		var/meleemod = 1
-		if(ishuman(user))
-			var/mob/living/carbon/human/M = user
-			meleemod = M.dna?.species.meleemod
-		apply_damage((I.force*meleemod), I.damtype)
-		if(I.damtype == BRUTE)
-			if(prob(33))
-				I.add_mob_blood(src)
-				var/turf/location = get_turf(src)
-				add_splatter_floor(location)
-				if(get_dist(user, src) <= 1)	//people with TK won't get smeared with blood
-					user.add_mob_blood(src)
-		return TRUE //successful attack
+	var/damage = take_damage(attacking_item.force, attacking_item.damtype, MELEE, 1)
+	//only witnesses close by and the victim see a hit message.
+	user.visible_message(span_danger("[user] hits [src] with [attacking_item][damage ? "." : ", without leaving a mark!"]"), \
+		span_danger("You hit [src] with [attacking_item][damage ? "." : ", without leaving a mark!"]"), null, COMBAT_MESSAGE_RANGE)
+	log_combat(user, src, "attacked", attacking_item)
+
+/area/attacked_by(obj/item/attacking_item, mob/living/user)
+	CRASH("areas are NOT supposed to have attacked_by() called on them!")
+
+/mob/living/attacked_by(obj/item/attacking_item, mob/living/user)
+	send_item_attack_message(attacking_item, user)
+	if(!attacking_item.force)
+		return FALSE
+	var/damage = attacking_item.force
+	if(mob_biotypes & MOB_ROBOTIC)
+		damage *= attacking_item.demolition_mod
+	apply_damage(damage, attacking_item.damtype)
+	if(attacking_item.damtype == BRUTE && prob(33))
+		attacking_item.add_mob_blood(src)
+		var/turf/location = get_turf(src)
+		add_splatter_floor(location)
+		if(get_dist(user, src) <= 1) //people with TK won't get smeared with blood
+			user.add_mob_blood(src)
+	return TRUE //successful attack
 
 /mob/living/simple_animal/attacked_by(obj/item/I, mob/living/user)
 	if(!attack_threshold_check(I.force, I.damtype, MELEE, FALSE))
