@@ -32,9 +32,10 @@
 		update_parent(index)
 
 /datum/component/construction/proc/action(datum/source, obj/item/I, mob/living/user)
-	SIGNAL_HANDLER_DOES_SLEEP
-
-	return check_step(I, user)
+	SIGNAL_HANDLER
+	ASYNC //This proc will never actually sleep, it calls do_after with a time of 0.
+		. = check_step(I, user)
+	return .
 
 /datum/component/construction/proc/update_index(diff)
 	index += diff
