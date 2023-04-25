@@ -6,7 +6,7 @@ GLOBAL_LIST_EMPTY(clanes_list)	//>:3
 GLOBAL_LIST_EMPTY(morality_list) // TFN EDIT: morality system
 GLOBAL_LIST_EMPTY(auspices_list)
 
-/proc/make_datum_references_lists()
+/proc/init_sprite_accessories()
 	//hair
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/hair, GLOB.hairstyles_list, GLOB.hairstyles_male_list, GLOB.hairstyles_female_list)
 	//facial hair
@@ -39,7 +39,8 @@ GLOBAL_LIST_EMPTY(auspices_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/moth_markings, GLOB.moth_markings_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/tails/monkey, GLOB.tails_list_monkey)
 
-	//Species
+/// Inits GLOB.species_list. Not using GLOBAL_LIST_INIT b/c it depends on GLOB.string_lists
+/proc/init_species_list()
 	for(var/spath in subtypesof(/datum/species))
 		var/datum/species/S = new spath()
 		GLOB.species_list[S.id] = spath
@@ -62,22 +63,30 @@ GLOBAL_LIST_EMPTY(auspices_list)
 	sortList(GLOB.morality_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 	// TFN EDIT END
 
-	//Surgeries
+/// Inits GLOB.surgeries
+/proc/init_surgeries()
+	var/surgeries = list()
 	for(var/path in subtypesof(/datum/surgery))
-		GLOB.surgeries_list += new path()
-	sortList(GLOB.surgeries_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
+		surgeries += new path()
+	sort_list(surgeries, GLOBAL_PROC_REF(cmp_typepaths_asc))
+	return surgeries
 
-	// Hair Gradients - Initialise all /datum/sprite_accessory/gradient into an list indexed by gradient-style name
+/// Hair Gradients - Initialise all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name
+/proc/init_hair_gradients()
 	for(var/path in subtypesof(/datum/sprite_accessory/gradient))
 		var/datum/sprite_accessory/gradient/H = new path()
 		GLOB.gradients_list[H.name] = H
 
-	// Keybindings
+/// Legacy procs that really should be replaced with proper _INIT macros
+/proc/make_datum_reference_lists()
+	// I tried to eliminate this proc but I couldn't untangle their init-order interdependencies -Dominion/Cyberboss
+	init_sprite_accessories()
+	init_species_list()
+	init_hair_gradients()
 	init_keybindings()
-
-	GLOB.emote_list = init_emote_list()
-
-	init_crafting_recipes(GLOB.crafting_recipes)
+	GLOB.emote_list = init_emote_list() // WHY DOES THIS NEED TO GO HERE? IT JUST INITS DATUMS
+	init_crafting_recipes()
+	init_crafting_recipes_atoms()
 
 /// Inits the crafting recipe list, sorting crafting recipe requirements in the process.
 /proc/init_crafting_recipes(list/crafting_recipes)
