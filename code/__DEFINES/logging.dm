@@ -59,3 +59,106 @@
 // TFN EDIT ADDITION END
 #define LOGSRC_CLIENT "Client"
 #define LOGSRC_MOB "Mob"
+
+// Log header keys
+#define LOG_HEADER_CATEGORY "cat"
+#define LOG_HEADER_CATEGORY_LIST "cat-list"
+#define LOG_HEADER_INIT_TIMESTAMP "ts"
+#define LOG_HEADER_ROUND_ID "round-id"
+#define LOG_HEADER_SECRET "secret"
+
+// Log json keys
+#define LOG_JSON_CATEGORY "cat"
+#define LOG_JSON_ENTRIES "entries"
+#define LOG_JSON_LOGGING_START "log-start"
+
+// Category for invalid/missing categories
+#define LOG_CATEGORY_NOT_FOUND "invalid-category"
+
+// Misc categories
+#define LOG_CATEGORY_ATTACK "attack"
+#define LOG_CATEGORY_CONFIG "config"
+#define LOG_CATEGORY_DYNAMIC "dynamic"
+#define LOG_CATEGORY_ECONOMY "economy"
+#define LOG_CATEGORY_FILTER "filter"
+#define LOG_CATEGORY_MANIFEST "manifest"
+#define LOG_CATEGORY_MECHA "mecha"
+#define LOG_CATEGORY_PAPER "paper"
+#define LOG_CATEGORY_RUNTIME "runtime"
+#define LOG_CATEGORY_SHUTTLE "shuttle"
+#define LOG_CATEGORY_SILICON "silicon"
+#define LOG_CATEGORY_SILO "silo"
+#define LOG_CATEGORY_SIGNAL "signal"
+#define LOG_CATEGORY_SPEECH_INDICATOR "speech-indiciator"
+#define LOG_CATEGORY_SUSPICIOUS_LOGIN "supicious-login"
+#define LOG_CATEGORY_TARGET_ZONE_SWITCH "target-zone-switch"
+#define LOG_CATEGORY_TELECOMMS "telecomms"
+#define LOG_CATEGORY_TOOL "tool"
+#define LOG_CATEGORY_VIRUS "virus"
+
+// Admin categories
+#define LOG_CATEGORY_ADMIN "admin"
+#define LOG_CATEGORY_ADMIN_CIRCUIT "admin-circuit"
+#define LOG_CATEGORY_ADMIN_DSAY "admin-dsay"
+
+// Admin private categories
+#define LOG_CATEGORY_ADMIN_PRIVATE "adminprivate"
+#define LOG_CATEGORY_ADMIN_PRIVATE_ASAY "adminprivate-asay"
+
+// Debug categories
+#define LOG_CATEGORY_DEBUG "debug"
+#define LOG_CATEGORY_DEBUG_ASSET "debug-asset"
+#define LOG_CATEGORY_DEBUG_HREF "debug-href"
+#define LOG_CATEGORY_DEBUG_JOB "debug-job"
+#define LOG_CATEGORY_DEBUG_LUA "debug-lua"
+#define LOG_CATEGORY_DEBUG_MAPPING "debug-mapping"
+#define LOG_CATEGORY_DEBUG_MOBTAG "debug-mobtag"
+#define LOG_CATEGORY_DEBUG_QDEL "debug-qdel"
+#define LOG_CATEGORY_DEBUG_SQL "debug-sql"
+#define LOG_CATEGORY_DEBUG_TGUI "debug-tgui"
+
+// Compatibility categories, for when stuff is changed and you need existing functionality to work
+#define LOG_CATEGORY_COMPAT_GAME "game-compat"
+
+// Game categories
+#define LOG_CATEGORY_GAME "game"
+#define LOG_CATEGORY_GAME_ACCESS "game-access"
+#define LOG_CATEGORY_GAME_EMOTE "game-emote"
+#define LOG_CATEGORY_GAME_INTERNET_REQUEST "game-internet-request"
+#define LOG_CATEGORY_GAME_OOC "game-ooc"
+#define LOG_CATEGORY_GAME_PRAYER "game-prayer"
+#define LOG_CATEGORY_GAME_RADIO_EMOTE "game-radio-emote"
+#define LOG_CATEGORY_GAME_SAY "game-say"
+#define LOG_CATEGORY_GAME_TOPIC "game-topic"
+#define LOG_CATEGORY_GAME_TRAITOR "game-traitor"
+#define LOG_CATEGORY_GAME_VOTE "game-vote"
+#define LOG_CATEGORY_GAME_WHISPER "game-whisper"
+
+// Uplink categories
+#define LOG_CATEGORY_UPLINK "uplink"
+#define LOG_CATEGORY_UPLINK_CHANGELING "uplink-changeling"
+#define LOG_CATEGORY_UPLINK_HERETIC "uplink-heretic"
+#define LOG_CATEGORY_UPLINK_MALF "uplink-malf"
+#define LOG_CATEGORY_UPLINK_SPELL "uplink-spell"
+
+// PDA categories
+#define LOG_CATEGORY_PDA "pda"
+#define LOG_CATEGORY_PDA_CHAT "pda-chat"
+#define LOG_CATEGORY_PDA_COMMENT "pda-comment"
+
+#define SCHEMA_VERSION "schema-version"
+
+// Default log schema version
+#define LOG_CATEGORY_SCHEMA_VERSION_NOT_SET "0.0.1"
+
+//wrapper macros for easier grepping
+#define DIRECT_OUTPUT(A, B) A << B
+#define DIRECT_INPUT(A, B) A >> B
+#define SEND_IMAGE(target, image) DIRECT_OUTPUT(target, image)
+#define SEND_SOUND(target, sound) DIRECT_OUTPUT(target, sound)
+#define SEND_TEXT(target, text) DIRECT_OUTPUT(target, text)
+#define WRITE_FILE(file, text) DIRECT_OUTPUT(file, text)
+#define READ_FILE(file, text) DIRECT_INPUT(file, text)
+//This is an external call, "true" and "false" are how rust parses out booleans
+#define WRITE_LOG(log, text) rustg_log_write(log, text, "true")
+#define WRITE_LOG_NO_FORMAT(log, text) rustg_log_write(log, text, "false")
