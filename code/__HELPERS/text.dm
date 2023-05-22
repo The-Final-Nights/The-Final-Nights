@@ -1,11 +1,11 @@
 /*
  * Holds procs designed to help with filtering text
  * Contains groups:
- *			SQL sanitization/formating
- *			Text sanitization
- *			Text searches
- *			Text modification
- *			Misc
+ * SQL sanitization/formating
+ * Text sanitization
+ * Text searches
+ * Text modification
+ * Misc
  */
 
 
@@ -20,14 +20,15 @@
  * Text sanitization
  */
 
+
 ///returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
 /proc/sanitize_name(target, allow_numbers = FALSE, cap_after_symbols = TRUE)
-	if(CHAT_FILTER_CHECK(target))
-		alert(usr, "You cannot set a name that contains a word prohibited in IC chat!")
+	if(is_ic_filtered(target) || is_soft_ic_filtered(target))
+		tgui_alert(usr, "You cannot set a name that contains a word prohibited in IC chat!")
 		return ""
 	var/result = reject_bad_name(target, allow_numbers = allow_numbers, strict = TRUE, cap_after_symbols = cap_after_symbols)
 	if(!result)
-		alert(usr, "Invalid name.")
+		tgui_alert(usr, "Invalid name.")
 		return ""
 	return sanitize(result)
 
@@ -52,6 +53,7 @@
 /proc/adminscrub(text, limit = MAX_MESSAGE_LEN)
 	return html_encode(STRIP_HTML_SIMPLE(text, limit))
 
+
 /**
  * Perform a whitespace cleanup on the text, similar to what HTML renderers do
  *
@@ -74,6 +76,7 @@
 	t = replacetext(t, matchSpacing, " ")
 
 	return t
+
 
 /**
  * Returns the text if properly formatted, or null else.
@@ -102,6 +105,7 @@
 		return null
 	return text
 
+
 /**
  * Used to get a properly sanitized input. Returns null if cancel is pressed.
  *
@@ -117,7 +121,7 @@
 	if(isnull(user_input)) // User pressed cancel
 		return
 	if(no_trim)
-		return copytext_char(html_encode(user_input), 1, max_length)
+		return copytext(html_encode(user_input), 1, max_length)
 	else
 		return trim(html_encode(user_input), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
 
@@ -136,7 +140,7 @@
 	if(isnull(user_input)) // User pressed cancel
 		return
 	if(no_trim)
-		return copytext_char(html_encode(user_input), 1, max_length)
+		return copytext(html_encode(user_input), 1, max_length)
 	else
 		return trim(html_encode(user_input), max_length)
 
@@ -149,7 +153,7 @@
 /**
  * Filters out undesirable characters from names.
  *
- * * strict - return null immediately instead of filtering out
+ * * strict - return null immidiately instead of filtering out
  * * allow_numbers - allows numbers and common special characters - used for silicon/other weird things names
  * * cap_after_symbols - words like Bob's will be capitalized to Bob'S by default. False is good for titles.
  */
@@ -165,7 +169,7 @@
 	var/char = ""
 
 	// This is a sanity short circuit, if the users name is three times the maximum allowable length of name
-	// We bail out on trying to process the name at all, as it could be a bug or malicious input and we don't
+	// We bail out on trying to process the name at all, as it could be a bug or malicious input and we dont
 	// Want to iterate all of it.
 	if(t_len > 3 * MAX_NAME_LEN)
 		return
@@ -237,7 +241,12 @@
 	if(last_char_group == SPACES_DETECTED)
 		t_out = copytext_char(t_out, 1, -1) //removes the last character (in this case a space)
 
-	if(CHAT_FILTER_CHECK(t_out))
+	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai")) //prevents these common metagamey names
+		if(cmptext(t_out,bad_name))
+			return //(not case sensitive)
+
+	// Protects against names containing IC chat prohibited words.
+	if(is_ic_filtered(t_out) || is_soft_ic_filtered(t_out))
 		return
 
 	return t_out
@@ -246,6 +255,8 @@
 #undef SPACES_DETECTED
 #undef NUMBERS_DETECTED
 #undef LETTERS_DETECTED
+
+
 
 //html_encode helper proc that returns the smallest non null of two numbers
 //or 0 if they're both null (needed because of findtext returning 0 when a value is not present)
@@ -298,6 +309,24 @@
 			return copytext(text, 1, i + 1)
 	return ""
 
+//Returns a string with reserved characters and spaces after the first and last letters removed
+//Like trim(), but very slightly faster. worth it for niche usecases
+/proc/trim_reduced(text)
+	var/starting_coord = 1
+	var/text_len = length(text)
+	for (var/i in 1 to text_len)
+		if (text2ascii(text, i) > 32)
+			starting_coord = i
+			break
+
+	for (var/i = text_len, i >= starting_coord, i--)
+		if (text2ascii(text, i) > 32)
+			return copytext(text, starting_coord, i + 1)
+
+	if(starting_coord > 1)
+		return copytext(text, starting_coord)
+	return ""
+
 /**
  * Truncate a string to the given length
  *
@@ -312,12 +341,13 @@
 /proc/truncate(text, max_length)
 	if(length(text) > max_length)
 		return copytext(text, 1, max_length)
+	return text
 
 //Returns a string with reserved characters and spaces before the first word and after the last word removed.
 /proc/trim(text, max_length)
 	if(max_length)
 		text = copytext_char(text, 1, max_length)
-	return trim_left(trim_right(text))
+	return trim_reduced(text)
 
 //Returns a string with the first element of the string capitalized.
 /proc/capitalize(t)
@@ -380,15 +410,18 @@
 GLOBAL_LIST_INIT(zero_character_only, list("0"))
 GLOBAL_LIST_INIT(hex_characters, list("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"))
 GLOBAL_LIST_INIT(alphabet, list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"))
+GLOBAL_LIST_INIT(alphabet_upper, list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"))
+GLOBAL_LIST_INIT(numerals, list("1","2","3","4","5","6","7","8","9","0"))
+GLOBAL_LIST_INIT(space, list(" "))
 GLOBAL_LIST_INIT(binary, list("0","1"))
 /proc/random_string(length, list/characters)
 	. = ""
-	for(var/i=1, i<=length, i++)
+	for(var/i in 1 to length)
 		. += pick(characters)
 
 /proc/repeat_string(times, string="")
 	. = ""
-	for(var/i=1, i<=times, i++)
+	for(var/i in 1 to times)
 		. += string
 
 /proc/random_short_color()
@@ -490,7 +523,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		var/tlistlen = tlist.len
 		var/listlevel = -1
 		var/singlespace = -1 // if 0, double spaces are used before asterisks, if 1, single are
-		for(var/i = 1, i <= tlistlen, i++)
+		for(var/i in 1 to tlistlen)
 			var/line = tlist[i]
 			var/count_asterisk = length(replacetext(line, regex("\[^\\*\]+", "g"), ""))
 			if(count_asterisk % 2 == 1 && findtext(line, regex("^\\s*\\*", "g"))) // there is an extra asterisk in the beggining
@@ -523,7 +556,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		// end for
 
 		t = tlist[1]
-		for(var/i = 2, i <= tlistlen, i++)
+		for(var/i in 2 to tlistlen)
 			t += "\n" + tlist[i]
 
 		while(listlevel >= 0)
@@ -593,7 +626,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 
 	t = parsemarkdown_basic_step1(t)
 
-	t = replacetext(t, regex("%s(?:ign)?(?=\\s|$)", "igm"), user ? "<font face=\"[SIGNFONT]\"><i>[user.real_name]</i></font>" : "<span class=\"paper_field\"></span>")
+	t = replacetext(t, regex("%s(?:ign)?(?=\\s|$)", "igm"), user ? "<font face=\"[SIGNATURE_FONT]\"><i>[user.real_name]</i></font>" : "<span class=\"paper_field\"></span>")
 	t = replacetext(t, regex("%f(?:ield)?(?=\\s|$)", "igm"), "<span class=\"paper_field\"></span>")
 
 	t = parsemarkdown_basic_step2(t)
@@ -666,7 +699,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		var/punctbuffer = ""
 		var/cutoff = 0
 		lentext = length_char(buffer)
-		for(var/pos = 1, pos <= lentext, pos++)
+		for(var/pos in 1 to lentext)
 			let = copytext_char(buffer, -pos, -pos + 1)
 			if(!findtext(let, GLOB.is_punctuation)) //This won't handle things like Nyaaaa!~ but that's fine
 				break
@@ -722,7 +755,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 
 	var/list/finalized = list()
 	finalized = accepted.Copy() + oldentries.Copy() //we keep old and unreferenced phrases near the bottom for culling
-	listclearnulls(finalized)
+	list_clear_nulls(finalized)
 	if(length(finalized) > storemax)
 		finalized.Cut(storemax + 1)
 	fdel(log)
@@ -743,7 +776,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	if(!next_space)
 		next_space = leng - next_backslash
 
-	if(!next_space)	//trailing bs
+	if(!next_space) //trailing bs
 		return string
 
 	var/base = next_backslash == 1 ? "" : copytext(string, 1, next_backslash)
@@ -782,6 +815,9 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 			base = text("[]\herself", rest)
 		if("hers")
 			base = text("[]\hers", rest)
+		else // Someone fucked up, if you're not a macro just go home yeah?
+			// This does technically break parsing, but at least it's better then what it used to do
+			return base
 
 	. = base
 	if(rest)
@@ -819,6 +855,113 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		else
 			return "[number]\th"
 
+/**
+ * Takes a 1, 2 or 3 digit number and returns it in words. Don't call this directly, use convert_integer_to_words() instead.
+ *
+ * Arguments:
+ * * number - 1, 2 or 3 digit number to convert.
+ * * carried_string - Text to append after number is converted to words, e.g. "million", as in "eighty million".
+ * * capitalise - Whether the number it returns should be capitalised or not, e.g. "Eighty-Eight" vs. "eighty-eight".
+ */
+/proc/int_to_words(number, carried_string, capitalise = FALSE)
+	var/static/list/tens = list("", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety")
+	var/static/list/ones = list("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen")
+	number = round(number)
+
+	if(number > 999)
+		return
+
+	if(number <= 0)
+		return
+
+	var/list/string = list()
+
+	if(number >= 100)
+		string += int_to_words(number / 100, "hundred")
+		number = round(number % 100)
+		if(!number)
+			return string + carried_string
+		string += "and"
+
+	//if number is more than 19, divide it
+	if(number > 19)
+		var/temp_num = tens[number / 10]
+		if(number % 10)
+			temp_num += "-"
+			if(capitalise)
+				temp_num += capitalize(ones[number % 10])
+			else
+				temp_num += ones[number % 10]
+		string += temp_num
+	else
+		string += ones[number]
+
+	if(carried_string)
+		string += carried_string
+
+	return string
+
+/**
+ * Takes an integer up to 999,999,999 and returns it in words. Works with negative numbers and 0.
+ *
+ * Arguments:
+ * * number - Integer up to 999,999,999 to convert.
+ * * capitalise - Whether the number it returns should be capitalised or not, e.g. "Eighty Million" vs. "eighty million".
+ */
+/proc/convert_integer_to_words(number, capitalise = FALSE)
+
+	if(!isnum(number))
+		return
+
+	var/negative = FALSE
+	if(number < 0)
+		number = abs(number)
+		negative = TRUE
+
+	number = round(number)
+
+	if(number > 999999999)
+		return negative ? -number : number
+
+	if(number == 0)
+		return capitalise ? "Zero" : "zero"
+
+	//stores word representation of given number
+	var/list/output = list()
+
+	//handles millions
+	var/millions = int_to_words(((number / 1000000) % 1000), "million", capitalise)
+	if(length(millions))
+		output += millions
+
+	///handles thousands
+	var/thousands = int_to_words(((number / 1000) % 1000), "thousand", capitalise)
+	if(length(thousands))
+		output += thousands
+
+	if(length(output) && number % 1000 && (number % 1000) < 100) //e.g. One Thousand And Ninety-Nine, instead of One Thousand Ninety-Nine
+		output += "and"
+
+	//handles digits at ones, tens and hundreds places (if any)
+	output += int_to_words((number % 1000), "", capitalise)
+
+	for(var/index in 1 to length(output))
+		if(isnull(output[index]))
+			output -= output[index]
+			continue
+		if(capitalise)
+			output[index] = capitalize(output[index])
+
+	if(!length(output))
+		return negative ? -number : number
+
+	var/number_in_words
+	if(negative)
+		number_in_words += capitalise ? "Negative " : "negative "
+
+	number_in_words += output.Join(" ")
+
+	return number_in_words
 
 /proc/random_capital_letter()
 	return uppertext(pick(GLOB.alphabet))
@@ -875,7 +1018,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	try
 		return json_decode(data)
 	catch
-		return
+		return null
 
 /proc/num2loadingbar(percent as num, numSquares = 20, reverse = FALSE)
 	var/loadstring = ""
@@ -947,3 +1090,118 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 			continue
 		out += prob(replaceprob)? pick(replacementchars) : char
 	return out.Join("")
+
+///runs `piglatin_word()` proc on each word in a sentence. preserves caps and punctuation
+/proc/piglatin_sentence(text)
+	var/text_length = length(text)
+
+	//remove caps since words will be shuffled
+	text = lowertext(text)
+	//remove punctuation for same reasons as above
+	var/punctuation = ""
+	var/punctuation_hit_list = list("!","?",".","-")
+	for(var/letter_index in text_length to 1 step -1)
+		var/letter = text[letter_index]
+		if(!(letter in punctuation_hit_list))
+			break
+		punctuation += letter
+	punctuation = reverse_text(punctuation)
+	text = copytext(text, 1, ((text_length + 1) - length(punctuation)))
+
+	//now piglatin each word
+	var/list/old_words = splittext(text, " ")
+	var/list/new_words = list()
+	for(var/word in old_words)
+		new_words += piglatin_word(word)
+	text = new_words.Join(" ")
+	//replace caps and punc
+	text = capitalize(text)
+	text += punctuation
+	return text
+
+///takes "word", and returns it piglatinized.
+/proc/piglatin_word(word)
+	if(length(word) == 1)
+		return word
+	var/first_letter = copytext(word, 1, 2)
+	var/first_two_letters = copytext(word, 1, 3)
+	var/first_word_is_vowel = (first_letter in list("a", "e", "i", "o", "u"))
+	var/second_word_is_vowel = (copytext(word, 2, 3) in list("a", "e", "i", "o", "u"))
+	//If a word starts with a vowel add the word "way" at the end of the word.
+	if(first_word_is_vowel)
+		return word + pick("yay", "way", "hay") //in cultures around the world it's different, so heck lets have fun and make it random. should still be readable
+	//If a word starts with a consonant and a vowel, put the first letter of the word at the end of the word and add "ay."
+	if(!first_word_is_vowel && second_word_is_vowel)
+		word = copytext(word, 2)
+		word += first_letter
+		return word + "ay"
+	//If a word starts with two consonants move the two consonants to the end of the word and add "ay."
+	if(!first_word_is_vowel && !second_word_is_vowel)
+		word = copytext(word, 3)
+		word += first_two_letters
+		return word + "ay"
+	//otherwise unmutated
+	return word
+
+/**
+ * The procedure to check the text of the entered text on ntnrc_client.dm
+ *
+ * This procedure is designed to check the text you type into the chat client.
+ * It checks for invalid characters and the size of the entered text.
+ */
+/proc/reject_bad_chattext(text, max_length = 256)
+	var/non_whitespace = FALSE
+	var/char = ""
+	if (length(text) > max_length)
+		return
+	else
+		for(var/i = 1, i <= length(text), i += length(char))
+			char = text[i]
+			switch(text2ascii(char))
+				if(0 to 31)
+					return
+				if(32)
+					continue
+				else
+					non_whitespace = TRUE
+		if (non_whitespace)
+			return text
+
+///Properly format a string of text by using replacetext()
+/proc/format_text(text)
+	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
+
+///Returns a string based on the weight class define used as argument
+/proc/weight_class_to_text(w_class)
+	switch(w_class)
+		if(WEIGHT_CLASS_TINY)
+			. = "tiny"
+		if(WEIGHT_CLASS_SMALL)
+			. = "small"
+		if(WEIGHT_CLASS_NORMAL)
+			. = "normal-sized"
+		if(WEIGHT_CLASS_BULKY)
+			. = "bulky"
+		if(WEIGHT_CLASS_HUGE)
+			. = "huge"
+		if(WEIGHT_CLASS_GIGANTIC)
+			. = "gigantic"
+		else
+			. = ""
+
+/// Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts
+/proc/sanitize_css_class_name(name)
+	var/static/regex/regex = new(@"[^a-zA-Z0-9]","g")
+	return replacetext(name, regex, "")
+
+/// Converts a semver string into a list of numbers
+/proc/semver_to_list(semver_string)
+	var/static/regex/semver_regex = regex(@"(\d+)\.(\d+)\.(\d+)", "")
+	if(!semver_regex.Find(semver_string))
+		return null
+
+	return list(
+		text2num(semver_regex.group[1]),
+		text2num(semver_regex.group[2]),
+		text2num(semver_regex.group[3]),
+	)
