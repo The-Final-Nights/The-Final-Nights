@@ -104,3 +104,23 @@
 /datum/looping_sound/proc/on_stop()
 	if(end_sound)
 		play(end_sound, end_volume)
+<<<<<<< HEAD
+=======
+
+/// A simple proc to change who our parent is set to, also handling registering and unregistering the QDELETING signals on the parent.
+/datum/looping_sound/proc/set_parent(new_parent)
+	if(parent)
+		UnregisterSignal(parent, COMSIG_QDELETING)
+	parent = new_parent
+	if(parent)
+		RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(handle_parent_del))
+
+/// A simple proc that lets us know whether the sounds are currently active or not.
+/datum/looping_sound/proc/is_active()
+	return !!timer_id
+
+/// A simple proc to handle the deletion of the parent, so that it does not force it to hard-delete.
+/datum/looping_sound/proc/handle_parent_del(datum/source)
+	SIGNAL_HANDLER
+	set_parent(null)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

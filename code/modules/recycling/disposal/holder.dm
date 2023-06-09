@@ -66,18 +66,15 @@
 	setDir(DOWN)
 	move()
 
-// movement process, persists while holder is moving through pipes
-/obj/structure/disposalholder/proc/move()
-	set waitfor = FALSE
-	var/ticks = 1
-	var/obj/structure/disposalpipe/last
-	while(active)
-		var/obj/structure/disposalpipe/curr = loc
-		last = curr
-		set_glide_size(DELAY_TO_GLIDE_SIZE(ticks * world.tick_lag))
-		curr = curr.transfer(src)
-		if(!curr && active)
-			last.expel(src, get_turf(src), dir)
+/// Starts the movement process, persists while the holder is moving through pipes
+/obj/structure/disposalholder/proc/start_moving()
+	var/delay = world.tick_lag
+	var/datum/move_loop/our_loop = SSmove_manager.move_disposals(src, delay = delay, timeout = delay * count)
+	if(our_loop)
+		RegisterSignal(our_loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
+		RegisterSignal(our_loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(try_expel))
+		RegisterSignal(our_loop, COMSIG_QDELETING, PROC_REF(movement_stop))
+		current_pipe = loc
 
 		ticks = stoplag()
 		if(!(count--))

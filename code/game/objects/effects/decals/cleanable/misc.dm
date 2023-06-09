@@ -350,6 +350,7 @@
 
 /turf/open/floor/Exited(atom/movable/Obj, atom/newloc)
 	. = ..()
+<<<<<<< HEAD
 	/*
 	if(GLOB.winter)
 		if(istype(get_area(src), /area/vtm))
@@ -378,3 +379,148 @@
 						var/obj/effect/decal/cleanable/car_trail/trail = new(src)
 						trail.dir = Obj.dir
 	*/
+=======
+	if(vname == NAMEOF(src, bite_sound))
+		update_ant_damage()
+
+/obj/effect/decal/cleanable/ants/handle_merge_decal(obj/effect/decal/cleanable/merger)
+	. = ..()
+	var/obj/effect/decal/cleanable/ants/ants = merger
+	ants.update_ant_damage()
+
+/obj/effect/decal/cleanable/ants/proc/update_ant_damage(ant_min_damage, ant_max_damage)
+	if(!ant_max_damage)
+		ant_max_damage = min(10, round((reagents.get_reagent_amount(/datum/reagent/ants) * 0.1),0.1)) // 100u ants = 10 max_damage
+	if(!ant_min_damage)
+		ant_min_damage = 0.1
+	var/ant_flags = (CALTROP_NOCRAWL | CALTROP_NOSTUN) /// Small amounts of ants won't be able to bite through shoes.
+	if(ant_max_damage > 1)
+		ant_flags = (CALTROP_NOCRAWL | CALTROP_NOSTUN | CALTROP_BYPASS_SHOES)
+
+	var/datum/component/caltrop/caltrop_comp = GetComponent(/datum/component/caltrop)
+	if(caltrop_comp)
+		caltrop_comp.min_damage = ant_min_damage
+		caltrop_comp.max_damage = ant_max_damage
+		caltrop_comp.flags = ant_flags
+		caltrop_comp.soundfile = bite_sound
+	else
+		AddComponent(/datum/component/caltrop, min_damage = ant_min_damage, max_damage = ant_max_damage, flags = ant_flags, soundfile = bite_sound)
+
+	update_appearance(UPDATE_ICON)
+
+/obj/effect/decal/cleanable/ants/update_icon_state()
+	if(istype(src, /obj/effect/decal/cleanable/ants/fire)) //i fucking hate this but you're forced to call parent in update_icon_state()
+		return ..()
+	if(!(flags_1 & INITIALIZED_1))
+		return ..()
+
+	var/datum/component/caltrop/caltrop_comp = GetComponent(/datum/component/caltrop)
+	if(!caltrop_comp)
+		return ..()
+
+	switch(caltrop_comp.max_damage)
+		if(0 to 1)
+			icon_state = initial(icon_state)
+		if(1.1 to 4)
+			icon_state = "[initial(icon_state)]_2"
+		if(4.1 to 7)
+			icon_state = "[initial(icon_state)]_3"
+		if(7.1 to INFINITY)
+			icon_state = "[initial(icon_state)]_4"
+	return ..()
+
+/obj/effect/decal/cleanable/ants/update_overlays()
+	. = ..()
+	. += emissive_appearance(icon, "[icon_state]_light", src, alpha = src.alpha)
+
+/obj/effect/decal/cleanable/ants/fire_act(exposed_temperature, exposed_volume)
+	var/obj/effect/decal/cleanable/ants/fire/fire_ants = new(loc)
+	fire_ants.reagents.clear_reagents()
+	reagents.trans_to(fire_ants, fire_ants.reagents.maximum_volume)
+	qdel(src)
+
+/obj/effect/decal/cleanable/ants/fire
+	name = "space fire ants"
+	desc = "A small colony no longer. We are the fire nation."
+	icon_state = "fire_ants"
+	mergeable_decal = FALSE
+
+/obj/effect/decal/cleanable/ants/fire/update_ant_damage(ant_min_damage, ant_max_damage)
+	return ..(15, 25)
+
+/obj/effect/decal/cleanable/ants/fire/fire_act(exposed_temperature, exposed_volume)
+	return
+
+/obj/effect/decal/cleanable/fuel_pool
+	name = "pool of fuel"
+	desc = "A pool of flammable fuel. Its probably wise to clean this off before something ignites it..."
+	icon_state = "fuel_pool"
+	layer = LOW_OBJ_LAYER
+	beauty = -50
+	clean_type = CLEAN_TYPE_BLOOD
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
+	/// Maximum amount of hotspots this pool can create before deleting itself
+	var/burn_amount = 3
+	/// Is this fuel pool currently burning?
+	var/burning = FALSE
+	/// Type of hotspot fuel pool spawns upon being ignited
+	var/hotspot_type = /obj/effect/hotspot
+
+/obj/effect/decal/cleanable/fuel_pool/Initialize(mapload, burn_stacks)
+	. = ..()
+	for(var/obj/effect/decal/cleanable/fuel_pool/pool in get_turf(src)) //Can't use locate because we also belong to that turf
+		if(pool == src)
+			continue
+		pool.burn_amount =  max(min(pool.burn_amount + burn_stacks, 10), 1)
+		return INITIALIZE_HINT_QDEL
+
+	if(burn_stacks)
+		burn_amount = max(min(burn_stacks, 10), 1)
+
+/obj/effect/decal/cleanable/fuel_pool/fire_act(exposed_temperature, exposed_volume)
+	. = ..()
+	ignite()
+
+/**
+ * Ignites the fuel pool. This should be the only way to ignite fuel pools.
+ */
+/obj/effect/decal/cleanable/fuel_pool/proc/ignite()
+	if(burning)
+		return
+	burning = TRUE
+	burn_process()
+
+/**
+ * Spends 1 burn_amount and spawns a hotspot. If burn_amount is equal to 0, deletes the fuel pool.
+ * Else, queues another call of this proc upon hotspot getting deleted and ignites other fuel pools around itself after 0.5 seconds.
+ * THIS SHOULD NOT BE CALLED DIRECTLY.
+ */
+/obj/effect/decal/cleanable/fuel_pool/proc/burn_process()
+	SIGNAL_HANDLER
+
+	burn_amount -= 1
+	var/obj/effect/hotspot/hotspot = new hotspot_type(get_turf(src))
+	addtimer(CALLBACK(src, PROC_REF(ignite_others)), 0.5 SECONDS)
+
+	if(!burn_amount)
+		qdel(src)
+		return
+
+	RegisterSignal(hotspot, COMSIG_QDELETING, PROC_REF(burn_process))
+
+/**
+ * Ignites other oil pools around itself.
+ */
+/obj/effect/decal/cleanable/fuel_pool/proc/ignite_others()
+	for(var/obj/effect/decal/cleanable/fuel_pool/oil in range(1, get_turf(src)))
+		oil.ignite()
+
+/obj/effect/decal/cleanable/fuel_pool/bullet_act(obj/projectile/hit_proj)
+	. = ..()
+	ignite()
+
+/obj/effect/decal/cleanable/fuel_pool/attackby(obj/item/item, mob/user, params)
+	if(item.ignition_effect(src, user))
+		ignite()
+	return ..()
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

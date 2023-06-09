@@ -24,7 +24,165 @@
 
 /datum/antagonist/space_dragon/on_gain()
 	forge_objectives()
+<<<<<<< HEAD
 	. = ..()
+=======
+	rift_ability = new()
+	owner.special_role = ROLE_SPACE_DRAGON
+	owner.set_assigned_role(SSjob.GetJobType(/datum/job/space_dragon))
+	return ..()
+
+/datum/antagonist/space_dragon/on_removal()
+	owner.special_role = null
+	owner.set_assigned_role(SSjob.GetJobType(/datum/job/unassigned))
+	return ..()
+
+/datum/antagonist/space_dragon/apply_innate_effects(mob/living/mob_override)
+	var/mob/living/antag = mob_override || owner.current
+	RegisterSignal(antag, COMSIG_LIVING_LIFE, PROC_REF(rift_checks))
+	RegisterSignal(antag, COMSIG_LIVING_DEATH, PROC_REF(destroy_rifts))
+	antag.faction |= FACTION_CARP
+	// Give the ability over if we have one
+	rift_ability?.Grant(antag)
+	wavespeak = antag.AddComponent( \
+		/datum/component/mind_linker, \
+		network_name = "Wavespeak", \
+		chat_color = "#635BAF", \
+		signals_which_destroy_us = list(COMSIG_LIVING_DEATH), \
+		speech_action_icon = 'icons/mob/actions/actions_space_dragon.dmi', \
+		speech_action_icon_state = "wavespeak", \
+	)
+	RegisterSignal(wavespeak, COMSIG_QDELETING, PROC_REF(clear_wavespeak))
+
+/datum/antagonist/space_dragon/remove_innate_effects(mob/living/mob_override)
+	var/mob/living/antag = mob_override || owner.current
+	UnregisterSignal(antag, COMSIG_LIVING_LIFE)
+	UnregisterSignal(antag, COMSIG_LIVING_DEATH)
+	antag.faction -= FACTION_CARP
+	rift_ability?.Remove(antag)
+	QDEL_NULL(wavespeak)
+
+/datum/antagonist/space_dragon/Destroy()
+	rift_list = null
+	carp = null
+	QDEL_NULL(rift_ability)
+	QDEL_NULL(wavespeak)
+	chosen_rift_areas.Cut()
+	return ..()
+
+/datum/antagonist/space_dragon/get_preview_icon()
+	var/icon/icon = icon('icons/mob/nonhuman-player/spacedragon.dmi', "spacedragon")
+
+	icon.Blend(COLOR_STRONG_VIOLET, ICON_MULTIPLY)
+	icon.Blend(icon('icons/mob/nonhuman-player/spacedragon.dmi', "overlay_base"), ICON_OVERLAY)
+
+	icon.Crop(10, 9, 54, 53)
+	icon.Scale(ANTAGONIST_PREVIEW_ICON_SIZE, ANTAGONIST_PREVIEW_ICON_SIZE)
+
+	return icon
+
+/datum/antagonist/space_dragon/proc/clear_wavespeak()
+	SIGNAL_HANDLER
+	wavespeak = null
+
+/**
+ * Checks to see if we need to do anything with the current state of the dragon's rifts.
+ *
+ * A simple update check which sees if we need to do anything based on the current state of the dragon's rifts.
+ *
+ */
+/datum/antagonist/space_dragon/proc/rift_checks()
+	if((rifts_charged == 3 || (SSshuttle.emergency.mode == SHUTTLE_DOCKED && rifts_charged > 0)) && !objective_complete)
+		victory()
+		return
+	if(riftTimer == -1)
+		return
+	riftTimer = min(riftTimer + 1, maxRiftTimer + 1)
+	if(riftTimer == (maxRiftTimer - 60))
+		to_chat(owner.current, span_boldwarning("You have a minute left to summon the rift! Get to it!"))
+		return
+	if(riftTimer >= maxRiftTimer)
+		to_chat(owner.current, span_boldwarning("You've failed to summon the rift in a timely manner! You're being pulled back from whence you came!"))
+		destroy_rifts()
+		SEND_SOUND(owner.current, sound('sound/magic/demon_dies.ogg'))
+		owner.current.death(/* gibbed = */ TRUE)
+		QDEL_NULL(owner.current)
+
+/**
+ * Destroys all of Space Dragon's current rifts.
+ *
+ * QDeletes all the current rifts after removing their references to other objects.
+ * Currently, the only reference they have is to the Dragon which created them, so we clear that before deleting them.
+ * Currently used when Space Dragon dies or one of his rifts is destroyed.
+ */
+/datum/antagonist/space_dragon/proc/destroy_rifts()
+	if(objective_complete)
+		return
+	rifts_charged = 0
+	owner.current.add_movespeed_modifier(/datum/movespeed_modifier/dragon_depression)
+	riftTimer = -1
+	SEND_SOUND(owner.current, sound('sound/vehicles/rocketlaunch.ogg'))
+	for(var/obj/structure/carp_rift/rift as anything in rift_list)
+		rift.dragon = null
+		rift_list -= rift
+		if(!QDELETED(rift))
+			QDEL_NULL(rift)
+
+/**
+ * Sets up Space Dragon's victory for completing the objectives.
+ *
+ * Triggers when Space Dragon completes his objective.
+ * Calls the shuttle with a coefficient of 3, making it impossible to recall.
+ * Sets all of his rifts to allow for infinite sentient carp spawns
+ * Also plays appropiate sounds and CENTCOM messages.
+ */
+/datum/antagonist/space_dragon/proc/victory()
+	objective_complete = TRUE
+	permanant_empower()
+	var/datum/objective/summon_carp/main_objective = locate() in objectives
+	main_objective?.completed = TRUE
+	priority_announce("A large amount of lifeforms have been detected approaching [station_name()] at extreme speeds. \
+		Remaining crew are advised to evacuate as soon as possible.", "Central Command Wildlife Observations", has_important_message = TRUE)
+	sound_to_playing_players('sound/creatures/space_dragon_roar.ogg', volume = 75)
+	for(var/obj/structure/carp_rift/rift as anything in rift_list)
+		rift.carp_stored = 999999
+		rift.time_charged = rift.max_charge
+
+/**
+ * Gives Space Dragon their the rift speed buff permanantly and fully heals the user.
+ *
+ * Gives Space Dragon the enraged speed buff from charging rifts permanantly.
+ * Only happens in circumstances where Space Dragon completes their objective.
+ * Also gives them a full heal.
+ */
+/datum/antagonist/space_dragon/proc/permanant_empower()
+	owner.current.fully_heal()
+	owner.current.add_filter("anger_glow", 3, list("type" = "outline", "color" = "#ff330030", "size" = 5))
+	owner.current.add_movespeed_modifier(/datum/movespeed_modifier/dragon_rage)
+
+/**
+ * Handles Space Dragon's temporary empowerment after boosting a rift.
+ *
+ * Empowers and depowers Space Dragon after a successful rift charge.
+ * Empowered, Space Dragon regains all his health and becomes temporarily faster for 30 seconds, along with being tinted red.
+ */
+/datum/antagonist/space_dragon/proc/rift_empower()
+	owner.current.fully_heal()
+	owner.current.add_filter("anger_glow", 3, list("type" = "outline", "color" = "#ff330030", "size" = 5))
+	owner.current.add_movespeed_modifier(/datum/movespeed_modifier/dragon_rage)
+	addtimer(CALLBACK(src, PROC_REF(rift_depower)), 30 SECONDS)
+
+/**
+ * Removes Space Dragon's rift speed buff.
+ *
+ * Removes Space Dragon's speed buff from charging a rift.  This is only called
+ * in rift_empower, which uses a timer to call this after 30 seconds.  Also
+ * removes the red glow from Space Dragon which is synonymous with the speed buff.
+ */
+/datum/antagonist/space_dragon/proc/rift_depower()
+	owner.current.remove_filter("anger_glow")
+	owner.current.remove_movespeed_modifier(/datum/movespeed_modifier/dragon_rage)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/objective/summon_carp
 	var/datum/antagonist/space_dragon/dragon

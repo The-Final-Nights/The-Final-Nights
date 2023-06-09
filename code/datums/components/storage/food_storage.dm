@@ -18,8 +18,13 @@
 
 /datum/component/food_storage/Initialize(_minimum_weight_class = WEIGHT_CLASS_SMALL, _bad_chance = 0, _good_chance = 100)
 
+<<<<<<< HEAD:code/datums/components/storage/food_storage.dm
 	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, PROC_REF(try_inserting_item))
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(try_removing_item))
+=======
+	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(try_inserting_item))
+	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(try_removing_item))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914)):code/datums/components/food_storage.dm
 	RegisterSignal(parent, COMSIG_FOOD_EATEN, PROC_REF(consume_food_storage))
 
 	var/atom/food = parent

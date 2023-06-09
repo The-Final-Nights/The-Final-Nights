@@ -168,9 +168,18 @@
 	ui_interact(user)
 
 /mob/proc/unset_machine()
+<<<<<<< HEAD
 	if(machine)
 		machine.on_unset_machine(src)
 		machine = null
+=======
+	SIGNAL_HANDLER
+	if(!machine)
+		return
+	UnregisterSignal(machine, COMSIG_QDELETING)
+	machine.on_unset_machine(src)
+	machine = null
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 //called when the user unsets the machine.
 /atom/movable/proc/on_unset_machine(mob/user)
@@ -179,7 +188,12 @@
 /mob/proc/set_machine(obj/O)
 	if(src.machine)
 		unset_machine()
+<<<<<<< HEAD
 	src.machine = O
+=======
+	machine = O
+	RegisterSignal(O, COMSIG_QDELETING, PROC_REF(unset_machine))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	if(istype(O))
 		O.obj_flags |= IN_USE
 

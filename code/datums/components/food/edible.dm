@@ -62,8 +62,28 @@ Behavior that's still missing from this component that original food items had t
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(examine))
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_ANIMAL, PROC_REF(UseByAnimal))
+=======
+	src.bite_consumption = bite_consumption
+	src.food_flags = food_flags
+	src.foodtypes = foodtypes
+	src.volume = volume
+	src.eat_time = eat_time
+	src.eatverbs = string_list(eatverbs)
+	src.junkiness = junkiness
+	src.after_eat = after_eat
+	src.on_consume = on_consume
+	src.tastes = string_assoc_list(tastes)
+	src.check_liked = check_liked
+
+	setup_initial_reagents(initial_reagents)
+
+/datum/component/edible/RegisterWithParent()
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
+	RegisterSignals(parent, COMSIG_ATOM_ATTACK_ANIMAL, PROC_REF(UseByAnimal))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	RegisterSignal(parent, COMSIG_ATOM_CHECKPARTS, PROC_REF(OnCraft))
 	RegisterSignal(parent, COMSIG_ATOM_CREATEDBY_PROCESSING, PROC_REF(OnProcessed))
 	RegisterSignal(parent, COMSIG_ITEM_MICROWAVE_COOKED, PROC_REF(OnMicrowaveCooked))
@@ -83,6 +103,7 @@ Behavior that's still missing from this component that original food items had t
 	else if(isturf(parent) || isstructure(parent))
 		RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(TryToEatIt))
 
+<<<<<<< HEAD
 	src.bite_consumption = bite_consumption
 	src.food_flags = food_flags
 	src.foodtypes = foodtypes
@@ -95,6 +116,21 @@ Behavior that's still missing from this component that original food items had t
 	src.tastes = string_assoc_list(tastes)
 	src.microwaved_type = microwaved_type
 	src.check_liked = check_liked
+=======
+/datum/component/edible/UnregisterFromParent()
+	UnregisterSignal(parent, list(
+		COMSIG_ATOM_ATTACK_ANIMAL,
+		COMSIG_ATOM_ATTACK_HAND,
+		COMSIG_ATOM_CHECKPARTS,
+		COMSIG_ATOM_CREATEDBY_PROCESSING,
+		COMSIG_ATOM_ENTERED,
+		COMSIG_FOOD_INGREDIENT_ADDED,
+		COMSIG_ITEM_ATTACK,
+		COMSIG_ITEM_USED_AS_INGREDIENT,
+		COMSIG_OOZE_EAT_ATOM,
+		COMSIG_ATOM_EXAMINE,
+	))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 	var/atom/owner = parent
 

@@ -26,13 +26,35 @@
 			warning += " A very bad feeling... As if you are surrounded by a twisted aura of pure malevolence..."
 		to_chat(parent, "<span class='warning'>[warning]</span>")
 
+<<<<<<< HEAD
+=======
+	if(istype(vessel))
+		src.vessel = vessel
+		RegisterSignal(vessel, COMSIG_QDELETING, PROC_REF(vessel_qdeleting))
+	if(!isnull(permanent))
+		src.permanent = permanent
+	if(!isnull(luck_mod))
+		src.luck_mod = luck_mod
+	if(!isnull(damage_mod))
+		src.damage_mod = damage_mod
+
+/datum/component/omen/Destroy(force)
+	var/mob/living/person = parent
+	to_chat(person, span_nicegreen("You feel a horrible omen lifted off your shoulders!"))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/omen/Destroy(force, silent)
 	if(!silent)
 		var/mob/living/person = parent
 		to_chat(person, "<span class='nicegreen'>You feel a horrible omen lifted off your shoulders!</span>")
 	if(vessel)
+<<<<<<< HEAD
 		vessel.visible_message("<span class='warning'>[vessel] burns up in a sinister flash, taking an evil energy with it...</span>")
+=======
+		vessel.visible_message(span_warning("[vessel] burns up in a sinister flash, taking an evil energy with it..."))
+		UnregisterSignal(vessel, COMSIG_QDELETING)
+		vessel.burn()
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		vessel = null
 	return ..()
 
@@ -118,3 +140,95 @@
 		return
 
 	qdel(src)
+<<<<<<< HEAD
+=======
+
+/// Severe deaths. Normally lifts the curse.
+/datum/component/omen/proc/check_death(mob/living/our_guy)
+	SIGNAL_HANDLER
+
+	if(permanent)
+		return
+
+	qdel(src)
+
+/// Creates a localized explosion that shakes the camera
+/datum/component/omen/proc/death_explode(mob/living/our_guy)
+	explosion(our_guy, explosion_cause = src)
+
+	for(var/mob/witness in view(2, our_guy))
+		shake_camera(witness, 1 SECONDS, 2)
+
+/// Vessel got deleted, set it to null
+/datum/component/omen/proc/vessel_qdeleting(atom/source)
+	SIGNAL_HANDLER
+
+	UnregisterSignal(vessel, COMSIG_QDELETING)
+	vessel = null
+
+/**
+ * The smite omen. Permanent.
+ */
+/datum/component/omen/smite
+
+/datum/component/omen/smite/check_death(mob/living/our_guy)
+	if(!permanent)
+		return ..()
+
+	death_explode(our_guy)
+	our_guy.gib()
+
+/**
+ * The quirk omen. Permanent.
+ * Has only a 50% chance of bad things happening, and takes only 25% of normal damage.
+ */
+/datum/component/omen/quirk
+	permanent = TRUE
+	luck_mod = 0.5 // 50% chance of bad things happening
+	damage_mod = 0.25 // 25% of normal damage
+
+/datum/component/omen/quirk/RegisterWithParent()
+	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(check_accident))
+	RegisterSignal(parent, COMSIG_ON_CARBON_SLIP, PROC_REF(check_slip))
+	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(check_death))
+
+/datum/component/omen/quirk/UnregisterFromParent()
+	UnregisterSignal(parent, list(COMSIG_ON_CARBON_SLIP, COMSIG_MOVABLE_MOVED, COMSIG_LIVING_DEATH))
+
+/datum/component/omen/quirk/check_death(mob/living/our_guy)
+	if(!iscarbon(our_guy))
+		our_guy.gib()
+		return
+
+	// Don't explode if buckled to a stasis bed
+	if(our_guy.buckled)
+		var/obj/machinery/stasis/stasis_bed = our_guy.buckled
+		if(istype(stasis_bed))
+			return
+
+	death_explode(our_guy)
+	var/mob/living/carbon/player = our_guy
+	player.spread_bodyparts(skip_head = TRUE)
+	player.spawn_gibs()
+
+	return
+
+/**
+ * The bible omen.
+ * While it lasts, parent gets a cursed aura filter.
+ */
+/datum/component/omen/bible
+
+/datum/component/omen/bible/RegisterWithParent()
+	. = ..()
+	var/mob/living/living_parent = parent
+	living_parent.add_filter("omen", 2, list("type" = "drop_shadow", "color" = COLOR_DARK_RED, "alpha" = 0, "size" = 2))
+	var/filter = living_parent.get_filter("omen")
+	animate(filter, alpha = 255, time = 2 SECONDS, loop = -1)
+	animate(alpha = 0, time = 2 SECONDS)
+
+/datum/component/omen/bible/UnregisterFromParent()
+	. = ..()
+	var/mob/living/living_parent = parent
+	living_parent.remove_filter("omen")
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

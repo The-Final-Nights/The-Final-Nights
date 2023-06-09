@@ -49,12 +49,14 @@
 			return
 		if(!user.transferItemToLoc(I, src))
 			return
-		to_chat(user, "<span class='notice'>You hook the trashbag onto [src].</span>")
-		mybag = I
-		update_icon()
-	else if(istype(I, /obj/item/janiupgrade))
-		if(floorbuffer)
-			to_chat(user, "<span class='warning'>[src] already has a floor buffer!</span>")
+		to_chat(user, span_notice("You hook the trashbag onto [src]."))
+		trash_bag = I
+		RegisterSignal(trash_bag, COMSIG_QDELETING, PROC_REF(bag_deleted))
+		SEND_SIGNAL(src, COMSIG_VACUUM_BAG_ATTACH, I)
+		update_appearance()
+	else if(istype(I, /obj/item/janicart_upgrade))
+		if(installed_upgrade)
+			to_chat(user, span_warning("[src] already has an upgrade installed! Use a screwdriver to remove it."))
 			return
 		floorbuffer = TRUE
 		qdel(I)
@@ -71,15 +73,37 @@
 	if(mybag)
 		. += "cart_garbage"
 
-/obj/vehicle/ridden/janicart/attack_hand(mob/user)
-	. = ..()
-	if(.)
-		return
-	else if(mybag)
-		mybag.forceMove(get_turf(user))
-		user.put_in_hands(mybag)
-		mybag = null
-		update_icon()
+/obj/vehicle/ridden/janicart/attack_hand(mob/user, list/modifiers)
+	// right click removes bag without unbuckling when possible
+	. = (LAZYACCESS(modifiers, RIGHT_CLICK) && try_remove_bag(user)) || ..()
+	if (!.)
+		try_remove_bag(user)
+
+
+/**
+ * Called if the attached bag is being qdeleted, ensures appearance is maintained properly
+ */
+/obj/vehicle/ridden/janicart/proc/bag_deleted(datum/source)
+	SIGNAL_HANDLER
+	INVOKE_ASYNC(src, PROC_REF(try_remove_bag))
+
+/**
+ * Attempts to remove the attached trash bag, returns true if bag was removed
+ *
+ * Arguments:
+ * * remover - The (optional) mob attempting to remove the bag
+ */
+/obj/vehicle/ridden/janicart/proc/try_remove_bag(mob/remover = null)
+	if (!trash_bag)
+		return FALSE
+	if (remover)
+		trash_bag.forceMove(get_turf(remover))
+		remover.put_in_hands(trash_bag)
+	UnregisterSignal(trash_bag, COMSIG_QDELETING)
+	trash_bag = null
+	SEND_SIGNAL(src, COMSIG_VACUUM_BAG_DETACH)
+	update_appearance()
+	return TRUE
 
 /obj/vehicle/ridden/janicart/upgraded
 	floorbuffer = TRUE

@@ -133,7 +133,7 @@
 	attached_item.forceMove(src)
 	attached_item.vis_flags |= VIS_INHERIT_ID
 	vis_contents += attached_item
-	RegisterSignal(attached_item, COMSIG_PARENT_QDELETING, PROC_REF(on_attached_delete))
+	RegisterSignal(attached_item, COMSIG_QDELETING, PROC_REF(on_attached_delete))
 	handle_density()
 
 /**
@@ -142,7 +142,12 @@
  * Cleans up behavior for when the attached item is deleted or removed.
  */
 /obj/structure/training_machine/proc/on_attached_delete()
+<<<<<<< HEAD
 	UnregisterSignal(attached_item, COMSIG_PARENT_QDELETING)
+=======
+	SIGNAL_HANDLER
+	UnregisterSignal(attached_item, COMSIG_QDELETING)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	vis_contents -= attached_item
 	attached_item = null
 	handle_density()
@@ -160,7 +165,7 @@
 	if (!attached_item)
 		return
 	if (istype(attached_item, /obj/item/storage/toolbox/syndicate))
-		UnregisterSignal(attached_item, COMSIG_PARENT_QDELETING)
+		UnregisterSignal(attached_item, COMSIG_QDELETING)
 		qdel(attached_item)
 	else if (user)
 		user.put_in_hands(attached_item)

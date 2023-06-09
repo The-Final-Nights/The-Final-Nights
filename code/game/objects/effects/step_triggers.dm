@@ -57,6 +57,7 @@
 	if(immobilize)
 		ADD_TRAIT(AM, TRAIT_IMMOBILIZED, src)
 
+<<<<<<< HEAD
 	affecting.Add(AM)
 	while(AM && !stopthrow)
 		if(tiles)
@@ -64,6 +65,13 @@
 				break
 		if(AM.z != src.z)
 			break
+=======
+	affecting[AM] = AM.dir
+	var/datum/move_loop/loop = SSmove_manager.move(AM, direction, speed, tiles ? tiles * speed : INFINITY)
+	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
+	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
+	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(set_to_normal))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 		curtiles++
 

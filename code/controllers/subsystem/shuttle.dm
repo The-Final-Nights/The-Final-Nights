@@ -521,6 +521,11 @@ SUBSYSTEM_DEF(shuttle)
 	new_transit_dock.setDir(angle2dir(dock_angle))
 
 	M.assigned_transit = new_transit_dock
+<<<<<<< HEAD
+=======
+	RegisterSignal(proposal, COMSIG_QDELETING, PROC_REF(transit_space_clearing))
+
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	return new_transit_dock
 
 /datum/controller/subsystem/shuttle/Recover()

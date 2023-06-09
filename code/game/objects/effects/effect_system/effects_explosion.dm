@@ -9,11 +9,23 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/particle_effect/expl_particles/LateInitialize()
+<<<<<<< HEAD
 	var/direct = pick(GLOB.alldirs)
 	var/steps_amt = pick(25;1,50;2,100;3,200;4)
 	for(var/j in 1 to steps_amt)
 		step(src, direct)
 		sleep(1)
+=======
+	var/step_amt = pick(25;1,50;2,100;3,200;4)
+
+	var/datum/move_loop/loop = SSmove_manager.move(src, pick(GLOB.alldirs), 1, timeout = step_amt, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
+	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(end_particle))
+
+/obj/effect/particle_effect/expl_particles/proc/end_particle(datum/source)
+	SIGNAL_HANDLER
+	if(QDELETED(src))
+		return
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	qdel(src)
 
 /datum/effect_system/expl_particles

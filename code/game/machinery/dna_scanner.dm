@@ -144,6 +144,21 @@
 		return
 	close_machine(target)
 
+<<<<<<< HEAD
+=======
+//This is only called by the scanner. if you ever want to use this outside of that context you'll need to refactor things a bit
+/obj/machinery/dna_scannernew/proc/set_linked_console(new_console)
+	if(linked_console)
+		UnregisterSignal(linked_console, COMSIG_QDELETING)
+	linked_console = new_console
+	if(linked_console)
+		RegisterSignal(linked_console, COMSIG_QDELETING, PROC_REF(react_to_console_del))
+
+/obj/machinery/dna_scannernew/proc/react_to_console_del(datum/source)
+	SIGNAL_HANDLER
+	set_linked_console(null)
+
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 //Just for transferring between genetics machines.
 /obj/item/disk/data

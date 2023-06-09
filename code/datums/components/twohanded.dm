@@ -180,6 +180,10 @@
 	offhand_item.desc = "Your second grip on [parent_item]."
 	offhand_item.wielded = TRUE
 	RegisterSignal(offhand_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+<<<<<<< HEAD
+=======
+	RegisterSignal(offhand_item, COMSIG_QDELETING, PROC_REF(on_destroy))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	user.put_in_inactive_hand(offhand_item)
 
 /**
@@ -242,7 +246,11 @@
 
 	// Remove the object in the offhand
 	if(offhand_item)
+<<<<<<< HEAD
 		UnregisterSignal(offhand_item, COMSIG_ITEM_DROPPED)
+=======
+		UnregisterSignal(offhand_item, list(COMSIG_ITEM_DROPPED, COMSIG_QDELETING))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		qdel(offhand_item)
 	// Clear any old refrence to an item that should be gone now
 	offhand_item = null

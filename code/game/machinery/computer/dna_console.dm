@@ -2136,6 +2136,27 @@
 		diskette.forceMove(drop_location())
 	diskette = null
 
+<<<<<<< HEAD
+=======
+/obj/machinery/computer/scan_consolenew/proc/set_connected_scanner(new_scanner)
+	if(connected_scanner)
+		UnregisterSignal(connected_scanner, COMSIG_QDELETING)
+		if(connected_scanner.linked_console == src)
+			connected_scanner.set_linked_console(null)
+	connected_scanner = new_scanner
+	if(connected_scanner)
+		RegisterSignal(connected_scanner, COMSIG_QDELETING, PROC_REF(react_to_scanner_del))
+		connected_scanner.set_linked_console(src)
+
+/obj/machinery/computer/scan_consolenew/proc/react_to_scanner_del(datum/source)
+	SIGNAL_HANDLER
+	set_connected_scanner(null)
+
+#undef GENETIC_DAMAGE_PULSE_UNIQUE_IDENTITY
+#undef GENETIC_DAMAGE_PULSE_UNIQUE_FEATURES
+
+#undef ENZYME_COPY_BASE_COOLDOWN
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 #undef INJECTOR_TIMEOUT
 #undef NUMBER_OF_BUFFERS
 #undef SCRAMBLE_TIMEOUT

@@ -13,8 +13,40 @@
 	RegisterSignal(parent, list(COMSIG_ITEM_IMBUE_SOUL), PROC_REF(check_soul_imbue))
 	RegisterSignal(parent, list(COMSIG_ITEM_MARK_RETRIEVAL), PROC_REF(check_mark_retrieval))
 	src.inform_admins = inform_admins
+<<<<<<< HEAD
 	src.allow_death = allow_death
 	check_in_bounds() // Just in case something is being created outside of station/centcom
+=======
+	src.allow_item_destruction = allow_item_destruction
+
+	// Just in case something is being created outside of station/centcom
+	if(!atom_in_bounds(parent))
+		relocate()
+
+/datum/component/stationloving/RegisterWithParent()
+	RegisterSignal(parent, COMSIG_PREQDELETED, PROC_REF(on_parent_pre_qdeleted))
+	RegisterSignal(parent, COMSIG_ITEM_IMBUE_SOUL, PROC_REF(check_soul_imbue))
+	RegisterSignal(parent, COMSIG_ITEM_MARK_RETRIEVAL, PROC_REF(check_mark_retrieval))
+	// Relocate when we become unreachable
+	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_parent_moved))
+	// Relocate when our loc, or any of our loc's locs, becomes unreachable
+	var/static/list/loc_connections = list(
+		COMSIG_MOVABLE_MOVED = PROC_REF(on_parent_moved),
+		SIGNAL_ADDTRAIT(TRAIT_SECLUDED_LOCATION) = PROC_REF(on_loc_secluded),
+	)
+	AddComponent(/datum/component/connect_containers, parent, loc_connections)
+
+/datum/component/stationloving/UnregisterFromParent()
+	UnregisterSignal(parent, list(
+		COMSIG_MOVABLE_Z_CHANGED,
+		COMSIG_PREQDELETED,
+		COMSIG_ITEM_IMBUE_SOUL,
+		COMSIG_ITEM_MARK_RETRIEVAL,
+		COMSIG_MOVABLE_MOVED,
+	))
+
+	qdel(GetComponent(/datum/component/connect_containers))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/stationloving/InheritComponent(datum/component/stationloving/newc, original, inform_admins, allow_death)
 	if (original)

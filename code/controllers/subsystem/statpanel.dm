@@ -192,8 +192,45 @@ SUBSYSTEM_DEF(statpanels)
 		else
 			turfitems[++turfitems.len] = list("[turf_content.name]", REF(turf_content))
 
+<<<<<<< HEAD
 	turfitems = turfitems
 	target.stat_panel.send_message("update_listedturf", turfitems)
+=======
+#define OBJ_IMAGE_LOADING "statpanels obj loading temporary"
+/// Returns all our ready object tab images
+/// Returns a list in the form list(list(object_name, object_ref, loaded_image), ...)
+/datum/controller/subsystem/statpanels/proc/return_object_images(client/load_from)
+	// You might be inclined to think that this is a waste of cpu time, since we
+	// A: Double iterate over atoms in the build case, or
+	// B: Generate these lists over and over in the refresh case
+	// It's really not very hot. The hot portion of this code is genuinely mostly in the image generation
+	// So it's ok to pay a performance cost for cleanliness here
+
+	// No turf? go away
+	if(!load_from.mob?.listed_turf)
+		return list()
+	var/datum/object_window_info/obj_window = load_from.obj_window
+	var/list/already_seen = obj_window.atoms_to_images
+	var/list/to_make = obj_window.atoms_to_imagify
+	var/list/turf_items = list()
+	for(var/atom/turf_item as anything in obj_window.atoms_to_show)
+		// First, we fill up the list of refs to display
+		// If we already have one, just use that
+		var/existing_image = already_seen[turf_item]
+		if(existing_image == OBJ_IMAGE_LOADING)
+			continue
+		// We already have it. Success!
+		if(existing_image)
+			turf_items[++turf_items.len] = list("[turf_item.name]", REF(turf_item), existing_image)
+			continue
+		// Now, we're gonna queue image generation out of those refs
+		to_make += turf_item
+		already_seen[turf_item] = OBJ_IMAGE_LOADING
+		obj_window.RegisterSignal(turf_item, COMSIG_QDELETING, TYPE_PROC_REF(/datum/object_window_info,viewing_atom_deleted)) // we reset cache if anything in it gets deleted
+	return turf_items
+
+#undef OBJ_IMAGE_LOADING
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/controller/subsystem/statpanels/proc/generate_mc_data()
 	mc_data = list(

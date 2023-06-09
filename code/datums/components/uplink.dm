@@ -33,8 +33,12 @@
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 
+<<<<<<< HEAD
 
 	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, PROC_REF(OnAttackBy))
+=======
+	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(OnAttackBy))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(interact))
 	if(istype(parent, /obj/item/implant))
 		RegisterSignal(parent, COMSIG_IMPLANT_ACTIVATED, PROC_REF(implant_activation))
@@ -58,10 +62,27 @@
 			purchase_log = GLOB.uplink_purchase_logs_by_key[owner]
 		else
 			purchase_log = new(owner, src)
+<<<<<<< HEAD
 	lockable = _lockable
 	active = _enabled
 	gamemode = _gamemode
 	telecrystals = starting_tc
+=======
+		RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	src.lockable = lockable
+	src.active = enabled
+	if(!uplink_handler_override)
+		uplink_handler = new()
+		uplink_handler.has_objectives = FALSE
+		uplink_handler.uplink_flag = uplink_flag
+		uplink_handler.telecrystals = starting_tc
+		uplink_handler.has_progression = has_progression
+		uplink_handler.purchase_log = purchase_log
+	else
+		uplink_handler = uplink_handler_override
+	RegisterSignal(uplink_handler, COMSIG_UPLINK_HANDLER_ON_UPDATE, PROC_REF(handle_uplink_handler_update))
+	RegisterSignal(uplink_handler, COMSIG_UPLINK_HANDLER_REPLACEMENT_ORDERED, PROC_REF(handle_uplink_replaced))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	if(!lockable)
 		active = TRUE
 		locked = FALSE

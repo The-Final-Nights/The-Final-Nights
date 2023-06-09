@@ -66,7 +66,12 @@
 	return ..()
 
 /datum/component/acid/RegisterWithParent()
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+=======
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_update_overlays))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	RegisterSignal(parent, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(on_clean))
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(on_attack_hand))
 	RegisterSignal(parent, COMSIG_ATOM_EXPOSE_REAGENT, PROC_REF(on_expose_reagent))
@@ -75,7 +80,12 @@
 
 /datum/component/acid/UnregisterFromParent()
 	UnregisterSignal(parent, list(
+<<<<<<< HEAD
 		COMSIG_PARENT_EXAMINE,
+=======
+		COMSIG_ATOM_EXAMINE,
+		COMSIG_ATOM_UPDATE_OVERLAYS,
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		COMSIG_COMPONENT_CLEAN_ACT,
 		COMSIG_ATOM_ATTACK_HAND,
 		COMSIG_ATOM_EXPOSE_REAGENT))

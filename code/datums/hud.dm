@@ -54,6 +54,7 @@ GLOBAL_LIST_INIT(huds, list(
 /datum/atom_hud/proc/remove_hud_from(mob/M, absolute = FALSE)
 	if(!M || !hudusers[M])
 		return
+<<<<<<< HEAD
 	if (absolute || !--hudusers[M])
 		UnregisterSignal(M, COMSIG_PARENT_QDELETING)
 		hudusers -= M
@@ -61,6 +62,25 @@ GLOBAL_LIST_INIT(huds, list(
 			next_time_allowed -= M
 		if(queued_to_see[M])
 			queued_to_see -= M
+=======
+
+	if(!hud_users_all_z_levels[new_viewer])
+		hud_users_all_z_levels[new_viewer] = 1
+
+		RegisterSignal(new_viewer, COMSIG_QDELETING, PROC_REF(unregister_atom), override = TRUE) //both hud users and hud atoms use these signals
+		RegisterSignal(new_viewer, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(on_atom_or_user_z_level_changed), override = TRUE)
+
+		var/turf/their_turf = get_turf(new_viewer)
+		if(!their_turf)
+			return
+		hud_users[their_turf.z][new_viewer] = TRUE
+
+		if(next_time_allowed[new_viewer] > world.time)
+			if(!queued_to_see[new_viewer])
+				addtimer(CALLBACK(src, PROC_REF(show_hud_images_after_cooldown), new_viewer), next_time_allowed[new_viewer] - world.time)
+				queued_to_see[new_viewer] = TRUE
+
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		else
 			for(var/atom/A in hudatoms)
 				remove_from_single_hud(M, A)
@@ -96,7 +116,128 @@ GLOBAL_LIST_INIT(huds, list(
 	else
 		hudusers[M]++
 
+<<<<<<< HEAD
 /datum/atom_hud/proc/unregister_mob(datum/source, force)
+=======
+///Hides the images in this hud from former_viewer
+///If absolute is set to true, this will forcefully remove the hud, even if sources in theory remain
+/datum/atom_hud/proc/hide_from(mob/former_viewer, absolute = FALSE)
+	if(!former_viewer || !hud_users_all_z_levels[former_viewer])
+		return
+
+	hud_users_all_z_levels[former_viewer] -= 1//decrement number of sources for this hud on this user (bad way to track i know)
+
+	if (absolute || hud_users_all_z_levels[former_viewer] <= 0)//if forced or there arent any sources left, remove the user
+
+		if(!hud_atoms_all_z_levels[former_viewer])//make sure we arent unregistering changes on a mob thats also a hud atom for this hud
+			UnregisterSignal(former_viewer, COMSIG_MOVABLE_Z_CHANGED)
+			UnregisterSignal(former_viewer, COMSIG_QDELETING)
+
+		hud_users_all_z_levels -= former_viewer
+
+		if(next_time_allowed[former_viewer])
+			next_time_allowed -= former_viewer
+
+		var/turf/their_turf = get_turf(former_viewer)
+		if(their_turf)
+			hud_users[their_turf.z] -= former_viewer
+
+		if(queued_to_see[former_viewer])
+			queued_to_see -= former_viewer
+		else if (their_turf)
+			for(var/atom/hud_atom as anything in get_hud_atoms_for_z_level(their_turf.z))
+				remove_atom_from_single_hud(former_viewer, hud_atom)
+
+/// add new_hud_atom to this hud
+/datum/atom_hud/proc/add_atom_to_hud(atom/new_hud_atom)
+	if(!new_hud_atom)
+		return FALSE
+
+	// No matter where or who you are, you matter to me :)
+	RegisterSignal(new_hud_atom, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(on_atom_or_user_z_level_changed), override = TRUE)
+	RegisterSignal(new_hud_atom, COMSIG_QDELETING, PROC_REF(unregister_atom), override = TRUE) //both hud atoms and hud users use these signals
+	hud_atoms_all_z_levels[new_hud_atom] = TRUE
+
+	var/turf/atom_turf = get_turf(new_hud_atom)
+	if(!atom_turf)
+		return TRUE
+
+	hud_atoms[atom_turf.z] |= new_hud_atom
+
+	for(var/mob/mob_to_show as anything in get_hud_users_for_z_level(atom_turf.z))
+		if(!queued_to_see[mob_to_show])
+			add_atom_to_single_mob_hud(mob_to_show, new_hud_atom)
+	return TRUE
+
+/// remove this atom from this hud completely
+/datum/atom_hud/proc/remove_atom_from_hud(atom/hud_atom_to_remove)
+	if(!hud_atom_to_remove || !hud_atoms_all_z_levels[hud_atom_to_remove])
+		return FALSE
+
+	//make sure we arent unregistering a hud atom thats also a hud user mob
+	if(!hud_users_all_z_levels[hud_atom_to_remove])
+		UnregisterSignal(hud_atom_to_remove, COMSIG_MOVABLE_Z_CHANGED)
+		UnregisterSignal(hud_atom_to_remove, COMSIG_QDELETING)
+
+	for(var/mob/mob_to_remove as anything in hud_users_all_z_levels)
+		remove_atom_from_single_hud(mob_to_remove, hud_atom_to_remove)
+
+	hud_atoms_all_z_levels -= hud_atom_to_remove
+
+	var/turf/atom_turf = get_turf(hud_atom_to_remove)
+	if(!atom_turf)
+		return TRUE
+
+	hud_atoms[atom_turf.z] -= hud_atom_to_remove
+
+	return TRUE
+
+///adds a newly active hud category's image on a hud atom to every mob that could see it
+/datum/atom_hud/proc/add_single_hud_category_on_atom(atom/hud_atom, hud_category_to_add)
+	if(!hud_atom?.active_hud_list?[hud_category_to_add] || QDELING(hud_atom) || !(hud_category_to_add in hud_icons))
+		return FALSE
+
+	if(!hud_atoms_all_z_levels[hud_atom])
+		add_atom_to_hud(hud_atom)
+		return TRUE
+
+	var/turf/atom_turf = get_turf(hud_atom)
+	if(!atom_turf)
+		return FALSE
+
+	for(var/mob/hud_user as anything in get_hud_users_for_z_level(atom_turf.z))
+		if(!hud_user.client)
+			continue
+		if(!hud_exceptions[hud_user] || !(hud_atom in hud_exceptions[hud_user]))
+			hud_user.client.images |= hud_atom.active_hud_list[hud_category_to_add]
+
+	return TRUE
+
+///removes the image or images in hud_atom.hud_list[hud_category_to_remove] from every mob that can see it but leaves every other image
+///from that atom there.
+/datum/atom_hud/proc/remove_single_hud_category_on_atom(atom/hud_atom, hud_category_to_remove)
+	if(QDELETED(hud_atom) || !(hud_category_to_remove in hud_icons) || !hud_atoms_all_z_levels[hud_atom])
+		return FALSE
+
+	if(!hud_atom.active_hud_list)
+		remove_atom_from_hud(hud_atom)
+		return TRUE
+
+	var/turf/atom_turf = get_turf(hud_atom)
+	if(!atom_turf)
+		return FALSE
+
+	for(var/mob/hud_user as anything in get_hud_users_for_z_level(atom_turf.z))
+		if(!hud_user.client)
+			continue
+		hud_user.client.images -= hud_atom.active_hud_list[hud_category_to_remove]//by this point it shouldnt be in active_hud_list
+
+	return TRUE
+
+///when a hud atom or hud user changes z levels this makes sure it gets the images it needs and removes the images it doesnt need.
+///because of how signals work we need the same proc to handle both use cases because being a hud atom and being a hud user arent mutually exclusive
+/datum/atom_hud/proc/on_atom_or_user_z_level_changed(atom/movable/moved_atom, turf/old_turf, turf/new_turf)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	SIGNAL_HANDLER
 	remove_hud_from(source, TRUE)
 

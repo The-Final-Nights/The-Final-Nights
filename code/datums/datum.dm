@@ -33,6 +33,7 @@
 	  *
 	  * Lazy associated list in the structure of `signal:registree/list of registrees`
 	  */
+<<<<<<< HEAD
 	var/list/comp_lookup
 	/// Lazy associated list in the structure of `signals:proctype` that are run when the datum receives that signal
 	var/list/list/datum/callback/signal_procs
@@ -42,6 +43,11 @@
 	  * Set to true when a signal has been registered
 	  */
 	var/signal_enabled = FALSE
+=======
+	var/list/_listen_lookup
+	/// Lazy associated list in the structure of `target -> list(signal -> proctype)` that are run when the datum receives that signal
+	var/list/list/_signal_procs
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 	/// Datum level flags
 	var/datum_flags = NONE
@@ -124,7 +130,19 @@
 			qdel(C, FALSE, TRUE)
 		dc.Cut()
 
+<<<<<<< HEAD
 	var/list/lookup = comp_lookup
+=======
+	_clear_signal_refs()
+	//END: ECS SHIT
+
+	return QDEL_HINT_QUEUE
+
+///Only override this if you know what you're doing. You do not know what you're doing
+///This is a threat
+/datum/proc/_clear_signal_refs()
+	var/list/lookup = _listen_lookup
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	if(lookup)
 		for(var/sig in lookup)
 			var/list/comps = lookup[sig]
@@ -135,7 +153,11 @@
 			else
 				var/datum/component/comp = comps
 				comp.UnregisterSignal(src, sig)
+<<<<<<< HEAD
 		comp_lookup = lookup = null
+=======
+		_listen_lookup = lookup = null
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 	for(var/target in signal_procs)
 		UnregisterSignal(target, signal_procs[target])

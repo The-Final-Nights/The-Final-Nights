@@ -1,7 +1,7 @@
 #define UNREGISTER_BOMB_SIGNALS(A) \
 	do { \
 		UnregisterSignal(A, boom_signals); \
-		UnregisterSignal(A, COMSIG_PARENT_EXAMINE); \
+		UnregisterSignal(A, COMSIG_ATOM_EXAMINE); \
 	} while (0)
 
 //Bomb

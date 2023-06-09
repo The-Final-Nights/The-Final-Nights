@@ -135,7 +135,115 @@
 	. = ..()
 
 /obj/item/hand_tele/attack_self(mob/user)
+<<<<<<< HEAD
 	var/turf/current_location = get_turf(user)//What turf is the user on?
+=======
+	if (!can_teleport_notifies(user))
+		return
+
+	var/list/locations = list()
+	for(var/obj/machinery/computer/teleporter/computer in GLOB.machines)
+		var/atom/target = computer.target_ref?.resolve()
+		if(!target)
+			computer.target_ref = null
+			continue
+		var/area/computer_area = get_area(target)
+		if(!computer_area || (computer_area.area_flags & NOTELEPORT))
+			continue
+		if(computer.power_station?.teleporter_hub && computer.power_station.engaged)
+			locations["[get_area(target)] (Active)"] = computer
+		else
+			locations["[get_area(target)] (Inactive)"] = computer
+
+	locations["None (Dangerous)"] = PORTAL_LOCATION_DANGEROUS
+
+	var/teleport_location_key = tgui_input_list(user, "Teleporter to lock on", "Hand Teleporter", sort_list(locations))
+	if (isnull(teleport_location_key))
+		return
+	if(user.get_active_held_item() != src || user.incapacitated())
+		return
+
+	// Not always a datum, but needed for IS_WEAKREF_OF to cast properly.
+	var/datum/teleport_location = locations[teleport_location_key]
+	if (!try_create_portal_to(user, teleport_location))
+		return
+
+	if (teleport_location == PORTAL_LOCATION_DANGEROUS)
+		last_portal_location = PORTAL_LOCATION_DANGEROUS
+	else if (!IS_WEAKREF_OF(teleport_location, last_portal_location))
+		if (isweakref(teleport_location))
+			var/datum/weakref/about_to_replace_location_ref = last_portal_location
+			var/obj/machinery/computer/teleporter/about_to_replace_location = about_to_replace_location_ref.resolve()
+			if (about_to_replace_location)
+				UnregisterSignal(about_to_replace_location, COMSIG_TELEPORTER_NEW_TARGET)
+
+		RegisterSignal(teleport_location, COMSIG_TELEPORTER_NEW_TARGET, PROC_REF(on_teleporter_new_target))
+
+		last_portal_location = WEAKREF(teleport_location)
+
+/// Takes either PORTAL_LOCATION_DANGEROUS or an /obj/machinery/computer/teleport/computer.
+/obj/item/hand_tele/proc/try_create_portal_to(mob/user, teleport_location)
+	if (length(active_portal_pairs) >= max_portal_pairs)
+		user.show_message(span_notice("[src] is recharging!"))
+		return
+
+	var/atom/teleport_target
+
+	if (teleport_location == PORTAL_LOCATION_DANGEROUS)
+		var/list/dangerous_turfs = list()
+		for(var/turf/dangerous_turf in urange(10, orange=1))
+			if(dangerous_turf.x > world.maxx - PORTAL_DANGEROUS_EDGE_LIMIT || dangerous_turf.x < PORTAL_DANGEROUS_EDGE_LIMIT)
+				continue //putting them at the edge is dumb
+			if(dangerous_turf.y > world.maxy - PORTAL_DANGEROUS_EDGE_LIMIT || dangerous_turf.y < PORTAL_DANGEROUS_EDGE_LIMIT)
+				continue
+			var/area/dangerous_area = dangerous_turf.loc
+			if(dangerous_area.area_flags & NOTELEPORT)
+				continue
+			dangerous_turfs += dangerous_turf
+
+		teleport_target = pick(dangerous_turfs)
+	else
+		var/obj/machinery/computer/teleporter/computer = teleport_location
+		var/atom/target = computer.target_ref?.resolve()
+		if(!target)
+			computer.target_ref = null
+		teleport_target = target
+
+	if (teleport_target == null)
+		to_chat(user, span_notice("[src] vibrates, then stops. Maybe you should try something else."))
+		return
+
+	var/area/teleport_area = get_area(teleport_target)
+	if (teleport_area.area_flags & NOTELEPORT)
+		to_chat(user, span_notice("[src] is malfunctioning."))
+		return
+
+	if (!can_teleport_notifies(user))
+		return
+
+	var/list/obj/effect/portal/created = create_portal_pair(get_turf(user), get_teleport_turf(get_turf(teleport_target)), 300, 1, null)
+	if(LAZYLEN(created) != 2)
+		return
+
+	var/obj/effect/portal/portal1 = created[1]
+	var/obj/effect/portal/portal2 = created[2]
+
+	RegisterSignal(portal1, COMSIG_QDELETING, PROC_REF(on_portal_destroy))
+	RegisterSignal(portal2, COMSIG_QDELETING, PROC_REF(on_portal_destroy))
+
+	try_move_adjacent(portal1, user.dir)
+	active_portal_pairs[portal1] = portal2
+
+	investigate_log("was used by [key_name(user)] at [AREACOORD(user)] to create a portal pair with destinations [AREACOORD(portal1)] and [AREACOORD(portal2)].", INVESTIGATE_PORTAL)
+	add_fingerprint(user)
+
+	user.show_message(span_notice("Locked in."), MSG_AUDIBLE)
+
+	return TRUE
+
+/obj/item/hand_tele/proc/can_teleport_notifies(mob/user)
+	var/turf/current_location = get_turf(user)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	var/area/current_area = current_location.loc
 	if(!current_location || (current_area.area_flags & NOTELEPORT) || is_away_level(current_location.z) || !isturf(user.loc))//If turf was not found or they're on z level 2 or >7 which does not currently exist. or if user is not located on a turf
 		to_chat(user, "<span class='notice'>\The [src] is malfunctioning.</span>")

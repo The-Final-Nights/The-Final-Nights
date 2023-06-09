@@ -9,6 +9,19 @@ INITIALIZE_IMMEDIATE(/obj/effect/statclick)
 	. = ..()
 	name = text
 	src.target = target
+<<<<<<< HEAD
+=======
+	if(isdatum(target)) //Harddel man bad
+		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(cleanup))
+
+/obj/effect/statclick/Destroy()
+	target = null
+	return ..()
+
+/obj/effect/statclick/proc/cleanup()
+	SIGNAL_HANDLER
+	qdel(src)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /obj/effect/statclick/proc/update(text)
 	name = text

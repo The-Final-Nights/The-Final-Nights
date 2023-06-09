@@ -9,7 +9,25 @@
 	help_verb = /mob/living/proc/sleeping_carp_help
 	display_combos = TRUE
 
+<<<<<<< HEAD
 /datum/martial_art/the_sleeping_carp/proc/check_streak(mob/living/A, mob/living/D)
+=======
+/datum/martial_art/the_sleeping_carp/teach(mob/living/target, make_temporary = FALSE)
+	. = ..()
+	if(!.)
+		return
+	target.add_traits(list(TRAIT_NOGUNS, TRAIT_HARDLY_WOUNDED, TRAIT_NODISMEMBER), SLEEPING_CARP_TRAIT)
+	RegisterSignal(target, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
+	target.faction |= FACTION_CARP //:D
+
+/datum/martial_art/the_sleeping_carp/on_remove(mob/living/target)
+	target.remove_traits(list(TRAIT_NOGUNS, TRAIT_HARDLY_WOUNDED, TRAIT_NODISMEMBER), SLEEPING_CARP_TRAIT)
+	UnregisterSignal(target, COMSIG_ATOM_ATTACKBY)
+	target.faction -= FACTION_CARP //:(
+	. = ..()
+
+/datum/martial_art/the_sleeping_carp/proc/check_streak(mob/living/attacker, mob/living/defender)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	if(findtext(streak,STRONG_PUNCH_COMBO))
 		streak = ""
 		strongPunch(A,D)

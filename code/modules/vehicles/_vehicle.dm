@@ -144,6 +144,17 @@
 			remove_controller_actions_by_flag(controller, i)
 	return TRUE
 
+/// To add a trailer to the vehicle in a manner that allows safe qdels
+/obj/vehicle/proc/add_trailer(obj/vehicle/added_vehicle)
+	trailer = added_vehicle
+	RegisterSignal(trailer, COMSIG_QDELETING, PROC_REF(remove_trailer))
+
+/// To remove a trailer from the vehicle in a manner that allows safe qdels
+/obj/vehicle/proc/remove_trailer()
+	SIGNAL_HANDLER
+	UnregisterSignal(trailer, COMSIG_QDELETING)
+	trailer = null
+
 /obj/vehicle/Move(newloc, dir)
 	. = ..()
 	if(trailer && .)

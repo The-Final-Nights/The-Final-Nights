@@ -21,6 +21,7 @@
 
 	src.rotation_flags = rotation_flags
 
+<<<<<<< HEAD
 	if(can_user_rotate)
 		src.can_user_rotate = can_user_rotate
 	else
@@ -70,6 +71,16 @@
 
 /datum/component/simple_rotation/proc/remove_signals()
 	UnregisterSignal(parent, list(COMSIG_CLICK_ALT, COMSIG_PARENT_EXAMINE, COMSIG_PARENT_ATTACKBY))
+=======
+/datum/component/simple_rotation/proc/AddSignals()
+	RegisterSignal(parent, COMSIG_CLICK_ALT, PROC_REF(RotateLeft))
+	RegisterSignal(parent, COMSIG_CLICK_ALT_SECONDARY, PROC_REF(RotateRight))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(ExamineMessage))
+	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
+
+/datum/component/simple_rotation/proc/RemoveSignals()
+	UnregisterSignal(parent, list(COMSIG_CLICK_ALT, COMSIG_CLICK_ALT_SECONDARY, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/simple_rotation/RegisterWithParent()
 	add_verbs()

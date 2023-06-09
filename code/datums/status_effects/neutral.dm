@@ -180,7 +180,12 @@
 		return
 
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(check_owner_in_range))
+<<<<<<< HEAD
 	RegisterSignal(offered_item, list(COMSIG_PARENT_QDELETING, COMSIG_ITEM_DROPPED), PROC_REF(dropped_item))
+=======
+	RegisterSignals(offered_item, list(COMSIG_QDELETING, COMSIG_ITEM_DROPPED), PROC_REF(dropped_item))
+	//RegisterSignal(owner, COMSIG_ATOM_EXAMINE_MORE, PROC_REF(check_fake_out))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/status_effect/offering/Destroy()
 	for(var/mob/living/carbon/removed_taker as anything in possible_takers)
@@ -344,9 +349,63 @@
 	desc = "You're leaning on something!"
 	icon_state = "buckled"
 
+<<<<<<< HEAD
 /atom/movable/screen/alert/status_effect/leaning/Click()
 	var/mob/living/L = usr
 	if(!istype(L) || L != owner)
+=======
+/datum/status_effect/eigenstasium
+	id = "eigenstasium"
+	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = null
+	processing_speed = STATUS_EFFECT_NORMAL_PROCESS
+	///So we know what cycle we're in during the status
+	var/current_cycle = EIGENSTASIUM_MAX_BUFFER //Consider it your stability
+	///The addiction looper for addiction stage 3
+	var/phase_3_cycle = -0 //start off delayed
+	///Your clone from another reality
+	var/mob/living/carbon/alt_clone = null
+	///If we display the stabilised message or not
+	var/stable_message = FALSE
+
+/datum/status_effect/eigenstasium/Destroy()
+	if(alt_clone)
+		UnregisterSignal(alt_clone, COMSIG_QDELETING)
+		QDEL_NULL(alt_clone)
+	return ..()
+
+/datum/status_effect/eigenstasium/tick()
+	. = ..()
+	//This stuff runs every cycle
+	if(prob(5))
+		do_sparks(5, FALSE, owner)
+
+	//If we have a reagent that blocks the effects
+	var/block_effects = FALSE
+	if(owner.has_reagent(/datum/reagent/bluespace))
+		current_cycle = max(EIGENSTASIUM_MAX_BUFFER, (current_cycle - (EIGENSTASIUM_STABILISATION_RATE * 1.5))) //cap to -250
+		block_effects = TRUE
+	if(owner.has_reagent(/datum/reagent/stabilizing_agent))
+		current_cycle = max(EIGENSTASIUM_MAX_BUFFER, (current_cycle - EIGENSTASIUM_STABILISATION_RATE))
+		block_effects = TRUE
+	var/datum/reagent/eigen = owner.has_reagent(/datum/reagent/eigenstate)
+	if(eigen)
+		if(eigen.overdosed)
+			block_effects = FALSE
+		else
+			current_cycle = max(EIGENSTASIUM_MAX_BUFFER, (current_cycle - (EIGENSTASIUM_STABILISATION_RATE * 2)))
+			block_effects = TRUE
+
+	if(!QDELETED(alt_clone)) //catch any stragglers
+		do_sparks(5, FALSE, alt_clone)
+		owner.visible_message("[owner] is snapped across to a different alternative reality!")
+		QDEL_NULL(alt_clone)
+
+	if(block_effects)
+		if(!stable_message)
+			owner.visible_message("You feel stable...for now.")
+			stable_message = TRUE
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		return
 	L.changeNext_move(CLICK_CD_RESIST)
 	if(L.last_special <= world.time)
@@ -359,8 +418,119 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/leaning
 
+<<<<<<< HEAD
 /datum/status_effect/leaning/on_creation(mob/living/carbon/new_owner, atom/object, leaning_offset = 11)
 	. = ..()
 	if(!.)
 		return
 	new_owner.start_leaning(object, leaning_offset)
+=======
+		//phase 1
+		if(1 to EIGENSTASIUM_PHASE_1_END)
+			owner.set_jitter_if_lower(4 SECONDS)
+			owner.adjust_nutrition(-4)
+
+		//phase 2
+		if(EIGENSTASIUM_PHASE_1_END to EIGENSTASIUM_PHASE_2_END)
+			if(current_cycle == 51)
+				to_chat(owner, span_userdanger("You start to convlse violently as you feel your consciousness merges across realities, your possessions flying wildy off your body!"))
+				owner.set_jitter_if_lower(400 SECONDS)
+				owner.Knockdown(10)
+
+			var/list/items = list()
+			var/max_loop
+			if (length(owner.get_contents()) >= 10)
+				max_loop = 10
+			else
+				max_loop = length(owner.get_contents())
+			for (var/i in 1 to max_loop)
+				var/obj/item/item = owner.get_contents()[i]
+				if ((item.item_flags & DROPDEL) || HAS_TRAIT(item, TRAIT_NODROP)) // can't teleport these kinds of items
+					continue
+				items.Add(item)
+
+			if(!LAZYLEN(items))
+				return ..()
+			var/obj/item/item = pick(items)
+			owner.dropItemToGround(item, TRUE)
+			do_sparks(5,FALSE,item)
+			do_teleport(item, get_turf(item), 3, no_effects=TRUE);
+			do_sparks(5,FALSE,item)
+
+		//phase 3 - little break to get your items
+		if(EIGENSTASIUM_PHASE_3_START to EIGENSTASIUM_PHASE_3_END)
+			//Clone function - spawns a clone then deletes it - simulates multiple copies of the player teleporting in
+			switch(phase_3_cycle) //Loops 0 -> 1 -> 2 -> 1 -> 2 -> 1 ...ect.
+				if(0)
+					owner.set_jitter_if_lower(200 SECONDS)
+					to_chat(owner, span_userdanger("Your eigenstate starts to rip apart, drawing in alternative reality versions of yourself!"))
+				if(1)
+					var/typepath = owner.type
+					alt_clone = new typepath(owner.loc)
+					alt_clone.appearance = owner.appearance
+					alt_clone.real_name = owner.real_name
+					RegisterSignal(alt_clone, COMSIG_QDELETING, PROC_REF(remove_clone_from_var))
+					owner.visible_message("[owner] splits into seemingly two versions of themselves!")
+					do_teleport(alt_clone, get_turf(alt_clone), 2, no_effects=TRUE) //teleports clone so it's hard to find the real one!
+					do_sparks(5,FALSE,alt_clone)
+					alt_clone.emote("spin")
+					owner.emote("spin")
+					var/list/say_phrases = strings(EIGENSTASIUM_FILE, "lines")
+					alt_clone.say(pick(say_phrases))
+				if(2)
+					phase_3_cycle = 0 //counter
+			phase_3_cycle++
+			do_teleport(owner, get_turf(owner), 2, no_effects=TRUE) //Teleports player randomly
+			do_sparks(5, FALSE, owner)
+
+		//phase 4
+		if(EIGENSTASIUM_PHASE_3_END to INFINITY)
+			//clean up and remove status
+			SSblackbox.record_feedback("tally", "chemical_reaction", 1, "Eigenstasium wild rides ridden")
+			do_sparks(5, FALSE, owner)
+			do_teleport(owner, get_turf(owner), 2, no_effects=TRUE) //teleports clone so it's hard to find the real one!
+			do_sparks(5, FALSE, owner)
+			owner.Sleeping(100)
+			owner.set_jitter_if_lower(100 SECONDS)
+			to_chat(owner, span_userdanger("You feel your eigenstate settle, as \"you\" become an alternative version of yourself!"))
+			owner.emote("me",1,"flashes into reality suddenly, gasping as they gaze around in a bewildered and highly confused fashion!",TRUE)
+			owner.log_message("has become an alternative universe version of themselves via EIGENSTASIUM.", LOG_GAME)
+			//new you new stuff
+			SSquirks.randomise_quirks(owner)
+			owner.reagents.remove_all(1000)
+			owner.mob_mood.remove_temp_moods() //New you, new moods.
+			var/mob/living/carbon/human/human_mob = owner
+			owner.add_mood_event("Eigentrip", /datum/mood_event/eigentrip)
+			if(QDELETED(human_mob))
+				return
+			if(prob(1))//low chance of the alternative reality returning to monkey
+				var/obj/item/organ/external/tail/monkey/monkey_tail = new ()
+				monkey_tail.Insert(human_mob, drop_if_replaced = FALSE)
+			var/datum/species/human_species = human_mob.dna?.species
+			if(human_species)
+				human_species.randomize_features(human_mob)
+				human_species.randomize_active_underwear(human_mob)
+
+			owner.remove_status_effect(/datum/status_effect/eigenstasium)
+
+	//Finally increment cycle
+	current_cycle++
+
+/datum/status_effect/eigenstasium/proc/remove_clone_from_var()
+	SIGNAL_HANDLER
+	UnregisterSignal(alt_clone, COMSIG_QDELETING)
+
+/datum/status_effect/eigenstasium/on_remove()
+	if(!QDELETED(alt_clone))//catch any stragilers
+		do_sparks(5, FALSE, alt_clone)
+		owner.visible_message("One of the [owner]s suddenly phases out of reality in front of you!")
+		QDEL_NULL(alt_clone)
+	return ..()
+
+#undef EIGENSTASIUM_MAX_BUFFER
+#undef EIGENSTASIUM_STABILISATION_RATE
+#undef EIGENSTASIUM_PHASE_1_END
+#undef EIGENSTASIUM_PHASE_2_END
+#undef EIGENSTASIUM_PHASE_3_START
+#undef EIGENSTASIUM_PHASE_3_END
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

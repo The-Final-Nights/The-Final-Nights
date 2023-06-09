@@ -17,9 +17,17 @@
 /datum/component/slippery/proc/Slip(datum/source, atom/movable/AM)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	var/mob/victim = AM
 	if(istype(victim) && !(victim.movement_type & FLYING) && victim.slip(knockdown_time, parent, lube_flags, paralyze_time, force_drop_items) && callback)
 		callback.Invoke(victim)
+=======
+	if((!LAZYLEN(slot_whitelist) || (slot in slot_whitelist)) && isliving(equipper))
+		holder = equipper
+		qdel(GetComponent(/datum/component/connect_loc_behalf))
+		AddComponent(/datum/component/connect_loc_behalf, holder, holder_connections)
+		RegisterSignal(holder, COMSIG_QDELETING, PROC_REF(holder_deleted))
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 
 /datum/component/slippery/proc/Slip_on_wearer(datum/source, atom/movable/AM, mob/living/crossed)
@@ -29,7 +37,11 @@
 		Slip(source, AM)
 
 
+<<<<<<< HEAD
 /datum/component/slippery/clowning //used for making the clown PDA only slip if the clown is wearing his shoes and the elusive banana-skin belt
+=======
+	UnregisterSignal(user, COMSIG_QDELETING)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 
 /datum/component/slippery/clowning/Slip_on_wearer(datum/source, atom/movable/AM, mob/living/crossed)

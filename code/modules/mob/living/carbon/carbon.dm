@@ -1080,8 +1080,20 @@
 				bodypart_instance.held_index = r_arm_index_next //2, 4, 6, 8...
 				hand_bodyparts += bodypart_instance
 
+/// Called when a new hand is added
+/mob/living/carbon/proc/on_added_hand(obj/item/bodypart/arm/new_hand, hand_index)
+	if(hand_index > hand_bodyparts.len)
+		hand_bodyparts.len = hand_index
+	hand_bodyparts[hand_index] = new_hand
+	RegisterSignals(new_hand, list(COMSIG_QDELETING, COMSIG_BODYPART_REMOVED), PROC_REF(on_lost_hand))
 
-///Proc to hook behavior on bodypart additions.
+/// Cleans up references to an arm when it is dismembered or deleted
+/mob/living/carbon/proc/on_lost_hand(obj/item/bodypart/arm/lost_hand)
+	SIGNAL_HANDLER
+	hand_bodyparts[lost_hand.held_index] = null
+	UnregisterSignal(lost_hand, list(COMSIG_QDELETING, COMSIG_BODYPART_REMOVED))
+
+///Proc to hook behavior on bodypart additions. Do not directly call. You're looking for [/obj/item/bodypart/proc/try_attach_limb()].
 /mob/living/carbon/proc/add_bodypart(obj/item/bodypart/new_bodypart)
 	bodyparts += new_bodypart
 

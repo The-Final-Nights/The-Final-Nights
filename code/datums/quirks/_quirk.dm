@@ -36,6 +36,49 @@
 	else
 		RegisterSignal(quirk_holder, COMSIG_MOB_LOGIN, PROC_REF(on_quirk_holder_first_login))
 
+<<<<<<< HEAD
+=======
+	add(client_source)
+
+	if(quirk_flags & QUIRK_PROCESSES)
+		START_PROCESSING(SSquirks, src)
+
+	if(!quirk_transfer)
+		if(gain_text)
+			to_chat(quirk_holder, gain_text)
+		add_unique(client_source)
+
+		if(quirk_holder.client)
+			post_add()
+		else
+			RegisterSignal(quirk_holder, COMSIG_MOB_LOGIN, PROC_REF(on_quirk_holder_first_login))
+
+	RegisterSignal(quirk_holder, COMSIG_QDELETING, PROC_REF(on_holder_qdeleting))
+
+	return TRUE
+
+/// Removes the quirk from the current quirk_holder.
+/datum/quirk/proc/remove_from_current_holder(quirk_transfer = FALSE)
+	if(!quirk_holder)
+		CRASH("Attempted to remove quirk from the current holder when it has no current holder.")
+
+	UnregisterSignal(quirk_holder, list(COMSIG_MOB_LOGIN, COMSIG_QDELETING))
+
+	quirk_holder.quirks -= src
+
+	if(!quirk_transfer && lose_text)
+		to_chat(quirk_holder, lose_text)
+
+	if(mob_trait)
+		REMOVE_TRAIT(quirk_holder, mob_trait, QUIRK_TRAIT)
+
+	if(quirk_flags & QUIRK_PROCESSES)
+		STOP_PROCESSING(SSquirks, src)
+
+	remove()
+
+	quirk_holder = null
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /**
  * On client connection set quirk preferences.

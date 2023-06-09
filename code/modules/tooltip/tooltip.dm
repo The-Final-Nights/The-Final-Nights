@@ -52,6 +52,14 @@ Notes:
 /datum/tooltip/proc/show(atom/movable/thing, params = null, title = null, content = null, theme = "default", special = "none")
 	if (!thing || !params || (!title && !content) || !owner || !isnum(world.icon_size))
 		return FALSE
+
+	if (!isnull(last_target))
+		UnregisterSignal(last_target, COMSIG_QDELETING)
+
+	RegisterSignal(thing, COMSIG_QDELETING, PROC_REF(on_target_qdel))
+
+	last_target = thing
+
 	if (!init)
 		//Initialize some vars
 		init = 1

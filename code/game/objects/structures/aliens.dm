@@ -144,6 +144,14 @@
 
 	last_expand = world.time + rand(growth_cooldown_low, growth_cooldown_high)
 
+<<<<<<< HEAD
+=======
+/obj/structure/alien/weeds/Destroy()
+	if(parent_node)
+		UnregisterSignal(parent_node, COMSIG_QDELETING)
+		parent_node = null
+	return ..()
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 ///Randomizes the weeds' starting icon, gets redefined by children for them not to share the behavior.
 /obj/structure/alien/weeds/proc/set_base_icon()
@@ -172,9 +180,53 @@
 
 		if(is_type_in_typecache(T, blacklisted_turfs))
 			continue
+<<<<<<< HEAD
 
 		new /obj/structure/alien/weeds(T)
 	return TRUE
+=======
+		//spawn a new one in the turf
+		check_weed = new(check_turf)
+		//set the new one's parent node to our parent node
+		check_weed.parent_node = parent_node
+		check_weed.RegisterSignal(parent_node, COMSIG_QDELETING, PROC_REF(after_parent_destroyed))
+
+/**
+ * Called when the parent node is destroyed
+ */
+/obj/structure/alien/weeds/proc/after_parent_destroyed()
+	if(!find_new_parent())
+		var/random_time = rand(2 SECONDS, 8 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(do_qdel)), random_time)
+
+/**
+ * Called when trying to find a new parent after our previous parent died
+ * Will return false if it can't find a new_parent
+ * Will return the new parent if it can find one
+ */
+/obj/structure/alien/weeds/proc/find_new_parent()
+	var/previous_node = parent_node
+	parent_node = null
+	for(var/obj/structure/alien/weeds/node/new_parent in range(node_range, src))
+		if(new_parent == previous_node)
+			continue
+		parent_node = new_parent
+		RegisterSignal(parent_node, COMSIG_QDELETING, PROC_REF(after_parent_destroyed))
+		return parent_node
+	return FALSE
+
+/**
+ * Called to delete the weed
+ */
+/obj/structure/alien/weeds/proc/do_qdel()
+	qdel(src)
+
+/obj/structure/alien/weeds/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
+	return exposed_temperature > 300
+
+/obj/structure/alien/weeds/atmos_expose(datum/gas_mixture/air, exposed_temperature)
+	take_damage(5, BURN, 0, 0)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 //Weed nodes
 /obj/structure/alien/weeds/node

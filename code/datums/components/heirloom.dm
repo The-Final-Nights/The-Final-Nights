@@ -9,9 +9,24 @@
 	owner = new_owner
 	family_name = new_family_name
 
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(examine))
 
 /datum/component/heirloom/proc/examine(datum/source, mob/user, list/examine_list)
+=======
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+
+/datum/component/heirloom/Destroy(force, silent)
+	owner = null
+	return ..()
+
+/**
+ * Signal proc for [COMSIG_ATOM_EXAMINE].
+ *
+ * Shows who owns the heirloom on examine.
+ */
+/datum/component/heirloom/proc/on_examine(datum/source, mob/user, list/examine_list)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	SIGNAL_HANDLER
 
 	if(user.mind == owner)

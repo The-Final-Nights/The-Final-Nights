@@ -160,6 +160,7 @@
 	return
 
 /**
+<<<<<<< HEAD
  * Register to listen for a signal from the passed in target
  *
  * This sets up a listening relationship such that when the target object emits a signal
@@ -247,6 +248,27 @@
 	signal_procs[target] -= sig_type_or_types
 	if(!signal_procs[target].len)
 		signal_procs -= target
+=======
+ * Called when the component has a new source registered
+ */
+/datum/component/proc/on_source_add(source)
+	SHOULD_CALL_PARENT(TRUE)
+	if(dupe_mode != COMPONENT_DUPE_SOURCES)
+		CRASH("Component '[type]' does not use sources but has been given a source")
+	LAZYOR(sources, source)
+
+/**
+ * Called when the component has a source removed.
+ * You probably want to call parent after you do your logic because at the end of this we qdel if we have no sources remaining!
+ */
+/datum/component/proc/on_source_remove(source)
+	SHOULD_CALL_PARENT(TRUE)
+	if(dupe_mode != COMPONENT_DUPE_SOURCES)
+		CRASH("Component '[type]' does not use sources but is trying to remove a source")
+	LAZYREMOVE(sources, source)
+	if(!LAZYLEN(sources))
+		qdel(src)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /**
  * Called on a component when a component of the same type was added to the same parent
@@ -300,6 +322,7 @@
 	//and since most components are root level + 1, this won't even have to run
 	while (current_type != /datum/component)
 		current_type = type2parent(current_type)
+<<<<<<< HEAD
 		. += current_type
 
 /**
@@ -324,6 +347,9 @@
 			continue
 		var/proctype = C.signal_procs[src][sigtype]
 		. |= CallAsync(C, proctype, arguments)
+=======
+	. += current_type
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 // The type arg is casted so initial works, you shouldn't be passing a real instance into this
 /**

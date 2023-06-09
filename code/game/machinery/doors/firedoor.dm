@@ -130,7 +130,32 @@
 		log_game("[key_name(user)] [welded ? "welded":"unwelded"] firedoor [src] with [W] at [AREACOORD(src)]")
 		update_icon()
 
+<<<<<<< HEAD
 /obj/machinery/door/firedoor/try_to_crowbar(obj/item/I, mob/user)
+=======
+/// We check for adjacency when using the primary attack.
+/obj/machinery/door/firedoor/try_to_crowbar(obj/item/acting_object, mob/user)
+	if(welded || operating)
+		return
+
+	if(density)
+		being_held_open = TRUE
+		user.balloon_alert_to_viewers("holding [src] open", "holding [src] open")
+		COOLDOWN_START(src, activation_cooldown, REACTIVATION_DELAY)
+		open()
+		if(QDELETED(user))
+			being_held_open = FALSE
+			return
+		RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(handle_held_open_adjacency))
+		RegisterSignal(user, COMSIG_LIVING_SET_BODY_POSITION, PROC_REF(handle_held_open_adjacency))
+		RegisterSignal(user, COMSIG_QDELETING, PROC_REF(handle_held_open_adjacency))
+		handle_held_open_adjacency(user)
+	else
+		close()
+
+/// A simple toggle for firedoors between on and off
+/obj/machinery/door/firedoor/try_to_crowbar_secondary(obj/item/acting_object, mob/user)
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	if(welded || operating)
 		return
 
@@ -139,6 +164,23 @@
 	else
 		close()
 
+<<<<<<< HEAD
+=======
+/obj/machinery/door/firedoor/proc/handle_held_open_adjacency(mob/user)
+	SIGNAL_HANDLER
+
+	var/mob/living/living_user = user
+	if(!QDELETED(user) && Adjacent(user) && isliving(user) && (living_user.body_position == STANDING_UP))
+		return
+	being_held_open = FALSE
+	correct_state()
+	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
+	UnregisterSignal(user, COMSIG_LIVING_SET_BODY_POSITION)
+	UnregisterSignal(user, COMSIG_QDELETING)
+	if(user)
+		user.balloon_alert_to_viewers("released [src]", "released [src]")
+
+>>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 /obj/machinery/door/firedoor/attack_ai(mob/user)
 	add_fingerprint(user)
 	if(welded || operating || machine_stat & NOPOWER)
