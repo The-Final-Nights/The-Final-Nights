@@ -158,10 +158,11 @@
 	var/string_type = "[type]"
 	var/list/splits = splittext(string_type, "/")
 	var/endpart = splits[splits.len]
+	/// custom ringtone for this job
+	var/job_tone
 
-	var/list/job_changes = SSmapping.config.job_changes
-	if(!(endpart in job_changes))
-		return list()
+	/// Minimal character age for this job
+	var/required_character_age
 
 	return job_changes[endpart]
 
