@@ -68,50 +68,58 @@ SUBSYSTEM_DEF(atoms)
 		atoms_to_return += created_atoms
 		created_atoms = null
 
-/// Init this specific atom
-/datum/controller/subsystem/atoms/proc/InitAtom(atom/A, list/arguments)
-	var/the_type = A.type
-	if(QDELING(A))
-		BadInitializeCalls[the_type] |= BAD_INIT_QDEL_BEFORE
-		return TRUE
+	for (var/queued_deletion in queued_deletions)
+		qdel(queued_deletion)
 
-	var/start_tick = world.time
+	testing("[queued_deletions.len] atoms were queued for deletion.")
+	queued_deletions.Cut()
 
-	var/result = A.Initialize(arglist(arguments))
+	#ifdef PROFILE_MAPLOAD_INIT_ATOM
+	rustg_file_write(json_encode(mapload_init_times), "[GLOB.log_directory]/init_times.json")
+	#endif
 
-	if(start_tick != world.time)
-		BadInitializeCalls[the_type] |= BAD_INIT_SLEPT
+/// Actually creates the list of atoms. Exists soley so a runtime in the creation logic doesn't cause initalized to totally break
+/datum/controller/subsystem/atoms/proc/CreateAtoms(list/atoms, list/atoms_to_return = null)
+	if (atoms_to_return)
+		LAZYINITLIST(created_atoms)
 
-	var/qdeleted = FALSE
+	#ifdef TESTING
+	var/count
+	#endif
 
-	if(result != INITIALIZE_HINT_NORMAL)
-		switch(result)
-			if(INITIALIZE_HINT_LATELOAD)
-				if(arguments[1])	//mapload
-					late_loaders += A
-				else
-					A.LateInitialize()
-			if(INITIALIZE_HINT_QDEL)
-				qdel(A)
-				qdeleted = TRUE
-			else
-				BadInitializeCalls[the_type] |= BAD_INIT_NO_HINT
+	var/list/mapload_arg = list(TRUE)
 
-	if(!A)	//possible harddel
-		qdeleted = TRUE
-	else if(!(A.flags_1 & INITIALIZED_1))
-		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
+	if(atoms)
+		#ifdef TESTING
+		count = atoms.len
+		#endif
+
+		for(var/I in 1 to atoms.len)
+			var/atom/A = atoms[I]
+			if(!(A.flags_1 & INITIALIZED_1))
+				CHECK_TICK
+				PROFILE_INIT_ATOM_BEGIN()
+				InitAtom(A, TRUE, mapload_arg)
+				PROFILE_INIT_ATOM_END(A)
 	else
-		SEND_SIGNAL(A,COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE)
+		#ifdef TESTING
+		count = 0
+		#endif
 
-	if (created_atoms)
-		created_atoms += A
+		for(var/atom/A as anything in world)
+			if(!(A.flags_1 & INITIALIZED_1))
+				PROFILE_INIT_ATOM_BEGIN()
+				InitAtom(A, FALSE, mapload_arg)
+				PROFILE_INIT_ATOM_END(A)
+				#ifdef TESTING
+				++count
+				#endif
+				CHECK_TICK
 
-	return qdeleted || QDELING(A)
+	testing("Initialized [count] atoms")
 
-/datum/controller/subsystem/atoms/proc/map_loader_begin()
-	old_initialized = initialized
-	initialized = INITIALIZATION_INSSATOMS
+/datum/controller/subsystem/atoms/proc/map_loader_begin(source)
+	set_tracked_initalized(INITIALIZATION_INSSATOMS, source)
 
 /datum/controller/subsystem/atoms/proc/map_loader_stop()
 	initialized = old_initialized
