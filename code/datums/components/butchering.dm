@@ -154,5 +154,62 @@
 	var/obj/machinery/recycler/eater = parent
 	if(eater.safety_mode || (eater.machine_stat & (BROKEN|NOPOWER))) //I'm so sorry.
 		return
-	if(L.stat == DEAD && (L.butcher_results || L.guaranteed_butcher_results))
-		Butcher(parent, L)
+
+	if(victim.stat == DEAD && (victim.butcher_results || victim.guaranteed_butcher_results))
+		on_butchering(parent, victim)
+
+/datum/component/butchering/mecha
+
+/datum/component/butchering/mecha/RegisterWithParent()
+	. = ..()
+	RegisterSignal(parent, COMSIG_MECHA_EQUIPMENT_ATTACHED, PROC_REF(enable_butchering))
+	RegisterSignal(parent, COMSIG_MECHA_EQUIPMENT_DETACHED, PROC_REF(disable_butchering))
+	RegisterSignal(parent, COMSIG_MECHA_DRILL_MOB, PROC_REF(on_drill))
+
+/datum/component/butchering/mecha/UnregisterFromParent()
+	. = ..()
+	UnregisterSignal(parent, list(
+		COMSIG_MECHA_DRILL_MOB,
+		COMSIG_MECHA_EQUIPMENT_ATTACHED,
+		COMSIG_MECHA_EQUIPMENT_DETACHED,
+	))
+
+///When we are ready to drill through a mob
+/datum/component/butchering/mecha/proc/on_drill(datum/source, obj/vehicle/sealed/mecha/chassis, mob/living/target)
+	SIGNAL_HANDLER
+	INVOKE_ASYNC(src, PROC_REF(on_butchering), chassis, target)
+
+/datum/component/butchering/wearable
+
+/datum/component/butchering/wearable/RegisterWithParent()
+	. = ..()
+	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(worn_enable_butchering))
+	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(worn_disable_butchering))
+
+/datum/component/butchering/wearable/UnregisterFromParent()
+	. = ..()
+	UnregisterSignal(parent, list(
+		COMSIG_ITEM_EQUIPPED,
+		COMSIG_ITEM_DROPPED,
+	))
+
+///Same as enable_butchering but for worn items
+/datum/component/butchering/wearable/proc/worn_enable_butchering(obj/item/source, mob/user, slot)
+	SIGNAL_HANDLER
+	//check if the item is being not worn
+	if(!(slot & source.slot_flags))
+		return
+	butchering_enabled = TRUE
+	RegisterSignal(user, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(butcher_target))
+
+///Same as disable_butchering but for worn items
+/datum/component/butchering/wearable/proc/worn_disable_butchering(obj/item/source, mob/user)
+	SIGNAL_HANDLER
+	butchering_enabled = FALSE
+	UnregisterSignal(user, COMSIG_LIVING_UNARMED_ATTACK)
+
+/datum/component/butchering/wearable/proc/butcher_target(mob/user, atom/target, proximity)
+	SIGNAL_HANDLER
+	if(!isliving(target))
+		return NONE
+	return onItemAttack(parent, target, user)

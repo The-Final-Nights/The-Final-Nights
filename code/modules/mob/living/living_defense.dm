@@ -230,21 +230,50 @@
 	if (user.apply_martial_art(src))
 		return TRUE
 
-/mob/living/attack_paw(mob/living/carbon/human/M)
-	if(isturf(loc) && istype(loc.loc, /area/start))
-		to_chat(M, "No attacking people at spawn, you jackass.")
-		return FALSE
+	for(var/datum/surgery/operations as anything in surgeries)
+		if(user.m_intent == INTENT_HARM)
+			break
+		if(IS_IN_INVALID_SURGICAL_POSITION(src, operations))
+			continue
+		if(operations.next_step(user, modifiers))
+			return TRUE
 
-	if (M.apply_martial_art(src))
-		return TRUE
+	var/martial_result = user.apply_martial_art(src, modifiers)
+	if (martial_result != MARTIAL_ATTACK_INVALID)
+		return martial_result
+
+/mob/living/attack_paw(mob/living/carbon/human/user, list/modifiers)
+	var/martial_result = user.apply_martial_art(src, modifiers)
+	if (martial_result != MARTIAL_ATTACK_INVALID)
+		return martial_result
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if (M != src)
 			M.disarm(src)
 			return TRUE
-	if (M.combat_mode)
-		if(HAS_TRAIT(M, TRAIT_PACIFISM))
-			to_chat(M, "<span class='warning'>You don't want to hurt anyone!</span>")
-			return FALSE
+	if (!(user.m_intent == INTENT_HARM))
+		return FALSE
+	if(HAS_TRAIT(user, TRAIT_PACIFISM))
+		to_chat(user, span_warning("You don't want to hurt anyone!"))
+		return FALSE
+
+	if(!user.get_bodypart(BODY_ZONE_HEAD))
+		return FALSE
+	if(user.is_muzzled() || user.is_mouth_covered(ITEM_SLOT_MASK))
+		to_chat(user, span_warning("You can't bite with your mouth covered!"))
+		return FALSE
+	user.do_attack_animation(src, ATTACK_EFFECT_BITE)
+	if (prob(75))
+		log_combat(user, src, "attacked")
+		playsound(loc, 'sound/weapons/bite.ogg', 50, TRUE, -1)
+		visible_message(span_danger("[user.name] bites [src]!"), \
+						span_userdanger("[user.name] bites you!"), span_hear("You hear a chomp!"), COMBAT_MESSAGE_RANGE, user)
+		to_chat(user, span_danger("You bite [src]!"))
+		return TRUE
+	else
+		visible_message(span_danger("[user.name]'s bite misses [src]!"), \
+						span_danger("You avoid [user.name]'s bite!"), span_hear("You hear the sound of jaws snapping shut!"), COMBAT_MESSAGE_RANGE, user)
+		to_chat(user, span_warning("Your bite misses [src]!"))
 
 	switch (M.a_intent)
 		if (INTENT_HARM)

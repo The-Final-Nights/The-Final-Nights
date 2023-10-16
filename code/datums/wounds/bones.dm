@@ -52,7 +52,14 @@
 
 	update_inefficiencies()
 
-/datum/wound/blunt/remove_wound(ignore_limb, replaced)
+	if (victim)
+		UnregisterSignal(victim, COMSIG_LIVING_UNARMED_ATTACK)
+	if (new_victim)
+		RegisterSignal(new_victim, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(attack_with_hurt_hand))
+
+	return ..()
+
+/datum/wound/blunt/bone/remove_wound(ignore_limb, replaced)
 	limp_slowdown = 0
 	QDEL_NULL(active_trauma)
 	if(limb)
@@ -96,8 +103,8 @@
 /datum/wound/blunt/proc/attack_with_hurt_hand(mob/M, atom/target, proximity)
 	SIGNAL_HANDLER
 
-	if(victim.get_active_hand() != limb || victim.a_intent == INTENT_HELP || !ismob(target) || severity <= WOUND_SEVERITY_MODERATE)
-		return
+	if(victim.get_active_hand() != limb || !proximity || victim.a_intent == INTENT_HELP || !ismob(target) || severity <= WOUND_SEVERITY_MODERATE)
+		return NONE
 
 	// With a severe or critical wound, you have a 15% or 30% chance to proc pain on hit
 	if(prob((severity - 1) * 15))
@@ -113,6 +120,7 @@
 			limb.receive_damage(brute=rand(3,7))
 			return COMPONENT_CANCEL_ATTACK_CHAIN
 
+	return NONE
 
 /datum/wound/blunt/receive_damage(wounding_type, wounding_dmg, wound_bonus)
 	if(!victim || wounding_dmg < WOUND_MINIMUM_DAMAGE)
