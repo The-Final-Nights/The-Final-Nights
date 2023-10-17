@@ -260,13 +260,13 @@
 
 	if(can_inject(M, 1, affecting))//Thick suits can stop monkey bites.
 		if(..()) //successful monkey bite, this handles disease contraction.
-			var/damage = rand(M.dna.species.punchdamagelow, M.dna.species.punchdamagehigh)
+			var/obj/item/bodypart/head/monkey_mouth = user.get_bodypart(BODY_ZONE_HEAD)
+			var/damage = HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER) ? monkey_mouth.unarmed_damage_high : rand(monkey_mouth.unarmed_damage_low, monkey_mouth.unarmed_damage_high)
 			if(!damage)
-				return
-			if(check_shields(M, damage, "the [M.name]"))
 				return FALSE
-			if(stat != DEAD)
-				apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, MELEE))
+			if(check_shields(user, damage, "the [user.name]"))
+				return FALSE
+			apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, MELEE))
 		return TRUE
 
 /mob/living/carbon/human/attack_alien(mob/living/carbon/alien/humanoid/M)
