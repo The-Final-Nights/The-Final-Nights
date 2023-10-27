@@ -558,10 +558,10 @@
 						healies *= 1.1
 					if(emagged == 2)
 						patient.reagents.add_reagent(/datum/reagent/toxin/chloralhydrate, 5)
-						patient.apply_damage_type((healies*1),treatment_method)
+						patient.apply_damage((healies * 1), treatment_method, spread_damage = TRUE)
 						log_combat(src, patient, "pretended to tend wounds on", "internal tools", "([uppertext(treatment_method)]) (EMAGGED)")
 					else
-						patient.apply_damage_type((healies*-1),treatment_method) //don't need to check treatment_method since we know by this point that they were actually damaged.
+						patient.heal_damage_type((healies * 1), treatment_method) //don't need to check treatment_method since we know by this point that they were actually damaged.
 						log_combat(src, patient, "tended the wounds of", "internal tools", "([uppertext(treatment_method)])")
 					C.visible_message("<span class='notice'>[src] tends the wounds of [patient]!</span>", \
 						"<span class='green'>[src] tends your wounds!</span>")

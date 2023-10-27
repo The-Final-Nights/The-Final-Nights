@@ -33,9 +33,15 @@
 
 /datum/species/vampire/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	if(!isnull(batform))
-		C.RemoveSpell(batform)
-		QDEL_NULL(batform)
+	to_chat(new_vampire, "[info_text]")
+	new_vampire.skin_tone = "albino"
+	new_vampire.update_body(0)
+	new_vampire.set_safe_hunger_level()
+	RegisterSignal(new_vampire, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_weakness))
+
+/datum/species/vampire/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
+	. = ..()
+	UnregisterSignal(C, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS)
 
 /datum/species/vampire/spec_life(mob/living/carbon/human/C)
 	. = ..()
@@ -59,10 +65,11 @@
 		C.adjust_fire_stacks(6)
 		C.IgniteMob()
 
-/datum/species/vampire/check_species_weakness(obj/item/weapon, mob/living/attacker)
-	if(istype(weapon, /obj/item/nullrod/whip))
-		return 2 //Whips deal 2x damage to vampires. Vampire killer.
-	return 1
+/datum/species/vampire/proc/damage_weakness(datum/source, list/damage_mods, damage_amount, damagetype, def_zone, sharpness, attack_direction, obj/item/attacking_item)
+	SIGNAL_HANDLER
+
+	if(istype(attacking_item, /obj/item/nullrod/whip))
+		damage_mods += 2
 
 /obj/item/organ/tongue/vampire
 	name = "vampire tongue"

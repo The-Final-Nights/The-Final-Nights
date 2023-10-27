@@ -867,32 +867,42 @@
 	var/messagedelivered = FALSE
 	var/heal_amount = 1
 
-/datum/status_effect/stabilized/black/tick()
-	if(owner.pulling && isliving(owner.pulling) && owner.grab_state == GRAB_KILL)
-		var/mob/living/M = owner.pulling
-		if(M.stat == DEAD)
-			return
-		if(!messagedelivered)
-			to_chat(owner,"<span class='notice'>You feel your hands melt around [M]'s neck and start to drain [M.p_them()] of life.</span>")
-			to_chat(owner.pulling, "<span class='userdanger'>[owner]'s hands melt around your neck, and you can feel your life starting to drain away!</span>")
-			messagedelivered = TRUE
-		examine_text = "<span class='warning'>SUBJECTPRONOUN is draining health from [owner.pulling]!</span>"
-		var/list/healing_types = list()
-		if(owner.getBruteLoss() > 0)
-			healing_types += BRUTE
-		if(owner.getFireLoss() > 0)
-			healing_types += BURN
-		if(owner.getToxLoss() > 0)
-			healing_types += TOX
-		if(owner.getCloneLoss() > 0)
-			healing_types += CLONE
-		if(length(healing_types))
-			owner.apply_damage_type(-heal_amount, damagetype=pick(healing_types))
-		owner.adjust_nutrition(3)
-		M.adjustCloneLoss(heal_amount * 1.2) //This way, two people can't just convert each other's damage away.
-	else
-		messagedelivered = FALSE
-		examine_text = null
+	draining_ref = WEAKREF(draining)
+	to_chat(owner, span_boldnotice("You feel your hands melt around [draining]'s neck as you start to drain [draining.p_them()] of [draining.p_their()] life!"))
+	to_chat(draining, span_userdanger("[owner]'s hands melt around your neck as you can feel your life starting to drain away!"))
+
+/datum/status_effect/stabilized/black/get_examine_text()
+	var/mob/living/draining = draining_ref?.resolve()
+	if(!draining)
+		return null
+
+	return span_warning("[owner.p_They()] [owner.p_are()] draining health from [draining]!")
+
+/datum/status_effect/stabilized/black/tick(seconds_between_ticks)
+	if(owner.grab_state < GRAB_KILL || !IS_WEAKREF_OF(owner.pulling, draining_ref))
+		return
+
+	var/mob/living/drained = draining_ref.resolve()
+	if(drained.stat == DEAD)
+		to_chat(owner, span_warning("[drained] is dead, you cannot drain anymore life from them!"))
+		draining_ref = null
+		return
+
+	var/list/healing_types = list()
+	if(owner.getBruteLoss() > 0)
+		healing_types += BRUTE
+	if(owner.getFireLoss() > 0)
+		healing_types += BURN
+	if(owner.getToxLoss() > 0)
+		healing_types += TOX
+	if(owner.getCloneLoss() > 0)
+		healing_types += CLONE
+
+	if(length(healing_types))
+		owner.heal_damage_type(heal_amount, damagetype = pick(healing_types))
+
+	owner.adjust_nutrition(3)
+	drained.apply_damage(heal_amount * DRAIN_DAMAGE_MULTIPLIER, damagetype = BRUTE, spread_damage = TRUE)
 	return ..()
 
 /datum/status_effect/stabilized/lightpink
