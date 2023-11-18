@@ -864,8 +864,30 @@
 /datum/status_effect/stabilized/black
 	id = "stabilizedblack"
 	colour = "black"
-	var/messagedelivered = FALSE
+	/// How much we heal per tick (also how much we damage per tick times DRAIN_DAMAGE_MULTIPLIER).
 	var/heal_amount = 1
+	/// Weakref to the mob we're currently draining every tick.
+	var/datum/weakref/draining_ref
+
+/datum/status_effect/stabilized/black/on_apply()
+	RegisterSignal(owner, COMSIG_MOVABLE_SET_GRAB_STATE, PROC_REF(on_grab))
+	return ..()
+
+/datum/status_effect/stabilized/black/on_remove()
+	UnregisterSignal(owner, COMSIG_MOVABLE_SET_GRAB_STATE)
+	return ..()
+
+/// Whenever we grab someone by the neck, set "draining" to a weakref of them.
+/datum/status_effect/stabilized/black/proc/on_grab(mob/living/source, new_state)
+	SIGNAL_HANDLER
+
+	if(new_state < GRAB_KILL || !isliving(source.pulling))
+		draining_ref = null
+		return
+
+	var/mob/living/draining = source.pulling
+	if(draining.stat == DEAD)
+		return
 
 	draining_ref = WEAKREF(draining)
 	to_chat(owner, span_boldnotice("You feel your hands melt around [draining]'s neck as you start to drain [draining.p_them()] of [draining.p_their()] life!"))
