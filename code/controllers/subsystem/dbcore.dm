@@ -7,12 +7,17 @@ SUBSYSTEM_DEF(dbcore)
 	init_order = INIT_ORDER_DBCORE
 	priority = FIRE_PRIORITY_DATABASE
 
-	var/failed_connection_timeout = 0
-
 	var/schema_mismatch = 0
 	var/db_minor = 0
 	var/db_major = 0
+	/// Number of failed connection attempts this try. Resets after the timeout or successful connection
 	var/failed_connections = 0
+	/// Max number of consecutive failures before a timeout (here and not a define so it can be vv'ed mid round if needed)
+	var/max_connection_failures = 5
+	/// world.time that connection attempts can resume
+	var/failed_connection_timeout = 0
+	/// Total number of times connections have had to be timed out.
+	var/failed_connection_timeout_count = 0
 
 	var/last_error
 
@@ -184,17 +189,17 @@ SUBSYSTEM_DEF(dbcore)
 		//Take over control of all active queries
 		var/queries_to_check = queries_active.Copy()
 		queries_active.Cut()
-		
+
 		//Start all waiting queries
 		for(var/datum/db_query/query in queries_standby)
 			run_query(query)
 			queries_to_check += query
 			queries_standby -= query
-		
+
 		//wait for them all to finish
 		for(var/datum/db_query/query in queries_to_check)
 			UNTIL(query.process() || REALTIMEOFDAY > endtime)
-		
+
 		//log shutdown to the db
 		var/datum/db_query/query_round_shutdown = SSdbcore.NewQuery(
 			"UPDATE [format_table_name("round")] SET shutdown_datetime = Now(), end_state = :end_state WHERE id = :round_id",
@@ -243,11 +248,15 @@ SUBSYSTEM_DEF(dbcore)
 	if(IsConnected())
 		return TRUE
 
-	if(failed_connection_timeout <= world.time) //it's been more than 5 seconds since we failed to connect, reset the counter
-		failed_connections = 0
+	if(connection)
+		Disconnect() //clear the current connection handle so isconnected() calls stop invoking rustg
+		connection = null //make sure its cleared even if runtimes happened
 
-	if(failed_connections > 5)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to connect for 5 seconds.
-		failed_connection_timeout = world.time + 50
+	if(failed_connection_timeout <= world.time) //it's been long enough since we failed to connect, reset the counter
+		failed_connections = 0
+		failed_connection_timeout = 0
+
+	if(failed_connection_timeout > 0)
 		return FALSE
 
 	if(!CONFIG_GET(flag/sql_enabled))
@@ -283,6 +292,11 @@ SUBSYSTEM_DEF(dbcore)
 		last_error = result["data"]
 		log_sql("Connect() failed | [last_error]")
 		++failed_connections
+		//If it failed to establish a connection more than 5 times in a row, don't bother attempting to connect for a time.
+		if(failed_connections > max_connection_failures)
+			failed_connection_timeout_count++
+			//basic exponential backoff algorithm
+			failed_connection_timeout = world.time + ((2 ** failed_connection_timeout_count) SECONDS)
 
 /datum/controller/subsystem/dbcore/proc/CheckSchemaVersion()
 	if(CONFIG_GET(flag/sql_enabled))
