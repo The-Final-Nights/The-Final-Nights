@@ -17,9 +17,6 @@
 /datum/outfit_manager/ui_state(mob/user)
 	return GLOB.admin_state
 
-/datum/outfit_manager/ui_close(mob/user)
-	qdel(src)
-
 /datum/outfit_manager/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
