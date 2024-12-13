@@ -139,4 +139,8 @@
 /// Trait when something was labelled by the /datum/element/tool_renaming element.
 #define RENAMING_TOOL_LABEL_TRAIT "renaming_tool_label"
 
+/// Trait aquired from being painted a certain color
+#define ATOM_COLOR_TRAIT "atom_color"
+
+
 // END TRAIT DEFINES

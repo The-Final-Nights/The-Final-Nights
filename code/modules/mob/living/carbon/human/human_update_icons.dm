@@ -562,7 +562,7 @@ generate/load female uniform sprites matching all previously decided variables
 			standing.pixel_y += L["y"]
 
 	standing.alpha = alpha
-	standing.color = color
+	standing = color_atom_overlay(standing)
 
 	return standing
 

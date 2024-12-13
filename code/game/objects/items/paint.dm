@@ -111,7 +111,7 @@
 		return
 	if(!isturf(target) || isspaceturf(target))
 		return
-	target.add_atom_colour(paint_color, WASHABLE_COLOUR_PRIORITY)
+	target.add_atom_colour(color_transition_filter(paint_color, SATURATION_OVERRIDE), WASHABLE_COLOUR_PRIORITY)
 
 /obj/item/paint/paint_remover
 	gender =  PLURAL
