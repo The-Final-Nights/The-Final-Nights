@@ -119,22 +119,18 @@ SUBSYSTEM_DEF(carpool)
 	var/locked = TRUE
 	var/access = "none"
 
-	var/driver_movement_dir = 0
-
-	var/drifting = FALSE
-
 	var/traction = 2	//our resistance to lateral movement
-	var/speed = 3		//acceleration in pixels per carpool/fire()
-	var/top_speed = 128
+	var/speed = 32		//acceleration in pixels per carpool/fire()
+	var/top_speed = 256
 	var/top_speed_back = 32
 
 	var/speed_x
 	var/speed_y
 	var/accel_x
 	var/accel_y
+	var/speed_magnitude
 
 	var/angle_looking
-	var/delta_angle = 3
 
 	var/health = 100
 	var/maxhealth = 100
@@ -554,71 +550,7 @@ SUBSYSTEM_DEF(carpool)
 			playsound(V, 'code/modules/wod13/sounds/door.ogg', 50, TRUE)
 			return
 		else
-			to_chat(src, "<span class='warning'>You fail to enter [V].")
 			return
-
-// /obj/vampire_car/Bump(atom/A)
-// 	if(!A)
-// 		return
-// 	var/prev_speed = round(abs(speed_in_pixels)/8)
-// 	if(!prev_speed)
-// 		return
-
-// 	if(istype(A, /mob/living))
-// 		var/mob/living/hit_mob = A
-// 		switch(hit_mob.mob_size)
-// 			if(MOB_SIZE_HUGE) 	//gangrel warforms, werewolves, bears, ppl with fortitude
-// 				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 75, TRUE)
-// 				speed_in_pixels = 0
-// 				impact_delay = world.time
-// 				hit_mob.Paralyze(1 SECONDS)
-// 			if(MOB_SIZE_LARGE)	//ppl with fat bodytype
-// 				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 60, TRUE)
-// 				speed_in_pixels = round(speed_in_pixels * 0.35)
-// 				hit_mob.Knockdown(1 SECONDS)
-// 			if(MOB_SIZE_SMALL)	//small animals
-// 				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 40, TRUE)
-// 				speed_in_pixels = round(speed_in_pixels * 0.75)
-// 				hit_mob.Knockdown(1 SECONDS)
-// 			else				//everything else
-// 				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 50, TRUE)
-// 				speed_in_pixels = round(speed_in_pixels * 0.5)
-// 				hit_mob.Knockdown(1 SECONDS)
-// 	else
-// 		playsound(src, 'code/modules/wod13/sounds/bump.ogg', 75, TRUE)
-// 		speed_in_pixels = 0
-// 		impact_delay = world.time
-
-// 	if(driver && istype(A, /mob/living/carbon/human/npc))
-// 		var/mob/living/carbon/human/npc/NPC = A
-// 		NPC.Aggro(driver, TRUE)
-
-// 	last_pos["x_pix"] = 0
-// 	last_pos["y_pix"] = 0
-// 	for(var/mob/living/L in src)
-// 		if(L)
-// 			if(L.client)
-// 				L.client.pixel_x = 0
-// 				L.client.pixel_y = 0
-// 	if(istype(A, /mob/living))
-// 		var/mob/living/L = A
-// 		var/dam2 = prev_speed
-// 		if(!HAS_TRAIT(L, TRAIT_TOUGH_FLESH))
-// 			dam2 = dam2*2
-// 		L.apply_damage(dam2, BRUTE, BODY_ZONE_CHEST)
-// 		var/dam = prev_speed
-// 		if(driver)
-// 			if(HAS_TRAIT(driver, TRAIT_EXP_DRIVER))
-// 				dam = round(dam/2)
-// 		get_damage(dam)
-// 	else
-// 		var/dam = prev_speed
-// 		if(driver)
-// 			if(HAS_TRAIT(driver, TRAIT_EXP_DRIVER))
-// 				dam = round(dam/2)
-// 			driver.apply_damage(prev_speed, BRUTE, BODY_ZONE_CHEST)
-// 		get_damage(dam)
-// 	return
 
 /obj/vampire_car/retro
 	icon_state = "1"
@@ -739,7 +671,6 @@ SUBSYSTEM_DEF(carpool)
 	Fari.plane = O_LIGHTING_VISUAL_PLANE
 	Fari.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	Fari.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-//	Fari.vis_flags = NONE
 	Fari.alpha = 110
 	gas = rand(100, 1000)
 	GLOB.car_list += src
@@ -749,79 +680,93 @@ SUBSYSTEM_DEF(carpool)
 	add_overlay(image(icon = src.icon, icon_state = src.icon_state, pixel_x = -32, pixel_y = -32))
 	icon_state = "empty"
 
-/obj/vampire_car/relaymove(mob/living/carbon/human/driver, movement_dir)
-	if(world.time-impact_delay < 20)
+/obj/vampire_car/relaymove(mob/living/carbon/human/driver, movement_dir) //fires 5 times for every call to running()
+	if(world.time-impact_delay < 20 \
+		|| driver.IsUnconscious() \
+		|| HAS_TRAIT(driver, TRAIT_INCAPACITATED) \
+		|| HAS_TRAIT(driver, TRAIT_RESTRAINED)
+	)
 		return
-	if(driver.IsUnconscious() || HAS_TRAIT(driver, TRAIT_INCAPACITATED) || HAS_TRAIT(driver, TRAIT_RESTRAINED))
-		return
-	driver_movement_dir = movement_dir
+
+	var/delta_angle = 0
+	if(movement_dir & EAST)
+		delta_angle = min(abs(speed_magnitude) / 6, 5)
+	if(movement_dir & WEST)
+		delta_angle = -min(abs(speed_magnitude) / 6, 5)
+	angle_looking = SIMPLIFY_DEGREES(angle_looking + delta_angle)
+
+	//TODO dont drink and drive
+
+	//at max turn speed, snap to nearest cardinal if our angle increment is higher than our difference to a cardinal direction
+	var/nearest_cardinal = round((angle_looking + 45) / 90) * 90
+	if(abs(delta_angle) == 5 && abs(angle_looking - nearest_cardinal) < 5)
+		angle_looking = nearest_cardinal
+	handle_rotation()
+
+	accel_x = 0
+	accel_y = 0
+	if(movement_dir & NORTH)
+		playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 10, FALSE)
+		accel_x = round(sin(angle_looking) * speed)
+		accel_y = round(cos(angle_looking) * speed)
 
 /obj/vampire_car/proc/running()
-	var/speed_magnitude = sqrt(speed_x ** 2 + speed_y ** 2)
-	var/delta_steer = 0
-	var/delta_accel = 0
-	if(driver_movement_dir & EAST)
-		delta_steer += min(abs(speed_magnitude) / 32, 3)
-	if(driver_movement_dir & WEST)
-		delta_steer -= min(abs(speed_magnitude) / 32, 3)
-	if(driver_movement_dir & NORTH)
-		delta_accel += speed
-	if(driver_movement_dir & SOUTH)
-		accel_x = 0
-		accel_y = 0
+	speed_x = clamp(speed_x + accel_x, -top_speed, top_speed) * 0.8
+	speed_y = clamp(speed_y + accel_y, -top_speed, top_speed) * 0.8
+	speed_magnitude = sqrt(speed_x ** 2 + speed_y ** 2)
 
-	angle_looking = SIMPLIFY_DEGREES(angle_looking + delta_steer)
-	accel_x = round(sin(angle_looking) * delta_accel)
-	accel_y = round(cos(angle_looking) * delta_accel)
-	speed_x = clamp(speed_x + accel_x, -top_speed, top_speed)
-	speed_y = clamp(speed_y + accel_y, -top_speed, top_speed)
-	var/last_pixel_x = pixel_x
-	var/last_pixel_y = pixel_y
-	pixel_x += speed_x
-	pixel_y += speed_y
+	var/delta_angle = angle_looking - ATAN2(speed_y, speed_x)
+	if(delta_angle != 0)
+		var/turn_radius = (speed_magnitude * (360 / abs(delta_angle))) / (2 * PI)
+		var/centripetal_force = round((speed_magnitude ** 2) / turn_radius) //f = v^2 / r
+		var/inwards = SIMPLIFY_DEGREES(angle_looking + 90 * SIGN(delta_angle))
+		speed_x += round(sin(inwards) * centripetal_force)
+		speed_y += round(cos(inwards) * centripetal_force)
+
+	var/new_pix_x = pixel_x + speed_x //we'll call animate() later to update our pixel_x to this
+	var/new_pix_y = pixel_y + speed_y
 
 	//if our sprite's offset is >16 pixels offcenter, move accross the world
-	var/delta_x = (pixel_x < 0 ? -1 : 1) * round((abs(pixel_x) + 16) / 32) //amount of turfs we will cross
-	var/delta_y = (pixel_y < 0 ? -1 : 1) * round((abs(pixel_y) + 16) / 32)
+	var/delta_x = (new_pix_x < 0 ? -1 : 1) * round((abs(new_pix_x) + 16) / 32) //amount of turfs we will cross
+	var/delta_y = (new_pix_y < 0 ? -1 : 1) * round((abs(new_pix_y) + 16) / 32)
 	if(delta_x || delta_y)
-		var/horizontal = pixel_x < 0 ? WEST : EAST
-		var/vertical = pixel_y < 0 ? NORTH : SOUTH
-		if(delta_x > delta_y)
+		var/horizontal = new_pix_x < 0 ? WEST : EAST
+		var/vertical = new_pix_y < 0 ? SOUTH : NORTH
+		pixel_x -= delta_x * 32
+		pixel_y -= delta_y * 32
+		new_pix_x -= delta_x * 32
+		new_pix_y -= delta_y * 32
+		if(abs(delta_x) > abs(delta_y))
 			bresenham_move(abs(delta_x), abs(delta_y), horizontal, vertical)
 		else
 			bresenham_move(abs(delta_y), abs(delta_x), vertical, horizontal)
-		last_pixel_x -= delta_x * 32
-		last_pixel_y -= delta_y * 32
-		pixel_x -= delta_x * 32
-		pixel_y -= delta_y * 32
-
-	to_chat(driver, "[last_pixel_x], [pixel_x]")
 
 	//vfx
 	for(var/mob/living/rider in src)
 		if(rider && rider.client)
-			rider.client.pixel_x = pixel_x //tomorrow: you misunderstood how this works
+			rider.client.pixel_x = pixel_x
 			rider.client.pixel_y = pixel_y
 			animate(rider.client,
-				pixel_x = pixel_x + (pixel_x - last_pixel_x),
-				pixel_y = pixel_y + (pixel_y - last_pixel_y),
+				pixel_x = new_pix_x,
+				pixel_y = new_pix_y,
 				SScarpool.wait, 1)
+	var/turn_state = round(SIMPLIFY_DEGREES(angle_looking + 22.5) / 45)
+	dir = GLOB.modulo_angle_to_dir[turn_state + 1]
 	animate(src,
-		pixel_x = pixel_x + (pixel_x - last_pixel_x),
-		pixel_y = pixel_y + (pixel_y - last_pixel_y),
+		pixel_x = new_pix_x,
+		pixel_y = new_pix_y,
 		SScarpool.wait, 1)
-	handle_rotation()
 
+//move in a straight diagonal line
 /obj/vampire_car/proc/bresenham_move(dx, dy, h, v)
-	var/error = 2 * dy - dx
+	var/margin = 2 * dy - dx
 	for(var/i=0; i<dx; i++)
-		var/dir_now = h
-		if(error >= 0)
-			dir_now |= v
-			error -= 2 * dx
-		error += 2 * dy
-		if(!Move(get_step(src, dir_now), dir_now))
-			return
+		if(margin >= 0)
+			if(!Move(get_step(src, v), v)) return FALSE
+			margin -= 2 * dx
+		margin += 2 * dy
+		if(!Move(get_step(src, h), h)) return FALSE
+	return TRUE
 
 /obj/vampire_car/Bump(atom/contact)
 	to_chat(driver, "we bumped [contact]")
@@ -829,10 +774,7 @@ SUBSYSTEM_DEF(carpool)
 /obj/vampire_car/proc/handle_rotation()
 	var/turn_state = round(SIMPLIFY_DEGREES(angle_looking + 22.5) / 45)
 	dir = GLOB.modulo_angle_to_dir[turn_state + 1]
-
-	var/matrix/M = matrix()
-	M.Turn(angle_looking - turn_state * 45)
-	transform = M
+	transform = turn(matrix(), angle_looking - turn_state * 45)
 
 /obj/vampire_car/setDir(newdir)
 	. = ..()
