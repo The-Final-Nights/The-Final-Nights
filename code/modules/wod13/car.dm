@@ -83,7 +83,6 @@ SUBSYSTEM_DEF(carpool)
 		playsound(get_turf(H), 'code/modules/wod13/sounds/gas_splat.ogg', 50, TRUE)
 		user.visible_message("<span class='warning'>[user] covers [A] in something flammable!</span>")
 
-
 /obj/vampire_car/attack_hand(mob/user)
 	. = ..()
 	if(ishuman(user))
@@ -107,33 +106,34 @@ SUBSYSTEM_DEF(carpool)
 	throwforce = 150
 	glide_size = 96
 
-	var/image/Fari
-	var/fari_on = FALSE
-
 	var/mob/living/driver
 	var/list/passengers = list()
 	var/max_passengers = 3
 
+	var/health = 100
+	var/maxhealth = 100
+	var/repairing = FALSE
+	var/gas = 1000
 	var/on = FALSE
 	var/locked = TRUE
 	var/access = "none"
 
-	var/speed = 48		//acceleration in pixels per carpool/fire()
-	var/top_speed = 256
+	//handling stats
+	var/speed = 32 //acceleration in pixels per carpool/fire()
+	var/top_speed = 312
 	var/top_speed_back = 32
 	var/steering = 3
 
+	//physics variables DO NOT TOUCH
 	var/speed_x
 	var/speed_y
 	var/accel_x
 	var/accel_y
 	var/speed_magnitude
 	var/angle_looking
+	var/angular_momentum
 	var/drifting = FALSE
-
-	var/health = 100
-	var/maxhealth = 100
-	var/repairing = FALSE
+	var/reverse = FALSE //i was going to do full on gear transmissions, but i got lazy
 
 	COOLDOWN_DECLARE(sfx)
 
@@ -143,8 +143,6 @@ SUBSYSTEM_DEF(carpool)
 
 	var/exploded = FALSE
 	var/beep_sound = 'code/modules/wod13/sounds/beep.ogg'
-
-	var/gas = 1000
 
 /obj/vampire_car/ComponentInitialize()
 	. = ..()
@@ -314,9 +312,6 @@ SUBSYSTEM_DEF(carpool)
 		var/datum/action/carr/exit_car/E = locate() in L.actions
 		if(E)
 			qdel(E)
-		var/datum/action/carr/fari_vrubi/F = locate() in L.actions
-		if(F)
-			qdel(F)
 		var/datum/action/carr/engine/N = locate() in L.actions
 		if(N)
 			qdel(N)
@@ -344,7 +339,7 @@ SUBSYSTEM_DEF(carpool)
 	if(driver || length(passengers))
 		. += "<span class='notice'>You see the following people inside:</span>"
 		for(var/mob/living/rider in src)
-			. += "<span class='notice'>* [rider]</span>"
+			. += "<span class='notice'>[icon2html(rider, user)] [rider]</span>"
 
 /obj/vampire_car/proc/get_damage(var/cost)
 	if(cost > 0)
@@ -363,9 +358,6 @@ SUBSYSTEM_DEF(carpool)
 				var/datum/action/carr/exit_car/E = locate() in L.actions
 				if(E)
 					qdel(E)
-				var/datum/action/carr/fari_vrubi/F = locate() in L.actions
-				if(F)
-					qdel(F)
 				var/datum/action/carr/engine/N = locate() in L.actions
 				if(N)
 					qdel(N)
@@ -381,25 +373,6 @@ SUBSYSTEM_DEF(carpool)
 		on = FALSE
 		set_light(0)
 	return
-
-/datum/action/carr/fari_vrubi
-	name = "Toggle Light"
-	desc = "Toggle light on/off."
-	button_icon_state = "lights"
-
-/datum/action/carr/fari_vrubi/Trigger()
-	if(istype(owner.loc, /obj/vampire_car))
-		var/obj/vampire_car/V = owner.loc
-		if(!V.fari_on)
-			V.fari_on = TRUE
-			V.add_overlay(V.Fari)
-			to_chat(owner, "<span class='notice'>You toggle [V]'s lights.</span>")
-			playsound(V, 'sound/weapons/magin.ogg', 40, TRUE)
-		else
-			V.fari_on = FALSE
-			V.cut_overlay(V.Fari)
-			to_chat(owner, "<span class='notice'>You toggle [V]'s lights.</span>")
-			playsound(V, 'sound/weapons/magout.ogg', 40, TRUE)
 
 /datum/action/carr/beep
 	name = "Signal"
@@ -442,6 +415,7 @@ SUBSYSTEM_DEF(carpool)
 		var/obj/vampire_car/V = owner.loc
 		if(!V.on)
 			if(V.gas <= 0)
+				playsound(V, 'code/modules/wod13/sounds/engine-start-failure.ogg', 50, FALSE)
 				to_chat(owner, "<span class='warning'>[V] is out of gas.")
 				return
 			if(V.health == V.maxhealth || prob(100*(V.health/V.maxhealth)))
@@ -469,8 +443,10 @@ SUBSYSTEM_DEF(carpool)
 	if(istype(owner.loc, /obj/vampire_car))
 		var/obj/vampire_car/V = owner.loc
 
-		if(HAS_TRAIT(owner, TRAIT_INCAPACITATED) || HAS_TRAIT(owner, TRAIT_RESTRAINED))
-			to_chat(owner, "<span class='warning'>You failed to escape [V] because you're restrained.</span>")
+		if(HAS_TRAIT(owner, TRAIT_INCAPACITATED))
+			return
+		if(HAS_TRAIT(owner, TRAIT_RESTRAINED))
+			to_chat(owner, "<span class='warning'>You can't get [V]'s door open while you're restrained.</span>")
 			return
 
 		if(V.driver == owner)
@@ -508,7 +484,7 @@ SUBSYSTEM_DEF(carpool)
 
 /mob/living/carbon/human/MouseDrop(atom/over_object)
 	. = ..()
-	if(istype(over_object, /obj/vampire_car) && get_dist(src, over_object) < 2)
+	if(istype(over_object, /obj/vampire_car) && get_dist(usr, src) < 2 && get_dist(usr, over_object) < 2)
 		var/obj/vampire_car/V = over_object
 
 		if(V.locked)
@@ -532,8 +508,6 @@ SUBSYSTEM_DEF(carpool)
 				V.driver = src
 				var/datum/action/carr/exit_car/E = new()
 				E.Grant(src)
-				var/datum/action/carr/fari_vrubi/F = new()
-				F.Grant(src)
 				var/datum/action/carr/engine/N = new()
 				N.Grant(src)
 				var/datum/action/carr/beep/B = new()
@@ -610,21 +584,7 @@ SUBSYSTEM_DEF(carpool)
 	var/last_color_change = 0
 
 /obj/vampire_car/police/running()
-	if(fari_on)
-		if(last_color_change+10 <= world.time)
-			last_color_change = world.time
-			if(color_blue)
-				color_blue = FALSE
-				set_light(0)
-				set_light(4, 6, "#ff0000")
-			else
-				color_blue = TRUE
-				set_light(0)
-				set_light(4, 6, "#0000ff")
-	else
-		if(last_color_change+10 <= world.time)
-			last_color_change = world.time
-			set_light(0)
+	//im sorry
 	..()
 
 /obj/vampire_car/taxi
@@ -660,20 +620,10 @@ SUBSYSTEM_DEF(carpool)
 
 /obj/vampire_car/Initialize()
 	. = ..()
-	Fari = new (src)
-	Fari.icon = 'icons/effects/light_overlays/light_cone_car.dmi'
-	Fari.icon_state = "light"
-	Fari.pixel_x = -64
-	Fari.pixel_y = -64
-	Fari.layer = O_LIGHTING_VISUAL_LAYER
-	Fari.plane = O_LIGHTING_VISUAL_PLANE
-	Fari.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
-	Fari.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	Fari.alpha = 110
-	gas = rand(100, 1000)
-	GLOB.car_list += src
 
+	GLOB.car_list += src
 	angle_looking = dir2angle(dir)
+	gas = rand(850, 1000)
 
 	add_overlay(image(icon = src.icon, icon_state = src.icon_state, pixel_x = -32, pixel_y = -32))
 	icon_state = "empty"
@@ -692,7 +642,7 @@ SUBSYSTEM_DEF(carpool)
 		delta_angle = -min(abs(speed_magnitude) / 15, steering)
 	angle_looking = SIMPLIFY_DEGREES(angle_looking + delta_angle)
 
-	//TODO: dont drink and drive
+	//TODO: randomly swerve if our driver is drunk
 
 	//at max turn speed, snap to nearest cardinal if our angle increment > difference to a cardinal direction
 	var/nearest_cardinal = round(SIMPLIFY_DEGREES(angle_looking + 45) / 90) * 90
@@ -700,27 +650,34 @@ SUBSYSTEM_DEF(carpool)
 		angle_looking = nearest_cardinal
 	handle_rotation()
 
-	accel_x = 0
-	accel_y = 0
 	if(movement_dir & NORTH && on)
 		if(drifting)
-			playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 20, FALSE)
+			playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 10, FALSE)
 		else
 			playsound(src, 'code/modules/wod13/sounds/drive.ogg', 10, FALSE)
 		gas -= 0.02
 		accel_x = round(sin(angle_looking) * speed)
 		accel_y = round(cos(angle_looking) * speed)
-	//TODO: RATIO GEAR TRANSMISSION
-	// if(movement_dir & SOUTH)
-	// 	playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 10, FALSE)
-	// 	var/angle_behind = SIMPLIFY_DEGREES(angle_looking + 180)
-	// 	accel_x = round(sin(angle_behind) * speed)
-	// 	accel_y = round(cos(angle_behind) * speed)
+		reverse = FALSE
+	if(movement_dir & SOUTH)
+		playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 10, FALSE)
+		var/angle_behind = SIMPLIFY_DEGREES(angle_looking + 180)
+		accel_x = round(sin(angle_behind) * speed)
+		accel_y = round(cos(angle_behind) * speed)
+		reverse = TRUE
 
 /obj/vampire_car/proc/running()
-	speed_x = round(clamp(speed_x + accel_x, -top_speed, top_speed) * 0.8)
-	speed_y = round(clamp(speed_y + accel_y, -top_speed, top_speed) * 0.8)
+	if(reverse)
+		speed_x = clamp(speed_x + accel_x, -top_speed_back, top_speed_back) * 0.8
+		speed_y = clamp(speed_y + accel_y, -top_speed_back, top_speed_back) * 0.8
+	else
+		speed_x = clamp(speed_x + accel_x, -top_speed, top_speed) * 0.8
+		speed_y = clamp(speed_y + accel_y, -top_speed, top_speed) * 0.8
+	speed_x = SIGN(speed_x) * round(max(abs(speed_x) - 2, 0))
+	speed_y = SIGN(speed_y) * round(max(abs(speed_y) - 2, 0))
 	speed_magnitude = sqrt(speed_x ** 2 + speed_y ** 2)
+	accel_x = 0
+	accel_y = 0
 
 	if(gas <= 0)
 		on = FALSE
@@ -731,39 +688,25 @@ SUBSYSTEM_DEF(carpool)
 		COOLDOWN_START(src, sfx, 1 SECONDS)
 
 	//handle drifting: if we're not drifting, apply centripetal force
-	var/delta_angle = closer_angle_difference(angle_looking, ATAN2(speed_y, speed_x))
+	var/momentum_angle = ATAN2(speed_y, speed_x)
+	var/delta_angle =		 closer_angle_difference(angle_looking, momentum_angle)
+	var/delta_angle_behind = closer_angle_difference(SIMPLIFY_DEGREES(angle_looking + 180), momentum_angle)
+	var/line_angle = abs(delta_angle) < abs(delta_angle_behind) ? angle_looking : SIMPLIFY_DEGREES(angle_looking + 180)
+	delta_angle = abs(delta_angle) < abs(delta_angle_behind) ? delta_angle : delta_angle_behind
 	if(drifting)
-		if(delta_angle < 10 || speed_magnitude < 24)
+		if(delta_angle < 20 || speed_magnitude < 32)
 			drifting = FALSE
 			steering = 3
 	else if(delta_angle && speed_magnitude)
-		if(closer_angle_difference(ATAN2(accel_x, accel_y), ATAN2(speed_y, speed_x)) > 45)
+		if(closer_angle_difference(ATAN2(accel_x, accel_y), momentum_angle) > 67.5)
 			drifting = TRUE
 			steering = 6
 		else
 			var/turn_radius = (360 / abs(delta_angle)) / (2 * PI)
 			var/centripetal_force = round(speed_magnitude / turn_radius) * 0.9
-			var/inwards = SIMPLIFY_DEGREES(angle_looking + 90 * SIGN(delta_angle))
+			var/inwards = SIMPLIFY_DEGREES(line_angle + 90 * SIGN(delta_angle))
 			speed_x += round(sin(inwards) * centripetal_force)
 			speed_y += round(cos(inwards) * centripetal_force)
-
-	var/new_pix_x = pixel_x + speed_x //we'll call animate() later to update our pixel_x to this
-	var/new_pix_y = pixel_y + speed_y
-
-	//if our sprite is >16 pixels offcenter, move accross the world
-	var/delta_x = (new_pix_x < 0 ? -1 : 1) * round((abs(new_pix_x) + 16) / 32) //amount of turfs we will cross
-	var/delta_y = (new_pix_y < 0 ? -1 : 1) * round((abs(new_pix_y) + 16) / 32)
-	if(delta_x || delta_y)
-		var/horizontal = new_pix_x < 0 ? WEST : EAST
-		var/vertical = new_pix_y < 0 ? SOUTH : NORTH
-		pixel_x -= delta_x * 32
-		pixel_y -= delta_y * 32
-		new_pix_x -= delta_x * 32
-		new_pix_y -= delta_y * 32
-		if(abs(delta_x) > abs(delta_y))
-			bresenham_move(abs(delta_x), abs(delta_y), horizontal, vertical)
-		else
-			bresenham_move(abs(delta_y), abs(delta_x), vertical, horizontal)
 
 	//make NPCs dodge out of the way
 	var/turf/check_ahead = locate( \
@@ -790,6 +733,28 @@ SUBSYSTEM_DEF(carpool)
 						if(prob(50))
 							NPC.RealisticSay(pick(NPC.socialrole.car_dodged))
 
+	var/new_pix_x = pixel_x + speed_x //we'll call animate() later to update our pixel_x to this
+	var/new_pix_y = pixel_y + speed_y
+
+	//if our sprite is >16 pixels offcenter, move accross the world
+	var/delta_x = (new_pix_x < 0 ? -1 : 1) * round((abs(new_pix_x) + 16) / 32) //amount of turfs we will cross
+	var/delta_y = (new_pix_y < 0 ? -1 : 1) * round((abs(new_pix_y) + 16) / 32)
+	var/last_x = x
+	var/last_y = y
+	if(delta_x || delta_y)
+		var/horizontal = new_pix_x < 0 ? WEST : EAST
+		var/vertical = new_pix_y < 0 ? SOUTH : NORTH
+		if(abs(delta_x) > abs(delta_y))
+			bresenham_move(abs(delta_x), abs(delta_y), horizontal, vertical)
+		else
+			bresenham_move(abs(delta_y), abs(delta_x), vertical, horizontal)
+		delta_x = x - last_x
+		delta_y = y - last_y
+		pixel_x -= delta_x * 32
+		pixel_y -= delta_y * 32
+		new_pix_x -= delta_x * 32
+		new_pix_y -= delta_y * 32
+
 	//vfx
 	for(var/mob/living/rider in src)
 		if(rider && rider.client)
@@ -809,14 +774,13 @@ SUBSYSTEM_DEF(carpool)
 	var/margin = 2 * dy - dx
 	for(var/i=0; i<dx; i++)
 		if(margin >= 0)
-			if(!Move(get_step(src, v), v)) return FALSE
+			if(!Move(get_step(src, v), v)) return
 			margin -= 2 * dx
 		margin += 2 * dy
-		if(!Move(get_step(src, h), h)) return FALSE
-	return TRUE
+		if(!Move(get_step(src, h), h)) return
 
 /obj/vampire_car/Bump(atom/contact)
-	//to_chat(driver, "we bumped [contact]")
+	to_chat(driver, "we bumped [contact]")
 
 /obj/vampire_car/proc/handle_rotation()
 	var/turn_state = round(SIMPLIFY_DEGREES(angle_looking + 22.5) / 45)
