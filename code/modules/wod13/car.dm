@@ -120,20 +120,21 @@ SUBSYSTEM_DEF(carpool)
 
 	//handling stats
 	var/speed = 32 //acceleration in pixels per carpool/fire()
-	var/top_speed = 312
-	var/top_speed_back = 32
+	var/top_speed = 418
+	var/top_speed_back = 64
 	var/steering = 3
 
-	//physics variables DO NOT TOUCH
 	var/speed_x
 	var/speed_y
 	var/accel_x
 	var/accel_y
 	var/speed_magnitude
 	var/angle_looking
-	var/angular_momentum
+	//var/torque
 	var/drifting = FALSE
 	var/reverse = FALSE //i was going to do full on gear transmissions, but i got lazy
+	var/new_pix_x
+	var/new_pix_y
 
 	COOLDOWN_DECLARE(sfx)
 
@@ -651,15 +652,12 @@ SUBSYSTEM_DEF(carpool)
 	handle_rotation()
 
 	if(movement_dir & NORTH && on)
-		if(drifting)
-			playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 10, FALSE)
-		else
-			playsound(src, 'code/modules/wod13/sounds/drive.ogg', 10, FALSE)
+		playsound(src, 'code/modules/wod13/sounds/drive.ogg', 10, FALSE)
 		gas -= 0.02
 		accel_x = round(sin(angle_looking) * speed)
 		accel_y = round(cos(angle_looking) * speed)
 		reverse = FALSE
-	if(movement_dir & SOUTH)
+	if(movement_dir & SOUTH && on)
 		playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 10, FALSE)
 		var/angle_behind = SIMPLIFY_DEGREES(angle_looking + 180)
 		accel_x = round(sin(angle_behind) * speed)
@@ -694,6 +692,7 @@ SUBSYSTEM_DEF(carpool)
 	var/line_angle = abs(delta_angle) < abs(delta_angle_behind) ? angle_looking : SIMPLIFY_DEGREES(angle_looking + 180)
 	delta_angle = abs(delta_angle) < abs(delta_angle_behind) ? delta_angle : delta_angle_behind
 	if(drifting)
+		playsound(src, 'code/modules/wod13/sounds/stopping.ogg', min(speed_magnitude / 4, 20), FALSE)
 		if(delta_angle < 20 || speed_magnitude < 32)
 			drifting = FALSE
 			steering = 3
@@ -733,8 +732,8 @@ SUBSYSTEM_DEF(carpool)
 						if(prob(50))
 							NPC.RealisticSay(pick(NPC.socialrole.car_dodged))
 
-	var/new_pix_x = pixel_x + speed_x //we'll call animate() later to update our pixel_x to this
-	var/new_pix_y = pixel_y + speed_y
+	new_pix_x = pixel_x + speed_x //we'll call animate() later to update our pixel_x to this
+	new_pix_y = pixel_y + speed_y
 
 	//if our sprite is >16 pixels offcenter, move accross the world
 	var/delta_x = (new_pix_x < 0 ? -1 : 1) * round((abs(new_pix_x) + 16) / 32) //amount of turfs we will cross
@@ -780,7 +779,62 @@ SUBSYSTEM_DEF(carpool)
 		if(!Move(get_step(src, h), h)) return
 
 /obj/vampire_car/Bump(atom/contact)
-	to_chat(driver, "we bumped [contact]")
+	if(istype(contact, /mob/living))
+		var/mob/living/hit_mob = contact
+		switch(hit_mob.mob_size)
+			if(MOB_SIZE_HUGE) 	//gangrel warforms, werewolves, bears, ppl with fortitude
+				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 75, TRUE)
+				speed_x = 0
+				speed_y = 0
+				driver.Stun(1 SECONDS)
+				hit_mob.Paralyze(1 SECONDS)
+			if(MOB_SIZE_LARGE)	//gargoyles, other heavier creatures
+				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 60, TRUE)
+				speed_x *= 0.35
+				speed_y *= 0.35
+				hit_mob.Knockdown(1 SECONDS)
+			if(MOB_SIZE_SMALL)	//small animals
+				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 40, TRUE)
+				speed_x *= 0.75
+				speed_y *= 0.75
+				hit_mob.Knockdown(1 SECONDS)
+			else
+				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 50, TRUE)
+				speed_x *= 0.5
+				speed_y *= 0.5
+				hit_mob.Knockdown(1 SECONDS)
+	else
+		playsound(src, 'code/modules/wod13/sounds/bump.ogg', 75, TRUE)
+		speed_x = 0
+		speed_y = 0
+		driver.Stun(1 SECONDS)
+
+	if(driver && istype(contact, /mob/living/carbon/human/npc))
+		var/mob/living/carbon/human/npc/NPC = contact
+		NPC.Aggro(driver, TRUE)
+
+	new_pix_x = 0
+	new_pix_y = 0
+
+	if(istype(contact, /mob/living))
+		var/mob/living/L = contact
+		var/dam2 = speed_magnitude / 8
+		if(!HAS_TRAIT(L, TRAIT_TOUGH_FLESH))
+			dam2 = dam2*2
+		L.apply_damage(dam2, BRUTE, BODY_ZONE_CHEST)
+		var/dam = speed_magnitude / 8
+		if(driver)
+			if(HAS_TRAIT(driver, TRAIT_EXP_DRIVER))
+				dam = round(dam/2)
+		get_damage(dam)
+	else
+		var/dam = speed_magnitude / 8
+		if(driver)
+			if(HAS_TRAIT(driver, TRAIT_EXP_DRIVER))
+				dam = round(dam/2)
+			driver.apply_damage(speed_magnitude / 8, BRUTE, BODY_ZONE_CHEST)
+		get_damage(dam)
+	return
 
 /obj/vampire_car/proc/handle_rotation()
 	var/turn_state = round(SIMPLIFY_DEGREES(angle_looking + 22.5) / 45)
