@@ -660,6 +660,7 @@ SUBSYSTEM_DEF(carpool)
 	if(movement_dir & SOUTH && on)
 		playsound(src, 'code/modules/wod13/sounds/stopping.ogg', 10, FALSE)
 		var/angle_behind = SIMPLIFY_DEGREES(angle_looking + 180)
+		gas -= 0.005
 		accel_x = round(sin(angle_behind) * speed)
 		accel_y = round(cos(angle_behind) * speed)
 		reverse = TRUE
@@ -786,7 +787,7 @@ SUBSYSTEM_DEF(carpool)
 				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 75, TRUE)
 				speed_x = 0
 				speed_y = 0
-				driver.Stun(1 SECONDS)
+				driver.Paralyze(1 SECONDS)
 				hit_mob.Paralyze(1 SECONDS)
 			if(MOB_SIZE_LARGE)	//gargoyles, other heavier creatures
 				playsound(src, 'code/modules/wod13/sounds/bump.ogg', 60, TRUE)
@@ -807,7 +808,7 @@ SUBSYSTEM_DEF(carpool)
 		playsound(src, 'code/modules/wod13/sounds/bump.ogg', 75, TRUE)
 		speed_x = 0
 		speed_y = 0
-		driver.Stun(1 SECONDS)
+		driver.Paralyze(1 SECONDS)
 
 	if(driver && istype(contact, /mob/living/carbon/human/npc))
 		var/mob/living/carbon/human/npc/NPC = contact
