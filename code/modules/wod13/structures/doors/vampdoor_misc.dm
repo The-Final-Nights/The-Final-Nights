@@ -82,3 +82,19 @@
 	locked = TRUE
 	lock_id = "strip"
 	lockpick_difficulty = 4
+
+/obj/structure/vampdoor/children_of_gaia
+	icon_state = "oldwood-1"
+	baseicon = "oldwood"
+	locked = TRUE
+	lock_id = "coggie"
+	burnable = TRUE
+	lockpick_difficulty = 10
+
+/obj/structure/vampdoor/food_pantry
+	icon_state = "cam-1"
+	baseicon = "cam"
+	locked = TRUE
+	lock_id = "coggie"
+	burnable = TRUE
+	lockpick_difficulty = 4

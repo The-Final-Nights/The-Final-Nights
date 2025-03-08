@@ -367,3 +367,10 @@
 		"taxi"
 	)
 	color = "#fffb8b"
+
+/obj/item/vamp/keys/children_of_gaia
+	name = "Food Pantry keys"
+	accesslocks = list(
+		"coggie"
+	)
+	color = "#339933"

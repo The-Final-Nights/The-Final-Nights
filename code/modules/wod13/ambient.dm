@@ -497,6 +497,19 @@
 	zone_type = "elysium"
 	music = /datum/vampiremusic/nosferatu
 	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/cog_pantry
+	name = "Earth's Bounty Food Pantry"
+	icon_state = "cog_pantry"
+	music = /datum/vampiremusic/forest
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/cog_caern
+	name = "Children of Gaia Caern"
+	icon_state = "cog_caern"
+	music = /datum/vampiremusic/forest
+	zone_type = "elysium"
+	wall_rating = HIGH_WALL_RATING
 //MUSIC
 
 /datum/vampiremusic
