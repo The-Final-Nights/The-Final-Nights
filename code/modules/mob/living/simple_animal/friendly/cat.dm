@@ -285,7 +285,7 @@
 		L.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.4)
 
 /mob/living/simple_animal/pet/cat/vampire
-	icon = 'code/modules/wod13/mobs.dmi'
+	icon = 'icons/wod13/mobs.dmi'
 	bloodpool = 2
 	maxbloodpool = 2
 	mob_size = MOB_SIZE_SMALL
@@ -300,7 +300,7 @@
 /mob/living/simple_animal/hostile/beastmaster/cat
 	name = "cat"
 	desc = "Kitty!!"
-	icon = 'code/modules/wod13/mobs.dmi'
+	icon = 'icons/wod13/mobs.dmi'
 	icon_state = "cat2"
 	icon_living = "cat2"
 	icon_dead = "cat2_dead"

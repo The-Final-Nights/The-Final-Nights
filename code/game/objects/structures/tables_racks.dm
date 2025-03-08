@@ -558,7 +558,7 @@
 /obj/structure/table/optable
 	name = "operating table"
 	desc = "Used for advanced medical procedures."
-	icon = 'code/modules/wod13/props.dmi'
+	icon = 'icons/wod13/props.dmi'
 	icon_state = "surgeonchair"
 	buildstack = /obj/item/stack/sheet/mineral/silver
 	smoothing_flags = NONE

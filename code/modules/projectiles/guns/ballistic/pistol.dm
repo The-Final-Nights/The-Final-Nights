@@ -50,7 +50,7 @@
 /obj/item/gun/ballistic/automatic/pistol/deagle
 	name = "\improper Desert Eagle"
 	desc = "A powerful .50 AE handgun."
-	icon = 'code/modules/wod13/weapons.dmi'
+	icon = 'icons/wod13/weapons.dmi'
 	icon_state = "deagle"
 	force = 14
 	mag_type = /obj/item/ammo_box/magazine/m50

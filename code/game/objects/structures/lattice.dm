@@ -19,7 +19,7 @@
 
 /obj/structure/lattice/pentex
 	desc = "Looks sturdy enough and made of advanced materials."
-	icon = 'code/modules/wod13/pentexcatwalk.dmi'
+	icon = 'icons/wod13/pentexcatwalk.dmi'
 
 
 /obj/structure/lattice/examine(mob/user)

@@ -93,7 +93,7 @@
 /obj/structure/showcase/machinery/tv
 	name = "\improper TV"
 	desc = "A slightly battered looking TV. Various infomercials play on a loop, accompanied by a jaunty tune."
-	icon = 'code/modules/wod13/props.dmi'
+	icon = 'icons/wod13/props.dmi'
 	icon_state = "tv_news"
 
 

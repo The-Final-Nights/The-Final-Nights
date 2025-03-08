@@ -6,14 +6,14 @@
 
 /atom/movable/screen/rage
 	name = "Rage"
-	icon = 'code/modules/wod13/48x48.dmi'
+	icon = 'icons/wod13/48x48.dmi'
 	icon_state = "rage0"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/transform_homid
 	name = "Homid"
-	icon = 'code/modules/wod13/32x48.dmi'
+	icon = 'icons/wod13/32x48.dmi'
 	icon_state = "homid"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -27,7 +27,7 @@
 
 /atom/movable/screen/transform_crinos
 	name = "Crinos"
-	icon = 'code/modules/wod13/32x48.dmi'
+	icon = 'icons/wod13/32x48.dmi'
 	icon_state = "crinos"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -41,7 +41,7 @@
 
 /atom/movable/screen/transform_lupus
 	name = "Lupus"
-	icon = 'code/modules/wod13/32x48.dmi'
+	icon = 'icons/wod13/32x48.dmi'
 	icon_state = "lupus"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -55,7 +55,7 @@
 
 /atom/movable/screen/auspice
 	name = "Auspice"
-	icon = 'code/modules/wod13/werewolf_ui.dmi'
+	icon = 'icons/wod13/werewolf_ui.dmi'
 	icon_state = "auspice_bar"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -132,14 +132,14 @@
 
 	if(iscrinos(owner))
 		using = new /atom/movable/screen/swap_hand()
-		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+		using.icon = 'icons/wod13/UI/buttons32.dmi'
 		using.icon_state = "swap_1"
 		using.screen_loc = ui_swaphand_position(owner,1)
 		using.hud = src
 		static_inventory += using
 
 		using = new /atom/movable/screen/swap_hand()
-		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+		using.icon = 'icons/wod13/UI/buttons32.dmi'
 		using.icon_state = "swap_2"
 		using.screen_loc = ui_swaphand_position(owner,2)
 		using.hud = src
@@ -147,37 +147,37 @@
 
 	using = new /atom/movable/screen/act_intent()
 	using.icon_state = mymob.a_intent
-	using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	using.icon = 'icons/wod13/UI/buttons32.dmi'
 	using.hud = src
 	static_inventory += using
 	action_intent = using
 
 	using = new/atom/movable/screen/language_menu
 	using.screen_loc = ui_language_menu
-	using.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	using.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	using.hud = src
 	static_inventory += using
 
 	using = new /atom/movable/screen/drop()
-	using.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	using.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	using.screen_loc = ui_drop
 	using.hud = src
 	static_inventory += using
 
 	using = new /atom/movable/screen/resist()
-	using.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	using.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	using.screen_loc = ui_resist
 	using.hud = src
 	hotkeybuttons += using
 
 	throw_icon = new /atom/movable/screen/throw_catch()
-	throw_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	throw_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	throw_icon.screen_loc = ui_throw
 	throw_icon.hud = src
 	hotkeybuttons += throw_icon
 
 	pull_icon = new /atom/movable/screen/pull()
-	pull_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	pull_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	pull_icon.update_icon()
 	pull_icon.screen_loc = ui_pull
 	pull_icon.hud = src
@@ -186,7 +186,7 @@
 //begin indicators
 
 	healths = new /atom/movable/screen/healths()
-	healths.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	healths.icon = 'icons/wod13/UI/buttons32.dmi'
 	healths.hud = src
 	infodisplay += healths
 	blood_icon = new /atom/movable/screen/blood()
@@ -195,7 +195,7 @@
 	infodisplay += blood_icon
 
 	zone_select = new /atom/movable/screen/zone_sel()
-	zone_select.icon = 'code/modules/wod13/UI/buttons64.dmi'
+	zone_select.icon = 'icons/wod13/UI/buttons64.dmi'
 	zone_select.hud = src
 	zone_select.update_icon()
 	static_inventory += zone_select

@@ -556,27 +556,27 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				DAWOF2.sprite_color = werewolf_color
 
 				var/obj/overlay/eyes_crinos = new(DAWOF)
-				eyes_crinos.icon = 'code/modules/wod13/werewolf.dmi'
+				eyes_crinos.icon = 'icons/wod13/werewolf.dmi'
 				eyes_crinos.icon_state = "eyes"
 				eyes_crinos.layer = ABOVE_HUD_LAYER
 				eyes_crinos.color = werewolf_eye_color
 				DAWOF.overlays |= eyes_crinos
 
 				var/obj/overlay/scar_crinos = new(DAWOF)
-				scar_crinos.icon = 'code/modules/wod13/werewolf.dmi'
+				scar_crinos.icon = 'icons/wod13/werewolf.dmi'
 				scar_crinos.icon_state = "scar[werewolf_scar]"
 				scar_crinos.layer = ABOVE_HUD_LAYER
 				DAWOF.overlays |= scar_crinos
 
 				var/obj/overlay/hair_crinos = new(DAWOF)
-				hair_crinos.icon = 'code/modules/wod13/werewolf.dmi'
+				hair_crinos.icon = 'icons/wod13/werewolf.dmi'
 				hair_crinos.icon_state = "hair[werewolf_hair]"
 				hair_crinos.layer = ABOVE_HUD_LAYER
 				hair_crinos.color = werewolf_hair_color
 				DAWOF.overlays |= hair_crinos
 
 				var/obj/overlay/eyes_lupus = new(DAWOF2)
-				eyes_lupus.icon = 'code/modules/wod13/werewolf_lupus.dmi'
+				eyes_lupus.icon = 'icons/wod13/werewolf_lupus.dmi'
 				eyes_lupus.icon_state = "eyes"
 				eyes_lupus.layer = ABOVE_HUD_LAYER
 				eyes_lupus.color = werewolf_eye_color

@@ -286,7 +286,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	for(var/i in 1 to mymob.held_items.len)
 		hand_box = new /atom/movable/screen/inventory/hand()
 		hand_box.name = mymob.get_held_index_name(i)
-		hand_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+		hand_box.icon = 'icons/wod13/UI/buttons32.dmi'
 		hand_box.icon_state = "hand_[mymob.held_index_to_dir(i)]"
 		hand_box.screen_loc = ui_hand_position(i)
 		hand_box.held_index = i

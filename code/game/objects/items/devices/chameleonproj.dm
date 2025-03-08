@@ -46,7 +46,7 @@
 /obj/item/chameleon
 	name = "Appearance Projector"
 	desc = "Use on others to save their appearance, and use on yourself to copy it."
-	icon = 'code/modules/wod13/icons.dmi'
+	icon = 'icons/wod13/icons.dmi'
 	icon_state = "vicissitude"
 	flags_1 = CONDUCT_1
 	item_flags = ABSTRACT | NOBLUDGEON | DROPDEL

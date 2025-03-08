@@ -1,6 +1,6 @@
 
 /atom/movable/screen/ghost
-	icon = 'code/modules/wod13/UI/buttons32.dmi'
+	icon = 'icons/wod13/UI/buttons32.dmi'
 	plane = 45 // [ChillRaccoon] - 42 was a value by default
 /*
 /atom/movable/screen/ghost/MouseEntered()

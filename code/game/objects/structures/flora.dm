@@ -302,7 +302,7 @@
 
 /obj/structure/flora/ausbushes/tallgrass
 	icon_state = "tallgrass_1"
-	icon = 'code/modules/wod13/32x48.dmi'
+	icon = 'icons/wod13/32x48.dmi'
 	var/dry = FALSE
 
 /obj/structure/flora/ausbushes/tallgrass/dry
@@ -318,7 +318,7 @@
 
 /obj/structure/flora/ausbushes/shortgrass
 	icon_state = "grass_1"
-	icon = 'code/modules/wod13/32x48.dmi'
+	icon = 'icons/wod13/32x48.dmi'
 
 /obj/structure/flora/ausbushes/shortgrass/Initialize()
 	icon_state = "grass_[rand(1, 4)]"
@@ -326,7 +326,7 @@
 
 /obj/structure/flora/ausbushes/redflower
 	icon_state = "redplant_1"
-	icon = 'code/modules/wod13/32x48.dmi'
+	icon = 'icons/wod13/32x48.dmi'
 
 /obj/structure/flora/ausbushes/redflower/Initialize()
 	icon_state = "redplant_[rand(1, 4)]"
