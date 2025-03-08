@@ -20,53 +20,37 @@
  * Text sanitization
  */
 
-//Simply removes < and > and limits the length of the message
-/proc/strip_html_simple(t,limit=MAX_MESSAGE_LEN)
-	var/list/strip_chars = list("<",">")
-	t = copytext(t,1,limit)
-	for(var/char in strip_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + copytext(t, index+1)
-			index = findtext(t, char)
-	return t
-
-//Removes a few problematic characters
-/proc/sanitize_simple(t,list/repl_chars = list("\n"="#","\t"="#"))
-	for(var/char in repl_chars)
-		var/index = findtext(t, char)
-		while(index)
-			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index + length(char))
-			index = findtext(t, char, index + length(char))
-	return t
-
-/proc/sanitize_filename(t)
-	return sanitize_simple(t, list("\n"="", "\t"="", "/"="", "\\"="", "?"="", "%"="", "*"="", ":"="", "|"="", "\""="", "<"="", ">"=""))
-
 ///returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
-/proc/sanitize_name(t,allow_numbers=FALSE)
-	if(CHAT_FILTER_CHECK(t))
-		alert("You cannot set a name that contains a word prohibited in IC chat!")
+/proc/sanitize_name(target, allow_numbers = FALSE, cap_after_symbols = TRUE)
+	if(CHAT_FILTER_CHECK(target))
+		alert(usr, "You cannot set a name that contains a word prohibited in IC chat!")
 		return ""
-	var/r = reject_bad_name(t,allow_numbers=allow_numbers,strict=TRUE)
-	if(!r)
-		alert("Invalid name.")
+	var/result = reject_bad_name(target, allow_numbers = allow_numbers, strict = TRUE, cap_after_symbols = cap_after_symbols)
+	if(!result)
+		alert(usr, "Invalid name.")
 		return ""
-	return sanitize(r)
+	return sanitize(result)
 
-//Runs byond's sanitization proc along-side sanitize_simple
-/proc/sanitize(t,list/repl_chars = null)
-	return html_encode(sanitize_simple(t,repl_chars))
 
-//Runs sanitize and strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' after sanitize() calls byond's html_encode()
-/proc/strip_html(t,limit=MAX_MESSAGE_LEN)
-	return copytext((sanitize(strip_html_simple(t))),1,limit)
+/// Runs byond's html encoding sanitization proc, after replacing new-lines and tabs for the # character.
+/proc/sanitize(text)
+	var/static/regex/regex = regex(@"[\n\t]", "g")
+	return html_encode(regex.Replace(text, "#"))
 
-//Runs byond's sanitization proc along-side strip_html_simple
-//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
-/proc/adminscrub(t,limit=MAX_MESSAGE_LEN)
-	return copytext((html_encode(strip_html_simple(t))),1,limit)
+
+/// Runs STRIP_HTML_SIMPLE and sanitize.
+/proc/strip_html(text, limit = MAX_MESSAGE_LEN)
+	return sanitize(STRIP_HTML_SIMPLE(text, limit))
+
+
+/// Runs STRIP_HTML_FULL and sanitize.
+/proc/strip_html_full(text, limit = MAX_MESSAGE_LEN)
+	return sanitize(STRIP_HTML_FULL(text, limit))
+
+
+/// Runs STRIP_HTML_SIMPLE and byond's sanitization proc.
+/proc/adminscrub(text, limit = MAX_MESSAGE_LEN)
+	return html_encode(STRIP_HTML_SIMPLE(text, limit))
 
 /**
  * Perform a whitespace cleanup on the text, similar to what HTML renderers do
@@ -91,49 +75,70 @@
 
 	return t
 
-//Returns null if there is any bad text in the string
+/**
+ * Returns the text if properly formatted, or null else.
+ *
+ * Things considered improper:
+ * * Larger than max_length.
+ * * Presence of non-ASCII characters if asci_only is set to TRUE.
+ * * Only whitespaces, tabs and/or line breaks in the text.
+ * * Presence of the <, >, \ and / characters.
+ * * Presence of ASCII special control characters (horizontal tab and new line not included).
+ * */
 /proc/reject_bad_text(text, max_length = 512, ascii_only = TRUE)
-	var/char_count = 0
-	var/non_whitespace = FALSE
-	var/lenbytes = length(text)
-	var/char = ""
-	for(var/i = 1, i <= lenbytes, i += length(char))
-		char = text[i]
-		char_count++
-		if(char_count > max_length)
-			return
-		switch(text2ascii(char))
-			if(62, 60, 92, 47) // <, >, \, /
-				return
-			if(0 to 31)
-				return
-			if(32)
-				continue
-			if(127 to INFINITY)
-				if(ascii_only)
-					return
-			else
-				non_whitespace = TRUE
-	if(non_whitespace)
-		return text		//only accepts the text if it has some non-spaces
+	if(ascii_only)
+		if(length(text) > max_length)
+			return null
+		var/static/regex/non_ascii = regex(@"[^\x20-\x7E\t\n]")
+		if(non_ascii.Find(text))
+			return null
+	else if(length_char(text) > max_length)
+		return null
+	var/static/regex/non_whitespace = regex(@"\S")
+	if(!non_whitespace.Find(text))
+		return null
+	var/static/regex/bad_chars = regex(@"[\\<>/\x00-\x08\x11-\x1F]")
+	if(bad_chars.Find(text))
+		return null
+	return text
 
-/// Used to get a properly sanitized input, of max_length
-/// no_trim is self explanatory but it prevents the input from being trimed if you intend to parse newlines or whitespace.
+/**
+ * Used to get a properly sanitized input. Returns null if cancel is pressed.
+ *
+ * Arguments
+ ** user - Target of the input prompt.
+ ** message - The text inside of the prompt.
+ ** title - The window title of the prompt.
+ ** max_length - If you intend to impose a length limit - default is 1024.
+ ** no_trim - Prevents the input from being trimmed if you intend to parse newlines or whitespace.
+*/
 /proc/stripped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
-	var/name = input(user, message, title, default) as text|null
-
+	var/user_input = input(user, message, title, default) as text|null
+	if(isnull(user_input)) // User pressed cancel
+		return
 	if(no_trim)
-		return copytext(html_encode(name), 1, max_length)
+		return copytext_char(html_encode(user_input), 1, max_length)
 	else
-		return trim(html_encode(name), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
+		return trim(html_encode(user_input), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
 
-// Used to get a properly sanitized multiline input, of max_length
+/**
+ * Used to get a properly sanitized input in a larger box. Works very similarly to stripped_input.
+ *
+ * Arguments
+ ** user - Target of the input prompt.
+ ** message - The text inside of the prompt.
+ ** title - The window title of the prompt.
+ ** max_length - If you intend to impose a length limit - default is 1024.
+ ** no_trim - Prevents the input from being trimmed if you intend to parse newlines or whitespace.
+*/
 /proc/stripped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
-	var/name = input(user, message, title, default) as message|null
+	var/user_input = input(user, message, title, default) as message|null
+	if(isnull(user_input)) // User pressed cancel
+		return
 	if(no_trim)
-		return copytext(html_encode(name), 1, max_length)
+		return copytext_char(html_encode(user_input), 1, max_length)
 	else
-		return trim(html_encode(name), max_length)
+		return trim(html_encode(user_input), max_length)
 
 #define NO_CHARS_DETECTED 0
 #define SPACES_DETECTED 1
@@ -144,10 +149,11 @@
 /**
  * Filters out undesirable characters from names.
  *
- * * strict - return null immidiately instead of filtering out
+ * * strict - return null immediately instead of filtering out
  * * allow_numbers - allows numbers and common special characters - used for silicon/other weird things names
+ * * cap_after_symbols - words like Bob's will be capitalized to Bob'S by default. False is good for titles.
  */
-/proc/reject_bad_name(t_in, allow_numbers = FALSE, max_length = MAX_NAME_LEN, ascii_only = TRUE, strict = FALSE)
+/proc/reject_bad_name(t_in, allow_numbers = FALSE, max_length = MAX_NAME_LEN, ascii_only = TRUE, strict = FALSE, cap_after_symbols = TRUE)
 	if(!t_in)
 		return //Rejects the input if it is null
 
@@ -159,7 +165,7 @@
 	var/char = ""
 
 	// This is a sanity short circuit, if the users name is three times the maximum allowable length of name
-	// We bail out on trying to process the name at all, as it could be a bug or malicious input and we dont
+	// We bail out on trying to process the name at all, as it could be a bug or malicious input and we don't
 	// Want to iterate all of it.
 	if(t_len > 3 * MAX_NAME_LEN)
 		return
@@ -168,28 +174,27 @@
 		switch(text2ascii(char))
 
 			// A  .. Z
-			if(65 to 90)			//Uppercase Letters
+			if(65 to 90) //Uppercase Letters
 				number_of_alphanumeric++
 				last_char_group = LETTERS_DETECTED
 
 			// a  .. z
-			if(97 to 122)			//Lowercase Letters
-				if(last_char_group == NO_CHARS_DETECTED || last_char_group == SPACES_DETECTED || last_char_group == SYMBOLS_DETECTED) //start of a word
+			if(97 to 122) //Lowercase Letters
+				if(last_char_group == NO_CHARS_DETECTED || last_char_group == SPACES_DETECTED || cap_after_symbols && last_char_group == SYMBOLS_DETECTED) //start of a word
 					char = uppertext(char)
 				number_of_alphanumeric++
 				last_char_group = LETTERS_DETECTED
 
 			// 0  .. 9
-			if(48 to 57)			//Numbers
+			if(48 to 57) //Numbers
 				if(last_char_group == NO_CHARS_DETECTED || !allow_numbers) //suppress at start of string
 					if(strict)
 						return
 					continue
 				number_of_alphanumeric++
 				last_char_group = NUMBERS_DETECTED
-
 			// '  -  .
-			if(39,45,46)			//Common name punctuation
+			if(39,45,46) //Common name punctuation
 				if(last_char_group == NO_CHARS_DETECTED)
 					if(strict)
 						return
@@ -197,7 +202,7 @@
 				last_char_group = SYMBOLS_DETECTED
 
 			// ~   |   @  :  #  $  %  &  *  +
-			if(126,124,64,58,35,36,37,38,42,43)			//Other symbols that we'll allow (mainly for AI)
+			if(126,124,64,58,35,36,37,38,42,43) //Other symbols that we'll allow (mainly for AI)
 				if(last_char_group == NO_CHARS_DETECTED || !allow_numbers) //suppress at start of string
 					if(strict)
 						return
@@ -227,16 +232,11 @@
 			break
 
 	if(number_of_alphanumeric < 2)
-		return		//protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
+		return //protects against tiny names like "A" and also names like "' ' ' ' ' ' ' '"
 
 	if(last_char_group == SPACES_DETECTED)
 		t_out = copytext_char(t_out, 1, -1) //removes the last character (in this case a space)
 
-	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai"))	//prevents these common metagamey names
-		if(cmptext(t_out,bad_name))
-			return	//(not case sensitive)
-
-	// Protects against names containing IC chat prohibited words.
 	if(CHAT_FILTER_CHECK(t_out))
 		return
 
@@ -246,8 +246,6 @@
 #undef SPACES_DETECTED
 #undef NUMBERS_DETECTED
 #undef LETTERS_DETECTED
-
-
 
 //html_encode helper proc that returns the smallest non null of two numbers
 //or 0 if they're both null (needed because of findtext returning 0 when a value is not present)

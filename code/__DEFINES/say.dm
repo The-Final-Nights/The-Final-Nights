@@ -82,7 +82,7 @@
 #define FOLLOW_OR_TURF_LINK(alice, bob, turfy) "<a href=?src=[REF(alice)];follow=[REF(bob)];x=[turfy.x];y=[turfy.y];z=[turfy.z]>(F)</a>" //<a href=?src=[REF(alice)];follow=[REF(bob)];x=[turfy.x];y=[turfy.y];z=[turfy.z]>(F)</a> //! [ChillRaccoon] - REWORK OR REMOVE
 
 //Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
-#define MAX_MESSAGE_LEN			1024
+#define MAX_MESSAGE_LEN			2048 // TFN EDIT: 1024 -> 2048
 #define MAX_NAME_LEN			42
 #define MAX_BROADCAST_LEN		512
 #define MAX_CHARTER_LEN			80
@@ -100,3 +100,7 @@
 
 //Used in visible_message_flags, audible_message_flags and runechat_flags
 #define EMOTE_MESSAGE (1<<0)
+/// By default, self_message will respect the visual / audible component of the message.
+/// Meaning that if the message is visual, and sourced from a blind mob, they will not see it.
+/// This flag skips that behavior, and will always show the self message to the mob.
+#define ALWAYS_SHOW_SELF_MESSAGE (1<<1)

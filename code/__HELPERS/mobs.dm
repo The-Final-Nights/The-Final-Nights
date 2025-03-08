@@ -164,9 +164,9 @@ GLOBAL_LIST_EMPTY(species_list)
 			return "toddler"
 		if(3 to 13)
 			return "child"
-		if(13 to 19)
-			return "teenager"
-		if(19 to 30)
+		if(13 to 17)
+			return "teenager" // thanks flav
+		if(18 to 30)
 			return "young adult"
 		if(30 to 45)
 			return "adult"

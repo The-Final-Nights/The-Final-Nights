@@ -167,6 +167,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["broadcast_login_logout"] , broadcast_login_logout)
 
 	READ_FILE(S["tgui_fancy"], tgui_fancy)
+	READ_FILE(S["tgui_input_mode"], tgui_input_mode)
+	READ_FILE(S["tgui_large_buttons"], tgui_large_buttons)
+	READ_FILE(S["tgui_swapped_buttons"], tgui_swapped_buttons)
 	READ_FILE(S["tgui_lock"], tgui_lock)
 	READ_FILE(S["buttons_locked"], buttons_locked)
 	READ_FILE(S["windowflash"], windowflashing)
@@ -229,6 +232,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	see_rc_emotes	= sanitize_integer(see_rc_emotes, FALSE, TRUE, initial(see_rc_emotes))
 	broadcast_login_logout = sanitize_integer(broadcast_login_logout, FALSE, TRUE, initial(broadcast_login_logout))
 	tgui_fancy		= sanitize_integer(tgui_fancy, FALSE, TRUE, initial(tgui_fancy))
+	tgui_input_mode	= sanitize_integer(tgui_input_mode, 0, 1, initial(tgui_input_mode))
+	tgui_large_buttons = sanitize_integer(tgui_large_buttons, 0, 1, initial(tgui_large_buttons))
+	tgui_swapped_buttons = sanitize_integer(tgui_swapped_buttons, 0, 1, initial(tgui_swapped_buttons))
 	tgui_lock		= sanitize_integer(tgui_lock, FALSE, TRUE, initial(tgui_lock))
 	buttons_locked	= sanitize_integer(buttons_locked, FALSE, TRUE, initial(buttons_locked))
 	windowflashing	= sanitize_integer(windowflashing, FALSE, TRUE, initial(windowflashing))
@@ -294,6 +300,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["see_rc_emotes"], see_rc_emotes)
 	WRITE_FILE(S["broadcast_login_logout"], broadcast_login_logout)
 	WRITE_FILE(S["tgui_fancy"], tgui_fancy)
+	WRITE_FILE(S["tgui_input_mode"], tgui_input_mode)
+	WRITE_FILE(S["tgui_large_buttons"], tgui_large_buttons)
+	WRITE_FILE(S["tgui_swapped_buttons"], tgui_swapped_buttons)
 	WRITE_FILE(S["tgui_lock"], tgui_lock)
 	WRITE_FILE(S["buttons_locked"], buttons_locked)
 	WRITE_FILE(S["windowflash"], windowflashing)
@@ -488,6 +497,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Quirks
 	READ_FILE(S["all_quirks"], all_quirks)
 
+	READ_FILE(S["headshot_link"], headshot_link) // TFN EDIT: headshot loading
 	//try to fix any outdated data if necessary
 	//preference updating will handle saving the updated data for us.
 	if(needs_update >= 0)
@@ -600,8 +610,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	enemy				= sanitize_integer(enemy, 0, 1, initial(enemy))
 	lover				= sanitize_integer(lover, 0, 1, initial(lover))
 	masquerade				= sanitize_integer(masquerade, 0, 5, initial(masquerade))
-	generation				= sanitize_integer(generation, 3, 13, initial(generation))
-	generation_bonus				= sanitize_integer(generation_bonus, 0, 6, initial(generation_bonus))
+	// TFN EDIT START: gen tweaks
+	generation				= sanitize_integer(generation, 8, 14, initial(generation))
+	generation_bonus				= sanitize_integer(generation_bonus, 0, 5, initial(generation_bonus))
+	// TFN EDIT END
 	hair_color			= sanitize_hexcolor(hair_color, 3, 0)
 	facial_hair_color			= sanitize_hexcolor(facial_hair_color, 3, 0)
 	underwear_color			= sanitize_hexcolor(underwear_color, 3, 0)
@@ -637,7 +649,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	all_quirks = SANITIZE_LIST(all_quirks)
 	validate_quirks()
-
+	// TFN EDIT ADDITION START: sanitize headshot
+	if(!valid_headshot_link(null, headshot_link, TRUE))
+		headshot_link = null
+	// TFN EDIT ADDITION END
 	//Convert jank old Discipline system to new Discipline system
 	if ((istype(pref_species, /datum/species/kindred) || istype(pref_species, /datum/species/ghoul)) && !discipline_types.len)
 		if (discipline1type && discipline1level)
@@ -795,6 +810,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Quirks
 	WRITE_FILE(S["all_quirks"]			, all_quirks)
+
+	WRITE_FILE(S["headshot_link"], headshot_link) // TFN EDIT: headshot saving
 
 	return TRUE
 

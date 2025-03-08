@@ -249,12 +249,10 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
 	for(var/datum/action/vampireinfo/VI in C.actions)
-		if(VI)
-			VI.Remove(C)
+		VI?.Remove(C)
 	for(var/datum/action/A in C.actions)
-		if(A)
-			if(A.vampiric)
-				A.Remove(C)
+		if(A?.vampiric)
+			A.Remove(C)
 
 /datum/action/blood_power
 	name = "Blood Power"
@@ -267,20 +265,17 @@
 	vampiric = TRUE
 
 /datum/action/blood_power/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	if(owner)
-		if(owner.client)
-			if(owner.client.prefs)
-				if(owner.client.prefs.old_discipline)
-					button_icon = 'icons/wod13/disciplines.dmi'
-					icon_icon = 'icons/wod13/disciplines.dmi'
-				else
-					button_icon = 'icons/wod13/UI/actions.dmi'
-					icon_icon = 'icons/wod13/UI/actions.dmi'
+	if(owner?.client?.prefs?.old_discipline)
+		button_icon = 'code/modules/wod13/disciplines.dmi'
+		icon_icon = 'code/modules/wod13/disciplines.dmi'
+	else
+		button_icon = 'code/modules/wod13/UI/actions.dmi'
+		icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	. = ..()
 
 /datum/action/blood_power/Trigger()
-	if(istype(owner, /mob/living/carbon/human))
-		if (HAS_TRAIT(owner, TRAIT_TORPOR))
+	if(iskindred(owner))
+		if(HAS_TRAIT(owner, TRAIT_TORPOR))
 			return
 		var/mob/living/carbon/human/BD = usr
 		if(world.time < BD.last_bloodpower_use+110)
@@ -294,7 +289,7 @@
 			animate(button, color = "#ffffff", time = 20, loop = 1)
 			BD.last_bloodpower_use = world.time
 			BD.bloodpool = max(0, BD.bloodpool-(2+plus))
-			to_chat(BD, "<span class='notice'>You use blood to become more powerful.</span>")
+			to_chat(BD, span_notice("You use blood to become more powerful."))
 			BD.dna.species.punchdamagehigh = BD.dna.species.punchdamagehigh+5
 			BD.physiology.armor.melee = BD.physiology.armor.melee+15
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet+15
@@ -308,12 +303,12 @@
 				end_bloodpower()
 		else
 			SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
-			to_chat(BD, "<span class='warning'>You don't have enough <b>BLOOD</b> to become more powerful.</span>")
+			to_chat(BD, span_warning("You don't have enough <b>BLOOD</b> to become more powerful."))
 
 /datum/action/blood_power/proc/end_bloodpower()
 	if(owner && ishuman(owner))
 		var/mob/living/carbon/human/BD = owner
-		to_chat(BD, "<span class='warning'>You feel like your <b>BLOOD</b>-powers slowly decrease.</span>")
+		to_chat(BD, span_warning("You feel like your <b>BLOOD</b>-powers slowly decrease."))
 		if(BD.dna.species)
 			BD.dna.species.punchdamagehigh = BD.dna.species.punchdamagehigh-5
 			BD.physiology.armor.melee = BD.physiology.armor.melee-15
@@ -333,244 +328,233 @@
 	var/giving = FALSE
 
 /datum/action/give_vitae/Trigger()
-	if(istype(owner, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = owner
-		if(H.bloodpool < 2)
-			to_chat(owner, "<span class='warning'>You don't have enough <b>BLOOD</b> to do that!</span>")
+	if(iskindred(owner))
+		var/mob/living/carbon/human/vampire = owner
+		if(vampire.bloodpool < 2)
+			to_chat(owner, span_warning("You don't have enough <b>BLOOD</b> to do that!"))
 			return
-		if(istype(H.pulling, /mob/living/simple_animal))
-			var/mob/living/L = H.pulling
-			L.bloodpool = min(L.maxbloodpool, L.bloodpool+2)
-			H.bloodpool = max(0, H.bloodpool-2)
-			L.adjustBruteLoss(-25)
-			L.adjustFireLoss(-25)
-		if(istype(H.pulling, /mob/living/carbon/human))
-			var/mob/living/carbon/human/BLOODBONDED = H.pulling
-			if(iscathayan(BLOODBONDED))
-				to_chat(owner, "<span class='warning'>[BLOODBONDED] vomits the vitae back!</span>")
+		if(isanimal(vampire.pulling))
+			var/mob/living/animal = vampire.pulling
+			animal.bloodpool = min(animal.maxbloodpool, animal.bloodpool+2)
+			vampire.bloodpool = max(0, vampire.bloodpool-2)
+			animal.adjustBruteLoss(-25)
+			animal.adjustFireLoss(-25)
+		if(ishuman(vampire.pulling))
+			var/mob/living/carbon/human/grabbed_victim = vampire.pulling
+			if(iscathayan(grabbed_victim))
+				to_chat(owner, span_warning("[grabbed_victim] vomits the vitae back!"))
 				return
-			if(!BLOODBONDED.client && !istype(H.pulling, /mob/living/carbon/human/npc))
-				to_chat(owner, "<span class='warning'>You need [BLOODBONDED]'s attention to do that!</span>")
+			if(!grabbed_victim.client && !isnpc(vampire.pulling))
+				to_chat(owner, span_warning("You need [grabbed_victim]'s attention to do that!"))
 				return
-			if(BLOODBONDED.stat == DEAD)
-				if(!BLOODBONDED.key)
-					to_chat(owner, "<span class='warning'>You need [BLOODBONDED]'s mind to Embrace!</span>")
+			if(grabbed_victim.stat == DEAD)
+				if(!grabbed_victim.key)
+					to_chat(owner, span_warning("You need [grabbed_victim]'s mind to Embrace!"))
 					return
-				message_admins("[ADMIN_LOOKUPFLW(H)] is Embracing [ADMIN_LOOKUPFLW(BLOODBONDED)]!")
+				message_admins("[ADMIN_LOOKUPFLW(vampire)] is Embracing [ADMIN_LOOKUPFLW(grabbed_victim)]!")
 			if(giving)
 				return
 			giving = TRUE
-			owner.visible_message("<span class='warning'>[owner] tries to feed [BLOODBONDED] with their own blood!</span>", "<span class='notice'>You started to feed [BLOODBONDED] with your own blood.</span>")
-			if(do_mob(owner, BLOODBONDED, 10 SECONDS))
-				H.bloodpool = max(0, H.bloodpool-2)
+			owner.visible_message(span_warning("[owner] tries to feed [grabbed_victim] with their own blood!"), span_notice("You started to feed [grabbed_victim] with your own blood."))
+			// Embraces or ghouls the grabbed victim after 10 seconds.
+			if(do_mob(owner, grabbed_victim, 10 SECONDS))
+				vampire.bloodpool = max(0, vampire.bloodpool-2)
 				giving = FALSE
 
+				var/mob/living/carbon/human/childe = grabbed_victim
+				var/mob/living/carbon/human/sire = vampire
+
 				var/new_master = FALSE
-				BLOODBONDED.drunked_of |= "[H.dna.real_name]"
+				childe.drunked_of |= "[sire.dna.real_name]"
 
-				if(BLOODBONDED.stat == DEAD && !iskindred(BLOODBONDED))
-					if (!BLOODBONDED.can_be_embraced)
-						to_chat(H, "<span class='notice'>[BLOODBONDED.name] doesn't respond to your Vitae.</span>")
+				if(childe.stat == DEAD && !iskindred(childe))
+					if(!childe.can_be_embraced)
+						to_chat(sire, span_notice("[childe.name] doesn't respond to your Vitae."))
 						return
-
-					if((BLOODBONDED.timeofdeath + 5 MINUTES) > world.time)
-						if (BLOODBONDED.auspice?.level) //here be Abominations
-							if (BLOODBONDED.auspice.force_abomination)
-								to_chat(H, "<span class='danger'>Something terrible is happening.</span>")
-								to_chat(BLOODBONDED, "<span class='userdanger'>Gaia has forsaken you.</span>")
-								message_admins("[ADMIN_LOOKUPFLW(H)] has turned [ADMIN_LOOKUPFLW(BLOODBONDED)] into an Abomination through an admin setting the force_abomination var.")
-								log_game("[key_name(H)] has turned [key_name(BLOODBONDED)] into an Abomination through an admin setting the force_abomination var.")
+					 // If they've been dead for more than 5 minutes, then nothing happens.
+					if((childe.timeofdeath + 5 MINUTES) > world.time)
+						if(childe.auspice?.level) //here be Abominations
+							if(childe.auspice.force_abomination)
+								to_chat(sire, span_danger("Something terrible is happening."))
+								to_chat(childe, span_userdanger("Gaia has forsaken you."))
+								message_admins("[ADMIN_LOOKUPFLW(sire)] has turned [ADMIN_LOOKUPFLW(childe)] into an Abomination through an admin setting the force_abomination var.")
+								log_game("[key_name(sire)] has turned [key_name(childe)] into an Abomination through an admin setting the force_abomination var.")
 							else
-								switch(storyteller_roll(BLOODBONDED.auspice.level))
-									if (ROLL_BOTCH)
-										to_chat(H, "<span class='danger'>Something terrible is happening.</span>")
-										to_chat(BLOODBONDED, "<span class='userdanger'>Gaia has forsaken you.</span>")
-										message_admins("[ADMIN_LOOKUPFLW(H)] has turned [ADMIN_LOOKUPFLW(BLOODBONDED)] into an Abomination.")
-										log_game("[key_name(H)] has turned [key_name(BLOODBONDED)] into an Abomination.")
-									if (ROLL_FAILURE)
-										BLOODBONDED.visible_message("<span class='warning'>[BLOODBONDED.name] convulses in sheer agony!</span>")
-										BLOODBONDED.Shake(15, 15, 5 SECONDS)
-										playsound(BLOODBONDED.loc, 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE)
-										BLOODBONDED.can_be_embraced = FALSE
+								switch(storyteller_roll(childe.auspice.level))
+									if(ROLL_BOTCH)
+										to_chat(sire, span_danger("Something terrible is happening."))
+										to_chat(childe, span_userdanger("Gaia has forsaken you."))
+										message_admins("[ADMIN_LOOKUPFLW(sire)] has turned [ADMIN_LOOKUPFLW(childe)] into an Abomination.")
+										log_game("[key_name(sire)] has turned [key_name(childe)] into an Abomination.")
+									if(ROLL_FAILURE)
+										childe.visible_message(span_warning("[childe.name] convulses in sheer agony!"))
+										childe.Shake(15, 15, 5 SECONDS)
+										playsound(childe.loc, 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE)
+										childe.can_be_embraced = FALSE
 										return
-									if (ROLL_SUCCESS)
-										to_chat(H, "<span class='notice'>[BLOODBONDED.name] does not respond to your Vitae...</span>")
-										BLOODBONDED.can_be_embraced = FALSE
+									if(ROLL_SUCCESS)
+										to_chat(sire, span_notice("[childe.name] does not respond to your Vitae..."))
+										childe.can_be_embraced = FALSE
 										return
 
-						log_game("[key_name(H)] has Embraced [key_name(BLOODBONDED)].")
-						message_admins("[ADMIN_LOOKUPFLW(H)] has Embraced [ADMIN_LOOKUPFLW(BLOODBONDED)].")
+						log_game("[key_name(sire)] has Embraced [key_name(childe)].")
+						message_admins("[ADMIN_LOOKUPFLW(sire)] has Embraced [ADMIN_LOOKUPFLW(childe)].")
 						giving = FALSE
 						var/save_data_v = FALSE
-						if(BLOODBONDED.revive(full_heal = TRUE, admin_revive = TRUE))
-							BLOODBONDED.grab_ghost(force = TRUE)
-							to_chat(BLOODBONDED, "<span class='userdanger'>You rise with a start, you're alive! Or not... You feel your soul going somewhere, as you realize you are embraced by a vampire...</span>")
-							var/response_v = input(BLOODBONDED, "Do you wish to keep being a vampire on your save slot?(Yes will be a permanent choice and you can't go back!)") in list("Yes", "No")
+						if(childe.revive(full_heal = TRUE, admin_revive = TRUE))
+							childe.grab_ghost(force = TRUE)
+							to_chat(childe, span_userdanger("You rise with a start, you're alive! Or not... You feel your soul going somewhere, as you realize you are embraced by a vampire..."))
+							var/response_v = input(childe, "Do you wish to keep being a vampire on your save slot?(Yes will be a permanent choice and you can't go back!)") in list("Yes", "No")
 							if(response_v == "Yes")
 								save_data_v = TRUE
 							else
 								save_data_v = FALSE
-						BLOODBONDED.roundstart_vampire = FALSE
-						BLOODBONDED.set_species(/datum/species/kindred)
-						BLOODBONDED.clane = null
-						if(H.generation < 13)
-							BLOODBONDED.generation = 13
-							BLOODBONDED.skin_tone = get_vamp_skin_color(BLOODBONDED.skin_tone)
-							BLOODBONDED.update_body()
-							if (H.clane.whitelisted)
-								if (!SSwhitelists.is_whitelisted(BLOODBONDED.ckey, H.clane.name))
-									if(H.clane.name == "True Brujah")
-										BLOODBONDED.clane = new /datum/vampireclane/brujah()
-										to_chat(BLOODBONDED,"<span class='warning'> You don't got that whitelist! Changing to the non WL Brujah</span>")
-									else if(H.clane.name == "Tzimisce")
-										BLOODBONDED.clane = new /datum/vampireclane/old_clan_tzimisce()
-										to_chat(BLOODBONDED,"<span class='warning'> You don't got that whitelist! Changing to the non WL Old Tzmisce</span>")
-									else
-										to_chat(BLOODBONDED,"<span class='warning'> You don't got that whitelist! Changing to a random non WL clan.</span>")
-										var/list/non_whitelisted_clans = list(/datum/vampireclane/brujah,/datum/vampireclane/malkavian,/datum/vampireclane/nosferatu,/datum/vampireclane/gangrel,/datum/vampireclane/giovanni,/datum/vampireclane/ministry,/datum/vampireclane/salubri,/datum/vampireclane/toreador,/datum/vampireclane/tremere,/datum/vampireclane/ventrue)
-										var/random_clan = pick(non_whitelisted_clans)
-										BLOODBONDED.clane = new random_clan
-								else
-									BLOODBONDED.clane = new H.clane.type()
-							else
-								BLOODBONDED.clane = new H.clane.type()
 
-							BLOODBONDED.clane.on_gain(BLOODBONDED)
-							BLOODBONDED.clane.post_gain(BLOODBONDED)
-							if(BLOODBONDED.clane.alt_sprite)
-								BLOODBONDED.skin_tone = "albino"
-								BLOODBONDED.update_body()
+						childe.roundstart_vampire = FALSE
+						childe.set_species(/datum/species/kindred)
+						childe.clane = null
+						childe.generation = sire.generation+1
 
-							//Gives the Childe the Sire's first three Disciplines
+						childe.skin_tone = get_vamp_skin_color(childe.skin_tone)
+						childe.update_body()
 
-							var/list/disciplines_to_give = list()
-							for (var/i in 1 to min(3, H.client.prefs.discipline_types.len))
-								disciplines_to_give += H.client.prefs.discipline_types[i]
-							BLOODBONDED.create_disciplines(FALSE, disciplines_to_give)
-
-							BLOODBONDED.maxbloodpool = 10+((13-min(13, BLOODBONDED.generation))*3)
-							BLOODBONDED.clane.enlightenment = H.clane.enlightenment
+						if(childe.generation <= 13)
+							childe.clane = new sire.clane.type()
+							childe.clane.on_gain(childe)
+							childe.clane.post_gain(childe)
 						else
-							BLOODBONDED.maxbloodpool = 10+((13-min(13, BLOODBONDED.generation))*3)
-							BLOODBONDED.generation = 14
-							BLOODBONDED.clane = new /datum/vampireclane/caitiff()
+							childe.clane = new /datum/vampireclane/caitiff()
+
+						if(childe.clane.alt_sprite)
+							childe.skin_tone = "albino"
+							childe.update_body()
+
+						//Gives the Childe the Sire's first three Disciplines
+
+						var/list/disciplines_to_give = list()
+						for (var/i in 1 to min(3, sire.client.prefs.discipline_types.len))
+							disciplines_to_give += sire.client.prefs.discipline_types[i]
+						childe.create_disciplines(FALSE, disciplines_to_give)
+						// TODO: Rework the max blood pool calculations.
+						childe.maxbloodpool = 10+((13-min(13, childe.generation))*3)
+						childe.clane.enlightenment = sire.clane.enlightenment
 
 						//Verify if they accepted to save being a vampire
-						if (iskindred(BLOODBONDED) && save_data_v)
-							var/datum/preferences/BLOODBONDED_prefs_v = BLOODBONDED.client.prefs
+						if(iskindred(childe) && save_data_v)
+							var/datum/preferences/childe_prefs_v = childe.client.prefs
 
-							BLOODBONDED_prefs_v.pref_species.id = "kindred"
-							BLOODBONDED_prefs_v.pref_species.name = "Vampire"
-							if(H.generation < 13)
-
-								BLOODBONDED_prefs_v.clane = BLOODBONDED.clane
-								BLOODBONDED_prefs_v.generation = 13
-								BLOODBONDED_prefs_v.skin_tone = get_vamp_skin_color(BLOODBONDED.skin_tone)
-								BLOODBONDED_prefs_v.clane.enlightenment = H.clane.enlightenment
-
-
-								//Rarely the new mid round vampires get the 3 brujah skil(it is default)
-								//This will remove if it happens
-								// Or if they are a ghoul with abunch of disciplines
-								if(BLOODBONDED_prefs_v.discipline_types.len > 0)
-									for (var/i in 1 to BLOODBONDED_prefs_v.discipline_types.len)
-										var/removing_discipline = BLOODBONDED_prefs_v.discipline_types[1]
-										if (removing_discipline)
-											var/index = BLOODBONDED_prefs_v.discipline_types.Find(removing_discipline)
-											BLOODBONDED_prefs_v.discipline_types.Cut(index, index + 1)
-											BLOODBONDED_prefs_v.discipline_levels.Cut(index, index + 1)
-
-								if(BLOODBONDED_prefs_v.discipline_types.len == 0)
-									for (var/i in 1 to 3)
-										BLOODBONDED_prefs_v.discipline_types += BLOODBONDED_prefs_v.clane.clane_disciplines[i]
-										BLOODBONDED_prefs_v.discipline_levels += 1
-								BLOODBONDED_prefs_v.save_character()
-
+							childe_prefs_v.pref_species.id = "kindred"
+							childe_prefs_v.pref_species.name = "Vampire"
+							childe_prefs_v.clane = childe.clane
+							// If the childe is somehow 15th gen, reset to 14th.
+							if(childe.generation <= 14)
+								childe_prefs_v.generation = childe.generation
 							else
-								BLOODBONDED_prefs_v.generation = 13 // Game always set to 13 anyways, 14 is not possible.
-								BLOODBONDED_prefs_v.clane = new /datum/vampireclane/caitiff()
-								BLOODBONDED_prefs_v.save_character()
+								childe_prefs_v.generation = 14
 
+							childe_prefs_v.skin_tone = get_vamp_skin_color(childe.skin_tone)
+							childe_prefs_v.clane.enlightenment = sire.clane.enlightenment
+
+							//Rarely the new mid round vampires get the 3 brujah skil(it is default)
+							//This will remove if it happens
+							// Or if they are a ghoul with abunch of disciplines
+							if(childe_prefs_v.discipline_types.len > 0)
+								for (var/i in 1 to childe_prefs_v.discipline_types.len)
+									var/removing_discipline = childe_prefs_v.discipline_types[1]
+									if (removing_discipline)
+										var/index = childe_prefs_v.discipline_types.Find(removing_discipline)
+										childe_prefs_v.discipline_types.Cut(index, index + 1)
+										childe_prefs_v.discipline_levels.Cut(index, index + 1)
+
+							if(childe_prefs_v.discipline_types.len == 0)
+								for (var/i in 1 to 3)
+									childe_prefs_v.discipline_types += childe_prefs_v.clane.clane_disciplines[i]
+									childe_prefs_v.discipline_levels += 1
+
+							childe_prefs_v.save_character()
 					else
-
-						to_chat(owner, "<span class='notice'>[BLOODBONDED] is totally <b>DEAD</b>!</span>")
+						to_chat(owner, span_notice("[childe] is totally <b>DEAD</b>!"))
 						giving = FALSE
 						return
+				// Ghouling
 				else
-					if(BLOODBONDED.has_status_effect(STATUS_EFFECT_INLOVE))
-						BLOODBONDED.remove_status_effect(STATUS_EFFECT_INLOVE)
-					BLOODBONDED.apply_status_effect(STATUS_EFFECT_INLOVE, owner)
-					to_chat(owner, "<span class='notice'>You successfuly fed [BLOODBONDED] with vitae.</span>")
-					to_chat(BLOODBONDED, "<span class='userlove'>You feel good when you drink this <b>BLOOD</b>...</span>")
+					var/mob/living/carbon/human/thrall = grabbed_victim
+					var/mob/living/carbon/human/regnant = vampire
 
-					message_admins("[ADMIN_LOOKUPFLW(H)] has bloodbonded [ADMIN_LOOKUPFLW(BLOODBONDED)].")
-					log_game("[key_name(H)] has bloodbonded [key_name(BLOODBONDED)].")
+					if(thrall.has_status_effect(STATUS_EFFECT_INLOVE))
+						thrall.remove_status_effect(STATUS_EFFECT_INLOVE)
+					thrall.apply_status_effect(STATUS_EFFECT_INLOVE, owner)
+					to_chat(owner, "<span class='notice'>You successfuly fed [thrall] with vitae.</span>")
+					to_chat(thrall, "<span class='userlove'>You feel good when you drink this <b>BLOOD</b>...</span>")
 
-					if(H.reagents)
-						if(length(H.reagents.reagent_list))
-							H.reagents.trans_to(BLOODBONDED, min(10, H.reagents.total_volume), transfered_by = H, methods = VAMPIRE)
-					BLOODBONDED.adjustBruteLoss(-25, TRUE)
-					if(length(BLOODBONDED.all_wounds))
-						var/datum/wound/W = pick(BLOODBONDED.all_wounds)
+					message_admins("[ADMIN_LOOKUPFLW(regnant)] has bloodbonded [ADMIN_LOOKUPFLW(thrall)].")
+					log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
+
+					if(length(regnant.reagents?.reagent_list))
+						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = H, methods = VAMPIRE)
+					thrall.adjustBruteLoss(-25, TRUE)
+					if(length(thrall.all_wounds))
+						var/datum/wound/W = pick(thrall.all_wounds)
 						W.remove_wound()
-					BLOODBONDED.adjustFireLoss(-25, TRUE)
-					BLOODBONDED.bloodpool = min(BLOODBONDED.maxbloodpool, BLOODBONDED.bloodpool+2)
+					thrall.adjustFireLoss(-25, TRUE)
+					thrall.bloodpool = min(thrall.maxbloodpool, thrall.bloodpool+2)
 					giving = FALSE
 
-					if (iskindred(BLOODBONDED))
-						var/datum/species/kindred/species = BLOODBONDED.dna.species
-						if (HAS_TRAIT(BLOODBONDED, TRAIT_TORPOR) && COOLDOWN_FINISHED(species, torpor_timer))
-							BLOODBONDED.untorpor()
+					if(iskindred(thrall))
+						var/datum/species/kindred/species = thrall.dna.species
+						if(HAS_TRAIT(thrall, TRAIT_TORPOR) && COOLDOWN_FINISHED(species, torpor_timer))
+							thrall.untorpor()
 
-					if(!isghoul(H.pulling) && istype(H.pulling, /mob/living/carbon/human/npc))
-						var/mob/living/carbon/human/npc/NPC = H.pulling
+					if(!isghoul(thrall) && istype(thrall, /mob/living/carbon/human/npc))
+						var/mob/living/carbon/human/npc/NPC = thrall
 						if(NPC.ghoulificate(owner))
 							new_master = TRUE
 //							if(NPC.hud_used)
 //								var/datum/hud/human/HU = NPC.hud_used
 //								HU.create_ghoulic()
 							NPC.roundstart_vampire = FALSE
-					if(BLOODBONDED.mind)
-						if(BLOODBONDED.mind.enslaved_to != owner)
-							BLOODBONDED.mind.enslave_mind_to_creator(owner)
-							to_chat(BLOODBONDED, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [H]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
+					if(thrall.mind)
+						if(thrall.mind.enslaved_to != owner)
+							thrall.mind.enslave_mind_to_creator(owner)
+							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [H]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
 							new_master = TRUE
-					if(isghoul(BLOODBONDED))
-						var/datum/species/ghoul/G = BLOODBONDED.dna.species
-						G.master = owner
-						G.last_vitae = world.time
+					if(isghoul(thrall))
+						var/datum/species/ghoul/ghoul = thrall.dna.species
+						ghoul.master = owner
+						ghoul.last_vitae = world.time
 						if(new_master)
-							G.changed_master = TRUE
-					else if(!iskindred(BLOODBONDED) && !isnpc(BLOODBONDED))
+							ghoul.changed_master = TRUE
+					else if(!iskindred(thrall) && !isnpc(thrall))
 						var/save_data_g = FALSE
-						BLOODBONDED.set_species(/datum/species/ghoul)
-						BLOODBONDED.clane = null
-						var/response_g = input(BLOODBONDED, "Do you wish to keep being a ghoul on your save slot?(Yes will be a permanent choice and you can't go back)") in list("Yes", "No")
+						thrall.set_species(/datum/species/ghoul)
+						thrall.clane = null
+						var/response_g = input(thrall, "Do you wish to keep being a ghoul on your save slot?(Yes will be a permanent choice and you can't go back)") in list("Yes", "No")
 //						if(BLOODBONDED.hud_used)
 //							var/datum/hud/human/HU = BLOODBONDED.hud_used
 //							HU.create_ghoulic()
-						BLOODBONDED.roundstart_vampire = FALSE
-						var/datum/species/ghoul/G = BLOODBONDED.dna.species
-						G.master = owner
-						G.last_vitae = world.time
+						thrall.roundstart_vampire = FALSE
+						var/datum/species/ghoul/ghoul = thrall.dna.species
+						ghoul.master = owner
+						ghoul.last_vitae = world.time
 						if(new_master)
-							G.changed_master = TRUE
+							ghoul.changed_master = TRUE
 						if(response_g == "Yes")
 							save_data_g = TRUE
 						else
 							save_data_g = FALSE
 						if(save_data_g)
-							var/datum/preferences/BLOODBONDED_prefs_g = BLOODBONDED.client.prefs
-							if(BLOODBONDED_prefs_g.discipline_types.len == 3)
+							var/datum/preferences/thrall_prefs_g = thrall.client.prefs
+							if(thrall_prefs_g.discipline_types.len == 3)
 								for (var/i in 1 to 3)
-									var/removing_discipline = BLOODBONDED_prefs_g.discipline_types[1]
+									var/removing_discipline = thrall_prefs_g.discipline_types[1]
 									if (removing_discipline)
-										var/index = BLOODBONDED_prefs_g.discipline_types.Find(removing_discipline)
-										BLOODBONDED_prefs_g.discipline_types.Cut(index, index + 1)
-										BLOODBONDED_prefs_g.discipline_levels.Cut(index, index + 1)
-							BLOODBONDED_prefs_g.pref_species.name = "Ghoul"
-							BLOODBONDED_prefs_g.pref_species.id = "ghoul"
-							BLOODBONDED_prefs_g.save_character()
+										var/index = thrall_prefs_g.discipline_types.Find(removing_discipline)
+										thrall_prefs_g.discipline_types.Cut(index, index + 1)
+										thrall_prefs_g.discipline_levels.Cut(index, index + 1)
+							thrall_prefs_g.pref_species.name = "Ghoul"
+							thrall_prefs_g.pref_species.id = "ghoul"
+							//thrall_prefs_g.regnant = ghoul.master
+							thrall_prefs_g.save_character()
 			else
 				giving = FALSE
 
@@ -713,7 +697,7 @@
 /datum/species/kindred/proc/slip_into_torpor(var/mob/living/carbon/human/source)
 	SIGNAL_HANDLER
 
-	to_chat(source, "<span class='warning'>You can feel yourself slipping into Torpor. You can use succumb to immediately sleep...</span>")
+	to_chat(source, span_warning("You can feel yourself slipping into Torpor. You can use succumb to immediately sleep..."))
 	spawn(2 MINUTES)
 		if (source.stat >= SOFT_CRIT)
 			source.torpor("damage")
@@ -741,22 +725,22 @@
 	var/datum/species/kindred/teacher_species = teacher.dna.species
 
 	if (!student.client)
-		to_chat(teacher, "<span class='warning'>Your student needs to be a player!</span>")
+		to_chat(teacher, span_warning("Your student needs to be a player!"))
 		return
 	var/datum/preferences/student_prefs = student.client.prefs
 
 	if (!iskindred(student))
-		to_chat(teacher, "<span class='warning'>Your student needs to be a vampire!</span>")
+		to_chat(teacher, span_warning("Your student needs to be a vampire!"))
 		return
 	if (student.stat >= SOFT_CRIT)
-		to_chat(teacher, "<span class='warning'>Your student needs to be conscious!</span>")
+		to_chat(teacher, span_warning("Your student needs to be conscious!"))
 		return
 	if (teacher_prefs.true_experience < 10)
-		to_chat(teacher, "<span class='warning'>You don't have enough experience to teach them this Discipline!</span>")
+		to_chat(teacher, span_warning("You don't have enough experience to teach them this Discipline!"))
 		return
 	//checks that the teacher has blood bonded the student, this is something that needs to be reworked when blood bonds are made better
 	if (student.mind.enslaved_to != teacher)
-		to_chat(teacher, "<span class='warning'>You need to have fed your student your blood to teach them Disciplines!</span>")
+		to_chat(teacher, span_warning("You need to have fed your student your blood to teach them Disciplines!"))
 		return
 
 	var/possible_disciplines = teacher_prefs.discipline_types - student_prefs.discipline_types
@@ -765,17 +749,18 @@
 	if (teaching_discipline)
 		var/datum/discipline/teacher_discipline = teacher_species.get_discipline(teaching_discipline)
 		var/datum/discipline/giving_discipline = new teaching_discipline
-
+		/* TFN EDIT: Whitelists? Nope!
 		//if a Discipline is clan-restricted, it must be checked if the student has access to at least one Clan with that Discipline
 		if (giving_discipline.clane_restricted)
 			if (!can_access_discipline(student, teaching_discipline))
-				to_chat(teacher, "<span class='warning'>Your student is not whitelisted for any Clans with this Discipline, so they cannot learn it.</span>")
+				to_chat(teacher, span_warning("Your student is not whitelisted for any Clans with this Discipline, so they cannot learn it."))
 				qdel(giving_discipline)
 				return
+		*/
 
 		//ensure the teacher's mastered it, also prevents them from teaching with free starting experience
 		if (teacher_discipline.level < 5)
-			to_chat(teacher, "<span class='warning'>You do not know this Discipline well enough to teach it. You need to master it to the 5th rank.</span>")
+			to_chat(teacher, span_notice("You do not know this Discipline well enough to teach it. You need to master it to the 5th rank."))
 			qdel(giving_discipline)
 			return
 
@@ -792,19 +777,19 @@
 		var/alienation = FALSE
 		if (student.clane.restricted_disciplines.Find(teaching_discipline))
 			if (alert(student, "Learning [giving_discipline] will alienate you from the rest of the [student.clane], making you just like the false Clan. Do you wish to continue?", "Confirmation", "Yes", "No") != "Yes")
-				visible_message("<span class='warning'>[student] refuses [teacher]'s mentoring!</span>")
+				visible_message(span_notice("[student] refuses [teacher]'s mentoring!"))
 				qdel(giving_discipline)
 				return
 			else
 				alienation = TRUE
-				to_chat(teacher, "<span class='notice'>[student] accepts your mentoring!</span>")
+				to_chat(teacher, span_notice("[student] accepts your mentoring!"))
 
 		if (get_dist(student.loc, teacher.loc) > 1)
-			to_chat(teacher, "<span class='warning'>Your student needs to be next to you!</span>")
+			to_chat(teacher, span_warning("Your student needs to be next to you!"))
 			qdel(giving_discipline)
 			return
 
-		visible_message("<span class='notice'>[teacher] begins mentoring [student] in [giving_discipline].</span>")
+		visible_message(span_notice("[teacher] begins mentoring [student] in [giving_discipline]."))
 		if (do_after(teacher, 30 SECONDS, student))
 			teacher_prefs.true_experience -= 10
 
@@ -825,8 +810,8 @@
 			student_prefs.save_character()
 			teacher_prefs.save_character()
 
-			to_chat(teacher, "<span class='notice'>You finish teaching [student] the basics of [giving_discipline]. [student.p_they(TRUE)] seem[student.p_s()] to have absorbed your mentoring.[restricted ? " May your Clanmates take mercy on your soul for spreading their secrets." : ""]</span>")
-			to_chat(student, "<span class='nicegreen'>[teacher] has taught you the basics of [giving_discipline]. You may now spend experience points to learn its first level in the character menu.</span>")
+			to_chat(teacher, span_notice("You finish teaching [student] the basics of [giving_discipline]. [student.p_they(TRUE)] seem[student.p_s()] to have absorbed your mentoring.[restricted ? " May your Clanmates take mercy on your soul for spreading their secrets." : ""]"))
+			to_chat(student, span_nicegreen("[teacher] has taught you the basics of [giving_discipline]. You may now spend experience points to learn its first level in the character menu."))
 
 			message_admins("[ADMIN_LOOKUPFLW(teacher)] taught [ADMIN_LOOKUPFLW(student)] the Discipline [giving_discipline.name].")
 			log_game("[key_name(teacher)] taught [key_name(student)] the Discipline [giving_discipline.name].")

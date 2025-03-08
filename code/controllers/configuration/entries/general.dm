@@ -76,7 +76,11 @@
 /datum/config_entry/flag/log_attack	// log attack messages
 
 /datum/config_entry/flag/log_emote	// log emotes
+// TFN EDIT ADDITION START
+/datum/config_entry/flag/log_subtle  // TFN EDIT: log subtle emotes
 
+/datum/config_entry/flag/log_subtler  // TFN EDIT: log subtler emotes
+// TFN EDIT ADDITION END
 /datum/config_entry/flag/log_econ	// log economy actions
 
 /datum/config_entry/flag/log_adminchat	// log admin chat messages
@@ -213,16 +217,16 @@
 	config_entry_value = "https://wiki.wod13.org"
 
 /datum/config_entry/string/forumurl
-	config_entry_value = ""
+	config_entry_value = "https://discord.com/invite/hQHAK67Drd"
 
 /datum/config_entry/string/discordurl
-	config_entry_value = "https://discord.com/invite/WU92NG2Me8"
+	config_entry_value = "https://discord.com/invite/hQHAK67Drd"
 
 /datum/config_entry/string/rulesurl
 	config_entry_value = ""
 
 /datum/config_entry/string/githuburl
-	config_entry_value = "https://github.com/WorldOfDarknessXIII/World-of-Darkness-13"
+	config_entry_value = "https://github.com/Near-Web/The-Final-Nights"
 /datum/config_entry/string/discordbotcommandprefix
 	config_entry_value = "?"
 

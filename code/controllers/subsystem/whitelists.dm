@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(whitelists)
 		return ..()
 	if(!CONFIG_GET(flag/whitelists_enabled))
 		return ..()
-	whitelists_enabled = TRUE
+	whitelists_enabled = FALSE
 
 	for (var/key in subtypesof(/datum/vampireclane))
 		var/datum/vampireclane/clan = new key

@@ -1,5 +1,5 @@
 /datum/vampireclane/cappadocian
-	name = "Cappadocian"
+	name = CLAN_CAPPADOCIAN
 	desc = "A presumed-to-be-extinct Clan of necromancers, the Cappadocians studied death specifically in the physical world. The Giovanni were Embraced into their line to help further their studies into the underworld. They were rewarded with Diablerie and the destruction of their Clan and founder."
 	curse = "Extremely corpselike appearance that worsens with age."
 	clane_disciplines = list(
@@ -11,7 +11,7 @@
 	alt_sprite = "rotten1"
 	alt_sprite_greyscale = TRUE
 
-	whitelisted = TRUE
+	whitelisted = FALSE
 
 /datum/vampireclane/cappadocian/on_gain(mob/living/carbon/human/H)
 	var/years_undead = H.chronological_age - H.age

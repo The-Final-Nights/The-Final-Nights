@@ -30,9 +30,16 @@ GLOBAL_LIST_INIT(anarch_positions, list(
 	"Bruiser"
 	))
 
-
 GLOBAL_LIST_INIT(citizen_positions, list(
 	"Citizen",
+	"Barista",
+	"Counselor",
+	"Cabaret Worker",
+	"Museum Groundskeeper",
+	"Monestary Monk",
+	"Veterinarian",
+	"Antique Worker",
+	"Hotel Attendant"
 ))
 
 GLOBAL_LIST_INIT(police_positions, list(
@@ -40,7 +47,6 @@ GLOBAL_LIST_INIT(police_positions, list(
     "Police Sergeant",
     "Police Officer",
 	"Emergency Dispatcher"
-
 ))
 
 GLOBAL_LIST_INIT(national_security_positions, list(
@@ -81,6 +87,7 @@ GLOBAL_LIST_INIT(warehouse_positions, list(
 
 GLOBAL_LIST_INIT(tremere_positions, list(
 	"Chantry Regent",
+	"Chantry Gargoyle",
 	"Chantry Archivist"
 ))
 

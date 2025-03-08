@@ -368,7 +368,7 @@
 /obj/structure/sign/painting/proc/save_persistent()
 	if(!persistence_id || !current_canvas)
 		return
-	if(sanitize_filename(persistence_id) != persistence_id)
+	if(SANITIZE_FILENAME(persistence_id) != persistence_id)
 		stack_trace("Invalid persistence_id - [persistence_id]")
 		return
 	if(!current_canvas.painting_name)

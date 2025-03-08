@@ -151,7 +151,17 @@ GLOBAL_LIST_INIT(testing_global_profiler, list("_PROFILE_NAME" = "Global"))
 /proc/log_emote(text)
 	if (CONFIG_GET(flag/log_emote))
 		WRITE_LOG(GLOB.world_game_log, "EMOTE: [text]")
+// TFN EDIT ADDITION START
+/// This logs subtle emotes in game.log
+/proc/log_subtle(text)
+	if (CONFIG_GET(flag/log_subtle))
+		WRITE_LOG(GLOB.world_game_log, "EMOTE (SUBTLE): [text]")
 
+/// This logs subtler emotes in game.log, if the conflig flag is true.
+/proc/log_subtler(text)
+	if (CONFIG_GET(flag/log_subtler))
+		WRITE_LOG(GLOB.world_game_log, "EMOTE (SUBTLER): [text]")
+// TFN EDIT ADDITION END
 /proc/log_prayer(text)
 	if (CONFIG_GET(flag/log_prayer))
 		WRITE_LOG(GLOB.world_game_log, "PRAY: [text]")

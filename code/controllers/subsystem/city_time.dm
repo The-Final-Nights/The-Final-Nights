@@ -29,73 +29,69 @@ SUBSYSTEM_DEF(city_time)
 		minutes = max(0, minutes+1)
 
 	timeofnight = "[get_watch_number(hour)]:[get_watch_number(minutes)]"
-
+	// TFN EDIT REFACTOR START
 	if(hour == 0 && minutes == 0)
 		for(var/mob/living/carbon/werewolf/W in GLOB.player_list)
-			if(W)
-				if(W.stat != DEAD)
-					if(W.key)
-						var/datum/preferences/P = GLOB.preferences_datums[ckey(W.key)]
-						if(P)
-							P.add_experience(3)
+			if(W?.stat != DEAD && W?.key)
+				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(W.key)]
+				char_sheet?.add_experience(3)
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
-			if(H)
-				if(H.stat != DEAD)
-					if(H.key)
-						var/datum/preferences/P = GLOB.preferences_datums[ckey(H.key)]
-						if(P)
-							P.add_experience(1)
-							if(H.mind)
-								if("[H.mind.assigned_role]" == "Prince" || "[H.mind.assigned_role]" == "Sheriff" || "[H.mind.assigned_role]" == "Seneschal" || "[H.mind.assigned_role]" == "Chantry Regent" || "[H.mind.assigned_role]" == "Baron" || "[H.mind.assigned_role]" == "Dealer")
-									P.add_experience(2)
-							if(!HAS_TRAIT(H, TRAIT_NON_INT))
-								if(H.total_erp > 1500)
-									P.add_experience(2)
-									H.total_erp = 0
-								if(H.total_cleaned > 25)
-									P.add_experience(1)
-									H.total_cleaned = 0
-									call_dharma("cleangrow", H)
-								if(H.mind)
-									if(H.mind.assigned_role == "Graveyard Keeper")
-										if(SSgraveyard.total_good > SSgraveyard.total_bad)
-											P.add_experience(1)
-							P.save_preferences()
-							P.save_character()
+			if(H?.stat != DEAD && H?.key)
+				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(H.key)]
+				if(char_sheet)
+					char_sheet.add_experience(3)
+
+					var/role = H.mind?.assigned_role
+
+					if(role in list("Prince", "Sheriff", "Seneschal", "Chantry Regent", "Baron", "Dealer"))
+						char_sheet.add_experience(3)
+
+					if(!HAS_TRAIT(H, TRAIT_NON_INT))
+						if(H.total_erp > 1500)
+							char_sheet.add_experience(2)
+							H.total_erp = 0
+						if(H.total_cleaned > 25)
+							char_sheet.add_experience(1)
+							H.total_cleaned = 0
+							call_dharma("cleangrow", H)
+						if(role == "Graveyard Keeper")
+							if(SSgraveyard.total_good > SSgraveyard.total_bad)
+								char_sheet.add_experience(1)
+
+					char_sheet.save_preferences()
+					char_sheet.save_character()
 
 	if(hour == 3 && minutes == 0)
 		for(var/mob/living/carbon/werewolf/W in GLOB.player_list)
-			if(W)
-				if(W.stat != DEAD)
-					if(W.key)
-						var/datum/preferences/P = GLOB.preferences_datums[ckey(W.key)]
-						if(P)
-							P.add_experience(3)
+			if(W?.stat != DEAD && W?.key)
+				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(W.key)]
+				char_sheet?.add_experience(3)
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
-			if(H)
-				if(H.stat != DEAD)
-					if(H.key)
-						var/datum/preferences/P = GLOB.preferences_datums[ckey(H.key)]
-						if(P)
-							P.add_experience(1)
-							if(H.mind)
-								if("[H.mind.assigned_role]" == "Prince" || "[H.mind.assigned_role]" == "Sheriff" || "[H.mind.assigned_role]" == "Seneschal" || "[H.mind.assigned_role]" == "Chantry Regent" || "[H.mind.assigned_role]" == "Baron" || "[H.mind.assigned_role]" == "Dealer")
-									P.add_experience(2)
-							if(!HAS_TRAIT(H, TRAIT_NON_INT))
-								if(H.total_erp > 9000)
-									P.add_experience(2)
-									H.total_erp = 0
-								if(H.total_cleaned > 25)
-									P.add_experience(1)
-									H.total_cleaned = 0
-									call_dharma("cleangrow", H)
-								if(H.mind)
-									if(H.mind.assigned_role == "Graveyard Keeper")
-										if(SSgraveyard.total_good > SSgraveyard.total_bad)
-											P.add_experience(1)
-							P.save_preferences()
-							P.save_character()
+			if(H?.stat != DEAD && H?.key)
+				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(H.key)]
+				if(char_sheet)
+					char_sheet.add_experience(3)
 
+					var/role = H.mind?.assigned_role
+
+					if(role in list("Prince", "Sheriff", "Seneschal", "Chantry Regent", "Baron", "Dealer"))
+						char_sheet.add_experience(2)
+
+					if(!HAS_TRAIT(H, TRAIT_NON_INT))
+						if(H.total_erp > 1500)
+							char_sheet.add_experience(2)
+							H.total_erp = 0
+						if(H.total_cleaned > 25)
+							char_sheet.add_experience(1)
+							H.total_cleaned = 0
+							call_dharma("cleangrow", H)
+						if(role == "Graveyard Keeper")
+							if(SSgraveyard.total_good > SSgraveyard.total_bad)
+								char_sheet.add_experience(1)
+
+					char_sheet.save_preferences()
+					char_sheet.save_character()
+	// TFN EDIT REFACTOR END
 	if(hour == 5 && minutes == 30)
 		to_chat(world, "<span class='ghostalert'>The night is ending...</span>")
 

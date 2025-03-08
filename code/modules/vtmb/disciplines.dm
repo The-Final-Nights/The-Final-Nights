@@ -829,7 +829,7 @@
 
 /datum/discipline/fortitude/activate(mob/living/target, mob/living/carbon/human/caster)
 	. = ..()
-	var/mod = min(3, level_casting)
+	var/mod = level_casting
 	var/armah = 15*mod
 //	caster.remove_overlay(FORTITUDE_LAYER)
 //	var/mutable_appearance/fortitude_overlay = mutable_appearance('icons/wod13/icons.dmi', "fortitude", -FORTITUDE_LAYER)

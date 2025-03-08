@@ -502,25 +502,25 @@
 			var/torpor_length = 0 SECONDS
 			switch(humanity)
 				if(10)
-					torpor_length = 1 MINUTES
-				if(9)
-					torpor_length = 3 MINUTES
-				if(8)
-					torpor_length = 4 MINUTES
-				if(7)
 					torpor_length = 5 MINUTES
-				if(6)
+				if(9)
 					torpor_length = 10 MINUTES
+				if(8)
+					torpor_length = 15 MINUTES
+				if(7)
+					torpor_length = 15 MINUTES
+				if(6)
+					torpor_length = 15 MINUTES
 				if(5)
 					torpor_length = 15 MINUTES
 				if(4)
-					torpor_length = 30 MINUTES
+					torpor_length = 15 MINUTES
 				if(3)
-					torpor_length = 1 HOURS
+					torpor_length = 30 MINUTES
 				if(2)
-					torpor_length = 2 HOURS
+					torpor_length = 35 MINUTES
 				if(1)
-					torpor_length = 3 HOURS
+					torpor_length = 1 HOURS
 				else
 					torpor_length = 5 HOURS
 			COOLDOWN_START(vampire_species, torpor_timer, torpor_length)

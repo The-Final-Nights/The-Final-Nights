@@ -32,7 +32,6 @@
 	if(GLOB.admin_datums[ckey] || GLOB.deadmins[ckey])
 		admin = TRUE
 
-
 	//Whitelist
 	if(!real_bans_only && !C && CONFIG_GET(flag/usewhitelist))
 		if(!check_whitelist(ckey))
@@ -48,10 +47,10 @@
 	//Guest Checking
 	if(!real_bans_only && !C && IsGuestKey(key))
 		if (CONFIG_GET(flag/guest_ban))
-			log_access("Failed Login: [key] - Guests not allowed")
+			log_access("Failed Login: [ckey] - Guests not allowed")
 			return list("reason"="guest", "desc"="\nReason: Guests not allowed. Please sign in with a byond account.")
 		if (CONFIG_GET(flag/panic_bunker) && SSdbcore.Connect())
-			log_access("Failed Login: [key] - Guests not allowed during panic bunker")
+			log_access("Failed Login: [ckey] - Guests not allowed during panic bunker")
 			return list("reason"="guest", "desc"="\nReason: Sorry but the server is currently not accepting connections from never before seen players or guests. If you have played on this server with a byond account before, please log in to the byond account you have played from.")
 
 	//Population Cap Checking
@@ -60,7 +59,7 @@
 		var/popcap_value = GLOB.clients.len
 		if(popcap_value >= extreme_popcap && !GLOB.joined_player_list.Find(ckey))
 			if(!CONFIG_GET(flag/byond_member_bypass_popcap) || !world.IsSubscribed(ckey, "BYOND"))
-				log_access("Failed Login: [key] - Population cap reached")
+				log_access("Failed Login: [ckey] - Population cap reached")
 				return list("reason"="popcap", "desc"= "\nReason: [CONFIG_GET(string/extreme_popcap_message)]")
 
 	if(CONFIG_GET(flag/sql_enabled))
@@ -74,16 +73,16 @@
 			for(var/i in ban_details)
 				if(admin)
 					if(text2num(i["applies_to_admins"]))
-						var/msg = "Admin [key] is admin banned, and has been disallowed access."
+						var/msg = "Admin [ckey] is admin banned, and has been disallowed access."
 						log_admin(msg)
 						if (message)
 							message_admins(msg)
 					else
-						var/msg = "Admin [key] has been allowed to bypass a matching non-admin ban on [i["key"]] [i["ip"]]-[i["computerid"]]."
+						var/msg = "Admin [ckey] has been allowed to bypass a matching non-admin ban on [ckey(i["key"])] [i["ip"]]-[i["computerid"]]."
 						log_admin(msg)
 						if (message)
 							message_admins(msg)
-							addclientmessage(ckey,"<span class='adminnotice'>Admin [key] has been allowed to bypass a matching non-admin ban on [i["key"]] [i["ip"]]-[i["computerid"]].</span>")
+							addclientmessage(ckey,"<span class='adminnotice'>Admin [ckey] has been allowed to bypass a matching non-admin ban on [i["key"]] [i["ip"]]-[i["computerid"]].</span>")
 						continue
 				var/expires = "This is a permanent ban."
 				if(i["expiration_time"])
@@ -92,7 +91,7 @@
 				The ban reason is: [i["reason"]]
 				This ban (BanID #[i["id"]]) was applied by [i["admin_key"]] on [i["bantime"]] during round ID [i["round_id"]].
 				[expires]"}
-				log_access("Failed Login: [key] [computer_id] [address] - Banned (#[i["id"]])")
+				log_access("Failed Login: [ckey] [computer_id] [address] - Banned (#[i["id"]])")
 				return list("reason"="Banned","desc"="[desc]")
 	if (admin)
 		if (GLOB.directory[ckey])
@@ -214,9 +213,9 @@
 		//ie, ones where the "apply to this game only" checkbox is not checked (defaults to not checked)
 		//So it's safe to let admins walk thru host/sticky bans here
 		if (admin)
-			log_admin("The admin [key] has been allowed to bypass a matching host/sticky ban on [bannedckey]")
+			log_admin("The admin [ckey] has been allowed to bypass a matching host/sticky ban on [bannedckey]")
 			if (message)
-				message_admins("<span class='adminnotice'>The admin [key] has been allowed to bypass a matching host/sticky ban on [bannedckey]</span>")
+				message_admins("<span class='adminnotice'>The admin [ckey] has been allowed to bypass a matching host/sticky ban on [bannedckey]</span>")
 				addclientmessage(ckey,"<span class='adminnotice'>You have been allowed to bypass a matching host/sticky ban on [bannedckey]</span>")
 			return null
 
@@ -225,7 +224,7 @@
 
 		var/desc = "\nReason:(StickyBan) You, or another user of this computer or connection ([bannedckey]) is banned from playing here. The ban reason is:\n[ban["message"]]\nThis ban was applied by [ban["admin"]]\nThis is a BanEvasion Detection System ban, if you think this ban is a mistake, please wait EXACTLY 6 seconds, then try again before filing an appeal.\n"
 		. = list("reason" = "Stickyban", "desc" = desc)
-		log_access("Failed Login: [key] [computer_id] [address] - StickyBanned [ban["message"]] Target Username: [bannedckey] Placed by [ban["admin"]]")
+		log_access("Failed Login: [ckey] [computer_id] [address] - StickyBanned [ban["message"]] Target Username: [bannedckey] Placed by [ban["admin"]]")
 
 	return .
 

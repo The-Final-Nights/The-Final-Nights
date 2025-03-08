@@ -432,7 +432,7 @@
 		to_chat(user, "<span class='boldwarning'>You cannot send IC messages (muted).</span>")
 		return FALSE
 	else if(!params)
-		var/custom_emote = copytext(sanitize(input("Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
+		var/custom_emote = stripped_multiline_input(user, "Choose an emote to display.", "Emote", max_length = MAX_MESSAGE_LEN)
 		if(custom_emote && !check_invalid(user, custom_emote))
 			var/type = input("Is this a visible or hearable emote?") as null|anything in list("Visible", "Hearable")
 			switch(type)
@@ -443,9 +443,9 @@
 				else
 					alert("Unable to use this emote, must be either hearable or visible.")
 					return
-			message = custom_emote
+			message = user.say_emphasis(custom_emote)
 	else
-		message = params
+		message = user.say_emphasis(params)
 		if(type_override)
 			emote_type = type_override
 	. = ..()

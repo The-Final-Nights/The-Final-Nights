@@ -200,10 +200,11 @@
 			to_chat(usr, "Order queue reset.")
 			return TRUE
 		if("finalize_order")
-			if(!order_queue.len)
+			var/list/final_order = order_queue.Copy()
+			if(!final_order.len)
 				to_chat(usr, "Order queue is empty.")
 				return
-			if(order_queue.len > max_orders)
+			if(final_order.len > max_orders)
 				to_chat(usr, "You can only make 10 orders at a time!")
 				return
 			if(account_balance < total_order_cost())
@@ -224,15 +225,18 @@
 				spawn(trackLength)
 					var/obj/structure/closet/crate/crate = new(get_turf(train))
 					crate.name = "Supply Crate"
-					for(var/datum/supply_pack/vampire/pack in order_queue)
+					for(var/datum/supply_pack/vampire/pack in final_order)
 						for(var/item_path in pack.contains)
-							var/obj/item/item_instance = new item_path
-							item_instance.forceMove(crate)
+							if(!pack.contains[item_path])
+								pack.contains[item_path] = 1
+							for(var/iteration = 1 to pack.contains[item_path])
+								var/obj/item/item_instance = new item_path
+								item_instance.forceMove(crate)
 					playsound(train, 'code/modules/wod13/sounds/train_depart.ogg', 50, FALSE)
 					walk_to(train, get_nearest_free_turf(LZ), 1, 3)
 					spawn(trackLength)
 						qdel(train)
-					order_queue = list()
+					order_queue.Cut()
 				return
 
 /obj/machinery/computer/cargo/express/proc/total_order_cost()

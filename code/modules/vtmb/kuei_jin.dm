@@ -1,10 +1,11 @@
+/// Checks the Kuei-Jin's Chi for imbalance, determining their mortality.
 /mob/living/carbon/human/proc/check_kuei_jin_alive()
 	if(iscathayan(src))
 		if(mind?.dharma)
-			if(mind.dharma.animated == "Yang")
+			if(mind.dharma.animated == "Yang" || max_yang_chi > max_yin_chi + 2) // Alive
 				return TRUE
-			else if (max_yang_chi > max_yin_chi + 2)
-				return TRUE
+			else if(mind.dharma.animated == "Yin" || max_yin_chi > max_yang_chi + 2) // Unalive
+				return FALSE
 	else
 		return FALSE
 
