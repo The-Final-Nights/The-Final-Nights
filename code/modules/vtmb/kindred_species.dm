@@ -266,11 +266,11 @@
 
 /datum/action/blood_power/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
 	if(owner?.client?.prefs?.old_discipline)
-		button_icon = 'code/modules/wod13/disciplines.dmi'
-		icon_icon = 'code/modules/wod13/disciplines.dmi'
+		button_icon = 'icons/wod13/disciplines.dmi'
+		icon_icon = 'icons/wod13/disciplines.dmi'
 	else
-		button_icon = 'code/modules/wod13/UI/actions.dmi'
-		icon_icon = 'code/modules/wod13/UI/actions.dmi'
+		button_icon = 'icons/wod13/UI/actions.dmi'
+		icon_icon = 'icons/wod13/UI/actions.dmi'
 	. = ..()
 
 /datum/action/blood_power/Trigger()
