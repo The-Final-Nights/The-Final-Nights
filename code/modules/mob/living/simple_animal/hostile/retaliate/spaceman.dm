@@ -77,7 +77,7 @@
 /mob/living/simple_animal/hostile/retaliate/nanotrasenpeace/vampire
 	name = "SWAT Soldier"
 	desc = "An officer part of SFPD's private security force."
-	icon = 'code/modules/wod13/mobs.dmi'
+	icon = 'icons/wod13/mobs.dmi'
 	icon_state = "swat"
 	icon_living = "swat"
 	icon_dead = "swat_dead"
@@ -137,7 +137,7 @@
 
 /obj/effect/temp_visual/desant
 	name = "helicopter rope"
-	icon = 'code/modules/wod13/64x64.dmi'
+	icon = 'icons/wod13/64x64.dmi'
 	icon_state = "swat"
 	duration = 7
 
@@ -164,7 +164,7 @@
 
 /obj/effect/temp_visual/desant_back
 	name = "helicopter rope"
-	icon = 'code/modules/wod13/64x64.dmi'
+	icon = 'icons/wod13/64x64.dmi'
 	icon_state = "swat_back"
 	duration = 7
 

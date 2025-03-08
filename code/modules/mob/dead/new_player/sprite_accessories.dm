@@ -2388,7 +2388,7 @@
 
 /datum/sprite_accessory/wings/gargoyle
 	name = "Gargoyle"
-	icon = 'code/modules/wod13/64x32.dmi'
+	icon = 'icons/wod13/64x32.dmi'
 	icon_state = "gargoyle"
 	dimension_x = 64
 	center = TRUE
@@ -2399,7 +2399,7 @@
 
 /datum/sprite_accessory/wings_open/gargoyle
 	name = "Gargoyle"
-	icon = 'code/modules/wod13/64x32.dmi'
+	icon = 'icons/wod13/64x32.dmi'
 	icon_state = "gargoyle"
 	dimension_x = 64
 	center = TRUE

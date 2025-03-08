@@ -643,13 +643,13 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 				A = image('icons/effects/effects.dmi',H,"nothing")
 				A.name = "..."
 			if("monkey")//Monkey
-				A = image('code/modules/wod13/32x48.dmi',H,"baali")
+				A = image('icons/wod13/32x48.dmi',H,"baali")
 				A.name = "Infernalist"
 			if("carp")//Carp
-				A = image('code/modules/wod13/48x64.dmi',H,"4armstzi")
+				A = image('icons/wod13/48x64.dmi',H,"4armstzi")
 				A.name = "zulo"
 			if("corgi")//Corgi
-				A = image('code/modules/wod13/mobs.dmi',H,"dog")
+				A = image('icons/wod13/mobs.dmi',H,"dog")
 				A.name = "dog"
 			if("skeleton")//Skeletons
 				A = image('icons/mob/human.dmi',H,"skeleton")
@@ -687,11 +687,11 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	feedback_details += "Type: [kind]"
 	switch(kind)
 		if("monkey")//Monkey
-			A = image('code/modules/wod13/32x48.dmi',target,"baali")
+			A = image('icons/wod13/32x48.dmi',target,"baali")
 		if("carp")//Carp
-			A = image('code/modules/wod13/48x64.dmi',target,"4armstzi")
+			A = image('icons/wod13/48x64.dmi',target,"4armstzi")
 		if("corgi")//Corgi
-			A = image('code/modules/wod13/mobs.dmi',target,"dog")
+			A = image('icons/wod13/mobs.dmi',target,"dog")
 		if("skeleton")//Skeletons
 			A = image('icons/mob/human.dmi',target,"skeleton")
 		if("zombie")//Zombies
@@ -699,7 +699,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		if("demon")//Demon
 			A = image('icons/mob/mob.dmi',target,"daemon")
 		if("robot")//Cyborg
-			A = image('code/modules/wod13/werewolf.dmi',target,"white")
+			A = image('icons/wod13/werewolf.dmi',target,"white")
 		if("custom")
 			A = image(custom_icon_file, target, custom_icon)
 	A.override = 1

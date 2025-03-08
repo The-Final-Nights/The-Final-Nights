@@ -42616,7 +42616,7 @@
 "jHY" = (
 /obj/structure/bonfire/prelit{
 	burn_icon = "campfire_on";
-	icon = 'code/modules/wod13/props.dmi';
+	icon = 'icons/wod13/props.dmi';
 	icon_state = "campfire_off"
 	},
 /turf/open/floor/plating/vampbeach,
@@ -62360,7 +62360,7 @@
 "txk" = (
 /obj/structure/bonfire/prelit{
 	burn_icon = "campfire_on";
-	icon = 'code/modules/wod13/props.dmi';
+	icon = 'icons/wod13/props.dmi';
 	icon_state = "campfire_off"
 	},
 /turf/open/floor/plating/rough/cave,

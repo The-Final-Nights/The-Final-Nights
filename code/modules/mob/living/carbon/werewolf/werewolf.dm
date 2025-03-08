@@ -22,7 +22,7 @@
 
 /mob/living/carbon/werewolf
 	name = "werewolf"
-	icon = 'code/modules/wod13/werewolf.dmi'
+	icon = 'icons/wod13/werewolf.dmi'
 	gender = MALE
 	dna = null
 	faction = list("Gaia")

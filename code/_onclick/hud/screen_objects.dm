@@ -87,7 +87,7 @@
 
 /atom/movable/screen/craft
 	name = "crafting menu"
-	icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	icon = 'icons/wod13/UI/buttons_wide.dmi'
 	icon_state = "craft"
 	screen_loc = ui_crafting
 
@@ -474,7 +474,7 @@
 	name = "damage zone"
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
-	var/overlay_icon = 'code/modules/wod13/UI/buttons64.dmi'
+	var/overlay_icon = 'icons/wod13/UI/buttons64.dmi'
 	var/static/list/hover_overlays_cache = list()
 	var/hovering
 
@@ -516,7 +516,7 @@
 	vis_contents += overlay_object
 
 /obj/effect/overlay/zone_sel
-	icon = 'code/modules/wod13/UI/buttons64.dmi'
+	icon = 'icons/wod13/UI/buttons64.dmi'
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 128
 	anchored = TRUE

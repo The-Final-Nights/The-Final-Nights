@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/zombie
 	name = "Shambling Corpse"
 	desc = "When there is no more room in Hell, the dead will walk on Earth."
-	icon = 'code/modules/wod13/mobs.dmi'
+	icon = 'icons/wod13/mobs.dmi'
 	icon_state = "zombie"
 	icon_living = "zombie"
 	mob_biotypes = MOB_UNDEAD
@@ -83,7 +83,7 @@
 /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie
 	name = "Shambling Corpse"
 	desc = "When there is no more room in hell, the dead will walk on Earth."
-	icon = 'code/modules/wod13/mobs.dmi'
+	icon = 'icons/wod13/mobs.dmi'
 	icon_state = "zombie"
 	icon_living = "zombie"
 	icon_dead = "zombie_dead"

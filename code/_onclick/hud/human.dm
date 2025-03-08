@@ -1,10 +1,10 @@
 /atom/movable/screen/human
-	icon = 'code/modules/wod13/UI/buttons32.dmi'
+	icon = 'icons/wod13/UI/buttons32.dmi'
 
 /atom/movable/screen/fullscreen_hud
 	layer = HUD_LAYER
 	plane = HUD_PLANE
-	icon = 'code/modules/wod13/UI/full.dmi'
+	icon = 'icons/wod13/UI/full.dmi'
 
 /atom/movable/screen/human/toggle
 	name = "toggle"
@@ -114,7 +114,7 @@
 		static_inventory += demon_chi_icon
 
 	using = new/atom/movable/screen/language_menu
-	using.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	using.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	using.hud = src
 	static_inventory += using
 
@@ -130,26 +130,26 @@
 
 	action_intent = new /atom/movable/screen/act_intent/segmented
 	action_intent.icon_state = mymob.a_intent
-	action_intent.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	action_intent.icon = 'icons/wod13/UI/buttons32.dmi'
 	action_intent.hud = src
 	static_inventory += action_intent
 
 	using = new /atom/movable/screen/mov_intent
-	using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	using.icon = 'icons/wod13/UI/buttons32.dmi'
 	using.icon_state = (mymob.m_intent == MOVE_INTENT_RUN ? "running" : "walking")
 	using.screen_loc = ui_movi
 	using.hud = src
 	static_inventory += using
 
 	using = new /atom/movable/screen/drop()
-	using.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	using.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	using.screen_loc = ui_drop
 	using.hud = src
 	static_inventory += using
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "i_clothing"
-	inv_box.icon = 'code/modules/wod13/UI/buttons48.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons48.dmi'
 	inv_box.slot_id = ITEM_SLOT_ICLOTHING
 	inv_box.icon_state = "uniform"
 	inv_box.icon_full = "template1"
@@ -159,7 +159,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "o_clothing"
-	inv_box.icon = 'code/modules/wod13/UI/buttons48.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons48.dmi'
 	inv_box.slot_id = ITEM_SLOT_OCLOTHING
 	inv_box.icon_state = "suit"
 	inv_box.icon_full = "template1"
@@ -170,14 +170,14 @@
 	build_hand_slots()
 
 	using = new /atom/movable/screen/swap_hand()
-	using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	using.icon = 'icons/wod13/UI/buttons32.dmi'
 	using.icon_state = "swap_1"
 	using.screen_loc = ui_swaphand_position(owner,1)
 	using.hud = src
 	static_inventory += using
 
 	using = new /atom/movable/screen/swap_hand()
-	using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	using.icon = 'icons/wod13/UI/buttons32.dmi'
 	using.icon_state = "swap_2"
 	using.screen_loc = ui_swaphand_position(owner,2)
 	using.hud = src
@@ -185,7 +185,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "id"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "id"
 	inv_box.icon_full = "template2"
 	inv_box.screen_loc = ui_id
@@ -195,7 +195,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "mask"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "mask"
 	inv_box.icon_full = "template1"
 	inv_box.screen_loc = ui_mask
@@ -205,7 +205,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "neck"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "neck"
 	inv_box.icon_full = "template1"
 	inv_box.screen_loc = ui_neck
@@ -215,7 +215,7 @@
 
 //	inv_add = new /atom/movable/screen/addinv()
 //	inv_add.name = "inventory"
-//	inv_add.icon = 'code/modules/wod13/32x48.dmi'
+//	inv_add.icon = 'icons/wod13/32x48.dmi'
 //	inv_add.icon_state = "gorg"
 //	inv_add.screen_loc = ui_gorg
 //	inv_add.hud = src
@@ -223,7 +223,7 @@
 
 //	inv_add = new /atom/movable/screen/addinv()
 //	inv_add.name = "inventory"
-//	inv_add.icon = 'code/modules/wod13/icons.dmi'
+//	inv_add.icon = 'icons/wod13/icons.dmi'
 //	inv_add.icon_state = "cross1"
 //	inv_add.screen_loc = ui_cross1
 //	inv_add.hud = src
@@ -231,7 +231,7 @@
 
 //	inv_add = new /atom/movable/screen/addinv()
 //	inv_add.name = "inventory"
-//	inv_add.icon = 'code/modules/wod13/icons.dmi'
+//	inv_add.icon = 'icons/wod13/icons.dmi'
 //	inv_add.icon_state = "cross2"
 //	inv_add.screen_loc = ui_cross2
 //	inv_add.hud = src
@@ -239,7 +239,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "back"
-	inv_box.icon = 'code/modules/wod13/UI/buttons48.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons48.dmi'
 	inv_box.icon_state = "back"
 	inv_box.icon_full = "template2"
 	inv_box.screen_loc = ui_back
@@ -249,7 +249,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "storage1"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "pocket"
 	inv_box.icon_full = "template2"
 	inv_box.screen_loc = ui_storage1
@@ -259,7 +259,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "storage2"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "pocket"
 	inv_box.icon_full = "template2"
 	inv_box.screen_loc = ui_storage2
@@ -269,7 +269,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "suit storage"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "suit_storage"
 	inv_box.icon_full = "template2"
 	inv_box.screen_loc = ui_sstore1
@@ -278,7 +278,7 @@
 	static_inventory += inv_box
 
 	using = new /atom/movable/screen/resist()
-	using.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	using.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	using.screen_loc = ui_resist
 	using.hud = src
 	hotkeybuttons += using
@@ -296,7 +296,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "gloves"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "gloves"
 	inv_box.icon_full = "template1"
 	inv_box.screen_loc = ui_gloves
@@ -306,7 +306,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "eyes"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "glasses"
 	inv_box.icon_full = "template1"
 	inv_box.screen_loc = ui_glasses
@@ -316,7 +316,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "ears"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "ears"
 	inv_box.icon_full = "template1"
 	inv_box.screen_loc = ui_ears
@@ -326,7 +326,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "head"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "head"
 	inv_box.icon_full = "template1"
 	inv_box.screen_loc = ui_head
@@ -336,7 +336,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "shoes"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "shoes"
 	inv_box.icon_full = "template1"
 	inv_box.screen_loc = ui_shoes
@@ -346,7 +346,7 @@
 
 	inv_box = new /atom/movable/screen/inventory()
 	inv_box.name = "belt"
-	inv_box.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	inv_box.icon = 'icons/wod13/UI/buttons32.dmi'
 	inv_box.icon_state = "belt"
 	inv_box.icon_full = "template1"
 //	inv_box.icon_full = "template_small"
@@ -356,25 +356,25 @@
 	static_inventory += inv_box
 
 	throw_icon = new /atom/movable/screen/throw_catch()
-	throw_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	throw_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	throw_icon.screen_loc = ui_throw
 	throw_icon.hud = src
 	hotkeybuttons += throw_icon
 
 	rest_icon = new /atom/movable/screen/rest()
-	rest_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	rest_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	rest_icon.screen_loc = ui_rest
 	rest_icon.hud = src
 	static_inventory += rest_icon
 
 	block_icon = new /atom/movable/screen/block()
-	block_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	block_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	block_icon.screen_loc = ui_block
 	block_icon.hud = src
 	static_inventory += block_icon
 
 	jump_icon = new /atom/movable/screen/jump()
-	jump_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	jump_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	jump_icon.screen_loc = ui_jump
 	jump_icon.hud = src
 	static_inventory += jump_icon
@@ -388,7 +388,7 @@
 	infodisplay += spacesuit
 
 	healths = new /atom/movable/screen/healths()
-	healths.icon = 'code/modules/wod13/UI/buttons32.dmi'
+	healths.icon = 'icons/wod13/UI/buttons32.dmi'
 	healths.hud = src
 	infodisplay += healths
 
@@ -399,7 +399,7 @@
 
 	drinkblood_icon = new /atom/movable/screen/drinkblood()
 	drinkblood_icon.icon_state = "act_bite"
-	drinkblood_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	drinkblood_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	drinkblood_icon.screen_loc = ui_drinkblood
 	drinkblood_icon.hud = src
 	static_inventory += drinkblood_icon
@@ -410,7 +410,7 @@
 	static_inventory += zone_icon
 
 	pull_icon = new /atom/movable/screen/pull()
-	pull_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
+	pull_icon.icon = 'icons/wod13/UI/buttons_wide.dmi'
 	pull_icon.update_icon()
 	pull_icon.screen_loc = ui_pull
 	pull_icon.hud = src
@@ -425,7 +425,7 @@
 	infodisplay += lingstingdisplay
 
 	zone_select =  new /atom/movable/screen/zone_sel()
-	zone_select.icon = 'code/modules/wod13/UI/buttons64.dmi'
+	zone_select.icon = 'icons/wod13/UI/buttons64.dmi'
 	zone_select.hud = src
 	zone_select.update_icon()
 	static_inventory += zone_select
