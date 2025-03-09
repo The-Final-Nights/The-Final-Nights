@@ -27855,6 +27855,12 @@
 "cIt" = (
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/ventrue)
+"cIZ" = (
+/obj/structure/roofstuff/alt3{
+	dir = 8
+	},
+/turf/open/floor/plating/roofwalk,
+/area/vtm)
 "cJA" = (
 /obj/machinery/light/warm{
 	dir = 1
@@ -31897,6 +31903,16 @@
 /obj/item/paper/crumpled,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility)
+"eEl" = (
+/obj/structure/railing{
+	dir = 10
+	},
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 6
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "eEn" = (
 /obj/effect/turf_decal/weather/sand{
 	dir = 10
@@ -45385,7 +45401,7 @@
 /area/vtm/forest)
 "kIt" = (
 /obj/structure/sink{
-	dir = 4;
+	dir = 4
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -49886,6 +49902,12 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/strip_elysium)
+"mSm" = (
+/obj/structure/railing{
+	dir = 6
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "mSt" = (
 /obj/effect/landmark/npcactivity,
 /turf/open/floor/plating/sidewalk,
@@ -50158,7 +50180,7 @@
 /area/vtm/interior)
 "nar" = (
 /obj/machinery/light/small{
-	dir = 8;
+	dir = 8
 	},
 /obj/effect/decal/bordur{
 	dir = 8
@@ -50574,6 +50596,17 @@
 /obj/structure/fireplace,
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/old_clan_tzimisce_manor)
+"nkN" = (
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 10
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/roofwalk,
+/area/vtm)
 "nkZ" = (
 /obj/structure/table/wood,
 /obj/item/clothing/suit/vampire/vest,
@@ -51923,7 +51956,7 @@
 /area/vtm/interior/techshop)
 "nSI" = (
 /obj/structure/sink{
-	dir = 8;
+	dir = 8
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -52625,6 +52658,13 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility)
+"okl" = (
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 6
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "okF" = (
 /obj/structure/fluff/hedge,
 /obj/structure/railing{
@@ -54848,6 +54888,10 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/interior)
+"pne" = (
+/obj/structure/railing,
+/turf/open/floor/plating/roofwalk,
+/area/vtm)
 "pnl" = (
 /obj/structure/fireplace,
 /turf/open/floor/plating/parquetry/old,
@@ -56805,8 +56849,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "qme" = (
-/obj/structure/mirror{
-	},
+/obj/structure/mirror,
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/cog_pantry)
 "qmn" = (
@@ -57828,6 +57871,17 @@
 /obj/machinery/processor,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/laundromat)
+"qIw" = (
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 6
+	},
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 6
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "qIz" = (
 /obj/structure/window/reinforced/tinted{
 	dir = 1;
@@ -60033,6 +60087,13 @@
 /obj/elevator_door/start_closed,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f5)
+"rKa" = (
+/obj/structure/railing{
+	dir = 9;
+	pixel_y = 5
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "rKb" = (
 /obj/structure/chair/comfy/beige,
 /obj/effect/decal/pallet,
@@ -62404,8 +62465,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
 "sOy" = (
-/obj/structure/sink{
-	},
+/obj/structure/sink,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
@@ -63055,6 +63115,14 @@
 /obj/structure/trashcan,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer/nosferatu_town)
+"tdA" = (
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 10
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "tdZ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -65065,14 +65133,13 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "tYP" = (
-/obj/machinery/light/small{
-	dir = 8;
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 10
 	},
-/obj/effect/decal/bordur{
-	dir = 8
-	},
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/cog_caern)
+/turf/open/floor/plating/roofwalk,
+/area/vtm)
 "tYQ" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -66510,6 +66577,12 @@
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/pacificheights)
+"uJa" = (
+/obj/structure/railing{
+	dir = 6
+	},
+/turf/open/floor/plating/roofwalk,
+/area/vtm)
 "uJe" = (
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/wyrm_corrupted)
@@ -74619,6 +74692,12 @@
 /obj/effect/decal/wallpaper/gold/alt,
 /turf/closed/wall/vampwall/rich,
 /area/vtm/interior/millennium_tower/f4)
+"ylw" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/roofwalk,
+/area/vtm)
 "ylz" = (
 /obj/effect/decal/graffiti{
 	icon_state = "graffiti12"
@@ -85385,7 +85464,7 @@ aab
 rcP
 qsA
 cLV
-tYP
+nar
 mlt
 nar
 fGG
@@ -218261,20 +218340,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+rKa
+okl
+okl
+okl
+okl
+okl
+okl
+okl
+okl
+okl
+okl
+okl
+qIw
+eEl
 aiA
 aiA
 aiA
@@ -218518,20 +218597,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tdA
+bBA
+aiD
+aiD
+bBA
+aiD
+aiD
+bBA
+aiD
+aiD
+bBA
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -218775,20 +218854,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tdA
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -219032,20 +219111,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tdA
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -219289,20 +219368,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -219546,20 +219625,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+aiD
+bBt
+aiD
+byr
 aiA
 aiA
 aiA
@@ -219803,20 +219882,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+ftd
+bBp
+bBp
+gJS
+bBp
+bBp
+ftd
+bBp
+bBp
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -220060,20 +220139,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+cIZ
+bBp
+bBp
+bBp
+bBp
+bBp
+cIZ
+bBp
+bBp
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -220317,20 +220396,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -220574,20 +220653,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -220831,20 +220910,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+ftd
+bBp
+bBp
+bBp
+bBp
+bBp
+ftd
+bBp
+bBp
+aiD
+aiD
+aiD
+byr
 aiA
 aiA
 aiA
@@ -221088,20 +221167,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+cIZ
+bBp
+bBp
+bBp
+bBp
+bBp
+cIZ
+bBp
+bBp
+aiD
+bBt
+aiD
+byr
 aiA
 aiA
 aiA
@@ -221345,20 +221424,20 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bFm
+bFm
+bFm
+mSm
 aiA
 aiA
 aiA
@@ -221602,16 +221681,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -221859,16 +221938,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -222116,16 +222195,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+ftd
+bBp
+bBp
+bBp
+bBp
+bBp
+ftd
+bBp
+pne
 aiA
 aiA
 aiA
@@ -222373,16 +222452,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+cIZ
+bBp
+bBp
+bBp
+bBp
+bBp
+cIZ
+bBp
+pne
 aiA
 aiA
 aiA
@@ -222630,16 +222709,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -222887,16 +222966,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -223144,16 +223223,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -223401,16 +223480,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+ftd
+bBp
+bBp
+bBp
+bBp
+bBp
+ftd
+bBp
+pne
 aiA
 aiA
 aiA
@@ -223658,16 +223737,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+cIZ
+bBp
+bBp
+bBp
+bBp
+bBp
+cIZ
+bBp
+pne
 aiA
 aiA
 aiA
@@ -223915,16 +223994,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -224172,16 +224251,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -224429,16 +224508,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+ftd
+bBp
+bBp
+bBp
+bBp
+bBp
+ftd
+bBp
+pne
 aiA
 aiA
 aiA
@@ -224686,16 +224765,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+cIZ
+bBp
+bBp
+gJS
+bBp
+bBp
+cIZ
+bBp
+pne
 aiA
 aiA
 aiA
@@ -224943,16 +225022,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+tYP
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+bBp
+pne
 aiA
 aiA
 aiA
@@ -225200,16 +225279,16 @@ aiA
 aiA
 aiA
 aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
-aiA
+nkN
+ylw
+ylw
+ylw
+ylw
+ylw
+ylw
+ylw
+ylw
+uJa
 aiA
 aiA
 aiA
