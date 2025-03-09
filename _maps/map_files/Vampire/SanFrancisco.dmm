@@ -45386,7 +45386,6 @@
 "kIt" = (
 /obj/structure/sink{
 	dir = 4;
-	step_x = -9
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -50160,7 +50159,6 @@
 "nar" = (
 /obj/machinery/light/small{
 	dir = 8;
-	step_x = 17
 	},
 /obj/effect/decal/bordur{
 	dir = 8
@@ -51926,7 +51924,6 @@
 "nSI" = (
 /obj/structure/sink{
 	dir = 8;
-	step_x = 9
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -56809,7 +56806,6 @@
 /area/vtm/sewer)
 "qme" = (
 /obj/structure/mirror{
-	step_y = -6
 	},
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/cog_pantry)
@@ -62409,7 +62405,6 @@
 /area/vtm)
 "sOy" = (
 /obj/structure/sink{
-	step_y = 7
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
@@ -65072,7 +65067,6 @@
 "tYP" = (
 /obj/machinery/light/small{
 	dir = 8;
-	step_x = 16
 	},
 /obj/effect/decal/bordur{
 	dir = 8
