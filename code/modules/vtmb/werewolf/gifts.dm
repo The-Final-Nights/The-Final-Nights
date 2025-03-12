@@ -5,6 +5,7 @@
 	var/rage_req = 0
 	var/gnosis_req = 0
 	var/cool_down = 0
+	var/cool_down_timer = 150
 
 	var/allowed_to_proceed = FALSE
 
@@ -31,7 +32,7 @@
 				SEND_SOUND(owner, sound('code/modules/wod13/sounds/werewolf_cast_failed.ogg', 0, 0, 75))
 				allowed_to_proceed = FALSE
 				return
-		if(cool_down+150 >= world.time)
+		if(cool_down+cool_down_timer >= world.time)
 			allowed_to_proceed = FALSE
 			return
 		cool_down = world.time
@@ -231,6 +232,7 @@
 	button_icon_state = "scent_of_the_true_form"
 	rage_req = 1
 	//gnosis_req = 1
+	cool_down_timer = 200
 
 /datum/action/gift/scent_of_the_true_form/Trigger()
 	. = ..()
@@ -264,6 +266,7 @@
 	desc = "This Gift allows the werewolf to sense the presence of Wyrm."
 	button_icon_state = "sense_wyrm"
 	rage_req = 1
+	cool_down_timer = 200
 
 /datum/action/gift/sense_wyrm/Trigger()
 	. = ..()
@@ -281,6 +284,7 @@
 	desc = "This Gift allows the Garou to communicate with encountered spirits."
 	button_icon_state = "spirit_speech"
 	//gnosis_req = 1
+	cool_down_timer = 200
 
 /datum/action/gift/spirit_speech/Trigger()
 	. = ..()
@@ -296,6 +300,7 @@
 	button_icon_state = "blur_of_the_milky_eye"
 	rage_req = 2
 	//gnosis_req = 1
+	cool_down_timer = 200
 
 /datum/action/gift/blur_of_the_milky_eye/Trigger()
 	. = ..()

@@ -38,6 +38,7 @@
 	button_icon_state = "freezing_wind"
 	rage_req = 1
 	//gnosis_req = 1
+	cool_down_timer = 200
 
 /datum/action/gift/freezing_wind/Trigger()
 	. = ..()
@@ -184,6 +185,7 @@
 	button_icon_state = "elemental_improvement"
 	rage_req = 2
 	gnosis_req = 1
+	cool_down_timer = 200
 
 /datum/action/gift/elemental_improvement/Trigger()
 	. = ..()
