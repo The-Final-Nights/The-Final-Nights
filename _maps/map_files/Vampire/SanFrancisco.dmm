@@ -39320,7 +39320,9 @@
 /obj/effect/decal/bordur{
 	dir = 1
 	},
-/obj/machinery/vending/dinnerware,
+/obj/machinery/vending/dinnerware{
+	scan_id = 0
+	},
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/cog_pantry)
 "hQN" = (
