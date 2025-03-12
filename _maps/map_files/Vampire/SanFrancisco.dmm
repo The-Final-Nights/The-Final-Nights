@@ -27703,6 +27703,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
+/obj/machinery/hydroponics/soil,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog_caern)
 "cCE" = (
@@ -31245,6 +31246,21 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
+"elS" = (
+/obj/structure/table/wood,
+/obj/item/seeds/corn,
+/obj/item/seeds/carrot,
+/obj/item/seeds/eggplant,
+/obj/item/seeds/onion,
+/obj/item/seeds/tomato,
+/obj/item/seeds/watermelon,
+/obj/item/seeds/apple,
+/obj/item/seeds/cherry,
+/obj/item/seeds/chili,
+/obj/item/seeds/potato,
+/obj/item/seeds/tea,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/interior/cog_caern)
 "elT" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
@@ -34084,6 +34100,12 @@
 	dir = 1
 	},
 /area/vtm/financialdistrict)
+"fEU" = (
+/obj/effect/decal/bordur,
+/obj/structure/table/wood,
+/obj/item/kitchen/knife/butcher,
+/turf/open/floor/plating/bacotell,
+/area/vtm/interior/cog_pantry)
 "fFj" = (
 /obj/machinery/light,
 /turf/closed/wall/vampwall/city,
@@ -35420,6 +35442,7 @@
 /area/vtm/interior/police)
 "gjr" = (
 /obj/structure/flora/ausbushes/grassybush,
+/obj/structure/flora/ausbushes/tallgrass,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/cog_caern)
 "gjL" = (
@@ -36476,8 +36499,7 @@
 /obj/effect/decal/bordur{
 	dir = 1
 	},
-/obj/structure/table/wood,
-/obj/item/kitchen/knife/butcher,
+/obj/structure/sink,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/cog_pantry)
 "gHF" = (
@@ -38407,6 +38429,10 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
+/obj/machinery/light{
+	dir = 8;
+	light_color = "#6488EA"
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/cog_pantry)
 "huI" = (
@@ -39294,8 +39320,7 @@
 /obj/effect/decal/bordur{
 	dir = 1
 	},
-/obj/structure/table/wood,
-/obj/item/kitchen/knife,
+/obj/machinery/vending/dinnerware,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/cog_pantry)
 "hQN" = (
@@ -41593,6 +41618,13 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/bianchiBank)
+"iTW" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/machinery/hydroponics/soil,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/interior/cog_caern)
 "iUa" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 10
@@ -43105,6 +43137,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
+/obj/machinery/hydroponics/soil,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog_caern)
 "jBk" = (
@@ -46473,6 +46506,13 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/giovanni)
+"lkA" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 9
+	},
+/obj/machinery/hydroponics/soil,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/interior/cog_caern)
 "lkC" = (
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/vampcarpet,
@@ -47721,9 +47761,6 @@
 "lSk" = (
 /obj/effect/decal/bordur{
 	dir = 4
-	},
-/obj/structure/sink{
-	dir = 8
 	},
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/cog_pantry)
@@ -51615,6 +51652,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
+"nLj" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/cog_pantry)
 "nLs" = (
 /obj/structure/flora/ausbushes/sparsegrass{
 	icon_state = "lavendergrass_3"
@@ -56036,6 +56080,7 @@
 /area/vtm/sewer)
 "pPP" = (
 /obj/effect/turf_decal/weather/dirt,
+/obj/machinery/hydroponics/soil,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog_caern)
 "pQm" = (
@@ -56770,6 +56815,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/weather/dirt,
+/obj/machinery/hydroponics/soil,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog_caern)
 "qkA" = (
@@ -63008,6 +63054,10 @@
 	},
 /turf/open/floor/light,
 /area/vtm/interior/strip_elysium)
+"tbo" = (
+/obj/structure/table/wood,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/interior/cog_caern)
 "tbr" = (
 /mob/living/simple_animal/hostile/ghost/hostile,
 /obj/structure/trashbag,
@@ -63770,6 +63820,13 @@
 /obj/item/flashlight/lantern,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
+"trt" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 5
+	},
+/obj/machinery/hydroponics/soil,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/interior/cog_caern)
 "trv" = (
 /obj/item/documents/photocopy,
 /obj/structure/table/abductor{
@@ -64669,6 +64726,16 @@
 /obj/effect/decal/cleanable/food/tomato_smudge,
 /turf/open/floor/plating/rust,
 /area/vtm/sewer)
+"tNc" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/machinery/hydroponics/soil,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/interior/cog_caern)
 "tNo" = (
 /obj/structure/table/wood,
 /obj/item/vampire_stake,
@@ -65540,6 +65607,8 @@
 /obj/item/reagent_containers/food/condiment/milk{
 	name = "full cream milk"
 	},
+/obj/item/storage/box/ingredients/vegetarian,
+/obj/item/storage/box/ingredients/exotic,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/cog_pantry)
 "uiQ" = (
@@ -66547,6 +66616,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/forest)
+"uJw" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
+/obj/machinery/hydroponics/soil,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/interior/cog_caern)
 "uJA" = (
 /obj/machinery/light/prince{
 	pixel_y = 32
@@ -70076,6 +70152,12 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower)
+"wqo" = (
+/obj/effect/decal/bordur,
+/obj/structure/table/wood,
+/obj/item/kitchen/knife,
+/turf/open/floor/plating/bacotell,
+/area/vtm/interior/cog_pantry)
 "wqr" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating/toilet,
@@ -70463,8 +70545,9 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "wAa" = (
-/obj/effect/decal/bordur,
-/turf/closed/wall/vampwall/rich/low/window/reinforced,
+/obj/item/food/soup/stew,
+/obj/structure/rack/bubway/vertical,
+/turf/closed/wall/vampwall/brick/low,
 /area/vtm/interior/cog_pantry)
 "wAh" = (
 /obj/effect/decal/bordur{
@@ -72261,6 +72344,11 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
+"xkw" = (
+/obj/structure/table/wood,
+/obj/item/melee/vampirearms/handsickle,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/interior/cog_caern)
 "xkA" = (
 /obj/machinery/light{
 	dir = 4;
@@ -81540,7 +81628,7 @@ bms
 dhw
 jDk
 xKx
-ePa
+lkA
 cjd
 kPo
 yfx
@@ -82054,7 +82142,7 @@ bms
 ibF
 jDk
 xKx
-uDF
+trt
 qxC
 rsH
 qWs
@@ -82314,7 +82402,7 @@ fWn
 oNG
 qhp
 rza
-rza
+tNc
 cdH
 jDk
 gaY
@@ -83595,7 +83683,7 @@ aaa
 aab
 aab
 oTv
-bms
+xkw
 bms
 hYp
 lBF
@@ -83852,7 +83940,7 @@ aaa
 aaa
 aab
 oTv
-kAh
+elS
 vhh
 bms
 hEi
@@ -84109,7 +84197,7 @@ aaa
 aaa
 aab
 fgC
-bms
+tbo
 rrG
 bms
 dgO
@@ -84882,7 +84970,7 @@ aab
 pum
 hSP
 hOt
-dEf
+iTW
 dEf
 dEf
 hOt
@@ -85141,7 +85229,7 @@ uoA
 vEd
 uDF
 hOt
-cjd
+uJw
 pWJ
 mlt
 pum
@@ -155314,7 +155402,7 @@ tMe
 odK
 hQC
 tCo
-gAT
+fEU
 qcY
 dBs
 dBs
@@ -155568,10 +155656,10 @@ ivd
 dBs
 uUf
 wSd
-udV
+qcY
 seQ
 tCo
-gAT
+wqo
 scK
 vof
 dBs
@@ -155825,7 +155913,7 @@ sTC
 dBs
 dBs
 wSd
-udV
+qcY
 qza
 lSk
 eNY
@@ -156081,9 +156169,9 @@ qcY
 eMO
 dBs
 dBs
-wSd
-udV
-udV
+nLj
+qcY
+wAa
 wAa
 qcY
 qcY
