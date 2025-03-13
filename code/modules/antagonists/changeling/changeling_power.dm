@@ -32,7 +32,7 @@ the same goes for Remove(). if you override Remove(), call parent or else your p
 
 /datum/action/changeling/Trigger()
 	var/mob/user = owner
-	if(!user || !user.mind || !user.mind.has_antag_datum(/datum/antagonist/changeling))
+	if(!user || !user.mind)
 		return
 	try_to_sting(user)
 
@@ -47,8 +47,6 @@ the same goes for Remove(). if you override Remove(), call parent or else your p
  *Returns TRUE on a successful activation.
  */
 /datum/action/changeling/proc/try_to_sting(mob/user, mob/target)
-	if(!can_sting(user, target))
-		return FALSE
 	var/datum/antagonist/changeling/c = user.mind.has_antag_datum(/datum/antagonist/changeling)
 	if(sting_action(user, target))
 		sting_feedback(user, target)
@@ -68,20 +66,10 @@ the same goes for Remove(). if you override Remove(), call parent or else your p
 /datum/action/changeling/proc/can_sting(mob/living/user, mob/target)
 	if(!ishuman(user)) //typecast everything from mob to carbon from this point onwards
 		return FALSE
-	var/datum/antagonist/changeling/c = user.mind.has_antag_datum(/datum/antagonist/changeling)
-	if(c.chem_charges < chemical_cost)
-		to_chat(user, "<span class='warning'>We require at least [chemical_cost] unit\s of chemicals to do that!</span>")
-		return FALSE
-	if(c.absorbedcount < req_dna)
-		to_chat(user, "<span class='warning'>We require at least [req_dna] sample\s of compatible DNA.</span>")
-		return FALSE
-	if(c.trueabsorbs < req_absorbs)
-		to_chat(user, "<span class='warning'>We require at least [req_absorbs] sample\s of DNA gained through our Absorb ability.</span>")
-		return FALSE
 	if(req_stat < user.stat)
 		to_chat(user, "<span class='warning'>We are incapacitated.</span>")
 		return FALSE
-	if((HAS_TRAIT(user, TRAIT_DEATHCOMA)) && (!ignores_fakedeath))
+	if((HAS_TRAIT(user, TRAIT_TORPOR)) && (!ignores_fakedeath))
 		to_chat(user, "<span class='warning'>We are incapacitated.</span>")
 		return FALSE
 	return TRUE

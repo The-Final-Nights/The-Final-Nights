@@ -208,7 +208,8 @@
 		qdel(target)
 	else
 		target.emote("scream")
-		target.apply_damage(30, BRUTE, BODY_ZONE_CHEST)
+		target.apply_damage(60, BRUTE, BODY_ZONE_CHEST)
+		target.Stun(2 SECONDS)
 
 /datum/discipline_power/vicissitude/fleshcrafting/post_gain()
 	. = ..()
@@ -264,13 +265,15 @@
 		qdel(target)
 	else
 		target.emote("scream")
-		target.apply_damage(60, BRUTE, BODY_ZONE_CHEST)
+		target.apply_damage(90, BRUTE, BODY_ZONE_CHEST)
+		target.Stun(4 SECONDS)
 
 /datum/discipline_power/vicissitude/bonecrafting/post_gain()
 	. = ..()
 	var/datum/action/basic_vicissitude/vicissitude_upgrade = new()
 	vicissitude_upgrade.Grant(owner)
-
+	var/datum/action/changeling/weapon/tzimblade/tzimblade = new()
+	tzimblade.Grant(owner)
 	if (!owner.mind)
 		return
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_trench)
@@ -408,6 +411,8 @@
 
 /datum/discipline_power/vicissitude/horrid_form/post_gain()
 	. = ..()
+	var/datum/action/changeling/weapon/tzimtacle/tzimtacle = new()
+	tzimtacle.Grant(owner)
 	if (!owner.mind)
 		return
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_heart)
@@ -441,3 +446,61 @@
 	bloodform_shapeshift.Restore(bloodform_shapeshift.myshape)
 	owner.Stun(1.5 SECONDS)
 	owner.do_jitter_animation(30)
+
+
+//oiroseess slop code, copies changeling code with change to our weapons
+
+/datum/action/changeling/weapon/tzimblade
+	name = "Arm Blade"
+	desc = "We reform one of our arms into a deadly blade."
+	helptext = "We may retract our armblade in the same manner as we form it. Cannot be used while in lesser form."
+	button_icon_state = "armblade"
+	background_icon_state = "default"
+	chemical_cost = 0
+	weapon_type = /obj/item/vampirearms/tzimblade
+	weapon_name_simple = "blade"
+
+/datum/action/changeling/weapon/tzimtacle
+	name = "Tentacle"
+	desc = "We ready a tentacle to grab items or victims with."
+	helptext = "We can use it once to retrieve a distant item. If used on living creatures, the effect depends on the intent: \
+	Help will simply drag them closer, Disarm will grab whatever they're holding instead of them, Grab will put the victim in our hold after catching it, \
+	and Harm will pull it in and stab it if we're also holding a sharp weapon. Cannot be used while in lesser form."
+	button_icon_state = "tentacle"
+	background_icon_state = "default"
+	chemical_cost = 0
+	weapon_type = /obj/item/gun/magic/tentacle
+	weapon_name_simple = "tentacle"
+	silent = TRUE
+
+/obj/item/vampirearms/tzimblade
+	name = "bone blade"
+	desc = "A grotesque blade made out of bone and flesh that cleaves through people as a hot knife through butter."
+	icon = 'icons/obj/changeling_items.dmi'
+	icon_state = "arm_blade"
+	inhand_icon_state = "arm_blade"
+	lefthand_file = 'icons/mob/inhands/antag/changeling_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
+	w_class = WEIGHT_CLASS_HUGE
+	force = 60
+	throwforce = 10
+	block_chance = 40
+	armour_penetration = 40
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 5
+	bare_wound_bonus = 25
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = TRUE
+	is_iron = FALSE
+
+/obj/item/vampirearms/tzimblade/Initialize(mapload,silent,synthetic)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, CHANGELING_TRAIT)
+	if(ismob(loc) && !silent)
+		loc.visible_message("<span class='warning'>A grotesque blade forms around [loc.name]\'s arm!</span>", "<span class='warning'>Our arm twists and mutates, transforming it into a deadly blade.</span>", "<span class='hear'>You hear organic matter ripping and tearing!</span>")
+	AddComponent(/datum/component/butchering, 60, 80)
+
+
