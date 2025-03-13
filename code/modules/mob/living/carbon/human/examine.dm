@@ -418,10 +418,10 @@
 					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a skeletonised corpse!</b></span><br>"
 			//Low humanity now makes you look ghoulish
 			if(!clane.enlightenment)
-				if(humanity <= 5)
-					msg += "[p_they(TRUE)] [p_have()] an eerie red tint in their eyes.<br>"
-				else if(humanity <= 3)
+				if(humanity <= 3)
 					msg += "<span class='danger'><b>Cold, grey skin, long jagged canines, hideously jaundiced eyes! [p_they(TRUE)] [p_are()] a monster!</b></span><br>"
+				else if(humanity <= 5)
+					msg += "[p_they(TRUE)] [p_have()] an eerie red tint in their eyes.<br>"
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
