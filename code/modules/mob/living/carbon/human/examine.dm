@@ -426,11 +426,11 @@
 			else
 				if(humanity <= 3)
 					msg += "<span class='danger'><b>[p_they(TRUE)] seem as still as a statue and [p_their()] chest does not rise with breath.</b></span><br>"
-				if(humanity <= 5)
+				else if(humanity <= 5)
 					msg += "[p_they(TRUE)] stare at people as they would a wolf and their prey.<br>"
-				if(humanity <= 8)
+				else if(humanity <= 8)
 					msg += "Glassy eyes which never blink or waver, a deadpan face which never rouses with emotion.<br>"
-				if(humanity <= 10)
+				else if(humanity <= 10)
 					msg += "Every twitch of [p_their()] muscles, every ripple of the faintest microexpression on their face exudes cold deliberation.<b>"
 
 		if(getorgan(/obj/item/organ/brain))
