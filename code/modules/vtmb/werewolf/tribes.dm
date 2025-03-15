@@ -91,7 +91,7 @@
 	name = "Venom Claws"
 	desc = "While this ability is active, strikes with claws poison foes of garou."
 	button_icon_state = "venom_claws"
-	rage_req = 1
+	rage_req = 3
 
 /datum/action/gift/venom_claws/Trigger()
 	. = ..()
@@ -100,7 +100,7 @@
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/venom_claws.ogg', 75, FALSE)
 			var/mob/living/carbon/human/H = owner
 			H.melee_damage_lower = initial(H.melee_damage_lower)+5
-			H.melee_damage_upper = initial(H.melee_damage_upper)+5
+			H.melee_damage_upper = initial(H.melee_damage_upper)+5 // so you are gonna be hitting 50 here, and vamps take half that
 			H.tox_damage_plus = 5
 			to_chat(owner, "<span class='notice'>You feel your claws filling with pure venom...</span>")
 			spawn(12 SECONDS)

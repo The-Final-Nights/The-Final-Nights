@@ -96,7 +96,7 @@
 	name = "Razor Claws"
 	desc = "By raking his claws over stone, steel, or another hard surface, the Ahroun hones them to razor sharpness."
 	button_icon_state = "razor_claws"
-	rage_req = 1
+	rage_req = 3
 
 /datum/action/gift/razor_claws/Trigger()
 	. = ..()
@@ -104,7 +104,7 @@
 		if(ishuman(owner))
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/razor_claws.ogg', 75, FALSE)
 			var/mob/living/carbon/human/H = owner
-			H.dna.species.attack_verb = "slash"f
+			H.dna.species.attack_verb = "slash"
 			H.dna.species.attack_sound = 'sound/weapons/slash.ogg'
 			H.dna.species.miss_sound = 'sound/weapons/slashmiss.ogg'
 			H.dna.species.punchdamagelow = 20
