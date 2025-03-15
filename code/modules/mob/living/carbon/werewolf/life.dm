@@ -87,7 +87,7 @@
 /mob/living/carbon/werewolf/crinos/Life()
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
-		adjust_veil(-1)
+		adjust_veil(-3)
 
 /mob/living/carbon/werewolf/check_breath(datum/gas_mixture/breath)
 	return

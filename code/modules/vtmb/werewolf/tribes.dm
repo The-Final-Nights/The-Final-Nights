@@ -99,9 +99,9 @@
 		if(ishuman(owner))
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/venom_claws.ogg', 75, FALSE)
 			var/mob/living/carbon/human/H = owner
-			H.melee_damage_lower = initial(H.melee_damage_lower)+15
-			H.melee_damage_upper = initial(H.melee_damage_upper)+15
-			H.tox_damage_plus = 15
+			H.melee_damage_lower = initial(H.melee_damage_lower)+5
+			H.melee_damage_upper = initial(H.melee_damage_upper)+5
+			H.tox_damage_plus = 5
 			to_chat(owner, "<span class='notice'>You feel your claws filling with pure venom...</span>")
 			spawn(12 SECONDS)
 				H.tox_damage_plus = 0
@@ -113,7 +113,7 @@
 			var/mob/living/carbon/H = owner
 			H.melee_damage_lower = initial(H.melee_damage_lower)+10
 			H.melee_damage_upper = initial(H.melee_damage_upper)+10
-			H.tox_damage_plus = 10
+			H.tox_damage_plus = 5
 			to_chat(owner, "<span class='notice'>You feel your claws filling with pure venom...</span>")
 			spawn(12 SECONDS)
 				H.tox_damage_plus = 0
@@ -133,12 +133,12 @@
 	if(allowed_to_proceed)
 		owner.visible_message("<span class='danger'>[owner.name] crackles with heat!</span>", "<span class='danger'>You crackle with heat, charging up your Gift!</span>")
 		if(do_after(owner, 3 SECONDS))
-			for(var/mob/living/L in orange(5, owner))
+			for(var/mob/living/L in orange(2, owner))
 				if(L)
 					L.adjustFireLoss(40)
-			for(var/turf/T in orange(4, get_turf(owner)))
+			for(var/turf/T in orange(2, get_turf(owner)))
 				var/obj/effect/fire/F = new(T)
-				spawn(5)
+				spawn(2)
 					qdel(F)
 
 /datum/action/gift/smooth_move
@@ -174,7 +174,7 @@
 		if(do_after(owner, 3 SECONDS))
 			playsound(owner, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
 			tesla_zap(owner, 3, 30, ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE | ZAP_MOB_STUN | ZAP_ALLOW_DUPLICATES)
-			for(var/mob/living/L in orange(6, owner))
+			for(var/mob/living/L in orange(4, owner))
 				if(L)
 					L.electrocute_act(30, owner, siemens_coeff = 1, flags = NONE)
 
