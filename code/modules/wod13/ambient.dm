@@ -510,6 +510,12 @@
 	music = /datum/vampiremusic/forest
 	zone_type = "elysium"
 	wall_rating = HIGH_WALL_RATING
+	
+/area/vtm/interior/bone_gnawer_shrine
+	name = "Bone Gnawer Shrine"
+	icon_state = "gnawer"
+	music = /datum/vampiremusic/forest
+	wall_rating = HIGH_WALL_RATING
 //MUSIC
 
 /datum/vampiremusic
