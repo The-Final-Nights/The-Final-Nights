@@ -346,21 +346,59 @@
 				L.emote("laugh")
 				L.Stun(20)
 
-/datum/action/gift/rage_heal
-	name = "Rage Heal"
+/datum/action/gift/minor_rage_heal
+	name = "Minor Rage Heal"
 	desc = "This Gift allows the Garou to heal severe injuries with rage."
 	button_icon_state = "rage_heal"
-	rage_req = 1
+	rage_req = 3
 	check_flags = null
 
-/datum/action/gift/rage_heal/Trigger()
+/datum/action/gift/minor_rage_heal/Trigger()
+	. = ..()
+	if(allowed_to_proceed)
+		var/mob/living/carbon/C = owner
+		if(C.stat != DEAD)
+			SEND_SOUND(owner, sound('code/modules/wod13/sounds/rage_heal.ogg', 0, 0, 75))
+			C.adjustBruteLoss(-20*C.auspice.level, TRUE)
+			C.adjustFireLoss(-10*C.auspice.level, TRUE) // fire is agg damage for werewolves
+			C.adjustCloneLoss(-10*C.auspice.level, TRUE)
+			C.adjustToxLoss(-20*C.auspice.level, TRUE)
+			C.adjustOxyLoss(-20*C.auspice.level, TRUE)
+			C.bloodpool = min(C.bloodpool + C.auspice.level, C.maxbloodpool)
+			C.blood_volume = min(C.blood_volume + 56 * C.auspice.level, BLOOD_VOLUME_NORMAL)
+			if(ishuman(owner))
+				var/mob/living/carbon/human/BD = owner
+				if(length(BD.all_wounds))
+					var/datum/wound/W = pick(BD.all_wounds)
+					W.remove_wound()
+				if(length(BD.all_wounds))
+					var/datum/wound/W = pick(BD.all_wounds)
+					W.remove_wound()
+				if(length(BD.all_wounds))
+					var/datum/wound/W = pick(BD.all_wounds)
+					W.remove_wound()
+				if(length(BD.all_wounds))
+					var/datum/wound/W = pick(BD.all_wounds)
+					W.remove_wound()
+				if(length(BD.all_wounds))
+					var/datum/wound/W = pick(BD.all_wounds)
+					W.remove_wound()
+
+/datum/action/gift/major_rage_heal
+	name = "Major Rage Heal"
+	desc = "This Gift allows the Garou to heal severe injuries with rage."
+	button_icon_state = "rage_heal"
+	rage_req = 5
+	check_flags = null
+
+/datum/action/gift/major_rage_heal/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/C = owner
 		if(C.stat != DEAD)
 			SEND_SOUND(owner, sound('code/modules/wod13/sounds/rage_heal.ogg', 0, 0, 75))
 			C.adjustBruteLoss(-40*C.auspice.level, TRUE)
-			C.adjustFireLoss(-30*C.auspice.level, TRUE)
+			C.adjustFireLoss(-10*C.auspice.level, TRUE) // fire is agg damage on pnp without a gift
 			C.adjustCloneLoss(-10*C.auspice.level, TRUE)
 			C.adjustToxLoss(-10*C.auspice.level, TRUE)
 			C.adjustOxyLoss(-20*C.auspice.level, TRUE)
