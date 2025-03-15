@@ -350,7 +350,7 @@
 	name = "Minor Rage Heal"
 	desc = "This Gift allows the Garou to heal severe injuries with rage."
 	button_icon_state = "rage_heal"
-	rage_req = 3
+	rage_req = 2
 	check_flags = null
 
 /datum/action/gift/minor_rage_heal/Trigger()
@@ -388,7 +388,7 @@
 	name = "Major Rage Heal"
 	desc = "This Gift allows the Garou to heal severe injuries with rage."
 	button_icon_state = "rage_heal"
-	rage_req = 5
+	rage_req = 3
 	check_flags = null
 
 /datum/action/gift/major_rage_heal/Trigger()

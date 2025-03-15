@@ -195,7 +195,7 @@
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/pounce_cooldown = 0
-	var/pounce_cooldown_time = 60
+	var/pounce_cooldown_time = 35
 	pixel_w = -8
 //	deathsound = 'sound/voice/hiss6.ogg'
 	bodyparts = list(
@@ -207,7 +207,7 @@
 		/obj/item/bodypart/l_leg,
 		)
 
-	werewolf_armor = 25
+	werewolf_armor = 35
 
 /datum/movespeed_modifier/crinosform
 	multiplicative_slowdown = -0.2
