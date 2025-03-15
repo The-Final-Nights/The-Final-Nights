@@ -309,28 +309,28 @@
 /datum/supply_pack/vampire/ammo9/silver
 	name = "Ammo (9mm, silver)"
 	desc = "Contains a box of silver 9mm ammunition."
-	cost = 2000
+	cost = 1500
 	contains = list(/obj/item/ammo_box/vampire/c9mm/silver)
 	crate_name = "ammo crate"
 
 /datum/supply_pack/vampire/ammo44/silver
 	name = "Ammo (.44, silver)"
 	desc = "Contains a box of silver .44 ammunition."
-	cost = 2000
+	cost = 1500
 	contains = list(/obj/item/ammo_box/vampire/c44/silver)
 	crate_name = "ammo crate"
 
 /datum/supply_pack/vampire/ammo45/silver
 	name = "Ammo (.45, silver)"
 	desc = "Contains a box of silver .45 ammunition."
-	cost = 2000
+	cost = 1500
 	contains = list(/obj/item/ammo_box/vampire/c45acp/silver)
 	crate_name = "ammo crate"
 
 /datum/supply_pack/vampire/ammo556/silver
 	name = "Ammo (5.56, silver)"
 	desc = "Contains a box of silver 5.56 ammunition."
-	cost = 3000
+	cost = 1500
 	contains = list(/obj/item/ammo_box/vampire/c556/silver)
 
 /datum/supply_pack/vampire/ammo50
