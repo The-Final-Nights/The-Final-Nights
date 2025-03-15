@@ -970,7 +970,7 @@
 /datum/status_effect/silver_slowdown
 	id = "slowdown"
 	status_type = STATUS_EFFECT_REPLACE
-	duration = 5 SECONDS
+	duration = 15 SECONDS
 
 /datum/status_effect/silver_slowdown/on_apply()
 	. = ..()
