@@ -33,14 +33,14 @@
 /datum/supply_pack/vampire/bloodpack
 	name = "Blood Pack"
 	desc = "Contains 5 default blood packs."
-	cost = 100
+	cost = 750
 	contains = list(/obj/item/drinkable_bloodpack = 5)
 	crate_name = "blood crate"
 
 /datum/supply_pack/vampire/bloodpack_elite
 	name = "Elite Blood Pack"
 	desc = "Contains 5 elite blood packs."
-	cost = 300
+	cost = 1250
 	contains = list(/obj/item/drinkable_bloodpack/elite = 5)
 	crate_name = "blood crate"
 
