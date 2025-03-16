@@ -106,9 +106,10 @@
 	shake_camera(src, 5, 4)
 
 /mob/living/carbon/werewolf/Initialize()
-	var/datum/action/gift/minor_rage_heal/GH = new()
-	var/datum/action/gift/major_rage_heal/GH = new()
-	GH.Grant(src)
+	var/datum/action/gift/minor_rage_heal/MRH = new()
+	var/datum/action/gift/major_rage_heal/GRH = new()
+	MRH.Grant(src)
+	GRH.Grant(src)
 	add_verb(src, /mob/living/proc/mob_sleep)
 	add_verb(src, /mob/living/proc/toggle_resting)
 

@@ -111,9 +111,10 @@
 	infor.Grant(C)
 	var/datum/action/gift/glabro/glabro = new()
 	glabro.Grant(C)
-	var/datum/action/gift/minor_rage_heal/GH = new()
-	var/datum/action/gift/major_rage_heal/GH = new()
-	GH.Grant(C)
+	var/datum/action/gift/minor_rage_heal/MRH = new()
+	var/datum/action/gift/major_rage_heal/GRH = new()
+	MRH.Grant(C)
+	GRH.Grant(C)
 	C.transformator = new(C)
 	C.transformator.human_form = C
 
