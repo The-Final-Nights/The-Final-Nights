@@ -17,10 +17,10 @@
 	exp_type_department = EXP_TYPE_TZIMISCE
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Old Clan Tzimisce")
+	allowed_bloodlines = list("Tzimisce")
 	minimal_generation = 10
 
-	v_duty = "You are a Childe of the Voivode-in-Waiting, the ancient Tzimisce Elder who has rested beneath the Earth for an age longer than the city that now rests on their bones. Honor them in all your actions, and remember that you walk with their favor."
+	v_duty = "You are a Childe of the Voivode-in-Waiting, the ancient Tzimisce Elder who has rested beneath the Earth for an age longer than the city that now rests on their bones, and thus the master of your Haven. Honor them in all your actions, and remember that you walk with their favor."
 	experience_addition = 20
 	minimal_masquerade = 2
 	my_contact_is_important = TRUE
@@ -39,7 +39,7 @@
 	belt = /obj/item/storage/belt/vampire/sheathe/longsword
 	l_pocket = /obj/item/vamp/phone
 	//r_pocket =
-	backpack_contents = list(/obj/item/vamp/keys/old_clan_tzimisce=1, /obj/item/melee/vampirearms/eguitar=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1)
+	backpack_contents = list(/obj/item/vamp/keys/tzimisce=1, /obj/item/melee/vampirearms/eguitar=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1)
 
 /obj/effect/landmark/start/voivode
 	name = "Voivode"

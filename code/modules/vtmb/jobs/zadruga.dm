@@ -16,6 +16,7 @@
 	display_order = JOB_DISPLAY_ORDER_ZADRUGA
 	exp_type_department = EXP_TYPE_TZIMISCE
 
+	allowed_species = list("Ghoul")
 	//ghoul_only = TRUE
 	//allowed_bloodlines = list("Old Clan Tzimisce", "Tzimisce")
 	//minimal_generation = 7	//Uncomment when players get exp enough
@@ -30,16 +31,16 @@
 
 
 /datum/outfit/job/zadruga
-	name = "zadruga"
+	name = "Zadruga"
 	jobtype = /datum/job/vamp/zadruga
 	id = /obj/item/card/id/bogatyr
-	//glasses = /obj/item/clothing/glasses/vampire/yellow
+	glasses = /obj/item/clothing/glasses/vampire/yellow
 	uniform = /obj/item/clothing/under/vampire/bogatyr
-	//suit = /obj/item/clothing/suit/vampire/jacket/punk
+	suit = /obj/item/clothing/suit/vampire/jacket/punk
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone
-	//r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/old_clan_tzimisce=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
+	r_pocket = /obj/item/cockclock
+	backpack_contents = list(/obj/item/vamp/keys/tzimisce=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /obj/effect/landmark/start/zadruga
 	name = "Zadruga"

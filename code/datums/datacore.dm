@@ -146,7 +146,7 @@
 		"Tremere",
 		"Anarch",
 		"Giovanni",
-		"Old Clan Tzimisce",
+		"Clan Tzimisce",
 		"Law Enforcement",
 		"Warehouse",
 		"Triad"
@@ -157,7 +157,7 @@
 		"Tremere" = GLOB.tremere_positions,
 		"Anarch" = GLOB.anarch_positions,
 		"Giovanni" = GLOB.giovanni_positions,
-		"Old Clan Tzimisce" = GLOB.tzimisce_positions,
+		"Clan Tzimisce" = GLOB.tzimisce_positions,
 		"Law Enforcement" = GLOB.police_positions + GLOB.national_security_positions,
 		"Warehouse" = GLOB.warehouse_positions,
 		"Triad" = GLOB.gang_positions
@@ -168,7 +168,7 @@
 		var/has_department = FALSE
 		for(var/department in departments)
 			var/list/jobs = departments[department]
-			if(rank in jobs)
+			if(rank in jobs || (t.fields["truerank"] && (t.fields["truerank"] in jobs))) // TFN EDIT: alt job titles
 				if(!manifest_out[department])
 					manifest_out[department] = list()
 				manifest_out[department] += list(list(
@@ -223,12 +223,19 @@
 	var/static/list/show_directions = list(SOUTH, WEST)
 	if(H.mind && (H.mind.assigned_role != H.mind.special_role))
 		var/assignment
+		var/trueassignment // TFN EDIT: alt job titles
 		if(H.mind.assigned_role)
 			assignment = H.mind.assigned_role
 		else if(H.job)
 			assignment = H.job
 		else
 			assignment = "Unassigned"
+
+		// TFN EDIT START: alt job titles
+		if(C?.prefs?.alt_titles_preferences[assignment])
+			trueassignment = assignment
+			assignment = C.prefs.alt_titles_preferences[assignment]
+		// TFN EDIT END
 
 		var/static/record_id_num = 1001
 		var/id = num2hex(record_id_num++,6)
@@ -252,6 +259,7 @@
 		G.fields["id"]			= id
 		G.fields["name"]		= H.real_name
 		G.fields["rank"]		= assignment
+		G.fields["truerank"] = trueassignment // TFN EDIT: alt job titles
 		G.fields["age"]			= H.age
 		G.fields["species"]	= H.dna.species.name
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)

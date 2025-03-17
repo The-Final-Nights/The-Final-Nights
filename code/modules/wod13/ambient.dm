@@ -102,6 +102,20 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/interior/strip/toreador
+	name = "Strip Club Apartments"
+	icon_state = "prince"
+	upper = FALSE
+	fire_controled = TRUE
+	zone_type = "elysium"
+
+/area/vtm/interior/strip/elysium
+	name = "Strip Club Elysium"
+	icon_state = "prince"
+	upper = FALSE
+	fire_controled = TRUE
+	zone_type = "elysium"
+
 /area/vtm/interior/mansion
 	name = "Abandoned Mansion"
 	icon_state = "mansion"
@@ -197,19 +211,20 @@
 	icon_state = "millenniumtowerf2"
 
 /area/vtm/interior/millennium_tower/f3
-	name = "Millennium Tower F3"
+	name = "Millennium Tower F3 - Security Wing"
 	icon_state = "millenniumtowerf3"
 
 /area/vtm/interior/millennium_tower/f4
-	name = "Millennium Tower F4"
+	name = "Millennium Tower F4 - Executive Floor"
 	icon_state = "millenniumtowerf4"
 
 /area/vtm/interior/millennium_tower/f5
-	name = "Millennium Tower F5"
+	name = "Millennium Tower F5 - Roof Access"
 	icon_state = "millenniumtowerf5"
+	fire_controled = FALSE
 
 /area/vtm/interior/millennium_tower/ventrue
-	name = "Millennium Tower Penthouse"
+	name = "Jazz Club Penthouse"
 	icon_state = "millenniumtowerpenthouse"
 
 /area/vtm/jazzclub
@@ -259,7 +274,7 @@
 /area/vtm/hotel
 	name = "Hotel"
 	icon_state = "hotel"
-//	music = /datum/vampiremusic/bar
+	music = /datum/vampiremusic/bar
 	ambience_index = AMBIENCE_INTERIOR
 	upper = FALSE
 	fire_controled = TRUE
@@ -333,6 +348,7 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+// GAROU CENTRIC AREAS
 /area/vtm/forest
 	name = "Forest"
 	icon_state = "park"
@@ -362,6 +378,51 @@
 	yin_chi = 1
 	wall_rating = LOW_WALL_RATING
 
+/area/vtm/interior/endron_facility/restricted
+	name = "Endron Facility Restricted"
+	icon_state = "graveyard"
+	zone_type = "battle"
+	music = /datum/vampiremusic/forest
+	fire_controled = FALSE
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/interior/wyrm_corrupted
+	name = "Wyrm Corruption"
+	icon_state = "graveyard"
+	zone_type = "battle"
+	music = /datum/vampiremusic/forest
+	fire_controled = FALSE
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/interior/cog
+	name = "Children of Gaia Generic"
+	icon_state = "cog_pantry"
+
+/area/vtm/interior/cog/pantry
+	name = "Earth's Bounty Food Pantry"
+	icon_state = "cog_pantry"
+	music = /datum/vampiremusic/forest
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/cog/caern
+	name = "Children of Gaia Caern"
+	icon_state = "cog_caern"
+	music = /datum/vampiremusic/forest
+	zone_type = "elysium"
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/interior/gnawer
+	name = "Bone Gnawer Shrine"
+	icon_state = "gnawer"
+	music = /datum/vampiremusic/forest
+	wall_rating = LOW_WALL_RATING
+
+//MISC AND CONTINUED AREAS
 /area/vtm/interior/penumbra
 	name = "Penumbra"
 	icon_state = "church"
@@ -393,37 +454,8 @@
 	zone_type = "elysium"
 	fire_controled = TRUE
 
-/area/vtm/interior/backrooms
-	name = "Backrooms"
-	icon_state = "church"
-	ambience_index = AMBIENCE_INTERIOR
-	upper = FALSE
-	zone_type = "battle"
-	fire_controled = FALSE
-	wall_rating = LOW_WALL_RATING
-
-/area/vtm/interior/endron_facility/restricted
-	name = "Endron Facility Restricted"
-	icon_state = "graveyard"
-	zone_type = "battle"
-	music = /datum/vampiremusic/forest
-	fire_controled = FALSE
-	yang_chi = 0
-	yin_chi = 2
-	wall_rating = LOW_WALL_RATING
-
-/area/vtm/interior/wyrm_corrupted
-	name = "Wyrm Corruption"
-	icon_state = "graveyard"
-	zone_type = "battle"
-	music = /datum/vampiremusic/forest
-	fire_controled = FALSE
-	yang_chi = 0
-	yin_chi = 2
-	wall_rating = LOW_WALL_RATING
-
-/area/vtm/interior/lasombra_church_interior
-	name = "Old Church"
+/area/vtm/interior/lasombra
+	name = "Old Church Historical Site"
 	icon_state = "old_clan_tzimisce"
 	zone_type = "elysium"
 	music = /datum/vampiremusic/prince
@@ -432,28 +464,18 @@
 	yin_chi = 2
 	wall_rating = LOW_WALL_RATING // abyss mysticism and stuff
 
-/area/vtm/interior/kiasyd_museum
+/area/vtm/interior/museum
 	name = "Historical Museum"
 	icon_state = "old_clan_tzimisce"
 	zone_type = "elysium"
 	music = /datum/vampiremusic/prince
 	fire_controled = TRUE
 	yang_chi = 0
-	yin_chi = 3
-	wall_rating = LOW_WALL_RATING // abyss mysticism and stuff, and worse!
-
-/area/vtm/interior/tzimisce_hotel
-	name = "Nerve Ends Hotel"
-	icon_state = "old_clan_tzimisce"
-	zone_type = "elysium"
-	music = /datum/vampiremusic/prince
-	fire_controled = TRUE
-	yang_chi = 0
 	yin_chi = 2
-	wall_rating = LOW_WALL_RATING // there are probably haunts from wraiths happening here
+	wall_rating = LOW_WALL_RATING // Not all museum pieces are innocent.
 
 /area/vtm/interior/trujah
-	name = "Antique Firearms Shop"
+	name = "Antique Shop"
 	icon_state = "old_clan_tzimisce"
 	zone_type = "elysium"
 	music = /datum/vampiremusic/prince
@@ -484,19 +506,33 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
-/area/vtm/interior/old_clan_tzimisce_manor
-	name = "Old Clan Tzimisce Manor"
+/area/vtm/interior/tzimisce_manor
+	name = "Clan Tzimisce Manor"
 	icon_state = "old_clan_tzimisce"
 	zone_type = "elysium"
 	music = /datum/vampiremusic/prince
 	wall_rating = HIGH_WALL_RATING
 
-/area/vtm/sewer/old_clan_sanctum
-	name = "Old Clan Tzimisce Sanctum"
+/area/vtm/sewer/tzimisce_sanctum
+	name = "Clan Tzimisce Sanctum"
 	icon_state = "old_clan_sanctum"
 	zone_type = "elysium"
 	music = /datum/vampiremusic/nosferatu
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/interior/setite
+	name = "Community Center"
+	icon_state = "hotel"
+	upper = FALSE
+	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/setite/basement
+	name = "Community Center Basement"
+	zone_type = "elysium"
+	yang_chi = 0
+	yin_chi = 2
+
 //MUSIC
 
 /datum/vampiremusic

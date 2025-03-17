@@ -50,6 +50,7 @@
 	name = "Clerk's keys"
 	accesslocks = list(
 		"camarilla",
+		"prince",
 		"clerk",
 		"theatre",
 		"milleniumCommon",
@@ -118,10 +119,23 @@
 	)
 
 /obj/item/vamp/keys/lasombra
-	name = "dark keys"
+	name = "Dark keys"
 	accesslocks = list(
-		"lasombra"
+		"lasombra",
+		"kyasid"
 	)
+	color = "#290355"
+
+/obj/item/vamp/keys/lasombra/primogen
+	name = "Really Dark keys"
+	accesslocks = list(
+		"lasombra",
+		"kyasid",
+		"primogen",
+		"milleniumCommon",
+		"camarilla"
+	)
+	color = "#4b039c"
 
 /obj/item/vamp/keys/trujah
 	name = "static keys"
@@ -131,16 +145,17 @@
 	)
 
 /obj/item/vamp/keys/kiasyd
-	name = "eldritch keys"
+	name = "Solitary keys"
 	accesslocks = list(
-		"kiasyd"
+		"kiasyd",
+		"lasombra"
 	)
+	color = "#580443"
 
 /obj/item/vamp/keys/daughters
 	name = "Eclectic keys"
 	accesslocks = list(
-		"daughters",
-		"tmr"
+		"daughters"
 	)
 
 /obj/item/vamp/keys/salubri
@@ -150,17 +165,24 @@
 	)
 
 /obj/item/vamp/keys/old_clan_tzimisce
-	name = "Regal keys"
+	name = "Vintage Regal keys"
 	accesslocks = list(
 		"old_clan_tzimisce",
 		"tmr"
 	)
 
-/obj/item/vamp/keys/tzimisce_new
-	name = "Red keys"
+/obj/item/vamp/keys/tzimisce
+	name = "Regal keys"
 	accesslocks = list(
-		"new_clan_tzimisce"
+		"tzimisce"
 	)
+
+/obj/item/vamp/keys/setite
+	name = "Serpentine keys"
+	accesslocks = list(
+		"setite"
+	)
+	color = "#1805db"
 
 /obj/item/vamp/keys/malkav
 	name = "Insane keys"
@@ -175,6 +197,7 @@
 		"primMalkav",
 		"malkav",
 		"primogen",
+		"clinic",
 		"milleniumCommon",
 		"camarilla"
 	)
@@ -187,7 +210,8 @@
 		"toreador1",
 		"toreador2",
 		"toreador3",
-		"toreador4"
+		"toreador4",
+		"strip"
 	)
 	color = "#ffa7e6"
 
@@ -198,11 +222,26 @@
 	)
 	color = "#06053d"
 
+/obj/item/vamp/keys/banuhaqim/primogen
+	name = "Really Just keys"
+	accesslocks = list(
+		"banuhaqim",
+		"primogen",
+		"milleniumCommon",
+		"camarilla"
+	)
+	color = "#05037e"
+
 /obj/item/vamp/keys/toreador/primogen
 	name = "Really sexy keys"
 	accesslocks = list(
 		"primToreador",
 		"toreador",
+		"toreador1",
+		"toreador2",
+		"toreador3",
+		"toreador4",
+		"strip",
 		"primogen",
 		"milleniumCommon",
 		"camarilla"
@@ -248,8 +287,7 @@
 /obj/item/vamp/keys/ventrue
 	name = "Businessy keys"
 	accesslocks = list(
-		"ventrue",
-		"milleniumCommon"
+		"ventrue"
 	)
 	color = "#f6ffa7"
 
@@ -324,11 +362,18 @@
 	color = "#466a72"
 
 /obj/item/vamp/keys/pentex
-	name = "Facility keys"
+	name = "Endron Facility keys"
 	accesslocks = list(
 		"pentex"
 	)
 	color = "#062e03"
+
+/obj/item/vamp/keys/children_of_gaia
+	name = "Food Pantry keys"
+	accesslocks = list(
+		"coggie"
+	)
+	color = "#339933"
 
 /obj/item/vamp/keys/graveyard
 	name = "Graveyard keys"
@@ -349,14 +394,14 @@
 	)
 
 /obj/item/vamp/keys/supply
-	name = "Supply keys"
+	name = "Supply Depot keys"
 	accesslocks = list(
 		"supply"
 	)
 	color = "#434343"
 
 /obj/item/vamp/keys/strip
-	name = "Strip keys"
+	name = "Strip Club keys"
 	accesslocks = list(
 		"strip"
 	)

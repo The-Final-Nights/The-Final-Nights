@@ -169,7 +169,7 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 		if (id_card)
 			entry["name"] = id_card.registered_name
 			entry["assignment"] = id_card.assignment
-			entry["ijob"] = jobs[id_card.assignment]
+			entry["ijob"] = jobs[id_card.GetJobName()] // TFN EDIT: alt job titles
 
 		// Binary living/dead status
 		if (sensor_mode >= SENSOR_LIVING)

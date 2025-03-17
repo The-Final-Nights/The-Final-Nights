@@ -498,6 +498,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["all_quirks"], all_quirks)
 
 	READ_FILE(S["headshot_link"], headshot_link) // TFN EDIT: headshot loading
+	// TFN EDIT START: alt job titles
+	READ_FILE(S["alt_titles_preferences"], alt_titles_preferences)
+	alt_titles_preferences = SANITIZE_LIST(alt_titles_preferences)
+	if(SSjob)
+		for(var/datum/job/job in sortList(SSjob.occupations, /proc/cmp_job_display_asc))
+			if(alt_titles_preferences[job.title])
+				if(!(alt_titles_preferences[job.title] in job.alt_titles))
+					alt_titles_preferences.Remove(job.title)
+	// TFN EDIT END
 	//try to fix any outdated data if necessary
 	//preference updating will handle saving the updated data for us.
 	if(needs_update >= 0)
@@ -813,6 +822,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	WRITE_FILE(S["headshot_link"], headshot_link) // TFN EDIT: headshot saving
 
+	WRITE_FILE(S["alt_titles_preferences"], alt_titles_preferences) // TFN EDIT: alt job titles
 	return TRUE
 
 

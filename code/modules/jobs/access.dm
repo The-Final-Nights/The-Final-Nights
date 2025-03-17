@@ -389,4 +389,9 @@
 		return jobName
 	if(jobName in get_all_centcom_jobs()) //Return with the NT logo if it is a CentCom job
 		return "CentCom"
+	// TFN EDIT START: alt job titles
+	for(var/datum/job/J in SSjob.occupations)
+		if(jobName in J.alt_titles)
+			return J.title
+	// TFN EDIT END
 	return "Unknown" //Return unknown if none of the above apply

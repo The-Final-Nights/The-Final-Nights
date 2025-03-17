@@ -170,18 +170,57 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "id1"
 
-/obj/item/card/id/anarch
-	name = "biker badge"
-	id_type_name = "biker badge"
-	desc = "A badge which shows protest and anarchy."
+/obj/item/card/id/bruiser
+	name = "bruiser badge"
+	id_type_name = "bruiser badge"
+	desc = "A badge which shows grit."
 	icon = 'code/modules/wod13/items.dmi'
-	icon_state = "id5"
+	icon_state = "bruiser_badge"
 	inhand_icon_state = "card-id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
-	worn_icon_state = "id5"
+	worn_icon_state = "bruiser_badge"
+
+/obj/item/card/id/sweeper
+	name = "sweeper badge"
+	id_type_name = "sweeper badge"
+	desc = "A badge which shows perspective."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "sweeper_badge"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "sweeper_badge"
+
+/obj/item/card/id/emissary
+	name = "emissary badge"
+	id_type_name = "emissary badge"
+	desc = "A badge which shows a favored voice, interlaced with gold thread."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "emissary_badge"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "emissary_badge"
+
+/obj/item/card/id/baron
+	name = "eagle badge"
+	id_type_name = "eagle badge"
+	desc = "The badge of a leader. The eagle stands proud, surrounded by the gold of their nest."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "eagle_badge"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "eagle_badge"
 
 /obj/item/card/id/clinic
 	name = "medical badge"
@@ -343,33 +382,6 @@
 	name = "fbi special agent badge"
 	desc = "Sponsored by the Government. This one has all the bells and whistles."
 
-/obj/item/card/id/voivode
-	name = "ancient badge"
-	id_type_name ="ancient badge"
-	desc = "You have to wear this filthy thing to be recognized."
-	icon = 'code/modules/wod13/items.dmi'
-	icon_state = "id12"
-	inhand_icon_state = "card-id"
-	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
-	worn_icon = 'code/modules/wod13/worn.dmi'
-	worn_icon_state = "id12"
-
-/obj/item/card/id/bogatyr
-	name = "dusty badge"
-	id_type_name ="dusty badge"
-	desc = "You have to wear this because the Voivode wants you to."
-	icon = 'code/modules/wod13/items.dmi'
-	icon_state = "id12"
-	inhand_icon_state = "card-id"
-	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
-	worn_icon = 'code/modules/wod13/worn.dmi'
-	worn_icon_state = "id12"
-
-
 /obj/item/card/id/bahari
 	name = "cultist badge"
 	id_type_name = "cultist badge"
@@ -397,6 +409,32 @@
 	worn_icon_state = "id15"
 
 //TZIMISCE ROLES
+
+/obj/item/card/id/voivode
+	name = "ancient badge"
+	id_type_name ="ancient badge"
+	desc = "You have to wear this filthy thing to be recognized."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id12"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id12"
+
+/obj/item/card/id/bogatyr
+	name = "dusty badge"
+	id_type_name ="dusty badge"
+	desc = "You have to wear this because the Voivode wants you to."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id12"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id12"
 
 // PRIMOGEN STAFF (Distributed in game by Primogen)
 

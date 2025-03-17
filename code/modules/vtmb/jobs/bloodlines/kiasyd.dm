@@ -1,5 +1,5 @@
 /datum/job/vamp/kiasyd
-	title = "Museum Groundskeeper"
+	title = "Old Church Curator"
 	faction = "Vampire"
 	total_positions = 4
 	spawn_positions = 4
@@ -20,7 +20,7 @@
 	allowed_species = list("Vampire")
 
 	v_duty = "Follow the traditions of the Camarilla. Obey the Prince and their authority. The city belongs to him. Aligning yourself with your clan members would be of benefit."
-	duty = "You are a member of the Kiasyd bloodline! You operate the museum during the night and conduct arcane rituals where you please. Good luck."
+	duty = "You are a member of the Kiasyd bloodline! You maintain the old Historical Church, alongside the local Lasombra, and its library during the night and conduct arcane rituals out of sight. Good luck."
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Kiasyd")
 

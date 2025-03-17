@@ -1,5 +1,5 @@
 /obj/item/stocks_license
-	name = "unidentified stocks trading license"
+	name = "unbound stocks trading license"
 	desc = "Contains tons of information about broker's marketplace account."
 	icon_state = "card1"
 	icon = 'code/modules/wod13/items.dmi'
@@ -12,7 +12,7 @@
 
 /obj/item/stocks_license/attack_self(mob/user)
 	. = ..()
-	if(name == "unidentified stocks trading license")
+	if(name == "unbound stocks trading license")
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			var/obj/item/stocks_license/CR = get_fuckin_card_number(H.true_real_name)

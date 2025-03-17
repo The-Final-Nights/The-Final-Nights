@@ -225,7 +225,7 @@
 	vitae.Grant(C)
 
 	//this needs to be adjusted to be more accurate for blood spending rates
-	var/datum/discipline/bloodheal/giving_bloodheal = new(clamp(11 - C.generation, 1, 10))
+	var/datum/discipline/bloodheal/giving_bloodheal = new(clamp(13 - C.generation, 1, 10))
 	C.give_discipline(giving_bloodheal)
 
 	var/datum/action/blood_power/bloodpower = new()

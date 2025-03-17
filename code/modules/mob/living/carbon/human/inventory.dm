@@ -285,7 +285,7 @@
 	sec_hud_set_security_status()
 	..()
 
-/mob/living/carbon/human/proc/equipOutfit(outfit, visualsOnly = FALSE)
+/mob/living/carbon/human/proc/equipOutfit(outfit, visualsOnly = FALSE, client/preference_source = null) // TFN EDIT: alt job titles
 	var/datum/outfit/O = null
 
 	if(ispath(outfit))
@@ -297,8 +297,7 @@
 	if(!O)
 		return 0
 
-	return O.equip(src, visualsOnly)
-
+	return O.equip(src, visualsOnly, preference_source) // TFN EDIT: alt job titles
 
 //delete all equipment without dropping anything
 /mob/living/carbon/human/proc/delete_equipment()

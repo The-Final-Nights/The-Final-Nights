@@ -43,7 +43,7 @@
 			//	transformator.trans_gender(src, auspice.base_breed)
 
 			if(gaining_rage && client)
-				if((last_rage_gain + 1 MINUTES) < world.time)
+				if(((last_rage_gain + 1 MINUTES) < world.time) && (auspice.rage <= 6))
 					last_rage_gain = world.time
 					adjust_rage(1, src, TRUE)
 

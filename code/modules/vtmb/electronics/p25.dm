@@ -488,7 +488,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	var/static/list/restricted_areas = list(
 		/area/vtm/sewer,
 		/area/vtm/sewer/nosferatu_town,
-		/area/vtm/sewer/old_clan_sanctum
+		/area/vtm/sewer/tzimisce_sanctum
 	)
 	var/area/current_area = get_area(A)
 	for(var/restricted_type in restricted_areas)

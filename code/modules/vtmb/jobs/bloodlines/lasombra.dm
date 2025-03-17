@@ -1,5 +1,5 @@
 /datum/job/vamp/lasombra
-	title = "Monestary Monk"
+	title = "Old Church Caretaker"
 	faction = "Vampire"
 	total_positions = 5
 	spawn_positions = 5

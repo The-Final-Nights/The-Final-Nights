@@ -16,9 +16,21 @@
 			"Linkage": "Cross"
 		},
 		{
+			"Up": 1,
 			"Down": -1,
 			"Baseturf": "/turf/open/floor/plating",
 			"Linkage": "Cross"
+		},
+		{
+			"Down": -1,
+			"Baseturf": "/turf/open/floor/plating",
+			"Linkage": "Cross"
+		},
+		{
+			"Baseturf": "/turf/open/floor/plating"
+		},
+		{
+			"Baseturf": "/turf/open/floor/plating"
 		},
 		{
 			"Baseturf": "/turf/open/floor/plating"
