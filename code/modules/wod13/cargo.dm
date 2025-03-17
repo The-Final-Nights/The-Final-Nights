@@ -451,7 +451,7 @@
 	name = "Ammo (3x Desert Eagle 50AE magazines)"
 	desc = "Contains three desert eagle 50AE magazines."
 	cost = 1200
-	contains = list(/obj/item/ammo_box/magazine/m50, /obj/item/ammo_box/magazine/m50)
+	contains = list(/obj/item/ammo_box/magazine/m50, /obj/item/ammo_box/magazine/m50, /obj/item/ammo_box/magazine/m50)
 	crate_name = "ammo crate"
 
 /datum/supply_pack/vampire/armorlight
