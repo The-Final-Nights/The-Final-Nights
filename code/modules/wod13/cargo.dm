@@ -467,6 +467,43 @@
 	contains = list(/obj/structure/drill)
 	crate_name = "drill crate"
 
+/datum/supply_pack/vampire/camera
+	name = "Camera Kit"
+	desc = "Contains a single camera and a spare roll of film."
+	cost = 200
+	contains = list(/obj/item/camera, /obj/item/camera_film)
+
+/datum/supply_pack/vampire/binoculars
+	name = "Binoculars"
+	desc = "Contains a single pair of binoculars."
+	cost = 300
+	contains = list(/obj/item/binoculars)
+
+/datum/supply_pack/vampire/medicalsupplies
+	name = "Medical Supplies"
+	desc = "Contains some first aid supplies."
+	cost = 500
+	contains = list(/obj/item/stack/medical/gauze, /obj/item/stack/medical/bruise_pack, /obj/item/stack/medical/suture, /obj/item/stack/medical/ointment)
+
+/datum/supply_pack/vampire/weapondeagle50
+	name = "Weapon (desert eagle 50AE)"
+	desc = "Contains a .50 caliber desert eagle."
+	cost = 2000
+	contains = list(/obj/item/gun/ballistic/automatic/pistol/deagle, /obj/item/ammo_box/magazine/m50)
+
+/datum/supply_pack/vampire/magazine_deagle50
+	name = "Ammo (3x Desert Eagle 50AE magazines)"
+	desc = "Contains three desert eagle 50AE magazines."
+	cost = 1200
+	contains = list(/obj/item/ammo_box/magazine/m50, /obj/item/ammo_box/magazine/m50)
+	crate_name = "ammo crate"
+
+/datum/supply_pack/vampire/radiopack
+	name = "Radios"
+	desc = "Contains a pack of five handheld two way radios."
+	cost = 1000
+	contains = list(/obj/item/radio, /obj/item/radio, /obj/item/radio, /obj/item/radio, /obj/item/radio, )
+
 /obj/item/stack/dollar
 	name = "dollars"
 	desc = "Wow! With enough of these, you could buy a lot! ...Pssh, yeah right."
