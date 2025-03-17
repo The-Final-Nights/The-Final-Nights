@@ -277,6 +277,8 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_biter)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_fister)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_tanker)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_guitar)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_helmet)
 
 /datum/action/basic_vicissitude
 	name = "Vicissitude Upgrade"

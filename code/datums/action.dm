@@ -238,6 +238,23 @@
 			H.Stun(30)
 			H.do_jitter_animation(30)
 
+/datum/action/item_action/eguitar_tzi
+	name = "Engage Agony"
+	var/last_shit = 0
+
+/datum/action/item_action/eguitar_tzi/Trigger()
+	if(istype(target, /obj/item/melee/vampirearms/eguitar_tzi))
+		var/obj/item/melee/vampirearms/eguitar_tzi/E = target
+		if(!E.wielded)
+			return
+	if(last_shit+70 < world.time)
+		playsound(get_turf(owner), 'code/modules/wod13/sounds/femurbreaker.ogg', 100, FALSE)
+		owner.emote("me",1,"strums the exposed nerves of the living guitar.",TRUE)
+		last_shit = world.time
+		for(var/mob/living/carbon/human/H in oviewers(7, owner))
+			H.Stun(30)
+			H.do_jitter_animation(30)
+
 /datum/action/item_action/toggle_gunlight
 	name = "Toggle Gunlight"
 
