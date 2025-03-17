@@ -140,6 +140,12 @@
 	icon_state = "skull"
 	armor = list(MELEE = 20, BULLET = 20, LASER = 10, ENERGY = 10, BOMB = 10, BIO = 0, RAD = 0, FIRE = 0, ACID = 10, WOUND = 10)
 
+/obj/item/clothing/head/vampire/skull_tzi
+	name = "skull helmet"
+	desc = "Damn... Provides some kind of protection."
+	icon_state = "skull_tzi"
+	armor = list(MELEE = 20, BULLET = 20, LASER = 10, ENERGY = 10, BOMB = 10, BIO = 0, RAD = 0, FIRE = 0, ACID = 10, WOUND = 10)
+
 /obj/item/clothing/head/vampire/helmet
 	name = "police helmet"
 	desc = "Looks dangerous. Provides good protection."

@@ -662,6 +662,70 @@
 /obj/item/melee/vampirearms/eguitar/update_icon_state()
 	icon_state = "rock0"
 
+/obj/item/melee/vampirearms/eguitar_tzi
+	icon = 'code/modules/wod13/48x32weapons.dmi'
+	icon_state = "rock0_tzi"
+	name = "living electric guitar"
+	desc = "that is really fucking metal..."
+	force = 40
+	throwforce = 25
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	attack_verb_continuous = list("attacks", "chops", "rocks", "hits")
+	attack_verb_simple = list("attack", "chop", "rock", "hit")
+	hitsound = 'code/modules/wod13/sounds/rock.ogg'
+	sharpness = SHARP_EDGED
+	max_integrity = 200
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 30)
+	resistance_flags = FIRE_PROOF
+	wound_bonus = -15
+	bare_wound_bonus = 15
+	armour_penetration = 30
+	pixel_w = -8
+	masquerade_violating = TRUE
+	actions_types = list(/datum/action/item_action/eguitar_tzi)
+	is_wood = TRUE
+	var/wielded = FALSE
+	var/on = FALSE
+	var/last_solo = 0
+
+/obj/item/melee/vampirearms/eguitar_tzi/AltClick(mob/user)
+	if(last_solo+600 > world.time)
+		return
+	var/result = input(user, "Select a riff") as null|anything in list("1", "2", "3", "4")
+	if(result)
+		last_solo = world.time
+		if(result == "1")
+			playsound(loc, 'code/modules/wod13/sounds/solo1.ogg', 100, FALSE)
+		if(result == "2")
+			playsound(loc, 'code/modules/wod13/sounds/solo2.ogg', 100, FALSE)
+		if(result == "3")
+			playsound(loc, 'code/modules/wod13/sounds/solo3.ogg', 100, FALSE)
+		if(result == "4")
+			playsound(loc, 'code/modules/wod13/sounds/solo4.ogg', 100, FALSE)
+
+/obj/item/melee/vampirearms/eguitar_tzi/Initialize()
+	. = ..()
+	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, PROC_REF(on_wield))
+	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, PROC_REF(on_unwield))
+
+/obj/item/melee/vampirearms/eguitar_tzi/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/two_handed, force_unwielded=40, force_wielded=10, icon_wielded="rock1_tzi")
+
+/obj/item/melee/vampirearms/eguitar_tzi/proc/on_wield(obj/item/source, mob/user)
+	SIGNAL_HANDLER
+
+	wielded = TRUE
+
+/obj/item/melee/vampirearms/eguitar_tzi/proc/on_unwield(obj/item/source, mob/user)
+	SIGNAL_HANDLER
+
+	wielded = FALSE
+
+/obj/item/melee/vampirearms/eguitar_tzi/update_icon_state()
+	icon_state = "rock0_tzi"
+
 /obj/item/shield/door
 	name = "\improper door"
 	desc = "It opens and closes."

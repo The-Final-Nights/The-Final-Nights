@@ -118,6 +118,22 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzi_guitar
+	name = "Living Guitar"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 40, /obj/item/organ/eyes = 1, /obj/item/spine = 1)
+	result = /obj/item/melee/vampirearms/eguitar_tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzi_helmet
+	name = "skull helmet"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/bodypart/head = 1)
+	result = /obj/item/clothing/head/vampire/skull_tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_floor
 	name = "Gut Floor"
 	time = 50
