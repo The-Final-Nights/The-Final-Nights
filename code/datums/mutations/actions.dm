@@ -118,9 +118,9 @@
 	name = "Fire Breath"
 	desc = "You can breathe fire at a target."
 	school = "evocation"
-	charge_max = 600
+	charge_max = 300
 	clothes_req = FALSE
-	range = 20
+	range = 5
 	projectile_type = /obj/projectile/magic/aoe/fireball/firebreath
 	base_icon_state = "fireball"
 	action_icon_state = "fireball0"
@@ -154,8 +154,8 @@
 	name = "fire breath"
 	exp_heavy = 0
 	exp_light = 0
-	exp_flash = 0
-	exp_fire= 4
+	exp_flash = 2
+	exp_fire= 3
 
 /datum/mutation/human/void
 	name = "Void Magnet"
