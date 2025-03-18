@@ -51,9 +51,8 @@
 
 	violates_masquerade = TRUE
 
-	cancelable = TRUE
-	duration_length = 20 SECONDS
-	cooldown_length = 20 SECONDS
+	toggled = TRUE
+	duration_length = 2 TURNS
 
 	grouped_powers = list(
 		/datum/discipline_power/protean/earth_meld,
