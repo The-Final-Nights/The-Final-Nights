@@ -178,7 +178,6 @@
 	cooldown_length = 20 SECONDS
 
 	grouped_powers = list(
-		/datum/discipline_power/protean/eyes_of_the_beast,
 		/datum/discipline_power/protean/feral_claws,
 		/datum/discipline_power/protean/earth_meld,
 		/datum/discipline_power/protean/shape_of_the_beast
