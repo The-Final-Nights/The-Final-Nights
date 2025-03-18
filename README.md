@@ -1,9 +1,9 @@
 
 * **Website:** TO_BE_DECLARED
-* **Code:** https://github.com/WorldOfDarknessXIII/World-of-Darkness-13
+* **Code:** [You are here.](https://github.com/ApocryphaXIII/ApocryphaXIII)
 * **Wiki:** UNDER_CONSTRUCTION
 * **Codedocs:** https://codedocs.tgstation13.org/ + For the time being +
-* **World of Darkness 13 Discord:** https://discord.gg/WBktth6Z8j
+* **Apocrypha:** [To The Discord!](https://discord.gg/cq3gqaCTFG)
 * **Coderbus Discord:** https://discord.gg/Vh8TJp9
 * ~~**IRC:** irc://irc.rizon.net/coderbus~~ (dead)
 
