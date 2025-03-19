@@ -41,7 +41,7 @@
 /obj/item/melee/vampirearms/fireaxe/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/butchering, 100, 80, 0 , hitsound)
-	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=70, icon_wielded="fireaxe1")
+	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=40, icon_wielded="fireaxe1")
 
 /obj/item/melee/vampirearms/fireaxe/proc/on_wield(obj/item/source, mob/user)
 	SIGNAL_HANDLER
@@ -71,7 +71,7 @@
 	icon = 'code/modules/wod13/48x32weapons.dmi'
 	icon_state = "katana"
 	flags_1 = CONDUCT_1
-	force = 55
+	force = 35
 	throwforce = 10
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
@@ -125,7 +125,7 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "rapier"
 	flags_1 = CONDUCT_1
-	force = 48
+	force = 35
 	throwforce = 10
 	block_chance = 45
 	armour_penetration = 30
@@ -147,7 +147,7 @@
     icon = 'code/modules/wod13/weapons.dmi'
     icon_state = "machete"
     flags_1 = CONDUCT_1
-    force = 45
+    force = 25
     throwforce = 30
     w_class = WEIGHT_CLASS_BULKY
     slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
@@ -170,7 +170,7 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "sabre"
 	flags_1 = CONDUCT_1
-	force = 56
+	force = 35
 	throwforce = 10
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 35
@@ -192,7 +192,7 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "longsword"
 	flags_1 = CONDUCT_1
-	force = 58
+	force = 35
 	throwforce = 10
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 40
@@ -335,7 +335,7 @@
 	name = "ripped arm"
 	desc = "Wow, that was someone's arm."
 	icon_state = "hand"
-	force = 50
+	force = 25
 	block_chance = 25
 	masquerade_violating = TRUE
 	is_wood = FALSE
@@ -411,7 +411,7 @@
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		L.apply_damage(30, CLONE)
+		L.apply_damage(8, CLONE)
 
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"
@@ -426,8 +426,8 @@
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		L.apply_damage(16, CLONE)
-		L.apply_damage(7, BURN)
+		L.apply_damage(8, CLONE)
+		L.apply_damage(8, BURN)
 
 /obj/item/melee/touch_attack/werewolf
 	name = "\improper falling touch"
@@ -461,7 +461,7 @@
 	icon_state = "chainsaw"
 	flags_1 = CONDUCT_1
 	force = 15
-	var/force_on = 150
+	var/force_on = 50
 	w_class = WEIGHT_CLASS_BULKY
 	throwforce = 10
 	throw_speed = 2
@@ -560,7 +560,7 @@
 	icon_state = "shovel"
 	name = "shovel"
 	desc = "Great weapon against mortal or immortal."
-	force = 40
+	force = 25
 	throwforce = 10
 	block_chance = 30
 	w_class = WEIGHT_CLASS_BULKY
@@ -585,7 +585,7 @@
 	desc = "More instrument, than a weapon. Instrumentally cuts heads..."
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "kosa"
-	force = 50
+	force = 35
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = null
 	block_chance = 12
@@ -604,7 +604,7 @@
 	icon_state = "rock0"
 	name = "electric guitar"
 	desc = "You are pretty fly for a white guy..."
-	force = 40
+	force = 35
 	throwforce = 25
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
@@ -690,7 +690,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb_continuous = list("bludgeons", "bashes", "beats")
 	attack_verb_simple = list("bludgeon", "bash", "beat")
-	force = 30
+	force = 25
 	wound_bonus = 15
 	block_chance = 10
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
