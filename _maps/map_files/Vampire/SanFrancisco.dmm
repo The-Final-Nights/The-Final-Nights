@@ -77298,7 +77298,7 @@
 "xRg" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/manholedown,
-/turf/open/floor/plating/sidewalk/old,
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/jazzclub)
 "xRl" = (
 /obj/structure/roadsign/parking,
