@@ -11,7 +11,7 @@
 /mob/living/carbon/human/npc/bouncer/elysium/jazzclub_ballroom
 	protected_zone_id = "jazzclub_ballroom"
 
-/mob/living/carbon/human/npc/bouncer/elysium/jazzclub_basement_1
+/mob/living/carbon/human/npc/bouncer/jazzclub/jazzclub_basement_1
 	protected_zone_id = "jazzclub_basement_1"
 
 /mob/living/carbon/human/npc/bouncer/jazzclub/jazzclub_basement_2
