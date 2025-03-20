@@ -1,4 +1,4 @@
-/mob/living/carbon/human/npc/bouncer/elysium
+/mob/living/carbon/human/npc/bouncer/jazzclub
 	our_role = /datum/socialrole/bouncer/jazzclub
 	protected_zone_id = "jazzclub"
 
