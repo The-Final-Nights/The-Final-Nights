@@ -2,9 +2,6 @@
 	our_role = /datum/socialrole/bouncer/jazzclub
 	protected_zone_id = "jazzclub"
 
-/mob/living/carbon/human/npc/bouncer/jazzclub
-	protected_zone_id = "jazzclub"
-
 /mob/living/carbon/human/npc/bouncer/jazzclub/jazzclub_elevator
 	protected_zone_id = "jazzclub_elevator"
 

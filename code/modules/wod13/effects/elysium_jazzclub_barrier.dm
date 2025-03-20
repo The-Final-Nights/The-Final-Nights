@@ -4,9 +4,6 @@
 	protected_zone_id = "jazzclub"
 	social_roll_difficulty = 7
 
-/obj/effect/vip_barrier/jazzclub
-	protected_zone_id = "jazzclub"
-
 /obj/effect/vip_barrier/jazzclub/jazzclub_elevator
 	protected_zone_id = "jazzclub_elevator"
 
