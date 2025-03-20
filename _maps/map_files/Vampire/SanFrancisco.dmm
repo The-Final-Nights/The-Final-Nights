@@ -15783,12 +15783,6 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/strip)
-"eUu" = (
-/obj/structure/musician/piano{
-	icon_state = "piano"
-	},
-/turf/open/floor/carpet/lone,
-/area/vtm/jazzclub)
 "eUA" = (
 /obj/structure/chair/pew/right,
 /obj/effect/decal/bordur{
@@ -21037,10 +21031,6 @@
 /obj/effect/decal/shadow,
 /turf/open/openspace,
 /area/vtm)
-"gvI" = (
-/obj/machinery/portable_atmospherics/canister/air,
-/turf/open/floor/plating/granite/black,
-/area/vtm/interior/millennium_tower/ventrue)
 "gvJ" = (
 /obj/structure/window/reinforced/indestructable{
 	dir = 4
@@ -53733,7 +53723,9 @@
 	lockpick_difficulty = 14;
 	name = "board room"
 	},
-/obj/effect/vip_barrier/elysium/jazzclub_elevator,
+/obj/effect/vip_barrier/elysium/jazzclub_elevator{
+	dir = 1
+	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/vtm/jazzclub)
 "qFX" = (
@@ -53873,10 +53865,6 @@
 "qIU" = (
 /turf/closed/wall/vampwall/old,
 /area/vtm/interior/techshop)
-"qIW" = (
-/obj/item/wrench,
-/turf/open/floor/plating/granite/black,
-/area/vtm/interior/millennium_tower/ventrue)
 "qIX" = (
 /turf/open/floor/plating/vampbeach,
 /area/vtm/northbeach)
@@ -65842,6 +65830,9 @@
 /mob/living/simple_animal/pet/cat/vampire,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/financialdistrict)
+"uoS" = (
+/turf/open/floor/plating/sidewalk/old,
+/area/vtm/interior/cog/pantry)
 "upi" = (
 /obj/structure/vampdoor/prison{
 	dir = 1;
@@ -66560,8 +66551,14 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/northbeach)
 "uAs" = (
-/turf/open/floor/plating/sidewalk/old,
-/area/vtm/interior/cog/pantry)
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 9
+	},
+/obj/machinery/light/prince{
+	dir = 4
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/vtm/jazzclub)
 "uAx" = (
 /obj/structure/railing{
 	dir = 4
@@ -73287,6 +73284,9 @@
 /obj/item/reagent_containers/glass/bucket,
 /obj/structure/sink,
 /obj/structure/tank_holder/extinguisher,
+/obj/machinery/light{
+	pixel_y = 32
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/jazzclub)
 "wGI" = (
@@ -74081,10 +74081,6 @@
 	},
 /turf/open/floor/plating/church,
 /area/vtm/church)
-"wUF" = (
-/obj/structure/chair/stool/bar,
-/turf/open/floor/carpet/lone,
-/area/vtm/jazzclub)
 "wUR" = (
 /obj/effect/landmark/npcwall,
 /obj/effect/landmark/npcwall,
@@ -157484,7 +157480,7 @@ kpk
 mxK
 jdF
 jdF
-uAs
+uoS
 ftp
 qId
 hXm
@@ -169791,7 +169787,7 @@ pGK
 fDH
 gWv
 aGc
-rMx
+uAs
 cis
 wsc
 xPY
@@ -173132,7 +173128,7 @@ iGA
 qPt
 tLz
 tLz
-tLz
+mtR
 osc
 qFV
 cCY
@@ -175967,7 +175963,7 @@ qtT
 hnC
 kmv
 hnC
-eUu
+sku
 kwp
 eiL
 hnz
@@ -176224,7 +176220,7 @@ qtT
 kmv
 hnC
 kmv
-wUF
+bIJ
 hGD
 eiL
 hnz
@@ -241233,7 +241229,7 @@ ntq
 ntq
 dUS
 dkX
-gvI
+qYL
 hGK
 hGK
 hGK
@@ -241747,7 +241743,7 @@ ntq
 ntq
 dUS
 dkX
-qIW
+qYL
 vwj
 hGK
 hGK
