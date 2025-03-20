@@ -16,7 +16,7 @@
 /obj/effect/vip_barrier/elysium/jazzclub_basement_1
 	protected_zone_id = "jazzclub_basement_1"
 
-/obj/effect/vip_barrier/elysium/jazzclub_basement_2
+/obj/effect/vip_barrier/jazzclub/jazzclub_basement_2
 	protected_zone_id = "jazzclub_basement_2"
 
 /obj/effect/vip_barrier/elysium/check_entry_permission_custom(var/mob/living/carbon/human/entering_mob)
