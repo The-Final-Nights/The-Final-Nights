@@ -1,4 +1,4 @@
-/obj/effect/vip_barrier/elysium
+/obj/effect/vip_barrier/jazzclub
 	name = "Elysium JazzClub Checkpoint"
 	desc = "Beyond this point lay riches and secrets untold."
 	protected_zone_id = "jazzclub"
