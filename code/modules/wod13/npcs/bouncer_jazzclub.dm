@@ -8,7 +8,7 @@
 /mob/living/carbon/human/npc/bouncer/jazzclub/jazzclub_elevator
 	protected_zone_id = "jazzclub_elevator"
 
-/mob/living/carbon/human/npc/bouncer/elysium/jazzclub_ballroom
+/mob/living/carbon/human/npc/bouncer/jazzclub/jazzclub_ballroom
 	protected_zone_id = "jazzclub_ballroom"
 
 /mob/living/carbon/human/npc/bouncer/jazzclub/jazzclub_basement_1
