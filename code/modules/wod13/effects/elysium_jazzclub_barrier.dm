@@ -10,7 +10,7 @@
 /obj/effect/vip_barrier/jazzclub/jazzclub_elevator
 	protected_zone_id = "jazzclub_elevator"
 
-/obj/effect/vip_barrier/elysium/jazzclub_ballroom
+/obj/effect/vip_barrier/jazzclub/jazzclub_ballroom
 	protected_zone_id = "jazzclub_ballroom"
 
 /obj/effect/vip_barrier/elysium/jazzclub_basement_1
