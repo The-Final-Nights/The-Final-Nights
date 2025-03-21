@@ -17,21 +17,38 @@
 	name = "Sense the Sin"
 	desc = "Become supernaturally resistant to fire."
 
+	target_type = TARGET_HUMAN
+	range = 12
 	level = 1
 
 	cancelable = TRUE
-	duration_length = 20 SECONDS
-	cooldown_length = 10 SECONDS
 
-/datum/discipline_power/daimonion/sense_the_sin/activate()
+/datum/discipline_power/daimonion/sense_the_sin/activate(mob/living/carbon/human/target)
 	. = ..()
-	owner.physiology.burn_mod /= 100
-	owner.color = "#884200"
+	if(target.get_total_social() <= 3)
+		to_chat(caster, "Victim is not social or influencing.")
+	if(target.get_total_mentality() <= 3)
+		to_chat(caster, "Victim lacks appropiate willpower.")
+	if(target.get_total_physique() <= 3)
+		to_chat(caster, "Victim's body is weak and feeble.")
+	if(isgarou(target))
+		to_chat(caster, "Victim's natural banishment is silver...")
+	if(iskindred(target))
+		var/datum/daimonion/daim = new
+		daim.baali_get_clan_weakness(target, caster)
+		if(target.generation >= 10)
+			to_chat(caster, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
+		else
+			to_chat(caster, "Victim's vitae is thick and strong. You can clearly see their fear for fire, it seems that's a kindred.")
+	if(isghoul(target))
+		var/mob/living/carbon/human/ghoul = target
+		if(ghoul.mind.enslaved_to)
+			to_chat(caster, "Victim is addicted to vampiric vitae and its true master is [ghoul.mind.enslaved_to]")
+		else
+			to_chat(caster, "Victim is addicted to vampiric vitae, but is independent and free.")
+	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
+		to_chat(caster, "Victim is a feeble worm with no strengths or visible weaknesses.")
 
-/datum/discipline_power/daimonion/sense_the_sin/deactivate()
-	. = ..()
-	owner.color = initial(owner.color)
-	owner.physiology.burn_mod *= 100
 
 //FEAR OF THE VOID BELOW
 /datum/discipline_power/daimonion/fear_of_the_void_below
