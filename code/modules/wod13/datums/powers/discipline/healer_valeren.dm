@@ -82,6 +82,11 @@
 				target.grab_ghost()
 				target.revive(full_heal = FALSE, admin_revive = FALSE)
 				target.Jitter(100)
+				to_chat(target, "<span class='notice'>SOMETHING PULLS YOU FROM THE BRINK.</span>")
+			else if(HAS_TRAIT(target, TRAIT_TORPOR))
+				target.cure_torpor()
+				to_chat(target, "<span class='notice'>YOUR DREAMS ARE RUDELY INTERRUPTED.</span>")
+
 			var/datum/wound/wound = pick(human_target.all_wounds)
 			wound.remove_wound()
 
