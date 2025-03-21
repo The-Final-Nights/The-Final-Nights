@@ -53,24 +53,34 @@
 //FEAR OF THE VOID BELOW
 /datum/discipline_power/daimonion/fear_of_the_void_below
 	name = "Fear of the Void Below"
-	desc = "Sprout wings and become able to fly."
+	desc = "Induce fear in a target.."
 
 	level = 2
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_LYING | DISC_CHECK_IMMOBILE
+	check_flags = DISC_CHECK_CONSCIOUS
 
-	violates_masquerade = TRUE
+	target_type = TARGET_HUMAN
+	range = 7
 
-	cancelable = TRUE
-	duration_length = 30 SECONDS
-	cooldown_length = 20 SECONDS
+	duration_length = 3 SECONDS
 
-/datum/discipline_power/daimonion/fear_of_the_void_below/activate()
+/datum/discipline_power/daimonion/fear_of_the_void_below/pre_activation_checks(mob/living/target)
+	var/mypower = caster.get_total_social()
+	var/theirpower = target.get_total_mentality()
+	if((theirpower >= mypower) || (caster.generation > target.generation))
+		to_chat(caster, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
+		return FALSE
+	return TRUE
+
+/datum/discipline_power/daimonion/fear_of_the_void_below/activate(mob/living/carbon/human/target)
 	. = ..()
-	owner.dna.species.GiveSpeciesFlight(owner)
+	to_chat(target, "<span class='warning'><b>Your mind is enveloped by your greatest fear!</span></b>")
+	if(!target.in_frenzy) // Cause target to frenzy
+	target.enter_frenzymod()
+	target.Paralyze(3 SECONDS)
 
-/datum/discipline_power/daimonion/fear_of_the_void_below/deactivate()
+/datum/discipline_power/daimonion/fear_of_the_void_below/deactivate(mob/living/carbon/human/target)
 	. = ..()
-	owner.dna.species.RemoveSpeciesFlight(owner)
+	target.exit_frenzymod()
 
 //CONFLAGRATION
 /datum/discipline_power/daimonion/conflagration
