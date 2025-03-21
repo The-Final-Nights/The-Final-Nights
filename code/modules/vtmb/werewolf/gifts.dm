@@ -5,7 +5,7 @@
 	var/rage_req = 0
 	var/gnosis_req = 0
 	var/cool_down = 0
-	var/cool_down_timer = 150
+	var/cool_down_timer = 15 SECONDS
 
 	var/allowed_to_proceed = FALSE
 
