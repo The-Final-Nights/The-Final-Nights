@@ -232,7 +232,7 @@
 	button_icon_state = "scent_of_the_true_form"
 	rage_req = 1
 	//gnosis_req = 1
-	cool_down_timer = 200
+	cool_down_timer = 20 SECONDS
 
 /datum/action/gift/scent_of_the_true_form/Trigger()
 	. = ..()
