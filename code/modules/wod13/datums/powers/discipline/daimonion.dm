@@ -90,6 +90,8 @@
 	target_type = TARGET_LIVING
 	range = 7
 
+	aggravating = TRUE
+	hostile = TRUE
 	violates_masquerade = TRUE
 
 /datum/discipline_power/daimonion/conflagration/activate(mob/living/target)
