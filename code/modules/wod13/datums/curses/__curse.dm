@@ -1,6 +1,5 @@
-GLOBAL_LIST_EMPTY(cursed_characters)
 //Global list of those who've been cursed
-
+GLOBAL_LIST_EMPTY(cursed_characters)
 
 /datum/curse
 	/* CUSTOMIZABLE
