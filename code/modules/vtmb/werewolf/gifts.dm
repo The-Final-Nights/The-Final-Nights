@@ -266,7 +266,7 @@
 	desc = "This Gift allows the werewolf to sense the presence of Wyrm."
 	button_icon_state = "sense_wyrm"
 	rage_req = 1
-	cool_down_timer = 200
+	cool_down_timer = 20 SECONDS
 
 /datum/action/gift/sense_wyrm/Trigger()
 	. = ..()
