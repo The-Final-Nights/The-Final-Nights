@@ -104,32 +104,17 @@
 //PSYCHOMACHIA
 /datum/discipline_power/daimonion/psychomachia
 	name = "Psychomachia"
-	desc = "Become a bat."
+	desc = "Bring forth the target's greatest fear."
 
 	level = 4
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
 
-	violates_masquerade = TRUE
+	violates_masquerade = FALSE
 
-	duration_length = 30 SECONDS
-	cooldown_length = 10 SECONDS
-	grouped_powers = list(/datum/discipline_power/daimonion/condemnation)
-
-	var/obj/effect/proc_holder/spell/targeted/shapeshift/bat/bat_shapeshift
-
-/datum/discipline_power/daimonion/psychomachia/activate()
+/datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
-	if(!bat_shapeshift)
-		bat_shapeshift = new(owner)
-
-	owner.drop_all_held_items()
-	bat_shapeshift.Shapeshift(owner)
-
-/datum/discipline_power/daimonion/psychomachia/deactivate()
-	. = ..()
-	bat_shapeshift.Restore(bat_shapeshift.myshape)
-	owner.Stun(1.5 SECONDS)
-	owner.do_jitter_animation(30)
+	to_chat(target, "<span class='warning'><b>You hear an infernal laugh!</span></b>")
+	new /datum/hallucination/baali(target, TRUE)
 
 //CONDEMNTATION
 /datum/discipline_power/daimonion/condemnation
