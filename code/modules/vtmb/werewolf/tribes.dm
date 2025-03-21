@@ -38,7 +38,7 @@
 	button_icon_state = "freezing_wind"
 	rage_req = 1
 	//gnosis_req = 1
-	cool_down_timer = 200
+	cool_down_timer = 20 SECONDS
 
 /datum/action/gift/freezing_wind/Trigger()
 	. = ..()
