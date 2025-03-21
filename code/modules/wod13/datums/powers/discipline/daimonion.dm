@@ -34,7 +34,6 @@
 	if(isgarou(target))
 		to_chat(owner, "Victim's natural banishment is silver...")
 	if(iskindred(target))
-		var/datum/daimonion/daim = new
 		if(target.generation >= 10)
 			to_chat(owner, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
 		else
@@ -74,8 +73,8 @@
 	. = ..()
 	to_chat(target, "<span class='warning'><b>Your mind is enveloped by your greatest fear!</span></b>")
 	if(!target.in_frenzy) // Cause target to frenzy
-	target.enter_frenzymod()
-	target.Paralyze(3 SECONDS)
+		target.enter_frenzymod()
+		target.Paralyze(3 SECONDS)
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/deactivate(mob/living/carbon/human/target)
 	. = ..()
