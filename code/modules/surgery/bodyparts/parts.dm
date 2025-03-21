@@ -3,7 +3,7 @@
 	name = BODY_ZONE_CHEST
 	desc = "It's impolite to stare at a person's chest."
 	icon_state = "default_human_chest"
-	max_damage = 200
+	max_damage = 300
 	body_zone = BODY_ZONE_CHEST
 	body_part = CHEST
 	px_x = 0
@@ -41,6 +41,9 @@
 	max_damage = 500
 	animal_origin = ALIEN_BODYPART
 
+/obj/item/bodypart/chest/crinos
+	max_damage = 600
+
 /obj/item/bodypart/chest/larva
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "larva_chest"
@@ -57,7 +60,7 @@
 	icon_state = "default_human_l_arm"
 	attack_verb_continuous = list("slaps", "punches")
 	attack_verb_simple = list("slap", "punch")
-	max_damage = 50
+	max_damage = 75
 	max_stamina_damage = 50
 	body_zone = BODY_ZONE_L_ARM
 	body_part = ARM_LEFT
@@ -145,6 +148,9 @@
 	max_damage = 100
 	animal_origin = ALIEN_BODYPART
 
+/obj/item/bodypart/l_arm/crinos
+	max_damage = 125
+
 /obj/item/bodypart/r_arm
 	name = "right arm"
 	desc = "Over 87% of humans are right handed. That figure is much lower \
@@ -152,7 +158,7 @@
 	icon_state = "default_human_r_arm"
 	attack_verb_continuous = list("slaps", "punches")
 	attack_verb_simple = list("slap", "punch")
-	max_damage = 50
+	max_damage = 75
 	body_zone = BODY_ZONE_R_ARM
 	body_part = ARM_RIGHT
 	aux_zone = BODY_ZONE_PRECISE_R_HAND
@@ -240,6 +246,9 @@
 	max_damage = 100
 	animal_origin = ALIEN_BODYPART
 
+/obj/item/bodypart/r_arm/crinos
+	max_damage = 125
+
 /obj/item/bodypart/l_leg
 	name = "left leg"
 	desc = "Some athletes prefer to tie their left shoelaces first for good \
@@ -247,7 +256,7 @@
 	icon_state = "default_human_l_leg"
 	attack_verb_continuous = list("kicks", "stomps")
 	attack_verb_simple = list("kick", "stomp")
-	max_damage = 50
+	max_damage = 75
 	body_zone = BODY_ZONE_L_LEG
 	body_part = LEG_LEFT
 	body_damage_coeff = 0.75
@@ -329,6 +338,9 @@
 	max_damage = 100
 	animal_origin = ALIEN_BODYPART
 
+/obj/item/bodypart/l_leg/crinos
+	max_damage = 125
+
 /obj/item/bodypart/r_leg
 	name = "right leg"
 	desc = "You put your right leg in, your right leg out. In, out, in, out, \
@@ -338,7 +350,7 @@
 	icon_state = "default_human_r_leg"
 	attack_verb_continuous = list("kicks", "stomps")
 	attack_verb_simple = list("kick", "stomp")
-	max_damage = 50
+	max_damage = 75
 	body_zone = BODY_ZONE_R_LEG
 	body_part = LEG_RIGHT
 	body_damage_coeff = 0.75
@@ -419,3 +431,6 @@
 	can_be_disabled = FALSE
 	max_damage = 100
 	animal_origin = ALIEN_BODYPART
+
+/obj/item/bodypart/r_leg/crinos
+	max_damage = 125
