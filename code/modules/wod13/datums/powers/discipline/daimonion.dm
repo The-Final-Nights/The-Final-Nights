@@ -131,7 +131,7 @@
 /datum/discipline_power/daimonion/condemnation/activate(mob/living/target)
 	. = ..()
 	if(GLOB.cursed_characters.len == 0 || GLOB.cursed_characters.len > 0 && !(GLOB.cursed_characters.Find(target)))
-		for(var/i in subtypesof(datum/curse/daimonion))
+		for(var/i in subtypesof(/datum/curse/daimonion))
 			var/datum/curse/daimonion/D = new i
 			curses += D
 			if(owner.generation <= D.genrequired)
