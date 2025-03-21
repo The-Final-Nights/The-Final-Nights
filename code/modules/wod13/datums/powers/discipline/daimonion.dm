@@ -119,55 +119,31 @@
 //CONDEMNTATION
 /datum/discipline_power/daimonion/condemnation
 	name = "Condemnation"
-	desc = "Become a bat."
+	desc = "Condemn a fool to suffering."
 
 	level = 5
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
 
 	violates_masquerade = TRUE
 
-	duration_length = 30 SECONDS
-	cooldown_length = 10 SECONDS
-	grouped_powers = list(/datum/discipline_power/daimonion/psychomachia)
+	var/list/curse_names = list()
+	var/list/curses = list()
 
-	var/obj/effect/proc_holder/spell/targeted/shapeshift/bat/bat_shapeshift
-
-/datum/discipline_power/daimonion/condemnation/activate()
+/datum/discipline_power/daimonion/condemnation/activate(mob/living/target)
 	. = ..()
-	if(!bat_shapeshift)
-		bat_shapeshift = new(owner)
+	if(GLOB.cursed_characters.len == 0 || GLOB.cursed_characters.len > 0 && !(GLOB.cursed_characters.Find(target)))
+		for(var/i in subtypesof(datum/curse/daimonion))
+			var/datum/curse/daimonion/D = new i
+			curses += D
+			if(owner.generation <= D.genrequired)
+				curse_names += initial(D.name)
+		to_chat(caster, "<span class='userdanger'><b>The greatest of curses come with the greatest of costs. Are you willing to take the risk of total damnation?</b></span>")
+		var/chosencurse = input(owner, "Pick a curse to bestow:", "Daimonion") as null|anything in curse_names
+		if(chosencurse)
+			for(var/datum/curse/daimonion/C in curses)
+				if(C.name == chosencurse)
+					C.activate(target)
+					owner.cursed_bloodpool += C.bloodcurse
+	else
+		to_chat(owner, "<span class='warning'>This one is already cursed!</span>")
 
-	owner.drop_all_held_items()
-	bat_shapeshift.Shapeshift(owner)
-
-/datum/discipline_power/daimonion/condemnation/deactivate()
-	. = ..()
-	bat_shapeshift.Restore(bat_shapeshift.myshape)
-	owner.Stun(1.5 SECONDS)
-	owner.do_jitter_animation(30)
-
-/datum/discipline_power/daimonion/condemnation/post_gain()
-	. = ..()
-	var/datum/action/antifrenzy/antifrenzy_contract = new()
-	antifrenzy_contract.Grant(owner)
-
-/datum/action/antifrenzy
-	name = "Resist Beast"
-	desc = "Resist Frenzy and Rotshreck by signing a contract with Demons."
-	button_icon_state = "resist"
-	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
-	vampiric = TRUE
-	var/used = FALSE
-
-/datum/action/antifrenzy/Trigger()
-	var/mob/living/carbon/human/user = owner
-	if(user.stat >= UNCONSCIOUS || user.IsSleeping() || user.IsUnconscious() || user.IsParalyzed() || user.IsKnockdown() || user.IsStun() || HAS_TRAIT(user, TRAIT_RESTRAINED) || !isturf(user.loc))
-		return
-	if(used)
-		to_chat(owner, span_warning("You've already signed this contract!"))
-		return
-	used = TRUE
-	user.antifrenzy = TRUE
-	SEND_SOUND(owner, sound('sound/magic/curse.ogg', 0, 0, 50))
-	to_chat(owner, span_warning("You feel control over your Beast, but at what cost..."))
-	qdel(src)
