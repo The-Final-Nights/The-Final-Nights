@@ -419,7 +419,7 @@
 			//Low humanity now makes you look ghoulish
 			if(!clane.enlightenment)
 				if(humanity <= 3)
-					msg += "<span class='danger'><b>Cold, grey skin, long jagged canines, hideously jaundiced eyes! [p_they(TRUE)] [p_are()] a monster!</b></span><br>"
+					msg += "<span class='danger'><b>They seem sickly and malnourished.</b></span><br>"
 				else if(humanity <= 5)
 					msg += "[p_they(TRUE)] [p_have()] an eerie red tint in their eyes.<br>"
 			//Path of enlightenmentoids now seem inhuman at every step of the journey.
