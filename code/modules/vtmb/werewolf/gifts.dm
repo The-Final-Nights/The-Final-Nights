@@ -284,7 +284,7 @@
 	desc = "This Gift allows the Garou to communicate with encountered spirits."
 	button_icon_state = "spirit_speech"
 	//gnosis_req = 1
-	cool_down_timer = 200
+	cool_down_timer = 20 SECONDS
 
 /datum/action/gift/spirit_speech/Trigger()
 	. = ..()
