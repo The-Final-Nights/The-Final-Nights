@@ -26,28 +26,27 @@
 /datum/discipline_power/daimonion/sense_the_sin/activate(mob/living/carbon/human/target)
 	. = ..()
 	if(target.get_total_social() <= 3)
-		to_chat(caster, "Victim is not social or influencing.")
+		to_chat(owner, "Victim is not social or influencing.")
 	if(target.get_total_mentality() <= 3)
-		to_chat(caster, "Victim lacks appropiate willpower.")
+		to_chat(owner, "Victim lacks appropiate willpower.")
 	if(target.get_total_physique() <= 3)
-		to_chat(caster, "Victim's body is weak and feeble.")
+		to_chat(owner, "Victim's body is weak and feeble.")
 	if(isgarou(target))
-		to_chat(caster, "Victim's natural banishment is silver...")
+		to_chat(owner, "Victim's natural banishment is silver...")
 	if(iskindred(target))
 		var/datum/daimonion/daim = new
-		daim.baali_get_clan_weakness(target, caster)
 		if(target.generation >= 10)
-			to_chat(caster, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
+			to_chat(owner, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
 		else
-			to_chat(caster, "Victim's vitae is thick and strong. You can clearly see their fear for fire, it seems that's a kindred.")
+			to_chat(owner, "Victim's vitae is thick and strong. You can clearly see their fear for fire, it seems that's a kindred.")
 	if(isghoul(target))
 		var/mob/living/carbon/human/ghoul = target
 		if(ghoul.mind.enslaved_to)
-			to_chat(caster, "Victim is addicted to vampiric vitae and its true master is [ghoul.mind.enslaved_to]")
+			to_chat(owner, "Victim is addicted to vampiric vitae and its true master is [ghoul.mind.enslaved_to]")
 		else
-			to_chat(caster, "Victim is addicted to vampiric vitae, but is independent and free.")
+			to_chat(owner, "Victim is addicted to vampiric vitae, but is independent and free.")
 	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
-		to_chat(caster, "Victim is a feeble worm with no strengths or visible weaknesses.")
+		to_chat(owner, "Victim is a feeble worm with no strengths or visible weaknesses.")
 
 
 //FEAR OF THE VOID BELOW
@@ -64,10 +63,10 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/pre_activation_checks(mob/living/target)
-	var/mypower = caster.get_total_social()
+	var/mypower = owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
-	if((theirpower >= mypower) || (caster.generation > target.generation))
-		to_chat(caster, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
+	if((theirpower >= mypower) || (owner.generation > target.generation))
+		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
 		return FALSE
 	return TRUE
 
@@ -137,7 +136,7 @@
 			curses += D
 			if(owner.generation <= D.genrequired)
 				curse_names += initial(D.name)
-		to_chat(caster, "<span class='userdanger'><b>The greatest of curses come with the greatest of costs. Are you willing to take the risk of total damnation?</b></span>")
+		to_chat(owner, "<span class='userdanger'><b>The greatest of curses come with the greatest of costs. Are you willing to take the risk of total damnation?</b></span>")
 		var/chosencurse = input(owner, "Pick a curse to bestow:", "Daimonion") as null|anything in curse_names
 		if(chosencurse)
 			for(var/datum/curse/daimonion/C in curses)
