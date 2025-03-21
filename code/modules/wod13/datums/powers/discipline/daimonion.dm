@@ -85,50 +85,21 @@
 //CONFLAGRATION
 /datum/discipline_power/daimonion/conflagration
 	name = "Conflagration"
-	desc = "Turn your hands into deadly claws."
+	desc = "Draw out the destructive essence of the Beyond."
 
 	level = 3
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
 
 	violates_masquerade = TRUE
 
-	cancelable = TRUE
-	duration_length = 30 SECONDS
-	cooldown_length = 10 SECONDS
-
-/datum/discipline_power/daimonion/conflagration/activate()
+/datum/discipline_power/daimonion/conflagration/activate(mob/living/target)
 	. = ..()
-	owner.drop_all_held_items()
-	owner.put_in_r_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
-	owner.put_in_l_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
+	var/turf/start = get_turf(owner)
+	var/obj/projectile/magic/aoe/fireball/baali/created_fireball = new(start)
+	created_fireball.firer = owner
+	created_fireball.preparePixelProjectile(target, start)
+	created_fireball.fire(direct_target = target)
 
-/datum/discipline_power/daimonion/conflagration/deactivate()
-	. = ..()
-	for(var/obj/item/melee/vampirearms/knife/gangrel/claws in owner)
-		qdel(claws)
-
-/datum/discipline_power/daimonion/conflagration/post_gain()
-	. = ..()
-	var/obj/effect/proc_holder/spell/aimed/fireball/baali/balefire = new(owner)
-	owner.mind.AddSpell(balefire)
-
-/obj/effect/proc_holder/spell/aimed/fireball/baali
-	name = "Infernal Fireball"
-	desc = "This spell fires an explosive fireball at a target."
-	school = "evocation"
-	charge_max = 60
-	clothes_req = FALSE
-	invocation = "FR BRTH"
-	invocation_type = INVOCATION_WHISPER
-	range = 20
-	cooldown_min = 20 //10 deciseconds reduction per rank
-	projectile_type = /obj/projectile/magic/aoe/fireball/baali
-	base_icon_state = "infernaball"
-	action_icon_state = "infernaball0"
-	sound = 'sound/magic/fireball.ogg'
-	active_msg = "You prepare to cast your fireball spell!"
-	deactive_msg = "You extinguish your fireball... for now."
-	active = FALSE
 
 //PSYCHOMACHIA
 /datum/discipline_power/daimonion/psychomachia
