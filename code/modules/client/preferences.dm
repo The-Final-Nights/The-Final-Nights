@@ -470,12 +470,20 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(clane?.name == CLAN_NONE)
 						generation_allowed = FALSE
 					if(generation_allowed)
-						if(generation_bonus)
-							dat += " (+[generation_bonus]/[min(MAX_PUBLIC_GENERATION-1, generation-MAX_PUBLIC_GENERATION)])"
-						if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_PUBLIC_GENERATION))
-							dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+						if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
+							if(generation_bonus)
+								dat += " (+[generation_bonus]/[min(MAX_TRUSTED_GENERATION-1, generation-MAX_TRUSTED_GENERATION)])"
+							if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_TRUSTED_GENERATION))
+								dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+							else
+								dat += "<BR>"
 						else
-							dat += "<BR>"
+							if(generation_bonus)
+								dat += " (+[generation_bonus]/[min(MAX_PUBLIC_GENERATION-1, generation-MAX_PUBLIC_GENERATION)])"
+							if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_PUBLIC_GENERATION))
+								dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+							else
+								dat += "<BR>"
 					else
 						dat += "<BR>"
 				if("Kuei-Jin")
@@ -1371,6 +1379,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(is_banned_from(user.ckey, rank))
 				HTML += "<font color=red>[rank]</font></td><td><a href='?_src_=prefs;bancheck=[rank]'> BANNED</a></td></tr>"
 				continue
+			// Jobs can only be whitelisted under Trusted Player, so that's all it checks for.
+			if(job.whitelisted)
+				if(!SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
+					HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> WHITELISTED</font></td></tr>"
+					continue
 			var/required_playtime_remaining = job.required_playtime_remaining(user.client)
 			//<font color=red>text</font> (Zamenil potomu chto slishkom rezhet glaza
 			if(required_playtime_remaining && !bypass)
@@ -2407,7 +2420,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					true_experience -= 20
-					generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_PUBLIC_GENERATION))
+					if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
+						generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_TRUSTED_GENERATION))
+					else
+						generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_PUBLIC_GENERATION))
 
 				if("friend_text")
 					var/new_text = tgui_input_text(user, "What a Friend knows about me:", "Character Preference", max_length = 512)
@@ -2462,11 +2478,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					log_game("[user] has set their Headshot image to '[headshot_link]'.")
 				// TFN EDIT ADDITION END
 				if("change_appearance")
-					if((true_experience < 3) || !slotlocked)
+					if(!slotlocked)
 						return
 
 					slotlocked = FALSE
-					true_experience -= 3
 
 				if("reset_with_bonus")
 					if((clane?.name == "Caitiff") || !generation_bonus)

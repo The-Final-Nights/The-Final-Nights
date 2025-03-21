@@ -66,7 +66,7 @@
 			if(PLAYER_READY_TO_OBSERVE)
 				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)] | <b> Observe </b> \]</p>"
 	else
-		output += "<p><a href='byond://?src=[REF(src)];manifest=1'>View the Kindred Population</a></p>"
+		output += "<p><a href='byond://?src=[REF(src)];manifest=1'>View the Current Population</a></p>"
 		output += "<p><a href='byond://?src=[REF(src)];late_join=1'>Join Game!</a></p>"
 		output += "<p>[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)]</p>"
 
@@ -290,6 +290,8 @@
 			return "[jobtitle] is unavailable."
 		if(JOB_UNAVAILABLE_BANNED)
 			return "You are currently banned from [jobtitle]."
+		if(JOB_UNAVAILABLE_WHITELISTED)
+			return "You do not have the relevant whitelist for [jobtitle]."
 		if(JOB_UNAVAILABLE_PLAYTIME)
 			return "You do not have enough relevant playtime for [jobtitle]."
 		if(JOB_UNAVAILABLE_ACCOUNTAGE)
@@ -317,6 +319,9 @@
 		return JOB_UNAVAILABLE_SLOTFULL
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
+	if(job.whitelisted)
+		if(!SSwhitelists.is_whitelisted(ckey, TRUSTED_PLAYER))
+			return JOB_UNAVAILABLE_WHITELISTED
 	if(QDELETED(src))
 		return JOB_UNAVAILABLE_GENERIC
 	if(!job.player_old_enough(client) && !bypass)
@@ -585,7 +590,7 @@
 	client.crew_manifest_delay = world.time + (1 SECONDS)
 
 	var/dat = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head><body>"
-	dat += "<h4>Kindred population</h4>"
+	dat += "<h4>Current population</h4>"
 	dat += GLOB.data_core.get_manifest_html()
 
 	src << browse(dat, "window=manifest;size=387x420;can_close=1")

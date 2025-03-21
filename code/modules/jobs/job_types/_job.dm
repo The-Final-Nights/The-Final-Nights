@@ -82,7 +82,8 @@
 	var/list/species_slots = list()
 	///List of Bloodlines that are allowed to do this job.
 	var/list/allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry")
-
+	///If this job requires whitelisting before it can be selected for characters.
+	var/whitelisted = FALSE
 	// List for phone shit
 	var/my_contact_is_important = FALSE
 	// Only for display in memories

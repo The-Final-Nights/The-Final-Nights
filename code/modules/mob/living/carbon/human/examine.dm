@@ -447,7 +447,7 @@
 			if (iskindred(src))
 				var/mob/living/carbon/human/vampire = src
 				weaver_taint++
-
+				msg += "<span class='purple'><i>You recognize their scent as cold and lifeless.</i></span><br>"
 				if ((humanity < 7) || client?.prefs?.enlightenment)
 					wyrm_taint++
 
@@ -456,7 +456,7 @@
 
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
 				var/mob/living/carbon/wolf = src
-
+				msg += "<span class='purple'><i>You recognize their scent as Garou.</i></span><br>"
 				switch(wolf.auspice.tribe)
 					if ("Wendigo")
 						wyld_taint++

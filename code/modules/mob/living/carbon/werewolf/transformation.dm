@@ -28,6 +28,8 @@ INITIALIZE_IMMEDIATE(/obj/werewolf_holder/transformation)
 	second.adjustCloneLoss(round((first.getCloneLoss()/100)*percentage)-second.getCloneLoss())
 
 /obj/werewolf_holder/transformation/proc/trans_gender(mob/living/carbon/trans, form)
+	if(trans.stat == DEAD)
+		return
 	if(!given_quirks)
 		given_quirks = TRUE
 		if(HAS_TRAIT(trans, TRAIT_DANCER))

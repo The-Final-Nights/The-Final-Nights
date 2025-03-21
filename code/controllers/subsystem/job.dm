@@ -96,6 +96,9 @@ SUBSYSTEM_DEF(job)
 			return FALSE
 		if(is_banned_from(player.ckey, rank) || QDELETED(player))
 			return FALSE
+		if(job.whitelisted)
+			if(!SSwhitelists.is_whitelisted(player.ckey, TRUSTED_PLAYER) || QDELETED(player))
+				return FALSE
 		if(!job.player_old_enough(player.client) && !bypass)
 			return FALSE
 		if(job.required_playtime_remaining(player.client) && !bypass)
@@ -132,6 +135,10 @@ SUBSYSTEM_DEF(job)
 		if(is_banned_from(player.ckey, job.title) || QDELETED(player))
 			JobDebug("FOC isbanned failed, Player: [player]")
 			continue
+		if(job.whitelisted)
+			if(!SSwhitelists.is_whitelisted(player.ckey, TRUSTED_PLAYER) || QDELETED(player))
+				JobDebug("FOC player not whitelisted, Player: [player]")
+				continue
 		if(!job.player_old_enough(player.client) && !bypass)
 			JobDebug("FOC player not old enough, Player: [player]")
 			continue
@@ -189,6 +196,14 @@ SUBSYSTEM_DEF(job)
 				break
 			JobDebug("GRJ isbanned failed, Player: [player], Job: [job.title]")
 			continue
+
+		if(job.whitelisted)
+			if(!SSwhitelists.is_whitelisted(player.ckey, TRUSTED_PLAYER) || QDELETED(player))
+				if(QDELETED(player))
+					JobDebug("GRJ is_whitelisted failed, Player deleted")
+					break
+				JobDebug("GRJ is_whitelisted failed, Player: [player], Job: [job.title]")
+				continue
 
 		if(!job.player_old_enough(player.client))
 			JobDebug("GRJ player not old enough, Player: [player]")
@@ -395,6 +410,11 @@ SUBSYSTEM_DEF(job)
 				if(is_banned_from(player.ckey, job.title))
 					JobDebug("DO isbanned failed, Player: [player], Job:[job.title]")
 					continue
+
+				if(job.whitelisted)
+					if(!SSwhitelists.is_whitelisted(player.ckey, TRUSTED_PLAYER))
+						JobDebug("DO is_whitelisted failed, Player: [player], Job: [job.title]")
+						continue
 
 				if(QDELETED(player))
 					JobDebug("DO player deleted during job ban check")

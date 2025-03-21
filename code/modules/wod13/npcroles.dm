@@ -89,7 +89,7 @@
 		"You know who I work for?",
 		"Get the hell outta here, 'fore I get my gang on yo' ass.",
 		"You need sumn' punk?",
-		"Get lost, liberal.",
+		"Get lost, loser.",
 		"Get outta this side of town.",
 		"Think you scare me? You know who I work for?",
 		"Think you're hot shit?"
@@ -97,10 +97,9 @@
 	neutral_phrases = list(
 		"Why you starin' at me like that?",
 		"Another dumbass tryin' to look threatening.",
-		"Halloween's over, what's with the costumes.",
-		"I think that whore gave me the clap.",
+		"Halloween is over, what's with the costumes?",
 		"Gotta get home soon, family to feed and all that.",
-		"Get lost, liberal.",
+		"Get lost, loser.",
 		"I think.. I miss my wife.",
 		"What? You need somethin?",
 		"Outta my way.",
@@ -247,6 +246,7 @@
 		"I'm late, don't interrupt me.",
 		"Check the bar if you want somebody to bother...",
 		"Can't speak right now.",
+		"It's 2015, get over it.",
 		"Goodnight, I guess?",
 		"Guh...",
 		"I dunno what to say.",
@@ -372,9 +372,8 @@
 		"Do you need something?",
 		"Do I really need to answer?",
 		"I'm late.",
-		"Pervert...",
 		"Can't speak right now.",
-		"Buy yourself a watch",
+		"Buy yourself an iPhone or something.",
 		"Hey.",
 		"Go away."
 	)
@@ -383,9 +382,9 @@
 		"Do you need something?",
 		"Do I really need to answer?",
 		"I'm late.",
-		"Pervert...",
 		"Can't speak right now.",
-		"Buy yourself a watch",
+		"Buy yourself an iPhone or something.",
+		"It's 2015, get over it.",
 		"Hey.",
 		"Go away."
 	)

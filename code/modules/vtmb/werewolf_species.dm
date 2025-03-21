@@ -13,7 +13,7 @@
 	heatmod = 1
 	burnmod = 1
 	dust_anim = "dust-h"
-	whitelisted = TRUE
+	whitelisted = FALSE
 	selectable = TRUE
 	var/glabro = FALSE
 

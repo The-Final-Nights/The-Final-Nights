@@ -198,12 +198,12 @@
 	pixel_w = -8
 //	deathsound = 'sound/voice/hiss6.ogg'
 	bodyparts = list(
-		/obj/item/bodypart/chest,
-		/obj/item/bodypart/head,
-		/obj/item/bodypart/l_arm,
-		/obj/item/bodypart/r_arm,
-		/obj/item/bodypart/r_leg,
-		/obj/item/bodypart/l_leg,
+		/obj/item/bodypart/chest/crinos,
+		/obj/item/bodypart/head/crinos,
+		/obj/item/bodypart/l_arm/crinos,
+		/obj/item/bodypart/r_arm/crinos,
+		/obj/item/bodypart/r_leg/crinos,
+		/obj/item/bodypart/l_leg/crinos,
 		)
 
 	werewolf_armor = 30

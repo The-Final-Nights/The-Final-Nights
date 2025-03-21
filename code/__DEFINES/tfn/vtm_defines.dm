@@ -60,3 +60,9 @@
 #define AURA_GAROU "aura_bright"
 #define AURA_GHOUL "aura_ghoul"
 #define AURA_TRUE_FAITH "#ffe12f"
+
+/**
+ * Whitelist defines
+ */
+
+#define TRUSTED_PLAYER "trusted_player"
