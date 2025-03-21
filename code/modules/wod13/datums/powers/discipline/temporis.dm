@@ -156,6 +156,7 @@
 	. = ..()
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/temporis5)
 	owner.next_move_modifier *= 0.25
+	owner.dexterity += 6 //6 because temporis is just that much better
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(temporis_visual))
 	RegisterSignal(owner, COMSIG_POWER_PRE_ACTIVATION, PROC_REF(celerity_explode))
 
@@ -163,6 +164,7 @@
 	. = ..()
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/temporis5)
 	owner.next_move_modifier /= 0.25
+	owner.dexterity -= 6 //6 because temporis is just that much better
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 	UnregisterSignal(owner, COMSIG_POWER_PRE_ACTIVATION)
 
