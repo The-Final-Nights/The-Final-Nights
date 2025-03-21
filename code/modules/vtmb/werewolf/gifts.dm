@@ -300,7 +300,7 @@
 	button_icon_state = "blur_of_the_milky_eye"
 	rage_req = 2
 	//gnosis_req = 1
-	cool_down_timer = 200
+	cool_down_timer = 20 SECONDS
 
 /datum/action/gift/blur_of_the_milky_eye/Trigger()
 	. = ..()
