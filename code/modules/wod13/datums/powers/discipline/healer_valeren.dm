@@ -85,7 +85,7 @@
 				to_chat(target, span_notice("SOMETHING PULLS YOU FROM THE BRINK."))
 			else if(HAS_TRAIT(target, TRAIT_TORPOR))
 				target.cure_torpor()
-				to_chat(target, "<span class='notice'>YOUR DREAMS ARE RUDELY INTERRUPTED.</span>")
+				to_chat(target, span_notice("YOUR DREAMS ARE RUDELY INTERRUPTED."))
 
 			var/datum/wound/wound = pick(human_target.all_wounds)
 			wound.remove_wound()
