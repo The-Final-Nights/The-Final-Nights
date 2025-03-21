@@ -110,6 +110,8 @@
 
 	level = 4
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
+	target_type = TARGET_LIVING
+	range = 7
 
 	violates_masquerade = FALSE
 
@@ -125,7 +127,8 @@
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
-
+	target_type = TARGET_LIVING
+	range = 7
 	violates_masquerade = TRUE
 
 	var/list/curse_names = list()
