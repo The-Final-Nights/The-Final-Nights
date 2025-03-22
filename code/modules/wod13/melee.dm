@@ -399,7 +399,8 @@
 	name = "claws"
 	icon_state = "gangrel"
 	w_class = WEIGHT_CLASS_BULKY
-	force = 17
+	force = 35
+	damtype = CLONE
 	armour_penetration = 100	//It's magical damage
 	block_chance = 20
 	item_flags = DROPDEL
@@ -409,13 +410,13 @@
 /obj/item/melee/vampirearms/knife/gangrel/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)
 		return
-	if(isliving(target))
-		var/mob/living/L = target
-		L.apply_damage(18, CLONE)
+	if(isstructure(target)) //This is literally just so that the claws can still smash barricades and windows without whiffing.
+		var/obj/structure/L = target
+		L.take_damage(35,BRUTE,MELEE, 0)
 
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"
-	force = 7
+	force = 23
 	armour_penetration = 100
 	block_chance = 0
 	icon_state = "lasombra"
@@ -426,8 +427,10 @@
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		L.apply_damage(16, CLONE)
 		L.apply_damage(12, BURN)
+	else if(isstructure(target))
+		var/obj/structure/L = target
+		L.take_damage(35,BRUTE,MELEE, 0)
 
 /obj/item/melee/touch_attack/werewolf
 	name = "\improper falling touch"
