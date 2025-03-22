@@ -418,39 +418,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "</tr></table>"
 
 			dat += "<h2>[make_font_cool("BODY")]</h2>"
-			/*
-			dat += "<BR>"
-			var/max_death = 6
-			if(pref_species.name == "Vampire")
-				switch(generation)
-					if(13)
-						max_death = 6
-					if(12)
-						max_death = 6
-					if(11)
-						max_death = 5
-					if(10)
-						max_death = 4
-					if(9)
-						max_death = 3
-					if(8)
-						max_death = 2
-					if(7)
-						max_death = 2
-					if(6)
-						max_death = 1
-					if(5)
-						max_death = 1
-					if(4)
-						max_death = 1
-					if(3)
-						max_death = 1
-
-			dat += "<b>[pref_species.name == "Vampire" ? "Torpor" : "Clinical Death"] Count:</b> [torpor_count]/[max_death]"
-			if(true_experience >= 3*(14-generation) && torpor_count > 0)
-				dat += " <a href='?_src_=prefs;preference=torpor_restore;task=input'>Restore ([5*(14-generation)])</a><BR>"
-			dat += "<BR>"
-			*/
 			dat += "<a href='?_src_=prefs;preference=all;task=random'>Random Body</A> "
 
 			dat += "<table width='100%'><tr><td width='24%' valign='top'>"
@@ -2361,14 +2328,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						po += 1
 						yin += 1
 						yang += 1
-
-				/*
-				if("torpor_restore")
-					if(torpor_count != 0 && true_experience >= 3*(14-generation))
-						torpor_count = 0
-						true_experience = true_experience-(3*(14-generation))
-				*/
-
 
 				if("dharmatype")
 					if(slotlocked)
