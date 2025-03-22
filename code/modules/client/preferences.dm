@@ -171,8 +171,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/discipline3type
 	var/discipline4type
 
+	//Legacy experience counter per each character's exp total. DO NOT USE THIS ANYMORE.
+	var/true_experience = 0
+
+	//New experience counter, global for all characters per client.
+	var/player_experience = 0
+	//Amount of EXP used on the current character, this is returned when a character is reset.
+	var/experience_used_on_character = 0
+
 	//Character sheet stats
-	var/true_experience = 50
 	var/torpor_count = 0
 
 	//linked lists determining known Disciplines and their known ranks
@@ -235,7 +242,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/chi_levels = list()
 
 /datum/preferences/proc/add_experience(amount)
-	true_experience = clamp(true_experience + amount, 0, 1000)
+	player_experience = clamp(player_experience + amount, 0, 1000)
 
 /datum/preferences/proc/reset_character()
 	slotlocked = 0
@@ -280,7 +287,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	random_species()
 	random_character()
 	body_model = rand(1, 3)
-	true_experience = 50
+	experience_used_on_character = 0
 	real_name = random_unique_name(gender)
 	headshot_link = null // TFN EDIT
 	save_character()
@@ -424,7 +431,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			switch(pref_species.name)
 				if("Vampire")
 					dat += "<b>Path of [enlightenment ? "Enlightenment" : "Humanity"]:</b> [humanity]/10"
-					if ((true_experience >= (humanity * 2)) && (humanity < 10))
+					if ((player_experience >= (humanity * 2)) && (humanity < 10))
 						dat += " <a href='?_src_=prefs;preference=path;task=input'>Increase [enlightenment ? "Enlightenment" : "Humanity"] ([humanity * 2])</a>"
 					dat += "<br>"
 					if(!slotlocked)
@@ -438,14 +445,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 							if(generation_bonus)
 								dat += " (+[generation_bonus]/[min(MAX_TRUSTED_GENERATION-1, generation-MAX_TRUSTED_GENERATION)])"
-							if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_TRUSTED_GENERATION))
+							if(player_experience >= 20 && generation_bonus < max(0, generation-MAX_TRUSTED_GENERATION))
 								dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
 							else
 								dat += "<BR>"
 						else
 							if(generation_bonus)
 								dat += " (+[generation_bonus]/[min(MAX_PUBLIC_GENERATION-1, generation-MAX_PUBLIC_GENERATION)])"
-							if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_PUBLIC_GENERATION))
+							if(player_experience >= 20 && generation_bonus < max(0, generation-MAX_PUBLIC_GENERATION))
 								dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
 							else
 								dat += "<BR>"
@@ -455,7 +462,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/datum/dharma/D = new dharma_type()
 					dat += "<b>Dharma:</b> [D.name] [dharma_level]/6 <a href='?_src_=prefs;preference=dharmatype;task=input'>Switch</a><BR>"
 					dat += "[D.desc]<BR>"
-					if(true_experience >= min((dharma_level * 5), 20) && (dharma_level < 6))
+					if(player_experience >= min((dharma_level * 5), 20) && (dharma_level < 6))
 						var/dharma_cost = min((dharma_level * 5), 20)
 						dat += " <a href='?_src_=prefs;preference=dharmarise;task=input'>Raise Dharmic Enlightenment ([dharma_cost])</a><BR>"
 					dat += "<b>P'o Personality</b>: [po_type] <a href='?_src_=prefs;preference=potype;task=input'>Switch</a><BR>"
@@ -490,7 +497,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Cruelty:</b> [build_attribute_score(blood, A.archetype_additional_blood, blood_price, "blood")]"
 			dat += "<b>Lockpicking:</b> [build_attribute_score(lockpicking, A.archetype_additional_lockpicking, lockpicking_price, "lockpicking")]"
 			dat += "<b>Athletics:</b> [build_attribute_score(athletics, A.archetype_additional_athletics, athletics_price, "athletics")]"
-			dat += "Experience rewarded: [true_experience]<BR>"
+			dat += "Experience rewarded: [player_experience]<BR>"
 			if(pref_species.name == "Werewolf")
 				dat += "<h2>[make_font_cool("TRIBE")]</h2>"
 				dat += "<br><b>Werewolf Name:</b> "
@@ -498,7 +505,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<b>Auspice:</b> <a href='?_src_=prefs;preference=auspice;task=input'>[auspice.name]</a><BR>"
 				dat += "Description: [auspice.desc]<BR>"
 				dat += "<b>Power:</b> •[auspice_level > 1 ? "•" : "o"][auspice_level > 2 ? "•" : "o"]([auspice_level])"
-				if(true_experience >= 10*auspice_level && auspice_level != 3)
+				if(player_experience >= 10*auspice_level && auspice_level != 3)
 					dat += "<a href='?_src_=prefs;preference=auspice_level;task=input'>Increase ([10*auspice_level])</a>"
 				dat += "<b>Initial Rage:</b> •[auspice.start_rage > 1 ? "•" : "o"][auspice.start_rage > 2 ? "•" : "o"][auspice.start_rage > 3 ? "•" : "o"][auspice.start_rage > 4 ? "•" : "o"]([auspice.start_rage])<BR>"
 				var/gifts_text = ""
@@ -603,7 +610,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						cost = discipline_level * 7
 
 					dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"]([discipline_level])"
-					if((true_experience >= cost) && (discipline_level != 5))
+					if((player_experience >= cost) && (discipline_level != 5))
 						dat += "<a href='?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
 					else
 						dat += "<BR>"
@@ -617,7 +624,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (discipline.clan_restricted)
 							possible_new_disciplines -= discipline_type
 						qdel(discipline)
-					if (possible_new_disciplines.len && (true_experience >= 10))
+					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
 			if(pref_species.name == "Ghoul")
@@ -629,7 +636,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					qdel(discipline)
 
 				var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
-				if (possible_new_disciplines.len && (true_experience >= 10))
+				if (possible_new_disciplines.len && (player_experience >= 10))
 					dat += "<a href='?_src_=prefs;preference=newghouldiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
 			if (pref_species.name == "Kuei-Jin")
@@ -646,7 +653,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						cost = discipline_level * 6
 
 					dat += "<b>[discipline.name]</b> ([discipline.discipline_type]): [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"]([discipline_level])"
-					if((true_experience >= cost) && (discipline_level != 5))
+					if((player_experience >= cost) && (discipline_level != 5))
 						dat += "<a href='?_src_=prefs;preference=discipline;task=input;upgradechidiscipline=[i]'>Learn ([cost])</a><BR>"
 					else
 						dat += "<BR>"
@@ -677,10 +684,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if(initial(C.discipline_type) == "Chi")
 							if(has_chi_one)
 								possible_new_disciplines -= i
-				if (possible_new_disciplines.len && (true_experience >= 10))
+				if (possible_new_disciplines.len && (player_experience >= 10))
 					dat += "<a href='?_src_=prefs;preference=newchidiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
-			if(true_experience >= 3 && slotlocked)
+			if(player_experience >= 3 && slotlocked)
 				dat += "<a href='?_src_=prefs;preference=change_appearance;task=input'>Change Appearance (3)</a><BR>"
 			if(generation_bonus)
 				dat += "<a href='?_src_=prefs;preference=reset_with_bonus;task=input'>Create new character with generation bonus ([generation]-[generation_bonus])</a><BR>"
@@ -1255,7 +1262,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	for(var/c in 1 to leftover_circles)
 		dat += "o"
 	var/real_price = attribute ? (attribute*price) : price //In case we have an attribute of 0, we don't multiply by 0
-	if((true_experience >= real_price) && (attribute < ATTRIBUTE_BASE_LIMIT))
+	if((player_experience >= real_price) && (attribute < ATTRIBUTE_BASE_LIMIT))
 		dat += "<a href='?_src_=prefs;preference=[variable_name];task=input'>Increase ([real_price])</a>"
 	dat += "<br>"
 	return dat
@@ -2004,7 +2011,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						eye_color = sanitize_hexcolor(new_eyes)
 
 				if("newdiscipline")
-					if((true_experience < 10) || !(pref_species.id == "kindred") || !(clane.name == "Caitiff"))
+					if((player_experience < 10) || !(pref_species.id == "kindred") || !(clane.name == "Caitiff"))
 						return
 
 					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
@@ -2017,10 +2024,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_discipline)
 						discipline_types += new_discipline
 						discipline_levels += 1
-						true_experience -= 10
+						player_experience -= 10
 
 				if("newghouldiscipline")
-					if((true_experience < 10) || !(pref_species.id == "ghoul"))
+					if((player_experience < 10) || !(pref_species.id == "ghoul"))
 						return
 
 					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
@@ -2028,10 +2035,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_discipline)
 						discipline_types += new_discipline
 						discipline_levels += 1
-						true_experience -= 10
+						player_experience -= 10
 
 				if("newchidiscipline")
-					if((true_experience < 10) || !(pref_species.id == "kuei-jin"))
+					if((player_experience < 10) || !(pref_species.id == "kuei-jin"))
 						return
 
 					var/list/possible_new_disciplines = subtypesof(/datum/chi_discipline) - discipline_types
@@ -2063,7 +2070,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_discipline)
 						discipline_types += new_discipline
 						discipline_levels += 1
-						true_experience -= 10
+						player_experience -= 10
 
 				if("werewolf_color")
 					if(slotlocked || !(pref_species.id == "garou"))
@@ -2194,10 +2201,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								clane_accessory = pick(clane.accessories)
 				if("auspice_level")
 					var/cost = max(10, auspice_level * 10)
-					if ((true_experience < cost) || (auspice_level >= 3))
+					if ((player_experience < cost) || (auspice_level >= 3))
 						return
 
-					true_experience -= cost
+					player_experience -= cost
 					auspice_level = max(1, auspice_level + 1)
 
 				if("physique")
@@ -2280,10 +2287,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						else if (clane.clane_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 5
 
-						if ((true_experience < cost) || (discipline_level >= 5))
+						if ((player_experience < cost) || (discipline_level >= 5))
 							return
 
-						true_experience -= cost
+						player_experience -= cost
 						discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
 
 					if(pref_species.id == "kuei-jin")
@@ -2294,18 +2301,18 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (discipline_level <= 0)
 							cost = 10
 
-						if ((true_experience < cost) || (discipline_level >= 5))
+						if ((player_experience < cost) || (discipline_level >= 5))
 							return
 
-						true_experience -= cost
+						player_experience -= cost
 						discipline_levels[a] = min(5, max(1, discipline_levels[a] + 1))
 
 				if("path")
 					var/cost = max(2, humanity * 2)
-					if ((true_experience < cost) || (humanity >= 10) || !(pref_species.id == "kindred"))
+					if ((player_experience < cost) || (humanity >= 10) || !(pref_species.id == "kindred"))
 						return
 
-					true_experience -= cost
+					player_experience -= cost
 					humanity = max(1, humanity + 1)
 
 				if("pathof")
@@ -2315,10 +2322,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					enlightenment = !enlightenment
 
 				if("dharmarise")
-					if ((true_experience < min((dharma_level * 5), 20)) || (dharma_level >= 6) || !(pref_species.id == "kuei-jin"))
+					if ((player_experience < min((dharma_level * 5), 20)) || (dharma_level >= 6) || !(pref_species.id == "kuei-jin"))
 						return
 
-					true_experience -= min((dharma_level * 5), 20)
+					player_experience -= min((dharma_level * 5), 20)
 					dharma_level = clamp(dharma_level + 1, 1, 6)
 
 					if (dharma_level >= 6)
@@ -2373,10 +2380,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						po = max_limit-sett
 
 				if("generation")
-					if((clane?.name == "Caitiff") || (true_experience < 20))
+					if((clane?.name == "Caitiff") || (player_experience < 20))
 						return
 
-					true_experience -= 20
+					player_experience -= 20
 					if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 						generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_TRUSTED_GENERATION))
 					else
@@ -3018,6 +3025,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("reset_all")
 					if (tgui_alert(user, "Are you sure you want to reset your character?", "Confirmation", list("Yes", "No")) != "Yes")
 						return
+					player_experience += experience_used_on_character
 					reset_character()
 
 				if("changeslot")
@@ -3040,9 +3048,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	return TRUE
 
 /datum/preferences/proc/handle_upgrade(var/number, var/cost)
-	if ((true_experience < cost) || (number >= ATTRIBUTE_BASE_LIMIT))
+	if ((player_experience < cost) || (number >= ATTRIBUTE_BASE_LIMIT))
 		return FALSE
-	true_experience -= cost
+	player_experience -= cost
 	return TRUE
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE)
