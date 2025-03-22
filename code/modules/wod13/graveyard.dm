@@ -57,13 +57,6 @@ SUBSYSTEM_DEF(graveyard)
 					if(L.mind.assigned_role == "Graveyard Keeper")
 						if(L.client && L.key)
 							total_good += 1
-//							var/datum/preferences/P = GLOB.preferences_datums[ckey(L.key)]
-//							if(P)
-//								L.AdjustMasquerade(1)
-//								var/mode = 1
-//								if(HAS_TRAIT(L, TRAIT_NON_INT))
-//									mode = 2
-//								P.exper = min(calculate_mob_max_exper(L), P.exper+((250+L.experience_plus)/mode))
 
 /obj/vampgrave
 	icon = 'code/modules/wod13/props.dmi'

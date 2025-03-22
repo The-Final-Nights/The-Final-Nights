@@ -160,8 +160,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/humanity = 7
 
 	//Legacy
-	var/exper = 1440
-	var/exper_plus = 0
 
 	var/discipline1level = 1
 	var/discipline2level = 1

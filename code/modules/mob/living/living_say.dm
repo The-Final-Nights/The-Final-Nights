@@ -299,12 +299,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 			if(EX.key && EX.client)
 				if(EX.last_message != message)
 					EX.last_message = message
-//					var/datum/preferences/P = GLOB.preferences_datums[ckey(EX.key)]
-//					if(P)
 					EX.total_erp += length_char(message)
-//						P.exper = min(calculate_mob_max_exper(EX), P.exper+kal)
-//						P.save_preferences()
-//						P.save_character()
 
 	// Recompose message for AI hrefs, language incomprehension.
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)

@@ -1331,9 +1331,6 @@
 				total_corpses = 0
 				playsound(get_turf(src), 'sound/magic/demon_dies.ogg', 100, TRUE)
 				new /mob/living/simple_animal/hostile/baali_guard(get_turf(src))
-//			var/datum/preferences/P = GLOB.preferences_datums[ckey(user.key)]
-//			if(P)
-//				P.exper = min(calculate_mob_max_exper(user), P.exper+15)
 
 /obj/structure/vamptree
 	name = "tree"
