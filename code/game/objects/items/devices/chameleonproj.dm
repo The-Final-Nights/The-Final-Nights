@@ -19,6 +19,10 @@
 			if(iskindred(src))
 				if(clane)
 					if(clane.name == "Malkavian")
+						if (job in GLOB.command_positions)
+							return
+						if (job in GLOB.camarilla_council_positions)
+							return
 						for(var/mob/living/carbon/human/H in GLOB.malkavian_list)
 							if(H)
 //							if(H != src)
