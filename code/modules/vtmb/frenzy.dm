@@ -189,13 +189,6 @@
 
 /datum/species/kindred/spec_life(mob/living/carbon/human/H)
 	. = ..()
-	if(H.clane?.name == "Baali")
-		if(istype(get_area(H), /area/vtm/church))
-			if(prob(25))
-				to_chat(H, "<span class='warning'>You don't belong here!</span>")
-				H.adjustFireLoss(20)
-				H.adjust_fire_stacks(6)
-				H.IgniteMob()
 	//FIRE FEAR
 	if(!H.antifrenzy && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
 		var/fearstack = 0
