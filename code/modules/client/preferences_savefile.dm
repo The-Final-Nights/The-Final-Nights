@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	38
+#define SAVEFILE_VERSION_MAX	39
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -89,6 +89,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 
 	if(current_version < 39)
+		player_experience += true_experience
+		true_experience = 0
 		WRITE_FILE(S["player_experience"], player_experience)
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
@@ -723,7 +725,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["diablerist"]			, diablerist)
 	WRITE_FILE(S["humanity"]			, humanity)
 	WRITE_FILE(S["enlightement"]			, enlightenment)
-	WRITE_FILE(S["true_experience"]			, true_experience)
 	WRITE_FILE(S["auspice_level"]			, auspice_level)
 	WRITE_FILE(S["physique"]		, physique)
 	WRITE_FILE(S["dexterity"]		, dexterity)
