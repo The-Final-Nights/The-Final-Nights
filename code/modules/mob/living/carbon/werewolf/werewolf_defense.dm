@@ -1,10 +1,4 @@
 
-/mob/living/carbon/werewolf/get_eye_protection()
-	return ..() + 2 //potential cyber implants + natural eye protection
-
-/mob/living/carbon/werewolf/get_ear_protection()
-	return 2 //no ears
-
 /mob/living/carbon/werewolf/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	..(AM, skipcatch = TRUE, hitpush = FALSE)
 

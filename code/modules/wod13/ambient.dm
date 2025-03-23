@@ -6,6 +6,7 @@
 /area
 	var/fire_controled = FALSE
 	var/fire_controling = FALSE
+	var/zone_type = "masquerade"
 	//Chi stuff
 	var/yang_chi = 1
 	var/yin_chi = 1
@@ -21,7 +22,6 @@
 	wall_rating = VERY_HIGH_WALL_RATING
 	var/music
 	var/upper = TRUE
-	var/zone_type = "masquerade"
 
 
 /area/vtm/powered(chan)
