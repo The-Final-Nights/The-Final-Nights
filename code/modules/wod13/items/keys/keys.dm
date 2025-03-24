@@ -302,15 +302,15 @@
 	)
 	color = "#e8ff29"
 
-//===========================CLINIC KEYS===========================
+//===========================HOSPITAL KEYS===========================
 /obj/item/vamp/keys/clinic
-	name = "Clinic keys"
+	name = "Hospital keys"
 	accesslocks = list(
 		"clinic"
 	)
 
 /obj/item/vamp/keys/clinics_director
-	name = "Clinic director keys"
+	name = "Hospital director keys"
 	accesslocks = list(
 		"clinic",
 		"director"

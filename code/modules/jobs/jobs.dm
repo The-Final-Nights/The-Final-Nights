@@ -5,7 +5,7 @@ GLOBAL_LIST_INIT(leader_positions, list(
 	"Police Chief",
 	"Dealer",
     "Capo",
-	"Clinic Director"
+	"Hospital Director"
 	))
 
 GLOBAL_LIST_INIT(command_positions, list(
@@ -61,7 +61,7 @@ GLOBAL_LIST_INIT(services_positions, list(
 ))
 
 GLOBAL_LIST_INIT(clinic_positions, list(
-    "Clinic Director",
+    "Hospital Director",
     "Doctor"
 ))
 

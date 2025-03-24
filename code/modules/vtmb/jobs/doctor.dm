@@ -1,7 +1,7 @@
 
 /datum/job/vamp/vdoctor
 	title = "Doctor"
-	department_head = list("Clinic Director")
+	department_head = list("Hospital Director")
 	faction = "Vampire"
 	total_positions = 4
 	spawn_positions = 4
@@ -24,10 +24,10 @@
 	bounty_types = CIV_JOB_MED
 
 	v_duty = "Help your fellow kindred in all matters medicine related. Sell blood. Keep your human colleagues ignorant."
-	duty = "Collect blood by helping mortals at the Clinic."
+	duty = "Collect blood by helping mortals at the Hospital."
 	experience_addition = 15
 	allowed_bloodlines = list("Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
-	known_contacts = list("Clinic Director")
+	known_contacts = list("Hospital Director")
 
 /datum/outfit/job/vdoctor
 	name = "Doctor"
@@ -55,7 +55,7 @@
 
 
 /datum/job/vamp/vdirector
-	title = "Clinic Director"
+	title = "Hospital Director"
 	department_head = list("Seneschal")
 	faction = "Vampire"
 	total_positions = 1
@@ -78,13 +78,13 @@
 	display_order = JOB_DISPLAY_ORDER_CLINICS_DIRECTOR
 	bounty_types = CIV_JOB_MED
 
-	v_duty = "Keep Saint John's clinic up and running. Sell blood. Keep your human colleagues ignorant."
-	duty = "Keep Saint John's clinic up and running. Collect blood by helping mortals at the Clinic."
+	v_duty = "Keep Ludmilla General Hospital up and running. Sell blood. Keep your human colleagues ignorant."
+	duty = "Keep Ludmilla General Hospital up and running. Collect blood by helping mortals at the Hospital."
 	experience_addition = 15
 	allowed_bloodlines = list("Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
 
 /datum/outfit/job/vdirector
-	name = "Clinic Director"
+	name = "Hospital Director"
 	jobtype = /datum/job/vamp/vdirector
 
 	ears = /obj/item/p25radio

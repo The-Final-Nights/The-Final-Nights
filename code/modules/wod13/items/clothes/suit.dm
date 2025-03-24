@@ -363,8 +363,8 @@
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 90, WOUND = 10)
 
 /obj/item/clothing/suit/vampire/labcoat/director
-	name = "clinic director's labcoat"
-	desc = "Special labcoat for clinic director with Saint John Clinic's emblems."
+	name = "hospital director's labcoat"
+	desc = "Special labcoat for the director with Ludmilla General Hospital's emblem."
 	icon_state = "director"
 
 /obj/item/clothing/suit/vampire/fancy_gray

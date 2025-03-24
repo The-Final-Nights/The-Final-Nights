@@ -389,7 +389,7 @@
 	set_frequency(FREQ_SECURITY)
 
 /obj/item/radio/clinic
-	name = "clinic radio"
+	name = "hospital radio"
 	subspace_transmission = FALSE
 	subspace_switchable = FALSE
 	keyslot = new /obj/item/encryptionkey/headset_medsci
