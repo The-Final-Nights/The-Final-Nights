@@ -1,3 +1,5 @@
+GLOBAL_LIST_INIT(phone_chat_messages, list())
+
 /proc/create_unique_phone_number(var/exchange = 513)
 	if(length(GLOB.subscribers_numbers_list) < 1)
 		create_subscribers_numbers()
@@ -41,6 +43,7 @@
 	var/closed = TRUE
 	var/owner = ""
 	var/number
+	var/nickname = ""
 	var/obj/item/vamp/phone/online
 	var/talking = FALSE
 	var/choosed_number = ""
@@ -52,6 +55,7 @@
 	var/toggle_published_contacts = FALSE
 	var/list/published_numbers_contacts = list()
 	var/list/phone_history_list = list()
+	var/chat_interface = "PhoneChat"
 
 	/// Phone icon states
 	var/open_state = "phone2"
@@ -152,6 +156,10 @@
 			if(P.number == online.number)
 				data["calling_user"] = P.name
 
+	// Add chat messages and nickname to the data
+	data["chat_messages"] = GLOB.phone_chat_messages
+	data["nickname"] = nickname
+
 	return data
 /*
 /obj/item/vamp/phone/proc/OpenMenu(var/mob/mobila)
@@ -200,6 +208,42 @@
 
 
 	switch(action)
+		if("send_message")
+			var/message = params["message"]
+			if(message)
+				var/mob/living/L = usr
+				var/display_name = number
+				if(ishuman(L))
+					var/mob/living/carbon/human/H = L
+					display_name = H.real_name
+				if(nickname)
+					message = "[display_name] ([nickname]): [message]"
+				else
+					message = "[display_name]: [message]"
+
+				// Ensure global chat messages list exists
+				if(!GLOB.phone_chat_messages)
+					GLOB.phone_chat_messages = list()
+
+				// Add message to global chat messages
+				GLOB.phone_chat_messages += message
+
+				// Keep only last 100 messages
+				if(GLOB.phone_chat_messages.len > 100)
+					GLOB.phone_chat_messages.Cut(1, 2)
+
+				// Notify all phones about new message
+				for(var/obj/item/vamp/phone/P in GLOB.phones_list)
+					if(P != src)
+						P.update_chat()
+
+				// Also show the message in the game chat
+				to_chat(usr, "<span class='notice'>[message]</span>")
+		if("set_nickname")
+			var/new_nickname = params["nickname"]
+			if(new_nickname)
+				nickname = new_nickname
+				to_chat(usr, "<span class='notice'>Your chat nickname has been set to: [nickname]</span>")
 		if("hang")
 			last_call = 0
 			if(talking)
@@ -366,10 +410,16 @@
 					to_chat(usr, "<span class='notice'>Invalid number.</span>")
 			.= TRUE
 		if("contacts")
-			var/list/options = list("Add","Remove","Choose","Block", "Unblock", "My Number", "Publish Number", "Published Numbers", "Call History", "Delete Call History")
+			var/list/options = list("Add","Remove","Choose","Block", "Unblock", "My Number", "Publish Number", "Published Numbers", "Call History", "Delete Call History", "Chatroom")
 			var/option =  tgui_input_list(usr, "Select an option", "Contacts Option", options)
 			var/result
 			switch(option)
+				if("Chatroom")
+					// Open the chat interface
+					var/datum/tgui/ui = SStgui.try_update_ui(usr, src, chat_interface)
+					if(!ui)
+						ui = new(usr, src, chat_interface)
+						ui.open()
 				if("Publish Number")
 					if (!islist(GLOB.published_numbers))
 						GLOB.published_numbers = list()
@@ -1050,5 +1100,8 @@
 	..()
 	var/datum/phonecontact/tremere/REGENT = new()
 	contacts += REGENT
+
+/obj/item/vamp/phone/proc/update_chat()
+	SStgui.update_uis(src)
 
 
