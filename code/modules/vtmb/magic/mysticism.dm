@@ -115,8 +115,8 @@
 	response_disarm_simple = "gently push aside"
 	emote_taunt = list("gnashes")
 	speed = 0
-	maxHealth = 200
-	health = 200
+	maxHealth = 150
+	health = 150
 
 	harm_intent_damage = 8
 	obj_damage = 50

@@ -1306,7 +1306,7 @@
 			var/target_phys = target.get_total_physique()
 			target.add_splatter_floor(get_turf(target))
 			target.add_splatter_floor(get_turf(get_step(target, caster.dir)))
-			switch(vampireroll(mypower, target_phys + 3))
+			switch(SSroll.storyteller_roll(mypower, target_phys + 3))
 				if(DICE_WIN, DICE_CRIT_WIN)
 					target.apply_damage(5*mypower, BRUTE)
 					target.apply_damage(2*mypower, CLONE)

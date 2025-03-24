@@ -17,6 +17,7 @@
 	desc = "Discipline power description"
 
 	level = 1
+	vitae_cost = 0
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND
 	target_type = TARGET_MOB
 	range = 1

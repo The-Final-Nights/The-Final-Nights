@@ -56,6 +56,8 @@
 // /atom signals
 ///from base of atom/proc/Initialize(): sent any time a new atom is created
 #define COMSIG_ATOM_CREATED "atom_created"
+///from base of atom/examine(): (/mob, list/examine_text)
+#define COMSIG_ATOM_EXAMINE "atom_examine"
 //from SSatoms InitAtom - Only if the  atom was not deleted or failed initialization
 #define COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE "atom_init_success"
 ///from base of atom/attackby(): (/obj/item, /mob/living, params)
@@ -416,8 +418,14 @@
 ///from /mob/say_dead(): (mob/speaker, message)
 #define COMSIG_MOB_DEADSAY "mob_deadsay"
 	#define MOB_DEADSAY_SIGNAL_INTERCEPT (1<<0)
+
 ///from /mob/living/emote(): ()
 #define COMSIG_MOB_EMOTE "mob_emote"
+///Mob is trying to emote, from /datum/emote/proc/run_emote(): (key, params, type_override, intentional, emote)
+#define COMSIG_MOB_PRE_EMOTED "mob_pre_emoted"
+	#define COMPONENT_CANT_EMOTE (1<<0)
+#define COMSIG_MOB_EMOTED(emote_key) "mob_emoted_[emote_key]"
+
 ///from base of mob/swap_hand(): (obj/item)
 #define COMSIG_MOB_SWAP_HANDS "mob_swap_hands"
 	#define COMPONENT_BLOCK_SWAP (1<<0)
@@ -453,6 +461,16 @@
 
 ///from base of mob/living/death(): (gibbed)
 #define COMSIG_LIVING_DEATH "living_death"
+
+///from /obj/item/hand_item/slapper/attack_atom(): (source=mob/living/slammer, obj/structure/table/slammed_table)
+#define COMSIG_LIVING_SLAM_TABLE "living_slam_table"
+///from /obj/item/hand_item/slapper/attack(): (source=mob/living/slapper, mob/living/slapped)
+#define COMSIG_LIVING_SLAP_MOB "living_slap_mob"
+///from /obj/item/hand_item/slapper/attack(): (source=mob/living/slapper, mob/living/slapped)
+#define COMSIG_LIVING_SLAPPED "living_slapped"
+
+///from /obj/item/hand_item/slapper/attack_atom(): (source=obj/structure/table/slammed_table, mob/living/slammer)
+#define COMSIG_TABLE_SLAMMED "table_slammed"
 
 ///sent from borg recharge stations: (amount, repairs)
 #define COMSIG_PROCESS_BORGCHARGER_OCCUPANT "living_charge"
@@ -619,6 +637,15 @@
 #define COMSIG_GRILL_COMPLETED "item_grill_completed"
 ///Called when an armor plate is successfully applied to an object
 #define COMSIG_ARMOR_PLATED "armor_plated"
+
+///Called when an item is being offered, from [/obj/item/proc/on_offered(mob/living/carbon/offerer)]
+#define COMSIG_ITEM_OFFERING "item_offering"
+	///Interrupts the offer proc
+	#define COMPONENT_OFFER_INTERRUPT (1<<0)
+///Called when an someone tries accepting an offered item, from [/obj/item/proc/on_offer_taken(mob/living/carbon/offerer, mob/living/carbon/taker)]
+#define COMSIG_ITEM_OFFER_TAKEN "item_offer_taken"
+	///Interrupts the offer acceptance
+	#define COMPONENT_OFFER_TAKE_INTERRUPT (1<<0)
 
 ///from base of [/obj/item/proc/tool_check_callback]: (mob/living/user)
 #define COMSIG_TOOL_IN_USE "tool_in_use"

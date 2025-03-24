@@ -17,6 +17,7 @@
 	desc = "Sense magical items on another person."
 
 	level = 1
+	vitae_cost = 0
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
 	target_type = TARGET_MOB
 	range = 7

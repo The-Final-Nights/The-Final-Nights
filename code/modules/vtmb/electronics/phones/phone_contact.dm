@@ -14,13 +14,13 @@
 //Remember to set the job of the phone with "my_contact_is_important = TRUE", or the check_global_contacts proc won't get activate automatically
 
 
-/datum/phonecontact/brujah
-	name = "Primogen Brujah"
+/datum/phonecontact/primogen_banu_haqim
+	name = "Primogen Banu Haqim"
 
-/datum/phonecontact/brujah/check_global_contacts()
-	if(number != GLOB.brujahnumber && name_check != GLOB.brujahname)
-		number = GLOB.brujahnumber
-		name = GLOB.brujahname + " - " + name
+/datum/phonecontact/primogen_banu_haqim/check_global_contacts()
+	if(number != GLOB.banunumber && name_check != GLOB.banuname)
+		number = GLOB.banunumber
+		name = GLOB.banuname + " - " + name
 		return TRUE
 	..()
 

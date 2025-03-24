@@ -121,6 +121,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/mass_zombie_cure,
 	/client/proc/polymorph_all,
 	/client/proc/show_tip,
+	/client/proc/roll_dice_vtm,
 	/client/proc/smite,
 	/client/proc/admin_away,
 	/client/proc/toggle_RMB

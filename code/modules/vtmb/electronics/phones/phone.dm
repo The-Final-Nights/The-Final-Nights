@@ -355,7 +355,7 @@
 					call_sound = 'code/modules/wod13/sounds/nokia.ogg'
 					to_chat(usr, "<span class='notice'>Code activated.</span>")
 				else if(choosed_number == "#666")
-					call_sound = 'sound/voice/human/malescream_6.ogg'
+					call_sound = 'sound/mobs/humanoids/human/scream/malescream_6.ogg'
 					to_chat(usr, "<span class='notice'>Code activated.</span>")
 				else if(choosed_number == "#34")
 					if(ishuman(usr))
@@ -671,7 +671,7 @@
 						call_sound = 'code/modules/wod13/sounds/nokia.ogg'
 						to_chat(usr, "<span class='notice'>Code activated.</span>")
 					else if(choosed_number == "#666")
-						call_sound = 'sound/voice/human/malescream_6.ogg'
+						call_sound = 'sound/mobs/humanoids/human/scream/malescream_6.ogg'
 						to_chat(usr, "<span class='notice'>Code activated.</span>")
 					else if(choosed_number == "#34")
 						usr << link("https://rule34.xxx/index.php?page=post&s=list&tags=werewolf")
@@ -848,7 +848,7 @@
 	contacts += T
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
-	var/datum/phonecontact/brujah/B = new()
+	var/datum/phonecontact/primogen_banu_haqim/B = new()
 	contacts += B
 
 /obj/item/vamp/phone/sheriff
@@ -888,7 +888,7 @@
 	contacts += T
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
-	var/datum/phonecontact/brujah/B = new()
+	var/datum/phonecontact/primogen_banu_haqim/B = new()
 	contacts += B
 
 /obj/item/vamp/phone/barkeeper
@@ -958,7 +958,7 @@
 	contacts += T
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
-	var/datum/phonecontact/brujah/B = new()
+	var/datum/phonecontact/primogen_banu_haqim/B = new()
 	contacts += B
 
 /obj/item/vamp/phone/nosferatu/Initialize()
@@ -975,7 +975,7 @@
 	contacts += T
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
-	var/datum/phonecontact/brujah/B = new()
+	var/datum/phonecontact/primogen_banu_haqim/B = new()
 	contacts += B
 
 /obj/item/vamp/phone/toreador/Initialize()
@@ -992,13 +992,13 @@
 	contacts += N
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
-	var/datum/phonecontact/brujah/B = new()
+	var/datum/phonecontact/primogen_banu_haqim/B = new()
 	contacts += B
 
-/obj/item/vamp/phone/brujah/Initialize()
+/obj/item/vamp/phone/primogen_banu_haqim/Initialize()
 	..()
-	GLOB.brujahnumber = number
-	GLOB.brujahname = owner
+	GLOB.banunumber = number
+	GLOB.banuname = owner
 	var/datum/phonecontact/prince/PRINCE = new()
 	contacts += PRINCE
 	var/datum/phonecontact/tremere/REGENT = new()
@@ -1026,7 +1026,7 @@
 	contacts += N
 	var/datum/phonecontact/toreador/T = new()
 	contacts += T
-	var/datum/phonecontact/brujah/B = new()
+	var/datum/phonecontact/primogen_banu_haqim/B = new()
 	contacts += B
 
 /obj/item/vamp/phone/tremere/Initialize()
@@ -1043,7 +1043,7 @@
 	contacts += T
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
-	var/datum/phonecontact/brujah/B = new()
+	var/datum/phonecontact/primogen_banu_haqim/B = new()
 	contacts += B
 
 /obj/item/vamp/phone/archivist/Initialize()

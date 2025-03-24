@@ -19,7 +19,8 @@ GLOBAL_LIST_INIT(camarilla_council_positions, list(
     "Primogen Nosferatu",
     "Primogen Toreador",
     "Primogen Ventrue",
-    "Primogen Brujah"
+    "Primogen Banu Haqim",
+	"Primogen Lasombra"
 ))
 
 

@@ -922,6 +922,7 @@
 	maxHealth = 10
 	health = 10
 	speed = -0.8
+	see_in_dark = 10
 
 /mob/living/simple_animal/hostile/beastmaster/rat/flying/UnarmedAttack(atom/A)
 	. = ..()

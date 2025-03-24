@@ -1024,7 +1024,6 @@
 		user.setDir(SOUTH)
 		user.Stun(100)
 		user.forceMove(src.loc)
-		user.visible_message("<B>[user] dances on [src]!</B>")
 		animatepole(user)
 		user.layer = layer //set them to the poles layer
 		obj_flags &= ~IN_USE

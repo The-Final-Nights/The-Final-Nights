@@ -19,13 +19,13 @@
 	level = 1
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
 
-	duration_length = 5 SECONDS
-	cooldown_length = 15 SECONDS
+	duration_length = 10 SECONDS //TT duration is one hour, but this causes dizzyness.
+	cooldown_length = 20 SECONDS
 	duration_override = TRUE
 
 /datum/discipline_power/quietus/silence_of_death/activate()
 	. = ..()
-	for(var/mob/living/carbon/human/H in viewers(7, owner))
+	for(var/mob/living/carbon/human/H in orange(7, owner))
 		ADD_TRAIT(H, TRAIT_DEAF, "quietus")
 		if(H.get_confusion() < 15)
 			var/diff = 15 - H.get_confusion()
@@ -52,7 +52,7 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		L.adjustFireLoss(10)
-		L.AdjustKnockdown(3 SECONDS)
+		L.AdjustKnockdown(4 SECONDS)
 		L.adjustStaminaLoss(50)
 	return ..()
 
@@ -69,9 +69,8 @@
 
 /datum/discipline_power/quietus/scorpions_touch/activate()
 	. = ..()
-	owner.drop_all_held_items()
 	//this should probably be changed to a normal ranged attack
-	owner.put_in_active_hand(new /obj/item/melee/touch_attack/quietus(owner))
+	owner.put_in_active_hand(new /obj/item/melee/touch_attack/quietus(owner), TRUE)
 
 //DAGON'S CALL
 /datum/discipline_power/quietus/dagons_call
@@ -143,7 +142,7 @@
 	name = "acid spit"
 	icon_state = "har4ok"
 	pass_flags = PASSTABLE
-	damage = 80
+	damage = 40
 	damage_type = BURN
 	hitsound = 'sound/weapons/effects/searwall.ogg'
 	hitsound_wall = 'sound/weapons/effects/searwall.ogg'
@@ -212,6 +211,5 @@
 
 /datum/discipline_power/quietus/taste_of_death/activate()
 	. = ..()
-	owner.drop_all_held_items()
 	//should be changed to a ranged attack targeting turfs
-	owner.put_in_active_hand(new /obj/item/gun/magic/quietus(owner))
+	owner.put_in_active_hand(new /obj/item/gun/magic/quietus(owner), TRUE)
