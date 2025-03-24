@@ -27,13 +27,13 @@
 
 /datum/discipline_power/protean/eyes_of_the_beast/activate()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_PROTEAN_VISION, TRAIT_GENERIC)
 	owner.add_client_colour(/datum/client_colour/glass_colour/red)
 	owner.update_sight()
 
 /datum/discipline_power/protean/eyes_of_the_beast/deactivate()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_PROTEAN_VISION, TRAIT_GENERIC)
 	owner.remove_client_colour(/datum/client_colour/glass_colour/red)
 	owner.update_sight()
 
