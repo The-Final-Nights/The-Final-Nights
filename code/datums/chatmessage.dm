@@ -158,6 +158,7 @@
 
 	// We dim italicized text to make it more distinguishable from regular text
 	var/tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
+
 	// Use voice color if available for human speakers
 	if(ismob(target))
 		var/mob/M = target

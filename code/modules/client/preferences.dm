@@ -5,7 +5,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	//doohickeys for savefiles
 	var/path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/max_save_slots = 3
+	var/max_save_slots = 20
 
 	//non-preference stuff
 	var/muted = 0
@@ -14,8 +14,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
-	var/ooccolor = "#002eb8"
-	var/asaycolor = "#FF4500"			//This won't change the color for current admins, only incoming ones.
+	var/ooccolor = "#c43b23"
+	var/asaycolor = "#ff4500"			//This won't change the color for current admins, only incoming ones.
 	var/enable_tips = TRUE
 	var/tip_delay = 500 //tip delay in milliseconds
 
