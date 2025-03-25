@@ -706,22 +706,17 @@ Dancer
 	select_new_target()
 
 /datum/quirk/obsession/proc/on_drink_blood(mob/living/carbon/human/drinker, mob/living/carbon/human/target, amount)
-	if(!target || !target.mind || target.mind != obsession_target)
+	if(!target || !target.mind || target != obsession_target)
 		amount *= 0.25 // Reduce blood gain to 25% for non-obsession targets
-		to_chat(drinker, "<span class='warning'>This blood... it's not the same. It lacks the sweet essence of [obsession_target.real_name]'s blood. You only gain a quarter of what you would normally.</span>")
+		to_chat(drinker, "<span class='warning'>This blood... it's not the same. It lacks the sweet essence of [obsession_target ? obsession_target.real_name : "your obsession target"]'s blood. You only gain a quarter of what you would normally.</span>")
+		return amount
 	else
 		amount *= 2 // Double blood gain from obsession target
-		to_chat(drinker, "<span class='notice'>The blood of [obsession_target.real_name] is absolutely divine! You feel euphoric as their essence flows through you.</span>")
-
-/datum/quirk/obsession/proc/select_new_target()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(!H)
-		return
-	H.SetImmobilized(INFINITY)
-	select_target()
+		to_chat(drinker, "<span class='userlove'>The blood of [obsession_target.real_name] is absolutely divine! You feel euphoric as their essence flows through you.</span>")
+		return amount
 
 /datum/quirk/obsession/proc/on_mob_joined(datum/source, mob/living/carbon/human/new_mob, rank)
-	if(!new_mob || !ishuman(new_mob) || new_mob == quirk_holder || !new_mob.client || new_mob.stat == DEAD || HAS_TRAIT(new_mob, TRAIT_OBSESSION))
+	if(!waiting_for_target || !quirk_holder || !new_mob || !ishuman(new_mob) || new_mob == quirk_holder || !new_mob.client || new_mob.stat == DEAD || HAS_TRAIT(new_mob, TRAIT_OBSESSION))
 		return
 
 	// Only proceed if the new mob has the Alluring trait
@@ -731,7 +726,15 @@ Dancer
 	// Set the new Alluring target
 	obsession_target = new_mob
 	waiting_for_target = FALSE
+	UnregisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED)
 	to_chat(quirk_holder, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
+
+/datum/quirk/obsession/proc/select_new_target()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(!H)
+		return
+	H.SetImmobilized(INFINITY)
+	select_target()
 
 /datum/quirk/obsession/proc/select_target()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -746,13 +749,6 @@ Dancer
 		if(HAS_TRAIT(target, TRAIT_ALLURING))
 			valid_targets += target
 
-	// If no Alluring targets found, add all valid human targets
-	if(!valid_targets.len)
-		for(var/mob/living/carbon/human/target in GLOB.human_list)
-			if(target == H || !target.client || target.stat == DEAD || HAS_TRAIT(target, TRAIT_OBSESSION))
-				continue
-			valid_targets += target
-
 	if(!valid_targets.len)
 		to_chat(H, "<span class='warning'>No valid targets found. You will automatically select the next human that joins.</span>")
 		waiting_for_target = TRUE
@@ -763,7 +759,7 @@ Dancer
 		var/job = target.get_assignment()
 		var/display_name = "[target.real_name] ([job])"
 		if(HAS_TRAIT(target, TRAIT_ALLURING))
-			display_name += " <span class='notice'>(Alluring)</span>"
+			display_name = "\[Alluring\] [display_name]"
 		choices += display_name
 		name_to_target[display_name] = target
 
