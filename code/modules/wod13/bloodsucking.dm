@@ -39,11 +39,10 @@
 		NPC.danger_source = null
 		mob.Stun(40) //NPCs don't get to resist
 
-	// Check for obsession quirk
-	if(HAS_TRAIT(src, TRAIT_OBSESSION))
-		if(mob != obsession_target)
-			bloodgain *= 0.25 // Reduce blood gain to 25% for non-obsession targets
-			to_chat(src, "<span class='warning'>This blood... it's not the same. It lacks the sweet essence of your obsession target's blood. You only gain a quarter of what you would normally.</span>")
+	// Send the blood drinking signal and get the modified blood gain
+	var/modified_bloodgain = SEND_SIGNAL(src, COMSIG_MOB_DRINK_BLOOD, mob, src, bloodgain)
+	if(modified_bloodgain)
+		bloodgain = modified_bloodgain
 
 	if(mob.bloodpool <= 1 && mob.maxbloodpool > 1)
 		to_chat(src, "<span class='warning'>You feel small amount of <b>BLOOD</b> in your victim.</span>")
