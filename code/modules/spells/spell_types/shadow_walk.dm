@@ -70,7 +70,7 @@
 
 
 /obj/effect/dummy/phased_mob/shadow/relaymove(mob/living/user, direction)
-	if(last_go+5 > world.time)
+	if(last_go+2 > world.time)
 		return
 	last_go = world.time
 	var/turf/oldloc = loc
