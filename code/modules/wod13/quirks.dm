@@ -709,6 +709,9 @@ Dancer
 	if(!target || !target.mind || target.mind != obsession_target)
 		amount *= 0.25 // Reduce blood gain to 25% for non-obsession targets
 		to_chat(drinker, "<span class='warning'>This blood... it's not the same. It lacks the sweet essence of [obsession_target.real_name]'s blood. You only gain a quarter of what you would normally.</span>")
+	else
+		amount *= 2 // Double blood gain from obsession target
+		to_chat(drinker, "<span class='notice'>The blood of [obsession_target.real_name] is absolutely divine! You feel euphoric as their essence flows through you.</span>")
 
 /datum/quirk/obsession/proc/select_new_target()
 	var/mob/living/carbon/human/H = quirk_holder
