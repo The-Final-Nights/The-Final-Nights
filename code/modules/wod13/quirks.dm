@@ -677,6 +677,7 @@ Dancer
 	gain_text = "You feel a strong desire for someone's blood..."
 	lose_text = "You no longer feel the need for specific blood."
 	medical_record_text = "Patient exhibits an unhealthy obsession with specific blood."
+	allowed_species = list("Vampire")
 	var/mob/living/carbon/human/target = null
 	var/target_pending = TRUE  // Using a different name to avoid conflicts
 
