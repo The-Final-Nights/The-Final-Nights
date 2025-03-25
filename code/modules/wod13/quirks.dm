@@ -681,10 +681,10 @@ Dancer
 
 /datum/quirk/obsession/add()
 	var/mob/living/carbon/human/H = quirk_holder
-	RegisterSignal(H, COMSIG_MOB_DEATH, .proc/on_death)
-	RegisterSignal(H, COMSIG_MOB_LOGOUT, .proc/on_logout)
-	RegisterSignal(H, COMSIG_MOB_DRINK_BLOOD, .proc/on_drink_blood)
-	RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, .proc/on_mob_joined)
+	RegisterSignal(H, COMSIG_MOB_DEATH, PROC_REF(on_death))
+	RegisterSignal(H, COMSIG_MOB_LOGOUT, PROC_REF(on_logout))
+	RegisterSignal(H, COMSIG_MOB_DRINK_BLOOD, PROC_REF(on_drink_blood))
+	RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, PROC_REF(on_mob_joined))
 	select_target()
 
 /datum/quirk/obsession/remove()
@@ -720,18 +720,11 @@ Dancer
 	if(!new_mob || !ishuman(new_mob) || new_mob == quirk_holder || !new_mob.client || new_mob.stat == DEAD || HAS_TRAIT(new_mob, TRAIT_OBSESSION))
 		return
 
-	// If we're not waiting for a target, only proceed if the new mob is Alluring
-	if(!waiting_for_target && !HAS_TRAIT(new_mob, TRAIT_ALLURING))
+	// Only proceed if the new mob has the Alluring trait
+	if(!HAS_TRAIT(new_mob, TRAIT_ALLURING))
 		return
 
-	// Prioritize Alluring targets
-	if(HAS_TRAIT(new_mob, TRAIT_ALLURING))
-		obsession_target = new_mob
-		waiting_for_target = FALSE
-		to_chat(quirk_holder, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
-		return
-
-	// If we're waiting for a target and no Alluring target is found, use the first valid human
+	// Set the new Alluring target
 	obsession_target = new_mob
 	waiting_for_target = FALSE
 	to_chat(quirk_holder, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
@@ -759,25 +752,25 @@ Dancer
 	if(!valid_targets.len)
 		to_chat(H, "<span class='warning'>No valid targets found. You will automatically select the next human that joins.</span>")
 		waiting_for_target = TRUE
-		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, .proc/on_mob_joined)
+		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, PROC_REF(on_mob_joined))
 		return
 
 	for(var/mob/living/carbon/human/target in valid_targets)
 		var/job = target.get_assignment()
 		var/display_name = "[target.real_name] ([job])"
 		if(HAS_TRAIT(target, TRAIT_ALLURING))
-			display_name += " [span_notice("(Alluring)")]"
+			display_name += " <span class='notice'>(Alluring)</span>"
 		choices += display_name
 		name_to_target[display_name] = target
 
 	H.SetImmobilized(1)
-	var/selected = input(H, "Choose your obsession target:", "Obsession Target") as null|anything in choices
+	var/selected = tgui_input_list(H, "Choose your obsession target:", "Obsession Target", choices)
 	H.SetImmobilized(0)
 
 	if(!selected)
 		to_chat(H, "<span class='warning'>No target selected. You will automatically select the next human that joins.</span>")
 		waiting_for_target = TRUE
-		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, .proc/on_mob_joined)
+		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, PROC_REF(on_mob_joined))
 		return
 
 	obsession_target = name_to_target[selected]
@@ -786,7 +779,7 @@ Dancer
 /datum/quirk/alluring
 	name = "Alluring"
 	desc = "Your blood has a special quality that makes it particularly attractive to vampires with the Obsession quirk. You may be selected as an obsession target."
-	value = -2
+	value = 0
 	gain_text = "<span class='notice'>You feel a subtle magnetic pull towards certain individuals...</span>"
 	lose_text = "<span class='notice'>You feel less special than before.</span>"
 	allowed_species = list("Human")
