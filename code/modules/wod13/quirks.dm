@@ -716,18 +716,51 @@ Dancer
 		return amount
 
 /datum/quirk/obsession/proc/on_mob_joined(datum/source, mob/living/carbon/human/new_mob, rank)
-	if(!waiting_for_target || !quirk_holder || !new_mob || !ishuman(new_mob) || new_mob == quirk_holder || !new_mob.client || new_mob.stat == DEAD || HAS_TRAIT(new_mob, TRAIT_OBSESSION))
+	// Queue the check to run after a brief delay to allow traits to initialize
+	addtimer(CALLBACK(src, PROC_REF(check_new_arrival), new_mob), 2 SECONDS)
+
+/datum/quirk/obsession/proc/check_new_arrival(mob/living/carbon/human/new_mob)
+	// Basic validation with logging
+	if(!quirk_holder)
+		to_chat(quirk_holder, "<span class='warning'>DEBUG: No quirk holder found.</span>")
+		return
+	if(!new_mob || !ishuman(new_mob))
+		to_chat(quirk_holder, "<span class='warning'>DEBUG: Invalid new mob.</span>")
+		return
+	if(new_mob == quirk_holder)
+		to_chat(quirk_holder, "<span class='warning'>DEBUG: New mob is self.</span>")
+		return
+	if(!new_mob.client)
+		to_chat(quirk_holder, "<span class='warning'>DEBUG: New mob has no client.</span>")
+		return
+	if(new_mob.stat == DEAD)
+		to_chat(quirk_holder, "<span class='warning'>DEBUG: New mob is dead.</span>")
+		return
+	if(HAS_TRAIT(new_mob, TRAIT_OBSESSION))
+		to_chat(quirk_holder, "<span class='warning'>DEBUG: New mob has obsession trait.</span>")
 		return
 
-	// Only proceed if the new mob has the Alluring trait
-	if(!HAS_TRAIT(new_mob, TRAIT_ALLURING))
+	// Log the current state
+	to_chat(quirk_holder, "<span class='notice'>Checking new arrival: [new_mob.real_name]</span>")
+
+	// More detailed trait check
+	var/is_alluring = HAS_TRAIT(new_mob, TRAIT_ALLURING)
+	to_chat(quirk_holder, "<span class='notice'>DEBUG: Alluring trait check: [is_alluring ? "YES" : "NO"]</span>")
+
+	// Check if they're Alluring
+	if(!is_alluring)
+		to_chat(quirk_holder, "<span class='notice'>[new_mob.real_name] is not alluring to you.</span>")
 		return
 
-	// Set the new Alluring target
+	// Check if we need a target
+	if(obsession_target && !waiting_for_target)
+		to_chat(quirk_holder, "<span class='notice'>You already have an obsession with [obsession_target.real_name].</span>")
+		return
+
+	// Set them as our target
 	obsession_target = new_mob
 	waiting_for_target = FALSE
-	UnregisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED)
-	to_chat(quirk_holder, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
+	to_chat(quirk_holder, "<span class='userlove'>You feel an overwhelming pull towards [obsession_target.real_name]. Their very presence ignites a burning obsession within you!</span>")
 
 /datum/quirk/obsession/proc/select_new_target()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -750,14 +783,12 @@ Dancer
 			valid_targets += target
 
 	if(!valid_targets.len)
-		to_chat(H, "<span class='warning'>No valid targets found. You will automatically select the next human that joins.</span>")
+		to_chat(H, "<span class='warning'>No valid targets found. You will automatically select the next alluring human that joins.</span>")
 		waiting_for_target = TRUE
-		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, PROC_REF(on_mob_joined))
 		return
 
 	for(var/mob/living/carbon/human/target in valid_targets)
-		var/job = target.get_assignment()
-		var/display_name = "[target.real_name] ([job])"
+		var/display_name = "[target.real_name] ([target.get_assignment()])"
 		if(HAS_TRAIT(target, TRAIT_ALLURING))
 			display_name = "\[Alluring\] [display_name]"
 		choices += display_name
@@ -768,13 +799,13 @@ Dancer
 	H.SetImmobilized(0)
 
 	if(!selected)
-		to_chat(H, "<span class='warning'>No target selected. You will automatically select the next human that joins.</span>")
+		to_chat(H, "<span class='warning'>No target selected. You will automatically select the next alluring human that joins.</span>")
 		waiting_for_target = TRUE
-		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, PROC_REF(on_mob_joined))
 		return
 
 	obsession_target = name_to_target[selected]
-	to_chat(H, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
+	waiting_for_target = FALSE
+	to_chat(H, "<span class='userlove'>You feel an overwhelming pull towards [obsession_target.real_name]. Their very presence ignites a burning obsession within you!</span>")
 
 /datum/quirk/alluring
 	name = "Alluring"
