@@ -672,7 +672,7 @@ Dancer
 /datum/quirk/obsession
 	name = "Obsession"
 	desc = "You are obsessed with someone's blood."
-	value = -2
+	value = -5
 	mob_trait = TRAIT_OBSESSION
 	gain_text = "You feel a strong desire for someone's blood..."
 	lose_text = "You no longer feel the need for specific blood."
