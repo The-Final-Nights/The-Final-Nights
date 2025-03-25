@@ -676,6 +676,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel a strong pull towards a specific human...</span>"
 	lose_text = "<span class='notice'>The obsession fades away.</span>"
 	mob_trait = TRAIT_OBSESSION
+	allowed_species = list("Vampire")
 	var/mob/living/carbon/human/obsession_target = null
 	var/waiting_for_target = FALSE
 
