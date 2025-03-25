@@ -373,6 +373,10 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 		if(M.client && !M.client.prefs.chat_on_map)
 			speech_bubble_recipients.Add(M.client)
 	var/image/I = image('icons/mob/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		if(H.client?.prefs?.voice_color)
+			I.color = H.client.prefs.voice_color
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(flick_overlay), I, speech_bubble_recipients, 30)
 

@@ -157,6 +157,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//general preferences
 	READ_FILE(S["asaycolor"], asaycolor)
 	READ_FILE(S["ooccolor"], ooccolor)
+	READ_FILE(S["voice_color"], voice_color)
 	READ_FILE(S["lastchangelog"], lastchangelog)
 	READ_FILE(S["UI_style"], UI_style)
 	READ_FILE(S["hotkeys"], hotkeys)
@@ -223,6 +224,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Sanitize
 	asaycolor		= sanitize_ooccolor(sanitize_hexcolor(asaycolor, 6, 1, initial(asaycolor)))
 	ooccolor		= sanitize_ooccolor(sanitize_hexcolor(ooccolor, 6, 1, initial(ooccolor)))
+	voice_color		= sanitize_hexcolor(voice_color, 6, 1, initial(voice_color))
 	lastchangelog	= sanitize_text(lastchangelog, initial(lastchangelog))
 	UI_style		= sanitize_inlist(UI_style, GLOB.available_ui_styles, GLOB.available_ui_styles[1])
 	hotkeys			= sanitize_integer(hotkeys, FALSE, TRUE, initial(hotkeys))
@@ -291,6 +293,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//general preferences
 	WRITE_FILE(S["asaycolor"], asaycolor)
 	WRITE_FILE(S["ooccolor"], ooccolor)
+	WRITE_FILE(S["voice_color"], voice_color)
 	WRITE_FILE(S["lastchangelog"], lastchangelog)
 	WRITE_FILE(S["UI_style"], UI_style)
 	WRITE_FILE(S["hotkeys"], hotkeys)
@@ -793,7 +796,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_moth_wings"]			, features["moth_wings"])
 	WRITE_FILE(S["feature_moth_antennae"]			, features["moth_antennae"])
 	WRITE_FILE(S["feature_moth_markings"]		, features["moth_markings"])
+
 	WRITE_FILE(S["persistent_scars"]			, persistent_scars)
+
 	WRITE_FILE(S["dharma_type"], dharma_type)
 	WRITE_FILE(S["dharma_level"], dharma_level)
 	WRITE_FILE(S["po_type"], po_type)
