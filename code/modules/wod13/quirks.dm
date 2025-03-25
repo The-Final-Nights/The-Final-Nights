@@ -16,6 +16,7 @@ Dwarf
 Homosexual
 Dancer
 */
+
 /datum/quirk/broker
 	name = "Broker"
 	desc = "You are working on stock market in Millenium Tower."
@@ -667,3 +668,126 @@ Dancer
 
 #undef SHORT
 #undef TALL
+
+/datum/quirk/obsession
+	name = "Obsession"
+	desc = "You are obsessed with a specific human. You can only drink blood from them, and gain more blood from them."
+	value = -5
+	gain_text = "<span class='notice'>You feel a strong pull towards a specific human...</span>"
+	lose_text = "<span class='notice'>The obsession fades away.</span>"
+	mob_trait = TRAIT_OBSESSION
+	var/mob/living/carbon/human/obsession_target = null
+	var/waiting_for_target = FALSE
+
+/datum/quirk/obsession/add()
+	var/mob/living/carbon/human/H = quirk_holder
+	RegisterSignal(H, COMSIG_MOB_DEATH, .proc/on_death)
+	RegisterSignal(H, COMSIG_MOB_LOGOUT, .proc/on_logout)
+	RegisterSignal(H, COMSIG_MOB_DRINK_BLOOD, .proc/on_drink_blood)
+	RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, .proc/on_mob_joined)
+	select_target()
+
+/datum/quirk/obsession/remove()
+	var/mob/living/carbon/human/H = quirk_holder
+	UnregisterSignal(H, COMSIG_MOB_DEATH)
+	UnregisterSignal(H, COMSIG_MOB_LOGOUT)
+	UnregisterSignal(H, COMSIG_MOB_DRINK_BLOOD)
+	UnregisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED)
+	obsession_target = null
+	waiting_for_target = FALSE
+
+/datum/quirk/obsession/proc/on_death()
+	to_chat(quirk_holder, "<span class='warning'>Your obsession target has died! You must select a new target...</span>")
+	select_new_target()
+
+/datum/quirk/obsession/proc/on_logout()
+	to_chat(quirk_holder, "<span class='warning'>Your obsession target has left! You must select a new target...</span>")
+	select_new_target()
+
+/datum/quirk/obsession/proc/on_drink_blood(mob/living/carbon/human/drinker, mob/living/carbon/human/target, amount)
+	if(!target || !target.mind || target.mind != obsession_target)
+		amount *= 0.25 // Reduce blood gain to 25% for non-obsession targets
+		to_chat(drinker, "<span class='warning'>This blood... it's not the same. It lacks the sweet essence of [obsession_target.real_name]'s blood. You only gain a quarter of what you would normally.</span>")
+
+/datum/quirk/obsession/proc/select_new_target()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(!H)
+		return
+	H.SetImmobilized(INFINITY)
+	select_target()
+
+/datum/quirk/obsession/proc/on_mob_joined(datum/source, mob/living/carbon/human/new_mob, rank)
+	if(!new_mob || !ishuman(new_mob) || new_mob == quirk_holder || !new_mob.client || new_mob.stat == DEAD || HAS_TRAIT(new_mob, TRAIT_OBSESSION))
+		return
+
+	// If we're not waiting for a target, only proceed if the new mob is Alluring
+	if(!waiting_for_target && !HAS_TRAIT(new_mob, TRAIT_ALLURING))
+		return
+
+	// Prioritize Alluring targets
+	if(HAS_TRAIT(new_mob, TRAIT_ALLURING))
+		obsession_target = new_mob
+		waiting_for_target = FALSE
+		to_chat(quirk_holder, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
+		return
+
+	// If we're waiting for a target and no Alluring target is found, use the first valid human
+	obsession_target = new_mob
+	waiting_for_target = FALSE
+	to_chat(quirk_holder, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
+
+/datum/quirk/obsession/proc/select_target()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/list/valid_targets = list()
+	var/list/choices = list()
+	var/list/name_to_target = list()
+
+	// First, try to find targets with the Alluring trait
+	for(var/mob/living/carbon/human/target in GLOB.human_list)
+		if(target == H || !target.client || target.stat == DEAD || HAS_TRAIT(target, TRAIT_OBSESSION))
+			continue
+		if(HAS_TRAIT(target, TRAIT_ALLURING))
+			valid_targets += target
+
+	// If no Alluring targets found, add all valid human targets
+	if(!valid_targets.len)
+		for(var/mob/living/carbon/human/target in GLOB.human_list)
+			if(target == H || !target.client || target.stat == DEAD || HAS_TRAIT(target, TRAIT_OBSESSION))
+				continue
+			valid_targets += target
+
+	if(!valid_targets.len)
+		to_chat(H, "<span class='warning'>No valid targets found. You will automatically select the next human that joins.</span>")
+		waiting_for_target = TRUE
+		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, .proc/on_mob_joined)
+		return
+
+	for(var/mob/living/carbon/human/target in valid_targets)
+		var/job = target.get_assignment()
+		var/display_name = "[target.real_name] ([job])"
+		if(HAS_TRAIT(target, TRAIT_ALLURING))
+			display_name += " [span_notice("(Alluring)")]"
+		choices += display_name
+		name_to_target[display_name] = target
+
+	H.SetImmobilized(1)
+	var/selected = input(H, "Choose your obsession target:", "Obsession Target") as null|anything in choices
+	H.SetImmobilized(0)
+
+	if(!selected)
+		to_chat(H, "<span class='warning'>No target selected. You will automatically select the next human that joins.</span>")
+		waiting_for_target = TRUE
+		RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, .proc/on_mob_joined)
+		return
+
+	obsession_target = name_to_target[selected]
+	to_chat(H, "<span class='notice'>You have chosen [obsession_target.real_name] as your new obsession target.</span>")
+
+/datum/quirk/alluring
+	name = "Alluring"
+	desc = "Your blood has a special quality that makes it particularly attractive to vampires with the Obsession quirk. You may be selected as an obsession target."
+	value = -2
+	gain_text = "<span class='notice'>You feel a subtle magnetic pull towards certain individuals...</span>"
+	lose_text = "<span class='notice'>You feel less special than before.</span>"
+	allowed_species = list("Human")
+	mob_trait = TRAIT_ALLURING

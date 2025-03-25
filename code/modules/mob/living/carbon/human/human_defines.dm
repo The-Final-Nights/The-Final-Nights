@@ -134,3 +134,6 @@
 	max_yang_chi = 4
 	yin_chi = 2
 	max_yin_chi = 2
+
+	/// The target that this vampire is obsessed with
+	var/mob/living/carbon/human/obsession_target = null

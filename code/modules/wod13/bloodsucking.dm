@@ -39,6 +39,12 @@
 		NPC.danger_source = null
 		mob.Stun(40) //NPCs don't get to resist
 
+	// Check for obsession quirk
+	if(HAS_TRAIT(src, TRAIT_OBSESSION))
+		if(mob != obsession_target)
+			bloodgain *= 0.25 // Reduce blood gain to 25% for non-obsession targets
+			to_chat(src, "<span class='warning'>This blood... it's not the same. It lacks the sweet essence of your obsession target's blood. You only gain a quarter of what you would normally.</span>")
+
 	if(mob.bloodpool <= 1 && mob.maxbloodpool > 1)
 		to_chat(src, "<span class='warning'>You feel small amount of <b>BLOOD</b> in your victim.</span>")
 		if(iskindred(mob) && iskindred(src))
@@ -153,6 +159,14 @@
 			update_damage_overlays()
 			update_health_hud()
 			update_blood_hud()
+			if(HAS_TRAIT(mob, TRAIT_POTENT_BLOOD))
+				to_chat(src, span_notice("The blood is incredibly potent! You feel your wounds healing completely."))
+				heal_overall_damage(INFINITY, INFINITY, INFINITY, BODYPART_ORGANIC)
+				adjustToxLoss(-INFINITY)
+				adjustOxyLoss(-INFINITY)
+				adjustCloneLoss(-INFINITY)
+				update_damage_overlays()
+				update_health_hud()
 		if(mob.bloodpool <= 0)
 			if(ishuman(mob))
 				var/mob/living/carbon/human/K = mob

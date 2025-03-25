@@ -306,3 +306,6 @@
 /// A trait gained by leaning against a wall
 #define TRAIT_LEANING "leaning"
 
+
+#define TRAIT_OBSESSION "obsession"
+#define TRAIT_ALLURING "alluring"
