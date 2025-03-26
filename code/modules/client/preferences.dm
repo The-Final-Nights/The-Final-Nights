@@ -1287,13 +1287,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 //
 /datum/preferences/proc/build_attribute_score(var/attribute, var/bonus_number, var/price, var/variable_name)
 	var/dat
-	for(var/a in 1 to attribute)
+
+	// For visual representation purposes, show actual dots based on real attribute value
+	var/display_attribute = attribute
+
+	// For visual representation only - show dots for actual value
+	for(var/a in 1 to display_attribute)
 		dat += "•"
+
+	// Show bonus dots from archetype with a different formatting
 	for(var/b in 1 to bonus_number)
-		dat += "•"
-	var/leftover_circles = 5 - attribute //5 is the default number of blank circles
+		dat += "<span style='color: #8888ff;'>•</span>"
+
+	var/leftover_circles = 5 - display_attribute //5 is the default number of blank circles
 	for(var/c in 1 to leftover_circles)
 		dat += "o"
+
+	// Show the effective value (base + bonus)
+	dat += " <small>([display_attribute + bonus_number] effective)</small> "
+
 	var/real_price = attribute ? (attribute*price) : price //In case we have an attribute of 0, we don't multiply by 0
 	if((true_experience >= real_price) && (attribute < ATTRIBUTE_BASE_LIMIT))
 		dat += "<a href='?_src_=prefs;preference=[variable_name];task=input'>Increase ([real_price])</a>"
@@ -2310,6 +2322,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							athletics = archetip.start_athletics
 							// Mark stats as initialized
 							stats_initialized = TRUE
+
+						// Force a UI refresh to display the new archetype's stat bonuses
+						ShowChoices(user)
 
 				if("discipline")
 					if(pref_species.id == "kindred")
