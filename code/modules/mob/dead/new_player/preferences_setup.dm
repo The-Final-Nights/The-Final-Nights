@@ -1,4 +1,3 @@
-
 	//The mob should have a gender you want before running this proc. Will run fine without H
 /datum/preferences/proc/random_character(gender_override, antag_override = FALSE)
 	if(randomise[RANDOM_SPECIES])
@@ -51,6 +50,9 @@
 		body_type = gender
 	else
 		body_type = pick(MALE, FEMALE)
+
+	// Mark stats as initialized for a randomly generated character
+	stats_initialized = TRUE
 
 /datum/preferences/proc/random_species()
 	var/random_species_type = GLOB.species_list[pick(get_roundstart_species())]
