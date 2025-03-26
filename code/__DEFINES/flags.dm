@@ -241,3 +241,17 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define EMOTE_IMPORTANT (1<<2)
 /// Emote only prints to runechat, not to the chat window
 #define EMOTE_RUNECHAT (1<<3)
+
+// Bearing flags for bearing_flags
+#define BEARING_MUNDANE (1<<0)
+#define BEARING_RESOLVE (1<<1)
+#define BEARING_JUSTICE (1<<2)
+#define BEARING_INHUMANITY (1<<3)
+#define BEARING_COMMAND (1<<4)
+#define BEARING_INTELLECT (1<<5)
+#define BEARING_DEVOTION (1<<6)
+#define BEARING_HOLINESS (1<<7)
+#define BEARING_SILENCE (1<<8)
+#define BEARING_MENACE (1<<9)
+#define BEARING_FAITH (1<<10)
+#define BEARING_GUILT (1<<11)
