@@ -2491,6 +2491,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					slotlocked = FALSE
+					stats_initialized = TRUE
 
 				if("reset_with_bonus")
 					if((clane?.name == "Caitiff") || !generation_bonus)
