@@ -27,6 +27,7 @@
 		/datum/language/hebrew,
 		/datum/language/french,
 		/datum/language/arabic,
+		/datum/language/highfalutin,
 		/datum/language/german,
 		/datum/language/hebrew,
 		/datum/language/japanese,

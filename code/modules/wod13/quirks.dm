@@ -520,6 +520,15 @@ Dancer
 	var/mob/living/carbon/H = quirk_holder
 	H.grant_language(/datum/language/greek)
 
+/datum/quirk/highfalutin
+	name = "High-Falutin"
+	desc = "The language of many of Gaia's warriors."
+	value = 1
+	allowed_species = list("Werewolf")
+
+/datum/quirk/highfalutin/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/highfalutin)
 
 /datum/quirk/consumption
 	name = "Consumption"
