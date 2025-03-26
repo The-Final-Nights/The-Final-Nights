@@ -100,6 +100,8 @@
 	var/cost_yang = 0
 	///Cost in demon points of activating this Discipline.
 	var/cost_demon = 0
+	///Cost in golden points of activating this Discipline.
+	var/cost_golden = 0
 	//Is ranged?
 	var/ranged = FALSE
 	///Duration and cooldown of the Discipline.
@@ -144,6 +146,10 @@
 	if(caster.demon_chi < cost_demon)
 		SEND_SOUND(caster, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 		to_chat(caster, "<span class='warning'>You don't have enough <b>Demon Chi</b> to use [src].</span>")
+		return FALSE
+	if(caster.golden_chi < cost_golden)
+		SEND_SOUND(caster, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+		to_chat(caster, "<span class='warning'>You don't have enough <b>golden Chi</b> to use [src].</span>")
 		return FALSE
 
 	if(HAS_TRAIT(caster, TRAIT_PACIFISM))
@@ -972,14 +978,24 @@
 /datum/action/choose_demon_form/Trigger()
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/user = usr
-		var/new_form = input(user, "Choose your Demon Form", "Demon Form") as null|anything in list("Samurai", "Tentacles", "Demon", "Giant", "Foul")
-		if(new_form)
-			to_chat(user, "Your new form is [new_form].")
-			for(var/datum/action/chi_discipline/chi_action in user.actions)
-				if(chi_action)
-					if(istype(chi_action.discipline, /datum/chi_discipline/demon_shintai))
-						var/datum/chi_discipline/demon_shintai/demon_shintai = chi_action.discipline
-						demon_shintai.current_form = new_form
+		if(HAS_TRAIT(owner, TRAIT_GAMERGOD))
+			var/new_form = input(user, "Choose your Demon Form", "Demon Form") as null|anything in list("Samurai", "Tentacles", "Demon", "Giant", "Foul","Gods")
+			if(new_form)
+				to_chat(user, "Your new form is [new_form].")
+				for(var/datum/action/chi_discipline/chi_action in user.actions)
+					if(chi_action)
+						if(istype(chi_action.discipline, /datum/chi_discipline/demon_shintai))
+							var/datum/chi_discipline/demon_shintai/demon_shintai = chi_action.discipline
+							demon_shintai.current_form = new_form
+		else
+			var/new_form = input(user, "Choose your Demon Form", "Demon Form") as null|anything in list("Samurai", "Tentacles", "Demon", "Giant", "Foul")
+			if(new_form)
+				to_chat(user, "Your new form is [new_form].")
+				for(var/datum/action/chi_discipline/chi_action in user.actions)
+					if(chi_action)
+						if(istype(chi_action.discipline, /datum/chi_discipline/demon_shintai))
+							var/datum/chi_discipline/demon_shintai/demon_shintai = chi_action.discipline
+							demon_shintai.current_form = new_form
 		button.color = "#970000"
 		animate(button, color = "#ffffff", time = 2 SECONDS, loop = 1)
 
@@ -1116,6 +1132,45 @@
 					caster.remove_overlay(UNICORN_LAYER)
 					REMOVE_TRAIT(caster, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/demonshintai_deactivate.ogg', 50, FALSE)
+		if("Gods")
+			var/mod = 7*level_casting
+			var/meleemod = level_casting*0.35
+			caster.remove_overlay(UNICORN_LAYER)
+			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "holyness", -UNICORN_LAYER)
+			caster.overlays_standing[UNICORN_LAYER] = potence_overlay
+			caster.apply_overlay(UNICORN_LAYER)
+			caster.physiology.armor.melee += mod
+			caster.physiology.armor.bullet += mod
+			caster.dna.species.punchdamagelow += mod
+			caster.dna.species.punchdamagehigh += mod
+			caster.dna.species.meleemod += meleemod
+			if (level_casting >= 1 && level_casting < 4)
+				caster.add_movespeed_modifier(/datum/movespeed_modifier/demonform1)
+			else
+				caster.add_movespeed_modifier(/datum/movespeed_modifier/demonform2)
+				ADD_TRAIT(caster, TRAIT_PUSHIMMUNE, SPECIES_TRAIT)
+				ADD_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
+			ADD_TRAIT(caster, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			ADD_TRAIT(caster, TRAIT_MOVE_FLOATING, TRAUMA_TRAIT)
+			ADD_TRAIT(caster, TRAIT_PASSTABLE, SPECIES_TRAIT)
+			spawn((delay)+caster.discipline_time_plus)
+				if(caster)
+					caster.physiology.armor.melee -= mod
+					caster.physiology.armor.bullet -= mod
+					caster.dna.species.punchdamagelow -= mod
+					caster.dna.species.punchdamagehigh -= mod
+					caster.dna.species.meleemod -= meleemod
+					if (level_casting >= 1 && level_casting < 4)
+						caster.remove_movespeed_modifier(/datum/movespeed_modifier/demonform1)
+					else
+						caster.remove_movespeed_modifier(/datum/movespeed_modifier/demonform2)
+						REMOVE_TRAIT(caster, TRAIT_PUSHIMMUNE, SPECIES_TRAIT)
+						REMOVE_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
+					caster.remove_overlay(UNICORN_LAYER)
+					REMOVE_TRAIT(caster, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+					REMOVE_TRAIT(caster, TRAIT_MOVE_FLOATING, TRAUMA_TRAIT)
+					REMOVE_TRAIT(caster, TRAIT_PASSTABLE, SPECIES_TRAIT)
+					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/cross.ogg', 50, FALSE)
 
 /datum/chi_discipline/demon_shintai/proc/foul_aura_loop(mob/living/carbon/human/caster, duration, strength)
 	var/loop_started_time = world.time
@@ -2199,7 +2254,6 @@
 	discipline_type = "Chi"
 	activate_sound = 'code/modules/wod13/sounds/yang_prana.ogg'
 	var/obj/effect/proc_holder/spell/targeted/ethereal_jaunt/jaunt
-
 /datum/chi_discipline/yang_prana/activate(mob/living/target, mob/living/carbon/human/caster)
 	..()
 	if(!jaunt)
@@ -2266,3 +2320,144 @@
 				viewing_mantle.flash_act(affect_silicon = 1)
 
 		sleep(2 SECONDS)
+/datum/chi_discipline/prayer_eating
+	name = "Prayer Eating"
+	desc = "Allows you to absorb the energy of prayers directed to you, and transform it into golden chi"
+	icon_state = "gods"
+	ranged = TRUE
+	delay = 12 SECONDS
+	discipline_type = "Chi"
+	activate_sound = 'code/modules/wod13/sounds/canon.ogg'
+	//cost_yang = 1
+/datum/chi_discipline/prayer_eating/post_gain(mob/living/carbon/human/user)
+	var/datum/action/choose_golden_chim/golden_chim_action = new()
+	golden_chim_action.Grant(user)
+/datum/movespeed_modifier/gifted_speed
+	multiplicative_slowdown = -1
+/datum/action/choose_golden_chim
+	name = "Change your golden chi for another chi type"
+	desc = "Change your golden chi for another chi type"
+	button_icon_state = "gods2"
+	button_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+	background_icon_state = "discipline"
+	icon_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
+/datum/action/choose_golden_chim/Trigger()
+	if(istype(owner, /mob/living/carbon/human))
+		var/mob/living/carbon/human/user = usr
+		var/choose_golden_chi = input(user, "Choose what chi you will exchange for your golden essence", "Golden chi") as null|anything in list("Yang", "Yin", "Demon")
+		if(user.golden_chi>0)
+			if (choose_golden_chi == "Yang")
+				user.golden_chi = min(user.golden_chi-1, user.max_golden_chi)
+				user.yang_chi = min(user.yang_chi+3, user.max_yang_chi)
+			if(choose_golden_chi == "Yin")
+				user.golden_chi = min(user.golden_chi-1, user.max_golden_chi)
+				user.yin_chi = min(user.yin_chi+3, user.max_yin_chi)
+			if(choose_golden_chi == "Demon")
+				user.golden_chi = min(user.golden_chi-1, user.max_golden_chi)
+				user.demon_chi = min(user.demon_chi+3, user.max_demon_chi)
+		else
+			to_chat(user, "<span class='warning'>You do not have any golden chi to exchange.</span>")
+/datum/chi_discipline/prayer_eating/activate(mob/living/target, mob/living/carbon/human/caster)
+	ADD_TRAIT(caster, TRAIT_GAMERGOD, "pwr_game")
+	// for some reason the code does not like this, the delay is not there alongside the cost, so im gonna add it manually to all
+	if (caster.max_yin_chi > caster.max_yang_chi)
+		cost_yin = 1
+	else
+		cost_yang = 1
+	switch(level_casting)
+		if(1)
+			// dot 1: intimate communication
+			var/new_say = input(caster, "What do you wish to tell [target]?", "Say") as null|text
+			new_say = sanitize_text(new_say)
+			if (new_say)
+				to_chat(caster, "<span class='boldnotice'>You transmit to [target]:</span> <span class='notice'>[new_say]</span>")
+				for (var/mob/living/M in oviewers(7, caster))
+					to_chat(M, "<span class='boldnotice'>You hear a voice from beyond...</span> <span class='notice'>[new_say]</span>")
+		if(2)
+        // dot 2: prayer eating
+			var/giveprayers = input(target, "[caster] is asking for your prayers, do you do pray to them?", "godly reward") as null|anything in list("accept", "decline")
+			switch(giveprayers)
+				if("accept")
+					to_chat(target, "<span class='userdanger'><b>you feel as energy slowly exits you and enter your god [H]!.</b></span>")
+					to_chat(caster, "<span class='boldnotice'>[target] you feel golden energy, like sweet nectar slowly enter your body as their prayer ends.</span>")
+					caster.golden_chi = min(caster.golden_chi+2, caster.max_golden_chi)
+					to_chat(src, "<span class='servradio'>Some <b>Golden</b> Chi energy enters you...</span>")
+					playsound(src, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
+				if("decline")
+					return FALSE
+		if(3)
+        // dot 3: fulfill prayer
+			var/god_rewoard = input(target, "Choose your reward", "godly reward") as null|anything in list("Power", "Speed", "Healing")
+			if(god_rewoard)
+				to_chat(target, "Your have chosen [god_rewoard].")
+			switch(god_rewoard)
+				if("Power")
+					playsound(target, 'code/modules/wod13/sounds/potence_activate.ogg', 40, TRUE)
+					target.physique += 4
+					to_chat(target, "<span class='userdanger'><b> YOU FEEL OVERWELMING POWER FLOWING THROUGH YOU, FILLING YOU WITH UNNATURAL STRENGTH.</b></span>")
+					spawn((delay)+target.discipline_time_plus)
+						if(caster)
+							target.physique -= 4
+							to_chat(target, "<span class='userdanger'><b> all your power vanishes, leaving you empty inside!.</b></span>")
+							playsound(target, 'code/modules/wod13/sounds/insanity.ogg', 40, TRUE)
+				if("Speed")
+					playsound(target, 'code/modules/wod13/sounds/celerity_activate.ogg', 40, TRUE)
+					target.add_movespeed_modifier(/datum/movespeed_modifier/gifted_speed)
+					to_chat(target, "<span class='userdanger'><b> YOU FEEL AS IF TIME ITSELF STOPPED AROUND YOU!.</b></span>")
+					spawn((delay)+target.discipline_time_plus)
+						if(caster)
+							target.remove_movespeed_modifier(/datum/movespeed_modifier/gifted_speed)
+							to_chat(target, "<span class='userdanger'><b>you movements start to feel sluggish as your perception returns to normal!.</b></span>")
+							playsound(target, 'code/modules/wod13/sounds/insanity.ogg', 40, TRUE)
+				if("Healing")
+					playsound(target, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
+					target.heal_ordered_damage(60, list(BRUTE, TOX, BURN, CLONE, OXY, BRAIN))
+		if(4)
+		// dot 4: unbreakable soul bond
+			var/followering = input(target, "[caster] is asking for you to pray to them, do you do it?", "godly reward") as null|anything in list("accept", "decline")
+			if(HAS_TRAIT(target, TRAIT_GAMERGOD))
+				to_chat(caster, "<span class='userdanger'><b>[target] CANT BE BLESSED AGAIN!")
+				to_chat(target, "<span class='userdanger'><b> you already have a god!.</b></span>")
+			else
+				switch(followering)
+					if("accept")
+						to_chat(target, "<span class='userdanger'><b>AS THE ENERGY OF YOUR GOD ENTERS YOUR BODY, YOU ARE FILLED WITH UNWAVERING LOYALTY [H], DO NOT CHALLENGE YOUR GOD, OR YOU WILL SUFFER.</b></span>")
+						to_chat(caster, "<span class='boldnotice'>[target] has become your follower!.</span>")
+						playsound(caster, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
+						playsound(target, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
+						ADD_TRAIT(target, TRAIT_GAMERGOD, "pwr_game")
+						target.dexterity += 2
+						target.mentality += 1
+						target.physique += 1
+						target.athletics += 2
+						target.lockpicking += 2
+					if("decline")
+						return FALSE
+		if(5)
+		// dot 5: JUDGEMENT
+			if(target.stat >= HARD_CRIT)
+				if(target.stat != DEAD)
+					target.death()
+			else
+				caster.golden_chi = min(caster.golden_chi+1, caster.max_golden_chi)
+				target.emote("scream")
+				target.apply_damage(100, BRUTE, BODY_ZONE_CHEST)
+				to_chat(target, "<span class='userdanger'><b>as [caster] snaps their fingers, you feel your most vital essence burst out of you!</b></span>")
+				if(HAS_TRAIT(target, TRAIT_GAMERGOD))
+					to_chat(target, "<span class='userdanger'><b>YOU HAVE DISAPOINTED YOUR GOD!</b></span>")
+					explosion(target.loc,1, 1, 1)
+	if (caster.max_yin_chi > caster.max_yang_chi)
+		caster.yin_chi = min(caster.yin_chi-1, caster.max_yin_chi)
+		spawn(delay+caster.discipline_time_plus)
+		if(caster.yin_chi < 0)
+			caster.yin_chi = 0
+	else
+		caster.yang_chi = min(caster.yang_chi-1, caster.max_yang_chi)
+		spawn(delay+caster.discipline_time_plus)
+		if(caster.yang_chi < 0)
+			caster.yang_chi = 0
+
+
+
+

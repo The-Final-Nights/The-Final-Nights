@@ -78,6 +78,7 @@
 		hud_used.yin_chi_icon.icon_state = "yin-[round((yin_chi/max_yin_chi)*12)]"
 		hud_used.yang_chi_icon.icon_state = "yang-[round((yang_chi/max_yang_chi)*12)]"
 		hud_used.demon_chi_icon.icon_state = "demon-[round((demon_chi/max_demon_chi)*12)]"
+		hud_used.golden_chi_icon.icon_state = "golden-[round((golden_chi/max_golden_chi)*12)]"
 		if(max_yin_chi > max_yang_chi + 2)
 			hud_used.imbalance_chi_icon.icon_state = "yin_imbalance"
 		else if(max_yang_chi > max_yin_chi + 2)
@@ -116,6 +117,12 @@
 
 /atom/movable/screen/demon_chi
 	name = "Demon Chi"
+	icon = 'code/modules/wod13/UI/chi.dmi'
+	icon_state = "base"
+	layer = HUD_LAYER
+	plane = HUD_PLANE
+/atom/movable/screen/golden_chi
+	name = "golden Chi"
 	icon = 'code/modules/wod13/UI/chi.dmi'
 	icon_state = "base"
 	layer = HUD_LAYER

@@ -284,5 +284,7 @@
 	var/max_yin_chi = 1
 	var/demon_chi = 0
 	var/max_demon_chi = 0
+	var/golden_chi = 0
+	var/max_golden_chi = 0
 	COOLDOWN_DECLARE(chi_restore)
 	var/datum/action/chi_discipline/chi_ranged

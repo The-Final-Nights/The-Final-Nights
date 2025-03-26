@@ -9,6 +9,7 @@
 	//Chi stuff
 	var/yang_chi = 1
 	var/yin_chi = 1
+	var/golden_chi = 1
 	var/wall_rating = VERY_HIGH_WALL_RATING
 
 /area/vtm
@@ -272,6 +273,7 @@
 	ambience_index = AMBIENCE_INTERIOR
 	upper = FALSE
 	fire_controled = TRUE
+	golden_chi = 2
 	wall_rating = LOW_WALL_RATING
 
 /area/vtm/graveyard
@@ -430,6 +432,7 @@
 	fire_controled = TRUE
 	yang_chi = 0
 	yin_chi = 2
+	golden_chi = 1
 	wall_rating = LOW_WALL_RATING // abyss mysticism and stuff
 
 /area/vtm/interior/kiasyd_museum

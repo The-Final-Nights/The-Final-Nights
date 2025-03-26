@@ -61,6 +61,12 @@
 	tenets = list("savelife", "meet", "protect")
 	tenets_done = list("savelife" = 0, "protect" = 0)
 	fails = list("killfirst", "steal", "desire", "grief", "torture")
+/datum/dharma/face_of_the_gods
+    name = "Face of the Gods (Hun+P'o)"
+    desc = "From the far south of Asia, this Heretical Dharmic Cult seeks to amass a herd of Mortal and immortal followers by granting their wishes and ascending to a godlike state, believing themselves to be cast down gods. As god, tend to your flock and do not fall to your divine fury, for it will send you off the path to godhood, do not be disrespected or give in to base desires. Tend to life, Destroy your enemies and stoke joy and worship from your flock as you chase godhood!"
+    tenets = list("protect", "judgement", "cleangrow")
+    tenets_done = list("protect" = 0, "judgement" = 0, "cleangrow" = 0)
+    fails = list("letpo", "disrespect", "desire")
 
 /datum/dharma/proc/on_gain(mob/living/carbon/human/mob)
 	mob.mind.dharma = src
@@ -106,8 +112,7 @@
 	var/virtue_pair_limit = max(10, level * 2)
 
 	var/total_chi = owner.max_yin_chi + owner.max_yang_chi
-	var/total_virtues = Hun + owner.max_demon_chi
-
+	var/total_virtues = owner.max_golden_chi + owner.max_demon_chi
 	var/chi_discrepancy = virtue_pair_limit - total_chi
 	var/virtue_discrepancy = virtue_pair_limit - total_virtues
 
@@ -119,8 +124,9 @@
 	owner.yin_chi = min(owner.yin_chi, owner.max_yin_chi)
 	owner.yang_chi = min(owner.yang_chi, owner.max_yang_chi)
 
-	Hun += virtue_discrepancy / 2
+	owner.max_golden_chi += virtue_discrepancy / 2
 	owner.max_demon_chi += virtue_discrepancy / 2
+	owner.max_golden_chi = min(owner.golden_chi, owner.max_golden_chi)
 	owner.demon_chi = min(owner.demon_chi, owner.max_demon_chi)
 
 /proc/update_dharma(mob/living/carbon/human/kueijin, dot)

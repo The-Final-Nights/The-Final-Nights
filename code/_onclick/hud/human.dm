@@ -112,6 +112,10 @@
 		demon_chi_icon.screen_loc = ui_chi_demon
 		demon_chi_icon.hud = src
 		static_inventory += demon_chi_icon
+		golden_chi_icon = new /atom/movable/screen/golden_chi()
+		golden_chi_icon.screen_loc = ui_chi_golden
+		golden_chi_icon.hud = src
+		static_inventory += golden_chi_icon
 
 	using = new/atom/movable/screen/language_menu
 	using.icon = 'code/modules/wod13/UI/buttons_wide.dmi'

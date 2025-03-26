@@ -3116,6 +3116,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			character.yin_chi = yin
 			character.max_yin_chi = yin
 			character.max_demon_chi = po
+			character.max_golden_chi = hun
 		else
 			character.yang_chi = 3
 			character.max_yang_chi = 3

@@ -100,23 +100,42 @@
 				else // players die less from being succed
 					H.blood_volume = max(H.blood_volume-20, 150)
 			if(iscathayan(src))
-				if(mob.yang_chi > 0 || mob.yin_chi > 0)
-					if(mob.yang_chi > mob.yin_chi)
-						mob.yang_chi = mob.yang_chi-1
-						yang_chi = min(yang_chi+1, max_yang_chi)
-						to_chat(src, "<span class='engradio'>Some <b>Yang</b> Chi energy enters you...</span>")
+				if(HAS_TRAIT(src, TRAIT_GAMERGOD))
+					if(mob.yang_chi > 0 || mob.yin_chi > 0)
+						if(mob.yang_chi > mob.yin_chi)
+							mob.yang_chi = mob.yang_chi-1
+							yang_chi = min(yang_chi+1, max_yang_chi)
+							golden_chi = min(golden_chi+1, max_golden_chi)
+							to_chat(src, "<span class='engradio'>Some <b>Yang</b> Chi energy enters you...</span>")
+							to_chat(src, "<span class='.servradio'>Some <b>Golden</b> Chi energy enters you...</span>")
+						else
+							mob.yin_chi = mob.yin_chi-1
+							yin_chi = min(yin_chi+1, max_yin_chi)
+							golden_chi = min(golden_chi+1, max_golden_chi)
+							to_chat(src, "<span class='medradio'>Some <b>Yin</b> Chi energy enters you...</span>")
+							to_chat(src, "<span class='.servradio'>Some <b>Golden</b> Chi energy enters you...</span>")
+						COOLDOWN_START(mob, chi_restore, 30 SECONDS)
+						update_chi_hud()
 					else
-						mob.yin_chi = mob.yin_chi-1
-						yin_chi = min(yin_chi+1, max_yin_chi)
-						to_chat(src, "<span class='medradio'>Some <b>Yin</b> Chi energy enters you...</span>")
-					COOLDOWN_START(mob, chi_restore, 30 SECONDS)
-					update_chi_hud()
+						to_chat(src, "<span class='warning'>The <b>BLOOD</b> feels tasteless...</span>")
 				else
-					to_chat(src, "<span class='warning'>The <b>BLOOD</b> feels tasteless...</span>")
-			if(H.reagents)
-				if(length(H.reagents.reagent_list))
-					if(prob(50))
-						H.reagents.trans_to(src, min(10, H.reagents.total_volume), transfered_by = mob, methods = VAMPIRE)
+					if(mob.yang_chi > 0 || mob.yin_chi > 0)
+						if(mob.yang_chi > mob.yin_chi)
+							mob.yang_chi = mob.yang_chi-1
+							yang_chi = min(yang_chi+1, max_yang_chi)
+							to_chat(src, "<span class='engradio'>Some <b>Yang</b> Chi energy enters you...</span>")
+						else
+							mob.yin_chi = mob.yin_chi-1
+							yin_chi = min(yin_chi+1, max_yin_chi)
+							to_chat(src, "<span class='medradio'>Some <b>Yin</b> Chi energy enters you...</span>")
+						COOLDOWN_START(mob, chi_restore, 30 SECONDS)
+						update_chi_hud()
+					else
+						to_chat(src, "<span class='warning'>The <b>BLOOD</b> feels tasteless...</span>")
+				if(H.reagents)
+					if(length(H.reagents.reagent_list))
+						if(prob(50))
+							H.reagents.trans_to(src, min(10, H.reagents.total_volume), transfered_by = mob, methods = VAMPIRE)
 		if(clane)
 			if(clane.name == "Giovanni")
 				mob.adjustBruteLoss(20, TRUE)
