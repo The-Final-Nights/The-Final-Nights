@@ -81,6 +81,7 @@ GLOBAL_LIST_INIT(common_loot, list( //common: basic items
 		/obj/item/pushbroom = 1,
 		/obj/item/reagent_containers/glass/bucket = 1,
 		/obj/item/toy/crayon/spraycan = 1,
+		/obj/item/scissors = 1,
 		) = 1,
 
 	list(//equipment
