@@ -2,6 +2,7 @@
 	name = CLAN_NOSFERATU
 	desc = "The Nosferatu wear their curse on the outside. Their bodies horribly twisted and deformed through the Embrace, they lurk on the fringes of most cities, acting as spies and brokers of information. Using animals and their own supernatural capacity to hide, nothing escapes the eyes of the so-called Sewer Rats."
 	curse = "Masquerade-violating appearance."
+	clane_curse_flags = CURSE_NOSFERATU
 	alt_sprite = "nosferatu"
 //	no_hair = TRUE		//Pyotr from Hunter the Parenting had hair and it didn't go out of place in the setting. I'll do limited hairstyles
 	no_facial = TRUE

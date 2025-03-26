@@ -63,7 +63,7 @@ GLOBAL_LIST_EMPTY(las_mirrors)
 
 		//Sorry, you can't see yourself in front of the mirror!
 		if(H.clane)
-			if(H.clane.name == "Lasombra")
+			if(H.clane.clane_curse_flags & CURSE_LASOMBRA)
 				return
 
 		//see code/modules/mob/dead/new_player/preferences.dm at approx line 545 for comments!

@@ -13,7 +13,8 @@ And it also helps for the character set panel
 	var/curse = "None."
 	var/list/allowed_jobs = list()
 	var/list/denied_jobs = list()
-	var/clane_curse //There should be a reference here.
+	///The Clan's unique curse as a bitflag.
+	var/clane_curse_flags = NONE
 	///The Clan's unique body sprite
 	var/alt_sprite
 	///If the Clan's unique body sprites need to account for skintone

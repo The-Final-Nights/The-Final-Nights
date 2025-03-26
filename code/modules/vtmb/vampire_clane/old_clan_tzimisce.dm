@@ -2,6 +2,7 @@
 	name = CLAN_OLD_TZIMISCE
 	desc = " The Old Clan Tzimisce are a small group of Fiends who predate the use of fleshcrafting. They regard Vicissitude as a disease of the soul, and refuse to learn or employ it. In most other respects, though, they resemble the rest of the Clan."
 	curse = "Grounded to material domain."
+	clane_curse_flags = CURSE_OLD_TZIMISCE
 	clane_disciplines = list(
 		/datum/discipline/auspex,
 		/datum/discipline/animalism,
