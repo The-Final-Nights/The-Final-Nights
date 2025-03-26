@@ -9,6 +9,14 @@
  * Misc
  */
 
+// Generic listoflist safe add and removal macros:
+///If value is a list, wrap it in a list so it can be used with list add/remove operations
+#define LIST_VALUE_WRAP_LISTS(value) (islist(value) ? list(value) : value)
+///Add an untyped item to a list, taking care to handle list items by wrapping them in a list to remove the footgun
+#define UNTYPED_LIST_ADD(list, item) (list += LIST_VALUE_WRAP_LISTS(item))
+///Remove an untyped item to a list, taking care to handle list items by wrapping them in a list to remove the footgun
+#define UNTYPED_LIST_REMOVE(list, item) (list -= LIST_VALUE_WRAP_LISTS(item))
+
 #define LAZYINITLIST(L) if (!L) L = list()
 #define UNSETEMPTY(L) if (L && !length(L)) L = null
 #define LAZYCOPY(L) (L ? L.Copy() : list() )
@@ -293,21 +301,21 @@
 	for(var/i=1, i<L.len, ++i)
 		L.Swap(i,rand(i,L.len))
 
-//Return a list with no duplicate entries
-/proc/uniqueList(list/L)
+///Return a list with no duplicate entries
+/proc/unique_list(list/inserted_list)
 	. = list()
-	for(var/i in L)
-		. |= i
+	for(var/i in inserted_list)
+		. |= LIST_VALUE_WRAP_LISTS(i)
 
-//same, but returns nothing and acts on list in place (also handles associated values properly)
-/proc/uniqueList_inplace(list/L)
-	var/temp = L.Copy()
-	L.len = 0
+///same as unique_list, but returns nothing and acts on list in place (also handles associated values properly)
+/proc/unique_list_in_place(list/inserted_list)
+	var/temp = inserted_list.Copy()
+	inserted_list.len = 0
 	for(var/key in temp)
 		if (isnum(key))
-			L |= key
+			inserted_list |= key
 		else
-			L[key] = temp[key]
+			inserted_list[key] = temp[key]
 
 //for sorting clients or mobs by ckey
 /proc/sortKey(list/L, order=1)

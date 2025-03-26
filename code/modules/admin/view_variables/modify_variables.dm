@@ -152,7 +152,7 @@ GLOBAL_PROTECT(VVpixelmovement)
 			return
 
 		if(variable == "(CLEAR DUPES)")
-			L = uniqueList(L)
+			L = unique_list(L)
 			if (!O.vv_edit_var(objectvar, L))
 				to_chat(src, "Your edit was rejected by the object.", confidential = TRUE)
 				return

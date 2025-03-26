@@ -19,7 +19,7 @@
 		if(href_list[VV_HK_LIST_ADD])
 			mod_list_add(target, null, "list", "contents")
 		if(href_list[VV_HK_LIST_ERASE_DUPES])
-			uniqueList_inplace(target)
+			unique_list_in_place(target)
 			log_world("### ListVarEdit by [src]: /list contents: CLEAR DUPES")
 			log_admin("[key_name(src)] modified list's contents: CLEAR DUPES")
 			message_admins("[key_name_admin(src)] modified list's contents: CLEAR DUPES")
