@@ -2207,6 +2207,7 @@
 #include "code\modules\language\french.dm"
 #include "code\modules\language\greek.dm"
 #include "code\modules\language\hebrew.dm"
+#include "code\modules\language\high-falutin.dm"
 #include "code\modules\language\italian.dm"
 #include "code\modules\language\japanese.dm"
 #include "code\modules\language\language.dm"
@@ -3596,8 +3597,8 @@
 #include "modular_tfn\modules\discord\tgs_commands.dm"
 #include "modular_tfn\modules\discord\toggle_notify.dm"
 #include "modular_tfn\modules\fomori\code\fomori.dm"
+#include "modular_tfn\modules\morality\morality.dm"
 #include "modular_tfn\modules\morality\morality_component.dm"
 #include "modular_tfn\modules\panicbunker\code\panicbunker.dm"
-#include "modular_tfn\modules\morality\morality.dm"
 #include "modular_tfn\modules\subtle\subtle.dm"
 // END_INCLUDE
