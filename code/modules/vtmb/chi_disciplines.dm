@@ -1136,7 +1136,7 @@
 			var/mod = 7*level_casting
 			var/meleemod = level_casting*0.35
 			caster.remove_overlay(UNICORN_LAYER)
-			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "holyness", -UNICORN_LAYER)
+			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "holyness2", -UNICORN_LAYER)
 			caster.overlays_standing[UNICORN_LAYER] = potence_overlay
 			caster.apply_overlay(UNICORN_LAYER)
 			caster.physiology.armor.melee += mod
