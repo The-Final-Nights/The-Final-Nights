@@ -54,8 +54,7 @@
 			return
 
 	if(istype(W, /obj/item/organ))
-		to_chat(H, span_userdanger("<b>Selling organs is a depraved act... If I keep doing this, I will become a wight!</b>"))
-		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
+		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 3)
 	else if(istype(W, /obj/item/reagent_containers/food/drinks/meth/cocaine))
 		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 5)
 	else if(istype(W, /obj/item/reagent_containers/food/drinks/meth))
