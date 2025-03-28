@@ -1,4 +1,3 @@
-
 //Preference toggles
 #define SOUND_ADMINHELP			(1<<0)
 #define SOUND_MIDI				(1<<1)
@@ -89,6 +88,7 @@
 #define EXP_TYPE_WAREHOUSE      "Warehouse"
 #define EXP_TYPE_NATIONAL_SECURITY      "National Security"
 #define EXP_TYPE_CHURCH         "Church"
+#define EXP_TYPE_CLUB           "Club"
 #define EXP_TYPE_SPECIAL		"Special"
 #define EXP_TYPE_GHOST			"Ghost"
 #define EXP_TYPE_ADMIN			"Admin"

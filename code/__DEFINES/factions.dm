@@ -12,3 +12,6 @@
 
 // City faction
 #define FACTION_CITY "City"
+
+// Club faction
+#define FACTION_CLUB "Club"
