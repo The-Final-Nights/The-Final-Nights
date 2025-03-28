@@ -154,6 +154,14 @@
 				if(host.real_name != GLOB.banuname)
 					dat += " My primogen is:  [GLOB.banuname].<BR>"
 		if(host.clane.name == "Tzimisce")
+			if(GLOB.tzimiscename != "")
+				if(host.real_name != GLOB.tzimiscename)
+					dat += " My primogen is:  [GLOB.tzimiscename].<BR>"
+		if(host.clane.name == "Giovanni")
+			if(GLOB.giovanniname != "")
+				if(host.real_name != GLOB.giovanniname)
+					dat += " My primogen is:  [GLOB.giovanniname].<BR>"
+		if(host.clane.name == "Tzimisce")
 			if(GLOB.voivodename != "")
 				if(host.real_name != GLOB.voivodename)
 					dat += " The Voivode of the Manor is:  [GLOB.voivodename].<BR>"

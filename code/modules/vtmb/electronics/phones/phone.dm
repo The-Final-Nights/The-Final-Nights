@@ -995,12 +995,16 @@
 	contacts += N
 	var/datum/phonecontact/toreador/T = new()
 	contacts += T
-	var/datum/phonecontact/ventrue/V = new()
-	contacts += V
 	var/datum/phonecontact/banu/B = new()
 	contacts += B
 	var/datum/phonecontact/lasombra/L = new()
 	contacts += L
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
+	var/datum/phonecontact/ventrue/V = new()
+	contacts += V
 	var/datum/phonecontact/harpy/H = new()
 	contacts += H
 
@@ -1020,12 +1024,16 @@
 	contacts += M
 	var/datum/phonecontact/toreador/T = new()
 	contacts += T
-	var/datum/phonecontact/ventrue/V = new()
-	contacts += V
 	var/datum/phonecontact/banu/B = new()
 	contacts += B
 	var/datum/phonecontact/lasombra/L = new()
 	contacts += L
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
+	var/datum/phonecontact/ventrue/V = new()
+	contacts += V
 	var/datum/phonecontact/harpy/H = new()
 	contacts += H
 
@@ -1051,6 +1059,10 @@
 	contacts += B
 	var/datum/phonecontact/lasombra/L = new()
 	contacts += L
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
 	var/datum/phonecontact/harpy/H = new()
 	contacts += H
 
@@ -1076,6 +1088,10 @@
 	contacts += B
 	var/datum/phonecontact/lasombra/L = new()
 	contacts += L
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
 	var/datum/phonecontact/harpy/H = new()
 	contacts += H
 
@@ -1101,6 +1117,10 @@
 	contacts += B
 	var/datum/phonecontact/lasombra/L = new()
 	contacts += L
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
 	var/datum/phonecontact/harpy/H = new()
 	contacts += H
 
@@ -1129,6 +1149,10 @@
 	contacts += T
 	var/datum/phonecontact/banu/B = new()
 	contacts += B
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
 	var/datum/phonecontact/harpy/H = new()
@@ -1154,6 +1178,10 @@
 	contacts += T
 	var/datum/phonecontact/lasombra/L = new()
 	contacts += L
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
 	var/datum/phonecontact/harpy/H = new()
@@ -1172,6 +1200,10 @@
 	contacts += CLERK
 	var/datum/phonecontact/barkeeper/BARKEEPER = new()
 	contacts += BARKEEPER
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
 	var/datum/phonecontact/harpy/H = new()
 	contacts += H
 
@@ -1199,7 +1231,83 @@
 	contacts += L
 	var/datum/phonecontact/banu/B = new()
 	contacts += B
-	var/datum/phonecontact/voivode/Z = new()
-	contacts += Z
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
+	var/datum/phonecontact/harpy/H = new()
+	contacts += H
+
+/obj/item/vamp/phone/tzimisce
+	name = "Tzimisce's Phone"
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "phone"
+	w_class = WEIGHT_CLASS_SMALL
+
+/obj/item/vamp/phone/tzimisce/Initialize()
+	..()
+	GLOB.tzimiscenumber = number
+	GLOB.tzimiscename = owner
+	var/datum/phonecontact/prince/PRINCE = new()
+	contacts += PRINCE
+	var/datum/phonecontact/tremere/REGENT = new()
+	contacts += REGENT
+	var/datum/phonecontact/clerk/CLERK = new()
+	contacts += CLERK
+	var/datum/phonecontact/sheriff/SHERIFF = new()
+	contacts += SHERIFF
+	var/datum/phonecontact/malkavian/M = new()
+	contacts += M
+	var/datum/phonecontact/nosferatu/N = new()
+	contacts += N
+	var/datum/phonecontact/toreador/T = new()
+	contacts += T
+	var/datum/phonecontact/lasombra/L = new()
+	contacts += L
+	var/datum/phonecontact/banu/B = new()
+	contacts += B
+	var/datum/phonecontact/ventrue/V = new()
+	contacts += V
+	var/datum/phonecontact/voivode/Z = new()
+	contacts += Z
+	var/datum/phonecontact/giovanni/G = new()
+	contacts += G
+	var/datum/phonecontact/harpy/H = new()
+	contacts += H
+
+/obj/item/vamp/phone/giovanni
+	name = "Giovanni's Phone"
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "phone"
+	w_class = WEIGHT_CLASS_SMALL
+
+/obj/item/vamp/phone/giovanni/Initialize()
+	..()
+	GLOB.giovanninumber = number
+	GLOB.giovanniname = owner
+	var/datum/phonecontact/prince/PRINCE = new()
+	contacts += PRINCE
+	var/datum/phonecontact/tremere/REGENT = new()
+	contacts += REGENT
+	var/datum/phonecontact/clerk/CLERK = new()
+	contacts += CLERK
+	var/datum/phonecontact/sheriff/SHERIFF = new()
+	contacts += SHERIFF
+	var/datum/phonecontact/malkavian/M = new()
+	contacts += M
+	var/datum/phonecontact/nosferatu/N = new()
+	contacts += N
+	var/datum/phonecontact/toreador/T = new()
+	contacts += T
+	var/datum/phonecontact/lasombra/L = new()
+	contacts += L
+	var/datum/phonecontact/banu/B = new()
+	contacts += B
+	var/datum/phonecontact/tzimisce/TZ = new()
+	contacts += TZ
+	var/datum/phonecontact/ventrue/V = new()
+	contacts += V
+	var/datum/phonecontact/harpy/H = new()
+	contacts += H

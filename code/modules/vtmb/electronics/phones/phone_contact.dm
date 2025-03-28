@@ -1,4 +1,3 @@
-
 /datum/phonecontact
 	var/name = "Unknown"
 	var/number = ""
@@ -151,5 +150,25 @@
 	if(number != GLOB.harpynumber && name_check != GLOB.harpyname)
 		number = GLOB.harpynumber
 		name = GLOB.harpyname + " - " + name
+		return TRUE
+	..()
+
+/datum/phonecontact/tzimisce
+	name = "Primogen Tzimisce"
+
+/datum/phonecontact/tzimisce/check_global_contacts()
+	if(number != GLOB.tzimiscenumber && name_check != GLOB.tzimiscename)
+		number = GLOB.tzimiscenumber
+		name = GLOB.tzimiscename + " - " + name
+		return TRUE
+	..()
+
+/datum/phonecontact/giovanni
+	name = "Primogen Giovanni"
+
+/datum/phonecontact/giovanni/check_global_contacts()
+	if(number != GLOB.giovanninumber && name_check != GLOB.giovanniname)
+		number = GLOB.giovanninumber
+		name = GLOB.giovanniname + " - " + name
 		return TRUE
 	..()
