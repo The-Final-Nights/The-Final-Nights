@@ -1,9 +1,9 @@
 /datum/job/vamp/club_owner
 	title = "Club Manager"
-	faction = FACTION_CLUB
+	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "Toredaor Primogen"
+	supervisors = "the Toreador Primogen"
 	selection_color = "#ff69b4"
 	access = list()
 	minimal_access = list()

@@ -14,4 +14,4 @@
 #define FACTION_CITY "City"
 
 // Club faction
-#define FACTION_CLUB "Club"
+#define FACTION_CLUB "Red Rose Night Club"

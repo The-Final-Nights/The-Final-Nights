@@ -1,6 +1,6 @@
 /datum/job/vamp/strip
 	title = "Club Worker"
-	faction = FACTION_CLUB
+	faction = "Vampire"
 	total_positions = 6
 	spawn_positions = 6
 	supervisors = "The Club Manager"
@@ -24,7 +24,7 @@
 
 /datum/outfit/job/strip
 	name = "Club Worker"
-	jobtype = /datum/job/vamp/citizen
+	jobtype = /datum/job/vamp/strip
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/strip
 	id = /obj/item/cockclock

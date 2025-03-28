@@ -1,6 +1,6 @@
 /datum/job/vamp/club_bouncer
 	title = "Club Bouncer"
-	faction = FACTION_CLUB
+	faction = "Vampire"
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "The Club Manager"

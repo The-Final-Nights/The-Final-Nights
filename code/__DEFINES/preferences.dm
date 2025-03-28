@@ -88,7 +88,7 @@
 #define EXP_TYPE_WAREHOUSE      "Warehouse"
 #define EXP_TYPE_NATIONAL_SECURITY      "National Security"
 #define EXP_TYPE_CHURCH         "Church"
-#define EXP_TYPE_CLUB           "Club"
+#define EXP_TYPE_CLUB           "Red Rose Night Club"
 #define EXP_TYPE_SPECIAL		"Special"
 #define EXP_TYPE_GHOST			"Ghost"
 #define EXP_TYPE_ADMIN			"Admin"
