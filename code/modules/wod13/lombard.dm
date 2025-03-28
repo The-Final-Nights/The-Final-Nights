@@ -58,7 +58,7 @@
 	else if(istype(W, /obj/item/reagent_containers/food/drinks/meth/cocaine))
 		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 5)
 	else if(istype(W, /obj/item/reagent_containers/food/drinks/meth))
-		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 4)
+		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 5)
 	else if(illegal)
 		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 7)
 
