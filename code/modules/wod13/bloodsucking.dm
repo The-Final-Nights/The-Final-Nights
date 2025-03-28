@@ -232,7 +232,7 @@
 					SEND_SOUND(src, sound('code/modules/wod13/sounds/feed_failed.ogg', 0, 0, 75))
 					to_chat(src, "<span class='warning'>This sad sacrifice for your own pleasure affects something deep in your mind.</span>")
 					AdjustMasquerade(-1)
-					SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
+					SEND_SIGNAL(src, COMSIG_PATH_HIT, 3)
 					mob.death()
 			if(!ishuman(mob))
 				if(mob.stat != DEAD)
