@@ -60,7 +60,7 @@
 			else
 				if(ishuman(last_attacker))
 					var/mob/living/carbon/human/HM = last_attacker
-					SEND_SIGNAL(HM, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
+					SEND_SIGNAL(HM, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 3)
 					HM.last_nonraid = world.time
 					HM.killed_count = HM.killed_count+1
 					if(!HM.warrant && !HM.ignores_warrant)
