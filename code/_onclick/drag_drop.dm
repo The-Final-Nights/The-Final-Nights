@@ -15,6 +15,16 @@
 	if(!Adjacent(usr) || !over.Adjacent(usr))
 		return // should stop you from dragging through windows
 
+	// Handle middle-mouse drag interactions (for sex menu)
+	var/list/modifiers = params2list(params)
+	if(modifiers["middle"] && isliving(src) && isliving(over) && src != over)
+		var/mob/living/source = src
+		var/mob/living/target = over
+
+		// Call the sex interaction system
+		show_sex_interaction_menu(source, target)
+		return
+
 	over.MouseDrop_T(src,usr)
 	return
 
