@@ -45,7 +45,7 @@
 			if(istype(last_attacker, /mob/living/simple_animal/hostile))
 				var/mob/living/simple_animal/hostile/HS = last_attacker
 				if(HS.my_creator)
-					SEND_SIGNAL(HS.my_creator, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
+					SEND_SIGNAL(HS.my_creator, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 3)
 					HS.my_creator.last_nonraid = world.time
 					HS.my_creator.killed_count = HS.my_creator.killed_count+1
 					if(!HS.my_creator.warrant && !HS.my_creator.ignores_warrant)
