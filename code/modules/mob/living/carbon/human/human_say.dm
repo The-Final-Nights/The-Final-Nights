@@ -25,6 +25,13 @@
 			return ("Unknown")
 		else
 			return real_name
+	if((wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE)))
+		if(gender == FEMALE)
+			return "Unknown woman"
+		else if(gender == MALE)
+			return "Unknown man"
+		else
+			return "Unknown person"
 	if(mind)
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(changeling?.mimicing )
