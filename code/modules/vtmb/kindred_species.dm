@@ -96,13 +96,9 @@
 				masquerade_level = "'m danger to the Masquerade and my own kind."
 		dat += "Camarilla thinks I[masquerade_level]<BR>"
 		var/humanity = "I'm out of my mind."
-		var/enlight = FALSE
-		if(host.clane)
-			if(host.clane.enlightenment)
-				enlight = TRUE
 
-		if(!enlight)
-			switch(host.humanity)
+		if(!host.clane.is_enlightened)
+			switch(host.morality_path.score)
 				if(8 to 10)
 					humanity = "I'm saintly."
 				if(7)
@@ -117,7 +113,7 @@
 					humanity = "Blood. Feed. Hunger. It gnaws. Must <b>FEED!</b>"
 
 		else
-			switch(host.humanity)
+			switch(host.morality_path.score)
 				if(8 to 10)
 					humanity = "I'm <b>ENLIGHTENED</b>, my <b>BEAST</b> and I are in complete harmony."
 				if(7)
@@ -133,10 +129,6 @@
 
 		dat += "[humanity]<BR>"
 
-		if(host.clane.name == "Brujah")
-			if(GLOB.brujahname != "")
-				if(host.real_name != GLOB.brujahname)
-					dat += " My primogen is:  [GLOB.brujahname].<BR>"
 		if(host.clane.name == "Malkavian")
 			if(GLOB.malkavianname != "")
 				if(host.real_name != GLOB.malkavianname)
@@ -153,6 +145,18 @@
 			if(GLOB.ventruename != "")
 				if(host.real_name != GLOB.ventruename)
 					dat += " My primogen is:  [GLOB.ventruename].<BR>"
+		if(host.clane.name == "Lasombra")
+			if(GLOB.lasombraname != "")
+				if(host.real_name != GLOB.lasombraname)
+					dat += " My primogen is:  [GLOB.lasombraname].<BR>"
+		if(host.clane.name == "Banu Haqim")
+			if(GLOB.banuname != "")
+				if(host.real_name != GLOB.banuname)
+					dat += " My primogen is:  [GLOB.banuname].<BR>"
+		if(host.clane.name == "Tzimisce")
+			if(GLOB.voivodename != "")
+				if(host.real_name != GLOB.voivodename)
+					dat += " The Voivode of the Manor is:  [GLOB.voivodename].<BR>"
 
 		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
 		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
@@ -225,7 +229,7 @@
 	vitae.Grant(C)
 
 	//this needs to be adjusted to be more accurate for blood spending rates
-	var/datum/discipline/bloodheal/giving_bloodheal = new(clamp(13 - C.generation, 1, 10))
+	var/datum/discipline/bloodheal/giving_bloodheal = new(clamp(11 - C.generation, 1, 10))
 	C.give_discipline(giving_bloodheal)
 
 	var/datum/action/blood_power/bloodpower = new()
@@ -386,7 +390,7 @@
 								message_admins("[ADMIN_LOOKUPFLW(sire)] has turned [ADMIN_LOOKUPFLW(childe)] into an Abomination through an admin setting the force_abomination var.")
 								log_game("[key_name(sire)] has turned [key_name(childe)] into an Abomination through an admin setting the force_abomination var.")
 							else
-								switch(storyteller_roll(childe.auspice.level))
+								switch(SSroll.storyteller_roll(childe.auspice.level))
 									if(ROLL_BOTCH)
 										to_chat(sire, span_danger("Something terrible is happening."))
 										to_chat(childe, span_userdanger("Gaia has forsaken you."))
@@ -443,7 +447,7 @@
 						childe.create_disciplines(FALSE, disciplines_to_give)
 						// TODO: Rework the max blood pool calculations.
 						childe.maxbloodpool = 10+((13-min(13, childe.generation))*3)
-						childe.clane.enlightenment = sire.clane.enlightenment
+						childe.clane.is_enlightened = sire.clane.is_enlightened
 
 						//Verify if they accepted to save being a vampire
 						if(iskindred(childe) && save_data_v)
@@ -459,7 +463,7 @@
 								childe_prefs_v.generation = 14
 
 							childe_prefs_v.skin_tone = get_vamp_skin_color(childe.skin_tone)
-							childe_prefs_v.clane.enlightenment = sire.clane.enlightenment
+							childe_prefs_v.clane.is_enlightened = sire.clane.is_enlightened
 
 							//Rarely the new mid round vampires get the 3 brujah skil(it is default)
 							//This will remove if it happens
@@ -739,7 +743,7 @@
 	if (student.stat >= SOFT_CRIT)
 		to_chat(teacher, span_warning("Your student needs to be conscious!"))
 		return
-	if (teacher_prefs.true_experience < 10)
+	if (teacher_prefs.true_experience < 100)
 		to_chat(teacher, span_warning("You don't have enough experience to teach them this Discipline!"))
 		return
 	//checks that the teacher has blood bonded the student, this is something that needs to be reworked when blood bonds are made better
@@ -795,7 +799,7 @@
 
 		visible_message(span_notice("[teacher] begins mentoring [student] in [giving_discipline]."))
 		if (do_after(teacher, 30 SECONDS, student))
-			teacher_prefs.true_experience -= 10
+			teacher_prefs.true_experience -= 100
 
 			student_prefs.discipline_types += teaching_discipline
 			student_prefs.discipline_levels += 0

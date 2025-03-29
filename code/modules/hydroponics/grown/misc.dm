@@ -53,17 +53,6 @@
 	if(parent.age < maturation) // Start a little before it blooms
 		return
 
-	var/turf/open/T = get_turf(parent)
-	if(abs(ONE_ATMOSPHERE - T.return_air().return_pressure()) > (potency/10 + 10)) // clouds can begin showing at around 50-60 potency in standard atmos
-		return
-
-	var/datum/gas_mixture/stank = new
-	ADD_GAS(/datum/gas/miasma, stank.gases)
-	stank.gases[/datum/gas/miasma][MOLES] = (yield + 6)*3.5*MIASMA_CORPSE_MOLES*delta_time // this process is only being called about 2/7 as much as corpses so this is 12-32 times a corpses
-	stank.temperature = T20C // without this the room would eventually freeze and miasma mining would be easier
-	T.assume_air(stank)
-	T.air_update_turf(FALSE, FALSE)
-
 //Galaxy Thistle
 /obj/item/seeds/galaxythistle
 	name = "pack of galaxythistle seeds"

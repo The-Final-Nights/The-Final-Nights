@@ -100,9 +100,6 @@
 
 	if(loc)
 		//Restore air flow if we were blocking it (movables with ATMOS_PASS_PROC will need to do this manually if necessary)
-		if(((CanAtmosPass == ATMOS_PASS_DENSITY && density) || CanAtmosPass == ATMOS_PASS_NO) && isturf(loc))
-			CanAtmosPass = ATMOS_PASS_YES
-			air_update_turf(TRUE, FALSE)
 		loc.handle_atom_del(src)
 
 	if(opacity)
@@ -264,12 +261,14 @@
 		if(!supress_message)
 			M.visible_message("<span class='warning'>[src] grabs [M] passively.</span>", \
 				"<span class='danger'>[src] grabs you passively.</span>")
+	SEND_SIGNAL(pulling, COMSIG_MOVABLE_PULLED)
 	return TRUE
 
 /atom/movable/proc/stop_pulling()
 	if(pulling)
 		pulling.set_pulledby(null)
 		setGrabState(GRAB_PASSIVE)
+		SEND_SIGNAL(pulling, COMSIG_MOVABLE_NO_LONGER_PULLED)
 		pulling = null
 
 

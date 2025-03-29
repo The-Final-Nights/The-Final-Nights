@@ -1,6 +1,6 @@
 /obj/item/masquerade_contract
-	name = "Masquerade Contract"
-	desc = "See where to search the shitty Masquerade breakers. <b>CLICK ON the Contract to see possible breakers for catching. PUSH the target in torpor, to restore the Masquerade</b>"
+	name = "\improper elegant scroll"
+	desc = "This piece of thaumaturgy shows Masquerade breakers. <b>CLICK ON the Contract to see possible breakers for catching. PUSH the target in torpor, to restore the Masquerade.</b>"
 	icon = 'code/modules/wod13/items.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	icon_state = "masquerade"

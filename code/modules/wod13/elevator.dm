@@ -1,8 +1,8 @@
 /obj/elevator_button_up
-	name = "elevator panel"
-	desc = "Call an elevator."
-	icon_state = "control"
-	icon = 'icons/obj/assemblies/new_assemblies.dmi'
+	name = "Upper level Elevator button"
+	desc = "Send an Elevator down."
+	icon_state = "down"
+	icon = 'code/modules/wod13/icons.dmi'
 	anchored = TRUE
 	var/id = 1
 	var/obj/elevator_button_down/D
@@ -47,10 +47,10 @@
 	..()
 
 /obj/elevator_button_down
-	name = "elevator panel"
-	desc = "Call an elevator."
-	icon_state = "control"
-	icon = 'icons/obj/assemblies/new_assemblies.dmi'
+	name = "Lower Level Elevator button"
+	desc = "Send an elevator up."
+	icon_state = "up"
+	icon = 'code/modules/wod13/icons.dmi'
 	anchored = TRUE
 	var/id = 1
 	var/obj/elevator_button_up/U
@@ -95,10 +95,10 @@
 	..()
 
 /obj/elevator_button
-	name = "elevator button"
+	name = "Elevator Panel"
 	desc = "Call an elevator."
-	icon = 'icons/obj/assemblies/new_assemblies.dmi'
-	icon_state = "control"
+	icon = 'code/modules/wod13/icons.dmi'
+	icon_state = "lift"
 	var/id = 1
 	var/obj/elevator_button_down/I = null
 	var/obj/elevator_button_up/O = null

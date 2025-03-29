@@ -99,10 +99,11 @@
 	new /obj/effect/temp_visual/dir_setting/fall_effect(get_turf(src))
 	for(var/mob/living/carbon/C in range(5, src))
 		if(apply_stun_others)
-			C.Stun(30)
+			C.Knockdown(20)
+			C.Stun(10)
 		shake_camera(C, (6-get_dist(C, src))+1, (6-get_dist(C, src)))
 	if(apply_stun_self)
-		Stun(20)
+		Knockdown(20)
 	shake_camera(src, 5, 4)
 
 /mob/living/carbon/werewolf/Initialize()
@@ -132,27 +133,6 @@
 
 /mob/living/carbon/werewolf/assess_threat(judgement_criteria, lasercolor = "", datum/callback/weaponcheck=null) // beepsky won't hunt aliums
 	return -10
-
-/mob/living/carbon/werewolf/handle_environment(datum/gas_mixture/environment)
-	// Run base mob body temperature proc before taking damage
-	// this balances body temp to the environment and natural stabilization
-	. = ..()
-
-	if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
-		//Body temperature is too hot.
-		throw_alert("alien_fire", /atom/movable/screen/alert/alien_fire)
-		switch(bodytemperature)
-			if(360 to 400)
-				apply_damage(HEAT_DAMAGE_LEVEL_1, BURN)
-			if(400 to 460)
-				apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
-			if(460 to INFINITY)
-				if(on_fire)
-					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN)
-				else
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
-	else
-		clear_alert("alien_fire")
 
 /mob/living/carbon/werewolf/reagent_check(datum/reagent/R) //can metabolize all reagents
 	return 0
@@ -198,12 +178,12 @@
 	pixel_w = -8
 //	deathsound = 'sound/voice/hiss6.ogg'
 	bodyparts = list(
-		/obj/item/bodypart/chest,
-		/obj/item/bodypart/head,
-		/obj/item/bodypart/l_arm,
-		/obj/item/bodypart/r_arm,
-		/obj/item/bodypart/r_leg,
-		/obj/item/bodypart/l_leg,
+		/obj/item/bodypart/chest/crinos,
+		/obj/item/bodypart/head/crinos,
+		/obj/item/bodypart/l_arm/crinos,
+		/obj/item/bodypart/r_arm/crinos,
+		/obj/item/bodypart/r_leg/crinos,
+		/obj/item/bodypart/l_leg/crinos,
 		)
 
 	werewolf_armor = 30

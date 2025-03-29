@@ -103,8 +103,6 @@
 			if(istype(holder, /obj/item/assembly_holder))
 				var/obj/item/assembly_holder/assembly_holder = holder
 				I.icon_state = "[initial(I.icon_state)]_[(assembly_holder.a_left == src) ? "l":"r"]" //Sync the offset of the beam with the position of the sensor.
-			else if(istype(holder, /obj/item/transfer_valve))
-				I.icon_state = "[initial(I.icon_state)]_ttv"
 			I.density = TRUE
 			if(!I.Move(_T))
 				qdel(I)

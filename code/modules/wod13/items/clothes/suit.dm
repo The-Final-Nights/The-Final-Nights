@@ -24,8 +24,8 @@
 	icon_state = "malkav_coat"
 
 /obj/item/clothing/suit/hooded/heisenberg
-	name = "chemical costume"
-	desc = "A costume made for chemical protection."
+	name = "chemical PPE Worksuit"
+	desc = "A set of PPE, made for working with chemicals."
 	icon = 'code/modules/wod13/clothing.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
@@ -40,7 +40,7 @@
 
 /obj/item/clothing/head/hooded/heisenberg_hood
 	name = "chemical hood"
-	desc = "A hood attached to a cchemical costume."
+	desc = "A hood attached to a chemical worksuit."
 	icon_state = "heisenberg_helm"
 	icon = 'code/modules/wod13/clothing.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
@@ -344,7 +344,7 @@
 
 /obj/item/clothing/suit/vampire/bogatyr
 	name = "bogatyr armor"
-	desc = "A regal set of armor made of unknown materials."
+	desc = "A regal set of armor, made from what seem to be unknown materials. In truth, the Voivodes know well how to mold flesh and bone."
 	icon_state = "bogatyr_armor"
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	flags_inv = HIDEJUMPSUIT
@@ -364,7 +364,7 @@
 
 /obj/item/clothing/suit/vampire/labcoat/director
 	name = "clinic director's labcoat"
-	desc = "Special labcoat for clinic director with Saint John Clinic's emblems."
+	desc = "Special labcoat for clinic director with the Saint John's Hospital emblem."
 	icon_state = "director"
 
 /obj/item/clothing/suit/vampire/fancy_gray

@@ -23,8 +23,8 @@
 	display_order = JOB_DISPLAY_ORDER_DOCTOR
 	bounty_types = CIV_JOB_MED
 
-	v_duty = "Help your fellow kindred in all matters medicine related. Sell blood. Keep your human colleagues ignorant."
-	duty = "Collect blood by helping mortals at the Clinic."
+	v_duty = "Help your fellow kindred in all matters medicine related. Sell blood. Keep your human colleagues ignorant. Remember, this is a Malkavian Domain."
+	duty = "You are on the night shift at the local clinic. Your eccentric bosses seem to be keeping a close eye on your work."
 	experience_addition = 15
 	allowed_bloodlines = list("Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
 	known_contacts = list("Clinic Director")
@@ -56,11 +56,11 @@
 
 /datum/job/vamp/vdirector
 	title = "Clinic Director"
-	department_head = list("Seneschal")
+	department_head = list("Primogen Malkavian")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Camarilla or the Anarchs"
+	supervisors = "the Patron of the Hospital (Malkavian Primogen)"
 	selection_color = "#80D0F4"
 	exp_type_department = EXP_TYPE_CLINIC
 
@@ -74,14 +74,15 @@
 
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)
 
-	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf")
+	allowed_species = list("Ghoul", "Human", "Kuei-Jin")
 	display_order = JOB_DISPLAY_ORDER_CLINICS_DIRECTOR
 	bounty_types = CIV_JOB_MED
 
-	v_duty = "Keep Saint John's clinic up and running. Sell blood. Keep your human colleagues ignorant."
-	duty = "Keep Saint John's clinic up and running. Collect blood by helping mortals at the Clinic."
+	v_duty = "Keep Saint John's clinic up and running, and sell blood to the vegan kindred who need it. Keep your human colleagues ignorant. Serve the best interests of the hospital's generous eccentric Malkavian Primogen patron who finances everything."
+	duty = "Keep Saint John's Hospital up and running on behalf of your hospital's eccentric patron who finances it. Keep your underlings and colleagues ignorant of the truth, as much as possible. Collect blood donations from locals for the day shift."
 	experience_addition = 15
-	allowed_bloodlines = list("Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
+	// allowed_bloodlines = list("Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
+	known_contacts = list("Primogen Malkavian")
 
 /datum/outfit/job/vdirector
 	name = "Clinic Director"

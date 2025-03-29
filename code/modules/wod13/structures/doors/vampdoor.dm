@@ -80,6 +80,11 @@
 		var/odds = value ? clamp((value/max_rand_value), 0, 1) : 0
 		. += "<span class='notice'>As an expert in lockpicking, you estimate that you have a [round(odds*100, 1)]% chance to lockpick this door successfully.</span>"
 
+/obj/structure/vampdoor/MouseDrop_T(atom/dropping, mob/user, params)
+	. = ..()
+
+	LoadComponent(/datum/component/leanable, dropping)
+
 /obj/structure/vampdoor/attack_hand(mob/user)
 	. = ..()
 	var/mob/living/N = user
@@ -119,10 +124,11 @@
 	if(closed)
 		playsound(src, open_sound, 75, TRUE)
 		icon_state = "[baseicon]-0"
-		density = FALSE
+		set_density(FALSE)
 		opacity = FALSE
 		layer = OPEN_DOOR_LAYER
 		to_chat(user, "<span class='notice'>You open [src].</span>")
+		SEND_SIGNAL(src, COMSIG_AIRLOCK_OPEN)
 		closed = FALSE
 	else
 		for(var/mob/living/L in src.loc)
@@ -132,7 +138,7 @@
 				return
 		playsound(src, close_sound, 75, TRUE)
 		icon_state = "[baseicon]-1"
-		density = TRUE
+		set_density(TRUE)
 		if(!glass)
 			opacity = TRUE
 		layer = ABOVE_ALL_MOB_LAYER

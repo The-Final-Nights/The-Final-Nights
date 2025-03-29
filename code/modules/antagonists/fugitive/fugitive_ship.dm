@@ -58,5 +58,3 @@
 		new /obj/item/clothing/head/helmet/space/eva(src)
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/mask/breath(src)
-	for(var/i in 1 to 3)
-		new /obj/item/tank/internals/oxygen(src)

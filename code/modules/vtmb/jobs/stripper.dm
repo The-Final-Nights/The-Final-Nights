@@ -1,10 +1,10 @@
 
 /datum/job/vamp/strip
-	title = "Stripper"
+	title = "Club Worker"
 	faction = "Vampire"
-	total_positions = 4
-	spawn_positions = 4
-	supervisors = "the Camarilla or the Anarchs"
+	total_positions = 6
+	spawn_positions = 6
+	supervisors = "The Club Owner (Toreador Primogen)"
 	selection_color = "#e3e3e3"
 	access = list()
 	minimal_access = list()
@@ -24,7 +24,7 @@
 	experience_addition = 10
 
 /datum/outfit/job/strip
-	name = "Stripper"
+	name = "Club Worker"
 	jobtype = /datum/job/vamp/citizen
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/strip

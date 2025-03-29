@@ -191,7 +191,7 @@ Dancer
 
 /datum/quirk/hungry
 	name = "Hungry"
-	desc = "You need more food to feed your hunger."
+	desc = "You need more food to feed your hunger, as every expenditure of The Blood is far more costly."
 	mob_trait = TRAIT_HUNGRY
 	value = -3
 	gain_text = "<span class='warning'>You feel extra <b>HUNGRY</b>.</span>"
@@ -290,7 +290,7 @@ Dancer
 			if(J)
 				if(ishuman(owner))
 					var/mob/living/carbon/human/human = owner
-					human.AdjustHumanity(1, 8)
+					SEND_SIGNAL(human, COMSIG_PATH_HIT, PATH_SCORE_UP)
 					last_added_humanity = world.time
 
 /datum/quirk/dwarf

@@ -147,7 +147,7 @@
 
 #define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
 
-
+#define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
 #define TRAIT_DANCER			"dancer"
 #define TRAIT_EXP_DRIVER		"experienced_driver"
 #define TRAIT_BONE_KEY			"bone_key"
@@ -300,3 +300,9 @@
 #define TRAIT_DRIED "trait_dried"
 //Trait for customizable reagent holder
 #define TRAIT_CUSTOMIZABLE_REAGENT_HOLDER "customizable_reagent_holder"
+
+/// Apply this to make a mob not dense, and remove it when you want it to no longer make them undense, other sorces of undesity will still apply. Always define a unique source when adding a new instance of this!
+#define TRAIT_UNDENSE "undense"
+/// A trait gained by leaning against a wall
+#define TRAIT_LEANING "leaning"
+

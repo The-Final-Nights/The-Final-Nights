@@ -27,12 +27,6 @@
 		return QDEL_HINT_LETMELIVE
 	. = ..()
 
-/obj/effect/sound_emitter/singularity_act()
-	return
-
-/obj/effect/sound_emitter/singularity_pull()
-	return
-
 /obj/effect/sound_emitter/examine(mob/user)
 	. = ..()
 	if(!isobserver(user))
@@ -141,7 +135,7 @@
 			hearing_mobs = GLOB.player_list.Copy()
 	for(var/mob/M in hearing_mobs)
 		if(M.client.prefs.toggles & SOUND_MIDI)
-			M.playsound_local(M, sound_file, sound_volume, FALSE, channel = CHANNEL_ADMIN, pressure_affected = FALSE)
+			M.playsound_local(M, sound_file, sound_volume, FALSE, channel = CHANNEL_ADMIN)
 	if(user)
 		log_admin("[ADMIN_LOOKUPFLW(user)] activated a sound emitter with file \"[sound_file]\" at [AREACOORD(src)]")
 	flick("shield1", src)

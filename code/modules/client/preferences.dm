@@ -39,6 +39,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/see_rc_emotes = TRUE
 	//Клан вампиров
 	var/datum/vampireclane/clane = new /datum/vampireclane/brujah()
+	var/datum/morality/morality_path = new /datum/morality/humanity()
 	// Custom Keybindings
 	var/list/key_bindings = list()
 
@@ -156,8 +157,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	//Masquerade
 	var/masquerade = 5
 
-	var/enlightenment = FALSE
-	var/humanity = 7
+	var/path_score = 7
+	var/is_enlightened = FALSE
 
 	//Legacy
 	var/exper = 1440
@@ -272,13 +273,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	athletics = A.start_athletics
 	qdel(clane)
 	clane = new /datum/vampireclane/brujah()
+	qdel(morality_path)
+	morality_path = new /datum/morality/humanity()
 	discipline_types = list()
 	discipline_levels = list()
 	for (var/i in 1 to clane.clane_disciplines.len)
 		discipline_types += clane.clane_disciplines[i]
 		discipline_levels += 1
-	humanity = clane.start_humanity
-	enlightenment = clane.enlightenment
+	path_score = morality_path.score
+	is_enlightened = FALSE
 	random_species()
 	random_character()
 	body_model = rand(1, 3)
@@ -458,24 +461,26 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Species:</b><BR><a href='?_src_=prefs;preference=species;task=input'>[pref_species.name]</a><BR>"
 			switch(pref_species.name)
 				if("Vampire")
-					dat += "<b>Path of [enlightenment ? "Enlightenment" : "Humanity"]:</b> [humanity]/10"
-					if ((true_experience >= (humanity * 2)) && (humanity < 10))
-						dat += " <a href='?_src_=prefs;preference=path;task=input'>Increase [enlightenment ? "Enlightenment" : "Humanity"] ([humanity * 2])</a>"
-					dat += "<br>"
-					if(!slotlocked)
-						dat += "<a href='?_src_=prefs;preference=pathof;task=input'>Switch Path</a><BR>"
 					dat += "<b>Masquerade:</b> [masquerade]/5<BR>"
 					dat += "<b>Generation:</b> [generation]"
 					var/generation_allowed = TRUE
 					if(clane?.name == CLAN_NONE)
 						generation_allowed = FALSE
 					if(generation_allowed)
-						if(generation_bonus)
-							dat += " (+[generation_bonus]/[min(MAX_PUBLIC_GENERATION-1, generation-MAX_PUBLIC_GENERATION)])"
-						if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_PUBLIC_GENERATION))
-							dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+						if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
+							if(generation_bonus)
+								dat += " (+[generation_bonus]/[min(MAX_TRUSTED_GENERATION-1, generation-MAX_TRUSTED_GENERATION)])"
+							if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_TRUSTED_GENERATION))
+								dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+							else
+								dat += "<BR>"
 						else
-							dat += "<BR>"
+							if(generation_bonus)
+								dat += " (+[generation_bonus]/[min(MAX_PUBLIC_GENERATION-1, generation-MAX_PUBLIC_GENERATION)])"
+							if(true_experience >= 20 && generation_bonus < max(0, generation-MAX_PUBLIC_GENERATION))
+								dat += " <a href='?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+							else
+								dat += "<BR>"
 					else
 						dat += "<BR>"
 				if("Kuei-Jin")
@@ -557,27 +562,27 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				DAWOF.sprite_color = werewolf_color
 				DAWOF2.sprite_color = werewolf_color
 
-				var/obj/overlay/eyes_crinos = new(DAWOF)
+				var/obj/effect/overlay/eyes_crinos = new(DAWOF)
 				eyes_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				eyes_crinos.icon_state = "eyes"
 				eyes_crinos.layer = ABOVE_HUD_LAYER
 				eyes_crinos.color = werewolf_eye_color
 				DAWOF.overlays |= eyes_crinos
 
-				var/obj/overlay/scar_crinos = new(DAWOF)
+				var/obj/effect/overlay/scar_crinos = new(DAWOF)
 				scar_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				scar_crinos.icon_state = "scar[werewolf_scar]"
 				scar_crinos.layer = ABOVE_HUD_LAYER
 				DAWOF.overlays |= scar_crinos
 
-				var/obj/overlay/hair_crinos = new(DAWOF)
+				var/obj/effect/overlay/hair_crinos = new(DAWOF)
 				hair_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				hair_crinos.icon_state = "hair[werewolf_hair]"
 				hair_crinos.layer = ABOVE_HUD_LAYER
 				hair_crinos.color = werewolf_hair_color
 				DAWOF.overlays |= hair_crinos
 
-				var/obj/overlay/eyes_lupus = new(DAWOF2)
+				var/obj/effect/overlay/eyes_lupus = new(DAWOF2)
 				eyes_lupus.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 				eyes_lupus.icon_state = "eyes"
 				eyes_lupus.layer = ABOVE_HUD_LAYER
@@ -711,7 +716,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<a href='?_src_=prefs;preference=change_appearance;task=input'>Change Appearance (3)</a><BR>"
 			if(generation_bonus)
 				dat += "<a href='?_src_=prefs;preference=reset_with_bonus;task=input'>Create new character with generation bonus ([generation]-[generation_bonus])</a><BR>"
-			// TFN EDIT ADDITION START
+			// TFN EDIT ADDITION START: headshots, flavortext, and morality system
+			if(pref_species.name == "Vampire")
+				dat += "<h2>[make_font_cool("PATH")]</h2>"
+				dat += "<b>[morality_path.name]:</b> [path_score]/10"
+				if ((true_experience >= (path_score * 2)) && (path_score < 10))
+					dat += " <a href='?_src_=prefs;preference=path;task=input'>Increase Path ([path_score * 2])</a>"
+				if(!slotlocked)
+					dat += "<a href='?_src_=prefs;preference=pathof;task=input'>Switch Path</a>"
+				dat += "<BR><b>Description:</b> [morality_path.desc]<BR>"
+
 			if(length(flavor_text) <= 110)
 				dat += "<BR><b>Flavor Text:</b> [flavor_text] <a href='?_src_=prefs;preference=flavor_text;task=input'>Change</a><BR>"
 			else
@@ -1371,6 +1385,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(is_banned_from(user.ckey, rank))
 				HTML += "<font color=red>[rank]</font></td><td><a href='?_src_=prefs;bancheck=[rank]'> BANNED</a></td></tr>"
 				continue
+			// Jobs can only be whitelisted under Trusted Player, so that's all it checks for.
+			if(job.whitelisted)
+				if(!SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
+					HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> WHITELISTED</font></td></tr>"
+					continue
 			var/required_playtime_remaining = job.required_playtime_remaining(user.client)
 			//<font color=red>text</font> (Zamenil potomu chto slishkom rezhet glaza
 			if(required_playtime_remaining && !bypass)
@@ -2203,8 +2222,21 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						for (var/i in 1 to clane.clane_disciplines.len)
 							discipline_types += clane.clane_disciplines[i]
 							discipline_levels += 1
-						humanity = clane.start_humanity
-						enlightenment = clane.enlightenment
+						is_enlightened = clane.is_enlightened
+						if(is_enlightened)
+							qdel(morality_path)
+							switch(clane.name)
+								if(CLAN_LASOMBRA)
+									morality_path = new /datum/morality/power()
+								if(CLAN_OLD_TZIMISCE)
+									morality_path = new /datum/morality/kings()
+								if(CLAN_TZIMISCE)
+									morality_path = new /datum/morality/metamorphosis()
+								if(CLAN_TRUE_BRUJAH)
+									morality_path = new /datum/morality/heart()
+								if(CLAN_BAALI)
+									morality_path = new /datum/morality/hive()
+						path_score = morality_path.score
 						if(clane.no_hair)
 							hairstyle = "Bald"
 						if(clane.no_facial)
@@ -2323,18 +2355,38 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						discipline_levels[a] = min(5, max(1, discipline_levels[a] + 1))
 
 				if("path")
-					var/cost = max(2, humanity * 2)
-					if ((true_experience < cost) || (humanity >= 10) || !(pref_species.id == "kindred"))
+					var/cost = max(2, path_score * 2)
+					if ((true_experience < cost) || (path_score >= 10) || !(pref_species.id == "kindred"))
 						return
 
 					true_experience -= cost
-					humanity = max(1, humanity + 1)
+					path_score = clamp(path_score + 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
 
 				if("pathof")
-					if (slotlocked || !(pref_species.id == "kindred"))
+					if(slotlocked || !(pref_species.id == "kindred"))
 						return
 
-					enlightenment = !enlightenment
+					if(tgui_alert(user, "Are you sure you want to change Path? This will reset Path-specific stats.", "Confirmation", list("Yes", "No")) != "Yes")
+						return
+
+					var/list/available_paths = list()
+
+					for(var/i in GLOB.morality_list)
+						var/a = GLOB.morality_list[i]
+						var/datum/morality/M = new a
+						available_paths[M.name] += GLOB.morality_list
+						qdel(M)
+
+					var/result = tgui_input_list(user, "Select a Path", "Path Selection", sortList(available_paths))
+					if(result)
+						var/newtype = GLOB.morality_list[result]
+						morality_path = new newtype()
+						path_score = morality_path.score
+						switch(morality_path.alignment)
+							if(MORALITY_HUMANITY)
+								is_enlightened = FALSE
+							if(MORALITY_ENLIGHTENMENT)
+								is_enlightened = TRUE
 
 				if("dharmarise")
 					if ((true_experience < min((dharma_level * 5), 20)) || (dharma_level >= 6) || !(pref_species.id == "kuei-jin"))
@@ -2407,7 +2459,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					true_experience -= 20
-					generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_PUBLIC_GENERATION))
+					if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
+						generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_TRUSTED_GENERATION))
+					else
+						generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_PUBLIC_GENERATION))
 
 				if("friend_text")
 					var/new_text = tgui_input_text(user, "What a Friend knows about me:", "Character Preference", max_length = 512)
@@ -2462,11 +2517,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					log_game("[user] has set their Headshot image to '[headshot_link]'.")
 				// TFN EDIT ADDITION END
 				if("change_appearance")
-					if((true_experience < 3) || !slotlocked)
+					if(!slotlocked)
 						return
 
 					slotlocked = FALSE
-					true_experience -= 3
 
 				if("reset_with_bonus")
 					if((clane?.name == "Caitiff") || !generation_bonus)
@@ -3128,16 +3182,20 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if(pref_species.name == "Vampire")
 		var/datum/vampireclane/CLN = new clane.type()
+		var/datum/morality/MOR = new morality_path.type()
 		character.clane = CLN
+		character.morality_path = MOR
 		character.clane.current_accessory = clane_accessory
 		character.maxbloodpool = 10 + ((13 - generation) * 3)
 		character.bloodpool = rand(2, character.maxbloodpool)
 		character.generation = generation
 		character.max_yin_chi = character.maxbloodpool
 		character.yin_chi = character.max_yin_chi
-		character.clane.enlightenment = enlightenment
+		// TODO: detach is_enlightened from the clan datum
+		character.clane.is_enlightened = is_enlightened
 	else
 		character.clane = null
+		character.morality_path = null
 		character.generation = 13
 		character.bloodpool = character.maxbloodpool
 		if(pref_species.name == "Kuei-Jin")
@@ -3177,7 +3235,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(pref_species.name == "Vampire")
 		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
 		character.health = character.maxHealth
-		character.humanity = humanity
+		character.morality_path.score = path_score
 	character.masquerade = masquerade
 	if(!character_setup)
 		if(character in GLOB.masquerade_breakers_list)
@@ -3313,6 +3371,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(!character.ischildren)
 				character.ischildren = TRUE
 				character.AddElement(/datum/element/children, COMSIG_PARENT_PREQDELETED, src)
+
 		parent << browse(null, "window=preferences_window")
 		parent << browse(null, "window=preferences_browser")
 

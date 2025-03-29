@@ -205,7 +205,7 @@
 
 /obj/item/clothing/head/vampire/bogatyr
 	name = "Bogatyr helmet"
-	desc = "A regal helmet made of unknown materials."
+	desc = "A regal helmet made of what some would seem to be unknown materials. In truth, the Voivodes know well how to mold flesh and bone."
 	icon_state = "bogatyr_helmet"
 	armor = list(MELEE = 55, BULLET = 50, LASER = 60, ENERGY = 60, BOMB = 20, BIO = 0, RAD = 0, FIRE = 40, ACID = 70, WOUND = 30)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEHAIR
@@ -289,3 +289,8 @@
 	desc = "A black beret with a mysterious golden insigna bearing a spiral."
 	icon_state = "pentex_beret"
 	flags_inv = HIDEHAIR
+
+/obj/item/clothing/head/vampire/chauffeur
+	name = "chauffeur hat"
+	desc = "A fine hat like that is well-earned by opening car doors for rich people and driving them around the city."
+	icon_state = "chauffeur"

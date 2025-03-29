@@ -43,7 +43,7 @@
 		new /datum/data/mining_equipment("Lazarus Injector",			/obj/item/lazarus_injector,											1000),
 		new /datum/data/mining_equipment("Silver Pickaxe",				/obj/item/pickaxe/silver,											1000),
 		new /datum/data/mining_equipment("Mining Conscription Kit",		/obj/item/storage/backpack/duffelbag/mining_conscript,				1500),
-		new /datum/data/mining_equipment("Jetpack Upgrade",				/obj/item/tank/jetpack/suit,										2000),
+		new /datum/data/mining_equipment("Jetpack Upgrade",				/obj/item/jetpack/suit,										2000),
 		new /datum/data/mining_equipment("Space Cash",					/obj/item/stack/spacecash/c1000,									2000),
 		new /datum/data/mining_equipment("Mining Hardsuit",				/obj/item/clothing/suit/space/hardsuit/mining,						2000),
 		new /datum/data/mining_equipment("Diamond Pickaxe",				/obj/item/pickaxe/diamond,											2000),
@@ -230,8 +230,9 @@
 
 /obj/machinery/mineral/equipment_vendor/restricted/hospital
 	jobs_allowed = list(
-		"Doctor" = 150,
-		"Clinic Director" = 750,
+		"Doctor" = 1000,
+		"Clinic Director" = 5000,
+		"Primogen Malkavian" = 5000,
 	)
 	prize_list = list(
 		new /datum/data/mining_equipment("iron pill bottle", /obj/item/storage/pill_bottle/iron, 5),
@@ -258,7 +259,7 @@
 /obj/machinery/mineral/equipment_vendor/restricted/police
 	jobs_allowed = list(
 		"Police Officer" = 200,
-		"Federal Investigator" = 400,
+		"Federal Investigator" = 300,
 		"Police Sergeant" = 500,
 		"Police Chief" = 15000,	// don't you love the militirization of the police?
 	)

@@ -27,7 +27,6 @@
 	healable = 0
 	faction = list("cult")
 	is_flying_animal = TRUE
-	pressure_resistance = 100
 	unique_name = 1
 	AIStatus = AI_OFF //normal constructs don't have AI
 	loot = list(/obj/item/ectoplasm)
@@ -460,26 +459,12 @@
 	..()
 
 /datum/action/innate/seek_prey/Activate()
-	if(GLOB.cult_narsie == null)
-		return
 	if(the_construct.seeking)
 		desc = "None can hide from Nar'Sie, activate to track a survivor attempting to flee the red harvest!"
 		button_icon_state = "cult_mark"
 		the_construct.seeking = FALSE
 		to_chat(the_construct, "<span class='cult italic'>You are now tracking Nar'Sie, return to reap the harvest!</span>")
 		return
-	else
-		if(LAZYLEN(GLOB.cult_narsie.souls_needed))
-			the_construct.master = pick(GLOB.cult_narsie.souls_needed)
-			var/mob/living/real_target = the_construct.master //We can typecast this way because Narsie only allows /mob/living into the souls list
-			to_chat(the_construct, "<span class='cult italic'>You are now tracking your prey, [real_target.real_name] - harvest [real_target.p_them()]!</span>")
-		else
-			to_chat(the_construct, "<span class='cult italic'>Nar'Sie has completed her harvest!</span>")
-			return
-		desc = "Activate to track Nar'Sie!"
-		button_icon_state = "sintouch"
-		the_construct.seeking = TRUE
-
 
 /////////////////////////////ui stuff/////////////////////////////
 

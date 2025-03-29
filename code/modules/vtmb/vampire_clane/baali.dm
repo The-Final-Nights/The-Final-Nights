@@ -9,7 +9,7 @@
 	)
 	male_clothes = /obj/item/clothing/under/vampire/baali
 	female_clothes = /obj/item/clothing/under/vampire/baali/female
-	enlightenment = TRUE
+	is_enlightened = TRUE
 	whitelisted = FALSE
 	clan_keys = /obj/item/vamp/keys/baali
 

@@ -1486,7 +1486,7 @@
 			to_chat(usr, "Error: Could not locate the specified mob.")
 			return
 		usr.client.cmd_admin_adjust_masquerade(M)
-
+/*
 	else if(href_list["adjusthumanity"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -1495,7 +1495,7 @@
 			to_chat(usr, "Error: Could not locate the specified mob.")
 			return
 		usr.client.cmd_admin_adjust_humanity(M)
-
+*/
 	else if(href_list["playsoundto"])
 		if(!check_rights(R_SOUND))
 			return

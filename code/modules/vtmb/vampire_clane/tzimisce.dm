@@ -14,7 +14,7 @@
 	male_clothes = /obj/item/clothing/under/vampire/sport
 	female_clothes = /obj/item/clothing/under/vampire/red
 	clan_keys = /obj/item/vamp/keys/tzimisce
-	enlightenment = TRUE
+	is_enlightened = TRUE
 	var/obj/item/heirl
 	whitelisted = FALSE // dont ruin it
 	current_accessory = "none"
@@ -258,7 +258,6 @@
 	minbodytemp = 0
 	maxbodytemp = 1500
 	faction = list("Tzimisce")
-	pressure_resistance = 200
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 2
 	maxbloodpool = 2
@@ -346,12 +345,12 @@
 	mob_size = MOB_SIZE_HUGE
 	speak_chance = 0
 	speed = -0.4
-	maxHealth = 400
-	health = 400
+	maxHealth = 275
+	health = 275
 	butcher_results = list(/obj/item/stack/human_flesh = 10)
 	harm_intent_damage = 5
-	melee_damage_lower = 40
-	melee_damage_upper = 40
+	melee_damage_lower = 30
+	melee_damage_upper = 30
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
@@ -365,19 +364,19 @@
 	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 
 /mob/living/simple_animal/hostile/gangrel/better
-	maxHealth = 500
-	health = 500
-	melee_damage_lower = 45
-	melee_damage_upper = 45
+	maxHealth = 325
+	health = 325
+	melee_damage_lower = 35
+	melee_damage_upper = 35
 	speed = -0.6
 
 /mob/living/simple_animal/hostile/gangrel/best
 	icon_state = "gangrel_m"
 	icon_living = "gangrel_m"
-	maxHealth = 600
-	health = 600
-	melee_damage_lower = 55
-	melee_damage_upper = 55
+	maxHealth = 400 //More in line with new health values.
+	health = 400
+	melee_damage_lower = 40
+	melee_damage_upper = 40
 	speed = -0.8
 
 /mob/living/simple_animal/hostile/gargoyle

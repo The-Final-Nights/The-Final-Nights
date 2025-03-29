@@ -91,11 +91,6 @@
 					/mob/living/simple_animal/bot/floorbot,
 					/mob/living/simple_animal/bot/medbot,
 					/mob/living/simple_animal/bot/medbot,
-					/obj/item/tank/internals/emergency_oxygen,
-					/obj/item/tank/internals/emergency_oxygen,
-					/obj/item/tank/internals/emergency_oxygen,
-					/obj/item/tank/internals/emergency_oxygen,
-					/obj/item/tank/internals/emergency_oxygen,
 					/obj/item/clothing/mask/breath,
 					/obj/item/clothing/mask/breath,
 					/obj/item/clothing/mask/breath,
@@ -126,8 +121,6 @@
 					/obj/item/clothing/mask/gas,
 					/obj/item/flashlight,
 					/obj/item/flashlight,
-					/obj/item/tank/internals/oxygen/red,
-					/obj/item/tank/internals/oxygen/red,
 					/obj/item/extinguisher/advanced,
 					/obj/item/extinguisher/advanced,
 					/obj/item/clothing/head/hardhat/red,
@@ -152,13 +145,7 @@
 					/obj/item/clothing/mask/gas,
 					/obj/item/clothing/mask/breath,
 					/obj/item/clothing/mask/breath,
-					/obj/item/clothing/mask/breath,
-					/obj/item/tank/internals/emergency_oxygen,
-					/obj/item/tank/internals/emergency_oxygen,
-					/obj/item/tank/internals/emergency_oxygen,
-					/obj/item/tank/internals/oxygen,
-					/obj/item/tank/internals/oxygen,
-					/obj/item/tank/internals/oxygen)
+					/obj/item/clothing/mask/breath)
 	crate_name = "internals crate"
 	crate_type = /obj/structure/closet/crate/internals
 
@@ -187,8 +174,6 @@
 	cost = CARGO_CRATE_VALUE * 3
 	contains = list(/obj/item/clothing/under/plasmaman,
 					/obj/item/clothing/under/plasmaman,
-					/obj/item/tank/internals/plasmaman/belt/full,
-					/obj/item/tank/internals/plasmaman/belt/full,
 					/obj/item/clothing/head/helmet/space/plasmaman,
 					/obj/item/clothing/head/helmet/space/plasmaman,
 					/obj/item/clothing/gloves/color/plasmaman,
@@ -219,7 +204,7 @@
 	contains = list(/obj/item/clothing/suit/space,
 					/obj/item/clothing/head/helmet/space,
 					/obj/item/clothing/mask/breath,
-					/obj/item/tank/jetpack/carbondioxide)
+					/obj/item/jetpack)
 	crate_name = "space suit crate"
 	crate_type = /obj/structure/closet/crate/secure
 
@@ -520,10 +505,7 @@
 	desc = "Burn, baby burn. Contains three incendiary grenades, three plasma canisters, and a flamethrower. Requires Armory access to open."
 	cost = CARGO_CRATE_VALUE * 7
 	access = ACCESS_HEADS
-	contains = list(/obj/item/flamethrower/full,
-					/obj/item/tank/internals/plasma,
-					/obj/item/tank/internals/plasma,
-					/obj/item/tank/internals/plasma,
+	contains = list(
 					/obj/item/grenade/chem_grenade/incendiary,
 					/obj/item/grenade/chem_grenade/incendiary,
 					/obj/item/grenade/chem_grenade/incendiary)
@@ -773,134 +755,6 @@
 	cost = CARGO_CRATE_VALUE * 5
 	crate_name = "toolbox crate"
 
-/datum/supply_pack/engineering/portapump
-	name = "Portable Air Pump Crate"
-	desc = "Did someone let the air out of the shuttle again? We've got you covered. Contains two portable air pumps."
-	cost = CARGO_CRATE_VALUE * 4.5
-	access_view = ACCESS_ATMOSPHERICS
-	contains = list(/obj/machinery/portable_atmospherics/pump,
-					/obj/machinery/portable_atmospherics/pump)
-	crate_name = "portable air pump crate"
-
-/datum/supply_pack/engineering/portascrubber
-	name = "Portable Scrubber Crate"
-	desc = "Clean up that pesky plasma leak with your very own set of two portable scrubbers."
-	cost = CARGO_CRATE_VALUE * 4.5
-	access_view = ACCESS_ATMOSPHERICS
-	contains = list(/obj/machinery/portable_atmospherics/scrubber,
-					/obj/machinery/portable_atmospherics/scrubber)
-	crate_name = "portable scrubber crate"
-
-/datum/supply_pack/engineering/hugescrubber
-	name = "Huge Portable Scrubber Crate"
-	desc = "A huge portable scrubber for huge atmospherics mistakes."
-	cost = CARGO_CRATE_VALUE * 7.5
-	access_view = ACCESS_ATMOSPHERICS
-	contains = list(/obj/machinery/portable_atmospherics/scrubber/huge/movable/cargo)
-	crate_name = "huge portable scrubber crate"
-	crate_type = /obj/structure/closet/crate/large
-
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////// Engine Construction /////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-/datum/supply_pack/engine
-	group = "Engine Construction"
-	access_view = ACCESS_ENGINE
-	crate_type = /obj/structure/closet/crate/engineering
-
-/datum/supply_pack/engine/emitter
-	name = "Emitter Crate"
-	desc = "Useful for powering forcefield generators while destroying locked crates and intruders alike. Contains two high-powered energy emitters. Requires CE access to open."
-	cost = CARGO_CRATE_VALUE * 4
-	access = ACCESS_CE
-	contains = list(/obj/machinery/power/emitter,
-					/obj/machinery/power/emitter)
-	crate_name = "emitter crate"
-	crate_type = /obj/structure/closet/crate/secure/engineering
-	dangerous = TRUE
-
-/datum/supply_pack/engine/field_gen
-	name = "Field Generator Crate"
-	desc = "Typically the only thing standing between the station and a messy death. Powered by emitters. Contains two field generators."
-	cost = CARGO_CRATE_VALUE * 3
-	contains = list(/obj/machinery/field/generator,
-					/obj/machinery/field/generator)
-	crate_name = "field generator crate"
-
-/datum/supply_pack/engine/grounding_rods
-	name = "Grounding Rod Crate"
-	desc = "Four grounding rods guaranteed to keep any uppity tesla coil's lightning under control."
-	cost = CARGO_CRATE_VALUE * 8
-	contains = list(/obj/machinery/power/grounding_rod,
-					/obj/machinery/power/grounding_rod,
-					/obj/machinery/power/grounding_rod,
-					/obj/machinery/power/grounding_rod)
-	crate_name = "grounding rod crate"
-	crate_type = /obj/structure/closet/crate/engineering/electrical
-
-/datum/supply_pack/engine/collector
-	name = "Radiation Collector Crate"
-	desc = "Contains three radiation collectors. Useful for collecting energy off nearby Supermatter Crystals, Singularities or Teslas!"
-	cost = CARGO_CRATE_VALUE * 5
-	contains = list(/obj/machinery/power/rad_collector,
-					/obj/machinery/power/rad_collector,
-					/obj/machinery/power/rad_collector)
-	crate_name = "collector crate"
-
-/datum/supply_pack/engine/solar
-	name = "Solar Panel Crate"
-	desc = "Go green with this DIY advanced solar array. Contains twenty one solar assemblies, a solar-control circuit board, and tracker. If you have any questions, please check out the enclosed instruction book."
-	cost = CARGO_CRATE_VALUE * 5
-	contains  = list(/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/solar_assembly,
-					/obj/item/circuitboard/computer/solar_control,
-					/obj/item/electronics/tracker,
-					/obj/item/paper/guides/jobs/engi/solars)
-	crate_name = "solar panel crate"
-	crate_type = /obj/structure/closet/crate/engineering/electrical
-
-/datum/supply_pack/engine/supermatter_shard
-	name = "Supermatter Shard Crate"
-	desc = "The power of the heavens condensed into a single crystal. Requires CE access to open."
-	cost = CARGO_CRATE_VALUE * 20
-	access = ACCESS_CE
-	contains = list(/obj/machinery/power/supermatter_crystal/shard)
-	crate_name = "supermatter shard crate"
-	crate_type = /obj/structure/closet/crate/secure/engineering
-	dangerous = TRUE
-
-/datum/supply_pack/engine/tesla_coils
-	name = "Tesla Coil Crate"
-	desc = "Whether it's high-voltage executions, creating research points, or just plain old assistant electrofrying: This pack of four Tesla coils can do it all!"
-	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/machinery/power/tesla_coil,
-					/obj/machinery/power/tesla_coil,
-					/obj/machinery/power/tesla_coil,
-					/obj/machinery/power/tesla_coil)
-	crate_name = "tesla coil crate"
-	crate_type = /obj/structure/closet/crate/engineering/electrical
-
 //////////////////////////////////////////////////////////////////////////////
 /////////////////////// Canisters & Materials ////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
@@ -972,25 +826,6 @@
 	contains = list(/obj/item/stack/sheet/mineral/wood/fifty)
 	crate_name = "wood planks crate"
 
-/datum/supply_pack/materials/bz
-	name = "BZ Canister Crate"
-	desc = "Contains a canister of BZ. Requires Toxins access to open."
-	cost = CARGO_CRATE_VALUE * 16
-	access = ACCESS_TOXINS
-	access_view = ACCESS_ATMOSPHERICS
-	contains = list(/obj/machinery/portable_atmospherics/canister/bz)
-	crate_name = "BZ canister crate"
-	crate_type = /obj/structure/closet/crate/secure/science
-
-/datum/supply_pack/materials/carbon_dio
-	name = "Carbon Dioxide Canister"
-	desc = "Contains a canister of Carbon Dioxide."
-	cost = CARGO_CRATE_VALUE * 6
-	access_view = ACCESS_ATMOSPHERICS
-	contains = list(/obj/machinery/portable_atmospherics/canister/carbon_dioxide)
-	crate_name = "carbon dioxide canister crate"
-	crate_type = /obj/structure/closet/crate/large
-
 /datum/supply_pack/materials/foamtank
 	name = "Firefighting Foam Tank Crate"
 	desc = "Contains a tank of firefighting foam. Also known as \"plasmaman's bane\"."
@@ -1022,48 +857,6 @@
 	access_view = ACCESS_ENGINE
 	contains = list(/obj/structure/reagent_dispensers/fueltank/large)
 	crate_name = "high-capacity fuel tank crate"
-	crate_type = /obj/structure/closet/crate/large
-
-/datum/supply_pack/materials/nitrogen
-	name = "Nitrogen Canister"
-	desc = "Contains a canister of Nitrogen."
-	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/obj/machinery/portable_atmospherics/canister/nitrogen)
-	crate_name = "nitrogen canister crate"
-	crate_type = /obj/structure/closet/crate/large
-
-/datum/supply_pack/materials/nitrous_oxide_canister
-	name = "Nitrous Oxide Canister"
-	desc = "Contains a canister of Nitrous Oxide. Requires Atmospherics access to open."
-	cost = CARGO_CRATE_VALUE * 6
-	access = ACCESS_ATMOSPHERICS
-	access_view = ACCESS_ATMOSPHERICS
-	contains = list(/obj/machinery/portable_atmospherics/canister/nitrous_oxide)
-	crate_name = "nitrous oxide canister crate"
-	crate_type = /obj/structure/closet/crate/secure
-
-/datum/supply_pack/materials/oxygen
-	name = "Oxygen Canister"
-	desc = "Contains a canister of Oxygen. Canned in Druidia."
-	cost = CARGO_CRATE_VALUE * 3
-	contains = list(/obj/machinery/portable_atmospherics/canister/oxygen)
-	crate_name = "oxygen canister crate"
-	crate_type = /obj/structure/closet/crate/large
-
-/datum/supply_pack/materials/watertank
-	name = "Water Tank Crate"
-	desc = "Contains a tank of dihydrogen monoxide... sounds dangerous."
-	cost = CARGO_CRATE_VALUE * 1.2
-	contains = list(/obj/structure/reagent_dispensers/watertank)
-	crate_name = "water tank crate"
-	crate_type = /obj/structure/closet/crate/large
-
-/datum/supply_pack/materials/water_vapor
-	name = "Water Vapor Canister"
-	desc = "Contains a canister of Water Vapor. I swear to god if you open this in the halls..."
-	cost = CARGO_CRATE_VALUE * 4
-	contains = list(/obj/machinery/portable_atmospherics/canister/water_vapor)
-	crate_name = "water vapor canister crate"
 	crate_type = /obj/structure/closet/crate/large
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1235,9 +1028,7 @@
 	cost = CARGO_CRATE_VALUE * 2
 	access = ACCESS_TOXINS
 	access_view = ACCESS_TOXINS
-	contains = list(/obj/item/tank/internals/plasma,
-					/obj/item/tank/internals/plasma,
-					/obj/item/tank/internals/plasma,
+	contains = list(
 					/obj/item/assembly/igniter,
 					/obj/item/assembly/igniter,
 					/obj/item/assembly/igniter,
@@ -1344,17 +1135,6 @@
 	crate_name = "shield generators crate"
 	crate_type = /obj/structure/closet/crate/secure/science
 
-/datum/supply_pack/science/transfer_valves
-	name = "Tank Transfer Valves Crate"
-	desc = "The key ingredient for making a lot of people very angry very fast. Contains two tank transfer valves. Requires RD access to open."
-	cost = CARGO_CRATE_VALUE * 12
-	access = ACCESS_RD
-	contains = list(/obj/item/transfer_valve,
-					/obj/item/transfer_valve)
-	crate_name = "tank transfer valves crate"
-	crate_type = /obj/structure/closet/crate/secure/science
-	dangerous = TRUE
-
 /datum/supply_pack/science/monkey_helmets
 	name = "Monkey Mind Magnification Helmet crate"
 	desc = "Some research is best done with monkeys, yet sometimes they're just too dumb to complete more complicated tasks. These helmets should help."
@@ -1372,8 +1152,7 @@
 					/obj/item/biopsy_tool,
 					/obj/item/storage/box/petridish,
 					/obj/item/storage/box/petridish,
-					/obj/item/storage/box/swab,
-					/obj/item/construction/plumbing/research)
+					/obj/item/storage/box/swab)
 	crate_name = "cytology supplies crate"
 
 //////////////////////////////////////////////////////////////////////////////

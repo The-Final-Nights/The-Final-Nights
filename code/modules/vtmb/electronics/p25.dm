@@ -195,6 +195,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 			to_chat(listener, message)
 			if(play_sound)
 				playsound(R, play_sound, sound_volume, FALSE)
+
 	return TRUE
 
 // ==============================
@@ -386,6 +387,8 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	if(!A)
 		return
 
+	if(!isMasqueradeEnforced(A))
+		return
 	var/coords = "[location.x]:[location.y]"
 	var/message = ""
 	var/should_announce = FALSE
@@ -586,6 +589,13 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 
 	playsound(src, 'sound/effects/radioclick.ogg', 30, FALSE)
 
+	var/tmp/garble = FALSE
+	if(iskindred(speaker))
+		var/mob/living/carbon/human/speaker_man = speaker
+		if(speaker_man.clane?.name == "Lasombra")
+			message = scramble_lasombra_message(message,speaker_man)
+			garble = TRUE
+
 	var/formatted = format_message(message)
 	if(check_signal())
 		for(var/obj/item/p25radio/R in GLOB.p25_radios)
@@ -598,11 +608,12 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 
 			for(var/mob/listener in get_hearers_in_view(1, get_turf(R)))
 				to_chat(listener, formatted)
+			if(garble)
+				playsound(R, 'code/modules/wod13/sounds/lasombra_whisper.ogg', 0.3, FALSE, ignore_walls = FALSE)
+			playsound(R, 'sound/effects/radioclick.ogg', 1, FALSE)
 
 		if(linked_transceiver)
 			linked_transceiver.broadcast_message(formatted)
-
-		playsound(src, 'sound/effects/radioclick.ogg', 30, FALSE)
 
 	return ITALICS | REDUCE_RANGE
 

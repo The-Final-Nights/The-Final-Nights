@@ -8,9 +8,6 @@
 	base_icon_state = "wall"
 	explosion_block = 1
 
-	thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
-	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
-
 	baseturfs = /turf/open/floor/plating
 
 	flags_ricochet = RICOCHET_HARD
@@ -241,10 +238,6 @@
 			return TRUE
 
 	return FALSE
-
-/turf/closed/wall/singularity_pull(S, current_size)
-	..()
-	wall_singularity_pull(current_size)
 
 /turf/closed/wall/proc/wall_singularity_pull(current_size)
 	if(current_size >= STAGE_FIVE)

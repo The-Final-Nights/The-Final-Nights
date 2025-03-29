@@ -19,7 +19,7 @@
 	icon_state = "brujah_m"
 
 /obj/item/clothing/under/vampire/brujah/female
-	desc = "A sports bra and someblack sweat pants. Classy."
+	desc = "A sports bra and some black sweat pants. Classy."
 	icon_state = "brujah_f"
 
 /obj/item/clothing/under/vampire/gangrel
@@ -202,7 +202,7 @@
 
 /obj/item/clothing/under/vampire/gothic
 	name = "gothic getup"
-	desc = "Torn jeans and a black sweatshirt. Goth. Apperently."
+	desc = "Torn jeans and a black sweatshirt. Goth. Apparently."
 	icon_state = "gothic"
 
 //PATRICK BATEMAN (High Society)
@@ -243,7 +243,7 @@
 
 /obj/item/clothing/under/vampire/janitor
 	name = "janitorial uniform"
-	desc = "Your job? Toilets 'n boilers, boilers 'n toilets, plus that one boilin' toilet."
+	desc = "Another night, another mess to clean."
 	icon_state = "janitor"
 
 /obj/item/clothing/under/vampire/nurse

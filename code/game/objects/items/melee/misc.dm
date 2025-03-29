@@ -430,104 +430,6 @@
 	target.Jitter(20)
 	target.stuttering += 20
 
-/obj/item/melee/supermatter_sword
-	name = "supermatter sword"
-	desc = "In a station full of bad ideas, this might just be the worst."
-	icon = 'icons/obj/items_and_weapons.dmi'
-	icon_state = "supermatter_sword"
-	inhand_icon_state = "supermatter_sword"
-	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	slot_flags = null
-	w_class = WEIGHT_CLASS_BULKY
-	force = 0.001
-	armour_penetration = 1000
-	var/obj/machinery/power/supermatter_crystal/shard
-	var/balanced = 1
-	force_string = "INFINITE"
-
-/obj/item/melee/supermatter_sword/Initialize()
-	. = ..()
-	shard = new /obj/machinery/power/supermatter_crystal(src)
-	qdel(shard.countdown)
-	shard.countdown = null
-	START_PROCESSING(SSobj, src)
-	visible_message("<span class='warning'>[src] appears, balanced ever so perfectly on its hilt. This isn't ominous at all.</span>")
-
-/obj/item/melee/supermatter_sword/process()
-	if(balanced || throwing || ismob(src.loc) || isnull(src.loc))
-		return
-	if(!isturf(src.loc))
-		var/atom/target = src.loc
-		forceMove(target.loc)
-		consume_everything(target)
-	else
-		var/turf/T = get_turf(src)
-		if(!isspaceturf(T))
-			consume_turf(T)
-
-/obj/item/melee/supermatter_sword/afterattack(target, mob/user, proximity_flag)
-	. = ..()
-	if(user && target == user)
-		user.dropItemToGround(src)
-	if(proximity_flag)
-		consume_everything(target)
-
-/obj/item/melee/supermatter_sword/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	..()
-	if(ismob(hit_atom))
-		var/mob/M = hit_atom
-		if(src.loc == M)
-			M.dropItemToGround(src)
-	consume_everything(hit_atom)
-
-/obj/item/melee/supermatter_sword/pickup(user)
-	..()
-	balanced = 0
-
-/obj/item/melee/supermatter_sword/ex_act(severity, target)
-	visible_message("<span class='danger'>The blast wave smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
-	consume_everything()
-
-/obj/item/melee/supermatter_sword/acid_act()
-	visible_message("<span class='danger'>The acid smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
-	consume_everything()
-	return TRUE
-
-/obj/item/melee/supermatter_sword/bullet_act(obj/projectile/P)
-	visible_message("<span class='danger'>[P] smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
-	consume_everything(P)
-	return BULLET_ACT_HIT
-
-/obj/item/melee/supermatter_sword/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] touches [src]'s blade. It looks like [user.p_theyre()] tired of waiting for the radiation to kill [user.p_them()]!</span>")
-	user.dropItemToGround(src, TRUE)
-	shard.Bumped(user)
-
-/obj/item/melee/supermatter_sword/proc/consume_everything(target)
-	if(isnull(target))
-		shard.Consume()
-	else if(!isturf(target))
-		shard.Bumped(target)
-	else
-		consume_turf(target)
-
-/obj/item/melee/supermatter_sword/proc/consume_turf(turf/T)
-	var/oldtype = T.type
-	var/turf/newT = T.ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-	if(newT.type == oldtype)
-		return
-	playsound(T, 'sound/effects/supermatter.ogg', 50, TRUE)
-	T.visible_message("<span class='danger'>[T] smacks into [src] and rapidly flashes to ash.</span>",\
-	"<span class='hear'>You hear a loud crack as you are washed with a wave of heat.</span>")
-	shard.Consume()
-
-/obj/item/melee/supermatter_sword/add_blood_DNA(list/blood_dna)
-	return FALSE
-
 /obj/item/melee/curator_whip
 	name = "curator's whip"
 	desc = "Somewhat eccentric and outdated, it still stings like hell to be hit by."
@@ -570,7 +472,7 @@
 /obj/item/melee/roastingstick/Initialize()
 	. = ..()
 	if (!ovens)
-		ovens = typecacheof(list(/obj/singularity, /obj/energy_ball, /obj/machinery/power/supermatter_crystal, /obj/structure/bonfire))
+		ovens = typecacheof(list(/obj/structure/bonfire))
 
 /obj/item/melee/roastingstick/attack_self(mob/user)
 	on = !on
@@ -637,10 +539,6 @@
 		if (held_sausage?.roasted)
 			to_chat("<span class='warning'>Your [held_sausage] has already been cooked!</span>")
 			return
-		if (istype(target, /obj/singularity) && get_dist(user, target) < 10)
-			to_chat(user, "<span class='notice'>You send [held_sausage] towards [target].</span>")
-			playsound(src, 'sound/items/rped.ogg', 50, TRUE)
-			beam = user.Beam(target,icon_state="rped_upgrade", time = 10 SECONDS)
 		else if (user.Adjacent(target))
 			to_chat(user, "<span class='notice'>You extend [src] towards [target].</span>")
 			playsound(src.loc, 'sound/weapons/batonextend.ogg', 50, TRUE)

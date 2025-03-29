@@ -3,7 +3,6 @@
 
 GLOBAL_LIST_INIT(blacklisted_malf_machines, typecacheof(list(
 		/obj/machinery/field/containment,
-		/obj/machinery/power/supermatter_crystal,
 		/obj/machinery/doomsday_device,
 		/obj/machinery/nuclearbomb,
 		/obj/machinery/nuclearbomb/selfdestruct,
@@ -636,10 +635,6 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module))
 	uses = 1
 
 /datum/action/innate/ai/break_air_alarms/Activate()
-	for(var/obj/machinery/airalarm/AA in GLOB.machines)
-		if(!is_station_level(AA.z))
-			continue
-		AA.obj_flags |= EMAGGED
 	to_chat(owner, "<span class='notice'>All air alarm safeties on the station have been overridden. Air alarms may now use the Flood environmental mode.</span>")
 	owner.playsound_local(owner, 'sound/machines/terminal_off.ogg', 50, 0)
 

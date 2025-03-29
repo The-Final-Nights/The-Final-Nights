@@ -159,7 +159,7 @@
 				if(iskindred(mob) && iskindred(src))
 					var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
 					var/datum/preferences/P2 = GLOB.preferences_datums[ckey(mob.key)]
-					AdjustHumanity(-1, 0)
+					SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 					AdjustMasquerade(-1)
 					if(K.generation >= generation)
 						message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
@@ -232,7 +232,7 @@
 					SEND_SOUND(src, sound('code/modules/wod13/sounds/feed_failed.ogg', 0, 0, 75))
 					to_chat(src, "<span class='warning'>This sad sacrifice for your own pleasure affects something deep in your mind.</span>")
 					AdjustMasquerade(-1)
-					AdjustHumanity(-1, 0)
+					SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
 					mob.death()
 			if(!ishuman(mob))
 				if(mob.stat != DEAD)

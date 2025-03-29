@@ -173,10 +173,24 @@
 		owner.visible_message("<span class='danger'>[owner.name] crackles with static electricity!</span>", "<span class='danger'>You crackle with static electricity, charging up your Gift!</span>")
 		if(do_after(owner, 3 SECONDS))
 			playsound(owner, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
-			tesla_zap(owner, 3, 30, ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE | ZAP_MOB_STUN | ZAP_ALLOW_DUPLICATES)
 			for(var/mob/living/L in orange(6, owner))
 				if(L)
 					L.electrocute_act(30, owner, siemens_coeff = 1, flags = NONE)
+
+/datum/action/gift/hands_full_of_thunder
+	name = "Hands Full of Thunder"
+	desc = "Invoke the machine spirits to support you in these trying times. Abstain from needing bullets when you fire a gun."
+	button_icon_state = "hands_full_of_thunder"
+	gnosis_req = 1
+
+/datum/action/gift/hands_full_of_thunder/Trigger()
+	. = ..()
+	if(allowed_to_proceed)
+		ADD_TRAIT(owner, TRAIT_THUNDERSHOT, src)
+		to_chat(owner, "<span class='notice'>You feel your fingers tingling with electricity...!</span>")
+		spawn(100)
+			REMOVE_TRAIT(owner, TRAIT_THUNDERSHOT, src)
+			to_chat(owner, "<span class='notice'>The buzz in your fingertips ebbs...</span>")
 
 /datum/action/gift/elemental_improvement
 	name = "Elemental Improvement"

@@ -92,31 +92,24 @@
 
 /obj/structure/tank_holder/oxygen
 	icon_state = "holder_oxygen"
-	tank = /obj/item/tank/internals/oxygen
 
 /obj/structure/tank_holder/anesthetic
 	icon_state = "holder_anesthetic"
-	tank = /obj/item/tank/internals/anesthetic
 
 /obj/structure/tank_holder/oxygen/yellow
 	icon_state = "holder_oxygen_f"
-	tank = /obj/item/tank/internals/oxygen/yellow
 
 /obj/structure/tank_holder/oxygen/red
 	icon_state = "holder_oxygen_fr"
-	tank = /obj/item/tank/internals/oxygen/red
 
 /obj/structure/tank_holder/emergency_oxygen
 	icon_state = "holder_emergency"
-	tank = /obj/item/tank/internals/emergency_oxygen
 
 /obj/structure/tank_holder/emergency_oxygen/engi
 	icon_state = "holder_emergency_engi"
-	tank = /obj/item/tank/internals/emergency_oxygen/engi
 
 /obj/structure/tank_holder/generic
 	icon_state = "holder_generic"
-	tank = /obj/item/tank/internals/generic
 
 /obj/structure/tank_holder/extinguisher
 	icon_state = "holder_extinguisher"

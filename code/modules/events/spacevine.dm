@@ -210,29 +210,11 @@
 	severity = 3
 	quality = NEGATIVE
 
-/datum/spacevine_mutation/oxy_eater/process_mutation(obj/structure/spacevine/holder)
-	var/turf/open/floor/T = holder.loc
-	if(istype(T))
-		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/oxygen])
-			return
-		GM.gases[/datum/gas/oxygen][MOLES] = max(GM.gases[/datum/gas/oxygen][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
-
 /datum/spacevine_mutation/nitro_eater
 	name = "nitrogen consuming"
 	hue = "#8888ff"
 	severity = 3
 	quality = NEGATIVE
-
-/datum/spacevine_mutation/nitro_eater/process_mutation(obj/structure/spacevine/holder)
-	var/turf/open/floor/T = holder.loc
-	if(istype(T))
-		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/nitrogen])
-			return
-		GM.gases[/datum/gas/nitrogen][MOLES] = max(GM.gases[/datum/gas/nitrogen][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
 
 /datum/spacevine_mutation/carbondioxide_eater
 	name = "CO2 consuming"
@@ -240,29 +222,11 @@
 	severity = 3
 	quality = POSITIVE
 
-/datum/spacevine_mutation/carbondioxide_eater/process_mutation(obj/structure/spacevine/holder)
-	var/turf/open/floor/T = holder.loc
-	if(istype(T))
-		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/carbon_dioxide])
-			return
-		GM.gases[/datum/gas/carbon_dioxide][MOLES] = max(GM.gases[/datum/gas/carbon_dioxide][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
-
 /datum/spacevine_mutation/plasma_eater
 	name = "toxins consuming"
 	hue = "#ffbbff"
 	severity = 3
 	quality = POSITIVE
-
-/datum/spacevine_mutation/plasma_eater/process_mutation(obj/structure/spacevine/holder)
-	var/turf/open/floor/T = holder.loc
-	if(istype(T))
-		var/datum/gas_mixture/GM = T.air
-		if(!GM.gases[/datum/gas/plasma])
-			return
-		GM.gases[/datum/gas/plasma][MOLES] = max(GM.gases[/datum/gas/plasma][MOLES] - severity * holder.energy, 0)
-		GM.garbage_collect()
 
 /datum/spacevine_mutation/thorns
 	name = "thorny"
@@ -334,10 +298,6 @@
 /obj/structure/spacevine/Initialize()
 	. = ..()
 	add_atom_colour("#ffffff", FIXED_COLOUR_PRIORITY)
-
-/obj/structure/spacevine/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
 
 /obj/structure/spacevine/examine(mob/user)
 	. = ..()
@@ -572,16 +532,6 @@
 		i += SM.on_explosion(severity, target, src)
 	if(!i && prob(100/severity))
 		qdel(src)
-
-/obj/structure/spacevine/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > FIRE_MINIMUM_TEMPERATURE_TO_SPREAD //if you're cold you're safe
-
-/obj/structure/spacevine/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	var/volume = air.return_volume()
-	for(var/datum/spacevine_mutation/SM in mutations)
-		if(SM.process_temperature(src, exposed_temperature, volume)) //If it's ever true we're safe
-			return
-	qdel(src)
 
 /obj/structure/spacevine/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()

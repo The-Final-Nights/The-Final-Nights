@@ -19,7 +19,6 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/stop_sounds,
 	/client/proc/mark_datum_mapview,
 	/client/proc/debugstatpanel,
-	/client/proc/fix_air,				/*resets air in designated radius to its default atmos composition*/
 	// TFN MODULAR START
 	/client/proc/addbunkerbypass,
 	/client/proc/revokebunkerbypass,
@@ -59,7 +58,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/cmd_admin_subtle_message,	/*send a message to somebody as a 'voice in their head'*/
 	/client/proc/cmd_admin_adjust_masquerade, /*adjusts the masquerade level of a player*/
 	/client/proc/cmd_admin_global_adjust_masquerade, /*adjusts the global masquerade*/
-	/client/proc/cmd_admin_adjust_humanity, /*adjusts the humanity level of a player*/
+//	/client/proc/cmd_admin_adjust_humanity, /*adjusts the humanity level of a player*/
 	/client/proc/cmd_admin_headset_message,	/*send a message to somebody through their headset as CentCom*/
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
@@ -121,6 +120,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/mass_zombie_cure,
 	/client/proc/polymorph_all,
 	/client/proc/show_tip,
+	/client/proc/roll_dice_vtm,
 	/client/proc/smite,
 	/client/proc/admin_away,
 	/client/proc/toggle_RMB
@@ -227,7 +227,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/cmd_admin_subtle_message,
 	/client/proc/cmd_admin_adjust_masquerade,
 	/client/proc/cmd_admin_global_adjust_masquerade,
-	/client/proc/cmd_admin_adjust_humanity,
+//	/client/proc/cmd_admin_adjust_humanity,
 	/client/proc/cmd_admin_headset_message,
 	/client/proc/cmd_admin_check_contents,
 	/datum/admins/proc/access_news_network,
@@ -521,7 +521,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	message_admins(msg)
 	admin_ticket_log(M, msg)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adjust Masquerade")
-
+/*
 /client/proc/cmd_admin_adjust_humanity(mob/living/carbon/human/M in GLOB.player_list)
 	set name = "Adjust Humanity"
 	set category = "Admin"
@@ -534,23 +534,21 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		return
 
 	var/is_enlightenment = FALSE
-	if (M.client?.prefs?.enlightenment)
+	if (M.client?.prefs?.is_enlightened)
 		is_enlightenment = TRUE
 
 	var/value = input(usr, "Enter the [is_enlightenment ? "Enlightenment" : "Humanity"] adjustment value for [M.key]:", "Humanity Adjustment", 0) as num|null
 	if(value == null)
 		return
-	if (is_enlightenment)
-		value = -value
 
-	M.AdjustHumanity(value, 0, forced = TRUE)
+	M.morality_path.adjust_humanity(value, M)
 
-	var/msg = "<span class='adminnotice'><b>Humanity Adjustment: [key_name_admin(usr)] adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.humanity]</b></span>"
-	log_admin("HumanityAdjust: [key_name_admin(usr)] has adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.humanity]")
+	var/msg = "<span class='adminnotice'><b>Humanity Adjustment: [key_name_admin(usr)] adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.morality_path.score]</b></span>"
+	log_admin("HumanityAdjust: [key_name_admin(usr)] has adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.morality_path.score]")
 	message_admins(msg)
 	admin_ticket_log(M, msg)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adjust Humanity")
-
+*/
 /client/proc/reward_exp()
 	set name = "Reward Experience"
 	set category = "Admin"
@@ -584,17 +582,17 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		return
 
 	if (!SSwhitelists.whitelists_enabled)
-		to_chat(usr, "<span class='warning'>Whitelisting isn't enabled!</span>")
+		to_chat(usr, span_warning("Whitelisting isn't enabled!"))
 		return
 
 	var/whitelistee = input("CKey to whitelist:") as null|text
 	if (whitelistee)
 		whitelistee = ckey(whitelistee)
 		var/list/whitelist_pool = (SSwhitelists.possible_whitelists - SSwhitelists.get_user_whitelists(whitelistee))
-		if (whitelist_pool.len == 0)
-			to_chat(usr, "<span class='warning'>[whitelistee] already has all whitelists!</span>")
+		if (!length(whitelist_pool))
+			to_chat(usr, span_warning("[whitelistee] already has all whitelists!"))
 			return
-		var/whitelist = input("Whitelist to give:") as null|anything in whitelist_pool
+		var/whitelist = input("Whitelist to give:") as null|anything in sortList(whitelist_pool)
 		if (whitelist)
 			var/ticket_link = input("Link to whitelist request ticket:") as null|text
 			if (ticket_link)
@@ -843,7 +841,6 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set category = "Debug"
 	if(!check_rights(R_DEBUG))
 		return
-	SSair.ui_interact(mob)
 
 /client/proc/reload_cards()
 	set name = "Reload Cards"

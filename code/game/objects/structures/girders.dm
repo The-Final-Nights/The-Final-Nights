@@ -209,13 +209,6 @@
 				return
 
 		add_hiddenprint(user)
-
-	else if(istype(W, /obj/item/pipe))
-		var/obj/item/pipe/P = W
-		if (P.pipe_type in list(0, 1, 5))	//simple pipes, simple bends, and simple manifolds.
-			if(!user.transferItemToLoc(P, drop_location()))
-				return
-			to_chat(user, "<span class='notice'>You fit the pipe into \the [src].</span>")
 	else
 		return ..()
 

@@ -53,9 +53,6 @@
 	else
 		return QDEL_HINT_LETMELIVE
 
-/obj/structure/necropolis_gate/singularity_pull()
-	return 0
-
 /obj/structure/necropolis_gate/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
 	if(!(get_dir(loc, target) == dir))
@@ -75,9 +72,6 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	opacity = TRUE
 	anchored = TRUE
-
-/obj/structure/opacity_blocker/singularity_pull()
-	return 0
 
 /obj/structure/opacity_blocker/Destroy(force)
 	if(force)
@@ -184,7 +178,7 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 		for(var/mob/M in GLOB.player_list)
 			if(M.z == z)
 				to_chat(M, "<span class='userdanger'>Discordant whispers flood your mind in a thousand voices. Each one speaks your name, over and over. Something horrible has been released.</span>")
-				M.playsound_local(T, null, 100, FALSE, 0, FALSE, pressure_affected = FALSE, S = legion_sound)
+				M.playsound_local(T, null, 100, FALSE, 0, FALSE, S = legion_sound)
 				flash_color(M, flash_color = "#FF0000", flash_time = 50)
 		var/mutable_appearance/release_overlay = mutable_appearance('icons/effects/effects.dmi', "legiondoor")
 		notify_ghosts("Legion has been released in the [get_area(src)]!", source = src, alert_overlay = release_overlay, action = NOTIFY_JUMP, flashwindow = FALSE)
@@ -223,9 +217,6 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 	top_overlay.layer = EDGED_TURF_LAYER
 	add_overlay(top_overlay)
 
-/obj/structure/necropolis_arch/singularity_pull()
-	return 0
-
 /obj/structure/necropolis_arch/Destroy(force)
 	if(force)
 		. = ..()
@@ -260,8 +251,6 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 	else
 		return QDEL_HINT_LETMELIVE
 
-/obj/structure/stone_tile/singularity_pull()
-	return
 
 /obj/structure/stone_tile/Crossed(atom/movable/AM)
 	. = ..()

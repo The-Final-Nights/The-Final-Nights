@@ -14,16 +14,6 @@
 //Remember to set the job of the phone with "my_contact_is_important = TRUE", or the check_global_contacts proc won't get activate automatically
 
 
-/datum/phonecontact/brujah
-	name = "Primogen Brujah"
-
-/datum/phonecontact/brujah/check_global_contacts()
-	if(number != GLOB.brujahnumber && name_check != GLOB.brujahname)
-		number = GLOB.brujahnumber
-		name = GLOB.brujahname + " - " + name
-		return TRUE
-	..()
-
 /datum/phonecontact/malkavian
 	name = "Primogen Malkavian"
 
@@ -124,4 +114,42 @@
 		return TRUE
 	..()
 
+/datum/phonecontact/voivode
+	name = "Tzimisce Voivode"
 
+/datum/phonecontact/voivode/check_global_contacts()
+	if(number != GLOB.voivodenumber && name_check != GLOB.voivodename)
+		number = GLOB.voivodenumber
+		name = GLOB.voivodename + " - " + name
+		return TRUE
+	..()
+
+/datum/phonecontact/banu
+	name = "Primogen Banu Haqim"
+
+/datum/phonecontact/banu/check_global_contacts()
+	if(number != GLOB.banunumber && name_check != GLOB.banuname)
+		number = GLOB.banunumber
+		name = GLOB.banuname + " - " + name
+		return TRUE
+	..()
+
+/datum/phonecontact/lasombra
+	name = "Primogen Lasombra"
+
+/datum/phonecontact/lasombra/check_global_contacts()
+	if(number != GLOB.lasombranumber && name_check != GLOB.lasombraname)
+		number = GLOB.lasombranumber
+		name = GLOB.lasombraname + " - " + name
+		return TRUE
+	..()
+
+/datum/phonecontact/harpy
+	name = "Harpy"
+
+/datum/phonecontact/harpy/check_global_contacts()
+	if(number != GLOB.harpynumber && name_check != GLOB.harpyname)
+		number = GLOB.harpynumber
+		name = GLOB.harpyname + " - " + name
+		return TRUE
+	..()

@@ -92,31 +92,24 @@
 
 /obj/machinery/door/poddoor/incinerator_toxmix
 	name = "combustion chamber vent"
-	id = INCINERATOR_TOXMIX_VENT
 
 /obj/machinery/door/poddoor/incinerator_atmos_main
 	name = "turbine vent"
-	id = INCINERATOR_ATMOS_MAINVENT
 
 /obj/machinery/door/poddoor/incinerator_atmos_aux
 	name = "combustion chamber vent"
-	id = INCINERATOR_ATMOS_AUXVENT
 
 /obj/machinery/door/poddoor/atmos_test_room_mainvent_1
 	name = "test chamber 1 vent"
-	id = TEST_ROOM_ATMOS_MAINVENT_1
 
 /obj/machinery/door/poddoor/atmos_test_room_mainvent_2
 	name = "test chamber 2 vent"
-	id = TEST_ROOM_ATMOS_MAINVENT_2
 
 /obj/machinery/door/poddoor/incinerator_syndicatelava_main
 	name = "turbine vent"
-	id = INCINERATOR_SYNDICATELAVA_MAINVENT
 
 /obj/machinery/door/poddoor/incinerator_syndicatelava_aux
 	name = "combustion chamber vent"
-	id = INCINERATOR_SYNDICATELAVA_AUXVENT
 
 /obj/machinery/door/poddoor/massdriver_toxins
 	name = "Toxins Launcher Bay Door"

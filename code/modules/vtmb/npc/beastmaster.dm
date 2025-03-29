@@ -82,11 +82,11 @@ SUBSYSTEM_DEF(beastmastering)
 //	move_to_delay = 3
 //	rapid = 3
 //	ranged = 1
-	maxHealth = 80
-	health = 85
+	maxHealth = 55 //Killable in two swings from a proper melee.
+	health = 55
 	harm_intent_damage = 5
-	melee_damage_lower = 10
-	melee_damage_upper = 25
+	melee_damage_lower = 8
+	melee_damage_upper = 18
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'code/modules/wod13/sounds/dog.ogg'

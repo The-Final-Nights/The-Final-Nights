@@ -8,12 +8,6 @@
 	if(linked)
 		linked.examine(user)
 
-/obj/effect/cult_turf/overlay/singularity_act()
-	return
-
-/obj/effect/cult_turf/overlay/singularity_pull()
-	return
-
 /obj/effect/cult_turf/overlay/Destroy()
 	if(linked)
 		linked = null

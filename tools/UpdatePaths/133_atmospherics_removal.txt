@@ -1,0 +1,2 @@
+/obj/machinery/atmospherics/@SUBTYPES : @DELETE
+/obj/machinery/atmospherics : @DELETE

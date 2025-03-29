@@ -65,11 +65,9 @@
 		/obj/item/assembly/signaler,
 		/obj/item/lightreplacer,
 		/obj/item/construction/rcd,
-		/obj/item/pipe_dispenser,
 		/obj/item/inducer,
 		/obj/item/plunger,
-		/obj/item/airlock_painter,
-		/obj/item/pipe_painter
+		/obj/item/airlock_painter
 		))
 
 /obj/item/storage/belt/utility/chief
@@ -178,14 +176,12 @@
 		/obj/item/wrench/medical,
 		/obj/item/clothing/mask/muzzle,
 		/obj/item/reagent_containers/blood,
-		/obj/item/tank/internals/emergency_oxygen,
 		/obj/item/gun/syringe/syndicate,
 		/obj/item/implantcase,
 		/obj/item/implant,
 		/obj/item/implanter,
 		/obj/item/pinpointer/crew,
 		/obj/item/holosign_creator/medical,
-		/obj/item/construction/plumbing,
 		/obj/item/plunger,
 		/obj/item/reagent_containers/spray,
 		/obj/item/shears,

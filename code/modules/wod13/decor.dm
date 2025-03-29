@@ -415,6 +415,12 @@
 			if(V.upper)
 				icon_state = "[initial(icon_state)]-snow"
 
+/obj/structure/hydrant/MouseDrop_T(atom/dropping, mob/user, params)
+	. = ..()
+
+	if(HAS_TRAIT(user, TRAIT_DWARF)) //Only lean on the fire hydrant if we are smol
+		LoadComponent(/datum/component/leanable, dropping)
+
 /obj/structure/vampcar
 	name = "car"
 	desc = "It drives."
@@ -612,7 +618,7 @@
 			if(starter)
 				if(ishuman(starter))
 					var/mob/living/carbon/human/H = starter
-					H.AdjustHumanity(-1, 0)
+					SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 		L.gib()
 	..()
 
@@ -1024,7 +1030,6 @@
 		user.setDir(SOUTH)
 		user.Stun(100)
 		user.forceMove(src.loc)
-		user.visible_message("<B>[user] dances on [src]!</B>")
 		animatepole(user)
 		user.layer = layer //set them to the poles layer
 		obj_flags &= ~IN_USE

@@ -1,7 +1,7 @@
 /datum/job/vamp/zadruga
 	title = "Zadruga"
 	department_head = list("Voivode")
-	faction = "Ghoul" //[Lucifernix] - Change this to vampire when I actually fix this.
+	faction = "Vampire" //[Lucifernix] - Change this to vampire when I actually fix this.
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = " the Laws of Hospitality"
@@ -40,7 +40,7 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/tzimisce=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
+	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /obj/effect/landmark/start/zadruga
 	name = "Zadruga"

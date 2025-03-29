@@ -15,11 +15,6 @@
 	var/roundstart_fix = FALSE
 
 //===========================VAMPIRE KEYS===========================
-/obj/item/vamp/keys/camarilla
-	name = "Camarilla keys"
-	accesslocks = list("camarilla")
-	color = "#bd3327"
-
 /obj/item/vamp/keys/prince
 	name = "Prince's keys"
 	accesslocks = list(
@@ -59,12 +54,22 @@
 	color = "#bd3327"
 
 /obj/item/vamp/keys/camarilla
-	name = "Millenium Tower keys"
+	name = "Millenium Tower Security keys"
 	accesslocks = list(
 		"milleniumCommon",
 		"clerk",
 		"camarilla"
 	)
+	color = "#bd3327"
+
+/obj/item/vamp/keys/camarilla/ghoul
+	name = "Millenium Tower Employee keys"
+	accesslocks = list(
+		"milleniumCommon",
+		"clerk",
+		"camarilla"
+	)
+	color = "#bd3327"
 
 /obj/item/vamp/keys/archive
 	name = "Archive keys"
@@ -122,7 +127,8 @@
 	name = "Dark keys"
 	accesslocks = list(
 		"lasombra",
-		"kyasid"
+		"kyasid",
+		"church"
 	)
 	color = "#290355"
 
@@ -131,7 +137,9 @@
 	accesslocks = list(
 		"lasombra",
 		"kyasid",
+		"church",
 		"primogen",
+		"primLasombra",
 		"milleniumCommon",
 		"camarilla"
 	)
@@ -148,6 +156,7 @@
 	name = "Solitary keys"
 	accesslocks = list(
 		"kiasyd",
+		"church",
 		"lasombra"
 	)
 	color = "#580443"
@@ -175,6 +184,13 @@
 	name = "Regal keys"
 	accesslocks = list(
 		"tzimisce"
+	)
+
+/obj/item/vamp/keys/tzimisce/manor
+	name = "Manor keys"
+	accesslocks = list(
+		"tzimisce",
+		"tzimiscemanor"
 	)
 
 /obj/item/vamp/keys/setite
@@ -227,6 +243,8 @@
 	accesslocks = list(
 		"banuhaqim",
 		"primogen",
+		"primBanu",
+		"police",
 		"milleniumCommon",
 		"camarilla"
 	)
@@ -313,7 +331,8 @@
 	name = "Clinic director keys"
 	accesslocks = list(
 		"clinic",
-		"director"
+		"director",
+		"malkav"
 	)
 
 //===========================POLICE KEYS===========================
@@ -321,6 +340,13 @@
 	name = "Police keys"
 	accesslocks = list(
 		"police"
+	)
+
+/obj/item/vamp/keys/police/federal
+	name = "Federal Agent keys"
+	accesslocks = list(
+		"police",
+		"glowie"
 	)
 
 /obj/item/vamp/keys/dispatch
@@ -391,6 +417,12 @@
 	name = "Church keys"
 	accesslocks = list(
 		"church"
+	)
+
+/obj/item/vamp/keys/hunter
+	name = "Creed-Bound keys"
+	accesslocks = list(
+		"hunter"
 	)
 
 /obj/item/vamp/keys/supply

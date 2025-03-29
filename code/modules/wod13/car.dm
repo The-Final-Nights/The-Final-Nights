@@ -223,7 +223,7 @@ SUBSYSTEM_DEF(carpool)
 					if(initial(access) == "none") //Stealing a car with no keys assigned to it is basically robbing a random person and not an organization
 						if(ishuman(user))
 							var/mob/living/carbon/human/H = user
-							H.AdjustHumanity(-1, 6)
+							SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 6)
 							call_dharma("steal", H)
 						return
 				else

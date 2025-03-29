@@ -17,6 +17,7 @@
 	desc = "Make those around you admire and want to be closer to you."
 
 	level = 1
+	vitae_cost = 0
 
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_SPEAK
 	target_type = TARGET_HUMAN
@@ -47,7 +48,7 @@
 	for(var/i in 1 to 30)
 		addtimer(cb, (i - 1) * target.total_multiplicative_slowdown())
 	to_chat(target, "<span class='userlove'><b>COME HERE</b></span>")
-	owner.say("COME HERE!!")
+	owner.say("Come here.")
 
 /datum/discipline_power/presence/awe/deactivate(mob/living/carbon/human/target)
 	. = ..()

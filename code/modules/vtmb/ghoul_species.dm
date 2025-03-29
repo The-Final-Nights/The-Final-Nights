@@ -320,17 +320,6 @@
 				P.save_preferences()
 				P.save_character()
 
-			if(H.humanity <= 2)
-				if(prob(5))
-					if(prob(50))
-						H.Stun(20)
-						to_chat(H, "<span class='warning'>You stop in fear and remember your crimes against humanity...</span>")
-						H.emote("cry")
-					else
-						to_chat(H, "<span class='warning'>You feel the rage rising as your last sins come to your head...</span>")
-						H.drop_all_held_items()
-						H.emote("scream")
-
 /datum/species/human/spec_life(mob/living/carbon/human/H)
 	. = ..()
 	if(HAS_TRAIT(H, TRAIT_UNMASQUERADE))

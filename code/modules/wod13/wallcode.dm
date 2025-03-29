@@ -68,38 +68,18 @@
 /turf/closed/wall/vampwall/attack_hand(mob/user)
 	return
 
-/*/turf/closed/wall/vampwall/attack_hand(mob/user)
-	if(ismob(user))
-		var/mob/living/carbon/human/H = user
-
-		var/new_z = H.z + 1
-		var/turf/above_turf = locate(H.x, H.y, new_z)
-		if(H.body_position != STANDING_UP)
-			return
-		if(above_turf && istype(above_turf, /turf/open/openspace))
-			to_chat(H, "<span class='notice'>You start climbing up...")
-
-			var/initial_x = H.x
-			var/initial_y = H.y
-			var/initial_z = H.z
-
-			spawn(20)
-				if(H.x != initial_x || H.y != initial_y || H.z != initial_z)
-					return
-
-				var/roll = rand(1, 20)
-				var/physique = H.physique
-				if(roll + physique*2 >= 15)
-					H.loc = above_turf
-					var/turf/forward_turf = get_step(H.loc, H.dir)
-					if(forward_turf && !forward_turf.density)
-						H.forceMove(forward_turf)
-						to_chat(H, "<span class='notice'>You climb up.</span>")
-				else
-					to_chat(user, ("<span class='warning'>You fail to climb up.</span>"))
+/turf/closed/wall/vampwall/MouseDrop_T(atom/dropping, mob/user, params)
+	. = ..()
+	if(user.a_intent != INTENT_HARM)
+		LoadComponent(/datum/component/leanable, dropping)
 	else
-		return
-*/
+		if(get_dist(user, src) < 2)
+			var/turf/above_turf = locate(user.x, user.y, user.z + 1)
+			if(above_turf && istype(above_turf, /turf/open/openspace))
+				var/mob/living/carbon/human/carbon_human = user
+				carbon_human.climb_wall(above_turf)
+			else
+				to_chat(user, "<span class='warning'>You can't climb there!</span>")
 
 /turf/closed/wall/vampwall/ex_act(severity, target)
 	return
@@ -473,7 +453,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				new /obj/effect/decal/snow_overlay(src)
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -516,7 +495,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				icon_state = "snow[rand(1, 14)]"
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -545,7 +523,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				icon_state = "snow[rand(1, 14)]"
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -584,7 +561,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				icon_state = "snow[rand(1, 14)]"
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -732,7 +708,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				icon_state = "snow[rand(1, 14)]"
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -809,7 +784,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				icon_state = "snow[rand(1, 14)]"
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -825,7 +799,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				icon_state = "snow_rails"
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -966,6 +939,7 @@
 	icon_state = "wallpaper"
 	plane = GAME_PLANE
 	layer = ABOVE_NORMAL_TURF_LAYER	//WALLPAPER_LAYER dont work
+	mouse_opacity = 0
 
 /obj/effect/decal/wallpaper/Initialize()
 	..()
@@ -1073,7 +1047,6 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				initial_gas_mix = WINTER_DEFAULT_ATMOS
 				icon_state = "snow[rand(1, 14)]"
 				footstep = FOOTSTEP_SNOW
 				barefootstep = FOOTSTEP_SNOW
@@ -1315,3 +1288,9 @@
 	barefootstep = FOOTSTEP_TROTUAR
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
+
+//solving anime in a messy way.
+
+/turf/open/floor/plating/Initialize()
+	..()
+	base_icon_state = icon_state

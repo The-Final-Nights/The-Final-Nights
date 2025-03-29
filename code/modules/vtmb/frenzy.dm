@@ -27,14 +27,15 @@
 		SEND_SOUND(src, sound('code/modules/wod13/sounds/bloodneed.ogg', 0, 0, 50))
 		var/check
 		if(iscathayan(src))
-			check = vampireroll(max(1, mind.dharma.Hun), min(10, (mind.dharma.level*2)-max_demon_chi), src)
+			check = SSroll.storyteller_roll(max(1, mind.dharma.Hun), min(10, (mind.dharma.level*2)-max_demon_chi), src)
 		else
-			check = vampireroll(max(1, round(humanity/2)), min(frenzy_chance_boost, frenzy_hardness), src)
+			check = SSroll.storyteller_roll(max(1, round(H.morality_path.score/2)), min(frenzy_chance_boost, frenzy_hardness), src)
 		switch(check)
 			if(DICE_FAILURE)
 				enter_frenzymod()
 				if(iskindred(src))
 					addtimer(CALLBACK(src, PROC_REF(exit_frenzymod)), 100*H.clane.frenzymod)
+					SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
 				else
 					addtimer(CALLBACK(src, PROC_REF(exit_frenzymod)), 100)
 				frenzy_hardness = 1
@@ -42,11 +43,14 @@
 				enter_frenzymod()
 				if(iskindred(src))
 					addtimer(CALLBACK(src, PROC_REF(exit_frenzymod)), 200*H.clane.frenzymod)
+					SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
 				else
 					addtimer(CALLBACK(src, PROC_REF(exit_frenzymod)), 200)
 				frenzy_hardness = 1
 			if(DICE_CRIT_WIN)
 				frenzy_hardness = max(1, frenzy_hardness-1)
+				if(iskindred(src))
+					SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_UP)
 			else
 				frenzy_hardness = min(10, frenzy_hardness+1)
 
@@ -317,8 +321,8 @@
 	if(H.key && (H.stat <= HARD_CRIT))
 		var/datum/preferences/P = GLOB.preferences_datums[ckey(H.key)]
 		if(P)
-			if(P.humanity != H.humanity)
-				P.humanity = H.humanity
+			if(P.path_score != H.morality_path.score)
+				P.path_score = H.morality_path.score
 				P.save_preferences()
 				P.save_character()
 			if(P.masquerade != H.masquerade)
@@ -343,9 +347,9 @@
 //					P.save_preferences()
 //					P.save_character()
 			if(!H.antifrenzy)
-				if(P.humanity < 1)
+				if(P.path_score < 1)
 					H.enter_frenzymod()
-					to_chat(H, "<span class='userdanger'>You have lost control of the Beast within you, and it has taken your body. Be more [H.client.prefs.enlightenment ? "Enlightened" : "humane"] next time.</span>")
+					to_chat(H, "<span class='userdanger'>You have lost control of the Beast within you, and it has taken your body. Be more [H.client.prefs.is_enlightened ? "Enlightened" : "humane"] next time.</span>")
 					H.ghostize(FALSE)
 					P.reason_of_death = "Lost control to the Beast ([time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")])."
 
@@ -364,20 +368,8 @@
 			if(H.bloodpool > 1 || H.in_frenzy)
 				H.last_frenzy_check = world.time
 
-//	var/list/blood_fr = list()
-//	for(var/obj/effect/decal/cleanable/blood/B in range(7, src))
-//		if(B.bloodiness)
-//			blood_fr += B
 	if(!H.antifrenzy && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
 		if(H.bloodpool <= 1 && !H.in_frenzy)
 			if((H.last_frenzy_check + 40 SECONDS) <= world.time)
 				H.last_frenzy_check = world.time
 				H.rollfrenzy()
-				if(H.clane)
-					if(H.clane.enlightenment)
-						if(!H.CheckFrenzyMove())
-							H.AdjustHumanity(1, 10)
-//	if(length(blood_fr) >= 10 && !H.in_frenzy)
-//		if(H.last_frenzy_check+400 <= world.time)
-//			H.last_frenzy_check = world.time
-//			H.rollfrenzy()

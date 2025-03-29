@@ -389,16 +389,6 @@
 	time = 40
 	category = CAT_ROBOT
 
-/datum/crafting_recipe/hygienebot
-	name = "Hygienebot"
-	result = /mob/living/simple_animal/bot/hygienebot
-	reqs = list(/obj/item/bot_assembly/hygienebot = 1,
-				/obj/item/stack/ducts = 1,
-				/obj/item/assembly/prox_sensor = 1)
-	tools = list(TOOL_WELDER)
-	time = 40
-	category = CAT_ROBOT
-
 /datum/crafting_recipe/improvised_pneumatic_cannon //Pretty easy to obtain but
 	name = "Pneumatic Cannon"
 	result = /obj/item/pneumatic_cannon/ghetto
@@ -984,19 +974,11 @@
 
 /datum/crafting_recipe/ghettojetpack
 	name = "Improvised Jetpack"
-	result = /obj/item/tank/jetpack/improvised
+	result = /obj/item/jetpack/improvised
 	time = 30
-	reqs = list(/obj/item/tank/internals/oxygen = 2, /obj/item/extinguisher = 1, /obj/item/pipe = 3, /obj/item/stack/cable_coil = MAXCOIL)
+	reqs = list(/obj/item/extinguisher = 1, /obj/item/pipe = 3, /obj/item/stack/cable_coil = MAXCOIL)
 	category = CAT_MISC
 	tools = list(TOOL_WRENCH, TOOL_WELDER, TOOL_WIRECUTTER)
-
-/datum/crafting_recipe/multiduct
-	name = "Multi-layer duct"
-	result = /obj/machinery/duct/multilayered
-	time = 5
-	reqs = list(/obj/item/stack/ducts = 5)
-	category = CAT_MISC
-	tools = list(TOOL_WELDER)
 
 /datum/crafting_recipe/rib
 	name = "Collosal Rib"

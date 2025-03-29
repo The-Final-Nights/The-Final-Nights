@@ -45,7 +45,7 @@
 	belt = /obj/item/storage/belt/vampire/sheathe/longsword
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/tzimisce=1, /obj/item/melee/vampirearms/fireaxe=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
+	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /obj/effect/landmark/start/bogatyr
 	name = "Bogatyr"

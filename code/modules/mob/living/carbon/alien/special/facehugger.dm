@@ -30,10 +30,6 @@
 
 	var/attached = 0
 
-/obj/item/clothing/mask/facehugger/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
-
 /obj/item/clothing/mask/facehugger/lamarr
 	name = "Lamarr"
 	desc = "The Research Director's pet, a domesticated and debeaked xenomorph facehugger. Friendly, but may still try to couple with your head."
@@ -81,12 +77,6 @@
 			. += "<span class='boldannounce'>[src] seems to be active!</span>"
 	if (sterile)
 		. += "<span class='boldannounce'>It looks like the proboscis has been removed.</span>"
-
-/obj/item/clothing/mask/facehugger/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return (exposed_temperature > 300)
-
-/obj/item/clothing/mask/facehugger/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	Die()
 
 /obj/item/clothing/mask/facehugger/equipped(mob/M)
 	. = ..()

@@ -17,7 +17,7 @@
 					/obj/item/scalpel = 2,
 					/obj/item/circular_saw = 2,
 					/obj/item/bonesetter = 2,
-					/obj/item/tank/internals/anesthetic = 2,
+					/obj/item/anesthetic_tank = 2,
 					/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/screwdriver = 5,
 					/obj/item/crowbar = 5)
