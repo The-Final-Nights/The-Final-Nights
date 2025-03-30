@@ -536,9 +536,6 @@
 /obj/effect/immortality_talisman/attackby()
 	return
 
-/obj/effect/immortality_talisman/singularity_pull()
-	return
-
 /obj/effect/immortality_talisman/Destroy(force)
 	if(!can_destroy && !force)
 		return QDEL_HINT_LETMELIVE

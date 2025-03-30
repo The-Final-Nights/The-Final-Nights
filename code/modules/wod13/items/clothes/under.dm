@@ -243,7 +243,7 @@
 
 /obj/item/clothing/under/vampire/janitor
 	name = "janitorial uniform"
-	desc = "Your job? Toilets 'n boilers, boilers 'n toilets, plus that one boilin' toilet."
+	desc = "Another night, another mess to clean."
 	icon_state = "janitor"
 
 /obj/item/clothing/under/vampire/nurse

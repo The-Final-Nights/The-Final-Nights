@@ -89,7 +89,7 @@
 	var/obj/damap/theatre/TH = new(user)
 	var/obj/damap/bar/BA = new(user)
 	var/obj/damap/hospital/HS = new(user)
-	var/obj/overlay/AM = new(DAMAP)
+	var/obj/effect/overlay/AM = new(DAMAP)
 	AM.icon = 'code/modules/wod13/disciplines.dmi'
 	AM.icon_state = "target"
 	AM.layer = ABOVE_HUD_LAYER
@@ -227,8 +227,7 @@
 	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
 	ears = /obj/item/radio/headset
 	mask = /obj/item/clothing/mask/gas/syndicate
-	back = /obj/item/tank/jetpack/oxygen
-	r_pocket = /obj/item/tank/internals/emergency_oxygen
+	back = /obj/item/jetpack/oxygen
 	id = /obj/item/card/id/syndicate
 // TRIAD
 

@@ -12,12 +12,6 @@
 	var/def_zone
 	pass_flags = PASSTABLE
 
-/obj/effect/beam/singularity_act()
-	return
-
-/obj/effect/beam/singularity_pull()
-	return
-
 /obj/effect/spawner
 	name = "object spawner"
 
@@ -97,3 +91,8 @@
 
 /obj/effect/abstract/directional_lighting
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+
+/obj/effect/dummy/lighting_obj/moblight/fire
+	name = "fire"
+	light_color = LIGHT_COLOR_FIRE
+	light_range = LIGHT_RANGE_FIRE

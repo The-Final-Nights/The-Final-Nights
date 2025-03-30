@@ -19,7 +19,6 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/stop_sounds,
 	/client/proc/mark_datum_mapview,
 	/client/proc/debugstatpanel,
-	/client/proc/fix_air,				/*resets air in designated radius to its default atmos composition*/
 	// TFN MODULAR START
 	/client/proc/addbunkerbypass,
 	/client/proc/revokebunkerbypass,
@@ -842,7 +841,6 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set category = "Debug"
 	if(!check_rights(R_DEBUG))
 		return
-	SSair.ui_interact(mob)
 
 /client/proc/reload_cards()
 	set name = "Reload Cards"

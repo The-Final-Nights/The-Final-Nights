@@ -132,4 +132,10 @@
 
 //trait from /mob/living/carbon/human/npc
 #define NPC_ITEM_TRAIT "npc_item"
+
+// used by the obfuscate ability
+#define OBFUSCATE_TRAIT "obfuscate_trait"
+
+
+
 // END TRAIT DEFINES

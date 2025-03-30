@@ -415,6 +415,12 @@
 			if(V.upper)
 				icon_state = "[initial(icon_state)]-snow"
 
+/obj/structure/hydrant/MouseDrop_T(atom/dropping, mob/user, params)
+	. = ..()
+
+	if(HAS_TRAIT(user, TRAIT_DWARF)) //Only lean on the fire hydrant if we are smol
+		LoadComponent(/datum/component/leanable, dropping)
+
 /obj/structure/vampcar
 	name = "car"
 	desc = "It drives."

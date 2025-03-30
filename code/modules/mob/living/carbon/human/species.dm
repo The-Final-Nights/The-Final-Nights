@@ -1385,6 +1385,8 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
 		return FALSE
+	if(user.blocking)
+		return FALSE
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[target] blocks [user]'s attack!</span>", \
 						"<span class='userdanger'>You block [user]'s attack!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
@@ -1424,7 +1426,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			if(atk_verb == ATTACK_EFFECT_KICK || HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER)) //kicks never miss (provided your species deals more than 0 damage)
 				miss_chance = 0
 			else
-				miss_chance = min((user.dna.species.punchdamagehigh/user.dna.species.punchdamagelow) + user.getStaminaLoss() + (user.getBruteLoss()*0.5), 100) //old base chance for a miss + various damage. capped at 100 to prevent weirdness in prob()
+				miss_chance = min((user.dna.species.punchdamagehigh/user.dna.species.punchdamagelow) + user.getStaminaLoss() + (user.getBruteLoss()*0.1), 100) //Tweaked for FN, keeps stamina loss for future non-lethals, but brute damage impact lowered a lot to account for higher health pool and damages.
 
 		if(!damage || !affecting || prob(miss_chance))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
@@ -1454,12 +1456,11 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
 
-		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.5x raw damage
-			target.apply_damage(damage*1.5, user.dna.species.attack_type, affecting, armor_block)
+		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.1x raw damage
+			target.apply_damage(damage*1.1, user.dna.species.attack_type, affecting, armor_block)
 			log_combat(user, target, "kicked")
-		else//other attacks deal full raw damage + 1.5x in stamina damage
+		else//other attacks deal full damage
 			target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block)
-			target.apply_damage(damage*1.5, STAMINA, affecting, armor_block)
 			log_combat(user, target, "punched")
 		//Punches have a chance (by default 10%, up to 30%) to knock down a target for about 2 seconds depending on physique and dexterity.
 		//Checks if the target is already knocked down to prevent stunlocking.
@@ -1724,17 +1725,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 // ENVIRONMENT HANDLERS //
 //////////////////////////
 
-/**
- * Environment handler for species
- *
- * vars:
- * * environment (required) The environment gas mix
- * * humi (required)(type: /mob/living/carbon/human) The mob we will target
- */
-/datum/species/proc/handle_environment(datum/gas_mixture/environment, mob/living/carbon/human/humi)
-	handle_environment_pressure(environment, humi)
-
-/**
+/*
  * Body temperature handler for species
  *
  * These procs manage body temp, bamage, and alerts
@@ -1743,9 +1734,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
  * * humi (required)(type: /mob/living/carbon/human) The mob we will target
  */
 /datum/species/proc/handle_body_temperature(mob/living/carbon/human/humi)
-	//when in a cryo unit we suspend all natural body regulation
-	if(istype(humi.loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
-		return
 
 	//Only stabilise core temp when alive and not in statis
 	if(humi.stat < DEAD && !IS_IN_STASIS(humi))
@@ -1787,14 +1775,8 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 	humi.adjust_coretemperature(skin_core_change)
 
-	// get the enviroment details of where the mob is standing
-	var/turf/T = get_turf(humi)
-	var/datum/gas_mixture/environment = T.return_air()
-	if(!environment) // if there is no environment (nullspace) drop out here.
-		return
-
 	// Get the temperature of the environment for area
-	var/area_temp = humi.get_temperature(environment)
+	var/area_temp = humi.get_temperature()
 
 	// Get the insulation value based on the area's temp
 	var/thermal_protection = humi.get_insulation_protection(area_temp)
@@ -1972,49 +1954,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		burn_damage = HEAT_DAMAGE_LEVEL_3
 
 	humi.apply_damage(burn_damage, BURN, bodypart)
-
-/// Handle the air pressure of the environment
-/datum/species/proc/handle_environment_pressure(datum/gas_mixture/environment, mob/living/carbon/human/H)
-	var/pressure = environment.return_pressure()
-	var/adjusted_pressure = H.calculate_affecting_pressure(pressure)
-
-	// Set alerts and apply damage based on the amount of pressure
-	switch(adjusted_pressure)
-
-		// Very high pressure, show an alert and take damage
-		if(HAZARD_HIGH_PRESSURE to INFINITY)
-			if(!HAS_TRAIT(H, TRAIT_RESISTHIGHPRESSURE))
-				H.adjustBruteLoss(min(((adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 ) * \
-					PRESSURE_DAMAGE_COEFFICIENT, MAX_HIGH_PRESSURE_DAMAGE) * H.physiology.pressure_mod)
-				H.throw_alert("pressure", /atom/movable/screen/alert/highpressure, 2)
-			else
-				H.clear_alert("pressure")
-
-		// High pressure, show an alert
-		if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
-			H.throw_alert("pressure", /atom/movable/screen/alert/highpressure, 1)
-
-		// No pressure issues here clear pressure alerts
-		if(WARNING_LOW_PRESSURE to WARNING_HIGH_PRESSURE)
-			H.clear_alert("pressure")
-
-		// Low pressure here, show an alert
-		if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
-			// We have low pressure resit trait, clear alerts
-			if(HAS_TRAIT(H, TRAIT_RESISTLOWPRESSURE))
-				H.clear_alert("pressure")
-			else
-				H.throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 1)
-
-		// Very low pressure, show an alert and take damage
-		else
-			// We have low pressure resit trait, clear alerts
-			if(HAS_TRAIT(H, TRAIT_RESISTLOWPRESSURE))
-				H.clear_alert("pressure")
-			else
-				H.adjustBruteLoss(LOW_PRESSURE_DAMAGE * H.physiology.pressure_mod)
-				H.throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 2)
-
 
 //////////
 // FIRE //
@@ -2205,12 +2144,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	if(!T)
 		return FALSE
 
-	var/datum/gas_mixture/environment = T.return_air()
-	if(environment && !(environment.return_pressure() > 30))
-		to_chat(H, "<span class='warning'>The atmosphere is too thin for you to fly!</span>")
-		return FALSE
-	else
-		return TRUE
+	return TRUE
 
 /datum/species/proc/flyslip(mob/living/carbon/human/H)
 	var/obj/buckled_obj

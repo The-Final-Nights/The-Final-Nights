@@ -19,14 +19,6 @@
 		/obj/item/stock_parts/manipulator = 1,
 		/obj/item/stack/sheet/glass = 1)
 
-/obj/item/circuitboard/machine/grounding_rod
-	name = "Grounding Rod (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/power/grounding_rod
-	req_components = list(/obj/item/stock_parts/capacitor = 1)
-	needs_anchored = FALSE
-
-
 /obj/item/circuitboard/machine/telecomms/broadcaster
 	name = "Subspace Broadcaster (Machine Board)"
 	icon_state = "engineering"
@@ -105,41 +97,12 @@
 		/obj/item/stack/cable_coil = 1,
 		/obj/item/stock_parts/subspace/filter = 1)
 
-/obj/item/circuitboard/machine/tesla_coil
-	name = "Tesla Controller (Machine Board)"
-	icon_state = "engineering"
-	desc = "You can use a screwdriver to switch between Research and Power Generation."
-	build_path = /obj/machinery/power/tesla_coil
-	req_components = list(/obj/item/stock_parts/capacitor = 1)
-	needs_anchored = FALSE
-
 /obj/item/circuitboard/machine/cell_charger
 	name = "Cell Charger (Machine Board)"
 	icon_state = "engineering"
 	build_path = /obj/machinery/cell_charger
 	req_components = list(/obj/item/stock_parts/capacitor = 1)
 	needs_anchored = FALSE
-
-/obj/item/circuitboard/machine/circulator
-	name = "Circulator/Heat Exchanger (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/binary/circulator
-	req_components = list()
-
-/obj/item/circuitboard/machine/emitter
-	name = "Emitter (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/power/emitter
-	req_components = list(
-		/obj/item/stock_parts/micro_laser = 1,
-		/obj/item/stock_parts/manipulator = 1)
-	needs_anchored = FALSE
-
-/obj/item/circuitboard/machine/generator
-	name = "Thermo-Electric Generator (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/power/generator
-	req_components = list()
 
 /obj/item/circuitboard/machine/ntnet_relay
 	name = "NTNet Relay (Machine Board)"
@@ -165,38 +128,10 @@
 	icon_state = "engineering"
 	build_path = /obj/machinery/power/port_gen/pacman/super
 
-/obj/item/circuitboard/machine/power_compressor
-	name = "Power Compressor (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/power/compressor
-	req_components = list(
-		/obj/item/stack/cable_coil = 5,
-		/obj/item/stock_parts/manipulator = 6)
-
-/obj/item/circuitboard/machine/power_turbine
-	name = "Power Turbine (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/power/turbine
-	req_components = list(
-		/obj/item/stack/cable_coil = 5,
-		/obj/item/stock_parts/capacitor = 6)
-
 /obj/item/circuitboard/machine/protolathe/department/engineering
 	name = "Departmental Protolathe (Machine Board) - Engineering"
 	icon_state = "engineering"
 	build_path = /obj/machinery/rnd/production/protolathe/department/engineering
-
-/obj/item/circuitboard/machine/rad_collector
-	name = "Radiation Collector (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/power/rad_collector
-	req_components = list(
-		/obj/item/stack/cable_coil = 5,
-		/obj/item/stock_parts/matter_bin = 1,
-		/obj/item/stack/sheet/plasmarglass = 2,
-		/obj/item/stock_parts/capacitor = 1,
-		/obj/item/stock_parts/manipulator = 1)
-	needs_anchored = FALSE
 
 /obj/item/circuitboard/machine/rtg
 	name = "RTG (Machine Board)"
@@ -237,73 +172,6 @@
 /obj/item/circuitboard/machine/techfab/department/engineering
 	name = "\improper Departmental Techfab (Machine Board) - Engineering"
 	build_path = /obj/machinery/rnd/production/techfab/department/engineering
-
-/obj/item/circuitboard/machine/thermomachine
-	name = "Thermomachine (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/unary/thermomachine/freezer
-	var/pipe_layer = PIPING_LAYER_DEFAULT
-	req_components = list(
-		/obj/item/stock_parts/matter_bin = 2,
-		/obj/item/stock_parts/micro_laser = 2,
-		/obj/item/stack/cable_coil = 1,
-		/obj/item/stack/sheet/glass = 1)
-
-/obj/item/circuitboard/machine/thermomachine/multitool_act(mob/living/user, obj/item/multitool/I)
-	. = ..()
-	if (istype(I))
-		pipe_layer = (pipe_layer >= PIPING_LAYER_MAX) ? PIPING_LAYER_MIN : (pipe_layer + 1)
-		to_chat(user, "<span class='notice'>You change the circuitboard to layer [pipe_layer].</span>")
-
-/obj/item/circuitboard/machine/thermomachine/examine()
-	. = ..()
-	. += "<span class='notice'>It is set to layer [pipe_layer].</span>"
-
-/obj/item/circuitboard/machine/HFR_fuel_input
-	name = "HFR Fuel Input (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/fuel_input
-	req_components = list(
-		/obj/item/stack/sheet/plasteel = 5)
-
-/obj/item/circuitboard/machine/HFR_waste_output
-	name = "HFR Waste Output (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/waste_output
-	req_components = list(
-		/obj/item/stack/sheet/plasteel = 5)
-
-/obj/item/circuitboard/machine/HFR_moderator_input
-	name = "HFR Moderator Input (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/moderator_input
-	req_components = list(
-		/obj/item/stack/sheet/plasteel = 5)
-
-/obj/item/circuitboard/machine/HFR_core
-	name = "HFR core (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/atmospherics/components/unary/hypertorus/core
-	req_components = list(
-		/obj/item/stack/cable_coil = 10,
-		/obj/item/stack/sheet/glass = 10,
-		/obj/item/stack/sheet/plasteel = 10)
-
-/obj/item/circuitboard/machine/HFR_corner
-	name = "HFR Corner (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/hypertorus/corner
-	req_components = list(
-		/obj/item/stack/sheet/plasteel = 5)
-
-/obj/item/circuitboard/machine/HFR_interface
-	name = "HFR Interface (Machine Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/hypertorus/interface
-	req_components = list(
-		/obj/item/stack/cable_coil = 10,
-		/obj/item/stack/sheet/glass = 10,
-		/obj/item/stack/sheet/plasteel = 5)
 
 //Generic
 
@@ -419,29 +287,6 @@
 	if(is_special_type)
 		return
 	. += "<span class='info'>[src] is set to [fridges_name_paths[build_path]]. You can use a screwdriver to reconfigure it.</span>"
-
-
-/obj/item/circuitboard/machine/space_heater
-	name = "Space Heater (Machine Board)"
-	icon_state = "generic"
-	build_path = /obj/machinery/space_heater
-	req_components = list(
-		/obj/item/stock_parts/micro_laser = 1,
-		/obj/item/stock_parts/capacitor = 1,
-		/obj/item/stack/cable_coil = 3)
-	needs_anchored = FALSE
-
-/obj/item/circuitboard/machine/electrolyzer
-	name = "Electrolyzer (Machine Board)"
-	icon_state = "generic"
-	build_path = /obj/machinery/electrolyzer
-	req_components = list(
-		/obj/item/stock_parts/electrolite = 2,
-		/obj/item/stock_parts/capacitor = 2,
-		/obj/item/stack/cable_coil = 5,
-		/obj/item/stack/sheet/glass = 1)
-
-	needs_anchored = FALSE
 
 
 /obj/item/circuitboard/machine/techfab
@@ -620,15 +465,6 @@
 		to_chat(user, "<span class='notice'>You change the circuit board setting to \"[new_name]\".</span>")
 	else
 		return ..()
-
-/obj/item/circuitboard/machine/cryo_tube
-	name = "Cryotube (Machine Board)"
-	icon_state = "medical"
-	build_path = /obj/machinery/atmospherics/components/unary/cryo_cell
-	req_components = list(
-		/obj/item/stock_parts/matter_bin = 1,
-		/obj/item/stack/cable_coil = 1,
-		/obj/item/stack/sheet/glass = 4)
 
 /obj/item/circuitboard/machine/fat_sucker
 	name = "Lipid Extractor (Machine Board)"
@@ -1180,17 +1016,6 @@
 		/obj/item/stock_parts/micro_laser = 2,
 		/obj/item/stock_parts/scanning_module = 2
 	)
-
-/obj/item/circuitboard/machine/plumbing_receiver
-	name = "Chemical Recipient (Machine Board)"
-	icon_state = "medical"
-	build_path = /obj/machinery/plumbing/receiver
-	req_components = list(
-		/obj/item/stack/ore/bluespace_crystal = 1,
-		/obj/item/stock_parts/capacitor = 2,
-		/obj/item/stack/sheet/glass = 1)
-	def_components = list(/obj/item/stack/ore/bluespace_crystal = /obj/item/stack/ore/bluespace_crystal/artificial)
-	needs_anchored = FALSE
 
 /obj/item/circuitboard/machine/skill_station
 	name = "Skill Station (Machine Board)"

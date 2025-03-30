@@ -38,8 +38,6 @@ All ShuttleMove procs go here
 
 
 		else //non-living mobs shouldn't be affected by shuttles, which is why this is an else
-			if(istype(thing, /obj/singularity) || istype(thing, /obj/energy_ball))
-				continue
 			if(!thing.anchored)
 				step(thing, shuttle_dir)
 			else
@@ -58,13 +56,7 @@ All ShuttleMove procs go here
 	newT.CopyOnTop(src, 1, depth, TRUE)
 	//Air stuff
 	newT.blocks_air = TRUE
-	newT.air_update_turf(TRUE, FALSE)
 	blocks_air = TRUE
-	air_update_turf(TRUE, TRUE)
-	if(isopenturf(newT))
-		var/turf/open/new_open = newT
-		new_open.copy_air_with_tile(src)
-
 	return TRUE
 
 // Called on the new turf after everything has been moved
@@ -84,9 +76,7 @@ All ShuttleMove procs go here
 
 /turf/proc/lateShuttleMove(turf/oldT)
 	blocks_air = initial(blocks_air)
-	air_update_turf(TRUE, blocks_air)
 	oldT.blocks_air = initial(oldT.blocks_air)
-	oldT.air_update_turf(TRUE, oldT.blocks_air)
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -211,11 +201,6 @@ All ShuttleMove procs go here
 	. = ..()
 	recharging_turf = get_step(loc, dir)
 
-/obj/machinery/atmospherics/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
-	. = ..()
-	if(pipe_vision_img)
-		pipe_vision_img.loc = loc
-
 /obj/machinery/computer/auxiliary_base/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	. = ..()
 	if(is_mining_level(z)) //Avoids double logging and landing on other Z-levels due to badminnery
@@ -231,35 +216,6 @@ All ShuttleMove procs go here
 	if(charge_count != 0 && charging_state != POWER_UP)
 		on = TRUE
 	update_list()
-
-/obj/machinery/atmospherics/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
-	. = ..()
-	var/missing_nodes = FALSE
-	for(var/i in 1 to device_type)
-		if(nodes[i])
-			var/obj/machinery/atmospherics/node = nodes[i]
-			var/connected = FALSE
-			for(var/D in GLOB.cardinals)
-				if(node in get_step(src, D))
-					connected = TRUE
-					break
-
-			if(!connected)
-				nullifyNode(i)
-
-		if(!nodes[i])
-			missing_nodes = TRUE
-
-	if(missing_nodes)
-		atmosinit()
-		for(var/obj/machinery/atmospherics/A in pipeline_expansion())
-			A.atmosinit()
-			if(A.returnPipenet())
-				A.addMember(src)
-		SSair.add_to_rebuild_queue(src)
-	else
-		// atmosinit() calls update_icon(), so we don't need to call it
-		update_icon()
 
 /obj/machinery/navbeacon/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
 	. = ..()

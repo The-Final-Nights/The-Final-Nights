@@ -191,7 +191,7 @@ Actual Adjacent procs :
 
 //Returns adjacent turfs in cardinal directions that are reachable via atmos
 /turf/proc/reachableAdjacentAtmosTurfs()
-	return atmos_adjacent_turfs
+	return reachableAdjacentTurfs()
 
 /turf/proc/LinkBlockedWithAccess(turf/T, caller, ID)
 	var/adir = get_dir(src, T)

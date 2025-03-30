@@ -26,7 +26,7 @@
 /obj/structure/closet/secure_closet/medical2/PopulateContents()
 	..()
 	for(var/i in 1 to 3)
-		new /obj/item/tank/internals/anesthetic(src)
+		new /obj/item/anesthetic_tank(src)
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/mask/breath/medical(src)
 

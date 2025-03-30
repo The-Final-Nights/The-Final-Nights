@@ -118,12 +118,6 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	walk(src,0)
 	walk_towards(src, destination, 1)
 
-/obj/effect/immovablerod/singularity_act()
-	return
-
-/obj/effect/immovablerod/singularity_pull()
-	return
-
 /obj/effect/immovablerod/Bump(atom/clong)
 	if(prob(10))
 		playsound(src, 'sound/effects/bang.ogg', 50, TRUE)

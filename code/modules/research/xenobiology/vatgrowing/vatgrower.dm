@@ -3,14 +3,12 @@
 	name = "growing vat"
 	desc = "Tastes just like the chef's soup."
 	icon_state = "growing_vat"
-	buffer = 200
 	///List of all microbiological samples in this soup.
 	var/datum/biological_sample/biological_sample
 
 ///Add that sexy demnand component
 /obj/machinery/plumbing/growing_vat/Initialize(mapload, bolt)
 	. = ..()
-	AddComponent(/datum/component/plumbing/simple_demand, bolt)
 
 /obj/machinery/plumbing/growing_vat/create_reagents(max_vol, flags)
 	. = ..()

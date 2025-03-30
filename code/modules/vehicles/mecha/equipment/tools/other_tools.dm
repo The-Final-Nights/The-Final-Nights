@@ -531,24 +531,8 @@
 	effect_type = /obj/effect/particle_effect/smoke
 	var/move_cost = 20 //moles per step
 
-/obj/item/mecha_parts/mecha_equipment/thrusters/gas/try_attach_part(mob/user, obj/vehicle/sealed/mecha/M)
-	if(!M.internal_tank)
-		to_chat(user, "<span class='warning'>[M] does not have an internal tank and cannot support this upgrade!</span>")
-		return FALSE
-	return ..()
-
 /obj/item/mecha_parts/mecha_equipment/thrusters/gas/thrust(movement_dir)
-	if(!chassis || !chassis.internal_tank)
-		return FALSE
-	var/moles = chassis.internal_tank.air_contents.total_moles()
-	if(moles < move_cost)
-		chassis.internal_tank.air_contents.remove(moles)
-		return FALSE
-	chassis.internal_tank.air_contents.remove(move_cost)
-	generate_effect(movement_dir)
 	return TRUE
-
-
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/ion //for mechs with built-in thrusters, should never really exist un-attached to a mech
 	name = "Ion thruster package"

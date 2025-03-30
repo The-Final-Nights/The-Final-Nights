@@ -109,7 +109,6 @@
 		/obj/item/wrench/medical,
 		/obj/item/clothing/mask/muzzle,
 		/obj/item/reagent_containers/blood,
-		/obj/item/tank/internals/emergency_oxygen,
 		/obj/item/gun/syringe/syndicate,
 		/obj/item/implantcase,
 		/obj/item/implant,

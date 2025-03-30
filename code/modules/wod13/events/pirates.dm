@@ -200,7 +200,6 @@
 	suit_type = /obj/item/clothing/suit/space
 	helmet_type = /obj/item/clothing/head/helmet/space
 	mask_type = /obj/item/clothing/mask/breath
-	storage_type = /obj/item/tank/internals/oxygen
 
 /obj/machinery/loot_locator
 	name = "Booty Locator"

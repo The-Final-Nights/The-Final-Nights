@@ -23,12 +23,16 @@ var/list/zalgo_letters = list(
 	send_speech(message, 2, src, , spans, message_language=language)
 //	speech_span = initial(speech_span)
 
-/proc/scramble_lasombra_message(var/message)
+/proc/scramble_lasombra_message(var/message,var/mob/living/carbon/human/lasombra)
 	var/gibberish_message = ""
+	var/totalsocial = 0
+	if(lasombra)
+		totalsocial = (lasombra.social+lasombra.additional_social) * 3 // +3% chance per social. 15 max, 18 avg, 24 beauty.9
 	for(var/i = 1 to length(message))
 		var/char = message[i]
 		// Randomize or replace characters with gibberish
-		if(prob(30)) // 30% chance to keep the original character
+		var/chance = 70 + totalsocial // 70% + totalsocial chance per point of social to keep intact.
+		if(prob(chance))
 			gibberish_message += char
 		else
 			gibberish_message += pick(zalgo_letters) // Replace with random gibberish letters

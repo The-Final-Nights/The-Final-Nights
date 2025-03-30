@@ -195,15 +195,6 @@
 	category = list("initial", "Electronics")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
 
-/datum/design/airalarm_electronics
-	name = "Air Alarm Electronics"
-	id = "airalarm_electronics"
-	build_type = AUTOLATHE | PROTOLATHE
-	materials = list(/datum/material/iron = 50, /datum/material/glass = 50)
-	build_path = /obj/item/electronics/airalarm
-	category = list("initial", "Electronics")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
-
 /datum/design/firealarm_electronics
 	name = "Fire Alarm Electronics"
 	id = "firealarm_electronics"
@@ -237,15 +228,6 @@
 	build_path = /obj/item/clothing/ears/earmuffs
 	category = list("initial", "Misc")
 
-/datum/design/pipe_painter
-	name = "Pipe Painter"
-	id = "pipe_painter"
-	build_type = AUTOLATHE | PROTOLATHE
-	materials = list(/datum/material/iron = 5000, /datum/material/glass = 2000)
-	build_path = /obj/item/pipe_painter
-	category = list("initial","Tools","Tool Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
-
 /datum/design/airlock_painter
 	name = "Airlock Painter"
 	id = "airlock_painter"
@@ -263,41 +245,6 @@
 	build_path = /obj/item/airlock_painter/decal
 	category = list("initial","Tools","Tool Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SERVICE
-
-/datum/design/emergency_oxygen
-	name = "Emergency Oxygen Tank"
-	id = "emergency_oxygen"
-	build_type = AUTOLATHE | PROTOLATHE
-	materials = list(/datum/material/iron = 500)
-	build_path = /obj/item/tank/internals/emergency_oxygen/empty
-	category = list("initial","Misc","Equipment")
-
-/datum/design/emergency_oxygen_engi
-	name = "Extended-Capacity Emergency Oxygen Tank"
-	id = "emergency_oxygen_engi"
-	build_type = AUTOLATHE | PROTOLATHE
-	materials = list(/datum/material/iron = 750)
-	build_path = /obj/item/tank/internals/emergency_oxygen/engi/empty
-	category = list("hacked","Misc","Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_CARGO
-
-/datum/design/plasmaman_tank_belt
-	name = "Plasmaman Belt Tank"
-	id = "plasmaman_tank_belt"
-	build_type = AUTOLATHE | PROTOLATHE
-	materials = list(/datum/material/iron = 800)
-	build_path = /obj/item/tank/internals/plasmaman/belt/empty
-	category = list("hacked","Misc","Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_CARGO
-
-/datum/design/generic_gas_tank
-	name = "Generic Gas Tank"
-	id = "generic_tank"
-	build_type = AUTOLATHE | PROTOLATHE
-	materials = list(/datum/material/iron = 1000)
-	build_path = /obj/item/tank/internals/generic
-	category = list("initial","Misc","Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_CARGO
 
 /datum/design/metal
 	name = "Metal"
@@ -806,15 +753,6 @@
 	build_path = /obj/item/ammo_box/foambox
 	category = list("initial", "Misc")
 
-//hacked autolathe recipes
-/datum/design/flamethrower
-	name = "Flamethrower"
-	id = "flamethrower"
-	build_type = AUTOLATHE
-	materials = list(/datum/material/iron = 500)
-	build_path = /obj/item/flamethrower/full
-	category = list("hacked", "Security")
-
 /datum/design/electropack
 	name = "Electropack"
 	id = "electropack"
@@ -1087,15 +1025,6 @@
 	materials = list(/datum/material/iron = 5000, /datum/material/glass = 2000)
 	build_path = /obj/item/vending_refill/custom
 	category = list("initial", "Misc")
-
-/datum/design/ducts
-	name = "Fluid Ducts"
-	id = "fluid_ducts"
-	build_type = AUTOLATHE
-	materials = list(/datum/material/iron = 500)
-	build_path = /obj/item/stack/ducts
-	category = list("initial", "Construction")
-	maxstack = 50
 
 /datum/design/toygun
 	name = "Cap Gun"

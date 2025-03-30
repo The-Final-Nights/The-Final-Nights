@@ -42,8 +42,7 @@
 	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
 	ears = /obj/item/radio/headset
 	mask = /obj/item/clothing/mask/gas/syndicate
-	back = /obj/item/tank/jetpack/oxygen
-	r_pocket = /obj/item/tank/internals/emergency_oxygen
+	back = /obj/item/jetpack/oxygen
 	id = /obj/item/card/id/syndicate
 
 
@@ -62,7 +61,7 @@
 	gloves = /obj/item/clothing/gloves/tackler/combat
 	ears = /obj/item/radio/headset
 	mask = /obj/item/clothing/mask/gas/syndicate
-	back = /obj/item/tank/jetpack/oxygen/harness
+	back = /obj/item/jetpack/oxygen/harness
 	id = /obj/item/card/id/syndicate
 
 

@@ -59,7 +59,7 @@
 		var/obj/item/clothing/CS = wear_suit
 		var/obj/item/clothing/CH = head
 		if (CS.clothing_flags & CH.clothing_flags & STOPSPRESSUREDAMAGE)
-			return ONE_ATMOSPHERE
+			return TRUE
 	return pressure
 
 
@@ -78,7 +78,7 @@
 	if(!dna.species.breathe(src))
 		..()
 
-/mob/living/carbon/human/check_breath(datum/gas_mixture/breath)
+/mob/living/carbon/human/check_breath()
 	if(HAS_TRAIT(src, TRAIT_NOBREATH))
 		return
 
@@ -107,15 +107,8 @@
 	else
 		if(istype(L, /obj/item/organ/lungs))
 			var/obj/item/organ/lungs/lun = L
-			lun.check_breath(breath,src)
-
-/// Environment handlers for species
-/mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
-	// If we are in a cryo bed do not process life functions
-	if(istype(loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
-		return
-
-	dna.species.handle_environment(environment, src)
+			lun.check_breath(src)
+			..()
 
 /**
  * Adjust the core temperature of a mob

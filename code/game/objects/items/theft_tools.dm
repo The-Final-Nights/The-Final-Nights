@@ -279,8 +279,6 @@
 		victim.dust()
 		message_admins("[src] has consumed [key_name_admin(victim)] [ADMIN_JMP(src)].")
 		investigate_log("has consumed [key_name(victim)].", INVESTIGATE_SUPERMATTER)
-	else if(istype(AM, /obj/singularity))
-		return
 	else
 		investigate_log("has consumed [AM].", INVESTIGATE_SUPERMATTER)
 		qdel(AM)

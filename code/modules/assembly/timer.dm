@@ -111,7 +111,7 @@
 	switch(action)
 		if("time")
 			timing = !timing
-			if(timing && istype(holder, /obj/item/transfer_valve))
+			if(timing)
 				log_bomber(usr, "activated a", src, "attachment on [holder]")
 			update_icon()
 			. = TRUE

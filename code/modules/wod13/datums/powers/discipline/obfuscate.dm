@@ -22,6 +22,7 @@
 		COMSIG_MOB_THREW_MOVABLE,
 		COMSIG_MOB_ATTACKING_MELEE,
 		COMSIG_MOB_ATTACKED_BY_MELEE,
+		CELERITY_POWER_ACTIVATE,
 	)
 
 /datum/discipline_power/obfuscate/proc/on_combat_signal(datum/source)
@@ -79,14 +80,14 @@
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
 		if (NPC.danger_source == owner)
 			NPC.danger_source = null
-	owner.alpha = 10
+	ADD_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 /datum/discipline_power/obfuscate/cloak_of_shadows/deactivate()
 	. = ..()
 	UnregisterSignal(owner, aggressive_signals)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 
-	owner.alpha = 255
+	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 /datum/discipline_power/obfuscate/cloak_of_shadows/proc/handle_move(datum/source, atom/moving_thing, dir)
 	SIGNAL_HANDLER
@@ -129,14 +130,14 @@
 		if (NPC.danger_source == owner)
 			NPC.danger_source = null
 
-	owner.alpha = 10
+	ADD_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 /datum/discipline_power/obfuscate/unseen_presence/deactivate()
 	. = ..()
 	UnregisterSignal(owner, aggressive_signals)
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 
-	owner.alpha = 255
+	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 //remove this when Mask of a Thousand Faces is made tabletop accurate
 /datum/discipline_power/obfuscate/unseen_presence/proc/handle_move(datum/source, atom/moving_thing, dir)
@@ -156,6 +157,7 @@
 
 	level = 3
 	check_flags = DISC_CHECK_CAPABLE
+	vitae_cost = 1
 
 	toggled = TRUE
 
@@ -168,7 +170,6 @@
 	)
 
 /datum/discipline_power/obfuscate/mask_of_a_thousand_faces/pre_activation_checks()
-	. = ..()
 	return is_seen_check()
 
 /datum/discipline_power/obfuscate/mask_of_a_thousand_faces/activate()
@@ -178,13 +179,13 @@
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
 		if (NPC.danger_source == owner)
 			NPC.danger_source = null
-	owner.alpha = 10
+	ADD_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 /datum/discipline_power/obfuscate/mask_of_a_thousand_faces/deactivate()
 	. = ..()
 	UnregisterSignal(owner, aggressive_signals)
 
-	owner.alpha = 255
+	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 //VANISH FROM THE MIND'S EYE
 /datum/discipline_power/obfuscate/vanish_from_the_minds_eye
@@ -193,6 +194,7 @@
 
 	level = 4
 	check_flags = DISC_CHECK_CAPABLE
+	vitae_cost = 2
 
 	toggled = TRUE
 
@@ -211,13 +213,13 @@
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
 		if (NPC.danger_source == owner)
 			NPC.danger_source = null
-	owner.alpha = 10
+	ADD_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 /datum/discipline_power/obfuscate/vanish_from_the_minds_eye/deactivate()
 	. = ..()
 	UnregisterSignal(owner, aggressive_signals)
 
-	owner.alpha = 255
+	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 //CLOAK THE GATHERING
 /datum/discipline_power/obfuscate/cloak_the_gathering
@@ -226,7 +228,7 @@
 
 	level = 5
 	check_flags = DISC_CHECK_CAPABLE
-	vitae_cost = 0
+	vitae_cost = 2
 
 	toggled = TRUE
 
@@ -245,13 +247,13 @@
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
 		if (NPC.danger_source == owner)
 			NPC.danger_source = null
-	owner.alpha = 10
+	ADD_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 /datum/discipline_power/obfuscate/cloak_the_gathering/deactivate()
 	. = ..()
 	UnregisterSignal(owner, aggressive_signals)
 
-	owner.alpha = 255
+	REMOVE_TRAIT(owner, TRAIT_OBFUSCATED, OBFUSCATE_TRAIT)
 
 #undef COMBAT_COOLDOWN_LENGTH
 #undef REVEAL_COOLDOWN_LENGTH

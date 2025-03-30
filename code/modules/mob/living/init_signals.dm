@@ -41,6 +41,8 @@
 	RegisterSignal(src, COMSIG_MOVETYPE_FLAG_ENABLED, PROC_REF(on_movement_type_flag_enabled))
 	RegisterSignal(src, COMSIG_MOVETYPE_FLAG_DISABLED, PROC_REF(on_movement_type_flag_disabled))
 
+	RegisterSignal(src, list(SIGNAL_ADDTRAIT(TRAIT_UNDENSE), SIGNAL_REMOVETRAIT(TRAIT_UNDENSE)), PROC_REF(undense_changed))
+
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_SKITTISH), PROC_REF(on_skittish_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_SKITTISH), PROC_REF(on_skittish_trait_loss))
 
@@ -48,6 +50,9 @@
 		SIGNAL_ADDTRAIT(TRAIT_TORPOR),
 		SIGNAL_REMOVETRAIT(TRAIT_TORPOR),
 	), PROC_REF(update_torpor_action))
+
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_OBFUSCATED), PROC_REF(make_invisible))
+	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_OBFUSCATED), PROC_REF(make_visible))
 
 /// Called when [TRAIT_KNOCKEDOUT] is added to the mob.
 /mob/living/proc/on_knockedout_trait_gain(datum/source)
@@ -72,6 +77,10 @@
 	SIGNAL_HANDLER
 	REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, TRAIT_DEATHCOMA)
 
+/// Called when [TRAIT_UNDENSE] is gained or lost
+/mob/living/proc/undense_changed(datum/source)
+	SIGNAL_HANDLER
+	update_density()
 
 /// Called when [TRAIT_IMMOBILIZED] is added to the mob.
 /mob/living/proc/on_immobilized_trait_gain(datum/source)
@@ -217,3 +226,13 @@
 /mob/living/proc/on_skittish_trait_loss(datum/source)
 	SIGNAL_HANDLER
 	RemoveElement(/datum/element/skittish)
+
+/// Called when [TRAIT_OBFUSCATED] is added to the mob.
+/mob/living/proc/make_invisible(datum/source)
+	SIGNAL_HANDLER
+	animate(src, invisibility = OBFUSCATE_INVISIBILITY, time = 0.5 SECONDS)
+
+/// Called when [TRAIT_OBFUSCATED] is removed from the mob.
+/mob/living/proc/make_visible(datum/source)
+	SIGNAL_HANDLER
+	animate(src, invisibility = NONE, time = 0.5 SECONDS)

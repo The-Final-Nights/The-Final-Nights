@@ -151,7 +151,6 @@
 		bong_turf.visible_message(flavor_text)
 
 /obj/item/bong/proc/spawn_cloud(turf/open/location, smoke_range)
-	var/list/turfs_affected = list(location)
 	var/list/turfs_to_spread = list(location)
 	var/spread_stage = smoke_range
 	for(var/i in 1 to smoke_range)
@@ -162,17 +161,9 @@
 			if(isspaceturf(turf_to_spread))
 				continue
 			var/obj/effect/abstract/fake_steam/fake_steam = locate() in turf_to_spread
-			var/at_edge = FALSE
 			if(!fake_steam)
-				at_edge = TRUE
 				fake_steam = new(turf_to_spread)
 			fake_steam.stage_up(spread_stage)
-
-			if(!at_edge)
-				for(var/turf/open/open_turf as anything in turf_to_spread.atmos_adjacent_turfs)
-					if(!(open_turf in turfs_affected))
-						new_spread_list += open_turf
-						turfs_affected += open_turf
 
 		turfs_to_spread = new_spread_list
 		spread_stage--

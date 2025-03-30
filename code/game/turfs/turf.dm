@@ -105,9 +105,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	if(!IS_DYNAMIC_LIGHTING(src) && IS_DYNAMIC_LIGHTING(A))
 		add_overlay(/obj/effect/fullbright)
 
-	if(requires_activation)
-		CALCULATE_ADJACENT_TURFS(src, KILL_EXCITED)
-
 	if (light_power && light_range)
 		update_light()
 
@@ -128,9 +125,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	ComponentInitialize()
 
 	return INITIALIZE_HINT_NORMAL
-
-/turf/proc/Initalize_Atmos(times_fired)
-	CALCULATE_ADJACENT_TURFS(src, NORMAL_TURF)
 
 /turf/Destroy(force)
 	. = QDEL_HINT_IWILLGC
@@ -334,7 +328,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 /turf/open/Entered(atom/movable/AM)
 	..()
 	//melting
-	if(isobj(AM) && air && air.temperature > T0C)
+	if(isobj(AM))
 		var/obj/O = AM
 		if(O.obj_flags & FROZEN)
 			O.make_unfrozen()

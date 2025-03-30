@@ -93,17 +93,16 @@
 			playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_step.ogg', 50, FALSE)
 	..()
 
-/mob/living/carbon/proc/epic_fall(var/apply_stun_self = TRUE, var/apply_stun_others = TRUE)
+/mob/living/carbon/proc/epic_fall(var/apply_stun_self = TRUE, var/apply_stun_others = TRUE) //This proc is only called for Potence jumps. I have no idea why its stored here.
 	playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_fall.ogg', 100, FALSE)
 	new /obj/effect/temp_visual/dir_setting/crack_effect(get_turf(src))
 	new /obj/effect/temp_visual/dir_setting/fall_effect(get_turf(src))
-	for(var/mob/living/carbon/C in range(5, src))
+	for(var/mob/living/carbon/C in range(3, src))
 		if(apply_stun_others)
 			C.Knockdown(20)
-			C.Stun(10)
 		shake_camera(C, (6-get_dist(C, src))+1, (6-get_dist(C, src)))
 	if(apply_stun_self)
-		Knockdown(20)
+		Immobilize(20)
 	shake_camera(src, 5, 4)
 
 /mob/living/carbon/werewolf/Initialize()
@@ -133,27 +132,6 @@
 
 /mob/living/carbon/werewolf/assess_threat(judgement_criteria, lasercolor = "", datum/callback/weaponcheck=null) // beepsky won't hunt aliums
 	return -10
-
-/mob/living/carbon/werewolf/handle_environment(datum/gas_mixture/environment)
-	// Run base mob body temperature proc before taking damage
-	// this balances body temp to the environment and natural stabilization
-	. = ..()
-
-	if(bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
-		//Body temperature is too hot.
-		throw_alert("alien_fire", /atom/movable/screen/alert/alien_fire)
-		switch(bodytemperature)
-			if(360 to 400)
-				apply_damage(HEAT_DAMAGE_LEVEL_1, BURN)
-			if(400 to 460)
-				apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
-			if(460 to INFINITY)
-				if(on_fire)
-					apply_damage(HEAT_DAMAGE_LEVEL_3, BURN)
-				else
-					apply_damage(HEAT_DAMAGE_LEVEL_2, BURN)
-	else
-		clear_alert("alien_fire")
 
 /mob/living/carbon/werewolf/reagent_check(datum/reagent/R) //can metabolize all reagents
 	return 0
