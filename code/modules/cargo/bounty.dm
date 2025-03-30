@@ -33,7 +33,7 @@
 	if(guided && (guided != CIV_JOB_RANDOM))
 		bounty_num = guided
 	else
-		bounty_num = rand(1,12)
+		bounty_num = rand(1,11)
 	switch(bounty_num)
 		if(1)
 			var/subtype = pick(subtypesof(/datum/bounty/item/assistant))
@@ -65,15 +65,12 @@
 			var/subtype = pick(subtypesof(/datum/bounty/item/slime))
 			return new subtype
 		if(9)
-			var/subtype = pick(subtypesof(/datum/bounty/item/engineering))
-			return new subtype
-		if(10)
 			var/subtype = pick(subtypesof(/datum/bounty/item/mining))
 			return new subtype
-		if(11)
+		if(10)
 			var/subtype = pick(subtypesof(/datum/bounty/item/medical))
 			return new subtype
-		if(12)
+		if(11)
 			var/subtype = pick(subtypesof(/datum/bounty/item/botany))
 			return new subtype
 

@@ -81,27 +81,6 @@
 		return L.temperature
 	return 0 //what
 
-/obj/machinery/rnd/server/proc/produce_heat(heat_amt)
-	if(!(machine_stat & (NOPOWER|BROKEN))) //Blatently stolen from space heater.
-		var/turf/L = loc
-		if(istype(L))
-			var/datum/gas_mixture/env = L.return_air()
-			if(env.temperature < (heat_amt+T0C))
-
-				var/transfer_moles = 0.25 * env.total_moles()
-
-				var/datum/gas_mixture/removed = env.remove(transfer_moles)
-
-				if(removed)
-
-					var/heat_capacity = removed.heat_capacity()
-					if(heat_capacity == 0 || heat_capacity == null)
-						heat_capacity = 1
-					removed.temperature = min((removed.temperature*heat_capacity + heating_power)/heat_capacity, 1000)
-
-				env.merge(removed)
-				air_update_turf(FALSE, FALSE)
-
 /proc/fix_noid_research_servers()
 	var/list/no_id_servers = list()
 	var/list/server_ids = list()

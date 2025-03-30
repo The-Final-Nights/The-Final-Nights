@@ -529,7 +529,7 @@
 	if(HAS_TRAIT(src, TRAIT_RUBICON))
 		if(istype(NewLoc, /turf/open/floor/plating/shit))
 			return
-	. =..()
+	. = ..()
 
 
 /mob/living/carbon/human/toggle_resting()

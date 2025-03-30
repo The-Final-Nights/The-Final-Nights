@@ -18,8 +18,9 @@
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/atom/movable/screen/transform_homid/Click()
-	var/mob/living/carbon/C = usr
+/atom/movable/screen/transform_homid/CtrlClick(mob/user)
+	. = ..()
+	var/mob/living/carbon/C = user
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
@@ -32,8 +33,9 @@
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/atom/movable/screen/transform_crinos/Click()
-	var/mob/living/carbon/C = usr
+/atom/movable/screen/transform_crinos/CtrlClick(mob/user)
+	. = ..()
+	var/mob/living/carbon/C = user
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
@@ -46,8 +48,9 @@
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
-/atom/movable/screen/transform_lupus/Click()
-	var/mob/living/carbon/C = usr
+/atom/movable/screen/transform_lupus/CtrlClick(mob/user)
+	. = ..()
+	var/mob/living/carbon/C = user
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
@@ -75,7 +78,8 @@
 		C.transformator.lupus_form.last_moon_look = world.time
 		C.transformator.crinos_form.last_moon_look = world.time
 		C.transformator.human_form.last_moon_look = world.time
-		to_chat(C, "<span class='notice'>The Moon is [GLOB.moon_state].</span>")
+		to_chat(C, span_notice("The Moon is [GLOB.moon_state]."))
+		to_chat(C, span_notice("You can activate transformations using Ctrl-Click!"))
 //		icon_state = "[GLOB.moon_state]"
 		C.emote("howl")
 		playsound(get_turf(C), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)

@@ -146,8 +146,6 @@
 			continue
 		ctf_enabled = CTF.toggle_ctf()
 		A = get_area(CTF)
-	for(var/obj/machinery/power/emitter/E in A)
-		E.active = ctf_enabled
 	if(user)
 		message_admins("[key_name_admin(user)] has [ctf_enabled ? "enabled" : "disabled"] CTF!")
 	else if(automated)

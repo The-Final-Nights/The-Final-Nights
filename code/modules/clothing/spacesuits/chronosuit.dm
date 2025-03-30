@@ -254,12 +254,6 @@
 	var/atom/movable/screen/chronos_target/target_ui
 	var/obj/item/clothing/suit/space/chronos/chronosuit
 
-/obj/effect/chronos_cam/singularity_act()
-	return
-
-/obj/effect/chronos_cam/singularity_pull()
-	return
-
 /obj/effect/chronos_cam/proc/create_target_ui()
 	if(holder?.client && chronosuit)
 		if(target_ui)

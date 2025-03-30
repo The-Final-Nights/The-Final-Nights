@@ -43,9 +43,6 @@ Chilling extracts:
 
 /obj/item/slimecross/chilling/orange/do_effect(mob/user)
 	user.visible_message("<span class='danger'>[src] shatters, and lets out a jet of heat!</span>")
-	for(var/turf/T in orange(get_turf(user),2))
-		if(get_dist(get_turf(user), T) > 1)
-			new /obj/effect/hotspot(T)
 	..()
 
 /obj/item/slimecross/chilling/purple
@@ -104,14 +101,6 @@ Chilling extracts:
 		to_chat(user, "<span class='warning'>[src] can't affect such a large area.</span>")
 		return
 	var/filtered = FALSE
-	for(var/turf/open/T in A)
-		var/datum/gas_mixture/G = T.air
-		if(istype(G))
-			G.assert_gas(/datum/gas/plasma)
-			G.gases[/datum/gas/plasma][MOLES] = 0
-			filtered = TRUE
-			G.garbage_collect()
-			T.air_update_turf(FALSE, FALSE)
 	if(filtered)
 		user.visible_message("<span class='notice'>Cracks spread throughout [src], and some air is sucked in!</span>")
 	else

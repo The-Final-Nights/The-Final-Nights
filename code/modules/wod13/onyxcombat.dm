@@ -439,10 +439,10 @@
 	var/last_discipline_use = 0
 	var/main_state = ""
 	var/active = FALSE
-	var/obj/overlay/level2
-	var/obj/overlay/level3
-	var/obj/overlay/level4
-	var/obj/overlay/level5
+	var/obj/effect/overlay/level2
+	var/obj/effect/overlay/level3
+	var/obj/effect/overlay/level4
+	var/obj/effect/overlay/level5
 
 /atom/movable/screen/disciplines/Initialize()
 	. = ..()

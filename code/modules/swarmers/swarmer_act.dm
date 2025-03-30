@@ -15,8 +15,6 @@
 		var/turf/open/turf_adjacent = t
 		if(!istype(turf_adjacent))
 			continue
-		pressure_greatest = max(pressure_greatest, turf_adjacent.air.return_pressure())
-		pressure_smallest = min(pressure_smallest, turf_adjacent.air.return_pressure())
 
 	return pressure_greatest - pressure_smallest
 
@@ -26,9 +24,6 @@
 	for(var/t in RANGE_TURFS(1, src))
 		if(!isopenturf(t))
 			continue
-		var/turf/open/turf_adjacent = t
-		if(turf_adjacent.planetary_atmos)
-			return TRUE
 
 /atom/proc/swarmer_act(mob/living/simple_animal/hostile/swarmer/actor)
 	actor.dis_integrate(src)

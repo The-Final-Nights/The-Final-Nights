@@ -160,7 +160,6 @@
 			owner.visible_message("<span class='danger'>The tesla capacitors on [owner]'s reactive tesla armor are still recharging! The armor merely emits some sparks.</span>")
 			return
 		owner.visible_message("<span class='danger'>[src] blocks [attack_text], sending out arcs of lightning!</span>")
-		tesla_zap(owner, zap_range, zap_power, zap_flags)
 		reactivearmor_cooldown = world.time + reactivearmor_cooldown_duration
 		return TRUE
 

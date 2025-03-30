@@ -328,7 +328,6 @@
 	shoes = /obj/item/clothing/shoes/sneakers/black
 	back = /obj/item/storage/backpack
 	mask = /obj/item/clothing/mask/breath
-	l_pocket = /obj/item/tank/internals/emergency_oxygen
 	r_pocket = /obj/item/flashlight/glowstick
 
 //Prisoner containment sleeper: Spawns in crashed prison ships in lavaland. Ghosts become escaped prisoners and are advised to find a way out of the mess they've gotten themselves into.
@@ -361,7 +360,6 @@
 	uniform = /obj/item/clothing/under/rank/prisoner
 	mask = /obj/item/clothing/mask/breath
 	shoes = /obj/item/clothing/shoes/sneakers/orange
-	r_pocket = /obj/item/tank/internals/emergency_oxygen
 
 
 /obj/effect/mob_spawn/human/prisoner_transport/Destroy()
@@ -534,7 +532,6 @@
 	shoes = /obj/item/clothing/shoes/workboots
 	id = /obj/item/card/id/away/old/eng
 	gloves = /obj/item/clothing/gloves/color/fyellow/old
-	l_pocket = /obj/item/tank/internals/emergency_oxygen
 	assignedrole = "Ancient Crew"
 
 /obj/effect/mob_spawn/human/oldeng/Destroy()

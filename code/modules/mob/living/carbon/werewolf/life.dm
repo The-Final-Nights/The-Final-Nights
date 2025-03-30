@@ -83,14 +83,10 @@
 							adjust_veil(1, src, TRUE)
 							last_veil_restore = world.time
 
-
 /mob/living/carbon/werewolf/crinos/Life()
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1)
-
-/mob/living/carbon/werewolf/check_breath(datum/gas_mixture/breath)
-	return
 
 /mob/living/carbon/werewolf/handle_status_effects()
 	..()

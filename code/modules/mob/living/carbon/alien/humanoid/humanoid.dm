@@ -96,12 +96,6 @@
 		return A
 	return FALSE
 
-
-/mob/living/carbon/alien/humanoid/check_breath(datum/gas_mixture/breath)
-	if(breath && breath.total_moles() > 0 && !sneaking)
-		playsound(get_turf(src), pick('sound/voice/lowHiss2.ogg', 'sound/voice/lowHiss3.ogg', 'sound/voice/lowHiss4.ogg'), 50, FALSE, -5)
-	..()
-
 /mob/living/carbon/alien/humanoid/set_name()
 	if(numba)
 		name = "[name] ([numba])"

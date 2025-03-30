@@ -297,15 +297,12 @@
 			if(mob_species == /datum/species/plasmaman)
 				uniform = /obj/item/clothing/under/plasmaman
 				head = /obj/item/clothing/head/helmet/space/plasmaman
-				belt = /obj/item/tank/internals/plasmaman/belt
 			else
 				uniform = /obj/item/clothing/under/rank/cargo/miner/lavaland
 				if (prob(4))
 					belt = pickweight(list(/obj/item/storage/belt/mining = 2, /obj/item/storage/belt/mining/alt = 2))
 				else if(prob(10))
 					belt = pickweight(list(/obj/item/pickaxe = 8, /obj/item/pickaxe/mini = 4, /obj/item/pickaxe/silver = 2, /obj/item/pickaxe/diamond = 1))
-				else
-					belt = /obj/item/tank/internals/emergency_oxygen/engi
 			if(mob_species != /datum/species/lizard)
 				shoes = /obj/item/clothing/shoes/workboots/mining
 			gloves = /obj/item/clothing/gloves/color/black
@@ -368,7 +365,6 @@
 			else
 				back = /obj/item/shield/riot/buckler
 				belt = /obj/item/nullrod/claymore
-			r_pocket = /obj/item/tank/internals/emergency_oxygen
 			mask = /obj/item/clothing/mask/breath
 		if("Operative")
 			id_job = "Operative"
@@ -381,7 +377,6 @@
 			shoes = /obj/item/clothing/shoes/sneakers/black
 			suit = /obj/item/clothing/suit/toggle/labcoat
 			glasses = /obj/item/clothing/glasses/blindfold
-			back = /obj/item/tank/internals/oxygen
 			mask = /obj/item/clothing/mask/breath
 		if("Cultist")
 			uniform = /obj/item/clothing/under/costume/roman

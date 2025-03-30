@@ -54,12 +54,16 @@
 	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 	abductor_hud.add_hud_to(owner)
 
+	owner.see_invisible = OBFUSCATE_INVISIBILITY
+
 	owner.update_sight()
 
 /datum/discipline_power/auspex/aura_perception/deactivate()
 	. = ..()
 	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 	abductor_hud.remove_hud_from(owner)
+
+	owner.see_invisible = SEE_INVISIBLE_LIVING
 
 	owner.update_sight()
 

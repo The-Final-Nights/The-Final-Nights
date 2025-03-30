@@ -298,8 +298,3 @@
 	density = TRUE
 	anchored = TRUE
 
-/obj/effect/gateway/singularity_act()
-	return
-
-/obj/effect/gateway/singularity_pull()
-	return

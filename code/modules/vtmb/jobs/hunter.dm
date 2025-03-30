@@ -102,7 +102,7 @@
 	var/datum/objective/martyr/die_objective = new
 	die_objective.owner = owner
 	objectives += die_objective
-	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/orthodox_start.ogg', 100, FALSE, pressure_affected = FALSE, use_reverb = FALSE)
+	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/orthodox_start.ogg', 100, FALSE, use_reverb = FALSE)
 	return ..()
 
 /datum/antagonist/hunter/on_removal()

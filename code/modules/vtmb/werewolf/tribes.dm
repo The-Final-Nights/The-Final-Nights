@@ -173,7 +173,6 @@
 		owner.visible_message("<span class='danger'>[owner.name] crackles with static electricity!</span>", "<span class='danger'>You crackle with static electricity, charging up your Gift!</span>")
 		if(do_after(owner, 3 SECONDS))
 			playsound(owner, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
-			tesla_zap(owner, 3, 30, ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE | ZAP_MOB_STUN | ZAP_ALLOW_DUPLICATES)
 			for(var/mob/living/L in orange(6, owner))
 				if(L)
 					L.electrocute_act(30, owner, siemens_coeff = 1, flags = NONE)

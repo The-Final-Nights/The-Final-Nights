@@ -397,29 +397,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 				dat += tnote
 				dat += "<br>"
 
-			if (3)
-				dat += "<h4>[PDAIMG(atmos)] Atmospheric Readings</h4>"
-
-				var/turf/T = user.loc
-				if (isnull(T))
-					dat += "Unable to obtain a reading.<br>"
-				else
-					var/datum/gas_mixture/environment = T.return_air()
-					var/list/env_gases = environment.gases
-
-					var/pressure = environment.return_pressure()
-					var/total_moles = environment.total_moles()
-
-					dat += "Air Pressure: [round(pressure,0.1)] kPa<br>"
-
-					if (total_moles)
-						for(var/id in env_gases)
-							var/gas_level = env_gases[id][MOLES]/total_moles
-							if(gas_level > 0)
-								dat += "[env_gases[id][GAS_META][META_GAS_NAME]]: [round(gas_level*100, 0.01)]%<br>"
-
-					dat += "Temperature: [round(environment.temperature-T0C)]&deg;C<br>"
-				dat += "<br>"
 			else//Else it links to the cart menu proc. Although, it really uses menu hub 4--menu 4 doesn't really exist as it simply redirects to hub.
 				dat += cartridge.generate_menu()
 
@@ -1093,7 +1070,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 		visible_message("<span class='danger'>[src] explodes!</span>", "<span class='warning'>You hear a loud *pop*!</span>")
 
 	if(T)
-		T.hotspot_expose(700,125)
 		if(istype(cartridge, /obj/item/cartridge/virus/syndicate))
 			explosion(T, -1, 1, 3, 4)
 		else

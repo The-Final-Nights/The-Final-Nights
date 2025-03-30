@@ -271,7 +271,6 @@
 	if(has_water_reclaimer)
 		create_reagents(100, NO_REACT)
 		reagents.add_reagent(dispensedreagent, 100)
-	AddComponent(/datum/component/plumbing/simple_demand, bolt)
 
 /obj/structure/sink/examine(mob/user)
 	. = ..()

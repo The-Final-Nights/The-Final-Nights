@@ -9,13 +9,6 @@
 		M.adjust_fire_stacks(fire_stacks)
 		M.IgniteMob()
 
-/obj/projectile/bullet/incendiary/Move()
-	. = ..()
-	var/turf/location = get_turf(src)
-	if(location)
-		new /obj/effect/hotspot(location)
-		location.hotspot_expose(700, 50, 1)
-
 /// Used in [the backblast element][/datum/element/backblast]
 /obj/projectile/bullet/incendiary/backblast
 	damage = 15

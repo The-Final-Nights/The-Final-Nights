@@ -52,10 +52,6 @@
 	myarea = get_area(src)
 	LAZYADD(myarea.firealarms, src)
 
-/obj/machinery/firealarm/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
-
 /obj/machinery/firealarm/Destroy()
 	LAZYREMOVE(myarea.firealarms, src)
 	if(triggered)
@@ -130,26 +126,6 @@
 		user.visible_message("<span class='warning'>Sparks fly out of [src]!</span>",
 							"<span class='notice'>You emag [src], disabling its thermal sensors.</span>")
 	playsound(src, "sparks", 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
-
-/obj/machinery/firealarm/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return (exposed_temperature > T0C + 200 || exposed_temperature < BODYTEMP_COLD_DAMAGE_LIMIT) && !(obj_flags & EMAGGED) && !machine_stat
-
-/obj/machinery/firealarm/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	if(!detecting)
-		return
-	if(!triggered)
-		triggered = TRUE
-		myarea.triggered_firealarms += 1
-		update_icon()
-	alarm()
-
-/obj/machinery/firealarm/atmos_end(datum/gas_mixture/air, exposed_temperature)
-	if(!detecting)
-		return
-	if(triggered)
-		triggered = FALSE
-		myarea.triggered_firealarms -= 1
-		update_icon()
 
 /obj/machinery/firealarm/proc/alarm(mob/user)
 	if(!is_operational || !COOLDOWN_FINISHED(src, last_alarm))
@@ -311,11 +287,6 @@
 		if(obj_integrity > 0 && !(machine_stat & BROKEN) && buildstage != 0)
 			if(prob(33))
 				alarm()
-
-/obj/machinery/firealarm/singularity_pull(S, current_size)
-	if (current_size >= STAGE_FIVE) // If the singulo is strong enough to pull anchored objects, the fire alarm experiences integrity failure
-		deconstruct()
-	..()
 
 /obj/machinery/firealarm/obj_break(damage_flag)
 	if(buildstage == 0) //can't break the electronics if there isn't any inside.

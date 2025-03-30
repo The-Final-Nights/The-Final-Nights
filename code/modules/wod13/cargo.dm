@@ -274,7 +274,7 @@
 	desc = "Contains a .50 caliber desert eagle."
 	cost = 2000
 	contains = list(
-		/obj/item/gun/ballistic/automatic/pistol/deagle,
+		/obj/item/gun/ballistic/automatic/vampire/deagle/c50,
 		/obj/item/ammo_box/magazine/m50,
 	)
 

@@ -114,6 +114,9 @@
 #define STATUS_EFFECT_OFFERING /datum/status_effect/offering // you are offering up an item to people
 
 #define STATUS_EFFECT_SURRENDER /datum/status_effect/surrender // gives an alert to quickly surrender
+
+#define STATUS_EFFECT_LEANING /datum/status_effect/leaning //! Makes you lean on something
+
 /////////////
 //  SLIME  //
 /////////////

@@ -103,7 +103,7 @@
 
 /obj/structure/closet/malf/suits/PopulateContents()
 	..()
-	new /obj/item/tank/jetpack/void(src)
+	new /obj/item/jetpack/void(src)
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/clothing/head/helmet/space/nasavoid(src)
 	new /obj/item/clothing/suit/space/nasavoid(src)

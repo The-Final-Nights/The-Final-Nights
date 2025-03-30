@@ -18,17 +18,15 @@
 
 /datum/discipline_power/dominate/activate(mob/living/target)
 	. = ..()
-	var/mob/living/carbon/human/TRGT
+	var/mob/living/carbon/human/dominate_target
 	if(ishuman(target))
-		TRGT = target
-		TRGT.remove_overlay(MUTATIONS_LAYER)
+		dominate_target = target
+		dominate_target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dominate_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dominate", -MUTATIONS_LAYER)
 		dominate_overlay.pixel_z = 2
-		TRGT.overlays_standing[MUTATIONS_LAYER] = dominate_overlay
-		TRGT.apply_overlay(MUTATIONS_LAYER)
-		spawn(2 SECONDS)
-			if(TRGT)
-				TRGT.remove_overlay(MUTATIONS_LAYER)
+		dominate_target.overlays_standing[MUTATIONS_LAYER] = dominate_overlay
+		dominate_target.apply_overlay(MUTATIONS_LAYER)
+		addtimer(CALLBACK(dominate_target, TYPE_PROC_REF(/mob/living/carbon/human, post_dominate_checks), dominate_target), 2 SECONDS)
 	return TRUE
 
 /datum/movespeed_modifier/dominate
@@ -243,3 +241,7 @@
 				ClickOn(src)
 		else
 			ClickOn(src)
+
+/mob/living/carbon/human/proc/post_dominate_checks(mob/living/carbon/human/dominate_target)
+	if(dominate_target)
+		dominate_target.remove_overlay(MUTATIONS_LAYER)

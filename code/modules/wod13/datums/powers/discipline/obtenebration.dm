@@ -128,7 +128,9 @@
 	if (!tenebrous_form_spell)
 		tenebrous_form_spell = new
 
-	tenebrous_form_spell.cast(user = owner)
+	if(!tenebrous_form_spell.cast(user = owner))
+		owner.bloodpool += vitae_cost
+		to_chat(owner, span_warning("You fail to slip into the shadows. [vitae_cost] blood points refunded."))
 
 /datum/discipline_power/obtenebration/tenebrous_form/post_gain()
 	. = ..()

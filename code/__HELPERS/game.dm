@@ -531,15 +531,7 @@
 	announcer.announce("ARRIVAL", character.real_name, displayed_rank, list()) //make the list empty to make it announce it in common
 	// TFN EDIT END
 /proc/lavaland_equipment_pressure_check(turf/T)
-	. = FALSE
-	if(!istype(T))
-		return
-	var/datum/gas_mixture/environment = T.return_air()
-	if(!istype(environment))
-		return
-	var/pressure = environment.return_pressure()
-	if(pressure <= LAVALAND_EQUIPMENT_EFFECT_PRESSURE)
-		. = TRUE
+	. = TRUE
 
 /proc/ispipewire(item)
 	var/static/list/pire_wire = list(

@@ -34,8 +34,6 @@
 				circuit_type = /obj/item/electronics/firelock
 			if("fire alarm")
 				circuit_type = /obj/item/electronics/firealarm
-			if("air alarm")
-				circuit_type = /obj/item/electronics/airalarm
 			if("APC")
 				circuit_type = /obj/item/electronics/apc
 		to_chat(user, "<span class='notice'>You spot your circuit, and carefully attempt to remove it from [src], hold still!</span>")

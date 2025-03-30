@@ -175,7 +175,7 @@
 	var/datum/objective/survive/survive_objective = new
 	survive_objective.owner = owner
 	objectives += survive_objective
-	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, pressure_affected = FALSE, use_reverb = FALSE)
+	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, use_reverb = FALSE)
 	return ..()
 
 /datum/antagonist/sabbatist/on_removal()
