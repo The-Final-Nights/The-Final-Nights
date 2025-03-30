@@ -30,19 +30,13 @@
 		var/turf/T = get_turf(user)
 		var/light_amount = T.get_lumcount()
 		if(light_amount < SHADOW_SPECIES_LIGHT_THRESHOLD)
-			if(!activating)
-				activating = TRUE
-				if(do_mob(user, user, 0))
-					activating = FALSE
-					playsound(get_turf(user), 'sound/magic/ethereal_enter.ogg', 50, TRUE, -1)
-					visible_message("<span class='boldwarning'>[user] melts into the shadows!</span>")
-					user.SetAllImmobility(0)
-					user.setStaminaLoss(0, 0)
-					var/obj/effect/dummy/phased_mob/shadow/S2 = new(get_turf(user.loc))
-					user.forceMove(S2)
-					S2.jaunter = user
-				else
-					activating = FALSE
+			playsound(get_turf(user), 'sound/magic/ethereal_enter.ogg', 50, TRUE, -1)
+			visible_message("<span class='boldwarning'>[user] melts into the shadows!</span>")
+			user.SetAllImmobility(0)
+			user.setStaminaLoss(0, 0)
+			var/obj/effect/dummy/phased_mob/shadow/S2 = new(get_turf(user.loc))
+			user.forceMove(S2)
+			S2.jaunter = user
 		else
 			to_chat(user, "<span class='warning'>It isn't dark enough here!</span>")
 
