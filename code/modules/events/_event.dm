@@ -87,12 +87,22 @@
 		log_admin_private("[key_name(usr)] cancelled event [name].")
 		SSblackbox.record_feedback("tally", "event_admin_cancelled", 1, typepath)
 
-/datum/round_event_control/proc/runEvent(random = FALSE)
-	var/datum/round_event/E = new typepath()
-	E.current_players = get_active_player_count(alive_check = 1, afk_check = 1, human_check = 1)
-	E.control = src
-	SSblackbox.record_feedback("tally", "event_ran", 1, "[E]")
-	occurrences++
+	if(announce_chance_override != null)
+		round_event.announce_chance = announce_chance_override
+
+	testing("[time2text(world.time, "hh:mm:ss", 0)] [round_event.type]")
+	triggering = TRUE
+
+	if(!triggering)
+		RegisterSignal(SSdcs, COMSIG_GLOB_RANDOM_EVENT, PROC_REF(stop_random_event))
+		round_event.cancel_event = TRUE
+		return round_event
+
+	triggering = FALSE
+	log_game("[random ? "Random" : "Forced"] Event triggering: [name] ([typepath]).")
+
+	if(alert_observers)
+		round_event.announce_deadchat(random, event_cause)
 
 	testing("[time2text(world.time, "hh:mm:ss")] [E.type]")
 	if(random)

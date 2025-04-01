@@ -247,7 +247,7 @@ GENERAL_PROTECT_DATUM(/datum/log_holder)
 	return RUSTG_CALL(RUST_G, "unix_timestamp")()
 
 /datum/log_holder/proc/human_readable_timestamp(precision = 3)
-	var/start = time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")
+	var/start = time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", TIMEZONE_UTC)
 	// now we grab the millis from the rustg timestamp
 	var/list/timestamp = splittext(unix_timestamp_string(), ".")
 	var/millis = timestamp[2]
