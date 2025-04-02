@@ -26,8 +26,7 @@ SUBSYSTEM_DEF(statpanels)
 		num_fires++
 		global_data = list(
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
-			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)]",
-			"Round Time: [ROUND_TIME()]",
+			"Round Duration: [DisplayTimeText(world.time - SSticker.round_start_time)]",
 			"---",
 			"Canon: [GLOB.canon_event ? "Yes" : "No"]",
 			"Masquerade: [SSmasquerade.get_description()] [SSmasquerade.total_level]/1000",

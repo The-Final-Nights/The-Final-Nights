@@ -125,7 +125,7 @@
 	if(!radio_connection)
 		return
 
-	var/time = time2text(world.realtime, "hh:mm:ss", TIMEZONE_UTC)
+	var/time = time2text(world.realtime,"hh:mm:ss")
 	var/turf/T = get_turf(src)
 
 	var/logging_data
