@@ -119,9 +119,6 @@
 	return FALSE
 
 /obj/docking_port/mobile/arrivals/proc/NukeDiskCheck()
-	for (var/obj/item/disk/nuclear/N in GLOB.poi_list)
-		if (get_area(N) in areas)
-			return TRUE
 	return FALSE
 
 /obj/docking_port/mobile/arrivals/proc/SendToStation()

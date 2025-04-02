@@ -34,9 +34,6 @@
 /obj/item/pinpointer/nuke/scan_for_target()
 	target = null
 	switch(mode)
-		if(TRACK_NUKE_DISK)
-			var/obj/item/disk/nuclear/N = locate() in GLOB.poi_list
-			target = N
 		if(TRACK_MALF_AI)
 			for(var/V in GLOB.ai_list)
 				var/mob/living/silicon/ai/A = V
