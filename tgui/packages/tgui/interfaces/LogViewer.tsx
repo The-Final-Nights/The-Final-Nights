@@ -1,5 +1,5 @@
 import { useBackend, useLocalState } from '../backend';
-import { Button, Collapsible, Input, NoticeBox, Section, Stack } from 'tgui-core/components';
+import { Button, Collapsible, Input, NoticeBox, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 type LogViewerData = {
