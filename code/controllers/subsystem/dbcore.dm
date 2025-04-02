@@ -159,7 +159,7 @@ SUBSYSTEM_DEF(dbcore)
 		return
 	query.job_id = rustg_sql_query_async(connection, query.sql, json_encode(query.arguments))
 
-/datum/controller/subsystem/dbcore/proc/queue_query(datum/db_query/query)
+/datum/controller/subsystem/dbcore/proc/run_or_queue_query(datum/db_query/query)
 	if(IsAdminAdvancedProcCall())
 		return
 
@@ -184,17 +184,17 @@ SUBSYSTEM_DEF(dbcore)
 		//Take over control of all active queries
 		var/queries_to_check = queries_active.Copy()
 		queries_active.Cut()
-		
+
 		//Start all waiting queries
 		for(var/datum/db_query/query in queries_standby)
 			run_query(query)
 			queries_to_check += query
 			queries_standby -= query
-		
+
 		//wait for them all to finish
 		for(var/datum/db_query/query in queries_to_check)
 			UNTIL(query.process() || REALTIMEOFDAY > endtime)
-		
+
 		//log shutdown to the db
 		var/datum/db_query/query_round_shutdown = SSdbcore.NewQuery(
 			"UPDATE [format_table_name("round")] SET shutdown_datetime = Now(), end_state = :end_state WHERE id = :round_id",
@@ -585,7 +585,7 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 		if(!MC_RUNNING(SSdbcore.init_stage))
 			SSdbcore.run_query_sync(src)
 		else
-			SSdbcore.queue_query(src)
+			SSdbcore.run_or_queue_query(src)
 		sync()
 	else
 		var/job_result_str = rustg_sql_query_blocking(connection, sql, json_encode(arguments))
@@ -610,8 +610,7 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 
 /// Sleeps until execution of the query has finished.
 /datum/db_query/proc/sync()
-	while(status < DB_QUERY_FINISHED)
-		stoplag()
+	UNTIL(process())
 
 /datum/db_query/process(seconds_per_tick)
 	if(status >= DB_QUERY_FINISHED)
