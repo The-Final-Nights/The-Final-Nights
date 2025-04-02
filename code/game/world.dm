@@ -76,9 +76,6 @@ GLOBAL_VAR(restart_counter)
 	// Init the debugger first so we can debug Master
 	init_debugger()
 
-	// Create the logger
-	logger = new
-
 	// THAT'S IT, WE'RE DONE, THE. FUCKING. END.
 	Master = new
 
@@ -114,7 +111,7 @@ GLOBAL_VAR(restart_counter)
 	// From a really fucking old commit (91d7150)
 	// I wanted to move it but I think this needs to be after /world/New is called but before any sleeps?
 	// - Dominion/Cyberboss
-	GLOB.timezoneOffset = world.timezone * 36000
+	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
 
 	// First possible sleep()
 	InitTgs()
