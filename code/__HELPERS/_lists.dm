@@ -603,11 +603,3 @@
 			inserted_list.Swap(start++, end--)
 
 	return inserted_list
-
-
-/**
- * Removes any null entries from the list
- * Returns TRUE if the list had nulls, FALSE otherwise
-**/
-/proc/list_clear_nulls(list/list_to_clear)
-	return (list_to_clear.RemoveAll(null) > 0)

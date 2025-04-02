@@ -555,6 +555,12 @@
 /mob/proc/can_hold_items(obj/item/I)
 	return length(held_items)
 
+/// Returns this mob's default lighting alpha
+/mob/proc/default_lighting_cutoff()
+	if(client?.combo_hud_enabled && client?.prefs?.toggles & COMBOHUD_LIGHTING)
+		return LIGHTING_CUTOFF_FULLBRIGHT
+	return initial(lighting_cutoff)
+
 /// Returns a generic path of the object based on the slot
 /proc/get_path_by_slot(slot_id)
 	switch(slot_id)
@@ -571,7 +577,7 @@
 		if(ITEM_SLOT_BELT)
 			return /obj/item/storage/belt
 		if(ITEM_SLOT_ID)
-			return /obj/item/card/id
+			return /obj/item/card/id/advanced
 		if(ITEM_SLOT_EARS)
 			return /obj/item/clothing/ears
 		if(ITEM_SLOT_EYES)
@@ -633,7 +639,7 @@
 	)
 
 	if(mind?.assigned_role)
-		data["assigned_role"] = mind.assigned_role
+		data["assigned_role"] = mind.assigned_role.title
 	if(job)
 		data["assigned_job"] = job
 
