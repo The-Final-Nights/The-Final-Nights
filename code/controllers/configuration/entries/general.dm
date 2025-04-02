@@ -89,6 +89,10 @@
 
 /datum/config_entry/flag/log_whisper	// log client whisper
 
+/datum/config_entry/flag/log_subtle
+
+/datum/config_entry/flag/log_subtler
+
 /datum/config_entry/flag/log_attack	// log attack messages
 
 /datum/config_entry/flag/log_emote	// log emotes

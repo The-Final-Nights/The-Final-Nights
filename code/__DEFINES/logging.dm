@@ -50,6 +50,8 @@
 #define LOG_RADIO_EMOTE (1 << 20)
 #define LOG_SPEECH_INDICATORS (1 << 21)
 #define LOG_TRANSPORT (1 << 22)
+#define LOG_SUBTLE (1 << 23)
+#define LOG_SUBTLER (1 << 24)
 
 //Individual logging panel pages
 #define INDIVIDUAL_ATTACK_LOG		(LOG_ATTACK)
@@ -58,10 +60,6 @@
 #define INDIVIDUAL_COMMS_LOG		(LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS)
 #define INDIVIDUAL_OOC_LOG			(LOG_OOC | LOG_ADMIN)
 #define INDIVIDUAL_OWNERSHIP_LOG	(LOG_OWNERSHIP)
-/// TFN EDIT ADDITION START
-// Logging types for log_message()
-#define LOG_SUBTLE (1 << 22)
-#define LOG_SUBTLER (1 << 23)
 
 //Individual logging panel pages
 #define INDIVIDUAL_EMOTE_LOG (LOG_EMOTE | LOG_SUBTLE | LOG_SUBTLER)
@@ -153,6 +151,8 @@
 #define LOG_CATEGORY_GAME_TRAITOR "game-traitor"
 #define LOG_CATEGORY_GAME_VOTE "game-vote"
 #define LOG_CATEGORY_GAME_WHISPER "game-whisper"
+#define LOG_CATEGORY_GAME_SUBTLE "game-subtle"
+#define LOG_CATEGORY_GAME_SUBTLER "game-subtler"
 
 // Uplink categories
 #define LOG_CATEGORY_UPLINK "uplink"
