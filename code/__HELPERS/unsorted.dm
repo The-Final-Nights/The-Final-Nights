@@ -257,12 +257,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 				name += " \[dead\]"
 		pois[name] = M
 
-	if(!mobs_only)
-		for(var/atom/A in GLOB.poi_list)
-			if(!A || !A.loc)
-				continue
-			pois[avoid_assoc_duplicate_keys(A.name, namecounts)] = A
-
 	return pois
 //Orders mobs by type then by name
 /proc/sortmobs()

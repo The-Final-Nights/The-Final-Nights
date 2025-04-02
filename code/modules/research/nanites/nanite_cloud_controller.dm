@@ -56,7 +56,7 @@
 	var/datum/component/nanites/cloud_copy = backup.AddComponent(/datum/component/nanites)
 	backup.cloud_id = cloud_id
 	backup.nanites = cloud_copy
-	investigate_log("[key_name(user)] created a new nanite cloud backup with id #[cloud_id]")
+	investigate_log("[key_name(user)] created a new nanite cloud backup with id #[cloud_id]", INVESTIGATE_NANITES)
 
 /obj/machinery/computer/nanite_cloud_controller/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -189,7 +189,7 @@
 			if(backup)
 				playsound(src, 'sound/machines/terminal_prompt.ogg', 50, FALSE)
 				qdel(backup)
-				investigate_log("[key_name(usr)] deleted the nanite cloud backup #[current_view]")
+				investigate_log("[key_name(usr)] deleted the nanite cloud backup #[current_view]", INVESTIGATE_NANITES)
 			. = TRUE
 		if("upload_program")
 			if(disk?.program)
@@ -198,7 +198,7 @@
 					playsound(src, 'sound/machines/terminal_prompt.ogg', 50, FALSE)
 					var/datum/component/nanites/nanites = backup.nanites
 					nanites.add_program(null, disk.program.copy())
-					investigate_log("[key_name(usr)] uploaded program [disk.program.name] to cloud #[current_view]")
+					investigate_log("[key_name(usr)] uploaded program [disk.program.name] to cloud #[current_view]", INVESTIGATE_NANITES)
 			. = TRUE
 		if("remove_program")
 			var/datum/nanite_cloud_backup/backup = get_backup(current_view)
@@ -206,7 +206,7 @@
 				playsound(src, 'sound/machines/terminal_prompt.ogg', 50, FALSE)
 				var/datum/component/nanites/nanites = backup.nanites
 				var/datum/nanite_program/P = nanites.programs[text2num(params["program_id"])]
-				investigate_log("[key_name(usr)] deleted program [P.name] from cloud #[current_view]")
+				investigate_log("[key_name(usr)] deleted program [P.name] from cloud #[current_view]", INVESTIGATE_NANITES)
 				qdel(P)
 			. = TRUE
 		if("add_rule")
@@ -221,7 +221,7 @@
 					var/datum/nanite_program/P = nanites.programs[text2num(params["program_id"])]
 					var/datum/nanite_rule/rule = rule_template.make_rule(P)
 
-					investigate_log("[key_name(usr)] added rule [rule.display()] to program [P.name] in cloud #[current_view]")
+					investigate_log("[key_name(usr)] added rule [rule.display()] to program [P.name] in cloud #[current_view]", INVESTIGATE_NANITES)
 			. = TRUE
 		if("remove_rule")
 			var/datum/nanite_cloud_backup/backup = get_backup(current_view)
@@ -232,7 +232,7 @@
 				var/datum/nanite_rule/rule = P.rules[text2num(params["rule_id"])]
 				rule.remove()
 
-				investigate_log("[key_name(usr)] removed rule [rule.display()] from program [P.name] in cloud #[current_view]")
+				investigate_log("[key_name(usr)] removed rule [rule.display()] from program [P.name] in cloud #[current_view]", INVESTIGATE_NANITES)
 			. = TRUE
 		if("toggle_rule_logic")
 			var/datum/nanite_cloud_backup/backup = get_backup(current_view)
@@ -241,7 +241,7 @@
 				var/datum/component/nanites/nanites = backup.nanites
 				var/datum/nanite_program/P = nanites.programs[text2num(params["program_id"])]
 				P.all_rules_required = !P.all_rules_required
-				investigate_log("[key_name(usr)] edited rule logic for program [P.name] into [P.all_rules_required ? "All" : "Any"] in cloud #[current_view]")
+				investigate_log("[key_name(usr)] edited rule logic for program [P.name] into [P.all_rules_required ? "All" : "Any"] in cloud #[current_view]", INVESTIGATE_NANITES)
 				. = TRUE
 
 /datum/nanite_cloud_backup
