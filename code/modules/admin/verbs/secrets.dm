@@ -113,6 +113,11 @@
 				dat += text("[l]<BR>")
 			holder << browse(HTML_SKELETON(dat), "window=bombers")
 
+		if("list_signalers")
+			var/dat = "<B>Showing last [length(GLOB.lastsignalers)] signalers.</B><HR>"
+			for(var/sig in GLOB.lastsignalers)
+				dat += "[sig]<BR>"
+			holder << browse(HTML_SKELETON(dat), "window=lastsignalers;size=800x500")
 		if("list_lawchanges")
 			var/dat = "<B>Showing last [length(GLOB.lawchanges)] law changes.</B><HR>"
 			for(var/sig in GLOB.lawchanges)
