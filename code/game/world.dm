@@ -29,10 +29,16 @@ GLOBAL_VAR(restart_counter)
  *			All atoms in both compiled and uncompiled maps are initialized()
  */
 /world/New()
+	// Write everything to this log file until we get to SetupLogs() later
+	_initialize_log_files("data/logs/config_error.[GUID()].log")
+
 	enable_debugger()
 #ifdef REFERENCE_TRACKING
 	enable_reference_tracking()
 #endif
+
+	// Create the logger
+	logger = new
 
 	log_world("World loaded at [time_stamp()]!")
 
@@ -50,7 +56,6 @@ GLOBAL_VAR(restart_counter)
 	//DB schema and set RoundID if we can
 	SSdbcore.CheckSchemaVersion()
 	SSdbcore.SetRoundID()
-	SetupLogs()
 	load_poll_data()
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
@@ -73,8 +78,7 @@ GLOBAL_VAR(restart_counter)
 	if(NO_INIT_PARAMETER in params)
 		return
 
-	// Create the logger
-	logger = new
+	SetupLogs()
 
 	Master.Initialize(10, FALSE, TRUE)
 
