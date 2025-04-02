@@ -5,66 +5,63 @@
 /// Admins can still manually request a re-render
 #define LOG_UPDATE_TIMEOUT 5 SECONDS
 
+// The maximum number of entries allowed in the signaler investigate log, keep this relatively small to prevent performance issues when an admin tries to query it
+#define INVESTIGATE_SIGNALER_LOG_MAX_LENGTH 500
+
 //Investigate logging defines
-#define INVESTIGATE_ATMOS			"atmos"
-#define INVESTIGATE_BOTANY			"botany"
-#define INVESTIGATE_CARGO			"cargo"
-#define INVESTIGATE_EXPERIMENTOR	"experimentor"
-#define INVESTIGATE_GRAVITY			"gravity"
-#define INVESTIGATE_RECORDS			"records"
-#define INVESTIGATE_SINGULO			"singulo"
-#define INVESTIGATE_SUPERMATTER		"supermatter"
-#define INVESTIGATE_TELESCI			"telesci"
-#define INVESTIGATE_WIRES			"wires"
-#define INVESTIGATE_PORTAL			"portals"
-#define INVESTIGATE_RESEARCH		"research"
-#define INVESTIGATE_HALLUCINATIONS	"hallucinations"
-#define INVESTIGATE_RADIATION		"radiation"
-#define INVESTIGATE_EXONET			"exonet"
-#define INVESTIGATE_NANITES			"nanites"
-#define INVESTIGATE_PRESENTS		"presents"
-#define INVESTIGATE_HYPERTORUS		"hypertorus"
-#define INVESTIGATE_ACCESSCHANGES	"id_card_changes"
+#define INVESTIGATE_ACCESSCHANGES "id_card_changes"
+#define INVESTIGATE_ATMOS "atmos"
+#define INVESTIGATE_BOTANY "botany"
+#define INVESTIGATE_CARGO "cargo"
+#define INVESTIGATE_CRAFTING "crafting"
+#define INVESTIGATE_DEATHS "deaths"
+#define INVESTIGATE_ENGINE "engine"
+#define INVESTIGATE_EXPERIMENTOR "experimentor"
+#define INVESTIGATE_GRAVITY "gravity"
+#define INVESTIGATE_HALLUCINATIONS "hallucinations"
+#define INVESTIGATE_HYPERTORUS "hypertorus"
+#define INVESTIGATE_PORTAL "portals"
+#define INVESTIGATE_PRESENTS "presents"
+#define INVESTIGATE_RADIATION "radiation"
+#define INVESTIGATE_RECORDS "records"
+#define INVESTIGATE_RESEARCH "research"
+#define INVESTIGATE_WIRES "wires"
 
 // Logging types for log_message()
-#define LOG_ATTACK			(1 << 0)
-#define LOG_SAY				(1 << 1)
-#define LOG_WHISPER			(1 << 2)
-#define LOG_EMOTE			(1 << 3)
-#define LOG_DSAY			(1 << 4)
-#define LOG_PDA				(1 << 5)
-#define LOG_CHAT			(1 << 6)
-#define LOG_COMMENT			(1 << 7)
-#define LOG_TELECOMMS		(1 << 8)
-#define LOG_OOC				(1 << 9)
-#define LOG_ADMIN			(1 << 10)
-#define LOG_OWNERSHIP		(1 << 11)
-#define LOG_GAME			(1 << 12)
-#define LOG_ADMIN_PRIVATE	(1 << 13)
-#define LOG_ASAY			(1 << 14)
-#define LOG_MECHA			(1 << 15)
-#define LOG_VIRUS			(1 << 16)
-#define LOG_CLONING			(1 << 17)
-#define LOG_SHUTTLE			(1 << 18)
-#define LOG_ECON			(1 << 19)
+#define LOG_ATTACK (1 << 0)
+#define LOG_SAY (1 << 1)
+#define LOG_WHISPER (1 << 2)
+#define LOG_EMOTE (1 << 3)
+#define LOG_DSAY (1 << 4)
+#define LOG_PDA (1 << 5)
+#define LOG_CHAT (1 << 6)
+#define LOG_COMMENT (1 << 7)
+#define LOG_TELECOMMS (1 << 8)
+#define LOG_OOC (1 << 9)
+#define LOG_ADMIN (1 << 10)
+#define LOG_OWNERSHIP (1 << 11)
+#define LOG_GAME (1 << 12)
+#define LOG_ADMIN_PRIVATE (1 << 13)
+#define LOG_ASAY (1 << 14)
+#define LOG_MECHA (1 << 15)
+#define LOG_VIRUS (1 << 16)
+#define LOG_SHUTTLE (1 << 17)
+#define LOG_ECON (1 << 18)
+#define LOG_VICTIM (1 << 19)
+#define LOG_RADIO_EMOTE (1 << 20)
+#define LOG_SPEECH_INDICATORS (1 << 21)
+#define LOG_TRANSPORT (1 << 22)
 
 //Individual logging panel pages
-#define INDIVIDUAL_ATTACK_LOG		(LOG_ATTACK)
-#define INDIVIDUAL_SAY_LOG			(LOG_SAY | LOG_WHISPER | LOG_DSAY)
-//#define INDIVIDUAL_EMOTE_LOG		(LOG_EMOTE)
-#define INDIVIDUAL_COMMS_LOG		(LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS)
-#define INDIVIDUAL_OOC_LOG			(LOG_OOC | LOG_ADMIN)
-#define INDIVIDUAL_OWNERSHIP_LOG	(LOG_OWNERSHIP)
-/// TFN EDIT ADDITION START
-// Logging types for log_message()
-#define LOG_SUBTLE (1 << 22)
-#define LOG_SUBTLER (1 << 23)
+#define INDIVIDUAL_GAME_LOG (LOG_GAME)
+#define INDIVIDUAL_ATTACK_LOG (LOG_ATTACK | LOG_VICTIM)
+#define INDIVIDUAL_SAY_LOG (LOG_SAY | LOG_WHISPER | LOG_DSAY | LOG_SPEECH_INDICATORS)
+#define INDIVIDUAL_EMOTE_LOG (LOG_EMOTE | LOG_RADIO_EMOTE)
+#define INDIVIDUAL_COMMS_LOG (LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS)
+#define INDIVIDUAL_OOC_LOG (LOG_OOC | LOG_ADMIN)
+#define INDIVIDUAL_SHOW_ALL_LOG (LOG_ATTACK | LOG_SAY | LOG_WHISPER | LOG_EMOTE | LOG_RADIO_EMOTE | LOG_DSAY | LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS | LOG_OOC | LOG_ADMIN | LOG_OWNERSHIP | LOG_GAME | LOG_ADMIN_PRIVATE | LOG_ASAY | LOG_MECHA | LOG_VIRUS | LOG_SHUTTLE | LOG_ECON | LOG_VICTIM | LOG_SPEECH_INDICATORS)
 
-//Individual logging panel pages
-#define INDIVIDUAL_EMOTE_LOG (LOG_EMOTE | LOG_SUBTLE | LOG_SUBTLER)
-#define INDIVIDUAL_SHOW_ALL_LOG (LOG_ATTACK | LOG_SAY | LOG_WHISPER | LOG_EMOTE | LOG_SUBTLE | LOG_SUBTLER | LOG_DSAY | LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS | LOG_OOC | LOG_ADMIN | LOG_OWNERSHIP | LOG_GAME | LOG_ADMIN_PRIVATE | LOG_ASAY | LOG_MECHA | LOG_VIRUS | LOG_SHUTTLE | LOG_ECON)
-// TFN EDIT ADDITION END
-#define LOGSRC_CLIENT "Client"
+#define LOGSRC_CKEY "Ckey"
 #define LOGSRC_MOB "Mob"
 
 // Log header keys
@@ -89,8 +86,9 @@
 #define LOG_ENTRY_KEY_ID "id"
 #define LOG_ENTRY_KEY_SCHEMA_VERSION "s-ver"
 
-// Category for invalid/missing categories
-#define LOG_CATEGORY_NOT_FOUND "invalid-category"
+// Internal categories
+#define LOG_CATEGORY_INTERNAL_CATEGORY_NOT_FOUND "internal-category-not-found"
+#define LOG_CATEGORY_INTERNAL_ERROR "internal-error"
 
 // Misc categories
 #define LOG_CATEGORY_ATTACK "attack"
@@ -101,17 +99,21 @@
 #define LOG_CATEGORY_MANIFEST "manifest"
 #define LOG_CATEGORY_MECHA "mecha"
 #define LOG_CATEGORY_PAPER "paper"
+#define LOG_CATEGORY_QDEL "qdel"
 #define LOG_CATEGORY_RUNTIME "runtime"
 #define LOG_CATEGORY_SHUTTLE "shuttle"
 #define LOG_CATEGORY_SILICON "silicon"
 #define LOG_CATEGORY_SILO "silo"
 #define LOG_CATEGORY_SIGNAL "signal"
 #define LOG_CATEGORY_SPEECH_INDICATOR "speech-indiciator"
-#define LOG_CATEGORY_SUSPICIOUS_LOGIN "supicious-login"
+// Leave the underscore, it's there for backwards compatibility reasons
+#define LOG_CATEGORY_SUSPICIOUS_LOGIN "suspicious_logins"
 #define LOG_CATEGORY_TARGET_ZONE_SWITCH "target-zone-switch"
 #define LOG_CATEGORY_TELECOMMS "telecomms"
 #define LOG_CATEGORY_TOOL "tool"
+#define LOG_CATEGORY_TRANSPORT "transport"
 #define LOG_CATEGORY_VIRUS "virus"
+#define LOG_CATEGORY_CAVE_GENERATION "cave-generation"
 
 // Admin categories
 #define LOG_CATEGORY_ADMIN "admin"
@@ -125,14 +127,12 @@
 // Debug categories
 #define LOG_CATEGORY_DEBUG "debug"
 #define LOG_CATEGORY_DEBUG_ASSET "debug-asset"
-#define LOG_CATEGORY_DEBUG_HREF "debug-href"
 #define LOG_CATEGORY_DEBUG_JOB "debug-job"
 #define LOG_CATEGORY_DEBUG_LUA "debug-lua"
+#define LOG_CATEGORY_DEBUG_TTS "debug-tts"
 #define LOG_CATEGORY_DEBUG_MAPPING "debug-mapping"
 #define LOG_CATEGORY_DEBUG_MOBTAG "debug-mobtag"
-#define LOG_CATEGORY_DEBUG_QDEL "debug-qdel"
 #define LOG_CATEGORY_DEBUG_SQL "debug-sql"
-#define LOG_CATEGORY_DEBUG_TGUI "debug-tgui"
 
 // Compatibility categories, for when stuff is changed and you need existing functionality to work
 #define LOG_CATEGORY_COMPAT_GAME "game-compat"
@@ -151,17 +151,28 @@
 #define LOG_CATEGORY_GAME_VOTE "game-vote"
 #define LOG_CATEGORY_GAME_WHISPER "game-whisper"
 
+// HREF categories
+#define LOG_CATEGORY_HREF "href"
+#define LOG_CATEGORY_HREF_TGUI "href-tgui"
+
 // Uplink categories
 #define LOG_CATEGORY_UPLINK "uplink"
 #define LOG_CATEGORY_UPLINK_CHANGELING "uplink-changeling"
 #define LOG_CATEGORY_UPLINK_HERETIC "uplink-heretic"
 #define LOG_CATEGORY_UPLINK_MALF "uplink-malf"
 #define LOG_CATEGORY_UPLINK_SPELL "uplink-spell"
+#define LOG_CATEGORY_UPLINK_SPY "uplink-spy"
 
 // PDA categories
 #define LOG_CATEGORY_PDA "pda"
 #define LOG_CATEGORY_PDA_CHAT "pda-chat"
 #define LOG_CATEGORY_PDA_COMMENT "pda-comment"
+
+// Flags that apply to the entry_flags var on logging categories
+// These effect how entry datums process the inputs passed into them
+/// Enables data list usage for readable log entries
+/// You'll likely want to disable internal formatting to make this work properly
+#define ENTRY_USE_DATA_W_READABLE (1<<0)
 
 #define SCHEMA_VERSION "schema-version"
 
