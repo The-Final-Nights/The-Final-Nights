@@ -21,7 +21,18 @@
 	var/font_color = "purple"
 	var/prayer_type = "PRAYER"
 	var/deity
-	if(isliving(usr))
+	if(usr.job == JOB_CHAPLAIN)
+		cross.icon_state = "kingyellow"
+		font_color = "blue"
+		prayer_type = "CHAPLAIN PRAYER"
+		if(GLOB.deity)
+			deity = GLOB.deity
+	else if(IS_CULTIST(usr))
+		cross.icon_state = "tome"
+		font_color = "red"
+		prayer_type = "CULTIST PRAYER"
+		deity = "Nar'Sie"
+	else if(isliving(usr))
 		var/mob/living/L = usr
 		if(HAS_TRAIT(L, TRAIT_SPIRITUAL))
 			cross.icon_state = "holylight"

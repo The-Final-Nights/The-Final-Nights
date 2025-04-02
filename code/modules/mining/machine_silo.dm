@@ -160,6 +160,7 @@ GLOBAL_LIST_EMPTY(silo_access_logs)
 			updateUsrDialog()
 			return TRUE
 	else if(href_list["hold"])
+		var/datum/component/remote_materials/mats = locate(href_list["hold"]) in ore_connected_machines
 		updateUsrDialog()
 		return TRUE
 	else if(href_list["ejectsheet"])
