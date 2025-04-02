@@ -38,8 +38,3 @@
 	name = "Jazz Club"
 	lock_id = "milleniumCommon"
 	lockpick_difficulty = 8
-
-/obj/structure/vampdoor/wood/cappadocian
-	locked = TRUE
-	lock_id = "cappadocian"
-	lockpick_difficulty = 8

@@ -242,10 +242,3 @@
 
 	///If the blood cell cursor is currently active due to a Discipline being targeted
 	var/discipline_targeting = FALSE
-
-	///the icon currently used for the typing indicator's bubble
-	var/active_typing_indicator
-	///the icon currently used for the thinking indicator's bubble
-	var/active_thinking_indicator
-	/// User is thinking in character. Used to revert to thinking state after stop_typing
-	var/thinking_IC = FALSE

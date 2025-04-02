@@ -50,7 +50,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	else
 		. += "Time To Start: SOON"
 
-	. += "Players: [LAZYLEN(GLOB.clients)]"
+	. += "Players: [SSticker.totalPlayers]"
 	if(client.holder)
 		. += "Players Ready: [SSticker.totalPlayersReady]"
 

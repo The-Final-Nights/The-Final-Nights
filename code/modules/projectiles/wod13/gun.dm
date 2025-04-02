@@ -370,7 +370,6 @@
 			M.attackby(bayonet, user)
 			return
 		else
-			process_fire(M, user)
 			return ..()
 	return
 

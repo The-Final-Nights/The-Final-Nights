@@ -583,7 +583,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 	dellog += "</ol>"
 
-	usr << browse(HTML_SKELETON(dellog.Join()), "window=dellog")
+	usr << browse(dellog.Join(), "window=dellog")
 
 /client/proc/cmd_display_overlay_log()
 	set category = "Debug"
@@ -597,9 +597,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Display Initialize() Log"
 	set desc = "Displays a list of things that didn't handle Initialize() properly"
 
-	var/datum/browser/browser = new(usr, "initlog", "Initialize Log", 500, 500)
-	browser.set_content(replacetext(SSatoms.InitLog(), "\n", "<br>"))
-	browser.open()
+	usr << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
 
 /client/proc/debug_huds(i as num)
 	set category = "Debug"
@@ -691,24 +689,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		to_chat(src, "<span class='italics'>[template.description]</span>", confidential = TRUE)
 	else
 		to_chat(src, "<span class='warning'>Failed to place [template.name].</span>", confidential = TRUE)
-
-/client/proc/run_empty_query(val as num)
-	set category = "Debug"
-	set name = "Run empty query"
-	set desc = "Amount of queries to run"
-
-	var/list/queries = list()
-	for(var/i in 1 to val)
-		var/datum/db_query/query = SSdbcore.NewQuery("NULL")
-		INVOKE_ASYNC(query, /datum/db_query.proc/Execute)
-		queries += query
-
-	for(var/datum/db_query/query as anything in queries)
-		query.sync()
-		qdel(query)
-	queries.Cut()
-
-	message_admins("[key_name_admin(src)] ran [val] empty queries.")
 
 /client/proc/clear_dynamic_transit()
 	set category = "Debug"
@@ -819,15 +799,13 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/bucket_list_output = generate_timer_source_output(SStimer.bucket_list)
 	var/second_queue = generate_timer_source_output(SStimer.second_queue)
 
-	var/datum/browser/browser = new(usr, "check_timer_sources", "Timer Sources", 700, 700)
-	browser.set_content({"
+	usr << browse({"
 		<h3>bucket_list</h3>
 		[bucket_list_output]
 
 		<h3>second_queue</h3>
 		[second_queue]
-	"})
-	browser.open()
+	"}, "window=check_timer_sources;size=700x700")
 
 /proc/generate_timer_source_output(list/datum/timedevent/events)
 	var/list/per_source = list()

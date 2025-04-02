@@ -139,8 +139,6 @@
 
 #define ATMOS_GROUP_PLANE 22
 #define ATMOS_GROUP_LAYER 22
-/// Bubble for typing indicators
-#define TYPING_LAYER 23
 
 //HUD layer defines
 

@@ -42,6 +42,11 @@
 		if(!host.real_name)
 			dat += "Unknown,"
 		dat += " [host.auspice.tribe] [host.auspice.base_breed]"
+//		if(host.clane)
+//			dat += " the [host.clane.name]"
+//		if(!host.clane)
+//			dat += " the caitiff"
+
 		if(host.mind)
 
 			if(host.mind.assigned_role)
@@ -94,10 +99,11 @@
 				if(H.bank_id == account.bank_id)
 					dat += "<b>My bank account code is: [account.code]</b><BR>"
 		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
-		onclose(HTML_SKELETON(host), "vampire", src)
+		onclose(host, "vampire", src)
 
 /datum/species/garou/on_species_gain(mob/living/carbon/human/C)
 	. = ..()
+//	ADD_TRAIT(C, TRAIT_NOBLEED, HIGHLANDER)
 	C.update_body(0)
 	C.last_experience = world.time+3000
 	var/datum/action/garouinfo/infor = new()

@@ -114,10 +114,10 @@
 		if(vw.low)
 			return TRUE
 
-/obj/structure/table/CanAStarPass(ID, dir, pathfinding_atom)
+/obj/structure/table/CanAStarPass(ID, dir, caller)
 	. = !density
-	if(ismovable(pathfinding_atom))
-		var/atom/movable/mover = pathfinding_atom
+	if(ismovable(caller))
+		var/atom/movable/mover = caller
 		. = . || (mover.pass_flags & PASSTABLE)
 
 /obj/structure/table/proc/tableplace(mob/living/user, mob/living/pushed_mob)

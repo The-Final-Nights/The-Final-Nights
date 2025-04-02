@@ -98,7 +98,6 @@
 	projectile_type = /obj/projectile/magic/aoe/fireball/baali
 	base_icon_state = "infernaball"
 	action_icon_state = "infernaball0"
-	action_background_icon_state = "default"
 	sound = 'sound/magic/fireball.ogg'
 	active_msg = "You prepare to cast your fireball spell!"
 	deactive_msg = "You extinguish your fireball... for now."

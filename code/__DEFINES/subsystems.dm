@@ -63,10 +63,6 @@
 ///Empty ID define
 #define TIMER_ID_NULL -1
 
-/// Used to trigger object removal from a processing list
-#define PROCESS_KILL 26
-
-
 //! ## Initialization subsystem
 
 ///New should not call Initialize
@@ -162,7 +158,6 @@
 #define FIRE_PRIORITY_RESEARCH		10
 #define FIRE_PRIORITY_VIS			10
 #define FIRE_PRIORITY_GARBAGE		15
-#define FIRE_PRIORITY_DATABASE 16
 #define FIRE_PRIORITY_WET_FLOORS	20
 #define FIRE_PRIORITY_AIR			20
 #define FIRE_PRIORITY_NPC			20

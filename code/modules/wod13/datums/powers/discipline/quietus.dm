@@ -136,7 +136,6 @@
 		target.armour_penetration = min(100, target.armour_penetration+30)
 		target.force += 20
 		target.color = "#72b27c"
-		target.owner = WEAKREF(src.owner)
 
 //TASTE OF DEATH
 /obj/projectile/quietus
