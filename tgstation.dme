@@ -32,6 +32,7 @@
 #include "code\__DEFINES\ai.dm"
 #include "code\__DEFINES\antagonists.dm"
 #include "code\__DEFINES\aquarium.dm"
+#include "code\__DEFINES\assert.dm"
 #include "code\__DEFINES\atom_hud.dm"
 #include "code\__DEFINES\bitfields.dm"
 #include "code\__DEFINES\blackmarket.dm"
