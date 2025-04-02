@@ -1,5 +1,4 @@
 #define PROFILER_FILENAME "profiler.json"
-#define SENDMAPS_FILENAME "sendmaps.json"
 
 SUBSYSTEM_DEF(profiler)
 	name = "Profiler"
