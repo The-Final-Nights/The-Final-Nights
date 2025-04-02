@@ -117,6 +117,9 @@
 #define span_yell(str) ("<span class='yell'>" + str + "</span>")
 #define span_yellowteamradio(str) ("<span class='yellowteamradio'>" + str + "</span>")
 
+#define span_subtle(str) ("<span class='subtle'>" + str + "</span>")
+#define span_subtler(str) ("<span class='subtler'>" + str + "</span>")
+
 // Spans that use embedded tgui components:
 // Sorted alphabetically
 #define span_tooltip(tip, main_text) ("<span data-component=\"Tooltip\" data-content=\"" + tip + "\" class=\"tooltip\">" + main_text + "</span>")
