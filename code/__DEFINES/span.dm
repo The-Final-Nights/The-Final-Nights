@@ -119,6 +119,8 @@
 
 #define span_subtle(str) ("<span class='subtle'>" + str + "</span>")
 #define span_subtler(str) ("<span class='subtler'>" + str + "</span>")
+#define span_emote(str) ("<span class='emote'>" + str + "</span>")
+
 
 // Spans that use embedded tgui components:
 // Sorted alphabetically
