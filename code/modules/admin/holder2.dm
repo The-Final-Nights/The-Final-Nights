@@ -29,21 +29,6 @@ GLOBAL_PROTECT(href_token)
 	var/deadmined
 
 	var/datum/filter_editor/filteriffic
-	var/datum/particle_editor/particle_test
-	var/datum/colorblind_tester/color_test = new
-	var/datum/plane_master_debug/plane_debug
-	var/obj/machinery/computer/libraryconsole/admin_only_do_not_map_in_you_fucker/library_manager
-
-	/// Whether or not the user tried to connect, but was blocked by 2FA
-	var/blocked_by_2fa = FALSE
-
-	/// Whether or not this user can bypass 2FA
-	var/bypass_2fa = FALSE
-
-	/// A lazylist of tagged datums, for quick reference with the View Tags verb
-	var/list/tagged_datums
-
-	var/given_profiling = FALSE
 
 /datum/admins/New(datum/admin_rank/R, ckey, force_active = FALSE, protected)
 	if(IsAdminAdvancedProcCall())
