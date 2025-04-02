@@ -68,7 +68,6 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag
 
 	implants = list(/obj/item/implant/mindshield)
-//	accessory = /obj/item/clothing/accessory/medal/gold/captain
 
 /datum/outfit/job/prince/pre_equip(mob/living/carbon/human/H)
 	..()

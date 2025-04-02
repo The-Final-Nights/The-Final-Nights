@@ -72,12 +72,6 @@
 			L.chi_ranged = null
 	. = ..()
 
-//			if(DISCP)
-//				if(DISCP.active)
-//					DISCP.range_activate(src, SH)
-//					SH.face_atom(src)
-//					return
-
 /atom/movable/screen/movable/action_button/Click(location,control,params)
 	if(istype(linked_action, /datum/action/chi_discipline))
 		var/list/modifiers = params2list(params)
@@ -247,7 +241,6 @@
 		for(var/obj/item/I in C.held_items)
 			C.accident(I)
 
-//		var/olddir = C.dir
 		C.moving_diagonally = 0 //If this was part of diagonal move slipping will stop it.
 		C.Knockdown(2 SECONDS)
 
@@ -721,10 +714,6 @@
 /obj/item/chameleon/temp
 	name = "Appearance Projector"
 	item_flags = DROPDEL
-
-//obj/item/chameleon/temp/Initialize()
-//	. = ..()
-//	ADD_TRAIT(src, TRAIT_NODROP, STICKY_NODROP)
 
 //Meat Hook
 /obj/item/gun/magic/hook/flesh_shintai
@@ -1215,10 +1204,6 @@
 	..()
 	var/mod = level_casting
 	var/bonus = 15 * mod
-//	caster.remove_overlay(FORTITUDE_LAYER)
-//	var/mutable_appearance/fortitude_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "mountain", -FORTITUDE_LAYER)
-//	caster.overlays_standing[FORTITUDE_LAYER] = fortitude_overlay
-//	caster.apply_overlay(FORTITUDE_LAYER)
 	caster.physiology.armor.melee += bonus
 	caster.physiology.armor.bullet += bonus
 	spawn(delay+caster.discipline_time_plus)
@@ -1226,7 +1211,6 @@
 			caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/ironmountain_deactivate.ogg', 50, FALSE)
 			caster.physiology.armor.melee -= bonus
 			caster.physiology.armor.bullet -= bonus
-//			caster.remove_overlay(FORTITUDE_LAYER)
 
 /datum/chi_discipline/kiai
 	name = "Kiai"
@@ -1961,19 +1945,6 @@
 	cost_yin = 1
 	discipline_type = "Chi"
 	activate_sound = 'code/modules/wod13/sounds/tapestry.ogg'
-	//var/prev_z
-
-//nonfunctional
-/*
-/obj/penumbra_ghost
-	COOLDOWN_DECLARE(move_ghost)
-
-/obj/penumbra_ghost/relaymove(mob/living/user, direction)
-	if(COOLDOWN_FINISHED(src, move_ghost))
-		COOLDOWN_START(src, move_ghost, 0.5 SECONDS)
-		dir = direction
-		forceMove(get_step(src, direction))
-*/
 
 /obj/effect/anomaly/grav_kuei
 	name = "gravitational anomaly"
@@ -2046,49 +2017,6 @@
 		if(2)
 			caster.yin_chi += 1
 			caster.yang_chi += 1
-			//disabled due to bugs, sorry!
-			/*
-			var/chosen_z
-			var/umbra_z
-			var/obj/penumbra_ghost/ghost
-
-			if(istype(caster.loc, /obj/penumbra_ghost))
-				ghost = caster.loc
-
-			for(var/area/vtm/interior/penumbra/penumbra in world)
-				if(penumbra)
-					chosen_z = penumbra.z
-					umbra_z = penumbra.z
-
-			if(caster.z != chosen_z)
-				prev_z = caster.z
-			else
-				chosen_z = prev_z
-				var/turf/caster_turf = get_turf(caster)
-				var/turf/to_wall = locate(caster_turf.x, caster_turf.y, chosen_z)
-				var/area/cross_area = get_area(to_wall)
-				if(cross_area)
-					if(cross_area.wall_rating > LOW_WALL_RATING)
-						to_chat(caster, "<span class='warning'><b>GAUNTLET</b> rating there is too high! You can't cross <b>PENUMBRA</b> like this...</span>")
-						caster.yin_chi += 1
-						caster.yang_chi += 1
-						return
-
-			if(do_mob(caster, caster, delay))
-				if(chosen_z != umbra_z)
-					var/atom/myloc = caster.loc
-					caster.forceMove(locate(myloc.x, myloc.y, chosen_z))
-					if(ghost)
-						qdel(ghost)
-				else
-					caster.z = chosen_z
-					ghost = new (get_turf(caster))
-					ghost.appearance = caster.appearance
-					ghost.name = caster.name
-					ghost.alpha = 128
-					caster.forceMove(ghost)
-				playsound(get_turf(caster), 'code/modules/wod13/sounds/portal.ogg', 100, TRUE)
-			*/
 		if(3)
 			ADD_TRAIT(caster, TRAIT_SUPERNATURAL_LUCK, "tapestry 3")
 			to_chat(caster, "<b>You feel insanely lucky!</b>")

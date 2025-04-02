@@ -208,12 +208,6 @@
 		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
 		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
 		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
-//		if(host.hud_used)
-//			dat += "<b>Known disciplines:</b><BR>"
-//			for(var/datum/action/discipline/D in host.actions)
-//				if(D)
-//					if(D.discipline)
-//						dat += "[D.discipline.name] [D.discipline.level] - [D.discipline.desc]<BR>"
 		if(host.Myself)
 			if(host.Myself.Friend)
 				if(host.Myself.Friend.owner)
@@ -243,7 +237,7 @@
 			if(host.bank_id == account.bank_id)
 				dat += "<b>My bank account code is: [account.code]</b><BR>"
 		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
-		onclose(host, "vampire", src)
+		onclose(HTML_SKELETON(host), "vampire", src)
 
 /datum/species/kuei_jin/on_species_gain(mob/living/carbon/human/C)
 	. = ..()

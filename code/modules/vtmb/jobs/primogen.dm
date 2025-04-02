@@ -189,49 +189,6 @@
 		uniform = /obj/item/clothing/under/vampire/primogen_toreador/female
 		shoes = /obj/item/clothing/shoes/vampire/heels/red
 
-
-/*/datum/job/vamp/primogen_brujah
-	title = "Primogen Brujah"
-	department_head = list("Justicar")
-	faction = "Vampire"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = " the Traditions"
-	selection_color = "#4f0404"
-
-	outfit = /datum/outfit/job/brujah
-
-	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
-	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
-	paycheck = PAYCHECK_EASY
-	paycheck_department = ACCOUNT_SRV
-	display_order = JOB_DISPLAY_ORDER_BRUJAH
-	exp_type_department = EXP_TYPE_COUNCIL
-
-	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Brujah")
-	minimal_generation = 10
-
-	v_duty = "Offer your infinite knowledge to Prince of the City."
-	experience_addition = 20
-	minimal_masquerade = 5
-	my_contact_is_important = TRUE
-	known_contacts = list("Prince")
-
-/datum/outfit/job/brujah
-	name = "Primogen Brujah"
-	jobtype = /datum/job/vamp/primogen_brujah
-
-	id = /obj/item/card/id/primogen
-	glasses = /obj/item/clothing/glasses/vampire/yellow
-	uniform = /obj/item/clothing/under/vampire/punk
-	suit = /obj/item/clothing/suit/vampire/jacket/punk
-	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	l_pocket = /obj/item/vamp/phone/brujah
-	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/brujah/primogen=1, /obj/item/melee/vampirearms/eguitar=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
-*/
-
 /datum/job/vamp/primogen_banu
 	title = "Primogen Banu Haqim"
 	department_head = list("Justicar")
@@ -276,7 +233,6 @@
 /obj/effect/landmark/start/primogen_banu
 	name = "Primogen Banu Haqim"
 	icon_state = "Assistant"
-
 
 /datum/job/vamp/primogen_lasombra
 	title = "Primogen Lasombra"

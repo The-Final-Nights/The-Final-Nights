@@ -137,7 +137,6 @@
 	desc = "The werewolf with this Gift may communicate with any animals from fish to mammals."
 	button_icon_state = "beast_speech"
 	rage_req = 1
-	//gnosis_req = 1
 
 /datum/action/gift/beast_speech/Trigger()
 	. = ..()
@@ -176,13 +175,11 @@
 					playsound(get_turf(A), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
 					spawn(10)
 						adjust_gnosis(1, A, TRUE)
-//	awo1
 
 /datum/action/gift/mindspeak
 	name = "Mindspeak"
 	desc = "By invoking the power of waking dreams, the Garou can place any chosen characters into silent communion."
 	button_icon_state = "mindspeak"
-//	gnosis_req = 1
 
 /datum/action/gift/mindspeak/Trigger()
 	. = ..()
@@ -230,7 +227,6 @@
 	desc = "This Gift allows the Garou to determine the true nature of a person."
 	button_icon_state = "scent_of_the_true_form"
 	rage_req = 1
-	//gnosis_req = 1
 
 /datum/action/gift/scent_of_the_true_form/Trigger()
 	. = ..()
@@ -244,14 +240,12 @@
 	name = "Truth Of Gaia"
 	desc = "As judges of the Litany, Philodox have the ability to sense whether others have spoken truth or falsehood."
 	button_icon_state = "truth_of_gaia"
-//	rage_req = 1
 
 /datum/action/gift/mothers_touch
 	name = "Mother's Touch"
 	desc = "The Garou is able to heal the wounds of any living creature, aggravated or otherwise, simply by laying hands over the afflicted area."
 	button_icon_state = "mothers_touch"
 	rage_req = 2
-	//gnosis_req = 1
 
 /datum/action/gift/mothers_touch/Trigger()
 	. = ..()
@@ -280,7 +274,6 @@
 	name = "Spirit Speech"
 	desc = "This Gift allows the Garou to communicate with encountered spirits."
 	button_icon_state = "spirit_speech"
-	//gnosis_req = 1
 
 /datum/action/gift/spirit_speech/Trigger()
 	. = ..()
@@ -295,7 +288,6 @@
 	desc = "The Garou's form becomes a shimmering blur, allowing him to pass unnoticed among others."
 	button_icon_state = "blur_of_the_milky_eye"
 	rage_req = 2
-	//gnosis_req = 1
 
 /datum/action/gift/blur_of_the_milky_eye/Trigger()
 	. = ..()
@@ -310,7 +302,6 @@
 	name = "Open Seal"
 	desc = "With this Gift, the Garou can open nearly any sort of closed or locked physical device."
 	button_icon_state = "open_seal"
-//	gnosis_req = 1
 
 /datum/action/gift/open_seal/Trigger()
 	. = ..()
