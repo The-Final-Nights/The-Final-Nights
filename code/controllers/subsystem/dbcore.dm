@@ -1,9 +1,8 @@
-#define SHUTDOWN_QUERY_TIMELIMIT (1 MINUTES)
 SUBSYSTEM_DEF(dbcore)
 	name = "Database"
 	flags = SS_TICKER
 	wait = 10 // Not seconds because we're running on SS_TICKER
-	runlevels = RUNLEVEL_LOBBY|RUNLEVELS_DEFAULT
+	runlevels = RUNLEVEL_INIT|RUNLEVEL_LOBBY|RUNLEVELS_DEFAULT
 	init_order = INIT_ORDER_DBCORE
 	priority = FIRE_PRIORITY_DATABASE
 
@@ -35,9 +34,6 @@ SUBSYSTEM_DEF(dbcore)
 	/// Queries pending execution, mapped to complete arguments
 	var/list/datum/db_query/queries_standby = list()
 
-	/// We are in the process of shutting down and should not allow more DB connections
-	var/shutting_down = FALSE
-
 
 	var/connection  // Arbitrary handle returned from rust_g.
 
@@ -52,7 +48,7 @@ SUBSYSTEM_DEF(dbcore)
 		if(2)
 			message_admins("Could not get schema version from database")
 
-	return SS_INIT_SUCCESS
+	return ..()
 
 /datum/controller/subsystem/dbcore/OnConfigLoad()
 	. = ..()
@@ -174,39 +170,17 @@ SUBSYSTEM_DEF(dbcore)
 	connection = SSdbcore.connection
 
 /datum/controller/subsystem/dbcore/Shutdown()
-	shutting_down = TRUE
-	var/msg = "Clearing DB queries standby:[length(queries_standby)] active: [length(queries_active)] all: [length(all_queries)]"
-	to_chat(world, span_boldannounce(msg))
-	log_world(msg)
 	//This is as close as we can get to the true round end before Disconnect() without changing where it's called, defeating the reason this is a subsystem
-	var/endtime = REALTIMEOFDAY + SHUTDOWN_QUERY_TIMELIMIT
 	if(SSdbcore.Connect())
-		//Take over control of all active queries
-		var/queries_to_check = queries_active.Copy()
-		queries_active.Cut()
-		
-		//Start all waiting queries
 		for(var/datum/db_query/query in queries_standby)
 			run_query(query)
-			queries_to_check += query
-			queries_standby -= query
-		
-		//wait for them all to finish
-		for(var/datum/db_query/query in queries_to_check)
-			UNTIL(query.process() || REALTIMEOFDAY > endtime)
-		
-		//log shutdown to the db
+
 		var/datum/db_query/query_round_shutdown = SSdbcore.NewQuery(
 			"UPDATE [format_table_name("round")] SET shutdown_datetime = Now(), end_state = :end_state WHERE id = :round_id",
-			list("end_state" = SSticker.end_state, "round_id" = GLOB.round_id),
-			TRUE
+			list("end_state" = SSticker.end_state, "round_id" = GLOB.round_id)
 		)
-		query_round_shutdown.Execute(FALSE)
+		query_round_shutdown.Execute()
 		qdel(query_round_shutdown)
-
-	msg = "Done clearing DB queries standby:[length(queries_standby)] active: [length(queries_active)] all: [length(all_queries)]"
-	to_chat(world, span_boldannounce(msg))
-	log_world(msg)
 	if(IsConnected())
 		Disconnect()
 	stop_db_daemon()
@@ -246,7 +220,7 @@ SUBSYSTEM_DEF(dbcore)
 	if(failed_connection_timeout <= world.time) //it's been more than 5 seconds since we failed to connect, reset the counter
 		failed_connections = 0
 
-	if(failed_connections > 5) //If it failed to establish a connection more than 5 times in a row, don't bother attempting to connect for 5 seconds.
+	if(failed_connections > 5)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to connect for 5 seconds.
 		failed_connection_timeout = world.time + 50
 		return FALSE
 
@@ -305,9 +279,7 @@ SUBSYSTEM_DEF(dbcore)
 	else
 		log_sql("Database is not enabled in configuration.")
 
-/datum/controller/subsystem/dbcore/proc/InitializeRound()
-	CheckSchemaVersion()
-
+/datum/controller/subsystem/dbcore/proc/SetRoundID()
 	if(!Connect())
 		return
 	var/datum/db_query/query_round_initialize = SSdbcore.NewQuery(
@@ -359,44 +331,28 @@ SUBSYSTEM_DEF(dbcore)
 /datum/controller/subsystem/dbcore/proc/ReportError(error)
 	last_error = error
 
-/datum/controller/subsystem/dbcore/proc/NewQuery(sql_query, arguments, allow_during_shutdown=FALSE)
-	//If the subsystem is shutting down, disallow new queries
-	if(!allow_during_shutdown && shutting_down)
-		CRASH("Attempting to create a new db query during the world shutdown")
-
+/datum/controller/subsystem/dbcore/proc/NewQuery(sql_query, arguments)
 	if(IsAdminAdvancedProcCall())
 		log_admin_private("ERROR: Advanced admin proc call led to sql query: [sql_query]. Query has been blocked")
 		message_admins("ERROR: Advanced admin proc call led to sql query. Query has been blocked")
 		return FALSE
 	return new /datum/db_query(connection, sql_query, arguments)
 
-/** QuerySelect
-	Run a list of query datums in parallel, blocking until they all complete.
-	* queries - List of queries or single query datum to run.
-	* warn - Controls rather warn_execute() or Execute() is called.
-	* qdel - If you don't care about the result or checking for errors, you can have the queries be deleted afterwards.
-		This can be combined with invoke_async as a way of running queries async without having to care about waiting for them to finish so they can be deleted.
-*/
-/datum/controller/subsystem/dbcore/proc/QuerySelect(list/queries, warn = FALSE, qdel = FALSE)
-	if (!islist(queries))
-		if (!istype(queries, /datum/db_query))
-			CRASH("Invalid query passed to QuerySelect: [queries]")
-		queries = list(queries)
-	else
-		queries = queries.Copy() //we don't want to hide bugs in the parent caller by removing invalid values from this list.
+/datum/controller/subsystem/dbcore/proc/QuerySelect(list/querys, warn = FALSE, qdel = FALSE)
+	if (!islist(querys))
+		if (!istype(querys, /datum/db_query))
+			CRASH("Invalid query passed to QuerySelect: [querys]")
+		querys = list(querys)
 
-	for (var/datum/db_query/query as anything in queries)
-		if (!istype(query))
-			queries -= query
-			stack_trace("Invalid query passed to QuerySelect: `[query]` [REF(query)]")
-			continue
-
+	for (var/thing in querys)
+		var/datum/db_query/query = thing
 		if (warn)
 			INVOKE_ASYNC(query, TYPE_PROC_REF(/datum/db_query, warn_execute))
 		else
 			INVOKE_ASYNC(query, TYPE_PROC_REF(/datum/db_query, Execute))
 
-	for (var/datum/db_query/query as anything in queries)
+	for (var/thing in querys)
+		var/datum/db_query/query = thing
 		query.sync()
 		if (qdel)
 			qdel(query)
@@ -411,8 +367,11 @@ The duplicate_key arg can be true to automatically generate this part of the que
 	or set to a string that is appended to the end of the query
 Ignore_errors instructes mysql to continue inserting rows if some of them have errors.
 	the erroneous row(s) aren't inserted and there isn't really any way to know why or why errored
+Delayed insert mode was removed in mysql 7 and only works with MyISAM type tables,
+	It was included because it is still supported in mariadb.
+	It does not work with duplicate_key and the mysql server ignores it in those cases
 */
-/datum/controller/subsystem/dbcore/proc/MassInsert(table, list/rows, duplicate_key = FALSE, ignore_errors = FALSE, warn = FALSE, async = TRUE, special_columns = null)
+/datum/controller/subsystem/dbcore/proc/MassInsert(table, list/rows, duplicate_key = FALSE, ignore_errors = FALSE, delayed = FALSE, warn = FALSE, async = TRUE, special_columns = null)
 	if (!table || !rows || !istype(rows))
 		return
 
@@ -429,6 +388,8 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 
 	// Prepare SQL query full of placeholders
 	var/list/query_parts = list("INSERT")
+	if (delayed)
+		query_parts += " DELAYED"
 	if (ignore_errors)
 		query_parts += " IGNORE"
 	query_parts += " INTO "
@@ -485,11 +446,11 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	ASSERT(fexists(daemon), "Configured db_daemon doesn't exist")
 
 	var/list/result = world.shelleo("echo \"Starting ezdb daemon, do not close this window\" && [daemon]")
-	var/result_code = result[1]
-	if (!result_code || result_code == 1)
+	var/error_code = result[1]
+	if (!error_code)
 		return
 
-	stack_trace("Failed to start DB daemon: [result_code]\n[result[3]]")
+	stack_trace("Failed to start DB daemon: [error_code]\n[result[3]]")
 
 /datum/controller/subsystem/dbcore/proc/stop_db_daemon()
 	set waitfor = FALSE
@@ -565,7 +526,7 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 /datum/db_query/proc/warn_execute(async = TRUE)
 	. = Execute(async)
 	if(!.)
-		to_chat(usr, span_danger("A SQL error occurred during this operation, check the server logs."))
+		to_chat(usr, "<span class='danger'>A SQL error occurred during this operation, check the server logs.</span>")
 
 /datum/db_query/proc/Execute(async = TRUE, log_error = TRUE)
 	Activity("Execute")
@@ -582,7 +543,7 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	Close()
 	status = DB_QUERY_STARTED
 	if(async)
-		if(!MC_RUNNING(SSdbcore.init_stage))
+		if(!Master.current_runlevel || Master.processing == 0)
 			SSdbcore.run_query_sync(src)
 		else
 			SSdbcore.queue_query(src)
@@ -594,18 +555,12 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	. = (status != DB_QUERY_BROKEN)
 	var/timed_out = !. && findtext(last_error, "Operation timed out")
 	if(!. && log_error)
-		logger.Log(LOG_CATEGORY_DEBUG_SQL, "sql query failed", list(
-			"query" = sql,
-			"arguments" = json_encode(arguments),
-			"error" = last_error,
-		))
-
+		log_sql("[last_error] | Query used: [sql] | Arguments: [json_encode(arguments)]")
 	if(!async && timed_out)
-		logger.Log(LOG_CATEGORY_DEBUG_SQL, "slow query timeout", list(
-			"query" = sql,
-			"start_time" = start_time,
-			"end_time" = REALTIMEOFDAY,
-		))
+		log_query_debug("Query execution started at [start_time]")
+		log_query_debug("Query execution ended at [REALTIMEOFDAY]")
+		log_query_debug("Slow query timeout detected.")
+		log_query_debug("Query used: [sql]")
 		slow_query_check()
 
 /// Sleeps until execution of the query has finished.
@@ -613,14 +568,14 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	while(status < DB_QUERY_FINISHED)
 		stoplag()
 
-/datum/db_query/process(seconds_per_tick)
+/datum/db_query/process(delta_time)
 	if(status >= DB_QUERY_FINISHED)
-		return TRUE // we are done processing after all
+		return
 
 	status = DB_QUERY_STARTED
 	var/job_result = rustg_sql_check_query(job_id)
 	if(job_result == RUSTG_JOB_NO_RESULTS_YET)
-		return FALSE //no results yet
+		return
 
 	store_data(json_decode(job_result))
 	return TRUE
@@ -662,4 +617,3 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 /datum/db_query/proc/Close()
 	rows = null
 	item = null
-#undef SHUTDOWN_QUERY_TIMELIMIT
