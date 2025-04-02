@@ -103,7 +103,6 @@
 	duty = "Underpaid, overworked, and understrength. Do your best to keep the order in San Francisco. Keep the officers in line."
 	minimal_masquerade = 0
 	my_contact_is_important = FALSE
-//	known_contacts = list("Investigator")
 
 /datum/outfit/job/police_chief
 	name = "Police Chief"

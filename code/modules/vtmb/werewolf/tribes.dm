@@ -37,7 +37,6 @@
 	desc = "Garou of Wendigo Tribe can create a stream of cold, freezing wind, and strike her foes with it."
 	button_icon_state = "freezing_wind"
 	rage_req = 1
-	//gnosis_req = 1
 
 /datum/action/gift/freezing_wind/Trigger()
 	. = ..()
@@ -50,7 +49,6 @@
 				W.strength = 100
 				spawn(200)
 					qdel(W)
-//	if(allowed_to_proceed)
 
 /datum/action/gift/bloody_feast
 	name = "Bloody Feast"
@@ -145,7 +143,6 @@
 	name = "Smooth Move"
 	desc = "Garou jumps forward, avoiding every damage for a moment."
 	button_icon_state = "smooth_move"
-	//rage_req = 1   somewhat useless gift with MMB pounce
 
 /datum/action/gift/smooth_move/Trigger()
 	. = ..()
