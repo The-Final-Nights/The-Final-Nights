@@ -2,6 +2,9 @@
 GLOBAL_VAR(log_directory)
 GLOBAL_PROTECT(log_directory)
 
+GLOBAL_VAR(round_id)
+GLOBAL_PROTECT(round_id)
+
 #define DECLARE_LOG_NAMED(log_var_name, log_file_name, start)\
 GLOBAL_VAR(##log_var_name);\
 GLOBAL_PROTECT(##log_var_name);\
@@ -38,8 +41,7 @@ DECLARE_LOG_NAMED(test_log, "tests", START_LOG)
 
 GLOBAL_LIST_EMPTY(bombers)
 GLOBAL_PROTECT(bombers)
-GLOBAL_LIST_EMPTY(admin_log)
-GLOBAL_PROTECT(admin_log)
+
 GLOBAL_LIST_EMPTY(lastsignalers)	//keeps last 100 signals here in format: "[src] used [REF(src)] @ location [src.loc]: [freq]/[code]"
 GLOBAL_PROTECT(lastsignalers)
 GLOBAL_LIST_EMPTY(lawchanges) //Stores who uploaded laws to which silicon-based lifeform, and what the law was
@@ -56,7 +58,6 @@ GLOBAL_PROTECT(adminlog)
 
 GLOBAL_LIST_EMPTY(active_turfs_startlist)
 
-/////Picture logging
 GLOBAL_VAR(picture_log_directory)
 GLOBAL_PROTECT(picture_log_directory)
 
@@ -64,7 +65,10 @@ GLOBAL_VAR_INIT(picture_logging_id, 1)
 GLOBAL_PROTECT(picture_logging_id)
 GLOBAL_VAR(picture_logging_prefix)
 GLOBAL_PROTECT(picture_logging_prefix)
-/////
+
+/// All admin related log lines minus their categories
+GLOBAL_LIST_EMPTY(admin_activities)
+GLOBAL_PROTECT(admin_activities)
 
 #undef DECLARE_LOG
 #undef DECLARE_LOG_NAMED

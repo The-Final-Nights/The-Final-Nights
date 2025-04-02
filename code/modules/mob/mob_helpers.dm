@@ -633,7 +633,7 @@
 	)
 
 	if(mind?.assigned_role)
-		data["assigned_role"] = mind.assigned_role.title
+		data["assigned_role"] = mind.assigned_role
 	if(job)
 		data["assigned_job"] = job
 

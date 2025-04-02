@@ -52,6 +52,9 @@
 
 /datum/config_entry/flag/log_access	// log login/logout
 
+/// Config entry which special logging of failed logins under suspicious circumstances.
+/datum/config_entry/flag/log_suspicious_login
+
 /datum/config_entry/flag/log_say	// log client say
 
 /datum/config_entry/flag/log_admin	// log admin actions
@@ -59,7 +62,20 @@
 
 /datum/config_entry/flag/log_prayer	// log prayers
 
-/datum/config_entry/flag/log_law	// log lawchanges
+///Log Music Requests
+/datum/config_entry/flag/log_internet_request
+
+/// log silicons
+/datum/config_entry/flag/log_silicon
+
+/datum/config_entry/flag/log_law
+	deprecated_by = /datum/config_entry/flag/log_silicon
+
+/datum/config_entry/flag/log_law/DeprecationUpdate(value)
+	return value
+
+/// log usage of tools
+/datum/config_entry/flag/log_tools
 
 /datum/config_entry/flag/log_game	// log game events
 
@@ -67,7 +83,7 @@
 
 /datum/config_entry/flag/log_virus	// log virology data
 
-/datum/config_entry/flag/log_cloning // log cloning actions.
+/datum/config_entry/flag/log_asset
 
 /datum/config_entry/flag/log_vote	// log voting
 
@@ -83,6 +99,8 @@
 // TFN EDIT ADDITION END
 /datum/config_entry/flag/log_econ	// log economy actions
 
+/datum/config_entry/flag/log_traitor /// log traitor objectives
+
 /datum/config_entry/flag/log_adminchat	// log admin chat messages
 	protection = CONFIG_ENTRY_LOCKED
 
@@ -91,6 +109,9 @@
 /datum/config_entry/flag/log_uplink	// log uplink/spellbook/codex ciatrix purchases and refunds
 
 /datum/config_entry/flag/log_telecomms	// log telecomms messages
+
+/// log speech indicators(started/stopped speaking)
+/datum/config_entry/flag/log_speech_indicators
 
 /datum/config_entry/flag/log_twitter	// log certain expliotable parrots and other such fun things in a JSON file of twitter valid phrases.
 

@@ -38,8 +38,6 @@ GLOBAL_VAR(restart_counter)
 
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
 
-	GLOB.config_error_log = GLOB.world_manifest_log = GLOB.world_pda_log = GLOB.world_job_debug_log = GLOB.sql_error_log = GLOB.world_href_log = GLOB.world_runtime_log = GLOB.world_attack_log = GLOB.world_game_log = GLOB.world_econ_log = GLOB.world_shuttle_log = "data/logs/config_error.[GUID()].log" //temporary file used to record errors with loading config, moved to log directory once logging is set bl
-
 	GLOB.revdata = new
 
 	InitTgs()
@@ -74,6 +72,9 @@ GLOBAL_VAR(restart_counter)
 
 	if(NO_INIT_PARAMETER in params)
 		return
+
+	// Create the logger
+	logger = new
 
 	Master.Initialize(10, FALSE, TRUE)
 
@@ -111,9 +112,9 @@ GLOBAL_VAR(restart_counter)
 	var/override_dir = params[OVERRIDE_LOG_DIRECTORY_PARAMETER]
 	if(!override_dir)
 		var/realtime = world.realtime
-		var/texttime = time2text(realtime, "YYYY/MM/DD")
+		var/texttime = time2text(realtime, "YYYY/MM/DD", 0)
 		GLOB.log_directory = "data/logs/[texttime]/round-"
-		GLOB.picture_logging_prefix = "L_[time2text(realtime, "YYYYMMDD")]_"
+		GLOB.picture_logging_prefix = "L_[time2text(realtime, "YYYYMMDD", 0)]_"
 		GLOB.picture_log_directory = "data/picture_logs/[texttime]/round-"
 		if(GLOB.round_id)
 			GLOB.log_directory += "[GLOB.round_id]"
@@ -131,28 +132,8 @@ GLOBAL_VAR(restart_counter)
 
 	logger.init_logging()
 
-#ifdef UNIT_TESTS
-	GLOB.test_log = "[GLOB.log_directory]/tests.log"
-	start_log(GLOB.test_log)
-#endif
-	start_log(GLOB.world_game_log)
-	start_log(GLOB.world_attack_log)
-	start_log(GLOB.world_econ_log)
-	start_log(GLOB.world_pda_log)
-	start_log(GLOB.world_uplink_log)
-	start_log(GLOB.world_telecomms_log)
-	start_log(GLOB.world_manifest_log)
-	start_log(GLOB.world_href_log)
-	start_log(GLOB.world_qdel_log)
-	start_log(GLOB.world_runtime_log)
-	start_log(GLOB.world_job_debug_log)
-	start_log(GLOB.tgui_log)
-	start_log(GLOB.world_shuttle_log)
-
-	GLOB.changelog_hash = md5('html/changelog.html') //for telling if the changelog has changed recently
-	if(fexists(GLOB.config_error_log))
-		fcopy(GLOB.config_error_log, "[GLOB.log_directory]/config_error.log")
-		fdel(GLOB.config_error_log)
+	var/latest_changelog = file("[global.config.directory]/../html/changelogs/archive/" + time2text(world.timeofday, "YYYY-MM", 0) + ".yml")
+	GLOB.changelog_hash = fexists(latest_changelog) ? md5(latest_changelog) : 0 //for telling if the changelog has changed recently
 
 	if(GLOB.round_id)
 		log_game("Round ID: [GLOB.round_id]")
@@ -161,6 +142,13 @@ GLOBAL_VAR(restart_counter)
 	// but those are both private, so let's put the commit info in the runtime
 	// log which is ultimately public.
 	log_runtime(GLOB.revdata.get_log_message())
+
+#ifndef USE_CUSTOM_ERROR_HANDLER
+	world.log = file("[GLOB.log_directory]/dd.log")
+#else
+	if (TgsAvailable()) // why
+		world.log = file("[GLOB.log_directory]/dd.log") //not all runtimes trigger world/Error, so this is the only way to ensure we can see all of them.
+#endif
 
 /world/Topic(T, addr, master, key)
 	TGS_TOPIC	//redirect to server tools if necessary
