@@ -757,7 +757,6 @@ VENTORY!
 	else
 		//Being destroyed, just move to nullspace now (so it's not in contents for the icon update)
 		removed.moveToNullspace()
-//	removed.update_appearance()
 	update_icon()
 	refresh_mob_views()
 	return TRUE

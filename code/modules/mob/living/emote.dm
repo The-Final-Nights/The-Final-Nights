@@ -1,4 +1,3 @@
-
 /* EMOTE DATUMS */
 /datum/emote/living
 	mob_type_allowed_typecache = /mob/living
@@ -591,9 +590,37 @@
 		to_chat(user, span_boldwarning("You cannot send IC messages (muted)."))
 		return FALSE
 	else if(!params)
+		// Show speech indicator when using dialog input for custom emote
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			if(!C.overlays_standing[SAY_LAYER])
+				var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+				C.overlays_standing[SAY_LAYER] = say_overlay
+				C.apply_overlay(SAY_LAYER)
+
 		custom_emote = copytext(sanitize(input("Choose an emote to display.") as text|null), 1, MAX_MESSAGE_LEN)
+
+		// Remove speech indicator after dialog
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			C.remove_overlay(SAY_LAYER)
+
 		if(custom_emote && !check_invalid(user, custom_emote))
+			// Show speech indicator for emote type selection
+			if(ishuman(user) || ismonkey(user))
+				var/mob/living/carbon/C = user
+				if(!C.overlays_standing[SAY_LAYER])
+					var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+					C.overlays_standing[SAY_LAYER] = say_overlay
+					C.apply_overlay(SAY_LAYER)
+
 			var/type = input("Is this a visible or hearable emote?") as null|anything in list("Visible", "Hearable", "Both")
+
+			// Remove speech indicator after type selection
+			if(ishuman(user) || ismonkey(user))
+				var/mob/living/carbon/C = user
+				C.remove_overlay(SAY_LAYER)
+
 			switch(type)
 				if("Visible")
 					custom_emote_type = EMOTE_VISIBLE

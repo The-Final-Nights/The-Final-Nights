@@ -30,13 +30,6 @@
 	H.physique = 4
 	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.physique+13-H.generation))
 	H.health = round((initial(H.health)-initial(H.health)/4)+(initial(H.health)/4)*(H.physique+13-H.generation))
-/*	var/my_name = "Tyler"
-	if(H.gender == MALE)
-		my_name = pick(GLOB.first_names_male)
-	else
-		my_name = pick(GLOB.first_names_female)
-	var/my_surname = pick(GLOB.last_names)
-	H.fully_replace_character_name(null,"[my_name] [my_surname]")*/
 	for(var/datum/action/A in H.actions)
 		if(A.vampiric)
 			A.Remove(H)
@@ -271,10 +264,6 @@
 	H.gender = pick(MALE, FEMALE)
 	H.body_type = H.gender
 	H.age = rand(18, 36)
-//	if(age >= 55)
-//		hair_color = "a2a2a2"
-//		facial_hair_color = hair_color
-//	else
 	H.hair_color = pick(h_gen.hair_colors)
 	H.facial_hair_color = H.hair_color
 	if(H.gender == MALE)

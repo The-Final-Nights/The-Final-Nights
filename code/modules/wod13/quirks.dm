@@ -45,17 +45,6 @@ Dancer
 	gain_text = "<span class='notice'>You feel more experienced about cars.</span>"
 	lose_text = "<span class='warning'>You feel more clueless about cars.</span>"
 
-//[Lucia] - commented out due to being made defunct by the lockpicking update
-/*
-/datum/quirk/bone_key
-	name = "Bone Key"
-	desc = "You know much more about door locks, and always have a tool for them."
-	mob_trait = TRAIT_BONE_KEY
-	value = 3
-	gain_text = "<span class='notice'>You feel more experienced in lockery.</span>"
-	lose_text = "<span class='warning'>You feel more clueless in lockery.</span>"
-*/
-
 /datum/quirk/annonymus
 	name = "Anonymous"
 	desc = "You always bring a mask."
@@ -279,7 +268,6 @@ Dancer
 	if(HAS_TRAIT(owner, TRAIT_FLOORED))
 		to_chat(owner, "<span class='warning'>You got to get up before you get down!</span>")
 		return
-//	var/mob/living/carbon/H = owner
 	if(prob(50))
 		dancefirst(owner)
 	else
@@ -533,33 +521,7 @@ Dancer
 /datum/quirk/consumption/on_process(delta_time)
 	if(prob(5))
 		quirk_holder.adjustBruteLoss(5, TRUE)
-/*
-/datum/quirk/hunted
-	name = "Sir You Are Being Hunted"
-	desc = "You are in the Blood Hunt list from the start and can't leave it. Good luck!"
-	value = -3
-	mob_trait = TRAIT_HUNTED
-	allowed_species = list("Vampire", "Ghoul")
 
-/datum/quirk/hunted/on_spawn()
-	if(iswerewolf(quirk_holder) || isgarou(quirk_holder))
-		return
-	if(isturf(quirk_holder.loc))
-		SSbloodhunt.announce_hunted(quirk_holder, "Camarilla Wanted List") */
-
-/*
-/datum/quirk/diablerist
-	name = "Black Secret"
-	desc = "You have a small, ancient secret, somehow related to Diablerie, and this decreases your chance to survive another one. <b>This isn't a licence to diablerie anyone you want!</b>"
-	value = -3
-	allowed_species = list("Vampire")
-
-/datum/quirk/diablerist/on_spawn()
-	if(iswerewolf(quirk_holder) || isgarou(quirk_holder))
-		return
-	var/mob/living/carbon/human/H = quirk_holder
-	H.diablerist = TRUE
-*/
 /datum/quirk/badvision
 	name = "Nearsighted"
 	desc = "Your eye illness somehow did not become cured after the Embrace, and you need to wear perception glasses."

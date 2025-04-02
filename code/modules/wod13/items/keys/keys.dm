@@ -320,6 +320,13 @@
 	)
 	color = "#e8ff29"
 
+/obj/item/vamp/keys/cappadocian
+	name = "Eroded keys"
+	accesslocks = list(
+		"cappadocian"
+	)
+	color = "#99620e"
+
 //===========================CLINIC KEYS===========================
 /obj/item/vamp/keys/clinic
 	name = "Clinic keys"
@@ -444,3 +451,8 @@
 		"taxi"
 	)
 	color = "#fffb8b"
+
+/obj/item/vamp/keys/apartment
+	name = "Apartment keys"
+	desc = "The key to someone's home. Hope it's not lost."
+	accesslocks = "apartment"

@@ -78,21 +78,6 @@
 			if(0)
 				masquerade_level = "'m danger to the Masquerade and my own kind."
 		dat += "Camarilla thinks I[masquerade_level]<BR>"
-//		var/humanity = "I'm out of my mind."
-//		switch(host.humanity)
-//			if(8 to 10)
-//				humanity = "I'm the best example of mercy and kindness."
-//			if(7)
-//				humanity = "I have nothing to complain about my humanity."
-//			if(5 to 6)
-//				humanity = "I'm slightly above the humane."
-//			if(4)
-//				humanity = "I don't care about kine."
-//			if(2 to 3)
-//				humanity = "There's nothing bad in murdering for <b>BLOOD</b>."
-//			if(1)
-//				humanity = "I'm slowly falling into madness..."
-//		dat += "[humanity]<BR>"
 		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
 		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
 		dat += "<b>Social</b>: [host.social] + [host.additional_social]<BR>"
@@ -127,7 +112,7 @@
 		for(var/datum/vtm_bank_account/account in GLOB.bank_account_list)
 			if(host.bank_id == account.bank_id)
 				dat += "<b>My bank account code is: [account.code]</b><BR>"
-		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
+		host << browse(HTML_SKELETON(dat), "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
 		onclose(host, "ghoul", src)
 
 /datum/species/ghoul/on_species_gain(mob/living/carbon/human/C)
