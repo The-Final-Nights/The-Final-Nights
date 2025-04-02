@@ -215,6 +215,7 @@
 						</table>
 						<div align='center'>
 							<b><font size='1'>[formatted_type]</font></b>
+							<br><b><font size='1'>[ref_line]</font></b>
 							<span id='marked'>[marked_line]</span>
 							<span id='varedited'>[varedited_line]</span>
 							<span id='deleted'>[deleted_line]</span>

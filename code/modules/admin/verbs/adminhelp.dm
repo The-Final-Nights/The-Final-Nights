@@ -262,7 +262,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	var/afk_admins = jointext(admin_counts["afk"], ", ")
 	var/other_admins = jointext(admin_counts["noflags"], ", ")
 	var/admin_text = ""
-	var/player_count = "**Total**: [length(GLOB.clients)], **Living**: [length(GLOB.alive_player_list)], **Dead**: [length(GLOB.dead_player_list)], **Observers**: [length(GLOB.current_observers_list)]"
+	var/player_count = "**Total**: [length(GLOB.clients)]"
 	if(stealth_admins)
 		admin_text += "**Stealthed**: [stealth_admins]\n"
 	if(afk_admins)
@@ -274,7 +274,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		"PLAYERS" = player_count,
 		"ROUND STATE" = round_state,
 		"ROUND ID" = GLOB.round_id,
-		"ROUND TIME" = ROUND_TIME,
+		"ROUND TIME" = world.time - SSticker.round_start_time,
 		"MESSAGE" = message,
 		"ADMINS" = admin_text,
 	)
@@ -1106,6 +1106,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 
 				msglist[i]= "<u><A href='?_src_=holder;[HrefToken()];ahelp=[REF(ahelp_check)];ahelp_action=ticket'>[word] ([state_word] | [ahelp_check.initiator_key_name])</A></u>"
 	if(modified)
+		var/list/return_list = list()
 		return_list[ASAY_LINK_NEW_MESSAGE_INDEX] = jointext(msglist, " ") // without tuples, we must make do!
 		return_list[ASAY_LINK_PINGED_ADMINS_INDEX] = pinged_admins
 		return return_list

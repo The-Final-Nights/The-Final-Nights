@@ -59,7 +59,7 @@
 			nametag = "[real_mob_name](as [mob_name])"
 		targets["[nametag] - [client]"] = client
 
-	var/target = input(src,"To whom shall we send a message?", "Admin PM", null) as null|anything in sort_list(targets)
+	var/target = input(src,"To whom shall we send a message?", "Admin PM", null) as null|anything in targets
 	cmd_admin_pm(targets[target], null)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Admin PM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 

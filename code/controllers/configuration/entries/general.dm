@@ -506,3 +506,25 @@
 /datum/config_entry/string/centcom_ban_db	// URL for the CentCom Galactic Ban DB API
 
 /datum/config_entry/string/centcom_source_whitelist
+
+/datum/config_entry/number/urgent_ahelp_cooldown
+	default = 300
+
+/datum/config_entry/string/urgent_ahelp_message
+	default = "This ahelp is urgent!"
+
+/datum/config_entry/string/ahelp_message
+	default = ""
+
+/datum/config_entry/string/urgent_ahelp_user_prompt
+	default = "There are no admins currently on. Do not press the button below if your ahelp is a joke, a request or a question. Use it only for cases of obvious grief."
+
+/datum/config_entry/string/urgent_adminhelp_webhook_url
+
+/datum/config_entry/string/regular_adminhelp_webhook_url
+
+/datum/config_entry/string/adminhelp_webhook_pfp
+
+/datum/config_entry/string/adminhelp_webhook_name
+
+/datum/config_entry/string/adminhelp_ahelp_link
