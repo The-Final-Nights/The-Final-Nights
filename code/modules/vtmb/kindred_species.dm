@@ -213,7 +213,7 @@
 		for(var/datum/vtm_bank_account/account in GLOB.bank_account_list)
 			if(host.bank_id == account.bank_id)
 				dat += "<b>My bank account code is: [account.code]</b><BR>"
-		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
+		host << browse(HTML_SKELETON(dat), "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
 		onclose(host, "vampire", src)
 
 /datum/species/kindred/on_species_gain(mob/living/carbon/human/C)
@@ -519,9 +519,6 @@
 						var/mob/living/carbon/human/npc/NPC = thrall
 						if(NPC.ghoulificate(owner))
 							new_master = TRUE
-//							if(NPC.hud_used)
-//								var/datum/hud/human/HU = NPC.hud_used
-//								HU.create_ghoulic()
 							NPC.roundstart_vampire = FALSE
 					if(thrall.mind)
 						if(thrall.mind.enslaved_to != owner)
@@ -539,9 +536,6 @@
 						thrall.set_species(/datum/species/ghoul)
 						thrall.clane = null
 						var/response_g = input(thrall, "Do you wish to keep being a ghoul on your save slot?(Yes will be a permanent choice and you can't go back)") in list("Yes", "No")
-//						if(BLOODBONDED.hud_used)
-//							var/datum/hud/human/HU = BLOODBONDED.hud_used
-//							HU.create_ghoulic()
 						thrall.roundstart_vampire = FALSE
 						var/datum/species/ghoul/ghoul = thrall.dna.species
 						ghoul.master = owner
@@ -757,15 +751,6 @@
 	if (teaching_discipline)
 		var/datum/discipline/teacher_discipline = teacher_species.get_discipline(teaching_discipline)
 		var/datum/discipline/giving_discipline = new teaching_discipline
-		/* TFN EDIT: Whitelists? Nope!
-		//if a Discipline is clan-restricted, it must be checked if the student has access to at least one Clan with that Discipline
-		if (giving_discipline.clan_restricted)
-			if (!can_access_discipline(student, teaching_discipline))
-				to_chat(teacher, span_warning("Your student is not whitelisted for any Clans with this Discipline, so they cannot learn it."))
-				qdel(giving_discipline)
-				return
-		*/
-
 		//ensure the teacher's mastered it, also prevents them from teaching with free starting experience
 		if (teacher_discipline.level < 5)
 			to_chat(teacher, span_notice("You do not know this Discipline well enough to teach it. You need to master it to the 5th rank."))

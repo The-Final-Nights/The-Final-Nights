@@ -37,13 +37,8 @@
 	jobtype = /datum/job/vamp/triad_soldier
 	uniform = /obj/item/clothing/under/vampire/suit
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-//	suit = /obj/item/clothing/suit/vampire/vest
-//	belt = /obj/item/melee/classic_baton
 	id = /obj/item/cockclock
-//	gloves = /obj/item/cockclock
-//	id = /obj/item/card/id/police
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/flashlight
 	l_hand = /obj/item/vamp/keys/triads
-//	r_hand = /obj/item/police_radio
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/creditcard=1, /obj/item/clothing/mask/vampire/balaclava =1, /obj/item/gun/ballistic/automatic/vampire/beretta=2,/obj/item/ammo_box/magazine/semi9mm=2, /obj/item/melee/vampirearms/knife)

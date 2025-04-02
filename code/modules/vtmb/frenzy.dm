@@ -269,15 +269,6 @@
 					H.rollfrenzy()
 					to_chat(H, "<span class='warning'>[I] is <b>COLD IRON</b>!")
 
-/*
-	if(!H in GLOB.masquerade_breakers_list)
-		if(H.masquerade < 4)
-			GLOB.masquerade_breakers_list += H
-	else if(H in GLOB.masquerade_breakers_list)
-		if(H.masquerade > 3)
-			GLOB.masquerade_breakers_list -= H
-*/
-
 	if(H.key && (H.stat <= HARD_CRIT))
 		var/datum/preferences/P = GLOB.preferences_datums[ckey(H.key)]
 		if(P)
@@ -289,23 +280,6 @@
 				P.masquerade = H.masquerade
 				P.save_preferences()
 				P.save_character()
-//			if(H.last_experience+600 <= world.time)
-//				var/addd = 5
-//				if(!H.JOB && H.mind)
-//					H.JOB = SSjob.GetJob(H.mind.assigned_role)
-//					if(H.JOB)
-//						addd = H.JOB.experience_addition
-//				P.exper = min(calculate_mob_max_exper(H), P.exper+addd+H.experience_plus)
-//				if(P.exper == calculate_mob_max_exper(H))
-//					to_chat(H, "You've reached a new level! You can add new points in Character Setup (Lobby screen).")
-//				P.save_preferences()
-//				P.save_character()
-//				H.last_experience = world.time
-//			if(H.roundstart_vampire)
-//				if(P.generation != H.generation)
-//					P.generation = H.generation
-//					P.save_preferences()
-//					P.save_character()
 			if(!H.antifrenzy)
 				if(P.path_score < 1)
 					H.enter_frenzymod()

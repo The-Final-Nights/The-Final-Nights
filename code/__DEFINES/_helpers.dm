@@ -24,7 +24,6 @@
 #define span_notice(str) ("<span class='notice'>" + str + "</span>")
 #define span_warning(str) ("<span class='warning'>" + str + "</span>")
 #define span_bold(str) ("<span class='bold'>" + str + "</span>")
-// TFN EDIT START
 #define span_userdanger(str) ("<span class='userdanger'>" + str + "</span>")
 #define span_nicegreen(str) ("<span class='nicegreen'>" + str + "</span>")
 #define span_boldwarning(str) ("<span class='boldwarning'>" + str + "</span>")
@@ -32,7 +31,7 @@
 #define span_subtle(str) ("<span class='subtle'>" + str + "</span>")
 #define span_subtler(str) ("<span class='subtler'>" + str + "</span>")
 #define span_adminnotice(str) ("<span class='adminnotice'>" + str + "</span>")
-// TFN EDIT END
 #define span_danger(str) ("<span class='danger'>" + str + "</span>")
 #define span_alert(str) ("<span class='alert'>" + str + "</span>")
 #define span_hear(str) ("<span class='hear'>" + str + "</span>")
+#define span_boldannounce(str) ("<span class='boldannounce'>" + str + "</span>")

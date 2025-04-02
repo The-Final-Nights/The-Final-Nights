@@ -73,9 +73,6 @@
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
 
-//some arbitrary defines to be used by self-pruning global lists. (see master_controller)
-#define PROCESS_KILL 26	//Used to trigger removal from a processing list
-
 // Cargo-related stuff.
 #define MANIFEST_ERROR_CHANCE		5
 #define MANIFEST_ERROR_NAME			1
