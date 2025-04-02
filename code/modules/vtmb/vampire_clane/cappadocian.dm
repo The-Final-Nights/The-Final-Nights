@@ -12,6 +12,7 @@
 	alt_sprite_greyscale = TRUE
 
 	whitelisted = FALSE
+	clan_keys = /obj/item/vamp/keys/cappadocian
 
 /datum/vampireclane/cappadocian/on_gain(mob/living/carbon/human/H)
 	var/years_undead = H.chronological_age - H.age
@@ -38,4 +39,3 @@
 
 	var/obj/item/clothing/mask/vampire/venetian_mask/fancy/new_mask = new(H.loc)
 	H.equip_to_appropriate_slot(new_mask, FALSE)
-

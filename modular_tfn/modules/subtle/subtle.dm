@@ -24,7 +24,19 @@
 		to_chat(user, "You cannot send IC messages (muted).")
 		return FALSE
 	else if(!params)
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			if(!C.overlays_standing[SAY_LAYER])
+				var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+				C.overlays_standing[SAY_LAYER] = say_overlay
+				C.apply_overlay(SAY_LAYER)
+
 		subtle_emote = tgui_input_text(user, "Choose an emote to display.", "Subtle", null, MAX_MESSAGE_LEN, TRUE)
+
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			C.remove_overlay(SAY_LAYER)
+
 		if(!subtle_emote)
 			return FALSE
 		subtle_message = subtle_emote
@@ -79,7 +91,19 @@
 		to_chat(user, span_warning("You cannot send IC messages (muted)."))
 		return FALSE
 	else if(!subtler_emote)
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			if(!C.overlays_standing[SAY_LAYER])
+				var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+				C.overlays_standing[SAY_LAYER] = say_overlay
+				C.apply_overlay(SAY_LAYER)
+
 		subtler_emote = tgui_input_text(user, "Choose an emote to display.", "Subtler Anti-Ghost" , null, MAX_MESSAGE_LEN, TRUE)
+
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			C.remove_overlay(SAY_LAYER)
+
 		if(!subtler_emote)
 			return FALSE
 
@@ -96,8 +120,20 @@
 			if(istype(vamp_item, /obj/item/vamp/phone) || istype(vamp_item, /obj/item/vamp/creditcard))
 				in_view.Remove(vamp_item)
 
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			if(!C.overlays_standing[SAY_LAYER])
+				var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+				C.overlays_standing[SAY_LAYER] = say_overlay
+				C.apply_overlay(SAY_LAYER)
+
 		var/list/targets = list(SUBTLE_ONE_TILE_TEXT, SUBTLE_SAME_TILE_TEXT) + in_view
 		target = tgui_input_list(user, "Pick a target", "Target Selection", targets)
+
+		if(ishuman(user) || ismonkey(user))
+			var/mob/living/carbon/C = user
+			C.remove_overlay(SAY_LAYER)
+
 		if(!target)
 			return FALSE
 
@@ -155,7 +191,18 @@
 	if(GLOB.say_disabled)	// This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
+	// Show speech indicator while typing subtle emote
+	if(ishuman(usr) || ismonkey(usr))
+		var/mob/living/carbon/C = usr
+		if(!C.overlays_standing[SAY_LAYER])
+			var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+			C.overlays_standing[SAY_LAYER] = say_overlay
+			C.apply_overlay(SAY_LAYER)
 	usr.emote("subtle")
+	// Remove speech indicator after sending subtle emote
+	if(ishuman(usr) || ismonkey(usr))
+		var/mob/living/carbon/C = usr
+		C.remove_overlay(SAY_LAYER)
 
 /*
 *	VERB CODE 2
@@ -167,7 +214,18 @@
 	if(GLOB.say_disabled)	// This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
+	// Show speech indicator while typing subtler emote
+	if(ishuman(usr) || ismonkey(usr))
+		var/mob/living/carbon/C = usr
+		if(!C.overlays_standing[SAY_LAYER])
+			var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+			C.overlays_standing[SAY_LAYER] = say_overlay
+			C.apply_overlay(SAY_LAYER)
 	usr.emote("subtler")
+	// Remove speech indicator after sending subtler emote
+	if(ishuman(usr) || ismonkey(usr))
+		var/mob/living/carbon/C = usr
+		C.remove_overlay(SAY_LAYER)
 
 #undef SUBTLE_DEFAULT_DISTANCE
 #undef SUBTLE_ONE_TILE

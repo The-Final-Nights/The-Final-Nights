@@ -112,7 +112,11 @@
 
 /datum/config_entry/flag/log_uplink	// log uplink/spellbook/codex ciatrix purchases and refunds
 
-/datum/config_entry/flag/log_telecomms	// log telecomms messages
+/// log telecomms messages
+/datum/config_entry/flag/log_telecomms
+
+/// log speech indicators(started/stopped speaking)
+/datum/config_entry/flag/log_speech_indicators
 
 /// log speech indicators(started/stopped speaking)
 /datum/config_entry/flag/log_speech_indicators
@@ -558,3 +562,10 @@
 /datum/config_entry/string/adminhelp_webhook_name
 
 /datum/config_entry/string/adminhelp_ahelp_link
+
+/**
+ * Tgui ui_act payloads larger than 2kb are split into chunks a maximum of 1kb in size.
+ * This flag represents the maximum chunk count the server is willing to receive.
+ */
+/datum/config_entry/number/tgui_max_chunk_count
+	default = 32
