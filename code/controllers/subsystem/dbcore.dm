@@ -421,15 +421,12 @@ SUBSYSTEM_DEF(dbcore)
 			stack_trace("Invalid query passed to QuerySelect: `[query]` [REF(query)]")
 			continue
 
-	for (var/thing in querys)
-		var/datum/db_query/query = thing
 		if (warn)
 			INVOKE_ASYNC(query, TYPE_PROC_REF(/datum/db_query, warn_execute))
 		else
 			INVOKE_ASYNC(query, TYPE_PROC_REF(/datum/db_query, Execute))
 
-	for (var/thing in querys)
-		var/datum/db_query/query = thing
+	for (var/datum/db_query/query as anything in queries)
 		query.sync()
 		if (qdel)
 			qdel(query)
