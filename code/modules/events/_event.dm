@@ -87,6 +87,30 @@
 		log_admin_private("[key_name(usr)] cancelled event [name].")
 		SSblackbox.record_feedback("tally", "event_admin_cancelled", 1, typepath)
 
+	if(announce_chance_override != null)
+		round_event.announce_chance = announce_chance_override
+
+	testing("[time2text(world.time, "hh:mm:ss", 0)] [round_event.type]")
+	triggering = TRUE
+
+	if(!triggering)
+		RegisterSignal(SSdcs, COMSIG_GLOB_RANDOM_EVENT, PROC_REF(stop_random_event))
+		round_event.cancel_event = TRUE
+		return round_event
+
+	triggering = FALSE
+	log_game("[random ? "Random" : "Forced"] Event triggering: [name] ([typepath]).")
+
+	if(alert_observers)
+		round_event.announce_deadchat(random, event_cause)
+
+	testing("[time2text(world.time, "hh:mm:ss")] [E.type]")
+	if(random)
+		log_game("Random Event triggering: [name] ([typepath])")
+	if (alert_observers)
+		deadchat_broadcast(" has just been[random ? " randomly" : ""] triggered!", "<b>[name]</b>", message_type=DEADCHAT_ANNOUNCEMENT) //STOP ASSUMING IT'S BADMINS!
+	return E
+
 //Special admins setup
 /datum/round_event_control/proc/admin_setup()
 	return

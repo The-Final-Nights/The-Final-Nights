@@ -234,6 +234,27 @@
 			switch(alert("Do you want this to be a random disease or do you have something in mind?",,"Make Your Own","Random","Choose"))
 				if("Make Your Own")
 					AdminCreateVirus(holder)
+				if("Random")
+					var/datum/round_event_control/disease_outbreak/DC = locate(/datum/round_event_control/disease_outbreak) in SSevents.control
+					E = DC.runEvent()
+				if("Choose")
+					var/virus = input("Choose the virus to spread", "BIOHAZARD") as null|anything in sortList(typesof(/datum/disease), GLOBAL_PROC_REF(cmp_typepaths_asc))
+					var/datum/round_event_control/disease_outbreak/DC = locate(/datum/round_event_control/disease_outbreak) in SSevents.control
+					var/datum/round_event/disease_outbreak/DO = DC.runEvent()
+					DO.virus_type = virus
+					E = DO
+		if("allspecies")
+			if(!is_funmin)
+				return
+			var/result = input(holder, "Please choose a new species","Species") as null|anything in GLOB.species_list
+			if(result)
+				SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Mass Species Change", "[result]"))
+				log_admin("[key_name(holder)] turned all humans into [result]", 1)
+				message_admins("\blue [key_name_admin(holder)] turned all humans into [result]")
+				var/newtype = GLOB.species_list[result]
+				for(var/i in GLOB.human_list)
+					var/mob/living/carbon/human/H = i
+					H.set_species(newtype)
 		if("power")
 			if(!is_funmin)
 				return

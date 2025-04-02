@@ -437,42 +437,6 @@ DEFAULT_VIEW_SQUARE 15x15
 ## If enabled, only bans from these servers will be shown to admins using CentCom. The default sources list is an example.
 #CENTCOM_SOURCE_WHITELIST Beestation MRP,TGMC,FTL13
 
-## How long in seconds after which a hard delete is treated as causing lag. This can be a float and supports a precision as low as nanoseconds.
-#HARD_DELETES_OVERRUN_THRESHOLD 0.5
-
-## Once a typepath causes overrun from hard deletes this many times, stop hard deleting it on garbage collection failures. (set to 0 to disable)
-#HARD_DELETES_OVERRUN_LIMIT 0
-
-## The URL to the webhook for adminhelps to relay the urgent ahelp message to
-## If not set, will disable urgent ahelps.
-#URGENT_ADMINHELP_WEBHOOK_URL
-
-## See above, but for non-urgent ahelps
-#REGULAR_ADMINHELP_WEBHOOK_URL
-
-## The urgent ahelp cooldown for a given player if they're alone on a server and need to send an urgent ahelp.
-URGENT_AHELP_COOLDOWN 300
-
-## The message that is sent to the discord if an urgent ahelp is sent. Useful for sending a role ping.
-#URGENT_AHELP_MESSAGE
-
-## See above, but for non-urgent ahelps.
-#AHELP_MESSAGE
-
-## The message that the player receives whenever prompted whether they want to send an urgent ahelp or not.
-#URGENT_AHELP_USER_PROMPT This'll ping the admins!
-
-## The link that the title of a ticket can link to.
-## If not set, it will link nowhere
-## use $RID for the round ID and $TID for the ticket ID
-#ADMINHELP_AHELP_LINK
-
-## The URL for the pfp of the webhook
-#ADMINHELP_WEBHOOK_PFP
-
-## The name of the webhook
-#ADMINHELP_WEBHOOK_NAME
-
 #### DISCORD STUFFS ####
 ## MAKE SURE ALL SECTIONS OF THIS ARE FILLED OUT BEFORE ENABLING
 ## Discord IDs can be obtained by following this guide: https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-
