@@ -5,6 +5,10 @@ GLOBAL_VAR_INIT(timezoneOffset, 0) // The difference betwen midnight (of the hos
 GLOBAL_VAR_INIT(year, time2text(world.realtime,"YYYY"))
 GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 
+	// For FTP requests. (i.e. downloading runtime logs.)
+	// However it'd be ok to use for accessing attack logs and such too, which are even laggier.
+GLOBAL_VAR_INIT(fileaccess_timer, 0)
+
 GLOBAL_DATUM_INIT(data_core, /datum/datacore, new)
 
 GLOBAL_VAR_INIT(CELLRATE, 0.002)  // conversion ratio between a watt-tick and kilojoule

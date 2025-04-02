@@ -63,6 +63,8 @@
 	///Last fingerprints to touch this atom
 	var/fingerprintslast
 
+	var/list/filter_data //For handling persistent filters
+
 	///Price of an item in a vending machine, overriding the base vending machine price. Define in terms of paycheck defines as opposed to raw numbers.
 	var/custom_price
 	///Price of an item in a vending machine, overriding the premium vending machine price. Define in terms of paycheck defines as opposed to raw numbers.
@@ -1339,9 +1341,212 @@
 /atom/proc/analyzer_act(mob/living/user, obj/item/I)
 	return
 
+///Generate a tag for this atom
+/atom/proc/GenerateTag()
+	return
+
 ///Connect this atom to a shuttle
 /atom/proc/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	return
+
+/// Generic logging helper
+/atom/proc/log_message(message, message_type, color=null, log_globally=TRUE)
+	if(!log_globally)
+		return
+
+	var/log_text = "[key_name(src)] [message] [loc_name(src)]"
+	switch(message_type)
+		if(LOG_ATTACK)
+			log_attack(log_text)
+		if(LOG_SAY)
+			log_say(log_text)
+		if(LOG_WHISPER)
+			log_whisper(log_text)
+		if(LOG_EMOTE)
+			log_emote(log_text)
+		// TFN EDIT ADDITION START
+		if(LOG_SUBTLE)
+			log_subtle(log_text)
+		if(LOG_SUBTLER)
+			log_subtler(log_text)
+		// TFN EDIT ADDITION END
+		if(LOG_DSAY)
+			log_dsay(log_text)
+		if(LOG_PDA)
+			log_pda(log_text)
+		if(LOG_CHAT)
+			log_chat(log_text)
+		if(LOG_COMMENT)
+			log_comment(log_text)
+		if(LOG_TELECOMMS)
+			log_telecomms(log_text)
+		if(LOG_ECON)
+			log_econ(log_text)
+		if(LOG_OOC)
+			log_ooc(log_text)
+		if(LOG_ADMIN)
+			log_admin(log_text)
+		if(LOG_ADMIN_PRIVATE)
+			log_admin_private(log_text)
+		if(LOG_ASAY)
+			log_adminsay(log_text)
+		if(LOG_OWNERSHIP)
+			log_game(log_text)
+		if(LOG_GAME)
+			log_game(log_text)
+		if(LOG_MECHA)
+			log_mecha(log_text)
+		if(LOG_SHUTTLE)
+			log_shuttle(log_text)
+		else
+			stack_trace("Invalid individual logging type: [message_type]. Defaulting to [LOG_GAME] (LOG_GAME).")
+			log_game(log_text)
+
+/// Helper for logging chat messages or other logs with arbitrary inputs (e.g. announcements)
+/atom/proc/log_talk(message, message_type, tag=null, log_globally=TRUE, forced_by=null)
+	var/prefix = tag ? "([tag]) " : ""
+	var/suffix = forced_by ? " FORCED by [forced_by]" : ""
+	log_message("[prefix]\"[message]\"[suffix]", message_type, log_globally=log_globally)
+
+/// Helper for logging of messages with only one sender and receiver
+/proc/log_directed_talk(atom/source, atom/target, message, message_type, tag)
+	if(!tag)
+		stack_trace("Unspecified tag for private message")
+		tag = "UNKNOWN"
+
+	source.log_talk(message, message_type, tag="[tag] to [key_name(target)]")
+	if(source != target)
+		target.log_talk(message, message_type, tag="[tag] from [key_name(source)]", log_globally=FALSE)
+
+/**
+ * Log a combat message in the attack log
+ *
+ * Arguments:
+ * * atom/user - argument is the actor performing the action
+ * * atom/target - argument is the target of the action
+ * * what_done - is a verb describing the action (e.g. punched, throwed, kicked, etc.)
+ * * atom/object - is a tool with which the action was made (usually an item)
+ * * addition - is any additional text, which will be appended to the rest of the log line
+ */
+/proc/log_combat(atom/user, atom/target, what_done, atom/object=null, addition=null)
+	var/ssource = key_name(user)
+	var/starget = key_name(target)
+
+	var/mob/living/living_target = target
+	var/hp = istype(living_target) ? " (NEWHP: [living_target.health]) " : ""
+
+	var/sobject = ""
+	if(object)
+		sobject = " with [object]"
+	var/saddition = ""
+	if(addition)
+		saddition = " [addition]"
+
+	var/postfix = "[sobject][saddition][hp]"
+
+	var/message = "has [what_done] [starget][postfix]"
+	user.log_message(message, LOG_ATTACK, color="red")
+
+	if(user != target)
+		var/reverse_message = "has been [what_done] by [ssource][postfix]"
+		target.log_message(reverse_message, LOG_ATTACK, color="orange", log_globally=FALSE)
+
+/**
+ * log_wound() is for when someone is *attacked* and suffers a wound. Note that this only captures wounds from damage, so smites/forced wounds aren't logged, as well as demotions like cuts scabbing over
+ *
+ * Note that this has no info on the attack that dealt the wound: information about where damage came from isn't passed to the bodypart's damaged proc. When in doubt, check the attack log for attacks at that same time
+ * TODO later: Add logging for healed wounds, though that will require some rewriting of healing code to prevent admin heals from spamming the logs. Not high priority
+ *
+ * Arguments:
+ * * victim- The guy who got wounded
+ * * suffered_wound- The wound, already applied, that we're logging. It has to already be attached so we can get the limb from it
+ * * dealt_damage- How much damage is associated with the attack that dealt with this wound.
+ * * dealt_wound_bonus- The wound_bonus, if one was specified, of the wounding attack
+ * * dealt_bare_wound_bonus- The bare_wound_bonus, if one was specified *and applied*, of the wounding attack. Not shown if armor was present
+ * * base_roll- Base wounding ability of an attack is a random number from 1 to (dealt_damage ** WOUND_DAMAGE_EXPONENT). This is the number that was rolled in there, before mods
+ */
+/proc/log_wound(atom/victim, datum/wound/suffered_wound, dealt_damage, dealt_wound_bonus, dealt_bare_wound_bonus, base_roll)
+	if(QDELETED(victim) || !suffered_wound)
+		return
+	var/message = "has suffered: [suffered_wound][suffered_wound.limb ? " to [suffered_wound.limb.name]" : null]"// maybe indicate if it's a promote/demote?
+
+	if(dealt_damage)
+		message += " | Damage: [dealt_damage]"
+		// The base roll is useful since it can show how lucky someone got with the given attack. For example, dealing a cut
+		if(base_roll)
+			message += " (rolled [base_roll]/[dealt_damage ** WOUND_DAMAGE_EXPONENT])"
+
+	if(dealt_wound_bonus)
+		message += " | WB: [dealt_wound_bonus]"
+
+	if(dealt_bare_wound_bonus)
+		message += " | BWB: [dealt_bare_wound_bonus]"
+
+	victim.log_message(message, LOG_ATTACK, color="blue")
+
+/atom/proc/add_filter(name,priority,list/params)
+	LAZYINITLIST(filter_data)
+	var/list/p = params.Copy()
+	p["priority"] = priority
+	filter_data[name] = p
+	update_filters()
+
+/atom/proc/update_filters()
+	filters = null
+	filter_data = sortTim(filter_data, GLOBAL_PROC_REF(cmp_filter_data_priority), TRUE)
+	for(var/f in filter_data)
+		var/list/data = filter_data[f]
+		var/list/arguments = data.Copy()
+		arguments -= "priority"
+		filters += filter(arglist(arguments))
+	UNSETEMPTY(filter_data)
+
+/atom/proc/transition_filter(name, time, list/new_params, easing, loop)
+	var/filter = get_filter(name)
+	if(!filter)
+		return
+
+	var/list/old_filter_data = filter_data[name]
+
+	var/list/params = old_filter_data.Copy()
+	for(var/thing in new_params)
+		params[thing] = new_params[thing]
+
+	animate(filter, new_params, time = time, easing = easing, loop = loop)
+	for(var/param in params)
+		filter_data[name][param] = params[param]
+
+/atom/proc/change_filter_priority(name, new_priority)
+	if(!filter_data || !filter_data[name])
+		return
+
+	filter_data[name]["priority"] = new_priority
+	update_filters()
+
+/obj/item/update_filters()
+	. = ..()
+	for(var/X in actions)
+		var/datum/action/A = X
+		A.UpdateButtonIcon()
+
+/atom/proc/get_filter(name)
+	if(filter_data && filter_data[name])
+		return filters[filter_data.Find(name)]
+
+/atom/proc/remove_filter(name_or_names)
+	if(!filter_data)
+		return
+
+	var/list/names = islist(name_or_names) ? name_or_names : list(name_or_names)
+
+	for(var/name in names)
+		if(filter_data[name])
+			filter_data -= name
+	update_filters()
+
+/atom/proc/clear_filters()
+	filter_data = null
+	filters = null
 
 /atom/proc/intercept_zImpact(atom/movable/AM, levels = 1)
 	. |= SEND_SIGNAL(src, COMSIG_ATOM_INTERCEPT_Z_FALL, AM, levels)
