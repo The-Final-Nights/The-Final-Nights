@@ -37,6 +37,7 @@ SUBSYSTEM_DEF(time_track)
 		) + sendmaps_shorthands
 #else
 		)
+#endif
 	)
 
 /datum/controller/subsystem/time_track/fire()

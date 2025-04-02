@@ -2,7 +2,7 @@ SUBSYSTEM_DEF(weed)
 	name = "Weed Growth"
 	init_order = INIT_ORDER_DEFAULT
 	wait = 1800
-	priority = FIRE_PRIORITY_VERYLOW
+	priority = FIRE_PRIORITY_DEFAULT
 
 /datum/controller/subsystem/weed/fire()
 	for(var/obj/structure/weedshit/W in GLOB.weed_list)
