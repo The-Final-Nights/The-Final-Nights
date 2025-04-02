@@ -247,22 +247,22 @@
 	if(program_flags & NANITE_EMP_IMMUNE)
 		return
 	if(prob(80 / severity))
-		host_mob.investigate_log("[src] nanite program received a software error due to emp.", INVESTIGATE_NANITES)
+		host_mob.investigate_log("[src] nanite program received a software error due to emp.")
 		software_error()
 
 /datum/nanite_program/proc/on_shock(shock_damage)
 	if( (!program_flags) & NANITE_SHOCK_IMMUNE)
 		if(prob(10))
-			host_mob.investigate_log("[src] nanite program received a software error due to shock.", INVESTIGATE_NANITES)
+			host_mob.investigate_log("[src] nanite program received a software error due to shock.")
 			software_error()
 		else if(prob(33))
-			host_mob.investigate_log("[src] nanite program was deleted due to shock.", INVESTIGATE_NANITES)
+			host_mob.investigate_log("[src] nanite program was deleted due to shock.")
 			qdel(src)
 
 /datum/nanite_program/proc/on_minor_shock()
 	if( (!program_flags) & NANITE_SHOCK_IMMUNE)
 		if(prob(10))
-			host_mob.investigate_log("[src] nanite program received a software error due to minor shock.", INVESTIGATE_NANITES)
+			host_mob.investigate_log("[src] nanite program received a software error due to minor shock.")
 			software_error()
 
 /datum/nanite_program/proc/on_death()
@@ -273,41 +273,41 @@
 		type = rand(1,5)
 	switch(type)
 		if(1)
-			host_mob.investigate_log("[src] nanite program was deleted by software error.", INVESTIGATE_NANITES)
+			host_mob.investigate_log("[src] nanite program was deleted by software error.")
 			qdel(src) //kill switch
 			return
 		if(2) //deprogram codes
-			host_mob.investigate_log("[src] nanite program was de-programmed by software error.", INVESTIGATE_NANITES)
+			host_mob.investigate_log("[src] nanite program was de-programmed by software error.")
 			activation_code = 0
 			deactivation_code = 0
 			kill_code = 0
 			trigger_code = 0
 		if(3)
-			host_mob.investigate_log("[src] nanite program was toggled by software error.", INVESTIGATE_NANITES)
+			host_mob.investigate_log("[src] nanite program was toggled by software error.")
 			toggle() //enable/disable
 		if(4)
 			if(can_trigger)
-				host_mob.investigate_log("[src] nanite program was triggered by software error.", INVESTIGATE_NANITES)
+				host_mob.investigate_log("[src] nanite program was triggered by software error.")
 				trigger()
 		if(5) //Program is scrambled and does something different
 			var/rogue_type = pick(rogue_types)
 			var/datum/nanite_program/rogue = new rogue_type
-			host_mob.investigate_log("[src] nanite program was converted into [rogue.name] by software error.", INVESTIGATE_NANITES)
+			host_mob.investigate_log("[src] nanite program was converted into [rogue.name] by software error.")
 			nanites.add_program(null, rogue, src)
 			qdel(src)
 
 /datum/nanite_program/proc/receive_signal(code, source)
 	if(activation_code && code == activation_code && !activated)
 		activate()
-		host_mob.investigate_log("'s [name] nanite program was activated by [source] with code [code].", INVESTIGATE_NANITES)
+		host_mob.investigate_log("'s [name] nanite program was activated by [source] with code [code].")
 	else if(deactivation_code && code == deactivation_code && activated)
 		deactivate()
-		host_mob.investigate_log("'s [name] nanite program was deactivated by [source] with code [code].", INVESTIGATE_NANITES)
+		host_mob.investigate_log("'s [name] nanite program was deactivated by [source] with code [code].")
 	if(can_trigger && trigger_code && code == trigger_code)
 		trigger()
-		host_mob.investigate_log("'s [name] nanite program was triggered by [source] with code [code].", INVESTIGATE_NANITES)
+		host_mob.investigate_log("'s [name] nanite program was triggered by [source] with code [code].")
 	if(kill_code && code == kill_code)
-		host_mob.investigate_log("'s [name] nanite program was deleted by [source] with code [code].", INVESTIGATE_NANITES)
+		host_mob.investigate_log("'s [name] nanite program was deleted by [source] with code [code].")
 		qdel(src)
 
 ///A nanite program containing a behaviour protocol. Only one protocol of each class can be active at once.

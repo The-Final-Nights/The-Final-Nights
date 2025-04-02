@@ -82,7 +82,7 @@
 	//Here is all the possible non-ID payment methods.
 	var/list/counted_money = list()
 	var/physical_cash_total = 0
-	for(var/obj/item/credit in typecache_filter_list(user.get_all_contents(), allowed_money)) //Coins, cash, and credits.
+	for(var/obj/item/credit in typecache_filter_list(user.GetAllContents(), allowed_money)) //Coins, cash, and credits.
 		if(physical_cash_total > total_cost)
 			break
 		physical_cash_total += credit.get_item_credit_value()

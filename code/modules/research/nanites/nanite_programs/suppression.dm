@@ -124,7 +124,7 @@
 	if(!activated || !comm_code.get_value())
 		return
 	if(signal_comm_code == comm_code.get_value())
-		host_mob.investigate_log("'s [name] nanite program was messaged by [comm_source] with comm code [signal_comm_code] and message '[comm_message]'.", INVESTIGATE_NANITES)
+		host_mob.investigate_log("'s [name] nanite program was messaged by [comm_source] with comm code [signal_comm_code] and message '[comm_message]'.")
 		trigger(FALSE, comm_message)
 
 /datum/nanite_program/comm/speech
