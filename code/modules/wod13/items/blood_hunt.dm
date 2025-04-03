@@ -20,7 +20,8 @@
 		reason = "No reason necessary."
 
 	var/name_in_list = FALSE
-	for(var/mob/living/carbon/human/H in GLOB.player_list)
+	// Blood hunts are only able to be called on fellow Kindred.
+	for(var/mob/living/carbon/human/H in GLOB.kindred_list)
 		if(H.real_name != chosen_name)
 			continue
 
@@ -35,11 +36,11 @@
 			for(var/mob/living/carbon/human/R in GLOB.kindred_list)
 				if(!R.client)
 					return
-				to_chat(R, "<b>The Blood Hunt after <span class='green'>[H.true_real_name]</span> is over!</b>")
+				to_chat(R, "<b>The Blood Hunt after <span class='green'>[H.real_name]</span> is over!</b>")
 				SEND_SOUND(R, sound('code/modules/wod13/sounds/announce.ogg'))
 		else
 			SSbloodhunt.announce_hunted(H, reason)
 			to_chat(user, span_warning("You add [chosen_name] to the Hunted list."))
 		name_in_list = TRUE
 	if(!name_in_list)
-		to_chat(user, span_warning("There is no such name in the city!"))
+		to_chat(user, span_warning("There is no such name in the Camarilla's records!"))

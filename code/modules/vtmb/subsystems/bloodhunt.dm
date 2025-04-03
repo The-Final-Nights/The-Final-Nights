@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(bloodhunt)
 		for(var/mob/living/carbon/human/H in (GLOB.kindred_list + GLOB.ghoul_list))
 			H.clear_alert("bloodhunt")
 
-/datum/controller/subsystem/bloodhunt/proc/announce_hunted(mob/living/target, reason)
+/datum/controller/subsystem/bloodhunt/proc/announce_hunted(mob/living/carbon/human/target, reason)
 	if(!ishuman(target))
 		return
 	var/mob/living/carbon/human/H = target
