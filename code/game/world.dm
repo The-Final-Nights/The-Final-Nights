@@ -55,6 +55,8 @@ GLOBAL_VAR(restart_counter)
 	SetupLogs()
 	load_poll_data()
 
+	populate_gear_list()
+
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
 #else
