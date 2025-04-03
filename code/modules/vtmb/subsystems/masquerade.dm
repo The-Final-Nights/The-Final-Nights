@@ -25,10 +25,22 @@ SUBSYSTEM_DEF(masquerade)
 	var/sabbat = 0
 	if(length(GLOB.masquerade_breakers_list))
 		masquerade_violators = (2000/length(GLOB.player_list))*length(GLOB.masquerade_breakers_list)
+		masquerade_violators = round(masquerade_violators)
 	if(length(GLOB.sabbatites))
 		sabbat = (2000/length(GLOB.player_list))*length(GLOB.sabbatites)
+		sabbat = round(sabbat)
 
-	total_level = max(0, min(1000, 1000 + dead_level + manual_adjustment - masquerade_violators - sabbat))
+	/**
+	*	GLOBAL MASQUERADE CALCULATION FACTORS
+	*
+	*	Masquerade violation: -50
+	*	Spotted body: -25
+	*	Blood: -5
+	*	Masquerade reinforcement: +25
+	*	Final death: +50
+	*/
+	var/total_level_calc = (dead_level + manual_adjustment) - (masquerade_violators - sabbat)
+	total_level = clamp(total_level_calc, 0, 1000)
 
 	var/shit_happens = "stable"
 	switch(total_level)
@@ -43,21 +55,14 @@ SUBSYSTEM_DEF(masquerade)
 
 	if(last_level != shit_happens)
 		last_level = shit_happens
-		for(var/mob/living/carbon/human/H in GLOB.player_list)
-			if(H)
-				if(iskindred(H) || isghoul(H))
-					switch(last_level)
-						if("stable")
-							to_chat(H, "The night becomes clear. Nothing can threaten the Masquerade.")
-						if("slightly")
-							to_chat(H, "Something is going wrong here...")
-						if("moderate")
-							to_chat(H, "People start noticing...")
-						if("breach")
-							to_chat(H, "The Masquerade is about to fall...")
+		for(var/mob/living/carbon/human/knower in (GLOB.kindred_list + GLOB.ghoul_list))
+			switch(last_level)
+				if("stable")
+					to_chat(knower, span_notice("The night becomes clear. Nothing can threaten the Masquerade."))
+				if("slightly")
+					to_chat(knower, span_warning("Something is going wrong here..."))
+				if("moderate")
+					to_chat(knower, span_boldwarning("People start noticing..."))
+				if("breach")
+					to_chat(knower, span_danger("The Masquerade is about to fall..."))
 
-//Spotted body -25
-//Blood -5 for each
-//Masquerade violation -50
-//Masquerade reinforcement +25
-//Final death +50

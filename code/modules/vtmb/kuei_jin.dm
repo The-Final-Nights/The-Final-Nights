@@ -254,6 +254,8 @@
 	//Kuei-jin resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_kuei_jin_bitten))
 
+	C.add_to_kueijin_list()
+
 /datum/species/kuei_jin/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
@@ -278,6 +280,8 @@
 	for(var/datum/action/chi_discipline/A in C.actions)
 		if(A)
 			A.Remove(C)
+
+	C.remove_from_kueijin_list()
 
 /datum/species/kuei_jin/spec_life(mob/living/carbon/human/H)
 	. = ..()

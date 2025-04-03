@@ -115,6 +115,8 @@
 	RegisterSignal(C.transformator.lupus_form, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
 	RegisterSignal(C.transformator.crinos_form, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
 
+	C.add_to_garou_list()
+
 /datum/species/garou/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
@@ -126,6 +128,8 @@
 	for(var/datum/action/gift/G in C.actions)
 		if(G)
 			G.Remove(C)
+
+	C.remove_from_garou_list()
 
 /datum/species/garou/check_roundstart_eligible()
 	return FALSE

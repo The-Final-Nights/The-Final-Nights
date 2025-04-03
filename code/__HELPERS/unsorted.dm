@@ -676,6 +676,7 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 				return TRUE
 	return FALSE
 
+///Properly format a string of text by using replacetext()
 /proc/format_text(text)
 	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
 

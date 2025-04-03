@@ -5,12 +5,12 @@
 	. = ..()
 
 	if(iskindred(src))
-		SSmasquerade.dead_level = min(1000, SSmasquerade.dead_level+50)
+		SSmasquerade.dead_level = clamp(SSmasquerade.dead_level+50, 0, 1000)
 	else
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.zone_type == "masquerade")
-				SSmasquerade.dead_level = max(0, SSmasquerade.dead_level-25)
+				SSmasquerade.dead_level = clamp(SSmasquerade.dead_level-25, 0, 1000)
 
 	if(bloodhunted)
 		SSbloodhunt.hunted -= src

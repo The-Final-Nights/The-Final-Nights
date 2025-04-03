@@ -255,6 +255,9 @@
 	//vampires resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
 
+	C.AddComponent(/datum/component/morality)
+	C.add_to_kindred_list()
+
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
@@ -263,6 +266,8 @@
 	for(var/datum/action/A in C.actions)
 		if(A?.vampiric)
 			A.Remove(C)
+
+	C.remove_from_kindred_list()
 
 /datum/action/blood_power
 	name = "Blood Power"

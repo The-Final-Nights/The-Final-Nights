@@ -132,6 +132,8 @@
 	C.maxHealth = 200
 	C.health = 200
 
+	C.add_to_ghoul_list()
+
 /datum/species/ghoul/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	for(var/datum/action/A in C.actions)
@@ -141,6 +143,8 @@
 	for(var/datum/action/ghoulinfo/infor in C.actions)
 		if(infor)
 			infor.Remove(C)
+
+	C.remove_from_ghoul_list()
 
 /datum/action/take_vitae
 	name = "Take Vitae"

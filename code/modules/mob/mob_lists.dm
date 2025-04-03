@@ -117,3 +117,35 @@
 	if(!SSticker?.mode)
 		return
 	SSticker.mode.current_players[CURRENT_LIVING_ANTAGS] -= src
+
+/mob/proc/add_to_kindred_list()
+	if(QDELETED(src))
+		return
+	GLOB.kindred_list |= src
+
+/mob/proc/remove_from_kindred_list()
+	GLOB.kindred_list -= src
+
+/mob/proc/add_to_ghoul_list()
+	if(QDELETED(src))
+		return
+	GLOB.ghoul_list |= src
+
+/mob/proc/remove_from_ghoul_list()
+	GLOB.ghoul_list -= src
+
+/mob/proc/add_to_garou_list()
+	if(QDELETED(src))
+		return
+	GLOB.garou_list |= src
+
+/mob/proc/remove_from_garou_list()
+	GLOB.garou_list -= src
+
+/mob/proc/add_to_kueijin_list()
+	if(QDELETED(src))
+		return
+	GLOB.kueijin_list |= src
+
+/mob/proc/remove_from_kueijin_list()
+	GLOB.kueijin_list -= src
