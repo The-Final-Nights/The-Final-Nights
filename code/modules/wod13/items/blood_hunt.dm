@@ -35,7 +35,7 @@
 			to_chat(user, span_warning("You remove [chosen_name] from the Hunted list."))
 			for(var/mob/living/carbon/human/R in GLOB.kindred_list)
 				if(!R.client)
-					return
+					continue
 				to_chat(R, "<b>The Blood Hunt after <span class='green'>[H.real_name]</span> is over!</b>")
 				SEND_SOUND(R, sound('code/modules/wod13/sounds/announce.ogg'))
 		else
