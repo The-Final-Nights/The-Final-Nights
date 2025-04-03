@@ -120,7 +120,7 @@
 	qdel(BA)
 	qdel(HS)
 
-
+/*
 /obj/effect/mob_spawn/human/citizen
 	name = "just a civilian"
 	desc = "A humming sleeper with a silhouetted occupant inside. Its stasis function is broken and it's likely being used as a bed."
@@ -158,6 +158,7 @@
 		my_name = pick(GLOB.first_names_female)
 	var/my_surname = pick(GLOB.last_names)
 	new_spawn.fully_replace_character_name(null,"[my_name] [my_surname]")
+*/
 
 /datum/outfit/civillian1
 	name = "civillian"
@@ -229,6 +230,8 @@
 	mask = /obj/item/clothing/mask/gas/syndicate
 	back = /obj/item/jetpack/oxygen
 	id = /obj/item/card/id/syndicate
+
+/*
 // TRIAD
 
 /obj/effect/mob_spawn/human/triad_soldier
@@ -254,6 +257,7 @@
 		my_name = pick(GLOB.first_names_female_triad)
 	var/my_surname = pick(GLOB.last_names_triad)
 	new_spawn.fully_replace_character_name(null,"[my_name] [my_surname]")
+*/
 
 /obj/effect/mob_spawn/human/police
 	name = "a police officer"
