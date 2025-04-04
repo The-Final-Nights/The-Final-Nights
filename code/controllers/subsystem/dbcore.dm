@@ -313,7 +313,7 @@ SUBSYSTEM_DEF(dbcore)
 			else
 				schema_mismatch = 2 //flag admin message about no schema version
 				log_sql("Could not get schema version from database. Setting latest known version.")
-				var/datum/db_query/query_db_version_set = NewQuery("INSERT INTO [format_table_name("schema_revision")] (major, minor) VALUES (5, 22)")
+				var/datum/db_query/query_db_version_set = NewQuery("INSERT INTO [format_table_name(schema_revision)] (major, minor) VALUES (5, 22)")
 				query_db_version_set.Execute(async = FALSE)
 				qdel(query_db_version_set)
 				db_major = 5
