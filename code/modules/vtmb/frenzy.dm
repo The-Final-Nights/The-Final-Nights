@@ -135,7 +135,6 @@
 							BT.add_bite_animation()
 						if(CheckEyewitness(L, src, 7, FALSE))
 							H.AdjustMasquerade(-1)
-						playsound(src, 'code/modules/wod13/sounds/drinkblood1.ogg', 50, TRUE)
 						L.visible_message("<span class='warning'><b>[src] bites [L]'s neck!</b></span>", "<span class='warning'><b>[src] bites your neck!</b></span>")
 						face_atom(L)
 						H.drinksomeblood(L)

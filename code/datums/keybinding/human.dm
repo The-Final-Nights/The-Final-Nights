@@ -148,13 +148,11 @@
 				var/skipface = (BD.wear_mask && (BD.wear_mask.flags_inv & HIDEFACE)) || (BD.head && (BD.head.flags_inv & HIDEFACE))
 				if(!skipface)
 					if(!HAS_TRAIT(BD, TRAIT_BLOODY_LOVER))
-						playsound(BD, 'code/modules/wod13/sounds/drinkblood1.ogg', 50, TRUE)
 						LV.visible_message("<span class='warning'><b>[BD] bites [LV]'s neck!</b></span>", "<span class='warning'><b>[BD] bites your neck!</b></span>")
 					if(!HAS_TRAIT(BD, TRAIT_BLOODY_LOVER))
 						if(BD.CheckEyewitness(LV, BD, 7, FALSE))
 							BD.AdjustMasquerade(-1)
 					else
-						playsound(BD, 'code/modules/wod13/sounds/kiss.ogg', 50, TRUE)
 						LV.visible_message("<span class='italics'><b>[BD] kisses [LV]!</b></span>", "<span class='userlove'><b>[BD] kisses you!</b></span>")
 					if(iskindred(LV))
 						var/mob/living/carbon/human/HV = BD.pulling
