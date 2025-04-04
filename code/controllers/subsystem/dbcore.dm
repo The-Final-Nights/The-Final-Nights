@@ -312,12 +312,7 @@ SUBSYSTEM_DEF(dbcore)
 					log_sql("Database schema ([db_major].[db_minor]) doesn't match the latest schema version ([DB_MAJOR_VERSION].[DB_MINOR_VERSION]), this may lead to undefined behaviour or errors")
 			else
 				schema_mismatch = 2 //flag admin message about no schema version
-				log_sql("Could not get schema version from database. Setting latest known version.")
-				var/datum/db_query/query_db_version_set = NewQuery("INSERT INTO [format_table_name(schema_revision)] (major, minor) VALUES (5, 22)")
-				query_db_version_set.Execute(async = FALSE)
-				qdel(query_db_version_set)
-				db_major = 5
-				db_minor = 22
+				log_sql("Could not get schema version from database")
 			qdel(query_db_version)
 		else
 			log_sql("Your server failed to establish a connection with the database.")
