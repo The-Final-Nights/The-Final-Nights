@@ -166,7 +166,7 @@
 		return
 
 	var/mob/living/carbon/human/human_user = user
-	if(human_user.physique == FEMALE)
+	if(human_user.body_type == FEMALE)
 		return pick(
 			'sound/mobs/humanoids/human/gasp/gasp_female1.ogg',
 			'sound/mobs/humanoids/human/gasp/gasp_female2.ogg',

@@ -32,8 +32,8 @@
 		for(var/mob/living/carbon/human/H in ohearers(7, src))
 			if(H)
 				if(H.can_hear())
-					var/mypower = 13-A.generation+A.social
-					var/theirpower = 13-H.generation+H.mentality
+					var/mypower = 13-A.generation+A.character_sheet.social
+					var/theirpower = 13-H.generation+H.character_sheet.mentality
 					if(theirpower <= mypower)
 						H.cure_trauma_type(/datum/brain_trauma/severe/hypnotic_trigger, TRAUMA_RESILIENCE_BASIC)
 						H.gain_trauma(new /datum/brain_trauma/severe/hypnotic_trigger(new_say), TRAUMA_RESILIENCE_BASIC)

@@ -158,13 +158,13 @@
 				if(host.real_name != GLOB.voivodename)
 					dat += " The Voivode of the Manor is:  [GLOB.voivodename].<BR>"
 
-		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
-		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
-		dat += "<b>Social</b>: [host.social] + [host.additional_social]<BR>"
-		dat += "<b>Mentality</b>: [host.mentality] + [host.additional_mentality]<BR>"
-		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
-		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
-		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
+		dat += "<b>Physique</b>: [host.character_sheet.physique] + [host.character_sheet.additional_physique]<BR>"
+		dat += "<b>Dexterity</b>: [host.character_sheet.dexterity] + [host.character_sheet.additional_dexterity]<BR>"
+		dat += "<b>Social</b>: [host.character_sheet.social] + [host.character_sheet.additional_social]<BR>"
+		dat += "<b>Mentality</b>: [host.character_sheet.mentality] + [host.character_sheet.additional_mentality]<BR>"
+		dat += "<b>Cruelty</b>: [host.character_sheet.blood] + [host.character_sheet.additional_blood]<BR>"
+		dat += "<b>Lockpicking</b>: [host.character_sheet.lockpicking] + [host.character_sheet.additional_lockpicking]<BR>"
+		dat += "<b>Athletics</b>: [host.character_sheet.athletics] + [host.character_sheet.additional_athletics]<BR>"
 		if(host.hud_used)
 			dat += "<b>Known disciplines:</b><BR>"
 			for(var/datum/action/discipline/D in host.actions)
@@ -303,9 +303,9 @@
 			BD.dna.species.punchdamagehigh = BD.dna.species.punchdamagehigh+5
 			BD.physiology.armor.melee = BD.physiology.armor.melee+15
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet+15
-			BD.dexterity = BD.dexterity+2
-			BD.athletics = BD.athletics+2
-			BD.lockpicking = BD.lockpicking+2
+			BD.character_sheet.dexterity = BD.character_sheet.dexterity+2
+			BD.character_sheet.athletics = BD.character_sheet.athletics+2
+			BD.character_sheet.lockpicking = BD.character_sheet.lockpicking+2
 			if(!HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				ADD_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 			BD.update_blood_hud()
@@ -325,9 +325,9 @@
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet-15
 			if(HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				REMOVE_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
-		BD.dexterity = BD.dexterity-2
-		BD.athletics = BD.athletics-2
-		BD.lockpicking = BD.lockpicking-2
+		BD.character_sheet.dexterity = BD.character_sheet.dexterity-2
+		BD.character_sheet.athletics = BD.character_sheet.athletics-2
+		BD.character_sheet.lockpicking = BD.character_sheet.lockpicking-2
 
 /datum/action/give_vitae
 	name = "Give Vitae"

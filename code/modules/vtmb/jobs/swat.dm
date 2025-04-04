@@ -26,10 +26,10 @@
 		qdel(H.clane)
 	H.set_species(/datum/species/human)
 	H.generation = 13
-	H.lockpicking = 5
-	H.physique = 4
-	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.physique+13-H.generation))
-	H.health = round((initial(H.health)-initial(H.health)/4)+(initial(H.health)/4)*(H.physique+13-H.generation))
+	H.character_sheet.lockpicking = 5
+	H.character_sheet.physique = 4
+	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.character_sheet.physique+13-H.generation))
+	H.health = round((initial(H.health)-initial(H.health)/4)+(initial(H.health)/4)*(H.character_sheet.physique+13-H.generation))
 	for(var/datum/action/A in H.actions)
 		if(A.vampiric)
 			A.Remove(H)

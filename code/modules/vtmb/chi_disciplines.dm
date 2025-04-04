@@ -636,7 +636,7 @@
 
 /datum/chi_discipline/ghost_flame_shintai/activate(mob/living/target, mob/living/carbon/human/caster)
 	..()
-	var/limit = min(2, level) + caster.social + caster.more_companions - 1
+	var/limit = min(2, level) + caster.character_sheet.social + caster.more_companions - 1
 	if(length(caster.beastmaster) >= limit)
 		var/mob/living/simple_animal/hostile/beastmaster/random_beast = pick(caster.beastmaster)
 		random_beast.death()
@@ -1247,17 +1247,17 @@
 	var/total_power = 1 //The proportion of your Social to their Mentality. Higher social means higher total_power and higher effect. If this is 1 or more, our social is at least as high as their mentality
 	switch(level_casting)
 		if(1)
-			caster.physique += 2
-			caster.dexterity += 2
-			caster.athletics += 2
+			caster.character_sheet.physique += 2
+			caster.character_sheet.dexterity += 2
+			caster.character_sheet.athletics += 2
 			caster.add_movespeed_modifier(/datum/movespeed_modifier/kiai)
 			ADD_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 			caster.do_jitter_animation(1 SECONDS)
 			spawn(delay+caster.discipline_time_plus)
 				if(caster)
-					caster.physique -= 2
-					caster.dexterity -= 2
-					caster.athletics -= 2
+					caster.character_sheet.physique -= 2
+					caster.character_sheet.dexterity -= 2
+					caster.character_sheet.athletics -= 2
 					caster.remove_movespeed_modifier(/datum/movespeed_modifier/kiai)
 					REMOVE_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 		if(2)
@@ -1347,7 +1347,7 @@
 	..()
 	if(!wolflike_shapeshift)
 		wolflike_shapeshift = new(caster)
-	var/limit = min(2, level) + caster.social + caster.more_companions - 1
+	var/limit = min(2, level) + caster.character_sheet.social + caster.more_companions - 1
 	if(length(caster.beastmaster) >= limit)
 		var/mob/living/simple_animal/hostile/beastmaster/random_beast = pick(caster.beastmaster)
 		random_beast.death()
@@ -1715,9 +1715,9 @@
 			caster.dna.species.punchdamagehigh += 5
 			caster.physiology.armor.melee += 15
 			caster.physiology.armor.bullet += 15
-			caster.dexterity += 2
-			caster.athletics += 2
-			caster.lockpicking += 2
+			caster.character_sheet.dexterity += 2
+			caster.character_sheet.athletics += 2
+			caster.character_sheet.lockpicking += 2
 			ADD_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 			caster.do_jitter_animation(1 SECONDS)
 			spawn(delay+caster.discipline_time_plus)
@@ -1725,9 +1725,9 @@
 					caster.dna.species.punchdamagehigh -= 5
 					caster.physiology.armor.melee -= 15
 					caster.physiology.armor.bullet -= 15
-					caster.dexterity -= 2
-					caster.athletics -= 2
-					caster.lockpicking -= 2
+					caster.character_sheet.dexterity -= 2
+					caster.character_sheet.athletics -= 2
+					caster.character_sheet.lockpicking -= 2
 					REMOVE_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 		if(2)
 			caster.yin_chi += 1
@@ -1778,9 +1778,9 @@
 				affected_mob.dna.species.punchdamagehigh += 5
 				affected_mob.physiology.armor.melee += 15
 				affected_mob.physiology.armor.bullet += 15
-				affected_mob.dexterity += 2
-				affected_mob.athletics += 2
-				affected_mob.lockpicking += 2
+				affected_mob.character_sheet.dexterity += 2
+				affected_mob.character_sheet.athletics += 2
+				affected_mob.character_sheet.lockpicking += 2
 				ADD_TRAIT(affected_mob, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 				var/obj/effect/celerity/celerity_effect = new(get_turf(affected_mob))
 				celerity_effect.appearance = affected_mob.appearance
@@ -1794,9 +1794,9 @@
 						affected_mob.dna.species.punchdamagehigh -= 5
 						affected_mob.physiology.armor.melee -= 15
 						affected_mob.physiology.armor.bullet -= 15
-						affected_mob.dexterity -= 2
-						affected_mob.athletics -= 2
-						affected_mob.lockpicking -= 2
+						affected_mob.character_sheet.dexterity -= 2
+						affected_mob.character_sheet.athletics -= 2
+						affected_mob.character_sheet.lockpicking -= 2
 						REMOVE_TRAIT(affected_mob, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 		if(4)
 			for(var/mob/living/affected_mob in oviewers(5, caster))

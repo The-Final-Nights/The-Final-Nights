@@ -201,13 +201,13 @@
 		dat += "<b>Yin/Yang</b>[host.max_yin_chi]/[host.max_yang_chi]<BR>"
 		dat += "<b>Hun/P'o</b>[host.mind.dharma?.Hun]/[host.max_demon_chi]<BR>"
 
-		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
-		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
-		dat += "<b>Social</b>: [host.social] + [host.additional_social]<BR>"
-		dat += "<b>Mentality</b>: [host.mentality] + [host.additional_mentality]<BR>"
-		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
-		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
-		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
+		dat += "<b>Physique</b>: [host.character_sheet.physique] + [host.character_sheet.additional_physique]<BR>"
+		dat += "<b>Dexterity</b>: [host.character_sheet.dexterity] + [host.character_sheet.additional_dexterity]<BR>"
+		dat += "<b>Social</b>: [host.character_sheet.social] + [host.character_sheet.additional_social]<BR>"
+		dat += "<b>Mentality</b>: [host.character_sheet.mentality] + [host.character_sheet.additional_mentality]<BR>"
+		dat += "<b>Cruelty</b>: [host.character_sheet.blood] + [host.character_sheet.additional_blood]<BR>"
+		dat += "<b>Lockpicking</b>: [host.character_sheet.lockpicking] + [host.character_sheet.additional_lockpicking]<BR>"
+		dat += "<b>Athletics</b>: [host.character_sheet.athletics] + [host.character_sheet.additional_athletics]<BR>"
 		if(host.Myself)
 			if(host.Myself.Friend)
 				if(host.Myself.Friend.owner)

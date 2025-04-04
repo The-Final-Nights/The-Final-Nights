@@ -95,7 +95,7 @@
 	if(!H.is_holding_item_of_type(/obj/item/vamp/keys/hack))
 		return
 	var/message //So the code isn't flooded with . +=, it's just a visual thing
-	var/difference = (H.lockpicking * 2 + H.dexterity) - lockpick_difficulty //Lower number = higher difficulty
+	var/difference = (H.character_sheet.lockpicking * 2 + H.character_sheet.dexterity) - lockpick_difficulty //Lower number = higher difficulty
 	switch(difference) //Because rand(1,20) always adds a minimum of 1 we take that into consideration for our theoretical roll ranges, which really makes it a random range of 19.
 		if(-INFINITY to -11) //Roll can never go above 10 (-11 + 20 = 9), impossible to lockpick.
 			message = "<span class='warning'>You don't have any chance of lockpicking this with your current skills!</span>"
@@ -110,7 +110,7 @@
 		if(5 to INFINITY) //Becomes guaranteed to lockpick at 9.
 			message = "<span class='nicegreen'>This door is really simple to you. It should be very easy to lockpick it.</span>"
 	. += "[message]"
-	if(H.lockpicking >= 5) //The difference between a 1/19 and a 4/19 is about 4x. An expert in lockpicks is more discerning.
+	if(H.character_sheet.lockpicking >= 5) //The difference between a 1/19 and a 4/19 is about 4x. An expert in lockpicks is more discerning.
 		//Converting the difference into a number that can be divided by the max value of the rand() used in lockpicking calculations.
 		var/max_rand_value = 20
 		var/minimum_lockpickable_difference = -10 //Minimum value, any lower and lockpicking will always fail.

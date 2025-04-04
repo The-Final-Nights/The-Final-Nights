@@ -178,7 +178,7 @@
 	if(check_contents(a, R, contents))
 		if(check_tools(a, R, contents))
 			//If we're a mob we'll try a do_after; non mobs will instead instantly construct the item
-			if(ismob(a) && !do_after(a, R.time*max(1, (5-PIS.mentality)), target = a))
+			if(ismob(a) && !do_after(a, R.time*max(1, (5-PIS.character_sheet.mentality)), target = a))
 				return "."
 			contents = get_surroundings(a,R.blacklist)
 			if(!check_contents(a, R, contents))

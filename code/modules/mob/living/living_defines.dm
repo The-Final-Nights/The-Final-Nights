@@ -175,21 +175,6 @@
 
 	var/total_cleaned = 0
 
-	var/physique = 1
-	var/dexterity = 1
-	var/social = 1
-	var/mentality = 1
-	var/lockpicking = 0
-	var/athletics = 0
-	var/blood = 1
-
-	var/additional_physique = 0
-	var/additional_dexterity = 0
-	var/additional_mentality = 0
-	var/additional_social = 0
-	var/additional_blood = 0
-	var/additional_lockpicking = 0
-	var/additional_athletics = 0
 	var/more_companions = 0
 	var/melee_professional = FALSE
 
@@ -284,3 +269,6 @@
 
 	//If we are currently leaning on something, and what that object is
 	var/atom/leaned_object
+
+	// Character sheet object, for attaching the sheet from preferences to the mob.
+	var/datum/character_sheet/character_sheet

@@ -437,7 +437,7 @@
 			H.remove_overlay(PROTEAN_LAYER)
 			G.punchdamagelow -= 15
 			G.punchdamagehigh -= 15
-			H.physique = H.physique-2
+			H.character_sheet.physique = H.character_sheet.physique-2
 			H.physiology.armor.melee -= 15
 			H.physiology.armor.bullet -= 15
 			var/matrix/M = matrix()
@@ -452,7 +452,7 @@
 			H.apply_overlay(PROTEAN_LAYER)
 			G.punchdamagelow += 15
 			G.punchdamagehigh += 15
-			H.physique = H.physique+2
+			H.character_sheet.physique = H.character_sheet.physique+2
 			H.physiology.armor.melee += 15
 			H.physiology.armor.bullet += 15
 			var/matrix/M = matrix()

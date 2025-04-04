@@ -1954,25 +1954,25 @@
 //Making a proc for each of these.
 
 /mob/living/proc/get_total_physique()
-	return physique + additional_physique
+	return character_sheet.physique + character_sheet.additional_physique
 
 /mob/living/proc/get_total_dexterity()
-	return dexterity + additional_dexterity
+	return character_sheet.dexterity + character_sheet.additional_dexterity
 
 /mob/living/proc/get_total_social()
 	if(iscathayan(src))
 		if(mind?.dharma?.animated == "Yin")
-			return max(0, social + additional_social - 2)
-	return social + additional_social
+			return max(0, character_sheet.social + character_sheet.additional_social - 2)
+	return character_sheet.social + character_sheet.additional_social
 
 /mob/living/proc/get_total_mentality()
-	return mentality + additional_mentality
+	return character_sheet.mentality + character_sheet.additional_mentality
 
 /mob/living/proc/get_total_blood()
-	return blood + additional_blood
+	return character_sheet.blood + character_sheet.additional_blood
 
 /mob/living/proc/get_total_lockpicking()
-	return lockpicking + additional_lockpicking
+	return character_sheet.lockpicking + character_sheet.additional_lockpicking
 
 /mob/living/proc/get_total_athletics()
-	return athletics + additional_athletics
+	return character_sheet.athletics + character_sheet.additional_athletics

@@ -19,7 +19,7 @@
 	if(istype(W, /obj/item/stack))
 		return
 
-	var/amount = round(W.cost / 5 * (user.social + (user.additional_social * 0.1)))
+	var/amount = round(W.cost / 5 * (user.character_sheet.social + (user.character_sheet.additional_social * 0.1)))
 	if(amount > 0)
 		new /obj/item/stack/dollar(get_turf(src), amount)
 
@@ -63,7 +63,7 @@
 	else if(illegal)
 		SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 7)
 
-	var/amount = round(W.cost / 5 * (user.social + (user.additional_social * 0.1)))
+	var/amount = round(W.cost / 5 * (user.character_sheet.social + (user.character_sheet.additional_social * 0.1)))
 	if(amount > 0)
 		new /obj/item/stack/dollar(get_turf(src), amount)
 

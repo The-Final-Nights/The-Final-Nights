@@ -334,7 +334,7 @@
 		var/ritual = input(owner, "Choose rune to draw:", "Thaumaturgy") as null|anything in shit
 		if(ritual)
 			drawing = TRUE
-			if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
+			if(do_after(H, 3 SECONDS * max(1, 5 - H.character_sheet.mentality), H))
 				drawing = FALSE
 				new ritual(H.loc)
 				H.bloodpool = max(H.bloodpool - 2, 0)
@@ -352,7 +352,7 @@
 		var/ritual = input(owner, "Choose rune to draw (You need an Arcane Tome to reduce random):", "Thaumaturgy") as null|anything in list("???")
 		if(ritual)
 			drawing = TRUE
-			if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
+			if(do_after(H, 3 SECONDS * max(1, 5 - H.character_sheet.mentality), H))
 				drawing = FALSE
 				var/rune = pick(shit)
 				new rune(H.loc)

@@ -574,7 +574,7 @@
 		probed_to_crit = TRUE
 		if(ishuman(firer))
 			var/mob/living/carbon/human/frer = firer
-			if(frer.blood)
+			if(frer.character_sheet.blood)
 				if(prob(frer.get_total_blood()*10))
 					damage *= 2
 	if(temporary_unstoppable_movement)

@@ -105,3 +105,9 @@
 /proc/sanitize_ooccolor(color)
 	var/static/regex/color_regex = regex(@"^#[0-9a-fA-F]{6}$")
 	return findtext(color, color_regex) ? color : GLOB.normal_ooc_colour
+
+/proc/sanitize_datum(datum, default)
+	RETURN_TYPE(/datum)
+	if(isdatum(datum))
+		return datum
+	return default
