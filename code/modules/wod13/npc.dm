@@ -12,9 +12,9 @@
 	/// The last entry in the list for a type of NPC should always have 100 as the index
 	var/static/list/role_weapons_chances = list(
 		BANDIT_TYPE_NPC = list(
-			 /obj/item/gun/ballistic/automatic/vampire/deagle = 33,
-			 /obj/item/gun/ballistic/vampire/revolver/snub = 33,
-			 /obj/item/melee/vampirearms/baseball = 100,
+			/obj/item/gun/ballistic/automatic/vampire/deagle = 33,
+			/obj/item/gun/ballistic/vampire/revolver/snub = 33,
+			/obj/item/melee/vampirearms/baseball = 100,
 		),
 		POLICE_TYPE_NPC = list(
 			/obj/item/gun/ballistic/vampire/revolver = 66,

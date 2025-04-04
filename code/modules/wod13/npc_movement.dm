@@ -34,6 +34,8 @@
 	GLOB.npc_list += src
 	GLOB.alive_npc_list += src
 	add_movespeed_modifier(/datum/movespeed_modifier/npc)
+	// Instantiate a character sheet on the NPC
+	character_sheet = new()
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/carbon/human/npc/death()
