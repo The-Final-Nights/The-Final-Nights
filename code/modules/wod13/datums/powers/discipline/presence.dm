@@ -30,7 +30,7 @@
 /datum/discipline_power/presence/awe/pre_activation_checks(mob/living/target)
 	var/mypower = owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
-	if((theirpower >= mypower) || ((owner.generation - 3) >= target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
 
@@ -79,7 +79,7 @@
 /datum/discipline_power/presence/dread_gaze/pre_activation_checks(mob/living/target)
 	var/mypower = owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
-	if((theirpower >= mypower) || ((owner.generation - 3) >= target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
 
@@ -121,7 +121,7 @@
 /datum/discipline_power/presence/entrancement/pre_activation_checks(mob/living/target)
 	var/mypower = owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
-	if((theirpower >= mypower) || ((owner.generation - 3) >= target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
 
@@ -170,7 +170,7 @@
 /datum/discipline_power/presence/summon/pre_activation_checks(mob/living/target)
 	var/mypower = owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
-	if((theirpower >= mypower) || ((owner.generation - 3) >= target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
 
@@ -220,7 +220,7 @@
 /datum/discipline_power/presence/majesty/pre_activation_checks(mob/living/target)
 	var/mypower = owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
-	if((theirpower >= mypower) || ((owner.generation - 3) >= target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
 		return FALSE
 
