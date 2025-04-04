@@ -56,7 +56,7 @@
 		if(human_target.clane?.name == "Gargoyle")
 			return TRUE
 
-	if((theirpower >= mypower) || (owner.generation > target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to dominate!"))
 		return FALSE
 
@@ -95,7 +95,7 @@
 		if(human_target.clane?.name == "Gargoyle")
 			return TRUE
 
-	if((theirpower >= mypower) || (owner.generation > target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to dominate!"))
 		return FALSE
 
@@ -136,7 +136,7 @@
 		if(human_target.clane?.name == "Gargoyle")
 			return TRUE
 
-	if((theirpower >= mypower) || (owner.generation > target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to dominate!"))
 		return FALSE
 
@@ -176,7 +176,7 @@
 		if(human_target.clane?.name == "Gargoyle")
 			return TRUE
 
-	if((theirpower >= mypower) || (owner.generation > target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to dominate!"))
 		return FALSE
 
@@ -215,7 +215,7 @@
 		if(human_target.clane?.name == "Gargoyle")
 			return TRUE
 
-	if((theirpower >= mypower) || (owner.generation > target.generation))
+	if(theirpower >= mypower)
 		to_chat(owner, span_warning("[target]'s mind is too powerful to dominate!"))
 		return FALSE
 
