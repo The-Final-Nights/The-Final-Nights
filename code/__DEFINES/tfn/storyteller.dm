@@ -1,0 +1,2 @@
+#define MAX_DICE_POOL 10
+#define MIN_DICE_POOL 0

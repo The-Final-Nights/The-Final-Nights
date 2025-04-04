@@ -28,3 +28,25 @@
 	unique_id = null
 
 	return ..()
+
+/datum/character_sheet/ui_state(mob/user)
+	return GLOB.new_player_state
+
+/datum/character_sheet/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "CharacterSheet")
+		ui.open()
+
+/datum/character_sheet/ui_data(mob/user)
+	var/list/data = list()
+
+	return data
+
+/datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return
+
+	switch(action)
+		if("TO_BE_ADDED")
