@@ -2,7 +2,7 @@
 	// TODO: replace this with a UUID that coresponds with the owner's
 	/// Owner of the character sheet, tmp so BYOND doesn't save the reference.
 	//var/tmp/mob/living/carbon/human/owner
-	var/uid = ""
+	var/unique_id
 	// Attributes
 	var/physique = 1
 	var/dexterity = 1
@@ -21,10 +21,10 @@
 	var/additional_lockpicking = 0
 	var/additional_athletics = 0
 
-/datum/character_sheet/New(uid)
-	src.uid = uid
+/datum/character_sheet/New(unique_id)
+	src.unique_id = unique_id
 
 /datum/character_sheet/Destroy()
-	uid = null
+	unique_id = null
 
 	return ..()

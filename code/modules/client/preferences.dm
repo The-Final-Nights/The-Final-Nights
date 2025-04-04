@@ -37,7 +37,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/see_chat_non_mob = TRUE
 	///Whether emotes will be displayed on runechat. Requires chat_on_map to have effect. Boolean.
 	var/see_rc_emotes = TRUE
-	//Клан вампиров
+	// References to objects we'll use later on
 	var/datum/vampireclane/clane = new /datum/vampireclane/brujah()
 	var/datum/morality/morality_path = new /datum/morality/humanity()
 	var/datum/character_sheet/character_sheet
@@ -229,17 +229,21 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/chi_types = list()
 	var/list/chi_levels = list()
 
+	/// Used for keeping track of characters
+	var/unique_id
+
 /datum/preferences/proc/add_experience(amount)
 	true_experience = clamp(true_experience + amount, 0, 1000)
 
-/datum/preferences/proc/reset_character()
+/datum/preferences/proc/reset_character(client/parent)
+	unique_id = rustg_hash_string(RUSTG_HASH_XXH64, "[parent.ckey][rand(2,999)][rustg_unix_timestamp()]")
 	slotlocked = 0
 	diablerist = 0
 	torpor_count = 0
 	generation_bonus = 0
 	// Generate character's UID somewhere before this, so it can be set in the new()
 	qdel(character_sheet)
-	character_sheet = new()
+	character_sheet = new(unique_id)
 	info_known = INFO_KNOWN_UNKNOWN
 	masquerade = initial(masquerade)
 	generation = initial(generation)
@@ -725,6 +729,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<br><b>Headshot(1:1):</b> <a href='byond://?_src_=prefs;preference=headshot;task=input'>Change</a>"
 			if(headshot_link != null)
 				dat += "<a href='byond://?_src_=prefs;preference=view_headshot;task=input'>View</a>"
+			dat += "<BR><b>Character ID:</b> [unique_id]"
 			// TFN EDIT ADDITION END
 			dat += "<h2>[make_font_cool("EQUIP")]</h2>"
 
@@ -3099,11 +3104,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("reset_all")
 					if (tgui_alert(user, "Are you sure you want to reset your character?", "Confirmation", list("Yes", "No")) != "Yes")
 						return
-					reset_character()
+					reset_character(parent)
 
 				if("changeslot")
 					if(!load_character(text2num(href_list["num"])))
-						reset_character()
+						reset_character(parent)
 
 				if("tab")
 					if (href_list["tab"])

@@ -396,6 +396,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["werewolf_eye_color"], werewolf_eye_color)
 
 	//Character
+	READ_FILE(S["unique_id"], unique_id)
+	READ_FILE(S["character_sheet"], character_sheet)
 	READ_FILE(S["slotlocked"], slotlocked)
 	READ_FILE(S["diablerist"], diablerist)
 	READ_FILE(S["auspice_level"], auspice_level)
@@ -404,7 +406,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["exper"], exper)
 	READ_FILE(S["exper_plus"], exper_plus)
 	READ_FILE(S["true_experience"], true_experience)
-	READ_FILE(S["character_sheet"], character_sheet)
 	READ_FILE(S["archetype"], archetype)
 	READ_FILE(S["discipline1level"], discipline1level)
 	READ_FILE(S["discipline2level"], discipline2level)
@@ -515,16 +516,19 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		update_character(needs_update, S)		//needs_update == savefile_version if we need an update (positive integer)
 
 	//Sanitize
+	unique_id = sanitize_text(unique_id)
+	character_sheet = sanitize_datum(character_sheet)
 	real_name = reject_bad_name(real_name)
 	werewolf_name = reject_bad_name(werewolf_name)
 	gender = sanitize_gender(gender)
 	body_type = sanitize_gender(body_type, FALSE, FALSE, gender)
 	body_model = sanitize_integer(body_model, 1, 3, initial(body_model))
+	if(!unique_id)
+		unique_id = rustg_hash_string(RUSTG_HASH_XXH64, "[parent.ckey][rand(2,999)][rustg_unix_timestamp()]")
+	if(!character_sheet)
+		character_sheet = new(unique_id)
 	if(!real_name)
 		real_name = random_unique_name(gender)
-//	if(!clane)
-//		var/newtype = GLOB.clanes_list["Brujah"]
-//		clane = new newtype()
 
 	//Prevent Wighting upon joining a round
 	if(path_score <= 0)
@@ -589,7 +593,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	exper				= sanitize_integer(exper, 0, 99999999, initial(exper))
 	exper_plus				= sanitize_integer(exper_plus, 0, 99999999, initial(exper_plus))
 	true_experience				= sanitize_integer(true_experience, 0, 99999999, initial(true_experience))
-	character_sheet = sanitize_datum(character_sheet, /datum/character_sheet)
 	auspice_level			= sanitize_integer(auspice_level, 1, 5, initial(auspice_level))
 	discipline1level				= sanitize_integer(discipline1level, 1, 5, initial(discipline1level))
 	discipline2level				= sanitize_integer(discipline2level, 1, 5, initial(discipline2level))
@@ -711,6 +714,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["auspice"]			, auspice.name)
 
 	//Character
+	WRITE_FILE(S["unique_id"], unique_id)
 	WRITE_FILE(S["slotlocked"]			, slotlocked)
 	WRITE_FILE(S["diablerist"]			, diablerist)
 	WRITE_FILE(S["humanity"]			, path_score)
