@@ -209,6 +209,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["hearted_until"], hearted_until)
 	if(hearted_until > world.realtime)
 		hearted = TRUE
+	//favorite outfits
+	READ_FILE(S["favorite_outfits"], favorite_outfits)
+
+	var/list/parsed_favs = list()
+	for(var/typetext in favorite_outfits)
+		var/datum/outfit/path = text2path(typetext)
+		if(ispath(path)) //whatever typepath fails this check probably doesn't exist anymore
+			parsed_favs += path
+	favorite_outfits = uniqueList(parsed_favs)
 
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
@@ -248,15 +257,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	widescreenpref  = sanitize_integer(widescreenpref, FALSE, TRUE, initial(widescreenpref))
 	pixel_size		= sanitize_float(pixel_size, PIXEL_SCALING_AUTO, PIXEL_SCALING_3X, 0.5, initial(pixel_size))
 	scaling_method  = sanitize_text(scaling_method, initial(scaling_method))
-	ghost_form		= sanitize_inlist(ghost_form, GLOB.ghost_forms, initial(ghost_form))
-	ghost_orbit 	= sanitize_inlist(ghost_orbit, GLOB.ghost_orbits, initial(ghost_orbit))
-	ghost_accs		= sanitize_inlist(ghost_accs, GLOB.ghost_accs_options, GHOST_ACCS_DEFAULT_OPTION)
-	ghost_others	= sanitize_inlist(ghost_others, GLOB.ghost_others_options, GHOST_OTHERS_DEFAULT_OPTION)
-	menuoptions		= SANITIZE_LIST(menuoptions)
-	be_special		= SANITIZE_LIST(be_special)
-	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
-	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
-	key_bindings 	= sanitize_keybindings(key_bindings)
+	ghost_form = sanitize_inlist(ghost_form, GLOB.ghost_forms, initial(ghost_form))
+	ghost_orbit = sanitize_inlist(ghost_orbit, GLOB.ghost_orbits, initial(ghost_orbit))
+	ghost_accs = sanitize_inlist(ghost_accs, GLOB.ghost_accs_options, GHOST_ACCS_DEFAULT_OPTION)
+	ghost_others = sanitize_inlist(ghost_others, GLOB.ghost_others_options, GHOST_OTHERS_DEFAULT_OPTION)
+	menuoptions = SANITIZE_LIST(menuoptions)
+	be_special = SANITIZE_LIST(be_special)
+	brief_outfit = sanitize_inlist(brief_outfit, subtypesof(/datum/outfit), null)
+	pda_style = sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
+	pda_color = sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
+	key_bindings = sanitize_keybindings(key_bindings)
+	favorite_outfits = SANITIZE_LIST(favorite_outfits)
 
 	if(needs_update >= 0) //save the updated version
 		var/old_default_slot = default_slot
@@ -334,6 +345,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pda_color"], pda_color)
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["hearted_until"], (hearted_until > world.realtime ? hearted_until : null))
+	WRITE_FILE(S["favorite_outfits"], favorite_outfits)
 	return TRUE
 
 /datum/preferences/proc/load_character(slot)
