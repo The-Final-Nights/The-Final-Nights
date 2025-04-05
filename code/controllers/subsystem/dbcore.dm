@@ -49,6 +49,8 @@ SUBSYSTEM_DEF(dbcore)
 	var/db_daemon_started = FALSE
 
 /datum/controller/subsystem/dbcore/Initialize()
+	Connect()
+
 	//We send warnings to the admins during subsystem init, as the clients will be New'd and messages
 	//will queue properly with goonchat
 	switch(schema_mismatch)
@@ -57,7 +59,7 @@ SUBSYSTEM_DEF(dbcore)
 		if(2)
 			message_admins("Could not get schema version from database")
 
-	return ..()
+	return TRUE
 
 /datum/controller/subsystem/dbcore/OnConfigLoad()
 	. = ..()
@@ -320,6 +322,8 @@ SUBSYSTEM_DEF(dbcore)
 		log_sql("Database is not enabled in configuration.")
 
 /datum/controller/subsystem/dbcore/proc/SetRoundID()
+	CheckSchemaVersion()
+
 	if(!Connect())
 		return
 	var/datum/db_query/query_round_initialize = SSdbcore.NewQuery(
