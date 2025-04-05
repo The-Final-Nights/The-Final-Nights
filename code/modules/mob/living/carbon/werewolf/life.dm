@@ -65,7 +65,7 @@
 					last_veil_restore = world.time
 
 			switch(auspice.tribe)
-				if("Wendigo")
+				if("Gale Stalkers")
 					if(istype(get_area(src), /area/vtm/forest))
 						if((last_veil_restore + 50 SECONDS) <= world.time)
 							adjust_veil(1, src, TRUE)

@@ -202,7 +202,7 @@
 	)
 
 /datum/industry/consumer/generateProductName(var/company)
-	var/list/meat = list("chicken", "lizard", "corgi", "monkey", "goat", "fly", "xenomorph", "human", "walrus", "wendigo", "bear", "clown", "turkey", "pork", "carp", "crab", "mimic", "mystery")
+	var/list/meat = list("chicken", "lizard", "corgi", "monkey", "goat", "fly", "xenomorph", "human", "walrus", "bear", "clown", "turkey", "pork", "carp", "crab", "mimic", "mystery")
 	var/list/qualifier = list("synthetic", "organic", "bio", "diet", "sugar-free", "paleolithic", "homeopathic", "recycled", "reclaimed", "vat-grown")
 	return "the [pick(qualifier)] [pick(meat)] meat product line"
 

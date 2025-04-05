@@ -214,7 +214,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/archetype = /datum/archetype/average
 
 	var/breed = "Homid"
-	var/tribe = "Wendigo"
+	var/tribe = "Gale Stalkers"
 	var/datum/auspice/auspice = new /datum/auspice/ahroun()
 	var/werewolf_color = "black"
 	var/werewolf_scar = 0
@@ -541,8 +541,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					switch (tribe)
 						if ("Glasswalkers")
 							zalupa = auspice.glasswalker[i]
-						if ("Wendigo")
-							zalupa = auspice.wendigo[i]
+						if ("Gale Stalkers")
+							zalupa = auspice.galestalker[i]
 						if ("Black Spiral Dancers")
 							zalupa = auspice.spiral[i]
 					var/datum/action/T = new zalupa()
@@ -2289,7 +2289,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
 
-					var/new_tribe = tgui_input_list(user, "Choose your Tribe:", "Tribe", sortList(list("Wendigo", "Glasswalkers", "Black Spiral Dancers")))
+					var/new_tribe = tgui_input_list(user, "Choose your Tribe:", "Tribe", sortList(list("Gale Stalkers", "Glasswalkers", "Black Spiral Dancers")))
 					if (new_tribe)
 						tribe = new_tribe
 
@@ -3226,7 +3226,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
 		character.health = character.maxHealth
 		switch(tribe)
-			if("Wendigo")
+			if("Gale Stalkers")
 				character.yin_chi = 1
 				character.max_yin_chi = 1
 				character.yang_chi = 5 + (auspice_level * 2)

@@ -458,7 +458,7 @@
 				var/mob/living/carbon/wolf = src
 				msg += "<span class='purple'><i>You recognize their scent as Garou.</i></span><br>"
 				switch(wolf.auspice.tribe)
-					if ("Wendigo")
+					if ("Gale Stalkers")
 						wyld_taint++
 					if ("Glasswalkers")
 						weaver_taint++

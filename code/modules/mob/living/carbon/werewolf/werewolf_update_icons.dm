@@ -40,7 +40,7 @@
 
 	if(sprite_apparel)
 		switch(auspice.tribe)
-			if("Wendigo")
+			if("Gale Stalkers")
 				var/mutable_appearance/clothing_overlay = mutable_appearance(icon, "wendigo[sprite_apparel][laid_down ? "_rest" : ""]")
 				add_overlay(clothing_overlay)
 			if("Glasswalkers")

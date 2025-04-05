@@ -34,7 +34,7 @@
 
 /datum/action/gift/freezing_wind
 	name = "Freezing Wind"
-	desc = "Garou of Wendigo Tribe can create a stream of cold, freezing wind, and strike her foes with it."
+	desc = "Garou of Gale Stalkers Tribe can create a stream of cold, freezing wind, and strike her foes with it."
 	button_icon_state = "freezing_wind"
 	rage_req = 1
 

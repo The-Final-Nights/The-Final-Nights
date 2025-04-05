@@ -7,11 +7,11 @@
 	var/start_gnosis = 1
 	var/gnosis = 1
 	var/base_breed = "Homid"
-	var/tribe = "Wendigo"
+	var/tribe = "Gale Stalkers"
 	var/list/gifts = list()
 	var/force_abomination = FALSE
 
-	var/list/wendigo = list(
+	var/list/galestalker = list(
 		/datum/action/gift/stoic_pose = 1,
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
@@ -55,9 +55,9 @@
 				A1.Grant(C.transformator.lupus_form)
 				var/datum/action/A2 = new zalupa()
 				A2.Grant(C.transformator.crinos_form)
-		if("Wendigo")
+		if("Gale Stalkers")
 			for(var/i in 1 to level)
-				var/zalupa = wendigo[i]
+				var/zalupa = galestalker[i]
 				var/datum/action/A = new zalupa()
 				A.Grant(C)
 				var/datum/action/A1 = new zalupa()
