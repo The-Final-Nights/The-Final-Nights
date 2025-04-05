@@ -358,8 +358,8 @@
 	G.petrify(50)
 
 /mob/living/simple_animal/hostile/tzimisce_beast
-	name = "Tzimisce Beast Form"
-	desc = "The peak of abominations armor. Unbelievably undamagable..."
+	name = "zulo"
+	desc = "The first step on the Path of Metamorphosis, this horrid form is unlike anything wrought by nature."
 	icon = 'code/modules/wod13/64x64.dmi'
 	icon_state = "weretzi"
 	icon_living = "weretzi"
@@ -386,8 +386,8 @@
 	dodging = TRUE
 
 /mob/living/simple_animal/hostile/bloodcrawler
-	name = "Tzimisce Blood Form"
-	desc = "The peak of abominations. Unbelievably undamagable..."
+	name = "bloodcrawler"
+	desc = "A moving, oozing, sapient pool of blood. A stuff of nightmares."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "liquid"
 	icon_living = "liquid"
