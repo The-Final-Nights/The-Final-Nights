@@ -2,7 +2,9 @@
 /mob/verb/input_say()
 	set name = "inputSay"
 	set category = null
-	var/message = input("What are you trying to say?") as text|null
+	winset(usr, "input", "title='Say'") // Set the title to just 'Say'
+	var/message = input("") as text|null
+	winset(usr, "input", "title='Input'") // Reset title to default
 	say_verb(message)
 ///Say verb
 /mob/verb/say_verb(message as text|null)
@@ -31,7 +33,10 @@
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
 		return
+
+	winset(usr, "input", "title='Whisper'") // Set the title to just 'Whisper'
 	whisper(message)
+	winset(usr, "input", "title='Input'") // Reset title to default
 
 ///whisper a message
 /mob/proc/whisper(message, datum/language/language=null)
@@ -46,7 +51,9 @@
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 
+	winset(usr, "input", "title='Me'") // Set the title to just 'Me'
 	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+	winset(usr, "input", "title='Input'") // Reset title to default
 
 	usr.emote("me", EMOTE_VISIBLE, message, TRUE)
 // TFN EDIT END

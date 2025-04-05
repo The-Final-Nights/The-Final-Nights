@@ -384,9 +384,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	src << browse("<script>document.documentElement.className+=' dark';document.body.className+=' dark';</script>", "window=statbrowser;display=0;can_close=0;can_resize=0")
 	src << browse("<script>document.documentElement.className+=' dark';document.body.className+=' dark';</script>", "window=browseroutput;display=0;can_close=0;can_resize=0")
 
-	if(alert_mob_dupe_login)
-		spawn()
-			alert(mob, "You have logged in already with another key this round, please log out of this one NOW or risk being banned!")
+	if(alert_mob_dupe_login && !holder)
+		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
+		dupe_login_message += "\nAdmins have been informed."
+		message_admins(span_danger("<B>MULTIKEYING: </B></span><span class='notice'>[key_name_admin(src)] has a matching CID+IP with another player and is clearly multikeying. They have been warned to leave the server or risk getting banned."))
+		log_admin_private("MULTIKEYING: [key_name(src)] has a matching CID+IP with another player and is clearly multikeying. They have been warned to leave the server or risk getting banned.")
+		spawn(0.5 SECONDS) //needs to run during world init, do not convert to add timer
+			alert(mob, dupe_login_message) //players get banned if they don't see this message, do not convert to tgui_alert (or even tg_alert) please.
+			to_chat(mob, span_danger(dupe_login_message))
 
 	connection_time = world.time
 	connection_realtime = world.realtime
