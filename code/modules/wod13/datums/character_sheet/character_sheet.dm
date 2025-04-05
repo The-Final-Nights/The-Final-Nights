@@ -4,14 +4,24 @@
 	//var/tmp/mob/living/carbon/human/owner
 	var/unique_id
 	// Attributes
-	var/physique = 1
-	var/dexterity = 1
-	var/social = 1
-	var/mentality = 1
-	var/blood = 1
-	// Skills
-	var/lockpicking = 0
-	var/athletics = 0
+	var/list/attributes = list(
+		"strength" = 1,
+		"dexterity" = 1,
+		"stamina" = 1,
+		"charisma" = 1,
+		"manipulation" = 1,
+		"composure" = 1,
+		"intelligence" = 1,
+		"wits" = 1,
+		"resolve" = 1,
+	)
+	var/list/skills = list(
+		"athletics" = 0,
+		"larceny" = 0,
+	)
+
+	/// Derived from: Composure + Resolve
+	var/willpower = 0
 
 	var/additional_physique = 0
 	var/additional_dexterity = 0
@@ -21,32 +31,21 @@
 	var/additional_lockpicking = 0
 	var/additional_athletics = 0
 
-/datum/character_sheet/New(unique_id)
-	src.unique_id = unique_id
+	/// Cached list of all attributes in the game. key: attribute name -> value: attribute id
+	var/static/list/attributes_cache = list(
+		"Strength" = "strength",
+		"Dexterity" = "dexterity",
+		"Stamina" = "stamina",
+		"Charisma" = "charisma",
+		"Manipulation" = "manipulation",
+		"Composure" = "composure",
+		"Intelligence" = "intelligence",
+		"Wits" = "wits",
+		"Resolve" = "resolve"
+	)
 
-/datum/character_sheet/Destroy()
-	unique_id = null
-
-	return ..()
-
-/datum/character_sheet/ui_state(mob/user)
-	return GLOB.new_player_state
-
-/datum/character_sheet/ui_interact(mob/user, datum/tgui/ui)
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "CharacterSheet")
-		ui.open()
-
-/datum/character_sheet/ui_data(mob/user)
-	var/list/data = list()
-
-	return data
-
-/datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	. = ..()
-	if(.)
-		return
-
-	switch(action)
-		if("TO_BE_ADDED")
+	/// Cached list of all skills in the game. key: skill name -> value: skill id
+	var/static/list/skills_cache = list(
+		"Athletics" = "athletics",
+		"Larceny" = "larceny"
+	)

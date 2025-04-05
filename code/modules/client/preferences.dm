@@ -314,7 +314,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
-#define ATTRIBUTE_BASE_LIMIT 5 //Highest level that a base attribute can be upgraded to. Bonus attributes can increase the actual amount past the limit.
 
 /proc/make_font_cool(text)
 	if(text)
@@ -493,28 +492,22 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			dat += "<h2>[make_font_cool("ATTRIBUTES")]</h2>"
 
-			dat += "<b>Archetype</b><BR>"
-			var/datum/archetype/A = new archetype()
-			dat += "<a href='byond://?_src_=prefs;preference=archetype;task=input'>[A.name]</a> [A.specialization]<BR>"
+			var/attribute_cost = 5
+			var/skill_price = 3
 
-			//Prices for each ability, can be adjusted, multiplied by current attribute level
-			var/physique_price = 4
-			var/dexterity_price = 4
-			var/social_price = 4
-			var/mentality_price = 4
-			var/blood_price = 6
-			//Lockpicking and Athletics have an initial price of 3
-			var/lockpicking_price = !character_sheet.lockpicking ? 3 : 2
-			var/athletics_price = !character_sheet.athletics ? 3 : 2
+			// Key,value pair loop to map the character's attributes
+			for(var/attribute, attribute_id in character_sheet.attributes_cache)
+				debug_world("[attribute] - [attribute_id]")
+				dat += "<b>[attribute]:</b> [build_attribute_score(attribute_id, attribute_cost)]"
 
-			dat += "<b>Physique:</b> [build_attribute_score(character_sheet.physique, A.archetype_additional_physique, physique_price, "physique")]"
-			dat += "<b>Dexterity:</b> [build_attribute_score(character_sheet.dexterity, A.archetype_additional_dexterity, dexterity_price, "dexterity")]"
-			dat += "<b>Social:</b> [build_attribute_score(character_sheet.social, A.archetype_additional_social, social_price, "social")]"
-			dat += "<b>Mentality:</b> [build_attribute_score(character_sheet.mentality, A.archetype_additional_mentality, mentality_price, "mentality")]"
-			dat += "<b>Cruelty:</b> [build_attribute_score(character_sheet.blood, A.archetype_additional_blood, blood_price, "blood")]"
-			dat += "<b>Lockpicking:</b> [build_attribute_score(character_sheet.lockpicking, A.archetype_additional_lockpicking, lockpicking_price, "lockpicking")]"
-			dat += "<b>Athletics:</b> [build_attribute_score(character_sheet.athletics, A.archetype_additional_athletics, athletics_price, "athletics")]"
-			dat += "Experience rewarded: [true_experience]<BR>"
+			dat += "<h3>[make_font_cool("SKILLS")]</h3>"
+
+			// Key,value pair loop to map the character's skills
+			for(var/skill, skill_id in character_sheet.skills_cache)
+				debug_world("[skill] - [skill_id]")
+				dat += "<b>[skill]:</b> [build_attribute_score(skill_id, skill_price)]"
+
+			dat += "<BR>Experience rewarded: [true_experience]<BR>"
 			if(pref_species.name == "Werewolf")
 				dat += "<h2>[make_font_cool("TRIBE")]</h2>"
 				dat += "<br><b>Werewolf Name:</b> "
@@ -1281,18 +1274,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 //A proc that creates the score circles based on attribute and the additional bonus for the attribute
 //
-/datum/preferences/proc/build_attribute_score(var/attribute, var/bonus_number, var/price, var/variable_name)
-	var/dat
-	for(var/a in 1 to attribute)
+/datum/preferences/proc/build_attribute_score(attribute, price, bonus)
+	var/attribute_score = LAZYACCESS(character_sheet.attributes, attribute)
+
+	var/dat = ""
+	for(var/a in 1 to attribute_score)
 		dat += "•"
-	for(var/b in 1 to bonus_number)
-		dat += "•"
-	var/leftover_circles = 5 - attribute //5 is the default number of blank circles
+
+	if(bonus)
+		for(var/b in 1 to bonus)
+			dat += "•"
+
+	var/leftover_circles = 5 - attribute_score //5 is the default number of blank circles
 	for(var/c in 1 to leftover_circles)
 		dat += "o"
-	var/real_price = attribute ? (attribute*price) : price //In case we have an attribute of 0, we don't multiply by 0
-	if((true_experience >= real_price) && (attribute < ATTRIBUTE_BASE_LIMIT))
-		dat += "<a href='byond://?_src_=prefs;preference=[variable_name];task=input'>Increase ([real_price])</a>"
+
+	// New level X price, ex: Composure (2 + 1) * 5 = 15
+	var/real_price = ((attribute_score + 1) * price)
+	if((true_experience >= real_price) && (attribute_score < MAX_ATTRIBUTE_SCORE))
+		dat += "<a href='?_src_=prefs;preference=stats_set;task=update;stat=[attribute];cost=[real_price]'>Increase ([real_price])</a>"
 	dat += "<br>"
 	return dat
 
@@ -1741,6 +1741,22 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			else
 				SetQuirks(user)
 		return TRUE
+
+	else if(href_list["preference"] == "stats_set")
+		switch(href_list["task"])
+			if("update")
+				var/target_stat = href_list["stat"]
+				var/stat_score = LAZYACCESS(character_sheet.attributes, target_stat)
+				var/cost = text2num(href_list["cost"])
+
+				if(!stat_score)
+					return
+				if((true_experience < cost) || (stat_score >= MAX_ATTRIBUTE_SCORE))
+					return
+
+				true_experience -= cost
+				LAZYADDVALUE(character_sheet.attributes, target_stat, 1)
+				true_experience = clamp(true_experience, 0, 1000)
 
 	switch(href_list["task"])
 		if("random")
@@ -2249,34 +2265,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					true_experience -= cost
 					auspice_level = max(1, auspice_level + 1)
 
-				if("physique")
-					if(handle_upgrade(character_sheet.physique, character_sheet.physique * 4))
-						character_sheet.physique++
-
-				if("dexterity")
-					if(handle_upgrade(character_sheet.dexterity, character_sheet.dexterity * 4))
-						character_sheet.dexterity++
-
-				if("social")
-					if(handle_upgrade(character_sheet.social, character_sheet.social * 4))
-						character_sheet.social++
-
-				if("mentality")
-					if(handle_upgrade(character_sheet.mentality, character_sheet.mentality * 4))
-						character_sheet.mentality++
-
-				if("blood")
-					if(handle_upgrade(character_sheet.blood, character_sheet.blood * 6))
-						character_sheet.blood++
-
-				if("lockpicking")
-					if(handle_upgrade(character_sheet.lockpicking, character_sheet.lockpicking ? character_sheet.lockpicking*2 : 3))
-						character_sheet.lockpicking++
-
-				if("athletics")
-					if(handle_upgrade(character_sheet.athletics, character_sheet.athletics ? character_sheet.athletics*2 : 3))
-						character_sheet.athletics++
-
 				if("tribe")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
@@ -2321,13 +2309,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/i = text2num(href_list["upgradediscipline"])
 
 						var/discipline_level = discipline_levels[i]
-						var/cost = discipline_level * 7
+						var/cost = (discipline_level + 1) * 7
 						if (discipline_level <= 0)
 							cost = 10
 						else if (clane.name == "Caitiff")
-							cost = discipline_level * 6
+							cost = (discipline_level + 1) * 6
 						else if (clane.clane_disciplines.Find(discipline_types[i]))
-							cost = discipline_level * 5
+							cost = (discipline_level + 1) * 5
 
 						if ((true_experience < cost) || (discipline_level >= 5))
 							return
@@ -2339,7 +2327,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/a = text2num(href_list["upgradechidiscipline"])
 
 						var/discipline_level = discipline_levels[a]
-						var/cost = discipline_level * 6
+						var/cost = (discipline_level + 1) * 6
 						if (discipline_level <= 0)
 							cost = 10
 
@@ -3123,12 +3111,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	save_preferences()
 	save_character()
 	ShowChoices(user)
-	return TRUE
-
-/datum/preferences/proc/handle_upgrade(var/number, var/cost)
-	if ((true_experience < cost) || (number >= ATTRIBUTE_BASE_LIMIT))
-		return FALSE
-	true_experience -= cost
 	return TRUE
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE)
