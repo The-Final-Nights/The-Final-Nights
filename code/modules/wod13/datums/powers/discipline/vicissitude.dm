@@ -38,7 +38,7 @@
 	name = "surgical fang"
 	desc = "A spiral fang that bores into the flesh with reckless glee."
 	icon_state = "drill_vic"
-	hitsound = 'sound\effects\wounds\blood2.ogg'
+	hitsound = 'sound/effects/wounds/blood2.ogg'
 
 /obj/item/scalpel/augment/vicissitude
 	name = "scalpel claw"
@@ -49,7 +49,7 @@
 	name = "circular jaw"
 	desc = "A spinning disc of teeth, screaming, as it bites through the flesh."
 	icon_state = "saw_vic"
-	hitsound = 'sound\effects\wounds\blood2.ogg'
+	hitsound = 'sound/effects/wounds/blood2.ogg'
 
 /obj/item/surgical_drapes/vicissitude
 	name = "skin drape"
