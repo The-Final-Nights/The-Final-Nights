@@ -37,6 +37,11 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
 		return
 
+	// Inject dark theme CSS for browser windows
+	if(href_list["window"] && !findtext(href, "statbrowser:"))
+		spawn(2) // Add a slight delay to ensure the window is created
+			apply_dark_theme(href_list["window"])
+
 	// asset_cache
 	var/asset_cache_job
 	if(href_list["asset_cache_confirm_arrival"])
@@ -330,7 +335,31 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	// Initialize stat panel
 	stat_panel.initialize(
-		inline_html = file2text('html/statbrowser.html'),
+		inline_html = {"
+			<div class='stat-container'>
+				<div id='menu' class='button-container'></div>
+				<div id='under-menu'></div>
+				<div id='statcontent' style='background-color: #151515;color: #b2c4dd;'></div>
+				<div id='under-content'></div>
+			</div>
+			<style>
+				html, body, #statcontent, .stat-container {
+					background-color: #151515 !important;
+					color: #b2c4dd !important;
+				}
+				#statcontent {
+					background-color: #151515 !important;
+					color: #b2c4dd !important;
+				}
+				#statcontent * {
+					background-color: transparent !important;
+				}
+			</style>
+			<script>
+				document.documentElement.className += ' dark';
+				document.body.className += ' dark';
+			</script>
+		"},
 		inline_js = file2text('html/statbrowser.js'),
 		inline_css = file2text('html/statbrowser.css'),
 	)
@@ -338,6 +367,22 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	// Initialize tgui panel
 	tgui_panel.initialize()
+
+	// Force dark theme for all windows using direct BYOND window styling
+	winset(src, null, "background-color=#151515;text-color=#b2c4dd")
+	winset(src, "statbrowser", "background-color=#151515;text-color=#b2c4dd")
+	winset(src, "browseroutput", "background-color=#151515;text-color=#b2c4dd")
+	winset(src, "outputwindow", "background-color=#151515;text-color=#b2c4dd")
+	winset(src, "mainwindow", "background-color=#151515;text-color=#b2c4dd")
+	winset(src, "info", "background-color=#151515;text-color=#b2c4dd")
+	winset(src, "browserwindow", "background-color=#151515;text-color=#b2c4dd")
+
+	// Force dark theme for all browser windows
+	src << browse("<style>html, body, * { background-color: #151515 !important; color: #b2c4dd !important; }</style>", "window=darktheme;display=0;can_close=0;can_resize=0")
+
+	// Apply dark theme to specific browser windows by injecting CSS
+	src << browse("<script>document.documentElement.className+=' dark';document.body.className+=' dark';</script>", "window=statbrowser;display=0;can_close=0;can_resize=0")
+	src << browse("<script>document.documentElement.className+=' dark';document.body.className+=' dark';</script>", "window=browseroutput;display=0;can_close=0;can_resize=0")
 
 	if(alert_mob_dupe_login)
 		spawn()
@@ -1197,3 +1242,15 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	SEND_SOUND(usr, sound(null))
 	tgui_panel?.stop_music()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Stop Self Sounds"))
+
+// Apply dark theme to a window - using BYOND's native styling
+/client/proc/apply_dark_theme(window_name)
+	if(!window_name)
+		return
+
+	// Apply direct BYOND styling
+	winset(src, window_name, "background-color=#151515;text-color=#b2c4dd")
+
+	// Simple CSS for basic consistency
+	var/dark_css = "<style>body{background-color:#151515;color:#b2c4dd;}</style>"
+	src << browse(dark_css, "window=[window_name]")

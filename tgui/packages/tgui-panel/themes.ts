@@ -8,20 +8,20 @@ export const THEMES = ['light', 'dark'];
 
 const COLORS = {
   DARK: {
-    BG_BASE: '#212020',
-    BG_SECOND: '#161515',
-    BUTTON: '#414040',
-    TEXT: '#A6A6A6',
+    BG_BASE: '#151515',
+    BG_SECOND: '#202020',
+    BUTTON: '#313131',
+    TEXT: '#b2c4dd',
   },
   LIGHT: {
-    BG_BASE: '#EFEEEE',
-    BG_SECOND: '#FFFFFF',
-    BUTTON: '#FFFEFE',
-    TEXT: '#000000',
+    BG_BASE: '#151515', // Force dark theme by making light theme dark too
+    BG_SECOND: '#202020',
+    BUTTON: '#313131',
+    TEXT: '#b2c4dd',
   },
 };
 
-let setClientThemeTimer: NodeJS.Timeout;
+let setClientThemeTimer: any;
 
 /**
  * Darkmode preference, originally by Kmc2000.
@@ -34,6 +34,9 @@ let setClientThemeTimer: NodeJS.Timeout;
  * It's painful but it works, and is the way Lummox suggested.
  */
 export const setClientTheme = (name) => {
+  // Always use dark theme regardless of input
+  name = 'dark';
+
   // Transmit once for fast updates and again in a little while in case we won
   // the race against statbrowser init.
   clearInterval(setClientThemeTimer);

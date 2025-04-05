@@ -218,8 +218,9 @@ window "outputwindow"
 		type = MAIN
 		pos = 0,0
 		size = 640x480
-		anchor1 = -1, -1
-		anchor2 = -1, -1
+		anchor1 = -1,-1
+		anchor2 = -1,-1
+		background-color = #151515
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-pane = true
 	elem "input"
@@ -228,6 +229,8 @@ window "outputwindow"
 		size = 517x20
 		anchor1 = 0,100
 		anchor2 = 100,100
+		background-color = #151515
+		text-color = #b2c4dd
 		is-default = true
 		border = line
 		saved-params = "command"
@@ -287,7 +290,7 @@ window "output_legacy"
 		size = 640x456
 		anchor1 = -1,-1
 		anchor2 = -1,-1
-		background-color = none
+		background-color = #151515
 		saved-params = "pos;size;is-minimized;is-maximized"
 		is-pane = true
 	elem "output"
@@ -296,6 +299,8 @@ window "output_legacy"
 		size = 640x456
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = #151515
+		text-color = #b2c4dd
 		is-default = true
 		saved-params = ""
 
@@ -371,5 +376,7 @@ window "statwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = #151515
+		text-color = #b2c4dd
 		is-visible = false
 		saved-params = ""

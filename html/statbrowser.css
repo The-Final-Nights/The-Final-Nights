@@ -1,14 +1,57 @@
-.light:root {
-	--scrollbar-base: #f2f2f2;
-	--scrollbar-thumb: #a7a7a7;
+/**
+ * MARK: Force dark theme by default
+ */
+:root {
+	--scrollbar-base: #151515;
+	--scrollbar-thumb: #363636;
 }
 
-html,
-body {
-	scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-base);
+/* Force dark theme with higher specificity selectors */
+html, body, #statcontent, .stat-container, div {
+	background-color: #151515 !important;
+	color: #b2c4dd !important;
+}
+
+#statcontent {
+	background-color: #151515 !important;
+	color: #b2c4dd !important;
+	flex: 1;
+	padding: 0.75em 0.5em;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+/* Force all direct children of statcontent to have proper colors */
+#statcontent > * {
+	background-color: #151515 !important;
+	color: #b2c4dd !important;
+}
+
+/* Make sure text is visible */
+#statcontent div, #statcontent span, #statcontent a {
+	color: #b2c4dd !important;
+}
+
+/* Exception for red-colored text that should remain visible */
+#statcontent [style*="color: red"],
+#statcontent [style*="color:#ff0000"],
+#statcontent [style*="color: #ff0000"] {
+	color: #ff0000 !important;
+}
+
+/* Apply styles to all children through deep nesting */
+#statcontent * {
+	background-color: transparent !important;
 }
 
 body {
+	scrollbar-base-color: #1c1c1c;
+	scrollbar-face-color: #3b3b3b;
+	scrollbar-3dlight-color: #252525;
+	scrollbar-highlight-color: #252525;
+	scrollbar-track-color: #1c1c1c;
+	scrollbar-arrow-color: #929292;
+	scrollbar-shadow-color: #3b3b3b;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	font-size: 12px;
 	margin: 0 !important;
@@ -17,12 +60,14 @@ body {
 }
 
 a {
-	color: #003399;
+	color: #6699ff !important;
 	text-decoration: none;
 }
 
-a:hover {
-	color: #007fff;
+a:hover,
+.grid-item:hover,
+.grid-item:active {
+	color: #80bfff !important;
 }
 
 h3 {
@@ -48,7 +93,7 @@ img {
 	overflow-x: auto;
 	overflow-y: hidden;
 	padding: 0.25em 0.25em 0;
-	background-color: #ffffff;
+	background-color: #151515 !important;
 }
 
 .menu-wrap {
@@ -68,7 +113,7 @@ img {
 }
 
 #menu.tabs-classic .button.active {
-	background-color: #0668b8;
+	background-color: #20b142;
 	color: white;
 }
 
@@ -81,38 +126,31 @@ img {
 	min-width: 2.9em;
 	padding: 0.5em 0.5em 0.4em;
 	background-color: transparent;
-	color: rgba(0, 0, 0, 0.5);
+	color: rgba(255, 255, 255, 0.5) !important;
 	border: 0;
 	border-bottom: 0.1667em solid transparent;
 	border-radius: 0.25em 0.25em 0 0;
 }
 
 .button:hover {
-	background-color: #ececec;
+	background-color: #252525 !important;
 }
 
 .button.active {
 	cursor: default;
-	background-color: #dfdfdf;
-	color: black;
-	border-bottom-color: #000000;
+	background-color: #313131 !important;
+	color: #d4dfec !important;
+	border-bottom-color: #d4dfec !important;
 }
 
 #under-menu {
 	height: 0.5em;
-	background-color: #eeeeee;
+	background-color: #202020 !important;
 }
 
 #under-content {
 	height: calc(0.5em - 4px);
-	background-color: #eeeeee;
-}
-
-#statcontent {
-	flex: 1;
-	padding: 0.75em 0.5em;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	background-color: #202020 !important;
 }
 
 .grid-container {
@@ -127,7 +165,7 @@ img {
 	max-height: 1.85em;
 	text-decoration: none;
 	background-color: transparent;
-	color: black;
+	color: #b2c4dd !important;
 }
 
 .grid-item:hover,
@@ -151,11 +189,11 @@ img {
 	height: 100%;
 	overflow: visible;
 	white-space: normal;
-	background-color: #ececec;
+	background-color: #252525 !important;
 }
 
 .grid-item:active .grid-item-text  {
-	background-color: #dfdfdf;
+	background-color: #313131 !important;
 }
 
 @media only screen and (min-width: 300px) {
@@ -189,73 +227,4 @@ img {
 .interview_panel_stats,
 .interview_panel_controls {
 	margin-bottom: 1em;
-}
-
-/**
- * MARK: Dark theme colors
- */
-.dark:root {
-	--scrollbar-base: #151515;
-	--scrollbar-thumb: #363636;
-}
-
-body.dark {
-	background-color: #151515;
-	color: #b2c4dd;
-	scrollbar-base-color: #1c1c1c;
-	scrollbar-face-color: #3b3b3b;
-	scrollbar-3dlight-color: #252525;
-	scrollbar-highlight-color: #252525;
-	scrollbar-track-color: #1c1c1c;
-	scrollbar-arrow-color: #929292;
-	scrollbar-shadow-color: #3b3b3b;
-}
-
-.dark a {
-	color: #6699ff;
-}
-
-.dark a:hover,
-.dark .grid-item:hover,
-.dark .grid-item:active {
-	color: #80bfff;
-}
-
-.dark #menu {
-	background-color: #151515;
-}
-
-.dark #menu.tabs-classic .button.active {
-	background-color: #20b142;
-}
-
-.dark .button {
-	color: rgba(255, 255, 255, 0.5);
-}
-
-.dark .button:hover {
-	background-color: #252525;
-}
-
-.dark .button.active  {
-	background-color: #313131;
-	color: #d4dfec;
-	border-bottom-color: #d4dfec;
-}
-
-.dark #under-menu,
-.dark #under-content {
-	background-color: #202020;
-}
-
-.dark .grid-item{
-	color: #b2c4dd;
-}
-
-.dark .grid-item:hover .grid-item-text {
-	background-color: #252525;
-}
-
-.dark .grid-item:active .grid-item-text {
-	background-color: #313131;
 }

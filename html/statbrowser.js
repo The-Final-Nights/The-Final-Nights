@@ -817,6 +817,10 @@ if (!current_tab) {
 }
 
 window.onload = function () {
+	// Force dark theme on load
+	document.documentElement.className += ' dark';
+	document.body.className += ' dark';
+	// Call for verbs update
 	Byond.command("Update-Verbs");
 };
 
