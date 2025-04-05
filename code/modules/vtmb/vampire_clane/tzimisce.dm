@@ -242,26 +242,6 @@
 	bloodpool = 2
 	maxbloodpool = 2
 
-/mob/living/simple_animal/hostile/biter/lasombra
-	name = "shadow abomination"
-	mob_biotypes = MOB_SPIRIT
-	icon_state = "shadow"
-	icon_living = "shadow"
-	del_on_death = TRUE
-	maxHealth = 100
-	health = 100
-	bloodpool = 0
-	maxbloodpool = 0
-	faction = list("Lasombra")
-
-/mob/living/simple_animal/hostile/biter/lasombra/better
-	icon_state = "shadow2"
-	icon_living = "shadow2"
-	maxHealth = 200
-	health = 200
-	melee_damage_lower = 50
-	melee_damage_upper = 50
-
 /mob/living/simple_animal/hostile/fister
 	name = "szlachta"
 	desc = "A perversion of human form, waddling on a pair of overdeveloped arms."
@@ -314,50 +294,6 @@
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 7
 	maxbloodpool = 7
-
-/mob/living/simple_animal/hostile/gangrel
-	name = "Gangrel Form"
-	desc = "The peak of abominations armor. Unbelievably undamagable..."
-	icon = 'code/modules/wod13/32x48.dmi'
-	icon_state = "gangrel_f"
-	icon_living = "gangrel_f"
-	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mob_size = MOB_SIZE_HUGE
-	speak_chance = 0
-	speed = -0.4
-	maxHealth = 275
-	health = 275
-	butcher_results = list(/obj/item/stack/human_flesh = 10)
-	harm_intent_damage = 5
-	melee_damage_lower = 30
-	melee_damage_upper = 30
-	attack_verb_continuous = "slashes"
-	attack_verb_simple = "slash"
-	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
-	minbodytemp = 0
-	bloodpool = 10
-	maxbloodpool = 10
-	dextrous = TRUE
-	held_items = list(null, null)
-	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
-
-/mob/living/simple_animal/hostile/gangrel/better
-	maxHealth = 325
-	health = 325
-	melee_damage_lower = 35
-	melee_damage_upper = 35
-	speed = -0.6
-
-/mob/living/simple_animal/hostile/gangrel/best
-	icon_state = "gangrel_m"
-	icon_living = "gangrel_m"
-	maxHealth = 400 //More in line with new health values.
-	health = 400
-	melee_damage_lower = 40
-	melee_damage_upper = 40
-	speed = -0.8
 
 /mob/living/simple_animal/hostile/gargoyle
 	name = "Gargoyle"
