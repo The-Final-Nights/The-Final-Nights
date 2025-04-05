@@ -201,7 +201,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["tip_delay"], tip_delay)
 	READ_FILE(S["pda_style"], pda_style)
 	READ_FILE(S["pda_color"], pda_color)
-	READ_FILE(S["equipped_gear"], equipped_gear)
 
 	// Custom hotkeys
 	READ_FILE(S["key_bindings"], key_bindings)
@@ -336,7 +335,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pda_color"], pda_color)
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["hearted_until"], (hearted_until > world.realtime ? hearted_until : null))
-	WRITE_FILE(S["equipped_gear"], equipped_gear)
 	return TRUE
 
 /datum/preferences/proc/load_character(slot)
@@ -490,6 +488,20 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	else
 		READ_FILE(S["feature_human_tail"], features["tail_human"])
 		READ_FILE(S["feature_human_ears"], features["ears"])
+
+	READ_FILE(S["equipped_gear"], equipped_gear)
+	if(config) //This should *probably* always be there, but just in case.
+		if(length(equipped_gear) > CONFIG_GET(number/max_loadout_items))
+			to_chat(parent, span_userdanger("Loadout maximum items exceeded in loaded slot, Your loadout has been cleared! You had [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)] equipped items!"))
+			equipped_gear = list()
+			WRITE_FILE(S["equipped_gear"], equipped_gear)
+
+	for(var/gear in equipped_gear)
+		if(!(gear in GLOB.gear_datums))
+			to_chat(parent, span_warning("Removing nonvalid loadout item [gear] from loadout"))
+			equipped_gear -= gear //be GONE
+			WRITE_FILE(S["equipped_gear"], equipped_gear)
+
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -814,6 +826,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["chi_types"], chi_types)
 	WRITE_FILE(S["chi_levels"], chi_levels)
 	WRITE_FILE(S["path"], morality_path.name)
+	WRITE_FILE(S["equipped_gear"], equipped_gear)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)

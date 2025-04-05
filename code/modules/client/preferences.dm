@@ -107,6 +107,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// 0 = character settings, 1 = game preferences
 	var/current_tab = 0
 
+	var/show_gear = TRUE
+	var/show_loadout = TRUE
+
 	var/unlock_content = 0
 
 	var/list/ignoring = list()
@@ -335,6 +338,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return coolfont
 
 /datum/preferences/proc/ShowChoices(mob/user)
+	show_loadout = (current_tab != 1) ? show_loadout : FALSE
+	show_gear = (current_tab != 1)
 	if(!SSatoms.initialized)
 		to_chat(user, span_warning("Please wait for the game to do a little more setup first...!"))
 		return
@@ -343,7 +348,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(slot_randomized)
 		load_character(default_slot) // Reloads the character slot. Prevents random features from overwriting the slot if saved.
 		slot_randomized = FALSE
-	update_preview_icon()
+	update_preview_icon(show_gear, show_loadout)
 	var/list/dat = list("<center>")
 
 	if(istype(user, /mob/dead/new_player))
@@ -1155,6 +1160,24 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<b>Preferred Map:</b> <a href='?_src_=prefs;preference=preferred_map;task=input'>[p_map]</a><br>"
 
 		if(2) //Loadout
+			if(path)
+				var/savefile/S = new /savefile(path)
+				if(S)
+					dat += "<center>"
+					var/name
+					var/unspaced_slots = 0
+					for(var/i=1, i<=max_save_slots, i++)
+						unspaced_slots++
+						if(unspaced_slots > 4)
+							dat += "<br>"
+							unspaced_slots = 0
+						S.cd = "/character[i]"
+						S["real_name"] >> name
+						if(!name)
+							name = "Character[i]"
+						dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[i];' [i == default_slot ? "class='linkOn'" : ""]>[name]</a> "
+					dat += "</center>"
+					dat += "<HR>"
 			var/list/type_blacklist = list()
 			if(equipped_gear && length(equipped_gear))
 				for(var/i = 1, i <= length(equipped_gear), i++)
@@ -1813,24 +1836,26 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					alert(user, "You can't have more than [CONFIG_GET(number/max_loadout_items)] items in your loadout!")
 					return
 				var/list/type_blacklist = list()
-				var/list/slot_blacklist = list()
 				for(var/gear_name in equipped_gear)
 					var/datum/gear/G = GLOB.gear_datums[gear_name]
 					if(istype(G))
 						if(G.subtype_path in type_blacklist)
 							continue
 						type_blacklist += G.subtype_path
-				if(!(TG.subtype_path in type_blacklist) || !(TG.slot in slot_blacklist))
+				if(!(TG.subtype_path in type_blacklist))
 					equipped_gear += TG.display_name
 				else
 					alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
-			save_preferences()
+			save_character()
+
 
 		else if(href_list["select_category"])
 			gear_tab = href_list["select_category"]
 		else if(href_list["clear_loadout"])
 			equipped_gear.Cut()
-			save_preferences()
+			save_character()
+		else if(href_list["toggle_loadout"])
+			show_loadout = !show_loadout
 
 		ShowChoices(user)
 		return
@@ -2589,7 +2614,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					to_chat(user, span_notice("Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<b>do not use a real life photo or use any image that is less than serious.</b>"]"))
 					to_chat(user, span_notice("If the photo doesn't show up properly in-game, ensure that it's a direct image link that opens properly in a browser."))
 					to_chat(user, span_notice("Resolution: 250x250 pixels."))
-					var/new_headshot_link = tgui_input_text(user, "Input the headshot link (https, hosts: gyazo, discord, lensdump, imgbox, catbox):", "Headshot", headshot_link, encode = FALSE)
+					var/new_headshot_link = tgui_input_text(user, "Input the headshot link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Headshot", headshot_link, encode = FALSE)
 					if(isnull(new_headshot_link))
 						return
 					if(!length(new_headshot_link))
@@ -3197,6 +3222,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("tab")
 					if (href_list["tab"])
 						current_tab = text2num(href_list["tab"])
+						if(current_tab == 2)
+							show_loadout = TRUE
 
 				if("clear_heart")
 					hearted = FALSE
@@ -3215,7 +3242,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	true_experience -= cost
 	return TRUE
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE, loadout = FALSE)
 
 	hardcore_survival_score = 0 //Set to 0 to prevent you getting points from last another time.
 
@@ -3380,6 +3407,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.backpack = backpack
 
 	character.jumpsuit_style = jumpsuit_style
+
+	if(loadout)
+		for(var/gear in equipped_gear)
+			var/datum/gear/G = GLOB.gear_datums[gear]
+			if(G?.slot)
+				if(!character.equip_to_slot_or_del(G.spawn_item(character, character), G.slot))
+					continue
 
 	var/datum/species/chosen_species
 	chosen_species = pref_species.type

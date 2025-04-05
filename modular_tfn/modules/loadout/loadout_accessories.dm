@@ -3,6 +3,9 @@
 	slot = ITEM_SLOT_NECK
 	sort_category = "Accessories"
 
+/datum/gear/accessory/scarf
+	subtype_path = /datum/gear/accessory/scarf
+
 /datum/gear/accessory/scarf/red
 	display_name = "scarf, red"
 	path = /obj/item/clothing/neck/scarf/red

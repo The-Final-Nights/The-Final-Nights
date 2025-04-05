@@ -9,8 +9,8 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	category = cat
 	..()
 
+///Create a list of gear datums to sort
 /proc/populate_gear_list()
-	//create a list of gear datums to sort
 	for(var/geartype in subtypesof(/datum/gear))
 		var/datum/gear/G = geartype
 
@@ -20,11 +20,11 @@ GLOBAL_LIST_EMPTY(gear_datums)
 		if(G == initial(G.subtype_path))
 			continue
 
-		if(!use_name)
-			WARNING("Loadout - Missing display name: [G]")
+		if(!use_name && initial(G.path))
+			WARNING("Loadout gear [G] is missing display name")
 			continue
 		if(!initial(G.path))
-			WARNING("Loadout - Missing path definition: [G]")
+			WARNING("Loadout gear [G] is missing path definition")
 			continue
 
 		if(!GLOB.loadout_categories[use_category])
@@ -40,24 +40,32 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	return 1
 
 /datum/gear
-	var/display_name       //Name/index. Must be unique.
-	var/description        //Description of this gear. If left blank will default to the description of the pathed item.
-	var/path               //Path to item.
-	var/slot               //Slot to equip to.
-	var/list/allowed_roles //Roles that can spawn with this item.
-	var/list/species_blacklist //Stop certain species from receiving this gear
-	var/list/species_whitelist //Only allow certain species to receive this gear
+	///Name/index. Must be unique.
+	var/display_name
+	///Description of this gear. If left blank will default to the description of the pathed item.
+	var/description
+	///Path to item.
+	var/path
+	///Slot to equip to.
+	var/slot
+	///Roles that can spawn with this item.
+	var/list/allowed_roles
+	///Stop certain species from receiving this gear
+	var/list/species_blacklist
+	///Only allow certain species to receive this gear
+	var/list/species_whitelist
+	///A list of jobs with typepaths to the loadout item the job should recieve
+	var/list/role_replacements
+	///The sub tab under gear that the loadout item is listed under
 	var/sort_category = "General"
-	var/subtype_path = /datum/gear //for skipping organizational subtypes (optional)
+	///for skipping organizational subtypes (optional)
+	var/subtype_path = /datum/gear
 
 /datum/gear/New()
 	..()
 	if(!description)
 		var/obj/O = path
 		description = initial(O.desc)
-
-/datum/gear/proc/purchase(client/C) //Called when the gear is first purchased
-	return
 
 /datum/gear_data
 	var/path
@@ -68,6 +76,13 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	location = nlocation
 
 /datum/gear/proc/spawn_item(location, mob/owner)
-	var/datum/gear_data/gd = new(path, location)
-	var/item = new gd.path(gd.location)
-	return item
+	var/datum/gear_data/gd
+	if(role_replacements) //If the owner is a carbon and the item in question has a role replacement
+		var/job = owner.job || owner.mind?.assigned_role
+		if(job in role_replacements) //If the job has an applicable replacement
+			gd = new(role_replacements[job], location)
+			return new gd.path(gd.location)
+
+	gd = new(path, location) //Else, just give them the item and be done with it
+
+	return new gd.path(gd.location)

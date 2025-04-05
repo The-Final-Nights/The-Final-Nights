@@ -92,8 +92,6 @@
 	var/duty
 	var/v_duty
 
-	var/tmp/list/gear_leftovers = list()
-
 /datum/job/New()
 	. = ..()
 	var/list/jobs_changes = GetMapChanges()
@@ -127,6 +125,8 @@
 	if(!iscarbon(H))
 		return
 
+	var/list/gear_leftovers
+
 	var/mob/living/carbon/human/spawnee = H
 
 	if(M.client && (M.client.prefs.equipped_gear && M.client.prefs.equipped_gear.len))
@@ -151,22 +151,20 @@
 				if(!permitted)
 					to_chat(M, "<span class='warning'>Your current species or role does not permit you to spawn with [gear]!</span>")
 					continue
-
+				if(G.slot == ITEM_SLOT_ICLOTHING)
+					continue // Handled in pre_equip
 				if(G.slot)
-					if(H.equip_to_slot_or_del(G.spawn_item(H), G.slot))
-						to_chat(M, "<span class='notice'>Equipping you with [gear]!</span>")
-					else
-						gear_leftovers += G
+					if(!H.equip_to_slot_or_del(G.spawn_item(H, owner = H), G.slot))
+						LAZYADD(gear_leftovers, G)
 				else
-					gear_leftovers += G
-
+					LAZYADD(gear_leftovers, G)
 			else
 				M.client.prefs.equipped_gear -= gear
 
-	if(gear_leftovers.len)
+	if(gear_leftovers?.len)
 		for(var/datum/gear/G in gear_leftovers)
 			var/metadata = M.client.prefs.equipped_gear[G.display_name]
-			var/item = G.spawn_item(null, metadata)
+			var/item = G.spawn_item(null, metadata, owner = H)
 			var/atom/placed_in = spawnee.equip_or_collect(item)
 
 			if(istype(placed_in))
@@ -185,7 +183,7 @@
 
 			var/obj/item/storage/B = (locate() in H)
 			if(B)
-				G.spawn_item(B, metadata)
+				G.spawn_item(B, metadata, owner = H)
 				to_chat(M, "<span class='notice'>Placing [G.display_name] in [B.name]!</span>")
 				continue
 
@@ -348,7 +346,7 @@
 
 	var/pda_slot = ITEM_SLOT_BELT
 
-/datum/outfit/job/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+/datum/outfit/job/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
 	switch(H.backpack)
 		if(GBACKPACK)
 			back = /obj/item/storage/backpack //Grey backpack
@@ -374,6 +372,20 @@
 	else
 		holder = "[uniform]"
 	uniform = text2path(holder)
+
+	if(H.jumpsuit_style == PREF_LOADOUT)
+		if (preference_source == null)
+			holder = "[uniform]" // Who are we getting the loadout pref from anyways?
+		else
+			var/datum/pref_loadout_uniform = null
+			for(var/gear in preference_source.prefs.equipped_gear)
+				var/datum/gear/G = GLOB.gear_datums[gear]
+				if (G.slot == ITEM_SLOT_ICLOTHING)
+					pref_loadout_uniform = G.path
+			if (pref_loadout_uniform == null)
+				holder = "[uniform]"
+			else
+				uniform = pref_loadout_uniform
 
 /datum/outfit/job/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null) // TFN EDIT: alt job titles
 	if(visualsOnly)
