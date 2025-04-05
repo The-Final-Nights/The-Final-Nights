@@ -2482,16 +2482,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				// TODO: Completely revamp flavor text into a more expansive system - TFN
 				// TFN EDIT ADDITION START: character headshots & flavortext
 				if("ooc_notes")
-					var/new_ooc_notes = tgui_input_text(user, "Choose your character's OOC notes:", "Character Preference", ooc_notes, MAX_MESSAGE_LEN, multiline = TRUE)
+					var/new_ooc_notes = tgui_input_text(user, "Choose your character's OOC notes:", "Character Preference", ooc_notes, MAX_MESSAGE_LEN, multiline = TRUE, encode = FALSE)
 					if(!length(new_ooc_notes))
 						return
-					ooc_notes = new_ooc_notes
+					ooc_notes = STRIP_HTML_SIMPLE(new_ooc_notes, MAX_MESSAGE_LEN)
 
 				if("flavor_text")
-					var/new_flavor = tgui_input_text(user, "Choose your character's flavor text:", "Character Preference", flavor_text, MAX_FLAVOR_LEN, multiline = TRUE)
+					var/new_flavor = tgui_input_text(user, "Choose your character's flavor text:", "Character Preference", flavor_text, MAX_FLAVOR_LEN, multiline = TRUE, encode = FALSE)
 					if(!length(new_flavor))
 						return
-					flavor_text = new_flavor
+					flavor_text = STRIP_HTML_SIMPLE(new_flavor, MAX_FLAVOR_LEN)
 
 				if("view_flavortext")
 					var/datum/browser/popup = new(user, "[real_name]_flavortext", real_name, 500, 200)
