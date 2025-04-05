@@ -94,7 +94,7 @@
 	name = "Implanting Flesh Device"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/melee/vampirearms/knife = 1, /obj/item/drinkable_bloodpack = 1)
-	result = /obj/item/autosurgeon/organ
+	result = /obj/item/autosurgeon/organ/vicissitude
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -206,8 +206,8 @@
 	category = CAT_TZIMISCE
 
 /mob/living/simple_animal/hostile/biter
-	name = "biter"
-	desc = "A ferocious, fang-bearing creature that resembles a spider."
+	name = "szlachta"
+	desc = "The human form twisted to a breaking point, into a vague resemblence of a fanged spider."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "biter"
 	icon_living = "biter"
@@ -263,8 +263,8 @@
 	melee_damage_upper = 50
 
 /mob/living/simple_animal/hostile/fister
-	name = "fister"
-	desc = "True abomination walking on both hands."
+	name = "szlachta"
+	desc = "A perversion of human form, waddling on a pair of overdeveloped arms."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "fister"
 	icon_living = "fister"
@@ -290,8 +290,8 @@
 	maxbloodpool = 5
 
 /mob/living/simple_animal/hostile/tanker
-	name = "tanker"
-	desc = "The peak of abominations armor. Unbelievably undamagable..."
+	name = "szlachta"
+	desc = "A bloated parody of the human form, possessing an immense bulk."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "tanker"
 	icon_living = "tanker"
@@ -496,7 +496,7 @@
 	singular_name = "human flesh"
 	icon_state = "human"
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
-	mats_per_unit = list(/datum/material/pizza = MINERAL_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/meat = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/human_flesh
 	max_amount = 50
 
@@ -537,3 +537,8 @@
 		playsound(get_turf(M), 'sound/misc/splort.ogg', 50, 1)
 		desc += "Looks like it's been used up."
 
+/obj/item/autosurgeon/organ/vicissitude
+	name = "little brother"
+	desc = "A talented fleshcrafted creature that can insert an implant or organ into its master without the hassle of extensive surgery. \
+		Its mouth is eagerly awaiting implants or organs. However, it's quite greedy, so a screwdriver must be used to pry away accidentally added items."
+	icon = 'code/modules/wod13/icons.dmi'
