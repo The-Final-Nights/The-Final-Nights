@@ -49,22 +49,6 @@
 	H.equip_in_one_of_slots(heirloom, slots, FALSE)
 	heirl = heirloom
 
-/datum/crafting_recipe/stake
-	name = "Stake"
-	time = 50
-	reqs = list(/obj/item/stack/sheet/mineral/wood = 5)
-	result = /obj/item/vampire_stake
-	always_available = TRUE
-	category = CAT_WEAPON
-
-/datum/crafting_recipe/molotov
-	name = "Molotov Cocktail"
-	time = 50
-	reqs = list(/obj/item/stack/sheet/cloth = 1, /obj/item/reagent_containers/food/drinks/beer/vampire = 1, /obj/item/gas_can = 1)
-	result = /obj/item/molotov
-	always_available = TRUE
-	category = CAT_WEAPON
-
 /datum/crafting_recipe/tzi_trench
 	name = "Leather-Bone Trenchcoat (Armor)"
 	time = 50
@@ -80,7 +64,6 @@
 	result = /obj/item/organ/cyberimp/arm/medibeam
 	always_available = FALSE
 	category = CAT_TZIMISCE
-
 
 /datum/crafting_recipe/tzi_heart
 	name = "Second Heart (Antistun)"
