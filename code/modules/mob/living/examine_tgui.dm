@@ -70,7 +70,7 @@
 
 	data["obscured"] = obscured ? TRUE : FALSE
 	data["character_name"] = name
-	data["flavor_text"] = html_decode(flavor_text)
-	data["ooc_notes"] = html_decode(ooc_notes)
+	data["flavor_text"] = flavor_text
+	data["ooc_notes"] = ooc_notes
 	data["headshot"] = headshot
 	return data
