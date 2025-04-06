@@ -50,14 +50,6 @@ ADD COLUMN `admin_ckey` VARCHAR(32) NOT NULL DEFAULT '*no key*' AFTER `ckey2`;
 Version 5.19, 10 November 2021, by WalterMeldron
 Adds an urgent column to tickets for ahelps marked as urgent.
 
-```sql
-ALTER TABLE `ticket` ADD COLUMN `urgent` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER `sender`;
-```
-
------------------------------------------------------
-Version 5.19, 10 November 2021, by WalterMeldron
-Adds an urgent column to tickets for ahelps marked as urgent.
-
 ```
 ALTER TABLE `ticket` ADD COLUMN `urgent` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER `sender`;
 ```
