@@ -297,6 +297,16 @@
 	icon_living = "cat[id]"
 	icon_dead = "cat[id]_dead"
 
+/mob/living/simple_animal/pet/cat/vampiretzi
+	name = "cat?"
+	icon = 'code/modules/wod13/mobs.dmi'
+	bloodpool = 5
+	maxbloodpool = 5
+	mob_size = MOB_SIZE_SMALL
+	icon_state = "cattzi"
+	icon_living = "cattzi"
+	icon_dead = "cattzi_dead"
+
 /mob/living/simple_animal/hostile/beastmaster/cat
 	name = "cat"
 	desc = "Kitty!!"
