@@ -124,7 +124,7 @@
 	category = CAT_TZIMISCE
 
 /datum/crafting_recipe/tziregenerativecore
-	name = "Regenerative Core"
+	name = "pulsating heart"
 	time = 50
 	reqs = list(/obj/item/organ/heart = 1, /obj/item/drinkable_bloodpack/elite = 1)
 	result = /obj/item/organ/regenerative_core/legion
