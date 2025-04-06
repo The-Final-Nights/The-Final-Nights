@@ -23,6 +23,7 @@
 	name = "retracting appendage"
 	desc = "A pair of prehensile pincers."
 	icon_state = "retractor_vic"
+	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 
@@ -30,6 +31,7 @@
 	name = "hemostatic pincers"
 	desc = "A pair of thin appendages that were once fingers, secreting a hemostatic fluid from the tips."
 	icon_state = "hemostat_vic"
+	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 
@@ -37,6 +39,7 @@
 	name = "chemical cautery"
 	desc = "A specialized organ drooling a chemical package that releases an extreme amount of heat, very quickly."
 	icon_state = "cautery_vic"
+	inhand_icon_state = "cautery_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 
@@ -52,6 +55,7 @@
 	name = "scalpel claw"
 	desc = "An altered nail, adjusted to make fine incisions."
 	icon_state = "scalpel_vic"
+	inhand_icon_state = "scalpel_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 
@@ -59,6 +63,7 @@
 	name = "circular jaw"
 	desc = "A spinning disc of teeth, screaming, as it bites through the flesh."
 	icon_state = "saw_vic"
+	inhand_icon_state = "saw_vic"
 	hitsound = 'sound/effects/wounds/blood2.ogg'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
@@ -67,6 +72,7 @@
 	name = "skin drape"
 	desc = "A stretch of skin, sweating out antibiotics and disinfectants, to provide a sterile-ish environment to work in."
 	icon_state = "surgical_drapes_vic"
+	inhand_icon_state = "drapes_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 
