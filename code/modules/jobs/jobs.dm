@@ -98,7 +98,11 @@ GLOBAL_LIST_INIT(church_positions, list(
 ))
 
 GLOBAL_LIST_INIT(gang_positions, list(
-	"Triad Soldier",
+	"Court Retainer",
+	"Court Member",
+	"Fist of the Screaming Oni",
+	"Mandarin of the Laughable Promise",
+	"Ancestor of the Laughable Promise"
 ))
 
 GLOBAL_LIST_INIT(ss13, list(

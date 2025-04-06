@@ -241,6 +241,71 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "id2"
 
+/obj/item/card/id/retainerbadge
+	name = "Smoldering Dragon Worker"
+	id_type_name = "head security badge"
+	desc = "A badge which shows honour and dedication."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id4"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id4"
+
+/obj/item/card/id/courtmemberbadge
+	name = "Smoldering Dragon Lower Manager" // idk man get me a new name
+	id_type_name = "head security badge"
+	desc = "A badge which shows honour and dedication."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id4"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id4"
+
+/obj/item/card/id/screamingonibadge
+	name = "Smoldering Dragon Security Manager"
+	id_type_name = "head security badge"
+	desc = "A badge which shows honour and dedication."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id4"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id4"
+
+/obj/item/card/id/mandarinbadge
+	name = "Smoldering Dragon General Manager"
+	id_type_name = "head security badge"
+	desc = "A badge which shows honour and dedication."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id4"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id4"
+
+/obj/item/card/id/ancestorbadge
+	name = "Smoldering Dragon Owner"
+	id_type_name = "head security badge"
+	desc = "A badge which shows honour and dedication."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id4"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id4"
+
 /obj/item/card/id/clinic/director
 	name = "clinic director's badge"
 	desc = "A badge which shows not only medical qualification, but also an authority over the clinic."
