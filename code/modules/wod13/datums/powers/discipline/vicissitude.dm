@@ -26,6 +26,7 @@
 	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
 
 /obj/item/hemostat/augment/vicissitude
 	name = "hemostatic pincers"
@@ -34,6 +35,7 @@
 	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
 
 /obj/item/cautery/augment/vicissitude
 	name = "chemical cautery"
@@ -42,6 +44,7 @@
 	inhand_icon_state = "cautery_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
 
 /obj/item/surgicaldrill/augment/vicissitude
 	name = "surgical fang"
@@ -50,6 +53,7 @@
 	hitsound = 'sound/effects/wounds/blood2.ogg'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
 
 /obj/item/scalpel/augment/vicissitude
 	name = "scalpel claw"
@@ -58,6 +62,7 @@
 	inhand_icon_state = "scalpel_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
 
 /obj/item/circular_saw/augment/vicissitude
 	name = "circular jaw"
@@ -67,6 +72,7 @@
 	hitsound = 'sound/effects/wounds/blood2.ogg'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
 
 /obj/item/surgical_drapes/vicissitude
 	name = "skin drape"
@@ -75,6 +81,7 @@
 	inhand_icon_state = "drapes_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
 
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
