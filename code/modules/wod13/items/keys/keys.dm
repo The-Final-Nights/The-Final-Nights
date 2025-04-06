@@ -380,11 +380,35 @@
 
 //===========================MISC KEYS===========================
 
-/obj/item/vamp/keys/triads
-	name = "Rusty keys"
+/obj/item/vamp/keys/retainerkeys
+	name = "Retainer keys"
 	accesslocks = list(
-		"triad",
-		"laundromat"
+		"chinatown",
+		"Smoldering Dragon"
+	)
+
+/obj/item/vamp/keys/courtmemberkeys
+	name = "Court-like keys"
+	accesslocks = list(
+		"chinatown",
+		"smoldering_dragon",
+	)
+
+/obj/item/vamp/keys/mandarinkeys
+	name = "Manager Keys"
+	accesslocks = list(
+		"chinatown",
+		"smoldering_dragon",
+		"smoldering_dragon_manager"
+	)
+
+/obj/item/vamp/keys/ancestor
+	name = "Ancestral Keys"
+	accesslocks = list(
+		"chinatown",
+		"smoldering_dragon",
+		"smoldering_dragon_manager",
+		"smoldering_dragon_owner"
 	)
 
 /obj/item/vamp/keys/techstore

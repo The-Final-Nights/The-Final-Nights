@@ -1,44 +1,42 @@
-
-/datum/job/vamp/triad_soldier
-	title = "Triad Soldier"
-	department_head = list("Triad Leadership")
+/datum/job/vamp/court_retainer
+	title = "Court Retainer"
+	department_head = list("The Mandarin of the Laughable Promise")
 	faction = "Vampire"
-	total_positions = 8
-	spawn_positions = 8
-	supervisors = " the Triads"
+	total_positions = 4
+	spawn_positions = 4
+	supervisors = "Managers of the Smoldering Dragon
 	selection_color = "#bb9d3d"
 
-	outfit = /datum/outfit/job/triad_soldier
+	outfit = /datum/outfit/job/court_retainer
 
 	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	paycheck = PAYCHECK_EASY
 	paycheck_department = ACCOUNT_SRV
-	display_order = JOB_DISPLAY_ORDER_TRIAD_GANGSTER
+	display_order = JOB_DISPLAY_ORDER_COURT_RETAINER
 	exp_type_department = EXP_TYPE_GANG
 
-	allowed_species = list("Human", "Werewolf", "Kuei-Jin")
-	minimal_generation = 13
+	allowed_species = list("Human")
 
-	duty = "Make money, do drugs, fight law. Your hideout is the laundromat in Chinatown."
-	experience_addition = 10
+	duty = "You serve the owner of the Smoldering Dragon resturant. Cook food, make people happy, don't ask question about your bosses or you will regret it. Eternally."
 	minimal_masquerade = 0
 	my_contact_is_important = FALSE
 
-/datum/outfit/job/triad_soldier/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/court_retainer/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.grant_language(/datum/language/cantonese)
+	H.grant_language(/datum/language/mandarin)
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/vampire/suit/female
 		shoes = /obj/item/clothing/shoes/vampire/heels
 
-/datum/outfit/job/triad_soldier
-	name = "Triad Soldier"
-	jobtype = /datum/job/vamp/triad_soldier
+/datum/outfit/job/court_retainer
+	name = "Court Retainer"
+	jobtype = /datum/job/vamp/court_retainer
 	uniform = /obj/item/clothing/under/vampire/suit
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	id = /obj/item/cockclock
+	id = /obj/item/card/id/retainerbadge
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/flashlight
-	l_hand = /obj/item/vamp/keys/triads
+	l_hand = /obj/item/vamp/keys/retainerkeys
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/creditcard=1, /obj/item/clothing/mask/vampire/balaclava =1, /obj/item/gun/ballistic/automatic/vampire/beretta=2,/obj/item/ammo_box/magazine/semi9mm=2, /obj/item/melee/vampirearms/knife)
