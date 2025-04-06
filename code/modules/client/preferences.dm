@@ -95,6 +95,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/alt_titles_preferences = list() // TFN EDIT: alt job titles
 
+	// TODO: add an appropriate config option for this
+	/// If we spawn an ERT as an admin and choose to spawn as the briefing officer, we'll be given this outfit
+	var/brief_outfit = /datum/outfit/centcom/commander
 	//Quirk list
 	var/list/all_quirks = list()
 
