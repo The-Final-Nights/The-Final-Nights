@@ -116,7 +116,7 @@
 	category = CAT_TZIMISCE
 
 /datum/crafting_recipe/tzicreature
-	name = "wretched creature"
+	name = "Wretched Creature"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/organ/brain = 1, )
 	result = /obj/item/toy/plush/tzi
@@ -124,10 +124,10 @@
 	category = CAT_TZIMISCE
 
 /datum/crafting_recipe/tziregenerativecore
-	name = "pulsating heart"
+	name = "Pulsating Heart"
 	time = 50
 	reqs = list(/obj/item/organ/heart = 1, /obj/item/drinkable_bloodpack/elite = 1)
-	result = /obj/item/organ/regenerative_core/legion
+	result = /obj/item/organ/regenerative_core/legion/tzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
