@@ -3478,6 +3478,8 @@
 #include "modular_tfn\modules\loadout\_loadout.dm"
 #include "modular_tfn\modules\loadout\loadout_accessories.dm"
 #include "modular_tfn\modules\loadout\loadout_cosmetics.dm"
+#include "modular_tfn\modules\loadout\loadout_eyewear.dm"
+#include "modular_tfn\modules\loadout\loadout_footwear.dm"
 #include "modular_tfn\modules\loadout\loadout_general.dm"
 #include "modular_tfn\modules\loadout\loadout_hat.dm"
 #include "modular_tfn\modules\loadout\loadout_suit.dm"
