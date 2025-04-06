@@ -3,7 +3,6 @@
 	slot = ITEM_SLOT_EYES
 	sort_category = "Eyewear"
 
-
 /datum/gear/eyewear/yellow_aviator
 	display_name = "aviator, yellow"
 	path = /obj/item/clothing/glasses/vampire/yellow

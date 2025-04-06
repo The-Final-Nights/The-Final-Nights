@@ -5,7 +5,7 @@
 
 // Regular shoes
 /datum/gear/footwear/shoes
-	subtype_path = /datum/gear/uniform/shoes
+	subtype_path = /datum/gear/footwear/shoes
 
 /datum/gear/footwear/shoes/black
 	display_name = "shoes, black"
@@ -33,7 +33,7 @@
 
 // Sneakers
 /datum/gear/footwear/sneakers
-	subtype_path = /datum/gear/uniform/sneakers
+	subtype_path = /datum/gear/footwear/sneakers
 
 /datum/gear/footwear/sneakers/white
 	display_name = "sneakers, white"

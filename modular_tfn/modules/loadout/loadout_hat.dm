@@ -5,7 +5,6 @@
 
 
 // Bandana
-
 /datum/gear/hat/bandana
 	subtype_path = /datum/gear/hat/bandana
 
@@ -22,24 +21,22 @@
 	path = /obj/item/clothing/head/vampire/bandana/black
 
 // Beanie
-
 /datum/gear/hat/beanie
 	subtype_path = /datum/gear/hat/beanie
 
 /datum/gear/hat/beanie/white
 	display_name = "beanie, white"
-	path = /obj/item/clothing/head/vampire/bandana
+	path = /obj/item/clothing/head/vampire/beanie
 
 /datum/gear/hat/beanie/black
 	display_name = "beanie, black"
-	path = /obj/item/clothing/head/vampire/bandana/black
+	path = /obj/item/clothing/head/vampire/beanie/black
 
 /datum/gear/hat/beanie/homeless
 	display_name = "beanie, rough"
-	path = /obj/item/clothing/head/vampire/bandana/homeless
+	path = /obj/item/clothing/head/vampire/beanie/homeless
 
 // Misc
-
 /datum/gear/hat/baseball_cap
 	display_name = "baseball cap"
 	path = /obj/item/clothing/head/vampire/baseballcap

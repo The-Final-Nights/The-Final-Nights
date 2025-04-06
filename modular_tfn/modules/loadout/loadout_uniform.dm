@@ -24,16 +24,16 @@
 	display_name = "luxury suitskirt, black"
 	path = /obj/item/clothing/under/vampire/ventrue/female
 
-/datum/gear/uniform/suit/business_white
-	display_name = "business suit, white"
+/datum/gear/uniform/suit/formal_white
+	display_name = "formal suit, white"
 	path = /obj/item/clothing/under/vampire/office
 
-/datum/gear/uniform/suit/business_bargundy
-	display_name = "business suit, bargundy"
+/datum/gear/uniform/suit/formal_bargundy
+	display_name = "formal suit, bargundy"
 	path = /obj/item/clothing/under/vampire/tremere
 
-/datum/gear/uniform/suit/business_bargundy_skirt
-	display_name = "business suitskirt, bargundy"
+/datum/gear/uniform/suit/formal_bargundy_skirt
+	display_name = "formal suitskirt, bargundy"
 	path = /obj/item/clothing/under/vampire/tremere/female
 
 /datum/gear/uniform/suit/plain_black
@@ -73,7 +73,7 @@
 	subtype_path = /datum/gear/uniform/skirt
 
 /datum/gear/uniform/skirt/pentagram
-	display_name = "skirt, pentagram"
+	display_name = "outfit, skirt pentagram"
 	path = /obj/item/clothing/under/vampire/baali/female
 
 // Pants
@@ -93,10 +93,8 @@
 	display_name = "dress, black"
 	path = /obj/item/clothing/under/vampire/business
 
-
-
 /datum/gear/uniform/black_overcoat
-	display_name = "overcoat_black"
+	display_name = "overcoat, black"
 	path = /obj/item/clothing/under/vampire/rich
 
 /datum/gear/uniform/flamboyant
@@ -176,11 +174,11 @@
 	path = /obj/item/clothing/under/vampire/gangrel/female
 
 /datum/gear/uniform/sleeveless_yellow
-	display_name = "outfit, yellow sleeveless shirt"
+	display_name = "outfit, yellow shirt"
 	path = /obj/item/clothing/under/vampire/larry
 
 /datum/gear/uniform/sleeveless_white
-	display_name = "outfit, white sleeveless shirt"
+	display_name = "outfit, white shirt"
 	path = /obj/item/clothing/under/vampire/bandit
 
 /datum/gear/uniform/turtleneck_white
