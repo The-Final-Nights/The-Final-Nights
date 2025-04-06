@@ -113,7 +113,7 @@
 
 /*************************Legion core********************/
 /obj/item/organ/regenerative_core/legion
-	desc = "The steal beating heart of an unfortunate wretch."
+	desc = "The still beating heart of an unfortunate wretch."
 	icon_state = "legion_soul"
 
 /obj/item/organ/regenerative_core/legion/Initialize()
