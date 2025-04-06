@@ -73,10 +73,10 @@
 				to_chat(user, "<span class='notice'>[src] is useless on the dead.</span>")
 				return
 			if(H != user)
-				H.visible_message("<span class='notice'>[user] forces [H] to apply [src]... Black tendrils entangle and reinforce [H.p_them()]!</span>")
+				target.visible_message(span_notice("[user] forces [target] to apply [src]... Black tendrils entangle and reinforce [target.p_them()]!"))
 				SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "other"))
 			else
-				to_chat(user, "<span class='notice'>You crush the beating [src] in your hand. Disgusting tendrils and vitae hold you together and allow you to keep moving, but for how long?</span>")
+				to_chat(user, span_notice("You start to smear [src] on yourself. Disgusting tendrils hold you together and allow you to keep moving, but for how long?"))
 				SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "self"))
 			H.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
 			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "core", /datum/mood_event/healsbadman) //Now THIS is a miner buff (fixed - nerf)
@@ -95,11 +95,11 @@
 	. = ..()
 	if(!preserved && !inert)
 		preserved(TRUE)
-		owner.visible_message("<span class='notice'>[src] stabilizes as it's inserted.</span>")
+		owner.visible_message(span_notice("[src] stabilizes as it's inserted."))
 
 /obj/item/organ/regenerative_core/Remove(mob/living/carbon/M, special = 0)
 	if(!inert && !special)
-		owner.visible_message("<span class='notice'>[src] rapidly decays as it's removed.</span>")
+		owner.visible_message(span_notice("[src] rapidly decays as it's removed."))
 		go_inert()
 	return ..()
 
