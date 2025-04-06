@@ -21,7 +21,7 @@
 
 /************************Hivelord core*******************/
 /obj/item/organ/regenerative_core
-	name = "regenerative core"
+	name = "pulsating heart"
 	desc = "All that remains of a hivelord. It can be used to help keep your body going, but it will rapidly decay into uselessness."
 	icon_state = "roro core 2"
 	item_flags = NOBLUDGEON
