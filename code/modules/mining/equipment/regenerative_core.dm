@@ -32,14 +32,6 @@
 	var/inert = 0
 	var/preserved = 0
 
-/obj/item/organ/regenerative_core/Initialize()
-	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(inert_check)), 999999)
-
-/obj/item/organ/regenerative_core/proc/inert_check()
-	if(!preserved)
-		go_inert()
-
 /obj/item/organ/regenerative_core/proc/preserved(implanted = 0)
 	inert = FALSE
 	preserved = TRUE
