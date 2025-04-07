@@ -264,6 +264,12 @@
 	dynamic_hair_suffix = ""
 	dynamic_fhair_suffix = ""
 
+/obj/item/clothing/head/vampire/nun
+	name = "Sisterly Wimple"
+	desc = "The head covering of a religious sister."
+	icon_state = "nun_hood"
+	flags_inv = HIDEEARS|HIDEHAIR
+
 /obj/item/clothing/head/pentex
 	icon = 'code/modules/wod13/clothing.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
