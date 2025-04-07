@@ -87,15 +87,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if (!found_block_movement)
 			LAZYADD(key_bindings["Ctrl"], "block_movement")
 
-
+/datum/preferences/proc/update_character(current_version, savefile/S)
 	if(current_version < 39)
-		READ_FILE(S["true_experience"], true_experience)
 		player_experience += true_experience
 		true_experience = 0
-		WRITE_FILE(S["player_experience"], player_experience)
-		WRITE_FILE(S["true_experience"], true_experience)
-
-/datum/preferences/proc/update_character(current_version, savefile/S)
 	return
 
 /// checks through keybindings for outdated unbound keys and updates them
