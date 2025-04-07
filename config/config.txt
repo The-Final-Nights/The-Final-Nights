@@ -547,3 +547,9 @@ DEFAULT_VIEW_SQUARE 15x15
 ## Tgui payloads larger than the 2kb limit for BYOND topic requests are split into roughly 1kb chunks and sent in sequence.
 ## This config option limits the maximum chunk count for which the server will accept a payload, default is 32
 TGUI_MAX_CHUNK_COUNT 32
+
+## Enables the Discord Overwatch system
+#DISCORD_OVERWATCH
+
+## Sets the webhook URL for the Overwatch System
+#DISCORD_OVERWATCH_WEBHOOK https://discord.com/api/webhooks/XXX/XXX

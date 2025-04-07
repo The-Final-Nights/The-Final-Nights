@@ -157,6 +157,8 @@
 		new /datum/data/mining_equipment("hijab",	/obj/item/clothing/suit/vampire/imam,  10),
 		new /datum/data/mining_equipment("taqiyah",	/obj/item/clothing/head/vampire/taqiyah,  10),
 		new /datum/data/mining_equipment("kalimavkion",	/obj/item/clothing/head/vampire/kalimavkion,  10),
+		new /datum/data/mining_equipment("Nun Frock",	/obj/item/clothing/suit/vampire/nun,  15),
+		new /datum/data/mining_equipment("Wimple",	/obj/item/clothing/head/vampire/nun,	10),
 		new /datum/data/mining_equipment("duffelbag",	/obj/item/storage/backpack/duffelbag,	100),
 		new /datum/data/mining_equipment("backpack",	/obj/item/storage/backpack,		100),
 		new /datum/data/mining_equipment("satchel",		/obj/item/storage/backpack/satchel,		100),

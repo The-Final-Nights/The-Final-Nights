@@ -196,6 +196,11 @@
 	desc = "A red hood with an ornate golden trim, marked with the emblem of House Tremere."
 	icon_state = "magister_hood"
 
+/obj/item/clothing/suit/vampire/nun
+	name = "Sisterly Frock"
+	desc = "The habit of a religious sister of the catholic church."
+	icon_state = "nun"
+
 /obj/item/clothing/suit/vampire/coat
 	name = "brown coat"
 	desc = "A warm and heavy brown coat."

@@ -574,6 +574,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 						message_admins("[ADMIN_LOOKUPFLW(usr)] rewarded [ADMIN_LOOKUPFLW(exper)] with [amount] experience points. Reason: [reason]")
 						log_admin("[key_name(usr)] rewarded [key_name(exper)] with [amount] experience points. Reason: [reason]")
+						SSoverwatch.record_action(usr, "[key_name(usr)] rewarded [key_name(exper)] with [amount] experience points. Reason: [reason]")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Reward Experience") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/grant_whitelist()
@@ -636,6 +637,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 					message_admins("[ADMIN_LOOKUPFLW(usr)] gave [ADMIN_LOOKUPFLW(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
 					log_admin("[key_name(usr)] gave [key_name(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
+					SSoverwatch.record_action(usr, "[key_name(usr)] gave [key_name(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
 
 					if ((giving_discipline_level > 0) && player.mob)
 						if (ishuman(player.mob))
@@ -676,6 +678,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 				message_admins("[ADMIN_LOOKUPFLW(usr)] removed the Discipline [discipline.name] from [ADMIN_LOOKUPFLW(player)]. Reason: [reason]")
 				log_admin("[key_name(usr)] removed the Discipline [discipline.name] from [key_name(player)]. Reason: [reason]")
+				SSoverwatch.record_action(usr, "[key_name(usr)] removed the Discipline [discipline.name] from [key_name(player)]. Reason: [reason]")
 
 				qdel(discipline)
 
