@@ -605,6 +605,8 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 				continue
 			if(!R.receiving)
 				continue
+			if(!R.powered)
+				continue
 
 			for(var/mob/listener in get_hearers_in_view(1, get_turf(R)))
 				to_chat(listener, formatted)

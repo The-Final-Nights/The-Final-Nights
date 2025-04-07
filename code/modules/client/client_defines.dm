@@ -207,3 +207,6 @@
 
 	/// If the client is currently under the restrictions of the interview system
 	var/interviewee = FALSE
+	// ! For our server's purposes, the following will ALWAYS be enabled.
+	/// Does this client have typing indicators enabled?
+	var/typing_indicators = TRUE

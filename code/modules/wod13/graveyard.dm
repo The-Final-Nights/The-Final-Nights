@@ -37,19 +37,6 @@ SUBSYSTEM_DEF(graveyard)
 	else
 		lost_points = max(0, lost_points+1)
 		clear_runs = 0
-
-//	if(lost_points > 2)
-//		for(var/mob/living/carbon/human/L in GLOB.player_list)
-//			if(L)
-//				if(L.mind)
-//					if(L.mind.assigned_role == "Graveyard Keeper")
-//						if(L.client)
-//							if(istype(get_area(L), /area/vtm/graveyard))
-//								L.AdjustMasquerade(-1)
-//								total_bad += 1
-//		lost_points = 0
-
-	if(clear_runs > 2)
 		clear_runs = 0
 		for(var/mob/living/carbon/human/L in GLOB.player_list)
 			if(L)
@@ -57,14 +44,6 @@ SUBSYSTEM_DEF(graveyard)
 					if(L.mind.assigned_role == "Graveyard Keeper")
 						if(L.client && L.key)
 							total_good += 1
-//							var/datum/preferences/P = GLOB.preferences_datums[ckey(L.key)]
-//							if(P)
-//								L.AdjustMasquerade(1)
-//								var/mode = 1
-//								if(HAS_TRAIT(L, TRAIT_NON_INT))
-//									mode = 2
-//								P.exper = min(calculate_mob_max_exper(L), P.exper+((250+L.experience_plus)/mode))
-
 /obj/vampgrave
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "grave1"

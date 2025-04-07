@@ -4,7 +4,19 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	var/quieted = FALSE
+	var/datum/weakref/owner = null
 	cost = 25
+
+/obj/item/melee/vampirearms/pickup(mob/living/user)
+	. = ..()
+	if(quieted)
+		var/mob/living/carbon/human/resolved_blade_owner = owner?.resolve()
+		// We don't need to check if resolved_blade_owner is null, the following check will work as intended either way.
+		if(user != resolved_blade_owner)
+			to_chat(user, "<span class='userdanger'>The acidic ichor sears your hand!</span>")
+			user.apply_damage(20, BURN)
+			user.Paralyze(1)
+
 
 /obj/item
 	var/masquerade_violating = FALSE

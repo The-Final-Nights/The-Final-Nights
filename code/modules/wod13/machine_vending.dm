@@ -149,14 +149,6 @@
 
 	switch(action)
 		if("purchase")
-//			var/obj/item/card/id/I
-//			if(isliving(usr))
-//				var/mob/living/L = usr
-//				I = L.get_idcard(TRUE)
-//			if(!istype(I))
-//				to_chat(usr, "<span class='alert'>Error: An ID is required!</span>")
-//				flick(icon_deny, src)
-//				return
 			var/datum/data/mining_equipment/prize = locate(params["ref"]) in prize_list
 			if(!prize || !(prize in prize_list))
 				to_chat(usr, "<span class='alert'>Error: Invalid choice!</span>")

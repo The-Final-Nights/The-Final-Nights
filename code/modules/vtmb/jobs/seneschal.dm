@@ -39,7 +39,6 @@
 
 	display_order = JOB_DISPLAY_ORDER_CLERK
 
-//	minimal_generation = 12	//Uncomment when players get exp enough
 	minimal_masquerade = 5
 
 	my_contact_is_important = TRUE
@@ -58,7 +57,6 @@
 	id = /obj/item/card/id/clerk
 	uniform = /obj/item/clothing/under/vampire/clerk
 	shoes = /obj/item/clothing/shoes/vampire/brown
-//	head = /obj/item/clothing/head/hopcap
 	l_pocket = /obj/item/vamp/phone/clerk
 	r_pocket = /obj/item/vamp/keys/clerk
 	backpack_contents = list(/obj/item/passport=1, /obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/seneschal=1)

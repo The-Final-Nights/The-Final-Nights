@@ -2482,16 +2482,18 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				// TODO: Completely revamp flavor text into a more expansive system - TFN
 				// TFN EDIT ADDITION START: character headshots & flavortext
 				if("ooc_notes")
-					var/new_ooc_notes = tgui_input_text(user, "Choose your character's OOC notes:", "Character Preference", ooc_notes, MAX_MESSAGE_LEN, TRUE, FALSE)
+					var/new_ooc_notes = tgui_input_text(user, "Choose your character's OOC notes:", "Character Preference", ooc_notes, MAX_MESSAGE_LEN, multiline = TRUE)
 					if(!length(new_ooc_notes))
 						return
 					ooc_notes = new_ooc_notes
+					SSoverwatch.record_action(user, "**OOC NOTES**: [html_decode(ooc_notes)]")
 
 				if("flavor_text")
-					var/new_flavor = tgui_input_text(user, "Choose your character's flavor text:", "Character Preference", flavor_text, MAX_MESSAGE_LEN, TRUE, FALSE)
+					var/new_flavor = tgui_input_text(user, "Choose your character's flavor text:", "Character Preference", flavor_text, MAX_FLAVOR_LEN, multiline = TRUE)
 					if(!length(new_flavor))
 						return
 					flavor_text = new_flavor
+					SSoverwatch.record_action(user, "**FLAVORTEXT**: [html_decode(flavor_text)]")
 
 				if("view_flavortext")
 					var/datum/browser/popup = new(user, "[real_name]_flavortext", real_name, 500, 200)
@@ -2523,7 +2525,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 					headshot_link = new_headshot_link
 					to_chat(user, span_notice("Successfully updated headshot picture!"))
-					log_game("[user] has set their Headshot image to '[headshot_link]'.")
+					log_game("[key_name(user)] has set their Headshot image to '[headshot_link]'.")
+					SSoverwatch.record_action(user, "[key_name(user)] has set their Headshot image to [headshot_link]")
 				// TFN EDIT ADDITION END
 				if("change_appearance")
 					if(!slotlocked)
@@ -2850,6 +2853,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								key_bindings -= old_key
 						user << browse(null, "window=capturekeypress")
 						user.client.set_macros()
+						user.client.update_special_keybinds()
 						save_preferences()
 						ShowChoices(user)
 						return
@@ -2885,6 +2889,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 					user << browse(null, "window=capturekeypress")
 					user.client.set_macros()
+					user.client.update_special_keybinds()
 					save_preferences()
 
 				if("keybindings_reset")
@@ -2895,6 +2900,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					hotkeys = (choice == "Hotkey")
 					key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
 					user.client.set_macros()
+					user.client.update_special_keybinds()
 
 				if("chat_on_map")
 					chat_on_map = !chat_on_map

@@ -42,11 +42,6 @@
 		if(!host.real_name)
 			dat += "Unknown,"
 		dat += " [host.auspice.tribe] [host.auspice.base_breed]"
-//		if(host.clane)
-//			dat += " the [host.clane.name]"
-//		if(!host.clane)
-//			dat += " the caitiff"
-
 		if(host.mind)
 
 			if(host.mind.assigned_role)
@@ -103,7 +98,6 @@
 
 /datum/species/garou/on_species_gain(mob/living/carbon/human/C)
 	. = ..()
-//	ADD_TRAIT(C, TRAIT_NOBLEED, HIGHLANDER)
 	C.update_body(0)
 	C.last_experience = world.time+3000
 	var/datum/action/garouinfo/infor = new()

@@ -9,7 +9,6 @@
 	layer = ABOVE_ALL_MOB_LAYERS_LAYER
 	anchored = TRUE
 	mouse_opacity = 0
-//	vis_flags = VIS_HIDE
 
 /obj/effect/addwall/Crossed(atom/movable/AM, oldloc)
 	. = ..()
@@ -586,10 +585,6 @@
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
 				icon_state = "[initial(icon_state)]-snow"
-//				footstep = FOOTSTEP_SNOW
-//				barefootstep = FOOTSTEP_SNOW
-//				clawfootstep = FOOTSTEP_SNOW
-//				heavyfootstep = FOOTSTEP_SNOW
 
 /obj/effect/decal/bordur/corner
 	icon_state = "border_corner"
@@ -1200,13 +1195,6 @@
 	barefootstep = FOOTSTEP_WATER
 	clawfootstep = FOOTSTEP_WATER
 	heavyfootstep = FOOTSTEP_WATER
-
-/*
-/turf/open/floor/plating/shit/Initialize()
-	. = ..()
-	if(prob(50))
-		new /obj/effect/realistic_fog(src)
-*/
 
 /turf/open/floor/plating/shit/border
 	icon_state = "shit_border"
