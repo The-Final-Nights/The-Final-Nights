@@ -83,7 +83,6 @@
 		new /datum/data/mining_equipment("red hipster outfit",	/obj/item/clothing/under/vampire/red,	20),
 		new /datum/data/mining_equipment("messy shirt",	/obj/item/clothing/under/vampire/bouncer,	15),
 		new /datum/data/mining_equipment("agent shirt",	/obj/item/clothing/under/vampire/hound,	15),
-		new /datum/data/mining_equipment("blue overals",	/obj/item/clothing/under/vampire/mechanic,	20),
 		new /datum/data/mining_equipment("cheap shirt",	/obj/item/clothing/under/vampire/homeless,	10),
 		new /datum/data/mining_equipment("cheaper shirt",	/obj/item/clothing/under/vampire/homeless/female,	5),
 		new /datum/data/mining_equipment("blue overalls",	/obj/item/clothing/under/vampire/mechanic,	20),
