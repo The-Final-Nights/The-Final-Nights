@@ -1982,7 +1982,11 @@
 /turf/open/floor/plating/asphalt,
 /area/vtm/unionsquare)
 "aCR" = (
-/turf/open/floor/plasteel/stairs/right,
+/turf/open/floor/plating/vampcarpet{
+	icon = 'icons/obj/stairs.dmi';
+	icon_state = "stairs";
+	dir = 1
+	},
 /area/vtm/anarch/garage)
 "aCS" = (
 /obj/structure/table/wood,
@@ -15905,6 +15909,12 @@
 "eHF" = (
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/fed)
+"eHO" = (
+/obj/machinery/light{
+	pixel_y = 32
+	},
+/turf/open/openspace,
+/area/vtm/anarch)
 "eHT" = (
 /obj/structure/vampdoor/wood{
 	lock_id = "primBanu";
@@ -19203,14 +19213,13 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
 "fCx" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 5
-	},
 /obj/structure/railing{
-	dir = 8
+	dir = 4
 	},
-/obj/structure/railing,
-/turf/open/floor/plating/rough,
+/turf/open/floor/plating/vampcarpet{
+	icon = 'icons/obj/stairs.dmi';
+	icon_state = "stairs"
+	},
 /area/vtm/anarch)
 "fCy" = (
 /obj/effect/decal/litter,
@@ -25142,9 +25151,13 @@
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/interior/chantry)
 "hmS" = (
-/turf/open/floor/plasteel/stairs/right{
+/obj/machinery/light{
+	pixel_y = 32
+	},
+/obj/structure/railing{
 	dir = 4
 	},
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "hmX" = (
 /obj/item/kirbyplants/random,
@@ -26455,12 +26468,10 @@
 	},
 /obj/effect/turf_decal/siding/white,
 /obj/structure/railing{
-	dir = 8
+	dir = 4
 	},
 /obj/structure/railing{
-	dir = 1;
-	layer = 4;
-	pixel_y = 16
+	layer = 4
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch)
@@ -31518,7 +31529,10 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/siding/white,
-/turf/open/floor/plasteel/stairs/right,
+/obj/structure/railing{
+	layer = 4
+	},
+/turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "jis" = (
 /obj/structure/table/wood,
@@ -36018,6 +36032,14 @@
 /obj/structure/cable/layer1,
 /turf/open/floor/circuit,
 /area/vtm/interior/glasswalker)
+"kzU" = (
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 16
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "kzY" = (
 /obj/effect/decal/bordur,
 /obj/structure/railing{
@@ -43531,6 +43553,12 @@
 /obj/structure/fire_barrel,
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
+"mKq" = (
+/turf/open/floor/plating/vampcarpet{
+	icon = 'icons/obj/stairs.dmi';
+	icon_state = "stairs"
+	},
+/area/vtm/anarch)
 "mKs" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -52035,7 +52063,11 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/open/floor/plasteel/stairs/right,
+/turf/open/floor/plating/vampcarpet{
+	icon = 'icons/obj/stairs.dmi';
+	icon_state = "stairs";
+	dir = 1
+	},
 /area/vtm/anarch)
 "pgD" = (
 /obj/effect/turf_decal/siding/wood{
@@ -54740,6 +54772,17 @@
 /obj/effect/decal/litter,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
+"pSn" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 12
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "pSB" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -65963,7 +66006,11 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/techshop)
 "tbD" = (
-/turf/open/floor/plasteel/stairs/right,
+/turf/open/floor/plating/vampcarpet{
+	icon = 'icons/obj/stairs.dmi';
+	icon_state = "stairs";
+	dir = 1
+	},
 /area/vtm/anarch)
 "tbE" = (
 /obj/effect/turf_decal/weather/dirt,
@@ -67001,14 +67048,15 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "tri" = (
-/obj/structure/railing{
-	dir = 8
+/obj/effect/turf_decal/siding/white{
+	dir = 1
 	},
 /obj/structure/railing{
 	dir = 1;
-	pixel_y = 3
+	layer = 4;
+	pixel_y = 12
 	},
-/turf/open/floor/plating/parquetry/old,
+/turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "trk" = (
 /obj/structure/table/wood,
@@ -72659,7 +72707,10 @@
 /area/vtm/interior/bianchiBank)
 "vaX" = (
 /obj/effect/turf_decal/siding/white,
-/turf/open/floor/plasteel/stairs/right,
+/obj/structure/railing{
+	layer = 4
+	},
+/turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "vaZ" = (
 /obj/effect/decal/bordur,
@@ -75520,9 +75571,10 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 4
 	},
-/turf/open/floor/plasteel/stairs/right{
+/obj/structure/railing{
 	dir = 4
 	},
+/turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "vRV" = (
 /obj/effect/decal/bordur,
@@ -78695,7 +78747,12 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 9
 	},
-/turf/open/floor/plasteel/stairs/right,
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 12
+	},
+/turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "wNZ" = (
 /obj/structure/flora/ausbushes/ppflowers,
@@ -80594,7 +80651,15 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 1
 	},
-/turf/open/floor/plasteel/stairs/right,
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 12
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "xru" = (
 /obj/effect/turf_decal/siding/white{
@@ -166314,7 +166379,7 @@ ppK
 bbM
 pMC
 pMC
-xri
+tri
 wsX
 wsX
 wsX
@@ -166571,7 +166636,7 @@ kGg
 cEl
 pMC
 pMC
-xri
+tri
 wsX
 wsX
 wsX
@@ -166828,7 +166893,7 @@ kGg
 cEl
 pMC
 pMC
-xri
+tri
 wsX
 wsX
 wsX
@@ -167085,7 +167150,7 @@ kGg
 cEl
 pMC
 pMC
-xri
+tri
 wsX
 wsX
 wsX
@@ -167342,7 +167407,7 @@ ppK
 mbo
 pMC
 pMC
-xri
+tri
 wsX
 wsX
 wsX
@@ -167856,7 +167921,7 @@ oWo
 pMC
 pMC
 pMC
-xri
+mKq
 wsX
 wsX
 wsX
@@ -168622,7 +168687,7 @@ vmN
 vmN
 vmN
 vmN
-tbD
+pSn
 pMC
 pMC
 pMC
@@ -168879,7 +168944,7 @@ vmN
 vmN
 vmN
 vmN
-tbD
+neZ
 pMC
 pMC
 big
@@ -169136,7 +169201,7 @@ vmN
 vmN
 vmN
 vmN
-tbD
+neZ
 pMC
 pMC
 rHN
@@ -169393,7 +169458,7 @@ vmN
 vmN
 vmN
 vmN
-tbD
+neZ
 pMC
 pMC
 tyv
@@ -169645,12 +169710,12 @@ dnj
 xEC
 sbN
 kGg
-hmS
-hmS
-hmS
-hmS
-hmS
-tri
+mbo
+mbo
+mbo
+mbo
+mbo
+pMC
 pMC
 pMC
 pMC
@@ -233641,7 +233706,7 @@ ntq
 fkk
 fkk
 kGg
-ehv
+hmS
 pMC
 pMC
 lgZ
@@ -233896,10 +233961,10 @@ ntq
 ntq
 ntq
 kGg
-pMC
-pMC
-pMC
-pMC
+qtE
+qtE
+qtE
+kzU
 pMC
 lgZ
 lgZ
@@ -234153,10 +234218,10 @@ ntq
 ntq
 ntq
 kGg
-pMC
-pMC
-pMC
-pMC
+qtE
+qtE
+qtE
+kzU
 pMC
 lgZ
 ktI
@@ -234410,10 +234475,10 @@ ntq
 ntq
 ntq
 kGg
-ehv
-pMC
-pMC
-pMC
+eHO
+qtE
+qtE
+kzU
 pMC
 lgZ
 lgZ
@@ -234667,9 +234732,9 @@ ntq
 ntq
 ntq
 rLP
-pMC
-pMC
-pMC
+mbo
+mbo
+mbo
 pMC
 pMC
 pMC
@@ -302258,12 +302323,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -302515,12 +302580,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -302772,12 +302837,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+fuh
+kno
 ntq
 ntq
 ntq
@@ -303029,12 +303094,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+bgM
+kno
 ntq
 ntq
 ntq
@@ -303286,12 +303351,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -303543,12 +303608,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -303800,12 +303865,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+fuh
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -304057,12 +304122,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+bgM
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -304314,12 +304379,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -304571,12 +304636,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+fuh
+kno
+kno
 ntq
 ntq
 ntq
@@ -304828,12 +304893,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+bgM
+kno
+kno
 ntq
 ntq
 ntq
@@ -305085,12 +305150,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+kno
 ntq
 ntq
 ntq
@@ -305342,12 +305407,12 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+kno
 ntq
 ntq
 ntq
