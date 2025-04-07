@@ -89,9 +89,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 
 	if(current_version < 39)
+		READ_FILE(S["true_experience"], true_experience)
 		player_experience += true_experience
 		true_experience = 0
 		WRITE_FILE(S["player_experience"], player_experience)
+		WRITE_FILE(S["true_experience"], true_experience)
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
 	return
