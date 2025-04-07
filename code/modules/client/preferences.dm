@@ -178,6 +178,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/experience_used_on_character = 0
 
 	//Character sheet stats
+	var/true_experience = 0
 	var/torpor_count = 0
 
 	//linked lists determining known Disciplines and their known ranks
@@ -2031,6 +2032,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						discipline_types += new_discipline
 						discipline_levels += 1
 						player_experience -= 10
+						experience_used_on_character += 10
 
 				if("newghouldiscipline")
 					if((player_experience < 10) || !(pref_species.id == "ghoul"))
@@ -2042,6 +2044,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						discipline_types += new_discipline
 						discipline_levels += 1
 						player_experience -= 10
+						experience_used_on_character += 10
 
 				if("newchidiscipline")
 					if((player_experience < 10) || !(pref_species.id == "kuei-jin"))
@@ -2077,6 +2080,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						discipline_types += new_discipline
 						discipline_levels += 1
 						player_experience -= 10
+						experience_used_on_character += 10
 
 				if("werewolf_color")
 					if(slotlocked || !(pref_species.id == "garou"))
@@ -2224,6 +2228,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					player_experience -= cost
+					experience_used_on_character += cost
 					auspice_level = max(1, auspice_level + 1)
 
 				if("physique")
@@ -2310,6 +2315,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							return
 
 						player_experience -= cost
+						experience_used_on_character += cost
 						discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
 
 					if(pref_species.id == "kuei-jin")
@@ -2324,6 +2330,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							return
 
 						player_experience -= cost
+						experience_used_on_character += cost
 						discipline_levels[a] = min(5, max(1, discipline_levels[a] + 1))
 
 				if("path")
@@ -2332,6 +2339,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					player_experience -= cost
+					experience_used_on_character += cost
 					path_score = clamp(path_score + 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
 
 				if("pathof")
@@ -2365,6 +2373,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					player_experience -= min((dharma_level * 5), 20)
+					experience_used_on_character += min((dharma_level * 5), 20)
 					dharma_level = clamp(dharma_level + 1, 1, 6)
 
 					if (dharma_level >= 6)
@@ -2423,6 +2432,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					player_experience -= 20
+					experience_used_on_character += 20
 					if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 						generation_bonus = min(generation_bonus + 1, max(0, generation-MAX_TRUSTED_GENERATION))
 					else
@@ -3102,6 +3112,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if ((player_experience < cost) || (number >= ATTRIBUTE_BASE_LIMIT))
 		return FALSE
 	player_experience -= cost
+	experience_used_on_character += cost
 	return TRUE
 
 /datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE)
