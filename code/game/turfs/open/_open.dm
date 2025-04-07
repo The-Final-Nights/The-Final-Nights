@@ -90,7 +90,6 @@
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "necro1"
 	baseturfs = /turf/open/indestructible/necropolis
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	footstep = FOOTSTEP_LAVA
 	barefootstep = FOOTSTEP_LAVA
 	clawfootstep = FOOTSTEP_LAVA
@@ -103,23 +102,17 @@
 		icon_state = "necro[rand(2,3)]"
 
 /turf/open/indestructible/necropolis/air
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 
 /turf/open/indestructible/boss //you put stone tiles on this and use it as a base
 	name = "necropolis floor"
 	icon = 'icons/turf/boss_floors.dmi'
 	icon_state = "boss"
 	baseturfs = /turf/open/indestructible/boss
-	planetary_atmos = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 
 /turf/open/indestructible/boss/air
-	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 
 /turf/open/indestructible/hierophant
 	icon = 'icons/turf/floors/hierophant_floor.dmi'
-	planetary_atmos = TRUE
-	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
 	baseturfs = /turf/open/indestructible/hierophant
 	smoothing_flags = SMOOTH_CORNERS
 	tiled_dirt = FALSE
@@ -141,7 +134,6 @@
 
 /turf/open/indestructible/binary
 	name = "tear in the fabric of reality"
-	CanAtmosPass = ATMOS_PASS_NO
 	baseturfs = /turf/open/indestructible/binary
 	icon_state = "binary"
 	footstep = null
@@ -153,56 +145,6 @@
 	icon_state = "bluespace"
 	blocks_air = TRUE
 	baseturfs = /turf/open/indestructible/airblock
-
-/turf/open/Initalize_Atmos(times_fired)
-	excited = FALSE
-	update_visuals()
-
-	current_cycle = times_fired
-	ImmediateCalculateAdjacentTurfs()
-	for(var/i in atmos_adjacent_turfs)
-		var/turf/open/enemy_tile = i
-		var/datum/gas_mixture/enemy_air = enemy_tile.return_air()
-		if(!excited && air.compare(enemy_air))
-			//testing("Active turf found. Return value of compare(): [is_active]")
-			excited = TRUE
-			SSair.active_turfs += src
-
-/turf/open/proc/GetHeatCapacity()
-	. = air.heat_capacity()
-
-/turf/open/proc/GetTemperature()
-	. = air.temperature
-
-/turf/open/proc/TakeTemperature(temp)
-	air.temperature += temp
-	air_update_turf(FALSE, FALSE)
-
-/turf/open/proc/freon_gas_act()
-	for(var/obj/I in contents)
-		if(I.resistance_flags & FREEZE_PROOF)
-			continue
-		if(!(I.obj_flags & FROZEN))
-			I.make_frozen_visual()
-	for(var/mob/living/L in contents)
-		if(L.bodytemperature <= 50)
-			L.apply_status_effect(/datum/status_effect/freon)
-	MakeSlippery(TURF_WET_PERMAFROST, 50)
-	return TRUE
-
-/turf/open/proc/water_vapor_gas_act()
-	MakeSlippery(TURF_WET_WATER, min_wet_time = 100, wet_time_to_add = 50)
-
-	for(var/mob/living/simple_animal/slime/M in src)
-		M.apply_water()
-
-	wash(CLEAN_WASH)
-	for(var/am in src)
-		var/atom/movable/movable_content = am
-		if(ismopable(movable_content)) // Will have already been washed by the wash call above at this point.
-			continue
-		movable_content.wash(CLEAN_WASH)
-	return TRUE
 
 /turf/open/handle_slip(mob/living/carbon/C, knockdown_amount, obj/O, lube, paralyze_amount, force_drop)
 	if(C.movement_type & FLYING)
@@ -259,29 +201,3 @@
 
 /turf/open/proc/ClearWet()//Nuclear option of immediately removing slipperyness from the tile instead of the natural drying over time
 	qdel(GetComponent(/datum/component/wet_floor))
-
-/turf/open/rad_act(strength)
-	. = ..()
-	var/gas_change = FALSE
-	var/list/cached_gases = air.gases
-	if(cached_gases[/datum/gas/oxygen] && cached_gases[/datum/gas/carbon_dioxide])
-		gas_change = TRUE
-		var/pulse_strength = min(strength, cached_gases[/datum/gas/oxygen][MOLES] * 1000, cached_gases[/datum/gas/carbon_dioxide][MOLES] * 2000)
-		cached_gases[/datum/gas/carbon_dioxide][MOLES] -= pulse_strength / 2000
-		cached_gases[/datum/gas/oxygen][MOLES] -= pulse_strength / 1000
-		ASSERT_GAS(/datum/gas/pluoxium, air)
-		cached_gases[/datum/gas/pluoxium][MOLES] += pulse_strength / 4000
-		strength -= pulse_strength
-
-	if(cached_gases[/datum/gas/hydrogen])
-		gas_change = TRUE
-		var/pulse_strength = min(strength, cached_gases[/datum/gas/hydrogen][MOLES] * 1000)
-		cached_gases[/datum/gas/hydrogen][MOLES] -= pulse_strength / 1000
-		ASSERT_GAS(/datum/gas/tritium, air)
-		cached_gases[/datum/gas/tritium][MOLES] += pulse_strength / 1000
-		strength -= pulse_strength
-
-	if(gas_change)
-		air.garbage_collect()
-		air_update_turf(FALSE, FALSE)
-

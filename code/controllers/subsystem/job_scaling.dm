@@ -49,9 +49,10 @@ SUBSYSTEM_DEF(job_scaling)
 
 //civilian/human jobs
 	scaling_rules["Doctor"] = list(10, 30, 5)  // 1 slot per 10 players over 30 players, up to 5 extra slots (9 max since 4 is the base)
-	scaling_rules["Priest"] = list(10, 30, 3) // 1 slot per 10 players over 30 players, up to 3 extra slots (5 max since 2 is the base)
-	scaling_rules["Stripper"] = list(10, 30, 6) // 1 slot per 10 players over 30 players, up to 6 extra slots (10 max since 6 is the base)
+	scaling_rules["Priest"] = list(10, 30, 3) // 1 slot per 10 players over 30 players, up to 3 extra slots (7 max since 4 is the base)
+	scaling_rules["Club Worker"] = list(10, 30, 4) // 1 slot per 10 players over 30 players, up to 4 extra slots (10 max since 6 is the base)
 	scaling_rules["Street Janitor"] = list(10, 30, 4) // 1 slot per 10 players over 30 players, up to 4 extra slots (10 max since 6 is the base)
+	scaling_rules["Tower Employee"] = list(10, 30, 6) // 1 slot per 10 players over 30 players, up to 6 extra slots (10 max since 4 is the base)
 
 //vampire jobs
 	scaling_rules["Hound"] = list(10, 30, 3) // 1 slot per 10 players over 30 players, up to 3 extra slots (10 max since 7 is the base)

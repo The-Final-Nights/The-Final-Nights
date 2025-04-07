@@ -123,7 +123,6 @@
 
 /obj/effect/decal/cleanable/blood/gibs/dry()
 	. = ..()
-	AddComponent(/datum/component/rot/gibs)
 
 /obj/effect/decal/cleanable/blood/gibs/ex_act(severity, target)
 	return

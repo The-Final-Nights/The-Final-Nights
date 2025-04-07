@@ -24,8 +24,8 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	var/list/dat = list()
 	dat += "<div class='statusDisplay'>"
 	dat += "Status: [active ? "<span class='good'>ONLINE</span>" : "<span class='bad'>OFFLINE</span>"]<BR>"
-	dat += "<A href='?src=[REF(src)];toggle=1'>[active ? "Turn Off" : "Turn On"]</A><BR><BR>"
-	dat += "<A href='?src=[REF(src)];view_callsigns=1'>View Registered Callsigns</A>"
+	dat += "<A href='byond://?src=[REF(src)];toggle=1'>[active ? "Turn Off" : "Turn On"]</A><BR><BR>"
+	dat += "<A href='byond://?src=[REF(src)];view_callsigns=1'>View Registered Callsigns</A>"
 	dat += "</div>"
 
 	var/datum/browser/popup = new(user, "p25_transceiver", "[src.name]", 300, 220)
@@ -195,6 +195,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 			to_chat(listener, message)
 			if(play_sound)
 				playsound(R, play_sound, sound_volume, FALSE)
+
 	return TRUE
 
 // ==============================
@@ -588,6 +589,13 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 
 	playsound(src, 'sound/effects/radioclick.ogg', 30, FALSE)
 
+	var/garble = FALSE
+	if(iskindred(speaker))
+		var/mob/living/carbon/human/speaker_man = speaker
+		if(speaker_man.clane?.name == "Lasombra")
+			message = scramble_lasombra_message(message,speaker_man)
+			garble = TRUE
+
 	var/formatted = format_message(message)
 	if(check_signal())
 		for(var/obj/item/p25radio/R in GLOB.p25_radios)
@@ -597,14 +605,17 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 				continue
 			if(!R.receiving)
 				continue
+			if(!R.powered)
+				continue
 
 			for(var/mob/listener in get_hearers_in_view(1, get_turf(R)))
 				to_chat(listener, formatted)
+			if(garble)
+				playsound(R, 'code/modules/wod13/sounds/lasombra_whisper.ogg', 0.3, FALSE, ignore_walls = FALSE)
+			playsound(R, 'sound/effects/radioclick.ogg', 1, FALSE)
 
 		if(linked_transceiver)
 			linked_transceiver.broadcast_message(formatted)
-
-		playsound(src, 'sound/effects/radioclick.ogg', 30, FALSE)
 
 	return ITALICS | REDUCE_RANGE
 

@@ -5,7 +5,7 @@
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Camarilla and the Traditions"
+	supervisors = "the Camarilla and the Traditions. Yourself."
 	selection_color = "#bd3327"
 	req_admin_notify = 1
 	minimal_player_age = 14
@@ -36,7 +36,8 @@
 		"Dealer",
 		"Tremere Regent",
 		"Primogens",
-		"Baron"
+		"Baron",
+		"Voivode"
 	)
 
 	v_duty = "You are the top dog of this city. You hold Praxis over San Francisco, and your word is law. Make sure the Masquerade is upheld, and your status is respected."
@@ -44,7 +45,7 @@
 
 /datum/job/vamp/prince/announce(mob/living/carbon/human/H)
 	..()
-	SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, PROC_REF(minor_announce), "Prince [H.real_name] is in the city!"))
+	SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, PROC_REF(minor_announce), "Prince [H.real_name] has arrived in the district!"))
 
 /datum/outfit/job/prince
 	name = "Prince"
@@ -67,11 +68,9 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag
 
 	implants = list(/obj/item/implant/mindshield)
-//	accessory = /obj/item/clothing/accessory/medal/gold/captain
 
 /datum/outfit/job/prince/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.ignores_warrant = TRUE
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/vampire/prince/female
 		shoes = /obj/item/clothing/shoes/vampire/heels

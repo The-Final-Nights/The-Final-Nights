@@ -1,7 +1,7 @@
 /datum/job/vamp/zadruga
 	title = "Zadruga"
 	department_head = list("Voivode")
-	faction = "Ghoul" //[Lucifernix] - Change this to vampire when I actually fix this.
+	faction = "Vampire" //[Lucifernix] - Change this to vampire when I actually fix this.
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = " the Laws of Hospitality"
@@ -17,10 +17,6 @@
 	exp_type_department = EXP_TYPE_TZIMISCE
 
 	allowed_species = list("Ghoul")
-	//ghoul_only = TRUE
-	//allowed_bloodlines = list("Old Clan Tzimisce", "Tzimisce")
-	//minimal_generation = 7	//Uncomment when players get exp enough
-
 	duty = "You were born in servitude to the Master of the Manor: your father served the Voivode, as did his father. Now, you carry their blood, and with it their responsibilities."
 	experience_addition = 20
 	minimal_masquerade = 2
@@ -40,7 +36,7 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/tzimisce=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
+	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /obj/effect/landmark/start/zadruga
 	name = "Zadruga"

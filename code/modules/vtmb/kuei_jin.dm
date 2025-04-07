@@ -208,12 +208,6 @@
 		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
 		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
 		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
-//		if(host.hud_used)
-//			dat += "<b>Known disciplines:</b><BR>"
-//			for(var/datum/action/discipline/D in host.actions)
-//				if(D)
-//					if(D.discipline)
-//						dat += "[D.discipline.name] [D.discipline.level] - [D.discipline.desc]<BR>"
 		if(host.Myself)
 			if(host.Myself.Friend)
 				if(host.Myself.Friend.owner)
@@ -243,7 +237,7 @@
 			if(host.bank_id == account.bank_id)
 				dat += "<b>My bank account code is: [account.code]</b><BR>"
 		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
-		onclose(host, "vampire", src)
+		onclose(HTML_SKELETON(host), "vampire", src)
 
 /datum/species/kuei_jin/on_species_gain(mob/living/carbon/human/C)
 	. = ..()
@@ -287,47 +281,6 @@
 
 /datum/species/kuei_jin/spec_life(mob/living/carbon/human/H)
 	. = ..()
-	if(istype(get_area(H), /area/vtm))
-		var/area/vtm/V = get_area(H)
-		if(V.zone_type == "masquerade" && V.upper)
-			if(H.pulling)
-				if(ishuman(H.pulling))
-					var/mob/living/carbon/human/pull = H.pulling
-					if(pull.stat == DEAD)
-						var/obj/item/card/id/id_card = H.get_idcard(FALSE)
-						if(!istype(id_card, /obj/item/card/id/clinic) && !istype(id_card, /obj/item/card/id/police) && !istype(id_card, /obj/item/card/id/sheriff) && !istype(id_card, /obj/item/card/id/prince) && !istype(id_card, /obj/item/card/id/camarilla))
-							if(H.CheckEyewitness(H, H, 7, FALSE))
-								if(H.last_loot_check+50 <= world.time)
-									H.last_loot_check = world.time
-									H.last_nonraid = world.time
-									H.killed_count = H.killed_count+1
-									if(!H.warrant && !H.ignores_warrant)
-										if(H.killed_count >= 5)
-											H.warrant = TRUE
-											SEND_SOUND(H, sound('code/modules/wod13/sounds/suspect.ogg', 0, 0, 75))
-											to_chat(H, "<span class='userdanger'><b>POLICE ASSAULT IN PROGRESS</b></span>")
-										else
-											SEND_SOUND(H, sound('code/modules/wod13/sounds/sus.ogg', 0, 0, 75))
-											to_chat(H, "<span class='userdanger'><b>SUSPICIOUS ACTION (corpse)</b></span>")
-			for(var/obj/item/I in H.contents)
-				if(I)
-					if(I.masquerade_violating)
-						if(I.loc == H)
-							var/obj/item/card/id/id_card = H.get_idcard(FALSE)
-							if(!istype(id_card, /obj/item/card/id/clinic) && !istype(id_card, /obj/item/card/id/police) && !istype(id_card, /obj/item/card/id/sheriff) && !istype(id_card, /obj/item/card/id/prince) && !istype(id_card, /obj/item/card/id/camarilla))
-								if(H.CheckEyewitness(H, H, 7, FALSE))
-									if(H.last_loot_check+50 <= world.time)
-										H.last_loot_check = world.time
-										H.last_nonraid = world.time
-										H.killed_count = H.killed_count+1
-										if(!H.warrant && !H.ignores_warrant)
-											if(H.killed_count >= 5)
-												H.warrant = TRUE
-												SEND_SOUND(H, sound('code/modules/wod13/sounds/suspect.ogg', 0, 0, 75))
-												to_chat(H, "<span class='userdanger'><b>POLICE ASSAULT IN PROGRESS</b></span>")
-											else
-												SEND_SOUND(H, sound('code/modules/wod13/sounds/sus.ogg', 0, 0, 75))
-												to_chat(H, "<span class='userdanger'><b>SUSPICIOUS ACTION (equipment)</b></span>")
 
 	if(H.key && (H.stat <= HARD_CRIT) && H.mind.dharma)
 		var/datum/preferences/P = GLOB.preferences_datums[ckey(H.key)]

@@ -104,25 +104,6 @@
 		visible_message("<span class='danger'>[src] shatters into a million pieces!</span>")
 		qdel(src)
 
-
-/obj/assume_air(datum/gas_mixture/giver)
-	if(loc)
-		return loc.assume_air(giver)
-	else
-		return null
-
-/obj/remove_air(amount)
-	if(loc)
-		return loc.remove_air(amount)
-	else
-		return null
-
-/obj/return_air()
-	if(loc)
-		return loc.return_air()
-	else
-		return null
-
 /obj/proc/handle_internal_lifeform(mob/lifeform_inside_me, breath_request)
 	//Return: (NONSTANDARD)
 	//		null if object handles breathing logic for lifeform
@@ -130,9 +111,7 @@
 	//DEFAULT: Take air from turf to give to have mob process
 
 	if(breath_request>0)
-		var/datum/gas_mixture/environment = return_air()
-		var/breath_percentage = BREATH_VOLUME / environment.return_volume()
-		return remove_air(environment.total_moles() * breath_percentage)
+		return null
 	else
 		return null
 
@@ -209,19 +188,12 @@
 	if(istype(M) && M.client && M.machine == src)
 		src.attack_self(M)
 
-/obj/singularity_pull(S, current_size)
-	..()
-	if(move_resist == INFINITY)
-		return
-	if(!anchored || current_size >= STAGE_FIVE)
-		step_towards(src,S)
-
 /obj/get_dumping_location(datum/component/storage/source,mob/user)
 	return get_turf(src)
 
-/obj/proc/CanAStarPass(ID, dir, caller)
-	if(ismovable(caller))
-		var/atom/movable/AM = caller
+/obj/proc/CanAStarPass(ID, dir, pathfinding_atom)
+	if(ismovable(pathfinding_atom))
+		var/atom/movable/AM = pathfinding_atom
 		if(AM.pass_flags & pass_flags_self)
 			return TRUE
 	. = !density
@@ -357,11 +329,6 @@
 	if(user.incapacitated())
 		return FALSE
 	return TRUE
-
-/obj/analyzer_act(mob/living/user, obj/item/I)
-	if(atmosanalyzer_scan(user, src))
-		return TRUE
-	return ..()
 
 /obj/proc/plunger_act(obj/item/plunger/P, mob/living/user, reinforced)
 	return

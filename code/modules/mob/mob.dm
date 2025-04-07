@@ -105,27 +105,6 @@
 				hud_list[hud] = I
 
 /**
- * Some kind of debug verb that gives atmosphere environment details
- */
-/mob/proc/Cell()
-	set category = "Admin"
-	set hidden = TRUE
-
-	if(!loc)
-		return
-
-	var/datum/gas_mixture/environment = loc.return_air()
-
-	var/t =	"<span class='notice'>Coordinates: [x],[y] </span>\n"
-	t +=	"<span class='danger'>Temperature: [environment.temperature] </span>\n"
-	for(var/id in environment.gases)
-		var/gas = environment.gases[id]
-		if(gas[MOLES])
-			t+="<span class='notice'>[gas[GAS_META][META_GAS_NAME]]: [gas[MOLES]] </span>\n"
-
-	to_chat(usr, t)
-
-/**
  * Return the desc of this mob for a photo
  */
 /mob/proc/get_photo_description(obj/item/camera/camera)
@@ -1048,7 +1027,7 @@
 			LAZYREMOVE(mob_spell_list, S)
 			qdel(S)
 	if(client)
-		client << output(null, "statbrowser:check_spells")
+		client.stat_panel.send_message("check_spells")
 
 ///Return any anti magic atom on this mob that matches the magic type
 /mob/proc/anti_magic_check(magic = TRUE, holy = FALSE, tinfoil = FALSE, chargecost = 1, self = FALSE)

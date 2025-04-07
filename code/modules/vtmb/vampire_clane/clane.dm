@@ -27,7 +27,7 @@ And it also helps for the character set panel
 	var/violating_appearance
 	var/male_clothes
 	var/female_clothes
-	var/enlightenment = FALSE
+	var/is_enlightened = FALSE
 	var/whitelisted = FALSE
 	var/accessories = list()
 	var/accessories_layers = list()
@@ -62,6 +62,8 @@ And it also helps for the character set panel
 
 	if(clan_keys)
 		H.put_in_hands(new clan_keys(H))
+
+	H.AddComponent(/datum/component/morality)
 
 /mob/living/carbon
 	var/datum/relationship/Myself

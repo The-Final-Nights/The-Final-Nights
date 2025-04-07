@@ -116,18 +116,12 @@
 // Ordinary survival box
 /obj/item/storage/box/survival
 	var/mask_type = /obj/item/clothing/mask/breath
-	var/internal_type = /obj/item/tank/internals/emergency_oxygen
 	var/medipen_type = /obj/item/reagent_containers/hypospray/medipen
 
 /obj/item/storage/box/survival/PopulateContents()
 	new mask_type(src)
 	if(!isnull(medipen_type))
 		new medipen_type(src)
-
-	if(!isplasmaman(loc))
-		new internal_type(src)
-	else
-		new /obj/item/tank/internals/plasmaman/belt(src)
 
 /obj/item/storage/box/survival/radio/PopulateContents()
 	..() // we want the survival stuff too.
@@ -143,7 +137,6 @@
 
 // Engineer survival box
 /obj/item/storage/box/survival/engineer
-	internal_type = /obj/item/tank/internals/emergency_oxygen/engi
 
 /obj/item/storage/box/survival/engineer/radio/PopulateContents()
 	..() // we want the regular items too.
@@ -152,7 +145,6 @@
 // Syndie survival box
 /obj/item/storage/box/survival/syndie
 	mask_type = /obj/item/clothing/mask/gas/syndicate
-	internal_type = /obj/item/tank/internals/emergency_oxygen/engi
 	medipen_type = null
 
 // Security survival box
@@ -826,10 +818,6 @@
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
-	if(!isplasmaman(loc))
-		new /obj/item/tank/internals/emergency_oxygen(src)
-	else
-		new /obj/item/tank/internals/plasmaman/belt(src)
 
 /obj/item/storage/box/rubbershot
 	name = "box of rubber shots"
@@ -1091,7 +1079,6 @@
 		/obj/item/modular_computer/tablet/preset/advanced=1,\
 		/obj/item/geiger_counter=1,\
 		/obj/item/construction/rcd/combat/admin=1,\
-		/obj/item/pipe_dispenser=1,\
 		/obj/item/card/emag=1,\
 		/obj/item/stack/spacecash/c1000=50,\
 		/obj/item/healthanalyzer/advanced=1,\
@@ -1297,7 +1284,6 @@
 /obj/item/storage/box/plumbing/PopulateContents()
 	var/list/items_inside = list(
 		/obj/item/stock_parts/water_recycler = 2,
-		/obj/item/stack/ducts/fifty = 1,
 		/obj/item/stack/sheet/metal/ten = 1,
 		)
 	generate_items_inside(items_inside, src)

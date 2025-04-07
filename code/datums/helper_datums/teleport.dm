@@ -114,34 +114,6 @@
 
 		if(cycle < 300 && destination_area.area_flags & NOTELEPORT)//if the area is mostly NOTELEPORT (centcom) we gotta give up on this fantasy at some point.
 			continue
-		if(!F.air)
-			continue
-
-		var/datum/gas_mixture/A = F.air
-		var/list/A_gases = A.gases
-		var/trace_gases
-		for(var/id in A_gases)
-			if(id in GLOB.hardcoded_gases)
-				continue
-			trace_gases = TRUE
-			break
-
-		// Can most things breathe?
-		if(trace_gases)
-			continue
-		if(!(A_gases[/datum/gas/oxygen] && A_gases[/datum/gas/oxygen][MOLES] >= 16))
-			continue
-		if(A_gases[/datum/gas/plasma])
-			continue
-		if(A_gases[/datum/gas/carbon_dioxide] && A_gases[/datum/gas/carbon_dioxide][MOLES] >= 10)
-			continue
-
-		// Aim for goldilocks temperatures and pressure
-		if((A.temperature <= 270) || (A.temperature >= 360))
-			continue
-		var/pressure = A.return_pressure()
-		if((pressure <= 20) || (pressure >= 550))
-			continue
 
 		if(extended_safety_checks)
 			if(islava(F)) //chasms aren't /floor, and so are pre-filtered

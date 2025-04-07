@@ -62,9 +62,6 @@
 		s.set_up(3, 1, T)
 		s.start()
 		T.temperature = 5000 //Why? not quite sure to be honest with you
-		T.hotspot_expose(50000,50000,1)
-
-
 
 /obj/effect/holodeck_effect/mobspawner
 	var/mobtype = /mob/living/simple_animal/hostile/carp/holocarp

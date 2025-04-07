@@ -209,13 +209,6 @@
 				return
 
 		add_hiddenprint(user)
-
-	else if(istype(W, /obj/item/pipe))
-		var/obj/item/pipe/P = W
-		if (P.pipe_type in list(0, 1, 5))	//simple pipes, simple bends, and simple manifolds.
-			if(!user.transferItemToLoc(P, drop_location()))
-				return
-			to_chat(user, "<span class='notice'>You fit the pipe into \the [src].</span>")
 	else
 		return ..()
 
@@ -297,10 +290,10 @@
 	if((mover.pass_flags & PASSGRILLE) || istype(mover, /obj/projectile))
 		return prob(girderpasschance)
 
-/obj/structure/girder/CanAStarPass(ID, dir, caller)
+/obj/structure/girder/CanAStarPass(ID, dir, pathfinding_atom)
 	. = !density
-	if(ismovable(caller))
-		var/atom/movable/mover = caller
+	if(ismovable(pathfinding_atom))
+		var/atom/movable/mover = pathfinding_atom
 		. = . || (mover.pass_flags & PASSGRILLE)
 
 /obj/structure/girder/deconstruct(disassembled = TRUE)

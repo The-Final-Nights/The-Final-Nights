@@ -66,12 +66,6 @@
 	else
 		return ..()
 
-/obj/effect/rend/singularity_act()
-	return
-
-/obj/effect/rend/singularity_pull()
-	return
-
 /obj/item/veilrender/vealrender
 	name = "veal render"
 	desc = "A wicked curved blade of alien origin, recovered from the ruins of a vast farm."
@@ -120,14 +114,6 @@
 
 /obj/tear_in_reality/Initialize(mapload)
 	. = ..()
-
-	AddComponent(
-		/datum/component/singularity, \
-		consume_range = TEAR_IN_REALITY_CONSUME_RANGE, \
-		notify_admins = !mapload, \
-		roaming = FALSE, \
-		singularity_size = TEAR_IN_REALITY_SINGULARITY_SIZE, \
-	)
 
 /obj/tear_in_reality/attack_tk(mob/user)
 	if(!iscarbon(user))

@@ -7,12 +7,6 @@
 	invisibility = INVISIBILITY_ABSTRACT
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
-/obj/effect/landmark/singularity_act()
-	return
-
-/obj/effect/landmark/singularity_pull()
-	return
-
 INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/Initialize()
@@ -436,3 +430,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	name = "portal exit"
 	icon_state = "portal_exit"
 	var/id
+
+/// Marks the bottom left of the testing zone.
+/// In landmarks.dm and not unit_test.dm so it is always active in the mapping tools.
+/obj/effect/landmark/unit_test_bottom_left
+	name = "unit test zone bottom left"
+
+/// Marks the top right of the testing zone.
+/// In landmarks.dm and not unit_test.dm so it is always active in the mapping tools.
+/obj/effect/landmark/unit_test_top_right
+	name = "unit test zone top right"

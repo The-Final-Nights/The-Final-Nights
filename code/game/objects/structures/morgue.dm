@@ -272,7 +272,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 				if(user)
 					if(isnpc(M) && !iskindred(M))
 						var/mob/living/carbon/human/HM = user
-						HM.AdjustHumanity(-1, 0)
+						SEND_SIGNAL(HM, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 						call_dharma("torture", user)
 						if(!(M in HM.mind.dharma?.deserving))
 							call_dharma("killfirst")

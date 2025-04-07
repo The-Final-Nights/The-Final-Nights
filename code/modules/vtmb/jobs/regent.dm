@@ -5,7 +5,7 @@
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Pyramid"
+	supervisors = "the Pyramid, or what remains of it"
 	selection_color = "#ab2508"
 
 	outfit = /datum/outfit/job/regent

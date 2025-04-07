@@ -37,19 +37,6 @@ SUBSYSTEM_DEF(graveyard)
 	else
 		lost_points = max(0, lost_points+1)
 		clear_runs = 0
-
-//	if(lost_points > 2)
-//		for(var/mob/living/carbon/human/L in GLOB.player_list)
-//			if(L)
-//				if(L.mind)
-//					if(L.mind.assigned_role == "Graveyard Keeper")
-//						if(L.client)
-//							if(istype(get_area(L), /area/vtm/graveyard))
-//								L.AdjustMasquerade(-1)
-//								total_bad += 1
-//		lost_points = 0
-
-	if(clear_runs > 2)
 		clear_runs = 0
 		for(var/mob/living/carbon/human/L in GLOB.player_list)
 			if(L)

@@ -160,7 +160,7 @@
 /obj/item/card/id/clerk
 	name = "clerk badge"
 	id_type_name = "clerk badge"
-	desc = "A badge which shows buerocracy qualification."
+	desc = "A badge which shows bureaucracy qualification."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "id1"
 	inhand_icon_state = "card-id"
@@ -169,6 +169,11 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "id1"
+
+/obj/item/card/id/clerk/harpy
+	name = "Public Relations Clerk badge"
+	id_type_name = "junior clerk badge"
+	desc = "A badge which shows social qualifications."
 
 /obj/item/card/id/bruiser
 	name = "bruiser badge"

@@ -242,6 +242,15 @@
 	/// When returned from `COMSIG_ATOM_SINGULARITY_TRY_MOVE`, the singularity will move to that turf
 	#define SINGULARITY_TRY_MOVE_BLOCK (1 << 0)
 
+// From /atom/proc/set_density(new_value) for when an atom changes density
+#define COMSIG_ATOM_DENSITY_CHANGED "atom_density_change"
+
+#define COMSIG_MOVABLE_PULLED "movable_pulled"						//! signal sent out by an atom when it is being pulled by something else : (atom/puller)
+#define COMSIG_MOVABLE_NO_LONGER_PULLED "movable_no_longer_pulled"	//! signal sent out by an atom when it is no longer being pulled by something else : (atom/puller)
+
+///From living/set_resting(): (new_resting, silent, instant)
+#define COMSIG_LIVING_RESTING "living_resting"
+
 /////////////////
 
 ///from base of area/Entered(): (/area)
@@ -432,6 +441,9 @@
 ///from /obj/structure/door/crush(): (mob/living/crushed, /obj/machinery/door/crushing_door)
 #define COMSIG_LIVING_DOORCRUSHED "living_doorcrush"
 
+/// From base of /client/Move()
+#define COMSIG_MOB_CLIENT_MOVED "mob_client_moved"
+
 ///from base of mob/living/resist() (/mob/living)
 #define COMSIG_LIVING_RESIST "living_resist"
 ///from base of mob/living/IgniteMob() (/mob/living)
@@ -497,6 +509,12 @@
 ///from base of /mob/living/can_track(): (mob/user)
 #define COMSIG_LIVING_CAN_TRACK "mob_cantrack"
 	#define COMPONENT_CANT_TRACK (1<<0)
+
+/// From /mob/living/proc/stop_leaning()
+#define COMSIG_LIVING_STOPPED_LEANING "living_stopped_leaning"
+
+/// Called when a living mob has its resting updated: (resting_state)
+#define COMSIG_LIVING_RESTING_UPDATED "resting_updated"
 
 ///From /datum/component/creamed/Initialize()
 #define COMSIG_MOB_CREAMED "mob_creamed"
@@ -986,7 +1004,7 @@
 ///from monkey CtrlClickOn(): (/mob)
 #define COMSIG_XENO_MONKEY_CLICK_CTRL "xeno_monkey_click_ctrl"
 
-//from /turf/open/temperature_expose(datum/gas_mixture/air, exposed_temperature)
+//from /turf/open/temperature_expose(exposed_temperature)
 #define COMSIG_TURF_EXPOSE "turf_expose"
 
 // /datum/component/container_item

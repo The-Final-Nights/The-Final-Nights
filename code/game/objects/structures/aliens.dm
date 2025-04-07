@@ -63,21 +63,6 @@
 	canSmoothWith = list(SMOOTH_GROUP_ALIEN_RESIN)
 	max_integrity = 200
 	var/resintype = null
-	CanAtmosPass = ATMOS_PASS_DENSITY
-
-
-/obj/structure/alien/resin/Initialize(mapload)
-	. = ..()
-	air_update_turf(TRUE, TRUE)
-
-/obj/structure/alien/resin/Destroy()
-	air_update_turf(TRUE, FALSE)
-	. = ..()
-
-/obj/structure/alien/resin/Move()
-	var/turf/T = loc
-	. = ..()
-	move_update_air(T)
 
 /obj/structure/alien/resin/wall
 	name = "resin wall"
@@ -88,9 +73,6 @@
 	resintype = "wall"
 	smoothing_groups = list(SMOOTH_GROUP_ALIEN_RESIN, SMOOTH_GROUP_ALIEN_WALLS)
 	canSmoothWith = list(SMOOTH_GROUP_ALIEN_WALLS)
-
-/obj/structure/alien/resin/wall/BlockSuperconductivity()
-	return 1
 
 /obj/structure/alien/resin/wall/creature
 	name = "gelatinous wall"
@@ -178,18 +160,13 @@
 			base_icon_state = "weeds3"
 	set_smoothed_icon_state(smoothing_junction)
 
-
-/obj/structure/alien/weeds/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
-
 /obj/structure/alien/weeds/proc/expand()
 	var/turf/U = get_turf(src)
 	if(is_type_in_typecache(U, blacklisted_turfs))
 		qdel(src)
 		return FALSE
 
-	for(var/turf/T in U.GetAtmosAdjacentTurfs())
+	for(var/turf/T in U.reachableAdjacentTurfs())
 		if(locate(/obj/structure/alien/weeds) in T)
 			continue
 
@@ -198,12 +175,6 @@
 
 		new /obj/structure/alien/weeds(T)
 	return TRUE
-
-/obj/structure/alien/weeds/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > 300
-
-/obj/structure/alien/weeds/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	take_damage(5, BURN, 0, 0)
 
 //Weed nodes
 /obj/structure/alien/weeds/node
@@ -286,10 +257,6 @@
 	if(status == BURST)
 		obj_integrity = integrity_failure * max_integrity
 
-/obj/structure/alien/egg/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
-
 /obj/structure/alien/egg/update_icon_state()
 	switch(status)
 		if(GROWING)
@@ -354,12 +321,6 @@
 					if(CanHug(M))
 						child.Leap(M)
 						break
-
-/obj/structure/alien/egg/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > 500
-
-/obj/structure/alien/egg/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	take_damage(5, BURN, 0, 0)
 
 /obj/structure/alien/egg/obj_break(damage_flag)
 	if(!(flags_1 & NODECONSTRUCT_1))

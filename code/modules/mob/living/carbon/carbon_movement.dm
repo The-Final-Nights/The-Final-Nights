@@ -14,7 +14,7 @@
 	if(istype(T) && movement_dir && T.on)
 		return TRUE
 
-	var/obj/item/tank/jetpack/J = get_jetpack()
+	var/obj/item/jetpack/J = get_jetpack()
 	if(istype(J) && (movement_dir || J.stabilizers) && J.on)
 		return TRUE
 

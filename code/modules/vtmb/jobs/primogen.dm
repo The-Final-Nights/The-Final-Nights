@@ -20,7 +20,7 @@
 	allowed_bloodlines = list("Malkavian")
 	minimal_generation = 10
 
-	v_duty = "Offer your infinite knowledge to Prince of the City."
+	v_duty = "Offer your infinite knowledge to Prince of the City. You likely have a hold over the local hospital, make good use of it and ensure the blood bags remain available."
 	experience_addition = 20
 	minimal_masquerade = 5
 	my_contact_is_important = TRUE
@@ -39,7 +39,7 @@
 	head = /obj/item/clothing/head/vampire/malkav
 	l_pocket = /obj/item/vamp/phone/malkavian
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/malkav/primogen=1, /obj/item/vamp/keys/clinic, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	backpack_contents = list(/obj/item/vamp/keys/malkav/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
 /datum/outfit/job/malkav/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -71,7 +71,7 @@
 	allowed_bloodlines = list("Nosferatu")
 	minimal_generation = 10
 
-	v_duty = "Offer your infinite knowledge to Prince of the City."
+	v_duty = "Offer your infinite knowledge to Prince of the City, and run the warren, your domain watches over the sewers."
 	experience_addition = 20
 	minimal_masquerade = 5
 	my_contact_is_important = TRUE
@@ -118,7 +118,7 @@
 	allowed_bloodlines = list("Ventrue")
 	minimal_generation = 10
 
-	v_duty = "Offer your infinite knowledge to Prince of the City."
+	v_duty = "Offer your infinite knowledge to Prince of the City. Maintain the local Jazz Club, in front of the Tower, and its Elysium."
 	experience_addition = 20
 	minimal_masquerade = 5
 	my_contact_is_important = TRUE
@@ -164,7 +164,7 @@
 	allowed_bloodlines = list("Toreador")
 	minimal_generation = 10
 
-	v_duty = "Offer your infinite knowledge to Prince of the City."
+	v_duty = "Offer your infinite knowledge to Prince of the City. Take care of the Strip Club and its Elysium, for it is your domain and a social center within the city."
 	experience_addition = 20
 	minimal_masquerade = 5
 	my_contact_is_important = TRUE
@@ -189,54 +189,50 @@
 		uniform = /obj/item/clothing/under/vampire/primogen_toreador/female
 		shoes = /obj/item/clothing/shoes/vampire/heels/red
 
-//////////////////////////// POST 2015 STUFF BEYOND
-
 /datum/job/vamp/primogen_banu
 	title = "Primogen Banu Haqim"
 	department_head = list("Justicar")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions"
+	supervisors = " the Traditions and the Laws of Haqim"
 	selection_color = "#4f0404"
+
+	outfit = /datum/outfit/job/banuprim
 
 	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	paycheck = PAYCHECK_EASY
 	paycheck_department = ACCOUNT_SRV
-	display_order = JOB_DISPLAY_ORDER_PRIMOGEN_BANU
+	display_order = JOB_DISPLAY_ORDER_BANUPRIM
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Banu Haqim")
 	minimal_generation = 10
 
-	v_duty = "Police the Banu Haqim and offer knowledge to the Prince."
+	v_duty = "Offer your infinite knowledge to Prince of the City, while overseeing the Banu Haqim in the city. Monitor their contracts and ensure they remain true to the ways of the Clan. You have an official cover with the Police Department as a local civilian consultant, ensure things run smoothly, on either end."
 	experience_addition = 20
 	minimal_masquerade = 5
 	my_contact_is_important = TRUE
 	known_contacts = list("Prince")
 
-	outfit = /datum/outfit/job/primogen_banu
-
-/datum/outfit/job/primogen_banu
+/datum/outfit/job/banuprim
 	name = "Primogen Banu Haqim"
 	jobtype = /datum/job/vamp/primogen_banu
 
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/yellow
-	uniform = /obj/item/clothing/under/vampire/punk
-	suit = /obj/item/clothing/suit/vampire/jacket/punk // cant believe they stole the coat
+	uniform = /obj/item/clothing/under/vampire/bandit
+	suit = /obj/item/clothing/suit/vampire/jacket/punk
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	l_pocket = /obj/item/vamp/phone/primogen_banu_haqim
+	l_pocket = /obj/item/vamp/phone/banu
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	backpack_contents = list(/obj/item/vamp/keys/banuhaqim/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
 /obj/effect/landmark/start/primogen_banu
 	name = "Primogen Banu Haqim"
 	icon_state = "Assistant"
-
-//
 
 /datum/job/vamp/primogen_lasombra
 	title = "Primogen Lasombra"
@@ -244,29 +240,29 @@
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions"
+	supervisors = " the Traditions and the Friends of the Night"
 	selection_color = "#4f0404"
 
-	outfit = /datum/outfit/job/primogen_lasombra
+	outfit = /datum/outfit/job/lasombraprim
 
 	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	paycheck = PAYCHECK_EASY
 	paycheck_department = ACCOUNT_SRV
-	display_order = JOB_DISPLAY_ORDER_PRIMOGEN_LASOMBRA
+	display_order = JOB_DISPLAY_ORDER_LASOMBRAPRIM
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Lasombra")
 	minimal_generation = 10
 
-	v_duty = "You are a member of the Les Amis Noirs and may appoint local Court of Blood members. Offer knowledge to the Prince."
+	v_duty = "Offer your infinite knowledge to Prince of the City. Monitor those of your Clan and your lesser cousins, while holding a Court of Blood as need be, for all it takes for the Camarilla to turn on you is one mistake. You and Your Clan were given a domain in the local Church and in the vicinity of a swarm of Lupines, keep matters under control."
 	experience_addition = 20
 	minimal_masquerade = 5
 	my_contact_is_important = TRUE
 	known_contacts = list("Prince")
 
-/datum/outfit/job/primogen_lasombra
+/datum/outfit/job/lasombraprim
 	name = "Primogen Lasombra"
 	jobtype = /datum/job/vamp/primogen_lasombra
 
@@ -275,8 +271,9 @@
 	uniform = /obj/item/clothing/under/vampire/turtleneck_black
 	suit = /obj/item/clothing/suit/vampire/trench
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	r_pocket = /obj/item/cockclock // no need for a phone
-	backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	l_pocket = /obj/item/vamp/phone/lasombra
+	r_pocket = /obj/item/cockclock
+	backpack_contents = list(/obj/item/vamp/keys/lasombra/primogen=1,/obj/item/passport=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
 /datum/outfit/job/primogen_lasombra/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -287,4 +284,3 @@
 /obj/effect/landmark/start/primogen_lasombra
 	name = "Primogen Lasombra"
 	icon_state = "Assistant"
-

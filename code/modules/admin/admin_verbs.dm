@@ -19,7 +19,6 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/stop_sounds,
 	/client/proc/mark_datum_mapview,
 	/client/proc/debugstatpanel,
-	/client/proc/fix_air,				/*resets air in designated radius to its default atmos composition*/
 	// TFN MODULAR START
 	/client/proc/addbunkerbypass,
 	/client/proc/revokebunkerbypass,
@@ -59,7 +58,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/cmd_admin_subtle_message,	/*send a message to somebody as a 'voice in their head'*/
 	/client/proc/cmd_admin_adjust_masquerade, /*adjusts the masquerade level of a player*/
 	/client/proc/cmd_admin_global_adjust_masquerade, /*adjusts the global masquerade*/
-	/client/proc/cmd_admin_adjust_humanity, /*adjusts the humanity level of a player*/
+//	/client/proc/cmd_admin_adjust_humanity, /*adjusts the humanity level of a player*/
 	/client/proc/cmd_admin_headset_message,	/*send a message to somebody through their headset as CentCom*/
 	/client/proc/cmd_admin_delete,		/*delete an instance/object/mob/etc*/
 	/client/proc/cmd_admin_check_contents,	/*displays the contents of an instance*/
@@ -121,6 +120,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/mass_zombie_cure,
 	/client/proc/polymorph_all,
 	/client/proc/show_tip,
+	/client/proc/roll_dice_vtm,
 	/client/proc/smite,
 	/client/proc/admin_away,
 	/client/proc/toggle_RMB
@@ -182,6 +182,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/map_template_upload,
 	/client/proc/jump_to_ruin,
 	/client/proc/clear_dynamic_transit,
+	/client/proc/run_empty_query,
 	/client/proc/toggle_medal_disable,
 	/client/proc/view_runtimes,
 	/client/proc/pump_random_event,
@@ -227,7 +228,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/cmd_admin_subtle_message,
 	/client/proc/cmd_admin_adjust_masquerade,
 	/client/proc/cmd_admin_global_adjust_masquerade,
-	/client/proc/cmd_admin_adjust_humanity,
+//	/client/proc/cmd_admin_adjust_humanity,
 	/client/proc/cmd_admin_headset_message,
 	/client/proc/cmd_admin_check_contents,
 	/datum/admins/proc/access_news_network,
@@ -521,7 +522,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	message_admins(msg)
 	admin_ticket_log(M, msg)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adjust Masquerade")
-
+/*
 /client/proc/cmd_admin_adjust_humanity(mob/living/carbon/human/M in GLOB.player_list)
 	set name = "Adjust Humanity"
 	set category = "Admin"
@@ -534,23 +535,21 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		return
 
 	var/is_enlightenment = FALSE
-	if (M.client?.prefs?.enlightenment)
+	if (M.client?.prefs?.is_enlightened)
 		is_enlightenment = TRUE
 
 	var/value = input(usr, "Enter the [is_enlightenment ? "Enlightenment" : "Humanity"] adjustment value for [M.key]:", "Humanity Adjustment", 0) as num|null
 	if(value == null)
 		return
-	if (is_enlightenment)
-		value = -value
 
-	M.AdjustHumanity(value, 0, forced = TRUE)
+	M.morality_path.adjust_humanity(value, M)
 
-	var/msg = "<span class='adminnotice'><b>Humanity Adjustment: [key_name_admin(usr)] adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.humanity]</b></span>"
-	log_admin("HumanityAdjust: [key_name_admin(usr)] has adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.humanity]")
+	var/msg = "<span class='adminnotice'><b>Humanity Adjustment: [key_name_admin(usr)] adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.morality_path.score]</b></span>"
+	log_admin("HumanityAdjust: [key_name_admin(usr)] has adjusted [key_name(M)]'s [is_enlightenment ? "Enlightenment" : "Humanity"] by [is_enlightenment ? -value : value] to [M.morality_path.score]")
 	message_admins(msg)
 	admin_ticket_log(M, msg)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adjust Humanity")
-
+*/
 /client/proc/reward_exp()
 	set name = "Reward Experience"
 	set category = "Admin"
@@ -575,6 +574,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 						message_admins("[ADMIN_LOOKUPFLW(usr)] rewarded [ADMIN_LOOKUPFLW(exper)] with [amount] experience points. Reason: [reason]")
 						log_admin("[key_name(usr)] rewarded [key_name(exper)] with [amount] experience points. Reason: [reason]")
+						SSoverwatch.record_action(usr, "[key_name(usr)] rewarded [key_name(exper)] with [amount] experience points. Reason: [reason]")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Reward Experience") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/grant_whitelist()
@@ -637,6 +637,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 					message_admins("[ADMIN_LOOKUPFLW(usr)] gave [ADMIN_LOOKUPFLW(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
 					log_admin("[key_name(usr)] gave [key_name(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
+					SSoverwatch.record_action(usr, "[key_name(usr)] gave [key_name(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
 
 					if ((giving_discipline_level > 0) && player.mob)
 						if (ishuman(player.mob))
@@ -677,6 +678,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 				message_admins("[ADMIN_LOOKUPFLW(usr)] removed the Discipline [discipline.name] from [ADMIN_LOOKUPFLW(player)]. Reason: [reason]")
 				log_admin("[key_name(usr)] removed the Discipline [discipline.name] from [key_name(player)]. Reason: [reason]")
+				SSoverwatch.record_action(usr, "[key_name(usr)] removed the Discipline [discipline.name] from [key_name(player)]. Reason: [reason]")
 
 				qdel(discipline)
 
@@ -843,7 +845,6 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set category = "Debug"
 	if(!check_rights(R_DEBUG))
 		return
-	SSair.ui_interact(mob)
 
 /client/proc/reload_cards()
 	set name = "Reload Cards"
@@ -1083,4 +1084,4 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set name = "Debug Stat Panel"
 	set category = "Debug"
 
-	src << output("", "statbrowser:create_debug")
+	src.stat_panel.send_message("create_debug")

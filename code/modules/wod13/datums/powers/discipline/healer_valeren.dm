@@ -14,22 +14,23 @@
 //SENSE VITALITY
 /datum/discipline_power/valeren/sense_vitality
 	name = "Sense Vitality"
-	desc = "Discipline power description"
+	desc = "Detect how healthy an individual is or other blood information"
 
 	level = 1
 	vitae_cost = 0
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND
-	target_type = TARGET_MOB
+	target_type = TARGET_HUMAN
 	range = 1
 
 	cooldown_length = 5 SECONDS
 
-/datum/discipline_power/valeren/sense_vitality/activate(mob/living/target)
+/datum/discipline_power/valeren/sense_vitality/activate(mob/living/carbon/human/target)
 	. = ..()
 	healthscan(owner, target, 1, FALSE)
 	chemscan(owner, target)
 	to_chat(owner, "<b>[target]</b> has <b>[num2text(target.bloodpool)]/[target.maxbloodpool]</b> blood points.")
-	to_chat(owner, "<b>[target]</b> has a rating of <b>[target.humanity]</b> on their path.")
+	if(iskindred(target))
+		to_chat(owner, "<b>[target]</b> has a rating of <b>[target.morality_path?.score]</b> on their path.")
 
 //ANESTHETIC TOUCH
 /datum/discipline_power/valeren/anesthetic_touch
@@ -105,7 +106,7 @@
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND
-	target_type = TARGET_LIVING
+	target_type = TARGET_VAMPIRE
 	range = 1
 
 	cooldown_length = 5 SECONDS
@@ -122,20 +123,15 @@
 
 	return .
 
-/datum/discipline_power/valeren/unburden_the_bestial_soul/can_activate(mob/living/target, alert)
+/datum/discipline_power/valeren/unburden_the_bestial_soul/can_activate(mob/living/carbon/human/target, alert)
 	. = ..()
-
-	if (!iskindred(target))
-		if (alert)
-			to_chat(owner, span_warning("[src] can only be used on Kindred."))
-		return FALSE
 
 	if (!target.client)
 		if (alert)
 			to_chat(owner, span_warning("[target] does not have a soul to cleanse!"))
 		return FALSE
 
-	if (target.humanity >= 10 && !target.client?.prefs?.enlightenment)
+	if (target.morality_path.score >= 10 && !target.client?.prefs?.is_enlightened)
 		if (alert)
 			to_chat(owner, span_warning("[target]'s soul is already completely pure."))
 		return FALSE
@@ -149,8 +145,11 @@
 
 /datum/discipline_power/valeren/unburden_the_bestial_soul/activate(mob/living/carbon/human/target)
 	. = ..()
+	// Resets the path hit cooldown on the target vampire so this power isn't rendered completely time consuming
+	S_TIMER_COOLDOWN_RESET(target.morality_path, COOLDOWN_PATH_HIT)
+
 	to_chat(owner, span_notice("You have healed [target]'s soul slightly."))
-	target.AdjustHumanity(1, 10)
+	SEND_SIGNAL(target, COMSIG_PATH_HIT, PATH_SCORE_UP)
 	points_can_restore--
 
 

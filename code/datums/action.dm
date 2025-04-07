@@ -418,7 +418,7 @@
 	name = "Toggle Jetpack Stabilization"
 
 /datum/action/item_action/jetpack_stabilization/IsAvailable()
-	var/obj/item/tank/jetpack/J = target
+	var/obj/item/jetpack/J = target
 	if(!istype(J) || !J.on)
 		return FALSE
 	return ..()

@@ -156,7 +156,6 @@
 	minbodytemp = 0
 	maxbodytemp = 1500
 	faction = list("Tremere")
-	pressure_resistance = 200
 	bloodpool = 1
 	maxbloodpool = 1
 
@@ -410,8 +409,6 @@
 					if(LAZYLEN(candidates))
 						var/mob/dead/observer/C = pick(candidates)
 						H.key = C.key
-//					Y.key = C.key
-//					Y.my_creator = last_activator
 				playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 				qdel(src)
 				return

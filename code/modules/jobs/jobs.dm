@@ -12,15 +12,17 @@ GLOBAL_LIST_INIT(command_positions, list(
 	"Prince",
 	"Seneschal",
 	"Sheriff",
-	"Hound"))
+	"Harpy",
+	"Hound",
+	"Tower Employee"))
 
 GLOBAL_LIST_INIT(camarilla_council_positions, list(
     "Primogen Malkavian",
     "Primogen Nosferatu",
     "Primogen Toreador",
     "Primogen Ventrue",
-    "Primogen Banu Haqim",
-	"Primogen Lasombra"
+	"Primogen Lasombra",
+	"Primogen Banu Haqim"
 ))
 
 
@@ -36,8 +38,8 @@ GLOBAL_LIST_INIT(citizen_positions, list(
 	"Barista",
 	"Counselor",
 	"Cabaret Worker",
-	"Old Church Curator",
-	"Old Church Caretaker",
+	"Church Curator",
+	"Church Caretaker",
 	"Veterinarian",
 	"Antique Worker"
 ))
@@ -55,7 +57,7 @@ GLOBAL_LIST_INIT(national_security_positions, list(
 
 GLOBAL_LIST_INIT(services_positions, list(
     "Graveyard Keeper",
-    "Stripper",
+    "Club Worker",
     "Street Janitor",
     "Taxi Driver"
 ))

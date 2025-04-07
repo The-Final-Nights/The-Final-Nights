@@ -347,49 +347,16 @@
 	if(pulledby && pulledby.grab_state >= GRAB_KILL && atmos_requirements["min_oxy"])
 		. = FALSE //getting choked
 
-	if(isturf(loc) && isopenturf(loc))
-		var/turf/open/ST = loc
-		if(ST.air)
-			var/ST_gases = ST.air.gases
-			ST.air.assert_gases(arglist(GLOB.hardcoded_gases))
-
-			var/tox = ST_gases[/datum/gas/plasma][MOLES]
-			var/oxy = ST_gases[/datum/gas/oxygen][MOLES]
-			var/n2  = ST_gases[/datum/gas/nitrogen][MOLES]
-			var/co2 = ST_gases[/datum/gas/carbon_dioxide][MOLES]
-
-			ST.air.garbage_collect()
-
-			if(atmos_requirements["min_oxy"] && oxy < atmos_requirements["min_oxy"])
-				. = FALSE
-			else if(atmos_requirements["max_oxy"] && oxy > atmos_requirements["max_oxy"])
-				. = FALSE
-			else if(atmos_requirements["min_tox"] && tox < atmos_requirements["min_tox"])
-				. = FALSE
-			else if(atmos_requirements["max_tox"] && tox > atmos_requirements["max_tox"])
-				. = FALSE
-			else if(atmos_requirements["min_n2"] && n2 < atmos_requirements["min_n2"])
-				. = FALSE
-			else if(atmos_requirements["max_n2"] && n2 > atmos_requirements["max_n2"])
-				. = FALSE
-			else if(atmos_requirements["min_co2"] && co2 < atmos_requirements["min_co2"])
-				. = FALSE
-			else if(atmos_requirements["max_co2"] && co2 > atmos_requirements["max_co2"])
-				. = FALSE
-		else
-			if(atmos_requirements["min_oxy"] || atmos_requirements["min_tox"] || atmos_requirements["min_n2"] || atmos_requirements["min_co2"])
-				. = FALSE
-
-/mob/living/simple_animal/proc/environment_temperature_is_safe(datum/gas_mixture/environment)
+/mob/living/simple_animal/proc/environment_temperature_is_safe()
 	. = TRUE
-	var/areatemp = get_temperature(environment)
+	var/areatemp = get_temperature()
 	if((areatemp < minbodytemp) || (areatemp > maxbodytemp))
 		. = FALSE
 
-/mob/living/simple_animal/handle_environment(datum/gas_mixture/environment)
+/mob/living/simple_animal/handle_environment()
 	var/atom/A = loc
 	if(isturf(A))
-		var/areatemp = get_temperature(environment)
+		var/areatemp = get_temperature()
 		if(abs(areatemp - bodytemperature) > 5)
 			var/diff = areatemp - bodytemperature
 			diff = diff / 5

@@ -114,7 +114,6 @@
 	icon_state = "plasma_wall-0"
 	base_icon_state = "plasma_wall"
 	sheet_type = /obj/item/stack/sheet/mineral/plasma
-	thermal_conductivity = 0.04
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = list(SMOOTH_GROUP_CLOSED_TURFS, SMOOTH_GROUP_WALLS, SMOOTH_GROUP_PLASMA_WALLS)
 	canSmoothWith = list(SMOOTH_GROUP_PLASMA_WALLS)
@@ -130,12 +129,6 @@
 /turf/closed/wall/mineral/plasma/proc/PlasmaBurn(temperature)
 	new girder_type(src)
 	ScrapeAway()
-	var/turf/open/T = src
-	T.atmos_spawn_air("plasma=400;TEMP=[temperature]")
-
-/turf/closed/wall/mineral/plasma/temperature_expose(datum/gas_mixture/air, exposed_temperature)//Doesn't work because walls have superconduction turned off
-	if(exposed_temperature > 300)
-		PlasmaBurn(exposed_temperature)
 
 /turf/closed/wall/mineral/plasma/proc/ignite(exposed_temperature)
 	if(exposed_temperature > 300)

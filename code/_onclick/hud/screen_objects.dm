@@ -331,27 +331,27 @@
 					to_chat(C, "<span class='warning'>You are not wearing an internals mask!</span>")
 					return
 
-		var/obj/item/I = C.is_holding_item_of_type(/obj/item/tank)
+		var/obj/item/I = C.is_holding_item_of_type(/obj/item)
 		if(I)
 			to_chat(C, "<span class='notice'>You are now running on internals from [I] in your [C.get_held_index_name(C.get_held_index_of_item(I))].</span>")
 			C.internal = I
 		else if(ishuman(C))
 			var/mob/living/carbon/human/H = C
-			if(istype(H.s_store, /obj/item/tank))
+			if(istype(H.s_store, /obj/item))
 				to_chat(H, "<span class='notice'>You are now running on internals from [H.s_store] on your [H.wear_suit.name].</span>")
 				H.internal = H.s_store
-			else if(istype(H.belt, /obj/item/tank))
+			else if(istype(H.belt, /obj/item))
 				to_chat(H, "<span class='notice'>You are now running on internals from [H.belt] on your belt.</span>")
 				H.internal = H.belt
-			else if(istype(H.l_store, /obj/item/tank))
+			else if(istype(H.l_store, /obj/item))
 				to_chat(H, "<span class='notice'>You are now running on internals from [H.l_store] in your left pocket.</span>")
 				H.internal = H.l_store
-			else if(istype(H.r_store, /obj/item/tank))
+			else if(istype(H.r_store, /obj/item))
 				to_chat(H, "<span class='notice'>You are now running on internals from [H.r_store] in your right pocket.</span>")
 				H.internal = H.r_store
 
 		//Separate so CO2 jetpacks are a little less cumbersome.
-		if(!C.internal && istype(C.back, /obj/item/tank))
+		if(!C.internal && istype(C.back, /obj/item))
 			to_chat(C, "<span class='notice'>You are now running on internals from [C.back] on your back.</span>")
 			C.internal = C.back
 

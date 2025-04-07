@@ -16,7 +16,7 @@
 		return 1
 
 /mob/living/carbon/human/proc/drinksomeblood(var/mob/living/mob)
-	var/bloodgain = 1*max(1, mob.bloodquality-1)
+	var/bloodgain = max(1, mob.bloodquality-1)
 	var/fumbled = FALSE
 	last_drinkblood_use = world.time
 	if(client)
@@ -159,7 +159,7 @@
 				if(iskindred(mob) && iskindred(src))
 					var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
 					var/datum/preferences/P2 = GLOB.preferences_datums[ckey(mob.key)]
-					AdjustHumanity(-1, 0)
+					SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 					AdjustMasquerade(-1)
 					if(K.generation >= generation)
 						message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
@@ -188,12 +188,6 @@
 							death()
 							if(P)
 								P.reason_of_death = "Failed the Diablerie ([time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")])."
-//							ghostize(FALSE)
-//							key = K.key
-//							generation = K.generation
-//							maxHealth = initial(maxHealth)+100*(13-generation)
-//							health = initial(health)+100*(13-generation)
-//							mob.death()
 						else
 							message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
 							log_attack("[key_name(src)] successfully Diablerized [key_name(mob)].")
@@ -226,13 +220,12 @@
 						Npc.last_attacker = null
 						killed_count = killed_count+1
 						if(killed_count >= 5)
-//							GLOB.fuckers |= src
 							SEND_SOUND(src, sound('code/modules/wod13/sounds/humanity_loss.ogg', 0, 0, 75))
 							to_chat(src, "<span class='userdanger'><b>POLICE ASSAULT IN PROGRESS</b></span>")
 					SEND_SOUND(src, sound('code/modules/wod13/sounds/feed_failed.ogg', 0, 0, 75))
 					to_chat(src, "<span class='warning'>This sad sacrifice for your own pleasure affects something deep in your mind.</span>")
 					AdjustMasquerade(-1)
-					AdjustHumanity(-1, 0)
+					SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
 					mob.death()
 			if(!ishuman(mob))
 				if(mob.stat != DEAD)

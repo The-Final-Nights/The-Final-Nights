@@ -25,6 +25,49 @@
 	var/close_sound = 'code/modules/wod13/sounds/door_close.ogg'
 	var/lock_sound = 'code/modules/wod13/sounds/door_locked.ogg'
 	var/burnable = FALSE
+	/// Whether to grant an apartment_key
+	var/grant_apartment_key = FALSE
+	var/apartment_key_amount = 1
+	/// The type of a key the resident will get
+	var/apartment_key_type
+
+/obj/structure/vampdoor/proc/try_award_apartment_key(mob/user)
+	if(!grant_apartment_key)
+		return FALSE
+	if(!lock_id)
+		return FALSE
+	if(!ishuman(user))
+		return FALSE
+	var/mob/living/carbon/human/human = user
+	if(human.received_apartment_key)
+		return FALSE
+	var/alert = tgui_alert(user, "Is this my apartment?", "Apartment", list("Yes", "No"))
+	if(alert != "Yes")
+		return
+	if(!grant_apartment_key)
+		return
+	var/spare_key = tgui_alert(user, "Do I have an extra spare key?", "Apartment", list("Yes", "No"))
+	if(!grant_apartment_key)
+		return
+	if(spare_key == "Yes")
+		apartment_key_amount = 2
+	else
+		apartment_key_amount = 1
+	for(var/i in 1 to apartment_key_amount)
+		var/obj/item/vamp/keys/key
+		if(apartment_key_type)
+			key = new apartment_key_type(get_turf(human))
+		else
+			key = new /obj/item/vamp/keys(get_turf(human))
+		key.accesslocks = list("[lock_id]")
+		human.put_in_hands(key)
+	human.received_apartment_key = TRUE
+	grant_apartment_key = FALSE
+	if(apartment_key_amount > 1)
+		to_chat(human, span_notice("They're just where I left them..."))
+	else
+		to_chat(human, span_notice("It's just where I left it..."))
+	return TRUE
 
 /obj/structure/vampdoor/New()
 	..()
@@ -59,7 +102,7 @@
 		if(-10 to -7)
 			message = "<span class='warning'>This door looks extremely complicated. You figure you will have to be lucky to break it open."
 		if(-6 to -3)
-			message = "<span class='notice'>This door looks very complicated. You might need a few tries to lockpick it."
+			message = "<span class='notice'>This door looks very complicated. You might need a few tries to lockpick it.</span>"
 		if(-2 to 0) //Only 3 numbers here instead of 4.
 			message = "<span class='notice'>This door looks mildly complicated. It shouldn't be too hard to lockpick it.</span>"
 		if(1 to 4) //Impossible to break the lockpick from here on because minimum rand(1,20) will always move the value to 2.
@@ -80,9 +123,16 @@
 		var/odds = value ? clamp((value/max_rand_value), 0, 1) : 0
 		. += "<span class='notice'>As an expert in lockpicking, you estimate that you have a [round(odds*100, 1)]% chance to lockpick this door successfully.</span>"
 
+/obj/structure/vampdoor/MouseDrop_T(atom/dropping, mob/user, params)
+	. = ..()
+
+	LoadComponent(/datum/component/leanable, dropping)
+
 /obj/structure/vampdoor/attack_hand(mob/user)
 	. = ..()
 	var/mob/living/N = user
+	if(try_award_apartment_key(user))
+		return
 	if(locked)
 		if(N.a_intent != INTENT_HARM)
 			playsound(src, lock_sound, 75, TRUE)
@@ -119,10 +169,11 @@
 	if(closed)
 		playsound(src, open_sound, 75, TRUE)
 		icon_state = "[baseicon]-0"
-		density = FALSE
+		set_density(FALSE)
 		opacity = FALSE
 		layer = OPEN_DOOR_LAYER
 		to_chat(user, "<span class='notice'>You open [src].</span>")
+		SEND_SIGNAL(src, COMSIG_AIRLOCK_OPEN)
 		closed = FALSE
 	else
 		for(var/mob/living/L in src.loc)
@@ -132,7 +183,7 @@
 				return
 		playsound(src, close_sound, 75, TRUE)
 		icon_state = "[baseicon]-1"
-		density = TRUE
+		set_density(TRUE)
 		if(!glass)
 			opacity = TRUE
 		layer = ABOVE_ALL_MOB_LAYER
@@ -190,3 +241,47 @@
 						playsound(src, lock_sound, 75, TRUE)
 						to_chat(user, "[src] is now unlocked.")
 						locked = FALSE
+
+/obj/structure/vampdoor/Click(location, control, params)
+	var/list/modifiers = params2list(params)
+	if(!modifiers["right"])
+		return ..()
+
+	if(!ishuman(usr) || !usr.canUseTopic(src, BE_CLOSE))
+		return
+
+	var/mob/living/carbon/human/H = usr
+	var/obj/item/vamp/keys/found_key = locate(/obj/item/vamp/keys) in H.contents
+	if(!found_key)
+		to_chat(usr, span_warning("You need a key to lock/unlock this door!"))
+		return
+
+	if(found_key.roundstart_fix)
+		found_key.roundstart_fix = FALSE
+		lock_id = pick(found_key.accesslocks)
+
+	if(!found_key.accesslocks)
+		to_chat(usr, span_warning("Your key doesn't fit this lock!"))
+		return
+
+	for(var/i in found_key.accesslocks)
+		if(i == lock_id)
+			locked = !locked
+			playsound(src, lock_sound, 75, TRUE)
+			to_chat(usr, span_notice("You [locked ? "lock" : "unlock"] [src]."))
+			return
+
+	to_chat(usr, span_warning("Your key doesn't fit this lock!"))
+	return ..()
+
+/obj/structure/vampdoor/wood/apartment
+	locked = TRUE
+	grant_apartment_key = TRUE
+	apartment_key_type = /obj/item/vamp/keys/apartment
+	lock_id = null //Will be randomized
+	lockpick_difficulty = 8
+
+/obj/structure/vampdoor/wood/apartment/Initialize()
+	. = ..()
+	if(grant_apartment_key && !lock_id)
+		lock_id = "[rand(1,9999999)]" // I know, not foolproof

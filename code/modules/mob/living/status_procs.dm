@@ -500,7 +500,7 @@
 			var/mob/living/carbon/human/vampire = src
 			var/datum/species/kindred/vampire_species = vampire.dna.species
 			var/torpor_length = 0 SECONDS
-			switch(humanity)
+			switch(vampire.morality_path.score)
 				if(10)
 					torpor_length = 1 MINUTES
 				if(9)

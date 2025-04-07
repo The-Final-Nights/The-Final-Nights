@@ -67,6 +67,21 @@
 	contains = list(/obj/item/storage/box/handcuffs)
 	crate_name = "handcuff crate"
 
+/datum/supply_pack/vampire/camera
+	name = "Camera Kit"
+	desc = "Contains a single camera and a spare roll of film."
+	cost = 200
+	contains = list(
+		/obj/item/camera,
+		/obj/item/camera_film,
+	)
+
+/datum/supply_pack/vampire/binoculars
+	name = "Binoculars"
+	desc = "Contains a single pair of binoculars."
+	cost = 300
+	contains = list(/obj/item/binoculars)
+
 /datum/supply_pack/vampire/weaponshovel
 	name = "Weapon (shovel)"
 	desc = "Contains a shovel."
@@ -98,6 +113,17 @@
 	desc = "Contains a gas can."
 	cost = 400
 	contains = list(/obj/item/gas_can/full)
+
+/datum/supply_pack/vampire/medicalsupplies
+	name = "Medical Supplies"
+	desc = "Contains some first aid supplies."
+	cost = 500
+	contains = list(
+		/obj/item/stack/medical/gauze,
+		/obj/item/stack/medical/bruise_pack,
+		/obj/item/stack/medical/suture,
+		/obj/item/stack/medical/ointment,
+	)
 
 /datum/supply_pack/vampire/weaponfireaxe
 	name = "Weapon (fire axe)"
@@ -242,6 +268,15 @@
 	cost = 1000
 	contains = list(/obj/item/gun/ballistic/shotgun/toy/crossbow/vampire)
 	crate_name = "weapon crate"
+
+/datum/supply_pack/vampire/weapondeagle50
+	name = "Weapon (desert eagle 50AE)"
+	desc = "Contains a .50 caliber desert eagle."
+	cost = 5000
+	contains = list(
+		/obj/item/gun/ballistic/automatic/vampire/deagle/c50,
+		/obj/item/ammo_box/magazine/m50,
+	)
 
 /datum/supply_pack/vampire/weaponsniper
 	name = "Weapon (sniper rifle)"
@@ -416,6 +451,20 @@
 	cost = 300
 	contains = list(/obj/item/ammo_box/magazine/vampthompson = 3)
 	crate_name = "ammo crate"
+
+/datum/supply_pack/vampire/magazine_deagle50
+	name = "Ammo (3x Desert Eagle 50AE magazines)"
+	desc = "Contains three desert eagle 50AE magazines."
+	cost = 1200
+	contains = list(/obj/item/ammo_box/magazine/m50 = 3)
+	crate_name = "ammo crate"
+
+/datum/supply_pack/vampire/holster
+	name = "Armor (holster)"
+	desc = "Contans one pistol holster."
+	cost = 300
+	contains = list(/obj/item/storage/belt/holster/detective/vampire)
+	crate_name = "armor crate"
 
 /datum/supply_pack/vampire/armorlight
 	name = "Armor (3 civilian)"

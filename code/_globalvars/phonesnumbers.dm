@@ -10,7 +10,10 @@ GLOBAL_VAR_INIT(nosferatunumber, "")
 GLOBAL_VAR_INIT(toreadornumber, "")
 GLOBAL_VAR_INIT(ventruenumber, "")
 GLOBAL_VAR_INIT(banunumber, "")
+GLOBAL_VAR_INIT(lasombranumber, "")
 GLOBAL_VAR_INIT(tremerenumber, "")
+GLOBAL_VAR_INIT(voivodenumber, "")
+GLOBAL_VAR_INIT(harpynumber, "")
 
 // Important Names for contacts
 
@@ -24,4 +27,7 @@ GLOBAL_VAR_INIT(nosferatuname, "")
 GLOBAL_VAR_INIT(toreadorname, "")
 GLOBAL_VAR_INIT(ventruename, "")
 GLOBAL_VAR_INIT(banuname, "")
+GLOBAL_VAR_INIT(lasombraname, "")
 GLOBAL_VAR_INIT(tremerename, "")
+GLOBAL_VAR_INIT(voivodename, "")
+GLOBAL_VAR_INIT(harpyname, "")

@@ -175,7 +175,6 @@
 /obj/structure/trap/fire/trap_effect(mob/living/L)
 	to_chat(L, "<span class='danger'><B>Spontaneous combustion!</B></span>")
 	L.Paralyze(20)
-	new /obj/effect/hotspot(get_turf(src))
 
 /obj/structure/trap/chill
 	name = "frost trap"

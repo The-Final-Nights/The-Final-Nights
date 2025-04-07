@@ -14,13 +14,10 @@
 	var/on = FALSE
 
 /obj/machinery/igniter/incinerator_toxmix
-	id = INCINERATOR_TOXMIX_IGNITER
 
 /obj/machinery/igniter/incinerator_atmos
-	id = INCINERATOR_ATMOS_IGNITER
 
 /obj/machinery/igniter/incinerator_syndicatelava
-	id = INCINERATOR_SYNDICATELAVA_IGNITER
 
 /obj/machinery/igniter/on
 	on = TRUE
@@ -37,10 +34,6 @@
 	update_icon()
 
 /obj/machinery/igniter/process()	//ugh why is this even in process()?
-	if (on && !(machine_stat & NOPOWER) )
-		var/turf/location = loc
-		if (isturf(location))
-			location.hotspot_expose(1000,500,1)
 	return 1
 
 /obj/machinery/igniter/Initialize()
@@ -70,7 +63,6 @@
 	var/datum/effect_system/spark_spread/spark_system
 
 /obj/machinery/sparker/toxmix
-	id = INCINERATOR_TOXMIX_IGNITER
 
 /obj/machinery/sparker/Initialize()
 	. = ..()
@@ -125,9 +117,6 @@
 	spark_system.start()
 	last_spark = world.time
 	use_power(1000)
-	var/turf/location = loc
-	if (isturf(location))
-		location.hotspot_expose(1000,2500,1)
 	return 1
 
 /obj/machinery/sparker/emp_act(severity)

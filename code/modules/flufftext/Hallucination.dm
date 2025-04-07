@@ -99,12 +99,6 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	var/image_layer = MOB_LAYER
 	var/active = TRUE //qdelery
 
-/obj/effect/hallucination/singularity_pull()
-	return
-
-/obj/effect/hallucination/singularity_act()
-	return
-
 /obj/effect/hallucination/simple/Initialize(mapload, mob/living/carbon/T)
 	. = ..()
 	target = T
@@ -210,7 +204,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	for(var/turf/FT in flood_turfs)
 		for(var/dir in GLOB.cardinals)
 			var/turf/T = get_step(FT, dir)
-			if((T in flood_turfs) || !TURFS_CAN_SHARE(T, FT) || isspaceturf(T)) //If we've gottem already, or if they're not alright to spread with.
+			if((T in flood_turfs) || !get_adjacent_open_turfs(T) || isspaceturf(T)) //If we've gottem already, or if they're not alright to spread with.
 				continue
 			var/obj/effect/plasma_image_holder/pih = new(T)
 			var/image/new_plasma = image(image_icon, pih, image_state, FLY_LAYER)
@@ -247,65 +241,6 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	if(hit_atom == target && target.stat!=DEAD)
 		target.Paralyze(100)
 		target.visible_message("<span class='danger'>[target] flails around wildly.</span>","<span class='userdanger'>[name] pounces on you!</span>")
-
-// The numbers of seconds it takes to get to each stage of the xeno attack choreography
-#define XENO_ATTACK_STAGE_LEAP_AT_TARGET 1
-#define XENO_ATTACK_STAGE_LEAP_AT_PUMP 2
-#define XENO_ATTACK_STAGE_CLIMB 3
-#define XENO_ATTACK_STAGE_FINISH 6
-
-/// Xeno crawls from nearby vent,jumps at you, and goes back in
-/datum/hallucination/xeno_attack
-	var/turf/pump_location = null
-	var/obj/effect/hallucination/simple/xeno/xeno = null
-	var/time_processing = 0
-	var/stage = XENO_ATTACK_STAGE_LEAP_AT_TARGET
-
-/datum/hallucination/xeno_attack/New(mob/living/carbon/C, forced = TRUE)
-	..()
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/U in orange(7,target))
-		if(!U.welded)
-			pump_location = get_turf(U)
-			break
-
-	if(pump_location)
-		feedback_details += "Vent Coords: [pump_location.x],[pump_location.y],[pump_location.z]"
-		xeno = new(pump_location, target)
-		START_PROCESSING(SSfastprocess, src)
-	else
-		qdel(src)
-
-/datum/hallucination/xeno_attack/process(delta_time)
-	time_processing += delta_time
-
-	if (time_processing >= stage)
-		switch (time_processing)
-			if (XENO_ATTACK_STAGE_FINISH to INFINITY)
-				to_chat(target, "<span class='notice'>[xeno.name] scrambles into the ventilation ducts!</span>")
-				qdel(src)
-			if (XENO_ATTACK_STAGE_CLIMB to XENO_ATTACK_STAGE_FINISH)
-				to_chat(target, "<span class='notice'>[xeno.name] begins climbing into the ventilation system...</span>")
-				stage = XENO_ATTACK_STAGE_FINISH
-			if (XENO_ATTACK_STAGE_LEAP_AT_PUMP to XENO_ATTACK_STAGE_CLIMB)
-				xeno.update_icon("alienh_leap",'icons/mob/alienleap.dmi', -32, -32)
-				xeno.throw_at(pump_location, 7, 1, spin = FALSE, diagonals_first = TRUE)
-				stage = XENO_ATTACK_STAGE_CLIMB
-			if (XENO_ATTACK_STAGE_LEAP_AT_TARGET to XENO_ATTACK_STAGE_LEAP_AT_PUMP)
-				xeno.update_icon("alienh_leap",'icons/mob/alienleap.dmi', -32, -32)
-				xeno.throw_at(target, 7, 1, spin = FALSE, diagonals_first = TRUE)
-				stage = XENO_ATTACK_STAGE_LEAP_AT_PUMP
-
-/datum/hallucination/xeno_attack/Destroy()
-	. = ..()
-
-	STOP_PROCESSING(SSfastprocess, src)
-	QDEL_NULL(xeno)
-	pump_location = null
-
-#undef XENO_ATTACK_STAGE_LEAP_AT_TARGET
-#undef XENO_ATTACK_STAGE_LEAP_AT_PUMP
-#undef XENO_ATTACK_STAGE_CLIMB
-#undef XENO_ATTACK_STAGE_FINISH
 
 /obj/effect/hallucination/simple/clown
 	image_icon = 'icons/mob/animal.dmi'
@@ -1040,8 +975,8 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			to_chat(target, "<br><br><span class='alert'>Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.</span><br><br>")
 			SEND_SOUND(target, 'sound/ai/outbreak5.ogg')
 		if("ratvar")
-			target.playsound_local(target, 'sound/machines/clockcult/ark_deathrattle.ogg', 50, FALSE, pressure_affected = FALSE)
-			target.playsound_local(target, 'sound/effects/clockcult_gateway_disrupted.ogg', 50, FALSE, pressure_affected = FALSE)
+			target.playsound_local(target, 'sound/machines/clockcult/ark_deathrattle.ogg', 50, FALSE)
+			target.playsound_local(target, 'sound/effects/clockcult_gateway_disrupted.ogg', 50, FALSE)
 			addtimer(CALLBACK(
 				target,
 				/mob/proc/playsound_local,
@@ -1052,7 +987,6 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 				/* frequency = */ null,
 				/* falloff_exponential = */ null,
 				/* channel = */ null,
-				/* pressure_affected = */ FALSE
 			), 27)
 		if("shuttle dock")
 			to_chat(target, "<h1 class='alert'>Priority Announcement</h1>")

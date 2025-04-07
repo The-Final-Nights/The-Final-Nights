@@ -2,8 +2,8 @@
 	title = "Chantry Gargoyle"
 	department_head = list("Prince")
 	faction = "Vampire"
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the Traditions and the Regent"
 	selection_color = "#ab2508"
 

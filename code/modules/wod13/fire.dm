@@ -74,8 +74,6 @@ SUBSYSTEM_DEF(die_in_a_fire)
 		if(istype(S, /obj/structure/vamptree))
 			var/obj/structure/vamptree/T = S
 			T.burnshit()
-//		if(!isitem(S))
-//			S.take_damage(10*stage, BURN, MELEE, 1)
 	for(var/obj/effect/decal/cleanable/blood/B in our_turf)
 		if(B)
 			B.dry()

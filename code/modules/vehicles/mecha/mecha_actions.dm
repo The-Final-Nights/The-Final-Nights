@@ -26,19 +26,6 @@
 		return
 	chassis.container_resist_act(owner)
 
-/datum/action/vehicle/sealed/mecha/mech_toggle_internals
-	name = "Toggle Internal Airtank Usage"
-	button_icon_state = "mech_internals_off"
-
-/datum/action/vehicle/sealed/mecha/mech_toggle_internals/Trigger()
-	if(!owner || !chassis || !(owner in chassis.occupants))
-		return
-	chassis.use_internal_tank = !chassis.use_internal_tank
-	button_icon_state = "mech_internals_[chassis.use_internal_tank ? "on" : "off"]"
-	to_chat(chassis.occupants, "[icon2html(chassis, owner)]<span class='notice'>Now taking air from [chassis.use_internal_tank?"internal airtank":"environment"].</span>")
-	chassis.log_message("Now taking air from [chassis.use_internal_tank?"internal airtank":"environment"].", LOG_MECHA)
-	UpdateButtonIcon()
-
 /datum/action/vehicle/sealed/mecha/mech_cycle_equip
 	name = "Cycle Equipment"
 	button_icon_state = "mech_cycle_equip_off"

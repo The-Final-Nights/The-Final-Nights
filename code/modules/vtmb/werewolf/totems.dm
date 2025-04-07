@@ -10,7 +10,7 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	var/tribe
 	var/totem_health = 500
-	var/obj/overlay/totem_light_overlay
+	var/obj/effect/overlay/totem_light_overlay
 	var/totem_overlay_color = "#FFFFFF"
 
 	var/last_rage = 0
