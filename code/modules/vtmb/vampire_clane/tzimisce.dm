@@ -135,7 +135,7 @@
 	name = "Living Axe"
 	time = 50
 	reqs = list(/obj/item/organ/eyes = 1, /obj/item/spine = 2, /obj/item/stack/human_flesh = 40)
-	result = /obj/item/melee/vampirearms/axetzi
+	result = /obj/item/melee/vampirearms/fireaxe/axetzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 

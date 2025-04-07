@@ -77,59 +77,26 @@
 			var/obj/structure/W = A
 			W.obj_destruction("fireaxe")
 
-/obj/item/melee/vampirearms/axetzi
+/obj/item/melee/vampirearms/fireaxe/axetzi
 	icon = 'code/modules/wod13/48x32weapons.dmi'
 	icon_state = "axetzi0"
 	name = "living axe"
 	desc = "Truly, the weapon of a madman."
-	force = 10
-	throwforce = 50
-	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
-	attack_verb_continuous = list("attacks", "chops", "cleaves", "tears", "lacerates", "cuts")
-	attack_verb_simple = list("attack", "chop", "cleave", "tear", "lacerate", "cut")
-	hitsound = 'sound/weapons/bladeslice.ogg'
-	sharpness = SHARP_EDGED
-	max_integrity = 200
-	wound_bonus = -15
-	bare_wound_bonus = 20
-	armour_penetration = 35
-	block_chance = 15
-	pixel_w = -8
 	masquerade_violating = TRUE
-	var/wielded = FALSE
 
-/obj/item/melee/vampirearms/axetzi/Initialize()
+/obj/item/melee/vampirearms/fireaxe/axetzi/Initialize()
 	. = ..()
 	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, PROC_REF(on_wield))
 	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, PROC_REF(on_unwield))
 
-/obj/item/melee/vampirearms/axetzi/ComponentInitialize()
+/obj/item/melee/vampirearms/fireaxe/axetzi/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/butchering, 100, 80, 0 , hitsound)
 	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=40, icon_wielded="axetzi1")
 
-/obj/item/melee/vampirearms/axetzi/proc/on_wield(obj/item/source, mob/user)
-	SIGNAL_HANDLER
-
-	wielded = TRUE
-
-/obj/item/melee/vampirearms/axetzi/proc/on_unwield(obj/item/source, mob/user)
-	SIGNAL_HANDLER
-
-	wielded = FALSE
-
-/obj/item/melee/vampirearms/axetzi/update_icon_state()
+/obj/item/melee/vampirearms/fireaxe/axetzi/update_icon_state()
 	icon_state = "axetzi0"
 
-/obj/item/melee/vampirearms/axetzi/afterattack(atom/A, mob/user, proximity)
-	. = ..()
-	if(!proximity)
-		return
-	if(wielded)
-		if(istype(A, /obj/structure/window) || istype(A, /obj/structure/grille))
-			var/obj/structure/W = A
-			W.obj_destruction("fireaxe")
 
 /obj/item/melee/vampirearms/katana
 	name = "katana"
