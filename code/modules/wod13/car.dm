@@ -772,14 +772,11 @@ SUBSYSTEM_DEF(carpool)
 	Fari.plane = O_LIGHTING_VISUAL_PLANE
 	Fari.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	Fari.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-//	Fari.vis_flags = NONE
 	Fari.alpha = 110
 	gas = rand(100, 1000)
 	GLOB.car_list += src
 	last_pos["x"] = x
 	last_pos["y"] = y
-//	last_pos["x_pix"] = 32
-//	last_pos["y_pix"] = 32
 	switch(dir)
 		if(SOUTH)
 			movement_vector = 180
@@ -910,8 +907,6 @@ SUBSYSTEM_DEF(carpool)
 							hit_turf = T
 		if(hit_turf)
 			Bump(pick(hit_turf.unpassable))
-			// to_chat(world, "I can't pass that [hit_turf] at [hit_turf.x] x [hit_turf.y] cause of [pick(hit_turf.unpassable)] FUCK")
-			// var/bearing = get_angle_raw(x, y, pixel_x, pixel_y, hit_turf.x, hit_turf.y, 0, 0)
 			var/actual_distance = get_dist_in_pixels(last_pos["x"]*32+last_pos["x_pix"], last_pos["y"]*32+last_pos["y_pix"], hit_turf.x*32, hit_turf.y*32)-32
 			moved_x = round(sin(true_movement_angle)*actual_distance)
 			moved_y = round(cos(true_movement_angle)*actual_distance)

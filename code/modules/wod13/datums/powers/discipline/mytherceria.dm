@@ -182,6 +182,10 @@
 	var/unique = FALSE
 	var/mob/owner
 
+/obj/mytherceria_trap/AltClick(mob/user) //delete rune on alt click, in parity with similar effects for thaum and mysticism
+	..()
+	qdel(src)
+
 /obj/mytherceria_trap/Crossed(atom/movable/AM)
 	..()
 	if(isliving(AM) && owner)

@@ -166,6 +166,20 @@
 	yin_chi = 2
 	wall_rating = LOW_WALL_RATING
 
+/area/vtm/interior/apartment
+	name = "Millenium Apartments"
+	icon_state = "camarilla_interior"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/ghetto
+	name = "Ghetto Apartments"
+	icon_state = "ghetto_interior"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/financialdistrict
 	name = "Financial District"
 	icon_state = "financialdistrict"
@@ -433,6 +447,17 @@
 	yang_chi = 0
 	yin_chi = 2
 	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/sewer/cappadocian
+	name = "Cappadocian Crypt"
+	icon_state = "graveyard"
+	ambience_index = AMBIENCE_INTERIOR
+	music = /datum/vampiremusic/hollywood
+	upper = FALSE
+	zone_type = "elysium"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
 
 // GAROU CENTRIC AREAS
 /area/vtm/forest
@@ -708,12 +733,6 @@
 	if(istype(get_area(T), /area/vtm))
 		var/area/vtm/VTM = get_area(T)
 		if(VTM)
-			/*
-			if(VTM.upper)
-				if(SScityweather.raining)
-					SEND_SOUND(src, sound('code/modules/wod13/sounds/rain.ogg', 0, 0, CHANNEL_RAIN, 25))
-					wash(CLEAN_WASH)
-			*/
 
 			var/cacophony = FALSE
 

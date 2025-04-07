@@ -14,7 +14,7 @@ def red(text):
 on_github = os.getenv("GITHUB_ACTIONS") == "true"
 
 defines_file = "code/__DEFINES/traits/declarations.dm"
-globalvars_file = "code/_globalvars/traits.dm"
+globalvars_file = "code/_globalvars/traits/_traits.dm"
 
 how_to_fix_message = f"Please ensure that all traits in the {defines_file} file are added in the {globalvars_file} file."
 
@@ -66,11 +66,8 @@ if number_of_defines == 0:
 	print(red("No defines found! This is likely an error."))
 	sys.exit(1)
 
-<<<<<<< HEAD
-if number_of_defines <= 200:
-=======
+
 if number_of_defines <= 450:
->>>>>>> parent of 2d085b6076 (Revert "Fixes most of the CI, updates some of tgui" (#804))
 	print(red(f"Only found {number_of_defines} defines! Something has likely gone wrong as the number of global traits should not be this low."))
 	sys.exit(1)
 
