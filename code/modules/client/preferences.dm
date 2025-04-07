@@ -107,7 +107,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// 0 = character settings, 1 = game preferences
 	var/current_tab = 0
 
-	var/show_gear = TRUE
 	var/show_loadout = TRUE
 
 	var/unlock_content = 0
@@ -339,7 +338,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	show_loadout = (current_tab != 1) ? show_loadout : FALSE
-	show_gear = (current_tab != 1)
 	if(!SSatoms.initialized)
 		to_chat(user, span_warning("Please wait for the game to do a little more setup first...!"))
 		return
@@ -348,7 +346,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(slot_randomized)
 		load_character(default_slot) // Reloads the character slot. Prevents random features from overwriting the slot if saved.
 		slot_randomized = FALSE
-	update_preview_icon(show_gear, show_loadout)
+	update_preview_icon(show_loadout)
 	var/list/dat = list("<center>")
 
 	if(istype(user, /mob/dead/new_player))

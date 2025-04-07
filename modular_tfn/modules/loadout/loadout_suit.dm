@@ -35,8 +35,8 @@
 /datum/gear/suit/jacket
 	subtype_path = /datum/gear/suit/jacket
 
-/datum/gear/suit/coat/jacket/majima_jacket
-	display_name = "fancy jacket, too much "
+/datum/gear/suit/jacket/majima_jacket
+	display_name = "fancy jacket, too much"
 	path = /obj/item/clothing/suit/vampire/majima_jacket
 
 /datum/gear/suit/jacket/fancy_gray
