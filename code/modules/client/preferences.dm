@@ -3337,41 +3337,49 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.auspice.gnosis = 3
 				character.auspice.start_gnosis = 3
 				character.auspice.base_breed = "Crinos"
-		if(character.transformator)
-			if(character.transformator.crinos_form && character.transformator.lupus_form)
-				character.transformator.crinos_form.sprite_color = werewolf_color
-				character.transformator.crinos_form.sprite_scar = werewolf_scar
-				character.transformator.crinos_form.sprite_hair = werewolf_hair
-				character.transformator.crinos_form.sprite_hair_color = werewolf_hair_color
-				character.transformator.crinos_form.sprite_eye_color = werewolf_eye_color
-				character.transformator.lupus_form.sprite_color = werewolf_color
-				character.transformator.lupus_form.sprite_eye_color = werewolf_eye_color
+		if(character.transformator?.crinos_form && character.transformator?.lupus_form)
+			var/mob/living/carbon/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
 
-				if(werewolf_name)
-					character.transformator.crinos_form.name = werewolf_name
-					character.transformator.lupus_form.name = werewolf_name
-				else
-					character.transformator.crinos_form.name = real_name
-					character.transformator.lupus_form.name = real_name
+			if(!crinos)
+				character.transformator.crinos_form = null
+				CRASH("[key_name(character)]'s crinos_form weakref contained no crinos mob!")
+			if(!lupus)
+				character.transformator.lupus_form = null
+				CRASH("[key_name(character)]'s lupus_form weakref contained no lupus mob!")
 
-				character.transformator.crinos_form.physique = physique
-				character.transformator.crinos_form.dexterity = dexterity
-				character.transformator.crinos_form.mentality = mentality
-				character.transformator.crinos_form.social = social
-				character.transformator.crinos_form.blood = blood
+			crinos.sprite_color = werewolf_color
+			crinos.sprite_scar = werewolf_scar
+			crinos.sprite_hair = werewolf_hair
+			crinos.sprite_hair_color = werewolf_hair_color
+			crinos.sprite_eye_color = werewolf_eye_color
+			lupus.sprite_color = werewolf_color
+			lupus.sprite_eye_color = werewolf_eye_color
 
-				character.transformator.lupus_form.physique = physique
-				character.transformator.lupus_form.dexterity = dexterity
-				character.transformator.lupus_form.mentality = mentality
-				character.transformator.lupus_form.social = social
-				character.transformator.lupus_form.blood = blood
+			if(werewolf_name)
+				crinos.name = werewolf_name
+				lupus.name = werewolf_name
+			else
+				crinos.name = real_name
+				lupus.name = real_name
 
-				character.transformator.lupus_form.maxHealth = round((initial(character.transformator.lupus_form.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique )))+(character.auspice.level-1)*50
-				character.transformator.lupus_form.health = character.transformator.lupus_form.maxHealth
-				character.transformator.crinos_form.maxHealth = round((initial(character.transformator.crinos_form.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique )))+(character.auspice.level-1)*50
-				character.transformator.crinos_form.health = character.transformator.crinos_form.maxHealth
-//		character.transformator.crinos_form.update_icons()
-//		character.transformator.lupus_form.update_icons()
+			crinos.physique = physique
+			crinos.dexterity = dexterity
+			crinos.mentality = mentality
+			crinos.social = social
+			crinos.blood = blood
+
+			lupus.physique = physique
+			lupus.dexterity = dexterity
+			lupus.mentality = mentality
+			lupus.social = social
+			lupus.blood = blood
+
+			lupus.maxHealth = round((lupus::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			lupus.health = lupus.maxHealth
+			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			crinos.health = crinos.maxHealth
+
 	if(pref_species.mutant_bodyparts["tail_lizard"])
 		character.dna.species.mutant_bodyparts["tail_lizard"] = pref_species.mutant_bodyparts["tail_lizard"]
 	if(pref_species.mutant_bodyparts["spines"])
