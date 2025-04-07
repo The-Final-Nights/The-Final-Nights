@@ -31,7 +31,7 @@
 		var/light_amount = T.get_lumcount()
 		if(light_amount < SHADOW_SPECIES_LIGHT_THRESHOLD)
 			playsound(get_turf(user), 'sound/magic/ethereal_enter.ogg', 50, TRUE, -1)
-			visible_message(span_boldwarning ("[user] melts into the shadows!"))
+			visible_message(span_boldwarning("[user] melts into the shadows!"))
 			user.SetAllImmobility(0)
 			user.setStaminaLoss(0, 0)
 			var/obj/effect/dummy/phased_mob/shadow/S2 = new(get_turf(user.loc))
