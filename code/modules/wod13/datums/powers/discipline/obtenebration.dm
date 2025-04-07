@@ -30,7 +30,7 @@
 /datum/discipline_power/obtenebration/shadow_play/activate(target)
 	. = ..()
 	shadow = new(target)
-	shadow.set_light(3, -7)
+	shadow.set_light(discipline.level+2, -10)
 
 /datum/discipline_power/obtenebration/shadow_play/deactivate(target)
 	. = ..()
@@ -116,6 +116,7 @@
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
+	vitae_cost = 0
 
 	violates_masquerade = TRUE
 
@@ -128,9 +129,7 @@
 	if (!tenebrous_form_spell)
 		tenebrous_form_spell = new
 
-	if(!tenebrous_form_spell.cast(user = owner))
-		owner.bloodpool += vitae_cost
-		to_chat(owner, span_warning("You fail to slip into the shadows. [vitae_cost] blood points refunded."))
+	tenebrous_form_spell.cast(user = owner)
 
 /datum/discipline_power/obtenebration/tenebrous_form/post_gain()
 	. = ..()
