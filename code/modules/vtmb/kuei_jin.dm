@@ -121,6 +121,7 @@
 	icon_state = "base"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
+
 /atom/movable/screen/golden_chi
 	name = "golden Chi"
 	icon = 'code/modules/wod13/UI/chi.dmi'
