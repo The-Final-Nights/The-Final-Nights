@@ -8745,6 +8745,12 @@
 	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/jazzclub)
+"cwX" = (
+/turf/open/floor/plating/vampcarpet{
+	icon = 'icons/obj/stairs.dmi';
+	icon_state = "stairs"
+	},
+/area/vtm/anarch)
 "cwZ" = (
 /obj/structure/railing{
 	dir = 1;
@@ -15909,12 +15915,6 @@
 "eHF" = (
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/fed)
-"eHO" = (
-/obj/machinery/light{
-	pixel_y = 32
-	},
-/turf/open/openspace,
-/area/vtm/anarch)
 "eHT" = (
 /obj/structure/vampdoor/wood{
 	lock_id = "primBanu";
@@ -21206,6 +21206,17 @@
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/tzimisce_manor)
+"ggm" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 12
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "ggo" = (
 /obj/structure/bed/maint{
 	pixel_y = 2
@@ -25154,10 +25165,7 @@
 /obj/machinery/light{
 	pixel_y = 32
 	},
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/floor/plating/parquetry/old,
+/turf/open/openspace,
 /area/vtm/anarch)
 "hmX" = (
 /obj/item/kirbyplants/random,
@@ -27401,6 +27409,20 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/cog/pantry)
+"hVs" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 12
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "hVC" = (
 /obj/structure/table,
 /obj/vampire_computer{
@@ -36032,14 +36054,6 @@
 /obj/structure/cable/layer1,
 /turf/open/floor/circuit,
 /area/vtm/interior/glasswalker)
-"kzU" = (
-/obj/structure/railing{
-	dir = 1;
-	layer = 4;
-	pixel_y = 16
-	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch)
 "kzY" = (
 /obj/effect/decal/bordur,
 /obj/structure/railing{
@@ -43553,12 +43567,6 @@
 /obj/structure/fire_barrel,
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
-"mKq" = (
-/turf/open/floor/plating/vampcarpet{
-	icon = 'icons/obj/stairs.dmi';
-	icon_state = "stairs"
-	},
-/area/vtm/anarch)
 "mKs" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -54772,17 +54780,6 @@
 /obj/effect/decal/litter,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
-"pSn" = (
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/railing{
-	dir = 1;
-	layer = 4;
-	pixel_y = 12
-	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch)
 "pSB" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -67048,15 +67045,12 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "tri" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 1
-	},
 /obj/structure/railing{
 	dir = 1;
 	layer = 4;
-	pixel_y = 12
+	pixel_y = 16
 	},
-/turf/open/floor/plating/rough,
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "trk" = (
 /obj/structure/table/wood,
@@ -80497,11 +80491,14 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "xoo" = (
-/obj/machinery/light/small{
-	dir = 1
+/obj/machinery/light{
+	pixel_y = 32
 	},
-/turf/open/floor/carpet/blue,
-/area/vtm/anarch/basement)
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "xoJ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -80655,9 +80652,6 @@
 	dir = 1;
 	layer = 4;
 	pixel_y = 12
-	},
-/obj/structure/railing{
-	dir = 4
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch)
@@ -109341,7 +109335,7 @@ mLp
 xZj
 oBy
 oBy
-xoo
+oBy
 mLp
 hRA
 lCv
@@ -109851,7 +109845,7 @@ waf
 wTq
 nYS
 mLp
-xZj
+lCv
 cQq
 oBy
 oBy
@@ -166379,7 +166373,7 @@ ppK
 bbM
 pMC
 pMC
-tri
+xri
 wsX
 wsX
 wsX
@@ -166636,7 +166630,7 @@ kGg
 cEl
 pMC
 pMC
-tri
+xri
 wsX
 wsX
 wsX
@@ -166893,7 +166887,7 @@ kGg
 cEl
 pMC
 pMC
-tri
+xri
 wsX
 wsX
 wsX
@@ -167150,7 +167144,7 @@ kGg
 cEl
 pMC
 pMC
-tri
+xri
 wsX
 wsX
 wsX
@@ -167407,7 +167401,7 @@ ppK
 mbo
 pMC
 pMC
-tri
+xri
 wsX
 wsX
 wsX
@@ -167664,7 +167658,7 @@ kGg
 ehv
 pMC
 pMC
-xri
+hVs
 wsX
 wsX
 wsX
@@ -167921,7 +167915,7 @@ oWo
 pMC
 pMC
 pMC
-mKq
+cwX
 wsX
 wsX
 wsX
@@ -168687,7 +168681,7 @@ vmN
 vmN
 vmN
 vmN
-pSn
+ggm
 pMC
 pMC
 pMC
@@ -233706,7 +233700,7 @@ ntq
 fkk
 fkk
 kGg
-hmS
+xoo
 pMC
 pMC
 lgZ
@@ -233964,7 +233958,7 @@ kGg
 qtE
 qtE
 qtE
-kzU
+tri
 pMC
 lgZ
 lgZ
@@ -234221,7 +234215,7 @@ kGg
 qtE
 qtE
 qtE
-kzU
+tri
 pMC
 lgZ
 ktI
@@ -234475,10 +234469,10 @@ ntq
 ntq
 ntq
 kGg
-eHO
+hmS
 qtE
 qtE
-kzU
+tri
 pMC
 lgZ
 lgZ
@@ -238330,7 +238324,7 @@ ntq
 ntq
 ntq
 vHl
-elZ
+hsR
 vHl
 vHl
 vHl
