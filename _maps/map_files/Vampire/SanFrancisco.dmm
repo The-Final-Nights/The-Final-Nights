@@ -8745,12 +8745,6 @@
 	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/jazzclub)
-"cwX" = (
-/turf/open/floor/plating/vampcarpet{
-	icon = 'icons/obj/stairs.dmi';
-	icon_state = "stairs"
-	},
-/area/vtm/anarch)
 "cwZ" = (
 /obj/structure/railing{
 	dir = 1;
@@ -21206,17 +21200,6 @@
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/tzimisce_manor)
-"ggm" = (
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/railing{
-	dir = 1;
-	layer = 4;
-	pixel_y = 12
-	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch)
 "ggo" = (
 /obj/structure/bed/maint{
 	pixel_y = 2
@@ -25165,7 +25148,10 @@
 /obj/machinery/light{
 	pixel_y = 32
 	},
-/turf/open/openspace,
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "hmX" = (
 /obj/item/kirbyplants/random,
@@ -27409,20 +27395,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/cog/pantry)
-"hVs" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 1
-	},
-/obj/structure/railing{
-	dir = 1;
-	layer = 4;
-	pixel_y = 12
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/floor/plating/rough,
-/area/vtm/anarch)
 "hVC" = (
 /obj/structure/table,
 /obj/vampire_computer{
@@ -41952,6 +41924,12 @@
 /obj/structure/table/wood,
 /turf/closed/wall/vampwall/painted/low,
 /area/vtm/interior/bianchiBank)
+"mnW" = (
+/obj/machinery/light{
+	pixel_y = 32
+	},
+/turf/open/openspace,
+/area/vtm/anarch)
 "mnY" = (
 /obj/structure/chair/old/tzimisce{
 	dir = 8
@@ -67046,9 +67024,12 @@
 /area/vtm/interior/millennium_tower/ventrue)
 "tri" = (
 /obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
 	dir = 1;
 	layer = 4;
-	pixel_y = 16
+	pixel_y = 12
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -77121,6 +77102,20 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
+"wpd" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 12
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "wpo" = (
 /obj/effect/decal/bordur,
 /obj/item/vamp/phone/street{
@@ -78045,9 +78040,12 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/community)
 "wDp" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/paper/darkred,
-/turf/closed/wall/vampwall/bar,
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 16
+	},
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "wDq" = (
 /obj/structure/vampfence/corner/rich{
@@ -80491,13 +80489,10 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "xoo" = (
-/obj/machinery/light{
-	pixel_y = 32
+/turf/open/floor/plating/vampcarpet{
+	icon = 'icons/obj/stairs.dmi';
+	icon_state = "stairs"
 	},
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "xoJ" = (
 /obj/effect/decal/bordur{
@@ -167658,7 +167653,7 @@ kGg
 ehv
 pMC
 pMC
-hVs
+wpd
 wsX
 wsX
 wsX
@@ -167915,7 +167910,7 @@ oWo
 pMC
 pMC
 pMC
-cwX
+xoo
 wsX
 wsX
 wsX
@@ -168681,7 +168676,7 @@ vmN
 vmN
 vmN
 vmN
-ggm
+tri
 pMC
 pMC
 pMC
@@ -168932,7 +168927,7 @@ dnj
 dnj
 xEC
 cyo
-wDp
+mxy
 vmN
 vmN
 vmN
@@ -169189,7 +169184,7 @@ wgF
 wgF
 bAl
 mms
-wDp
+mxy
 vmN
 vmN
 vmN
@@ -169446,7 +169441,7 @@ wgF
 wgF
 vwX
 tio
-wDp
+mxy
 jut
 vmN
 vmN
@@ -232682,7 +232677,7 @@ bmi
 sOD
 xgc
 qtE
-qtE
+tbD
 qtE
 qtE
 qtE
@@ -233700,7 +233695,7 @@ ntq
 fkk
 fkk
 kGg
-xoo
+hmS
 pMC
 pMC
 lgZ
@@ -233958,7 +233953,7 @@ kGg
 qtE
 qtE
 qtE
-tri
+wDp
 pMC
 lgZ
 lgZ
@@ -234215,7 +234210,7 @@ kGg
 qtE
 qtE
 qtE
-tri
+wDp
 pMC
 lgZ
 ktI
@@ -234469,10 +234464,10 @@ ntq
 ntq
 ntq
 kGg
-hmS
+mnW
 qtE
 qtE
-tri
+wDp
 pMC
 lgZ
 lgZ
