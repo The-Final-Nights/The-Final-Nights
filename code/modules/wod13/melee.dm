@@ -83,12 +83,7 @@
 	name = "living axe"
 	desc = "Truly, the weapon of a madman."
 	masquerade_violating = TRUE
-
-/obj/item/melee/vampirearms/fireaxe/axetzi/Initialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, PROC_REF(on_wield))
-	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, PROC_REF(on_unwield))
-
+	base_icon_state = "axetzi1"
 /obj/item/melee/vampirearms/fireaxe/axetzi/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/butchering, 100, 80, 0 , hitsound)
