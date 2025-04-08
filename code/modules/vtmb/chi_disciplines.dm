@@ -149,7 +149,7 @@
 		return FALSE
 	if(caster.golden_chi < cost_golden)
 		SEND_SOUND(caster, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
-		to_chat(caster, "<span class='warning'>You don't have enough <b>Golden Chi</b> to use [src].</span>")
+		to_chat(caster, "<span class='warning'>You don't have enough <b>golden Chi</b> to use [src].</span>")
 		return FALSE
 
 	if(HAS_TRAIT(caster, TRAIT_PACIFISM))
@@ -1136,7 +1136,7 @@
 			var/mod = 7*level_casting
 			var/meleemod = level_casting*0.35
 			caster.remove_overlay(UNICORN_LAYER)
-			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "holyness2", -UNICORN_LAYER)
+			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "holyness1", -UNICORN_LAYER)
 			caster.overlays_standing[UNICORN_LAYER] = potence_overlay
 			caster.apply_overlay(UNICORN_LAYER)
 			caster.physiology.armor.melee += mod
@@ -2323,34 +2323,30 @@
 
 /datum/chi_discipline/prayer_eating
 	name = "Prayer Eating"
-	desc = "Enables you to absorb the energy of prayers offered to you and convert it into golden chi"
+	desc = "Allows you to absorb the energy of prayers directed to you, and transform it into golden chi"
 	icon_state = "gods"
 	ranged = TRUE
 	delay = 12 SECONDS
 	discipline_type = "Chi"
 	activate_sound = 'code/modules/wod13/sounds/canon.ogg'
 	//cost_yang = 1
-
 /datum/chi_discipline/prayer_eating/post_gain(mob/living/carbon/human/user)
 	var/datum/action/choose_golden_chim/golden_chim_action = new()
 	golden_chim_action.Grant(user)
-
 /datum/movespeed_modifier/gifted_speed
 	multiplicative_slowdown = -1
-
 /datum/action/choose_golden_chim
-	name = "exchange your Golden chi"
-	desc = "Enables you to absorb the energy of prayers offered to you and convert it into another type of chi"
+	name = "Change your golden chi for another chi type"
+	desc = "Change your golden chi for another chi type"
 	button_icon_state = "gods2"
 	button_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
 	background_icon_state = "discipline"
 	icon_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
-
 /datum/action/choose_golden_chim/Trigger()
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/user = usr
-		var/choose_golden_chi = input(user, "Choose which chi you will exchange for your golden essence", "Golden chi") as null|anything in list("Yang", "Yin", "Demon")
+		var/choose_golden_chi = input(user, "Choose what chi you will exchange for your golden essence", "Golden chi") as null|anything in list("Yang", "Yin", "Demon")
 		if(user.golden_chi>0)
 			if (choose_golden_chi == "Yang")
 				user.golden_chi = min(user.golden_chi-1, user.max_golden_chi)
@@ -2362,7 +2358,7 @@
 				user.golden_chi = min(user.golden_chi-1, user.max_golden_chi)
 				user.demon_chi = min(user.demon_chi+3, user.max_demon_chi)
 		else
-			to_chat(user, "<span class='warning'>You do not have any Golden chi to exchange.</span>")
+			to_chat(user, span_warning("You do not have any golden chi to exchange."))
 
 /datum/chi_discipline/prayer_eating/activate(mob/living/target, mob/living/carbon/human/caster)
 	ADD_TRAIT(caster, TRAIT_GAMERGOD, "pwr_game")
@@ -2377,16 +2373,16 @@
 			var/new_say = input(caster, "What do you wish to tell [target]?", "Say") as null|text
 			new_say = sanitize_text(new_say)
 			if (new_say)
-				to_chat(caster, span_boldnotice("You transmit to [target]: <span class='notice'>[new_say]</span>"))
+				to_chat(caster, span_boldnotice("You transmit to [target]:</span> <span class='notice'>[new_say]</span>"))
 				for (var/mob/living/M in oviewers(7, caster))
-					to_chat(M, span_boldnotice("You hear a voice from beyond... <span class='notice'>[new_say]</span>"))
+					to_chat(M, span_boldnotice("You hear a voice from beyond...", span_notice("[new_say]")))
 		if(2)
         // dot 2: prayer eating
-			var/giveprayers = input(target, "[caster] is asking for your prayers. Do you pray to them?", "godly reward") as null|anything in list("accept", "decline")
+			var/giveprayers = input(target, "[caster] is asking for your prayers, do you do pray to them?", "godly reward") as null|anything in list("accept", "decline")
 			switch(giveprayers)
 				if("accept")
-					to_chat(target, "<span class='userdanger'><b>You feel energy slowly leaving you and flowing into your god!.</b></span>")
-					to_chat(caster, "<span class='boldnotice'>[target] You feel golden energy, like sweet nectar, slowly entering your body as their prayer concludes..</span>")
+					to_chat(target, span_userdanger("<b>you feel as energy slowly exits you and enter your god [H]!.</b>"))
+					to_chat(caster, span_boldnotice("[target] you feel golden energy, like sweet nectar slowly enter your body as their prayer ends"))
 					caster.golden_chi = min(caster.golden_chi+2, caster.max_golden_chi)
 					to_chat(src, "<span class='servradio'>Some <b>Golden</b> Chi energy enters you...</span>")
 					playsound(src, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
@@ -2401,35 +2397,35 @@
 				if("Power")
 					playsound(target, 'code/modules/wod13/sounds/potence_activate.ogg', 40, TRUE)
 					target.physique += 4
-					to_chat(target, "<span class='userdanger'><b> YOU FEEL OVERWHELMING POWER SURGING THROUGH YOU, FILLING YOU WITH UNNATURAL STRENGTH!.</b></span>")
+					to_chat(target, span_userdanger("<b> YOU FEEL OVERWELMING POWER FLOWING THROUGH YOU, FILLING YOU WITH UNNATURAL STRENGTH.</b>"))
 					spawn((delay)+target.discipline_time_plus)
 						if(caster)
 							target.physique -= 4
-							to_chat(target, "<span class='userdanger'><b> All your power vanishes, leaving you empty inside!.</b></span>")
+							to_chat(target, "<span class='userdanger'><b> all your power vanishes, leaving you empty inside!.</b></span>")
 							playsound(target, 'code/modules/wod13/sounds/insanity.ogg', 40, TRUE)
 				if("Speed")
 					playsound(target, 'code/modules/wod13/sounds/celerity_activate.ogg', 40, TRUE)
 					target.add_movespeed_modifier(/datum/movespeed_modifier/gifted_speed)
-					to_chat(target, "<span class='userdanger'><b> YOU FEEL AS IF TIME ITSELF HAS STOPPED AROUND YOU!.</b></span>")
+					to_chat(target, span_userdanger("<b> YOU FEEL AS IF TIME ITSELF STOPPED AROUND YOU!</b>"))
 					spawn((delay)+target.discipline_time_plus)
 						if(caster)
 							target.remove_movespeed_modifier(/datum/movespeed_modifier/gifted_speed)
-							to_chat(target, "<span class='userdanger'><b>Your movements start to feel sluggish as your perception returns to normal!.</b></span>")
+							to_chat(target, span_userdanger("<b>you movements start to feel sluggish as your perception returns to normal!.</b>"))
 							playsound(target, 'code/modules/wod13/sounds/insanity.ogg', 40, TRUE)
 				if("Healing")
 					playsound(target, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
 					target.heal_ordered_damage(60, list(BRUTE, TOX, BURN, CLONE, OXY, BRAIN))
 		if(4)
 		// dot 4: unbreakable soul bond
-			var/followering = input(target, "[caster] is asking you to be their follower. Do you accept?", "godly reward") as null|anything in list("accept", "decline")
+			var/followering = input(target, "[caster] is asking for you to pray to them, do you do it?", "godly reward") as null|anything in list("accept", "decline")
 			if(HAS_TRAIT(target, TRAIT_GAMERGOD))
 				to_chat(caster, span_userdanger("<b>[target] CANT BE BLESSED AGAIN!</b>"))
-				to_chat(target, span_userdanger("<b> you already have a god!</b>"))
+				to_chat(target, span_userdanger("<b> you already have a god!</b>")
 			else
 				switch(followering)
 					if("accept")
-						to_chat(target, "<span class='userdanger'><b>AS THE ENERGY OF YOUR GOD ENTERS YOUR BODY, YOU ARE FILLED WITH UNWAVERING LOYALTY [H]. DO NOT CHALLENGE YOUR GOD, OR YOU WILL SUFFER.</b></span>")
-						to_chat(caster, "<span class='boldnotice'>[target] has become your follower!.</span>")
+						to_chat(target, span_userdanger("AS THE ENERGY OF YOUR GOD ENTERS YOUR BODY, YOU ARE FILLED WITH UNWAVERING LOYALTY [H], DO NOT CHALLENGE YOUR GOD, OR YOU WILL SUFFER"))
+						to_chat(caster, span_boldnotice("[target] has become your follower!"))
 						playsound(caster, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
 						playsound(target, 'code/modules/wod13/sounds/cross.ogg', 40, TRUE)
 						ADD_TRAIT(target, TRAIT_GAMERGOD, "pwr_game")
@@ -2449,9 +2445,9 @@
 				caster.golden_chi = min(caster.golden_chi+1, caster.max_golden_chi)
 				target.emote("scream")
 				target.apply_damage(100, BRUTE, BODY_ZONE_CHEST)
-				to_chat(target, "<span class='userdanger'><b>As [caster] snaps their fingers, you feel your most vital essence burst out of you!</b></span>")
+				to_chat(target, span_userdanger("<b>as [caster] snaps their fingers, you feel your most vital essence burst out of you!</b>"))
 				if(HAS_TRAIT(target, TRAIT_GAMERGOD))
-					to_chat(target, "<span class='userdanger'><b>YOU HAVE DISAPPOINTED YOUR GOD!</b></span>")
+					to_chat(target, span_userdanger("<b>YOU HAVE DISAPOINTED YOUR GOD!</b>"))
 					explosion(target.loc,1, 1, 1)
 	if (caster.max_yin_chi > caster.max_yang_chi)
 		caster.yin_chi = min(caster.yin_chi-1, caster.max_yin_chi)

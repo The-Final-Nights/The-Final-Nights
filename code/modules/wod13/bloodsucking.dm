@@ -108,7 +108,7 @@
 					else
 						mob.yin_chi = mob.yin_chi-1
 						yin_chi = min(yin_chi+1, max_yin_chi)
-						to_chat(src, "<span class='medradio'>Some <b>Yin</b> Chi energy enters you...</span>")
+						to_chat(src, span_medradio("Some <b>Yin</b> Chi energy enters you..."))
 					COOLDOWN_START(mob, chi_restore, 30 SECONDS)
 					update_chi_hud()
 				else
