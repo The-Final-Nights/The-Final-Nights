@@ -18,6 +18,9 @@
 #define span_subtle(str) ("<span class='subtle'>" + str + "</span>")
 #define span_subtler(str) ("<span class='subtler'>" + str + "</span>")
 #define span_adminnotice(str) ("<span class='adminnotice'>" + str + "</span>")
+#define span_engradio(str) ("<span class='engradio'>" + str + "</span")
+#define span_medradio(str) ("<span class='medradio'>" + str + "</span")
+#define span_boldnotice(str) ("<span class='boldnotice'>" + str + "</span>")
 // TFN EDIT END
 #define span_danger(str) ("<span class='danger'>" + str + "</span>")
 #define span_alert(str) ("<span class='alert'>" + str + "</span>")
