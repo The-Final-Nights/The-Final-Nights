@@ -335,6 +335,7 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "id11"
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_ID
 
 /obj/item/card/id/primogen
 	name = "mysterious primogen badge"
