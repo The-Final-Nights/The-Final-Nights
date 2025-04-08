@@ -1847,14 +1847,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					equipped_gear += TG.display_name
 				else
 					alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
-			save_character()
 
 
 		else if(href_list["select_category"])
 			gear_tab = href_list["select_category"]
 		else if(href_list["clear_loadout"])
 			equipped_gear.Cut()
-			save_character()
 		else if(href_list["toggle_loadout"])
 			show_loadout = !show_loadout
 

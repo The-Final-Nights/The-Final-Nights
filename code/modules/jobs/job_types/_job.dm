@@ -122,7 +122,7 @@
 
 	var/list/roundstart_experience
 
-	if(!iscarbon(H))
+	if(!ishuman(H))
 		return
 
 	var/list/gear_leftovers
