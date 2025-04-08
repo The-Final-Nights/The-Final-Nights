@@ -118,7 +118,7 @@
 
 
 /obj/item/vamp/keys/baali
-	name = "Counselor keys"
+	name = "Mystery keys"
 	accesslocks = list(
 		"baali"
 	)
