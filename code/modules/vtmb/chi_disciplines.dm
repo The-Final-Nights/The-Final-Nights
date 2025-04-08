@@ -2330,11 +2330,14 @@
 	discipline_type = "Chi"
 	activate_sound = 'code/modules/wod13/sounds/canon.ogg'
 	//cost_yang = 1
+
 /datum/chi_discipline/prayer_eating/post_gain(mob/living/carbon/human/user)
 	var/datum/action/choose_golden_chim/golden_chim_action = new()
 	golden_chim_action.Grant(user)
+
 /datum/movespeed_modifier/gifted_speed
 	multiplicative_slowdown = -1
+
 /datum/action/choose_golden_chim
 	name = "Change your golden chi for another chi type"
 	desc = "Change your golden chi for another chi type"
@@ -2343,6 +2346,7 @@
 	background_icon_state = "discipline"
 	icon_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
+
 /datum/action/choose_golden_chim/Trigger()
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/user = usr
