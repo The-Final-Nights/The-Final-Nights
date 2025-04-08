@@ -2375,7 +2375,7 @@
 			if (new_say)
 				to_chat(caster, span_boldnotice("You transmit to [target]:</span> <span class='notice'>[new_say]</span>"))
 				for (var/mob/living/M in oviewers(7, caster))
-					to_chat(M, span_boldnotice("You hear a voice from beyond...", span_notice("[new_say]")))
+					to_chat(M, span_boldnotice("You hera a voice from beyond...<span class='notice'>[new_say]</span>"))
 		if(2)
         // dot 2: prayer eating
 			var/giveprayers = input(target, "[caster] is asking for your prayers, do you do pray to them?", "godly reward") as null|anything in list("accept", "decline")
@@ -2420,7 +2420,7 @@
 			var/followering = input(target, "[caster] is asking for you to pray to them, do you do it?", "godly reward") as null|anything in list("accept", "decline")
 			if(HAS_TRAIT(target, TRAIT_GAMERGOD))
 				to_chat(caster, span_userdanger("<b>[target] CANT BE BLESSED AGAIN!</b>"))
-				to_chat(target, span_userdanger("<b> you already have a god!</b>")
+				to_chat(target, span_userdanger("<b> you already have a god!</b>"))
 			else
 				switch(followering)
 					if("accept")
