@@ -44,6 +44,7 @@
 #define CLAN_GARGOYLE "Gargoyle"
 #define CLAN_DAUGHTERS_OF_CACOPHONY "Daughters of Cacophony"
 #define CLAN_CAPPADOCIAN "Cappadocian"
+#define CLAN_CHILDREN_OF_DAMBALLAH "Children of Damballah"
 
 /**
  * Auspex aura defines
