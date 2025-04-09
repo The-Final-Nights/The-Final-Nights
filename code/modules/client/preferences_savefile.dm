@@ -87,6 +87,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if (!found_block_movement)
 			LAZYADD(key_bindings["Ctrl"], "block_movement")
 
+	if (current_version < 39)
 		if (tribe == "Wendigo")
 			tribe = "Gale Stalkers"
 
