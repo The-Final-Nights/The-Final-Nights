@@ -34781,8 +34781,12 @@
 /area/vtm/park)
 "jCg" = (
 /obj/structure/table/glass,
-/obj/item/food/grown/moonflower{
-	pixel_x = -13
+/obj/item/food/grown/poppy,
+/obj/item/food/grown/poppy/lily{
+	pixel_y = 6
+	},
+/obj/item/food/grown/poppy/geranium{
+	pixel_y = 13
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm/cabaret)
@@ -49878,8 +49882,10 @@
 /area/vtm/interior/baali)
 "nNj" = (
 /obj/structure/table/glass,
-/obj/item/pen/fountain,
 /obj/item/storage/fancy/cigarettes/cigars/cohiba,
+/obj/item/lighter{
+	pixel_x = 11
+	},
 /turf/open/floor/carpet/purple,
 /area/vtm/cabaret)
 "nNk" = (
@@ -77418,9 +77424,13 @@
 /area/vtm/interior/strip)
 "vlI" = (
 /obj/structure/table/glass,
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy/lily{
-	pixel_y = 8
+/obj/item/paper_bin{
+	pixel_y = 3;
+	pixel_x = 5
+	},
+/obj/item/pen/fountain{
+	pixel_y = 4;
+	pixel_x = 5
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm/cabaret)
@@ -78988,9 +78998,8 @@
 	pixel_y = 13
 	},
 /obj/structure/table/wood,
-/obj/item/clothing/head/peaceflower{
-	pixel_y = 12;
-	pixel_x = -9
+/obj/item/food/grown/moonflower{
+	pixel_x = -13
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/cabaret)
