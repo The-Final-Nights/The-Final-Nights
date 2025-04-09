@@ -3194,6 +3194,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.additional_lockpicking = A.archetype_additional_lockpicking
 	character.additional_athletics = A.archetype_additional_athletics
 	A.special_skill(character)
+	character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
+	character.health = character.maxHealth
 
 	if(pref_species.name == "Vampire")
 		var/datum/vampireclane/CLN = new clane.type()
@@ -3226,8 +3228,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			character.max_yin_chi = 2
 
 	if(pref_species.name == "Werewolf")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 		switch(tribe)
 			if("Wendigo")
 				character.yin_chi = 1
@@ -3244,13 +3244,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.max_yin_chi = 1 + auspice_level * 2
 				character.yang_chi = 5
 				character.max_yang_chi = 5
-	if(pref_species.name == "Kuei-Jin")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 	if(pref_species.name == "Vampire")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 		character.morality_path.score = path_score
+
 	character.masquerade = masquerade
 	if(!character_setup)
 		if(character in GLOB.masquerade_breakers_list)
