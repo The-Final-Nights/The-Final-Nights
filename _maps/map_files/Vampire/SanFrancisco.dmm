@@ -13614,6 +13614,7 @@
 /obj/item/ammo_box/magazine/vampaug,
 /obj/item/ammo_box/magazine/vampaug,
 /obj/item/ammo_box/magazine/vampaug,
+/obj/item/megaphone,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/police/upstairs)
 "dJt" = (
@@ -65961,6 +65962,7 @@
 /obj/item/melee/classic_baton/vampire,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/reagent_containers/spray/pepper,
+/obj/item/megaphone,
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
