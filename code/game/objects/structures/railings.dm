@@ -16,7 +16,7 @@
 	climbable = FALSE
 
 /obj/structure/railing/metal
-	name = "railing_metal"
+	name = "metal railing"
 	desc = "Basic railing meant to protect idiots like you from falling."
 	icon = 'icons/obj/railings.dmi'
 	icon_state = "railing"

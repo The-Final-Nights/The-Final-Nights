@@ -12238,7 +12238,7 @@
 /area/vtm/anarch/basement)
 "dpc" = (
 /obj/structure/railing/metal{
-	layer = 3
+	layer = 4.1
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/morgue)
@@ -23158,7 +23158,9 @@
 /obj/effect/decal/bordur{
 	dir = 8
 	},
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 4.1
+	},
 /turf/open/floor/plasteel/stairs{
 	dir = 4
 	},
@@ -23210,7 +23212,9 @@
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/chantry/basement)
 "gtA" = (
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 4.1
+	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "gtI" = (
@@ -26372,7 +26376,7 @@
 	name = "Police Sergeant"
 	},
 /obj/structure/railing/metal{
-	layer = 3
+	layer = 4.1
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
@@ -26929,7 +26933,9 @@
 /obj/machinery/light{
 	pixel_y = 32
 	},
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 4.1
+	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "hve" = (
@@ -41126,7 +41132,7 @@
 /area/vtm/interior/police/fed)
 "lzr" = (
 /obj/structure/railing/metal{
-	layer = 3
+	layer = 4.1
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
@@ -54353,7 +54359,7 @@
 	light_color = "#6488EA"
 	},
 /obj/structure/railing/metal{
-	layer = 3
+	layer = 4.1
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/morgue)
@@ -78911,7 +78917,7 @@
 	name = "Police Officer"
 	},
 /obj/structure/railing/metal{
-	layer = 3
+	layer = 4.1
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
