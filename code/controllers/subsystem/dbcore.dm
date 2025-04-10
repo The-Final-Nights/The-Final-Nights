@@ -3,8 +3,8 @@ SUBSYSTEM_DEF(dbcore)
 	name = "Database"
 	flags = SS_TICKER
 	wait = 10 // Not seconds because we're running on SS_TICKER
-	runlevels = RUNLEVEL_INIT|RUNLEVEL_LOBBY|RUNLEVELS_DEFAULT
 	init_order = INIT_ORDER_DBCORE
+	runlevels = RUNLEVEL_LOBBY|RUNLEVELS_DEFAULT
 	priority = FIRE_PRIORITY_DATABASE
 
 	var/schema_mismatch = 0
@@ -600,7 +600,7 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 /datum/db_query/proc/warn_execute(async = TRUE)
 	. = Execute(async)
 	if(!.)
-		to_chat(usr, "<span class='danger'>A SQL error occurred during this operation, check the server logs.</span>")
+		to_chat(usr, span_danger("A SQL error occurred during this operation, check the server logs."))
 
 /datum/db_query/proc/Execute(async = TRUE, log_error = TRUE)
 	Activity("Execute")
