@@ -37905,7 +37905,7 @@
 /obj/structure/chair/office{
 	dir = 4
 	},
-/mob/living/carbon/human/npc/guard,
+/mob/living/carbon/human/npc/police/static,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "kDu" = (
@@ -59511,10 +59511,8 @@
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/chinatown)
 "qzo" = (
-/obj/structure/chair/office{
-	dir = 4
-	},
-/turf/open/floor/plating/parquetry/old,
+/mob/living/carbon/human/npc/police,
+/turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "qzp" = (
 /obj/structure/big_vamprocks,
@@ -63102,6 +63100,7 @@
 /obj/structure/chair/office{
 	dir = 8
 	},
+/mob/living/carbon/human/npc/police/static,
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
@@ -204522,7 +204521,7 @@ iot
 mNv
 uZV
 uZV
-qzo
+kDt
 uZV
 iot
 imn
@@ -206064,7 +206063,7 @@ iot
 oGP
 oGP
 oGP
-yhf
+qzo
 yhf
 hBt
 jlv
