@@ -776,7 +776,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			if((HAS_FLESH in pref_species.species_traits) || (HAS_BONE in pref_species.species_traits))
 				dat += "<BR><b>Temporal Scarring:</b><BR><a href='byond://?_src_=prefs;preference=persistent_scars'>[(persistent_scars) ? "Enabled" : "Disabled"]</A>"
-				dat += "<a href='byond://?_src_=prefs;preference=clear_scars'>Clear scar slots</A>"
+				dat += "<a href='byond://?_src_=prefs;preference=clear_scars'>Clear scar slots</a>"
 
 //			dat += "<br><b>Antagonist Items Spawn Location:</b><BR><a href ='byond://?_src_=prefs;preference=uplink_loc;task=input'>[uplink_spawn_loc]</a><BR></td>"
 //			if (user.client.get_exp_living(TRUE) >= PLAYTIME_VETERAN)
@@ -1843,7 +1843,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							ghost_others = GHOST_OTHERS_SIMPLE
 
 				if("werewolf_name")
-					if(slotlocked || (!pref_species.id == "garou"))
+					if(slotlocked || !(pref_species.id == "garou"))
 						return
 
 					var/new_name = tgui_input_text(user, "Choose your character's werewolf name:", "Character Preference", max_length = MAX_NAME_LEN)
@@ -3287,7 +3287,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(clane.alt_sprite && !clane.alt_sprite_greyscale)
 			character.skin_tone = "albino"
 		else
-			character.skin_tone = get_vamp_skin_color(skin_tone)
+			var/mob/living/carbon/human/H = character
+			if(HAS_TRAIT(H, TRAIT_BLUSH_OF_HEALTH) && H.bloodpool > (H.maxbloodpool / 2))
+				character.skin_tone = skin_tone
+			else
+				character.skin_tone = get_vamp_skin_color(skin_tone)
 	else
 		character.skin_tone = skin_tone
 
