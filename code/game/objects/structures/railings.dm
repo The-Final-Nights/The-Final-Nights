@@ -27,9 +27,9 @@
 	///Initial direction of the railing.
 	var/ini_dir
 
-/obj/structure/railing/corner/metal
+/obj/structure/railing/metal/corner
 	icon = 'icons/obj/railings.dmi'
-	icon_state = "railing_corner_metal"
+	icon_state = "railing_corner"
 	density = FALSE
 	climbable = FALSE
 
