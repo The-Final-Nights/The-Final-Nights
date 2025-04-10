@@ -1154,6 +1154,7 @@
 /obj/item/pizzabox/mushroom{
 	pixel_y = 10
 	},
+/obj/item/kitchen/knife/plastic,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/police/upstairs)
 "aqr" = (
@@ -53992,6 +53993,7 @@
 	pixel_y = 32
 	},
 /obj/item/pizzabox/margherita,
+/obj/item/kitchen/knife/plastic,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "par" = (
