@@ -8170,6 +8170,10 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"clB" = (
+/obj/structure/railing/metal/corner,
+/turf/open/floor/plating/concrete,
+/area/vtm/interior/police)
 "clD" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/plating/parquetry/old,
@@ -22787,9 +22791,8 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "gog" = (
-/obj/structure/railing{
-	dir = 4;
-	pixel_y = -2
+/obj/structure/railing/metal{
+	dir = 4
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
@@ -23149,10 +23152,10 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/tzimisce_manor)
 "gsS" = (
-/obj/structure/railing,
 /obj/effect/decal/bordur{
 	dir = 8
 	},
+/obj/structure/railing/metal,
 /turf/open/floor/plasteel/stairs{
 	dir = 4
 	},
@@ -23204,7 +23207,7 @@
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/chantry/basement)
 "gtA" = (
-/obj/structure/railing,
+/obj/structure/railing/metal,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "gtI" = (
@@ -26918,10 +26921,10 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/ghetto)
 "hvd" = (
-/obj/structure/railing,
 /obj/machinery/light{
 	pixel_y = 32
 	},
+/obj/structure/railing/metal,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "hve" = (
@@ -29525,12 +29528,11 @@
 /obj/structure/chair/greyscale{
 	dir = 8
 	},
-/obj/structure/railing{
-	dir = 4;
-	pixel_y = -2
-	},
 /obj/effect/landmark/start{
 	name = "Police Officer"
+	},
+/obj/structure/railing/metal{
+	dir = 4
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
@@ -35810,6 +35812,9 @@
 	},
 /obj/structure/filingcabinet/chestdrawer/wheeled{
 	pixel_x = 7
+	},
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/open/floor/plating/toilet{
 	color = "#636363"
@@ -42208,10 +42213,8 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm)
 "lOR" = (
-/obj/structure/railing{
-	dir = 8;
-	layer = 4;
-	pixel_y = -2
+/obj/structure/railing/metal{
+	dir = 8
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
@@ -45035,6 +45038,13 @@
 /obj/structure/arc/add,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/chinatown)
+"mFN" = (
+/obj/structure/fluff/hedge,
+/obj/machinery/light{
+	pixel_y = 32
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police/upstairs)
 "mFU" = (
 /obj/structure/bookcase/random/nonfiction,
 /turf/open/floor/plating/parquetry/old,
@@ -55850,11 +55860,11 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/baali)
 "pBs" = (
-/obj/structure/railing{
-	dir = 4
-	},
 /obj/effect/decal/bordur{
 	dir = 1
+	},
+/obj/structure/railing/metal{
+	dir = 4
 	},
 /turf/open/floor/plasteel/stairs,
 /area/vtm/interior/police)
@@ -61672,6 +61682,9 @@
 	icon_state = "plant4";
 	pixel_y = 18;
 	pixel_x = 11
+	},
+/obj/machinery/light{
+	pixel_y = 32
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
@@ -69533,8 +69546,8 @@
 	},
 /obj/item/kirbyplants{
 	icon_state = "plant3";
-	pixel_y = -4;
-	pixel_x = -10
+	pixel_y = 15;
+	pixel_x = 6
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
@@ -75534,9 +75547,6 @@
 	},
 /obj/structure/table,
 /obj/item/food/vampire/donut,
-/obj/machinery/light{
-	pixel_y = 32
-	},
 /turf/closed/wall/vampwall/market/low,
 /area/vtm/interior/police/upstairs)
 "uUh" = (
@@ -200125,8 +200135,8 @@ jlv
 jlv
 avt
 mwS
-mwS
 xcF
+mwS
 mwS
 mwS
 iot
@@ -200396,7 +200406,7 @@ yhf
 uLe
 yhf
 iot
-yhf
+clB
 pBs
 bJU
 ldy
@@ -200639,8 +200649,8 @@ jlv
 jlv
 avt
 oXv
-oXv
 wcf
+oXv
 mwS
 mwS
 iot
@@ -269266,10 +269276,10 @@ ntq
 vMH
 lTQ
 pjl
-kXi
+mFN
 aoW
 uPr
-atT
+uPr
 atT
 jzw
 xaW

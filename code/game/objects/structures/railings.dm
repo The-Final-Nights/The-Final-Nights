@@ -23,10 +23,6 @@
 	density = TRUE
 	anchored = TRUE
 
-	var/climbable = TRUE
-	///Initial direction of the railing.
-	var/ini_dir
-
 /obj/structure/railing/metal/corner
 	icon = 'icons/obj/railings.dmi'
 	icon_state = "railing_corner"
