@@ -559,6 +559,16 @@
 		else
 			hud_used.blood_icon.icon_state = "blood[emm]"
 
+	// Update skin tone for vampires with Blush of Health
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		if(iskindred(H) && HAS_TRAIT(H, TRAIT_BLUSH_OF_HEALTH))
+			if(H.bloodpool > (H.maxbloodpool / 2))
+				H.skin_tone = H.client?.prefs?.skin_tone
+			else
+				H.skin_tone = get_vamp_skin_color(H.client?.prefs?.skin_tone)
+			H.update_body()
+
 /mob/living/proc/update_zone_hud()
 	if(!client || !hud_used)
 		return
