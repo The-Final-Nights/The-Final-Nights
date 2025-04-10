@@ -12237,7 +12237,9 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
 "dpc" = (
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 3
+	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/morgue)
 "dpj" = (
@@ -26368,7 +26370,9 @@
 /obj/effect/landmark/start{
 	name = "Police Sergeant"
 	},
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 3
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "hmH" = (
@@ -41120,7 +41124,9 @@
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/police/fed)
 "lzr" = (
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 3
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "lzw" = (
@@ -54345,7 +54351,9 @@
 	dir = 4;
 	light_color = "#6488EA"
 	},
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 3
+	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/morgue)
 "pgd" = (
@@ -78900,7 +78908,9 @@
 /obj/effect/landmark/start{
 	name = "Police Officer"
 	},
-/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	layer = 3
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "vRK" = (
