@@ -5814,10 +5814,6 @@
 /obj/item/weedseed,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/setite)
-"bCP" = (
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/roofwalk,
-/area/vtm/interior/police/upstairs)
 "bCR" = (
 /obj/structure/chair/plastic{
 	dir = 8
@@ -23466,7 +23462,7 @@
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
-/area/vtm)
+/area/vtm/interior/police/upstairs)
 "gwD" = (
 /obj/machinery/light{
 	dir = 1
@@ -30443,9 +30439,6 @@
 /obj/effect/decal/wallpaper/paper/rich,
 /turf/closed/wall/vampwall/rich,
 /area/vtm/interior/millennium_tower)
-"ivP" = (
-/turf/closed/wall/vampwall/market,
-/area/vtm)
 "ivT" = (
 /obj/structure/coclock,
 /turf/open/floor/plating/rough,
@@ -35830,7 +35823,7 @@
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
-/area/vtm)
+/area/vtm/interior/police/upstairs)
 "jXL" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -37025,12 +37018,6 @@
 /obj/effect/landmark/npcwall,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/northbeach)
-"kqZ" = (
-/obj/effect/decal/bordur{
-	dir = 6
-	},
-/turf/open/floor/plating/roofwalk,
-/area/vtm/interior/police/upstairs)
 "kri" = (
 /obj/structure/railing{
 	dir = 8;
@@ -49524,8 +49511,11 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/chantry/basement)
 "nNy" = (
-/turf/open/floor/plating/roofwalk,
-/area/vtm/interior/police/upstairs)
+/obj/machinery/vamp/atm{
+	pixel_y = 25
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/ghetto)
 "nNC" = (
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk/poor,
@@ -71494,12 +71484,6 @@
 /obj/item/reagent_containers/food/drinks/meth/cocaine,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/strip)
-"tLE" = (
-/obj/effect/decal/bordur{
-	dir = 10
-	},
-/turf/open/floor/plating/roofwalk,
-/area/vtm/interior/police/upstairs)
 "tLG" = (
 /obj/structure/vampipe{
 	icon_state = "piping40"
@@ -74700,7 +74684,7 @@
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
-/area/vtm)
+/area/vtm/interior/police/upstairs)
 "uHt" = (
 /obj/structure/chinesesign{
 	dir = 1
@@ -87475,7 +87459,7 @@
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
-/area/vtm)
+/area/vtm/interior/police/upstairs)
 "ylB" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/effect/landmark/npcwall,
@@ -206855,7 +206839,7 @@ myG
 yhf
 yhf
 iot
-jlv
+nNy
 jlv
 wCe
 mwS
@@ -270591,7 +270575,7 @@ atT
 atT
 atT
 pjl
-tLE
+xtH
 jps
 jps
 iex
@@ -270848,7 +270832,7 @@ atT
 atT
 atT
 pjl
-nNy
+lTQ
 lTQ
 lTQ
 ctC
@@ -271105,7 +271089,7 @@ atT
 atT
 atT
 pjl
-nNy
+lTQ
 lTQ
 lTQ
 ctC
@@ -271362,7 +271346,7 @@ atT
 atT
 atT
 pjl
-kqZ
+gjZ
 lbr
 lbr
 vTc
@@ -271619,7 +271603,7 @@ atT
 atT
 atT
 pjl
-bCP
+ctC
 ntq
 ntq
 ntq
@@ -271876,7 +271860,7 @@ atT
 atT
 atT
 pjl
-bCP
+ctC
 ntq
 ntq
 ntq
@@ -272133,7 +272117,7 @@ atT
 atT
 atT
 pjl
-bCP
+ctC
 ntq
 ntq
 ntq
@@ -273151,7 +273135,7 @@ lTQ
 lTQ
 lTQ
 lTQ
-ivP
+pjl
 gwB
 rud
 fuU
@@ -273408,11 +273392,11 @@ lTQ
 lTQ
 lTQ
 lTQ
-ivP
+pjl
 uHp
 jXG
 ylk
-ivP
+pjl
 xCn
 kDo
 nCU
@@ -273665,17 +273649,17 @@ lbr
 lbr
 lbr
 lbr
-ivP
-ivP
-ivP
-ivP
-ivP
-ivP
-ivP
-ivP
-ivP
-ivP
-ivP
+pjl
+pjl
+pjl
+pjl
+pjl
+pjl
+pjl
+pjl
+pjl
+pjl
+pjl
 ntq
 ntq
 ntq
