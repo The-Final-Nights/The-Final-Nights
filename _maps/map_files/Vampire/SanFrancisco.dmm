@@ -4397,11 +4397,13 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/community)
 "biQ" = (
-/obj/effect/landmark/start{
-	name = "Emergency Dispatcher"
+/obj/structure/roofstuff/alt2{
+	layer = 2.8
 	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/turf/open/floor/plating/sidewalk/poor{
+	color = "#8f8f8f"
+	},
+/area/vtm)
 "biR" = (
 /obj/structure/fluff/hedge,
 /obj/structure/railing{
@@ -12994,16 +12996,12 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/police)
 "dzE" = (
-/obj/structure/railing{
-	dir = 1;
-	layer = 4;
-	pixel_y = 16
-	},
-/obj/structure/railing{
-	dir = 4
+/obj/effect/decal/litter,
+/obj/effect/decal/bordur{
+	dir = 6
 	},
 /turf/open/floor/plating/sidewalk/poor,
-/area/vtm)
+/area/vtm/ghetto)
 "dzH" = (
 /obj/structure/vampfence/corner,
 /turf/open/floor/plating/concrete,
@@ -15871,15 +15869,14 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "esp" = (
-/obj/structure/rack/bubway/north,
-/obj/item/gun/ballistic/shotgun/vampire,
-/obj/item/ammo_box/vampire/c12g/buck{
-	pixel_y = 9
-	},
-/obj/machinery/light{
+/obj/effect/turf_decal/siding/white{
 	dir = 8
 	},
-/turf/open/floor/plating/parquetry/old,
+/obj/structure/vampdoor/police{
+	lockpick_difficulty = 16;
+	dir = 4
+	},
+/turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "esx" = (
 /obj/structure/coclock,
@@ -20725,8 +20722,17 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/f4)
 "fLS" = (
-/turf/closed/wall/vampwall/old,
-/area/vtm/interior/police)
+/obj/structure/railing{
+	dir = 8;
+	layer = 4
+	},
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 16
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "fLT" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/closed/wall/vampwall/metal/reinforced,
@@ -30106,18 +30112,9 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip/toreador)
 "iqZ" = (
-/obj/structure/table,
-/obj/item/paper_bin{
-	pixel_y = 6
-	},
-/obj/item/pen{
-	pixel_y = 7
-	},
-/obj/machinery/light{
-	pixel_y = 32
-	},
-/turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/obj/vampire_car/rand,
+/turf/open/floor/plating/asphalt,
+/area/vtm/ghetto)
 "irc" = (
 /turf/open/floor/plating/roofwalk,
 /area/vtm/park)
@@ -43702,14 +43699,12 @@
 /area/vtm/interior/shop)
 "mne" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 8;
-	color = "#636363"
+	dir = 8
 	},
-/obj/structure/vampdoor/police{
-	lockpick_difficulty = 16;
-	dir = 4
+/obj/structure/vampdoor/dispatch{
+	dir = 8
 	},
-/turf/open/floor/plating/concrete,
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "mnf" = (
 /obj/structure/vampfence,
@@ -45061,12 +45056,12 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "mGe" = (
-/obj/structure/table,
-/obj/machinery/p25transceiver/police{
-	pixel_y = 10
+/obj/effect/decal/asphaltline/alt{
+	dir = 8;
+	pixel_y = 15
 	},
-/turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/turf/open/floor/plating/asphalt,
+/area/vtm/ghetto)
 "mGg" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -56676,15 +56671,12 @@
 /turf/open/floor/plating,
 /area/vtm/clinic/haven)
 "pKX" = (
-/obj/structure/railing{
-	dir = 1;
-	layer = 4;
-	pixel_y = 16
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 1
 	},
-/obj/structure/railing{
-	dir = 4
+/obj/structure/railing/metal{
+	layer = 4.1
 	},
-/obj/structure/railing,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "pKY" = (
@@ -58329,14 +58321,12 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/old)
 "qir" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 1
+/obj/effect/decal/bordur{
+	dir = 4
 	},
-/obj/structure/vampdoor/police{
-	lockpick_difficulty = 18
-	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/obj/effect/decal/litter,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/ghetto)
 "qiv" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -67528,6 +67518,12 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f4)
+"sDE" = (
+/obj/structure/railing/metal{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "sDJ" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/effect/landmark/npcwall,
@@ -68166,9 +68162,10 @@
 /turf/open/floor/carpet,
 /area/vtm/interior/strip/elysium)
 "sOv" = (
-/turf/open/floor/plasteel/stairs{
+/obj/structure/railing/metal{
 	dir = 8
 	},
+/turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "sOE" = (
 /obj/effect/turf_decal/siding/wood{
@@ -74974,8 +74971,14 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "uLe" = (
-/obj/effect/landmark/start{
-	name = "Police Officer"
+/obj/structure/reagent_dispensers/water_cooler{
+	pixel_y = 20;
+	density = 0
+	},
+/obj/item/kirbyplants{
+	icon_state = "plant5";
+	pixel_y = 17;
+	pixel_x = -10
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
@@ -76518,6 +76521,10 @@
 /obj/vampire_computer,
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
+"vhC" = (
+/obj/structure/barrels/rand,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/ghetto)
 "vhE" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -80689,9 +80696,15 @@
 /turf/open/floor/carpet,
 /area/vtm/pacificheights/forest)
 "wrw" = (
-/obj/structure/closet/cardboard,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/unionsquare)
+/obj/structure/table,
+/obj/machinery/p25transceiver/police{
+	pixel_y = 10
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/plating/concrete,
+/area/vtm/interior/police)
 "wrA" = (
 /obj/structure/coclock,
 /turf/open/floor/plating/vampplating/mono,
@@ -80849,9 +80862,13 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto)
 "wuy" = (
-/obj/structure/vampdoor/dispatch,
-/obj/effect/turf_decal/siding/white{
-	dir = 1
+/obj/structure/rack/bubway/south,
+/obj/item/gun/ballistic/shotgun/vampire,
+/obj/item/ammo_box/vampire/c12g/buck{
+	pixel_y = 9
+	},
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
@@ -81607,7 +81624,7 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
 "wFl" = (
-/obj/structure/rack/bubway/south,
+/obj/structure/rack/bubway/north,
 /obj/item/gun/ballistic/automatic/vampire/ar15{
 	cost = 0;
 	desc = "A shiny new SFPD Carbine, courtesy of improved budgets and a dire need to clean these streets.";
@@ -82474,9 +82491,11 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/tzimisce_manor)
 "wSa" = (
-/obj/structure/trashcan,
+/obj/structure/railing/metal{
+	dir = 1
+	},
 /turf/open/floor/plating/sidewalk/poor,
-/area/vtm/unionsquare)
+/area/vtm)
 "wSd" = (
 /mob/living/simple_animal/hostile/ghost/hostile,
 /obj/structure/trashbag,
@@ -84302,6 +84321,13 @@
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/concrete,
 /area/vtm/graveyard/interior)
+"xsr" = (
+/obj/structure/vampdoor/police{
+	lockpick_difficulty = 18
+	},
+/obj/effect/turf_decal/siding/white,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police)
 "xsx" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -197865,18 +197891,18 @@ oOD
 oOD
 oOD
 oOD
-fLS
+oOD
+oOD
+fkd
+vhC
+iot
+iot
+mne
 iot
 iot
 iot
 iot
 iot
-iot
-iot
-vci
-iog
-iog
-iog
 iog
 dar
 mJe
@@ -198122,6 +198148,10 @@ fkd
 fkd
 fkd
 fkd
+fkd
+fkd
+fkd
+vhC
 iot
 oyW
 uZV
@@ -198130,10 +198160,6 @@ qWT
 mWK
 vrI
 iot
-vci
-iog
-iog
-iog
 iog
 dar
 jcs
@@ -198368,6 +198394,7 @@ muL
 muL
 muL
 muL
+qir
 muL
 muL
 muL
@@ -198379,18 +198406,17 @@ muL
 muL
 muL
 muL
+muL
+muL
+qir
 iot
 pag
-biQ
+uZV
 uZV
 uZV
 avF
 cow
 iot
-oiz
-mHu
-mHu
-mHu
 mHu
 dar
 lHu
@@ -198631,11 +198657,15 @@ jlv
 jlv
 jlv
 jlv
+typ
 jlv
 jlv
 jlv
 jlv
 jlv
+jlv
+jlv
+jmU
 iot
 hXD
 uZV
@@ -198644,10 +198674,6 @@ uZV
 uZV
 tUK
 iot
-wrw
-lHG
-lHG
-lHG
 jhC
 dar
 jGR
@@ -198885,6 +198911,9 @@ jlv
 jlv
 jlv
 jlv
+mrM
+jlv
+tTU
 jlv
 jlv
 jlv
@@ -198893,7 +198922,8 @@ jlv
 jlv
 jlv
 jlv
-wuy
+dci
+iot
 uZV
 uZV
 ksX
@@ -198901,10 +198931,6 @@ cow
 uZV
 uZV
 iot
-wSa
-lHG
-lHG
-lHG
 hFy
 dar
 mhX
@@ -199146,10 +199172,14 @@ jlv
 jlv
 jlv
 jlv
+dzE
+fKQ
+fKQ
+fKQ
+fKQ
+bAA
 jlv
-jlv
-jlv
-jlv
+dci
 iot
 iot
 elZ
@@ -199158,10 +199188,6 @@ vdu
 uZV
 jkY
 iot
-wSa
-lHG
-lHG
-lHG
 lHG
 dar
 gKn
@@ -199403,20 +199429,20 @@ jmU
 jlv
 jlv
 jlv
-jlv
-jlv
-jlv
-jlv
-jlv
+avt
+mwS
+mwS
+mGe
+mwS
+ulT
 iot
 iot
 iot
 iot
-mne
 iot
 iot
 iot
-iot
+esp
 iot
 iot
 lHG
@@ -199659,22 +199685,22 @@ mes
 gyz
 jlv
 jlv
-jlv
-jlv
-jlv
 exy
-vRy
-fKQ
-fKQ
+avt
+mwS
+iqZ
+mGe
+mwS
+ulT
 iot
-vdm
-yhf
-yhf
-yhf
-iot
-biB
-esp
 wFl
+wuy
+biB
+iot
+uLe
+yhf
+yhf
+vdm
 iot
 lHG
 lHG
@@ -199914,24 +199940,24 @@ iFP
 iFP
 mes
 jlv
-jlv
-typ
-jlv
 vRy
 fKQ
 fKQ
 jpN
 mwS
 mwS
-iot
-iqZ
 mGe
-yhf
-yhf
-qir
-uZV
-kDt
+mwS
+cbK
+iot
 tjF
+kDt
+uZV
+xsr
+yhf
+yhf
+fEz
+wrw
 iot
 lHG
 lHG
@@ -200171,24 +200197,24 @@ iFP
 iFP
 mes
 xOJ
-jlv
-jlv
-jlv
 avt
 mwS
 xcF
 mwS
 mwS
 mwS
-iot
-gBI
-iaP
-yhf
-yhf
+mwS
+mwS
+mwS
 iot
 twW
 xcJ
 twW
+iot
+yhf
+yhf
+iaP
+yhf
 iot
 iot
 iot
@@ -200428,23 +200454,23 @@ rjQ
 iFP
 mes
 xOJ
-tTU
-jlv
-jlv
 avt
 mwS
 mwS
 mwS
 mwS
 mwS
+mwS
+mwS
+mwS
 iot
+gBI
 yhf
 yhf
 yhf
 yhf
 yhf
 yhf
-uLe
 yhf
 iot
 clB
@@ -200685,16 +200711,16 @@ mes
 mes
 mes
 xOJ
-xOJ
-jlv
-jlv
 avt
 oXv
 wcf
 oXv
 mwS
 mwS
-iot
+mwS
+mwS
+mwS
+twW
 fEz
 yhf
 yhf
@@ -200942,10 +200968,10 @@ uCs
 jlv
 xOJ
 jlv
-jlv
-jlv
-jlv
 avt
+mwS
+mwS
+mwS
 mwS
 mwS
 mwS
@@ -201199,10 +201225,10 @@ jlv
 jlv
 jlv
 jlv
-jlv
-jlv
-mrM
 ibT
+xFV
+xFV
+xFV
 xFV
 xFV
 cxc
@@ -263401,18 +263427,18 @@ kno
 cEq
 cEq
 cEq
-kno
-kno
+cEq
+ogR
+ntq
+ntq
+fLS
+mbQ
 mbQ
 mbQ
 mbQ
 mbQ
 mbQ
 xWX
-ntq
-ntq
-ntq
-ntq
 ntq
 dar
 mJe
@@ -263658,6 +263684,10 @@ ntq
 ntq
 ntq
 ntq
+ntq
+ntq
+ntq
+ntq
 hpg
 kno
 kno
@@ -263666,10 +263696,6 @@ kno
 kno
 kno
 hjS
-ntq
-ntq
-ntq
-ntq
 ntq
 dar
 mJe
@@ -263915,18 +263941,18 @@ ntq
 ntq
 ntq
 ntq
+ntq
+ntq
+ntq
+ntq
 hpg
 kno
+pEQ
 kno
-kno
-kno
+pEQ
 kno
 kno
 hjS
-ntq
-ntq
-ntq
-ntq
 ntq
 dar
 lHu
@@ -264172,6 +264198,10 @@ ntq
 ntq
 ntq
 ntq
+ntq
+ntq
+ntq
+ntq
 hpg
 kno
 kno
@@ -264180,10 +264210,6 @@ kno
 kno
 kno
 hjS
-ntq
-ntq
-ntq
-ntq
 ntq
 dar
 jGR
@@ -264429,18 +264455,18 @@ ntq
 ntq
 ntq
 ntq
+ntq
+ntq
+ntq
+ntq
 hpg
 kno
+pEQ
 kno
-kno
-kno
+pEQ
 kno
 kno
 hjS
-ntq
-ntq
-ntq
-ntq
 ntq
 dar
 mhX
@@ -264686,18 +264712,18 @@ ntq
 ntq
 ntq
 ntq
-dzE
+ntq
+ntq
+ntq
+ntq
+hpg
 kno
-cEq
-cEq
-cEq
-cEq
-cEq
-aNx
-ntq
-ntq
-ntq
-ntq
+kno
+kno
+kno
+kno
+kno
+hjS
 ntq
 dar
 jGR
@@ -264944,7 +264970,7 @@ ntq
 ntq
 ntq
 ntq
-pKX
+ntq
 xVm
 jps
 jps
@@ -270871,7 +270897,7 @@ atT
 atT
 atT
 atT
-pjl
+hxd
 lTQ
 lTQ
 lTQ
@@ -271385,7 +271411,7 @@ atT
 atT
 atT
 atT
-pjl
+hxd
 gjZ
 lbr
 lbr
@@ -271899,7 +271925,7 @@ atT
 atT
 atT
 atT
-pjl
+hxd
 ctC
 ntq
 ntq
@@ -333570,9 +333596,9 @@ ntq
 vMH
 lTQ
 oKk
-kno
+sDE
 kFy
-kno
+sDE
 kno
 wNt
 lTQ
@@ -333826,11 +333852,11 @@ ntq
 ntq
 vMH
 lTQ
-oKk
+pKX
 gxM
 eHV
-gxM
-kno
+biQ
+wSa
 wNt
 lTQ
 ctC
@@ -334083,11 +334109,11 @@ ntq
 ntq
 vMH
 lTQ
-oKk
+pKX
 gxM
 eHV
-gxM
-kno
+biQ
+wSa
 wNt
 lTQ
 ctC
@@ -334340,11 +334366,11 @@ ntq
 ntq
 vMH
 lTQ
-oKk
+pKX
 gxM
 eHV
-gxM
-kno
+biQ
+wSa
 wNt
 lTQ
 ctC
@@ -334598,9 +334624,9 @@ ntq
 vMH
 lTQ
 oKk
-kno
 sOv
-kno
+sOv
+sOv
 kno
 wNt
 lTQ
