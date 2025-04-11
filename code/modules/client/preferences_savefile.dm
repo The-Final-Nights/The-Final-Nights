@@ -91,6 +91,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 39)
 		if(length(ooc_notes))
 			character_notes = ooc_notes
+			ooc_notes = ""
 
 /// checks through keybindings for outdated unbound keys and updates them
 /datum/preferences/proc/check_keybindings()
