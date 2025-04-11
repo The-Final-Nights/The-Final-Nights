@@ -9163,6 +9163,12 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
+"cxL" = (
+/obj/effect/decal/graffiti{
+	icon_state = "graffiti12"
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/fishermanswharf/lower)
 "cxS" = (
 /turf/open/indestructible/necropolis/air,
 /area/vtm/interior/endron_facility)
@@ -12556,10 +12562,12 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/clinic/haven)
 "dtD" = (
-/obj/effect/decal/trash,
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/fishermanswharf/lower)
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "dtG" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -18646,12 +18654,6 @@
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/police/upstairs)
-"fju" = (
-/obj/effect/decal/graffiti{
-	icon_state = "graffiti12"
-	},
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/fishermanswharf/lower)
 "fjw" = (
 /obj/structure/table,
 /turf/open/floor/plating/concrete,
@@ -39051,6 +39053,12 @@
 /obj/structure/bonfire/dense,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/glasswalker)
+"kUL" = (
+/obj/structure/sign/poster/random{
+	pixel_y = 32
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "kUM" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -44770,6 +44778,11 @@
 "mAL" = (
 /turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/f4)
+"mAR" = (
+/obj/effect/decal/trash,
+/obj/effect/decal/bordur,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/fishermanswharf/lower)
 "mAU" = (
 /obj/structure/vampdoor/wood/giovanni,
 /turf/open/floor/carpet,
@@ -48346,6 +48359,13 @@
 "nys" = (
 /turf/closed/wall/vampwall/rock,
 /area/vtm/graveyard)
+"nyx" = (
+/obj/machinery/light{
+	pixel_y = 32
+	},
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "nyC" = (
 /obj/structure/table/wood,
 /obj/structure/mirror{
@@ -50318,13 +50338,6 @@
 /obj/item/bong,
 /turf/open/floor/carpet,
 /area/vtm/interior/strip/toreador)
-"nZS" = (
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/item/kirbyplants/random,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch)
 "nZW" = (
 /obj/structure/coclock,
 /turf/open/floor/plating/vampplating,
@@ -53177,11 +53190,6 @@
 	},
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
-"oOp" = (
-/obj/effect/decal/cardboard,
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/fishermanswharf/lower)
 "oOw" = (
 /obj/structure/sink{
 	pixel_y = 16
@@ -64736,6 +64744,11 @@
 /obj/effect/decal/wallpaper/light,
 /turf/closed/wall/vampwall/city,
 /area/vtm/interior/ghetto)
+"rPS" = (
+/obj/effect/decal/cardboard,
+/obj/effect/decal/bordur,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/fishermanswharf/lower)
 "rPZ" = (
 /obj/structure/window/reinforced/indestructable{
 	alpha = 0;
@@ -71764,13 +71777,6 @@
 /mob/living/carbon/human/npc/hobo,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
-"tNV" = (
-/obj/machinery/light{
-	pixel_y = 32
-	},
-/obj/item/kirbyplants/random,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch)
 "tNW" = (
 /obj/effect/turf_decal/siding/purple{
 	dir = 1
@@ -171165,14 +171171,14 @@ fkk
 msq
 msq
 ouT
-fju
+cxL
 msq
 msq
 ouT
 iJO
 msq
 msq
-dtD
+mAR
 dnN
 vox
 hwp
@@ -171686,7 +171692,7 @@ nBj
 msq
 pRN
 msq
-oOp
+rPS
 oWV
 vox
 hwp
@@ -171943,7 +171949,7 @@ msq
 msq
 lFX
 msq
-oOp
+rPS
 oWV
 vox
 hwp
@@ -173189,7 +173195,7 @@ wgF
 vwX
 tio
 svE
-nZS
+dtD
 mbo
 mbo
 mbo
@@ -235900,7 +235906,7 @@ ntq
 gGf
 ntq
 kGg
-tNV
+nyx
 pMC
 pMC
 pMC
@@ -236414,7 +236420,7 @@ ntq
 gGf
 mSP
 kGg
-pMC
+kUL
 pMC
 pMC
 pMC
