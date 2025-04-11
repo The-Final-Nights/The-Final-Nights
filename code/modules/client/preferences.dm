@@ -243,9 +243,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// Off by default. Opt-in.
 	var/nsfw_content_pref = FALSE
 
-	///The Examine Panel TGUI.
-	var/datum/examine_panel/tgui = new() //create the datum
-
 /datum/preferences/proc/add_experience(amount)
 	true_experience = clamp(true_experience + amount, 0, 1000)
 
