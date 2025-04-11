@@ -49,8 +49,8 @@
 	range = 7
 
 /datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)
-	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = 1)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
@@ -85,8 +85,8 @@
 	range = 7
 
 /datum/discipline_power/dominate/mesmerize/pre_activation_checks(mob/living/target)
-	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = 1)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
@@ -123,8 +123,8 @@
 	range = 7
 
 /datum/discipline_power/dominate/the_forgetful_mind/pre_activation_checks(mob/living/target)
-	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = 1)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
@@ -160,8 +160,8 @@
 	range = 7
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
-	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = 1)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
@@ -196,8 +196,8 @@
 	range = 7
 
 /datum/discipline_power/dominate/possession/pre_activation_checks(mob/living/target)
-	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = 1)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
