@@ -12556,11 +12556,12 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/clinic/haven)
 "dtD" = (
-/obj/effect/decal/trash,
-/obj/structure/bed/maint,
-/obj/effect/decal/graffiti,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/anarch/garage)
+/obj/machinery/light{
+	pixel_y = 32
+	},
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "dtG" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -13207,9 +13208,10 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm)
 "dDS" = (
-/obj/structure/bed/maint,
-/obj/effect/decal/graffiti,
-/turf/open/floor/plating/sidewalk/poor,
+/obj/effect/turf_decal/siding/white{
+	dir = 8
+	},
+/turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "dDT" = (
 /obj/item/clothing/under/suit/checkered,
@@ -17414,6 +17416,9 @@
 	pixel_x = -16
 	},
 /obj/effect/decal/trash,
+/obj/effect/turf_decal/siding/white{
+	dir = 8
+	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "eRP" = (
@@ -21530,6 +21535,12 @@
 /obj/structure/chair/office,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
+"fVW" = (
+/obj/effect/decal/graffiti{
+	icon_state = "graffiti12"
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/fishermanswharf/lower)
 "fWf" = (
 /obj/machinery/light/warm{
 	dir = 1;
@@ -28169,9 +28180,6 @@
 /obj/structure/railing{
 	dir = 4;
 	layer = 4
-	},
-/obj/structure/chair/sofa/corp/left{
-	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -44540,10 +44548,10 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
 "mxT" = (
-/obj/structure/chair/sofa/corp{
+/obj/effect/landmark/start/bruiser,
+/obj/structure/chair/sofa/corp/left{
 	dir = 1
 	},
-/obj/effect/landmark/start/bruiser,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "myl" = (
@@ -64387,6 +64395,7 @@
 	layer = 4;
 	pixel_y = 12
 	},
+/obj/item/kirbyplants/random,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "rLH" = (
@@ -67110,6 +67119,13 @@
 /obj/manholeup,
 /turf/open/floor/plating/vampcanal,
 /area/vtm/sewer)
+"swl" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "swn" = (
 /obj/effect/decal/graffiti/large,
 /obj/structure/glowshroom/single,
@@ -84644,6 +84660,7 @@
 /obj/structure/railing{
 	dir = 4
 	},
+/obj/item/kirbyplants/random,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "xyB" = (
@@ -171138,7 +171155,7 @@ fkk
 msq
 msq
 ouT
-iJO
+fVW
 msq
 msq
 ouT
@@ -172905,7 +172922,7 @@ wgF
 bAl
 mms
 svE
-gtq
+mTI
 gtq
 gtq
 gtq
@@ -173162,12 +173179,12 @@ wgF
 vwX
 tio
 svE
-mTI
-gtq
-gtq
-gtq
-gtq
-xCP
+swl
+mbo
+mbo
+mbo
+mbo
+pMC
 pMC
 pMC
 ubl
@@ -173419,11 +173436,11 @@ dnj
 xEC
 lns
 kGg
-mbo
-mbo
-mbo
-mbo
-mbo
+pMC
+pMC
+pMC
+pMC
+pMC
 pMC
 pMC
 pMC
@@ -176503,10 +176520,10 @@ dnj
 xEC
 lns
 dpp
-cMf
-cMf
+dDS
+dDS
 eRD
-cMf
+dDS
 bQz
 vpB
 vpB
@@ -235873,7 +235890,7 @@ ntq
 gGf
 ntq
 kGg
-ehv
+dtD
 pMC
 pMC
 pMC
@@ -241269,7 +241286,7 @@ ntq
 ntq
 bQz
 dhU
-bQz
+gJH
 bQz
 bQz
 bQz
@@ -241526,8 +241543,8 @@ ntq
 ntq
 bQz
 eWA
+gJH
 dpp
-dtD
 sTU
 bQz
 ntq
@@ -241783,8 +241800,8 @@ ntq
 ntq
 bQz
 dhU
-aGw
 gJH
+aGw
 gJH
 bQz
 iFk
@@ -242040,7 +242057,7 @@ ntq
 ntq
 bQz
 gJH
-bQz
+gJH
 bQz
 bQz
 bQz
@@ -242297,8 +242314,8 @@ ntq
 ntq
 bQz
 eWA
+gJH
 dpp
-dDS
 oti
 bQz
 iFk
@@ -242554,8 +242571,8 @@ ntq
 ntq
 bQz
 xBo
-aGw
 gJH
+aGw
 gJH
 bQz
 ntq
@@ -242811,7 +242828,7 @@ ntq
 ntq
 bQz
 vYU
-bQz
+gJH
 bQz
 bQz
 bQz
