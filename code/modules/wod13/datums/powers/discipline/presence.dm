@@ -31,7 +31,7 @@
 	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = 1)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
+		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		return FALSE
 	return TRUE
 
@@ -79,7 +79,7 @@
 	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = 1)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
+		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		return FALSE
 	return TRUE
 
@@ -120,7 +120,7 @@
 	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = 1)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
+		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		return FALSE
 	return TRUE
 
@@ -168,7 +168,7 @@
 	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = 1)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
+		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		return FALSE
 	return TRUE
 
@@ -217,7 +217,7 @@
 	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = 1)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to sway!"))
+		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		return FALSE
 	return TRUE
 
