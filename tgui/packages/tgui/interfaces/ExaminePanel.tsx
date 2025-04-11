@@ -89,14 +89,12 @@ export const ExaminePanel = (props) => {
               >
                 <Section fitted title={'Flavor Text'} />
               </Tabs.Tab>
-              {nsfw_content && (
-                <Tabs.Tab
-                  selected={tabIndex === 2}
-                  onClick={() => setTabIndex(2)}
-                >
-                  <Section fitted title={'Flavor Text (NSFW)'} />
-                </Tabs.Tab>
-              )}
+              <Tabs.Tab
+                selected={tabIndex === 2}
+                onClick={() => setTabIndex(2)}
+              >
+                <Section fitted title={'Flavor Text (NSFW)'} />
+              </Tabs.Tab>
             </Tabs>
             {tabIndex === 1 && (
               <Section
@@ -133,14 +131,12 @@ export const ExaminePanel = (props) => {
               >
                 <Section fitted title={'Character Notes'} />
               </Tabs.Tab>
-              {nsfw_content && (
-                <Tabs.Tab
-                  selected={lowerTabIndex === 2}
-                  onClick={() => setLowerTabIndex(2)}
-                >
-                  <Section fitted title={'OOC Notes (NSFW)'} />
-                </Tabs.Tab>
-              )}
+              <Tabs.Tab
+                selected={lowerTabIndex === 2}
+                onClick={() => setLowerTabIndex(2)}
+              >
+                <Section fitted title={'OOC Notes (NSFW)'} />
+              </Tabs.Tab>
             </Tabs>
               {lowerTabIndex === 1 && (
                 <Section
