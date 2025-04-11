@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	38
+#define SAVEFILE_VERSION_MAX	39
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -88,7 +88,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			LAZYADD(key_bindings["Ctrl"], "block_movement")
 
 /datum/preferences/proc/update_character(current_version, savefile/S)
-	return
+	if(current_version < 39)
+		if(length(ooc_notes))
+			character_notes = ooc_notes
 
 /// checks through keybindings for outdated unbound keys and updates them
 /datum/preferences/proc/check_keybindings()
@@ -210,6 +212,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(hearted_until > world.realtime)
 		hearted = TRUE
 
+	READ_FILE(S["nsfw_content_pref"], nsfw_content_pref)
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
 		var/bacpath = "[path].updatebac" //todo: if the savefile version is higher then the server, check the backup, and give the player a prompt to load the backup
@@ -257,6 +260,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_keybindings(key_bindings)
+	nsfw_content_pref = sanitize_integer(nsfw_content_pref, FALSE, TRUE, src::nsfw_content_pref)
 
 	if(needs_update >= 0) //save the updated version
 		var/old_default_slot = default_slot
@@ -334,6 +338,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pda_color"], pda_color)
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["hearted_until"], (hearted_until > world.realtime ? hearted_until : null))
+	WRITE_FILE(S["nsfw_content_pref"], nsfw_content_pref)
 	return TRUE
 
 /datum/preferences/proc/load_character(slot)
@@ -427,7 +432,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["enemy"], enemy)
 	READ_FILE(S["lover"], lover)
 	READ_FILE(S["flavor_text"], flavor_text)
+	READ_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	READ_FILE(S["ooc_notes"], ooc_notes)
+	READ_FILE(S["character_notes"], character_notes)
 	READ_FILE(S["friend_text"], friend_text)
 	READ_FILE(S["enemy_text"], enemy_text)
 	READ_FILE(S["lover_text"], lover_text)
@@ -579,7 +586,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	werewolf_hair_color		= sanitize_ooccolor(werewolf_hair_color, 3, 0)
 	werewolf_eye_color		= sanitize_ooccolor(werewolf_eye_color, 3, 0)
 	flavor_text	= sanitize_text(flavor_text)
+	flavor_text_nsfw = sanitize_text(flavor_text_nsfw)
 	ooc_notes = sanitize_text(ooc_notes)
+	character_notes = sanitize_text(character_notes)
 	socks			= sanitize_inlist(socks, GLOB.socks_list)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	diablerist				= sanitize_integer(diablerist, 0, 1, initial(diablerist))
@@ -754,6 +763,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["enemy"]			, enemy)
 	WRITE_FILE(S["lover"]			, lover)
 	WRITE_FILE(S["flavor_text"], flavor_text)
+	WRITE_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	WRITE_FILE(S["ooc_notes"], ooc_notes)
 	WRITE_FILE(S["friend_text"]			, friend_text)
 	WRITE_FILE(S["enemy_text"]			, enemy_text)
