@@ -1,5 +1,5 @@
 // THIS IS A SKYRAT UI FILE
-import { ReactNode, useState } from 'react';
+import { useState } from 'react';
 
 import { resolveAsset } from '../assets';
 import { useBackend } from '../backend';
