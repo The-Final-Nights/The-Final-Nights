@@ -459,7 +459,7 @@
 	name = "claws"
 	icon_state = "gangrel"
 	w_class = WEIGHT_CLASS_BULKY
-	force = 20
+	force = 10
 	armour_penetration = 100	//It's magical damage
 	block_chance = 20
 	item_flags = DROPDEL
@@ -471,11 +471,11 @@
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		L.apply_damage(20, CLONE)
+		L.apply_damage(10, CLONE)
 
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"
-	force = 25
+	force = 10
 	armour_penetration = 100
 	block_chance = 0
 	icon_state = "lasombra"
@@ -487,6 +487,7 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		L.apply_damage(10, BURN)
+		L.apply_damage(10, CLONE)
 
 /obj/item/melee/touch_attack/werewolf
 	name = "\improper falling touch"
