@@ -2253,12 +2253,12 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "aFq" = (
-/obj/structure/flora/ausbushes,
-/obj/structure/closet/cardboard,
-/obj/effect/decal/cardboard,
-/obj/effect/decal/litter,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/northbeach)
+/obj/structure/railing{
+	dir = 4;
+	layer = 4
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "aFt" = (
 /obj/structure/trad{
 	pixel_y = 32
@@ -3523,11 +3523,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/giovanni)
-"aWf" = (
-/obj/effect/landmark/npcbeacon/directed,
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/fishermanswharf)
 "aWj" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -7003,13 +6998,9 @@
 /turf/open/floor/carpet/red,
 /area/vtm/interior/tzimisce_manor)
 "bUJ" = (
-/obj/effect/decal/litter,
-/obj/effect/decal/trash,
-/obj/effect/decal/trash{
-	icon_state = "trash8"
-	},
-/turf/open/floor/plating/vampbeach,
-/area/vtm/northbeach)
+/obj/effect/decal/bordur,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/fishermanswharf)
 "bUK" = (
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/sidewalk,
@@ -12294,6 +12285,12 @@
 /obj/effect/decal/litter,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/nosferatu_town)
+"dqj" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "dqq" = (
 /obj/effect/decal/wallpaper/blue,
 /turf/closed/wall/vampwall/painted,
@@ -14771,6 +14768,16 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic/haven)
+"ecK" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/effect/decal/bordur{
+	dir = 4
+	},
+/obj/effect/decal/bordur,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "ecR" = (
 /obj/structure/closet/crate/freezer/blood,
 /obj/item/drinkable_bloodpack,
@@ -15355,6 +15362,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/baali)
+"elD" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/effect/decal/trash,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/fishermanswharf)
 "elI" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/sidewalk/rich,
@@ -16232,12 +16246,10 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip)
 "eAj" = (
-/obj/effect/decal/trash,
-/obj/effect/decal/trash{
-	icon_state = "trash8"
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/northbeach)
+/obj/machinery/light/small,
+/obj/effect/decal/wallpaper/light,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "eAw" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -22022,13 +22034,13 @@
 /turf/open/floor/carpet/red,
 /area/vtm/clinic/haven)
 "gef" = (
-/obj/effect/decal/bordur{
-	dir = 8
-	},
+/obj/effect/decal/bordur,
 /obj/effect/decal/bordur{
 	dir = 1
 	},
-/obj/effect/decal/bordur,
+/obj/effect/decal/bordur{
+	dir = 8
+	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "geh" = (
@@ -23456,6 +23468,13 @@
 "gwI" = (
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer)
+"gwO" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/effect/decal/litter,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/fishermanswharf)
 "gxj" = (
 /obj/structure/vampdoor/setite{
 	dir = 4
@@ -26240,12 +26259,9 @@
 /turf/open/floor/carpet,
 /area/vtm/interior/cog/caern)
 "hlL" = (
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/obj/effect/decal/trash,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/fishermanswharf)
+/obj/item/cigbutt,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/northbeach)
 "hlM" = (
 /obj/structure/railing{
 	dir = 8;
@@ -26431,6 +26447,11 @@
 	},
 /turf/open/floor/plating/roofwalk,
 /area/vtm/interior/oldchurch)
+"hoP" = (
+/obj/effect/landmark/npcbeacon/directed,
+/obj/effect/decal/bordur,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/fishermanswharf)
 "hoV" = (
 /obj/structure/table,
 /obj/structure/extinguisher_cabinet{
@@ -27719,6 +27740,13 @@
 /mob/living/simple_animal/pet/cat/vampire,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/fishermanswharf/lower)
+"hIS" = (
+/obj/effect/decal/bordur{
+	dir = 4
+	},
+/obj/effect/decal/bordur,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/fishermanswharf)
 "hIT" = (
 /turf/closed/wall/vampwall/brick,
 /area/vtm/interior/shop)
@@ -33533,6 +33561,14 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"jqZ" = (
+/obj/effect/decal/cardboard,
+/obj/effect/decal/litter,
+/obj/effect/decal/trash{
+	icon_state = "trash8"
+	},
+/turf/open/floor/plating/vampgrass,
+/area/vtm/northbeach)
 "jrc" = (
 /obj/item/drinkable_bloodpack,
 /obj/item/drinkable_bloodpack,
@@ -34700,14 +34736,6 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/cabaret/basement)
-"jIb" = (
-/obj/effect/decal/cardboard,
-/obj/effect/decal/litter,
-/obj/effect/decal/trash{
-	icon_state = "trash8"
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/northbeach)
 "jIf" = (
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk,
@@ -37186,6 +37214,13 @@
 /obj/effect/decal/litter,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/community)
+"kub" = (
+/obj/structure/roadsign/parking,
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/fishermanswharf)
 "kum" = (
 /obj/structure/chair/comfy/brown{
 	dir = 8
@@ -42180,13 +42215,6 @@
 /obj/structure/sign/poster/contraband/random,
 /turf/closed/wall/vampwall/city,
 /area/vtm/cabaret/basement)
-"lOM" = (
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/obj/effect/decal/litter,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/fishermanswharf)
 "lON" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -43590,13 +43618,6 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip/toreador)
-"mky" = (
-/obj/vampire_car/track/volkswagen,
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/fishermanswharf)
 "mkE" = (
 /obj/structure/closet/cardboard,
 /turf/open/floor/plating/sidewalk,
@@ -44279,6 +44300,14 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower)
+"mvd" = (
+/obj/structure/railing,
+/obj/structure/railing{
+	dir = 4;
+	layer = 4
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "mvj" = (
 /obj/structure/vampdoor/anarch{
 	dir = 4;
@@ -48107,6 +48136,17 @@
 /obj/machinery/light/prince,
 /turf/closed/wall/vampwall/old,
 /area/vtm/interior/tzimisce_manor)
+"nwp" = (
+/obj/structure/railing{
+	dir = 4;
+	layer = 4
+	},
+/obj/structure/railing{
+	dir = 4;
+	layer = 4
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "nwr" = (
 /obj/structure/railing{
 	dir = 8
@@ -50729,11 +50769,10 @@
 /turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
 "ohy" = (
-/obj/structure/trashbag,
-/obj/structure/trashbag,
+/obj/effect/decal/bordur,
 /obj/effect/decal/trash,
-/turf/open/floor/plating/vampbeach,
-/area/vtm/northbeach)
+/turf/open/floor/plating/sidewalk,
+/area/vtm/fishermanswharf)
 "ohE" = (
 /obj/fusebox,
 /turf/open/floor/plating/church,
@@ -56537,11 +56576,13 @@
 /area/vtm/interior/millennium_tower/f4)
 "pKt" = (
 /obj/effect/decal/bordur{
+	dir = 8
+	},
+/obj/effect/decal/bordur{
 	dir = 1
 	},
-/obj/effect/decal/bordur,
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 6
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
@@ -56749,12 +56790,6 @@
 /obj/item/vampire_stake,
 /turf/open/floor/carpet/green,
 /area/vtm/interior/millennium_tower/f3)
-"pMp" = (
-/obj/effect/decal/cardboard,
-/obj/effect/decal/litter,
-/obj/effect/decal/trash,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/northbeach)
 "pMq" = (
 /obj/structure/table,
 /obj/item/cardboard_cutout,
@@ -56840,6 +56875,11 @@
 /mob/living/simple_animal/hostile/biter/hostile,
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer)
+"pNG" = (
+/obj/effect/decal/litter,
+/obj/effect/decal/trash,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/northbeach)
 "pNH" = (
 /turf/open/floor/plating/vampgrass,
 /area/vtm/park)
@@ -64483,6 +64523,14 @@
 /obj/item/food/american_sausage,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/tzimisce_manor)
+"rNm" = (
+/obj/effect/decal/litter,
+/obj/effect/decal/trash,
+/obj/effect/decal/trash{
+	icon_state = "trash8"
+	},
+/turf/open/floor/plating/vampbeach,
+/area/vtm/northbeach)
 "rNq" = (
 /obj/machinery/light/small{
 	dir = 8;
@@ -66191,6 +66239,13 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/clinic)
+"skt" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/decal/bordur,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/fishermanswharf)
 "sku" = (
 /obj/structure/chair/sofa/corp{
 	dir = 8
@@ -66735,6 +66790,13 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/pacificheights/forest)
+"srG" = (
+/obj/effect/decal/trash,
+/obj/effect/decal/trash{
+	icon_state = "trash8"
+	},
+/turf/open/floor/plating/vampgrass,
+/area/vtm/northbeach)
 "srH" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalk/poor,
@@ -73473,11 +73535,6 @@
 /obj/machinery/vending/boozeomat/all_access,
 /turf/open/floor/carpet,
 /area/vtm/interior/strip/elysium)
-"uqd" = (
-/obj/effect/decal/litter,
-/obj/effect/decal/trash,
-/turf/open/floor/plating/vampbeach,
-/area/vtm/northbeach)
 "uqk" = (
 /obj/structure/railing{
 	dir = 4
@@ -76003,10 +76060,10 @@
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/bianchiBank)
 "vaX" = (
-/obj/effect/decal/trash{
-	icon_state = "trash8"
-	},
-/turf/open/floor/plating/vampbeach,
+/obj/effect/decal/cardboard,
+/obj/effect/decal/litter,
+/obj/effect/decal/trash,
+/turf/open/floor/plating/vampgrass,
 /area/vtm/northbeach)
 "vaZ" = (
 /obj/effect/decal/bordur,
@@ -81301,15 +81358,10 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict/construction)
 "wBY" = (
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm)
+/obj/structure/trashbag,
+/obj/effect/decal/trash,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/northbeach)
 "wCb" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/effect/decal/trash,
@@ -82921,10 +82973,9 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm)
 "xab" = (
-/obj/effect/decal/litter,
-/obj/structure/trashbag,
-/obj/structure/trashbag,
-/obj/effect/decal/trash,
+/obj/effect/decal/trash{
+	icon_state = "trash8"
+	},
 /turf/open/floor/plating/vampbeach,
 /area/vtm/northbeach)
 "xaf" = (
@@ -84121,9 +84172,13 @@
 	},
 /area/vtm/interior/giovanni/basement)
 "xri" = (
-/obj/structure/mirror,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
+/obj/structure/flora/ausbushes,
+/obj/structure/closet/cardboard,
+/obj/effect/decal/cardboard,
+/obj/effect/decal/litter,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/northbeach)
 "xrm" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -84836,12 +84891,10 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights)
 "xBU" = (
-/obj/structure/roadsign/parking,
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/fishermanswharf)
+/obj/item/cigbutt,
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/northbeach)
 "xBW" = (
 /obj/structure/vampdoor/wood{
 	lock_id = "bianchiBank";
@@ -85975,10 +86028,17 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/glasswalker)
 "xRl" = (
-/obj/effect/decal/bordur,
-/obj/effect/decal/trash,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/fishermanswharf)
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 12
+	},
+/obj/structure/railing{
+	dir = 4;
+	layer = 4
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "xRt" = (
 /obj/structure/chair/plastic{
 	dir = 1
@@ -168989,12 +169049,12 @@ dnj
 dnj
 mmb
 vJc
-qIX
-qIX
-qIX
-qIX
-qIX
-qIX
+lBM
+lBM
+lBM
+lBM
+lBM
+lBM
 lBM
 deg
 deg
@@ -169247,12 +169307,12 @@ dnj
 mmb
 vJc
 lBM
-lBM
-lBM
-lBM
-lBM
-lBM
-lBM
+qIX
+qIX
+hlL
+aUi
+xBU
+deg
 deg
 deg
 deg
@@ -169504,7 +169564,7 @@ dnj
 mmb
 vJc
 lBM
-xab
+pNG
 fkk
 fkk
 fkk
@@ -169761,7 +169821,7 @@ dnj
 mmb
 rcX
 lBM
-ohy
+wBY
 iSn
 sLU
 aOU
@@ -170018,7 +170078,7 @@ dnj
 mmb
 vJc
 lBM
-bUJ
+rNm
 fkk
 fkk
 oYY
@@ -170275,7 +170335,7 @@ dnj
 mmb
 vJc
 lBM
-vaX
+xab
 gSg
 adc
 mVa
@@ -170532,7 +170592,7 @@ dnj
 mmb
 vJc
 lBM
-uqd
+pNG
 fkk
 fkk
 fkk
@@ -170789,7 +170849,7 @@ dnj
 mmb
 rcX
 lBM
-eAj
+srG
 gSg
 adc
 mVa
@@ -171046,7 +171106,7 @@ dnj
 mmb
 vJc
 lBM
-pMp
+vaX
 fkk
 fkk
 oYY
@@ -171303,7 +171363,7 @@ dnj
 mmb
 mPD
 lBM
-jIb
+jqZ
 gSg
 adc
 mVa
@@ -171560,7 +171620,7 @@ dnj
 mmb
 yft
 lBM
-aFq
+xri
 fkk
 fkk
 fkk
@@ -173902,7 +173962,7 @@ kBp
 kBp
 kBp
 pXm
-fkk
+kGg
 xLe
 uqI
 pMC
@@ -174416,7 +174476,7 @@ kBp
 tWk
 kBp
 dhL
-fkk
+kGg
 uqI
 uqI
 pMC
@@ -175944,7 +176004,7 @@ xOZ
 xOZ
 uFZ
 xOZ
-xOZ
+skt
 jxb
 jxb
 dgA
@@ -176201,7 +176261,7 @@ edz
 vpB
 vpB
 vpB
-vpB
+bUJ
 jxb
 jxb
 jxb
@@ -176458,7 +176518,7 @@ vpB
 vpB
 edz
 edz
-vpB
+bUJ
 jxb
 uum
 jxb
@@ -176715,7 +176775,7 @@ vpB
 vpB
 vpB
 vpB
-vpB
+bUJ
 jxb
 dgA
 jxb
@@ -176972,7 +177032,7 @@ aLy
 fGJ
 fGJ
 kJS
-fGJ
+hIS
 oJe
 oJe
 oJe
@@ -178745,7 +178805,7 @@ lKL
 epJ
 lKL
 epJ
-xBU
+kub
 jxb
 dgA
 jxb
@@ -178754,7 +178814,7 @@ jxb
 jxb
 jxb
 jxb
-xRl
+ohy
 bQz
 svg
 svg
@@ -178998,11 +179058,11 @@ lKL
 epJ
 kvK
 epJ
-lKL
+fiy
 epJ
 vdD
 epJ
-mky
+vCa
 jxb
 jxb
 jxb
@@ -179525,7 +179585,7 @@ jxb
 jxb
 jxb
 jxb
-xRl
+ohy
 gtI
 axB
 xaQ
@@ -180030,7 +180090,7 @@ lKL
 lKL
 lKL
 lKL
-hlL
+elD
 jxb
 eze
 oJe
@@ -180281,7 +180341,7 @@ tOY
 tOY
 lKL
 lKL
-lKL
+vdD
 rgv
 fLI
 wrJ
@@ -180546,7 +180606,7 @@ epJ
 lKL
 vCa
 fhc
-aWf
+hoP
 urh
 urh
 pkb
@@ -180801,7 +180861,7 @@ ajK
 lKL
 epJ
 lKL
-lOM
+gwO
 jxb
 bUt
 bUt
@@ -234525,13 +234585,13 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-krr
+pKt
+ewN
+ewN
+ewN
+ewN
+ewN
+nuz
 bif
 cgO
 cgO
@@ -234782,13 +234842,13 @@ ntq
 ntq
 ntq
 ntq
-pKt
-ewN
-ewN
-ewN
-ewN
-ewN
-nuz
+gGf
+ntq
+azU
+kno
+kno
+kno
+kno
 vtQ
 kno
 kno
@@ -236325,7 +236385,7 @@ ntq
 ntq
 ntq
 gGf
-jPj
+dqj
 kGg
 pMC
 pMC
@@ -237095,7 +237155,7 @@ ntq
 ntq
 ntq
 ntq
-wBY
+ecK
 kno
 kGg
 pMC
@@ -238651,7 +238711,7 @@ fkk
 oLT
 fkk
 iZB
-fkk
+kGg
 pMC
 pMC
 pMC
@@ -238666,7 +238726,7 @@ fkk
 kno
 kno
 jpM
-kno
+ntq
 kno
 kno
 kno
@@ -238906,9 +238966,9 @@ fkk
 lHY
 pXm
 pMC
-uEh
+eAj
 aOU
-fkk
+kGg
 fDw
 pHA
 uxo
@@ -238923,7 +238983,7 @@ fkk
 kno
 kno
 kno
-kno
+ntq
 kno
 kno
 kno
@@ -239163,9 +239223,9 @@ uEh
 psQ
 pMC
 dhL
-xri
+oYY
 nZz
-fkk
+kGg
 lsM
 xlz
 uxo
@@ -239180,7 +239240,7 @@ uEh
 kno
 kno
 kno
-kno
+ntq
 kno
 kno
 kno
@@ -239420,9 +239480,9 @@ fkk
 oOw
 pMC
 mXb
-fkk
+hBS
 pYk
-fkk
+kGg
 fDw
 pHA
 uxo
@@ -239437,7 +239497,7 @@ jWZ
 kno
 kno
 kno
-kno
+ntq
 kno
 kno
 kno
@@ -239694,7 +239754,7 @@ fkk
 kno
 kno
 kno
-kno
+ntq
 kno
 kno
 kno
@@ -239951,7 +240011,7 @@ kno
 kno
 kno
 kno
-kno
+ntq
 kno
 kno
 kno
@@ -245319,15 +245379,15 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+awK
+kno
+kno
+kno
+kno
+kno
+kno
+kno
+hjS
 ntq
 ntq
 ntq
@@ -245576,15 +245636,15 @@ ntq
 ntq
 ntq
 ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
-ntq
+xRl
+aFq
+aFq
+aFq
+aFq
+aFq
+aFq
+nwp
+mvd
 ntq
 ntq
 ntq
@@ -300613,9 +300673,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
@@ -300870,9 +300930,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
@@ -301127,9 +301187,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
@@ -301886,9 +301946,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -302143,9 +302203,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -302400,9 +302460,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -302657,9 +302717,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -302914,9 +302974,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -303171,9 +303231,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -303428,9 +303488,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -303685,9 +303745,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -303942,9 +304002,9 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
 kno
 kno
 kno
@@ -304199,10 +304259,10 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
@@ -304456,10 +304516,10 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
@@ -304713,10 +304773,10 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
@@ -304970,10 +305030,10 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
@@ -305227,10 +305287,10 @@ kno
 kno
 kno
 kno
-kno
-kno
-kno
-kno
+ntq
+ntq
+ntq
+ntq
 ntq
 ntq
 ntq
