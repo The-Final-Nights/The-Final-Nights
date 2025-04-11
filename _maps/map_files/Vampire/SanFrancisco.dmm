@@ -68883,6 +68883,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
+"tao" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	pixel_y = 20;
+	density = 0
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police/upstairs)
 "taq" = (
 /obj/effect/decal/bordur{
 	dir = 10
@@ -81140,6 +81147,15 @@
 /obj/police_department{
 	pixel_x = -8
 	},
+/obj/item/folder/blue{
+	pixel_y = -9
+	},
+/obj/item/paper_bin{
+	pixel_y = 6
+	},
+/obj/item/pen{
+	pixel_y = 7
+	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "wzt" = (
@@ -81725,6 +81741,20 @@
 /obj/american_flag{
 	pixel_y = 32
 	},
+/obj/item/reagent_containers/glass/bowl/mushroom_bowl{
+	name = "ashtray";
+	desc = "A discreet ashtray for keeping things clean.";
+	pixel_x = -6;
+	pixel_y = 10
+	},
+/obj/item/cigbutt{
+	pixel_x = -5;
+	pixel_y = 13
+	},
+/obj/item/cigbutt{
+	pixel_x = -10;
+	pixel_y = 14
+	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "wGQ" = (
@@ -81913,6 +81943,14 @@
 /obj/structure/closet/secure_closet/evidence,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/police)
+"wJX" = (
+/obj/item/kirbyplants{
+	icon_state = "plant5";
+	pixel_y = 17;
+	pixel_x = 19
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police/upstairs)
 "wKf" = (
 /obj/structure/vampipe{
 	icon_state = "piping32"
@@ -201946,7 +201984,7 @@ rGp
 dwc
 bBp
 hBt
-caN
+kUH
 caN
 yhf
 yhf
@@ -203232,7 +203270,7 @@ wHj
 iot
 iot
 wGO
-caN
+kUH
 yhf
 yhf
 yhf
@@ -271083,7 +271121,7 @@ dpc
 vao
 vao
 jze
-xaW
+wJX
 xaW
 kZi
 atT
@@ -271340,7 +271378,7 @@ bXo
 dpc
 vao
 kqo
-xaW
+tao
 tvc
 kZi
 atT
@@ -271597,7 +271635,7 @@ bXo
 pfU
 vao
 kqo
-tBv
+xaW
 xaW
 kZi
 atT
@@ -271854,7 +271892,7 @@ rgQ
 kqo
 kqo
 kqo
-xaW
+tBv
 bLH
 kZi
 atT
