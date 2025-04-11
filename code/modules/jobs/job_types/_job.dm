@@ -162,7 +162,8 @@
 	if(gear_leftovers?.len)
 		for(var/datum/gear/G in gear_leftovers)
 			var/item = G.spawn_item(null, owner = H)
-			var/atom/placed_in = spawnee.equip_or_collect(item)
+			var/atom/placed_in = spawnee.equip_to_slot_if_possible(item, disable_warning = TRUE)
+			// maybe equip_to_slot_if_possible that one
 
 			if(istype(placed_in))
 				if(isturf(placed_in))

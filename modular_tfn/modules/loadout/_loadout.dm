@@ -23,6 +23,9 @@ GLOBAL_LIST_EMPTY(gear_datums)
 		if(!use_name && initial(G.path))
 			WARNING("Loadout gear [G] is missing display name")
 			continue
+		if(!initial(G.cost))
+			WARNING("Loadout - Missing cost: [G]")
+			continue
 		if(!initial(G.path))
 			WARNING("Loadout gear [G] is missing path definition")
 			continue
@@ -66,6 +69,10 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	if(!description)
 		var/obj/O = path
 		description = initial(O.desc)
+
+///Called when the gear is first purchased
+/datum/gear/proc/purchase(client/C)
+	return
 
 /datum/gear_data
 	var/path
