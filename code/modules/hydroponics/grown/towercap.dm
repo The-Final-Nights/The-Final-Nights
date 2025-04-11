@@ -245,7 +245,6 @@
 
 /obj/structure/bonfire/proc/Burn(delta_time = 2)
 	var/turf/current_location = get_turf(src)
-//	current_location.hotspot_expose(1000, 250 * delta_time, 1)
 	for(var/A in current_location)
 		if(A == src)
 			continue

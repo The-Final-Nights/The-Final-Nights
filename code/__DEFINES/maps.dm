@@ -79,7 +79,7 @@ require only minor tweaks.
 // must correspond to _basemap.dm for things to work correctly
 #define DEFAULT_MAP_TRAITS list(\
 	DECLARE_LEVEL("CentCom", ZTRAITS_CENTCOM),\
-)
+	DECLARE_LEVEL("Unknown", ZTRAITS_CENTCOM)) //Genuinly have no clue where its getting the second z level from. For now, im putting this here so someone can figure it out in 5 years time.
 
 // Camera lock flags
 #define CAMERA_LOCK_STATION 1

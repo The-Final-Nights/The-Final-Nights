@@ -82,18 +82,6 @@
 					IT = /obj/item/food/fish/shark
 				new IT(user.loc)
 				playsound(loc, 'code/modules/wod13/sounds/catched.ogg', 50, FALSE)
-//					var/IT = pick(/obj/item/food/fish/shark,
-//									/obj/item/food/fish/tune,
-//									/obj/item/food/fish/catfish,
-//									/obj/item/food/fish/crab)
-//				var/i = rand(1, 1000)
-//				if(i == 1000)
-//					IT = /obj/item/vtm_artifact/rand
-
-//					if(user.key)
-//						var/datum/preferences/P = GLOB.preferences_datums[ckey(user.key)]
-//						if(P)
-//							P.exper = min(calculate_mob_max_exper(user), P.exper+10)
 			else
 				catching = FALSE
 				user.isfishing = FALSE

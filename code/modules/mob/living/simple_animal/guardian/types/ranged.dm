@@ -119,12 +119,6 @@
 		for(var/para in guardians)
 			to_chat(para, "<span class='danger'><B>[AM] has crossed surveillance snare, [name].</span></B>")
 
-/obj/effect/snare/singularity_act()
-	return
-
-/obj/effect/snare/singularity_pull()
-	return
-
 /mob/living/simple_animal/hostile/guardian/ranged/Manifest(forced)
 	if (toggle)
 		incorporeal_move = INCORPOREAL_MOVE_BASIC

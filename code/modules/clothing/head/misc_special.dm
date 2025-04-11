@@ -66,9 +66,6 @@
 		if(M.is_holding(src) || M.head == src)
 			location = M.loc
 
-	if(isturf(location))
-		location.hotspot_expose(700, 1)
-
 /obj/item/clothing/head/hardhat/cakehat/turn_on(mob/living/user)
 	..()
 	force = force_on

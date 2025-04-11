@@ -50,3 +50,20 @@
 		"Preacher",
 		"Rabbi",
 	)
+
+/datum/job/vamp/strip
+	alt_titles = list(
+		"Stripper",
+		"Club Bouncer",
+		"Club Bartender",
+		"Club Attendant"
+	)
+
+/datum/job/vamp/towerwork
+	alt_titles = list(
+		"Tower Cleaner",
+		"Tower Assistant",
+		"Tower Security Guard",
+		"Tower Personal Driver",
+		"Tower Personal Attendant"
+	)

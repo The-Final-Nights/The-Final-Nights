@@ -500,29 +500,29 @@
 			var/mob/living/carbon/human/vampire = src
 			var/datum/species/kindred/vampire_species = vampire.dna.species
 			var/torpor_length = 0 SECONDS
-			switch(humanity)
+			switch(vampire.morality_path.score)
 				if(10)
-					torpor_length = 5 MINUTES
+					torpor_length = 1 MINUTES
 				if(9)
-					torpor_length = 10 MINUTES
+					torpor_length = 3 MINUTES
 				if(8)
-					torpor_length = 15 MINUTES
+					torpor_length = 5 MINUTES
 				if(7)
-					torpor_length = 15 MINUTES
+					torpor_length = 7 MINUTES
 				if(6)
-					torpor_length = 15 MINUTES
+					torpor_length = 9 MINUTES
 				if(5)
-					torpor_length = 15 MINUTES
+					torpor_length = 10 MINUTES
 				if(4)
 					torpor_length = 15 MINUTES
 				if(3)
-					torpor_length = 30 MINUTES
+					torpor_length = 17 MINUTES
 				if(2)
-					torpor_length = 35 MINUTES
+					torpor_length = 20 MINUTES
 				if(1)
-					torpor_length = 1 HOURS
+					torpor_length = 28 MINUTES
 				else
-					torpor_length = 5 HOURS
+					torpor_length = 30 MINUTES
 			COOLDOWN_START(vampire_species, torpor_timer, torpor_length)
 		if (iscathayan(src))
 			var/mob/living/carbon/human/cathayan = src

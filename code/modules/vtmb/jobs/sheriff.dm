@@ -36,10 +36,10 @@
 	minimal_generation = 12	//Uncomment when players get exp enough
 	minimal_masquerade = 5
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("True Brujah", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Lasombra")
+	allowed_bloodlines = list("True Brujah", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Tzimisce", "Ministry", "Lasombra")
 
 	my_contact_is_important = TRUE
-	known_contacts = list("Prince","Seneschal","Dealer")
+	known_contacts = list("Prince","Seneschal","Tremere Regent","Dealer","Primogens","Voivode")
 
 	v_duty = "Protect the Prince and the Masquerade. You are their sword."
 	experience_addition = 20
@@ -55,7 +55,7 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	suit = /obj/item/clothing/suit/vampire/vest
 	gloves = /obj/item/clothing/gloves/vampire/leather
-//	head = /obj/item/clothing/head/hos/beret
+	head = /obj/item/clothing/head/hos/beret
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	r_pocket = /obj/item/vamp/keys/sheriff
 	l_pocket = /obj/item/vamp/phone/sheriff
@@ -69,7 +69,6 @@
 
 /datum/outfit/job/sheriff/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.ignores_warrant = TRUE
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/vampire/sheriff/female
 

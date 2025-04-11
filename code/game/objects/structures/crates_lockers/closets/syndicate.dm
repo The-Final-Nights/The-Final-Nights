@@ -89,9 +89,6 @@
 	if(pickednum >= 45)
 		new /obj/item/stack/sheet/mineral/diamond(src, rand(rare_min, rare_max))
 
-	//Jetpack (You hit the jackpot!)
-	if(pickednum == 50)
-		new /obj/item/tank/jetpack/carbondioxide(src)
 
 /obj/structure/closet/syndicate/resources/everything
 	desc = "It's an emergency storage closet for repairs."

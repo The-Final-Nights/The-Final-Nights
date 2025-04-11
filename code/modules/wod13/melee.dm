@@ -4,7 +4,19 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	var/quieted = FALSE
+	var/datum/weakref/owner = null
 	cost = 25
+
+/obj/item/melee/vampirearms/pickup(mob/living/user)
+	. = ..()
+	if(quieted)
+		var/mob/living/carbon/human/resolved_blade_owner = owner?.resolve()
+		// We don't need to check if resolved_blade_owner is null, the following check will work as intended either way.
+		if(user != resolved_blade_owner)
+			to_chat(user, "<span class='userdanger'>The acidic ichor sears your hand!</span>")
+			user.apply_damage(20, BURN)
+			user.Paralyze(1)
+
 
 /obj/item
 	var/masquerade_violating = FALSE
@@ -64,6 +76,22 @@
 		if(istype(A, /obj/structure/window) || istype(A, /obj/structure/grille))
 			var/obj/structure/W = A
 			W.obj_destruction("fireaxe")
+
+/obj/item/melee/vampirearms/fireaxe/axetzi
+	icon = 'code/modules/wod13/48x32weapons.dmi'
+	icon_state = "axetzi0"
+	name = "living axe"
+	desc = "Truly, the weapon of a madman."
+	masquerade_violating = TRUE
+	base_icon_state = "axetzi1"
+/obj/item/melee/vampirearms/fireaxe/axetzi/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/butchering, 100, 80, 0 , hitsound)
+	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=40, icon_wielded="axetzi1")
+
+/obj/item/melee/vampirearms/fireaxe/axetzi/update_icon_state()
+	icon_state = "axetzi0"
+
 
 /obj/item/melee/vampirearms/katana
 	name = "katana"
@@ -170,7 +198,7 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "sabre"
 	flags_1 = CONDUCT_1
-	force = 35
+	force = 30
 	throwforce = 10
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 35
@@ -207,6 +235,38 @@
 	masquerade_violating = FALSE
 	is_iron = TRUE
 	cost = 1800
+
+/obj/item/melee/vampirearms/longsword/keeper
+	name = "The Brother's Keeper"
+	desc = "The ancient yet classic weapon of times gone, this is a longsword. This exemplar is surprisingly well taken care of, despite its age, to the point that whatever blood or vitae it may have drawn in the past is not visible at all, while still functioning as well as it first did however long ago. Upon the flat side of this blade, a simple well-worn inscription is engraved in Latin. 'In Death, I Rise.'"
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "longsword"
+	color = "#C0C0C0"
+	flags_1 = CONDUCT_1
+	w_class = WEIGHT_CLASS_BULKY
+	force = 40
+	block_chance = 45
+	armour_penetration = 40
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 5
+	bare_wound_bonus = 25
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = FALSE
+	is_iron = FALSE
+
+/obj/item/melee/vampirearms/longsword/keeper/afterattack(atom/target, mob/living/carbon/user, proximity)
+	. = ..()
+	if(iswerewolf(target) || isgarou(target) && proximity)
+		var/mob/living/carbon/M = target
+		if(M.auspice.gnosis)
+			if(prob(50))
+				adjust_gnosis(-1, M)
+
+		M.apply_damage(25, CLONE)
+		M.apply_status_effect(STATUS_EFFECT_SILVER_SLOWDOWN)
 
 
 /obj/item/storage/belt/vampire/sheathe
@@ -791,5 +851,4 @@
 		sharpness = SHARP_NONE
 		grid_width = 2 GRID_BOXES
 		grid_height = 1 GRID_BOXES
-
 

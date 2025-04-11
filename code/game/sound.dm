@@ -35,13 +35,12 @@ extrarange - modifier for sound range. This gets added on top of SOUND_RANGE
 falloff_exponent - Rate of falloff for the audio. Higher means quicker drop to low volume. Should generally be over 1 to indicate a quick dive to 0 rather than a slow dive.
 frequency - playback speed of audio
 channel - The channel the sound is played at
-pressure_affected - Whether or not difference in pressure affects the sound (E.g. if you can hear in space)
 ignore_walls - Whether or not the sound can pass through walls.
 falloff_distance - Distance at which falloff begins. Sound is at peak volume (in regards to falloff) aslong as it is in this range.
 
 */
 
-/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff_exponent = SOUND_FALLOFF_EXPONENT, frequency = null, channel = 0, pressure_affected = TRUE, ignore_walls = TRUE, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, use_reverb = TRUE)
+/proc/playsound(atom/source, soundin, vol as num, vary, extrarange as num, falloff_exponent = SOUND_FALLOFF_EXPONENT, frequency = null, channel = 0, ignore_walls = TRUE, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, use_reverb = TRUE)
 	if(isarea(source))
 		CRASH("playsound(): source is an area")
 
@@ -81,11 +80,11 @@ falloff_distance - Distance at which falloff begins. Sound is at peak volume (in
 	for(var/P in listeners)
 		var/mob/M = P
 		if(get_dist(M, turf_source) <= maxdistance)
-			M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, pressure_affected, S, maxdistance, falloff_distance)
+			M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, S, maxdistance, falloff_distance)
 	for(var/P in SSmobs.dead_players_by_zlevel[source_z])
 		var/mob/M = P
 		if(get_dist(M, turf_source) <= maxdistance)
-			M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, pressure_affected, S, maxdistance, falloff_distance)
+			M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff_exponent, channel, S, maxdistance, falloff_distance)
 
 /*! playsound
 
@@ -99,14 +98,13 @@ vary - bool that determines if the sound changes pitch every time it plays
 frequency - playback speed of audio
 falloff_exponent - Rate of falloff for the audio. Higher means quicker drop to low volume. Should generally be over 1 to indicate a quick dive to 0 rather than a slow dive.
 channel - The channel the sound is played at
-pressure_affected - Whether or not difference in pressure affects the sound (E.g. if you can hear in space)
 max_distance - The peak distance of the sound, if this is a 3D sound
 falloff_distance - Distance at which falloff begins, if this is a 3D sound
 distance_multiplier - Can be used to multiply the distance at which the sound is heard
 
 */
 
-/mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel = 0, pressure_affected = TRUE, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, use_reverb = TRUE)
+/mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff_exponent = SOUND_FALLOFF_EXPONENT, channel = 0, sound/S, max_distance, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, distance_multiplier = 1, use_reverb = TRUE)
 	if(!client || !can_hear())
 		return
 
@@ -135,25 +133,6 @@ distance_multiplier - Can be used to multiply the distance at which the sound is
 			S.volume -= (max(distance - falloff_distance, 0) ** (1 / falloff_exponent)) / ((max(max_distance, distance) - falloff_distance) ** (1 / falloff_exponent)) * S.volume
 			//https://www.desmos.com/calculator/sqdfl8ipgf
 
-		if(pressure_affected)
-			//Atmosphere affects sound
-			var/pressure_factor = 1
-			var/datum/gas_mixture/hearer_env = T.return_air()
-			var/datum/gas_mixture/source_env = turf_source.return_air()
-
-			if(hearer_env && source_env)
-				var/pressure = min(hearer_env.return_pressure(), source_env.return_pressure())
-				if(pressure < ONE_ATMOSPHERE)
-					pressure_factor = max((pressure - SOUND_MINIMUM_PRESSURE)/(ONE_ATMOSPHERE - SOUND_MINIMUM_PRESSURE), 0)
-			else //space
-				pressure_factor = 0
-
-			if(distance <= 1)
-				pressure_factor = max(pressure_factor, 0.15) //touching the source of the sound
-
-			S.volume *= pressure_factor
-			//End Atmosphere affecting sound
-
 		if(S.volume <= 0)
 			return //No sound
 
@@ -181,16 +160,16 @@ distance_multiplier - Can be used to multiply the distance at which the sound is
 
 	SEND_SOUND(src, S)
 
-/proc/sound_to_playing_players(soundin, volume = 100, vary = FALSE, frequency = 0, channel = 0, pressure_affected = FALSE, sound/S)
+/proc/sound_to_playing_players(soundin, volume = 100, vary = FALSE, frequency = 0, channel = 0, sound/S)
 	if(!S)
 		S = sound(get_sfx(soundin))
 	for(var/m in GLOB.player_list)
 		if(ismob(m) && !isnewplayer(m))
 			var/mob/M = m
-			M.playsound_local(M, null, volume, vary, frequency, null, channel, pressure_affected, S)
+			M.playsound_local(M, null, volume, vary, frequency, null, channel, S)
 
 /// Play a sound to all players in an area.
-/proc/sound_to_players_in_area(area/area_source, soundin, volume = 100, vary = FALSE, frequency = 0, channel = 0, pressure_affected = FALSE, sound/S)
+/proc/sound_to_players_in_area(area/area_source, soundin, volume = 100, vary = FALSE, frequency = 0, channel = 0, sound/S)
 	if(!S)
 		S = sound(get_sfx(soundin))
 	if(istype(area_source))
@@ -200,7 +179,7 @@ distance_multiplier - Can be used to multiply the distance at which the sound is
 			continue
 		if(get_area(M) != area_source)
 			continue
-		M.playsound_local(M, null, volume, vary, frequency, null, channel, pressure_affected, S)
+		M.playsound_local(M, null, volume, vary, frequency, null, channel, S)
 
 /mob/proc/stop_sound_channel(chan)
 	SEND_SOUND(src, sound(null, repeat = 0, wait = 0, channel = chan))

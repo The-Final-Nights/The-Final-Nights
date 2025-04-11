@@ -461,8 +461,6 @@
 	effect_sprite = "emark4"
 
 /datum/status_effect/eldritch/void/on_effect()
-	var/turf/open/turfie = get_turf(owner)
-	turfie.TakeTemperature(-40)
 	owner.adjust_bodytemperature(-20)
 	return ..()
 

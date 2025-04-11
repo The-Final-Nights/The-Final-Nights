@@ -685,7 +685,8 @@
 		return
 
 	if (spend_resources())
-		to_chat(owner, span_warning("[src] consumes your blood to stay active."))
+		if(vitae_cost > 0)
+			to_chat(owner, span_warning("[src] consumes your blood to stay active."))
 		if (!duration_override)
 			do_duration(target)
 	else

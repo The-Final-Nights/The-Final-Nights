@@ -93,31 +93,6 @@
 		to_chat(victim, "<span class='userdanger'>You have been kicked FOR NO REISIN!</span>")
 		qdel(victim.client)
 
-
-/obj/effect/mine/gas
-	name = "oxygen mine"
-	var/gas_amount = 360
-	var/gas_type = "o2"
-
-/obj/effect/mine/gas/mineEffect(mob/victim)
-	atmos_spawn_air("[gas_type]=[gas_amount]")
-
-
-/obj/effect/mine/gas/plasma
-	name = "plasma mine"
-	gas_type = "plasma"
-
-
-/obj/effect/mine/gas/n2o
-	name = "\improper N2O mine"
-	gas_type = "n2o"
-
-
-/obj/effect/mine/gas/water_vapor
-	name = "chilled vapor mine"
-	gas_amount = 500
-	gas_type = "water_vapor"
-
 /obj/effect/mine/sound
 	name = "honkblaster 1000"
 	var/sound = 'sound/items/bikehorn.ogg'

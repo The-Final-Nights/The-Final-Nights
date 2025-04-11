@@ -229,7 +229,6 @@
 	density = TRUE
 	var/buildstacktype = /obj/item/stack/sheet/metal
 	var/buildstackamount = 5
-	CanAtmosPass = ATMOS_PASS_NO
 
 /obj/structure/fans/deconstruct()
 	if(!(flags_1 & NODECONSTRUCT_1))
@@ -256,13 +255,6 @@
 	icon_state = "fan_tiny"
 	buildstackamount = 2
 
-/obj/structure/fans/Initialize(mapload)
-	. = ..()
-	air_update_turf(TRUE, TRUE)
-
-/obj/structure/fans/Destroy()
-	air_update_turf(TRUE, FALSE)
-	. = ..()
 //Invisible, indestructible fans
 /obj/structure/fans/tiny/invisible
 	name = "air flow blocker"
@@ -285,7 +277,6 @@
 	var/possible = list(/obj/item/ship_in_a_bottle,
 						/obj/item/gun/energy/pulse,
 						/obj/item/book/granter/martial/carp,
-						/obj/item/melee/supermatter_sword,
 						/obj/item/shield/changeling,
 						/obj/item/lava_staff,
 						/obj/item/energy_katana,

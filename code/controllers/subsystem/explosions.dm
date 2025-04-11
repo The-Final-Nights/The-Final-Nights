@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(explosions)
 
 	var/list/explosions = list()
 
-	var/currentpart = SSAIR_PIPENETS
+	var/currentpart = SSEXPLOSIONS_MOVABLES
 
 
 /datum/controller/subsystem/explosions/stat_entry(msg)
@@ -283,7 +283,7 @@ SUBSYSTEM_DEF(explosions)
 					M.playsound_local(epicenter, null, echo_volume, 1, frequency, S = explosion_echo_sound, distance_multiplier = 0)
 
 				if(creaking_explosion) // 5 seconds after the bang, the station begins to creak
-					addtimer(CALLBACK(M, TYPE_PROC_REF(/mob, playsound_local), epicenter, null, rand(FREQ_LOWER, FREQ_UPPER), 1, frequency, null, null, FALSE, hull_creaking_sound, 0), CREAK_DELAY)
+					addtimer(CALLBACK(M, TYPE_PROC_REF(/mob, playsound_local), epicenter, null, rand(FREQ_LOWER, FREQ_UPPER), 1, frequency, null, null, hull_creaking_sound, 0), CREAK_DELAY)
 
 	if(heavy_impact_range > 1)
 		var/datum/effect_system/explosion/E
@@ -493,12 +493,7 @@ SUBSYSTEM_DEF(explosions)
 		cost_highturf = MC_AVERAGE(cost_highturf, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
 
 		timer = TICK_USAGE_REAL
-		var/list/flame_turf = flameturf
 		flameturf = list()
-		for(var/thing in flame_turf)
-			if(thing)
-				var/turf/T = thing
-				new /obj/effect/hotspot(T) //Mostly for ambience!
 		cost_flameturf = MC_AVERAGE(cost_flameturf, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
 
 		if (low_turf.len || med_turf.len || high_turf.len)

@@ -79,14 +79,11 @@ SUBSYSTEM_DEF(beastmastering)
 	speak_chance = 0
 	turns_per_move = 1
 	speed = 0.35
-//	move_to_delay = 3
-//	rapid = 3
-//	ranged = 1
-	maxHealth = 80
-	health = 85
+	maxHealth = 55 //Killable in two swings from a proper melee.
+	health = 55
 	harm_intent_damage = 5
-	melee_damage_lower = 10
-	melee_damage_upper = 25
+	melee_damage_lower = 8
+	melee_damage_upper = 18
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'code/modules/wod13/sounds/dog.ogg'
@@ -95,10 +92,6 @@ SUBSYSTEM_DEF(beastmastering)
 	minbodytemp = 0
 	bloodpool = 2
 	maxbloodpool = 2
-//	retreat_distance = 3
-//	minimum_distance = 5
-//	casingtype = /obj/item/ammo_casing/vampire/c556mm
-//	projectilesound = 'code/modules/wod13/sounds/rifle.ogg'
 	loot = list()
 	AIStatus = AI_OFF
 
@@ -201,7 +194,6 @@ SUBSYSTEM_DEF(beastmastering)
 		if(isliving(A))
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster)
 				B.add_beastmaster_enemies(A)
-//				B.GiveTarget(A)
 
 /mob/living/simple_animal/hostile/beastmaster/attack_hand(mob/user)
 	if(user)
@@ -286,4 +278,3 @@ SUBSYSTEM_DEF(beastmastering)
 		for(var/mob/living/simple_animal/hostile/beastmaster/B in H.beastmaster)
 			B.enemies = list()
 			B.targa = null
-//			B.LosePatience()

@@ -122,8 +122,6 @@
 		return
 
 	playsound(src, 'sound/effects/comfyfire.ogg',50,FALSE, FALSE, TRUE)
-	var/turf/T = get_turf(src)
-	T.hotspot_expose(700, 2.5 * delta_time)
 	update_icon()
 	adjust_light()
 

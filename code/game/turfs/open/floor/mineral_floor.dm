@@ -39,10 +39,6 @@
 	floor_tile = /obj/item/stack/tile/mineral/plasma
 	icons = list("plasma","plasma_dam")
 
-/turf/open/floor/mineral/plasma/temperature_expose(datum/gas_mixture/air, exposed_temperature)
-	if(exposed_temperature > 300)
-		PlasmaBurn(exposed_temperature)
-
 /turf/open/floor/mineral/plasma/attackby(obj/item/W, mob/user, params)
 	if(W.get_temperature() > 300)//If the temperature of the object is over 300, then ignite
 		message_admins("Plasma flooring was ignited by [ADMIN_LOOKUPFLW(user)] in [ADMIN_VERBOSEJMP(src)]")
@@ -53,7 +49,6 @@
 
 /turf/open/floor/mineral/plasma/proc/PlasmaBurn(temperature)
 	make_plating()
-	atmos_spawn_air("plasma=20;TEMP=[temperature]")
 
 /turf/open/floor/mineral/plasma/proc/ignite(exposed_temperature)
 	if(exposed_temperature > 300)
@@ -95,35 +90,30 @@
 	return // titanium does not rust
 
 /turf/open/floor/mineral/titanium/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/yellow
 	icon_state = "titanium_yellow"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/yellow
 
 /turf/open/floor/mineral/titanium/yellow/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/blue
 	icon_state = "titanium_blue"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/blue
 
 /turf/open/floor/mineral/titanium/blue/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/white
 	icon_state = "titanium_white"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/white
 
 /turf/open/floor/mineral/titanium/white/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/purple
 	icon_state = "titanium_purple"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/purple
 
 /turf/open/floor/mineral/titanium/purple/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 // OLD TITANIUM (titanium floor tiles before PR #50454)
 /turf/open/floor/mineral/titanium/tiled
@@ -135,35 +125,30 @@
 	return list("titanium_dam1_old","titanium_dam2_old","titanium_dam3_old","titanium_dam4_old","titanium_dam5_old")
 
 /turf/open/floor/mineral/titanium/tiled/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/tiled/yellow
 	icon_state = "titanium_tiled_yellow"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/tiled/yellow
 
 /turf/open/floor/mineral/titanium/tiled/yellow/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/tiled/blue
 	icon_state = "titanium_tiled_blue"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/tiled/blue
 
 /turf/open/floor/mineral/titanium/tiled/blue/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/tiled/white
 	icon_state = "titanium_tiled_white"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/tiled/white
 
 /turf/open/floor/mineral/titanium/tiled/white/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/titanium/tiled/purple
 	icon_state = "titanium_tiled_purple"
 	floor_tile = /obj/item/stack/tile/mineral/titanium/tiled/purple
 
 /turf/open/floor/mineral/titanium/tiled/purple/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 //PLASTITANIUM (syndieshuttle)
 /turf/open/floor/mineral/plastitanium
@@ -178,13 +163,11 @@
 	return // plastitanium does not rust
 
 /turf/open/floor/mineral/plastitanium/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/plastitanium/red
 	icon_state = "plastitanium_red"
 
 /turf/open/floor/mineral/plastitanium/red/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/floor/mineral/plastitanium/red/brig
 	name = "brig floor"
@@ -230,7 +213,6 @@
 		sound_cooldown = world.time + 10
 
 /turf/open/floor/mineral/bananium/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 //DIAMOND
 

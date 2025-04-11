@@ -160,9 +160,15 @@
 /obj/item/gun/proc/shoot_live_shot(mob/living/user, pointblank = 0, atom/pbtarget = null, message = 1)
 
 	if(suppressed)
-		playsound(user, suppressed_sound, suppressed_volume, vary_fire_sound, ignore_walls = FALSE, extrarange = SILENCED_SOUND_EXTRARANGE, falloff_distance = 0)
+		if(HAS_TRAIT(user, TRAIT_THUNDERSHOT))
+			playsound(src, 'sound/magic/lightningshock.ogg', 40, TRUE, extrarange = 5)
+		else
+			playsound(user, suppressed_sound, suppressed_volume, vary_fire_sound, ignore_walls = FALSE, extrarange = SILENCED_SOUND_EXTRARANGE, falloff_distance = 0)
 	else
-		playsound(user, fire_sound, fire_sound_volume, vary_fire_sound)
+		if(HAS_TRAIT(user, TRAIT_THUNDERSHOT))
+			playsound(src, 'sound/magic/lightningshock.ogg', 70, TRUE, extrarange = 5)
+		else
+			playsound(user, fire_sound, fire_sound_volume, vary_fire_sound)
 		if(message)
 			if(pointblank)
 				user.visible_message("<span class='danger'>[user] fires [src] point blank at [pbtarget]!</span>", \
@@ -325,14 +331,14 @@
 		for(var/i = 1 to burst_size)
 			addtimer(CALLBACK(src, PROC_REF(process_burst), user, target, message, params, zone_override, sprd, randomized_gun_spread, randomized_bonus_spread, rand_spr, i), max(1, real_fire_delay * (i - 1)))
 	else
-		if(chambered)
+		if(chambered || HAS_TRAIT(user, TRAIT_THUNDERSHOT))
 			if(HAS_TRAIT(user, TRAIT_PACIFISM)) // If the user has the pacifist trait, then they won't be able to fire [src] if the round chambered inside of [src] is lethal.
 				if(chambered.harmful) // Is the bullet chambered harmful?
 					to_chat(user, "<span class='warning'>[src] is lethally chambered! You don't want to risk harming anyone...</span>")
 					return
 			sprd = round((rand() - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
 			before_firing(target,user)
-			if(!chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
+			if(!chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src) && !HAS_TRAIT(user, TRAIT_THUNDERSHOT))
 				shoot_with_empty_chamber(user)
 				return
 			else
@@ -343,7 +349,8 @@
 		else
 			shoot_with_empty_chamber(user)
 			return
-		process_chamber()
+		if(!HAS_TRAIT(user, TRAIT_THUNDERSHOT))
+			process_chamber()
 		update_icon()
 		semicd = TRUE
 		addtimer(CALLBACK(src, PROC_REF(reset_semicd)), real_fire_delay)
@@ -363,6 +370,7 @@
 			M.attackby(bayonet, user)
 			return
 		else
+			process_fire(M, user)
 			return ..()
 	return
 

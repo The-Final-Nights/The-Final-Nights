@@ -34,7 +34,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/turf/T = get_turf(mob)
 	if(!isturf(T))
 		return
-	atmosanalyzer_scan(usr, T, TRUE)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Air Status In Location") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/cmd_admin_robotize(mob/M in GLOB.mob_list)
@@ -275,42 +274,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	log_admin("[key_name(usr)] gave away direct control of [M] to [newkey].")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Give Direct Control") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_test_atmos_controllers()
-	set category = "Mapping"
-	set name = "Test Atmos Monitoring Consoles"
-
-	var/list/dat = list()
-
-	if(SSticker.current_state == GAME_STATE_STARTUP)
-		to_chat(usr, "Game still loading, please hold!", confidential = TRUE)
-		return
-
-	message_admins("<span class='adminnotice'>[key_name_admin(usr)] used the Test Atmos Monitor debug command.</span>")
-	log_admin("[key_name(usr)] used the Test Atmos Monitor debug command.")
-
-	var/bad_shit = 0
-	for(var/obj/machinery/computer/atmos_control/tank/console in GLOB.atmos_air_controllers)
-		dat += "<h1>[console] at [AREACOORD(console)]:</h1><br>"
-		if(console.input_tag == console.output_tag)
-			dat += "Error: input_tag is the same as the output_tag, \"[console.input_tag]\"!<br>"
-			bad_shit++
-		if(!LAZYLEN(console.input_info))
-			dat += "Failed to find a valid outlet injector as an input with the tag [console.input_tag].<br>"
-			bad_shit++
-		if(!LAZYLEN(console.output_info))
-			dat += "Failed to find a valid siphon pump as an outlet with the tag [console.output_tag].<br>"
-			bad_shit++
-		if(!bad_shit)
-			dat += "<B>STATUS:</B> NORMAL"
-		else
-			bad_shit = 0
-		dat += "<br>"
-		CHECK_TICK
-
-	var/datum/browser/popup = new(usr, "testatmoscontroller", "Test Atmos Monitoring Consoles", 500, 750)
-	popup.set_content(dat.Join())
-	popup.open()
-
 /client/proc/cmd_admin_areatest(on_station)
 	set category = "Mapping"
 	set name = "Test Areas"
@@ -363,15 +326,6 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			areas_with_APC.Add(A.type)
 		else if(A.type in areas_all)
 			areas_with_multiple_APCs.Add(A.type)
-		CHECK_TICK
-
-	for(var/obj/machinery/airalarm/AA in GLOB.machines)
-		var/area/A = get_area(AA)
-		if(!A) //Make sure the target isn't inside an object, which results in runtimes.
-			dat += "Skipped over [AA] in invalid location, [AA.loc].<br>"
-			continue
-		if(!(A.type in areas_with_air_alarm))
-			areas_with_air_alarm.Add(A.type)
 		CHECK_TICK
 
 	for(var/obj/machinery/requests_console/RC in GLOB.machines)
@@ -629,7 +583,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 	dellog += "</ol>"
 
-	usr << browse(dellog.Join(), "window=dellog")
+	usr << browse(HTML_SKELETON(dellog.Join()), "window=dellog")
 
 /client/proc/cmd_display_overlay_log()
 	set category = "Debug"
@@ -643,7 +597,9 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	set name = "Display Initialize() Log"
 	set desc = "Displays a list of things that didn't handle Initialize() properly"
 
-	usr << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
+	var/datum/browser/browser = new(usr, "initlog", "Initialize Log", 500, 500)
+	browser.set_content(replacetext(SSatoms.InitLog(), "\n", "<br>"))
+	browser.open()
 
 /client/proc/debug_huds(i as num)
 	set category = "Debug"
@@ -735,6 +691,24 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		to_chat(src, "<span class='italics'>[template.description]</span>", confidential = TRUE)
 	else
 		to_chat(src, "<span class='warning'>Failed to place [template.name].</span>", confidential = TRUE)
+
+/client/proc/run_empty_query(val as num)
+	set category = "Debug"
+	set name = "Run empty query"
+	set desc = "Amount of queries to run"
+
+	var/list/queries = list()
+	for(var/i in 1 to val)
+		var/datum/db_query/query = SSdbcore.NewQuery("NULL")
+		INVOKE_ASYNC(query, /datum/db_query.proc/Execute)
+		queries += query
+
+	for(var/datum/db_query/query as anything in queries)
+		query.sync()
+		qdel(query)
+	queries.Cut()
+
+	message_admins("[key_name_admin(src)] ran [val] empty queries.")
 
 /client/proc/clear_dynamic_transit()
 	set category = "Debug"
@@ -845,13 +819,15 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	var/bucket_list_output = generate_timer_source_output(SStimer.bucket_list)
 	var/second_queue = generate_timer_source_output(SStimer.second_queue)
 
-	usr << browse({"
+	var/datum/browser/browser = new(usr, "check_timer_sources", "Timer Sources", 700, 700)
+	browser.set_content({"
 		<h3>bucket_list</h3>
 		[bucket_list_output]
 
 		<h3>second_queue</h3>
 		[second_queue]
-	"}, "window=check_timer_sources;size=700x700")
+	"})
+	browser.open()
 
 /proc/generate_timer_source_output(list/datum/timedevent/events)
 	var/list/per_source = list()

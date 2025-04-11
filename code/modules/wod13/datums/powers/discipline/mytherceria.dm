@@ -17,6 +17,7 @@
 	desc = "Sense magical items on another person."
 
 	level = 1
+	vitae_cost = 0
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
 	target_type = TARGET_MOB
 	range = 7
@@ -180,6 +181,10 @@
 	color = "#4182ad"
 	var/unique = FALSE
 	var/mob/owner
+
+/obj/mytherceria_trap/AltClick(mob/user) //delete rune on alt click, in parity with similar effects for thaum and mysticism
+	..()
+	qdel(src)
 
 /obj/mytherceria_trap/Crossed(atom/movable/AM)
 	..()

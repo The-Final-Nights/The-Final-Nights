@@ -922,6 +922,7 @@
 	maxHealth = 10
 	health = 10
 	speed = -0.8
+	see_in_dark = 10
 
 /mob/living/simple_animal/hostile/beastmaster/rat/flying/UnarmedAttack(atom/A)
 	. = ..()
@@ -1165,15 +1166,6 @@
 	if(prob(66))
 		base_body_mod = "f"
 	AssignSocialRole(/datum/socialrole/police)
-
-/mob/living/carbon/human/npc/police/Life()
-	. = ..()
-	if(stat < 1)
-		if(prob(10))
-			for(var/mob/living/carbon/human/H in oviewers(4, src))
-				if(H)
-					if(H.warrant)
-						Aggro(H, FALSE)
 
 /datum/socialrole/guard
 	s_tones = list(

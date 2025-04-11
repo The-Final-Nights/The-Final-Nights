@@ -45,7 +45,7 @@
 
 /datum/objective_item/steal/jetpack
 	name = "the Captain's jetpack."
-	targetitem = /obj/item/tank/jetpack/oxygen/captain
+	targetitem = /obj/item/jetpack/oxygen/captain
 	difficulty = 5
 	excludefromjob = list("Captain")
 
@@ -101,32 +101,6 @@
 /datum/objective_item/steal/nuke_core/New()
 	special_equipment += /obj/item/storage/box/syndie_kit/nuke
 	..()
-
-/datum/objective_item/steal/supermatter
-	name = "a sliver of a supermatter crystal. Be sure to use the proper safety equipment when extracting the sliver!"
-	targetitem = /obj/item/nuke_core/supermatter_sliver
-	difficulty = 15
-
-/datum/objective_item/steal/supermatter/New()
-	special_equipment += /obj/item/storage/box/syndie_kit/supermatter
-	..()
-
-/datum/objective_item/steal/supermatter/TargetExists()
-	return GLOB.main_supermatter_engine != null
-
-//Items with special checks!
-/datum/objective_item/steal/plasma
-	name = "28 moles of plasma (full tank)."
-	targetitem = /obj/item/tank
-	difficulty = 3
-	excludefromjob = list("Chief Engineer","Research Director","Station Engineer","Scientist","Atmospheric Technician")
-
-/datum/objective_item/steal/plasma/check_special_completion(obj/item/tank/T)
-	var/target_amount = text2num(name)
-	var/found_amount = 0
-	found_amount += T.air_contents.gases[/datum/gas/plasma] ? T.air_contents.gases[/datum/gas/plasma][MOLES] : 0
-	return found_amount>=target_amount
-
 
 /datum/objective_item/steal/functionalai
 	name = "a functional AI."

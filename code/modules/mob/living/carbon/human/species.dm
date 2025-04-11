@@ -1385,6 +1385,8 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
 		return FALSE
+	if(user.blocking)
+		return FALSE
 	if(target.check_block())
 		target.visible_message("<span class='warning'>[target] blocks [user]'s attack!</span>", \
 						"<span class='userdanger'>You block [user]'s attack!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
@@ -1424,7 +1426,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			if(atk_verb == ATTACK_EFFECT_KICK || HAS_TRAIT(user, TRAIT_PERFECT_ATTACKER)) //kicks never miss (provided your species deals more than 0 damage)
 				miss_chance = 0
 			else
-				miss_chance = min((user.dna.species.punchdamagehigh/user.dna.species.punchdamagelow) + user.getStaminaLoss() + (user.getBruteLoss()*0.5), 100) //old base chance for a miss + various damage. capped at 100 to prevent weirdness in prob()
+				miss_chance = min((user.dna.species.punchdamagehigh/user.dna.species.punchdamagelow) + user.getStaminaLoss() + (user.getBruteLoss()*0.1), 100) //Tweaked for FN, keeps stamina loss for future non-lethals, but brute damage impact lowered a lot to account for higher health pool and damages.
 
 		if(!damage || !affecting || prob(miss_chance))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
@@ -1454,21 +1456,26 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
 
-		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.5x raw damage
-			target.apply_damage(damage*1.5, user.dna.species.attack_type, affecting, armor_block)
+		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.1x raw damage
+			target.apply_damage(damage*1.1, user.dna.species.attack_type, affecting, armor_block)
+			if((damage * 1.5) >= 9)
+				target.force_say()
 			log_combat(user, target, "kicked")
-		else//other attacks deal full raw damage + 1.5x in stamina damage
+		else//other attacks deal full damage
 			target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block)
-			target.apply_damage(damage*1.5, STAMINA, affecting, armor_block)
+			if(damage >= 9)
+				target.force_say()
 			log_combat(user, target, "punched")
 		//Punches have a chance (by default 10%, up to 30%) to knock down a target for about 2 seconds depending on physique and dexterity.
 		//Checks if the target is already knocked down to prevent stunlocking.
 		if((target.stat != DEAD) && (!target.IsKnockdown()))
 			//Compare puncher's physique to the greater between the target's physique (robust enough to tank it) or dexterity (rolls with the punches)
-			if(
-			target.storyteller_roll(
+			var/roll = SSroll.storyteller_roll(
 			dice = target.get_total_physique() + round(min(target.get_total_athletics(), target.get_total_dexterity()) / 2),
-			difficulty = clamp(user.get_total_physique(), 1, 4) + (user.melee_professional ? rand(1,4) : 0) == ROLL_FAILURE))
+			difficulty = clamp(user.get_total_physique(), 1, 4) + (user.melee_professional ? rand(1,4) : 0),
+			mobs_to_show_output = user)
+
+			if(roll == ROLL_FAILURE)
 				target.visible_message("<span class='danger'>[user] knocks [target] down!</span>", "<span class='userdanger'>You're knocked down by [user]!</span>", "<span class='hear'>You hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, user)
 				to_chat(user, "<span class='danger'>You knock [target] down!</span>")
 				target.apply_effect(2 SECONDS, EFFECT_KNOCKDOWN, armor_block)
@@ -1638,6 +1645,10 @@ GLOBAL_LIST_EMPTY(selectable_races)
 						H.w_uniform.add_mob_blood(H)
 						H.update_inv_w_uniform()
 
+		/// Triggers force say events
+		if(I.force > 10 || I.force >= 5 && prob(33))
+			H.force_say(user)
+
 	return TRUE
 
 /datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, spread_damage = FALSE, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE)
@@ -1722,17 +1733,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 // ENVIRONMENT HANDLERS //
 //////////////////////////
 
-/**
- * Environment handler for species
- *
- * vars:
- * * environment (required) The environment gas mix
- * * humi (required)(type: /mob/living/carbon/human) The mob we will target
- */
-/datum/species/proc/handle_environment(datum/gas_mixture/environment, mob/living/carbon/human/humi)
-	handle_environment_pressure(environment, humi)
-
-/**
+/*
  * Body temperature handler for species
  *
  * These procs manage body temp, bamage, and alerts
@@ -1741,9 +1742,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
  * * humi (required)(type: /mob/living/carbon/human) The mob we will target
  */
 /datum/species/proc/handle_body_temperature(mob/living/carbon/human/humi)
-	//when in a cryo unit we suspend all natural body regulation
-	if(istype(humi.loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
-		return
 
 	//Only stabilise core temp when alive and not in statis
 	if(humi.stat < DEAD && !IS_IN_STASIS(humi))
@@ -1785,14 +1783,8 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 	humi.adjust_coretemperature(skin_core_change)
 
-	// get the enviroment details of where the mob is standing
-	var/turf/T = get_turf(humi)
-	var/datum/gas_mixture/environment = T.return_air()
-	if(!environment) // if there is no environment (nullspace) drop out here.
-		return
-
 	// Get the temperature of the environment for area
-	var/area_temp = humi.get_temperature(environment)
+	var/area_temp = humi.get_temperature()
 
 	// Get the insulation value based on the area's temp
 	var/thermal_protection = humi.get_insulation_protection(area_temp)
@@ -1970,49 +1962,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		burn_damage = HEAT_DAMAGE_LEVEL_3
 
 	humi.apply_damage(burn_damage, BURN, bodypart)
-
-/// Handle the air pressure of the environment
-/datum/species/proc/handle_environment_pressure(datum/gas_mixture/environment, mob/living/carbon/human/H)
-	var/pressure = environment.return_pressure()
-	var/adjusted_pressure = H.calculate_affecting_pressure(pressure)
-
-	// Set alerts and apply damage based on the amount of pressure
-	switch(adjusted_pressure)
-
-		// Very high pressure, show an alert and take damage
-		if(HAZARD_HIGH_PRESSURE to INFINITY)
-			if(!HAS_TRAIT(H, TRAIT_RESISTHIGHPRESSURE))
-				H.adjustBruteLoss(min(((adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 ) * \
-					PRESSURE_DAMAGE_COEFFICIENT, MAX_HIGH_PRESSURE_DAMAGE) * H.physiology.pressure_mod)
-				H.throw_alert("pressure", /atom/movable/screen/alert/highpressure, 2)
-			else
-				H.clear_alert("pressure")
-
-		// High pressure, show an alert
-		if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
-			H.throw_alert("pressure", /atom/movable/screen/alert/highpressure, 1)
-
-		// No pressure issues here clear pressure alerts
-		if(WARNING_LOW_PRESSURE to WARNING_HIGH_PRESSURE)
-			H.clear_alert("pressure")
-
-		// Low pressure here, show an alert
-		if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
-			// We have low pressure resit trait, clear alerts
-			if(HAS_TRAIT(H, TRAIT_RESISTLOWPRESSURE))
-				H.clear_alert("pressure")
-			else
-				H.throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 1)
-
-		// Very low pressure, show an alert and take damage
-		else
-			// We have low pressure resit trait, clear alerts
-			if(HAS_TRAIT(H, TRAIT_RESISTLOWPRESSURE))
-				H.clear_alert("pressure")
-			else
-				H.adjustBruteLoss(LOW_PRESSURE_DAMAGE * H.physiology.pressure_mod)
-				H.throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 2)
-
 
 //////////
 // FIRE //
@@ -2203,12 +2152,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	if(!T)
 		return FALSE
 
-	var/datum/gas_mixture/environment = T.return_air()
-	if(environment && !(environment.return_pressure() > 30))
-		to_chat(H, "<span class='warning'>The atmosphere is too thin for you to fly!</span>")
-		return FALSE
-	else
-		return TRUE
+	return TRUE
 
 /datum/species/proc/flyslip(mob/living/carbon/human/H)
 	var/obj/buckled_obj
@@ -2296,3 +2240,95 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			continue
 
 		current_part.change_bodypart(species_part)
+
+/datum/species/proc/get_scream_sound(mob/living/carbon/human/human)
+	if(human.gender == MALE)
+		if(prob(1))
+			return 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg'
+		return pick(
+			'sound/mobs/humanoids/human/scream/malescream_1.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_2.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_3.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_4.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_5.ogg',
+			'sound/mobs/humanoids/human/scream/malescream_6.ogg',
+		)
+
+	return pick(
+		'sound/mobs/humanoids/human/scream/femalescream_1.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_2.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_3.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_4.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_5.ogg',
+	)
+
+/datum/species/proc/get_cough_sound(mob/living/carbon/human/human)
+	if(human.gender == FEMALE)
+		return pick(
+			'sound/mobs/humanoids/human/cough/female_cough1.ogg',
+			'sound/mobs/humanoids/human/cough/female_cough2.ogg',
+			'sound/mobs/humanoids/human/cough/female_cough3.ogg',
+			'sound/mobs/humanoids/human/cough/female_cough4.ogg',
+			'sound/mobs/humanoids/human/cough/female_cough5.ogg',
+			'sound/mobs/humanoids/human/cough/female_cough6.ogg',
+		)
+	return pick(
+		'sound/mobs/humanoids/human/cough/male_cough1.ogg',
+		'sound/mobs/humanoids/human/cough/male_cough2.ogg',
+		'sound/mobs/humanoids/human/cough/male_cough3.ogg',
+		'sound/mobs/humanoids/human/cough/male_cough4.ogg',
+		'sound/mobs/humanoids/human/cough/male_cough5.ogg',
+		'sound/mobs/humanoids/human/cough/male_cough6.ogg',
+	)
+
+/datum/species/proc/get_cry_sound(mob/living/carbon/human/human)
+	if(human.gender == FEMALE)
+		return pick(
+			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
+			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
+		)
+	return pick(
+		'sound/mobs/humanoids/human/cry/male_cry1.ogg',
+		'sound/mobs/humanoids/human/cry/male_cry2.ogg',
+		'sound/mobs/humanoids/human/cry/male_cry3.ogg',
+	)
+
+
+/datum/species/proc/get_sneeze_sound(mob/living/carbon/human/human)
+	if(human.gender == FEMALE)
+		return 'sound/mobs/humanoids/human/sneeze/female_sneeze1.ogg'
+	return 'sound/mobs/humanoids/human/sneeze/male_sneeze1.ogg'
+
+/datum/species/proc/get_laugh_sound(mob/living/carbon/human/human)
+	if(human.gender == FEMALE)
+		return 'sound/mobs/humanoids/human/laugh/womanlaugh.ogg'
+	return pick(
+		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
+		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
+	)
+
+/datum/species/proc/get_sigh_sound(mob/living/carbon/human/human)
+	if(human.gender == FEMALE)
+		return pick(
+				'sound/mobs/humanoids/human/sigh/female_sigh1.ogg',
+				'sound/mobs/humanoids/human/sigh/female_sigh2.ogg',
+				'sound/mobs/humanoids/human/sigh/female_sigh3.ogg',
+			)
+	return pick(
+				'sound/mobs/humanoids/human/sigh/male_sigh1.ogg',
+				'sound/mobs/humanoids/human/sigh/male_sigh2.ogg',
+				'sound/mobs/humanoids/human/sigh/male_sigh3.ogg',
+			)
+
+/datum/species/proc/get_sniff_sound(mob/living/carbon/human/human)
+	if(human.gender == FEMALE)
+		return 'sound/mobs/humanoids/human/sniff/female_sniff.ogg'
+	return 'sound/mobs/humanoids/human/sniff/male_sniff.ogg'
+
+/datum/species/proc/get_snore_sound(mob/living/carbon/human/human)
+	if(human.gender == FEMALE)
+		return "snore_female"
+	return "snore_male"
+
+/datum/species/proc/get_hiss_sound(mob/living/carbon/human/human)
+	return 'sound/mobs/humanoids/human/hiss/human_hiss.ogg'

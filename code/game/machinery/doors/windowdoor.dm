@@ -14,7 +14,6 @@
 	flags_1 = ON_BORDER_1
 	opacity = FALSE
 	pass_flags_self = PASSGLASS
-	CanAtmosPass = ATMOS_PASS_PROC
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 	network_id = NETWORK_DOOR_AIRLOCKS
 	set_dir_on_move = FALSE
@@ -44,7 +43,6 @@
 
 /obj/machinery/door/window/ComponentInitialize()
 	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
 	AddComponent(/datum/component/ntnet_interface)
 
 /obj/machinery/door/window/Destroy()
@@ -53,8 +51,6 @@
 	if(obj_integrity == 0)
 		playsound(src, "shatter", 70, TRUE)
 	electronics = null
-	var/turf/floor = get_turf(src)
-	floor.air_update_turf(TRUE, FALSE)
 	return ..()
 
 /obj/machinery/door/window/update_icon_state()
@@ -124,12 +120,6 @@
 
 	return TRUE
 
-/obj/machinery/door/window/CanAtmosPass(turf/T)
-	if(get_dir(loc, T) == dir)
-		return !density
-	else
-		return TRUE
-
 //used in the AStar algorithm to determinate if the turf the door is on is passable
 /obj/machinery/door/window/CanAStarPass(obj/item/card/id/ID, to_dir)
 	return !density || (dir != to_dir) || (check_access(ID) && hasPower())
@@ -157,7 +147,6 @@
 	icon_state ="[base_state]open"
 	sleep(10)
 	density = FALSE
-	air_update_turf(TRUE, FALSE)
 	update_freelook_sight()
 
 	if(operating == 1) //emag again
@@ -179,7 +168,6 @@
 	icon_state = base_state
 
 	density = TRUE
-	air_update_turf(TRUE, TRUE)
 	update_freelook_sight()
 	sleep(10)
 
@@ -204,13 +192,6 @@
 
 /obj/machinery/door/window/narsie_act()
 	add_atom_colour("#7D1919", FIXED_COLOUR_PRIORITY)
-
-/obj/machinery/door/window/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return (exposed_temperature > T0C + (reinf ? 1600 : 800))
-
-/obj/machinery/door/window/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	take_damage(round(exposed_temperature / 200), BURN, 0, 0)
-
 
 /obj/machinery/door/window/emag_act(mob/user)
 	if(!operating && density && !(obj_flags & EMAGGED))

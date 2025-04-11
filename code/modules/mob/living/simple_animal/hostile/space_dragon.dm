@@ -59,7 +59,6 @@
 	minbodytemp = 0
 	maxbodytemp = 1500
 	faction = list("carp")
-	pressure_resistance = 200
 	/// Current time since the the last rift was activated.  If set to -1, does not increment.
 	var/riftTimer = 0
 	/// Maximum amount of time which can pass without a rift before Space Dragon despawns.
@@ -295,8 +294,6 @@
 /mob/living/simple_animal/hostile/space_dragon/proc/dragon_fire_line(turf/T)
 	var/list/hit_list = list()
 	hit_list += src
-	new /obj/effect/hotspot(T)
-	T.hotspot_expose(700,50,1)
 	for(var/mob/living/L in T.contents)
 		if(L in hit_list)
 			continue

@@ -453,7 +453,6 @@
 /obj/effect/spawner/lootdrop/techstorage/engineering
 	name = "engineering circuit board spawner"
 	loot = list(
-				/obj/item/circuitboard/computer/atmos_alert,
 				/obj/item/circuitboard/computer/stationalert,
 				/obj/item/circuitboard/computer/powermonitor
 				)

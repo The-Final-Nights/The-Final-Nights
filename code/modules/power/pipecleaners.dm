@@ -144,11 +144,6 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/pipe_cleaner/attackby(obj/item/W, mob/user, params)
 	handlecable(W, user, params)
 
-/obj/structure/pipe_cleaner/singularity_pull(S, current_size)
-	..()
-	if(current_size >= STAGE_FIVE)
-		deconstruct()
-
 /obj/structure/pipe_cleaner/proc/update_stored(length = 1, colorC = COLOR_RED)
 	stored.amount = length
 	stored.color = colorC

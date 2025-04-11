@@ -570,18 +570,6 @@
 /obj/machinery/nuclearbomb/beer/proc/stationwide_foam()
 	priority_announce("The scrubbers network is experiencing a backpressure surge. Some ejection of contents may occur.", "Atmospherics alert")
 
-	for (var/obj/machinery/atmospherics/components/unary/vent_scrubber/vent in GLOB.machines)
-		var/turf/vent_turf = get_turf(vent)
-		if (!vent_turf || !is_station_level(vent_turf.z) || vent.welded)
-			continue
-
-		var/datum/reagents/beer = new /datum/reagents(1000)
-		beer.my_atom = vent
-		beer.add_reagent(/datum/reagent/consumable/ethanol/beer, 100)
-		beer.create_foam(/datum/effect_system/foam_spread, 200)
-
-		CHECK_TICK
-
 /obj/machinery/nuclearbomb/beer/really_actually_explode()
 	disarm()
 	stationwide_foam()

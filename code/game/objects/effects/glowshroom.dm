@@ -99,9 +99,6 @@
 	addtimer(CALLBACK(src, PROC_REF(Spread)), delay_spread, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
 	addtimer(CALLBACK(src, PROC_REF(Decay)), delay_decay, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
 
-/obj/structure/glowshroom/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
 */
 /**
  * Causes glowshroom spreading across the floor/walls.
@@ -113,8 +110,7 @@
 	if(QDELETED(src))
 		return
 
-	var/turf/ownturf = get_turf(src)
-	if(!TURF_SHARES(ownturf)) //If we are in a 1x1 room
+	if(!get_adjacent_open_turfs(src)) //If we are in a 1x1 room
 		addtimer(CALLBACK(src, PROC_REF(Spread)), delay_spread, TIMER_UNIQUE|TIMER_NO_HASH_WAIT)
 		return //Deal with it not now
 
@@ -126,7 +122,7 @@
 	for(var/turf/open/floor/earth in view(3,src))
 		if(is_type_in_typecache(earth, blacklisted_glowshroom_turfs))
 			continue
-		if(!TURF_SHARES(earth))
+		if(!get_adjacent_open_turfs(earth))
 			continue
 		possibleLocs += earth
 
@@ -237,12 +233,6 @@
 /obj/structure/glowshroom/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	if(damage_type == BURN && damage_amount)
 		playsound(src.loc, 'sound/items/welder.ogg', 100, TRUE)
-
-/obj/structure/glowshroom/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > 300
-
-/obj/structure/glowshroom/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	take_damage(5, BURN, 0, 0)
 
 /obj/structure/glowshroom/acid_act(acidpwr, acid_volume)
 	visible_message("<span class='danger'>[src] melts away!</span>")

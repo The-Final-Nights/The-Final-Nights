@@ -1,8 +1,8 @@
 /datum/job/vamp/daughterof
 	title = "Cabaret Worker"
 	faction = "Vampire"
-	total_positions = 6
-	spawn_positions = 6
+	total_positions = 10
+	spawn_positions = 10
 	supervisors = "the Traditions"
 	selection_color = "#df7058"
 	access = list()			//See /datum/job/assistant/get_access()
@@ -17,10 +17,11 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_DAUGHTER
 
-	allowed_species = list("Vampire")
+	allowed_species = list("Vampire","Ghoul")
+	species_slots = list("Vampire" = 6)
 
-	v_duty = "Follow the traditions of the Camarilla. Obey the Prince and their authority. The city belongs to him. Aligning yourself with your clan members would be of benefit."
-	duty = "You are either a Daughter of Cacophony or a Son of Discord. You work at the Cabaret and sing masterful songs yet the singing never stops within your head..."
+	v_duty = "You are either a Daughter of Cacophony or a Son of Discord. You work at the Cabaret and sing masterful songs yet the singing never stops within your head..."
+	duty = "You work at the local Cabaret, and have some inkling of the oddities going on with the owners, but for one reason or another you dont really care enough to bring it up. Perhaps the pay is nice, or you are personally involved with one of them."
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Daughters of Cacophony")
 

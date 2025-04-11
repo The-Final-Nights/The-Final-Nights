@@ -89,7 +89,7 @@
 	var/obj/damap/theatre/TH = new(user)
 	var/obj/damap/bar/BA = new(user)
 	var/obj/damap/hospital/HS = new(user)
-	var/obj/overlay/AM = new(DAMAP)
+	var/obj/effect/overlay/AM = new(DAMAP)
 	AM.icon = 'code/modules/wod13/disciplines.dmi'
 	AM.icon_state = "target"
 	AM.layer = ABOVE_HUD_LAYER
@@ -98,13 +98,13 @@
 	DAMAP.overlays |= AM
 	dat += "<center>[icon2html(getFlatIcon(DAMAP), user)]</center><BR>"
 	dat += "<center>[icon2html(getFlatIcon(SU), user)] - Railway Station;</center><BR>"
-	dat += "<center>[icon2html(getFlatIcon(CH), user)] - Catholic Church;</center><BR>"
+	dat += "<center>[icon2html(getFlatIcon(CH), user)] - Church;</center><BR>"
 	dat += "<center>[icon2html(getFlatIcon(GR), user)] - City Graveyard;</center><BR>"
-	dat += "<center>[icon2html(getFlatIcon(HO), user)] - Hotel \"Cock Roach\";</center><BR>"
+	dat += "<center>[icon2html(getFlatIcon(HO), user)] - Hotel;</center><BR>"
 	dat += "<center>[icon2html(getFlatIcon(TO), user)] - Millenium Tower;</center><BR>"
 	dat += "<center>[icon2html(getFlatIcon(CL), user)] - Cleaning Services;</center><BR>"
 	dat += "<center>[icon2html(getFlatIcon(TH), user)] - National Theatre;</center><BR>"
-	dat += "<center>[icon2html(getFlatIcon(BA), user)] - Bar \"Big Shoe\";</center><BR>"
+	dat += "<center>[icon2html(getFlatIcon(BA), user)] - Bar;</center><BR>"
 	dat += "<center>[icon2html(getFlatIcon(HS), user)] - City Hospital.</center>"
 	user << browse(dat, "window=map;size=400x600;border=1;can_resize=0;can_minimize=0")
 	onclose(user, "map", src)
@@ -227,8 +227,7 @@
 	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
 	ears = /obj/item/radio/headset
 	mask = /obj/item/clothing/mask/gas/syndicate
-	back = /obj/item/tank/jetpack/oxygen
-	r_pocket = /obj/item/tank/internals/emergency_oxygen
+	back = /obj/item/jetpack/oxygen
 	id = /obj/item/card/id/syndicate
 // TRIAD
 
@@ -379,3 +378,16 @@
 
 /obj/item/card/id/chunk/AltClick(mob/user)
 	return
+
+/obj/item/card/id/chunk/ghoul
+	name = "Millenium Tower Employee ID"
+	id_type_name = "Security ID"
+	desc = "An ID showing employment with the Millenium Tower - Maybe they give you free donuts."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id2"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id2"

@@ -157,6 +157,9 @@ LOG_CLONING
 ## log shuttle actions
 LOG_SHUTTLE
 
+## log speech indicators
+LOG_SPEECH_INDICATORS
+
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
 
@@ -292,10 +295,6 @@ ALLOW_HOLIDAYS
 
 ## Uncomment to show the names of the admin sending a pm from IRC instead of showing as a stealthmin.
 #SHOW_IRC_NAME
-
-## Defines the ticklimit for subsystem initialization (In percents of a byond tick). Lower makes world start smoother. Higher makes it faster.
-##This is currently a testing optimized setting. A good value for production would be 98.
-TICK_LIMIT_MC_INIT 500
 
 ##Defines the ticklag for the world. Ticklag is the amount of time between game ticks (aka byond ticks) (in 1/10ths of a second).
 ##	This also controls the client network update rate, as well as the default client fps
@@ -544,3 +543,13 @@ DEFAULT_VIEW_SQUARE 15x15
 ## Windows: directory\to\save\ | Linux: directory/to/save/
 ## Don't forget the last path separator!
 #JSON_CONVERSION_PATH data\player_saves\json_saves\
+
+## Tgui payloads larger than the 2kb limit for BYOND topic requests are split into roughly 1kb chunks and sent in sequence.
+## This config option limits the maximum chunk count for which the server will accept a payload, default is 32
+TGUI_MAX_CHUNK_COUNT 32
+
+## Enables the Discord Overwatch system
+#DISCORD_OVERWATCH
+
+## Sets the webhook URL for the Overwatch System
+#DISCORD_OVERWATCH_WEBHOOK https://discord.com/api/webhooks/XXX/XXX

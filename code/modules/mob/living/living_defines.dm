@@ -3,7 +3,6 @@
 	sight = 0
 	see_in_dark = 2
 	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD)
-	pressure_resistance = 10
 
 	hud_type = /datum/hud/living
 
@@ -143,7 +142,7 @@
 	var/worn_slot_flags = NONE //if it can be held, can it be equipped to any slots? (think pAI's on head)
 
 	var/radiation = 0 ///If the mob is irradiated.
-	var/ventcrawl_layer = PIPING_LAYER_DEFAULT
+	var/ventcrawl_layer = 3
 	var/losebreath = 0
 
 	//List of active diseases
@@ -257,14 +256,10 @@
 	var/bloodpool = 5
 	var/maxbloodpool = 5
 	var/generation = 13
-	var/humanity = 7
 	var/masquerade = 5
 	var/last_masquerade_violation = 0
-	var/last_nonraid = 0
-	var/warrant = FALSE
-	var/ignores_warrant = FALSE
 
-	var/obj/overlay/gnosis
+	var/obj/effect/overlay/gnosis
 
 	var/isdwarfy = FALSE
 	var/ischildren = FALSE
@@ -286,3 +281,6 @@
 	var/max_demon_chi = 0
 	COOLDOWN_DECLARE(chi_restore)
 	var/datum/action/chi_discipline/chi_ranged
+
+	//If we are currently leaning on something, and what that object is
+	var/atom/leaned_object

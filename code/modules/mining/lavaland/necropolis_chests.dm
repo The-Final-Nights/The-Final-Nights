@@ -536,9 +536,6 @@
 /obj/effect/immortality_talisman/attackby()
 	return
 
-/obj/effect/immortality_talisman/singularity_pull()
-	return
-
 /obj/effect/immortality_talisman/Destroy(force)
 	if(!can_destroy && !force)
 		return QDEL_HINT_LETMELIVE
@@ -874,7 +871,7 @@
 	to_chat(user, "<span class='notice'>You call out for aid, attempting to summon spirits to your side.</span>")
 
 	notify_ghosts("[user] is raising [user.p_their()] [src], calling for your help!",
-		enter_link="<a href=?src=[REF(src)];orbit=1>(Click to help)</a>",
+		enter_link="<a href=byond://?src=[REF(src)];orbit=1>(Click to help)</a>",
 		source = user, ignore_key = POLL_IGNORE_SPECTRAL_BLADE, header = "Spectral blade")
 
 	summon_cooldown = world.time + 600
