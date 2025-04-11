@@ -12561,6 +12561,11 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/clinic/haven)
+"dtw" = (
+/obj/effect/decal/cleanable/blood/old,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/plating/rough,
+/area/vtm/anarch/garage)
 "dtD" = (
 /obj/structure/railing{
 	dir = 8
@@ -13214,9 +13219,7 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm)
 "dDS" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 8
-	},
+/obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "dDT" = (
@@ -17422,9 +17425,6 @@
 	pixel_x = -16
 	},
 /obj/effect/decal/trash,
-/obj/effect/turf_decal/siding/white{
-	dir = 8
-	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "eRP" = (
@@ -42204,6 +42204,10 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
+"lNK" = (
+/obj/effect/decal/graffiti/large,
+/turf/open/floor/plating/asphalt,
+/area/vtm/anarch/garage)
 "lNR" = (
 /obj/machinery/light,
 /turf/closed/wall/vampwall/market,
@@ -56313,6 +56317,7 @@
 	dir = 1;
 	pixel_y = -16
 	},
+/obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "pGG" = (
@@ -64581,6 +64586,7 @@
 /area/vtm/sewer)
 "rNM" = (
 /obj/structure/table/optable,
+/obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "rNZ" = (
@@ -67808,6 +67814,10 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
+"sGx" = (
+/obj/effect/decal/trash,
+/turf/open/floor/plating/rough,
+/area/vtm/anarch/garage)
 "sGC" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/vampwood,
@@ -175511,7 +175521,7 @@ bQz
 rtj
 cMf
 lJI
-pGx
+cfK
 bQz
 pJI
 pHC
@@ -175766,9 +175776,9 @@ xEC
 lns
 dpp
 rNM
-cMf
+dDS
 lJI
-cMf
+sGx
 bQz
 pPy
 pHC
@@ -176023,7 +176033,7 @@ xEC
 lns
 bQz
 vjx
-cMf
+dtw
 lJI
 cMf
 bQz
@@ -176536,10 +176546,10 @@ dnj
 xEC
 lns
 dpp
-dDS
-dDS
+cMf
+cMf
 eRD
-dDS
+cMf
 bQz
 vpB
 vpB
@@ -178849,7 +178859,7 @@ jxb
 jxb
 wBY
 bQz
-svg
+lNK
 svg
 svg
 dSU
