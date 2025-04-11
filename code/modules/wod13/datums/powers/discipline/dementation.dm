@@ -31,10 +31,10 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/dementation/passion/pre_activation_checks(mob/living/target)
-	var/mypower = owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	if(theirpower >= mypower)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to corrupt!"))
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = 1)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	if((theirpower >= mypower))
+		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		return FALSE
 	return TRUE
 
@@ -74,10 +74,10 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/dementation/the_haunting/pre_activation_checks(mob/living/target)
-	var/mypower = owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	if(theirpower >= mypower)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to corrupt!"))
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = 1)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	if((theirpower >= mypower))
+		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		return FALSE
 	return TRUE
 
@@ -113,10 +113,10 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/dementation/eyes_of_chaos/pre_activation_checks(mob/living/target)
-	var/mypower = owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	if(theirpower >= mypower)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to corrupt!"))
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = 1)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	if((theirpower >= mypower))
+		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		return FALSE
 	return TRUE
 
@@ -246,10 +246,10 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/dementation/voice_of_madness/pre_activation_checks(mob/living/target)
-	var/mypower = owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	if(theirpower >= mypower)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to corrupt!"))
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = 1)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	if((theirpower >= mypower))
+		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		return FALSE
 	return TRUE
 
@@ -285,10 +285,10 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/dementation/total_insanity/pre_activation_checks(mob/living/target)
-	var/mypower = owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	if(theirpower >= mypower)
-		to_chat(owner, span_warning("[target]'s mind is too powerful to corrupt!"))
+	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = 1)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = 1)
+	if((theirpower >= mypower))
+		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		return FALSE
 	return TRUE
 
