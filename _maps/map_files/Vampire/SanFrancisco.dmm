@@ -1113,9 +1113,6 @@
 /area/vtm/ghetto)
 "aqn" = (
 /obj/machinery/iv_drip,
-/obj/structure/sign/poster/contraband/pixies{
-	pixel_y = 32
-	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior)
 "aqr" = (
@@ -4327,10 +4324,6 @@
 /obj/machinery/grill,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior/police/upstairs)
-"bhZ" = (
-/obj/structure/sign/poster/vesuvius,
-/turf/closed/wall/vampwall/city,
-/area/vtm/cabaret/basement)
 "bif" = (
 /obj/structure/railing{
 	dir = 8;
@@ -9396,10 +9389,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/tzimisce_manor)
-"cBc" = (
-/obj/structure/sign/poster/redlady,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/cabaret/basement)
 "cBn" = (
 /obj/structure/vampfence/rich,
 /obj/structure/vampfence/corner/rich,
@@ -9521,10 +9510,6 @@
 /obj/structure/table/wood,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/forest)
-"cDD" = (
-/obj/structure/sign/poster/diemydarling,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/cabaret/basement)
 "cDQ" = (
 /obj/structure/table/wood,
 /obj/item/drinkable_bloodpack,
@@ -16720,10 +16705,6 @@
 /obj/item/stack/dollar/hundred,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/bianchiBank)
-"eHb" = (
-/obj/structure/sign/poster/ministry,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/cabaret/basement)
 "eHj" = (
 /obj/item/vamp/phone/street{
 	pixel_z = 24
@@ -19883,9 +19864,6 @@
 "fzj" = (
 /obj/item/bedsheet/random,
 /obj/structure/bed,
-/obj/structure/sign/poster/contraband/bloodrayne{
-	pixel_y = 32
-	},
 /turf/open/floor/carpet,
 /area/vtm/interior/techshop)
 "fzn" = (
@@ -25268,10 +25246,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer)
-"gWw" = (
-/obj/structure/sign/poster/chiasm,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/cabaret/basement)
 "gWy" = (
 /turf/open/floor/plating/vampgrass,
 /area/vtm/unionsquare)
@@ -28677,10 +28651,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
-"hVJ" = (
-/obj/structure/sign/poster/contraband/blade,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/interior/millennium_tower)
 "hVQ" = (
 /obj/effect/decal/wallpaper/gold/alt,
 /turf/closed/wall/vampwall/rich,
@@ -29240,9 +29210,6 @@
 /area/vtm/clinic/haven)
 "idj" = (
 /obj/structure/chair/sofa/left,
-/obj/structure/sign/poster/contraband/pixies{
-	pixel_y = 32
-	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/ghetto)
 "idm" = (
@@ -33394,11 +33361,6 @@
 /obj/structure/sign/blank{
 	pixel_y = 30
 	},
-/obj/structure/sign/poster/contraband/blade{
-	layer = 3.5;
-	pixel_x = -3;
-	pixel_y = 38
-	},
 /obj/structure/sign/poster/contraband/kish{
 	layer = 3.5;
 	pixel_x = 5;
@@ -35094,6 +35056,9 @@
 	lock_id = "bar";
 	lockpick_difficulty = 16
 	},
+/obj/effect/turf_decal/siding/white{
+	dir = 4
+	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "jNc" = (
@@ -35253,9 +35218,6 @@
 "jPn" = (
 /obj/structure/coclock,
 /obj/structure/table/wood,
-/obj/machinery/computer/bookmanagement{
-	pixel_y = 9
-	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
 "jPo" = (
@@ -41462,7 +41424,6 @@
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
 "lDH" = (
-/obj/structure/sign/poster/contraband/blade,
 /obj/effect/decal/wallpaper/light,
 /turf/closed/wall/vampwall/junk{
 	density = 0
@@ -48977,10 +48938,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/giovanni)
-"nGu" = (
-/obj/structure/sign/poster/genitorturers,
-/turf/closed/wall/vampwall/wood,
-/area/vtm/interior)
 "nGz" = (
 /obj/structure/table,
 /obj/item/storage/pill_bottle/potassiodide,
@@ -60595,13 +60552,6 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/millennium_tower)
-"qNd" = (
-/obj/machinery/light/small{
-	light_power = 0.5
-	},
-/obj/structure/sign/poster/tiamat,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch/basement)
 "qNj" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -65826,10 +65776,6 @@
 /obj/structure/chair/plastic,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior/tzimisce_manor)
-"sdC" = (
-/obj/structure/sign/poster/lacunacoil,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/cabaret/basement)
 "sdF" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -74216,7 +74162,6 @@
 /area/vtm/interior/millennium_tower/ventrue)
 "uzv" = (
 /obj/structure/table/wood/fancy/red,
-/obj/machinery/computer/bookmanagement,
 /obj/machinery/light/prince{
 	pixel_y = 32
 	},
@@ -74474,10 +74419,6 @@
 /obj/machinery/washing_machine,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/ghetto)
-"uCU" = (
-/obj/structure/sign/poster/tiamat,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/cabaret/basement)
 "uCV" = (
 /turf/open/floor/plating/sidewalk,
 /area/vtm/interior/oldchurch)
@@ -80514,13 +80455,6 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/hotel)
-"wnL" = (
-/obj/structure/chair/stool/bar,
-/obj/structure/sign/poster/vesuvius{
-	pixel_y = 30
-	},
-/turf/open/floor/plating/rough,
-/area/vtm/interior/strip)
 "wnQ" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -81058,10 +80992,6 @@
 /obj/structure/hydrant,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/fishermanswharf/lower)
-"wwV" = (
-/obj/structure/bookcase/random/regent,
-/turf/open/floor/carpet/lone,
-/area/vtm/interior/chantry/basement)
 "wwX" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -82505,10 +82435,6 @@
 /obj/structure/trashbag,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
-"wSq" = (
-/obj/structure/sign/poster/gravitykills,
-/turf/closed/wall/vampwall/rich/old,
-/area/vtm/cabaret/basement)
 "wSr" = (
 /turf/open/floor/carpet/black,
 /area/vtm/sewer/nosferatu_town)
@@ -91034,7 +90960,7 @@ nYS
 nYS
 nYS
 nYS
-bhZ
+dfN
 jen
 dfN
 dfN
@@ -92320,7 +92246,7 @@ atu
 tSA
 nYS
 nYS
-wSq
+xev
 jen
 jen
 lTt
@@ -92834,7 +92760,7 @@ sba
 tSA
 nYS
 nYS
-gWw
+xev
 jen
 jen
 vSn
@@ -93091,7 +93017,7 @@ atu
 tSA
 nYS
 nYS
-cDD
+xev
 jen
 rkf
 nZF
@@ -93605,7 +93531,7 @@ atu
 tSA
 nYS
 nYS
-sdC
+xev
 jen
 jen
 vSn
@@ -94119,7 +94045,7 @@ pcT
 tSA
 nYS
 nYS
-uCU
+xev
 jen
 jen
 fib
@@ -95145,7 +95071,7 @@ tSA
 tSA
 nYS
 nYS
-eHb
+xev
 dvb
 iQQ
 jen
@@ -95916,7 +95842,7 @@ dhc
 dhc
 dhc
 nYS
-cBc
+xev
 viK
 shV
 adW
@@ -105962,7 +105888,7 @@ wTq
 yen
 wTq
 lzL
-wnL
+wTE
 fWI
 lzL
 jKQ
@@ -112315,7 +112241,7 @@ mYt
 owT
 isZ
 rYV
-qNd
+hHF
 mlC
 mlC
 rHN
@@ -122646,7 +122572,7 @@ dhc
 dhc
 dhc
 nYS
-hVJ
+lYS
 oRh
 rHQ
 rHQ
@@ -132153,7 +132079,7 @@ fRQ
 cih
 vXE
 kbp
-wwV
+llg
 vXE
 eoH
 vBl
@@ -243545,7 +243471,7 @@ fmI
 imq
 dMJ
 pgt
-nGu
+fmI
 ntq
 ddv
 skW
