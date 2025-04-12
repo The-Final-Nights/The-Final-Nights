@@ -53,8 +53,7 @@
     $with: ('background-color': hsla(120, 100%, 19%, 0.25))
   );
 
-  .Layout__content {
-    //background-image: none;
+  .Window__rest {
     background-image: repeating-linear-gradient(
         0deg,
         hsla(0, 0%, 0%, 0.15),
