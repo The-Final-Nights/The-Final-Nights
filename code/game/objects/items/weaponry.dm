@@ -617,6 +617,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	attack_verb_continuous = list("beats", "smacks")
 	attack_verb_simple = list("beat", "smack")
 	custom_materials = list(/datum/material/wood = MINERAL_MATERIAL_AMOUNT * 3.5)
+	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_HUGE
 	var/homerun_ready = 0
 	var/homerun_able = 0
@@ -670,6 +671,8 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	desc = "This bat is made of highly reflective, highly armored material."
 	icon_state = "baseball_bat_metal"
 	inhand_icon_state = "baseball_bat_metal"
+	custom_materials = list(/datum/material/titanium = MINERAL_MATERIAL_AMOUNT * 3.5)
+	resistance_flags = NONE
 	force = 12
 	throwforce = 15
 
@@ -754,6 +757,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 /obj/item/gohei
 	name = "gohei"
 	desc = "A wooden stick with white streamers at the end. Originally used by shrine maidens to purify things. Now used by the station's valued weeaboos."
+	resistance_flags = FLAMMABLE
 	force = 5
 	throwforce = 5
 	hitsound = "swing_hit"
