@@ -40071,7 +40071,7 @@
 	},
 /obj/item/ammo_box/vampire/c12g/buck,
 /obj/item/paper/fluff{
-	info = "I use the shotgun. You know why? Cause the shotgun doesnt miss, and unlike the shitty taser it stops a criminal in their tracks in two hits. Bang, bang, and theyre fucking done. I use four shots just to make damn sure because im not here to coddle a bunch of criminal scum sucking dirtbags. Im there to enforce Cali-fucking-fornian LAW. The shotgun is the superior law enforcement weapon because it stops crime. And it stops crime by reducing the number of criminals roaming the fucking streets."
+	default_raw_text = "I use the shotgun. You know why? Cause the shotgun doesnt miss, and unlike the shitty taser it stops a criminal in their tracks in two hits. Bang, bang, and theyre fucking done. I use four shots just to make damn sure because im not here to coddle a bunch of criminal scum sucking dirtbags. Im there to enforce Cali-fucking-fornian LAW. The shotgun is the superior law enforcement weapon because it stops crime. And it stops crime by reducing the number of criminals roaming the fucking streets."
 	},
 /obj/machinery/button/door{
 	pixel_y = 30;
@@ -55817,6 +55817,14 @@
 /obj/item/phone_book,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
+"pAp" = (
+/obj/item/kirbyplants{
+	icon_state = "plant3";
+	pixel_y = 15;
+	pixel_x = 6
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police)
 "pAs" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/vampdirt,
@@ -198699,9 +198707,9 @@ jlv
 dci
 qTP
 uZV
-uZV
 wGO
 kUH
+uZV
 uZV
 uZV
 qTP
@@ -198955,10 +198963,10 @@ bAA
 jlv
 dci
 qTP
-qTP
 vDw
 vTc
 mht
+pAp
 uZV
 jkY
 qTP
