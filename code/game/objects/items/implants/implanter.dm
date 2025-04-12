@@ -56,6 +56,10 @@
 		else
 			name = "implanter"
 	else
+		to_chat(user, span_warning("[user] fails to implant [src]."))
+
+/obj/item/implanter/attackby(obj/item/I, mob/living/user, params)
+	if(IS_WRITING_UTENSIL(I))
 		return ..()
 
 /obj/item/implanter/Initialize(mapload)

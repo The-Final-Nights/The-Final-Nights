@@ -114,11 +114,6 @@
 	pixel_x = 5;
 	pixel_y = 9
 	},
-/obj/item/book/manual/wiki/research_and_development{
-	name = "Sacred Text of the Liberator";
-	pixel_x = -4;
-	pixel_y = 3
-	},
 /obj/structure/window/reinforced{
 	dir = 4;
 	name = "shrine of the liberator"

@@ -541,12 +541,19 @@
 	id = "skill_station"
 	build_path = /obj/item/circuitboard/machine/skill_station
 	category = list ("Misc. Machinery")
-	departmental_flags = DEPARTMENTAL_FLAG_SCIENCE | DEPARTMENTAL_FLAG_CARGO | DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SERVICE
 
-/datum/design/board/accounting
-	name = "Machine Design (Account Registration Device)"
-	desc = "The circuit board for a Account Registration Device."
-	id = "accounting"
-	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-	build_path = /obj/item/circuitboard/machine/accounting
-	category = list ("Misc. Machinery")
+/datum/design/board/fax
+	name = "Machine Design (Fax Machine)"
+	desc = "The circuit board for a fax machine."
+	id = "fax"
+	build_path = /obj/item/circuitboard/machine/fax
+
+/datum/design/board/bookbinder
+	name = "Book Binder"
+	desc = "The circuit board for a book binder"
+	id = "bookbinder"
+
+/datum/design/board/libraryscanner
+	name = "Book Scanner"
+	desc = "The circuit board for a book scanner"
+	id = "libraryscanner"

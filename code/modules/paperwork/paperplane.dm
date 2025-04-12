@@ -30,11 +30,13 @@
 		newPaper.forceMove(src)
 	else
 		internalPaper = new(src)
+	if(internalPaper.icon_state == "cpaper" || internalPaper.icon_state == "cpaper_words")
+		icon_state = "paperplane_carbon" // It's the purple carbon copy. Use the purple paper plane
 	update_icon()
 
-/obj/item/paperplane/Exited(atom/movable/AM, atom/newLoc)
+/obj/item/paperplane/Exited(atom/movable/gone, direction)
 	. = ..()
-	if (AM == internalPaper)
+	if (internalPaper == gone)
 		internalPaper = null
 		if(!QDELETED(src))
 			qdel(src)
@@ -45,22 +47,21 @@
 
 /obj/item/paperplane/suicide_act(mob/living/user)
 	var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
-	user.Stun(200)
-	user.visible_message("<span class='suicide'>[user] jams [src] in [user.p_their()] nose. It looks like [user.p_theyre()] trying to commit suicide!</span>")
+	user.Stun(20 SECONDS)
+	user.visible_message(span_suicide("[user] jams [src] in [user.p_their()] nose. It looks like [user.p_theyre()] trying to commit suicide!"))
 	user.adjust_blurriness(6)
 	if(eyes)
 		eyes.applyOrganDamage(rand(6,8))
-	sleep(10)
+	sleep(1 SECONDS)
 	return (BRUTELOSS)
 
 /obj/item/paperplane/update_overlays()
 	. = ..()
-	if(internalPaper?.stamped)
-		for(var/S in internalPaper.stamped)
-			. += "paperplane_[S]"
+	for(var/stamp in internalPaper?.stamp_cache)
+		. += "[base_icon_state]_[stamp]"
 
 /obj/item/paperplane/attack_self(mob/user)
-	to_chat(user, "<span class='notice'>You unfold [src].</span>")
+	to_chat(user, span_notice("You unfold [src]."))
 	// We don't have to qdel the paperplane here; it shall be done once the internal paper object is moved out of src anyway.
 	if(user.Adjacent(internalPaper))
 		user.put_in_hands(internalPaper)
@@ -70,11 +71,11 @@
 /obj/item/paperplane/attackby(obj/item/P, mob/living/carbon/human/user, params)
 	if(burn_paper_product_attackby_check(P, user))
 		return
-	if(istype(P, /obj/item/pen) || istype(P, /obj/item/toy/crayon))
-		to_chat(user, "<span class='warning'>You should unfold [src] before changing it!</span>")
+	if(IS_WRITING_UTENSIL(P))
+		to_chat(user, span_warning("You should unfold [src] before changing it!"))
 		return
 
-	else if(istype(P, /obj/item/stamp)) 	//we don't randomize stamps on a paperplane
+	else if(istype(P, /obj/item/stamp)) //we don't randomize stamps on a paperplane
 		internalPaper.attackby(P, user) //spoofed attack to update internal paper.
 		update_icon()
 		add_fingerprint(user)
@@ -101,7 +102,7 @@
 	if(prob(hit_probability))
 		if(H.is_eyes_covered())
 			return
-		visible_message("<span class='danger'>\The [src] hits [H] in the eye[eyes ? "" : " socket"]!</span>")
+		visible_message(span_danger("\The [src] hits [H] in the eye[eyes ? "" : " socket"]!"))
 		H.adjust_blurriness(6)
 		eyes?.applyOrganDamage(rand(6,8))
 		H.Paralyze(40)
@@ -109,24 +110,20 @@
 
 /obj/item/paper/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>Alt-click [src] to fold it into a paper plane.</span>"
+	. += span_notice("Alt-click [src] to fold it into a paper plane.")
 
 /obj/item/paper/AltClick(mob/living/user, obj/item/I)
 	if(!user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY, FALSE, TRUE))
 		return
 	if(istype(src, /obj/item/paper/carbon))
 		var/obj/item/paper/carbon/Carbon = src
-		if(!Carbon.iscopy && !Carbon.copied)
-			to_chat(user, "<span class='notice'>Take off the carbon copy first.</span>")
+		if(!Carbon.copied)
+			to_chat(user, span_notice("Take off the carbon copy first."))
 			return
-	to_chat(user, "<span class='notice'>You fold [src] into the shape of a plane!</span>")
-	user.temporarilyRemoveItemFromInventory(src)
-	var/obj/item/paperplane/plane_type = /obj/item/paperplane
 	//Origami Master
 	var/datum/action/innate/origami/origami_action = locate() in user.actions
 	if(origami_action?.active)
-		plane_type = /obj/item/paperplane/syndicate
+		make_plane(user, I, /obj/item/paperplane/syndicate)
+	else
+		make_plane(user, I, /obj/item/paperplane)
 
-	I = new plane_type(loc, src)
-	if(user.Adjacent(I))
-		user.put_in_hands(I)
