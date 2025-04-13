@@ -486,9 +486,6 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 	usr << browse(policytext.Join(""),"window=policy")
 
-
-
-
 /client/verb/toggle_fullscreen()
 	set name = "Toggle Fullscreen"
 	set category = "OOC"
