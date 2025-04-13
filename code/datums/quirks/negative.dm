@@ -841,6 +841,18 @@
 	else
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "bad_touch", /datum/mood_event/bad_touch)
 
+/datum/quirk/derangement
+	name = "Derangement"
+	desc = "All members of Clan Malkavian suffer from a permanent, incurable derangement."
+	gain_text = span_danger("The important thing is to pull yourself up by your own hair to turn yourself inside out and see the whole world with fresh eyes.")
+	lose_text = span_notice("Malkav's crazed eyes drift away from your grain as it slips through the hourglass of time...")
+	medical_record_text = "Patient suffers from a treatment-resistant mental illness."
+
+/datum/quirk/derangement/on_process(delta_time)
+	if(DT_PROB(2, delta_time)) //we'll all be mad soon enough
+		quirk_holder.hallucination += rand(10, 20)
+	handle_malk_floors()
+
 #undef LOCATION_LPOCKET
 #undef LOCATION_RPOCKET
 #undef LOCATION_BACKPACK
