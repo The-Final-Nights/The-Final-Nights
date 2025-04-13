@@ -134,6 +134,13 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/pacificheights/forest)
+"acj" = (
+/obj/structure/vampipe{
+	icon_state = "piping32"
+	},
+/obj/manholeup,
+/turf/open/floor/plating/vampcanalplating,
+/area/vtm/sewer)
 "ack" = (
 /obj/effect/decal/trash,
 /obj/structure/bed/roller,
@@ -23232,10 +23239,8 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
 "gtt" = (
-/obj/structure/vampdoor/police{
-	lockpick_difficulty = 18
-	},
 /obj/effect/turf_decal/siding/white,
+/obj/structure/vampdoor/police,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "gtz" = (
@@ -29868,9 +29873,14 @@
 /turf/open/floor/plating/gummaguts,
 /area/vtm/interior/shop)
 "iot" = (
-/obj/structure/closet/crate,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/obj/structure/vampipe{
+	pixel_y = 32
+	},
+/obj/structure/vampipe{
+	icon_state = "piping35"
+	},
+/turf/open/floor/plating/vampcanal,
+/area/vtm/sewer)
 "iow" = (
 /obj/structure/reagent_dispensers/cleaningfluid,
 /turf/open/floor/plating/vampplating,
@@ -35269,6 +35279,12 @@
 "jQt" = (
 /obj/structure/table,
 /obj/item/reagent_containers/food/drinks/coffee/vampire/robust,
+/obj/item/flashlight/seclite,
+/obj/item/flashlight/seclite,
+/obj/item/flashlight/seclite,
+/obj/item/flashlight/seclite,
+/obj/item/flashlight/seclite,
+/obj/item/flashlight/seclite,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/upstairs)
 "jQw" = (
@@ -68767,7 +68783,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f2)
 "sYq" = (
-/obj/structure/bookcase/random/reference,
+/obj/structure/bookcase,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "sYx" = (
@@ -81631,8 +81647,9 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/shop)
 "wHj" = (
-/turf/closed/wall/vampwall/market/low,
-/area/vtm/interior/police/upstairs)
+/obj/manholedown,
+/turf/open/floor/plating/asphalt,
+/area/vtm/ghetto)
 "wHu" = (
 /obj/structure/table/wood/poker,
 /obj/machinery/light{
@@ -136529,7 +136546,7 @@ dVr
 dVr
 dVr
 dVr
-dVr
+acj
 dVr
 dVr
 dVr
@@ -137280,7 +137297,7 @@ dhc
 dhc
 nYS
 wTq
-qUy
+iot
 pOW
 dVI
 dVI
@@ -199477,7 +199494,7 @@ ulT
 qTP
 esp
 xaW
-iot
+uZV
 qTP
 exy
 yhf
@@ -202065,7 +202082,7 @@ jlv
 mIK
 avt
 mwS
-mwS
+wHj
 ulT
 jlv
 vFi
@@ -270417,7 +270434,7 @@ rbq
 lLc
 dZF
 dZF
-wHj
+kDt
 atT
 atT
 atT
@@ -270674,7 +270691,7 @@ sel
 lLc
 dZF
 rOz
-wHj
+kDt
 atT
 atT
 atT
@@ -270931,7 +270948,7 @@ fwd
 lLc
 qzv
 dZF
-wHj
+kDt
 atT
 atT
 atT
@@ -271188,7 +271205,7 @@ fwd
 hJo
 lOR
 pjl
-wHj
+kDt
 atT
 atT
 atT
@@ -271445,7 +271462,7 @@ fwd
 hJo
 dZF
 dZF
-wHj
+kDt
 atT
 atT
 atT
@@ -271702,7 +271719,7 @@ hJo
 hJo
 uPH
 rOz
-wHj
+kDt
 atT
 atT
 atT
@@ -271959,7 +271976,7 @@ qir
 hJo
 dZF
 dZF
-wHj
+kDt
 atT
 atT
 atT
