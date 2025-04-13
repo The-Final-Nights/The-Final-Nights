@@ -486,6 +486,16 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 	usr << browse(policytext.Join(""),"window=policy")
 
+/client/verb/toggle_fullscreen()
+	set name = "Toggle Fullscreen"
+	set category = "OOC"
+
+	var/current = winget(src, null, "fullscreen")
+	if (current == "true")
+		winset(src, null, "fullscreen=false")
+	else
+		winset(src, null, "fullscreen=true")
+
 /client/verb/fix_stat_panel()
 	set name = "Fix Stat Panel"
 	set hidden = TRUE
