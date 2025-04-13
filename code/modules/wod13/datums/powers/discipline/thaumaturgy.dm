@@ -221,6 +221,7 @@
 	name = "Cauldron of Blood"
 	desc = "Boil your target's blood in their body, killing almost anyone."
 
+	cooldown_length = 15.0 SECONDS
 	level = 5
 
 	//effect_sound = 'code/modules/wod13/sounds/bloodcauldron.ogg'
