@@ -203,7 +203,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/flavor_text
 	var/flavor_text_nsfw
 	var/ooc_notes
-	var/character_notes
+	var/character_notes = " "
 
 	var/friend_text
 	var/enemy_text
