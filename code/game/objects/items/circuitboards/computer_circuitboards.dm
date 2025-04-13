@@ -49,120 +49,6 @@
 	icon_state = "engineering"
 	build_path = /obj/machinery/computer/apc_control
 
-/obj/item/circuitboard/computer/atmos_alert
-	name = "Atmospheric Alert (Computer Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/computer/atmos_alert
-
-/obj/item/circuitboard/computer/atmos_control
-	name = "Atmospheric Monitor (Computer Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/computer/atmos_control
-
-/obj/item/circuitboard/computer/atmos_control/incinerator
-	name = "Incinerator Air Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/incinerator
-
-/obj/item/circuitboard/computer/atmos_control/toxinsmix
-	name = "Toxins Mixing Air Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/toxinsmix
-
-/obj/item/circuitboard/computer/atmos_control/tank
-	name = "Tank Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/oxygen_tank
-	name = "Oxygen Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/oxygen_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/toxin_tank
-	name = "Plasma Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/toxin_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/air_tank
-	name = "Mixed Air Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/air_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/mix_tank
-	name = "Gas Mix Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/mix_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/nitrous_tank
-	name = "Nitrous Oxide Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/nitrous_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/nitrogen_tank
-	name = "Nitrogen Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/nitrogen_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/carbon_tank
-	name = "Carbon Dioxide Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/carbon_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/bz_tank
-	name = "BZ Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/bz_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/freon_tank
-	name = "Freon Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/freon_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/halon_tank
-	name = "Halon Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/halon_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/healium_tank
-	name = "Healium Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/healium_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/hydrogen_tank
-	name = "Hydrogen Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/hydrogen_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/hypernoblium_tank
-	name = "Hypernoblium Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/hypernoblium_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/miasma_tank
-	name = "Miasma Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/miasma_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/nitryl_tank
-	name = "Nitryl Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/nitryl_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/pluoxium_tank
-	name = "Pluoxium Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/pluoxium_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/proto_nitrate_tank
-	name = "Proto-Nitrate Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/proto_nitrate_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/stimulum_tank
-	name = "Stimulum Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/stimulum_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/tritium_tank
-	name = "Tritium Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/tritium_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/water_vapor
-	name = "Water Vapor Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/water_vapor
-
-/obj/item/circuitboard/computer/atmos_control/tank/zauker_tank
-	name = "Zauker Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/zauker_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/helium_tank
-	name = "Helium Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/helium_tank
-
-/obj/item/circuitboard/computer/atmos_control/tank/antinoblium_tank
-	name = "Antinoblium Supply Control (Computer Board)"
-	build_path = /obj/machinery/computer/atmos_control/tank/antinoblium_tank
-
 /obj/item/circuitboard/computer/auxiliary_base
 	name = "Auxiliary Base Management Console (Computer Board)"
 	icon_state = "engineering"
@@ -223,16 +109,6 @@
 	icon_state = "engineering"
 	build_path = /obj/machinery/computer/station_alert
 
-/obj/item/circuitboard/computer/turbine_computer
-	name = "Turbine Computer (Computer Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/computer/turbine_computer
-
-/obj/item/circuitboard/computer/turbine_control
-	name = "Turbine control (Computer Board)"
-	icon_state = "engineering"
-	build_path = /obj/machinery/computer/turbine_computer
-
 //Generic
 
 /obj/item/circuitboard/computer/arcade/amputation
@@ -259,18 +135,20 @@
 	name = "Library Visitor Console (Computer Board)"
 	build_path = /obj/machinery/computer/libraryconsole
 
-/obj/item/circuitboard/computer/libraryconsole/attackby(obj/item/I, mob/user, params)
-	if(I.tool_behaviour == TOOL_SCREWDRIVER)
-		if(build_path == /obj/machinery/computer/bookmanagement)
-			name = "Library Visitor Console (Computer Board)"
-			build_path = /obj/machinery/computer/libraryconsole
-			to_chat(user, "<span class='notice'>Defaulting access protocols.</span>")
-		else
-			name = "Book Inventory Management Console (Computer Board)"
-			build_path = /obj/machinery/computer/bookmanagement
-			to_chat(user, "<span class='notice'>Access protocols successfully updated.</span>")
+/obj/item/circuitboard/computer/libraryconsole/bookconsole
+	name =  "Book Inventory Management Console (Machine Board)"
+	build_path = /obj/machinery/computer/libraryconsole/bookmanagement
+
+/obj/item/circuitboard/computer/libraryconsole/screwdriver_act(mob/living/user, obj/item/tool)
+	if(build_path == /obj/machinery/computer/libraryconsole/bookmanagement)
+		name = "Library Visitor Console (Computer Board)"
+		build_path = /obj/machinery/computer/libraryconsole
+		to_chat(user, span_notice("Defaulting access protocols."))
 	else
-		return ..()
+		name = "Book Inventory Management Console (Computer Board)"
+		build_path = /obj/machinery/computer/libraryconsole/bookmanagement
+		to_chat(user, span_notice("Access protocols successfully updated."))
+	return TRUE
 
 /obj/item/circuitboard/computer/monastery_shuttle
 	name = "Monastery Shuttle (Computer Board)"

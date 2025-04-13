@@ -13,9 +13,7 @@
 	meat = /obj/item/food/meat/slab/human/mutant/golem
 	sexes = 1
 	limbs_id = "mannequin"
-//	fixed_mut_color = "aaa"
 	use_skintones = FALSE
-//	var/last_spooked_out = 0
 
 /datum/species/vamp_mannequin/on_species_gain(mob/living/carbon/human/C)
 	. = ..()
@@ -47,9 +45,6 @@
 		walk_to(H, 0)
 
 /datum/species/vamp_mannequin/proc/do_spooky(var/mob/living/carbon/human/man)
-//	if(last_spooked_out+10 > world.time)
-//		return
-//	last_spooked_out = world.time
 	for(var/mob/living/L in range(7, man))
 		if(L.client)
 			man.face_atom(L)
@@ -70,5 +65,4 @@
 
 	if(prob(33))
 		var/turf/T = get_step(man, pick(NORTH, SOUTH, WEST, EAST))
-//		man.face_atom(T)
 		step_to(man,T,0)

@@ -63,7 +63,7 @@
 							"<span class='userdanger'>[M] [response_harm_continuous] you!</span>", null, COMBAT_MESSAGE_RANGE, M)
 			to_chat(M, "<span class='danger'>You [response_harm_simple] [src]!</span>")
 			playsound(loc, attacked_sound, 25, TRUE, -1)
-			attack_threshold_check(harm_intent_damage)
+			attack_threshold_check(M.dna.species.punchdamagelow)
 			log_combat(M, src, "attacked")
 			updatehealth()
 			return TRUE

@@ -1,8 +1,8 @@
 /datum/job/vamp/salubri
 	title = "Veterinarian"
 	faction = "Vampire"
-	total_positions = 6
-	spawn_positions = 6
+	total_positions = 12
+	spawn_positions = 12
 	supervisors = "the Traditions"
 	selection_color = "#df7058"
 	access = list()			//See /datum/job/assistant/get_access()
@@ -17,10 +17,11 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_SALUBRI
 
-	allowed_species = list("Vampire")
+	allowed_species = list("Vampire", "Ghoul", "Human")
+	species_slots = list("Vampire" = 6)
 
-	v_duty = "Follow the traditions of the Camarilla. Obey the Prince and their authority. The city belongs to him. Aligning yourself with your clan members would be of benefit."
-	duty = "One of the few Healer Salubri left within the city, maybe even in the world! You operate the Vet for any diseased or sick animals. You may have been an escaped member of The Seven or not. Regardless, you must hide and lay low."
+	v_duty = "One of the few Healer Salubri left within the city, maybe even in the world! You operate the Vet for any diseased or sick animals. You may have been an escaped member of The Seven or not. Regardless, you must hide and lay low."
+	duty = "You work in the local privately owned Veterinary Clinic, in the old ghetto. You might notice some oddities with the other workers, but they help people and are generally nice, right? Either way, you dont care enough to out them."
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Salubri")
 

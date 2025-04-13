@@ -3,9 +3,9 @@
 	title = "Priest"
 	department_head = list("Bishop")
 	faction = "Vampire"
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "God"
+	total_positions = 4
+	spawn_positions = 4
+	supervisors = "God ... And the Patron of the Church."
 	selection_color = "#fff700"
 
 	outfit = /datum/outfit/job/priest
@@ -17,11 +17,13 @@
 	display_order = JOB_DISPLAY_ORDER_PRIEST
 	exp_type_department = EXP_TYPE_CHURCH
 
-	allowed_species = list("Human")
+	allowed_species = list("Human", "Ghoul", "Vampire")
+	allowed_bloodlines = list("Lasombra","Toreador","Malkavian","Salubri","Cappadocian","Banu Haqim","Caitiff")
+	species_slots = list("Vampire" = 2)
 	minimal_generation = 13
 
-	duty = "Be the shepherd of the flock in San Francisco, lead them to salvation, piety and righteousness."
-	v_duty = "The mortals believe you to be their savior. The kindred look at you with suspicion. Yours is the charge of this church."
+	duty = "Be the shepherd of the flock in San Francisco, lead them to salvation, piety and righteousness, despite whatever oddities you may notice from the restricted Top Floor, and the Patron of the Church that you answer to."
+	v_duty = "Yours is the charge of this church and its safety, in diverting attention away from your kind. But behave when under the gaze of the true master of this shadowed Domain."
 	minimal_masquerade = 0
 	my_contact_is_important = FALSE
 
@@ -40,7 +42,8 @@
 
 /datum/outfit/job/priest/pre_equip(mob/living/carbon/human/H)
 	..()
-	add_verb(H, /datum/job/vampire/priest/verb/choose_special)
+	if(!iskindred(H))
+		add_verb(H, /datum/job/vampire/priest/verb/choose_special)
 
 /datum/job/vampire/priest/verb/choose_special()
 	set category = "Priest"

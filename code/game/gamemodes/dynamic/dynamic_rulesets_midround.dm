@@ -439,17 +439,6 @@
 /datum/dynamic_ruleset/midround/from_ghosts/xenomorph/execute()
 	// 50% chance of being incremented by one
 	required_candidates += prob(50)
-	for(var/obj/machinery/atmospherics/components/unary/vent_pump/temp_vent in GLOB.machines)
-		if(QDELETED(temp_vent))
-			continue
-		if(is_station_level(temp_vent.loc.z) && !temp_vent.welded)
-			var/datum/pipeline/temp_vent_parent = temp_vent.parents[1]
-			if(!temp_vent_parent)
-				continue // No parent vent
-			// Stops Aliens getting stuck in small networks.
-			// See: Security, Virology
-			if(temp_vent_parent.other_atmosmch.len > 20)
-				vents += temp_vent
 	if(!vents.len)
 		return FALSE
 	. = ..()

@@ -46,7 +46,7 @@
 	action.button_icon_state = "[base_icon_state][active]"
 	action.UpdateButtonIcon()
 
-/obj/effect/proc_holder/spell/aimed/InterceptClickOn(mob/living/caller, params, atom/target)
+/obj/effect/proc_holder/spell/aimed/InterceptClickOn(mob/living/clicker, params, atom/target)
 	if(..())
 		return FALSE
 	var/ran_out = (current_amount <= 0)
@@ -199,6 +199,7 @@
 	projectile_type = /obj/projectile/magic/aoe/fireball/baali
 	base_icon_state = "infernaball"
 	action_icon_state = "infernaball0"
+	action_background_icon_state = "default"
 	sound = 'sound/magic/fireball.ogg'
 	active_msg = "You prepare to cast your fireball spell!"
 	deactive_msg = "You extinguish your fireball... for now."

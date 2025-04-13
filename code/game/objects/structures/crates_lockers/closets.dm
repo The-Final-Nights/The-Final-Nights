@@ -152,7 +152,7 @@
 	for(var/atom/movable/AM in L)
 		if(AM != src && insert(AM) == -1) // limit reached
 			break
-	for(var/i in reverseRange(L.GetAllContents()))
+	for(var/i in reverse_range(L.GetAllContents()))
 		var/atom/movable/thing = i
 		SEND_SIGNAL(thing, COMSIG_TRY_STORAGE_HIDE_ALL)
 
@@ -521,7 +521,3 @@
 
 /obj/structure/closet/AllowDrop()
 	return TRUE
-
-
-/obj/structure/closet/return_temperature()
-	return

@@ -71,18 +71,6 @@
 	///Whether or not the mech destroys walls by running into it.
 	var/bumpsmash = FALSE
 
-	///////////ATMOS
-	///Whether we are currrently drawing from the internal tank
-	var/use_internal_tank = FALSE
-	///The setting of the valve on the internal tank
-	var/internal_tank_valve = ONE_ATMOSPHERE
-	///The internal air tank obj of the mech
-	var/obj/machinery/portable_atmospherics/canister/internal_tank
-	///Internal air mix datum
-	var/datum/gas_mixture/cabin_air
-	///The connected air port, if we have one
-	var/obj/machinery/atmospherics/components/unary/portables_connector/connected_port
-
 	///Special version of the radio, which is unsellable
 	var/obj/item/radio/mech/radio
 	var/list/trackers = list()
@@ -174,10 +162,6 @@
 /obj/vehicle/sealed/mecha/Initialize()
 	. = ..()
 	add_radio()
-	add_cabin()
-	if(enclosed)
-		add_airtank()
-		RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE , PROC_REF(disconnect_air))
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(play_stepsound))
 	spark_system.set_up(2, 0, src)
 	spark_system.attach(src)
@@ -198,10 +182,6 @@
 	diag_hud_set_mechstat()
 	update_icon()
 
-/obj/mecha/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/atmos_sensitive)
-
 /obj/vehicle/sealed/mecha/Destroy()
 	for(var/M in occupants)
 		var/mob/living/occupant = M
@@ -218,15 +198,8 @@
 	QDEL_NULL(cell)
 	QDEL_NULL(scanmod)
 	QDEL_NULL(capacitor)
-	QDEL_NULL(internal_tank)
 	STOP_PROCESSING(SSobj, src)
 	LAZYCLEARLIST(equipment)
-	if(loc)
-		loc.assume_air(cabin_air)
-		air_update_turf(FALSE, FALSE)
-	else
-		qdel(cabin_air)
-	cabin_air = null
 	QDEL_NULL(spark_system)
 	QDEL_NULL(smoke_system)
 
@@ -280,10 +253,6 @@
 ////// Helpers /////////
 ////////////////////////
 
-/obj/vehicle/sealed/mecha/proc/add_airtank()
-	internal_tank = new /obj/machinery/portable_atmospherics/canister/air(src)
-	return internal_tank
-
 ///Adds a cell, for use in Map-spawned mechs, Nuke Ops mechs, and admin-spawned mechs. Mechs built by hand will replace this.
 /obj/vehicle/sealed/mecha/proc/add_cell(obj/item/stock_parts/cell/C=null)
 	QDEL_NULL(cell)
@@ -310,15 +279,6 @@
 		capacitor = cap
 	else
 		capacitor = new /obj/item/stock_parts/capacitor(src)
-
-/obj/vehicle/sealed/mecha/proc/add_cabin()
-	cabin_air = new
-	cabin_air.temperature = T20C
-	cabin_air.volume = 200
-	cabin_air.add_gases(/datum/gas/oxygen, /datum/gas/nitrogen)
-	cabin_air.gases[/datum/gas/oxygen][MOLES] = O2STANDARD*cabin_air.volume/(R_IDEAL_GAS_EQUATION*cabin_air.temperature)
-	cabin_air.gases[/datum/gas/nitrogen][MOLES] = N2STANDARD*cabin_air.volume/(R_IDEAL_GAS_EQUATION*cabin_air.temperature)
-	return cabin_air
 
 /obj/vehicle/sealed/mecha/proc/add_radio()
 	radio = new(src)
@@ -373,71 +333,17 @@
 
 //processing internal damage, temperature, air regulation, alert updates, lights power use.
 /obj/vehicle/sealed/mecha/process(delta_time)
-	var/internal_temp_regulation = 1
 
 	if(internal_damage)
 		if(internal_damage & MECHA_INT_FIRE)
 			if(!(internal_damage & MECHA_INT_TEMP_CONTROL) && DT_PROB(2.5, delta_time))
 				clearInternalDamage(MECHA_INT_FIRE)
-			if(internal_tank)
-				var/datum/gas_mixture/int_tank_air = internal_tank.return_air()
-				if(int_tank_air.return_pressure() > internal_tank.maximum_pressure && !(internal_damage & MECHA_INT_TANK_BREACH))
-					setInternalDamage(MECHA_INT_TANK_BREACH)
-				if(int_tank_air && int_tank_air.return_volume() > 0) //heat the air_contents
-					int_tank_air.temperature = min(6000+T0C, int_tank_air.temperature+rand(5,7.5)*delta_time)
-			if(cabin_air && cabin_air.return_volume()>0)
-				cabin_air.temperature = min(6000+T0C, cabin_air.return_temperature()+rand(5,7.5)*delta_time)
-				if(cabin_air.return_temperature() > max_temperature/2)
-					take_damage(delta_time*2/round(max_temperature/cabin_air.return_temperature(),0.1), BURN, 0, 0)
-
-		if(internal_damage & MECHA_INT_TEMP_CONTROL)
-			internal_temp_regulation = 0
-
-		if(internal_damage & MECHA_INT_TANK_BREACH) //remove some air from internal tank
-			if(internal_tank)
-				var/datum/gas_mixture/int_tank_air = internal_tank.return_air()
-				var/datum/gas_mixture/leaked_gas = int_tank_air.remove_ratio(DT_PROB_RATE(0.05, delta_time))
-				if(loc)
-					loc.assume_air(leaked_gas)
-					air_update_turf(FALSE, FALSE)
-				else
-					qdel(leaked_gas)
 
 		if(internal_damage & MECHA_INT_SHORT_CIRCUIT)
 			if(get_charge())
 				spark_system.start()
 				cell.charge -= min(10 * delta_time, cell.charge)
 				cell.maxcharge -= min(10 * delta_time, cell.maxcharge)
-
-	if(internal_temp_regulation)
-		if(cabin_air && cabin_air.return_volume() > 0)
-			var/delta = cabin_air.temperature - T20C
-			cabin_air.temperature -= clamp(round(delta / 8, 0.1), -5, 5) * delta_time
-
-	if(internal_tank)
-		var/datum/gas_mixture/tank_air = internal_tank.return_air()
-
-		var/release_pressure = internal_tank_valve
-		var/cabin_pressure = cabin_air.return_pressure()
-		var/pressure_delta = min(release_pressure - cabin_pressure, (tank_air.return_pressure() - cabin_pressure)/2)
-		var/transfer_moles = 0
-		if(pressure_delta > 0) //cabin pressure lower than release pressure
-			if(tank_air.return_temperature() > 0)
-				transfer_moles = pressure_delta*cabin_air.return_volume()/(cabin_air.return_temperature() * R_IDEAL_GAS_EQUATION)
-				var/datum/gas_mixture/removed = tank_air.remove(transfer_moles)
-				cabin_air.merge(removed)
-		else if(pressure_delta < 0) //cabin pressure higher than release pressure
-			var/datum/gas_mixture/t_air = return_air()
-			pressure_delta = cabin_pressure - release_pressure
-			if(t_air)
-				pressure_delta = min(cabin_pressure - t_air.return_pressure(), pressure_delta)
-			if(pressure_delta > 0) //if location pressure is lower than cabin pressure
-				transfer_moles = pressure_delta*cabin_air.return_volume()/(cabin_air.return_temperature() * R_IDEAL_GAS_EQUATION)
-				var/datum/gas_mixture/removed = cabin_air.remove(transfer_moles)
-				if(t_air)
-					t_air.merge(removed)
-				else //just delete the cabin gas, we're in space or some shit
-					qdel(removed)
 
 	if(LAZYLEN(occupants))
 		for(var/i in occupants)
@@ -585,12 +491,6 @@
 		return
 	playsound(src, stepsound, 40, TRUE)
 
-/obj/vehicle/sealed/mecha/proc/disconnect_air()
-	SIGNAL_HANDLER
-	if(internal_tank.disconnect()) // Something moved us and broke connection
-		to_chat(occupants, "[icon2html(src, occupants)]<span class='warning'>Air port connection has been severed!</span>")
-		log_message("Lost connection to gas port.", LOG_MECHA)
-
 /obj/vehicle/sealed/mecha/Process_Spacemove(movement_dir = 0)
 	. = ..()
 	if(.)
@@ -622,11 +522,6 @@
 	if(completely_disabled)
 		return FALSE
 	if(!direction)
-		return FALSE
-	if(internal_tank?.connected_port)
-		if(!TIMER_COOLDOWN_CHECK(src, COOLDOWN_MECHA_MESSAGE))
-			to_chat(occupants, "[icon2html(src, occupants)]<span class='warning'>Unable to move while connected to the air system port!</span>")
-			TIMER_COOLDOWN_START(src, COOLDOWN_MECHA_MESSAGE, 2 SECONDS)
 		return FALSE
 	if(construction_state)
 		if(!TIMER_COOLDOWN_CHECK(src, COOLDOWN_MECHA_MESSAGE))
@@ -785,7 +680,7 @@
 			to_chat(user, "[B.get_mecha_info()]")
 			break
 		//Nothing like a big, red link to make the player feel powerful!
-		to_chat(user, "<a href='?src=[REF(user)];ai_take_control=[REF(src)]'><span class='userdanger'>ASSUME DIRECT CONTROL?</span></a><br>")
+		to_chat(user, "<a href='byond://?src=[REF(user)];ai_take_control=[REF(src)]'><span class='userdanger'>ASSUME DIRECT CONTROL?</span></a><br>")
 	else
 		examine(user)
 		if(length(return_drivers()) > 0)
@@ -799,7 +694,7 @@
 		if(!can_control_mech)
 			to_chat(user, "<span class='warning'>You cannot control exosuits without AI control beacons installed.</span>")
 			return
-		to_chat(user, "<a href='?src=[REF(user)];ai_take_control=[REF(src)]'><span class='boldnotice'>Take control of exosuit?</span></a><br>")
+		to_chat(user, "<a href='byond://?src=[REF(user)];ai_take_control=[REF(src)]'><span class='boldnotice'>Take control of exosuit?</span></a><br>")
 
 /obj/vehicle/sealed/mecha/transfer_ai(interaction, mob/user, mob/living/silicon/ai/AI, obj/item/aicard/card)
 	. = ..()
@@ -905,29 +800,6 @@
 ////////  Atmospheric stuff  ////////
 /////////////////////////////////////
 
-/obj/vehicle/sealed/mecha/remove_air(amount)
-	if(use_internal_tank)
-		return cabin_air.remove(amount)
-	return ..()
-
-/obj/vehicle/sealed/mecha/return_air()
-	if(use_internal_tank)
-		return cabin_air
-	return ..()
-
-/obj/vehicle/sealed/mecha/return_analyzable_air()
-	return cabin_air
-
-/obj/vehicle/sealed/mecha/proc/return_pressure()
-	var/datum/gas_mixture/t_air = return_air()
-	if(t_air)
-		return t_air.return_pressure()
-
-/obj/vehicle/sealed/mecha/return_temperature()
-	var/datum/gas_mixture/t_air = return_air()
-	if(t_air)
-		return t_air.return_temperature()
-
 /obj/vehicle/sealed/mecha/mob_try_enter(mob/M)
 	if(!ishuman(M)) // no silicons or drones in mechas.
 		return
@@ -974,7 +846,6 @@
 
 /obj/vehicle/sealed/mecha/generate_actions()
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_eject)
-	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_toggle_internals)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_cycle_equip)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_toggle_lights)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_view_stats)

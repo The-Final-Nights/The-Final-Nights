@@ -1,3 +1,5 @@
+// Look into #71978 when porting proc_holders > /datum/action
+
 /obj/effect/proc_holder/spell/targeted/touch
 	var/hand_path = /obj/item/melee/touch_attack
 	var/obj/item/melee/touch_attack/attached_hand = null
@@ -89,7 +91,7 @@
 	desc = "A spell that summons a duffel bag demon on the target, slowing them down and slowly eating them."
 	hand_path = /obj/item/melee/touch_attack/duffelbag
 	action_icon_state = "duffelbag_curse"
-	
+
 	school = "conjuration"
 	charge_max = 60
 	clothes_req = FALSE

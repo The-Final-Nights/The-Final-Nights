@@ -47,7 +47,7 @@
 	if(pickednum == 1)
 		var/obj/item/paper/P = new /obj/item/paper(src)
 		P.name = "\improper IOU"
-		P.info = "Sorry man, we needed the money so we sold your stash. It's ok, we'll double our money for sure this time!"
+		P.add_raw_text("Sorry man, we needed the money so we sold your stash. It's ok, we'll double our money for sure this time!")
 
 	//Metal (common ore)
 	if(pickednum >= 2)
@@ -89,9 +89,6 @@
 	if(pickednum >= 45)
 		new /obj/item/stack/sheet/mineral/diamond(src, rand(rare_min, rare_max))
 
-	//Jetpack (You hit the jackpot!)
-	if(pickednum == 50)
-		new /obj/item/tank/jetpack/carbondioxide(src)
 
 /obj/structure/closet/syndicate/resources/everything
 	desc = "It's an emergency storage closet for repairs."

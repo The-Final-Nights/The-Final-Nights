@@ -17,6 +17,7 @@
 	desc = "Make those around you admire and want to be closer to you."
 
 	level = 1
+	vitae_cost = 0
 
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_SPEAK
 	target_type = TARGET_HUMAN
@@ -43,17 +44,15 @@
 	target.overlays_standing[MUTATIONS_LAYER] = presence_overlay
 	target.apply_overlay(MUTATIONS_LAYER)
 
-	var/datum/cb = CALLBACK(target, /mob/living/carbon/human/proc/walk_to_caster, owner)
-	for(var/i in 1 to 30)
-		addtimer(cb, (i - 1) * target.total_multiplicative_slowdown())
+	target.apply_status_effect(STATUS_EFFECT_AWE, owner)
 	to_chat(target, "<span class='userlove'><b>COME HERE</b></span>")
-	owner.say("COME HERE!!")
+	owner.say("Come here.")
 
 /datum/discipline_power/presence/awe/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-/mob/living/carbon/human/proc/walk_to_caster(mob/living/step_to)
+/mob/living/carbon/proc/walk_to_caster(mob/living/step_to)
 	walk(src, 0)
 	if(!CheckFrenzyMove())
 		set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))

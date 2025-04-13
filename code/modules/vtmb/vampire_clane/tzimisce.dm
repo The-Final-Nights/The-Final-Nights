@@ -2,9 +2,6 @@
 	name = CLAN_TZIMISCE
 	desc = "If someone were to call a Tzimisce inhuman and sadistic, the Tzimisce would probably commend them for their perspicacity, and then demonstrate that their mortal definition of sadism was laughably inadequate. The Tzimisce have left the human condition behind gladly, and now focus on transcending the limitations of the vampiric state. At a casual glance or a brief conversation, a Tzimisce appears to be one of the more pleasant vampires. Polite, intelligent, and inquisitive, they seem a stark contrast to the howling Sabbat mobs or even the apparently more humane Brujah or Nosferatu. However, upon closer inspection, it becomes clear that this is merely a mask hiding something alien and monstrous."
 	curse = "Grounded to material domain."
-//	alt_sprite = "tzi"
-//	no_hair = TRUE
-//	no_facial = TRUE	//FUCK WRONG RULEBOOK
 	clane_disciplines = list(
 		/datum/discipline/auspex,
 		/datum/discipline/animalism,
@@ -14,7 +11,7 @@
 	male_clothes = /obj/item/clothing/under/vampire/sport
 	female_clothes = /obj/item/clothing/under/vampire/red
 	clan_keys = /obj/item/vamp/keys/tzimisce
-	enlightenment = TRUE
+	is_enlightened = TRUE
 	var/obj/item/heirl
 	whitelisted = FALSE // dont ruin it
 	current_accessory = "none"
@@ -118,6 +115,30 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzicreature
+	name = "Wretched Creature"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/organ/brain = 1, )
+	result = /obj/item/toy/plush/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tziregenerativecore
+	name = "Pulsating Heart"
+	time = 50
+	reqs = list(/obj/item/organ/heart = 1, /obj/item/drinkable_bloodpack/elite = 1)
+	result = /obj/item/organ/regenerative_core/legion/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/axetzi
+	name = "Living Axe"
+	time = 50
+	reqs = list(/obj/item/organ/eyes = 1, /obj/item/spine = 2, /obj/item/stack/human_flesh = 40)
+	result = /obj/item/melee/vampirearms/fireaxe/axetzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_floor
 	name = "Gut Floor"
 	time = 50
@@ -126,11 +147,35 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzi_floor_living
+	name = "Writhing Floor"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 1, /obj/item/guts = 1)
+	result = /turf/open/indestructible/necropolis
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_wall
 	name = "Flesh Wall"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 2)
 	result = /obj/structure/fleshwall
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzijelly
+	name = "Living Meat Node"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/toy/plush/tzi = 1)
+	result = /obj/structure/tzijelly
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/cattzi
+	name = "flesh feline"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/spine = 1, /obj/item/toy/plush/tzi = 1)
+	result = /mob/living/simple_animal/pet/cat/vampiretzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -258,7 +303,6 @@
 	minbodytemp = 0
 	maxbodytemp = 1500
 	faction = list("Tzimisce")
-	pressure_resistance = 200
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 2
 	maxbloodpool = 2
@@ -346,12 +390,12 @@
 	mob_size = MOB_SIZE_HUGE
 	speak_chance = 0
 	speed = -0.4
-	maxHealth = 400
-	health = 400
+	maxHealth = 275
+	health = 275
 	butcher_results = list(/obj/item/stack/human_flesh = 10)
 	harm_intent_damage = 5
-	melee_damage_lower = 40
-	melee_damage_upper = 40
+	melee_damage_lower = 30
+	melee_damage_upper = 30
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
@@ -365,19 +409,19 @@
 	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 
 /mob/living/simple_animal/hostile/gangrel/better
-	maxHealth = 500
-	health = 500
-	melee_damage_lower = 45
-	melee_damage_upper = 45
+	maxHealth = 325
+	health = 325
+	melee_damage_lower = 35
+	melee_damage_upper = 35
 	speed = -0.6
 
 /mob/living/simple_animal/hostile/gangrel/best
 	icon_state = "gangrel_m"
 	icon_living = "gangrel_m"
-	maxHealth = 600
-	health = 600
-	melee_damage_lower = 55
-	melee_damage_upper = 55
+	maxHealth = 400 //More in line with new health values.
+	health = 400
+	melee_damage_lower = 40
+	melee_damage_upper = 40
 	speed = -0.8
 
 /mob/living/simple_animal/hostile/gargoyle
@@ -558,4 +602,3 @@
 		playsound(get_turf(M), 'sound/misc/splort.ogg', 50, 1)
 		desc += "Looks like it's been used up."
 
-//GiveSpeciesFlight(mob/living/carbon/human/H)

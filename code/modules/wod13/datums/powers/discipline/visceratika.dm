@@ -115,7 +115,7 @@
 	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
 
 	owner.name_override = null
-	owner.status_flags &= GODMODE
+	owner.status_flags &= ~GODMODE
 	owner.remove_atom_colour(FIXED_COLOUR_PRIORITY)
 
 	for(var/obj/item/stuff in owner.contents)

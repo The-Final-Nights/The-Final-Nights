@@ -1,9 +1,9 @@
 /datum/job/vamp/lasombra
-	title = "Old Church Caretaker"
+	title = "Church Caretaker"
 	faction = "Vampire"
-	total_positions = 5
-	spawn_positions = 5
-	supervisors = "Courts of Blood"
+	total_positions = 12
+	spawn_positions = 12
+	supervisors = "Your Primogen."
 	selection_color = "#df7058"
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
@@ -17,10 +17,11 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_LASOMBRA
 
-	allowed_species = list("Vampire")
+	allowed_species = list("Vampire", "Ghoul")
+	species_slots = list("Vampire" = 6)
 
-	v_duty = "Follow the traditions of the Camarilla. Obey the Prince and their authority. The city belongs to him. Aligning yourself with your clan members would be of benefit."
-	duty = "You are a member of the Amis Noir within Clan Lasombra! You maintain the gradually collapsing church that was set up along the pier that became a historical site."
+	v_duty = "You are a member of the local Lasombra! You maintain the haven set up in the attic of the local Church, owned by your Clan Primogen."
+	duty = "You are a Ghoul in service to the local Lasombra or its Primogen, get used to the dark of the upper floors and good luck with what you will endure. They rely on you, as much as they may say otherwise."
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Lasombra")
 

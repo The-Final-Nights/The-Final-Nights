@@ -441,26 +441,6 @@
 				SEND_SIGNAL(M, COMSIG_ATOM_USED_IN_CRAFT, src)
 		parts_list.Cut()
 
-///Take air from the passed in gas mixture datum
-/atom/proc/assume_air(datum/gas_mixture/giver)
-	qdel(giver)
-	return null
-
-///Remove air from this atom
-/atom/proc/remove_air(amount)
-	return null
-
-///Return the current air environment in this atom
-/atom/proc/return_air()
-	if(loc)
-		return loc.return_air()
-	else
-		return null
-
-///Return the air if we can analyze it
-/atom/proc/return_analyzable_air()
-	return null
-
 ///Check if this atoms eye is still alive (probably)
 /atom/proc/check_eye(mob/user)
 	return
@@ -807,15 +787,6 @@
 ///Respond to the singularity eating this atom
 /atom/proc/singularity_act()
 	return
-
-/**
- * Respond to the singularity pulling on us
- *
- * Default behaviour is to send [COMSIG_ATOM_SING_PULL] and return
- */
-/atom/proc/singularity_pull(obj/singularity/S, current_size)
-	SEND_SIGNAL(src, COMSIG_ATOM_SING_PULL, S, current_size)
-
 
 /**
  * Respond to acid being used on our atom
@@ -1208,7 +1179,7 @@
 	. = ..()
 	var/refid = REF(src)
 	. += "[VV_HREF_TARGETREF(refid, VV_HK_AUTO_RENAME, "<b id='name'>[src]</b>")]"
-	. += "<br><font size='1'><a href='?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=left'><<</a> <a href='?_src_=vars;[HrefToken()];datumedit=[refid];varnameedit=dir' id='dir'>[dir2text(dir) || dir]</a> <a href='?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=right'>>></a></font>"
+	. += "<br><font size='1'><a href='byond://?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=left'><<</a> <a href='byond://?_src_=vars;[HrefToken()];datumedit=[refid];varnameedit=dir' id='dir'>[dir2text(dir) || dir]</a> <a href='byond://?_src_=vars;[HrefToken()];rotatedatum=[refid];rotatedir=right'>>></a></font>"
 
 ///Where atoms should drop if taken from this atom
 /atom/proc/drop_location()
@@ -1248,10 +1219,6 @@
  */
 /atom/Exited(atom/movable/AM, atom/newLoc)
 	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, AM, newLoc)
-
-///Return atom temperature
-/atom/proc/return_temperature()
-	return
 
 /**
  *Tool behavior procedure. Redirects to tool-specific procs by default.
@@ -1431,6 +1398,8 @@
 			log_mecha(log_text)
 		if(LOG_SHUTTLE)
 			log_shuttle(log_text)
+		if(LOG_SPEECH_INDICATORS)
+			log_speech_indicators(log_text)
 		else
 			stack_trace("Invalid individual logging type: [message_type]. Defaulting to [LOG_GAME] (LOG_GAME).")
 			log_game(log_text)
@@ -1769,6 +1738,15 @@
 				max_grav = max(G.setting,max_grav)
 			return max_grav
 	return SSmapping.level_trait(T.z, ZTRAIT_GRAVITY)
+
+///Setter for the `density` variable to append behavior related to its changing.
+/atom/proc/set_density(new_value)
+	SHOULD_CALL_PARENT(TRUE)
+	if(density == new_value)
+		return
+	. = density
+	density = new_value
+	SEND_SIGNAL(src, COMSIG_ATOM_DENSITY_CHANGED)
 
 /**
  * Causes effects when the atom gets hit by a rust effect from heretics

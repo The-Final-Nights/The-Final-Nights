@@ -146,10 +146,14 @@
 	for(var/mob/living/L in get_hearers_in_view(8, user))
 		if(L.can_hear() && !L.anti_magic_check(FALSE, TRUE) && L.stat != DEAD)
 			var/dominate_me = FALSE
+			var/theirpower = L.get_total_mentality()
+			var/mob/living/carbon/human/conditioner = L.conditioner?.resolve()
 			if(L == user && !include_speaker)
 				continue
 			if(ishuman(L))
 				var/mob/living/carbon/human/H = L
+				if(L.conditioned)
+					theirpower += 3
 				if(H.clane)
 					if(H.clane.name == "Gargoyle")
 						dominate_me = TRUE
@@ -157,8 +161,9 @@
 					continue
 			if(user.generation > L.generation && !dominate_me) //Dominate can't be used on lower Generations
 				continue
-			if((user.get_total_social() <= L.get_total_mentality()) && !dominate_me) //Dominate must defeat resistance
-				continue
+			if(user != conditioner)
+				if((user.get_total_social() <= theirpower) && !dominate_me) //Dominate must defeat resistance
+					continue
 			if(L.resistant_to_disciplines)
 				continue
 			listeners += L
@@ -217,6 +222,16 @@
 		power_multiplier *= (1 + (1/specific_listeners.len)) //2x on a single guy, 1.5x on two and so on
 		message = copytext(message, length(found_string) + 1)
 
+	for(var/affected in listeners)
+		if(ishuman(affected))
+			var/mob/living/carbon/human/dominate_target = affected
+			dominate_target.remove_overlay(MUTATIONS_LAYER)
+			var/mutable_appearance/dominate_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dominate", -MUTATIONS_LAYER)
+			dominate_overlay.pixel_z = 2
+			dominate_target.overlays_standing[MUTATIONS_LAYER] = dominate_overlay
+			dominate_target.apply_overlay(MUTATIONS_LAYER)
+			addtimer(CALLBACK(dominate_target, TYPE_PROC_REF(/mob/living/carbon/human, post_dominate_checks), dominate_target), 2 SECONDS)
+
 	//removed some keywords as they don't fit mental domination
 	var/static/regex/stun_words = regex("stop|wait|stand still|hold on|halt|cease")
 	var/static/regex/knockdown_words = regex("drop|fall|trip|knockdown")
@@ -236,7 +251,6 @@
 	var/static/regex/whoareyou_words = regex("who are you|say your name|state your name|identify")
 	var/static/regex/saymyname_words = regex("say my name|who am i|whoami")
 	var/static/regex/knockknock_words = regex("knock knock")
-	//var/static/regex/statelaws_words = regex("state laws|state your laws")
 	var/static/regex/move_words = regex("move|walk")
 	var/static/regex/left_words = regex("left|west|port")
 	var/static/regex/right_words = regex("right|east|starboard")
@@ -259,7 +273,6 @@
 	var/static/regex/salute_words = regex("salute")
 	var/static/regex/deathgasp_words = regex("play dead")
 	var/static/regex/clap_words = regex("clap|applaud")
-	var/static/regex/honk_words = regex("ho+nk") //hooooooonk
 	var/static/regex/multispin_words = regex("like a record baby|right round")
 
 	var/i = 0
@@ -407,14 +420,6 @@
 			var/mob/living/L = V
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/atom/movable, say), "Who's there?"), 5 * i)
 			i++
-
-	//STATE LAWS
-	/*
-	else if((findtext(message, statelaws_words)))
-		cooldown = COOLDOWN_STUN
-		for(var/mob/living/silicon/S in listeners)
-			S.statelaws(force = 1)
-	*/
 
 	//MOVE
 	else if((findtext(message, move_words)))
@@ -568,15 +573,6 @@
 			var/mob/living/L = V
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living/, emote), "clap"), 5 * i)
 			i++
-
-	//HONK
-	else if((findtext(message, honk_words)))
-		cooldown = COOLDOWN_MEME
-		addtimer(CALLBACK(GLOBAL_PROC, PROC_REF(playsound), get_turf(user), 'sound/items/bikehorn.ogg', 300, 1), 25)
-		if(user.mind && user.mind.assigned_role == "Clown")
-			for(var/mob/living/carbon/C in listeners)
-				C.slip(140 * power_multiplier)
-			cooldown = COOLDOWN_MEME
 
 	//RIGHT ROUND
 	else if((findtext(message, multispin_words)))

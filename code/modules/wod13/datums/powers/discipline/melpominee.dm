@@ -17,6 +17,7 @@
 	desc = "Throw your voice to any place you can see."
 
 	level = 1
+	vitae_cost = 0
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_SPEAK
 	target_type = TARGET_OBJ | TARGET_LIVING
 	range = 7
@@ -63,7 +64,7 @@
 		difficulty_malus = 0
 		if (get_dist(hearer, target) > 3)
 			difficulty_malus += 1
-		if (storyteller_roll(hearer.get_total_mentality(), base_difficulty + difficulty_malus) == ROLL_SUCCESS)
+		if (SSroll.storyteller_roll(hearer.get_total_mentality(), base_difficulty + difficulty_malus, mobs_to_show_output = hearer) == ROLL_SUCCESS)
 			if (masked)
 				to_chat(hearer, span_warning("[target]'s jaw isn't moving to match [target.p_their()] words."))
 			else
@@ -75,6 +76,7 @@
 	desc = "Project your voice to anyone you've met, speaking to them from afar."
 
 	level = 2
+	vitae_cost = 0
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_SPEAK
 
 	cooldown_length = 5 SECONDS

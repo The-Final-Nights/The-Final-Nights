@@ -1,10 +1,4 @@
 
-/mob/living/carbon/werewolf/get_eye_protection()
-	return ..() + 2 //potential cyber implants + natural eye protection
-
-/mob/living/carbon/werewolf/get_ear_protection()
-	return 2 //no ears
-
 /mob/living/carbon/werewolf/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	..(AM, skipcatch = TRUE, hitpush = FALSE)
 
@@ -79,13 +73,13 @@
 	if(..())
 		switch(M.a_intent)
 			if ("harm")
-				var/damage = rand(1, 9)
+				var/damage = M.dna.species.punchdamagelow
 				if (prob(90))
 					playsound(loc, "punch", 25, TRUE, -1)
 					visible_message("<span class='danger'>[M] punches [src]!</span>", \
 									"<span class='userdanger'>[M] punches you!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
 					to_chat(M, "<span class='danger'>You punch [src]!</span>")
-					if ((stat != DEAD) && (damage > 9 || prob(5)))//Regular humans have a very small chance of knocking an alien down.
+					if ((stat != DEAD) && (prob(5)))//Regular humans have a very small chance of knocking an alien down.
 						Unconscious(3 SECONDS)
 						visible_message("<span class='danger'>[M] knocks [src] down!</span>", \
 										"<span class='userdanger'>[M] knocks you down!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", null, M)

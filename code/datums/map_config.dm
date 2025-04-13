@@ -5,7 +5,7 @@
 
 /datum/map_config
 	// Metadata
-	var/config_filename = "_maps/metastation.json"
+	var/config_filename = "_maps/kindredcity.json"
 	var/defaulted = TRUE  // set to FALSE by LoadConfig() succeeding
 	// Config from maps.txt
 	var/config_max_users = 0
@@ -14,9 +14,9 @@
 	var/votable = FALSE
 
 	// Config actually from the JSON - should default to Meta
-	var/map_name = "Meta Station"
-	var/map_path = "map_files/MetaStation"
-	var/map_file = "MetaStation.dmm"
+	var/map_name = "San Francisco"
+	var/map_path = "map_files/Vampire"
+	var/map_file = "SanFrancisco.dmm"
 
 	var/traits = null
 	var/space_ruin_levels = 0
@@ -33,6 +33,8 @@
 
 	/// Dictionary of job sub-typepath to template changes dictionary
 	var/job_changes = list()
+	/// List of additional areas that count as a part of the library
+	var/library_areas = list()
 
 /proc/load_map_config(filename = "data/next_map.json", default_to_box, delete_after, error_if_missing = TRUE)
 	var/datum/map_config/config = new
@@ -83,7 +85,7 @@
 	map_path = json["map_path"]
 
 	map_file = json["map_file"]
-	// "map_file": "MetaStation.dmm"
+	// "map_file": "SanFrancisco.dmm"
 	if (istext(map_file))
 		if (!fexists("_maps/[map_path]/[map_file]"))
 			log_world("Map file ([map_path]/[map_file]) does not exist!")
@@ -144,6 +146,17 @@
 			log_world("map_config \"job_changes\" field is missing or invalid!")
 			return
 		job_changes = json["job_changes"]
+	
+	if("library_areas" in json)
+		if(!islist(json["library_areas"]))
+			log_world("map_config \"library_areas\" field is missing or invalid!")
+			return
+		for(var/path_as_text in json["library_areas"])
+			var/path = text2path(path_as_text)
+			if(!ispath(path, /area))
+				stack_trace("Invalid path in mapping config for additional library areas: \[[path_as_text]\]")
+				continue
+			library_areas += path
 
 	defaulted = FALSE
 	return TRUE

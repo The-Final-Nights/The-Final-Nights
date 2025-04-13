@@ -171,7 +171,7 @@
 	icon_state = "deagle"
 	ammo_type = /obj/item/ammo_casing/vampire/c50
 	caliber = CALIBER_50
-	max_ammo = 7
+	max_ammo = 7 //Can't touch this without breaking the sprite because its using .44 mag sprites.
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 
 /obj/item/gun/ballistic/automatic/vampire/deagle/c50
@@ -180,6 +180,7 @@
 	icon_state = "deagle50"
 	inhand_icon_state = "deagle"
 	worn_icon_state = "deagle"
+	weapon_weight = WEAPON_HEAVY // No dual-wielding .50 cals.
 	mag_type = /obj/item/ammo_box/magazine/m50
 	fire_sound_volume = 125 //MY EARS
 
@@ -436,6 +437,7 @@
 	inhand_icon_state = "rifle"
 	worn_icon_state = "rifle"
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_MEDIUM
 	mag_type = /obj/item/ammo_box/magazine/vamp556
 	burst_size = 2
 	fire_delay = 2
@@ -455,6 +457,7 @@
 	inhand_icon_state = "huntrifle"
 	worn_icon_state = "huntrifle"
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_MEDIUM
 	mag_type = /obj/item/ammo_box/magazine/vamp556/hunt
 	burst_size = 1
 	fire_delay = 1
@@ -487,6 +490,7 @@
 	inhand_icon_state = "ak74"
 	worn_icon_state = "ak74"
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_MEDIUM
 	mag_type = /obj/item/ammo_box/magazine/vamp545
 	recoil = 5
 	burst_size = 3
@@ -520,6 +524,7 @@
 	inhand_icon_state = "aug"
 	worn_icon_state = "aug"
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_MEDIUM //Bullpup makes it easy to fire with one hand, but we still don't want these dual-wielded
 	mag_type = /obj/item/ammo_box/magazine/vampaug
 	burst_size = 3
 	fire_delay = 2
@@ -553,6 +558,7 @@
 	inhand_icon_state = "thompson"
 	worn_icon_state = "thompson"
 	w_class = WEIGHT_CLASS_NORMAL
+	weapon_weight = WEAPON_MEDIUM
 	mag_type = /obj/item/ammo_box/magazine/vampthompson
 	recoil = 7
 	burst_size = 5
@@ -581,6 +587,7 @@
 	inhand_icon_state = "sniper"
 	worn_icon_state = "sniper"
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_HEAVY
 	mag_type = /obj/item/ammo_box/magazine/internal/vampire/sniper
 	bolt_wording = "bolt"
 	bolt_type = BOLT_TYPE_STANDARD
@@ -594,7 +601,6 @@
 	tac_reloads = FALSE
 	fire_delay = 40
 	burst_size = 1
-	w_class = WEIGHT_CLASS_NORMAL
 	zoomable = TRUE
 	zoom_amt = 10 //Long range, enough to see in front of you, but no tiles behind you.
 	zoom_out_amt = 5
@@ -621,6 +627,7 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_MEDIUM
 	icon_state = "pomp"
 	inhand_icon_state = "pomp"
 	worn_icon_state = "pomp"
@@ -654,6 +661,7 @@
 	inhand_icon_state = "spas15"
 	worn_icon_state = "rifle"
 	w_class = WEIGHT_CLASS_BULKY
+	weapon_weight = WEAPON_HEAVY
 	mag_type = /obj/item/ammo_box/magazine/vampautoshot
 	burst_size = 1
 	fire_delay = 2

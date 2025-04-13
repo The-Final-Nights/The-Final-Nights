@@ -28,7 +28,7 @@
 	var/hispo = FALSE
 
 /datum/movespeed_modifier/lupusform
-	multiplicative_slowdown = -0.80
+	multiplicative_slowdown = -0.7
 
 /mob/living/carbon/werewolf/lupus/update_icons()
 	cut_overlays()

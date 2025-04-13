@@ -76,7 +76,6 @@
 
 /obj/vehicle/sealed/mecha/working/ripley/mk2/generate_actions()
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_eject)
-	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_toggle_internals)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_cycle_equip)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_toggle_lights)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/mech_view_stats)
@@ -172,7 +171,7 @@
 	output += "<b>Cargo Compartment Contents:</b><div style=\"margin-left: 15px;\">"
 	if(LAZYLEN(cargo))
 		for(var/obj/O in cargo)
-			output += "<a href='?src=[REF(src)];drop_from_cargo=[REF(O)]'>Unload</a> : [O]<br>"
+			output += "<a href='byond://?src=[REF(src)];drop_from_cargo=[REF(O)]'>Unload</a> : [O]<br>"
 	else
 		output += "Nothing"
 	output += "</div>"

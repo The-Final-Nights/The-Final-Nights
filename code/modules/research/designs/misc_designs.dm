@@ -266,26 +266,6 @@
 	build_path = /obj/item/vending_refill/donksoft
 	category = list("Equipment")
 
-/datum/design/oxygen_tank
-	name = "Oxygen Tank"
-	desc = "An empty oxygen tank."
-	id = "oxygen_tank"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 2000)
-	build_path = /obj/item/tank/internals/oxygen/empty
-	category = list("Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
-
-/datum/design/plasma_tank
-	name = "Plasma Tank"
-	desc = "An empty oxygen tank."
-	id = "plasma_tank"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 2000)
-	build_path = /obj/item/tank/internals/plasma/empty
-	category = list("Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
-
 /datum/design/id
 	name = "Identification Card"
 	desc = "A card used to provide ID and determine access across the station."
@@ -581,17 +561,6 @@
 	build_path = /obj/item/evidencebag
 	category = list("Equipment")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
-
-/datum/design/plumbing_rcd
-	name = "Plumbing Constructor"
-	id = "plumbing_rcd"
-	build_type = PROTOLATHE
-	materials = list(/datum/material/iron = 75000, /datum/material/glass = 37500, /datum/material/plastic = 1000)
-	build_path = /obj/item/construction/plumbing
-	category = list("Equipment")
-	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
-
-
 
 /////////////////////////////////////////
 /////////////////Tape////////////////////

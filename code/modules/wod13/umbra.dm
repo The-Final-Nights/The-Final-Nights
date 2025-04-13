@@ -18,7 +18,6 @@
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 	umbra = TRUE
 	density = TRUE
-	planetary_atmos = TRUE
 
 /turf/open/floor/plating/umbra/Initialize()
 	. = ..()
@@ -85,10 +84,6 @@
 			animate(src, color = "#4000ff", time = 10)
 		if(8)
 			animate(src, color = "#4000ff", time = 10)
-//	icon_state = "[amount_of_bombs]"
-//	if(amount_of_bombs == 0)
-//		for(var/obj/minespot/M in range(1, src))
-//			M.uncover()
 
 /obj/minespot/attack_hand(mob/user)
 	. = ..()

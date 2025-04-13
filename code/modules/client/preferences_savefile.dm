@@ -122,7 +122,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 /datum/preferences/proc/announce_conflict(list/notadded)
 	to_chat(parent, "<span class='userdanger'>KEYBINDING CONFLICT!!!\n\
 	There are new keybindings that have defaults bound to keys you already set, They will default to Unbound. You can bind them in Setup Character or Game Preferences\n\
-	<a href='?_src_=prefs;preference=tab;tab=3'>Or you can click here to go straight to the keybindings page</a></span>")
+	<a href='byond://?_src_=prefs;preference=tab;tab=3'>Or you can click here to go straight to the keybindings page</a></span>")
 	for(var/item in notadded)
 		var/datum/keybinding/conflicted = item
 		to_chat(parent, "<span class='userdanger'>[conflicted.category]: [conflicted.full_name] needs updating")
@@ -373,6 +373,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(newtype)
 			clane = new newtype
 
+	var/path_id
+	READ_FILE(S["path"], path_id)
+	if(path_id)
+		var/newtype = GLOB.morality_list[path_id]
+		if(newtype)
+			morality_path = new newtype
+
 	var/auspice_id
 	READ_FILE(S["auspice"], auspice_id)
 	if(auspice_id)
@@ -392,8 +399,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["slotlocked"], slotlocked)
 	READ_FILE(S["diablerist"], diablerist)
 	READ_FILE(S["auspice_level"], auspice_level)
-	READ_FILE(S["humanity"], humanity)
-	READ_FILE(S["enlightement"], enlightenment)
+	READ_FILE(S["humanity"], path_score)
+	READ_FILE(S["enlightement"], is_enlightened)
 	READ_FILE(S["exper"], exper)
 	READ_FILE(S["exper_plus"], exper_plus)
 	READ_FILE(S["true_experience"], true_experience)
@@ -420,6 +427,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["enemy"], enemy)
 	READ_FILE(S["lover"], lover)
 	READ_FILE(S["flavor_text"], flavor_text)
+	READ_FILE(S["ooc_notes"], ooc_notes)
 	READ_FILE(S["friend_text"], friend_text)
 	READ_FILE(S["enemy_text"], enemy_text)
 	READ_FILE(S["lover_text"], lover_text)
@@ -525,8 +533,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 //		clane = new newtype()
 
 	//Prevent Wighting upon joining a round
-	if(humanity <= 0)
-		humanity = 1
+	if(path_score <= 0)
+		path_score = 1
 
 	if(dharma_level <= 0)
 		dharma_level = 1
@@ -570,7 +578,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	werewolf_hair	= sanitize_integer(werewolf_hair, 0, 4, initial(werewolf_hair))
 	werewolf_hair_color		= sanitize_ooccolor(werewolf_hair_color, 3, 0)
 	werewolf_eye_color		= sanitize_ooccolor(werewolf_eye_color, 3, 0)
-	flavor_text		= sanitize_text(flavor_text)
+	flavor_text	= sanitize_text(flavor_text)
+	ooc_notes = sanitize_text(ooc_notes)
 	socks			= sanitize_inlist(socks, GLOB.socks_list)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	diablerist				= sanitize_integer(diablerist, 0, 1, initial(diablerist))
@@ -581,8 +590,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	torpor_count				= sanitize_integer(torpor_count, 0, 6, initial(torpor_count))
 	total_age		= sanitize_integer(total_age, 18, 1120, initial(total_age))
 	slotlocked			= sanitize_integer(slotlocked, 0, 1, initial(slotlocked))
-	humanity				= sanitize_integer(humanity, 0, 10, initial(humanity))
-	enlightenment				= sanitize_integer(enlightenment, 0, 1, initial(enlightenment))
+	path_score				= sanitize_integer(path_score, 0, 10, initial(path_score))
+	is_enlightened				= sanitize_integer(is_enlightened, 0, 1, initial(is_enlightened))
 	exper				= sanitize_integer(exper, 0, 99999999, initial(exper))
 	exper_plus				= sanitize_integer(exper_plus, 0, 99999999, initial(exper_plus))
 	true_experience				= sanitize_integer(true_experience, 0, 99999999, initial(true_experience))
@@ -716,8 +725,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Character
 	WRITE_FILE(S["slotlocked"]			, slotlocked)
 	WRITE_FILE(S["diablerist"]			, diablerist)
-	WRITE_FILE(S["humanity"]			, humanity)
-	WRITE_FILE(S["enlightement"]			, enlightenment)
+	WRITE_FILE(S["humanity"]			, path_score)
+	WRITE_FILE(S["enlightement"]			, is_enlightened)
 	WRITE_FILE(S["exper"]			, exper)
 	WRITE_FILE(S["exper_plus"]			, exper_plus)
 	WRITE_FILE(S["true_experience"]			, true_experience)
@@ -744,7 +753,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["friend"]			, friend)
 	WRITE_FILE(S["enemy"]			, enemy)
 	WRITE_FILE(S["lover"]			, lover)
-	WRITE_FILE(S["flavor_text"]			, flavor_text)
+	WRITE_FILE(S["flavor_text"], flavor_text)
+	WRITE_FILE(S["ooc_notes"], ooc_notes)
 	WRITE_FILE(S["friend_text"]			, friend_text)
 	WRITE_FILE(S["enemy_text"]			, enemy_text)
 	WRITE_FILE(S["lover_text"]			, lover_text)
@@ -803,6 +813,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["yin"], yin)
 	WRITE_FILE(S["chi_types"], chi_types)
 	WRITE_FILE(S["chi_levels"], chi_levels)
+	WRITE_FILE(S["path"], morality_path.name)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)

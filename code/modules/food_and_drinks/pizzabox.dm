@@ -200,8 +200,8 @@
 			update_icon()
 			return
 		else if(bomb)
-			to_chat(user, "<span class='warning'>[src] already has a bomb in it!</span>")
-	else if(istype(I, /obj/item/pen))
+			balloon_alert(user, "already rigged!")
+	else if(IS_WRITING_UTENSIL(I))
 		if(!open)
 			if(!user.is_literate())
 				to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
@@ -210,7 +210,8 @@
 			box.boxtag += stripped_input(user, "Write on [box]'s tag:", box, "", 30)
 			if(!user.canUseTopic(src, BE_CLOSE))
 				return
-			to_chat(user, "<span class='notice'>You write with [I] on [src].</span>")
+			balloon_alert(user, "writing box tag...")
+			playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
 			update_icon()
 			return
 	else if(is_wire_tool(I))

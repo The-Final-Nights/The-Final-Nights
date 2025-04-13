@@ -6,6 +6,7 @@
 /area
 	var/fire_controled = FALSE
 	var/fire_controling = FALSE
+	var/zone_type = "masquerade"
 	//Chi stuff
 	var/yang_chi = 1
 	var/yin_chi = 1
@@ -21,7 +22,6 @@
 	wall_rating = VERY_HIGH_WALL_RATING
 	var/music
 	var/upper = TRUE
-	var/zone_type = "masquerade"
 
 
 /area/vtm/powered(chan)
@@ -66,6 +66,26 @@
 	yin_chi = 2
 	wall_rating = LOW_WALL_RATING
 
+/area/vtm/interior/giovanni/outside
+	name = "Giovanni Mansion - Courtyard"
+	icon_state = "giovanni"
+	upper = TRUE
+	zone_type = "elysium"
+	fire_controled = FALSE
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/interior/giovanni/basement
+	name = "Giovanni Mansion - Basement"
+	icon_state = "giovanni"
+	upper = FALSE
+	zone_type = "elysium"
+	fire_controled = TRUE
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
+
 /area/vtm/interior/techshop
 	name = "Nightwolf Techshop"
 	icon_state = "shop"
@@ -88,6 +108,27 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/interior/police/morgue
+	name = "Police Station - Morgue"
+	icon_state = "police"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/police/upstairs
+	name = "Police Station - Upstairs"
+	icon_state = "police"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/police/fed
+	name = "Hotel"
+	icon_state = "police"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/interior/vjanitor
 	name = "Cleaners"
 	icon_state = "janitor"
@@ -103,14 +144,14 @@
 	wall_rating = HIGH_WALL_RATING
 
 /area/vtm/interior/strip/toreador
-	name = "Strip Club Apartments"
+	name = "Strip Club - Apartments"
 	icon_state = "prince"
 	upper = FALSE
 	fire_controled = TRUE
 	zone_type = "elysium"
 
 /area/vtm/interior/strip/elysium
-	name = "Strip Club Elysium"
+	name = "Strip Club - Elysium"
 	icon_state = "prince"
 	upper = FALSE
 	fire_controled = TRUE
@@ -125,6 +166,20 @@
 	yin_chi = 2
 	wall_rating = LOW_WALL_RATING
 
+/area/vtm/interior/apartment
+	name = "Millenium Apartments"
+	icon_state = "camarilla_interior"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/ghetto
+	name = "Ghetto Apartments"
+	icon_state = "ghetto_interior"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/financialdistrict
 	name = "Financial District"
 	icon_state = "financialdistrict"
@@ -132,6 +187,12 @@
 	music = /datum/vampiremusic/downtown
 	upper = TRUE
 	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/financialdistrict/construction
+	name = "Financial District - In Construction"
+
+/area/vtm/financialdistrict/library
+	name = "Financial District - Cultural Square"
 
 /area/vtm/ghetto
 	name = "Ghetto"
@@ -141,6 +202,9 @@
 	upper = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/ghetto/old
+	name = "Ghetto - Old Quarter"
+
 /area/vtm/pacificheights
 	name = "Pacific Heights"
 	icon_state = "pacificheights"
@@ -148,6 +212,17 @@
 	music = /datum/vampiremusic/hollywood
 	upper = TRUE
 	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/pacificheights/forest
+	name = "Pacific Heights Forest Outskirts"
+	music = /datum/vampiremusic/forest
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/pacificheights/old
+	name = "Pacific Heights - Old District"
+
+/area/vtm/pacificheights/community
+	name = "Pacific Heights - Community Road"
 
 /area/vtm/chinatown
 	name = "Chinatown"
@@ -165,8 +240,14 @@
 	upper = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/fishermanswharf/ghetto
+	name = "Fisherman's Wharf - Ghetto"
+
+/area/vtm/fishermanswharf/lower
+	name = "Fisherman's Wharf - Lower Beachside"
+
 /area/vtm/northbeach
-	name = "North Beach"
+	name = "Beach"
 	icon_state = "northbeach"
 	ambience_index = AMBIENCE_BEACH
 	music = /datum/vampiremusic/santamonica
@@ -179,24 +260,6 @@
 	ambience_index = AMBIENCE_CITY
 	music = /datum/vampiremusic/downtown
 	upper = TRUE
-	wall_rating = HIGH_WALL_RATING
-
-/area/vtm/prince_elevator
-	name = "Millenium Elevator"
-	icon_state = "prince"
-	ambience_index = AMBIENCE_INTERIOR
-	upper = FALSE
-	zone_type = "elysium"
-	fire_controled = TRUE
-	wall_rating = HIGH_WALL_RATING
-
-/area/vtm/city_elevator
-	name = "City Elevator"
-	icon_state = "prince"
-	ambience_index = AMBIENCE_INTERIOR
-	upper = FALSE
-	zone_type = "elysium"
-	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
 /area/vtm/interior/millennium_tower
@@ -244,8 +307,11 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/cabaret/basement
+	name = "Siren's Cabaret - Basement"
+	zone_type = "elysium"
 /area/vtm/clinic
-	name = "Clinic"
+	name = "Hospital"
 	icon_state = "clinic"
 	ambience_index = AMBIENCE_INTERIOR
 	upper = FALSE
@@ -254,8 +320,12 @@
 	yin_chi = 0
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/clinic/haven
+	name = "Hospital - Psych Ward"
+	zone_type = "elysium"
+
 /area/vtm/supply
-	name = "Supply"
+	name = "Supply Depot"
 	icon_state = "supply"
 	ambience_index = AMBIENCE_INTERIOR
 	upper = FALSE
@@ -263,6 +333,16 @@
 
 /area/vtm/anarch
 	name = "Bar"
+	icon_state = "anarch"
+	ambience_index = AMBIENCE_INTERIOR
+	upper = FALSE
+	music = /datum/vampiremusic/bar
+	zone_type = "elysium"
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/anarch/basement
+	name = "Bar - Basement"
 	icon_state = "anarch"
 	ambience_index = AMBIENCE_INTERIOR
 	upper = FALSE
@@ -281,12 +361,41 @@
 	wall_rating = HIGH_WALL_RATING
 
 /area/vtm/church
-	name = "Church"
+	name = "Church Grounds"
+	icon_state = "church"
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/church/interior
+	name = "Church - Interior"
 	icon_state = "church"
 	music = /datum/vampiremusic/church
 	ambience_index = AMBIENCE_INTERIOR
 	upper = FALSE
 	fire_controled = TRUE
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/church/interior/staff
+	name = "Church - Backrooms"
+	icon_state = "church"
+	zone_type = "elysium"
+	music = /datum/vampiremusic/church
+	ambience_index = AMBIENCE_INTERIOR
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/church/interior/haven
+	name = "Church - Restricted Floor"
+	icon_state = "old_clan_tzimisce"
+	zone_type = "elysium"
+	music = /datum/vampiremusic/church
+	ambience_index = AMBIENCE_INTERIOR
+	upper = FALSE
+	fire_controled = TRUE
+	yang_chi = 0
+	yin_chi = 2
 	wall_rating = LOW_WALL_RATING
 
 /area/vtm/graveyard
@@ -339,14 +448,16 @@
 	yin_chi = 2
 	wall_rating = HIGH_WALL_RATING
 
-/area/vtm/elevator
-	name = "Elevator"
-	icon_state = "prince"
-	music = /datum/vampiremusic/elevator
+/area/vtm/sewer/cappadocian
+	name = "Cappadocian Crypt"
+	icon_state = "graveyard"
+	ambience_index = AMBIENCE_INTERIOR
+	music = /datum/vampiremusic/hollywood
 	upper = FALSE
 	zone_type = "elysium"
-	fire_controled = TRUE
-	wall_rating = HIGH_WALL_RATING
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
 
 // GAROU CENTRIC AREAS
 /area/vtm/forest
@@ -454,15 +565,12 @@
 	zone_type = "elysium"
 	fire_controled = TRUE
 
-/area/vtm/interior/lasombra
-	name = "Old Church Historical Site"
-	icon_state = "old_clan_tzimisce"
-	zone_type = "elysium"
-	music = /datum/vampiremusic/prince
+/area/vtm/interior/oldchurch
+	name = "Old Seaside Church"
+	icon_state = "church"
+	music = /datum/vampiremusic/church
 	fire_controled = TRUE
-	yang_chi = 0
-	yin_chi = 2
-	wall_rating = LOW_WALL_RATING // abyss mysticism and stuff
+	wall_rating = LOW_WALL_RATING
 
 /area/vtm/interior/museum
 	name = "Historical Museum"
@@ -500,6 +608,13 @@
 
 /area/vtm/interior/banu
 	name = "Coffee House"
+	icon_state = "old_clan_tzimisce"
+	music = /datum/vampiremusic/prince
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/banu/haven
+	name = "Coffee House Staff Section"
 	icon_state = "old_clan_tzimisce"
 	zone_type = "elysium"
 	music = /datum/vampiremusic/prince
@@ -618,12 +733,6 @@
 	if(istype(get_area(T), /area/vtm))
 		var/area/vtm/VTM = get_area(T)
 		if(VTM)
-			/*
-			if(VTM.upper)
-				if(SScityweather.raining)
-					SEND_SOUND(src, sound('code/modules/wod13/sounds/rain.ogg', 0, 0, CHANNEL_RAIN, 25))
-					wash(CLEAN_WASH)
-			*/
 
 			var/cacophony = FALSE
 

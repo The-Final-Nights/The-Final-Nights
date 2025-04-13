@@ -182,11 +182,6 @@ GLOBAL_LIST_INIT(wire_node_generating_types, typecacheof(list(/obj/structure/gri
 	else
 		return FALSE
 
-/obj/structure/cable/singularity_pull(S, current_size)
-	..()
-	if(current_size >= STAGE_FIVE)
-		deconstruct()
-
 ////////////////////////////////////////////
 // Power related
 ///////////////////////////////////////////

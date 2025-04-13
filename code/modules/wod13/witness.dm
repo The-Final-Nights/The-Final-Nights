@@ -39,7 +39,8 @@
 	var/area/crime_location = get_area(location)
 	var/direction = get_cardinal_direction(location.x, location.y)
 	var/message = ""
-
+	if(!isMasqueradeEnforced(crime_location))
+		return
 	switch(crime)
 		if("shooting")
 			if(last_shooting + 15 SECONDS < world.time)

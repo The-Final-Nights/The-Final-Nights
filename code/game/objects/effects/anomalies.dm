@@ -288,19 +288,13 @@
 		return
 	else
 		ticks -= releasedelay
-	var/turf/open/T = get_turf(src)
-	if(istype(T))
-		T.atmos_spawn_air("o2=5;plasma=5;TEMP=1000")
 
 /obj/effect/anomaly/pyro/detonate()
 	INVOKE_ASYNC(src, PROC_REF(makepyroslime))
 
 /obj/effect/anomaly/pyro/proc/makepyroslime()
-	var/turf/open/T = get_turf(src)
-	if(istype(T))
-		T.atmos_spawn_air("o2=500;plasma=500;TEMP=1000") //Make it hot and burny for the new slime
 	var/new_colour = pick("red", "orange")
-	var/mob/living/simple_animal/slime/S = new(T, new_colour)
+	var/mob/living/simple_animal/slime/S = new(src, new_colour)
 	S.rabid = TRUE
 	S.amount_grown = SLIME_EVOLUTION_THRESHOLD
 	S.Evolve()
@@ -315,7 +309,7 @@
 		var/policy = get_policy(ROLE_PYROCLASTIC_SLIME)
 		if (policy)
 			to_chat(S, policy)
-		log_game("[key_name(S.key)] was made into a slime by pyroclastic anomaly at [AREACOORD(T)].")
+		log_game("[key_name(S.key)] was made into a slime by pyroclastic anomaly at [AREACOORD(src)].")
 
 /////////////////////
 

@@ -1,6 +1,6 @@
 /obj/item/blood_hunt
 	name = "Blood Hunt Announcer"
-	desc = "Announce a Blood Hunt to the city."
+	desc = "A stylized skull, made out of marble. This thaumaturgically-created artifact allows you to announce a Blood Hunt to the city. Name your target."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "eye"
 	item_flags = NOBLUDGEON

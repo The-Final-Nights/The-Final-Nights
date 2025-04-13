@@ -3,9 +3,9 @@
 	desc = "A large wooden barrel. You can ferment fruits and such inside it, or just use it to hold liquid."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "barrel"
+	resistance_flags = FLAMMABLE
 	density = TRUE
 	anchored = FALSE
-	pressure_resistance = 2 * ONE_ATMOSPHERE
 	max_integrity = 300
 	var/open = FALSE
 	var/speed_multiplier = 1 //How fast it distills. Defaults to 100% (1.0). Lower is better.

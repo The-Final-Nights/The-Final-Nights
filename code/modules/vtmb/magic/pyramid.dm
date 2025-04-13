@@ -140,8 +140,8 @@
 	response_disarm_simple = "gently push aside"
 	emote_taunt = list("gnashes")
 	speed = 0
-	maxHealth = 150
-	health = 150
+	maxHealth = 110
+	health = 110
 
 	harm_intent_damage = 8
 	obj_damage = 50
@@ -156,7 +156,6 @@
 	minbodytemp = 0
 	maxbodytemp = 1500
 	faction = list("Tremere")
-	pressure_resistance = 200
 	bloodpool = 1
 	maxbloodpool = 1
 
@@ -209,6 +208,18 @@
 	desc = "Wall from FLESH."
 	icon = 'code/modules/wod13/icons.dmi'
 	icon_state = "fleshwall"
+	plane = GAME_PLANE
+	layer = ABOVE_MOB_LAYER
+	anchored = TRUE
+	density = TRUE
+	max_integrity = 100
+	obj_integrity = 100
+
+/obj/structure/tzijelly
+	name = "jelly thing"
+	desc = "an important part of the meat matrix."
+	icon = 'code/modules/wod13/icons.dmi'
+	icon_state = "tzijelly"
 	plane = GAME_PLANE
 	layer = ABOVE_MOB_LAYER
 	anchored = TRUE
@@ -410,8 +421,6 @@
 					if(LAZYLEN(candidates))
 						var/mob/dead/observer/C = pick(candidates)
 						H.key = C.key
-//					Y.key = C.key
-//					Y.my_creator = last_activator
 				playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 				qdel(src)
 				return

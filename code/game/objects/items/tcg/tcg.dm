@@ -288,7 +288,7 @@ GLOBAL_LIST_EMPTY(tcgcard_radial_choices)
 /obj/item/tcgcard_deck/proc/flip_deck()
 	flipped = !flipped
 	var/list/temp_deck = contents.Copy()
-	contents = reverseRange(temp_deck)
+	contents = reverse_range(temp_deck)
 	//Now flip the cards to their opposite positions.
 	for(var/a in 1 to contents.len)
 		var/obj/item/tcgcard/nu_card = contents[a]

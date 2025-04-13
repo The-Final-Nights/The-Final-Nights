@@ -3,7 +3,6 @@
  *		Pens
  *		Sleepy Pens
  *		Parapens
- *		Edaggers
  */
 
 
@@ -23,13 +22,38 @@
 	throw_speed = 3
 	throw_range = 7
 	custom_materials = list(/datum/material/iron=10)
-	pressure_resistance = 2
 	grind_results = list(/datum/reagent/iron = 2, /datum/reagent/iodine = 1)
 	var/colour = "black"	//what colour the ink is!
 	var/degrees = 0
 	var/font = PEN_FONT
 	embedding = list()
 	sharpness = SHARP_POINTY
+	/// If this pen can be clicked in order to retract it
+	var/can_click = TRUE
+
+/obj/item/pen/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/tool_renaming)
+	if (!can_click)
+		return
+	RegisterSignal(src, COMSIG_TRANSFORMING_ON_TRANSFORM, PROC_REF(on_transform))
+
+
+/*
+ * Signal proc for [COMSIG_TRANSFORMING_ON_TRANSFORM].
+ *
+ * Clicks the pen to make an annoying sound. Clickity clickery click!
+ */
+/obj/item/pen/proc/on_transform(obj/item/source, mob/user, active)
+	SIGNAL_HANDLER
+
+	if(user)
+		balloon_alert(user, "clicked")
+	playsound(src, 'sound/machines/click.ogg', 30, TRUE, -3)
+	icon_state = initial(icon_state) + (active ? "_retracted" : "")
+	update_icon()
+
+	return COMPONENT_NO_DEFAULT_MESSAGE
 
 /obj/item/pen/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is scribbling numbers all over [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit sudoku...</span>")
@@ -54,28 +78,39 @@
 /obj/item/pen/fourcolor
 	desc = "It's a fancy four-color ink pen, set to black."
 	name = "four-color pen"
-	colour = "black"
+	icon_state = "pen_4color"
+	colour = COLOR_BLACK
+	can_click = FALSE
 
 /obj/item/pen/fourcolor/attack_self(mob/living/carbon/user)
+	. = ..()
+
+	var/chosen_colour
 	switch(colour)
-		if("black")
+		if(COLOR_BLACK)
+			chosen_colour = "red"
 			colour = "red"
-			throw_speed++
 		if("red")
+			chosen_colour = "green"
 			colour = "green"
-			throw_speed = initial(throw_speed)
 		if("green")
+			chosen_colour = "blue"
 			colour = "blue"
 		else
-			colour = "black"
-	to_chat(user, "<span class='notice'>\The [src] will now write in [colour].</span>")
-	desc = "It's a fancy four-color ink pen, set to [colour]."
+			chosen_colour = "black"
+			colour = COLOR_BLACK
+
+	to_chat(user, span_notice("\The [src] will now write in [chosen_colour]."))
+	desc = "It's a fancy four-color ink pen, set to [chosen_colour]."
+	balloon_alert(user, "clicked")
+	playsound(src, 'sound/machines/click.ogg', 30, TRUE, -3)
 
 /obj/item/pen/fountain
 	name = "fountain pen"
 	desc = "It's a common fountain pen, with a faux wood body."
 	icon_state = "pen-fountain"
 	font = FOUNTAIN_PEN_FONT
+	can_click = FALSE
 
 /obj/item/pen/charcoal
 	name = "charcoal stylus"
@@ -85,6 +120,7 @@
 	font = CHARCOAL_FONT
 	custom_materials = null
 	grind_results = list(/datum/reagent/ash = 5, /datum/reagent/cellulose = 10)
+	can_click = FALSE
 
 /datum/crafting_recipe/charcoal_stylus
 	name = "Charcoal Stylus"
@@ -121,28 +157,24 @@
 	if(current_skin)
 		desc = "It's an expensive [current_skin] fountain pen. The nib is quite sharp."
 
-/obj/item/pen/attack_self(mob/living/carbon/user)
-	var/deg = input(user, "What angle would you like to rotate the pen head to? (1-360)", "Rotate Pen Head") as null|num
-	if(deg && (deg > 0 && deg <= 360))
-		degrees = deg
-		to_chat(user, "<span class='notice'>You rotate the top of the pen to [degrees] degrees.</span>")
-		SEND_SIGNAL(src, COMSIG_PEN_ROTATED, deg, user)
+/obj/item/pen/attack(mob/living/M, mob/user, params)
+	if(force) // If the pen has a force value, call the normal attack procs. Used for e-daggers and captain's pen mostly.
+		return ..()
+	to_chat(user, span_warning("You stab [M] with the pen."))
+	to_chat(M, span_danger("You feel a tiny prick!"))
+	log_combat(user, M, "stabbed", src)
+	return TRUE
 
-/obj/item/pen/attack(mob/living/M, mob/user,stealth)
-	if(!istype(M))
-		return
+/obj/item/pen/get_writing_implement_details()
+	if (HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
+		return null
+	return list(
+		interaction_mode = MODE_WRITING,
+		font = font,
+		color = colour,
+		use_bold = FALSE,
+	)
 
-	if(!force)
-		if(M.can_inject(user, 1))
-			to_chat(user, "<span class='warning'>You stab [M] with the pen.</span>")
-			if(!stealth)
-				to_chat(M, "<span class='danger'>You feel a tiny prick!</span>")
-			. = 1
-
-		log_combat(user, M, "stabbed", src)
-
-	else
-		. = ..()
 
 /obj/item/pen/afterattack(obj/O, mob/living/user, proximity)
 	. = ..()
@@ -156,10 +188,10 @@
 			var/oldname = O.name
 			if(QDELETED(O) || !user.canUseTopic(O, BE_CLOSE))
 				return
-			if(oldname == input || input == "")
+			if(input == oldname || !input)
 				to_chat(user, "<span class='notice'>You changed [O] to... well... [O].</span>")
 			else
-				O.name = input
+				O.AddComponent(/datum/component/rename, input, O.desc)
 				var/datum/component/label/label = O.GetComponent(/datum/component/label)
 				if(label)
 					label.remove_label()
@@ -172,22 +204,25 @@
 			var/olddesc = O.desc
 			if(QDELETED(O) || !user.canUseTopic(O, BE_CLOSE))
 				return
-			if(olddesc == input || input == "")
+			if(input == olddesc || !input)
 				to_chat(user, "<span class='notice'>You decide against changing [O]'s description.</span>")
 			else
-				O.desc = input
+				O.AddComponent(/datum/component/rename, O.name, input)
 				to_chat(user, "<span class='notice'>You have successfully changed [O]'s description.</span>")
 				O.renamedByPlayer = TRUE
 
 		if(penchoice == "Reset")
 			if(QDELETED(O) || !user.canUseTopic(O, BE_CLOSE))
 				return
-			O.desc = initial(O.desc)
-			O.name = initial(O.name)
+
+			qdel(O.GetComponent(/datum/component/rename))
+
+			//reapply any label to name
 			var/datum/component/label/label = O.GetComponent(/datum/component/label)
 			if(label)
 				label.remove_label()
 				label.apply_label()
+
 			to_chat(user, "<span class='notice'>You have successfully reset [O]'s name and description.</span>")
 			O.renamedByPlayer = FALSE
 
@@ -213,68 +248,6 @@
 	reagents.add_reagent(/datum/reagent/toxin/mutetoxin, 15)
 	reagents.add_reagent(/datum/reagent/toxin/staminatoxin, 10)
 
-/*
- * (Alan) Edaggers
- */
-/obj/item/pen/edagger
-	attack_verb_continuous = list("slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts") //these won't show up if the pen is off
-	attack_verb_simple = list("slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
-	sharpness = SHARP_EDGED
-	var/on = FALSE
-
-/obj/item/pen/edagger/ComponentInitialize()
-	. = ..()
-	AddComponent(/datum/component/butchering, 60, 100, 0, 'sound/weapons/blade1.ogg')
-	AddElement(/datum/element/update_icon_updates_onmob)
-
-/obj/item/pen/edagger/get_sharpness()
-	return on * sharpness
-
-/obj/item/pen/edagger/suicide_act(mob/user)
-	. = BRUTELOSS
-	if(on)
-		user.visible_message("<span class='suicide'>[user] forcefully rams the pen into their mouth!</span>")
-	else
-		user.visible_message("<span class='suicide'>[user] is holding a pen up to their mouth! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-		attack_self(user)
-
-/obj/item/pen/edagger/attack_self(mob/living/user)
-	if(on)
-		on = FALSE
-		force = initial(force)
-		throw_speed = initial(throw_speed)
-		w_class = initial(w_class)
-		name = initial(name)
-		hitsound = initial(hitsound)
-		embedding = list(embed_chance = EMBED_CHANCE)
-		throwforce = initial(throwforce)
-		playsound(user, 'sound/weapons/saberoff.ogg', 5, TRUE)
-		to_chat(user, "<span class='warning'>[src] can now be concealed.</span>")
-	else
-		on = TRUE
-		force = 18
-		throw_speed = 4
-		w_class = WEIGHT_CLASS_NORMAL
-		name = "energy dagger"
-		hitsound = 'sound/weapons/blade1.ogg'
-		embedding = list(embed_chance = 100) //rule of cool
-		throwforce = 35
-		playsound(user, 'sound/weapons/saberon.ogg', 5, TRUE)
-		to_chat(user, "<span class='warning'>[src] is now active.</span>")
-	updateEmbedding()
-	update_icon()
-
-/obj/item/pen/edagger/update_icon_state()
-	if(on)
-		icon_state = inhand_icon_state = "edagger"
-		lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
-		righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
-	else
-		icon_state = initial(icon_state) //looks like a normal pen when off.
-		inhand_icon_state = initial(inhand_icon_state)
-		lefthand_file = initial(lefthand_file)
-		righthand_file = initial(righthand_file)
-
 /obj/item/pen/survival
 	name = "survival pen"
 	desc = "The latest in portable survival technology, this pen was designed as a miniature diamond pickaxe. Watchers find them very desirable for their diamond exterior."
@@ -285,7 +258,28 @@
 	force = 3
 	w_class = WEIGHT_CLASS_TINY
 	custom_materials = list(/datum/material/iron=10, /datum/material/diamond=100, /datum/material/titanium = 10)
-	pressure_resistance = 2
 	grind_results = list(/datum/reagent/iron = 2, /datum/reagent/iodine = 1)
 	tool_behaviour = TOOL_MINING //For the classic "digging out of prison with a spoon but you're in space so this analogy doesn't work" situation.
 	toolspeed = 10 //You will never willingly choose to use one of these over a shovel.
+	font = FOUNTAIN_PEN_FONT
+	colour = COLOR_BLUE
+	can_click = FALSE
+
+/obj/item/pen/survival/proc/on_dart_hit(obj/projectile/source, atom/movable/firer, atom/target)
+	var/turf/target_turf = get_turf(target)
+	if(!target_turf)
+		target_turf = get_turf(src)
+	if(ismineralturf(target_turf))
+		var/turf/closed/mineral/mineral_turf = target_turf
+		mineral_turf.gets_drilled(firer, TRUE)
+
+/obj/item/pen/destroyer
+	name = "Fine Tipped Pen"
+	desc = "A pen with an infinitly sharpened tip. Capable of striking the weakest point of a strucutre or robot and annihilating it instantly. Good at putting holes in people too."
+	force = 5
+	wound_bonus = 100
+
+/obj/item/pen/edagger
+	name = "e-dagger"
+	desc = "A pen with an infinitly sharpened tip. Capable of striking the weakest point of a strucutre or robot and annihilating it instantly. Good at putting holes in people too."
+	icon_state = "pen-edagger"

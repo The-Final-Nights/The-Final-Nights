@@ -7,10 +7,6 @@
 	rad_insulation = RAD_MEDIUM_INSULATION
 	pass_flags_self = PASSCLOSEDTURF
 
-/turf/closed/AfterChange()
-	. = ..()
-	SSair.high_pressure_delta -= src
-
 /turf/closed/get_smooth_underlay_icon(mutable_appearance/underlay_appearance, turf/asking_turf, adjacency_dir)
 	return FALSE
 
@@ -40,6 +36,25 @@
 	name = "strange shuttle wall"
 	icon = 'icons/turf/shuttleold.dmi'
 	icon_state = "block"
+
+/turf/closed/indestructible/weeb
+	name = "paper wall"
+	desc = "Reinforced paper walling. Someone really doesn't want you to leave."
+	icon = 'icons/obj/smooth_structures/paperframes.dmi'
+	icon_state = "paperframes-0"
+	base_icon_state = "paperframes"
+	smoothing_flags = SMOOTH_BITMASK
+	smoothing_groups = list(SMOOTH_GROUP_PAPERFRAME)
+	canSmoothWith = list(SMOOTH_GROUP_PAPERFRAME)
+	var/static/mutable_appearance/indestructible_paper = mutable_appearance('icons/obj/smooth_structures/paperframes.dmi',icon_state = "paper", layer = CLOSED_TURF_LAYER - 0.1)
+
+/turf/closed/indestructible/weeb/Initialize(mapload)
+	. = ..()
+	update_icon()
+
+/turf/closed/indestructible/weeb/update_overlays()
+	. = ..()
+	. += indestructible_paper
 
 /turf/closed/indestructible/sandstone
 	name = "sandstone wall"

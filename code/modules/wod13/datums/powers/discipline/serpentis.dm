@@ -50,7 +50,7 @@
 		if(EAST)
 			antidir = WEST
 	if(target.dir == antidir)
-		target.Immobilize(2 SECONDS)
+		target.Immobilize(4 SECONDS)
 		target.visible_message(span_warning("<b>[owner] hypnotizes [target] with [owner.p_their()] eyes!</b>"), span_warning("<b>[owner] hypnotizes you like a cobra!</b>"))
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target

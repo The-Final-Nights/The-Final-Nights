@@ -116,7 +116,6 @@ GLOBAL_LIST_INIT(caesar_cipher, list(
 		passkey = rand(5, 15)
 	else
 		passkey = rand(-15, -5)
-	//to_chat(world, "<span class='userdanger'><b>UNKNOWN SARCOPHAGUS POSITION HAS BEEN LEAKED</b></span>")
 	SEND_SOUND(world, sound('code/modules/wod13/sounds/announce.ogg'))
 
 /obj/item/sarcophagus_key
