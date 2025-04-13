@@ -17,6 +17,17 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	/datum/hallucination/oh_yeah = 1
 	))
 
+GLOBAL_LIST_INIT(malk_hallucinations, list(
+	/datum/hallucination/malk/object = 100,
+	/datum/hallucination/message = 60,
+	/datum/hallucination/sounds = 50,
+	/datum/hallucination/laugh = 40,
+	/datum/hallucination/battle = 20,
+	/datum/hallucination/dangerflash = 15,
+	/datum/hallucination/weird_sounds = 8,
+	/datum/hallucination/stray_bullet = 7,
+	))
+
 //Tut nekotoroe runtime sret
 
 /mob/living/carbon/proc/handle_hallucinations()
@@ -27,8 +38,11 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 	if(world.time < next_hallucination)
 		return
-
-	var/halpick = pickweight(GLOB.hallucination_list)
+	var/halpick
+	if(has_quirk(/datum/quirk/derangement))
+		halpick = pickweight(GLOB.malk_hallucinations)
+	else
+		halpick = pickweight(GLOB.hallucination_list)
 	new halpick(src, FALSE)
 
 	next_hallucination = world.time + rand(100, 600)
@@ -798,7 +812,9 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			if(get_dist(target,H)<get_dist(target,person))
 				person = H
 
-	// Get person to affect if radio hallucination
+	// Disables radio messages, doesn't work anyway. Just spewed out a random message if no-one was around.
+	if(!person)
+		return
 	var/is_radio = !person || force_radio
 	if (is_radio)
 		var/list/humans = list()

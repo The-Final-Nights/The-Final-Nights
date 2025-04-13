@@ -7,7 +7,7 @@
 
 /datum/discipline/dementation/post_gain()
 	. = ..()
-	owner.add_quirk(/datum/quirk/insanity)
+	owner.add_quirk(/datum/quirk/derangement)
 
 /datum/discipline_power/dementation
 	name = "Dementation power name"
