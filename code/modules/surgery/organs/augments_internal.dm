@@ -132,7 +132,9 @@
 		owner.SetKnockdown(0)
 		owner.SetImmobilized(0)
 		owner.SetParalyzed(0)
-		ADD_TRAIT(owner, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
+		ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
+		ADD_TRAIT(owner, TRAIT_TOUGH_FLESH, SPECIES_TRAIT)
+
 
 
 /obj/item/organ/cyberimp/brain/anti_stun/emp_act(severity)
