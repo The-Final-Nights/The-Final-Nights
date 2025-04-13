@@ -17,14 +17,14 @@
 	var/offset = pick(-3,-2, -1, 1, 2, 3)
 	var/disappearfirst = rand(1 SECONDS, 3 SECONDS) * abs(offset)
 	animate(fake_floor, pixel_y = offset, time = disappearfirst, flags = ANIMATION_RELATIVE)
-	addtimer(CALLBACK(src, PROC_REF(marauder_floor_stage1), quirk_holder, offset, fake_floor), disappearfirst, TIMER_CLIENT_TIME)
+	addtimer(CALLBACK(src, PROC_REF(malk_floor_stage1), quirk_holder, offset, fake_floor), disappearfirst, TIMER_CLIENT_TIME)
 
-/datum/quirk/derangement/proc/marauder_floor_stage1(mob/living/malk, offset, mutable_appearance/fake_floor)
+/datum/quirk/derangement/proc/malk_floor_stage1(mob/living/malk, offset, mutable_appearance/fake_floor)
 	var/disappearsecond = 3 SECONDS
 	animate(fake_floor, pixel_y = -offset, time = disappearsecond, flags = ANIMATION_RELATIVE)
-	addtimer(CALLBACK(src, PROC_REF(marauder_floor_stage2), malk, fake_floor), disappearsecond, TIMER_CLIENT_TIME)
+	addtimer(CALLBACK(src, PROC_REF(malk_floor_stage2), malk, fake_floor), disappearsecond, TIMER_CLIENT_TIME)
 
-/datum/quirk/derangement/proc/marauder_floor_stage2(mob/living/malk, mutable_appearance/fake_floor)
+/datum/quirk/derangement/proc/malk_floor_stage2(mob/living/malk, mutable_appearance/fake_floor)
 	malk.client?.images -= fake_floor
 
 /datum/hallucination/malk
