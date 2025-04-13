@@ -2524,11 +2524,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					flavor_text_nsfw = STRIP_HTML_SIMPLE(new_flavor_nsfw, MAX_FLAVOR_LEN)
 
 				if("view_flavortext")
-					// Since we have no way of getting the genuine character mob from prefs setup for TGUI, we have to generate a dummy and use that.
-					var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_EXAMINE)
+					// The examine preview dummy will be cleaned up once the user closes the TGUI window.
+					var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy()
 					mannequin.setup_examine_preview(user.client)
 					mannequin.tgui?.ui_interact(usr)
-					unset_busy_human_dummy(DUMMY_HUMAN_SLOT_EXAMINE)
 
 				if("headshot")
 					to_chat(user, span_notice("Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<b>do not use a real life photo or use any image that is less than serious.</b>"]"))
