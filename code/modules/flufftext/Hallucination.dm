@@ -22,7 +22,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	/datum/hallucination/chat = 90,
 	/datum/hallucination/message = 60,
 	/datum/hallucination/sounds = 50,
-	/datum/hallucination/laugh = 40,
+	/datum/hallucination/malk/laugh = 40,
 	/datum/hallucination/battle = 20,
 	/datum/hallucination/dangerflash = 15,
 	/datum/hallucination/weird_sounds = 8,

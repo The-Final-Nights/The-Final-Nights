@@ -6,6 +6,8 @@
 	for(var/turf/open/floor in view(target))
 		if(!prob(7))
 			continue
+		if(isgroundlessturf(floor))
+			continue
 		handle_malk_floor(floor)
 
 /datum/quirk/derangement/proc/handle_malk_floor(turf/open/floor)
@@ -30,7 +32,7 @@
 
 /datum/hallucination/malk/laugh
 
-/datum/hallucination/laugh/New(mob/living/carbon/malk, forced = TRUE)
+/datum/hallucination/malk/laugh/New(mob/living/carbon/malk, forced = TRUE)
 	var/static/list/funnies = list(
 		'sound/hallucinations/malk/comic1.ogg',
 		'sound/hallucinations/malk/comic2.ogg',
