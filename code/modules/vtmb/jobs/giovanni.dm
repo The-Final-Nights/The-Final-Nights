@@ -67,7 +67,7 @@
 	v_duty = "Whether born or Embraced into the family, you are one of the Giovanni. Be you a necromancer, financier or lowly fledgling, remember that so long as you stand with your family, they too will stand with you."
 	minimal_masquerade = 0
 	experience_addition = 10
-	allowed_species = list("Vampire")
+	allowed_species = list("Vampire", "Kuei-Jin")
 	allowed_bloodlines = list("Giovanni", "Cappadocian")
 
 /datum/outfit/job/giovanni
