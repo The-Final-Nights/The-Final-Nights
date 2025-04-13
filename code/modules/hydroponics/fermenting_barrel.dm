@@ -3,6 +3,7 @@
 	desc = "A large wooden barrel. You can ferment fruits and such inside it, or just use it to hold liquid."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "barrel"
+	resistance_flags = FLAMMABLE
 	density = TRUE
 	anchored = FALSE
 	max_integrity = 300

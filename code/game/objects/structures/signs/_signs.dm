@@ -128,7 +128,7 @@
 	return TRUE
 
 /obj/structure/sign/attackby(obj/item/I, mob/user, params)
-	if(is_editable && istype(I, /obj/item/pen))
+	if(is_editable && IS_WRITING_UTENSIL(I))
 		if(!length(GLOB.editable_sign_types))
 			populate_editable_sign_types()
 			if(!length(GLOB.editable_sign_types))
@@ -157,58 +157,34 @@
 		return
 	return ..()
 
-/obj/item/sign/attackby(obj/item/I, mob/user, params)
-	if(is_editable && istype(I, /obj/item/pen))
-		if(!length(GLOB.editable_sign_types))
-			populate_editable_sign_types()
-			if(!length(GLOB.editable_sign_types))
-				CRASH("GLOB.editable_sign_types failed to populate")
-		var/choice = input(user, "Select a sign type.", "Sign Customization") as null|anything in GLOB.editable_sign_types
-		if(!choice)
-			return
-		if(!Adjacent(user)) //Make sure user is adjacent still.
-			to_chat(user, "<span class='warning'>You need to stand next to the sign to change it!</span>")
-			return
-		if(!choice)
-			return
-		user.visible_message("<span class='notice'>You begin changing [src].</span>")
-		if(!do_after(user, 4 SECONDS, target = src))
-			return
-		var/obj/structure/sign/sign_type = GLOB.editable_sign_types[choice]
-		name = initial(sign_type.name)
-		if(sign_type != /obj/structure/sign/blank)
-			desc = "[initial(sign_type.desc)] It can be placed on a wall."
-		else
-			desc = initial(desc) //If you're changing it to a blank sign, just use obj/item/sign's description.
-		icon_state = initial(sign_type.icon_state)
-		sign_path = sign_type
-		user.visible_message("<span class='notice'>You finish changing the sign.</span>")
-		return
-	return ..()
+/**
+ * This is called when a sign is removed from a wall, either through deconstruction or being knocked down.
+ * @param mob/living/user The user who removed the sign, if it was knocked down by a mob.
+ */
+/obj/structure/sign/proc/knock_down(mob/living/user)
+	var/turf/drop_turf
+	if(user)
+		drop_turf = get_turf(user)
+	else
+		drop_turf = drop_location()
+	var/obj/item/sign/unwrenched_sign = new (drop_turf)
+	if(type != /obj/structure/sign/blank) //If it's still just a basic sign backing, we can (and should) skip some of the below variable transfers.
+		unwrenched_sign.name = name //Copy over the sign structure variables to the sign item we're creating when we unwrench a sign.
+		unwrenched_sign.desc = "[desc] It can be placed on a wall."
+		unwrenched_sign.icon = icon
+		unwrenched_sign.icon_state = icon_state
+		unwrenched_sign.sign_path = type
+		unwrenched_sign.set_custom_materials(custom_materials) //This is here so picture frames and wooden things don't get messed up.
+		unwrenched_sign.is_editable = is_editable
+	unwrenched_sign.setDir(dir)
+	qdel(src) //The sign structure on the wall goes poof and only the sign item from unwrenching remains.
 
-/obj/item/sign/afterattack(atom/target, mob/user, proximity)
-	. = ..()
-	if(!iswallturf(target) || !proximity)
-		return
-	var/turf/target_turf = target
-	var/turf/user_turf = get_turf(user)
-	var/obj/structure/sign/placed_sign = new sign_path(user_turf) //We place the sign on the turf the user is standing, and pixel shift it to the target wall, as below.
-	//This is to mimic how signs and other wall objects are usually placed by mappers, and so they're only visible from one side of a wall.
-	var/dir = get_dir(user_turf, target_turf)
-	if(dir & NORTH)
-		placed_sign.pixel_y = 32
-	else if(dir & SOUTH)
-		placed_sign.pixel_y = -32
-	if(dir & EAST)
-		placed_sign.pixel_x = 32
-	else if(dir & WEST)
-		placed_sign.pixel_x = -32
-	user.visible_message("<span class='notice'>[user] fastens [src] to [target_turf].</span>", \
-		"<span class='notice'>You attach the sign to [target_turf].</span>")
-	playsound(target_turf, 'sound/items/deconstruct.ogg', 50, TRUE)
-	placed_sign.obj_integrity = obj_integrity
-	placed_sign.setDir(dir)
-	qdel(src)
+/obj/structure/sign/blank //This subtype is necessary for now because some other things (posters, picture frames, paintings) inheret from the parent type.
+	icon_state = "backing"
+	name = "sign backing"
+	desc = "A plastic sign backing, use a pen to change the decal. It can be detached from the wall with a wrench."
+	is_editable = TRUE
+	sign_change_name = "Blank Sign"
 
 /obj/structure/sign/nanotrasen
 	name = "\improper Nanotrasen logo sign"

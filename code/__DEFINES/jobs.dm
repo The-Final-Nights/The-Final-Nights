@@ -14,7 +14,9 @@
 #define JOB_UNAVAILABLE_WHITELISTED 12
 
 #define DEFAULT_RELIGION "Christianity"
-#define DEFAULT_DEITY "Jesus"
+#define DEFAULT_DEITY "Space Jesus"
+#define DEFAULT_BIBLE "Default Bible Name"
+#define DEFAULT_BIBLE_REPLACE(religion) "The Holy Book of [religion]"
 
 #define JOB_DISPLAY_ORDER_DEFAULT 0
 

@@ -573,7 +573,6 @@
 "bK" = (
 /obj/machinery/light,
 /obj/structure/rack,
-/obj/item/book/manual/random,
 /obj/item/poster/random_contraband,
 /turf/open/floor/plasteel,
 /area/ruin/space/has_grav/hellfactory)

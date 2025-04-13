@@ -9,6 +9,8 @@
 	holder.pixel_y = I.Height() - world.icon_size
 	holder.icon_state = "aura"
 
+	var/mob/living/carbon/human/H = src
+
 	if(client)
 		switch(a_intent)
 			if(INTENT_HARM)
