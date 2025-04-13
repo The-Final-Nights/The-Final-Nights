@@ -3,7 +3,6 @@ Experienced Driver
 Bone Key
 Anonymous
 Bloody Lover
-Tough Flesh
 Slowpoke
 \"Blood\" Sucker
 One Handed
@@ -65,14 +64,6 @@ Dancer
 	gain_text = "<span class='notice'>You feel more experienced in love.</span>"
 	lose_text = "<span class='warning'>You feel more clueless in love.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
-
-/datum/quirk/tough_flesh
-	name = "Tough Flesh"
-	desc = "Your flesh is much sturdier than normal. You are much better in resisting stuns, bumps and hits."
-	mob_trait = TRAIT_TOUGH_FLESH
-	value = 3
-	gain_text = "<span class='notice'>You feel tough.</span>"
-	lose_text = "<span class='warning'>You feel fragile again.</span>"
 
 /datum/movespeed_modifier/slowpoke
 	multiplicative_slowdown = 1
