@@ -219,6 +219,14 @@
 	range = 2
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
+	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
+	if(owner == conditioner)
+		to_chat(owner, span_warning("[target]'s mind is already under my sway!"))
+		return FALSE
+	else if(target.conditioned)
+		to_chat(owner, span_warning("[target]'s mind appears to already be under someone else's sway!"))
+		return FALSE
+
 	var/mypower =  SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if(ishuman(target))
