@@ -250,33 +250,60 @@
 /datum/discipline_power/thaumaturgy/cauldron_of_blood/activate(mob/living/target)
 	. = ..()
 	if(iscarbon(target))
+		new /obj/effect/temp_visual/tremere(target.loc, "gib")
+		animate(target, pixel_y = 16, color = "#ff0000", time = 5 SECONDS, loop = 1)
+		spawn(5 SECONDS)
+			animate(target, color = null, pixel_y = 0, time = 5 SECONDS, loop = 1)
+
 		target.visible_message(span_danger("[target] reddens and quakes!"), span_userdanger("Your veins feel like they're on fire!"))
 
-		var/phys = clamp(target.get_total_physique() * 10, 10, 80)
+		var/dice = clamp(target.get_total_physique(), 1, 8)
+		var/successes = SSroll.storyteller_roll(dice, difficulty = 5, mobs_to_show_output = target, numerical = TRUE)
 
-		// Stage 1
-		if(!prob(clamp(phys, 10, 30)))
+		if(successes <= 1)
+			// All stages (fails completely)
 			target.Stun(2.5 SECONDS)
 			target.apply_damage(20, BURN, owner.zone_selected)
 			target.emote("twitch")
 			target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
 			sleep(2.5 SECONDS)
 
-			// Stage 2
-			if(!prob(clamp(phys, 20, 40)))
-				target.apply_damage(20, BURN, owner.zone_selected)
-				target.emote("scream")
-				target.emote("twitch")
-				target.visible_message(span_warning("[target] howls in agony, their whole body convulsing!"), span_userdanger("You scream in anguish as your blood boils!"))
-				sleep(2.5 SECONDS)
+			target.apply_damage(20, BURN, owner.zone_selected)
+			target.emote("scream")
+			target.emote("twitch")
+			target.visible_message(span_warning("[target] howls in agony, their whole body convulsing!"), span_userdanger("You scream in anguish as your blood boils!"))
+			sleep(2.5 SECONDS)
 
-				// Stage 3
-				if(!prob(clamp(phys + 15, 40, 80)))
-					target.Stun(2.5 SECONDS)
-					target.apply_damage(30, BURN, owner.zone_selected)
-					target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
-					target.emote("collapse")
-					target.toggle_resting()
+			target.Stun(2.5 SECONDS)
+			target.apply_damage(30, BURN, owner.zone_selected)
+			target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
+			target.emote("collapse")
+			target.toggle_resting()
+
+		else if(successes == 2)
+			// Stages 1 & 2
+			target.Stun(2.5 SECONDS)
+			target.apply_damage(20, BURN, owner.zone_selected)
+			target.emote("twitch")
+			target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
+			sleep(2.5 SECONDS)
+
+			target.apply_damage(20, BURN, owner.zone_selected)
+			target.emote("scream")
+			target.emote("twitch")
+			target.visible_message(span_warning("[target] howls in agony, their whole body convulsing!"), span_userdanger("You scream in anguish as your blood boils!"))
+
+		else if(successes == 3)
+			// Stage 1 only
+			target.Stun(2.5 SECONDS)
+			target.apply_damage(20, BURN, owner.zone_selected)
+			target.emote("twitch")
+			target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
+
+		else
+			// Resisted completely
+			to_chat(target, span_notice("You steel yourself as the blood begins to churn—but your will holds firm."))
+
 	else
 		owner.bloodpool = min(owner.bloodpool + target.bloodpool, owner.maxbloodpool)
 		if(!istype(target, /mob/living/simple_animal/hostile/megafauna))
