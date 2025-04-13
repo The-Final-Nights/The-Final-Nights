@@ -493,7 +493,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	fullscreen = !fullscreen
 
 	winset(src, "mainwindow", "menu=;is-fullscreen=[fullscreen ? "true" : "false"]")
-	//attempt_auto_fit_viewport()
+	fit_viewport()
 
 /client/verb/fix_stat_panel()
 	set name = "Fix Stat Panel"
