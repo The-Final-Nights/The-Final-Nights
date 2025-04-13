@@ -1856,7 +1856,7 @@
 "azm" = (
 /obj/structure/table/wood,
 /obj/underplate,
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/carpet/purple,
 /area/vtm/fishermanswharf)
 "azq" = (
 /obj/effect/decal/bordur{
@@ -3966,7 +3966,7 @@
 	dir = 6
 	},
 /obj/effect/decal/bordur,
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf)
 "bcX" = (
 /obj/structure/sink{
@@ -4341,7 +4341,7 @@
 /obj/underplate/stuff{
 	pixel_y = 8
 	},
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/carpet/purple,
 /area/vtm/fishermanswharf)
 "bik" = (
 /obj/structure/chair/sofa/corp/corner,
@@ -19963,7 +19963,7 @@
 /obj/underplate/stuff{
 	pixel_y = 8
 	},
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/carpet/purple,
 /area/vtm/fishermanswharf)
 "fAo" = (
 /obj/structure/roadblock/alt,
@@ -25448,7 +25448,7 @@
 /obj/structure/chair/wood{
 	dir = 1
 	},
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/carpet/purple,
 /area/vtm/fishermanswharf)
 "gZu" = (
 /obj/structure/vampdoor/church,
@@ -36364,7 +36364,7 @@
 /area/vtm/interior/millennium_tower/f4)
 "kfO" = (
 /obj/effect/decal/bordur,
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf)
 "kfS" = (
 /obj/effect/turf_decal/siding/wood{
@@ -42034,7 +42034,7 @@
 /obj/effect/decal/bordur{
 	dir = 1
 	},
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf)
 "lLK" = (
 /obj/machinery/jukebox,
@@ -59678,7 +59678,7 @@
 /obj/effect/decal/bordur{
 	dir = 4
 	},
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf)
 "qBa" = (
 /obj/transfer_point_vamp{
@@ -64390,7 +64390,7 @@
 /area/vtm/pacificheights/forest)
 "rLP" = (
 /obj/structure/table/wood,
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/carpet/purple,
 /area/vtm/fishermanswharf)
 "rLV" = (
 /obj/structure/filingcabinet/security,
@@ -65654,7 +65654,7 @@
 /area/vtm/pacificheights/forest)
 "sbb" = (
 /obj/structure/chair/wood,
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/carpet/purple,
 /area/vtm/fishermanswharf)
 "sbd" = (
 /obj/effect/decal/bordur/corner{
@@ -67224,7 +67224,7 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/vtm/jazzclub)
 "sxQ" = (
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf)
 "sxU" = (
 /obj/structure/railing{
@@ -67653,7 +67653,7 @@
 /obj/effect/decal/bordur{
 	dir = 5
 	},
-/turf/open/floor/plating/vampgrass,
+/turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf)
 "sES" = (
 /obj/effect/mob_spawn/human/corpse/ciz4,
