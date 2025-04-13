@@ -586,7 +586,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	flavor_text	= sanitize_text(flavor_text)
 	flavor_text_nsfw = sanitize_text(flavor_text_nsfw)
 	ooc_notes = sanitize_text(ooc_notes)
-	character_notes = sanitize_text(character_notes, ooc_notes)
+	character_notes = sanitize_text(character_notes)
 	socks			= sanitize_inlist(socks, GLOB.socks_list)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	diablerist				= sanitize_integer(diablerist, 0, 1, initial(diablerist))
