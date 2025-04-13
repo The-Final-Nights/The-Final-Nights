@@ -203,7 +203,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/flavor_text
 	var/flavor_text_nsfw
 	var/ooc_notes
-	var/character_notes = " "
+	var/character_notes
 
 	var/friend_text
 	var/enemy_text
@@ -2498,16 +2498,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				// TODO: Completely revamp flavor text into a more expansive system - TFN
 				// TFN EDIT ADDITION START: character headshots & flavortext
 				if("ooc_notes")
-					var/new_ooc_notes = tgui_input_text(user, "Choose your OOC notes:", "Character Preference", ooc_notes, MAX_MESSAGE_LEN, multiline = TRUE, encode = FALSE)
+					var/new_ooc_notes = tgui_input_text(user, "Choose your OOC notes:", "Character Preference", ooc_notes, MAX_FLAVOR_LEN, multiline = TRUE, encode = FALSE)
 					if(!length(new_ooc_notes))
 						return
-					ooc_notes = STRIP_HTML_SIMPLE(new_ooc_notes, MAX_MESSAGE_LEN)
+					ooc_notes = STRIP_HTML_SIMPLE(new_ooc_notes, MAX_FLAVOR_LEN)
 
 				if("character_notes")
-					var/new_character_notes = tgui_input_text(user, "Choose your character notes:", "Character Preference", character_notes, MAX_MESSAGE_LEN, multiline = TRUE, encode = FALSE)
+					var/new_character_notes = tgui_input_text(user, "Choose your character notes:", "Character Preference", character_notes, MAX_FLAVOR_LEN, multiline = TRUE, encode = FALSE)
 					if(!length(new_character_notes))
 						return
-					character_notes = STRIP_HTML_SIMPLE(new_character_notes, MAX_MESSAGE_LEN)
+					character_notes = STRIP_HTML_SIMPLE(new_character_notes, MAX_FLAVOR_LEN)
 					SSoverwatch.record_action(user, "**CHARACTER NOTES**: [character_notes]")
 
 				if("flavor_text")
