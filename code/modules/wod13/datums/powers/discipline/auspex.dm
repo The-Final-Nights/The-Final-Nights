@@ -204,9 +204,7 @@
 
 /datum/discipline_power/auspex/telepathy/activate(mob/living/target)
 	. = ..()
-	var/notice = "notice"
-	var/boldnotice = "boldnotice"
-	var/input_message = input(owner, "What message will you project to them?") as null|text
+	var/input_message = tgui_input_text(owner, "What message will you project to them?") as null|text
 	if (!input_message)
 		return
 
@@ -218,8 +216,8 @@
 		return
 
 	log_directed_talk(owner, input_message, LOG_SAY, "[name]")
-	to_chat(owner, "<span class='[boldnotice]'>You project your thoughts into [target]'s mind:</span> <span class='[notice]'>[input_message]</span>")
-	to_chat(target, "<span class='[boldnotice]'>You hear a voice in your head...</span> <span class='[notice]'>[input_message]</span>")
+	to_chat(owner, "<span class='boldannounce'>You project your thoughts into [target]'s mind:<span class='notice'>[input_message]</span>")
+	to_chat(target, "<span class='boldannounce'>You hear a voice in your head...</span> <span class='notice'>[input_message]</span>")
 
 
 //PSYCHIC PROJECTION
