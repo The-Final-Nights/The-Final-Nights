@@ -19,11 +19,11 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 
 GLOBAL_LIST_INIT(malk_hallucinations, list(
 	/datum/hallucination/malk/object = 100,
-	/datum/hallucination/chat = 90,
 	/datum/hallucination/message = 60,
 	/datum/hallucination/sounds = 50,
 	/datum/hallucination/malk/laugh = 40,
 	/datum/hallucination/battle = 20,
+	/datum/hallucination/chat = 20,
 	/datum/hallucination/dangerflash = 15,
 	/datum/hallucination/weird_sounds = 8,
 	/datum/hallucination/stray_bullet = 7,
