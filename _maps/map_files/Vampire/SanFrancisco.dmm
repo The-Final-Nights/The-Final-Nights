@@ -5514,6 +5514,7 @@
 	pixel_x = -3;
 	pixel_y = 5
 	},
+/obj/item/toner/large,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "byQ" = (
@@ -26079,6 +26080,7 @@
 "hih" = (
 /obj/structure/table,
 /obj/item/storage/fancy/donut_box,
+/obj/item/toner/large,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "hik" = (
@@ -38065,6 +38067,7 @@
 	pixel_y = 18;
 	pixel_x = -14
 	},
+/obj/item/toner/large,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "kFx" = (
