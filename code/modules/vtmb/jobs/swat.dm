@@ -1,13 +1,13 @@
 /datum/outfit/job/swat
 	name = "Swat Officer"
 	ears = /obj/item/p25radio/police/tactical
-	uniform = /obj/item/clothing/under/vampire/police
+	uniform = /obj/item/clothing/under/vampire/police/utility
 	mask = /obj/item/clothing/mask/vampire/balaclava
 	r_pocket = /obj/item/flashlight
 	l_pocket = /obj/item/ammo_box/magazine/vamp556
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	belt = /obj/item/gun/ballistic/automatic/vampire/ar15
-	suit = /obj/item/clothing/suit/vampire/vest/police
+	suit = /obj/item/clothing/suit/vampire/vest
 	head = /obj/item/clothing/head/vampire/helmet
 	id = /obj/item/card/id/police
 	backpack_contents = list(
