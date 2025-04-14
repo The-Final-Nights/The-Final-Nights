@@ -16095,6 +16095,7 @@
 "ewz" = (
 /obj/structure/table/wood,
 /obj/item/cigbutt/roach,
+/obj/item/reagent_containers/food/drinks/beer/vampire,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "ewI" = (
@@ -32923,6 +32924,7 @@
 /obj/structure/table/wood,
 /obj/item/food/vampire/burger,
 /obj/item/food/vampire/burger,
+/obj/underplate,
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch)
 "jfC" = (
@@ -45871,6 +45873,7 @@
 	pixel_y = -16
 	},
 /obj/structure/table/wood,
+/obj/underplate,
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch)
 "mNC" = (
@@ -51497,6 +51500,7 @@
 /area/vtm/interior/banu/haven)
 "opP" = (
 /obj/structure/table/wood,
+/obj/underplate,
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch)
 "oqb" = (
@@ -87537,6 +87541,14 @@
 /obj/structure/stairs/north,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
+"ygT" = (
+/obj/structure/table/wood,
+/obj/underplate/stuff{
+	pixel_y = 8
+	},
+/obj/underplate,
+/turf/open/floor/carpet/green,
+/area/vtm/anarch)
 "yhf" = (
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
@@ -170976,7 +170988,7 @@ hBS
 gjb
 aOU
 wsw
-opP
+wsw
 fkk
 msq
 sMA
@@ -173020,7 +173032,7 @@ pMC
 pMC
 pMC
 htz
-pHA
+ygT
 kVz
 pMC
 pMC
@@ -173271,7 +173283,7 @@ xCP
 pMC
 pMC
 pHA
-pHA
+ygT
 pHA
 pMC
 pMC
@@ -174042,11 +174054,11 @@ pMC
 pMC
 pMC
 htz
-pHA
+ygT
 kVz
 pMC
 htz
-pHA
+ygT
 kVz
 pMC
 pMC
