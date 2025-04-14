@@ -100,13 +100,13 @@
 
 /datum/discipline_power/obtenebration/black_metamorphosis/activate()
 	. = ..()
-	owner.physiology.damage_resistance += 60
+	owner.physiology.damage_resistance = 60
 	animate(owner, color = "#000000", time = 1 SECONDS, loop = 1)
 
 /datum/discipline_power/obtenebration/black_metamorphosis/deactivate()
 	. = ..()
 	playsound(owner.loc, 'sound/magic/voidblink.ogg', 50, FALSE)
-	owner.physiology.damage_resistance -= 60
+	owner.physiology.damage_resistance = 0
 	animate(owner, color = initial(owner.color), time = 1 SECONDS, loop = 1)
 
 //TENEBROUS FORM

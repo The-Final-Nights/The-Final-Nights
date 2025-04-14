@@ -381,14 +381,14 @@
 	H.bloodpool = max(H.bloodpool - 2, 0)
 	playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 	abuse_fix = world.time
-	H.physiology.damage_resistance += 60
+	H.physiology.damage_resistance = 60
 	animate(H, color = "#ff0000", time = 10, loop = 1)
 	if(H.CheckEyewitness(H, H, 7, FALSE))
 		H.AdjustMasquerade(-1)
 	spawn(15 SECONDS)
 		if(H)
 			playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
-			H.physiology.damage_resistance -= 60
+			H.physiology.damage_resistance = 0
 			H.color = initial(H.color)
 
 /*
