@@ -16115,16 +16115,8 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
 "exy" = (
-/obj/structure/reagent_dispensers/water_cooler{
-	pixel_y = 20;
-	density = 0
-	},
-/obj/item/kirbyplants{
-	icon_state = "plant5";
-	pixel_y = 17;
-	pixel_x = -10
-	},
-/turf/open/floor/plating/concrete,
+/obj/effect/turf_decal/siding/white,
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "exB" = (
 /obj/structure/closet/crate/coffin,
@@ -18506,9 +18498,6 @@
 "fhh" = (
 /obj/structure/chair/greyscale{
 	dir = 4
-	},
-/obj/effect/landmark/start{
-	name = "Police Officer"
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/upstairs)
@@ -23239,9 +23228,8 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
 "gtt" = (
-/obj/effect/turf_decal/siding/white,
 /obj/structure/vampdoor/police,
-/turf/open/floor/plating/parquetry/old,
+/turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "gtz" = (
 /obj/machinery/light/small{
@@ -49164,6 +49152,19 @@
 /obj/effect/decal/wallpaper/paper/rich/low,
 /turf/closed/wall/vampwall/painted/low/window,
 /area/vtm/interior/bianchiBank)
+"nJd" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	pixel_y = 20;
+	density = 0;
+	pixel_x = -10
+	},
+/obj/item/kirbyplants{
+	icon_state = "plant5";
+	pixel_y = 5;
+	pixel_x = -10
+	},
+/turf/open/floor/plating/concrete,
+/area/vtm/interior/police)
 "nJf" = (
 /obj/item/clothing/head/cone,
 /turf/open/floor/plating/vampdirt,
@@ -199494,10 +199495,10 @@ ulT
 qTP
 esp
 xaW
-uZV
-qTP
 exy
+qTP
 yhf
+nJd
 yhf
 vdm
 qTP
@@ -199751,7 +199752,7 @@ cbK
 qTP
 kgF
 eeP
-uZV
+exy
 gtt
 yhf
 yhf
