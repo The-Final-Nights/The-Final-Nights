@@ -253,21 +253,21 @@
 /datum/emote/living/carbon/human/snap/one
 	key = "snap"
 	key_third_person = "snaps"
-	message = "snaps their fingers"
+	message = "snaps their fingers."
 	message_param = "snaps their fingers at %t"
 	sound = 'sound/mobs/humanoids/human/snap/snap.ogg'
 
 /datum/emote/living/carbon/human/snap/two
 	key = "snap2"
 	key_third_person = "snaps2"
-	message = "snaps their fingers twice"
+	message = "snaps their fingers twice."
 	message_param = "snaps their fingers at %t twice"
 	sound = 'sound/mobs/humanoids/human/snap/snap2.ogg'
 
 /datum/emote/living/carbon/human/snap/three
 	key = "snap3"
 	key_third_person = "snaps3"
-	message = "snaps their fingers thrice"
+	message = "snaps their fingers thrice."
 	message_param = "snaps their fingers at %t thrice"
 	sound = 'sound/mobs/humanoids/human/snap/snap3.ogg'
 

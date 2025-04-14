@@ -2486,12 +2486,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(!length(new_ooc_notes))
 						return
 					ooc_notes = new_ooc_notes
+					SSoverwatch.record_action(user, "**OOC NOTES**: [html_decode(ooc_notes)]")
 
 				if("flavor_text")
 					var/new_flavor = tgui_input_text(user, "Choose your character's flavor text:", "Character Preference", flavor_text, MAX_FLAVOR_LEN, multiline = TRUE)
 					if(!length(new_flavor))
 						return
 					flavor_text = new_flavor
+					SSoverwatch.record_action(user, "**FLAVORTEXT**: [html_decode(flavor_text)]")
 
 				if("view_flavortext")
 					var/datum/browser/popup = new(user, "[real_name]_flavortext", real_name, 500, 200)
@@ -2523,7 +2525,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 					headshot_link = new_headshot_link
 					to_chat(user, span_notice("Successfully updated headshot picture!"))
-					log_game("[user] has set their Headshot image to '[headshot_link]'.")
+					log_game("[key_name(user)] has set their Headshot image to '[headshot_link]'.")
+					SSoverwatch.record_action(user, "[key_name(user)] has set their Headshot image to [headshot_link]")
 				// TFN EDIT ADDITION END
 				if("change_appearance")
 					if(!slotlocked)
@@ -3191,6 +3194,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.additional_lockpicking = A.archetype_additional_lockpicking
 	character.additional_athletics = A.archetype_additional_athletics
 	A.special_skill(character)
+	character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
+	character.health = character.maxHealth
 
 	if(pref_species.name == "Vampire")
 		var/datum/vampireclane/CLN = new clane.type()
@@ -3223,8 +3228,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			character.max_yin_chi = 2
 
 	if(pref_species.name == "Werewolf")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 		switch(tribe)
 			if("Wendigo")
 				character.yin_chi = 1
@@ -3241,13 +3244,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.max_yin_chi = 1 + auspice_level * 2
 				character.yang_chi = 5
 				character.max_yang_chi = 5
-	if(pref_species.name == "Kuei-Jin")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 	if(pref_species.name == "Vampire")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 		character.morality_path.score = path_score
+
 	character.masquerade = masquerade
 	if(!character_setup)
 		if(character in GLOB.masquerade_breakers_list)

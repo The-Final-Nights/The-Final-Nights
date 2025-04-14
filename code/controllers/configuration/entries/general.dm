@@ -517,3 +517,9 @@
  */
 /datum/config_entry/number/tgui_max_chunk_count
 	default = 32
+
+/// Enables sending certain actions to a Discord webhook for review
+/datum/config_entry/flag/discord_overwatch
+
+/datum/config_entry/string/discord_overwatch_webhook
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN

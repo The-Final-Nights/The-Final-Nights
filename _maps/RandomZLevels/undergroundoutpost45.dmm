@@ -366,7 +366,6 @@
 /area/awaymission/undergroundoutpost45/central)
 "bb" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/ripley_build_and_repair,
 /turf/open/floor/plasteel/grimy{
 	heat_capacity = 1e+006
 	},
@@ -2195,7 +2194,6 @@
 /area/awaymission/undergroundoutpost45/central)
 "eE" = (
 /obj/structure/table,
-/obj/item/book/manual/hydroponics_pod_people,
 /obj/item/paper/guides/jobs/hydroponics,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/neutral{
@@ -2400,7 +2398,6 @@
 "eW" = (
 /obj/structure/table,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/item/book/manual/wiki/security_space_law,
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
@@ -3798,7 +3795,6 @@
 	dir = 4
 	},
 /obj/structure/table,
-/obj/item/book/manual/chef_recipes,
 /turf/open/floor/plasteel/cafeteria{
 	dir = 5;
 	heat_capacity = 1e+006
@@ -3960,7 +3956,6 @@
 /area/awaymission/undergroundoutpost45/crew_quarters)
 "io" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/barman_recipes,
 /obj/item/reagent_containers/food/drinks/shaker,
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
@@ -6540,7 +6535,6 @@
 /area/awaymission/undergroundoutpost45/research)
 "mS" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/security_space_law,
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
@@ -10060,7 +10054,6 @@
 	dir = 1
 	},
 /obj/structure/table,
-/obj/item/book/manual/wiki/security_space_law,
 /obj/effect/turf_decal/tile/red,
 /obj/effect/turf_decal/tile/red{
 	dir = 4
