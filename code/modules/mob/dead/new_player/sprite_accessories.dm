@@ -2280,17 +2280,6 @@
 	icon_state = "cat"
 	color_src = HAIR
 
-/datum/sprite_accessory/tails/human/gargoyle
-	name = "Gargoyle"
-	icon_state = "gargoyle"
-	color_src = HAIR
-
-/datum/sprite_accessory/tails_animated/human/gargoyle
-
-	name = "Gargoyle"
-	icon_state = "gargoyle"
-	color_src = HAIR
-
 /datum/sprite_accessory/tails/monkey/default
 	name = "Monkey"
 	icon_state = "monkey"

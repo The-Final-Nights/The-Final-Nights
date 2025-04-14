@@ -13,8 +13,8 @@
 	male_clothes = /obj/item/clothing/under/vampire/malkavian
 	female_clothes = /obj/item/clothing/under/vampire/malkavian
 	current_accessory = "gargoyle_full"
-	accessories = list("gargoyle_full", "gargoyle_left", "gargoyle_right", "gargoyle_broken", "gargoyle_round", "none")
-	accessories_layers = list("gargoyle_full" = UNICORN_LAYER, "gargoyle_left" = UNICORN_LAYER, "gargoyle_right" = UNICORN_LAYER, "gargoyle_broken" = UNICORN_LAYER, "gargoyle_round" = UNICORN_LAYER, "none" = UNICORN_LAYER)
+	accessories = list("gargoyle_full", "gargoyle_left", "gargoyle_right", "gargoyle_broken", "gargoyle_round", "gargoyle_devil", "gargoyle_oni", "none")
+	accessories_layers = list("gargoyle_full" = UNICORN_LAYER, "gargoyle_left" = UNICORN_LAYER, "gargoyle_right" = UNICORN_LAYER, "gargoyle_broken" = UNICORN_LAYER, "gargoyle_round" = UNICORN_LAYER, "gargoyle_devil" = UNICORN_LAYER, "gargoyle_oni" = UNICORN_LAYER, "none" = UNICORN_LAYER)
 	whitelisted = FALSE
 
 /datum/vampireclane/gargoyle/on_gain(mob/living/carbon/human/H)
@@ -25,3 +25,7 @@
 /datum/vampireclane/gargoyle/post_gain(mob/living/carbon/human/H)
 	..()
 	H.dna.species.GiveSpeciesFlight(H)
+	H.remove_overlay(MARKS_LAYER)
+	var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "gargoyle_legs_n_tails", -MARKS_LAYER)
+	H.overlays_standing[MARKS_LAYER] = acc_overlay
+	H.apply_overlay(MARKS_LAYER)

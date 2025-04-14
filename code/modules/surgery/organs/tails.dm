@@ -34,27 +34,6 @@
 		color = H.hair_color
 		H.update_body()
 
-/obj/item/organ/tail/cat
-	name = "gargoyle tail"
-	desc = "A severed tail. Looks to be from a gargoyle's statue of some kind."
-	tail_type = "Gargoyle"
-
-/obj/item/organ/tail/cat/Insert(mob/living/carbon/human/H, special = 0, drop_if_replaced = TRUE)
-	..()
-	if(istype(H))
-		var/default_part = H.dna.species.mutant_bodyparts["tail_human"]
-		if(!default_part || default_part == "None")
-			H.dna.features["tail_human"] = H.dna.species.mutant_bodyparts["tail_human"] = gargoyle
-			H.update_body()
-
-/obj/item/organ/tail/cat/Remove(mob/living/carbon/human/H,  special = 0)
-	..()
-	if(istype(H))
-		H.dna.features["tail_human"] = "None"
-		H.dna.species.mutant_bodyparts -= "tail_human"
-		color = H.hair_color
-		H.update_body()
-
 /obj/item/organ/tail/lizard
 	name = "lizard tail"
 	desc = "A severed lizard tail. Somewhere, no doubt, a lizard hater is very pleased with themselves."
