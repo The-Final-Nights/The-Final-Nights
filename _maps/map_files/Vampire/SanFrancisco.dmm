@@ -1403,6 +1403,16 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
+"atl" = (
+/obj/structure/table/wood,
+/obj/effect/turf_decal/siding/brown{
+	color = "#50331a"
+	},
+/obj/item/clothing/head/spacepolice{
+	name = "SFPD Captains cap"
+	},
+/turf/open/floor/plating/vampcarpet,
+/area/vtm/interior/police/upstairs)
 "atm" = (
 /obj/effect/landmark/npcwall,
 /obj/structure/vampfence/corner/rich,
@@ -269413,7 +269423,7 @@ dZF
 psB
 mSy
 wJy
-nBk
+atl
 lXw
 xyC
 pwI
