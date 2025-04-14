@@ -17,63 +17,90 @@
 	name = "Sense the Sin"
 	desc = "Become supernaturally resistant to fire."
 
+	target_type = TARGET_HUMAN
+	range = 12
 	level = 1
 
 	cancelable = TRUE
-	duration_length = 20 SECONDS
-	cooldown_length = 10 SECONDS
 
-/datum/discipline_power/daimonion/sense_the_sin/activate()
+/datum/discipline_power/daimonion/sense_the_sin/activate(mob/living/carbon/human/target)
 	. = ..()
-	owner.physiology.burn_mod /= 100
-	owner.color = "#884200"
+	if(target.get_total_social() <= 3)
+		to_chat(owner, "Victim is not social or influencing.")
+	if(target.get_total_mentality() <= 3)
+		to_chat(owner, "Victim lacks appropiate willpower.")
+	if(target.get_total_physique() <= 3)
+		to_chat(owner, "Victim's body is weak and feeble.")
+	if(isgarou(target))
+		to_chat(owner, "Victim's natural banishment is silver...")
+	if(iskindred(target))
+		if(target.generation >= 10)
+			to_chat(owner, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
+		else
+			to_chat(owner, "Victim's vitae is thick and strong. You can clearly see their fear for fire, it seems that's a kindred.")
+	if(isghoul(target))
+		var/mob/living/carbon/human/ghoul = target
+		if(ghoul.mind.enslaved_to)
+			to_chat(owner, "Victim is addicted to vampiric vitae and its true master is [ghoul.mind.enslaved_to]")
+		else
+			to_chat(owner, "Victim is addicted to vampiric vitae, but is independent and free.")
+	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
+		to_chat(owner, "Victim is a feeble worm with no strengths or visible weaknesses.")
 
-/datum/discipline_power/daimonion/sense_the_sin/deactivate()
-	. = ..()
-	owner.color = initial(owner.color)
-	owner.physiology.burn_mod *= 100
 
 //FEAR OF THE VOID BELOW
 /datum/discipline_power/daimonion/fear_of_the_void_below
 	name = "Fear of the Void Below"
-	desc = "Sprout wings and become able to fly."
+	desc = "Induce fear in a target.."
 
 	level = 2
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_LYING | DISC_CHECK_IMMOBILE
+	check_flags = DISC_CHECK_CONSCIOUS
 
-	violates_masquerade = TRUE
+	target_type = TARGET_HUMAN
+	range = 7
 
-	cancelable = TRUE
-	duration_length = 30 SECONDS
-	cooldown_length = 20 SECONDS
+	duration_length = 3 SECONDS
 
-/datum/discipline_power/daimonion/fear_of_the_void_below/activate()
+/datum/discipline_power/daimonion/fear_of_the_void_below/pre_activation_checks(mob/living/target)
+	var/mypower = owner.get_total_social()
+	var/theirpower = target.get_total_mentality()
+	if((theirpower >= mypower) || (owner.generation > target.generation))
+		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
+		return FALSE
+	return TRUE
+
+/datum/discipline_power/daimonion/fear_of_the_void_below/activate(mob/living/carbon/human/target)
 	. = ..()
-	owner.dna.species.GiveSpeciesFlight(owner)
+	to_chat(target, "<span class='warning'><b>Your mind is enveloped by your greatest fear!</span></b>")
+	if(!target.in_frenzy) // Cause target to frenzy
+		target.enter_frenzymod()
+		target.Paralyze(3 SECONDS)
 
-/datum/discipline_power/daimonion/fear_of_the_void_below/deactivate()
+/datum/discipline_power/daimonion/fear_of_the_void_below/deactivate(mob/living/carbon/human/target)
 	. = ..()
-	owner.dna.species.RemoveSpeciesFlight(owner)
+	target.exit_frenzymod()
 
 //CONFLAGRATION
 /datum/discipline_power/daimonion/conflagration
 	name = "Conflagration"
-	desc = "Turn your hands into deadly claws."
+	desc = "Draw out the destructive essence of the Beyond."
 
 	level = 3
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
+	target_type = TARGET_LIVING
+	range = 7
 
+	aggravating = TRUE
+	hostile = TRUE
 	violates_masquerade = TRUE
 
-	cancelable = TRUE
-	duration_length = 30 SECONDS
-	cooldown_length = 10 SECONDS
-
-/datum/discipline_power/daimonion/conflagration/activate()
+/datum/discipline_power/daimonion/conflagration/activate(mob/living/target)
 	. = ..()
-	owner.drop_all_held_items()
-	owner.put_in_r_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
-	owner.put_in_l_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
+	var/turf/start = get_turf(owner)
+	var/obj/projectile/magic/aoe/fireball/baali/created_fireball = new(start)
+	created_fireball.firer = owner
+	created_fireball.preparePixelProjectile(target, start)
+	created_fireball.fire(direct_target = target)
 
 /datum/discipline_power/daimonion/conflagration/deactivate()
 	. = ..()
@@ -107,85 +134,49 @@
 //PSYCHOMACHIA
 /datum/discipline_power/daimonion/psychomachia
 	name = "Psychomachia"
-	desc = "Become a bat."
+	desc = "Bring forth the target's greatest fear."
 
 	level = 4
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
+	target_type = TARGET_LIVING
+	range = 7
 
-	violates_masquerade = TRUE
+	violates_masquerade = FALSE
 
-	duration_length = 30 SECONDS
-	cooldown_length = 10 SECONDS
-	grouped_powers = list(/datum/discipline_power/daimonion/condemnation)
-
-	var/obj/effect/proc_holder/spell/targeted/shapeshift/bat/bat_shapeshift
-
-/datum/discipline_power/daimonion/psychomachia/activate()
+/datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
-	if(!bat_shapeshift)
-		bat_shapeshift = new(owner)
-
-	owner.drop_all_held_items()
-	bat_shapeshift.Shapeshift(owner)
-
-/datum/discipline_power/daimonion/psychomachia/deactivate()
-	. = ..()
-	bat_shapeshift.Restore(bat_shapeshift.myshape)
-	owner.Stun(1.5 SECONDS)
-	owner.do_jitter_animation(30)
+	to_chat(target, "<span class='warning'><b>You hear an infernal laugh!</span></b>")
+	new /datum/hallucination/baali(target, TRUE)
 
 //CONDEMNTATION
 /datum/discipline_power/daimonion/condemnation
 	name = "Condemnation"
-	desc = "Become a bat."
+	desc = "Condemn a fool to suffering."
 
 	level = 5
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
-
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
+	target_type = TARGET_LIVING
+	range = 7
 	violates_masquerade = TRUE
 
-	duration_length = 30 SECONDS
-	cooldown_length = 10 SECONDS
-	grouped_powers = list(/datum/discipline_power/daimonion/psychomachia)
+	var/list/curse_names = list()
+	var/list/curses = list()
 
-	var/obj/effect/proc_holder/spell/targeted/shapeshift/bat/bat_shapeshift
-
-/datum/discipline_power/daimonion/condemnation/activate()
+/datum/discipline_power/daimonion/condemnation/activate(mob/living/target)
 	. = ..()
-	if(!bat_shapeshift)
-		bat_shapeshift = new(owner)
+	if(GLOB.cursed_characters.len == 0 || GLOB.cursed_characters.len > 0 && !(GLOB.cursed_characters.Find(target)))
+		for(var/i in subtypesof(/datum/curse/daimonion))
+			var/datum/curse/daimonion/D = new i
+			curses += D
+			if(owner.generation <= D.genrequired)
+				curse_names += initial(D.name)
+		to_chat(owner, "<span class='userdanger'><b>The greatest of curses come with the greatest of costs. Are you willing to take the risk of total damnation?</b></span>")
+		var/chosencurse = input(owner, "Pick a curse to bestow:", "Daimonion") as null|anything in curse_names
+		if(chosencurse)
+			for(var/datum/curse/daimonion/C in curses)
+				if(C.name == chosencurse)
+					C.activate(target)
+					owner.cursed_bloodpool += C.bloodcurse
+	else
+		to_chat(owner, "<span class='warning'>This one is already cursed!</span>")
 
-	owner.drop_all_held_items()
-	bat_shapeshift.Shapeshift(owner)
-
-/datum/discipline_power/daimonion/condemnation/deactivate()
-	. = ..()
-	bat_shapeshift.Restore(bat_shapeshift.myshape)
-	owner.Stun(1.5 SECONDS)
-	owner.do_jitter_animation(30)
-
-/datum/discipline_power/daimonion/condemnation/post_gain()
-	. = ..()
-	var/datum/action/antifrenzy/antifrenzy_contract = new()
-	antifrenzy_contract.Grant(owner)
-
-/datum/action/antifrenzy
-	name = "Resist Beast"
-	desc = "Resist Frenzy and Rotshreck by signing a contract with Demons."
-	button_icon_state = "resist"
-	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
-	vampiric = TRUE
-	var/used = FALSE
-
-/datum/action/antifrenzy/Trigger()
-	var/mob/living/carbon/human/user = owner
-	if(user.stat >= UNCONSCIOUS || user.IsSleeping() || user.IsUnconscious() || user.IsParalyzed() || user.IsKnockdown() || user.IsStun() || HAS_TRAIT(user, TRAIT_RESTRAINED) || !isturf(user.loc))
-		return
-	if(used)
-		to_chat(owner, span_warning("You've already signed this contract!"))
-		return
-	used = TRUE
-	user.antifrenzy = TRUE
-	SEND_SOUND(owner, sound('sound/magic/curse.ogg', 0, 0, 50))
-	to_chat(owner, span_warning("You feel control over your Beast, but at what cost..."))
-	qdel(src)

@@ -255,6 +255,7 @@
 
 	var/bloodpool = 5
 	var/maxbloodpool = 5
+	var/cursed_bloodpool = 0
 	var/generation = 13
 	var/masquerade = 5
 	var/last_masquerade_violation = 0
