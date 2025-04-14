@@ -116,6 +116,7 @@
 			return TRUE
 	if((theirpower >= mypower) || (owner.generation > target.generation))
 		to_chat(owner, span_warning("[target]'s has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist.")
 		return FALSE
 	return TRUE
 
@@ -152,6 +153,7 @@
 			return TRUE
 	if((theirpower >= mypower) || (owner.generation > target.generation))
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist.")
 		return FALSE
 	return TRUE
 
@@ -190,6 +192,7 @@
 			return TRUE
 	if((theirpower >= mypower) || (owner.generation > target.generation))
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist.")
 		return FALSE
 	return TRUE
 
@@ -235,6 +238,7 @@
 			return TRUE
 	if((theirpower >= mypower) || (owner.generation > target.generation))
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist.")
 		return FALSE
 	return TRUE
 
@@ -275,6 +279,7 @@
 			return TRUE
 	if((theirpower >= mypower) || (owner.generation > target.generation))
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist.")
 		return FALSE
 	return TRUE
 
