@@ -199,7 +199,7 @@
 	check_flags = DISC_CHECK_CONSCIOUS
 	target_type = TARGET_LIVING
 	vitae_cost = 0
-	cooldown_length = 10 SECONDS
+	cooldown_length = 15 SECONDS
 	range = 7
 
 /datum/discipline_power/auspex/telepathy/activate(mob/living/target)
