@@ -172,6 +172,7 @@
 
 			if(user != conditioner)
 				if((theirpower >= mypower) && !dominate_me)
+					to_chat(L, span_warning("Your ears ring with the undeniable authority of [user]'s voice. For a moment, you nearly obey… but your will breaks through the illusion."))
 					continue
 
 			if(L.resistant_to_disciplines)
