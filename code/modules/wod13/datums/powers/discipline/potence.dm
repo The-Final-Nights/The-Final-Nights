@@ -100,6 +100,7 @@
 
 	check_flags = DISC_CHECK_CAPABLE
 
+	violates_masquerade = TRUE
 	toggled = TRUE
 	duration_length = 2 TURNS
 
@@ -140,6 +141,7 @@
 
 	check_flags = DISC_CHECK_CAPABLE
 
+	violates_masquerade = TRUE
 	toggled = TRUE
 	duration_length = 2 TURNS
 
@@ -180,6 +182,7 @@
 
 	check_flags = DISC_CHECK_CAPABLE
 
+	violates_masquerade = TRUE
 	toggled = TRUE
 	duration_length = 2 TURNS
 
