@@ -100,7 +100,6 @@
 
 	check_flags = DISC_CHECK_CAPABLE
 
-	violates_masquerade = TRUE
 	toggled = TRUE
 	duration_length = 2 TURNS
 
@@ -121,6 +120,7 @@
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 5, speed = 1, skill_mod = 0, min_distance = 0)
 	owner.potential = 3
+	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 /datum/discipline_power/potence/three/deactivate()
 	. = ..()
@@ -131,6 +131,7 @@
 	owner.remove_overlay(POTENCE_LAYER)
 	owner.potential = 0
 	qdel(tackler)
+	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 //POTENCE 4
 /datum/discipline_power/potence/four
@@ -141,7 +142,6 @@
 
 	check_flags = DISC_CHECK_CAPABLE
 
-	violates_masquerade = TRUE
 	toggled = TRUE
 	duration_length = 2 TURNS
 
@@ -162,6 +162,7 @@
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 6, speed = 1, skill_mod = 0, min_distance = 0)
 	owner.potential = 4
+	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 /datum/discipline_power/potence/four/deactivate()
 	. = ..()
@@ -172,6 +173,7 @@
 	owner.remove_overlay(POTENCE_LAYER)
 	owner.potential = 0
 	qdel(tackler)
+	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 //POTENCE 5
 /datum/discipline_power/potence/five
@@ -182,7 +184,6 @@
 
 	check_flags = DISC_CHECK_CAPABLE
 
-	violates_masquerade = TRUE
 	toggled = TRUE
 	duration_length = 2 TURNS
 
@@ -203,6 +204,7 @@
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 7, speed = 1, skill_mod = 0, min_distance = 0)
 	owner.potential = 5
+	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 /datum/discipline_power/potence/five/deactivate()
 	. = ..()
@@ -213,3 +215,4 @@
 	owner.remove_overlay(POTENCE_LAYER)
 	owner.potential = 0
 	qdel(tackler)
+	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
