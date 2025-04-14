@@ -32,6 +32,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
+		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
 		return FALSE
 	return TRUE
 
@@ -78,6 +79,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
+		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
 		return FALSE
 	return TRUE
 
@@ -119,6 +121,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
+		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
 		return FALSE
 	return TRUE
 
@@ -167,6 +170,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
+		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
 		return FALSE
 	return TRUE
 
@@ -216,6 +220,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower) || (owner.generation-3) >= target.generation)
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
+		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
 		return FALSE
 	return TRUE
 
