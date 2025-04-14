@@ -35,6 +35,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
+		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains.")
 		return FALSE
 	return TRUE
 
@@ -78,6 +79,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
+		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains.")
 		return FALSE
 	return TRUE
 
@@ -117,6 +119,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
+		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains.")
 		return FALSE
 	return TRUE
 
@@ -250,6 +253,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
+		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains.")
 		return FALSE
 	return TRUE
 
@@ -289,6 +293,7 @@
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	if((theirpower >= mypower))
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
+		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains.")
 		return FALSE
 	return TRUE
 
