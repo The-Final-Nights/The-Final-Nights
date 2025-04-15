@@ -156,13 +156,13 @@ GLOBAL_PROTECT(href_token)
 /*
 checks if usr is an admin with at least ONE of the flags in rights_required. (Note, they don't need all the flags)
 if rights_required == 0, then it simply checks if they are an admin.
-if it doesn't return 1 and show_msg=1 it will prints a message explaining why the check has failed
+if it doesn't return TRUE and show_msg=TRUE it will prints a message explaining why the check has failed
 generally it would be used like so:
 
 /proc/admin_proc()
 	if(!check_rights(R_ADMIN))
 		return
-	to_chat(world, "you have enough rights!", confidential = TRUE)
+	to_chat(world, "you have enough rights!")
 
 NOTE: it checks usr! not src! So if you're checking somebody's rank in a proc which they did not call
 you will have to do something like if(client.rights & R_ADMIN) yourself.
@@ -173,7 +173,7 @@ you will have to do something like if(client.rights & R_ADMIN) yourself.
 			return TRUE
 		else
 			if(show_msg)
-				to_chat(usr, "<font color='red'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</font>", confidential = TRUE)
+				to_chat(usr, "<font color='red'>Error: You do not have sufficient rights to do that. You require one of the following flags:[rights2text(rights_required," ")].</font>")
 	return FALSE
 
 //probably a bit iffy - will hopefully figure out a better solution
