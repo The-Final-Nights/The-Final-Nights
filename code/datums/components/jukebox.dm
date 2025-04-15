@@ -1,5 +1,5 @@
 /// Checks if the mob has jukebox muted in their preferences
-#define IS_PREF_MUTED(mob) (!isnull(mob.client) && !mob.client.prefs.read_preference(/datum/preference/toggle/sound_jukebox))
+#define IS_PREF_MUTED(mob) (!isnull(mob.client) && !(mob.client.prefs.toggles & SOUND_INSTRUMENTS))
 
 // Reasons for appling STATUS_MUTE to a mob's sound status
 /// The mob is deaf
@@ -67,7 +67,7 @@
 
 	RegisterSignal(parent, COMSIG_ENTER_AREA, PROC_REF(on_enter_area))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
-	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(parent_delete))
+	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(parent_delete))
 
 /datum/jukebox/Destroy()
 	unlisten_all()
@@ -212,14 +212,14 @@
 	PROTECTED_PROC(TRUE)
 
 	listeners[new_listener] = NONE
-	RegisterSignal(new_listener, COMSIG_QDELETING, PROC_REF(listener_deleted))
+	RegisterSignal(new_listener, COMSIG_PARENT_QDELETING, PROC_REF(listener_deleted))
 
 	if(isnull(new_listener.client))
 		RegisterSignal(new_listener, COMSIG_MOB_LOGIN, PROC_REF(listener_login))
 		return
 
 	RegisterSignal(new_listener, COMSIG_MOVABLE_MOVED, PROC_REF(listener_moved))
-	RegisterSignals(new_listener, list(SIGNAL_ADDTRAIT(TRAIT_DEAF), SIGNAL_REMOVETRAIT(TRAIT_DEAF)), PROC_REF(listener_deaf))
+	RegisterSignal(new_listener, list(SIGNAL_ADDTRAIT(TRAIT_DEAF), SIGNAL_REMOVETRAIT(TRAIT_DEAF)), PROC_REF(listener_deaf))
 
 	if(HAS_TRAIT(new_listener, TRAIT_DEAF) || IS_PREF_MUTED(new_listener))
 		listeners[new_listener] |= SOUND_MUTE
@@ -310,7 +310,7 @@
 	no_longer_listening.stop_sound_channel(CHANNEL_JUKEBOX)
 	UnregisterSignal(no_longer_listening, list(
 		COMSIG_MOB_LOGIN,
-		COMSIG_QDELETING,
+		COMSIG_PARENT_QDELETING,
 		COMSIG_MOVABLE_MOVED,
 		SIGNAL_ADDTRAIT(TRAIT_DEAF),
 		SIGNAL_REMOVETRAIT(TRAIT_DEAF),

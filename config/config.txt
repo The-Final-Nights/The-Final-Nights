@@ -185,13 +185,13 @@ RULESURL https://discord.gg/WU92NG2Me8
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 BANAPPEALS https://discord.gg/WU92NG2Me8
 
-## System command that invokes youtube-dl, used by Play Internet Sound.
-## You can install youtube-dl with
-## "pip install youtube-dl" if you have pip installed
-## from https://github.com/rg3/youtube-dl/releases
+## System command that invokes yt-dlp, used by Play Internet Sound.
+## You can install yt-dlp with
+## "pip install yt-dlp" if you have pip installed
+## from https://github.com/yt-dlp/yt-dlp/releases
 ## or your package manager
-## The default value assumes youtube-dl is in your system PATH
-# INVOKE_YOUTUBEDL youtube-dl
+## The default value assumes yt-dlp is in your system PATH
+# INVOKE_YOUTUBEDL yt-dlp
 
 ## Comment this out to disable users ability to use the request internet sounds to be played.
 REQUEST_INTERNET_SOUND

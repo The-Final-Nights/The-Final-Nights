@@ -1,7 +1,3 @@
-#define MUSICIAN_HEARCHECK_MINDELAY 4
-#define MUSIC_MAXLINES 1000
-#define MUSIC_MAXLINECHARS 300
-
 /**
  * # Song datum
  *
@@ -26,11 +22,6 @@
 
 	/// Are we currently playing?
 	var/playing = FALSE
-
-	/// Are we currently editing?
-	var/editing = TRUE
-	/// Is the help screen open?
-	var/help = FALSE
 
 	/// Repeats left
 	var/repeat = 0
@@ -111,7 +102,6 @@
 	var/note_shift = 0
 	var/note_shift_min = -100
 	var/note_shift_max = 100
-	var/can_noteshift = TRUE
 	/// The kind of sustain we're using
 	var/sustain_mode = SUSTAIN_LINEAR
 	/// When a note is considered dead if it is below this in volume
@@ -133,7 +123,7 @@
 	tempo = sanitize_tempo(tempo)
 	src.parent = parent
 	if(instrument_ids)
-		allowed_instrument_ids = islist(instrument_ids)? instrument_ids : list(instrument_ids)
+		allowed_instrument_ids = islist(instrument_ids) ? instrument_ids : list(instrument_ids)
 	if(length(allowed_instrument_ids))
 		set_instrument(allowed_instrument_ids[1])
 	hearing_mobs = list()
@@ -212,7 +202,6 @@
 		to_chat(user, "<span class='warning'>Song is empty.</span>")
 		return
 	playing = TRUE
-	updateDialog(user_playing)
 	//we can not afford to runtime, since we are going to be doing sound channel reservations and if we runtime it means we have a channel allocation leak.
 	//wrap the rest of the stuff to ensure stop_playing() is called.
 	do_hearcheck()
@@ -288,6 +277,16 @@
 /datum/song/proc/should_stop_playing(mob/user)
 	return QDELETED(parent) || !using_instrument || !playing
 
+/// Sets and sanitizes the repeats variable.
+/datum/song/proc/set_repeats(new_repeats_value)
+	if(playing)
+		return //So that people cant keep adding to repeat. If the do it intentionally, it could result in the server crashing.
+	repeat = round(new_repeats_value)
+	if(repeat < 0)
+		repeat = 0
+	if(repeat > max_repeats)
+		repeat = max_repeats
+
 /**
  * Sanitizes tempo to a value that makes sense and fits the current world.tick_lag.
  */
@@ -306,12 +305,6 @@
  */
 /datum/song/proc/set_bpm(bpm)
 	tempo = sanitize_tempo(600 / bpm)
-
-/**
- * Updates the window for our users. Override down the line.
- */
-/datum/song/proc/updateDialog(mob/user)
-	ui_interact(user)
 
 /datum/song/process(wait)
 	if(!playing)
@@ -338,7 +331,6 @@
 /datum/song/proc/set_volume(volume)
 	src.volume = clamp(volume, max(0, min_volume), min(100, max_volume))
 	update_sustain()
-	updateDialog()
 
 /**
  * Setter for setting how low the volume has to get before a note is considered "dead" and dropped
@@ -346,7 +338,6 @@
 /datum/song/proc/set_dropoff_volume(volume)
 	sustain_dropoff_volume = clamp(volume, INSTRUMENT_MIN_SUSTAIN_DROPOFF, 100)
 	update_sustain()
-	updateDialog()
 
 /**
  * Setter for setting exponential falloff factor.
@@ -354,7 +345,6 @@
 /datum/song/proc/set_exponential_drop_rate(drop)
 	sustain_exponential_dropoff = clamp(drop, INSTRUMENT_EXP_FALLOFF_MIN, INSTRUMENT_EXP_FALLOFF_MAX)
 	update_sustain()
-	updateDialog()
 
 /**
  * Setter for setting linear falloff duration.
@@ -362,7 +352,6 @@
 /datum/song/proc/set_linear_falloff_duration(duration)
 	sustain_linear_duration = clamp(duration, 0.1, INSTRUMENT_MAX_TOTAL_SUSTAIN)
 	update_sustain()
-	updateDialog()
 
 /datum/song/vv_edit_var(var_name, var_value)
 	. = ..()
@@ -380,9 +369,6 @@
 // subtype for handheld instruments, like violin
 /datum/song/handheld
 
-/datum/song/handheld/updateDialog(mob/user)
-	parent.ui_interact(user || usr)
-
 /datum/song/handheld/should_stop_playing(mob/user)
 	. = ..()
 	if(.)
@@ -392,9 +378,6 @@
 
 // subtype for stationary structures, like pianos
 /datum/song/stationary
-
-/datum/song/stationary/updateDialog(mob/user)
-	parent.ui_interact(user || usr)
 
 /datum/song/stationary/should_stop_playing(mob/user)
 	. = ..()

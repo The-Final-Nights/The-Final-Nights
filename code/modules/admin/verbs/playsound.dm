@@ -3,7 +3,13 @@
 #define SHELLEO_STDOUT 2
 #define SHELLEO_STDERR 3
 
-ADMIN_VERB(play_sound, R_SOUND, "Play Global Sound", "Play a sound to all connected players.", ADMIN_CATEGORY_FUN, sound as sound)
+/client/proc/play_sound(sound as sound)
+	set category = "Admin.Fun"
+	set name = "Play Global Sound"
+	if(!check_rights(R_SOUND))
+		return
+	var/mob/user = usr
+
 	var/freq = 1
 	var/vol = tgui_input_number(user, "What volume would you like the sound to play at?", max_value = 100)
 	if(!vol)
@@ -31,24 +37,32 @@ ADMIN_VERB(play_sound, R_SOUND, "Play Global Sound", "Play a sound to all connec
 	message_admins("[key_name_admin(user)] played sound [sound]")
 
 	for(var/mob/M in GLOB.player_list)
-		var/volume_modifier = M.client.prefs.read_preference(/datum/preference/numeric/volume/sound_midi)
-		if(volume_modifier > 0)
-			admin_sound.volume = vol * M.client.admin_music_volume * (volume_modifier/100)
-			SEND_SOUND(M, admin_sound)
-			admin_sound.volume = vol
+		admin_sound.volume = vol * M.client.admin_music_volume
+		SEND_SOUND(M, admin_sound)
+		admin_sound.volume = vol
 
 	BLACKBOX_LOG_ADMIN_VERB("Play Global Sound")
 
-ADMIN_VERB(play_local_sound, R_SOUND, "Play Local Sound", "Plays a sound only you can hear.", ADMIN_CATEGORY_FUN, sound as sound)
-	log_admin("[key_name(user)] played a local sound [sound]")
-	message_admins("[key_name_admin(user)] played a local sound [sound]")
-	var/volume = tgui_input_number(user, "What volume would you like the sound to play at?", max_value = 100)
-	playsound(get_turf(user.mob), sound, volume || 50, FALSE)
+/client/proc/play_local_sound(S as sound)
+	set category = "Admin.Fun"
+	set name = "Play Local Sound"
+	if(!check_rights(R_SOUND))
+		return
+
+	log_admin("[key_name(src)] played a local sound [S]")
+	message_admins("[key_name_admin(src)] played a local sound [S]")
+	playsound(get_turf(src.mob), S, 50, FALSE, FALSE)
 	BLACKBOX_LOG_ADMIN_VERB("Play Local Sound")
 
-ADMIN_VERB(play_direct_mob_sound, R_SOUND, "Play Direct Mob Sound", "Play a sound directly to a mob.", ADMIN_CATEGORY_FUN, sound as sound, mob/target in world)
+/client/proc/play_direct_mob_sound(sound as sound, mob/target)
+	set category = "Admin.Fun"
+	set name = "Play Direct Mob Sound"
+	if(!check_rights(R_SOUND))
+		return
+
+	var/mob/user = usr
 	if(!target)
-		target = input(user, "Choose a mob to play the sound to. Only they will hear it.", "Play Mob Sound") as null|anything in sort_names(GLOB.player_list)
+		target = input(user, "Choose a mob to play the sound to. Only they will hear it.", "Play Mob Sound") as null|anything in sortNames(GLOB.player_list)
 	if(QDELETED(target))
 		return
 	log_admin("[key_name(user)] played a direct mob sound [sound] to [key_name_admin(target)].")
@@ -151,7 +165,7 @@ GLOBAL_VAR_INIT(web_sound_cooldown, 0)
 		for(var/m in GLOB.player_list)
 			var/mob/M = m
 			var/client/C = M.client
-			if(C.prefs.read_preference(/datum/preference/numeric/volume/sound_midi))
+			if(C.prefs.toggles & SOUND_MIDI)
 				// Stops playing lobby music and admin loaded music automatically.
 				SEND_SOUND(C, sound(null, channel = CHANNEL_LOBBYMUSIC))
 				SEND_SOUND(C, sound(null, channel = CHANNEL_ADMIN))
@@ -164,10 +178,18 @@ GLOBAL_VAR_INIT(web_sound_cooldown, 0)
 
 	BLACKBOX_LOG_ADMIN_VERB("Play Internet Sound")
 
-ADMIN_VERB_CUSTOM_EXIST_CHECK(play_web_sound)
-	return !!CONFIG_GET(string/invoke_youtubedl)
+/client/proc/play_web_sound()
+	set category = "Admin.Fun"
+	set name = "Play Internet Sound"
+	if(!check_rights(R_SOUND))
+		return
 
-ADMIN_VERB(play_web_sound, R_SOUND, "Play Internet Sound", "Play a given internet sound to all players.", ADMIN_CATEGORY_FUN)
+	var/mob/user = usr
+	var/ytdl = CONFIG_GET(string/invoke_youtubedl)
+	if(!ytdl)
+		to_chat(src, span_boldwarning("Youtube-dl was not configured, action unavailable"), confidential = TRUE) //Check config.txt for the INVOKE_YOUTUBEDL value
+		return
+
 	if(!CLIENT_COOLDOWN_FINISHED(GLOB, web_sound_cooldown))
 		if(tgui_alert(user, "Someone else is already playing an Internet sound! It has [DisplayTimeText(CLIENT_COOLDOWN_TIMELEFT(GLOB, web_sound_cooldown), 1)] remaining. \
 		Would you like to override?", "Musicalis Interruptus", list("No","Yes")) != "Yes")
@@ -181,11 +203,19 @@ ADMIN_VERB(play_web_sound, R_SOUND, "Play Internet Sound", "Play a given interne
 			to_chat(user, span_boldwarning("Non-http(s) URIs are not allowed."), confidential = TRUE)
 			to_chat(user, span_warning("For youtube-dl shortcuts like ytsearch: please use the appropriate full URL from the website."), confidential = TRUE)
 			return
-		web_sound(user.mob, web_sound_input)
+		web_sound(user, web_sound_input)
 	else
-		web_sound(user.mob, null)
+		web_sound(user, null)
 
-ADMIN_VERB(set_round_end_sound, R_SOUND, "Set Round End Sound", "Set the sound that plays on round end.", ADMIN_CATEGORY_FUN, sound as sound)
+/client/proc/set_round_end_sound(sound as sound)
+	set category = "Admin.Fun"
+	set name = "Set Round End Sound"
+	if(!check_rights(R_SOUND))
+		return
+
+	var/mob/user = usr
+	log_admin("[key_name(src)] set the round end sound to [sound]")
+	message_admins("[key_name_admin(src)] set the round end sound to [sound]")
 	var/volume = tgui_input_number(user, "What volume would you like this sound to play at?", max_value = 100)
 	var/sound/admin_sound = sound(sound)
 	if(volume)
@@ -196,7 +226,13 @@ ADMIN_VERB(set_round_end_sound, R_SOUND, "Set Round End Sound", "Set the sound t
 	message_admins("[key_name_admin(user)] set the round end sound to [sound]")
 	BLACKBOX_LOG_ADMIN_VERB("Set Round End Sound")
 
-ADMIN_VERB(stop_sounds, R_NONE, "Stop All Playing Sounds", "Stops all playing sounds for EVERYONE.", ADMIN_CATEGORY_DEBUG)
+/client/proc/stop_sounds()
+	set category = "Debug"
+	set name = "Stop All Playing Sounds"
+	if(!src.holder)
+		return
+
+	var/mob/user = usr
 	log_admin("[key_name(user)] stopped all currently playing sounds.")
 	message_admins("[key_name_admin(user)] stopped all currently playing sounds.")
 	for(var/mob/player as anything in GLOB.player_list)

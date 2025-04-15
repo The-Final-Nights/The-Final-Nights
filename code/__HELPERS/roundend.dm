@@ -221,8 +221,8 @@
 		if(!C?.credits)
 			C?.RollCredits()
 		if(COOLDOWN_FINISHED(GLOB, web_sound_cooldown))
-			C?.playtitlemusic(volume_multiplier = 0.5)
-		if(speed_round && was_forced != ADMIN_FORCE_END_ROUND)
+			C?.playtitlemusic(50)
+		if(speed_round)
 			C?.give_award(/datum/award/achievement/misc/speed_round, C?.mob)
 		HandleRandomHardcoreScore(C)
 

@@ -134,6 +134,8 @@
 /// Diluted, mid-warmth pink. rgb(225, 125, 225)
 #define LIGHT_COLOR_PINK       "#E17DE1"
 /// Dimmed yellow, leaning kaki. rgb(225, 225, 125)
+#define LIGHT_COLOR_DIM_YELLOW "#E1E17D"
+/// Dimmed yellow, leaning kaki. rgb(225, 225, 125)
 #define LIGHT_COLOR_YELLOW     "#E1E17D"
 /// Clear brown, mostly dim. rgb(150, 100, 50)
 #define LIGHT_COLOR_BROWN      "#966432"
