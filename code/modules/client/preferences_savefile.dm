@@ -412,6 +412,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["humanity"], path_score)
 	READ_FILE(S["enlightement"], is_enlightened)
 	READ_FILE(S["true_experience"], true_experience)
+	READ_FILE(S["physique"], physique)
 	READ_FILE(S["dexterity"], dexterity)
 	READ_FILE(S["social"], social)
 	READ_FILE(S["mentality"], mentality)
