@@ -143,4 +143,17 @@ GLOBAL_VAR_INIT(ghost_role_flags, (~0))
 //ie pais, posibrains
 #define GHOSTROLE_SILICONS			(1<<3)
 //ie mafia, ctf
-#define GHOSTROLE_MINIGAME			(1<<4)
+#define GHOSTROLE_MINIGAME 			(1<<4)
+
+//smite defines
+
+#define LIGHTNING_BOLT_DAMAGE 75
+#define LIGHTNING_BOLT_ELECTROCUTION_ANIMATION_LENGTH 40
+
+/// for [/proc/check_asay_links], if there are any actionable refs in the asay message, this index in the return list contains the new message text to be printed
+#define ASAY_LINK_NEW_MESSAGE_INDEX "!asay_new_message"
+/// for [/proc/check_asay_links], if there are any admin pings in the asay message, this index in the return list contains a list of admins to ping
+#define ASAY_LINK_PINGED_ADMINS_INDEX "!pinged_admins"
+
+/// When passed in as the duration for ban_panel, will make the ban default to permanent
+#define BAN_PANEL_PERMANENT "permanent"

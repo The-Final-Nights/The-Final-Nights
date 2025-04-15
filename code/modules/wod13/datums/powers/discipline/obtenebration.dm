@@ -30,7 +30,7 @@
 /datum/discipline_power/obtenebration/shadow_play/activate(target)
 	. = ..()
 	shadow = new(target)
-	shadow.set_light(3, -7)
+	shadow.set_light(discipline.level+2, -10)
 
 /datum/discipline_power/obtenebration/shadow_play/deactivate(target)
 	. = ..()
@@ -116,6 +116,7 @@
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
+	vitae_cost = 0
 
 	violates_masquerade = TRUE
 
