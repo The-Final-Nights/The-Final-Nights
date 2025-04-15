@@ -110,6 +110,7 @@
 	return
 
 /datum/help_ui/ui_act(action, params)
+	. = ..()
 	if(!check_permission(usr))
 		message_admins("[usr] sent a request to interact with the ticket browser without sufficient rights.")
 		log_admin_private("[usr] sent a request to interact with the ticket browser without sufficient rights.")
@@ -341,6 +342,8 @@
 	var/reply_sound = "sound/effects/adminhelp.ogg"
 	/// The message type used for resolve messages
 	var/message_type = MESSAGE_TYPE_ADMINPM
+	/// Whether this ahelp has sent a webhook or not, and what type
+	var/webhook_sent = 0
 
 /datum/help_ticket/New(client/C)
 	initiator = C
@@ -490,6 +493,7 @@
 	return
 
 /datum/help_ticket/ui_act(action, params)
+	. = ..()
 	if(!check_permission_act(usr))
 		message_admins("[usr] sent a request to interact with the ticket window without sufficient rights.")
 		log_admin_private("[usr] sent a request to interact with the ticket window without sufficient rights.")
@@ -769,24 +773,6 @@
 			.["stealth"] += X
 		else
 			.["present"] += X
-
-/proc/send2tgs_adminless_only(source, msg, requiredflags = R_BAN)
-	var/list/adm = get_admin_counts(requiredflags)
-	var/list/activemins = adm["present"]
-	. = activemins.len
-	if(. <= 0)
-		var/final = ""
-		var/list/afkmins = adm["afk"]
-		var/list/stealthmins = adm["stealth"]
-		var/list/powerlessmins = adm["noflags"]
-		var/list/allmins = adm["total"]
-		if(!afkmins.len && !stealthmins.len && !powerlessmins.len)
-			final = "[msg] - No admins online"
-		else
-			final = "[msg] - All admins stealthed\[[english_list(stealthmins)]\], AFK\[[english_list(afkmins)]\], or lacks +BAN\[[english_list(powerlessmins)]\]! Total: [allmins.len] "
-		send2tgs(source,final)
-		SStopic.crosscomms_send("ahelp", final, source)
-
 
 /proc/send2tgs(msg,msg2)
 	msg = replacetext(replacetext(msg, "\proper", ""), "\improper", "")

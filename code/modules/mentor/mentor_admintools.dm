@@ -11,4 +11,4 @@
 /// Logs a mentor action to the investigate panel and game.log
 /proc/log_mentor(text)
 	GLOB.mentorlog.Add(text)
-	WRITE_LOG(GLOB.world_game_log, "MENTOR: [text]")
+	logger.Log(LOG_CATEGORY_GAME, "MENTOR: [text]")
