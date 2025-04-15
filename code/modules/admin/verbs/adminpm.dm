@@ -42,7 +42,7 @@
 	var/client/C
 	if(istext(whom))
 		if(whom[1] == "@")
-			whom = findStealthKey(whom)
+			whom = getStealthKey(whom)
 		C = GLOB.directory[whom]
 	else if(istype(whom, /client))
 		C = whom
@@ -69,7 +69,7 @@
 	var/client/C
 	if(istext(whom))
 		if(whom[1] == "@")
-			whom = findStealthKey(whom)
+			whom = getStealthKey(whom)
 		C = GLOB.directory[whom]
 	else if(istype(whom, /client))
 		C = whom
@@ -98,7 +98,7 @@
 	var/external = 0
 	if(istext(whom))
 		if(whom[1] == "@")
-			whom = findStealthKey(whom)
+			whom = getStealthKey(whom)
 		if(whom == "IRCKEY")
 			external = 1
 		else
