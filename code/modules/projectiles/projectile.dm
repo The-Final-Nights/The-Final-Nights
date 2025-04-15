@@ -576,7 +576,7 @@
 			var/mob/living/carbon/human/frer = firer
 			if(frer.blood)
 				if(prob(frer.get_total_blood()*10))
-					damage *= 2
+					damage *= 1.4
 	if(temporary_unstoppable_movement)
 		temporary_unstoppable_movement = FALSE
 		movement_type &= ~PHASING
