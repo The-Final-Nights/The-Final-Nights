@@ -216,8 +216,8 @@
 		return
 
 	log_directed_talk(owner, input_message, LOG_SAY, "[name]")
-	to_chat(owner, "<span class='boldannounce'>You project your thoughts into [target]'s mind: <span class='notice'>[input_message]</span>")
-	to_chat(target, "<span class='boldannounce'>You hear a voice in your head...</span> <span class='notice'>[input_message]</span>")
+	to_chat(owner, span_notice("You project your thoughts into [target]'s mind: '[input_message]'"))
+	to_chat(target, span_boldannounce("You hear a voice in your head... '[input_message]'"))
 
 
 //PSYCHIC PROJECTION
