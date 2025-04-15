@@ -214,6 +214,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(hearted_until > world.realtime)
 		hearted = TRUE
 
+	READ_FILE(S["nsfw_content_pref"], nsfw_content_pref)
 	//try to fix any outdated data if necessary
 	if(needs_update >= 0)
 		var/bacpath = "[path].updatebac" //todo: if the savefile version is higher then the server, check the backup, and give the player a prompt to load the backup
@@ -261,6 +262,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_keybindings(key_bindings)
+	nsfw_content_pref = sanitize_integer(nsfw_content_pref, FALSE, TRUE, src::nsfw_content_pref)
 
 	player_experience   = sanitize_integer(player_experience, 0, 1000, 0)
 
@@ -340,6 +342,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["pda_color"], pda_color)
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["hearted_until"], (hearted_until > world.realtime ? hearted_until : null))
+	WRITE_FILE(S["nsfw_content_pref"], nsfw_content_pref)
 	WRITE_FILE(S["player_experience"], player_experience)
 	return TRUE
 
@@ -431,7 +434,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["enemy"], enemy)
 	READ_FILE(S["lover"], lover)
 	READ_FILE(S["flavor_text"], flavor_text)
+	READ_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	READ_FILE(S["ooc_notes"], ooc_notes)
+	READ_FILE(S["character_notes"], character_notes)
 	READ_FILE(S["friend_text"], friend_text)
 	READ_FILE(S["enemy_text"], enemy_text)
 	READ_FILE(S["lover_text"], lover_text)
@@ -583,7 +588,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	werewolf_hair_color		= sanitize_ooccolor(werewolf_hair_color, 3, 0)
 	werewolf_eye_color		= sanitize_ooccolor(werewolf_eye_color, 3, 0)
 	flavor_text	= sanitize_text(flavor_text)
+	flavor_text_nsfw = sanitize_text(flavor_text_nsfw)
 	ooc_notes = sanitize_text(ooc_notes)
+	character_notes = sanitize_text(character_notes)
 	socks			= sanitize_inlist(socks, GLOB.socks_list)
 	age				= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	diablerist				= sanitize_integer(diablerist, 0, 1, initial(diablerist))
@@ -753,6 +760,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["enemy"]			, enemy)
 	WRITE_FILE(S["lover"]			, lover)
 	WRITE_FILE(S["flavor_text"], flavor_text)
+	WRITE_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	WRITE_FILE(S["ooc_notes"], ooc_notes)
 	WRITE_FILE(S["friend_text"]			, friend_text)
 	WRITE_FILE(S["enemy_text"]			, enemy_text)

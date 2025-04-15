@@ -50,7 +50,7 @@
 
 /datum/newspanel/ui_static_data(mob/user)
 	. = ..()
-	if (!is_admin(user))
+	if (!isAdminObserver(user))
 		to_chat(usr, "Error: you are not an admin!", confidential = TRUE)
 		return
 
