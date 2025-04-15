@@ -56,8 +56,8 @@
 
 /obj/projectile/beam/beam_rifle/vampire/vamp44
 	name = ".44 bullet"
-	damage = 35
-	armour_penetration = 10
+	damage = 30
+	armour_penetration = 15
 	bare_wound_bonus = -5
 	wound_bonus = 10
 
