@@ -44,7 +44,6 @@
 /datum/hallucination/malk/object
 
 /datum/hallucination/malk/object/New(mob/living/carbon/target, forced = TRUE)
-	testing("malk obj halu")
 	var/list/objects = list()
 
 	for(var/obj/object in view(target))
@@ -59,7 +58,6 @@
 			weight = 2
 		objects[object] = weight
 	if(!objects.len)
-		testing("objects had no len")
 		return
 	objects -= target.contents
 
@@ -82,7 +80,6 @@
 		speech = "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
 	else
 		speech = pick(malklines)
-	testing("speech is [speech]")
 	var/language = target.get_random_understood_language()
 	var/message = target.compose_message(speaker, language, speech)
 	target.playsound_local(target, pick(speech_sounds), vol = 60, vary = FALSE)

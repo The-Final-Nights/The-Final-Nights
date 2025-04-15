@@ -31,6 +31,8 @@ GLOBAL_LIST_INIT(malkavian_character_replacements, list(
 	hivemind.Grant(malky)
 	malk_font.Grant(malky)
 	GLOB.malkavian_list += malky
+	malky.add_quirk(/datum/quirk/derangement)
+
 
 /datum/action/cooldown/malk_hivemind
 	name = "Hivemind"
