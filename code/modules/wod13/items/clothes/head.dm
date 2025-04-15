@@ -306,6 +306,8 @@
 	desc = "Used by kidnappers, sadists, and three letter agencies. Easily fits over the head to obscure vision."
 	icon_state = "black_bag"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR
+	dynamic_hair_suffix = ""
+	dynamic_fhair_suffix = ""
 
 	flash_protect = FLASH_PROTECTION_WELDER
 	tint = 3
@@ -324,8 +326,8 @@
 		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
 		return
 	if(do_mob(user, target, 0.5 SECONDS)) //Mainly to prevent black_bagging mid combat.
-		target.visible_message("<span class='warning'>[user] forces [src] onto [target]'s head!</span>", \
-		"<span class='danger'>[target] forces [src] onto your head!</span>", "<i>I cant see anything.</i>")
+		target.visible_message(span_warning("[user] forces [src] onto [target]'s head!"))
+		to_chat(target, span_bolddanger("[target] forces [src] onto your head!</span>"))
 		target.emote("scream")
 		target.Stun(0.5 SECONDS)
 
