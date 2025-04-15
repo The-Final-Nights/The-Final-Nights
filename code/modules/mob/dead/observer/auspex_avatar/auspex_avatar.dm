@@ -23,6 +23,7 @@ GLOBAL_LIST_INIT(avatar_banned_verbs, list(
 
 /mob/dead/observer/avatar/Initialize()
 	. = ..()
+	set_invisibility(GLOB.avatar_default_invisibility)
 	add_to_avatar_list()
 
 	remove_verb(src, GLOB.avatar_banned_verbs)
