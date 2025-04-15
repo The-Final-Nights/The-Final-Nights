@@ -2044,8 +2044,7 @@
 	name = "Aquarium Kit"
 	desc = "Everything you need to start your own aquarium. Contains aquarium construction kit, fish catalog, feed can and three freshwater fish from our collection."
 	cost = CARGO_CRATE_VALUE * 10
-	contains = list(/obj/item/book/fish_catalog,
-					/obj/item/storage/fish_case/random/freshwater,
+	contains = list(/obj/item/storage/fish_case/random/freshwater,
 					/obj/item/storage/fish_case/random/freshwater,
 					/obj/item/storage/fish_case/random/freshwater,
 					/obj/item/fish_feed,
@@ -2091,9 +2090,6 @@
 	cost = CARGO_CRATE_VALUE * 3
 	access_view = ACCESS_LIBRARY
 	contains = list(/obj/item/book/codex_gigas,
-					/obj/item/book/manual/random/,
-					/obj/item/book/manual/random/,
-					/obj/item/book/manual/random/,
 					/obj/item/book/random,
 					/obj/item/book/random,
 					/obj/item/book/random)

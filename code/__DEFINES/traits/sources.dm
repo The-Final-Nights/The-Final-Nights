@@ -136,6 +136,7 @@
 // used by the obfuscate ability
 #define OBFUSCATE_TRAIT "obfuscate_trait"
 
-
+/// Trait when something was labelled by the /datum/element/tool_renaming element.
+#define RENAMING_TOOL_LABEL_TRAIT "renaming_tool_label"
 
 // END TRAIT DEFINES

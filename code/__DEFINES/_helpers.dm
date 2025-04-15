@@ -35,3 +35,6 @@
 #define span_alert(str) ("<span class='alert'>" + str + "</span>")
 #define span_hear(str) ("<span class='hear'>" + str + "</span>")
 #define span_boldannounce(str) ("<span class='boldannounce'>" + str + "</span>")
+#define span_linkify(str) ("<span class='linkify'>" + str + "</span>")
+#define span_suicide(str) ("<span class='suicide'>" + str + "</span>")
+#define span_info(str) ("<span class='info'>" + str + "</span>")
