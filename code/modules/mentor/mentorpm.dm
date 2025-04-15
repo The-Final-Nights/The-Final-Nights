@@ -71,21 +71,21 @@
 
 	if(recipient.is_mentor())
 		if(is_mentor())//both are mentors
-			to_chat(recipient, "<span class='mentorfrom'>Mentor PM from-<b>[key_name_mentor(src, recipient)]</b>: [msg]</span>", type = MESSAGE_TYPE_MENTORPM)
-			to_chat(src, "<span class='mentorto'>Mentor PM to-<b>[key_name_mentor(recipient, recipient)]</b>: [msg]</span>", type = MESSAGE_TYPE_MENTORPM)
+			to_chat(recipient, span_mentorfrom("Mentor PM from-<b>[key_name_mentor(src, recipient)]</b>: [msg]"), type = MESSAGE_TYPE_MENTORPM)
+			to_chat(src, span_mentorto("Mentor PM to-<b>[key_name_mentor(recipient, recipient)]</b>: [msg]"), type = MESSAGE_TYPE_MENTORPM)
 			admin_ticket_log(src, msg, key_name_mentor(src, recipient), key_name_mentor(recipient, src), color="teal", isSenderAdmin = TRUE, safeSenderLogged = TRUE, is_admin_ticket = FALSE)
 			if(recipient != src)
 				admin_ticket_log(recipient, msg, key_name_mentor(src, recipient), key_name_mentor(recipient, src), color="teal", isSenderAdmin = TRUE, safeSenderLogged = TRUE, is_admin_ticket = FALSE)
 
 		else		//recipient is an mentor but sender is not
-			to_chat(recipient, "<span class='mentorfrom'>Reply PM from-<b>[key_name_mentor(src, recipient)]</b>: [msg]</span>", type = MESSAGE_TYPE_MENTORPM)
-			to_chat(src, "<span class='mentorto'>Mentor PM to-<b>Mentors</b>: [msg]</span>", type = MESSAGE_TYPE_MENTORPM)
+			to_chat(recipient, span_mentorfrom("Reply PM from-<b>[key_name_mentor(src, recipient)]</b>: [msg]"), type = MESSAGE_TYPE_MENTORPM)
+			to_chat(src, span_mentorto("Mentor PM to-<b>Mentors</b>: [msg]"), type = MESSAGE_TYPE_MENTORPM)
 			admin_ticket_log(src, msg, key_name_mentor(src, recipient, TRUE), null, "white", isSenderAdmin = TRUE, safeSenderLogged = TRUE, is_admin_ticket = FALSE)
 
 	else
 		if(is_mentor())	//sender is an mentor but recipient is not.
-			to_chat(recipient, "<span class='mentorfrom'>Mentor PM from-<b>[key_name_mentor(src, recipient)]</b>: [msg]</span>", type = MESSAGE_TYPE_MENTORPM)
-			to_chat(src, "<span class='mentorto'>Mentor PM to-<b>[key_name_mentor(recipient, recipient)]</b>: [msg]</span>", type = MESSAGE_TYPE_MENTORPM)
+			to_chat(recipient, span_mentorfrom("Mentor PM from-<b>[key_name_mentor(src, recipient)]</b>: [msg]"), type = MESSAGE_TYPE_MENTORPM)
+			to_chat(src, span_mentorto("Mentor PM to-<b>[key_name_mentor(recipient, recipient)]</b>: [msg]"), type = MESSAGE_TYPE_MENTORPM)
 			admin_ticket_log(recipient, msg, key_name_mentor(src), null, "purple", safeSenderLogged = TRUE, is_admin_ticket = FALSE)
 
 	log_mentor("Mentor PM: [key_name(src)]->[key_name(recipient)]: [rawmsg]")

@@ -84,15 +84,15 @@ export const TicketClosureStates = ({ admin }) => {
   const { act } = useBackend();
   return (
     <Box inline>
-      <ButtonConfirm content="REJT" onClick={() => act('reject')} />
+      <Button content="REJT" onClick={() => act('reject')} />
       {admin ? (
         <>
-          <ButtonConfirm content="IC" onClick={() => act('markic')} />
-          <ButtonConfirm content="CLOSE" onClick={() => act('close')} />
+          <Button content="IC" onClick={() => act('markic')} />
+          <Button content="CLOSE" onClick={() => act('close')} />
         </>
       ) : null}
       <Button content="RSLVE" onClick={() => act('resolve')} />
-      <ButtonConfirm content={admin ? 'MHELP' : 'AHELP'} onClick={() => act(`${admin ? 'mentor' : 'admin'}help`)} />
+      <Button content={admin ? 'MHELP' : 'AHELP'} onClick={() => act(`${admin ? 'mentor' : 'admin'}help`)} />
     </Box>
   );
 };

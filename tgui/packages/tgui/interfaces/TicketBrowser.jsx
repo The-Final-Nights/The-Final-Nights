@@ -199,7 +199,7 @@ export const ActionButton = ({ action, confirm, ticket_id }) => {
   return (
     <Table.Cell collapsing>
       {confirm ? (
-        <ButtonConfirm
+        <Button
           content={capitalize(action[0])}
           onClick={() =>
             act(action[0], {
