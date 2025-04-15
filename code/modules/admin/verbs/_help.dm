@@ -79,7 +79,6 @@
 	if(!ui)
 		log_admin_private("[user.ckey] opened the ticket panel.")
 		ui = new(user, src, "TicketBrowser", "Ticket Browser")
-		ui.set_autoupdate(TRUE)
 		ui.open()
 
 /datum/help_ui/ui_data(mob/user)
@@ -724,11 +723,11 @@
 	TicketPanel()	//we have to be here to do this
 
 /datum/help_ticket/proc/resolve_message(status = "Resolved", message = null, extratext = "")
-	var/output = "<span class='[span_class]_conclusion'><span class='big'><b>[verb_name] [status]</b></span><br />"
+	var/output = "<span class='[span_class]_conclusion'>[span_big("<b>[verb_name] [status]</b>")]<br />"
 	output += message || "\A [handling_name] has handled your ticket.[extratext]<br />\
 		Thank you for creating a ticket, the [verb_name] verb will be returned to you shortly."
 	if(claimee)
-		output += "<br />Your ticket was handled by: <span class='adminooc'>[claimee.ckey]</span></span>"
+		output += "<br />Your ticket was handled by: [span_adminooc(claimee.ckey)]</span>"
 	to_chat(initiator, output, type = message_type)
 
 //

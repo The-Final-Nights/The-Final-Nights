@@ -28,52 +28,134 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/help_tickets/admin, new)
 	admin_datum.admin_interface.ui_interact(user)
 
 /client/proc/giveadminhelpverb()
-	if(!src)
-		return
 	add_verb(src, /client/verb/adminhelp)
 	deltimer(adminhelptimerid)
 	adminhelptimerid = 0
 
-// Used for methods where input via arg doesn't work
-/client/proc/get_adminhelp()
-	var/msg = capped_multiline_input(src, "Please describe your problem concisely and an admin will help as soon as they're able. Include the names of the people you are ahelping against if applicable.", "Adminhelp contents")
-	adminhelp(msg)
+GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 
-/client/verb/adminhelp(msg as message)
-	set category = "Admin"
-	set name = "Adminhelp"
+/datum/admin_help_ui_handler
+	var/list/ahelp_cooldowns = list()
 
-	if(GLOB.say_disabled)	//This is here to try to identify lag problems
-		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+/datum/admin_help_ui_handler/ui_state(mob/user)
+	return GLOB.always_state
+
+/datum/admin_help_ui_handler/ui_data(mob/user)
+	. = list()
+	var/list/admins = get_admin_counts(R_BAN)
+	.["adminCount"] = length(admins["present"])
+
+/datum/admin_help_ui_handler/ui_static_data(mob/user)
+	. = list()
+	.["bannedFromUrgentAhelp"] = is_banned_from(user.ckey, "Urgent Adminhelp")
+	.["urgentAhelpPromptMessage"] = CONFIG_GET(string/urgent_ahelp_user_prompt)
+	var/webhook_url = CONFIG_GET(string/urgent_adminhelp_webhook_url)
+	if(webhook_url)
+		.["urgentAhelpEnabled"] = TRUE
+
+/datum/admin_help_ui_handler/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "Adminhelp")
+		ui.open()
+		ui.set_autoupdate(FALSE)
+
+/datum/admin_help_ui_handler/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return
+	var/client/user_client = usr.client
+	var/message = sanitize_text(trim(params["message"]))
+	var/urgent = !!params["urgent"]
+	var/list/admins = get_admin_counts(R_BAN)
+	if(length(admins["present"]) != 0 || is_banned_from(user_client.ckey, "Urgent Adminhelp"))
+		urgent = FALSE
+
+	if(user_client.adminhelptimerid)
+		return
+
+	perform_adminhelp(user_client, message, urgent)
+	ui.close()
+
+/datum/admin_help_ui_handler/proc/perform_adminhelp(client/user_client, message, urgent)
+	if(GLOB.say_disabled) //This is here to try to identify lag problems
+		to_chat(usr, span_danger("Speech is currently admin-disabled."), confidential = TRUE)
+		return
+
+	if(!message)
 		return
 
 	//handle muting and automuting
-	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, "<span class='danger'>Error: Admin-PM: You cannot send adminhelps (Muted).</span>")
+	if(user_client.prefs.muted & MUTE_ADMINHELP)
+		to_chat(user_client, span_danger("Error: Admin-PM: You cannot send adminhelps (Muted)."), confidential = TRUE)
 		return
-	if(handle_spam_prevention(msg,MUTE_ADMINHELP))
-		return
-
-	msg = trim(msg)
-
-	if(!msg)
+	if(user_client.handle_spam_prevention(message, MUTE_ADMINHELP))
 		return
 
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adminhelp") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	if(current_adminhelp_ticket)
-		if(alert(usr, "You already have a ticket open. Is this for the same issue?",,"Yes","No") != "No")
-			if(current_adminhelp_ticket)
-				current_adminhelp_ticket.MessageNoRecipient(msg)
-				current_adminhelp_ticket.TimeoutVerb()
-				return
-			else
-				to_chat(usr, "<span class='warning'>Ticket not found, creating new one...</span>")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adminhelp") // If you are copy-pasting this, ensure the 4th parameter is unique to the new proc!
+
+	if(urgent)
+		if(!COOLDOWN_FINISHED(src, ahelp_cooldowns?[user_client.ckey]))
+			urgent = FALSE // Prevent abuse
 		else
-			current_adminhelp_ticket.AddInteraction("yellow", "[usr] opened a new ticket.")
-			current_adminhelp_ticket.Close()
+			COOLDOWN_START(src, ahelp_cooldowns[user_client.ckey], CONFIG_GET(number/urgent_ahelp_cooldown) * (1 SECONDS))
 
-	var/datum/help_ticket/admin/ticket = new(src)
-	ticket.Create(msg, FALSE)
+	if(user_client.current_adminhelp_ticket)
+		user_client.current_adminhelp_ticket.TimeoutVerb()
+		if(urgent)
+			var/sanitized_message = sanitize(copytext_char(message, 1, MAX_MESSAGE_LEN))
+			user_client.current_adminhelp_ticket.send_message_to_tgs(sanitized_message, urgent = TRUE)
+		user_client.current_adminhelp_ticket.MessageNoRecipient(message, urgent)
+		return
+
+	var/datum/help_ticket/admin/ticket = new(user_client)
+	ticket.Create(message, FALSE)
+
+
+/client/verb/no_tgui_adminhelp(message as message)
+	set name = "NoTguiAdminhelp"
+	set hidden = TRUE
+
+	if(adminhelptimerid)
+		return
+
+	message = trim(message)
+
+	GLOB.admin_help_ui_handler.perform_adminhelp(src, message, FALSE)
+
+/client/verb/adminhelp()
+	set category = "Admin"
+	set name = "Adminhelp"
+	GLOB.admin_help_ui_handler.ui_interact(mob)
+	to_chat(src, span_boldnotice("Adminhelp failing to open or work? <a href='byond://?src=[REF(src)];tguiless_adminhelp=1'>Click here</a>"))
+
+/client/verb/view_latest_ticket()
+	set category = "Admin"
+	set name = "View Latest Ticket"
+
+	if(!current_adminhelp_ticket)
+		// Check if the client had previous tickets, and show the latest one
+		var/list/prev_tickets = list()
+		var/datum/help_ticket/admin/last_ticket
+		// Check all resolved tickets for this player
+		for(var/datum/help_ticket/admin/resolved_ticket in GLOB.ahelp_tickets.resolved_tickets)
+			if(resolved_ticket.initiator_ckey == ckey) // Initiator is a misnomer, it's always the non-admin player even if an admin bwoinks first
+				prev_tickets += resolved_ticket
+		// Check all closed tickets for this player
+		for(var/datum/help_ticket/admin/closed_ticket in GLOB.ahelp_tickets.closed_tickets)
+			if(closed_ticket.initiator_ckey == ckey)
+				prev_tickets += closed_ticket
+		// Take the most recent entry of prev_tickets and open the panel on it
+		if(LAZYLEN(prev_tickets))
+			last_ticket = pop(prev_tickets)
+			last_ticket.TicketPanel()
+			return
+
+		// client had no tickets this round
+		to_chat(src, span_warning("You have not had an ahelp ticket this round."))
+		return
+
+	current_adminhelp_ticket.TicketPanel()
 
 /// Ticket List UI
 
