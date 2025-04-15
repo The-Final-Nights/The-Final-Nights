@@ -145,6 +145,12 @@
 /// The holder of this trait has antennae or whatever that hurt a ton when noogied
 #define TRAIT_ANTENNAE	"antennae"
 
+/// Trait that tracks if something has been renamed. Typically holds a REF() to the object itself (AKA src) for wide addition/removal.
+#define TRAIT_WAS_RENAMED "was_renamed"
+
+/// A transforming item that is actively extended / transformed
+#define TRAIT_TRANSFORM_ACTIVE "active_transform"
+
 #define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
 
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.

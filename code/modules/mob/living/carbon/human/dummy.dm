@@ -26,6 +26,15 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	randomize_human(src)
 	dna.initialize_dna(skip_index = TRUE) //Skip stuff that requires full round init.
 
+/mob/living/carbon/human/dummy/proc/setup_examine_preview(client/client)
+	src.name = sanitize_name(client.prefs?.real_name)
+	src.flavor_text = sanitize_text(client.prefs?.flavor_text)
+	src.flavor_text_nsfw = sanitize_text(client.prefs?.flavor_text_nsfw)
+	src.ooc_notes = sanitize_text(client.prefs?.ooc_notes)
+	src.character_notes = sanitize_text(client.prefs?.character_notes)
+	src.headshot_link = sanitize_text(client.prefs?.headshot_link)
+	tgui.holder = src
+
 //Inefficient pooling/caching way.
 GLOBAL_LIST_EMPTY(human_dummy_list)
 GLOBAL_LIST_EMPTY(dummy_mob_list)

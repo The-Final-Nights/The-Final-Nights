@@ -154,7 +154,7 @@
 		new /datum/data/mining_equipment("kasaya",	/obj/item/clothing/suit/vampire/kasaya,  15),
 		new /datum/data/mining_equipment("imam's robe",	/obj/item/clothing/suit/vampire/imam,  15),
 		new /datum/data/mining_equipment("orthodox robe",	/obj/item/clothing/suit/vampire/orthodox,  15),
-		new /datum/data/mining_equipment("hijab",	/obj/item/clothing/suit/vampire/imam,  10),
+		new /datum/data/mining_equipment("hijab",	/obj/item/clothing/head/vampire/hijab,  10),
 		new /datum/data/mining_equipment("taqiyah",	/obj/item/clothing/head/vampire/taqiyah,  10),
 		new /datum/data/mining_equipment("kalimavkion",	/obj/item/clothing/head/vampire/kalimavkion,  10),
 		new /datum/data/mining_equipment("Nun Frock",	/obj/item/clothing/suit/vampire/nun,  15),

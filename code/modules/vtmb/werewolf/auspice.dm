@@ -31,19 +31,25 @@
 
 /datum/auspice/proc/on_gain(var/mob/living/carbon/C)
 	C.update_rage_hud()
-	C.transformator.lupus_form.auspice = src
-	C.transformator.lupus_form.dna = C.dna
-	C.transformator.crinos_form.auspice = src
-	C.transformator.crinos_form.dna = C.dna
+
+	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+
+	lupus?.auspice = src
+	lupus?.dna = C.dna
+	crinos?.auspice = src
+	crinos?.dna = C.dna
+
+
 	rage = start_rage
 	if(length(gifts))
 		for(var/i in gifts)
 			var/datum/action/A1 = new i()
 			A1.Grant(C)
 			var/datum/action/A2 = new i()
-			A2.Grant(C.transformator.lupus_form)
+			A2.Grant(lupus)
 			var/datum/action/A3 = new i()
-			A3.Grant(C.transformator.crinos_form)
+			A3.Grant(crinos)
 
 	switch(tribe)
 		if("Glasswalkers")
@@ -52,27 +58,27 @@
 				var/datum/action/A = new zalupa()
 				A.Grant(C)
 				var/datum/action/A1 = new zalupa()
-				A1.Grant(C.transformator.lupus_form)
+				A1.Grant(lupus)
 				var/datum/action/A2 = new zalupa()
-				A2.Grant(C.transformator.crinos_form)
+				A2.Grant(crinos)
 		if("Wendigo")
 			for(var/i in 1 to level)
 				var/zalupa = wendigo[i]
 				var/datum/action/A = new zalupa()
 				A.Grant(C)
 				var/datum/action/A1 = new zalupa()
-				A1.Grant(C.transformator.lupus_form)
+				A1.Grant(lupus)
 				var/datum/action/A2 = new zalupa()
-				A2.Grant(C.transformator.crinos_form)
+				A2.Grant(crinos)
 		if("Black Spiral Dancers")
 			for(var/i in 1 to level)
 				var/zalupa = spiral[i]
 				var/datum/action/A = new zalupa()
 				A.Grant(C)
 				var/datum/action/A1 = new zalupa()
-				A1.Grant(C.transformator.lupus_form)
+				A1.Grant(lupus)
 				var/datum/action/A2 = new zalupa()
-				A2.Grant(C.transformator.crinos_form)
+				A2.Grant(crinos)
 
 /datum/auspice/ahroun
 	name = "Ahroun"
