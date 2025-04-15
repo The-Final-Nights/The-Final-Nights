@@ -247,7 +247,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/nsfw_content_pref = FALSE
 
 /datum/preferences/proc/add_experience(amount)
-	player_experience = clamp(player_experience + amount, 0, 1000)
+	player_experience = clamp(player_experience + amount, 0, 100000)
 
 /datum/preferences/proc/reset_character()
 	slotlocked = 0

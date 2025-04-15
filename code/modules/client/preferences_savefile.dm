@@ -205,7 +205,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["pda_color"], pda_color)
 
 	READ_FILE(S["player_experience"], player_experience)
-	READ_FILE(S["experience_used_on_character", experience_used_on_character])
 
 	// Custom hotkeys
 	READ_FILE(S["key_bindings"], key_bindings)
@@ -266,7 +265,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	nsfw_content_pref = sanitize_integer(nsfw_content_pref, FALSE, TRUE, src::nsfw_content_pref)
 
 	player_experience   = sanitize_integer(player_experience, 0, 100000, 0)
-	experience_used_on_character = sanitize_integer(experience_used_on_character, 0, 100000, 0)
 
 	if(needs_update >= 0) //save the updated version
 		var/old_default_slot = default_slot
@@ -668,6 +666,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["moth_wings"] 	= sanitize_inlist(features["moth_wings"], GLOB.moth_wings_list, "Plain")
 	features["moth_antennae"] 	= sanitize_inlist(features["moth_antennae"], GLOB.moth_antennae_list, "Plain")
 	features["moth_markings"] 	= sanitize_inlist(features["moth_markings"], GLOB.moth_markings_list, "None")
+	experience_used_on_character = sanitize_integer(experience_used_on_character, 0, 100000, 0)
 
 	persistent_scars = sanitize_integer(persistent_scars)
 
