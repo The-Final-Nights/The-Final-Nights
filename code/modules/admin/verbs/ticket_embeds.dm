@@ -50,13 +50,12 @@
 	var/message_to_send = message
 
 	if(urgent)
+		var/extra_message_to_send = "[message] - Requested an admin"
 		var/extra_message = CONFIG_GET(string/urgent_ahelp_message)
+		if(extra_message)
+			extra_message_to_send += " ([extra_message])"
 		to_chat(initiator, span_boldwarning("Notified admins to prioritize your ticket"))
-		var/datum/discord_embed/embed = format_embed_discord(message)
-		embed.content = extra_message
-		embed.footer = "This player requested an admin"
-		send2adminchat_webhook(embed, urgent = TRUE)
-		webhook_sent = WEBHOOK_URGENT
+		send2adminchat_webhook("RELAY: [initiator_ckey] | Ticket #[id]: [extra_message_to_send]")
 	//send it to TGS if nobody is on and tell us how many were on
 	var/admin_number_present = send2tgs_adminless_only(initiator_ckey, "Ticket #[id]: [message_to_send]")
 	log_admin_private("Ticket #[id]: [key_name(initiator)]: [name] - heard by [admin_number_present] non-AFK admins who have +BAN.")

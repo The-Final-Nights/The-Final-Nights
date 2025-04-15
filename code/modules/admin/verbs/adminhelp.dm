@@ -198,7 +198,7 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 /datum/help_ticket/admin
 	var/heard_by_no_admins = FALSE
 	/// is the ahelp player to admin (not bwoink) or admin to player (bwoink)
-	var/bwoink
+	var/bwoink = FALSE
 
 /datum/help_ticket/admin/get_data_glob()
 	return GLOB.ahelp_tickets
@@ -215,6 +215,13 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 /datum/help_ticket/admin/reply(whom, msg)
 	usr.client.cmd_ahelp_reply_instant(whom, msg)
 
+/**
+ * Call this on its own to create a ticket, don't manually assign current_ticket
+ *
+ * Arguments:
+ * * msg - The first message of this admin_help: used for the initial title of the ticket
+ * * is_bwoink - Boolean operator, TRUE if this ticket was started by an admin PM
+ */
 /datum/help_ticket/admin/Create(msg, is_bwoink)
 	if(!..())
 		return FALSE
@@ -222,18 +229,15 @@ GLOBAL_DATUM_INIT(admin_help_ui_handler, /datum/admin_help_ui_handler, new)
 		AddInteraction("blue", name, usr.ckey, initiator_key_name, "Administrator", "You")
 		message_admins("<font color='blue'>Ticket [TicketHref("#[id]")] created</font>")
 		Claim()	//Auto claim bwoinks
+		bwoink = TRUE
 	else
 		MessageNoRecipient(msg)
-
 		//send it to tgs if nobody is on and tell us how many were on
 		var/admin_number_present = send2tgs_adminless_only(initiator_ckey, "Ticket #[id]: [msg]")
 		log_admin_private("Ticket #[id]: [key_name(initiator)]: [name] - heard by [admin_number_present] non-AFK admins who have +BAN.")
 		if(admin_number_present <= 0)
 			to_chat(initiator, "<span class='notice'>No active admins are online, your adminhelp was sent through TGS to admins who are available. This may use IRC or Discord.</span>", type = message_type)
 			heard_by_no_admins = TRUE
-
-	bwoink = is_bwoink
-	if(!bwoink)
 		send_message_to_tgs("**ADMINHELP: (#[id]) [initiator.key]: ** \"[msg]\" [heard_by_no_admins ? "**(NO ADMINS)**" : "" ]")
 	return TRUE
 
