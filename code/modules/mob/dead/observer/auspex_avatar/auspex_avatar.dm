@@ -93,3 +93,7 @@ GLOBAL_LIST_INIT(avatar_banned_verbs, list(
 
 /mob/dead/observer/avatar/say_dead(message)
 	return
+
+// Auspex Avatars can't manually orbit people.
+/mob/dead/observer/avatar/ManualFollow(atom/movable/target)
+	return
