@@ -3205,6 +3205,7 @@
 #include "code\modules\tgui\states\inventory.dm"
 #include "code\modules\tgui\states\language_menu.dm"
 #include "code\modules\tgui\states\mentor.dm"
+#include "code\modules\tgui\states\never.dm"
 #include "code\modules\tgui\states\new_player.dm"
 #include "code\modules\tgui\states\not_incapacitated.dm"
 #include "code\modules\tgui\states\notcontained.dm"

@@ -93,9 +93,10 @@
 /turf/Safe_COORD_Location()
 	return src
 
-#define AHELP_ACTIVE 1
-#define AHELP_CLOSED 2
-#define AHELP_RESOLVED 3
+#define TICKET_UNCLAIMED 1
+#define TICKET_ACTIVE 2
+#define TICKET_CLOSED 3
+#define TICKET_RESOLVED 4
 
 /// Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 #define ROUNDSTART_LOGOUT_REPORT_TIME	6000

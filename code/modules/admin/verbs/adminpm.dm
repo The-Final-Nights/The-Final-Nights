@@ -51,7 +51,7 @@
 			to_chat(src, "<span class='danger'>Error: Admin-PM: Client not found.</span>", type = MESSAGE_TYPE_ADMINPM)
 		return
 
-	var/datum/help_ticket/AH = C.current_adminhelp_ticket
+	var/datum/help_tickets/AH = C.current_ticket
 
 	if(AH)
 		message_admins("[key_name_admin(src)] has started replying to [key_name_admin(C, 0, 0)]'s admin help.")
@@ -89,7 +89,7 @@
 		to_chat(src, "<span class='danger'>Error: Admin-PM: You are unable to use admin PM-s (muted).</span>", type = MESSAGE_TYPE_ADMINPM)
 		return
 
-	if(!holder && !current_adminhelp_ticket)	//no ticket? https://www.youtube.com/watch?v=iHSPf6x1Fdo
+	if(!holder && !current_ticket)	//no ticket? https://www.youtube.com/watch?v=iHSPf6x1Fdo
 		to_chat(src, "<span class='danger'>You can no longer reply to this ticket, please open another one by using the Adminhelp verb if need be.</span>", type = MESSAGE_TYPE_ADMINPM)
 		to_chat(src, "<span class='notice'>Message: [msg]</span>", type = MESSAGE_TYPE_ADMINPM)
 		return
@@ -128,7 +128,7 @@
 					to_chat(src, msg)
 				return
 			else if(msg) // you want to continue if there's no message instead of returning now
-				current_adminhelp_ticket.MessageNoRecipient(msg, sanitized = html_encoded)
+				current_ticket.MessageNoRecipient(msg, sanitized = html_encoded)
 				return
 
 		//get message text, limit it's length.and clean/escape html
@@ -148,7 +148,7 @@
 				if(holder)
 					to_chat(src, "<span class='danger'>Error: Admin-PM: Client not found.</span>", type = MESSAGE_TYPE_ADMINPM)
 				else
-					current_adminhelp_ticket.MessageNoRecipient(msg, sanitized = html_encoded)
+					current_ticket.MessageNoRecipient(msg, sanitized = html_encoded)
 				return
 
 	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
@@ -172,7 +172,7 @@
 
 	if(external)
 		to_chat(src, "<span class='notice'>PM to-<b>Admins</b>: <span class='linkify'>[rawmsg]</span></span>", type = MESSAGE_TYPE_ADMINPM)
-		var/datum/help_ticket/AH = admin_ticket_log(src, "<font color='red'>Reply PM from-<b>[key_name(src, TRUE, TRUE)] to <i>External</i>: [keywordparsedmsg]</font>")
+		var/datum/help_tickets/AH = admin_ticket_log(src, "<font color='red'>Reply PM from-<b>[key_name(src, TRUE, TRUE)] to <i>External</i>: [keywordparsedmsg]</font>")
 		externalreplyamount--
 		send2tgs("[AH ? "#[AH.id] " : ""]Reply: [ckey]", rawmsg)
 	else
@@ -193,13 +193,12 @@
 				to_chat(src, "<span class='notice'>PM to-<b>Admins</b>: <span class='linkify'>[msg]</span></span>", type = MESSAGE_TYPE_ADMINPM)
 
 			//play the receiving admin the adminhelp sound (if they have them enabled)
-			if(recipient.prefs.toggles & PREFTOGGLE_SOUND_ADMINHELP)
-				SEND_SOUND(recipient, sound('sound/effects/adminhelp.ogg'))
+			SEND_SOUND(recipient, sound('sound/effects/adminhelp.ogg'))
 
 		else
 			if(holder)	//sender is an admin but recipient is not. Do BIG RED TEXT
-				if(!recipient.current_adminhelp_ticket)
-					var/datum/help_ticket/admin/ticket = new(recipient)
+				if(!recipient.current_ticket)
+					var/datum/help_tickets/admin/ticket = new(recipient)
 					ticket.Create(msg, TRUE)
 
 				to_chat(recipient, "<font color='red' size='4'><b>-- Administrator private message --</b></font>", type = MESSAGE_TYPE_ADMINPM)
@@ -252,7 +251,7 @@
 	target = ckey(target)
 	var/client/C = GLOB.directory[target]
 
-	var/datum/help_ticket/ticket = C ? C.current_adminhelp_ticket : GLOB.ahelp_tickets.CKey2ActiveTicket(target)
+	var/datum/help_tickets/ticket = C ? C.current_ticket : GLOB.ahelp_tickets.CKey2ActiveTicket(target)
 	var/compliant_msg = trim(lowertext(msg))
 	var/tgs_tagged = "[sender](TGS/External)"
 	var/list/splits = splittext(compliant_msg, " ")
@@ -269,8 +268,8 @@
 					ticket.Resolve(tgs_tagged)
 					return "Ticket #[ticket.id] successfully resolved"
 			if("icissue")
-				if(ticket && istype(ticket, /datum/help_ticket/admin))
-					var/datum/help_ticket/admin/a_ticket = ticket
+				if(ticket && istype(ticket, /datum/help_tickets/admin))
+					var/datum/help_tickets/admin/a_ticket = ticket
 					a_ticket.ICIssue(tgs_tagged)
 					return "Ticket #[ticket.id] successfully marked as IC issue"
 			if("reject")
@@ -285,7 +284,7 @@
 					fail = text2num(splits[3])
 				if(isnull(fail))
 					return "Error: No/Invalid ticket id specified. [TGS_AHELP_USAGE]"
-				var/datum/help_ticket/AH = GLOB.ahelp_tickets.TicketByID(fail)
+				var/datum/help_tickets/AH = GLOB.ahelp_tickets.TicketByID(fail)
 				if(!AH)
 					return "Error: Ticket #[fail] not found"
 				if(AH.initiator_ckey != target)
@@ -298,7 +297,7 @@
 					return "None"
 				. = ""
 				for(var/I in tickets)
-					var/datum/help_ticket/AH = I
+					var/datum/help_tickets/AH = I
 					if(.)
 						. += ", "
 					if(AH == ticket)
@@ -327,7 +326,7 @@
 	msg = emoji_parse(msg)
 
 	to_chat(C, "<font color='red' size='4'><b>-- Administrator private message --</b></font>", type = MESSAGE_TYPE_ADMINPM)
-	to_chat(C, "<span class='adminsay'>Admin PM from-<b><a href='?priv_msg=[stealthkey]'>[adminname]</A></b>: [msg]</span>", allow_linkify = TRUE, type = MESSAGE_TYPE_ADMINPM)
+	to_chat(C, "<span class='adminsay'>Admin PM from-<b><a href='?priv_msg=[stealthkey]'>[adminname]</A></b>: [msg]</span>", type = MESSAGE_TYPE_ADMINPM)
 	to_chat(C, "<span class='adminsay'><i>Click on the administrator's name to reply.</i></span>", type = MESSAGE_TYPE_ADMINPM)
 
 	admin_ticket_log(C, msg, adminname, null, "cyan", isSenderAdmin = TRUE, safeSenderLogged = TRUE)

@@ -158,7 +158,7 @@
 			to_chat(src, "<span class='danger'>Error: Mentor-PM: Client not found.</span>", type = MESSAGE_TYPE_MENTORPM)
 		return
 
-	var/datum/help_ticket/AH = C.current_mentorhelp_ticket
+	var/datum/help_tickets/AH = C.current_mentorhelp_ticket
 
 	if(AH)
 		message_mentors("[key_name_mentor(src, TRUE)] has started replying to [key_name_mentor(C, FALSE)]'s mentor help.")
