@@ -309,7 +309,6 @@
 
 	flash_protect = FLASH_PROTECTION_WELDER
 	tint = 3
-	dog_fashion = /datum/dog_fashion/head
 
 /obj/item/clothing/head/vampire/blackbag/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
