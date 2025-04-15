@@ -96,7 +96,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/open_borgopanel,
 	/client/proc/log_viewer_new,
 	/client/proc/fax_panel, /*send a paper to fax*/
-	/client/proc/fix_say,
 	/client/proc/openTicketManager
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
