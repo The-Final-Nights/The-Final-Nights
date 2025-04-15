@@ -27,7 +27,7 @@
 			return
 
 		var/ahelp_ref = href_list["ahelp"]
-		var/datum/help_tickets/admin/AH = locate(ahelp_ref)
+		var/datum/help_ticket/admin/AH = locate(ahelp_ref)
 		if(istype(AH))
 			AH.Action(href_list["ahelp_action"])
 		else
@@ -859,10 +859,8 @@
 	else if(href_list["messageedits"])
 		if(!check_rights(R_ADMIN))
 			return
-		var/datum/db_query/query_get_message_edits = SSdbcore.NewQuery(
-			"SELECT edits FROM [format_table_name("messages")] WHERE id = :message_id",
-			list("message_id" = href_list["messageedits"])
-		)
+		var/message_id = sanitizeSQL("[href_list["messageedits"]]")
+		var/datum/DBQuery/query_get_message_edits = SSdbcore.NewQuery("SELECT edits FROM [format_table_name("messages")] WHERE id = '[message_id]'")
 		if(!query_get_message_edits.warn_execute())
 			qdel(query_get_message_edits)
 			return

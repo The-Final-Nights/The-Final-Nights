@@ -7,13 +7,9 @@
 //
 
 /datum/help_tickets
-	/// The set of all unclaimed tickets
 	var/list/unclaimed_tickets = list()
-	/// The set of all active tickets
 	var/list/active_tickets = list()
-	/// The set of all closed tickets
 	var/list/closed_tickets = list()
-	/// The set of all resolved tickets
 	var/list/resolved_tickets = list()
 
 /datum/help_tickets/Destroy()
@@ -29,7 +25,7 @@
 /datum/help_tickets/proc/TicketByID(id)
 	var/list/lists = list(unclaimed_tickets, active_tickets, closed_tickets, resolved_tickets)
 	for(var/I in lists)
-		for(var/datum/help_tickets/AH in I)
+		for(var/datum/help_ticket/AH in I)
 			if(AH.id == id)
 				return AH
 
@@ -37,12 +33,12 @@
 	. = list()
 	var/list/lists = list(unclaimed_tickets, active_tickets, closed_tickets, resolved_tickets)
 	for(var/I in lists)
-		for(var/datum/help_tickets/AH in I)
+		for(var/datum/help_ticket/AH in I)
 			if(AH.initiator_ckey == ckey)
 				. += AH
 
 //private
-/datum/help_tickets/proc/ListInsert(datum/help_tickets/new_ticket)
+/datum/help_tickets/proc/ListInsert(datum/help_ticket/new_ticket)
 	var/list/ticket_list
 	switch(new_ticket.state)
 		if(TICKET_UNCLAIMED)
@@ -58,7 +54,7 @@
 	var/num_closed = ticket_list.len
 	if(num_closed)
 		for(var/I in 1 to num_closed)
-			var/datum/help_tickets/AH = ticket_list[I]
+			var/datum/help_ticket/AH = ticket_list[I]
 			if(AH.id > new_ticket.id)
 				ticket_list.Insert(I, new_ticket)
 				return
@@ -114,7 +110,6 @@
 	return
 
 /datum/help_ui/ui_act(action, params)
-	. = ..()
 	if(!check_permission(usr))
 		message_admins("[usr] sent a request to interact with the ticket browser without sufficient rights.")
 		log_admin_private("[usr] sent a request to interact with the ticket browser without sufficient rights.")
@@ -123,7 +118,7 @@
 	var/datum/help_tickets/data_glob = get_data_glob()
 	if(!istype(data_glob))
 		return
-	var/datum/help_tickets/ticket = data_glob.TicketByID(ticket_id)
+	var/datum/help_ticket/ticket = data_glob.TicketByID(ticket_id)
 	if(!ticket)
 		ticket = get_additional_ticket_data(ticket_id)
 	if(!ticket)
@@ -156,24 +151,24 @@
 		ticket.Claim()
 
 
-/datum/help_ui/proc/additional_act(action, datum/help_tickets/ticket, claim_ticket)
+/datum/help_ui/proc/additional_act(action, datum/help_ticket/ticket, claim_ticket)
 	return
 
 // has to be here because defines
-/datum/help_ui/admin/additional_act(action, datum/help_tickets/ticket, claim_ticket)
+/datum/help_ui/admin/additional_act(action, datum/help_ticket/ticket, claim_ticket)
 	switch(action)
 		if("ic")
 			claim_ticket = CLAIM_OVERRIDE
-			if(istype(ticket, /datum/help_tickets/admin))
-				var/datum/help_tickets/admin/a_ticket = ticket
+			if(istype(ticket, /datum/help_ticket/admin))
+				var/datum/help_ticket/admin/a_ticket = ticket
 				a_ticket.ICIssue()
 		if("close")
 			claim_ticket = CLAIM_OVERRIDE
 			ticket.Close()
 		if("mhelp")
 			claim_ticket = CLAIM_OVERRIDE
-			if(istype(ticket, /datum/help_tickets/admin))
-				var/datum/help_tickets/admin/a_ticket = ticket
+			if(istype(ticket, /datum/help_ticket/admin))
+				var/datum/help_ticket/admin/a_ticket = ticket
 				a_ticket.MHelpThis()
 		if("flw")
 			var/datum/admins/admin_datum = GLOB.admin_datums[usr.ckey]
@@ -182,12 +177,12 @@
 			admin_datum.admin_follow(get_mob_by_ckey(ticket.initiator_ckey))
 	return claim_ticket
 
-/datum/help_ui/mentor/additional_act(action, datum/help_tickets/ticket, claim_ticket)
+/datum/help_ui/mentor/additional_act(action, datum/help_ticket/ticket, claim_ticket)
 	switch(action)
 		if("ahelp")
 			claim_ticket = CLAIM_OVERRIDE
-			if(istype(ticket, /datum/help_tickets/mentor))
-				var/datum/help_tickets/mentor/m_ticket = ticket
+			if(istype(ticket, /datum/help_ticket/mentor))
+				var/datum/help_ticket/mentor/m_ticket = ticket
 				m_ticket.AHelpThis()
 	return claim_ticket
 
@@ -205,7 +200,7 @@
 	if(!l2b)
 		return
 	var/list/dat = list()
-	for(var/datum/help_tickets/AH in l2b)
+	for(var/datum/help_ticket/AH in l2b)
 		var/list/ticket = list(
 			"id" = AH.id,
 			"initiator_key_name" = AH.initiator_key_name,
@@ -213,7 +208,7 @@
 			"claimed_key_name" = AH.claimee_key_name,
 			"disconnected" = AH.initiator ? FALSE : TRUE,
 			"state" = AH.state,
-			"is_admin_type" = istype(AH, /datum/help_tickets/admin)
+			"is_admin_type" = istype(AH, /datum/help_ticket/admin)
 		)
 		dat += list(ticket)
 	return dat
@@ -235,7 +230,7 @@
 	)
 	var/num_disconnected = 0
 	for(var/l in list(active_tickets, unclaimed_tickets))
-		for(var/datum/help_tickets/AH in l)
+		for(var/datum/help_ticket/AH in l)
 			if(AH.initiator)
 				tab_data["#[AH.id]. [AH.initiator_key_name]"] = list(
 					text = AH.name,
@@ -265,7 +260,7 @@
 
 //Reassociate still open ticket if one exists
 /datum/help_tickets/proc/ClientLogin(client/C)
-	var/datum/help_tickets/active_ticket = CKey2ActiveTicket(C.ckey)
+	var/datum/help_ticket/active_ticket = CKey2ActiveTicket(C.ckey)
 	if(active_ticket)
 		active_ticket.initiator = C
 		active_ticket.AddInteraction("green", "Client reconnected.")
@@ -273,7 +268,7 @@
 
 //Dissasociate ticket
 /datum/help_tickets/proc/ClientLogout(client/C)
-	var/datum/help_tickets/active_ticket = get_active_ticket(C)
+	var/datum/help_ticket/active_ticket = get_active_ticket(C)
 	if(active_ticket)
 		active_ticket.AddInteraction("red", "Client disconnected.")
 		active_ticket.initiator = null
@@ -282,14 +277,14 @@
 //Get a ticket given a ckey
 /datum/help_tickets/proc/CKey2ActiveTicket(ckey)
 	for(var/l in list(unclaimed_tickets, active_tickets))
-		for(var/datum/help_tickets/AH in l)
+		for(var/datum/help_ticket/AH in l)
 			if(AH.initiator_ckey == ckey)
 				return AH
 
 /datum/help_tickets/proc/get_active_ticket(client/C)
 	return
 
-/datum/help_tickets/proc/set_active_ticket(client/C, datum/help_tickets/ticket)
+/datum/help_tickets/proc/set_active_ticket(client/C, datum/help_ticket/ticket)
 	return
 
 //
@@ -313,7 +308,7 @@
 // Ticket datum
 //
 
-/datum/help_tickets
+/datum/help_ticket
 	var/id
 	var/name
 	var/state = TICKET_UNCLAIMED
@@ -347,13 +342,13 @@
 	/// The message type used for resolve messages
 	var/message_type = MESSAGE_TYPE_ADMINPM
 
-/datum/help_tickets/New(client/C)
+/datum/help_ticket/New(client/C)
 	initiator = C
 	initiator_ckey = initiator.ckey
 	initiator_key_name = key_name(initiator, FALSE, TRUE)
 
 /// Call this on its own to create a ticket, don't manually assign current_ticket, msg is the title of the ticket: usually the ahelp text
-/datum/help_tickets/proc/Create(msg)
+/datum/help_ticket/proc/Create(msg)
 	//Clean the input message
 	msg = sanitize(copytext_char(msg, 1, MAX_MESSAGE_LEN))
 	if(!msg || !initiator || !initiator.mob)
@@ -368,7 +363,7 @@
 	var/datum/help_tickets/data_glob = get_data_glob()
 	if(!istype(data_glob))
 		return FALSE
-	var/datum/help_tickets/active_ticket = data_glob.get_active_ticket(initiator)
+	var/datum/help_ticket/active_ticket = data_glob.get_active_ticket(initiator)
 	if(active_ticket)	//This is a bug
 		stack_trace("Multiple current_tickets in ticket of type [verb_name]")
 		active_ticket.AddInteraction("red", "Ticket erroneously left open by code")
@@ -382,7 +377,7 @@
 	data_glob.unclaimed_tickets += src
 	return TRUE
 
-/datum/help_tickets/proc/NewFrom(datum/help_tickets/old_ticket)
+/datum/help_ticket/proc/NewFrom(datum/help_ticket/old_ticket)
 	initial_msg = old_ticket.initial_msg
 	id = ++ticket_counter
 	opened_at = old_ticket.opened_at
@@ -394,7 +389,7 @@
 		ticket_counter--
 		qdel(src)
 		return FALSE
-	var/datum/help_tickets/active_ticket = data_glob.get_active_ticket(initiator)
+	var/datum/help_ticket/active_ticket = data_glob.get_active_ticket(initiator)
 	if(active_ticket)
 		to_chat(initiator, "<span class='warning'>Your ticket could not be transferred because you already have a ticket of the same type open. Please make another ticket at a later time, or bring up whatever the issue was in your current ticket.</span>", type = message_type)
 		old_ticket.message_ticket_managers("<span class='[old_ticket.span_class]'>Could not transfer Ticket [old_ticket.TicketHref("#[old_ticket.id]")], [old_ticket.key_name_ticket(old_ticket.initiator)] already has a ticket open of the same type.</span>")
@@ -410,7 +405,7 @@
 	data_glob.unclaimed_tickets += src
 	return TRUE
 
-/datum/help_tickets/Destroy()
+/datum/help_ticket/Destroy()
 	RemoveActive()
 	var/datum/help_tickets/data_glob = get_data_glob()
 	if(!istype(data_glob))
@@ -419,16 +414,16 @@
 	data_glob.resolved_tickets -= src
 	return ..()
 
-/datum/help_tickets/proc/get_data_glob()
+/datum/help_ticket/proc/get_data_glob()
 	return
 
-/datum/help_tickets/proc/check_permission(mob/user)
+/datum/help_ticket/proc/check_permission(mob/user)
 	return FALSE
 
-/datum/help_tickets/proc/check_permission_act(mob/user)
+/datum/help_ticket/proc/check_permission_act(mob/user)
 	return FALSE
 
-/datum/help_tickets/proc/AddInteraction(msg_color, message, name_from, name_to, safe_from, safe_to)
+/datum/help_ticket/proc/AddInteraction(msg_color, message, name_from, name_to, safe_from, safe_to)
 	var/datum/ticket_interaction/interaction_message = new /datum/ticket_interaction
 	interaction_message.message_color = msg_color
 	interaction_message.message = message
@@ -439,13 +434,13 @@
 	_interactions += interaction_message
 	SStgui.update_uis(src)
 
-/datum/help_tickets/proc/TimeoutVerb()
+/datum/help_ticket/proc/TimeoutVerb()
 	return
 
-/datum/help_tickets/proc/TicketPanel()
+/datum/help_ticket/proc/TicketPanel()
 	ui_interact(usr)
 
-/datum/help_tickets/ui_interact(mob/user, datum/tgui/ui = null)
+/datum/help_ticket/ui_interact(mob/user, datum/tgui/ui = null)
 	//Support multiple tickets open at once
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -454,10 +449,10 @@
 		ui.set_autoupdate(TRUE)
 		ui.open()
 
-/datum/help_tickets/ui_state(mob/user)
+/datum/help_ticket/ui_state(mob/user)
 	return GLOB.never_state
 
-/datum/help_tickets/ui_data(mob/user)
+/datum/help_ticket/ui_data(mob/user)
 	if(!check_permission(user))
 		message_admins("[user] sent a request to interact with the ticket window without sufficient rights.")
 		log_admin_private("[user] sent a request to interact with the ticket window without sufficient rights.")
@@ -488,13 +483,13 @@
 	data = get_ticket_additional_data(user, data)
 	return data
 
-/datum/help_tickets/proc/get_ticket_additional_data(mob/user, list/data)
+/datum/help_ticket/proc/get_ticket_additional_data(mob/user, list/data)
 	return data
 
-/datum/help_tickets/proc/reply(whom, msg)
+/datum/help_ticket/proc/reply(whom, msg)
 	return
 
-/datum/help_tickets/ui_act(action, params)
+/datum/help_ticket/ui_act(action, params)
 	if(!check_permission_act(usr))
 		message_admins("[usr] sent a request to interact with the ticket window without sufficient rights.")
 		log_admin_private("[usr] sent a request to interact with the ticket window without sufficient rights.")
@@ -520,11 +515,11 @@
 	if(claim_ticket == CLAIM_OVERRIDE || (claim_ticket == CLAIM_CLAIMIFNONE && !claimee))
 		Claim()
 
-/datum/help_tickets/proc/additional_act(action, claim_ticket)
+/datum/help_ticket/proc/additional_act(action, claim_ticket)
 	return
 
 // has to be here because defines
-/datum/help_tickets/admin/additional_act(action, claim_ticket)
+/datum/help_ticket/admin/additional_act(action, claim_ticket)
 	var/datum/admins/admin_datum = GLOB.admin_datums[usr.ckey]
 	if(!admin_datum)
 		message_admins("[usr] sent a request to interact with the ticket window without sufficient rights.")
@@ -558,32 +553,32 @@
 			claim_ticket = CLAIM_OVERRIDE
 	return claim_ticket
 
-/datum/help_tickets/mentor/additional_act(action, claim_ticket)
+/datum/help_ticket/mentor/additional_act(action, claim_ticket)
 	if(action == "adminhelp")
 		AHelpThis()
 		claim_ticket = CLAIM_OVERRIDE
 	return claim_ticket
 
-/datum/help_tickets/proc/MessageNoRecipient(msg, sanitized = FALSE, urgent = FALSE)
+/datum/help_ticket/proc/MessageNoRecipient(msg, sanitized = FALSE)
 	return
 
-/datum/help_tickets/proc/key_name_ticket(mob/user)
+/datum/help_ticket/proc/key_name_ticket(mob/user)
 	return
 
-/datum/help_tickets/proc/message_ticket_managers(msg)
+/datum/help_ticket/proc/message_ticket_managers(msg)
 	return
 
-/datum/help_tickets/proc/LinkedReplyName(ref_src)
+/datum/help_ticket/proc/LinkedReplyName(ref_src)
 	return "[initiator_key_name]"
 
-/datum/help_tickets/proc/TicketHref(msg, ref_src, action = "ticket")
+/datum/help_ticket/proc/TicketHref(msg, ref_src, action = "ticket")
 	return "[msg]"
 
-/datum/help_tickets/proc/blackbox_feedback(increment, data)
+/datum/help_ticket/proc/blackbox_feedback(increment, data)
 	return
 
 //Reopen a closed ticket
-/datum/help_tickets/proc/Reopen()
+/datum/help_ticket/proc/Reopen()
 	if(state <= TICKET_ACTIVE)
 		to_chat(usr, "<span class='warning'>This ticket is already open.</span>")
 		return
@@ -617,7 +612,7 @@
 	TicketPanel()	//can only be done from here, so refresh it
 
 /// Don't call this, internal use only. Use Close/Resolve instead
-/datum/help_tickets/proc/RemoveActive()
+/datum/help_ticket/proc/RemoveActive()
 	if(state > TICKET_ACTIVE)
 		return
 	closed_at = world.time
@@ -631,7 +626,7 @@
 	if(initiator && data_glob.get_active_ticket(initiator) == src)
 		data_glob.set_active_ticket(initiator, null)
 
-/datum/help_tickets/proc/Claim(key_name = key_name_ticket(usr), silent = FALSE)
+/datum/help_ticket/proc/Claim(key_name = key_name_ticket(usr), silent = FALSE)
 	if(claimee == usr)
 		return
 	if(initiator && !claimee && !silent)
@@ -657,7 +652,7 @@
 		log_admin_private(msg)
 
 /// Mark open ticket as closed/meme
-/datum/help_tickets/proc/Close(key_name = key_name_ticket(usr), silent = FALSE, hide_interaction = FALSE)
+/datum/help_ticket/proc/Close(key_name = key_name_ticket(usr), silent = FALSE, hide_interaction = FALSE)
 	if(state > TICKET_ACTIVE)
 		return
 	if(!claimee)
@@ -677,7 +672,7 @@
 		log_admin_private(msg)
 
 /// Mark open ticket as resolved/legitimate, returns ahelp verb
-/datum/help_tickets/proc/Resolve(key_name = key_name_ticket(usr), silent = FALSE)
+/datum/help_ticket/proc/Resolve(key_name = key_name_ticket(usr), silent = FALSE)
 	if(state > TICKET_ACTIVE)
 		return
 	if(!claimee)
@@ -698,7 +693,7 @@
 		log_admin_private(msg)
 
 /// Close and return ahelp verb, use if ticket is incoherent
-/datum/help_tickets/proc/Reject(key_name = key_name_ticket(usr), extra_text)
+/datum/help_ticket/proc/Reject(key_name = key_name_ticket(usr), extra_text)
 	if(state > TICKET_ACTIVE)
 		return
 	if(!claimee)
@@ -714,7 +709,7 @@
 	AddInteraction("red", "Rejected by [key_name].")
 	Close(silent = TRUE)
 
-/datum/help_tickets/proc/Retitle(key_name = key_name_ticket(usr))
+/datum/help_ticket/proc/Retitle(key_name = key_name_ticket(usr))
 	var/new_title = capped_input(usr, "Enter a title for the ticket", "Rename Ticket", name)
 	if(new_title)
 		name = new_title
@@ -724,7 +719,7 @@
 		log_admin_private(msg)
 	TicketPanel()	//we have to be here to do this
 
-/datum/help_tickets/proc/resolve_message(status = "Resolved", message = null, extratext = "")
+/datum/help_ticket/proc/resolve_message(status = "Resolved", message = null, extratext = "")
 	var/output = "<span class='[span_class]_conclusion'><span class='big'><b>[verb_name] [status]</b></span><br />"
 	output += message || "\A [handling_name] has handled your ticket.[extratext]<br />\
 		Thank you for creating a ticket, the [verb_name] verb will be returned to you shortly."
@@ -748,7 +743,7 @@
 		C = GLOB.directory[what]
 	if(!istype(C))
 		return
-	var/datum/help_tickets/ticket = is_admin_ticket ? C.current_adminhelp_ticket : C.current_mentorhelp_ticket
+	var/datum/help_ticket/ticket = is_admin_ticket ? C.current_adminhelp_ticket : C.current_mentorhelp_ticket
 	if(!ticket)
 		return
 	if(safeSenderLogged)

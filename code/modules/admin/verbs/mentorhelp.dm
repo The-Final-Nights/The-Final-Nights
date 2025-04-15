@@ -4,7 +4,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 
 /client
 	var/mentorhelptimerid = 0	//a timer id for returning the mhelp verb
-	var/datum/help_tickets/current_mentorhelp_ticket	//the current ticket the (usually) not-admin client is dealing with
+	var/datum/help_ticket/current_mentorhelp_ticket	//the current ticket the (usually) not-admin client is dealing with
 	var/datum/help_tickets/admin/current_admin_ticket	//the current ticket the (usually) not-admin client is dealing with
 
 /client/proc/openMentorTicketManager()
@@ -28,7 +28,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 /client/proc/givementorhelpverb()
 	if(!src)
 		return
-	add_verb(src, /client/verb/mentorhelp)
+	src.add_verb(/client/verb/mentorhelp)
 	deltimer(mentorhelptimerid)
 	mentorhelptimerid = 0
 
@@ -70,7 +70,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 			current_mentorhelp_ticket.AddInteraction("yellow", "[usr] opened a new ticket.")
 			current_mentorhelp_ticket.Close()
 
-	var/datum/help_tickets/mentor/ticket = new(src)
+	var/datum/help_ticket/mentor/ticket = new(src)
 	ticket.Create(msg)
 
 /// Ticket List UI
@@ -94,64 +94,64 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 /datum/help_tickets/mentor/get_active_ticket(client/C)
 	return C.current_mentorhelp_ticket
 
-/datum/help_tickets/mentor/set_active_ticket(client/C, datum/help_tickets/ticket)
+/datum/help_tickets/mentor/set_active_ticket(client/C, datum/help_ticket/ticket)
 	C.current_mentorhelp_ticket = ticket
 
 /// Ticket Datum
 
-/datum/help_tickets/mentor
+/datum/help_ticket/mentor
 	span_class = "mentorhelp"
 	handling_name = "mentor"
 	verb_name = "Mentorhelp"
 	reply_sound = "sound/items/bikehorn.ogg"
 	message_type = MESSAGE_TYPE_MENTORPM
 
-/datum/help_tickets/mentor/New(client/C)
+/datum/help_ticket/mentor/New(client/C)
 	..()
 	initiator_key_name = key_name_mentor(initiator, FALSE)
 
-/datum/help_tickets/mentor/get_data_glob()
+/datum/help_ticket/mentor/get_data_glob()
 	return GLOB.mhelp_tickets
 
-/datum/help_tickets/mentor/check_permission(mob/user)
+/datum/help_ticket/mentor/check_permission(mob/user)
 	return !!GLOB.mentor_datums[user.ckey]
 
-/datum/help_tickets/mentor/check_permission_act(mob/user)
+/datum/help_ticket/mentor/check_permission_act(mob/user)
 	return !!GLOB.mentor_datums[user.ckey]// && check_rights(R_MENTOR) once this exists
 
-/datum/help_tickets/mentor/ui_state(mob/user)
+/datum/help_ticket/mentor/ui_state(mob/user)
 	return GLOB.mentor_state
 
-/datum/help_tickets/mentor/get_ticket_additional_data(mob/user, list/data)
+/datum/help_ticket/mentor/get_ticket_additional_data(mob/user, list/data)
 	data["is_admin_type"] = FALSE
 	return data
 
-/datum/help_tickets/mentor/reply(whom, msg)
+/datum/help_ticket/mentor/reply(whom, msg)
 	usr.client.cmd_mhelp_reply_instant(whom, msg)
 
-/datum/help_tickets/mentor/Create(msg)
+/datum/help_ticket/mentor/Create(msg)
 	if(!..())
 		return FALSE
 	MessageNoRecipient(msg)
 	return TRUE
 
-/datum/help_tickets/mentor/NewFrom(datum/help_tickets/old_ticket)
+/datum/help_ticket/mentor/NewFrom(datum/help_ticket/old_ticket)
 	if(!..())
 		return FALSE
 	MessageNoRecipient(initial_msg, add_to_ticket = FALSE, sanitized = TRUE) // initial_msg is sanitized already
 	return TRUE
 
-/datum/help_tickets/mentor/TimeoutVerb()
-	remove_verb(initiator, /client/verb/mentorhelp)
+/datum/help_ticket/mentor/TimeoutVerb()
+	initiator.remove_verb(/client/verb/mentorhelp)
 	initiator.mentorhelptimerid = addtimer(CALLBACK(initiator, /client/proc/givementorhelpverb), 1200, TIMER_STOPPABLE)
 
-/datum/help_tickets/mentor/key_name_ticket(mob/user)
+/datum/help_ticket/mentor/key_name_ticket(mob/user)
 	return key_name_mentor(user)
 
-/datum/help_tickets/mentor/message_ticket_managers(msg)
+/datum/help_ticket/mentor/message_ticket_managers(msg)
 	message_mentors(msg)
 
-/datum/help_tickets/mentor/MessageNoRecipient(msg, sanitized = FALSE, urgent = FALSE, add_to_ticket = TRUE)
+/datum/help_ticket/mentor/MessageNoRecipient(msg, add_to_ticket = TRUE, sanitized = FALSE)
 	var/ref_src = "[REF(src)]"
 	var/sanitized_msg = sanitized ? msg : sanitize(msg)
 
@@ -164,7 +164,8 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 
 	//send this msg to all admins
 	for(var/client/X in GLOB.mentors | GLOB.admins)
-		SEND_SOUND(X, sound(reply_sound))
+		if(X.prefs.toggles & PREFTOGGLE_SOUND_ADMINHELP)
+			SEND_SOUND(X, sound(reply_sound))
 		window_flash(X, ignorepref = TRUE)
 		to_chat(X, admin_msg, type = message_type)
 
@@ -172,7 +173,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 	if(add_to_ticket)
 		to_chat(initiator, "<span class='mentornotice'>PM to-<b>Mentors</b>: <span class='linkify'>[sanitized_msg]</span></span>", type = message_type)
 
-/datum/help_tickets/mentor/proc/ClosureLinks(ref_src)
+/datum/help_ticket/mentor/proc/ClosureLinks(ref_src)
 	if(state > TICKET_ACTIVE)
 		return ""
 	if(!ref_src)
@@ -181,21 +182,21 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 	. += " (<A HREF='?_src_=mentor;[MentorHrefToken(TRUE)];mhelp=[ref_src];mhelp_action=resolve'>RSLVE</A>)"
 	. += " (<A HREF='?_src_=mentor;[MentorHrefToken(TRUE)];mhelp=[ref_src];mhelp_action=ahelp'>AHELP</A>)"
 
-/datum/help_tickets/mentor/LinkedReplyName(ref_src)
+/datum/help_ticket/mentor/LinkedReplyName(ref_src)
 	if(!ref_src)
 		ref_src = "[REF(src)]"
 	return "<A HREF='?_src_=mentor;[MentorHrefToken(TRUE)];mhelp=[ref_src];mhelp_action=reply'>[initiator_key_name]</A>"
 
-/datum/help_tickets/mentor/TicketHref(msg, ref_src, action = "ticket")
+/datum/help_ticket/mentor/TicketHref(msg, ref_src, action = "ticket")
 	if(!ref_src)
 		ref_src = "[REF(src)]"
 	return "<A HREF='?_src_=mentor;[MentorHrefToken(TRUE)];mhelp=[ref_src];mhelp_action=[action]'>[msg]</A>"
 
-/datum/help_tickets/mentor/blackbox_feedback(increment, data)
+/datum/help_ticket/mentor/blackbox_feedback(increment, data)
 	SSblackbox.record_feedback("tally", "mhelp_stats", increment, data)
 
 /// Close ticket and escalate to adminhelp, auto-converts and creates a new admin ticket with the same history
-/datum/help_tickets/mentor/proc/AHelpThis(key_name = key_name_ticket(usr))
+/datum/help_ticket/mentor/proc/AHelpThis(key_name = key_name_ticket(usr))
 	if(state > TICKET_ACTIVE)
 		return
 
@@ -217,11 +218,11 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 		return
 	message_ticket_managers(msg)
 	log_admin_private(msg)
-	var/datum/help_tickets/admin/ticket = new(initiator)
+	var/datum/help_ticket/admin/ticket = new(initiator)
 	ticket.NewFrom(src)
 
 /// Forwarded action from mentor/Topic
-/datum/help_tickets/mentor/proc/Action(action)
+/datum/help_ticket/mentor/proc/Action(action)
 	testing("Mhelp action: [action]")
 	switch(action)
 		if("ticket")
@@ -241,11 +242,11 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 		if("ahelp")
 			AHelpThis()
 
-/datum/help_tickets/mentor/Resolve(key_name = key_name_ticket(usr), silent = FALSE)
+/datum/help_ticket/mentor/Resolve(key_name = key_name_ticket(usr), silent = FALSE)
 	..()
 	addtimer(CALLBACK(initiator, /client/proc/givementorhelpverb), 50)
 
-/datum/help_tickets/mentor/Reject(key_name = key_name_ticket(usr))
+/datum/help_ticket/mentor/Reject(key_name = key_name_ticket(usr))
 	..()
 	if(initiator)
 		initiator.givementorhelpverb()

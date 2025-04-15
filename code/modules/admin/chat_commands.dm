@@ -33,7 +33,7 @@
 	all_params.Cut(1, 2)
 	var/id = text2num(target)
 	if(id != null)
-		var/datum/help_tickets/AH = GLOB.ahelp_tickets.TicketByID(id)
+		var/datum/help_ticket/AH = GLOB.ahelp_tickets.TicketByID(id)
 		if(AH)
 			target = AH.initiator_ckey
 		else
@@ -93,7 +93,7 @@ GLOBAL_LIST(round_end_notifiees)
 	var/list/text_res = results.Copy(1, 3)
 	var/list/refs = results.len > 3 ? results.Copy(4) : null
 	. = "[text_res.Join("\n")][refs ? "\nRefs: [refs.Join(" ")]" : ""]"
-
+	
 /datum/tgs_chat_command/reload_admins
 	name = "reload_admins"
 	help_text = "Forces the server to reload admins."
