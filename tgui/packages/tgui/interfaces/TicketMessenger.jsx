@@ -1,9 +1,8 @@
-import { decodeHtmlEntities } from 'common/string';
+import { decodeHtmlEntities } from 'tgui-core/string';
 import { useBackend } from '../backend';
-import { Box, Button, Input, Section, Table, Divider } from '../components';
+import { Box, Button, Input, Section, Table, Divider } from 'tgui-core/components';
 import { Window } from '../layouts';
-import { round } from 'common/math';
-import { ButtonConfirm } from '../components/Button';
+import { round } from 'tgui-core/math';
 import { Component, createRef } from 'react';
 
 export const TicketMessenger = (props) => {

@@ -1,8 +1,7 @@
 import { useBackend, useLocalState } from '../backend';
-import { Box, Button, Section, Table, Tabs, Collapsible, BlockQuote } from '../components';
+import { Box, Button, Section, Table, Tabs, Collapsible, BlockQuote } from 'tgui-core/components';
 import { Window } from '../layouts';
-import { capitalize } from 'common/string';
-import { ButtonConfirm } from '../components/Button';
+import { capitalize } from 'tgui-core/string';
 
 export const TicketBrowser = (_) => {
   const { data } = useBackend();
