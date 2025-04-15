@@ -49,7 +49,7 @@ GLOBAL_LIST_EMPTY(gear_datums)
 	var/description
 	///Path to item.
 	var/path
-	///Number of metacoins
+	///Cost to purchase
 	var/cost = 0
 	///Slot to equip to.
 	var/slot
