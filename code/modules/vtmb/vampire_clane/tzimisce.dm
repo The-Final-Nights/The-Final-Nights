@@ -474,13 +474,43 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	w_class = WEIGHT_CLASS_SMALL
 
+/datum/material/vicissitude_flesh
+	name = "flesh"
+	desc = "What remains of a person, when you really get down to it."
+	color = "#d8965b"
+	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
+	sheet_type = /obj/item/stack/sheet/meat
+	value_per_unit = 0.05
+	beauty_modifier = -0.3
+	strength_modifier = 0.7
+	armor_modifiers = list(MELEE = 0.3, BULLET = 0.3, LASER = 1.2, ENERGY = 1.2, BOMB = 0.3, BIO = 0, RAD = 0.7, FIRE = 1, ACID = 1)
+	item_sound_override = 'sound/effects/meatslap.ogg'
+	turf_sound_override = FOOTSTEP_MEAT
+	
+/datum/material/vicissitude_flesh/on_removed(atom/source, amount, material_flags)
+	. = ..()
+	qdel(source.GetComponent(/datum/component/edible))
+
+/datum/material/vicissitude_flesh/on_applied_obj(obj/O, amount, material_flags)
+	. = ..()
+	make_edible(O, amount, material_flags)
+
+/datum/material/vicissitude_flesh/on_applied_turf(turf/T, amount, material_flags)
+	. = ..()
+	make_edible(T, amount, material_flags)
+
+/datum/material/meat/proc/make_edible(atom/source, amount, material_flags)
+	var/nutriment_count = 3 * (amount / MINERAL_MATERIAL_AMOUNT)
+	var/oil_count = 2 * (amount / MINERAL_MATERIAL_AMOUNT)
+	source.AddComponent(/datum/component/edible, list(/datum/reagent/consumable/nutriment = nutriment_count, /datum/reagent/consumable/cooking_oil = oil_count), null, RAW | MEAT | GROSS, null, 30, list("Fleshy"))
+
 /obj/item/stack/human_flesh
 	name = "human flesh"
 	desc = "What the fuck..."
 	singular_name = "human flesh"
 	icon_state = "human"
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
-	mats_per_unit = list(/datum/material/meat = MINERAL_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/vicissitude_flesh = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/human_flesh
 	max_amount = 50
 
