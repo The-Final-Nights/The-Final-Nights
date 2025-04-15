@@ -1,4 +1,4 @@
-#define FLOOR_DISSAPEAR 3 SECONDS
+#define FLOOR_DISAPPEAR 3 SECONDS
 
 /datum/quirk/derangement/proc/handle_malk_floors()
 	var/mob/living/target = quirk_holder
@@ -22,9 +22,8 @@
 	addtimer(CALLBACK(src, PROC_REF(malk_floor_stage1), quirk_holder, offset, fake_floor), disappearfirst, TIMER_CLIENT_TIME)
 
 /datum/quirk/derangement/proc/malk_floor_stage1(mob/living/malk, offset, mutable_appearance/fake_floor)
-	var/disappearsecond = FLOOR_DISSAPEAR
-	animate(fake_floor, pixel_y = -offset, time = disappearsecond, flags = ANIMATION_RELATIVE)
-	addtimer(CALLBACK(src, PROC_REF(malk_floor_stage2), malk, fake_floor), disappearsecond, TIMER_CLIENT_TIME)
+	animate(fake_floor, pixel_y = -offset, time = FLOOR_DISAPPEAR, flags = ANIMATION_RELATIVE)
+	addtimer(CALLBACK(src, PROC_REF(malk_floor_stage2), malk, fake_floor), FLOOR_DISAPPEAR, TIMER_CLIENT_TIME)
 
 /datum/quirk/derangement/proc/malk_floor_stage2(mob/living/malk, mutable_appearance/fake_floor)
 	malk.client?.images -= fake_floor
@@ -89,4 +88,4 @@
 		target.create_chat_message(speaker, language, speech, spans = list(target.speech_span))
 	to_chat(target, message)
 
-#undef FLOOR_DISSAPEAR
+#undef FLOOR_DISAPPEAR
