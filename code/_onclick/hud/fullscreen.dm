@@ -198,3 +198,4 @@
 	layer = FULLSCREEN_LAYER
 	alpha = 90
 	blend_mode = 4
+	show_when_dead = TRUE
