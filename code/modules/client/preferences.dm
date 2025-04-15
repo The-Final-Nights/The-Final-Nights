@@ -173,7 +173,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/discipline4type
 
 	//New experience counter, global for all characters per client.
-	var/player_experience = 0
+	var/player_experience = 50
 	//Amount of EXP used on the current character, this is returned when a character is reset.
 	var/experience_used_on_character = 0
 
