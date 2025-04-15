@@ -40,7 +40,7 @@
 		'sound/hallucinations/malk/comic3.ogg',
 		'sound/hallucinations/malk/comic4.ogg',
 	)
-	malk.playsound_local(malk, pick(funnies), vol = 80, vary = FALSE)
+	malk.playsound_local(malk, pick(funnies), vol = 40, vary = FALSE)
 
 /datum/hallucination/malk/object
 
