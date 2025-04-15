@@ -1512,6 +1512,7 @@
 #include "code\modules\admin\verbs\mapping.dm"
 #include "code\modules\admin\verbs\maprotation.dm"
 #include "code\modules\admin\verbs\mentorhelp.dm"
+#include "code\modules\admin\verbs\mentors_edit.dm"
 #include "code\modules\admin\verbs\one_click_antag.dm"
 #include "code\modules\admin\verbs\onlyone.dm"
 #include "code\modules\admin\verbs\panicbunker.dm"

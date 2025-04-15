@@ -181,9 +181,11 @@ a.popt {
   padding: 2px 0;
 }
 
-.filterMessages input
+.filterMessages input {
+}
 
-.filterMessages label
+.filterMessages label {
+}
 
 .icon-stack {
   height: 1em;
@@ -297,6 +299,10 @@ em {
   font-weight: bold;
 }
 
+.name {
+  font-weight: bold;
+}
+
 mentor {
   color: #24a340;
   font-weight: bold;
@@ -331,11 +337,12 @@ mentor {
   font-weight: bold;
 }
 
-.say
-.emote
-.infoplain
-.oocplain
-.warningplain
+.say,
+.emote,
+.infoplain,
+.oocplain,
+.warningplain {
+}
 
 .deadsay {
   color: hsl(271.9, 100%, 87.8%);
