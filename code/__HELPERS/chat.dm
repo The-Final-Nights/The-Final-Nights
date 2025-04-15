@@ -44,8 +44,10 @@ it will be sent to all connected chats.
  * channel_tag - Required. If "", the message with be sent to all connected (Game-type for TGS3) channels. Otherwise, it will be sent to TGS4 channels with that tag (Delimited by ','s).
  * admin_only - Determines if this communication can only be sent to admin only channels.
  */
+
 /proc/send2chat(datum/tgs_message_content/message, channel_tag, admin_only = FALSE)
 	set waitfor = FALSE
+  
 	if(channel_tag == null || !world.TgsAvailable())
 		return
 

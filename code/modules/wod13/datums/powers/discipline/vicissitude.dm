@@ -220,8 +220,11 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_wall)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_stool)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_eyes)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_implant)
+
+
 
 //BONECRAFTING
 /datum/discipline_power/vicissitude/bonecrafting
@@ -278,6 +281,11 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_fister)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_tanker)
 
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tziregenerativecore)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/axetzi)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzijelly)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzicreature)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/cattzi)
 /datum/action/basic_vicissitude
 	name = "Vicissitude Upgrade"
 	desc = "Upgrade your body..."
