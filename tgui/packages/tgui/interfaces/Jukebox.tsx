@@ -1,43 +1,71 @@
 import { sortBy } from 'common/collections';
-import { flow } from 'tgui-core/fp';
-import { useBackend } from '../backend';
 import {
   Box,
   Button,
   Dropdown,
-  Section,
   Knob,
   LabeledControls,
   LabeledList,
+  Section,
 } from 'tgui-core/components';
+import { BooleanLike } from 'tgui-core/react';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
-export const Jukebox = (props) => {
-  const { act, data } = useBackend();
-  const { active, track_selected, track_length, track_beat, volume } = data;
-  data.songs.sort((a, b) => a.name.localeCompare(b.name));
+type Song = {
+  name: string;
+  length: number;
+  beat: number;
+};
+
+type Data = {
+  active: BooleanLike;
+  looping: BooleanLike;
+  volume: number;
+  track_selected: string | null;
+  songs: Song[];
+};
+
+export const Jukebox = () => {
+  const { act, data } = useBackend<Data>();
+  const { active, looping, track_selected, volume, songs } = data;
+
+  const songs_sorted: Song[] = sortBy(songs, (song: Song) => song.name);
+  const song_selected: Song | undefined = songs.find(
+    (song) => song.name === track_selected,
+  );
+
   return (
     <Window width={370} height={313}>
       <Window.Content>
         <Section
           title="Song Player"
           buttons={
-            <Button
-              icon={active ? 'pause' : 'play'}
-              content={active ? 'Stop' : 'Play'}
-              selected={active}
-              onClick={() => act('toggle')}
-            />
+            <>
+              <Button
+                icon={active ? 'pause' : 'play'}
+                content={active ? 'Stop' : 'Play'}
+                selected={active}
+                onClick={() => act('toggle')}
+              />
+              <Button.Checkbox
+                icon={'arrow-rotate-left'}
+                content="Repeat"
+                disabled={active}
+                checked={looping}
+                onClick={() => act('loop', { looping: !looping })}
+              />
+            </>
           }
         >
           <LabeledList>
             <LabeledList.Item label="Track Selected">
               <Dropdown
-                overflow-y="scroll"
                 width="240px"
-                options={data.songs.map((song) => song.name)}
-                disabled={active}
-                selected={track_selected || 'Select a Track'}
+                options={songs_sorted.map((song) => song.name)}
+                disabled={!!active}
+                selected={song_selected?.name || 'Select a Track'}
                 onSelected={(value) =>
                   act('select_track', {
                     track: value,
@@ -46,11 +74,11 @@ export const Jukebox = (props) => {
               />
             </LabeledList.Item>
             <LabeledList.Item label="Track Length">
-              {track_selected ? track_length : 'No Track Selected'}
+              {song_selected?.length || 'No Track Selected'}
             </LabeledList.Item>
             <LabeledList.Item label="Track Beat">
-              {track_selected ? track_beat : 'No Track Selected'}
-              {track_beat === 1 ? ' beat' : ' beats'}
+              {song_selected?.beat || 'No Track Selected'}
+              {song_selected?.beat === 1 ? ' beat' : ' beats'}
             </LabeledList.Item>
           </LabeledList>
         </Section>
@@ -60,14 +88,13 @@ export const Jukebox = (props) => {
               <Box position="relative">
                 <Knob
                   size={3.2}
-                  color={volume >= 50 ? 'red' : 'green'}
+                  color={volume >= 25 ? 'red' : 'green'}
                   value={volume}
                   unit="%"
                   minValue={0}
-                  maxValue={100}
+                  maxValue={50}
                   step={1}
                   stepPixelSize={1}
-                  disabled={active}
                   onDrag={(e, value) =>
                     act('set_volume', {
                       volume: value,
