@@ -29,7 +29,7 @@ GLOBAL_LIST_INIT(avatar_banned_verbs, list(
 	remove_verb(src, GLOB.avatar_banned_verbs)
 	add_verb(src, /mob/dead/observer/avatar/verb/reenter_body)
 
-	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
+	sight = NONE
 	movement_type = FLYING | GROUND | PHASING
 
 /mob/dead/observer/avatar/Destroy()
