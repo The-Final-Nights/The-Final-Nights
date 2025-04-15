@@ -668,11 +668,7 @@ SUBSYSTEM_DEF(ticker)
 	save_admin_data()
 	update_everything_flag_in_db()
 	if(!round_end_sound)
-		round_end_sound = pick(\
-		'sound/roundend/malkavian.ogg',
-		'sound/roundend/cain.ogg',
-		'sound/roundend/die.ogg'\
-		)
+		round_end_sound = choose_round_end_song()
 	///The reference to the end of round sound that we have chosen.
 	var/sound/end_of_round_sound_ref = sound(round_end_sound)
 	for(var/mob/M in GLOB.player_list)
@@ -689,3 +685,12 @@ SUBSYSTEM_DEF(ticker)
 		log_admin("[usr.ckey] blocked commendation from [heart_sender] ([heart_sender.ckey]) to [intended_recepient] ([intended_recepient.ckey])")
 		message_admins("[usr.ckey] blocked commendation from [heart_sender] ([heart_sender.ckey]) to [intended_recepient] ([intended_recepient.ckey])")
 		hearts[intended_recepient] = null
+
+/datum/controller/subsystem/ticker/proc/choose_round_end_song()
+	var/list/reboot_sounds = flist("[global.config.directory]/reboot_themes/")
+	var/list/possible_themes = list()
+
+	for(var/themes in reboot_sounds)
+		possible_themes += themes
+	if(possible_themes.len)
+		return "[global.config.directory]/reboot_themes/[pick(possible_themes)]"
