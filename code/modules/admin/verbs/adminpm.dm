@@ -193,8 +193,7 @@
 				to_chat(src, "<span class='notice'>PM to-<b>Admins</b>: <span class='linkify'>[msg]</span></span>", type = MESSAGE_TYPE_ADMINPM)
 
 			//play the receiving admin the adminhelp sound (if they have them enabled)
-			if(recipient.prefs.toggles & PREFTOGGLE_SOUND_ADMINHELP)
-				SEND_SOUND(recipient, sound('sound/effects/adminhelp.ogg'))
+			SEND_SOUND(recipient, sound('sound/effects/adminhelp.ogg'))
 
 		else
 			if(holder)	//sender is an admin but recipient is not. Do BIG RED TEXT
@@ -327,7 +326,7 @@
 	msg = emoji_parse(msg)
 
 	to_chat(C, "<font color='red' size='4'><b>-- Administrator private message --</b></font>", type = MESSAGE_TYPE_ADMINPM)
-	to_chat(C, "<span class='adminsay'>Admin PM from-<b><a href='?priv_msg=[stealthkey]'>[adminname]</A></b>: [msg]</span>", allow_linkify = TRUE, type = MESSAGE_TYPE_ADMINPM)
+	to_chat(C, "<span class='adminsay'>Admin PM from-<b><a href='?priv_msg=[stealthkey]'>[adminname]</A></b>: [msg]</span>", type = MESSAGE_TYPE_ADMINPM)
 	to_chat(C, "<span class='adminsay'><i>Click on the administrator's name to reply.</i></span>", type = MESSAGE_TYPE_ADMINPM)
 
 	admin_ticket_log(C, msg, adminname, null, "cyan", isSenderAdmin = TRUE, safeSenderLogged = TRUE)

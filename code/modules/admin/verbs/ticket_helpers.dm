@@ -166,3 +166,18 @@
 		return_list[ASAY_LINK_NEW_MESSAGE_INDEX] = jointext(msglist, " ") // without tuples, we must make do!
 		return_list[ASAY_LINK_PINGED_ADMINS_INDEX] = pinged_admins
 		return return_list
+
+/// Proc to hook user-enacted teleporting behavior and keep logging of the event.
+/atom/movable/proc/admin_teleport(atom/new_location)
+	if(isnull(new_location))
+		log_admin("[key_name(usr)] teleported [key_name(src)] to nullspace")
+		moveToNullspace()
+	else
+		log_admin("[key_name(usr)] teleported [key_name(src)] to [AREACOORD(loc)]")
+		forceMove(new_location)
+
+/mob/admin_teleport(atom/new_location)
+	var/msg = "[key_name_admin(usr)] teleported [ADMIN_LOOKUPFLW(src)] to [isnull(new_location) ? "nullspace" : ADMIN_VERBOSEJMP(loc)]"
+	message_admins(msg)
+	admin_ticket_log(src, msg)
+	return ..()
