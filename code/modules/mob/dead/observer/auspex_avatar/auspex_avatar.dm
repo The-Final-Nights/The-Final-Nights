@@ -31,11 +31,6 @@ GLOBAL_LIST_INIT(avatar_banned_verbs, list(
 
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
 	movement_type = FLYING | GROUND | PHASING
-	sight = 0
-	client.prefs.chat_toggles &= ~CHAT_GHOSTEARS
-	client.prefs.chat_toggles &= ~CHAT_GHOSTWHISPER
-	client.prefs.chat_toggles ^= CHAT_DEAD
-	client.show_popup_menus = 0
 
 /mob/dead/observer/avatar/Destroy()
 	remove_from_avatar_list()
@@ -54,6 +49,10 @@ GLOBAL_LIST_INIT(avatar_banned_verbs, list(
 	auspex_avatar.key = key
 	auspex_avatar.client.init_verbs()
 	auspex_avatar.client = src.client
+	auspex_avatar.client.prefs.chat_toggles &= ~CHAT_GHOSTEARS
+	auspex_avatar.client.prefs.chat_toggles &= ~CHAT_GHOSTWHISPER
+	auspex_avatar.client.prefs.chat_toggles ^= CHAT_DEAD
+	auspex_avatar.client.show_popup_menus = 0
 
 	return auspex_avatar
 
