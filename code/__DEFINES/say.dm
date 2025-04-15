@@ -61,6 +61,7 @@
 #define SPAN_COMMAND "command_headset"
 #define SPAN_CLOWN "clown"
 #define SPAN_SINGING "singing"
+#define SPAN_TAPE_RECORDER "tape_recorder"
 
 #define SPAN_PHONE "phone"
 #define SPAN_SMALLPHONE "smallphone"
@@ -82,10 +83,16 @@
 #define FOLLOW_OR_TURF_LINK(alice, bob, turfy) "<a href=byond://?src=[REF(alice)];follow=[REF(bob)];x=[turfy.x];y=[turfy.y];z=[turfy.z]>(F)</a>" //<a href=byond://?src=[REF(alice)];follow=[REF(bob)];x=[turfy.x];y=[turfy.y];z=[turfy.z]>(F)</a> //! [ChillRaccoon] - REWORK OR REMOVE
 
 //Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
-#define MAX_MESSAGE_LEN			2048 // TFN EDIT: 1024 -> 2048
-#define MAX_NAME_LEN			42
-#define MAX_BROADCAST_LEN		512
-#define MAX_CHARTER_LEN			80
+#define MAX_MESSAGE_LEN	2048 // TFN EDIT: 1024 -> 2048
+#define MAX_NAME_LEN 42
+#define MAX_BROADCAST_LEN 512
+#define MAX_CHARTER_LEN	80
+// Double the maximum message length.
+#define MAX_FLAVOR_LEN 4096
+
+#define MAX_PLAQUE_LEN 144
+#define MAX_LABEL_LEN 64
+#define MAX_DESC_LEN 280
 
 // Is something in the IC chat filter? This is config dependent.
 #define CHAT_FILTER_CHECK(T) (config.ic_filter_regex && findtext(T, config.ic_filter_regex))

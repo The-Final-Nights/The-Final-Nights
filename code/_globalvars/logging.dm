@@ -2,6 +2,9 @@
 GLOBAL_VAR(log_directory)
 GLOBAL_PROTECT(log_directory)
 
+GLOBAL_VAR(round_id)
+GLOBAL_PROTECT(round_id)
+
 #define DECLARE_LOG_NAMED(log_var_name, log_file_name, start)\
 GLOBAL_VAR(##log_var_name);\
 GLOBAL_PROTECT(##log_var_name);\
@@ -23,68 +26,22 @@ GLOBAL_PROTECT(##log_var_name);\
 	SHOULD_CALL_PARENT(TRUE)
 	return
 
+// All individual log files.
+// These should be used where the log category cannot easily be a json log file.
+DECLARE_LOG(config_error_log, DONT_START_LOG)
+DECLARE_LOG(perf_log, DONT_START_LOG) // Declared here but name is set in time_track subsystem
+
+#ifdef REFERENCE_DOING_IT_LIVE
+DECLARE_LOG_NAMED(harddel_log, "harddels", START_LOG)
+#endif
 
 #if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
 DECLARE_LOG_NAMED(test_log, "tests", START_LOG)
 #endif
 
-GLOBAL_VAR(world_game_log)
-GLOBAL_PROTECT(world_game_log)
-GLOBAL_VAR(world_runtime_log)
-GLOBAL_PROTECT(world_runtime_log)
-GLOBAL_VAR(world_qdel_log)
-GLOBAL_PROTECT(world_qdel_log)
-GLOBAL_VAR(world_attack_log)
-GLOBAL_PROTECT(world_attack_log)
-GLOBAL_VAR(world_econ_log)
-GLOBAL_PROTECT(world_econ_log)
-GLOBAL_VAR(world_href_log)
-GLOBAL_PROTECT(world_href_log)
-GLOBAL_VAR(round_id)
-GLOBAL_PROTECT(round_id)
-GLOBAL_VAR(config_error_log)
-GLOBAL_PROTECT(config_error_log)
-GLOBAL_VAR(sql_error_log)
-GLOBAL_PROTECT(sql_error_log)
-GLOBAL_VAR(world_pda_log)
-GLOBAL_PROTECT(world_pda_log)
-GLOBAL_VAR(world_uplink_log)
-GLOBAL_PROTECT(world_uplink_log)
-GLOBAL_VAR(world_telecomms_log)
-GLOBAL_PROTECT(world_telecomms_log)
-GLOBAL_VAR(world_manifest_log)
-GLOBAL_PROTECT(world_manifest_log)
-GLOBAL_VAR(query_debug_log)
-GLOBAL_PROTECT(query_debug_log)
-GLOBAL_VAR(world_job_debug_log)
-GLOBAL_PROTECT(world_job_debug_log)
-GLOBAL_VAR(world_mecha_log)
-GLOBAL_PROTECT(world_mecha_log)
-GLOBAL_VAR(world_virus_log)
-GLOBAL_PROTECT(world_virus_log)
-GLOBAL_VAR(world_asset_log)
-GLOBAL_PROTECT(world_asset_log)
-GLOBAL_VAR(world_cloning_log)
-GLOBAL_PROTECT(world_cloning_log)
-GLOBAL_VAR(world_map_error_log)
-GLOBAL_PROTECT(world_map_error_log)
-GLOBAL_VAR(world_paper_log)
-GLOBAL_PROTECT(world_paper_log)
-GLOBAL_VAR(tgui_log)
-GLOBAL_PROTECT(tgui_log)
-GLOBAL_VAR(world_shuttle_log)
-GLOBAL_PROTECT(world_shuttle_log)
-
-GLOBAL_VAR(perf_log)
-GLOBAL_PROTECT(perf_log)
-
-GLOBAL_VAR(demo_log)
-GLOBAL_PROTECT(demo_log)
-
 GLOBAL_LIST_EMPTY(bombers)
 GLOBAL_PROTECT(bombers)
-GLOBAL_LIST_EMPTY(admin_log)
-GLOBAL_PROTECT(admin_log)
+
 GLOBAL_LIST_EMPTY(lastsignalers)	//keeps last 100 signals here in format: "[src] used [REF(src)] @ location [src.loc]: [freq]/[code]"
 GLOBAL_PROTECT(lastsignalers)
 GLOBAL_LIST_EMPTY(lawchanges) //Stores who uploaded laws to which silicon-based lifeform, and what the law was
@@ -101,7 +58,6 @@ GLOBAL_PROTECT(adminlog)
 
 GLOBAL_LIST_EMPTY(active_turfs_startlist)
 
-/////Picture logging
 GLOBAL_VAR(picture_log_directory)
 GLOBAL_PROTECT(picture_log_directory)
 
@@ -109,7 +65,10 @@ GLOBAL_VAR_INIT(picture_logging_id, 1)
 GLOBAL_PROTECT(picture_logging_id)
 GLOBAL_VAR(picture_logging_prefix)
 GLOBAL_PROTECT(picture_logging_prefix)
-/////
+
+/// All admin related log lines minus their categories
+GLOBAL_LIST_EMPTY(admin_activities)
+GLOBAL_PROTECT(admin_activities)
 
 #undef DECLARE_LOG
 #undef DECLARE_LOG_NAMED

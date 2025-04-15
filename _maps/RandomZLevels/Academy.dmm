@@ -2722,7 +2722,6 @@
 /area/awaymission/academy/classrooms)
 "kK" = (
 /obj/structure/table,
-/obj/item/book/manual/ripley_build_and_repair,
 /turf/open/floor/plasteel,
 /area/awaymission/academy/classrooms)
 "kL" = (

@@ -193,7 +193,6 @@
 "aI" = (
 /obj/structure/table,
 /obj/item/storage/fancy/donut_box,
-/obj/item/book/manual/wiki/security_space_law,
 /obj/item/storage/box/handcuffs,
 /turf/open/floor/mineral/plastitanium/red/brig,
 /area/shuttle/escape/brig)

@@ -220,7 +220,6 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/hunter)
 "Q" = (
-/obj/item/book/manual/ripley_build_and_repair,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/hunter)
 "Y" = (

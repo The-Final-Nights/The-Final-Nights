@@ -136,7 +136,7 @@
 
 /obj/abyssrune/identification
 	name = "Occult Items Identification"
-	desc = "Identificates single occult item"
+	desc = "Identifies a single occult item"
 	icon_state = "rune4"
 	word = "WUS'ZAT"
 
@@ -147,3 +147,49 @@
 			playsound(loc, 'sound/magic/voidblink.ogg', 50, FALSE)
 			qdel(src)
 			return
+
+/obj/abyssrune/blackout //not canon wod material, seemed a cool idea.
+	name = "Blackout"
+	desc = "Destroys every wall light in range of the rune."
+	icon_state = "rune7"
+	word = "FYU'SES BLO'OUN"
+	mystlevel = 2
+
+//actual function of the rune
+/obj/abyssrune/blackout/complete()
+	for(var/obj/machinery/light/light_to_kill in range(7, src)) //for every light in a range of 7 (called i)
+		if(light_to_kill != LIGHT_BROKEN) //if it aint broke
+			light_to_kill.break_light_tube(0) //break it
+	playsound(get_turf(src), 'sound/magic/voidblink.ogg', 50, FALSE) //make the funny void sound
+	qdel(src) //delete the rune
+
+/obj/abyssrune/comforting_darkness
+	name = "Comforting Darkness"
+	desc = "Use the power of the abyss to mend the wounds of yourself and others."
+	icon_state = "rune8"
+	word = "KEYUR'AGA"
+	mystlevel = 3
+
+/obj/abyssrune/comforting_darkness/complete()
+	var/list/heal_targets = list()
+	var/turf/rune_location = get_turf(src)
+	var/mob/living/carbon/human/invoker = last_activator
+
+	if(TIMER_COOLDOWN_CHECK(invoker, COOLDOWN_RITUAL_INVOKE))
+		to_chat(invoker, span_notice("The abyssal energies in the area must settle first!"))
+		return
+
+	for(var/mob/living/carbon/human/target in rune_location) //for every living mob in the same space as the rune
+		if(iskindred(target))
+			heal_targets |= target
+
+	// Include the invoker in the heal whether they were on the rune or not
+	heal_targets |= invoker
+
+	for(var/mob/living/carbon/human/target in heal_targets)
+		target.heal_ordered_damage(90, list(BRUTE, TOX, OXY, STAMINA))
+		target.heal_ordered_damage(30, list(BURN, CLONE))
+
+	TIMER_COOLDOWN_START(invoker, COOLDOWN_RITUAL_INVOKE, 30 SECONDS)
+	playsound(rune_location, 'sound/magic/voidblink.ogg', 50, FALSE)
+	qdel(src)

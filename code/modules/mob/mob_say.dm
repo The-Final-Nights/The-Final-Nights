@@ -46,9 +46,22 @@
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 
+	// Show speech indicator while typing an emote
+	if(ishuman(usr) || ismonkey(usr))
+		var/mob/living/carbon/C = usr
+		if(!C.overlays_standing[SAY_LAYER])
+			var/mutable_appearance/say_overlay = mutable_appearance('icons/mob/talk.dmi', "default0", -SAY_LAYER)
+			C.overlays_standing[SAY_LAYER] = say_overlay
+			C.apply_overlay(SAY_LAYER)
+
 	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
 
 	usr.emote("me", EMOTE_VISIBLE, message, TRUE)
+
+	// Remove speech indicator after sending emote
+	if(ishuman(usr) || ismonkey(usr))
+		var/mob/living/carbon/C = usr
+		C.remove_overlay(SAY_LAYER)
 // TFN EDIT END
 ///Speak as a dead person (ghost etc)
 /mob/proc/say_dead(message)

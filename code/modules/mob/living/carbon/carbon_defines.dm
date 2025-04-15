@@ -133,7 +133,7 @@
 	var/last_rage_hit = 0
 
 	var/datum/auspice/auspice
-	var/obj/werewolf_holder/transformation/transformator
+	var/datum/werewolf_holder/transformation/transformator
 
 	var/list/beastmaster = list()
 

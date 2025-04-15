@@ -447,7 +447,8 @@
 			H.update_icons()
 		else
 			H.remove_overlay(PROTEAN_LAYER)
-			var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', H.transformator.crinos_form?.sprite_color, -PROTEAN_LAYER)
+			var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
+			var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
 			H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
 			H.apply_overlay(PROTEAN_LAYER)
 			G.punchdamagelow += 15

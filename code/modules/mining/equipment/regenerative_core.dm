@@ -32,14 +32,6 @@
 	var/inert = 0
 	var/preserved = 0
 
-/obj/item/organ/regenerative_core/Initialize()
-	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(inert_check)), 2400)
-
-/obj/item/organ/regenerative_core/proc/inert_check()
-	if(!preserved)
-		go_inert()
-
 /obj/item/organ/regenerative_core/proc/preserved(implanted = 0)
 	inert = FALSE
 	preserved = TRUE
@@ -81,10 +73,10 @@
 				to_chat(user, "<span class='notice'>[src] is useless on the dead.</span>")
 				return
 			if(H != user)
-				H.visible_message("<span class='notice'>[user] forces [H] to apply [src]... Black tendrils entangle and reinforce [H.p_them()]!</span>")
+				target.visible_message(span_notice("[user] forces [target] to apply [src]... Black tendrils entangle and reinforce [target.p_them()]!"))
 				SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "other"))
 			else
-				to_chat(user, "<span class='notice'>You start to smear [src] on yourself. Disgusting tendrils hold you together and allow you to keep moving, but for how long?</span>")
+				to_chat(user, span_notice("You start to smear [src] on yourself. Disgusting tendrils hold you together and allow you to keep moving, but for how long?"))
 				SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "self"))
 			H.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
 			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "core", /datum/mood_event/healsbadman) //Now THIS is a miner buff (fixed - nerf)
@@ -103,17 +95,17 @@
 	. = ..()
 	if(!preserved && !inert)
 		preserved(TRUE)
-		owner.visible_message("<span class='notice'>[src] stabilizes as it's inserted.</span>")
+		owner.visible_message(span_notice("[src] stabilizes as it's inserted."))
 
 /obj/item/organ/regenerative_core/Remove(mob/living/carbon/M, special = 0)
 	if(!inert && !special)
-		owner.visible_message("<span class='notice'>[src] rapidly decays as it's removed.</span>")
+		owner.visible_message(span_notice("[src] rapidly decays as it's removed."))
 		go_inert()
 	return ..()
 
 /*************************Legion core********************/
 /obj/item/organ/regenerative_core/legion
-	desc = "A strange rock that crackles with power. It can be used to heal completely, but it will rapidly decay into uselessness."
+	desc = "The still beating heart of an unfortunate wretch."
 	icon_state = "legion_soul"
 
 /obj/item/organ/regenerative_core/legion/Initialize()
@@ -121,17 +113,9 @@
 	update_icon()
 
 /obj/item/organ/regenerative_core/update_icon_state()
-	icon_state = inert ? "legion_soul_inert" : "legion_soul"
+	icon_state = inert ? "legion_soul" : "legion_soul"
 
-/obj/item/organ/regenerative_core/update_overlays()
-	. = ..()
-	if(!inert && !preserved)
-		. += "legion_soul_crackle"
-
-/obj/item/organ/regenerative_core/legion/go_inert()
-	..()
-	desc = "[src] has become inert. It has decayed, and is completely useless."
-
-/obj/item/organ/regenerative_core/legion/preserved(implanted = 0)
-	..()
-	desc = "[src] has been stabilized. It is preserved, allowing you to use it to heal completely without danger of decay."
+/obj/item/organ/regenerative_core/legion/tzi
+	name = "Pulsating Heart"
+	desc = "The still beating heart of an unfortunate wretch."
+	icon_state = "legion_soul"

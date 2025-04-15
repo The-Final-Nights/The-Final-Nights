@@ -54,7 +54,12 @@
 #define AREACOORD(src) "[src ? src.Admin_Coordinates_Readable(TRUE) : "nonexistent location"]"
 #define ADMIN_COORDJMP(src) "[src ? src.Admin_Coordinates_Readable(FALSE, TRUE) : "nonexistent location"]"
 #define ADMIN_VERBOSEJMP(src) "[src ? src.Admin_Coordinates_Readable(TRUE, TRUE) : "nonexistent location"]"
-#define ADMIN_INDIVIDUALLOG(user) "(<a href='byond://?_src_=holder;[HrefToken(TRUE)];individuallog=[REF(user)]'>LOGS</a>)"
+#define ADMIN_INDIVIDUALLOG(user) "(<a href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];individuallog=[REF(user)]'>LOGS</a>)"
+#define ADMIN_TAG(datum) "(<A href='?src=[REF(src)];[HrefToken(forceGlobal = TRUE)];tag_datum=[REF(datum)]'>TAG</a>)"
+#define ADMIN_LUAVIEW(state) "(<a href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];lua_state=[REF(state)]'>VIEW STATE</a>)"
+#define ADMIN_LUAVIEW_CHUNK(state, log_index) "(<a href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];lua_state=[REF(state)];log_index=[log_index]'>VIEW CODE</a>)"
+/// Displays "(SHOW)" in the chat, when clicked it tries to show atom(paper). First you need to set the request_state variable to TRUE for the paper.
+#define ADMIN_SHOW_PAPER(atom) "(<A href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];show_paper=[REF(atom)]'>SHOW</a>)"
 
 #define ADMIN_PUNISHMENT_LIGHTNING "Lightning bolt"
 #define ADMIN_PUNISHMENT_BRAINDAMAGE "Brain damage"
@@ -85,5 +90,42 @@
 #define STICKYBAN_ROGUE_CHECK_TIME 5
 
 
-#define POLICY_POLYMORPH "polymorph" //Shown to vicitm of staff of change and related effects.
-#define POLICY_VERB_HEADER "policy_verb_header" //Shown on top of policy verb window
+/// Shown to vicitm of staff of change and related effects.
+#define POLICY_POLYMORPH "polymorph"
+/// Shown on top of policy verb window
+#define POLICY_VERB_HEADER "policy_verb_header"
+
+//How many things you can spawn at once with spawn verb/create panel
+#define ADMIN_SPAWN_CAP 100
+
+// LOG BROWSE TYPES
+#define BROWSE_ROOT_ALL_LOGS 1
+#define BROWSE_ROOT_CURRENT_LOGS 2
+
+// allowed ghost roles this round, starts as everything allowed
+GLOBAL_VAR_INIT(ghost_role_flags, (~0))
+
+//Flags that control what ways ghosts can get back into the round
+//ie fugitives, space dragon, etc. also includes dynamic midrounds as it's the same deal
+#define GHOSTROLE_MIDROUND_EVENT	(1<<0)
+//ie ashwalkers, free golems, beach bums
+#define GHOSTROLE_SPAWNER			(1<<1)
+//ie mind monkeys, sentience potion
+#define GHOSTROLE_STATION_SENTIENCE	(1<<2)
+//ie pais, posibrains
+#define GHOSTROLE_SILICONS			(1<<3)
+//ie mafia, ctf
+#define GHOSTROLE_MINIGAME 			(1<<4)
+
+//smite defines
+
+#define LIGHTNING_BOLT_DAMAGE 75
+#define LIGHTNING_BOLT_ELECTROCUTION_ANIMATION_LENGTH 40
+
+/// for [/proc/check_asay_links], if there are any actionable refs in the asay message, this index in the return list contains the new message text to be printed
+#define ASAY_LINK_NEW_MESSAGE_INDEX "!asay_new_message"
+/// for [/proc/check_asay_links], if there are any admin pings in the asay message, this index in the return list contains a list of admins to ping
+#define ASAY_LINK_PINGED_ADMINS_INDEX "!pinged_admins"
+
+/// When passed in as the duration for ban_panel, will make the ban default to permanent
+#define BAN_PANEL_PERMANENT "permanent"

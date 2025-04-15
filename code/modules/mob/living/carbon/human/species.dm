@@ -1458,9 +1458,13 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.1x raw damage
 			target.apply_damage(damage*1.1, user.dna.species.attack_type, affecting, armor_block)
+			if((damage * 1.5) >= 9)
+				target.force_say()
 			log_combat(user, target, "kicked")
 		else//other attacks deal full damage
 			target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block)
+			if(damage >= 9)
+				target.force_say()
 			log_combat(user, target, "punched")
 		//Punches have a chance (by default 10%, up to 30%) to knock down a target for about 2 seconds depending on physique and dexterity.
 		//Checks if the target is already knocked down to prevent stunlocking.
@@ -1534,16 +1538,14 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
 	// Allows you to put in item-specific reactions based on species
-	var/modifikator = 1
+	var/meleemod = 1
 	if(ishuman(user))
-		var/mob/living/carbon/human/USR = user
-		if(USR.dna)
-			if(USR.dna.species)
-				modifikator = USR.dna.species.meleemod
-		if(USR.age < 16)
-			modifikator = modifikator/2
-		if(ishuman(user))
-			modifikator = (modifikator/3)*(user.get_total_physique())
+		var/mob/living/carbon/human/M = user
+		if(M.dna)
+			if(M.dna.species)
+				meleemod = M.dna.species.meleemod
+		if(user.get_total_physique() > 4)
+			meleemod = (meleemod/5)*(user.get_total_physique() + 1) //1.2x at Physique 5, increasing by 0.2x per point higher than that.
 	if(user != H)
 		if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armour_penetration))
 			return FALSE
@@ -1578,7 +1580,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 					if(H.bloodpool)
 						H.bloodpool = max(0, H.bloodpool-1)
 						OC.stored_blood = OC.stored_blood+1
-	apply_damage((I.force*modifikator) * weakness, I.damtype, def_zone, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
+	apply_damage((I.force*meleemod) * weakness, I.damtype, def_zone, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
 
 	if(!I.force)
 		return FALSE //item force is zero
@@ -1640,6 +1642,10 @@ GLOBAL_LIST_EMPTY(selectable_races)
 					if(H.w_uniform)
 						H.w_uniform.add_mob_blood(H)
 						H.update_inv_w_uniform()
+
+		/// Triggers force say events
+		if(I.force > 10 || I.force >= 5 && prob(33))
+			H.force_say(user)
 
 	return TRUE
 

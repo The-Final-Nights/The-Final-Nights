@@ -201,7 +201,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/lover = FALSE
 
 	var/flavor_text
+	var/flavor_text_nsfw
 	var/ooc_notes
+	var/character_notes
 
 	var/friend_text
 	var/enemy_text
@@ -237,6 +239,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/yin = 5
 	var/list/chi_types = list()
 	var/list/chi_levels = list()
+
+	// Off by default. Opt-in.
+	var/nsfw_content_pref = FALSE
 
 /datum/preferences/proc/add_experience(amount)
 	true_experience = clamp(true_experience + amount, 0, 1000)
@@ -713,11 +718,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if (possible_new_disciplines.len && (true_experience >= 10))
 					dat += "<a href='byond://?_src_=prefs;preference=newchidiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
-			if(true_experience >= 3 && slotlocked)
-				dat += "<a href='byond://?_src_=prefs;preference=change_appearance;task=input'>Change Appearance (3)</a><BR>"
+			if(slotlocked)
+				dat += "<a href='byond://?_src_=prefs;preference=change_appearance;task=input'>Change Appearance (Free)</a><BR>"
 			if(generation_bonus)
 				dat += "<a href='byond://?_src_=prefs;preference=reset_with_bonus;task=input'>Create new character with generation bonus ([generation]-[generation_bonus])</a><BR>"
-			// TFN EDIT ADDITION START: headshots, flavortext, and morality system
+			// TFN EDIT ADDITION START: headshots, flavortext, morality system, and most other TFN specific prefs
 			if(pref_species.name == "Vampire")
 				dat += "<h2>[make_font_cool("PATH")]</h2>"
 				dat += "<b>[morality_path.name]:</b> [path_score]/10"
@@ -727,17 +732,28 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<a href='byond://?_src_=prefs;preference=pathof;task=input'>Switch Path</a>"
 				dat += "<BR><b>Description:</b> [morality_path.desc]<BR>"
 
+			var/preview_text = copytext_char(flavor_text, 1, 110)
+			var/preview_text_nsfw = copytext_char(flavor_text_nsfw, 1, 110)
+
+			dat += "<BR><a href='byond://?_src_=prefs;preference=view_flavortext;task=input'>Show Examine Panel</a>"
+
 			if(length(flavor_text) <= 110)
-				dat += "<BR><b>Flavor Text:</b> [flavor_text] <a href='byond://?_src_=prefs;preference=flavor_text;task=input'>Change</a><BR>"
+				dat += "<BR><b>Flavor Text:</b> [flavor_text] <a href='byond://?_src_=prefs;preference=flavor_text;task=input'>Change</a>"
 			else
-				dat += "<BR><b>Flavor Text:</b> [copytext_char(flavor_text, 1, 110)]... <a href='byond://?_src_=prefs;preference=flavor_text;task=input'>Change</a>"
-				dat += "<a href='byond://?_src_=prefs;preference=view_flavortext;task=input'>Show More</a><BR>"
+				dat += "<BR><b>Flavor Text:</b> [preview_text]... <a href='byond://?_src_=prefs;preference=flavor_text;task=input'>Change</a>"
 
-			dat += "<BR><b>OOC Notes:</b> [ooc_notes] <a href='byond://?_src_=prefs;preference=ooc_notes;task=input'>Change</a><BR>"
+			dat += "<BR><b>Character Notes:</b> [character_notes] <a href='byond://?_src_=prefs;preference=character_notes;task=input'>Change</a>"
 
-			dat += "<br><b>Headshot(1:1):</b> <a href='byond://?_src_=prefs;preference=headshot;task=input'>Change</a>"
-			if(headshot_link != null)
-				dat += "<a href='byond://?_src_=prefs;preference=view_headshot;task=input'>View</a>"
+			dat += "<BR><b>Headshot(1:1):</b> <a href='byond://?_src_=prefs;preference=headshot;task=input'>Change</a>"
+
+			dat += "<BR><b>NSFW Content:</b> <a href='byond://?_src_=prefs;preference=nsfw_content_preference'>[(nsfw_content_pref) ? "Enabled" : "Disabled"]</A>"
+			if(nsfw_content_pref)
+				if(length(flavor_text_nsfw) <= 110)
+					dat += "<BR><b>Flavor Text (NSFW):</b> [flavor_text_nsfw] <a href='byond://?_src_=prefs;preference=flavor_text_nsfw;task=input'>Change</a>"
+				else
+					dat += "<BR><b>Flavor Text (NSFW):</b> [preview_text_nsfw]... <a href='byond://?_src_=prefs;preference=flavor_text_nsfw;task=input'>Change</a>"
+				dat += "<BR><b>OOC Notes:</b> [ooc_notes] <a href='byond://?_src_=prefs;preference=ooc_notes;task=input'>Change</a>"
+
 			// TFN EDIT ADDITION END
 			dat += "<h2>[make_font_cool("EQUIP")]</h2>"
 
@@ -2482,29 +2498,36 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				// TODO: Completely revamp flavor text into a more expansive system - TFN
 				// TFN EDIT ADDITION START: character headshots & flavortext
 				if("ooc_notes")
-					var/new_ooc_notes = tgui_input_text(user, "Choose your character's OOC notes:", "Character Preference", ooc_notes, MAX_MESSAGE_LEN, TRUE, FALSE)
+					var/new_ooc_notes = tgui_input_text(user, "Choose your OOC notes:", "Character Preference", ooc_notes, MAX_FLAVOR_LEN, multiline = TRUE, encode = FALSE)
 					if(!length(new_ooc_notes))
 						return
-					ooc_notes = new_ooc_notes
+					ooc_notes = STRIP_HTML_SIMPLE(new_ooc_notes, MAX_FLAVOR_LEN)
+
+				if("character_notes")
+					var/new_character_notes = tgui_input_text(user, "Choose your character notes:", "Character Preference", character_notes, MAX_FLAVOR_LEN, multiline = TRUE, encode = FALSE)
+					if(!length(new_character_notes))
+						return
+					character_notes = STRIP_HTML_SIMPLE(new_character_notes, MAX_FLAVOR_LEN)
+					SSoverwatch.record_action(user, "**CHARACTER NOTES**: [character_notes]")
 
 				if("flavor_text")
-					var/new_flavor = tgui_input_text(user, "Choose your character's flavor text:", "Character Preference", flavor_text, MAX_MESSAGE_LEN, TRUE, FALSE)
+					var/new_flavor = tgui_input_text(user, "Choose your character's flavor text:", "Character Preference", flavor_text, MAX_FLAVOR_LEN, multiline = TRUE, encode = FALSE)
 					if(!length(new_flavor))
 						return
-					flavor_text = new_flavor
+					flavor_text = STRIP_HTML_SIMPLE(new_flavor, MAX_FLAVOR_LEN)
+					SSoverwatch.record_action(user, "**FLAVORTEXT**: [flavor_text]")
+
+				if("flavor_text_nsfw")
+					var/new_flavor_nsfw = tgui_input_text(user, "Choose your character's NSFW flavor text:", "Character Preference", flavor_text_nsfw, MAX_FLAVOR_LEN, multiline = TRUE, encode = FALSE)
+					if(!length(new_flavor_nsfw))
+						return
+					flavor_text_nsfw = STRIP_HTML_SIMPLE(new_flavor_nsfw, MAX_FLAVOR_LEN)
 
 				if("view_flavortext")
-					var/datum/browser/popup = new(user, "[real_name]_flavortext", real_name, 500, 200)
-					popup.set_content(replacetext(flavor_text, "\n", "<BR>"))
-					popup.open(FALSE)
-					return
-
-				if("view_headshot")
-					var/list/dat = list("<table width='100%' height='100%'><td align='center' valign='middle'><img src='[headshot_link]' width='250px' height='250px'></td></table>")
-					var/datum/browser/popup = new(user, "[real_name]_headshot", "<div align='center'>Headshot</div>", 310, 330)
-					popup.set_content(dat.Join())
-					popup.open(FALSE)
-					return
+					// The examine preview dummy will be cleaned up once the user closes the TGUI window.
+					var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy()
+					mannequin.setup_examine_preview(user.client)
+					mannequin.tgui?.ui_interact(usr)
 
 				if("headshot")
 					to_chat(user, span_notice("Please use a relatively SFW image of the head and shoulder area to maintain immersion level. Lastly, ["<b>do not use a real life photo or use any image that is less than serious.</b>"]"))
@@ -2523,7 +2546,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 					headshot_link = new_headshot_link
 					to_chat(user, span_notice("Successfully updated headshot picture!"))
-					log_game("[user] has set their Headshot image to '[headshot_link]'.")
+					log_game("[key_name(user)] has set their Headshot image to '[headshot_link]'.")
+					SSoverwatch.record_action(user, "[key_name(user)] has set their Headshot image to [headshot_link]")
 				// TFN EDIT ADDITION END
 				if("change_appearance")
 					if(!slotlocked)
@@ -2850,6 +2874,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								key_bindings -= old_key
 						user << browse(null, "window=capturekeypress")
 						user.client.set_macros()
+						user.client.update_special_keybinds()
 						save_preferences()
 						ShowChoices(user)
 						return
@@ -2885,6 +2910,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 					user << browse(null, "window=capturekeypress")
 					user.client.set_macros()
+					user.client.update_special_keybinds()
 					save_preferences()
 
 				if("keybindings_reset")
@@ -2895,6 +2921,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					hotkeys = (choice == "Hotkey")
 					key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
 					user.client.set_macros()
+					user.client.update_special_keybinds()
 
 				if("chat_on_map")
 					chat_on_map = !chat_on_map
@@ -2971,6 +2998,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				if("lover")
 					lover = !lover
+
+				if("nsfw_content_preference")
+					nsfw_content_pref = !nsfw_content_pref
 
 				if("persistent_scars")
 					persistent_scars = !persistent_scars
@@ -3188,6 +3218,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.additional_lockpicking = A.archetype_additional_lockpicking
 	character.additional_athletics = A.archetype_additional_athletics
 	A.special_skill(character)
+	character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
+	character.health = character.maxHealth
 
 	if(pref_species.name == "Vampire")
 		var/datum/vampireclane/CLN = new clane.type()
@@ -3220,8 +3252,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			character.max_yin_chi = 2
 
 	if(pref_species.name == "Werewolf")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 		switch(tribe)
 			if("Wendigo")
 				character.yin_chi = 1
@@ -3238,13 +3268,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.max_yin_chi = 1 + auspice_level * 2
 				character.yang_chi = 5
 				character.max_yang_chi = 5
-	if(pref_species.name == "Kuei-Jin")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 	if(pref_species.name == "Vampire")
-		character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-		character.health = character.maxHealth
 		character.morality_path.score = path_score
+
 	character.masquerade = masquerade
 	if(!character_setup)
 		if(character in GLOB.masquerade_breakers_list)
@@ -3254,7 +3280,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			GLOB.masquerade_breakers_list += character
 
 	character.flavor_text = sanitize_text(flavor_text)
+	character.flavor_text_nsfw = sanitize_text(flavor_text_nsfw)
 	character.ooc_notes = sanitize_text(ooc_notes)
+	character.character_notes = sanitize_text(character_notes)
 	character.gender = gender
 	character.age = age
 	character.chronological_age = total_age
@@ -3331,41 +3359,49 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.auspice.gnosis = 3
 				character.auspice.start_gnosis = 3
 				character.auspice.base_breed = "Crinos"
-		if(character.transformator)
-			if(character.transformator.crinos_form && character.transformator.lupus_form)
-				character.transformator.crinos_form.sprite_color = werewolf_color
-				character.transformator.crinos_form.sprite_scar = werewolf_scar
-				character.transformator.crinos_form.sprite_hair = werewolf_hair
-				character.transformator.crinos_form.sprite_hair_color = werewolf_hair_color
-				character.transformator.crinos_form.sprite_eye_color = werewolf_eye_color
-				character.transformator.lupus_form.sprite_color = werewolf_color
-				character.transformator.lupus_form.sprite_eye_color = werewolf_eye_color
+		if(character.transformator?.crinos_form && character.transformator?.lupus_form)
+			var/mob/living/carbon/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
 
-				if(werewolf_name)
-					character.transformator.crinos_form.name = werewolf_name
-					character.transformator.lupus_form.name = werewolf_name
-				else
-					character.transformator.crinos_form.name = real_name
-					character.transformator.lupus_form.name = real_name
+			if(!crinos)
+				character.transformator.crinos_form = null
+				CRASH("[key_name(character)]'s crinos_form weakref contained no crinos mob!")
+			if(!lupus)
+				character.transformator.lupus_form = null
+				CRASH("[key_name(character)]'s lupus_form weakref contained no lupus mob!")
 
-				character.transformator.crinos_form.physique = physique
-				character.transformator.crinos_form.dexterity = dexterity
-				character.transformator.crinos_form.mentality = mentality
-				character.transformator.crinos_form.social = social
-				character.transformator.crinos_form.blood = blood
+			crinos.sprite_color = werewolf_color
+			crinos.sprite_scar = werewolf_scar
+			crinos.sprite_hair = werewolf_hair
+			crinos.sprite_hair_color = werewolf_hair_color
+			crinos.sprite_eye_color = werewolf_eye_color
+			lupus.sprite_color = werewolf_color
+			lupus.sprite_eye_color = werewolf_eye_color
 
-				character.transformator.lupus_form.physique = physique
-				character.transformator.lupus_form.dexterity = dexterity
-				character.transformator.lupus_form.mentality = mentality
-				character.transformator.lupus_form.social = social
-				character.transformator.lupus_form.blood = blood
+			if(werewolf_name)
+				crinos.name = werewolf_name
+				lupus.name = werewolf_name
+			else
+				crinos.name = real_name
+				lupus.name = real_name
 
-				character.transformator.lupus_form.maxHealth = round((initial(character.transformator.lupus_form.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique )))+(character.auspice.level-1)*50
-				character.transformator.lupus_form.health = character.transformator.lupus_form.maxHealth
-				character.transformator.crinos_form.maxHealth = round((initial(character.transformator.crinos_form.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique )))+(character.auspice.level-1)*50
-				character.transformator.crinos_form.health = character.transformator.crinos_form.maxHealth
-//		character.transformator.crinos_form.update_icons()
-//		character.transformator.lupus_form.update_icons()
+			crinos.physique = physique
+			crinos.dexterity = dexterity
+			crinos.mentality = mentality
+			crinos.social = social
+			crinos.blood = blood
+
+			lupus.physique = physique
+			lupus.dexterity = dexterity
+			lupus.mentality = mentality
+			lupus.social = social
+			lupus.blood = blood
+
+			lupus.maxHealth = round((lupus::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			lupus.health = lupus.maxHealth
+			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			crinos.health = crinos.maxHealth
+
 	if(pref_species.mutant_bodyparts["tail_lizard"])
 		character.dna.species.mutant_bodyparts["tail_lizard"] = pref_species.mutant_bodyparts["tail_lizard"]
 	if(pref_species.mutant_bodyparts["spines"])

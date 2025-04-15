@@ -115,6 +115,30 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzicreature
+	name = "Wretched Creature"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/organ/brain = 1, )
+	result = /obj/item/toy/plush/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tziregenerativecore
+	name = "Pulsating Heart"
+	time = 50
+	reqs = list(/obj/item/organ/heart = 1, /obj/item/drinkable_bloodpack/elite = 1)
+	result = /obj/item/organ/regenerative_core/legion/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/axetzi
+	name = "Living Axe"
+	time = 50
+	reqs = list(/obj/item/organ/eyes = 1, /obj/item/spine = 2, /obj/item/stack/human_flesh = 40)
+	result = /obj/item/melee/vampirearms/fireaxe/axetzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_floor
 	name = "Gut Floor"
 	time = 50
@@ -123,11 +147,35 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzi_floor_living
+	name = "Writhing Floor"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 1, /obj/item/guts = 1)
+	result = /turf/open/indestructible/necropolis
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_wall
 	name = "Flesh Wall"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 2)
 	result = /obj/structure/fleshwall
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzijelly
+	name = "Living Meat Node"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/toy/plush/tzi = 1)
+	result = /obj/structure/tzijelly
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/cattzi
+	name = "flesh feline"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/spine = 1, /obj/item/toy/plush/tzi = 1)
+	result = /mob/living/simple_animal/pet/cat/vampiretzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 

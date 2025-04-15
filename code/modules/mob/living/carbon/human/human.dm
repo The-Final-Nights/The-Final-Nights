@@ -549,17 +549,6 @@
 				to_chat(usr, "<span class='notice'>Successfully added comment.</span>")
 				return
 	// TFN EDIT ADDITION START: view character headshot & big flavortext via examine
-	if(href_list["view_headshot"])
-		if(!ismob(usr))
-			return
-		if(!valid_headshot_link(null, headshot_link, TRUE))
-			return
-		var/list/dat = list("<table width='100%' height='100%'><td align='center' valign='middle'><img src='[headshot_link]' width='250px' height='250px'></td></table>")
-		var/datum/browser/popup = new(user, "[name]'s Headshot", "<div align='center'>[name]</div>", 310, 330)
-		popup.set_content(dat.Join())
-		popup.open(FALSE)
-		return
-
 	if(href_list["view_flavortext"])
 		tgui.holder = src
 		tgui.ui_interact(usr) //datum has a tgui component, here we open the window
