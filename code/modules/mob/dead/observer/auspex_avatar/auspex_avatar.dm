@@ -73,7 +73,7 @@ GLOBAL_LIST_INIT(avatar_banned_verbs, list(
 	var/turf/current_turf = get_turf(src)
 	var/turf/body_turf = get_turf(original_body)
 
-	if(!(body_turf == current_turf))
+	if(!(body_turf == current_turf) && !(isnull(body_turf) && isnull(current_turf)))
 		to_chat(src, span_warning("Your body is not here. It is located at coordinates: [body_turf.x], [body_turf.y], [body_turf.z]."))
 		to_chat(src, span_warning("Your current coordinates are: [current_turf.x], [current_turf.y], [current_turf.z]."))
 	if(mind.current.key && mind.current.key[1] != "@")	//makes sure we don't accidentally kick any clients
