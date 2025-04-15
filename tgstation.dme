@@ -91,6 +91,7 @@
 #include "code\__DEFINES\mecha.dm"
 #include "code\__DEFINES\melee.dm"
 #include "code\__DEFINES\menu.dm"
+#include "code\__DEFINES\mobs.dm"
 #include "code\__DEFINES\mentor.dm"
 #include "code\__DEFINES\monkeys.dm"
 #include "code\__DEFINES\move_force.dm"

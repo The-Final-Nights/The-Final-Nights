@@ -30,7 +30,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/help_tickets/admin, new)
 /client/proc/giveadminhelpverb()
 	if(!src)
 		return
-	src.add_verb(/client/verb/adminhelp)
+	add_verb(src, /client/verb/adminhelp)
 	deltimer(adminhelptimerid)
 	adminhelptimerid = 0
 

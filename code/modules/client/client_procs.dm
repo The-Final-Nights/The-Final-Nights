@@ -101,11 +101,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		cmd_admin_pm(href_list["priv_msg"],null)
 		return
 
-	// TGUIless adminhelp
-	if(href_list["tguiless_adminhelp"])
-		no_tgui_adminhelp(input(src, "Enter your ahelp", "Ahelp") as null|message)
-		return
-
 	// Mentor PM
 	if(href_list["mentor_msg"])
 		cmd_mentor_pm(href_list["mentor_msg"], null)
