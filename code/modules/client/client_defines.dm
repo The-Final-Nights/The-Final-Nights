@@ -35,6 +35,8 @@
 	COOLDOWN_DECLARE(say_slowmode)
 	/// The last urgent ahelp that this player sent
 	COOLDOWN_DECLARE(urgent_ahelp_cooldown)
+	/// The last urgent ahelp that this player sent
+	COOLDOWN_DECLARE(staff_check_rate)
 
 		/////////
 		//OTHER//
