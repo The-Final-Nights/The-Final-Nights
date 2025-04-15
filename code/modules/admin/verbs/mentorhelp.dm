@@ -27,7 +27,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 /client/proc/givementorhelpverb()
 	if(!src)
 		return
-	src.add_verb(/client/verb/mentorhelp)
+	add_verb(src, /client/verb/mentorhelp)
 	deltimer(mentorhelptimerid)
 	mentorhelptimerid = 0
 
@@ -141,7 +141,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 	return TRUE
 
 /datum/help_ticket/mentor/TimeoutVerb()
-	initiator.remove_verb(/client/verb/mentorhelp)
+	remove_verb(initiator, /client/verb/mentorhelp)
 	initiator.mentorhelptimerid = addtimer(CALLBACK(initiator, /client/proc/givementorhelpverb), 1200, TIMER_STOPPABLE)
 
 /datum/help_ticket/mentor/key_name_ticket(mob/user)
@@ -163,8 +163,7 @@ GLOBAL_DATUM_INIT(mhelp_tickets, /datum/help_tickets/mentor, new)
 
 	//send this msg to all admins
 	for(var/client/X in GLOB.mentors | GLOB.admins)
-		if(X.prefs.toggles & PREFTOGGLE_SOUND_ADMINHELP)
-			SEND_SOUND(X, sound(reply_sound))
+		SEND_SOUND(X, sound(reply_sound))
 		window_flash(X, ignorepref = TRUE)
 		to_chat(X, admin_msg, type = message_type)
 
