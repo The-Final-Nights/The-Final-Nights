@@ -346,7 +346,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["hearted_until"], (hearted_until > world.realtime ? hearted_until : null))
 	WRITE_FILE(S["nsfw_content_pref"], nsfw_content_pref)
 	WRITE_FILE(S["player_experience"], player_experience)
-	WRITE_FILE(S["experience_used_on_character", experience_used_on_character])
 	return TRUE
 
 /datum/preferences/proc/load_character(slot)
@@ -485,6 +484,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_moth_antennae"], features["moth_antennae"])
 	READ_FILE(S["feature_moth_markings"], features["moth_markings"])
 	READ_FILE(S["persistent_scars"] , persistent_scars)
+	READ_FILE(S["experience_used_on_character", experience_used_on_character])
 	READ_FILE(S["dharma_type"], dharma_type)
 	READ_FILE(S["dharma_level"], dharma_level)
 	READ_FILE(S["po_type"], po_type)
@@ -814,6 +814,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_moth_antennae"]			, features["moth_antennae"])
 	WRITE_FILE(S["feature_moth_markings"]		, features["moth_markings"])
 	WRITE_FILE(S["persistent_scars"]			, persistent_scars)
+	WRITE_FILE(S["experience_used_on_character", experience_used_on_character])
 	WRITE_FILE(S["dharma_type"], dharma_type)
 	WRITE_FILE(S["dharma_level"], dharma_level)
 	WRITE_FILE(S["po_type"], po_type)
