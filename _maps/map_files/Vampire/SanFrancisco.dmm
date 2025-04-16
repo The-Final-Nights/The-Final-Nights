@@ -3052,8 +3052,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
 "aQe" = (
-/obj/structure/table/glass,
-/turf/open/floor/carpet/red,
+/turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/millennium_tower/ventrue)
 "aQk" = (
 /obj/structure/vampdoor/reinf{
@@ -3157,7 +3156,8 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "aRT" = (
-/obj/item/kirbyplants/random,
+/obj/structure/curtain/bounty,
+/obj/structure/closet/crate/coffin,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
 "aRW" = (
@@ -4238,6 +4238,10 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
+"bgD" = (
+/obj/effect/turf_decal/siding/white,
+/turf/open/floor/mineral/plastitanium,
+/area/vtm/interior/millennium_tower/ventrue)
 "bgI" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/sidewalk/rich,
@@ -14715,6 +14719,9 @@
 /area/vtm/interior/bianchiBank)
 "ebT" = (
 /obj/structure/table/wood/fancy/purple,
+/obj/item/storage/secure/briefcase{
+	pixel_y = -10
+	},
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
 "ebX" = (
@@ -32906,6 +32913,10 @@
 /obj/item/clothing/under/vampire/malkavian,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
+"jht" = (
+/obj/item/clothing/shoes/wheelys/rollerskates,
+/turf/open/floor/plating/asphalt,
+/area/vtm/pacificheights/old)
 "jhz" = (
 /obj/effect/decal/litter,
 /obj/structure/chair/greyscale{
@@ -35503,10 +35514,26 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/ghetto/old)
 "jST" = (
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 3
+	},
+/obj/structure/fluff/hedge{
+	pixel_y = 6
+	},
+/obj/structure/flora/ausbushes/lavendergrass{
+	pixel_y = 13
+	},
+/obj/structure/flora/ausbushes/ywflowers{
+	pixel_y = 10
+	},
+/obj/structure/railing{
+	dir = 8
+	},
 /obj/machinery/light/prince{
 	pixel_y = 32
 	},
-/turf/open/openspace,
+/turf/open/floor/plating/vampwood,
 /area/vtm/interior/millennium_tower/ventrue)
 "jSU" = (
 /obj/effect/decal/litter,
@@ -42350,6 +42377,26 @@
 /obj/structure/sign/poster/contraband/random,
 /turf/closed/wall/vampwall/city,
 /area/vtm/cabaret/basement)
+"lOD" = (
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 3
+	},
+/obj/structure/fluff/hedge{
+	pixel_y = 6
+	},
+/obj/structure/flora/ausbushes/lavendergrass{
+	pixel_y = 13
+	},
+/obj/structure/flora/ausbushes/ywflowers{
+	pixel_y = 10
+	},
+/obj/structure/railing,
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/plating/vampwood,
+/area/vtm/interior/millennium_tower/ventrue)
 "lON" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -45395,9 +45442,24 @@
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/tzimisce_manor)
 "mIi" = (
-/obj/structure/table/glass,
-/obj/item/newspaper,
-/turf/open/floor/carpet/red,
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 3
+	},
+/obj/structure/fluff/hedge{
+	pixel_y = 6
+	},
+/obj/structure/flora/ausbushes/lavendergrass{
+	pixel_y = 13
+	},
+/obj/structure/flora/ausbushes/ywflowers{
+	pixel_y = 10
+	},
+/obj/structure/railing,
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/vampwood,
 /area/vtm/interior/millennium_tower/ventrue)
 "mIj" = (
 /turf/open/floor/plating/sidewalk,
@@ -49112,6 +49174,28 @@
 /obj/item/gun/ballistic/automatic/pistol/deagle,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"nHm" = (
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 3
+	},
+/obj/structure/fluff/hedge{
+	pixel_y = 6
+	},
+/obj/structure/flora/ausbushes/lavendergrass{
+	pixel_y = 13
+	},
+/obj/structure/flora/ausbushes/ywflowers{
+	pixel_y = 10
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/machinery/light/prince{
+	pixel_y = 32
+	},
+/turf/open/floor/plating/vampwood,
+/area/vtm/interior/millennium_tower/ventrue)
 "nHn" = (
 /obj/machinery/vending/boozeomat,
 /turf/open/floor/plating/toilet,
@@ -51304,9 +51388,10 @@
 /turf/open/floor/plating/saint,
 /area/vtm/interior/oldchurch)
 "omV" = (
-/obj/structure/table/wood/fancy/red,
-/obj/item/candle,
-/turf/open/floor/carpet/lone,
+/obj/structure/table/glass,
+/obj/item/paper_bin,
+/obj/item/pen/fountain,
+/turf/open/floor/carpet/red,
 /area/vtm/interior/millennium_tower/ventrue)
 "omW" = (
 /obj/structure/chair/sofa/corp/right{
@@ -51862,12 +51947,10 @@
 "ovK" = (
 /obj/structure/table/wood/fancy/royalblue,
 /obj/structure/table/wood/fancy/royalblue,
-/obj/item/storage/secure/briefcase{
-	pixel_y = -10
-	},
 /obj/effect/turf_decal/siding/white{
 	dir = 8
 	},
+/obj/machinery/fax/camarilla,
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/millennium_tower/ventrue)
 "ovO" = (
@@ -67810,8 +67893,9 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/supply)
 "sGe" = (
-/obj/structure/closet/crate/coffin,
-/turf/open/floor/carpet/purple,
+/obj/structure/table/wood/fancy/red,
+/obj/item/newspaper,
+/turf/open/floor/carpet/lone,
 /area/vtm/interior/millennium_tower/ventrue)
 "sGh" = (
 /obj/structure/vampdoor/npc{
@@ -81839,6 +81923,11 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
+"wId" = (
+/obj/structure/table/glass,
+/obj/machinery/fax/camarilla,
+/turf/open/floor/carpet/red,
+/area/vtm/interior/millennium_tower/ventrue)
 "wIe" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -185865,7 +185954,7 @@ fzQ
 hHf
 hHf
 hHf
-roo
+hHf
 mIo
 rBR
 rBR
@@ -200818,7 +200907,7 @@ fRx
 kSU
 eGT
 thT
-thT
+jht
 thT
 thT
 eZM
@@ -203130,7 +203219,7 @@ fRx
 fRx
 lHx
 qpS
-thT
+jht
 thT
 thT
 thT
@@ -244463,12 +244552,12 @@ hVQ
 vZF
 gQi
 vCy
-vCy
+rtk
 hVQ
 vZF
 sZr
 vCy
-vCy
+rtk
 iNI
 tEV
 cen
@@ -244720,12 +244809,12 @@ hVQ
 oCg
 oXZ
 vCy
-sGe
+vCy
 hVQ
 oCg
 oXZ
 vCy
-sGe
+vCy
 iNI
 wKO
 oxU
@@ -245495,7 +245584,7 @@ lus
 dsw
 dsw
 dsw
-dsw
+aQe
 ezL
 rtk
 rtk
@@ -245744,16 +245833,16 @@ ntq
 ntq
 ntq
 ntq
-iNI
-qZA
-qZA
 rtk
 rtk
 rtk
 iNI
 hQn
-dsw
-cbJ
+aQe
+aQe
+aQe
+aQe
+bgD
 fRj
 fRj
 rtk
@@ -246001,16 +246090,16 @@ ntq
 ntq
 ntq
 ntq
-jQM
-qXE
-dsw
 iNI
 ukB
-omV
-aQe
+sGe
+wId
 nlw
-dsw
-cbJ
+aQe
+aQe
+aQe
+aQe
+bgD
 fRj
 fRj
 rtk
@@ -246258,15 +246347,15 @@ ntq
 ntq
 ntq
 ntq
-jQM
-dsw
-grI
-eye
+iNI
 dsw
 dsw
 jKJ
-mIi
+omV
+aQe
 dsw
+dsw
+aQe
 dsw
 rtk
 rtk
@@ -246515,16 +246604,16 @@ ntq
 ntq
 ntq
 ntq
-jQM
-dsw
-dsw
 tBj
 xsI
 dsw
 dsw
 owH
+aQe
 dsw
-dsw
+aQe
+aQe
+aQe
 eye
 xcw
 ogY
@@ -246772,14 +246861,14 @@ ntq
 ntq
 ntq
 ntq
-iNI
-sTy
-dsw
 rtk
 jeD
 qZA
 iNI
 val
+aQe
+dsw
+aQe
 dsw
 dsw
 iUJ
@@ -247033,10 +247122,10 @@ oet
 vhw
 grI
 eye
-dsw
-dsw
+aQe
+aQe
 qXE
-dsw
+aQe
 dsw
 dsw
 tyx
@@ -247290,10 +247379,10 @@ iNI
 sTy
 dsw
 gzE
+aQe
+aQe
 dsw
-dsw
-dsw
-dsw
+aQe
 dsw
 dsw
 iNI
@@ -249610,7 +249699,7 @@ ojk
 ojk
 ezr
 foo
-fRj
+mIi
 pHq
 kZM
 kZM
@@ -251152,7 +251241,7 @@ vIq
 vIq
 kaN
 foo
-fRj
+lOD
 wgf
 wFY
 ebg
@@ -251409,7 +251498,7 @@ ojk
 uWA
 jKA
 iNI
-jST
+nHm
 jKA
 aeX
 sku
