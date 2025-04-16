@@ -2,9 +2,6 @@
 	name = CLAN_TZIMISCE
 	desc = "If someone were to call a Tzimisce inhuman and sadistic, the Tzimisce would probably commend them for their perspicacity, and then demonstrate that their mortal definition of sadism was laughably inadequate. The Tzimisce have left the human condition behind gladly, and now focus on transcending the limitations of the vampiric state. At a casual glance or a brief conversation, a Tzimisce appears to be one of the more pleasant vampires. Polite, intelligent, and inquisitive, they seem a stark contrast to the howling Sabbat mobs or even the apparently more humane Brujah or Nosferatu. However, upon closer inspection, it becomes clear that this is merely a mask hiding something alien and monstrous."
 	curse = "Grounded to material domain."
-//	alt_sprite = "tzi"
-//	no_hair = TRUE
-//	no_facial = TRUE	//FUCK WRONG RULEBOOK
 	clane_disciplines = list(
 		/datum/discipline/auspex,
 		/datum/discipline/animalism,
@@ -118,6 +115,30 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzicreature
+	name = "Wretched Creature"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/organ/brain = 1, )
+	result = /obj/item/toy/plush/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tziregenerativecore
+	name = "Pulsating Heart"
+	time = 50
+	reqs = list(/obj/item/organ/heart = 1, /obj/item/drinkable_bloodpack/elite = 1)
+	result = /obj/item/organ/regenerative_core/legion/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/axetzi
+	name = "Living Axe"
+	time = 50
+	reqs = list(/obj/item/organ/eyes = 1, /obj/item/spine = 2, /obj/item/stack/human_flesh = 40)
+	result = /obj/item/melee/vampirearms/fireaxe/axetzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_floor
 	name = "Gut Floor"
 	time = 50
@@ -126,11 +147,35 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzi_floor_living
+	name = "Writhing Floor"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 1, /obj/item/guts = 1)
+	result = /turf/open/indestructible/necropolis
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_wall
 	name = "Flesh Wall"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 2)
 	result = /obj/structure/fleshwall
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzijelly
+	name = "Living Meat Node"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/toy/plush/tzi = 1)
+	result = /obj/structure/tzijelly
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/cattzi
+	name = "flesh feline"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/spine = 1, /obj/item/toy/plush/tzi = 1)
+	result = /mob/living/simple_animal/pet/cat/vampiretzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -557,4 +602,3 @@
 		playsound(get_turf(M), 'sound/misc/splort.ogg', 50, 1)
 		desc += "Looks like it's been used up."
 
-//GiveSpeciesFlight(mob/living/carbon/human/H)

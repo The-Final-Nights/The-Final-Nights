@@ -26,13 +26,12 @@
 		QDEL_NULL(foldedbag_instance)
 	return ..()
 
-/obj/structure/closet/body_bag/attackby(obj/item/I, mob/user, params)
-	if (istype(I, /obj/item/pen) || istype(I, /obj/item/toy/crayon))
-		if(!user.is_literate())
-			to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
+/obj/structure/closet/body_bag/attackby(obj/item/interact_tool, mob/user, params)
+	if (IS_WRITING_UTENSIL(interact_tool))
+		if(!user.can_write(interact_tool))
 			return
 		var/t = stripped_input(user, "What would you like the label to be?", name, null, 53)
-		if(user.get_active_held_item() != I)
+		if(user.get_active_held_item() != interact_tool)
 			return
 		if(!user.canUseTopic(src, BE_CLOSE))
 			return
@@ -43,11 +42,15 @@
 		else
 			name = initial(name)
 		return
-	else if(I.tool_behaviour == TOOL_WIRECUTTER)
-		to_chat(user, "<span class='notice'>You cut the tag off [src].</span>")
-		name = "body bag"
-		tagged = FALSE
-		update_icon()
+	if(interact_tool.tool_behaviour == TOOL_WIRECUTTER || interact_tool.get_sharpness())
+		to_chat(user, span_notice("You cut the tag off [src]."))
+		handle_tag()
+
+///Handles renaming of the bodybag's examine tag.
+/obj/structure/closet/body_bag/proc/handle_tag(new_name)
+	playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
+	name = new_name ? "[initial(name)] - [new_name]" : initial(name)
+	update_icon()
 
 /obj/structure/closet/body_bag/update_overlays()
 	. = ..()

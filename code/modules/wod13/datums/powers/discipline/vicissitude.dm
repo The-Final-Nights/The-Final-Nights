@@ -223,6 +223,9 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_eyes)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_implant)
 
+	// owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living) (Commented out because crafting it resulted in the crafting icon in tgui to go infinitely and stop the crafting menu from working)
+
+
 //BONECRAFTING
 /datum/discipline_power/vicissitude/bonecrafting
 	name = "Bonecrafting"
@@ -278,6 +281,11 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_fister)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_tanker)
 
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tziregenerativecore)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/axetzi)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzijelly)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzicreature)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/cattzi)
 /datum/action/basic_vicissitude
 	name = "Vicissitude Upgrade"
 	desc = "Upgrade your body..."

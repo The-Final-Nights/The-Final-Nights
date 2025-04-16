@@ -127,17 +127,25 @@
 	return
 
 /obj/attacked_by(obj/item/I, mob/living/user)
+	var/meleemod = 1
+	if(ishuman(user))
+		var/mob/living/carbon/human/M = user
+		meleemod = M.dna?.species.meleemod
 	if(I.force)
 		user.visible_message("<span class='danger'>[user] hits [src] with [I]!</span>", \
 					"<span class='danger'>You hit [src] with [I]!</span>", null, COMBAT_MESSAGE_RANGE)
 		//only witnesses close by and the victim see a hit message.
 		log_combat(user, src, "attacked", I)
-	take_damage(I.force, I.damtype, MELEE, 1)
+	take_damage((I.force*meleemod), I.damtype, MELEE, 1)
 
 /mob/living/attacked_by(obj/item/I, mob/living/user)
 	send_item_attack_message(I, user)
 	if(I.force)
-		apply_damage(I.force, I.damtype)
+		var/meleemod = 1
+		if(ishuman(user))
+			var/mob/living/carbon/human/M = user
+			meleemod = M.dna?.species.meleemod
+		apply_damage((I.force*meleemod), I.damtype)
 		if(I.damtype == BRUTE)
 			if(prob(33))
 				I.add_mob_blood(src)

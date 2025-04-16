@@ -21,7 +21,6 @@ var/list/zalgo_letters = list(
 	if(!language)
 		language = get_selected_language()
 	send_speech(message, 2, src, , spans, message_language=language)
-//	speech_span = initial(speech_span)
 
 /proc/scramble_lasombra_message(var/message,var/mob/living/carbon/human/lasombra)
 	var/gibberish_message = ""

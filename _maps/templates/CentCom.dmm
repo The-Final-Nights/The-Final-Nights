@@ -360,7 +360,6 @@
 /area/holodeck/rec_center/lounge)
 "abf" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/wiki/barman_recipes,
 /obj/item/clothing/mask/cigarette/pipe,
 /turf/open/floor/holofloor/carpet,
 /area/holodeck/rec_center/lounge)
@@ -9173,7 +9172,6 @@
 /area/syndicate_mothership)
 "auK" = (
 /obj/structure/table/reinforced,
-/obj/item/book/manual/splurt_space_law,
 /obj/item/taperecorder,
 /turf/open/floor/plasteel/grimy,
 /area/centcom/ferry)
@@ -10099,7 +10097,6 @@
 /area/wizard_station)
 "awR" = (
 /obj/structure/table/reinforced,
-/obj/item/book/manual/splurt_space_law,
 /obj/item/taperecorder,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -15384,7 +15381,6 @@
 /area/tdome/tdomeobserve)
 "aIq" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/wiki/barman_recipes,
 /obj/item/reagent_containers/food/drinks/shaker,
 /obj/item/reagent_containers/rag,
 /obj/machinery/newscaster{
@@ -17341,7 +17337,6 @@
 /area/slavers)
 "aNI" = (
 /obj/structure/table/reinforced,
-/obj/item/book/manual/splurt_space_law,
 /obj/item/taperecorder,
 /obj/machinery/firealarm{
 	dir = 8;
@@ -17645,7 +17640,6 @@
 /turf/open/floor/plasteel/dark,
 /area/slavers)
 "aOW" = (
-/obj/item/book/manual/splurt_space_law,
 /obj/item/taperecorder,
 /obj/structure/table/wood,
 /obj/effect/turf_decal/tile/neutral{
@@ -18228,7 +18222,6 @@
 "aRp" = (
 /obj/structure/table/wood,
 /obj/item/folder/red,
-/obj/item/book/manual/splurt_space_law,
 /obj/item/restraints/handcuffs,
 /obj/item/assembly/flash/handheld,
 /obj/effect/turf_decal/tile/neutral{
@@ -18922,7 +18915,6 @@
 /area/slavers)
 "aUi" = (
 /obj/structure/table/reinforced,
-/obj/item/book/manual/splurt_space_law,
 /obj/item/taperecorder,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -18939,7 +18931,6 @@
 "aUm" = (
 /obj/structure/table/wood,
 /obj/item/folder/red,
-/obj/item/book/manual/splurt_space_law,
 /obj/item/restraints/handcuffs,
 /obj/item/assembly/flash/handheld,
 /obj/machinery/airalarm{
@@ -19654,7 +19645,6 @@
 /turf/closed/indestructible/riveted,
 /area/tdome/tdomeobserve)
 "aWU" = (
-/obj/item/book/manual/splurt_space_law,
 /obj/structure/table/wood,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
@@ -20258,7 +20248,6 @@
 "aZf" = (
 /obj/structure/table/wood,
 /obj/item/folder/red,
-/obj/item/book/manual/splurt_space_law,
 /obj/item/restraints/handcuffs,
 /obj/item/assembly/flash/handheld,
 /obj/effect/turf_decal/tile/neutral{
@@ -20293,7 +20282,6 @@
 /area/centcom/supplypod)
 "aZk" = (
 /obj/structure/table/wood/fancy,
-/obj/item/book/manual/splurt_space_law,
 /turf/open/floor/holofloor{
 	dir = 8;
 	icon_state = "dark"
@@ -23092,10 +23080,6 @@
 /area/syndicate_mothership/control)
 "eQG" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/wiki/barman_recipes{
-	pixel_x = -4;
-	pixel_y = 7
-	},
 /turf/open/indestructible/hotelwood,
 /area/centcom/holding)
 "eQH" = (
@@ -31855,10 +31839,6 @@
 "rgu" = (
 /obj/item/slimepotion/slime/mutator,
 /obj/item/slimepotion/slime/mutator,
-/obj/item/book/manual/wiki/medical_cloning{
-	pixel_x = 14;
-	pixel_y = 7
-	},
 /obj/effect/turf_decal/tile/brown/fourcorners,
 /obj/structure/table/reinforced,
 /turf/open/floor/iron/dark,

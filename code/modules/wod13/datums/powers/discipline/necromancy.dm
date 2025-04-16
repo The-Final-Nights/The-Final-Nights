@@ -116,14 +116,13 @@
 	name = "See Ghosts"
 	desc = "Allows you to see ghosts."
 	button_icon_state = "ghost"
-	check_flags = AB_CHECK_HANDS_BLOCKED | AB_CHECK_IMMOBILE | AB_CHECK_LYING | AB_CHECK_CONSCIOUS
+	check_flags = AB_CHECK_CONSCIOUS
 	vampiric = TRUE
-	var/datum/timedevent/loop_timer
-	var/duration_length = 15 SECONDS
+	var/ghosts_visible = FALSE
 
 /datum/action/ghost_hear/Trigger()
 	. = ..()
-	if (loop_timer)
+	if(ghosts_visible == TRUE)
 		deactivate()
 	else
 		activate()
@@ -131,37 +130,18 @@
 /datum/action/ghost_hear/proc/activate()
 	if(!isliving(owner))
 		return
+	ghosts_visible = TRUE
 	var/mob/living/user = owner
-	if (user.bloodpool < 1)
-		to_chat(owner, span_warning("You don't have enough blood to peek into the Shadowlands!"))
-		return
-	user.bloodpool = max(user.bloodpool - 1, 0)
-
-	loop_timer = addtimer(CALLBACK(src, PROC_REF(refresh)), duration_length, TIMER_STOPPABLE | TIMER_DELETE_ME)
 	user.see_invisible = SEE_INVISIBLE_OBSERVER
 	to_chat(owner, span_notice("You peek beyond the Shroud to see ghosts."))
 
 /datum/action/ghost_hear/proc/deactivate()
 	if(!isliving(owner))
 		return
+	ghosts_visible = FALSE
 	var/mob/living/user = owner
-
-	deltimer(loop_timer)
-	loop_timer = null
 	user.see_invisible = initial(owner.see_invisible)
 	to_chat(owner, span_warning("Your vision returns to the mortal realm."))
-
-/datum/action/ghost_hear/proc/refresh()
-	if(!isliving(owner))
-		return
-	var/mob/living/user = owner
-
-	if (user.bloodpool >= 1)
-		user.bloodpool = max(user.bloodpool - 1, 0)
-		to_chat(owner, span_warning("Your ghost sight consumes blood to stay active..."))
-		loop_timer = addtimer(CALLBACK(src, PROC_REF(refresh)), duration_length, TIMER_STOPPABLE | TIMER_DELETE_ME)
-	else
-		deactivate()
 
 //SHAMBLING HORDES
 /datum/discipline_power/necromancy/shambling_hordes

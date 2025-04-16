@@ -80,7 +80,7 @@ jobs:
         with:
           dotnet-version: 9.x
       - name: Install OpenDream
-        uses: robinraju/release-downloader@v1.11
+        uses: robinraju/release-downloader@v1.12
         with:
           repository: "OpenDreamProject/OpenDream"
           tag: "latest"
@@ -89,7 +89,6 @@ jobs:
       - name: Install Tools
         run: |
           pip3 install setuptools
-          bash tools/ci/install_node.sh
           bash tools/ci/install_spaceman_dmm.sh dreamchecker
           bash tools/ci/install_ripgrep.sh
           tools/bootstrap/python -c ''
@@ -104,10 +103,9 @@ jobs:
         run: |
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/tgstation_dme.json
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/unit_tests.json
-      # Yeah no. I'm leaving this one for another day. Getting this to pass will be a huge challenge.
-      # - name: Check Define Sanity
-        # if: steps.linter-setup.conclusion == 'success' && !cancelled()
-        # run: tools/bootstrap/python -m define_sanity.check
+      - name: Check Define Sanity
+        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        run: tools/bootstrap/python -m define_sanity.check
       - name: Check Trait Validity
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: tools/bootstrap/python -m trait_validity.check
@@ -127,10 +125,6 @@ jobs:
         run: |
           tools/bootstrap/python -m mapmerge2.dmm_test
           tools/bootstrap/python -m tools.maplint.source
-      # I don't think this is valid since we have wallening walls?
-      # - name: Check Cutter
-        # if: steps.linter-setup.conclusion == 'success' && !cancelled()
-        # run: tools/bootstrap/python -m tools.icon_cutter.check
       - name: Run DMI Tests
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: tools/bootstrap/python -m dmi.test

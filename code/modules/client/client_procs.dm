@@ -100,6 +100,10 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(href_list["priv_msg"])
 		cmd_admin_pm(href_list["priv_msg"],null)
 		return
+	// TGUIless adminhelp
+	if(href_list["tguiless_adminhelp"])
+		no_tgui_adminhelp(input(src, "Enter your ahelp", "Ahelp") as null|message)
+		return
 
 	switch(href_list["_src_"])
 		if("holder")
@@ -218,10 +222,13 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	// Instantiate tgui panel
 	tgui_panel = new(src, "browseroutput")
 
+	tgui_say = new(src, "tgui_say")
+
 	set_right_click_menu_mode(TRUE)
 
 	GLOB.ahelp_tickets.ClientLogin(src)
 	GLOB.interviews.client_login(src)
+	GLOB.requests.client_login(src)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
 	//Admin Authorisation
 	holder = GLOB.admin_datums[ckey]
@@ -339,9 +346,17 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	// Initialize tgui panel
 	tgui_panel.initialize()
 
-	if(alert_mob_dupe_login)
-		spawn()
-			alert(mob, "You have logged in already with another key this round, please log out of this one NOW or risk being banned!")
+	tgui_say.initialize()
+
+	if(alert_mob_dupe_login && !holder)
+		var/dupe_login_message = "Your ComputerID has already logged in with another key this round, please log out of this one NOW or risk being banned!"
+		dupe_login_message += "\nAdmins have been informed."
+		message_admins(span_danger("<B>MULTIKEYING: </B></span><span class='notice'>[key_name_admin(src)] has a matching CID+IP with another player and is clearly multikeying. They have been warned to leave the server or risk getting banned."))
+		log_admin_private("MULTIKEYING: [key_name(src)] has a matching CID+IP with another player and is clearly multikeying. They have been warned to leave the server or risk getting banned.")
+		spawn(0.5 SECONDS) //needs to run during world init, do not convert to add timer
+			alert(mob, dupe_login_message) //players get banned if they don't see this message, do not convert to tgui_alert (or even tg_alert) please.
+			to_chat(mob, span_danger(dupe_login_message))
+
 
 	connection_time = world.time
 	connection_realtime = world.realtime
@@ -479,6 +494,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	log_access("Logout: [key_name(src)]")
 	GLOB.ahelp_tickets.ClientLogout(src)
 	GLOB.interviews.client_logout(src)
+	GLOB.requests.client_logout(src)
 	SSserver_maint.UpdateHubStatus()
 	if(credits)
 		QDEL_LIST(credits)
@@ -649,22 +665,16 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 					qdel(query_datediff)
 	qdel(query_get_client_age)
 	if(!new_player)
-		var/datum/db_query/query_log_player = SSdbcore.NewQuery(
+		SSdbcore.FireAndForget(
 			"UPDATE [format_table_name("player")] SET lastseen = Now(), lastseen_round_id = :round_id, ip = INET_ATON(:ip), computerid = :computerid, lastadminrank = :admin_rank, accountjoindate = :account_join_date WHERE ckey = :ckey",
 			list("round_id" = GLOB.round_id, "ip" = address, "computerid" = computer_id, "admin_rank" = admin_rank, "account_join_date" = account_join_date || null, "ckey" = ckey)
 		)
-		if(!query_log_player.Execute())
-			qdel(query_log_player)
-			return
-		qdel(query_log_player)
 	if(!account_join_date)
 		account_join_date = "Error"
-	var/datum/db_query/query_log_connection = SSdbcore.NewQuery({"
+	SSdbcore.FireAndForget({"
 		INSERT INTO `[format_table_name("connection_log")]` (`id`,`datetime`,`server_ip`,`server_port`,`round_id`,`ckey`,`ip`,`computerid`)
 		VALUES(null,Now(),INET_ATON(:internet_address),:port,:round_id,:ckey,INET_ATON(:ip),:computerid)
 	"}, list("internet_address" = world.internet_address || "0", "port" = world.port, "round_id" = GLOB.round_id, "ckey" = ckey, "ip" = address, "computerid" = computer_id))
-	query_log_connection.Execute()
-	qdel(query_log_connection)
 
 	SSserver_maint.UpdateHubStatus()
 
@@ -974,7 +984,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
  *
  * Handles adding macros for the keys that need it
  * And adding movement keys to the clients movement_keys list
- * At the time of writing this, communication(OOC, Say, IC) require macros
+ * At the time of writing this, communication(OOC, Say, IC, ASAY) require macros
  * Arguments:
  * * direct_prefs - the preference we're going to get keybinds from
  */
@@ -994,12 +1004,12 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 					movement_keys[key] = WEST
 				if("South")
 					movement_keys[key] = SOUTH
-				if("Say")
-					winset(src, "default-[REF(key)]", "parent=default;name=[key];command=inputSay")
-				if("OOC")
-					winset(src, "default-[REF(key)]", "parent=default;name=[key];command=ooc")
-				if("Me")
-					winset(src, "default-[REF(key)]", "parent=default;name=[key];command=me")
+				if(ADMIN_CHANNEL)
+					if(holder)
+						var/asay = tgui_say_create_open_command(ADMIN_CHANNEL)
+						winset(src, "default-[REF(key)]", "parent=default;name=[key];command=[asay]")
+					else
+						winset(src, "default-[REF(key)]", "parent=default;name=[key];command=")
 
 /client/proc/change_view(new_size)
 	if (isnull(new_size))

@@ -64,6 +64,8 @@
 #define DYNAMIC_LIGHTING_IFSTARLIGHT 3
 #define IS_DYNAMIC_LIGHTING(A) A.dynamic_lighting
 
+/// The amount of lumcount on a tile for it to be considered dark (used to determine reading and nyctophobia)
+#define LIGHTING_TILE_IS_DARK 0.2
 
 //code assumes higher numbers override lower numbers.
 #define LIGHTING_NO_UPDATE 0
