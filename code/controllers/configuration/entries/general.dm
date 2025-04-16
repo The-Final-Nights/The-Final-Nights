@@ -244,7 +244,7 @@
 /datum/config_entry/string/banappeals
 
 /datum/config_entry/string/wikiurl
-	config_entry_value = "https://wiki.wod13.org"
+	config_entry_value = "https://thefinalnights.com/wiki"
 
 /datum/config_entry/string/forumurl
 	config_entry_value = "https://discord.com/invite/hQHAK67Drd"
