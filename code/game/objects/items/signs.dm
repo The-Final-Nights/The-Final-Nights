@@ -22,15 +22,16 @@
 	if(!user.is_literate())
 		to_chat(user, "<span class='notice'>You scribble illegibly on [src]!</span>")
 		return
-	var/txt = stripped_input(user, "What would you like to write on the sign?", "Sign Label", null , 30)
+	var/txt = tgui_input_text(user, "What would you like to write on the sign?", "Sign Label", max_length = 30)
 	if(txt && user.canUseTopic(src, BE_CLOSE))
+		playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
 		label = txt
 		name = "[label] sign"
 		desc =	"It reads: [label]"
 
 /obj/item/picket_sign/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/pen) || istype(W, /obj/item/toy/crayon))
-		retext(user)
+	if(IS_WRITING_UTENSIL(W))
+		retext(user, W)
 	else
 		return ..()
 

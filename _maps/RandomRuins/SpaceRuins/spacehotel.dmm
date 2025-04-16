@@ -1629,7 +1629,6 @@
 /area/ruin/space/has_grav/hotel/bar)
 "fF" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/barman_recipes,
 /obj/item/reagent_containers/food/drinks/shaker,
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
@@ -2299,7 +2298,6 @@
 /area/ruin/space/has_grav/hotel/bar)
 "hy" = (
 /obj/structure/table,
-/obj/item/book/manual/chef_recipes,
 /turf/open/floor/plasteel/cafeteria,
 /area/ruin/space/has_grav/hotel/bar)
 "hz" = (
@@ -3472,7 +3470,6 @@
 /area/ruin/space/has_grav/hotel/power)
 "kK" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/security_space_law,
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},

@@ -566,6 +566,16 @@ Dancer
 	lose_text = "<span class='notice'>You don't feel charismatic anymore.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
 
+/datum/quirk/diablerist
+	name = "Diablerist"
+	desc = "For one reason or another, you have committed Diablerie in your past, a great crime within Kindred society. <b>This is not a license to Diablerize without proper reason!</b>"
+	value = 0
+	allowed_species = list("Vampire")
+
+/datum/quirk/diablerist/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.diablerist = TRUE
+
 /datum/quirk/tower
 	name = "Tower"
 	desc = "You are tall."

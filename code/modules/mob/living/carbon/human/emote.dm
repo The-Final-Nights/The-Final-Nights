@@ -138,6 +138,12 @@
 		return FALSE
 	return ..()
 
+/datum/emote/living/carbon/human/tut
+	key = "tut"
+	key_third_person = "tuts"
+	message = "tuts."
+	emote_type = EMOTE_AUDIBLE
+
 /datum/emote/living/carbon/human/wag
 	key = "wag"
 	key_third_person = "wags"
@@ -231,11 +237,17 @@
 	message = "blinks."
 	emote_type = EMOTE_VISIBLE
 
+/datum/emote/living/carbon/human/blink/get_sound(mob/living/user)
+	return 'sound/mobs/humanoids/human/blink/blink.ogg'
+
 /datum/emote/living/carbon/human/blink_r
 	key = "blink_r"
 	name = "blink (Rapid)"
 	message = "blinks rapidly."
 	emote_type = EMOTE_VISIBLE
+
+/datum/emote/living/carbon/human/blink_r/get_sound(mob/living/user)
+	return 'sound/mobs/humanoids/human/blink/blinkrapid.ogg'
 
 /datum/emote/living/carbon/human/snap
 	emote_type = EMOTE_AUDIBLE
@@ -253,21 +265,21 @@
 /datum/emote/living/carbon/human/snap/one
 	key = "snap"
 	key_third_person = "snaps"
-	message = "snaps their fingers"
+	message = "snaps their fingers."
 	message_param = "snaps their fingers at %t"
 	sound = 'sound/mobs/humanoids/human/snap/snap.ogg'
 
 /datum/emote/living/carbon/human/snap/two
 	key = "snap2"
 	key_third_person = "snaps2"
-	message = "snaps their fingers twice"
+	message = "snaps their fingers twice."
 	message_param = "snaps their fingers at %t twice"
 	sound = 'sound/mobs/humanoids/human/snap/snap2.ogg'
 
 /datum/emote/living/carbon/human/snap/three
 	key = "snap3"
 	key_third_person = "snaps3"
-	message = "snaps their fingers thrice"
+	message = "snaps their fingers thrice."
 	message_param = "snaps their fingers at %t thrice"
 	sound = 'sound/mobs/humanoids/human/snap/snap3.ogg'
 

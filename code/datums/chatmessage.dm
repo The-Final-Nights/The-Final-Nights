@@ -27,7 +27,7 @@
  * Datum for generating a message overlay on the map
  */
 /datum/chatmessage
-	/// The visual element of the chat messsage
+	/// The visual element of the chat message
 	var/image/message
 	/// The location in which the message is appearing
 	var/atom/message_loc
@@ -197,7 +197,7 @@
 	message.maptext = MAPTEXT(complete_text)
 
 	// View the message
-	LAZYADDASSOC(owned_by.seen_messages, message_loc, src)
+	LAZYADDASSOCLIST(owned_by.seen_messages, message_loc, src)
 	owned_by.images |= message
 	animate(message, alpha = 255, time = CHAT_MESSAGE_SPAWN_TIME)
 

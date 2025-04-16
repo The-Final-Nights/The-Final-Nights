@@ -23,15 +23,6 @@
 			really = TRUE
 	if(really)
 		user.total_cleaned += 1
-//	if(ishuman(user))
-//		if(user.key)
-//			var/mob/living/carbon/human/H = user
-//			var/datum/preferences/P = GLOB.preferences_datums[ckey(H.key)]
-//			if(P)
-//				turfs_for_exp = turfs_for_exp+1
-//				if(turfs_for_exp >= 100)
-//					turfs_for_exp = 0
-//					P.exper = min(calculate_mob_max_exper(H), P.exper+5)
 	..()
 
 /obj/vehicle/ridden/janicart/Destroy()
