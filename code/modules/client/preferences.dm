@@ -1843,7 +1843,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							ghost_others = GHOST_OTHERS_SIMPLE
 
 				if("werewolf_name")
-					if(slotlocked || !(pref_species.id == "garou"))
+					if(slotlocked || pref_species.id != "garou")
 						return
 
 					var/new_name = tgui_input_text(user, "Choose your character's werewolf name:", "Character Preference", max_length = MAX_NAME_LEN)
