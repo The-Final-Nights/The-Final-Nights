@@ -841,7 +841,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["chi_types"], chi_types)
 	WRITE_FILE(S["chi_levels"], chi_levels)
 	WRITE_FILE(S["path"], morality_path.name)
-	WRITE_FILE(S["equipped_gear"], equipped_gear)
 	WRITE_FILE(S["purchased_gear"], purchased_gear)
 
 	//Custom names
@@ -851,6 +850,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	WRITE_FILE(S["preferred_ai_core_display"] ,  preferred_ai_core_display)
 	WRITE_FILE(S["prefered_security_department"] , prefered_security_department)
+
+	// Getting rid of the previewed items before writing
+	if(equipped_gear)
+		for(var/gear in equipped_gear)
+			if(!(gear in purchased_gear))
+				equipped_gear -= gear
+	WRITE_FILE(S["equipped_gear"], equipped_gear)
 
 	//Jobs
 	WRITE_FILE(S["joblessrole"]		, joblessrole)
@@ -895,7 +901,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	var/changed = FALSE
 	for(var/gear in gear_list)
 		if(!(gear in GLOB.gear_datums))
-			to_chat(src, span_warning("Removing invalid loadout item [gear] from loadout."))
+			to_chat(usr, span_warning("Removing invalid loadout item [gear] from loadout."))
 			gear_list -= gear //be GONE
 			changed = TRUE
 

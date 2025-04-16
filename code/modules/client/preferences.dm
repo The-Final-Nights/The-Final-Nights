@@ -1210,15 +1210,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				var/datum/gear/G = LC.gear[gear_name]
 				var/ticked = (G.display_name in equipped_gear)
 
-				dat += "<tr style='vertical-align:top;'><td width=20%>[G.display_name]\n"
+				dat += "<tr style='vertical-align:top;'><td width=20%><a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name]</a>"
 				if(G.display_name in purchased_gear)
-					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>Equip</a></td>"
+					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Unequip" : "Equip") + "</a></td>"
 				else
 					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a></td>"
 				dat += "<td width = 5% style='vertical-align:top'>[G.cost]</td><td>"
 
-				//dat += "<tr style='vertical-align:top;'><td width=20%><a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name]</a></td><td>"
-				// TODO: Maybe let's turn above into a preview button.
 				if(G.allowed_roles)
 					dat += "<font size=2>"
 					for(var/role in G.allowed_roles)
@@ -1831,11 +1829,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/datum/preferences/user_prefs = user.client.prefs
 			var/datum/gear/TG = GLOB.gear_datums[href_list["purchase_gear"]]
 			if(TG.cost <= user_prefs.player_experience)
-				purchased_gear += TG.display_name
-				TG.purchase(user.client)
-				player_experience -= TG.cost
-				to_chat(user, "Purchased [TG.display_name].")
-				save_preferences()
+				if(tgui_alert(user, "Are you sure you want to spend [TG.cost] experience for \the [TG.display_name]?", "Confirmation", list("Yes", "No")) == "Yes")
+					purchased_gear += TG.display_name
+					TG.purchase(user.client)
+					player_experience -= TG.cost
+					to_chat(user, span_info("Purchased [TG.display_name]!"))
+					save_character()
 			else
 				to_chat(user, "<span class='warning'>You don't have enough experience to purchase \the [TG.display_name]!</span>")
 
