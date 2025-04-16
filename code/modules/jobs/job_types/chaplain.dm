@@ -108,6 +108,7 @@
 		else
 			B.name = "The Holy Book of [new_religion]"
 
+
 	GLOB.religion = new_religion
 	GLOB.bible_name = B.name
 	GLOB.deity = B.deity_name

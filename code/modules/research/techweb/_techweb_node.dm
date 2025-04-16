@@ -36,7 +36,7 @@
 	return ..()
 
 /datum/techweb_node/serialize_list(list/options)
-	. = list()
+	. = ..()
 	VARSET_TO_LIST(., id)
 	VARSET_TO_LIST(., display_name)
 	VARSET_TO_LIST(., hidden)
@@ -50,6 +50,7 @@
 	VARSET_TO_LIST(., category)
 
 /datum/techweb_node/deserialize_list(list/input, list/options)
+	. = ..()
 	if(!input["id"])
 		return
 	VARSET_FROM_LIST(input, id)

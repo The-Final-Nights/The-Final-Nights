@@ -3294,7 +3294,6 @@
 /area/awaymission/moonoutpost19/research)
 "hg" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/security_space_law,
 /obj/machinery/computer/security/telescreen/entertainment{
 	pixel_x = -32
 	},
@@ -4275,7 +4274,6 @@
 /area/awaymission/moonoutpost19/arrivals)
 "jc" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/detective,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel{
 	heat_capacity = 1e+006
@@ -4610,9 +4608,6 @@
 /area/awaymission/moonoutpost19/arrivals)
 "jP" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/barman_recipes{
-	pixel_y = 5
-	},
 /obj/item/reagent_containers/food/drinks/shaker,
 /turf/open/floor/plasteel/cafeteria{
 	dir = 5
@@ -4834,10 +4829,6 @@
 /area/awaymission/moonoutpost19/arrivals)
 "kq" = (
 /obj/structure/table,
-/obj/item/book/manual/chef_recipes{
-	pixel_x = 2;
-	pixel_y = 6
-	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel/cafeteria{
 	dir = 5

@@ -3,7 +3,7 @@
 $include game_options.txt
 $include dbconfig.txt
 $include comms.txt
-$include antag_rep.txt
+$include logging.txt
 $include resources.txt
 $include interviews.txt
 
@@ -74,91 +74,6 @@ ENABLE_LOCALHOST_RANK
 #USE_EXP_RESTRICTIONS_OTHER
 ## Allows admins to bypass job playtime requirements.
 #USE_EXP_RESTRICTIONS_ADMIN_BYPASS
-
-## log OOC channel
-LOG_OOC
-
-## log client Say
-LOG_SAY
-
-## log admin actions
-LOG_ADMIN
-
-## log admin chat
-LOG_ADMINCHAT
-
-## log client access (logon/logoff)
-LOG_ACCESS
-
-## log game actions (start of round, results, etc.)
-LOG_GAME
-
-## log player votes
-LOG_VOTE
-
-## log client Whisper
-LOG_WHISPER
-
-## log emotes
-LOG_EMOTE
-
-## log subtle emotes
-LOG_SUBTLER
-
-## log subtler emotes
-LOG_SUBTLE
-
-## log attack messages
-LOG_ATTACK
-
-## log pda messages
-LOG_PDA
-
-## log uplink purchases
-LOG_UPLINK
-
-## log telecomms messages
-LOG_TELECOMMS
-
-## log prayers
-LOG_PRAYER
-
-## log lawchanges
-LOG_LAW
-
-## log economy actions
-LOG_ECON
-
-## log crew manifest to seperate file
-LOG_MANIFEST
-
-## log job divide debugging information
-#LOG_JOB_DEBUG
-
-## log all world.Topic() calls
-# LOG_WORLD_TOPIC
-
-## enables use of the proc twitterize() that lets you take a large list of strings and turn it into a JSON file of tweet sized strings.
-## As an example of how this could be """useful""" look towards Poly (https://twitter.com/Poly_the_Parrot)
-# LOG_TWITTER
-
-## Enable logging pictures
-# LOG_PICTURES
-
-## log mecha actions
-# LOG_MECHA
-
-## log virus and actions
-LOG_VIRUS
-
-## log cloning actions
-LOG_CLONING
-
-## log shuttle actions
-LOG_SHUTTLE
-
-## log speech indicators
-LOG_SPEECH_INDICATORS
 
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
@@ -521,6 +436,36 @@ DEFAULT_VIEW_SQUARE 15x15
 ## Uncomment to enable source whitelisting, a comma-separated list (no spaces) of CentCom sources (sourceName).
 ## If enabled, only bans from these servers will be shown to admins using CentCom. The default sources list is an example.
 #CENTCOM_SOURCE_WHITELIST Beestation MRP,TGMC,FTL13
+
+## The URL to the webhook for adminhelps to relay the urgent ahelp message to
+## If not set, will disable urgent ahelps.
+#URGENT_ADMINHELP_WEBHOOK_URL
+
+## See above, but for non-urgent ahelps
+#REGULAR_ADMINHELP_WEBHOOK_URL
+
+## The urgent ahelp cooldown for a given player if they're alone on a server and need to send an urgent ahelp.
+URGENT_AHELP_COOLDOWN 300
+
+## The message that is sent to the discord if an urgent ahelp is sent. Useful for sending a role ping.
+#URGENT_AHELP_MESSAGE
+
+## See above, but for non-urgent ahelps.
+#AHELP_MESSAGE
+
+## The message that the player receives whenever prompted whether they want to send an urgent ahelp or not.
+#URGENT_AHELP_USER_PROMPT This'll ping the admins!
+
+## The link that the title of a ticket can link to.
+## If not set, it will link nowhere
+## use $RID for the round ID and $TID for the ticket ID
+#ADMINHELP_AHELP_LINK
+
+## The URL for the pfp of the webhook
+#ADMINHELP_WEBHOOK_PFP
+
+## The name of the webhook
+#ADMINHELP_WEBHOOK_NAME
 
 #### DISCORD STUFFS ####
 ## MAKE SURE ALL SECTIONS OF THIS ARE FILLED OUT BEFORE ENABLING
