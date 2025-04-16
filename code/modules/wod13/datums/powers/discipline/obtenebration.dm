@@ -64,13 +64,12 @@
 	desc = "Use shadows as your arms to harm and grab others from afar."
 
 	level = 3
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_FREE_HAND | DISC_CHECK_IMMOBILE
+	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
 
 	violates_masquerade = TRUE
 
-	cancelable = TRUE
-	duration_length = 30 SECONDS
-	cooldown_length = 15 SECONDS
+	toggled = TRUE
+	duration_length = 6 TURNS
 
 /datum/discipline_power/obtenebration/arms_of_the_abyss/activate()
 	. = ..()
