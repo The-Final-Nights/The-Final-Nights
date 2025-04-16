@@ -1,7 +1,7 @@
 
 * **Website:** TO_BE_DECLARED
 * **Code:** https://github.com/WorldOfDarknessXIII/World-of-Darkness-13
-* **Wiki:** UNDER_CONSTRUCTION
+* **Wiki:** https://thefinalnights.com/wiki/index.php?title=Main_Page
 * **Codedocs:** https://codedocs.tgstation13.org/ + For the time being +
 * **World of Darkness 13 Discord:** https://discord.gg/WBktth6Z8j
 * **Coderbus Discord:** https://discord.gg/Vh8TJp9
