@@ -2,6 +2,7 @@
 	subtype_path = /datum/gear/eyewear
 	slot = ITEM_SLOT_EYES
 	sort_category = "Eyewear"
+	cost = 2
 
 /datum/gear/eyewear/yellow_aviator
 	display_name = "aviator, yellow"

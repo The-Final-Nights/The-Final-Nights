@@ -263,6 +263,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_keybindings(key_bindings)
 	equipped_gear	= SANITIZE_LIST(equipped_gear)
+	purchased_gear  = SANITIZE_LIST(purchased_gear)
 	nsfw_content_pref = sanitize_integer(nsfw_content_pref, FALSE, TRUE, src::nsfw_content_pref)
 
 	player_experience   = sanitize_integer(player_experience, 0, 100000, 0)
@@ -502,18 +503,18 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		READ_FILE(S["feature_human_ears"], features["ears"])
 
 	READ_FILE(S["equipped_gear"], equipped_gear)
+	READ_FILE(S["purchased_gear"], purchased_gear)
 	if(config) //This should *probably* always be there, but just in case.
 		if(length(equipped_gear) > CONFIG_GET(number/max_loadout_items))
 			to_chat(parent, span_userdanger("Loadout maximum items exceeded in loaded slot, Your loadout has been cleared! You had [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)] equipped items!"))
 			equipped_gear = list()
 			WRITE_FILE(S["equipped_gear"], equipped_gear)
 
-	for(var/gear in equipped_gear)
-		if(!(gear in GLOB.gear_datums))
-			to_chat(parent, span_warning("Removing nonvalid loadout item [gear] from loadout"))
-			equipped_gear -= gear //be GONE
-			WRITE_FILE(S["equipped_gear"], equipped_gear)
-
+	//Clearing invalid items that aren't on the loadout list
+	if(clean_invalid_loadout(equipped_gear))
+		WRITE_FILE(S["equipped_gear"], equipped_gear)
+	if(clean_invalid_loadout(purchased_gear))
+		WRITE_FILE(S["purchased_gear"], purchased_gear)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -841,6 +842,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["chi_levels"], chi_levels)
 	WRITE_FILE(S["path"], morality_path.name)
 	WRITE_FILE(S["equipped_gear"], equipped_gear)
+	WRITE_FILE(S["purchased_gear"], purchased_gear)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -888,3 +890,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S.ImportText("/",file("[path].txt"))
 
 #endif
+
+/proc/clean_invalid_loadout(var/list/gear_list)
+	var/changed = FALSE
+	for(var/gear in gear_list)
+		if(!(gear in GLOB.gear_datums))
+			to_chat(src, span_warning("Removing invalid loadout item [gear] from loadout."))
+			gear_list -= gear //be GONE
+			changed = TRUE
+
+	return changed

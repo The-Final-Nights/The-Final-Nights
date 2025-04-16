@@ -305,6 +305,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	body_model = rand(1, 3)
 	experience_used_on_character = 0
 	real_name = random_unique_name(gender)
+	equipped_gear = list() // TFN edit
 	headshot_link = null // TFN EDIT
 	save_character()
 
@@ -1179,7 +1180,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						equipped_gear.Cut(i,i+1)
 
 			dat += "<table align='center' width='100%'>"
-			dat += "<tr><td colspan=4><center><b>Total Experience:[total_experience]\nCurrent loadout usage: [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)]</b> \[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
+			dat += "<tr><td colspan=4><center><b>Experience: [player_experience]. Current loadout usage: [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)].</b><br>\[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
 			dat += "<tr><td colspan=4><center><b>"
 
 			var/firstcat = 1
@@ -1195,28 +1196,29 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "</b></center></td></tr>"
 
 			var/datum/loadout_category/LC = GLOB.loadout_categories[gear_tab]
-			dat += "<tr><td colspan=3><hr></td></tr>"
-			dat += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
-			dat += "<tr><td colspan=3><hr></td></tr>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
+			dat += "<tr><td colspan=4><b><center>[LC.category]</center></b></td></tr>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
 
-			dat += "<tr><td colspan=3><hr></td></tr>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
 			dat += "<tr><td><b>Name</b></td>"
 			dat += "<td><b>Cost</b></td>"
 			dat += "<td><b>Restricted Jobs</b></td>"
 			dat += "<td><b>Description</b></td>"
-			dat += "<tr><td colspan=3><hr></td></tr>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
 			for(var/gear_name in LC.gear)
 				var/datum/gear/G = LC.gear[gear_name]
 				var/ticked = (G.display_name in equipped_gear)
 
 				dat += "<tr style='vertical-align:top;'><td width=20%>[G.display_name]\n"
 				if(G.display_name in purchased_gear)
-						dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>Equip</a></td>"
+					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>Equip</a></td>"
 				else
 					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a></td>"
 				dat += "<td width = 5% style='vertical-align:top'>[G.cost]</td><td>"
 
-				dat += "<tr style='vertical-align:top;'><td width=20%><a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name]</a></td><td>" //if this breaks check beestation's
+				//dat += "<tr style='vertical-align:top;'><td width=20%><a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name]</a></td><td>"
+				// TODO: Maybe let's turn above into a preview button.
 				if(G.allowed_roles)
 					dat += "<font size=2>"
 					for(var/role in G.allowed_roles)
@@ -1828,11 +1830,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(href_list["purchase_gear"])
 			var/datum/preferences/user_prefs = user.client.prefs
 			var/datum/gear/TG = GLOB.gear_datums[href_list["purchase_gear"]]
-			if(TG.cost < user_prefs.player_experience())
+			if(TG.cost <= user_prefs.player_experience)
 				purchased_gear += TG.display_name
 				TG.purchase(user.client)
 				player_experience -= TG.cost
-				to_chat(user, "Purchased [TG.display_name]."))
+				to_chat(user, "Purchased [TG.display_name].")
 				save_preferences()
 			else
 				to_chat(user, "<span class='warning'>You don't have enough experience to purchase \the [TG.display_name]!</span>")

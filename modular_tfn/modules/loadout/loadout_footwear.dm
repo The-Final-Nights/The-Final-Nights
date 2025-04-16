@@ -2,6 +2,7 @@
 	subtype_path = /datum/gear/footwear
 	slot = ITEM_SLOT_FEET
 	sort_category = "Footwear"
+	cost = 2
 
 // Regular shoes
 /datum/gear/footwear/shoes

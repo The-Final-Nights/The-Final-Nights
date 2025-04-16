@@ -3543,7 +3543,6 @@
 #include "modular_tfn\modules\discord\toggle_notify.dm"
 #include "modular_tfn\modules\fomori\code\fomori.dm"
 #include "modular_tfn\modules\loadout\_loadout.dm"
-#include "modular_tfn\modules\loadout\loadout_cosmetics.dm"
 #include "modular_tfn\modules\loadout\loadout_eyewear.dm"
 #include "modular_tfn\modules\loadout\loadout_footwear.dm"
 #include "modular_tfn\modules\loadout\loadout_general.dm"

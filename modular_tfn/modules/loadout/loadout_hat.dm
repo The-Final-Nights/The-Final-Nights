@@ -2,6 +2,7 @@
 	subtype_path = /datum/gear/hat
 	slot = ITEM_SLOT_HEAD
 	sort_category = "Headwear"
+	cost = 2
 
 
 // Bandana
