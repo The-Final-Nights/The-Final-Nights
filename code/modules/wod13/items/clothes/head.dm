@@ -325,7 +325,7 @@
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
 		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
 		return
-	if(do_mob(user, target, 0.5 SECONDS)) //Mainly to prevent black_bagging mid combat.
+	if(do_after(user, 0.5 SECONDS, target)) //Mainly to prevent black_bagging mid combat.
 		target.visible_message(span_warning("[user] forces [src] onto [target]'s head!"))
 		to_chat(target, span_bolddanger("[target] forces [src] onto your head!</span>"))
 		target.emote("scream")
