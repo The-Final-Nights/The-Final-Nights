@@ -22,10 +22,15 @@
 	H.dna.species.wings_icon = "Gargoyle"
 	H.physiology.brute_mod = 0.8
 
-/datum/vampireclane/gargoyle/post_gain(mob/living/carbon/human/H)
+/datum/vampireclane/gargoyle/post_gain(mob/living/carbon/human/gargoyle)
 	..()
-	H.dna.species.GiveSpeciesFlight(H)
-	H.remove_overlay(MARKS_LAYER)
+	gargoyle.dna.species.GiveSpeciesFlight(gargoyle)
+
+	if(gargoyle.shoes)
+		qdel(gargoyle.shoes)
+	gargoyle.Digitigrade_Leg_Swap(FALSE) //TODO: Remove shoes first
+
+	gargoyle.remove_overlay(MARKS_LAYER)
 	var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "gargoyle_legs_n_tails", -MARKS_LAYER)
-	H.overlays_standing[MARKS_LAYER] = acc_overlay
-	H.apply_overlay(MARKS_LAYER)
+	gargoyle.overlays_standing[MARKS_LAYER] = acc_overlay
+	gargoyle.apply_overlay(MARKS_LAYER)

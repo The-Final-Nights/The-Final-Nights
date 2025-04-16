@@ -665,5 +665,14 @@ Dancer
 	UnregisterSignal(L, comsig)
 	attached_targets -= L
 
+/datum/quirk/hardened_soles
+	name = "Hardened Soles"
+	desc = "You're feet callouses are so thick, you can walk barefoot across the state if you want to!"
+	value = 2
+
+/datum/quirk/hardened_soles/on_spawn()
+	var/mob/living/carbon/human = quirk_holder
+	ADD_TRAIT(human, TRAIT_HARDENED_SOLES, ROUNDSTART_TRAIT)
+
 #undef SHORT
 #undef TALL
