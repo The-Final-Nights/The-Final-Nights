@@ -24,6 +24,7 @@
 @include meta.load-css('./interfaces/ListInput.scss');
 @include meta.load-css('./interfaces/AlertModal.scss');
 @include meta.load-css('./interfaces/CameraConsole.scss');
+@include meta.load-css('./interfaces/LibraryComputer.scss');
 @include meta.load-css('./interfaces/NuclearBomb.scss');
 @include meta.load-css('./interfaces/Paper.scss');
 @include meta.load-css('./interfaces/Roulette.scss');
@@ -37,6 +38,7 @@
 @include meta.load-css('./interfaces/WindowsXP/News.scss');
 @include meta.load-css('./interfaces/WindowsXP/LoginScreen.scss');
 @include meta.load-css('./interfaces/WindowsXP/Components.scss');
+@include meta.load-css('./interfaces/RequestManager.scss');
 
 // Layouts
 @include meta.load-css('./layouts/Layout.scss');

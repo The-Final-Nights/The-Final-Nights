@@ -1033,7 +1033,6 @@
 /area/ruin/powered/beach)
 "FF" = (
 /obj/structure/table,
-/obj/item/book/manual/wiki/barman_recipes,
 /obj/item/reagent_containers/food/drinks/shaker,
 /obj/item/reagent_containers/glass/rag,
 /turf/open/floor/wood,
@@ -1050,7 +1049,6 @@
 /area/ruin/powered/beach)
 "Ga" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/wiki/cooking_to_serve_man,
 /obj/item/clothing/suit/apron/chef,
 /obj/item/clothing/head/chefhat,
 /turf/open/floor/wood,

@@ -686,6 +686,15 @@ SUBSYSTEM_DEF(carpool)
 	var/color_blue = FALSE
 	var/last_color_change = 0
 
+/obj/vampire_car/police/unmarked
+	icon_state = "unmarked"
+	max_passengers = 3
+	dir = WEST
+	beep_sound = 'code/modules/wod13/sounds/migalka.ogg'
+	access = "police"
+	baggage_limit = 45
+	baggage_max = WEIGHT_CLASS_BULKY
+
 /obj/vampire_car/police/handle_caring()
 	if(fari_on)
 		if(last_color_change+10 <= world.time)

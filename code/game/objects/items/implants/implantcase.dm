@@ -13,30 +13,27 @@
 	var/obj/item/implant/imp = null
 	var/imp_type
 
-
 /obj/item/implantcase/update_icon_state()
-	if(imp)
-		icon_state = "implantcase-[imp.implant_color]"
-	else
-		icon_state = "implantcase-0"
+	icon_state = "implantcase-[imp ? imp.implant_color : 0]"
+	return ..()
 
-
-/obj/item/implantcase/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/pen))
-		if(!user.is_literate())
+/obj/item/implantcase/attackby(obj/item/used_item, mob/living/user, params)
+	if(IS_WRITING_UTENSIL(used_item))
+		if(!user.can_write(used_item))
 			to_chat(user, "<span class='notice'>You scribble illegibly on the side of [src]!</span>")
 			return
-		var/t = stripped_input(user, "What would you like the label to be?", name, null)
-		if(user.get_active_held_item() != W)
+		var/t = tgui_input_text(user, "What would you like the label to be?", name, null)
+		if(user.get_active_held_item() != used_item)
 			return
 		if(!user.canUseTopic(src, BE_CLOSE))
 			return
 		if(t)
+			playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
 			name = "implant case - '[t]'"
 		else
 			name = "implant case"
-	else if(istype(W, /obj/item/implanter))
-		var/obj/item/implanter/I = W
+	else if(istype(used_item, /obj/item/implanter))
+		var/obj/item/implanter/I = used_item
 		if(I.imp)
 			if(imp || I.imp.imp_in)
 				return

@@ -77,6 +77,22 @@
 			var/obj/structure/W = A
 			W.obj_destruction("fireaxe")
 
+/obj/item/melee/vampirearms/fireaxe/axetzi
+	icon = 'code/modules/wod13/48x32weapons.dmi'
+	icon_state = "axetzi0"
+	name = "living axe"
+	desc = "Truly, the weapon of a madman."
+	masquerade_violating = TRUE
+	base_icon_state = "axetzi1"
+/obj/item/melee/vampirearms/fireaxe/axetzi/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/butchering, 100, 80, 0 , hitsound)
+	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=40, icon_wielded="axetzi1")
+
+/obj/item/melee/vampirearms/fireaxe/axetzi/update_icon_state()
+	icon_state = "axetzi0"
+
+
 /obj/item/melee/vampirearms/katana
 	name = "katana"
 	desc = "An elegant weapon, its tiny edge is capable of cutting through flesh and bone with ease."
@@ -443,7 +459,7 @@
 	name = "claws"
 	icon_state = "gangrel"
 	w_class = WEIGHT_CLASS_BULKY
-	force = 6
+	force = 10
 	armour_penetration = 100	//It's magical damage
 	block_chance = 20
 	item_flags = DROPDEL
@@ -455,11 +471,11 @@
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		L.apply_damage(8, CLONE)
+		L.apply_damage(10, CLONE)
 
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"
-	force = 7
+	force = 10
 	armour_penetration = 100
 	block_chance = 0
 	icon_state = "lasombra"
@@ -470,8 +486,8 @@
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		L.apply_damage(8, CLONE)
-		L.apply_damage(8, BURN)
+		L.apply_damage(10, BURN)
+		L.apply_damage(10, CLONE)
 
 /obj/item/melee/touch_attack/werewolf
 	name = "\improper falling touch"
@@ -836,5 +852,4 @@
 		sharpness = SHARP_NONE
 		grid_width = 2 GRID_BOXES
 		grid_height = 1 GRID_BOXES
-
 

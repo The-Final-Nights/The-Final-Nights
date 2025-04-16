@@ -701,9 +701,6 @@
 /obj/machinery/microwave{
 	pixel_y = 5
 	},
-/obj/item/book/manual/wiki/barman_recipes{
-	pixel_x = -8
-	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
