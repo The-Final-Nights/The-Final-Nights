@@ -107,7 +107,7 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		to_chat(owner, span_warning("You awaken a chorus of horrors in [target]'s mind!"))
-		to_chat(target, "<span class='userdanger'><b>There’s something here. Watching. Whispering.</b></span>")
+		to_chat(target, span_warning("There’s something here. Watching. Whispering."))
 
 		target.hallucination += 50
 		new /datum/hallucination/oh_yeah(target, TRUE)
