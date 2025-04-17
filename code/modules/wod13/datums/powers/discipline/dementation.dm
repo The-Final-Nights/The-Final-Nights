@@ -346,21 +346,33 @@
 	. = ..()
 
 	if(total_insanity_succeeded)
-		target.remove_overlay(MUTATIONS_LAYER)
-		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
-		dementation_overlay.pixel_z = 1
-		target.overlays_standing[MUTATIONS_LAYER] = dementation_overlay
-		target.apply_overlay(MUTATIONS_LAYER)
+		start_total_insanity_effect(target)
+		addtimer(CALLBACK(/proc/stop_total_insanity_effect, target), 20 SECONDS) 
 
 		to_chat(owner, span_warning("You unravel [target]'s sanity, leaving them in a state of uncontrollable mania!"))
 		to_chat(target, span_danger("Reality fractures and collapses around you. You lash out blindly, unsure what’s real."))
-
-		var/datum/total_insanity_attack_self = CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command)
-		for(var/i in 1 to 20)
-			addtimer(total_insanity_attack_self, i * 1.5 SECONDS)
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))
+
+// Start the Total Insanity effect
+/proc/start_total_insanity_effect(mob/living/carbon/human/target)
+	if(!target) return
+
+	target.remove_overlay(MUTATIONS_LAYER)
+	var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
+	dementation_overlay.pixel_z = 1
+	target.overlays_standing[MUTATIONS_LAYER] = dementation_overlay
+	target.apply_overlay(MUTATIONS_LAYER)
+
+	// Repeated "attack self" behavior over time
+	for(var/i in 1 to 20)
+		addtimer(CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command), i * 1.5 SECONDS)
+
+/proc/stop_total_insanity_effect(mob/living/carbon/human/target)
+	if(!target) return
+
+	target.remove_overlay(MUTATIONS_LAYER)
 
 /datum/discipline_power/dementation/total_insanity/deactivate(mob/living/carbon/human/target)
 	. = ..()
