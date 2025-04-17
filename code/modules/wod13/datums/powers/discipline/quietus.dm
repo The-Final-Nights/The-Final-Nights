@@ -133,8 +133,8 @@
 	. = ..()
 	if(!target.quieted)
 		target.quieted = TRUE
-		target.armour_penetration = min(100, target.armour_penetration+30)
-		target.force += 20
+		target.armour_penetration = min(70, target.armour_penetration+15)
+		target.force += 10
 		target.color = "#72b27c"
 		target.owner = WEAKREF(src.owner)
 
