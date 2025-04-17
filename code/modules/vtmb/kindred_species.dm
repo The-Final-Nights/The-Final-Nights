@@ -737,7 +737,7 @@
 	if (student.stat >= SOFT_CRIT)
 		to_chat(teacher, span_warning("Your student needs to be conscious!"))
 		return
-	if (teacher_prefs.true_experience < 100)
+	if (teacher_prefs.player_experience < 100)
 		to_chat(teacher, span_warning("You don't have enough experience to teach them this Discipline!"))
 		return
 	//checks that the teacher has blood bonded the student, this is something that needs to be reworked when blood bonds are made better
@@ -784,7 +784,7 @@
 
 		visible_message(span_notice("[teacher] begins mentoring [student] in [giving_discipline]."))
 		if (do_after(teacher, 30 SECONDS, student))
-			teacher_prefs.true_experience -= 100
+			teacher_prefs.player_experience -= 100
 
 			student_prefs.discipline_types += teaching_discipline
 			student_prefs.discipline_levels += 0

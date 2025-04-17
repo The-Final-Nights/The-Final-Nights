@@ -7,6 +7,7 @@
 #define MUTE_ADMINHELP	(1<<3)
 #define MUTE_DEADCHAT	(1<<4)
 #define MUTE_MHELP		(1<<5)
+#define MUTE_INTERNET_REQUEST (1<<6)
 #define MUTE_ALL		(~0)
 
 //Some constants for DB_Ban
@@ -74,6 +75,8 @@
 #define ADMIN_LUAVIEW_CHUNK(state, log_index) "(<a href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];lua_state=[REF(state)];log_index=[log_index]'>VIEW CODE</a>)"
 /// Displays "(SHOW)" in the chat, when clicked it tries to show atom(paper). First you need to set the request_state variable to TRUE for the paper.
 #define ADMIN_SHOW_PAPER(atom) "(<A href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];show_paper=[REF(atom)]'>SHOW</a>)"
+/// Displays "(PLAY)" in the chat, when clicked it tries to play internet sounds from the request.
+#define ADMIN_PLAY_INTERNET(text, credit) "(<A href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];play_internet=[url_encode(text)];credit=[credit]'>PLAY</a>)"
 
 /atom/proc/Admin_Coordinates_Readable(area_name, admin_jump_ref)
 	var/turf/T = Safe_COORD_Location()
@@ -160,3 +163,7 @@ GLOBAL_VAR_INIT(ghost_role_flags, (~0))
 
 /// When passed in as the duration for ban_panel, will make the ban default to permanent
 #define BAN_PANEL_PERMANENT "permanent"
+
+/// Used in logging uses of admin verbs (and sometimes some non-admin or debug verbs) to the blackbox
+/// Only pass it a string key, the verb being used.
+#define BLACKBOX_LOG_ADMIN_VERB(the_verb) SSblackbox.record_feedback("tally", "admin_verb", 1, the_verb)

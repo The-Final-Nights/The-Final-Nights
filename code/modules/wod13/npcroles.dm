@@ -1161,6 +1161,12 @@
 	max_stat = 4
 	my_backup_weapon_type = /obj/item/melee/classic_baton/vampire
 
+/mob/living/carbon/human/npc/police/static
+	fights_anyway = TRUE
+	staying = TRUE
+	max_stat = 4
+	my_backup_weapon_type = /obj/item/melee/classic_baton/vampire
+
 /mob/living/carbon/human/npc/police/Initialize()
 	. = ..()
 	if(prob(66))
@@ -1286,7 +1292,7 @@
 			for(var/obj/machinery/jukebox/J in range(5, src))
 				if(J)
 					hasjukebox = TRUE
-					if(J.active)
+					if(J.music_player)
 						if(prob(50))
 							dancefirst(src)
 						else

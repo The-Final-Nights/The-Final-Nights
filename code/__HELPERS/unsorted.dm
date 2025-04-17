@@ -412,17 +412,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 		var/atom/A = .[++i]
 		. += A.contents
 
-///identical to getallcontents but returns a list of atoms of the type passed in the argument.
-/atom/proc/get_all_contents_type(type)
-	var/list/processing_list = list(src)
-	. = list()
-	while(length(processing_list))
-		var/atom/A = processing_list[1]
-		processing_list.Cut(1, 2)
-		processing_list += A.contents
-		if(istype(A, type))
-			. += A
-
 /atom/proc/GetAllContentsIgnoring(list/ignore_typecache)
 	if(!length(ignore_typecache))
 		return GetAllContents()

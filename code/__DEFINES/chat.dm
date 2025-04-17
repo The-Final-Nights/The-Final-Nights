@@ -20,6 +20,7 @@
 #define MESSAGE_TYPE_MENTORPM "mentorpm"
 #define MESSAGE_TYPE_COMBAT "combat"
 #define MESSAGE_TYPE_ADMINCHAT "adminchat"
+#define MESSAGE_TYPE_PRAYER "prayer"
 #define MESSAGE_TYPE_MODCHAT "modchat"
 #define MESSAGE_TYPE_EVENTCHAT "eventchat"
 #define MESSAGE_TYPE_ADMINLOG "adminlog"

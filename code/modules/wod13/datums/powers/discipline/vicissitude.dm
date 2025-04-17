@@ -220,10 +220,10 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_wall)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_stool)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor)
-	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_eyes)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_implant)
 
+	// owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living) (Commented out because crafting it resulted in the crafting icon in tgui to go infinitely and stop the crafting menu from working)
 
 
 //BONECRAFTING
