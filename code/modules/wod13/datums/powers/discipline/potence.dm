@@ -13,7 +13,9 @@
 
 /datum/discipline/potence/post_gain()
 	. = ..()
-	owner.additional_physique += (1 * level)
+	owner.dna.species.punchdamagelow += (3 * level)
+	owner.dna.species.punchdamagehigh += (3 * level)
+	owner.dna.species.meleemod += (0.2 * level)
 
 //POTENCE 1
 /datum/discipline_power/potence/one
