@@ -5134,12 +5134,6 @@
 /obj/structure/railing,
 /turf/open/floor/plating/vampwood,
 /area/vtm/northbeach)
-"bsX" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 8
-	},
-/turf/open/floor/plasteel/stairs,
-/area/vtm/anarch)
 "btl" = (
 /obj/structure/coclock/grandpa{
 	pixel_y = 12
@@ -40139,9 +40133,6 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/fishermanswharf)
 "ldO" = (
-/obj/machinery/light{
-	pixel_y = 32
-	},
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -45373,9 +45364,6 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto/old)
 "mEk" = (
-/obj/machinery/light{
-	dir = 8
-	},
 /obj/effect/turf_decal/siding/white{
 	dir = 9
 	},
@@ -45383,6 +45371,10 @@
 	dir = 1;
 	layer = 4;
 	pixel_y = 12
+	},
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_x = -16
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch)
@@ -52032,9 +52024,6 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
 "otn" = (
-/obj/machinery/light{
-	pixel_y = 32
-	},
 /obj/effect/decal/graffiti{
 	icon_state = "graffiti12"
 	},
@@ -170830,14 +170819,14 @@ aFq
 aOU
 aOU
 iSy
-kGg
+xAI
 ldO
 pMC
 mEk
 rza
 rza
 rza
-bsX
+fLm
 pzL
 vRT
 bGN
@@ -172372,7 +172361,7 @@ eYu
 aSF
 aOU
 iSy
-kGg
+xAI
 otn
 pMC
 gNl
