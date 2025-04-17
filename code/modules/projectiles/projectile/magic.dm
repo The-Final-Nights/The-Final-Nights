@@ -684,7 +684,7 @@
 	damage = 25
 	damage_type = CLONE
 
-obj/projectile/magic/aoe/fireball/baali/on_hit(target)
+/obj/projectile/magic/aoe/fireball/baali/on_hit(target)
 	. = ..()
 	var/obj/effect/fire/created_fire = new(get_turf(target)) // Creates fire object on the hit if successfully landed
 	created_fire.color = src.color

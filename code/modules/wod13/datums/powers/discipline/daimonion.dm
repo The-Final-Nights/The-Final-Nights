@@ -51,7 +51,7 @@
 //FEAR OF THE VOID BELOW
 /datum/discipline_power/daimonion/fear_of_the_void_below
 	name = "Fear of the Void Below"
-	desc = "Induce fear in a target.."
+	desc = "Induce fear in a target."
 
 	level = 2
 	check_flags = DISC_CHECK_CONSCIOUS
@@ -71,7 +71,7 @@
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/activate(mob/living/carbon/human/target)
 	. = ..()
-	to_chat(target, "<span class='warning'><b>Your mind is enveloped by your greatest fear!</span></b>")
+	to_chat(target, span_warning("Your mind is enveloped by your greatest fear!"))
 	if(!target.in_frenzy) // Cause target to frenzy
 		target.enter_frenzymod()
 		target.Paralyze(3 SECONDS)
@@ -145,13 +145,13 @@
 
 /datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
-	to_chat(target, "<span class='warning'><b>You hear an infernal laugh!</span></b>")
+	to_chat(target, span_boldwarning("You hear an infernal laugh!"))
 	new /datum/hallucination/baali(target, TRUE)
 
 //CONDEMNTATION
 /datum/discipline_power/daimonion/condemnation
 	name = "Condemnation"
-	desc = "Condemn a fool to suffering."
+	desc = "Condemn a soul to suffering."
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
@@ -164,19 +164,19 @@
 
 /datum/discipline_power/daimonion/condemnation/activate(mob/living/target)
 	. = ..()
-	if(GLOB.cursed_characters.len == 0 || GLOB.cursed_characters.len > 0 && !(GLOB.cursed_characters.Find(target)))
+	if(LAZYLEN(GLOB.cursed_characters) == 0 || LAZYLEN(GLOB.cursed_characters) > 0 && !(GLOB.cursed_characters.Find(target)))
 		for(var/i in subtypesof(/datum/curse/daimonion))
 			var/datum/curse/daimonion/D = new i
 			curses += D
 			if(owner.generation <= D.genrequired)
 				curse_names += initial(D.name)
-		to_chat(owner, "<span class='userdanger'><b>The greatest of curses come with the greatest of costs. Are you willing to take the risk of total damnation?</b></span>")
-		var/chosencurse = input(owner, "Pick a curse to bestow:", "Daimonion") as null|anything in curse_names
+		to_chat(owner, span_userdanger("The greatest of curses come with the greatest of costs. Are you willing to take the risk of total damnation?"))
+		var/chosencurse = tgui_input_list(owner, "Pick a curse to bestow:", "Daimonion", curse_names)
 		if(chosencurse)
 			for(var/datum/curse/daimonion/C in curses)
 				if(C.name == chosencurse)
 					C.activate(target)
 					owner.cursed_bloodpool += C.bloodcurse
 	else
-		to_chat(owner, "<span class='warning'>This one is already cursed!</span>")
+		to_chat(owner, span_warning("This one is already cursed!"))
 
