@@ -447,7 +447,7 @@ SUBSYSTEM_DEF(ticker)
 			to_chat(NP, "<span class='userdanger'>The alive players limit has been released!<br><a href='byond://?src=[REF(NP)];late_join=override'>[html_encode(">>Join Game<<")]</a></span>")
 			SEND_SOUND(NP, sound('sound/misc/notice1.ogg'))
 			NP.LateChoices()
-		length(queued_players) = 0
+		queued_players.len = 0
 		queue_delay = 0
 		return
 
