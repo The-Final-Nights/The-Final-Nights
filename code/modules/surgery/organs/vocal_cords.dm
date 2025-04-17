@@ -147,7 +147,6 @@
 		if(L.can_hear() && !L.anti_magic_check(FALSE, TRUE) && L.stat != DEAD)
 			var/dominate_me = FALSE
 			var/conditioner
-			var/conditioned = FALSE
 
 			if(L == user && !include_speaker)
 				continue
@@ -155,8 +154,7 @@
 			if(ishuman(L))
 				var/mob/living/carbon/human/H = L
 				conditioner = H.conditioner?.resolve()
-				conditioned = H.conditioned
-				if(H.clane && H.clane.name == "Gargoyle")
+				if(H.clane?.name == "Gargoyle")
 					dominate_me = TRUE
 				if(istype(H.ears, /obj/item/clothing/ears/earmuffs))
 					continue
@@ -167,7 +165,7 @@
 			var/mypower = SSroll.storyteller_roll(user.get_total_social(), difficulty = 6, mobs_to_show_output = user, numerical = 1)
 			var/theirpower = SSroll.storyteller_roll(L.get_total_mentality(), difficulty = 6, mobs_to_show_output = L, numerical = 1)
 
-			if(conditioned && user != conditioner)
+			if(conditioner && user != conditioner)
 				theirpower += 3
 
 			if(user != conditioner)

@@ -109,14 +109,19 @@
 	var/tmp/command_succeeded = FALSE
 
 /datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
 			command_succeeded = TRUE
 			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
 	if(mypower > theirpower && owner.generation <= target.generation)
 		command_succeeded = TRUE
@@ -157,14 +162,19 @@
 	var/tmp/mesmerize_succeeded = FALSE
 
 /datum/discipline_power/dominate/mesmerize/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
 			mesmerize_succeeded = TRUE
 			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
 	if(mypower > theirpower && owner.generation <= target.generation)
 		mesmerize_succeeded = TRUE
@@ -208,14 +218,19 @@
 	var/tmp/the_forgetful_mind_succeeded = FALSE
 
 /datum/discipline_power/dominate/the_forgetful_mind/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
 			the_forgetful_mind_succeeded = TRUE
 			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
 	if(mypower > theirpower && owner.generation <= target.generation)
 		the_forgetful_mind_succeeded = TRUE
@@ -257,6 +272,7 @@
 	var/tmp/conditioning_succeeded = FALSE
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
+
 	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 	if(owner == conditioner)
 		to_chat(owner, span_warning("[target]'s mind is already under my sway!"))
@@ -265,14 +281,18 @@
 		to_chat(owner, span_warning("[target]'s mind appears to already be under someone else's sway!"))
 		return FALSE
 
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
 			conditioning_succeeded = TRUE
 			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
 	if(mypower > theirpower && owner.generation <= target.generation)
 		conditioning_succeeded = TRUE
@@ -317,14 +337,19 @@
 
 
 /datum/discipline_power/dominate/possession/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
+		
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clane?.name == "Gargoyle")
 			possession_succeeded = TRUE
 			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
 	if(mypower > theirpower && owner.generation <= target.generation)
 		possession_succeeded = TRUE

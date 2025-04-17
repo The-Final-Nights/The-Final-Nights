@@ -35,7 +35,7 @@
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower))
+	if(mypower > theirpower)
 		passion_succeeded = TRUE
 	else
 		passion_succeeded = FALSE
@@ -89,7 +89,7 @@
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower))
+	if(mypower > theirpower)
 		the_haunting_succeeded = TRUE
 	else
 		the_haunting_succeeded = FALSE
@@ -139,7 +139,7 @@
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower))
+	if(mypower > theirpower)
 		eyes_of_chaos_succeeded = TRUE
 	else
 		eyes_of_chaos_succeeded = FALSE
@@ -284,7 +284,7 @@
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower))
+	if(mypower > theirpower)
 		voice_of_madness_succeeded = TRUE
 	else
 		voice_of_madness_succeeded = FALSE
@@ -335,7 +335,7 @@
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower))
+	if(mypower > theirpower)
 		total_insanity_succeeded = TRUE
 	else
 		total_insanity_succeeded = FALSE
@@ -355,9 +355,9 @@
 		to_chat(owner, span_warning("You unravel [target]'s sanity, leaving them in a state of uncontrollable mania!"))
 		to_chat(target, span_danger("Reality fractures and collapses around you. You lash out blindly, unsure what’s real."))
 
-		var/datum/cb = CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command)
+		var/datum/total_insanity_attack_self = CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command)
 		for(var/i in 1 to 20)
-			addtimer(cb, (i - 1) * 1.5 SECONDS)
+			addtimer(total_insanity_attack_self, i * 1.5 SECONDS)
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))

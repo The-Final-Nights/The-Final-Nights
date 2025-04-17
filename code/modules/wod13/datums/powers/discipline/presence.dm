@@ -50,7 +50,7 @@
 
 		target.apply_status_effect(STATUS_EFFECT_AWE, owner)
 		to_chat(owner, span_warning("You've enthralled [target] with your commanding aura!"))
-		to_chat(target, "<span class='userlove'><b>COME HERE</b></span>")
+		to_chat(target, span_userlove("COME HERE"))
 		owner.say("Come here.")
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
@@ -105,7 +105,7 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		target.Stun(1 SECONDS)
-		to_chat(target, "<span class='userlove'><b>REST</b></span>")
+		to_chat(target, span_userlove("REST"))
 		to_chat(owner, span_warning("You've enthralled [target] with your commanding aura!"))
 		owner.say("REST!!")
 		if(target.body_position == STANDING_UP)
@@ -159,7 +159,7 @@
 		var/obj/item/I2 = target.get_inactive_held_item()
 
 		to_chat(owner, span_warning("You've enthralled [target] with your commanding aura!"))
-		to_chat(target, "<span class='userlove'><b>PLEASE ME</b></span>")
+		to_chat(target, span_userlove("PLEASE ME"))
 		owner.say("PLEASE ME!!")
 
 		target.face_atom(owner)
@@ -216,7 +216,7 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		to_chat(owner, span_warning("You've compelled [target] to heed your presence!"))
-		to_chat(target, "<span class='userlove'><b>FEAR ME</b></span>")
+		to_chat(target, span_userlove("FEAR ME"))
 		owner.say("FEAR ME!!")
 
 		var/datum/cb = CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
@@ -277,7 +277,7 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		to_chat(owner, span_warning("You've overwhelmed [target] with your majestic aura!"))
-		to_chat(target, "<span class='userlove'><b>UNDRESS YOURSELF</b></span>")
+		to_chat(target, span_userlove("UNDRESS YOURSELF"))
 		owner.say("UNDRESS YOURSELF!!")
 		target.Immobilize(1 SECONDS)
 		for(var/obj/item/clothing/W in target.contents)
