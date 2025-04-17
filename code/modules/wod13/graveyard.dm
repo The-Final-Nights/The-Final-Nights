@@ -44,6 +44,7 @@ SUBSYSTEM_DEF(graveyard)
 					if(L.mind.assigned_role == "Graveyard Keeper")
 						if(L.client && L.key)
 							total_good += 1
+
 /obj/vampgrave
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "grave1"

@@ -52,6 +52,9 @@
 
 /datum/config_entry/flag/log_access	// log login/logout
 
+/// Config entry which special logging of failed logins under suspicious circumstances.
+/datum/config_entry/flag/log_suspicious_login
+
 /datum/config_entry/flag/log_say	// log client say
 
 /datum/config_entry/flag/log_admin	// log admin actions
@@ -59,7 +62,20 @@
 
 /datum/config_entry/flag/log_prayer	// log prayers
 
-/datum/config_entry/flag/log_law	// log lawchanges
+///Log Music Requests
+/datum/config_entry/flag/log_internet_request
+
+/// log silicons
+/datum/config_entry/flag/log_silicon
+
+/datum/config_entry/flag/log_law
+	deprecated_by = /datum/config_entry/flag/log_silicon
+
+/datum/config_entry/flag/log_law/DeprecationUpdate(value)
+	return value
+
+/// log usage of tools
+/datum/config_entry/flag/log_tools
 
 /datum/config_entry/flag/log_game	// log game events
 
@@ -67,11 +83,15 @@
 
 /datum/config_entry/flag/log_virus	// log virology data
 
-/datum/config_entry/flag/log_cloning // log cloning actions.
+/datum/config_entry/flag/log_asset
 
 /datum/config_entry/flag/log_vote	// log voting
 
 /datum/config_entry/flag/log_whisper	// log client whisper
+
+/datum/config_entry/flag/log_subtle
+
+/datum/config_entry/flag/log_subtler
 
 /datum/config_entry/flag/log_attack	// log attack messages
 
@@ -82,6 +102,8 @@
 /datum/config_entry/flag/log_subtler  // TFN EDIT: log subtler emotes
 // TFN EDIT ADDITION END
 /datum/config_entry/flag/log_econ	// log economy actions
+
+/datum/config_entry/flag/log_traitor /// log traitor objectives
 
 /datum/config_entry/flag/log_adminchat	// log admin chat messages
 	protection = CONFIG_ENTRY_LOCKED
@@ -96,6 +118,9 @@
 /// log speech indicators(started/stopped speaking)
 /datum/config_entry/flag/log_speech_indicators
 
+/// log speech indicators(started/stopped speaking)
+/datum/config_entry/flag/log_speech_indicators
+
 /datum/config_entry/flag/log_twitter	// log certain expliotable parrots and other such fun things in a JSON file of twitter valid phrases.
 
 /datum/config_entry/flag/log_world_topic	// log all world.Topic() calls
@@ -106,11 +131,16 @@
 
 /datum/config_entry/flag/log_shuttle // log shuttle related actions, ie shuttle computers, shuttle manipulator, emergency console
 
-/datum/config_entry/flag/allow_admin_ooccolor	// Allows admins with relevant permissions to have their own ooc colour
-
 /datum/config_entry/flag/allow_admin_asaycolor //Allows admins with relevant permissions to have a personalized asay color
 
 /datum/config_entry/flag/allow_vote_restart	// allow votes to restart
+
+/// Log human readable versions of json log entries
+/datum/config_entry/flag/log_as_human_readable
+	default = TRUE
+
+/// allows admins with relevant permissions to have their own ooc colour
+/datum/config_entry/flag/allow_admin_ooccolor
 
 /datum/config_entry/flag/allow_vote_mode	// allow votes to change mode
 
@@ -510,6 +540,28 @@
 /datum/config_entry/string/centcom_ban_db	// URL for the CentCom Galactic Ban DB API
 
 /datum/config_entry/string/centcom_source_whitelist
+
+/datum/config_entry/number/urgent_ahelp_cooldown
+	default = 300
+
+/datum/config_entry/string/urgent_ahelp_message
+	default = "This ahelp is urgent!"
+
+/datum/config_entry/string/ahelp_message
+	default = ""
+
+/datum/config_entry/string/urgent_ahelp_user_prompt
+	default = "There are no admins currently on. Do not press the button below if your ahelp is a joke, a request or a question. Use it only for cases of obvious grief."
+
+/datum/config_entry/string/urgent_adminhelp_webhook_url
+
+/datum/config_entry/string/regular_adminhelp_webhook_url
+
+/datum/config_entry/string/adminhelp_webhook_pfp
+
+/datum/config_entry/string/adminhelp_webhook_name
+
+/datum/config_entry/string/adminhelp_ahelp_link
 
 /**
  * Tgui ui_act payloads larger than 2kb are split into chunks a maximum of 1kb in size.

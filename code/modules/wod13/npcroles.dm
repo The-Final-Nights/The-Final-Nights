@@ -1161,6 +1161,12 @@
 	max_stat = 4
 	my_backup_weapon_type = /obj/item/melee/classic_baton/vampire
 
+/mob/living/carbon/human/npc/police/static
+	fights_anyway = TRUE
+	staying = TRUE
+	max_stat = 4
+	my_backup_weapon_type = /obj/item/melee/classic_baton/vampire
+
 /mob/living/carbon/human/npc/police/Initialize()
 	. = ..()
 	if(prob(66))
