@@ -253,8 +253,8 @@
 	if(iscarbon(target))
 		new /obj/effect/temp_visual/tremere(target.loc, "gib")
 		animate(target, pixel_y = 16, color = "#ff0000", time = 5 SECONDS, loop = 1)
-		spawn(5 SECONDS)
-			animate(target, color = null, pixel_y = 0, time = 5 SECONDS, loop = 1)
+		addtimer(CALLBACK(src, /datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/reset_target_appearance, target), 5 SECONDS)
+
 
 		target.visible_message(span_danger("[target] reddens and quakes!"), span_userdanger("Your veins feel like they're on fire!"))
 
@@ -262,44 +262,19 @@
 		var/successes = SSroll.storyteller_roll(dice, difficulty = 5, mobs_to_show_output = target, numerical = TRUE)
 
 		if(successes <= 1)
-			// All stages (fails completely)
-			target.Stun(2.5 SECONDS)
-			target.apply_damage(20, BURN, owner.zone_selected)
-			target.emote("twitch")
-			target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
-			sleep(2.5 SECONDS)
-
-			target.apply_damage(20, BURN, owner.zone_selected)
-			target.emote("scream")
-			target.emote("twitch")
-			target.visible_message(span_warning("[target] howls in agony, their whole body convulsing!"), span_userdanger("You scream in anguish as your blood boils!"))
-			sleep(2.5 SECONDS)
-
-			target.Stun(2.5 SECONDS)
-			target.apply_damage(30, BURN, owner.zone_selected)
-			target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
-			target.emote("collapse")
-			target.toggle_resting()
+			// All stages (fail completely)
+			addtimer(CALLBACK(src, .proc/blood_burn_stage1, target), 0)
+			addtimer(CALLBACK(src, .proc/blood_burn_stage2, target), 2.5 SECONDS)
+			addtimer(CALLBACK(src, .proc/blood_burn_stage3, target), 5 SECONDS)
 
 		else if(successes == 2)
 			// Stages 1 & 2
-			target.Stun(2.5 SECONDS)
-			target.apply_damage(20, BURN, owner.zone_selected)
-			target.emote("twitch")
-			target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
-			sleep(2.5 SECONDS)
-
-			target.apply_damage(20, BURN, owner.zone_selected)
-			target.emote("scream")
-			target.emote("twitch")
-			target.visible_message(span_warning("[target] howls in agony, their whole body convulsing!"), span_userdanger("You scream in anguish as your blood boils!"))
+			addtimer(CALLBACK(src, .proc/blood_burn_stage1, target), 0)
+			addtimer(CALLBACK(src, .proc/blood_burn_stage2, target), 2.5 SECONDS)
 
 		else if(successes == 3)
 			// Stage 1 only
-			target.Stun(2.5 SECONDS)
-			target.apply_damage(20, BURN, owner.zone_selected)
-			target.emote("twitch")
-			target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
+			addtimer(CALLBACK(src, .proc/blood_burn_stage1, target), 0)
 
 		else
 			// Resisted completely
@@ -309,6 +284,28 @@
 		owner.bloodpool = min(owner.bloodpool + target.bloodpool, owner.maxbloodpool)
 		if(!istype(target, /mob/living/simple_animal/hostile/megafauna))
 			target.tremere_gib()
+
+/datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/blood_burn_stage1(mob/living/target)
+	if(!target) return
+	target.Stun(2.5 SECONDS)
+	target.apply_damage(20, BURN, owner.zone_selected)
+	target.emote("twitch")
+	target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
+
+/datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/blood_burn_stage2(mob/living/target)
+	if(!target) return
+	target.apply_damage(20, BURN, owner.zone_selected)
+	target.emote("scream")
+	target.emote("twitch")
+	target.visible_message(span_warning("[target] howls in agony, their whole body convulsing!"), span_userdanger("You scream in anguish as your blood boils!"))
+
+/datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/blood_burn_stage3(mob/living/target)
+	if(!target) return
+	target.Stun(2.5 SECONDS)
+	target.apply_damage(30, BURN, owner.zone_selected)
+	target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
+	target.emote("collapse")
+	target.toggle_resting()
 
 //MISCELLANEOUS BULLSHIT
 /datum/action/thaumaturgy
@@ -420,3 +417,7 @@
 			owner.physiology.armor.bullet = owner.physiology.armor.bullet-(15*mod)
 			owner.color = initial(owner.color)
 */
+
+/datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/reset_target_appearance(mob/living/target)
+	if(!target) return
+	animate(target, pixel_y = 0, color = null)
