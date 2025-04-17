@@ -19,33 +19,23 @@
 
 	level = 1
 
-	check_flags = DISC_CHECK_IMMOBILE | DISC_CHECK_CAPABLE
+	check_flags = DISC_CHECK_CONSCIOUS
+	vitae_cost = 0
+	violates_masquerade = FALSE
 
-	violates_masquerade = TRUE
-
-	cancelable = TRUE
-	duration_length = 20 SECONDS
-	cooldown_length = 20 SECONDS
-
-	grouped_powers = list(
-		/datum/discipline_power/protean/feral_claws,
-		/datum/discipline_power/protean/earth_meld,
-		/datum/discipline_power/protean/shape_of_the_beast,
-		/datum/discipline_power/protean/mist_form
-	)
+	toggled = TRUE
 
 /datum/discipline_power/protean/eyes_of_the_beast/activate()
 	. = ..()
-	owner.drop_all_held_items()
-	owner.put_in_r_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
-	owner.put_in_l_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
+	ADD_TRAIT(owner, TRAIT_PROTEAN_VISION, TRAIT_GENERIC)
 	owner.add_client_colour(/datum/client_colour/glass_colour/red)
+	owner.update_sight()
 
 /datum/discipline_power/protean/eyes_of_the_beast/deactivate()
 	. = ..()
-	for(var/obj/item/melee/vampirearms/knife/gangrel/G in owner.contents)
-		qdel(G)
+	REMOVE_TRAIT(owner, TRAIT_PROTEAN_VISION, TRAIT_GENERIC)
 	owner.remove_client_colour(/datum/client_colour/glass_colour/red)
+	owner.update_sight()
 
 //FERAL CLAWS
 /datum/movespeed_modifier/protean2
@@ -61,12 +51,10 @@
 
 	violates_masquerade = TRUE
 
-	cancelable = TRUE
-	duration_length = 20 SECONDS
-	cooldown_length = 20 SECONDS
+	toggled = TRUE
+	duration_length = 2 TURNS
 
 	grouped_powers = list(
-		/datum/discipline_power/protean/eyes_of_the_beast,
 		/datum/discipline_power/protean/earth_meld,
 		/datum/discipline_power/protean/shape_of_the_beast,
 		/datum/discipline_power/protean/mist_form
@@ -112,7 +100,6 @@
 	cooldown_length = 20 SECONDS
 
 	grouped_powers = list(
-		/datum/discipline_power/protean/eyes_of_the_beast,
 		/datum/discipline_power/protean/feral_claws,
 		/datum/discipline_power/protean/shape_of_the_beast,
 		/datum/discipline_power/protean/mist_form
@@ -152,7 +139,6 @@
 	cooldown_length = 20 SECONDS
 
 	grouped_powers = list(
-		/datum/discipline_power/protean/eyes_of_the_beast,
 		/datum/discipline_power/protean/feral_claws,
 		/datum/discipline_power/protean/earth_meld,
 		/datum/discipline_power/protean/mist_form
@@ -192,7 +178,6 @@
 	cooldown_length = 20 SECONDS
 
 	grouped_powers = list(
-		/datum/discipline_power/protean/eyes_of_the_beast,
 		/datum/discipline_power/protean/feral_claws,
 		/datum/discipline_power/protean/earth_meld,
 		/datum/discipline_power/protean/shape_of_the_beast

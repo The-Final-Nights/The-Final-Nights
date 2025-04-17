@@ -139,4 +139,3 @@
 
 	///The Examine Panel TGUI.
 	var/datum/examine_panel/tgui = new() //create the datum
-	
