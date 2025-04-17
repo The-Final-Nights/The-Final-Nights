@@ -323,11 +323,11 @@
 
 /obj/item/clothing/head/vampire/blackbag/attack(mob/living/target, mob/living/user)
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
-		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
+		to_chat(user, span_warning("Remove [target.p_their()] headgear first!"))
 		return
 	if(do_after(user, 0.5 SECONDS, target)) //Mainly to prevent black_bagging mid combat.
 		target.visible_message(span_warning("[user] forces [src] onto [target]'s head!"))
-		to_chat(target, span_bolddanger("[target] forces [src] onto your head!</span>"))
+		to_chat(target, span_bolddanger("[target] forces [src] onto your head!"))
 		target.emote("scream")
 		target.Stun(0.5 SECONDS)
 
