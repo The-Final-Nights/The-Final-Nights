@@ -13,9 +13,9 @@
 
 /datum/discipline/potence/post_gain()
 	. = ..()
-	owner.dna.species.punchdamagelow += (3 * level)
-	owner.dna.species.punchdamagehigh += (3 * level)
-	owner.dna.species.meleemod += (0.2 * level)
+	owner.dna.species.punchdamagelow += (1 * level)
+	owner.dna.species.punchdamagehigh += (1 * level)
+	owner.dna.species.meleemod += (0.1 * level)
 
 //POTENCE 1
 /datum/discipline_power/potence/one
@@ -42,6 +42,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 3, speed = 1, skill_mod = 0, min_distance = 0)
+	owner.dna.species.punchdamagelow += 2
+	owner.dna.species.punchdamagehigh += 2
+	owner.dna.species.meleemod += 0.1
 	owner.potential = 1
 	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
@@ -49,6 +52,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
 	owner.remove_overlay(POTENCE_LAYER)
+	owner.dna.species.punchdamagelow -= 2
+	owner.dna.species.punchdamagehigh -= 2
+	owner.dna.species.meleemod -= 0.1
 	owner.potential = 0
 	qdel(tackler)
 	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
@@ -79,6 +85,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 4, speed = 1, skill_mod = 0, min_distance = 0)
+	owner.dna.species.punchdamagelow += 4
+	owner.dna.species.punchdamagehigh += 4
+	owner.dna.species.meleemod += 0.2
 	owner.potential = 2
 	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
@@ -86,6 +95,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
 	owner.remove_overlay(POTENCE_LAYER)
+	owner.dna.species.punchdamagelow -= 4
+	owner.dna.species.punchdamagehigh -= 4
+	owner.dna.species.meleemod -= 0.2
 	owner.potential = 0
 	qdel(tackler)
 	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
@@ -115,6 +127,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 5, speed = 1, skill_mod = 0, min_distance = 0)
+	owner.dna.species.punchdamagelow += 6
+	owner.dna.species.punchdamagehigh += 6
+	owner.dna.species.meleemod += 0.3
 	owner.potential = 3
 	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
@@ -122,6 +137,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
 	owner.remove_overlay(POTENCE_LAYER)
+	owner.dna.species.punchdamagelow -= 6
+	owner.dna.species.punchdamagehigh -= 6
+	owner.dna.species.meleemod -= 0.3
 	owner.potential = 0
 	qdel(tackler)
 	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
@@ -151,6 +169,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 6, speed = 1, skill_mod = 0, min_distance = 0)
+	owner.dna.species.punchdamagelow += 8
+	owner.dna.species.punchdamagehigh += 8
+	owner.dna.species.meleemod += 0.4
 	owner.potential = 4
 	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
@@ -158,6 +179,9 @@
 	. = ..()
 	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
 	owner.remove_overlay(POTENCE_LAYER)
+	owner.dna.species.punchdamagelow -= 8
+	owner.dna.species.punchdamagehigh -= 8
+	owner.dna.species.meleemod -= 0.4
 	owner.potential = 0
 	qdel(tackler)
 	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
@@ -187,12 +211,18 @@
 	. = ..()
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 7, speed = 1, skill_mod = 0, min_distance = 0)
+	owner.dna.species.punchdamagelow += 10
+	owner.dna.species.punchdamagehigh += 10
+	owner.dna.species.meleemod += 0.5
 	owner.potential = 5
 	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 /datum/discipline_power/potence/five/deactivate()
 	. = ..()
 	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
+	owner.dna.species.punchdamagelow -= 10
+	owner.dna.species.punchdamagehigh -= 10
+	owner.dna.species.meleemod -= 0.5
 	owner.remove_overlay(POTENCE_LAYER)
 	owner.potential = 0
 	qdel(tackler)
