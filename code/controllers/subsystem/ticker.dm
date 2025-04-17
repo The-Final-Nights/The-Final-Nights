@@ -90,7 +90,7 @@ SUBSYSTEM_DEF(ticker)
 	for(var/S in provisional_title_music)
 		var/lower = lowertext(S)
 		var/list/L = splittext(lower,"+")
-		switch(L.len)
+		switch(length(L))
 			if(3) //rare+MAP+sound.ogg or MAP+rare.sound.ogg -- Rare Map-specific sounds
 				if(use_rare_music)
 					if(L[1] == "rare" && L[2] == SSmapping.config.map_name)
@@ -106,13 +106,13 @@ SUBSYSTEM_DEF(ticker)
 				music += S
 
 	var/old_login_music = trim(file2text("data/last_round_lobby_music.txt"))
-	if(music.len > 1)
+	if(length(music) > 1)
 		music -= old_login_music
 
 	for(var/S in music)
 		var/list/L = splittext(S,".")
-		if(L.len >= 2)
-			var/ext = lowertext(L[L.len]) //pick the real extension, no 'honk.ogg.exe' nonsense here
+		if(length(L) >= 2)
+			var/ext = lowertext(L[length(L)]) //pick the real extension, no 'honk.ogg.exe' nonsense here
 			if(byond_sound_formats[ext])
 				continue
 		music -= S
@@ -230,7 +230,7 @@ SUBSYSTEM_DEF(ticker)
 					mode = smode
 
 		if(!mode)
-			if(!runnable_modes.len)
+			if(!length(runnable_modes))
 				to_chat(world, "<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby.")
 				return FALSE
 			mode = pickweight(runnable_modes)
@@ -320,7 +320,7 @@ SUBSYSTEM_DEF(ticker)
 
 	var/list/adm = get_admin_counts()
 	var/list/allmins = adm["present"]
-	send2adminchat("Server", "Round [GLOB.round_id ? "#[GLOB.round_id]:" : "of"] [hide_mode ? "secret":"[mode.name]"] has started[allmins.len ? ".":" with no active admins online!"]")
+	send2adminchat("Server", "Round [GLOB.round_id ? "#[GLOB.round_id]:" : "of"] [hide_mode ? "secret":"[mode.name]"] has started[length(allmins) ? ".":" with no active admins online!"]")
 	setup_done = TRUE
 
 	for(var/i in GLOB.start_landmarks_list)
@@ -414,7 +414,7 @@ SUBSYSTEM_DEF(ticker)
 				S.Fade(TRUE)
 				living.client.init_verbs()
 			livings += living
-	if(livings.len)
+	if(length(livings))
 		addtimer(CALLBACK(src, PROC_REF(release_characters), livings), 30, TIMER_CLIENT_TIME)
 
 /datum/controller/subsystem/ticker/proc/release_characters(list/livings)
@@ -429,16 +429,16 @@ SUBSYSTEM_DEF(ticker)
 	else
 		var/list/randomtips = world.file2list("strings/tips.txt")
 		var/list/memetips = world.file2list("strings/sillytips.txt")
-		if(randomtips.len && prob(95))
+		if(length(randomtips) && prob(95))
 			m = pick(randomtips)
-		else if(memetips.len)
+		else if(length(memetips))
 			m = pick(memetips)
 
 	if(m)
 		to_chat(world, "<span class='purple'><b>Tip of the round: </b>[html_encode(m)]</span>")
 
 /datum/controller/subsystem/ticker/proc/check_queue()
-	if(!queued_players.len)
+	if(!length(queued_players))
 		return
 	var/hpc = CONFIG_GET(number/hard_popcap)
 	if(!hpc)
@@ -447,7 +447,7 @@ SUBSYSTEM_DEF(ticker)
 			to_chat(NP, "<span class='userdanger'>The alive players limit has been released!<br><a href='byond://?src=[REF(NP)];late_join=override'>[html_encode(">>Join Game<<")]</a></span>")
 			SEND_SOUND(NP, sound('sound/misc/notice1.ogg'))
 			NP.LateChoices()
-		queued_players.len = 0
+		length(queued_players) = 0
 		queue_delay = 0
 		return
 
@@ -692,5 +692,5 @@ SUBSYSTEM_DEF(ticker)
 
 	for(var/themes in reboot_sounds)
 		possible_themes += themes
-	if(possible_themes.len)
+	if(length(possible_themes))
 		return "[global.config.directory]/reboot_themes/[pick(possible_themes)]"
