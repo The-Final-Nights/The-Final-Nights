@@ -12,7 +12,6 @@
 /area/shuttle/escape/backup)
 "f" = (
 /obj/structure/table/wood,
-/obj/item/book/manual/random,
 /turf/open/floor/mineral/titanium,
 /area/shuttle/escape/backup)
 "g" = (
