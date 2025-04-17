@@ -83,7 +83,7 @@
 		speech = pick(malklines)
 	var/language = target.get_random_understood_language()
 	var/message = target.compose_message(speaker, language, speech)
-	target.playsound_local(target, pick(speech_sounds), vol = 60, vary = FALSE)
+	target.playsound_local(target, pick(speech_sounds), vol = 30, vary = FALSE)
 	if(target.client?.prefs?.chat_on_map)
 		target.create_chat_message(speaker, language, speech, spans = list(target.speech_span))
 	to_chat(target, message)

@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	/datum/hallucination/oh_yeah = 1
 	))
 
-GLOBAL_LIST_INIT(malk_hallucinations, list(
+/*GLOBAL_LIST_INIT(malk_hallucinations, list(
 	/datum/hallucination/malk/object = 100,
 	/datum/hallucination/message = 60,
 	/datum/hallucination/sounds = 50,
@@ -26,6 +26,29 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	/datum/hallucination/chat = 20,
 	/datum/hallucination/weird_sounds = 8,
 	/datum/hallucination/stray_bullet = 7,
+	/datum/hallucination/husks = 7,
+	/datum/hallucination/fire = 3,
+	))*/
+
+GLOBAL_LIST_INIT(malk_hallucinations, list(
+	/datum/hallucination/malk/gangstalker = 100,
+))
+
+
+GLOBAL_LIST_INIT(malk_hallucinations_extreme, list(
+	/datum/hallucination/malk/object = 100,
+	/datum/hallucination/message = 60,
+	/datum/hallucination/sounds = 50,
+	/datum/hallucination/malk/laugh = 20,
+	/datum/hallucination/battle = 20,
+	/datum/hallucination/chat = 20,
+	/datum/hallucination/weird_sounds = 8,
+	/datum/hallucination/stray_bullet = 7,
+	/datum/hallucination/husks = 7,
+	/datum/hallucination/fire = 3,
+	/datum/hallucination/shock = 1,
+	/datum/hallucination/death = 1,
+	/datum/hallucination/oh_yeah = 1
 	))
 
 //Tut nekotoroe runtime sret
@@ -577,7 +600,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	set waitfor = FALSE
 	. = ..()
 	var/image/A = null
-	var/kind = force_kind ? force_kind : pick("nothing","monkey","corgi","carp","skeleton","demon","zombie")
+	var/kind = force_kind ? force_kind : pick("nothing","monkey","corgi","carp","skeleton","demon","zombie", "repent", "kitty", "goblin", "shade", "troll")
 	feedback_details += "Type: [kind]"
 	var/list/nearby
 	if(skip_nearby)
@@ -607,8 +630,23 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 				A = image('icons/mob/human.dmi',H,"zombie")
 				A.name = "Zombie"
 			if("demon")//Demon
-				A = image('icons/mob/mob.dmi',H,"daemon")
+				A = image('icons/mob/mob.dmi',H,"gobimp")
 				A.name = "Demon"
+			if("repent")
+				A = image('code/modules/wod13/64x64.dmi',H,"cross")
+				A.name = "Our Sins"
+			if("kitty")
+				A = image('code/modules/wod13/mobs.dmi',H,"cattzi")
+				A.name = "A Pretty Kitty"
+			if("goblin")
+				A = image('code/modules/wod13/mobs.dmi',H,"goblin")
+				A.name = "Wretched Creecher"
+			if("shade")
+				A = image('code/modules/wod13/mobs.dmi',H,"shade")
+				A.name = "Interloper"
+			if("troll")
+				A = image('code/modules/wod13/64x64.dmi',H,"troll")
+				A.name = "???"
 			if("custom")
 				A = image(custom_icon_file, H, custom_icon)
 				A.name = custom_name
@@ -945,7 +983,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	..()
 	var/turf/source = random_far_turf()
 	if(!sound_type)
-		sound_type = pick("phone","hallelujah","canon","laughter","orthodox","spoopy","creepy","ante")
+		sound_type = pick("phone","hallelujah","laughter","orthodox","spoopy","creepy","ante")
 	feedback_details += "Type: [sound_type]"
 	//Strange audio
 	switch(sound_type)
@@ -957,8 +995,6 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			target.playsound_local(null, 'code/modules/wod13/sounds/orthodox_start.ogg', 75)
 		if("hallelujah")
 			target.playsound_local(source, 'code/modules/wod13/sounds/cross.ogg', 75)
-		if("canon")
-			target.playsound_local(null, 'code/modules/wod13/sounds/canon.ogg', 75)
 		if("spoopy")
 			target.playsound_local(source, 'code/modules/wod13/sounds/fuck.ogg', 50)
 		if("laughter")
@@ -1438,16 +1474,14 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	if(possible_points.len)
 		var/turf/open/floor/husk_point = pick(possible_points)
 		switch(rand(1,4))
-			if(1)
+			if(1, 2)
 				var/image/body = image('icons/mob/human.dmi',husk_point,"husk",TURF_LAYER)
 				var/matrix/M = matrix()
 				M.Turn(90)
 				body.transform = M
 				halbody = body
-			if(2,3)
+			if(3,4)
 				halbody = image('icons/mob/human.dmi',husk_point,"husk",TURF_LAYER)
-			if(4)
-				halbody = image('icons/mob/alien.dmi',husk_point,"alienother",TURF_LAYER)
 
 		if(target.client)
 			target.client.images += halbody
@@ -1458,7 +1492,110 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	QDEL_NULL(halbody)
 	return ..()
 
-//hallucination projectile code in code/modules/projectiles/projectile/special.dm
+/obj/effect/hallucination/simple/gangstalker/
+	image_icon = 'code/modules/wod13/mobs.dmi'
+	image_state = "gangstalker"
+
+/obj/effect/hallucination/simple/gangstalker/Initialize()
+	..()
+	if(prob(20))
+		image_state = "swat_melee"
+		name = "Sgt. Greysteel"
+	else if(prob(20))
+		image_icon = 'code/modules/wod13/werewolf.dmi'
+		image_state = "red"
+		name = "Big Red"
+	else
+		name = "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]"
+
+/datum/hallucination/malk/gangstalker/
+	var/obj/effect/hallucination/simple/gangstalker/gangstalker
+	var/turf/landing
+	var/turf/gangstalker_source
+	var/next_action = 0
+	var/attacked = 0
+	var/made_it = 0
+
+/datum/hallucination/malk/gangstalker/New(mob/living/carbon/C, forced = TRUE)
+	set waitfor = FALSE
+	. = ..()
+	to_chat(target, span_notice("gangstalker"))
+	var/obj/gangstalker_source_obj
+	for(var/obj/manholedown/manhawl in orange(8, target))
+		gangstalker_source_obj = manhawl
+		break
+	gangstalker_source = get_turf(gangstalker_source_obj)
+
+	if(!gangstalker_source)
+		return INITIALIZE_HINT_QDEL
+
+	feedback_details += "Source: [gangstalker_source.x],[gangstalker_source.y],[gangstalker_source.z]"
+
+	gangstalker = new(gangstalker_source, target)
+
+	landing = get_turf(target)
+
+	addtimer(CALLBACK(src, PROC_REF(start_processing)), 1 SECONDS)
+
+/datum/hallucination/malk/gangstalker/proc/start_processing()
+	if(isnull(target))
+		qdel(src)
+		return
+	START_PROCESSING(SSfastprocess, src)
+
+/datum/hallucination/malk/gangstalker/process(delta_time)
+	next_action -= delta_time
+	if(QDELETED(src))
+		return
+	if(QDELETED(gangstalker))
+		qdel(src)
+		return
+	if(!attacked)
+		if(get_turf(gangstalker) != landing && target?.stat != DEAD)
+
+			if(!landing || (get_turf(gangstalker)).loc.z != landing.loc.z)
+				qdel(src)
+				return
+
+			gangstalker.forceMove(get_step_towards(gangstalker, landing))
+			gangstalker.setDir(get_dir(gangstalker, landing))
+
+			if(gangstalker.Adjacent(target))
+				target.Paralyze(2 SECONDS)
+				target.adjustStaminaLoss(20)
+				step_away(target, gangstalker)
+
+				target.visible_message(
+					span_warning("[target] hits the deck with a dazed expression."),
+					span_userdanger("[gangstalker.name] clocks you in the head!")
+				)
+
+			next_action = 0.2
+		else
+			attacked = TRUE
+	else if(get_turf(gangstalker) != gangstalker_source && target?.stat != DEAD)
+
+		if(!gangstalker_source || (get_turf(gangstalker)).loc.z != gangstalker_source.loc.z)
+			qdel(src)
+			return
+
+		gangstalker.forceMove(get_step_towards(gangstalker, gangstalker_source))
+		gangstalker.setDir(get_dir(gangstalker, gangstalker_source))
+
+		if(gangstalker.Adjacent(gangstalker_source))
+			to_chat(target, span_notice("[gangstalker.name] begins lifting the manhole..."))
+			made_it = 1
+			STOP_PROCESSING(SSfastprocess, src)
+			QDEL_IN(src, 3 SECONDS)
+
+/datum/hallucination/malk/gangstalker/Destroy()
+
+	if(!QDELETED(gangstalker))
+		to_chat(target, span_notice("[gangstalker.name] scurries back into the sewers..."))
+	QDEL_NULL(gangstalker)
+	STOP_PROCESSING(SSfastprocess, src)
+	return ..()
+
 /datum/hallucination/stray_bullet
 
 /datum/hallucination/stray_bullet/New(mob/living/carbon/C, forced = TRUE)
@@ -1479,3 +1616,4 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	H.preparePixelProjectile(target, start)
 	H.fire()
 	qdel(src)
+
