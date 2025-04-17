@@ -2240,7 +2240,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		current_part.change_bodypart(species_part)
 
 /datum/species/proc/get_scream_sound(mob/living/carbon/human/human)
-	if(human.gender == MALE)
+	if(human.body_type == MALE)
 		if(prob(1))
 			return 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg'
 		return pick(
@@ -2261,7 +2261,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	)
 
 /datum/species/proc/get_cough_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return pick(
 			'sound/mobs/humanoids/human/cough/female_cough1.ogg',
 			'sound/mobs/humanoids/human/cough/female_cough2.ogg',
@@ -2280,7 +2280,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	)
 
 /datum/species/proc/get_cry_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return pick(
 			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
 			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
@@ -2293,12 +2293,12 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 
 /datum/species/proc/get_sneeze_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return 'sound/mobs/humanoids/human/sneeze/female_sneeze1.ogg'
 	return 'sound/mobs/humanoids/human/sneeze/male_sneeze1.ogg'
 
 /datum/species/proc/get_laugh_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return 'sound/mobs/humanoids/human/laugh/womanlaugh.ogg'
 	return pick(
 		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
@@ -2306,7 +2306,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	)
 
 /datum/species/proc/get_sigh_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return pick(
 				'sound/mobs/humanoids/human/sigh/female_sigh1.ogg',
 				'sound/mobs/humanoids/human/sigh/female_sigh2.ogg',
@@ -2319,14 +2319,26 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			)
 
 /datum/species/proc/get_sniff_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return 'sound/mobs/humanoids/human/sniff/female_sniff.ogg'
 	return 'sound/mobs/humanoids/human/sniff/male_sniff.ogg'
 
 /datum/species/proc/get_snore_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return "snore_female"
 	return "snore_male"
 
 /datum/species/proc/get_hiss_sound(mob/living/carbon/human/human)
 	return 'sound/mobs/humanoids/human/hiss/human_hiss.ogg'
+
+/datum/species/proc/get_giggle_sound(mob/living/carbon/human/human)
+	if(human.body_type == FEMALE)
+		return pick(
+				'sound/mobs/humanoids/human/giggle/female_giggle_1.ogg',
+				'sound/mobs/humanoids/human/giggle/female_giggle_2.ogg',
+			)
+	return pick(
+				'sound/mobs/humanoids/human/giggle/male_giggle_1.ogg',
+				'sound/mobs/humanoids/human/giggle/male_giggle_2.ogg',
+				'sound/mobs/humanoids/human/giggle/male_giggle_3.ogg',
+			)
