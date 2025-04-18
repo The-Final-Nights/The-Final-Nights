@@ -100,7 +100,7 @@
 	var/obj/projectile/magic/aoe/fireball/baali/created_fireball = new(start)
 	created_fireball.firer = owner
 	created_fireball.preparePixelProjectile(target, start)
-	created_fireball.fire(direct_target = target)
+	created_fireball.fire()
 
 /datum/discipline_power/daimonion/conflagration/deactivate()
 	. = ..()
