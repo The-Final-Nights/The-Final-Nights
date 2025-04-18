@@ -128,7 +128,7 @@
 			to_chat(owner, "[target] is shunned by most as it lacks a clan.")
 
 
-/datum/daimonion/proc/baali_get_stolen_disciplines(target, owner)
+/datum/discipline_power/daimonion/sense_the_sin/proc/baali_get_stolen_disciplines(target, owner)
 	if(!owner || !target)
 		return
 	var/mob/living/carbon/human/vampire = target
