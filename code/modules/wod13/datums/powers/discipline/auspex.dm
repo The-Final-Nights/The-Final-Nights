@@ -204,7 +204,7 @@
 
 /datum/discipline_power/auspex/telepathy/activate(mob/living/target)
 	. = ..()
-	var/input_message = tgui_input_text(owner, "What message will you project to them?")
+	var/input_message = tgui_input_text(owner, "What message will you project to them?", encode = FALSE)
 	if (!input_message)
 		return
 
