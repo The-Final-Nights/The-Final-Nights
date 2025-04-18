@@ -146,8 +146,6 @@
 			to_chat(owner, "[target] fears that the fact they stole Lasombra's Obtenebration will be known.")
 		if(clan.get_discipline("Dementation") && vampire.clane?.name != "Malkavian")
 			to_chat(owner, "[target] fears that the fact they stole Malkavian's Dementation will be known.")
-		if(clan.get_discipline("Thaumaturgy") && vampire.clane?.name != "Tremere" || clan.get_discipline("Thaumaturgy") && vampire.clane?.name != "Baali")
-			to_chat(owner, "[target] fears that the fact they stole Tremere's Thaumaturgy will be known.")
 		if(clan.get_discipline("Vicissitude") && vampire.clane?.name != "Tzimisce")
 			to_chat(owner, "[target] fears that the fact they stole Tzimisce's Vicissitude will be known.")
 		if(clan.get_discipline("Melpominee") && vampire.clane?.name != "Daughters of Cacophony")

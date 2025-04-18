@@ -12,22 +12,22 @@
 
 /datum/curse/daimonion/physical_weakness
 	name = "Baby Strength"
-	genrequired = 10
+	genrequired = 12
 	bloodcurse = 2
 
 /datum/curse/daimonion/mental_weakness
 	name = "Reap Mentality"
-	genrequired = 9
+	genrequired = 11
 	bloodcurse = 3
 
 /datum/curse/daimonion/offspring_weakness
 	name = "Sterile Vitae"
-	genrequired = 8
+	genrequired = 10
 	bloodcurse = 4
 
 /datum/curse/daimonion/success_weakness
 	name = "The Mark Of Doom"
-	genrequired = 7
+	genrequired = 19
 	bloodcurse = 5
 
 /datum/curse/daimonion/lying_weakness/activate(mob/living/carbon/human/target)
