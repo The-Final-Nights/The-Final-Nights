@@ -23,9 +23,6 @@
 		connected_mechpad.id = id
 		return INITIALIZE_HINT_LATELOAD
 	else
-<<<<<<< HEAD
-		id ="handmade"
-=======
 		id = "handmade[REF(src)]"
 
 /obj/machinery/computer/mechpad/proc/connect_launchpad(obj/machinery/mechpad/pad)
@@ -38,7 +35,6 @@
 /obj/machinery/computer/mechpad/proc/unconnect_launchpad(obj/machinery/mechpad/pad)
 	SIGNAL_HANDLER
 	connected_mechpad = null
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /obj/machinery/computer/mechpad/LateInitialize()
 	for(var/obj/machinery/mechpad/pad in GLOB.mechpad_list)
@@ -90,9 +86,6 @@
 			mechpads += buffered_console
 			LAZYADD(buffered_console.consoles, src)
 			multitool.buffer = null
-<<<<<<< HEAD
-			to_chat(user, "<span class='notice'>You upload the data from the [multitool.name]'s buffer.</span>")
-=======
 			to_chat(user, span_notice("You upload the data from the [multitool.name]'s buffer."))
 	return TRUE
 
@@ -104,7 +97,6 @@
 	SIGNAL_HANDLER
 	mechpads -= pad
 	UnregisterSignal(pad, COMSIG_QDELETING)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /**
  * Tries to call the launch proc on the connected mechpad, returns if there is no connected mechpad or there is no mecha on the pad

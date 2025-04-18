@@ -22,18 +22,11 @@
 	src.result_atom_type = result_atom_type
 
 	RegisterSignal(target, COMSIG_ATOM_TOOL_ACT(tool_behaviour), PROC_REF(try_process))
-<<<<<<< HEAD
-
-/datum/element/processable/Detach(datum/target)
-	. = ..()
-	UnregisterSignal(target, COMSIG_ATOM_TOOL_ACT(tool_behaviour))
-=======
 	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(OnExamine))
 
 /datum/element/processable/Detach(datum/target)
 	. = ..()
 	UnregisterSignal(target, list(COMSIG_ATOM_TOOL_ACT(tool_behaviour), COMSIG_ATOM_EXAMINE, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/element/processable/proc/try_process(datum/source, mob/living/user, obj/item/I, list/mutable_recipes)
 	SIGNAL_HANDLER

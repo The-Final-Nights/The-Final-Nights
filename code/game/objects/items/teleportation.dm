@@ -135,9 +135,6 @@
 	. = ..()
 
 /obj/item/hand_tele/attack_self(mob/user)
-<<<<<<< HEAD
-	var/turf/current_location = get_turf(user)//What turf is the user on?
-=======
 	if (!can_teleport_notifies(user))
 		return
 
@@ -243,7 +240,6 @@
 
 /obj/item/hand_tele/proc/can_teleport_notifies(mob/user)
 	var/turf/current_location = get_turf(user)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	var/area/current_area = current_location.loc
 	if(!current_location || (current_area.area_flags & NOTELEPORT) || is_away_level(current_location.z) || !isturf(user.loc))//If turf was not found or they're on z level 2 or >7 which does not currently exist. or if user is not located on a turf
 		to_chat(user, "<span class='notice'>\The [src] is malfunctioning.</span>")

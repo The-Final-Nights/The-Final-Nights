@@ -350,36 +350,6 @@
 
 /turf/open/floor/Exited(atom/movable/Obj, atom/newloc)
 	. = ..()
-<<<<<<< HEAD
-	/*
-	if(GLOB.winter)
-		if(istype(get_area(src), /area/vtm))
-			var/area/vtm/V = get_area(src)
-			if(V.upper)
-				if(isliving(Obj))
-					if(ishuman(Obj))
-						var/mob/living/carbon/human/human = Obj
-						if(human.body_position != LYING_DOWN)
-							var/obj/effect/decal/cleanable/feet_trail/trail = new(src)
-							trail.dir = get_dir(src, newloc)
-						else
-							var/obj/effect/decal/cleanable/drag_trail/trail = new(src)
-							trail.dir = get_dir(src, newloc)
-					else
-						var/mob/living/living = Obj
-						if(!living.stat)
-							var/obj/effect/decal/cleanable/feet_trail/trail = new(src)
-							trail.dir = get_dir(src, newloc)
-						else
-							var/obj/effect/decal/cleanable/drag_trail/trail = new(src)
-							trail.dir = get_dir(src, newloc)
-				if(istype(Obj, /obj/vampire_car))
-					var/obj/vampire_car/car = Obj
-					if(car.on)
-						var/obj/effect/decal/cleanable/car_trail/trail = new(src)
-						trail.dir = Obj.dir
-	*/
-=======
 	if(vname == NAMEOF(src, bite_sound))
 		update_ant_damage()
 
@@ -523,4 +493,3 @@
 	if(item.ignition_effect(src, user))
 		ignite()
 	return ..()
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

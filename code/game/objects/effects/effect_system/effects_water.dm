@@ -25,8 +25,6 @@
 		reagents.expose(A)
 	return ..()
 
-<<<<<<< HEAD
-=======
 ///Extinguisher snowflake
 /obj/effect/particle_effect/water/extinguisher
 
@@ -70,7 +68,6 @@
 	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_forcemove))
 	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(movement_stopped))
 	return loop
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /////////////////////////////////////////////
 // GENERIC STEAM SPREAD SYSTEM

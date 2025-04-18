@@ -31,9 +31,6 @@
 	. = ..()
 	saber_color = "green"
 
-<<<<<<< HEAD
-/obj/item/holo/esword/red/Initialize()
-=======
 /obj/item/melee/energy/sword/holographic/green
 	sword_color_icon = "green"
 
@@ -46,7 +43,6 @@
 /obj/item/toy/cards/deck/syndicate/holographic/Initialize(mapload, obj/machinery/computer/holodeck/holodeck)
 	src.holodeck = holodeck
 	RegisterSignal(src, COMSIG_QDELETING, PROC_REF(handle_card_delete))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	. = ..()
 	saber_color = "red"
 

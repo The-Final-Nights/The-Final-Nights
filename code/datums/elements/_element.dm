@@ -22,29 +22,19 @@
 	if(type == /datum/element)
 		return ELEMENT_INCOMPATIBLE
 	SEND_SIGNAL(target, COMSIG_ELEMENT_ATTACH, src)
-<<<<<<< HEAD
-	if(element_flags & ELEMENT_DETACH)
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(Detach), override = TRUE)
-=======
 	if(element_flags & ELEMENT_DETACH_ON_HOST_DESTROY)
 		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(OnTargetDelete), override = TRUE)
 
 /datum/element/proc/OnTargetDelete(datum/source, force)
 	SIGNAL_HANDLER
 	Detach(source)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /// Deactivates the functionality defines by the element on the given datum
 /datum/element/proc/Detach(datum/source, force)
 	SIGNAL_HANDLER
 
 	SEND_SIGNAL(source, COMSIG_ELEMENT_DETACH, src)
-<<<<<<< HEAD
-	SHOULD_CALL_PARENT(TRUE)
-	UnregisterSignal(source, COMSIG_PARENT_QDELETING)
-=======
 	UnregisterSignal(source, COMSIG_QDELETING)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/element/Destroy(force)
 	if(!force)

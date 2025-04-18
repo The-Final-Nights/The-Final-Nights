@@ -215,19 +215,11 @@
 			forced_open = C.force_opens
 		try_to_crowbar(I, user, forced_open)
 		return TRUE
-<<<<<<< HEAD
-	else if(I.tool_behaviour == TOOL_WELDER)
-		try_to_weld(I, user)
-		return TRUE
-	else if(!(I.item_flags & NOBLUDGEON) && user.a_intent != INTENT_HARM)
-		try_to_activate_door(user)
-=======
 	else if(weapon.item_flags & NOBLUDGEON || user.combat_mode)
 		return ..()
 	else if(!user.combat_mode && istype(weapon, /obj/item/stack/sheet/mineral/wood))
 		return ..() // we need this so our can_barricade element can be called using COMSIG_ATOM_ATTACKBY
 	else if(try_to_activate_door(user))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		return TRUE
 	return ..()
 

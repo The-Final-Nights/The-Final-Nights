@@ -39,15 +39,6 @@
 	master.add_overlay(overlay)
 
 	RegisterSignal(parent, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(clean_react))
-<<<<<<< HEAD
-	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, PROC_REF(attackby_react))
-	RegisterSignal(parent, COMSIG_ATOM_FIRE_ACT, PROC_REF(flame_react))
-
-/datum/component/thermite/UnregisterFromParent()
-	UnregisterSignal(parent, COMSIG_COMPONENT_CLEAN_ACT)
-	UnregisterSignal(parent, COMSIG_PARENT_ATTACKBY)
-	UnregisterSignal(parent, COMSIG_ATOM_FIRE_ACT)
-=======
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(attackby_react))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(parent_qdeleting)) //probably necessary because turfs are wack
@@ -65,7 +56,6 @@
 	))
 	var/turf/turf_parent = parent
 	turf_parent.update_appearance()
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/thermite/Destroy()
 	var/turf/master = parent
@@ -81,14 +71,6 @@
 		amount += _amount
 
 /datum/component/thermite/proc/thermite_melt(mob/user)
-<<<<<<< HEAD
-	var/turf/master = parent
-	master.cut_overlay(overlay)
-	playsound(master, 'sound/items/welder.ogg', 100, TRUE)
-	var/obj/effect/overlay/thermite/fakefire = new(master)
-	addtimer(CALLBACK(src, PROC_REF(burn_parent), fakefire, user), min(amount * 0.35 SECONDS, 20 SECONDS))
-	UnregisterFromParent()
-=======
 	var/turf/parent_turf = parent
 	playsound(parent_turf, 'sound/items/welder.ogg', 100, TRUE)
 	fakefire = new(parent_turf)
@@ -96,7 +78,6 @@
 	burn_timer = addtimer(burn_callback, min(amount * 0.35 SECONDS, 20 SECONDS), TIMER_STOPPABLE)
 	//unregister everything mechanical, we are burning up
 	UnregisterSignal(parent, list(COMSIG_COMPONENT_CLEAN_ACT, COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_FIRE_ACT))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/thermite/proc/burn_parent(datum/fakefire, mob/user)
 	var/turf/master = parent
@@ -127,8 +108,6 @@
 
 	if(thing.get_temperature())
 		thermite_melt(user)
-<<<<<<< HEAD
-=======
 
 /// Signal handler for COMSIG_QDELETING, necessary because turfs can be weird with qdel()
 /datum/component/thermite/proc/parent_qdeleting(datum/source)
@@ -136,4 +115,3 @@
 
 	if(!QDELING(src))
 		qdel(src)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

@@ -104,8 +104,6 @@
 /datum/looping_sound/proc/on_stop()
 	if(end_sound)
 		play(end_sound, end_volume)
-<<<<<<< HEAD
-=======
 
 /// A simple proc to change who our parent is set to, also handling registering and unregistering the QDELETING signals on the parent.
 /datum/looping_sound/proc/set_parent(new_parent)
@@ -123,4 +121,3 @@
 /datum/looping_sound/proc/handle_parent_del(datum/source)
 	SIGNAL_HANDLER
 	set_parent(null)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

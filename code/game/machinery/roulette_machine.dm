@@ -172,8 +172,6 @@
 				to_chat(user, "<span class='notice'>You link the wheel to your account.</span>")
 				power_change()
 				return
-<<<<<<< HEAD
-=======
 			name = msg
 			desc = "Owned by [player_card.registered_account.account_holder], draws directly from [user.p_their()] account."
 			my_card = player_card
@@ -181,7 +179,6 @@
 			to_chat(user, span_notice("You link the wheel to your account."))
 			power_change()
 			return
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	return ..()
 
 ///Proc called when player is going to try and play

@@ -735,10 +735,7 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 
 /datum/objective/protect_object/proc/set_target(obj/O)
 	protect_target = O
-<<<<<<< HEAD
-=======
 	RegisterSignal(protect_target, COMSIG_QDELETING, PROC_REF(on_objective_qdel))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	update_explanation_text()
 
 /datum/objective/protect_object/update_explanation_text()

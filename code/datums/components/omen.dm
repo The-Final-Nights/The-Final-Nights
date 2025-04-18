@@ -26,8 +26,6 @@
 			warning += " A very bad feeling... As if you are surrounded by a twisted aura of pure malevolence..."
 		to_chat(parent, "<span class='warning'>[warning]</span>")
 
-<<<<<<< HEAD
-=======
 	if(istype(vessel))
 		src.vessel = vessel
 		RegisterSignal(vessel, COMSIG_QDELETING, PROC_REF(vessel_qdeleting))
@@ -41,20 +39,15 @@
 /datum/component/omen/Destroy(force)
 	var/mob/living/person = parent
 	to_chat(person, span_nicegreen("You feel a horrible omen lifted off your shoulders!"))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/omen/Destroy(force, silent)
 	if(!silent)
 		var/mob/living/person = parent
 		to_chat(person, "<span class='nicegreen'>You feel a horrible omen lifted off your shoulders!</span>")
 	if(vessel)
-<<<<<<< HEAD
-		vessel.visible_message("<span class='warning'>[vessel] burns up in a sinister flash, taking an evil energy with it...</span>")
-=======
 		vessel.visible_message(span_warning("[vessel] burns up in a sinister flash, taking an evil energy with it..."))
 		UnregisterSignal(vessel, COMSIG_QDELETING)
 		vessel.burn()
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		vessel = null
 	return ..()
 
@@ -140,8 +133,6 @@
 		return
 
 	qdel(src)
-<<<<<<< HEAD
-=======
 
 /// Severe deaths. Normally lifts the curse.
 /datum/component/omen/proc/check_death(mob/living/our_guy)
@@ -231,4 +222,3 @@
 	. = ..()
 	var/mob/living/living_parent = parent
 	living_parent.remove_filter("omen")
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

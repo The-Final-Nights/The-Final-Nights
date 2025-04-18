@@ -24,9 +24,6 @@
 
 /datum/antagonist/space_dragon/on_gain()
 	forge_objectives()
-<<<<<<< HEAD
-	. = ..()
-=======
 	rift_ability = new()
 	owner.special_role = ROLE_SPACE_DRAGON
 	owner.set_assigned_role(SSjob.GetJobType(/datum/job/space_dragon))
@@ -182,7 +179,6 @@
 /datum/antagonist/space_dragon/proc/rift_depower()
 	owner.current.remove_filter("anger_glow")
 	owner.current.remove_movespeed_modifier(/datum/movespeed_modifier/dragon_rage)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/objective/summon_carp
 	var/datum/antagonist/space_dragon/dragon

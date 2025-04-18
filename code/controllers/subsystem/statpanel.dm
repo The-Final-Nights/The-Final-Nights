@@ -192,10 +192,6 @@ SUBSYSTEM_DEF(statpanels)
 		else
 			turfitems[++turfitems.len] = list("[turf_content.name]", REF(turf_content))
 
-<<<<<<< HEAD
-	turfitems = turfitems
-	target.stat_panel.send_message("update_listedturf", turfitems)
-=======
 #define OBJ_IMAGE_LOADING "statpanels obj loading temporary"
 /// Returns all our ready object tab images
 /// Returns a list in the form list(list(object_name, object_ref, loaded_image), ...)
@@ -230,7 +226,6 @@ SUBSYSTEM_DEF(statpanels)
 	return turf_items
 
 #undef OBJ_IMAGE_LOADING
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/controller/subsystem/statpanels/proc/generate_mc_data()
 	mc_data = list(

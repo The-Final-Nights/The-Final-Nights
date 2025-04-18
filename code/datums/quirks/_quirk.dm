@@ -36,8 +36,6 @@
 	else
 		RegisterSignal(quirk_holder, COMSIG_MOB_LOGIN, PROC_REF(on_quirk_holder_first_login))
 
-<<<<<<< HEAD
-=======
 	add(client_source)
 
 	if(quirk_flags & QUIRK_PROCESSES)
@@ -78,7 +76,6 @@
 	remove()
 
 	quirk_holder = null
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /**
  * On client connection set quirk preferences.

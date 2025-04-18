@@ -40,13 +40,8 @@
 
 /obj/structure/aquarium/Initialize()
 	. = ..()
-<<<<<<< HEAD:code/modules/aquarium/aquarium.dm
-	update_icon()
-	RegisterSignal(src,COMSIG_PARENT_ATTACKBY, PROC_REF(feed_feedback))
-=======
 	update_appearance()
 	RegisterSignal(src,COMSIG_ATOM_ATTACKBY, PROC_REF(feed_feedback))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914)):code/modules/fishing/aquarium/aquarium.dm
 
 
 /obj/structure/aquarium/proc/request_layer(layer_type)

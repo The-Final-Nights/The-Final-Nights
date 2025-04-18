@@ -250,9 +250,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	if(((src in target) && !target_self) || (!isturf(target.loc) && !isturf(target) && not_inside))
 		return 0
 	else
-<<<<<<< HEAD
-		return 1
-=======
 		CRASH("item add_item_action got a type or instance of something that wasn't an action.")
 
 	LAZYADD(actions, action)
@@ -296,7 +293,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	if(not_inside && !isturf(target.loc) && !isturf(target))
 		return FALSE
 	return TRUE
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /obj/item/blob_act(obj/structure/blob/B)
 	if(B && B.loc == loc)

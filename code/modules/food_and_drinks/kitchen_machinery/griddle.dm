@@ -92,22 +92,10 @@
 	griddled_objects += item_to_grill
 	item_to_grill.flags_1 |= IS_ONTOP_1
 	RegisterSignal(item_to_grill, COMSIG_MOVABLE_MOVED, PROC_REF(ItemMoved))
-<<<<<<< HEAD:code/modules/food_and_drinks/kitchen_machinery/griddle.dm
-	RegisterSignal(item_to_grill, COMSIG_GRILL_COMPLETED, PROC_REF(GrillCompleted))
-	RegisterSignal(item_to_grill, COMSIG_PARENT_QDELETING, PROC_REF(ItemRemovedFromGrill))
-=======
 	RegisterSignal(item_to_grill, COMSIG_ITEM_GRILLED, PROC_REF(GrillCompleted))
 	RegisterSignal(item_to_grill, COMSIG_QDELETING, PROC_REF(ItemRemovedFromGrill))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914)):code/modules/food_and_drinks/machinery/griddle.dm
 	update_grill_audio()
 
-<<<<<<< HEAD:code/modules/food_and_drinks/kitchen_machinery/griddle.dm
-/obj/machinery/griddle/proc/ItemRemovedFromGrill(obj/item/I)
-	I.flags_1 &= ~IS_ONTOP_1
-	griddled_objects -= I
-	vis_contents -= I
-	UnregisterSignal(I, list(COMSIG_GRILL_COMPLETED, COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING))
-=======
 /obj/machinery/griddle/proc/ItemRemovedFromGrill(obj/item/ungrill)
 	SIGNAL_HANDLER
 	ungrill.flags_1 &= ~IS_ONTOP_1
@@ -115,7 +103,6 @@
 	griddled_objects -= ungrill
 	vis_contents -= ungrill
 	UnregisterSignal(ungrill, list(COMSIG_ITEM_GRILLED, COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914)):code/modules/food_and_drinks/machinery/griddle.dm
 	update_grill_audio()
 
 /obj/machinery/griddle/proc/ItemMoved(obj/item/I, atom/OldLoc, Dir, Forced)

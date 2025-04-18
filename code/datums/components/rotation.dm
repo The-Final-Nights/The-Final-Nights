@@ -21,57 +21,6 @@
 
 	src.rotation_flags = rotation_flags
 
-<<<<<<< HEAD
-	if(can_user_rotate)
-		src.can_user_rotate = can_user_rotate
-	else
-		src.can_user_rotate = CALLBACK(src, PROC_REF(default_can_user_rotate))
-
-	if(can_be_rotated)
-		src.can_be_rotated = can_be_rotated
-	else
-		src.can_be_rotated = CALLBACK(src, PROC_REF(default_can_be_rotated))
-
-	if(after_rotation)
-		src.after_rotation = after_rotation
-	else
-		src.after_rotation = CALLBACK(src, PROC_REF(default_after_rotation))
-
-	//Try Clockwise,counter,flip in order
-	if(src.rotation_flags & ROTATION_FLIP)
-		default_rotation_direction = ROTATION_FLIP
-	if(src.rotation_flags & ROTATION_COUNTERCLOCKWISE)
-		default_rotation_direction = ROTATION_COUNTERCLOCKWISE
-	if(src.rotation_flags & ROTATION_CLOCKWISE)
-		default_rotation_direction = ROTATION_CLOCKWISE
-
-/datum/component/simple_rotation/proc/add_signals()
-	if(rotation_flags & ROTATION_ALTCLICK)
-		RegisterSignal(parent, COMSIG_CLICK_ALT, PROC_REF(HandRot))
-		RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(ExamineMessage))
-	if(rotation_flags & ROTATION_WRENCH)
-		RegisterSignal(parent, COMSIG_ATOM_TOOL_ACT(TOOL_WRENCH), PROC_REF(WrenchRot))
-
-/datum/component/simple_rotation/proc/add_verbs()
-	if(rotation_flags & ROTATION_VERBS)
-		var/atom/movable/AM = parent
-		if(rotation_flags & ROTATION_FLIP)
-			AM.verbs += /atom/movable/proc/simple_rotate_flip
-		if(src.rotation_flags & ROTATION_CLOCKWISE)
-			AM.verbs += /atom/movable/proc/simple_rotate_clockwise
-		if(src.rotation_flags & ROTATION_COUNTERCLOCKWISE)
-			AM.verbs += /atom/movable/proc/simple_rotate_counterclockwise
-
-/datum/component/simple_rotation/proc/remove_verbs()
-	if(parent)
-		var/atom/movable/AM = parent
-		AM.verbs -= /atom/movable/proc/simple_rotate_flip
-		AM.verbs -= /atom/movable/proc/simple_rotate_clockwise
-		AM.verbs -= /atom/movable/proc/simple_rotate_counterclockwise
-
-/datum/component/simple_rotation/proc/remove_signals()
-	UnregisterSignal(parent, list(COMSIG_CLICK_ALT, COMSIG_PARENT_EXAMINE, COMSIG_PARENT_ATTACKBY))
-=======
 /datum/component/simple_rotation/proc/AddSignals()
 	RegisterSignal(parent, COMSIG_CLICK_ALT, PROC_REF(RotateLeft))
 	RegisterSignal(parent, COMSIG_CLICK_ALT_SECONDARY, PROC_REF(RotateRight))
@@ -80,7 +29,6 @@
 
 /datum/component/simple_rotation/proc/RemoveSignals()
 	UnregisterSignal(parent, list(COMSIG_CLICK_ALT, COMSIG_CLICK_ALT_SECONDARY, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/simple_rotation/RegisterWithParent()
 	add_verbs()

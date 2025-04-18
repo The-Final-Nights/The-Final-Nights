@@ -23,16 +23,10 @@
 	cart_table = new(src)
 	cart_tent = new(src)
 	packed_things = list(cart_table, cart_smartfridge, cart_tent, cart_griddle) //middle, left, left, right
-<<<<<<< HEAD:code/modules/food_and_drinks/kitchen_machinery/food_cart.dm
-	RegisterSignal(cart_griddle, COMSIG_PARENT_QDELETING, PROC_REF(lost_part))
-	RegisterSignal(cart_smartfridge, COMSIG_PARENT_QDELETING, PROC_REF(lost_part))
-	RegisterSignal(cart_table, COMSIG_PARENT_QDELETING, PROC_REF(lost_part))
-=======
 	RegisterSignal(cart_griddle, COMSIG_QDELETING, PROC_REF(lost_part))
 	RegisterSignal(cart_smartfridge, COMSIG_QDELETING, PROC_REF(lost_part))
 	RegisterSignal(cart_table, COMSIG_QDELETING, PROC_REF(lost_part))
 	RegisterSignal(cart_tent, COMSIG_QDELETING, PROC_REF(lost_part))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914)):code/modules/food_and_drinks/machinery/food_cart.dm
 
 /obj/machinery/food_cart/Destroy()
 	if(cart_griddle)
@@ -117,19 +111,11 @@
 	SIGNAL_HANDLER
 
 	//okay, so it's deleting the fridge or griddle which are more important. We're gonna break the machine then
-<<<<<<< HEAD:code/modules/food_and_drinks/kitchen_machinery/food_cart.dm
-	UnregisterSignal(cart_griddle, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
-	UnregisterSignal(cart_smartfridge, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
-	UnregisterSignal(cart_table, list(COMSIG_PARENT_QDELETING, COMSIG_MOVABLE_MOVED))
-	UnregisterSignal(cart_tent, COMSIG_MOVABLE_MOVED)
-	obj_break()
-=======
 	UnregisterSignal(cart_griddle, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 	UnregisterSignal(cart_smartfridge, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 	UnregisterSignal(cart_table, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 	UnregisterSignal(cart_tent, list(COMSIG_QDELETING, COMSIG_MOVABLE_MOVED))
 	atom_break()
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914)):code/modules/food_and_drinks/machinery/food_cart.dm
 
 /obj/machinery/food_cart/obj_break(damage_flag)
 	. = ..()

@@ -170,10 +170,7 @@ DEFINE_BITFIELD(turret_flags, list(
 	else if (turret_gun)
 		stored_gun = turret_gun
 
-<<<<<<< HEAD
-=======
 	RegisterSignal(stored_gun, COMSIG_QDELETING, PROC_REF(null_gun))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	var/list/gun_properties = stored_gun.get_turret_properties()
 
 	//required properties

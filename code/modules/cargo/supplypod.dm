@@ -449,8 +449,6 @@
 	glow_effect.icon_state = "pod_glow_" + GLOB.podstyles[style][POD_GLOW]
 	vis_contents += glow_effect
 	glow_effect.layer = GASFIRE_LAYER
-<<<<<<< HEAD
-=======
 	SET_PLANE_EXPLICIT(glow_effect, ABOVE_GAME_PLANE, src)
 	RegisterSignal(glow_effect, COMSIG_QDELETING, PROC_REF(remove_glow))
 
@@ -459,22 +457,18 @@
 	if(same_z_layer)
 		return
 	SET_PLANE_EXPLICIT(glow_effect, ABOVE_GAME_PLANE, src)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /obj/structure/closet/supplypod/proc/endGlow()
 	if(!glow_effect)
 		return
 	glow_effect.layer = LOW_ITEM_LAYER
 	glow_effect.fadeAway(delays[POD_OPENING])
-<<<<<<< HEAD
-=======
 	//Trust the signals
 
 /obj/structure/closet/supplypod/proc/remove_glow()
 	SIGNAL_HANDLER
 	UnregisterSignal(glow_effect, COMSIG_QDELETING)
 	vis_contents -= glow_effect
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	glow_effect = null
 
 /obj/structure/closet/supplypod/Destroy()

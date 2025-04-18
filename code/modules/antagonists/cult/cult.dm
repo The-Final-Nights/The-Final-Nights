@@ -299,9 +299,6 @@
 		H.apply_overlay(HALO_LAYER)
 
 /datum/team/cult/proc/setup_objectives()
-<<<<<<< HEAD
-	//SAC OBJECTIVE , todo: move this to objective internals
-=======
 	var/datum/objective/sacrifice/sacrifice_objective = new
 	sacrifice_objective.team = src
 	sacrifice_objective.find_target()
@@ -329,7 +326,6 @@
 	if(!istype(team, /datum/team/cult))
 		return
 	var/datum/team/cult/cult = team
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	var/list/target_candidates = list()
 	var/datum/objective/sacrifice/sac_objective = new
 	sac_objective.team = src
@@ -345,21 +341,6 @@
 				target_candidates += player.mind
 	listclearnulls(target_candidates)
 	if(LAZYLEN(target_candidates))
-<<<<<<< HEAD
-		sac_objective.target = pick(target_candidates)
-		sac_objective.update_explanation_text()
-
-		var/datum/job/sacjob = SSjob.GetJob(sac_objective.target.assigned_role)
-		var/datum/preferences/sacface = sac_objective.target.current.client.prefs
-		var/icon/reshape = get_flat_human_icon(null, sacjob, sacface, list(SOUTH))
-		reshape.Shift(SOUTH, 4)
-		reshape.Shift(EAST, 1)
-		reshape.Crop(7,4,26,31)
-		reshape.Crop(-5,-3,26,30)
-		sac_objective.sac_image = reshape
-
-		objectives += sac_objective
-=======
 		target = pick(target_candidates)
 		update_explanation_text()
 		// Register a bunch of signals to both the target mind and its body
@@ -367,23 +348,10 @@
 		RegisterSignal(target, COMSIG_MIND_TRANSFERRED, PROC_REF(on_mind_transfer))
 		RegisterSignal(target.current, COMSIG_QDELETING, PROC_REF(on_target_body_del))
 		RegisterSignal(target.current, COMSIG_MOB_MIND_TRANSFERRED_INTO, PROC_REF(on_possible_mindswap))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	else
 		message_admins("Cult Sacrifice: Could not find unconvertible or convertible target. WELP!")
 
 
-<<<<<<< HEAD
-	//SUMMON OBJECTIVE
-
-	var/datum/objective/eldergod/summon_objective = new()
-	summon_objective.team = src
-	objectives += summon_objective
-
-
-/datum/objective/sacrifice
-	var/sacced = FALSE
-	var/sac_image
-=======
 /datum/objective/sacrifice/proc/on_mind_transfer(datum/source, mob/previous_body)
 	SIGNAL_HANDLER
 	//If, for some reason, the mind was transferred to a ghost (better safe than sorry), find a new target.
@@ -406,7 +374,6 @@
 		return
 	RegisterSignal(target.current, COMSIG_QDELETING, PROC_REF(on_target_body_del))
 	RegisterSignal(target.current, COMSIG_MOB_MIND_TRANSFERRED_INTO, PROC_REF(on_possible_mindswap))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/objective/sacrifice/check_completion()
 	return sacced || completed
@@ -475,10 +442,6 @@
 
 	return "<div class='panel redborder'>[parts.Join("<br>")]</div>"
 
-<<<<<<< HEAD
-/datum/team/cult/is_gamemode_hero()
-	return SSticker.mode.name == "cult"
-=======
 /datum/team/cult/proc/is_sacrifice_target(datum/mind/mind)
 	for(var/datum/objective/sacrifice/sac_objective in objectives)
 		if(mind == sac_objective.target)
@@ -583,4 +546,3 @@
 #undef CULT_NARSIE_KILLED
 #undef CULT_VICTORY
 #undef SUMMON_POSSIBILITIES
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

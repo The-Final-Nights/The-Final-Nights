@@ -39,10 +39,6 @@
 			old_wound.highest_scar = null
 
 	if(!highest_scar)
-<<<<<<< HEAD
-		highest_scar = new
-		highest_scar.generate(limb, src, add_to_scars=FALSE)
-=======
 		var/datum/scar/new_scar = new
 		set_highest_scar(new_scar)
 		new_scar.generate(limb, src, add_to_scars=FALSE)
@@ -57,7 +53,6 @@
 /datum/wound/slash/proc/clear_highest_scar(datum/source)
 	SIGNAL_HANDLER
 	set_highest_scar(null)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/wound/slash/remove_wound(ignore_limb, replaced)
 	if(!replaced && highest_scar)

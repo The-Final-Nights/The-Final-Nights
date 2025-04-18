@@ -365,12 +365,8 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 
 /atom/movable/screen/alert/give/highfive/setup(mob/living/carbon/taker, datum/status_effect/offering/offer)
 	. = ..()
-<<<<<<< HEAD
-	RegisterSignal(offer.owner, COMSIG_PARENT_EXAMINE_MORE, PROC_REF(check_fake_out))
-=======
 	RegisterSignal(offerer, COMSIG_ATOM_EXAMINE_MORE, PROC_REF(check_fake_out))
 
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /atom/movable/screen/alert/give/highfive/handle_transfer()
 	if(too_slowing_this_guy)

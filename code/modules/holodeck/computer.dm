@@ -246,23 +246,13 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 			spawned -= atoms
 			continue
 
-<<<<<<< HEAD
-		atoms.flags_1 |= HOLOGRAM_1
-		RegisterSignal(atoms, COMSIG_PARENT_PREQDELETED, PROC_REF(remove_from_holo_lists))
-=======
 		RegisterSignal(holo_atom, COMSIG_QDELETING, PROC_REF(remove_from_holo_lists))
 		holo_atom.flags_1 |= HOLOGRAM_1
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 		if (isholoeffect(atoms))//activates holo effects and transfers them from the spawned list into the effects list
 			var/obj/effect/holodeck_effect/holo_effect = atoms
 			effects += holo_effect
 			spawned -= holo_effect
-<<<<<<< HEAD
-			var/atom/active_effect = holo_effect.activate(src)
-			if(istype(active_effect) || islist(active_effect))
-				spawned += active_effect // we want mobs or objects spawned via holoeffects to be tracked as objects
-=======
 			var/atom/holo_effect_product = holo_effect.activate(src)//change name
 			if(istype(holo_effect_product))
 				spawned += holo_effect_product // we want mobs or objects spawned via holoeffects to be tracked as objects
@@ -270,7 +260,6 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 			if(islist(holo_effect_product))
 				for(var/atom/atom_product as anything in holo_effect_product)
 					RegisterSignal(atom_product, COMSIG_QDELETING, PROC_REF(remove_from_holo_lists))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 			continue
 
 		if (isobj(atoms))
@@ -295,13 +284,10 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 /obj/machinery/computer/holodeck/proc/derez(obj/object, silent = TRUE, forced = FALSE)
 	if(!object)
 		return
-<<<<<<< HEAD
-=======
 	UnregisterSignal(holo_atom, COMSIG_QDELETING)
 	var/turf/target_turf = get_turf(holo_atom)
 	for(var/atom/movable/atom_contents as anything in holo_atom) //make sure that things inside of a holoitem are moved outside before destroying it
 		atom_contents.forceMove(target_turf)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 	spawned -= object
 	UnregisterSignal(object, COMSIG_PARENT_PREQDELETED)
@@ -317,11 +303,7 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 
 /obj/machinery/computer/holodeck/proc/remove_from_holo_lists(datum/to_remove, _forced)
 	spawned -= to_remove
-<<<<<<< HEAD
-	UnregisterSignal(to_remove, COMSIG_PARENT_PREQDELETED)
-=======
 	UnregisterSignal(to_remove, COMSIG_QDELETING)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /obj/machinery/computer/holodeck/process(delta_time)
 	if(damaged && DT_PROB(5, delta_time))

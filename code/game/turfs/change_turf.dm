@@ -89,13 +89,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 		comp.RemoveComponent()
 
 	changing_turf = TRUE
-<<<<<<< HEAD
-	qdel(src)	//Just get the side effects and call Destroy
-	var/turf/W = new path(src)
-
-	for(var/i in transferring_comps)
-		W.TakeComponent(i)
-=======
 	qdel(src) //Just get the side effects and call Destroy
 	//We do this here so anything that doesn't want to persist can clear itself
 	var/list/old_listen_lookup = _listen_lookup?.Copy()
@@ -112,7 +105,6 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 	for(var/datum/callback/callback as anything in post_change_callbacks)
 		callback.InvokeAsync(new_turf)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 	if(new_baseturfs)
 		W.baseturfs = baseturfs_string_list(new_baseturfs, W)

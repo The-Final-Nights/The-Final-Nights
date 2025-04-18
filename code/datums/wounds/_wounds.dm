@@ -162,8 +162,6 @@
 		wound_injury(old_wound)
 		second_wind()
 
-<<<<<<< HEAD
-=======
 // Updates descriptive texts for the wound, in case it can get altered for whatever reason
 /datum/wound/proc/update_descriptions()
 	return
@@ -184,7 +182,6 @@
 	SIGNAL_HANDLER
 	qdel(src)
 
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 /// Remove the wound from whatever it's afflicting, and cleans up whateverstatus effects it had or modifiers it had on interaction times. ignore_limb is used for detachments where we only want to forget the victim
 /datum/wound/proc/remove_wound(ignore_limb, replaced = FALSE)
 	//TODO: have better way to tell if we're getting removed without replacement (full heal) scar stuff
@@ -229,14 +226,10 @@
 	if(limb == new_value)
 		return FALSE //Limb can either be a reference to something or `null`. Returning the number variable makes it clear no change was made.
 	. = limb
-<<<<<<< HEAD
-	limb = new_value
-=======
 	if(limb)
 		UnregisterSignal(limb, COMSIG_QDELETING)
 	limb = new_value
 	RegisterSignal(new_value, COMSIG_QDELETING, PROC_REF(source_died))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	if(. && disabling)
 		var/obj/item/bodypart/old_limb = .
 		REMOVE_TRAIT(old_limb, TRAIT_PARALYSIS, src)

@@ -36,8 +36,6 @@
 	. = ..()
 	update_icon()
 
-<<<<<<< HEAD
-=======
 /obj/item/pizzabox/proc/register_bomb(new_bomb)
 	bomb = new_bomb
 	if(istype(bomb))
@@ -49,7 +47,6 @@
 		return
 	UnregisterSignal(bomb, COMSIG_QDELETING)
 	bomb = null
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /obj/item/pizzabox/Destroy()
 	unprocess()

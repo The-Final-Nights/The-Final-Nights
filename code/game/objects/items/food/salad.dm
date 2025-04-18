@@ -136,11 +136,8 @@
 
 /obj/item/reagent_containers/glass/bowl/Initialize()
 	. = ..()
-<<<<<<< HEAD
-=======
 	RegisterSignal(src, COMSIG_ATOM_REAGENT_EXAMINE, PROC_REF(reagent_special_examine))
 	AddElement(/datum/element/foodlike_drink)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	AddComponent(/datum/component/customizable_reagent_holder, /obj/item/food/salad/empty, CUSTOM_INGREDIENT_ICON_FILL, max_ingredients = 6)
 
 // empty salad for custom salads

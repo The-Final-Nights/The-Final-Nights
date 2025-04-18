@@ -2136,8 +2136,6 @@
 		diskette.forceMove(drop_location())
 	diskette = null
 
-<<<<<<< HEAD
-=======
 /obj/machinery/computer/scan_consolenew/proc/set_connected_scanner(new_scanner)
 	if(connected_scanner)
 		UnregisterSignal(connected_scanner, COMSIG_QDELETING)
@@ -2156,7 +2154,6 @@
 #undef GENETIC_DAMAGE_PULSE_UNIQUE_FEATURES
 
 #undef ENZYME_COPY_BASE_COOLDOWN
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 #undef INJECTOR_TIMEOUT
 #undef NUMBER_OF_BUFFERS
 #undef SCRAMBLE_TIMEOUT

@@ -18,10 +18,7 @@
 /datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, atom/nref = null)
 
 	user = nuser
-<<<<<<< HEAD
-=======
 	RegisterSignal(user, COMSIG_QDELETING, PROC_REF(user_deleted))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	window_id = nwindow_id
 	if (ntitle)
 		title = format_text(ntitle)

@@ -130,9 +130,6 @@
 		log_game("[key_name(user)] [welded ? "welded":"unwelded"] firedoor [src] with [W] at [AREACOORD(src)]")
 		update_icon()
 
-<<<<<<< HEAD
-/obj/machinery/door/firedoor/try_to_crowbar(obj/item/I, mob/user)
-=======
 /// We check for adjacency when using the primary attack.
 /obj/machinery/door/firedoor/try_to_crowbar(obj/item/acting_object, mob/user)
 	if(welded || operating)
@@ -155,7 +152,6 @@
 
 /// A simple toggle for firedoors between on and off
 /obj/machinery/door/firedoor/try_to_crowbar_secondary(obj/item/acting_object, mob/user)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	if(welded || operating)
 		return
 
@@ -164,8 +160,6 @@
 	else
 		close()
 
-<<<<<<< HEAD
-=======
 /obj/machinery/door/firedoor/proc/handle_held_open_adjacency(mob/user)
 	SIGNAL_HANDLER
 
@@ -180,7 +174,6 @@
 	if(user)
 		user.balloon_alert_to_viewers("released [src]", "released [src]")
 
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 /obj/machinery/door/firedoor/attack_ai(mob/user)
 	add_fingerprint(user)
 	if(welded || operating || machine_stat & NOPOWER)

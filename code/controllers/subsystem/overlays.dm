@@ -207,8 +207,6 @@ SUBSYSTEM_DEF(overlays)
 			overlays |= cached_other
 	else if(cut_old)
 		cut_overlays()
-<<<<<<< HEAD
-=======
 
 // Debug procs
 
@@ -306,4 +304,3 @@ SUBSYSTEM_DEF(overlays)
 	message_admins(text)
 	log_world(text)
 	return diff_found
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

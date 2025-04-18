@@ -11,10 +11,6 @@
 	block_chance = 75
 	smashes_tables = TRUE
 	var/old_grab_state = null
-<<<<<<< HEAD
-	var/restraining = FALSE
-	display_combos = TRUE
-=======
 	var/mob/restraining_mob
 
 /datum/martial_art/cqc/teach(mob/living/cqc_user, make_temporary)
@@ -43,7 +39,6 @@
 		return
 	INVOKE_ASYNC(touch_spell, TYPE_PROC_REF(/datum/action/cooldown/spell/touch, do_hand_hit), touch_weapon, attacker, attacker)
 	return COMPONENT_NO_AFTERATTACK
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/martial_art/cqc/reset_streak(mob/living/new_target)
 	. = ..()

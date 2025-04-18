@@ -13,10 +13,6 @@
 	RegisterSignal(parent, list(COMSIG_ITEM_IMBUE_SOUL), PROC_REF(check_soul_imbue))
 	RegisterSignal(parent, list(COMSIG_ITEM_MARK_RETRIEVAL), PROC_REF(check_mark_retrieval))
 	src.inform_admins = inform_admins
-<<<<<<< HEAD
-	src.allow_death = allow_death
-	check_in_bounds() // Just in case something is being created outside of station/centcom
-=======
 	src.allow_item_destruction = allow_item_destruction
 
 	// Just in case something is being created outside of station/centcom
@@ -46,7 +42,6 @@
 	))
 
 	qdel(GetComponent(/datum/component/connect_containers))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/stationloving/InheritComponent(datum/component/stationloving/newc, original, inform_admins, allow_death)
 	if (original)

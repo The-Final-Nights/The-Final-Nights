@@ -299,8 +299,6 @@
 	if((blood_state != BLOOD_STATE_OIL) && (blood_state != BLOOD_STATE_NOT_BLOODY))
 		return TRUE
 	return FALSE
-<<<<<<< HEAD
-=======
 
 /obj/effect/decal/cleanable/blood/hitsplatter
 	name = "blood splatter"
@@ -406,4 +404,3 @@
 	the_window.vis_contents += final_splatter
 	the_window.bloodied = TRUE
 	qdel(src)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

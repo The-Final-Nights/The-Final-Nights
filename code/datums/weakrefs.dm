@@ -86,8 +86,6 @@
 	var/datum/D = locate(reference)
 	return (!QDELETED(D) && D.weak_reference == src) ? D : null
 
-<<<<<<< HEAD
-=======
 /**
  * SERIOUSLY READ THE AUTODOC COMMENT FOR THIS PROC BEFORE EVEN THINKING ABOUT USING IT
  *
@@ -105,7 +103,6 @@
 /datum/weakref/proc/hard_resolve()
 	var/datum/D = locate(reference)
 	return (D?.weak_reference == src) ? D : null
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 // QoL stuff
 /datum/weakref/vv_get_dropdown()

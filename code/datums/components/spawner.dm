@@ -8,26 +8,8 @@
 	var/list/faction = list("mining")
 
 
-<<<<<<< HEAD
-
-/datum/component/spawner/Initialize(_mob_types, _spawn_time, _faction, _spawn_text, _max_mobs)
-	if(_spawn_time)
-		spawn_time=_spawn_time
-	if(_mob_types)
-		mob_types=_mob_types
-	if(_faction)
-		faction=_faction
-	if(_spawn_text)
-		spawn_text=_spawn_text
-	if(_max_mobs)
-		max_mobs=_max_mobs
-
-	RegisterSignal(parent, list(COMSIG_PARENT_QDELETING), PROC_REF(stop_spawning))
-	START_PROCESSING(SSprocessing, src)
-=======
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(stop_spawning))
 	START_PROCESSING((spawn_time < 2 SECONDS ? SSfastprocess : SSprocessing), src)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/spawner/process()
 	try_spawn_mob()
@@ -48,16 +30,6 @@
 		return
 	if(spawn_delay > world.time)
 		return
-<<<<<<< HEAD
-	spawn_delay = world.time + spawn_time
-	var/chosen_mob_type = pick(mob_types)
-	var/mob/living/simple_animal/L = new chosen_mob_type(P.loc)
-	L.flags_1 |= (P.flags_1 & ADMIN_SPAWNED_1)
-	spawned_mobs += L
-	L.nest = src
-	L.faction = src.faction
-	P.visible_message("<span class='danger'>[L] [spawn_text] [P].</span>")
-=======
 	var/atom/spawner = parent
 	COOLDOWN_START(src, spawn_delay, spawn_time)
 
@@ -100,4 +72,3 @@
 		return
 	spawned_things -= WEAKREF(source)
 	UnregisterSignal(source, list(COMSIG_QDELETING, COMSIG_MOB_STATCHANGE))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

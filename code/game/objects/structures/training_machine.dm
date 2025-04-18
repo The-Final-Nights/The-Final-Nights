@@ -142,12 +142,8 @@
  * Cleans up behavior for when the attached item is deleted or removed.
  */
 /obj/structure/training_machine/proc/on_attached_delete()
-<<<<<<< HEAD
-	UnregisterSignal(attached_item, COMSIG_PARENT_QDELETING)
-=======
 	SIGNAL_HANDLER
 	UnregisterSignal(attached_item, COMSIG_QDELETING)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 	vis_contents -= attached_item
 	attached_item = null
 	handle_density()

@@ -180,12 +180,8 @@
 		return
 
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(check_owner_in_range))
-<<<<<<< HEAD
-	RegisterSignal(offered_item, list(COMSIG_PARENT_QDELETING, COMSIG_ITEM_DROPPED), PROC_REF(dropped_item))
-=======
 	RegisterSignals(offered_item, list(COMSIG_QDELETING, COMSIG_ITEM_DROPPED), PROC_REF(dropped_item))
 	//RegisterSignal(owner, COMSIG_ATOM_EXAMINE_MORE, PROC_REF(check_fake_out))
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/status_effect/offering/Destroy()
 	for(var/mob/living/carbon/removed_taker as anything in possible_takers)
@@ -349,11 +345,6 @@
 	desc = "You're leaning on something!"
 	icon_state = "buckled"
 
-<<<<<<< HEAD
-/atom/movable/screen/alert/status_effect/leaning/Click()
-	var/mob/living/L = usr
-	if(!istype(L) || L != owner)
-=======
 /datum/status_effect/eigenstasium
 	id = "eigenstasium"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -405,7 +396,6 @@
 		if(!stable_message)
 			owner.visible_message("You feel stable...for now.")
 			stable_message = TRUE
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 		return
 	L.changeNext_move(CLICK_CD_RESIST)
 	if(L.last_special <= world.time)
@@ -418,13 +408,6 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/leaning
 
-<<<<<<< HEAD
-/datum/status_effect/leaning/on_creation(mob/living/carbon/new_owner, atom/object, leaning_offset = 11)
-	. = ..()
-	if(!.)
-		return
-	new_owner.start_leaning(object, leaning_offset)
-=======
 		//phase 1
 		if(1 to EIGENSTASIUM_PHASE_1_END)
 			owner.set_jitter_if_lower(4 SECONDS)
@@ -533,4 +516,3 @@
 #undef EIGENSTASIUM_PHASE_2_END
 #undef EIGENSTASIUM_PHASE_3_START
 #undef EIGENSTASIUM_PHASE_3_END
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))

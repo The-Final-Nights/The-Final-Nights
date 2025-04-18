@@ -11,9 +11,6 @@
 	if(new_amount)
 		amount = new_amount
 
-<<<<<<< HEAD
-	START_PROCESSING(SSprocessing, src)
-=======
 	RegisterSignals(parent, list(COMSIG_ATOM_HULK_ATTACK, COMSIG_ATOM_ATTACK_ANIMAL, COMSIG_ATOM_ATTACK_HAND), PROC_REF(rot_react_touch))
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(rot_hit_react))
 	if(ismovable(parent))
@@ -34,7 +31,6 @@
 		var/mob/living/carbon/human/human_parent = parent
 		RegisterSignal(parent, COMSIG_HUMAN_CORETEMP_CHANGE, PROC_REF(check_for_temperature))
 		check_for_temperature(null, 0, human_parent.coretemperature)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 /datum/component/rot/Destroy(force, silent)
 	STOP_PROCESSING(SSprocessing, src)

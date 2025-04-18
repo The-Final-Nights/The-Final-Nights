@@ -144,14 +144,11 @@
 
 	last_expand = world.time + rand(growth_cooldown_low, growth_cooldown_high)
 
-<<<<<<< HEAD
-=======
 /obj/structure/alien/weeds/Destroy()
 	if(parent_node)
 		UnregisterSignal(parent_node, COMSIG_QDELETING)
 		parent_node = null
 	return ..()
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 ///Randomizes the weeds' starting icon, gets redefined by children for them not to share the behavior.
 /obj/structure/alien/weeds/proc/set_base_icon()
@@ -180,11 +177,6 @@
 
 		if(is_type_in_typecache(T, blacklisted_turfs))
 			continue
-<<<<<<< HEAD
-
-		new /obj/structure/alien/weeds(T)
-	return TRUE
-=======
 		//spawn a new one in the turf
 		check_weed = new(check_turf)
 		//set the new one's parent node to our parent node
@@ -226,7 +218,6 @@
 
 /obj/structure/alien/weeds/atmos_expose(datum/gas_mixture/air, exposed_temperature)
 	take_damage(5, BURN, 0, 0)
->>>>>>> ae5a4f955d0 (Pulls apart the vestiges of components still hanging onto signals (#75914))
 
 //Weed nodes
 /obj/structure/alien/weeds/node
