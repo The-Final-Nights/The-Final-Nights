@@ -37,6 +37,7 @@
 		to_chat(owner, "Victim's natural banishment is silver...")
 	if(iskindred(target))
 		baali_get_clan_weakness(target, owner)
+		baali_get_stolen_disciplines(target, owner)
 		if(target.generation >= 10)
 			to_chat(owner, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
 		else
@@ -62,77 +63,103 @@
 		to_chat(owner, "[target] is a feeble worm with no strengths or visible weaknesses, a mere human.")
 
 /datum/discipline_power/daimonion/sense_the_sin/proc/baali_get_clan_weakness(target, owner)
+	if(!owner || !target)
+		return
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire))
 		var/datum/species/kindred/clan = vampire.dna.species
 		if(vampire.clane?.name)
 			if(vampire.clane?.name == "Toreador")
 				to_chat(owner, "[target] is too clingy to the art.")
-			else if(vampire.clane?.name == "Daughters of Cacophony")
+				return
+			if(vampire.clane?.name == "Daughters of Cacophony")
 				to_chat(owner, "[target]'s mind is envelopped by nonstopping music.")
-			else if(vampire.clane?.name == "Ventrue")
+			if(vampire.clane?.name == "Ventrue")
 				to_chat(owner, "[target] finds no pleasure in poor's blood.")
-			else if(vampire.clane?.name == "Lasombra")
+				return
+			if(vampire.clane?.name == "Lasombra")
 				to_chat(owner, "[target] is afraid of modern technology.")
-			else if(vampire.clane?.name == "Tzimisce")
+				return
+			if(vampire.clane?.name == "Tzimisce")
 				to_chat(owner, "[target] is tied to its domain.")
-			else if(vampire.clane?.name == "Gangrel")
+				return
+			if(vampire.clane?.name == "Gangrel")
 				to_chat(owner, "[target] is a feral being used to the nature.")
-			else if(vampire.clane?.name == "Malkavian")
+				return
+			if(vampire.clane?.name == "Malkavian")
 				to_chat(owner, "[target] is unstable, the mind is ill.")
-			else if(vampire.clane?.name == "Brujah")
+				return
+			if(vampire.clane?.name == "Brujah")
 				to_chat(owner, "[target] is full of uncontrollable rage.")
-			else if(vampire.clane?.name == "Nosferatu")
+			if(vampire.clane?.name == "Nosferatu")
 				to_chat(owner, "[target] is ugly and nothing will save them.")
-			else if(vampire.clane?.name == "Tremere")
+				return
+			if(vampire.clane?.name == "Tremere")
 				to_chat(owner, "[target] is weak to kindred blood and vulnerable to blood bonds.")
-			else if(vampire.clane?.name == "Baali")
+				return
+			if(vampire.clane?.name == "Baali")
 				to_chat(owner, "[target] is afraid of holy.")
-			else if(vampire.clane?.name == "Banu Haqim")
+				return
+			if(vampire.clane?.name == "Banu Haqim")
 				to_chat(owner, "[target] is addicted to kindred vitae...")
-			else if(vampire.clane?.name == "True Brujah")
+				return
+			if(vampire.clane?.name == "True Brujah")
 				to_chat(owner, "[target] cant express emotions.")
-			else if(vampire.clane?.name == "Salubri")
+				return
+			if(vampire.clane?.name == "Salubri")
 				to_chat(owner, "[target] is unable to feed on unwilling.")
-			else if(vampire.clane?.name == "Giovanni")
+				return
+			if(vampire.clane?.name == "Giovanni")
 				to_chat(owner, "[target]'s bite inflicts too much harm.")
-			else if(vampire.clane?.name == "Cappadocian")
+				return
+			if(vampire.clane?.name == "Cappadocian")
 				to_chat(owner, "[target]'s skin will stay pale and lifeless no matter what.")
-			else if(vampire.clane?.name == "Kiasyd")
+				return
+			if(vampire.clane?.name == "Kiasyd")
 				to_chat(owner, "[target] is afraid of cold iron.")
-			else if(vampire.clane?.name == "Gargoyle")
+				return
+			if(vampire.clane?.name == "Gargoyle")
 				to_chat(owner, "[target] is too dependent on its masters, its mind is feeble.")
-			else if(vampire.clane?.name == "Ministry")
+				return
+			if(vampire.clane?.name == "Ministry")
 				to_chat(owner, "[target] is afraid of bright lights.")
-			else
-				to_chat(owner, "[target] is shunned by most as it lacks a clan.")
-		if(clan.get_discipline("Quietus") && !(vampire.clane?.name == "Banu Haqim"))
-			to_chat(owner, "[target] fears that the fact they stole Banu Haqim's Quietus will be known.")
-		if(clan.get_discipline("Protean") && !(vampire.clane?.name == "Gangrel"))
-			to_chat(owner, "[target] fears that the fact they stole Gangrel's Protean will be known.")
-		if(clan.get_discipline("Serpentis") && !(vampire.clane?.name == "Ministry"))
-			to_chat(owner, "[target] fears that the fact they stole Ministry's Serpentis will be known.")
-		if(clan.get_discipline("Necromancy") && !(vampire.clane?.name == "Giovanni") || !(vampire.clane?.name = "Cappadocian"))
-			to_chat(owner, "[target] fears that the fact they stole Giovanni's Necromancy will be known.")
-		if(clan.get_discipline("Obtenebration") && !(vampire.clane?.name == "Lasombra") || !(vampire.clane?.name == "Baali"))
-			to_chat(owner, "[target] fears that the fact they stole Lasombra's Obtenebration will be known.")
-		if(clan.get_discipline("Dementation") && !(vampire.clane?.name == "Malkavian"))
-			to_chat(owner, "[target] fears that the fact they stole Malkavian's Dementation will be known.")
-		if(clan.get_discipline("Thaumaturgy") && !(vampire.clane?.name == "Tremere") || !(vampire.clane?.name == "Baali"))
-			to_chat(owner, "[target] fears that the fact they stole Tremere's Thaumaturgy will be known.")
-		if(clan.get_discipline("Vicissitude") && !(vampire.clane?.name == "Tzimisce"))
-			to_chat(owner, "[target] fears that the fact they stole Tzimisce's Vicissitude will be known.")
-		if(clan.get_discipline("Melpominee") && !(vampire.clane?.name == "Daughters of Cacophony"))
-			to_chat(owner, "[target] fears that the fact they stole Daughters of Cacophony's Melpominee will be known.")
-		if(clan.get_discipline("Daimonion") && !(vampire.clane?.name == "Baali"))
-			to_chat(owner, "[target] fears that the fact they stole Baali's Daimonion will be known.")
-		if(clan.get_discipline("Temporis") && !(vampire.clane?.name == "True Brujah"))
-			to_chat(owner, "[target] fears that the fact they stole True Brujah's Temporis will be known.")
-		if(clan.get_discipline("Valeren") && !(vampire.clane?.name == "Salubri"))
-			to_chat(owner, "[target] fears that the fact they stole Salubri's Valeren will be known.")
-		if(clan.get_discipline("Mytherceria") && !(vampire.clane?.name == "Kiasyd"))
-			to_chat(owner, "[target] fears that the fact they stole Kiasyd's Mytherceria will be known.")
+				return
 
+			to_chat(owner, "[target] is shunned by most as it lacks a clan.")
+
+
+/datum/daimonion/proc/baali_get_stolen_disciplines(target, owner)
+	if(!owner || !target)
+		return
+	var/mob/living/carbon/human/vampire = target
+	if(iskindred(vampire))
+		var/datum/species/kindred/clan = vampire.dna.species
+		if(clan.get_discipline("Quietus") && vampire.clane?.name != "Banu Haqim")
+			to_chat(owner, "[target] fears that the fact they stole Banu Haqim's Quietus will be known.")
+		if(clan.get_discipline("Protean") && vampire.clane?.name != "Gangrel")
+			to_chat(owner, "[target] fears that the fact they stole Gangrel's Protean will be known.")
+		if(clan.get_discipline("Serpentis") && vampire.clane?.name != "Ministry")
+			to_chat(owner, "[target] fears that the fact they stole Ministry's Serpentis will be known.")
+		if(clan.get_discipline("Necromancy") && vampire.clane?.name != "Giovanni" || clan.get_discipline("Necromancy") && vampire.clane?.name != "Cappadocian")
+			to_chat(owner, "[target] fears that the fact they stole Giovanni's Necromancy will be known.")
+		if(clan.get_discipline("Obtenebration") && vampire.clane?.name != "Lasombra" || clan.get_discipline("Obtenebration") && vampire.clane?.name != "Baali")
+			to_chat(owner, "[target] fears that the fact they stole Lasombra's Obtenebration will be known.")
+		if(clan.get_discipline("Dementation") && vampire.clane?.name != "Malkavian")
+			to_chat(owner, "[target] fears that the fact they stole Malkavian's Dementation will be known.")
+		if(clan.get_discipline("Thaumaturgy") && vampire.clane?.name != "Tremere" || clan.get_discipline("Thaumaturgy") && vampire.clane?.name != "Baali")
+			to_chat(owner, "[target] fears that the fact they stole Tremere's Thaumaturgy will be known.")
+		if(clan.get_discipline("Vicissitude") && vampire.clane?.name != "Tzimisce")
+			to_chat(owner, "[target] fears that the fact they stole Tzimisce's Vicissitude will be known.")
+		if(clan.get_discipline("Melpominee") && vampire.clane?.name != "Daughters of Cacophony")
+			to_chat(owner, "[target] fears that the fact they stole Daughters of Cacophony's Melpominee will be known.")
+		if(clan.get_discipline("Daimonion") && vampire.clane?.name != "Baali")
+			to_chat(owner, "[target] fears that the fact they stole Baali's Daimonion will be known.")
+		if(clan.get_discipline("Temporis") && vampire.clane?.name != "True Brujah")
+			to_chat(owner, "[target] fears that the fact they stole True Brujah's Temporis will be known.")
+		if(clan.get_discipline("Valeren") && vampire.clane?.name != "Salubri")
+			to_chat(owner, "[target] fears that the fact they stole Salubri's Valeren will be known.")
+		if(clan.get_discipline("Mytherceria") && vampire.clane?.name != "Kiasyd")
+			to_chat(owner, "[target] fears that the fact they stole Kiasyd's Mytherceria will be known.")
 //FEAR OF THE VOID BELOW
 /datum/discipline_power/daimonion/fear_of_the_void_below
 	name = "Fear of the Void Below"
