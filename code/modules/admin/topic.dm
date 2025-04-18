@@ -27,7 +27,7 @@
 			return
 
 		var/ahelp_ref = href_list["ahelp"]
-		var/datum/admin_help/AH = locate(ahelp_ref)
+		var/datum/help_ticket/admin/AH = locate(ahelp_ref)
 		if(AH)
 			AH.Action(href_list["ahelp_action"])
 		else
@@ -1916,15 +1916,17 @@
 	else if(href_list["slowquery"])
 		if(!check_rights(R_ADMIN))
 			return
+
+		var/data = list("key" = usr.key)
 		var/answer = href_list["slowquery"]
 		if(answer == "yes")
-			log_query_debug("[usr.key] | Reported a server hang")
-			if(alert(usr, "Had you just press any admin buttons?", "Query server hang report", "Yes", "No") == "Yes")
+			if(tgui_alert(usr, "Did you just press any admin buttons?", "Query server hang report", list("Yes", "No")) == "Yes")
 				var/response = input(usr,"What were you just doing?","Query server hang report") as null|text
 				if(response)
-					log_query_debug("[usr.key] | [response]")
+					data["response"] = response
+			logger.Log(LOG_CATEGORY_DEBUG_SQL, "server hang", data)
 		else if(answer == "no")
-			log_query_debug("[usr.key] | Reported no server hang")
+			logger.Log(LOG_CATEGORY_DEBUG_SQL, "no server hang", data)
 
 	else if(href_list["ctf_toggle"])
 		if(!check_rights(R_ADMIN))
@@ -2148,6 +2150,16 @@
 		if(!paper_to_show)
 			return
 		paper_to_show.ui_interact(usr)
+	else if(href_list["play_internet"])
+		if(!check_rights(R_SOUND))
+			return
+
+		var/credit = href_list["credit"]
+		var/link_url = href_list["play_internet"]
+		if(!link_url)
+			return
+
+		web_sound(usr, link_url, credit)
 
 /datum/admins/proc/HandleCMode()
 	if(!check_rights(R_ADMIN))

@@ -348,6 +348,7 @@
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/C = owner
+		var/obj/item/organ/brain/brain = C.getorganslot(ORGAN_SLOT_BRAIN)
 		if(C.stat != DEAD)
 			SEND_SOUND(owner, sound('code/modules/wod13/sounds/rage_heal.ogg', 0, 0, 75))
 			C.adjustBruteLoss(-40*C.auspice.level, TRUE)
@@ -374,6 +375,9 @@
 				if(length(BD.all_wounds))
 					var/datum/wound/W = pick(BD.all_wounds)
 					W.remove_wound()
+			if (brain)
+				brain.applyOrganDamage(-30*C.auspice.level)
+				brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 /datum/action/change_apparel
 	name = "Change Apparel"
@@ -447,7 +451,8 @@
 			H.update_icons()
 		else
 			H.remove_overlay(PROTEAN_LAYER)
-			var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', H.transformator.crinos_form?.sprite_color, -PROTEAN_LAYER)
+			var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
+			var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
 			H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
 			H.apply_overlay(PROTEAN_LAYER)
 			G.punchdamagelow += 15

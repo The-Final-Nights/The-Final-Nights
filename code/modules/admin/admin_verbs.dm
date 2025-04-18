@@ -23,6 +23,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/addbunkerbypass,
 	/client/proc/revokebunkerbypass,
 	// TFN MODULAR END
+	/client/proc/requests
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
 GLOBAL_PROTECT(admin_verbs_admin)
@@ -93,7 +94,9 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/toggleadminhelpsound,
 	/client/proc/respawn_character,
 	/datum/admins/proc/open_borgopanel,
-	/client/proc/fax_panel /*send a paper to fax*/
+	/client/proc/log_viewer_new,
+	/client/proc/fax_panel, /*send a paper to fax*/
+	/client/proc/openTicketManager
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
 GLOBAL_PROTECT(admin_verbs_ban)
@@ -207,7 +210,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	)
 GLOBAL_LIST_INIT(admin_verbs_possess, list(GLOBAL_PROC_REF(possess), GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)
-GLOBAL_LIST_INIT(admin_verbs_permissions, list(/client/proc/edit_admin_permissions))
+GLOBAL_LIST_INIT(admin_verbs_permissions, list(/client/proc/edit_admin_permissions, /client/proc/edit_mentors))
 GLOBAL_PROTECT(admin_verbs_permissions)
 GLOBAL_LIST_INIT(admin_verbs_poll, list(/client/proc/poll_panel))
 GLOBAL_PROTECT(admin_verbs_poll)
@@ -699,24 +702,38 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	holder.poll_list_panel()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Server Poll Management") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/findStealthKey(txt)
-	if(txt)
-		for(var/P in GLOB.stealthminID)
-			if(GLOB.stealthminID[P] == txt)
-				return P
-	txt = GLOB.stealthminID[ckey]
-	return txt
+/// Returns this client's stealthed ckey
+/client/proc/getStealthKey()
+	return GLOB.stealthminID[ckey]
+
+/// Takes a stealthed ckey as input, returns the true key it represents
+/proc/findTrueKey(stealth_key)
+	if(!stealth_key)
+		return
+	for(var/potentialKey in GLOB.stealthminID)
+		if(GLOB.stealthminID[potentialKey] == stealth_key)
+			return potentialKey
+
+/// Hands back a stealth ckey to use, guarenteed to be unique
+/proc/generateStealthCkey()
+	var/guess = rand(0, 1000)
+	var/text_guess
+	var/valid_found = FALSE
+	while(valid_found == FALSE)
+		valid_found = TRUE
+		text_guess = "@[num2text(guess)]"
+		// We take a guess at some number, and if it's not in the existing stealthmin list we exit
+		for(var/key in GLOB.stealthminID)
+			// If it is in the list tho, we up one number, and redo the loop
+			if(GLOB.stealthminID[key] == text_guess)
+				guess += 1
+				valid_found = FALSE
+				break
+
+	return text_guess
 
 /client/proc/createStealthKey()
-	var/num = (rand(0,1000))
-	var/i = 0
-	while(i == 0)
-		i = 1
-		for(var/P in GLOB.stealthminID)
-			if(num == GLOB.stealthminID[P])
-				num++
-				i = 0
-	GLOB.stealthminID["[ckey]"] = "@[num2text(num)]"
+	GLOB.stealthminID["[ckey]"] = generateStealthCkey()
 
 /client/proc/stealth()
 	set category = "Admin"

@@ -66,7 +66,7 @@ GLOBAL_LIST_INIT(malkavian_character_replacements, list(
 	button_icon_state = "malk_speech"
 	check_flags = AB_CHECK_CONSCIOUS
 	vampiric = TRUE
-	cooldown_time = 5 MINUTES
+	cooldown_time = 5 SECONDS
 	///clane datum
 	var/datum/vampireclane/malkavian/clane_datum
 
