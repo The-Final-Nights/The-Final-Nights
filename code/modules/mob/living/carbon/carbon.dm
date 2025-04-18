@@ -981,6 +981,8 @@
 	if(admin_revive)
 		suiciding = FALSE
 		regenerate_limbs()
+		if(HAS_TRAIT(src, TRAIT_TORPOR))
+			cure_torpor()
 		regenerate_organs()
 		set_handcuffed(null)
 		for(var/obj/item/restraints/R in contents) //actually remove cuffs from inventory
