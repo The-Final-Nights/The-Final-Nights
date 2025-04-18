@@ -2,6 +2,7 @@
 /datum/gear/accessory/gloves
 	subtype_path = /datum/gear/accessory/gloves
 	slot = ITEM_SLOT_GLOVES
+	sort_category = "Accessories"
 	cost = 1
 
 /datum/gear/accessory/gloves/leather

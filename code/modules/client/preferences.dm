@@ -1161,13 +1161,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "</center>"
 					dat += "<HR>"
 			var/list/type_blacklist = list()
+			var/list/slot_blacklist = list()
 			if(equipped_gear && length(equipped_gear))
 				for(var/i = 1, i <= length(equipped_gear), i++)
 					var/datum/gear/G = GLOB.gear_datums[equipped_gear[i]]
 					if(G)
-						if(G.subtype_path in type_blacklist)
+						if((G.subtype_path in type_blacklist) || G.slot in slot_blacklist)
 							continue
 						type_blacklist += G.subtype_path
+						slot_blacklist += G.slot
 					else
 						equipped_gear.Cut(i,i+1)
 
@@ -1212,8 +1214,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				if(G.allowed_roles)
 					dat += "<font size=2>"
+					var/list/allowedroles = list()
 					for(var/role in G.allowed_roles)
-						dat += role + " "
+						allowedroles += role
+					dat += english_list(allowedroles, null, ", ")
 					dat += "</font>"
 				dat += "</td><td><font size=2><i>[G.description]</i></font></td></tr>"
 			dat += "</table>"
@@ -1842,13 +1846,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					tgui_alert(user, "You can't have more than [CONFIG_GET(number/max_loadout_items)] items in your loadout!")
 					return
 				var/list/type_blacklist = list()
+				var/list/slot_blacklist = list()
 				for(var/gear_name in equipped_gear)
 					var/datum/gear/G = GLOB.gear_datums[gear_name]
 					if(istype(G))
 						if(G.subtype_path in type_blacklist)
 							continue
 						type_blacklist += G.subtype_path
-				if(!(TG.subtype_path in type_blacklist))
+				if(!(TG.subtype_path in type_blacklist) && !(TG.slot in slot_blacklist))
 					equipped_gear += TG.display_name
 				else
 					tgui_alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
