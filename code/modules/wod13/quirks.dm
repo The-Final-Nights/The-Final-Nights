@@ -639,7 +639,7 @@ Dancer
 
 /datum/quirk/hardened_soles
 	name = "Hardened Soles"
-	desc = "You're feet callouses are so thick, you can walk barefoot across the state if you want to!"
+	desc = "Your feet callouses are so thick, you can walk barefoot across the state if you want to!"
 	value = 2
 
 /datum/quirk/hardened_soles/on_spawn()
