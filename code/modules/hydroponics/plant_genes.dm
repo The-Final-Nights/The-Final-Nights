@@ -227,18 +227,6 @@
 /datum/plant_gene/trait/proc/on_grow(obj/machinery/hydroponics/H)
 	return
 
-	// Add on any bonus lines on examine
-	if(description)
-		RegisterSignal(our_plant, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
-	return TRUE
-
-/// Add on any unique examine text to the plant's examine text.
-/datum/plant_gene/trait/proc/examine(obj/item/our_plant, mob/examiner, list/examine_list)
-	SIGNAL_HANDLER
-
-	examine_list += span_info("[description]")
-
-/// Allows the plant to be squashed when thrown or slipped on, leaving a colored mess and trash type item behind.
 /datum/plant_gene/trait/squash
 	// Allows the plant to be squashed when thrown or slipped on, leaving a colored mess and trash type item behind.
 	// Also splashes everything in target turf with reagents and applies other trait effects (teleporting, etc) to the target by on_squash.
@@ -442,12 +430,16 @@
 			pocell.icon_state = G.icon_state
 			pocell.maxcharge = G.seed.potency * 20
 
-	our_plant.flags_1 |= HAS_CONTEXTUAL_SCREENTIPS_1
-	RegisterSignal(our_plant, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
-	RegisterSignal(our_plant, COMSIG_ATOM_ATTACKBY, PROC_REF(make_battery))
-
+	// The secret of potato supercells!
+	var/datum/plant_gene/trait/cell_charge/CG = G.seed.get_gene(/datum/plant_gene/trait/cell_charge)
+	if(CG) // Cell charge max is now 40MJ or otherwise known as 400KJ (Same as bluespace power cells)
+		pocell.maxcharge *= CG.rate*100
+	pocell.charge = pocell.maxcharge
+	pocell.name = "[G.name] battery"
+	pocell.desc = "A rechargeable plant-based power cell. This one has a rating of [DisplayEnergy(pocell.maxcharge)], and you should not swallow it."
 	if(G.reagents.has_reagent(/datum/reagent/toxin/plasma, 2))
 		pocell.rigged = TRUE
+
 		qdel(G)
 	else
 		to_chat(user, "<span class='warning'>You need five lengths of cable to make a [G] battery!</span>")
