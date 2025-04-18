@@ -380,7 +380,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 			target.Paralyze(50)
 			target.adjustStaminaLoss(500)
 			step_away(target, demon)
-			target.visible_message("<span class='warning'>[target] jumps backwards, falling on the ground!</span>","<span class='userdanger'>[demon] slams into you!</span>")
+			target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
 			STOP_PROCESSING(SSfastprocess, src)
 			qdel(src)
 		next_action = 0.2

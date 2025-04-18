@@ -29,10 +29,11 @@
 	name = "The Mark Of Doom"
 	genrequired = 7
 	bloodcurse = 5
+
 /datum/curse/daimonion/lying_weakness/activate(mob/living/carbon/human/target)
 	. = ..()
 	target.gain_trauma(/datum/brain_trauma/mild/mind_echo, TRAUMA_RESILIENCE_ABSOLUTE)
-	to_chat(target, "<span class='userdanger'><b>You feel like a great curse was placed on you!</span></b>")
+	to_chat(target, span_userdanger(span_bold("You feel like a great curse was placed on you!")))
 
 /datum/curse/daimonion/physical_weakness/activate(mob/living/target)
 	. = ..()
@@ -42,7 +43,7 @@
 	for (var/datum/action/blood_power/blood_power in vampire.actions)
 		if(blood_power)
 			blood_power.Remove(vampire)
-	to_chat(target, "<span class='userdanger'><b>You feel like a great curse was placed on you!</span></b>")
+	to_chat(target, span_userdanger(span_bold("You feel like a great curse was placed on you!")))
 
 /datum/curse/daimonion/mental_weakness/activate(mob/living/target)
 	. = ..()
@@ -50,7 +51,7 @@
 		target.social = 4
 	if(target.mentality >= 5)
 		target.mentality = 4
-	to_chat(target, "<span class='userdanger'><b>You feel like a great curse was placed on you!</span></b>")
+	to_chat(target, span_userdanger(span_bold("You feel like a great curse was placed on you!")))
 
 /datum/curse/daimonion/offspring_weakness/activate(mob/living/target)
 	. = ..()
@@ -58,11 +59,11 @@
 	for (var/datum/action/give_vitae/give_vitae in vampire.actions)
 		if(give_vitae)
 			give_vitae.Remove(vampire)
-	to_chat(target, "<span class='userdanger'><b>You feel like a great curse was placed on you!</span></b>")
+	to_chat(target, span_userdanger(span_bold("You feel like a great curse was placed on you!")))
 
 /datum/curse/daimonion/success_weakness/activate(mob/living/target)
 	. = ..()
 	target.add_quirk(/datum/quirk/slowpoke)
 	target.add_quirk(/datum/quirk/lazy)
 	target.add_quirk(/datum/quirk/hungry)
-	to_chat(target, "<span class='userdanger'><b>You feel like a great curse was placed on you!</span></b>")
+	to_chat(target, span_userdanger(span_bold("You feel like a great curse was placed on you!")))
