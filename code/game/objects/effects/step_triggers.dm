@@ -49,6 +49,8 @@
 	if(!A || !ismovable(A))
 		return
 	var/atom/movable/AM = A
+	var/curtiles = 0
+	var/stopthrow = FALSE
 	for(var/obj/effect/step_trigger/thrower/T in orange(2, src))
 		if(AM in T.affecting)
 			return
@@ -56,41 +58,39 @@
 	if(immobilize)
 		ADD_TRAIT(AM, TRAIT_IMMOBILIZED, src)
 
-	affecting[AM] = AM.dir
-	var/datum/move_loop/loop = SSmove_manager.move(AM, direction, speed, tiles ? tiles * speed : INFINITY)
-	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
-	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
-	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(set_to_normal))
+	affecting.Add(AM)
+	while(AM && !stopthrow)
+		if(tiles)
+			if(curtiles >= tiles)
+				break
+		if(AM.z != src.z)
+			break
 
-/obj/effect/step_trigger/thrower/proc/pre_move(datum/move_loop/source)
-	SIGNAL_HANDLER
-	var/atom/movable/being_moved = source.moving
-	affecting[being_moved] = being_moved.dir
+		curtiles++
 
-/obj/effect/step_trigger/thrower/proc/post_move(datum/move_loop/source)
-	SIGNAL_HANDLER
-	var/atom/movable/being_moved = source.moving
-	if(!facedir)
-		being_moved.setDir(affecting[being_moved])
-	if(being_moved.z != z)
-		qdel(source)
-		return
+		sleep(speed)
+
+		// Calculate if we should stop the process
 	if(!nostop)
-		for(var/obj/effect/step_trigger/T in get_turf(being_moved))
+		for(var/obj/effect/step_trigger/T in get_step(AM, direction))
 			if(T.stopper && T != src)
-				qdel(source)
-				return
+				stopthrow = TRUE
 	else
-		for(var/obj/effect/step_trigger/teleporter/T in get_turf(being_moved))
+		for(var/obj/effect/step_trigger/teleporter/T in get_step(AM, direction))
 			if(T.stopper)
-				qdel(source)
-				return
+				stopthrow = TRUE
 
-/obj/effect/step_trigger/thrower/proc/set_to_normal(datum/move_loop/source)
-	SIGNAL_HANDLER
-	var/atom/movable/being_moved = source.moving
-	affecting -= being_moved
-	REMOVE_TRAIT(being_moved, TRAIT_IMMOBILIZED, REF(src))
+		if(AM)
+			var/predir = AM.dir
+			step(AM, direction)
+			if(!facedir)
+				AM.setDir(predir)
+
+
+
+	affecting.Remove(AM)
+
+	REMOVE_TRAIT(AM, TRAIT_IMMOBILIZED, src)
 
 
 /* Stops things thrown by a thrower, doesn't do anything */

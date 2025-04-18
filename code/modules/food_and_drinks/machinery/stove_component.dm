@@ -42,12 +42,8 @@
 	RegisterSignal(parent, COMSIG_ATOM_EXITED, PROC_REF(on_exited))
 	RegisterSignal(parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_overlay_update))
 	RegisterSignal(parent, COMSIG_OBJ_DECONSTRUCT, PROC_REF(on_deconstructed))
-	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_MACHINERY_REFRESH_PARTS, PROC_REF(on_refresh_parts))
-
-	var/obj/machinery/real_parent = parent
-	real_parent.flags_1 |= HAS_CONTEXTUAL_SCREENTIPS_1
 
 /datum/component/stove/UnregisterFromParent()
 	if(!QDELING(parent))
@@ -60,7 +56,6 @@
 		COMSIG_ATOM_ATTACK_HAND_SECONDARY,
 		COMSIG_OBJ_DECONSTRUCT,
 		COMSIG_ATOM_EXITED,
-		COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM,
 		COMSIG_ATOM_UPDATE_OVERLAYS,
 		COMSIG_ATOM_ATTACKBY,
 		COMSIG_ATOM_EXAMINE,
@@ -161,17 +156,6 @@
 	light.color = "#00ff00"
 	overlays += light
 	overlays += emissive_appearance(real_parent.icon, "[real_parent.base_icon_state]_on_overlay", real_parent, alpha = real_parent.alpha)
-
-/datum/component/stove/proc/on_requesting_context(obj/machinery/source, list/context, obj/item/held_item)
-	SIGNAL_HANDLER
-
-	if(isnull(held_item))
-		context[SCREENTIP_CONTEXT_RMB] = "Turn [on ? "off":"on"] burner"
-		return CONTEXTUAL_SCREENTIP_SET
-
-	if(held_item.is_open_container())
-		context[SCREENTIP_CONTEXT_LMB] = "Place container"
-		return CONTEXTUAL_SCREENTIP_SET
 
 /datum/component/stove/proc/on_examine(obj/machinery/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER

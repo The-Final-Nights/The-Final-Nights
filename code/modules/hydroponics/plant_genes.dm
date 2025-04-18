@@ -446,12 +446,11 @@
 	RegisterSignal(our_plant, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
 	RegisterSignal(our_plant, COMSIG_ATOM_ATTACKBY, PROC_REF(make_battery))
 
-			if(G.reagents.has_reagent(/datum/reagent/toxin/plasma, 2))
-				pocell.rigged = TRUE
-
-			qdel(G)
-		else
-			to_chat(user, "<span class='warning'>You need five lengths of cable to make a [G] battery!</span>")
+	if(G.reagents.has_reagent(/datum/reagent/toxin/plasma, 2))
+		pocell.rigged = TRUE
+		qdel(G)
+	else
+		to_chat(user, "<span class='warning'>You need five lengths of cable to make a [G] battery!</span>")
 
 
 /datum/plant_gene/trait/stinging
