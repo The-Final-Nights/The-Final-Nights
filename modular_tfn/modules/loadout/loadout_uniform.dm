@@ -73,14 +73,14 @@
 	path = /obj/item/clothing/under/vampire/archivist/female
 
 /datum/gear/uniform/suit/prince
-	display_name = "prince's suit"
-	allowed_roles = list("Prince")
+	display_name = "prince suit"
 	path = /obj/item/clothing/under/vampire/prince
+	allowed_roles = list("Prince")
 
 /datum/gear/uniform/suit/prince_skirt
-	display_name = "prince's suitskirt"
-	allowed_roles = list("Prince")
+	display_name = "prince suitskirt"
 	path = /obj/item/clothing/under/vampire/prince/female
+	allowed_roles = list("Prince")
 
 // Skirt
 /datum/gear/uniform/skirt
