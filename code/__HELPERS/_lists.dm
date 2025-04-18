@@ -183,6 +183,11 @@
 
 			return "[output][and_text][input[index]]"
 
+/// Return either pick(list) or null if list is not of type /list or is empty
+/proc/safepick(list/L)
+	if(LAZYLEN(L))
+		return pick(L)
+
 //Checks for specific types in a list
 /proc/is_type_in_list(atom/A, list/L)
 	if(!LAZYLEN(L) || !A)

@@ -8,7 +8,6 @@
 	use_skintones = TRUE
 	limbs_id = "human"
 	wings_icon = "Dragon"
-	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	brutemod = 0.75
 	heatmod = 1
 	burnmod = 1

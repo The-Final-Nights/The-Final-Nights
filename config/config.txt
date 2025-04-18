@@ -48,6 +48,11 @@ ADMIN_LEGACY_SYSTEM
 ##If enabled, each time admins are loaded ranks the database will be updated with the current ranks and their flags
 #LOAD_LEGACY_RANKS_ONLY
 
+## Comment this out if you want to use the SQL based mentor system, the legacy system uses mentors.txt.
+## You need to set up your database to use the SQL based system.
+## This flag is automatically enabled if SQL_ENABLED isn't
+MENTOR_LEGACY_SYSTEM
+
 ## Comment this out to stop locally connected clients from being given the almost full access !localhost! admin rank
 ENABLE_LOCALHOST_RANK
 
@@ -74,7 +79,6 @@ ENABLE_LOCALHOST_RANK
 #USE_EXP_RESTRICTIONS_OTHER
 ## Allows admins to bypass job playtime requirements.
 #USE_EXP_RESTRICTIONS_ADMIN_BYPASS
-
 ##Log camera pictures - Must have picture logging enabled
 PICTURE_LOGGING_CAMERA
 
@@ -186,13 +190,21 @@ RULESURL https://discord.gg/WU92NG2Me8
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 BANAPPEALS https://discord.gg/WU92NG2Me8
 
-## System command that invokes youtube-dl, used by Play Internet Sound.
-## You can install youtube-dl with
-## "pip install youtube-dl" if you have pip installed
-## from https://github.com/rg3/youtube-dl/releases
+## System command that invokes yt-dlp, used by Play Internet Sound.
+## You can install yt-dlp with
+## "pip install yt-dlp" if you have pip installed
+## from https://github.com/yt-dlp/yt-dlp/releases
 ## or your package manager
-## The default value assumes youtube-dl is in your system PATH
-# INVOKE_YOUTUBEDL youtube-dl
+## The default value assumes yt-dlp is in your system PATH
+# INVOKE_YOUTUBEDL yt-dlp
+
+## Comment this out to disable users ability to use the request internet sounds to be played.
+REQUEST_INTERNET_SOUND
+
+## Request Internet Sound Allowed URL'S comma separated, urls here are the only sites allowed through Request Internet Sound, Add more to allow more, or remove to disallow.
+## The Defaults here are all supported by youtube-dl
+## Ensure . and / are escaped with \
+REQUEST_INTERNET_ALLOWED youtube\.com\/watch?v=,youtu\.be\/,soundcloud\.com\/,bandcamp\.com\/track\/
 
 ## In-game features
 ##Toggle for having jobs load up from the .txt
