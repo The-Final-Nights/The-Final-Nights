@@ -867,3 +867,7 @@
 		return founds
 
 	return msg
+
+#undef CLAIM_DONTCLAIM
+#undef CLAIM_CLAIMIFNONE
+#undef CLAIM_OVERRIDE
