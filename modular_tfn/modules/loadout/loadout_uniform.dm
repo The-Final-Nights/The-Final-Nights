@@ -72,6 +72,16 @@
 	description = "Some business clothes." // Consistency!
 	path = /obj/item/clothing/under/vampire/archivist/female
 
+/datum/gear/uniform/suit/prince
+	display_name = "prince's suit"
+	allowed_roles = list("Prince")
+	path = /obj/item/clothing/under/vampire/prince
+
+/datum/gear/uniform/suit/prince_skirt
+	display_name = "prince's suitskirt"
+	allowed_roles = list("Prince")
+	path = /obj/item/clothing/under/vampire/prince/female
+
 // Skirt
 /datum/gear/uniform/skirt
 	subtype_path = /datum/gear/uniform/skirt

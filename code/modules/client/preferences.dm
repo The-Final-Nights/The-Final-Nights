@@ -1831,7 +1831,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					to_chat(user, span_info("Purchased [TG.display_name]!"))
 					save_character()
 			else
-				to_chat(user, "<span class='warning'>You don't have enough experience to purchase \the [TG.display_name]!</span>")
+				to_chat(user, span_warning("You don't have enough experience to purchase \the [TG.display_name]!"))
 
 		if(href_list["toggle_gear"])
 			var/datum/gear/TG = GLOB.gear_datums[href_list["toggle_gear"]]
@@ -1839,7 +1839,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				equipped_gear -= TG.display_name
 			else
 				if(length(equipped_gear) >= CONFIG_GET(number/max_loadout_items))
-					alert(user, "You can't have more than [CONFIG_GET(number/max_loadout_items)] items in your loadout!")
+					tgui_alert(user, "You can't have more than [CONFIG_GET(number/max_loadout_items)] items in your loadout!")
 					return
 				var/list/type_blacklist = list()
 				for(var/gear_name in equipped_gear)
@@ -1851,7 +1851,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(!(TG.subtype_path in type_blacklist))
 					equipped_gear += TG.display_name
 				else
-					alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
+					tgui_alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
 
 		else if(href_list["select_category"])
 			gear_tab = href_list["select_category"]

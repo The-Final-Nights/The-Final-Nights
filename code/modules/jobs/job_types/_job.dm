@@ -150,7 +150,7 @@
 					permitted = FALSE
 
 				if(!permitted)
-					to_chat(M, "<span class='warning'>Your current species or role does not permit you to spawn with [gear]!</span>")
+					to_chat(M, span_warning("Your current species or role does not permit you to spawn with [gear]!"))
 					continue
 				if(G.slot)
 					if(!H.equip_to_slot_or_del(G.spawn_item(H, owner = H), G.slot))
@@ -160,32 +160,32 @@
 			else
 				M.client.prefs.equipped_gear -= gear
 
-	if(gear_leftovers?.len)
+	if(length(gear_leftovers))
 		for(var/datum/gear/G in gear_leftovers)
 			var/item = G.spawn_item(null, owner = H)
 			var/atom/placed_in = spawnee.equip_to_slot_if_possible(item, disable_warning = TRUE)
 
 			if(istype(placed_in))
 				if(isturf(placed_in))
-					to_chat(M, "<span class='notice'>Placing [G.display_name] on [placed_in]!</span>")
+					to_chat(M, span_notice("Placing [G.display_name] on [placed_in]!"))
 				else
-					to_chat(M, "<span class='noticed'>Placing [G.display_name] in [placed_in.name]]")
+					to_chat(M, span_notice("Placing [G.display_name] in [placed_in.name]]"))
 				continue
 
 			if(H.equip_to_appropriate_slot(item))
-				to_chat(M, "<span class='notice'>Placing [G.display_name] in your inventory!</span>")
+				to_chat(M, span_notice("Placing [G.display_name] in your inventory!"))
 				continue
 			if(H.put_in_hands(item))
-				to_chat(M, "<span class='notice'>Placing [G.display_name] in your hands!</span>")
+				to_chat(M, span_notice("Placing [G.display_name] in your hands!"))
 				continue
 
 			var/obj/item/storage/B = (locate() in H)
 			if(B)
 				G.spawn_item(B, owner = H)
-				to_chat(M, "<span class='notice'>Placing [G.display_name] in [B.name]!</span>")
+				to_chat(M, span_notice("Placing [G.display_name] in [B.name]!"))
 				continue
 
-			to_chat(M, "<span class='danger'>Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug.</span>")
+			to_chat(M, span_danger("Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug."))
 			qdel(item)
 
 		qdel(gear_leftovers)
