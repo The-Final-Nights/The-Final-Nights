@@ -176,7 +176,9 @@
 			for(var/datum/curse/daimonion/C in curses)
 				if(C.name == chosencurse)
 					C.activate(target)
-					owner.cursed_bloodpool += C.bloodcurse
+					owner.maxbloodpool -= C.bloodcurse
+					if(owner.bloodpool > owner.maxbloodpool)
+						owner.bloodpool = owner.maxbloodpool
 	else
 		to_chat(owner, span_warning("This one is already cursed!"))
 
