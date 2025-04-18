@@ -8,6 +8,7 @@
 // Suits (and suitskirts)
 /datum/gear/uniform/suit
 	subtype_path = /datum/gear/uniform/suit
+	cost = 4 // Suits aren't cheap!
 
 /datum/gear/uniform/suit/fancy_gray
 	display_name = "fancy suit, gray"
@@ -26,15 +27,15 @@
 	path = /obj/item/clothing/under/vampire/ventrue/female
 
 /datum/gear/uniform/suit/formal_white
-	display_name = "formal suit, white"
+	display_name = "plain suit, white"
 	path = /obj/item/clothing/under/vampire/office
 
-/datum/gear/uniform/suit/formal_bargundy
-	display_name = "formal suit, bargundy"
+/datum/gear/uniform/suit/formal_burgundy
+	display_name = "plain suit, burgundy"
 	path = /obj/item/clothing/under/vampire/tremere
 
-/datum/gear/uniform/suit/formal_bargundy_skirt
-	display_name = "formal suitskirt, bargundy"
+/datum/gear/uniform/suit/formal_burgundy_skirt
+	display_name = "plain suitskirt, burgundy"
 	path = /obj/item/clothing/under/vampire/tremere/female
 
 /datum/gear/uniform/suit/plain_black
@@ -63,10 +64,12 @@
 
 /datum/gear/uniform/suit/plain_brown
 	display_name = "plain suit, brown"
+	description = "Some business clothes." // Consistency
 	path = /obj/item/clothing/under/vampire/archivist
 
 /datum/gear/uniform/suit/plain_brown_skirt
 	display_name = "plain suit, brown"
+	description = "Some business clothes." // Consistency!
 	path = /obj/item/clothing/under/vampire/archivist/female
 
 // Skirt
@@ -75,11 +78,36 @@
 
 /datum/gear/uniform/skirt/pentagram
 	display_name = "outfit, skirt pentagram"
+	description = "A red pentagram on a black t-shirt." // Shortened, as we don't want to bloat the menu with long descriptions
 	path = /obj/item/clothing/under/vampire/baali/female
+
+// Turtleneck
+/datum/gear/uniform/turtleneck
+	subtype_path = /datum/gear/uniform/turtleneck
+
+
+/datum/gear/uniform/turtleneck/black
+	display_name = "turtleneck, black"
+	description = "A black turtleneck" // Consistency!
+	path = /obj/item/clothing/under/vampire/turtleneck_black
+
+/datum/gear/uniform/turtleneck/navy
+	display_name = "turtleneck, navy"
+	path = /obj/item/clothing/under/vampire/turtleneck_navy
+
+/datum/gear/uniform/turtleneck/red
+	display_name = "turtleneck, red"
+	path = /obj/item/clothing/under/vampire/turtleneck_red
+
+/datum/gear/uniform/turtleneck/white
+	display_name = "turtleneck, white"
+	description = "A white turtleneck" // Consistency!
+	path = /obj/item/clothing/under/vampire/turtleneck_white
 
 // Pants
 /datum/gear/uniform/pants
 	subtype_path = /datum/gear/uniform/pants
+	cost = 2
 
 /datum/gear/uniform/pants/leather
 	display_name = "pants, leather"
@@ -104,6 +132,7 @@
 
 /datum/gear/uniform/flamboyant_female
 	display_name = "outfit, flamboyant female"
+	description = "	Some sexy clothes." // Consistency!
 	path = /obj/item/clothing/under/vampire/toreador/female
 
 /datum/gear/uniform/sexy
@@ -136,6 +165,7 @@
 
 /datum/gear/uniform/pentagram
 	display_name = "outfit, pentagram"
+	description = "A red pentagram on a black t-shirt." // Shortened, as we don't want to bloat the menu with long descriptions
 	path = /obj/item/clothing/under/vampire/baali
 
 /datum/gear/uniform/emo
@@ -181,22 +211,6 @@
 /datum/gear/uniform/sleeveless_white
 	display_name = "outfit, white shirt"
 	path = /obj/item/clothing/under/vampire/bandit
-
-/datum/gear/uniform/turtleneck_white
-	display_name = "outfit, white turtleneck"
-	path = /obj/item/clothing/under/vampire/turtleneck_white
-
-/datum/gear/uniform/turtleneck_black
-	display_name = "outfit, black turtleneck"
-	path = /obj/item/clothing/under/vampire/turtleneck_black
-
-/datum/gear/uniform/turtleneck_red
-	display_name = "outfit, red turtleneck"
-	path = /obj/item/clothing/under/vampire/turtleneck_red
-
-/datum/gear/uniform/turtleneck_navy
-	display_name = "outfit, navy turtleneck"
-	path = /obj/item/clothing/under/vampire/turtleneck_navy
 
 /datum/gear/uniform/biker
 	display_name = "outfit, biker"

@@ -15,6 +15,7 @@
 /datum/gear/footwear/shoes/black_fancy
 	display_name = "shoes, fancy black"
 	path = /obj/item/clothing/shoes/vampire/businessblack
+	cost = 3
 
 /datum/gear/footwear/shoes/brown
 	display_name = "shoes, brown"
@@ -50,14 +51,14 @@
 	path = /obj/item/clothing/under/vampire/burlesque/daisyd
 
 /datum/gear/footwear/jackboots
-	display_name = "black boots"
+	display_name = "boots, black"
 	path = /obj/item/clothing/shoes/vampire/jackboots
 
 /datum/gear/footwear/jackboots_work
-	display_name = "work boots"
+	display_name = "boots, work"
 	path = /obj/item/clothing/shoes/vampire/jackboots/work
 
-/datum/gear/footwear/high_heels
+/datum/gear/footwear/high_heels_black
 	display_name = "high heels, black"
 	path = /obj/item/clothing/shoes/vampire/heels
 

@@ -1,5 +1,5 @@
 /datum/gear/accessory
-	subtype_path = /datum/gear/accessory
+	subtype_path = /datum/gear/accessory/neck
 	slot = ITEM_SLOT_NECK
 	sort_category = "Accessories"
 	cost = 2

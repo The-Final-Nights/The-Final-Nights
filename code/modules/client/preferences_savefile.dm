@@ -262,8 +262,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_keybindings(key_bindings)
-	equipped_gear	= SANITIZE_LIST(equipped_gear)
-	purchased_gear  = SANITIZE_LIST(purchased_gear)
+	equipped_gear	= SANITIZE_LIST(equipped_gear) // TFN ADDITION: loadout
+	purchased_gear  = SANITIZE_LIST(purchased_gear) // TFN ADDITION: loadout
 	nsfw_content_pref = sanitize_integer(nsfw_content_pref, FALSE, TRUE, src::nsfw_content_pref)
 
 	player_experience   = sanitize_integer(player_experience, 0, 100000, 0)
@@ -502,6 +502,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		READ_FILE(S["feature_human_tail"], features["tail_human"])
 		READ_FILE(S["feature_human_ears"], features["ears"])
 
+
+	// TFN ADDITION START: loadout
 	READ_FILE(S["equipped_gear"], equipped_gear)
 	READ_FILE(S["purchased_gear"], purchased_gear)
 	if(config) //This should *probably* always be there, but just in case.
@@ -510,11 +512,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			equipped_gear = list()
 			WRITE_FILE(S["equipped_gear"], equipped_gear)
 
-	//Clearing invalid items that aren't on the loadout list
+	// Clearing invalid items that aren't on the loadout list
 	if(clean_invalid_loadout(equipped_gear))
 		WRITE_FILE(S["equipped_gear"], equipped_gear)
 	if(clean_invalid_loadout(purchased_gear))
 		WRITE_FILE(S["purchased_gear"], purchased_gear)
+	// TFN ADDITION END
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -841,7 +844,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["chi_types"], chi_types)
 	WRITE_FILE(S["chi_levels"], chi_levels)
 	WRITE_FILE(S["path"], morality_path.name)
-	WRITE_FILE(S["purchased_gear"], purchased_gear)
+	WRITE_FILE(S["purchased_gear"], purchased_gear) // TFN ADDITION: loadout
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -851,12 +854,13 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["preferred_ai_core_display"] ,  preferred_ai_core_display)
 	WRITE_FILE(S["prefered_security_department"] , prefered_security_department)
 
-	// Getting rid of the previewed items before writing
+	// TFN ADDITION START: Getting rid of the previewed items before writing
 	if(equipped_gear)
 		for(var/gear in equipped_gear)
 			if(!(gear in purchased_gear))
 				equipped_gear -= gear
 	WRITE_FILE(S["equipped_gear"], equipped_gear)
+	// TFN ADDITION END
 
 	//Jobs
 	WRITE_FILE(S["joblessrole"]		, joblessrole)
@@ -897,7 +901,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 #endif
 
-/proc/clean_invalid_loadout(var/list/gear_list)
+/proc/clean_invalid_loadout(var/list/gear_list) // TFN ADDITION: clears invalid loadout items
 	var/changed = FALSE
 	for(var/gear in gear_list)
 		if(!(gear in GLOB.gear_datums))

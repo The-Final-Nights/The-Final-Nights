@@ -107,8 +107,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// 0 = character settings, 1 = game preferences
 	var/current_tab = 0
 
-	var/show_loadout = TRUE
-
 	var/unlock_content = 0
 
 	var/list/ignoring = list()
@@ -134,13 +132,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/list/exp = list()
 	var/list/menuoptions
-
-	//Gear the client has purchased
-	var/list/purchased_gear = list()
-	///Gear the client has equipped
-	var/list/equipped_gear = list()
-	///Gear tab currently being viewed
-	var/gear_tab = "General"
 
 	var/action_buttons_screen_locs = list()
 
@@ -305,8 +296,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	body_model = rand(1, 3)
 	experience_used_on_character = 0
 	real_name = random_unique_name(gender)
-	equipped_gear = list() // TFN edit
-	headshot_link = null // TFN EDIT
+	equipped_gear = list() // TFN ADDITION
+	headshot_link = null // TFN ADDITION
 	save_character()
 
 /datum/preferences/New(client/C)
@@ -349,7 +340,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return coolfont
 
 /datum/preferences/proc/ShowChoices(mob/user)
-	show_loadout = (current_tab != 1) ? show_loadout : FALSE
+	show_loadout = (current_tab != 1) ? show_loadout : FALSE // TFN EDIT: loadout
 	if(!SSatoms.initialized)
 		to_chat(user, span_warning("Please wait for the game to do a little more setup first...!"))
 		return
@@ -358,13 +349,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(slot_randomized)
 		load_character(default_slot) // Reloads the character slot. Prevents random features from overwriting the slot if saved.
 		slot_randomized = FALSE
-	update_preview_icon(show_loadout)
+	update_preview_icon(show_loadout) // TFN EDIT: original: update_preview_icon()
 	var/list/dat = list("<center>")
 
 	if(istype(user, /mob/dead/new_player))
 		dat += "<a href='byond://?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>[make_font_cool("CHARACTER SETTINGS")]</a>"
 	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>[make_font_cool("GAME PREFERENCES")]</a>"
-	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>[make_font_cool("LOADOUT")]</a>"
+	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>[make_font_cool("LOADOUT")]</a>" // TFN ADDITION - loadout
 	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=3' [current_tab == 3 ? "class='linkOn'" : ""]>[make_font_cool("OOC PREFERENCES")]</a>"
 	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=4' [current_tab == 4 ? "class='linkOn'" : ""]>[make_font_cool("CUSTOM KEYBINDINGS")]</a>"
 
@@ -1149,6 +1140,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(CONFIG_GET(flag/preference_map_voting))
 					dat += "<b>Preferred Map:</b> <a href='byond://?_src_=prefs;preference=preferred_map;task=input'>[p_map]</a><br>"
 
+		// TFN ADDITION START: loadout
 		if(2) //Loadout
 			if(path)
 				var/savefile/S = new /savefile(path)
@@ -1210,12 +1202,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				var/datum/gear/G = LC.gear[gear_name]
 				var/ticked = (G.display_name in equipped_gear)
 
-				dat += "<tr style='vertical-align:top;'><td width=20%><a style='white-space:normal;' [(G.display_name in equipped_gear) ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>[G.display_name]</a>"
+				dat += "<tr style='vertical-align:top;'><td width=35%>[G.display_name] "
 				if(G.display_name in purchased_gear)
 					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Unequip" : "Equip") + "</a></td>"
 				else
-					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a></td>"
-				dat += "<td width = 5% style='vertical-align:top'>[G.cost]</td><td>"
+					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a>"
+					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Stop Preview" : "Preview") + "</a></td>"
+				dat += "<td width = 5% style='vertical-align:top;'>[G.cost]</td><td>"
 
 				if(G.allowed_roles)
 					dat += "<font size=2>"
@@ -1224,6 +1217,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "</font>"
 				dat += "</td><td><font size=2><i>[G.description]</i></font></td></tr>"
 			dat += "</table>"
+		// TFN ADDITION END: loadout
 
 		if(3) //OOC Preferences
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
@@ -1824,6 +1818,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				SetQuirks(user)
 		return TRUE
 
+	// TFN ADDITION START: loadout
 	if(href_list["preference"] == "gear")
 		if(href_list["purchase_gear"])
 			var/datum/preferences/user_prefs = user.client.prefs
@@ -1858,7 +1853,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				else
 					alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
 
-
 		else if(href_list["select_category"])
 			gear_tab = href_list["select_category"]
 		else if(href_list["clear_loadout"])
@@ -1868,6 +1862,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		ShowChoices(user)
 		return
+	// TFN ADDITION END: loadout
 
 	switch(href_list["task"])
 		if("random")
@@ -3253,8 +3248,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("tab")
 					if (href_list["tab"])
 						current_tab = text2num(href_list["tab"])
-						if(current_tab == 2)
-							show_loadout = TRUE
+						if(current_tab == 2) // TFN ADDITION: loadout
+							show_loadout = TRUE // TFN ADDITION: loadout
 
 				if("clear_heart")
 					hearted = FALSE
@@ -3274,7 +3269,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	experience_used_on_character += cost
 	return TRUE
 
-/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE, loadout = FALSE)
+/datum/preferences/proc/copy_to(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE, is_latejoiner = TRUE, loadout = FALSE) // TFN EDIT: original: remove "loadout = FALSE"
 
 	hardcore_survival_score = 0 //Set to 0 to prevent you getting points from last another time.
 
@@ -3439,12 +3434,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	character.jumpsuit_style = jumpsuit_style
 
+	// TFN ADDITION START: loadout
 	if(loadout)
 		for(var/gear in equipped_gear)
 			var/datum/gear/G = GLOB.gear_datums[gear]
 			if(G?.slot)
-				if(!character.equip_to_slot_or_del(G.spawn_item(character, character), G.slot))
+				if(!character.equip_to_slot_or_del(G.spawn_item(character, owner = character), G.slot))
 					continue
+	// TFN ADDITION END: loadout
 
 	var/datum/species/chosen_species
 	chosen_species = pref_species.type

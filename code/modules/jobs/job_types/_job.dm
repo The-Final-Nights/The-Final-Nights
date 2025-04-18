@@ -125,6 +125,7 @@
 	if(!ishuman(H))
 		return
 
+	// TFN ADDITION START: loadout spawning
 	var/list/gear_leftovers
 
 	var/mob/living/carbon/human/spawnee = H
@@ -188,6 +189,8 @@
 			qdel(item)
 
 		qdel(gear_leftovers)
+
+	// TFN ADDITION END: loadout spawning
 
 	if(!config)	//Needed for robots.
 		roundstart_experience = minimal_skills
@@ -343,7 +346,7 @@
 
 	var/pda_slot = ITEM_SLOT_BELT
 
-/datum/outfit/job/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source = null)
+/datum/outfit/job/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	switch(H.backpack)
 		if(GBACKPACK)
 			back = /obj/item/storage/backpack //Grey backpack

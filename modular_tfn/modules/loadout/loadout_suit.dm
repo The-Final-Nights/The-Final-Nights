@@ -10,6 +10,7 @@
 
 /datum/gear/suit/coat/slickbackcoat
 	display_name = "coat, purple fur"
+	description = "	A warm and heavy purple furred coat."
 	path = /obj/item/clothing/suit/vampire/slickbackcoat
 
 /datum/gear/suit/coat/labcoat
@@ -26,6 +27,7 @@
 
 /datum/gear/suit/coat/black
 	display_name = "coat, black"
+	description = "A warm and heavy brown coat." // Consistency!
 	path = /obj/item/clothing/suit/vampire/coat/winter
 
 /datum/gear/suit/coat/red
@@ -38,6 +40,7 @@
 
 /datum/gear/suit/jacket/majima_jacket
 	display_name = "fancy jacket, too much"
+	description = "A fancy jacket for a fancy punk."
 	path = /obj/item/clothing/suit/vampire/majima_jacket
 
 /datum/gear/suit/jacket/fancy_gray
@@ -50,13 +53,19 @@
 
 /datum/gear/suit/jacket/black_leather
 	display_name = "jacket, black leather"
+	description = "	True clothing for any punk."
 	path = /obj/item/clothing/suit/vampire/jacket
 
 // Trenchcoats
-/datum/gear/suit/trench_black
+/datum/gear/suit/trenchcoat
+	subtype_path = /datum/gear/suit/trenchcoat
+
+/datum/gear/suit/trenchcoat/black
 	display_name = "trenchcoat, black"
+	description = "Best noir clothes for night."
 	path = /obj/item/clothing/suit/vampire/trench
 
-/datum/gear/suit/trench_brown
+/datum/gear/suit/trenchcoat/brown
 	display_name = "trenchcoat, brown"
+	description = "Best noir clothes for night."
 	path = /obj/item/clothing/suit/vampire/trench/alt

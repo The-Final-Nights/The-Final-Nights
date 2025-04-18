@@ -6,7 +6,7 @@
 /datum/gear/general/dice_bag
 	display_name = "bag of dices"
 	path = /obj/item/storage/pill_bottle/dice
-	cost = 3
+	cost = 2
 
 /datum/gear/general/d20
 	display_name = "d20"

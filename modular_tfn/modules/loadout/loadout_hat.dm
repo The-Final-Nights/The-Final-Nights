@@ -40,8 +40,13 @@
 // Misc
 /datum/gear/hat/baseball_cap
 	display_name = "baseball cap"
+	description = "A soft hat with a rounded crown and a stiff bill projecting in front." // Shortened
 	path = /obj/item/clothing/head/vampire/baseballcap
 
 /datum/gear/hat/ushanka
 	display_name = "ushanka"
 	path = /obj/item/clothing/head/vampire/ushanka
+
+/datum/gear/hat/hijab
+	display_name = "hijab"
+	path = /obj/item/clothing/head/vampire/hijab
