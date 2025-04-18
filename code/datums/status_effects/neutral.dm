@@ -345,61 +345,6 @@
 	desc = "You're leaning on something!"
 	icon_state = "buckled"
 
-/datum/status_effect/eigenstasium
-	id = "eigenstasium"
-	status_type = STATUS_EFFECT_UNIQUE
-	alert_type = null
-	processing_speed = STATUS_EFFECT_NORMAL_PROCESS
-	///So we know what cycle we're in during the status
-	var/current_cycle = EIGENSTASIUM_MAX_BUFFER //Consider it your stability
-	///The addiction looper for addiction stage 3
-	var/phase_3_cycle = -0 //start off delayed
-	///Your clone from another reality
-	var/mob/living/carbon/alt_clone = null
-	///If we display the stabilised message or not
-	var/stable_message = FALSE
-
-/datum/status_effect/eigenstasium/Destroy()
-	if(alt_clone)
-		UnregisterSignal(alt_clone, COMSIG_QDELETING)
-		QDEL_NULL(alt_clone)
-	return ..()
-
-/datum/status_effect/eigenstasium/tick()
-	. = ..()
-	//This stuff runs every cycle
-	if(prob(5))
-		do_sparks(5, FALSE, owner)
-
-	//If we have a reagent that blocks the effects
-	var/block_effects = FALSE
-	if(owner.has_reagent(/datum/reagent/bluespace))
-		current_cycle = max(EIGENSTASIUM_MAX_BUFFER, (current_cycle - (EIGENSTASIUM_STABILISATION_RATE * 1.5))) //cap to -250
-		block_effects = TRUE
-	if(owner.has_reagent(/datum/reagent/stabilizing_agent))
-		current_cycle = max(EIGENSTASIUM_MAX_BUFFER, (current_cycle - EIGENSTASIUM_STABILISATION_RATE))
-		block_effects = TRUE
-	var/datum/reagent/eigen = owner.has_reagent(/datum/reagent/eigenstate)
-	if(eigen)
-		if(eigen.overdosed)
-			block_effects = FALSE
-		else
-			current_cycle = max(EIGENSTASIUM_MAX_BUFFER, (current_cycle - (EIGENSTASIUM_STABILISATION_RATE * 2)))
-			block_effects = TRUE
-
-	if(!QDELETED(alt_clone)) //catch any stragglers
-		do_sparks(5, FALSE, alt_clone)
-		owner.visible_message("[owner] is snapped across to a different alternative reality!")
-		QDEL_NULL(alt_clone)
-
-	if(block_effects)
-		if(!stable_message)
-			owner.visible_message("You feel stable...for now.")
-			stable_message = TRUE
-		return
-	L.changeNext_move(CLICK_CD_RESIST)
-	if(L.last_special <= world.time)
-		return L.stop_leaning()
 
 /datum/status_effect/leaning
 	id = "leaning"
