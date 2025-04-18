@@ -95,7 +95,6 @@
 /datum/gear/uniform/turtleneck
 	subtype_path = /datum/gear/uniform/turtleneck
 
-
 /datum/gear/uniform/turtleneck/black
 	display_name = "turtleneck, black"
 	description = "A black turtleneck" // Consistency!
@@ -230,3 +229,22 @@
 	display_name = "outfit, burlesque"
 	path = /obj/item/clothing/under/vampire/burlesque
 
+/datum/gear/uniform/baron
+	display_name = "red shirt"
+	path = /obj/item/clothing/under/vampire/bar
+	allowed_roles = list("Baron")
+
+/datum/gear/uniform/baron_female
+	display_name = "red skirt"
+	path = /obj/item/clothing/under/vampire/bar/female
+	allowed_roles = list("Baron")
+
+/datum/gear/uniform/bogatyr
+	display_name = "blue shirt"
+	path = /obj/item/clothing/under/vampire/bogatyr
+	allowed_roles = list("Bogatyr")
+
+/datum/gear/uniform/bogatyr_female
+	display_name = "blue shirt"
+	path = /obj/item/clothing/under/vampire/bogatyr/female
+	allowed_roles = list("Bogatyr")

@@ -1166,7 +1166,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				for(var/i = 1, i <= length(equipped_gear), i++)
 					var/datum/gear/G = GLOB.gear_datums[equipped_gear[i]]
 					if(G)
-						if((G.subtype_path in type_blacklist) || G.slot in slot_blacklist)
+						if((G.subtype_path in type_blacklist) || (G.slot in slot_blacklist))
 							continue
 						type_blacklist += G.subtype_path
 						slot_blacklist += G.slot
