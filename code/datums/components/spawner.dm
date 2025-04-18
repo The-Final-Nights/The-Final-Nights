@@ -7,7 +7,21 @@
 	var/spawn_text = "emerges from"
 	var/list/faction = list("mining")
 
-
+/datum/component/spawner/Initialize(spawn_types = list(), spawn_time = 30 SECONDS, max_spawned = 5, max_spawn_per_attempt = 1 , faction = list(FACTION_MINING), spawn_text = null, datum/callback/spawn_callback = null, spawn_distance = 1, spawn_distance_exclude = 0, initial_spawn_delay = 0 SECONDS)
+	if (!islist(spawn_types))
+		CRASH("invalid spawn_types to spawn specified for spawner component!")
+	src.spawn_time = spawn_time
+	src.spawn_types = spawn_types
+	src.faction = faction
+	src.spawn_text = spawn_text
+	src.max_spawned = max_spawned
+	src.spawn_callback = spawn_callback
+	src.max_spawn_per_attempt = max_spawn_per_attempt
+	src.spawn_distance = spawn_distance
+	src.spawn_distance_exclude = spawn_distance_exclude
+	// If set, doesn't instantly spawn a creature when the spawner component is applied.
+	if(initial_spawn_delay)
+		COOLDOWN_START(src, spawn_delay, spawn_time)
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(stop_spawning))
 	START_PROCESSING((spawn_time < 2 SECONDS ? SSfastprocess : SSprocessing), src)
 
