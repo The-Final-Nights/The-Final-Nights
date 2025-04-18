@@ -140,7 +140,7 @@ Dancer
 	value = 3
 	gain_text = "<span class='warning'>You feel like you're standing in the shade.</span>"
 	lose_text = "<span class='notice'>You feel a subtle warmth.</span>"
-	allowed_species = list("Human", "Ghoul")
+	allowed_species = list("Ghoul")
 
 /datum/quirk/warm_aura
 	name = "Lively Aura"
