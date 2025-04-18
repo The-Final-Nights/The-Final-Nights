@@ -17,24 +17,6 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	/datum/hallucination/oh_yeah = 1
 	))
 
-/*GLOBAL_LIST_INIT(malk_hallucinations, list(
-	/datum/hallucination/malk/object = 100,
-	/datum/hallucination/message = 60,
-	/datum/hallucination/sounds = 50,
-	/datum/hallucination/malk/laugh = 20,
-	/datum/hallucination/battle = 20,
-	/datum/hallucination/chat = 20,
-	/datum/hallucination/weird_sounds = 8,
-	/datum/hallucination/stray_bullet = 7,
-	/datum/hallucination/husks = 7,
-	/datum/hallucination/fire = 3,
-	))*/
-
-GLOBAL_LIST_INIT(malk_hallucinations, list(
-	/datum/hallucination/malk/gangstalker = 100,
-))
-
-
 GLOBAL_LIST_INIT(malk_hallucinations_extreme, list(
 	/datum/hallucination/malk/object = 100,
 	/datum/hallucination/message = 60,
@@ -42,13 +24,30 @@ GLOBAL_LIST_INIT(malk_hallucinations_extreme, list(
 	/datum/hallucination/malk/laugh = 20,
 	/datum/hallucination/battle = 20,
 	/datum/hallucination/chat = 20,
+	/datum/hallucination/dangerflash = 15,
 	/datum/hallucination/weird_sounds = 8,
 	/datum/hallucination/stray_bullet = 7,
 	/datum/hallucination/husks = 7,
 	/datum/hallucination/fire = 3,
+	/datum/hallucination/delusion = 2,
 	/datum/hallucination/shock = 1,
 	/datum/hallucination/death = 1,
 	/datum/hallucination/oh_yeah = 1
+	))
+
+
+GLOBAL_LIST_INIT(malk_hallucinations, list(
+	/datum/hallucination/malk/object = 100,
+	/datum/hallucination/message = 60,
+	/datum/hallucination/sounds = 50,
+	/datum/hallucination/malk/auspex = 40,
+	/datum/hallucination/malk/laugh = 20,
+	/datum/hallucination/battle = 20,
+	/datum/hallucination/chat = 20,
+	/datum/hallucination/weird_sounds = 8,
+	/datum/hallucination/stray_bullet = 7,
+	/datum/hallucination/husks = 7,
+	/datum/hallucination/delusion = 1,
 	))
 
 //Tut nekotoroe runtime sret
@@ -61,11 +60,24 @@ GLOBAL_LIST_INIT(malk_hallucinations_extreme, list(
 
 	if(world.time < next_hallucination)
 		return
+
 	var/halpick
+
 	if(has_quirk(/datum/quirk/derangement))
-		halpick = pickweight(GLOB.malk_hallucinations)
+		var/mob/living/carbon/human/H = src
+		var/datum/vampireclane/malkavian/malk = H.clane
+
+		if(!malk)
+			halpick = pickweight(GLOB.malk_hallucinations)
+
+		if(malk.derangement)
+			halpick = pickweight(GLOB.malk_hallucinations_extreme)
+		else
+			halpick = pickweight(GLOB.malk_hallucinations)
+
 	else
 		halpick = pickweight(GLOB.hallucination_list)
+
 	new halpick(src, FALSE)
 
 	next_hallucination = world.time + rand(100, 600)
@@ -1617,3 +1629,53 @@ GLOBAL_LIST_INIT(malk_hallucinations_extreme, list(
 	H.fire()
 	qdel(src)
 
+/datum/hallucination/malk/auspex
+	var/list/undead_auras = list(AURA_UNDEAD_HARM, AURA_UNDEAD_GRAB, AURA_UNDEAD_DISARM, AURA_UNDEAD_HELP)
+	var/list/mortal_auras = list(AURA_MORTAL_HARM, AURA_MORTAL_GRAB, AURA_MORTAL_DISARM, AURA_MORTAL_HELP)
+	var/image/auspex_aura
+
+/datum/hallucination/malk/auspex/New(mob/living/carbon/C, forced = TRUE)
+	set waitfor = FALSE
+	..()
+
+	var/datum/atom_hud/auspex_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
+
+	if(!(C in auspex_hud.hudusers))
+		qdel(src)
+		return
+
+	var/list/possible_points = list()
+	for(var/turf/open/floor/F in view(target,world.view))
+		possible_points += F
+
+	if(possible_points.len)
+		var/turf/open/floor/auspex_turf = pick(possible_points)
+		auspex_aura = image('icons/mob/hud.dmi', auspex_turf, "aura", TURF_LAYER)
+
+		switch(pick(1, 2))
+			if(1)
+				var/picked_aura = pick(undead_auras)
+				auspex_aura.color = picked_aura
+				if(prob(15))
+					auspex_aura.icon_state = "diablerie_aura"
+				if(prob(5))
+					auspex_aura.icon = 'icons/effects/32x64.dmi'
+			if(2)
+				var/picked_aura = pick(mortal_auras)
+				auspex_aura.color = picked_aura
+				if(prob(15))
+					auspex_aura.icon_state = AURA_GHOUL
+				if(prob(10))
+					auspex_aura.icon_state = AURA_GAROU
+				if(prob(5))
+					auspex_aura.icon_state = AURA_TRUE_FAITH
+
+		if(target.client)
+			target.client.images += auspex_aura
+
+		QDEL_IN(src, rand(10 SECONDS, 20 SECONDS))
+
+/datum/hallucination/malk/auspex/Destroy()
+	target?.client?.images -= auspex_aura
+	QDEL_NULL(auspex_aura)
+	return ..()
