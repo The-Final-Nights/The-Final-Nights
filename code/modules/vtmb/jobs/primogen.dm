@@ -260,7 +260,7 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Lasombra")
 	minimal_generation = 10
-	minimum_character_age = 100
+	// minimum_character_age = 100 // Heavily meritocratic and new to the Camarilla, plus, Julia Sowinski *shrug
 
 	v_duty = "Offer your infinite knowledge to Prince of the City. Monitor those of your Clan and your lesser cousins, while holding a Court of Blood as need be, for all it takes for the Camarilla to turn on you is one mistake. You and Your Clan were given a domain in the local Church and in the vicinity of a swarm of Lupines, keep matters under control."
 	experience_addition = 20
