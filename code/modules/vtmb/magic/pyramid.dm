@@ -348,37 +348,6 @@
 			else
 				to_chat(user, "<span class='warning'>The spell fails as no destination is found!</span>")
 
-/obj/ritualrune/curse
-	name = "Curse Rune"
-	desc = "Curse your enemies in distance. Requires a heart."
-	icon_state = "rune7"
-	word = "CUS-RE'S"
-	thaumlevel = 5
-	sacrifices = list(/obj/item/organ/heart)
-
-/obj/ritualrune/curse/complete()
-	if(!activated)
-		playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
-		color = rgb(255,0,0)
-		activated = TRUE
-
-/obj/ritualrune/curse/attack_hand(mob/user)
-	..()
-	var/cursed
-	if(activated)
-		var/namem = input(user, "Choose target name:", "Curse Rune") as text|null
-		qdel(src)
-		if(namem)
-			cursed = namem
-			for(var/mob/living/carbon/human/H in GLOB.player_list)
-				if(H.real_name == cursed)
-					H.adjustCloneLoss(25)
-					playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
-					to_chat(H, "<span class='warning'>You feel someone repeating your name from the shadows...</span>")
-					H.Stun(10)
-					return
-			to_chat(user, "<span class='warning'>There is no such names in the city!</span>")
-
 /obj/ritualrune/blood_to_water
 	name = "Blood To Water"
 	desc = "Purges all blood in range into the water."
