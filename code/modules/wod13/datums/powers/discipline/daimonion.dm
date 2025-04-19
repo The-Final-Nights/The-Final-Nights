@@ -68,60 +68,60 @@
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire))
 		var/datum/species/kindred/clan = vampire.dna.species
-		if(vampire.clane?.name)
-			if(vampire.clane?.name == "Toreador")
+		switch(vampire.clane?.name)
+			if("Toreador")
 				to_chat(owner, "[target] is too clingy to the art.")
 				return
-			if(vampire.clane?.name == "Daughters of Cacophony")
+			if("Daughters of Cacophony")
 				to_chat(owner, "[target]'s mind is envelopped by nonstopping music.")
-			if(vampire.clane?.name == "Ventrue")
+			if("Ventrue")
 				to_chat(owner, "[target] finds no pleasure in poor's blood.")
 				return
-			if(vampire.clane?.name == "Lasombra")
+			if("Lasombra")
 				to_chat(owner, "[target] is afraid of modern technology.")
 				return
-			if(vampire.clane?.name == "Tzimisce")
+			if("Tzimisce")
 				to_chat(owner, "[target] is tied to its domain.")
 				return
-			if(vampire.clane?.name == "Gangrel")
+			if("Gangrel")
 				to_chat(owner, "[target] is a feral being used to the nature.")
 				return
-			if(vampire.clane?.name == "Malkavian")
+			if("Malkavian")
 				to_chat(owner, "[target] is unstable, the mind is ill.")
 				return
-			if(vampire.clane?.name == "Brujah")
+			if("Brujah")
 				to_chat(owner, "[target] is full of uncontrollable rage.")
 			if(vampire.clane?.name == "Nosferatu")
 				to_chat(owner, "[target] is ugly and nothing will save them.")
 				return
-			if(vampire.clane?.name == "Tremere")
+			if("Tremere")
 				to_chat(owner, "[target] is weak to kindred blood and vulnerable to blood bonds.")
 				return
-			if(vampire.clane?.name == "Baali")
-				to_chat(owner, "[target] is afraid of holy.")
+			if("Baali")
+				to_chat(owner, "[target] is afraid that of the holy.")
 				return
-			if(vampire.clane?.name == "Banu Haqim")
+			if("Banu Haqim")
 				to_chat(owner, "[target] is addicted to kindred vitae...")
 				return
-			if(vampire.clane?.name == "True Brujah")
+			if("True Brujah")
 				to_chat(owner, "[target] cant express emotions.")
 				return
-			if(vampire.clane?.name == "Salubri")
+			if("Salubri")
 				to_chat(owner, "[target] is unable to feed on unwilling.")
 				return
-			if(vampire.clane?.name == "Giovanni")
+			if("Giovanni")
 				to_chat(owner, "[target]'s bite inflicts too much harm.")
 				return
-			if(vampire.clane?.name == "Cappadocian")
+			if("Cappadocian")
 				to_chat(owner, "[target]'s skin will stay pale and lifeless no matter what.")
 				return
-			if(vampire.clane?.name == "Kiasyd")
+			if("Kiasyd")
 				to_chat(owner, "[target] is afraid of cold iron.")
 				return
-			if(vampire.clane?.name == "Gargoyle")
+			if("Gargoyle")
 				to_chat(owner, "[target] is too dependent on its masters, its mind is feeble.")
 				return
-			if(vampire.clane?.name == "Ministry")
+			if("Ministry")
 				to_chat(owner, "[target] is afraid of bright lights.")
 				return
 

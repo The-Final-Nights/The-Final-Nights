@@ -27,7 +27,7 @@
 
 /datum/curse/daimonion/success_weakness
 	name = "The Mark Of Doom"
-	genrequired = 19
+	genrequired = 10
 	bloodcurse = 5
 
 /datum/curse/daimonion/lying_weakness/activate(mob/living/carbon/human/target)
