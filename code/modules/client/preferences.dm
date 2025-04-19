@@ -1209,7 +1209,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Unequip" : "Equip") + "</a></td>"
 				else
 					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a>"
-					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Stop Preview" : "Preview") + "</a></td>"
+					if(G.sort_category != "General")
+						dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Stop Preview" : "Preview") + "</a></td>"
 				dat += "<td width = 5% style='vertical-align:top;'>[G.cost]</td><td>"
 
 				if(G.allowed_roles)
@@ -3444,7 +3445,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		for(var/gear in equipped_gear)
 			var/datum/gear/G = GLOB.gear_datums[gear]
 			if(G?.slot)
-				if(!character.equip_to_slot_or_del(G.spawn_item(character, owner = character), G.slot))
+				if(!character.equip_to_slot_or_del(G.spawn_item(character, character), G.slot))
 					continue
 	// TFN ADDITION END: loadout
 

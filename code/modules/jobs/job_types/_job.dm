@@ -187,9 +187,6 @@
 
 			to_chat(M, span_danger("Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug."))
 			qdel(item)
-
-		qdel(gear_leftovers)
-
 	// TFN ADDITION END: loadout spawning
 
 	if(!config)	//Needed for robots.

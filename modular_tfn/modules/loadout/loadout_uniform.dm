@@ -238,13 +238,3 @@
 	display_name = "red skirt"
 	path = /obj/item/clothing/under/vampire/bar/female
 	allowed_roles = list("Baron")
-
-/datum/gear/uniform/bogatyr
-	display_name = "blue shirt"
-	path = /obj/item/clothing/under/vampire/bogatyr
-	allowed_roles = list("Bogatyr")
-
-/datum/gear/uniform/bogatyr_female
-	display_name = "blue shirt"
-	path = /obj/item/clothing/under/vampire/bogatyr/female
-	allowed_roles = list("Bogatyr")

@@ -264,7 +264,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_keybindings(key_bindings)
-	equipped_gear	= sanitize_each_inlist(equipped_gear, GLOB.gear_datums) // TFN ADDITION: loadout
 	purchased_gear  = sanitize_each_inlist(purchased_gear, GLOB.gear_datums) // TFN ADDITION: loadout
 	nsfw_content_pref = sanitize_integer(nsfw_content_pref, FALSE, TRUE, src::nsfw_content_pref)
 
@@ -508,6 +507,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	// TFN ADDITION START: loadout
 	READ_FILE(S["equipped_gear"], equipped_gear)
+	if(!equipped_gear)
+		equipped_gear = list()
+
 	if(config) //This should *probably* always be there, but just in case.
 		if(length(equipped_gear) > CONFIG_GET(number/max_loadout_items))
 			to_chat(parent, span_userdanger("Loadout maximum items exceeded in loaded slot, Your loadout has been cleared! You had [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)] equipped items!"))
@@ -683,6 +685,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["moth_antennae"] 	= sanitize_inlist(features["moth_antennae"], GLOB.moth_antennae_list, "Plain")
 	features["moth_markings"] 	= sanitize_inlist(features["moth_markings"], GLOB.moth_markings_list, "None")
 	experience_used_on_character = sanitize_integer(experience_used_on_character, 0, 100000, 0)
+	equipped_gear	= sanitize_each_inlist(equipped_gear, GLOB.gear_datums) // TFN ADDITION: loadout
 
 	persistent_scars = sanitize_integer(persistent_scars)
 
