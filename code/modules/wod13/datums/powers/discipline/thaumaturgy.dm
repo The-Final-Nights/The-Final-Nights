@@ -210,7 +210,7 @@
 		target.add_splatter_floor(get_turf(get_step(target, target.dir)))
 		if(target.bloodpool >= 2)
 			target.bloodpool -= 2
-			owner.bloodpool += 3 // costs 1 bp to cast
+			owner.bloodpool = min(owner.bloodpool + 3, owner.maxbloodpool) // costs 1 bp to cast so this nets 2 bps
 	else
 		owner.bloodpool = min(owner.bloodpool + target.bloodpool, owner.maxbloodpool)
 		if(!istype(target, /mob/living/simple_animal/hostile/megafauna))
@@ -252,8 +252,7 @@
 	. = ..()
 	if(iscarbon(target))
 		new /obj/effect/temp_visual/tremere(target.loc, "gib")
-		animate(target, pixel_y = 16, color = "#ff0000", time = 5 SECONDS, loop = 1)
-		addtimer(CALLBACK(src, /datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/reset_target_appearance, target), 5 SECONDS)
+
 
 
 		target.visible_message(span_danger("[target] reddens and quakes!"), span_userdanger("Your veins feel like they're on fire!"))
@@ -263,16 +262,22 @@
 
 		if(successes <= 1)
 			// All stages (fail completely)
+			animate(target, pixel_y = 16, color = "#ff0000", time = 5 SECONDS, loop = 1)
+			addtimer(CALLBACK(src, /datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/reset_target_appearance, target), 5 SECONDS)
 			addtimer(CALLBACK(src, .proc/blood_burn_stage1, target), 0)
 			addtimer(CALLBACK(src, .proc/blood_burn_stage2, target), 2.5 SECONDS)
 			addtimer(CALLBACK(src, .proc/blood_burn_stage3, target), 5 SECONDS)
 
 		else if(successes == 2)
 			// Stages 1 & 2
+			animate(target, pixel_y = 16, color = "#ff0000", time = 2.5 SECONDS, loop = 1)
+			addtimer(CALLBACK(src, /datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/reset_target_appearance, target), 2.5 SECONDS)
 			addtimer(CALLBACK(src, .proc/blood_burn_stage1, target), 0)
 			addtimer(CALLBACK(src, .proc/blood_burn_stage2, target), 2.5 SECONDS)
 
 		else if(successes == 3)
+			animate(target, pixel_y = 16, color = "#ff0000", time = 1 SECONDS, loop = 1)
+			addtimer(CALLBACK(src, /datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/reset_target_appearance, target), 1 SECONDS)
 			// Stage 1 only
 			addtimer(CALLBACK(src, .proc/blood_burn_stage1, target), 0)
 
