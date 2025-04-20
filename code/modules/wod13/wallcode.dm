@@ -1022,6 +1022,15 @@
 /obj/effect/decal/wallpaper/gold/low
 	icon_state = "wallpaper-gold_low"
 
+/obj/effect/decal/wallpaper/papers/one
+	icon_state = "wall papers 1"
+
+/obj/effect/decal/wallpaper/papers/two
+	icon_state = "wall papers 2"
+
+/obj/effect/decal/wallpaper/papers/three
+	icon_state = "wall papers 3"
+
 /turf/open/floor/plating/vampwood
 	gender = PLURAL
 	name = "wood"
