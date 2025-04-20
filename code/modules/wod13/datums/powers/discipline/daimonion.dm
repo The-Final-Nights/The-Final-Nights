@@ -67,7 +67,6 @@
 		return
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire))
-		var/datum/species/kindred/clan = vampire.dna.species
 		switch(vampire.clane?.name)
 			if("Toreador")
 				to_chat(owner, "[target] is too clingy to the art.")
@@ -91,7 +90,7 @@
 				return
 			if("Brujah")
 				to_chat(owner, "[target] is full of uncontrollable rage.")
-			if(vampire.clane?.name == "Nosferatu")
+			if("Nosferatu")
 				to_chat(owner, "[target] is ugly and nothing will save them.")
 				return
 			if("Tremere")
@@ -125,7 +124,8 @@
 				to_chat(owner, "[target] is afraid of bright lights.")
 				return
 
-			to_chat(owner, "[target] is shunned by most as it lacks a clan.")
+			else
+				to_chat(owner, "[target] is shunned by most as it lacks a clan.")
 
 
 /datum/discipline_power/daimonion/sense_the_sin/proc/baali_get_stolen_disciplines(target, owner)
