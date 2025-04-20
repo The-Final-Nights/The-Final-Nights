@@ -16308,6 +16308,11 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/fishermanswharf)
+"ezn" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/seven,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "ezp" = (
 /obj/structure/fire_barrel,
 /turf/open/floor/plating/vampdirt,
@@ -38769,6 +38774,11 @@
 /obj/effect/decal/trash,
 /turf/open/floor/carpet/blue,
 /area/vtm/anarch)
+"kLx" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "kLG" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -41269,6 +41279,11 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior)
+"lvD" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/four,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "lvF" = (
 /turf/closed/wall/vampwall/old/low/window,
 /area/vtm/interior/chantry)
@@ -42363,6 +42378,11 @@
 "lKs" = (
 /turf/closed/wall/vampwall/old/low/window,
 /area/vtm/interior/vjanitor)
+"lKu" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/one,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "lKv" = (
 /obj/structure/table,
 /obj/underplate/stuff{
@@ -46046,6 +46066,11 @@
 /obj/structure/roadsign/crosswalk,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
+"mMI" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/three,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "mMP" = (
 /obj/structure/chair{
 	dir = 1
@@ -77754,6 +77779,11 @@
 	density = 0
 	},
 /area/vtm/interior/tzimisce_manor)
+"vqU" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/two,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "vqY" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/carpet/black,
@@ -77765,6 +77795,11 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/giovanni/outside)
+"vrg" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/five,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "vri" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/railing{
@@ -174154,7 +174189,7 @@ sFZ
 ikl
 vpB
 sjZ
-kGg
+kLx
 sVf
 wsX
 wsX
@@ -174411,19 +174446,19 @@ brK
 vpB
 vpB
 jSp
-kGg
+lKu
 kTX
 fEb
 bGN
-kGg
+vrg
 qLB
 ohy
 qLB
-kGg
+lvD
 bGN
 ohy
 yaE
-kGg
+ezn
 pMC
 pMC
 kBp
@@ -174668,11 +174703,11 @@ sFZ
 vpB
 jSp
 jSp
-kGg
+vqU
 xLh
 hOk
 vpZ
-kGg
+mMI
 wDD
 hOk
 vpZ
@@ -174680,7 +174715,7 @@ kGg
 dES
 hOk
 uEh
-kGg
+kLx
 pMC
 pMC
 fwo
