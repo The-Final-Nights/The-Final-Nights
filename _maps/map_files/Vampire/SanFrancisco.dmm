@@ -170,6 +170,11 @@
 /obj/structure/curtain,
 /turf/open/floor/plating/toilet,
 /area/vtm/hotel)
+"acH" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/seven,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "acI" = (
 /obj/effect/decal/wallpaper/paper/stripe,
 /turf/closed/wall/vampwall/old,
@@ -10350,6 +10355,11 @@
 /mob/living/carbon/human/npc/bandit,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto/old)
+"cOu" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/three,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "cOv" = (
 /obj/structure/railing,
 /turf/open/floor/plating/sidewalk/poor,
@@ -24850,11 +24860,6 @@
 "gOj" = (
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/millennium_tower/ventrue)
-"gOx" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/two,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "gOy" = (
 /obj/machinery/light/small/pink{
 	pixel_y = 32
@@ -37754,11 +37759,6 @@
 /obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
-"kwL" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/five,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "kwQ" = (
 /obj/structure/railing{
 	dir = 4;
@@ -40809,11 +40809,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/cog/caern)
-"lnW" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/eight,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "lnX" = (
 /obj/structure/table/wood,
 /obj/item/kitchen/fork,
@@ -42753,6 +42748,11 @@
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/interior/tzimisce_manor)
+"lRm" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/four,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "lRq" = (
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/carpet/green,
@@ -43328,6 +43328,11 @@
 "lYS" = (
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/millennium_tower)
+"lYT" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/two,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "lZf" = (
 /obj/structure/table/optable,
 /obj/structure/cable/layer1,
@@ -45886,11 +45891,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/millennium_tower/f2)
-"mKl" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/one,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "mKo" = (
 /obj/structure/fire_barrel,
 /turf/open/floor/plating/vampgrass,
@@ -65780,11 +65780,6 @@
 /obj/item/clothing/under/vampire/bouncer,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/strip)
-"rWQ" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/seven,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "rWS" = (
 /obj/effect/decal/bordur{
 	dir = 6
@@ -67517,6 +67512,11 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
+"stE" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "stS" = (
 /obj/structure/table/wood,
 /turf/open/floor/plating/parquetry/old,
@@ -67905,6 +67905,11 @@
 /obj/machinery/griddle,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/laundromat)
+"szC" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/one,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "szD" = (
 /obj/effect/decal/wallpaper/stone,
 /turf/closed/wall/vampwall/rich,
@@ -75252,11 +75257,6 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
-"uFz" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/four,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "uFS" = (
 /obj/structure/table,
 /obj/machinery/p25transceiver/clinic{
@@ -86749,11 +86749,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/cog/caern)
-"xQs" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/three,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "xQu" = (
 /obj/structure/chair{
 	dir = 1
@@ -87469,6 +87464,11 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/millennium_tower)
+"xZY" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/five,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "yaa" = (
 /obj/structure/vampdoor/wood{
 	dir = 1;
@@ -174189,7 +174189,7 @@ sFZ
 ikl
 vpB
 sjZ
-lnW
+stE
 sVf
 wsX
 wsX
@@ -174446,19 +174446,19 @@ brK
 vpB
 vpB
 jSp
-mKl
+szC
 kTX
 fEb
 bGN
-kwL
+xZY
 qLB
 ohy
 qLB
-uFz
+lRm
 bGN
 ohy
 yaE
-rWQ
+acH
 pMC
 pMC
 kBp
@@ -174703,11 +174703,11 @@ sFZ
 vpB
 jSp
 jSp
-gOx
+lYT
 xLh
 hOk
 vpZ
-xQs
+cOu
 wDD
 hOk
 vpZ
@@ -174715,7 +174715,7 @@ kGg
 dES
 hOk
 uEh
-lnW
+stE
 pMC
 pMC
 fwo
