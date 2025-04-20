@@ -17499,11 +17499,6 @@
 /obj/structure/closet/cabinet,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
-"eQO" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/one,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "eQU" = (
 /obj/american_flag{
 	pixel_y = 32
@@ -20592,11 +20587,6 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/ghetto/old)
-"fGU" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/four,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "fGX" = (
 /obj/structure/closet/crate,
 /turf/open/floor/plating/concrete,
@@ -24860,6 +24850,11 @@
 "gOj" = (
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/millennium_tower/ventrue)
+"gOx" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/two,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "gOy" = (
 /obj/machinery/light/small/pink{
 	pixel_y = 32
@@ -29852,11 +29847,6 @@
 /obj/item/pen,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
-"ijP" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/seven,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "ijQ" = (
 /obj/effect/decal/graffiti,
 /obj/structure/closet/cardboard,
@@ -37764,6 +37754,11 @@
 /obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
+"kwL" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/five,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "kwQ" = (
 /obj/structure/railing{
 	dir = 4;
@@ -38477,11 +38472,6 @@
 /obj/vampire_computer,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/baali)
-"kFS" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/five,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "kFZ" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/plating/rough,
@@ -40819,6 +40809,11 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/cog/caern)
+"lnW" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "lnX" = (
 /obj/structure/table/wood,
 /obj/item/kitchen/fork,
@@ -43896,11 +43891,6 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/museum)
-"mhY" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/three,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "min" = (
 /obj/item/trash/can,
 /turf/open/floor/plating/vampbeach,
@@ -45896,6 +45886,11 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/millennium_tower/f2)
+"mKl" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/one,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "mKo" = (
 /obj/structure/fire_barrel,
 /turf/open/floor/plating/vampgrass,
@@ -65785,6 +65780,11 @@
 /obj/item/clothing/under/vampire/bouncer,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/strip)
+"rWQ" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/seven,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "rWS" = (
 /obj/effect/decal/bordur{
 	dir = 6
@@ -70119,11 +70119,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
-"thF" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/eight,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "thT" = (
 /turf/open/floor/plating/asphalt,
 /area/vtm/pacificheights/old)
@@ -75257,6 +75252,11 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
+"uFz" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/four,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "uFS" = (
 /obj/structure/table,
 /obj/machinery/p25transceiver/clinic{
@@ -78471,11 +78471,6 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
-"vBw" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/two,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "vBC" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -86754,6 +86749,11 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/cog/caern)
+"xQs" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/three,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "xQu" = (
 /obj/structure/chair{
 	dir = 1
@@ -174189,7 +174189,7 @@ sFZ
 ikl
 vpB
 sjZ
-thF
+lnW
 sVf
 wsX
 wsX
@@ -174446,19 +174446,19 @@ brK
 vpB
 vpB
 jSp
-eQO
+mKl
 kTX
 fEb
 bGN
-kFS
+kwL
 qLB
 ohy
 qLB
-fGU
+uFz
 bGN
 ohy
 yaE
-ijP
+rWQ
 pMC
 pMC
 kBp
@@ -174703,11 +174703,11 @@ sFZ
 vpB
 jSp
 jSp
-vBw
+gOx
 xLh
 hOk
 vpZ
-mhY
+xQs
 wDD
 hOk
 vpZ
@@ -174715,7 +174715,7 @@ kGg
 dES
 hOk
 uEh
-thF
+lnW
 pMC
 pMC
 fwo
