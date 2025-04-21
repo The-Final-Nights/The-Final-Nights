@@ -4231,6 +4231,11 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
+"bgG" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/five,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "bgI" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/sidewalk/rich,
@@ -28479,6 +28484,11 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/costumes,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
+"hQL" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/seven,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "hQQ" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
@@ -29509,6 +29519,11 @@
 /obj/structure/closet/crate/large,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
+"iej" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/three,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "iem" = (
 /obj/structure/chair/wood{
 	dir = 8
@@ -47739,6 +47754,16 @@
 	},
 /turf/open/floor/plating/church,
 /area/vtm/church/interior/haven)
+"njt" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
+"njv" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/four,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "njA" = (
 /obj/structure/table,
 /obj/machinery/microwave{
@@ -72095,6 +72120,11 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/bianchiBank)
+"tKV" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/six,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "tLn" = (
 /obj/structure/roadsign/warningtrafficlight,
 /mob/living/carbon/human/npc/walkby,
@@ -75820,6 +75850,11 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"uPh" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/two,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "uPi" = (
 /obj/structure/hydrant,
 /turf/open/floor/plating/sidewalk,
@@ -174130,7 +174165,7 @@ sFZ
 ikl
 vpB
 sjZ
-kGg
+njt
 sVf
 wsX
 wsX
@@ -174387,19 +174422,19 @@ brK
 vpB
 vpB
 jSp
-kGg
+uPh
 kTX
 fEb
 bGN
-kGg
+hQL
 qLB
 ohy
 qLB
-kGg
+njv
 bGN
 ohy
 yaE
-kGg
+njt
 pMC
 pMC
 kBp
@@ -174644,11 +174679,11 @@ sFZ
 vpB
 jSp
 jSp
-kGg
+iej
 xLh
 hOk
 vpZ
-kGg
+tKV
 wDD
 hOk
 vpZ
@@ -174656,7 +174691,7 @@ kGg
 dES
 hOk
 uEh
-kGg
+bgG
 pMC
 pMC
 fwo
