@@ -36,7 +36,7 @@
 	species = "lily"
 	plantname = "Lily Plants"
 	product = /obj/item/food/grown/poppy/lily
-	mutatelist = list(/obj/item/seeds/poppy/lily/trumpet)
+	mutatelist = list(/obj/item/seeds/poppy/lily/clusterlily)
 
 /obj/item/food/grown/poppy/lily
 	seed = /obj/item/seeds/poppy/lily
@@ -49,7 +49,7 @@
 
 	name = "pack of brodiaea elegans seeds"
 	desc = "These seeds grow into elegant cluster-lilies."
-	icon_state = "seed-trumpet"
+	icon_state = "seed-clusterlily"
 	species = "clusterlily"
 	plantname = "Elegant Cluster-Lily Plant"
 	product = /obj/item/food/grown/clusterlily
