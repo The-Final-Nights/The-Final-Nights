@@ -518,6 +518,7 @@
 	update_appearance()
 
 /obj/item/stack/dollar/update_icon_state()
+	. = ..()
 	var/amount = get_amount()
 	switch(amount)
 		if(100 to INFINITY)

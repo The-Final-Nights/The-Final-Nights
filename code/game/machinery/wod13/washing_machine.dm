@@ -280,6 +280,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		open_machine()
 
 /obj/machinery/washing_machine/update_icon_state()
+	. = ..()
 	if(busy)
 		icon_state = "wm_running_[bloody_mess]"
 	else if(bloody_mess)

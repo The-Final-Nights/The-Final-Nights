@@ -66,6 +66,7 @@
 	wielded = FALSE
 
 /obj/item/melee/vampirearms/fireaxe/update_icon_state()
+	. = ..()
 	icon_state = "fireaxe0"
 
 /obj/item/melee/vampirearms/fireaxe/afterattack(atom/A, mob/user, proximity)
@@ -90,6 +91,7 @@
 	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=40, icon_wielded="axetzi1")
 
 /obj/item/melee/vampirearms/fireaxe/axetzi/update_icon_state()
+	. = ..()
 	icon_state = "axetzi0"
 
 
@@ -337,6 +339,7 @@
 		to_chat(user, "<span class='warning'>[src] is empty!</span>")
 
 /obj/item/storage/belt/vampire/sheathe/update_icon_state()
+	. = ..()
 	icon_state = initial(icon_state)
 	if(contents.len)
 		var/obj/item/I = contents[1]
@@ -720,6 +723,7 @@
 	wielded = FALSE
 
 /obj/item/melee/vampirearms/eguitar/update_icon_state()
+	. = ..()
 	icon_state = "rock0"
 
 /obj/item/shield/door

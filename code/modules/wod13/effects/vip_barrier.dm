@@ -150,6 +150,7 @@
 	update_appearance()
 
 /obj/effect/vip_barrier/update_appearance()
+	. = ..()
 	if(always_invisible)
 		alpha = 0
 		return
