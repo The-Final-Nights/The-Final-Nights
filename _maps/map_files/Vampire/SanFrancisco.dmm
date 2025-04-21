@@ -38955,13 +38955,11 @@
 /turf/closed/wall/vampwall/city/low/window,
 /area/vtm/hotel)
 "kNI" = (
-/obj/structure/vampdoor/anarch{
-	dir = 4;
-	lock_id = "bar";
-	lockpick_difficulty = 16
-	},
 /obj/effect/turf_decal/siding/white{
 	dir = 4
+	},
+/obj/structure/vampdoor/anarch{
+	dir = 8
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
@@ -39540,7 +39538,7 @@
 "kVs" = (
 /obj/effect/decal/trash,
 /obj/structure/table/wood,
-/turf/open/floor/plating/parquetry/old,
+/turf/open/floor/carpet/green,
 /area/vtm/anarch)
 "kVv" = (
 /obj/structure/table/wood/poker,
@@ -57994,7 +57992,7 @@
 /obj/structure/table/wood,
 /obj/item/pen,
 /obj/item/paper,
-/turf/open/floor/plating/parquetry/old,
+/turf/open/floor/carpet/green,
 /area/vtm/anarch)
 "pSl" = (
 /obj/effect/decal/trash,
@@ -73879,10 +73877,6 @@
 /obj/structure/closet/crate/bin,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower)
-"uiJ" = (
-/obj/item/kirbyplants/random,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch)
 "uiK" = (
 /obj/structure/billiard_table{
 	density = 0;
@@ -74482,7 +74476,7 @@
 /obj/structure/chair/plastic{
 	pixel_y = 4
 	},
-/turf/open/floor/plating/parquetry/old,
+/turf/open/floor/carpet/green,
 /area/vtm/anarch)
 "urh" = (
 /turf/open/floor/plating/sidewalk/rich,
@@ -75682,13 +75676,11 @@
 /turf/open/floor/carpet/green,
 /area/vtm/interior/wyrm_corrupted)
 "uIe" = (
-/obj/structure/vampdoor/anarch{
-	dir = 4;
-	lock_id = "bar";
-	lockpick_difficulty = 16
-	},
 /obj/effect/turf_decal/siding/white{
 	dir = 4
+	},
+/obj/structure/vampdoor/anarch{
+	dir = 8
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/anarch/garage)
@@ -236934,9 +236926,9 @@ big
 ntq
 ntq
 ecV
-pMC
-uiJ
-pMC
+lJI
+sbb
+lJI
 ldW
 uTZ
 uTZ
@@ -237193,7 +237185,7 @@ ntq
 fIV
 urg
 kVs
-pMC
+lJI
 pMC
 pMC
 qtE
@@ -237448,9 +237440,9 @@ big
 ntq
 ntq
 pCW
-pMC
+lJI
 pSi
-pMC
+lJI
 vmN
 pMC
 qtE
@@ -237705,9 +237697,9 @@ big
 ntq
 ntq
 afE
-pMC
-uiJ
-vmN
+lJI
+sbb
+bSR
 pMC
 pMC
 qtE
