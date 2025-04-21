@@ -141,6 +141,7 @@
 	H.preparePixelProjectile(target, start)
 	H.level = 2
 	H.fire(direct_target = target)
+	H.cruelty_multiplier = 1.1
 
 //BLOOD OF POTENCY
 /datum/discipline_power/thaumaturgy/blood_of_potency
@@ -167,6 +168,7 @@
 	H.preparePixelProjectile(target, start)
 	H.level = 2
 	H.fire(direct_target = target)
+	H.cruelty_multiplier = 1.1
 
 //THEFT OF VITAE
 /mob/living/proc/tremere_gib()
