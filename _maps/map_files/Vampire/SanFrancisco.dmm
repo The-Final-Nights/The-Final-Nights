@@ -16464,10 +16464,8 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip)
 "eAj" = (
-/obj/effect/decal/trash,
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_x = -16
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -19414,19 +19412,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
-"fqy" = (
-/obj/effect/decal/trash{
-	icon_state = "trash5"
-	},
-/obj/effect/decal/trash{
-	icon_state = "trash8"
-	},
-/obj/machinery/light/small{
-	dir = 1;
-	pixel_y = -16
-	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch)
 "fqE" = (
 /obj/structure/chair/sofa/right{
 	dir = 4
@@ -33129,13 +33114,6 @@
 /mob/living/simple_animal/hostile/fister/hostile,
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer)
-"jfr" = (
-/obj/machinery/light/small{
-	dir = 1;
-	pixel_y = -16
-	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch/basement)
 "jfC" = (
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/gnawer)
@@ -64880,9 +64858,6 @@
 "rGr" = (
 /obj/effect/landmark/start/sweeper,
 /obj/structure/chair/stool/bar,
-/obj/machinery/light/small{
-	dir = 1
-	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "rGw" = (
@@ -73572,10 +73547,6 @@
 /obj/effect/decal/trash,
 /obj/effect/decal/trash{
 	icon_state = "trash8"
-	},
-/obj/machinery/light/small{
-	dir = 1;
-	pixel_y = -16
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -112918,7 +112889,7 @@ svE
 bFb
 lCv
 mlC
-jfr
+eFH
 mLp
 jyi
 lCv
@@ -114460,7 +114431,7 @@ xLw
 lCv
 lCv
 sgp
-jfr
+eFH
 mLp
 mLp
 mLp
@@ -175119,8 +175090,8 @@ lRq
 xLe
 sae
 pMC
+vmN
 eAj
-pMC
 pMC
 cHV
 nla
@@ -177178,7 +177149,7 @@ pMC
 vmN
 xNY
 lMJ
-xNY
+pMC
 pMC
 pMC
 fkk
@@ -238839,7 +238810,7 @@ vwp
 vwp
 vwp
 vwp
-fqy
+brr
 uEh
 xBo
 uEh
@@ -239096,7 +239067,7 @@ pMC
 pMC
 pMC
 pMC
-xoz
+pMC
 uEh
 uEh
 uEh
