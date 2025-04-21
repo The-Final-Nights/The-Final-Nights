@@ -155,6 +155,13 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/on_move(mob/M)
 	return
 
+/**
+ * Called when a reagent is inside of a mob when they are dead if the reagent has the REAGENT_DEAD_PROCESS flag
+ * Returning UPDATE_MOB_HEALTH will cause updatehealth() to be called on the holder mob by /datum/reagents/proc/metabolize.
+ */
+/datum/reagent/proc/on_mob_dead(mob/living/carbon/affected_mob, seconds_per_tick)
+	SHOULD_CALL_PARENT(TRUE)
+
 /// Called after add_reagents creates a new reagent.
 /datum/reagent/proc/on_new(data)
 	return
