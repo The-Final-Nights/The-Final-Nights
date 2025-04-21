@@ -6597,8 +6597,10 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer/nosferatu_town)
 "bOs" = (
-/obj/machinery/light{
-	dir = 4
+/obj/effect/decal/litter,
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_x = -16
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -13330,6 +13332,13 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
+"dES" = (
+/obj/structure/table/wood,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/carpet/green,
+/area/vtm/anarch)
 "dEW" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -57324,10 +57333,8 @@
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
 "pLg" = (
-/obj/effect/decal/litter,
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_x = -16
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -74768,6 +74775,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating/bacotell,
 /area/vtm/clinic/haven)
+"uwT" = (
+/obj/effect/decal/wallpaper/red,
+/obj/machinery/light,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "uwV" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -170973,7 +170985,7 @@ rza
 rza
 rza
 fLm
-pLg
+bOs
 vRT
 bGN
 qLB
@@ -172507,7 +172519,7 @@ uHX
 aSF
 aOU
 iSy
-xAI
+uwT
 otn
 pMC
 gNl
@@ -236509,7 +236521,7 @@ qtE
 qtE
 qtE
 vtQ
-rVi
+dES
 iFM
 pMC
 sOb
@@ -239332,7 +239344,7 @@ pMC
 pMC
 pMC
 pMC
-bOs
+pLg
 pMC
 pMC
 pMC
