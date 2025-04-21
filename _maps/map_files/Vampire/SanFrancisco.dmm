@@ -1218,9 +1218,7 @@
 /area/vtm)
 "ark" = (
 /obj/structure/vampdoor/anarch{
-	dir = 4;
-	lock_id = "bar";
-	lockpick_difficulty = 16
+	dir = 8
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch)
@@ -32761,15 +32759,6 @@
 /obj/structure/vampdoor/glass,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/interior/shop)
-"iZB" = (
-/obj/structure/vampdoor/anarch{
-	dir = 4;
-	lock_id = "bar";
-	lockpick_difficulty = 16;
-	locked = 0
-	},
-/turf/open/floor/plating/toilet,
-/area/vtm/anarch)
 "iZD" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -66283,8 +66272,7 @@
 	icon_state = "piping31"
 	},
 /obj/machinery/light/small{
-	dir = 1;
-	pixel_y = -16
+	dir = 1
 	},
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
@@ -85969,9 +85957,7 @@
 /area/vtm/interior/bianchiBank)
 "xBX" = (
 /obj/structure/vampdoor/anarch{
-	dir = 4;
-	lock_id = "bar";
-	lockpick_difficulty = 16
+	dir = 8
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -113857,7 +113843,7 @@ wTq
 mYt
 owT
 isZ
-rYV
+waf
 mLp
 fPy
 sgp
@@ -239782,7 +239768,7 @@ fkk
 fkk
 xBX
 fkk
-iZB
+ark
 pCW
 lJI
 ubl
