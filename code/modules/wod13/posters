@@ -1,4 +1,3 @@
-
 /obj/structure/sign/poster/vampire
 	icon = "code/modules/wod13/posters.dmi"
 
