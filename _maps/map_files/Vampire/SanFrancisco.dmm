@@ -170,11 +170,6 @@
 /obj/structure/curtain,
 /turf/open/floor/plating/toilet,
 /area/vtm/hotel)
-"acH" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/seven,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "acI" = (
 /obj/effect/decal/wallpaper/paper/stripe,
 /turf/closed/wall/vampwall/old,
@@ -3133,12 +3128,6 @@
 /obj/effect/decal/wallpaper/light,
 /turf/closed/wall/vampwall/city,
 /area/vtm/interior)
-"aRE" = (
-/obj/effect/decal/wallpaper/red,
-/obj/machinery/light/small,
-/obj/effect/decal/wallpaper/papers/two,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "aRF" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -10361,11 +10350,6 @@
 /mob/living/carbon/human/npc/bandit,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto/old)
-"cOu" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/three,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "cOv" = (
 /obj/structure/railing,
 /turf/open/floor/plating/sidewalk/poor,
@@ -18096,12 +18080,6 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
-"fai" = (
-/obj/effect/decal/wallpaper/red,
-/obj/machinery/light/small,
-/obj/effect/decal/wallpaper/papers/five,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "fas" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -42757,11 +42735,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/interior/tzimisce_manor)
-"lRm" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/four,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "lRq" = (
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/carpet/green,
@@ -43337,11 +43310,6 @@
 "lYS" = (
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/millennium_tower)
-"lYT" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/two,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "lZf" = (
 /obj/structure/table/optable,
 /obj/structure/cable/layer1,
@@ -50714,12 +50682,6 @@
 "nYX" = (
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
-"nYY" = (
-/obj/machinery/light/small,
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/six,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "nZf" = (
 /obj/effect/decal/kopatich{
 	pixel_x = -20;
@@ -55620,10 +55582,6 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights)
-"ppK" = (
-/obj/effect/decal/wallpaper/papers/eight,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "ppL" = (
 /obj/transfer_point_vamp{
 	icon = 'icons/obj/stairs.dmi';
@@ -67516,11 +67474,6 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
-"stE" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/eight,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "stS" = (
 /obj/structure/table/wood,
 /turf/open/floor/plating/parquetry/old,
@@ -67909,11 +67862,6 @@
 /obj/machinery/griddle,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/laundromat)
-"szC" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/one,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "szD" = (
 /obj/effect/decal/wallpaper/stone,
 /turf/closed/wall/vampwall/rich,
@@ -69671,10 +69619,6 @@
 "tbG" = (
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/chantry)
-"tbJ" = (
-/obj/effect/decal/wallpaper/papers/seven,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "tbM" = (
 /obj/structure/vampipe{
 	icon_state = "piping31";
@@ -78206,11 +78150,6 @@
 /obj/structure/toilet,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/shop)
-"vwp" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/six,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "vwt" = (
 /turf/open/water,
 /area/vtm/interior/tzimisce_manor)
@@ -87471,11 +87410,6 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/millennium_tower)
-"xZY" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/five,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "yaa" = (
 /obj/structure/vampdoor/wood{
 	dir = 1;
@@ -174196,7 +174130,7 @@ sFZ
 ikl
 vpB
 sjZ
-ppK
+kGg
 sVf
 wsX
 wsX
@@ -174453,19 +174387,19 @@ brK
 vpB
 vpB
 jSp
-ppK
+kGg
 kTX
 fEb
 bGN
-tbJ
+kGg
 qLB
 ohy
 qLB
-acH
+kGg
 bGN
 ohy
 yaE
-acH
+kGg
 pMC
 pMC
 kBp
@@ -174710,11 +174644,11 @@ sFZ
 vpB
 jSp
 jSp
-ppK
+kGg
 xLh
 hOk
 vpZ
-ppK
+kGg
 wDD
 hOk
 vpZ
@@ -174722,7 +174656,7 @@ kGg
 dES
 hOk
 uEh
-stE
+kGg
 pMC
 pMC
 fwo
@@ -236392,7 +236326,7 @@ ntq
 xRl
 ntq
 ntq
-stE
+kGg
 pMC
 pMC
 pMC
@@ -236649,7 +236583,7 @@ ntq
 xRl
 ntq
 ntq
-fai
+xAI
 pMC
 uiJ
 pMC
@@ -236906,7 +236840,7 @@ ntq
 xRl
 ntq
 ntq
-lRm
+kGg
 ePC
 aXY
 pMC
@@ -237163,7 +237097,7 @@ ntq
 xRl
 ntq
 ntq
-szC
+kGg
 pMC
 jQI
 pMC
@@ -237420,7 +237354,7 @@ ntq
 xRl
 ntq
 ntq
-acH
+kGg
 pMC
 uiJ
 dhL
@@ -237677,7 +237611,7 @@ gTq
 htz
 ntq
 ntq
-vwp
+kGg
 pMC
 dhL
 pMC
@@ -237934,7 +237868,7 @@ xRl
 ntq
 ntq
 ntq
-cOu
+kGg
 pMC
 pMC
 pMC
@@ -238191,7 +238125,7 @@ xRl
 ntq
 ntq
 ntq
-aRE
+xAI
 dhL
 pMC
 dhL
@@ -238448,7 +238382,7 @@ xRl
 ntq
 ntq
 fkk
-stE
+kGg
 uTZ
 uTZ
 uTZ
@@ -238704,7 +238638,7 @@ fiV
 xNY
 ntq
 ntq
-xZY
+kGg
 wsX
 fAz
 wsX
@@ -238961,7 +238895,7 @@ xRl
 ntq
 ntq
 ntq
-lRm
+kGg
 wsX
 wsX
 wsX
@@ -239218,7 +239152,7 @@ xRl
 ntq
 ntq
 ntq
-szC
+kGg
 oku
 wsX
 wsX
@@ -239475,7 +239409,7 @@ nts
 ntq
 ntq
 ntq
-acH
+kGg
 wsX
 wsX
 xlz
@@ -239732,7 +239666,7 @@ ntq
 ntq
 ntq
 ntq
-nYY
+oeX
 rvp
 mMj
 kBp
@@ -239989,7 +239923,7 @@ ntq
 ntq
 ntq
 ntq
-cOu
+kGg
 lRq
 iBd
 iBd
@@ -240246,7 +240180,7 @@ ntq
 ntq
 ntq
 ntq
-lYT
+kGg
 iWF
 qAU
 lgZ
