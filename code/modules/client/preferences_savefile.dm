@@ -507,9 +507,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	// TFN ADDITION START: loadout
 	READ_FILE(S["equipped_gear"], equipped_gear)
-	if(!equipped_gear)
-		equipped_gear = list()
-
 	if(config) //This should *probably* always be there, but just in case.
 		if(length(equipped_gear) > CONFIG_GET(number/max_loadout_items))
 			to_chat(parent, span_userdanger("Loadout maximum items exceeded in loaded slot, Your loadout has been cleared! You had [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)] equipped items!"))
