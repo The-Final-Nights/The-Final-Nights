@@ -44,14 +44,15 @@
 	desc = "A beautiful orange flower."
 	icon_state = "lily"
 
-	//Spacemans's Trumpet
-/obj/item/seeds/poppy/lily/trumpet
-	name = "pack of spaceman's trumpet seeds"
-	desc = "A plant sculped by extensive genetic engineering. The spaceman's trumpet is said to bear no resemblance to its wild ancestors. Inside NT AgriSci circles it is better known as NTPW-0372."
+	//Elegant cluster-lily. Formerly Spacemans's Trumpet
+/obj/item/seeds/poppy/lily/clusterlily
+
+	name = "pack of brodiaea elegans seeds"
+	desc = "These seeds grow into elegant cluster-lilies."
 	icon_state = "seed-trumpet"
-	species = "spacemanstrumpet"
-	plantname = "Spaceman's Trumpet Plant"
-	product = /obj/item/food/grown/trumpet
+	species = "clusterlily"
+	plantname = "Elegant Cluster-Lily Plant"
+	product = /obj/item/food/grown/clusterlily
 	lifespan = 80
 	production = 5
 	endurance = 10
@@ -62,24 +63,24 @@
 	weed_rate = 2
 	weed_chance = 10
 	growing_icon = 'icons/obj/hydroponics/growing_flowers.dmi'
-	icon_grow = "spacemanstrumpet-grow"
-	icon_dead = "spacemanstrumpet-dead"
+	icon_grow = "clusterlily-grow"
+	icon_dead = "clusterlily-dead"
 	mutatelist = list()
 	genes = list(/datum/plant_gene/reagent/polypyr)
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05)
 	rarity = 30
 	graft_gene = /datum/plant_gene/reagent/polypyr
 
-/obj/item/seeds/poppy/lily/trumpet/Initialize(mapload,nogenes)
+/obj/item/seeds/poppy/lily/clusterlily/Initialize(mapload,nogenes)
 	. = ..()
 	if(!nogenes)
 		unset_mutability(/datum/plant_gene/reagent/polypyr, PLANT_GENE_EXTRACTABLE)
 
-/obj/item/food/grown/trumpet
-	seed = /obj/item/seeds/poppy/lily/trumpet
-	name = "spaceman's trumpet"
-	desc = "A vivid flower that smells faintly of freshly cut grass. Touching the flower seems to stain the skin some time after contact, yet most other surfaces seem to be unaffected by this phenomenon."
-	icon_state = "spacemanstrumpet"
+/obj/item/food/grown/clusterlily
+	seed = /obj/item/seeds/poppy/lily/clusterlily
+	name = "elegent cluster-lily"
+	desc = "A beautiful cluster of purple flowers."
+	icon_state = "clusterlily"
 	bite_consumption_mod = 3
 	foodtypes = VEGETABLES
 
