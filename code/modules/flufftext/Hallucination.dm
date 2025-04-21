@@ -654,7 +654,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 				A = image('code/modules/wod13/mobs.dmi',H,"goblin")
 				A.name = "Wretched Creecher"
 			if("shade")
-				A = image('code/modules/wod13/mobs.dmi',H,"shade")
+				A = image('icons/mob/mob.dmi',H,"shade")
 				A.name = "Interloper"
 			if("troll")
 				A = image('code/modules/wod13/64x64.dmi',H,"troll")
