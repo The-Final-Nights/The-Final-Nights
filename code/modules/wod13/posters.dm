@@ -1,7 +1,7 @@
 /obj/structure/sign/poster/vampire
 	name = "movie poster"
 	icon = 'code/modules/wod13/posters.dmi'
-	desc = "an interesting movie poster."
+	desc = "An interesting movie poster."
 
 /obj/structure/sign/poster/vampire/wotw
 	icon_state = "war of the worlds"
