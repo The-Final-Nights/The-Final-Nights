@@ -1036,6 +1036,7 @@
 
 /obj/effect/decal/wallpaper/papers/three
 	icon_state = "wall papers 3"
+
 /obj/effect/decal/wallpaper/papers/four
 	icon_state = "wall papers 4"
 
