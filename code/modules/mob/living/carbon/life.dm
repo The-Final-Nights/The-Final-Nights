@@ -552,29 +552,27 @@ All effects don't start immediately, but rather get worse over time; the rate is
 //LIVER//
 /////////
 
-///Check to see if we have the liver, if not automatically gives you last-stage effects of lacking a liver.
-
-/mob/living/carbon/proc/handle_liver(delta_time, times_fired)
+///Decides if the liver is failing or not.
+/mob/living/carbon/proc/handle_liver()
 	if(!dna)
 		return
-
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(liver)
-		return
-
-	reagents.end_metabolization(src, keep_liverless = TRUE) //Stops trait-based effects on reagents, to prevent permanent buffs
-	reagents.metabolize(src, delta_time, times_fired, can_overdose=FALSE, liverless = TRUE)
-
-	if(HAS_TRAIT(src, TRAIT_STABLELIVER) || HAS_TRAIT(src, TRAIT_NOMETABOLISM))
-		return
-
-	adjustToxLoss(0.6 * delta_time, TRUE,  TRUE)
-	adjustOrganLoss(pick(ORGAN_SLOT_HEART, ORGAN_SLOT_LUNGS, ORGAN_SLOT_STOMACH, ORGAN_SLOT_EYES, ORGAN_SLOT_EARS), 0.5* delta_time)
+	if(!liver)
+		liver_failure()
 
 /mob/living/carbon/proc/undergoing_liver_failure()
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
-	if(liver?.organ_flags & ORGAN_FAILING)
+	if(liver && (liver.organ_flags & ORGAN_FAILING))
 		return TRUE
+
+/mob/living/carbon/proc/liver_failure()
+	reagents.end_metabolization(src, keep_liverless = TRUE) //Stops trait-based effects on reagents, to prevent permanent buffs
+	reagents.metabolize(src, can_overdose=FALSE, liverless = TRUE)
+	if(HAS_TRAIT(src, TRAIT_STABLELIVER) || HAS_TRAIT(src, TRAIT_NOMETABOLISM))
+		return
+	adjustToxLoss(4, TRUE,  TRUE)
+	if(prob(30))
+		to_chat(src, "<span class='warning'>You feel a stabbing pain in your abdomen!</span>")
 
 /////////////
 //CREMATION//
