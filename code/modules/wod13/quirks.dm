@@ -230,6 +230,10 @@ Dancer
 	lose_text = "<span class='notice'>You feel subtly enervated.</span>"
 	allowed_species = list("Ghoul","Human")
 
+/datum/quirk/potent_blood/on_spawn()
+	var/mob/living/carbon/H = quirk_holder
+	H.bloodquality = 4
+	
 /datum/action/fly_upper
 	name = "Fly Up"
 	desc = "Fly to the upper level."
