@@ -47,7 +47,6 @@
 	owner.dna.species.meleemod += 0.1
 	owner.potential = 1
 	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
-	ADD_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
 
 /datum/discipline_power/potence/one/deactivate()
 	. = ..()
@@ -59,7 +58,6 @@
 	owner.potential = 0
 	qdel(tackler)
 	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
-	REMOVE_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
 
 //POTENCE 2
 /datum/discipline_power/potence/two
@@ -91,7 +89,6 @@
 	owner.dna.species.meleemod += 0.2
 	owner.potential = 2
 	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
-	ADD_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
 
 /datum/discipline_power/potence/two/deactivate()
 	. = ..()
@@ -103,7 +100,6 @@
 	owner.potential = 0
 	qdel(tackler)
 	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
-	REMOVE_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
 
 //POTENCE 3
 /datum/discipline_power/potence/three
