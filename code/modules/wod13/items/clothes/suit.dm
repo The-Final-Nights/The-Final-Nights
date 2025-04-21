@@ -286,6 +286,7 @@
 	name = "bulletproof vest"
 	desc = "Durable, lightweight vest designed to protect against most threats efficiently."
 	icon_state = "vest"
+	slowdown = 0.5
 	armor = list(MELEE = 55, BULLET = 55, LASER = 10, ENERGY = 10, BOMB = 55, BIO = 0, RAD = 0, FIRE = 45, ACID = 10, WOUND = 25)
 	allowed = list(
 		/obj/item/card/id,
@@ -327,7 +328,8 @@
 	name = "army vest"
 	desc = "Army equipment. Provides great protection against blunt force."
 	icon_state = "army"
-	w_class = WEIGHT_CLASS_BULKY
+	slowdown = 1.5
+	w_class = WEIGHT_CLASS_HUGE
 	armor = list(MELEE = 70, BULLET = 70, LASER = 10, ENERGY = 10, BOMB = 55, BIO = 0, RAD = 0, FIRE = 45, ACID = 10, WOUND = 25)
 //	clothing_traits = list(TRAIT_UNMASQUERADE)
 	masquerade_violating = TRUE
@@ -342,7 +344,7 @@
 	cold_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	heat_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	slowdown = 2
-	w_class = WEIGHT_CLASS_BULKY
+	w_class = WEIGHT_CLASS_HUGE
 	armor = list(MELEE = 90, BULLET = 90, LASER = 50, ENERGY = 50, BOMB = 100, BIO = 0, RAD = 0, FIRE = 70, ACID = 90, WOUND = 50)
 //	clothing_traits = list(TRAIT_UNMASQUERADE)
 	masquerade_violating = TRUE
