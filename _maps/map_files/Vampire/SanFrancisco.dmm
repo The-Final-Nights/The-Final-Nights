@@ -10355,11 +10355,6 @@
 /mob/living/carbon/human/npc/bandit,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto/old)
-"cOu" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/three,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "cOv" = (
 /obj/structure/railing,
 /turf/open/floor/plating/sidewalk/poor,
@@ -42748,11 +42743,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/interior/tzimisce_manor)
-"lRm" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/four,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "lRq" = (
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/carpet/green,
@@ -43328,11 +43318,6 @@
 "lYS" = (
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/millennium_tower)
-"lYT" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/two,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "lZf" = (
 /obj/structure/table/optable,
 /obj/structure/cable/layer1,
@@ -67905,11 +67890,6 @@
 /obj/machinery/griddle,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/laundromat)
-"szC" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/one,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "szD" = (
 /obj/effect/decal/wallpaper/stone,
 /turf/closed/wall/vampwall/rich,
@@ -87464,11 +87444,6 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/millennium_tower)
-"xZY" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/five,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "yaa" = (
 /obj/structure/vampdoor/wood{
 	dir = 1;
@@ -174446,15 +174421,15 @@ brK
 vpB
 vpB
 jSp
-szC
+stE
 kTX
 fEb
 bGN
-xZY
+acH
 qLB
 ohy
 qLB
-lRm
+acH
 bGN
 ohy
 yaE
@@ -174703,11 +174678,11 @@ sFZ
 vpB
 jSp
 jSp
-lYT
+stE
 xLh
 hOk
 vpZ
-cOu
+stE
 wDD
 hOk
 vpZ
