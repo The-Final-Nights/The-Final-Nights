@@ -1024,7 +1024,9 @@
 
 /obj/effect/decal/wallpaper/papers
 	name = "papers"
-	plane = CAR_LAYER
+	plane = GAME_PLANE
+	layer = CAR_LAYER
+	anchored = TRUE
 
 /obj/effect/decal/wallpaper/papers/one
 	icon_state = "wall papers 1"
