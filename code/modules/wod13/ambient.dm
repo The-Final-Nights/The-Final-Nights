@@ -185,6 +185,8 @@
 	icon_state = "financialdistrict"
 	ambience_index = AMBIENCE_CITY
 	music = /datum/vampiremusic/downtown
+	extra_music = list(/datum/vampiremusic/nychub)
+	parent_type = /area/vtm/randomized_music
 	upper = TRUE
 	wall_rating = HIGH_WALL_RATING
 
@@ -199,6 +201,8 @@
 	icon_state = "ghetto"
 	ambience_index = AMBIENCE_CITY
 	music = /datum/vampiremusic/downtown
+	extra_music = list(/datum/vampiremusic/nychub)
+	parent_type = /area/vtm/randomized_music
 	upper = TRUE
 	wall_rating = HIGH_WALL_RATING
 
@@ -229,6 +233,8 @@
 	icon_state = "chinatown"
 	ambience_index = AMBIENCE_CITY
 	music = /datum/vampiremusic/chinatown
+	extra_music = list(/datum/vampiremusic/nychub)
+	parent_type = /area/vtm/randomized_music
 	upper = TRUE
 	wall_rating = LOW_WALL_RATING	//Kinda chinatown is part of asia and has some deeper connection?
 
@@ -259,6 +265,8 @@
 	icon_state = "unionsquare"
 	ambience_index = AMBIENCE_CITY
 	music = /datum/vampiremusic/downtown
+	extra_music = list(/datum/vampiremusic/nychub)
+	parent_type = /area/vtm/randomized_music
 	upper = TRUE
 	wall_rating = HIGH_WALL_RATING
 
@@ -422,6 +430,8 @@
 	icon_state = "park"
 	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/downtown
+	extra_music = list(/datum/vampiremusic/nychub)
+	parent_type = /area/vtm/randomized_music
 	upper = TRUE
 	yang_chi = 2
 	yin_chi = 0
@@ -650,6 +660,22 @@
 
 //MUSIC
 
+/area/vtm/randomized_music
+	var/list/extra_music = list()
+	var/music_picked = null
+
+	Initialize()
+		. = ..()
+		if (!music)
+			return
+
+		var/list/music_choices = list(music)
+		if (extra_music && length(extra_music))
+			music_choices += extra_music
+
+		music_picked = pick(music_choices)
+		music = music_picked
+
 /datum/vampiremusic
 	var/length = 30 SECONDS
 	var/sound
@@ -702,6 +728,11 @@
 /datum/vampiremusic/theatre
 	length = 93 SECONDS
 	sound = 'code/modules/wod13/sounds/theatre.ogg'
+	forced = TRUE
+
+/datum/vampiremusic/nychub
+	length = 452 SECONDS
+	sound = 'code/modules/wod13/sounds/VTMRedemptionNYChub.ogg'
 	forced = TRUE
 
 /datum/vampiremusic/nosferatu
