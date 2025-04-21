@@ -1,5 +1,5 @@
 /obj/structure/sign/poster/vampire
-	icon = "Posters.dmi"
+	icon = "posters.dmi"
 
 /obj/structure/sign/poster/vampire/wotw
 	icon_state = "war of the worlds"
