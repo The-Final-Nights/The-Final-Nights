@@ -6597,10 +6597,10 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer/nosferatu_town)
 "bOs" = (
-/obj/effect/decal/wallpaper/red,
-/obj/machinery/light/small,
-/obj/effect/decal/wallpaper/papers/eight,
-/turf/closed/wall/vampwall/bar,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "bOt" = (
 /obj/structure/chair/wood{
@@ -8732,10 +8732,6 @@
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/financialdistrict/construction)
-"crP" = (
-/obj/effect/decal/wallpaper/papers/one,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "crS" = (
 /obj/structure/vampipe{
 	icon_state = "piping43"
@@ -13334,13 +13330,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
-"dES" = (
-/obj/structure/chair/sofa/corp/right{
-	dir = 8
-	},
-/obj/effect/decal/graffiti,
-/turf/open/floor/carpet,
-/area/vtm/anarch)
 "dEW" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -57335,10 +57324,12 @@
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
 "pLg" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/six,
-/obj/effect/decal/wallpaper/papers/three,
-/turf/closed/wall/vampwall/bar,
+/obj/effect/decal/litter,
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_x = -16
+	},
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "pLj" = (
 /obj/structure/chair/sofa/corp/corner{
@@ -74777,10 +74768,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating/bacotell,
 /area/vtm/clinic/haven)
-"uwT" = (
-/obj/effect/decal/wallpaper/papers/eight,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "uwV" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -79279,7 +79266,6 @@
 "vJx" = (
 /obj/machinery/light/small,
 /obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/four,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
 "vJD" = (
@@ -170730,7 +170716,7 @@ giR
 wxu
 wxu
 wxu
-wxu
+fkk
 wxu
 fkk
 fkk
@@ -170987,7 +170973,7 @@ rza
 rza
 rza
 fLm
-pzL
+pLg
 vRT
 bGN
 qLB
@@ -173035,7 +173021,7 @@ svD
 svD
 svD
 fLm
-pMC
+sOb
 pMC
 pMC
 qjS
@@ -174837,7 +174823,7 @@ wDD
 hOk
 vpZ
 hQL
-dES
+wDD
 hOk
 uEh
 bgG
@@ -175352,7 +175338,7 @@ vpB
 edz
 vpB
 vpB
-uwT
+fkk
 gZq
 fAz
 fAz
@@ -176123,7 +176109,7 @@ edz
 xOn
 vpB
 edz
-crP
+fkk
 sii
 wsX
 rcJ
@@ -236767,7 +236753,7 @@ ntq
 xRl
 ntq
 ntq
-bOs
+xAI
 pMC
 uiJ
 pMC
@@ -237538,7 +237524,7 @@ ntq
 xRl
 ntq
 ntq
-hQL
+kGg
 pMC
 uiJ
 dhL
@@ -238309,7 +238295,7 @@ xRl
 ntq
 ntq
 ntq
-qEW
+xAI
 dhL
 pMC
 dhL
@@ -238822,7 +238808,7 @@ fiV
 xNY
 ntq
 ntq
-njt
+kGg
 wsX
 fAz
 wsX
@@ -239346,7 +239332,7 @@ pMC
 pMC
 pMC
 pMC
-wDp
+bOs
 pMC
 pMC
 pMC
@@ -239603,7 +239589,7 @@ fkk
 dsa
 fkk
 iZB
-kGg
+njv
 kBp
 rXs
 rXs
@@ -240107,7 +240093,7 @@ ntq
 ntq
 ntq
 ntq
-pLg
+kGg
 lRq
 iBd
 iBd
@@ -240117,7 +240103,7 @@ pMC
 nak
 gYj
 nZz
-kGg
+tKV
 kBp
 fPy
 oBy
