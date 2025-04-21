@@ -372,6 +372,11 @@
 /obj/effect/decal/gut_floor,
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer)
+"afE" = (
+/obj/effect/decal/wallpaper/red,
+/obj/structure/sign/poster/vampire/cursed,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "afF" = (
 /obj/effect/decal/bordur{
 	dir = 10
@@ -7911,6 +7916,11 @@
 /obj/structure/lamppost/sidewalk,
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/chinatown)
+"chK" = (
+/obj/effect/decal/wallpaper/red,
+/obj/structure/sign/poster/vampire/lod,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "chT" = (
 /turf/open/floor/plating/circled,
 /area/vtm/interior)
@@ -14138,6 +14148,11 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/graveyard)
+"dRe" = (
+/obj/effect/decal/wallpaper/red,
+/obj/structure/sign/poster/vampire/electra,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "dRm" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/vampfence/rich{
@@ -20796,6 +20811,11 @@
 	},
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
+"fIV" = (
+/obj/effect/decal/wallpaper/red,
+/obj/structure/sign/poster/vampire/blade,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "fIW" = (
 /obj/structure/railing{
 	dir = 1;
@@ -24805,9 +24825,6 @@
 /area/vtm/financialdistrict/construction)
 "gLn" = (
 /obj/structure/chair/sofa/corp/right,
-/obj/structure/sign/poster/random{
-	pixel_y = 32
-	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "gLr" = (
@@ -35680,6 +35697,10 @@
 	},
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/tzimisce_manor)
+"jQG" = (
+/obj/structure/sign/poster/vampire/lod/old,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch/basement)
 "jQI" = (
 /obj/effect/decal/wallpaper/red,
 /obj/effect/decal/wallpaper/papers/four,
@@ -53587,7 +53608,7 @@
 /turf/open/floor/carpet/green,
 /area/vtm/interior/strip/toreador)
 "oKa" = (
-/obj/structure/sign/poster/contraband/random,
+/obj/structure/sign/poster/vampire/electra/old,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch/basement)
 "oKg" = (
@@ -72451,6 +72472,11 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/financialdistrict/library)
+"tKB" = (
+/obj/effect/decal/wallpaper/red,
+/obj/structure/sign/poster/vampire/wotw,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "tKT" = (
 /obj/structure/mirror{
 	pixel_y = 32
@@ -80238,6 +80264,10 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/bianchiBank)
+"vVf" = (
+/obj/structure/sign/poster/vampire/wotw/old,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch/basement)
 "vVl" = (
 /obj/structure/statue/bone/rib{
 	dir = 1
@@ -84940,6 +84970,10 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/graveyard/interior)
+"xlT" = (
+/obj/structure/sign/poster/vampire/blade/old,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch/basement)
 "xlV" = (
 /obj/structure/weedshit,
 /turf/open/floor/plating/parquetry/old,
@@ -85808,6 +85842,10 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
+"xzQ" = (
+/obj/structure/sign/poster/vampire/blade,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch/basement)
 "xAc" = (
 /obj/structure/closet,
 /obj/item/clothing/under/vampire/police,
@@ -109021,7 +109059,7 @@ waf
 wTq
 nYS
 nYS
-mLp
+jQG
 cBR
 vzD
 vzD
@@ -109792,7 +109830,7 @@ waf
 wTq
 nYS
 nYS
-mLp
+vVf
 alp
 vzD
 xLM
@@ -111853,7 +111891,7 @@ xuD
 lCv
 lCv
 gCY
-mLp
+xzQ
 gLn
 lCv
 lCv
@@ -116734,7 +116772,7 @@ dFm
 mmx
 rTL
 mmx
-mLp
+xlT
 xLw
 lCv
 lCv
@@ -237247,7 +237285,7 @@ ntq
 big
 ntq
 ntq
-kBp
+fIV
 urg
 kVs
 pMC
@@ -237761,7 +237799,7 @@ ntq
 big
 ntq
 ntq
-kGg
+afE
 pMC
 uiJ
 vmN
@@ -238275,7 +238313,7 @@ big
 ntq
 ntq
 ntq
-tDF
+dRe
 pMC
 pMC
 pMC
@@ -239045,7 +239083,7 @@ xri
 qUZ
 ntq
 ntq
-kGg
+chK
 wsX
 mtQ
 wsX
@@ -240330,7 +240368,7 @@ ntq
 ntq
 ntq
 ntq
-kGg
+tKB
 gJH
 cXX
 cXX
