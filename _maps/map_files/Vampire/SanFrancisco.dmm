@@ -37579,6 +37579,14 @@
 /obj/machinery/hydroponics/soil,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog/caern)
+"ktb" = (
+/obj/structure/curtain/bounty{
+	base_pixel_y = 5;
+	pixel_y = 8
+	},
+/obj/effect/decal/wallpaper/red/low,
+/turf/closed/wall/vampwall/bar/low/window,
+/area/vtm/anarch)
 "ktc" = (
 /obj/effect/landmark/npcwall,
 /obj/structure/small_vamprocks,
@@ -42174,6 +42182,10 @@
 /obj/item/clothing/suit/vampire/jacket,
 /obj/item/clothing/suit/vampire/jacket,
 /obj/item/clothing/glasses/vampire/sun,
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_x = -16
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "lGm" = (
@@ -73093,14 +73105,6 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/fishermanswharf/lower)
-"tWk" = (
-/obj/structure/curtain/bounty{
-	base_pixel_y = 5;
-	pixel_y = 8
-	},
-/obj/effect/decal/wallpaper/red/low,
-/turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/anarch)
 "tWn" = (
 /obj/effect/landmark/start/zadruga,
 /turf/open/floor/carpet/royalblack,
@@ -110778,7 +110782,7 @@ klB
 klB
 nHW
 ftg
-hHF
+mLp
 pRw
 vzD
 pRw
@@ -117458,7 +117462,7 @@ mLp
 qKG
 iUG
 dQO
-mLp
+wxu
 gDp
 lCv
 nBq
@@ -239785,9 +239789,9 @@ ubl
 ubl
 ubl
 kGg
-tWk
+ktb
 nhy
-tWk
+ktb
 kBp
 pMC
 fkk
@@ -240798,9 +240802,9 @@ ntq
 ntq
 ntq
 iTu
-tWk
-tWk
-tWk
+ktb
+ktb
+ktb
 fkk
 fkk
 fkk
