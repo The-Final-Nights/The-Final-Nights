@@ -46,9 +46,6 @@
 	path = /obj/item/clothing/shoes/vampire/sneakers/red
 
 // Misc
-/datum/gear/footwear/daisyd
-	display_name = "daisy dukes"
-	path = /obj/item/clothing/under/vampire/burlesque/daisyd
 
 /datum/gear/footwear/jackboots
 	display_name = "boots, black"

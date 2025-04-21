@@ -229,6 +229,10 @@
 	display_name = "outfit, burlesque"
 	path = /obj/item/clothing/under/vampire/burlesque
 
+/datum/gear/uniform/daisyd
+	display_name = "daisy dukes"
+	path = /obj/item/clothing/under/vampire/burlesque/daisyd
+
 /datum/gear/uniform/baron
 	display_name = "red shirt"
 	path = /obj/item/clothing/under/vampire/bar

@@ -1834,7 +1834,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					TG.purchase(user.client)
 					player_experience -= TG.cost
 					to_chat(user, span_info("Purchased [TG.display_name]!"))
-					save_character()
+					save_preferences()
 			else
 				to_chat(user, span_warning("You don't have enough experience to purchase \the [TG.display_name]!"))
 
@@ -1854,7 +1854,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if(G.subtype_path in type_blacklist)
 							continue
 						type_blacklist += G.subtype_path
-				if(!(TG.subtype_path in type_blacklist) && !(TG.slot in slot_blacklist))
+				if(!(TG.subtype_path in type_blacklist) && !(TG.slot in slot_blacklist) || TG.sort_category == "General")
 					equipped_gear += TG.display_name
 				else
 					tgui_alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
