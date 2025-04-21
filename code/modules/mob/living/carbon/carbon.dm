@@ -725,6 +725,10 @@
 		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_NV_TRAIT)
 		see_in_dark = max(see_in_dark, 8)
 
+	if(HAS_TRAIT(src, TRAIT_PROTEAN_VISION))
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
+		see_in_dark = max(see_in_dark, 8)
+
 	if(see_override)
 		see_invisible = see_override
 	. = ..()
@@ -977,6 +981,8 @@
 	if(admin_revive)
 		suiciding = FALSE
 		regenerate_limbs()
+		if(HAS_TRAIT(src, TRAIT_TORPOR))
+			cure_torpor()
 		regenerate_organs()
 		set_handcuffed(null)
 		for(var/obj/item/restraints/R in contents) //actually remove cuffs from inventory

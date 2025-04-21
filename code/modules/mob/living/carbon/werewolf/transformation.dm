@@ -1,9 +1,9 @@
 // this is evil
 // todo: use a datum or something instead lol
-/obj/werewolf_holder/transformation
-	var/mob/living/carbon/human/human_form
-	var/mob/living/carbon/werewolf/crinos/crinos_form
-	var/mob/living/carbon/werewolf/lupus/lupus_form
+/datum/werewolf_holder/transformation
+	var/datum/weakref/human_form
+	var/datum/weakref/crinos_form
+	var/datum/weakref/lupus_form
 
 	var/transformating = FALSE
 	var/given_quirks = FALSE
@@ -11,15 +11,28 @@
 // we should really initialize on creation always
 // if this were a datum we'd just use New()
 // but since it's an atom subtype we have to use INITIALIZE_IMMEDIATE
-INITIALIZE_IMMEDIATE(/obj/werewolf_holder/transformation)
-/obj/werewolf_holder/transformation/Initialize()
-	. = ..()
-	crinos_form = new()
-	crinos_form.transformator = src
-	lupus_form = new()
-	lupus_form.transformator = src
+/datum/werewolf_holder/transformation/New()
+	var/mob/living/carbon/werewolf/crinos/crinos = new()
+	crinos_form = WEAKREF(crinos)
+	crinos = crinos_form.resolve()
+	crinos?.transformator = src
 
-/obj/werewolf_holder/transformation/proc/transfer_damage(mob/living/carbon/first, mob/living/carbon/second)
+	var/mob/living/carbon/werewolf/lupus/lupus = new()
+	lupus_form = WEAKREF(lupus)
+	lupus = lupus_form.resolve()
+	lupus?.transformator = src
+
+	crinos?.moveToNullspace()
+	lupus?.moveToNullspace()
+
+/datum/werewolf_holder/transformation/Destroy()
+	human_form = null
+	crinos_form = null
+	lupus_form = null
+
+	return ..()
+
+/datum/werewolf_holder/transformation/proc/transfer_damage(mob/living/carbon/first, mob/living/carbon/second)
 	second.masquerade = first.masquerade
 	var/percentage = (100/first.maxHealth)*second.maxHealth
 	second.adjustBruteLoss(round((first.getBruteLoss()/100)*percentage)-second.getBruteLoss())
@@ -27,8 +40,11 @@ INITIALIZE_IMMEDIATE(/obj/werewolf_holder/transformation)
 	second.adjustToxLoss(round((first.getToxLoss()/100)*percentage)-second.getToxLoss())
 	second.adjustCloneLoss(round((first.getCloneLoss()/100)*percentage)-second.getCloneLoss())
 
-/obj/werewolf_holder/transformation/proc/trans_gender(mob/living/carbon/trans, form)
+/datum/werewolf_holder/transformation/proc/trans_gender(mob/living/carbon/trans, form)
 	if(trans.stat == DEAD)
+		return
+	if(transformating)
+		trans.balloon_alert(trans, "already transforming!")
 		return
 	if(!given_quirks)
 		given_quirks = TRUE
@@ -37,13 +53,16 @@ INITIALIZE_IMMEDIATE(/obj/werewolf_holder/transformation)
 			DA.Grant(lupus_form)
 			var/datum/action/dance/NE = new()
 			NE.Grant(crinos_form)
-	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
+
+	var/matrix/ntransform = matrix(trans.transform) //aka transform.Copy()
+
 	if(trans.auspice.rage == 0 && form != trans.auspice.base_breed)
 		to_chat(trans, "Not enough rage to transform into anything but [trans.auspice.base_breed].")
 		return
 	if(trans.in_frenzy)
 		to_chat(trans, "You can't transform while in frenzy.")
 		return
+
 	trans.inspired = FALSE
 	if(ishuman(trans))
 		var/datum/species/garou/G = trans.dna.species
@@ -76,115 +95,154 @@ INITIALIZE_IMMEDIATE(/obj/werewolf_holder/transformation)
 				ntransform.Scale(0.75, 0.5)
 			if(islupus(trans))
 				ntransform.Scale(1, 1.5)
-	if(!transformating)
-		transformating = TRUE
-		switch(form)
-			if("Lupus")
-				if(trans == lupus_form)
-					transformating = FALSE
-					return
-				animate(trans, transform = ntransform, color = "#000000", time = 30)
-				playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
-				for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
-					if(B)
-						qdel(B)
-				spawn(30)
-					if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
-						animate(trans, transform = null, color = "#FFFFFF")
-						return
-					var/items = trans.get_contents()
-					for(var/obj/item/item_worn in items)
-						if(item_worn)
-							if(!ismob(item_worn.loc))
-								continue
-							trans.dropItemToGround(item_worn, TRUE)
-					var/current_loc = get_turf(trans)
-					lupus_form.color = "#000000"
-					lupus_form.forceMove(current_loc)
-					animate(lupus_form, color = "#FFFFFF", time = 10)
-					lupus_form.key = trans.key
-					forceMove(lupus_form)
-					lupus_form.bloodpool = trans.bloodpool
-					lupus_form.masquerade = trans.masquerade
-					lupus_form.nutrition = trans.nutrition
-					lupus_form.mind = trans.mind
-					lupus_form.update_blood_hud()
-					transfer_damage(trans, lupus_form)
-					lupus_form.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
-					trans.forceMove(src)
-					transformating = FALSE
-					animate(trans, transform = null, color = "#FFFFFF", time = 1)
-					lupus_form.update_icons()
-			if("Crinos")
-				if(trans == crinos_form)
-					transformating = FALSE
-					return
-				animate(trans, transform = ntransform, color = "#000000", time = 30)
-				playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
-				for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
-					if(B)
-						qdel(B)
-				spawn(30)
-					if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
-						animate(trans, transform = null, color = "#FFFFFF")
-						return
-					var/items = trans.get_contents()
-					for(var/obj/item/item_worn in items)
-						if(item_worn)
-							if(!ismob(item_worn.loc))
-								continue
-							trans.dropItemToGround(item_worn, TRUE)
-					var/current_loc = get_turf(trans)
-					crinos_form.color = "#000000"
-					crinos_form.forceMove(current_loc)
-					animate(crinos_form, color = "#FFFFFF", time = 10)
-					crinos_form.key = trans.key
-					forceMove(crinos_form)
-					crinos_form.bloodpool = trans.bloodpool
-					crinos_form.masquerade = trans.masquerade
-					crinos_form.nutrition = trans.nutrition
-					crinos_form.mind = trans.mind
-					crinos_form.update_blood_hud()
-					crinos_form.physique = crinos_form.physique+3
-					transfer_damage(trans, crinos_form)
-					crinos_form.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
-					trans.forceMove(src)
-					transformating = FALSE
-					animate(trans, transform = null, color = "#FFFFFF", time = 1)
-					crinos_form.update_icons()
-			if("Homid")
-				if(trans == human_form)
-					transformating = FALSE
-					return
-				animate(trans, transform = ntransform, color = "#000000", time = 30)
-				playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
-				for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
-					if(B)
-						qdel(B)
-				spawn(30)
-					if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
-						animate(trans, transform = null, color = "#FFFFFF")
-						return
-					var/items = trans.get_contents()
-					for(var/obj/item/item_worn in items)
-						if(item_worn)
-							if(!ismob(item_worn.loc))
-								continue
-							trans.dropItemToGround(item_worn, TRUE)
-					var/current_loc = get_turf(trans)
-					human_form.color = "#000000"
-					human_form.forceMove(current_loc)
-					animate(human_form, color = "#FFFFFF", time = 10)
-					human_form.key = trans.key
-					forceMove(human_form)
-					human_form.bloodpool = trans.bloodpool
-					human_form.masquerade = trans.masquerade
-					human_form.nutrition = trans.nutrition
-					human_form.mind = trans.mind
-					human_form.update_blood_hud()
-					transfer_damage(trans, human_form)
-					human_form.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
-					human_form.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
-					trans.forceMove(src)
-					transformating = FALSE
-					animate(trans, transform = null, color = "#FFFFFF", time = 1)
+	switch(form)
+		if("Lupus")
+			if(islupus(trans))
+				transformating = FALSE
+				return
+			if(!lupus_form)
+				return
+			var/mob/living/carbon/werewolf/lupus/lupus = lupus_form.resolve()
+			if(!lupus)
+				lupus_form = null
+				return
+
+			transformating = TRUE
+
+			animate(trans, transform = ntransform, color = "#000000", time = 30)
+			playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+
+			for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
+				if(B)
+					qdel(B)
+
+			addtimer(CALLBACK(src, PROC_REF(transform_lupus), trans, lupus), 30 DECISECONDS)
+		if("Crinos")
+			if(iscrinos(trans))
+				transformating = FALSE
+				return
+			if(!crinos_form)
+				return
+			var/mob/living/carbon/werewolf/crinos/crinos = crinos_form.resolve()
+			if(!crinos)
+				crinos_form = null
+				return
+
+			transformating = TRUE
+
+			animate(trans, transform = ntransform, color = "#000000", time = 30)
+			playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+			for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
+				if(B)
+					qdel(B)
+
+			addtimer(CALLBACK(src, PROC_REF(transform_crinos), trans, crinos), 30 DECISECONDS)
+		if("Homid")
+			if(ishuman(trans))
+				transformating = FALSE
+				return
+			if(!human_form)
+				return
+			var/mob/living/carbon/human/homid = human_form.resolve()
+			if(!homid)
+				human_form = null
+				return
+
+			transformating = TRUE
+
+			animate(trans, transform = ntransform, color = "#000000", time = 30)
+			playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+			for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
+				if(B)
+					qdel(B)
+
+			addtimer(CALLBACK(src, PROC_REF(transform_homid), trans, homid), 30 DECISECONDS)
+
+/datum/werewolf_holder/transformation/proc/transform_lupus(mob/living/carbon/trans, mob/living/carbon/werewolf/lupus/lupus)
+	PRIVATE_PROC(TRUE)
+
+	if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
+		animate(trans, transform = null, color = "#FFFFFF")
+		return
+	var/items = trans.get_contents()
+	for(var/obj/item/item_worn in items)
+		if(item_worn)
+			if(!ismob(item_worn.loc))
+				continue
+			trans.dropItemToGround(item_worn, TRUE)
+	var/turf/current_loc = get_turf(trans)
+	lupus.color = "#000000"
+	lupus.forceMove(current_loc)
+	animate(lupus, color = "#FFFFFF", time = 10)
+	lupus.key = trans.key
+	trans.moveToNullspace()
+	lupus.bloodpool = trans.bloodpool
+	lupus.masquerade = trans.masquerade
+	lupus.nutrition = trans.nutrition
+	lupus.mind = trans.mind
+	lupus.update_blood_hud()
+	transfer_damage(trans, lupus)
+	lupus.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+	transformating = FALSE
+	animate(trans, transform = null, color = "#FFFFFF", time = 1)
+	lupus.update_icons()
+
+/datum/werewolf_holder/transformation/proc/transform_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/crinos/crinos)
+	PRIVATE_PROC(TRUE)
+
+	if(trans.stat == DEAD)
+		animate(trans, transform = null, color = "#FFFFFF")
+		return
+	var/items = trans.get_contents()
+	for(var/obj/item/item_worn in items)
+		if(item_worn)
+			if(!ismob(item_worn.loc))
+				continue
+			trans.dropItemToGround(item_worn, TRUE)
+	var/turf/current_loc = get_turf(trans)
+	crinos.color = "#000000"
+	crinos.forceMove(current_loc)
+	animate(crinos, color = "#FFFFFF", time = 10)
+	crinos.key = trans.key
+	trans.moveToNullspace()
+	crinos.bloodpool = trans.bloodpool
+	crinos.masquerade = trans.masquerade
+	crinos.nutrition = trans.nutrition
+	crinos.mind = trans.mind
+	crinos.update_blood_hud()
+	crinos.physique = crinos.physique+3
+	transfer_damage(trans, crinos)
+	crinos.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	transformating = FALSE
+	animate(trans, transform = null, color = "#FFFFFF", time = 1)
+	crinos.update_icons()
+
+/datum/werewolf_holder/transformation/proc/transform_homid(mob/living/carbon/trans, mob/living/carbon/human/homid)
+	PRIVATE_PROC(TRUE)
+
+	if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
+		animate(trans, transform = null, color = "#FFFFFF")
+		return
+	var/items = trans.get_contents()
+	for(var/obj/item/item_worn in items)
+		if(item_worn)
+			if(!ismob(item_worn.loc))
+				continue
+			trans.dropItemToGround(item_worn, TRUE)
+	var/turf/current_loc = get_turf(trans)
+	homid.color = "#000000"
+	homid.forceMove(current_loc)
+	animate(homid, color = "#FFFFFF", time = 10)
+	homid.key = trans.key
+	trans.moveToNullspace()
+	homid.bloodpool = trans.bloodpool
+	homid.masquerade = trans.masquerade
+	homid.nutrition = trans.nutrition
+	homid.mind = trans.mind
+	homid.update_blood_hud()
+	transfer_damage(trans, homid)
+	homid.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	homid.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+	transformating = FALSE
+	animate(trans, transform = null, color = "#FFFFFF", time = 1)
+	homid.update_body()

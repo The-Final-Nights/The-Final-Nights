@@ -237,7 +237,6 @@
 /area/template_noop)
 "H" = (
 /obj/structure/table/wood/fancy,
-/obj/item/book/manual/wiki/security_space_law,
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1

@@ -84,6 +84,8 @@
 	var/datum/atom_hud/health_hud = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	health_hud.add_hud_to(owner)
 
+	owner.auspex_examine = TRUE
+
 	owner.update_sight()
 
 /datum/discipline_power/auspex/the_spirits_touch/deactivate()
@@ -91,31 +93,6 @@
 
 	var/datum/atom_hud/health_hud = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	health_hud.remove_hud_from(owner)
-
-	owner.update_sight()
-
-//TELEPATHY
-/datum/discipline_power/auspex/telepathy
-	name = "Telepathy"
-	desc = "Feel the psychic resonances left on objects you can touch."
-
-	level = 4
-	check_flags = DISC_CHECK_CONSCIOUS
-	vitae_cost = 0
-
-	toggled = TRUE
-
-/datum/discipline_power/auspex/telepathy/activate()
-	. = ..()
-	owner.add_client_colour(/datum/client_colour/glass_colour/lightblue)
-
-	owner.auspex_examine = TRUE
-
-	owner.update_sight()
-
-/datum/discipline_power/auspex/telepathy/deactivate()
-	. = ..()
-	owner.remove_client_colour(/datum/client_colour/glass_colour/lightblue)
 
 	owner.auspex_examine = FALSE
 
@@ -212,6 +189,36 @@
 			if(!found_something)
 				to_chat(user, "<I># No forensic traces found #</I>") // Don't display this to the holder user
 			return
+
+//TELEPATHY
+/datum/discipline_power/auspex/telepathy
+	name = "Telepathy"
+	desc = "Project your thoughts into the mind of another."
+
+	level = 4
+	check_flags = DISC_CHECK_CONSCIOUS
+	target_type = TARGET_LIVING
+	vitae_cost = 0
+	cooldown_length = 15 SECONDS
+	range = 7
+
+/datum/discipline_power/auspex/telepathy/activate(mob/living/target)
+	. = ..()
+	var/input_message = tgui_input_text(owner, "What message will you project to them?", encode = FALSE)
+	if (!input_message)
+		return
+
+	//sanitisation!
+	input_message = STRIP_HTML_SIMPLE(input_message, MAX_MESSAGE_LEN)
+	if(CHAT_FILTER_CHECK(input_message))
+		to_chat(owner, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[input_message]\"</span>"))
+		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
+		return
+
+	log_directed_talk(owner, input_message, LOG_SAY, "[name]")
+	to_chat(owner, span_notice("You project your thoughts into [target]'s mind: [input_message]"))
+	to_chat(target, span_boldannounce("You hear a voice in your head... [input_message]"))
+
 
 //PSYCHIC PROJECTION
 /datum/discipline_power/auspex/psychic_projection

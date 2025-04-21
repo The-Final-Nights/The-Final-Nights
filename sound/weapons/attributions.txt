@@ -16,3 +16,20 @@ revolverspin1, revolverspin2, and revolverspin3 are cut from a recording
 captured by the BBC
 "Gunfire & Guns: Revolver, Chambers spinning.": http://bbcsfx.acropolis.org.uk/assets/07027165.wav
 bbc.co.uk - (c) copyright 2018 BBC
+
+kiss sound: https://freesound.org/people/stereostereo/sounds/117355/
+champagne_pop.ogg is credited to ultradust on freesound https://freesound.org/people/ultradust/sounds/166923/
+
+can_open.ogg adapted from https://freesound.org/people/MaxDemianAGL/sounds/130031/
+can_shake.ogg adapted from https://freesound.org/people/mcmast/sounds/456703/
+
+
+splatter.ogg adapted from https://freesound.org/people/Rocktopus/sounds/233418/
+hohoho.ogg and hehe.ogg are cut from a recording by Nanakisan on freesound: https://freesound.org/people/Nanakisan/sounds/253534/
+mbox_full.ogg and mbox_end.ogg make use of The Ragtime Drummer by James Lent, in the public domain
+
+growl1.ogg and growl2.ogg in /sound/creatures/dog are adapted from Glitchedtones's Freesound shih-tzu uploads https://freesound.org/people/Glitchedtones/
+
+eject.ogg is by magedu, adapted from https://freesound.org/people/magedu/sounds/267832/
+
+standard_stamp.ogg is adapted from tom_woysky's "Stamp.wav" https://freesound.org/people/tom_woysky/sounds/348316/

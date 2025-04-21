@@ -540,7 +540,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/item/book/manual/wiki/engineering_singulo_tesla,
 /turf/open/floor/plasteel/icemoon,
 /area/icemoon/surface/outdoors)
 "bE" = (
@@ -713,7 +712,6 @@
 /turf/open/floor/plasteel/icemoon,
 /area/icemoon/surface/outdoors)
 "cc" = (
-/obj/item/book/manual/wiki/atmospherics,
 /turf/open/floor/plasteel/icemoon,
 /area/icemoon/surface/outdoors)
 "cd" = (
