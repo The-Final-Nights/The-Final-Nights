@@ -517,7 +517,7 @@
 #undef PLACE_SPEED
 
 /obj/structure/sign/poster/vampire
-	icon = "posters.dmi"
+	icon = "code/modules/wod13/posters.dmi"
 
 /obj/structure/sign/poster/vampire/wotw
 	icon_state = "war of the worlds"
