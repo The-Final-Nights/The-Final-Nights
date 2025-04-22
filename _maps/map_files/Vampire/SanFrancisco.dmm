@@ -3364,6 +3364,11 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/bronze,
 /area/vtm/interior/giovanni)
+"aTL" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/food/drinks/beer/vampire/blue_stripe,
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "aTO" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -8092,6 +8097,11 @@
 /obj/structure/chair/sofa/corp/right,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"cjR" = (
+/obj/effect/decal/trash,
+/obj/structure/chair/sofa/corp/left,
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "cjT" = (
 /obj/item/arcane_tome,
 /turf/open/floor/plating/rough,
@@ -10265,6 +10275,20 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
+"cLP" = (
+/obj/effect/decal/trash{
+	icon_state = "trash5"
+	},
+/obj/effect/decal/trash{
+	icon_state = "trash8"
+	},
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 16
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "cLV" = (
 /turf/closed/wall/vampwall/rock,
 /area/vtm/interior/gnawer)
@@ -31480,9 +31504,7 @@
 /area/vtm/financialdistrict)
 "iFM" = (
 /obj/effect/decal/wallpaper/red/low,
-/obj/structure/curtain/bounty{
-	base_pixel_y = 26
-	},
+/obj/structure/curtain/bounty,
 /turf/closed/wall/vampwall/bar/low/window,
 /area/vtm/anarch)
 "iFP" = (
@@ -32901,6 +32923,12 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
+"jbb" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 4
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "jbc" = (
 /obj/structure/vampdoor/glass/clinic{
 	dir = 4;
@@ -44655,6 +44683,15 @@
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"mqw" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/decal/trash{
+	icon_state = "trash8"
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "mqz" = (
 /obj/machinery/light{
 	dir = 1
@@ -47837,9 +47874,7 @@
 	},
 /area/vtm/pacificheights/forest)
 "nhy" = (
-/obj/structure/curtain/bounty{
-	base_pixel_y = 26
-	},
+/obj/structure/curtain/bounty,
 /turf/open/floor/carpet/red,
 /area/vtm/anarch)
 "nhA" = (
@@ -50716,6 +50751,10 @@
 "nUX" = (
 /obj/structure/table/wood/poker,
 /turf/open/floor/carpet/green,
+/area/vtm/anarch)
+"nVg" = (
+/obj/structure/chair/sofa/corp,
+/turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "nVt" = (
 /obj/structure/table,
@@ -54785,6 +54824,12 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
+"oZF" = (
+/obj/effect/decal/trash,
+/turf/open/floor/plasteel/stairs{
+	dir = 1
+	},
+/area/vtm/anarch)
 "oZH" = (
 /turf/open/floor/plating/asphalt,
 /area/vtm/financialdistrict/construction)
@@ -57510,6 +57555,14 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/hotel)
+"pKM" = (
+/obj/structure/railing{
+	dir = 1;
+	layer = 4;
+	pixel_y = 16
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "pKQ" = (
 /obj/effect/decal/litter,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -65464,6 +65517,13 @@
 /obj/structure/chair/comfy/beige,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"rOf" = (
+/obj/effect/decal/trash,
+/obj/structure/chair/sofa/corp{
+	dir = 4
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "rOj" = (
 /obj/structure/vamprocks,
 /turf/open/floor/plating/vampgrass,
@@ -72993,6 +73053,12 @@
 /obj/effect/decal/litter,
 /turf/open/floor/plating/vampcanal,
 /area/vtm/sewer)
+"tTO" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "tTR" = (
 /obj/structure/glowshroom/single,
 /turf/open/floor/plating/rough/cave,
@@ -77478,6 +77544,12 @@
 /obj/structure/barrels/rand,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"vgQ" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 4
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch)
 "vgU" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -236766,9 +236838,9 @@ big
 ntq
 ntq
 tDF
-pMC
-pMC
-pMC
+lJI
+sbb
+lJI
 pMC
 pMC
 xab
@@ -237023,8 +237095,8 @@ big
 ntq
 ntq
 ecV
-lJI
-sbb
+urg
+kVs
 lJI
 ldW
 pMC
@@ -237280,8 +237352,8 @@ big
 ntq
 ntq
 fIV
-urg
-kVs
+lJI
+pSi
 lJI
 pMC
 pMC
@@ -237538,8 +237610,8 @@ ntq
 ntq
 pCW
 lJI
-pSi
-lJI
+sbb
+bSR
 vmN
 pMC
 qtE
@@ -237794,9 +237866,9 @@ big
 ntq
 ntq
 afE
-lJI
-sbb
-bSR
+uTZ
+uTZ
+uTZ
 pMC
 pMC
 qtE
@@ -238051,10 +238123,10 @@ fZo
 ntq
 ntq
 fDw
-pMC
-vmN
-pMC
-pMC
+vgQ
+rOf
+jbb
+pKM
 pMC
 mbo
 pKt
@@ -238308,10 +238380,10 @@ ntq
 ntq
 ntq
 dRe
-pMC
-pMC
-pMC
-brr
+nVg
+aTL
+aTL
+cLP
 pMC
 pMC
 pOS
@@ -238565,9 +238637,9 @@ ntq
 ntq
 ntq
 ecV
-vmN
-pMC
-vmN
+cjR
+aIz
+oZF
 pMC
 pMC
 ldW
@@ -238822,9 +238894,9 @@ ntq
 ntq
 fkk
 bBG
-uTZ
-uTZ
-uTZ
+mqw
+tTO
+rcC
 pMC
 pMC
 pMC
