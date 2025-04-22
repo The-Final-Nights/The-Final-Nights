@@ -577,6 +577,14 @@
 		var/datum/action/A = X
 		A.UpdateButtonIcon()
 
+/datum/crafting_recipe/stake
+	name = "Stake"
+	time = 50
+	reqs = list(/obj/item/stack/sheet/mineral/wood = 5)
+	result = /obj/item/vampire_stake
+	always_available = TRUE
+	category = CAT_WEAPON
+
 /obj/item/vampire_stake
 	name = "stake"
 	desc = "Paralyzes blank-bodies if aimed straight to the heart."
