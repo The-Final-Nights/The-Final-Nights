@@ -57,6 +57,7 @@
 	. = ..()
 	var/mob/living/carbon/human/dominate_target
 	if(ishuman(target))
+
 		dominate_target = target
 		dominate_target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dominate_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dominate", -MUTATIONS_LAYER)
@@ -66,27 +67,14 @@
 		addtimer(CALLBACK(dominate_target, TYPE_PROC_REF(/mob/living/carbon/human, post_dominate_checks), dominate_target), 2 SECONDS)
 	return TRUE
 
-/datum/discipline_power/dominate/proc/dominate_check(mob/living/carbon/human/owner, mob/living/target, tiebreaker = FALSE) //These checks are common to all applications of Dominate.
-	var/mypower = owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
-
-	if(owner == conditioner)
-		return TRUE
-
-	if(target.conditioned)
-		theirpower += 3
-
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == "Gargoyle")
-			return TRUE
-
-	if((theirpower >= mypower) && !tiebreaker || (owner.generation > target.generation) || (theirpower > mypower))
-		to_chat(owner, span_warning("[target]'s mind is too powerful to dominate!"))
+/datum/discipline_power/dominate/proc/dominate_hearing_check(mob/living/carbon/human/owner, mob/living/target)
+	var/list/hearers = get_hearers_in_view(8, owner)
+	if(!(target in hearers))
+		to_chat(owner, span_warning("[target] cannot hear you — they are too far or behind an obstruction."))
 		return FALSE
-
-	return TRUE
+	else
+		to_chat(owner, span_info("[target] hears you clearly."))
+		return TRUE
 
 /datum/movespeed_modifier/dominate
 	multiplicative_slowdown = 5
@@ -107,12 +95,21 @@
 	duration_length = 3 SECONDS
 	range = 7
 	var/tmp/command_succeeded = FALSE
+	var/custom_command = "FORGET ABOUT IT"
 
 /datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)
 
+	if(!dominate_hearing_check(owner,target))
+		return FALSE
+	
 	// Early success / failure if target is not human or if target is a Gargoyle.
 	if(!ishuman(target))
 		return FALSE 
+		
+	custom_command = input(owner, "What is your command?", "Dominate Command", custom_command)
+
+	var/word_count = length(splittext(custom_command, " "))
+	var/extra_words_difficulty = 4 + max(0, word_count - 1) // Base 4, +1 for every extra word
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
@@ -120,7 +117,7 @@
 			command_succeeded = TRUE
 			return TRUE
 
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = extra_words_difficulty, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
 	if(mypower > theirpower && owner.generation <= target.generation)
@@ -135,8 +132,10 @@
 
 	if(command_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-		to_chat(target, span_danger("FORGET ABOUT IT"))
-		owner.say("FORGET ABOUT IT!!")
+		owner.say("[custom_command]!")
+		to_chat(target, span_danger("[custom_command]!"))
+		to_chat(target, span_userlove("[custom_command]!"))
+		to_chat(target, span_danger("[custom_command]!"))
 		ADD_TRAIT(target, TRAIT_BLIND, "dominate")
 	else
 		to_chat(owner, span_warning("[target] has resisted your domination!"))
@@ -162,6 +161,9 @@
 	var/tmp/mesmerize_succeeded = FALSE
 
 /datum/discipline_power/dominate/mesmerize/pre_activation_checks(mob/living/target)
+
+	if(!dominate_hearing_check(owner,target))
+		return FALSE
 
 	// Early success / failure if target is not human or if target is a Gargoyle.
 	if(!ishuman(target))
@@ -219,6 +221,9 @@
 
 /datum/discipline_power/dominate/the_forgetful_mind/pre_activation_checks(mob/living/target)
 
+	if(!dominate_hearing_check(owner,target))
+		return FALSE
+
 	// Early success / failure if target is not human or if target is a Gargoyle.
 	if(!ishuman(target))
 		return FALSE 
@@ -272,6 +277,9 @@
 	var/tmp/conditioning_succeeded = FALSE
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
+
+	if(!dominate_hearing_check(owner,target))
+		return FALSE
 
 	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 	if(owner == conditioner)
@@ -337,6 +345,9 @@
 
 
 /datum/discipline_power/dominate/possession/pre_activation_checks(mob/living/target)
+
+	if(!dominate_hearing_check(owner,target))
+		return FALSE
 
 	// Early success / failure if target is not human or if target is a Gargoyle.
 	if(!ishuman(target))

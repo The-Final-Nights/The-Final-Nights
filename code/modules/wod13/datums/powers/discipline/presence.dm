@@ -11,6 +11,16 @@
 	activate_sound = 'code/modules/wod13/sounds/presence_activate.ogg'
 	deactivate_sound = 'code/modules/wod13/sounds/presence_deactivate.ogg'
 
+
+/datum/discipline_power/presence/proc/presence_hearing_check(mob/living/carbon/human/owner, mob/living/target)
+	var/list/hearers = get_hearers_in_view(8, owner)
+	if(!(target in hearers))
+		to_chat(owner, span_warning("[target] cannot hear you — they are too far or behind an obstruction."))
+		return FALSE
+	else
+		to_chat(owner, span_info("[target] hears you clearly."))
+		return TRUE
+
 //AWE
 /datum/discipline_power/presence/awe
 	name = "Awe"
@@ -29,6 +39,10 @@
 	var/tmp/awe_succeeded = FALSE
 
 /datum/discipline_power/presence/awe/pre_activation_checks(mob/living/target)
+
+	if(!presence_hearing_check(owner,target))
+		return FALSE
+
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
@@ -84,6 +98,10 @@
 	var/tmp/dread_gaze_succeeded = FALSE
 
 /datum/discipline_power/presence/dread_gaze/pre_activation_checks(mob/living/target)
+
+	if(!presence_hearing_check(owner,target))
+		return FALSE
+
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
@@ -135,6 +153,10 @@
 	var/tmp/entrancement_succeeded = FALSE
 
 /datum/discipline_power/presence/entrancement/pre_activation_checks(mob/living/target)
+
+	if(!presence_hearing_check(owner,target))
+		return FALSE
+
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
@@ -195,6 +217,10 @@
 	var/tmp/summon_succeeded = FALSE
 
 /datum/discipline_power/presence/summon/pre_activation_checks(mob/living/target)
+
+	if(!presence_hearing_check(owner,target))
+		return FALSE
+
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
@@ -256,6 +282,10 @@
 	var/tmp/majesty_succeeded = FALSE
 
 /datum/discipline_power/presence/majesty/pre_activation_checks(mob/living/target)
+
+	if(!presence_hearing_check(owner,target))
+		return FALSE
+
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
