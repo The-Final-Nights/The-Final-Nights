@@ -458,7 +458,7 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 		var/mob/living/carbon/human/vampire = living_owner
 		var/datum/species/kindred/kindred_species = vampire.dna.species
 		if (COOLDOWN_FINISHED(kindred_species, torpor_timer) && (vampire.bloodpool > 0))
-			to_chat(usr, "<span class='userdanger'><b>You have risen once more, but your mind is clouded. You do not remember the events that lead to your Torpor.</b></span>")
+			to_chat(usr, "<span class='userdanger'><b>You have risen once more, but your mind is clouded. You do not remember the events that led to your Torpor.</b></span>")
 			vampire.untorpor()
 			spawn()
 				vampire.clear_alert("succumb")
