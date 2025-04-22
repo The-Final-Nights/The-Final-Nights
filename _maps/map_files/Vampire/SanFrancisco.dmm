@@ -17293,6 +17293,14 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/financialdistrict)
+"eNi" = (
+/obj/structure/curtain/bounty{
+	base_pixel_y = 10;
+	pixel_y = 8
+	},
+/obj/effect/decal/wallpaper/red/low,
+/turf/closed/wall/vampwall/bar/low/window,
+/area/vtm/anarch)
 "eNk" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/vamptree,
@@ -25103,6 +25111,14 @@
 /obj/effect/landmark/npcwall,
 /turf/open/floor/plating/vampbeach,
 /area/vtm/northbeach)
+"gQC" = (
+/obj/effect/decal/wallpaper/red/low,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 5;
+	pixel_y = 14
+	},
+/turf/closed/wall/vampwall/bar/low/window,
+/area/vtm/anarch)
 "gQD" = (
 /obj/machinery/light/small/red{
 	dir = 8;
@@ -62815,6 +62831,14 @@
 /obj/structure/barrels/rand,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/ghetto)
+"rgG" = (
+/obj/effect/decal/wallpaper/red/low,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 5;
+	pixel_y = 20
+	},
+/turf/closed/wall/vampwall/bar/low/window,
+/area/vtm/anarch)
 "rgN" = (
 /obj/structure/curtain/cloth/fancy/mechanical{
 	id = 2006
@@ -70227,14 +70251,13 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
 "tfG" = (
-/obj/structure/vampfence/rich{
-	dir = 4;
-	layer = 5;
-	name = "window bars";
-	pixel_y = 32
+/obj/effect/decal/wallpaper/red/low,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 5;
+	pixel_y = 18
 	},
-/turf/open/floor/carpet/blue,
-/area/vtm/anarch/basement)
+/turf/closed/wall/vampwall/bar/low/window,
+/area/vtm/anarch)
 "tfH" = (
 /obj/structure/bookcase/random/fiction,
 /turf/open/floor/carpet,
@@ -80445,6 +80468,11 @@
 "vYU" = (
 /obj/effect/decal/wallpaper/stone/low,
 /obj/effect/decal/wallpaper/stone/low,
+/obj/structure/vampfence/rich{
+	dir = 4;
+	layer = 5;
+	name = "window bars"
+	},
 /turf/closed/wall/vampwall/rich/low/window/reinforced,
 /area/vtm/anarch/basement)
 "vYV" = (
@@ -113326,7 +113354,7 @@ mLp
 mlC
 mlC
 vYU
-tfG
+uCe
 oxg
 uCe
 lCv
@@ -113840,7 +113868,7 @@ mLp
 fPy
 sgp
 vYU
-tfG
+uCe
 oxg
 gis
 lCv
@@ -239769,7 +239797,7 @@ ubl
 kGg
 ktb
 nhy
-ktb
+eNi
 kBp
 pMC
 fkk
@@ -240795,9 +240823,9 @@ nBj
 nBj
 nBj
 fkk
-nBj
-nBj
-nBj
+rgG
+tfG
+gQC
 fkk
 fkk
 fkk
