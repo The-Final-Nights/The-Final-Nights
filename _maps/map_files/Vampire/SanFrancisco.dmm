@@ -12425,6 +12425,7 @@
 "dpM" = (
 /obj/machinery/light/small,
 /obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/five,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
 "dpT" = (
@@ -27604,6 +27605,12 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f3)
+"hBC" = (
+/obj/effect/decal/wallpaper/red,
+/obj/machinery/light/small,
+/obj/effect/decal/wallpaper/papers/one,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "hBH" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -75549,6 +75556,10 @@
 "uEh" = (
 /turf/open/floor/carpet/blue,
 /area/vtm/anarch)
+"uEj" = (
+/obj/structure/closet,
+/turf/open/floor/carpet/green,
+/area/vtm/anarch)
 "uEo" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -81488,6 +81499,10 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/interior/police)
+"wlP" = (
+/obj/structure/sign/poster/vampire/wotw,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "wlT" = (
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/vampplating,
@@ -236838,7 +236853,7 @@ big
 ntq
 ntq
 tDF
-lJI
+uEj
 sbb
 lJI
 pMC
@@ -237094,7 +237109,7 @@ ntq
 big
 ntq
 ntq
-ecV
+hBC
 urg
 kVs
 lJI
@@ -237352,7 +237367,7 @@ big
 ntq
 ntq
 fIV
-lJI
+urg
 pSi
 lJI
 pMC
@@ -238636,7 +238651,7 @@ big
 ntq
 ntq
 ntq
-ecV
+cgO
 cjR
 aIz
 oZF
@@ -240438,7 +240453,7 @@ tKB
 gJH
 cXX
 cXX
-fkk
+wlP
 psQ
 pMC
 xoz
