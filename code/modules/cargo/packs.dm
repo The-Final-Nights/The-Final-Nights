@@ -2150,7 +2150,7 @@
 	access_view = ACCESS_CHAPEL_OFFICE
 	contains = list(/obj/item/clothing/under/misc/burial,
 					/obj/item/food/grown/harebell,
-					/obj/item/food/grown/poppy/geranium)
+					/obj/item/food/grown/flower/poppy/geranium)
 	crate_name = "coffin"
 	crate_type = /obj/structure/closet/crate/coffin
 
