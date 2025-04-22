@@ -36,7 +36,7 @@
 	if(isgarou(target))
 		to_chat(owner, "Victim's natural banishment is silver...")
 	if(iskindred(target))
-		baali_get_clan_weakness(target, owner)
+		baali_get_moral_failings(target, owner)
 		baali_get_stolen_disciplines(target, owner)
 		if(target.generation >= 10)
 			to_chat(owner, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
@@ -62,14 +62,14 @@
 	if(!iskindred(target) && !isghoul(target) && !isgarou(target) && !iscathayan(target))
 		to_chat(owner, "[target] is a feeble worm with no strengths or visible weaknesses, a mere human.")
 
-/datum/discipline_power/daimonion/sense_the_sin/proc/baali_get_clan_weakness(target, owner)
+/datum/discipline_power/daimonion/sense_the_sin/proc/baali_get_moral_failings(target, owner)
 	if(!owner || !target)
 		return
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire))
 		switch(vampire.clane?.name)
 			if("Toreador")
-				to_chat(owner, "[target] is too clingy to the art.")
+				to_chat(owner, "[target] is obsessive to a fault.")
 				return
 			if("Daughters of Cacophony")
 				to_chat(owner, "[target]'s mind is envelopped by nonstopping music.")
@@ -77,55 +77,55 @@
 				to_chat(owner, "[target] finds no pleasure in poor's blood.")
 				return
 			if("Lasombra")
-				to_chat(owner, "[target] is afraid of modern technology.")
+				to_chat(owner, "[target] fears change itself evermore.")
 				return
 			if("Tzimisce")
-				to_chat(owner, "[target] is tied to its domain.")
+				to_chat(owner, "[target] is consumed by a singular desire.")
 				return
 			if("Gangrel")
-				to_chat(owner, "[target] is a feral being used to the nature.")
+				to_chat(owner, "[target] is unable to control their impulses.")
 				return
 			if("Malkavian")
-				to_chat(owner, "[target] is unstable, the mind is ill.")
+				to_chat(owner, "[target] frightens people near them.")
 				return
 			if("Brujah")
-				to_chat(owner, "[target] is full of uncontrollable rage.")
+				to_chat(owner, "[target] is cursed to anger for their shame at carthage..")
 			if("Nosferatu")
-				to_chat(owner, "[target] is ugly and nothing will save them.")
+				to_chat(owner, "[target] is entranced by that which is unknown.")
 				return
 			if("Tremere")
-				to_chat(owner, "[target] is weak to kindred blood and vulnerable to blood bonds.")
+				to_chat(owner, "[target] has a sense of perfectionism by their own actions.")
 				return
 			if("Baali")
-				to_chat(owner, "[target] is afraid that of the holy.")
+				to_chat(owner, "[target] is scared of the lord's presence.")
 				return
 			if("Banu Haqim")
-				to_chat(owner, "[target] is addicted to kindred vitae...")
+				to_chat(owner, "[target] sees themselves as absolute judgement.")
 				return
 			if("True Brujah")
 				to_chat(owner, "[target] cant express emotions.")
 				return
 			if("Salubri")
-				to_chat(owner, "[target] is unable to feed on unwilling.")
+				to_chat(owner, "[target] is ruled by consent.")
 				return
 			if("Giovanni")
-				to_chat(owner, "[target]'s bite inflicts too much harm.")
+				to_chat(owner, "[target] never considers any action too great for their family.")
 				return
 			if("Cappadocian")
-				to_chat(owner, "[target]'s skin will stay pale and lifeless no matter what.")
+				to_chat(owner, "[target] will never escape the appearance of a corpse.")
 				return
 			if("Kiasyd")
 				to_chat(owner, "[target] is afraid of cold iron.")
 				return
 			if("Gargoyle")
-				to_chat(owner, "[target] is too dependent on its masters, its mind is feeble.")
+				to_chat(owner, "[target]'s mind is a fortress with gates open and unbarred.")
 				return
 			if("Ministry")
-				to_chat(owner, "[target] is afraid of bright lights.")
+				to_chat(owner, "[target] believes every stain of sin is a virtue.")
 				return
 
 			else
-				to_chat(owner, "[target] is shunned by most as it lacks a clan.")
+				to_chat(owner, "[target] has been abandoned by the cold ocean of the night with nobody to keep them afloat.")
 
 
 /datum/discipline_power/daimonion/sense_the_sin/proc/baali_get_stolen_disciplines(target, owner)

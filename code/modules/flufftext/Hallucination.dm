@@ -342,7 +342,6 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	var/obj/effect/hallucination/simple/demon/demon
 	var/turf/landing
 	var/charged
-	var/next_action = 0
 	COOLDOWN_DECLARE(next_cooldown)
 
 /datum/hallucination/baali/New(mob/living/carbon/C, forced = TRUE)
@@ -377,7 +376,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		QDEL_IN(src, 4 SECONDS)
 		if(demon.Adjacent(target) && !charged)
 			charged = TRUE
-			target.Paralyze(50)
+			target.Paralyze(6 SECONDS)
 			target.adjustStaminaLoss(500)
 			step_away(target, demon)
 			target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
