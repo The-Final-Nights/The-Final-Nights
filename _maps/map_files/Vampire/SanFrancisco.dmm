@@ -31481,7 +31481,7 @@
 "iFM" = (
 /obj/effect/decal/wallpaper/red/low,
 /obj/structure/curtain/bounty{
-	base_pixel_y = 12
+	base_pixel_y = 26
 	},
 /turf/closed/wall/vampwall/bar/low/window,
 /area/vtm/anarch)
@@ -47838,7 +47838,7 @@
 /area/vtm/pacificheights/forest)
 "nhy" = (
 /obj/structure/curtain/bounty{
-	base_pixel_y = 12
+	base_pixel_y = 26
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/anarch)
@@ -237027,7 +237027,7 @@ lJI
 sbb
 lJI
 ldW
-uTZ
+pMC
 uTZ
 sYc
 qtE
@@ -238055,7 +238055,7 @@ pMC
 vmN
 pMC
 pMC
-mbo
+pMC
 mbo
 pKt
 qtE
