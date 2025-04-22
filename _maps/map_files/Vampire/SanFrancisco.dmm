@@ -24438,10 +24438,10 @@
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/megaphone,
-/obj/item/gun/energy/taser,
-/obj/item/gun/energy/taser,
-/obj/item/gun/energy/taser,
-/obj/item/gun/energy/taser,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},

@@ -1119,3 +1119,7 @@ VENTORY!
 /obj/item/vampire/drill
 	grid_width = 10 GRID_BOXES
 	grid_height = 10 GRID_BOXES
+
+/obj/item/gun/energy/taser
+	grid_width = 2 GRID_BOXES
+	grid_height = 1 GRID_BOXES
