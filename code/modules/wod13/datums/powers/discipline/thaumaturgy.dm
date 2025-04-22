@@ -142,6 +142,8 @@
 	H.level = 2
 	H.fire(direct_target = target)
 	H.cruelty_multiplier = 1.1
+	to_chat(target, span_danger("A bolt of boiling blood flies toward you!"))
+
 
 //BLOOD OF POTENCY
 /datum/discipline_power/thaumaturgy/blood_of_potency
@@ -169,6 +171,8 @@
 	H.level = 2
 	H.fire(direct_target = target)
 	H.cruelty_multiplier = 1.1
+	to_chat(target, span_danger("A bolt of boiling blood flies toward you!"))
+
 
 //THEFT OF VITAE
 /mob/living/proc/tremere_gib()
@@ -312,7 +316,6 @@
 	target.apply_damage(30, BURN, owner.zone_selected)
 	target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
 	target.emote("collapse")
-	target.toggle_resting()
 
 //MISCELLANEOUS BULLSHIT
 /datum/action/thaumaturgy
