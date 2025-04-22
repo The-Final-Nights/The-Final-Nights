@@ -407,13 +407,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	var/mob/living/carbon/human/original_body = mind.current
 	var/turf/current_turf = get_turf(src)
-	var/found_body = FALSE
 
-	for(var/atom/A in current_turf)
-		if(ishuman(A) && A == original_body)
-			found_body = TRUE
-			break
-	if(!found_body && src.auspex_ghosted == TRUE)
+	if(!(get_turf(original_body) == current_turf) && src.auspex_ghosted == TRUE)
 		var/turf/body_turf = get_turf(original_body)
 		to_chat(src, "<span class='warning'>Your body is not here. It is located at coordinates: [body_turf.x], [body_turf.y], [body_turf.z].</span>")
 		to_chat(src, "<span class='warning'>Your current coordinates are: [current_turf.x], [current_turf.y], [current_turf.z].</span>")
@@ -470,7 +465,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 				A.add_overlay(source)
 				source.layer = old_layer
 				source.plane = old_plane
-	to_chat(src, "<span class='ghostalert'><a href=?src=[REF(src)];reenter=1>(Click to re-enter)</a></span>")
+	to_chat(src, "<span class='ghostalert'><a href=byond://?src=[REF(src)];reenter=1>(Click to re-enter)</a></span>")
 	if(sound)
 		SEND_SOUND(src, sound(sound))
 

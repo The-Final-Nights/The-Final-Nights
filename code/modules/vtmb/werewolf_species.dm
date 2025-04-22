@@ -8,7 +8,6 @@
 	use_skintones = TRUE
 	limbs_id = "human"
 	wings_icon = "Dragon"
-	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	brutemod = 0.75
 	heatmod = 1
 	burnmod = 1
@@ -42,11 +41,6 @@
 		if(!host.real_name)
 			dat += "Unknown,"
 		dat += " [host.auspice.tribe] [host.auspice.base_breed]"
-//		if(host.clane)
-//			dat += " the [host.clane.name]"
-//		if(!host.clane)
-//			dat += " the caitiff"
-
 		if(host.mind)
 
 			if(host.mind.assigned_role)
@@ -99,11 +93,10 @@
 				if(H.bank_id == account.bank_id)
 					dat += "<b>My bank account code is: [account.code]</b><BR>"
 		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
-		onclose(host, "vampire", src)
+		onclose(HTML_SKELETON(host), "vampire", src)
 
 /datum/species/garou/on_species_gain(mob/living/carbon/human/C)
 	. = ..()
-//	ADD_TRAIT(C, TRAIT_NOBLEED, HIGHLANDER)
 	C.update_body(0)
 	C.last_experience = world.time+3000
 	var/datum/action/garouinfo/infor = new()
@@ -114,18 +107,24 @@
 	var/datum/action/gift/rage_heal/GH = new()
 	GH.Grant(C)
 	C.transformator = new(C)
-	C.transformator.human_form = C
+	C.transformator.human_form = WEAKREF(C)
+
+	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
 
 	//garou resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
-	RegisterSignal(C.transformator.lupus_form, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
-	RegisterSignal(C.transformator.crinos_form, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
+	RegisterSignal(lupus, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
+	RegisterSignal(crinos, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
 
 /datum/species/garou/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
+	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
-	UnregisterSignal(C.transformator.lupus_form, COMSIG_MOB_VAMPIRE_SUCKED)
-	UnregisterSignal(C.transformator.crinos_form, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(lupus, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(crinos, COMSIG_MOB_VAMPIRE_SUCKED)
 	for(var/datum/action/garouinfo/VI in C.actions)
 		if(VI)
 			VI.Remove(C)

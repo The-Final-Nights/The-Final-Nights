@@ -46,8 +46,6 @@
 		T.visible_message("<span class='warning'>The cover and contents of [src] start shifting and changing!</span>")
 
 		qdel(src)
-		var/obj/item/book/manual/random/book = new(T)
-		user.put_in_active_hand(book)
 
 /obj/item/language_manual/codespeak_manual/unlimited
 	name = "deluxe codespeak manual"

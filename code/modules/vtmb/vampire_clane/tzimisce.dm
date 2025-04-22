@@ -2,9 +2,6 @@
 	name = CLAN_TZIMISCE
 	desc = "If someone were to call a Tzimisce inhuman and sadistic, the Tzimisce would probably commend them for their perspicacity, and then demonstrate that their mortal definition of sadism was laughably inadequate. The Tzimisce have left the human condition behind gladly, and now focus on transcending the limitations of the vampiric state. At a casual glance or a brief conversation, a Tzimisce appears to be one of the more pleasant vampires. Polite, intelligent, and inquisitive, they seem a stark contrast to the howling Sabbat mobs or even the apparently more humane Brujah or Nosferatu. However, upon closer inspection, it becomes clear that this is merely a mask hiding something alien and monstrous."
 	curse = "Grounded to material domain."
-//	alt_sprite = "tzi"
-//	no_hair = TRUE
-//	no_facial = TRUE	//FUCK WRONG RULEBOOK
 	clane_disciplines = list(
 		/datum/discipline/auspex,
 		/datum/discipline/animalism,
@@ -52,22 +49,6 @@
 	H.equip_in_one_of_slots(heirloom, slots, FALSE)
 	heirl = heirloom
 
-/datum/crafting_recipe/stake
-	name = "Stake"
-	time = 50
-	reqs = list(/obj/item/stack/sheet/mineral/wood = 5)
-	result = /obj/item/vampire_stake
-	always_available = TRUE
-	category = CAT_WEAPON
-
-/datum/crafting_recipe/molotov
-	name = "Molotov Cocktail"
-	time = 50
-	reqs = list(/obj/item/stack/sheet/cloth = 1, /obj/item/reagent_containers/food/drinks/beer/vampire = 1, /obj/item/gas_can = 1)
-	result = /obj/item/molotov
-	always_available = TRUE
-	category = CAT_WEAPON
-
 /datum/crafting_recipe/tzi_trench
 	name = "Leather-Bone Trenchcoat (Armor)"
 	time = 50
@@ -83,7 +64,6 @@
 	result = /obj/item/organ/cyberimp/arm/medibeam
 	always_available = FALSE
 	category = CAT_TZIMISCE
-
 
 /datum/crafting_recipe/tzi_heart
 	name = "Second Heart (Antistun)"
@@ -114,7 +94,31 @@
 	name = "Implanting Flesh Device"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/melee/vampirearms/knife = 1, /obj/item/drinkable_bloodpack = 1)
-	result = /obj/item/autosurgeon/organ
+	result = /obj/item/autosurgeon/organ/vicissitude
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzicreature
+	name = "Wretched Creature"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/organ/brain = 1, )
+	result = /obj/item/toy/plush/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tziregenerativecore
+	name = "Pulsating Heart"
+	time = 50
+	reqs = list(/obj/item/organ/heart = 1, /obj/item/drinkable_bloodpack/elite = 1)
+	result = /obj/item/organ/regenerative_core/legion/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/axetzi
+	name = "Living Axe"
+	time = 50
+	reqs = list(/obj/item/organ/eyes = 1, /obj/item/spine = 2, /obj/item/stack/human_flesh = 40)
+	result = /obj/item/melee/vampirearms/fireaxe/axetzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -126,11 +130,35 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzi_floor_living
+	name = "Writhing Floor"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 1, /obj/item/guts = 1)
+	result = /turf/open/indestructible/necropolis
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 /datum/crafting_recipe/tzi_wall
 	name = "Flesh Wall"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 2)
 	result = /obj/structure/fleshwall
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzijelly
+	name = "Living Meat Node"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/toy/plush/tzi = 1)
+	result = /obj/structure/tzijelly
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/cattzi
+	name = "flesh feline"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 20, /obj/item/guts = 1, /obj/item/spine = 1, /obj/item/toy/plush/tzi = 1)
+	result = /mob/living/simple_animal/pet/cat/vampiretzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -226,8 +254,8 @@
 	category = CAT_TZIMISCE
 
 /mob/living/simple_animal/hostile/biter
-	name = "biter"
-	desc = "A ferocious, fang-bearing creature that resembles a spider."
+	name = "szlachta"
+	desc = "The human form twisted to a breaking point, into a vague resemblence of a fanged spider."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "biter"
 	icon_living = "biter"
@@ -262,29 +290,9 @@
 	bloodpool = 2
 	maxbloodpool = 2
 
-/mob/living/simple_animal/hostile/biter/lasombra
-	name = "shadow abomination"
-	mob_biotypes = MOB_SPIRIT
-	icon_state = "shadow"
-	icon_living = "shadow"
-	del_on_death = TRUE
-	maxHealth = 100
-	health = 100
-	bloodpool = 0
-	maxbloodpool = 0
-	faction = list("Lasombra")
-
-/mob/living/simple_animal/hostile/biter/lasombra/better
-	icon_state = "shadow2"
-	icon_living = "shadow2"
-	maxHealth = 200
-	health = 200
-	melee_damage_lower = 50
-	melee_damage_upper = 50
-
 /mob/living/simple_animal/hostile/fister
-	name = "fister"
-	desc = "True abomination walking on both hands."
+	name = "szlachta"
+	desc = "A perversion of human form, waddling on a pair of overdeveloped arms."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "fister"
 	icon_living = "fister"
@@ -310,8 +318,8 @@
 	maxbloodpool = 5
 
 /mob/living/simple_animal/hostile/tanker
-	name = "tanker"
-	desc = "The peak of abominations armor. Unbelievably undamagable..."
+	name = "szlachta"
+	desc = "A bloated parody of the human form, possessing an immense bulk."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "tanker"
 	icon_living = "tanker"
@@ -334,50 +342,6 @@
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 7
 	maxbloodpool = 7
-
-/mob/living/simple_animal/hostile/gangrel
-	name = "Gangrel Form"
-	desc = "The peak of abominations armor. Unbelievably undamagable..."
-	icon = 'code/modules/wod13/32x48.dmi'
-	icon_state = "gangrel_f"
-	icon_living = "gangrel_f"
-	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	mob_size = MOB_SIZE_HUGE
-	speak_chance = 0
-	speed = -0.4
-	maxHealth = 275
-	health = 275
-	butcher_results = list(/obj/item/stack/human_flesh = 10)
-	harm_intent_damage = 5
-	melee_damage_lower = 30
-	melee_damage_upper = 30
-	attack_verb_continuous = "slashes"
-	attack_verb_simple = "slash"
-	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
-	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
-	minbodytemp = 0
-	bloodpool = 10
-	maxbloodpool = 10
-	dextrous = TRUE
-	held_items = list(null, null)
-	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
-
-/mob/living/simple_animal/hostile/gangrel/better
-	maxHealth = 325
-	health = 325
-	melee_damage_lower = 35
-	melee_damage_upper = 35
-	speed = -0.6
-
-/mob/living/simple_animal/hostile/gangrel/best
-	icon_state = "gangrel_m"
-	icon_living = "gangrel_m"
-	maxHealth = 400 //More in line with new health values.
-	health = 400
-	melee_damage_lower = 40
-	melee_damage_upper = 40
-	speed = -0.8
 
 /mob/living/simple_animal/hostile/gargoyle
 	name = "Gargoyle"
@@ -442,8 +406,8 @@
 	G.petrify(50)
 
 /mob/living/simple_animal/hostile/tzimisce_beast
-	name = "Tzimisce Beast Form"
-	desc = "The peak of abominations armor. Unbelievably undamagable..."
+	name = "zulo"
+	desc = "The first step on the Path of Metamorphosis, this horrid form is unlike anything wrought by nature."
 	icon = 'code/modules/wod13/64x64.dmi'
 	icon_state = "weretzi"
 	icon_living = "weretzi"
@@ -470,8 +434,8 @@
 	dodging = TRUE
 
 /mob/living/simple_animal/hostile/bloodcrawler
-	name = "Tzimisce Blood Form"
-	desc = "The peak of abominations. Unbelievably undamagable..."
+	name = "bloodcrawler"
+	desc = "A moving, oozing, sapient pool of blood. A stuff of nightmares."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "liquid"
 	icon_living = "liquid"
@@ -510,13 +474,43 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	w_class = WEIGHT_CLASS_SMALL
 
+/datum/material/vicissitude_flesh
+	name = "flesh"
+	desc = "What remains of a person, when you really get down to it."
+	color = "#d8965b"
+	categories = list(MAT_CATEGORY_RIGID = TRUE, MAT_CATEGORY_BASE_RECIPES = TRUE, MAT_CATEGORY_ITEM_MATERIAL=TRUE)
+	sheet_type = /obj/item/stack/sheet/meat
+	value_per_unit = 0.05
+	beauty_modifier = -0.3
+	strength_modifier = 0.7
+	armor_modifiers = list(MELEE = 0.3, BULLET = 0.3, LASER = 1.2, ENERGY = 1.2, BOMB = 0.3, BIO = 0, RAD = 0.7, FIRE = 1, ACID = 1)
+	item_sound_override = 'sound/effects/meatslap.ogg'
+	turf_sound_override = FOOTSTEP_MEAT
+	
+/datum/material/vicissitude_flesh/on_removed(atom/source, amount, material_flags)
+	. = ..()
+	qdel(source.GetComponent(/datum/component/edible))
+
+/datum/material/vicissitude_flesh/on_applied_obj(obj/O, amount, material_flags)
+	. = ..()
+	make_edible(O, amount, material_flags)
+
+/datum/material/vicissitude_flesh/on_applied_turf(turf/T, amount, material_flags)
+	. = ..()
+	make_edible(T, amount, material_flags)
+
+/datum/material/vicissitude_flesh/proc/make_edible(atom/source, amount, material_flags)
+	var/nutriment_count = 3 * (amount / MINERAL_MATERIAL_AMOUNT)
+	var/oil_count = 2 * (amount / MINERAL_MATERIAL_AMOUNT)
+	source.AddComponent(/datum/component/edible, list(/datum/reagent/consumable/nutriment = nutriment_count, /datum/reagent/consumable/cooking_oil = oil_count), null, RAW | MEAT | GROSS, null, 30, list("Fleshy"))
+
 /obj/item/stack/human_flesh
 	name = "human flesh"
 	desc = "What the fuck..."
 	singular_name = "human flesh"
 	icon_state = "human"
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
-	mats_per_unit = list(/datum/material/pizza = MINERAL_MATERIAL_AMOUNT)
+	mats_per_unit = list(/datum/material/vicissitude_flesh = MINERAL_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/human_flesh
 	max_amount = 50
 
@@ -557,4 +551,8 @@
 		playsound(get_turf(M), 'sound/misc/splort.ogg', 50, 1)
 		desc += "Looks like it's been used up."
 
-//GiveSpeciesFlight(mob/living/carbon/human/H)
+/obj/item/autosurgeon/organ/vicissitude
+	name = "little brother"
+	desc = "A talented fleshcrafted creature that can insert an implant or organ into its master without the hassle of extensive surgery. \
+		Its mouth is eagerly awaiting implants or organs. However, it's quite greedy, so a screwdriver must be used to pry away accidentally added items."
+	icon = 'code/modules/wod13/items.dmi'

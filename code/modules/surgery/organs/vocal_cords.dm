@@ -146,21 +146,36 @@
 	for(var/mob/living/L in get_hearers_in_view(8, user))
 		if(L.can_hear() && !L.anti_magic_check(FALSE, TRUE) && L.stat != DEAD)
 			var/dominate_me = FALSE
+			var/conditioner
+
 			if(L == user && !include_speaker)
 				continue
+
 			if(ishuman(L))
 				var/mob/living/carbon/human/H = L
-				if(H.clane)
-					if(H.clane.name == "Gargoyle")
-						dominate_me = TRUE
+				conditioner = H.conditioner?.resolve()
+				if(H.clane?.name == "Gargoyle")
+					dominate_me = TRUE
 				if(istype(H.ears, /obj/item/clothing/ears/earmuffs))
 					continue
-			if(user.generation > L.generation && !dominate_me) //Dominate can't be used on lower Generations
+
+			if(user.generation > L.generation && !dominate_me)
 				continue
-			if((user.get_total_social() <= L.get_total_mentality()) && !dominate_me) //Dominate must defeat resistance
-				continue
+
+			var/mypower = SSroll.storyteller_roll(user.get_total_social(), difficulty = 6, mobs_to_show_output = user, numerical = 1)
+			var/theirpower = SSroll.storyteller_roll(L.get_total_mentality(), difficulty = 6, mobs_to_show_output = L, numerical = 1)
+
+			if(conditioner && user != conditioner)
+				theirpower += 3
+
+			if(user != conditioner)
+				if((theirpower >= mypower) && !dominate_me)
+					to_chat(L, span_warning("Your ears ring with the undeniable authority of [user]'s voice. For a moment, you nearly obey… but your will breaks through the illusion."))
+					continue
+
 			if(L.resistant_to_disciplines)
 				continue
+
 			listeners += L
 
 	if(!listeners.len)

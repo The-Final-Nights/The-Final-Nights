@@ -469,10 +469,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/item/book/manual/wiki/security_space_law{
-	pixel_x = -4;
-	pixel_y = 4
-	},
+
 /obj/item/storage/lockbox/loyalty,
 /obj/item/radio/intercom{
 	pixel_x = -28

@@ -539,10 +539,6 @@
 	name = "Station Intercom (General)";
 	pixel_y = -31
 	},
-/obj/item/book/manual/wiki/security_space_law{
-	pixel_x = -4;
-	pixel_y = 4
-	},
 /turf/open/floor/mineral/plastitanium/red/brig,
 /area/shuttle/escape/brig)
 "bE" = (

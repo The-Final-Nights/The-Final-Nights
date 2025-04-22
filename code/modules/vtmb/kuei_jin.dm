@@ -51,11 +51,10 @@
 	disliked_food = GROSS | RAW
 	liked_food = JUNKFOOD | FRIED
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE)
-	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_VIRUSIMMUNE, TRAIT_PERFECT_ATTACKER, TRAIT_NOBREATH)
+	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_VIRUSIMMUNE, TRAIT_PERFECT_ATTACKER, TRAIT_NOBREATH, TRAIT_NOCRITDAMAGE)
 	use_skintones = TRUE
 	limbs_id = "human"
 	wings_icon = "None"
-	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	brutemod = 0.5
 	heatmod = 1
 	burnmod = 3
@@ -208,12 +207,6 @@
 		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
 		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
 		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
-//		if(host.hud_used)
-//			dat += "<b>Known disciplines:</b><BR>"
-//			for(var/datum/action/discipline/D in host.actions)
-//				if(D)
-//					if(D.discipline)
-//						dat += "[D.discipline.name] [D.discipline.level] - [D.discipline.desc]<BR>"
 		if(host.Myself)
 			if(host.Myself.Friend)
 				if(host.Myself.Friend.owner)
@@ -243,7 +236,7 @@
 			if(host.bank_id == account.bank_id)
 				dat += "<b>My bank account code is: [account.code]</b><BR>"
 		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
-		onclose(host, "vampire", src)
+		onclose(HTML_SKELETON(host), "vampire", src)
 
 /datum/species/kuei_jin/on_species_gain(mob/living/carbon/human/C)
 	. = ..()
@@ -543,6 +536,7 @@
 	var/obj/item/organ/brain/brain = kueijin.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain)
 		brain.applyOrganDamage(-100)
+		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 	var/heal_level = min(kueijin.mind.dharma.level, 4)
 	kueijin.heal_ordered_damage(20 * heal_level, list(OXY, STAMINA, BRUTE, TOX))
@@ -602,6 +596,7 @@
 	var/obj/item/organ/brain/brain = kueijin.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain)
 		brain.applyOrganDamage(-100)
+		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 	var/heal_level = min(kueijin.mind.dharma.level, 4)
 	kueijin.heal_ordered_damage(10 * heal_level, list(OXY, STAMINA, BRUTE, TOX))

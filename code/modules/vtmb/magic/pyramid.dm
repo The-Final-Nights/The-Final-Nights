@@ -215,6 +215,18 @@
 	max_integrity = 100
 	obj_integrity = 100
 
+/obj/structure/tzijelly
+	name = "jelly thing"
+	desc = "an important part of the meat matrix."
+	icon = 'code/modules/wod13/icons.dmi'
+	icon_state = "tzijelly"
+	plane = GAME_PLANE
+	layer = ABOVE_MOB_LAYER
+	anchored = TRUE
+	density = TRUE
+	max_integrity = 100
+	obj_integrity = 100
+
 /obj/ritualrune/identification
 	name = "Identification Rune"
 	desc = "Identifies a single occult item."
@@ -409,8 +421,6 @@
 					if(LAZYLEN(candidates))
 						var/mob/dead/observer/C = pick(candidates)
 						H.key = C.key
-//					Y.key = C.key
-//					Y.my_creator = last_activator
 				playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 				qdel(src)
 				return

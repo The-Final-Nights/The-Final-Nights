@@ -23,6 +23,7 @@
 		COMSIG_MOB_ATTACKING_MELEE,
 		COMSIG_MOB_ATTACKED_BY_MELEE,
 		CELERITY_POWER_ACTIVATE,
+		COMSIG_PROJECTILE_PREHIT,
 	)
 
 /datum/discipline_power/obfuscate/proc/on_combat_signal(datum/source)

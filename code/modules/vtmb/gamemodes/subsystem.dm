@@ -103,23 +103,6 @@ SUBSYSTEM_DEF(bad_guys_party)
 					max_candidates = 2
 					go_on_next_fire = TRUE
 					Next = new /datum/outfit/job/hunter()
-			/*if(3)
-				if(prob(50))
-					//hunt
-					if(Next)
-						qdel(Next)
-					threat = min(100, threat+60)
-					max_candidates = 2
-					go_on_next_fire = TRUE
-					Next = new /datum/outfit/job/hunter()
-				else
-					//sabbat
-					if(Next)
-						qdel(Next)
-					threat = min(100, threat+90)
-					max_candidates = 3
-					go_on_next_fire = TRUE
-					Next = new /datum/outfit/job/sabbatist()*/
 
 /mob/dead/new_player/proc/ForceLateSpawn()
 	if(SSticker.late_join_disabled)
