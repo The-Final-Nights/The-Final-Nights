@@ -1,6 +1,6 @@
 // Flower template originally created to facilitate different bouquet types with minimal overlap
 /obj/item/food/grown/flower
-	seed = /obj/item/seeds/poppy
+	seed = /obj/item/seeds/test
 	name = "flower"
 	desc = "you shouldn't be seeing this. please contact staff."
 	icon_state = "poppy"
@@ -8,7 +8,11 @@
 	bite_consumption_mod = 3 //How many bites to eat it
 	foodtypes = VEGETABLES | GROSS
 	distill_reagent = /datum/reagent/consumable/ethanol/vermouth
-
+/obj/item/food/grown/flower/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower speaks to you of A Bug.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses shitcode.</span>")
 // Poppy
 /obj/item/seeds/poppy
 	name = "pack of poppy seeds"
@@ -37,6 +41,11 @@
 	bite_consumption_mod = 3
 	foodtypes = VEGETABLES | GROSS
 	distill_reagent = /datum/reagent/consumable/ethanol/vermouth
+/obj/item/food/grown/flower/poppy/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower speaks to you of Consolation, of Death.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses being Fun-loving.</span>")
 
 // Lily
 /obj/item/seeds/flower/lily
@@ -53,6 +62,11 @@
 	name = "lily"
 	desc = "A beautiful orange flower."
 	icon_state = "lily"
+/obj/item/food/grown/flower/lily/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower speaks to you of Purity and sweetness.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses Purity and chastity.</span>")
 
 	//Elegant cluster-lily. Formerly Spacemans's Trumpet.
 /obj/item/seeds/flower/lily/clusterlily
@@ -93,6 +107,11 @@
 	icon_state = "clusterlily"
 	bite_consumption_mod = 3
 	foodtypes = VEGETABLES
+/obj/item/food/grown/flower/clusterlily/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower speaks to you of Royalty, of Elegance.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses being love-drunk.</span>")
 
 // Geranium
 /obj/item/seeds/poppy/geranium
@@ -109,7 +128,11 @@
 	name = "geranium"
 	desc = "A beautiful blue flower."
 	icon_state = "geranium"
-
+/obj/item/food/grown/flower/geranium/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower speaks to you of Envy.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses Friendship.</span>")
 ///Fraxinella seeds.
 /obj/item/seeds/poppy/geranium/fraxinella
 	name = "pack of fraxinella seeds"
@@ -123,7 +146,7 @@
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05, /datum/reagent/fuel/oil = 0.05)
 
 ///Fraxinella Flowers.
-/obj/item/food/grown/flower/geranium/fraxinella
+/obj/item/food/grown/flower/geranium/fraxinella //typically not found in America and thus lacks US Victorian Floriography.
 	seed = /obj/item/seeds/poppy/geranium/fraxinella
 	name = "fraxinella"
 	desc = "A beautiful light pink flower."
@@ -159,6 +182,12 @@
 	slot_flags = ITEM_SLOT_HEAD
 	bite_consumption_mod = 3
 	distill_reagent = /datum/reagent/consumable/ethanol/vermouth
+
+/obj/item/food/grown/flower/harebell/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower speaks to you of Humility.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses Gratefulness.</span>")
 
 // Sunflower
 /obj/item/seeds/poppy/sunflower
@@ -198,6 +227,12 @@
 	to_chat(M, "<font color='green'>[user] smacks you with a sunflower!<font color='orange'><b>FLOWER POWER!</b></font></font>")
 	to_chat(user, "<font color='green'>Your sunflower's <font color='orange'><b>FLOWER POWER</b></font> strikes [M]!</font>")
 
+/obj/item/grown/flower/sunflower/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>If short, this flower speaks of devout adoration. If notably tall, this flower speaks of Pride.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses Respect, passionate love, radiance.</span>")
+
 // Moonflower
 /obj/item/seeds/sunflower/moonflower
 	name = "pack of moonflower seeds"
@@ -226,6 +261,12 @@
 	slot_flags = ITEM_SLOT_HEAD
 	bite_consumption_mod = 2
 	distill_reagent = /datum/reagent/consumable/ethanol/absinthe //It's made from flowers.
+
+/obj/item/seeds/sunflower/moonflower/OnExamine()
+	if(HAS_TRAIT(FLOWER_LANGUAGE_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower speaks to you of mortality, of love in vain.</span>")
+	if(HAS_TRAIT(FLOWER_LANGUAGE_JP_TRAIT))
+		to_chat(usr, "<span class='subtle'>This flower expresses Willful promises.</span>")
 
 // Novaflower
 /obj/item/seeds/sunflower/novaflower
