@@ -885,7 +885,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/millennium_tower)
 "alO" = (
@@ -3016,7 +3018,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/millennium_tower)
 "aOT" = (
@@ -3194,7 +3198,9 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/fishermanswharf)
 "aRT" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
@@ -3568,7 +3574,9 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/ghetto)
 "aVO" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/old/low/window/reinforced,
 /area/vtm/interior/tzimisce_manor)
 "aVP" = (
@@ -4724,7 +4732,9 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/supply)
 "bmK" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower)
 "bmN" = (
@@ -6200,7 +6210,9 @@
 /obj/effect/decal/shadow{
 	pixel_y = -32
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/interior/tzimisce_manor)
 "bIg" = (
@@ -7751,7 +7763,9 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/millennium_tower/f5)
 "cfN" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/interior/police/fed)
 "cfP" = (
@@ -8574,7 +8588,9 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/tzimisce_manor)
 "cpL" = (
@@ -10415,7 +10431,9 @@
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/cog/pantry)
 "cOj" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/white{
 	dir = 8
 	},
@@ -10476,7 +10494,9 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict/construction)
 "cPs" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plasteel/stairs{
 	dir = 4
 	},
@@ -10891,7 +10911,9 @@
 /area/vtm/fishermanswharf)
 "cUF" = (
 /obj/effect/decal/wallpaper/blue/low,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/church/interior/haven)
 "cUJ" = (
@@ -12137,7 +12159,9 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/structure/table/abductor{
 	name = "elegant table";
 	desc = "An extremely fancy table"
@@ -12457,7 +12481,9 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
@@ -14229,7 +14255,9 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/shop)
 "dTd" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "emergencylockdown";
 	max_integrity = 1000
@@ -15701,7 +15729,9 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f2)
 "ent" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/strip)
@@ -17293,14 +17323,6 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/financialdistrict)
-"eNi" = (
-/obj/structure/curtain/bounty{
-	base_pixel_y = 10;
-	pixel_y = 8
-	},
-/obj/effect/decal/wallpaper/red/low,
-/turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/anarch)
 "eNk" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/vamptree,
@@ -18330,7 +18352,9 @@
 /area/vtm/interior/laundromat)
 "fbY" = (
 /obj/effect/decal/wallpaper/gold/low,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window/reinforced,
 /area/vtm/interior/millennium_tower/f4)
 "fbZ" = (
@@ -20632,7 +20656,9 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/giovanni/outside)
 "fGj" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "emergencylockdown";
 	max_integrity = 1000
@@ -22099,7 +22125,9 @@
 /turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/f4)
 "gaJ" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/hotel)
 "gaR" = (
@@ -25111,14 +25139,6 @@
 /obj/effect/landmark/npcwall,
 /turf/open/floor/plating/vampbeach,
 /area/vtm/northbeach)
-"gQC" = (
-/obj/effect/decal/wallpaper/red/low,
-/obj/structure/curtain/bounty{
-	base_pixel_y = 5;
-	pixel_y = 14
-	},
-/turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/anarch)
 "gQD" = (
 /obj/machinery/light/small/red{
 	dir = 8;
@@ -25167,7 +25187,9 @@
 /turf/open/floor/plating/asphalt,
 /area/vtm/pacificheights/forest)
 "gRb" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/strip/toreador)
 "gRc" = (
@@ -28643,7 +28665,9 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "hQv" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/interior/strip)
 "hQw" = (
@@ -28861,7 +28885,9 @@
 /turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
 "hTn" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/church/interior/staff)
 "hTp" = (
@@ -30405,7 +30431,9 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "iqn" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/jazzclub)
 "iqB" = (
@@ -30764,7 +30792,9 @@
 /turf/open/floor/plating/asphalt,
 /area/vtm/anarch/garage)
 "ivI" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower/f4)
 "ivN" = (
@@ -31109,7 +31139,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
@@ -31447,8 +31479,10 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
 "iFM" = (
-/obj/structure/curtain/bounty,
 /obj/effect/decal/wallpaper/red/low,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/bar/low/window,
 /area/vtm/anarch)
 "iFP" = (
@@ -31853,7 +31887,9 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/gnawer)
 "iMw" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
 /area/vtm/church/interior/haven)
 "iMz" = (
@@ -35681,7 +35717,9 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
 "jQM" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/decal/wallpaper/paper/rich/low,
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower/ventrue)
@@ -36634,7 +36672,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/structure/table/wood,
 /obj/machinery/chem_dispenser/drinks/fullupgrade{
 	dir = 4
@@ -37153,7 +37193,9 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/cog/caern)
 "kmv" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower/ventrue)
 "kmy" = (
@@ -37584,14 +37626,6 @@
 /obj/machinery/hydroponics/soil,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog/caern)
-"ktb" = (
-/obj/structure/curtain/bounty{
-	base_pixel_y = 5;
-	pixel_y = 8
-	},
-/obj/effect/decal/wallpaper/red/low,
-/turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/anarch)
 "ktc" = (
 /obj/effect/landmark/npcwall,
 /obj/structure/small_vamprocks,
@@ -40327,7 +40361,9 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/northbeach)
 "leR" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/strip)
 "leS" = (
@@ -40514,7 +40550,9 @@
 /turf/open/floor/plating/bacotell,
 /area/vtm/clinic/haven)
 "lho" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window/reinforced,
 /area/vtm/interior/giovanni)
 "lhq" = (
@@ -44744,7 +44782,9 @@
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/strip/toreador)
 "mtu" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/interior/tzimisce_manor)
 "mtw" = (
@@ -46218,7 +46258,9 @@
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
 "mMm" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/old/low/window,
 /area/vtm/interior/techshop)
 "mMr" = (
@@ -47748,7 +47790,9 @@
 /obj/structure/railing{
 	dir = 4
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
@@ -47794,8 +47838,7 @@
 /area/vtm/pacificheights/forest)
 "nhy" = (
 /obj/structure/curtain/bounty{
-	base_pixel_y = 5;
-	pixel_y = 8
+	base_pixel_y = 12
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/anarch)
@@ -48633,7 +48676,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/drinks/shaker,
 /obj/item/storage/box/drinkingglasses,
@@ -49156,14 +49201,6 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/snacks,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
-"nBj" = (
-/obj/effect/decal/wallpaper/red/low,
-/obj/structure/curtain/bounty{
-	base_pixel_y = 5;
-	pixel_y = 8
-	},
-/turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/anarch)
 "nBk" = (
 /obj/structure/table/wood,
 /obj/effect/turf_decal/siding/brown{
@@ -49788,7 +49825,9 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/community)
 "nIR" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/sewer/cappadocian)
 "nIZ" = (
@@ -52671,7 +52710,9 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
@@ -54305,7 +54346,9 @@
 /turf/closed/wall/vampwall/bar,
 /area/vtm/interior/techshop)
 "oTm" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/structure/window/reinforced/tinted{
 	dir = 1;
 	max_integrity = 1000000
@@ -55022,7 +55065,9 @@
 /area/vtm/interior/giovanni/basement)
 "peh" = (
 /obj/effect/decal/wallpaper/paper/darkred/low,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window/reinforced,
 /area/vtm/interior/millennium_tower/f3)
 "pek" = (
@@ -55880,7 +55925,9 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "pqu" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/church/interior/haven)
 "pqM" = (
@@ -56477,7 +56524,9 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/shop)
 "pyO" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/machinery/door/poddoor/shutters/preopen{
 	id = "emergencylockdown";
 	max_integrity = 1000
@@ -57004,7 +57053,9 @@
 /area/vtm/interior/giovanni/outside)
 "pFO" = (
 /obj/structure/window/reinforced/tinted,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower/ventrue)
 "pFU" = (
@@ -57497,7 +57548,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
@@ -60220,7 +60273,9 @@
 /area/vtm/church/interior/haven)
 "qxF" = (
 /obj/structure/closet/crate/coffin,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer/nosferatu_town)
 "qxL" = (
@@ -61489,7 +61544,9 @@
 	layer = 4;
 	pixel_y = 12
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
@@ -62831,14 +62888,6 @@
 /obj/structure/barrels/rand,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/ghetto)
-"rgG" = (
-/obj/effect/decal/wallpaper/red/low,
-/obj/structure/curtain/bounty{
-	base_pixel_y = 5;
-	pixel_y = 20
-	},
-/turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/anarch)
 "rgN" = (
 /obj/structure/curtain/cloth/fancy/mechanical{
 	id = 2006
@@ -66054,7 +66103,9 @@
 /turf/closed/wall/vampwall/city,
 /area/vtm/interior)
 "rWu" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/laundromat)
 "rWz" = (
@@ -66439,7 +66490,9 @@
 "sas" = (
 /obj/effect/decal/wallpaper/paper/darkred,
 /obj/structure/table/wood,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/machinery/jukebox,
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/jazzclub)
@@ -67111,7 +67164,9 @@
 /area/vtm/sewer)
 "skN" = (
 /obj/effect/decal/wallpaper/paper/darkred/low,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower/f3)
 "skW" = (
@@ -67224,7 +67279,9 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
 "slX" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/interior/strip/toreador)
 "sme" = (
@@ -70250,14 +70307,6 @@
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
-"tfG" = (
-/obj/effect/decal/wallpaper/red/low,
-/obj/structure/curtain/bounty{
-	base_pixel_y = 5;
-	pixel_y = 18
-	},
-/turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/anarch)
 "tfH" = (
 /obj/structure/bookcase/random/fiction,
 /turf/open/floor/carpet,
@@ -71828,7 +71877,9 @@
 /area/vtm/interior/techshop)
 "tCy" = (
 /obj/effect/turf_decal/siding/white,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/structure/vampdoor/glass/laundromat,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/laundromat)
@@ -74837,7 +74888,9 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/setite)
 "uvV" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/structure/window/reinforced/tinted{
 	dir = 4;
 	max_integrity = 1000000
@@ -78630,7 +78683,9 @@
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/giovanni/outside)
 "vzi" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/decal/cleanable/food/egg_smudge,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/bianchiBank)
@@ -80413,7 +80468,9 @@
 /turf/open/floor/plating/shit,
 /area/vtm/sewer)
 "vYe" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/carpet/green,
 /area/vtm/interior/millennium_tower)
 "vYq" = (
@@ -80453,7 +80510,9 @@
 /turf/open/floor/plating/rough,
 /area/vtm/graveyard/interior)
 "vYx" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/closed/wall/vampwall/market/low/window,
 /area/vtm/interior/techshop)
 "vYA" = (
@@ -81807,7 +81866,9 @@
 "wtb" = (
 /obj/effect/decal/wallpaper/paper/darkred,
 /obj/structure/table/wood,
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/jazzclub)
 "wtd" = (
@@ -85557,7 +85618,9 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/chantry)
 "xvU" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/carpet/red,
 /area/vtm/jazzclub)
 "xvX" = (
@@ -85829,7 +85892,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 1
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/millennium_tower)
 "xAx" = (
@@ -86866,7 +86931,9 @@
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/tzimisce_manor)
 "xMT" = (
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "xMU" = (
@@ -88149,7 +88216,9 @@
 	pixel_x = -4;
 	pixel_y = 5
 	},
-/obj/structure/curtain/bounty,
+/obj/structure/curtain/bounty{
+	base_pixel_y = 12
+	},
 /obj/effect/decal/wallpaper/paper/rich/low,
 /turf/closed/wall/vampwall/rich/low,
 /area/vtm/interior/millennium_tower/ventrue)
@@ -236449,16 +236518,16 @@ fkk
 fkk
 fkk
 fkk
-nBj
-nBj
-nBj
+iFM
+iFM
+iFM
 fkk
 fkk
 pOI
 fkk
-nBj
-nBj
-nBj
+iFM
+iFM
+iFM
 fkk
 kno
 kno
@@ -239795,9 +239864,9 @@ ubl
 ubl
 ubl
 kGg
-ktb
+iFM
 nhy
-eNi
+iFM
 kBp
 pMC
 fkk
@@ -240808,9 +240877,9 @@ ntq
 ntq
 ntq
 iTu
-ktb
-ktb
-ktb
+iFM
+iFM
+iFM
 fkk
 fkk
 fkk
@@ -240818,14 +240887,14 @@ fkk
 fkk
 fkk
 fkk
-nBj
-nBj
-nBj
-nBj
+iFM
+iFM
+iFM
+iFM
 fkk
-rgG
-tfG
-gQC
+iFM
+iFM
+iFM
 fkk
 fkk
 fkk
