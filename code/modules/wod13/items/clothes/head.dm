@@ -150,7 +150,7 @@
 	dynamic_fhair_suffix = ""
 	armor = list(MELEE = 40, BULLET = 40, LASER = 40, ENERGY = 40, BOMB = 20, BIO = 0, RAD = 0, FIRE = 20, ACID = 40, WOUND = 25)
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
-	clothing_traits = list(TRAIT_UNMASQUERADE)
+//	clothing_traits = list(TRAIT_UNMASQUERADE)
 	masquerade_violating = TRUE
 
 /obj/item/clothing/head/vampire/helmet/egorium
@@ -340,20 +340,3 @@
 
 		target.dropItemToGround(H)
 		target.equip_to_slot_if_possible(src, ITEM_SLOT_HEAD)
-/*
-if(istype(H.head, /obj/item))
-			var/obj/item/WH = H.head
-			///check if the item has NODROP
-			if(HAS_TRAIT(WH, TRAIT_NODROP))
-				H.visible_message("<span class='warning'>[src] bounces off [H]'s [WH.name]!</span>", "<span class='warning'>[src] bounces off your [WH.name], falling to the floor.</span>")
-				return
-			///check if the item is an actual clothing head item, since some non-clothing items can be worn
-			if(istype(WH, /obj/item/clothing/head))
-				var/obj/item/clothing/head/WHH = WH
-				///SNUG_FIT hats are immune to being knocked off
-				if(WHH.clothing_flags & SNUG_FIT)
-					H.visible_message("<span class='warning'>[src] bounces off [H]'s [WHH.name]!</span>", "<span class='warning'>[src] bounces off your [WHH.name], falling to the floor.</span>")
-					return
-			///if the hat manages to knock something off
-			if(H.dropItemToGround(WH))
-			*/
