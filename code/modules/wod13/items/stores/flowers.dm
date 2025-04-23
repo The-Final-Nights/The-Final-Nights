@@ -5,7 +5,7 @@
 		new /datum/data/mining_equipment("Sunflower Bouquet", /obj/item/bouquet/sunflower,	20),
 		new /datum/data/mining_equipment("Poppy Bouquet", /obj/item/bouquet/poppy,	20),
 		new /datum/data/mining_equipment("Mixed Bouquet",	 /obj/item/bouquet,	25),
-		new /datum/data/mining_equipment("Work Gloves",	/obj/item/clothing/gloves/vampire/work,	45),
+		new /datum/data/mining_equipment("Gardening Gloves",	/obj/item/clothing/gloves/botanic_leather,	45),
 		new /datum/data/mining_equipment("Respirator",	/obj/item/clothing/mask/vampire,	35),
 		new /datum/data/mining_equipment("Plant Bag",	/obj/item/storage/bag/plants,	45),
 		new /datum/data/mining_equipment("Secateurs",	 /obj/item/secateurs,	12),
