@@ -108,4 +108,3 @@
 			return "vamp11"
 		else
 			return value
-

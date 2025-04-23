@@ -109,7 +109,7 @@
 #define TRUSTED_PLAYER "trusted_player"
 
 /**
- * Specifically Just For Organ Signal Thing
+ * Signal to add blood to a blood pool
  */
 #define COMSIG_ADD_VITAE "add_vitae_from_item"
 
