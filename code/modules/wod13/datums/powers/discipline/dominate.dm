@@ -76,6 +76,21 @@
 		to_chat(owner, span_info("[target] hears you clearly."))
 		return TRUE
 
+/datum/discipline_power/dominate/proc/dominate_check(mob/living/carbon/human/owner, mob/living/target, tiebreaker = FALSE, base_difficulty = 4)
+
+	if(!ishuman(target))
+		return FALSE
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clane?.name == "Gargoyle")
+			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	return (mypower > theirpower && owner.generation <= target.generation)
+
 /datum/movespeed_modifier/dominate
 	multiplicative_slowdown = 5
 
@@ -94,43 +109,27 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 3 SECONDS
 	range = 7
-	var/tmp/command_succeeded = FALSE
+	var/tmp/dominate_succeeded = FALSE
 	var/custom_command = "FORGET ABOUT IT"
 
-/datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)
+/datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)  // this pre-check includes some special checks 
 
-	if(!dominate_hearing_check(owner,target))
+	if(!dominate_hearing_check(owner, target)) // putting the hearing check into the pre_activation so that if the target cant hear you it doesnt consume blood and alerts you
 		return FALSE
-	
-	// Early success / failure if target is not human or if target is a Gargoyle.
-	if(!ishuman(target))
-		return FALSE 
-		
-	custom_command = input(owner, "What is your command?", "Dominate Command", custom_command)
+
+	// Command is unique — we need the input first to determine difficulty
+	custom_command = input(owner, "What is your command?", "Dominate Command", "FORGET ABOUT IT")
 
 	var/word_count = length(splittext(custom_command, " "))
-	var/extra_words_difficulty = 4 + max(0, word_count - 1) // Base 4, +1 for every extra word
+	var/extra_words_difficulty = 4 + max(0, word_count - 1) // Base 4 +1 per extra word
 
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == "Gargoyle")
-			command_succeeded = TRUE
-			return TRUE
-
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = extra_words_difficulty, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
-
-	if(mypower > theirpower && owner.generation <= target.generation)
-		command_succeeded = TRUE
-	else
-		command_succeeded = FALSE
-
-	return TRUE // proceed regardless
+	dominate_succeeded = dominate_check(owner, target, base_difficulty = extra_words_difficulty)
+	return TRUE
 
 /datum/discipline_power/dominate/command/activate(mob/living/target)
 	. = ..()
 
-	if(command_succeeded)
+	if(dominate_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		owner.say("[custom_command]!")
 		to_chat(target, span_danger("[custom_command]!"))
@@ -158,37 +157,20 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
-	var/tmp/mesmerize_succeeded = FALSE
+	var/tmp/dominate_succeeded = FALSE
 
 /datum/discipline_power/dominate/mesmerize/pre_activation_checks(mob/living/target)
 
-	if(!dominate_hearing_check(owner,target))
+	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	// Early success / failure if target is not human or if target is a Gargoyle.
-	if(!ishuman(target))
-		return FALSE 
-
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == "Gargoyle")
-			mesmerize_succeeded = TRUE
-			return TRUE
-
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
-
-	if(mypower > theirpower && owner.generation <= target.generation)
-		mesmerize_succeeded = TRUE
-	else
-		mesmerize_succeeded = FALSE
-
-	return TRUE // continue either way
+	dominate_succeeded = dominate_check(owner, target, base_difficulty = 5)
+	return TRUE
 
 /datum/discipline_power/dominate/mesmerize/activate(mob/living/target)
 	. = ..()
 
-	if(mesmerize_succeeded)
+	if(dominate_succeeded)
 		target.Immobilize(0.5 SECONDS)
 		if(target.body_position == STANDING_UP)
 			to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
@@ -217,37 +199,20 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 3 SECONDS
 	range = 7
-	var/tmp/the_forgetful_mind_succeeded = FALSE
+	var/tmp/dominate_succeeded = FALSE
 
 /datum/discipline_power/dominate/the_forgetful_mind/pre_activation_checks(mob/living/target)
 
-	if(!dominate_hearing_check(owner,target))
+	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	// Early success / failure if target is not human or if target is a Gargoyle.
-	if(!ishuman(target))
-		return FALSE 
-
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == "Gargoyle")
-			the_forgetful_mind_succeeded = TRUE
-			return TRUE
-
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
-
-	if(mypower > theirpower && owner.generation <= target.generation)
-		the_forgetful_mind_succeeded = TRUE
-	else
-		the_forgetful_mind_succeeded = FALSE
-
-	return TRUE // proceed to activation regardless
+	dominate_succeeded = dominate_check(owner, target, base_difficulty = 6)
+	return TRUE
 
 /datum/discipline_power/dominate/the_forgetful_mind/activate(mob/living/target)
 	. = ..()
 
-	if(the_forgetful_mind_succeeded)
+	if(dominate_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		to_chat(target, span_danger("THINK TWICE"))
 		owner.say("THINK TWICE!!")
@@ -274,45 +239,21 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 6 SECONDS
 	range = 2
-	var/tmp/conditioning_succeeded = FALSE
+	var/tmp/dominate_succeeded = FALSE
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
 
-	if(!dominate_hearing_check(owner,target))
+	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
-	if(owner == conditioner)
-		to_chat(owner, span_warning("[target]'s mind is already under my sway!"))
-		return FALSE
-	else if(target.conditioned)
-		to_chat(owner, span_warning("[target]'s mind appears to already be under someone else's sway!"))
-		return FALSE
-
-	// Early success / failure if target is not human or if target is a Gargoyle.
-	if(!ishuman(target))
-		return FALSE 
-
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == "Gargoyle")
-			conditioning_succeeded = TRUE
-			return TRUE
-
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
-
-	if(mypower > theirpower && owner.generation <= target.generation)
-		conditioning_succeeded = TRUE
-	else
-		conditioning_succeeded = FALSE
-
-	return TRUE // allow activation to continue either way
+	dominate_succeeded = dominate_check(owner, target, base_difficulty = 6)
+	return TRUE
+	
 
 /datum/discipline_power/dominate/conditioning/activate(mob/living/target)
 	. = ..()
 
-	if(conditioning_succeeded)
+	if(dominate_succeeded)
 		target.dir = get_dir(target, owner)
 		to_chat(target, span_danger("LOOK AT ME"))
 		owner.say("Look at me.")
@@ -341,38 +282,21 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
-	var/tmp/possession_succeeded = FALSE
+	var/tmp/dominate_succeeded = FALSE
 
 
 /datum/discipline_power/dominate/possession/pre_activation_checks(mob/living/target)
 
-	if(!dominate_hearing_check(owner,target))
+	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	// Early success / failure if target is not human or if target is a Gargoyle.
-	if(!ishuman(target))
-		return FALSE 
-		
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == "Gargoyle")
-			possession_succeeded = TRUE
-			return TRUE
-
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
-
-	if(mypower > theirpower && owner.generation <= target.generation)
-		possession_succeeded = TRUE
-	else
-		possession_succeeded = FALSE
-
-	return TRUE // allow activation to continue either way
+	dominate_succeeded = dominate_check(owner, target, base_difficulty = 7)
+	return TRUE
 
 /datum/discipline_power/dominate/possession/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(possession_succeeded)
+	if(dominate_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		to_chat(target, span_danger("YOU SHOULD HARM YOURSELF NOW"))
 		owner.say("YOU SHOULD HARM YOURSELF NOW!!")
