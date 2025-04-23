@@ -5550,6 +5550,7 @@
 "bys" = (
 /obj/structure/rack,
 /obj/item/clothing/head/vampire/cowboy,
+/obj/item/clothing/head/vampire/cowboy,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "byt" = (
@@ -6985,6 +6986,13 @@
 "bTM" = (
 /turf/open/floor/carpet/red,
 /area/vtm/interior/theatre)
+"bTN" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/closet/crate/bin,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "bTR" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalk,
@@ -29603,6 +29611,13 @@
 	},
 /turf/open/openspace,
 /area/vtm/interior/bianchiBank)
+"icT" = (
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_x = -16
+	},
+/turf/open/floor/plating/parquetry/rich,
+/area/vtm/anarch)
 "icU" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /obj/machinery/light{
@@ -35741,7 +35756,7 @@
 /area/vtm/anarch/basement)
 "jQI" = (
 /obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/four,
+/obj/structure/sign/poster/vampire/cursed/old,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch/basement)
 "jQK" = (
@@ -39013,8 +39028,7 @@
 /area/vtm/interior/strip)
 "kMV" = (
 /obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/one,
-/obj/effect/decal/wallpaper/papers/seven,
+/obj/structure/sign/poster/vampire/wotw/old,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch/basement)
 "kNl" = (
@@ -39504,6 +39518,12 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"kTm" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/three,
+/obj/machinery/light/small,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "kTn" = (
 /obj/structure/closet/secure_closet/freezer/fridge/open,
 /obj/item/reagent_containers/food/drinks/beer/vampire,
@@ -46922,13 +46942,9 @@
 /turf/open/floor/plating/church,
 /area/vtm/church/interior/haven)
 "mTP" = (
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_x = -16
-	},
-/obj/effect/decal/trash,
-/turf/open/floor/plating/rough,
-/area/vtm/anarch/garage)
+/obj/structure/sign/poster/vampire/cursed,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "mTZ" = (
 /obj/structure/vampfence/rich{
 	dir = 4;
@@ -62919,6 +62935,10 @@
 /obj/effect/landmark/npcwall,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/community)
+"rfK" = (
+/obj/effect/decal/bordur,
+/turf/closed/wall/vampwall/junk/alt/low/window,
+/area/vtm/anarch/garage)
 "rfY" = (
 /turf/closed/wall/vampwall/rich/low/window/reinforced,
 /area/vtm/interior/baali)
@@ -66876,6 +66896,7 @@
 /area/vtm/interior/setite)
 "sfz" = (
 /obj/structure/chair/office,
+/obj/effect/landmark/start/sweeper,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "sfI" = (
@@ -84462,13 +84483,9 @@
 /turf/open/floor/plating/vampcanal,
 /area/vtm/sewer)
 "xdw" = (
-/obj/structure/railing{
-	dir = 8;
-	layer = 4
-	},
-/obj/structure/roofstuff/alt1,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm)
+/obj/structure/sign/poster/vampire/cursed/old,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch/basement)
 "xdE" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/rough/cave,
@@ -88605,6 +88622,11 @@
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/carpet/orange,
 /area/vtm/clinic)
+"yjo" = (
+/obj/effect/decal/wallpaper/red,
+/obj/structure/sign/poster/vampire/blade/old,
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch)
 "yjs" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -112735,7 +112757,7 @@ lSp
 owT
 isZ
 waf
-mLp
+xdw
 tCC
 vzD
 svE
@@ -114536,7 +114558,7 @@ isZ
 waf
 wTq
 nYS
-mLp
+oKa
 xLw
 lCv
 lCv
@@ -173374,7 +173396,7 @@ vxB
 fkk
 gtq
 oyA
-oyA
+icT
 oyA
 jAr
 pMC
@@ -175170,7 +175192,7 @@ gtI
 vpB
 jSp
 jSp
-lRq
+yjo
 hNd
 mTI
 vpZ
@@ -175178,7 +175200,7 @@ tDF
 jBp
 mTI
 vpZ
-xOn
+chK
 jBp
 mTI
 syF
@@ -175697,7 +175719,7 @@ vpB
 fkk
 gZq
 mtQ
-mtQ
+wsX
 fkk
 buN
 jxb
@@ -175953,7 +175975,7 @@ vpB
 vpB
 fAh
 gZq
-sVf
+wsX
 sVf
 yiH
 jxb
@@ -176465,7 +176487,7 @@ bSa
 epL
 vpB
 bSa
-fkk
+mTP
 wDp
 wsX
 sBV
@@ -176965,7 +176987,7 @@ dnj
 dnj
 xEC
 bvZ
-qzT
+bQz
 htz
 uYK
 bcU
@@ -177736,10 +177758,10 @@ dnj
 dnj
 xEC
 bvZ
-qzT
+bQz
 kTX
 kTX
-mTP
+cMf
 kTX
 bQz
 vpB
@@ -179029,7 +179051,7 @@ xqp
 vWS
 spA
 xnx
-kVz
+rfK
 lKL
 lKL
 epJ
@@ -236102,7 +236124,7 @@ tEQ
 aFn
 rqE
 cQi
-xdw
+cQi
 cQi
 nQR
 ntq
@@ -236616,7 +236638,7 @@ iFM
 iFM
 iFM
 fkk
-kno
+vqu
 kno
 hbj
 iYD
@@ -237881,7 +237903,7 @@ big
 ntq
 ntq
 afE
-uTZ
+bTN
 uTZ
 uTZ
 pMC
@@ -240483,7 +240505,7 @@ aSF
 kno
 kno
 kno
-pEQ
+kno
 kno
 uGe
 ntq
@@ -240706,7 +240728,7 @@ ntq
 ntq
 ntq
 ntq
-lRq
+kTm
 jZZ
 lgZ
 hWO
@@ -240997,7 +241019,7 @@ kno
 kno
 kno
 aSF
-kno
+pEQ
 kno
 uGe
 ntq
