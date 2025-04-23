@@ -1,5 +1,5 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/flowershop
-	name = "Unfettered Nightbloom"
+	name = "Unfettered Nightbloom" //items were priced according to online shopping data at retail price available to the customer, not at wholesale 23/04/2025
 	desc = "The only 24hr flower shop in SanFran."
 	prize_list = list(
 		new /datum/data/mining_equipment("Sunflower Bouquet", /obj/item/bouquet/sunflower,	20),
@@ -24,5 +24,5 @@
 		new /datum/data/mining_equipment("Oat seeds", /obj/item/seeds/wheat/oat, 5),
 		new /datum/data/mining_equipment("Aloe seeds", /obj/item/seeds/aloe, 5),
 		new /datum/data/mining_equipment("Bloody Butcher Tomatoes", /obj/item/seeds/tomato/blood, 15),
-		new /datum/data/mining_equipment("Fermentation Barrel",	 /obj/structure/fermenting_barrel,	500),
+		new /datum/data/mining_equipment("Fermentation Barrel",	 /obj/structure/fermenting_barrel,	230),
 		)
