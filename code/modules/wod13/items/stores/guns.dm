@@ -5,7 +5,7 @@
 		new /datum/data/mining_equipment("Elite 92G",	/obj/item/gun/ballistic/automatic/vampire/beretta,	500),
 		new /datum/data/mining_equipment("desert eagle",	/obj/item/gun/ballistic/automatic/vampire/deagle,	600),
 		new /datum/data/mining_equipment("hunting rifle",	/obj/item/gun/ballistic/automatic/vampire/huntrifle, 2000),
-		new /datum/data/mining_equipment("fishing rod",		/obj/item/fishing_rod,	200),
+		new /datum/data/mining_equipment("fishing rod",		/obj/item/fishing_rod,	50),
 		new	/datum/data/mining_equipment("5.45 ammo",	/obj/item/ammo_box/vampire/c545,	1000),
 		new	/datum/data/mining_equipment(".45 ACP ammo",	/obj/item/ammo_box/vampire/c45acp,	2100),
 		new /datum/data/mining_equipment("9mm ammo",	/obj/item/ammo_box/vampire/c9mm,	600),
