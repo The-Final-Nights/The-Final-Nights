@@ -536,6 +536,7 @@
 	var/obj/item/organ/brain/brain = kueijin.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain)
 		brain.applyOrganDamage(-100)
+		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 	var/heal_level = min(kueijin.mind.dharma.level, 4)
 	kueijin.heal_ordered_damage(20 * heal_level, list(OXY, STAMINA, BRUTE, TOX))
@@ -595,6 +596,7 @@
 	var/obj/item/organ/brain/brain = kueijin.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain)
 		brain.applyOrganDamage(-100)
+		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 	var/heal_level = min(kueijin.mind.dharma.level, 4)
 	kueijin.heal_ordered_damage(10 * heal_level, list(OXY, STAMINA, BRUTE, TOX))

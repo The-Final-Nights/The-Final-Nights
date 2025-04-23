@@ -208,7 +208,7 @@
 			return
 
 		var/name_wrong = FALSE
-		for(var/i in GLOB.fucking_joined)
+		for(var/i in GLOB.player_list)
 			if(i == client.prefs.real_name)
 				name_wrong = TRUE
 		if(name_wrong)
@@ -572,7 +572,6 @@
 						H.mind.dharma.Hun = H.client.prefs.hun
 						H.mind.dharma.on_gain(H)
 //						H.mind.dharma.initial_skin_color = H.skin_tone
-				GLOB.fucking_joined |= H.client.prefs.real_name
 				var/datum/relationship/R = new ()
 				H.Myself = R
 				R.owner = H

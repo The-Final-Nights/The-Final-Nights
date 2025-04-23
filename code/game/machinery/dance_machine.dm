@@ -6,7 +6,6 @@
 	base_icon_state = "jukebox"
 	verb_say = "states"
 	density = TRUE
-	req_access = list(ACCESS_BAR)
 	processing_flags = START_PROCESSING_MANUALLY
 	/// Cooldown between "Error" sound effects being played
 	COOLDOWN_DECLARE(jukebox_error_cd)
@@ -21,13 +20,15 @@
 	. = ..()
 	music_player = new(src)
 
+/obj/machinery/jukebox/examine(mob/user)
+	. = ..()
+	if(music_player.active_song_sound)
+		. += "Now playing: [music_player.selection.song_name]"
+
 /obj/machinery/jukebox/Destroy()
 	stop_music()
 	QDEL_NULL(music_player)
 	return ..()
-
-/obj/machinery/jukebox/no_access
-	req_access = null
 
 /obj/machinery/jukebox/wrench_act(mob/living/user, obj/item/tool)
 	if(!isnull(music_player.active_song_sound))
@@ -53,7 +54,7 @@
 		user.playsound_local(src, 'sound/misc/compiler-failure.ogg', 25, TRUE)
 		return UI_CLOSE
 	if(!length(music_player.songs))
-		to_chat(user,span_warning("Error: No music tracks have been authorized for your station. Petition Central Command to resolve this issue."))
+		to_chat(user,span_warning("Error: No music tracks have been authorized for your city. Petition the city council to resolve this issue."))
 		user.playsound_local(src, 'sound/misc/compiler-failure.ogg', 25, TRUE)
 		return UI_CLOSE
 	return ..()

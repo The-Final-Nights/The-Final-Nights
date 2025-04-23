@@ -91,6 +91,7 @@
 /datum/movespeed_modifier/dominate
 	multiplicative_slowdown = 5
 
+
 //COMMAND
 /datum/discipline_power/dominate/command
 	name = "Command"
@@ -105,15 +106,41 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 3 SECONDS
 	range = 7
+	var/tmp/command_succeeded = FALSE
 
 /datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)
-	return dominate_check(owner, target)
+
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clane?.name == "Gargoyle")
+			command_succeeded = TRUE
+			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	if(mypower > theirpower && owner.generation <= target.generation)
+		command_succeeded = TRUE
+	else
+		command_succeeded = FALSE
+
+	return TRUE // proceed regardless
 
 /datum/discipline_power/dominate/command/activate(mob/living/target)
 	. = ..()
-	to_chat(target, "<span class='userdanger'><b>FORGET ABOUT IT</b></span>")
-	owner.say("FORGET ABOUT IT!!")
-	ADD_TRAIT(target, TRAIT_BLIND, "dominate")
+
+	if(command_succeeded)
+		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
+		to_chat(target, span_danger("FORGET ABOUT IT"))
+		owner.say("FORGET ABOUT IT!!")
+		ADD_TRAIT(target, TRAIT_BLIND, "dominate")
+	else
+		to_chat(owner, span_warning("[target] has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
 
 /datum/discipline_power/dominate/command/deactivate(mob/living/target)
 	. = ..()
@@ -132,20 +159,47 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
+	var/tmp/mesmerize_succeeded = FALSE
 
 /datum/discipline_power/dominate/mesmerize/pre_activation_checks(mob/living/target)
-	return dominate_check(owner, target)
+
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clane?.name == "Gargoyle")
+			mesmerize_succeeded = TRUE
+			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	if(mypower > theirpower && owner.generation <= target.generation)
+		mesmerize_succeeded = TRUE
+	else
+		mesmerize_succeeded = FALSE
+
+	return TRUE // continue either way
 
 /datum/discipline_power/dominate/mesmerize/activate(mob/living/target)
 	. = ..()
-	target.Immobilize(0.5 SECONDS)
-	if(target.body_position == STANDING_UP)
-		to_chat(target, "<span class='userdanger'><b>GET DOWN</b></span>")
-		target.toggle_resting()
-		owner.say("GET DOWN!!")
+
+	if(mesmerize_succeeded)
+		target.Immobilize(0.5 SECONDS)
+		if(target.body_position == STANDING_UP)
+			to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
+			to_chat(target, span_danger("GET DOWN"))
+			target.toggle_resting()
+			owner.say("GET DOWN!!")
+		else
+			to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
+			to_chat(target, span_danger("STAY DOWN"))
+			owner.say("STAY DOWN!!")
 	else
-		to_chat(target, "<span class='userdanger'><b>STAY DOWN</b></span>")
-		owner.say("STAY DOWN!!")
+		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
 
 //THE FORGETFUL MIND
 /datum/discipline_power/dominate/the_forgetful_mind
@@ -161,15 +215,41 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 3 SECONDS
 	range = 7
+	var/tmp/the_forgetful_mind_succeeded = FALSE
 
 /datum/discipline_power/dominate/the_forgetful_mind/pre_activation_checks(mob/living/target)
-	return dominate_check(owner, target)
+
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clane?.name == "Gargoyle")
+			the_forgetful_mind_succeeded = TRUE
+			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	if(mypower > theirpower && owner.generation <= target.generation)
+		the_forgetful_mind_succeeded = TRUE
+	else
+		the_forgetful_mind_succeeded = FALSE
+
+	return TRUE // proceed to activation regardless
 
 /datum/discipline_power/dominate/the_forgetful_mind/activate(mob/living/target)
 	. = ..()
-	to_chat(target, "<span class='userdanger'><b>THINK TWICE</b></span>")
-	owner.say("THINK TWICE!!")
-	target.add_movespeed_modifier(/datum/movespeed_modifier/dominate)
+
+	if(the_forgetful_mind_succeeded)
+		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
+		to_chat(target, span_danger("THINK TWICE"))
+		owner.say("THINK TWICE!!")
+		target.add_movespeed_modifier(/datum/movespeed_modifier/dominate)
+	else
+		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
 
 /datum/discipline_power/dominate/the_forgetful_mind/deactivate(mob/living/target)
 	. = ..()
@@ -189,10 +269,11 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 6 SECONDS
 	range = 2
+	var/tmp/conditioning_succeeded = FALSE
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
-	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 
+	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 	if(owner == conditioner)
 		to_chat(owner, span_warning("[target]'s mind is already under my sway!"))
 		return FALSE
@@ -200,18 +281,41 @@
 		to_chat(owner, span_warning("[target]'s mind appears to already be under someone else's sway!"))
 		return FALSE
 
-	return dominate_check(owner, target, TRUE)
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clane?.name == "Gargoyle")
+			conditioning_succeeded = TRUE
+			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	if(mypower > theirpower && owner.generation <= target.generation)
+		conditioning_succeeded = TRUE
+	else
+		conditioning_succeeded = FALSE
+
+	return TRUE // allow activation to continue either way
 
 /datum/discipline_power/dominate/conditioning/activate(mob/living/target)
 	. = ..()
-	target.dir = get_dir(target, owner)
-	to_chat(target, span_danger("LOOK AT ME"))
-	owner.say("Look at me.")
-	if(do_mob(owner, target, 20 SECONDS)) //20 seconds, VERY deliberate. This is not meant to be tossed around lightly.
-		target.conditioned = TRUE
-		target.conditioner = WEAKREF(owner)
-		target.additional_social -= 3 //Lessened charisma and ability to lead independently.
-		to_chat(target, span_danger("Your mind is filled with thoughts surrounding [owner]. Their every word and gesture carries weight to you."))
+
+	if(conditioning_succeeded)
+		target.dir = get_dir(target, owner)
+		to_chat(target, span_danger("LOOK AT ME"))
+		owner.say("Look at me.")
+		if(do_mob(owner, target, 20 SECONDS))
+			target.conditioned = TRUE
+			target.conditioner = WEAKREF(owner)
+			target.additional_social -= 3
+			to_chat(target, span_danger("Your mind is filled with thoughts surrounding [owner]. Their every word and gesture carries weight to you."))
+	else
+		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
 
 /datum/discipline_power/dominate/conditioning/deactivate(mob/living/target)
 	. = ..()
@@ -229,17 +333,46 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
+	var/tmp/possession_succeeded = FALSE
+
 
 /datum/discipline_power/dominate/possession/pre_activation_checks(mob/living/target)
-	return dominate_check(owner, target)
+
+	// Early success / failure if target is not human or if target is a Gargoyle.
+	if(!ishuman(target))
+		return FALSE 
+		
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clane?.name == "Gargoyle")
+			possession_succeeded = TRUE
+			return TRUE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	if(mypower > theirpower && owner.generation <= target.generation)
+		possession_succeeded = TRUE
+	else
+		possession_succeeded = FALSE
+
+	return TRUE // allow activation to continue either way
 
 /datum/discipline_power/dominate/possession/activate(mob/living/carbon/human/target)
 	. = ..()
-	to_chat(target, "<span class='userdanger'><b>YOU SHOULD HARM YOURSELF NOW</b></span>")
-	owner.say("YOU SHOULD HARM YOURSELF NOW!!")
-	var/datum/cb = CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command)
-	for(var/i in 1 to 20)
-		addtimer(cb, (i - 1) * 1.5 SECONDS)
+
+	if(possession_succeeded)
+		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
+		to_chat(target, span_danger("YOU SHOULD HARM YOURSELF NOW"))
+		owner.say("YOU SHOULD HARM YOURSELF NOW!!")
+
+		var/datum/cb = CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command)
+		for(var/i in 1 to 20)
+			addtimer(cb, (i - 1) * 1.5 SECONDS)
+	else
+		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
+
 
 /mob/living/carbon/human/proc/attack_myself_command()
 	if(!CheckFrenzyMove())

@@ -27,7 +27,7 @@
 			return
 
 		var/ahelp_ref = href_list["ahelp"]
-		var/datum/admin_help/AH = locate(ahelp_ref)
+		var/datum/help_ticket/admin/AH = locate(ahelp_ref)
 		if(AH)
 			AH.Action(href_list["ahelp_action"])
 		else
