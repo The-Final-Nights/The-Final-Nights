@@ -122,7 +122,7 @@
 
 /datum/garou_tribe/blackspiraldancers
 	name = "Black Spiral Dancers"
-	desc = "The lost tribe. The dreadwolves. Those who dance lockstep with the Wyrm. They who have entered the labyrinth and come back, changed.\n <b>{THIS IS AN ADVANCED TRIBE AND NOT RECOMMENDED FOR BEGINNERS. LORE KNOWLEDGE IS REQUIRED TO PLAY THIS TRIBE}</B>"
+	desc = "The lost tribe. The dreadwolves. Those who dance lockstep with the Wyrm. They who have entered the labyrinth and come back, changed.\n<b>{THIS IS AN ADVANCED TRIBE AND NOT RECOMMENDED FOR BEGINNERS. LORE KNOWLEDGE IS REQUIRED TO PLAY THIS TRIBE}</B>"
 	tribal_gifts = list(
 		/datum/action/gift/stinky_fur = 1,
 		/datum/action/gift/venom_claws = 2,

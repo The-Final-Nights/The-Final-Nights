@@ -10,7 +10,7 @@
 				return
 	..()
 
-/mob/living/carbon/proc/rollfrenzy(var/frenzyoverride = 0)
+/mob/living/carbon/proc/rollfrenzy(frenzyoverride = 0)
 	if(client)
 		var/mob/living/carbon/human/H
 		if(ishuman(src))

@@ -403,8 +403,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		var/newtype = GLOB.tribes_list[tribe_id]
 		if(newtype)
 			tribe = new newtype
-			if(tribe.name)
-				testing("[tribe.name]")
 
 	READ_FILE(S["breed"], breed)
 	READ_FILE(S["werewolf_color"], werewolf_color)

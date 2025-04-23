@@ -55751,9 +55751,7 @@
 /area/vtm)
 "pgf" = (
 /obj/structure/werewolf_totem/wendigo,
-/turf/open/floor/plating/dirt{
-	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
-	},
+/turf/open/floor/plating/dirt,
 /area/vtm/forest)
 "pgl" = (
 /obj/machinery/light/small{
@@ -189644,7 +189642,6 @@ buY
 ozy
 ozy
 ozy
-eGS
 tvv
 tvv
 mRK

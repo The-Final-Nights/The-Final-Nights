@@ -730,7 +730,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				qdel(DAWOF2)
 				dat += "<b>Breed:</b> <a href='byond://?_src_=prefs;preference=breed;task=input'>[breed]</a><BR>"
 				dat += "<b>Tribe:</b> <a href='byond://?_src_=prefs;preference=tribe;task=input'>[tribe.name]</a><BR>"
-				dat += "<b>Description:</b> [tribe.desc]"
+				dat += "<b>Description:</b> [tribe.desc]<BR>"
 				dat += "Color: <a href='byond://?_src_=prefs;preference=werewolf_color;task=input'>[werewolf_color]</a><BR>"
 				dat += "Scars: <a href='byond://?_src_=prefs;preference=werewolf_scar;task=input'>[werewolf_scar]</a><BR>"
 				dat += "Hair: <a href='byond://?_src_=prefs;preference=werewolf_hair;task=input'>[werewolf_hair]</a><BR>"
