@@ -135,22 +135,22 @@ GLOBAL_LIST_INIT(nonhuman_positions, list())
 // job categories for rendering the late join menu
 GLOBAL_LIST_INIT(position_categories, list(
 	EXP_TYPE_CAMARILLIA = list("jobs" = command_positions, "color" = "#9f1111"),
-    EXP_TYPE_COUNCIL = list("jobs" = camarilla_council_positions, "color" = "#4f0404"),
-    EXP_TYPE_TREMERE = list("jobs" = tremere_positions, "color" = "#b2442c"),
-    EXP_TYPE_GIOVANNI = list("jobs" = giovanni_positions, "color" = "#3e0c70"),
-    EXP_TYPE_OTHER_CITIZEN = list("jobs" = citizen_positions, "color" = "#7e7e7e"),
-    EXP_TYPE_ANARCH = list("jobs" = anarch_positions, "color" = "#313131"),
-    EXP_TYPE_WAREHOUSE = list("jobs" = warehouse_positions, "color" = "#edc009"),
+	EXP_TYPE_COUNCIL = list("jobs" = camarilla_council_positions, "color" = "#4f0404"),
+	EXP_TYPE_TREMERE = list("jobs" = tremere_positions, "color" = "#b2442c"),
+	EXP_TYPE_GIOVANNI = list("jobs" = giovanni_positions, "color" = "#3e0c70"),
+	EXP_TYPE_OTHER_CITIZEN = list("jobs" = citizen_positions, "color" = "#7e7e7e"),
+	EXP_TYPE_ANARCH = list("jobs" = anarch_positions, "color" = "#313131"),
+	EXP_TYPE_WAREHOUSE = list("jobs" = warehouse_positions, "color" = "#edc009"),
 	EXP_TYPE_CLINIC = list("jobs" = clinic_positions, "color" = "#80D0F4"),
-    EXP_TYPE_SERVICES = list("jobs" = services_positions, "color" = "#e8e6e6"),
-    EXP_TYPE_CHURCH = list("jobs" = church_positions, "color" = " #fff700"),
-    EXP_TYPE_POLICE = list("jobs" = police_positions, "color" = "#1d22cc"),
-    EXP_TYPE_NATIONAL_SECURITY = list("jobs" = national_security_positions, "color" = " #000491"),
-    EXP_TYPE_GANG = list("jobs" = gang_positions, "color" = "#837524"),
-    EXP_TYPE_TZIMISCE = list("jobs" = tzimisce_positions, "color" = "#fa0207"),
+	EXP_TYPE_SERVICES = list("jobs" = services_positions, "color" = "#e8e6e6"),
+	EXP_TYPE_CHURCH = list("jobs" = church_positions, "color" = " #fff700"),
+	EXP_TYPE_POLICE = list("jobs" = police_positions, "color" = "#1d22cc"),
+	EXP_TYPE_NATIONAL_SECURITY = list("jobs" = national_security_positions, "color" = " #000491"),
+	EXP_TYPE_GANG = list("jobs" = gang_positions, "color" = "#837524"),
+	EXP_TYPE_TZIMISCE = list("jobs" = tzimisce_positions, "color" = "#fa0207"),
 	EXP_TYPE_PAINTED_CITY = list("jobs" = painted_positions, "color" = "#7195ad"),
-    EXP_TYPE_AMBERGLADE = list("jobs" = amberglade_positions, "color" = "#69e430"),
-    EXP_TYPE_SPIRAL = list("jobs" = spiral_positions, "color" = "#015334")
+	EXP_TYPE_AMBERGLADE = list("jobs" = amberglade_positions, "color" = "#69e430"),
+	EXP_TYPE_SPIRAL = list("jobs" = spiral_positions, "color" = "#015334")
 ))
 
 
@@ -160,19 +160,19 @@ GLOBAL_LIST_INIT(exp_jobsmap, list(
 	EXP_TYPE_TREMERE = list("titles" = tremere_positions),
 	EXP_TYPE_ANARCH = list("titles" = anarch_positions),
 	EXP_TYPE_GANG = list("titles" = gang_positions),
-    EXP_TYPE_OTHER_CITIZEN = list("titles" = citizen_positions),
-    EXP_TYPE_COUNCIL = list("titles" = camarilla_council_positions),
-    EXP_TYPE_POLICE = list("titles" = police_positions),
+	EXP_TYPE_OTHER_CITIZEN = list("titles" = citizen_positions),
+	EXP_TYPE_COUNCIL = list("titles" = camarilla_council_positions),
+	EXP_TYPE_POLICE = list("titles" = police_positions),
 	EXP_TYPE_CLINIC = list("titles" = clinic_positions),
-    EXP_TYPE_SERVICES = list("titles" = services_positions),
-    EXP_TYPE_GIOVANNI = list("titles" = giovanni_positions),
-    EXP_TYPE_TZIMISCE = list("titles" = tzimisce_positions),
-    EXP_TYPE_WAREHOUSE = list("titles" = warehouse_positions),
-    EXP_TYPE_CHURCH = list("titles" = church_positions),
-    EXP_TYPE_NATIONAL_SECURITY = list("titles" = national_security_positions),
+	EXP_TYPE_SERVICES = list("titles" = services_positions),
+	EXP_TYPE_GIOVANNI = list("titles" = giovanni_positions),
+	EXP_TYPE_TZIMISCE = list("titles" = tzimisce_positions),
+	EXP_TYPE_WAREHOUSE = list("titles" = warehouse_positions),
+	EXP_TYPE_CHURCH = list("titles" = church_positions),
+	EXP_TYPE_NATIONAL_SECURITY = list("titles" = national_security_positions),
 	EXP_TYPE_PAINTED_CITY = list("titles" = painted_positions),
-    EXP_TYPE_AMBERGLADE = list("titles" = amberglade_positions),
-    EXP_TYPE_SPIRAL = list("titles" = spiral_positions)
+	EXP_TYPE_AMBERGLADE = list("titles" = amberglade_positions),
+	EXP_TYPE_SPIRAL = list("titles" = spiral_positions)
 
 ))
 
