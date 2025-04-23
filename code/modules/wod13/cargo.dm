@@ -7,12 +7,12 @@
 		/obj/item/seeds/carrot,
 		/obj/item/seeds/corn,
 		/obj/item/seeds/onion,
-		/obj/item/seeds/parsnip
-		/obj/item/seeds/peas
-		/obj/item/seeds/potato
-		/obj/item/seeds/pumpkin
+		/obj/item/seeds/carrot/parsnip,
+		/obj/item/seeds/peas,
+		/obj/item/seeds/potato,
+		/obj/item/seeds/pumpkin,
 		/obj/item/seeds/soya,
-		/obj/item/seeds/tomato
+		/obj/item/seeds/tomato,
 	)
 	crate_name = "veggie crate"
 
@@ -21,14 +21,15 @@
 	desc = "Contains a selection of flower seeds. No trays."
 	cost = 20
 	contains = list(
-		/obj/item/seeds/poppy
-		/obj/item/seeds/poppy/sunflower
-		/obj/item/seeds/poppy/geranium
-		/obj/item/seeds/poppy/lily
+		/obj/item/seeds/poppy,
+		/obj/item/seeds/poppy/sunflower,
+		/obj/item/seeds/poppy/geranium,
+		/obj/item/seeds/poppy/lily,
 	)
 	crate_name = "flower crate"
 
-/datum/supply_pack/vampire/personal_gardening
+/datum/supply_pack/vampire/hydro_tray
+	name = "Magadon™ Hydroponics Tray"
 	desc = "Contains a high-tech hydroponics tray. Oddly, it lacks an auto-watering feature."
 	cost = 200
 	contains = list(/obj/machinery/hydroponics)

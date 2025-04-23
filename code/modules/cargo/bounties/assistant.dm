@@ -122,7 +122,7 @@
 	description = "Commander Zot has the hots for Commander Zena. Send a shipment of geraniums - her favorite flower - and he'll happily reward you."
 	reward = CARGO_CRATE_VALUE * 8
 	required_count = 3
-	wanted_types = list(/obj/item/food/grown/flower/poppy/geranium)
+	wanted_types = list(/obj/item/food/grown/flower/geranium)
 	include_subtypes = FALSE
 
 /datum/bounty/item/assistant/poppy
