@@ -111,7 +111,7 @@
 /**
  * Specifically Just For Organ Signal Thing
  */
-#define COMSIG_ORGANOVORE_ATE_ORGAN "organovore_ate_organ"
+#define COMSIG_ADD_VITAE "add_vitae_from_item"
 
 /**
  * Cooldown defines

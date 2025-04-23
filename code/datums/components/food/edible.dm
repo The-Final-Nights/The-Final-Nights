@@ -386,7 +386,7 @@ Behavior that's still missing from this component that original food items had t
 
 	if(H.dna.species.id == "kindred")
 		if(HAS_TRAIT(H, TRAIT_ORGANOVORE) && (foodtypes & GORE))
-			SEND_SIGNAL(H, COMSIG_ORGANOVORE_ATE_ORGAN, 1, FALSE)
+			SEND_SIGNAL(H, COMSIG_ADD_VITAE, 1, FALSE)
 			return // Skip the rest, I think this is fine?
 		if(HAS_TRAIT(H, TRAIT_AGEUSIA))
 			to_chat(H, "<span class='warning'>You don't feel so good...</span>")

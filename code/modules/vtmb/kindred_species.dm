@@ -255,6 +255,9 @@
 	//vampires resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
 
+	//putting this here for now not sure if elsewhere is better?
+	RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
+
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
@@ -879,3 +882,18 @@
 
 	if(iskindred(being_bitten))
 		return COMPONENT_RESIST_VAMPIRE_KISS
+
+/datum/species/kindred/proc/add_vitae_from_item(datum/source, var/amount_of_bloodpoints, var/plays_sound = FALSE)
+	SIGNAL_HANDLER
+
+	var/mob/living/carbon/human/H = source
+
+	H.bloodpool = min(H.maxbloodpool, H.bloodpool+amount_of_bloodpoints)
+	H.adjustBruteLoss(-10, TRUE)
+	H.adjustFireLoss(-10, TRUE)
+	H.update_damage_overlays()
+	H.update_health_hud()
+	if(iskindred(H))
+		H.update_blood_hud()
+	if(plays_sound)
+		playsound(H.loc,'sound/items/drink.ogg', 50, TRUE)
