@@ -599,7 +599,7 @@
 		if(myseed)
 			if(P_analyzer.scan_mode == PLANT_SCANMODE_STATS)
 				to_chat(user, "*** <B>[myseed.plantname]</B> ***" )
-				to_chat(user, "- Plant Age: <span_class='notice'>("[age]")</span>")
+				to_chat(user, "- Plant Age: <span class='notice'> ([age]) </span>")
 				var/list/text_string = myseed.get_analyzer_text()
 				if(text_string)
 					to_chat(user, text_string)
@@ -612,11 +612,11 @@
 				to_chat(user, "*---------*")
 		else
 			to_chat(user, "<B>No plant found.</B>")
-		to_chat(user, "- Weed level: <span class='notice'>("[weedlevel] / 10")</span>")
-		to_chat(user, "- Pest level: <span class='notice'>("[pestlevel] / 10</span>"</span>")
-		to_chat(user, "- Toxicity level: <span class='notice'>("[toxic] / 100</span>")</span>")
-		to_chat(user, "- Water level: <span class='notice'>("[waterlevel] / [maxwater]")</span>")
-		to_chat(user, "- Nutrition level: <span class='notice'>("[reagents.total_volume] / [maxnutri]")</span>")
+		to_chat(user, "- Weed level: <span class='notice'> ([weedlevel / 10]) </span>")
+		to_chat(user, "- Pest level: <span class='notice'> ([pestlevel / 10]) </span>")
+		to_chat(user, "- Toxicity level: <span class='notice'> ([toxic / 100]) </span>")
+		to_chat(user, "- Water level: <span class='notice'> ([waterlevel / maxwater]) </span>")
+		to_chat(user, "- Nutrition level: <span class='notice'> ([reagents.total_volume / maxnutri]) </span>")
 		to_chat(user, "")
 		return
 
@@ -711,10 +711,10 @@
 		if(!myseed && !weedlevel)
 			to_chat(user, span_warning("[src] doesn't have any plants or weeds!"))
 			return
-		user.visible_message(span_notice("[user] starts digging out [src]'s plants...")),
-			span_notice("You start digging out [src]'s plants...")
+		user.visible_message(span_notice("[user] starts digging out [src]'s plants..."),
+			span_notice("You start digging out [src]'s plants..."))
 		if(O.use_tool(src, user, 50, volume=50) || (!myseed && !weedlevel))
-			user.visible_message(span_notice("[user] digs out the plants in [src]!")), span_notice("You dig out all of [src]'s plants!")
+			user.visible_message(span_notice("[user] digs out the plants in [src]!"), span_notice("You dig out all of [src]'s plants!"))
 			if(myseed) //Could be that they're just using it as a de-weeder
 				age = 0
 				plant_health = 0
