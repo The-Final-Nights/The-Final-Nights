@@ -85180,6 +85180,7 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto/old)
 "xnx" = (
+/obj/effect/decal/litter,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -179050,7 +179051,7 @@ vHG
 xqp
 vWS
 spA
-xnx
+kGA
 rfK
 lKL
 lKL
@@ -179307,7 +179308,7 @@ xBU
 xqp
 kGA
 hPd
-uGn
+xnx
 kVz
 lKL
 lKL
