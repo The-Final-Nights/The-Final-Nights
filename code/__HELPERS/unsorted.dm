@@ -412,17 +412,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 		var/atom/A = .[++i]
 		. += A.contents
 
-///identical to getallcontents but returns a list of atoms of the type passed in the argument.
-/atom/proc/get_all_contents_type(type)
-	var/list/processing_list = list(src)
-	. = list()
-	while(length(processing_list))
-		var/atom/A = processing_list[1]
-		processing_list.Cut(1, 2)
-		processing_list += A.contents
-		if(istype(A, type))
-			. += A
-
 /atom/proc/GetAllContentsIgnoring(list/ignore_typecache)
 	if(!length(ignore_typecache))
 		return GetAllContents()
@@ -635,7 +624,7 @@ GLOBAL_LIST_INIT(WALLITEMS, typecacheof(list(
 	/obj/machinery/computer/security/telescreen,
 	/obj/item/storage/secure/safe, /obj/machinery/door_timer, /obj/machinery/flasher, /obj/machinery/keycard_auth,
 	/obj/structure/mirror, /obj/structure/fireaxecabinet, /obj/machinery/computer/security/telescreen/entertainment,
-	/obj/structure/sign/picture_frame, /obj/machinery/bounty_board
+	/obj/structure/sign/picture_frame
 	)))
 
 GLOBAL_LIST_INIT(WALLITEMS_EXTERNAL, typecacheof(list(
@@ -675,9 +664,6 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 			if(O.pixel_x == 0 && O.pixel_y == 0)
 				return TRUE
 	return FALSE
-
-/proc/format_text(text)
-	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
 
 /proc/check_target_facings(mob/living/initator, mob/living/target)
 	/*This can be used to add additional effects on interactions between mobs depending on how the mobs are facing each other, such as adding a crit damage to blows to the back of a guy's head.

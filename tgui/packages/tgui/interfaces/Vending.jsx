@@ -139,3 +139,24 @@ export const Vending = (props) => {
     </Window>
   );
 };
+
+/** Displays user details if an ID is present and the user is on the station */
+export const UserDetails = (props) => {
+  const { data } = useBackend<VendingData>();
+  const { user } = data;
+
+  return (
+    <NoticeBox m={0} color={user && 'blue'}>
+      <Stack align="center">
+        <Stack.Item>
+          <Icon name="id-card" size={1.5} />
+        </Stack.Item>
+        <Stack.Item>
+          {user
+            ? `${user.name || 'Unknown'} | ${user.job}`
+            : 'No ID detected! Contact the Head of Personnel.'}
+        </Stack.Item>
+      </Stack>
+    </NoticeBox>
+  );
+};

@@ -51,11 +51,10 @@
 	disliked_food = GROSS | RAW
 	liked_food = JUNKFOOD | FRIED
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE)
-	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_VIRUSIMMUNE, TRAIT_PERFECT_ATTACKER, TRAIT_NOBREATH)
+	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_VIRUSIMMUNE, TRAIT_PERFECT_ATTACKER, TRAIT_NOBREATH, TRAIT_NOCRITDAMAGE)
 	use_skintones = TRUE
 	limbs_id = "human"
 	wings_icon = "None"
-	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	brutemod = 0.5
 	heatmod = 1
 	burnmod = 3
@@ -537,6 +536,7 @@
 	var/obj/item/organ/brain/brain = kueijin.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain)
 		brain.applyOrganDamage(-100)
+		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 	var/heal_level = min(kueijin.mind.dharma.level, 4)
 	kueijin.heal_ordered_damage(20 * heal_level, list(OXY, STAMINA, BRUTE, TOX))
@@ -596,6 +596,7 @@
 	var/obj/item/organ/brain/brain = kueijin.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain)
 		brain.applyOrganDamage(-100)
+		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 	var/heal_level = min(kueijin.mind.dharma.level, 4)
 	kueijin.heal_ordered_damage(10 * heal_level, list(OXY, STAMINA, BRUTE, TOX))

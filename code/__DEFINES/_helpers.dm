@@ -20,18 +20,3 @@
 //Returns an integer given a hex input, supports negative values "-ff"
 //skips preceding invalid characters
 #define hex2num(X) text2num(X, 16)
-
-#define span_notice(str) ("<span class='notice'>" + str + "</span>")
-#define span_warning(str) ("<span class='warning'>" + str + "</span>")
-#define span_bold(str) ("<span class='bold'>" + str + "</span>")
-#define span_userdanger(str) ("<span class='userdanger'>" + str + "</span>")
-#define span_nicegreen(str) ("<span class='nicegreen'>" + str + "</span>")
-#define span_boldwarning(str) ("<span class='boldwarning'>" + str + "</span>")
-#define span_emote(str) ("<span class='emote'>" + str + "</span>")
-#define span_subtle(str) ("<span class='subtle'>" + str + "</span>")
-#define span_subtler(str) ("<span class='subtler'>" + str + "</span>")
-#define span_adminnotice(str) ("<span class='adminnotice'>" + str + "</span>")
-#define span_danger(str) ("<span class='danger'>" + str + "</span>")
-#define span_alert(str) ("<span class='alert'>" + str + "</span>")
-#define span_hear(str) ("<span class='hear'>" + str + "</span>")
-#define span_boldannounce(str) ("<span class='boldannounce'>" + str + "</span>")

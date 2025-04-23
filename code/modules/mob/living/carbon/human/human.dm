@@ -549,17 +549,6 @@
 				to_chat(usr, "<span class='notice'>Successfully added comment.</span>")
 				return
 	// TFN EDIT ADDITION START: view character headshot & big flavortext via examine
-	if(href_list["view_headshot"])
-		if(!ismob(usr))
-			return
-		if(!valid_headshot_link(null, headshot_link, TRUE))
-			return
-		var/list/dat = list("<table width='100%' height='100%'><td align='center' valign='middle'><img src='[headshot_link]' width='250px' height='250px'></td></table>")
-		var/datum/browser/popup = new(user, "[name]'s Headshot", "<div align='center'>[name]</div>", 310, 330)
-		popup.set_content(dat.Join())
-		popup.open(FALSE)
-		return
-
 	if(href_list["view_flavortext"])
 		tgui.holder = src
 		tgui.ui_interact(usr) //datum has a tgui component, here we open the window
@@ -727,13 +716,6 @@
 				if(N.last_damager != src)
 					SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_UP)
 					call_dharma("savelife", src)
-//			if(key)
-//				var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
-//				if(P)
-//					var/mode = 1
-//					if(HAS_TRAIT(src, TRAIT_NON_INT))
-//						mode = 2
-//					P.exper = min(calculate_mob_max_exper(src), P.exper+(20/mode))
 		log_combat(src, target, "CPRed")
 
 		if (HAS_TRAIT(target, TRAIT_NOBREATH))
@@ -755,8 +737,8 @@
 #undef CPR_PANIC_SPEED
 
 /mob/living/carbon/human/cuff_resist(obj/item/I)
-	if(dna?.check_mutation(HULK))
-		say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ), forced = "hulk")
+	if(dna?.check_mutation(HULK) || HAS_TRAIT(src, TRAIT_CUFFBREAKER))
+		say(pick("RAAAAAAAARGH!", "HNNNNNNNNNGGGGGGH!", "GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", "AAAAAAARRRGH!" ))
 		if(..(I, cuff_break = FAST_CUFFBREAK))
 			dropItemToGround(I)
 	else

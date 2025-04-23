@@ -100,6 +100,7 @@
 #define TRAIT_NOMOBSWAP         "no-mob-swap"
 #define TRAIT_XRAY_VISION       "xray_vision"
 #define TRAIT_THERMAL_VISION    "thermal_vision"
+#define TRAIT_PROTEAN_VISION	"protean_vision"
 #define TRAIT_ABDUCTOR_TRAINING "abductor-training"
 #define TRAIT_ABDUCTOR_SCIENTIST_TRAINING "abductor-scientist-training"
 #define TRAIT_SURGEON           "surgeon"
@@ -144,6 +145,12 @@
 #define TRAIT_COAGULATING		"coagulating" //from coagulant reagents, this doesn't affect the bleeding itself but does affect the bleed warning messages
 /// The holder of this trait has antennae or whatever that hurt a ton when noogied
 #define TRAIT_ANTENNAE	"antennae"
+
+/// Trait that tracks if something has been renamed. Typically holds a REF() to the object itself (AKA src) for wide addition/removal.
+#define TRAIT_WAS_RENAMED "was_renamed"
+
+/// A transforming item that is actively extended / transformed
+#define TRAIT_TRANSFORM_ACTIVE "active_transform"
 
 #define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
 
@@ -311,3 +318,6 @@
 
 //Trait for when a kindred turns on obfuscate. Supposed to make them invisible to normal sight.area
 #define TRAIT_OBFUSCATED "trait_obfuscated"
+
+//For handcuff breaking speed.
+#define TRAIT_CUFFBREAKER		"cuffbreaker"

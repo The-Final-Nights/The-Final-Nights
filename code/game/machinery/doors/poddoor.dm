@@ -142,10 +142,10 @@
 	switch(animation)
 		if("opening")
 			flick("opening", src)
-			playsound(src, 'sound/machines/blastdoor.ogg', 30, TRUE)
+			playsound(src, 'sound/machines/shutters_open.ogg', 30, TRUE)
 		if("closing")
 			flick("closing", src)
-			playsound(src, 'sound/machines/blastdoor.ogg', 30, TRUE)
+			playsound(src, 'sound/machines/shutters_close.ogg', 30, TRUE)
 
 /obj/machinery/door/poddoor/update_icon_state()
 	if(density)

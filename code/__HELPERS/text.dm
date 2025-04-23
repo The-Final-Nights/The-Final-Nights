@@ -20,6 +20,16 @@
  * Text sanitization
  */
 
+
+/// Removes all characters in `repl_chars`
+/proc/sanitize_simple(t,list/repl_chars = list("\n"="#","\t"="#"))
+	for(var/char in repl_chars)
+		var/index = findtext(t, char)
+		while(index)
+			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index + length(char))
+			index = findtext(t, char, index + length(char))
+	return t
+
 ///returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
 /proc/sanitize_name(target, allow_numbers = FALSE, cap_after_symbols = TRUE)
 	if(CHAT_FILTER_CHECK(target))
@@ -101,6 +111,22 @@
 	if(bad_chars.Find(text))
 		return null
 	return text
+
+/// Used to get a properly maximum length capped input.
+/proc/capped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as text|null
+	if(no_trim)
+		return copytext(name, 1, max_length)
+	else
+		return trim(name, max_length)
+
+/// Used to get a properly maximum length capped input, but this time multiline.
+/proc/capped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as message|null
+	if(no_trim)
+		return copytext(name, 1, max_length)
+	else
+		return trim(name, max_length)
 
 /**
  * Used to get a properly sanitized input. Returns null if cancel is pressed.
@@ -593,7 +619,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 
 	t = parsemarkdown_basic_step1(t)
 
-	t = replacetext(t, regex("%s(?:ign)?(?=\\s|$)", "igm"), user ? "<font face=\"[SIGNFONT]\"><i>[user.real_name]</i></font>" : "<span class=\"paper_field\"></span>")
+	t = replacetext(t, regex("%s(?:ign)?(?=\\s|$)", "igm"), user ? "<font face=\"[SIGNATURE_FONT]\"><i>[user.real_name]</i></font>" : "<span class=\"paper_field\"></span>")
 	t = replacetext(t, regex("%f(?:ield)?(?=\\s|$)", "igm"), "<span class=\"paper_field\"></span>")
 
 	t = parsemarkdown_basic_step2(t)
@@ -947,3 +973,118 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 			continue
 		out += prob(replaceprob)? pick(replacementchars) : char
 	return out.Join("")
+
+///runs `piglatin_word()` proc on each word in a sentence. preserves caps and punctuation
+/proc/piglatin_sentence(text)
+	var/text_length = length(text)
+
+	//remove caps since words will be shuffled
+	text = lowertext(text)
+	//remove punctuation for same reasons as above
+	var/punctuation = ""
+	var/punctuation_hit_list = list("!","?",".","-")
+	for(var/letter_index in text_length to 1 step -1)
+		var/letter = text[letter_index]
+		if(!(letter in punctuation_hit_list))
+			break
+		punctuation += letter
+	punctuation = reverse_text(punctuation)
+	text = copytext(text, 1, ((text_length + 1) - length(punctuation)))
+
+	//now piglatin each word
+	var/list/old_words = splittext(text, " ")
+	var/list/new_words = list()
+	for(var/word in old_words)
+		new_words += piglatin_word(word)
+	text = new_words.Join(" ")
+	//replace caps and punc
+	text = capitalize(text)
+	text += punctuation
+	return text
+
+///takes "word", and returns it piglatinized.
+/proc/piglatin_word(word)
+	if(length(word) == 1)
+		return word
+	var/first_letter = copytext(word, 1, 2)
+	var/first_two_letters = copytext(word, 1, 3)
+	var/first_word_is_vowel = (first_letter in list("a", "e", "i", "o", "u"))
+	var/second_word_is_vowel = (copytext(word, 2, 3) in list("a", "e", "i", "o", "u"))
+	//If a word starts with a vowel add the word "way" at the end of the word.
+	if(first_word_is_vowel)
+		return word + pick("yay", "way", "hay") //in cultures around the world it's different, so heck lets have fun and make it random. should still be readable
+	//If a word starts with a consonant and a vowel, put the first letter of the word at the end of the word and add "ay."
+	if(!first_word_is_vowel && second_word_is_vowel)
+		word = copytext(word, 2)
+		word += first_letter
+		return word + "ay"
+	//If a word starts with two consonants move the two consonants to the end of the word and add "ay."
+	if(!first_word_is_vowel && !second_word_is_vowel)
+		word = copytext(word, 3)
+		word += first_two_letters
+		return word + "ay"
+	//otherwise unmutated
+	return word
+
+/**
+ * The procedure to check the text of the entered text on ntnrc_client.dm
+ *
+ * This procedure is designed to check the text you type into the chat client.
+ * It checks for invalid characters and the size of the entered text.
+ */
+/proc/reject_bad_chattext(text, max_length = 256)
+	var/non_whitespace = FALSE
+	var/char = ""
+	if (length(text) > max_length)
+		return
+	else
+		for(var/i = 1, i <= length(text), i += length(char))
+			char = text[i]
+			switch(text2ascii(char))
+				if(0 to 31)
+					return
+				if(32)
+					continue
+				else
+					non_whitespace = TRUE
+		if (non_whitespace)
+			return text
+
+///Properly format a string of text by using replacetext()
+/proc/format_text(text)
+	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
+
+///Returns a string based on the weight class define used as argument
+/proc/weight_class_to_text(w_class)
+	switch(w_class)
+		if(WEIGHT_CLASS_TINY)
+			. = "tiny"
+		if(WEIGHT_CLASS_SMALL)
+			. = "small"
+		if(WEIGHT_CLASS_NORMAL)
+			. = "normal-sized"
+		if(WEIGHT_CLASS_BULKY)
+			. = "bulky"
+		if(WEIGHT_CLASS_HUGE)
+			. = "huge"
+		if(WEIGHT_CLASS_GIGANTIC)
+			. = "gigantic"
+		else
+			. = ""
+
+/// Removes all non-alphanumerics from the text, keep in mind this can lead to id conflicts
+/proc/sanitize_css_class_name(name)
+	var/static/regex/regex = new(@"[^a-zA-Z0-9]","g")
+	return replacetext(name, regex, "")
+
+/// Converts a semver string into a list of numbers
+/proc/semver_to_list(semver_string)
+	var/static/regex/semver_regex = regex(@"(\d+)\.(\d+)\.(\d+)", "")
+	if(!semver_regex.Find(semver_string))
+		return null
+
+	return list(
+		text2num(semver_regex.group[1]),
+		text2num(semver_regex.group[2]),
+		text2num(semver_regex.group[3]),
+	)

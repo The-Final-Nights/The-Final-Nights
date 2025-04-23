@@ -230,6 +230,10 @@ Dancer
 	lose_text = "<span class='notice'>You feel subtly enervated.</span>"
 	allowed_species = list("Ghoul","Human")
 
+/datum/quirk/potent_blood/on_spawn()
+	var/mob/living/carbon/H = quirk_holder
+	H.bloodquality = BLOOD_QUALITY_POTENT
+	
 /datum/action/fly_upper
 	name = "Fly Up"
 	desc = "Fly to the upper level."
@@ -565,6 +569,16 @@ Dancer
 	gain_text = "<span class='notice'>You feel charismatic.</span>"
 	lose_text = "<span class='notice'>You don't feel charismatic anymore.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
+
+/datum/quirk/diablerist
+	name = "Diablerist"
+	desc = "For one reason or another, you have committed Diablerie in your past, a great crime within Kindred society. <b>This is not a license to Diablerize without proper reason!</b>"
+	value = 0
+	allowed_species = list("Vampire")
+
+/datum/quirk/diablerist/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.diablerist = TRUE
 
 /datum/quirk/tower
 	name = "Tower"

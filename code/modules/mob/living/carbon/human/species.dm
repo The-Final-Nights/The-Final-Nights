@@ -1538,16 +1538,14 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
 	// Allows you to put in item-specific reactions based on species
-	var/modifikator = 1
+	var/meleemod = 1
 	if(ishuman(user))
-		var/mob/living/carbon/human/USR = user
-		if(USR.dna)
-			if(USR.dna.species)
-				modifikator = USR.dna.species.meleemod
-		if(USR.age < 16)
-			modifikator = modifikator/2
-		if(ishuman(user))
-			modifikator = (modifikator/3)*(user.get_total_physique())
+		var/mob/living/carbon/human/M = user
+		if(M.dna)
+			if(M.dna.species)
+				meleemod = M.dna.species.meleemod
+		if(user.get_total_physique() > 4)
+			meleemod = (meleemod)+((user.get_total_physique() + 1)/5 - 1) //1.2x at Physique 5, increasing by 0.2x per point higher than that.
 	if(user != H)
 		if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armour_penetration))
 			return FALSE
@@ -1582,7 +1580,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 					if(H.bloodpool)
 						H.bloodpool = max(0, H.bloodpool-1)
 						OC.stored_blood = OC.stored_blood+1
-	apply_damage((I.force*modifikator) * weakness, I.damtype, def_zone, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
+	apply_damage((I.force*meleemod) * weakness, I.damtype, def_zone, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
 
 	if(!I.force)
 		return FALSE //item force is zero
@@ -2242,7 +2240,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		current_part.change_bodypart(species_part)
 
 /datum/species/proc/get_scream_sound(mob/living/carbon/human/human)
-	if(human.gender == MALE)
+	if(human.body_type == MALE)
 		if(prob(1))
 			return 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg'
 		return pick(
@@ -2263,7 +2261,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	)
 
 /datum/species/proc/get_cough_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return pick(
 			'sound/mobs/humanoids/human/cough/female_cough1.ogg',
 			'sound/mobs/humanoids/human/cough/female_cough2.ogg',
@@ -2282,7 +2280,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	)
 
 /datum/species/proc/get_cry_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return pick(
 			'sound/mobs/humanoids/human/cry/female_cry1.ogg',
 			'sound/mobs/humanoids/human/cry/female_cry2.ogg',
@@ -2295,12 +2293,12 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 
 /datum/species/proc/get_sneeze_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return 'sound/mobs/humanoids/human/sneeze/female_sneeze1.ogg'
 	return 'sound/mobs/humanoids/human/sneeze/male_sneeze1.ogg'
 
 /datum/species/proc/get_laugh_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return 'sound/mobs/humanoids/human/laugh/womanlaugh.ogg'
 	return pick(
 		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
@@ -2308,7 +2306,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	)
 
 /datum/species/proc/get_sigh_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return pick(
 				'sound/mobs/humanoids/human/sigh/female_sigh1.ogg',
 				'sound/mobs/humanoids/human/sigh/female_sigh2.ogg',
@@ -2321,14 +2319,26 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			)
 
 /datum/species/proc/get_sniff_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return 'sound/mobs/humanoids/human/sniff/female_sniff.ogg'
 	return 'sound/mobs/humanoids/human/sniff/male_sniff.ogg'
 
 /datum/species/proc/get_snore_sound(mob/living/carbon/human/human)
-	if(human.gender == FEMALE)
+	if(human.body_type == FEMALE)
 		return "snore_female"
 	return "snore_male"
 
 /datum/species/proc/get_hiss_sound(mob/living/carbon/human/human)
 	return 'sound/mobs/humanoids/human/hiss/human_hiss.ogg'
+
+/datum/species/proc/get_giggle_sound(mob/living/carbon/human/human)
+	if(human.body_type == FEMALE)
+		return pick(
+				'sound/mobs/humanoids/human/giggle/female_giggle_1.ogg',
+				'sound/mobs/humanoids/human/giggle/female_giggle_2.ogg',
+			)
+	return pick(
+				'sound/mobs/humanoids/human/giggle/male_giggle_1.ogg',
+				'sound/mobs/humanoids/human/giggle/male_giggle_2.ogg',
+				'sound/mobs/humanoids/human/giggle/male_giggle_3.ogg',
+			)

@@ -159,8 +159,6 @@
 /area/ruin/unpowered/syndicate_lava_base/arrivals)
 "cA" = (
 /obj/structure/table/reinforced,
-/obj/item/book/manual/wiki/chemistry,
-/obj/item/book/manual/wiki/chemistry,
 /obj/item/clothing/glasses/science,
 /obj/item/clothing/glasses/science,
 /obj/effect/decal/cleanable/dirt,
@@ -718,7 +716,7 @@
 	dir = 8
 	},
 /obj/item/paper/crumpled{
-	info = "Explosive testing on site is STRICTLY forbidden, as this outpost's walls are lined with explosives intended for intentional self-destruct purposes that may be set off prematurely through careless experiments.";
+	default_raw_text = "Explosive testing on site is STRICTLY forbidden, as this outpost's walls are lined with explosives intended for intentional self-destruct purposes that may be set off prematurely through careless experiments.";
 	name = "Explosives Testing Warning";
 	pixel_x = -6;
 	pixel_y = -3
@@ -1533,9 +1531,6 @@
 /area/ruin/unpowered/syndicate_lava_base/virology)
 "fA" = (
 /obj/structure/table/glass,
-/obj/item/book/manual/wiki/infections{
-	pixel_y = 7
-	},
 /obj/item/reagent_containers/syringe/antiviral,
 /obj/item/reagent_containers/dropper,
 /obj/item/reagent_containers/spray/cleaner,
@@ -4218,11 +4213,6 @@
 	dir = 1;
 	pixel_y = 1
 	},
-/obj/item/book/manual/chef_recipes{
-	pixel_x = 2;
-	pixel_y = 6
-	},
-/obj/item/book/manual/wiki/barman_recipes,
 /obj/item/reagent_containers/food/drinks/shaker,
 /turf/open/floor/wood,
 /area/ruin/unpowered/syndicate_lava_base/bar)
