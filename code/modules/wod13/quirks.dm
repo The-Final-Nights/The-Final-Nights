@@ -232,7 +232,7 @@ Dancer
 
 /datum/quirk/potent_blood/on_spawn()
 	var/mob/living/carbon/H = quirk_holder
-	H.bloodquality = 4
+	H.bloodquality = BLOOD_QUALITY_POTENT
 	
 /datum/action/fly_upper
 	name = "Fly Up"
