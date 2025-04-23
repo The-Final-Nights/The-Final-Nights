@@ -347,7 +347,7 @@
 
 	if(total_insanity_succeeded)
 		start_total_insanity_effect(target)
-		addtimer(CALLBACK(/proc/stop_total_insanity_effect, target), 20 SECONDS)
+		addtimer(CALLBACK(PROC_REF(stop_total_insanity_effect), target), 20 SECONDS)
 
 		to_chat(owner, span_warning("You unravel [target]'s sanity, leaving them in a state of uncontrollable mania!"))
 		to_chat(target, span_danger("Reality fractures and collapses around you. You lash out blindly, unsure what’s real."))
