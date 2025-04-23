@@ -131,6 +131,18 @@
 					client.images -= suckbar
 				qdel(suckbar)
 				return
+		if(HAS_TRAIT(src, TRAIT_ORGANOVORE)) // think this is fine?
+			mob.adjustBruteLoss(20, TRUE) // sharp teeth
+			to_chat(src, "<span class='warning'>You can't drink this disgusting <b>BLOOD</b>. Go find something meatier!</span>")
+			visible_message("<span class='danger'>[src] throws up!</span>", "<span class='userdanger'>You throw up!</span>")
+			playsound(get_turf(src), 'code/modules/wod13/sounds/vomit.ogg', 75, TRUE)
+			if(isturf(loc))
+				add_splatter_floor(loc)
+			stop_sound_channel(CHANNEL_BLOOD)
+			if(client)
+				client.images -= suckbar
+			qdel(suckbar)
+			return
 		if(iskindred(mob))
 			to_chat(src, "<span class='userlove'>[mob]'s blood tastes HEAVENLY...</span>")
 			adjustBruteLoss(-25, TRUE)

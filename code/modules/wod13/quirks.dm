@@ -230,6 +230,43 @@ Dancer
 	lose_text = "<span class='notice'>You feel subtly enervated.</span>"
 	allowed_species = list("Ghoul","Human")
 
+/datum/quirk/organovore
+	name = "Organovore"
+	desc = "The thought of drinking blood repulses you, you can only subsist off of organs, instead."
+	mob_trait = TRAIT_ORGANOVORE
+	value = -2
+	gain_text = "<span class='warning'>You have a craving for liver.</span>"
+	lose_text = "<span class='notice'>Your craving subsides...</span>"
+	allowed_species = list("Vampire")
+
+/datum/quirk/organovore/add()
+	. = ..()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(!H)
+		return
+	RegisterSignal(H, COMSIG_ORGANOVORE_ATE_ORGAN, PROC_REF(add_vitae_from_item))
+
+/datum/quirk/organovore/remove()
+	. = ..()
+	var/mob/living/carbon/human/H = quirk_holder
+	if(H)
+		UnregisterSignal(H, COMSIG_ORGANOVORE_ATE_ORGAN, PROC_REF(add_vitae_from_item))
+
+/datum/quirk/organovore/proc/add_vitae_from_item(datum/source, amount_of_bloodpoints)
+	SIGNAL_HANDLER
+
+	var/mob/living/carbon/human/H = source
+
+	H.bloodpool = min(H.maxbloodpool, H.bloodpool+amount_of_bloodpoints)
+	H.adjustBruteLoss(-10, TRUE)
+	H.adjustFireLoss(-10, TRUE)
+	H.update_damage_overlays()
+	H.update_health_hud()
+	if(iskindred(H))
+		H.update_blood_hud()
+	playsound(H.loc,'sound/items/drink.ogg', 50, TRUE)
+
+
 /datum/action/fly_upper
 	name = "Fly Up"
 	desc = "Fly to the upper level."

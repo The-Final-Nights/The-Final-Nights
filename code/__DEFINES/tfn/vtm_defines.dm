@@ -108,8 +108,10 @@
 
 #define TRUSTED_PLAYER "trusted_player"
 
-
-
+/**
+ * Specifically Just For Organ Signal Thing
+ */
+#define COMSIG_ORGANOVORE_ATE_ORGAN "organovore_ate_organ"d
 
 /**
  * Cooldown defines

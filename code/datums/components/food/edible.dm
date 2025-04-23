@@ -346,6 +346,9 @@ Behavior that's still missing from this component that original food items had t
 			On_Consume(eater, feeder)
 		checkLiked(fraction, eater)
 
+		if(iskindred(eater) && HAS_TRAIT(eater, TRAIT_ORGANOVORE))
+			On_Consume(eater, feeder)
+
 		//Invoke our after eat callback if it is valid
 		if(after_eat)
 			after_eat.Invoke(eater, feeder, bitecount)
@@ -382,6 +385,9 @@ Behavior that's still missing from this component that original food items had t
 	last_check_time = world.time
 
 	if(H.dna.species.id == "kindred")
+		if(HAS_TRAIT(H, TRAIT_ORGANOVORE) && (foodtypes & GORE))
+			SEND_SIGNAL(H, COMSIG_ORGANOVORE_ATE_ORGAN, 1)
+			return // Skip the rest, I think this is fine?
 		if(HAS_TRAIT(H, TRAIT_AGEUSIA))
 			to_chat(H, "<span class='warning'>You don't feel so good...</span>")
 			H.adjust_disgust(11 + 15 * fraction)
