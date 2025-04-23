@@ -230,6 +230,10 @@ Dancer
 	lose_text = "<span class='notice'>You feel subtly enervated.</span>"
 	allowed_species = list("Ghoul","Human")
 
+/datum/quirk/potent_blood/on_spawn()
+	var/mob/living/carbon/H = quirk_holder
+	H.bloodquality = BLOOD_QUALITY_POTENT
+
 /datum/quirk/organovore
 	name = "Organovore"
 	desc = "The thought of drinking blood repulses you, you can only subsist off of organs, instead."

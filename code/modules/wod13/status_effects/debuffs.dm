@@ -1005,3 +1005,41 @@
 /datum/status_effect/awe/Destroy()
 	source = null
 	return ..()
+
+/datum/status_effect/diablerie_high //Used for powers that force a target to walk to you.
+	id = "diablerie"
+	status_type = STATUS_EFFECT_REPLACE
+	duration = 15 MINUTES
+	tick_interval = 2 SECONDS
+	alert_type = /atom/movable/screen/alert/status_effect/diablerie_high
+
+/atom/movable/screen/alert/status_effect/diablerie_high
+	name = "Amaranth"
+	desc = "That felt amazing... I am zooted out of my mind."
+	icon_state = "hypnosis"
+
+/datum/movespeed_modifier/diablerie_high
+	multiplicative_slowdown = 0.15
+
+/datum/status_effect/diablerie_high/tick()
+	var/mob/living/carbon/H = owner
+	H.set_drugginess(15)
+	if(prob(4))
+		var/high_message = pick("You feel in tune with your Beast.","You feel like fistfighting Hardestadt.","Some more Vitae would wash this down nicely..","You could use some more of that nectar.","You can feel your blood pulsing.","You feel relaxed.","Your Beast craves for more.","You notice you've been moving more slowly.")
+		to_chat(H, span_notice("[high_message]"))
+
+/datum/status_effect/diablerie_high/on_apply()
+	. = ..()
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/diablerie_high)
+	if(!HAS_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN))
+		ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
+	owner.additional_dexterity -= 2
+	owner.additional_mentality -= 1
+
+/datum/status_effect/diablerie_high/on_remove()
+	. = ..()
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/diablerie_high)
+	owner.additional_dexterity += 2
+	owner.additional_mentality += 1
+	if(HAS_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN))
+		REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
