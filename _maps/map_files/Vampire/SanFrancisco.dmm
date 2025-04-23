@@ -11463,6 +11463,7 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/sewer/nosferatu_town)
 "deU" = (
+/obj/structure/closet/crate/wooden/communitygardens/seeds,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/unionsquare)
 "deV" = (
@@ -45263,6 +45264,10 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/park)
+"mEV" = (
+/obj/structure/closet/crate/wooden/communitygardens/tools,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/unionsquare)
 "mFf" = (
 /obj/structure/table/wood/fancy/orange,
 /obj/item/storage/pill_bottle/happy,
@@ -193977,7 +193982,7 @@ rFS
 iog
 iog
 wsO
-deU
+mEV
 lYC
 ezp
 lYC
