@@ -13,8 +13,8 @@
 	icon_state = "fish1"
 	cost = 40
 
-/obj/item/food/fish/tune
-	name = "tune"
+/obj/item/food/fish/tuna
+	name = "tuna"
 	icon_state = "fish2"
 	cost = 15
 
@@ -73,7 +73,7 @@
 				var/diceroll = rand(1, 20)
 				var/IT
 				if(diceroll <= 5)
-					IT = /obj/item/food/fish/tune
+					IT = /obj/item/food/fish/tuna
 				else if(diceroll <= 10)
 					IT = /obj/item/food/fish/catfish
 				else if(diceroll <= 15)
