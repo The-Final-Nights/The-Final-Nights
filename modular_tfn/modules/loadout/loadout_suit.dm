@@ -69,3 +69,21 @@
 	display_name = "trenchcoat, brown"
 	description = "Best noir clothes for night."
 	path = /obj/item/clothing/suit/vampire/trench/alt
+
+// Misc
+
+/datum/gear/suit/kasaya
+	display_name = "kasaya"
+	path = /obj/item/clothing/suit/vampire/kasaya
+
+/datum/gear/suit/imam
+	display_name = "imam robe"
+	path = /obj/item/clothing/suit/vampire/imam
+
+/datum/gear/suit/orthodox
+	display_name = "orthodox robe"
+	path = /obj/item/clothing/suit/vampire/orthodox
+
+/datum/gear/suit/nun
+	display_name = "nun frock"
+	path = /obj/item/clothing/suit/vampire/nun

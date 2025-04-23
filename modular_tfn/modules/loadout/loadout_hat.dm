@@ -21,6 +21,18 @@
 	display_name = "bandana, black"
 	path = /obj/item/clothing/head/vampire/bandana/black
 
+// Beret
+/datum/gear/hat/beret
+	subtype_path = /datum/gear/hat/beret
+
+/datum/gear/hat/beret/red
+	display_name = "beret, red"
+	path = /obj/item/clothing/head/beret
+
+/datum/gear/hat/beret/black
+	display_name = "beret, black"
+	path = /obj/item/clothing/head/beret/black
+
 // Beanie
 /datum/gear/hat/beanie
 	subtype_path = /datum/gear/hat/beanie
@@ -50,3 +62,15 @@
 /datum/gear/hat/hijab
 	display_name = "hijab"
 	path = /obj/item/clothing/head/vampire/hijab
+
+/datum/gear/hat/taqiyah
+	display_name = "taqiyah"
+	path = /obj/item/clothing/head/vampire/taqiyah
+
+/datum/gear/hat/kalimavkion
+	display_name = "kalimavkion"
+	path = /obj/item/clothing/head/vampire/kalimavkion
+
+/datum/gear/hat/wimple
+	display_name = "wimple"
+	path = /obj/item/clothing/head/vampire/nun
