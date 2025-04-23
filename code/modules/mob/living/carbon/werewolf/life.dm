@@ -1,3 +1,7 @@
+#define UMBRA_VEIL_COOLDOWN 80 MINUTES
+#define CAERN_VEIL_COOLDOWN 120 MINUTES
+#define GAROU_BP_REGEN 60 SECONDS
+
 /mob/living/carbon/werewolf/Life()
 	update_icons()
 	update_rage_hud()
@@ -20,7 +24,7 @@
 			for(var/obj/structure/werewolf_totem/W in GLOB.totems)
 				if(W)
 					if(W.totem_health)
-						if(W.tribe == auspice.tribe)
+						if(W.tribe == auspice.tribe.name)
 							if(get_area(W) == get_area(src) && client)
 								gaining_rage = FALSE
 								if(last_gnosis_buff+300 < world.time)
@@ -60,26 +64,26 @@
 						rollfrenzy()
 
 			if(istype(get_area(src), /area/vtm/interior/penumbra))
-				if((last_veil_restore + 5000 SECONDS) < world.time)
+				if((last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
 					adjust_veil(1, 4, -1)
 					last_veil_restore = world.time
 
-			switch(auspice.tribe)
+			switch(auspice.tribe.name)
 				if("Galestalkers","Ghost Council","Hart Wardens")
 					if(istype(get_area(src), /area/vtm/forest))
-						if((last_veil_restore + 8000 SECONDS) <= world.time && src.masquerade < 5)
+						if((last_veil_restore + CAERN_VEIL_COOLDOWN) <= world.time && src.masquerade < 5)
 							adjust_veil(1, 3, -1)
 							last_veil_restore = world.time
 
 				if("Glasswalkers","Bone Gnawers","Children of Gaia")
 					if(istype(get_area(src), /area/vtm/interior/glasswalker))
-						if((last_veil_restore + 8000 SECONDS) <= world.time && src.masquerade < 5)
+						if((last_veil_restore + CAERN_VEIL_COOLDOWN) <= world.time && src.masquerade < 5)
 							adjust_veil(1, 3, -1)
 							last_veil_restore = world.time
 
 				if("Black Spiral Dancers")
 					if(istype(get_area(src), /area/vtm/interior/endron_facility) && src.masquerade < 5)
-						if((last_veil_restore + 8000 SECONDS) <= world.time)
+						if((last_veil_restore + CAERN_VEIL_COOLDOWN) <= world.time)
 							adjust_veil(1, 3, -1)
 							last_veil_restore = world.time
 
@@ -89,7 +93,7 @@
 		if(H.CheckEyewitness(H, H, 7, FALSE))
 			H.adjust_veil(-1,random = -1)
 
-	if((H.last_bloodpool_restore + 60 SECONDS) <= world.time)
+	if((H.last_bloodpool_restore + GAROU_BP_REGEN) <= world.time)
 		H.last_bloodpool_restore = world.time
 		H.bloodpool = min(H.maxbloodpool, H.bloodpool+1)
 	if(glabro)
@@ -116,7 +120,7 @@
 		return
 	adjust_bodytemperature(BODYTEMP_HEATING_MAX) //If you're on fire, you heat up!
 
-/mob/living/carbon/proc/adjust_veil(var/amount,var/threshold,var/random,var/honoradj,var/gloryadj,var/wisdomadj)
+/mob/living/carbon/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj)
 	if(!GLOB.canon_event)
 		return
 	if(last_veil_adjusting+200 >= world.time)
@@ -283,3 +287,7 @@
 			return FALSE
 
 	return FALSE
+
+#undef UMBRA_VEIL_COOLDOWN
+#undef CAERN_VEIL_COOLDOWN
+#undef GAROU_BP_REGEN

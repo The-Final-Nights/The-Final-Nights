@@ -69,14 +69,14 @@
 		switch(renownrank)
 			if(1)
 				if(same_tribe)
-					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe].</b>"
+					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(2)
 				if(same_tribe)
-					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe].</b>"
+					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(3,4,5,6)
-				. += "<b>You know [p_them()] as an [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe].</b>"
+				. += "<b>You know [p_them()] as an [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe.name].</b>"
 				isknown = 1
 		if(isknown)
 			switch(honor)
@@ -514,7 +514,7 @@
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
 				var/mob/living/carbon/wolf = src
 				is_kin++
-				switch(wolf.auspice.tribe)
+				switch(wolf.auspice.tribe.name)
 					if ("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Red Talons","Stargazers")
 						wyld_taint++
 					if ("Glasswalkers","Bone Gnawers","Shadow Lords")

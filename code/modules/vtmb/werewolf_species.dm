@@ -40,7 +40,7 @@
 			dat += "[host.real_name],"
 		if(!host.real_name)
 			dat += "Unknown,"
-		dat += " [host.auspice.tribe] [host.auspice.base_breed]"
+		dat += " [host.auspice.tribe.name] [host.auspice.base_breed]"
 		if(host.mind)
 
 			if(host.mind.assigned_role)
@@ -78,7 +78,7 @@
 		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR><BR>"
 		dat += "<b>Gnosis</b>: [host.auspice.gnosis]<BR>"
 		dat += "<b>Rank</b>: [RankName(host.renownrank)]<BR>"
-		if(host.auspice.tribe == "Black Spiral Dancers")
+		if(host.auspice.tribe.name == "Black Spiral Dancers")
 			dat += "<b>Power</b>: [host.honor]<BR>"
 			dat += "<b>Infamy</b>: [host.glory]<BR>"
 			dat += "<b>Cunning</b>: [host.wisdom]<BR>"

@@ -225,7 +225,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/archetype = /datum/archetype/average
 
 	var/breed = "Homid"
-	var/tribe = "Galestalkers"
+	var/datum/garou_tribe/tribe = new /datum/garou_tribe/galestalkers()
 	var/datum/auspice/auspice = new /datum/auspice/ahroun()
 	var/werewolf_color = "black"
 	var/werewolf_scar = 0
@@ -597,7 +597,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/honorXP = max(5, honor * 10)
 					var/wisdomXP =  max(5, wisdom * 10)
 					dat += "<b>Veil:</b> [masquerade]/5<BR>"
-					switch(tribe)
+					switch(tribe.name)
 						if("Ronin")
 							dat += "Renown matters little to you, now."
 						if("Black Spiral Dancers")
@@ -677,38 +677,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				var/gifts_text = ""
 				var/num_of_gifts = 0
 				for(var/i in 1 to auspice_level)
-					var/zalupa
-					switch (tribe)
-						if ("Glasswalkers")
-							zalupa = auspice.glasswalker[i]
-						if ("Galestalkers")
-							zalupa = auspice.galestalkers[i]
-						if ("Bone Gnawers")
-							zalupa = auspice.bonegnawer[i]
-						if ("Ghost Council")
-							zalupa = auspice.ghostcouncil[i]
-						if ("Hart Wardens")
-							zalupa = auspice.hartwardens[i]
-						if ("Silver Fangs")
-							zalupa = auspice.silverfangs[i]
-						if ("Red Talons")
-							zalupa = auspice.redtalons[i]
-						if ("Get of Fenris")
-							zalupa = auspice.getoffenris[i]
-						if ("Shadow Lords")
-							zalupa = auspice.shadowlords[i]
-						if ("Stargazers")
-							zalupa = auspice.stargazers[i]
-						if ("Silent Striders")
-							zalupa = auspice.silentstriders[i]
-						if ("Black Furies")
-							zalupa = auspice.blackfuries[i]
-						if ("Children of Gaia")
-							zalupa = auspice.childrenofgaia[i]
-						if ("Black Spiral Dancers")
-							zalupa = auspice.spiral[i]
-						if ("Ronin")
-							zalupa = auspice.ronin[i]
+					var/zalupa = tribe.tribal_gifts[i]
 					var/datum/action/T = new zalupa()
 					gifts_text += "[T.name], "
 				for(var/i in auspice.gifts)
@@ -760,7 +729,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				qdel(DAWOF)
 				qdel(DAWOF2)
 				dat += "<b>Breed:</b> <a href='byond://?_src_=prefs;preference=breed;task=input'>[breed]</a><BR>"
-				dat += "<b>Tribe:</b> <a href='byond://?_src_=prefs;preference=tribe;task=input'>[tribe]</a><BR>"
+				dat += "<b>Tribe:</b> <a href='byond://?_src_=prefs;preference=tribe;task=input'>[tribe.name]</a><BR>"
+				dat += "<b>Description:</b> [tribe.desc]"
 				dat += "Color: <a href='byond://?_src_=prefs;preference=werewolf_color;task=input'>[werewolf_color]</a><BR>"
 				dat += "Scars: <a href='byond://?_src_=prefs;preference=werewolf_scar;task=input'>[werewolf_scar]</a><BR>"
 				dat += "Hair: <a href='byond://?_src_=prefs;preference=werewolf_hair;task=input'>[werewolf_hair]</a><BR>"
@@ -1599,10 +1569,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(tribe)
 					var/alloww = FALSE
 					for(var/i in job.allowed_tribes)
-						if(i == tribe)
+						if(i == tribe.name)
 							alloww = TRUE
 					if(!alloww && !bypass)
-						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[tribe] RESTRICTED\]</font></td></tr>"
+						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[tribe.name] RESTRICTED\]</font></td></tr>"
 						continue
 				if(auspice)
 					var/alloww = FALSE
@@ -1811,10 +1781,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(length(Q.allowed_tribes) && "Werewolf" == pref_species.name)
 					var/tribe_restricted = TRUE
 					for(var/i in Q.allowed_tribes)
-						if(i == tribe)
+						if(i == tribe.name)
 							tribe_restricted = FALSE
 					if(tribe_restricted)
-						lock_reason = "[tribe] restricted."
+						lock_reason = "[tribe.name] restricted."
 						quirk_conflict = TRUE
 				qdel(Q)
 
@@ -2336,7 +2306,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
 
-					if(tribe == "Glasswalkers")
+					if(tribe.name == "Glasswalkers")
 						if(werewolf_scar == 9)
 							werewolf_scar = 0
 						else
@@ -2504,8 +2474,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
 
-					var/new_tribe = tgui_input_list(user, "Choose your Tribe:", "Tribe", sortList(list("Galestalkers","Ghost Council","Hart Wardens", "Children of Gaia","Glasswalkers","Bone Gnawers","Ronin","Black Spiral Dancers","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Shadow Lords","Red Talons", "Stargazers")))
-					if (new_tribe)
+					var/list/available_tribes = list()
+					for(var/i in GLOB.tribes_list)
+						var/a = GLOB.tribes_list[i]
+						var/datum/garou_tribe/G = new a
+						available_tribes[G.name] += GLOB.tribes_list[i]
+						qdel(G)
+					var/new_tribe = tgui_input_list(user, "Choose your Tribe:", "Tribe", sortList(available_tribes))
+					if(new_tribe)
+						var/newtype = GLOB.tribes_list[new_tribe]
+						new_tribe = new newtype()
 						tribe = new_tribe
 
 				if("breed")
@@ -3480,7 +3458,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			character.max_yin_chi = 2
 
 	if(pref_species.name == "Werewolf")
-		switch(tribe)
+		switch(tribe.name)
 			if("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens")
 				character.yin_chi = 1
 				character.max_yin_chi = 1

@@ -7,100 +7,9 @@
 	var/start_gnosis = 1
 	var/gnosis = 1
 	var/base_breed = "Homid"
-	var/tribe = "Galestalkers"
+	var/datum/garou_tribe/tribe = new /datum/garou_tribe/galestalkers()
 	var/list/gifts = list()
 	var/force_abomination = FALSE
-
-	var/list/galestalkers = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/ghostcouncil = list(
-		/datum/action/gift/shroud = 1,
-		/datum/action/gift/coils_of_the_serpent = 2,
-		/datum/action/gift/banish_totem = 3
-	)
-
-	var/list/hartwardens = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/glasswalker = list(
-		/datum/action/gift/smooth_move = 1,
-		/datum/action/gift/digital_feelings = 2,
-		/datum/action/gift/elemental_improvement = 3
-	)
-
-	var/list/bonegnawer = list(
-		/datum/action/gift/guise_of_the_hound = 1,
-		/datum/action/gift/infest = 2,
-		/datum/action/gift/gift_of_the_termite = 3
-	)
-
-	var/list/childrenofgaia = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/getoffenris = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/blackfuries = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/silentstriders = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/shadowlords = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/redtalons = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/silverfangs = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/stargazers = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/spiral = list(
-		/datum/action/gift/stinky_fur = 1,
-		/datum/action/gift/venom_claws = 2,
-		/datum/action/gift/burning_scars = 3
-	)
-
-	var/list/ronin = list(
-		/datum/action/gift/guise_of_the_hound = 1,
-		/datum/action/gift/stoic_pose = 2,
-		/datum/action/gift/smooth_move = 3,
-		/datum/action/gift/shroud = 4
-	)
 
 /datum/auspice/proc/on_gain(var/mob/living/carbon/C)
 	C.update_rage_hud()
@@ -126,37 +35,7 @@
 
 	for(var/i in 1 to level)
 		var/zalupa
-		switch(tribe)
-			if("Galestalkers")
-				zalupa = galestalkers[i]
-			if("Ghost Council")
-				zalupa = ghostcouncil[i]
-			if("Hart Wardens")
-				zalupa = hartwardens[i]
-			if("Glasswalkers")
-				zalupa = glasswalker[i]
-			if("Bone Gnawers")
-				zalupa = bonegnawer[i]
-			if("Children of Gaia")
-				zalupa = childrenofgaia[i]
-			if("Ronin")
-				zalupa = ronin[i]
-			if("Black Spiral Dancers")
-				zalupa = spiral[i]
-			if("Get of Fenris")
-				zalupa = getoffenris[i]
-			if("Black Furies")
-				zalupa = blackfuries[i]
-			if("Silver Fangs")
-				zalupa = silverfangs[i]
-			if("Silent Striders")
-				zalupa = silentstriders[i]
-			if("Shadow Lords")
-				zalupa = shadowlords[i]
-			if("Red Talons")
-				zalupa = redtalons[i]
-			if("Stargazers")
-				zalupa = stargazers[i]
+		zalupa = tribe.tribal_gifts[i]
 		var/datum/action/A = new zalupa()
 		A.Grant(C)
 		var/datum/action/A1 = new zalupa()

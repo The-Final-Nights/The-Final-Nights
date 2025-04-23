@@ -404,9 +404,6 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(stuttering)
 		message = stutter(message)
 
-//	if(slurring)
-//		message = slur(message) //Removes the worst barrier to drunk RP.
-
 	if(cultslurring)
 		message = cultslur(message)
 

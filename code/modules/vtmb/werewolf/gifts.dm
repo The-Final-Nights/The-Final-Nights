@@ -293,7 +293,7 @@
 					is_wyrm = 1
 			if (isgarou(target) || iswerewolf(target))
 				var/mob/living/carbon/wolf = target
-				switch(wolf.auspice.tribe)
+				switch(wolf.auspice.tribe.name)
 					if ("Black Spiral Dancers")
 						is_wyrm = 1
 			if(is_wyrm)
@@ -548,7 +548,7 @@
 					break
 
 			var/message = howl["message"]
-			var/tribe = C.auspice.tribe
+			var/tribe = C.auspice.tribe.name
 			if (tribe)
 				message = replacetext(message, "tribe", tribe)
 

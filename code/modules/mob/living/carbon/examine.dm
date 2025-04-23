@@ -137,7 +137,7 @@
 
 		..()
 
-	if (isgarou(user) || iswerewolf(user))
+	if (iswerewolf(user))
 		if (get_dist(user, src) <= 2)
 			var/wyrm_taint = NONE
 			var/weaver_taint = NONE
@@ -159,7 +159,7 @@
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
 				var/mob/living/carbon/wolf = src
 
-				switch(wolf.auspice.tribe)
+				switch(wolf.auspice.tribe.name)
 					if ("Galestalkers","Children of Gaia","Hart Wardens","Ghost Council","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Red Talons","Stargazers")
 						wyld_taint++
 					if ("Glasswalkers","Bone Gnawers","Shadow Lords")

@@ -180,7 +180,7 @@
 	lupus.bloodpool = trans.bloodpool
 	lupus.masquerade = trans.masquerade
 	lupus.nutrition = trans.nutrition
-	if(trans.auspice.tribe == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
+	if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
 		lupus.wyrm_tainted = 1
 	if(HAS_TRAIT(trans, TRAIT_DOGWOLF))
 		lupus.is_dog = TRUE
@@ -215,7 +215,7 @@
 	crinos.bloodpool = trans.bloodpool
 	crinos.masquerade = trans.masquerade
 	crinos.nutrition = trans.nutrition
-	if(trans.auspice.tribe == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
+	if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
 		crinos.wyrm_tainted = 1
 	crinos.mind = trans.mind
 	crinos.update_blood_hud()
