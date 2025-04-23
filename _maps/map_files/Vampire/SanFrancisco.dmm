@@ -16256,7 +16256,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/fishermanswharf)
 "ezp" = (
-/turf/open/floor/plating/grass,
+/turf/open/floor/grass,
 /area/vtm/unionsquare)
 "ezr" = (
 /obj/effect/turf_decal/siding/white{
@@ -24195,7 +24195,7 @@
 /area/vtm/pacificheights/forest)
 "gFt" = (
 /obj/machinery/hydroponics/soil,
-/turf/open/floor/plating/grass,
+/turf/open/floor/grass,
 /area/vtm/unionsquare)
 "gFJ" = (
 /obj/structure/chair/wood/wings{
@@ -31514,9 +31514,6 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/strip)
 "iKd" = (
-/obj/structure/fence{
-	dir = 4
-	},
 /obj/structure/fence/door,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/unionsquare)
@@ -43119,7 +43116,7 @@
 /area/vtm/interior/chantry)
 "lYC" = (
 /obj/structure/flora/ausbushes/brflowers,
-/turf/open/floor/plating/grass,
+/turf/open/floor/grass,
 /area/vtm/unionsquare)
 "lYE" = (
 /obj/structure/lamppost/one{
@@ -44306,7 +44303,7 @@
 "mrm" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/lavendergrass,
-/turf/open/floor/plating/grass,
+/turf/open/floor/grass,
 /area/vtm/unionsquare)
 "mrB" = (
 /obj/structure/lamppost/sidewalk,
@@ -67960,7 +67957,7 @@
 /area/vtm/interior)
 "sFh" = (
 /obj/structure/flora/ausbushes/ppflowers,
-/turf/open/floor/plating/grass,
+/turf/open/floor/grass,
 /area/vtm/unionsquare)
 "sFi" = (
 /obj/structure/rack,
@@ -76659,7 +76656,7 @@
 "vgo" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/structure/flora/ausbushes/ppflowers,
-/turf/open/floor/plating/grass,
+/turf/open/floor/grass,
 /area/vtm/unionsquare)
 "vgp" = (
 /obj/effect/turf_decal/siding/white{
