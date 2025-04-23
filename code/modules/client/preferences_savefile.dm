@@ -765,6 +765,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["flavor_text"], flavor_text)
 	WRITE_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	WRITE_FILE(S["ooc_notes"], ooc_notes)
+	WRITE_FILE(S["character_notes"], character_notes)
 	WRITE_FILE(S["friend_text"]			, friend_text)
 	WRITE_FILE(S["enemy_text"]			, enemy_text)
 	WRITE_FILE(S["lover_text"]			, lover_text)
