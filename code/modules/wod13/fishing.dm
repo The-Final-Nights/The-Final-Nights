@@ -11,22 +11,22 @@
 /obj/item/food/fish/shark
 	name = "leopard shark"
 	icon_state = "fish1"
-	cost = 400
+	cost = 40
 
 /obj/item/food/fish/tune
 	name = "tune"
 	icon_state = "fish2"
-	cost = 125
+	cost = 15
 
 /obj/item/food/fish/catfish
 	name = "catfish"
 	icon_state = "fish3"
-	cost = 50
+	cost = 5
 
 /obj/item/food/fish/crab
 	name = "crab"
 	icon_state = "fish4"
-	cost = 200
+	cost = 20
 
 /obj/item/fishing_rod
 	name = "fishing rod"
