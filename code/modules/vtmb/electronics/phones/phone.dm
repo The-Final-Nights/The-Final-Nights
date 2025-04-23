@@ -1,4 +1,4 @@
-/proc/create_unique_phone_number(var/exchange = 513)
+/proc/create_unique_phone_number(exchange = 513)
 	if(length(GLOB.subscribers_numbers_list) < 1)
 		create_subscribers_numbers()
 	var/subscriber_code = pick(GLOB.subscribers_numbers_list)
@@ -518,7 +518,7 @@
 				if(L)
 					to_chat(L, "<span class='notice'>Some important contacts in your phone work again.</span>")
 
-/obj/item/vamp/phone/proc/Recall(var/obj/item/vamp/phone/abonent, var/mob/usar)
+/obj/item/vamp/phone/proc/Recall(obj/item/vamp/phone/abonent, mob/usar)
 	if(last_call+100 <= world.time && !talking)
 		last_call = 0
 		if(online)
@@ -597,8 +597,8 @@
 	open_state = "redphone"
 	closed_state = "redphone"
 	folded_state = "redphone"
-	var/obj/machinery/p25transceiver/clinic_transciever
-	var/obj/machinery/p25transceiver/police_transciever
+	var/obj/machinery/p25transceiver/clinic_transceiver
+	var/obj/machinery/p25transceiver/police_transceiver
 
 /obj/item/vamp/phone/emergency/Initialize()
 	. = ..()

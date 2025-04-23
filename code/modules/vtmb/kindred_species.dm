@@ -381,7 +381,7 @@
 					if(!childe.can_be_embraced)
 						to_chat(sire, span_notice("[childe.name] doesn't respond to your Vitae."))
 						return
-					 // If they've been dead for more than 5 minutes, then nothing happens.
+					// If they've been dead for more than 5 minutes, then nothing happens.
 					if((childe.timeofdeath + 5 MINUTES) > world.time)
 						if(childe.auspice?.level) //here be Abominations
 							if(childe.auspice.force_abomination)
@@ -501,7 +501,7 @@
 					log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
 
 					if(length(regnant.reagents?.reagent_list))
-						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = H, methods = VAMPIRE)
+						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = regnant, methods = VAMPIRE)
 					thrall.adjustBruteLoss(-25, TRUE)
 					if(length(thrall.all_wounds))
 						var/datum/wound/W = pick(thrall.all_wounds)
@@ -523,7 +523,7 @@
 					if(thrall.mind)
 						if(thrall.mind.enslaved_to != owner)
 							thrall.mind.enslave_mind_to_creator(owner)
-							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [H]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
+							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [regnant]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
 							new_master = TRUE
 					if(isghoul(thrall))
 						var/datum/species/ghoul/ghoul = thrall.dna.species
@@ -688,7 +688,7 @@
  * * source - The Kindred whose organ has been removed.
  * * organ - The organ which has been removed.
  */
-/datum/species/kindred/proc/lose_organ(var/mob/living/carbon/human/source, var/obj/item/organ/organ)
+/datum/species/kindred/proc/lose_organ(mob/living/carbon/human/source, obj/item/organ/organ)
 	SIGNAL_HANDLER
 
 	if (istype(organ, /obj/item/organ/heart))
@@ -696,7 +696,7 @@
 			if (!source.getorganslot(ORGAN_SLOT_HEART))
 				source.death()
 
-/datum/species/kindred/proc/slip_into_torpor(var/mob/living/carbon/human/source)
+/datum/species/kindred/proc/slip_into_torpor(mob/living/carbon/human/source)
 	SIGNAL_HANDLER
 
 	to_chat(source, span_warning("You can feel yourself slipping into Torpor. You can use succumb to immediately sleep..."))

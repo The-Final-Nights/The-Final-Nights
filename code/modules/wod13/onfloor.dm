@@ -3,7 +3,7 @@
 	var/onflooricon_state
 	var/body_worn = FALSE
 
-/obj/item/proc/update_bodyfied(var/mob/living/carbon/human/human)
+/obj/item/proc/update_bodyfied(mob/living/carbon/human/human)
 	if(body_worn)
 		if(human.body_sprite)
 			worn_icon = human.body_sprite

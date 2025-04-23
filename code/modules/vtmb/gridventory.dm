@@ -877,8 +877,8 @@ VENTORY!
 	grid_height = 1 GRID_BOXES
 
 /obj/item/melee/vampirearms/machete
-    grid_width = 3 GRID_BOXES
-    grid_height = 1 GRID_BOXES
+	grid_width = 3 GRID_BOXES
+	grid_height = 1 GRID_BOXES
 
 /obj/item/melee/vampirearms/rapier
 	grid_width = 2 GRID_BOXES

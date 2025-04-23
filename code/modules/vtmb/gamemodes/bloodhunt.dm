@@ -32,7 +32,7 @@ SUBSYSTEM_DEF(bloodhunt)
 			if(iskindred(H) || isghoul(H))
 				H.clear_alert("bloodhunt")
 
-/datum/controller/subsystem/bloodhunt/proc/announce_hunted(var/mob/living/target, var/reason)
+/datum/controller/subsystem/bloodhunt/proc/announce_hunted(mob/living/target, reason)
 	if(!ishuman(target))
 		return
 	var/mob/living/carbon/human/H = target

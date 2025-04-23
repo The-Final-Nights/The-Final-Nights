@@ -183,10 +183,10 @@
 	masquerade_violating = TRUE
 
 /obj/item/clothing/head/vampire/hardhat
-    name = "construction helmet"
-    desc = "A thermoplastic hard helmet used to protect the head from injury."
-    icon_state = "hardhat"
-    armor = list(MELEE = 20, BULLET = 5, LASER = 0, ENERGY = 0, BOMB = 10, BIO = 0, RAD = 0, FIRE = 5, ACID = 0, WOUND = 15)
+	name = "construction helmet"
+	desc = "A thermoplastic hard helmet used to protect the head from injury."
+	icon_state = "hardhat"
+	armor = list(MELEE = 20, BULLET = 5, LASER = 0, ENERGY = 0, BOMB = 10, BIO = 0, RAD = 0, FIRE = 5, ACID = 0, WOUND = 15)
 
 /obj/item/clothing/head/vampire/eod
 	name = "EOD helmet"

@@ -44,7 +44,7 @@
 	else
 		walk_to(H, 0)
 
-/datum/species/vamp_mannequin/proc/do_spooky(var/mob/living/carbon/human/man)
+/datum/species/vamp_mannequin/proc/do_spooky(mob/living/carbon/human/man)
 	for(var/mob/living/L in range(7, man))
 		if(L.client)
 			man.face_atom(L)

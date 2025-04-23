@@ -12,9 +12,9 @@
 	/// The last entry in the list for a type of NPC should always have 100 as the index
 	var/static/list/role_weapons_chances = list(
 		BANDIT_TYPE_NPC = list(
-			 /obj/item/gun/ballistic/automatic/vampire/deagle = 33,
-			 /obj/item/gun/ballistic/vampire/revolver/snub = 33,
-			 /obj/item/melee/vampirearms/baseball = 100,
+			/obj/item/gun/ballistic/automatic/vampire/deagle = 33,
+			/obj/item/gun/ballistic/vampire/revolver/snub = 33,
+			/obj/item/melee/vampirearms/baseball = 100,
 		),
 		POLICE_TYPE_NPC = list(
 			/obj/item/gun/ballistic/vampire/revolver = 66,
@@ -340,7 +340,7 @@
 
 	var/is_criminal = FALSE
 
-/mob/living/carbon/human/npc/proc/AssignSocialRole(var/datum/socialrole/S, var/dont_random = FALSE)
+/mob/living/carbon/human/npc/proc/AssignSocialRole(datum/socialrole/S, var/dont_random = FALSE)
 	if(!S)
 		return
 	physique = rand(1, max_stat)
@@ -454,11 +454,11 @@
 	equipOutfit(O)
 	qdel(O)
 
-/mob/living/carbon/human/npc/proc/GetSayDelay(var/message)
+/mob/living/carbon/human/npc/proc/GetSayDelay(message)
 	var/delay = length_char(message)
 	return delay
 
-/mob/living/carbon/human/npc/proc/RealisticSay(var/message)
+/mob/living/carbon/human/npc/proc/RealisticSay(message)
 	walk(src,0)
 	if(!message)
 		return
@@ -479,7 +479,7 @@
 				say(message)
 				is_talking = FALSE
 
-/mob/living/carbon/human/npc/proc/Annoy(var/atom/source)
+/mob/living/carbon/human/npc/proc/Annoy(atom/source)
 	walk(src,0)
 	if(CheckMove())
 		return

@@ -3,11 +3,6 @@ GLOBAL_LIST_EMPTY(ghost_images_simple) //this is a list of all ghost images as t
 
 GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
-var/list/CMNoir = list(0.3,0.3,0.3,0,\
-			 		   0.3,0.3,0.3,0,\
-					   0.3,0.3,0.3,0,\
-					   0.0,0.0,0.0,1,)// [ChillRaccoon] - more about "color matrix" you can read in BYOND documentation
-
 /mob/dead/observer
 	name = "ghost"
 	//desc = "It's a g-g-g-g-ghooooost" //jinkies! //[ChillRaccon] - maggot

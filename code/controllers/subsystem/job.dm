@@ -65,7 +65,7 @@ SUBSYSTEM_DEF(job)
 
 	return TRUE
 
-/datum/controller/subsystem/job/proc/FreeRole(rank, var/mob/living/carbon/human/mob)
+/datum/controller/subsystem/job/proc/FreeRole(rank, mob/living/carbon/human/mob)
 	if(!rank)
 		return
 	var/datum/job/job = GetJob(rank)
