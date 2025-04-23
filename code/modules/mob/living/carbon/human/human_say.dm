@@ -25,6 +25,9 @@
 			return ("Unknown")
 		else
 			return real_name
+	var/obj/item/clothing/mask/M = wear_mask
+	if(M && M.conceals_voice && (M.flags_inv & HIDEFACE))
+		return ("[age2agedescription(age)] [gender]")
 	if(mind)
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(changeling?.mimicing )
@@ -80,7 +83,3 @@
 			return ITALICS | REDUCE_RANGE
 
 	return FALSE
-
-/mob/living/carbon/human/get_alt_name()
-	if(name != GetVoice())
-		return " (as [get_id_name("Unknown")])"

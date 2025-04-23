@@ -8,6 +8,7 @@
 	var/modifies_speech = FALSE
 	var/mask_adjusted = FALSE
 	var/adjusted_flags = null
+	var/conceals_voice = TRUE
 
 /obj/item/clothing/mask/attack_self(mob/user)
 	if((clothing_flags & VOICEBOX_TOGGLABLE))
@@ -82,3 +83,9 @@
 	if(user)
 		user.wear_mask_update(src, toggle_off = mask_adjusted)
 		user.update_action_buttons_icon() //when mask is adjusted out, we update all buttons icon so the user's potential internal tank correctly shows as off.
+
+//Toggles voice hiding.
+/obj/item/clothing/mask/AltClick(mob/user)
+	..()
+	conceals_voice = !conceals_voice
+	to_chat(user, span_notice("You are [conceals_voice ? "now" : "no longer"] concealing your voice!"))
