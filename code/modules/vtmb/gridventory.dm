@@ -1092,7 +1092,7 @@ VENTORY!
 	grid_width = 3 GRID_BOXES
 	grid_height = 1 GRID_BOXES
 
-/obj/item/food/fish/tune
+/obj/item/food/fish/tuna
 	grid_width = 2 GRID_BOXES
 	grid_height = 1 GRID_BOXES
 
