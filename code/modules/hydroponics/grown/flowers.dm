@@ -7,7 +7,7 @@
 	slot_flags = ITEM_SLOT_HEAD //Where you can equip it
 	bite_consumption_mod = 3 //How many bites to eat it
 	foodtypes = VEGETABLES | GROSS
-	distill_reagent = /datum/reagent/consumable/ethanol/vermouth
+	distill_reagent = /datum/reagent/consumable/ethanol
 
 /obj/item/seeds/template //seed template to make the flower template work. you can't specify a seed that doesn't exist.
 	name = "pack of testing seeds"

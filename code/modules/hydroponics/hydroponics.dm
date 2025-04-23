@@ -60,7 +60,6 @@
 	reagents.add_reagent(/datum/reagent/plantnutriment/eznutriment, 10) //Half filled nutrient trays for dirt trays to have more to grow with in prison/lavaland.
 	. = ..()
 
-
 /obj/machinery/hydroponics/constructable
 	name = "hydroponics tray"
 	icon = 'icons/obj/hydroponics/equipment.dmi'
@@ -812,6 +811,25 @@
 	if(warning == "Yes" && user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		reagents.clear_reagents()
 		to_chat(user, "<span class='warning'>You empty [src]'s nutrient tank.</span>")
+
+/obj/machinery/hydroponics/Click(location, control, params) //Due to the absence of wrenches, this permits you to un/anchor by hand.
+	var/list/modifiers = params2list(params)
+	if(!modifiers["right"])
+		return ..()
+
+	if(!ishuman(usr) || !usr.canUseTopic(src, BE_CLOSE))
+		return
+	var/mob/living/carbon/human/user = usr
+	if(do_after(user, 15))
+		playsound(src, 'sound/items/ratchet.ogg', 50, TRUE)
+		if(anchored)
+			to_chat(user, span_notice("You unsecure [src] from the ground."))
+			anchored = FALSE
+			return
+		else
+			to_chat(user, span_notice("You secure [src] to the ground."))
+			anchored = TRUE
+			return
 
 /**
  * Update Tray Proc
