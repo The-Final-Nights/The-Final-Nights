@@ -108,3 +108,17 @@
 			return "vamp11"
 		else
 			return value
+
+/proc/add_vitae_from_item(datum/source, amount_of_bloodpoints, var/plays_sound = FALSE)
+	SIGNAL_HANDLER
+	var/mob/living/carbon/human/H = source
+	H.bloodpool = min(H.maxbloodpool, H.bloodpool+amount_of_bloodpoints)
+	H.adjustBruteLoss(-10, TRUE)
+	H.adjustFireLoss(-10, TRUE)
+	H.update_damage_overlays()
+	H.update_health_hud()
+	if(iskindred(H))
+		H.update_blood_hud()
+	if(plays_sound)
+		playsound(H.loc,'sound/items/drink.ogg', 50, TRUE)
+	return
