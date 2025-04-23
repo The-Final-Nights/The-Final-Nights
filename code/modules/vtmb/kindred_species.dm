@@ -883,6 +883,8 @@
 	if(iskindred(being_bitten))
 		return COMPONENT_RESIST_VAMPIRE_KISS
 
+// Currently just used for the Organovore Quirk, might be handy for something else. Unsure where else to put it?
+
 /datum/species/kindred/proc/add_vitae_from_item(datum/source, var/amount_of_bloodpoints, var/plays_sound = FALSE)
 	SIGNAL_HANDLER
 
@@ -890,7 +892,6 @@
 
 	H.bloodpool = min(H.maxbloodpool, H.bloodpool+amount_of_bloodpoints)
 	H.adjustBruteLoss(-10, TRUE)
-	H.adjustFireLoss(-10, TRUE)
 	H.update_damage_overlays()
 	H.update_health_hud()
 	if(iskindred(H))
