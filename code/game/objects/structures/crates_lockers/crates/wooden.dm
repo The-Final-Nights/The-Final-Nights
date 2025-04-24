@@ -40,7 +40,7 @@
 	name = "community garden seeds"
 	desc = "It's marked with the San Francisco City Council stamp."
 
-/obj/structure/closet/crate/wooden/communitygardens/tools/PopulateContents()
+/obj/structure/closet/crate/wooden/communitygardens/seeds/PopulateContents()
 	. = ..()
 	new	/obj/item/seeds/cabbage(src)
 	new	/obj/item/seeds/peas(src)
