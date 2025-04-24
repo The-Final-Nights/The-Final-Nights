@@ -171,12 +171,18 @@
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05, /datum/reagent/fuel/oil = 0.05)
 
 ///Fraxinella Flowers.
-/obj/item/food/grown/flower/geranium/fraxinella //typically not found in America and thus lacks US Victorian Floriography.
+/obj/item/food/grown/flower/geranium/fraxinella //typically not found in America and thus lacks US Victorian Floriography. A modern subsitute was applied.
 	seed = /obj/item/seeds/poppy/geranium/fraxinella
 	name = "fraxinella"
 	desc = "A beautiful light pink flower."
 	icon_state = "fraxinella"
 	distill_reagent = /datum/reagent/ash
+
+/obj/item/food/grown/flower/fraxinella/examine(mob/user)
+	if(HAS_TRAIT(user, TRAIT_FLOWER_LANGUAGE))
+		. += span_subtle("Floriography speaks to you of Fire.")
+	if(HAS_TRAIT(user, TRAIT_FLOWER_LANGUAGE_JAPANESE))
+		. += span_subtle("You don't recall any expression from this flower in Hanakotoba.")
 
 // Harebell
 /obj/item/seeds/harebell
@@ -231,7 +237,7 @@
 	growing_icon = 'icons/obj/hydroponics/growing_flowers.dmi'
 	icon_grow = "sunflower-grow"
 	icon_dead = "sunflower-dead"
-	mutatelist = list(/obj/item/seeds/sunflower/moonflower, /obj/item/seeds/sunflower/novaflower)
+	mutatelist = list(/obj/item/seeds/sunflower/moonflower, /* /obj/item/seeds/sunflower/novaflower */)
 	reagents_add = list(/datum/reagent/consumable/cornoil = 0.08, /datum/reagent/consumable/nutriment = 0.04)
 
 /obj/item/grown/flower/sunflower // FLOWER POWER!
@@ -296,6 +302,9 @@
 	if(HAS_TRAIT(user, TRAIT_FLOWER_LANGUAGE_JAPANESE))
 		. += span_subtle("Hanakotoba expresses Willful promises.")
 
+/* Commenting this out because regrettably, a pyro flower on the vampire server would be funny but OP.
+Choosing not to delete it in case the example of its code is useful for something down the line.
+
 // Novaflower
 /obj/item/seeds/sunflower/novaflower
 	name = "pack of novaflower seeds"
@@ -357,3 +366,5 @@
 	if(!user.gloves)
 		to_chat(user, "<span class='danger'>The [name] burns your bare hand!</span>")
 		user.adjustFireLoss(rand(1, 5))
+*/
+
