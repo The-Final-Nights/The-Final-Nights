@@ -236,7 +236,7 @@ Dancer
 
 /datum/quirk/organovor
 	name = "Organovore"
-	desc = "The thought of drinking blood repulses you, you can only subsist off of organs, instead."
+	desc = "For one reason or another, blood doesn't sate your hunger. Organs will, though."
 	mob_trait = TRAIT_ORGANOVORE
 	value = -3
 	gain_text = "<span class='warning'>You have a craving for liver.</span>"

@@ -885,7 +885,7 @@
 
 // Currently just used for the Organovore Quirk, might be handy for something else. Unsure where else to put it?
 
-/datum/species/kindred/proc/add_vitae_from_item(datum/source, var/amount_of_bloodpoints, var/plays_sound = FALSE)
+/datum/species/kindred/proc/add_vitae_from_item(datum/source, amount_of_bloodpoints, plays_sound)
 	SIGNAL_HANDLER
 
 	var/mob/living/carbon/human/H = source

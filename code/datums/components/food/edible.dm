@@ -343,11 +343,11 @@ Behavior that's still missing from this component that original food items had t
 			var/obj/item/food/vampire/V = parent
 			V.got_biten()
 		if(!owner.reagents.total_volume)
-			On_Consume(eater, feeder)
+			on_consume(eater, feeder)
 		checkLiked(fraction, eater)
 
 		if(iskindred(eater) && HAS_TRAIT(eater, TRAIT_ORGANOVORE))
-			On_Consume(eater, feeder)
+			on_consume(eater, feeder)
 
 		//Invoke our after eat callback if it is valid
 		if(after_eat)
@@ -431,7 +431,7 @@ Behavior that's still missing from this component that original food items had t
 			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "fav_food", /datum/mood_event/favorite_food)
 
 ///Delete the item when it is fully eaten
-/datum/component/edible/proc/On_Consume(mob/living/eater, mob/living/feeder)
+/datum/component/edible/proc/on_consume(mob/living/eater, mob/living/feeder)
 	SEND_SIGNAL(parent, COMSIG_FOOD_CONSUMED, eater, feeder)
 
 	on_consume?.Invoke(eater, feeder)
