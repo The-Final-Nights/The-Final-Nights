@@ -234,7 +234,7 @@ Dancer
 	var/mob/living/carbon/H = quirk_holder
 	H.bloodquality = BLOOD_QUALITY_POTENT
 
-/datum/quirk/organovore
+/datum/quirk/organovor
 	name = "Organovore"
 	desc = "The thought of drinking blood repulses you, you can only subsist off of organs, instead."
 	mob_trait = TRAIT_ORGANOVORE

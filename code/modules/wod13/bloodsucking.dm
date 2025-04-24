@@ -105,8 +105,8 @@
 				return
 		if(HAS_TRAIT(src, TRAIT_ORGANOVORE)) // think this is fine?
 			mob.adjustBruteLoss(20, TRUE) // sharp teeth
-			to_chat(src, "<span class='warning'>You can't drink this disgusting <b>BLOOD</b>. Go find something meatier!</span>")
-			visible_message("<span class='danger'>[src] throws up!</span>", "<span class='userdanger'>You throw up!</span>")
+			to_chat(src, span_warning("You can't drink this disgusting <b>BLOOD</b>. Go find something meatier!"))
+			visible_message(span_warning("[src] throws up!</span>"), span_warning("You throw up!"))
 			playsound(get_turf(src), 'code/modules/wod13/sounds/vomit.ogg', 75, TRUE)
 			if(isturf(loc))
 				add_splatter_floor(loc)
