@@ -5022,13 +5022,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/trujah)
-"bpr" = (
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 1
-	},
-/turf/open/chasm,
-/area/vtm/forest)
 "bps" = (
 /mob/living/carbon/human/npc/guard,
 /obj/structure/chair/office{
@@ -12239,12 +12232,6 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/tzimisce_manor)
-"dlJ" = (
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0
-	},
-/turf/open/floor/plating/rough/cave,
-/area/vtm/forest)
 "dlM" = (
 /obj/machinery/light/red{
 	pixel_y = 32
@@ -22671,9 +22658,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/tzimisce_manor)
-"ggo" = (
-/turf/open/chasm,
-/area/vtm/forest)
 "ggr" = (
 /obj/item/food/burger/clown,
 /turf/open/floor/plating/vampplating/mono,
@@ -24700,18 +24684,6 @@
 "gGH" = (
 /obj/structure/flora/rock/pile/largejungle,
 /turf/open/floor/plating/vampgrass,
-/area/vtm/forest)
-"gGL" = (
-/obj/structure/small_vamprocks,
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 1
-	},
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
-/turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
 "gGP" = (
 /obj/effect/decal/bordur{
@@ -33063,14 +33035,6 @@
 /obj/effect/turf_decal/siding/wideplating/dark,
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/jazzclub)
-"iYm" = (
-/obj/structure/lattice,
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 1
-	},
-/turf/open/floor/fakepit,
-/area/vtm/forest)
 "iYp" = (
 /obj/structure/vampipe{
 	icon_state = "piping32"
@@ -35549,17 +35513,6 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
-"jHU" = (
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 1
-	},
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
-/turf/open/chasm,
-/area/vtm/forest)
 "jIa" = (
 /obj/machinery/light/dim{
 	pixel_y = 32
@@ -39034,17 +38987,6 @@
 	},
 /turf/closed/wall/vampwall,
 /area/vtm/interior/shop)
-"kFN" = (
-/obj/structure/lattice,
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0
-	},
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
-/turf/open/floor/fakepit,
-/area/vtm/forest)
 "kFO" = (
 /obj/effect/decal/cardboard,
 /obj/item/cigbutt,
@@ -46387,13 +46329,6 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/chantry)
-"mHQ" = (
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
-/turf/open/chasm,
-/area/vtm/forest)
 "mHT" = (
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk,
@@ -49039,10 +48974,6 @@
 	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
-"nso" = (
-/obj/structure/lattice,
-/turf/open/floor/fakepit,
-/area/vtm/forest)
 "nsu" = (
 /obj/structure/curtain,
 /turf/open/floor/plating/toilet,
@@ -51152,9 +51083,6 @@
 "nTr" = (
 /obj/effect/turf_decal/loading_area/red{
 	dir = 4
-	},
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0
 	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
@@ -67722,13 +67650,6 @@
 /obj/item/storage/box/drinkingglasses,
 /turf/open/floor/light,
 /area/vtm/interior/strip)
-"ske" = (
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 1
-	},
-/turf/open/floor/plating/rough/cave,
-/area/vtm/forest)
 "skg" = (
 /obj/structure/trashbag,
 /obj/structure/trashbag{
@@ -72499,14 +72420,6 @@
 /obj/item/instrument/piano_synth/headphones,
 /turf/open/floor/plating/sandy_dirt,
 /area/vtm/interior/bianchiBank)
-"tBJ" = (
-/obj/structure/lattice,
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
-/turf/open/floor/fakepit,
-/area/vtm/forest)
 "tBS" = (
 /obj/structure/fluff/hedge,
 /obj/structure/railing,
@@ -80049,17 +79962,6 @@
 /obj/item/bedsheet/random,
 /turf/open/floor/carpet/cyan,
 /area/vtm/hotel)
-"vGY" = (
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 1
-	},
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
-/turf/open/floor/plating/rough/cave,
-/area/vtm/forest)
 "vGZ" = (
 /obj/structure/fire_barrel,
 /obj/effect/decal/litter,
@@ -500662,9 +500564,9 @@ mIV
 mIV
 mIV
 jEJ
-ggo
-ggo
-gGL
+laE
+laE
+mGG
 loz
 gYr
 sDZ
@@ -500919,10 +500821,10 @@ mIV
 dhc
 mIV
 jEJ
-ggo
-ggo
-ggo
-vGY
+laE
+laE
+laE
+aKj
 laE
 cRj
 gYr
@@ -501176,11 +501078,11 @@ mIV
 dhc
 mIV
 jEJ
-ggo
-ggo
-ggo
-ggo
-ske
+laE
+laE
+laE
+laE
+laE
 sDZ
 gYr
 sDZ
@@ -501433,11 +501335,11 @@ mIV
 mIV
 mIV
 jEJ
-ggo
-ggo
-ggo
-ggo
-ske
+laE
+laE
+laE
+laE
+laE
 sDZ
 sDZ
 sDZ
@@ -501690,11 +501592,11 @@ jEJ
 jEJ
 jEJ
 jEJ
-ggo
-ggo
-ggo
-mHQ
-iYm
+laE
+laE
+laE
+laE
+laE
 laE
 qia
 qia
@@ -501947,12 +501849,12 @@ jEJ
 laE
 qia
 boS
-bpr
-ggo
-mHQ
-iYm
-tBJ
-aKj
+laE
+laE
+laE
+laE
+laE
+laE
 laE
 qia
 qia
@@ -502204,13 +502106,13 @@ jEJ
 qia
 gGH
 rmu
-jHU
-mHQ
-iYm
-kFN
-ggo
-ggo
-vGY
+laE
+laE
+laE
+laE
+laE
+laE
+laE
 sDZ
 qia
 qia
@@ -502462,13 +502364,13 @@ sUn
 sDZ
 wlZ
 xmp
-nso
-kFN
-ggo
-ggo
-ggo
-ggo
-ske
+laE
+laE
+laE
+laE
+laE
+laE
+laE
 gYr
 qia
 qia
@@ -502720,12 +502622,12 @@ sDZ
 clx
 hwy
 nTr
-ggo
-ggo
-ggo
-ggo
-ggo
-ske
+laE
+laE
+laE
+laE
+laE
+laE
 sDZ
 jqR
 sDZ
@@ -502976,10 +502878,10 @@ qia
 sDZ
 clx
 oQg
-dlJ
-mHQ
-ggo
-ggo
+laE
+laE
+laE
+laE
 jEJ
 jEJ
 jEJ
@@ -503234,9 +503136,9 @@ qia
 clx
 adX
 mGG
-dlJ
-mHQ
-ggo
+laE
+laE
+laE
 jEJ
 teP
 dyO
