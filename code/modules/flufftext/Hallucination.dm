@@ -377,7 +377,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		if(demon.Adjacent(target) && !charged)
 			charged = TRUE
 			target.Paralyze(6 SECONDS)
-			target.adjustStaminaLoss(500)
+			target.adjustStaminaLoss(200)
 			step_away(target, demon)
 			target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
 			STOP_PROCESSING(SSfastprocess, src)

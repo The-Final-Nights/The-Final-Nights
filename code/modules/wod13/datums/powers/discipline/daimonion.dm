@@ -25,13 +25,13 @@
 
 /datum/discipline_power/daimonion/sense_the_sin/activate(mob/living/carbon/human/target)
 	. = ..()
-	if(target.get_total_social() <= 3)
+	if(target.get_total_social() <= 2)
 		to_chat(owner, "Victim is not social or influencing.")
-	if(target.get_total_mentality() <= 3)
+	if(target.get_total_mentality() <= 2)
 		to_chat(owner, "Victim lacks appropiate willpower.")
-	if(target.get_total_physique() <= 3)
+	if(target.get_total_physique() <= 2)
 		to_chat(owner, "Victim's body is weak and feeble.")
-	if(target.get_total_dexterity() <= 3)
+	if(target.get_total_dexterity() <= 2)
 		to_chat(owner, "Victim's lacks coordination.")
 	if(isgarou(target))
 		to_chat(owner, "Victim's natural banishment is silver...")
@@ -172,9 +172,7 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/pre_activation_checks(mob/living/target)
-	var/mypower = owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	if((theirpower >= mypower) || (owner.generation > target.generation))
+	if(SSroll.storyteller_roll(user.get_total_social(), target.get_total_mentality(), mobs_to_show_output = user) == ROLL_SUCCESS)
 		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
 		return FALSE
 	return TRUE
@@ -182,9 +180,10 @@
 /datum/discipline_power/daimonion/fear_of_the_void_below/activate(mob/living/carbon/human/target)
 	. = ..()
 	to_chat(target, span_warning("Your mind is enveloped by your greatest fear!"))
-	if(!target.in_frenzy) // Cause target to frenzy
-		target.enter_frenzymod()
-		target.Paralyze(3 SECONDS)
+	if(prob(50)) // Stuns/Sleeps target
+		target.Paralyze(6 SECONDS)
+	else
+		target.Sleeping(6 SECONDS)
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/deactivate(mob/living/carbon/human/target)
 	. = ..()
@@ -255,6 +254,10 @@
 
 /datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
+	if(SSroll.storyteller_roll(user.get_total_mentality(), 6, mobs_to_show_output = user) == ROLL_SUCCESS)
+		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
+		return FALSE
+
 	to_chat(target, span_boldwarning("You hear an infernal laugh!"))
 	new /datum/hallucination/baali(target, TRUE)
 
@@ -285,6 +288,10 @@
 		if(chosencurse)
 			for(var/datum/curse/daimonion/C in curses)
 				if(C.name == chosencurse)
+					if(SSroll.storyteller_roll(user.get_total_social(), target.get_total_mentality(), mobs_to_show_output = user) == !ROLL_SUCCESS)
+						to_chat(owner, span_warning("Your mind fails to pierce their mind!"))
+						to_chat(target, span_warning("You resists something that tried to pierce your mind."))
+						return
 					C.activate(target)
 					owner.maxbloodpool -= C.bloodcurse
 					if(owner.bloodpool > owner.maxbloodpool)
