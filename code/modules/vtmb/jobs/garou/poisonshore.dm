@@ -318,6 +318,7 @@
 	title = "Endron Employee"
 	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf")
 	department_head = list("Endron International")
+	allowed_tribes = list("Black Spiral Dancers", "Ronin")
 	faction = "Vampire"
 	selection_color = "#015334"
 

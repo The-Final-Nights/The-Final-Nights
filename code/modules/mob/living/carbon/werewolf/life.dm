@@ -1,6 +1,7 @@
 #define UMBRA_VEIL_COOLDOWN 80 MINUTES
 #define CAERN_VEIL_COOLDOWN 120 MINUTES
 #define GAROU_BP_REGEN 60 SECONDS
+#define VEIL_COOLDOWN 20 SECONDS
 
 /mob/living/carbon/werewolf/Life()
 	update_icons()
@@ -75,7 +76,7 @@
 							adjust_veil(1, 3, -1)
 							last_veil_restore = world.time
 
-				if("Glasswalkers","Bone Gnawers","Children of Gaia")
+				if("Glass Walkers","Bone Gnawers","Children of Gaia")
 					if(istype(get_area(src), /area/vtm/interior/glasswalker))
 						if((last_veil_restore + CAERN_VEIL_COOLDOWN) <= world.time && src.masquerade < 5)
 							adjust_veil(1, 3, -1)
@@ -120,10 +121,13 @@
 		return
 	adjust_bodytemperature(BODYTEMP_HEATING_MAX) //If you're on fire, you heat up!
 
-/mob/living/carbon/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj)
+/mob/living/carbon/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, mob/living/carbon/vessel)
+	if(iswerewolf(src))
+		var/mob/living/carbon/player = transformator.human_form.resolve()
+		player.adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, src)
 	if(!GLOB.canon_event)
 		return
-	if(last_veil_adjusting+200 >= world.time)
+	if(next_veil_time >= world.time)
 		return
 	if(amount > 0)
 		if(HAS_TRAIT(src, TRAIT_VIOLATOR))
@@ -133,19 +137,21 @@
 			var/area/vtm/V = get_area(src)
 			if(V.zone_type != "masquerade")
 				return
-	last_veil_adjusting = world.time
+	next_veil_time = world.time + VEIL_COOLDOWN
 	if(!is_special_character(src))
+		if(!vessel)
+			vessel = src
 		if(amount < 0)
 			if(masquerade > 0 && masquerade > threshold)
-				SEND_SOUND(src, sound('code/modules/wod13/sounds/veil_violation.ogg', 0, 0, 75))
-				to_chat(src, "<span class='boldnotice'><b>VEIL VIOLATION</b></span>")
+				SEND_SOUND(vessel, sound('code/modules/wod13/sounds/veil_violation.ogg', 0, 0, 75))
+				to_chat(vessel, "<span class='boldnotice'><b>VEIL VIOLATION</b></span>")
 				if(masquerade+amount < threshold)
 					amount = threshold-masquerade
 				masquerade = max(0, masquerade+amount)
 		if(amount > 0)
 			if(masquerade < 5)
-				SEND_SOUND(src, sound('code/modules/wod13/sounds/humanity_gain.ogg', 0, 0, 75))
-				to_chat(src, "<span class='boldnotice'><b>VEIL REINFORCEMENT</b></span>")
+				SEND_SOUND(vessel, sound('code/modules/wod13/sounds/humanity_gain.ogg', 0, 0, 75))
+				to_chat(vessel, "<span class='boldnotice'><b>VEIL REINFORCEMENT</b></span>")
 				if(masquerade+amount > threshold)
 					amount = threshold-masquerade
 				masquerade = min(5, masquerade+amount)
@@ -153,49 +159,59 @@
 			var/random_renown = pick("Honor","Wisdom","Glory")
 			switch(random_renown)
 				if("Honor")
-					adjust_honor(random)
+					adjust_honor(random, vessel = vessel)
 				if("Glory")
-					adjust_glory(random)
+					adjust_glory(random, vessel = vessel)
 				if("Wisdom")
-					adjust_wisdom(random)
+					adjust_wisdom(random, vessel = vessel)
 		else
 			if(honoradj)
-				adjust_honor(honoradj)
+				adjust_honor(honoradj, vessel = vessel)
 			if(gloryadj)
-				adjust_glory(gloryadj)
+				adjust_glory(gloryadj, vessel = vessel)
 			if(wisdomadj)
-				adjust_wisdom(wisdomadj)
+				adjust_wisdom(wisdomadj, vessel = vessel)
 
-/mob/living/carbon/proc/adjust_honor(var/amount,var/threshold)
+		if(src in GLOB.masquerade_breakers_list)
+			if(masquerade > 2)
+				GLOB.masquerade_breakers_list -= src
+		else if(masquerade < 3)
+			GLOB.masquerade_breakers_list |= src
+
+/mob/living/carbon/proc/adjust_honor(amount, threshold, mob/living/carbon/vessel)
 	if(!GLOB.canon_event)
 		return
 	if(!is_special_character(src))
+		if(!vessel)
+			vessel = src
 		if(amount < 0)
 			if(honor <= threshold)
 				return
 			if(honor+amount <= threshold)
 				amount = (threshold-honor)
-			to_chat(src,span_userdanger("You feel ashamed!"))
+			to_chat(vessel, span_userdanger("You feel ashamed!"))
 			honor = max(0, honor+amount)
 			if(renownrank > AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(src,span_userdanger("You are now a [RankName(src.renownrank)]."))
+				to_chat(vessel, span_userdanger("You are now a [RankName(src.renownrank)]."))
 		if(amount > 0)
 			if(honor >= threshold)
 				return
 			if(honor+amount >= threshold)
 				amount = (threshold-honor)
-			to_chat(src,span_bold("You feel vindicated!"))
+			to_chat(vessel, span_bold("You feel vindicated!"))
 			honor = min(10, honor+amount)
 			if(renownrank < AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(src,span_boldnotice("You are now a [RankName(src.renownrank)]."))
+				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
 
 
-/mob/living/carbon/proc/adjust_glory(var/amount,var/threshold)
+/mob/living/carbon/proc/adjust_glory(amount, threshold, mob/living/carbon/vessel)
 	if(!GLOB.canon_event)
 		return
 	if(!is_special_character(src))
+		if(!vessel)
+			vessel = src
 		if(amount < 0)
 			if(glory <= threshold)
 				return
@@ -205,44 +221,44 @@
 			glory = max(0, glory+amount)
 			if(renownrank > AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(src,span_userdanger("You are now a [RankName(src.renownrank)]."))
+				to_chat(vessel, span_userdanger("You are now a [RankName(src.renownrank)]."))
 		if(amount > 0)
 			if(glory >= threshold)
 				return
 			if(glory+amount >= threshold)
 				amount = (threshold-glory)
-			to_chat(src,span_bold("You feel brave!"))
+			to_chat(vessel, span_bold("You feel brave!"))
 			glory = min(10, glory+amount)
 			if(renownrank < AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(src,span_boldnotice("You are now a [RankName(src.renownrank)]."))
+				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
 
-/mob/living/carbon/proc/adjust_wisdom(var/amount,var/threshold)
+/mob/living/carbon/proc/adjust_wisdom(amount, threshold, mob/living/carbon/vessel)
 	if(!GLOB.canon_event)
 		return
 	if(!is_special_character(src))
+		if(!vessel)
+			vessel = src
 		if(amount < 0)
 			if(wisdom <= threshold)
 				return
 			if(wisdom+amount <= threshold)
 				amount = (threshold-wisdom)
-			to_chat(src,span_userdanger("You feel foolish!"))
+			to_chat(vessel, span_userdanger("You feel foolish!"))
 			wisdom = max(0, wisdom+amount)
 			if(renownrank > AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(src,span_userdanger("You are now a [RankName(src.renownrank)]."))
+				to_chat(vessel, span_userdanger("You are now a [RankName(src.renownrank)]."))
 		if(amount > 0)
 			if(wisdom >= threshold)
 				return
 			if(wisdom+amount >= threshold)
 				amount = (threshold-wisdom)
-			to_chat(src,span_bold("You feel clever!"))
+			to_chat(vessel, span_bold("You feel clever!"))
 			wisdom = min(10, wisdom+amount)
 			if(renownrank < AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(src,span_boldnotice("You are now a [RankName(src.renownrank)]."))
-
-
+				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
 
 /mob/living/carbon/proc/AuspiceRankCheck(mob/living/carbon/user)
 	switch(auspice.name)
@@ -291,3 +307,4 @@
 #undef UMBRA_VEIL_COOLDOWN
 #undef CAERN_VEIL_COOLDOWN
 #undef GAROU_BP_REGEN
+#undef VEIL_COOLDOWN

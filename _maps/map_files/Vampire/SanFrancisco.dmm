@@ -37091,6 +37091,12 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
+"kdF" = (
+/obj/structure/curtain/cloth/fancy/mechanical{
+	id = 2005
+	},
+/turf/open/floor/plating/parquetry,
+/area/vtm/interior/theatre)
 "kdK" = (
 /obj/structure/hydrant,
 /turf/open/floor/plating/sidewalk,
@@ -189642,9 +189648,10 @@ buY
 ozy
 ozy
 ozy
-tvv
+kdF
 tvv
 mRK
+kdF
 lfk
 ppW
 ppW
@@ -486485,7 +486492,7 @@ jEJ
 jEJ
 jEJ
 jEJ
-kfi
+jEJ
 mIV
 mIV
 mIV
@@ -487012,7 +487019,7 @@ sDZ
 sDZ
 sDZ
 sDZ
-jEJ
+sDZ
 sDZ
 sDZ
 sDZ
@@ -487284,7 +487291,7 @@ sDZ
 ifX
 jEJ
 jEJ
-mIV
+jEJ
 mIV
 dhc
 dhc
@@ -488058,7 +488065,7 @@ sDZ
 sDZ
 jEJ
 jEJ
-kfi
+jEJ
 mIV
 mIV
 mIV
@@ -491159,7 +491166,7 @@ sDZ
 sDZ
 sDZ
 jEJ
-mIV
+jEJ
 mIV
 dhc
 dhc
@@ -504429,7 +504436,7 @@ dhc
 dhc
 mIV
 mIV
-kfi
+jEJ
 jEJ
 jEJ
 sDZ

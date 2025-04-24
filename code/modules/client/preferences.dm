@@ -1572,9 +1572,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(pref_species.name == "Werewolf")
 				if(tribe)
 					var/alloww = FALSE
-					for(var/i in job.allowed_tribes)
-						if(i == tribe.name)
-							alloww = TRUE
+					if(job.allowed_tribes.len)
+						for(var/i in job.allowed_tribes)
+							if(i == tribe.name)
+								alloww = TRUE
+					else
+						alloww = TRUE
+
 					if(!alloww && !bypass)
 						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[tribe.name] RESTRICTED\]</font></td></tr>"
 						continue
@@ -1586,7 +1590,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(!alloww && !bypass)
 						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[auspice.name] RESTRICTED\]</font></td></tr>"
 						continue
-				if((renownrank < job.minimal_renownrank) && !bypass)
+				var/renownlowed = TRUE
+				if(job.minimal_renownrank)
+					if((renownrank < job.minimal_renownrank) && !bypass)
+						renownlowed = FALSE
+				if(!renownlowed && !bypass)
 					HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_renownrank] RENOWN RANK REQUIRED\]</font></td></tr>"
 					continue
 			if((job_preferences[SSjob.overflow_role] == JP_LOW) && (rank != SSjob.overflow_role) && !is_banned_from(user.ckey, SSjob.overflow_role))
@@ -1774,7 +1782,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(species_restricted)
 						lock_reason = "[pref_species.name] restricted."
 						quirk_conflict = TRUE
-				if(length(Q.allowed_clans) && "Kindred" == pref_species.name)
+				if(Q.allowed_tribes.len && "Kindred" == pref_species.name)
 					var/clan_restricted = TRUE
 					for(var/i in Q.allowed_clans)
 						if(i == clane.name)
@@ -1782,7 +1790,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(clan_restricted)
 						lock_reason = "[clane.name] restricted."
 						quirk_conflict = TRUE
-				if(length(Q.allowed_tribes) && "Werewolf" == pref_species.name)
+				if(Q.allowed_tribes.len && "Werewolf" == pref_species.name)
 					var/tribe_restricted = TRUE
 					for(var/i in Q.allowed_tribes)
 						if(i == tribe.name)
@@ -2310,7 +2318,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
 
-					if(tribe.name == "Glasswalkers")
+					if(tribe.name == "Glass Walkers")
 						if(werewolf_scar == 9)
 							werewolf_scar = 0
 						else
@@ -3488,7 +3496,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.max_yin_chi = 1
 				character.yang_chi = 5 + (auspice_level * 2)
 				character.max_yang_chi = 5 + (auspice_level * 2)
-			if("Glasswalkers","Bone Gnawers")
+			if("Glass Walkers","Bone Gnawers")
 				character.yin_chi = 1 + auspice_level
 				character.max_yin_chi = 1 + auspice_level
 				character.yang_chi = 5 + auspice_level

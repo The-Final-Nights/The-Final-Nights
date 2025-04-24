@@ -162,7 +162,7 @@
 				switch(wolf.auspice.tribe.name)
 					if ("Galestalkers","Children of Gaia","Hart Wardens","Ghost Council","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Red Talons","Stargazers")
 						wyld_taint++
-					if ("Glasswalkers","Bone Gnawers","Shadow Lords")
+					if ("Glass Walkers","Bone Gnawers","Shadow Lords")
 						weaver_taint++
 					if ("Black Spiral Dancers")
 						wyrm_taint = VERY_TAINTED

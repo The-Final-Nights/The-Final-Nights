@@ -686,6 +686,9 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 
 	var/mob/living/living_victim = victim
+	if(iswerewolf(victim))
+		to_chat(src, span_warning("You probably shouldn't do that to a werewolf."))
+		return
 	if (istype(living_victim))
 		if(confirm == "Yes")
 			living_victim.gib()

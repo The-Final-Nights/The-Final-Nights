@@ -115,7 +115,7 @@
 	name = "Glasswalker Totem"
 	desc = "Gives power to all Garou of that tribe and steals it from others."
 	icon_state = "glassw"
-	tribe = "Glasswalkers"
+	tribe = "Glass Walkers"
 	totem_overlay_color = "#35b0ff"
 
 /obj/structure/werewolf_totem/spiral

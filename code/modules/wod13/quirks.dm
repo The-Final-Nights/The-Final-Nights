@@ -228,7 +228,7 @@ Dancer
 	gain_text = "<span class='warning'>You feel wrongness crawling beneath your skin.</span>"
 	lose_text = "<span class='notice'>You feel relief and warmth.</span>"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ronin","Glasswalkers","Ghost Council","Hart Wardens","Children of Gaia","Bone Gnawers","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Shadow Lords","Red Talons","Stargazers")
+	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers")
 
 /datum/quirk/illegal_identity
 	name = "Illegal Identity"
@@ -250,7 +250,7 @@ Dancer
 /datum/quirk/potent_blood/on_spawn()
 	var/mob/living/carbon/H = quirk_holder
 	H.bloodquality = BLOOD_QUALITY_POTENT
-	
+
 /datum/action/fly_upper
 	name = "Fly Up"
 	desc = "Fly to the upper level."

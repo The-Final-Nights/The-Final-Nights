@@ -79,20 +79,28 @@
 			H.transform = M
 			G.glabro = FALSE
 			H.update_icons()
+	var/datum/language_holder/garou_lang = trans.get_language_holder()
 	switch(form)
 		if("Lupus")
+			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
 			if(iscrinos(trans))
 				ntransform.Scale(0.75, 0.75)
 			if(ishuman(trans))
 				ntransform.Scale(1, 0.75)
 		if("Crinos")
+			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
 			if(islupus(trans))
-				ntransform.Scale(1.75, 1.75)
+				var/mob/living/carbon/werewolf/lupus/lupor = trans
+				if(lupor.hispo)
+					ntransform.Scale(0.95, 1.25)
+				else
+					ntransform.Scale(1, 1.75)
 			if(ishuman(trans))
 				ntransform.Scale(1.25, 1.5)
 		if("Homid")
+			garou_lang.remove_language(/datum/language/primal_tongue, FALSE, TRUE)
 			if(iscrinos(trans))
-				ntransform.Scale(0.75, 0.5)
+				ntransform.Scale(0.75, 0.75)
 			if(islupus(trans))
 				ntransform.Scale(1, 1.5)
 
@@ -182,10 +190,6 @@
 	lupus.nutrition = trans.nutrition
 	if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
 		lupus.wyrm_tainted = 1
-	if(HAS_TRAIT(trans, TRAIT_DOGWOLF))
-		lupus.is_dog = TRUE
-	else
-		lupus.is_dog = FALSE
 	lupus.mind = trans.mind
 	lupus.update_blood_hud()
 	transfer_damage(trans, lupus)
@@ -193,6 +197,9 @@
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	lupus.update_icons()
+	if(lupus.hispo)
+		lupus.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+		lupus.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 
 /datum/werewolf_holder/transformation/proc/transform_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/crinos/crinos)
 	PRIVATE_PROC(TRUE)

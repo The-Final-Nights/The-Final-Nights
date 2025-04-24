@@ -6,7 +6,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glasswalkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
 
 	total_positions = 3
 	spawn_positions = 3
@@ -66,7 +66,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glasswalkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
 
 	minimal_renownrank = 3
 	total_positions = 1
@@ -126,7 +126,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glasswalkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
 
 	total_positions = 1
 	spawn_positions = 1
@@ -185,7 +185,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glasswalkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
 
 	total_positions = 1
 	spawn_positions = 1
@@ -249,7 +249,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glasswalkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
 
 	total_positions = 5
 	spawn_positions = 5

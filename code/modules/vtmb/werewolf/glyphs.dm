@@ -7,45 +7,50 @@
     var/list/rituals = list()
 
 /obj/item/charcoal_stick/Initialize()
-    . = ..()
-    // Populate the rituals list with glyph objects
-    for(var/i in subtypesof(/obj/effect/decal/garou_glyph))
-        if(i)
-            var/obj/effect/decal/garou_glyph/G = new i(src)
-            rituals |= list(G)
+	. = ..()
+	// Populate the rituals list with glyph objects
+	for(var/i in subtypesof(/obj/effect/decal/garou_glyph))
+		if(i)
+			var/obj/effect/decal/garou_glyph/G = new i(src)
+			rituals |= list(G)
+			qdel(G)
 
 /obj/item/charcoal_stick/afterattack(atom/target, mob/living/carbon/user, proximity)
-    . = ..()
-    var/site = get_turf(target)
-    if(!proximity || !isgarou(user))
-        return
-    if(rituals.len == 0)
-        user << "There are no glyphs available."
-        return
+	if(!proximity || !isgarou(user))
+		return
 
-    var/list/glyph_names = list()
-    for(var/obj/effect/decal/garou_glyph/glyph in rituals)
-        if(isgarou(user))
-            glyph_names += glyph.garou_name
-        else
-            glyph_names += glyph.name
+	if(rituals.len == 0)
+		to_chat(user, span_notice("There are no glyphs available."))
+		return
 
-    var/choice = input(user, "Select a glyph to draw.", "Glyph Selection") in glyph_names
-    if(choice)
-        var/obj/effect/decal/garou_glyph/drawn_glyph
-        for(var/obj/effect/decal/garou_glyph/glyph in rituals)
-            if((isgarou(user) && glyph.garou_name == choice) || (!isgarou(user) && glyph.name == choice))
-                drawn_glyph = glyph
-                break
+	if(!istype(target, /turf/open/floor))
+		return
 
-        if(drawn_glyph)
-            if(do_after(user, 5, user))
-                if(get_dist(user, site) <= 1)
-                    new drawn_glyph.type(site)
-                    user.visible_message("<span class='notice'>[user] starts drawing a glyph onto [site]...</span>")
-                else
-                    user.visible_message("<span class='notice'>You fail to draw a glyph.</span>")
-    return
+	var/list/glyph_names = list()
+
+	for(var/obj/effect/decal/garou_glyph/glyph in rituals)
+		glyph_names += glyph.garou_name
+
+	var/choice = input(user, "Select a glyph to draw.", "Glyph Selection") in glyph_names
+	if(choice)
+		var/obj/effect/decal/garou_glyph/drawn_glyph
+		for(var/obj/effect/decal/garou_glyph/glyph_ritual in rituals)
+			if(glyph_ritual.garou_name == choice)
+				drawn_glyph = glyph_ritual
+				break
+
+		if(drawn_glyph)
+			user.visible_message(span_notice("[user] starts to scrape a glyph into the ground..."), \
+			span_notice("You begin to etch the spirals and lines of your chosen glyph..."))
+
+			if(do_after(user, 5 SECONDS, target))
+				new drawn_glyph.type(target)
+				user.visible_message(span_notice("[user] finishes up their rune."), \
+				span_notice("You put the finishing touches on your rune, as it marks the ground before you."))
+			else
+				user.visible_message(span_notice("[user] slips, smduges and ruins their glyph."), \
+				span_notice("You mess it up, the glyph turning into nothing more than a smear upon the ground."))
+	. = ..()
 
 /obj/effect/decal/garou_glyph
     name = "Odd Glyph"

@@ -347,13 +347,16 @@
 					return JOB_AVAILABLE
 			return JOB_UNAVAILABLE_CLAN
 	if((client.prefs.pref_species.name == "Werewolf") && !bypass)
-		if(client.prefs.tribe)
-			for(var/i in job.allowed_tribes)
-				if(i == client.prefs.tribe)
-					return JOB_AVAILABLE
-			return JOB_UNAVAILABLE_TRIBE
-		if((client.prefs.renownrank < job.minimal_renownrank) && !bypass)
-			return JOB_UNAVAILABLE_RANK
+
+		if(client.prefs.tribe && !bypass)
+			if(job.allowed_tribes.len)
+				if(!job.allowed_tribes.Find(client.prefs.tribe.name))
+					return JOB_UNAVAILABLE_RANK
+
+		if(job.minimal_renownrank && !bypass)
+			if(client.prefs.renownrank < job.minimal_renownrank)
+				return JOB_UNAVAILABLE_RANK
+
 	return JOB_AVAILABLE
 
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)

@@ -1,3 +1,5 @@
+#define DOGGY_ANIMATION_COOLDOWN 30 DECISECONDS
+
 /datum/action/gift
 	icon_icon = 'code/modules/wod13/werewolf_abilities.dmi'
 	button_icon = 'code/modules/wod13/werewolf_abilities.dmi'
@@ -435,26 +437,45 @@
 	if(allowed_to_proceed)
 		var/mob/living/carbon/werewolf/lupus/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+		var/matrix/ntransform = matrix(owner.transform)
 		if(H.hispo)
-			H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
-			H.pixel_w = 0
-			H.pixel_z = 0
-			H.melee_damage_lower = initial(H.melee_damage_lower)
-			H.melee_damage_upper = initial(H.melee_damage_upper)
-			H.hispo = FALSE
-			H.update_icons()
-			H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
-			H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+			ntransform.Scale(0.95, 0.95)
+			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(trans_doggy), H), DOGGY_ANIMATION_COOLDOWN)
 		else
-			H.icon = 'code/modules/wod13/hispo.dmi'
-			H.pixel_w = -16
-			H.pixel_z = -16
-			H.melee_damage_lower = 35
-			H.melee_damage_upper = 55
-			H.hispo = TRUE
-			H.update_icons()
-			H.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
-			H.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+			ntransform.Scale(1.05, 1.05)
+			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(trans_hispo), H), DOGGY_ANIMATION_COOLDOWN)
+
+/datum/action/gift/hispo/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
+		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
+	else
+		H.icon = 'code/modules/wod13/tfn_lupus.dmi'
+	H.pixel_w = 0
+	H.pixel_z = 0
+	H.melee_damage_lower = initial(H.melee_damage_lower)
+	H.melee_damage_upper = initial(H.melee_damage_upper)
+	H.hispo = FALSE
+	H.regenerate_icons()
+	H.update_transform()
+	animate(H, transform = null, color = "#FFFFFF", time = 1)
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+
+/datum/action/gift/hispo/proc/trans_hispo(mob/living/carbon/werewolf/lupus/H)
+	H.icon = 'code/modules/wod13/hispo.dmi'
+	H.pixel_w = -16
+	H.pixel_z = -16
+	H.melee_damage_lower = 35
+	H.melee_damage_upper = 55
+	H.hispo = TRUE
+	H.regenerate_icons()
+	H.update_transform()
+	animate(H, transform = null, color = "#FFFFFF", time = 1)
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+	H.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+
 
 /datum/action/gift/glabro
 	name = "Glabro Form"
@@ -506,31 +527,31 @@
 	var/list/howls = list(
 		"attack" = list(
 			"menu" = "Attack",
-			"message" = "A wolf howls a fierce call to attack!"
+			"message" = "A wolf howls a fierce call to attack"
 		),
 		"retreat" = list(
 			"menu" = "Retreat",
-			"message" = "A wolf howls a warning to retreat!"
+			"message" = "A wolf howls a warning to retreat"
 		),
 		"help" = list(
 			"menu" = "Help",
-			"message" = "A wolf howls a desperate plea for help!"
+			"message" = "A wolf howls a desperate plea for help"
 		),
 		"gather" = list(
 			"menu" = "Gather",
-			"message" = "A wolf howls to gather the pack!"
+			"message" = "A wolf howls to gather the pack"
 		),
 		"victory" = list(
 			"menu" = "Victory",
-			"message" = "A wolf howls in celebration of victory!"
+			"message" = "A wolf howls in celebration of victory"
 		),
 		"dying" = list(
 			"menu" = "Dying",
-			"message" = "A wolf howls in pain and despair!"
+			"message" = "A wolf howls in pain and despair"
 		),
 		"mourning" = list(
 			"menu" = "Mourning",
-			"message" = "A wolf howls in deep mourning for the fallen!"
+			"message" = "A wolf howls in deep mourning for the fallen"
 		)
 	)
 
@@ -557,8 +578,68 @@
 				message = replacetext(message, "tribe", tribe)
 
 			C.emote("howl")
-			playsound(get_turf(C), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
+			var/origin_turf = get_turf(C)
+			playsound(origin_turf, pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 50, FALSE)
+			var/list/sound_hearers = list()
+
+			for(var/mob/living/carbon/HearingGarou in range(17))
+				if(isgarou(HearingGarou) || iswerewolf(HearingGarou))
+					sound_hearers += HearingGarou
+
+			var/howl_details
+			var/final_message
 			for(var/mob/living/carbon/Garou in GLOB.player_list)
-				if(isgarou(Garou) || iswerewolf(Garou))
-					playsound(get_turf(Garou), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
-					to_chat(Garou, message, confidential = TRUE)
+				if(isgarou(Garou) || iswerewolf(Garou) && !owner)
+					if(!sound_hearers.Find(Garou))
+						Garou.playsound_local(get_turf(Garou), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 25, FALSE)
+					howl_details = get_message(Garou, origin_turf)
+					final_message = message + howl_details
+					to_chat(Garou, final_message, confidential = TRUE)
+
+
+/datum/action/gift/howling/proc/get_message(mob/living/carbon/Garou, turf/origin_turf)
+
+	var/distance = get_dist(Garou, origin_turf)
+	var/dirtext = " to the "
+	var/direction = get_dir(Garou, origin_turf)
+
+	switch(direction)
+		if(NORTH)
+			dirtext += "north"
+		if(SOUTH)
+			dirtext += "south"
+		if(EAST)
+			dirtext += "east"
+		if(WEST)
+			dirtext += "west"
+		if(NORTHWEST)
+			dirtext += "northwest"
+		if(NORTHEAST)
+			dirtext += "northeast"
+		if(SOUTHWEST)
+			dirtext += "southwest"
+		if(SOUTHEAST)
+			dirtext += "southeast"
+		else //Where ARE you.
+			dirtext = "although I cannot make out an exact direction"
+
+	var/disttext
+	switch(distance)
+		if(0 to 20)
+			disttext = " within 20 feet"
+		if(20 to 40)
+			disttext = " 20 to 40 feet away"
+		if(40 to 80)
+			disttext = " 40 to 80 feet away"
+		if(80 to 160)
+			disttext = " far"
+		else
+			disttext = " very far"
+
+	var/place = get_area_name(origin_turf)
+
+	var/returntext = "[disttext], [dirtext], at [place]."
+
+	return returntext
+
+#undef DOGGY_ANIMATION_COOLDOWN

@@ -5,11 +5,11 @@
 	flags = TONGUELESS_SPEECH
 	space_chance = 40
 	syllables = list(
-		"To", "lo", "of", "Li", "ka", "Ha", "He", "Ah", "ny", "ro",
-		"li", "Me", "Ad", "he", "Ah", "Um", "co", "Ga", "Gar", "fa",
-		"El", "Ra", "ia", "of", "os", "ra", "ta", "na", "ga", "Ho",
-		"Lu", "Lu", "Fe", "Zi", "Mo", "Sha", "Ru", "Te", "Vo", "Ni",
-		"Xa", "Jo", "Da", "Ku", "Pe", "Su", "Yo", "Ve", "Mi", "Ba"
+		"to", "lo", "of", "li", "ka", "ha", "he", "ah", "ny", "ro",
+		"li", "me", "ad", "he", "ah", "um", "co", "ga", "gar", "fa",
+		"el", "ra", "ia", "of", "os", "ra", "ta", "na", "ga", "ho",
+		"lu", "lu", "fe", "zi", "mo", "sha", "ru", "te", "vo", "ni",
+		"xa", "jo", "da", "ku", "pe", "su", "yo", "ve", "mi", "ba"
 	)
 	icon_state = "garou"
 	default_priority = 90
@@ -21,11 +21,11 @@
 	flags = TONGUELESS_SPEECH
 	space_chance = 40
 	syllables = list (
-		"Gra", "Grr", "Hru", "Rha", "Sha", "Zho", "Yip", "Whu", "Zar", "Ruk",
-		"Kra", "Hya", "Tza", "Ska", "Yrr", "Fru", "Thra", "Hwo", "Vra", "Snar",
-		"Kru", "Pha", "Gha", "Hro", "Tzo", "Wha", "Brak", "Thru", "Chur", "Dra",
-		"Vru", "Sna", "Yru", "Hru", "Yla", "Fro", "Rik", "Zru", "Skra", "Zhu",
-		"Kro", "Thro", "Zyi", "Sha", "Hza", "Mru", "Wru", "Bruk", "Hka", "Tza"
+		"gra", "grr", "gru", "gha", "sha", "zho", "yip", "whu", "zar", "ruk",
+		"kra", "hya", "tza", "ska", "yrr", "fru", "thra", "hwo", "vra", "snar",
+		"kru", "pha", "gha", "hro", "tzo", "wha", "brak", "thru", "chur", "dra",
+		"vru", "sna", "yru", "hru", "yla", "fro", "rik", "zru", "skra", "zhu",
+		"kro", "thro", "zyi", "sha", "hza", "mru", "wru", "bruk", "hka", "tza"
 	)
 	icon_state = "garou"
 	default_priority = 90
