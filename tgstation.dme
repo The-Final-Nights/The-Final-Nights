@@ -770,6 +770,7 @@
 #include "code\datums\proximity_monitor\fields\gravity.dm"
 #include "code\datums\proximity_monitor\fields\peaceborg_dampener.dm"
 #include "code\datums\proximity_monitor\fields\timestop.dm"
+#include "code\datums\proximity_monitor\fields\violation_check_aoe.dm"
 #include "code\datums\proximity_monitor\fields\void_storm.dm"
 #include "code\datums\quirks\_quirk.dm"
 #include "code\datums\quirks\good.dm"
