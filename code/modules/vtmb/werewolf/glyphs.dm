@@ -9,11 +9,7 @@
 /obj/item/charcoal_stick/Initialize()
 	. = ..()
 	// Populate the rituals list with glyph objects
-	for(var/i in subtypesof(/obj/effect/decal/garou_glyph))
-		if(i)
-			var/obj/effect/decal/garou_glyph/G = new i(src)
-			rituals |= list(G)
-			qdel(G)
+	rituals = GLOB.glyph_list
 
 /obj/item/charcoal_stick/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity || !isgarou(user))
