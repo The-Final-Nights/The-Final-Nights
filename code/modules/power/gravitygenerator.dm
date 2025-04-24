@@ -132,6 +132,9 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	var/current_overlay = null
 	var/broken_state = 0
 	var/setting = 1	//Gravity value when on
+	/// The gravity field created by the generator.
+	var/datum/proximity_monitor/advanced/gravity/gravity_field
+
 
 /obj/machinery/gravity_generator/main/Destroy() // If we somehow get deleted, remove all of our other parts.
 	investigate_log("was destroyed!", INVESTIGATE_GRAVITY)
@@ -283,7 +286,6 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 /obj/machinery/gravity_generator/main/proc/enable()
 	charging_state = POWER_IDLE
 	on = TRUE
-	update_use_power(ACTIVE_POWER_USE)
 
 	if (!SSticker.IsRoundInProgress())
 		return
@@ -300,7 +302,6 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 /obj/machinery/gravity_generator/main/proc/disable()
 	charging_state = POWER_IDLE
 	on = FALSE
-	update_use_power(IDLE_POWER_USE)
 
 	if (!SSticker.IsRoundInProgress())
 		return
@@ -315,7 +316,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	complete_state_update()
 
 /obj/machinery/gravity_generator/main/proc/complete_state_update()
-	update_appearance()
+	update_icon()
 	update_list()
 	updateUsrDialog()
 

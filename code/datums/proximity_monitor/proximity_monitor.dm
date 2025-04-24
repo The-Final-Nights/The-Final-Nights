@@ -9,8 +9,9 @@
 	var/ignore_if_not_on_turf
 	///The signals of the connect range component, needed to monitor the turfs in range.
 	var/static/list/loc_connections = list(
-		COMSIG_ATOM_ENTERED = .proc/on_entered,
-		COMSIG_ATOM_EXITED =.proc/on_uncrossed,
+		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
+		COMSIG_ATOM_EXITED = PROC_REF(on_uncrossed),
+		COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON = PROC_REF(on_initialized),
 	)
 
 /datum/proximity_monitor/New(atom/_host, range, _ignore_if_not_on_turf = TRUE)
@@ -28,14 +29,15 @@
 	if(new_receiver)
 		hasprox_receiver = new_receiver
 		if(new_receiver != new_host)
-			RegisterSignal(new_receiver, COMSIG_PARENT_QDELETING, .proc/on_host_or_receiver_del)
+			RegisterSignal(new_receiver, COMSIG_PARENT_QDELETING, PROC_REF(on_host_or_receiver_del))
 	else if(hasprox_receiver == host) //Default case
 		hasprox_receiver = new_host
 	host = new_host
-	RegisterSignal(new_host, COMSIG_PARENT_QDELETING, .proc/on_host_or_receiver_del)
-	var/static/list/containers_connections = list(COMSIG_MOVABLE_MOVED = .proc/on_moved)
+	RegisterSignal(new_host, COMSIG_PARENT_QDELETING, PROC_REF(on_host_or_receiver_del))
+	var/static/list/containers_connections = list(COMSIG_MOVABLE_MOVED = PROC_REF(on_moved), COMSIG_MOVABLE_Z_CHANGED = PROC_REF(on_z_change))
 	AddComponent(/datum/component/connect_containers, host, containers_connections)
-	RegisterSignal(host, COMSIG_MOVABLE_MOVED, .proc/on_moved)
+	RegisterSignal(host, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
+	RegisterSignal(host, COMSIG_MOVABLE_Z_CHANGED, PROC_REF(on_z_change))
 	set_range(current_range, TRUE)
 
 /datum/proximity_monitor/proc/on_host_or_receiver_del(datum/source)
@@ -61,6 +63,10 @@
 	if(source == host)
 		hasprox_receiver?.HasProximity(host)
 
+/datum/proximity_monitor/proc/on_z_change()
+	SIGNAL_HANDLER
+	return
+
 /datum/proximity_monitor/proc/set_ignore_if_not_on_turf(does_ignore = TRUE)
 	if(ignore_if_not_on_turf == does_ignore)
 		return
@@ -72,7 +78,12 @@
 	SIGNAL_HANDLER
 	return //Used by the advanced subtype for effect fields.
 
-/datum/proximity_monitor/proc/on_entered(atom/source, atom/movable/arrived)
+/datum/proximity_monitor/proc/on_entered(atom/source, atom/movable/arrived, turf/old_loc)
 	SIGNAL_HANDLER
 	if(source != host)
 		hasprox_receiver?.HasProximity(arrived)
+
+/datum/proximity_monitor/proc/on_initialized(turf/location, atom/created, init_flags)
+	SIGNAL_HANDLER
+	if(location != host)
+		hasprox_receiver?.HasProximity(created)

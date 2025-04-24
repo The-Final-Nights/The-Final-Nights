@@ -83,39 +83,6 @@
 	if(centered)
 		. += world.icon_size
 
-/**
- * Check if there is already a wall item on the turf loc
- * floor_loc = floor tile in front of the wall
- * dir_toward_wall = direction from the floor tile in front of the wall towards the wall
- * check_external = truthy if we should be checking against items coming out of the wall, rather than visually on top of the wall.
-**/
-/proc/check_wall_item(floor_loc, dir_toward_wall, check_external = 0)
-	var/wall_loc = get_step(floor_loc, dir_toward_wall)
-	for(var/obj/checked_object in floor_loc)
-		if(is_type_in_typecache(checked_object, GLOB.WALLITEMS_INTERIOR) && !check_external)
-			//Direction works sometimes
-			if(checked_object.dir == dir_toward_wall)
-				return TRUE
-
-			//Some stuff doesn't use dir properly, so we need to check pixel instead
-			//That's exactly what get_turf_pixel() does
-			if(get_turf_pixel(checked_object) == wall_loc)
-				return TRUE
-
-		if(is_type_in_typecache(checked_object, GLOB.WALLITEMS_EXTERIOR) && check_external)
-			if(checked_object.dir == dir_toward_wall)
-				return TRUE
-
-	//Some stuff is placed directly on the wallturf (signs).
-	//If we're only checking for external entities, we don't need to look though these.
-	if (check_external)
-		return FALSE
-	for(var/obj/checked_object in wall_loc)
-		if(is_type_in_typecache(checked_object, GLOB.WALLITEMS_INTERIOR))
-			if(checked_object.pixel_x == 0 && checked_object.pixel_y == 0)
-				return TRUE
-	return FALSE
-
 ///Forces the atom to take a step in a random direction
 /proc/random_step(atom/movable/moving_atom, steps, chance)
 	var/initial_chance = chance
@@ -247,15 +214,109 @@ rough example of the "cone" made by the 3 dirs checked
 	for(var/atom in atom_list)
 		if(!istype(atom, type))
 			continue
-		. += checked_atom.contents
+		var/distance = get_dist(source, atom)
+		if(!closest_atom)
+			closest_distance = distance
+			closest_atom = atom
+		else
+			if(closest_distance > distance)
+				closest_distance = distance
+				closest_atom = atom
+	return closest_atom
 
-///Returns a list of all locations (except the area) the movable is within.
-/proc/get_nested_locs(atom/movable/atom_on_location, include_turf = FALSE)
-	. = list()
-	var/atom/location = atom_on_location.loc
-	var/turf/our_turf = get_turf(atom_on_location)
-	while(location && location != our_turf)
-		. += location
-		location = location.loc
-	if(our_turf && include_turf) //At this point, only the turf is left, provided it exists.
-		. += our_turf
+///Returns a chosen path that is the closest to a list of matches
+/proc/pick_closest_path(value, list/matches = get_fancy_list_of_atom_types())
+	if (value == FALSE) //nothing should be calling us with a number, so this is safe
+		value = input("Enter type to find (blank for all, cancel to cancel)", "Search for type") as null|text
+		if (isnull(value))
+			return
+	value = trim(value)
+
+	var/random = FALSE
+	if(findtext(value, "?"))
+		value = replacetext(value, "?", "")
+		random = TRUE
+
+	if(!isnull(value) && value != "")
+		matches = filter_fancy_list(matches, value)
+
+	if(matches.len == 0)
+		return
+
+	var/chosen
+	if(matches.len == 1)
+		chosen = matches[1]
+	else if(random)
+		chosen = pick(matches) || null
+	else
+		chosen = input("Select a type", "Pick Type", matches[1]) as null|anything in sortList(matches)
+	if(!chosen)
+		return
+	chosen = matches[chosen]
+	return chosen
+
+///Creates new items inside an atom based on a list
+/proc/generate_items_inside(list/items_list, where_to)
+	for(var/each_item in items_list)
+		for(var/i in 1 to items_list[each_item])
+			new each_item(where_to)
+
+///Returns the atom type in the specified loc
+/proc/get(atom/loc, type)
+	while(loc)
+		if(istype(loc, type))
+			return loc
+		loc = loc.loc
+	return null
+
+/**
+ * Line of sight check!
+ * Spawns a dummy object and then iterates through each turf to see if it's blocked by something not handled by pass_args.
+ * Contains a mid_los_check, meant to be overriden by subtypes.
+ * args:
+ * * user = Origin to start at.
+ * * target = End point.
+ * * pass_args = pass_flags given to dummy object to allow it to ignore certain types of blockades.
+ */
+/proc/los_check(atom/movable/user, mob/target, pass_args = PASSTABLE|PASSGLASS|PASSGRILLE, datum/callback/mid_check)
+	var/turf/user_turf = user.loc
+	if(!istype(user_turf))
+		return FALSE
+	var/obj/dummy = new(user_turf)
+	dummy.pass_flags |= pass_args //Grille/Glass so it can be used through common windows
+	var/turf/previous_step = user_turf
+	var/first_step = TRUE
+	for(var/turf/next_step as anything in (get_line(user_turf, target) - user_turf))
+		if(first_step)
+			for(var/obj/blocker in user_turf)
+				if(!blocker.density || !(blocker.flags_1 & ON_BORDER_1))
+					continue
+				if(blocker.CanPass(dummy, get_dir(user_turf, next_step)))
+					continue
+				return FALSE // Could not leave the first turf.
+			first_step = FALSE
+		if(next_step.density)
+			qdel(dummy)
+			return FALSE
+		for(var/atom/movable/movable as anything in next_step)
+			if(!movable.CanPass(dummy, get_dir(next_step, previous_step)))
+				qdel(dummy)
+				return FALSE
+		if(mid_check?.Invoke(user, target, pass_args, next_step, dummy) == FALSE) // specify false as it may return null if there's no check
+			qdel(dummy)
+			return FALSE
+		previous_step = next_step
+	qdel(dummy)
+	return TRUE
+
+///Returns true if the src countain the atom target
+/atom/proc/contains(atom/target)
+	if(!target)
+		return FALSE
+	for(var/atom/location = target.loc, location, location = location.loc)
+		if(location == src)
+			return TRUE
+
+///A do nothing proc
+/proc/pass(...)
+	return
