@@ -24,5 +24,3 @@
 	new /obj/item/gun/ballistic/automatic/vampire/glock21(src)
 	new /obj/item/ammo_box/magazine/glock45acp(src)
 	new /obj/item/ammo_box/magazine/glock45acp(src)
-
-
