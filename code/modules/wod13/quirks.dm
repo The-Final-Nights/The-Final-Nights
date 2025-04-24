@@ -233,7 +233,7 @@ Dancer
 /datum/quirk/potent_blood/on_spawn()
 	var/mob/living/carbon/H = quirk_holder
 	H.bloodquality = BLOOD_QUALITY_POTENT
-	
+
 /datum/action/fly_upper
 	name = "Fly Up"
 	desc = "Fly to the upper level."
@@ -644,11 +644,8 @@ Dancer
 /datum/quirk/hardened_soles
 	name = "Hardened Soles"
 	desc = "Your feet callouses are so thick, you can walk barefoot across the state if you want to!"
+	mob_trait = TRAIT_HARDENED_SOLES
 	value = 2
-
-/datum/quirk/hardened_soles/on_spawn()
-	var/mob/living/carbon/human = quirk_holder
-	ADD_TRAIT(human, TRAIT_HARDENED_SOLES, ROUNDSTART_TRAIT)
 
 #undef SHORT
 #undef TALL
