@@ -130,7 +130,7 @@
 
 	var/mob/living/carbon/human/spawnee = H
 
-	if(M.client && (M.client.prefs.equipped_gear && M.client.prefs.equipped_gear.len))
+	if(M.client && (M.client.prefs.equipped_gear && length(M.client.prefs.equipped_gear)))
 		for(var/gear in M.client.prefs.equipped_gear)
 			var/datum/gear/G = GLOB.gear_datums[gear]
 			if(G)
@@ -172,17 +172,12 @@
 					to_chat(M, span_notice("Placing [G.display_name] in [placed_in.name]]"))
 				continue
 
-			if(H.equip_to_appropriate_slot(item))
-				to_chat(M, span_notice("Placing [G.display_name] in your inventory!"))
-				continue
 			if(H.put_in_hands(item))
 				to_chat(M, span_notice("Placing [G.display_name] in your hands!"))
 				continue
 
-			var/obj/item/storage/B = (locate() in H)
-			if(B)
-				G.spawn_item(B, owner = H)
-				to_chat(M, span_notice("Placing [G.display_name] in [B.name]!"))
+			if(H.equip_to_slot_if_possible(item, ITEM_SLOT_BACKPACK))
+				to_chat(M, span_notice("Placing [G.display_name] in your backpack!"))
 				continue
 
 			to_chat(M, span_danger("Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug."))

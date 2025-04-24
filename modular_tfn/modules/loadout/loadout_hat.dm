@@ -27,10 +27,12 @@
 
 /datum/gear/hat/beret/red
 	display_name = "beret, red"
+	description = "A stylish beret." // Consistency.
 	path = /obj/item/clothing/head/beret
 
 /datum/gear/hat/beret/black
 	display_name = "beret, black"
+	description = "A stylish beret." // Consistency.
 	path = /obj/item/clothing/head/beret/black
 
 // Beanie

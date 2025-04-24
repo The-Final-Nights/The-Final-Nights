@@ -27,3 +27,10 @@
 /datum/gear/neck/scarf/white
 	display_name = "scarf, white"
 	path = /obj/item/clothing/neck/vampire/scarf/white
+
+// Misc
+
+/datum/gear/neck/cross
+	display_name = "cross necklace"
+	description = "Brings you closer to God." // Original description was too long.
+	path = /obj/item/card/id/hunter // Fits on both neck and ID.
