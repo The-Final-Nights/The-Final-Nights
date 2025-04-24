@@ -11,9 +11,12 @@
 	show_verb_panel = FALSE
 	///Contains admin info. Null if client is not an admin.
 	var/datum/admins/holder = null
-	///Needs to implement InterceptClickOn(user,params,atom) proc
-	var/datum/click_intercept = null
-	///Used for admin AI interaction
+	var/datum/click_intercept = null // Needs to implement InterceptClickOn(user,params,atom) proc
+
+	/// Acts the same way holder does towards admin: it holds the mentor datum. if set, the client is a mentor.
+	var/datum/mentors/mentor_datum = null
+
+	/// Whether the client has ai interacting as a ghost enabled or not
 	var/AI_Interact = FALSE
 
 	///Used to cache this client's bans to save on DB queries
@@ -32,6 +35,8 @@
 	COOLDOWN_DECLARE(say_slowmode)
 	/// The last urgent ahelp that this player sent
 	COOLDOWN_DECLARE(urgent_ahelp_cooldown)
+	/// The last urgent ahelp that this player sent
+	COOLDOWN_DECLARE(staff_check_rate)
 
 		/////////
 		//OTHER//

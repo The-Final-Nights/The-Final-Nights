@@ -318,3 +318,5 @@
 
 //Stepping on glass shards immunity
 #define TRAIT_HARDENED_SOLES "trait_hardened_soles"
+//For handcuff breaking speed.
+#define TRAIT_CUFFBREAKER		"cuffbreaker"

@@ -300,3 +300,35 @@
 	name = "chauffeur hat"
 	desc = "A fine hat like that is well-earned by opening car doors for rich people and driving them around the city."
 	icon_state = "chauffeur"
+
+/obj/item/clothing/head/vampire/blackbag
+	name = "black bag"
+	desc = "Used by kidnappers, sadists, and three letter agencies. Easily fits over the head to obscure vision."
+	icon_state = "black_bag"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR
+	dynamic_hair_suffix = ""
+	dynamic_fhair_suffix = ""
+
+	flash_protect = FLASH_PROTECTION_WELDER
+	tint = 3
+
+/obj/item/clothing/head/vampire/blackbag/equipped(mob/living/carbon/human/user, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_HEAD)
+		user.become_blind("blindfold_[REF(src)]")
+
+/obj/item/clothing/head/vampire/blackbag/dropped(mob/living/carbon/human/user)
+	..()
+	user.cure_blind("blindfold_[REF(src)]")
+
+/obj/item/clothing/head/vampire/blackbag/attack(mob/living/target, mob/living/user)
+	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
+		to_chat(user, span_warning("Remove [target.p_their()] headgear first!"))
+		return
+	if(do_after(user, 0.5 SECONDS, target)) //Mainly to prevent black_bagging mid combat.
+		target.visible_message(span_warning("[user] forces [src] onto [target]'s head!"))
+		to_chat(target, span_bolddanger("[target] forces [src] onto your head!"))
+		target.emote("scream")
+		target.Stun(0.5 SECONDS)
+
+		target.equip_to_slot_if_possible(src, ITEM_SLOT_HEAD)

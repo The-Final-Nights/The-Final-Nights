@@ -484,6 +484,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_moth_markings"], features["moth_markings"])
 	READ_FILE(S["persistent_scars"] , persistent_scars)
 	READ_FILE(S["experience_used_on_character"], experience_used_on_character)
+	READ_FILE(S["derangement"], derangement)
 	READ_FILE(S["dharma_type"], dharma_type)
 	READ_FILE(S["dharma_level"], dharma_level)
 	READ_FILE(S["po_type"], po_type)
@@ -669,6 +670,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["moth_markings"] 	= sanitize_inlist(features["moth_markings"], GLOB.moth_markings_list, "None")
 	experience_used_on_character = sanitize_integer(experience_used_on_character, 0, 100000, 0)
 
+	derangement = sanitize_integer(derangement, 0, 1, 1)
+
 	persistent_scars = sanitize_integer(persistent_scars)
 
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
@@ -765,6 +768,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["flavor_text"], flavor_text)
 	WRITE_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	WRITE_FILE(S["ooc_notes"], ooc_notes)
+	WRITE_FILE(S["character_notes"], character_notes)
 	WRITE_FILE(S["friend_text"]			, friend_text)
 	WRITE_FILE(S["enemy_text"]			, enemy_text)
 	WRITE_FILE(S["lover_text"]			, lover_text)
@@ -815,6 +819,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_moth_markings"]		, features["moth_markings"])
 	WRITE_FILE(S["persistent_scars"]			, persistent_scars)
 	WRITE_FILE(S["experience_used_on_character"], experience_used_on_character)
+	WRITE_FILE(S["derangement"], derangement)
 	WRITE_FILE(S["dharma_type"], dharma_type)
 	WRITE_FILE(S["dharma_level"], dharma_level)
 	WRITE_FILE(S["po_type"], po_type)

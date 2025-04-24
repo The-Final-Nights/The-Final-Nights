@@ -20,6 +20,16 @@
  * Text sanitization
  */
 
+
+/// Removes all characters in `repl_chars`
+/proc/sanitize_simple(t,list/repl_chars = list("\n"="#","\t"="#"))
+	for(var/char in repl_chars)
+		var/index = findtext(t, char)
+		while(index)
+			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index + length(char))
+			index = findtext(t, char, index + length(char))
+	return t
+
 ///returns nothing with an alert instead of the message if it contains something in the ic filter, and sanitizes normally if the name is fine. It returns nothing so it backs out of the input the same way as if you had entered nothing.
 /proc/sanitize_name(target, allow_numbers = FALSE, cap_after_symbols = TRUE)
 	if(CHAT_FILTER_CHECK(target))
@@ -101,6 +111,22 @@
 	if(bad_chars.Find(text))
 		return null
 	return text
+
+/// Used to get a properly maximum length capped input.
+/proc/capped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as text|null
+	if(no_trim)
+		return copytext(name, 1, max_length)
+	else
+		return trim(name, max_length)
+
+/// Used to get a properly maximum length capped input, but this time multiline.
+/proc/capped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as message|null
+	if(no_trim)
+		return copytext(name, 1, max_length)
+	else
+		return trim(name, max_length)
 
 /**
  * Used to get a properly sanitized input. Returns null if cancel is pressed.

@@ -95,7 +95,8 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/respawn_character,
 	/datum/admins/proc/open_borgopanel,
 	/client/proc/log_viewer_new,
-	/client/proc/fax_panel /*send a paper to fax*/
+	/client/proc/fax_panel, /*send a paper to fax*/
+	/client/proc/openTicketManager
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
 GLOBAL_PROTECT(admin_verbs_ban)
@@ -209,7 +210,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	)
 GLOBAL_LIST_INIT(admin_verbs_possess, list(GLOBAL_PROC_REF(possess), GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)
-GLOBAL_LIST_INIT(admin_verbs_permissions, list(/client/proc/edit_admin_permissions))
+GLOBAL_LIST_INIT(admin_verbs_permissions, list(/client/proc/edit_admin_permissions, /client/proc/edit_mentors))
 GLOBAL_PROTECT(admin_verbs_permissions)
 GLOBAL_LIST_INIT(admin_verbs_poll, list(/client/proc/poll_panel))
 GLOBAL_PROTECT(admin_verbs_poll)
@@ -571,6 +572,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 						to_chat(C, "<b>You've been rewarded with [amount] experience points. Reason: \"[reason]\"</b>")
 
 						C.prefs.add_experience(amount)
+						C.prefs.save_preferences()
 						C.prefs.save_character()
 
 						message_admins("[ADMIN_LOOKUPFLW(usr)] rewarded [ADMIN_LOOKUPFLW(exper)] with [amount] experience points. Reason: [reason]")

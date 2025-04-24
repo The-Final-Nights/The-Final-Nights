@@ -209,7 +209,7 @@
 	if(is_signature)
 		field_text = signature_name
 	else if(is_date)
-		field_text = "[time2text(world.timeofday, "DD/MM")]/[GLOB.year_integer]"
+		field_text = "[time2text(world.timeofday, "DD/MM")]/[CURRENT_STATION_YEAR]"
 	else if(is_time)
 		field_text = time2text(world.timeofday, "hh:mm")
 

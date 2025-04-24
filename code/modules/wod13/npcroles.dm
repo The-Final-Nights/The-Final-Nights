@@ -1292,7 +1292,7 @@
 			for(var/obj/machinery/jukebox/J in range(5, src))
 				if(J)
 					hasjukebox = TRUE
-					if(J.active)
+					if(J.music_player)
 						if(prob(50))
 							dancefirst(src)
 						else
