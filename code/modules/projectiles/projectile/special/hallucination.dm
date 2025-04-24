@@ -22,10 +22,10 @@
 	var/hit_duration_wall
 
 /obj/projectile/hallucination/fire()
-	..()
 	fake_icon = image('icons/obj/projectiles.dmi', src, hal_icon_state, ABOVE_MOB_LAYER)
 	if(hal_target.client)
 		hal_target.client.images += fake_icon
+	return ..()
 
 /obj/projectile/hallucination/Destroy()
 	if(hal_target.client)
