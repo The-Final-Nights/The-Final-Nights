@@ -249,6 +249,24 @@
 			REMOVE_TRAIT(owner, TRAIT_DOGWOLF, src)
 			to_chat(owner, span_notice("You feel your lupine nature intensifying!"))
 
+		var/mob/living/carbon/werewolf/lupus/lopor = owner
+
+		if(lopor && !lopor.hispo)
+			playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+			var/matrix/ntransform = matrix(owner.transform)
+			ntransform.Scale(0.95, 0.95)
+			animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(trans_doggy), lopor), 3 SECONDS)
+
+/datum/action/gift/guise_of_the_hound/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
+		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
+	else
+		H.icon = 'code/modules/wod13/tfn_lupus.dmi'
+	H.regenerate_icons()
+	H.update_transform()
+	animate(H, transform = null, color = "#FFFFFF", time = 1)
+
 /datum/action/gift/infest
 	name = "Infest"
 	desc = "Call forth the vermin in the area to serve you against your enemies."

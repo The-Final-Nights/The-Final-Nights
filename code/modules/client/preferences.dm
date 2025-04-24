@@ -384,76 +384,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(6)
 			return "You're a Legendary NPC."
 
-/datum/preferences/proc/AuspiceRankUp(mob/user,currentrank)
-	switch(auspice.name)
-		if("Ahroun")
-			switch(renownrank)
-				if(0)
-					if(glory >= 2 && honor >= 1) return TRUE
-				if(1)
-					if(glory >= 4 && honor >= 1 && wisdom >= 1) return TRUE
-				if(2)
-					if(glory >= 6 && honor >= 3 && wisdom >= 1) return TRUE
-				if(3)
-					if(glory >= 9 && honor >= 4 && wisdom >= 2) return TRUE
-				if(4)
-					if(glory >= 10 && honor >= 9 && wisdom >= 4) return TRUE
-
-		if("Galliard")
-			switch(renownrank)
-				if(0)
-					if(glory >= 2 && wisdom >= 1) return TRUE
-				if(1)
-					if(glory >= 4 && wisdom >= 2) return TRUE
-				if(2)
-					if(glory >= 4 && honor >= 2 && wisdom >= 4) return TRUE
-				if(3)
-					if(glory >= 7 && honor >= 2 && wisdom >= 6) return TRUE
-				if(4)
-					if(glory >= 9 && honor >= 5 && wisdom >= 9) return TRUE
-
-		if("Philodox")
-			switch(renownrank)
-				if(0)
-					if(honor >= 3) return TRUE
-				if(1)
-					if(glory >= 1 && honor >= 4 && wisdom >= 1) return TRUE
-				if(2)
-					if(glory >= 2 && honor >= 6 && wisdom >= 2) return TRUE
-				if(3)
-					if(glory >= 3 && honor >= 8 && wisdom >= 4) return TRUE
-				if(4)
-					if(glory >= 4 && honor >= 10 && wisdom >= 9) return TRUE
-
-		if("Theurge")
-			switch(renownrank)
-				if(0)
-					if(wisdom >= 3) return TRUE
-				if(1)
-					if(glory >= 1 && wisdom >= 5) return TRUE
-				if(2)
-					if(glory >= 2 && honor >= 1 && wisdom >= 7) return TRUE
-				if(3)
-					if(glory >= 4 && honor >= 2 && wisdom >= 9) return TRUE
-				if(4)
-					if(glory >= 4 && honor >= 9 && wisdom >= 10) return TRUE
-
-		if("Ragabash")
-			switch(renownrank)
-				if(0)
-					if((glory+honor+wisdom) >= 3) return TRUE
-				if(1)
-					if((glory+honor+wisdom) >= 7) return TRUE
-				if(2)
-					if((glory+honor+wisdom) >= 13) return TRUE
-				if(3)
-					if((glory+honor+wisdom) >= 19) return TRUE
-				if(4)
-					if((glory+honor+wisdom) >= 25) return TRUE
-
-	return FALSE
-
-
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!SSatoms.initialized)
 		to_chat(user, span_warning("Please wait for the game to do a little more setup first...!"))
@@ -636,7 +566,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(canraise)
 						var/rank_cost = 50
 						dat += " <a href='byond://?_src_=prefs;preference=renownrank;task=input'>Raise Renown Rank ([rank_cost])</a><BR>"
-
+					else if(renownrank < MAX_PUBLIC_RANK)
+						var/renownrequirement = RenownRequirements()
+						dat += "<b>Needed To Raise Renown:</b> [renownrequirement]<BR>"
 					else
 						dat += "<BR>"
 				if("Ghoul")
@@ -1782,7 +1714,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(species_restricted)
 						lock_reason = "[pref_species.name] restricted."
 						quirk_conflict = TRUE
-				if(Q.allowed_tribes.len && "Kindred" == pref_species.name)
+				if(Q.allowed_clans.len && "Kindred" == pref_species.name)
 					var/clan_restricted = TRUE
 					for(var/i in Q.allowed_clans)
 						if(i == clane.name)
@@ -3708,3 +3640,196 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			return
 		else
 			custom_names[name_id] = sanitized_name
+
+/datum/preferences/proc/RenownRequirements()
+	var/gloryy = "Glory"
+	var/honorr = "Honor"
+	var/wisdomm = "Wisdom"
+	var/stringtoreturn
+	if(tribe.name == "Black Spiral Dancers")
+		gloryy = "Infamy"
+		honorr = "Power"
+		wisdomm = "Cunning"
+	switch(auspice.name)
+		if("Ahroun")
+			switch(renownrank)
+				if(0)
+					stringtoreturn = "2 [gloryy], 1 [honorr]"
+					return stringtoreturn
+
+				if(1)
+					stringtoreturn = "4 [gloryy], 1 [honorr], 1 [wisdomm]"
+					return stringtoreturn
+
+				if(2)
+					stringtoreturn = "6 [gloryy], 3 [honorr], 1 [wisdomm]"
+					return stringtoreturn
+
+				if(3)
+					stringtoreturn = "9 [gloryy], 4 [honorr], 2 [wisdomm]"
+					return stringtoreturn
+
+				if(4)
+					stringtoreturn = "10 [gloryy], 9 [honorr], 4 [wisdomm]"
+					return stringtoreturn
+
+
+		if("Galliard")
+			switch(renownrank)
+				if(0)
+					stringtoreturn = "2 [gloryy], 1 [wisdomm]"
+					return stringtoreturn
+
+				if(1)
+					stringtoreturn = "4 [gloryy], 2 [wisdomm]"
+					return stringtoreturn
+
+				if(2)
+					stringtoreturn = "4 [gloryy], 2[honorr], 4 [wisdomm]"
+					return stringtoreturn
+
+				if(3)
+					stringtoreturn = "7 [gloryy], 2 [honorr], 6 [wisdomm]"
+					return stringtoreturn
+
+				if(4)
+					stringtoreturn = "9 [gloryy], 5 [honorr], 9 [wisdomm]"
+					return stringtoreturn
+
+
+		if("Philodox")
+			switch(renownrank)
+				if(0)
+					stringtoreturn = "3 [honorr]"
+					return stringtoreturn
+
+				if(1)
+					stringtoreturn = "1 [gloryy], 4 [honorr], 1 [wisdomm]"
+					return stringtoreturn
+
+				if(2)
+					stringtoreturn = "2 [gloryy], 6 [honorr], 2 [wisdomm]"
+					return stringtoreturn
+
+				if(3)
+					stringtoreturn = "3 [gloryy], 6 [honorr], 4 [wisdomm]"
+					return stringtoreturn
+
+				if(4)
+					stringtoreturn = "4 [gloryy], 10 [honorr], 9 [wisdomm]"
+					return stringtoreturn
+
+
+		if("Theurge")
+			switch(renownrank)
+				if(0)
+					stringtoreturn = "3 [wisdomm]"
+					return stringtoreturn
+
+				if(1)
+					stringtoreturn = "1 [gloryy], 5 [wisdomm]"
+					return stringtoreturn
+
+				if(2)
+					stringtoreturn = "2 [gloryy], 1 [honorr], 7 [wisdomm]"
+					return stringtoreturn
+
+				if(3)
+					stringtoreturn = "4 [gloryy], 2 [honorr], 9 [wisdomm]"
+					return stringtoreturn
+
+				if(4)
+					stringtoreturn = "4 [gloryy], 9 [honorr], 10 [wisdomm]"
+					return stringtoreturn
+
+
+		if("Ragabash")
+			switch(renownrank)
+				if(0)
+					stringtoreturn = "3 Total"
+					return stringtoreturn
+
+				if(1)
+					stringtoreturn = "7 Total"
+					return stringtoreturn
+
+				if(2)
+					stringtoreturn = "13 Total"
+					return stringtoreturn
+
+				if(3)
+					stringtoreturn = "19 Total"
+					return stringtoreturn
+
+				if(4)
+					stringtoreturn = "25 Total"
+					return stringtoreturn
+
+/datum/preferences/proc/AuspiceRankUp()
+	switch(auspice.name)
+		if("Ahroun")
+			switch(renownrank)
+				if(0)
+					if(glory >= 2 && honor >= 1) return TRUE
+				if(1)
+					if(glory >= 4 && honor >= 1 && wisdom >= 1) return TRUE
+				if(2)
+					if(glory >= 6 && honor >= 3 && wisdom >= 1) return TRUE
+				if(3)
+					if(glory >= 9 && honor >= 4 && wisdom >= 2) return TRUE
+				if(4)
+					if(glory >= 10 && honor >= 9 && wisdom >= 4) return TRUE
+
+		if("Galliard")
+			switch(renownrank)
+				if(0)
+					if(glory >= 2 && wisdom >= 1) return TRUE
+				if(1)
+					if(glory >= 4 && wisdom >= 2) return TRUE
+				if(2)
+					if(glory >= 4 && honor >= 2 && wisdom >= 4) return TRUE
+				if(3)
+					if(glory >= 7 && honor >= 2 && wisdom >= 6) return TRUE
+				if(4)
+					if(glory >= 9 && honor >= 5 && wisdom >= 9) return TRUE
+
+		if("Philodox")
+			switch(renownrank)
+				if(0)
+					if(honor >= 3) return TRUE
+				if(1)
+					if(glory >= 1 && honor >= 4 && wisdom >= 1) return TRUE
+				if(2)
+					if(glory >= 2 && honor >= 6 && wisdom >= 2) return TRUE
+				if(3)
+					if(glory >= 3 && honor >= 8 && wisdom >= 4) return TRUE
+				if(4)
+					if(glory >= 4 && honor >= 10 && wisdom >= 9) return TRUE
+
+		if("Theurge")
+			switch(renownrank)
+				if(0)
+					if(wisdom >= 3) return TRUE
+				if(1)
+					if(glory >= 1 && wisdom >= 5) return TRUE
+				if(2)
+					if(glory >= 2 && honor >= 1 && wisdom >= 7) return TRUE
+				if(3)
+					if(glory >= 4 && honor >= 2 && wisdom >= 9) return TRUE
+				if(4)
+					if(glory >= 4 && honor >= 9 && wisdom >= 10) return TRUE
+
+		if("Ragabash")
+			switch(renownrank)
+				if(0)
+					if((glory+honor+wisdom) >= 3) return TRUE
+				if(1)
+					if((glory+honor+wisdom) >= 7) return TRUE
+				if(2)
+					if((glory+honor+wisdom) >= 13) return TRUE
+				if(3)
+					if((glory+honor+wisdom) >= 19) return TRUE
+				if(4)
+					if((glory+honor+wisdom) >= 25) return TRUE
+
+	return FALSE

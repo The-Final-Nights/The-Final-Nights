@@ -558,6 +558,11 @@
 /datum/action/gift/howling/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
+
+		if(istype(get_area(owner), /area/vtm/interior/penumbra))
+			to_chat(owner, span_warning("Your howl echoes and dissapates into the Umbra, it's sound blanketed by the spiritual energy of the Velvet Shadow."))
+			return
+
 		var/mob/living/carbon/C = owner
 		var/list/menu_options = list()
 		for (var/howl_key in howls)
