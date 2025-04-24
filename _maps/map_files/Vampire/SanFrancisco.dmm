@@ -57250,11 +57250,6 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
-"pNU" = (
-/obj/effect/turf_decal/siding/white,
-/obj/structure/vampdoor/npc,
-/turf/open/floor/plating/concrete,
-/area/vtm/interior/shop)
 "pNV" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -189384,7 +189379,7 @@ dQS
 dQS
 dQS
 dQS
-pNU
+mJk
 ewI
 ewI
 ewI
