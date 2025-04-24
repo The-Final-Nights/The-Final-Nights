@@ -172,7 +172,7 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/pre_activation_checks(mob/living/target)
-	if(SSroll.storyteller_roll(user.get_total_social(), target.get_total_mentality(), mobs_to_show_output = user) == ROLL_SUCCESS)
+	if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == ROLL_SUCCESS)
 		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
 		return FALSE
 	return TRUE
@@ -254,7 +254,7 @@
 
 /datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
-	if(SSroll.storyteller_roll(user.get_total_mentality(), 6, mobs_to_show_output = user) == ROLL_SUCCESS)
+	if(SSroll.storyteller_roll(owner.get_total_mentality(), 6, mobs_to_show_output = owner) == ROLL_SUCCESS)
 		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
 		return FALSE
 
@@ -288,7 +288,7 @@
 		if(chosencurse)
 			for(var/datum/curse/daimonion/C in curses)
 				if(C.name == chosencurse)
-					if(SSroll.storyteller_roll(user.get_total_social(), target.get_total_mentality(), mobs_to_show_output = user) == !ROLL_SUCCESS)
+					if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == !ROLL_SUCCESS)
 						to_chat(owner, span_warning("Your mind fails to pierce their mind!"))
 						to_chat(target, span_warning("You resists something that tried to pierce your mind."))
 						return
