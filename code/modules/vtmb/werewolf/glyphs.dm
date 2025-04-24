@@ -27,7 +27,7 @@
 	for(var/obj/effect/decal/garou_glyph/glyph in rituals)
 		glyph_names += glyph.garou_name
 
-	var/choice = input(user, "Select a glyph to draw.", "Glyph Selection") in glyph_names
+	var/choice = tgui_input_list(user, "Select a glyph to draw.", "Glyph Selection", glyph_names)
 	if(choice)
 		var/obj/effect/decal/garou_glyph/drawn_glyph
 		for(var/obj/effect/decal/garou_glyph/glyph_ritual in rituals)

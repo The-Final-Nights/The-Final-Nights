@@ -564,7 +564,7 @@
 			menu_options += howls[howl_key]["menu"]
 		menu_options += "Cancel"
 
-		var/choice = input(owner, "Select a howl to use!", "Howl Selection") in menu_options
+		var/choice = tgui_input_list(owner, "Select a howl to use!", "Howl Selection", menu_options)
 		if(choice && choice != "Cancel")
 			var/howl
 			for (var/howl_key in howls)

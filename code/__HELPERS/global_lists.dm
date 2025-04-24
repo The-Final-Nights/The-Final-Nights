@@ -64,16 +64,9 @@ GLOBAL_LIST_EMPTY(glyph_list)
 
 	for(var/spath in subtypesof(/obj/effect/decal/garou_glyph))
 		var/obj/effect/decal/garou_glyph/S = new spath()
-		GLOB.glyph_list |= spath
+		GLOB.glyph_list |= S
 		qdel(S)
-	sotList(GLOB.glyph_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
-
-
-		for(var/i in subtypesof(/obj/effect/decal/garou_glyph))
-		if(i)
-			var/obj/effect/decal/garou_glyph/G = new i(src)
-			rituals |= list(G)
-			qdel(G)
+	sortList(GLOB.glyph_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
 	// TFN EDIT ADDITION START: morality system
 	for(var/spath in subtypesof(/datum/morality))
