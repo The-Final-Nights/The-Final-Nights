@@ -1545,7 +1545,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			if(M.dna.species)
 				meleemod = M.dna.species.meleemod
 		if(user.get_total_physique() > 4)
-			meleemod = (meleemod/5)*(user.get_total_physique() + 1) //1.2x at Physique 5, increasing by 0.2x per point higher than that.
+			meleemod = (meleemod)+((user.get_total_physique() + 1)/5 - 1) //1.2x at Physique 5, increasing by 0.2x per point higher than that.
 	if(user != H)
 		if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armour_penetration))
 			return FALSE

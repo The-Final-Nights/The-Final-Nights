@@ -7,7 +7,8 @@
 
 /datum/discipline/dementation/post_gain()
 	. = ..()
-	owner.add_quirk(/datum/quirk/insanity)
+	if(!owner.has_quirk(/datum/quirk/derangement))
+		owner.add_quirk(/datum/quirk/derangement)
 
 /datum/discipline_power/dementation
 	name = "Dementation power name"
@@ -57,7 +58,7 @@
 
 		target.Stun(0.5 SECONDS)
 		target.emote("laugh")
-		owner.playsound_local(get_turf(H), pick('sound/items/SitcomLaugh1.ogg', 'sound/items/SitcomLaugh2.ogg', 'sound/items/SitcomLaugh3.ogg'), 100, FALSE)
+		owner.playsound_local(get_turf(target), pick('sound/items/SitcomLaugh1.ogg', 'sound/items/SitcomLaugh2.ogg', 'sound/items/SitcomLaugh3.ogg'), 100, FALSE)
 
 		if(target.body_position == STANDING_UP)
 			target.toggle_resting()
@@ -347,7 +348,7 @@
 
 	if(total_insanity_succeeded)
 		start_total_insanity_effect(target)
-		addtimer(CALLBACK(/proc/stop_total_insanity_effect, target), 20 SECONDS) 
+		addtimer(CALLBACK(PROC_REF(stop_total_insanity_effect), target), 20 SECONDS)
 
 		to_chat(owner, span_warning("You unravel [target]'s sanity, leaving them in a state of uncontrollable mania!"))
 		to_chat(target, span_danger("Reality fractures and collapses around you. You lash out blindly, unsure what’s real."))

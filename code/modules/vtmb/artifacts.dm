@@ -173,7 +173,7 @@
 
 /obj/item/vtm_artifact/daimonori/get_powers()
 	..()
-	owner.thaum_damage_plus = 20
+	owner.thaum_damage_plus = 10
 
 /obj/item/vtm_artifact/daimonori/remove_powers()
 	..()
