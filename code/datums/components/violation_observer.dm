@@ -2,7 +2,7 @@
 // Usually NPCs or cameras.
 /datum/component/violation_observer
 	dupe_mode = COMPONENT_DUPE_UNIQUE
-	var/datum/proximity_monitor/advanced/area_of_effect
+	var/datum/proximity_monitor/advanced/violation_check_aoe/area_of_effect
 	/// Time between us checking for violations
 	COOLDOWN_DECLARE(scan_cooldown)
 
