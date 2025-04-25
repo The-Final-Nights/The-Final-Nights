@@ -8,27 +8,13 @@
 		/datum/discipline/visceratika
 	)
 	alt_sprite = "gargoyle"
-	no_facial = TRUE
+	no_facial = FALSE
 	violating_appearance = TRUE
 	male_clothes = /obj/item/clothing/under/vampire/malkavian
 	female_clothes = /obj/item/clothing/under/vampire/malkavian
-	haircuts = list(
-		"Bald",
-		"Pyotr",
-		"Tau",
-		"Balding Hair",
-		"Boddicker",
-		"Feather",
-		"Gelled Back",
-		"Cornrows",
-		"Cornrows 2",
-		"Cornrow Bun",
-		"Cornrow Braid",
-		"Cornrow Tail"
-	)
 	current_accessory = "gargoyle_full"
-	accessories = list("gargoyle_full", "gargoyle_left", "gargoyle_right", "gargoyle_broken", "gargoyle_round", "none")
-	accessories_layers = list("gargoyle_full" = UNICORN_LAYER, "gargoyle_left" = UNICORN_LAYER, "gargoyle_right" = UNICORN_LAYER, "gargoyle_broken" = UNICORN_LAYER, "gargoyle_round" = UNICORN_LAYER, "none" = UNICORN_LAYER)
+	accessories = list("gargoyle_full", "gargoyle_left", "gargoyle_right", "gargoyle_broken", "gargoyle_round", "gargoyle_devil", "gargoyle_oni", "none")
+	accessories_layers = list("gargoyle_full" = UNICORN_LAYER, "gargoyle_left" = UNICORN_LAYER, "gargoyle_right" = UNICORN_LAYER, "gargoyle_broken" = UNICORN_LAYER, "gargoyle_round" = UNICORN_LAYER, "gargoyle_devil" = UNICORN_LAYER, "gargoyle_oni" = UNICORN_LAYER, "none" = UNICORN_LAYER)
 	whitelisted = FALSE
 
 /datum/vampireclane/gargoyle/on_gain(mob/living/carbon/human/H)
@@ -36,6 +22,15 @@
 	H.dna.species.wings_icon = "Gargoyle"
 	H.physiology.brute_mod = 0.8
 
-/datum/vampireclane/gargoyle/post_gain(mob/living/carbon/human/H)
+/datum/vampireclane/gargoyle/post_gain(mob/living/carbon/human/gargoyle)
 	..()
-	H.dna.species.GiveSpeciesFlight(H)
+	gargoyle.dna.species.GiveSpeciesFlight(gargoyle)
+
+	if(gargoyle.shoes)
+		qdel(gargoyle.shoes)
+	gargoyle.Digitigrade_Leg_Swap(FALSE) //TODO: Remove shoes first
+
+	gargoyle.remove_overlay(MARKS_LAYER)
+	var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "gargoyle_legs_n_tails", -MARKS_LAYER)
+	gargoyle.overlays_standing[MARKS_LAYER] = acc_overlay
+	gargoyle.apply_overlay(MARKS_LAYER)
