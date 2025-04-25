@@ -128,8 +128,9 @@
 /datum/discipline_power/dominate/command/activate(mob/living/target)
 	. = ..()
 
-	// Command is unique — we need the input first to determine difficulty
-	custom_command = input(owner, "What is your command?", "Dominate Command", "FORGET ABOUT IT")
+	custom_command = tgui_input_text(owner, "Dominate Command", "What is your command?", "FORGET ABOUT IT")
+	if (!custom_command)
+		return  // No message, no dominate
 
 	var/word_count = length(splittext(custom_command, " "))
 	var/extra_words_difficulty = 4 + max(0, word_count - 1) // Base 4 +1 per extra word
