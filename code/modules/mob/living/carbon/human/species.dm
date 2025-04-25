@@ -1751,16 +1751,12 @@ GLOBAL_LIST_EMPTY(selectable_races)
  * * humi (required)(type: /mob/living/carbon/human) The mob we will target
  */
 /datum/species/proc/handle_body_temperature(mob/living/carbon/human/humi, delta_time, times_fired)
-	//when in a cryo unit we suspend all natural body regulation
-	if(istype(humi.loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
-		return
 
 	//Only stabilise core temp when alive and not in statis
 	if(humi.stat < DEAD && !IS_IN_STASIS(humi))
 		body_temperature_core(humi, delta_time, times_fired)
 
 	//These do run in statis
-	body_temperature_skin(humi, delta_time, times_fired)
 	body_temperature_alerts(humi, delta_time, times_fired)
 
 	//Do not cause more damage in statis
@@ -1777,61 +1773,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 /datum/species/proc/body_temperature_core(mob/living/carbon/human/humi, delta_time, times_fired)
 	var/natural_change = get_temp_change_amount(humi.get_body_temp_normal() - humi.coretemperature, 0.06 * delta_time)
 	humi.adjust_coretemperature(humi.metabolism_efficiency * natural_change)
-
-/**
- * Used to normalize the skin temperature on living mobs
- *
- * The core temp effects the skin, then the enviroment effects the skin, then we refect that back to the core.
- * This happens even when dead so bodies revert to room temp over time.
- * vars:
- * * humi (required) The mob we will targeting
- * - delta_time: The amount of time that is considered as elapsing
- * - times_fired: The number of times SSmobs has fired
- */
-	var/skin_core_diff = humi.bodytemperature - humi.coretemperature
-	// change rate of 0.04 per second to be slightly below area to skin change rate and still have a solid curve
-	var/skin_core_change = get_temp_change_amount(skin_core_diff, 0.04 * delta_time)
-
-
-	// Get the temperature of the environment for area
-	var/area_temp = humi.get_temperature()
-
-	// Get the insulation value based on the area's temp
-	var/thermal_protection = humi.get_insulation_protection(area_temp)
-
-	// Changes to the skin temperature based on the area
-	var/area_skin_diff = area_temp - humi.bodytemperature
-	if(!humi.on_fire || area_skin_diff > 0)
-		// change rate of 0.05 as area temp has large impact on the surface
-		var/area_skin_change = get_temp_change_amount(area_skin_diff, 0.05 * delta_time)
-
-		// We need to apply the thermal protection of the clothing when applying area to surface change
-		// If the core bodytemp goes over the normal body temp you are overheating and becom sweaty
-		// This will cause the insulation value of any clothing to reduced in effect (70% normal rating)
-		// we add 10 degree over normal body temp before triggering as thick insulation raises body temp
-		if(humi.get_body_temp_normal(apply_change=FALSE) + 10 < humi.coretemperature)
-			// we are overheating and sweaty insulation is not as good reducing thermal protection
-			area_skin_change = (1 - (thermal_protection * 0.7)) * area_skin_change
-		else
-			area_skin_change = (1 - thermal_protection) * area_skin_change
-
-		humi.adjust_bodytemperature(area_skin_change)
-
-	// Core to skin temp transfer, when not on fire
-	if(!humi.on_fire)
-		// Get the changes to the skin from the core temp
-		var/core_skin_diff = humi.coretemperature - humi.bodytemperature
-		// change rate of 0.045 to reflect temp back to the skin at the slight higher rate then core to skin
-		var/core_skin_change = (1 + thermal_protection) * get_temp_change_amount(core_skin_diff, 0.045 * delta_time)
-
-		// We do not want to over shoot after using protection
-		if(core_skin_diff > 0)
-			core_skin_change = min(core_skin_change, core_skin_diff)
-		else
-			core_skin_change = max(core_skin_change, core_skin_diff)
-
-		humi.adjust_bodytemperature(core_skin_change)
-
 
 /**
  * Used to set alerts and debuffs based on body temperature
@@ -1924,13 +1865,13 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	if(humi.coretemperature < cold_damage_limit && !HAS_TRAIT(humi, TRAIT_RESISTCOLD))
 		var/damage_type = is_hulk ? BRUTE : BURN // Why?
 		var/damage_mod = coldmod * humi.physiology.cold_mod * (is_hulk ? HULK_COLD_DAMAGE_MOD : 1)
-		switch(humi.coretemperature)
-			if(201 to cold_damage_limit)
-				humi.apply_damage(COLD_DAMAGE_LEVEL_1 * damage_mod * delta_time, damage_type)
-			if(120 to 200)
-				humi.apply_damage(COLD_DAMAGE_LEVEL_2 * damage_mod * delta_time, damage_type)
-			else
-				humi.apply_damage(COLD_DAMAGE_LEVEL_3 * damage_mod * delta_time, damage_type)
+		// Can't be a switch due to http://www.byond.com/forum/post/2750423
+		if(humi.coretemperature in 201 to cold_damage_limit)
+			humi.apply_damage(COLD_DAMAGE_LEVEL_1 * damage_mod * delta_time, damage_type)
+		else if(humi.coretemperature in 120 to 200)
+			humi.apply_damage(COLD_DAMAGE_LEVEL_2 * damage_mod * delta_time, damage_type)
+		else
+			humi.apply_damage(COLD_DAMAGE_LEVEL_3 * damage_mod * delta_time, damage_type)
 
 /**
  * Used to apply burn wounds on random limbs
