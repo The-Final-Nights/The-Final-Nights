@@ -304,4 +304,4 @@
 	name = "Painted City Guardian"
 	icon_state = "Hound"
 
-#undef AMBERGLADE_ALLOWED_TRIBES
+#undef PAINTED_CITY_TRIBES
