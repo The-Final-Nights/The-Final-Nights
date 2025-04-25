@@ -66,13 +66,16 @@
 		var/isknown = 0
 		var/mob/living/carbon/human/werewolf = user
 		var/same_tribe = werewolf.auspice?.tribe == auspice?.tribe
+		var/truescent
+		if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
+			truescent = TRUE
 		switch(renownrank)
 			if(1)
-				if(same_tribe)
+				if(same_tribe || truescent)
 					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(2)
-				if(same_tribe)
+				if(same_tribe || truescent)
 					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(3,4,5,6)
@@ -475,8 +478,6 @@
 		var/sniff_distance = 2
 		if(iswerewolf(user))
 			sniff_distance = 7
-		else
-			sniff_distance = 2
 		if (get_dist(user, src) <= sniff_distance)
 			var/wyrm_taint = NONE
 			var/weaver_taint = NONE
@@ -533,9 +534,9 @@
 						weaver_taint--
 			if(!seems_alive)
 				msg += "<span class='purple'><i>You recognize their scent as cold and lifeless.</i></span><br>"
+			if(is_kin)
+				msg += "<span class='purple'><i>You recognize their scent as Garou.</i></span><br>"
 			if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
-				if (is_kin)
-					msg += "<span class='purple'><i>You recognize their scent as Garou.</i></span><br>"
 				if(splat_sense)
 					msg += "<span class='purple'><i>[named_splat]</i></span><br>"
 				if (wyrm_taint == TAINTED)

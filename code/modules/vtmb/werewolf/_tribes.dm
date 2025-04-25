@@ -2,6 +2,7 @@
 	var/name
 	var/desc
 	var/list/tribal_gifts = list()
+	var/tribe_keys
 
 /datum/garou_tribe/galestalkers
 	name = "Galestalkers"
@@ -38,6 +39,7 @@
 		/datum/action/gift/digital_feelings = 2,
 		/datum/action/gift/elemental_improvement = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/techstore
 
 /datum/garou_tribe/bonegnawers
 	name = "Bone Gnawers"

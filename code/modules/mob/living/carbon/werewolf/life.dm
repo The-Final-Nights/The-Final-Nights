@@ -1,7 +1,8 @@
-#define UMBRA_VEIL_COOLDOWN 80 MINUTES
-#define CAERN_VEIL_COOLDOWN 120 MINUTES
+#define UMBRA_VEIL_COOLDOWN 40 MINUTES
+#define CAERN_VEIL_COOLDOWN 60 MINUTES
 #define GAROU_BP_REGEN 60 SECONDS
 #define VEIL_COOLDOWN 20 SECONDS
+#define RAGE_LIFE_COOLDOWN 30 SECONDS
 
 /mob/living/carbon/werewolf/Life()
 	update_icons()
@@ -48,7 +49,7 @@
 			//	transformator.trans_gender(src, auspice.base_breed)
 
 			if(gaining_rage && client)
-				if(((last_rage_gain + 1 MINUTES) < world.time) && (auspice.rage <= 6))
+				if(((last_rage_gain + RAGE_LIFE_COOLDOWN) < world.time) && (auspice.rage <= 6))
 					last_rage_gain = world.time
 					adjust_rage(1, src, TRUE)
 
@@ -64,29 +65,33 @@
 						last_frenzy_check = world.time
 						rollfrenzy()
 
-			if(istype(get_area(src), /area/vtm/interior/penumbra))
-				if((last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
-					adjust_veil(1, 4, -1)
-					last_veil_restore = world.time
+			if(last_veil_restore == 0 || (last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
+				check_veil_adjust()
 
-			switch(auspice.tribe.name)
-				if("Galestalkers","Ghost Council","Hart Wardens")
-					if(istype(get_area(src), /area/vtm/forest))
-						if((last_veil_restore + CAERN_VEIL_COOLDOWN) <= world.time && src.masquerade < 5)
-							adjust_veil(1, 3, -1)
-							last_veil_restore = world.time
 
-				if("Glass Walkers","Bone Gnawers","Children of Gaia")
-					if(istype(get_area(src), /area/vtm/interior/glasswalker))
-						if((last_veil_restore + CAERN_VEIL_COOLDOWN) <= world.time && src.masquerade < 5)
-							adjust_veil(1, 3, -1)
-							last_veil_restore = world.time
+/mob/living/carbon/proc/check_veil_adjust()
 
-				if("Black Spiral Dancers")
-					if(istype(get_area(src), /area/vtm/interior/endron_facility) && src.masquerade < 5)
-						if((last_veil_restore + CAERN_VEIL_COOLDOWN) <= world.time)
-							adjust_veil(1, 3, -1)
-							last_veil_restore = world.time
+	if(istype(get_area(src), /area/vtm/interior/penumbra))
+		if((last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
+			adjust_veil(1, 4, -1)
+			last_veil_restore = world.time
+			return
+
+	switch(auspice.tribe.name)
+		if("Galestalkers","Ghost Council","Hart Wardens")
+			if(istype(get_area(src), /area/vtm/forest))
+				adjust_veil(1, 3, -1)
+				last_veil_restore = world.time
+
+		if("Glass Walkers","Bone Gnawers","Children of Gaia")
+			if(istype(get_area(src), /area/vtm/interior/glasswalker))
+				adjust_veil(1, 3, -1)
+				last_veil_restore = world.time
+
+		if("Black Spiral Dancers")
+			if(istype(get_area(src), /area/vtm/interior/endron_facility) && masquerade < 5)
+				adjust_veil(1, 3, -1)
+				last_veil_restore = world.time
 
 /datum/species/garou/spec_life(mob/living/carbon/human/H)
 	. = ..()
@@ -308,3 +313,4 @@
 #undef CAERN_VEIL_COOLDOWN
 #undef GAROU_BP_REGEN
 #undef VEIL_COOLDOWN
+#undef RAGE_LIFE_COOLDOWN

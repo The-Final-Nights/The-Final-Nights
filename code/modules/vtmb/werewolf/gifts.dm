@@ -277,11 +277,10 @@
 /datum/action/gift/sense_wyrm/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
-		var/target_area = get_area(owner)
-		var/list/target_turfs
-		if(target_area)
-			target_turfs = get_area_turfs(owner, target_z = 1, subtypes=FALSE)
-		for(var/mob/living/carbon/target in target_turfs)
+		var/list/mobs_in_range = list()
+		for(var/mob/living/carbon/target in orange(owner, 30))
+			mobs_in_range += target
+		for(var/mob/living/carbon/target in mobs_in_range)
 			var/is_wyrm = 0
 			if(iscathayan(target))
 				var/mob/living/carbon/human/kj = target
@@ -295,9 +294,8 @@
 					is_wyrm = 1
 			if (isgarou(target) || iswerewolf(target))
 				var/mob/living/carbon/wolf = target
-				switch(wolf.auspice.tribe.name)
-					if ("Black Spiral Dancers")
-						is_wyrm = 1
+				if(wolf.auspice.tribe.name == "Black Spiral Dancers")
+					is_wyrm = 1
 			if(is_wyrm)
 				to_chat(owner, "A stain is found at [get_area_name(target)], X:[target.x] Y:[target.y].")
 				is_wyrm = 0

@@ -1,3 +1,5 @@
+#define AMBERGLADE_ALLOWED_TRIBES list("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
+
 /datum/job/vamp/garou/amberglade/council
 	title = "Amberglade Councillor"
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
@@ -6,7 +8,7 @@
 	selection_color = "#69e430"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ghost Council","Hart Wardens")
+	allowed_tribes = AMBERGLADE_ALLOWED_TRIBES
 	minimal_renownrank = 4
 
 	total_positions = 3
@@ -66,7 +68,7 @@
 	selection_color = "#69e430"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ghost Council","Hart Wardens")
+	allowed_tribes = AMBERGLADE_ALLOWED_TRIBES
 
 	minimal_renownrank = 3
 	total_positions = 1
@@ -126,7 +128,7 @@
 	selection_color = "#69e430"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ghost Council","Hart Wardens")
+	allowed_tribes = AMBERGLADE_ALLOWED_TRIBES
 
 	total_positions = 1
 	spawn_positions = 1
@@ -186,7 +188,7 @@
 	selection_color = "#69e430"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ghost Council","Hart Wardens")
+	allowed_tribes = AMBERGLADE_ALLOWED_TRIBES
 
 	minimal_renownrank = 3
 	total_positions = 1
@@ -250,7 +252,7 @@
 	selection_color = "#69e430"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ghost Council","Hart Wardens")
+	allowed_tribes = AMBERGLADE_ALLOWED_TRIBES
 
 	total_positions = 5
 	spawn_positions = 5

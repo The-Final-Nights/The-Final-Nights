@@ -43,6 +43,9 @@
 		var/datum/action/A2 = new zalupa()
 		A2.Grant(crinos)
 
+	if(tribe.tribe_keys)
+		C.put_in_hands(new tribe.tribe_keys(C))
+
 /datum/auspice/ahroun
 	name = "Ahroun"
 	desc = "The Ahroun is the archetype of the werewolf as murderous beast, though they range from unapologetic berserkers to hardened veterans tempering their Rage with discipline. Their high levels of Rage put them on the edge at all times - the Full Moon's blessing is a hair trigger, among other things. Those closer to the waxing moon tend to exult in the glory of the war, while those closer to the waning moon are more viciously pragmatic, ruthless in their bloodthirst. Every Ahroun is a dangerous individual to be around, but when the forces of the Wyrm attack, their packmates are glad to have a Full Moon warrior at the front of the charge."

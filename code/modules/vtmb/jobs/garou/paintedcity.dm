@@ -1,3 +1,5 @@
+#define PAINTED_CITY_TRIBES list("Glass Walkers", "Bone Gnawers", "Children of Gaia", "Shadow Lords")
+
 /datum/job/vamp/garou/paintedcity/council
 	title = "Painted City Councillor"
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
@@ -6,7 +8,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = PAINTED_CITY_TRIBES
 
 	total_positions = 3
 	spawn_positions = 3
@@ -66,7 +68,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = PAINTED_CITY_TRIBES
 
 	minimal_renownrank = 3
 	total_positions = 1
@@ -126,7 +128,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = PAINTED_CITY_TRIBES
 
 	total_positions = 1
 	spawn_positions = 1
@@ -185,7 +187,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = PAINTED_CITY_TRIBES
 
 	total_positions = 1
 	spawn_positions = 1
@@ -249,7 +251,7 @@
 	selection_color = "#7195ad"
 	faction = "Vampire"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Glass Walkers", "Bone Gnawers", "Children of Gaia")
+	allowed_tribes = PAINTED_CITY_TRIBES
 
 	total_positions = 5
 	spawn_positions = 5
