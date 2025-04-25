@@ -86,6 +86,6 @@
 
 //Toggles voice hiding.
 /obj/item/clothing/mask/AltClick(mob/user)
-	..()
+	. = ..()
 	conceals_voice = !conceals_voice
 	to_chat(user, span_notice("You are [conceals_voice ? "now" : "no longer"] concealing your voice!"))
