@@ -658,5 +658,11 @@ Dancer
 	UnregisterSignal(L, comsig)
 	attached_targets -= L
 
+/datum/quirk/hardened_soles
+	name = "Hardened Soles"
+	desc = "Your feet callouses are so thick, you can walk barefoot across the state if you want to!"
+	mob_trait = TRAIT_HARDENED_SOLES
+	value = 2
+
 #undef SHORT
 #undef TALL
