@@ -403,3 +403,5 @@
 
 /datum/config_entry/string/json_conversion_path
 	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
+
+/datum/config_entry/flag/disallow_title_music
