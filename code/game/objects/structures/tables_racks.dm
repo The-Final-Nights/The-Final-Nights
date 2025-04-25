@@ -142,7 +142,6 @@
 	if(pushed_mob.loc != loc) //Something prevented the tabling
 		return
 	pushed_mob.Knockdown(30)
-	pushed_mob.apply_damage(10, BRUTE)
 	pushed_mob.apply_damage(40, STAMINA)
 	if(user.mind?.martial_art.smashes_tables && user.mind?.martial_art.can_use(user))
 		deconstruct(FALSE)

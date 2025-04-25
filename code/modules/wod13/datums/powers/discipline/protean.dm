@@ -75,6 +75,34 @@
 	owner.remove_client_colour(/datum/client_colour/glass_colour/red)
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/protean2)
 
+/mob/living/simple_animal/hostile/gangrel
+	name = "warform"
+	desc = "A horrid man-beast abomination."
+	icon = 'code/modules/wod13/32x48.dmi'
+	icon_state = "gangrel_f"
+	icon_living = "gangrel_f"
+	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	mob_size = MOB_SIZE_HUGE
+	speak_chance = 0
+	speed = -0.4
+	maxHealth = 275
+	health = 275
+	butcher_results = list(/obj/item/stack/human_flesh = 10)
+	harm_intent_damage = 5
+	melee_damage_lower = 30
+	melee_damage_upper = 30
+	attack_verb_continuous = "slashes"
+	attack_verb_simple = "slash"
+	attack_sound = 'sound/weapons/slash.ogg'
+	a_intent = INTENT_HARM
+	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	minbodytemp = 0
+	bloodpool = 10
+	maxbloodpool = 10
+	dextrous = TRUE
+	held_items = list(null, null)
+	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
+
 //EARTH MELD
 /obj/effect/proc_holder/spell/targeted/shapeshift/gangrel
 	name = "Gangrel Form"
@@ -120,6 +148,13 @@
 	owner.Stun(1.5 SECONDS)
 	owner.do_jitter_animation(30)
 
+/mob/living/simple_animal/hostile/gangrel/better
+	maxHealth = 325
+	health = 325
+	melee_damage_lower = 35
+	melee_damage_upper = 35
+	speed = -0.6
+
 //SHAPE OF THE BEAST
 /obj/effect/proc_holder/spell/targeted/shapeshift/gangrel/better
 	shapeshift_type = /mob/living/simple_animal/hostile/gangrel/better
@@ -158,6 +193,15 @@
 	GA.Restore(GA.myshape)
 	owner.Stun(1 SECONDS)
 	owner.do_jitter_animation(15)
+
+/mob/living/simple_animal/hostile/gangrel/best
+	icon_state = "gangrel_m"
+	icon_living = "gangrel_m"
+	maxHealth = 400 //More in line with new health values.
+	health = 400
+	melee_damage_lower = 40
+	melee_damage_upper = 40
+	speed = -0.8
 
 //MIST FORM
 /obj/effect/proc_holder/spell/targeted/shapeshift/gangrel/best
