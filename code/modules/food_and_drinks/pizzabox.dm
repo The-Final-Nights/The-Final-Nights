@@ -42,6 +42,7 @@
 	return ..()
 
 /obj/item/pizzabox/update_icon()
+	. = ..()
 	// Description
 	desc = initial(desc)
 	if(open)

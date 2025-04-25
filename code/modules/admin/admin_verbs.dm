@@ -572,6 +572,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 						to_chat(C, "<b>You've been rewarded with [amount] experience points. Reason: \"[reason]\"</b>")
 
 						C.prefs.add_experience(amount)
+						C.prefs.save_preferences()
 						C.prefs.save_character()
 
 						message_admins("[ADMIN_LOOKUPFLW(usr)] rewarded [ADMIN_LOOKUPFLW(exper)] with [amount] experience points. Reason: [reason]")
