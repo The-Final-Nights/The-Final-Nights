@@ -46,20 +46,19 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/awe/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	presence_succeeded = presence_check(owner, target, base_difficulty = 4)
+	
 	return TRUE
 
 /datum/discipline_power/presence/awe/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_succeeded)
+	if(presence_check(owner, target, base_difficulty = 4))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -99,20 +98,19 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/dread_gaze/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	presence_succeeded = presence_check(owner, target, base_difficulty = 5)
+	
 	return TRUE
 
 /datum/discipline_power/presence/dread_gaze/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_succeeded)
+	if(presence_check(owner, target, base_difficulty = 5))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -147,20 +145,19 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/entrancement/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	presence_succeeded = presence_check(owner, target, base_difficulty = 5)
+	
 	return TRUE
 
 /datum/discipline_power/presence/entrancement/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_succeeded)
+	if(presence_check(owner, target, base_difficulty = 5))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -204,20 +201,19 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/summon/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	presence_succeeded = presence_check(owner, target, base_difficulty = 6)
+	
 	return TRUE
 
 /datum/discipline_power/presence/summon/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_succeeded)
+	if(presence_check(owner, target, base_difficulty = 6))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -262,20 +258,19 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/majesty/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	presence_succeeded = presence_check(owner, target, base_difficulty = 7)
+	
 	return TRUE
 
 /datum/discipline_power/presence/majesty/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_succeeded)
+	if(presence_check(owner, target, base_difficulty = 7))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1

@@ -39,16 +39,14 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/passion/pre_activation_checks(mob/living/target)
-	dementation_succeeded = dementation_check(owner, target, base_difficulty = 4)
 	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/passion/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(dementation_succeeded)
+	if(dementation_check(owner, target, base_difficulty = 4))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -86,16 +84,14 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/the_haunting/pre_activation_checks(mob/living/target)
-	dementation_succeeded = dementation_check(owner, target, base_difficulty = 5)
 	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/the_haunting/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(dementation_succeeded)
+	if(dementation_check(owner, target, base_difficulty = 5))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -129,16 +125,14 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/eyes_of_chaos/pre_activation_checks(mob/living/target)
-	dementation_succeeded = dementation_check(owner, target, base_difficulty = 6)
 	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/eyes_of_chaos/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(dementation_succeeded)
+	if(dementation_check(owner, target, base_difficulty = 6))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -267,16 +261,14 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/voice_of_madness/pre_activation_checks(mob/living/target)
-	dementation_succeeded = dementation_check(owner, target, base_difficulty = 6)
 	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/voice_of_madness/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(dementation_succeeded)
+	if(dementation_check(owner, target, base_difficulty = 6))
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -311,16 +303,14 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/total_insanity/pre_activation_checks(mob/living/target)
-	dementation_succeeded = dementation_check(owner, target, base_difficulty = 7)
 	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/total_insanity/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(dementation_succeeded)
+	if(dementation_check(owner, target, base_difficulty = 7))
 		start_total_insanity_effect(target)
 		addtimer(CALLBACK(/proc/stop_total_insanity_effect, target), 20 SECONDS) 
 

@@ -88,6 +88,13 @@
 
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
+
+	if(owner == conditioner)
+		return TRUE
+
+	if(target.conditioned)
+		theirpower += 3
 
 	return (mypower > theirpower && owner.generation <= target.generation)
 
@@ -109,7 +116,6 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 3 SECONDS
 	range = 7
-	var/tmp/dominate_succeeded = FALSE
 	var/custom_command = "FORGET ABOUT IT"
 
 /datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)  // this pre-check includes some special checks 
@@ -117,19 +123,18 @@
 	if(!dominate_hearing_check(owner, target)) // putting the hearing check into the pre_activation so that if the target cant hear you it doesnt consume blood and alerts you
 		return FALSE
 
+	return TRUE
+
+/datum/discipline_power/dominate/command/activate(mob/living/target)
+	. = ..()
+
 	// Command is unique — we need the input first to determine difficulty
 	custom_command = input(owner, "What is your command?", "Dominate Command", "FORGET ABOUT IT")
 
 	var/word_count = length(splittext(custom_command, " "))
 	var/extra_words_difficulty = 4 + max(0, word_count - 1) // Base 4 +1 per extra word
 
-	dominate_succeeded = dominate_check(owner, target, base_difficulty = extra_words_difficulty)
-	return TRUE
-
-/datum/discipline_power/dominate/command/activate(mob/living/target)
-	. = ..()
-
-	if(dominate_succeeded)
+	if(dominate_check(owner, target, base_difficulty = extra_words_difficulty))
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		owner.say("[custom_command]!")
 		to_chat(target, span_danger("[custom_command]!"))
@@ -157,20 +162,19 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
-	var/tmp/dominate_succeeded = FALSE
 
 /datum/discipline_power/dominate/mesmerize/pre_activation_checks(mob/living/target)
 
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	dominate_succeeded = dominate_check(owner, target, base_difficulty = 5)
+	
 	return TRUE
 
 /datum/discipline_power/dominate/mesmerize/activate(mob/living/target)
 	. = ..()
 
-	if(dominate_succeeded)
+	if(dominate_check(owner, target, base_difficulty = 5))
 		target.Immobilize(0.5 SECONDS)
 		if(target.body_position == STANDING_UP)
 			to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
@@ -199,20 +203,19 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 3 SECONDS
 	range = 7
-	var/tmp/dominate_succeeded = FALSE
 
 /datum/discipline_power/dominate/the_forgetful_mind/pre_activation_checks(mob/living/target)
 
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	dominate_succeeded = dominate_check(owner, target, base_difficulty = 6)
+	
 	return TRUE
 
 /datum/discipline_power/dominate/the_forgetful_mind/activate(mob/living/target)
 	. = ..()
 
-	if(dominate_succeeded)
+	if(dominate_check(owner, target, base_difficulty = 6))
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		to_chat(target, span_danger("THINK TWICE"))
 		owner.say("THINK TWICE!!")
@@ -239,21 +242,20 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 6 SECONDS
 	range = 2
-	var/tmp/dominate_succeeded = FALSE
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
 
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	dominate_succeeded = dominate_check(owner, target, base_difficulty = 6)
+	
 	return TRUE
 	
 
 /datum/discipline_power/dominate/conditioning/activate(mob/living/target)
 	. = ..()
 
-	if(dominate_succeeded)
+	if(dominate_check(owner, target, base_difficulty = 6))
 		target.dir = get_dir(target, owner)
 		to_chat(target, span_danger("LOOK AT ME"))
 		owner.say("Look at me.")
@@ -282,7 +284,6 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
-	var/tmp/dominate_succeeded = FALSE
 
 
 /datum/discipline_power/dominate/possession/pre_activation_checks(mob/living/target)
@@ -290,13 +291,13 @@
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	dominate_succeeded = dominate_check(owner, target, base_difficulty = 7)
+	
 	return TRUE
 
 /datum/discipline_power/dominate/possession/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(dominate_succeeded)
+	if(dominate_check(owner, target, base_difficulty = 7))
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		to_chat(target, span_danger("YOU SHOULD HARM YOURSELF NOW"))
 		owner.say("YOU SHOULD HARM YOURSELF NOW!!")
