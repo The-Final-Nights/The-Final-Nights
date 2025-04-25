@@ -261,6 +261,7 @@
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(C, COMSIG_ADD_VITAE)
 	for(var/datum/action/vampireinfo/VI in C.actions)
 		VI?.Remove(C)
 	for(var/datum/action/A in C.actions)
