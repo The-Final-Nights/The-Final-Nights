@@ -62,6 +62,7 @@
 	TimerID = addtimer(CALLBACK(src, PROC_REF(DiscoFever)), 5, TIMER_STOPPABLE)  //Call ourselves every 0.5 seconds to change colors
 
 /obj/structure/etherealball/update_icon_state()
+	. = ..()
 	icon_state = "ethdisco_head_[TurnedOn]"
 
 /obj/structure/etherealball/update_overlays()

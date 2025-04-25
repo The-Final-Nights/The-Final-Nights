@@ -49,7 +49,7 @@ And it also helps for the character set panel
 		H.dna.species.limbs_id = alt_sprite
 		H.update_body_parts()
 		H.update_body()
-		H.update_icon()
+		H.update_appearance()
 
 /datum/vampireclane/proc/post_gain(var/mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)

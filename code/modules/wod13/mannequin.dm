@@ -22,7 +22,7 @@
 	C.dna.species.limbs_id = "mannequin"
 	C.update_body_parts()
 	C.update_body()
-	C.update_icon()
+	C.update_appearance()
 	C.dna.real_name = "mannequin"
 	C.real_name = "mannequin"
 	C.true_real_name = "mannequin"

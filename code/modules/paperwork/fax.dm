@@ -187,7 +187,7 @@
 /obj/machinery/fax/screwdriver_act(mob/living/user, obj/item/screwdriver)
 	. = ..()
 	default_deconstruction_screwdriver(user, icon_state, icon_state, screwdriver)
-	update_icon()
+	update_appearance()
 	return TRUE
 
 /**
@@ -220,7 +220,7 @@
 		if (!loaded_item_ref?.resolve())
 			loaded_item_ref = WEAKREF(item)
 			item.forceMove(src)
-			update_icon()
+			update_appearance()
 		return
 	return ..()
 
@@ -318,7 +318,7 @@
 			loaded.forceMove(drop_location())
 			loaded_item_ref = null
 			playsound(src, 'sound/machines/eject.ogg', 50, FALSE)
-			update_icon()
+			update_appearance()
 			return TRUE
 
 		if("send")
@@ -329,7 +329,7 @@
 			if(send(loaded, destination))
 				log_fax(loaded, destination, params["name"])
 				loaded_item_ref = null
-				update_icon()
+				update_appearance()
 				return TRUE
 
 		if("send_special")
@@ -350,7 +350,7 @@
 			to_chat(GLOB.admins, span_adminnotice("[icon2html(src.icon, GLOB.admins)]<b><font color=green>FAX REQUEST: </font>[ADMIN_FULLMONTY(usr)]:</b> [span_linkify("sent a fax message from [fax_name]/[fax_id][ADMIN_FLW(src)] to [params["name"]]")] [ADMIN_SHOW_PAPER(fax_paper)]"), confidential = TRUE)
 			log_fax(fax_paper, params["id"], params["name"])
 			loaded_item_ref = null
-			update_icon()
+			update_appearance()
 
 		if("history_clear")
 			history_clear()

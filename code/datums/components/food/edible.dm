@@ -343,8 +343,11 @@ Behavior that's still missing from this component that original food items had t
 			var/obj/item/food/vampire/V = parent
 			V.got_biten()
 		if(!owner.reagents.total_volume)
-			On_Consume(eater, feeder)
+			on_consume(eater, feeder)
 		checkLiked(fraction, eater)
+
+		if(iskindred(eater) && HAS_TRAIT(eater, TRAIT_ORGANOVORE))
+			on_consume(eater, feeder)
 
 		//Invoke our after eat callback if it is valid
 		if(after_eat)
@@ -382,6 +385,9 @@ Behavior that's still missing from this component that original food items had t
 	last_check_time = world.time
 
 	if(H.dna.species.id == "kindred")
+		if(HAS_TRAIT(H, TRAIT_ORGANOVORE) && (foodtypes & GORE))
+			SEND_SIGNAL(H, COMSIG_ADD_VITAE, 1, FALSE)
+			return // Skip the rest, I think this is fine?
 		if(HAS_TRAIT(H, TRAIT_AGEUSIA))
 			to_chat(H, "<span class='warning'>You don't feel so good...</span>")
 			H.adjust_disgust(11 + 15 * fraction)
@@ -425,7 +431,7 @@ Behavior that's still missing from this component that original food items had t
 			SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "fav_food", /datum/mood_event/favorite_food)
 
 ///Delete the item when it is fully eaten
-/datum/component/edible/proc/On_Consume(mob/living/eater, mob/living/feeder)
+/datum/component/edible/proc/on_consume(mob/living/eater, mob/living/feeder)
 	SEND_SIGNAL(parent, COMSIG_FOOD_CONSUMED, eater, feeder)
 
 	on_consume?.Invoke(eater, feeder)
