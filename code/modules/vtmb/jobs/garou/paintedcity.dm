@@ -303,3 +303,5 @@
 /obj/effect/landmark/start/garou/painted/guardian
 	name = "Painted City Guardian"
 	icon_state = "Hound"
+
+#undef AMBERGLADE_ALLOWED_TRIBES

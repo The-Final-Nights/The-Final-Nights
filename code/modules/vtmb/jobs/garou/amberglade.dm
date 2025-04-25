@@ -305,3 +305,4 @@
 	name = "Amberglade Guardian"
 	icon_state = "Hound"
 
+#undef AMBERGLADE_ALLOWED_TRIBES
