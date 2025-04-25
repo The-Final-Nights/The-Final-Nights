@@ -37140,10 +37140,6 @@
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/strip/toreador)
-"keD" = (
-/obj/machinery/smartfridge/drying_rack,
-/turf/open/floor/plating/rough/cave,
-/area/vtm/forest)
 "keN" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -87162,10 +87158,7 @@
 /area/vtm/interior/police)
 "xGZ" = (
 /obj/structure/table/wood,
-/obj/item/flashlight/lamp{
-	light_color = "#FFA500";
-	light_range = 3
-	},
+/obj/machinery/fax/endron,
 /turf/open/floor/carpet/green,
 /area/vtm/interior/wyrm_corrupted)
 "xHg" = (
@@ -504428,7 +504421,7 @@ iJm
 laE
 jEJ
 jEJ
-keD
+laE
 laE
 bSn
 laE
