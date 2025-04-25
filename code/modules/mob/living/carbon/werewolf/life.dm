@@ -78,12 +78,12 @@
 			return
 
 	switch(auspice.tribe.name)
-		if("Galestalkers","Ghost Council","Hart Wardens")
+		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
 			if(istype(get_area(src), /area/vtm/forest))
 				adjust_veil(1, 3, -1)
 				last_veil_restore = world.time
 
-		if("Glass Walkers","Bone Gnawers","Children of Gaia")
+		if("Glass Walkers", "Bone Gnawers", "Children of Gaia", "Shadow Lords")
 			if(istype(get_area(src), /area/vtm/interior/glasswalker))
 				adjust_veil(1, 3, -1)
 				last_veil_restore = world.time
