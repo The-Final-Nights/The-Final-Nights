@@ -40,9 +40,6 @@
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
 
-/datum/discipline_power/dementation/passion/pre_activation_checks(mob/living/target)
-	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
-
 /datum/discipline_power/dementation/passion/activate(mob/living/carbon/human/target)
 	. = ..()
 
@@ -85,9 +82,6 @@
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
 
-/datum/discipline_power/dementation/the_haunting/pre_activation_checks(mob/living/target)
-	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
-
 /datum/discipline_power/dementation/the_haunting/activate(mob/living/carbon/human/target)
 	. = ..()
 
@@ -126,8 +120,6 @@
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
 
-/datum/discipline_power/dementation/eyes_of_chaos/pre_activation_checks(mob/living/target)
-	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/eyes_of_chaos/activate(mob/living/carbon/human/target)
 	. = ..()
@@ -262,8 +254,6 @@
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
 
-/datum/discipline_power/dementation/voice_of_madness/pre_activation_checks(mob/living/target)
-	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/voice_of_madness/activate(mob/living/carbon/human/target)
 	. = ..()
@@ -304,8 +294,6 @@
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
 
-/datum/discipline_power/dementation/total_insanity/pre_activation_checks(mob/living/target)
-	return TRUE // Always Proceed - So that a failed roll consumes BP and initiates cooldown
 
 /datum/discipline_power/dementation/total_insanity/activate(mob/living/carbon/human/target)
 	. = ..()
