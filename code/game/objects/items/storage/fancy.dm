@@ -29,6 +29,7 @@
 		new spawn_type(src)
 
 /obj/item/storage/fancy/update_icon_state()
+	. = ..()
 	if(fancy_open)
 		icon_state = "[icon_type]box[contents.len]"
 	else
@@ -90,6 +91,7 @@
 	update_icon()
 
 /obj/item/storage/fancy/donut_box/update_icon_state()
+	. = ..()
 	if(fancy_open)
 		icon_state = "donutbox_inner"
 	else
@@ -230,6 +232,7 @@
 		to_chat(user, "<span class='notice'>There are no [icon_type]s left in the pack.</span>")
 
 /obj/item/storage/fancy/cigarettes/update_icon_state()
+	. = ..()
 	if(fancy_open || !contents.len)
 		if(!contents.len)
 			icon_state = "[initial(icon_state)]_empty"
@@ -372,7 +375,9 @@
 
 ///Overrides to do nothing because fancy boxes are fucking insane.
 /obj/item/storage/fancy/rollingpapers/update_icon_state()
-	return
+	. = ..()
+	//reset any changes the parent call may have made
+	icon_state = base_icon_state
 
 /obj/item/storage/fancy/rollingpapers/update_overlays()
 	. = ..()
@@ -400,6 +405,7 @@
 	STR.set_holdable(list(/obj/item/clothing/mask/cigarette/cigar))
 
 /obj/item/storage/fancy/cigarettes/cigars/update_icon_state()
+	. = ..()
 	if(fancy_open)
 		icon_state = "[initial(icon_state)]_open"
 	else
