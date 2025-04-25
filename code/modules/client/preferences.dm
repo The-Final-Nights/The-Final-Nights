@@ -246,6 +246,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// Off by default. Opt-in.
 	var/nsfw_content_pref = FALSE
 
+	var/derangement = TRUE
+
 /datum/preferences/proc/add_experience(amount)
 	player_experience = clamp(player_experience + amount, 0, 100000)
 
@@ -580,6 +582,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(pref_species.name == "Vampire")
 				dat += "<h2>[make_font_cool("CLANE")]</h2>"
 				dat += "<b>Clane/Bloodline:</b> <a href='byond://?_src_=prefs;preference=clane;task=input'>[clane.name]</a><BR>"
+				if(clane.name == CLAN_MALKAVIAN)
+					dat+="<b>Degree of Derangement:</b> <a href ='byond://?_src_=prefs;preference=derangement;task=input'>[derangement == TRUE ? "Insanity" : "Madness"]</a><BR>"
 				dat += "<b>Description:</b> [clane.desc]<BR>"
 				dat += "<b>Curse:</b> [clane.curse]<BR>"
 				if(length(clane.accessories))
@@ -2238,6 +2242,20 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								clane_accessory = "none"
 							else
 								clane_accessory = pick(clane.accessories)
+
+				if("derangement")
+
+					if(!(pref_species.id == "kindred" ) || clane.name != CLAN_MALKAVIAN)
+						return
+
+					if(!(clane.name == CLAN_MALKAVIAN))
+						return
+
+					if (tgui_alert(user, "Are you sure you want to change your derangement? Madness is more mundane than insanity.", "Confirmation", list("Yes", "No")) != "Yes")
+						return
+
+					derangement = !derangement
+
 				if("auspice_level")
 					var/cost = max(10, auspice_level * 10)
 					if ((player_experience < cost) || (auspice_level >= 3))
@@ -3196,6 +3214,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if(pref_species.name == "Vampire")
 		var/datum/vampireclane/CLN = new clane.type()
+
+		if(CLN.name == CLAN_MALKAVIAN)
+			var/datum/vampireclane/malkavian/malk = new clane.type()
+			malk.derangement = derangement
+			CLN = malk
+
 		var/datum/morality/MOR = new morality_path.type()
 		character.clane = CLN
 		character.morality_path = MOR
