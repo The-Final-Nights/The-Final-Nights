@@ -66,7 +66,8 @@
 						rollfrenzy()
 
 			if(last_veil_restore == 0 || (last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
-				check_veil_adjust()
+				if(masquerade < 5)
+					check_veil_adjust()
 
 
 /mob/living/carbon/proc/check_veil_adjust()
