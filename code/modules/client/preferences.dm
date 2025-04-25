@@ -525,9 +525,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						wisdom = 0
 					if(!renownrank)
 						renownrank = 0
-					var/gloryXP = max(5, glory * 10)
-					var/honorXP = max(5, honor * 10)
-					var/wisdomXP =  max(5, wisdom * 10)
+					var/gloryXP = 25
+					var/honorXP = 25
+					var/wisdomXP = 25
 					dat += "<b>Veil:</b> [masquerade]/5<BR>"
 					switch(tribe.name)
 						if("Ronin")
@@ -564,8 +564,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(canraise)
 						canraise = AuspiceRankUp()
 					if(canraise)
-						var/rank_cost = 50
-						dat += " <a href='byond://?_src_=prefs;preference=renownrank;task=input'>Raise Renown Rank ([rank_cost])</a><BR>"
+						dat += " <a href='byond://?_src_=prefs;preference=renownrank;task=input'>Raise Renown Rank</a><BR>"
 					else if(renownrank < MAX_PUBLIC_RANK)
 						var/renownrequirement = RenownRequirements()
 						dat += "<b>Needed To Raise Renown:</b> [renownrequirement]<BR>"
@@ -1443,7 +1442,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		var/bypass = FALSE
 		if (check_rights_for(user.client, R_ADMIN))
-			bypass = FALSE
+			bypass = TRUE
 
 		for(var/datum/job/job in sortList(SSjob.occupations, GLOBAL_PROC_REF(cmp_job_display_asc)))
 
@@ -2546,29 +2545,24 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								is_enlightened = TRUE
 
 				if("renownrank")
-					var/cost = 50
-					if ((player_experience < cost) || (renownrank >= 5) || !(pref_species.id == "garou"))
-						return
-					player_experience -= cost
-					experience_used_on_character += cost
 					renownrank = renownrank+1
 
 				if("renownglory")
-					var/cost = max(5, glory * 10)
+					var/cost = 25
 					if ((player_experience < cost) || (glory >= 10) || !(pref_species.id == "garou"))
 						return
 					player_experience -= cost
 					experience_used_on_character += cost
 					glory = glory+1
 				if("renownhonor")
-					var/cost = max(5, honor * 10)
+					var/cost = 25
 					if ((player_experience < cost) || (honor >= 10) || !(pref_species.id == "garou"))
 						return
 					player_experience -= cost
 					experience_used_on_character += cost
 					honor = honor+1
 				if("renownwisdom")
-					var/cost = max(5, wisdom * 10)
+					var/cost = 25
 					if ((player_experience < cost) || (wisdom >= 10) || !(pref_species.id == "garou"))
 						return
 					player_experience -= cost
