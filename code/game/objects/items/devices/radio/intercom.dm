@@ -100,21 +100,18 @@
 
 /obj/item/radio/intercom/emp_act(severity)
 	. = ..() // Parent call here will set `on` to FALSE.
-	update_icon()
+	update_appearance()
 
 /obj/item/radio/intercom/end_emp_effect(curremp)
 	. = ..()
 	AreaPowerCheck() // Make sure the area/local APC is powered first before we actually turn back on.
 
-/obj/item/radio/intercom/update_icon()
-	. = ..()
-	if(on)
-		icon_state = initial(icon_state)
-	else
-		icon_state = "intercom-p"
+/obj/item/radio/intercom/update_icon_state()
+	icon_state = on ? initial(icon_state) : "intercom-p"
+	return ..()
 
 /**
- * Proc called whenever the intercom's area loses or gains power. Responsible for setting the `on` variable and calling `update_icon()`.
+ * Proc called whenever the intercom's area loses or gains power. Responsible for setting the `on` variable and calling `update_appearance()`.
  *
  * Normally called after the intercom's area receives the `COMSIG_AREA_POWER_CHANGE` signal, but it can also be called directly.
  * Arguments:
@@ -126,7 +123,7 @@
 		on = FALSE
 	else
 		on = current_area.powered(AREA_USAGE_EQUIP) // set "on" to the equipment power status of our area.
-	update_icon()
+	update_appearance()
 
 /obj/item/radio/intercom/add_blood_DNA(list/blood_dna)
 	return FALSE

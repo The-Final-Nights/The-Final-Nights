@@ -180,7 +180,7 @@
 	diag_hud_set_mechhealth()
 	diag_hud_set_mechcell()
 	diag_hud_set_mechstat()
-	update_icon()
+	update_appearance()
 
 /obj/vehicle/sealed/mecha/Destroy()
 	for(var/M in occupants)
@@ -209,10 +209,12 @@
 /obj/vehicle/sealed/mecha/update_icon_state()
 	if((mecha_flags & SILICON_PILOT) && silicon_icon_state)
 		icon_state = silicon_icon_state
-	else if(LAZYLEN(occupants))
+		return ..()
+	if(LAZYLEN(occupants))
 		icon_state = base_icon_state
-	else
-		icon_state = "[base_icon_state]-open"
+		return ..()
+	icon_state = "[base_icon_state]-open"
+	return ..()
 
 
 /obj/vehicle/sealed/mecha/get_cell()
@@ -785,7 +787,7 @@
 	LAZYSET(occupants, pilot_mob, NONE)
 	pilot_mob.mecha = src
 	pilot_mob.forceMove(src)
-	update_icon()
+	update_appearance()
 
 ///Handles an actual AI (simple_animal mecha pilot) exiting the mech
 /obj/vehicle/sealed/mecha/proc/aimob_exit_mech(mob/living/simple_animal/hostile/syndicate/mecha_pilot/pilot_mob)
@@ -793,7 +795,7 @@
 	if(pilot_mob.mecha == src)
 		pilot_mob.mecha = null
 	pilot_mob.forceMove(get_turf(src))
-	update_icon()
+	update_appearance()
 
 
 /////////////////////////////////////
@@ -974,7 +976,7 @@
 				L.reset_perspective()
 				remove_occupant(L)
 			mmi.set_mecha(null)
-			mmi.update_icon()
+			mmi.update_appearance()
 		setDir(dir_in)
 	return ..()
 
@@ -985,7 +987,7 @@
 	RegisterSignal(M, COMSIG_MOB_MIDDLECLICKON, PROC_REF(on_middlemouseclick)) //For AIs
 	RegisterSignal(M, COMSIG_MOB_SAY, PROC_REF(display_speech_bubble))
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/vehicle/sealed/mecha/remove_occupant(mob/M)
 	UnregisterSignal(M, COMSIG_LIVING_DEATH)
@@ -999,7 +1001,7 @@
 		M.client.view_size.resetToDefault()
 		zoom_mode = 0
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /////////////////////////
 ////// Access stuff /////

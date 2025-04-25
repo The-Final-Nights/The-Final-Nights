@@ -139,7 +139,6 @@
 
 /datum/action/proc/OnUpdatedIcon()
 	SIGNAL_HANDLER
-
 	UpdateButtonIcon()
 
 //Presets for item actions

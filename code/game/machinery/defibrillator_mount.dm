@@ -99,7 +99,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 		// Make sure the defib is set before processing begins.
 		defib = I
 		begin_processing()
-		update_icon()
+		update_appearance()
 		return
 	else if(defib && I == defib.paddles)
 		defib.paddles.snap_back()
@@ -112,7 +112,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 				return
 			clamps_locked = !clamps_locked
 			to_chat(user, "<span class='notice'>Clamps [clamps_locked ? "" : "dis"]engaged.</span>")
-			update_icon()
+			update_appearance()
 		else
 			to_chat(user, "<span class='warning'>Insufficient access.</span>")
 		return
@@ -135,7 +135,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 	"<span class='notice'>You override the locking clamps on [src]!</span>")
 	playsound(src, 'sound/machines/locktoggle.ogg', 50, TRUE)
 	clamps_locked = FALSE
-	update_icon()
+	update_appearance()
 	return TRUE
 
 /obj/machinery/defibrillator_mount/wrench_act(mob/living/user, obj/item/wrench/W)
@@ -173,7 +173,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 	// Make sure processing ends before the defib is nulled
 	end_processing()
 	defib = null
-	update_icon()
+	update_appearance()
 
 /obj/machinery/defibrillator_mount/charging
 	name = "PENLITE defibrillator mount"
@@ -204,7 +204,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 	if(C.charge < C.maxcharge)
 		use_power(50 * delta_time)
 		C.give(40 * delta_time)
-		update_icon()
+		update_appearance()
 
 //wallframe, for attaching the mounts easily
 /obj/item/wallframe/defib_mount

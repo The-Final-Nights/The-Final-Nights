@@ -75,6 +75,7 @@
 	return
 
 /obj/item/storage/portable_chem_mixer/update_icon_state()
+	. = ..()
 	var/locked = SEND_SIGNAL(src, COMSIG_IS_STORAGE_LOCKED)
 	if (!locked)
 		icon_state = "portablechemicalmixer_open"

@@ -79,6 +79,7 @@
 
 
 /obj/structure/toilet/update_icon_state()
+	. = ..()
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/toilet/deconstruct()
@@ -647,6 +648,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 	update_icon()
 
 /obj/structure/curtain/update_icon()
+	. = ..()
 	if(!open)
 		icon_state = "[icon_type]-closed"
 		layer = ABOVE_ALL_MOB_LAYERS_LAYER
