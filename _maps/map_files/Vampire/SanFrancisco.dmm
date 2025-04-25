@@ -5080,6 +5080,11 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip/toreador)
+"brf" = (
+/obj/effect/decal/bordur,
+/obj/effect/decal/trash,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/unionsquare)
 "brk" = (
 /obj/structure/big_vamprocks,
 /obj/structure/vampstatue/cloaked,
@@ -8247,6 +8252,11 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
+"cll" = (
+/obj/effect/decal/bordur/corner,
+/obj/effect/decal/trash,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/ghetto)
 "clq" = (
 /obj/structure/chair/comfy/black{
 	dir = 8
@@ -46490,6 +46500,11 @@
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/interior)
+"mPY" = (
+/obj/effect/decal/bordur,
+/obj/effect/decal/litter,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/unionsquare)
 "mPZ" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 5
@@ -88419,6 +88434,13 @@
 /obj/effect/decal/graffiti/large,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/financialdistrict/construction)
+"ylL" = (
+/obj/effect/decal/bordur{
+	dir = 8
+	},
+/obj/effect/decal/litter,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/ghetto)
 "ylP" = (
 /obj/structure/lamppost/sidewalk/chinese{
 	dir = 4
@@ -195941,7 +195963,7 @@ kpG
 bbR
 kpG
 hfy
-iog
+tUI
 mXC
 fQP
 fQP
@@ -196199,7 +196221,7 @@ hfy
 hfy
 hfy
 uHv
-mXC
+brf
 fQP
 fQP
 rFS
@@ -196703,7 +196725,7 @@ pvm
 iog
 iog
 iog
-iog
+auj
 iog
 iog
 iog
@@ -199026,7 +199048,7 @@ iog
 iog
 iog
 iog
-mXC
+mPY
 fQP
 fQP
 rFS
@@ -200050,7 +200072,7 @@ opB
 opB
 opB
 lqp
-jlv
+mrM
 jlv
 jlv
 bbf
@@ -202110,7 +202132,7 @@ bvc
 ibT
 xFV
 xFV
-cxc
+cll
 mwS
 mwS
 qTP
@@ -202879,7 +202901,7 @@ ewI
 oyM
 bvc
 jlv
-jlv
+mhC
 jlv
 avt
 mwS
@@ -205193,7 +205215,7 @@ hZD
 qKe
 aix
 cla
-jlv
+mhC
 avt
 mwS
 mwS
@@ -207233,7 +207255,7 @@ xcu
 mwS
 ulT
 jlv
-jlv
+mrM
 neJ
 wpk
 fEd
@@ -209030,7 +209052,7 @@ avt
 mwS
 xcu
 mwS
-ulT
+lYG
 jlv
 jlv
 avt
@@ -209038,7 +209060,7 @@ tEw
 eHs
 tEw
 tEw
-ulT
+lYG
 jlv
 jlv
 jlv
@@ -210585,7 +210607,7 @@ xFV
 xFV
 xFV
 xFV
-xFV
+ylL
 xFV
 xFV
 xFV
@@ -210607,7 +210629,7 @@ xFV
 xFV
 xFV
 xFV
-xFV
+ylL
 xFV
 xFV
 xFV
@@ -211115,7 +211137,7 @@ udS
 jlv
 jlv
 jlv
-jlv
+mrM
 jlv
 jlv
 jlv
