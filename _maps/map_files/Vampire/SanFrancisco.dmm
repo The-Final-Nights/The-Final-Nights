@@ -19784,7 +19784,10 @@
 /area/vtm/interior/laundromat)
 "fwi" = (
 /obj/structure/glowshroom,
-/obj/effect/spawner/structure/window/hollow,
+/obj/structure/window{
+	dir = 5;
+	can_be_unanchored = 0
+	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/shop)
 "fwj" = (
