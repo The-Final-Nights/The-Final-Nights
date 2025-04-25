@@ -27,6 +27,7 @@
 			return real_name
 	var/obj/item/clothing/mask/M = wear_mask
 	if(M && M.conceals_voice && (M.flags_inv & HIDEFACE))
+	   return get_alt_name()
 		return ("[age2agedescription(age)] [gender]")
 	if(mind)
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
