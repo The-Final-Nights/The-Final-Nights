@@ -168,18 +168,18 @@
 			var/random_renown = pick("Honor","Wisdom","Glory")
 			switch(random_renown)
 				if("Honor")
-					adjust_honor(random, vessel = vessel)
+					adjust_renown("honor", random, vessel = vessel)
 				if("Glory")
-					adjust_glory(random, vessel = vessel)
+					adjust_renown("glory", random, vessel = vessel)
 				if("Wisdom")
-					adjust_wisdom(random, vessel = vessel)
+					adjust_renown("wisdom", random, vessel = vessel)
 		else
 			if(honoradj)
-				adjust_honor(honoradj, vessel = vessel)
+				adjust_renown("honor", honoradj, vessel = vessel)
 			if(gloryadj)
-				adjust_glory(gloryadj, vessel = vessel)
+				adjust_renown("glory", gloryadj, vessel = vessel)
 			if(wisdomadj)
-				adjust_wisdom(wisdomadj, vessel = vessel)
+				adjust_renown("wisdom", wisdomadj, vessel = vessel)
 
 		if(src in GLOB.masquerade_breakers_list)
 			if(masquerade > 2)
@@ -188,109 +188,102 @@
 			GLOB.masquerade_breakers_list |= src
 
 	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
-	P.masquerade = masquerade
-	P.save_character()
-	P.save_preferences()
+	if(P)
+		P.masquerade = masquerade
+		P.save_character()
+		P.save_preferences()
 
-/mob/living/carbon/proc/adjust_honor(amount, threshold, mob/living/carbon/vessel)
+
+/mob/living/carbon/proc/adjust_renown(attribute, amount, threshold, mob/living/carbon/vessel)
 	if(!GLOB.canon_event)
 		return
 	if(!is_special_character(src))
 		if(!vessel)
 			vessel = src
-		if(amount < 0)
-			if(honor <= threshold)
+
+		var/current_value
+		switch(attribute)
+			if("honor")
+				current_value = honor
+			if("glory")
+				current_value = glory
+			if("wisdom")
+				current_value = wisdom
+			else
 				return
-			if(honor+amount <= threshold)
-				amount = (threshold-honor)
-			to_chat(vessel, span_userdanger("You feel ashamed!"))
-			honor = max(0, honor+amount)
+
+		if(amount < 0)
+			if(threshold && current_value <= threshold)
+				return
+			if(current_value + amount <= threshold)
+				amount = (threshold - current_value)
+			to_chat(vessel, span_userdanger("You feel [get_negative_emotion(attribute)]!"))
+			current_value = max(0, current_value + amount)
 			if(renownrank > AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(vessel, span_userdanger("You are now a [RankName(src.renownrank)]."))
+				to_chat(vessel, span_userdanger("You are now ai  [RankName(src.renownrank)]."))
+
 		if(amount > 0)
-			if(honor >= threshold)
+			if(threshold && current_value >= threshold)
 				return
-			if(honor+amount >= threshold)
-				amount = (threshold-honor)
-			to_chat(vessel, span_bold("You feel vindicated!"))
-			honor = min(10, honor+amount)
+			if(current_value + amount >= threshold)
+				amount = (threshold - current_value)
+			to_chat(vessel, span_bold("You feel [get_positive_emotion(attribute)]!"))
+			current_value = min(10, current_value + amount)
 			if(renownrank < AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
 				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
 
-	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
-	P.honor = honor
-	P.renownrank = renownrank
-	P.save_character()
-	P.save_preferences()
+		switch(attribute)
+			if("honor")
+				honor = current_value
+			if("glory")
+				glory = current_value
+			if("wisdom")
+				wisdom = current_value
+
+		var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
+		if(P)
+			switch(attribute)
+				if("honor")
+					P.honor = honor
+				if("glory")
+					P.glory = glory
+				if("wisdom")
+					P.wisdom = wisdom
+
+			P.renownrank = renownrank
+			P.save_character()
+			P.save_preferences()
 
 
-/mob/living/carbon/proc/adjust_glory(amount, threshold, mob/living/carbon/vessel)
-	if(!GLOB.canon_event)
-		return
-	if(!is_special_character(src))
-		if(!vessel)
-			vessel = src
-		if(amount < 0)
-			if(glory <= threshold)
-				return
-			if(glory+amount <= threshold)
-				amount = (threshold-glory)
-			to_chat(src,span_userdanger("You feel humiliated!"))
-			glory = max(0, glory+amount)
-			if(renownrank > AuspiceRankCheck(src))
-				renownrank = AuspiceRankCheck(src)
-				to_chat(vessel, span_userdanger("You are now a [RankName(src.renownrank)]."))
-		if(amount > 0)
-			if(glory >= threshold)
-				return
-			if(glory+amount >= threshold)
-				amount = (threshold-glory)
-			to_chat(vessel, span_bold("You feel brave!"))
-			glory = min(10, glory+amount)
-			if(renownrank < AuspiceRankCheck(src))
-				renownrank = AuspiceRankCheck(src)
-				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
 
-	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
-	P.glory = glory
-	P.renownrank = renownrank
-	P.save_character()
-	P.save_preferences()
+/mob/living/carbon/proc/get_negative_emotion(attribute)
+	switch(attribute)
+		if("honor")
+			return "ashamed"
 
-/mob/living/carbon/proc/adjust_wisdom(amount, threshold, mob/living/carbon/vessel)
-	if(!GLOB.canon_event)
-		return
-	if(!is_special_character(src))
-		if(!vessel)
-			vessel = src
-		if(amount < 0)
-			if(wisdom <= threshold)
-				return
-			if(wisdom+amount <= threshold)
-				amount = (threshold-wisdom)
-			to_chat(vessel, span_userdanger("You feel foolish!"))
-			wisdom = max(0, wisdom+amount)
-			if(renownrank > AuspiceRankCheck(src))
-				renownrank = AuspiceRankCheck(src)
-				to_chat(vessel, span_userdanger("You are now a [RankName(src.renownrank)]."))
-		if(amount > 0)
-			if(wisdom >= threshold)
-				return
-			if(wisdom+amount >= threshold)
-				amount = (threshold-wisdom)
-			to_chat(vessel, span_bold("You feel clever!"))
-			wisdom = min(10, wisdom+amount)
-			if(renownrank < AuspiceRankCheck(src))
-				renownrank = AuspiceRankCheck(src)
-				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
+		if("glory")
+			return "humiliated"
 
-	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
-	P.wisdom = wisdom
-	P.renownrank = renownrank
-	P.save_character()
-	P.save_preferences()
+		if("wisdom")
+			return "foolish"
+
+	return "unsure"
+
+/mob/living/carbon/proc/get_positive_emotion(attribute)
+	switch(attribute)
+
+		if("honor")
+			return "vindicated"
+
+		if("glory")
+			return "brave"
+
+		if("wisdom")
+			return "clever"
+
+	return "confident"
 
 /mob/living/carbon/proc/AuspiceRankCheck(mob/living/carbon/user)
 	switch(auspice.name)
