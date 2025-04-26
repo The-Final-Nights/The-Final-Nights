@@ -26,7 +26,7 @@
 	. = ..()
 	if(books_to_load && isnum(books_to_load))
 		books_to_load += pick(-1,-1,0,1,1)
-	update_icon()
+	update_appearance()
 
 /**
  * Create a random book or books.

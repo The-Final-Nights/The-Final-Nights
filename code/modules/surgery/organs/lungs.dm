@@ -29,9 +29,6 @@
 		return
 	if(HAS_TRAIT(H, TRAIT_NOBREATH))
 		return
-	if(istype(H.loc, /obj/werewolf_holder/transformation))
-		H.failed_last_breath = FALSE //clear oxy issues
-		H.clear_alert("not_enough_oxy")
 	return
 
 

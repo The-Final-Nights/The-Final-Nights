@@ -71,21 +71,23 @@
 		return
 	var/area/vtm/V = get_area(C)
 	if(!V.upper)
-		to_chat(C, "<span class='warning'>You need to be outside to look at the moon!</span>")
+		to_chat(C, span_warning("You need to be outside to look at the moon!"))
 		return
 	if(C.last_moon_look == 0 || C.last_moon_look+600 < world.time)
-//		last_moon_look = world.time
-		C.transformator.lupus_form.last_moon_look = world.time
-		C.transformator.crinos_form.last_moon_look = world.time
-		C.transformator.human_form.last_moon_look = world.time
+		var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+		var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+		var/mob/living/carbon/human/homid = C.transformator.human_form?.resolve()
+
+		lupus?.last_moon_look = world.time
+		crinos?.last_moon_look = world.time
+		homid?.last_moon_look = world.time
+
 		to_chat(C, span_notice("The Moon is [GLOB.moon_state]."))
 		to_chat(C, span_notice("You can activate transformations using Ctrl-Click!"))
-//		icon_state = "[GLOB.moon_state]"
 		C.emote("howl")
 		playsound(get_turf(C), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
 		icon_state = "[GLOB.moon_state]"
-		spawn(10)
-			adjust_rage(1, C, TRUE)
+		adjust_rage(1, C, TRUE)
 
 /datum/hud
 	var/atom/movable/screen/auspice_icon
@@ -182,7 +184,7 @@
 
 	pull_icon = new /atom/movable/screen/pull()
 	pull_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
-	pull_icon.update_icon()
+	pull_icon.update_appearance()
 	pull_icon.screen_loc = ui_pull
 	pull_icon.hud = src
 	static_inventory += pull_icon
@@ -201,14 +203,14 @@
 	zone_select = new /atom/movable/screen/zone_sel()
 	zone_select.icon = 'code/modules/wod13/UI/buttons64.dmi'
 	zone_select.hud = src
-	zone_select.update_icon()
+	zone_select.update_appearance()
 	static_inventory += zone_select
 
 	for(var/atom/movable/screen/inventory/inv in (static_inventory + toggleable_inventory))
 		if(inv.slot_id)
 			inv.hud = src
 			inv_slots[TOBITSHIFT(inv.slot_id) + 1] = inv
-			inv.update_icon()
+			inv.update_appearance()
 
 /datum/hud/werewolf/persistent_inventory_update()
 	if(!mymob)

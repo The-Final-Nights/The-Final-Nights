@@ -96,6 +96,12 @@
 	if(mob.force_moving)
 		return FALSE
 
+	if(mob.shifting)
+		mob.pixel_shift(direct)
+		return FALSE
+	else if(mob.is_shifted)
+		mob.unpixel_shift()
+
 	var/mob/living/L = mob  //Already checked for isliving earlier // [ChillRaccoon] - actually didn't know why does it should work only for living
 	if(L.incorporeal_move)	//Move though walls
 		Process_Incorpmove(direct)
@@ -498,7 +504,7 @@
 		m_intent = MOVE_INTENT_RUN
 	if(hud_used?.static_inventory)
 		for(var/atom/movable/screen/mov_intent/selector in hud_used.static_inventory)
-			selector.update_icon()
+			selector.update_appearance()
 
 ///Moves a mob upwards in z level
 /mob/verb/up()

@@ -73,7 +73,7 @@
 
 /datum/emote/flip/check_cooldown(mob/user, intentional)
 	. = ..()
-	if(.)
+	if(!.)
 		return
 	if(!can_run_emote(user, intentional=intentional))
 		return
@@ -102,12 +102,11 @@
 
 /datum/emote/spin/run_emote(mob/user, params ,  type_override, intentional)
 	. = ..()
-	if(.)
-		user.spin(20, 1)
+	user.spin(20, 1)
 
 /datum/emote/spin/check_cooldown(mob/living/carbon/user, intentional)
 	. = ..()
-	if(.)
+	if(!.)
 		return
 	if(!can_run_emote(user, intentional=intentional))
 		return

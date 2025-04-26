@@ -169,6 +169,7 @@
 	victim = null
 
 /obj/machinery/hypnochair/update_icon_state()
+	. = ..()
 	icon_state = initial(icon_state)
 	if(state_open)
 		icon_state += "_open"

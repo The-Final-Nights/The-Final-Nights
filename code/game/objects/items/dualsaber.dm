@@ -71,10 +71,8 @@
 	return wielded * sharpness
 
 /obj/item/dualsaber/update_icon_state()
-	if(wielded)
-		icon_state = "dualsaber[saber_color][wielded]"
-	else
-		icon_state = "dualsaber0"
+	icon_state = wielded ? "dualsaber[saber_color][wielded]" : "dualsaber0"
+	return ..()
 
 /obj/item/dualsaber/suicide_act(mob/living/carbon/user)
 	if(wielded)
@@ -135,7 +133,7 @@
 		INVOKE_ASYNC(src, PROC_REF(jedi_spin), user)
 
 /obj/item/dualsaber/proc/jedi_spin(mob/living/user)
-	dance_rotate(user, CALLBACK(user, TYPE_PROC_REF(/mob, dance_flip)))
+	return
 
 /obj/item/dualsaber/proc/impale(mob/living/user)
 	to_chat(user, "<span class='warning'>You twirl around a bit before losing your balance and impaling yourself on [src].</span>")
@@ -194,7 +192,7 @@
 			hacked = TRUE
 			to_chat(user, "<span class='warning'>2XRNBW_ENGAGE</span>")
 			saber_color = "rainbow"
-			update_icon()
+			update_appearance()
 		else
 			to_chat(user, "<span class='warning'>It's starting to look like a triple rainbow - no, nevermind.</span>")
 	else

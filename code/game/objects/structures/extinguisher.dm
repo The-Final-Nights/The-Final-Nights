@@ -119,6 +119,7 @@
 		update_icon()
 
 /obj/structure/extinguisher_cabinet/update_icon_state()
+	. = ..()
 	icon_state = "firehouse"
 
 /obj/structure/extinguisher_cabinet/obj_break(damage_flag)

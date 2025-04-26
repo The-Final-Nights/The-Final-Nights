@@ -54,6 +54,7 @@
 #define ANTI_TINFOIL_MANEUVER   (1<<12) //Hats with negative effects when worn (i.e the tinfoil hat).
 #define DANGEROUS_OBJECT    (1<<13)     //Clothes that cause a larger notification when placed on a person.
 #define LARGE_WORN_ICON    (1<<14)     //Clothes that use large icons, for applying the proper overlays like blood
+#define NO_HAT_TRICKS		(1<<15)	//Prevents this item from being thrown onto other people's heads.
 
 /// Flags for the organ_flags var on /obj/item/organ
 

@@ -379,13 +379,13 @@
 /datum/status_effect/eldritch/on_apply()
 	if(owner.mob_size >= MOB_SIZE_HUMAN)
 		RegisterSignal(owner,COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(update_owner_underlay))
-		owner.update_icon()
+		owner.update_appearance()
 		return TRUE
 	return FALSE
 
 /datum/status_effect/eldritch/on_remove()
 	UnregisterSignal(owner,COMSIG_ATOM_UPDATE_OVERLAYS)
-	owner.update_icon()
+	owner.update_appearance()
 	return ..()
 
 /datum/status_effect/eldritch/proc/update_owner_underlay(atom/source, list/overlays)
@@ -948,7 +948,7 @@
 /datum/status_effect/cloudstruck/on_apply()
 	mob_overlay = mutable_appearance('icons/effects/eldritch.dmi', "cloud_swirl", ABOVE_MOB_LAYER)
 	owner.overlays += mob_overlay
-	owner.update_icon()
+	owner.update_appearance()
 	ADD_TRAIT(owner, TRAIT_BLIND, "cloudstruck")
 	return TRUE
 
@@ -959,7 +959,7 @@
 	REMOVE_TRAIT(owner, TRAIT_BLIND, "cloudstruck")
 	if(owner)
 		owner.overlays -= mob_overlay
-		owner.update_icon()
+		owner.update_appearance()
 
 /datum/status_effect/cloudstruck/Destroy()
 	. = ..()
@@ -1005,3 +1005,41 @@
 /datum/status_effect/awe/Destroy()
 	source = null
 	return ..()
+
+/datum/status_effect/diablerie_high //Used for powers that force a target to walk to you.
+	id = "diablerie"
+	status_type = STATUS_EFFECT_REPLACE
+	duration = 15 MINUTES
+	tick_interval = 2 SECONDS
+	alert_type = /atom/movable/screen/alert/status_effect/diablerie_high
+
+/atom/movable/screen/alert/status_effect/diablerie_high
+	name = "Amaranth"
+	desc = "That felt amazing... I am zooted out of my mind."
+	icon_state = "hypnosis"
+
+/datum/movespeed_modifier/diablerie_high
+	multiplicative_slowdown = 0.15
+
+/datum/status_effect/diablerie_high/tick()
+	var/mob/living/carbon/H = owner
+	H.set_drugginess(15)
+	if(prob(4))
+		var/high_message = pick("You feel in tune with your Beast.","You feel like fistfighting Hardestadt.","Some more Vitae would wash this down nicely..","You could use some more of that nectar.","You can feel your blood pulsing.","You feel relaxed.","Your Beast craves for more.","You notice you've been moving more slowly.")
+		to_chat(H, span_notice("[high_message]"))
+
+/datum/status_effect/diablerie_high/on_apply()
+	. = ..()
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/diablerie_high)
+	if(!HAS_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN))
+		ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
+	owner.additional_dexterity -= 2
+	owner.additional_mentality -= 1
+
+/datum/status_effect/diablerie_high/on_remove()
+	. = ..()
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/diablerie_high)
+	owner.additional_dexterity += 2
+	owner.additional_mentality += 1
+	if(HAS_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN))
+		REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)

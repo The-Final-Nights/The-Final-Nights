@@ -98,7 +98,8 @@
 	alpha = 64
 	color = "#c6845b"
 
-/obj/effect/decal/cleanable/gasoline/update_icon()
+/obj/effect/decal/cleanable/gasoline/update_appearance()
+	. = ..()
 	QUEUE_SMOOTH(src)
 	QUEUE_SMOOTH_NEIGHBORS(src)
 
