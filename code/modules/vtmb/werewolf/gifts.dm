@@ -641,7 +641,7 @@
 
 	var/place = get_area_name(origin_turf)
 
-	var/returntext = "[disttext], [dirtext], at [place]."
+	var/returntext = "[disttext],[dirtext], at [place]."
 
 	return returntext
 
