@@ -6691,7 +6691,7 @@
 /obj/structure/table/wood,
 /obj/item/vtm_artifact/rand,
 /obj/machinery/button/curtain{
-	id = malkav
+	id = 24
 	},
 /obj/item/paper_bin{
 	pixel_y = 8;
@@ -21405,7 +21405,7 @@
 /area/vtm)
 "fTM" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = malkav
+	id = 24
 	},
 /turf/closed/wall/vampwall/painted/low/window,
 /area/vtm/clinic/haven)
