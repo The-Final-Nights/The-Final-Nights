@@ -118,7 +118,7 @@ GLOBAL_LIST_INIT(amberglade_positions, list(
 ))
 
 GLOBAL_LIST_INIT(spiral_positions, list(
-    "Endron Branch Leader",
+    "Endron Branch Lead",
 	"Endron Executive",
 	"Endron Internal Affairs Agent",
 	"Endron Chief of Security",

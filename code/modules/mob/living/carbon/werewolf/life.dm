@@ -20,7 +20,6 @@
 					P.save_preferences()
 					P.save_character()
 
-
 		if(stat != DEAD)
 			var/gaining_rage = TRUE
 			for(var/obj/structure/werewolf_totem/W in GLOB.totems)
@@ -69,29 +68,35 @@
 				if(masquerade < 5)
 					check_veil_adjust()
 
+// currently being in your caern restores veil to max because theres no other way of doing. remember to cap it to THREE once shame rituals are back
 
 /mob/living/carbon/proc/check_veil_adjust()
 
 	if(istype(get_area(src), /area/vtm/interior/penumbra))
 		if((last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
-			adjust_veil(1, 4, -1)
+			adjust_veil(1, random = -1)
 			last_veil_restore = world.time
 			return
 
 	switch(auspice.tribe.name)
 		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
 			if(istype(get_area(src), /area/vtm/forest))
-				adjust_veil(1, 3, -1)
+				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
-		if("Glass Walkers", "Bone Gnawers", "Children of Gaia", "Shadow Lords")
+		if("Bone Gnawers", "Children of Gaia", "Shadow Lords")
+			if(istype(get_area(src), /area/vtm/interior/cog/caern))
+				adjust_veil(1, random = -1)
+				last_veil_restore = world.time
+
+		if("Glass Walkers")
 			if(istype(get_area(src), /area/vtm/interior/glasswalker))
-				adjust_veil(1, 3, -1)
+				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
 		if("Black Spiral Dancers")
 			if(istype(get_area(src), /area/vtm/interior/endron_facility) && masquerade < 5)
-				adjust_veil(1, 3, -1)
+				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
 /datum/species/garou/spec_life(mob/living/carbon/human/H)
@@ -127,22 +132,20 @@
 		return
 	adjust_bodytemperature(BODYTEMP_HEATING_MAX) //If you're on fire, you heat up!
 
-/mob/living/carbon/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, mob/living/carbon/vessel)
+/mob/living/carbon/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, mob/living/carbon/vessel, forced)
 	if(iswerewolf(src))
 		var/mob/living/carbon/player = transformator.human_form.resolve()
 		player.adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, src)
 	if(!GLOB.canon_event)
 		return
-	if(next_veil_time >= world.time)
+	if(next_veil_time >= world.time && !forced)
 		return
 	if(amount > 0)
 		if(HAS_TRAIT(src, TRAIT_VIOLATOR))
 			return
 	if(amount < 0)
-		if(istype(get_area(src), /area/vtm))
-			var/area/vtm/V = get_area(src)
-			if(V.zone_type != "masquerade")
-				return
+		if(!CheckZoneMasquerade(src) && !forced)
+			return
 	next_veil_time = world.time + VEIL_COOLDOWN
 	if(!is_special_character(src))
 		if(!vessel)
@@ -151,14 +154,14 @@
 			if(masquerade > 0 && masquerade > threshold)
 				SEND_SOUND(vessel, sound('code/modules/wod13/sounds/veil_violation.ogg', 0, 0, 75))
 				to_chat(vessel, "<span class='boldnotice'><b>VEIL VIOLATION</b></span>")
-				if(masquerade+amount < threshold)
+				if(threshold && masquerade+amount < threshold)
 					amount = threshold-masquerade
 				masquerade = max(0, masquerade+amount)
 		if(amount > 0)
 			if(masquerade < 5)
 				SEND_SOUND(vessel, sound('code/modules/wod13/sounds/humanity_gain.ogg', 0, 0, 75))
 				to_chat(vessel, "<span class='boldnotice'><b>VEIL REINFORCEMENT</b></span>")
-				if(masquerade+amount > threshold)
+				if(threshold && masquerade+amount > threshold)
 					amount = threshold-masquerade
 				masquerade = min(5, masquerade+amount)
 		if(random < 0 || random > 0)
@@ -183,6 +186,11 @@
 				GLOB.masquerade_breakers_list -= src
 		else if(masquerade < 3)
 			GLOB.masquerade_breakers_list |= src
+
+	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
+	P.masquerade = masquerade
+	P.save_character()
+	P.save_preferences()
 
 /mob/living/carbon/proc/adjust_honor(amount, threshold, mob/living/carbon/vessel)
 	if(!GLOB.canon_event)
@@ -210,6 +218,12 @@
 			if(renownrank < AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
 				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
+
+	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
+	P.honor = honor
+	P.renownrank = renownrank
+	P.save_character()
+	P.save_preferences()
 
 
 /mob/living/carbon/proc/adjust_glory(amount, threshold, mob/living/carbon/vessel)
@@ -239,6 +253,12 @@
 				renownrank = AuspiceRankCheck(src)
 				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
 
+	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
+	P.glory = glory
+	P.renownrank = renownrank
+	P.save_character()
+	P.save_preferences()
+
 /mob/living/carbon/proc/adjust_wisdom(amount, threshold, mob/living/carbon/vessel)
 	if(!GLOB.canon_event)
 		return
@@ -265,6 +285,12 @@
 			if(renownrank < AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
 				to_chat(vessel, span_boldnotice("You are now a [RankName(src.renownrank)]."))
+
+	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
+	P.wisdom = wisdom
+	P.renownrank = renownrank
+	P.save_character()
+	P.save_preferences()
 
 /mob/living/carbon/proc/AuspiceRankCheck(mob/living/carbon/user)
 	switch(auspice.name)
