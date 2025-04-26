@@ -113,6 +113,7 @@
 	update_icon()
 
 /obj/item/organ/regenerative_core/update_icon_state()
+	. = ..()
 	icon_state = inert ? "legion_soul" : "legion_soul"
 
 /obj/item/organ/regenerative_core/legion/tzi

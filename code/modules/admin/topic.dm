@@ -27,7 +27,7 @@
 			return
 
 		var/ahelp_ref = href_list["ahelp"]
-		var/datum/admin_help/AH = locate(ahelp_ref)
+		var/datum/help_ticket/admin/AH = locate(ahelp_ref)
 		if(AH)
 			AH.Action(href_list["ahelp_action"])
 		else
@@ -2150,6 +2150,16 @@
 		if(!paper_to_show)
 			return
 		paper_to_show.ui_interact(usr)
+	else if(href_list["play_internet"])
+		if(!check_rights(R_SOUND))
+			return
+
+		var/credit = href_list["credit"]
+		var/link_url = href_list["play_internet"]
+		if(!link_url)
+			return
+
+		web_sound(usr, link_url, credit)
 
 /datum/admins/proc/HandleCMode()
 	if(!check_rights(R_ADMIN))

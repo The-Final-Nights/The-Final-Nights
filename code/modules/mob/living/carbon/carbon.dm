@@ -46,10 +46,10 @@
 		var/atom/movable/screen/inventory/hand/H
 		H = hud_used.hand_slots["[oindex]"]
 		if(H)
-			H.update_icon()
+			H.update_appearance()
 		H = hud_used.hand_slots["[held_index]"]
 		if(H)
-			H.update_icon()
+			H.update_appearance()
 
 
 /mob/living/carbon/activate_hand(selhand) //l/r OR 1-held_items.len
@@ -981,6 +981,8 @@
 	if(admin_revive)
 		suiciding = FALSE
 		regenerate_limbs()
+		if(HAS_TRAIT(src, TRAIT_TORPOR))
+			cure_torpor()
 		regenerate_organs()
 		set_handcuffed(null)
 		for(var/obj/item/restraints/R in contents) //actually remove cuffs from inventory

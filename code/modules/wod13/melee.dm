@@ -66,6 +66,7 @@
 	wielded = FALSE
 
 /obj/item/melee/vampirearms/fireaxe/update_icon_state()
+	. = ..()
 	icon_state = "fireaxe0"
 
 /obj/item/melee/vampirearms/fireaxe/afterattack(atom/A, mob/user, proximity)
@@ -90,6 +91,7 @@
 	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=40, icon_wielded="axetzi1")
 
 /obj/item/melee/vampirearms/fireaxe/axetzi/update_icon_state()
+	. = ..()
 	icon_state = "axetzi0"
 
 
@@ -332,11 +334,12 @@
 		var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 		if(STR)
 			STR.grid_remove_item(I)
-		update_icon()
+		update_appearance()
 	else
 		to_chat(user, "<span class='warning'>[src] is empty!</span>")
 
 /obj/item/storage/belt/vampire/sheathe/update_icon_state()
+	. = ..()
 	icon_state = initial(icon_state)
 	if(contents.len)
 		var/obj/item/I = contents[1]
@@ -362,7 +365,7 @@
 		new /obj/item/melee/vampirearms/rapier(src)
 	else if(istype(src, /obj/item/storage/belt/vampire/sheathe/sabre))
 		new /obj/item/melee/vampirearms/sabre(src)
-	update_icon()
+	update_appearance()
 
 //end of sheathe code
 
@@ -577,6 +580,14 @@
 		var/datum/action/A = X
 		A.UpdateButtonIcon()
 
+/datum/crafting_recipe/stake
+	name = "Stake"
+	time = 50
+	reqs = list(/obj/item/stack/sheet/mineral/wood = 5)
+	result = /obj/item/vampire_stake
+	always_available = TRUE
+	category = CAT_WEAPON
+
 /obj/item/vampire_stake
 	name = "stake"
 	desc = "Paralyzes blank-bodies if aimed straight to the heart."
@@ -720,6 +731,7 @@
 	wielded = FALSE
 
 /obj/item/melee/vampirearms/eguitar/update_icon_state()
+	. = ..()
 	icon_state = "rock0"
 
 /obj/item/shield/door

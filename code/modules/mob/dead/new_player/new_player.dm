@@ -208,7 +208,7 @@
 			return
 
 		var/name_wrong = FALSE
-		for(var/i in GLOB.fucking_joined)
+		for(var/i in GLOB.player_list)
 			if(i == client.prefs.real_name)
 				name_wrong = TRUE
 		if(name_wrong)
@@ -275,7 +275,7 @@
 		observer.real_name = observer.client.prefs.real_name
 		observer.name = observer.real_name
 		observer.client.init_verbs()
-	observer.update_icon()
+	observer.update_appearance()
 	observer.stop_sound_channel(CHANNEL_LOBBYMUSIC)
 	deadchat_broadcast(" has observed.", "<b>[observer.real_name]</b>", follow_target = observer, turf_target = get_turf(observer), message_type = DEADCHAT_DEATHRATTLE)
 	QDEL_NULL(mind)
@@ -570,7 +570,6 @@
 						H.mind.dharma.Hun = H.client.prefs.hun
 						H.mind.dharma.on_gain(H)
 //						H.mind.dharma.initial_skin_color = H.skin_tone
-				GLOB.fucking_joined |= H.client.prefs.real_name
 				var/datum/relationship/R = new ()
 				H.Myself = R
 				R.owner = H

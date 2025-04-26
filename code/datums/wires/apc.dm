@@ -44,15 +44,11 @@
 		if(WIRE_POWER1, WIRE_POWER2) // Short out.
 			if(mend && !is_cut(WIRE_POWER1) && !is_cut(WIRE_POWER2))
 				A.shorted = FALSE
-				A.shock(usr, 50)
 			else
 				A.shorted = TRUE
-				A.shock(usr, 50)
+			A.shock(usr, 50)
 		if(WIRE_AI) // Disable AI control.
-			if(mend)
-				A.aidisabled = FALSE
-			else
-				A.aidisabled = TRUE
+			A.aidisabled = !mend
 
 /datum/wires/apc/can_reveal_wires(mob/user)
 	if(HAS_TRAIT(user, TRAIT_KNOW_ENGI_WIRES))

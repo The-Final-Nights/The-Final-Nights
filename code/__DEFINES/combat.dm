@@ -76,7 +76,7 @@
 #define HEALTH_THRESHOLD_DEAD -100
 
 #define HEALTH_THRESHOLD_VAMPIRE_TORPOR -100
-#define HEALTH_THRESHOLD_VAMPIRE_DEAD -200
+#define HEALTH_THRESHOLD_VAMPIRE_DEAD -700
 
 #define HEALTH_THRESHOLD_NEARDEATH -90 //Not used mechanically, but to determine if someone is so close to death they hear the other side
 

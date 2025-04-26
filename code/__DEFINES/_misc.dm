@@ -375,11 +375,6 @@ GLOBAL_LIST_INIT(pda_styles, sortList(list(MONO, VT, ORBITRON, SHARE)))
 #define MOUSE_OPACITY_ICON 1
 #define MOUSE_OPACITY_OPAQUE 2
 
-//world/proc/shelleo
-#define SHELLEO_ERRORLEVEL 1
-#define SHELLEO_STDOUT 2
-#define SHELLEO_STDERR 3
-
 //server security mode
 #define SECURITY_SAFE 1
 #define SECURITY_ULTRASAFE 2

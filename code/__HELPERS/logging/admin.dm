@@ -43,3 +43,7 @@
 	logger.Log(LOG_CATEGORY_SUSPICIOUS_LOGIN, text)
 	if(access_log_mirror)
 		log_access(text)
+
+/proc/log_href_exploit(atom/user, data = "")
+	logger.Log(LOG_CATEGORY_ADMIN, "HREF: [key_name(user)] has potentially attempted an href exploit.[data]")
+	message_admins("[key_name_admin(user)] has potentially attempted an href exploit.[data]")
