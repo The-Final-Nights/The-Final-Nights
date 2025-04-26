@@ -251,6 +251,15 @@ Dancer
 	var/mob/living/carbon/H = quirk_holder
 	H.bloodquality = BLOOD_QUALITY_POTENT
 
+/datum/quirk/organovore
+	name = "Organovore"
+	desc = "For one reason or another, blood doesn't sate your hunger. Organs will, though."
+	mob_trait = TRAIT_ORGANOVORE
+	value = -3
+	gain_text = "<span class='warning'>You have a craving for liver.</span>"
+	lose_text = "<span class='notice'>Your craving subsides...</span>"
+	allowed_species = list("Vampire")
+
 /datum/action/fly_upper
 	name = "Fly Up"
 	desc = "Fly to the upper level."

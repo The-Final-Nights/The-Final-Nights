@@ -524,6 +524,7 @@
 	amount = 5
 
 /obj/item/stack/human_flesh/update_icon_state()
+	. = ..()
 	var/amount = get_amount()
 	switch(amount)
 		if(30 to INFINITY)

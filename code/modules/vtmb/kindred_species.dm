@@ -255,9 +255,13 @@
 	//vampires resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
 
+	//putting this here for now not sure if elsewhere is better?
+	RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
+
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(C, COMSIG_ADD_VITAE)
 	for(var/datum/action/vampireinfo/VI in C.actions)
 		VI?.Remove(C)
 	for(var/datum/action/A in C.actions)
@@ -884,3 +888,19 @@
 
 	if(iskindred(being_bitten))
 		return COMPONENT_RESIST_VAMPIRE_KISS
+
+// Currently just used for the Organovore Quirk, might be handy for something else. Unsure where else to put it?
+
+/datum/species/kindred/proc/add_vitae_from_item(datum/source, amount_of_bloodpoints, plays_sound)
+	SIGNAL_HANDLER
+
+	var/mob/living/carbon/human/H = source
+
+	H.bloodpool = min(H.maxbloodpool, H.bloodpool+amount_of_bloodpoints)
+	H.adjustBruteLoss(-10, TRUE)
+	H.update_damage_overlays()
+	H.update_health_hud()
+	if(iskindred(H))
+		H.update_blood_hud()
+	if(plays_sound)
+		playsound(H.loc,'sound/items/drink.ogg', 50, TRUE)

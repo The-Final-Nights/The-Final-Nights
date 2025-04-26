@@ -384,7 +384,7 @@
 /obj/effect/decal/asphalt/Initialize()
 	..()
 	icon_state = "decal[rand(1, 24)]"
-	update_icon()
+	update_appearance()
 	if(GLOB.winter)
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
@@ -410,7 +410,7 @@
 /obj/effect/decal/asphaltline/Initialize()
 	..()
 	icon_state = "[initial(icon_state)][rand(1, 3)]"
-	update_icon()
+	update_appearance()
 	if(GLOB.winter)
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
@@ -426,7 +426,7 @@
 /obj/effect/decal/crosswalk/Initialize()
 	..()
 	icon_state = "crosswalk[rand(1, 3)]"
-	update_icon()
+	update_appearance()
 	if(GLOB.winter)
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
@@ -458,7 +458,7 @@
 				heavyfootstep = FOOTSTEP_SNOW
 	if(prob(50))
 		icon_state = "asphalt[rand(1, 3)]"
-		update_icon()
+		update_appearance()
 	if(prob(25))
 		new /obj/effect/decal/asphalt(src)
 	set_light(1, 0.5, "#a4b7ff")

@@ -77,6 +77,9 @@
 	var/minimal_masquerade = 1
 	///Minimum Renown Rank (garou) necessary to do this job.
 	var/minimal_renownrank
+	/// If set to a positive value, character must be at least this age (in years) to join as role.
+	var/minimum_character_age = JOB_NO_MINIMUM_CHARACTER_AGE
+
 	///List of species that are allowed to do this job.
 	var/list/allowed_species = list("Vampire")
 	///List of species that are limited to a certain amount of that species doing this job.
@@ -368,3 +371,6 @@
 	if(CONFIG_GET(flag/security_has_maint_access))
 		return list(ACCESS_MAINT_TUNNELS)
 	return list()
+
+/datum/job/proc/is_character_old_enough(chronological_age)
+	return minimum_character_age <= chronological_age

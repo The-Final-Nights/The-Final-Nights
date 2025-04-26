@@ -55,7 +55,7 @@
 			to_chat(user, "<span class='notice'>*[tag]*</span>")
 			sortTag = O.currTag
 			playsound(loc, 'sound/machines/twobeep_high.ogg', 100, TRUE)
-			update_icon()
+			update_appearance()
 	else if(IS_WRITING_UTENSIL(W))
 		if(!user.can_write(W))
 			return

@@ -118,8 +118,10 @@
 
 #define TRUSTED_PLAYER "trusted_player"
 
-
-
+/**
+ * Signal to add blood to a blood pool
+ */
+#define COMSIG_ADD_VITAE "add_vitae_from_item"
 
 /**
  * Cooldown defines

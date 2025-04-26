@@ -40,9 +40,11 @@
 /obj/effect/proc_holder/spell/aimed/proc/on_deactivation(mob/user)
 	return
 
-/obj/effect/proc_holder/spell/aimed/update_icon()
+/obj/effect/proc_holder/spell/aimed/update_appearance()
 	if(!action)
 		return
+
+	. = ..()
 	action.button_icon_state = "[base_icon_state][active]"
 	action.UpdateButtonIcon()
 

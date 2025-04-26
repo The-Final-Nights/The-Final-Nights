@@ -721,7 +721,7 @@ VENTORY!
 		else
 			coordinates = screen_loc_to_grid_coordinates(coordinates)
 		grid_add_item(storing, coordinates)
-	update_icon()
+	update_appearance()
 	refresh_mob_views()
 	return TRUE
 
@@ -753,7 +753,7 @@ VENTORY!
 	else
 		//Being destroyed, just move to nullspace now (so it's not in contents for the icon update)
 		removed.moveToNullspace()
-	update_icon()
+	update_appearance()
 	refresh_mob_views()
 	return TRUE
 
