@@ -57,4 +57,4 @@
 			if(TT)
 				to_chat(user, "[W.true_real_name], Veil: [W.masquerade], [get_area_name(W)] X:[TT.x] Y:[TT.y]")
 	else
-		to_chat(user, "No available Masquerade breakers in city...")
+		to_chat(user, "No available Veil breakers in city...")
