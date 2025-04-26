@@ -221,7 +221,7 @@
 	density = FALSE
 	if(drop)
 		dump_inventory_contents()
-	update_icon()
+	update_appearance()
 	updateUsrDialog()
 
 /**
@@ -304,7 +304,7 @@
 		set_occupant(target)
 		target.forceMove(src)
 	updateUsrDialog()
-	update_icon()
+	update_appearance()
 
 /obj/machinery/proc/auto_use_power()
 	if(!powered(power_channel))
@@ -529,7 +529,7 @@
 	if(!(machine_stat & BROKEN) && !(flags_1 & NODECONSTRUCT_1))
 		set_machine_stat(machine_stat | BROKEN)
 		SEND_SIGNAL(src, COMSIG_MACHINERY_BROKEN, damage_flag)
-		update_icon()
+		update_appearance()
 		return TRUE
 
 /obj/machinery/contents_explosion(severity, target)
@@ -538,7 +538,7 @@
 /obj/machinery/handle_atom_del(atom/A)
 	if(A == occupant)
 		set_occupant(null)
-		update_icon()
+		update_appearance()
 		updateUsrDialog()
 		return ..()
 

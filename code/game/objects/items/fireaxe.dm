@@ -45,6 +45,7 @@
 	wielded = FALSE
 
 /obj/item/fireaxe/update_icon_state()
+	. = ..()
 	icon_state = "fireaxe0"
 
 /obj/item/fireaxe/suicide_act(mob/user)
@@ -73,6 +74,7 @@
 	AddComponent(/datum/component/two_handed, force_unwielded=5, force_wielded=23, icon_wielded="bone_axe1")
 
 /obj/item/fireaxe/boneaxe/update_icon_state()
+	. = ..()
 	icon_state = "bone_axe0"
 
 /*
@@ -88,4 +90,5 @@
 	AddComponent(/datum/component/two_handed, force_unwielded=5, force_wielded=23, icon_wielded="metalh2_axe1")
 
 /obj/item/fireaxe/metal_h2_axe/update_icon_state()
+	. = ..()
 	icon_state = "metalh2_axe0"

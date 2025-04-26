@@ -6,7 +6,7 @@
 	volume = 200
 	var/blood_type = null
 	var/unique_blood = null
-	var/labelled = 0
+	var/labelled = FALSE
 	fill_icon_thresholds = list(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
 
 /obj/item/reagent_containers/blood/canconsume(mob/eater, mob/user)
@@ -16,7 +16,7 @@
 	. = ..()
 	if(blood_type != null)
 		reagents.add_reagent(unique_blood ? unique_blood : /datum/reagent/blood, 200, list("donor"=null,"viruses"=null,"blood_DNA"=null,"blood_type"=blood_type,"resistances"=null,"trace_chem"=null))
-		update_icon()
+		update_appearance()
 
 /// Handles updating the container when the reagents change.
 /obj/item/reagent_containers/blood/on_reagent_change(datum/reagents/holder, ...)
@@ -25,14 +25,13 @@
 		blood_type = B.data["blood_type"]
 	else
 		blood_type = null
-	update_pack_name()
 	return ..()
 
-/obj/item/reagent_containers/blood/proc/update_pack_name()
+/obj/item/reagent_containers/blood/update_name(updates)
+	. = ..()
 	if(labelled)
 		return
-
-	name = "blood_pack[blood_type ? " - [blood_type]" : ""]"
+	name = "blood_pack[blood_type ? " - [blood_type]" : null]"
 
 /obj/item/reagent_containers/blood/random
 	icon_state = "random_bloodpack"
@@ -86,7 +85,7 @@
 			playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
 			balloon_alert(user, "new label set")
 		else
-			labelled = 0
-			update_pack_name()
+			labelled = FALSE
+			update_name()
 	else
 		return ..()
