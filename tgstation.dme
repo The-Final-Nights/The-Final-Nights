@@ -3406,6 +3406,7 @@
 #include "code\modules\vtmb\vampire_clane\lasombra.dm"
 #include "code\modules\vtmb\vampire_clane\malkavian.dm"
 #include "code\modules\vtmb\vampire_clane\ministry.dm"
+#include "code\modules\vtmb\vampire_clane\nagaraja.dm"
 #include "code\modules\vtmb\vampire_clane\nosferatu.dm"
 #include "code\modules\vtmb\vampire_clane\old_clan_tzimisce.dm"
 #include "code\modules\vtmb\vampire_clane\salubri.dm"

@@ -31,6 +31,7 @@
 #define CLAN_GANGREL "Gangrel"
 #define CLAN_VENTRUE "Ventrue"
 #define CLAN_MALKAVIAN "Malkavian"
+#define CLAN_NAGARAJA "Nagaraja"
 #define CLAN_TZIMISCE "Tzimisce"
 #define CLAN_TRUE_BRUJAH "True Brujah"
 #define CLAN_OLD_TZIMISCE "Old Clan Tzimisce"
