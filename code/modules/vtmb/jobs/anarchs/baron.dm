@@ -18,6 +18,7 @@
 	bounty_types = CIV_JOB_DRINK
 
 //	minimal_generation = 11	//Uncomment when players get exp enough
+	minimum_character_age = 70
 
 	my_contact_is_important = TRUE
 	known_contacts = list(

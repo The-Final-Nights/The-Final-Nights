@@ -42,7 +42,7 @@
 		linked_perm.add_barrier(src)
 		//spessman purity means I have to register a signal with myself, pain
 		RegisterSignal(src, COMSIG_BARRIER_NOTIFY_GUARD_BLOCKED, PROC_REF(playBlockSound))
-		update_icon()
+		update_appearance()
 	else if(SSbouncer_barriers.initialized)
 		CRASH("A VIP barrier was created for vip_barrier_perms that were not loaded!")
 
@@ -147,9 +147,10 @@
 
 /obj/effect/vip_barrier/proc/signal_update_icon()
 	SIGNAL_HANDLER
-	update_icon()
+	update_appearance()
 
-/obj/effect/vip_barrier/update_icon()
+/obj/effect/vip_barrier/update_appearance()
+	. = ..()
 	if(always_invisible)
 		alpha = 0
 		return

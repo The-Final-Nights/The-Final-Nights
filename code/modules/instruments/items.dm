@@ -30,20 +30,7 @@
 	user.visible_message("<span class='suicide'>[user] begins to play 'Gloomy Sunday'! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (BRUTELOSS)
 
-/obj/item/instrument/attack_self(mob/user)
-	if(!ISADVANCEDTOOLUSER(user))
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
-		return TRUE
-	interact(user)
-
-/obj/item/instrument/interact(mob/user)
-	ui_interact(user)
-
-/obj/item/instrument/ui_interact(mob/living/user)
-	if(!isliving(user) || user.stat != CONSCIOUS || HAS_TRAIT(user, TRAIT_HANDS_BLOCKED))
-		return
-
-	user.set_machine(src)
+/obj/item/instrument/ui_interact(mob/user, datum/tgui/ui)
 	song.ui_interact(user)
 
 /obj/item/instrument/violin
@@ -97,14 +84,14 @@
  */
 /obj/item/instrument/piano_synth/headphones/proc/start_playing()
 	icon_state = "[initial(icon_state)]_on"
-	update_icon()
+	update_appearance()
 
 /**
  * Called by a component signal when our song stops playing.
  */
 /obj/item/instrument/piano_synth/headphones/proc/stop_playing()
 	icon_state = "[initial(icon_state)]"
-	update_icon()
+	update_appearance()
 
 /obj/item/instrument/piano_synth/headphones/spacepods
 	name = "\improper Nanotrasen space pods"
@@ -181,9 +168,9 @@
 	. = ..()
 	AddComponent(/datum/component/spooky)
 
-/obj/item/instrument/trumpet/spectral/attack(mob/living/carbon/C, mob/user)
-	playsound (src, 'sound/runtime/instruments/trombone/En4.mid', 100,1,-1)
-	..()
+/obj/item/instrument/trumpet/spectral/attack(mob/living/target_mob, mob/living/user, params)
+	playsound(src, 'sound/runtime/instruments/trombone/En4.mid', 1000, 1, -1)
+	return ..()
 
 /obj/item/instrument/saxophone
 	name = "saxophone"
@@ -205,9 +192,9 @@
 	. = ..()
 	AddComponent(/datum/component/spooky)
 
-/obj/item/instrument/saxophone/spectral/attack(mob/living/carbon/C, mob/user)
-	playsound (src, 'sound/runtime/instruments/saxophone/En4.mid', 100,1,-1)
-	..()
+/obj/item/instrument/saxophone/spectral/attack(mob/living/target_mob, mob/living/user, params)
+	playsound(src, 'sound/runtime/instruments/trombone/En4.mid', 1000, 1, -1)
+	return ..()
 
 /obj/item/instrument/trombone
 	name = "trombone"
@@ -229,9 +216,9 @@
 	. = ..()
 	AddComponent(/datum/component/spooky)
 
-/obj/item/instrument/trombone/spectral/attack(mob/living/carbon/C, mob/user)
-	playsound (src, 'sound/runtime/instruments/trombone/Cn4.mid', 100,1,-1)
-	..()
+/obj/item/instrument/trombone/spectral/attack(mob/living/target_mob, mob/living/user, params)
+	playsound(src, 'sound/runtime/instruments/trombone/Cn4.mid', 1000, 1, -1)
+	return ..()
 
 /obj/item/instrument/recorder
 	name = "recorder"
@@ -252,18 +239,24 @@
 	w_class = WEIGHT_CLASS_SMALL
 	actions_types = list(/datum/action/item_action/instrument)
 
+/obj/item/instrument/harmonica/equipped(mob/user, slot, initial = FALSE)
+	. = ..()
+	if(!(slot & slot_flags))
+		return
+	RegisterSignal(user, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+
+/obj/item/instrument/harmonica/dropped(mob/user, silent = FALSE)
+	. = ..()
+	UnregisterSignal(user, COMSIG_MOB_SAY)
+
 /obj/item/instrument/harmonica/proc/handle_speech(datum/source, list/speech_args)
-	if(song.playing && ismob(loc))
-		to_chat(loc, "<span class='warning'>You stop playing the harmonica to talk...</span>")
-		song.playing = FALSE
-
-/obj/item/instrument/harmonica/equipped(mob/M, slot)
-	. = ..()
-	RegisterSignal(M, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-
-/obj/item/instrument/harmonica/dropped(mob/M)
-	. = ..()
-	UnregisterSignal(M, COMSIG_MOB_SAY)
+	SIGNAL_HANDLER
+	if(!song.playing)
+		return
+	if(!ismob(loc))
+		CRASH("[src] was still registered to listen in on [source] but was not found to be on their mob.")
+	to_chat(loc, span_warning("You stop playing the harmonica to talk..."))
+	song.playing = FALSE
 
 /obj/item/instrument/bikehorn
 	name = "gilded bike horn"

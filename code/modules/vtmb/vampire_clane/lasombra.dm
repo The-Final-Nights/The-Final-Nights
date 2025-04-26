@@ -19,3 +19,24 @@
 	NV.Insert(H, TRUE, FALSE)
 	H.vis_flags |= VIS_HIDE
 	H.faction |= "Lasombra"
+
+/mob/living/simple_animal/hostile/biter/lasombra /// moved here from tzimisce.dm, as per request. not used anywhere.
+	name = "shadow abomination"
+	desc = "A shadow given an approximation of life."
+	mob_biotypes = MOB_SPIRIT
+	icon_state = "shadow"
+	icon_living = "shadow"
+	del_on_death = TRUE
+	maxHealth = 100
+	health = 100
+	bloodpool = 0
+	maxbloodpool = 0
+	faction = list("Lasombra")
+
+/mob/living/simple_animal/hostile/biter/lasombra/better
+	icon_state = "shadow2"
+	icon_living = "shadow2"
+	maxHealth = 200
+	health = 200
+	melee_damage_lower = 50
+	melee_damage_upper = 50

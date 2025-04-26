@@ -30,8 +30,6 @@
 			really = TRUE
 	if(really)
 		cleaner.total_cleaned += 1
-//	var/datum/preferences/P = GLOB.preferences_datums[ckey(cleaner.key)]
-//	P.exper = min(calculate_mob_max_exper(cleaner), P.exper+1)
 	if(reagents.has_reagent(/datum/reagent/water, 1) || reagents.has_reagent(/datum/reagent/water/holywater, 1) || reagents.has_reagent(/datum/reagent/consumable/ethanol/vodka, 1) || reagents.has_reagent(/datum/reagent/space_cleaner, 1))
 		// If there's a cleaner with a mind, let's gain some experience!
 		if(cleaner?.mind)
@@ -84,7 +82,7 @@
 	if(insertable)
 		J.put_in_cart(src, user)
 		J.mymop=src
-		J.update_icon()
+		J.update_appearance()
 	else
 		to_chat(user, "<span class='warning'>You are unable to fit your [name] into the [J.name].</span>")
 		return
