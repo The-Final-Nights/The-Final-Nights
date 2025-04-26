@@ -23787,7 +23787,7 @@
 /area/vtm/interior/techshop)
 "gBp" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = lasombraprim
+	id = 25
 	},
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
 /area/vtm/church/interior/haven)
@@ -34457,7 +34457,7 @@
 /area/vtm/sewer)
 "jBQ" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = ventrueprim
+	id = 29
 	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower/ventrue)
@@ -34732,7 +34732,7 @@
 "jGV" = (
 /obj/effect/decal/wallpaper/paper/darkred/low,
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = sheriffcurtain
+	id = 27
 	},
 /turf/closed/wall/vampwall/rich/low/window/reinforced,
 /area/vtm/interior/millennium_tower/f3)
@@ -42293,7 +42293,7 @@
 /area/vtm)
 "lNj" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = lasombra
+	id = 28
 	},
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/church/interior/haven)
@@ -54909,7 +54909,7 @@
 /area/vtm/interior/banu/haven)
 "pjT" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = lasombra
+	id = 28
 	},
 /obj/effect/decal/wallpaper/blue/low,
 /turf/closed/wall/vampwall/rich/old/low/window,
@@ -60201,7 +60201,7 @@
 /area/vtm/church)
 "qGl" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = sheriffcurtain
+	id = 27
 	},
 /turf/closed/wall/vampwall/rich/low/window/reinforced,
 /area/vtm/interior/millennium_tower/f3)
@@ -61503,7 +61503,7 @@
 "qWc" = (
 /obj/structure/table/wood/fancy/black,
 /obj/machinery/button/curtain{
-	id = lasombraprim
+	id = 25
 	},
 /turf/open/floor/plating/church,
 /area/vtm/church/interior/haven)
@@ -62812,7 +62812,7 @@
 /area/vtm/hotel)
 "ron" = (
 /obj/structure/curtain/cloth/fancy/mechanical{
-	id = banu
+	id = 26
 	},
 /turf/closed/wall/vampwall/painted/low/window/reinforced,
 /area/vtm/interior/banu/haven)
@@ -68429,7 +68429,7 @@
 /obj/item/paper_bin,
 /obj/item/pen/fountain,
 /obj/machinery/button/curtain{
-	id = lasombraprim;
+	id = 25;
 	pixel_y = 11
 	},
 /turf/open/floor/carpet/royalblack,
@@ -74536,7 +74536,7 @@
 /area/vtm/interior/millennium_tower)
 "uDd" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = lasombraprim
+	id = 25
 	},
 /obj/effect/decal/wallpaper/blue/low,
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
@@ -74820,7 +74820,7 @@
 /obj/item/paper_bin,
 /obj/item/pen/fountain,
 /obj/machinery/button/curtain{
-	id = banu;
+	id = 26;
 	pixel_y = 12
 	},
 /turf/open/floor/plating/parquetry/old,
@@ -77518,7 +77518,7 @@
 /area/vtm/interior/banu/haven)
 "vvx" = (
 /obj/structure/curtain/cloth/fancy/mechanical{
-	id = banu
+	id = 26
 	},
 /turf/closed/wall/vampwall/painted/low/window,
 /area/vtm/interior/banu/haven)
@@ -79697,7 +79697,7 @@
 /area/vtm/sewer)
 "wag" = (
 /obj/machinery/button/curtain{
-	id = ventrueprim
+	id = 29
 	},
 /obj/structure/table/wood/fancy/royalblue,
 /turf/open/floor/carpet/royalblue,
@@ -81026,7 +81026,7 @@
 /obj/item/stack/dollar/hundred,
 /obj/item/stack/dollar/hundred,
 /obj/machinery/button/curtain{
-	id = sheriffcurtain
+	id = 27
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/interior/millennium_tower/f3)
@@ -82544,7 +82544,7 @@
 "wRj" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/machinery/button/curtain{
-	id = lasombra
+	id = 28
 	},
 /turf/open/floor/plating/church,
 /area/vtm/church/interior/haven)
@@ -86213,7 +86213,7 @@
 "xSy" = (
 /obj/effect/decal/wallpaper/gold/low,
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = ventrueprim
+	id = 29
 	},
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/millennium_tower/ventrue)
