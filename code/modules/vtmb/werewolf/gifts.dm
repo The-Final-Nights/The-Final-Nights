@@ -288,7 +288,7 @@
 					is_wyrm = 1
 			if (iskindred(target))
 				var/mob/living/carbon/human/vampire = target
-				if ((vampire.morality_path?.score? < 7) || vampire.client?.prefs?.is_enlightened)
+				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
 					is_wyrm = 1
 				if ((vampire.clane?.name == "Baali") || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
 					is_wyrm = 1
