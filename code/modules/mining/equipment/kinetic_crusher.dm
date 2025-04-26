@@ -156,6 +156,7 @@
 
 
 /obj/item/kinetic_crusher/update_icon_state()
+	. = ..()
 	inhand_icon_state = "crusher[wielded]" // this is not icon_state and not supported by 2hcomponent
 
 /obj/item/kinetic_crusher/update_overlays()

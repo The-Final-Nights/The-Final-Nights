@@ -54,12 +54,12 @@
 	if(!actively_guarded && barrier_is_guarded)
 		actively_guarded = TRUE
 		for(var/obj/effect/vip_barrier/barrier in linked_barriers)
-			barrier.update_icon()
+			barrier.update_appearance()
 
 	else if (actively_guarded && !barrier_is_guarded)
 		actively_guarded = FALSE
 		for(var/obj/effect/vip_barrier/barrier in linked_barriers)
-			barrier.update_icon()
+			barrier.update_appearance()
 
 //=============================================================================
 //Procs for communication between barriers and bouncers
