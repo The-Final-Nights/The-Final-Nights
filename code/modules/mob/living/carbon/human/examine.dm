@@ -65,10 +65,23 @@
 	if((isgarou(user) || iswerewolf(user)) && isgarou(src) && is_face_visible())
 		var/isknown = 0
 		var/mob/living/carbon/human/werewolf = user
-		var/same_tribe = werewolf.auspice?.tribe == auspice?.tribe
+		var/same_tribe = FALSE
 		var/truescent
+
+		var/list/honorr = list("claim to good conduct", "claim to honor", "claim to chivalry")
+		var/list/wisdomm = list("claim to insight", "claim to wisdom", "claim to sagacity")
+		var/list/gloryy = list("claim to bravery", "claim to valor", "claim to glory")
+
 		if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
 			truescent = TRUE
+
+		if(werewolf.auspice?.tribe.name == auspice?.tribe.name)
+			same_tribe = TRUE
+			if(werewolf.auspice.tribe.name == "Black Spiral Dancers")
+				honorr = list("strength and will", "complete defeat of [t_his] enemies", "awesome destruction in service of the Wyrm")
+				wisdomm = list("knowledge of twisted machinations", "ability to turn [t_his] enemies against themselves", "brilliantly depraved plots in service of the Wyrm")
+				gloryy = list("trials in service of the Wyrm", "many victories in name of the Wyrm", "great conquests in the Wyrm's service")
+
 		switch(renownrank)
 			if(1)
 				if(same_tribe || truescent)
@@ -84,25 +97,25 @@
 		if(isknown)
 			switch(honor)
 				if(4,5,6)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to good conduct.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [honorr[1]].</i>"
 				if(7,8,9)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to honor.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [honorr[2]].</i>"
 				if(10)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to chivalry.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [honorr[3]].</i>"
 			switch(wisdom)
 				if(4,5,6)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to insight.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [wisdomm[1]].</i>"
 				if(7,8,9)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to wisdom.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [wisdomm[2]].</i>"
 				if(10)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to sagacity.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [wisdomm[3]].</i>"
 			switch(glory)
 				if(4,5,6)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to bravery.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [gloryy[1]].</i>"
 				if(7,8,9)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to valor.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [gloryy[2]].</i>"
 				if(10)
-					. += "<i>In the local Garou, you have heard of [t_his] claim to glory.</i>"
+					. += "<i>In the local Garou, you have heard of [t_his] [gloryy[3]].</i>"
 	//uniform
 	if(w_uniform && !(obscured & ITEM_SLOT_ICLOTHING) && !(w_uniform.item_flags & EXAMINE_SKIP))
 		//accessory

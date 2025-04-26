@@ -11,11 +11,16 @@
 
 /obj/item/masquerade_contract/attack_self(mob/user)
 	. = ..()
-	if(length(GLOB.masquerade_breakers_list))
+	var/list/masq_breakers = list()
+	if(GLOB.masquerade_breakers_list.len)
+		for(var/mob/living/carbon/human/breakor in GLOB.masquerade_breakers_list)
+			masq_breakers += breakor
+
+	if(masq_breakers.len)
 		var/turf/UT = get_turf(user)
 		if(UT)
 			to_chat(user, "<b>YOU</b>, [get_area_name(user)] X:[UT.x] Y:[UT.y]")
-		for(var/mob/living/carbon/human/H in GLOB.masquerade_breakers_list)
+		for(var/mob/living/carbon/human/H in masq_breakers)
 			if(iskindred(H) || isghoul(H) || iscathayan(H))
 				var/turf/TT = get_turf(H)
 				if(TT)
@@ -37,14 +42,19 @@
 
 /obj/item/veil_contract/attack_self(mob/user)
 	. = ..()
-	if(length(GLOB.masquerade_breakers_list))
+	var/list/masq_breakers = list()
+	if(GLOB.masquerade_breakers_list.len)
+		for(var/mob/living/carbon/breakor in GLOB.masquerade_breakers_list)
+			if(isgarou(breakor) || iswerewolf(breakor))
+				masq_breakers += breakor
+
+	if(masq_breakers.len)
 		var/turf/UT = get_turf(user)
 		if(UT)
 			to_chat(user, "<b>YOU</b>, [get_area_name(user)] X:[UT.x] Y:[UT.y]")
-		for(var/mob/living/carbon/W in GLOB.masquerade_breakers_list)
-			if(iswerewolf(W) || isgarou(H))
-				var/turf/TT = get_turf(W)
-				if(TT)
-					to_chat(user, "[W.true_real_name], Veil: [W.masquerade], [get_area_name(W)] X:[TT.x] Y:[TT.y]")
+		for(var/mob/living/carbon/human/W in masq_breakers)
+			var/turf/TT = get_turf(W)
+			if(TT)
+				to_chat(user, "[W.true_real_name], Veil: [W.masquerade], [get_area_name(W)] X:[TT.x] Y:[TT.y]")
 	else
-		to_chat(user, "No available Veil breachers in city...")
+		to_chat(user, "No available Masquerade breakers in city...")
