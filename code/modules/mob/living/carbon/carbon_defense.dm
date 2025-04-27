@@ -255,7 +255,7 @@
  * or another carbon.
 */
 
-/mob/living/carbon/proc/do_rage_from_attack(var/mob/living/target)
+/mob/living/carbon/proc/do_rage_from_attack(mob/living/target)
 	if(isgarou(src) || iswerewolf(src))
 		if(last_rage_from_attack == 0 || last_rage_from_attack+50 < world.time)
 			last_rage_from_attack = world.time

@@ -10,7 +10,12 @@
 	/// instead of the switch's location.
 	var/area/area = null
 
-/obj/machinery/light_switch/Initialize()
+/obj/machinery/light_switch/Initialize(mapload)
+	. = ..()
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/light_switch, 26)
+
+/obj/machinery/light_switch/Initialize(mapload)
 	. = ..()
 	if(istext(area))
 		area = text2path(area)
