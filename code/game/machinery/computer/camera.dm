@@ -276,7 +276,9 @@
 	var/icon_state_off = "entertainment_blank"
 	var/icon_state_on = "entertainment"
 
-/obj/machinery/computer/security/telescreen/entertainment/Initialize()
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/computer/security/telescreen/entertainment, 32)
+
+/obj/machinery/computer/security/telescreen/entertainment/Initialize(mapload)
 	. = ..()
 	RegisterSignal(src, COMSIG_CLICK, PROC_REF(BigClick))
 

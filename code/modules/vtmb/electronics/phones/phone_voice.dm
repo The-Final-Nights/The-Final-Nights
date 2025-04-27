@@ -5,15 +5,6 @@
 	density = FALSE
 	opacity = FALSE
 
-var/list/zalgo_letters = list(
-    "̨a", "̡b", "̢c", "̷d", "̶e", "̸f", "̹g", "̺h", "̻i",
-    "̼j", "̽k", "̾l", "̿m", "͈n", "͍o", "͎p", "q", "͕r",
-    "͓s", "͒t", "̱u", "̲v", "̳w", "͡x", "̨y", "̨z", "̨A",
-    "̨B", "̨C", "̨D", "̨E", "̨F", "̨G", "̨H", "̨I", "̨J",
-    "̨K", "̨L", "̨M", "̨N", "̨O", "̨P", "̨Q", "̨R", "̨S",
-    "̨T", "̨U", "̨V", "̨W", "̨X", "̨Y", "̨Z"
-)
-
 /obj/phonevoice/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	if(message == "" || !message)
 		return
@@ -22,7 +13,15 @@ var/list/zalgo_letters = list(
 		language = get_selected_language()
 	send_speech(message, 2, src, , spans, message_language=language)
 
-/proc/scramble_lasombra_message(var/message,var/mob/living/carbon/human/lasombra)
+/proc/scramble_lasombra_message(message, mob/living/carbon/human/lasombra)
+	var/static/list/zalgo_letters = list(
+    "̨a", "̡b", "̢c", "̷d", "̶e", "̸f", "̹g", "̺h", "̻i",
+    "̼j", "̽k", "̾l", "̿m", "͈n", "͍o", "͎p", "q", "͕r",
+    "͓s", "͒t", "̱u", "̲v", "̳w", "͡x", "̨y", "̨z", "̨A",
+    "̨B", "̨C", "̨D", "̨E", "̨F", "̨G", "̨H", "̨I", "̨J",
+    "̨K", "̨L", "̨M", "̨N", "̨O", "̨P", "̨Q", "̨R", "̨S",
+    "̨T", "̨U", "̨V", "̨W", "̨X", "̨Y", "̨Z"
+	)
 	var/gibberish_message = ""
 	var/totalsocial = 0
 	if(lasombra)
