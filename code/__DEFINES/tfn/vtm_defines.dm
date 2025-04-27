@@ -31,7 +31,6 @@
 #define CLAN_GANGREL "Gangrel"
 #define CLAN_VENTRUE "Ventrue"
 #define CLAN_MALKAVIAN "Malkavian"
-#define CLAN_NAGARAJA "Nagaraja"
 #define CLAN_TZIMISCE "Tzimisce"
 #define CLAN_TRUE_BRUJAH "True Brujah"
 #define CLAN_OLD_TZIMISCE "Old Clan Tzimisce"
@@ -45,6 +44,7 @@
 #define CLAN_GARGOYLE "Gargoyle"
 #define CLAN_DAUGHTERS_OF_CACOPHONY "Daughters of Cacophony"
 #define CLAN_CAPPADOCIAN "Cappadocian"
+#define CLAN_NAGARAJA "Nagaraja"
 
 /**
  * Auspex aura defines

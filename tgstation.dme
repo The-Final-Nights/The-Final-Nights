@@ -3384,6 +3384,7 @@
 #include "code\modules\vtmb\jobs\bloodlines\daughter.dm"
 #include "code\modules\vtmb\jobs\bloodlines\kiasyd.dm"
 #include "code\modules\vtmb\jobs\bloodlines\lasombra.dm"
+#include "code\modules\vtmb\jobs\bloodlines\nagaraja.dm"
 #include "code\modules\vtmb\jobs\bloodlines\salubri.dm"
 #include "code\modules\vtmb\jobs\bloodlines\trujah.dm"
 #include "code\modules\vtmb\magic\mysticism.dm"
