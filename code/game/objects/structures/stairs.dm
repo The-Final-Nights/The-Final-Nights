@@ -143,3 +143,7 @@
 		if(S.dir == dir)
 			return FALSE
 	return TRUE
+
+#undef STAIR_TERMINATOR_AUTOMATIC
+#undef STAIR_TERMINATOR_NO
+#undef STAIR_TERMINATOR_YES

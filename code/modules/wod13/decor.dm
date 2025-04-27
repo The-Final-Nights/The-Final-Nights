@@ -654,7 +654,7 @@
 		M3.opacity = TRUE
 	M3.anchored = TRUE
 
-/proc/get_nearest_free_turf(var/turf/start)
+/proc/get_nearest_free_turf(turf/start)
 	if(isopenturf(get_step(start, EAST)))
 		if(isopenturf(get_step(get_step(start, EAST), EAST)))
 			if(isopenturf(get_step(get_step(get_step(start, EAST), EAST), EAST)))
