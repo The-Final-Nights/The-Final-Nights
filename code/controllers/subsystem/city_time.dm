@@ -9,13 +9,13 @@ SUBSYSTEM_DEF(city_time)
 
 	var/timeofnight = "21:00"
 
-/proc/get_next_hour(var/number)
+/proc/get_next_hour(number)
 	if(number == 23)
 		return 0
 	else
 		return number+1
 
-/proc/get_watch_number(var/number)
+/proc/get_watch_number(number)
 	if(number < 10)
 		return "0[number]"
 	else

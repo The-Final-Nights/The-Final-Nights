@@ -42,7 +42,7 @@
 	totem_light_overlay.color = totem_overlay_color
 	overlays |= totem_light_overlay
 
-/obj/structure/werewolf_totem/proc/adjust_totem_health(var/amount)
+/obj/structure/werewolf_totem/proc/adjust_totem_health(amount)
 	if(amount > 0)
 		if(totem_health == 0)
 			return

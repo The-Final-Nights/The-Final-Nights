@@ -141,3 +141,9 @@
 #define MASSDRIVER_CHAPEL "chapelgun"
 #define MASSDRIVER_DISPOSALS "trash"
 #define MASSDRIVER_SHACK "shack"
+
+
+//Moving camera defines here as multiple files call them. These're for camera upgrades n similar.
+#define CAMERA_UPGRADE_XRAY 1
+#define CAMERA_UPGRADE_EMP_PROOF 2
+#define CAMERA_UPGRADE_MOTION 4

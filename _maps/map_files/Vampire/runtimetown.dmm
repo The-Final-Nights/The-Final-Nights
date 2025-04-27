@@ -1270,11 +1270,8 @@
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
 "Pg" = (
-/obj/structure/table/reinforced,
 /obj/machinery/mineral/equipment_vendor/fastfood/america,
-/obj/structure/window/reinforced/indestructable{
-	dir = 1
-	},
+/obj/structure/table,
 /turf/closed/wall/vampwall/market/low,
 /area/vtm/interior/shop)
 "Po" = (

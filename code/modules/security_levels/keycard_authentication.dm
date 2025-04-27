@@ -22,7 +22,9 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 	var/mob/triggerer = null
 	var/waiting = FALSE
 
-/obj/machinery/keycard_auth/Initialize()
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/keycard_auth, 26)
+
+/obj/machinery/keycard_auth/Initialize(mapload)
 	. = ..()
 	ev = GLOB.keycard_events.addEvent("triggerEvent", CALLBACK(src, PROC_REF(triggerEvent)))
 

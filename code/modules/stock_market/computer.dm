@@ -39,14 +39,14 @@
 		return 0
 	return get_fuckin_card_number_balance(logged_in)
 
-/proc/get_fuckin_card_number_balance(var/logged)
+/proc/get_fuckin_card_number_balance(logged)
 	for(var/obj/item/stocks_license/S in GLOB.stock_licenses)
 		if(S)
 			if(S.whose == logged)
 				return S.balance
 	return 0
 
-/proc/get_fuckin_card_number(var/logged)
+/proc/get_fuckin_card_number(logged)
 	for(var/obj/item/stocks_license/S in GLOB.stock_licenses)
 		if(S)
 			if(S.whose == logged)
@@ -198,7 +198,7 @@ a.updated {
 	popup.set_content(dat)
 	popup.open()
 
-/obj/machinery/computer/stockexchange/proc/sell_some_shares(var/datum/stock/S, var/mob/user)
+/obj/machinery/computer/stockexchange/proc/sell_some_shares(datum/stock/S, mob/user)
 	if (!user || !S)
 		return
 	var/li = logged_in
@@ -267,7 +267,7 @@ a.updated {
 	to_chat(user, "<span class='notice'>Bought [amt] shares of [S.name] at [S.current_value] a share for [total] credits.</span>")
 	GLOB.stockExchange.add_log(/datum/stock_log/buy, user.name, S.name, amt, S.current_value,  total)
 
-/obj/machinery/computer/stockexchange/proc/do_borrowing_deal(var/datum/borrow/B, var/mob/user)
+/obj/machinery/computer/stockexchange/proc/do_borrowing_deal(datum/borrow/B, mob/user)
 	if (B.stock.borrow(B, logged_in))
 		to_chat(user, "<span class='notice'>You successfully borrowed [B.share_amount] shares. Deposit: [B.deposit].</span>")
 		GLOB.stockExchange.add_log(/datum/stock_log/borrow, user.name, B.stock.name, B.share_amount, B.deposit)

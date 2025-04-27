@@ -11,7 +11,7 @@
 	var/damaged = 0
 	var/repairing = FALSE
 
-/obj/fusebox/proc/check_damage(var/mob/living/user)
+/obj/fusebox/proc/check_damage(mob/living/user)
 	if(damaged > 100 && icon_state != "fusebox_open")
 		icon_state = "fusebox_open"
 		var/area/A = get_area(src)

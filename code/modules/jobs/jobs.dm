@@ -4,7 +4,7 @@ GLOBAL_LIST_INIT(leader_positions, list(
 	"Chantry Regent",
 	"Police Chief",
 	"Dealer",
-    "Capo",
+	"Capo",
 	"Clinic Director"
 	))
 
@@ -17,10 +17,10 @@ GLOBAL_LIST_INIT(command_positions, list(
 	"Tower Employee"))
 
 GLOBAL_LIST_INIT(camarilla_council_positions, list(
-    "Primogen Malkavian",
-    "Primogen Nosferatu",
-    "Primogen Toreador",
-    "Primogen Ventrue",
+	"Primogen Malkavian",
+	"Primogen Nosferatu",
+	"Primogen Toreador",
+	"Primogen Ventrue",
 	"Primogen Lasombra",
 	"Primogen Banu Haqim"
 ))
@@ -45,45 +45,45 @@ GLOBAL_LIST_INIT(citizen_positions, list(
 ))
 
 GLOBAL_LIST_INIT(police_positions, list(
-    "Police Chief",
-    "Police Sergeant",
-    "Police Officer",
+	"Police Chief",
+	"Police Sergeant",
+	"Police Officer",
 	"Emergency Dispatcher"
 ))
 
 GLOBAL_LIST_INIT(national_security_positions, list(
-    "Federal Investigator"
+	"Federal Investigator"
 ))
 
 GLOBAL_LIST_INIT(services_positions, list(
-    "Graveyard Keeper",
-    "Club Worker",
-    "Street Janitor",
-    "Taxi Driver"
+	"Graveyard Keeper",
+	"Club Worker",
+	"Street Janitor",
+	"Taxi Driver"
 ))
 
 GLOBAL_LIST_INIT(clinic_positions, list(
-    "Clinic Director",
-    "Doctor"
+	"Clinic Director",
+	"Doctor"
 ))
 
 GLOBAL_LIST_INIT(neutral_positions, list())
 
 GLOBAL_LIST_INIT(giovanni_positions, list(
-    "Capo",
-    "La Squadra",
-    "La Famiglia"
+	"Capo",
+	"La Squadra",
+	"La Famiglia"
 ))
 
 GLOBAL_LIST_INIT(tzimisce_positions, list(
-    "Voivode",
-    "Bogatyr",
-    "Zadruga"
+	"Voivode",
+	"Bogatyr",
+	"Zadruga"
 ))
 
 GLOBAL_LIST_INIT(warehouse_positions, list(
-    "Dealer",
-    "Supply Technician"
+	"Dealer",
+	"Supply Technician"
 ))
 
 
@@ -94,7 +94,7 @@ GLOBAL_LIST_INIT(tremere_positions, list(
 ))
 
 GLOBAL_LIST_INIT(church_positions, list(
-    "Priest",
+	"Priest",
 ))
 
 GLOBAL_LIST_INIT(gang_positions, list(
@@ -127,7 +127,7 @@ GLOBAL_LIST_INIT(spiral_positions, list(
 ))
 
 GLOBAL_LIST_INIT(ss13, list(
-    "SS13",
+	"SS13",
 ))
 
 GLOBAL_LIST_INIT(nonhuman_positions, list())

@@ -6,7 +6,7 @@
 	var/approval_reason
 	var/date_whitelisted
 
-/datum/whitelist/New(var/ckey, var/whitelist, var/approver_ckey, var/ticket_link, var/approval_reason, var/date_whitelisted)
+/datum/whitelist/New(ckey, whitelist, approver_ckey, ticket_link, approval_reason, date_whitelisted)
 	src.ckey = ckey
 	src.whitelist = whitelist
 	src.approver_ckey = approver_ckey
