@@ -21826,7 +21826,6 @@
 /area/vtm)
 "fTM" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = "2010"
 	id = 24
 	},
 /turf/closed/wall/vampwall/painted/low/window,
