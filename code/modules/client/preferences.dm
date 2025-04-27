@@ -3709,7 +3709,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					return stringtoreturn
 
 				if(3)
-					stringtoreturn = "3 [gloryy], 6 [honorr], 4 [wisdomm]"
+					stringtoreturn = "3 [gloryy], 8 [honorr], 4 [wisdomm]"
 					return stringtoreturn
 
 				if(4)
