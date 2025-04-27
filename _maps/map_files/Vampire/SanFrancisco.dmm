@@ -24238,7 +24238,6 @@
 /area/vtm/interior/techshop)
 "gBp" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = "lasombraprim"
 	id = 25
 	},
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
