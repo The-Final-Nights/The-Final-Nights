@@ -304,8 +304,6 @@
 			return "Your species cannot be [jobtitle]."
 		if(JOB_UNAVAILABLE_SPECIES_LIMITED)
 			return "Your species has a limit on how many can be [jobtitle]."
-		if(JOB_UNAVAILABLE_CHARACTER_AGE)
-			return "Your character is too young for [jobtitle]"
 	return "Error: Unknown job availability."
 
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
@@ -332,8 +330,6 @@
 		return JOB_UNAVAILABLE_PLAYTIME
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
-	if(!job.is_character_old_enough(client.prefs.total_age) && !bypass)
-		return JOB_UNAVAILABLE_CHARACTER_AGE
 	if((client.prefs.generation > job.minimal_generation) && !bypass)
 		return JOB_UNAVAILABLE_GENERATION
 	if((client.prefs.masquerade < job.minimal_masquerade) && !bypass)
