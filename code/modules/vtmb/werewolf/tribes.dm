@@ -249,7 +249,7 @@
 			REMOVE_TRAIT(owner, TRAIT_DOGWOLF, src)
 			to_chat(owner, span_notice("You feel your lupine nature intensifying!"))
 
-		if(istype(owner, mob/living/carbon/werewolf/lupus))
+		if(istype(owner, /mob/living/carbon/werewolf/lupus))
 			var/mob/living/carbon/werewolf/lupus/lopor = owner
 
 			if(lopor && !lopor.hispo)
