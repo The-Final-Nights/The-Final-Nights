@@ -35170,7 +35170,6 @@
 /area/vtm/sewer)
 "jBQ" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = "ventrueprim"
 	id = 29
 	},
 /turf/closed/wall/vampwall/rich/low/window,
