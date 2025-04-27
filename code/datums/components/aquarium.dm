@@ -25,12 +25,12 @@
 		CRASH("Invalid property type provided for aquarium content component")
 	properties.parent = src
 
-	ADD_TRAIT(parent, TRAIT_FISH_CASE_COMPATIBILE, src)
+	ADD_TRAIT(parent, TRAIT_FISH_CASE_COMPATIBILE, REF(src))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(enter_aquarium))
 
 /datum/component/aquarium_content/PreTransfer()
 	. = ..()
-	REMOVE_TRAIT(parent, TRAIT_FISH_CASE_COMPATIBILE, src)
+	REMOVE_TRAIT(parent, TRAIT_FISH_CASE_COMPATIBILE, REF(src))
 
 /datum/component/aquarium_content/Destroy(force, silent)
 	if(current_aquarium)

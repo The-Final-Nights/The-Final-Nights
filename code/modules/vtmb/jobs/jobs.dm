@@ -78,7 +78,7 @@
 	for(var/mob/living/M in get_hearers_in_view(4, user.loc))
 		bang(get_turf(M), M, user)
 
-/obj/item/card/id/hunter/proc/bang(turf/T, mob/living/M, var/mob/living/user)
+/obj/item/card/id/hunter/proc/bang(turf/T, mob/living/M, mob/living/user)
 	if(M.stat == DEAD)	//They're dead!
 		return
 	var/mob/living/carbon/human/H

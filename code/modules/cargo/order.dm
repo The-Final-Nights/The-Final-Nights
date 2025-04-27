@@ -16,10 +16,10 @@
 		errors |= MANIFEST_ERROR_ITEM
 
 /obj/item/paper/fluff/jobs/cargo/manifest/proc/is_approved()
-	return TURRET_FLAG_SHOOT_UNSHIELDED
+	return LAZYLEN(stamp_cache) && !is_denied()
 
 /obj/item/paper/fluff/jobs/cargo/manifest/proc/is_denied()
-	return TRUE
+	return LAZYLEN(stamp_cache) && ("stamp-deny" in stamp_cache)
 
 /datum/supply_order
 	var/id

@@ -112,7 +112,7 @@
 			if(!hard_drive.store_file(robotact))
 				qdel(robotact)
 				robotact = null
-				CRASH("Cyborg [borgo]'s tablet hard drive rejected recieving a new copy of the self-manage app. To fix, check the hard drive's space remaining. Please make a bug report about this.")
+				CRASH("Cyborg [borgo]'s tablet hard drive rejected receiving a new copy of the self-manage app. To fix, check the hard drive's space remaining. Please make a bug report about this.")
 	return robotact
 
 //Makes the light settings reflect the borg's headlamp settings
