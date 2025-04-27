@@ -14,6 +14,8 @@ GLOBAL_LIST_EMPTY(las_mirrors)
 	vis_flags = VIS_HIDE
 	var/timerid = null
 
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
+
 /obj/structure/mirror/Initialize(mapload)
 	. = ..()
 	var/unique_number = ""
@@ -162,7 +164,7 @@ GLOBAL_LIST_EMPTY(las_mirrors)
 			var/datum/species/S = speciestype
 			if(initial(S.changesource_flags) & MIRROR_MAGIC)
 				choosable_races += initial(S.id)
-		choosable_races = sortList(choosable_races)
+		choosable_races = sort_list(choosable_races)
 	..()
 
 /obj/structure/mirror/magic/lesser/New()

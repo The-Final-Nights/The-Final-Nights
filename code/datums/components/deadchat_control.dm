@@ -1,6 +1,3 @@
-#define DEMOCRACY_MODE "democracy"
-#define ANARCHY_MODE "anarchy"
-
 /**
  * Deadchat Plays Things - The Componenting
  *

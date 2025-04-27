@@ -411,3 +411,9 @@ SUBSYSTEM_DEF(persistence)
 			original_human.save_persistent_scars(TRUE)
 		else
 			original_human.save_persistent_scars()
+
+
+#undef FILE_ANTAG_REP
+#undef FILE_RECENT_MAPS
+
+#undef KEEP_ROUNDS_MAP

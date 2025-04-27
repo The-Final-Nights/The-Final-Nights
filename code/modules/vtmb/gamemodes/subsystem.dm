@@ -29,10 +29,10 @@ SUBSYSTEM_DEF(bad_guys_party)
 			continue
 		jobs[job.title] = job
 
-/datum/controller/subsystem/bad_guys_party/proc/GetAntagJob(var/rank)
+/datum/controller/subsystem/bad_guys_party/proc/GetAntagJob(rank)
 	return jobs[rank]
 
-/datum/controller/subsystem/bad_guys_party/proc/set_badguys(var/new_setting)
+/datum/controller/subsystem/bad_guys_party/proc/set_badguys(new_setting)
 	if(new_setting in list("caitiff", "sabbat", "hunter"))
 		SSbad_guys_party.setting = new_setting
 	else
@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(bad_guys_party)
 
 
 
-/datum/controller/subsystem/bad_guys_party/proc/get_badguys(var/level)
+/datum/controller/subsystem/bad_guys_party/proc/get_badguys(level)
 	if(setting)
 		switch(setting)
 			if("caitiff")

@@ -213,7 +213,7 @@
 
 
 /proc/find_door_pin(door_type)
-    for(var/obj/structure/vaultdoor/vdoor in world)
-        if(istype(vdoor, door_type))
-            return vdoor
-    return null
+	for(var/obj/structure/vaultdoor/vdoor in world)
+		if(istype(vdoor, door_type))
+			return vdoor
+	return null

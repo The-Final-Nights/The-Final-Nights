@@ -139,7 +139,7 @@ SUBSYSTEM_DEF(die_in_a_fire)
 	set_light(3, 2, "#ffa800")
 	GLOB.fires_list += src
 
-/obj/effect/fire/proc/change_stage(var/stag)
+/obj/effect/fire/proc/change_stage(stag)
 	switch(stag)
 		if(0)
 			qdel(src)

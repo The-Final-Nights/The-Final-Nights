@@ -144,8 +144,8 @@
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 
-/datum/crafting_recipe/reciever
-	name = "Modular Rifle Reciever"
+/datum/crafting_recipe/receiver
+	name = "Modular Rifle Receiver"
 	tools = list(TOOL_WRENCH, TOOL_WELDER, TOOL_SAW)
 	result = /obj/item/weaponcrafting/receiver
 	reqs = list(/obj/item/stack/sheet/metal = 5,
