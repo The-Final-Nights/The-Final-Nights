@@ -256,6 +256,7 @@
 	return ..()
 
 /obj/effect/decal/cleanable/blood/footprints/update_icon()
+	. = ..()
 	cut_overlays()
 
 	for(var/Ddir in GLOB.cardinals)

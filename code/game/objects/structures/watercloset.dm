@@ -79,6 +79,7 @@
 
 
 /obj/structure/toilet/update_icon_state()
+	. = ..()
 	icon_state = "toilet[open][cistern]"
 
 /obj/structure/toilet/deconstruct()
@@ -156,7 +157,9 @@
 	var/exposed = 0 // can you currently put an item inside
 	var/obj/item/hiddenitem = null // what's in the urinal
 
-/obj/structure/urinal/Initialize()
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
+
+/obj/structure/urinal/Initialize(mapload)
 	. = ..()
 	hiddenitem = new /obj/item/food/urinalcake
 
@@ -645,6 +648,7 @@
 	update_icon()
 
 /obj/structure/curtain/update_icon()
+	. = ..()
 	if(!open)
 		icon_state = "[icon_type]-closed"
 		layer = ABOVE_ALL_MOB_LAYERS_LAYER

@@ -107,6 +107,7 @@
 	isSwitchingStates = FALSE
 
 /obj/structure/mineral_door/update_icon_state()
+	. = ..()
 	icon_state = "[initial(icon_state)][door_opened ? "open":""]"
 
 /obj/structure/mineral_door/attackby(obj/item/I, mob/user)

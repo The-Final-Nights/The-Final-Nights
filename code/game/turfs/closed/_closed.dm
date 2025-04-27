@@ -50,7 +50,7 @@
 
 /turf/closed/indestructible/weeb/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /turf/closed/indestructible/weeb/update_overlays()
 	. = ..()

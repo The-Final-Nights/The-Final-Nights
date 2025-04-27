@@ -3,11 +3,6 @@ GLOBAL_LIST_EMPTY(ghost_images_simple) //this is a list of all ghost images as t
 
 GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
-var/list/CMNoir = list(0.3,0.3,0.3,0,\
-			 		   0.3,0.3,0.3,0,\
-					   0.3,0.3,0.3,0,\
-					   0.0,0.0,0.0,1,)// [ChillRaccoon] - more about "color matrix" you can read in BYOND documentation
-
 /mob/dead/observer
 	name = "ghost"
 	//desc = "It's a g-g-g-g-ghooooost" //jinkies! //[ChillRaccon] - maggot
@@ -204,12 +199,12 @@ var/list/CMNoir = list(0.3,0.3,0.3,0,\
 
 /*
  * This proc will update the icon of the ghost itself, with hair overlays, as well as the ghost image.
- * Please call update_icon(icon_state) from now on when you want to update the icon_state of the ghost,
+ * Please call update_icon(updates, icon_state) from now on when you want to update the icon_state of the ghost,
  * or you might end up with hair on a sprite that's not supposed to get it.
  * Hair will always update its dir, so if your sprite has no dirs the haircut will go all over the place.
  * |- Ricotez
  */
-/mob/dead/observer/update_icon(new_form)
+/mob/dead/observer/update_icon(updates=ALL, new_form)
 	. = ..()
 
 	if(client) //We update our preferences in case they changed right before update_icon was called.
@@ -700,7 +695,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(!(L in GLOB.player_list) && !L.mind)
 			possessible += L
 
-	var/mob/living/target = input("Your new life begins today!", "Possess Mob", null, null) as null|anything in sortNames(possessible)
+	var/mob/living/target = input("Your new life begins today!", "Possess Mob", null, null) as null|anything in sort_names(possessible)
 
 	if(!target)
 		return FALSE
