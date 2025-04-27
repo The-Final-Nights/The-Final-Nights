@@ -2440,7 +2440,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/datum/garou_tribe/G = new a
 						available_tribes[G.name] += GLOB.tribes_list[i]
 						qdel(G)
-					var/new_tribe = tgui_input_list(user, "Choose your Tribe:", "Tribe", sortList(available_tribes))
+					var/new_tribe = tgui_input_list(user, "Choose your Tribe:", "Tribe", sort_list(available_tribes))
 					if(new_tribe)
 						var/newtype = GLOB.tribes_list[new_tribe]
 						new_tribe = new newtype()

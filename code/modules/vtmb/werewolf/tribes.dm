@@ -371,7 +371,7 @@
 			targets += wtarget
 		for(var/mob/living/carbon/human/htarget in orange(7,owner))
 			targets += htarget
-		var/mob/living/carbon/target = tgui_input_list(owner, "Select a target", "Banish Totem", sortList(targets))
+		var/mob/living/carbon/target = tgui_input_list(owner, "Select a target", "Banish Totem", sort_list(targets))
 		if(target && (iswerewolf(target) || isgarou(target)))
 			valid_tribe = target.auspice.tribe
 		for(var/mob/living/carbon/targetted in targets)
