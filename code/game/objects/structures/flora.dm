@@ -347,7 +347,7 @@
 
 	/// Can this plant be trimmed by someone with TRAIT_BONSAI
 	var/trimmable = TRUE
-	var/list/static/random_plant_states
+	var/static/list/random_plant_states
 
 /obj/item/kirbyplants/ComponentInitialize()
 	. = ..()

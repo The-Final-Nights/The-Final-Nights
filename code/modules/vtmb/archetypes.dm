@@ -18,7 +18,7 @@
 	var/archetype_additional_lockpicking = 0
 	var/archetype_additional_athletics = 0
 
-/datum/archetype/proc/special_skill(var/mob/living/carbon/human/H)
+/datum/archetype/proc/special_skill(mob/living/carbon/human/H)
 	return
 
 /datum/archetype/average
@@ -39,7 +39,7 @@
 	start_mentality = 2
 	start_blood = 2
 
-/datum/archetype/warrior/special_skill(var/mob/living/carbon/human/H)
+/datum/archetype/warrior/special_skill(mob/living/carbon/human/H)
 	H.melee_professional = TRUE
 
 /datum/archetype/gunfighter
@@ -49,7 +49,7 @@
 	start_mentality = 2
 	start_blood = 2
 
-/datum/archetype/gunfighter/special_skill(var/mob/living/carbon/human/H)
+/datum/archetype/gunfighter/special_skill(mob/living/carbon/human/H)
 	ADD_TRAIT(H, TRAIT_GUNFIGHTER, ROUNDSTART_TRAIT)
 
 /datum/archetype/diplomatic
@@ -59,7 +59,7 @@
 	start_social = 2
 	start_mentality = 2
 
-/datum/archetype/diplomatic/special_skill(var/mob/living/carbon/human/H)
+/datum/archetype/diplomatic/special_skill(mob/living/carbon/human/H)
 	H.more_companions = 3
 
 /datum/archetype/masochist
@@ -67,7 +67,7 @@
 	specialization = "<i>Takes more blows before passage.</i><br>You can sustain 30 more damage before falling into a critical condition."
 	start_physique = 3
 
-/datum/archetype/masochist/special_skill(var/mob/living/carbon/human/H)
+/datum/archetype/masochist/special_skill(mob/living/carbon/human/H)
 	ADD_TRAIT(H, TRAIT_NOSOFTCRIT, ROUNDSTART_TRAIT)
 
 /datum/archetype/wiseman

@@ -114,7 +114,7 @@ GLOBAL_LIST_EMPTY(FrozenAccounts)
 	var/output = "<div class='article'><div class='headline'>[headline]</div><div class='subtitle'>[subtitle]</div><div class='article-body'>[article]</div><div class='author'>[author]</div><div class='timestamp'>[spacetime]</div></div>"
 	return output
 
-/datum/article/proc/detokenize(var/token_string, var/list/industry_tokens, var/list/product_tokens = list())
+/datum/article/proc/detokenize(token_string, list/industry_tokens, list/product_tokens = list())
 	var/list/T_list = default_tokens.Copy()
 	for (var/I in industry_tokens)
 		T_list[I] = industry_tokens[I]

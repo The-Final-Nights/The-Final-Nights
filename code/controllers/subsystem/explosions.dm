@@ -557,3 +557,8 @@ SUBSYSTEM_DEF(explosions)
 		cost_throwturf = MC_AVERAGE(cost_throwturf, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
 
 	currentpart = SSEXPLOSIONS_TURFS
+
+#undef SSEX_TURF
+#undef SSEX_OBJ
+
+#undef EXPLOSION_THROW_SPEED

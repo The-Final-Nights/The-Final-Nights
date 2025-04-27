@@ -33,10 +33,10 @@
 	..()
 
 /proc/find_keypad(keypad_type)
-    for(var/obj/keypad/K in world)
-        if(istype(K, keypad_type))
-            return K
-    return null
+	for(var/obj/keypad/K in world)
+		if(istype(K, keypad_type))
+			return K
+	return null
 
 /obj/keypad/New()
 	..()

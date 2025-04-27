@@ -268,7 +268,7 @@
 	trigger_cost = 0
 	trigger_cooldown = 5
 
-	var/list/static/allowed_species = list(
+	var/static/list/allowed_species = list(
 		"Human" = /datum/species/human,
 		"Lizard" = /datum/species/lizard,
 		"Moth" = /datum/species/moth,

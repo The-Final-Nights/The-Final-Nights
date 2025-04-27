@@ -71,15 +71,6 @@
 	category = list("initial","Tools","Tool Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
 
-/datum/design/analyzer
-	name = "Analyzer"
-	id = "analyzer"
-	build_type = AUTOLATHE
-	materials = list(/datum/material/iron = 30, /datum/material/glass = 20)
-	build_path = /obj/item/analyzer
-	category = list("initial","Tools","Tool Designs")
-	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
-
 /datum/design/tscanner
 	name = "T-Ray Scanner"
 	id = "tscanner"
