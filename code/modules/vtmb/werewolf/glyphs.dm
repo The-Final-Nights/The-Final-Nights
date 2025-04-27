@@ -4,18 +4,12 @@
     icon = 'icons/obj/crayons.dmi'
     icon_state = "crayonblack"
     w_class = WEIGHT_CLASS_SMALL
-    var/list/rituals = list()
-
-/obj/item/charcoal_stick/Initialize()
-	. = ..()
-	// Populate the rituals list with glyph objects
-	rituals = GLOB.glyph_list
 
 /obj/item/charcoal_stick/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity || !isgarou(user))
 		return
 
-	if(rituals.len == 0)
+	if(!GLOB.glyph_list.len)
 		to_chat(user, span_notice("There are no glyphs available."))
 		return
 
@@ -24,13 +18,13 @@
 
 	var/list/glyph_names = list()
 
-	for(var/obj/effect/decal/garou_glyph/glyph in rituals)
+	for(var/obj/effect/decal/garou_glyph/glyph in GLOB.glyph_list)
 		glyph_names += glyph.garou_name
 
 	var/choice = tgui_input_list(user, "Select a glyph to draw.", "Glyph Selection", glyph_names)
 	if(choice)
 		var/obj/effect/decal/garou_glyph/drawn_glyph
-		for(var/obj/effect/decal/garou_glyph/glyph_ritual in rituals)
+		for(var/obj/effect/decal/garou_glyph/glyph_ritual in GLOB.glyph_list)
 			if(glyph_ritual.garou_name == choice)
 				drawn_glyph = glyph_ritual
 				break
