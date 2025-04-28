@@ -9478,9 +9478,7 @@
 /turf/open/floor/carpet/red,
 /area/vtm/interior/millennium_tower/ventrue)
 "cAk" = (
-/obj/item/paper{
-	info = "I'M STUCK HERE PLEASE HELP!!"
-	},
+/obj/item/paper,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "cAs" = (
