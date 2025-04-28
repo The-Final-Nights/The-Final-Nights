@@ -131,6 +131,10 @@
 	display_name = "dress, black"
 	path = /obj/item/clothing/under/vampire/business
 
+/datum/gear/uniform/dress_red
+	display_name = "dress, red"
+	path = /obj/item/clothing/under/vampire/primogen_toreador/female
+
 /datum/gear/uniform/black_overcoat
 	display_name = "overcoat, black"
 	path = /obj/item/clothing/under/vampire/rich
@@ -232,6 +236,15 @@
 /datum/gear/uniform/daisyd
 	display_name = "daisy dukes"
 	path = /obj/item/clothing/under/vampire/burlesque/daisyd
+
+/datum/gear/uniform/maid
+	display_name = "maid costume"
+	cost = 4 // And your dignity.
+	path = /obj/item/clothing/under/costume/maid
+
+/datum/gear/uniform/redeveninggown
+	display_name = "evening gown, red"
+	path = /obj/item/clothing/under/dress/redeveninggown
 
 /datum/gear/uniform/baron
 	display_name = "red shirt"

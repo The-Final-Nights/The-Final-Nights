@@ -95,19 +95,6 @@ There are several things that need to be remembered:
 //	update_body_parts_head_only()
 	remove_overlay(BODY_LAYER)
 	dna.species.handle_body(src)
-	/*
-	if(gender == MALE)
-		if(!given_penis)
-			var/obj/item/organ/replacement = new /obj/item/organ/penis()
-			replacement.Insert(src, TRUE, FALSE)
-			given_penis = TRUE
-	else
-		given_penis = FALSE
-		var/obj/item/organ/I = getorgan(/obj/item/organ/penis)
-		if(I)
-			I.Remove(src)
-			QDEL_NULL(I)
-	*/
 	..()
 
 /mob/living/carbon/human/update_fire()

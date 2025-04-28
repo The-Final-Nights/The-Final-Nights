@@ -1826,9 +1826,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	// TFN ADDITION START: loadout
 	if(href_list["preference"] == "gear")
 		if(href_list["purchase_gear"])
-			var/datum/preferences/user_prefs = user.client.prefs
 			var/datum/gear/TG = GLOB.gear_datums[href_list["purchase_gear"]]
-			if(TG.cost <= user_prefs.player_experience)
+			if(TG.cost <= player_experience)
 				if(tgui_alert(user, "Are you sure you want to spend [TG.cost] experience for \the [TG.display_name]?", "Confirmation", list("Yes", "No")) == "Yes")
 					purchased_gear += TG.display_name
 					TG.purchase(user.client)

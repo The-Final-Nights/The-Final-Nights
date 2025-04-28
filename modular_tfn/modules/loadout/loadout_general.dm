@@ -23,3 +23,32 @@
 /datum/gear/general/lipstick_red
 	display_name = "lipstick, red"
 	path = /obj/item/lipstick
+
+/datum/gear/general/hair_spray
+	display_name = "hair spray"
+	path = /obj/item/dyespray
+	cost = 2
+
+/datum/gear/general/cheap_lighter
+	display_name = "lighter, cheap"
+	path = /obj/item/lighter/greyscale
+	cost = 2
+
+/datum/gear/general/zippo_lighter
+	display_name = "lighter, zippo"
+	path = /obj/item/lighter
+	cost = 3
+
+/datum/gear/general/pen
+	display_name = "pen, regular"
+	path = /obj/item/pen
+
+/datum/gear/general/pen_fourcolor
+	display_name = "pen, four color"
+	path = /obj/item/pen/fourcolor
+	cost = 2
+
+/datum/gear/general/pen_fountain
+	display_name = "pen, fountain"
+	path = /obj/item/pen/fountain
+	cost = 3

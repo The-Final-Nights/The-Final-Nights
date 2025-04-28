@@ -56,6 +56,10 @@
 	description = "	True clothing for any punk."
 	path = /obj/item/clothing/suit/vampire/jacket
 
+/datum/gear/suit/jacket/dutch
+	display_name = "jacket, dutch"
+	path = /obj/item/clothing/suit/dutch
+
 // Trenchcoats
 /datum/gear/suit/trenchcoat
 	subtype_path = /datum/gear/suit/trenchcoat

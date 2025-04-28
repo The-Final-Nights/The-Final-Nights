@@ -153,7 +153,8 @@
 					to_chat(M, span_warning("Your current species or role does not permit you to spawn with [gear]!"))
 					continue
 				if(G.slot)
-					if(!H.equip_to_slot_or_del(G.spawn_item(H, owner = H), G.slot))
+					var/item = G.spawn_item(null, H)
+					if(!H.equip_to_slot_or_del(item, G.slot, TRUE))
 						LAZYADD(gear_leftovers, G)
 				else
 					LAZYADD(gear_leftovers, G)
@@ -162,7 +163,7 @@
 
 	if(length(gear_leftovers))
 		for(var/datum/gear/G in gear_leftovers)
-			var/item = G.spawn_item(null, owner = H)
+			var/item = G.spawn_item(null, H)
 			var/atom/placed_in = spawnee.equip_to_slot_if_possible(item, disable_warning = TRUE)
 
 			if(istype(placed_in))
@@ -176,12 +177,14 @@
 				to_chat(M, span_notice("Placing [G.display_name] in your hands!"))
 				continue
 
-			if(H.equip_to_slot_if_possible(item, ITEM_SLOT_BACKPACK))
+			if(H.equip_to_slot_if_possible(item, ITEM_SLOT_BACKPACK, TRUE))
 				to_chat(M, span_notice("Placing [G.display_name] in your backpack!"))
 				continue
 
 			to_chat(M, span_danger("Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug."))
 			qdel(item)
+	if(spawnee.base_body_mod != "") // Is the user fat or slim? if so, let's regenerate their icons so they're scaled accordingly.
+		spawnee.regenerate_icons()
 	// TFN ADDITION END: loadout spawning
 
 	if(!config)	//Needed for robots.
