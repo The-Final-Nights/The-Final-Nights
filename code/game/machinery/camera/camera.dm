@@ -1,7 +1,3 @@
-#define CAMERA_UPGRADE_XRAY 1
-#define CAMERA_UPGRADE_EMP_PROOF 2
-#define CAMERA_UPGRADE_MOTION 4
-
 /obj/machinery/camera
 	name = "security camera"
 	desc = "It's used to monitor rooms."
@@ -40,6 +36,12 @@
 	var/upgrades = 0
 
 	var/internal_light = TRUE //Whether it can light up when an AI views it
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera, 0)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/autoname, 0)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/emp_proof, 0)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/motion, 0)
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 
 /obj/machinery/camera/preset/toxins //Bomb test site in space
 	name = "Hardened Bomb-Test Camera"
@@ -208,7 +210,7 @@
 		droppable_parts += assembly.proxy_module
 	if(!droppable_parts.len)
 		return
-	var/obj/item/choice = input(user, "Select a part to remove:", src) as null|obj in sortNames(droppable_parts)
+	var/obj/item/choice = input(user, "Select a part to remove:", src) as null|obj in sort_names(droppable_parts)
 	if(!choice || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return
 	to_chat(user, "<span class='notice'>You remove [choice] from [src].</span>")

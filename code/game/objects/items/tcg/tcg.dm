@@ -569,7 +569,7 @@ GLOBAL_LIST_EMPTY(tcgcard_radial_choices)
 			totalCards++
 			cardsByCount[id] += 1
 	var/toSend = "Out of [totalCards] cards"
-	for(var/id in sortList(cardsByCount, GLOBAL_PROC_REF(cmp_num_string_asc)))
+	for(var/id in sort_list(cardsByCount, GLOBAL_PROC_REF(cmp_num_string_asc)))
 		if(id)
 			var/datum/card/template = GLOB.cached_cards[pack.series]["ALL"][id]
 			toSend += "\nID:[id] [template.name] [(cardsByCount[id] * 100) / totalCards]% Total:[cardsByCount[id]]"
@@ -608,3 +608,5 @@ GLOBAL_LIST_EMPTY(tcgcard_radial_choices)
 
 #undef DEFAULT_TCG_DMI_ICON
 #undef DEFAULT_TCG_DMI
+#undef TAPPED_ANGLE
+#undef UNTAPPED_ANGLE

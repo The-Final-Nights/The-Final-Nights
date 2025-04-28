@@ -183,10 +183,10 @@
 /datum/action/gift/hands_full_of_thunder/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
-		ADD_TRAIT(owner, TRAIT_THUNDERSHOT, src)
+		ADD_TRAIT(owner, TRAIT_THUNDERSHOT, "thunder")
 		to_chat(owner, "<span class='notice'>You feel your fingers tingling with electricity...!</span>")
 		spawn(100)
-			REMOVE_TRAIT(owner, TRAIT_THUNDERSHOT, src)
+			REMOVE_TRAIT(owner, TRAIT_THUNDERSHOT, "thunder")
 			to_chat(owner, "<span class='notice'>The buzz in your fingertips ebbs...</span>")
 
 /datum/action/gift/elemental_improvement

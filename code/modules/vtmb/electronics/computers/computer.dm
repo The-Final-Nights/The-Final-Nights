@@ -119,7 +119,7 @@ GLOBAL_LIST_EMPTY(vampire_computers)
 				for(var/obj/vampire_computer/C in GLOB.vampire_computers)
 					var/datum/app/icq/icq = C.apps[1]
 					if(icq.username == params["username"])
-						throw_error("This name is already exists!")
+						throw_error("This name already exists!")
 						return TRUE
 				var/datum/app/icq/app = locate(params["ref"]) in apps
 				app.username = params["username"]
@@ -194,7 +194,7 @@ GLOBAL_LIST_EMPTY(vampire_computers)
 				throw_error("You must write a subject!")
 				return TRUE
 			else if(!params["to"])
-				throw_error("You must write a reciever adress!")
+				throw_error("You must write a receiver adress!")
 				return TRUE
 			var/sended = gmail.send_email(params["message"], params["subject"], params["to"])
 			if(!sended)

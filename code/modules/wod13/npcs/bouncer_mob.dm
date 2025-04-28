@@ -80,7 +80,7 @@
 	set_is_guarding_true()
 
 
-/mob/living/carbon/human/npc/bouncer/AssignSocialRole(datum/socialrole/bouncer/role, var/dont_random = FALSE)
+/mob/living/carbon/human/npc/bouncer/AssignSocialRole(datum/socialrole/bouncer/role, dont_random = FALSE)
 	. = ..(role, dont_random)
 
 	if(role && ispath(role, /datum/socialrole/bouncer))
@@ -168,7 +168,7 @@
 	return TRUE
 
 
-/mob/living/carbon/human/npc/bouncer/proc/speak_seldom(var/phrase, mob/target)
+/mob/living/carbon/human/npc/bouncer/proc/speak_seldom(phrase, mob/target)
 	if(can_be_reasoned_with() && world.time > message_cooldown)
 		message_cooldown = world.time + repeat_delay
 		RealisticSay(phrase)

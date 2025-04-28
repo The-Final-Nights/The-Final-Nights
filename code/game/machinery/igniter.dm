@@ -62,7 +62,7 @@
 	var/last_spark = 0
 	var/datum/effect_system/spark_spread/spark_system
 
-/obj/machinery/sparker/toxmix
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/sparker, 26)
 
 /obj/machinery/sparker/Initialize()
 	. = ..()

@@ -369,7 +369,7 @@
 	mood_quirk = TRUE
 
 /datum/quirk/nyctophobia/add()
-	RegisterSignal(quirk_holder, COMSIG_MOVABLE_MOVED, .proc/on_holder_moved)
+	RegisterSignal(quirk_holder, COMSIG_MOVABLE_MOVED, PROC_REF(on_holder_moved))
 
 /datum/quirk/nyctophobia/remove()
 	UnregisterSignal(quirk_holder, COMSIG_MOVABLE_MOVED)

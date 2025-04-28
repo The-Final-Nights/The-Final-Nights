@@ -60,3 +60,23 @@
 #define BB_VENDING_UNTILT_COOLDOWN "BB_vending_untilt_cooldown"
 #define BB_VENDING_BUSY_TILTING "BB_vending_busy_tilting"
 #define BB_VENDING_LAST_HIT_SUCCESFUL "BB_vending_last_hit_succesful"
+
+//AI law defines
+
+#define LAW_ZEROTH "zeroth"
+#define LAW_INHERENT "inherent"
+#define LAW_SUPPLIED "supplied"
+#define LAW_ION "ion"
+#define LAW_HACKED "hacked"
+
+//We don't really use holocalls, but they're AIcode associated, so in here they go. Migrated from holocall.dm due to widespread use outside of local.area
+#define HOLOPAD_MAX_DIAL_TIME 200
+
+#define HOLORECORD_DELAY	"delay"
+#define HOLORECORD_SAY		"say"
+#define HOLORECORD_SOUND	"sound"
+#define HOLORECORD_LANGUAGE	"lang"
+#define HOLORECORD_PRESET	"preset"
+#define HOLORECORD_RENAME "rename"
+
+#define HOLORECORD_MAX_LENGTH 200

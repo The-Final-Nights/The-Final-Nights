@@ -7,7 +7,7 @@
 		if(src)
 			remove_overlay(BITE_LAYER)
 
-/proc/get_needed_difference_between_numbers(var/number1, var/number2)
+/proc/get_needed_difference_between_numbers(number1, number2)
 	if(number1 > number2)
 		return number1 - number2
 	else if(number1 < number2)
@@ -15,7 +15,7 @@
 	else
 		return 1
 
-/mob/living/carbon/human/proc/drinksomeblood(var/mob/living/mob)
+/mob/living/carbon/human/proc/drinksomeblood(mob/living/mob)
 	var/bloodgain = max(1, mob.bloodquality-1)
 	var/fumbled = FALSE
 	last_drinkblood_use = world.time

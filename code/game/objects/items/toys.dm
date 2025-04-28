@@ -1542,3 +1542,5 @@
 /obj/item/storage/box/heretic_box/PopulateContents()
 	for(var/i in 1 to rand(1,4))
 		new /obj/item/toy/reality_pierce(src)
+
+#undef BALLOON_COLORS
