@@ -209,11 +209,11 @@
 		else
 			to_chat(usr, "<span class='notice'>Access Denied.</span>")
 		. = TRUE
-	update_icon()
+	update_appearance()
 
 
 /proc/find_door_pin(door_type)
-    for(var/obj/structure/vaultdoor/vdoor in world)
-        if(istype(vdoor, door_type))
-            return vdoor
-    return null
+	for(var/obj/structure/vaultdoor/vdoor in world)
+		if(istype(vdoor, door_type))
+			return vdoor
+	return null

@@ -66,11 +66,11 @@
 	return TRUE
 
 /datum/keybinding/mob/jump
-    hotkey_keys = list("Northeast") // MMB
-    name = "jump"
-    full_name = "Jump"
-    description = "Makes your character jump."
-    keybind_signal = COMSIG_KB_MOB_JUMP_DOWN
+	hotkey_keys = list("Northeast") // MMB
+	name = "jump"
+	full_name = "Jump"
+	description = "Makes your character jump."
+	keybind_signal = COMSIG_KB_MOB_JUMP_DOWN
 
 /datum/keybinding/mob/jump/down(client/user)
 	. = ..()

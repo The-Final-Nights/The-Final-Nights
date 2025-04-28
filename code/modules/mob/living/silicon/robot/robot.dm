@@ -59,7 +59,7 @@
 		mmi.brainmob.name = src.real_name
 		mmi.brainmob.real_name = src.real_name
 		mmi.brainmob.container = mmi
-		mmi.update_icon()
+		mmi.update_appearance()
 
 	INVOKE_ASYNC(src, PROC_REF(updatename))
 
@@ -95,7 +95,7 @@
 			if(mmi.brainmob.stat == DEAD)
 				mmi.brainmob.set_stat(CONSCIOUS)
 			mind.transfer_to(mmi.brainmob)
-			mmi.update_icon()
+			mmi.update_appearance()
 		else
 			to_chat(src, "<span class='boldannounce'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>")
 			ghostize()
@@ -147,7 +147,7 @@
 	if(!CONFIG_GET(flag/disable_secborg))
 		model_list["Security"] = /obj/item/robot_model/security
 
-	var/input_model = input("Please, select a model!", "Robot", null, null) as null|anything in sortList(model_list)
+	var/input_model = input("Please, select a model!", "Robot", null, null) as null|anything in sort_list(model_list)
 	if(!input_model || model.type != /obj/item/robot_model)
 		return
 
@@ -461,14 +461,14 @@
 		set_light_color(COLOR_RED) //This should only matter for doomsday borgs, as any other time the lamp will be off and the color not seen
 		set_light_range(1) //Again, like above, this only takes effect when the light is forced on by doomsday mode.
 		lamp_enabled = FALSE
-		lampButton?.update_icon()
+		lampButton?.update_appearance()
 		update_icons()
 		return
 	set_light_range(lamp_intensity)
 	set_light_color(lamp_doom? COLOR_RED : lamp_color) //Red for doomsday killborgs, borg's choice otherwise
 	set_light_on(TRUE)
 	lamp_enabled = TRUE
-	lampButton?.update_icon()
+	lampButton?.update_appearance()
 	update_icons()
 
 /mob/living/silicon/robot/proc/deconstruct()
@@ -496,7 +496,7 @@
 		robot_suit.head.flash2.burn_out()
 		robot_suit.head.flash2 = null
 		robot_suit.head = null
-		robot_suit.update_icon()
+		robot_suit.update_appearance()
 	else
 		new /obj/item/robot_suit(T)
 		new /obj/item/bodypart/l_leg/robot(T)

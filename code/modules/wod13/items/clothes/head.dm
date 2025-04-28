@@ -145,6 +145,7 @@
 	desc = "Looks dangerous. Provides good protection."
 	icon_state = "helmet"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEHAIR
+	clothing_flags = NO_HAT_TRICKS|SNUG_FIT
 	dynamic_hair_suffix = ""
 	dynamic_fhair_suffix = ""
 	armor = list(MELEE = 40, BULLET = 40, LASER = 40, ENERGY = 40, BOMB = 20, BIO = 0, RAD = 0, FIRE = 20, ACID = 40, WOUND = 25)
@@ -176,6 +177,7 @@
 	desc = "Looks dangerous. Provides great protection against blunt force."
 	icon_state = "viet"
 	flags_inv = HIDEEARS|HIDEHAIR
+	clothing_flags = NO_HAT_TRICKS|SNUG_FIT
 	dynamic_hair_suffix = ""
 	dynamic_fhair_suffix = ""
 	armor = list(MELEE = 60, BULLET = 60, LASER = 60, ENERGY = 60, BOMB = 40, BIO = 0, RAD = 0, FIRE = 20, ACID = 40, WOUND = 25)
@@ -183,10 +185,10 @@
 	masquerade_violating = TRUE
 
 /obj/item/clothing/head/vampire/hardhat
-    name = "construction helmet"
-    desc = "A thermoplastic hard helmet used to protect the head from injury."
-    icon_state = "hardhat"
-    armor = list(MELEE = 20, BULLET = 5, LASER = 0, ENERGY = 0, BOMB = 10, BIO = 0, RAD = 0, FIRE = 5, ACID = 0, WOUND = 15)
+	name = "construction helmet"
+	desc = "A thermoplastic hard helmet used to protect the head from injury."
+	icon_state = "hardhat"
+	armor = list(MELEE = 20, BULLET = 5, LASER = 0, ENERGY = 0, BOMB = 10, BIO = 0, RAD = 0, FIRE = 5, ACID = 0, WOUND = 15)
 
 /obj/item/clothing/head/vampire/eod
 	name = "EOD helmet"
@@ -194,6 +196,7 @@
 	icon_state = "bomb"
 	armor = list(MELEE = 70, BULLET = 70, LASER = 90, ENERGY = 90, BOMB = 100, BIO = 0, RAD = 0, FIRE = 50, ACID = 90, WOUND = 40)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEHAIR
+	clothing_flags = NO_HAT_TRICKS|SNUG_FIT
 	dynamic_hair_suffix = ""
 	dynamic_fhair_suffix = ""
 	visor_flags_inv = HIDEFACE|HIDESNOUT
@@ -209,6 +212,7 @@
 	icon_state = "bogatyr_helmet"
 	armor = list(MELEE = 55, BULLET = 50, LASER = 60, ENERGY = 60, BOMB = 20, BIO = 0, RAD = 0, FIRE = 40, ACID = 70, WOUND = 30)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEHAIR
+	clothing_flags = NO_HAT_TRICKS|SNUG_FIT
 	dynamic_hair_suffix = ""
 	dynamic_fhair_suffix = ""
 	visor_flags_inv = HIDEFACE|HIDESNOUT
@@ -306,6 +310,7 @@
 	desc = "Used by kidnappers, sadists, and three letter agencies. Easily fits over the head to obscure vision."
 	icon_state = "black_bag"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR
+	clothing_flags = NO_HAT_TRICKS|SNUG_FIT
 	dynamic_hair_suffix = ""
 	dynamic_fhair_suffix = ""
 
@@ -322,13 +327,16 @@
 	user.cure_blind("blindfold_[REF(src)]")
 
 /obj/item/clothing/head/vampire/blackbag/attack(mob/living/target, mob/living/user)
-	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
-		to_chat(user, span_warning("Remove [target.p_their()] headgear first!"))
-		return
+	var/obj/item/clothing/head/H = target.get_item_by_slot(ITEM_SLOT_HEAD)
+	if(H)
+		if(H.clothing_flags & SNUG_FIT)
+			to_chat(user, span_warning("You can't fit the blackbag over [target.p_their()] headgear!"))
+			return
 	if(do_after(user, 0.5 SECONDS, target)) //Mainly to prevent black_bagging mid combat.
 		target.visible_message(span_warning("[user] forces [src] onto [target]'s head!"))
 		to_chat(target, span_bolddanger("[target] forces [src] onto your head!"))
 		target.emote("scream")
 		target.Stun(0.5 SECONDS)
 
+		target.dropItemToGround(H)
 		target.equip_to_slot_if_possible(src, ITEM_SLOT_HEAD)

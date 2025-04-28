@@ -273,3 +273,6 @@
 			new /obj/machinery/computer/piratepad_control/civilian(drop_location())
 			qdel(src)
 	uses--
+
+
+#undef CIV_BOUNTY_SPLIT

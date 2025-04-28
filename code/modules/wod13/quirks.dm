@@ -233,7 +233,16 @@ Dancer
 /datum/quirk/potent_blood/on_spawn()
 	var/mob/living/carbon/H = quirk_holder
 	H.bloodquality = BLOOD_QUALITY_POTENT
-	
+
+/datum/quirk/organovore
+	name = "Organovore"
+	desc = "For one reason or another, blood doesn't sate your hunger. Organs will, though."
+	mob_trait = TRAIT_ORGANOVORE
+	value = -3
+	gain_text = "<span class='warning'>You have a craving for liver.</span>"
+	lose_text = "<span class='notice'>Your craving subsides...</span>"
+	allowed_species = list("Vampire")
+
 /datum/action/fly_upper
 	name = "Fly Up"
 	desc = "Fly to the upper level."
@@ -640,6 +649,12 @@ Dancer
 		L.transform = L.transform.Translate(0, 16*(SHORT-1)) //Makes sure you stand on the tile no matter the size - sand
 	UnregisterSignal(L, comsig)
 	attached_targets -= L
+
+/datum/quirk/hardened_soles
+	name = "Hardened Soles"
+	desc = "Your feet callouses are so thick, you can walk barefoot across the state if you want to!"
+	mob_trait = TRAIT_HARDENED_SOLES
+	value = 2
 
 #undef SHORT
 #undef TALL

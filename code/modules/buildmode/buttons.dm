@@ -28,6 +28,7 @@
 	return 1
 
 /atom/movable/screen/buildmode/mode/update_icon_state()
+	. = ..()
 	icon_state = bd.mode.get_button_iconstate()
 
 /atom/movable/screen/buildmode/help
@@ -45,6 +46,7 @@
 	name = "Change Dir"
 
 /atom/movable/screen/buildmode/bdir/update_icon_state()
+	. = ..()
 	dir = bd.build_dir
 
 /atom/movable/screen/buildmode/bdir/Click()

@@ -367,6 +367,7 @@
 	prefix = "darkened"
 
 /obj/item/sharpener/cult/update_icon_state()
+	. = ..()
 	icon_state = "cult_sharpener[(uses == 0) ? "_used" : ""]"
 
 /obj/item/clothing/suit/hooded/cultrobes/cult_shield
@@ -670,6 +671,7 @@
 	wielded = FALSE
 
 /obj/item/cult_spear/update_icon_state()
+	. = ..()
 	icon_state = "bloodspear0"
 
 /obj/item/cult_spear/Destroy()

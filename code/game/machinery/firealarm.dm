@@ -10,6 +10,7 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "fire_bitem"
 	result_path = /obj/machinery/firealarm
+	pixel_shift = 26
 
 /obj/machinery/firealarm
 	name = "fire alarm"
@@ -41,13 +42,9 @@
 
 /obj/machinery/firealarm/Initialize(mapload, dir, building)
 	. = ..()
-	if(dir)
-		src.setDir(dir)
 	if(building)
 		buildstage = 0
 		panel_open = TRUE
-		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
-		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 	update_icon()
 	myarea = get_area(src)
 	LAZYADD(myarea.firealarms, src)
@@ -60,6 +57,7 @@
 	return ..()
 
 /obj/machinery/firealarm/update_icon_state()
+	. = ..()
 	if(panel_open)
 		icon_state = "fire_b[buildstage]"
 		return
@@ -313,12 +311,12 @@
 	else
 		set_light(l_power = 0)
 
-/*
- * Return of Party button
- */
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/firealarm, 26)
 
-/area
-	var/party = FALSE
+// Allows users to examine the state of the thermal sensor
+/obj/machinery/firealarm/examine(mob/user)
+	. = ..()
+	. += "A light on the side indicates the thermal sensor is [detecting ? "enabled" : "disabled"]."
 
 /obj/machinery/firealarm/partyalarm
 	name = "\improper PARTY BUTTON"
@@ -329,18 +327,18 @@
 	if (machine_stat & (NOPOWER|BROKEN))
 		return
 	var/area/A = get_area(src)
-	if (!A || !A.party)
+	if (!A)
 		return
-	A.party = FALSE
 	A.cut_overlay(party_overlay)
 
 /obj/machinery/firealarm/partyalarm/alarm()
 	if (machine_stat & (NOPOWER|BROKEN))
 		return
 	var/area/A = get_area(src)
-	if (!A || A.party || A.name == "Space")
+	if (!A || A.name == "Space")
 		return
-	A.party = TRUE
 	if (!party_overlay)
 		party_overlay = iconstate2appearance('icons/turf/areas.dmi', "party")
 	A.add_overlay(party_overlay)
+
+#undef FIREALARM_COOLDOWN

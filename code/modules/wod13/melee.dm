@@ -66,6 +66,7 @@
 	wielded = FALSE
 
 /obj/item/melee/vampirearms/fireaxe/update_icon_state()
+	. = ..()
 	icon_state = "fireaxe0"
 
 /obj/item/melee/vampirearms/fireaxe/afterattack(atom/A, mob/user, proximity)
@@ -90,6 +91,7 @@
 	AddComponent(/datum/component/two_handed, force_unwielded=10, force_wielded=50, icon_wielded="axetzi1")
 
 /obj/item/melee/vampirearms/fireaxe/axetzi/update_icon_state()
+	. = ..()
 	icon_state = "axetzi0"
 
 
@@ -170,27 +172,27 @@
 	is_iron = TRUE
 
 /obj/item/melee/vampirearms/machete
-    name = "machete"
-    desc = "A certified chopper fit for the jungles...but you don't see any vines around. Well-weighted enough to be thrown."
-    icon = 'code/modules/wod13/weapons.dmi'
-    icon_state = "machete"
-    flags_1 = CONDUCT_1
-    force = 40
-    throwforce = 30
-    w_class = WEIGHT_CLASS_BULKY
-    slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
-    block_chance = 40
-    armour_penetration = 25
-    sharpness = SHARP_EDGED
-    attack_verb_continuous = list("slashes", "cuts")
-    attack_verb_simple = list("slash", "cut")
-    hitsound = 'sound/weapons/rapierhit.ogg'
-    wound_bonus = 5
-    bare_wound_bonus = 25
-    pixel_w = -8
-    resistance_flags = FIRE_PROOF
-    masquerade_violating = FALSE
-    cost = 150
+	name = "machete"
+	desc = "A certified chopper fit for the jungles...but you don't see any vines around. Well-weighted enough to be thrown."
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "machete"
+	flags_1 = CONDUCT_1
+	force = 40
+	throwforce = 30
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	block_chance = 40
+	armour_penetration = 25
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 5
+	bare_wound_bonus = 25
+	pixel_w = -8
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = FALSE
+	cost = 150
 
 /obj/item/melee/vampirearms/sabre
 	name = "sabre"
@@ -332,11 +334,12 @@
 		var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 		if(STR)
 			STR.grid_remove_item(I)
-		update_icon()
+		update_appearance()
 	else
 		to_chat(user, "<span class='warning'>[src] is empty!</span>")
 
 /obj/item/storage/belt/vampire/sheathe/update_icon_state()
+	. = ..()
 	icon_state = initial(icon_state)
 	if(contents.len)
 		var/obj/item/I = contents[1]
@@ -362,7 +365,7 @@
 		new /obj/item/melee/vampirearms/rapier(src)
 	else if(istype(src, /obj/item/storage/belt/vampire/sheathe/sabre))
 		new /obj/item/melee/vampirearms/sabre(src)
-	update_icon()
+	update_appearance()
 
 //end of sheathe code
 
@@ -727,6 +730,7 @@
 	wielded = FALSE
 
 /obj/item/melee/vampirearms/eguitar/update_icon_state()
+	. = ..()
 	icon_state = "rock0"
 
 /obj/item/shield/door

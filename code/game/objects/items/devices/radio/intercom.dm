@@ -13,8 +13,6 @@
 
 /obj/item/radio/intercom/Initialize(mapload, ndir, building)
 	. = ..()
-	if(building)
-		setDir(ndir)
 	var/area/current_area = get_area(src)
 	if(!current_area)
 		return
@@ -102,23 +100,20 @@
 
 /obj/item/radio/intercom/emp_act(severity)
 	. = ..() // Parent call here will set `on` to FALSE.
-	update_icon()
+	update_appearance()
 
 /obj/item/radio/intercom/end_emp_effect(curremp)
 	. = ..()
 	AreaPowerCheck() // Make sure the area/local APC is powered first before we actually turn back on.
 
-/obj/item/radio/intercom/update_icon()
-	. = ..()
-	if(on)
-		icon_state = initial(icon_state)
-	else
-		icon_state = "intercom-p"
+/obj/item/radio/intercom/update_icon_state()
+	icon_state = on ? initial(icon_state) : "intercom-p"
+	return ..()
 
 /**
- * Proc called whenever the intercom's area loses or gains power. Responsible for setting the `on` variable and calling `update_icon()`.
+ * Proc called whenever the intercom's area loses or gains power. Responsible for setting the `on` variable and calling `update_appearance()`.
  *
- * Normally called after the intercom's area recieves the `COMSIG_AREA_POWER_CHANGE` signal, but it can also be called directly.
+ * Normally called after the intercom's area receives the `COMSIG_AREA_POWER_CHANGE` signal, but it can also be called directly.
  * Arguments:
  * * source - the area that just had a power change.
  */
@@ -128,7 +123,7 @@
 		on = FALSE
 	else
 		on = current_area.powered(AREA_USAGE_EQUIP) // set "on" to the equipment power status of our area.
-	update_icon()
+	update_appearance()
 
 /obj/item/radio/intercom/add_blood_DNA(list/blood_dna)
 	return FALSE
@@ -139,12 +134,16 @@
 	desc = "A ready-to-go intercom. Just slap it on a wall and screw it in!"
 	icon_state = "intercom"
 	result_path = /obj/item/radio/intercom/unscrewed
-	pixel_shift = 29
-	inverse = TRUE
+	pixel_shift = 26
 	custom_materials = list(/datum/material/iron = 75, /datum/material/glass = 25)
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/item/radio/intercom, 26)
 
 /obj/item/radio/intercom/chapel
 	name = "Confessional intercom"
 	anonymize = TRUE
 	frequency = 1481
 	broadcasting = TRUE
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/item/radio/intercom/prison, 26)
+MAPPING_DIRECTIONAL_HELPERS(/obj/item/radio/intercom/chapel, 26)

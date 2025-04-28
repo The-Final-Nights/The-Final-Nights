@@ -41,23 +41,30 @@
 		. += "<span class='notice'>The status display reads: This unit can hold a maximum of <b>[max_n_of_items]</b> items.</span>"
 
 /obj/machinery/smartfridge/update_icon_state()
-	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
+	if(machine_stat)
+		icon_state = "[initial(icon_state)]-off"
+		return ..()
+
+	if(!visible_contents)
+		icon_state = "[initial(icon_state)]"
+		return ..()
+
+	switch(contents.len)
+		if(0)
+			icon_state = "[initial(icon_state)]"
+		if(1 to 25)
+			icon_state = "[initial(icon_state)]1"
+		if(26 to 75)
+			icon_state = "[initial(icon_state)]2"
+		if(76 to INFINITY)
+			icon_state = "[initial(icon_state)]3"
+	return ..()
+
+/obj/machinery/smartfridge/update_overlays()
+	. = ..()
 	if(!machine_stat)
 		SSvis_overlays.add_vis_overlay(src, icon, "smartfridge-light-mask", EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha)
-		if (visible_contents)
-			switch(contents.len)
-				if(0)
-					icon_state = "[initial(icon_state)]"
-				if(1 to 25)
-					icon_state = "[initial(icon_state)]1"
-				if(26 to 75)
-					icon_state = "[initial(icon_state)]2"
-				if(76 to INFINITY)
-					icon_state = "[initial(icon_state)]3"
-		else
-			icon_state = "[initial(icon_state)]"
-	else
-		icon_state = "[initial(icon_state)]-off"
+
 
 
 
@@ -95,7 +102,7 @@
 			user.visible_message("<span class='notice'>[user] adds \the [O] to \the [src].</span>", "<span class='notice'>You add \the [O] to \the [src].</span>")
 			updateUsrDialog()
 			if (visible_contents)
-				update_icon()
+				update_appearance()
 			return TRUE
 
 		if(istype(O, /obj/item/storage/bag))
@@ -119,7 +126,7 @@
 				if(O.contents.len > 0)
 					to_chat(user, "<span class='warning'>Some items are refused.</span>")
 				if (visible_contents)
-					update_icon()
+					update_appearance()
 				return TRUE
 			else
 				to_chat(user, "<span class='warning'>There is nothing in [O] to put in [src]!</span>")
@@ -184,7 +191,7 @@
 				listofitems[md5name]["amount"]++	// The good news is, #30519 made smartfridge UIs non-auto-updating
 			else
 				listofitems[md5name] = list("name" = O.name, "type" = O.type, "amount" = 1)
-	sortList(listofitems)
+	sort_list(listofitems)
 
 	.["contents"] = listofitems
 	.["name"] = name
@@ -222,7 +229,7 @@
 						dispense(O, usr)
 						break
 				if (visible_contents)
-					update_icon()
+					update_appearance()
 				return TRUE
 
 			for(var/obj/item/O in src)
@@ -234,7 +241,7 @@
 					dispense(O, usr)
 					desired--
 			if (visible_contents)
-				update_icon()
+				update_appearance()
 			return TRUE
 	return FALSE
 
@@ -287,7 +294,7 @@
 /obj/machinery/smartfridge/drying_rack/ui_act(action, params)
 	. = ..()
 	if(.)
-		update_icon() // This is to handle a case where the last item is taken out manually instead of through drying pop-out
+		update_appearance() // This is to handle a case where the last item is taken out manually instead of through drying pop-out
 		return
 	switch(action)
 		if("Dry")
@@ -307,7 +314,7 @@
 
 /obj/machinery/smartfridge/drying_rack/load(/obj/item/dried_object) //For updating the filled overlay
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/machinery/smartfridge/drying_rack/update_overlays()
 	. = ..()
@@ -325,7 +332,7 @@
 			rack_dry(item_iterator)
 
 		SStgui.update_uis(src)
-		update_icon()
+		update_appearance()
 
 /obj/machinery/smartfridge/drying_rack/accept_check(obj/item/O)
 	if(HAS_TRAIT(O, TRAIT_DRYABLE)) //set on dryable element
@@ -339,7 +346,7 @@
 	else
 		drying = TRUE
 		use_power = ACTIVE_POWER_USE
-	update_icon()
+	update_appearance()
 
 /obj/machinery/smartfridge/drying_rack/proc/rack_dry(obj/item/target)
 	SEND_SIGNAL(target, COMSIG_ITEM_DRIED)
