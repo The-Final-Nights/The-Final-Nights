@@ -138,7 +138,7 @@
 	if(dominate_check(owner, target, base_difficulty = extra_words_difficulty))
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		owner.say("[custom_command]!")
-		to_chat(target, span_big('[custom_command]!'))
+		to_chat(target, span_big("[custom_command]!"))
 		ADD_TRAIT(target, TRAIT_BLIND, "dominate")
 	else
 		to_chat(owner, span_warning("[target] has resisted your domination!"))
