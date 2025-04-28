@@ -39,27 +39,27 @@ SUBSYSTEM_DEF(city_time)
 			if(H?.stat != DEAD && H?.key)
 				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(H.key)]
 				if(char_sheet)
-					char_sheet.add_experience(3)
+					char_sheet.add_experience(2)
 
 					var/role = H.mind?.assigned_role
 
 					if(role in list("Prince", "Sheriff", "Hound", "Seneschal", "Chantry Regent", "Baron", "Dealer", "Primogen Ventrue", "Primogen Lasombra", "Primogen Banu Haqim", "Primogen Nosferatu", "Primogen Malkavian"))
-						char_sheet.add_experience(3)
+						char_sheet.add_experience(2)
 
 					if(!HAS_TRAIT(H, TRAIT_NON_INT))
 						if(H.total_erp > 3000)
-							char_sheet.add_experience(9)
+							char_sheet.add_experience(3)
 							H.total_erp = 0
 						if(H.total_erp > 1500)
-							char_sheet.add_experience(6)
+							char_sheet.add_experience(2)
 							H.total_erp = 0
 						if(H.total_cleaned > 25)
-							char_sheet.add_experience(3)
+							char_sheet.add_experience(1)
 							H.total_cleaned = 0
 							call_dharma("cleangrow", H)
 						if(role == "Graveyard Keeper")
 							if(SSgraveyard.total_good > SSgraveyard.total_bad)
-								char_sheet.add_experience(3)
+								char_sheet.add_experience(1)
 
 					char_sheet.save_preferences()
 					char_sheet.save_character()
