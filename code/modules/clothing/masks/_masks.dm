@@ -85,7 +85,12 @@
 		user.update_action_buttons_icon() //when mask is adjusted out, we update all buttons icon so the user's potential internal tank correctly shows as off.
 
 //Toggles voice hiding.
-/obj/item/clothing/mask/AltClick(mob/user)
+/obj/item/clothing/mask/CtrlClick(mob/user)
 	. = ..()
 	conceals_voice = !conceals_voice
 	to_chat(user, span_notice("You are [conceals_voice ? "now" : "no longer"] concealing your voice!"))
+
+/obj/item/clothing/mask/examine(mob/user)
+	. = ..()
+	if(conceals_voice && (flags_inv & HIDEFACE))
+		. += span_notice("Ctrl-click the mask to toggle voice concealment.")
