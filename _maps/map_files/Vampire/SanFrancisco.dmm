@@ -13586,6 +13586,7 @@
 /obj/item/ammo_box/magazine/vampaug,
 /obj/item/ammo_box/magazine/vampaug,
 /obj/item/megaphone,
+/obj/item/gun/energy/taser/twoshot,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/police/upstairs)
 "dJt" = (
@@ -24460,6 +24461,11 @@
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/megaphone,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
@@ -26152,6 +26158,10 @@
 /obj/structure/table,
 /obj/item/storage/fancy/donut_box,
 /obj/item/toner/large,
+/obj/machinery/recharger{
+	pixel_x = -9;
+	pixel_y = 11
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "hik" = (
@@ -35349,6 +35359,10 @@
 /obj/item/flashlight/seclite,
 /obj/item/flashlight/seclite,
 /obj/item/flashlight/seclite,
+/obj/machinery/recharger{
+	pixel_x = 10;
+	pixel_y = 10
+	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/upstairs)
 "jQw" = (
@@ -66471,6 +66485,10 @@
 	},
 /obj/structure/table,
 /obj/item/food/vampire/donut,
+/obj/machinery/recharger{
+	pixel_x = 0;
+	pixel_y = 13
+	},
 /turf/closed/wall/vampwall/market/low,
 /area/vtm/interior/police/upstairs)
 "slw" = (
