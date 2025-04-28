@@ -28558,7 +28558,7 @@
 	max_integrity = 1000000
 	},
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughterswind
+	id = 1975
 	},
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
 /area/vtm/cabaret)
