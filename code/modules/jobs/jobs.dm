@@ -36,7 +36,7 @@ GLOBAL_LIST_INIT(anarch_positions, list(
 GLOBAL_LIST_INIT(citizen_positions, list(
 	"Citizen",
 	"Barista",
-	"Butcher",
+	"Mortuary Attendant",
 	"Counselor",
 	"Cabaret Worker",
 	"Church Curator",

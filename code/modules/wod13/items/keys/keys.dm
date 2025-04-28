@@ -328,6 +328,13 @@
 	color = "#99620e"
 
 //===========================CLINIC KEYS===========================
+
+/obj/item/vamp/keys/mortician // same as clinic but here for future stuff
+	name = "Mortician keys"
+	accesslocks = list(
+		"clinic"
+	)
+
 /obj/item/vamp/keys/clinic
 	name = "Clinic keys"
 	accesslocks = list(
