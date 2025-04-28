@@ -13722,13 +13722,11 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "dHD" = (
-/obj/effect/turf_decal/siding/white{
-	color = "#570090"
+/obj/structure/bed/dogbed,
+/mob/living/simple_animal/pet/dog/pug{
+	name = "\improper Vincent"
 	},
-/obj/machinery/light/blacklight{
-	dir = 4
-	},
-/turf/open/floor/plating/vampcarpet,
+/turf/open/floor/carpet/purple,
 /area/vtm/cabaret)
 "dHS" = (
 /obj/effect/turf_decal/stripes/white/line{
@@ -14892,6 +14890,9 @@
 /area/vtm/interior/police/upstairs)
 "dZZ" = (
 /obj/structure/closet/crate/bin,
+/obj/machinery/light/blacklight{
+	dir = 4
+	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "ead" = (
@@ -16178,7 +16179,7 @@
 /area/vtm/pacificheights/community)
 "erC" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughtersliving
+	id = 1980
 	},
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
 /area/vtm/cabaret)
@@ -16254,6 +16255,7 @@
 	icon_state = "computerprince";
 	pixel_y = 4
 	},
+/obj/item/instrument/piano_synth/headphones,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret/basement)
 "etj" = (
@@ -20693,7 +20695,7 @@
 	dir = 1
 	},
 /obj/structure/curtain/cloth/fancy/mechanical{
-	id = daughtersmusic
+	id = 1971
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/cabaret)
@@ -23020,8 +23022,6 @@
 "gju" = (
 /obj/structure/table/reinforced,
 /obj/item/clipboard,
-/obj/item/instrument/piano_synth/headphones,
-/obj/item/instrument/piano_synth/headphones,
 /obj/item/paper_bin{
 	pixel_y = 7;
 	pixel_x = 8
@@ -25116,6 +25116,9 @@
 /obj/item/chair/stool/bar{
 	pixel_y = 12;
 	pixel_x = -5
+	},
+/obj/structure/sink/kitchen{
+	pixel_y = 17
 	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/cabaret)
@@ -30551,7 +30554,7 @@
 /area/vtm/ghetto/old)
 "inX" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughtersliving
+	id = 1980
 	},
 /obj/effect/decal/wallpaper/red/low,
 /turf/closed/wall/vampwall/city/low/window,
@@ -31012,7 +31015,7 @@
 	dir = 9
 	},
 /obj/structure/curtain/cloth/fancy/mechanical{
-	id = daughtersmusic
+	id = 1971
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/cabaret)
@@ -31786,7 +31789,7 @@
 	dir = 9
 	},
 /obj/structure/curtain/cloth/fancy/mechanical{
-	id = daughtersmusic
+	id = 1971
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/cabaret)
@@ -33339,11 +33342,11 @@
 	color = "#570090"
 	},
 /obj/machinery/button/curtain{
-	id = daughtersmusic;
+	id = 1971;
 	name = "scene curtain button"
 	},
 /obj/machinery/button/curtain{
-	id = daughterswind;
+	id = 1975;
 	name = "windows curtain button";
 	pixel_y = 7
 	},
@@ -38180,7 +38183,7 @@
 	dir = 5
 	},
 /obj/structure/curtain/cloth/fancy/mechanical{
-	id = daughtersmusic
+	id = 1971
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/cabaret)
@@ -47143,10 +47146,8 @@
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_town)
 "mRz" = (
-/obj/machinery/light/blacklight{
-	dir = 4
-	},
-/turf/open/floor/plating/vampcarpet,
+/obj/item/kirbyplants/fullysynthetic,
+/turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "mRH" = (
 /obj/structure/chair/sofa/corp{
@@ -47291,7 +47292,7 @@
 /area/vtm/interior/millennium_tower/ventrue)
 "mSW" = (
 /obj/structure/curtain/cloth/fancy/mechanical{
-	id = daughtersmusic
+	id = 1971
 	},
 /turf/open/floor/plasteel/stairs{
 	dir = 1;
@@ -48356,7 +48357,7 @@
 	max_integrity = 1000000
 	},
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughterswind
+	id = 1975
 	},
 /turf/closed/wall/vampwall/city/low/window,
 /area/vtm/cabaret)
@@ -50040,7 +50041,7 @@
 "nFz" = (
 /obj/structure/table/glass,
 /obj/machinery/button/curtain{
-	id = daughtersliving;
+	id = 1980;
 	pixel_x = 8;
 	pixel_y = 3
 	},
@@ -50937,12 +50938,12 @@
 /area/vtm/interior/laundromat)
 "nQP" = (
 /obj/machinery/button/curtain{
-	id = daughtersmusic;
+	id = 1971;
 	pixel_y = -9;
 	name = "stage curtain button"
 	},
 /obj/machinery/button/curtain{
-	id = daughterswind;
+	id = 1975;
 	name = "windows curtain button";
 	pixel_y = -1
 	},
@@ -53710,6 +53711,9 @@
 	name = "elegant table";
 	desc = "An extremely fancy table"
 	},
+/obj/machinery/light/blacklight{
+	dir = 4
+	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/cabaret)
 "oFf" = (
@@ -53879,7 +53883,7 @@
 /area/vtm)
 "oHv" = (
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughtersliving
+	id = 1980
 	},
 /turf/closed/wall/vampwall/city/low/window,
 /area/vtm/cabaret)
@@ -69127,7 +69131,7 @@
 	max_integrity = 1000000
 	},
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughterswind
+	id = 1975
 	},
 /turf/closed/wall/vampwall/city/low/window,
 /area/vtm/cabaret)
@@ -69802,7 +69806,7 @@
 	max_integrity = 1000000
 	},
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughterswind
+	id = 1975
 	},
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
 /area/vtm/cabaret)
@@ -71588,7 +71592,7 @@
 	max_integrity = 1000000
 	},
 /obj/structure/curtain/cloth/fancy/mechanical/luxurious{
-	id = daughterswind
+	id = 1975
 	},
 /turf/closed/wall/vampwall/rich/old/low/window/reinforced,
 /area/vtm/cabaret)
@@ -86972,10 +86976,10 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/church)
 "xGe" = (
-/mob/living/simple_animal/pet/dog/pug{
-	name = "\improper Vincent"
+/obj/machinery/light/blacklight{
+	dir = 8
 	},
-/turf/open/floor/carpet/purple,
+/turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "xGg" = (
 /obj/effect/decal/bordur/corner{
@@ -159309,7 +159313,7 @@ wmm
 uxi
 vxx
 vxx
-vxx
+xGe
 vxx
 vxx
 vxx
@@ -159826,7 +159830,7 @@ vpC
 doL
 nyC
 vxx
-vxx
+pNg
 uxi
 sqZ
 eJT
@@ -160597,7 +160601,7 @@ aVV
 aVV
 aVV
 hJI
-vxx
+pNg
 cFm
 cFm
 sFK
@@ -161111,7 +161115,7 @@ ceo
 vpC
 dSA
 xGK
-pNg
+vxx
 cFm
 wmm
 rnc
@@ -161625,7 +161629,7 @@ ePE
 vpC
 dSA
 xGK
-vxx
+pNg
 cFm
 qkH
 wIe
@@ -162139,7 +162143,7 @@ qHx
 vpC
 dSA
 xGK
-pNg
+mRz
 cFm
 wmm
 wIe
@@ -162649,10 +162653,10 @@ wmm
 uqy
 uxi
 oFd
-mRz
+ePE
 egr
 dSA
-dHD
+xGK
 dZZ
 cFm
 ipP
@@ -226389,7 +226393,7 @@ kZd
 bbP
 hVF
 nsr
-nsr
+dHD
 xMh
 cFm
 ntq
@@ -226646,7 +226650,7 @@ coa
 sTz
 hvZ
 rXR
-xGe
+nsr
 nsr
 oHv
 ntq
