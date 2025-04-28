@@ -6086,7 +6086,7 @@
 /area/vtm/sewer)
 "bFq" = (
 /obj/item/paper/crumpled{
-	info = "Ventura Highway in the sunshine -- Where the days are longer -- The nights are stronger than moonshine -- You're gonna go, I know!"
+	default_raw_text = "Ventura Highway in the sunshine -- Where the days are longer -- The nights are stronger than moonshine -- You're gonna go, I know!"
 	},
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/plating/parquetry,
@@ -30019,7 +30019,7 @@
 /area/vtm/interior/mansion)
 "iej" = (
 /obj/item/paper/crumpled{
-	info = "A singer in a smoky room -- A smell of wine and cheap porfume ..."
+	default_raw_text = "A singer in a smoky room -- A smell of wine and cheap porfume ..."
 	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/cabaret/basement)
@@ -47146,7 +47146,9 @@
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_town)
 "mRz" = (
-/obj/item/kirbyplants/fullysynthetic,
+/obj/machinery/light/blacklight{
+	dir = 8
+	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "mRH" = (
@@ -55246,7 +55248,7 @@
 /area/vtm/interior/endron_facility/restricted)
 "paj" = (
 /obj/item/paper/crumpled{
-	info = "So, bye-bye, Miss American Pie -- Drove my Chevy to the levee, but the levee was dry -- And them good ol' boys were drinkin' whiskey and rye -- Singin', "This'llbethedaythatIdie" "
+	default_raw_text = "So, bye-bye, Miss American Pie -- Drove my Chevy to the levee, but the levee was dry -- And them good ol' boys were drinkin' whiskey and rye -- Singin', "This'llbethedaythatIdie" "
 	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/cabaret/basement)
@@ -86976,9 +86978,7 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/church)
 "xGe" = (
-/obj/machinery/light/blacklight{
-	dir = 8
-	},
+/obj/item/kirbyplants/fullysynthetic,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "xGg" = (
@@ -159313,7 +159313,7 @@ wmm
 uxi
 vxx
 vxx
-xGe
+mRz
 vxx
 vxx
 vxx
@@ -162143,7 +162143,7 @@ qHx
 vpC
 dSA
 xGK
-mRz
+xGe
 cFm
 wmm
 wIe
