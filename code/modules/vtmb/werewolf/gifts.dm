@@ -88,7 +88,7 @@
 		var/mob/living/carbon/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/inspiration.ogg', 75, FALSE)
 		H.emote("scream")
-		if(H.CheckEyewitness(src, src, 7, FALSE))
+		if(H.CheckEyewitness(H, H, 7, FALSE))
 			H.adjust_veil(-1)
 		for(var/mob/living/carbon/C in range(5, owner))
 			if(C)
@@ -290,7 +290,7 @@
 				var/mob/living/carbon/human/vampire = target
 				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
 					is_wyrm = 1
-				if ((vampire.clane?.name == "Baali") || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
+				if ((vampire.clane?.name == "Baali") || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
 					is_wyrm = 1
 			if (isgarou(target) || iswerewolf(target))
 				var/mob/living/carbon/wolf = target
