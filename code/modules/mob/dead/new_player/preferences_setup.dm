@@ -164,7 +164,7 @@
 		mannequin.update_hair()
 	mannequin.update_body()
 	mannequin.update_body_parts()
-	mannequin.update_icon()
+	mannequin.update_appearance()
 
 	if(previewJob)
 		mannequin.job = previewJob.title

@@ -6,6 +6,8 @@
 #define MUTE_PRAY		(1<<2)
 #define MUTE_ADMINHELP	(1<<3)
 #define MUTE_DEADCHAT	(1<<4)
+#define MUTE_MHELP		(1<<5)
+#define MUTE_INTERNET_REQUEST (1<<6)
 #define MUTE_ALL		(~0)
 
 //Some constants for DB_Ban
@@ -20,6 +22,7 @@
 #define BANTYPE_ADMIN_TEMP	8
 /// used to remove jobbans
 #define BANTYPE_ANY_JOB		9
+
 
 //Admin Permissions
 #define R_BUILD			(1<<0)
@@ -66,12 +69,14 @@
 #define AREACOORD(src) "[src ? src.Admin_Coordinates_Readable(TRUE) : "nonexistent location"]"
 #define ADMIN_COORDJMP(src) "[src ? src.Admin_Coordinates_Readable(FALSE, TRUE) : "nonexistent location"]"
 #define ADMIN_VERBOSEJMP(src) "[src ? src.Admin_Coordinates_Readable(TRUE, TRUE) : "nonexistent location"]"
-#define ADMIN_INDIVIDUALLOG(user) "(<a href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];individuallog=[REF(user)]'>LOGS</a>)"
-#define ADMIN_TAG(datum) "(<A href='?src=[REF(src)];[HrefToken(forceGlobal = TRUE)];tag_datum=[REF(datum)]'>TAG</a>)"
-#define ADMIN_LUAVIEW(state) "(<a href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];lua_state=[REF(state)]'>VIEW STATE</a>)"
-#define ADMIN_LUAVIEW_CHUNK(state, log_index) "(<a href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];lua_state=[REF(state)];log_index=[log_index]'>VIEW CODE</a>)"
+#define ADMIN_INDIVIDUALLOG(user) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];individuallog=[REF(user)]'>LOGS</a>)"
+#define ADMIN_TAG(datum) "(<A href='byond://?src=[REF(src)];[HrefToken(forceGlobal = TRUE)];tag_datum=[REF(datum)]'>TAG</a>)"
+#define ADMIN_LUAVIEW(state) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];lua_state=[REF(state)]'>VIEW STATE</a>)"
+#define ADMIN_LUAVIEW_CHUNK(state, log_index) "(<a href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];lua_state=[REF(state)];log_index=[log_index]'>VIEW CODE</a>)"
 /// Displays "(SHOW)" in the chat, when clicked it tries to show atom(paper). First you need to set the request_state variable to TRUE for the paper.
-#define ADMIN_SHOW_PAPER(atom) "(<A href='?_src_=holder;[HrefToken(forceGlobal = TRUE)];show_paper=[REF(atom)]'>SHOW</a>)"
+#define ADMIN_SHOW_PAPER(atom) "(<A href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];show_paper=[REF(atom)]'>SHOW</a>)"
+/// Displays "(PLAY)" in the chat, when clicked it tries to play internet sounds from the request.
+#define ADMIN_PLAY_INTERNET(text, credit) "(<A href='byond://?_src_=holder;[HrefToken(forceGlobal = TRUE)];play_internet=[url_encode(text)];credit=[credit]'>PLAY</a>)"
 
 /atom/proc/Admin_Coordinates_Readable(area_name, admin_jump_ref)
 	var/turf/T = Safe_COORD_Location()
@@ -91,9 +96,10 @@
 /turf/Safe_COORD_Location()
 	return src
 
-#define AHELP_ACTIVE 1
-#define AHELP_CLOSED 2
-#define AHELP_RESOLVED 3
+#define TICKET_UNCLAIMED 1
+#define TICKET_ACTIVE 2
+#define TICKET_CLOSED 3
+#define TICKET_RESOLVED 4
 
 /// Amount of time (in deciseconds) after the rounds starts, that the player disconnect report is issued.
 #define ROUNDSTART_LOGOUT_REPORT_TIME	6000
@@ -143,7 +149,7 @@ GLOBAL_VAR_INIT(ghost_role_flags, (~0))
 //ie pais, posibrains
 #define GHOSTROLE_SILICONS			(1<<3)
 //ie mafia, ctf
-#define GHOSTROLE_MINIGAME 			(1<<4)
+#define GHOSTROLE_MINIGAME			(1<<4)
 
 //smite defines
 
@@ -157,3 +163,19 @@ GLOBAL_VAR_INIT(ghost_role_flags, (~0))
 
 /// When passed in as the duration for ban_panel, will make the ban default to permanent
 #define BAN_PANEL_PERMANENT "permanent"
+
+/// Used in logging uses of admin verbs (and sometimes some non-admin or debug verbs) to the blackbox
+/// Only pass it a string key, the verb being used.
+#define BLACKBOX_LOG_ADMIN_VERB(the_verb) SSblackbox.record_feedback("tally", "admin_verb", 1, the_verb)
+
+//Migrated from deadchat_control.dm due to use outside local. Admin powers belong in adminstuff defines
+#define DEMOCRACY_MODE "democracy"
+#define ANARCHY_MODE "anarchy"
+
+//Migrated from interview.dm due to use outside local. This is used for the currently unused but existant ingame admin interview whitelisting subsystem
+/// State when an interview has been approved
+#define INTERVIEW_APPROVED	"interview_approved"
+/// State when an interview as been denied
+#define INTERVIEW_DENIED 	"interview_denied"
+/// State when an interview has had no action on it yet
+#define INTERVIEW_PENDING	"interview_pending"

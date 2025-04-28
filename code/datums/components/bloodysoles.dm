@@ -49,7 +49,7 @@
 /**
  * Run to update the icon of the parent
  */
-/datum/component/bloodysoles/proc/update_icon()
+/datum/component/bloodysoles/proc/update_appearance()
 	var/obj/item/parent_item = parent
 	parent_item.update_slot_icon()
 
@@ -71,7 +71,7 @@
 	pool.bloodiness = total_bloodiness - new_our_bloodiness // Give the pool the remaining blood incase we were limited
 
 	parent_atom.add_blood_DNA(pool.return_blood_DNA())
-	update_icon()
+	update_appearance()
 
 /**
  * Find a blood decal on a turf that matches our last_blood_state
@@ -143,11 +143,11 @@
 			add_parent_to_footprint(oldLocFP)
 			if (!(oldLocFP.exited_dirs & wielder.dir))
 				oldLocFP.exited_dirs |= wielder.dir
-				oldLocFP.update_icon()
+				oldLocFP.update_appearance()
 		else if(find_pool_by_blood_state(oldLocTurf))
 			// No footprints in the tile we left, but there was some other blood pool there. Add exit footprints on it
 			bloody_shoes[last_blood_state] -= half_our_blood
-			update_icon()
+			update_appearance()
 
 			oldLocFP = new(oldLocTurf)
 			oldLocFP.blood_state = last_blood_state
@@ -155,7 +155,7 @@
 			add_parent_to_footprint(oldLocFP)
 			oldLocFP.bloodiness = half_our_blood
 			oldLocFP.add_blood_DNA(parent_atom.return_blood_DNA())
-			oldLocFP.update_icon()
+			oldLocFP.update_appearance()
 
 			half_our_blood = bloody_shoes[last_blood_state] / 2
 
@@ -166,7 +166,7 @@
 	// Create new footprints
 	if(half_our_blood >= BLOOD_FOOTPRINTS_MIN)
 		bloody_shoes[last_blood_state] -= half_our_blood
-		update_icon()
+		update_appearance()
 
 		var/obj/effect/decal/cleanable/blood/footprints/FP = new(get_turf(parent_atom))
 		FP.blood_state = last_blood_state
@@ -174,7 +174,7 @@
 		add_parent_to_footprint(FP)
 		FP.bloodiness = half_our_blood
 		FP.add_blood_DNA(parent_atom.return_blood_DNA())
-		FP.update_icon()
+		FP.update_appearance()
 
 
 /**
@@ -195,7 +195,7 @@
 		if((bloody_shoes[last_blood_state] / 2) >= BLOOD_FOOTPRINTS_MIN && !(pool_FP.entered_dirs & wielder.dir))
 			// If our feet are bloody enough, add an entered dir
 			pool_FP.entered_dirs |= wielder.dir
-			pool_FP.update_icon()
+			pool_FP.update_appearance()
 
 	share_blood(pool)
 
@@ -212,7 +212,7 @@
 
 	bloody_shoes = list(BLOOD_STATE_HUMAN = 0, BLOOD_STATE_XENO = 0, BLOOD_STATE_OIL = 0, BLOOD_STATE_NOT_BLOODY = 0)
 	last_blood_state = BLOOD_STATE_NOT_BLOODY
-	update_icon()
+	update_appearance()
 	return COMPONENT_CLEANED
 
 
@@ -237,7 +237,7 @@
 	RegisterSignal(parent, COMSIG_CARBON_UNEQUIP_SHOECOVER, PROC_REF(unequip_shoecover))
 	RegisterSignal(parent, COMSIG_CARBON_EQUIP_SHOECOVER, PROC_REF(equip_shoecover))
 
-/datum/component/bloodysoles/feet/update_icon()
+/datum/component/bloodysoles/feet/update_appearance()
 	if(ishuman(wielder))
 		var/mob/living/carbon/human/human = wielder
 		if(NOBLOODOVERLAY in human.dna.species.species_traits)
@@ -283,9 +283,9 @@
 /datum/component/bloodysoles/feet/proc/unequip_shoecover(datum/source)
 	SIGNAL_HANDLER
 
-	update_icon()
+	update_appearance()
 
 /datum/component/bloodysoles/feet/proc/equip_shoecover(datum/source)
 	SIGNAL_HANDLER
 
-	update_icon()
+	update_appearance()

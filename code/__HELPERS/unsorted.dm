@@ -267,7 +267,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
-	var/list/sortmob = sortNames(GLOB.mob_list)
+	var/list/sortmob = sort_names(GLOB.mob_list)
 	for(var/mob/living/silicon/ai/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/camera/M in sortmob)
@@ -412,17 +412,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 		var/atom/A = .[++i]
 		. += A.contents
 
-///identical to getallcontents but returns a list of atoms of the type passed in the argument.
-/atom/proc/get_all_contents_type(type)
-	var/list/processing_list = list(src)
-	. = list()
-	while(length(processing_list))
-		var/atom/A = processing_list[1]
-		processing_list.Cut(1, 2)
-		processing_list += A.contents
-		if(istype(A, type))
-			. += A
-
 /atom/proc/GetAllContentsIgnoring(list/ignore_typecache)
 	if(!length(ignore_typecache))
 		return GetAllContents()
@@ -434,23 +423,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 		if(!ignore_typecache[A.type])
 			processing += A.contents
 			. += A
-
-//Step-towards method of determining whether one atom can see another. Similar to viewers()
-/proc/can_see(atom/source, atom/target, length=5) // I couldnt be arsed to do actual raycasting :I This is horribly inaccurate.
-	var/turf/current = get_turf(source)
-	var/turf/target_turf = get_turf(target)
-	var/steps = 1
-	if(current != target_turf)
-		current = get_step_towards(current, target_turf)
-		while(current != target_turf)
-			if(steps > length)
-				return FALSE
-			if(IS_OPAQUE_TURF(current))
-				return FALSE
-			current = get_step_towards(current, target_turf)
-			steps++
-	return TRUE
-
 
 //Repopulates sortedAreas list
 /proc/repopulate_sorted_areas()
@@ -527,11 +499,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 				if(target_z == 0 || target_z == T.z)
 					turfs += T
 	return turfs
-
-/proc/get_cardinal_dir(atom/A, atom/B)
-	var/dx = abs(B.x - A.x)
-	var/dy = abs(B.y - A.y)
-	return get_dir(A, B) & (rand() * (dx+dy) < dy ? 3 : 12)
 
 //chances are 1:value. anyprob(1) will always return true
 /proc/anyprob(value)
@@ -616,14 +583,6 @@ this may seem bad, but you're atleast as close to the center of the atom as poss
 	if(centered)
 		. += world.icon_size
 
-/proc/get(atom/loc, type)
-	while(loc)
-		if(istype(loc, type))
-			return loc
-		loc = loc.loc
-	return null
-
-
 /*
 Checks if that loc and dir has an item on the wall
 */
@@ -689,14 +648,6 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 		return FACING_EACHOTHER
 	if(initator.dir + 2 == target.dir || initator.dir - 2 == target.dir || initator.dir + 6 == target.dir || initator.dir - 6 == target.dir) //Initating mob is looking at the target, while the target mob is looking in a direction perpendicular to the 1st
 		return FACING_INIT_FACING_TARGET_TARGET_FACING_PERPENDICULAR
-
-/proc/random_step(atom/movable/AM, steps, chance)
-	var/initial_chance = chance
-	while(steps > 0)
-		if(prob(chance))
-			step(AM, pick(GLOB.alldirs))
-		chance = max(chance - (initial_chance / steps), 0)
-		steps--
 
 /proc/living_player_count()
 	var/living_player_count = 0
@@ -825,82 +776,6 @@ rough example of the "cone" made by the 3 dirs checked
 
 	return I
 
-//ultra range (no limitations on distance, faster than range for distances > 8); including areas drastically decreases performance
-/proc/urange(dist=0, atom/center=usr, orange=0, areas=0)
-	if(!dist)
-		if(!orange)
-			return list(center)
-		else
-			return list()
-
-	var/list/turfs = RANGE_TURFS(dist, center)
-	if(orange)
-		turfs -= get_turf(center)
-	. = list()
-	for(var/V in turfs)
-		var/turf/T = V
-		. += T
-		. += T.contents
-		if(areas)
-			. |= T.loc
-
-//similar function to range(), but with no limitations on the distance; will search spiralling outwards from the center
-/proc/spiral_range(dist=0, center=usr, orange=0)
-	var/list/L = list()
-	var/turf/t_center = get_turf(center)
-	if(!t_center)
-		return list()
-
-	if(!orange)
-		L += t_center
-		L += t_center.contents
-
-	if(!dist)
-		return L
-
-
-	var/turf/T
-	var/y
-	var/x
-	var/c_dist = 1
-
-
-	while( c_dist <= dist )
-		y = t_center.y + c_dist
-		x = t_center.x - c_dist + 1
-		for(x in x to t_center.x+c_dist)
-			T = locate(x,y,t_center.z)
-			if(T)
-				L += T
-				L += T.contents
-
-		y = t_center.y + c_dist - 1
-		x = t_center.x + c_dist
-		for(y in t_center.y-c_dist to y)
-			T = locate(x,y,t_center.z)
-			if(T)
-				L += T
-				L += T.contents
-
-		y = t_center.y - c_dist
-		x = t_center.x + c_dist - 1
-		for(x in t_center.x-c_dist to x)
-			T = locate(x,y,t_center.z)
-			if(T)
-				L += T
-				L += T.contents
-
-		y = t_center.y - c_dist + 1
-		x = t_center.x - c_dist
-		for(y in y to t_center.y+c_dist)
-			T = locate(x,y,t_center.z)
-			if(T)
-				L += T
-				L += T.contents
-		c_dist++
-
-	return L
-
 //similar function to RANGE_TURFS(), but will search spiralling outwards from the center (like the above, but only turfs)
 /proc/spiral_range_turfs(dist=0, center=usr, orange=0, list/outlist = list(), tick_checked)
 	outlist.Cut()
@@ -955,13 +830,6 @@ rough example of the "cone" made by the 3 dirs checked
 
 	return L
 
-/atom/proc/contains(atom/A)
-	if(!A)
-		return FALSE
-	for(var/atom/location = A.loc, location, location = location.loc)
-		if(location == src)
-			return TRUE
-
 /proc/flick_overlay_static(O, atom/A, duration)
 	set waitfor = FALSE
 	if(!A || !O)
@@ -997,52 +865,6 @@ rough example of the "cone" made by the 3 dirs checked
 			return target
 
 
-/proc/get_closest_atom(type, list, source)
-	var/closest_atom
-	var/closest_distance
-	for(var/A in list)
-		if(!istype(A, type))
-			continue
-		var/distance = get_dist(source, A)
-		if(!closest_atom)
-			closest_distance = distance
-			closest_atom = A
-		else
-			if(closest_distance > distance)
-				closest_distance = distance
-				closest_atom = A
-	return closest_atom
-
-
-/proc/pick_closest_path(value, list/matches = get_fancy_list_of_atom_types())
-	if (value == FALSE) //nothing should be calling us with a number, so this is safe
-		value = input("Enter type to find (blank for all, cancel to cancel)", "Search for type") as null|text
-		if (isnull(value))
-			return
-	value = trim(value)
-
-	var/random = FALSE
-	if(findtext(value, "?"))
-		value = replacetext(value, "?", "")
-		random = TRUE
-
-	if(!isnull(value) && value != "")
-		matches = filter_fancy_list(matches, value)
-
-	if(matches.len==0)
-		return
-
-	var/chosen
-	if(matches.len==1)
-		chosen = matches[1]
-	else if(random)
-		chosen = pick(matches) || null
-	else
-		chosen = input("Select a type", "Pick Type", matches[1]) as null|anything in sortList(matches)
-	if(!chosen)
-		return
-	chosen = matches[chosen]
-	return chosen
 
 //gives us the stack trace from CRASH() without ending the current proc.
 /proc/stack_trace(msg)
@@ -1192,9 +1014,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 			if(rail.dir == test_dir || is_fulltile)
 				return FALSE
 	return TRUE
-
-/proc/pass(...)
-	return
 
 /proc/get_mob_or_brainmob(occupant)
 	var/mob/living/mob_occupant
@@ -1376,10 +1195,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	for(var/i in L)
 		if(condition.Invoke(i))
 			. |= i
-/proc/generate_items_inside(list/items_list,where_to)
-	for(var/each_item in items_list)
-		for(var/i in 1 to items_list[each_item])
-			new each_item(where_to)
 
 /proc/CallAsync(datum/source, proctype, list/arguments)
 	set waitfor = FALSE

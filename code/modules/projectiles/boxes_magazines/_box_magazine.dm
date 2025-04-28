@@ -138,6 +138,7 @@
 		update_icon()
 
 /obj/item/ammo_box/update_icon()
+	. = ..()
 	var/shells_left = stored_ammo.len
 	switch(multiple_sprites)
 		if(AMMO_BOX_PER_BULLET)

@@ -18,9 +18,13 @@
 /// the type of wallframe it 'disassembles' into
 	var/wallframe_type = /obj/item/wallframe/defib_mount
 
-/obj/machinery/defibrillator_mount/loaded/Initialize() //loaded subtype for mapping use
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
+
+/obj/machinery/defibrillator_mount/loaded/Initialize(mapload) //loaded subtype for mapping use
 	. = ..()
 	defib = new/obj/item/defibrillator/loaded(src)
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/defibrillator_mount, 28)
 
 /obj/machinery/defibrillator_mount/Destroy()
 	if(defib)
@@ -95,7 +99,7 @@
 		// Make sure the defib is set before processing begins.
 		defib = I
 		begin_processing()
-		update_icon()
+		update_appearance()
 		return
 	else if(defib && I == defib.paddles)
 		defib.paddles.snap_back()
@@ -108,7 +112,7 @@
 				return
 			clamps_locked = !clamps_locked
 			to_chat(user, "<span class='notice'>Clamps [clamps_locked ? "" : "dis"]engaged.</span>")
-			update_icon()
+			update_appearance()
 		else
 			to_chat(user, "<span class='warning'>Insufficient access.</span>")
 		return
@@ -131,7 +135,7 @@
 	"<span class='notice'>You override the locking clamps on [src]!</span>")
 	playsound(src, 'sound/machines/locktoggle.ogg', 50, TRUE)
 	clamps_locked = FALSE
-	update_icon()
+	update_appearance()
 	return TRUE
 
 /obj/machinery/defibrillator_mount/wrench_act(mob/living/user, obj/item/wrench/W)
@@ -169,7 +173,7 @@
 	// Make sure processing ends before the defib is nulled
 	end_processing()
 	defib = null
-	update_icon()
+	update_appearance()
 
 /obj/machinery/defibrillator_mount/charging
 	name = "PENLITE defibrillator mount"
@@ -200,7 +204,7 @@
 	if(C.charge < C.maxcharge)
 		use_power(50 * delta_time)
 		C.give(40 * delta_time)
-		update_icon()
+		update_appearance()
 
 //wallframe, for attaching the mounts easily
 /obj/item/wallframe/defib_mount
@@ -211,7 +215,7 @@
 	custom_materials = list(/datum/material/iron = 300, /datum/material/glass = 100)
 	w_class = WEIGHT_CLASS_BULKY
 	result_path = /obj/machinery/defibrillator_mount
-	pixel_shift = -28
+	pixel_shift = 28
 
 /obj/item/wallframe/defib_mount/charging
 	name = "unhooked PENLITE defibrillator mount"

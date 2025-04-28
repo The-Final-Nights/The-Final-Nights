@@ -127,6 +127,7 @@
 	playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
 
 /obj/machinery/computer/pandemic/update_icon_state()
+	. = ..()
 	if(machine_stat & BROKEN)
 		icon_state = (beaker ? "mixer1_b" : "mixer0_b")
 	else
@@ -253,3 +254,7 @@
 /obj/machinery/computer/pandemic/on_deconstruction()
 	eject_beaker()
 	. = ..()
+
+
+#undef MAIN_SCREEN
+#undef SYMPTOM_DETAILS

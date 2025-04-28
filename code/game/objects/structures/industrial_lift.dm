@@ -1,8 +1,3 @@
-
-//Booleans in arguments are confusing, so I made them defines.
-#define LOCKED 1
-#define UNLOCKED 0
-
 ///Collect and command
 /datum/lift_master
 	var/list/lift_platforms

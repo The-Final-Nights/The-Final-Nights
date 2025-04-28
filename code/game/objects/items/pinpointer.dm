@@ -45,14 +45,14 @@
 	else
 		target = null
 		STOP_PROCESSING(SSfastprocess, src)
-	update_icon()
+	update_appearance()
 
 /obj/item/pinpointer/process()
 	if(!active)
 		return PROCESS_KILL
 	if(process_scan)
 		scan_for_target()
-	update_icon()
+	update_appearance()
 
 /obj/item/pinpointer/proc/scan_for_target()
 	return
@@ -146,7 +146,7 @@
 		user.visible_message("<span class='notice'>[user]'s pinpointer fails to detect a signal.</span>", "<span class='notice'>Your pinpointer fails to detect a signal.</span>")
 		return
 
-	var/A = input(user, "Person to track", "Pinpoint") in sortList(names)
+	var/A = input(user, "Person to track", "Pinpoint") in sort_list(names)
 	if(!A || QDELETED(src) || !user || !user.is_holding(src) || user.incapacitated())
 		return
 

@@ -654,7 +654,7 @@
 		M3.opacity = TRUE
 	M3.anchored = TRUE
 
-/proc/get_nearest_free_turf(var/turf/start)
+/proc/get_nearest_free_turf(turf/start)
 	if(isopenturf(get_step(start, EAST)))
 		if(isopenturf(get_step(get_step(start, EAST), EAST)))
 			if(isopenturf(get_step(get_step(get_step(start, EAST), EAST), EAST)))
@@ -936,49 +936,40 @@
 				matrixing = FALSE
 	return TRUE
 
-/proc/cryoMob(mob/living/mob_occupant, obj/pod)
-	if(isnpc(mob_occupant))
-		return
-	if(iscarbon(mob_occupant))
-		var/mob/living/carbon/C = mob_occupant
-		if(C.transformator)
-			qdel(C.transformator)
+/obj/matrix/proc/cryoMob(mob/living/mob_occupant)
 	var/list/crew_member = list()
 	crew_member["name"] = mob_occupant.real_name
-
-	if(mob_occupant.mind)
+	if(mob_occupant.mind && mob_occupant.mind.assigned_role)
 		// Handle job slot/tater cleanup.
 		var/job = mob_occupant.mind.assigned_role
 		crew_member["job"] = job
 		SSjob.FreeRole(job, mob_occupant)
-//		if(LAZYLEN(mob_occupant.mind.objectives))
-//			mob_occupant.mind.objectives.Cut()
 		mob_occupant.mind.special_role = null
 	else
 		crew_member["job"] = "N/A"
 
-	if (pod)
-		pod.visible_message("\The [pod] hums and hisses as it teleports [mob_occupant.real_name].")
+	// Delete them from datacore.
+	for(var/datum/data/record/medical_record as anything in GLOB.data_core.medical)
+		if(medical_record.fields["name"] == mob_occupant.real_name)
+			qdel(medical_record)
+	for(var/datum/data/record/security_record as anything in GLOB.data_core.security)
+		if(security_record.fields["name"] == mob_occupant.real_name)
+			qdel(security_record)
+	for(var/datum/data/record/general_record as anything in GLOB.data_core.general)
+		if(general_record.fields["name"] == mob_occupant.real_name)
+			qdel(general_record)
 
-	var/list/gear = list()
-	if(ishuman(mob_occupant))		// sorry simp-le-mobs deserve no mercy
-		var/mob/living/carbon/human/C = mob_occupant
-		if(C.bloodhunted)
-			SSbloodhunt.hunted -= C
-			C.bloodhunted = FALSE
-			SSbloodhunt.update_shit()
-		if(C.dna)
-			GLOB.fucking_joined -= C.dna.real_name
-		gear = C.get_all_gear()
-		for(var/obj/item/item_content as anything in gear)
-			qdel(item_content)
-		for(var/mob/living/L in mob_occupant.GetAllContents() - mob_occupant)
-			L.forceMove(pod.loc)
-		if(mob_occupant.client)
-			mob_occupant.client.screen.Cut()
-//			mob_occupant.client.screen += mob_ocupant.client.void
-			var/mob/dead/new_player/M = new /mob/dead/new_player()
-			M.key = mob_occupant.key
+	if(mob_occupant.bloodhunted)
+		SSbloodhunt.hunted -= mob_occupant
+		mob_occupant.bloodhunted = FALSE
+		SSbloodhunt.update_shit()
+
+	// Ghost and delete the mob.
+	if(!mob_occupant.get_ghost(TRUE))
+		if(world.time < 15 MINUTES) // before the 15 minute mark
+			mob_occupant.ghostize(FALSE) // Players despawned too early may not re-enter the game
+		else
+			mob_occupant.ghostize(TRUE)
 	QDEL_NULL(mob_occupant)
 
 /obj/structure/billiard_table

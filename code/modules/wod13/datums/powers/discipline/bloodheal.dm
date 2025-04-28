@@ -54,19 +54,16 @@
 	//brain damage and traumas healing
 	var/obj/item/organ/brain/brain = owner.getorganslot(ORGAN_SLOT_BRAIN)
 	if (brain)
-		brain.applyOrganDamage(-HEAL_BASHING_LETHAL * vitae_cost)
-
-		for (var/i in 1 to min(vitae_cost, length(brain.get_traumas_type())))
-			var/datum/brain_trauma/healing_trauma = pick(brain.get_traumas_type())
-			brain.cure_trauma_type(healing_trauma, resilience = TRAUMA_RESILIENCE_WOUND)
+		brain.applyOrganDamage(-HEAL_BASHING_LETHAL * (vitae_cost*5))
+		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
 
 	//miscellaneous organ damage healing
 	var/obj/item/organ/eyes/eyes = owner.getorganslot(ORGAN_SLOT_EYES)
 	if (eyes)
 		eyes.applyOrganDamage(-HEAL_BASHING_LETHAL * vitae_cost)
 
-		owner.adjust_blindness(-HEAL_AGGRAVATED * vitae_cost)
-		owner.adjust_blurriness(-HEAL_AGGRAVATED * vitae_cost)
+		owner.adjust_blindness(-HEAL_BASHING_LETHAL * vitae_cost)
+		owner.adjust_blurriness(-HEAL_BASHING_LETHAL * vitae_cost)
 
 	//healing too quickly attracts attention
 	if (violates_masquerade)

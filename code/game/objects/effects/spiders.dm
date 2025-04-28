@@ -115,7 +115,7 @@
 		spider_list[initial(spider.name)] = choice
 		var/image/spider_image = image(icon = initial(spider.icon), icon_state = initial(spider.icon_state))
 		display_spiders += list(initial(spider.name) = spider_image)
-	sortList(display_spiders)
+	sort_list(display_spiders)
 	var/chosen_spider = show_radial_menu(user, src, display_spiders, radius = 38, require_near = TRUE)
 	chosen_spider = spider_list[chosen_spider]
 	if(QDELETED(src) || QDELETED(user) || !chosen_spider)

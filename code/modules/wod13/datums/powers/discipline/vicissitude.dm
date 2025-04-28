@@ -15,6 +15,74 @@
 
 	activate_sound = 'code/modules/wod13/sounds/vicissitude.ogg'
 
+/obj/item/organ/cyberimp/arm/surgery/vicissitude
+	icon_state = "toolkit_implant_vic"
+	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude)
+
+/obj/item/retractor/augment/vicissitude
+	name = "retracting appendage"
+	desc = "A pair of prehensile pincers."
+	icon_state = "retractor_vic"
+	inhand_icon_state = "clamps_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/hemostat/augment/vicissitude
+	name = "hemostatic pincers"
+	desc = "A pair of thin appendages that were once fingers, secreting a hemostatic fluid from the tips."
+	icon_state = "hemostat_vic"
+	inhand_icon_state = "clamps_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/cautery/augment/vicissitude
+	name = "chemical cautery"
+	desc = "A specialized organ drooling a chemical package that releases an extreme amount of heat, very quickly."
+	icon_state = "cautery_vic"
+	inhand_icon_state = "cautery_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/surgicaldrill/augment/vicissitude
+	name = "surgical fang"
+	desc = "A spiral fang that bores into the flesh with reckless glee."
+	icon_state = "drill_vic"
+	hitsound = 'sound/effects/wounds/blood2.ogg'
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/scalpel/augment/vicissitude
+	name = "scalpel claw"
+	desc = "An altered nail, adjusted to make fine incisions."
+	icon_state = "scalpel_vic"
+	inhand_icon_state = "scalpel_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/circular_saw/augment/vicissitude
+	name = "circular jaw"
+	desc = "A spinning disc of teeth, screaming, as it bites through the flesh."
+	icon_state = "saw_vic"
+	inhand_icon_state = "saw_vic"
+	hitsound = 'sound/effects/wounds/blood2.ogg'
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/surgical_drapes/vicissitude
+	name = "skin drape"
+	desc = "A stretch of skin, sweating out antibiotics and disinfectants, to provide a sterile-ish environment to work in."
+	icon_state = "surgical_drapes_vic"
+	inhand_icon_state = "drapes_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
 	name = "Malleable Visage"
@@ -212,7 +280,7 @@
 
 /datum/discipline_power/vicissitude/fleshcrafting/post_gain()
 	. = ..()
-	var/obj/item/organ/cyberimp/arm/surgery/surgery_implant = new()
+	var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant = new()
 	surgery_implant.Insert(owner)
 
 	if (!owner.mind)
@@ -220,10 +288,10 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_wall)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_stool)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor)
-	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_eyes)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_implant)
 
+	// owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living) (Commented out because crafting it resulted in the crafting icon in tgui to go infinitely and stop the crafting menu from working)
 
 
 //BONECRAFTING

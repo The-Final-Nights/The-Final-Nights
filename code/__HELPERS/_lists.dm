@@ -183,6 +183,11 @@
 
 			return "[output][and_text][input[index]]"
 
+/// Return either pick(list) or null if list is not of type /list or is empty
+/proc/safepick(list/L)
+	if(LAZYLEN(L))
+		return pick(L)
+
 //Checks for specific types in a list
 /proc/is_type_in_list(atom/A, list/L)
 	if(!LAZYLEN(L) || !A)
@@ -405,20 +410,20 @@
 			L[key] = temp[key]
 
 //for sorting clients or mobs by ckey
-/proc/sortKey(list/L, order=1)
+/proc/sort_key(list/L, order=1)
 	return sortTim(L, order >= 0 ? GLOBAL_PROC_REF(cmp_ckey_asc) : GLOBAL_PROC_REF(cmp_ckey_dsc))
 
 //Specifically for record datums in a list.
-/proc/sortRecord(list/L, field = "name", order = 1)
+/proc/sort_record(list/L, field = "name", order = 1)
 	GLOB.cmp_field = field
 	return sortTim(L, order >= 0 ? GLOBAL_PROC_REF(cmp_records_asc) : GLOBAL_PROC_REF(cmp_records_dsc))
 
 //any value in a list
-/proc/sortList(list/L, cmp= GLOBAL_PROC_REF(cmp_text_asc))
+/proc/sort_list(list/L, cmp= GLOBAL_PROC_REF(cmp_text_asc))
 	return sortTim(L.Copy(), cmp)
 
-//uses sortList() but uses the var's name specifically. This should probably be using mergeAtom() instead
-/proc/sortNames(list/L, order=1)
+//uses sort_list() but uses the var's name specifically. This should probably be using mergeAtom() instead
+/proc/sort_names(list/L, order=1)
 	return sortTim(L.Copy(), order >= 0 ? GLOBAL_PROC_REF(cmp_name_asc) : GLOBAL_PROC_REF(cmp_name_dsc))
 
 //Mergesort: any value in a list, preserves key=value structure
