@@ -103,6 +103,8 @@ SUBSYSTEM_DEF(job)
 			return FALSE
 		if(job.required_playtime_remaining(player.client) && !bypass)
 			return FALSE
+		if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
+			return FALSE
 		if((player.client.prefs.generation > job.minimal_generation) && !bypass)
 			return FALSE
 		if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
@@ -144,6 +146,9 @@ SUBSYSTEM_DEF(job)
 			continue
 		if(job.required_playtime_remaining(player.client) && !bypass)
 			JobDebug("FOC player not enough xp, Player: [player]")
+			continue
+		if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
+			JobDebug("FOC character not old enough, Player: [player]")
 			continue
 		if((player.client.prefs.generation > job.minimal_generation) && !bypass)
 			JobDebug("FOC player not enough generation, Player: [player]")
@@ -211,6 +216,10 @@ SUBSYSTEM_DEF(job)
 
 		if(job.required_playtime_remaining(player.client))
 			JobDebug("GRJ player not enough xp, Player: [player]")
+			continue
+
+		if(!job.is_character_old_enough(player.client.prefs.total_age))
+			JobDebug("GRJ character not old enough, Player: [player]")
 			continue
 
 		if(player.client.prefs.generation > job.minimal_generation)
@@ -400,6 +409,10 @@ SUBSYSTEM_DEF(job)
 
 				if(job.required_playtime_remaining(player.client) && !bypass)
 					JobDebug("DO player not enough xp, Player: [player], Job:[job.title]")
+					continue
+
+				if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
+					JobDebug("DO character not old enough, Player: [player], Job:[job.title]")
 					continue
 
 				if((player.client.prefs.generation > job.minimal_generation) && !bypass)
