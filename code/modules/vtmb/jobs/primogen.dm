@@ -19,6 +19,7 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Malkavian")
 	minimal_generation = 10
+	// minimum_character_age = 100 // Actually Malkavian Primo is whoever showed for work that day. Crazy bunch.
 
 	v_duty = "Offer your infinite knowledge to Prince of the City. You likely have a hold over the local hospital, make good use of it and ensure the blood bags remain available."
 	experience_addition = 20
