@@ -6085,10 +6085,8 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "bFq" = (
-/obj/item/paper/crumpled{
-	default_raw_text = "Ventura Highway in the sunshine -- Where the days are longer -- The nights are stronger than moonshine -- You're gonna go, I know!"
-	},
 /obj/effect/turf_decal/siding/wood,
+/obj/item/paper/crumpled,
 /turf/open/floor/plating/parquetry,
 /area/vtm/cabaret)
 "bFt" = (
@@ -13722,11 +13720,10 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "dHD" = (
-/obj/structure/bed/dogbed,
-/mob/living/simple_animal/pet/dog/pug{
-	name = "\improper Vincent"
+/obj/machinery/light/blacklight{
+	dir = 8
 	},
-/turf/open/floor/carpet/purple,
+/turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "dHS" = (
 /obj/effect/turf_decal/stripes/white/line{
@@ -30018,9 +30015,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
 "iej" = (
-/obj/item/paper/crumpled{
-	default_raw_text = "A singer in a smoky room -- A smell of wine and cheap porfume ..."
-	},
+/obj/item/paper/crumpled,
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/cabaret/basement)
 "iem" = (
@@ -47146,9 +47141,7 @@
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_town)
 "mRz" = (
-/obj/machinery/light/blacklight{
-	dir = 8
-	},
+/obj/item/kirbyplants/fullysynthetic,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "mRH" = (
@@ -55246,12 +55239,6 @@
 /obj/item/camera,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/endron_facility/restricted)
-"paj" = (
-/obj/item/paper/crumpled{
-	default_raw_text = "So, bye-bye, Miss American Pie -- Drove my Chevy to the levee, but the levee was dry -- And them good ol' boys were drinkin' whiskey and rye -- Singin', "This'llbethedaythatIdie" "
-	},
-/turf/open/floor/plating/vampcarpet,
-/area/vtm/cabaret/basement)
 "par" = (
 /obj/machinery/light/prince{
 	pixel_y = 32
@@ -86978,8 +86965,11 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/church)
 "xGe" = (
-/obj/item/kirbyplants/fullysynthetic,
-/turf/open/floor/plating/vampplating/mono,
+/obj/structure/bed/dogbed,
+/mob/living/simple_animal/pet/dog/pug{
+	name = "\improper Vincent"
+	},
+/turf/open/floor/carpet/purple,
 /area/vtm/cabaret)
 "xGg" = (
 /obj/effect/decal/bordur/corner{
@@ -91198,7 +91188,7 @@ dhc
 nYS
 rkL
 sNY
-paj
+iej
 pyH
 pyH
 exn
@@ -159313,7 +159303,7 @@ wmm
 uxi
 vxx
 vxx
-mRz
+dHD
 vxx
 vxx
 vxx
@@ -162143,7 +162133,7 @@ qHx
 vpC
 dSA
 xGK
-xGe
+mRz
 cFm
 wmm
 wIe
@@ -226393,7 +226383,7 @@ kZd
 bbP
 hVF
 nsr
-dHD
+xGe
 xMh
 cFm
 ntq
