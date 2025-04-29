@@ -34,7 +34,7 @@ SUBSYSTEM_DEF(city_time)
 		for(var/mob/living/carbon/werewolf/W in GLOB.player_list)
 			if(W?.stat != DEAD && W?.key)
 				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(W.key)]
-				char_sheet?.add_experience(3)
+				char_sheet?.add_experience(2)
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
 			if(H?.stat != DEAD && H?.key)
 				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(H.key)]
