@@ -18,17 +18,12 @@
 
 	var/list/glyph_names = list()
 
-	for(var/obj/effect/decal/garou_glyph/glyph in GLOB.glyph_list)
-		glyph_names += glyph.garou_name
+	for(var/glyph in GLOB.glyph_list)
+		glyph_names += glyph
 
 	var/choice = tgui_input_list(user, "Select a glyph to draw.", "Glyph Selection", glyph_names)
 	if(choice)
-		var/obj/effect/decal/garou_glyph/drawn_glyph
-		for(var/obj/effect/decal/garou_glyph/glyph_ritual in GLOB.glyph_list)
-			if(glyph_ritual.garou_name == choice)
-				drawn_glyph = glyph_ritual
-				break
-
+		var/obj/effect/decal/garou_glyph/drawn_glyph = GLOB.glyph_list[choice]
 		if(drawn_glyph)
 			user.visible_message(span_notice("[user] starts to scrape a glyph into the ground..."), \
 			span_notice("You begin to etch the spirals and lines of your chosen glyph..."))

@@ -63,9 +63,8 @@ GLOBAL_LIST_EMPTY(glyph_list)
 	sort_list(GLOB.auspices_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
 	for(var/spath in subtypesof(/obj/effect/decal/garou_glyph))
-		var/obj/effect/decal/garou_glyph/S = new spath()
-		GLOB.glyph_list |= S
-		qdel(S)
+		var/obj/effect/decal/garou_glyph/S = spath
+		GLOB.glyph_list[S.garou_name] = S
 	sort_list(GLOB.glyph_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
 	// TFN EDIT ADDITION START: morality system
