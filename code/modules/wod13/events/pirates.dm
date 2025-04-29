@@ -104,7 +104,7 @@
 
 /obj/machinery/shuttle_scrambler/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/machinery/shuttle_scrambler/process()
 	if(active)
@@ -135,7 +135,7 @@
 		if(active || !user.canUseTopic(src, BE_CLOSE))
 			return
 		toggle_on(user)
-		update_icon()
+		update_appearance()
 	else
 		dump_loot(user)
 
@@ -164,10 +164,8 @@
 	STOP_PROCESSING(SSobj,src)
 
 /obj/machinery/shuttle_scrambler/update_icon_state()
-	if(active)
-		icon_state = "dominator-blue"
-	else
-		icon_state = "dominator"
+	icon_state = active ? "dominator-blue" : "dominator"
+	return ..()
 
 /obj/machinery/shuttle_scrambler/Destroy()
 	toggle_off()

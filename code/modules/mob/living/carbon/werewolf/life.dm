@@ -103,7 +103,7 @@
 		return
 	adjust_bodytemperature(BODYTEMP_HEATING_MAX) //If you're on fire, you heat up!
 
-/mob/living/carbon/proc/adjust_veil(var/amount)
+/mob/living/carbon/proc/adjust_veil(amount)
 	if(!GLOB.canon_event)
 		return
 	if(last_veil_adjusting+200 >= world.time)

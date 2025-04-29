@@ -34,7 +34,7 @@
 		if(!isbook(I))
 			continue
 		I.forceMove(src)
-	update_icon()
+	update_appearance()
 
 	if(SSlibrary.initialized)
 		INVOKE_ASYNC(src, PROC_REF(load_shelf))
@@ -74,7 +74,7 @@
 			create_random_books(amount = books_to_load, location = src, category = randomizing_categories ? BOOK_CATEGORY_RANDOM : random_category)
 
 		after_random_load()
-		update_icon() //Make sure you look proper
+		update_appearance() //Make sure you look proper
 
 	var/area/our_area = get_area(src)
 	var/area_type = our_area.type //Save me from the dark
@@ -113,7 +113,7 @@
 			if(!isbook(I))
 				continue
 			I.forceMove(Tsec)
-	update_icon()
+	update_appearance()
 
 /obj/structure/bookcase/attackby(obj/item/attacking_item, mob/user, params)
 	if(state == BOOKCASE_UNANCHORED)
@@ -139,7 +139,7 @@
 			W.use(2)
 			balloon_alert(user, "shelf added")
 			state = BOOKCASE_FINISHED
-			update_icon()
+			update_appearance()
 			return
 
 		if(attacking_item.tool_behaviour == TOOL_WRENCH)
@@ -152,7 +152,7 @@
 	if(isbook(attacking_item))
 		if(!user.transferItemToLoc(attacking_item, src))
 			return ..()
-		update_icon()
+		update_appearance()
 		return
 
 
@@ -164,7 +164,7 @@
 		return
 	if(!length(contents))
 		return
-	var/obj/item/book/choice = tgui_input_list(user, "Book to remove from the shelf", "Remove Book", sortNames(contents.Copy()))
+	var/obj/item/book/choice = tgui_input_list(user, "Book to remove from the shelf", "Remove Book", sort_names(contents.Copy()))
 	if(isnull(choice))
 		return
 	if(!(user.mobility_flags & MOBILITY_USE) || user.stat != CONSCIOUS || HAS_TRAIT(user, TRAIT_HANDS_BLOCKED) || !in_range(loc, user))
@@ -174,7 +174,7 @@
 			user.put_in_hands(choice)
 	else
 		choice.forceMove(drop_location())
-	update_icon()
+	update_appearance()
 
 /obj/structure/bookcase/deconstruct(disassembled = TRUE)
 	. = ..()
@@ -198,14 +198,14 @@
 
 /obj/structure/bookcase/manuals/engineering/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/structure/bookcase/manuals/research_and_development
 	name = "\improper R&D manuals bookcase"
 
 /obj/structure/bookcase/manuals/research_and_development/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 #undef BOOKCASE_UNANCHORED
 #undef BOOKCASE_ANCHORED

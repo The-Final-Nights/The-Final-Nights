@@ -219,3 +219,6 @@
 		else
 			itemUser.visible_message("<span class='suicide'>[user] looks even further depressed as they realize they do not have a head...and suddenly dies of shame!</span>")
 		return (BRUTELOSS)
+
+#undef SOURCE_PORTAL
+#undef DESTINATION_PORTAL

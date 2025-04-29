@@ -141,7 +141,7 @@
 
 /datum/datacore/proc/get_manifest()
 	var/list/manifest_out = list(
- 		"Camarilla",
+		"Camarilla",
 		"Primogen Council",
 		"Tremere",
 		"Anarch",
