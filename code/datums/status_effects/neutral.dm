@@ -103,7 +103,7 @@
 		for(var/obj/effect/proc_holder/spell/spell in rewarded.mind.spell_list)
 			spell.charge_counter = spell.charge_max
 			spell.recharging = FALSE
-			spell.update_icon()
+			spell.update_appearance()
 		rewarded.adjustBruteLoss(-25)
 		rewarded.adjustFireLoss(-25)
 		rewarded.adjustToxLoss(-25)
@@ -326,7 +326,7 @@
 /*
  * A status effect used for preventing caltrop message spam
  *
- * While a mob has this status effect, they won't recieve any messages about
+ * While a mob has this status effect, they won't receive any messages about
  * stepping on caltrops. But they will be stunned and damaged regardless.
  *
  * The status effect itself has no effect, other than to disappear after

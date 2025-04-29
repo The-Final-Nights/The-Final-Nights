@@ -1,4 +1,4 @@
-/proc/create_unique_phone_number(var/exchange = 513)
+/proc/create_unique_phone_number(exchange = 513)
 	if(length(GLOB.subscribers_numbers_list) < 1)
 		create_subscribers_numbers()
 	var/subscriber_code = pick(GLOB.subscribers_numbers_list)
@@ -362,7 +362,7 @@
 						if(CNT_REMOVE)
 							removing += CNT_REMOVE.name
 					if(length(removing) >= 1)
-						result = tgui_input_list(usr, "Select a contact", "Contact Selection", sortList(removing))
+						result = tgui_input_list(usr, "Select a contact", "Contact Selection", sort_list(removing))
 						if(result)
 							for(var/datum/phonecontact/CNT_REMOVE in contacts)
 								if(CNT_REMOVE.name == result)
@@ -373,7 +373,7 @@
 						if(CNTCT)
 							personal_contacts += CNTCT.name
 					if(length(personal_contacts) >= 1)
-						result = tgui_input_list(usr, "Select a contact", "Contact Selection", sortList(personal_contacts))
+						result = tgui_input_list(usr, "Select a contact", "Contact Selection", sort_list(personal_contacts))
 						if(result)
 							for(var/datum/phonecontact/CNTCT in contacts)
 								if(CNTCT.name == result)
@@ -401,7 +401,7 @@
 						if(CNT_UNBLOCK)
 							unblocking += CNT_UNBLOCK.name
 					if(length(unblocking) >= 1)
-						result = tgui_input_list(usr, "Select a blocked number", "Blocked Selection", sortList(unblocking))
+						result = tgui_input_list(usr, "Select a blocked number", "Blocked Selection", sort_list(unblocking))
 						if(result)
 							for(var/datum/phonecontact/CNT_UNBLOCK in blocked_contacts)
 								if(CNT_UNBLOCK.name == result)
@@ -518,7 +518,7 @@
 				if(L)
 					to_chat(L, "<span class='notice'>Some important contacts in your phone work again.</span>")
 
-/obj/item/vamp/phone/proc/Recall(var/obj/item/vamp/phone/abonent, var/mob/usar)
+/obj/item/vamp/phone/proc/Recall(obj/item/vamp/phone/abonent, mob/usar)
 	if(last_call+100 <= world.time && !talking)
 		last_call = 0
 		if(online)
@@ -597,8 +597,8 @@
 	open_state = "redphone"
 	closed_state = "redphone"
 	folded_state = "redphone"
-	var/obj/machinery/p25transceiver/clinic_transciever
-	var/obj/machinery/p25transceiver/police_transciever
+	var/obj/machinery/p25transceiver/clinic_transceiver
+	var/obj/machinery/p25transceiver/police_transceiver
 
 /obj/item/vamp/phone/emergency/Initialize()
 	. = ..()

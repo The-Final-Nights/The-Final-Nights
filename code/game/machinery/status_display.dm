@@ -157,7 +157,14 @@
 	var/friendc = FALSE      // track if Friend Computer mode
 	var/last_picture  // For when Friend Computer mode is undone
 
-/obj/machinery/status_display/evac/Initialize()
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/status_display/evac, 32)
+
+//makes it go on the wall when built
+/obj/machinery/status_display/Initialize(mapload, ndir, building)
+	. = ..()
+	update_icon()
+
+/obj/machinery/status_display/evac/Initialize(mapload)
 	. = ..()
 	// register for radio system
 	SSradio.add_object(src, frequency)
@@ -193,10 +200,7 @@
 
 /obj/machinery/status_display/evac/examine(mob/user)
 	. = ..()
-	if(mode == SD_EMERGENCY)
-		. += examine_shuttle(user, SSshuttle.emergency)
-	else if(!message1 && !message2)
-		. += "The display is blank."
+	. += "The display is blank."
 
 /obj/machinery/status_display/evac/receive_signal(datum/signal/signal)
 	switch(signal.data["command"])
@@ -204,7 +208,6 @@
 			mode = SD_BLANK
 			set_message(null, null)
 		if("shuttle")
-			mode = SD_EMERGENCY
 			set_message(null, null)
 		if("message")
 			mode = SD_MESSAGE
@@ -322,7 +325,10 @@
 		AI_EMOTION_RED_GLOW = "ai_hal",
 	)
 
-/obj/machinery/status_display/ai/Initialize()
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/status_display/ai, 32)
+
+/obj/machinery/status_display/ai/Initialize(mapload)
 	. = ..()
 	GLOB.ai_status_displays.Add(src)
 
@@ -358,3 +364,8 @@
 #undef FONT_COLOR
 #undef FONT_STYLE
 #undef SCROLL_SPEED
+
+#undef SD_BLANK
+#undef SD_EMERGENCY
+#undef SD_MESSAGE
+#undef SD_PICTURE

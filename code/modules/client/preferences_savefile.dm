@@ -484,6 +484,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_moth_markings"], features["moth_markings"])
 	READ_FILE(S["persistent_scars"] , persistent_scars)
 	READ_FILE(S["experience_used_on_character"], experience_used_on_character)
+	READ_FILE(S["derangement"], derangement)
 	READ_FILE(S["dharma_type"], dharma_type)
 	READ_FILE(S["dharma_level"], dharma_level)
 	READ_FILE(S["po_type"], po_type)
@@ -521,7 +522,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["alt_titles_preferences"], alt_titles_preferences)
 	alt_titles_preferences = SANITIZE_LIST(alt_titles_preferences)
 	if(SSjob)
-		for(var/datum/job/job in sortList(SSjob.occupations, /proc/cmp_job_display_asc))
+		for(var/datum/job/job in sort_list(SSjob.occupations, /proc/cmp_job_display_asc))
 			if(alt_titles_preferences[job.title])
 				if(!(alt_titles_preferences[job.title] in job.alt_titles))
 					alt_titles_preferences.Remove(job.title)
@@ -668,6 +669,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["moth_antennae"] 	= sanitize_inlist(features["moth_antennae"], GLOB.moth_antennae_list, "Plain")
 	features["moth_markings"] 	= sanitize_inlist(features["moth_markings"], GLOB.moth_markings_list, "None")
 	experience_used_on_character = sanitize_integer(experience_used_on_character, 0, 100000, 0)
+
+	derangement = sanitize_integer(derangement, 0, 1, 1)
 
 	persistent_scars = sanitize_integer(persistent_scars)
 
@@ -816,6 +819,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_moth_markings"]		, features["moth_markings"])
 	WRITE_FILE(S["persistent_scars"]			, persistent_scars)
 	WRITE_FILE(S["experience_used_on_character"], experience_used_on_character)
+	WRITE_FILE(S["derangement"], derangement)
 	WRITE_FILE(S["dharma_type"], dharma_type)
 	WRITE_FILE(S["dharma_level"], dharma_level)
 	WRITE_FILE(S["po_type"], po_type)

@@ -157,6 +157,7 @@
 	var/static/list/charge_items = typecacheof(list(/obj/item/stock_parts/cell, /obj/item/gun/energy))
 
 /obj/item/borg/charger/update_icon_state()
+	. = ..()
 	icon_state = "charger_[mode]"
 
 /obj/item/borg/charger/attack_self(mob/user)
@@ -637,6 +638,7 @@
 	to_chat(user, "<span class='boldnotice'>You [active? "activate":"deactivate"] [src].</span>")
 
 /obj/item/borg/projectile_dampen/update_icon_state()
+	. = ..()
 	icon_state = "[initial(icon_state)][active]"
 
 /obj/item/borg/projectile_dampen/proc/activate_field()
@@ -973,3 +975,6 @@
 	. = ..()
 	if(istype(A, /obj/item/ai_module) && !stored) //If an admin wants a borg to upload laws, who am I to stop them? Otherwise, we can hint that it fails
 		to_chat(user, "<span class='warning'>This circuit board doesn't seem to have standard robot apparatus pin holes. You're unable to pick it up.</span>")
+
+
+#undef PKBORG_DAMPEN_CYCLE_DELAY

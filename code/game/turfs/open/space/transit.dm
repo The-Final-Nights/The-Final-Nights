@@ -80,16 +80,17 @@
 
 /turf/open/space/transit/Initialize()
 	. = ..()
-	update_icon()
+	update_appearance()
 	for(var/atom/movable/AM in src)
 		throw_atom(AM)
 
-/turf/open/space/transit/update_icon()
+/turf/open/space/transit/update_appearance()
 	. = ..()
 	transform = turn(matrix(), get_transit_angle(src))
 
 /turf/open/space/transit/update_icon_state()
 	icon_state = "speedspace_ns_[get_transit_state(src)]"
+	return ..()
 
 /proc/get_transit_state(turf/T)
 	var/p = 9

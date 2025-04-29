@@ -10,7 +10,7 @@
 	// Default research tech, prevents bricking
 	design_ids = list("basic_matter_bin", "basic_cell", "basic_scanning", "basic_capacitor", "basic_micro_laser", "micro_mani", "basic_electrolite", "c-reader", "desttagger", "salestagger", "handlabel", "packagewrap",
 					"destructive_analyzer", "circuit_imprinter", "experimentor", "rdconsole", "bepis", "design_disk", "tech_disk", "rdserver", "rdservercontrol", "mechfab",
-					"paystand", "space_heater", "bucket", "sec_rshot", "sec_beanbag_slug", "sec_Islug", "sec_dart", "sec_38", "rglass", "plasteel",
+					"paystand", "bucket", "sec_rshot", "sec_beanbag_slug", "sec_Islug", "sec_dart", "sec_38", "rglass", "plasteel",
 					"plastitanium", "plasmaglass", "plasmareinforcedglass", "titaniumglass", "plastitaniumglass", "plastic_knife", "plastic_fork", "plastic_spoon", "conveyor_belt", "conveyor_switch")
 
 /datum/techweb_node/mmi
@@ -48,7 +48,7 @@
 	starting_node = TRUE
 	display_name = "Basic Tools"
 	description = "Basic mechanical, electronic, surgical and botanical tools."
-	design_ids = list("screwdriver", "wrench", "wirecutters", "crowbar", "multitool", "welding_tool", "tscanner", "analyzer", "cable_coil", "pipe_painter", "airlock_painter", "decal_painter",
+	design_ids = list("screwdriver", "wrench", "wirecutters", "crowbar", "multitool", "welding_tool", "tscanner", "cable_coil", "airlock_painter", "decal_painter",
 					"cultivator", "plant_analyzer", "shovel", "spade", "hatchet", "secateurs", "mop", "pushbroom", "plunger", "spraycan", "swab", "petri_dish", "normtrash")
 
 /datum/techweb_node/basic_medical
@@ -58,7 +58,7 @@
 	description = "Basic medical tools and equipment."
 	design_ids = list("cybernetic_liver", "cybernetic_heart", "cybernetic_lungs","cybernetic_stomach", "scalpel",
 					"blood_filter", "circular_saw", "bonesetter", "surgicaldrill", "retractor", "cautery", "hemostat",
-					"stethoscope", "surgical_drapes", "syringe", "plumbing_rcd", "beaker", "large_beaker", "xlarge_beaker",
+					"stethoscope", "surgical_drapes", "syringe", "beaker", "large_beaker", "xlarge_beaker",
 					"dropper", "defibmountdefault", "surgical_tape", "portable_chem_mixer")
 
 /////////////////////////Biotech/////////////////////////
@@ -67,7 +67,7 @@
 	display_name = "Biological Technology"
 	description = "What makes us tick."	//the MC, silly!
 	prereq_ids = list("base")
-	design_ids = list("chem_heater", "chem_master", "chem_dispenser", "pandemic", "defibrillator", "defibmount", "operating", "soda_dispenser", "beer_dispenser", "healthanalyzer", "medigel","genescanner", "med_spray_bottle", "chem_pack", "blood_pack", "medical_kiosk", "crewpinpointerprox", "medipen_refiller", "biopsy_tool", "plumbing_rcd_sci")
+	design_ids = list("chem_heater", "chem_master", "chem_dispenser", "pandemic", "defibrillator", "defibmount", "operating", "soda_dispenser", "beer_dispenser", "healthanalyzer", "medigel","genescanner", "med_spray_bottle", "chem_pack", "blood_pack", "medical_kiosk", "crewpinpointerprox", "medipen_refiller", "biopsy_tool")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
 /datum/techweb_node/adv_biotech
@@ -136,10 +136,9 @@
 	display_name = "Industrial Engineering"
 	description = "A refresher course on modern engineering technology."
 	prereq_ids = list("base")
-	design_ids = list("solarcontrol", "recharger", "powermonitor", "rped", "pacman", "adv_capacitor", "adv_scanning", "w-recycler" , "emitter", "high_cell", "adv_matter_bin", "scanner_gate",
-	"atmosalerts", "atmos_control", "recycler", "autolathe", "high_micro_laser", "nano_mani", "mesons", "welding_goggles", "thermomachine", "rad_collector", "tesla_coil", "grounding_rod",
-	"apc_control", "cell_charger", "power control", "airlock_board", "firelock_board", "airalarm_electronics", "firealarm_electronics", "cell_charger", "stack_console", "stack_machine",
-	"oxygen_tank", "plasma_tank", "emergency_oxygen", "emergency_oxygen_engi", "plasmaman_tank_belt", "electrolyzer", "adv_electrolite", "pneumatic_seal")
+	design_ids = list("solarcontrol", "recharger", "powermonitor", "rped", "pacman", "adv_capacitor", "adv_scanning", "w-recycler", "high_cell", "adv_matter_bin", "scanner_gate",
+	"recycler", "autolathe", "high_micro_laser", "nano_mani", "mesons", "welding_goggles", "apc_control", "cell_charger", "power control", "airlock_board", "firelock_board",
+	"firealarm_electronics", "cell_charger", "stack_console", "stack_machine", "adv_electrolite", "pneumatic_seal")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 7500)
 
 /datum/techweb_node/adv_engi
@@ -147,8 +146,7 @@
 	display_name = "Advanced Engineering"
 	description = "Pushing the boundaries of physics, one chainsaw-fist at a time."
 	prereq_ids = list("engineering", "emp_basic")
-	design_ids = list("engine_goggles", "magboots", "forcefield_projector", "weldingmask", "rcd_loaded", "rpd_loaded", "sheetifier", "HFR_core", "HFR_fuel_input",
-	"HFR_waste_output", "HFR_moderator_input", "HFR_corner", "HFR_interface")
+	design_ids = list("engine_goggles", "magboots", "forcefield_projector", "weldingmask", "rcd_loaded", "sheetifier")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
 /datum/techweb_node/anomaly
@@ -156,7 +154,7 @@
 	display_name = "Anomaly Research"
 	description = "Unlock the potential of the mysterious anomalies that appear on station."
 	prereq_ids = list("adv_engi", "practical_bluespace")
-	design_ids = list("reactive_armour", "anomaly_neutralizer", "crystal_stabilizer")
+	design_ids = list("reactive_armour", "anomaly_neutralizer")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 
 /datum/techweb_node/high_efficiency
@@ -172,7 +170,7 @@
 	display_name = "Advanced Power Manipulation"
 	description = "How to get more zap."
 	prereq_ids = list("engineering")
-	design_ids = list("smes", "super_cell", "hyper_cell", "super_capacitor", "superpacman", "power_turbine", "power_turbine_console", "power_compressor")
+	design_ids = list("smes", "super_cell", "hyper_cell", "super_capacitor", "superpacman")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
 /////////////////////////Bluespace tech/////////////////////////
@@ -213,7 +211,7 @@
 	display_name = "Applied Bluespace Research"
 	description = "Using bluespace to make things faster and better."
 	prereq_ids = list("bluespace_basic", "engineering")
-	design_ids = list("bs_rped","minerbag_holding", "bluespacebeaker", "bluespacesyringe", "phasic_scanning", "roastingstick", "ore_silo", "plumbing_receiver")
+	design_ids = list("bs_rped","minerbag_holding", "bluespacebeaker", "bluespacesyringe", "phasic_scanning", "roastingstick", "ore_silo")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
 
 /datum/techweb_node/bluespace_power
@@ -426,7 +424,7 @@
 	display_name = "Cryostasis Technology"
 	description = "Smart freezing of objects to preserve them!"
 	prereq_ids = list("adv_engi", "biotech")
-	design_ids = list("splitbeaker", "cryotube", "cryo_Grenade", "stasis")
+	design_ids = list("splitbeaker", "cryo_Grenade", "stasis")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2000)
 
 /datum/techweb_node/subdermal_implants
@@ -531,7 +529,7 @@
 	id = "rcd_upgrade"
 	display_name = "Rapid Device Upgrade Designs"
 	description = "Unlocks new designs that improve rapid devices."
-	design_ids = list("rcd_upgrade_frames", "rcd_upgrade_simple_circuits", "rcd_upgrade_furnishing", "rpd_upgrade_unwrench")
+	design_ids = list("rcd_upgrade_frames", "rcd_upgrade_simple_circuits", "rcd_upgrade_furnishing")
 	prereq_ids = list("adv_engi")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 

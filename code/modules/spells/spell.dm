@@ -71,7 +71,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 	if(msg)
 		to_chat(ranged_ability_user, msg)
 	active = TRUE
-	update_icon()
+	update_appearance()
 
 /obj/effect/proc_holder/proc/remove_ranged_ability(msg)
 	if(!ranged_ability_user || !ranged_ability_user.client || (ranged_ability_user.ranged_ability && ranged_ability_user.ranged_ability != src)) //To avoid removing the wrong ability
@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 		to_chat(ranged_ability_user, msg)
 	ranged_ability_user = null
 	active = FALSE
-	update_icon()
+	update_appearance()
 
 /obj/effect/proc_holder/spell
 	name = "Spell"
@@ -440,7 +440,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 				//Adds a safety check post-input to make sure those targets are actually in range.
 				var/mob/M
 				if(!random_target)
-					M = input("Choose the target for the spell.", "Targeting") as null|mob in sortNames(possible_targets)
+					M = input("Choose the target for the spell.", "Targeting") as null|mob in sort_names(possible_targets)
 				else
 					switch(random_target_priority)
 						if(TARGET_RANDOM)

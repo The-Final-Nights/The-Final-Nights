@@ -168,7 +168,7 @@
 		var/list/keys = list()
 		for(var/mob/M in GLOB.player_list)
 			keys += M.client
-		var/client/selection = input("Please, select a player!", "Team member", null, null) as null|anything in sortKey(keys)
+		var/client/selection = input("Please, select a player!", "Team member", null, null) as null|anything in sort_key(keys)
 		//Could be freeform if you want to add disconnected i guess
 		if(!selection)
 			return
@@ -205,7 +205,7 @@
 	ready_to_spawn = !ready_to_spawn
 	to_chat(user,"You [ready_to_spawn ? "enable" : "disable"] the spawners.")
 	log_admin("[key_name(user)] toggled event arena spawning for [arena_id] arena.")
-	// Could use update_icon on spawnpoints here to show they're on
+	// Could use update_appearance on spawnpoints here to show they're on
 	if(ready_to_spawn)
 		for(var/mob/M in all_contestants())
 			to_chat(M,"<span class='userdanger'>Arena you're signed up for is ready!</span>")

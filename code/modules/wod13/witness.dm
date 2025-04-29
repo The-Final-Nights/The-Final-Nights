@@ -35,7 +35,7 @@
 	direction += " San Francisco"
 	return direction
 
-/obj/item/police_radio/proc/announce_crime(var/crime, var/atom/location)
+/obj/item/police_radio/proc/announce_crime(crime, atom/location)
 	var/area/crime_location = get_area(location)
 	var/direction = get_cardinal_direction(location.x, location.y)
 	var/message = ""

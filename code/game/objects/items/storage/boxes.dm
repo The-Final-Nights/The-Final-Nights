@@ -36,7 +36,7 @@
 
 /obj/item/storage/box/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/item/storage/box/suicide_act(mob/living/carbon/user)
 	var/obj/item/bodypart/head/myhead = user.get_bodypart(BODY_ZONE_HEAD)
@@ -872,7 +872,7 @@
 
 /obj/item/storage/box/papersack/Initialize(mapload)
 	. = ..()
-	papersack_designs = sortList(list(
+	papersack_designs = sort_list(list(
 		"None" = image(icon = src.icon, icon_state = "paperbag_None"),
 		"NanotrasenStandard" = image(icon = src.icon, icon_state = "paperbag_NanotrasenStandard"),
 		"SyndiSnacks" = image(icon = src.icon, icon_state = "paperbag_SyndiSnacks"),
@@ -885,6 +885,7 @@
 		icon_state = "[inhand_icon_state]"
 	else
 		icon_state = "[inhand_icon_state]_closed"
+	return ..()
 
 /obj/item/storage/box/papersack/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/pen))

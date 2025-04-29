@@ -17,14 +17,16 @@
 	. = ..()
 
 /obj/structure/closet/crate/critter/update_icon_state()
+	SHOULD_CALL_PARENT(FALSE)
 	return
 
 /obj/structure/closet/crate/critter/update_overlays()
 	. = ..()
 	if(opened)
 		. += "crittercrate_door_open"
-	else
-		. += "crittercrate_door"
-		if(manifest)
-			. += "manifest"
+		return
+
+	. += "crittercrate_door"
+	if(manifest)
+		. += "manifest"
 
