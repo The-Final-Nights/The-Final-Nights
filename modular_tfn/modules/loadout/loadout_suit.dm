@@ -60,6 +60,15 @@
 	display_name = "jacket, dutch"
 	path = /obj/item/clothing/suit/dutch
 
+/datum/gear/suit/jacket/military
+	display_name = "jacket, military"
+	description = "A canvas jacket styled after classical American military garb."
+	path = /obj/item/clothing/suit/jacket/miljacket
+
+/datum/gear/suit/jacket/black_suit
+	display_name = "jacket, black suit"
+	path = /obj/item/clothing/suit/toggle/lawyer/black
+
 // Trenchcoats
 /datum/gear/suit/trenchcoat
 	subtype_path = /datum/gear/suit/trenchcoat
@@ -73,6 +82,10 @@
 	display_name = "trenchcoat, brown"
 	description = "Best noir clothes for night."
 	path = /obj/item/clothing/suit/vampire/trench/alt
+
+/datum/gear/suit/trenchcoat/burgundy
+	display_name = "trenchcoat, burgundy"
+	path = /obj/item/clothing/suit/vampire/trench/archive
 
 // Misc
 
@@ -91,3 +104,15 @@
 /datum/gear/suit/nun
 	display_name = "nun frock"
 	path = /obj/item/clothing/suit/vampire/nun
+
+/datum/gear/suit/hawaiian
+	display_name = "hawaiian overshirt"
+	path = /obj/item/clothing/suit/hawaiian
+
+/datum/gear/suit/striped_sweater
+	display_name = "striped sweater"
+	path = /obj/item/clothing/suit/striped_sweater
+
+/datum/gear/suit/letterman_red
+	display_name = "letterman, red"
+	path = /obj/item/clothing/suit/jacket/letterman_syndie

@@ -28,6 +28,22 @@
 	display_name = "scarf, white"
 	path = /obj/item/clothing/neck/vampire/scarf/white
 
+// Tie
+/datum/gear/neck/tie
+	subtype_path = /datum/gear/neck/tie
+
+/datum/gear/neck/tie/black
+	display_name = "tie, black"
+	path = /obj/item/clothing/neck/tie/black
+
+/datum/gear/neck/tie/red
+	display_name = "tie, red"
+	path = /obj/item/clothing/neck/tie/red
+
+/datum/gear/neck/tie/blue
+	display_name = "tie, blue"
+	path = /obj/item/clothing/neck/tie/blue
+
 // Misc
 
 /datum/gear/neck/cross
