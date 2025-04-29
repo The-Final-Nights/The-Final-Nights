@@ -38,6 +38,9 @@
 
 	var/memory
 
+	/// Guestbook datum, in case we actually make use of the guestbook mechanics
+	var/datum/guestbook/guestbook
+
 	var/assigned_role
 	var/special_role
 	var/list/restricted_roles = list()
@@ -89,12 +92,14 @@
 /datum/mind/New(_key)
 	key = _key
 	martial_art = default_martial_art
+	guestbook = new()
 	init_known_skills()
 
 /datum/mind/Destroy()
 	SSticker.minds -= src
 	if(islist(antag_datums))
 		QDEL_LIST(antag_datums)
+	QDEL_NULL(guestbook)
 	current = null
 	return ..()
 

@@ -544,7 +544,6 @@
 
 /**
  * Control+Shift click
- * Unused except for AI
  */
 /mob/proc/CtrlShiftClickOn(atom/A)
 	src.pointed(A)
