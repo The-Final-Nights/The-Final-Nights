@@ -94,6 +94,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/techstore
 
 /datum/garou_tribe/redtalons
 	name = "Red Talons"

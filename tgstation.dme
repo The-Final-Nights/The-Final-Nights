@@ -228,6 +228,7 @@
 #include "code\__HELPERS\unsorted.dm"
 #include "code\__HELPERS\verbs.dm"
 #include "code\__HELPERS\view.dm"
+#include "code\__HELPERS\weakref.dm"
 #include "code\__HELPERS\logging\_logging.dm"
 #include "code\__HELPERS\logging\admin.dm"
 #include "code\__HELPERS\logging\antagonists.dm"
