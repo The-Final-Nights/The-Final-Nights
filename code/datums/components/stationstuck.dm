@@ -1,8 +1,3 @@
-
-#define PUNISHMENT_MURDER "murder"
-#define PUNISHMENT_GIB "gib"
-#define PUNISHMENT_TELEPORT "teleport"
-
 //very similar to stationloving, but more made for mobs and not objects. used on derelict drones currently
 
 

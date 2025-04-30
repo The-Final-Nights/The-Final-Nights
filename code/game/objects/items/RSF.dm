@@ -203,3 +203,5 @@ RSF
 	cooldown = world.time + cooldowndelay
 	if(!(datum_flags & DF_ISPROCESSING))
 		START_PROCESSING(SSprocessing, src)
+
+#undef OBJECT_OR_LIST_ELEMENT

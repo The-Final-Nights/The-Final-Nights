@@ -7,6 +7,4 @@
 # 500.1337: runtimetown
 # 516.1638: runtimetown;516
 # Lowest supported version
-515.1627: runtimetown
-# Beta version
-516.1648: runtimetown;516
+516.1659: runtimetown

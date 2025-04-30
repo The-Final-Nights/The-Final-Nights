@@ -230,3 +230,8 @@
 	for(var/obj/machinery/door/M in A)
 		M.name = replacetext(M.name,oldtitle,title)
 	//TODO: much much more. Unnamed airlocks, cameras, etc.
+
+#undef AREA_ERRNONE
+#undef AREA_STATION
+#undef AREA_SPACE
+#undef AREA_SPECIAL

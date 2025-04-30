@@ -16,16 +16,16 @@
 	var/list/block_list = list("Unknown")
 
 
-/datum/vip_barrier_perm/New(var/protected_zone_id)
+/datum/vip_barrier_perm/New(protected_zone_id)
 	name = protected_zone_id
 
 
 //registers bouncer with the perms
-/datum/vip_barrier_perm/proc/add_bouncer(var/target_bouncer)
+/datum/vip_barrier_perm/proc/add_bouncer(target_bouncer)
 	linked_bouncers += target_bouncer
 
 //registers barrier with the perms
-/datum/vip_barrier_perm/proc/add_barrier(var/target_barrier)
+/datum/vip_barrier_perm/proc/add_barrier(target_barrier)
 	linked_barriers += target_barrier
 	RegisterSignal(target_barrier, COMSIG_BARRIER_NOTIFY_GUARD_BLOCKED, PROC_REF(notify_guard_blocked))
 	RegisterSignal(target_barrier, COMSIG_BARRIER_NOTIFY_GUARD_ENTRY, PROC_REF(notify_guard_entry))
@@ -54,12 +54,12 @@
 	if(!actively_guarded && barrier_is_guarded)
 		actively_guarded = TRUE
 		for(var/obj/effect/vip_barrier/barrier in linked_barriers)
-			barrier.update_icon()
+			barrier.update_appearance()
 
 	else if (actively_guarded && !barrier_is_guarded)
 		actively_guarded = FALSE
 		for(var/obj/effect/vip_barrier/barrier in linked_barriers)
-			barrier.update_icon()
+			barrier.update_appearance()
 
 //=============================================================================
 //Procs for communication between barriers and bouncers

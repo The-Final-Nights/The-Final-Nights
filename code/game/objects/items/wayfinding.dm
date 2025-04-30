@@ -68,13 +68,12 @@
 		set_expression("veryhappy", 2 SECONDS) //v happy to be back in the pinpointer business
 		START_PROCESSING(SSmachines, src)
 
-/obj/machinery/pinpointer_dispenser/update_icon_state()
-	if(machine_stat & BROKEN)
+/obj/machinery/pinpointer_dispenser/update_appearance(updates)
+	. = ..()
+	if((machine_stat & BROKEN) || !powered())
 		set_light(0)
-	else if(powered())
-		set_light(1.4)
-	else
-		set_light(0)
+		return
+	set_light(1.4)
 
 /obj/machinery/pinpointer_dispenser/process(delta_time)
 	if(machine_stat & (BROKEN|NOPOWER))
@@ -269,7 +268,7 @@
 		to_chat(user, "<span class='notice'>Your pinpointer fails to detect a signal.</span>")
 		return
 
-	var/A = input(user, "", "Pinpoint") as null|anything in sortList(beacons)
+	var/A = input(user, "", "Pinpoint") as null|anything in sort_list(beacons)
 	if(!A || QDELETED(src) || !user || !user.is_holding(src) || user.incapacitated())
 		return
 
@@ -427,3 +426,8 @@
 
 /obj/machinery/navbeacon/wayfinding/disposals
 	location = "Disposals"
+
+#undef COOLDOWN_SPAWN
+#undef COOLDOWN_INTERACT
+#undef COOLDOWN_SLOGAN
+#undef COOLDOWN_SPEW

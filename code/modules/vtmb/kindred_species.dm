@@ -255,9 +255,13 @@
 	//vampires resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
 
+	//putting this here for now not sure if elsewhere is better?
+	RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
+
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(C, COMSIG_ADD_VITAE)
 	for(var/datum/action/vampireinfo/VI in C.actions)
 		VI?.Remove(C)
 	for(var/datum/action/A in C.actions)
@@ -381,7 +385,7 @@
 					if(!childe.can_be_embraced)
 						to_chat(sire, span_notice("[childe.name] doesn't respond to your Vitae."))
 						return
-					 // If they've been dead for more than 5 minutes, then nothing happens.
+					// If they've been dead for more than 5 minutes, then nothing happens.
 					if((childe.timeofdeath + 5 MINUTES) > world.time)
 						if(childe.auspice?.level) //here be Abominations
 							if(childe.auspice.force_abomination)
@@ -501,7 +505,7 @@
 					log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
 
 					if(length(regnant.reagents?.reagent_list))
-						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = H, methods = VAMPIRE)
+						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = regnant, methods = VAMPIRE)
 					thrall.adjustBruteLoss(-25, TRUE)
 					if(length(thrall.all_wounds))
 						var/datum/wound/W = pick(thrall.all_wounds)
@@ -523,7 +527,7 @@
 					if(thrall.mind)
 						if(thrall.mind.enslaved_to != owner)
 							thrall.mind.enslave_mind_to_creator(owner)
-							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [H]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
+							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [regnant]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
 							new_master = TRUE
 					if(isghoul(thrall))
 						var/datum/species/ghoul/ghoul = thrall.dna.species
@@ -688,7 +692,7 @@
  * * source - The Kindred whose organ has been removed.
  * * organ - The organ which has been removed.
  */
-/datum/species/kindred/proc/lose_organ(var/mob/living/carbon/human/source, var/obj/item/organ/organ)
+/datum/species/kindred/proc/lose_organ(mob/living/carbon/human/source, obj/item/organ/organ)
 	SIGNAL_HANDLER
 
 	if (istype(organ, /obj/item/organ/heart))
@@ -696,7 +700,7 @@
 			if (!source.getorganslot(ORGAN_SLOT_HEART))
 				source.death()
 
-/datum/species/kindred/proc/slip_into_torpor(var/mob/living/carbon/human/source)
+/datum/species/kindred/proc/slip_into_torpor(mob/living/carbon/human/source)
 	SIGNAL_HANDLER
 
 	to_chat(source, span_warning("You can feel yourself slipping into Torpor. You can use succumb to immediately sleep..."))
@@ -879,3 +883,19 @@
 
 	if(iskindred(being_bitten))
 		return COMPONENT_RESIST_VAMPIRE_KISS
+
+// Currently just used for the Organovore Quirk, might be handy for something else. Unsure where else to put it?
+
+/datum/species/kindred/proc/add_vitae_from_item(datum/source, amount_of_bloodpoints, plays_sound)
+	SIGNAL_HANDLER
+
+	var/mob/living/carbon/human/H = source
+
+	H.bloodpool = min(H.maxbloodpool, H.bloodpool+amount_of_bloodpoints)
+	H.adjustBruteLoss(-10, TRUE)
+	H.update_damage_overlays()
+	H.update_health_hud()
+	if(iskindred(H))
+		H.update_blood_hud()
+	if(plays_sound)
+		playsound(H.loc,'sound/items/drink.ogg', 50, TRUE)

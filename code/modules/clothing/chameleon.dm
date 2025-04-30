@@ -182,7 +182,7 @@
 /datum/action/item_action/chameleon/change/proc/select_look(mob/user)
 	var/obj/item/picked_item
 	var/picked_name
-	picked_name = input("Select [chameleon_name] to change into", "Chameleon [chameleon_name]", picked_name) as null|anything in sortList(chameleon_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
+	picked_name = input("Select [chameleon_name] to change into", "Chameleon [chameleon_name]", picked_name) as null|anything in sort_list(chameleon_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 	if(!picked_name)
 		return
 	picked_item = chameleon_list[picked_name]
@@ -282,7 +282,7 @@
 	var/obj/item/pda/agent_pda = target
 	if(istype(agent_pda))
 		agent_pda.update_label()
-		agent_pda.update_icon()
+		agent_pda.update_appearance()
 
 /datum/action/item_action/chameleon/change/pda/apply_job_data(datum/job/job_datum)
 	..()

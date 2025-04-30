@@ -52,3 +52,9 @@
 #define WIRE_RESETOWNER "Reset Owner"
 #define WIRE_AGELIMIT "Age Limit"
 
+//Migrated to globals from airlock.dm due to multi-file usage
+#define AI_WIRE_NORMAL 0
+#define AI_WIRE_DISABLED 1
+#define AI_WIRE_HACKED 2
+#define AI_WIRE_DISABLED_HACKED -1
+
