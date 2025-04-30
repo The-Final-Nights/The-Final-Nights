@@ -57276,13 +57276,6 @@
 	},
 /turf/open/floor/plasteel/stairs,
 /area/vtm/interior/police)
-"pxA" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/mob/living/carbon/human/npc/nightbloom,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/unionsquare)
 "pxB" = (
 /obj/machinery/light/prince{
 	pixel_y = 32
@@ -193320,7 +193313,7 @@ bpO
 bpO
 bpO
 wyC
-pxA
+mHu
 mHu
 mHu
 mHu
