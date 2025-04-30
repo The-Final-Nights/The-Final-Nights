@@ -139,14 +139,10 @@
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		owner.say("[custom_command]!")
 		to_chat(target, span_big("[custom_command]!"))
-		ADD_TRAIT(target, TRAIT_BLIND, "dominate")
 	else
 		to_chat(owner, span_warning("[target] has resisted your domination!"))
 		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
 
-/datum/discipline_power/dominate/command/deactivate(mob/living/target)
-	. = ..()
-	REMOVE_TRAIT(target, TRAIT_BLIND, "dominate")
 
 //MESMERIZE
 /datum/discipline_power/dominate/mesmerize
