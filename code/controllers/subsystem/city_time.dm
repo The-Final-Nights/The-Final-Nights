@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(city_time)
 
 					var/role = H.mind?.assigned_role
 
-					if(role in list("Prince", "Sheriff", "Hound", "Seneschal", "Chantry Regent", "Baron", "Dealer", "Primogen Ventrue", "Primogen Lasombra", "Primogen Banu Haqim", "Primogen Nosferatu", "Primogen Malkavian"))
+					if(role in list("Prince", "Sheriff", "Hound", "Seneschal", "Chantry Regent", "Baron", "Dealer", "Primogen Ventrue", "Primogen Lasombra", "Primogen Banu Haqim", "Primogen Nosferatu", "Primogen Malkavian", "Endron Branch Lead", "Endron Internal Affairs Agent", "Endron Executive", "Endron Chief of Security", "Painted City Councillor", "Painted City Keeper", "Painted City Warder", "Painted City Truthcatcher", "Amberlgade Councillor", "Amberglade Keeper", "Amberglade Truthcatcher", "Amberglade Warder"))
 						char_sheet.add_experience(3)
 
 					if(!HAS_TRAIT(H, TRAIT_NON_INT))
@@ -74,7 +74,7 @@ SUBSYSTEM_DEF(city_time)
 
 					var/role = H.mind?.assigned_role
 
-					if(role in list("Prince", "Sheriff", "Hound", "Seneschal", "Chantry Regent", "Baron", "Dealer", "Primogen Ventrue", "Primogen Lasombra", "Primogen Banu Haqim", "Primogen Nosferatu", "Primogen Malkavian"))
+					if(role in list("Prince", "Sheriff", "Hound", "Seneschal", "Chantry Regent", "Baron", "Dealer", "Primogen Ventrue", "Primogen Lasombra", "Primogen Banu Haqim", "Primogen Nosferatu", "Primogen Malkavian", "Endron Branch Lead", "Endron Internal Affairs Agent", "Endron Executive", "Endron Chief of Security", "Painted City Councillor", "Painted City Keeper", "Painted City Warder", "Painted City Truthcatcher", "Amberlgade Councillor", "Amberglade Keeper", "Amberglade Truthcatcher", "Amberglade Warder"))
 						char_sheet.add_experience(2)
 
 					if(!HAS_TRAIT(H, TRAIT_NON_INT))

@@ -15,6 +15,8 @@
 	var/mob/living/quirk_holder
 
 	var/list/allowed_species = list()
+	var/list/allowed_clans = list()
+	var/list/allowed_tribes = list()
 
 /datum/quirk/New(mob/living/quirk_mob, spawn_effects)
 	..()
