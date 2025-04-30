@@ -64,7 +64,7 @@
 		if(!initial(potential_sign.is_editable))
 			continue
 		GLOB.editable_sign_types[initial(potential_sign.sign_change_name)] = potential_sign
-	GLOB.editable_sign_types = sortList(GLOB.editable_sign_types) //Alphabetizes the results.
+	GLOB.editable_sign_types = sort_list(GLOB.editable_sign_types) //Alphabetizes the results.
 
 /obj/structure/sign/wrench_act(mob/living/user, obj/item/wrench/I)
 	. = ..()

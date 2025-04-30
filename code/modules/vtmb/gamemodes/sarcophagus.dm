@@ -47,21 +47,21 @@ GLOBAL_LIST_INIT(caesar_cipher, list(
 	"Z" = 26
 ))
 
-/proc/get_encipher_num(var/letter, var/password)
+/proc/get_encipher_num(letter, password)
 	var/num = GLOB.caesar_cipher[letter]
 	var/enciphed = num+password
 	if(num+password > 26)
 		enciphed = (num+password)-26
 	return GLOB.caesar_cipher[enciphed]
 
-/proc/get_uncipher_num(var/letter, var/password)
+/proc/get_uncipher_num(letter, password)
 	var/num = GLOB.caesar_cipher[letter]
 	var/unciphed = num-password
 	if(num-password < 0)
 		unciphed = (num-password)+26
 	return GLOB.caesar_cipher[unciphed]
 
-/proc/encipher(var/message, var/password)
+/proc/encipher(message, password)
 	if(message)
 		message = uppertext(message)
 		var/final_message = ""
@@ -70,7 +70,7 @@ GLOBAL_LIST_INIT(caesar_cipher, list(
 			final_message += "[get_encipher_num(letter, password)]"
 		return final_message
 
-/proc/uncipher(var/message, var/password)
+/proc/uncipher(message, password)
 	if(message)
 		message = uppertext(message)
 		var/final_message = ""

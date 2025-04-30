@@ -194,7 +194,7 @@
 		M.update_hair()
 		M.update_body()
 		M.update_body_parts()
-		M.update_icon()
+		M.update_appearance()
 	else
 		M.adjustBruteLoss(5*REM, 0)
 	..()

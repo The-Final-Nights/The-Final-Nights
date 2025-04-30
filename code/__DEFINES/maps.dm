@@ -115,3 +115,9 @@ require only minor tweaks.
 #define BIOME_LOWMEDIUM_HUMIDITY "lowmedium_humidity"
 #define BIOME_HIGHMEDIUM_HUMIDITY "highmedium_humidity"
 #define BIOME_HIGH_HUMIDITY "high_humidity"
+
+
+//Migrated from stationstuck.dm due to use outside of local. These are used for map-locking mobs. See documentation in source file.
+#define PUNISHMENT_MURDER "murder"
+#define PUNISHMENT_GIB "gib"
+#define PUNISHMENT_TELEPORT "teleport"

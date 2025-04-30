@@ -196,7 +196,7 @@
 		return
 	..()
 
-/mob/living/carbon/human/proc/Parry(var/mob/M)
+/mob/living/carbon/human/proc/Parry(mob/M)
 	if(!pulledby && !parrying && world.time-parry_cd >= 30 && M != src)
 		parrying = M
 		if(blocking)

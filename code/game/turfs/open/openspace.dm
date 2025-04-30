@@ -82,9 +82,9 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	return can_build_on
 
 /turf/open/openspace/attack_hand(mob/living/carbon/human/H)
-    if(istype(H, /mob/living/carbon/human))
-        H.climb_down(src)
-    return ..()
+	if(istype(H, /mob/living/carbon/human))
+		H.climb_down(src)
+	return ..()
 
 /turf/open/openspace/attackby(obj/item/C, mob/user, params)
 	..()

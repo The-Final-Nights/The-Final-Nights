@@ -132,6 +132,7 @@
 		update_icon()
 
 /obj/item/gun/ballistic/update_icon_state()
+	. = ..()
 	if(current_skin)
 		icon_state = "[unique_reskin[current_skin]][sawn_off ? "_sawn" : ""]"
 	else

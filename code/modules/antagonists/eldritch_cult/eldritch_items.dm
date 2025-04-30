@@ -12,7 +12,7 @@
 	if(!IS_HERETIC(user))
 		return
 	if(!target)
-		to_chat(user,"<span class='warning'>No target could be found. Put the living heart on a transmutation rune and activate the rune to recieve a target.</span>")
+		to_chat(user,"<span class='warning'>No target could be found. Put the living heart on a transmutation rune and activate the rune to receive a target.</span>")
 		return
 	var/dist = get_dist(get_turf(user),get_turf(target))
 	var/dir = get_dir(get_turf(user),get_turf(target))

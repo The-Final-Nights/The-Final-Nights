@@ -38,7 +38,7 @@
 	var/code = ""
 	var/list/credit_cards = list()
 
-var/mob/living/carbon/human/H
+
 /datum/vtm_bank_account/New()
 	..()
 	if(!code || code == "")

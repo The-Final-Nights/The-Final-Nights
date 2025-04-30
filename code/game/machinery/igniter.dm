@@ -3,6 +3,7 @@
 	desc = "It's useful for igniting plasma."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "igniter0"
+	base_icon_state = "igniter"
 	plane = FLOOR_PLANE
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 2
@@ -31,7 +32,7 @@
 
 	use_power(50)
 	on = !( on )
-	update_icon()
+	update_appearance()
 
 /obj/machinery/igniter/process()	//ugh why is this even in process()?
 	return 1
@@ -41,10 +42,8 @@
 	icon_state = "igniter[on]"
 
 /obj/machinery/igniter/update_icon_state()
-	if(machine_stat & NOPOWER)
-		icon_state = "igniter0"
-	else
-		icon_state = "igniter[on]"
+	icon_state = "[base_icon_state][(machine_stat & NOPOWER) ? 0 : on]"
+	return ..()
 
 /obj/machinery/igniter/connect_to_shuttle(obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	id = "[port.id]_[id]"
@@ -56,13 +55,14 @@
 	desc = "A wall-mounted ignition device."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "migniter"
+	base_icon_state = "migniter"
 	resistance_flags = FIRE_PROOF
 	var/id = null
 	var/disable = 0
 	var/last_spark = 0
 	var/datum/effect_system/spark_spread/spark_system
 
-/obj/machinery/sparker/toxmix
+MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/sparker, 26)
 
 /obj/machinery/sparker/Initialize()
 	. = ..()
@@ -76,11 +76,10 @@
 
 /obj/machinery/sparker/update_icon_state()
 	if(disable)
-		icon_state = "[initial(icon_state)]-d"
-	else if(powered())
-		icon_state = "[initial(icon_state)]"
-	else
-		icon_state = "[initial(icon_state)]-p"
+		icon_state = "[base_icon_state]-d"
+		return ..()
+	icon_state = "[base_icon_state][powered() ? null : "-p"]"
+	return ..()
 
 /obj/machinery/sparker/powered()
 	if(disable)
@@ -95,7 +94,7 @@
 			user.visible_message("<span class='notice'>[user] disables \the [src]!</span>", "<span class='notice'>You disable the connection to \the [src].</span>")
 		if (!disable)
 			user.visible_message("<span class='notice'>[user] reconnects \the [src]!</span>", "<span class='notice'>You fix the connection to \the [src].</span>")
-		update_icon()
+		update_appearance()
 	else
 		return ..()
 

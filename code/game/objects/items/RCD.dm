@@ -806,6 +806,7 @@ RLD
 		..()
 
 /obj/item/construction/rld/update_icon_state()
+	. = ..()
 	icon_state = "rld-[round(matter/matter_divisor)]"
 
 /obj/item/construction/rld/attack_self(mob/user)
