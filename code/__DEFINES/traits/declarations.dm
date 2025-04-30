@@ -155,6 +155,9 @@
 #define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
 
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
+#define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
+#define TRAIT_DOGWOLF			"dogwolf"
+
 #define TRAIT_DANCER			"dancer"
 #define TRAIT_EXP_DRIVER		"experienced_driver"
 #define TRAIT_BONE_KEY			"bone_key"
@@ -168,12 +171,14 @@
 #define TRAIT_STAKE_RESISTANT	"stake_resistant"
 #define TRAIT_COLD_AURA			"cold_aura"
 #define TRAIT_WARM_AURA			"warm_aura"
+#define TRAIT_UNBONDABLE		"unbondable"
 #define TRAIT_BLUSH_OF_HEALTH	"blush_of_health"
 #define TRAIT_POTENT_BLOOD		"potent_blood"
 #define TRAIT_CAN_EAT			"can_eat" // this is for kindred. not normal people. normal people do not need this flag.
 #define TRAIT_MESSY_EATER		"messy_eater"
 #define TRAIT_DEBTOR			"debtor"
 #define TRAIT_ANIMAL_REPULSION	"animal_repulsion"
+#define TRAIT_WYRMTAINTED		"wyrm_tainted"
 #define TRAIT_ILLEGAL_IDENTITY	"illegal_identity"
 #define TRAIT_LAZY				"lazy"
 #define TRAIT_HOMOSEXUAL		"homosexual"

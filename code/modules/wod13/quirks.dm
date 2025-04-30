@@ -61,7 +61,7 @@ Dancer
 	name = "Bloody Lover"
 	desc = "Your bites feel more like a kiss."
 	mob_trait = TRAIT_BLOODY_LOVER
-	value = 2
+	value = 4
 	gain_text = "<span class='notice'>You feel more experienced in love.</span>"
 	lose_text = "<span class='warning'>You feel more clueless in love.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
@@ -70,7 +70,7 @@ Dancer
 	name = "Tough Flesh"
 	desc = "Your flesh is much sturdier than normal. You are much better in resisting stuns, bumps and hits."
 	mob_trait = TRAIT_TOUGH_FLESH
-	value = 3
+	value = 4
 	gain_text = "<span class='notice'>You feel tough.</span>"
 	lose_text = "<span class='warning'>You feel fragile again.</span>"
 
@@ -126,12 +126,11 @@ Dancer
 
 /datum/quirk/non_int
 	name = "Non Intellectual"
-	desc = "You are far more special than other beings from your kind, so you gain experience slower."
+	desc = "You feel more than you think about the world; you gain experience slower."
 	mob_trait = TRAIT_NON_INT
-	value = -5
+	value = -2
 	gain_text = "<span class='warning'>You feel dumb.</span>"
 	lose_text = "<span class='notice'>You don't feel dumb anymore.</span>"
-	allowed_species = list("Vampire", "Human", "Ghoul", "Kuei-Jin")
 
 /datum/quirk/cold_aura
 	name = "Deathly Aura"
@@ -159,6 +158,14 @@ Dancer
 	gain_text = "<span class='warning'>You feel your heart beat, thumping irregularly in your chest.</span>"
 	lose_text = "<span class='notice'>You feel your pulse slow to a crawl, stilling.</span>"
 	allowed_species = list("Vampire")
+
+/datum/quirk/unbondable
+	name = "Unbondable"
+	desc = "The vitae of Caine might be addictive, but you don't find any such tie to the origin."
+	mob_trait = TRAIT_UNBONDABLE
+	value = 4
+	gain_text = "<span class='warning'>You feel free of fetters.</span>"
+	lose_text = "<span class='notice'>You feel echoes of misbegotten emotion.</span>"
 
 /datum/quirk/coffin_therapy
 	name = "Coffin Therapy"
@@ -212,6 +219,16 @@ Dancer
 	gain_text = "<span class='warning'>You can feel hostile eyes watching you.</span>"
 	lose_text = "<span class='notice'>Cats walk by you unphased.</span>"
 	allowed_species = list("Vampire","Ghoul","Human","Kuei-jin")
+
+/datum/quirk/wyrm_tainted
+	name = "Wyrm Tainted"
+	desc = "The touch of the wyrm has perverted you. Other werewolves can sense this taint, and your crinos form is changed."
+	mob_trait = TRAIT_WYRMTAINTED
+	value = -1
+	gain_text = "<span class='warning'>You feel wrongness crawling beneath your skin.</span>"
+	lose_text = "<span class='notice'>You feel relief and warmth.</span>"
+	allowed_species = list("Werewolf")
+	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers")
 
 /datum/quirk/illegal_identity
 	name = "Illegal Identity"
