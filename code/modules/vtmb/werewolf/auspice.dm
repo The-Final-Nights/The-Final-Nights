@@ -29,7 +29,7 @@
 		/datum/action/gift/burning_scars = 3
 	)
 
-/datum/auspice/proc/on_gain(var/mob/living/carbon/C)
+/datum/auspice/proc/on_gain(mob/living/carbon/C)
 	C.update_rage_hud()
 
 	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()

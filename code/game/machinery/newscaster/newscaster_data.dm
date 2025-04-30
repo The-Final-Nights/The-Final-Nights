@@ -230,7 +230,7 @@ GLOBAL_LIST_EMPTY(request_list)
 	if(newMessage)
 		for(var/obj/machinery/newscaster/N in GLOB.allCasters)
 			N.news_alert()
-			N.update_icon()
+			N.update_appearance()
 
 /datum/feed_network/proc/delete_wanted()
 	wanted_issue.active = FALSE
@@ -239,7 +239,7 @@ GLOBAL_LIST_EMPTY(request_list)
 	wanted_issue.scanned_user = null
 	wanted_issue.img = null
 	for(var/obj/machinery/newscaster/updated_newscaster in GLOB.allCasters)
-		updated_newscaster.update_icon()
+		updated_newscaster.update_appearance()
 
 /datum/feed_network/proc/save_photo(icon/photo)
 	var/photo_file = copytext_char(md5("\icon[photo]"), 1, 6)

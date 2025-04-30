@@ -21,6 +21,9 @@
 	///if the thrown object's target zone isn't the head
 	if(thrownthing.target_zone != BODY_ZONE_HEAD)
 		return
+		///Some hats shouldn't be throwable.
+	if(clothing_flags & NO_HAT_TRICKS)
+		return
 	///ignore any hats with the tinfoil counter-measure enabled
 	if(clothing_flags & ANTI_TINFOIL_MANEUVER)
 		return
