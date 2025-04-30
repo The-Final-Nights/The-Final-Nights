@@ -9680,6 +9680,9 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer/nosferatu_town)
+"cCC" = (
+/turf/open/floor/plating/sidewalk,
+/area/vtm/interior/shop)
 "cCD" = (
 /obj/machinery/light/small{
 	dir = 1
@@ -51430,9 +51433,6 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/anarch)
-"nVn" = (
-/turf/open/floor/plating/sidewalk,
-/area/vtm/interior/shop)
 "nVt" = (
 /obj/structure/table,
 /obj/item/folder/blue,
@@ -57276,6 +57276,13 @@
 	},
 /turf/open/floor/plasteel/stairs,
 /area/vtm/interior/police)
+"pxA" = (
+/obj/effect/decal/bordur{
+	dir = 4
+	},
+/mob/living/carbon/human/npc/nightbloom,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/unionsquare)
 "pxB" = (
 /obj/machinery/light/prince{
 	pixel_y = 32
@@ -188689,7 +188696,7 @@ fQP
 kvZ
 iog
 xPN
-dQS
+kkL
 dQS
 dQS
 dQS
@@ -190231,7 +190238,7 @@ fQP
 oRe
 iog
 wqO
-dQS
+kkL
 dQS
 dQS
 dQS
@@ -191259,7 +191266,7 @@ fQP
 fUL
 iog
 vYR
-dQS
+kkL
 dQS
 dQS
 dQS
@@ -193313,7 +193320,7 @@ bpO
 bpO
 bpO
 wyC
-mHu
+pxA
 mHu
 mHu
 mHu
@@ -503926,7 +503933,7 @@ qia
 qia
 qia
 sDZ
-nVn
+cCC
 sDZ
 sDZ
 ohk
