@@ -259,6 +259,7 @@ Dancer
 	gain_text = "<span class='warning'>You have a craving for liver.</span>"
 	lose_text = "<span class='notice'>Your craving subsides...</span>"
 	allowed_species = list("Vampire")
+	excluded_clans = list("Nagaraja")
 
 /datum/action/fly_upper
 	name = "Fly Up"

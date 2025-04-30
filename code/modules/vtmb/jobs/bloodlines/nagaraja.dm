@@ -1,9 +1,9 @@
 /datum/job/vamp/nagaraja
 	title = "Mortuary Attendant"
 	faction = "Vampire"
-	total_positions = 4
-	spawn_positions = 4
-	supervisors = "the Traditions, or the Clinic Director."
+	total_positions = 6
+	spawn_positions = 6
+	supervisors = "the Traditions, or the Clinic Director"
 	selection_color = "#df7058"
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
@@ -14,10 +14,13 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_NAGARAJA
 
+	allowed_species = list("Vampire", "Ghoul", "Human")
+	species_slots = list("Vampire" = 4)
+
 	v_duty = "One of the Nagaraja bloodline, you're hiding out in this city for one reason or another. You're laying low, acting as a Mortician for the local hospital, dealing with the bodies, and staying out of the other doctors way."
 	duty = "You work in the mourge for the local hospital, dealing with the dead bodies and keeping your workspace clean, while staying out of the way of the other doctors."
-	minimal_masquerade = 0
 	allowed_bloodlines = list("Nagaraja")
+	minimal_masquerade = 0
 
 /datum/outfit/job/nagaraja
 	name = "nagaraja"
