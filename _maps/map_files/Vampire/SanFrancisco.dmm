@@ -27409,6 +27409,13 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior/strip/toreador)
+"htw" = (
+/obj/structure/chair{
+	dir = 4
+	},
+/obj/effect/landmark/start/nagaraja,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "htx" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -44335,6 +44342,7 @@
 	dir = 8;
 	pixel_x = 11
 	},
+/obj/effect/landmark/start/nagaraja,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "mfd" = (
@@ -45703,6 +45711,7 @@
 	dir = 4;
 	pixel_x = -16
 	},
+/obj/effect/landmark/start/nagaraja,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "myU" = (
@@ -59964,6 +59973,7 @@
 /area/vtm/interior/millennium_tower/f4)
 "qlY" = (
 /obj/effect/turf_decal/siding/white,
+/obj/effect/landmark/start/nagaraja,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "qmj" = (
@@ -249051,7 +249061,7 @@ lrT
 nQC
 bUt
 kno
-pUu
+htw
 uTu
 jcx
 jcx
