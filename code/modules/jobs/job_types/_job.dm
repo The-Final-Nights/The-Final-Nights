@@ -75,6 +75,8 @@
 	var/minimal_generation = 13
 	///Minimum Masquerade level necessary to do this job.
 	var/minimal_masquerade = 1
+	///Minimum Renown Rank (garou) necessary to do this job.
+	var/minimal_renownrank
 	/// If set to a positive value, character must be at least this age (in years) to join as role.
 	var/minimum_character_age = JOB_NO_MINIMUM_CHARACTER_AGE
 
@@ -84,6 +86,10 @@
 	var/list/species_slots = list()
 	///List of Bloodlines that are allowed to do this job.
 	var/list/allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry")
+	///List of Tribes that are allowed to do this job.
+	var/list/allowed_tribes = list("Galestalkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Glass Walkers", "Bone Gnawers", "Ronin", "Black Spiral Dancers","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Shadow Lords","Red Talons","Stargazers")
+	///List of Auspices that are allowed to do this job.
+	var/list/allowed_auspice = list("Philodox", "Galliard", "Ragabash", "Theurge", "Ahroun")
 	///If this job requires whitelisting before it can be selected for characters.
 	var/whitelisted = FALSE
 	// List for phone shit

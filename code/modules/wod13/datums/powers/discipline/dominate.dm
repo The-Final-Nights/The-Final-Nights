@@ -1,6 +1,6 @@
 /datum/discipline/dominate
 	name = "Dominate"
-	desc = "Supresses will of your targets and forces them to obey you, if their will is not more powerful than yours."
+	desc = "Suppresses will of your targets and forces them to obey you, if their will is not more powerful than yours."
 	icon_state = "dominate"
 	power_type = /datum/discipline_power/dominate
 
