@@ -3446,7 +3446,7 @@
 /area/vtm/interior/penumbra)
 "Lv" = (
 /obj/effect/landmark/teleport_mark{
-	tribe = "Glasswalkers"
+	tribe = "Glass Walkers"
 	},
 /turf/open/floor/plating/vampcanal{
 	umbra = 1

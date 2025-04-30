@@ -137,7 +137,7 @@
 
 		..()
 
-	if (isgarou(user) || iswerewolf(user))
+	if (iswerewolf(user))
 		if (get_dist(user, src) <= 2)
 			var/wyrm_taint = NONE
 			var/weaver_taint = NONE
@@ -159,13 +159,23 @@
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
 				var/mob/living/carbon/wolf = src
 
-				switch(wolf.auspice.tribe)
-					if ("Wendigo")
+				switch(wolf.auspice.tribe.name)
+					if ("Galestalkers","Children of Gaia","Hart Wardens","Ghost Council","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Red Talons","Stargazers")
 						wyld_taint++
-					if ("Glasswalkers")
+					if ("Glass Walkers","Bone Gnawers","Shadow Lords")
 						weaver_taint++
 					if ("Black Spiral Dancers")
 						wyrm_taint = VERY_TAINTED
+				if(HAS_TRAIT(wolf,TRAIT_WYRMTAINTED))
+					wyrm_taint++
+					wyld_taint--
+					weaver_taint--
+				if(istype(wolf,/mob/living/carbon/werewolf))
+					var/mob/living/carbon/werewolf/werewolf = src
+					if(werewolf.wyrm_tainted)
+						wyrm_taint++
+						wyld_taint--
+						weaver_taint--
 
 			if (wyrm_taint == TAINTED)
 				msg += "<span class='purple'><i>[p_they(TRUE)] smell[p_s()] of corruption...</i></span><br>"

@@ -1,4 +1,5 @@
 #define SHAKE_ANIMATION_OFFSET 4
+#define ATTACK_RAGE_COOLDOWN 3 SECONDS
 
 /mob/living/carbon/get_eye_protection()
 	. = ..()
@@ -257,7 +258,7 @@
 
 /mob/living/carbon/proc/do_rage_from_attack(mob/living/target)
 	if(isgarou(src) || iswerewolf(src))
-		if(last_rage_from_attack == 0 || last_rage_from_attack+50 < world.time)
+		if(last_rage_from_attack == 0 || last_rage_from_attack+ATTACK_RAGE_COOLDOWN < world.time)
 			last_rage_from_attack = world.time
 			adjust_rage(1, src, TRUE)
 	if(iscathayan(src))
