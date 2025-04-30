@@ -13,10 +13,16 @@
 	var/laid_down = FALSE
 
 	if(stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN)
-		icon_state = "[sprite_color]_rest"
+		if(wyrm_tainted)
+			icon_state = "spiral[sprite_color]_rest"
+		else
+			icon_state = "[sprite_color]_rest"
 		laid_down = TRUE
 	else
-		icon_state = "[sprite_color]"
+		if(wyrm_tainted)
+			icon_state = "spiral[sprite_color]"
+		else
+			icon_state = "[sprite_color]"
 		var/mutable_appearance/shadow_overlay = mutable_appearance(icon, "undershadow")
 		shadow_overlay.pixel_z = -4
 		shadow_overlay.alpha = 64
@@ -39,16 +45,8 @@
 			add_overlay(damage_overlay)
 
 	if(sprite_apparel)
-		switch(auspice.tribe)
-			if("Wendigo")
-				var/mutable_appearance/clothing_overlay = mutable_appearance(icon, "wendigo[sprite_apparel][laid_down ? "_rest" : ""]")
-				add_overlay(clothing_overlay)
-			if("Glasswalkers")
-				var/mutable_appearance/clothing_overlay = mutable_appearance(icon, "glasswalker[sprite_apparel][laid_down ? "_rest" : ""]")
-				add_overlay(clothing_overlay)
-			if("Black Spiral Dancers")
-				var/mutable_appearance/clothing_overlay = mutable_appearance(icon, "spiral[sprite_apparel][laid_down ? "_rest" : ""]")
-				add_overlay(clothing_overlay)
+		var/mutable_appearance/clothing_overlay = mutable_appearance(icon, "[auspice.tribe.name][sprite_apparel][laid_down ? "_rest" : ""]")
+		add_overlay(clothing_overlay)
 
 	if(sprite_hair)
 		var/mutable_appearance/hair_overlay = mutable_appearance(icon, "hair[sprite_hair][laid_down ? "_rest" : ""]")

@@ -172,7 +172,6 @@
 
 /obj/item/card/id/clerk/harpy
 	name = "Public Relations Clerk badge"
-	id_type_name = "junior clerk badge"
 	desc = "A badge which shows social qualifications."
 
 /obj/item/card/id/bruiser
@@ -482,3 +481,96 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "rubyBadge"
+
+// GAROU
+/obj/item/card/id/garou
+	name = "Base Garou ID"
+	id_type_name = "Coder Moment badge"
+	desc = "DO NOT USE THIS, THIS IS FOR CODE FOUNDATION ONLY. IF YOU SEE THIS, REPORT IT AS A BUG."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id5"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id5"
+
+//PAINTED CITY
+/obj/item/card/id/garou/city/council
+	name = "Pantry volunteer manager badge"
+	desc = "For those who have managed to go through the most dangerous of tasks, and lived long enough to be considered old in such a field. Volunteer work."
+
+/obj/item/card/id/garou/city/keeper
+	name = "Pantry building manager badge"
+	desc = "Forever stuck to taking care of the pantry, well, you signed up for this."
+
+/obj/item/card/id/garou/city/truthcatcher
+	name = "Pantry mediator badge"
+	desc = "You are not just the talker and cleaner by assignment. You volunteered for this. Good luck."
+
+/obj/item/card/id/garou/city/warder
+	name = "Pantry security lead badge"
+	desc = "Private security for a single building, there are no donuts in the backroom."
+
+/obj/item/card/id/garou/city/guardian
+	name = "Pantry security volunteer badge"
+	desc = "Private security for a single building, just hope they have donuts in the backroom."
+
+//AMBERGLADE
+/obj/item/card/id/garou/glade
+	icon_state = "id7"
+	worn_icon_state = "id7"
+
+/obj/item/card/id/garou/glade/council
+	name = "NPS Oversight Committee badge"
+	desc = "You have been out in the woods to know that you arent afraid of anything but one specific topic out there. Leadership."
+
+/obj/item/card/id/garou/glade/keeper
+	name = "NPS Biologist badge"
+	desc = "You love the outdoors? Good, you are now taking care of a wide outdoors area."
+
+/obj/item/card/id/garou/glade/truthcatcher
+	name = "Park Guide badge"
+	desc = "Remember, Dire Wolves arent real, as far as you tell people."
+
+/obj/item/card/id/garou/glade/warder
+	name = "Lead Park Ranger badge"
+	desc = "These are your woods and your lands. Keep them safe."
+
+/obj/item/card/id/garou/glade/guardian
+	name = "Park Ranger badge"
+	desc = "Only you can prevent forest fires."
+
+//ENDRON
+/obj/item/card/id/garou/spiral
+	icon_state = "id9"
+	worn_icon_state = "id9"
+
+/obj/item/card/id/garou/spiral/lead
+	name = "Endron Branch Leader card"
+	desc = "How bad can you possibly be?"
+
+/obj/item/card/id/garou/spiral/executive
+	name = "Endron Executive card"
+	desc = "All the customers are buying."
+
+/obj/item/card/id/garou/spiral/affairs
+	name = "Endron Internal Affairs card"
+	desc = "And the Lawyers are denying."
+
+/obj/item/card/id/garou/spiral/secchief
+	name = "Endron Chief of Security badge"
+	icon_state = "id3"
+	worn_icon_state = "id3"
+	desc = "Its not illegal if nobody finds out about it. Now if only Endron would pay for a single tank for you."
+
+/obj/item/card/id/garou/spiral/sec
+	name = "Endron Security Agent badge"
+	icon_state = "id3"
+	worn_icon_state = "id3"
+	desc = "Corporate Security, a step above a mall cop. Better paid than a real cop."
+
+/obj/item/card/id/garou/spiral/employee
+	name = "Endron Employee card"
+	desc = "Congratulations, Wagie."

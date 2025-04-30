@@ -19,6 +19,16 @@
 /// The default generation everyone begins at
 #define DEFAULT_GENERATION 13
 
+//Rank definitions.
+
+#define MAX_PUBLIC_RANK 4
+#define MAX_TRUSTED_RANK 5
+#define MINIMUM_LUPUS_ATHRO_AGE 7
+#define MINIMUM_ATHRO_AGE 21
+#define MINIMUM_LUPUS_ELDER_AGE 15
+#define MINIMUM_ELDER_AGE 30
+
+
 /**
  * Clan defines
  */

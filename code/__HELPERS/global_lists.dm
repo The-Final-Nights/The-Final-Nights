@@ -5,6 +5,8 @@
 GLOBAL_LIST_EMPTY(clanes_list)	//>:3
 GLOBAL_LIST_EMPTY(morality_list) // TFN EDIT: morality system
 GLOBAL_LIST_EMPTY(auspices_list)
+GLOBAL_LIST_EMPTY(tribes_list)
+GLOBAL_LIST_EMPTY(glyph_list)
 
 /proc/make_datum_references_lists()
 	//hair
@@ -50,10 +52,20 @@ GLOBAL_LIST_EMPTY(auspices_list)
 		GLOB.clanes_list[S.name] = spath
 	sort_list(GLOB.clanes_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
+	for(var/spath in subtypesof(/datum/garou_tribe))
+		var/datum/garou_tribe/S = new spath()
+		GLOB.tribes_list[S.name] = spath
+	sort_list(GLOB.tribes_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
+
 	for(var/spath in subtypesof(/datum/auspice))
 		var/datum/auspice/S = new spath()
 		GLOB.auspices_list[S.name] = spath
 	sort_list(GLOB.auspices_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
+
+	for(var/spath in subtypesof(/obj/effect/decal/garou_glyph))
+		var/obj/effect/decal/garou_glyph/S = spath
+		GLOB.glyph_list[S.garou_name] = S
+	sort_list(GLOB.glyph_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
 	// TFN EDIT ADDITION START: morality system
 	for(var/spath in subtypesof(/datum/morality))
