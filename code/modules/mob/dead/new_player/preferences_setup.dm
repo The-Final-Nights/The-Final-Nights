@@ -14,7 +14,7 @@
 	if(randomise[RANDOM_UNDERWEAR])
 		underwear = random_underwear(gender)
 	if(randomise[RANDOM_UNDERWEAR_COLOR])
-		underwear_color = random_color()
+		underwear_color = "#[random_color()]"
 	if(randomise[RANDOM_UNDERSHIRT])
 		undershirt = random_undershirt(gender)
 	if(randomise[RANDOM_SOCKS])
