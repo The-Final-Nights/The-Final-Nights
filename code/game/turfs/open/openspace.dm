@@ -16,7 +16,6 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	desc = "Watch your step!"
 	icon_state = "invisible"
 	baseturfs = /turf/open/openspace
-	CanAtmosPassVertical = ATMOS_PASS_YES
 	baseturfs = /turf/open/openspace
 	intact = FALSE //this means wires go on top
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -24,10 +23,8 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 	var/can_build_on = TRUE
 
 /turf/open/openspace/airless
-	initial_gas_mix = AIRLESS_ATMOS
 
 /turf/open/openspace/airless/planetary
-	planetary_atmos = TRUE
 
 /turf/open/openspace/Initialize() // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
