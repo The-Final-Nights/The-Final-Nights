@@ -11,11 +11,11 @@
 	instability = 25
 	growthstages = 5
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/plant_type/weed_hardy)
-	mutatelist = list(/obj/item/seeds/nettle/death)
+	// mutatelist = list(/obj/item/seeds/nettle/death)
 	reagents_add = list(/datum/reagent/toxin/acid = 0.5)
 	graft_gene = /datum/plant_gene/trait/plant_type/weed_hardy
 
-/obj/item/seeds/nettle/death
+/* /obj/item/seeds/nettle/death
 	name = "pack of death-nettle seeds"
 	desc = "These seeds grow into death-nettles."
 	icon_state = "seed-deathnettle"
@@ -29,7 +29,7 @@
 	mutatelist = list()
 	reagents_add = list(/datum/reagent/toxin/acid/fluacid = 0.5, /datum/reagent/toxin/acid = 0.5)
 	rarity = 20
-	graft_gene = /datum/plant_gene/trait/stinging
+	graft_gene = /datum/plant_gene/trait/stinging */
 
 /obj/item/food/grown/nettle // "snack"
 	seed = /obj/item/seeds/nettle
@@ -39,8 +39,8 @@
 	icon_state = "nettle"
 	lefthand_file = 'icons/mob/inhands/weapons/plants_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/plants_righthand.dmi'
-	damtype = BURN
-	force = 15
+	damtype = TOXIC
+	force = 2
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	throwforce = 5
 	w_class = WEIGHT_CLASS_TINY
@@ -67,7 +67,7 @@
 	if(affecting)
 		if(affecting.receive_damage(0, force))
 			C.update_damage_overlays()
-	to_chat(C, "<span class='userdanger'>The nettle burns your bare hand!</span>")
+	to_chat(C, "<span class='userdanger'>The nettle stings your bare hand!</span>")
 	return TRUE
 
 /obj/item/food/grown/nettle/afterattack(atom/A as mob|obj, mob/user,proximity)
@@ -87,7 +87,7 @@
 	. = ..()
 	force = round((5 + seed.potency / 5), 1)
 
-/obj/item/food/grown/nettle/death
+/* /obj/item/food/grown/nettle/death
 	seed = /obj/item/seeds/nettle/death
 	name = "deathnettle"
 	desc = "The <span class='danger'>glowing</span> nettle incites <span class='boldannounce'>rage</span> in you just from looking at it!"
@@ -118,3 +118,4 @@
 			M.Unconscious(force / 0.3)
 			M.Paralyze(force / 0.75)
 		M.drop_all_held_items()
+*/

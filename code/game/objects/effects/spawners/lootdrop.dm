@@ -614,7 +614,7 @@
 		/obj/item/seeds/glowshroom/glowcap = 1,
 		/obj/item/seeds/glowshroom/shadowshroom = 1,
 		/obj/item/seeds/liberty = 5,
-		/obj/item/seeds/nettle/death = 1,
+		// /obj/item/seeds/nettle/death = 1,
 		/obj/item/seeds/plump/walkingmushroom = 1,
 		/obj/item/seeds/reishi = 5,
 		/obj/item/seeds/cannabis/rainbow = 1,

@@ -170,12 +170,12 @@
 	multiplier = 2
 	foodtype = "omelet"
 
-/datum/bounty/item/botany/nettles_death
+/* /datum/bounty/item/botany/nettles_death
 	name = "Death Nettles"
 	wanted_types = list(/obj/item/food/grown/nettle/death)
 	multiplier = 2
 	bonus_desc = "Wear protection when handling them."
-	foodtype = "cheese"
+	foodtype = "cheese" */
 
 /datum/bounty/item/botany/pineapples
 	name = "Pineapples"
@@ -188,10 +188,10 @@
 	wanted_types = list(/obj/item/food/grown/tomato)
 	exclude_types = list(/obj/item/food/grown/tomato/blue)
 
-/datum/bounty/item/botany/tomato_bluespace
+/* /datum/bounty/item/botany/tomato_bluespace
 	name = "Bluespace Tomatoes"
 	wanted_types = list(/obj/item/food/grown/tomato/blue/bluespace)
-	multiplier = 4
+	multiplier = 4 */
 
 /datum/bounty/item/botany/oatz
 	name = "Oats"

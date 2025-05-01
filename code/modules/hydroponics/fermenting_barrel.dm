@@ -6,7 +6,10 @@
 	resistance_flags = FLAMMABLE
 	density = TRUE
 	anchored = FALSE
+	drag_slowdown = 1.5		// Same as a prone mob
 	max_integrity = 300
+	integrity_failure = 0.25
+	armor = list(MELEE = 20, BULLET = 10, LASER = 0, ENERGY = 0, BOMB = 10, BIO = 0, RAD = 0, FIRE = 0, ACID = 60)
 	var/open = FALSE
 	var/speed_multiplier = 1 //How fast it distills. Defaults to 100% (1.0). Lower is better.
 
