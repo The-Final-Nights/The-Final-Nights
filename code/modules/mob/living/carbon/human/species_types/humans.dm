@@ -41,9 +41,9 @@
 
 			if(host.mind.assigned_role)
 				if(host.mind.special_role)
-					dat += ", carrying the [host.mind.assigned_role] (<font color=red>[host.mind.special_role]</font>) role."
+					dat += " carrying the [host.mind.assigned_role] (<font color=red>[host.mind.special_role]</font>) role."
 				else
-					dat += ", carrying the [host.mind.assigned_role] role."
+					dat += " carrying the [host.mind.assigned_role] role."
 			if(!host.mind.assigned_role)
 				dat += "."
 			dat += "<BR>"
