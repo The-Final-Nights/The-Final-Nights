@@ -88,7 +88,9 @@
 	pixel_y = 7
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "abi" = (
 /obj/machinery/light/red{
 	dir = 8
@@ -2226,7 +2228,9 @@
 "aEF" = (
 /obj/structure/bed/maint,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "aEH" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -3152,7 +3156,9 @@
 /turf/open/floor/carpet/green,
 /area/vtm/interior/tzimisce_manor)
 "aRH" = (
-/obj/item/chair/wood/wings,
+/obj/structure/chair/wood/wings{
+	dir = 8
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "aRT" = (
@@ -4316,7 +4322,9 @@
 	pixel_y = 7
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bhO" = (
 /obj/structure/chair/sofa/corner{
 	dir = 1
@@ -4370,7 +4378,9 @@
 "biv" = (
 /obj/machinery/photocopier,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "biw" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -4739,7 +4749,9 @@
 	},
 /obj/item/folder/blue,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bnb" = (
 /obj/effect/decal/litter,
 /obj/effect/decal/trash,
@@ -4969,7 +4981,7 @@
 /area/vtm/interior/shop)
 "bqk" = (
 /obj/structure/table,
-/obj/structure/microscope,
+/obj/item/storage/firstaid/advanced,
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
@@ -4987,7 +4999,9 @@
 	pixel_y = 3
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bqu" = (
 /obj/structure/vampdoor/reinf{
 	dir = 8;
@@ -5534,7 +5548,9 @@
 	},
 /obj/item/toner/large,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "byQ" = (
 /obj/item/flashlight,
 /obj/structure/extinguisher_cabinet{
@@ -5711,7 +5727,9 @@
 	id = "pddock"
 	},
 /turf/closed/wall/vampwall/market,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bBv" = (
 /obj/item/paper{
 	default_raw_text = "I'M STUCK HERE PLEASE HELP!!"
@@ -5925,7 +5943,9 @@
 	pixel_x = 11
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bDX" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -6086,7 +6106,9 @@
 /obj/structure/closet/secure_closet/evidence,
 /obj/item/reagent_containers/food/drinks/meth/cocaine,
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bHt" = (
 /obj/structure/railing{
 	dir = 8;
@@ -6192,7 +6214,9 @@
 /obj/item/taperecorder,
 /obj/item/tape,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bIU" = (
 /obj/item/bedsheet/random,
 /obj/structure/bed,
@@ -6260,7 +6284,9 @@
 /area/vtm/jazzclub)
 "bJU" = (
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bJY" = (
 /obj/structure/sink/kitchen{
 	dir = 8;
@@ -7200,7 +7226,9 @@
 	name = "Parking Shutters Control"
 	},
 /turf/closed/wall/vampwall/market,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bXX" = (
 /obj/structure/closet/crate/wooden,
 /obj/item/reagent_containers/food/drinks/bottle/wine,
@@ -7241,7 +7269,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "bYk" = (
 /obj/structure/vamprocks{
 	icon_state = "rock6";
@@ -7359,7 +7389,9 @@
 "caN" = (
 /obj/structure/table,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "caP" = (
 /obj/effect/landmark/npcability,
 /obj/effect/decal/bordur{
@@ -7456,9 +7488,11 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights)
 "ccI" = (
-/obj/structure/filingcabinet/security,
-/turf/open/floor/plating/parquetry/rich,
-/area/vtm/interior/banu/haven)
+/obj/structure/filingcabinet/chestdrawer,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ccX" = (
 /obj/structure/railing{
 	dir = 1;
@@ -8267,7 +8301,9 @@
 /obj/item/detective_scanner,
 /obj/item/detective_scanner,
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "cmL" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/rough,
@@ -8339,7 +8375,9 @@
 "cnt" = (
 /obj/structure/chair/office,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "cnz" = (
 /obj/structure/chair/sofa/right{
 	dir = 8
@@ -9774,7 +9812,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "cHg" = (
 /obj/machinery/light/prince{
 	dir = 4
@@ -11039,6 +11079,14 @@
 /obj/item/storage/box/aquarium_props,
 /turf/open/floor/carpet/red,
 /area/vtm/interior/millennium_tower/ventrue)
+"cXG" = (
+/obj/structure/table/wood,
+/obj/item/detective_scanner,
+/obj/item/clothing/gloves/vampire/investigator,
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "cXK" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -11205,7 +11253,9 @@
 	name = "strange green package"
 	},
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "dbg" = (
 /obj/transfer_point_vamp{
 	dir = 1;
@@ -12723,7 +12773,9 @@
 /obj/structure/table/wood,
 /obj/machinery/p25policeportal,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "dwg" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -12790,7 +12842,9 @@
 "dwO" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "dwS" = (
 /obj/structure/chair/sofa/corp/corner{
 	dir = 1
@@ -13163,6 +13217,10 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/chinatown)
+"dCP" = (
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating/parquetry/rich,
+/area/vtm/interior/banu/haven)
 "dCT" = (
 /obj/structure/musician/piano{
 	icon_state = "piano"
@@ -13543,10 +13601,6 @@
 /obj/structure/cable/layer1,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/glasswalker)
-"dIO" = (
-/obj/item/cardboard_cutout,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/banu/haven)
 "dIU" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -13747,7 +13801,9 @@
 	pixel_x = -6
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "dLT" = (
 /obj/structure/railing,
 /turf/open/floor/plating/vampwood,
@@ -13843,7 +13899,9 @@
 /obj/structure/bed/maint,
 /obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "dNO" = (
 /obj/structure/bed/maint,
 /obj/structure/closet/crate/coffin,
@@ -14033,7 +14091,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "dRz" = (
 /obj/structure/chair/wood{
 	dir = 4;
@@ -14651,7 +14711,9 @@
 	icon_state = "trash5"
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "eaU" = (
 /obj/machinery/light/small/red{
 	dir = 4;
@@ -14962,7 +15024,9 @@
 	},
 /mob/living/carbon/human/npc/police/static,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "eeR" = (
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/pacificheights/forest)
@@ -15112,7 +15176,9 @@
 	},
 /obj/structure/closet/secure_closet/evidence,
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ehd" = (
 /obj/structure/table,
 /obj/item/vamp/phone/clean,
@@ -15877,7 +15943,9 @@
 	},
 /obj/item/storage/fancy/hardcase,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "esx" = (
 /obj/structure/coclock,
 /turf/open/floor/carpet,
@@ -16079,6 +16147,12 @@
 /obj/effect/decal/wallpaper/red/low,
 /turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/jazzclub)
+"ewa" = (
+/obj/structure/filingcabinet/employment,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ewc" = (
 /obj/machinery/light/prince{
 	dir = 8
@@ -16149,7 +16223,9 @@
 "exy" = (
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "exB" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/plating/concrete,
@@ -16220,7 +16296,9 @@
 "eyv" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "eyx" = (
 /obj/structure/chair/sofa/corp/right{
 	dir = 1
@@ -16926,7 +17004,9 @@
 	pixel_x = -11
 	},
 /turf/closed/wall/vampwall/market/low,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "eJZ" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/effect/landmark/npcwall,
@@ -17151,7 +17231,9 @@
 	pixel_y = 8
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "eNP" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -17217,7 +17299,9 @@
 	pixel_x = -10
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "eOE" = (
 /obj/machinery/light/small/red{
 	pixel_y = 24
@@ -18260,7 +18344,9 @@
 	pixel_y = 20
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "fdE" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 6
@@ -18500,7 +18586,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "fgH" = (
 /obj/structure/fluff/hedge,
 /obj/structure/flora/ausbushes/ywflowers,
@@ -18906,7 +18994,9 @@
 /obj/structure/table,
 /obj/machinery/mineral/equipment_vendor/restricted/police,
 /turf/closed/wall/vampwall/market/low,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "fmB" = (
 /obj/structure/railing{
 	dir = 8
@@ -19646,7 +19736,9 @@
 /obj/item/restraints/handcuffs,
 /obj/item/restraints/handcuffs,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "fvE" = (
 /obj/structure/chair/wood/wings{
 	dir = 8
@@ -20179,7 +20271,6 @@
 /obj/structure/table/wood/fancy/green,
 /obj/item/reagent_containers/glass/rag,
 /obj/item/vtm_artifact/key_of_alamut,
-/obj/item/drinkable_bloodpack/elite,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "fCs" = (
@@ -20366,7 +20457,9 @@
 	pixel_y = 29
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "fFk" = (
 /obj/structure/railing{
 	dir = 8
@@ -21039,7 +21132,9 @@
 	pixel_y = 11
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "fOT" = (
 /obj/structure/chair/pew/left,
 /turf/open/floor/plating/vampplating/stone,
@@ -22521,7 +22616,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gjx" = (
 /obj/structure/vampdoor/simple,
 /turf/open/floor/plating/toilet,
@@ -22669,7 +22766,9 @@
 	name = "Police Officer"
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "glh" = (
 /obj/structure/fluff/hedge,
 /obj/structure/railing{
@@ -22896,7 +22995,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gos" = (
 /obj/structure/lamppost/sidewalk,
 /obj/effect/landmark/npcactivity,
@@ -23164,7 +23265,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/sidewalk/poor,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gsf" = (
 /obj/effect/decal/cardboard,
 /obj/structure/extinguisher_cabinet{
@@ -23282,7 +23385,9 @@
 "gtt" = (
 /obj/structure/vampdoor/police,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gtz" = (
 /obj/machinery/light/small{
 	dir = 4;
@@ -23295,7 +23400,9 @@
 	layer = 4.1
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gtI" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -24655,7 +24762,9 @@
 	lockpick_difficulty = 18
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gMH" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -24703,7 +24812,9 @@
 	pixel_y = 15
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gNw" = (
 /obj/structure/railing,
 /obj/effect/turf_decal/siding/wood,
@@ -25461,7 +25572,9 @@
 	lockpick_difficulty = 18
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "gYr" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/vampgrass,
@@ -26153,7 +26266,9 @@
 /obj/item/storage/fancy/donut_box,
 /obj/item/toner/large,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hik" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -26559,7 +26674,9 @@
 	lockpick_difficulty = 18
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hoI" = (
 /obj/machinery/light{
 	dir = 1
@@ -26976,7 +27093,9 @@
 	},
 /obj/effect/decal/trash,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "huL" = (
 /obj/effect/gibspawner/human,
 /turf/open/floor/plating/parquetry/old,
@@ -27017,7 +27136,9 @@
 	layer = 4.1
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hve" = (
 /obj/vampire_car/track/volkswagen,
 /turf/open/floor/plating/asphalt,
@@ -27110,10 +27231,25 @@
 /obj/item/vampire_stake,
 /obj/item/p25radio/police,
 /obj/item/vamp/keys/police{
-	name = "Police Consultant keys"
+	name = "Police Analyst keys"
 	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/banu/haven)
+"hxj" = (
+/obj/structure/table/wood,
+/obj/structure/microscope,
+/obj/item/swab{
+	pixel_x = -12;
+	pixel_y = 4
+	},
+/obj/item/biopsy_tool{
+	pixel_x = 12
+	},
+/obj/item/petri_dish,
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hxQ" = (
 /turf/open/floor/carpet/black,
 /area/vtm/interior/laundromat)
@@ -27274,7 +27410,9 @@
 /area/vtm/interior)
 "hBt" = (
 /turf/closed/wall/vampwall/market/low/window,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hBw" = (
 /obj/effect/landmark/npcwall,
 /obj/machinery/light{
@@ -27795,7 +27933,9 @@
 /obj/structure/closet/secure_closet/evidence,
 /obj/item/storage/box/evidence,
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hHA" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -28063,7 +28203,9 @@
 "hMk" = (
 /obj/machinery/mineral/equipment_vendor/fastfood/sodavendor/blue,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hMm" = (
 /obj/effect/decal/bordur,
 /obj/structure/table/wood,
@@ -28238,7 +28380,9 @@
 	pixel_y = 28
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hOm" = (
 /obj/structure/chair/sofa/corp/right{
 	dir = 8
@@ -28481,7 +28625,9 @@
 "hSd" = (
 /obj/structure/table,
 /turf/closed/wall/vampwall/market/low,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hSg" = (
 /obj/machinery/shower{
 	dir = 4
@@ -28530,7 +28676,9 @@
 /area/vtm/pacificheights/old)
 "hSH" = (
 /turf/closed/wall/vampwall/market/low/window/reinforced,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "hSN" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
@@ -29608,7 +29756,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "iik" = (
 /obj/structure/table/wood,
 /turf/open/floor/plating/rough,
@@ -29718,7 +29868,9 @@
 	},
 /obj/item/pen,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ikz" = (
 /obj/machinery/light/small{
 	dir = 8;
@@ -31278,7 +31430,9 @@
 	name = "Police Officer"
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "iHU" = (
 /obj/machinery/light/small{
 	pixel_y = 32
@@ -31423,7 +31577,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "iJt" = (
 /obj/effect/decal/trash,
 /obj/effect/decal/litter,
@@ -32615,6 +32771,13 @@
 /obj/item/food/cake/lemon,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/tzimisce_manor)
+"jbw" = (
+/obj/machinery/light{
+	dir = 8;
+	light_color = "#6488EA"
+	},
+/turf/closed/wall/vampwall/market,
+/area/vtm/interior/police/morgue)
 "jby" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/vampdirt,
@@ -32647,7 +32810,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jbW" = (
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/cog/caern)
@@ -32857,7 +33022,9 @@
 	pixel_y = 7
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jgA" = (
 /obj/structure/railing{
 	dir = 1;
@@ -33057,7 +33224,9 @@
 	pixel_x = -2
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jjQ" = (
 /obj/effect/landmark/npcbeacon/directed{
 	dir = 4
@@ -33134,7 +33303,9 @@
 "jkY" = (
 /obj/machinery/photocopier,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jlj" = (
 /obj/structure/reagent_dispensers/water_cooler{
 	pixel_x = -6;
@@ -34019,7 +34190,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jwg" = (
 /obj/structure/flora/ausbushes/palebush,
 /obj/structure/flora/ausbushes/ppflowers,
@@ -34130,7 +34303,9 @@
 	pixel_x = 7
 	},
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jxZ" = (
 /obj/effect/decal/bordur,
 /obj/effect/landmark/npcability,
@@ -34429,7 +34604,9 @@
 	dir = 5
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jBE" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -34718,7 +34895,9 @@
 	lockpick_difficulty = 12
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jGq" = (
 /obj/elevator_button_down{
 	id = 2;
@@ -35407,7 +35586,9 @@
 	},
 /obj/item/assembly/mousetrap/armed,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jRc" = (
 /obj/machinery/light/small{
 	pixel_y = 32
@@ -35985,7 +36166,9 @@
 	pixel_y = 6
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "jZg" = (
 /obj/structure/closet,
 /obj/item/storage/firstaid/o2,
@@ -36406,7 +36589,9 @@
 "keU" = (
 /obj/effect/decal/cleanable/oil,
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kfc" = (
 /obj/structure/table/wood,
 /obj/machinery/light/small/pink{
@@ -36484,7 +36669,9 @@
 	pixel_x = 6
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kgH" = (
 /obj/structure/vampfence/corner/rich{
 	dir = 4
@@ -37179,7 +37366,9 @@
 	pixel_x = -6
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "krR" = (
 /obj/effect/mob_spawn/human/corpse/ciz4,
 /obj/item/melee/vampirearms/knife,
@@ -37447,7 +37636,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kwo" = (
 /obj/structure/railing{
 	dir = 4;
@@ -37629,7 +37820,9 @@
 	},
 /obj/structure/closet/secure_closet/evidence,
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kyK" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/candle,
@@ -38167,7 +38360,9 @@
 	},
 /obj/item/toner/large,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kFx" = (
 /obj/structure/chair/greyscale{
 	dir = 1
@@ -38466,7 +38661,9 @@
 	pixel_x = -2
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kKJ" = (
 /turf/open/floor/plating/asphalt,
 /area/vtm/graveyard)
@@ -39086,6 +39283,12 @@
 /obj/structure/rack/bubway/vertical,
 /turf/closed/wall/vampwall/brick/low,
 /area/vtm/interior/cog/pantry)
+"kTG" = (
+/obj/structure/chair,
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kTS" = (
 /obj/effect/decal/wallpaper/grey/low,
 /turf/closed/wall/vampwall/old/low/window,
@@ -39158,7 +39361,9 @@
 /obj/structure/table/wood,
 /obj/item/vamp/phone/emergency,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kUK" = (
 /obj/structure/bonfire/dense,
 /turf/open/floor/plating/rough,
@@ -39427,7 +39632,9 @@
 /area/vtm/hotel)
 "kYe" = (
 /turf/open/floor/plating/shit,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "kYh" = (
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/rough/cave,
@@ -39747,7 +39954,9 @@
 	color = "#636363"
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "lbI" = (
 /obj/machinery/griddle,
 /turf/open/floor/plating/vampplating,
@@ -39859,7 +40068,9 @@
 "ldy" = (
 /obj/vampire_car/police/unmarked,
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ldz" = (
 /obj/structure/vampdoor/simple{
 	dir = 4
@@ -39932,7 +40143,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ler" = (
 /obj/machinery/light{
 	dir = 4
@@ -41045,7 +41258,9 @@
 	name = "Police Sergeant"
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "lwj" = (
 /obj/structure/table/wood,
 /obj/item/candle/infinite{
@@ -41085,7 +41300,9 @@
 "lxf" = (
 /obj/vampire_car/police,
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "lxr" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /turf/open/floor/plating/parquetry/old,
@@ -41819,7 +42036,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "lGY" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -42765,7 +42984,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "lUT" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
@@ -42877,7 +43098,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "lWh" = (
 /obj/transfer_point_vamp{
 	alpha = 0;
@@ -43194,7 +43417,9 @@
 "mai" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "map" = (
 /obj/structure/chair/sofa/corp/left{
 	dir = 4
@@ -43252,7 +43477,9 @@
 	id = "pddock"
 	},
 /turf/closed/wall/vampwall/market,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mca" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/parquetry/old,
@@ -43598,7 +43825,9 @@
 /obj/structure/table/wood,
 /obj/item/phone_book,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mhC" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalk/poor,
@@ -43773,12 +44002,12 @@
 /area/vtm/interior/baali)
 "mke" = (
 /obj/structure/table/wood,
-/obj/item/storage/belt/vampire/sheathe/sabre,
 /obj/item/melee/vampirearms/sabre{
 	color = "#00A36C";
 	name = "The Law of Judgement";
 	desc = "A curved sword seemingly stuck with a permanent green tint to its steel, it is a weapon that has been passed down within the clan for decades, and now, yours to wield in enforcing its namesake."
 	},
+/obj/item/storage/belt/vampire/sheathe/sabre,
 /obj/item/detective_scanner,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/banu/haven)
@@ -44143,7 +44372,9 @@
 	pixel_x = 7
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mqi" = (
 /obj/structure/trashbag{
 	pixel_x = 5;
@@ -44599,7 +44830,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mwQ" = (
 /obj/structure/vampipe{
 	icon_state = "piping38";
@@ -44769,7 +45002,9 @@
 "myG" = (
 /mob/living/carbon/human/npc/police,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "myH" = (
 /turf/open/openspace,
 /area/vtm/hotel)
@@ -44889,7 +45124,9 @@
 	name = "Police Officer"
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mAx" = (
 /obj/vampire_car/retro/rand{
 	access = "giovanni"
@@ -45238,6 +45475,14 @@
 /obj/structure/bookcase/random/nonfiction,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/trujah)
+"mFX" = (
+/obj/effect/decal/bordur/corner{
+	dir = 1
+	},
+/turf/closed/wall/vampwall/market,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mGb" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -45587,7 +45832,9 @@
 	id = "pddock"
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mJA" = (
 /obj/structure/bed,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -45853,7 +46100,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mNw" = (
 /obj/effect/mob_spawn/human/corpse/ciz4,
 /mob/living/carbon/human/npc/hobo,
@@ -46012,7 +46261,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mPv" = (
 /obj/structure/closet/secure_closet,
 /obj/item/clothing/under/vampire/guard,
@@ -46156,7 +46407,9 @@
 "mRn" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mRv" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -46392,7 +46645,9 @@
 	name = "window bars"
 	},
 /turf/closed/wall/vampwall/market/low/window/reinforced,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mUa" = (
 /obj/effect/decal/gut_floor,
 /turf/open/floor/plating/concrete,
@@ -46450,7 +46705,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "mUZ" = (
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/interior)
@@ -47728,7 +47985,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "nnR" = (
 /obj/machinery/light/small{
 	pixel_y = 32
@@ -48684,7 +48943,9 @@
 "nBh" = (
 /obj/machinery/mineral/equipment_vendor/fastfood/snacks,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "nBj" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -49337,7 +49598,9 @@
 	pixel_x = -10
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "nJf" = (
 /obj/item/clothing/head/cone,
 /turf/open/floor/plating/vampdirt,
@@ -50196,7 +50459,9 @@
 /obj/structure/table,
 /obj/item/folder/blue,
 /turf/closed/wall/vampwall/market/low,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "nVv" = (
 /obj/effect/decal/asphaltline/alt,
 /turf/open/floor/plating/asphalt,
@@ -50236,7 +50501,9 @@
 "nVZ" = (
 /obj/structure/railing/metal/corner,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "nWq" = (
 /obj/effect/decal/litter,
 /obj/structure/table/wood,
@@ -50556,7 +50823,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oar" = (
 /obj/structure/vampfence{
 	dir = 8
@@ -50734,7 +51003,9 @@
 "odD" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "odQ" = (
 /obj/machinery/light/small{
 	dir = 8;
@@ -50856,6 +51127,15 @@
 /obj/mytherceria_trap/disorient,
 /turf/open/floor/carpet,
 /area/vtm/church/interior/haven)
+"ofN" = (
+/obj/structure/filingcabinet/security,
+/obj/effect/decal/trash{
+	icon_state = "trash5"
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ofV" = (
 /obj/machinery/shower,
 /obj/structure/curtain,
@@ -51116,7 +51396,9 @@
 /obj/item/kirbyplants/random,
 /obj/structure/coclock,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ojt" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/item/drinkable_bloodpack,
@@ -51419,7 +51701,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/sidewalk/poor,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "onN" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -51616,7 +51900,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ori" = (
 /obj/structure/table,
 /obj/item/clothing/suit/vampire/vest,
@@ -51641,6 +51927,12 @@
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/interior/laundromat)
+"orC" = (
+/obj/structure/filingcabinet/medical,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "orH" = (
 /obj/structure/fireplace{
 	dir = 8;
@@ -51762,6 +52054,13 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/unionsquare)
+"otd" = (
+/obj/structure/table/wood,
+/obj/item/storage/box/evidence,
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oth" = (
 /obj/machinery/light/small{
 	dir = 8;
@@ -52532,7 +52831,9 @@
 	},
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oCS" = (
 /obj/structure/fluff/hedge{
 	pixel_y = 6
@@ -52833,7 +53134,9 @@
 "oGP" = (
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oGQ" = (
 /obj/structure/table,
 /obj/item/storage/pill_bottle/epinephrine{
@@ -53325,7 +53628,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oNJ" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -53532,6 +53837,17 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/community)
+"oQd" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 8
+	},
+/obj/structure/vampdoor/police{
+	dir = 4
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oQf" = (
 /obj/item/soap,
 /turf/open/floor/plating/toilet,
@@ -53574,7 +53890,9 @@
 /obj/item/pizzabox/margherita,
 /obj/item/kitchen/knife/plastic,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oQG" = (
 /obj/effect/decal/litter,
 /obj/structure/glowshroom/single,
@@ -53700,6 +54018,9 @@
 /area/vtm/interior)
 "oSa" = (
 /obj/structure/closet/crate/freezer,
+/obj/item/drinkable_bloodpack/vitae,
+/obj/item/drinkable_bloodpack/vitae,
+/obj/item/drinkable_bloodpack/vitae,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/banu/haven)
 "oSd" = (
@@ -53707,7 +54028,16 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
+"oSh" = (
+/obj/effect/turf_decal/siding/white,
+/obj/structure/vampdoor/police{
+	dir = 1
+	},
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/police/morgue)
 "oSs" = (
 /obj/structure/chair/pew/right{
 	dir = 4
@@ -53854,7 +54184,9 @@
 /obj/structure/closet/secure_closet/evidence,
 /obj/item/storage/box/fireworks/dangerous,
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "oTK" = (
 /obj/effect/decal/bordur{
 	dir = 5
@@ -54304,7 +54636,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pbt" = (
 /obj/structure/fence/door,
 /turf/open/floor/plating/asphalt,
@@ -54420,7 +54754,9 @@
 /obj/structure/table/wood,
 /obj/item/camera/detective,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pcT" = (
 /turf/open/floor/plating/vampdirt,
 /area/vtm/pacificheights/forest)
@@ -55806,7 +56142,9 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel/stairs,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pxB" = (
 /obj/machinery/light/prince{
 	pixel_y = 32
@@ -56053,7 +56391,9 @@
 	pixel_x = 6
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pAs" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/vampdirt,
@@ -56127,7 +56467,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pBu" = (
 /obj/structure/trashcan,
 /turf/open/floor/plating/sidewalk,
@@ -56170,7 +56512,9 @@
 	pixel_y = -6
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pBZ" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/under/misc/pj/blue,
@@ -56310,6 +56654,14 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/cog/caern)
+"pDD" = (
+/obj/effect/decal/bordur{
+	dir = 4
+	},
+/turf/closed/wall/vampwall/market,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pDF" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -57504,7 +57856,9 @@
 /obj/item/storage/box/lights/mixed,
 /obj/item/wire_cutters,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pTE" = (
 /obj/manholeup,
 /obj/machinery/light/small{
@@ -57728,7 +58082,9 @@
 	pixel_y = 11
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "pWD" = (
 /obj/effect/landmark/npcactivity,
 /turf/open/floor/plating/sidewalk,
@@ -58896,7 +59252,9 @@
 /turf/open/floor/plasteel/stairs{
 	dir = 4
 	},
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "qnJ" = (
 /obj/structure/table,
 /obj/machinery/light/small/pink{
@@ -59532,7 +59890,9 @@
 	pixel_x = -9
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "qwB" = (
 /obj/structure/chair/greyscale{
 	dir = 4
@@ -59617,7 +59977,9 @@
 /obj/structure/table,
 /obj/item/food/donut/jelly/berry,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "qxU" = (
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/sidewalkalt,
@@ -59664,10 +60026,6 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto/old)
-"qyJ" = (
-/obj/item/cardboard_cutout,
-/turf/open/floor/plating/parquetry/rich,
-/area/vtm/interior/banu/haven)
 "qyO" = (
 /obj/item/stack/dollar/ten,
 /obj/item/stack/dollar/hundred,
@@ -59742,7 +60100,9 @@
 "qzo" = (
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "qzp" = (
 /obj/structure/big_vamprocks,
 /obj/effect/turf_decal/weather/dirt,
@@ -60512,7 +60872,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "qKo" = (
 /obj/structure/dresser,
 /turf/open/floor/carpet/royalblue,
@@ -61295,7 +61657,9 @@
 /area/vtm/interior/tzimisce_manor)
 "qTP" = (
 /turf/closed/wall/vampwall/market,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "qTQ" = (
 /obj/vampire_computer,
 /obj/structure/table/wood,
@@ -62088,7 +62452,9 @@
 	lockpick_difficulty = 15
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "reR" = (
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/carpet/red,
@@ -62287,7 +62653,9 @@
 /obj/structure/bed/maint,
 /mob/living/carbon/human/npc/hobo,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "rhY" = (
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/police/fed)
@@ -64107,7 +64475,9 @@
 	lockpick_difficulty = 16
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "rGa" = (
 /obj/structure/vampdoor/wood{
 	dir = 4
@@ -64239,7 +64609,9 @@
 /obj/structure/table,
 /obj/item/folder/blue,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "rIc" = (
 /obj/effect/decal/asphaltline/alt{
 	dir = 8
@@ -64344,7 +64716,9 @@
 /obj/item/folder/blue,
 /obj/item/camera/detective,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "rJx" = (
 /obj/item/flashlight/lantern{
 	light_color = "#013220";
@@ -65280,6 +65654,10 @@
 	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/tzimisce_manor)
+"rVE" = (
+/obj/structure/filingcabinet/medical,
+/turf/open/floor/plating/parquetry/rich,
+/area/vtm/interior/banu/haven)
 "rVG" = (
 /obj/structure/toilet{
 	dir = 8;
@@ -66277,7 +66655,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "sjh" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/parquetry/old,
@@ -66441,7 +66821,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "slm" = (
 /obj/structure/table,
 /obj/item/newspaper,
@@ -67417,7 +67799,10 @@
 /obj/item/ammo_box/vampire/c50,
 /obj/item/storage/backpack/duffelbag,
 /obj/item/storage/box/bodybags,
-/obj/item/melee/vampirearms/knife,
+/obj/item/melee/vampirearms/knife{
+	name = "Due Process";
+	desc = "Judge those of Caine's blood and punish them, should they be found wanting."
+	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/banu/haven)
 "syt" = (
@@ -68095,7 +68480,9 @@
 	},
 /obj/item/trash/vampirebar,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "sJv" = (
 /obj/effect/decal/bordur,
 /obj/structure/railing,
@@ -69053,7 +69440,9 @@
 	name = "Police Chief"
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "sZX" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -69164,7 +69553,9 @@
 	name = "Parking Shutter"
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "tbz" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/parquetry/old,
@@ -69755,7 +70146,9 @@
 	dir = 1
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "tjZ" = (
 /obj/structure/stairs/north,
 /turf/open/floor/carpet,
@@ -70213,7 +70606,9 @@
 	pixel_x = 3
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "tqE" = (
 /obj/effect/decal/asphaltline/alt,
 /turf/open/floor/plating/asphalt,
@@ -73191,7 +73586,9 @@
 	name = "Emergency Dispatcher"
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "ukh" = (
 /obj/item/candle/infinite{
 	pixel_x = 8;
@@ -74509,6 +74906,14 @@
 /obj/effect/landmark/npcwall,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/pacificheights/old)
+"uCr" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/turf/closed/wall/vampwall/market,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "uCs" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalk/poor,
@@ -75869,7 +76274,9 @@
 	},
 /mob/living/simple_animal/mouse/brown/tom,
 /turf/open/floor/plating/shit,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "uWN" = (
 /obj/effect/decal/cardboard,
 /obj/american_flag{
@@ -76098,7 +76505,9 @@
 /area/vtm/clinic/haven)
 "uZV" = (
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "uZZ" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/plating/parquetry/rich,
@@ -76279,9 +76688,12 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/nosferatu_town)
 "vcp" = (
-/obj/item/kirbyplants/random,
+/obj/structure/table/wood,
+/obj/vampire_computer,
 /turf/open/floor/plating/toilet,
-/area/vtm/interior/police/morgue)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vcC" = (
 /obj/structure/vampdoor/camarilla{
 	dir = 1;
@@ -76323,7 +76735,9 @@
 	name = "Police Officer"
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vdp" = (
 /obj/structure/coclock,
 /obj/structure/chair/sofa,
@@ -76960,7 +77374,9 @@
 	pixel_y = 2
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vmR" = (
 /obj/structure/curtain/cloth/fancy,
 /turf/closed/wall/vampwall/market/low/window/reinforced,
@@ -77258,7 +77674,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vrn" = (
 /obj/structure/vampfence/rich{
 	dir = 4
@@ -77895,7 +78313,9 @@
 	pixel_y = 16
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vBC" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -78040,7 +78460,9 @@
 	pixel_y = 11
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vDz" = (
 /obj/machinery/light/prince{
 	dir = 4
@@ -78066,7 +78488,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vDN" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -78147,7 +78571,9 @@
 	name = "Police Officer"
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vEr" = (
 /obj/structure/table,
 /obj/item/paper{
@@ -78624,6 +79050,12 @@
 	density = 0
 	},
 /area/vtm/clinic/haven)
+"vKH" = (
+/obj/effect/decal/litter,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vKN" = (
 /obj/effect/vip_barrier/elysium/theatre_backdoor{
 	dir = 8
@@ -79153,7 +79585,9 @@
 	pixel_y = 7
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vTd" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -79402,7 +79836,9 @@
 	pixel_x = -6
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vWE" = (
 /obj/structure/table/reinforced/ctf,
 /obj/item/ammo_box/magazine/vamp9mm,
@@ -79519,7 +79955,9 @@
 	lockpick_difficulty = 16
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "vXW" = (
 /obj/item/reagent_containers/food/drinks/beer/vampire{
 	list_reagents = list(/datum/reagent/consumable/ethanol/beer=0)
@@ -80409,7 +80847,9 @@
 "wkG" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wkI" = (
 /obj/structure/mopbucket,
 /obj/item/reagent_containers/glass/bucket,
@@ -80453,7 +80893,9 @@
 	pixel_y = 6
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wlT" = (
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/vampplating,
@@ -80824,7 +81266,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wrA" = (
 /obj/structure/coclock,
 /turf/open/floor/plating/vampplating/mono,
@@ -81085,6 +81529,11 @@
 	},
 /turf/open/openspace,
 /area/vtm/interior/tzimisce_manor)
+"wwq" = (
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wwC" = (
 /obj/structure/table/wood,
 /obj/item/newspaper,
@@ -81133,7 +81582,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wxp" = (
 /obj/structure/table,
 /obj/item/gun/ballistic/vampire/revolver,
@@ -81706,7 +82157,9 @@
 /obj/structure/table,
 /obj/machinery/fax/police,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wEY" = (
 /obj/structure/vampdoor/simple{
 	dir = 8
@@ -81729,7 +82182,9 @@
 	pixel_x = 11
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wFo" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -81840,7 +82295,9 @@
 	name = "Emergency Dispatcher"
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wGQ" = (
 /obj/structure/fireplace,
 /turf/open/floor/carpet/black,
@@ -82050,7 +82507,9 @@
 	pixel_y = 14
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "wKf" = (
 /obj/structure/vampipe{
 	icon_state = "piping32"
@@ -83196,7 +83655,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "xbb" = (
 /obj/structure/table,
 /turf/open/floor/plating/vampplating/mono,
@@ -83333,7 +83794,9 @@
 	name = "Police Officer"
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "xcT" = (
 /obj/structure/rack/tacobell,
 /obj/structure/rack/tacobell/horizontal{
@@ -84259,7 +84722,9 @@
 	dir = 8
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "xqD" = (
 /obj/manholedown,
 /turf/open/floor/plating/vampgrass,
@@ -84691,7 +85156,9 @@
 	id = "pddock"
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "xxu" = (
 /obj/effect/landmark/start/bogatyr,
 /turf/open/floor/carpet/royalblack,
@@ -84822,14 +85289,14 @@
 "xAc" = (
 /obj/structure/closet,
 /obj/item/clothing/under/vampire/police,
-/obj/item/clothing/shoes/vampire/jackboots,
 /obj/item/clothing/head/vampire/police,
 /obj/item/card/id/police/sergeant{
-	name = "police consultant badge";
+	name = "forensic analyst badge";
 	desc = "Sponsored by the Government. This one belongs to a civilian consultant attached to the local PD."
 	},
-/obj/item/clothing/suit/vampire/vest/police/sergeant,
 /obj/item/clothing/mask/vampire/balaclava,
+/obj/item/clothing/suit/vampire/vest/police,
+/obj/item/clothing/shoes/vampire/jackboots/punk,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/banu/haven)
 "xAj" = (
@@ -85414,7 +85881,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "xGZ" = (
 /obj/structure/table/wood,
 /obj/item/flashlight/lamp{
@@ -87120,7 +87589,9 @@
 /obj/effect/decal/cleanable/oil,
 /obj/vampire_car/police,
 /turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "yeI" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -87273,10 +87744,14 @@
 "ygK" = (
 /obj/structure/stairs/north,
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "yhf" = (
 /turf/open/floor/plating/concrete,
-/area/vtm/interior/police)
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "yhi" = (
 /obj/machinery/light/small{
 	pixel_y = 32
@@ -87493,6 +87968,15 @@
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf/lower)
+"yjU" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/machinery/light,
+/turf/closed/wall/vampwall/market,
+/area/vtm/interior/police{
+	name = "Police Station - Forensics"
+	})
 "yjV" = (
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/interior/millennium_tower)
@@ -271699,7 +272183,7 @@ ntq
 hJo
 hJo
 hJo
-vcp
+hJo
 qZb
 amI
 fwd
@@ -271953,9 +272437,9 @@ ntq
 ntq
 ntq
 ntq
-vMH
-lTQ
-hJo
+uCr
+vcp
+otd
 hJo
 fEz
 hJo
@@ -272210,10 +272694,10 @@ ntq
 ntq
 ntq
 ntq
-vMH
-lTQ
-lTQ
-hJo
+yjU
+wwq
+wwq
+oSh
 kfS
 ftX
 qir
@@ -272467,9 +272951,9 @@ ntq
 ntq
 ntq
 ntq
-vMH
-lTQ
-lTQ
+uCr
+kTG
+hxj
 hJo
 nvJ
 kfS
@@ -272724,9 +273208,9 @@ ntq
 ntq
 ntq
 ntq
-vMH
-iQG
-lTQ
+uCr
+wwq
+cXG
 hJo
 fOK
 fOK
@@ -272981,11 +273465,11 @@ ntq
 ntq
 ntq
 ntq
-vMH
-lTQ
-lTQ
+uCr
+oQd
+qTP
 hJo
-hJo
+jbw
 hJo
 hJo
 hJo
@@ -273238,12 +273722,12 @@ ntq
 ntq
 ntq
 ntq
-vMH
-lTQ
-lTQ
-lTQ
-lTQ
-lTQ
+yjU
+vKH
+ewa
+ofN
+orC
+ccI
 nPz
 lhu
 wPT
@@ -273495,12 +273979,12 @@ ntq
 ntq
 ntq
 ntq
-vMH
-iQG
-lTQ
-lTQ
-lTQ
-lTQ
+uCr
+uZV
+uZV
+uZV
+vKH
+uZV
 nPz
 qiD
 aEb
@@ -273752,12 +274236,12 @@ ntq
 ntq
 ntq
 ntq
-aOT
-lbr
-lbr
-lbr
-lbr
-lbr
+mFX
+pDD
+pDD
+pDD
+pDD
+pDD
 nPz
 nPz
 nPz
@@ -280143,7 +280627,7 @@ hNz
 mov
 mov
 mov
-mov
+fbZ
 ron
 ntq
 ntq
@@ -281171,7 +281655,7 @@ mov
 mov
 mov
 mNU
-dIO
+fbZ
 lqp
 ntq
 qGw
@@ -281685,7 +282169,7 @@ xAc
 hZE
 hZE
 hZE
-hZE
+dCP
 lqp
 lqp
 qGw
@@ -281942,8 +282426,8 @@ hZE
 hZE
 hZE
 hZE
-qyJ
-ccI
+hZE
+rVE
 lqp
 kno
 kno

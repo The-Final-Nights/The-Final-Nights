@@ -216,7 +216,7 @@
 	minimal_generation = 10
 	minimum_character_age = 100
 
-	v_duty = "Offer your infinite knowledge to Prince of the City, while overseeing the Banu Haqim in the city. Monitor their contracts and ensure they remain true to the ways of the Clan. You have an official cover with the Police Department as a local civilian consultant, ensure things run smoothly, on either end."
+	v_duty = "Offer your infinite knowledge to Prince of the City, while overseeing the Banu Haqim in the city. Monitor their contracts and ensure they remain true to the ways of the Clan. You have an official cover with the Police Department as a forensic analyst. Ensure things run smoothly, on either end."
 	experience_addition = 20
 	minimal_masquerade = 5
 	my_contact_is_important = TRUE
@@ -228,7 +228,7 @@
 
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/yellow
-	uniform = /obj/item/clothing/under/vampire/bandit
+	uniform = /obj/item/clothing/under/vampire/turtleneck_navy
 	suit = /obj/item/clothing/suit/vampire/jacket/punk
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone/banu
