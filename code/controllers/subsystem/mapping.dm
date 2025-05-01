@@ -54,18 +54,17 @@ SUBSYSTEM_DEF(mapping)
 	///associative list of the form: list("[z level num]" = max generator gravity in that z level OR the gravity level trait)
 	var/list/gravity_by_z_level = list()
 
-/datum/controller/subsystem/mapping/New()
+/datum/controller/subsystem/mapping/PreInit()
 	..()
 #ifdef FORCE_MAP
-		config = load_map_config(FORCE_MAP)
+	config = load_map_config(FORCE_MAP)
 #else
-		config = load_map_config(error_if_missing = FALSE)
+	config = load_map_config(error_if_missing = FALSE)
 #endif
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
-	HACK_LoadMapConfig()
 	if(initialized)
-		return
+		return TRUE
 	if(config.defaulted)
 		var/old_config = config
 		config = global.config.defaultmap
@@ -77,7 +76,6 @@ SUBSYSTEM_DEF(mapping)
 	repopulate_sorted_areas()
 	process_teleport_locs()			//Sets up the wizard teleport locations
 	preloadTemplates()
-	run_map_generation()
 
 #ifndef LOWMEMORYMODE
 	// Create space ruin levels
@@ -102,10 +100,8 @@ SUBSYSTEM_DEF(mapping)
 	setup_map_transitions()
 	generate_station_area_list()
 	initialize_reserved_level(transit.z_value)
-	SSticker.OnRoundstart(CALLBACK(src, .proc/spawn_maintenance_loot))
 	generate_z_level_linkages()
 	calculate_default_z_level_gravities()
-
 	return ..()
 
 /datum/controller/subsystem/mapping/proc/calculate_default_z_level_gravities()
@@ -176,16 +172,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/space_ruins = levels_by_trait(ZTRAIT_SPACE_RUINS)
 	if (space_ruins.len)
 		seedRuins(space_ruins, CONFIG_GET(number/space_budget), list(/area/space), space_ruins_templates)
-	loading_ruins = FALSE
-#endif
-	// Add the transit level
-	transit = add_new_zlevel("Transit/Reserved", list(ZTRAIT_RESERVED = TRUE))
-	repopulate_sorted_areas()
-	// Set up Z-level transitions.
-	setup_map_transitions()
-	generate_station_area_list()
-	initialize_reserved_level(transit.z_value)
-	return ..()
+
 
 /datum/controller/subsystem/mapping/proc/wipe_reservations(wipe_safety_delay = 100)
 	if(clearing_reserved_turfs || !initialized)			//in either case this is just not needed.
