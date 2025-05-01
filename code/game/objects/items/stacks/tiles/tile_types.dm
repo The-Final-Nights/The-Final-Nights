@@ -414,6 +414,9 @@
 		/obj/item/stack/tile/bronze/filled,
 		)
 
+/obj/item/stack/tile/eighties/loaded
+	amount = 30
+
 /obj/item/stack/tile/bronze/flat
 	name = "flat bronze tile"
 	singular_name = "flat bronze floor tile"
