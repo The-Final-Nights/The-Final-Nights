@@ -31,7 +31,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 		if ((possible_target != src) && ishuman(possible_target.current))
 			possible_targets += possible_target.current
 
-	possible_targets = list("Free objective", "Random") + sortNames(possible_targets)
+	possible_targets = list("Free objective", "Random") + sort_names(possible_targets)
 
 
 	if(target?.current)
@@ -594,7 +594,7 @@ GLOBAL_LIST_EMPTY(possible_items)
 
 /datum/objective/steal/admin_edit(mob/admin)
 	var/list/possible_items_all = GLOB.possible_items
-	var/new_target = input(admin,"Select target:", "Objective target", steal_target) as null|anything in sortNames(possible_items_all)+"custom"
+	var/new_target = input(admin,"Select target:", "Objective target", steal_target) as null|anything in sort_names(possible_items_all)+"custom"
 	if (!new_target)
 		return
 
@@ -862,7 +862,7 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 /datum/objective/destroy/admin_edit(mob/admin)
 	var/list/possible_targets = active_ais(1)
 	if(possible_targets.len)
-		var/mob/new_target = input(admin,"Select target:", "Objective target") as null|anything in sortNames(possible_targets)
+		var/mob/new_target = input(admin,"Select target:", "Objective target") as null|anything in sort_names(possible_targets)
 		target = new_target.mind
 	else
 		to_chat(admin, "<span class='boldwarning'>No active AIs with minds.</span>")
@@ -935,7 +935,7 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 /proc/generate_admin_objective_list()
 	GLOB.admin_objective_list = list()
 
-	var/list/allowed_types = sortList(list(
+	var/list/allowed_types = sort_list(list(
 		/datum/objective/assassinate,
 		/datum/objective/maroon,
 		/datum/objective/debrain,

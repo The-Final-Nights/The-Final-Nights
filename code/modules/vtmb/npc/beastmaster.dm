@@ -130,7 +130,7 @@ SUBSYSTEM_DEF(beastmastering)
 		if(get_dist(src, targa) <= 1)
 			ClickOn(targa)
 	else
-		if(follow && isturf(beastmaster.loc))
+		if(follow && isturf(beastmaster?.loc))
 			if( (z != beastmaster.z) & (get_dist(beastmaster.loc, loc) <= 10) )
 				forceMove(get_turf(beastmaster))
 			else
@@ -139,7 +139,7 @@ SUBSYSTEM_DEF(beastmastering)
 		else
 			walk(src, 0)
 
-/mob/living/simple_animal/hostile/beastmaster/proc/add_beastmaster_enemies(var/mob/living/L)
+/mob/living/simple_animal/hostile/beastmaster/proc/add_beastmaster_enemies(mob/living/L)
 	if(istype(L, /mob/living/simple_animal/hostile/beastmaster))
 		var/mob/living/simple_animal/hostile/beastmaster/M = L
 		if(M.beastmaster == beastmaster)

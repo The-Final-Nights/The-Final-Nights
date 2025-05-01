@@ -335,7 +335,6 @@
 /area/vtm/interior/penumbra)
 "dr" = (
 /obj/structure/trad{
-	layer = 6;
 	pixel_y = 32
 	},
 /obj/effect/decal/litter,
@@ -614,9 +613,7 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
 "gf" = (
-/obj/structure/vamptree/pine{
-	layer = 5
-	},
+/obj/structure/vamptree/pine,
 /obj/structure/flora/ausbushes/brflowers,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
@@ -844,9 +841,7 @@
 	},
 /area/vtm/interior/penumbra)
 "iW" = (
-/obj/structure/vamptree/pine{
-	layer = 2.5
-	},
+/obj/structure/vamptree/pine,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
 	},
@@ -1146,7 +1141,6 @@
 /area/vtm/interior/penumbra)
 "mn" = (
 /obj/structure/table/wood,
-/obj/structure/table/wood,
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "mo" = (
@@ -1162,8 +1156,7 @@
 "mz" = (
 /obj/structure/trashcan,
 /obj/item/clothing/glasses/regular/hipster{
-	anchored = 1;
-	layer = 5
+	anchored = 1
 	},
 /turf/open/floor/plating/vampwood{
 	umbra = 1
@@ -1199,8 +1192,7 @@
 "nb" = (
 /obj/structure/trashcan,
 /obj/item/clothing/glasses/regular/circle{
-	anchored = 1;
-	layer = 6
+	anchored = 1
 	},
 /turf/open/floor/plating/vampwood{
 	umbra = 1
@@ -2186,7 +2178,6 @@
 "xP" = (
 /obj/structure/railing{
 	dir = 1;
-	layer = 4;
 	pixel_y = 6
 	},
 /turf/open/floor/plating/concrete{
@@ -2210,7 +2201,6 @@
 "yk" = (
 /obj/structure/railing{
 	dir = 1;
-	layer = 4;
 	pixel_y = 6
 	},
 /turf/open/floor/plating/umbra,
@@ -2224,7 +2214,6 @@
 "yo" = (
 /obj/structure/railing{
 	dir = 1;
-	layer = 4;
 	pixel_y = 6
 	},
 /obj/effect/decal/trash,
@@ -2293,9 +2282,7 @@
 /area/vtm/interior/penumbra)
 "zb" = (
 /obj/weapon_showcase,
-/obj/item/shard{
-	layer = 5
-	},
+/obj/item/shard,
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "ze" = (
@@ -2702,9 +2689,7 @@
 	},
 /area/vtm/interior/penumbra)
 "Dy" = (
-/obj/structure/vamptree/pine{
-	layer = 2.5
-	},
+/obj/structure/vamptree/pine,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "DD" = (
@@ -3187,7 +3172,6 @@
 /area/vtm/interior/penumbra)
 "Iz" = (
 /obj/structure/table,
-/obj/structure/table,
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "IG" = (
@@ -3462,7 +3446,7 @@
 /area/vtm/interior/penumbra)
 "Lv" = (
 /obj/effect/landmark/teleport_mark{
-	tribe = "Glasswalkers"
+	tribe = "Glass Walkers"
 	},
 /turf/open/floor/plating/vampcanal{
 	umbra = 1
@@ -3717,7 +3701,6 @@
 "Pc" = (
 /obj/structure/table,
 /obj/structure/window/reinforced/indestructable{
-	dir = 1;
 	icon_state = "rwindow"
 	},
 /turf/open/floor/plating/concrete{
@@ -3820,9 +3803,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
-/obj/structure/vamptree/pine{
-	layer = 5
-	},
+/obj/structure/vamptree/pine,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "PP" = (
@@ -3903,9 +3884,7 @@
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "Ry" = (
-/obj/structure/vamptree/pine{
-	layer = 2.5
-	},
+/obj/structure/vamptree/pine,
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -4099,9 +4078,7 @@
 	},
 /area/vtm/interior/penumbra)
 "TI" = (
-/obj/structure/vamptree/pine{
-	layer = 5
-	},
+/obj/structure/vamptree/pine,
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)

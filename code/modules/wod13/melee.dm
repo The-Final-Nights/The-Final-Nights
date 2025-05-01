@@ -172,27 +172,27 @@
 	is_iron = TRUE
 
 /obj/item/melee/vampirearms/machete
-    name = "machete"
-    desc = "A certified chopper fit for the jungles...but you don't see any vines around. Well-weighted enough to be thrown."
-    icon = 'code/modules/wod13/weapons.dmi'
-    icon_state = "machete"
-    flags_1 = CONDUCT_1
-    force = 25
-    throwforce = 30
-    w_class = WEIGHT_CLASS_BULKY
-    slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
-    block_chance = 40
-    armour_penetration = 25
-    sharpness = SHARP_EDGED
-    attack_verb_continuous = list("slashes", "cuts")
-    attack_verb_simple = list("slash", "cut")
-    hitsound = 'sound/weapons/rapierhit.ogg'
-    wound_bonus = 5
-    bare_wound_bonus = 25
-    pixel_w = -8
-    resistance_flags = FIRE_PROOF
-    masquerade_violating = FALSE
-    cost = 150
+	name = "machete"
+	desc = "A certified chopper fit for the jungles...but you don't see any vines around. Well-weighted enough to be thrown."
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "machete"
+	flags_1 = CONDUCT_1
+	force = 25
+	throwforce = 30
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+	block_chance = 40
+	armour_penetration = 25
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 5
+	bare_wound_bonus = 25
+	pixel_w = -8
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = FALSE
+	cost = 150
 
 /obj/item/melee/vampirearms/sabre
 	name = "sabre"
@@ -511,6 +511,23 @@
 		L.Immobilize(3 SECONDS)
 		if(L.body_position != LYING_DOWN)
 			L.toggle_resting()
+	return ..()
+
+/obj/item/melee/touch_attack/werewolf/gift_of_the_termite
+	name = "\improper gift of the termite"
+	desc = "REJECT ALL BOUNDARIES."
+
+/obj/item/melee/touch_attack/werewolf/gift_of_the_termite/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity)
+		return
+	if(istype(target,/turf/closed/wall))
+		var/turf/closed/wall/twall = target
+		for(var/obj/matrix in orange(1,twall))
+			to_chat(user, "This particular wall feels reinforced too harshly by the veil to dissolve.")
+			return
+		twall.dismantle_wall(1,0)
+		if(user.CheckEyewitness(user, user, 7, FALSE))
+			user.adjust_veil(-2)
 	return ..()
 
 /obj/item/melee/vampirearms/knife/gangrel/Initialize()

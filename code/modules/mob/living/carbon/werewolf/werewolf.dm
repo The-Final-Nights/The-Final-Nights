@@ -32,6 +32,7 @@
 	see_in_dark = 2
 	verb_say = "woofs"
 	rotate_on_lying = 0
+	initial_language_holder = /datum/language_holder/werewolf_transformed
 
 	movement_type = GROUND // [ChillRaccoon] - fucking flying werewolfes is a meme
 
@@ -74,6 +75,7 @@
 
 	var/step_variable = 0
 
+	var/wyrm_tainted = 0
 	var/werewolf_armor = 0
 
 	var/assigned_quirks = FALSE
@@ -93,7 +95,7 @@
 			playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_step.ogg', 50, FALSE)
 	..()
 
-/mob/living/carbon/proc/epic_fall(var/apply_stun_self = TRUE, var/apply_stun_others = TRUE) //This proc is only called for Potence jumps. I have no idea why its stored here.
+/mob/living/carbon/proc/epic_fall(apply_stun_self = TRUE, apply_stun_others = TRUE) //This proc is only called for Potence jumps. I have no idea why its stored here.
 	playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_fall.ogg', 100, FALSE)
 	new /obj/effect/temp_visual/dir_setting/crack_effect(get_turf(src))
 	new /obj/effect/temp_visual/dir_setting/fall_effect(get_turf(src))
@@ -108,6 +110,9 @@
 /mob/living/carbon/werewolf/Initialize()
 	var/datum/action/gift/rage_heal/GH = new()
 	GH.Grant(src)
+	var/datum/action/gift/howling/howl = new()
+	howl.Grant(src)
+
 	add_verb(src, /mob/living/proc/mob_sleep)
 	add_verb(src, /mob/living/proc/toggle_resting)
 
@@ -197,6 +202,7 @@
 	. = ..()
 	var/datum/action/change_apparel/A = new()
 	A.Grant(src)
+
 //	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
 
 /mob/living/carbon/werewolf/lupus/Initialize()

@@ -94,7 +94,7 @@
 			to_chat(X, "<B><span class='mentorto'>Mentor PM: [key_name_mentor(src, !!X)]-&gt;[key_name_mentor(recipient, !!X)]:</B> <span class='mentorhelp'>[msg]</span>", type = MESSAGE_TYPE_MENTORPM) //inform X
 
 /// Basically the same thing as key_name_admin but with the mentorPM key instead
-/proc/key_name_mentor(var/whom, var/include_link = null)
+/proc/key_name_mentor(whom, include_link = null)
 	var/mob/M
 	var/client/C
 	var/key
@@ -128,7 +128,7 @@
 
 	if(key)
 		if(include_link)
-			. += "<a href='?_src_=mentor;mentor_msg=[ckey];'>"
+			. += "<a href='byond://?_src_=mentor;mentor_msg=[ckey];'>"
 		if(C && C.holder && C.holder.fakekey)
 			. += "Administrator"
 		else

@@ -9,3 +9,11 @@
 #define CONFIG_ENTRY_LOCKED 1
 /// can't see value
 #define CONFIG_ENTRY_HIDDEN 2
+
+//Migrated from config_entry.dm due to widespread use outside of local file. Used for various config file associated chicanery
+#define VALUE_MODE_NUM 0
+#define VALUE_MODE_TEXT 1
+#define VALUE_MODE_FLAG 2
+
+#define KEY_MODE_TEXT 0
+#define KEY_MODE_TYPE 1

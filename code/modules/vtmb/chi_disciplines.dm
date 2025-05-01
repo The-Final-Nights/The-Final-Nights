@@ -1280,11 +1280,11 @@
 			target.add_splatter_floor(get_turf(target))
 			target.add_splatter_floor(get_turf(get_step(target, caster.dir)))
 			switch(SSroll.storyteller_roll(mypower, target_phys + 3))
-				if(DICE_WIN, DICE_CRIT_WIN)
+				if(ROLL_SUCCESS)
 					target.apply_damage(5*mypower, BRUTE)
 					target.apply_damage(2*mypower, CLONE)
 					target.visible_message("<span class='danger'>[target]'s flesh tears!</span>", "<span class='userdanger'>[caster]'s scream rips the flesh from your bones!</span>")
-				if(DICE_FAILURE, DICE_CRIT_FAILURE)
+				if(ROLL_FAILURE, ROLL_BOTCH)
 					target.apply_damage(3*mypower, BRUTE)
 					target.visible_message("<span class='danger'>Bleeding wounds open up on [target]!</span>", "<span class='userdanger'>[caster]'s scream tears at your flesh!</span>")
 		if(5)
@@ -1552,7 +1552,7 @@
 	icon_state = "zapper"
 	inhand_icon_state = "zapper"
 
-/obj/item/melee/touch_attack/storm_shintai/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/melee/touch_attack/storm_shintai/afterattack(atom/target, mob/living/carbon/human/user, proximity)
 	if(!proximity || target == user || !isliving(target) || !iscarbon(user)) //getting hard after touching yourself would also be bad
 		return
 	if(!(user.mobility_flags & MOBILITY_USE))
@@ -1565,6 +1565,8 @@
 		..()
 		return
 	human_target.electrocute_act(50, src, siemens_coeff = 1, flags = NONE)
+	if(user.CheckEyewitness(user, user, 7, FALSE))
+		user.AdjustMasquerade(-1)
 	return ..()
 
 /obj/item/gun/magic/hook/storm_shintai
@@ -2074,7 +2076,7 @@
 	color = "#343434"
 	inhand_icon_state = "mansus"
 
-/obj/item/melee/touch_attack/yin_touch/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/melee/touch_attack/yin_touch/afterattack(atom/target, mob/living/carbon/human/user, proximity)
 	if(!proximity)
 		return
 	if(istype(target, /obj/structure/vampdoor))
@@ -2088,6 +2090,8 @@
 		door_item.throw_at(throw_target, rand(2, 4), 4, src)
 		qdel(target)
 	if(isliving(target))
+		if(user.CheckEyewitness(user, user, 7, FALSE))
+			user.AdjustMasquerade(-1)
 		var/mob/living/target_mob = target
 		target_mob.adjustCloneLoss(20)
 		target_mob.AdjustKnockdown(2 SECONDS)

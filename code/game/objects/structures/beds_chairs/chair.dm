@@ -237,6 +237,8 @@
 	buildstackamount = 1
 	item_chair = /obj/item/chair/stool
 
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool, 0)
+
 /obj/structure/chair/stool/narsie_act()
 	return
 
@@ -262,6 +264,8 @@
 	desc = "It has some unsavory stains on it..."
 	icon_state = "bar"
 	item_chair = /obj/item/chair/stool/bar
+
+MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 
 /obj/item/chair
 	name = "chair"

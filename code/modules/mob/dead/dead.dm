@@ -38,6 +38,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	. = ..()
 	. += ""
 	. += "Game Mode: [SSticker.hide_mode ? "Secret" : "[GLOB.master_mode]"]"
+	. += "Late Party: [length(SSbad_guys_party.candidates)]/[SSbad_guys_party.go_on_next_fire == TRUE ? SSbad_guys_party.max_candidates : "???"] in [round((SSbad_guys_party.next_fire - world.time) / 10)]s"
 
 	if(SSticker.HasRoundStarted())
 		return

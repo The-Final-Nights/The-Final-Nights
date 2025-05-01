@@ -14,6 +14,7 @@
 	dust_anim = "dust-h"
 	whitelisted = FALSE
 	selectable = TRUE
+	species_language_holder = /datum/language_holder/werewolf
 	var/glabro = FALSE
 
 /datum/action/garouinfo
@@ -40,7 +41,7 @@
 			dat += "[host.real_name],"
 		if(!host.real_name)
 			dat += "Unknown,"
-		dat += " [host.auspice.tribe] [host.auspice.base_breed]"
+		dat += " [host.auspice.tribe.name] [host.auspice.base_breed]"
 		if(host.mind)
 
 			if(host.mind.assigned_role)
@@ -55,6 +56,19 @@
 			for(var/datum/antagonist/A in host.mind.antag_datums)
 				if(A.objectives)
 					dat += "[printobjectives(A.objectives)]<BR>"
+		var/masquerade_level = " have followed the rules tonight."
+		switch(host.masquerade)
+			if(4)
+				masquerade_level = " have made a faux pas tonight."
+			if(3)
+				masquerade_level = " have made a few issues tonight."
+			if(2)
+				masquerade_level = " have erred tonight."
+			if(1)
+				masquerade_level = " have acted foolishly and caused an uproar."
+			if(0)
+				masquerade_level = " should beg our totem for forgiveness."
+		dat += "My sect thinks I[masquerade_level]<BR>"
 
 		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
 		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
@@ -62,7 +76,17 @@
 		dat += "<b>Mentality</b>: [host.mentality] + [host.additional_mentality]<BR>"
 		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
 		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
-		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
+		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR><BR>"
+		dat += "<b>Gnosis</b>: [host.auspice.gnosis]<BR>"
+		dat += "<b>Rank</b>: [RankName(host.renownrank)]<BR>"
+		if(host.auspice.tribe.name == "Black Spiral Dancers")
+			dat += "<b>Power</b>: [host.honor]<BR>"
+			dat += "<b>Infamy</b>: [host.glory]<BR>"
+			dat += "<b>Cunning</b>: [host.wisdom]<BR>"
+		else
+			dat += "<b>Honor</b>: [host.honor]<BR>"
+			dat += "<b>Glory</b>: [host.glory]<BR>"
+			dat += "<b>Wisdom</b>: [host.wisdom]<BR>"
 		if(host.Myself)
 			if(host.Myself.Friend)
 				if(host.Myself.Friend.owner)
@@ -93,7 +117,7 @@
 				if(H.bank_id == account.bank_id)
 					dat += "<b>My bank account code is: [account.code]</b><BR>"
 		host << browse(dat, "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
-		onclose(HTML_SKELETON(host), "vampire", src)
+		onclose(host, "vampire", src)
 
 /datum/species/garou/on_species_gain(mob/living/carbon/human/C)
 	. = ..()
@@ -106,6 +130,8 @@
 	glabro.Grant(C)
 	var/datum/action/gift/rage_heal/GH = new()
 	GH.Grant(C)
+	var/datum/action/gift/howling/howl = new()
+	howl.Grant(C)
 	C.transformator = new(C)
 	C.transformator.human_form = WEAKREF(C)
 
@@ -135,7 +161,7 @@
 /datum/species/garou/check_roundstart_eligible()
 	return FALSE
 
-/proc/adjust_rage(var/amount, var/mob/living/carbon/C, var/sound = TRUE)
+/proc/adjust_rage(amount, mob/living/carbon/C, sound = TRUE)
 	if(amount > 0)
 		if(C.auspice.rage < 10)
 			if(sound)
@@ -150,7 +176,7 @@
 			to_chat(C, "<span class='userdanger'><b>RAGE DECREASES</b></span>")
 	C.update_rage_hud()
 
-/proc/adjust_gnosis(var/amount, var/mob/living/carbon/C, var/sound = TRUE)
+/proc/adjust_gnosis(amount, mob/living/carbon/C, sound = TRUE)
 	if(amount > 0)
 		if(C.auspice.gnosis < C.auspice.start_gnosis)
 			if(sound)
