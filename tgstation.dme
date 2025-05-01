@@ -2126,6 +2126,7 @@
 #include "code\modules\industrial_lift\tram_walls.dm"
 #include "code\modules\instruments\items.dm"
 #include "code\modules\instruments\stationary.dm"
+#include "code\modules\instruments\instrument_data\_instrument_data.dm"
 #include "code\modules\instruments\instrument_data\_instrument_key.dm"
 #include "code\modules\instruments\instrument_data\brass.dm"
 #include "code\modules\instruments\instrument_data\chromatic_percussion.dm"
