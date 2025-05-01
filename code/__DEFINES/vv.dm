@@ -137,3 +137,6 @@
 
 // paintings
 #define VV_HK_REMOVE_PAINTING "remove_painting"
+
+// weakrefs
+#define VV_HK_WEAKREF_RESOLVE "weakref_resolve"
