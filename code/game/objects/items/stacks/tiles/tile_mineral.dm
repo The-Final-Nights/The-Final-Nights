@@ -45,7 +45,6 @@
 		return ..()
 
 /obj/item/stack/tile/mineral/plasma/fire_act(exposed_temperature, exposed_volume)
-	atmos_spawn_air("plasma=[amount*2.5];TEMP=[exposed_temperature]")
 	qdel(src)
 
 /obj/item/stack/tile/mineral/uranium

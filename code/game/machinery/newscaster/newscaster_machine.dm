@@ -511,7 +511,7 @@
 	playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
 	if((machine_stat & BROKEN))
 		to_chat(user, span_warning("The broken remains of [src] fall on the ground."))
-		new /obj/item/stack/sheet/metal(loc, 5)
+		new /obj/item/stack/sheet/iron(loc, 5)
 		new /obj/item/shard(loc)
 		new /obj/item/shard(loc)
 	else
@@ -532,7 +532,7 @@
 
 
 /obj/machinery/newscaster/on_deconstruction(disassembled)
-	new /obj/item/stack/sheet/metal(loc, 2)
+	new /obj/item/stack/sheet/iron(loc, 2)
 	new /obj/item/shard(loc)
 	new /obj/item/shard(loc)
 
