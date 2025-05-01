@@ -376,7 +376,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 		QDEL_IN(src, 4 SECONDS)
 		if(demon.Adjacent(target) && !charged)
 			charged = TRUE
-			target.Paralyze(6 SECONDS)
+			target.Paralyze(1 SECONDS)
 			target.adjustStaminaLoss(200)
 			step_away(target, demon)
 			target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
