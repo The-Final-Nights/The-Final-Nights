@@ -1,5 +1,5 @@
 /obj/item/gun/energy/taser/twoshot
-	name = "taser gun"
+	name = "V26 taser"
 	desc = "A less-than-lethal stun gun. Fires an electrode pair that will impale and electrocute noncompliant suspects. Holds two rechargable cartridges."
 	icon = 'modular_tfn/modules/taser_tfn13/taser.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
