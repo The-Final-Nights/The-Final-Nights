@@ -228,9 +228,9 @@
 
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/yellow
-	uniform = /obj/item/clothing/under/vampire/bandit
+	uniform = /obj/item/clothing/under/vampire/turtleneck_navy
 	suit = /obj/item/clothing/suit/vampire/jacket/punk
-	shoes = /obj/item/clothing/shoes/vampire/jackboots
+	shoes = /obj/item/clothing/shoes/vampire/jackboots/punk
 	l_pocket = /obj/item/vamp/phone/banu
 	r_pocket = /obj/item/cockclock
 	backpack_contents = list(/obj/item/vamp/keys/banuhaqim/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
