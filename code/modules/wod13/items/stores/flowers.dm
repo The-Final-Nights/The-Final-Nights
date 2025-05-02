@@ -16,6 +16,7 @@
 		new /datum/data/mining_equipment("Aero Scour™ herbicide",	/obj/item/reagent_containers/spray/weedspray,	15),
 		new /datum/data/mining_equipment("Scour™ herbicide", /obj/item/reagent_containers/spray/plantbgone,	12),
 		new /datum/data/mining_equipment("Vanguard pesticide",	/obj/item/reagent_containers/spray/pestspray,	20),
+		new	/datum/data/mining_equipment("Spade",	/obj/item/shovel/spade,	11),
 		new /datum/data/mining_equipment("Garden Rake",	 /obj/item/cultivator/rake,	20),
 		new /datum/data/mining_equipment("Hatchet",	/obj/item/hatchet,	20),
 		new /datum/data/mining_equipment("Gardening Scythe",	/obj/item/scythe,	30),

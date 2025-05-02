@@ -40,16 +40,9 @@
 	cost = 100
 	contains = list(
 		/obj/item/bailer,
-		/obj/item/weedseed = 5,
+		/obj/item/seeds/cannabis = 3,
 	)
 	crate_name = "dispenser hydro crate"
-
-/datum/supply_pack/vampire/weed_tray
-	name = "Weed Tray"
-	desc = "Contains a tray of weed."
-	cost = 300
-	contains = list(/obj/structure/weedshit/buyable)
-	crate_name = "weed crate"
 
 /datum/supply_pack/vampire/methlab
 	name = "Lab Equipment"

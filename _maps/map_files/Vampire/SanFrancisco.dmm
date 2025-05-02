@@ -2482,13 +2482,9 @@
 /area/vtm/forest)
 "aGG" = (
 /obj/structure/table,
-/obj/item/weedseed{
-	pixel_x = -8
-	},
-/obj/item/weedseed,
-/obj/item/weedseed{
-	pixel_x = 8
-	},
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
 "aGO" = (
@@ -6002,10 +5998,10 @@
 "bCI" = (
 /obj/structure/closet/crate/large,
 /obj/effect/decal/pallet,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/setite)
 "bCR" = (
@@ -6198,7 +6194,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower)
 "bFo" = (
-/obj/item/weedpack,
+/obj/item/food/grown/cannabis,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "bFt" = (
@@ -7333,27 +7329,13 @@
 /area/vtm/interior/chantry)
 "bWE" = (
 /obj/structure/table/wood,
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "bWF" = (
@@ -7878,7 +7860,7 @@
 /area/vtm/fishermanswharf/lower)
 "cfJ" = (
 /obj/structure/table/wood,
-/obj/item/weedpack,
+/obj/item/food/grown/cannabis,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "cfM" = (
@@ -10624,7 +10606,7 @@
 /area/vtm/interior/millennium_tower)
 "cOQ" = (
 /obj/structure/table/wood,
-/obj/item/weedpack,
+/obj/item/food/grown/cannabis,
 /turf/open/floor/carpet,
 /area/vtm/interior/cog/pantry)
 "cPh" = (
@@ -11445,11 +11427,7 @@
 	dir = 9
 	},
 /obj/structure/closet/secure_closet/evidence,
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
+/obj/item/food/grown/cannabis,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/police)
 "dbg" = (
@@ -14012,10 +13990,10 @@
 /area/vtm/interior/giovanni)
 "dLe" = (
 /obj/structure/table,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
 "dLg" = (
@@ -14024,10 +14002,10 @@
 /area/vtm/interior/oldchurch)
 "dLh" = (
 /obj/structure/table,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "dLq" = (
@@ -14272,7 +14250,7 @@
 /area/vtm/interior/banu)
 "dQm" = (
 /obj/structure/table,
-/obj/item/weedpack,
+/obj/item/food/grown/cannabis,
 /obj/item/lighter,
 /turf/open/floor/plating,
 /area/vtm/interior)
@@ -18105,8 +18083,8 @@
 /area/vtm/interior/laundromat)
 "eTX" = (
 /obj/structure/table/wood,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/mansion)
 "eUa" = (
@@ -19359,9 +19337,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
 "fmn" = (
-/obj/structure/weedshit{
-	pixel_y = 4
-	},
+/obj/machinery/hydroponics,
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_x = -16
@@ -21248,7 +21224,7 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "fLj" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
@@ -21864,9 +21840,7 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior/tzimisce_manor)
 "fSU" = (
-/obj/structure/weedshit{
-	pixel_y = 4
-	},
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "fSY" = (
@@ -25185,9 +25159,9 @@
 "gLx" = (
 /obj/effect/decal/cardboard,
 /obj/structure/closet/crate,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "gLz" = (
@@ -25683,7 +25657,7 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
 "gSn" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/machinery/light/small/pink{
 	dir = 8;
 	pixel_x = 16
@@ -27537,7 +27511,7 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/shop)
 "hta" = (
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
 "htd" = (
@@ -31692,7 +31666,7 @@
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
 "iCH" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
@@ -35017,9 +34991,9 @@
 /area/vtm/financialdistrict)
 "jxW" = (
 /obj/structure/rack,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "jxY" = (
@@ -35171,11 +35145,7 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "jAj" = (
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
+/obj/item/food/grown/cannabis,
 /turf/closed/wall/vampwall/rich/old/low,
 /area/vtm/interior/strip)
 "jAm" = (
@@ -37170,14 +37140,14 @@
 	dir = 4
 	},
 /obj/structure/table,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/cog/caern)
 "kcP" = (
@@ -37559,21 +37529,11 @@
 /obj/machinery/light/small/pink{
 	dir = 1
 	},
-/obj/item/weedseed{
-	pixel_y = 8
-	},
-/obj/item/weedseed{
-	pixel_y = 8
-	},
-/obj/item/weedseed{
-	pixel_y = 8
-	},
-/obj/item/weedseed{
-	pixel_y = 8
-	},
-/obj/item/weedseed{
-	pixel_y = 8
-	},
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
 "kiB" = (
@@ -38656,10 +38616,7 @@
 /area/vtm/ghetto)
 "kzo" = (
 /obj/structure/glowshroom/single,
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
+/obj/item/food/grown/cannabis,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
 "kzs" = (
@@ -39423,7 +39380,7 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/tzimisce_manor)
 "kJu" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
@@ -39958,7 +39915,7 @@
 /turf/closed/wall/vampwall,
 /area/vtm/hotel)
 "kRO" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
 	},
@@ -41481,7 +41438,7 @@
 /turf/open/openspace,
 /area/vtm/jazzclub)
 "llB" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/machinery/light/small/pink{
 	pixel_y = 32
 	},
@@ -43047,7 +43004,7 @@
 /turf/open/openspace,
 /area/vtm/interior/tzimisce_manor)
 "lIv" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
 	},
@@ -44435,7 +44392,7 @@
 /area/vtm/interior/millennium_tower/f2)
 "mcK" = (
 /obj/structure/table/wood,
-/obj/item/weedpack,
+/obj/item/food/grown/cannabis,
 /turf/open/floor/carpet,
 /area/vtm/anarch/basement)
 "mcS" = (
@@ -46015,7 +45972,7 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/trujah)
 "mzs" = (
-/obj/structure/cargo_put,
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/rough,
 /area/vtm/supply)
 "mzA" = (
@@ -48178,8 +48135,8 @@
 /turf/open/floor/plating/stone,
 /area/vtm/interior/endron_facility/forest)
 "ncj" = (
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /obj/structure/closet/crate/large,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
@@ -52256,7 +52213,7 @@
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/financialdistrict)
 "ohn" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/decal/pallet,
 /obj/structure/coclock,
 /turf/open/floor/plating/concrete,
@@ -53253,7 +53210,7 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/oldchurch)
 "ovt" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
@@ -54798,7 +54755,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/mansion)
 "oPh" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
@@ -57424,32 +57381,16 @@
 /area/vtm/interior/strip)
 "pzt" = (
 /obj/structure/table,
-/obj/item/weedseed,
-/obj/item/weedseed{
-	pixel_x = -8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
-/obj/item/weedseed{
-	pixel_x = -8
-	},
-/obj/item/weedseed{
-	pixel_x = -8
-	},
-/obj/item/weedseed{
-	pixel_x = -8
-	},
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "pzv" = (
@@ -57557,10 +57498,10 @@
 /obj/structure/closet/crate,
 /obj/item/bailer,
 /obj/item/bailer,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
 "pAT" = (
@@ -58861,9 +58802,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "pRw" = (
-/obj/structure/weedshit{
-	pixel_y = 4
-	},
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
 "pRC" = (
@@ -60413,10 +60352,7 @@
 /obj/machinery/light/small/pink{
 	pixel_y = 32
 	},
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
+/obj/item/food/grown/cannabis,
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
@@ -67204,7 +67140,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f4)
 "rYR" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/machinery/light/small/pink{
 	dir = 8;
 	pixel_x = 16
@@ -68164,10 +68100,10 @@
 	pixel_y = 32
 	},
 /obj/structure/rack,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
 "slQ" = (
@@ -68670,56 +68606,16 @@
 /area/vtm/interior/cog/caern)
 "ssM" = (
 /obj/structure/closet/crate/large,
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
-/obj/item/weedpack{
-	cost = 30;
-	desc = "Green and TOO smelly... Don't worth so much...";
-	name = "strange green package"
-	},
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
 "ssN" = (
@@ -70084,18 +69980,9 @@
 "sNZ" = (
 /obj/structure/table/wood,
 /obj/item/vamp/keys/hack,
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer/nosferatu_town)
 "sOa" = (
@@ -70694,13 +70581,9 @@
 /area/vtm/clinic)
 "sXX" = (
 /obj/structure/table,
-/obj/item/weedseed,
-/obj/item/weedseed{
-	pixel_x = -8
-	},
-/obj/item/weedseed{
-	pixel_x = 8
-	},
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /obj/item/lighter,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
@@ -74946,7 +74829,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior/staff)
 "uiE" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/machinery/light/small/pink{
 	dir = 4;
 	pixel_x = -16
@@ -76690,7 +76573,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict/library)
 "uGv" = (
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
 /turf/open/floor/carpet,
 /area/vtm/interior/strip/toreador)
 "uGF" = (
@@ -77534,7 +77417,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "uTo" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
 "uTp" = (
@@ -79154,7 +79037,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility/restricted)
 "vqp" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
 "vqq" = (
@@ -80632,7 +80515,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/forest)
 "vKl" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
 "vKm" = (
@@ -81528,7 +81411,7 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/ventrue)
 "vXm" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /obj/effect/decal/graffiti,
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/concrete,
@@ -84592,7 +84475,7 @@
 	pixel_x = 16
 	},
 /obj/structure/table,
-/obj/item/weedseed,
+/obj/item/seeds/cannabis,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "wPN" = (
@@ -84604,7 +84487,7 @@
 	dir = 4;
 	pixel_x = -16
 	},
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "wPR" = (
@@ -86124,7 +86007,7 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog/caern)
 "xlr" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "xlz" = (
@@ -86164,7 +86047,7 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/graveyard/interior)
 "xlV" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "xlX" = (
@@ -86583,12 +86466,9 @@
 /obj/structure/closet/crate/bin,
 /obj/item/trash/sosjerky,
 /obj/item/bong,
-/obj/item/food/vampire/weed,
-/obj/item/food/vampire/weed{
-	pixel_x = 10;
-	pixel_y = 3
-	},
-/obj/item/food/vampire/weed,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
 /obj/item/food/meat/slab/rawcrab,
 /obj/item/food/meat/slab/rawcrab,
 /turf/open/floor/plating/vampbeach,

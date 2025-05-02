@@ -618,7 +618,7 @@
 		/obj/item/seeds/plump/walkingmushroom = 1,
 		/obj/item/seeds/reishi = 5,
 		/obj/item/seeds/cannabis/rainbow = 1,
-		/obj/item/seeds/cannabis/death = 1,
+		// /obj/item/seeds/cannabis/death = 1,
 		/obj/item/seeds/cannabis/white = 1,
 		/obj/item/seeds/cannabis/ultimate = 1,
 		/obj/item/seeds/replicapod = 5,

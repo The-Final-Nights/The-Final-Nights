@@ -10,12 +10,12 @@
 	potency = 20
 	growthstages = 1
 	instability = 40
-	growing_icon = 'icons/obj/power.dmi'
-	icon_grow = "smes" // Uses one growth icons set for all the subtypes
-	icon_dead = "smes" // Same for the dead icon
+	growing_icon = 'icons/obj/hydroponics/growing.dmi'
+	icon_grow = "cannabis-grow" // Uses one growth icons set for all the subtypes
+	icon_dead = "cannabis-dead" // Same for the dead icon
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/cannabis/rainbow,
-						/obj/item/seeds/cannabis/death,
+						// /obj/item/seeds/cannabis/death,
 						/obj/item/seeds/cannabis/white,
 						/obj/item/seeds/cannabis/ultimate)
 	reagents_add = list(/datum/reagent/drug/cannabis = 0.15, /datum/reagent/toxin/lipolicide = 0.35) // gives u the munchies
@@ -32,7 +32,7 @@
 	reagents_add = list(/datum/reagent/colorful_reagent = 0.05, /datum/reagent/medicine/psicodine = 0.03, /datum/reagent/drug/happiness = 0.1, /datum/reagent/toxin/mindbreaker = 0.1, /datum/reagent/toxin/lipolicide = 0.15)
 	rarity = 40
 
-/obj/item/seeds/cannabis/death
+/* /obj/item/seeds/cannabis/death
 	name = "pack of deathweed seeds"
 	desc = "These seeds grow into deathweed. Not groovy."
 	icon_state = "seed-blackcannabis"
@@ -41,7 +41,7 @@
 	product = /obj/item/food/grown/cannabis/death
 	mutatelist = list()
 	reagents_add = list(/datum/reagent/toxin/cyanide = 0.35, /datum/reagent/drug/space_drugs = 0.15, /datum/reagent/toxin/lipolicide = 0.15)
-	rarity = 40
+	rarity = 40 */
 
 /obj/item/seeds/cannabis/white
 	name = "pack of lifeweed seeds"
@@ -84,7 +84,7 @@
 
 /obj/item/food/grown/cannabis
 	seed = /obj/item/seeds/cannabis
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/hydroponics/harvest.dmi'
 	name = "cannabis leaf"
 	desc = "Recently legalized in most galaxies."
 	icon_state = "cannabis"
@@ -100,12 +100,12 @@
 	icon_state = "megacannabis"
 	wine_power = 60
 
-/obj/item/food/grown/cannabis/death
+/* /obj/item/food/grown/cannabis/death
 	seed = /obj/item/seeds/cannabis/death
 	name = "death cannabis leaf"
 	desc = "Looks a bit dark. Oh well."
 	icon_state = "blackcannabis"
-	wine_power = 40
+	wine_power = 40 */
 
 /obj/item/food/grown/cannabis/white
 	seed = /obj/item/seeds/cannabis/white
