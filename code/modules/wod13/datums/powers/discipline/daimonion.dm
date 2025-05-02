@@ -173,7 +173,7 @@
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/pre_activation_checks(mob/living/target)
 	if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == ROLL_SUCCESS)
-		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
+		to_chat(owner, span_warning("[target] has too much willpower to induce fear into them!"))
 		return FALSE
 	return TRUE
 
@@ -272,33 +272,36 @@
 	range = 7
 	violates_masquerade = TRUE
 
+	var/initialized_curses = FALSE //can't do this in new since it wouldn't have assigned owner yet. this will do.
 	var/list/curse_names = list()
 	var/list/curses = list()
 
 /datum/discipline_power/daimonion/condemnation/activate(mob/living/target)
 	. = ..()
 	if(LAZYLEN(GLOB.cursed_characters) == 0 || LAZYLEN(GLOB.cursed_characters) > 0 && !(GLOB.cursed_characters.Find(target)))
-		for(var/i in subtypesof(/datum/curse/daimonion))
-			var/datum/curse/daimonion/D = new i
-			curses += D
-			if(owner.generation <= D.genrequired)
-				curse_names += initial(D.name)
+		if(!initialized_curses)
+			for(var/i in subtypesof(/datum/curse/daimonion))
+				var/datum/curse/daimonion/daimonion_curse = new i
+				curses += daimonion_curse
+				if(owner.generation <= daimonion_curse.genrequired)
+					curse_names += initial(daimonion_curse.name)
+				initialized_curses = TRUE
+
 		to_chat(owner, span_userdanger("The greatest of curses come with the greatest of costs. Are you willing to take the risk of total damnation?"))
 		var/chosencurse = tgui_input_list(owner, "Pick a curse to bestow:", "Daimonion", curse_names)
-		if(chosencurse)
-			for(var/datum/curse/daimonion/C in curses)
-				if(C.name == chosencurse)
-					if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == !ROLL_SUCCESS)
-						to_chat(owner, span_warning("Your mind fails to pierce their mind!"))
-						to_chat(target, span_warning("You resists something that tried to pierce your mind."))
-						return
-					C.activate(target)
-					owner.maxbloodpool -= C.bloodcurse
-					if(owner.bloodpool > owner.maxbloodpool)
-						owner.bloodpool = owner.maxbloodpool
-					GLOB.cursed_characters += target
-		for(var/datum/curse/daimonion/curse in curses)
-			qdel(curse)
+		if(!chosencurse)
+			return
+		for(var/datum/curse/daimonion/C in curses)
+			if(C.name == chosencurse)
+				if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == !ROLL_SUCCESS)
+					to_chat(owner, span_warning("Your mind fails to pierce their mind!"))
+					to_chat(target, span_warning("You resists something that tried to pierce your mind."))
+					return
+				C.activate(target)
+				owner.maxbloodpool -= C.bloodcurse
+				if(owner.bloodpool > owner.maxbloodpool)
+					owner.bloodpool = owner.maxbloodpool
+				GLOB.cursed_characters += target
 	else
 		to_chat(owner, span_warning("This one is already cursed!"))
 
