@@ -44,6 +44,7 @@
 		new /datum/data/mining_equipment("camel",	/obj/item/storage/fancy/cigarettes/dromedaryco,	30),
 		new /datum/data/mining_equipment("zippo lighter",	/obj/item/lighter,	20),
 		new /datum/data/mining_equipment("lighter",		/obj/item/lighter/greyscale,	10)
+		new	/datum/data/mining_equipment("Rolling papers",	/obj/item/storage/fancy/rollingpapers,	10),
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/gas
