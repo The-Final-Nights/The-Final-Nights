@@ -15,7 +15,7 @@
 		new /datum/data/mining_equipment("Handcuffs", /obj/item/restraints/handcuffs, 50),
 		new /datum/data/mining_equipment("Black bag", /obj/item/clothing/head/vampire/blackbag, 50),
 		new /datum/data/mining_equipment("snub-nose revolver",	/obj/item/gun/ballistic/vampire/revolver/snub,	100),
-		new /datum/data/mining_equipment("cannabis package",		/obj/item/seeds/cannabis,	700),
+		new /datum/data/mining_equipment("cannabis",		/obj/item/food/grown/cannabis,	700),
 		new /datum/data/mining_equipment("morphine syringe",	/obj/item/reagent_containers/syringe/contraband/morphine,	800),
 		new	/datum/data/mining_equipment("meth package",	/obj/item/reagent_containers/food/drinks/meth,	800),
 		new	/datum/data/mining_equipment("cocaine package",	/obj/item/reagent_containers/food/drinks/meth/cocaine,	800),
