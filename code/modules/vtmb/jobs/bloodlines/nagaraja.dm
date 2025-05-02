@@ -18,7 +18,7 @@
 	species_slots = list("Vampire" = 4)
 
 	v_duty = "One of the Nagaraja bloodline, you're hiding out in this city for one reason or another. You're laying low, acting as a Mortician for the local hospital, dealing with the bodies, and staying out of the other doctors way."
-	duty = "You work in the mourge for the local hospital, dealing with the dead bodies and keeping your workspace clean, while staying out of the way of the other doctors."
+	duty = "You work in the morgue for the local hospital, dealing with the dead bodies and keeping your workspace clean, while staying out of the way of the other doctors."
 	allowed_bloodlines = list("Nagaraja")
 	minimal_masquerade = 0
 
@@ -27,6 +27,7 @@
 	jobtype = /datum/job/vamp/nagaraja
 	r_pocket = /obj/item/vamp/keys/mortician
 	l_pocket = /obj/item/vamp/phone
+	gloves = /obj/item/clothing/gloves/vampire/latex
 	id = /obj/item/cockclock
 	backpack_contents = list(
 		/obj/item/passport=1,
