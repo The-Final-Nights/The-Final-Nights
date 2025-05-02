@@ -50860,6 +50860,14 @@
 /obj/item/vamp/keys/techstore,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/interior/glasswalker)
+"nMR" = (
+/obj/structure/flora/ausbushes/brflowers,
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/reagent_dispensers/watertank/rainbarrel{
+	pixel_y = 10
+	},
+/turf/open/floor/plating/vampgrass,
+/area/vtm/unionsquare)
 "nMW" = (
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/asphalt,
@@ -196255,7 +196263,7 @@ iog
 wsO
 wsO
 kGR
-vgo
+nMR
 gWy
 vgo
 pJo
