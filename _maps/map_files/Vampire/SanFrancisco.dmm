@@ -3496,7 +3496,7 @@
 /area/vtm/northbeach)
 "aUm" = (
 /obj/structure/table,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /obj/item/bong,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
@@ -4210,7 +4210,7 @@
 /area/vtm/jazzclub)
 "bez" = (
 /obj/structure/table,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "beC" = (
@@ -6105,7 +6105,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower)
 "bDQ" = (
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "bDT" = (
@@ -6303,7 +6303,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "bHz" = (
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /obj/structure/sink{
 	pixel_y = 16
 	},
@@ -19658,7 +19658,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /obj/structure/rack,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/cog/caern)
@@ -25331,7 +25331,7 @@
 	pixel_y = 32
 	},
 /obj/structure/rack,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
 "gOB" = (
@@ -39877,7 +39877,7 @@
 	pixel_x = 16
 	},
 /obj/structure/table/wood,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "kRq" = (
@@ -45972,7 +45972,7 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/trujah)
 "mzs" = (
-/obj/machinery/hydroponics,
+/obj/structure/cargo_put,
 /turf/open/floor/plating/rough,
 /area/vtm/supply)
 "mzA" = (
@@ -57496,8 +57496,8 @@
 /area/vtm/interior/chantry)
 "pAS" = (
 /obj/structure/closet/crate,
-/obj/item/bailer,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
+/obj/item/reagent_containers/glass/wateringcan,
 /obj/item/seeds/cannabis,
 /obj/item/seeds/cannabis,
 /obj/item/seeds/cannabis,
@@ -61414,7 +61414,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/trujah)
 "qCA" = (
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
 "qCY" = (
@@ -61517,7 +61517,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/giovanni/basement)
 "qEY" = (
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
 "qFc" = (
@@ -75071,7 +75071,7 @@
 /area/vtm/interior/police/fed)
 "umf" = (
 /obj/structure/table/wood,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/shop)
 "umi" = (
@@ -79421,7 +79421,7 @@
 /obj/structure/toilet{
 	dir = 8
 	},
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip/toreador)
 "vvz" = (
@@ -87600,7 +87600,7 @@
 "xHY" = (
 /obj/structure/table,
 /obj/item/paper_bin,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /obj/machinery/light/red{
 	dir = 4
 	},

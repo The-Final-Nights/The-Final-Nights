@@ -2,3 +2,4 @@
 /obj/item/weedpack : /obj/item/food/grown/cannabis
 /obj/item/weedseed : /obj/item/seeds/cannabis
 /obj/item/food/vampire/weed : /obj/item/food/grown/cannabis
+/obj/item/bailer : /obj/item/reagent_containers/glass/wateringcan

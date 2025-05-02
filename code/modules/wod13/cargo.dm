@@ -13,7 +13,7 @@
 		/obj/item/seeds/pumpkin,
 		/obj/item/seeds/soya,
 		/obj/item/seeds/tomato,
-		/obj/item/bailer,
+		/obj/item/reagent_containers/glass/wateringcan,
 	)
 	crate_name = "veggie crate"
 
@@ -37,10 +37,10 @@
 	crate_name = "hydro crate"
 
 /datum/supply_pack/vampire/weed_supplies
-	desc = "Contains a bailer and some seeds. No trays."
+	desc = "Contains a watering can and some seeds. No trays."
 	cost = 100
 	contains = list(
-		/obj/item/bailer,
+		/obj/item/reagent_containers/glass/wateringcan,
 		/obj/item/seeds/cannabis = 3,
 	)
 	crate_name = "dispenser hydro crate"

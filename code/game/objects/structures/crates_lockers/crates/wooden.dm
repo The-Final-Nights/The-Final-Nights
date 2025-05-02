@@ -34,7 +34,7 @@
 	new /obj/item/reagent_containers/spray/pestspray(src)
 	new	/obj/item/cultivator(src)
 	new	/obj/item/clothing/gloves/botanic_leather(src)
-	new	/obj/item/bailer(src)
+	new	/obj/item/reagent_containers/glass/wateringcan(src)
 
 /obj/structure/closet/crate/wooden/communitygardens/seeds
 	name = "community garden seeds"
