@@ -26,5 +26,6 @@
 		new /datum/data/mining_equipment("Oat seeds", /obj/item/seeds/wheat/oat, 5),
 		new /datum/data/mining_equipment("Aloe seeds", /obj/item/seeds/aloe, 5),
 		new /datum/data/mining_equipment("Bloody Butcher Tomatoes", /obj/item/seeds/tomato/blood, 15),
+		new	/datum/data/mining_equipment("Drying Rack", /obj/machinery/smartfridge/drying_rack, 35),
 		new /datum/data/mining_equipment("Fermentation Barrel",	 /obj/structure/fermenting_barrel,	230),
 		)

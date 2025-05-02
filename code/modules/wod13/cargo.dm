@@ -13,6 +13,7 @@
 		/obj/item/seeds/pumpkin,
 		/obj/item/seeds/soya,
 		/obj/item/seeds/tomato,
+		/obj/item/bailer,
 	)
 	crate_name = "veggie crate"
 

@@ -303,6 +303,33 @@
 		return
 	return ..()
 
+/obj/item/reagent_containers/glass/bucket
+	name = "bucket"
+	desc = "It's a bucket."
+	icon = 'icons/obj/janitor.dmi'
+	icon_state = "bucket"
+	inhand_icon_state = "bucket"
+	lefthand_file = 'icons/mob/inhands/equipment/custodial_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/custodial_righthand.dmi'
+	custom_materials = list(/datum/material/iron=200)
+	w_class = WEIGHT_CLASS_NORMAL
+	amount_per_transfer_from_this = 20
+	possible_transfer_amounts = list(5,10,15,20,25,30,50,70)
+	volume = 70
+	slot_flags = NONE
+	resistance_flags = NONE
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 75, ACID = 50)
+	slot_equipment_priority = list( \
+		ITEM_SLOT_BACK, ITEM_SLOT_ID,\
+		ITEM_SLOT_ICLOTHING, ITEM_SLOT_OCLOTHING,\
+		ITEM_SLOT_MASK, ITEM_SLOT_HEAD, ITEM_SLOT_NECK,\
+		ITEM_SLOT_FEET, ITEM_SLOT_GLOVES,\
+		ITEM_SLOT_EARS, ITEM_SLOT_EYES,\
+		ITEM_SLOT_BELT, ITEM_SLOT_SUITSTORE,\
+		ITEM_SLOT_LPOCKET, ITEM_SLOT_RPOCKET,\
+		ITEM_SLOT_DEX_STORAGE
+	)
+
 /obj/item/pestle
 	name = "pestle"
 	desc = "An ancient, simple tool used in conjunction with a mortar to grind or juice items."

@@ -86,12 +86,14 @@
 	seed = /obj/item/seeds/cannabis
 	icon = 'icons/obj/hydroponics/harvest.dmi'
 	name = "cannabis leaf"
-	desc = "Recently legalized in most galaxies."
+	desc = "They say that next year they're going to try to legalise it."
 	icon_state = "cannabis"
 	bite_consumption_mod = 2
 	foodtypes = VEGETABLES //i dont really know what else weed could be to be honest
 	tastes = list("cannabis" = 1)
 	wine_power = 20
+	cost = 100 //for selling, priced from average california cost per 3.5g leaf to aim for people to get at least $20/leaf
+	illegal = TRUE //In 2015 Cannabis was only legally distributed in California by medical dispensary. https://web.archive.org/web/20161109220853/http://www.times-standard.com/article/NJ/20161107/NEWS/161109826
 
 /obj/item/food/grown/cannabis/rainbow
 	seed = /obj/item/seeds/cannabis/rainbow
@@ -99,13 +101,16 @@
 	desc = "Is it supposed to be glowing like that...?"
 	icon_state = "megacannabis"
 	wine_power = 60
+	cost = 150 //for selling in the black market
 
 /* /obj/item/food/grown/cannabis/death
 	seed = /obj/item/seeds/cannabis/death
 	name = "death cannabis leaf"
 	desc = "Looks a bit dark. Oh well."
 	icon_state = "blackcannabis"
-	wine_power = 40 */
+	wine_power = 40
+	cost = 400
+	var/illegal = TRUE */
 
 /obj/item/food/grown/cannabis/white
 	seed = /obj/item/seeds/cannabis/white
@@ -113,6 +118,7 @@
 	desc = "It feels smooth and nice to the touch."
 	icon_state = "whitecannabis"
 	wine_power = 10
+	cost = 150 //for selling in the black market
 
 /obj/item/food/grown/cannabis/ultimate
 	seed = /obj/item/seeds/cannabis/ultimate
@@ -121,3 +127,4 @@
 	icon_state = "ocannabis"
 	max_volume = 420
 	wine_power = 90
+	cost = 200  //for selling in the black market
