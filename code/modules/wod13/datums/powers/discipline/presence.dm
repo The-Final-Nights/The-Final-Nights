@@ -46,19 +46,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/awe/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	
-	return TRUE
+	presence_succeeded = presence_check(owner, target, base_difficulty = 4)
+	if(presence_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/awe/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_check(owner, target, base_difficulty = 4))
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -69,6 +74,7 @@
 		to_chat(owner, span_warning("You've enthralled [target] with your commanding aura!"))
 		to_chat(target, span_userlove("COME HERE"))
 		owner.say("Come here.")
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -98,19 +104,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/dread_gaze/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	
-	return TRUE
+	presence_succeeded = presence_check(owner, target, base_difficulty = 5)
+	if(presence_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/dread_gaze/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_check(owner, target, base_difficulty = 5))
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -123,6 +134,7 @@
 		owner.say("REST!!")
 		if(target.body_position == STANDING_UP)
 			target.toggle_resting()
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -145,19 +157,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/entrancement/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	
-	return TRUE
+	presence_succeeded = presence_check(owner, target, base_difficulty = 5)
+	if(presence_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/entrancement/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_check(owner, target, base_difficulty = 5))
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -179,6 +196,7 @@
 			I1.throw_at(get_turf(owner), 3, 1, target)
 		if(I2)
 			I2.throw_at(get_turf(owner), 3, 1, target)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -201,19 +219,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/summon/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	
-	return TRUE
+	presence_succeeded = presence_check(owner, target, base_difficulty = 6)
+	if(presence_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/summon/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_check(owner, target, base_difficulty = 6))
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -230,6 +253,7 @@
 
 		target.emote("scream")
 		target.do_jitter_animation(3 SECONDS)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -258,19 +282,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/majesty/pre_activation_checks(mob/living/target)
 
 	if(!presence_hearing_check(owner, target))
 		return FALSE
 
-	
-	return TRUE
+	presence_succeeded = presence_check(owner, target, base_difficulty = 7)
+	if(presence_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/majesty/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(presence_check(owner, target, base_difficulty = 7))
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -283,6 +312,7 @@
 		target.Immobilize(1 SECONDS)
 		for(var/obj/item/clothing/W in target.contents)
 			target.dropItemToGround(W, TRUE)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
