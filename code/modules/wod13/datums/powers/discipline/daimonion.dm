@@ -38,10 +38,6 @@
 	if(iskindred(target))
 		baali_get_moral_failings(target, owner)
 		baali_get_stolen_disciplines(target, owner)
-		if(target.generation >= 10)
-			to_chat(owner, "Victim's vitae is weak and thin. You can clearly see their fear for fire, it seems that's a kindred.")
-		else
-			to_chat(owner, "Victim's vitae is thick and strong. You can clearly see their fear for fire, it seems that's a kindred.")
 	if(isghoul(target))
 		var/mob/living/carbon/human/ghoul = target
 		if(ghoul.mind.enslaved_to)
