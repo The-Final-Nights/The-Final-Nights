@@ -586,6 +586,11 @@
 
 	var/obj/effect/proc_holder/spell/targeted/shapeshift/bloodcrawler/bloodform_shapeshift
 
+/datum/discipline_power/vicissitude/bloodform/post_gain()
+	. = ..()
+	var/datum/action/basic_vicissitude/advanced/vicissitude_upgrade_advanced = new()
+	advanced_vicissitude_upgrade_advanced.Grant(owner)
+
 /datum/discipline_power/vicissitude/bloodform/activate()
 	. = ..()
 	if (!bloodform_shapeshift)
