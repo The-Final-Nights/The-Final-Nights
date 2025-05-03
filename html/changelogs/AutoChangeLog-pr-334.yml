@@ -1,0 +1,4 @@
+author: "anything86"
+delete-after: True
+changes:
+  - bugfix: "Defibrillators can no longer revive a vampire or kuei-jin who has met Final Death."
