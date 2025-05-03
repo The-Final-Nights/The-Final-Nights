@@ -470,6 +470,10 @@
 /datum/action/basic_vicissitude/advanced
 	name = "Advanced Vicissitude Upgrade"
 	desc = "Upgrade your body further..."
+	var/selected_advanced_upgrade
+	var/advanced_original_skin_tone //Shouldn't be necessary most of the time, but in case someone combines the changes for the two armours.
+	var/advanced_original_hairstyle
+	var/advanced_original_body_mod
 
 /datum/action/basic_vicissitude/advanced/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
@@ -486,11 +490,11 @@
 		if ("Bone armor")
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.unique_body_sprite = "tziarmor"
-			original_skin_tone = user.skin_tone
+			advanced_original_skin_tone = user.skin_tone
 			user.skin_tone = "albino"
-			original_hairstyle = user.hairstyle
+			advanced_original_hairstyle = user.hairstyle
 			user.hairstyle = "Bald"
-			original_body_mod = user.base_body_mod
+			advanced_original_body_mod = user.base_body_mod
 			user.base_body_mod = ""
 			user.physiology.armor.melee += 60
 			user.physiology.armor.bullet += 60
@@ -516,9 +520,9 @@
 		if ("Bone armor")
 			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.unique_body_sprite = null
-			user.skin_tone = original_skin_tone
-			user.hairstyle = original_hairstyle
-			user.base_body_mod = original_body_mod
+			user.skin_tone = advanced_original_skin_tone
+			user.hairstyle = advanced_original_hairstyle
+			user.base_body_mod = advanced_original_body_mod
 			user.physiology.armor.melee -= 20
 			user.physiology.armor.bullet -= 20
 		if ("Membrane wings")
