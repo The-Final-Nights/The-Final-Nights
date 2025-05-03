@@ -503,8 +503,7 @@
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			user.dna.add_mutation(CUTTLEFISH)
-
+			user.verbs += /mob/living/carbon/human/proc/active_camo()
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -530,7 +529,7 @@
 			user.dna.species.RemoveSpeciesFlight(user)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			user.dna.remove_mutation(CUTTLEFISH)
+			user.verbs -= /mob/living/carbon/human/proc/active_camo()
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
