@@ -933,6 +933,50 @@
 				H.bloodpool = max(0, H.bloodpool-1)
 				beastmaster.bloodpool = min(beastmaster.maxbloodpool, beastmaster.bloodpool+1)
 
+/mob/living/simple_animal/hostile/beastmaster/cockroach
+	name = "cockroach"
+	desc = "It flutters like the giant, unhealthy skittering thing it is."
+	icon = 'code/modules/wod13/icons.dmi'
+	icon_state = "cockroach"
+	icon_living = "cockroach"
+	icon_dead = "cockroach_dead"
+	emote_hear = list("chitters.")
+	emote_see = list("flutters its' wings.", "wriggles its' antennae.")
+	attack_verb_continuous = "bites"
+	attack_verb_simple = "bite"
+	attack_sound = 'sound/weapons/bite.ogg'
+	speak_chance = 0
+	turns_per_move = 5
+	see_in_dark = 10
+	response_help_continuous = "pets"
+	response_help_simple = "pet"
+	response_disarm_continuous = "gently sweeps aside"
+	response_disarm_simple = "gently sweep aside"
+	response_harm_continuous = "smashes"
+	response_harm_simple = "smash"
+	can_be_held = TRUE
+	density = FALSE
+	anchored = FALSE
+	footstep_type = FOOTSTEP_MOB_CLAW
+	bloodquality = BLOOD_QUALITY_LOW
+	bloodpool = 1
+	maxbloodpool = 1
+	del_on_death = 1
+	maxHealth = 5
+	health = 5
+	melee_damage_type = TOX
+	harm_intent_damage = 5
+	melee_damage_lower = 3
+	melee_damage_upper = 7
+	is_flying_animal = TRUE
+	speed = -0.8
+	dodging = TRUE
+
+/mob/living/simple_animal/hostile/beastmaster/cockroach/Initialize()
+	. = ..()
+	pixel_w = rand(-8, 8)
+	pixel_z = rand(-8, 8)
+
 /datum/socialrole/shop
 	s_tones = list("albino",
 		"caucasian1",
