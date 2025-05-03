@@ -24,7 +24,7 @@
 /turf/open/floor/catwalk_floor/Initialize(mapload)
 	. = ..()
 	if(!catwalk_underlays[catwalk_type])
-		var/mutable_appearance/plating_underlay = mutable_appearance(icon, "[catwalk_type]_below", TURF_LAYER)
+		var/mutable_appearance/plating_underlay = mutable_appearance(icon, "[catwalk_type]_below", ABOVE_OPEN_TURF_LAYER)
 		catwalk_underlays[catwalk_type] = plating_underlay
 	underlays += catwalk_underlays[catwalk_type]
 	update_appearance()
@@ -34,7 +34,7 @@
 	covered = !covered
 	if(!covered)
 		underfloor_accessibility = UNDERFLOOR_INTERACTABLE
-		layer = TURF_LAYER
+		layer = LOW_FLOOR_LAYER
 		SET_PLANE_IMPLICIT(src, FLOOR_PLANE)
 		icon_state = "[catwalk_type]_below"
 	else

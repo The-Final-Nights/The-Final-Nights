@@ -204,7 +204,7 @@ mob
 	icon_state = "blue"
 	pixel_x = -24
 	pixel_y = 24
-	layer = TURF_LAYER // Should appear below the rest of the overlays
+	layer = ABOVE_OPEN_TURF_LAYER // Should appear below the rest of the overlays
 
 world
 	view = "7x7"
