@@ -460,6 +460,10 @@
 	SEND_SIGNAL(src, COMSIG_MOB_RESET_PERSPECTIVE)
 	return TRUE
 
+/// Show the mob's inventory to another mob
+/mob/proc/show_inv(mob/user)
+	return
+
 /**
  * Examine a mob
  *
