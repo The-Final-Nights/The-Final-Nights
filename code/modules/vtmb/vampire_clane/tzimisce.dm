@@ -168,7 +168,15 @@
 	icon_state = "tzimisce_floor"
 
 /datum/movespeed_modifier/centipede
-	multiplicative_slowdown = -0.6
+	multiplicative_slowdown = -0.8
+	blacklisted_movetypes = (FLYING|FLOATING)
+
+/datum/movespeed_modifier/leatherwings
+	multiplicative_slowdown = -0.5
+	movetypes = FLOATING|FLYING
+
+/datum/movespeed_modifier/membranewings
+	multiplicative_slowdown = -0.8
 
 /mob/living/simple_animal/hostile/bloodcrawler
 	var/collected_blood = 0
@@ -421,7 +429,7 @@
 	health = 575
 	butcher_results = list(/obj/item/stack/human_flesh = 10)
 	harm_intent_damage = 5
-	melee_damage_lower = 35
+	melee_damage_lower = 60
 	melee_damage_upper = 70
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
@@ -441,7 +449,7 @@
 	icon_living = "liquid"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speak_chance = 0
-	speed = 3
+	speed = -0.2
 	maxHealth = 100
 	health = 100
 	butcher_results = list(/obj/item/stack/human_flesh = 1)
