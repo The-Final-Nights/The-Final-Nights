@@ -12,6 +12,8 @@
 	heatmod = 1
 	burnmod = 1
 	dust_anim = "dust-h"
+	punchdamagelow = 10
+	punchdamagehigh = 20
 	whitelisted = FALSE
 	selectable = TRUE
 	species_language_holder = /datum/language_holder/werewolf
