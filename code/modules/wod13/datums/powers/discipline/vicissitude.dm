@@ -354,6 +354,7 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzijelly)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzicreature)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/cattzi)
+
 /datum/action/basic_vicissitude
 	name = "Vicissitude Upgrade"
 	desc = "Upgrade your body..."
@@ -377,7 +378,7 @@
 
 /datum/action/basic_vicissitude/proc/give_upgrade()
 	var/mob/living/carbon/human/user = owner
-	var/upgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Skin armor", "Centipede legs", "Second pair of arms", "Leather wings")
+	var/upgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Skin armor", "Centipede legs", "Second pair of arms", "Leather wings", "Chameleon Skin")
 	if(!upgrade)
 		return
 	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
@@ -416,6 +417,14 @@
 			user.apply_overlay(PROTEAN_LAYER)
 		if ("Leather wings")
 			user.dna.species.GiveSpeciesFlight(user)
+			user.add_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
+		if ("Chameleon skin")
+			original_skin_tone = user.skin_tone
+			user.skin_tone = "albino"
+			original_hairstyle = user.hairstyle
+			user.hairstyle = "Bald"
+			user.dna.add_mutation(CHAMELEON)
+
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -447,11 +456,82 @@
 			QDEL_NULL(upgrade_overlay)
 		if ("Leather wings")
 			user.dna.species.RemoveSpeciesFlight(user)
+			user.remove_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
+		if ("Chameleon skin")
+			user.skin_tone = original_skin_tone
+			user.hairstyle = original_hairstyle
+			user.dna.remove_mutation(CHAMELEON)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
 
 	selected_upgrade = null
+
+/datum/action/basic_vicissitude/advanced
+	name = "Advanced Vicissitude Upgrade"
+	desc = "Upgrade your body further..."
+
+/datum/action/basic_vicissitude/advanced/proc/give_advanced_upgrade()
+	var/mob/living/carbon/human/user = owner
+	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Bone armour", "Membrane wings", "Cuttlefish Skin")
+	if(!advancedupgrade)
+		return
+	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
+	if (!do_after(user, 10 SECONDS))
+		return
+	if(selected_advanced_upgrade)
+		return
+	selected_advanced_upgrade = advancedupgrade
+	switch (advancedupgrade)
+		if ("Bone armor")
+			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			user.unique_body_sprite = "tziarmor"
+			original_skin_tone = user.skin_tone
+			user.skin_tone = "albino"
+			original_hairstyle = user.hairstyle
+			user.hairstyle = "Bald"
+			original_body_mod = user.base_body_mod
+			user.base_body_mod = ""
+			user.physiology.armor.melee += 60
+			user.physiology.armor.bullet += 60
+		if ("Membrane wings")
+			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			user.dna.species.GiveSpeciesFlight(user)
+			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
+		if ("Cuttlefish skin")
+			user.dna.add_mutation(CUTTLEFISH)
+
+
+	user.do_jitter_animation(10)
+	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
+
+/datum/action/basic_vicissitude/advanced/proc/remove_upgrade()
+	var/mob/living/carbon/human/user = owner
+	if (!selected_advanced_upgrade)
+		return
+	to_chat(user, span_notice("You begin surgically removing your enhancements..."))
+	if (!do_after(user, 10 SECONDS))
+		return
+	switch (selected_advanced_upgrade)
+		if ("Bone armor")
+			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			user.unique_body_sprite = null
+			user.skin_tone = original_skin_tone
+			user.hairstyle = original_hairstyle
+			user.base_body_mod = original_body_mod
+			user.physiology.armor.melee -= 20
+			user.physiology.armor.bullet -= 20
+		if ("Membrane wings")
+			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			user.dna.species.RemoveSpeciesFlight(user)
+			user.remove_movespeed_modifier(/datum/movespeed_modifier/membranewings)
+		if ("Cuttlefish skin")
+			user.dna.remove_mutation(CUTTLEFISH)
+
+	user.do_jitter_animation(10)
+	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
+
+	selected_advanced_upgrade = null
 
 //HORRID FORM
 /datum/discipline_power/vicissitude/horrid_form
@@ -517,3 +597,17 @@
 	bloodform_shapeshift.Restore(bloodform_shapeshift.myshape)
 	owner.Stun(1.5 SECONDS)
 	owner.do_jitter_animation(30)
+
+
+// REWORK ABILITIES AND VERBS
+
+/mob/living/carbon/human/proc/active_camo()
+	set category = "Abilities"
+	set name = "Active Camo"
+	set desc = "Camouflage yourself"
+	var/stealth_alpha = 15
+
+	if(alpha == stealth_alpha)
+		animate(src, alpha = 255, time = 1.5 SECONDS)
+	else
+		animate(src, alpha = stealth_alpha, time = 1.5 SECONDS)
