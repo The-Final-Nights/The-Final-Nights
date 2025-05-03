@@ -454,6 +454,7 @@
 	H.pixel_z = 0
 	H.melee_damage_lower = initial(H.melee_damage_lower)
 	H.melee_damage_upper = initial(H.melee_damage_upper)
+	H.armour_penetration = initial(H.armour_penetration)
 	H.hispo = FALSE
 	H.regenerate_icons()
 	H.update_transform()
@@ -467,6 +468,7 @@
 	H.pixel_z = -16
 	H.melee_damage_lower = 45
 	H.melee_damage_upper = 45
+	H.armour_penetration = 50
 	H.hispo = TRUE
 	H.regenerate_icons()
 	H.update_transform()
