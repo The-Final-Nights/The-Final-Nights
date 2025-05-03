@@ -241,11 +241,9 @@
 		), 90)
 
 	var/damage = attacking_item.force
-	if(mob_biotypes & MOB_ROBOTIC)
-		damage *= attacking_item.demolition_mod
 
 	var/wounding = attacking_item.wound_bonus
-	if((attacking_item.item_flags & SURGICAL_TOOL) && !user.combat_mode && body_position == LYING_DOWN && (LAZYLEN(surgeries) > 0))
+	if((attacking_item.item_flags & SURGICAL_TOOL) && !(user.a_intent == INTENT_HARM) && body_position == LYING_DOWN && (LAZYLEN(surgeries) > 0))
 		wounding = CANT_WOUND
 
 	if(user != src)
@@ -262,11 +260,13 @@
 		SSblackbox.record_feedback("nested tally", "item_used_for_combat", 1, list("[attacking_item.force]", "[attacking_item.type]"))
 		SSblackbox.record_feedback("tally", "zone_targeted", 1, targeting_human_readable)
 
-	var/damage_done = apply_damage(
+	apply_damage(
 		damage = damage,
 		damagetype = attacking_item.damtype,
 		def_zone = targeting,
 		blocked = armor_block,
+		forced = forced,
+		spread_damage = spread_damage,
 		wound_bonus = wounding,
 		bare_wound_bonus = attacking_item.bare_wound_bonus,
 		sharpness = attacking_item.get_sharpness(),
@@ -274,99 +274,9 @@
 		attacking_item = attacking_item,
 	)
 
-	attack_effects(damage_done, targeting, armor_block, attacking_item, user)
 
 	return TRUE
 
-/**
- * Called when we take damage, used to cause effects such as a blood splatter.
- *
- * Return TRUE if an effect was done, FALSE otherwise.
- */
-/mob/living/proc/attack_effects(damage_done, hit_zone, armor_block, obj/item/attacking_item, mob/living/attacker)
-	if(damage_done > 0 && attacking_item.damtype == BRUTE && prob(25 + damage_done * 2))
-		attacking_item.add_mob_blood(src)
-		add_splatter_floor(get_turf(src))
-		if(get_dist(attacker, src) <= 1)
-			attacker.add_mob_blood(src)
-		return TRUE
-	return FALSE
-
-/mob/living/silicon/robot/attack_effects(damage_done, hit_zone, armor_block, obj/item/attacking_item, mob/living/attacker)
-	if(damage_done > 0 && attacking_item.damtype != STAMINA && stat != DEAD)
-		spark_system.start()
-		. = TRUE
-	return ..() || .
-
-/mob/living/silicon/ai/attack_effects(damage_done, hit_zone, armor_block, obj/item/attacking_item, mob/living/attacker)
-	if(damage_done > 0 && attacking_item.damtype != STAMINA && stat != DEAD)
-		spark_system.start()
-		. = TRUE
-	return ..() || .
-
-/mob/living/carbon/attack_effects(damage_done, hit_zone, armor_block, obj/item/attacking_item, mob/living/attacker)
-	var/obj/item/bodypart/hit_bodypart = get_bodypart(hit_zone) || bodyparts[1]
-	if(!hit_bodypart.can_bleed())
-		return FALSE
-
-	return ..()
-
-/mob/living/carbon/human/attack_effects(damage_done, hit_zone, armor_block, obj/item/attacking_item, mob/living/attacker)
-	. = ..()
-	switch(hit_zone)
-		if(BODY_ZONE_HEAD)
-			if(.)
-				if(wear_mask)
-					wear_mask.add_mob_blood(src)
-					update_worn_mask()
-				if(head)
-					head.add_mob_blood(src)
-					update_worn_head()
-				if(glasses && prob(33))
-					glasses.add_mob_blood(src)
-					update_worn_glasses()
-
-			if(!attacking_item.get_sharpness() && armor_block < 50)
-				if(prob(damage_done))
-					adjustOrganLoss(ORGAN_SLOT_BRAIN, 20)
-					if(stat == CONSCIOUS)
-						visible_message(
-							span_danger("[src] is knocked senseless!"),
-							span_userdanger("You're knocked senseless!"),
-						)
-						set_confusion_if_lower(20 SECONDS)
-						adjust_eye_blur(20 SECONDS)
-					if(prob(10))
-						gain_trauma(/datum/brain_trauma/mild/concussion)
-				else
-					adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_done * 0.2)
-
-				// rev deconversion through blunt trauma.
-				// this can be signalized to the rev datum
-				if(mind && stat == CONSCIOUS && src != attacker && prob(damage_done + ((100 - health) * 0.5)))
-					var/datum/antagonist/rev/rev = mind.has_antag_datum(/datum/antagonist/rev)
-					rev?.remove_revolutionary(attacker)
-
-		if(BODY_ZONE_CHEST)
-			if(.)
-				if(wear_suit)
-					wear_suit.add_mob_blood(src)
-					update_worn_oversuit()
-				if(w_uniform)
-					w_uniform.add_mob_blood(src)
-					update_worn_undersuit()
-
-			if(stat == CONSCIOUS && !attacking_item.get_sharpness() && armor_block < 50)
-				if(prob(damage_done))
-					visible_message(
-						span_danger("[src] is knocked down!"),
-						span_userdanger("You're knocked down!"),
-					)
-					apply_effect(6 SECONDS, EFFECT_KNOCKDOWN, armor_block)
-
-	// Triggers force say events
-	if(damage_done > 10 || (damage_done >= 5 && prob(33)))
-		force_say()
 
 /**
  * Last proc in the [/obj/item/proc/melee_attack_chain]
