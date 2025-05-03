@@ -2,10 +2,14 @@
 	name = "Unfettered Nightbloom" //items were priced according to online shopping data at retail price available to the customer, not at wholesale 23/04/2025
 	desc = "The only 24hr flower shop in SanFran."
 	prize_list = list(
-		new /datum/data/mining_equipment("Sunflower Bouquet", /obj/item/bouquet/sunflower,	20),
-		new /datum/data/mining_equipment("Poppy Bouquet", /obj/item/bouquet/poppy,	20),
-		new /datum/data/mining_equipment("Mixed Bouquet",	 /obj/item/bouquet,	20),
+		new /datum/data/mining_equipment("Sunflower Bouquet", /obj/item/bouquet/sunflower,	21),
+		new /datum/data/mining_equipment("Poppy Bouquet", /obj/item/bouquet/poppy,	21),
+		new /datum/data/mining_equipment("Mixed Bouquet",	 /obj/item/bouquet,	21),
 		new /datum/data/mining_equipment("Potted Plant",	/obj/item/kirbyplants/random, 15),
+		new /datum/data/mining_equipment("A poppy",	/obj/item/food/grown/flower/poppy,	7),
+		new /datum/data/mining_equipment("A sunflower",	/obj/item/grown/flower/sunflower,	7),
+		new /datum/data/mining_equipment("A geranium",	/obj/item/food/grown/flower/geranium,	7),
+		new /datum/data/mining_equipment("A lily",	/obj/item/food/grown/flower/lily,	7),
 		new /datum/data/mining_equipment("Gardening Gloves",	/obj/item/clothing/gloves/botanic_leather,	45),
 		new /datum/data/mining_equipment("Respirator",	/obj/item/clothing/mask/vampire,	35),
 		new /datum/data/mining_equipment("Plant Bag",	/obj/item/storage/bag/plants,	45),
