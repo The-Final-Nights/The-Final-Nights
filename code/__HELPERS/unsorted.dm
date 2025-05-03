@@ -1145,49 +1145,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		)
 	return pick(subtypesof(/obj/item/reagent_containers/food/drinks) - blocked)
 
-//For these two procs refs MUST be ref = TRUE format like typecaches!
-/proc/weakref_filter_list(list/things, list/refs)
-	if(!islist(things) || !islist(refs))
-		return
-	if(!refs.len)
-		return things
-	if(things.len > refs.len)
-		var/list/f = list()
-		for(var/i in refs)
-			var/datum/weakref/r = i
-			var/datum/d = r.resolve()
-			if(d)
-				f |= d
-		return things & f
-
-	else
-		. = list()
-		for(var/i in things)
-			if(!refs[WEAKREF(i)])
-				continue
-			. |= i
-
-/proc/weakref_filter_list_reverse(list/things, list/refs)
-	if(!islist(things) || !islist(refs))
-		return
-	if(!refs.len)
-		return things
-	if(things.len > refs.len)
-		var/list/f = list()
-		for(var/i in refs)
-			var/datum/weakref/r = i
-			var/datum/d = r.resolve()
-			if(d)
-				f |= d
-
-		return things - f
-	else
-		. = list()
-		for(var/i in things)
-			if(refs[WEAKREF(i)])
-				continue
-			. |= i
-
 /proc/special_list_filter(list/L, datum/callback/condition)
 	if(!islist(L) || !length(L) || !istype(condition))
 		return list()
@@ -1200,4 +1157,13 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))
 
-#define TURF_FROM_COORDS_LIST(List) (locate(List[1], List[2], List[3]))
+/proc/sanitize_filename(text)
+	return hashtag_newlines_and_tabs(text, list("\n"="", "\t"="", "/"="", "\\"="", "?"="", "%"="", "*"="", ":"="", "|"="", "\""="", "<"="", ">"=""))
+
+/proc/hashtag_newlines_and_tabs(text, list/repl_chars = list("\n"="#","\t"="#"))
+	for(var/char in repl_chars)
+		var/index = findtext(text, char)
+		while(index)
+			text = copytext(text, 1, index) + repl_chars[char] + copytext(text, index + length(char))
+			index = findtext(text, char, index + length(char))
+	return text
