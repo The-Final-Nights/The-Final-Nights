@@ -475,6 +475,15 @@
 	var/advanced_original_hairstyle
 	var/advanced_original_body_mod
 
+/datum/action/basic_vicissitude/advanced/Trigger()
+	. = ..()
+	if (selected_advanced_upgrade)
+		remove_advanced_upgrade()
+	else
+		give_advanced_upgrade()
+
+	owner.update_body()
+
 /datum/action/basic_vicissitude/advanced/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
 	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Bone armour", "Membrane wings", "Cuttlefish Skin")
@@ -508,7 +517,7 @@
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
 
-/datum/action/basic_vicissitude/advanced/proc/remove_upgrade()
+/datum/action/basic_vicissitude/advanced/proc/remove_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
 	if (!selected_advanced_upgrade)
 		return
@@ -589,7 +598,7 @@
 /datum/discipline_power/vicissitude/bloodform/post_gain()
 	. = ..()
 	var/datum/action/basic_vicissitude/advanced/vicissitude_upgrade_advanced = new()
-	advanced_vicissitude_upgrade_advanced.Grant(owner)
+	vicissitude_upgrade_advanced.Grant(owner)
 
 /datum/discipline_power/vicissitude/bloodform/activate()
 	. = ..()
