@@ -503,7 +503,7 @@
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			user.verbs += /mob/living/carbon/human/proc/active_camo()
+			user.AddAbility(new/obj/effect/proc_holder/vicissitude/camo(null))
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -529,7 +529,7 @@
 			user.dna.species.RemoveSpeciesFlight(user)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			user.verbs -= /mob/living/carbon/human/proc/active_camo()
+			user.RemoveAbility(new/obj/effect/proc_holder/vicissitude/camo(null))
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -614,3 +614,14 @@
 		animate(src, alpha = 255, time = 1.5 SECONDS)
 	else
 		animate(src, alpha = stealth_alpha, time = 1.5 SECONDS)
+
+/obj/effect/proc_holder/vicissitude
+	has_action = TRUE
+	base_action = /datum/action/spell_action
+	action_icon = 'icons/mob/mob.dmi'
+	action_icon_state = "shadow"
+	action_background_icon_state = "bg_spell"
+
+/obj/effect/proc_holder/vicissitude/camo
+	base_action = /datum/action/spell_action
+	action_icon_state = "shadow"
