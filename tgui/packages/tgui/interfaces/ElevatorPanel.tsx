@@ -1,7 +1,16 @@
-import { clamp } from 'common/math';
-import { BooleanLike } from 'common/react';
+import {
+  Blink,
+  Box,
+  Button,
+  Dimmer,
+  Icon,
+  Section,
+  Stack,
+} from 'tgui-core/components';
+import { clamp } from 'tgui-core/math';
+import { BooleanLike } from 'tgui-core/react';
+
 import { useBackend } from '../backend';
-import { Box, Blink, Button, Dimmer, Icon, Section, Stack } from '../components';
 import { Window } from '../layouts';
 
 type FloorData = {
@@ -28,8 +37,8 @@ type ElevatorPanelData = {
   all_floor_data: FloorData[];
 };
 
-export const ElevatorPanel = (props, context) => {
-  const { data, act } = useBackend<ElevatorPanelData>(context);
+export const ElevatorPanel = (props) => {
+  const { data, act } = useBackend<ElevatorPanelData>();
 
   const {
     current_floor,
@@ -70,16 +79,15 @@ export const ElevatorPanel = (props, context) => {
                 {all_floor_data.map((floor, index) => (
                   <Stack.Item key={index}>
                     <Button
-                      style={{
-                        'font-weight': 'bold',
-                        'font-size': '14px',
-                      }}
+                      fontWeight="bold"
+                      fontSize="14px"
                       fluid
                       ellipsis
                       textAlign="left"
                       icon="circle"
                       disabled={floor.z_level === current_floor}
-                      onClick={() => act('move_lift', { z: floor.z_level })}>
+                      onClick={() => act('move_lift', { z: floor.z_level })}
+                    >
                       {floor.name}
                     </Button>
                   </Stack.Item>
@@ -97,7 +105,8 @@ export const ElevatorPanel = (props, context) => {
                     'Closes all elevator doors, except \
                     those on the level of the elevator.'
                   }
-                  onClick={() => act('reset_doors')}>
+                  onClick={() => act('reset_doors')}
+                >
                   Reset Doors
                 </Button>
               ) : (
@@ -111,7 +120,8 @@ export const ElevatorPanel = (props, context) => {
                       ? 'In case of emergency, opens all lift doors.'
                       : `The station is only at ${emergency_level} alert.`
                   }
-                  onClick={() => act('emergency_door')}>
+                  onClick={() => act('emergency_door')}
+                >
                   Emergency
                 </Button>
               )}
@@ -149,14 +159,14 @@ const MovingDimmer = () => {
   );
 };
 
-const FloorPanel = (props, context) => {
-  const { data } = useBackend<ElevatorPanelData>(context);
+const FloorPanel = (props) => {
+  const { data } = useBackend<ElevatorPanelData>();
   const { current_floor, currently_moving, currently_moving_to_floor } = data;
 
   return (
-    <Stack width="50%" backgroundColor="black">
+    <Stack width="50%" backgroundColor="black" align="center">
       <Stack.Item ml={2} mr={1} mt={1} mb={1}>
-        <Stack vertical align="center">
+        <Stack vertical>
           <Stack.Item>
             <ArrowIcon
               icon="arrow-up"
@@ -179,14 +189,15 @@ const FloorPanel = (props, context) => {
           </Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item mt={1}>
+      <Stack.Item>
         <Box
           textColor="white"
           style={{
-            'font-family': 'Monospace',
-            'font-size': '50px',
-            'font-weight': 'bold',
-          }}>
+            fontFamily: 'Monospace',
+            fontSize: '50px',
+            fontWeight: 'bold',
+          }}
+        >
           {current_floor - 1}
         </Box>
       </Stack.Item>
