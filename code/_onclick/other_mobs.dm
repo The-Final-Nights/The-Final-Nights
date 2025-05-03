@@ -183,14 +183,23 @@
 
 /*
 	Aliens
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	A.attack_alien(src)
+	Defaults to same as monkey in most places
+*/
+/mob/living/carbon/alien/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	attack_target.attack_alien(src, modifiers)
 
-/atom/proc/attack_alien(mob/living/carbon/alien/user)
-	attack_paw(user)
-	return
+/mob/living/carbon/alien/resolve_right_click_attack(atom/target, list/modifiers)
+	return target.attack_alien_secondary(src, modifiers)
 
+/atom/proc/attack_alien(mob/living/carbon/alien/user, list/modifiers)
+	return attack_paw(user, modifiers)
+
+/**
+ * Called when an alien right clicks an atom.
+ * Returns a SECONDARY_ATTACK_* value.
+ */
+/atom/proc/attack_alien_secondary(mob/living/carbon/alien/user, list/modifiers)
+	return SECONDARY_ATTACK_CALL_NORMAL
 
 // Babby aliens
 /mob/living/carbon/alien/larva/UnarmedAttack(atom/A)
