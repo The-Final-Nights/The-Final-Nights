@@ -308,15 +308,15 @@
 	desc = "An unbranded garderner's pail with a spout."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "wateringcan"
-	/* inhand_icon_state = "bucket" will all be updated with other sprites later
-	lefthand_file = 'icons/mob/inhands/equipment/custodial_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/custodial_righthand.dmi' */
+	/* inhand_icon_state = "wateringcan" //sprites not implemented
+	lefthand_file = 'code/modules/wod13/lefthand.dmi'
+	righthand_file = 'code/modules/wod13/righthand.dmi' */
 	custom_materials = list(/datum/material/iron=200)
 	w_class = WEIGHT_CLASS_NORMAL
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5,10,15,20,25,30)
 	volume = 33 // average bucket is 15l, ss13 bucket is 50u. 50 / 15 = 3.333(1l). Average w.can is 8 - 10l. 10 x 3.333 = 33.333... ~33u.
-	slot_flags = NONE //you can't wear this. yet?
+	slot_flags = NONE
 	resistance_flags = NONE
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 75, ACID = 50)
 	slot_equipment_priority = list( \
