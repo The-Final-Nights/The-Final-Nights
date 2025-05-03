@@ -14,9 +14,9 @@
 					"<span class='userdanger'>[user] [hitverb]s you!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, user)
 	to_chat(user, "<span class='danger'>You [hitverb] [src]!</span>")
 
-/mob/living/carbon/alien/humanoid/attack_hand(mob/living/carbon/human/M)
+/mob/living/carbon/alien/humanoid/attack_hand(mob/living/carbon/human/M, modifiers)
 	if(..())
-		if(M.a_intent = "harm")
+		if(M.a_intent = INTENT_HARM)
 			if(LAZYACCESS(modifiers, RIGHT_CLICK))
 				if (body_position == STANDING_UP)
 					if (prob(5))
