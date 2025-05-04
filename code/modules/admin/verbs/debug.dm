@@ -829,7 +829,13 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	"})
 	browser.open()
 
-ADMIN_VERB(allow_browser_inspect, R_DEBUG, "Allow Browser Inspect", "Allow browser debugging via inspect", ADMIN_CATEGORY_DEBUG)
+/client/proc/allow_browser_inspect()
+	set category = "Debug"
+	set name = "Allow Browser Inspect"
+	set desc = "Allow browser debugging via inspect"
+	if (!check_rights(R_DEBUG))
+		return
+
 	if(user.byond_version < 516)
 		to_chat(user, span_warning("You can only use this on 516!"))
 		return
