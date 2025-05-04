@@ -87,7 +87,7 @@
 
 /obj/machinery/hydroponics/constructable/examine(mob/user)
 	. = ..()
-	. += span_notice("Use <b>Ctrl-Click</b> to activate autogrow. <b>Alt-Click</b> to empty the tray's nutrients. <b>Right-Click<b> to anchor and unanchor it.")
+	. += span_notice("<b>Alt-Click</b> to empty the tray's nutrients. <b>Right-Click<b> to anchor and unanchor it.")
 	if(in_range(user, src) || isobserver(user))
 		. += span_notice("The status display reads: Tray efficiency at <b>[rating*100]%</b>.")
 
@@ -787,7 +787,7 @@
 		if(user)
 			user.examinate(src)
 
-/obj/machinery/hydroponics/CtrlClick(mob/user)
+/* /obj/machinery/hydroponics/CtrlClick(mob/user)
 	. = ..()
 	if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return
@@ -799,7 +799,7 @@
 	self_sustaining = !self_sustaining
 	idle_power_usage = self_sustaining ? 5000 : 0
 	to_chat(user, span_notice("You [self_sustaining ? "activate" : "deactivated"] [src]'s autogrow function[self_sustaining ? ", maintaining the tray's health while using high amounts of power" : ""]."))
-	update_appearance()
+	update_appearance() */
 
 /obj/machinery/hydroponics/AltClick(mob/user)
 	. = ..()

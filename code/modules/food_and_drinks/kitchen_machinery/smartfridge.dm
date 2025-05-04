@@ -331,7 +331,7 @@
 
 /obj/machinery/smartfridge/drying_rack/powered()
 	if(!anchored)
-		return FALSE
+		return TRUE
 	return ..()
 
 /obj/machinery/smartfridge/drying_rack/power_change()

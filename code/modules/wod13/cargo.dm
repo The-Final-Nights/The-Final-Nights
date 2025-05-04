@@ -33,7 +33,7 @@
 	name = "Magadon™ Hydroponics Tray"
 	desc = "Contains a high-tech hydroponics tray. Oddly, it lacks an auto-watering feature."
 	cost = 200
-	contains = list(/obj/machinery/hydroponics)
+	contains = list(/obj/machinery/hydroponics/constructable)
 	crate_name = "hydro crate"
 
 /datum/supply_pack/vampire/weed_supplies

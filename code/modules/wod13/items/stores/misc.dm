@@ -27,13 +27,14 @@
 
 /obj/machinery/mineral/equipment_vendor/fastfood/pharmacy
 	prize_list = list(
+		new /datum/data/mining_equipment("Circinus Gum",	/obj/item/storage/box/gum/nicotine,	10),
 		new /datum/data/mining_equipment("bruise pack", /obj/item/stack/medical/bruise_pack, 100),
 		new /datum/data/mining_equipment("burn ointment", /obj/item/stack/medical/ointment, 100),
 		new /datum/data/mining_equipment("potassium iodide pill bottle", /obj/item/storage/pill_bottle/potassiodide, 100),
 		new /datum/data/mining_equipment("latex gloves", /obj/item/clothing/gloves/vampire/latex, 150),
 		new /datum/data/mining_equipment("iron pill bottle", /obj/item/storage/pill_bottle/iron, 150),
 		new /datum/data/mining_equipment("ephedrine pill bottle", /obj/item/storage/pill_bottle/ephedrine, 200),
-		new /datum/data/mining_equipment("box of syringes", /obj/item/storage/box/syringes, 300)
+		new /datum/data/mining_equipment("box of syringes", /obj/item/storage/box/syringes, 300),
 	)
 
 
@@ -44,6 +45,8 @@
 		new /datum/data/mining_equipment("zippo lighter",	/obj/item/lighter,	20),
 		new /datum/data/mining_equipment("lighter",		/obj/item/lighter/greyscale,	10),
 		new	/datum/data/mining_equipment("Rolling papers",	/obj/item/storage/fancy/rollingpapers,	10),
+		new /datum/data/mining_equipment("Circinus Vape",	/obj/item/clothing/mask/vape,	10),
+		new /datum/data/mining_equipment("Circinus Gum",	/obj/item/storage/box/gum/nicotine,	10),
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/gas
