@@ -489,7 +489,7 @@
 
 /datum/action/advanced_vicissitude/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
-	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish Skin")
+	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish skin")
 	if(!advancedupgrade)
 		return
 	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
@@ -499,7 +499,7 @@
 		return
 	selected_advanced_upgrade = advancedupgrade
 	switch (advancedupgrade)
-		if ("Bone armor")
+		if ("Bone armour")
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.unique_body_sprite = "tziarmor"
 			advanced_original_skin_tone = user.skin_tone
@@ -511,6 +511,7 @@
 			user.physiology.armor.melee += 60
 			user.physiology.armor.bullet += 60
 		if ("Centipede legs")
+			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.remove_overlay(PROTEAN_LAYER)
 			upgrade_overlay = mutable_appearance('code/modules/wod13/64x64.dmi', "centipede", -PROTEAN_LAYER)
 			upgrade_overlay.pixel_z = -16
@@ -519,6 +520,7 @@
 			user.apply_overlay(PROTEAN_LAYER)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/centipede)
 		if ("Second pair of arms")
+			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			var/limbs = user.held_items.len
 			user.change_number_of_hands(limbs + 2)
 			user.remove_overlay(PROTEAN_LAYER)
@@ -531,8 +533,8 @@
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			var/datum/action/active_camo = new()
-			active_camo.Grant(owner)
+			var/datum/action/active_camo/camo= new()
+			camo.Grant(owner)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -545,7 +547,7 @@
 	if (!do_after(user, 10 SECONDS))
 		return
 	switch (selected_advanced_upgrade)
-		if ("Bone armor")
+		if ("Bone armour")
 			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.unique_body_sprite = null
 			user.skin_tone = advanced_original_skin_tone
@@ -554,10 +556,12 @@
 			user.physiology.armor.melee -= 20
 			user.physiology.armor.bullet -= 20
 		if ("Centipede legs")
+			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.remove_overlay(PROTEAN_LAYER)
 			QDEL_NULL(upgrade_overlay)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/centipede)
 		if ("Second pair of arms")
+			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			var/limbs = user.held_items.len
 			user.change_number_of_hands(limbs - 2)
 			user.remove_overlay(PROTEAN_LAYER)
@@ -567,8 +571,11 @@
 			user.dna.species.RemoveSpeciesFlight(user)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			for(var/datum/action/active_camo in owner.actions)
-				active_camo.Remove(owner)
+			for(var/datum/action/active_camo/camo in owner.actions)
+				camo.Remove(owner)
+			if(owner.alpha == 15)
+				animate(owner, alpha = 255, time = 1.5 SECONDS)
+
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -651,13 +658,13 @@
 
 // REWORK ABILITIES AND VERBS
 
-/datum/action/active_camo/proc/toggle_camo()
-	var/mob/living/carbon/human/user = owner
-	set name = "Active Camo"
-	action_icon = 'icons/mob/mob.dmi'
-	action_icon_state = "shadow"
+/datum/action/active_camo
+	name = "Active Camo"
 	var/stealth_alpha = 15
+	button_icon_state = "basic"
 
+/datum/action/active_camo/Trigger()
+	var/mob/living/carbon/human/user = owner
 	if(owner.alpha == stealth_alpha)
 		animate(owner, alpha = 255, time = 1.5 SECONDS)
 		to_chat(user, span_notice("You disable your chromatophores and reappear!"))
