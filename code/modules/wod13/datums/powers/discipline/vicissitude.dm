@@ -486,7 +486,7 @@
 
 /datum/action/basic_vicissitude/advanced/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
-	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Bone armour", "Membrane wings", "Cuttlefish Skin")
+	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish Skin")
 	if(!advancedupgrade)
 		return
 	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
@@ -507,6 +507,22 @@
 			user.base_body_mod = ""
 			user.physiology.armor.melee += 60
 			user.physiology.armor.bullet += 60
+		if ("Centipede legs")
+			user.remove_overlay(PROTEAN_LAYER)
+			upgrade_overlay = mutable_appearance('code/modules/wod13/64x64.dmi', "centipede", -PROTEAN_LAYER)
+			upgrade_overlay.pixel_z = -16
+			upgrade_overlay.pixel_w = -16
+			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
+			user.apply_overlay(PROTEAN_LAYER)
+			user.add_movespeed_modifier(/datum/movespeed_modifier/centipede)
+		if ("Second pair of arms")
+			var/limbs = user.held_items.len
+			user.change_number_of_hands(limbs + 2)
+			user.remove_overlay(PROTEAN_LAYER)
+			upgrade_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "2hands", -PROTEAN_LAYER)
+			upgrade_overlay.color = "#[skintone2hex(user.skin_tone)]"
+			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
+			user.apply_overlay(PROTEAN_LAYER)
 		if ("Membrane wings")
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.dna.species.GiveSpeciesFlight(user)
@@ -533,6 +549,15 @@
 			user.base_body_mod = advanced_original_body_mod
 			user.physiology.armor.melee -= 20
 			user.physiology.armor.bullet -= 20
+		if ("Centipede legs")
+			user.remove_overlay(PROTEAN_LAYER)
+			QDEL_NULL(upgrade_overlay)
+			user.remove_movespeed_modifier(/datum/movespeed_modifier/centipede)
+		if ("Second pair of arms")
+			var/limbs = user.held_items.len
+			user.change_number_of_hands(limbs - 2)
+			user.remove_overlay(PROTEAN_LAYER)
+			QDEL_NULL(upgrade_overlay)
 		if ("Membrane wings")
 			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.dna.species.RemoveSpeciesFlight(user)
@@ -595,10 +620,6 @@
 
 	var/obj/effect/proc_holder/spell/targeted/shapeshift/bloodcrawler/bloodform_shapeshift
 
-/datum/discipline_power/vicissitude/bloodform/post_gain()
-	. = ..()
-	var/datum/action/basic_vicissitude/advanced/vicissitude_upgrade_advanced = new()
-	vicissitude_upgrade_advanced.Grant(owner)
 
 /datum/discipline_power/vicissitude/bloodform/activate()
 	. = ..()
