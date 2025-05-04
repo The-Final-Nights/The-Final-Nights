@@ -932,7 +932,7 @@
 	gender = PLURAL
 	name = "fancy wood flooring"
 	icon = 'code/modules/wod13/tiles.dmi'
-	icon_state = "wood1"
+	icon_state = "woodd1"
 	flags_1 = NONE
 	attachment_holes = FALSE
 	bullet_bounce_sound = null
