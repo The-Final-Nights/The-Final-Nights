@@ -265,3 +265,18 @@
 	name = "surgical bones"
 	desc = "A set of surgical tools hidden behind a concealed flesh on the user's arm."
 	contents = newlist(/obj/item/retractor/augment, /obj/item/hemostat/augment, /obj/item/cautery/augment, /obj/item/surgicaldrill/augment, /obj/item/scalpel/augment, /obj/item/circular_saw/augment, /obj/item/surgical_drapes)
+
+/obj/item/organ/cyberimp/arm/tzimisce
+	name = "armblade"
+	desc = "A concealed serrated bone blade."
+	contents = newlist(/obj/item/melee/vampirearms/tzimisce)
+
+/obj/item/organ/cyberimp/arm/tzimisce/venom
+	name = "nematocyst whip"
+	desc = "A concealed venomous whip."
+	contents = newlist(/obj/item/melee/vampirearms/tzimisce/venom)
+
+/obj/item/organ/cyberimp/arm/tzimisce/shock
+	name = "electrocyte whip"
+	desc = "A concealed electrical whip."
+	contents = newlist(/obj/item/melee/vampirearms/tzimisce/shock)
