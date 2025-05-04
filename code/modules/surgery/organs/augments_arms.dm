@@ -269,14 +269,18 @@
 /obj/item/organ/cyberimp/arm/tzimisce
 	name = "armblade"
 	desc = "A concealed serrated bone blade."
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "armblade"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce)
 
 /obj/item/organ/cyberimp/arm/tzimisce/venom
 	name = "nematocyst whip"
 	desc = "A concealed venomous whip."
+	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/venom)
 
 /obj/item/organ/cyberimp/arm/tzimisce/shock
 	name = "electrocyte whip"
 	desc = "A concealed electrical whip."
+	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/shock)
