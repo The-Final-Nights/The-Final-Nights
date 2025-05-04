@@ -385,7 +385,10 @@
 					if(!childe.can_be_embraced)
 						to_chat(sire, span_notice("[childe.name] doesn't respond to your Vitae."))
 						return
-					// If they've been dead for more than 5 minutes, then nothing happens.
+					 // If they've been dead for more than 5 minutes, then nothing happens.
+					if(childe.mind.damned)
+						to_chat(sire, span_notice("[childe.name] doesn't respond to your Vitae."))
+						return
 					if((childe.timeofdeath + 5 MINUTES) > world.time)
 						if(childe.auspice?.level) //here be Abominations
 							if(childe.auspice.force_abomination)
