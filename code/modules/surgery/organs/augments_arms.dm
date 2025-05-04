@@ -267,7 +267,7 @@
 	contents = newlist(/obj/item/retractor/augment, /obj/item/hemostat/augment, /obj/item/cautery/augment, /obj/item/surgicaldrill/augment, /obj/item/scalpel/augment, /obj/item/circular_saw/augment, /obj/item/surgical_drapes)
 
 /obj/item/organ/cyberimp/arm/tzimisce
-	name = "armblade"
+	name = "armblade implant"
 	desc = "A concealed serrated bone blade."
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "armblade"
@@ -275,13 +275,13 @@
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce)
 
 /obj/item/organ/cyberimp/arm/tzimisce/venom
-	name = "nematocyst whip"
+	name = "nematocyst whip implant"
 	desc = "A concealed venomous whip."
 	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/venom)
 
 /obj/item/organ/cyberimp/arm/tzimisce/shock
-	name = "electrocyte whip"
+	name = "electrocyte whip implant"
 	desc = "A concealed electrical whip."
 	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/shock)
