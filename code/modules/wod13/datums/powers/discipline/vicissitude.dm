@@ -341,6 +341,8 @@
 	. = ..()
 	var/datum/action/basic_vicissitude/vicissitude_upgrade = new()
 	vicissitude_upgrade.Grant(owner)
+	var/obj/item/organ/cyberimp/arm/tzimisce/armblade = new()
+	armblade.Insert(owner)
 
 	if (!owner.mind)
 		return
