@@ -130,7 +130,7 @@ SUBSYSTEM_DEF(beastmastering)
 		if(get_dist(src, targa) <= 1)
 			ClickOn(targa)
 	else
-		if(follow && isturf(beastmaster.loc))
+		if(follow && isturf(beastmaster?.loc))
 			if( (z != beastmaster.z) & (get_dist(beastmaster.loc, loc) <= 10) )
 				forceMove(get_turf(beastmaster))
 			else
