@@ -422,13 +422,6 @@
 		if ("Leather wings")
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
-		if ("Chameleon skin")
-			original_skin_tone = user.skin_tone
-			user.skin_tone = "albino"
-			original_hairstyle = user.hairstyle
-			user.hairstyle = "Bald"
-			user.dna.add_mutation(CHAMELEON)
-
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
