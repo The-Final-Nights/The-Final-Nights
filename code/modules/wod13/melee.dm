@@ -943,9 +943,6 @@
 		return
 	if(isliving(target))
 		var/mob/living/L = target
-		L.AdjustKnockdown(4 SECONDS)
 		L.adjustStaminaLoss(50)
-		L.Immobilize(3 SECONDS)
-		if(L.body_position != LYING_DOWN)
-			L.toggle_resting()
+		L.Jitter(20)
 	return ..()
