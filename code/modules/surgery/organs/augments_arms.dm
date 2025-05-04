@@ -269,8 +269,9 @@
 /obj/item/organ/cyberimp/arm/tzimisce
 	name = "armblade"
 	desc = "A concealed serrated bone blade."
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "armblade"
+	zone = BODY_ZONE_L_ARM
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce)
 
 /obj/item/organ/cyberimp/arm/tzimisce/venom
