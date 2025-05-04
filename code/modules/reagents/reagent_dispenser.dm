@@ -65,6 +65,7 @@
 	name = "Rain Barrel"
 	desc = "A water barrel that collects rain water, intended for watering a garden."
 	icon_state = "rain_barrel"
+	anchored = TRUE
 
 /obj/structure/reagent_dispensers/foamtank
 	name = "firefighting foam tank"
