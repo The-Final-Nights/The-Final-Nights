@@ -81,6 +81,22 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/datum/crafting_recipe/tzi_venom
+	name = "Nematocyst Whip"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 15, /obj/item/guts = 1)
+	result = /obj/item/organ/cyberimp/arm/tzimisce/venom
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzi_stun
+	name = "Electrocyte Whip"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 15, /obj/item/guts = 1)
+	result = /obj/item/organ/cyberimp/arm/tzimisce/shock
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
 //unused due to being bad
 /datum/crafting_recipe/tzi_koldun
 	name = "Koldun Sorcery (Firebreath)"
