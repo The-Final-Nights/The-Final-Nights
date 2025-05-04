@@ -184,7 +184,7 @@
 	icon_state = "tzimisce_floor"
 
 /datum/movespeed_modifier/centipede
-	multiplicative_slowdown = -0.8
+	multiplicative_slowdown = -1.2
 	blacklisted_movetypes = (FLYING|FLOATING)
 
 /datum/movespeed_modifier/leatherwings
@@ -193,6 +193,7 @@
 
 /datum/movespeed_modifier/membranewings
 	multiplicative_slowdown = -0.8
+	movetypes = FLOATING|FLYING
 
 /mob/living/simple_animal/hostile/bloodcrawler
 	var/collected_blood = 0
