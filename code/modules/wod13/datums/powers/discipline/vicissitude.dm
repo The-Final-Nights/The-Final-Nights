@@ -475,7 +475,7 @@
 	var/advanced_original_hairstyle
 	var/advanced_original_body_mod
 
-/datum/action/basic_vicissitude/advanced/Trigger()
+/datum/action/advanced_vicissitude/Trigger()
 	. = ..()
 	if (selected_advanced_upgrade)
 		remove_advanced_upgrade()
