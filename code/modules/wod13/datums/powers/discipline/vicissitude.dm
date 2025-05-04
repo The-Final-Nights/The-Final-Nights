@@ -467,9 +467,12 @@
 
 	selected_upgrade = null
 
-/datum/action/basic_vicissitude/advanced
+/datum/action/advanced_vicissitude
 	name = "Advanced Vicissitude Upgrade"
 	desc = "Upgrade your body further..."
+	button_icon_state = "basic"
+	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
+	vampiric = TRUE
 	var/selected_advanced_upgrade
 	var/advanced_original_skin_tone //Shouldn't be necessary most of the time, but in case someone combines the changes for the two armours.
 	var/advanced_original_hairstyle
@@ -484,9 +487,9 @@
 
 	owner.update_body()
 
-/datum/action/basic_vicissitude/advanced/proc/give_advanced_upgrade()
+/datum/action/advanced_vicissitude/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
-	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish Skin")
+	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish Skin")
 	if(!advancedupgrade)
 		return
 	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
@@ -528,12 +531,13 @@
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			user.AddAbility(new/obj/effect/proc_holder/vicissitude/camo(null))
+			var/datum/action/active_camo = new()
+			active_camo.Grant(owner)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
 
-/datum/action/basic_vicissitude/advanced/proc/remove_advanced_upgrade()
+/datum/action/advanced_vicissitude/proc/remove_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
 	if (!selected_advanced_upgrade)
 		return
@@ -563,7 +567,8 @@
 			user.dna.species.RemoveSpeciesFlight(user)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/membranewings)
 		if ("Cuttlefish skin")
-			user.RemoveAbility(new/obj/effect/proc_holder/vicissitude/camo(null))
+			for(var/datum/action/active_camo in owner.actions)
+				active_camo.Remove(owner)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -636,27 +641,26 @@
 	owner.Stun(1.5 SECONDS)
 	owner.do_jitter_animation(30)
 
+/datum/discipline_power/vicissitude/bloodform/post_gain()
+	. = ..()
+	for(var/datum/action/basic_vicissitude/vicissitude_upgrade in owner.actions)
+		vicissitude_upgrade.Remove(owner)
+
+	var/datum/action/advanced_vicissitude/vicissitude_upgrade_advanced = new()
+	vicissitude_upgrade_advanced.Grant(owner)
 
 // REWORK ABILITIES AND VERBS
 
-/mob/living/carbon/human/proc/active_camo()
-	set category = "Abilities"
+/datum/action/active_camo/proc/toggle_camo()
+	var/mob/living/carbon/human/user = owner
 	set name = "Active Camo"
-	set desc = "Camouflage yourself"
-	var/stealth_alpha = 15
-
-	if(alpha == stealth_alpha)
-		animate(src, alpha = 255, time = 1.5 SECONDS)
-	else
-		animate(src, alpha = stealth_alpha, time = 1.5 SECONDS)
-
-/obj/effect/proc_holder/vicissitude
-	has_action = TRUE
-	base_action = /datum/action/spell_action
 	action_icon = 'icons/mob/mob.dmi'
 	action_icon_state = "shadow"
-	action_background_icon_state = "bg_spell"
+	var/stealth_alpha = 15
 
-/obj/effect/proc_holder/vicissitude/camo
-	base_action = /datum/action/spell_action
-	action_icon_state = "shadow"
+	if(owner.alpha == stealth_alpha)
+		animate(owner, alpha = 255, time = 1.5 SECONDS)
+		to_chat(user, span_notice("You disable your chromatophores and reappear!"))
+	else
+		animate(owner, alpha = stealth_alpha, time = 1.5 SECONDS)
+		to_chat(user, span_notice("You activate your chromatophores and disappear!"))
