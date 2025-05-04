@@ -836,12 +836,12 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	if (!check_rights(R_DEBUG))
 		return
 
-	if(user.byond_version < 516)
-		to_chat(user, span_warning("You can only use this on 516!"))
+	if(usr.client.byond_version < 516)
+		to_chat(usr, span_warning("You can only use this on 516!"))
 		return
 
-	to_chat(user, span_notice("You can now right click to use inspect on browsers."))
-	winset(user, null, list("browser-options" = "+devtools"))
+	to_chat(usr, span_notice("You can now right click to use inspect on browsers."))
+	winset(usr, null, list("browser-options" = "+devtools"))
 
 /proc/generate_timer_source_output(list/datum/timedevent/events)
 	var/list/per_source = list()
