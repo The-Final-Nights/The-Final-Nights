@@ -470,6 +470,7 @@
 	button_icon_state = "basic"
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
+	var/mutable_appearance/upgrade_overlay
 	var/selected_advanced_upgrade
 	var/advanced_original_skin_tone //Shouldn't be necessary most of the time, but in case someone combines the changes for the two armours.
 	var/advanced_original_hairstyle
