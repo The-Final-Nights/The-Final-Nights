@@ -365,7 +365,7 @@
 	///The value in here has NOTHING to do with icons. It needs to be this for the proper examine.
 	icon_type = "rolling paper"
 	spawn_type = /obj/item/rollingpaper
-	custom_price = PAYCHECK_PRISONER
+	// custom_price = PAYCHECK_PRISONER
 
 /obj/item/storage/fancy/rollingpapers/ComponentInitialize()
 	. = ..()
