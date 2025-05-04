@@ -32,7 +32,6 @@ import { setupHotKeys } from 'tgui-core/hotkeys';
 import { setupHotReloading } from 'tgui-dev-server/link/client.mjs';
 
 import { setGlobalStore } from './backend';
-import { loadIconRefMap } from './icons';
 import { captureExternalLinks } from './links';
 import { createRenderer } from './renderer';
 import { configureStore } from './store';
@@ -44,7 +43,6 @@ const store = configureStore();
 
 const renderApp = createRenderer(() => {
   setGlobalStore(store);
-  loadIconRefMap();
 
   const { getRoutedComponent } = require('./routes');
   const Component = getRoutedComponent(store);
