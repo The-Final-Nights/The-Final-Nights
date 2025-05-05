@@ -17,6 +17,11 @@
   - bugfix: fixed icon state for fancy wood not showing
   ShadeAware:
   - image: New title screen.
+  chazzyjazzy:
+  - rscadd: Dominate 1 is now a custom command input textbox, where longer commands
+      have higher diceroll difficulty for success.
+  - balance: Dominate and Presence both can no longer be used through walls. The target
+      MUST hear you for the command to succeed.
   shadeaware, bomby:
   - rscadd: Tasers have been issued to the SFPD
   - sound: New sounds for the taser

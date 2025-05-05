@@ -1,5 +1,0 @@
-author: "chazzyjazzy"
-delete-after: True
-changes:
-  - rscadd: "Dominate 1 is now a custom command input textbox, where longer commands have higher diceroll difficulty for success."
-  - balance: "Dominate and Presence both can no longer be used through walls. The target MUST hear you for the command to succeed."
