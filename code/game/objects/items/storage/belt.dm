@@ -223,7 +223,7 @@
 		/obj/item/ammo_box/magazine/toy/pistol,
 		/obj/item/ammo_box/magazine/glock9mm,
 		/obj/item/ammo_box/magazine/vamp556,
-		/obj/item/gun/energy/taser,
+		/obj/item/gun/energy/taser/twoshot,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/restraints/handcuffs,
 		/obj/item/flashlight/seclite,
@@ -231,21 +231,21 @@
 		))
 
 /obj/item/storage/belt/police/full/PopulateContents()
+	new /obj/item/gun/energy/taser/twoshot(src)
+	new /obj/item/gun/ballistic/automatic/vampire/glock21(src)
 	new /obj/item/reagent_containers/spray/pepper(src)
 	new /obj/item/restraints/handcuffs(src)
 	new /obj/item/flashlight/seclite(src)
-	new /obj/item/gun/energy/taser(src)
-	new /obj/item/gun/ballistic/automatic/vampire/glock21(src)
 	new /obj/item/ammo_box/magazine/glock45acp(src)
 
 /obj/item/storage/belt/police/swat
 
 /obj/item/storage/belt/police/swat/full/PopulateContents()
+	new /obj/item/gun/energy/taser/twoshot(src)
 	new /obj/item/reagent_containers/spray/pepper(src)
 	new /obj/item/restraints/handcuffs(src)
 	new /obj/item/ammo_box/magazine/vamp556(src)
 	new /obj/item/ammo_box/magazine/vamp556(src)
-	new /obj/item/gun/energy/taser(src)
 
 /obj/item/storage/belt/security
 	name = "security belt"
