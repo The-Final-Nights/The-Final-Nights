@@ -551,8 +551,8 @@
 			user.skin_tone = advanced_original_skin_tone
 			user.hairstyle = advanced_original_hairstyle
 			user.base_body_mod = advanced_original_body_mod
-			user.physiology.armor.melee -= 20
-			user.physiology.armor.bullet -= 20
+			user.physiology.armor.melee -= 60
+			user.physiology.armor.bullet -= 60
 		if ("Centipede legs")
 			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.remove_overlay(PROTEAN_LAYER)
