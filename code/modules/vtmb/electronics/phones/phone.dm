@@ -645,8 +645,6 @@
 	contacts += L
 	var/datum/phonecontact/voivode/Z = new()
 	contacts += Z
-	var/datum/phonecontact/endronlead/ENDRONLEAD = new()
-	contacts += ENDRONLEAD
 
 /obj/item/vamp/phone/sheriff
 	exchange_num = 267
@@ -1006,8 +1004,6 @@
 	contacts += ENDRONAFFAIRS
 	var/datum/phonecontact/endronsecchief/ENDRONSECCHIEF = new()
 	contacts += ENDRONSECCHIEF
-	var/datum/phonecontact/prince/PRINCE = new()
-	contacts += PRINCE
 
 /obj/item/vamp/phone/endronexec/Initialize()
 	..()
