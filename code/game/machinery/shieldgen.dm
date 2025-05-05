@@ -497,3 +497,6 @@
 	else
 		if(istype(mover, /obj/projectile))
 			return prob(10)
+
+#undef ACTIVE_SETUPFIELDS
+#undef ACTIVE_HASFIELDS

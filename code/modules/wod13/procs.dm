@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/AdjustMasquerade(var/value, var/forced = FALSE)
+/mob/living/carbon/human/proc/AdjustMasquerade(value, forced = FALSE)
 	if(!iskindred(src) && !isghoul(src) && !iscathayan(src))
 		return
 	if(!GLOB.canon_event)
@@ -7,10 +7,8 @@
 		if(value > 0)
 			if(HAS_TRAIT(src, TRAIT_VIOLATOR))
 				return
-		if(istype(get_area(src), /area/vtm))
-			var/area/vtm/V = get_area(src)
-			if(V.zone_type != "masquerade")
-				return
+		if(!CheckZoneMasquerade(src))
+			return
 	if(!is_special_character(src) || forced)
 		if(((last_masquerade_violation + 10 SECONDS) < world.time) || forced)
 			last_masquerade_violation = world.time
@@ -35,7 +33,7 @@
 	else if(masquerade < 3)
 		GLOB.masquerade_breakers_list |= src
 
-/mob/living/carbon/human/npc/proc/backinvisible(var/atom/A)
+/mob/living/carbon/human/npc/proc/backinvisible(atom/A)
 	switch(dir)
 		if(NORTH)
 			if(A.y >= y)
@@ -50,6 +48,14 @@
 			if(A.x <= x)
 				return TRUE
 	return FALSE
+
+/proc/CheckZoneMasquerade(mob/target)
+	if(istype(get_area(target), /area/vtm))
+		var/area/vtm/V = get_area(target)
+		if(V.zone_type != "masquerade")
+			return FALSE
+		else
+			return TRUE
 
 /mob/living/proc/CheckEyewitness(var/mob/living/source, var/mob/attacker, var/range = 0, var/affects_source = FALSE)
 	var/actual_range = max(1, round(range*(attacker.alpha/255)))
@@ -82,7 +88,7 @@
 				return FALSE
 	return TRUE
 
-/proc/get_vamp_skin_color(var/value = "albino")
+/proc/get_vamp_skin_color(value = "albino")
 	switch(value)
 		if("caucasian1")
 			return "vamp1"
