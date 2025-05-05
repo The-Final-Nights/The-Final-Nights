@@ -345,7 +345,7 @@
 	spawn_type = /obj/item/clothing/mask/cigarette/xeno
 
 /obj/item/storage/fancy/cigarettes/cigpack_cannabis
-	name = "\improper Freak Brothers' Special packet"
+	name = "\improper Circinus Green Indiva packet"
 	desc = "A label on the packaging reads, \"Endorsed by Phineas, Freddy and Franklin.\""
 	icon_state = "midori"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/cannabis
@@ -365,7 +365,7 @@
 	///The value in here has NOTHING to do with icons. It needs to be this for the proper examine.
 	icon_type = "rolling paper"
 	spawn_type = /obj/item/rollingpaper
-	// custom_price = PAYCHECK_PRISONER
+	custom_price = PAYCHECK_PRISONER
 
 /obj/item/storage/fancy/rollingpapers/ComponentInitialize()
 	. = ..()

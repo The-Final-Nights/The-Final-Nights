@@ -359,6 +359,17 @@
 	..()
 	. = 1
 
+	// Kuzuyu - Kudzu Tea
+/datum/reagent/consumable/tea/kuzuyu
+	name = "kuzuyu"
+	description = "Made from Kudzu root."
+	color = "#fdfcf4" // rgb: 16, 64, 56
+	nutriment_factor = 0
+	taste_description = "slightly sweet tea"
+	glass_icon_state = "teaglass"
+	glass_name = "glass of kuzuyu"
+	glass_desc = "Pale white tea with the gooey consistency of honey."
+
 /datum/reagent/consumable/space_cola
 	name = "Cola"
 	description = "A refreshing beverage."
