@@ -571,7 +571,7 @@
 		if ("Cuttlefish skin")
 			for(var/datum/action/active_camo/camo in owner.actions)
 				camo.Remove(owner)
-			if(owner.alpha == 15)
+			if(owner.alpha == 30)
 				animate(owner, alpha = 255, time = 1.5 SECONDS)
 
 
@@ -658,7 +658,7 @@
 
 /datum/action/active_camo
 	name = "Active Camo"
-	var/stealth_alpha = 15
+	var/stealth_alpha = 30
 	button_icon_state = "basic"
 
 /datum/action/active_camo/Trigger()
