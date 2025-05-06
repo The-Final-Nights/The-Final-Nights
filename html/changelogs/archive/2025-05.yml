@@ -25,3 +25,13 @@
   shadeaware, bomby:
   - rscadd: Tasers have been issued to the SFPD
   - sound: New sounds for the taser
+2025-05-06:
+  Hardly:
+  - code_imp: Colors can now be picked with better precision.
+  JohnChiffir:
+  - rscadd: weed bloodbag and it's craft
+  Somniworld:
+  - bugfix: unupgrading Vissicitude's "2nd pair of arms" will no longer delimb one
+      of your original limbs, you will also no longer take damage from doing so.
+  Sparrowbird611:
+  - balance: Makes melee weapons stronger.

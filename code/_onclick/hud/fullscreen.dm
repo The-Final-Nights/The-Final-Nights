@@ -176,7 +176,7 @@
 /atom/movable/screen/fullscreen/lighting_backdrop/lit
 	invisibility = INVISIBILITY_LIGHTING
 	layer = BACKGROUND_LAYER+21
-	color = "#000"
+	color = "#000000"
 	show_when_dead = TRUE
 
 //Provides whiteness in case you don't see lights so everything is still visible
