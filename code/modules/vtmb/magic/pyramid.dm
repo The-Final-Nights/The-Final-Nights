@@ -60,6 +60,18 @@
 			L.Immobilize(30)
 			last_activator = user
 			activator_bonus = L.thaum_damage_plus
+
+			// Create a light source
+			//if(!src.light)
+			//	src.light = new /obj/light(src)
+			//	src.light.set_brightness(3)
+			//	src.light.set_color(255, 0, 0)
+			//	src.light.on()
+
+			// (Optionally a rune animation to glow brighter)
+			animate(src, color = rgb(255, 64, 64), time = 10)
+
+
 			if(sacrifices.len > 0)
 				var/list/found_items = list()
 				for(var/obj/item/I in get_turf(src))
@@ -245,7 +257,7 @@
 	name = "Question to Ancestors Rune"
 	desc = "Summon souls from the dead. Ask a question and get answers. Requires a bloodpack."
 	icon_state = "rune5"
-	word = "TE-ME'LL"
+	word = "VOCA-ANI'MA"
 	thaumlevel = 3
 	sacrifices = list(/obj/item/drinkable_bloodpack)
 
@@ -257,8 +269,9 @@
 	faction = list("Tremere")
 
 /obj/ritualrune/question/complete()
+	var/text_question = tgui_input_text(usr, "Enter your question to the Ancestors:", "Question to Ancestors")
 	visible_message("<span class='notice'>A call rings out to the dead from the [src.name] rune...</span>")
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to answer a question? (You are allowed to spread meta information)", null, null, null, 10 SECONDS, src)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to answer a question? (You are allowed to spread meta information) <br> The question is : [text_question]", null, null, null, 10 SECONDS, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
 			to_chat(G, "<span class='ghostalert'>Question rune has been triggered.</span>")
@@ -270,13 +283,13 @@
 		playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 		qdel(src)
 	else
-		visible_message("<span class='notice'>No one answers the [src.name] rune's call.</span>")
+		visible_message(span_notice("No one answers the [src.name] rune's call."))
 
 /obj/ritualrune/teleport
 	name = "Teleportation Rune"
 	desc = "Move your body among the city streets. Requires a bloodpack."
 	icon_state = "rune6"
-	word = "POR'TALE"
+	word = "CLAV'TRANSITUM"
 	thaumlevel = 5
 	sacrifices = list(/obj/item/drinkable_bloodpack)
 
@@ -290,9 +303,9 @@
 	..()
 	if(activated)
 		if(last_activator != user)
-			to_chat(user, "<span class='warning'>You are not the one who activated this rune!</span>")
+			to_chat(user, span_warning("You are not the one who activated this rune!"))
 			return
-		var/direction = input(user, "Choose direction:", "Teleportation Rune") in list("North", "East", "South", "West")
+		var/direction = tgui_input_list(user, "Choose direction:", "Teleportation Rune") in list("North", "East", "South", "West")
 		if(direction)
 			var/x_dir = user.x
 			var/y_dir = user.y
@@ -303,7 +316,7 @@
 			var/turf/destination = null
 
 			if(get_dist(src, user) > 1)
-				to_chat(user, "<span class='warning'>You moved away from the rune!</span>")
+				to_chat(user, span_warning("You moved away from the rune!"))
 				return
 
 			// Move at least min_distance tiles in the chosen direction
@@ -331,8 +344,8 @@
 					if("West")
 						x_dir -= 1
 
-				if(x_dir < 20 || x_dir > 230 || y_dir < 20 || y_dir > 230)
-					to_chat(user, "<span class='warning'>You can't teleport outside the city!</span>")
+				if(x_dir < 15 || x_dir > 240 || y_dir < 15 || y_dir > 240)
+					to_chat(user, span_warning("You can't teleport outside the city!"))
 					return
 
 				destination = locate(x_dir, y_dir, user.z)
@@ -346,15 +359,16 @@
 				user.forceMove(destination)
 				qdel(src)
 			else
-				to_chat(user, "<span class='warning'>The spell fails as no destination is found!</span>")
+				to_chat(user, span_warning("The spell fails as no destination is found!"))
 
 /obj/ritualrune/curse
 	name = "Curse Rune"
-	desc = "Curse your enemies in distance. Requires a heart."
+	desc = "Curse your enemies from afar. Requires a heart."
 	icon_state = "rune7"
-	word = "CUS-RE'S"
+	word = "MAL'DICTO-SANGUINIS"
 	thaumlevel = 5
 	sacrifices = list(/obj/item/organ/heart)
+
 
 /obj/ritualrune/curse/complete()
 	if(!activated)
@@ -395,40 +409,77 @@
 	name = "Gargoyle Transformation"
 	desc = "Create a Gargoyle."
 	icon_state = "rune9"
-	word = "GRORRR'RRR"
-	thaumlevel = 4
+	word = "FORMA-GARGONEM"
+	thaumlevel = 5
+	var/duration_length = 60 SECONDS
 
 /obj/ritualrune/gargoyle/complete()
 	for(var/mob/living/carbon/human/H in loc)
 		if(H)
 			if(H.stat > SOFT_CRIT)
-				for(var/datum/action/A in H.actions)
-					if(A)
-						if(A.vampiric)
-							A.Remove(H)
-				H.revive(TRUE)
-				H.set_species(/datum/species/kindred)
-				H.clane = new /datum/vampireclane/gargoyle()
-				H.clane.on_gain(H)
-				H.clane.post_gain(H)
-				H.forceMove(get_turf(src))
-				H.create_disciplines(FALSE, H.clane.clane_disciplines)
-				if(!H.key)
-					var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to play as Sentient Gargoyle?", null, null, null, 50, src)
-					for(var/mob/dead/observer/G in GLOB.player_list)
-						if(G.key)
-							to_chat(G, "<span class='ghostalert'>Gargoyle Transformation rune has been triggered.</span>")
-					if(LAZYLEN(candidates))
-						var/mob/dead/observer/C = pick(candidates)
-						H.key = C.key
+				H.Stun(600)
+				H.emote("twitch")
+				to_chat(usr, span_notice("You begin invoking the ritual of Gargoyle Creation..."))
 				playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
-				qdel(src)
-				return
+				playsound(loc, 'code/modules/wod13/sounds/vicissitude.ogg', 50, FALSE)
+				if(do_after(usr, duration_length, usr))
+					activated = TRUE
+					last_activator = usr
+					H.visible_message("<span class='gargoylealert'><b>[H]</b> is petrifying into stone!</span>")
+					// Add a timer to complete the transformation
+					addtimer(CALLBACK(src, PROC_REF(gargoyle_transform), H), 0)
+					return
+				else
+					to_chat(usr, span_warning("Your ritual was interrupted!"))
+
 			else
 				playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 				H.adjustBruteLoss(25)
 				H.emote("scream")
 				return
+
+/obj/ritualrune/gargoyle/proc/gargoyle_transform(mob/living/carbon/human/H)
+	if(!H || QDELETED(H) || H.stat > DEAD)
+		return
+
+	// Remove any vampiric actions (e.g., disciplines or abilities)
+	for(var/datum/action/A in H.actions)
+		if(A && A.vampiric)
+			A.Remove(H)
+
+	// Revive the human and set them as a Gargoyle
+	H.revive(TRUE)
+	H.set_species(/datum/species/kindred)
+	H.clane = new /datum/vampireclane/gargoyle()
+	H.clane.on_gain(H)
+	H.clane.post_gain(H)
+
+	// Move the Gargoyle back to their original location
+	var/original_location = H.loc  // Save the original location of the human
+	H.forceMove(original_location)  // Keep the Gargoyle at the original location
+
+	// Create the Gargoyle's disciplines
+	H.create_disciplines(FALSE, H.clane.clane_disciplines)
+	playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
+	playsound(H.loc, 'code/modules/wod13/sounds/vicissitude.ogg', 50, FALSE)
+
+	// Handle key assignment (if needed, such as for respawn handling)
+	if(!H.key)
+		var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to play as Sentient Gargoyle?", null, null, null, 50, src)
+		for(var/mob/dead/observer/G in GLOB.player_list)
+			if(G.key)
+				to_chat(G, "<span class='ghostalert'>Gargoyle Transformation rune has been triggered.</span>")
+
+		if(LAZYLEN(candidates))
+			var/mob/dead/observer/C = pick(candidates)
+			H.key = C.key
+
+	// Play sound and finalize the transformation process
+
+
+	// Clean up the rune (delete it)
+	qdel(src)
+
 
 //Deflection of the Wooden Doom ritual
 //Protects you from being staked for a single hit. Is it useful? Marginally. But it is a level 1 rite.
@@ -454,7 +505,7 @@
 	name = "Blood Walk"
 	desc = "Trace the subject's lineage from a blood syringe."
 	icon_state = "rune7"
-	word = "Reveal thine bloodline for my eyes."
+	word = "Reveal thy bloodline for mine eyes."
 	thaumlevel = 2
 
 /obj/ritualrune/bloodwalk/attack_hand(mob/user)
@@ -467,8 +518,9 @@
 						if(blood_data)
 							var/generation = blood_data["generation"]
 							var/clan = blood_data["clan"]
-
-							var/message = generate_message(generation, clan)
+							var/species = blood_data["species"]
+							var/disciplines = blood_data["disciplines"]
+							var/message = generate_message(species, generation, clan, disciplines)
 							to_chat(user, "[message]")
 						else
 							to_chat(user, "The blood speaks not-it is empty of power!")
@@ -479,56 +531,89 @@
 		activated = TRUE
 		qdel(src)
 
-/obj/ritualrune/bloodwalk/proc/generate_message(generation, clan)
+/obj/ritualrune/bloodwalk/proc/generate_message(species, generation, clan, disciplines)
 	var/message = ""
 
-	if(generation == 4)
-		message += "The blood is incredibly ancient and powerful! It must be from an ancient Methuselah! "
-	else if(generation == 5)
-		message += "The blood is incredibly ancient and powerful! It must be from a Methuselah! "
-	else if(generation == 6)
-		message += "The blood is incredibly ancient and powerful! It must be from an Elder! "
-	else if(generation == 7 || generation == 8 || generation == 9)
-		message += "The blood is powerful. It must come from an Ancilla or Elder! "
-	else if(generation == 10 || generation == 11)
-		message += "The blood is of middling strength. It must come from someone young. "
-	else if(generation >=12)
-		message += "The blood is of waning strength. It must come from a neonate. "
+	//species
+	if(species == "Human")
+		message += "This is the weak blood of the Kine.\n"
+	else if(species == "Vampire")
+		message += "This is Kindred blood.\n"
+	else if(species == "Ghoul")
+		message += "This is the blood of a ghoul servant.\n"
+	else if(species == "Werewolf")
+		message += "This is not normal blood... it feels too alive, filled with rage...\n"
+	else if (species == "Kuei-Jin")
+		message += "This blood's origin is murky and unknown. Could it be one of the clanless?\n"
 
+	//generation
+	if(generation == 4)
+		message += "The blood is incredibly ancient and powerful! It must be from an ancient Methuselah!\n"
+	else if(generation == 5)
+		message += "The blood is incredibly ancient and powerful! It must be from a Methuselah!\n"
+	else if(generation == 6)
+		message += "The blood is incredibly ancient and powerful! It must be from an Elder!\n"
+	else if(generation == 7 || generation == 8 || generation == 9)
+		message += "The blood is powerful. It must come from an Ancilla or Elder!\n"
+	else if(generation == 10 || generation == 11)
+		message += "The blood is of middling strength. It must come from someone young.\n"
+	else if(generation == 12 || generation == 13)
+		message += "The blood is of waning strength. It must come from a neonate.\n"
+	else if (generation >= 14)
+		message += "This is the vitae of a thinblood!\n"
+
+	//clan
 	if(clan == "Toreador" || clan == "Daughters of Cacophony")
-		message += "The blood is sweet and rich. The owner must, too, be beautiful."
+		message += "The blood is sweet and rich. The owner must, too, be beautiful.\n"
 	else if(clan == "Ventrue")
-		message += "The blood has kingly power in it, descending from Mithras or Hardestadt."
+		message += "The blood has kingly power in it, descending from Mithras or Hardestadt.\n"
 	else if(clan == "Lasombra")
-		message += "Cold and dark, this blood has a mystical connection to the Abyss."
+		message += "Cold and dark, this blood has a mystical connection to the Abyss.\n"
 	else if(clan == "Tzimisce")
-		message += "The vitae is mutable and twisted. Is there any doubt to the cursed line it belongs to?"
+		message += "The vitae is mutable and twisted. Is there any doubt to the cursed line it belongs to?\n"
+	else if (clan == "Old Clan Tzimisce")
+		message += "This vitae is old and ancient. It reminds you of a more twisted and cursed blood...\n"
 	else if(clan == "Gangrel")
-		message += "The blood emits a primal and feral aura. The same is likely of the owner."
+		message += "The blood emits a primal and feral aura. The same is likely of the owner.\n"
 	else if(clan == "Malkavian")
-		message += "You can sense chaos and madness within this blood. It's owner must be maddened too."
+		message += "You can sense chaos and madness within this blood. It's owner must be maddened too.\n"
 	else if(clan == "Brujah")
-		message += "The blood is filled with passion and anger. So must be the owner of the blood."
+		message += "The blood is filled with passion and anger. So must be the owner of the blood.\n"
 	else if(clan == "Nosferatu")
-		message += "The blood is foul and disgusting. Same must apply to the owner."
+		message += "The blood is foul and disgusting. Same must apply to the owner.\n"
 	else if(clan == "Tremere")
-		message += "The blood is filled with the power of magic. The owner must be a thaumaturge."
+		message += "The blood is filled with the power of magic. The owner must be a thaumaturge.\n"
 	else if(clan == "Baali")
-		message += "Tainted and corrupt. Vile and filthy. You see your reflection in the blood, but something else stares back."
+		message += "Tainted and corrupt. Vile and filthy. You see your reflection in the blood, but something else stares back.\n"
 	else if(clan == "Assamite")
-		message += "Potent... Deadly... And cursed. You know well the curse laid by Tremere on the assassins."
+		message += "Potent... deadly... and cursed. You know well the curse laid by Tremere on the assassins.\n"
 	else if(clan == "True Brujah")
-		message += "The blood is cold and static... It's hard to feel any emotion within it."
+		message += "The blood is cold and static... It's hard to feel any emotion within it.\n"
 	else if(clan == "Salubri")
-		message += "The cursed blood of the Salubri! The owner of this blood must be slain."
+		message += "The cursed blood of the Salubri! The owner of this blood must be slain.\n"
 	else if(clan == "Giovanni" || clan == "Cappadocian")
-		message += "The blood is very cold and filled with death. The owner must be a necromancer."
+		message += "The blood is very cold and filled with death. The owner must be a necromancer.\n"
 	else if(clan == "Kiasyd")
-		message += "The blood is filled with traces of fae magic."
+		message += "The blood is filled with traces of fae magic.\n"
 	else if(clan == "Gargoyle")
-		message += "The blood of our stone servants."
+		message += "The blood of our stone servants.\n"
 	else if(clan == "Ministry")
-		message += "Seduction and allure are in the blood. Ah, one of the snakes."
+		message += "Seduction and allure are in the blood. Ah, one of the snakes.\n"
+	else if (clan == "Caitiff")
+		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"
 	else
-		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?"
+		message += "The blood's origin is hard to trace.\n"
+
+	//disciplines
+	if (disciplines && length(disciplines) > 0)
+		message += "<b>Known disciplines:</b><br>"
+		for (var/entry in disciplines)
+			if (islist(entry))
+				var/name = entry["name"]
+				var/level = entry["level"]
+				message += "- [name] (Level [level])<br>"
+	else
+		message += ""
+
 	return message
+
