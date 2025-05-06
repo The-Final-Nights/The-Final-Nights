@@ -153,19 +153,19 @@
 		"Singer")
 
 	//Hair shit
-	var/list/hair_colors = list("040404",	//Black
-		"120b05",	//Dark Brown
-		"342414",	//Brown
-		"554433",	//Light Brown
-		"695c3b",	//Dark Blond
-		"ad924e",	//Blond
-		"dac07f",	//Light Blond
-		"802400",	//Ginger
-		"a5380e",	//Ginger alt
-		"ffeace",	//Albino
-		"650b0b",	//Punk Red
-		"14350e",	//Punk Green
-		"080918")	//Punk Blue
+	var/list/hair_colors = list("#040404",	//Black
+		"#120b05",	//Dark Brown
+		"#342414",	//Brown
+		"#554433",	//Light Brown
+		"#695c3b",	//Dark Blond
+		"#ad924e",	//Blond
+		"#dac07f",	//Light Blond
+		"#802400",	//Ginger
+		"#a5380e",	//Ginger alt
+		"#ffeace",	//Albino
+		"#650b0b",	//Punk Red
+		"#14350e",	//Punk Green
+		"#080918")	//Punk Blue
 
 	var/list/male_hair = list("Bald",
 		"Afro",
@@ -386,7 +386,7 @@
 		age = rand(socialrole.min_age, socialrole.max_age)
 		skin_tone = pick(socialrole.s_tones)
 		if(age >= 55)
-			hair_color = "a2a2a2"
+			hair_color = "#a2a2a2"
 			facial_hair_color = hair_color
 		else
 			hair_color = pick(socialrole.hair_colors)
