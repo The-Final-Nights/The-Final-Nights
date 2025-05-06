@@ -52,11 +52,12 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 
 //Tut nekotoroe runtime sret
 
-/mob/living/carbon/proc/handle_hallucinations(delta_time, times_fired)
+/mob/living/carbon/proc/handle_hallucinations()
 	if(!hallucination)
 		return
 
-	hallucination = max(hallucination - (0.5 * delta_time), 0)
+	hallucination = max(hallucination - 1, 0)
+
 	if(world.time < next_hallucination)
 		return
 

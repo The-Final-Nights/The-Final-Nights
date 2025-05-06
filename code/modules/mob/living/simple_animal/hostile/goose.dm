@@ -156,11 +156,11 @@
 	else
 		addtimer(CALLBACK(src, PROC_REF(suffocate)), 300)
 
-/mob/living/simple_animal/hostile/retaliate/goose/Life(delta_time = SSMOBS_DT, times_fired)
+/mob/living/simple_animal/hostile/retaliate/goose/Life()
 	. = ..()
 	if(choking && !stat)
 		do_jitter_animation(50)
-		if(DT_PROB(10, delta_time))
+		if(prob(20))
 			emote("gasp")
 
 /mob/living/simple_animal/hostile/retaliate/goose/proc/suffocate()

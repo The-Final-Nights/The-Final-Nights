@@ -311,7 +311,7 @@
 	return
 
 /// If var/processing is TRUE, this is run on each life tick
-/datum/wound/proc/handle_process(delta_time, times_fired)
+/datum/wound/proc/handle_process()
 	return
 
 /// For use in do_after callback checks
@@ -333,7 +333,7 @@
 	return
 
 /// Called when the patient is undergoing stasis, so that having fully treated a wound doesn't make you sit there helplessly until you think to unbuckle them
-/datum/wound/proc/on_stasis(delta_time, times_fired)
+/datum/wound/proc/on_stasis()
 	return
 
 /// Used when we're being dragged while bleeding, the value we return is how much bloodloss this wound causes from being dragged. Since it's a proc, you can let bandages soak some of the blood
