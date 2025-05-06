@@ -1157,8 +1157,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))
 
-#define TURF_FROM_COORDS_LIST(List) (locate(List[1], List[2], List[3]))
-
 #define TESLA_DEFAULT_ENERGY (695.304 MEGA JOULES)
 #define TESLA_MINI_ENERGY (347.652 MEGA JOULES) // Has a weird scaling thing so this is a lie for now (doesn't generate power anyways).
 //Zap constants, speeds up targeting
