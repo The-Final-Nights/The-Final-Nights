@@ -649,15 +649,14 @@
 	var/where_accessory //! where the accessory spawned
 	var/obj/item/accessory_type //! If this is null, an accessory won't be spawned.
 	var/process_interval = 30 SECONDS //! how frequently the quirk processes
+	var/next_process = 0 //! ticker for processing
 
 /datum/quirk/junkie/on_spawn()
-	var/mob/living/carbon/human/human_holder = quirk_holder
-
-	if(!reagent_type)
-		reagent_type = GLOB.possible_junkie_addictions[pick(GLOB.possible_junkie_addictions)]
-
+	var/mob/living/carbon/human/H = quirk_holder
+	if (!reagent_type)
+		reagent_type = pick(drug_list)
 	reagent_instance = new reagent_type()
-
+	LAZYADD(H.reagents.addiction_list, reagent_instance)
 	var/current_turf = get_turf(quirk_holder)
 	if (!drug_container_type)
 		drug_container_type = /obj/item/storage/pill_bottle
@@ -697,19 +696,18 @@
 /datum/quirk/junkie/on_process()
 	if(HAS_TRAIT(quirk_holder, TRAIT_NOMETABOLISM))
 		return
-	if(!COOLDOWN_FINISHED(src, next_process))
-		return
-	COOLDOWN_START(src, next_process, process_interval)
-	var/mob/living/carbon/human/human_holder = quirk_holder
-	var/deleted = QDELETED(reagent_instance)
-	var/missing_addiction = FALSE
-	for(var/addiction_type in reagent_instance.addiction_types)
-		if(!LAZYACCESS(human_holder.last_mind?.active_addictions, addiction_type))
-			missing_addiction = TRUE
-	if(deleted || missing_addiction)
-		if(deleted)
-			reagent_instance = new reagent_type()
-		to_chat(quirk_holder, span_danger("You thought you kicked it, but you feel like you're falling back onto bad habits.."))
+	var/mob/living/carbon/human/H = quirk_holder
+	if(world.time > next_process)
+		next_process = world.time + process_interval
+		var/deleted = QDELETED(reagent_instance)
+		if(deleted || !LAZYFIND(H.reagents.addiction_list, reagent_instance))
+			if(deleted)
+				reagent_instance = new reagent_type()
+			else
+				reagent_instance.addiction_stage = 0
+			LAZYADD(H.reagents.addiction_list, reagent_instance)
+			to_chat(quirk_holder, "<span class='danger'>You thought you kicked it, but you suddenly feel like you need [reagent_instance.name] again...</span>")
+
 /datum/quirk/junkie/smoker
 	name = "Smoker"
 	desc = "Sometimes you just really want a smoke. Probably not great for your lungs."

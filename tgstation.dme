@@ -275,7 +275,6 @@
 #include "code\_globalvars\lists\names.dm"
 #include "code\_globalvars\lists\objects.dm"
 #include "code\_globalvars\lists\poll_ignore.dm"
-#include "code\_globalvars\lists\quirks.dm"
 #include "code\_globalvars\lists\typecache.dm"
 #include "code\_globalvars\lists\xenobiology.dm"
 #include "code\_globalvars\traits\_traits.dm"
