@@ -1,16 +1,25 @@
-import { toFixed } from 'tgui-core/math';
-import { useBackend } from '../backend';
 import { Box, Button, Section } from 'tgui-core/components';
+import { toFixed } from 'tgui-core/math';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
+type Data = {
+  amount: number;
+  current_reagent: string;
+  chemicals: { id: string; title: string }[];
+  possible_amounts: number[];
+};
+
 export const ChemSynthesizer = (props) => {
-  const { act, data } = useBackend();
+  const { act, data } = useBackend<Data>();
   const {
     amount,
     current_reagent,
     chemicals = [],
     possible_amounts = [],
   } = data;
+
   return (
     <Window width={300} height={375}>
       <Window.Content>

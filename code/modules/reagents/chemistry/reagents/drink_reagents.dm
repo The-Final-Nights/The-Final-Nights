@@ -114,7 +114,7 @@
 /datum/reagent/consumable/lemonjuice
 	name = "Lemon Juice"
 	description = "This juice is VERY sour."
-	color = "#dbe45c" // rgb: 175, 175, 0
+	color = "#863333" // rgb: 175, 175, 0
 	taste_description = "sourness"
 	glass_icon_state  = "lemonglass"
 	glass_name = "glass of lemon juice"
@@ -124,7 +124,7 @@
 /datum/reagent/consumable/banana
 	name = "Banana Juice"
 	description = "The raw essence of a banana. HONK"
-	color = "#dbce57" // rgb: 175, 175, 0
+	color = "#863333" // rgb: 175, 175, 0
 	taste_description = "banana"
 	glass_icon_state = "banana"
 	glass_name = "glass of banana juice"
@@ -344,6 +344,26 @@
 	..()
 	. = 1
 
+/datum/reagent/consumable/hot_ice_coffee
+	name = "Hot Ice Coffee"
+	description = "Coffee with pulsing ice shards"
+	color = "#102838" // rgb: 16, 40, 56
+	nutriment_factor = 0
+	taste_description = "bitter coldness and a hint of smoke"
+	glass_icon_state = "hoticecoffee"
+	glass_name = "hot ice coffee"
+	glass_desc = "A sharp drink, this can't have come cheap"
+
+/datum/reagent/consumable/hot_ice_coffee/on_mob_life(mob/living/carbon/M)
+	M.dizziness = max(0,M.dizziness-5)
+	M.drowsyness = max(0,M.drowsyness-3)
+	M.AdjustSleeping(-60)
+	M.adjust_bodytemperature(-7 * TEMPERATURE_DAMAGE_COEFFICIENT, M.get_body_temp_normal())
+	M.Jitter(5)
+	M.adjustToxLoss(1*REM, 0)
+	..()
+	. = TRUE
+
 /datum/reagent/consumable/icetea
 	name = "Iced Tea"
 	description = "No relation to a certain rap artist/actor."
@@ -377,6 +397,34 @@
 	M.drowsyness = max(0,M.drowsyness-5)
 	M.adjust_bodytemperature(-5 * TEMPERATURE_DAMAGE_COEFFICIENT, M.get_body_temp_normal())
 	..()
+
+/datum/reagent/consumable/nuka_cola
+	name = "Nuka Cola"
+	description = "Cola, cola never changes."
+	color = "#100800" // rgb: 16, 8, 0
+	quality = DRINK_VERYGOOD
+	taste_description = "the future"
+	glass_icon_state = "nuka_colaglass"
+	glass_name = "glass of Nuka Cola"
+	glass_desc = "Don't cry, Don't raise your eye, It's only nuclear wasteland."
+
+/datum/reagent/consumable/nuka_cola/on_mob_metabolize(mob/living/L)
+	..()
+	L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/nuka_cola)
+
+/datum/reagent/consumable/nuka_cola/on_mob_end_metabolize(mob/living/L)
+	L.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/nuka_cola)
+	..()
+
+/datum/reagent/consumable/nuka_cola/on_mob_life(mob/living/carbon/M)
+	M.Jitter(20)
+	M.set_drugginess(30)
+	M.dizziness +=1.5
+	M.drowsyness = 0
+	M.AdjustSleeping(-40)
+	M.adjust_bodytemperature(-5 * TEMPERATURE_DAMAGE_COEFFICIENT, M.get_body_temp_normal())
+	..()
+	. = 1
 
 /datum/reagent/consumable/grey_bull
 	name = "Grey Bull"
@@ -585,6 +633,27 @@
 	M.adjust_bodytemperature(-5 * TEMPERATURE_DAMAGE_COEFFICIENT, M.get_body_temp_normal())
 	..()
 
+/datum/reagent/consumable/soy_latte
+	name = "Soy Latte"
+	description = "A nice and tasty beverage while you are reading your hippie books."
+	color = "#664300" // rgb: 102, 67, 0
+	quality = DRINK_NICE
+	taste_description = "creamy coffee"
+	glass_icon_state = "soy_latte"
+	glass_name = "soy latte"
+	glass_desc = "A nice and refreshing beverage while you're reading."
+
+/datum/reagent/consumable/soy_latte/on_mob_life(mob/living/carbon/M)
+	M.dizziness = max(0,M.dizziness-5)
+	M.drowsyness = max(0,M.drowsyness-3)
+	M.SetSleeping(0)
+	M.adjust_bodytemperature(5 * TEMPERATURE_DAMAGE_COEFFICIENT, 0, M.get_body_temp_normal())
+	M.Jitter(5)
+	if(M.getBruteLoss() && prob(20))
+		M.heal_bodypart_damage(1,0, 0)
+	..()
+	. = 1
+
 /datum/reagent/consumable/cafe_latte
 	name = "Cafe Latte"
 	description = "A nice, strong and tasty beverage while you are reading."
@@ -605,6 +674,73 @@
 		M.heal_bodypart_damage(1,0, 0)
 	..()
 	. = 1
+
+/datum/reagent/consumable/doctor_delight
+	name = "The Doctor's Delight"
+	description = "A gulp a day keeps the Medibot away! A mixture of juices that heals most damage types fairly quickly at the cost of hunger."
+	color = "#FF8CFF" // rgb: 255, 140, 255
+	quality = DRINK_VERYGOOD
+	taste_description = "homely fruit"
+	glass_icon_state = "doctorsdelightglass"
+	glass_name = "Doctor's Delight"
+	glass_desc = "The space doctor's favorite. Guaranteed to restore bodily injury; side effects include cravings and hunger."
+
+/datum/reagent/consumable/doctor_delight/on_mob_life(mob/living/carbon/M)
+	M.adjustBruteLoss(-0.5, 0)
+	M.adjustFireLoss(-0.5, 0)
+	M.adjustToxLoss(-0.5, 0)
+	M.adjustOxyLoss(-0.5, 0)
+	if(M.nutrition && (M.nutrition - 2 > 0))
+		var/obj/item/organ/liver/liver = M.getorganslot(ORGAN_SLOT_LIVER)
+		if(!(HAS_TRAIT(liver, TRAIT_MEDICAL_METABOLISM)))
+			// Drains the nutrition of the holder. Not medical doctors though, since it's the Doctor's Delight!
+			M.adjust_nutrition(-2)
+	..()
+	. = 1
+
+/datum/reagent/consumable/cherryshake
+	name = "Cherry Shake"
+	description = "A cherry flavored milkshake."
+	color = "#FFB6C1"
+	quality = DRINK_VERYGOOD
+	nutriment_factor = 4 * REAGENTS_METABOLISM
+	taste_description = "creamy cherry"
+	glass_icon_state = "cherryshake"
+	glass_name = "cherry shake"
+	glass_desc = "A cherry flavored milkshake."
+
+/datum/reagent/consumable/bluecherryshake
+	name = "Blue Cherry Shake"
+	description = "An exotic milkshake."
+	color = "#00F1FF"
+	quality = DRINK_VERYGOOD
+	nutriment_factor = 4 * REAGENTS_METABOLISM
+	taste_description = "creamy blue cherry"
+	glass_icon_state = "bluecherryshake"
+	glass_name = "blue cherry shake"
+	glass_desc = "An exotic blue milkshake."
+
+/datum/reagent/consumable/pumpkin_latte
+	name = "Pumpkin Latte"
+	description = "A mix of pumpkin juice and coffee."
+	color = "#F4A460"
+	quality = DRINK_VERYGOOD
+	nutriment_factor = 3 * REAGENTS_METABOLISM
+	taste_description = "creamy pumpkin"
+	glass_icon_state = "pumpkin_latte"
+	glass_name = "pumpkin latte"
+	glass_desc = "A mix of coffee and pumpkin juice."
+
+/datum/reagent/consumable/gibbfloats
+	name = "Gibb Floats"
+	description = "Ice cream on top of a Dr. Gibb glass."
+	color = "#B22222"
+	quality = DRINK_NICE
+	nutriment_factor = 3 * REAGENTS_METABOLISM
+	taste_description = "creamy cherry"
+	glass_icon_state = "gibbfloats"
+	glass_name = "Gibbfloat"
+	glass_desc = "Dr. Gibb with ice cream on top."
 
 /datum/reagent/consumable/pumpkinjuice
 	name = "Pumpkin Juice"

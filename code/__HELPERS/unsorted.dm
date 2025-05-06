@@ -1201,3 +1201,173 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	return call(source, proctype)(arglist(arguments))
 
 #define TURF_FROM_COORDS_LIST(List) (locate(List[1], List[2], List[3]))
+
+#define TESLA_DEFAULT_ENERGY (695.304 MEGA JOULES)
+#define TESLA_MINI_ENERGY (347.652 MEGA JOULES) // Has a weird scaling thing so this is a lie for now (doesn't generate power anyways).
+//Zap constants, speeds up targeting
+#define BIKE (COIL + 1)
+#define COIL (ROD + 1)
+#define ROD (RIDE + 1)
+#define RIDE (LIVING + 1)
+#define LIVING (MACHINERY + 1)
+#define MACHINERY (BLOB + 1)
+#define BLOB (STRUCTURE + 1)
+#define STRUCTURE (1)
+
+/proc/tesla_zap(atom/source, zap_range = 3, power, cutoff = 4e5, zap_flags = ZAP_DEFAULT_FLAGS, list/shocked_targets = list())
+	if(QDELETED(source))
+		return
+	if(!(zap_flags & ZAP_ALLOW_DUPLICATES))
+		LAZYSET(shocked_targets, source, TRUE) //I don't want no null refs in my list yeah?
+	. = source.dir
+	if(power < cutoff)
+		return
+
+	/*
+	THIS IS SO FUCKING UGLY AND I HATE IT, but I can't make it nice without making it slower, check*N rather then n. So we're stuck with it.
+	*/
+	var/atom/closest_atom
+	var/closest_type = 0
+	var/static/list/things_to_shock = zebra_typecacheof(list(
+		// Things that we want to shock.
+		/obj/machinery = TRUE,
+		/mob/living = TRUE,
+		/obj/structure = TRUE,
+		/obj/vehicle/ridden = TRUE,
+
+		// Things that we don't want to shock.
+		/obj/machinery/camera = FALSE,
+		/obj/machinery/gateway = FALSE,
+		/mob/living/simple_animal = FALSE,
+		/obj/structure/disposalpipe = FALSE,
+		/obj/structure/disposaloutlet = FALSE,
+		/obj/machinery/disposal/delivery_chute = FALSE,
+		/obj/structure/sign = FALSE,
+		/obj/structure/lattice = FALSE,
+		/obj/structure/grille = FALSE,
+		/obj/structure/frame/machine = FALSE,
+	))
+
+	//Ok so we are making an assumption here. We assume that view() still calculates from the center out.
+	//This means that if we find an object we can assume it is the closest one of its type. This is somewhat of a speed increase.
+	//This also means we have no need to track distance, as the doview() proc does it all for us.
+
+	//Darkness fucks oview up hard. I've tried dview() but it doesn't seem to work
+	//I hate existence
+	for(var/atom/A as anything in typecache_filter_list(oview(zap_range+2, source), things_to_shock))
+		if(!(zap_flags & ZAP_ALLOW_DUPLICATES) && LAZYACCESS(shocked_targets, A))
+			continue
+		// NOTE: these type checks are safe because CURRENTLY the range family of procs returns turfs in least to greatest distance order
+		// This is unspecified behavior tho, so if it ever starts acting up just remove these optimizations and include a distance check
+		if(closest_type >= BIKE)
+			break
+
+		else if(istype(A, /obj/vehicle/ridden/bicycle))//God's not on our side cause he hates idiots.
+			var/obj/vehicle/ridden/bicycle/B = A
+			if(!(B.obj_flags & BEING_SHOCKED) && B.can_buckle)//Gee goof thanks for the boolean
+				//we use both of these to save on istype and typecasting overhead later on
+				//while still allowing common code to run before hand
+				closest_type = BIKE
+				closest_atom = B
+
+		else if(closest_type >= COIL)
+			continue //no need checking these other things
+
+		else if(closest_type >= ROD)
+			continue
+
+		else if(closest_type >= RIDE)
+			continue
+
+		else if(istype(A,/obj/vehicle/ridden))
+			var/obj/vehicle/ridden/R = A
+			if(R.can_buckle && !(R.obj_flags & BEING_SHOCKED))
+				closest_type = RIDE
+				closest_atom = A
+
+		else if(closest_type >= LIVING)
+			continue
+
+		else if(isliving(A))
+			var/mob/living/L = A
+			if(L.stat != DEAD && !(HAS_TRAIT(L, TRAIT_TESLA_SHOCKIMMUNE)) && !(L.flags_1 & SHOCKED_1))
+				closest_type = LIVING
+				closest_atom = A
+
+		else if(closest_type >= MACHINERY)
+			continue
+
+		else if(ismachinery(A))
+			var/obj/machinery/M = A
+			if(!(M.obj_flags & BEING_SHOCKED))
+				closest_type = MACHINERY
+				closest_atom = A
+
+		else if(closest_type >= BLOB)
+			continue
+
+		else if(istype(A, /obj/structure/blob))
+			var/obj/structure/blob/B = A
+			if(!(B.obj_flags & BEING_SHOCKED))
+				closest_type = BLOB
+				closest_atom = A
+
+		else if(closest_type >= STRUCTURE)
+			continue
+
+		else if(isstructure(A))
+			var/obj/structure/S = A
+			if(!(S.obj_flags & BEING_SHOCKED))
+				closest_type = STRUCTURE
+				closest_atom = A
+
+	//Alright, we've done our loop, now lets see if was anything interesting in range
+	if(!closest_atom)
+		return
+	//common stuff
+	source.Beam(closest_atom, icon_state="lightning[rand(1,12)]", time = 5)
+	var/zapdir = get_dir(source, closest_atom)
+	if(zapdir)
+		. = zapdir
+
+	var/next_range = 2
+	if(closest_type == COIL)
+		next_range = 5
+
+	if(closest_type == LIVING)
+		var/mob/living/closest_mob = closest_atom
+		closest_mob.set_shocked()
+		addtimer(CALLBACK(closest_mob, /mob/living/proc/reset_shocked), 1 SECONDS)
+		var/shock_damage = (zap_flags & ZAP_MOB_DAMAGE) ? (min(round(power / 600), 90) + rand(-5, 5)) : 0
+		closest_mob.electrocute_act(shock_damage, source, 1, SHOCK_TESLA | ((zap_flags & ZAP_MOB_STUN) ? NONE : SHOCK_NOSTUN))
+		if(issilicon(closest_mob))
+			var/mob/living/silicon/S = closest_mob
+			if((zap_flags & ZAP_MOB_STUN) && (zap_flags & ZAP_MOB_DAMAGE))
+				S.emp_act(EMP_LIGHT)
+			next_range = 7 // metallic folks bounce it further
+		else
+			next_range = 5
+		power /= 1.5
+
+	else
+		power = closest_atom.zap_act(power, zap_flags)
+
+	if(prob(20))//I know I know
+		var/list/shocked_copy = shocked_targets.Copy()
+		tesla_zap(source = closest_atom, zap_range = next_range, power = power * 0.5, cutoff = cutoff, zap_flags = zap_flags, shocked_targets = shocked_copy)
+		tesla_zap(source = closest_atom, zap_range = next_range, power = power * 0.5, cutoff = cutoff, zap_flags = zap_flags, shocked_targets = shocked_targets)
+		shocked_targets += shocked_copy
+	else
+		tesla_zap(source = closest_atom, zap_range = next_range, power = power, cutoff = cutoff, zap_flags = zap_flags, shocked_targets = shocked_targets)
+
+#undef BIKE
+#undef COIL
+#undef ROD
+#undef RIDE
+#undef LIVING
+#undef MACHINERY
+#undef BLOB
+#undef STRUCTURE
+
+#undef TESLA_DEFAULT_ENERGY
+#undef TESLA_MINI_ENERGY

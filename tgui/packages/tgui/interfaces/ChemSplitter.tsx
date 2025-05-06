@@ -1,11 +1,19 @@
-import { toFixed } from 'tgui-core/math';
-import { useBackend } from '../backend';
 import { LabeledList, NumberInput, Section } from 'tgui-core/components';
+import { toFixed } from 'tgui-core/math';
+
+import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
+type Data = {
+  straight: number;
+  side: number;
+  max_transfer: number;
+};
+
 export const ChemSplitter = (props) => {
-  const { act, data } = useBackend();
+  const { act, data } = useBackend<Data>();
   const { straight, side, max_transfer } = data;
+
   return (
     <Window width={220} height={105}>
       <Window.Content>
@@ -21,7 +29,7 @@ export const ChemSplitter = (props) => {
                 format={(value) => toFixed(value, 2)}
                 step={0.05}
                 stepPixelSize={4}
-                onChange={(e, value) =>
+                onChange={(value) =>
                   act('set_amount', {
                     target: 'straight',
                     amount: value,
@@ -39,7 +47,7 @@ export const ChemSplitter = (props) => {
                 format={(value) => toFixed(value, 2)}
                 step={0.05}
                 stepPixelSize={4}
-                onChange={(e, value) =>
+                onChange={(value) =>
                   act('set_amount', {
                     target: 'side',
                     amount: value,

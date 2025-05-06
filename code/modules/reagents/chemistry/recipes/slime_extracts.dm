@@ -1,7 +1,7 @@
 
 /datum/chemical_reaction/slime
 	var/deletes_extract = TRUE
-	reaction_flags = REACTION_INSTANT 
+	reaction_flags = REACTION_INSTANT
 
 /datum/chemical_reaction/slime/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
 	use_slime_core(holder)
@@ -71,7 +71,7 @@
 /datum/chemical_reaction/slime/slimemetal/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
 	var/turf/location = get_turf(holder.my_atom)
 	new /obj/item/stack/sheet/plasteel(location, 5)
-	new /obj/item/stack/sheet/iron(location, 15)
+	new /obj/item/stack/sheet/metal(location, 15)
 	..()
 
 /datum/chemical_reaction/slime/slimeglass
@@ -196,18 +196,7 @@
 /datum/chemical_reaction/slime/slimefreeze/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
 	var/turf/T = get_turf(holder.my_atom)
 	T.visible_message("<span class='danger'>The slime extract starts to feel extremely cold!</span>")
-	addtimer(CALLBACK(src, .proc/freeze, holder), 50)
-	var/obj/item/slime_extract/M = holder.my_atom
-	deltimer(M.qdel_timer)
 	..()
-	M.qdel_timer = addtimer(CALLBACK(src, .proc/delete_extract, holder), 55, TIMER_STOPPABLE)
-
-/datum/chemical_reaction/slime/slimefreeze/proc/freeze(datum/reagents/holder)
-	if(holder?.my_atom)
-		var/turf/open/T = get_turf(holder.my_atom)
-		if(istype(T))
-			var/datum/gas/gastype = /datum/gas/nitrogen
-			T.atmos_spawn_air("[initial(gastype.id)]=50;TEMP=2.7")
 
 /datum/chemical_reaction/slime/slimefireproof
 	required_reagents = list(/datum/reagent/water = 1)
@@ -234,18 +223,7 @@
 /datum/chemical_reaction/slime/slimefire/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
 	var/turf/T = get_turf(holder.my_atom)
 	T.visible_message("<span class='danger'>The slime extract begins to vibrate adorably!</span>")
-	addtimer(CALLBACK(src, .proc/slime_burn, holder), 50)
-	var/obj/item/slime_extract/M = holder.my_atom
-	deltimer(M.qdel_timer)
 	..()
-	M.qdel_timer = addtimer(CALLBACK(src, .proc/delete_extract, holder), 55, TIMER_STOPPABLE)
-
-/datum/chemical_reaction/slime/slimefire/proc/slime_burn(datum/reagents/holder)
-	if(holder?.my_atom)
-		var/turf/open/T = get_turf(holder.my_atom)
-		if(istype(T))
-			T.atmos_spawn_air("plasma=50;TEMP=1000")
-
 
 /datum/chemical_reaction/slime/slimesmoke
 	results = list(/datum/reagent/phosphorus = 10, /datum/reagent/potassium = 10, /datum/reagent/consumable/sugar = 10)

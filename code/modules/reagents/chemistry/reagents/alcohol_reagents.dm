@@ -52,12 +52,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /datum/reagent/consumable/ethanol/expose_obj(obj/exposed_obj, reac_volume)
 	if(istype(exposed_obj, /obj/item/paper))
 		var/obj/item/paper/paperaffected = exposed_obj
-		paperaffected.clearpaper()
-		to_chat(usr, "<span class='notice'>[paperaffected]'s ink washes away.</span>")
+		paperaffected.clear_paper()
+		to_chat(usr, span_notice("[paperaffected]'s ink washes away."))
 	if(istype(exposed_obj, /obj/item/book))
 		if(reac_volume >= 5)
 			var/obj/item/book/affectedbook = exposed_obj
-			affectedbook.dat = null
+			affectedbook.book_data.set_content("")
 			exposed_obj.visible_message("<span class='notice'>[exposed_obj]'s writing is washed away by [name]!</span>")
 		else
 			exposed_obj.visible_message("<span class='warning'>[exposed_obj]'s ink is smeared by [name], but doesn't wash away!</span>")
@@ -511,7 +511,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	. = ..()
 	if(!gold_ratio)
 		// Calculate the amount of gold that goldschlager is made from
-		var/datum/chemical_reaction/goldschlager/goldschlager_reaction = new
+		var/datum/chemical_reaction/drink/goldschlager/goldschlager_reaction = new
 		var/vodka_amount = goldschlager_reaction.required_reagents[/datum/reagent/consumable/ethanol/vodka]
 		var/gold_amount = goldschlager_reaction.required_reagents[/datum/reagent/gold]
 		gold_ratio = gold_amount / (gold_amount + vodka_amount)
@@ -2042,7 +2042,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	generate_data_info(data)
 
 /datum/reagent/consumable/ethanol/fruit_wine/proc/generate_data_info(list/data)
-	var/minimum_percent = 0.15 //Percentages measured between 0 and 1.
+	var/const/minimum_percent = 0.15 //Percentages measured between 0 and 1.
 	var/list/primary_tastes = list()
 	var/list/secondary_tastes = list()
 	glass_name = "glass of [name]"

@@ -94,10 +94,10 @@
 	required_catalysts = list(/datum/reagent/consumable/enzyme = 5)
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/food/cheesewheel/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
-	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/food/cheese/wheel(location)
+///datum/chemical_reaction/food/cheesewheel/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+	//var/location = get_turf(holder.my_atom)
+	//for(var/i = 1, i <= created_volume, i++)
+	//	new /obj/item/food/cheese/wheel(location)
 
 /datum/chemical_reaction/food/synthmeat
 	required_reagents = list(/datum/reagent/blood = 5, /datum/reagent/medicine/cryoxadone = 1)
@@ -123,11 +123,11 @@
 	mix_message = "The mixture becomes similar to carp meat."
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/food/imitationcarpmeat/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
-	var/location = get_turf(holder.my_atom)
-	new /obj/item/food/fishmeat/carp/imitation(location)
-	if(holder?.my_atom)
-		qdel(holder.my_atom)
+///datum/chemical_reaction/food/imitationcarpmeat/on_reaction(datum/equilibrium/reaction, datum/reagents/holder, created_volume)
+	//var/location = get_turf(holder.my_atom)
+	//new /obj/item/food/fishmeat/carp/imitation(location)
+	//if(holder?.my_atom)
+	//	qdel(holder.my_atom)
 
 /datum/chemical_reaction/food/dough
 	required_reagents = list(/datum/reagent/water = 10, /datum/reagent/consumable/flour = 15)
