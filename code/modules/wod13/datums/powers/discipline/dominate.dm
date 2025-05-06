@@ -319,8 +319,8 @@
 
 	if(domination_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-		to_chat(target, span_danger("HARM YOURSELF"))
-		owner.say("Harm yourself.")
+		to_chat(target, span_danger("HIT YOURSELF"))
+		owner.say("Hit yourself.")
 
 		var/datum/cb = CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command)
 		for(var/i in 1 to 20)
