@@ -442,6 +442,7 @@
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/centipede)
 		if ("Second pair of arms")
 			var/limbs = user.held_items.len
+			user.active_hand_index = 1
 			user.change_number_of_hands(limbs - 2)
 			user.remove_overlay(PROTEAN_LAYER)
 			QDEL_NULL(upgrade_overlay)
