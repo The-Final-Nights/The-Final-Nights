@@ -392,10 +392,20 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		if(drunkenness >= 101)
 			adjustToxLoss(1 * delta_time) //Let's be honest you shouldn't be alive by now
 
+/// Base carbon environment handler, adds natural stabilization
+/mob/living/carbon/handle_environment()
+	var/areatemp = get_temperature()
+
+	if(stat != DEAD) // If you are dead your body does not stabilize naturally
+		natural_bodytemperature_stabilization()
+
+	if(!on_fire || areatemp > bodytemperature) // If we are not on fire or the area is hotter
+		adjust_bodytemperature((areatemp - bodytemperature), use_insulation=TRUE, use_steps=TRUE)
+
 /**
  * Used to stabilize the body temperature back to normal on living mobs
  */
-/mob/living/carbon/proc/natural_bodytemperature_stabilization(delta_time, times_fired)
+/mob/living/carbon/proc/natural_bodytemperature_stabilization()
 	var/areatemp = get_temperature()
 	var/body_temperature_difference = get_body_temp_normal() - bodytemperature
 	var/natural_change = 0

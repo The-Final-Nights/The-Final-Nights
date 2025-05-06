@@ -87,6 +87,16 @@
 /mob/living/proc/handle_random_events(delta_time, times_fired)
 	return
 
+// Base mob environment handler for body temperature
+/mob/living/proc/handle_environment(delta_time, times_fired)
+	var/loc_temp = get_temperature()
+
+	if(temp_delta < 0) // it is cold here
+		if(!on_fire) // do not reduce body temp when on fire
+			adjust_bodytemperature(max(max(temp_delta / BODYTEMP_DIVISOR, BODYTEMP_COOLING_MAX) * delta_time, temp_delta))
+	else // this is a hot place
+		adjust_bodytemperature(min(min(temp_delta / BODYTEMP_DIVISOR, BODYTEMP_HEATING_MAX) * delta_time, temp_delta))
+
 /mob/living/proc/handle_fire(delta_time, times_fired)
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
 		set_fire_stacks(min(0, fire_stacks + (0.5 * delta_time))) //So we dry ourselves back to default, nonflammable.

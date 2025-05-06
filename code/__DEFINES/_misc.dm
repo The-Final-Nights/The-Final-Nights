@@ -484,6 +484,11 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 #define VOMIT_PURPLE 2
 #define VOMIT_NANITE 3
 
+//chem grenades defines
+#define GRENADE_EMPTY 1
+#define GRENADE_WIRED 2
+#define GRENADE_READY 3
+
 //Misc text define. Does 4 spaces. Used as a makeshift tabulator.
 #define FOURSPACES "&nbsp;&nbsp;&nbsp;&nbsp;"
 
