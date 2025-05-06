@@ -3540,6 +3540,7 @@
 #include "code\modules\wod13\items\narcotics\bong.dm"
 #include "code\modules\wod13\items\narcotics\cokepack.dm"
 #include "code\modules\wod13\items\narcotics\morphpack.dm"
+#include "code\modules\wod13\items\narcotics\bweedpack.dm"
 #include "code\modules\wod13\items\narcotics\meth\cocaine.dm"
 #include "code\modules\wod13\items\narcotics\meth\meth.dm"
 #include "code\modules\wod13\items\narcotics\meth\methpack.dm"
