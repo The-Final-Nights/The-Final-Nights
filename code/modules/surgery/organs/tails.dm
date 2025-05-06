@@ -43,7 +43,7 @@
 
 /obj/item/organ/tail/lizard/Initialize()
 	. = ..()
-	color = "#"+ random_color()
+	color = random_color()
 
 /obj/item/organ/tail/lizard/Insert(mob/living/carbon/human/H, special = 0, drop_if_replaced = TRUE)
 	..()
@@ -63,7 +63,7 @@
 	if(istype(H))
 		H.dna.species.mutant_bodyparts -= "tail_lizard"
 		H.dna.species.mutant_bodyparts -= "spines"
-		color = "#" + H.dna.features["mcolor"]
+		color = H.dna.features["mcolor"]
 		tail_type = H.dna.features["tail_lizard"]
 		spines = H.dna.features["spines"]
 		H.update_body()

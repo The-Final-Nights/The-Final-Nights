@@ -11,6 +11,26 @@
 	activate_sound = 'code/modules/wod13/sounds/presence_activate.ogg'
 	deactivate_sound = 'code/modules/wod13/sounds/presence_deactivate.ogg'
 
+
+/datum/discipline_power/presence/proc/presence_hearing_check(mob/living/carbon/human/owner, mob/living/target)
+	var/list/hearers = get_hearers_in_view(8, owner)
+	if(!(target in hearers))
+		to_chat(owner, span_warning("[target] cannot hear you — they are too far or behind an obstruction."))
+		return FALSE
+	else
+		to_chat(owner, span_info("[target] hears you clearly."))
+		return TRUE
+
+/datum/discipline_power/presence/proc/presence_check(mob/living/carbon/human/owner, mob/living/target, base_difficulty = 4, var/presence_succeeded = FALSE)
+
+	if(!ishuman(target))
+		return FALSE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	return (mypower > theirpower && ((owner.generation - 3) < target.generation))
+
 //AWE
 /datum/discipline_power/presence/awe
 	name = "Awe"
@@ -26,22 +46,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/awe_succeeded = FALSE
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/awe/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower) && ((owner.generation - 3) < target.generation))
-		awe_succeeded = TRUE
+	if(!presence_hearing_check(owner, target))
+		return FALSE
+
+	presence_succeeded = presence_check(owner, target, base_difficulty = 4)
+	if(presence_succeeded)
+		return TRUE
 	else
-		awe_succeeded = FALSE
-	return TRUE // proceeds to activation so that cooldown and bp cost is incurred
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/awe/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(awe_succeeded)
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -52,6 +74,7 @@
 		to_chat(owner, span_warning("You've enthralled [target] with your commanding aura!"))
 		to_chat(target, span_userlove("COME HERE"))
 		owner.say("Come here.")
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -81,23 +104,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/dread_gaze_succeeded = FALSE
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/dread_gaze/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower) && ((owner.generation - 3) < target.generation))
-		dread_gaze_succeeded = TRUE
+	if(!presence_hearing_check(owner, target))
+		return FALSE
+
+	presence_succeeded = presence_check(owner, target, base_difficulty = 5)
+	if(presence_succeeded)
+		return TRUE
 	else
-		dread_gaze_succeeded = FALSE
-
-	return TRUE
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/dread_gaze/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(dread_gaze_succeeded)
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -110,6 +134,7 @@
 		owner.say("REST!!")
 		if(target.body_position == STANDING_UP)
 			target.toggle_resting()
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -132,23 +157,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/entrancement_succeeded = FALSE
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/entrancement/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower) && ((owner.generation - 3) < target.generation))
-		entrancement_succeeded = TRUE
+	if(!presence_hearing_check(owner, target))
+		return FALSE
+
+	presence_succeeded = presence_check(owner, target, base_difficulty = 5)
+	if(presence_succeeded)
+		return TRUE
 	else
-		entrancement_succeeded = FALSE
-
-	return TRUE // proceed regardless
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/entrancement/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(entrancement_succeeded)
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -170,6 +196,7 @@
 			I1.throw_at(get_turf(owner), 3, 1, target)
 		if(I2)
 			I2.throw_at(get_turf(owner), 3, 1, target)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -192,23 +219,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/summon_succeeded = FALSE
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/summon/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower) && ((owner.generation - 3) < target.generation))
-		summon_succeeded = TRUE
+	if(!presence_hearing_check(owner, target))
+		return FALSE
+
+	presence_succeeded = presence_check(owner, target, base_difficulty = 6)
+	if(presence_succeeded)
+		return TRUE
 	else
-		summon_succeeded = FALSE
-
-	return TRUE // Always proceed
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/summon/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(summon_succeeded)
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -225,6 +253,7 @@
 
 		target.emote("scream")
 		target.do_jitter_animation(3 SECONDS)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
@@ -253,23 +282,24 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	duration_length = 5 SECONDS
-	var/tmp/majesty_succeeded = FALSE
+	var/presence_succeeded = FALSE
 
 /datum/discipline_power/presence/majesty/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if((mypower > theirpower) && ((owner.generation - 3) < target.generation))
-		majesty_succeeded = TRUE
+	if(!presence_hearing_check(owner, target))
+		return FALSE
+
+	presence_succeeded = presence_check(owner, target, base_difficulty = 7)
+	if(presence_succeeded)
+		return TRUE
 	else
-		majesty_succeeded = FALSE
-
-	return TRUE // Always proceed, regardless of success
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/presence/majesty/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(majesty_succeeded)
+	if(presence_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 		presence_overlay.pixel_z = 1
@@ -282,6 +312,7 @@
 		target.Immobilize(1 SECONDS)
 		for(var/obj/item/clothing/W in target.contents)
 			target.dropItemToGround(W, TRUE)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
 		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your admiration… but you steel your heart and turn away from their unnatural allure."))
