@@ -70,7 +70,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	var/area/vtm/V = get_area(C)
-	if(!V.upper)
+	if(!istype(V, /area/vtm) || !V.upper)
 		to_chat(C, span_warning("You need to be outside to look at the moon!"))
 		return
 	if(C.last_moon_look == 0 || C.last_moon_look+600 < world.time)

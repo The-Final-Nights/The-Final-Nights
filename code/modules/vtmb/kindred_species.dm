@@ -94,7 +94,7 @@
 				masquerade_level = " almost ruined the Masquerade."
 			if(0)
 				masquerade_level = "'m danger to the Masquerade and my own kind."
-		dat += "Camarilla thinks I[masquerade_level]<BR>"
+		dat += "The Camarilla thinks I[masquerade_level]<BR>"
 		var/humanity = "I'm out of my mind."
 
 		if(!host.clane.is_enlightened)
@@ -385,7 +385,10 @@
 					if(!childe.can_be_embraced)
 						to_chat(sire, span_notice("[childe.name] doesn't respond to your Vitae."))
 						return
-					// If they've been dead for more than 5 minutes, then nothing happens.
+					 // If they've been dead for more than 5 minutes, then nothing happens.
+					if(childe.mind.damned)
+						to_chat(sire, span_notice("[childe.name] doesn't respond to your Vitae."))
+						return
 					if((childe.timeofdeath + 5 MINUTES) > world.time)
 						if(childe.auspice?.level) //here be Abominations
 							if(childe.auspice.force_abomination)
@@ -502,7 +505,10 @@
 					to_chat(thrall, "<span class='userlove'>You feel good when you drink this <b>BLOOD</b>...</span>")
 
 					message_admins("[ADMIN_LOOKUPFLW(regnant)] has bloodbonded [ADMIN_LOOKUPFLW(thrall)].")
-					log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
+					if(HAS_TRAIT(thrall,TRAIT_UNBONDABLE))
+						log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
+					else
+						log_game("[key_name(regnant)] has attempted to bloodbond [key_name(thrall)] (UNBONDABLE).")
 
 					if(length(regnant.reagents?.reagent_list))
 						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = regnant, methods = VAMPIRE)
@@ -525,10 +531,12 @@
 							new_master = TRUE
 							NPC.roundstart_vampire = FALSE
 					if(thrall.mind)
-						if(thrall.mind.enslaved_to != owner)
+						if(thrall.mind.enslaved_to != owner && !HAS_TRAIT(thrall,TRAIT_UNBONDABLE))
 							thrall.mind.enslave_mind_to_creator(owner)
 							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [regnant]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
 							new_master = TRUE
+						if(HAS_TRAIT(thrall,TRAIT_UNBONDABLE))
+							to_chat(thrall, "<span class='danger'><i>Precious vitae enters your mouth, an addictive drug. But for you, you feel no loyalty to the source; only the substance.</i></span>")
 					if(isghoul(thrall))
 						var/datum/species/ghoul/ghoul = thrall.dna.species
 						ghoul.master = owner

@@ -7,6 +7,8 @@
 
 #define IS_OPAQUE_TURF(turf) (turf.directional_opacity == ALL_CARDINALS)
 
+#define TURF_FROM_COORDS_LIST(List) (locate(List[1], List[2], List[3]))
+
 //supposedly the fastest way to do this according to https://gist.github.com/Giacom/be635398926bb463b42a
 #define RANGE_TURFS(RADIUS, CENTER) \
 	block( \
