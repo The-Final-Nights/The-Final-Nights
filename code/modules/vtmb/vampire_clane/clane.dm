@@ -34,7 +34,7 @@ And it also helps for the character set panel
 	var/current_accessory
 	var/clan_keys //Keys to your hideout
 
-/datum/vampireclane/proc/on_gain(var/mob/living/carbon/human/H)
+/datum/vampireclane/proc/on_gain(mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(length(accessories))
@@ -49,9 +49,9 @@ And it also helps for the character set panel
 		H.dna.species.limbs_id = alt_sprite
 		H.update_body_parts()
 		H.update_body()
-		H.update_icon()
+		H.update_appearance()
 
-/datum/vampireclane/proc/post_gain(var/mob/living/carbon/human/H)
+/datum/vampireclane/proc/post_gain(mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(violating_appearance && H.roundstart_vampire)
@@ -64,6 +64,7 @@ And it also helps for the character set panel
 		H.put_in_hands(new clan_keys(H))
 
 	H.AddComponent(/datum/component/morality)
+	H.mind.damned = 1
 
 /mob/living/carbon
 	var/datum/relationship/Myself

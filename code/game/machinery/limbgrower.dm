@@ -136,9 +136,9 @@
 	limb = new buildpath(loc)
 	if(selected_category=="human" || selected_category=="lizard" || selected_category=="ethereal") //Species with greyscale parts should be included here
 		if(selected_category=="human")			//humans don't use the full colour spectrum, they use random_skin_tone
-			limb.skin_tone = random_skin_tone()
+			limb.skin_tone = "#[random_skin_tone()]"
 		else
-			limb.species_color = random_short_color()
+			limb.species_color = random_color()
 
 		limb.icon = 'icons/mob/human_parts_greyscale.dmi'
 		limb.should_draw_greyscale = TRUE
@@ -234,3 +234,7 @@
 			stored_research.add_design(D)
 	to_chat(user, "<span class='warning'>A warning flashes onto the screen, stating that safety overrides have been deactivated!</span>")
 	obj_flags |= EMAGGED
+
+#undef LIMBGROWER_MAIN_MENU
+#undef LIMBGROWER_CATEGORY_MENU
+#undef LIMBGROWER_CHEMICAL_MENU

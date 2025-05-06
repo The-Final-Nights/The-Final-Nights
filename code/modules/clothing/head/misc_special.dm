@@ -164,13 +164,14 @@
 
 /obj/item/clothing/head/kitty/equipped(mob/living/carbon/human/user, slot)
 	if(ishuman(user) && slot == ITEM_SLOT_HEAD)
-		update_icon(user)
-		user.update_inv_head() //Color might have been changed by update_icon.
+		update_icon(ALL, user)
+		user.update_inv_head() //Color might have been changed by update_appearance.
 	..()
 
-/obj/item/clothing/head/kitty/update_icon(mob/living/carbon/human/user)
+/obj/item/clothing/head/kitty/update_icon(updates=ALL, mob/living/carbon/human/user)
+	. = ..()
 	if(ishuman(user))
-		add_atom_colour("#[user.hair_color]", FIXED_COLOUR_PRIORITY)
+		add_atom_colour(user.hair_color, FIXED_COLOUR_PRIORITY)
 
 /obj/item/clothing/head/kitty/genuine
 	desc = "A pair of kitty ears. A tag on the inside says \"Hand made from real cats.\""
@@ -219,20 +220,19 @@
 	inhand_icon_state = "pwig"
 	worn_icon_state = "wig"
 	flags_inv = HIDEHAIR | HIDEHEADGEAR
-	color = "#000"
+	color = "#000000"
 	var/hairstyle = "Very Long Hair"
 	var/adjustablecolor = TRUE //can color be changed manually?
 
 /obj/item/clothing/head/wig/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
 
 /obj/item/clothing/head/wig/update_icon_state()
 	var/datum/sprite_accessory/S = GLOB.hairstyles_list[hairstyle]
-	if(!S)
-		return
-	else
+	if(S)
 		icon_state = S.icon_state
+	return ..()
 
 
 /obj/item/clothing/head/wig/worn_overlays(isinhands = FALSE, file2use)
@@ -256,25 +256,25 @@
 		user.visible_message("<span class='notice'>[user] changes \the [src]'s hairstyle to [new_style].</span>", "<span class='notice'>You change \the [src]'s hairstyle to [new_style].</span>")
 	if(newcolor && newcolor != color) // only update if necessary
 		add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
-	update_icon()
+	update_appearance()
 
 /obj/item/clothing/head/wig/afterattack(mob/living/carbon/human/target, mob/user)
 	. = ..()
 	if (istype(target) && (HAIR in target.dna.species.species_traits) && target.hairstyle != "Bald")
 		to_chat(user, "<span class='notice'>You adjust the [src] to look just like [target.name]'s [target.hairstyle].</span>")
-		add_atom_colour("#[target.hair_color]", FIXED_COLOUR_PRIORITY)
+		add_atom_colour(target.hair_color, FIXED_COLOUR_PRIORITY)
 		hairstyle = target.hairstyle
-		update_icon()
+		update_appearance()
 
 /obj/item/clothing/head/wig/random/Initialize(mapload)
 	hairstyle = pick(GLOB.hairstyles_list - "Bald") //Don't want invisible wig
-	add_atom_colour("#[random_short_color()]", FIXED_COLOUR_PRIORITY)
+	add_atom_colour(random_color(), FIXED_COLOUR_PRIORITY)
 	. = ..()
 
 /obj/item/clothing/head/wig/natural
 	name = "natural wig"
 	desc = "A bunch of hair without a head attached. This one changes color to match the hair of the wearer. Nothing natural about that."
-	color = "#FFF"
+	color = "#FFFFFF"
 	adjustablecolor = FALSE
 	custom_price = PAYCHECK_HARD
 
@@ -285,9 +285,9 @@
 /obj/item/clothing/head/wig/natural/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(ishuman(user) && slot == ITEM_SLOT_HEAD)
-		if (color != "#[user.hair_color]") // only update if necessary
-			add_atom_colour("#[user.hair_color]", FIXED_COLOUR_PRIORITY)
-			update_icon()
+		if (color != user.hair_color) // only update if necessary
+			add_atom_colour(user.hair_color, FIXED_COLOUR_PRIORITY)
+			update_appearance()
 		user.update_inv_head()
 
 /obj/item/clothing/head/bronze

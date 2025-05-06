@@ -10,6 +10,7 @@
 	icon_state = "cameracase"
 	custom_materials = list(/datum/material/iron=400, /datum/material/glass=250)
 	result_path = /obj/structure/camera_assembly
+	wall_external = TRUE
 
 /obj/structure/camera_assembly
 	name = "camera assembly"
@@ -69,11 +70,12 @@
 
 /obj/structure/camera_assembly/update_icon_state()
 	icon_state = "[xray_module ? "xray" : null][initial(icon_state)]"
+	return ..()
 
 /obj/structure/camera_assembly/handle_atom_del(atom/A)
 	if(A == xray_module)
 		xray_module = null
-		update_icon()
+		update_appearance()
 		if(malf_xray_firmware_present)
 			malf_xray_firmware_active = malf_xray_firmware_present //re-enable firmware based upgrades after the part is removed.
 		if(istype(loc, /obj/machinery/camera))
@@ -109,7 +111,7 @@
 		xray_module = null
 		if(malf_xray_firmware_present)
 			malf_xray_firmware_active = malf_xray_firmware_present //re-enable firmware based upgrades after the part is removed.
-		update_icon()
+		update_appearance()
 
 	else if(I == emp_module)
 		emp_module = null
@@ -174,7 +176,7 @@
 				if(malf_xray_firmware_active)
 					malf_xray_firmware_active = FALSE //flavor reason: MALF AI Upgrade Camera Network ability's firmware is incompatible with the new part
 														//real reason: make it a normal upgrade so the finished camera's icons and examine texts are restored.
-				update_icon()
+				update_appearance()
 				return
 
 			else if(istype(W, /obj/item/assembly/prox_sensor)) //motion sensing upgrade
@@ -201,7 +203,7 @@
 		droppable_parts += proxy_module
 	if(!droppable_parts.len)
 		return
-	var/obj/item/choice = input(user, "Select a part to remove:", src) as null|obj in sortNames(droppable_parts)
+	var/obj/item/choice = input(user, "Select a part to remove:", src) as null|obj in sort_names(droppable_parts)
 	if(!choice || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return
 	to_chat(user, "<span class='notice'>You remove [choice] from [src].</span>")

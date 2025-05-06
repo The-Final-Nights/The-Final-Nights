@@ -346,7 +346,7 @@ GLOBAL_VAR_INIT(deaths_during_shift, 0)
 		var/datum/hud/H = M.hud_used
 		H.wanted_lvl.level = newlevel
 		H.wanted_lvl.cops_arrived = cops_arrived
-		H.wanted_lvl.update_icon()
+		H.wanted_lvl.update_appearance()
 
 /// Internal. Updates the end_time and sends out an announcement if the wanted level has increased. Called by update_wanted_level().
 /datum/gang_handler/proc/on_gain_wanted_level(newlevel)
@@ -614,3 +614,19 @@ GLOBAL_VAR_INIT(deaths_during_shift, 0)
 		report = "<span class='header greentext'>The police put the boots to the families, medium style!</span>"
 
 	return "</div><div class='panel redborder'>[report]" // </div> at the front not the back because this proc is intended for normal text not a whole new panel
+
+
+#undef LOWPOP_FAMILIES_COUNT
+
+#undef TWO_STARS_HIGHPOP
+#undef THREE_STARS_HIGHPOP
+#undef FOUR_STARS_HIGHPOP
+#undef FIVE_STARS_HIGHPOP
+
+#undef TWO_STARS_LOW
+#undef THREE_STARS_LOW
+#undef FOUR_STARS_LOW
+#undef FIVE_STARS_LOW
+
+#undef CREW_SIZE_MIN
+#undef CREW_SIZE_MAX

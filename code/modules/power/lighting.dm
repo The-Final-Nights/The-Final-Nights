@@ -24,7 +24,6 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "tube-construct-item"
 	result_path = /obj/structure/light_construct
-	inverse = TRUE
 
 /obj/item/wallframe/light_fixture/small
 	name = "small light fixture frame"
@@ -385,6 +384,7 @@
 	return ..()
 
 /obj/machinery/light/update_icon_state()
+	. = ..()
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
 			var/area/A = get_area(src)

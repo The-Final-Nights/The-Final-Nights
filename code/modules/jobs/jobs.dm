@@ -4,7 +4,7 @@ GLOBAL_LIST_INIT(leader_positions, list(
 	"Chantry Regent",
 	"Police Chief",
 	"Dealer",
-    "Capo",
+	"Capo",
 	"Clinic Director"
 	))
 
@@ -17,10 +17,10 @@ GLOBAL_LIST_INIT(command_positions, list(
 	"Tower Employee"))
 
 GLOBAL_LIST_INIT(camarilla_council_positions, list(
-    "Primogen Malkavian",
-    "Primogen Nosferatu",
-    "Primogen Toreador",
-    "Primogen Ventrue",
+	"Primogen Malkavian",
+	"Primogen Nosferatu",
+	"Primogen Toreador",
+	"Primogen Ventrue",
 	"Primogen Lasombra",
 	"Primogen Banu Haqim"
 ))
@@ -45,45 +45,45 @@ GLOBAL_LIST_INIT(citizen_positions, list(
 ))
 
 GLOBAL_LIST_INIT(police_positions, list(
-    "Police Chief",
-    "Police Sergeant",
-    "Police Officer",
+	"Police Chief",
+	"Police Sergeant",
+	"Police Officer",
 	"Emergency Dispatcher"
 ))
 
 GLOBAL_LIST_INIT(national_security_positions, list(
-    "Federal Investigator"
+	"Federal Investigator"
 ))
 
 GLOBAL_LIST_INIT(services_positions, list(
-    "Graveyard Keeper",
-    "Club Worker",
-    "Street Janitor",
-    "Taxi Driver"
+	"Graveyard Keeper",
+	"Club Worker",
+	"Street Janitor",
+	"Taxi Driver"
 ))
 
 GLOBAL_LIST_INIT(clinic_positions, list(
-    "Clinic Director",
-    "Doctor"
+	"Clinic Director",
+	"Doctor"
 ))
 
 GLOBAL_LIST_INIT(neutral_positions, list())
 
 GLOBAL_LIST_INIT(giovanni_positions, list(
-    "Capo",
-    "La Squadra",
-    "La Famiglia"
+	"Capo",
+	"La Squadra",
+	"La Famiglia"
 ))
 
 GLOBAL_LIST_INIT(tzimisce_positions, list(
-    "Voivode",
-    "Bogatyr",
-    "Zadruga"
+	"Voivode",
+	"Bogatyr",
+	"Zadruga"
 ))
 
 GLOBAL_LIST_INIT(warehouse_positions, list(
-    "Dealer",
-    "Supply Technician"
+	"Dealer",
+	"Supply Technician"
 ))
 
 
@@ -94,15 +94,40 @@ GLOBAL_LIST_INIT(tremere_positions, list(
 ))
 
 GLOBAL_LIST_INIT(church_positions, list(
-    "Priest",
+	"Priest",
 ))
 
 GLOBAL_LIST_INIT(gang_positions, list(
 	"Triad Soldier",
 ))
 
+GLOBAL_LIST_INIT(painted_positions, list(
+    "Painted City Councillor",
+	"Painted City Keeper",
+	"Painted City Truthcatcher",
+	"Painted City Warder",
+	"Painted City Guardian"
+))
+
+GLOBAL_LIST_INIT(amberglade_positions, list(
+    "Amberglade Councillor",
+	"Amberglade Keeper",
+	"Amberglade Truthcatcher",
+	"Amberglade Warder",
+	"Amberglade Guardian"
+))
+
+GLOBAL_LIST_INIT(spiral_positions, list(
+    "Endron Branch Lead",
+	"Endron Executive",
+	"Endron Internal Affairs Agent",
+	"Endron Chief of Security",
+	"Endron Security Agent",
+	"Endron Employee"
+))
+
 GLOBAL_LIST_INIT(ss13, list(
-    "SS13",
+	"SS13",
 ))
 
 GLOBAL_LIST_INIT(nonhuman_positions, list())
@@ -110,38 +135,44 @@ GLOBAL_LIST_INIT(nonhuman_positions, list())
 // job categories for rendering the late join menu
 GLOBAL_LIST_INIT(position_categories, list(
 	EXP_TYPE_CAMARILLIA = list("jobs" = command_positions, "color" = "#9f1111"),
-    EXP_TYPE_COUNCIL = list("jobs" = camarilla_council_positions, "color" = "#4f0404"),
-    EXP_TYPE_TREMERE = list("jobs" = tremere_positions, "color" = "#b2442c"),
-    EXP_TYPE_GIOVANNI = list("jobs" = giovanni_positions, "color" = "#3e0c70"),
-    EXP_TYPE_OTHER_CITIZEN = list("jobs" = citizen_positions, "color" = "#7e7e7e"),
-    EXP_TYPE_ANARCH = list("jobs" = anarch_positions, "color" = "#313131"),
-    EXP_TYPE_WAREHOUSE = list("jobs" = warehouse_positions, "color" = "#edc009"),
+	EXP_TYPE_COUNCIL = list("jobs" = camarilla_council_positions, "color" = "#4f0404"),
+	EXP_TYPE_TREMERE = list("jobs" = tremere_positions, "color" = "#b2442c"),
+	EXP_TYPE_GIOVANNI = list("jobs" = giovanni_positions, "color" = "#3e0c70"),
+	EXP_TYPE_OTHER_CITIZEN = list("jobs" = citizen_positions, "color" = "#7e7e7e"),
+	EXP_TYPE_ANARCH = list("jobs" = anarch_positions, "color" = "#313131"),
+	EXP_TYPE_WAREHOUSE = list("jobs" = warehouse_positions, "color" = "#edc009"),
 	EXP_TYPE_CLINIC = list("jobs" = clinic_positions, "color" = "#80D0F4"),
-    EXP_TYPE_SERVICES = list("jobs" = services_positions, "color" = "#e8e6e6"),
-    EXP_TYPE_CHURCH = list("jobs" = church_positions, "color" = " #fff700"),
-    EXP_TYPE_POLICE = list("jobs" = police_positions, "color" = "#1d22cc"),
-    EXP_TYPE_NATIONAL_SECURITY = list("jobs" = national_security_positions, "color" = " #000491"),
-    EXP_TYPE_GANG = list("jobs" = gang_positions, "color" = "#837524"),
-    EXP_TYPE_TZIMISCE = list("jobs" = tzimisce_positions, "color" = "#fa0207")
+	EXP_TYPE_SERVICES = list("jobs" = services_positions, "color" = "#e8e6e6"),
+	EXP_TYPE_CHURCH = list("jobs" = church_positions, "color" = " #fff700"),
+	EXP_TYPE_POLICE = list("jobs" = police_positions, "color" = "#1d22cc"),
+	EXP_TYPE_NATIONAL_SECURITY = list("jobs" = national_security_positions, "color" = " #000491"),
+	EXP_TYPE_GANG = list("jobs" = gang_positions, "color" = "#837524"),
+	EXP_TYPE_TZIMISCE = list("jobs" = tzimisce_positions, "color" = "#fa0207"),
+	EXP_TYPE_PAINTED_CITY = list("jobs" = painted_positions, "color" = "#7195ad"),
+	EXP_TYPE_AMBERGLADE = list("jobs" = amberglade_positions, "color" = "#69e430"),
+	EXP_TYPE_SPIRAL = list("jobs" = spiral_positions, "color" = "#015334")
 ))
 
 
 GLOBAL_LIST_INIT(exp_jobsmap, list(
-	EXP_TYPE_CREW = list("titles" = command_positions | church_positions | camarilla_council_positions | citizen_positions | police_positions | national_security_positions | anarch_positions | services_positions  | giovanni_positions | tzimisce_positions | warehouse_positions | tremere_positions | gang_positions | clinic_positions), // crew positions
+	EXP_TYPE_CREW = list("titles" = command_positions | church_positions | camarilla_council_positions | citizen_positions | police_positions | national_security_positions | anarch_positions | services_positions  | giovanni_positions | tzimisce_positions | warehouse_positions | tremere_positions | gang_positions | clinic_positions | painted_positions | amberglade_positions | spiral_positions), // crew positions
 	EXP_TYPE_CAMARILLIA = list("titles" = command_positions),
 	EXP_TYPE_TREMERE = list("titles" = tremere_positions),
 	EXP_TYPE_ANARCH = list("titles" = anarch_positions),
 	EXP_TYPE_GANG = list("titles" = gang_positions),
-    EXP_TYPE_OTHER_CITIZEN = list("titles" = citizen_positions),
-    EXP_TYPE_COUNCIL = list("titles" = camarilla_council_positions),
-    EXP_TYPE_POLICE = list("titles" = police_positions),
+	EXP_TYPE_OTHER_CITIZEN = list("titles" = citizen_positions),
+	EXP_TYPE_COUNCIL = list("titles" = camarilla_council_positions),
+	EXP_TYPE_POLICE = list("titles" = police_positions),
 	EXP_TYPE_CLINIC = list("titles" = clinic_positions),
-    EXP_TYPE_SERVICES = list("titles" = services_positions),
-    EXP_TYPE_GIOVANNI = list("titles" = giovanni_positions),
-    EXP_TYPE_TZIMISCE = list("titles" = tzimisce_positions),
-    EXP_TYPE_WAREHOUSE = list("titles" = warehouse_positions),
-    EXP_TYPE_CHURCH = list("titles" = church_positions),
-    EXP_TYPE_NATIONAL_SECURITY = list("titles" = national_security_positions),
+	EXP_TYPE_SERVICES = list("titles" = services_positions),
+	EXP_TYPE_GIOVANNI = list("titles" = giovanni_positions),
+	EXP_TYPE_TZIMISCE = list("titles" = tzimisce_positions),
+	EXP_TYPE_WAREHOUSE = list("titles" = warehouse_positions),
+	EXP_TYPE_CHURCH = list("titles" = church_positions),
+	EXP_TYPE_NATIONAL_SECURITY = list("titles" = national_security_positions),
+	EXP_TYPE_PAINTED_CITY = list("titles" = painted_positions),
+	EXP_TYPE_AMBERGLADE = list("titles" = amberglade_positions),
+	EXP_TYPE_SPIRAL = list("titles" = spiral_positions)
 
 ))
 

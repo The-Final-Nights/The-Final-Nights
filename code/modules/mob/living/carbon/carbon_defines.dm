@@ -119,13 +119,13 @@
 
 	var/list/overlays_standing[TOTAL_LAYERS]
 
-	var/last_veil_adjusting = 0
+	var/next_veil_time = 0
 
 	var/celerity_visual = FALSE
 	var/potential = 0
 
 	var/in_frenzy = FALSE
-	var/frenzy_hardness = 1
+	var/frenzy_hardness = 6
 	var/last_frenzy_check = 0
 	var/atom/frenzy_target = null
 	var/last_experience = 0

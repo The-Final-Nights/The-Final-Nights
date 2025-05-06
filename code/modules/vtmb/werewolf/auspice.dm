@@ -7,27 +7,9 @@
 	var/start_gnosis = 1
 	var/gnosis = 1
 	var/base_breed = "Homid"
-	var/tribe = "Wendigo"
+	var/datum/garou_tribe/tribe = new /datum/garou_tribe/galestalkers()
 	var/list/gifts = list()
 	var/force_abomination = FALSE
-
-	var/list/wendigo = list(
-		/datum/action/gift/stoic_pose = 1,
-		/datum/action/gift/freezing_wind = 2,
-		/datum/action/gift/bloody_feast = 3
-	)
-
-	var/list/glasswalker = list(
-		/datum/action/gift/smooth_move = 1,
-		/datum/action/gift/digital_feelings = 2,
-		/datum/action/gift/elemental_improvement = 3
-	)
-
-	var/list/spiral = list(
-		/datum/action/gift/stinky_fur = 1,
-		/datum/action/gift/venom_claws = 2,
-		/datum/action/gift/burning_scars = 3
-	)
 
 /datum/auspice/proc/on_gain(var/mob/living/carbon/C)
 	C.update_rage_hud()
@@ -51,34 +33,18 @@
 			var/datum/action/A3 = new i()
 			A3.Grant(crinos)
 
-	switch(tribe)
-		if("Glasswalkers")
-			for(var/i in 1 to level)
-				var/zalupa = glasswalker[i]
-				var/datum/action/A = new zalupa()
-				A.Grant(C)
-				var/datum/action/A1 = new zalupa()
-				A1.Grant(lupus)
-				var/datum/action/A2 = new zalupa()
-				A2.Grant(crinos)
-		if("Wendigo")
-			for(var/i in 1 to level)
-				var/zalupa = wendigo[i]
-				var/datum/action/A = new zalupa()
-				A.Grant(C)
-				var/datum/action/A1 = new zalupa()
-				A1.Grant(lupus)
-				var/datum/action/A2 = new zalupa()
-				A2.Grant(crinos)
-		if("Black Spiral Dancers")
-			for(var/i in 1 to level)
-				var/zalupa = spiral[i]
-				var/datum/action/A = new zalupa()
-				A.Grant(C)
-				var/datum/action/A1 = new zalupa()
-				A1.Grant(lupus)
-				var/datum/action/A2 = new zalupa()
-				A2.Grant(crinos)
+	for(var/i in 1 to level)
+		var/zalupa
+		zalupa = tribe.tribal_gifts[i]
+		var/datum/action/A = new zalupa()
+		A.Grant(C)
+		var/datum/action/A1 = new zalupa()
+		A1.Grant(lupus)
+		var/datum/action/A2 = new zalupa()
+		A2.Grant(crinos)
+
+	if(tribe.tribe_keys)
+		C.put_in_hands(new tribe.tribe_keys(C))
 
 /datum/auspice/ahroun
 	name = "Ahroun"

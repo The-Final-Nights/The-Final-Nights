@@ -755,6 +755,7 @@
 			update_icon()
 
 /obj/structure/window/paperframe/update_icon()
+	. = ..()
 	if(obj_integrity < max_integrity)
 		cut_overlay(paper)
 		add_overlay(torn)

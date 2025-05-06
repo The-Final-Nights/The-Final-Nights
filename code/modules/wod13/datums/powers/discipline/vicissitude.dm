@@ -411,7 +411,7 @@
 			user.change_number_of_hands(limbs + 2)
 			user.remove_overlay(PROTEAN_LAYER)
 			upgrade_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "2hands", -PROTEAN_LAYER)
-			upgrade_overlay.color = "#[skintone2hex(user.skin_tone)]"
+			upgrade_overlay.color = skintone2hex(user.skin_tone)
 			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
 			user.apply_overlay(PROTEAN_LAYER)
 		if ("Leather wings")
@@ -442,6 +442,7 @@
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/centipede)
 		if ("Second pair of arms")
 			var/limbs = user.held_items.len
+			user.active_hand_index = 1
 			user.change_number_of_hands(limbs - 2)
 			user.remove_overlay(PROTEAN_LAYER)
 			QDEL_NULL(upgrade_overlay)

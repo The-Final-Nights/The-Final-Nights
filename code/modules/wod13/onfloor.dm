@@ -3,7 +3,7 @@
 	var/onflooricon_state
 	var/body_worn = FALSE
 
-/obj/item/proc/update_bodyfied(var/mob/living/carbon/human/human)
+/obj/item/proc/update_bodyfied(mob/living/carbon/human/human)
 	if(body_worn)
 		if(human.body_sprite)
 			worn_icon = human.body_sprite
@@ -20,7 +20,7 @@
 			worn_icon = BS.body_sprite
 		else
 			worn_icon = initial(worn_icon)
-	update_icon()
+	update_appearance()
 	..()
 
 /obj/item/dropped(mob/M)
@@ -31,14 +31,14 @@
 		cut_overlays()
 		if(onflooricon_state)
 			icon_state = onflooricon_state
-	update_icon()
+	update_appearance()
 	..()
 
 /obj/item/Initialize()
 	..()
 	if(isturf(loc) && onflooricon)
 		icon = onflooricon
-		update_icon()
+		update_appearance()
 	if(onflooricon_state)
 		icon_state = onflooricon_state
-		update_icon()
+		update_appearance()

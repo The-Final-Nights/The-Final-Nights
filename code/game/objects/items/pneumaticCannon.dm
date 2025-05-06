@@ -260,3 +260,8 @@
 	charge_type = /obj/item/food/pie/cream/nostun
 	maxWeightClass = 6		//2 pies
 	charge_ticks = 2		//4 second/pie
+
+
+#undef PCANNON_FIREALL
+#undef PCANNON_FILO
+#undef PCANNON_FIFO

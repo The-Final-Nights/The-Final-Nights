@@ -130,6 +130,8 @@
 		to_chat(M, "<span class='warning'>You feel your flesh turn to stone for a moment, then revert back!</span>")
 		..()
 		return
+	if(user.CheckEyewitness(user, user, 7, FALSE))
+		user.adjust_veil(-1)
 	M.adjustBruteLoss(-100, TRUE)
 	M.adjustFireLoss(-30, TRUE)
 	M.adjustToxLoss(-50, TRUE)

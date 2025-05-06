@@ -234,6 +234,24 @@ GLOBAL_LIST_EMPTY(asset_datums)
 #undef SPRSZ_STRIPPED
 
 
+/datum/asset/changelog_item
+	_abstract = /datum/asset/changelog_item
+	var/item_filename
+
+/datum/asset/changelog_item/New(date)
+	item_filename = sanitize_filename("[date].yml")
+	SSassets.transport.register_asset(item_filename, file("html/changelogs/archive/" + item_filename))
+
+/datum/asset/changelog_item/send(client)
+	if (!item_filename)
+		return
+	. = SSassets.transport.send_assets(client, item_filename)
+
+/datum/asset/changelog_item/get_url_mappings()
+	if (!item_filename)
+		return
+	. = list("[item_filename]" = SSassets.transport.get_asset_url(item_filename))
+
 /datum/asset/spritesheet/simple
 	_abstract = /datum/asset/spritesheet/simple
 	var/list/assets
@@ -291,7 +309,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	if (legacy)
 		assets |= parents
 	var/list/hashlist = list()
-	var/list/sorted_assets = sortList(assets)
+	var/list/sorted_assets = sort_list(assets)
 
 	for (var/asset_name in sorted_assets)
 		var/datum/asset_cache_item/ACI = new(asset_name, sorted_assets[asset_name])

@@ -425,6 +425,7 @@
 		return FALSE
 
 /obj/machinery/door/airlock/update_icon(state=0, override=0)
+	. = ..()
 	if(operating && !override)
 		return
 	switch(state)
@@ -1207,7 +1208,7 @@
 		return
 
 	// reads from the airlock painter's `available paintjob` list. lets the player choose a paint option, or cancel painting
-	var/current_paintjob = input(user, "Please select a paintjob for this airlock.") as null|anything in sortList(painter.available_paint_jobs)
+	var/current_paintjob = input(user, "Please select a paintjob for this airlock.") as null|anything in sort_list(painter.available_paint_jobs)
 	if(!current_paintjob) // if the user clicked cancel on the popup, return
 		return
 

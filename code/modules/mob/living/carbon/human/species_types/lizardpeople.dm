@@ -3,7 +3,7 @@
 	name = "Lizardperson"
 	id = "lizard"
 	say_mod = "hisses"
-	default_color = "00FF00"
+	default_color = "#00FF00"
 	species_traits = list(MUTCOLORS,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_REPTILE
 	mutant_bodyparts = list("tail_lizard" = "Smooth", "snout" = "Round", "horns" = "None",

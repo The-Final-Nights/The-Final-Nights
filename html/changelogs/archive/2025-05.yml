@@ -1,0 +1,37 @@
+2025-05-03:
+  Marshmellow105:
+  - rscadd: this isnt really an addition but some idiot forgot to code in these floors
+      so I did it for them
+  XeonMations, san7890, celotajstg, NamelessFairy, Mothblocks:
+  - bugfix: Made our changelogs actually work correctly and compile.
+  anything86:
+  - bugfix: Defibrillators can no longer revive a vampire or kuei-jin who has met
+      Final Death.
+  maaacha:
+  - code_imp: 3 hourz
+2025-05-04:
+  XeonMations, buffyuwu:
+  - code_imp: okay NOW the changelog works
+2025-05-05:
+  Marshmellow105:
+  - bugfix: fixed icon state for fancy wood not showing
+  ShadeAware:
+  - image: New title screen.
+  chazzyjazzy:
+  - rscadd: Dominate 1 is now a custom command input textbox, where longer commands
+      have higher diceroll difficulty for success.
+  - balance: Dominate and Presence both can no longer be used through walls. The target
+      MUST hear you for the command to succeed.
+  shadeaware, bomby:
+  - rscadd: Tasers have been issued to the SFPD
+  - sound: New sounds for the taser
+2025-05-06:
+  Hardly:
+  - code_imp: Colors can now be picked with better precision.
+  JohnChiffir:
+  - rscadd: weed bloodbag and it's craft
+  Somniworld:
+  - bugfix: unupgrading Vissicitude's "2nd pair of arms" will no longer delimb one
+      of your original limbs, you will also no longer take damage from doing so.
+  Sparrowbird611:
+  - balance: Makes melee weapons stronger.

@@ -16,6 +16,16 @@
 
 	activate_sound = 'code/modules/wod13/sounds/insanity.ogg'
 
+/datum/discipline_power/dementation/proc/dementation_check(mob/living/carbon/human/owner, mob/living/target, base_difficulty = 4, var/dementation_succeeded = FALSE)
+
+	if(!ishuman(target))
+		return FALSE
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+
+	return (mypower > theirpower)
+
 //PASSION
 /datum/discipline_power/dementation/passion
 	name = "Passion"
@@ -30,23 +40,23 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/passion_succeeded = FALSE
+	var/dementation_succeeded = FALSE
+
 
 /datum/discipline_power/dementation/passion/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if(mypower > theirpower)
-		passion_succeeded = TRUE
+	dementation_succeeded = dementation_check(owner, target, base_difficulty = 4)
+	if(dementation_succeeded)
+		return TRUE
 	else
-		passion_succeeded = FALSE
+		do_cooldown(cooldown_length)
+		return FALSE
 
-	return TRUE // Always proceed
 
 /datum/discipline_power/dementation/passion/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(passion_succeeded)
+	if(dementation_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -62,6 +72,7 @@
 
 		if(target.body_position == STANDING_UP)
 			target.toggle_resting()
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/insanity.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))
@@ -84,23 +95,21 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/the_haunting_succeeded = FALSE
+	var/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/the_haunting/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 5, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if(mypower > theirpower)
-		the_haunting_succeeded = TRUE
+	dementation_succeeded = dementation_check(owner, target, base_difficulty = 5)
+	if(dementation_succeeded)
+		return TRUE
 	else
-		the_haunting_succeeded = FALSE
-
-	return TRUE // Always proceed
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/dementation/the_haunting/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(the_haunting_succeeded)
+	if(dementation_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -112,6 +121,7 @@
 
 		target.hallucination += 50
 		new /datum/hallucination/oh_yeah(target, TRUE)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/insanity.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))
@@ -134,23 +144,21 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/eyes_of_chaos_succeeded = FALSE
+	var/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/eyes_of_chaos/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if(mypower > theirpower)
-		eyes_of_chaos_succeeded = TRUE
+	dementation_succeeded = dementation_check(owner, target, base_difficulty = 6)
+	if(dementation_succeeded)
+		return TRUE
 	else
-		eyes_of_chaos_succeeded = FALSE
-
-	return TRUE // Always proceed
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/dementation/eyes_of_chaos/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(eyes_of_chaos_succeeded)
+	if(dementation_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -161,7 +169,7 @@
 		to_chat(target, span_danger("The world fractures—everything is color, rhythm, motion!"))
 
 		target.Immobilize(2 SECONDS)
-
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/insanity.ogg'))
 		if(!HAS_TRAIT(target, TRAIT_KNOCKEDOUT) && !HAS_TRAIT(target, TRAIT_IMMOBILIZED) && !HAS_TRAIT(target, TRAIT_RESTRAINED))
 			if(prob(50))
 				dancefirst(target)
@@ -279,23 +287,21 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/voice_of_madness_succeeded = FALSE
+	var/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/voice_of_madness/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if(mypower > theirpower)
-		voice_of_madness_succeeded = TRUE
+	dementation_succeeded = dementation_check(owner, target, base_difficulty = 6)
+	if(dementation_succeeded)
+		return TRUE
 	else
-		voice_of_madness_succeeded = FALSE
-
-	return TRUE // Always proceed
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/dementation/voice_of_madness/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(voice_of_madness_succeeded)
+	if(dementation_succeeded)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
@@ -307,6 +313,7 @@
 
 		// 8 second instastun - needs to be looked at in the future
 		new /datum/hallucination/death(target, TRUE)
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/insanity.ogg'))
 
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
@@ -330,28 +337,27 @@
 	multi_activate = TRUE
 	cooldown_length = 10 SECONDS
 	duration_length = 3 SECONDS
-	var/tmp/total_insanity_succeeded = FALSE
+	var/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/total_insanity/pre_activation_checks(mob/living/target)
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
-	if(mypower > theirpower)
-		total_insanity_succeeded = TRUE
+	dementation_succeeded = dementation_check(owner, target, base_difficulty = 7)
+	if(dementation_succeeded)
+		return TRUE
 	else
-		total_insanity_succeeded = FALSE
-
-	return TRUE // Always proceed
+		do_cooldown(cooldown_length)
+		return FALSE
 
 /datum/discipline_power/dementation/total_insanity/activate(mob/living/carbon/human/target)
 	. = ..()
 
-	if(total_insanity_succeeded)
+	if(dementation_succeeded)
 		start_total_insanity_effect(target)
 		addtimer(CALLBACK(PROC_REF(stop_total_insanity_effect), target), 20 SECONDS)
 
 		to_chat(owner, span_warning("You unravel [target]'s sanity, leaving them in a state of uncontrollable mania!"))
 		to_chat(target, span_danger("Reality fractures and collapses around you. You lash out blindly, unsure what’s real."))
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/insanity.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))

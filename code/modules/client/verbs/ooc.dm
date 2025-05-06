@@ -321,7 +321,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		return
 
 	// Sort the list
-	players = sortList(players)
+	players = sort_list(players)
 
 	// Request the player to ignore
 	var/selection = input("Please, select a player!", "Ignore", null, null) as null|anything in players
@@ -485,6 +485,15 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 		policytext += "No related rules found."
 
 	usr << browse(policytext.Join(""),"window=policy")
+
+/client/verb/toggle_fullscreen()
+	set name = "Toggle Fullscreen"
+	set category = "OOC"
+
+	fullscreen = !fullscreen
+
+	winset(src, "mainwindow", "menu=;is-fullscreen=[fullscreen ? "true" : "false"]")
+	//attempt_auto_fit_viewport()
 
 /client/verb/fix_stat_panel()
 	set name = "Fix Stat Panel"
