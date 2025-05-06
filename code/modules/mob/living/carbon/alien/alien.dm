@@ -48,8 +48,8 @@
 /mob/living/carbon/alien/assess_threat(judgement_criteria, lasercolor = "", datum/callback/weaponcheck=null) // beepsky won't hunt aliums
 	return -10
 
-/mob/living/carbon/alien/reagent_check(datum/reagent/R, delta_time, times_fired) //can metabolize all reagents
-	return FALSE
+/mob/living/carbon/alien/reagent_check(datum/reagent/R) //can metabolize all reagents
+	return 0
 
 /mob/living/carbon/alien/get_status_tab_items()
 	. = ..()

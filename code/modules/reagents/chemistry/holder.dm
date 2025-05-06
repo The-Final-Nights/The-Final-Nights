@@ -574,7 +574,7 @@
  * * can_overdose - Allows overdosing
  * * liverless - Stops reagents that aren't set as [/datum/reagent/var/self_consuming] from metabolizing
  */
-/datum/reagents/proc/metabolize(mob/living/carbon/owner, delta_time, times_fired, can_overdose = FALSE, liverless = FALSE)
+/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE)
 	var/list/cached_reagents = reagent_list
 	if(C)
 		expose_temperature(C.bodytemperature, 0.25)
@@ -587,29 +587,61 @@
 		if(!C)
 			C = R.holder.my_atom
 
-		if(owner && reagent)
-			if(owner.reagent_check(reagent, delta_time, times_fired) != TRUE)
-				if(liverless && !reagent.self_consuming) //need to be metabolized
+		if(C && R)
+			if(C.reagent_check(R) != TRUE)
+				if(liverless && !R.self_consuming) //need to be metabolized
 					continue
 				if(!R.metabolizing)
 					R.metabolizing = TRUE
 					R.on_mob_metabolize(C)
 				if(can_overdose)
-					if(reagent.overdose_threshold)
-						if(reagent.volume >= reagent.overdose_threshold && !reagent.overdosed)
-							reagent.overdosed = TRUE
-							need_mob_update += reagent.overdose_start(owner)
-							log_game("[key_name(owner)] has started overdosing on [reagent.name] at [reagent.volume] units.")
-					for(var/addiction in reagent.addiction_types)
-						owner.mind?.add_addiction_points(addiction, reagent.addiction_types[addiction] * REAGENTS_METABOLISM)
+					if(R.overdose_threshold)
+						if(R.volume >= R.overdose_threshold && !R.overdosed)
+							R.overdosed = TRUE
+							need_mob_update += R.overdose_start(C)
+							log_game("[key_name(C)] has started overdosing on [R.name] at [R.volume] units.")
+					var/is_addicted_to = addiction_list && is_type_in_list(R, addiction_list)
+					if(R.addiction_threshold)
+						if(R.volume >= R.addiction_threshold && !is_addicted_to)
+							var/datum/reagent/new_reagent = new R.addiction_type()
+							LAZYADD(addiction_list, new_reagent)
+							is_addicted_to = TRUE
+							log_game("[key_name(C)] has become addicted to [R.name] at [R.volume] units.")
+					if(R.overdosed)
+						need_mob_update += R.overdose_process(C)
+					var/datum/reagent/addiction_type = new R.addiction_type()
+					if(is_addicted_to)
+						for(var/addiction in addiction_list)
+							var/datum/reagent/A = addiction
+							if(istype(addiction_type, A))
+								A.addiction_stage = -15 // you're satisfied for a good while.
+				need_mob_update += R.on_mob_life(C)
 
-					if(reagent.overdosed)
-						need_mob_update += reagent.overdose_process(owner, delta_time, times_fired)
-
-				need_mob_update += reagent.on_mob_life(owner, delta_time, times_fired)
-	if(owner && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
-		owner.updatehealth()
-		owner.update_stamina()
+	if(can_overdose)
+		if(addiction_tick == 6)
+			addiction_tick = 1
+			for(var/addiction in addiction_list)
+				var/datum/reagent/R = addiction
+				if(!C)
+					break
+				R.addiction_stage++
+				switch(R.addiction_stage)
+					if(1 to 10)
+						need_mob_update += R.addiction_act_stage1(C)
+					if(10 to 20)
+						need_mob_update += R.addiction_act_stage2(C)
+					if(20 to 30)
+						need_mob_update += R.addiction_act_stage3(C)
+					if(30 to 40)
+						need_mob_update += R.addiction_act_stage4(C)
+					if(40 to INFINITY)
+						remove_addiction(R)
+					else
+						SEND_SIGNAL(C, COMSIG_CLEAR_MOOD_EVENT, "[R.type]_overdose")
+		addiction_tick++
+	if(C && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
+		C.updatehealth()
+		C.update_stamina()
 	update_total()
 
 /// Signals that metabolization has stopped, triggering the end of trait-based effects
