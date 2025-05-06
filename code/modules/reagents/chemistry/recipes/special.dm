@@ -1,6 +1,8 @@
 GLOBAL_LIST_INIT(food_reagents, build_reagents_to_food()) //reagentid = related food types
 GLOBAL_LIST_INIT(medicine_reagents, build_medicine_reagents())
 
+#define VALID_RANDOM_RECIPE_REAGENT(chemical_flags) (chemical_flags & REAGENT_CAN_BE_SYNTHESIZED && !(chemical_flags & REAGENT_NO_RANDOM_RECIPE))
+
 /proc/build_reagents_to_food()
 	. = list()
 	for (var/type in subtypesof(/obj/item/reagent_containers/food))
@@ -23,10 +25,10 @@ GLOBAL_LIST_INIT(medicine_reagents, build_medicine_reagents())
 /proc/build_medicine_reagents()
 	. = list()
 
-	for(var/A in subtypesof(/datum/reagent/medicine))
-		var/datum/reagent/R = A
-		if(initial(R.can_synth))
-			. += R
+	for(var/datum/reagent/reagent as anything in subtypesof(/datum/reagent/medicine))
+		var/chem_flags = initial(reagent.chemical_flags)
+		if(VALID_RANDOM_RECIPE_REAGENT(chem_flags))
+			. += reagent
 
 #define RNGCHEM_INPUT "input"
 #define RNGCHEM_CATALYSTS "catalysts"
@@ -35,7 +37,7 @@ GLOBAL_LIST_INIT(medicine_reagents, build_medicine_reagents())
 /datum/chemical_reaction/randomized
 
 	//Increase default leniency because these are already hard enough
-	optimal_ph_min = 1 
+	optimal_ph_min = 1
 	optimal_ph_max = 13
 	temp_exponent_factor = 0
 	ph_exponent_factor = 1
@@ -92,28 +94,28 @@ GLOBAL_LIST_INIT(medicine_reagents, build_medicine_reagents())
 	if(randomize_req_temperature)
 		is_cold_recipe = pick(TRUE,FALSE)
 		if(is_cold_recipe)
-			required_temp = rand(min_temp+50, max_temp) 
-			optimal_temp = rand(min_temp+25, required_temp-10) 
+			required_temp = rand(min_temp+50, max_temp)
+			optimal_temp = rand(min_temp+25, required_temp-10)
 			overheat_temp = rand(min_temp, optimal_temp-10)
 			if(overheat_temp >= 200) //Otherwise it can disappear when you're mixing and I don't want this to happen here
 				overheat_temp = 200
 			if(exo_or_endothermic)
 				thermic_constant = (rand(-200, 200))
 		else
-			required_temp = rand(min_temp, max_temp-50) 
-			optimal_temp = rand(required_temp+10, max_temp-25) 
+			required_temp = rand(min_temp, max_temp-50)
+			optimal_temp = rand(required_temp+10, max_temp-25)
 			overheat_temp = rand(optimal_temp, max_temp+50)
 			if(overheat_temp <= 400)
 				overheat_temp = 400
 			if(exo_or_endothermic)
 				thermic_constant = (rand(-200, 200))
-	
+
 	if(randomize_req_ph)
 		optimal_ph_min = min_ph + rand(0, inoptimal_range_ph)
 		optimal_ph_max = max((max_ph + rand(0, inoptimal_range_ph)), (min_ph + 1)) //Always ensure we've a window of 1
 		determin_ph_range = inoptimal_range_ph
 		H_ion_release = (rand(0, 25)/100)// 0 - 0.25
-	
+
 	if(randomize_impurity_minimum)
 		purity_min = (rand(0, 4)/10)
 
@@ -320,3 +322,5 @@ GLOBAL_LIST_INIT(medicine_reagents, build_medicine_reagents())
 #undef RNGCHEM_INPUT
 #undef RNGCHEM_CATALYSTS
 #undef RNGCHEM_OUTPUT
+
+#undef VALID_RANDOM_RECIPE_REAGENT
