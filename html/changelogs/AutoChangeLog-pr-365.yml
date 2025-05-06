@@ -1,4 +1,0 @@
-author: "XeonMations, san7890, celotajstg, NamelessFairy, Mothblocks"
-delete-after: True
-changes:
-  - bugfix: "Made our changelogs actually work correctly and compile."
