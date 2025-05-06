@@ -19337,7 +19337,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
 "fmn" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_x = -16
@@ -21224,7 +21224,7 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "fLj" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
@@ -21840,7 +21840,7 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior/tzimisce_manor)
 "fSU" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "fSY" = (
@@ -25657,7 +25657,7 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
 "gSn" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/machinery/light/small/pink{
 	dir = 8;
 	pixel_x = 16
@@ -27835,6 +27835,28 @@
 "hyN" = (
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict/construction)
+"hyO" = (
+/obj/structure/fluff/hedge{
+	pixel_y = 6
+	},
+/obj/structure/flora/ausbushes/ywflowers{
+	pixel_y = 10
+	},
+/obj/structure/flora/ausbushes/brflowers{
+	pixel_y = 10
+	},
+/obj/structure/railing{
+	layer = 4
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/coclock,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/interior/shop)
 "hyT" = (
 /obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/toilet,
@@ -31666,7 +31688,7 @@
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
 "iCH" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
@@ -39380,7 +39402,7 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/tzimisce_manor)
 "kJu" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
@@ -39915,7 +39937,7 @@
 /turf/closed/wall/vampwall,
 /area/vtm/hotel)
 "kRO" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
 	},
@@ -41438,7 +41460,7 @@
 /turf/open/openspace,
 /area/vtm/jazzclub)
 "llB" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/machinery/light/small/pink{
 	pixel_y = 32
 	},
@@ -43004,7 +43026,7 @@
 /turf/open/openspace,
 /area/vtm/interior/tzimisce_manor)
 "lIv" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
 	},
@@ -52221,7 +52243,7 @@
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/financialdistrict)
 "ohn" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/decal/pallet,
 /obj/structure/coclock,
 /turf/open/floor/plating/concrete,
@@ -53218,7 +53240,7 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/oldchurch)
 "ovt" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
@@ -54763,7 +54785,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/mansion)
 "oPh" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
@@ -58810,7 +58832,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "pRw" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
 "pRC" = (
@@ -67148,7 +67170,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f4)
 "rYR" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/machinery/light/small/pink{
 	dir = 8;
 	pixel_x = 16
@@ -74837,7 +74859,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior/staff)
 "uiE" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/machinery/light/small/pink{
 	dir = 4;
 	pixel_x = -16
@@ -77425,7 +77447,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "uTo" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
 "uTp" = (
@@ -79045,7 +79067,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility/restricted)
 "vqp" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
 "vqq" = (
@@ -80523,7 +80545,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/forest)
 "vKl" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest)
 "vKm" = (
@@ -81419,7 +81441,7 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/ventrue)
 "vXm" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /obj/effect/decal/graffiti,
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/concrete,
@@ -84495,7 +84517,7 @@
 	dir = 4;
 	pixel_x = -16
 	},
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "wPR" = (
@@ -86015,7 +86037,7 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog/caern)
 "xlr" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "xlz" = (
@@ -86055,7 +86077,7 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/graveyard/interior)
 "xlV" = (
-/obj/machinery/hydroponics,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "xlX" = (
@@ -188834,7 +188856,7 @@ lwp
 otB
 iog
 iWr
-ouV
+hyO
 dQS
 dQS
 ota

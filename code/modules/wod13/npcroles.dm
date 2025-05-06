@@ -1121,7 +1121,7 @@
 	female_names = list("Poppy")
 	surnames = list("Laurier")
 
-	hair_colors = list("ad924e")	//Blonde
+	hair_colors = list("#dac07f")	//Blonde
 	female_hair = list("Ponytail 5")
 
 	shoes = list(/obj/item/clothing/shoes/vampire/jackboots/work)
