@@ -35,3 +35,6 @@
       of your original limbs, you will also no longer take damage from doing so.
   Sparrowbird611:
   - balance: Makes melee weapons stronger.
+2025-05-07:
+  maaacha:
+  - bugfix: sanitizes garou renown integers before saving them

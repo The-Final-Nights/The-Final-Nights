@@ -129,9 +129,9 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		target.Stun(1 SECONDS)
-		to_chat(target, span_userlove("REST"))
+		to_chat(target, span_userlove("DOWN"))
 		to_chat(owner, span_warning("You've enthralled [target] with your commanding aura!"))
-		owner.say("REST!!")
+		owner.say("Down!")
 		if(target.body_position == STANDING_UP)
 			target.toggle_resting()
 		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
@@ -185,8 +185,8 @@
 		var/obj/item/I2 = target.get_inactive_held_item()
 
 		to_chat(owner, span_warning("You've enthralled [target] with your commanding aura!"))
-		to_chat(target, span_userlove("PLEASE ME"))
-		owner.say("PLEASE ME!!")
+		to_chat(target, span_userlove("GIVE IT HERE"))
+		owner.say("Give it here.")
 
 		target.face_atom(owner)
 		target.do_jitter_animation(3 SECONDS)
@@ -244,8 +244,8 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		to_chat(owner, span_warning("You've compelled [target] to heed your presence!"))
-		to_chat(target, span_userlove("FEAR ME"))
-		owner.say("FEAR ME!!")
+		to_chat(target, span_userlove("LEAVE"))
+		owner.say("Leave!")
 
 		var/datum/cb = CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
 		for(var/i in 1 to 30)
@@ -307,8 +307,8 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		to_chat(owner, span_warning("You've overwhelmed [target] with your majestic aura!"))
-		to_chat(target, span_userlove("UNDRESS YOURSELF"))
-		owner.say("UNDRESS YOURSELF!!")
+		to_chat(target, span_userlove("DISROBE"))
+		owner.say("Disrobe.")
 		target.Immobilize(1 SECONDS)
 		for(var/obj/item/clothing/W in target.contents)
 			target.dropItemToGround(W, TRUE)
