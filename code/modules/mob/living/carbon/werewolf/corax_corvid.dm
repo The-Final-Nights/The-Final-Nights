@@ -1,5 +1,5 @@
 // Wereraven code? In my werewolf folder?! Are you insane?!
-// this is a copy of the lupus.dm code, tweaked to unallow hispo, give the ravens a hand, and overall tweak their values.
+// this is a copy of the lupus.dm code, tweaked to hopefullygive the ravens a hand and overall tweak their values.
 
 /mob/living/carbon/werewolf/corvid
 	name = "corvid"
@@ -13,13 +13,14 @@
 	AddElement(/datum/element/waddling) // try not to look silly challenge
 	limb_destroyer = 1
 	has_limbs = 1
-//	dextrous = FALSE // I do not know what this
+	dextrous = FALSE // As funny as a raven shooting a gun is, I don't think this is something we want. Prevents them from using phones, sadly.
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 	health = 150
 	maxHealth = 150
 	werewolf_armor = 10
 	bodyparts = /obj/item/bodypart/r_arm/corvid_corax // a singular hand, to pick up items with.
+	var/obj/item/r_store = null
 	var/hispo = FALSE
 
 
@@ -38,7 +39,7 @@
 	else
 		icon_state = "[sprite_color]"
 
-	// if(stat == FLYING && stat != UNCONSCIOUS) //If we are flying, show the flying sprite.
+	// if(!HAS_TRAIT_FROM(src, TRAIT_INCAPACITATED, STAMINA)) //If we are flying, show the flying sprite.
 
 	switch(getFireLoss()+getBruteLoss())
 		if(25 to 75)

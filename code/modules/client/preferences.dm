@@ -2291,7 +2291,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("auspice")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
-
+					if(tribe=="Corax")
+						auspice="Theurge"
+						return
 					var/list/auspice_choices = list()
 					for(var/i in GLOB.auspices_list)
 						var/a = GLOB.auspices_list[i]
