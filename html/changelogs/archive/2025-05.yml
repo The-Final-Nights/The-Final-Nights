@@ -35,3 +35,16 @@
       of your original limbs, you will also no longer take damage from doing so.
   Sparrowbird611:
   - balance: Makes melee weapons stronger.
+2025-05-07:
+  ShadeAware:
+  - image: Gangrel claws are no longer huge.
+  maaacha:
+  - bugfix: sanitizes garou renown integers before saving them
+  molly!:
+  - rscadd: Dom 1 no longer automatically adds an exclamation point at the end of
+      your command, regardless of the punctuation you choose. Its range hasn't been
+      changed.
+  - rscadd: Dom 2's "GET DOWN!!" has been changed to a much simpler "Fall." Its secondary
+      effect has been changed from "STAY DOWN!!" to "Stay down."
+  - rscadd: Dom 3's "THINK TWICE!!" has been changed to "Think twice."
+  - rscadd: Dom 5's "YOU SHOULD HARM YOURSELF NOW!!" has been changed to "Hit yourself."
