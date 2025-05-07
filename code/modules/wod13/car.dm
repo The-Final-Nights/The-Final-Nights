@@ -35,6 +35,25 @@ SUBSYSTEM_DEF(carpool)
 			return
 		CAR.running()
 
+/obj/structure/vampcar
+	name = "car"
+	desc = "It drives."
+	icon = 'icons/obj/vehicles/cars.dmi'
+	icon_state = "taxi"
+	plane = GAME_PLANE
+	layer = ABOVE_ALL_MOB_LAYER
+	anchored = TRUE
+	density = TRUE
+	pixel_w = -16
+
+/obj/structure/vampcar/Initialize()
+	. = ..()
+	var/atom/movable/M = new(get_step(loc, EAST))
+	M.density = TRUE
+	M.anchored = TRUE
+	dir = pick(NORTH, SOUTH, WEST, EAST)
+
+
 /obj/item/gas_can
 	name = "gas can"
 	desc = "Stores gasoline or pure fire death."
@@ -97,7 +116,7 @@ SUBSYSTEM_DEF(carpool)
 	name = "car"
 	desc = "Take me home, country roads..."
 	icon_state = "2"
-	icon = 'code/modules/wod13/cars.dmi'
+	icon = 'icons/obj/vehicles/cars.dmi'
 	anchored = TRUE
 	plane = GAME_PLANE
 	layer = CAR_LAYER
