@@ -119,3 +119,13 @@
 	volume = 70
 	falloff_distance = 5
 	falloff_exponent = 20
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/datum/looping_sound/car_engine
+	mid_sounds = list('code/modules/wod13/sounds/drive.ogg')
+	mid_length = 2 SECONDS
+	extra_range = 20
+	volume = 10
+	falloff_distance = 10
+	falloff_exponent = 20
