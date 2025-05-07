@@ -1,7 +1,4 @@
-/*
-// Smooth movement vehicles, that aren't locked to the game's grid like normal vehicles are.
-*/
-
+// Smooth movement vehicles, aren't locked to the game's grid like normal vehicles are.
 /obj/vehicle_smooth
 	name = "coderbus vehicle"
 	desc = "If you see this, something fucked up."
@@ -22,11 +19,12 @@
 
 	// The current driver, if any
 	var/mob/living/carbon/human/driver = null
+	var/list/mob/living/passengers = list()
 	// How many passengers can fit in the vehicle
 	var/passenger_capacity = 0
 
 	var/datum/looping_sound/car_engine/engine_noise
-	var/beep_sound = 'code/modules/wod13/sounds/beep.ogg'
+	var/beep_sound = 'sound/vehicles/cars/beep.ogg'
 
 /obj/vehicle_smooth/Initialize(mapload)
 	. = ..()
@@ -36,6 +34,45 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	QDEL_NULL(engine_noise)
 	return ..()
+
+/obj/vehicle_smooth/MouseDrop_T(mob/living/dropping, mob/living/dropping_user)
+	. = ..()
+	if(dropping != dropping_user)
+		add_passenger(dropping)
+		return
+	add_vehicle_user(dropping)
+
+/obj/vehicle_smooth/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	var/removed_passenger = passengers[1]
+	forceMove(removed_passenger, over)
+	passengers -= removed_passenger
+
+/*
+// This is the function that allows WASD movement for the car. Oh God.
+// W - Accelerate forwards
+// S - Accelerate backwards
+// A - Turn left
+// D - Turn right
+// Pressing no keys will eventually stop the vehicle, but that's handled in the base movement ticks.
+*/
+/obj/vehicle_smooth/relaymove(mob/living/user, direction)
+	switch(direction)
+		if(NORTH)
+			accelerate()
+		if(SOUTH)
+			accelerate()
+		if(WEST)
+			turn()
+		if(EAST)
+			turn()
+
+///////////////////////////////////////////////////// Custom vehicle functions from here.
+
+/obj/vehicle_smooth/proc/add_passenger(mob/living/dropping)
+	forceMove(dropping, src)
+	passengers += dropping
+	playsound(src, 'sound/vehicles/cars/door.ogg', 20, TRUE)
 
 /obj/vehicle_smooth/proc/engine_start()
 	START_PROCESSING(SSfastprocess, src) // Need SSfastprocess here to avoid jankiness and smoothment.

@@ -123,7 +123,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /datum/looping_sound/car_engine
-	mid_sounds = list('code/modules/wod13/sounds/drive.ogg')
+	mid_sounds = list('sound/vehicles/cars/drive.ogg')
 	mid_length = 2 SECONDS
 	extra_range = 20
 	volume = 10
