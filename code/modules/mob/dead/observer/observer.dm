@@ -159,7 +159,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		remove_verb(src, /mob/dead/observer/verb/jumptomob)
 		remove_verb(src, /mob/dead/observer/verb/toggle_ghostsee)
 		remove_verb(src, /mob/dead/observer/verb/toggle_darkness)
-		remove_verb(src, /mob/dead/observer/verb/view_manifest)
 		remove_verb(src, /mob/dead/observer/verb/toggle_data_huds)
 		remove_verb(src, /mob/dead/observer/verb/observe)
 		remove_verb(src, /mob/dead/observer/verb/register_pai_candidate)
@@ -723,22 +722,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return FALSE
 	usr.visible_message("<span class='deadsay'><b>[src]</b> points to [A].</span>")
 	return TRUE
-
-/mob/dead/observer/verb/view_manifest()
-	set name = "View Crew Manifest"
-	set category = "Ghost"
-
-	if(!client)
-		return
-	if(world.time < client.crew_manifest_delay)
-		return
-	client.crew_manifest_delay = world.time + (1 SECONDS)
-
-	var/dat
-	dat += "<h4>Crew Manifest</h4>"
-	dat += GLOB.data_core.get_manifest_html()
-
-	src << browse(dat, "window=manifest;size=387x420;can_close=1")
 
 //this is called when a ghost is drag clicked to something.
 /mob/dead/observer/MouseDrop(atom/over)

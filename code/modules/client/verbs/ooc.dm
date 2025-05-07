@@ -500,3 +500,18 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	set hidden = TRUE
 
 	init_verbs()
+
+/client/verb/view_manifest()
+	set name = "View Crew Manifest"
+	set category = "OOC"
+
+	if(world.time < crew_manifest_delay)
+		return
+
+	crew_manifest_delay = world.time + 1 SECONDS
+
+	var/dat = "<html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'></head><body>"
+	dat += "<h4>Current population</h4>"
+	dat += GLOB.data_core.get_manifest_html()
+
+	usr << browse(dat, "window=manifest;size=387x420;can_close=1")
