@@ -382,7 +382,7 @@
 
 /datum/action/basic_vicissitude/proc/give_upgrade()
 	var/mob/living/carbon/human/user = owner
-	var/upgrade = list(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Skin armor", "Centipede legs", "Second pair of arms", "Leather wings", "Chameleon Skin")
+	var/upgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Skin armor", "Centipede legs", "Second pair of arms", "Leather wings", "Chameleon Skin")
 	if(!upgrade)
 		return
 	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
@@ -488,7 +488,7 @@
 
 /datum/action/advanced_vicissitude/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
-	var/advancedupgrade = list(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish skin")
+	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish skin")
 	if(!advancedupgrade)
 		return
 	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
