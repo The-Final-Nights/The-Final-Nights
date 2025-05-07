@@ -455,10 +455,6 @@
 		if ("Leather wings")
 			user.dna.species.RemoveSpeciesFlight(user)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
-		if ("Chameleon skin")
-			user.skin_tone = original_skin_tone
-			user.hairstyle = original_hairstyle
-			user.dna.remove_mutation(CHAMELEON)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -488,7 +484,7 @@
 
 /datum/action/advanced_vicissitude/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
-	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings", "Cuttlefish skin")
+	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings")
 	if(!advancedupgrade)
 		return
 	to_chat(user, span_notice("You begin molding your flesh and bone into a stronger form..."))
@@ -531,9 +527,9 @@
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
-		if ("Cuttlefish skin")
+/*		if ("Cuttlefish skin")
 			var/datum/action/active_camo/camo= new()
-			camo.Grant(owner)
+			camo.Grant(owner)*/
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -569,11 +565,11 @@
 			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.dna.species.RemoveSpeciesFlight(user)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/membranewings)
-		if ("Cuttlefish skin")
+/*		if ("Cuttlefish skin")
 			for(var/datum/action/active_camo/camo in owner.actions)
 				camo.Remove(owner)
 			if(owner.alpha == 30)
-				animate(owner, alpha = 255, time = 1.5 SECONDS)
+				animate(owner, alpha = 255, time = 1.5 SECONDS)*/
 
 
 	user.do_jitter_animation(10)
@@ -656,7 +652,7 @@
 	vicissitude_upgrade_advanced.Grant(owner)
 
 // REWORK ABILITIES AND VERBS
-
+/*
 /datum/action/active_camo
 	name = "Active Camo"
 	var/stealth_alpha = 30
@@ -669,4 +665,4 @@
 		to_chat(user, span_notice("You disable your chromatophores and reappear!"))
 	else
 		animate(owner, alpha = stealth_alpha, time = 1.5 SECONDS)
-		to_chat(user, span_notice("You activate your chromatophores and disappear!"))
+		to_chat(user, span_notice("You activate your chromatophores and disappear!"))*/
