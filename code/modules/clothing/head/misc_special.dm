@@ -171,7 +171,7 @@
 /obj/item/clothing/head/kitty/update_icon(updates=ALL, mob/living/carbon/human/user)
 	. = ..()
 	if(ishuman(user))
-		add_atom_colour("#[user.hair_color]", FIXED_COLOUR_PRIORITY)
+		add_atom_colour(user.hair_color, FIXED_COLOUR_PRIORITY)
 
 /obj/item/clothing/head/kitty/genuine
 	desc = "A pair of kitty ears. A tag on the inside says \"Hand made from real cats.\""
@@ -220,7 +220,7 @@
 	inhand_icon_state = "pwig"
 	worn_icon_state = "wig"
 	flags_inv = HIDEHAIR | HIDEHEADGEAR
-	color = "#000"
+	color = "#000000"
 	var/hairstyle = "Very Long Hair"
 	var/adjustablecolor = TRUE //can color be changed manually?
 
@@ -262,19 +262,19 @@
 	. = ..()
 	if (istype(target) && (HAIR in target.dna.species.species_traits) && target.hairstyle != "Bald")
 		to_chat(user, "<span class='notice'>You adjust the [src] to look just like [target.name]'s [target.hairstyle].</span>")
-		add_atom_colour("#[target.hair_color]", FIXED_COLOUR_PRIORITY)
+		add_atom_colour(target.hair_color, FIXED_COLOUR_PRIORITY)
 		hairstyle = target.hairstyle
 		update_appearance()
 
 /obj/item/clothing/head/wig/random/Initialize(mapload)
 	hairstyle = pick(GLOB.hairstyles_list - "Bald") //Don't want invisible wig
-	add_atom_colour("#[random_short_color()]", FIXED_COLOUR_PRIORITY)
+	add_atom_colour(random_color(), FIXED_COLOUR_PRIORITY)
 	. = ..()
 
 /obj/item/clothing/head/wig/natural
 	name = "natural wig"
 	desc = "A bunch of hair without a head attached. This one changes color to match the hair of the wearer. Nothing natural about that."
-	color = "#FFF"
+	color = "#FFFFFF"
 	adjustablecolor = FALSE
 	custom_price = PAYCHECK_HARD
 
@@ -285,8 +285,8 @@
 /obj/item/clothing/head/wig/natural/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(ishuman(user) && slot == ITEM_SLOT_HEAD)
-		if (color != "#[user.hair_color]") // only update if necessary
-			add_atom_colour("#[user.hair_color]", FIXED_COLOUR_PRIORITY)
+		if (color != user.hair_color) // only update if necessary
+			add_atom_colour(user.hair_color, FIXED_COLOUR_PRIORITY)
 			update_appearance()
 		user.update_inv_head()
 
