@@ -137,8 +137,8 @@
 
 	if(dominate_check(owner, target, base_difficulty = extra_words_difficulty))
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-		owner.say("[custom_command]!")
-		to_chat(target, span_big("[custom_command]!"))
+		owner.say("[custom_command]")
+		to_chat(target, span_big("[custom_command]"))
 		SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 	else
 		to_chat(owner, span_warning("[target] has resisted your domination!"))
@@ -179,14 +179,14 @@
 		target.Immobilize(0.5 SECONDS)
 		if(target.body_position == STANDING_UP)
 			to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-			to_chat(target, span_danger("GET DOWN"))
+			to_chat(target, span_danger("FALL"))
 			target.toggle_resting()
-			owner.say("GET DOWN!!")
+			owner.say("Fall.")
 			SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 		else
 			to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 			to_chat(target, span_danger("STAY DOWN"))
-			owner.say("STAY DOWN!!")
+			owner.say("Stay down.")
 			SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
@@ -226,7 +226,7 @@
 	if(domination_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
 		to_chat(target, span_danger("THINK TWICE"))
-		owner.say("THINK TWICE!!")
+		owner.say("Think twice.")
 		target.add_movespeed_modifier(/datum/movespeed_modifier/dominate)
 		SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 	else
@@ -319,8 +319,8 @@
 
 	if(domination_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-		to_chat(target, span_danger("YOU SHOULD HARM YOURSELF NOW"))
-		owner.say("YOU SHOULD HARM YOURSELF NOW!!")
+		to_chat(target, span_danger("HIT YOURSELF"))
+		owner.say("Hit yourself.")
 
 		var/datum/cb = CALLBACK(target, /mob/living/carbon/human/proc/attack_myself_command)
 		for(var/i in 1 to 20)
