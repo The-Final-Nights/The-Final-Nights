@@ -1,7 +1,7 @@
-// Wereraven code? In my werewolf folder?! Are you insane?!
+// Wereraven code? In my corax folder?! Are you insane?!
 // this is a copy of the lupus.dm code, tweaked to hopefullygive the ravens a hand and overall tweak their values.
 
-/mob/living/carbon/werewolf/corvid
+/mob/living/carbon/corax/corvid
 	name = "corvid"
 	icon_state = "black"
 	icon = 'code/modules/wod13/corax_corvid.dmi'
@@ -9,7 +9,7 @@
 	mob_size = MOB_SIZE_SMALL
 	butcher_results = list(/obj/item/food/meat/slab = 2)
 	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
-	hud_type = /datum/hud/werewolf
+	hud_type = /datum/hud/corax
 	AddElement(/datum/element/waddling) // try not to look silly challenge
 	limb_destroyer = 1
 	has_limbs = 1
@@ -18,7 +18,7 @@
 	melee_damage_upper = 20
 	health = 150
 	maxHealth = 150
-	werewolf_armor = 10
+	corax_armor = 10
 	bodyparts = /obj/item/bodypart/r_arm/corvid_corax // a singular hand, to pick up items with.
 	var/obj/item/r_store = null
 	var/hispo = FALSE
@@ -27,7 +27,7 @@
 /datum/movespeed_modifier/corvidform
 	multiplicative_slowdown = 0 // Ravens move at regular pace while landed.
 
-/mob/living/carbon/werewolf/corvid/update_icons()
+/mob/living/carbon/corax/corvid/update_icons()
 	cut_overlays()
 
 	var/laid_down = FALSE
@@ -58,16 +58,16 @@
 	eye_overlay.layer = ABOVE_LIGHTING_LAYER
 	add_overlay(eye_overlay)
 
-/mob/living/carbon/werewolf/corvid/regenerate_icons()
+/mob/living/carbon/corax/corvid/regenerate_icons()
 	if(!..())
 	//	update_icons() //Handled in update_transform(), leaving this here as a reminder
 		update_transform()
 
-/mob/living/carbon/werewolf/corvid/update_transform() //The old method of updating lying/standing was update_icons(). Aliens still expect that.
+/mob/living/carbon/corax/corvid/update_transform() //The old method of updating lying/standing was update_icons(). Aliens still expect that.
 	. = ..()
 	update_icons()
 
-/mob/living/carbon/werewolf/corvid/Life()
+/mob/living/carbon/corax/corvid/Life()
 	if(!(HAS_TRAIT(src, TRAIT_CROW)))
 		if(CheckEyewitness(src, src, 4, FALSE))
 			src.adjust_veil(-1,threshold = 4)
