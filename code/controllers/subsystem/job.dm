@@ -142,17 +142,17 @@ SUBSYSTEM_DEF(job)
 		return FALSE
 	if(job.required_playtime_remaining(player.client))
 		return FALSE
-	if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
+	if(!job.is_character_old_enough(player.client.prefs.total_age))
 		return FALSE
-	if((player.client.prefs.generation > job.minimal_generation) && !bypass)
+	if((player.client.prefs.generation > job.minimal_generation))
 		return FALSE
-	if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
+	if((player.client.prefs.masquerade < job.minimal_masquerade))
 		return FALSE
-	if((player.client.prefs.renownrank < job.minimal_renownrank) && !bypass)
+	if((player.client.prefs.renownrank < job.minimal_renownrank))
 		return FALSE
-	if(!job.allowed_species.Find(player.client.prefs.pref_species.name) && !bypass)
+	if(!job.allowed_species.Find(player.client.prefs.pref_species.name))
 		return FALSE
-	if ((job.species_slots[player.client.prefs.pref_species.name] == 0) && !bypass)
+	if ((job.species_slots[player.client.prefs.pref_species.name] == 0))
 		return FALSE
 	var/position_limit = job.total_positions
 	if(!latejoin)
@@ -183,9 +183,6 @@ SUBSYSTEM_DEF(job)
 			continue
 		if(job.required_playtime_remaining(player.client) && !bypass)
 			JobDebug("FOC player not enough xp, Player: [player]")
-			continue
-		if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
-			JobDebug("FOC character not old enough, Player: [player]")
 			continue
 		if((player.client.prefs.generation > job.minimal_generation) && !bypass)
 			JobDebug("FOC player not enough generation, Player: [player]")
@@ -255,10 +252,6 @@ SUBSYSTEM_DEF(job)
 
 		if(job.required_playtime_remaining(player.client))
 			JobDebug("GRJ player not enough xp, Player: [player]")
-			continue
-
-		if(!job.is_character_old_enough(player.client.prefs.total_age))
-			JobDebug("GRJ character not old enough, Player: [player]")
 			continue
 
 		if(player.client.prefs.generation > job.minimal_generation)
@@ -349,16 +342,12 @@ SUBSYSTEM_DEF(job)
  *  fills var "assigned_role" for all ready players.
  *  This proc must not have any side effect besides of modifying "assigned_role".
  **/
-/datum/controller/subsystem/job/proc/DivideOccupations(list/required_jobs)
+/datum/controller/subsystem/job/proc/DivideOccupations(pure = FALSE, allow_all = FALSE)
 	//Setup new player list and get the jobs list
 	JobDebug("Running DO")
+	run_divide_occupation_pure = pure
+	SEND_SIGNAL(src, COMSIG_OCCUPATIONS_DIVIDED, pure, allow_all)
 
-	//Holder for Triumvirate is stored in the SSticker, this just processes it
-	if(SSticker.triai)
-		for(var/datum/job/ai/A in occupations)
-			A.spawn_positions = 3
-		for(var/obj/effect/landmark/start/ai/secondary/S in GLOB.start_landmarks_list)
-			S.latejoin_active = TRUE
 
 	//Get the players who are ready
 	for(var/i in GLOB.new_player_list)
@@ -366,11 +355,9 @@ SUBSYSTEM_DEF(job)
 		if(player.ready == PLAYER_READY_TO_PLAY && player.check_preferences() && player.mind && is_unassigned_job(player.mind.assigned_role))
 			unassigned += player
 
-	initial_players_to_assign = unassigned.len
+	initial_players_to_assign = length(unassigned)
 
-	JobDebug("DO, Len: [unassigned.len]")
-	if(unassigned.len == 0)
-		return validate_required_jobs(required_jobs)
+	JobDebug("DO: Player count to assign roles to: [initial_players_to_assign]")
 
 	//Scale number of open security officer slots to population
 	setup_officer_positions()
@@ -451,10 +438,6 @@ SUBSYSTEM_DEF(job)
 
 				if(job.required_playtime_remaining(player.client) && !bypass)
 					JobDebug("DO player not enough xp, Player: [player], Job:[job.title]")
-					continue
-
-				if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
-					JobDebug("DO character not old enough, Player: [player], Job:[job.title]")
 					continue
 
 				if((player.client.prefs.generation > job.minimal_generation) && !bypass)
@@ -796,9 +779,12 @@ SUBSYSTEM_DEF(job)
 ///////////////////////////////////
 /datum/controller/subsystem/job/proc/get_living_heads()
 	. = list()
-	for(var/mob/living/carbon/human/player as anything in GLOB.human_list)
-		if(player.stat != DEAD && (player.mind?.assigned_role.departments & DEPARTMENT_COMMAND))
-			. += player.mind
+	for(var/datum/mind/head as anything in get_crewmember_minds())
+		if(!(head.assigned_role.job_flags & JOB_HEAD_OF_STAFF))
+			continue
+		if(isnull(head.current) || head.current.stat == DEAD)
+			continue
+		. += head
 
 
 ////////////////////////////
@@ -807,26 +793,9 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/get_all_heads()
 	. = list()
 	for(var/mob/living/carbon/human/player as anything in GLOB.human_list)
-		if(player.mind?.assigned_role.departments & DEPARTMENT_COMMAND)
+		if(player.assigned_role.job_flags & JOB_HEAD_OF_STAFF)
 			. += player.mind
 
-//////////////////////////////////////////////
-//Keeps track of all living security members//
-//////////////////////////////////////////////
-/datum/controller/subsystem/job/proc/get_living_sec()
-	. = list()
-	for(var/mob/living/carbon/human/player as anything in GLOB.human_list)
-		if(player.stat != DEAD && (player.mind?.assigned_role.departments & DEPARTMENT_SECURITY))
-			. += player.mind
-
-////////////////////////////////////////
-//Keeps track of all  security members//
-////////////////////////////////////////
-/datum/controller/subsystem/job/proc/get_all_sec()
-	. = list()
-	for(var/mob/living/carbon/human/player as anything in GLOB.human_list)
-		if(player.mind?.assigned_role.departments & DEPARTMENT_SECURITY)
-			. += player.mind
 
 /datum/controller/subsystem/job/proc/JobDebug(message)
 	log_job_debug(message)
@@ -846,65 +815,3 @@ SUBSYSTEM_DEF(job)
 
 	centcom_jobs = list("Central Command","VIP Guest","Custodian","Thunderdome Overseer","CentCom Official","Medical Officer","Research Officer", \
 		"Special Ops Officer","Admiral","CentCom Commander","CentCom Bartender","Private Security Force")
-
-/obj/item/paper/fluff/spare_id_safe_code
-	name = "Nanotrasen-Approved Spare ID Safe Code"
-	desc = "Proof that you have been approved for Captaincy, with all its glory and all its horror."
-
-/obj/item/paper/fluff/spare_id_safe_code/Initialize()
-	. = ..()
-	var/safe_code = SSid_access.spare_id_safe_code
-
-	info = "Captain's Spare ID safe code combination: [safe_code ? safe_code : "\[REDACTED\]"]<br><br>The spare ID can be found in its dedicated safe on the bridge.<br><br>If your job would not ordinarily have Head of Staff access, your ID card has been specially modified to possess it."
-	update_appearance()
-
-/obj/item/paper/fluff/emergency_spare_id_safe_code
-	name = "Emergency Spare ID Safe Code Requisition"
-	desc = "Proof that nobody has been approved for Captaincy. A skeleton key for a skeleton shift."
-
-/obj/item/paper/fluff/emergency_spare_id_safe_code/Initialize()
-	. = ..()
-	var/safe_code = SSid_access.spare_id_safe_code
-
-	info = "Captain's Spare ID safe code combination: [safe_code ? safe_code : "\[REDACTED\]"]<br><br>The spare ID can be found in its dedicated safe on the bridge."
-	update_appearance()
-
-/datum/controller/subsystem/job/proc/promote_to_captain(mob/living/carbon/human/new_captain, acting_captain = FALSE)
-	var/id_safe_code = SSid_access.spare_id_safe_code
-
-	if(!id_safe_code)
-		CRASH("Cannot promote [new_captain.real_name] to Captain, there is no id_safe_code.")
-
-	var/paper = new /obj/item/paper/fluff/spare_id_safe_code()
-	var/list/slots = list(
-		LOCATION_LPOCKET = ITEM_SLOT_LPOCKET,
-		LOCATION_RPOCKET = ITEM_SLOT_RPOCKET,
-		LOCATION_BACKPACK = ITEM_SLOT_BACKPACK,
-		LOCATION_HANDS = ITEM_SLOT_HANDS
-	)
-	var/where = new_captain.equip_in_one_of_slots(paper, slots, FALSE) || "at your feet"
-
-	if(acting_captain)
-		to_chat(new_captain, span_notice("Due to your position in the chain of command, you have been promoted to Acting Captain. You can find in important note about this [where]."))
-	else
-		to_chat(new_captain, span_notice("You can find the code to obtain your spare ID from the secure safe on the Bridge [where]."))
-
-	// Force-give their ID card bridge access.
-	var/obj/item/id_slot = new_captain.get_item_by_slot(ITEM_SLOT_ID)
-	if(id_slot)
-		var/obj/item/card/id/id_card = id_slot.GetID()
-		if(!(ACCESS_HEADS in id_card.access))
-			id_card.add_wildcards(list(ACCESS_HEADS), mode=FORCE_ADD_ALL)
-
-	assigned_captain = TRUE
-
-/// Send a drop pod containing a piece of paper with the spare ID safe code to loc
-/datum/controller/subsystem/job/proc/send_spare_id_safe_code(loc)
-	new /obj/effect/pod_landingzone(loc, /obj/structure/closet/supplypod/centcompod, new /obj/item/paper/fluff/emergency_spare_id_safe_code())
-	safe_code_timer_id = null
-	safe_code_request_loc = null
-
-/// Blindly assigns the required roles to every player in the dynamic_forced_occupations list.
-/datum/controller/subsystem/job/proc/assign_priority_positions()
-	for(var/mob/new_player in dynamic_forced_occupations)
-		AssignRole(new_player, GetJob(dynamic_forced_occupations[new_player]))
