@@ -143,7 +143,7 @@
 	name = "acid spit"
 	icon_state = "har4ok"
 	pass_flags = PASSTABLE
-	damage = 40
+	damage = 50
 	damage_type = BURN
 	hitsound = 'sound/weapons/effects/searwall.ogg'
 	hitsound_wall = 'sound/weapons/effects/searwall.ogg'

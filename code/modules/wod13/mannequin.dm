@@ -22,7 +22,7 @@
 	C.dna.species.limbs_id = "mannequin"
 	C.update_body_parts()
 	C.update_body()
-	C.update_icon()
+	C.update_appearance()
 	C.dna.real_name = "mannequin"
 	C.real_name = "mannequin"
 	C.true_real_name = "mannequin"
@@ -44,7 +44,7 @@
 	else
 		walk_to(H, 0)
 
-/datum/species/vamp_mannequin/proc/do_spooky(var/mob/living/carbon/human/man)
+/datum/species/vamp_mannequin/proc/do_spooky(mob/living/carbon/human/man)
 	for(var/mob/living/L in range(7, man))
 		if(L.client)
 			man.face_atom(L)

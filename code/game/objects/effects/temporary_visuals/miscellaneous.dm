@@ -572,6 +572,7 @@
 		update_icon()
 
 /obj/effect/constructing_effect/update_icon_state()
+	. = ..()
 	icon_state = "rcd"
 	if (delay < 10)
 		icon_state += "_shortest"

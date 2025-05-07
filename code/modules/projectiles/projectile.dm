@@ -126,6 +126,7 @@
 
 	var/damage = 10
 	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
+	var/cruelty_multiplier = 1.4
 	var/nodamage = FALSE //Determines if the projectile will skip any damage inflictions
 	var/flag = BULLET //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb
 	///How much armor this projectile pierces.
@@ -576,7 +577,7 @@
 			var/mob/living/carbon/human/frer = firer
 			if(frer.blood)
 				if(prob(frer.get_total_blood()*10))
-					damage *= 2
+					damage *= cruelty_multiplier
 	if(temporary_unstoppable_movement)
 		temporary_unstoppable_movement = FALSE
 		movement_type &= ~PHASING

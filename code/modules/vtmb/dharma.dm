@@ -64,6 +64,7 @@
 
 /datum/dharma/proc/on_gain(mob/living/carbon/human/mob)
 	mob.mind.dharma = src
+	mob.mind.damned = 1
 	initial_skin_color = mob.skin_tone
 
 	var/current_animate = rand(1, 10)

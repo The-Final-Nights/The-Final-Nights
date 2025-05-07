@@ -70,7 +70,7 @@ SUBSYSTEM_DEF(roll)
 			output_text += span_nicegreen("\n Success!")
 			return ROLL_SUCCESS
 
-/datum/controller/subsystem/roll/proc/get_dice_char(var/input)
+/datum/controller/subsystem/roll/proc/get_dice_char(input)
 	switch(input)
 		if(1)
 			return "❶"

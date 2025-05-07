@@ -14,7 +14,7 @@
 	if(randomise[RANDOM_UNDERWEAR])
 		underwear = random_underwear(gender)
 	if(randomise[RANDOM_UNDERWEAR_COLOR])
-		underwear_color = random_short_color()
+		underwear_color = "#[random_color()]"
 	if(randomise[RANDOM_UNDERSHIRT])
 		undershirt = random_undershirt(gender)
 	if(randomise[RANDOM_SOCKS])
@@ -36,9 +36,9 @@
 		else
 			facial_hairstyle = random_facial_hairstyle(gender)
 	if(randomise[RANDOM_HAIR_COLOR])
-		hair_color = random_short_color()
+		hair_color = "#[random_color()]"
 	if(randomise[RANDOM_FACIAL_HAIR_COLOR])
-		facial_hair_color = random_short_color()
+		facial_hair_color = "#[random_color()]"
 	if(randomise[RANDOM_SKIN_TONE])
 		skin_tone = random_skin_tone()
 	if(randomise[RANDOM_EYE_COLOR])
@@ -164,7 +164,7 @@
 		mannequin.update_hair()
 	mannequin.update_body()
 	mannequin.update_body_parts()
-	mannequin.update_icon()
+	mannequin.update_appearance()
 
 	if(previewJob)
 		mannequin.job = previewJob.title

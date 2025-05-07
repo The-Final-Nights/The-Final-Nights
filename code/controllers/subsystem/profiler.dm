@@ -61,3 +61,5 @@ SUBSYSTEM_DEF(profiler)
 	WRITE_FILE(json_file, current_profile_data)
 	write_cost = MC_AVERAGE(write_cost, TICK_DELTA_TO_MS(TICK_USAGE_REAL - timer))
 #endif
+
+#undef PROFILER_FILENAME

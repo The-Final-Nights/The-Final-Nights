@@ -12,9 +12,9 @@
 	/// The last entry in the list for a type of NPC should always have 100 as the index
 	var/static/list/role_weapons_chances = list(
 		BANDIT_TYPE_NPC = list(
-			 /obj/item/gun/ballistic/automatic/vampire/deagle = 33,
-			 /obj/item/gun/ballistic/vampire/revolver/snub = 33,
-			 /obj/item/melee/vampirearms/baseball = 100,
+			/obj/item/gun/ballistic/automatic/vampire/deagle = 33,
+			/obj/item/gun/ballistic/vampire/revolver/snub = 33,
+			/obj/item/melee/vampirearms/baseball = 100,
 		),
 		POLICE_TYPE_NPC = list(
 			/obj/item/gun/ballistic/vampire/revolver = 66,
@@ -153,19 +153,19 @@
 		"Singer")
 
 	//Hair shit
-	var/list/hair_colors = list("040404",	//Black
-		"120b05",	//Dark Brown
-		"342414",	//Brown
-		"554433",	//Light Brown
-		"695c3b",	//Dark Blond
-		"ad924e",	//Blond
-		"dac07f",	//Light Blond
-		"802400",	//Ginger
-		"a5380e",	//Ginger alt
-		"ffeace",	//Albino
-		"650b0b",	//Punk Red
-		"14350e",	//Punk Green
-		"080918")	//Punk Blue
+	var/list/hair_colors = list("#040404",	//Black
+		"#120b05",	//Dark Brown
+		"#342414",	//Brown
+		"#554433",	//Light Brown
+		"#695c3b",	//Dark Blond
+		"#ad924e",	//Blond
+		"#dac07f",	//Light Blond
+		"#802400",	//Ginger
+		"#a5380e",	//Ginger alt
+		"#ffeace",	//Albino
+		"#650b0b",	//Punk Red
+		"#14350e",	//Punk Green
+		"#080918")	//Punk Blue
 
 	var/list/male_hair = list("Bald",
 		"Afro",
@@ -340,7 +340,7 @@
 
 	var/is_criminal = FALSE
 
-/mob/living/carbon/human/npc/proc/AssignSocialRole(var/datum/socialrole/S, var/dont_random = FALSE)
+/mob/living/carbon/human/npc/proc/AssignSocialRole(datum/socialrole/S, var/dont_random = FALSE)
 	if(!S)
 		return
 	physique = rand(1, max_stat)
@@ -386,7 +386,7 @@
 		age = rand(socialrole.min_age, socialrole.max_age)
 		skin_tone = pick(socialrole.s_tones)
 		if(age >= 55)
-			hair_color = "a2a2a2"
+			hair_color = "#a2a2a2"
 			facial_hair_color = hair_color
 		else
 			hair_color = pick(socialrole.hair_colors)
@@ -454,11 +454,11 @@
 	equipOutfit(O)
 	qdel(O)
 
-/mob/living/carbon/human/npc/proc/GetSayDelay(var/message)
+/mob/living/carbon/human/npc/proc/GetSayDelay(message)
 	var/delay = length_char(message)
 	return delay
 
-/mob/living/carbon/human/npc/proc/RealisticSay(var/message)
+/mob/living/carbon/human/npc/proc/RealisticSay(message)
 	walk(src,0)
 	if(!message)
 		return
@@ -479,7 +479,7 @@
 				say(message)
 				is_talking = FALSE
 
-/mob/living/carbon/human/npc/proc/Annoy(var/atom/source)
+/mob/living/carbon/human/npc/proc/Annoy(atom/source)
 	walk(src,0)
 	if(CheckMove())
 		return
@@ -662,3 +662,7 @@
 				to_chat(src, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [owner]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
 				return TRUE
 	return FALSE
+
+
+#undef BANDIT_TYPE_NPC
+#undef POLICE_TYPE_NPC

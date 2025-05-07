@@ -29,7 +29,7 @@ GLOBAL_LIST_EMPTY(vampire_computers)
 	var/obj/item/paper/password_paper = new (loc)
 	password_paper.name = "don't forget your password!"
 	password_paper.add_raw_text("<center><h2>Hello, [username]!</h2></center><br>I have to remind you about it again, but please don't forget your password - <b>[password]</b>")
-	password_paper.update_icon()
+	password_paper.update_appearance()
 	var/datum/app/icq/icq = new ()
 	var/datum/app/notepad/notepad = new ()
 	var/datum/app/gmail/gmail = new ()
@@ -119,7 +119,7 @@ GLOBAL_LIST_EMPTY(vampire_computers)
 				for(var/obj/vampire_computer/C in GLOB.vampire_computers)
 					var/datum/app/icq/icq = C.apps[1]
 					if(icq.username == params["username"])
-						throw_error("This name is already exists!")
+						throw_error("This name already exists!")
 						return TRUE
 				var/datum/app/icq/app = locate(params["ref"]) in apps
 				app.username = params["username"]
@@ -194,7 +194,7 @@ GLOBAL_LIST_EMPTY(vampire_computers)
 				throw_error("You must write a subject!")
 				return TRUE
 			else if(!params["to"])
-				throw_error("You must write a reciever adress!")
+				throw_error("You must write a receiver adress!")
 				return TRUE
 			var/sended = gmail.send_email(params["message"], params["subject"], params["to"])
 			if(!sended)

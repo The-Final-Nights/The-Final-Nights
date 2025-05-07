@@ -20,10 +20,10 @@
 	surnames = null
 	is_criminal = TRUE
 
-	hair_colors = list("040404",	//Black
-											"120b05",	//Dark Brown
-											"342414",	//Brown
-											"554433")	//Light Brown
+	hair_colors = list("#040404",	//Black
+											"#120b05",	//Dark Brown
+											"#342414",	//Brown
+											"#554433")	//Light Brown
 	male_hair = list("Balding Hair",
 										"Bedhead",
 										"Bedhead 2",
@@ -157,19 +157,19 @@
 	surnames = null
 
 	hair_colors = list(
-		"040404",	//Black
-		"120b05",	//Dark Brown
-		"342414",	//Brown
-		"554433",	//Light Brown
-		"695c3b",	//Dark Blond
-		"ad924e",	//Blond
-		"dac07f",	//Light Blond
-		"802400",	//Ginger
-		"a5380e",	//Ginger alt
-		"ffeace",	//Albino
-		"650b0b",	//Punk Red
-		"14350e",	//Punk Green
-		"080918"    //Punk Blue
+		"#040404",	//Black
+		"#120b05",	//Dark Brown
+		"#342414",	//Brown
+		"#554433",	//Light Brown
+		"#695c3b",	//Dark Blond
+		"#ad924e",	//Blond
+		"#dac07f",	//Light Blond
+		"#802400",	//Ginger
+		"#a5380e",	//Ginger alt
+		"#ffeace",	//Albino
+		"#650b0b",	//Punk Red
+		"#14350e",	//Punk Green
+		"#080918"    //Punk Blue
 	)
 	male_hair = list(
 		"Balding Hair",
@@ -299,19 +299,19 @@
 	female_names = null
 	surnames = null
 // [dentbrain] man... actually coming up with shit for people to say is HARD work........
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	female_hair = list("Ahoge",
 										"Long Bedhead",
 										"Beehive",
@@ -435,19 +435,19 @@
 	male_names = null
 	surnames = null
 
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	male_hair = list("Balding Hair",
 										"Bedhead",
 										"Bedhead 2",
@@ -539,19 +539,19 @@
 	female_names = null
 	surnames = null
 
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	female_hair = list("Ahoge",
 										"Long Bedhead",
 										"Beehive",
@@ -641,19 +641,19 @@
 	male_names = null
 	surnames = null
 
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	male_hair = list("Business Hair",
 										"Business Hair 2",
 										"Business Hair 3",
@@ -714,19 +714,19 @@
 	female_names = null
 	surnames = null
 
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	female_hair = list("Ahoge",
 										"Bob Hair",
 										"Bob Hair 2",
@@ -933,6 +933,50 @@
 				H.bloodpool = max(0, H.bloodpool-1)
 				beastmaster.bloodpool = min(beastmaster.maxbloodpool, beastmaster.bloodpool+1)
 
+/mob/living/simple_animal/hostile/beastmaster/cockroach
+	name = "cockroach"
+	desc = "It flutters like the giant, unhealthy skittering thing it is."
+	icon = 'code/modules/wod13/icons.dmi'
+	icon_state = "cockroach"
+	icon_living = "cockroach"
+	icon_dead = "cockroach_dead"
+	emote_hear = list("chitters.")
+	emote_see = list("flutters its' wings.", "wriggles its' antennae.")
+	attack_verb_continuous = "bites"
+	attack_verb_simple = "bite"
+	attack_sound = 'sound/weapons/bite.ogg'
+	speak_chance = 0
+	turns_per_move = 5
+	see_in_dark = 10
+	response_help_continuous = "pets"
+	response_help_simple = "pet"
+	response_disarm_continuous = "gently sweeps aside"
+	response_disarm_simple = "gently sweep aside"
+	response_harm_continuous = "smashes"
+	response_harm_simple = "smash"
+	can_be_held = TRUE
+	density = FALSE
+	anchored = FALSE
+	footstep_type = FOOTSTEP_MOB_CLAW
+	bloodquality = BLOOD_QUALITY_LOW
+	bloodpool = 1
+	maxbloodpool = 1
+	del_on_death = 1
+	maxHealth = 5
+	health = 5
+	melee_damage_type = TOX
+	harm_intent_damage = 5
+	melee_damage_lower = 3
+	melee_damage_upper = 7
+	is_flying_animal = TRUE
+	speed = -0.8
+	dodging = TRUE
+
+/mob/living/simple_animal/hostile/beastmaster/cockroach/Initialize()
+	. = ..()
+	pixel_w = rand(-8, 8)
+	pixel_z = rand(-8, 8)
+
 /datum/socialrole/shop
 	s_tones = list("albino",
 		"caucasian1",
@@ -953,19 +997,19 @@
 	male_names = null
 	surnames = null
 
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	male_hair = list("Balding Hair",
 										"Bedhead",
 										"Bedhead 2",
@@ -1081,19 +1125,19 @@
 	male_names = null
 	surnames = null
 
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	male_hair = list("Balding Hair",
 										"Bedhead",
 										"Bedhead 2",
@@ -1188,19 +1232,19 @@
 	surnames = null
 
 	hair_colors = list(
-		"040404",	//Black
-		"120b05",	//Dark Brown
-		"342414",	//Brown
-		"554433",	//Light Brown
-		"695c3b",	//Dark Blond
-		"ad924e",	//Blond
-		"dac07f",	//Light Blond
-		"802400",	//Ginger
-		"a5380e",	//Ginger alt
-		"ffeace",	//Albino
-		"650b0b",	//Punk Red
-		"14350e",	//Punk Green
-		"080918"	//Punk Blue
+		"#040404",	//Black
+		"#120b05",	//Dark Brown
+		"#342414",	//Brown
+		"#554433",	//Light Brown
+		"#695c3b",	//Dark Blond
+		"#ad924e",	//Blond
+		"#dac07f",	//Light Blond
+		"#802400",	//Ginger
+		"#a5380e",	//Ginger alt
+		"#ffeace",	//Albino
+		"#650b0b",	//Punk Red
+		"#14350e",	//Punk Green
+		"#080918"	//Punk Blue
 	)
 	male_hair = list(
 		"Balding Hair",
@@ -1323,19 +1367,19 @@
 	female_names = null
 	surnames = null
 
-	hair_colors = list("040404",	//Black
-										"120b05",	//Dark Brown
-										"342414",	//Brown
-										"554433",	//Light Brown
-										"695c3b",	//Dark Blond
-										"ad924e",	//Blond
-										"dac07f",	//Light Blond
-										"802400",	//Ginger
-										"a5380e",	//Ginger alt
-										"ffeace",	//Albino
-										"650b0b",	//Punk Red
-										"14350e",	//Punk Green
-										"080918")	//Punk Blue
+	hair_colors = list("#040404",	//Black
+										"#120b05",	//Dark Brown
+										"#342414",	//Brown
+										"#554433",	//Light Brown
+										"#695c3b",	//Dark Blond
+										"#ad924e",	//Blond
+										"#dac07f",	//Light Blond
+										"#802400",	//Ginger
+										"#a5380e",	//Ginger alt
+										"#ffeace",	//Albino
+										"#650b0b",	//Punk Red
+										"#14350e",	//Punk Green
+										"#080918")	//Punk Blue
 	female_hair = list("Ahoge",
 										"Long Bedhead",
 										"Beehive",

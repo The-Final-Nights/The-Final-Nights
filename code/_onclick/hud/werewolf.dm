@@ -70,7 +70,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	var/area/vtm/V = get_area(C)
-	if(!V.upper)
+	if(!istype(V, /area/vtm) || !V.upper)
 		to_chat(C, span_warning("You need to be outside to look at the moon!"))
 		return
 	if(C.last_moon_look == 0 || C.last_moon_look+600 < world.time)
@@ -184,7 +184,7 @@
 
 	pull_icon = new /atom/movable/screen/pull()
 	pull_icon.icon = 'code/modules/wod13/UI/buttons_wide.dmi'
-	pull_icon.update_icon()
+	pull_icon.update_appearance()
 	pull_icon.screen_loc = ui_pull
 	pull_icon.hud = src
 	static_inventory += pull_icon
@@ -203,14 +203,14 @@
 	zone_select = new /atom/movable/screen/zone_sel()
 	zone_select.icon = 'code/modules/wod13/UI/buttons64.dmi'
 	zone_select.hud = src
-	zone_select.update_icon()
+	zone_select.update_appearance()
 	static_inventory += zone_select
 
 	for(var/atom/movable/screen/inventory/inv in (static_inventory + toggleable_inventory))
 		if(inv.slot_id)
 			inv.hud = src
 			inv_slots[TOBITSHIFT(inv.slot_id) + 1] = inv
-			inv.update_icon()
+			inv.update_appearance()
 
 /datum/hud/werewolf/persistent_inventory_update()
 	if(!mymob)

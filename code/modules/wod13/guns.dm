@@ -330,7 +330,7 @@
 	icon_state = "beretta_toreador"
 	inhand_icon_state = "beretta_toreador"
 	worn_icon_state = "beretta"
-	projectile_damage_multiplier = 2.5
+	projectile_damage_multiplier = 2
 	fire_sound_volume = 110
 	cost = 666
 
@@ -605,7 +605,7 @@
 	zoom_amt = 10 //Long range, enough to see in front of you, but no tiles behind you.
 	zoom_out_amt = 5
 	slot_flags = ITEM_SLOT_BACK
-	projectile_damage_multiplier = 2 //140 damage. Nice.
+	projectile_damage_multiplier = 2.2 //154 damage. Nice.
 	actions_types = list()
 	masquerade_violating = TRUE
 	cost = 250
@@ -708,6 +708,14 @@
 	icon = 'code/modules/wod13/ammo.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	harmful = TRUE
+
+/datum/crafting_recipe/molotov
+	name = "Molotov Cocktail"
+	time = 50
+	reqs = list(/obj/item/stack/sheet/cloth = 1, /obj/item/reagent_containers/food/drinks/beer/vampire = 1, /obj/item/gas_can = 1)
+	result = /obj/item/molotov
+	always_available = TRUE
+	category = CAT_WEAPON
 
 /obj/item/molotov
 	name = "molotov cocktail"

@@ -532,14 +532,11 @@ VENTORY!
 			final_y = screen_y+current_y
 			final_coordinates = "[final_x],[final_y]"
 			if(final_x >= (screen_max_columns*grid_box_ratio))
-				testing("validate_grid_coordinates FAILED, final_x >= screen_max_columns, final_coordinates: ([final_coordinates])")
 				return FALSE
 			if(final_y >= (screen_max_rows*grid_box_ratio))
-				testing("validate_grid_coordinates FAILED, final_y >= screen_max_rows, final_coordinates: ([final_coordinates])")
 				return FALSE
 			var/existing_item = LAZYACCESS(grid_coordinates_to_item, final_coordinates)
 			if(existing_item && (!dragged_item || (existing_item != dragged_item)))
-				testing("validate_grid_coordinates FAILED, coordinates already occupied, final_coordinates: ([final_coordinates])")
 				return FALSE
 	return TRUE
 
@@ -608,7 +605,6 @@ VENTORY!
 			final_x = coordinate_x+current_x
 			final_y = coordinate_y+current_y
 			calculated_coordinates = "[final_x],[final_y]"
-			testing("handle_item_insertion SUCCESS calculated_coordinates: ([calculated_coordinates])")
 			LAZYADDASSOCLIST(grid_coordinates_to_item, calculated_coordinates, storing)
 			LAZYINITLIST(item_to_grid_coordinates)
 			LAZYINITLIST(item_to_grid_coordinates[storing])
@@ -725,7 +721,7 @@ VENTORY!
 		else
 			coordinates = screen_loc_to_grid_coordinates(coordinates)
 		grid_add_item(storing, coordinates)
-	update_icon()
+	update_appearance()
 	refresh_mob_views()
 	return TRUE
 
@@ -757,7 +753,7 @@ VENTORY!
 	else
 		//Being destroyed, just move to nullspace now (so it's not in contents for the icon update)
 		removed.moveToNullspace()
-	update_icon()
+	update_appearance()
 	refresh_mob_views()
 	return TRUE
 
@@ -877,8 +873,8 @@ VENTORY!
 	grid_height = 1 GRID_BOXES
 
 /obj/item/melee/vampirearms/machete
-    grid_width = 3 GRID_BOXES
-    grid_height = 1 GRID_BOXES
+	grid_width = 3 GRID_BOXES
+	grid_height = 1 GRID_BOXES
 
 /obj/item/melee/vampirearms/rapier
 	grid_width = 2 GRID_BOXES
@@ -1119,3 +1115,7 @@ VENTORY!
 /obj/item/vampire/drill
 	grid_width = 10 GRID_BOXES
 	grid_height = 10 GRID_BOXES
+
+/obj/item/gun/energy/taser
+	grid_width = 2 GRID_BOXES
+	grid_height = 1 GRID_BOXES

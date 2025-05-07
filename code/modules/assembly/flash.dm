@@ -43,6 +43,7 @@
 	return FIRELOSS
 
 /obj/item/assembly/flash/update_icon(flash = FALSE)
+	. = ..()
 	cut_overlays()
 	attached_overlays = list()
 	if(burnt_out)
