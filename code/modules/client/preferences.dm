@@ -351,38 +351,72 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return coolfont
 
 /proc/RankName(rank)
-	switch(rank)
-		if(0)
-			return "Cub"
-		if(1)
-			return "Cliath"
-		if(2)
-			return "Fostern"
-		if(3)
-			return "Adren"
-		if(4)
-			return "Athro"
-		if(5)
-			return "Elder"
-		if(6)
-			return "Legend"
+	if(!iscorax)
+		switch(rank)
+			if(0)
+				return "Cub"
+			if(1)
+				return "Cliath"
+			if(2)
+				return "Fostern"
+			if(3)
+				return "Adren"
+			if(4)
+				return "Athro"
+			if(5)
+				return "Elder"
+			if(6)
+				return "Legend"
+	else
+		switch(rank)
+			if(0)
+				return "Fledgling"
+			if(1)
+				return "Oviculum"
+			if(2)
+				return "Neocornix"
+			if(3)
+				return "Ales"
+			if(4)
+				return "Volucris"
+			if(5)
+				return "Corvus"
+			if(6)
+				return "Grey Eminence"
 
 /proc/RankDesc(rank)
-	switch(rank)
-		if(0)
-			return "You are not known to other Garou. Why?"
-		if(1)
-			return "You have completed your rite of passage as a Cliath."
-		if(2)
-			return "Fosterns have challenged for their rank and become proven members of Garou society."
-		if(3)
-			return "With proven work, wit, and function, Adren are higher echelons of Garou society, better known for control."
-		if(4)
-			return "A disciplined lieutenant and trusted Garou to your peers, you have respect and renown within the city as an Athro."
-		if(5)
-			return "One of the renowned names of the region, you are known as outstanding in California to some degree, worthy of the title of Elder."
-		if(6)
-			return "You're a Legendary NPC."
+	if(!iscorax) // I feel like this is an especially dirty way of doing it, sorry!
+		switch(rank)
+			if(0)
+				return "You are not known to other Garou. Why?"
+			if(1)
+				return "You have completed your rite of passage as a Cliath."
+			if(2)
+				return "Fosterns have challenged for their rank and become proven members of Garou society."
+			if(3)
+				return "With proven work, wit, and function, Adren are higher echelons of Garou society, better known for control."
+			if(4)
+				return "A disciplined lieutenant and trusted Garou to your peers, you have respect and renown within the city as an Athro."
+			if(5)
+				return "One of the renowned names of the region, you are known as outstanding in California to some degree, worthy of the title of Elder."
+			if(6)
+				return "You're a Legendary NPC."
+	else
+		switch(rank)
+			if(0)
+				return "You are barely known to other Corax, and sit on the lower branches during Parliaments"
+			if(1)
+				return "Other Corax have indulged in your secrets, you are Oviculum."
+			if(2)
+				return "You usually get to speak before the eve comes, and have shared worthy intel several times, making you Neocornix ."
+			if(3)
+				return "You are witty, knowledgeable and have started making your mark accross the state, earning you the title of Ales"
+			if(4)
+				return "Not only do you posess juicy info over the state's big players, but you've gotten into dangerous scraps and came out in (mostly) one piece. \nOther Corax respectfully refer to you as Volucris"
+			if(5)
+				return "You sit on the highest branches of the tree whenever a Parliament's ongoing. You have shared devastating secrets with the rest of the Corax, and have shaped the fate of this nation. \n You have the influence and prestige that makes the rest of your kind quiet down and listen, you have earned the illustrious title of Corvus."
+			if(6)
+				return "Though you are officially still Corvus, your name is known worldwide, and your words can make or break nations, you should ideally be an NPC"
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	if(!SSatoms.initialized)
@@ -2447,6 +2481,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/newtype = GLOB.tribes_list[new_tribe]
 						new_tribe = new newtype()
 						tribe = new_tribe
+						if (tribe == /datum/garou_tribe/corax)
+							ADD_TRAIT(user,TRAIT_CORAX,tribe)
 
 				if("breed")
 					if(slotlocked || !(pref_species.id == "garou"))

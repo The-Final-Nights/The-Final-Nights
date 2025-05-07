@@ -42,10 +42,12 @@
 			//else if(auspice.rage == 0)
 			//	transformator.trans_gender(src, auspice.base_breed)
 			if(ishuman(src))
-				if(auspice.base_breed == "Homid")
+				if(auspice.base_breed == "Homid" || src.HAS_TRAIT(TRAIT_CORAX))
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0)
 			//	transformator.trans_gender(src, auspice.base_breed)
+			if(iscorvid(src))
+				gaining_rage = FALSE // Corax will spend most of the time talking, disabling rage generation also makes it harder for them to get their gifts active.
 
 			if(gaining_rage && client)
 				if(((last_rage_gain + RAGE_LIFE_COOLDOWN) < world.time) && (auspice.rage <= 6))

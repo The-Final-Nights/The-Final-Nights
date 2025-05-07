@@ -68,7 +68,4 @@
 	update_icons()
 
 /mob/living/carbon/corax/corvid/Life()
-	if(!(HAS_TRAIT(src, TRAIT_CROW)))
-		if(CheckEyewitness(src, src, 4, FALSE))
-			src.adjust_veil(-1,threshold = 4)
-	..()
+	..() // you do not breach the veil by being a bird in a city, probably a redundant self-call though.
