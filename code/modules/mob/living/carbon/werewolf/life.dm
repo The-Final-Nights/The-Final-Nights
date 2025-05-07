@@ -79,7 +79,7 @@
 			return
 
 	switch(auspice.tribe.name)
-		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
+		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers", "Corax")
 			if(istype(get_area(src), /area/vtm/forest))
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
