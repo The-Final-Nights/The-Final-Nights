@@ -277,7 +277,7 @@
 /datum/action/gift/guise_of_the_crow/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
-		if(!HAS_TRAIT(owner,TRAIT_DOGWOLF)) // TRAIT_CROW because otherwise we use the dogwolf sprite
+		if(!HAS_TRAIT(owner,TRAIT_CROW)) // TRAIT_CROW because otherwise we use the dogwolf sprite
 			ADD_TRAIT(owner, TRAIT_CROW, src)
 			to_chat(owner, span_notice("You feel your raven features lessening!"))
 		else
@@ -292,9 +292,9 @@
 				var/matrix/ntransform = matrix(owner.transform)
 				ntransform.Scale(0.95, 0.95)
 				animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
-				addtimer(CALLBACK(src, PROC_REF(trans_doggy), lopor), 3 SECONDS)
+				addtimer(CALLBACK(src, PROC_REF(trans_crow), lopor), 3 SECONDS)
 
-/datum/action/gift/guise_of_the_hound/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/guise_of_the_crow/proc/trans_crow(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_CROW))
 		H.icon = 'code/modules/wod13/corax_corvid.dmi' // The sprite remains the same. I would ideally like to reduce the size a little.
 	else

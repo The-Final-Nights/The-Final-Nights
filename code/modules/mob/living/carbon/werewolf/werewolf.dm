@@ -190,6 +190,34 @@
 		/obj/item/bodypart/l_leg/crinos,
 		)
 
+/mob/living/carbon/werewolf/crinos/corax
+	name = "corax_crinos"
+	icon_state = "black"
+	mob_size = MOB_SIZE_HUGE
+	butcher_results = list(/obj/item/food/meat/slab = 5)
+	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
+	limb_destroyer = 1
+	hud_type = /datum/hud/werewolf
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	health = 220
+	maxHealth = 220 // lower health than a werewolf
+//	speed = -1  doesn't work on carbons
+	var/obj/item/r_store = null
+	var/obj/item/l_store = null
+	var/pounce_cooldown = 0
+	var/pounce_cooldown_time = 20 // lower jump cooldown to represent better agility
+	pixel_w = -8
+//	deathsound = 'sound/voice/hiss6.ogg'
+	bodyparts = list(
+		/obj/item/bodypart/chest/crinos,
+		/obj/item/bodypart/head/crinos,
+		/obj/item/bodypart/l_arm/crinos,
+		/obj/item/bodypart/r_arm/crinos,
+		/obj/item/bodypart/r_leg/crinos,
+		/obj/item/bodypart/l_leg/crinos,
+		)
+
 	werewolf_armor = 30
 
 /datum/movespeed_modifier/crinosform

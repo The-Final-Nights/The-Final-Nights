@@ -448,8 +448,6 @@
 /datum/action/gift/hispo/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
-	else if(HAS_TRAIT(H, TRAIT_CROW))
-		H.icon = 'code/modules/wod13/corax_corvid.dmi' //This would be the exact same sprite as the normal raven, for now..
 	else
 		H.icon = 'code/modules/wod13/tfn_lupus.dmi'
 	H.pixel_w = 0
