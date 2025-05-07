@@ -271,7 +271,7 @@
 /obj/ritualrune/question/complete()
 	var/text_question = tgui_input_text(usr, "Enter your question to the Ancestors:", "Question to Ancestors")
 	visible_message("<span class='notice'>A call rings out to the dead from the [src.name] rune...</span>")
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to answer a question? (You are allowed to spread meta information) <br> The question is : [text_question]", null, null, null, 10 SECONDS, src)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to answer a question? (You are allowed to spread meta information) <br> The question is : [text_question]", null, null, null, 20 SECONDS, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
 			to_chat(G, "<span class='ghostalert'>Question rune has been triggered.</span>")
@@ -363,12 +363,14 @@
 
 /obj/ritualrune/curse
 	name = "Curse Rune"
-	desc = "Curse your enemies from afar. Requires a heart."
+	desc = "Curse your enemies from afar. Place multiple hearts on the rune to increase the curse duration."
 	icon_state = "rune7"
 	word = "MAL'DICTO-SANGUINIS"
 	thaumlevel = 5
-	sacrifices = list(/obj/item/organ/heart)
-
+	sacrifices = list() // No longer required in constructor since we'll check for hearts dynamically
+	var/channeling = FALSE
+	var/mob/living/channeler = null
+	var/curse_target = null
 
 /obj/ritualrune/curse/complete()
 	if(!activated)
@@ -377,21 +379,134 @@
 		activated = TRUE
 
 /obj/ritualrune/curse/attack_hand(mob/user)
-	..()
-	var/cursed
-	if(activated)
-		var/namem = input(user, "Choose target name:", "Curse Rune") as text|null
+	if(!activated)
+		// Initial activation of the rune
+		var/mob/living/L = user
+		if(L.thaumaturgy_knowledge)
+			L.say("[word]")
+			L.Immobilize(30)
+			last_activator = user
+			activator_bonus = L.thaum_damage_plus
+			animate(src, color = rgb(255, 64, 64), time = 10)
+			complete()
+
+			// Immediately start the curse process after activation
+			addtimer(CALLBACK(src, .proc/start_curse, user), 3 SECONDS)
+		return
+
+	// If already activated but not channeling, allow restarting
+	if(!channeling && last_activator == user)
+		start_curse(user)
+		return
+
+	// Only the activator can use the activated rune
+	if(last_activator != user)
+		to_chat(user, span_warning("You are not the one who activated this rune!"))
+		return
+
+	// Check if already channeling
+	if(channeling)
+		to_chat(user, span_warning("The curse is already being channeled!"))
+		return
+
+/obj/ritualrune/curse/proc/start_curse(mob/user)
+	if(!user || !activated || channeling)
+		return
+
+	// Count heart sacrifices
+	var/list/hearts = list()
+	for(var/obj/item/organ/heart/H in get_turf(src))
+		hearts += H
+
+	// Ensure at least one heart is present
+	if(hearts.len == 0)
+		to_chat(user, span_warning("You need at least one heart to channel the curse!"))
+		return
+
+	// Get target name
+	var/target_name = tgui_input_text(user, "Choose target name:", "Curse Rune")
+	if(!target_name || !user.Adjacent(src)) // Check if user is still nearby
+		to_chat(user, span_warning("You must specify a target and remain close to the rune!"))
+		return
+
+	// Start the channeling
+	curse_target = target_name
+	channeler = user
+	channeling = TRUE
+
+	// Begin the curse ritual
+	to_chat(user, span_warning("You begin channeling dark energy through [hearts.len] heart[hearts.len > 1 ? "s" : ""]..."))
+	channel_curse(hearts)
+
+/obj/ritualrune/curse/proc/channel_curse(list/hearts)
+	if(!channeling || !channeler || !curse_target)
+		return
+
+	if(!hearts.len)
+		to_chat(channeler, span_warning("No more hearts remain for the ritual!"))
+		channeling = FALSE
 		qdel(src)
-		if(namem)
-			cursed = namem
-			for(var/mob/living/carbon/human/H in GLOB.player_list)
-				if(H.real_name == cursed)
-					H.adjustCloneLoss(25)
-					playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
-					to_chat(H, "<span class='warning'>You feel someone repeating your name from the shadows...</span>")
-					H.Stun(10)
-					return
-			to_chat(user, "<span class='warning'>There is no such names in the city!</span>")
+		return
+
+	if(!channeler.Adjacent(src))
+		to_chat(channeler, span_warning("The curse ritual has been interrupted because you moved away!"))
+		channeling = FALSE
+		return
+
+	// Take the first heart
+	var/obj/item/organ/heart/heart = hearts[1]
+	if(!heart || QDELETED(heart) || heart.loc != get_turf(src))
+		hearts -= heart
+		if(hearts.len > 0)
+			channel_curse(hearts) // Skip this heart and continue
+		else
+			to_chat(channeler, span_warning("The curse ritual has ended as no valid hearts remain!"))
+			channeling = FALSE
+			qdel(src)
+		return
+
+	hearts -= heart
+
+	// Apply visual effects
+	playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 25, FALSE)
+	animate(src, color = rgb(255, 0, 0), time = 1.5)
+	animate(color = rgb(128, 0, 0), time = 1.5)
+
+	// Find the target and apply damage
+	var/found_target = FALSE
+	for(var/mob/living/carbon/human/H in GLOB.player_list)
+		if(H.real_name == curse_target)
+			found_target = TRUE
+			H.adjustCloneLoss(25)
+			playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
+			to_chat(H, span_warning("You feel dark energy tearing at your very being!"))
+			H.Stun(2) // Brief stun each pulse
+			break
+
+	if(!found_target)
+		to_chat(channeler, span_warning("There is no one by that name in the city!"))
+		channeling = FALSE
+		qdel(heart)
+		return
+
+	// Consume the heart
+	qdel(heart)
+
+	// Display feedback
+	to_chat(channeler, span_warning("A heart is consumed by the ritual. [hearts.len] heart[hearts.len != 1 ? "s" : ""] remain[hearts.len != 1 ? "" : "s"]."))
+
+	// If we still have hearts, continue the channel
+	if(hearts.len > 0)
+		// After 3 seconds, process the next heart
+		channeler.visible_message(span_warning("[channeler.name] continues channeling dark energy into the rune!"))
+
+		// Use addtimer instead of do_after to make the process more automatic
+		addtimer(CALLBACK(src, .proc/channel_curse, hearts), 3 SECONDS)
+	else
+		// We've used all the hearts
+		to_chat(channeler, span_warning("The last heart is consumed, completing the curse ritual!"))
+		channeling = FALSE
+		qdel(src)
 
 /obj/ritualrune/blood_to_water
 	name = "Blood To Water"
