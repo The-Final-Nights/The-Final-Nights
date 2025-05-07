@@ -18,24 +18,26 @@
 
 /datum/crew_manifest/ui_data(mob/user)
 	var/list/positions = list(
-		"Command" = 0,
-		"Security" = 0,
-		"Engineering" = 0,
-		"Medical" = 0,
-		"Science" = 0,
-		"Supply" = 0,
-		"Service" = 0,
-		"Silicon" = 0
+		"Camarilla" = 0,
+		"Primogen Council" = 0,
+		"Tremere" = 0,
+		"Anarch" = 0,
+		"Giovanni" = 0,
+		"Clan Tzimisce" = 0,
+		"Law Enforcement" = 0,
+		"Warehouse" = 0,
+		"Triad" = 0
 	)
 	var/list/departments = list(
-		list("flag" = DEPARTMENT_COMMAND, "name" = "Command"),
-		list("flag" = DEPARTMENT_SECURITY, "name" = "Security"),
-		list("flag" = DEPARTMENT_ENGINEERING, "name" = "Engineering"),
-		list("flag" = DEPARTMENT_MEDICAL, "name" = "Medical"),
-		list("flag" = DEPARTMENT_SCIENCE, "name" = "Science"),
-		list("flag" = DEPARTMENT_CARGO, "name" = "Supply"),
-		list("flag" = DEPARTMENT_SERVICE, "name" = "Service"),
-		list("flag" = DEPARTMENT_SILICON, "name" = "Silicon")
+		list("flag" = DEPARTMENT_CAMARILLA, "name" = "Camarilla"),
+		list("flag" = DEPARTMENT_PRIMOGEN_COUNCIL, "name" = "Primogen Council"),
+		list("flag" = DEPARTMENT_TREMERE, "name" = "Tremere"),
+		list("flag" = DEPARTMENT_ANARCH, "name" = "Anarch"),
+		list("flag" = DEPARTMENT_GIOVANNI, "name" = "Giovanni"),
+		list("flag" = DEPARTMENT_CLAN_TZIMISCE, "name" = "Clan Tzimisce"),
+		list("flag" = DEPARTMENT_LAW_ENFORCEMENT, "name" = "Law Enforcement"),
+		list("flag" = DEPARTMENT_WAREHOUSE, "name" = "Warehouse"),
+		list("flag" = DEPARTMENT_TRIAD, "name" = "Triad"),
 	)
 
 	for(var/job in SSjob.occupations)
