@@ -33,7 +33,7 @@
 	RegisterSignal(reagents, COMSIG_PARENT_QDELETING, .proc/on_reagents_del)
 
 /obj/item/reagent_containers/attack(mob/living/M, mob/living/user, params)
-	if (!user.combat_mode)
+	if (!(user.a_intent == INTENT_HARM))
 		return
 	return ..()
 
@@ -58,12 +58,6 @@
 					amount_per_transfer_from_this = possible_transfer_amounts[1]
 				to_chat(user, "<span class='notice'>[src]'s transfer amount is now [amount_per_transfer_from_this] units.</span>")
 				return
-
-/obj/item/reagent_containers/pre_attack_secondary(atom/target, mob/living/user, params)
-	if (try_splash(user, target))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	return ..()
 
 /// Tries to splash the target. Used on both right-click and normal click when in combat mode.
 /obj/item/reagent_containers/proc/try_splash(mob/user, atom/target)

@@ -237,8 +237,7 @@
 	. = ..()
 	if(.)
 		return
-	if(beaker && istype(src, /obj/machinery/chem_dispenser/drinks))
-		beaker.required_eject = TRUE
+
 	switch(action)
 		if("amount")
 			if(!is_operational || QDELETED(beaker))
@@ -277,11 +276,9 @@
 				work_animation()
 				. = TRUE
 		if("eject")
-			if(beaker.required_eject == TRUE)
-				beaker.required_eject = FALSE
-				beaker.reagents.handle_reactions()
 			replace_beaker(usr)
-			. = TRUE
+			return TRUE
+
 		if("dispense_recipe")
 			if(!is_operational || QDELETED(cell))
 				return
@@ -425,7 +422,7 @@
 		if(2 to 3)
 			return "average"
 		if(3 to 4)
-			return "yellow" 
+			return "yellow"
 		if(4 to 5)
 			return "olive"
 		if(5 to 6)

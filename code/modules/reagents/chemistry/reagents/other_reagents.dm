@@ -160,7 +160,6 @@
 	if(!istype(exposed_turf))
 		return
 
-	var/cool_temp = cooling_temperature
 	if(reac_volume >= 5)
 		exposed_turf.MakeSlippery(TURF_WET_WATER, 10 SECONDS, min(reac_volume*1.5 SECONDS, 60 SECONDS))
 
@@ -771,7 +770,7 @@
 
 	var/obj/item/stack/sheet/metal/M = exposed_obj
 	reac_volume = min(reac_volume, M.amount)
-	new/obj/item/stack/sheet/bronze(get_turf(M), reac_volume)
+	new/obj/item/stack/sheet/copper(get_turf(M), reac_volume)
 	M.use(reac_volume)
 
 /datum/reagent/nitrogen
