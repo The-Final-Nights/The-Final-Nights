@@ -68,7 +68,7 @@
 	path = /obj/item/clothing/under/vampire/archivist
 
 /datum/gear/uniform/suit/plain_brown_skirt
-	display_name = "plain suit, brown"
+	display_name = "plain suitskirt, brown"
 	description = "Some business clothes." // Consistency!
 	path = /obj/item/clothing/under/vampire/archivist/female
 
