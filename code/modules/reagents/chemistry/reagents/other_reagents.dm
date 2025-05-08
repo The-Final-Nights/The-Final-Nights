@@ -167,14 +167,6 @@
 	for(var/mob/living/simple_animal/slime/exposed_slime in exposed_turf)
 		exposed_slime.apply_water()
 
-	var/obj/effect/hotspot/hotspot = (locate(/obj/effect/hotspot) in exposed_turf)
-	if(hotspot && !isspaceturf(exposed_turf))
-		if(exposed_turf.air)
-			var/datum/gas_mixture/air = exposed_turf.air
-			air.temperature = max(min(air.temperature-(cool_temp*1000), air.temperature/cool_temp),TCMB)
-			air.react(src)
-			qdel(hotspot)
-
 /*
  * Water reaction to an object
  */
@@ -763,14 +755,6 @@
 	ph = 9.2//It's acutally a huge range and very dependant on the chemistry but ph is basically a made up var in it's implementation anyways
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-
-/datum/reagent/oxygen/expose_turf(turf/open/exposed_turf, reac_volume)
-	. = ..()
-	if(istype(exposed_turf))
-		var/temp = holder ? holder.chem_temp : T20C
-		exposed_turf.atmos_spawn_air("o2=[reac_volume/20];TEMP=[temp]")
-	return
-
 /datum/reagent/copper
 	name = "Copper"
 	description = "A highly ductile metal. Things made out of copper aren't very durable, but it makes a decent material for electrical wiring."
@@ -782,10 +766,10 @@
 
 /datum/reagent/copper/expose_obj(obj/exposed_obj, reac_volume)
 	. = ..()
-	if(!istype(exposed_obj, /obj/item/stack/sheet/iron))
+	if(!istype(exposed_obj, /obj/item/stack/sheet/metal))
 		return
 
-	var/obj/item/stack/sheet/iron/M = exposed_obj
+	var/obj/item/stack/sheet/metal/M = exposed_obj
 	reac_volume = min(reac_volume, M.amount)
 	new/obj/item/stack/sheet/bronze(get_turf(M), reac_volume)
 	M.use(reac_volume)
@@ -797,12 +781,6 @@
 	color = "#808080" // rgb: 128, 128, 128
 	taste_mult = 0
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
-
-/datum/reagent/nitrogen/expose_turf(turf/open/exposed_turf, reac_volume)
-	if(istype(exposed_turf))
-		var/temp = holder ? holder.chem_temp : T20C
-		exposed_turf.atmos_spawn_air("n2=[reac_volume/20];TEMP=[temp]")
-	return ..()
 
 /datum/reagent/hydrogen
 	name = "Hydrogen"
@@ -1342,12 +1320,6 @@
 	ph = 6
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/carbondioxide/expose_turf(turf/open/exposed_turf, reac_volume)
-	if(istype(exposed_turf))
-		var/temp = holder ? holder.chem_temp : T20C
-		exposed_turf.atmos_spawn_air("co2=[reac_volume/20];TEMP=[temp]")
-	return ..()
-
 /datum/reagent/nitrous_oxide
 	name = "Nitrous Oxide"
 	description = "A potent oxidizer used as fuel in rockets and as an anaesthetic during surgery."
@@ -1360,9 +1332,6 @@
 
 /datum/reagent/nitrous_oxide/expose_turf(turf/open/exposed_turf, reac_volume)
 	. = ..()
-	if(istype(exposed_turf))
-		var/temp = holder ? holder.chem_temp : T20C
-		exposed_turf.atmos_spawn_air("n2o=[reac_volume/20];TEMP=[temp]")
 
 /datum/reagent/nitrous_oxide/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume)
 	. = ..()
@@ -1765,7 +1734,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/carpet/expose_turf(turf/exposed_turf, reac_volume)
-	if(isplatingturf(exposed_turf) || istype(exposed_turf, /turf/open/floor/iron))
+	if(isplatingturf(exposed_turf) || istype(exposed_turf, /turf/open/floor))
 		var/turf/open/floor/target_floor = exposed_turf
 		target_floor.PlaceOnTop(carpet_type, flags = CHANGETURF_INHERIT_AIR)
 	..()
