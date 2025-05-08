@@ -770,7 +770,7 @@
 
 	var/obj/item/stack/sheet/metal/M = exposed_obj
 	reac_volume = min(reac_volume, M.amount)
-	new/obj/item/stack/sheet/copper(get_turf(M), reac_volume)
+	new/obj/item/stack/tile/bronze(get_turf(M), reac_volume)
 	M.use(reac_volume)
 
 /datum/reagent/nitrogen
