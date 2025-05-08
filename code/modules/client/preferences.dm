@@ -2326,19 +2326,20 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
 					if(is_corax==1)
-						auspice=var/datum/auspice/theurge
+						auspice=/datum/auspice/theurge
 						return
-					var/list/auspice_choices = list()
-					for(var/i in GLOB.auspices_list)
-						var/a = GLOB.auspices_list[i]
-						var/datum/auspice/V = new a
-						auspice_choices[V.name] += GLOB.auspices_list[i]
-						qdel(V)
-					var/result = tgui_input_list(user, "Select an Auspice", "Auspice Selection", auspice_choices)
-					if(result)
-						var/newtype = GLOB.auspices_list[result]
-						var/datum/auspice/Auspic = new newtype()
-						auspice = Auspic
+					else
+						var/list/auspice_choices = list()
+						for(var/i in GLOB.auspices_list)
+							var/a = GLOB.auspices_list[i]
+							var/datum/auspice/V = new a
+							auspice_choices[V.name] += GLOB.auspices_list[i]
+							qdel(V)
+						var/result = tgui_input_list(user, "Select an Auspice", "Auspice Selection", auspice_choices)
+						if(result)
+							var/newtype = GLOB.auspices_list[result]
+							var/datum/auspice/Auspic = new newtype()
+							auspice = Auspic
 
 				if("clane_acc")
 					if(pref_species.id != "kindred")	//Due to a lot of people being locked to furries
@@ -2481,9 +2482,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/newtype = GLOB.tribes_list[new_tribe]
 						new_tribe = new newtype()
 						tribe = new_tribe
-						if (new_tribe == /datum/garou_tribe/corax || "Corax")
+						if (tribe.name == "Corax")
 							ADD_TRAIT(user,TRAIT_CORAX,tribe) //This is probably such an ugly way of doing it
 							is_corax=1
+							auspice=/datum/auspice/theurge
+						else
+							if HAS_TRAIT(user,TRAIT_CORAX)
+								REMOVE_TRAIT(user, TRAIT_CORAX,tribe)
+							is_corax=0
 
 				if("breed")
 					if(slotlocked || !(pref_species.id == "garou"))
