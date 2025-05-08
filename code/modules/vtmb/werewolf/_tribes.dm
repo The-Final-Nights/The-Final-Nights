@@ -3,6 +3,7 @@
 	var/desc
 	var/list/tribal_gifts = list()
 	var/tribe_keys
+	var/tribe_trait
 
 /datum/garou_tribe/galestalkers
 	name = "Galestalkers"
@@ -145,7 +146,8 @@
 	name = "Corax"
 	desc = "<b>{CONSIDER : THIS IS A PLACEHOLDER, FEATURES WILL BE MISSING.}</B> \nMessengers of Gaia, children of Raven, and scions of Helios; the wereravens travel accross the globe, guided by their innate curiosity and insatiable thirst for gossip. \nThey are renowned for their ability to gather useful intelligence, and the difficulty of making them stop talking."
 	tribal_gifts = list(
-		/datum/action/gift/guise_of_the_crow = 1,
+		/datum/action/gift/guise_of_the_crow = 1, // change into another corax-specific gift when you code it.
 		/datum/action/gift/smooth_move = 2,
 		/datum/action/gift/freezing_wind = 3
 	)
+	tribe_trait = TRAIT_CORAX

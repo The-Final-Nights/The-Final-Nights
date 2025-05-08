@@ -1,43 +1,19 @@
-// Wereraven code? In my wereraven folder?! Are you insane?!
-// this is a copy of the wereraven.dm code, hopefully properly raven-ified
 
-/mob/living/carbon/corax/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
-	. = ..()
-	if(message)
-//		if(istype(loc, /obj/effect/dummy/chameleon))
-//			var/obj/effect/dummy/chameleon/C = loc
-//			C.say("[message]")
-//			return
-		if(length(GLOB.auspex_list))
-			for(var/mob/living/carbon/human/H in GLOB.auspex_list)
-				if(H)
-					to_chat(H, "<span class='scream_away'><b>[name]</b> says, \"[message]\"</span>")
-//		var/ending = copytext_char(message, -1)
-//		var/list/message_mods = list()
-//		message = get_message_mods(message, message_mods)
-//		if(message_mods[WHISPER_MODE] != MODE_WHISPER)
-//			if(ending == "?")
-//				playsound(get_turf(src), 'code/modules/wod13/sounds/wolf_ask.ogg', 75, TRUE)
-//			else if(ending == "!")
-//				playsound(get_turf(src), 'code/modules/wod13/sounds/wolf_yell.ogg', 100, TRUE)
-//			else
-//				playsound(get_turf(src), 'code/modules/wod13/sounds/wolf_speak.ogg', 75, TRUE)
-
-/mob/living/carbon/corax
-	name = "wereraven"
+/mob/living/carbon/werewolf/corax_crinos
+	name = "corax crinos"
 	icon = 'code/modules/wod13/corax_crinos.dmi'
 	gender = NEUTER
-	dna = null
+	/*dna = null
 	faction = list("Gaia")
 	ventcrawler = VENTCRAWLER_NONE
 	pass_flags = 0
 //	sight = SEE_MOBS
-	see_in_dark = 2
+	see_in_dark = 2*/
 	verb_say = pick("squawks", "caws", "croaks")
-	rotate_on_lying = 0
+	//rotate_on_lying = 0
 	initial_language_holder = /datum/language_holder/wereraven_transformed
 
-	movement_type = GROUND // might give the Crinos form the ability to fly, depends.
+	/*movement_type = GROUND // might give the Crinos form the ability to fly, depends.
 
 	bloodpool = 20
 	maxbloodpool = 20
@@ -51,19 +27,19 @@
 	var/leaping = FALSE
 	gib_type = /obj/effect/decal/cleanable/blood/gibs
 	unique_name = FALSE
-	var/environment_smash = ENVIRONMENT_SMASH_STRUCTURES
+	var/environment_smash = ENVIRONMENT_SMASH_STRUCTURES*/
 	melee_damage_lower = 20
 	melee_damage_upper = 20
 	butcher_results = list(/obj/item/food/meat/slab = 5)
-	layer = LARGE_MOB_LAYER
-	var/obj_damage = 30
+	/*layer = LARGE_MOB_LAYER
+	var/obj_damage = 30*/
 	var/wound_bonus = 15
 	var/bare_wound_bonus = 20
 	var/sharpness = 50
 	var/armour_penetration = 90 // Less AP for puny raven talons
 	var/melee_damage_type = BRUTE
 	var/list/damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
-	var/attack_verb_continuous = "attacks"
+	/*var/attack_verb_continuous = "attacks"
 	var/attack_verb_simple = "attack"
 	var/friendly_verb_continuous = "nuzzles"
 	var/friendly_verb_simple = "nuzzle"
@@ -78,12 +54,12 @@
 
 	var/step_variable = 0
 
-	var/wyrm_tainted = 0
+	var/wyrm_tainted = 0*/
 	var/wereraven_armor = 0
 
 	var/assigned_quirks = FALSE
 
-/mob/living/carbon/corax/update_resting()
+/*/mob/living/carbon/corax/update_resting()
 	if(resting)
 		ADD_TRAIT(src, TRAIT_IMMOBILIZED, RESTING_TRAIT)
 	else
@@ -125,43 +101,17 @@
 	internal_organs += new /obj/item/organ/heart
 	internal_organs += new /obj/item/organ/lungs
 	internal_organs += new /obj/item/organ/ears
-	..()
+	..()*/
 
-/mob/living/carbon/corax/assess_threat(judgement_criteria, lasercolor = "", datum/callback/weaponcheck=null) // beepsky won't hunt aliums
-	return -10
 
-/mob/living/carbon/corax/reagent_check(datum/reagent/R) //can metabolize all reagents
-	return 0
-
-/mob/living/carbon/corax/get_status_tab_items()
-	. = ..()
-	. += "Intent: [a_intent]"
-
-/mob/living/carbon/corax/getTrail()
-	return pick (list("trails_1", "trails2"))
-
-/mob/living/carbon/corax/canBeHandcuffed()
-	return FALSE
-
-/mob/living/carbon/corax/can_hold_items(obj/item/I)
-	return (I && (I.item_flags & werewolf_HOLDABLE || ISADVANCEDTOOLUSER(src)) && ..())
-
-/mob/living/carbon/corax/on_lying_down(new_lying_angle)
-	. = ..()
-	update_icons()
-
-/mob/living/carbon/corax/on_standing_up()
-	. = ..()
-	update_icons()
-
-/mob/living/carbon/corax/crinos
+/mob/living/carbon/werewolf/corax_crinos/corax //afraid I might call onto the werewolf Crinos form if I name it "crinos"
 	name = "wereraven"
-	icon_state = "black"
-	mob_size = MOB_SIZE_HUGE
-	butcher_results = list(/obj/item/food/meat/slab = 5)
-	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
+//	icon_state = "black"
+//	mob_size = MOB_SIZE_HUGE
+//	butcher_results = list(/obj/item/food/meat/slab = 5)
+//	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
 	limb_destroyer = 1
-	hud_type = /datum/hud/wereraven
+//  hud_type = /datum/hud/wereraven
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	health = 225
@@ -173,39 +123,39 @@
 	var/pounce_cooldown_time = 30
 	pixel_w = -8
 //	deathsound = 'sound/voice/hiss6.ogg'
-	bodyparts = list(
+/*	bodyparts = list(
 		/obj/item/bodypart/chest/crinos,
 		/obj/item/bodypart/head/crinos,
 		/obj/item/bodypart/l_arm/crinos,
 		/obj/item/bodypart/r_arm/crinos,
 		/obj/item/bodypart/r_leg/crinos,
 		/obj/item/bodypart/l_leg/crinos,
-		)
+		)*/
 
 
 
 	wereraven_armor = 20 // less armour, squishier
 
-/datum/movespeed_modifier/crinosform
-	multiplicative_slowdown = -0.2
+/*/datum/movespeed_modifier/crinosform
+	multiplicative_slowdown = -0.2*/
 
 /datum/movespeed_modifier/silver_slowdown
 	multiplicative_slowdown = 0 // no slowdown from silver
 
-/mob/living/carbon/corax/crinos/Initialize()
+/* /mob/living/carbon/corax/crinos/Initialize()
 	. = ..()
 	var/datum/action/change_apparel/A = new()
-	A.Grant(src)
+	A.Grant(src) */
 
 //	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
 
-/mob/living/carbon/corax/corvid/Initialize()
+/mob/living/carbon/werewolf/corvid/Initialize()
 	. = ..()
 	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
-	var/datum/action/gift/hispo/hispo = new()
-	hispo.Grant(src)
+	//var/datum/action/gift/hispo/hispo = new() //do not give us Hispo, we don't want that.
+	//hispo.Grant(src)
 
-/mob/living/carbon/corax/crinos/show_inv(mob/user)
+/* /mob/living/carbon/werewolf/corax_crinos/show_inv(mob/user)
 	user.set_machine(src)
 	var/list/dat = list()
 	dat += "<table>"
@@ -221,16 +171,16 @@
 
 	var/datum/browser/popup = new(user, "mob[REF(src)]", "[src]", 440, 510)
 	popup.set_content(dat.Join())
-	popup.open()
+	popup.open() */
 
 
-/mob/living/carbon/corax/crinos/can_hold_items(obj/item/I)
+/*/mob/living/carbon/werewolf/corax_crinos/can_hold_items(obj/item/I)
+	return TRUE*/
+
+/mob/living/carbon/werewolf/corvid/can_hold_items(obj/item/I) // the raven form can hold a singular item in it's talons, one at a time.
 	return TRUE
-
-/mob/living/carbon/corax/corvid/can_hold_items(obj/item/I) // the raven form can hold a singular item in it's talons, one at a time.
-	return TRUE
-
-/mob/living/carbon/corax/crinos/Topic(href, href_list)
+/*
+/mob/living/carbon/werewolf/corax_crinos/Topic(href, href_list)
 	//strip panel
 	if(href_list["pouches"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		visible_message("<span class='danger'>[usr] tries to empty [src]'s pouches.</span>", \
@@ -241,12 +191,12 @@
 
 	..()
 
-/mob/living/carbon/corax/crinos/resist_grab(moving_resist)
+/mob/living/carbon/werewolf/corax_crinos/resist_grab(moving_resist)
 	if(pulledby.grab_state)
 		visible_message("<span class='danger'>[src] breaks free of [pulledby]'s grip!</span>", \
 						"<span class='danger'>You break free of [pulledby]'s grip!</span>")
 	pulledby.stop_pulling()
 	. = 0
 
-/mob/living/carbon/corax/crinos/get_permeability_protection(list/target_zones)
-	return 0.8
+/mob/living/carbon/werewolf/corax_crinos/get_permeability_protection(list/target_zones)
+	return 0.8*/

@@ -45,6 +45,9 @@
 
 	if(tribe.tribe_keys)
 		C.put_in_hands(new tribe.tribe_keys(C))
+	if(tribe.tribe_trait==TRAIT_CORAX)
+		ADD_TRAIT(C,TRAIT_CORAX, tribe)
+
 
 /datum/auspice/ahroun
 	name = "Ahroun"

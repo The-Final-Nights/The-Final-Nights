@@ -56,6 +56,41 @@
 	if(C.transformator)
 		C.transformator.trans_gender(C, "Lupus")
 
+
+/atom/movable/screen/transform_corax_crinos
+	name = "Corax Crinos"
+	icon = 'code/modules/wod13/32x48.dmi'
+	icon_state = "gorg" // placeholder to differenciate and debug
+	layer = HUD_LAYER
+	plane = HUD_PLANE
+
+
+/atom/movable/screen/transform_corax_crinos/CtrlClick(mob/user)
+	. = ..()
+	var/mob/living/carbon/C = user
+	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
+		return
+	if(C.transformator)
+		C.transformator.trans_gender(C, "Corax")
+
+/atom/movable/screen/transform_corvid
+	name = "corvid"
+	icon = 'code/modules/wod13/32x48.dmi'
+	icon_state = "lupus" // placeholder.
+	layer = HUD_LAYER
+	plane = HUD_PLANE
+
+
+/atom/movable/screen/transform_corvid/CtrlClick(mob/user)
+	. = ..()
+	var/mob/living/carbon/C = user
+	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
+		return
+	if(C.transformator)
+		C.transformator.trans_gender(C, "Corvid")
+
+
+
 /atom/movable/screen/auspice
 	name = "Auspice"
 	icon = 'code/modules/wod13/werewolf_ui.dmi'

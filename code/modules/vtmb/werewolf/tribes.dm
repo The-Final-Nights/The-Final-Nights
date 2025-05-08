@@ -274,7 +274,7 @@
 	button_icon_state = "guise_of_the_hound" // I should ask a spriter to make the propper button, but..
 	rage_req = 1
 
-/datum/action/gift/guise_of_the_crow/Trigger()
+/datum/action/gift/guise_of_the_crow/Trigger() // TO BE CHANGED INTO SOMETHING ELSE. RIGHT NOW THIS IS USELESS
 	. = ..()
 	if(allowed_to_proceed)
 		if(!HAS_TRAIT(owner,TRAIT_CROW)) // TRAIT_CROW because otherwise we use the dogwolf sprite
@@ -296,7 +296,7 @@
 
 /datum/action/gift/guise_of_the_crow/proc/trans_crow(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_CROW))
-		H.icon = 'code/modules/wod13/corax_corvid.dmi' // The sprite remains the same. I would ideally like to reduce the size a little.
+		H.icon = 'code/modules/wod13/corax_corvid.dmi' // The sprite remains the same.
 	else
 		H.icon = 'code/modules/wod13/corax_corvid.dmi'
 	H.regenerate_icons()

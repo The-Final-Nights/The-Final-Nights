@@ -1,7 +1,7 @@
 // Wereraven code? In my corax folder?! Are you insane?!
 // this is a copy of the lupus.dm code, tweaked to hopefullygive the ravens a hand and overall tweak their values.
 
-/mob/living/carbon/corax/corvid
+/mob/living/carbon/werewolf/corvid
 	name = "corvid"
 	icon_state = "black"
 	icon = 'code/modules/wod13/corax_corvid.dmi'
@@ -11,7 +11,7 @@
 	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
 	hud_type = /datum/hud/corax
 	AddElement(/datum/element/waddling) // try not to look silly challenge
-	limb_destroyer = 1
+	limb_destroyer = 0 // you don't get your hand ripped off by a god damned raven, might be used for other stuff though
 	has_limbs = 1
 	dextrous = FALSE // As funny as a raven shooting a gun is, I don't think this is something we want. Prevents them from using phones, sadly.
 	melee_damage_lower = 15
@@ -27,7 +27,7 @@
 /datum/movespeed_modifier/corvidform
 	multiplicative_slowdown = 0 // Ravens move at regular pace while landed.
 
-/mob/living/carbon/corax/corvid/update_icons()
+/* /mob/living/carbon/corax/corvid/update_icons()
 	cut_overlays()
 
 	var/laid_down = FALSE
@@ -65,7 +65,7 @@
 
 /mob/living/carbon/corax/corvid/update_transform() //The old method of updating lying/standing was update_icons(). Aliens still expect that.
 	. = ..()
-	update_icons()
+	update_icons() */
 
-/mob/living/carbon/corax/corvid/Life()
+/mob/living/carbon/werewolf/corvid/Life()
 	..() // you do not breach the veil by being a bird in a city, probably a redundant self-call though.

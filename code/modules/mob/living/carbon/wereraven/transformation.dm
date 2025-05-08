@@ -1,10 +1,8 @@
-// copy of the werewolves' "transformation.dm" modified for Corax
-
 // this is evil
 // todo: use a datum or something instead lol
 /datum/werewolf_holder/transformation
 	var/datum/weakref/human_form
-	var/datum/weakref/crinos_form
+	var/datum/weakref/corax_form // the corax's crinos form.
 	var/datum/weakref/corvid_form
 
 	var/transformating = FALSE
@@ -13,23 +11,24 @@
 // we should really initialize on creation always
 // if this were a datum we'd just use New()
 // but since it's an atom subtype we have to use INITIALIZE_IMMEDIATE
-/datum/werewolf_holder/transformation/New()
-	var/mob/living/carbon/corax/crinos/crinos = new()
-	crinos_form = WEAKREF(crinos)
-	crinos = crinos_form.resolve()
-	crinos?.transformator = src
 
-	var/mob/living/carbon/corax/corvid/corvid = new()
-	corvids_form = WEAKREF(corvid)
+/datum/werewolf_holder/transformation/New()
+	var/mob/living/carbon/werewolf/corax/crinos/crinos = new()
+	corax_form = WEAKREF(corax)
+	corax = corax_form.resolve()
+	corax?.transformator = src
+
+	var/mob/living/carbon/wereraven/corax/corvid/corvid = new()
+	corvid_form = WEAKREF(corvid)
 	corvid = corvid_form.resolve()
 	corvid?.transformator = src
 
-	crinos?.moveToNullspace()
+	corax?.moveToNullspace()
 	corvid?.moveToNullspace()
 
-/datum/werewolf_holder/transformation/Destroy()
+/datum/werewolf_holder/transformation/Destroy() // Making this in it's own datum to avoid messing with Garou players
 	human_form = null
-	crinos_form = null
+	corax_form = null
 	corvid_form = null
 
 	return ..()
@@ -42,7 +41,7 @@
 	second.adjustToxLoss(round((first.getToxLoss()/100)*percentage)-second.getToxLoss())
 	second.adjustCloneLoss(round((first.getCloneLoss()/100)*percentage)-second.getCloneLoss())
 
-/datum/werewolf_holder/transformation/proc/trans_gender(mob/living/carbon/trans, form)
+/datum/werewolf_holder/transformation/proc/transform(mob/living/carbon/trans, form) //The old proc was named "trans_gender". This is a subtle reference to the devs being unfunny.
 	if(trans.stat == DEAD)
 		return
 	if(transformating)
@@ -54,7 +53,7 @@
 			var/datum/action/dance/DA = new()
 			DA.Grant(corvid_form)
 			var/datum/action/dance/NE = new()
-			NE.Grant(crinos_form)
+			NE.Grant(corax_form)
 
 	var/matrix/ntransform = matrix(trans.transform) //aka transform.Copy()
 
@@ -71,24 +70,24 @@
 		var/mob/living/carbon/human/H = trans
 	var/datum/language_holder/garou_lang = trans.get_language_holder()
 	switch(form)
-		if("corvid")
+		if("Corvid")
 			/*for(var/spoken_language in garou_lang.spoken_languages)
 				garou_lang.remove_language(spoken_language, FALSE, TRUE) // We do not remove known languages from were-ravens, their whole shtick is "talking".
 
 			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
 			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)*/
-			if(iscrinos(trans))
+			if(iscoraxcrinos(trans))
 				ntransform.Scale(0.75, 0.75)
 			if(ishuman(trans))
 				ntransform.Scale(1, 0.75)
-		if("Crinos")
+		if("Corax Crinos")
 			/*for(var/spoken_language in garou_lang.spoken_languages)
 				garou_lang.remove_language(spoken_language, FALSE, TRUE)
 
 			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
 			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)*/
 			if(iscorvid(trans))
-				var/mob/living/carbon/werewolf/corvid/lupor = trans
+				var/mob/living/carbon/wereraven/corvid/corvid = trans
 					ntransform.Scale(1, 1.75)
 			if(ishuman(trans))
 				ntransform.Scale(1.25, 1.5)
@@ -102,13 +101,13 @@
 				ntransform.Scale(1, 1.5)
 
 	switch(form)
-		if("corvid")
+		if("Corvid")
 			if(iscorvid(trans))
 				transformating = FALSE
 				return
 			if(!corvid_form)
 				return
-			var/mob/living/carbon/werewolf/corvid/corvid = corvid_form.resolve()
+			var/mob/living/carbon/wereraven/corvid/corvid = corvid_form.resolve()
 			if(!corvid)
 				corvid_form = null
 				return
@@ -123,15 +122,15 @@
 					qdel(B)
 
 			addtimer(CALLBACK(src, PROC_REF(transform_corvid), trans, corvid), 30 DECISECONDS)
-		if("Crinos")
-			if(iscrinos(trans))
+		if("Corax Crinos")
+			if(iscoraxcrinos(trans))
 				transformating = FALSE
 				return
-			if(!crinos_form)
+			if(!corax_form)
 				return
-			var/mob/living/carbon/werewolf/crinos/crinos = crinos_form.resolve()
+			var/mob/living/carbon/wereraven/crinos/crinos = corax_form.resolve()
 			if(!crinos)
-				crinos_form = null
+				corax_form = null
 				return
 
 			transformating = TRUE
@@ -164,7 +163,7 @@
 
 			addtimer(CALLBACK(src, PROC_REF(transform_homid), trans, homid), 30 DECISECONDS)
 
-/datum/werewolf_holder/transformation/proc/transform_corvid(mob/living/carbon/trans, mob/living/carbon/werewolf/corvid/corvid)
+/datum/werewolf_holder/transformation/proc/transform_corvid(mob/living/carbon/trans, mob/living/carbon/wereraven/corvid/corvid)
 	PRIVATE_PROC(TRUE)
 
 	if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
@@ -185,6 +184,8 @@
 	corvid.bloodpool = trans.bloodpool
 	corvid.masquerade = trans.masquerade
 	corvid.nutrition = trans.nutrition
+	/*if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
+		corvid.wyrm_tainted = 1*/ //Buzzards will come later, maybe. No promises.
 	corvid.mind = trans.mind
 	corvid.update_blood_hud()
 	transfer_damage(trans, corvid)
@@ -192,8 +193,11 @@
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	corvid.update_icons()
+	/*if(lupus.hispo)
+		lupus.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+		lupus.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)*/ // shouldn't ever be in hispo as Corax
 
-/datum/werewolf_holder/transformation/proc/transform_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/crinos/crinos)
+/datum/werewolf_holder/transformation/proc/transform_crinos(mob/living/carbon/trans, mob/living/carbon/wereraven/crinos/crinos)
 	PRIVATE_PROC(TRUE)
 
 	if(trans.stat == DEAD)
@@ -214,6 +218,8 @@
 	crinos.bloodpool = trans.bloodpool
 	crinos.masquerade = trans.masquerade
 	crinos.nutrition = trans.nutrition
+	/*if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
+		crinos.wyrm_tainted = 1*/ // no wyrm taint handling yet, out of scope for this.
 	crinos.mind = trans.mind
 	crinos.update_blood_hud()
 	crinos.physique = crinos.physique+3
