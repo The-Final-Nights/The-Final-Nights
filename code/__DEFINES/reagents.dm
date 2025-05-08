@@ -28,6 +28,8 @@
 #define PATCH (1<<3)
 /// Used for direct injection of reagents.
 #define INJECT (1<<4)
+/// Used for vampire feeding.
+#define VAMPIRE (1<<5)
 
 #define MIMEDRINK_SILENCE_DURATION 30  //ends up being 60 seconds given 1 tick every 2 seconds
 ///Health threshold for synthflesh and rezadone to unhusk someone
