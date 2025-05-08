@@ -138,7 +138,7 @@
 			to_chat(owner, "[target] fears that the fact they stole Ministry's Serpentis will be known.")
 		if(clan.get_discipline("Necromancy") && vampire.clane?.name != "Giovanni" || clan.get_discipline("Necromancy") && vampire.clane?.name != "Cappadocian")
 			to_chat(owner, "[target] fears that the fact they stole Giovanni's Necromancy will be known.")
-		if(clan.get_discipline("Obtenebration") && vampire.clane?.name != "Lasombra" || clan.get_discipline("Obtenebration") && vampire.clane?.name != "Baali")
+		if(clan.get_discipline("Obtenebration") && vampire.clane?.name != "Lasombra")
 			to_chat(owner, "[target] fears that the fact they stole Lasombra's Obtenebration will be known.")
 		if(clan.get_discipline("Dementation") && vampire.clane?.name != "Malkavian")
 			to_chat(owner, "[target] fears that the fact they stole Malkavian's Dementation will be known.")
