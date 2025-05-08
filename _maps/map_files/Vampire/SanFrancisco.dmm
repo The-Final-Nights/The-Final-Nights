@@ -2468,6 +2468,10 @@
 /obj/structure/railing{
 	dir = 4
 	},
+/obj/structure/window/reinforced/indestructable{
+	alpha = 0;
+	dir = 4
+	},
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/interior/strip/elysium)
 "aHp" = (
@@ -5640,6 +5644,7 @@
 /obj/machinery/light{
 	pixel_y = 15
 	},
+/obj/structure/gargoyle,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/strip/elysium)
 "bzV" = (
@@ -7195,7 +7200,6 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 6
 	},
-/obj/structure/gargoyle,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/strip/elysium)
 "bWv" = (
@@ -9084,6 +9088,23 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"cvv" = (
+/obj/structure/window/reinforced/indestructable{
+	alpha = 0
+	},
+/obj/structure/railing{
+	layer = 4;
+	pixel_y = -2
+	},
+/obj/structure/window/reinforced/indestructable{
+	alpha = 0;
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/interior/strip/elysium)
 "cvw" = (
 /obj/structure/vampdoor/wood,
 /obj/effect/turf_decal/siding/white{
@@ -33525,6 +33546,24 @@
 /obj/item/paper,
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
+"jmS" = (
+/obj/structure/window/reinforced/indestructable{
+	alpha = 0;
+	dir = 4
+	},
+/obj/structure/window/reinforced/indestructable{
+	alpha = 0;
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/window/reinforced/indestructable{
+	alpha = 0;
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/interior/strip/elysium)
 "jmT" = (
 /obj/effect/decal/bordur{
 	dir = 5
@@ -44737,6 +44776,7 @@
 /obj/effect/turf_decal/siding/white{
 	icon_state = "siding_corner"
 	},
+/obj/structure/gargoyle,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/strip/elysium)
 "mva" = (
@@ -65313,7 +65353,6 @@
 	alpha = 0;
 	dir = 1
 	},
-/obj/structure/gargoyle,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/strip/elysium)
 "rRr" = (
@@ -364802,7 +364841,7 @@ eiK
 eiK
 umC
 eiK
-tef
+cvv
 oGG
 vbS
 vbS
@@ -365057,7 +365096,7 @@ oJZ
 tOQ
 fMD
 ltU
-ltU
+jmS
 aHn
 muZ
 vZs
