@@ -138,7 +138,6 @@
 			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
 			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)*/
 			if(iscorvid(trans))
-				var/mob/living/carbon/werewolf/lupus/corvid/corvid = trans
 				ntransform.Scale(1, 1.75)
 			if(ishuman(trans))
 				ntransform.Scale(1.25, 1.5)
@@ -149,7 +148,11 @@
 			garou_lang.remove_language(/datum/language/primal_tongue, FALSE, TRUE)
 			if(iscrinos(trans))
 				ntransform.Scale(0.75, 0.75)
+			if(iscoraxcrinos(trans))
+				ntransform.Scale(0.75, 0.75)
 			if(islupus(trans))
+				ntransform.Scale(1, 1.5)
+			if(iscorvid(trans))
 				ntransform.Scale(1, 1.5)
 
 	switch(form)
@@ -215,15 +218,15 @@
 				if(B)
 					qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_lupus), trans, corvid), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_corvid), trans, corvid), 30 DECISECONDS)
 		if("Corax Crinos")
 			if(iscoraxcrinos(trans))
 				transformating = FALSE
 				return
 			if(!corax_form)
 				return
-			var/mob/living/carbon/werewolf/corax_crinos/crinos = corax_form.resolve()
-			if(!crinos)
+			var/mob/living/carbon/werewolf/corax_crinos/cor_crinos = corax_form.resolve()
+			if(!cor_crinos)
 				corax_form = null
 				return
 
@@ -235,7 +238,7 @@
 				if(B)
 					qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_crinos), trans, crinos), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_cor_crinos), trans, cor_crinos), 30 DECISECONDS)
 
 		if("Homid")
 			if(ishuman(trans))
@@ -324,6 +327,38 @@
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	crinos.update_icons()
 
+/datum/werewolf_holder/transformation/proc/transform_cor_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/corax_crinos/cor_crinos)
+	PRIVATE_PROC(TRUE)
+
+	if(trans.stat == DEAD)
+		animate(trans, transform = null, color = "#FFFFFF")
+		return
+	var/items = trans.get_contents()
+	for(var/obj/item/item_worn in items)
+		if(item_worn)
+			if(!ismob(item_worn.loc))
+				continue
+			trans.dropItemToGround(item_worn, TRUE)
+	var/turf/current_loc = get_turf(trans)
+	cor_crinos.color = "#000000"
+	cor_crinos.forceMove(current_loc)
+	animate(cor_crinos, color = "#FFFFFF", time = 10)
+	cor_crinos.key = trans.key
+	trans.moveToNullspace()
+	cor_crinos.bloodpool = trans.bloodpool
+	cor_crinos.masquerade = trans.masquerade
+	cor_crinos.nutrition = trans.nutrition
+	//if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED)) //can't be relevant since you cannot be both Corax and BSD, but might be helpful later
+	//	cor_crinos.wyrm_tainted = 1
+	cor_crinos.mind = trans.mind
+	cor_crinos.update_blood_hud()
+	cor_crinos.physique = cor_crinos.physique+3
+	transfer_damage(trans, cor_crinos)
+	cor_crinos.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	transformating = FALSE
+	animate(trans, transform = null, color = "#FFFFFF", time = 1)
+	cor_crinos.update_icons()
+
 /datum/werewolf_holder/transformation/proc/transform_homid(mob/living/carbon/trans, mob/living/carbon/human/homid)
 	PRIVATE_PROC(TRUE)
 
@@ -354,3 +389,36 @@
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	homid.update_body()
 
+/datum/werewolf_holder/transformation/proc/transform_corvid(mob/living/carbon/trans, mob/living/carbon/werewolf/lupus/corvid/corvid)
+	PRIVATE_PROC(TRUE)
+
+	if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
+		animate(trans, transform = null, color = "#FFFFFF")
+		return
+	var/items = trans.get_contents()
+	for(var/obj/item/item_worn in items)
+		if(item_worn)
+			if(!ismob(item_worn.loc))
+				continue
+			trans.dropItemToGround(item_worn, TRUE)
+	var/turf/current_loc = get_turf(trans)
+	corvid.color = "#000000"
+	corvid.forceMove(current_loc)
+	animate(corvid, color = "#FFFFFF", time = 10)
+	corvid.key = trans.key
+	trans.moveToNullspace()
+	corvid.bloodpool = trans.bloodpool
+	corvid.masquerade = trans.masquerade
+	corvid.nutrition = trans.nutrition
+	//if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED)) //check not useful for now, we can't be Corax and BSD
+	//	corvid.wyrm_tainted = 1
+	corvid.mind = trans.mind
+	corvid.update_blood_hud()
+	transfer_damage(trans, corvid)
+	corvid.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+	transformating = FALSE
+	animate(trans, transform = null, color = "#FFFFFF", time = 1)
+	corvid.update_icons()
+	if(corvid.hispo) // shouldn't ever be called, but you know..
+		corvid.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+		corvid.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)

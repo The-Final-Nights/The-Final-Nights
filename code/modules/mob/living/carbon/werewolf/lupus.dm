@@ -32,6 +32,8 @@
 	icon_state = "black"
 	icon = 'code/modules/wod13/corax_corvid.dmi'
 
+
+
 /datum/movespeed_modifier/lupusform
 	/*if(HAS_TRAIT(src, TRAIT_CORAX))
 		multiplicative_slowdown = 0.0 // you do not get bonuses for being a landed raven.

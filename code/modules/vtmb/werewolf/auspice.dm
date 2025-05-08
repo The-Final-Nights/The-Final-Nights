@@ -16,11 +16,16 @@
 
 	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
 	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
-
+	var/mob/living/carbon/werewolf/corax_crinos/cor_crinos = C.transformator.corax_form?.resolve()
+	var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
 	lupus?.auspice = src
 	lupus?.dna = C.dna
 	crinos?.auspice = src
 	crinos?.dna = C.dna
+	cor_crinos?.auspice = src
+	cor_crinos?.dna = C.dna
+	corvid?.auspice = src
+	corvid?.dna = C.dna
 
 
 	rage = start_rage
@@ -32,6 +37,10 @@
 			A2.Grant(lupus)
 			var/datum/action/A3 = new i()
 			A3.Grant(crinos)
+			var/datum/action/A4 = new i()
+			A4.Grant(cor_crinos)
+			var/datum/action/A5 = new i()
+			A5.Grant(corvid)
 
 	for(var/i in 1 to level)
 		var/zalupa
@@ -42,6 +51,10 @@
 		A1.Grant(lupus)
 		var/datum/action/A2 = new zalupa()
 		A2.Grant(crinos)
+		var/datum/action/A3 = new zalupa()
+		A3.Grant(cor_crinos)
+		var/datum/action/A4 = new zalupa()
+		A4.Grant(corvid)
 
 	if(tribe.tribe_keys)
 		C.put_in_hands(new tribe.tribe_keys(C))
