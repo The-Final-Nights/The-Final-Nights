@@ -236,7 +236,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/werewolf_name
 	var/auspice_level = 1
-
+	var/is_corax = 0 // are we Corax? This is likely a very dirty way of doing it.
 	var/clane_accessory
 
 	var/dharma_type = /datum/dharma
@@ -350,8 +350,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		var/coolfont = "<font face='Percolator'>[text]</font>"
 		return coolfont
 
-/proc/RankName(rank)
-	if(!iscorax)
+/proc/RankName(rank, is_corax)
+	if(is_corax==0)
 		switch(rank)
 			if(0)
 				return "Cub"
@@ -384,8 +384,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(6)
 				return "Grey Eminence"
 
-/proc/RankDesc(rank)
-	if(!iscorax) // I feel like this is an especially dirty way of doing it, sorry!
+/proc/RankDesc(rank, is_corax)
+	if(is_corax==0) // I feel like this is a dirty way of doing it, sorry!
 		switch(rank)
 			if(0)
 				return "You are not known to other Garou. Why?"
@@ -586,8 +586,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							dat += "<b>Wisdom:</b> [wisdom]/10<BR>"
 							if(wisdomXP <= player_experience && wisdom < 10)
 								dat +=" <a href='byond://?_src_=prefs;preference=renownwisdom;task=input'>Raise Wisdom ([wisdomXP])</a><BR>"
-					dat += "<b>Renown Rank:</b> [RankName(renownrank)]<br>"
-					dat += "[RankDesc(renownrank)]<BR>"
+					dat += "<b>Renown Rank:</b> [RankName(renownrank,src.is_corax)]<br>"
+					dat += "[RankDesc(renownrank, src.is_corax)]<BR>"
 					var/canraise = 0
 					if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 						if(renownrank < MAX_TRUSTED_RANK)
@@ -2325,8 +2325,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("auspice")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
-					if(tribe=="Corax")
-						auspice="Theurge"
+					if(is_corax==1)
+						auspice=var/datum/auspice/theurge
 						return
 					var/list/auspice_choices = list()
 					for(var/i in GLOB.auspices_list)
@@ -2481,8 +2481,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/newtype = GLOB.tribes_list[new_tribe]
 						new_tribe = new newtype()
 						tribe = new_tribe
-						if (tribe == /datum/garou_tribe/corax)
-							ADD_TRAIT(user,TRAIT_CORAX,tribe)
+						if (new_tribe == /datum/garou_tribe/corax || "Corax")
+							ADD_TRAIT(user,TRAIT_CORAX,tribe) //This is probably such an ugly way of doing it
+							is_corax=1
 
 				if("breed")
 					if(slotlocked || !(pref_species.id == "garou"))
@@ -3555,6 +3556,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.auspice.level = auspice_level
 		character.auspice.tribe = tribe
 		character.auspice.on_gain(character)
+
 		switch(breed)
 			if("Homid")
 				character.auspice.gnosis = 1

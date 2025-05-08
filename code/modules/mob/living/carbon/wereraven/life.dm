@@ -4,14 +4,14 @@
 #define VEIL_COOLDOWN 20 SECONDS
 #define RAGE_LIFE_COOLDOWN 30 SECONDS
 
-/mob/living/carbon/werewolf/Life()
+/mob/living/carbon/wereraven/Life()
 	update_icons()
 	update_rage_hud()
 	return..()
 
 /mob/living/carbon/Life()
 	. = ..()
-	if(isgarou(src) || iswerewolf(src))
+	if(isgarou(src) || iscorax(src)) //we still use the isgarou check because this is technically the same specie
 		if(key && stat <= HARD_CRIT)
 			var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
 			if(P)
@@ -31,22 +31,17 @@
 								if(last_gnosis_buff+300 < world.time)
 									last_gnosis_buff = world.time
 									adjust_gnosis(1, src, TRUE)
-			if(iscrinos(src))
-				if(auspice.base_breed == "Crinos")
-					gaining_rage = FALSE
+			/*if(iscrinos(src))
+				if(auspice.base_breed == "Crinos") //	Corax have no Metis, thus they will always get pissed when in Crinos.
+					gaining_rage = FALSE*/
 			//else if(auspice.rage == 0) //! [ChillRaccoon] - FIXME
 			//	transformator.trans_gender(src, auspice.base_breed)
-			if(islupus(src))
-				if(auspice.base_breed == "Lupus")
-					gaining_rage = FALSE
-			//else if(auspice.rage == 0)
-			//	transformator.trans_gender(src, auspice.base_breed)
-			if(ishuman(src))
-				if(auspice.base_breed == "Homid")
-					gaining_rage = FALSE
-			//else if(auspice.rage == 0)
-			//	transformator.trans_gender(src, auspice.base_breed)
 
+			if(ishuman(src))
+				gaining_rage = FALSE
+
+			if(iscorvid(src))
+				gaining_rage = FALSE // Corax will spend most of the time talking, disabling rage generation also makes it harder for them to get their gifts active.
 
 			if(gaining_rage && client)
 				if(((last_rage_gain + RAGE_LIFE_COOLDOWN) < world.time) && (auspice.rage <= 6))
@@ -56,7 +51,7 @@
 			if(masquerade == 0)
 				if(!is_special_character(src))
 					if(auspice.gnosis)
-						to_chat(src, "<span class='warning'>My Veil is too low to connect with the spirits of Umbra!</span>")
+						to_chat(src, "<span class='warning'>My Veil is too low to connect with the Umbra!</span>")
 						adjust_gnosis(-1, src, FALSE)
 
 			if(auspice.rage >= 9)
@@ -79,26 +74,23 @@
 			last_veil_restore = world.time
 			return
 
-	switch(auspice.tribe.name)
-		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
-			if(istype(get_area(src), /area/vtm/forest))
+		if(istype(get_area(src), /area/vtm/forest)) // for now Corax only restore their veil in the forest, we can tweak this later
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
-		if("Bone Gnawers", "Children of Gaia", "Shadow Lords")
-			if(istype(get_area(src), /area/vtm/interior/cog/caern))
+			/*if(istype(get_area(src), /area/vtm/interior/cog/caern))
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
-		if("Glass Walkers")
+
 			if(istype(get_area(src), /area/vtm/interior/glasswalker))
 				adjust_veil(1, random = -1)
-				last_veil_restore = world.time
+				last_veil_restore = world.time*/
 
-		if("Black Spiral Dancers")
+		/*if("Black Spiral Dancers") 								//I do not know if we wish to implement buzzards yet, I'll think about it
 			if(istype(get_area(src), /area/vtm/interior/endron_facility) && masquerade < 5)
 				adjust_veil(1, random = -1)
-				last_veil_restore = world.time
+				last_veil_restore = world.time*/
 
 /datum/species/garou/spec_life(mob/living/carbon/human/H)
 	. = ..()
@@ -113,28 +105,28 @@
 		if(H.CheckEyewitness(H, H, 3, FALSE))
 			H.adjust_veil(-1,random = -1)
 
-/mob/living/carbon/werewolf/crinos/Life()
+/mob/living/carbon/wereraven/crinos/Life()
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
-/mob/living/carbon/werewolf/handle_status_effects()
+/mob/living/carbon/wereraven/handle_status_effects()
 	..()
 	//natural reduction of movement delay due to stun.
 	if(move_delay_add > 0)
 		move_delay_add = max(0, move_delay_add - rand(1, 2))
 
-/mob/living/carbon/werewolf/handle_changeling()
+/mob/living/carbon/wereraven/handle_changeling()
 	return
 
-/mob/living/carbon/werewolf/handle_fire()//Aliens on fire code
+/mob/living/carbon/wereraven/handle_fire()//Aliens on fire code
 	. = ..()
 	if(.) //if the mob isn't on fire anymore
 		return
 	adjust_bodytemperature(BODYTEMP_HEATING_MAX) //If you're on fire, you heat up!
 
 /mob/living/carbon/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, mob/living/carbon/vessel, forced)
-	if(iswerewolf(src))
+	if(iscorax(src))
 		var/mob/living/carbon/player = transformator.human_form.resolve()
 		player.adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, src)
 	if(!GLOB.canon_event)
@@ -222,7 +214,7 @@
 			current_value = max(0, current_value + amount)
 			if(renownrank > AuspiceRankCheck(src))
 				renownrank = AuspiceRankCheck(src)
-				to_chat(vessel, span_userdanger("You are now ai  [RankName(src.renownrank)]."))
+				to_chat(vessel, span_userdanger("You are now a  [RankName(src.renownrank)]."))
 
 		if(amount > 0)
 			if(threshold && current_value >= threshold)
@@ -288,44 +280,13 @@
 
 /mob/living/carbon/proc/AuspiceRankCheck(mob/living/carbon/user)
 	switch(auspice.name)
-		if("Ahroun")
-			if(glory >= 10 && honor >= 9 && wisdom >= 4) return 5
-			if(glory >= 9 && honor >= 4 && wisdom >= 2) return 4
-			if(glory >= 6 && honor >= 3 && wisdom >= 1) return 3
-			if(glory >= 4 && honor >= 1 && wisdom >= 1) return 2
-			if(glory >= 2 || honor >= 1) return 1
-			return FALSE
-
-		if("Galliard")
-			if(glory >= 9 && honor >= 5 && wisdom >= 9) return 5
-			if(glory >= 7 && honor >= 2 && wisdom >= 6) return 4
-			if(glory >= 4 && honor >= 2 && wisdom >= 4) return 3
-			if(glory >= 4 && wisdom >= 2) return 2
-			if(glory >= 2 && wisdom >= 1) return 1
-			return FALSE
-
-		if("Philodox")
-			if(glory >= 4 && honor >= 10 && wisdom >= 9) return 5
-			if(glory >= 3 && honor >= 8 && wisdom >= 4) return 4
-			if(glory >= 2 && honor >= 6 && wisdom >= 2) return 3
-			if(glory >= 1 && honor >= 4 && wisdom >= 1) return 2
-			if(honor >= 3) return 1
-			return FALSE
 
 		if("Theurge")
-			if(glory >= 4 && honor >= 9 && wisdom >= 10) return 5
+			if(glory >= 4 && honor >= 9 && wisdom >= 10) return 5 //placeholder for the Corax renown ranks
 			if(glory >= 4 && honor >= 2 && wisdom >= 9) return 4
 			if(glory >= 2 && honor >= 1 && wisdom >= 7) return 3
 			if(glory >= 1 && wisdom >= 5) return 2
 			if(wisdom >= 3) return 1
-			return FALSE
-
-		if("Ragabash")
-			if((glory+honor+wisdom) >= 25) return 5
-			if((glory+honor+wisdom) >= 19) return 4
-			if((glory+honor+wisdom) >= 13) return 3
-			if((glory+honor+wisdom) >= 7) return 2
-			if((glory+honor+wisdom) >= 3) return 1
 			return FALSE
 
 	return FALSE
