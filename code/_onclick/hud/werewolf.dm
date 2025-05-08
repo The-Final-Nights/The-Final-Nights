@@ -71,7 +71,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
-		C.transformator.trans_gender(C, "Corax")
+		C.transformator.trans_gender(C, "Corax Crinos")
 
 /atom/movable/screen/transform_corvid
 	name = "corvid"

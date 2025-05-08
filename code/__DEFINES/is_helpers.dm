@@ -93,11 +93,9 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define islupus(A) (istype(A, /mob/living/carbon/werewolf/lupus))
 
-#define iscorax(A) (istype(A, /mob/living/carbon/werewolf/corax))
+#define iscorvid(A) (istype(A, /mob/living/carbon/werewolf/lupus/corvid))
 
-#define iscorvid(A) (istype(A, /mob/living/carbon/werewolf/corvid))
-
-#define iscoraxcrinos(A) (istype(A, /mob/living/carbon/werewolf/crinos)) //not sure if necessary, not taking chances
+#define iscoraxcrinos(A) (istype(A, /mob/living/carbon/werewolf/corax_crinos)) //not sure if necessary, not taking chances
 
 #define isalien(A) (istype(A, /mob/living/carbon/alien))
 

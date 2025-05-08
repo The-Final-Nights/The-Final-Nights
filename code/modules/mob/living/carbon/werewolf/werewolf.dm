@@ -80,6 +80,13 @@
 
 	var/assigned_quirks = FALSE
 
+/mob/living/carbon/werewolf/corax_crinos // the Corax variety of the Crinos form, a subtype of the main one
+	name = "corax_crinos"
+	icon = 'code/modules/wod13/corax_crinos.dmi'
+	verb_say = "caws"
+	verb_exclaim = "squawks"
+	verb_yell = "shrieks"
+
 /mob/living/carbon/werewolf/update_resting()
 	if(resting)
 		ADD_TRAIT(src, TRAIT_IMMOBILIZED, RESTING_TRAIT)

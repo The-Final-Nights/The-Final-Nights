@@ -85,12 +85,12 @@
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
-		if("Bone Gnawers", "Children of Gaia", "Shadow Lords")
+		if("Bone Gnawers", "Children of Gaia", "Shadow Lords", "Corax")
 			if(istype(get_area(src), /area/vtm/interior/cog/caern))
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
-		if("Glass Walkers")
+		if("Glass Walkers", "Corax")
 			if(istype(get_area(src), /area/vtm/interior/glasswalker))
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time

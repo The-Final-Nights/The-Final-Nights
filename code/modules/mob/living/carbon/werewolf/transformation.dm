@@ -23,18 +23,18 @@
 	lupus = lupus_form.resolve()
 	lupus?.transformator = src
 
-	/*var/mob/living/carbon/werewolf/corax_crinos/corax = new()
+	var/mob/living/carbon/werewolf/corax_crinos/corax = new()
 	corax_form = WEAKREF(corax)
 	corax = corax_form.resolve()
 	corax?.transformator = src
 
-	var/mob/living/carbon/werewolf/corvid/corvid = new()
+	var/mob/living/carbon/werewolf/lupus/corvid/corvid = new()
 	corvid_form = WEAKREF(corvid)
 	corvid = corvid_form.resolve()
 	corvid?.transformator = src
 
 	corax?.moveToNullspace()
-	corvid?.moveToNullspace()*/
+	corvid?.moveToNullspace()
 
 	crinos?.moveToNullspace()
 	lupus?.moveToNullspace()
@@ -121,7 +121,7 @@
 					ntransform.Scale(1, 1.75)
 			if(ishuman(trans))
 				ntransform.Scale(1.25, 1.5)
-		/*if("Corvid")
+		if("Corvid")
 			/*for(var/spoken_language in garou_lang.spoken_languages)
 				garou_lang.remove_language(spoken_language, FALSE, TRUE) // We do not remove known languages from were-ravens, their whole shtick is "talking".
 
@@ -138,10 +138,10 @@
 			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
 			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)*/
 			if(iscorvid(trans))
-				var/mob/living/carbon/werewolf/corvid/corvid = trans
-					ntransform.Scale(1, 1.75)
+				var/mob/living/carbon/werewolf/lupus/corvid/corvid = trans
+				ntransform.Scale(1, 1.75)
 			if(ishuman(trans))
-				ntransform.Scale(1.25, 1.5)*/
+				ntransform.Scale(1.25, 1.5)
 
 		if("Homid")
 			for(var/spoken_language in garou_lang.understood_languages)
@@ -195,13 +195,13 @@
 
 			addtimer(CALLBACK(src, PROC_REF(transform_crinos), trans, crinos), 30 DECISECONDS)
 
-		/*if("Corvid")
+		if("Corvid")
 			if(iscorvid(trans))
 				transformating = FALSE
 				return
 			if(!corvid_form)
 				return
-			var/mob/living/carbon/werewolf/corvid/corvid = corvid_form.resolve()
+			var/mob/living/carbon/werewolf/lupus/corvid/corvid = corvid_form.resolve()
 			if(!corvid)
 				corvid_form = null
 				return
@@ -215,14 +215,14 @@
 				if(B)
 					qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_corvid), trans, corvid), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_lupus), trans, corvid), 30 DECISECONDS)
 		if("Corax Crinos")
 			if(iscoraxcrinos(trans))
 				transformating = FALSE
 				return
 			if(!corax_form)
 				return
-			var/mob/living/carbon/werewolf/corax/crinos/crinos = corax_form.resolve()
+			var/mob/living/carbon/werewolf/corax_crinos/crinos = corax_form.resolve()
 			if(!crinos)
 				corax_form = null
 				return
@@ -235,7 +235,7 @@
 				if(B)
 					qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_crinos), trans, crinos), 30 DECISECONDS)*/
+			addtimer(CALLBACK(src, PROC_REF(transform_crinos), trans, crinos), 30 DECISECONDS)
 
 		if("Homid")
 			if(ishuman(trans))

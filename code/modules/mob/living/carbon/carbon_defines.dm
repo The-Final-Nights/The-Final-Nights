@@ -134,7 +134,6 @@
 
 	var/datum/auspice/auspice
 	var/datum/werewolf_holder/transformation/transformator
-	var/datum/werewolf_holder/transformation_corax/corax_transformator // the corax variant on werewolf shapeshifting
 
 	var/list/beastmaster = list()
 
