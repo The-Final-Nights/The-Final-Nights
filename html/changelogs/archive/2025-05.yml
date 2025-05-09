@@ -48,3 +48,10 @@
       effect has been changed from "STAY DOWN!!" to "Stay down."
   - rscadd: Dom 3's "THINK TWICE!!" has been changed to "Think twice."
   - rscadd: Dom 5's "YOU SHOULD HARM YOURSELF NOW!!" has been changed to "Hit yourself."
+2025-05-08:
+  EmilyFontaine:
+  - rscadd: coffee & tea reagents to the soda dispenser list
+  necti-dev:
+  - bugfix: Butterflies no longer have 5 blood points for vamps to feed on.
+  - rscadd: Having the Presence disciplines gives you the Charmer trait, so that NPCs
+      respond more favorably to you when you grab them.
