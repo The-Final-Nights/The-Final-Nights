@@ -3382,65 +3382,76 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
 	character.health = character.maxHealth
 
-	if(pref_species.name == "Vampire")
-		var/datum/vampireclane/CLN = new clane.type()
+	switch(pref_species.id)
+		if("kindred")
+			var/datum/vampireclane/CLN = new clane.type()
 
-		if(CLN.name == CLAN_MALKAVIAN)
-			var/datum/vampireclane/malkavian/malk = new clane.type()
-			malk.derangement = derangement
-			CLN = malk
+			if(CLN.name == CLAN_MALKAVIAN)
+				var/datum/vampireclane/malkavian/malk = new clane.type()
+				malk.derangement = derangement
+				CLN = malk
 
-		var/datum/morality/MOR = new morality_path.type()
-		character.clane = CLN
-		character.morality_path = MOR
-		character.clane.current_accessory = clane_accessory
-		character.maxbloodpool = 10 + ((13 - generation) * 3)
-		character.bloodpool = rand(2, character.maxbloodpool)
-		character.generation = generation
-		character.max_yin_chi = character.maxbloodpool
-		character.yin_chi = character.max_yin_chi
-		// TODO: detach is_enlightened from the clan datum
-		character.clane.is_enlightened = is_enlightened
-	else
-		character.clane = null
-		character.morality_path = null
-		character.generation = 13
-		character.bloodpool = character.maxbloodpool
-		if(pref_species.name == "Kuei-Jin")
+			var/datum/morality/MOR = new morality_path.type()
+			character.clane = CLN
+			character.morality_path = MOR
+			character.clane.current_accessory = clane_accessory
+			character.generation = generation
+			character.maxbloodpool = 10 + ((13 - generation) * 3)
+			character.bloodpool = rand(2, character.maxbloodpool)
+			character.max_yin_chi = character.maxbloodpool
+			character.yin_chi = character.max_yin_chi
+			// TODO: detach is_enlightened from the clan datum
+			character.clane.is_enlightened = is_enlightened
+			character.morality_path.score = path_score
+		if("kuei-jin")
 			character.yang_chi = yang
 			character.max_yang_chi = yang
 			character.yin_chi = yin
 			character.max_yin_chi = yin
 			character.max_demon_chi = po
-		else
-			character.yang_chi = 3
-			character.max_yang_chi = 3
-			character.yin_chi = 2
-			character.max_yin_chi = 2
+		if("gargoyle")
+			var/datum/vampireclane/CLN = new clane.type()
 
-	if(pref_species.name == "Werewolf")
-		switch(tribe.name)
-			if("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens")
-				character.yin_chi = 1
-				character.max_yin_chi = 1
-				character.yang_chi = 5 + (auspice_level * 2)
-				character.max_yang_chi = 5 + (auspice_level * 2)
-			if("Glass Walkers","Bone Gnawers")
-				character.yin_chi = 1 + auspice_level
-				character.max_yin_chi = 1 + auspice_level
-				character.yang_chi = 5 + auspice_level
-				character.max_yang_chi = 5 + auspice_level
-			if("Black Spiral Dancers","Ghost Council")
-				character.yin_chi = 1 + auspice_level * 2
-				character.max_yin_chi = 1 + auspice_level * 2
-				character.yang_chi = 5
-				character.max_yang_chi = 5
-		character.honor = honor
-		character.wisdom = wisdom
-		character.glory = glory
-		character.renownrank = renownrank
-	if(pref_species.name == "Vampire")
-		character.morality_path.score = path_score
+			if(CLN.name == CLAN_MALKAVIAN)
+				var/datum/vampireclane/malkavian/malk = new clane.type()
+				malk.derangement = derangement
+				CLN = malk
+
+			var/datum/morality/MOR = new morality_path.type()
+			character.clane = CLN
+			character.clane.current_accessory = clane_accessory
+			character.maxbloodpool = 10 + ((13 - generation) * 3)
+			character.bloodpool = rand(2, character.maxbloodpool)
+			character.generation = generation
+			character.max_yin_chi = character.maxbloodpool
+			character.yin_chi = character.max_yin_chi
+			character.morality_path = null
+		if("garou")
+			switch(tribe.name)
+				if("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens")
+					character.yin_chi = 1
+					character.max_yin_chi = 1
+					character.yang_chi = 5 + (auspice_level * 2)
+					character.max_yang_chi = 5 + (auspice_level * 2)
+				if("Glass Walkers","Bone Gnawers")
+					character.yin_chi = 1 + auspice_level
+					character.max_yin_chi = 1 + auspice_level
+					character.yang_chi = 5 + auspice_level
+					character.max_yang_chi = 5 + auspice_level
+				if("Black Spiral Dancers","Ghost Council")
+					character.yin_chi = 1 + auspice_level * 2
+					character.max_yin_chi = 1 + auspice_level * 2
+					character.yang_chi = 5
+					character.max_yang_chi = 5
+			character.honor = honor
+			character.wisdom = wisdom
+			character.glory = glory
+			character.renownrank = renownrank
+		else
+			character.clane = null
+			character.morality_path = null
+			character.generation = 14 // Haha, thinbloods can dominate humans once more.
+			character.bloodpool = character.maxbloodpool
 
 	character.masquerade = masquerade
 	if(!character_setup)
