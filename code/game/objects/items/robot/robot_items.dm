@@ -786,13 +786,15 @@
 ***********************************************************************/
 //These are tools that can hold only specific items. For example, the mediborg gets one that can only hold beakers and bottles.
 
-/obj/item/borg/apparatus/
+/obj/item/borg/apparatus
 	name = "unknown storage apparatus"
 	desc = "This device seems nonfunctional."
 	icon = 'icons/mob/robot_items.dmi'
 	icon_state = "hugmodule"
 	var/obj/item/stored
 	var/list/storable = list()
+
+/obj/item/borg/apparatus/organ_storage
 
 /obj/item/borg/apparatus/Initialize()
 	. = ..()

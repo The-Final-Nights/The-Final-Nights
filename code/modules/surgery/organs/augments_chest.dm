@@ -200,30 +200,6 @@
 	if(!owner_turf) // No more runtimes from being stuck in nullspace.
 		return FALSE
 
-	// Priority 1: use air from environment.
-	var/datum/gas_mixture/environment = owner_turf.return_air()
-	if(environment && environment.return_pressure() > 30)
-		ion_trail.generate_effect()
-		return TRUE
+	ion_trail.generate_effect()
+	return TRUE
 
-	// Priority 2: use plasma from internal plasma storage.
-	// (just in case someone would ever use this implant system to make cyber-alien ops with jetpacks and taser arms)
-	if(owner.getPlasma() >= num*100)
-		owner.adjustPlasma(-num*100)
-		ion_trail.generate_effect()
-		return TRUE
-
-	// Priority 3: use internals tank.
-	var/datum/gas_mixture/internal_mix = owner.internal.return_air()
-	if(internal_mix && internal_mix.total_moles() > num)
-		var/datum/gas_mixture/removed = internal_mix.remove(num)
-		if(removed.total_moles() > 0.005)
-			owner_turf.assume_air(removed)
-			ion_trail.generate_effect()
-			return TRUE
-		else
-			owner_turf.assume_air(removed)
-			ion_trail.generate_effect()
-
-	toggle(silent = TRUE)
-	return FALSE

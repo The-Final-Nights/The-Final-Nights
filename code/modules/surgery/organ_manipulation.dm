@@ -116,7 +116,7 @@
 				organs -= organ
 				organs[organ.name] = organ
 
-			target_organ = input("Remove which organ?", "Surgery", null, null) as null|anything in sortList(organs)
+			target_organ = input("Remove which organ?", "Surgery", null, null) as null|anything in sort_list(organs)
 			if(target_organ && user && target && user.Adjacent(target) && user.get_active_held_item() == tool)
 				target_organ = organs[target_organ]
 				if(!target_organ)
@@ -154,7 +154,7 @@
 			display_results(user, target, "<span class='notice'>You successfully extract [target_organ] from [target]'s [parse_zone(target_zone)].</span>",
 				"<span class='notice'>[user] successfully extracts [target_organ] from [target]'s [parse_zone(target_zone)]!</span>",
 				"<span class='notice'>[user] successfully extracts something from [target]'s [parse_zone(target_zone)]!</span>")
-			log_combat(user, target, "surgically removed [target_organ.name] from", addition="COMBAT MODE: [uppertext(user.combat_mode)]")
+			log_combat(user, target, "surgically removed [target_organ.name] from", addition="HARM MODE: [uppertext(user.m_intent == INTENT_HARM)]")
 			target_organ.Remove(target)
 			target_organ.forceMove(get_turf(target))
 		else
