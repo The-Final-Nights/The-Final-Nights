@@ -223,29 +223,13 @@
 		return
 	burning_temperature = null
 
-/datum/reagent/cryostylane/on_mob_add(mob/living/consumer, amount)
-	. = ..()
-	consumer.mob_surgery_speed_mod = 1-((CRYO_SPEED_PREFACTOR * (1 - creation_purity))+CRYO_SPEED_CONSTANT) //10% - 30% slower
-	consumer.color = COLOR_CYAN
-
-/datum/reagent/cryostylane/on_mob_delete(mob/living/consumer)
-	. = ..()
-	consumer.mob_surgery_speed_mod = 1
-	consumer.color = COLOR_WHITE
-
-//Pauses decay! Does do something, I promise.
-/datum/reagent/cryostylane/on_mob_dead(mob/living/carbon/consumer, delta_time)
-	. = ..()
-	metabolization_rate = 0.05 * REM //slower consumption when dead
-
-/datum/reagent/cryostylane/on_mob_life(mob/living/carbon/consumer, delta_time, times_fired)
-	metabolization_rate = 0.25 * REM//faster consumption when alive
-	if(consumer.reagents.has_reagent(/datum/reagent/oxygen))
-		consumer.reagents.remove_reagent(/datum/reagent/oxygen, 0.5 * REM * delta_time)
-		consumer.adjust_bodytemperature(-15 * REM * delta_time)
-		if(ishuman(consumer))
-			var/mob/living/carbon/human/humi = consumer
-			humi.adjust_coretemperature(-15 * REM * delta_time)
+/datum/reagent/cryostylane/on_mob_life(mob/living/carbon/M) //TODO: code freezing into an ice cube
+	if(M.reagents.has_reagent(/datum/reagent/oxygen))
+		M.reagents.remove_reagent(/datum/reagent/oxygen, 0.5)
+		M.adjust_bodytemperature(-15)
+		if(ishuman(M))
+			var/mob/living/carbon/human/humi = M
+			humi.adjust_coretemperature(-15)
 	..()
 
 /datum/reagent/cryostylane/expose_turf(turf/exposed_turf, reac_volume)
