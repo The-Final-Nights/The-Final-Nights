@@ -908,13 +908,13 @@ GLOBAL_LIST_EMPTY(selectable_races)
 				if("spines")
 					S = GLOB.spines_list[H.dna.features["spines"]]
 				if("waggingspines")
-					accessory = GLOB.animated_spines_list[source.dna.features["spines"]]
+					S = GLOB.animated_spines_list[H.dna.features["spines"]]
 				if("ears")
 					S = GLOB.ears_list[H.dna.features["ears"]]
 				if("body_markings")
-					accessory = GLOB.body_markings_list[source.dna.features["body_markings"]]
+					S = GLOB.body_markings_list[H.dna.features["body_markings"]]
 				if("legs")
-					accessory = GLOB.legs_list[source.dna.features["legs"]]
+					S = GLOB.legs_list[H.dna.features["legs"]]
 				if("caps")
 					S = GLOB.caps_list[H.dna.features["caps"]]
 				if("tail_monkey")

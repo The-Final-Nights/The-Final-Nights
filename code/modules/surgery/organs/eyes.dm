@@ -480,3 +480,8 @@
 	name = "pod eyes"
 	desc = "Strangest salad you've ever seen."
 	icon_state = "eyes_pod"
+
+/obj/item/organ/eyes/night_vision/kiasyd
+	name = "kiasyd eyes"
+	desc = "These eyes are a bit too big for your head."
+	icon_state = "eyes_kiasyd"

@@ -73,12 +73,7 @@
 	if(!location)
 		return FALSE
 
-	var/datum/gas_mixture/environment = location.return_air()
-	if(environment && !(environment.return_pressure() > 30))
-		to_chat(human, span_warning("The atmosphere is too thin for you to fly!"))
-		return FALSE
-	else
-		return TRUE
+	return TRUE
 
 ///Slipping but in the air?
 /obj/item/organ/external/wings/functional/proc/fly_slip(mob/living/carbon/human/human)
@@ -195,10 +190,8 @@
 	SIGNAL_HANDLER
 
 	if(!isspaceturf(owner.loc) && !burnt)
-		var/datum/gas_mixture/current = owner.loc.return_air()
-		if(current && (current.return_pressure() >= ONE_ATMOSPHERE*0.85)) //as long as there's reasonable pressure and no gravity, flight is possible
-			ADD_TRAIT(owner, TRAIT_FREE_FLOAT_MOVEMENT, src)
-			return
+		ADD_TRAIT(owner, TRAIT_FREE_FLOAT_MOVEMENT, src)
+		return
 
 	REMOVE_TRAIT(owner, TRAIT_FREE_FLOAT_MOVEMENT, src)
 
@@ -208,7 +201,6 @@
 
 	if(!burnt && human.bodytemperature >= 800 && human.fire_stacks > 0) //do not go into the extremely hot light. you will not survive
 		to_chat(human, span_danger("Your precious wings burn to a crisp!"))
-		SEND_SIGNAL(human, COMSIG_ADD_MOOD_EVENT, "burnt_wings", /datum/mood_event/burnt_wings)
 
 		burn_wings()
 		human.update_body_parts()
