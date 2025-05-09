@@ -236,7 +236,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/werewolf_name
 	var/auspice_level = 1
-	var/is_corax = 0 // are we Corax? This is likely a very dirty way of doing it.
+	var/is_corax // are we Corax? This is likely a very dirty way of doing it.
 	var/clane_accessory
 
 	var/dharma_type = /datum/dharma
@@ -3576,7 +3576,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.auspice.gnosis = 3
 				character.auspice.start_gnosis = 3
 				character.auspice.base_breed = "Crinos"
-		if(character.transformator?.crinos_form && character.transformator?.lupus_form)
+		if(character.transformator?.crinos_form && character.transformator?.lupus_form && !HAS_TRAIT(character,TRAIT_CORAX))
 			var/mob/living/carbon/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
 			var/mob/living/carbon/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
 
@@ -3618,7 +3618,50 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			lupus.health = lupus.maxHealth
 			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
 			crinos.health = crinos.maxHealth
+		else if(HAS_TRAIT(character,TRAIT_CORAX)/*character.transformator?.corax_form && character.transformator?.corvid_form*/) // if we have the Corax tribe, use the Corax forms instead..
+			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
 
+			if(!cor_crinos)
+				character.transformator.corax_form = null
+				CRASH("[key_name(character)]'s corax_form weakref contained no corax crinos mob!")
+			if(!corvid)
+				character.transformator.corvid_form = null
+				CRASH("[key_name(character)]'s corvid_form weakref contained no corvid mob!")
+
+			//cor_crinos.sprite_color = werewolf_color
+			cor_crinos.icon_state = werewolf_color // gotta use Icon state for this one apparently
+			cor_crinos.sprite_scar = werewolf_scar // I think having scars messes up the sprites
+			cor_crinos.sprite_hair = werewolf_hair
+			cor_crinos.sprite_hair_color = werewolf_hair_color
+			cor_crinos.sprite_eye_color = werewolf_eye_color
+			corvid.sprite_color = werewolf_color
+			corvid.sprite_eye_color = werewolf_eye_color
+
+			if(werewolf_name)
+				cor_crinos.name = werewolf_name
+				corvid.name = werewolf_name
+			else
+				cor_crinos.name = real_name
+				corvid.name = real_name
+
+			cor_crinos.physique = physique
+			cor_crinos.dexterity = dexterity
+			cor_crinos.mentality = mentality
+			cor_crinos.social = social
+			cor_crinos.blood = blood
+
+			corvid.physique = physique
+			corvid.dexterity = dexterity
+			corvid.mentality = mentality
+			corvid.social = social
+			corvid.athletics = athletics // corvid also get athletics so that they can jump further, might be absolutely batshit though
+			corvid.blood = blood
+
+			corvid.maxHealth = round((corvid::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			corvid.health = corvid.maxHealth
+			cor_crinos.maxHealth = round((cor_crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			cor_crinos.health = cor_crinos.maxHealth
 	if(pref_species.mutant_bodyparts["tail_lizard"])
 		character.dna.species.mutant_bodyparts["tail_lizard"] = pref_species.mutant_bodyparts["tail_lizard"]
 	if(pref_species.mutant_bodyparts["spines"])

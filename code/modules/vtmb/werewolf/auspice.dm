@@ -16,7 +16,7 @@
 
 	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
 	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
-	var/mob/living/carbon/werewolf/corax_crinos/cor_crinos = C.transformator.corax_form?.resolve()
+	var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = C.transformator.corax_form?.resolve()
 	var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
 	lupus?.auspice = src
 	lupus?.dna = C.dna
@@ -24,12 +24,14 @@
 	crinos?.dna = C.dna
 	cor_crinos?.auspice = src
 	cor_crinos?.dna = C.dna
+	ADD_TRAIT(cor_crinos, TRAIT_CORAX, tribe )
 	corvid?.auspice = src
 	corvid?.dna = C.dna
+	ADD_TRAIT(corvid, TRAIT_CORAX, tribe)
 
 
 	rage = start_rage
-	if(length(gifts))
+	if(length(gifts)) // This grants the auspice gifts, I believe
 		for(var/i in gifts)
 			var/datum/action/A1 = new i()
 			A1.Grant(C)
@@ -42,7 +44,7 @@
 			var/datum/action/A5 = new i()
 			A5.Grant(corvid)
 
-	for(var/i in 1 to level)
+	for(var/i in 1 to level) // This grants the tribe-specific gifts, linked to the werewolf "power" stat
 		var/zalupa
 		zalupa = tribe.tribal_gifts[i]
 		var/datum/action/A = new zalupa()

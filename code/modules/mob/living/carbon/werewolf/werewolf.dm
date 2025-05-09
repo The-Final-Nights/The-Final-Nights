@@ -80,8 +80,8 @@
 
 	var/assigned_quirks = FALSE
 
-/mob/living/carbon/werewolf/corax_crinos // the Corax variety of the Crinos form, a subtype of the main one
-	name = "corax_crinos"
+/mob/living/carbon/werewolf/corax // the Corax variety of the Crinos form, a subtype of the main one
+	name = "Corax"
 	icon = 'code/modules/wod13/corax_crinos.dmi'
 	verb_say = "caws"
 	verb_exclaim = "squawks"
@@ -198,6 +198,37 @@
 		)
 
 	werewolf_armor = 30
+
+/mob/living/carbon/werewolf/corax/corax_crinos // The specific stats for the Corax variation of Crinos
+	name = "corax"
+	icon_state = "black"
+	mob_size = MOB_SIZE_HUGE
+	butcher_results = list(/obj/item/food/meat/slab = 5)
+	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
+	limb_destroyer = 1
+
+	hud_type = /datum/hud/werewolf
+	melee_damage_lower = 35
+	melee_damage_upper = 45 // less damage for were-ravens
+	health = 250
+	maxHealth = 250
+//	speed = -1  doesn't work on carbons
+	var/obj/item/r_store = null
+	var/obj/item/l_store = null
+	var/pounce_cooldown = 0
+	var/pounce_cooldown_time = 30
+	pixel_w = -8
+//	deathsound = 'sound/voice/hiss6.ogg'
+	bodyparts = list(
+		/obj/item/bodypart/chest/crinos,
+		/obj/item/bodypart/head/crinos,
+		/obj/item/bodypart/l_arm/crinos,
+		/obj/item/bodypart/r_arm/crinos,
+		/obj/item/bodypart/r_leg/crinos,
+		/obj/item/bodypart/l_leg/crinos,
+		)
+
+
 
 /datum/movespeed_modifier/crinosform
 	multiplicative_slowdown = -0.2

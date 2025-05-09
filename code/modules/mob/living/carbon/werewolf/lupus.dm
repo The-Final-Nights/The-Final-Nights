@@ -31,7 +31,9 @@
 	name = "corvid"
 	icon_state = "black"
 	icon = 'code/modules/wod13/corax_corvid.dmi'
-
+	verb_say = "caws"
+	verb_exclaim = "squawks"
+	verb_yell = "shrieks"
 
 
 /datum/movespeed_modifier/lupusform
@@ -82,7 +84,7 @@
 		if(CheckEyewitness(src, src, 7, FALSE))
 			src.adjust_veil(-1,random = -1)
 	else
-		if(!(HAS_TRAIT(src, TRAIT_DOGWOLF) || !HAS_TRAIT(src, TRAIT_CORAX))) // ravens don't spook people
+		if(!(HAS_TRAIT(src, TRAIT_DOGWOLF) || !iscorax(src))) // ravens don't spook people
 			if(CheckEyewitness(src, src, 4, FALSE))
 				src.adjust_veil(-1,threshold = 4)
 	..()

@@ -23,7 +23,7 @@
 	lupus = lupus_form.resolve()
 	lupus?.transformator = src
 
-	var/mob/living/carbon/werewolf/corax_crinos/corax = new()
+	var/mob/living/carbon/werewolf/corax/corax_crinos/corax = new()
 	corax_form = WEAKREF(corax)
 	corax = corax_form.resolve()
 	corax?.transformator = src
@@ -35,7 +35,6 @@
 
 	corax?.moveToNullspace()
 	corvid?.moveToNullspace()
-
 	crinos?.moveToNullspace()
 	lupus?.moveToNullspace()
 
@@ -225,7 +224,7 @@
 				return
 			if(!corax_form)
 				return
-			var/mob/living/carbon/werewolf/corax_crinos/cor_crinos = corax_form.resolve()
+			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = corax_form.resolve()
 			if(!cor_crinos)
 				corax_form = null
 				return
@@ -327,7 +326,7 @@
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	crinos.update_icons()
 
-/datum/werewolf_holder/transformation/proc/transform_cor_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/corax_crinos/cor_crinos)
+/datum/werewolf_holder/transformation/proc/transform_cor_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos)
 	PRIVATE_PROC(TRUE)
 
 	if(trans.stat == DEAD)

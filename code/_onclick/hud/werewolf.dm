@@ -142,36 +142,66 @@
 		build_hand_slots()
 
 //begin buttons
+	if HAS_TRAIT(owner, TRAIT_CORAX) // if we picked the Corax tribe, we get the HUD that makes you transform into the various Corax forms
+		using = new /atom/movable/screen/fullscreen_hud()
+		using.screen_loc = ui_full_inventory
+		using.hud = src
+		static_inventory += using
 
-	using = new /atom/movable/screen/fullscreen_hud()
-	using.screen_loc = ui_full_inventory
-	using.hud = src
-	static_inventory += using
+		transform_werewolf = new /atom/movable/screen/transform_corvid()
+		transform_werewolf.screen_loc = ui_werewolf_lupus
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
 
-	transform_werewolf = new /atom/movable/screen/transform_lupus()
-	transform_werewolf.screen_loc = ui_werewolf_lupus
-	transform_werewolf.hud = src
-	static_inventory += transform_werewolf
+		transform_werewolf = new /atom/movable/screen/transform_corax_crinos()
+		transform_werewolf.screen_loc = ui_werewolf_crinos
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
 
-	transform_werewolf = new /atom/movable/screen/transform_crinos()
-	transform_werewolf.screen_loc = ui_werewolf_crinos
-	transform_werewolf.hud = src
-	static_inventory += transform_werewolf
+		transform_werewolf = new /atom/movable/screen/transform_homid()
+		transform_werewolf.screen_loc = ui_werewolf_homid
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
 
-	transform_werewolf = new /atom/movable/screen/transform_homid()
-	transform_werewolf.screen_loc = ui_werewolf_homid
-	transform_werewolf.hud = src
-	static_inventory += transform_werewolf
+		transform_werewolf = new /atom/movable/screen/auspice() // The Corax retain the ability to look at the moon and howl, since they still have Rage.
+		transform_werewolf.screen_loc = ui_werewolf_auspice
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
 
-	auspice_icon = new /atom/movable/screen/auspice()
-	auspice_icon.screen_loc = ui_werewolf_auspice
-	auspice_icon.hud = src
-	static_inventory += auspice_icon
+		rage_icon = new /atom/movable/screen/rage()
+		rage_icon.screen_loc = ui_werewolf_rage
+		rage_icon.hud = src
+		infodisplay += rage_icon
+	else
+		using = new /atom/movable/screen/fullscreen_hud()
+		using.screen_loc = ui_full_inventory
+		using.hud = src
+		static_inventory += using
 
-	rage_icon = new /atom/movable/screen/rage()
-	rage_icon.screen_loc = ui_werewolf_rage
-	rage_icon.hud = src
-	infodisplay += rage_icon
+		transform_werewolf = new /atom/movable/screen/transform_lupus()
+		transform_werewolf.screen_loc = ui_werewolf_lupus
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
+
+		transform_werewolf = new /atom/movable/screen/transform_crinos()
+		transform_werewolf.screen_loc = ui_werewolf_crinos
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
+
+		transform_werewolf = new /atom/movable/screen/transform_homid()
+		transform_werewolf.screen_loc = ui_werewolf_homid
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
+
+		auspice_icon = new /atom/movable/screen/auspice()
+		auspice_icon.screen_loc = ui_werewolf_auspice
+		auspice_icon.hud = src
+		static_inventory += auspice_icon
+
+		rage_icon = new /atom/movable/screen/rage()
+		rage_icon.screen_loc = ui_werewolf_rage
+		rage_icon.hud = src
+		infodisplay += rage_icon
 
 	if(iscrinos(owner))
 		using = new /atom/movable/screen/swap_hand()
