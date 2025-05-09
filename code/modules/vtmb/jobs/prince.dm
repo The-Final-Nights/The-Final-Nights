@@ -25,7 +25,8 @@
 	display_order = JOB_DISPLAY_ORDER_PRINCE
 
 	minimal_generation = 10
-	minimum_character_age = 150
+//	minimum_character_age = 150 //Uncomment if age-restriction wanted
+
 	minimal_masquerade = 5
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Tremere", "Ventrue", "Nosferatu", "Toreador", "Malkavian", "Brujah", "Lasombra", "Gangrel", "True Brujah")

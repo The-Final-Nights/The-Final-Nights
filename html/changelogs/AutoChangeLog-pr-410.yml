@@ -1,7 +1,0 @@
-author: "molly!"
-delete-after: True
-changes:
-  - rscadd: "Dom 1 no longer automatically adds an exclamation point at the end of your command, regardless of the punctuation you choose. Its range hasn't been changed."
-  - rscadd: "Dom 2's \"GET DOWN!!\" has been changed to a much simpler \"Fall.\" Its secondary effect has been changed from \"STAY DOWN!!\" to \"Stay down.\""
-  - rscadd: "Dom 3's \"THINK TWICE!!\" has been changed to \"Think twice.\""
-  - rscadd: "Dom 5's \"YOU SHOULD HARM YOURSELF NOW!!\" has been changed to \"Hit yourself.\""
