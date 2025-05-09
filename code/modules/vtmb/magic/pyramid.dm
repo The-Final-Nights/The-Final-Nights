@@ -387,7 +387,7 @@
 	icon_state = "rune7"
 	word = "MAL'DICTO-SANGUINIS"
 	thaumlevel = 5
-	sacrifices = list() // No longer required in constructor since we'll check for hearts dynamically
+	sacrifices = list() //checking for number of hearts in the function
 	var/channeling = FALSE
 	var/mob/living/channeler = null
 	var/curse_target = null
@@ -400,7 +400,6 @@
 
 /obj/ritualrune/curse/attack_hand(mob/user)
 	if(!activated)
-		// Initial activation of the rune
 		var/mob/living/L = user
 		if(L.thaumaturgy_knowledge)
 			L.say("[word]")
@@ -409,9 +408,7 @@
 			activator_bonus = L.thaum_damage_plus
 			animate(src, color = rgb(255, 64, 64), time = 10)
 			complete()
-
-			// Immediately start the curse process after activation
-			addtimer(CALLBACK(src, .proc/start_curse, user), 3 SECONDS)
+			addtimer(CALLBACK(src, .proc/start_curse, user), 1 SECONDS)
 		return
 
 	// If already activated but not channeling, allow restarting
@@ -518,13 +515,12 @@
 
 	// If we still have hearts, continue the channel
 	if(hearts.len > 0)
-		// After 3 seconds, process the next heart
+		// After 4 seconds, process the next heart
 		channeler.visible_message(span_warning("[channeler.name] continues channeling dark energy into the rune!"))
 
-		// Use addtimer instead of do_after to make the process more automatic
 		addtimer(CALLBACK(src, .proc/channel_curse, hearts), 4 SECONDS)
 	else
-		// We've used all the hearts
+		// after using all hearts
 		to_chat(channeler, span_warning("The last heart is consumed, completing the curse ritual!"))
 		channeling = FALSE
 		qdel(src)
@@ -557,7 +553,7 @@
 	var/duration_length = 60 SECONDS
 
 /obj/ritualrune/gargoyle/complete()
-	// Check for eligible bodies (vampire species only)
+	// vampire bodies only
 	var/list/valid_bodies = list()
 
 	for(var/mob/living/carbon/human/H in loc)
