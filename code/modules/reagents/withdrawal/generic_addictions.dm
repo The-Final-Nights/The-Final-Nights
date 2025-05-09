@@ -159,15 +159,15 @@
 /datum/addiction/medicine
 	name = "medicine"
 	withdrawal_stage_messages = list("", "", "")
-	var/datum/hallucination/fake_alert/hallucination
-	var/datum/hallucination/fake_health_doll/hallucination2
+	var/datum/hallucination/delusion/hallucination
+	var/datum/hallucination/battle/hallucination2
 
 /datum/addiction/medicine/withdrawal_enters_stage_1(mob/living/carbon/affected_carbon)
 	. = ..()
 	if(!ishuman(affected_carbon))
 		return
 	var/mob/living/carbon/human/human_mob = affected_carbon
-	hallucination2 = new(human_mob, TRUE, severity = 1, duration = 120 MINUTES)
+	hallucination2 = new(human_mob, TRUE)
 
 /datum/addiction/medicine/withdrawal_stage_1_process(mob/living/carbon/affected_carbon, delta_time)
 	. = ..()
@@ -181,22 +181,11 @@
 		possibilities += "temphot"
 	if(!HAS_TRAIT(affected_carbon, TRAIT_RESISTCOLD))
 		possibilities += "tempcold"
-	var/obj/item/organ/lungs/lungs = affected_carbon.getorganslot(ORGAN_SLOT_LUNGS)
-	if(lungs)
-		if(lungs.safe_oxygen_min)
-			possibilities += "not_enough_oxy"
-		if(lungs.safe_oxygen_max)
-			possibilities += "too_much_oxy"
 	var/type = pick(possibilities)
 	hallucination = new(affected_carbon, TRUE, type, 120 MINUTES)//last for a while basically
 
 /datum/addiction/medicine/withdrawal_stage_2_process(mob/living/carbon/affected_carbon, delta_time)
 	. = ..()
-	if(DT_PROB(10, delta_time))
-		hallucination2.add_fake_limb(severity = 1)
-		return
-	if(DT_PROB(5, delta_time))
-		hallucination2.increment_fake_damage()
 
 /datum/addiction/medicine/withdrawal_enters_stage_3(mob/living/carbon/affected_carbon)
 	. = ..()
@@ -204,9 +193,6 @@
 
 /datum/addiction/medicine/withdrawal_stage_3_process(mob/living/carbon/affected_carbon, delta_time)
 	. = ..()
-	if(DT_PROB(5, delta_time))
-		hallucination2.increment_fake_damage()
-		return
 	if(DT_PROB(15, delta_time))
 		affected_carbon.emote("cough")
 		return
@@ -226,5 +212,5 @@
 	if(iscarbon(victim_mind.current))
 		var/mob/living/carbon/affected_carbon = victim_mind.current
 		affected_carbon.hal_screwyhud = SCREWYHUD_NONE
-	hallucination.cleanup()
+	QDEL_NULL(hallucination)
 	QDEL_NULL(hallucination2)

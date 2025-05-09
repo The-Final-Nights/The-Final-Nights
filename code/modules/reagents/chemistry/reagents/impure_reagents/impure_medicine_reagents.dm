@@ -326,20 +326,6 @@
 	var/obj/item/organ/lungs/lungs = owner.getorganslot(ORGAN_SLOT_LUNGS)
 	if(!lungs)
 		return
-	cached_heat_level_1 = lungs.heat_level_1_threshold
-	cached_heat_level_2 = lungs.heat_level_2_threshold
-	cached_heat_level_3 = lungs.heat_level_3_threshold
-	cached_cold_level_1 = lungs.cold_level_1_threshold
-	cached_cold_level_2 = lungs.cold_level_2_threshold
-	cached_cold_level_3 = lungs.cold_level_3_threshold
-	//Heat threshold is increased
-	lungs.heat_level_1_threshold *= creation_purity * 1.5
-	lungs.heat_level_2_threshold *= creation_purity * 1.5
-	lungs.heat_level_3_threshold *= creation_purity * 1.5
-	//Cold threshold is decreased
-	lungs.cold_level_1_threshold *= creation_purity * 0.5
-	lungs.cold_level_2_threshold *= creation_purity * 0.5
-	lungs.cold_level_3_threshold *= creation_purity * 0.5
 
 /datum/reagent/inverse/healing/convermol/proc/on_removed_organ(mob/prev_owner, obj/item/organ/organ)
 	if(!istype(organ, /obj/item/organ/lungs))
@@ -348,12 +334,6 @@
 	restore_lung_levels(lungs)
 
 /datum/reagent/inverse/healing/convermol/proc/restore_lung_levels(obj/item/organ/lungs/lungs)
-	lungs.heat_level_1_threshold = cached_heat_level_1
-	lungs.heat_level_2_threshold = cached_heat_level_2
-	lungs.heat_level_3_threshold = cached_heat_level_3
-	lungs.cold_level_1_threshold = cached_cold_level_1
-	lungs.cold_level_2_threshold = cached_cold_level_2
-	lungs.cold_level_3_threshold = cached_cold_level_3
 
 /datum/reagent/inverse/healing/convermol/on_mob_delete(mob/living/owner)
 	. = ..()

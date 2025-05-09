@@ -55,6 +55,9 @@
 	var/purity_min = 0.15
 	/// bitflags for clear conversions; REACTION_CLEAR_IMPURE, REACTION_CLEAR_INVERSE, REACTION_CLEAR_RETAIN, REACTION_INSTANT
 	var/reaction_flags = NONE
+	///Tagging vars
+	///A bitflag var for tagging reagents for the reagent loopup functon
+	var/reaction_tags = NONE
 
 /datum/chemical_reaction/New()
 	. = ..()
@@ -411,9 +414,6 @@
 				equilibrium.data["[id]_y"] -= increment
 			else if(equilibrium.data["[id]_x"] > 0)
 				equilibrium.data["[id]_y"] += increment
-	var/turf/holder_turf = get_turf(holder.my_atom)
-	var/turf/target = locate(holder_turf.x + equilibrium.data["[id]_x"], holder_turf.y + equilibrium.data["[id]_y"], holder_turf.z)
-	new /obj/effect/hotspot(target)
 	debug_world("X: [equilibrium.data["[id]_x"]], Y: [equilibrium.data["[id]_x"]]")
 
 /*
@@ -423,12 +423,7 @@
  * How clf3 works, you know!
  */
 /datum/chemical_reaction/proc/explode_fire_square(datum/reagents/holder, datum/equilibrium/equilibrium, fire_range = 1)
-	var/turf/location = get_turf(holder.my_atom)
-	if(fire_range == 0)
-		new /obj/effect/hotspot(location)
-		return
-	for(var/turf/turf as anything in range(fire_range, location))
-		new /obj/effect/hotspot(turf)
+	return
 
 ///////////END FIRE BASED EXPLOSIONS
 

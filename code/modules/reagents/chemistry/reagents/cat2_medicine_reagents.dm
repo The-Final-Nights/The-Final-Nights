@@ -29,7 +29,7 @@
 	var/reaping = FALSE
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/medicine/c2/helbital/on_mob_life(mob/living/carbon/M)
+/datum/reagent/medicine/c2/helbital/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	. = TRUE
 	var/death_is_coming = (M.getToxLoss() + M.getOxyLoss() + M.getFireLoss() + M.getBruteLoss())*normalise_creation_purity()
 	var/thou_shall_heal = 0
@@ -202,7 +202,7 @@
 	inverse_chem_val = 0.3
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/medicine/c2/hercuri/on_mob_life(mob/living/carbon/M)
+/datum/reagent/medicine/c2/hercuri/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(M.getFireLoss() > 50)
 		M.adjustFireLoss(-2 * REM * delta_time * normalise_creation_purity(), FALSE)
 	else
@@ -249,7 +249,7 @@
 	inverse_chem = /datum/reagent/inverse/healing/convermol
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/medicine/c2/convermol/on_mob_life(mob/living/carbon/human/M)
+/datum/reagent/medicine/c2/convermol/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	var/oxycalc = 2.5*REM*current_cycle
 	if(!overdosed)
 		oxycalc = min(oxycalc, M.getOxyLoss() + 0.5) //if NOT overdosing, we lower our toxdamage to only the damage we actually healed with a minimum of 0.1*current_cycle. IE if we only heal 10 oxygen damage but we COULD have healed 20, we will only take toxdamage for the 10. We would take the toxdamage for the extra 10 if we were overdosing.
@@ -313,7 +313,7 @@
 	. = ..()
 	radbonustemp = rand(radbonustemp - 50, radbonustemp + 50) // Basically this means 50K and below will always give the percent heal, and upto 150K could. Calculated once.
 
-/datum/reagent/medicine/c2/seiver/on_mob_life(mob/living/carbon/human/M)
+/datum/reagent/medicine/c2/seiver/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	var/chemtemp = min(holder.chem_temp, 1000)
 	chemtemp = chemtemp ? chemtemp : 273 //why do you have null sweaty
 	var/healypoints = 0 //5 healypoints = 1 heart damage; 5 rads = 1 tox damage healed for the purpose of healypoints
@@ -350,7 +350,7 @@
 	ph = 9.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/medicine/c2/multiver/on_mob_life(mob/living/carbon/human/M)
+/datum/reagent/medicine/c2/multiver/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	var/medibonus = 0 //it will always have itself which makes it REALLY start @ 1
 	for(var/r in M.reagents.reagent_list)
 		var/datum/reagent/the_reagent = r
