@@ -18,7 +18,6 @@
 	. = ..()
 
 /datum/component/rot/process(delta_time)
-	var/atom/A = parent
 
 	//SSprocessing goes off per 1 second
 	time_remaining -= delta_time * 1 SECONDS
