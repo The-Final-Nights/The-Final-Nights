@@ -27,11 +27,11 @@
 	//Limb appearance info:
 	var/real_name = "" //Replacement name
 	//Hair colour and style
-	var/hair_color = "000"
+	var/hair_color = "#000000"
 	var/hairstyle = "Bald"
 	var/hair_alpha = 255
 	//Facial hair colour and style
-	var/facial_hair_color = "000"
+	var/facial_hair_color = "#000000"
 	var/facial_hairstyle = "Shaved"
 	//Eye Colouring
 
@@ -155,7 +155,7 @@
 				if(owner_species.hair_color == "mutcolor")
 					facial_hair_color = human_head_owner.dna.features["mcolor"]
 				else if(hair_color == "fixedmutcolor")
-					facial_hair_color = "#[owner_species.fixed_mut_color]"
+					facial_hair_color = S.fixed_mut_color
 				else
 					facial_hair_color = owner_species.hair_color
 			else
@@ -163,7 +163,7 @@
 			hair_alpha = owner_species.hair_alpha
 		else
 			facial_hairstyle = "Shaved"
-			facial_hair_color = "000"
+			facial_hair_color = "#000000"
 			hair_alpha = 255
 		//Hair
 		if(human_head_owner.hairstyle && (HAIR in owner_species.species_traits))
@@ -172,7 +172,7 @@
 				if(owner_species.hair_color == "mutcolor")
 					hair_color = human_head_owner.dna.features["mcolor"]
 				else if(hair_color == "fixedmutcolor")
-					hair_color = "#[owner_species.fixed_mut_color]"
+					hair_color = S.fixed_mut_color
 				else
 					hair_color = owner_species.hair_color
 			else
@@ -212,7 +212,7 @@
 				var/datum/sprite_accessory/sprite = GLOB.facial_hairstyles_list[facial_hairstyle]
 				if(sprite)
 					var/image/facial_overlay = image(sprite.icon, "[sprite.icon_state]", -HAIR_LAYER, SOUTH)
-					facial_overlay.color = "#" + facial_hair_color
+					facial_overlay.color = facial_hair_color
 					facial_overlay.alpha = hair_alpha
 					. += facial_overlay
 
@@ -233,7 +233,7 @@
 				var/datum/sprite_accessory/sprite2 = GLOB.hairstyles_list[hairstyle]
 				if(sprite2)
 					var/image/hair_overlay = image(sprite2.icon, "[sprite2.icon_state]", -HAIR_LAYER, SOUTH)
-					hair_overlay.color = "#" + hair_color
+					hair_overlay.color = hair_color
 					hair_overlay.alpha = hair_alpha
 					. += hair_overlay
 
@@ -251,7 +251,7 @@
 			eyes_overlay.icon_state = eyes.eye_icon_state
 
 			if(eyes.eye_color)
-				eyes_overlay.color = "#" + eyes.eye_color
+				eyes_overlay.color = eyes.eye_color
 
 /obj/item/bodypart/head/monkey
 	icon = 'icons/mob/animal_parts.dmi'
