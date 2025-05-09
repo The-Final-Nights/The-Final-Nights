@@ -90,6 +90,8 @@
 	var/list/allowed_tribes = list("Galestalkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Glass Walkers", "Bone Gnawers", "Ronin", "Black Spiral Dancers","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Shadow Lords","Red Talons","Stargazers")
 	///List of Auspices that are allowed to do this job.
 	var/list/allowed_auspice = list("Philodox", "Galliard", "Ragabash", "Theurge", "Ahroun")
+	//List of allowed gargoyle subtypes.
+	var/list/allowed_gargoyle_subtypes = list("Scout", "Sentinel", "Warrior")
 	///If this job requires whitelisting before it can be selected for characters.
 	var/whitelisted = FALSE
 	// List for phone shit

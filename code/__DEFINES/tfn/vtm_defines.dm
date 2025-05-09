@@ -19,6 +19,8 @@
 /// The default generation everyone begins at
 #define DEFAULT_GENERATION 13
 
+#define LOWEST_GARGOYLE_GENERATION 8
+
 //Rank definitions.
 
 #define MAX_PUBLIC_RANK 4

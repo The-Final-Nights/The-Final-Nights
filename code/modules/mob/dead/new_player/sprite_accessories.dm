@@ -2510,14 +2510,9 @@
 /datum/sprite_accessory/legs/none
 	name = "Normal Legs"
 
-// Lizards arent a fucking species for us, so this is fine.
-/datum/sprite_accessory/legs/digitigrade_lizard
-	name = "Digitigrade Legs"
-
 /datum/sprite_accessory/legs/digitigrade_gargoyle
 	name = "Digitigrade Legs"
-	icon = 'icons/tfn_icons/mobs/gargoyle/gargoyle_legs.dmi'
-	icon_state = "digitigrade_lizard"
+	icon_state = "gargoyle"
 
 /datum/sprite_accessory/caps
 	icon = 'icons/mob/mutant_bodyparts.dmi'

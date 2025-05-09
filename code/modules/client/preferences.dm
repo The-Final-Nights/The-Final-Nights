@@ -572,6 +572,29 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "<BR>"
 				if("Ghoul")
 					dat += "<b>Masquerade:</b> [masquerade]/5<BR>"
+				if("Gargoyle")
+					dat += "<b>Masquerade:</b> [masquerade]/5<BR>"
+					dat += "<b>Generation:</b> [generation]"
+					var/generation_allowed = TRUE
+					if(clane?.name == CLAN_NONE)
+						generation_allowed = FALSE
+					if(generation_allowed)
+						if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
+							if(generation_bonus)
+								dat += " (+[generation_bonus]/[min(LOWEST_GARGOYLE_GENERATION-1, generation-LOWEST_GARGOYLE_GENERATION)])"
+							if(player_experience >= 20 && generation_bonus < max(0, generation-LOWEST_GARGOYLE_GENERATION))
+								dat += " <a href='byond://?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+							else
+								dat += "<BR>"
+						else
+							if(generation_bonus)
+								dat += " (+[generation_bonus]/[min(MAX_PUBLIC_GENERATION-1, generation-MAX_PUBLIC_GENERATION)])"
+							if(player_experience >= 20 && generation_bonus < max(0, generation-MAX_PUBLIC_GENERATION))
+								dat += " <a href='byond://?_src_=prefs;preference=generation;task=input'>Claim generation bonus (20)</a><BR>"
+							else
+								dat += "<BR>"
+					else
+						dat += "<BR>"
 
 			dat += "<h2>[make_font_cool("ATTRIBUTES")]</h2>"
 
@@ -669,7 +692,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "Hair: <a href='byond://?_src_=prefs;preference=werewolf_hair;task=input'>[werewolf_hair]</a><BR>"
 				dat += "Hair Color: <a href='byond://?_src_=prefs;preference=werewolf_hair_color;task=input'>[werewolf_hair_color]</a><BR>"
 				dat += "Eyes: <a href='byond://?_src_=prefs;preference=werewolf_eye_color;task=input'>[werewolf_eye_color]</a><BR>"
-			if(pref_species.name == "Vampire")
+			if(pref_species.name == "Vampire" || pref_species.name == "Gargoyle")
 				dat += "<h2>[make_font_cool("CLANE")]</h2>"
 				dat += "<b>Clane/Bloodline:</b> <a href='byond://?_src_=prefs;preference=clane;task=input'>[clane.name]</a><BR>"
 				if(clane.name == CLAN_MALKAVIAN)
@@ -1494,43 +1517,53 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(!job.allowed_species.Find(pref_species.name) && !bypass)
 				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[pref_species.name] RESTRICTED\]</font></td></tr>"
 				continue
-			if(pref_species.name == "Vampire")
-				if(clane)
-					var/alloww = FALSE
-					for(var/i in job.allowed_bloodlines)
-						if(i == clane.name)
-							alloww = TRUE
-					if(!alloww && !bypass)
-						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[clane.name] RESTRICTED\]</font></td></tr>"
-						continue
-			if(pref_species.name == "Werewolf")
-				if(tribe)
-					var/alloww = FALSE
-					if(job.allowed_tribes.len)
-						for(var/i in job.allowed_tribes)
-							if(i == tribe.name)
+			switch(pref_species.id)
+				if("kindred")
+					if(clane)
+						var/alloww = FALSE
+						for(var/i in job.allowed_bloodlines)
+							if(i == clane.name)
 								alloww = TRUE
-					else
-						alloww = TRUE
-
-					if(!alloww && !bypass)
-						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[tribe.name] RESTRICTED\]</font></td></tr>"
-						continue
-				if(auspice)
-					var/alloww = FALSE
-					for(var/i in job.allowed_auspice)
-						if(i == auspice.name)
+						if(!alloww && !bypass)
+							HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[clane.name] RESTRICTED\]</font></td></tr>"
+							continue
+				if("gargoyle")
+					if(clane)
+						var/alloww = FALSE
+						for(var/i in job.allowed_gargoyle_subtypes)
+							if(i == clane.name)
+								alloww = TRUE
+						if(!alloww && !bypass)
+							HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[clane.name] RESTRICTED\]</font></td></tr>"
+							continue
+				if("garou")
+					if(tribe)
+						var/alloww = FALSE
+						if(job.allowed_tribes.len)
+							for(var/i in job.allowed_tribes)
+								if(i == tribe.name)
+									alloww = TRUE
+						else
 							alloww = TRUE
-					if(!alloww && !bypass)
-						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[auspice.name] RESTRICTED\]</font></td></tr>"
+
+						if(!alloww && !bypass)
+							HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[tribe.name] RESTRICTED\]</font></td></tr>"
+							continue
+					if(auspice)
+						var/alloww = FALSE
+						for(var/i in job.allowed_auspice)
+							if(i == auspice.name)
+								alloww = TRUE
+						if(!alloww && !bypass)
+							HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[auspice.name] RESTRICTED\]</font></td></tr>"
+							continue
+					var/renownlowed = TRUE
+					if(job.minimal_renownrank)
+						if((renownrank < job.minimal_renownrank) && !bypass)
+							renownlowed = FALSE
+					if(!renownlowed && !bypass)
+						HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_renownrank] RENOWN RANK REQUIRED\]</font></td></tr>"
 						continue
-				var/renownlowed = TRUE
-				if(job.minimal_renownrank)
-					if((renownrank < job.minimal_renownrank) && !bypass)
-						renownlowed = FALSE
-				if(!renownlowed && !bypass)
-					HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_renownrank] RENOWN RANK REQUIRED\]</font></td></tr>"
-					continue
 			if((job_preferences[SSjob.overflow_role] == JP_LOW) && (rank != SSjob.overflow_role) && !is_banned_from(user.ckey, SSjob.overflow_role))
 				HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 				continue
@@ -2305,9 +2338,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						auspice = Auspic
 
 				if("clane_acc")
-					if(pref_species.id != "kindred")	//Due to a lot of people being locked to furries
-						return
-
 					if(!length(clane.accessories))
 						clane_accessory = null
 						return
@@ -2316,7 +2346,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						clane_accessory = result
 
 				if("clane")
-					if(slotlocked || !(pref_species.id == "kindred"))
+					if(slotlocked)
 						return
 
 					if (tgui_alert(user, "Are you sure you want to change your Clan? This will reset your Disciplines.", "Confirmation", list("Yes", "No")) != "Yes")
@@ -2478,39 +2508,40 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						athletics = archetip.start_athletics
 
 				if("discipline")
-					if(pref_species.id == "kindred")
-						var/i = text2num(href_list["upgradediscipline"])
+					switch(pref_species.id)
+						if("kindred", "gargoyle")
+							var/i = text2num(href_list["upgradediscipline"])
 
-						var/discipline_level = discipline_levels[i]
-						var/cost = discipline_level * 7
-						if (discipline_level <= 0)
-							cost = 10
-						else if (clane.name == "Caitiff")
-							cost = discipline_level * 6
-						else if (clane.clane_disciplines.Find(discipline_types[i]))
-							cost = discipline_level * 5
+							var/discipline_level = discipline_levels[i]
+							var/cost = discipline_level * 7
+							if (discipline_level <= 0)
+								cost = 10
+							else if (clane.name == "Caitiff")
+								cost = discipline_level * 6
+							else if (clane.clane_disciplines.Find(discipline_types[i]))
+								cost = discipline_level * 5
 
-						if ((player_experience < cost) || (discipline_level >= 5))
-							return
+							if ((player_experience < cost) || (discipline_level >= 5))
+								return
 
-						player_experience -= cost
-						experience_used_on_character += cost
-						discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
+							player_experience -= cost
+							experience_used_on_character += cost
+							discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
 
-					if(pref_species.id == "kuei-jin")
-						var/a = text2num(href_list["upgradechidiscipline"])
+						if("kuei-jin")
+							var/a = text2num(href_list["upgradechidiscipline"])
 
-						var/discipline_level = discipline_levels[a]
-						var/cost = discipline_level * 6
-						if (discipline_level <= 0)
-							cost = 10
+							var/discipline_level = discipline_levels[a]
+							var/cost = discipline_level * 6
+							if (discipline_level <= 0)
+								cost = 10
 
-						if ((player_experience < cost) || (discipline_level >= 5))
-							return
+							if ((player_experience < cost) || (discipline_level >= 5))
+								return
 
-						player_experience -= cost
-						experience_used_on_character += cost
-						discipline_levels[a] = min(5, max(1, discipline_levels[a] + 1))
+							player_experience -= cost
+							experience_used_on_character += cost
+							discipline_levels[a] = min(5, max(1, discipline_levels[a] + 1))
 
 				if("path")
 					var/cost = max(2, path_score * 2)
@@ -2757,7 +2788,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							if("ghoul","human","kuei-jin")
 								discipline_types.Cut()
 								discipline_levels.Cut()
-							if("kindred")
+							if("kindred", "gargoyle")
 								qdel(clane)
 								clane = new /datum/vampireclane/brujah()
 								discipline_types.Cut()
@@ -3417,12 +3448,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				malk.derangement = derangement
 				CLN = malk
 
-			var/datum/morality/MOR = new morality_path.type()
+			var/bonus = generation-generation_bonus
 			character.clane = CLN
 			character.clane.current_accessory = clane_accessory
+			character.generation = generation
+			character.generation = clamp(bonus, LOWEST_GARGOYLE_GENERATION, HIGHEST_GENERATION_LIMIT) // The lowest generation a gargoyle can be is 8 due to lore reasons.
 			character.maxbloodpool = 10 + ((13 - generation) * 3)
 			character.bloodpool = rand(2, character.maxbloodpool)
-			character.generation = generation
 			character.max_yin_chi = character.maxbloodpool
 			character.yin_chi = character.max_yin_chi
 			character.morality_path = null

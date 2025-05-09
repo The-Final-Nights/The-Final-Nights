@@ -17,6 +17,7 @@
 	. = ..()
 	if(H.base_body_mod == "f")
 		H.base_body_mod = ""
+	H.unique_body_sprite = "gargoyle"
 	H.update_body()
 
 /datum/species/kindred/gargoyle/regenerate_organs(mob/living/carbon/C, datum/species/old_species, replace_current=TRUE, list/excluded_zones)
