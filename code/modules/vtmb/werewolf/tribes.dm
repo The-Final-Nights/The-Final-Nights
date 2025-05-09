@@ -268,40 +268,6 @@
 	H.update_transform()
 	animate(H, transform = null, color = "#FFFFFF", time = 1)
 
-/datum/action/gift/guise_of_the_crow // Should I make a subtype of guise of the hound? I do not know.
-	name = "Guise of the Crow"
-	desc = "Wear the face of an objectively inferiour bird to avoid concerning humans."
-	button_icon_state = "guise_of_the_hound" // I should ask a spriter to make the propper button, but..
-	rage_req = 1
-
-/datum/action/gift/guise_of_the_crow/Trigger() // TO BE CHANGED INTO SOMETHING ELSE. RIGHT NOW THIS IS USELESS
-	. = ..()
-	if(allowed_to_proceed)
-		if(!HAS_TRAIT(owner,TRAIT_CROW)) // TRAIT_CROW because otherwise we use the dogwolf sprite
-			ADD_TRAIT(owner, TRAIT_CROW, src)
-			to_chat(owner, span_notice("You feel your raven features lessening!"))
-		else
-			REMOVE_TRAIT(owner, TRAIT_CROW, src)
-			to_chat(owner, span_notice("You feel your raven features return to their propper glory!")) //snobby raven mindset, might need to shorten the chat message, depends.
-
-		if(istype(owner, /mob/living/carbon/werewolf/lupus))
-			var/mob/living/carbon/werewolf/lupus/lopor = owner
-
-			if(lopor && !lopor.hispo)
-				playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
-				var/matrix/ntransform = matrix(owner.transform)
-				ntransform.Scale(0.95, 0.95)
-				animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
-				addtimer(CALLBACK(src, PROC_REF(trans_crow), lopor), 3 SECONDS)
-
-/datum/action/gift/guise_of_the_crow/proc/trans_crow(mob/living/carbon/werewolf/lupus/H)
-	if(HAS_TRAIT(H, TRAIT_CROW))
-		H.icon = 'code/modules/wod13/corax_corvid.dmi' // The sprite remains the same.
-	else
-		H.icon = 'code/modules/wod13/corax_corvid.dmi'
-	H.regenerate_icons()
-	H.update_transform()
-	animate(H, transform = null, color = "#FFFFFF", time = 1)
 
 
 /datum/action/gift/infest

@@ -404,17 +404,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	else
 		switch(rank)
 			if(0)
-				return "You are barely known to other Corax, and sit on the lower branches during Parliaments"
+				return "You are barely known to other Corax, and sit on the lower branches during Parliament"
 			if(1)
-				return "Other Corax have indulged in your secrets, you are Oviculum."
+				return "Other Corax have indulged in your secrets, and consider you Oviculum."
 			if(2)
-				return "You usually get to speak before the eve comes, and have shared worthy intel several times, making you Neocornix ."
+				return "You usually get to speak before the afternoon, and have shared remarkable intel several times, making you Neocornix ."
 			if(3)
 				return "You are witty, knowledgeable and have started making your mark accross the state, earning you the title of Ales"
 			if(4)
 				return "Not only do you posess juicy info over the state's big players, but you've gotten into dangerous scraps and came out in (mostly) one piece. \nOther Corax respectfully refer to you as Volucris"
 			if(5)
-				return "You sit on the highest branches of the tree whenever a Parliament's ongoing. You have shared devastating secrets with the rest of the Corax, and have shaped the fate of this nation. \n You have the influence and prestige that makes the rest of your kind quiet down and listen, you have earned the illustrious title of Corvus."
+				return "You sit on the highest branches of the tree whenever a Parliament's ongoing. You have shared devastating secrets with the rest of the Corax, and have shaped the fate of this region. \n You have the influence and prestige that makes the rest of your kind quiet down and listen, earning you the illustrious title of Corvus."
 			if(6)
 				return "Though you are officially still Corvus, your name is known worldwide, and your words can make or break nations, you should ideally be an NPC"
 
