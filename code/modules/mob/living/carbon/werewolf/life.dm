@@ -118,6 +118,12 @@
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
+/mob/living/carbon/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
+	. = ..()
+	if(CheckEyewitness(src, src, 5, FALSE))
+		adjust_veil(-1, honoradj = -1)
+
+
 /mob/living/carbon/werewolf/handle_status_effects()
 	..()
 	//natural reduction of movement delay due to stun.

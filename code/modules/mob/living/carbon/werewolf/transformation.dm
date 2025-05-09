@@ -211,7 +211,7 @@
 			transformating = TRUE
 
 			animate(trans, transform = ntransform, color = "#000000", time = 30)
-			playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+			playsound(get_turf(trans), 'code/modules/wod13/sounds/corax_transform.ogg', 100, FALSE)
 
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
 				if(B)
@@ -232,7 +232,7 @@
 			transformating = TRUE
 
 			animate(trans, transform = ntransform, color = "#000000", time = 30)
-			playsound(get_turf(trans), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+			playsound(get_turf(trans), 'code/modules/wod13/sounds/corax_transform.ogg', 100, FALSE)
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
 				if(B)
 					qdel(B)

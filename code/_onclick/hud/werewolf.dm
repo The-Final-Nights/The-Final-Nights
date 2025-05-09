@@ -60,7 +60,7 @@
 /atom/movable/screen/transform_corax_crinos
 	name = "Corax Crinos"
 	icon = 'code/modules/wod13/32x48.dmi'
-	icon_state = "gorg" // placeholder to differenciate and debug
+	icon_state = "corax_crinos"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
@@ -76,7 +76,7 @@
 /atom/movable/screen/transform_corvid
 	name = "corvid"
 	icon = 'code/modules/wod13/32x48.dmi'
-	icon_state = "lupus" // placeholder.
+	icon_state = "corvid"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
@@ -112,15 +112,26 @@
 		var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
 		var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
 		var/mob/living/carbon/human/homid = C.transformator.human_form?.resolve()
+		var/mob/living/carbon/werewolf/corax/corax_crinos = C.transformator.corax_form?.resolve()
+		var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
 
 		lupus?.last_moon_look = world.time
 		crinos?.last_moon_look = world.time
 		homid?.last_moon_look = world.time
+		corax_crinos?.last_moon_look = world.time
+		corvid?.last_moon_look = world.time
 
 		to_chat(C, span_notice("The Moon is [GLOB.moon_state]."))
 		to_chat(C, span_notice("You can activate transformations using Ctrl-Click!"))
-		C.emote("howl")
-		playsound(get_turf(C), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
+		if(HAS_TRAIT(C, TRAIT_CORAX) || iscorax(C))
+			C.emote("caw")
+			if(!iscoraxcrinos(C))
+				playsound(get_turf(C),'code/modules/wod13/sounds/cawcorvid.ogg')
+			else
+				playsound(get_turf(C),'code/modules/wod13/sounds/cawcrinos.ogg')
+		else
+			C.emote("howl")
+			playsound(get_turf(C), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
 		icon_state = "[GLOB.moon_state]"
 		adjust_rage(1, C, TRUE)
 
@@ -217,6 +228,27 @@
 		using.screen_loc = ui_swaphand_position(owner,2)
 		using.hud = src
 		static_inventory += using
+	if(iscoraxcrinos(owner))
+				using = new /atom/movable/screen/swap_hand()
+		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+		using.icon_state = "swap_1"
+		using.screen_loc = ui_swaphand_position(owner,1)
+		using.hud = src
+		static_inventory += using
+
+		using = new /atom/movable/screen/swap_hand()
+		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+		using.icon_state = "swap_2"
+		using.screen_loc = ui_swaphand_position(owner,2)
+		using.hud = src
+		static_inventory += using
+	if(iscorvid(owner))
+		using = new /atom/movable/screen/swap_hand()
+		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
+		using.icon_state = "swap_1"
+		using.screen_loc = ui_swaphand_position(owner,1)
+		using.hud = src
+		static_inventory += using
 
 	using = new /atom/movable/screen/act_intent()
 	using.icon_state = mymob.a_intent
@@ -282,7 +314,7 @@
 /datum/hud/werewolf/persistent_inventory_update()
 	if(!mymob)
 		return
-	if(!iscrinos(mymob))
+	if(!iscrinos(mymob) && !iscoraxcrinos(mymob) && !iscorvid(mymob))
 		return
 	var/mob/living/carbon/werewolf/H = mymob
 	if(hud_version != HUD_STYLE_NOHUD)

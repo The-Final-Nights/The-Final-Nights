@@ -34,6 +34,7 @@
 	verb_say = "caws"
 	verb_exclaim = "squawks"
 	verb_yell = "shrieks"
+	hud_type = /datum/hud/werewolf
 
 
 /datum/movespeed_modifier/lupusform

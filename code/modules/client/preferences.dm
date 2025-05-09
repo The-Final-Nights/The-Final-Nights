@@ -3631,7 +3631,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			//cor_crinos.sprite_color = werewolf_color
 			cor_crinos.icon_state = werewolf_color // gotta use Icon state for this one apparently
-			cor_crinos.sprite_scar = werewolf_scar // I think having scars messes up the sprites
+			cor_crinos.sprite_scar = werewolf_scar
 			cor_crinos.sprite_hair = werewolf_hair
 			cor_crinos.sprite_hair_color = werewolf_hair_color
 			cor_crinos.sprite_eye_color = werewolf_eye_color
