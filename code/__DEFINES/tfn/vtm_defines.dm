@@ -51,9 +51,11 @@
 #define CLAN_SETITES "Ministry"
 #define CLAN_BANU_HAQIM "Banu Haqim"
 #define CLAN_GIOVANNI "Giovanni"
-#define CLAN_GARGOYLE "Gargoyle"
 #define CLAN_DAUGHTERS_OF_CACOPHONY "Daughters of Cacophony"
 #define CLAN_CAPPADOCIAN "Cappadocian"
+#define CLAN_GARGOYLE_SCOUT "Scout"
+#define CLAN_GARGOYLE_SENTINEL "Sentinel"
+#define CLAN_GARGOYLE_WARRIOR "Warrior"
 
 /**
  * Auspex aura defines
