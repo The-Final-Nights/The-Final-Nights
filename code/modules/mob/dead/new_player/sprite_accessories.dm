@@ -2270,15 +2270,14 @@
 	name = "None"
 	icon_state = "none"
 
-/datum/sprite_accessory/tails/human/cat
-	name = "Cat"
-	icon_state = "cat"
-	color_src = HAIR
+/datum/sprite_accessory/tails/human/gargoyle
+	name = "Gargoyle"
+	icon_state = "gargoyle_tail"
+	icon = 'icons/tfn_icons/mobs/gargoyle/gargoyle_tail.dmi'
 
-/datum/sprite_accessory/tails_animated/human/cat
-	name = "Cat"
-	icon_state = "cat"
-	color_src = HAIR
+/datum/sprite_accessory/tails_animated/human/gargoyle
+	name = "Gargoyle"
+	icon_state = "gargoyle_tail"
 
 /datum/sprite_accessory/tails/monkey/default
 	name = "Monkey"
@@ -2305,31 +2304,39 @@
 	icon_state = "roundlight"
 
 /datum/sprite_accessory/horns
-	icon = 'icons/mob/mutant_bodyparts.dmi'
+	icon = 'icons/tfn_icons/mobs/gargoyle/gargoyle_horns.dmi'
 
 /datum/sprite_accessory/horns/none
 	name = "None"
 	icon_state = "none"
 
-/datum/sprite_accessory/horns/simple
-	name = "Simple"
-	icon_state = "simple"
+/datum/sprite_accessory/horns/full
+	name = "Full"
+	icon_state = "full"
 
-/datum/sprite_accessory/horns/short
-	name = "Short"
-	icon_state = "short"
+/datum/sprite_accessory/horns/right
+	name = "Right"
+	icon_state = "right"
 
-/datum/sprite_accessory/horns/curled
-	name = "Curled"
-	icon_state = "curled"
+/datum/sprite_accessory/horns/left
+	name = "Right"
+	icon_state = "right"
 
-/datum/sprite_accessory/horns/ram
-	name = "Ram"
-	icon_state = "ram"
+/datum/sprite_accessory/horns/broken
+	name = "Broken"
+	icon_state = "broken"
 
-/datum/sprite_accessory/horns/angler
-	name = "Angeler"
-	icon_state = "angler"
+/datum/sprite_accessory/horns/round
+	name = "Round"
+	icon_state = "round"
+
+/datum/sprite_accessory/horns/oni
+	name = "Oni"
+	icon_state = "oni"
+
+/datum/sprite_accessory/horns/devil
+	name = "Devil"
+	icon_state = "devil"
 
 /datum/sprite_accessory/ears
 	icon = 'icons/mob/mutant_bodyparts.dmi'
@@ -2503,8 +2510,14 @@
 /datum/sprite_accessory/legs/none
 	name = "Normal Legs"
 
+// Lizards arent a fucking species for us, so this is fine.
 /datum/sprite_accessory/legs/digitigrade_lizard
 	name = "Digitigrade Legs"
+
+/datum/sprite_accessory/legs/digitigrade_gargoyle
+	name = "Digitigrade Legs"
+	icon = 'icons/tfn_icons/mobs/gargoyle/gargoyle_legs.dmi'
+	icon_state = "digitigrade_lizard"
 
 /datum/sprite_accessory/caps
 	icon = 'icons/mob/mutant_bodyparts.dmi'

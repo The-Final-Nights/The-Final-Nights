@@ -98,3 +98,10 @@
 		H.dna.features["tail_monkey"] = "None"
 		H.dna.species.mutant_bodyparts -= "tail_monkey"
 		H.update_body()
+
+/obj/item/organ/tail/gargoyle
+	name = "gargpyle tail"
+	desc = "It seems to be a tail made of stone."
+	tail_type = "Gargoyle"
+	icon_state = "gargoyle_tail"
+	icon = 'icons/tfn_icons/mobs/gargoyle/gargoyle_tail.dmi'
