@@ -6541,6 +6541,10 @@
 	pixel_y = 7;
 	pixel_x = 11
 	},
+/obj/machinery/recharger{
+	pixel_x = -6;
+	pixel_y = 10
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "bDX" = (
@@ -26826,6 +26830,10 @@
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/megaphone,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
+/obj/item/gun/energy/taser/twoshot,
 /turf/open/floor/plating/toilet{
 	color = "#636363"
 	},
@@ -38894,6 +38902,10 @@
 /obj/item/flashlight/seclite,
 /obj/item/flashlight/seclite,
 /obj/item/flashlight/seclite,
+/obj/machinery/recharger{
+	pixel_y = 10;
+	pixel_x = 11
+	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/upstairs)
 "jQw" = (
@@ -90525,6 +90537,7 @@
 	color = "#636363"
 	},
 /obj/structure/table,
+/obj/machinery/recharger,
 /turf/closed/wall/vampwall/market/low,
 /area/vtm/interior/police/upstairs)
 "wLS" = (

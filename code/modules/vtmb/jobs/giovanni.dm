@@ -17,7 +17,7 @@
 	exp_type_department = EXP_TYPE_GIOVANNI
 
 	minimal_generation = 11
-	minimum_character_age = 130
+//	minimum_character_age = 130 //Uncomment if age restriction wanted
 
 	v_duty = "Pure blood runs through your veins and, with it, old power. Throughout your long life you have learnt to hold onto two things and never let go: money, and family."
 	minimal_masquerade = 0
