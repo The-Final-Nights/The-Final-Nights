@@ -102,7 +102,7 @@
 		return
 	applyOrganDamage(maxHealth * decay_factor * 0.25 * delta_time)
 
-/obj/item/organ/proc/on_life()	//repair organ damage if the organ is not failing
+/obj/item/organ/proc/on_life(delta_time, times_fired)	//repair organ damage if the organ is not failing
 	if(organ_flags & ORGAN_FAILING)
 		handle_failing_organs(delta_time)
 		return

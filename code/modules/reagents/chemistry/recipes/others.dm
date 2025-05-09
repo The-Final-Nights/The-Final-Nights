@@ -506,7 +506,7 @@
 	required_temp = 374
 	reaction_flags = REACTION_INSTANT
 
-/datum/chemical_reaction/scream/on_reaction(datum/reagents/holdern, datum/equilibrium/reaction, created_volume)
+/datum/chemical_reaction/scream/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	playsound(holder.my_atom, pick(list( 'sound/mobs/humanoids/human/scream/malescream_1.ogg', 'sound/mobs/humanoids/human/scream/malescream_2.ogg', 'sound/mobs/humanoids/human/scream/malescream_3.ogg', 'sound/mobs/humanoids/human/scream/malescream_4.ogg', 'sound/mobs/humanoids/human/scream/malescream_5.ogg', 'sound/mobs/humanoids/human/scream/malescream_6.ogg', 'sound/mobs/humanoids/human/scream/femalescream_1.ogg', 'sound/mobs/humanoids/human/scream/femalescream_2.ogg', 'sound/mobs/humanoids/human/scream/femalescream_3.ogg', 'sound/mobs/humanoids/human/scream/femalescream_4.ogg', 'sound/mobs/humanoids/human/scream/femalescream_5.ogg', 'sound/mobs/humanoids/human/scream/wilhelm_scream.ogg')), created_volume*5,TRUE)
 
 /datum/chemical_reaction/hair_dye
@@ -715,10 +715,6 @@
 /datum/chemical_reaction/eigenstate/reaction_finish(datum/reagents/holder, datum/equilibrium/reaction, react_vol)
 	. = ..()
 	var/turf/open/location = get_turf(holder.my_atom)
-	if(reaction.data["ducts_teleported"] == TRUE) //If we teleported an duct, then we reconnect it at the end
-		for(var/obj/item/stack/ducts/duct in range(location, 3))
-			duct.check_attach_turf(duct.loc)
-
 	var/datum/reagent/eigenstate/eigen = holder.has_reagent(/datum/reagent/eigenstate)
 	if(!eigen)
 		return
@@ -752,9 +748,6 @@
 	do_sparks(3,FALSE,location)
 	holder.chem_temp += 10
 	playsound(location, 'sound/effects/phasein.ogg', 80, TRUE)
-	for(var/obj/machinery/duct/duct in range(location, 3))
-		do_teleport(duct, location, 3, no_effects=TRUE)
-		equilibrium.data["ducts_teleported"] = TRUE //If we teleported a duct - call the process in
 	var/lets_not_go_crazy = 15 //Teleport 15 items at max
 	var/list/items = list()
 	for(var/obj/item/item in range(location, 3))
