@@ -630,7 +630,7 @@
 				H.gib(FALSE, FALSE, TRUE)
 
 		// This function asks the ghosts and observers if theyd like to control the perfect Gargoyle. No clue why it's named that or what it stands for. It's from tzimisce.dm.
-		G.gain_nigs()
+		G.gain_sentience()
 
 		playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 		playsound(loc, 'code/modules/wod13/sounds/vicissitude.ogg', 50, FALSE)
