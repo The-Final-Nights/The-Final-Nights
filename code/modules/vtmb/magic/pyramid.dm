@@ -56,7 +56,7 @@
 	if(!activated)
 		var/mob/living/L = user
 		if(L.thaumaturgy_knowledge)
-			L.say("[word]")
+			L.say(word)
 			L.Immobilize(30)
 			last_activator = user
 			activator_bonus = L.thaum_damage_plus
@@ -288,7 +288,7 @@
 	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to answer a question? (You are allowed to spread meta information) <br> The question is : [text_question]", null, null, null, 20 SECONDS, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
-			to_chat(G, "<span class='ghostalert'>Question rune has been triggered.</span>")
+			to_chat(G, span_ghostalert("Question rune has been triggered."))
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		var/mob/living/simple_animal/hostile/ghost/tremere/TR = new(loc)
@@ -402,13 +402,13 @@
 	if(!activated)
 		var/mob/living/L = user
 		if(L.thaumaturgy_knowledge)
-			L.say("[word]")
+			L.say(word)
 			L.Immobilize(30)
 			last_activator = user
 			activator_bonus = L.thaum_damage_plus
 			animate(src, color = rgb(255, 64, 64), time = 10)
 			complete()
-			addtimer(CALLBACK(src, .proc/start_curse, user), 1 SECONDS)
+			addtimer(CALLBACK(src, PROC_REF(start_curse), user), 1 SECONDS)
 		return
 
 	// If already activated but not channeling, allow restarting
@@ -518,7 +518,7 @@
 		// After 4 seconds, process the next heart
 		channeler.visible_message(span_warning("[channeler.name] continues channeling dark energy into the rune!"))
 
-		addtimer(CALLBACK(src, .proc/channel_curse, hearts), 4 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(channel_curse), hearts), 4 SECONDS)
 	else
 		// after using all hearts
 		to_chat(channeler, span_warning("The last heart is consumed, completing the curse ritual!"))
@@ -557,7 +557,7 @@
 	var/list/valid_bodies = list()
 
 	for(var/mob/living/carbon/human/H in loc)
-		if(H && (istype(H, /mob/living/carbon/human/species/vampire) || istype(H, /mob/living/carbon/human/species/kindred)))
+		if(H && (istype(H, /mob/living/carbon/human/species/kindred)))
 			if(H.stat > SOFT_CRIT)
 				valid_bodies += H
 			else
@@ -593,9 +593,9 @@
 
 		var/transformation_message
 		if(perfect_gargoyle)
-			transformation_message = "<span class='gargoylealert'>The bodies begin to merge and petrify into a massive stone form!</span>"
+			transformation_message = span_gargoylealert("The bodies begin to merge and petrify into a massive stone form!")
 		else
-			transformation_message = "<span class='gargoylealert'>The body begins to petrify into a stone form!</span>"
+			transformation_message = span_gargoylealert("The body begins to petrify into a stone form!")
 		visible_message(transformation_message)
 
 		// Complete the transformation
@@ -613,7 +613,7 @@
 	if(perfect_gargoyle)
 		// Create perfect gargoyle (2+ bodies) -- you'd have to frag two different kindred players to create a perfect gargoyle.
 		var/mob/living/simple_animal/hostile/gargoyle/perfect/G = new /mob/living/simple_animal/hostile/gargoyle/perfect(loc)
-		G.visible_message("<span class='gargoylealert'>A massive perfect Gargoyle rises from the ritual!</span>")
+		G.visible_message(span_gargoylealert("A massive perfect Gargoyle rises from the ritual!"))
 
 		// Ensure perfect gargoyle is at full health
 		G.revive(TRUE)
@@ -690,11 +690,11 @@
 				target_body.name = chosen_gargoyle_name
 				target_body.update_name()
 			else
-				target_body.visible_message("<span class='gargoylealert'>A Gargoyle rises from the ritual!</span>")
+				target_body.visible_message(span_gargoylealert("A Gargoyle rises from the ritual!"))
 				qdel(src)
 				return
 
-		target_body.visible_message("<span class='gargoylealert'>A Gargoyle rises from the ritual!</span>")
+		target_body.visible_message(span_gargoylealert("A Gargoyle rises from the ritual!"))
 
 	qdel(src)
 
@@ -768,8 +768,7 @@
 							var/generation = blood_data["generation"]
 							var/clan = blood_data["clan"]
 							var/species = blood_data["species"]
-							var/disciplines = blood_data["disciplines"]
-							var/message = generate_message(species, generation, clan, disciplines)
+							var/message = generate_message(species, generation, clan)
 							to_chat(user, "[message]")
 						else
 							to_chat(user, "The blood speaks not-it is empty of power!")
@@ -852,17 +851,6 @@
 		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"
 	else
 		message += "The blood's origin is hard to trace.\n"
-
-	//disciplines
-	if (disciplines && length(disciplines) > 0)
-		message += "<b>Known disciplines:</b><br>"
-		for (var/entry in disciplines)
-			if (islist(entry))
-				var/name = entry["name"]
-				var/level = entry["level"]
-				message += "- [name] (Level [level])<br>"
-	else
-		message += ""
 
 	return message
 

@@ -262,23 +262,6 @@
 			if(H.dna && H.dna.species)
 				blood_data["species"] = H.dna.species.name
 
-				if(istype(H.dna.species, /datum/species/kindred))
-					var/datum/species/kindred/V = H.dna.species
-					var/list/known_disciplines = list()
-
-					for (var/datum/discipline/D in V.disciplines)
-						var/datum/discipline/found = V.get_discipline(D.name)
-						if (found)
-							known_disciplines += list(
-								list(
-									"name" = found.name,
-									"level" = found.level
-								)
-							)
-
-					if(length(known_disciplines))
-						blood_data["disciplines"] = known_disciplines
-
 		for(var/thing in diseases)
 			var/datum/disease/D = thing
 			blood_data["viruses"] += D.Copy()
