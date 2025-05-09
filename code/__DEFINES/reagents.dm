@@ -254,3 +254,9 @@
 #define LIQUID 1
 #define SOLID 2
 #define GAS 3
+
+#define CHEMICAL_VOLUME_MINIMUM 0.1
+
+#define PILL_STYLE_COUNT 6
+
+#define RANDOM_PILL_STYLE 1

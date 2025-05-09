@@ -18,7 +18,6 @@ PROCESSING_SUBSYSTEM_DEF(reagents)
 	GLOB.fake_reagent_blacklist = list(/datum/reagent/medicine/c2, /datum/reagent/medicine, /datum/reagent/reaction_agent)
 	//Build GLOB lists - see holder.dm
 	build_chemical_reagent_list()
-	build_chemical_reactions_lists()
 	return
 
 /datum/controller/subsystem/processing/reagents/fire(resumed = FALSE)

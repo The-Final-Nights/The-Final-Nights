@@ -20,7 +20,7 @@
 	if(chems.has_reagent(type, 1))
 		mytray.adjustToxic(round(chems.get_reagent_amount(type) * 2))
 
-/datum/reagent/toxin/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
+/datum/reagent/toxin/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(toxpwr)
 		M.adjustToxLoss(toxpwr * REM * normalise_creation_purity() * delta_time, 0)
 		. = TRUE
