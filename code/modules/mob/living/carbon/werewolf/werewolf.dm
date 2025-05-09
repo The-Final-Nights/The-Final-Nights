@@ -248,7 +248,7 @@
 /mob/living/carbon/werewolf/lupus/Initialize()
 	. = ..()
 	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
-	if(!iscorax(src))
+	if(!iscorvid(src))
 		var/datum/action/gift/hispo/hispo = new()
 		hispo.Grant(src)
 
