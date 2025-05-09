@@ -46,7 +46,7 @@
 
 /obj/item/organ/tail/lizard/Initialize()
 	. = ..()
-	color = "#"+ random_color()
+	color = random_color()
 
 /obj/item/organ/tail/lizard/Insert(mob/living/carbon/human/tail_owner, special = FALSE, drop_if_replaced = TRUE)
 	..()
@@ -66,7 +66,7 @@
 	if(istype(tail_owner))
 		tail_owner.dna.species.mutant_bodyparts -= "tail_lizard"
 		tail_owner.dna.species.mutant_bodyparts -= "spines"
-		color = "#" + tail_owner.dna.features["mcolor"]
+		color = H.dna.features["mcolor"]
 		tail_type = tail_owner.dna.features["tail_lizard"]
 		spines = tail_owner.dna.features["spines"]
 		tail_owner.update_body()
