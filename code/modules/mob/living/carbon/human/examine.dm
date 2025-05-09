@@ -62,7 +62,60 @@
 			if(INFO_KNOWN_CLAN_ONLY)
 				if(same_clan)
 					. += "<b>You know [p_them()] as a [job]. You are of the same bloodline.</b>"
+	if((isgarou(user) || iswerewolf(user)) && isgarou(src) && is_face_visible())
+		var/isknown = 0
+		var/mob/living/carbon/human/werewolf = user
+		var/same_tribe = FALSE
+		var/truescent
 
+		var/list/honorr = list("claim to good conduct", "claim to honor", "claim to chivalry")
+		var/list/wisdomm = list("claim to insight", "claim to wisdom", "claim to sagacity")
+		var/list/gloryy = list("claim to bravery", "claim to valor", "claim to glory")
+
+		if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
+			truescent = TRUE
+
+		if(werewolf.auspice?.tribe.name == auspice?.tribe.name)
+			same_tribe = TRUE
+			if(werewolf.auspice.tribe.name == "Black Spiral Dancers")
+				honorr = list("strength and will", "complete defeat of [t_his] enemies", "awesome destruction in service of the Wyrm")
+				wisdomm = list("knowledge of twisted machinations", "ability to turn [t_his] enemies against themselves", "brilliantly depraved plots in service of the Wyrm")
+				gloryy = list("trials in service of the Wyrm", "many victories in name of the Wyrm", "great conquests in the Wyrm's service")
+
+		switch(renownrank)
+			if(1)
+				if(same_tribe || truescent)
+					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe.name].</b>"
+					isknown = 1
+			if(2)
+				if(same_tribe || truescent)
+					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe.name].</b>"
+					isknown = 1
+			if(3,4,5,6)
+				. += "<b>You know [p_them()] as an [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe.name].</b>"
+				isknown = 1
+		if(isknown)
+			switch(honor)
+				if(4,5,6)
+					. += "<i>In the local Garou, you have heard of [t_his] [honorr[1]].</i>"
+				if(7,8,9)
+					. += "<i>In the local Garou, you have heard of [t_his] [honorr[2]].</i>"
+				if(10)
+					. += "<i>In the local Garou, you have heard of [t_his] [honorr[3]].</i>"
+			switch(wisdom)
+				if(4,5,6)
+					. += "<i>In the local Garou, you have heard of [t_his] [wisdomm[1]].</i>"
+				if(7,8,9)
+					. += "<i>In the local Garou, you have heard of [t_his] [wisdomm[2]].</i>"
+				if(10)
+					. += "<i>In the local Garou, you have heard of [t_his] [wisdomm[3]].</i>"
+			switch(glory)
+				if(4,5,6)
+					. += "<i>In the local Garou, you have heard of [t_his] [gloryy[1]].</i>"
+				if(7,8,9)
+					. += "<i>In the local Garou, you have heard of [t_his] [gloryy[2]].</i>"
+				if(10)
+					. += "<i>In the local Garou, you have heard of [t_his] [gloryy[3]].</i>"
 	//uniform
 	if(w_uniform && !(obscured & ITEM_SLOT_ICLOTHING) && !(w_uniform.item_flags & EXAMINE_SKIP))
 		//accessory
@@ -434,20 +487,38 @@
 				msg += "<span class='deadsay'>[t_He] [t_is] staring blanky into space, [t_his] eyes are slightly grayed out.</span>\n"
 
 	//examine text for garou detecting Triatic influences on others
-	if (isgarou(user) || iswerewolf(user))
-		if (get_dist(user, src) <= 2)
+	if (isgarou(user) || iswerewolf(user) || HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
+		var/sniff_distance = 2
+		if(iswerewolf(user))
+			sniff_distance = 7
+		if (get_dist(user, src) <= sniff_distance)
 			var/wyrm_taint = NONE
 			var/weaver_taint = NONE
 			var/wyld_taint = NONE
+			var/is_kin = NONE
+			var/seems_alive = 1
+			var/splat_sense = 0
+			var/named_splat
+
+			if(ishuman(user))
+				var/mob/living/carbon/human/garou = user
+				if((garou.mentality+garou.additional_mentality) > (src.social+src.additional_social))
+					splat_sense = 1
 
 			if(iscathayan(src))
 				if(!check_kuei_jin_alive())
+					seems_alive = 0
 					wyrm_taint++
+				named_splat = "You scent the dark journey through Erebus permeating this body, the mark of the Wan Kuei."
 
 			if (iskindred(src))
+				named_splat = "You scent the shiveringly addictive vitae of the children of Caine."
 				var/mob/living/carbon/human/vampire = src
 				weaver_taint++
-				msg += "<span class='purple'><i>You recognize their scent as cold and lifeless.</i></span><br>"
+				if (((vampire.morality_path.score >= 7) && !client?.prefs?.is_enlightened) || HAS_TRAIT(vampire, TRAIT_BLUSH_OF_HEALTH))
+					seems_alive = 1
+				else
+					seems_alive = 0
 				if ((vampire.morality_path.score < 7) || client?.prefs?.is_enlightened)
 					wyrm_taint++
 
@@ -456,34 +527,50 @@
 
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
 				var/mob/living/carbon/wolf = src
-				msg += "<span class='purple'><i>You recognize their scent as Garou.</i></span><br>"
-				switch(wolf.auspice.tribe)
-					if ("Wendigo")
+				is_kin++
+				switch(wolf.auspice.tribe.name)
+					if ("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Red Talons","Stargazers")
 						wyld_taint++
-					if ("Glasswalkers")
+					if ("Glass Walkers","Bone Gnawers","Shadow Lords")
 						weaver_taint++
 					if ("Black Spiral Dancers")
 						wyrm_taint = VERY_TAINTED
+				if(HAS_TRAIT(wolf,TRAIT_WYRMTAINTED))
+					wyrm_taint++
+					wyld_taint--
+					weaver_taint--
+				if(istype(wolf,/mob/living/carbon/werewolf))
+					var/mob/living/carbon/werewolf/werewolf = src
+					if(werewolf.wyrm_tainted)
+						wyrm_taint++
+						wyld_taint--
+						weaver_taint--
+			if(!seems_alive)
+				msg += "<span class='purple'><i>You recognize their scent as cold and lifeless.</i></span><br>"
+			if(is_kin)
+				msg += "<span class='purple'><i>You recognize their scent as Garou.</i></span><br>"
+			if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
+				if(splat_sense)
+					msg += "<span class='purple'><i>[named_splat]</i></span><br>"
+				if (wyrm_taint == TAINTED)
+					msg += "<span class='purple'><i>[p_they(TRUE)] smell[p_s()] of corruption...</i></span>\n"
+				else if (wyrm_taint == VERY_TAINTED)
+					msg += "<span class='purple'><i>[p_they(TRUE)] REEK[uppertext(p_s())] of the Wyrm and its defilement.</i></span>\n"
 
-			if (wyrm_taint == TAINTED)
-				msg += "<span class='purple'><i>[p_they(TRUE)] smell[p_s()] of corruption...</i></span>\n"
-			else if (wyrm_taint == VERY_TAINTED)
-				msg += "<span class='purple'><i>[p_they(TRUE)] REEK[uppertext(p_s())] of the Wyrm and its defilement.</i></span>\n"
+				if (weaver_taint == TAINTED)
+					msg += "<span class='purple'><i>[p_they(TRUE)] emanate[p_s()] stasis and order...</i></span>\n"
+				else if (weaver_taint == VERY_TAINTED)
+					msg += "<span class='purple'><i>[p_they(TRUE)] exude[p_s()] the Weaver's choking stasis and control.</i></span>\n"
 
-			if (weaver_taint == TAINTED)
-				msg += "<span class='purple'><i>[p_they(TRUE)] emanate[p_s()] stasis and order...</i></span>\n"
-			else if (weaver_taint == VERY_TAINTED)
-				msg += "<span class='purple'><i>[p_they(TRUE)] exude[p_s()] the Weaver's choking stasis and control.</i></span>\n"
+				if (wyld_taint == TAINTED)
+					msg += "<span class='purple'><i>[p_they(TRUE)] radiate[p_s()] chaos and creation...</i></span>\n"
+				else if (wyld_taint == VERY_TAINTED)
+					msg += "<span class='purple'><i>[p_they(TRUE)] [p_are()] infused with the Wyld's primal energies of creation.</i></span>\n"
 
-			if (wyld_taint == TAINTED)
-				msg += "<span class='purple'><i>[p_they(TRUE)] radiate[p_s()] chaos and creation...</i></span>\n"
-			else if (wyld_taint == VERY_TAINTED)
-				msg += "<span class='purple'><i>[p_they(TRUE)] [p_are()] infused with the Wyld's primal energies of creation.</i></span>\n"
-
-			if (!wyrm_taint && !weaver_taint && !wyld_taint)
-				msg += "<span class='purple'><i>You aren't sensing any supernatural taint on [p_them()]...</i></span>\n"
+				if (!wyrm_taint && !weaver_taint && !wyld_taint)
+					msg += "<span class='purple'><i>You aren't sensing any of the triat's influence on [p_them()]...</i></span>\n"
 		else
-			msg += "<span class='purple'><i>[p_they(TRUE)] [p_are()] too far away to sense any taint...</i></span>\n"
+			msg += "<span class='purple'><i>[p_they(TRUE)] [p_are()] too far away to get a good sniff...</i></span>\n"
 
 	var/scar_severity = 0
 	for(var/i in all_scars)

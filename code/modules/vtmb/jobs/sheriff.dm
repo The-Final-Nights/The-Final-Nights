@@ -34,7 +34,7 @@
 	bounty_types = CIV_JOB_SEC
 
 	minimal_generation = 12
-	minimum_character_age = 70
+//	minimum_character_age = 70 //Uncomment if age-restriction wanted
 	minimal_masquerade = 5
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("True Brujah", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Tzimisce", "Ministry", "Lasombra")
