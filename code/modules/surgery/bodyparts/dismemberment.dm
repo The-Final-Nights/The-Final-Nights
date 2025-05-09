@@ -374,8 +374,6 @@
 	var/hairstyle = src.hairstyle
 	var/facial_hair_color = src.facial_hair_color
 	var/facial_hairstyle = src.facial_hairstyle
-	var/lip_style = src.lip_style
-	var/lip_color = src.lip_color
 	var/real_name = src.real_name
 
 	. = ..()
@@ -404,7 +402,6 @@
 		human_head_owner.hairstyle = hairstyle
 		human_head_owner.facial_hair_color = facial_hair_color
 		human_head_owner.facial_hairstyle = facial_hairstyle
-		human_head_owner.update_lips(lip_style, lip_color, stored_lipstick_trait)
 	if(real_name)
 		new_head_owner.real_name = real_name
 	real_name = ""

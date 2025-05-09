@@ -112,15 +112,9 @@
 			var/list/fibers = return_fibers()
 			var/list/reagents = list()
 
-			if(ishuman(src))
-				var/mob/living/carbon/human/H = src
-				if(!H.gloves)
-					fingerprints += md5(H.dna.uni_identity)
+			fingerprints = return_fingerprints()
 
-			else if(!ismob(src))
-				fingerprints = return_fingerprints()
-
-
+			if(!ismob(src))
 				if(isturf(src))
 					var/turf/T = src
 					// Only get reagents from non-mobs.
