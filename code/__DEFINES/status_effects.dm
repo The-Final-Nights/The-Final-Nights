@@ -146,7 +146,7 @@
 // Grouped effect sources, see also code/__DEFINES/traits.dm
 
 #define STASIS_MACHINE_EFFECT "stasis_machine"
-
+#define STASIS_CHEMICAL_EFFECT "stasis_chemical"
 #define STASIS_ASCENSION_EFFECT "heretic_ascension"
 
 // Stasis helpers

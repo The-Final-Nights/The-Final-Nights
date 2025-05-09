@@ -20,7 +20,7 @@
 	if(chems.has_reagent(type, 1))
 		mytray.adjustToxic(round(chems.get_reagent_amount(type) * 2))
 
-/datum/reagent/toxin/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	if(toxpwr)
 		M.adjustToxLoss(toxpwr * REM * normalise_creation_purity() * delta_time, 0)
 		. = TRUE
@@ -58,7 +58,7 @@
 		exposed_mob.updateappearance()
 		exposed_mob.domutcheck()
 
-/datum/reagent/toxin/mutagen/on_mob_life(mob/living/carbon/C)
+/datum/reagent/toxin/mutagen/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	C.apply_effect(5,EFFECT_IRRADIATE,0)
 	return ..()
 
@@ -92,7 +92,7 @@
 	UnregisterSignal(holder, COMSIG_REAGENTS_TEMP_CHANGE)
 	return ..()
 
-/datum/reagent/toxin/plasma/on_mob_life(mob/living/carbon/C)
+/datum/reagent/toxin/plasma/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	if(holder.has_reagent(/datum/reagent/medicine/epinephrine))
 		holder.remove_reagent(/datum/reagent/medicine/epinephrine, 2*REM)
 	C.adjustPlasma(20)
@@ -149,7 +149,7 @@
 	ph = 1.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/lexorin/on_mob_life(mob/living/carbon/C)
+/datum/reagent/toxin/lexorin/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	. = TRUE
 
 	if(HAS_TRAIT(C, TRAIT_NOBREATH))
@@ -393,7 +393,7 @@
 	ph = 11
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/spore/on_mob_life(mob/living/carbon/C)
+/datum/reagent/toxin/spore/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	C.damageoverlaytemp = 60
 	C.update_damage_hud()
 	C.blur_eyes(3)
@@ -408,7 +408,7 @@
 	ph = 13
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/spore_burning/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/spore_burning/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	M.adjust_fire_stacks(2)
 	M.IgniteMob()
 	return ..()
@@ -425,7 +425,7 @@
 	impure_chem = /datum/reagent/impurity/chloralax
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/chloralhydrate/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/chloralhydrate/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	switch(current_cycle)
 		if(1 to 10)
 			M.add_confusion(2 * REM * normalise_creation_purity() * delta_time)
@@ -686,7 +686,7 @@
 	toxpwr = 2.5
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/initropidril/on_mob_life(mob/living/carbon/C)
+/datum/reagent/toxin/initropidril/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	if(prob(25))
 		var/picked_option = rand(1,3)
 		switch(picked_option)
@@ -763,7 +763,7 @@
 	ph = 6
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/sulfonal/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/sulfonal/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(current_cycle >= 22)
 		M.Sleeping(40 * REM * normalise_creation_purity() * delta_time)
 	return ..()
@@ -797,7 +797,7 @@
 	impure_chem = /datum/reagent/impurity/ipecacide
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/lipolicide/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/lipolicide/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	if(M.nutrition <= NUTRITION_LEVEL_STARVING)
 		M.adjustToxLoss(1 * REM * delta_time, 0)
 	M.adjust_nutrition(-3 * REM * normalise_creation_purity() * delta_time) // making the chef more valuable, one meme trap at a time
@@ -828,7 +828,7 @@
 	taste_description = "vomit"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/spewium/on_mob_life(mob/living/carbon/C)
+/datum/reagent/toxin/spewium/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	.=..()
 	if(current_cycle >=11 && prob(min(50,current_cycle)))
 		C.vomit(10, prob(10), prob(50), rand(0,4), TRUE)
@@ -917,7 +917,7 @@
 	ph = 8
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/toxin/anacea/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/anacea/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	var/remove_amt = 5
 	if(holder.has_reagent(/datum/reagent/medicine/calomel) || holder.has_reagent(/datum/reagent/medicine/pen_acid))
 		remove_amt = 0.5

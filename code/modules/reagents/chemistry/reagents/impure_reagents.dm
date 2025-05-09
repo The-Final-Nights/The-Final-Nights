@@ -15,7 +15,7 @@
 	metabolization_rate = 0.1 * REM //default impurity is 0.75, so we get 25% converted. Default metabolisation rate is 0.4, so we're 4 times slower.
 	var/liver_damage = 0.5
 
-/datum/reagent/impurity/on_mob_life(mob/living/carbon/C)
+/datum/reagent/impurity/on_mob_life(mob/living/carbon/C, delta_time, times_fired)
 	var/obj/item/organ/liver/L = C.getorganslot(ORGAN_SLOT_LIVER)
 	if(!L)//Though, lets be safe
 		C.adjustToxLoss(1, FALSE)//Incase of no liver!
