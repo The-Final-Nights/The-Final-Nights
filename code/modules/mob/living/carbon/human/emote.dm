@@ -186,11 +186,10 @@
 	. = ..()
 	if(.)
 		var/mob/living/carbon/human/H = user
-		var/obj/item/organ/external/wings/functional/wings = H.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)
-		if(wings && findtext(select_message_type(user,intentional), "open"))
-			wings.open_wings()
+		if(findtext(select_message_type(user,intentional), "open"))
+			H.OpenWings()
 		else
-			wings.close_wings()
+			H.CloseWings()
 
 /datum/emote/living/carbon/human/wing/select_message_type(mob/user, intentional)
 	. = ..()
@@ -206,6 +205,103 @@
 	var/mob/living/carbon/human/H = user
 	if(H.dna && H.dna.species && (H.dna.features["wings"] != "None"))
 		return TRUE
+
+/mob/living/carbon/human/proc/OpenWings()
+	if(!dna || !dna.species)
+		return
+	if(dna.species.mutant_bodyparts["wings"])
+		dna.species.mutant_bodyparts["wingsopen"] = dna.species.mutant_bodyparts["wings"]
+		dna.species.mutant_bodyparts -= "wings"
+	update_body()
+
+/mob/living/carbon/human/proc/CloseWings()
+	if(!dna || !dna.species)
+		return
+	if(dna.species.mutant_bodyparts["wingsopen"])
+		dna.species.mutant_bodyparts["wings"] = dna.species.mutant_bodyparts["wingsopen"]
+		dna.species.mutant_bodyparts -= "wingsopen"
+	update_body()
+	if(isturf(loc))
+		var/turf/T = loc
+		T.Entered(src)
+
+/datum/emote/living/carbon/human/clear_throat
+	key = "clear"
+	key_third_person = "clears throat"
+	message = "clears their throat."
+	emote_type = EMOTE_AUDIBLE
+
+/datum/emote/living/carbon/human/blink
+	key = "blink"
+	key_third_person = "blinks"
+	message = "blinks."
+	emote_type = EMOTE_VISIBLE
+
+/datum/emote/living/carbon/human/blink/get_sound(mob/living/user)
+	return 'sound/mobs/humanoids/human/blink/blink.ogg'
+
+/datum/emote/living/carbon/human/blink_r
+	key = "blink_r"
+	name = "blink (Rapid)"
+	message = "blinks rapidly."
+	emote_type = EMOTE_VISIBLE
+
+/datum/emote/living/carbon/human/blink_r/get_sound(mob/living/user)
+	return 'sound/mobs/humanoids/human/blink/blinkrapid.ogg'
+
+/datum/emote/living/carbon/human/snap
+	emote_type = EMOTE_AUDIBLE
+	muzzle_ignore = TRUE
+	hands_use_check = TRUE
+	vary = TRUE
+
+/datum/emote/living/carbon/human/snap/can_run_emote(mob/user, status_check = TRUE, intentional)
+	if(!..())
+		return FALSE
+	// sorry pal, but you need an arm to snap
+	var/mob/living/carbon/C = user
+	return C.get_bodypart(BODY_ZONE_L_ARM) || C.get_bodypart(BODY_ZONE_R_ARM)
+
+/datum/emote/living/carbon/human/snap/one
+	key = "snap"
+	key_third_person = "snaps"
+	message = "snaps their fingers."
+	message_param = "snaps their fingers at %t"
+	sound = 'sound/mobs/humanoids/human/snap/snap.ogg'
+
+/datum/emote/living/carbon/human/snap/two
+	key = "snap2"
+	key_third_person = "snaps2"
+	message = "snaps their fingers twice."
+	message_param = "snaps their fingers at %t twice"
+	sound = 'sound/mobs/humanoids/human/snap/snap2.ogg'
+
+/datum/emote/living/carbon/human/snap/three
+	key = "snap3"
+	key_third_person = "snaps3"
+	message = "snaps their fingers thrice."
+	message_param = "snaps their fingers at %t thrice"
+	sound = 'sound/mobs/humanoids/human/snap/snap3.ogg'
+
+
+/datum/emote/living/carbon/human/sign
+	key = "sign"
+	key_third_person = "signs"
+	message_param = "signs the number %t."
+	mob_type_allowed_typecache = list(/mob/living/carbon/alien)
+	hands_use_check = TRUE
+
+/datum/emote/living/carbon/human/sign/select_param(mob/user, params)
+	. = ..()
+	if(!isnum(text2num(params)))
+		return message
+
+/datum/emote/living/carbon/human/sign/signal
+	key = "signal"
+	key_third_person = "signals"
+	message_param = "raises %t fingers."
+	mob_type_allowed_typecache = list(/mob/living/carbon/human)
+	hands_use_check = TRUE
 
 ///Snowflake emotes only for le epic chimp
 /datum/emote/living/carbon/human/monkey
