@@ -419,12 +419,12 @@
 		start_curse(user)
 		return
 
-	// Only the activator can use the activated rune
+	// only the activator can use the activated rune
 	if(last_activator != user)
 		to_chat(user, span_warning("You are not the one who activated this rune!"))
 		return
 
-	// Check if already channeling
+	// check if already channeling
 	if(channeling)
 		to_chat(user, span_warning("The curse is already being channeled!"))
 		return
@@ -438,18 +438,18 @@
 	for(var/obj/item/organ/heart/H in get_turf(src))
 		hearts += H
 
-	// Ensure at least one heart is present
+	// at least one heart for the ritual
 	if(hearts.len == 0)
 		to_chat(user, span_warning("You need at least one heart to channel the curse!"))
 		return
 
-	// Get target name
+	// target name input
 	var/target_name = tgui_input_text(user, "Choose target name:", "Curse Rune")
 	if(!target_name || !user.Adjacent(src)) // Check if user is still nearby
 		to_chat(user, span_warning("You must specify a target and remain close to the rune!"))
 		return
 
-	// Start the channeling
+	// begin channeling
 	curse_target = target_name
 	channeler = user
 	channeling = TRUE
@@ -566,15 +566,18 @@
 				valid_bodies += H
 			else
 				H.adjustCloneLoss(50)
+				playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 10, FALSE)
+				to_chat(usr, "Your specimen must be incapacitated! The ritual has merely hurt them!")
+
 
 	if(valid_bodies.len < 1)
-		to_chat(usr, "<span class='warning'>The ritual requires at least one vampire body!</span>")
+		to_chat(usr, span_warning("The ritual requires at least one vampire body!"))
 		return
 
 	// Begin the ritual
 	var/body_count = valid_bodies.len
-	to_chat(usr, "<span class='notice'>You begin invoking the ritual of Gargoyle Creation with [body_count] vampire bod[body_count == 1 ? "y" : "ies"]...</span>")
-	usr.visible_message("<span class='notice'>[usr] begins invoking a ritual with [body_count] vampire bod[body_count == 1 ? "y" : "ies"]...</span>")
+	to_chat(usr, span_notice("You begin invoking the ritual of Gargoyle Creation with [body_count] vampire bod[body_count == 1 ? "y" : "ies"]..."))
+	usr.visible_message(span_notice("[usr] begins invoking a ritual with [body_count] vampire bod[body_count == 1 ? "y" : "ies"]..."))
 
 	playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 	playsound(loc, 'code/modules/wod13/sounds/vicissitude.ogg', 50, FALSE)
@@ -602,7 +605,7 @@
 		// Complete the transformation
 		addtimer(CALLBACK(src, PROC_REF(gargoyle_transform), valid_bodies, perfect_gargoyle), 1 SECONDS)
 	else
-		to_chat(usr, "<span class='warning'>Your ritual was interrupted!</span>")
+		to_chat(usr, span_warning("Your ritual was interrupted!"))
 		// Unstun the bodies if interrupted
 		for(var/mob/living/carbon/human/H in valid_bodies)
 			H.Stun(5) // Brief stun to recover
@@ -651,6 +654,7 @@
 
 		var/original_location = target_body.loc
 
+		// Revive the specimen and turn them into a gargoyle kindred
 		target_body.revive(TRUE)
 		target_body.set_species(/datum/species/kindred)
 		target_body.clane = new /datum/vampireclane/gargoyle()
@@ -660,9 +664,11 @@
 		target_body.setToxLoss(0)
 		target_body.setOxyLoss(0)
 		target_body.setCloneLoss(0)
-		target_body.real_name = old_name
+
+		target_body.real_name = old_name // the ritual for some reason is deleting their old name and replacing it with a random name.
 		target_body.name = old_name
 		target_body.update_name()
+
 		playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 		playsound(target_body.loc, 'code/modules/wod13/sounds/vicissitude.ogg', 50, FALSE)
 
@@ -673,7 +679,7 @@
 
 		// Handle key assignment
 		if(!target_body.key)
-			var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to play as Sentient Gargoyle?", null, null, null, 50, src)
+			var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to play as Sentient Gargoyle?", null, null, null, 20 SECONDS, src)
 			for(var/mob/dead/observer/G in GLOB.player_list)
 				if(G.key)
 					to_chat(G, "<span class='ghostalert'>Gargoyle Transformation rune has been triggered.</span>")
@@ -681,7 +687,16 @@
 				var/mob/dead/observer/C = pick(candidates)
 				target_body.key = C.key
 
-
+			var/choice = tgui_alert(target_body, "Do you want to pick a new name as a Gargoyle?", "Gargoyle Choose Name", list("Yes", "No"), 10 SECONDS)
+			if(choice == "Yes")
+				var/chosen_gargoyle_name = tgui_input_text(target_body, "What is your new name as a Gargoyle?", "Gargoyle Name Input")
+				target_body.real_name = chosen_gargoyle_name
+				target_body.name = chosen_gargoyle_name
+				target_body.update_name()
+			else
+				target_body.visible_message("<span class='gargoylealert'>A Gargoyle rises from the ritual!</span>")
+				qdel(src)
+				return
 
 		target_body.visible_message("<span class='gargoylealert'>A Gargoyle rises from the ritual!</span>")
 
@@ -693,7 +708,7 @@
 	desc = "A massive stone-skinned monstrosity with enhanced strength and durability."
 	icon_state = "gargoyle_m"
 	icon_living = "gargoyle_m"
-	mob_size = MOB_SIZE_HUGE
+	mob_size = MOB_SIZE_LARGE
 	speed = -2
 	maxHealth = 600
 	health = 600
@@ -709,7 +724,7 @@
 /mob/living/simple_animal/hostile/gargoyle/perfect/Initialize()
 	. = ..()
 	// Make the perfect gargoyle slightly larger
-	transform = transform.Scale(1.25, 1.25)
+	transform = transform.Scale(1.10, 1.10)
 
 
 

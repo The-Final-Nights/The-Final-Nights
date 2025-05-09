@@ -374,13 +374,20 @@
 
 /mob/living/simple_animal/hostile/gargoyle/proc/gain_nigs()
 	set waitfor = FALSE
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as Embraced Gargoyle?", null, null, null, 50, src)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as a Perfect Gargoyle?", null, null, null, 50, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
 			to_chat(G, "<span class='ghostalert'>New Gargoyle has been made.</span>")
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		key = C.key
+		var/choice = tgui_alert(C, "Do you want to pick a new name as a Gargoyle?", "Gargoyle Choose Name", list("Yes", "No"), 20)
+		if(choice == "Yes")
+			var/chosen_gargoyle_name = tgui_input_text(C, "What is your new name as a Gargoyle?", "Gargoyle Name Input")
+			name = chosen_gargoyle_name
+			update_name()
+		else
+			return
 
 /mob/living/simple_animal/hostile/gargoyle/Initialize()
 	. = ..()
@@ -486,7 +493,7 @@
 	armor_modifiers = list(MELEE = 0.3, BULLET = 0.3, LASER = 1.2, ENERGY = 1.2, BOMB = 0.3, BIO = 0, RAD = 0.7, FIRE = 1, ACID = 1)
 	item_sound_override = 'sound/effects/meatslap.ogg'
 	turf_sound_override = FOOTSTEP_MEAT
-	
+
 /datum/material/vicissitude_flesh/on_removed(atom/source, amount, material_flags)
 	. = ..()
 	qdel(source.GetComponent(/datum/component/edible))
