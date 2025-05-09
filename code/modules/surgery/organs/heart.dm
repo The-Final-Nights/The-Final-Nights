@@ -413,7 +413,7 @@
 /obj/structure/ethereal_crystal
 	name = "Ethereal Resurrection Crystal"
 	desc = "It seems to contain the corpse of an ethereal mending its wounds."
-	icon = 'icons/obj/ethereal_crystal.dmi'
+	icon = 'icons/mob/effects/ethereal_crystal.dmi'
 	icon_state = "ethereal_crystal"
 	damage_deflection = 0
 	max_integrity = 100
@@ -432,7 +432,7 @@
 	src.ethereal_heart = ethereal_heart
 	ethereal_heart.owner.visible_message("<span class='notice'>The crystals fully encase [ethereal_heart.owner]!</span>")
 	to_chat(ethereal_heart.owner, "<span class='notice'>You are encased in a huge crystal!</span>")
-	playsound(get_turf(src), 'sound/effects/ethereal_crystalization.ogg', 50)
+	playsound(get_turf(src), 'sound/mobs/humanoids/ethereal/ethereal_crystalization.ogg', 50)
 	ethereal_heart.owner.forceMove(src) //put that ethereal in
 	add_atom_colour(ethereal_heart.ethereal_color, FIXED_COLOUR_PRIORITY)
 	crystal_heal_timer = addtimer(CALLBACK(src, .proc/heal_ethereal), CRYSTALIZE_HEAL_TIME, TIMER_STOPPABLE)
@@ -447,7 +447,7 @@
 
 
 /obj/structure/ethereal_crystal/obj_destruction(damage_flag)
-	playsound(get_turf(ethereal_heart.owner), 'sound/effects/ethereal_revive_fail.ogg', 100)
+	playsound(get_turf(ethereal_heart.owner), 'sound/mobs/humanoids/ethereal/ethereal_revive_fail.ogg', 100)
 	return ..()
 
 
@@ -478,5 +478,5 @@
 	else
 		picked_trauma = pick(subtypesof(/datum/brain_trauma/mild))
 	ethereal_heart.owner.gain_trauma(picked_trauma, TRAUMA_RESILIENCE_ABSOLUTE)
-	playsound(get_turf(ethereal_heart.owner), 'sound/effects/ethereal_revive.ogg', 100)
+	playsound(get_turf(ethereal_heart.owner), 'sound/mobs/humanoids/ethereal/ethereal_revive.ogg', 100)
 	qdel(src)

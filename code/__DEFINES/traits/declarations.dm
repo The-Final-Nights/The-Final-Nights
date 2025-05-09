@@ -50,6 +50,8 @@
 #define TRAIT_SHOCKIMMUNE		"shock_immunity"
 #define TRAIT_TESLA_SHOCKIMMUNE	"tesla_shock_immunity"
 #define TRAIT_STABLEHEART		"stable_heart"
+/// Prevents you from leaving your corpse
+#define TRAIT_CORPSELOCKED "corpselocked"
 #define TRAIT_STABLELIVER		"stable_liver"
 #define TRAIT_RESISTHEAT		"resist_heat"
 #define TRAIT_RESISTHEATHANDS	"resist_heat_handsonly" //For when you want to be able to touch hot things, but still want fire to be an issue.

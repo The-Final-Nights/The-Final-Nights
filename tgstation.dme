@@ -164,6 +164,7 @@
 #include "code\__DEFINES\dcs\helpers.dm"
 #include "code\__DEFINES\dcs\signals.dm"
 #include "code\__DEFINES\dcs\signals\signals_admin.dm"
+#include "code\__DEFINES\dcs\signals\signals_mob_living.dm"
 #include "code\__DEFINES\dcs\signals\signals_transform.dm"
 #include "code\__DEFINES\research\anomalies.dm"
 #include "code\__DEFINES\tfn\vtm_defines.dm"

@@ -126,8 +126,10 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	var/flying_species = FALSE
 	///The actual flying ability given to flying species
 	var/datum/action/innate/flight/fly
-	///The icon used for the wings
+	///Current wings icon
 	var/wings_icon = "Angel"
+	//Dictates which wing icons are allowed for a given species. If count is >1 a radial menu is used to choose between all icons in list
+	var/list/wings_icons = list("Angel")
 	///Used to determine what description to give when using a potion of flight, if false it will describe them as growing new wings
 	var/has_innate_wings = FALSE
 
@@ -211,6 +213,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 	if(!limbs_id)	//if we havent set a limbs id to use, just use our own id
 		limbs_id = id
+	wings_icons = string_list(wings_icons)
 	..()
 
 /**
@@ -2001,6 +2004,46 @@ GLOBAL_LIST_EMPTY(selectable_races)
 /datum/species/proc/is_wagging_tail(mob/living/carbon/human/H)
 	return FALSE
 
+/*
+ * This proc is called when a mob loses their tail.
+ *
+ * tail_owner - the owner of the tail (who holds our species datum)
+ * lost_tail - the tail that was removed
+ * on_species_init - whether or not this was called when the species was initialized, or if it was called due to an ingame means (like surgery)
+ */
+/datum/species/proc/on_tail_lost(mob/living/carbon/human/tail_owner, obj/item/organ/tail/lost_tail, on_species_init = FALSE)
+	stop_wagging_tail(tail_owner)
+
+	// If it's initializing the species, don't add moodlets
+	if(on_species_init)
+		return
+	// If we don't have a set tail, don't bother adding moodlets
+	if(!mutant_organs.len)
+		return
+
+/*
+ * This proc is called when a mob gains a tail.
+ *
+ * tail_owner - the owner of the tail (who holds our species datum)
+ * lost_tail - the tail that was added
+ * on_species_init - whether or not this was called when the species was initialized, or if it was called due to an ingame means (like surgery)
+ */
+/datum/species/proc/on_tail_regain(mob/living/carbon/human/tail_owner, obj/item/organ/tail/found_tail, on_species_init = FALSE)
+	// If it's initializing the species, don't add moodlets
+	if(on_species_init)
+		return
+	// If we don't have a set tail, don't add moodlets
+	if(!mutant_organs.len)
+		return
+
+/*
+ * Clears all tail related moodlets when they lose their species.
+ *
+ * former_tail_owner - the mob that was once a species with a tail and now is a different species
+ */
+/datum/species/proc/clear_tail_moodlets(mob/living/carbon/human/former_tail_owner)
+	stop_wagging_tail(former_tail_owner)
+
 /datum/species/proc/start_wagging_tail(mob/living/carbon/human/H)
 
 /datum/species/proc/stop_wagging_tail(mob/living/carbon/human/H)
@@ -2013,6 +2056,25 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	if(flying_species) //species that already have flying traits should not work with this proc
 		return
 	flying_species = TRUE
+	if(wings_icons.len > 1)
+		if(!H.client)
+			wings_icon = pick(wings_icons)
+		else
+			var/list/wings = list()
+			for(var/W in wings_icons)
+				var/datum/sprite_accessory/S = GLOB.wings_list[W] //Gets the datum for every wing this species has, then prompts user with a radial menu
+				var/image/img = image(icon = 'icons/mob/clothing/wings.dmi', icon_state = "m_wingsopen_[S.icon_state]_BEHIND") //Process the HUD elements
+				img.transform *= 0.5
+				img.pixel_x = -32
+				if(wings[S.name])
+					stack_trace("Different wing types with repeated names. Please fix as this may cause issues.")
+				else
+					wings[S.name] = img
+			wings_icon = show_radial_menu(H, H, wings, tooltips = TRUE)
+			if(!wings_icon)
+				wings_icon = pick(wings_icons)
+	else
+		wings_icon = wings_icons[1]
 	if(isnull(fly))
 		fly = new
 		fly.Grant(H)
@@ -2020,53 +2082,12 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		mutant_bodyparts["wings"] = wings_icon
 		H.dna.features["wings"] = wings_icon
 		H.update_body()
-	var/datum/action/fly_upper/A = locate() in H.actions
-	if(A)
-		return
-	var/datum/action/fly_upper/DA = new()
-	DA.Grant(H)
-
-/datum/species/proc/RemoveSpeciesFlight(mob/living/carbon/human/H)
-	if(flying_species)
-		flying_species = FALSE
-		fly.Remove(H)
-		QDEL_NULL(fly)
-		if(H.movement_type & FLYING)
-			ToggleFlight(H)
-		var/datum/action/fly_upper/A = locate() in H.actions
-		if(A)
-			qdel(A)
-		if(H.dna && H.dna.species && (H.dna.features["wings"] == wings_icon))
-			H.dna.species.mutant_bodyparts -= "wings"
-			H.dna.features["wings"] = "None"
-			H.update_body()
-
-/datum/species
-	var/animation_goes_up = FALSE	//
 
 /datum/species/proc/HandleFlight(mob/living/carbon/human/H)
 	if(H.movement_type & FLYING)
 		if(!CanFly(H))
 			ToggleFlight(H)
 			return FALSE
-		if(animation_goes_up)
-			switch(H.pixel_z)
-				if(0)
-					H.pixel_z = 1
-				if(1)
-					H.pixel_z = 2
-				if(2)
-					H.pixel_z = 3
-					animation_goes_up = FALSE
-		else
-			switch(H.pixel_z)
-				if(3)
-					H.pixel_z = 2
-				if(2)
-					H.pixel_z = 1
-				if(1)
-					H.pixel_z = 0
-					animation_goes_up = TRUE
 		return TRUE
 	else
 		return FALSE
@@ -2074,7 +2095,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 /datum/species/proc/CanFly(mob/living/carbon/human/H)
 	if(H.stat || H.body_position == LYING_DOWN)
 		return FALSE
-	if(H.wear_suit && ((H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))))	//Jumpsuits have tail holes, so it makes sense they have wing holes too
+	if(H.wear_suit && ((H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception)))) //Jumpsuits have tail holes, so it makes sense they have wing holes too
 		to_chat(H, "<span class='warning'>Your suit blocks your wings from extending!</span>")
 		return FALSE
 	var/turf/T = get_turf(H)
@@ -2105,9 +2126,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		new /datum/forced_movement(H, get_ranged_target_turf(H, olddir, 4), 1, FALSE, CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon, spin), 1, 1))
 	return TRUE
 
-/datum/movespeed_modifier/wing
-	multiplicative_slowdown = -0.25
-
 //UNSAFE PROC, should only be called through the Activate or other sources that check for CanFly
 /datum/species/proc/ToggleFlight(mob/living/carbon/human/H)
 	if(!HAS_TRAIT_FROM(H, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT))
@@ -2116,7 +2134,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		ADD_TRAIT(H, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
 		ADD_TRAIT(H, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
 		passtable_on(H, SPECIES_TRAIT)
-		H.add_movespeed_modifier(/datum/movespeed_modifier/wing)
 		H.OpenWings()
 	else
 		stunmod *= 0.5
@@ -2124,7 +2141,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		REMOVE_TRAIT(H, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
 		REMOVE_TRAIT(H, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
 		passtable_off(H, SPECIES_TRAIT)
-		H.remove_movespeed_modifier(/datum/movespeed_modifier/wing)
 		H.CloseWings()
 
 /datum/action/innate/flight
