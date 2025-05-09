@@ -678,7 +678,7 @@
 			var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to play as Sentient Gargoyle?", null, null, null, 20 SECONDS, src)
 			for(var/mob/dead/observer/G in GLOB.player_list)
 				if(G.key)
-					to_chat(G, "<span class='ghostalert'>Gargoyle Transformation rune has been triggered.</span>")
+					to_chat(G, span_ghostalert("Gargoyle Transformation rune has been triggered."))
 			if(LAZYLEN(candidates))
 				var/mob/dead/observer/C = pick(candidates)
 				target_body.key = C.key
