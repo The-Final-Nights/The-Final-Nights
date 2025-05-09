@@ -24,6 +24,8 @@
 #define HELMET_TRAIT "helmet"
 #define MASK_TRAIT "mask" //inherited from the mask
 #define SHOES_TRAIT "shoes" //inherited from your sweet kicks
+/// Trait inherited by implants
+#define IMPLANT_TRAIT "implant"
 #define GLASSES_TRAIT "glasses"
 #define VEHICLE_TRAIT "vehicle" // inherited from riding vehicles
 #define INNATE_TRAIT "innate"

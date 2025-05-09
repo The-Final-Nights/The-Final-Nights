@@ -793,7 +793,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/power/apc/auto_name, APC_PIXEL_OFFSET
 		if(istype(maybe_stomach, /obj/item/organ/stomach/ethereal))
 			var/charge_limit = ETHEREAL_CHARGE_DANGEROUS - APC_POWER_GAIN
 			var/obj/item/organ/stomach/ethereal/stomach = maybe_stomach
-			if((stomach?.drain_time < world.time) && LAZYACCESS(modifiers, RIGHT_CLICK))
+			if((stomach?.drain_time < world.time))
 				if(H.m_intent == INTENT_HARM)
 					if(cell.charge <= (cell.maxcharge / 2)) // ethereals can't drain APCs under half charge, this is so that they are forced to look to alternative power sources if the station is running low
 						to_chat(H, span_warning("The APC's syphon safeties prevent you from draining power!"))

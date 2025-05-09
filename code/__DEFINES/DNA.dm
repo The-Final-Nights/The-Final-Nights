@@ -58,6 +58,7 @@
 #define HARS		/datum/mutation/human/headless
 #define BIOTECHCOMPAT /datum/mutation/human/biotechcompat
 
+#define UE_CHANGED "ue changed"
 #define UI_CHANGED "ui changed"
 #define UF_CHANGED "uf changed"
 
