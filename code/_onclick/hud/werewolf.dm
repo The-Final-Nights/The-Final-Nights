@@ -126,9 +126,9 @@
 		if(HAS_TRAIT(C, TRAIT_CORAX) || iscorax(C))
 			C.emote("caw")
 			if(!iscoraxcrinos(C))
-				playsound(get_turf(C),'code/modules/wod13/sounds/cawcorvid.ogg')
+				playsound(get_turf(C),'code/modules/wod13/sounds/cawcorvid.ogg', 100, FALSE)
 			else
-				playsound(get_turf(C),'code/modules/wod13/sounds/cawcrinos.ogg')
+				playsound(get_turf(C),'code/modules/wod13/sounds/cawcrinos.ogg', 100, FALSE)
 		else
 			C.emote("howl")
 			playsound(get_turf(C), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
@@ -154,10 +154,6 @@
 
 //begin buttons
 	if HAS_TRAIT(owner, TRAIT_CORAX) // if we picked the Corax tribe, we get the HUD that makes you transform into the various Corax forms
-		using = new /atom/movable/screen/fullscreen_hud()
-		using.screen_loc = ui_full_inventory
-		using.hud = src
-		static_inventory += using
 
 		transform_werewolf = new /atom/movable/screen/transform_corvid()
 		transform_werewolf.screen_loc = ui_werewolf_lupus
@@ -174,20 +170,7 @@
 		transform_werewolf.hud = src
 		static_inventory += transform_werewolf
 
-		transform_werewolf = new /atom/movable/screen/auspice() // The Corax retain the ability to look at the moon and howl, since they still have Rage.
-		transform_werewolf.screen_loc = ui_werewolf_auspice
-		transform_werewolf.hud = src
-		static_inventory += transform_werewolf
-
-		rage_icon = new /atom/movable/screen/rage()
-		rage_icon.screen_loc = ui_werewolf_rage
-		rage_icon.hud = src
-		infodisplay += rage_icon
 	else
-		using = new /atom/movable/screen/fullscreen_hud()
-		using.screen_loc = ui_full_inventory
-		using.hud = src
-		static_inventory += using
 
 		transform_werewolf = new /atom/movable/screen/transform_lupus()
 		transform_werewolf.screen_loc = ui_werewolf_lupus
@@ -204,15 +187,21 @@
 		transform_werewolf.hud = src
 		static_inventory += transform_werewolf
 
-		auspice_icon = new /atom/movable/screen/auspice()
-		auspice_icon.screen_loc = ui_werewolf_auspice
-		auspice_icon.hud = src
-		static_inventory += auspice_icon
+	auspice_icon = new /atom/movable/screen/auspice() // auspice, rage and the fullscreen HUD icons are shared between the two sub-species
+	auspice_icon.screen_loc = ui_werewolf_auspice
+	auspice_icon.hud = src
+	static_inventory += auspice_icon
 
-		rage_icon = new /atom/movable/screen/rage()
-		rage_icon.screen_loc = ui_werewolf_rage
-		rage_icon.hud = src
-		infodisplay += rage_icon
+	rage_icon = new /atom/movable/screen/rage()
+	rage_icon.screen_loc = ui_werewolf_rage
+	rage_icon.hud = src
+	infodisplay += rage_icon
+
+	using = new /atom/movable/screen/fullscreen_hud()
+	using.screen_loc = ui_full_inventory
+	using.hud = src
+	static_inventory += using
+
 
 	if(iscrinos(owner))
 		using = new /atom/movable/screen/swap_hand()
@@ -229,7 +218,7 @@
 		using.hud = src
 		static_inventory += using
 	if(iscoraxcrinos(owner))
-				using = new /atom/movable/screen/swap_hand()
+		using = new /atom/movable/screen/swap_hand()
 		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
 		using.icon_state = "swap_1"
 		using.screen_loc = ui_swaphand_position(owner,1)
@@ -240,13 +229,6 @@
 		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
 		using.icon_state = "swap_2"
 		using.screen_loc = ui_swaphand_position(owner,2)
-		using.hud = src
-		static_inventory += using
-	if(iscorvid(owner))
-		using = new /atom/movable/screen/swap_hand()
-		using.icon = 'code/modules/wod13/UI/buttons32.dmi'
-		using.icon_state = "swap_1"
-		using.screen_loc = ui_swaphand_position(owner,1)
 		using.hud = src
 		static_inventory += using
 
