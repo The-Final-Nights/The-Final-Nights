@@ -52,6 +52,30 @@
 	taste_description = "an awful, strongly chemical taste"
 	color = "#270d03"
 
+// Unique
+
+/datum/reagent/inverse/eigenswap
+	name = "Eigenswap"
+	description = "This reagent is known to swap the handedness of a patient."
+	ph = 3.3
+	chemical_flags = REAGENT_DONOTSPLIT
+	tox_damage = 0
+
+/datum/reagent/inverse/eigenswap/on_mob_life(mob/living/carbon/affected_mob)
+	. = ..()
+	if(!prob(creation_purity * 100))
+		return
+	var/list/cached_hand_items = affected_mob.held_items
+	var/index = 1
+	for(var/thing in cached_hand_items)
+		index++
+		if(index > length(cached_hand_items))//If we're past the end of the list, go back to start
+			index = 1
+		if(!thing)
+			continue
+		affected_mob.put_in_hand(thing, index, forced = TRUE, ignore_anim = TRUE)
+		playsound(affected_mob, 'sound/effects/phasein.ogg', 20, TRUE)
+
 /*
 * Freezes the player in a block of ice, 1s = 1u
 * Will be removed when the required reagent is removed too

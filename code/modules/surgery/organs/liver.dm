@@ -1,4 +1,6 @@
 #define LIVER_DEFAULT_TOX_TOLERANCE 3 //amount of toxins the liver can filter out
+#define LIVER_DEFAULT_TOX_RESISTANCE 1 //lower values lower how harmful toxins are to the liver
+#define LIVER_FAILURE_STAGE_SECONDS 60 //amount of seconds before liver failure reaches a new stage
 #define LIVER_DEFAULT_TOX_LETHALITY 0.005 //lower values lower how harmful toxins are to the liver
 /obj/item/organ/liver
 	name = "liver"
@@ -173,11 +175,11 @@
 		return
 	switch(failure_time)
 		if(0 to 3 * LIVER_FAILURE_STAGE_SECONDS - 1)
-			examine_list += "<span class='notice'>[owner]'s eyes are slightly yellow.</span>"
+			examine_list += span_notice("[owner]'s eyes are slightly yellow.")
 		if(3 * LIVER_FAILURE_STAGE_SECONDS to 4 * LIVER_FAILURE_STAGE_SECONDS - 1)
-			examine_list += "<span class='notice'>[owner]'s eyes are completely yellow, and he is visibly suffering.</span>"
+			examine_list += span_notice("[owner]'s eyes are completely yellow, and [owner.p_they()] [owner.p_are()] visibly suffering.")
 		if(4 * LIVER_FAILURE_STAGE_SECONDS to INFINITY)
-			examine_list += "<span class='danger'>[owner]'s eyes are completely yellow and swelling with pus. [owner.p_they()] don't look like they will be alive for much longer.</span>"
+			examine_list += span_danger("[owner]'s eyes are completely yellow and swelling with pus. [owner.p_they()] [owner.p_do()]n't look like [owner.p_they()] will be alive for much longer.")
 
 /obj/item/organ/liver/on_death(delta_time, times_fired)
 	. = ..()
@@ -197,7 +199,6 @@
 #undef HAS_SILENT_TOXIN
 #undef HAS_NO_TOXIN
 #undef HAS_PAINFUL_TOXIN
-#undef LIVER_FAILURE_STAGE_SECONDS
 
 /obj/item/organ/liver/get_availability(datum/species/S)
 	return !(TRAIT_NOMETABOLISM in S.inherent_traits)
@@ -254,4 +255,6 @@
 	if(prob(emp_vulnerability/severity)) //Chance of permanent effects
 		organ_flags |= ORGAN_SYNTHETIC_EMP //Starts organ faliure - gonna need replacing soon.
 
-
+#undef LIVER_DEFAULT_TOX_TOLERANCE
+#undef LIVER_DEFAULT_TOX_RESISTANCE
+#undef LIVER_FAILURE_STAGE_SECONDS

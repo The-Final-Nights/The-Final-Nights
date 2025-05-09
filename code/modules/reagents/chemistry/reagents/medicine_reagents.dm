@@ -11,7 +11,7 @@
 	taste_description = "bitterness"
 	failed_chem = /datum/reagent/impurity/healing/medicine_failure
 
-/datum/reagent/medicine/on_mob_life(mob/living/carbon/M)
+/datum/reagent/medicine/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	current_cycle++
 	if(length(reagent_removal_skip_list))
 		return
@@ -969,7 +969,7 @@
 	inverse_chem_val 	= 0.35
 	inverse_chem		= /datum/reagent/inverse/antihol
 
-/datum/reagent/medicine/antihol/on_mob_life(mob/living/carbon/M)
+/datum/reagent/medicine/antihol/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
 	M.dizziness = 0
 	M.drowsyness = 0
 	M.slurring = 0

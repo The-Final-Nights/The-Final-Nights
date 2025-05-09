@@ -88,8 +88,9 @@
 	return
 
 // Base mob environment handler for body temperature
-/mob/living/proc/handle_environment()
+/mob/living/proc/handle_environment(delta_time, times_fired)
 	var/loc_temp = get_temperature()
+	var/temp_delta = loc_temp - bodytemperature
 
 	if(temp_delta < 0) // it is cold here
 		if(!on_fire) // do not reduce body temp when on fire

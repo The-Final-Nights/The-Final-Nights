@@ -372,9 +372,6 @@
 #define CRYOSTYLANE_UNDERHEAT_TEMP 50
 #define CRYOSTYLANE_IMPURE_TEMPERATURE_RANGE 200
 
-#define CRYOSTYLANE_UNDERHEAT_TEMP 50
-#define CRYOSTYLANE_IMPURE_TEMPERATURE_RANGE 200
-
 /datum/chemical_reaction/cryostylane
 	results = list(/datum/reagent/cryostylane = 3)
 	required_reagents = list(/datum/reagent/consumable/ice = 1, /datum/reagent/stable_plasma = 1, /datum/reagent/nitrogen = 1)

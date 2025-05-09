@@ -353,7 +353,7 @@
 	if((areatemp < minbodytemp) || (areatemp > maxbodytemp))
 		. = FALSE
 
-/mob/living/simple_animal/handle_environment()
+/mob/living/simple_animal/handle_environment(delta_time, times_fired)
 	var/atom/A = loc
 	if(isturf(A))
 		var/areatemp = get_temperature()

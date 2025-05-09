@@ -19,8 +19,7 @@
 	ph = 3.7
 	purity = 0.5
 	creation_purity = 0.5
-	impure_chem = /datum/reagent/impurity/eigenswap
-	inverse_chem = null
+	inverse_chem = /datum/reagent/inverse/eigenswap
 	inverse_chem_val = 0
 	failed_chem = /datum/reagent/bluespace //crashes out
 	chemical_flags = REAGENT_DEAD_PROCESS //So if you die with it in your body, you still get teleported back to the location as a corpse

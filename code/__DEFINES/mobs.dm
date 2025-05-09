@@ -310,6 +310,7 @@
 #define ETHEREAL_CHARGE_FACTOR 0.8 //factor at which ethereal's charge decreases per second
 #define REAGENTS_METABOLISM 0.2 //How many units of reagent are consumed per second, by default.
 #define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4) // By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
+#define REM REAGENTS_EFFECT_MULTIPLIER //! Shorthand for the above define for ease of use in equations and the like
 
 // Eye protection
 #define FLASH_PROTECTION_SENSITIVE -1
