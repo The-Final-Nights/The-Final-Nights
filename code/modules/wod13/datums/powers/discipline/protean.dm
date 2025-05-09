@@ -65,7 +65,6 @@
 	owner.drop_all_held_items()
 	owner.put_in_r_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
 	owner.put_in_l_hand(new /obj/item/melee/vampirearms/knife/gangrel(owner))
-	owner.add_client_colour(/datum/client_colour/glass_colour/red)
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/protean2)
 
 /datum/discipline_power/protean/feral_claws/deactivate()
