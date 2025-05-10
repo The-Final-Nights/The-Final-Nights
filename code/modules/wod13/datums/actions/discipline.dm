@@ -1,14 +1,18 @@
 /datum/action/discipline
 	check_flags = NONE
-	button_icon = 'code/modules/wod13/UI/actions.dmi' //This is the file for the BACKGROUND icon
+	//button_icon = 'code/modules/wod13/UI/actions.dmi' //This is the file for the BACKGROUND icon
 	background_icon_state = "discipline" //And this is the state for the background icon
-	icon_icon = 'code/modules/wod13/UI/actions.dmi' //This is the file for the ACTION icon
+	//icon_icon = 'code/modules/wod13/UI/actions.dmi' //This is the file for the ACTION icon
 	button_icon_state = "discipline" //And this is the state for the action icon
+
+
+
 
 	vampiric = TRUE
 	var/level_icon_state = "1" //And this is the state for the action icon
 	var/datum/discipline/discipline
 	var/targeting = FALSE
+
 
 /datum/action/discipline/New(datum/discipline/discipline)
 	. = ..()
@@ -97,8 +101,14 @@
 	return .
 
 /datum/action/discipline/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	button_icon = 'code/modules/wod13/UI/actions.dmi'
-	icon_icon = 'code/modules/wod13/UI/actions.dmi'
+	if(owner?.client?.prefs?.old_discipline)
+		button_icon = 'code/modules/wod13/disciplines.dmi'
+		icon_icon = 'code/modules/wod13/disciplines.dmi'
+		background_icon_state = 'code/modules/wod13/disciplines.dmi'
+		button_icon_state = 'code/modules/wod13/disciplines.dmi'
+	else
+		button_icon = 'code/modules/wod13/UI/actions.dmi'
+		icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	if(icon_icon && button_icon_state && ((current_button.button_icon_state != button_icon_state) || force))
 		current_button.cut_overlays(TRUE)
 		if(discipline)
