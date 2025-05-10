@@ -55,3 +55,6 @@
   - bugfix: Butterflies no longer have 5 blood points for vamps to feed on.
   - rscadd: Having the Presence disciplines gives you the Charmer trait, so that NPCs
       respond more favorably to you when you grab them.
+2025-05-10:
+  darkincarnate:
+  - rscadd: Endron templates
