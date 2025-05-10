@@ -5,6 +5,8 @@
 	suit = /obj/item/clothing/suit/vampire/trench
 	id = /obj/item/cockclock
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vampire_stake=3, /obj/item/gun/ballistic/vampire/revolver=1, /obj/item/melee/vampirearms/knife=1, /obj/item/vamp/keys/hack=1, /obj/item/melee/vampirearms/katana/kosa=1)
+	v_duty = "You are a member of the Sabbat. You are charged with rebellion against the Elders and the Camarilla, against the Jyhad, against the Masquerade and the Traditions, and the recognition of Caine as the true Dark Father of all Kindred kind. <br> <b> NOTE: BY PLAYING THIS RULE YOU AGREE TO AND HAVE READ THE SERVER'S RULES ON ESCALATION FOR ANTAGS. KEEP THINGS INTERESTING AND ENGAGING FOR BOTH SIDES. KILLING PLAYERS JUST BECAUSE YOU CAN MAY RESULT IN A ROLEBAN. "
+
 
 /datum/outfit/job/sabbatist/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -25,14 +27,17 @@
 		H.mind.add_antag_datum(/datum/antagonist/sabbatist)
 	GLOB.sabbatites += H
 
-	var/my_name = "Tyler"
-	if(H.gender == MALE)
-		my_name = pick(GLOB.first_names_male)
+	var/antagonist_name = H.antagonist_name
+	if(H.antagonist_name)
+		H.fully_replace_character_name(null,"[antagonist_name]")
 	else
-		my_name = pick(GLOB.first_names_female)
-	var/my_surname = pick(GLOB.last_names)
-	H.fully_replace_character_name(null,"[my_name] [my_surname]")
-
+		var/my_name = "Tyler"
+		if(H.gender == MALE)
+			my_name = pick(GLOB.first_names_male)
+		else
+			my_name = pick(GLOB.first_names_female)
+		var/my_surname = pick(GLOB.last_names)
+		H.fully_replace_character_name(null,"[my_name] [my_surname]")
 	var/list/landmarkslist = list()
 	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
 		if(S.name == name)

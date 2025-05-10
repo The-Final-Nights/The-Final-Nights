@@ -72,6 +72,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
 	var/total_age = 30
+	var/antagonist_name = ""
 	var/underwear = "Nude"				//underwear type
 	var/underwear_color = "000"			//underwear color
 	var/undershirt = "Nude"				//undershirt type
@@ -446,6 +447,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<a href='byond://?_src_=prefs;preference=name;task=random'>Random Name</A> "
 			dat += "<br><b>Name:</b> "
 			dat += "<a href='byond://?_src_=prefs;preference=name;task=input'>[real_name]</a><BR>"
+			dat += "<b>Antagonist Name:</b> <a href ='byond://?_src_=prefs;preference=antagonist_name;task=input'>[antagonist_name]</a><BR>"
+
 
 			if(!(AGENDER in pref_species.species_traits))
 				var/dispGender
@@ -1884,6 +1887,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			switch(href_list["preference"])
 				if("name")
 					real_name = pref_species.random_name(gender,1)
+				if("antagonist_name")
+					antagonist_name = pref_species.random_name(gender,1)
 				if("age")
 					age = rand(AGE_MIN, AGE_MAX)
 				if("total_age")
@@ -2013,6 +2018,19 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (total_age < age)
 							age = total_age
 						update_preview_icon()
+
+				if("antagonist_name")
+					if(slotlocked)
+						return
+					var/new_antagonist_name = tgui_input_text(user, "Choose your character's name as an antagonist:", "Character Preference", max_length = MAX_NAME_LEN)
+					if(new_antagonist_name)
+						new_antagonist_name = reject_bad_name(new_antagonist_name)
+						if(new_antagonist_name)
+							antagonist_name = new_antagonist_name
+						else
+							to_chat(user, "<font color='red'>Invalid name. Your name should be at least 2 and at most [MAX_NAME_LEN] characters long. It may only contain the characters A-Z, a-z, -, ' and . It must not contain any words restricted by IC chat and name filters.</font>")
+
+
 
 				if("info_choose")
 					var/new_info_known = tgui_input_list(user, "Choose who knows your character:", "Fame", list(INFO_KNOWN_UNKNOWN, INFO_KNOWN_CLAN_ONLY, INFO_KNOWN_FACTION, INFO_KNOWN_PUBLIC))
@@ -3359,6 +3377,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.real_name = real_name
 	character.true_real_name = real_name
 	character.name = character.real_name
+	character.antagonist_name = antagonist_name
 	character.diablerist = diablerist
 	character.headshot_link = headshot_link // TFN EDIT
 	character.physique = physique

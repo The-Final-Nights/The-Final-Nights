@@ -989,7 +989,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set name = "Set Late Party"
 	set category = "Admin.Game"
 
-	var/setting = input(usr, "Choose the bad guys party setting:", "Set Late Party") in list("caitiff", "sabbat", "hunter", "random")
+	var/setting = input(usr, "Choose the bad guys party setting:", "Set Late Party") in list("sabbat", "hunter", "random")
 	if(setting == "random")
 		SSbad_guys_party.setting = null
 		SSbad_guys_party.get_badguys()
