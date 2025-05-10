@@ -168,7 +168,7 @@
 	duration_length = 3 SECONDS
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/pre_activation_checks(mob/living/target)
-	if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == ROLL_SUCCESS)
+	if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == !ROLL_SUCCESS)
 		to_chat(owner, span_warning("[target] has too much willpower to induce fear into them!"))
 		return FALSE
 	return TRUE
@@ -251,11 +251,12 @@
 /datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
 	if(SSroll.storyteller_roll(owner.get_total_mentality(), 6, mobs_to_show_output = owner) == ROLL_SUCCESS)
-		to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
-		return FALSE
+		to_chat(target, span_boldwarning("You hear an infernal laugh!"))
+		new /datum/hallucination/baali(target, TRUE)
+		return TRUE
 
-	to_chat(target, span_boldwarning("You hear an infernal laugh!"))
-	new /datum/hallucination/baali(target, TRUE)
+	to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
+	return FALSE
 
 //CONDEMNTATION
 /datum/discipline_power/daimonion/condemnation
