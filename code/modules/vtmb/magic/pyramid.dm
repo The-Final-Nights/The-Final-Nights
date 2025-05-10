@@ -792,7 +792,7 @@
 	else if(species == "Werewolf")
 		message += "This is not normal blood... it feels too alive, filled with rage...\n"
 	else if (species == "Kuei-Jin")
-		message += "This blood's origin is murky and unknown. Could it be one of the clanless?\n"
+		message += "This blood has a strange quality, it appears to have a mixture of death and life itself...\n"
 
 	//generation
 	if(generation == 4)
