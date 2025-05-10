@@ -1485,6 +1485,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(!bypass && !job.is_character_old_enough(user.client.prefs.total_age))
 				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[AT LEAST [job.minimum_character_age] YEARS OLD\]</font></td></tr>"
 				continue
+			if(!bypass && !job.is_vampire_old_enough(user.client.prefs.age, user.client.prefs.total_age))
+				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[AT LEAST [job.minimum_vampire_age] VAMPIRE YEARS OLD\]</font></td></tr>"
+				continue
 			if((generation > job.minimal_generation) && !bypass)
 				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[FROM [job.minimal_generation] GENERATION AND OLDER\]</font></td></tr>"
 				continue
