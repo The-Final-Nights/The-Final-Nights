@@ -16,7 +16,6 @@
 	fill_icon_thresholds = list(0, 25, 50, 75, 100)
 
 	var/blood_type = "O-"
-	var/unique_blood = null
 	var/labelled = FALSE
 	var/amount_of_bloodpoints = 2
 	var/vitae = FALSE
@@ -24,7 +23,6 @@
 /obj/item/reagent_containers/blood/Initialize()
 	. = ..()
 	if(blood_type != null)
-		reagents.add_reagent(unique_blood ? unique_blood : /datum/reagent/blood, 200,
 		list("donor" = null,
 			"viruses" = null,
 			"blood_DNA" = null,
@@ -130,3 +128,65 @@
 /obj/item/reagent_containers/blood/random/Initialize()
 	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-")
 	return ..()
+
+/obj/item/reagent_containers/blood/bweedpack
+	name = "\improper elite blood pack (full)"
+	blood_type = null
+
+/obj/item/reagent_containers/blood/bweedpack/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drug/cannabis, 20)
+	reagents.add_reagent(/datum/reagent/toxin/lipolicide, 20)
+	reagents.add_reagent(/datum/reagent/blood, 160,
+		list("donor" = null,
+			"viruses" = null,
+			"blood_DNA" = null,
+			"blood_type" = "O-",
+			"resistances" = null,
+			"trace_chem" = null))
+
+/obj/item/reagent_containers/blood/cokepack
+	name = "\improper elite blood pack (full)"
+	blood_type = null
+
+/obj/item/reagent_containers/blood/cokepack/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drug/methamphetamine/cocaine, 15)
+	reagents.add_reagent(/datum/reagent/blood, 185,
+		list("donor" = null,
+			"viruses" = null,
+			"blood_DNA" = null,
+			"blood_type" = "O-",
+			"resistances" = null,
+			"trace_chem" = null))
+
+/obj/item/reagent_containers/blood/morphpack
+	name = "\improper elite blood pack (full)"
+	blood_type = null
+
+/obj/item/reagent_containers/blood/morphpack/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/toxin/chloralhydrate, 10)
+	reagents.add_reagent(/datum/reagent/medicine/morphine, 10)
+	reagents.add_reagent(/datum/reagent/blood, 180,
+		list("donor" = null,
+			"viruses" = null,
+			"blood_DNA" = null,
+			"blood_type" = "O-",
+			"resistances" = null,
+			"trace_chem" = null))
+
+/obj/item/reagent_containers/blood/methpack
+	name = "\improper elite blood pack (full)"
+	blood_type = null
+
+/obj/item/reagent_containers/blood/methpack/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drug/methamphetamine, 15)
+	reagents.add_reagent(/datum/reagent/blood, 185,
+		list("donor" = null,
+			"viruses" = null,
+			"blood_DNA" = null,
+			"blood_type" = "O-",
+			"resistances" = null,
+			"trace_chem" = null))

@@ -2,7 +2,7 @@
 	name = "Make Meth Adulterated Bloodpack"
 	time = 25
 	reqs = list(/obj/item/reagent_containers/food/drinks/meth = 1, /obj/item/reagent_containers/blood = 1)
-	result = /obj/item/reagent_containers/drug/methpack
+	result = /obj/item/reagent_containers/blood/methpack
 	always_available = TRUE
 	category = CAT_DRUGS
 
@@ -10,7 +10,7 @@
 	name = "Make Morphine Adulterated Bloodpack (Syringe)"
 	time = 25
 	reqs = list(/obj/item/reagent_containers/syringe/contraband/morphine = 1, /obj/item/reagent_containers/blood = 1)
-	result = /obj/item/reagent_containers/drug/morphpack
+	result = /obj/item/reagent_containers/blood/morphpack
 	always_available = TRUE
 	category = CAT_DRUGS
 
@@ -18,7 +18,7 @@
 	name = "Make Morphine Adulterated Bloodpack (Reagent)"
 	time = 25
 	reqs = list(/datum/reagent/medicine/morphine = 15, /obj/item/reagent_containers/blood = 1)
-	result = /obj/item/reagent_containers/drug/morphpack
+	result = /obj/item/reagent_containers/blood/morphpack
 	always_available = TRUE
 	category = CAT_DRUGS
 
@@ -26,7 +26,7 @@
 	name = "Make Cocaine Adulterated Bloodpack"
 	time = 25
 	reqs = list(/obj/item/reagent_containers/food/drinks/meth/cocaine = 1, /obj/item/reagent_containers/blood = 1)
-	result = /obj/item/reagent_containers/drug/cokepack
+	result = /obj/item/reagent_containers/blood/cokepack
 	always_available = TRUE
 	category = CAT_DRUGS
 
@@ -34,6 +34,6 @@
 	name = "Make Weed Adulterated Bloodpack"
 	time = 25
 	reqs = list(/obj/item/weedpack = 1, /obj/item/reagent_containers/blood = 1)
-	result = /obj/item/reagent_containers/drug/bweedpack
+	result = /obj/item/reagent_containers/blood/bweedpack
 	always_available = TRUE
 	category = CAT_DRUGS
