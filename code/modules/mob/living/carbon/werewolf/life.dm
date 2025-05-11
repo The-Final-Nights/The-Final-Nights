@@ -42,11 +42,14 @@
 			//else if(auspice.rage == 0)
 			//	transformator.trans_gender(src, auspice.base_breed)
 			if(ishuman(src))
-				if(auspice.base_breed == "Homid")
+				if(auspice.base_breed == "Homid" || HAS_TRAIT(src, TRAIT_CORAX)) // Corvid-born Corax don't generate rage when in homid passively, the hope is to make talking more relaxed and the Corax weaker in combat.
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0)
 			//	transformator.trans_gender(src, auspice.base_breed)
-
+			if (iscorvid(src))
+				gaining_rage = FALSE // Corax will ideally be talking a lot, not having passive rage generation should also make them weaker in combat.
+			if (iscoraxcrinos(src))
+				gaining_rage = TRUE // Corax have no Metis, Crinos is uneasy no matter your breed, no "buts" about it.
 
 			if(gaining_rage && client)
 				if(((last_rage_gain + RAGE_LIFE_COOLDOWN) < world.time) && (auspice.rage <= 6))

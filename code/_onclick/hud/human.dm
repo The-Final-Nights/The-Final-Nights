@@ -82,15 +82,7 @@
 			transform_werewolf.hud = src
 			static_inventory += transform_werewolf
 
-			transform_werewolf = new /atom/movable/screen/auspice() // The Corax retain the ability to look at the moon and howl, since they still have Rage.
-			transform_werewolf.screen_loc = ui_werewolf_auspice
-			transform_werewolf.hud = src
-			static_inventory += transform_werewolf
 
-			rage_icon = new /atom/movable/screen/rage()
-			rage_icon.screen_loc = ui_werewolf_rage
-			rage_icon.hud = src
-			infodisplay += rage_icon
 		else
 			transform_werewolf = new /atom/movable/screen/transform_lupus()
 			transform_werewolf.screen_loc = ui_werewolf_lupus
@@ -107,15 +99,15 @@
 			transform_werewolf.hud = src
 			static_inventory += transform_werewolf
 
-			transform_werewolf = new /atom/movable/screen/auspice()
-			transform_werewolf.screen_loc = ui_werewolf_auspice
-			transform_werewolf.hud = src
-			static_inventory += transform_werewolf
+		transform_werewolf = new /atom/movable/screen/auspice() // Corax and Garou can share these two UI elements
+		transform_werewolf.screen_loc = ui_werewolf_auspice
+		transform_werewolf.hud = src
+		static_inventory += transform_werewolf
 
-			rage_icon = new /atom/movable/screen/rage()
-			rage_icon.screen_loc = ui_werewolf_rage
-			rage_icon.hud = src
-			infodisplay += rage_icon
+		rage_icon = new /atom/movable/screen/rage()
+		rage_icon.screen_loc = ui_werewolf_rage
+		rage_icon.hud = src
+		infodisplay += rage_icon
 
 
 
