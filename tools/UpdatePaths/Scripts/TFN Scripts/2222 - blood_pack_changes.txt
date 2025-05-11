@@ -1,0 +1,1 @@
+/obj/item/drinkable_bloodpack : /obj/item/reagent_containers/blood{@OLD}

@@ -65,9 +65,9 @@
 				for(var/obj/item/I in get_turf(src))
 					for(var/item_type in sacrifices)
 						if(istype(I, item_type))
-							if(istype(I, /obj/item/drinkable_bloodpack))
-								var/obj/item/drinkable_bloodpack/bloodpack = I
-								if(!bloodpack.empty)
+							if(istype(I, /obj/item/reagent_containers/blood))
+								var/obj/item/reagent_containers/blood/bloodpack = I
+								if(!bloodpack.reagents)
 									found_items += I
 									break
 							else
@@ -247,7 +247,7 @@
 	icon_state = "rune5"
 	word = "TE-ME'LL"
 	thaumlevel = 3
-	sacrifices = list(/obj/item/drinkable_bloodpack)
+	sacrifices = list(/obj/item/reagent_containers/blood)
 
 /mob/living/simple_animal/hostile/ghost/tremere
 	maxHealth = 1
@@ -278,7 +278,7 @@
 	icon_state = "rune6"
 	word = "POR'TALE"
 	thaumlevel = 5
-	sacrifices = list(/obj/item/drinkable_bloodpack)
+	sacrifices = list(/obj/item/reagent_containers/blood)
 
 /obj/ritualrune/teleport/complete()
 	if(!activated)

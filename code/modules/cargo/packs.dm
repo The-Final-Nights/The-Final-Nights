@@ -878,10 +878,7 @@
 					/obj/item/reagent_containers/blood/a_minus,
 					/obj/item/reagent_containers/blood/b_plus,
 					/obj/item/reagent_containers/blood/b_minus,
-					/obj/item/reagent_containers/blood/o_plus,
-					/obj/item/reagent_containers/blood/o_minus,
-					/obj/item/reagent_containers/blood/lizard,
-					/obj/item/reagent_containers/blood/ethereal)
+					/obj/item/reagent_containers/blood/o_plus)
 	crate_name = "blood freezer"
 	crate_type = /obj/structure/closet/crate/freezer
 
@@ -958,7 +955,6 @@
 					/obj/item/storage/firstaid/brute,
 					/obj/item/storage/firstaid/fire,
 					/obj/item/defibrillator/loaded,
-					/obj/item/reagent_containers/blood/o_minus,
 					/obj/item/storage/pill_bottle/mining,
 					/obj/item/reagent_containers/pill/neurine,
 					/obj/item/stack/medical/bone_gel,

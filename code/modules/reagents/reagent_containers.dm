@@ -4,6 +4,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = null
 	w_class = WEIGHT_CLASS_TINY
+	var/reagent_container_update_file = 'icons/obj/reagentfillings.dmi'
 	var/amount_per_transfer_from_this = 5
 	var/list/possible_transfer_amounts = list(5,10,15,20,25,30)
 	var/volume = 30
@@ -161,7 +162,7 @@
 		return
 	if(reagents.total_volume)
 		var/fill_name = fill_icon_state//? fill_icon_state : icon_state
-		var/mutable_appearance/filling = mutable_appearance('icons/obj/reagentfillings.dmi', "[fill_name][fill_icon_thresholds[1]]")
+		var/mutable_appearance/filling = mutable_appearance(reagent_container_update_file, "[fill_name][fill_icon_thresholds[1]]")
 
 		var/percent = round((reagents.total_volume / volume) * 100)
 		for(var/i in 1 to fill_icon_thresholds.len)
