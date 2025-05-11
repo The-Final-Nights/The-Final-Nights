@@ -2,9 +2,9 @@
 /obj/item/reagent_containers/blood
 	name = "blood pack"
 	desc = "Contains blood used for transfusion. Must be attached to an IV drip."
-	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "blood0"
 	inhand_icon_state = "blood0"
+	icon = 'code/modules/wod13/items.dmi'
 	lefthand_file = 'code/modules/wod13/lefthand.dmi'
 	righthand_file = 'code/modules/wod13/righthand.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
