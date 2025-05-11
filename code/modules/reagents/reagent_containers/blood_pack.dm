@@ -8,7 +8,6 @@
 	lefthand_file = 'code/modules/wod13/lefthand.dmi'
 	righthand_file = 'code/modules/wod13/righthand.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
-	reagent_container_update_file = 'code/modules/wod13/items.dmi'
 	volume = 200
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 100, ACID = 100)
 	item_flags = NOBLUDGEON
@@ -36,8 +35,20 @@
 
 /obj/item/reagent_containers/blood/update_appearance(updates)
 	. = ..()
-	inhand_icon_state = fill_icon_state ? fill_icon_state : "blood0"
-	onflooricon_state = fill_icon_state ? fill_icon_state : "blood0"
+	var/percent = round((reagents.total_volume / volume) * 100)
+	switch(percent)
+		if(100)
+			icon_state = "blood100"
+		if(75)
+			icon_state = "blood75"
+		if(50)
+			icon_state = "blood50"
+		if(25)
+			icon_state = "blood25"
+		if(0)
+			icon_state = "blood0"
+	inhand_icon_state = icon_state
+	onflooricon_state = icon_state
 
 /// Handles updating the container when the reagents change.
 /obj/item/reagent_containers/blood/on_reagent_change(datum/reagents/holder, ...)
