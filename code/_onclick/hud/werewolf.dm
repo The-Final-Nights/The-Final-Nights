@@ -149,7 +149,7 @@
 //equippable shit
 
 //hands
-	if(iscrinos(owner))
+	if(iscrinos(owner) || iscoraxcrinos(owner) || iscorvid(owner)) // corvid and crinos get hands
 		build_hand_slots()
 
 //begin buttons

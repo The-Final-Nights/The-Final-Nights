@@ -85,14 +85,14 @@
 		switch(renownrank)
 			if(1)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(2)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(3,4,5,6)
-				. += "<b>You know [p_them()] as an [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe.name].</b>"
+				. += "<b>You know [p_them()] as \a [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe.name].</b>"
 				isknown = 1
 		if(isknown)
 			switch(honor)

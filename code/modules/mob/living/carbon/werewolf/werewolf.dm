@@ -276,28 +276,6 @@
 /mob/living/carbon/werewolf/crinos/can_hold_items(obj/item/I)
 	return TRUE
 
-/mob/living/carbon/werewolf/corax/corax_crinos/show_inv(mob/user)
-	user.set_machine(src)
-	var/list/dat = list()
-	dat += "<table>"
-	for(var/i in 1 to held_items.len)
-		var/obj/item/I = get_item_for_held_index(i)
-		dat += "<tr><td><B>[get_held_index_name(i)]:</B></td><td><A href='byond://?src=[REF(src)];item=[ITEM_SLOT_HANDS];hand_index=[i]'>[(I && !(I.item_flags & ABSTRACT)) ? I : "<font color=grey>Empty</font>"]</a></td></tr>"
-	dat += "</td></tr><tr><td>&nbsp;</td></tr>"
-	dat += "<tr><td><A href='byond://?src=[REF(src)];pouches=1'>Empty Pouches</A></td></tr>"
-
-	dat += {"</table>
-	<A href='byond://?src=[REF(user)];mach_close=mob[REF(src)]'>Close</A>
-	"}
-
-	var/datum/browser/popup = new(user, "mob[REF(src)]", "[src]", 440, 510)
-	popup.set_content(dat.Join())
-	popup.open()
-
-
-/mob/living/carbon/werewolf/corax/corax_crinos/can_hold_items(obj/item/I)
-	return TRUE
-
 
 
 /mob/living/carbon/werewolf/crinos/Topic(href, href_list)
@@ -320,3 +298,54 @@
 
 /mob/living/carbon/werewolf/crinos/get_permeability_protection(list/target_zones)
 	return 0.8
+
+/mob/living/carbon/werewolf/corax/corax_crinos/show_inv(mob/user)
+	user.set_machine(src)
+	var/list/dat = list()
+	dat += "<table>"
+	for(var/i in 1 to held_items.len)
+		var/obj/item/I = get_item_for_held_index(i)
+		dat += "<tr><td><B>[get_held_index_name(i)]:</B></td><td><A href='byond://?src=[REF(src)];item=[ITEM_SLOT_HANDS];hand_index=[i]'>[(I && !(I.item_flags & ABSTRACT)) ? I : "<font color=grey>Empty</font>"]</a></td></tr>"
+	dat += "</td></tr><tr><td>&nbsp;</td></tr>"
+	dat += "<tr><td><A href='byond://?src=[REF(src)];pouches=1'>Empty Pouches</A></td></tr>"
+
+	dat += {"</table>
+	<A href='byond://?src=[REF(user)];mach_close=mob[REF(src)]'>Close</A>
+	"}
+
+	var/datum/browser/popup = new(user, "mob[REF(src)]", "[src]", 440, 510)
+	popup.set_content(dat.Join())
+	popup.open()
+
+
+/mob/living/carbon/werewolf/corax/corax_crinos/can_hold_items(obj/item/I)
+	return TRUE
+
+/mob/living/carbon/werewolf/corax/corax_crinos/Topic(href, href_list)
+	//strip panel
+	if(href_list["pouches"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+		visible_message("<span class='danger'>[usr] tries to empty [src]'s pouches.</span>", \
+						"<span class='userdanger'>[usr] tries to empty your pouches.</span>")
+		if(do_mob(usr, src, POCKET_STRIP_DELAY * 0.5))
+			dropItemToGround(r_store)
+			dropItemToGround(l_store)
+
+	..()
+
+/mob/living/carbon/werewolf/corax/corax_crinos/resist_grab(moving_resist)
+	if(pulledby.grab_state)
+		visible_message("<span class='danger'>[src] breaks free of [pulledby]'s grip!</span>", \
+						"<span class='danger'>You break free of [pulledby]'s grip!</span>")
+	pulledby.stop_pulling()
+	. = 0
+
+/mob/living/carbon/werewolf/corax/corax_crinos/get_permeability_protection(list/target_zones)
+	return 0.8
+
+/mob/living/carbon/werewolf/corax/corax_crinos/Move(NewLoc, direct)
+	if(isturf(loc))
+		step_variable = step_variable+1
+		if(step_variable == 2)
+			step_variable = 0
+			playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_step.ogg', 50, FALSE) // feel free to change the noise to something more avian later.
+	..()

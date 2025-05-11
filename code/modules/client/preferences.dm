@@ -353,35 +353,35 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	if(tribe != "Corax")
 		switch(rank)
 			if(0)
-				return "Cub"
+				return "cub" // in lowercase so that \a might function during the character examine
 			if(1)
-				return "Cliath"
+				return "cliath"
 			if(2)
-				return "Fostern"
+				return "fostern"
 			if(3)
-				return "Adren"
+				return "adren"
 			if(4)
-				return "Athro"
+				return "athro"
 			if(5)
-				return "Elder"
+				return "elder"
 			if(6)
-				return "Legend"
+				return "legend"
 	else
 		switch(rank)
 			if(0)
-				return "Fledgling"
+				return "fledgling"
 			if(1)
-				return "Oviculum"
+				return "oviculum"
 			if(2)
-				return "Neocornix"
+				return "neocornix"
 			if(3)
-				return "Ales"
+				return "ales"
 			if(4)
-				return "Volucris"
+				return "volucris"
 			if(5)
-				return "Corvus"
+				return "corvus"
 			if(6)
-				return "Grey Eminence"
+				return "grey eminence"
 
 /proc/RankDesc(rank, tribe)
 	if(tribe != "Corax")
@@ -3464,7 +3464,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if(pref_species.name == "Werewolf")
 		switch(tribe.name)
-			if("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens")
+			if("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens", "Corax")
 				character.yin_chi = 1
 				character.max_yin_chi = 1
 				character.yang_chi = 5 + (auspice_level * 2)
