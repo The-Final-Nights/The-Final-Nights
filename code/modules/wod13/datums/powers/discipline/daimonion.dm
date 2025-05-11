@@ -1,6 +1,6 @@
 /datum/discipline/daimonion
 	name = "Daimonion"
-	desc = "Get a help from the Hell creatures, resist THE FIRE, transform into an imp. Violates Masquerade."
+	desc = "Draw power from the demons and infernal nature of Hell. Use subtle power to manipulate people and when you must, draw upon fire itself and protect yourself."
 	icon_state = "daimonion"
 	clan_restricted = TRUE
 	power_type = /datum/discipline_power/daimonion
