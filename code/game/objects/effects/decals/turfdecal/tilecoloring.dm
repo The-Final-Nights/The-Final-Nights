@@ -6,7 +6,7 @@
 
 /obj/effect/turf_decal/tile/Initialize()
 	if(SSevents.holidays && SSevents.holidays[APRIL_FOOLS])
-		color = "#[random_short_color()]"
+		color = random_color()
 	. = ..()
 
 /obj/effect/turf_decal/tile/blue
@@ -48,7 +48,7 @@
 	color = "#E300FF" //bright pink as default for mapping
 
 /obj/effect/turf_decal/tile/random/Initialize()
-	color = "#[random_short_color()]"
+	color = random_color()
 	. = ..()
 
 
@@ -59,7 +59,7 @@
 
 /obj/effect/turf_decal/trimline/Initialize()
 	if(SSevents.holidays && SSevents.holidays[APRIL_FOOLS])
-		color = "#[random_short_color()]"
+		color = random_color()
 	. = ..()
 
 /obj/effect/turf_decal/trimline/white

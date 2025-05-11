@@ -93,8 +93,9 @@
 	display_order = JOB_DISPLAY_ORDER_ENDRON
 
 	minimal_masquerade = 5
-	allowed_species = list("Werewolf")
+	allowed_species = list("Werewolf", "Vampire", "Human")
 	allowed_tribes = list("Black Spiral Dancers")
+	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Toreador", "Malkavian", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff")
 
 	my_contact_is_important = TRUE
 	known_contacts = list(
@@ -156,7 +157,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_ENDRON
 
-	minimal_masquerade = 5
+	minimal_masquerade = 4
 	allowed_species = list("Werewolf")
 	allowed_tribes = list("Black Spiral Dancers")
 
@@ -221,7 +222,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_ENDRON
 
-	minimal_masquerade = 5
+	minimal_masquerade = 4
 	allowed_species = list("Werewolf")
 	allowed_tribes = list("Black Spiral Dancers")
 
@@ -283,9 +284,10 @@
 
 	display_order = JOB_DISPLAY_ORDER_ENDRON
 
-	minimal_masquerade = 5
-	allowed_species = list("Werewolf")
+	minimal_masquerade = 3
+	allowed_species = list("Werewolf", "Vampire", "Human")
 	allowed_tribes = list("Black Spiral Dancers")
+	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Toreador", "Malkavian", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff")
 
 	known_contacts = list(
 	)
@@ -319,7 +321,7 @@
 	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf")
 	department_head = list("Endron International")
 	allowed_tribes = list("Black Spiral Dancers", "Ronin")
-	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
+	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Toreador", "Malkavian", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff")
 	faction = "Vampire"
 	selection_color = "#015334"
 
@@ -344,7 +346,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_ENDRON
 
-	minimal_masquerade = 5
+	minimal_masquerade = 3
 
 	known_contacts = list(
 	)

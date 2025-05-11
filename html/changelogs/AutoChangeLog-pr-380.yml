@@ -1,0 +1,6 @@
+author: "darkincarnate"
+delete-after: True
+changes:
+  - rscadd: "new endron HQ"
+  - rscadd: "a light outside the tower front door per request"
+  - rscdel: "old endron HQ"
