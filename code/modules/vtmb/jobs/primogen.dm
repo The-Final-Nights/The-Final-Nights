@@ -71,7 +71,7 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Nosferatu")
 	minimal_generation = 10
-	minimum_character_age = 100
+//	minimum_character_age = 100 //Uncomment if age restriction wanted
 
 	v_duty = "Offer your infinite knowledge to Prince of the City, and run the warren, your domain watches over the sewers."
 	experience_addition = 20
@@ -119,7 +119,7 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Ventrue")
 	minimal_generation = 10
-	minimum_character_age = 100
+//	minimum_character_age = 100 //Uncomment if age restriction wanted
 
 	v_duty = "Offer your infinite knowledge to Prince of the City. Maintain the local Jazz Club, in front of the Tower, and its Elysium."
 	experience_addition = 20
@@ -166,7 +166,7 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Toreador")
 	minimal_generation = 10
-	minimum_character_age = 100
+//	minimum_character_age = 100 //Uncomment if age restriction wanted
 
 	v_duty = "Offer your infinite knowledge to Prince of the City. Take care of the Strip Club and its Elysium, for it is your domain and a social center within the city."
 	experience_addition = 20
@@ -214,7 +214,7 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Banu Haqim")
 	minimal_generation = 10
-	minimum_character_age = 100
+//	minimum_character_age = 100 //Uncomment if age restriction wanted
 
 	v_duty = "Offer your infinite knowledge to Prince of the City, while overseeing the Banu Haqim in the city. Monitor their contracts and ensure they remain true to the ways of the Clan. You have an official cover with the Police Department as a local civilian consultant, ensure things run smoothly, on either end."
 	experience_addition = 20
@@ -260,7 +260,7 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Lasombra")
 	minimal_generation = 10
-	// minimum_character_age = 100 // Heavily meritocratic and new to the Camarilla, plus, Julia Sowinski *shrug
+// minimum_character_age = 100 // Heavily meritocratic and new to the Camarilla, plus, Julia Sowinski *shrug
 
 	v_duty = "Offer your infinite knowledge to Prince of the City. Monitor those of your Clan and your lesser cousins, while holding a Court of Blood as need be, for all it takes for the Camarilla to turn on you is one mistake. You and Your Clan were given a domain in the local Church and in the vicinity of a swarm of Lupines, keep matters under control."
 	experience_addition = 20
