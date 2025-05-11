@@ -19,7 +19,7 @@
 
 //	minimal_generation = 13
 //	minimum_character_age = 70 //Uncomment if age-restriction wanted.
-	minimum_vampire_age = 40
+	minimum_vampire_age = 1
 
 	my_contact_is_important = TRUE
 	known_contacts = list(
