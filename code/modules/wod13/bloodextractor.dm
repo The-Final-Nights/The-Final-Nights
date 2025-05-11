@@ -17,16 +17,15 @@
 	if(!target.buckled)
 		to_chat(user, span_warning("You need to buckle [target] before using the extractor!"))
 		return
-	if(TIMER_COOLDOWN_CHECK(target, last_extracted))
+	if(!COOLDOWN_FINISHED(src, last_extracted))
 		to_chat(user, span_warning("The [src] isn't ready yet!"))
 		return
-	TIMER_COOLDOWN_START(target, last_extracted, 20 SECONDS)
-
+	COOLDOWN_START(src, last_extracted, 20 SECONDS)
 	if(iskindred(src))
 		if(target.bloodpool < 4)
 			to_chat(user, span_warning("The [src] can't find enough blood in [target]'s body!"))
 			return
-		new /obj/item/reagent_containers/blood/vitae(src)
+		new /obj/item/reagent_containers/blood/vitae(get_turf(src))
 		target.bloodpool = max(0, target.bloodpool - 4)
 		return
 
@@ -34,8 +33,7 @@
 		to_chat(user, span_warning("The [src] can't find enough blood in [target]'s body!"))
 		return
 	if(HAS_TRAIT(target, TRAIT_POTENT_BLOOD))
-		new /obj/item/reagent_containers/blood/elite(src)
+		new /obj/item/reagent_containers/blood/elite(get_turf(src))
 	else
-		new /obj/item/reagent_containers/blood(src)
+		new /obj/item/reagent_containers/blood(get_turf(src))
 	target.bloodpool = max(0, target.bloodpool - 2)
-

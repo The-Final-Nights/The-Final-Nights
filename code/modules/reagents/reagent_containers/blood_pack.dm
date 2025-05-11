@@ -32,6 +32,9 @@
 			"trace_chem" = null))
 	update_appearance()
 
+/obj/item/reagent_containers/blood/is_drainable()
+	return TRUE
+
 /obj/item/reagent_containers/blood/update_appearance(updates)
 	. = ..()
 	var/percent = round((reagents.total_volume / volume) * 100)
