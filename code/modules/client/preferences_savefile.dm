@@ -652,6 +652,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// TFN EDIT START: gen tweaks
 	generation				= sanitize_integer(generation, 7, 14, initial(generation))
 	generation_bonus				= sanitize_integer(generation_bonus, 0, 5, initial(generation_bonus))
+	glory = sanitize_integer(glory, 0, 10, initial(glory))
+	wisdom = sanitize_integer(wisdom, 0, 10, initial(wisdom))
+	honor = sanitize_integer(honor, 0, 10, initial(honor))
+	renownrank = sanitize_integer(renownrank, 0, 5, initial(renownrank))
 	// TFN EDIT END
 	hair_color			= sanitize_hexcolor(hair_color)
 	facial_hair_color			= sanitize_hexcolor(facial_hair_color)
