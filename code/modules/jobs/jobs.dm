@@ -128,7 +128,8 @@ GLOBAL_LIST_INIT(spiral_positions, list(
 
 GLOBAL_LIST_INIT(sabbat_positions, list(
 	"Sabbat Ductus",
-	"Sabbat Pack"
+	"Sabbat Pack",
+	"Sabbat Priest"
 ))
 
 GLOBAL_LIST_INIT(ss13, list(

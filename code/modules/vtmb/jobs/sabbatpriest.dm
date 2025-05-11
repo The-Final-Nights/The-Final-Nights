@@ -1,33 +1,37 @@
-/datum/job/vamp/sabbatductus
-	title = "Sabbat Ductus"
+/datum/job/vamp/sabbatpriest
+	title = "Sabbat Priest"
 	faction = "Vampire"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "Caine"
 	selection_color = "#7B0000"
 	access = list()
 	minimal_access = list()
-	outfit = /datum/outfit/job/sabbatductus
+	outfit = /datum/outfit/job/sabbatpriest
 	allowed_species = list("Vampire")
 	exp_type_department = EXP_TYPE_SABBAT
+	paycheck = PAYCHECK_ASSISTANT // Get a job. Job reassignment changes your paycheck now. Get over it.
+	paycheck_department = ACCOUNT_CIV
+
 	access = list(ACCESS_MAINT_TUNNELS)
 	liver_traits = list(TRAIT_GREYTIDE_METABOLISM)
 
-	v_duty = "You are a Ductus and Pack Leader of your Sabbat pack. You are charged with rebellion against the Elders and the Camarilla, against the Jyhad, against the Masquerade and the Traditions, and the recognition of Caine as the true Dark Father of all Kindred kind.  <br> <b> NOTE: BY PLAYING THIS ROLE YOU AGREE TO AND HAVE READ THE SERVER'S RULES ON ESCALATION FOR ANTAGS. KEEP THINGS INTERESTING AND ENGAGING FOR BOTH SIDES. KILLING PLAYERS JUST BECAUSE YOU CAN MAY RESULT IN A ROLEBAN.</b>"
+	v_duty = "You are a member of the Sabbat. You are charged with rebellion against the Elders and the Camarilla, against the Jyhad, against the Masquerade and the Traditions, and the recognition of Caine as the true Dark Father of all Kindred kind.  <br> <b> NOTE: BY PLAYING THIS ROLE YOU AGREE TO AND HAVE READ THE SERVER'S RULES ON ESCALATION FOR ANTAGS. KEEP THINGS INTERESTING AND ENGAGING FOR BOTH SIDES. KILLING PLAYERS JUST BECAUSE YOU CAN MAY RESULT IN A ROLEBAN. "
 	duty = "Down with the Camarilla. Down with the Elders. Down with the Jyhad! The Kindred are the true rulers of Earth, blessed by Caine, the Dark Father."
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Tzimisce", "Baali")
-	display_order = JOB_DISPLAY_ORDER_SABBATDUCTUS
+	display_order = JOB_DISPLAY_ORDER_SABBATPRIEST
 
-/datum/outfit/job/sabbatductus
-	name = "Sabbat Ductus"
-	jobtype = /datum/job/vamp/sabbatductus
+/datum/outfit/job/sabbatpriest
+	name = "Sabbat Priest"
+	jobtype = /datum/job/vamp/sabbatpriest
 	l_pocket = /obj/item/vamp/phone
 	id = /obj/item/cockclock
 
 
 
-/datum/outfit/job/sabbatductus/pre_equip(mob/living/carbon/human/H)
+
+/datum/outfit/job/sabbatpriest/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.clane)
 		if(H.gender == MALE)
@@ -52,14 +56,15 @@
 	if(H.clane && H.clane.name != "Lasombra")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 	if(H.mind)
-		H.mind.add_antag_datum(/datum/antagonist/sabbatductus)
+		H.mind.add_antag_datum(/datum/antagonist/sabbatpriest)
 
-/obj/effect/landmark/start/sabbatductus
-	name = "Sabbat Ductus"
+
+/obj/effect/landmark/start/sabbatpriest
+	name = "Sabbat Priest"
 	icon_state = "Assistant"
 
 
-/datum/antagonist/sabbatductus
+/datum/antagonist/sabbatpriest
 	name = "Sabbatist"
 	roundend_category = "sabbattites"
 	antagpanel_category = FACTION_SABBAT
@@ -68,7 +73,7 @@
 	antag_hud_type = ANTAG_HUD_REV
 	antag_hud_name = "rev_head"
 
-/datum/antagonist/sabbatductus/on_gain()
+/datum/antagonist/sabbatpriest/on_gain()
 	add_antag_hud(ANTAG_HUD_REV, "rev_head", owner.current)
 	owner.special_role = src
 	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, use_reverb = FALSE)

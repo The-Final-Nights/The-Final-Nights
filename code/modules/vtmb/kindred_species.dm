@@ -489,6 +489,12 @@
 									childe_prefs_v.discipline_levels += 1
 
 							childe_prefs_v.save_character()
+							// Sabbatist Embrace Logic
+							if(sire.mind && sire.mind.has_antag_datum(/datum/antagonist/sabbatist | /datum/antagonist/sabbatpriest | /datum/antagonist/sabbatductus))
+								if(childe.mind && !childe.mind.has_antag_datum(/datum/antagonist/sabbatist))
+									var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(childe.mind)
+									childe.mind.add_antag_datum(new_sabbat)
+									log_game("[key_name(sire)] has spread Sabbatism to [key_name(childe)] via Embrace.")
 					else
 						to_chat(owner, span_notice("[childe] is totally <b>DEAD</b>!"))
 						giving = FALSE
@@ -509,6 +515,13 @@
 						log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
 					else
 						log_game("[key_name(regnant)] has attempted to bloodbond [key_name(thrall)] (UNBONDABLE).")
+
+					// Sabbatist Ghouling Logic
+					if(regnant.mind && regnant.mind.has_antag_datum(/datum/antagonist/sabbatist | /datum/antagonist/sabbatpriest | /datum/antagonist/sabbatductus))
+						if(thrall.mind && !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist))
+							var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(thrall.mind)
+							thrall.mind.add_antag_datum(new_sabbat)
+							log_game("[key_name(regnant)] has spread Sabbatism to [key_name(thrall)] via vitae.")
 
 					if(length(regnant.reagents?.reagent_list))
 						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = regnant, methods = VAMPIRE)

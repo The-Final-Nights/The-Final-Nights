@@ -3381,6 +3381,7 @@
 #include "code\modules\vtmb\jobs\sabbat.dm"
 #include "code\modules\vtmb\jobs\sabbatductus.dm"
 #include "code\modules\vtmb\jobs\sabbatpack.dm"
+#include "code\modules\vtmb\jobs\sabbatpriest.dm"
 #include "code\modules\vtmb\jobs\seneschal.dm"
 #include "code\modules\vtmb\jobs\sheriff.dm"
 #include "code\modules\vtmb\jobs\stripper.dm"
