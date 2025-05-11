@@ -2,14 +2,14 @@
 /// See /datum/weakref's documentation for more information.
 /proc/WEAKREF(datum/input)
 	if(istype(input) && !QDELETED(input))
-		if(istype(input, /datum/weakref))
+		if(isweakref(input))
 			return input
 
 		if(!input.weak_reference)
 			input.weak_reference = new /datum/weakref(input)
 		return input.weak_reference
 
-/datum/proc/create_weakref()		//Forced creation for admin proccalls
+/datum/proc/create_weakref() //Forced creation for admin proccalls
 	return WEAKREF(src)
 
 /**
@@ -55,25 +55,15 @@
 /datum/weakref
 	var/reference
 
-	/*
-		variables to store some helpful information by opening vv window
-		"aa_" makes them placed at top, so we can see it at glance.
-	*/
-	var/aa0_hint_ref_path
-	var/aa1_hint_ref_creation_worldtime
-
 /datum/weakref/New(datum/thing)
 	reference = REF(thing)
-	aa1_hint_ref_creation_worldtime = world.time
-	if(istype(thing))
-		aa0_hint_ref_path = thing.type
 
 /datum/weakref/Destroy(force)
 	var/datum/target = resolve()
 	qdel(target)
 
 	if(!force)
-		return QDEL_HINT_LETMELIVE	//Let BYOND autoGC thiswhen nothing is using it anymore.
+		return QDEL_HINT_LETMELIVE //Let BYOND autoGC thiswhen nothing is using it anymore.
 	target?.weak_reference = null
 	return ..()
 
@@ -86,19 +76,37 @@
 	var/datum/D = locate(reference)
 	return (!QDELETED(D) && D.weak_reference == src) ? D : null
 
+/**
+ * SERIOUSLY READ THE AUTODOC COMMENT FOR THIS PROC BEFORE EVEN THINKING ABOUT USING IT
+ *
+ * Like resolve, but doesn't care if the datum is being qdeleted but hasn't been deleted yet.
+ *
+ * The return value of this proc leaves hanging references if the datum is being qdeleted but hasn't been deleted yet.
+ *
+ * Do not do anything that would create a lasting reference to the return value, such as giving it a tag, putting it on the map,
+ * adding it to an atom's contents or vis_contents, giving it a key (if it's a mob), attaching it to an atom (if it's an image),
+ * or assigning it to a datum or list referenced somewhere other than a temporary value.
+ *
+ * Unless you're resolving a weakref to a datum in a COMSIG_QDELETING signal handler registered on that very same datum,
+ * just use resolve instead.
+ */
+/datum/weakref/proc/hard_resolve()
+	var/datum/D = locate(reference)
+	return (D?.weak_reference == src) ? D : null
 
-// QoL stuff
 /datum/weakref/vv_get_dropdown()
-	. = list()
-	VV_DROPDOWN_OPTION(VV_HK_TRACK_REF, "View the original reference")
-	. += ..()
+	. = ..()
+	VV_DROPDOWN_OPTION(VV_HK_WEAKREF_RESOLVE, "Go to reference")
 
 /datum/weakref/vv_do_topic(list/href_list)
 	. = ..()
 
-	if(href_list[VV_HK_TRACK_REF])
-		var/datum/original = resolve()
-		if(!original)
-			to_chat(usr, "<span class='warning'>Failed to resolve. It might be qdeleted already.</span>")
+	if(!.)
+		return
+
+	if(href_list[VV_HK_WEAKREF_RESOLVE])
+		if(!check_rights(NONE))
 			return
-		usr.client.debug_variables(original)
+		var/datum/R = resolve()
+		if(R)
+			usr.client.debug_variables(R)

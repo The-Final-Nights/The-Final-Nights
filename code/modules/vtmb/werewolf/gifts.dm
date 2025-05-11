@@ -1,3 +1,5 @@
+#define DOGGY_ANIMATION_COOLDOWN 30 DECISECONDS
+
 /datum/action/gift
 	icon_icon = 'code/modules/wod13/werewolf_abilities.dmi'
 	button_icon = 'code/modules/wod13/werewolf_abilities.dmi'
@@ -86,6 +88,8 @@
 		var/mob/living/carbon/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/inspiration.ogg', 75, FALSE)
 		H.emote("scream")
+		if(H.CheckEyewitness(H, H, 7, FALSE))
+			H.adjust_veil(-1)
 		for(var/mob/living/carbon/C in range(5, owner))
 			if(C)
 				if(iswerewolf(C) || isgarou(C))
@@ -111,6 +115,8 @@
 			H.dna.species.punchdamagehigh = 20
 			H.agg_damage_plus = 5
 			to_chat(owner, "<span class='notice'>You feel your claws sharpening...</span>")
+			if(H.CheckEyewitness(H, H, 7, FALSE))
+				H.adjust_veil(-1)
 			spawn(150)
 				H.dna.species.attack_verb = initial(H.dna.species.attack_verb)
 				H.dna.species.attack_sound = initial(H.dna.species.attack_sound)
@@ -226,20 +232,29 @@
 	name = "Scent Of The True Form"
 	desc = "This Gift allows the Garou to determine the true nature of a person."
 	button_icon_state = "scent_of_the_true_form"
-	rage_req = 1
+	gnosis_req = 1
 
 /datum/action/gift/scent_of_the_true_form/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
-		var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
-		abductor_hud.add_hud_to(owner)
-		spawn(200)
-			abductor_hud.remove_hud_from(owner)
+		if(HAS_TRAIT(owner, TRAIT_SCENTTRUEFORM))
+			REMOVE_TRAIT(owner, TRAIT_SCENTTRUEFORM, src)
+			to_chat(owner, "<span class='notice'>You allow the essence of the spirit to leave your senses.</span>")
+
+		else
+			ADD_TRAIT(owner, TRAIT_SCENTTRUEFORM, src)
+			to_chat(owner, "<span class='notice'>Your nose gains a clarity for the supernal around you...</span>")
+
 
 /datum/action/gift/truth_of_gaia
 	name = "Truth Of Gaia"
 	desc = "As judges of the Litany, Philodox have the ability to sense whether others have spoken truth or falsehood."
 	button_icon_state = "truth_of_gaia"
+
+/datum/action/gift/truth_of_gaia/Trigger()
+	. = ..()
+//	if(allowed_to_proceed)
+//
 
 /datum/action/gift/mothers_touch
 	name = "Mother's Touch"
@@ -255,20 +270,35 @@
 
 /datum/action/gift/sense_wyrm
 	name = "Sense Wyrm"
-	desc = "This Gift allows the werewolf to sense the presence of Wyrm."
+	desc = "This Gift allows the werewolf to trace the location of all wyrm-tainted entities within the area."
 	button_icon_state = "sense_wyrm"
 	rage_req = 1
 
 /datum/action/gift/sense_wyrm/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
-		C.sight = SEE_MOBS|SEE_OBJS
-		playsound(get_turf(owner), 'code/modules/wod13/sounds/sense_wyrm.ogg', 75, FALSE)
-		to_chat(owner, "<span class='notice'>You feel your sense sharpening...</span>")
-		spawn(200)
-			C.sight = initial(C.sight)
-			to_chat(owner, "<span class='warning'>You no longer sense anything more than normal...</span>")
+		var/list/mobs_in_range = list()
+		for(var/mob/living/carbon/target in orange(owner, 30))
+			mobs_in_range += target
+		for(var/mob/living/carbon/target in mobs_in_range)
+			var/is_wyrm = 0
+			if(iscathayan(target))
+				var/mob/living/carbon/human/kj = target
+				if(!kj.check_kuei_jin_alive())
+					is_wyrm = 1
+			if (iskindred(target))
+				var/mob/living/carbon/human/vampire = target
+				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
+					is_wyrm = 1
+				if ((vampire.clane?.name == "Baali") || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
+					is_wyrm = 1
+			if (isgarou(target) || iswerewolf(target))
+				var/mob/living/carbon/wolf = target
+				if(wolf.auspice.tribe.name == "Black Spiral Dancers")
+					is_wyrm = 1
+			if(is_wyrm)
+				to_chat(owner, "A stain is found at [get_area_name(target)], X:[target.x] Y:[target.y].")
+				is_wyrm = 0
 
 /datum/action/gift/spirit_speech
 	name = "Spirit Speech"
@@ -405,26 +435,45 @@
 	if(allowed_to_proceed)
 		var/mob/living/carbon/werewolf/lupus/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+		var/matrix/ntransform = matrix(owner.transform)
 		if(H.hispo)
-			H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
-			H.pixel_w = 0
-			H.pixel_z = 0
-			H.melee_damage_lower = initial(H.melee_damage_lower)
-			H.melee_damage_upper = initial(H.melee_damage_upper)
-			H.hispo = FALSE
-			H.update_icons()
-			H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
-			H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+			ntransform.Scale(0.95, 0.95)
+			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(trans_doggy), H), DOGGY_ANIMATION_COOLDOWN)
 		else
-			H.icon = 'code/modules/wod13/hispo.dmi'
-			H.pixel_w = -16
-			H.pixel_z = -16
-			H.melee_damage_lower = 35
-			H.melee_damage_upper = 55
-			H.hispo = TRUE
-			H.update_icons()
-			H.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
-			H.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+			ntransform.Scale(1.05, 1.05)
+			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(trans_hispo), H), DOGGY_ANIMATION_COOLDOWN)
+
+/datum/action/gift/hispo/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
+		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
+	else
+		H.icon = 'code/modules/wod13/tfn_lupus.dmi'
+	H.pixel_w = 0
+	H.pixel_z = 0
+	H.melee_damage_lower = initial(H.melee_damage_lower)
+	H.melee_damage_upper = initial(H.melee_damage_upper)
+	H.hispo = FALSE
+	H.regenerate_icons()
+	H.update_transform()
+	animate(H, transform = null, color = "#FFFFFF", time = 1)
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+
+/datum/action/gift/hispo/proc/trans_hispo(mob/living/carbon/werewolf/lupus/H)
+	H.icon = 'code/modules/wod13/hispo.dmi'
+	H.pixel_w = -16
+	H.pixel_z = -16
+	H.melee_damage_lower = 35
+	H.melee_damage_upper = 55
+	H.hispo = TRUE
+	H.regenerate_icons()
+	H.update_transform()
+	animate(H, transform = null, color = "#FFFFFF", time = 1)
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
+	H.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+
 
 /datum/action/gift/glabro
 	name = "Glabro Form"
@@ -465,3 +514,135 @@
 			animate(H, transform = M, time = 1 SECONDS)
 			G.glabro = TRUE
 			H.update_icons()
+
+/datum/action/gift/howling
+	name = "Howl"
+	desc = "The werewolf may send her howl far beyond the normal range of hearing and communicate a single word or concept to all other Garou across the city."
+	button_icon_state = "call_of_the_wyld"
+	rage_req = 1
+	cool_down = 5
+	check_flags = null
+	var/list/howls = list(
+		"attack" = list(
+			"menu" = "Attack",
+			"message" = "A wolf howls a fierce call to attack"
+		),
+		"retreat" = list(
+			"menu" = "Retreat",
+			"message" = "A wolf howls a warning to retreat"
+		),
+		"help" = list(
+			"menu" = "Help",
+			"message" = "A wolf howls a desperate plea for help"
+		),
+		"gather" = list(
+			"menu" = "Gather",
+			"message" = "A wolf howls to gather the pack"
+		),
+		"victory" = list(
+			"menu" = "Victory",
+			"message" = "A wolf howls in celebration of victory"
+		),
+		"dying" = list(
+			"menu" = "Dying",
+			"message" = "A wolf howls in pain and despair"
+		),
+		"mourning" = list(
+			"menu" = "Mourning",
+			"message" = "A wolf howls in deep mourning for the fallen"
+		)
+	)
+
+/datum/action/gift/howling/Trigger()
+	. = ..()
+	if(allowed_to_proceed)
+
+		if(istype(get_area(owner), /area/vtm/interior/penumbra))
+			to_chat(owner, span_warning("Your howl echoes and dissapates into the Umbra, it's sound blanketed by the spiritual energy of the Velvet Shadow."))
+			return
+
+		var/mob/living/carbon/C = owner
+		var/list/menu_options = list()
+		for (var/howl_key in howls)
+			menu_options += howls[howl_key]["menu"]
+		menu_options += "Cancel"
+
+		var/choice = tgui_input_list(owner, "Select a howl to use!", "Howl Selection", menu_options)
+		if(choice && choice != "Cancel")
+			var/howl
+			for (var/howl_key in howls)
+				if (howls[howl_key]["menu"] == choice)
+					howl = howls[howl_key]
+					break
+
+			var/message = howl["message"]
+			var/tribe = C.auspice.tribe.name
+			if (tribe)
+				message = replacetext(message, "tribe", tribe)
+
+			C.emote("howl")
+			var/origin_turf = get_turf(C)
+			playsound(origin_turf, pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 50, FALSE)
+			var/list/sound_hearers = list()
+
+			for(var/mob/living/carbon/HearingGarou in range(17))
+				if(isgarou(HearingGarou) || iswerewolf(HearingGarou))
+					sound_hearers += HearingGarou
+
+			var/howl_details
+			var/final_message
+			for(var/mob/living/carbon/Garou in GLOB.player_list)
+				if(isgarou(Garou) || iswerewolf(Garou) && !owner)
+					if(!sound_hearers.Find(Garou))
+						Garou.playsound_local(get_turf(Garou), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 25, FALSE)
+					howl_details = get_message(Garou, origin_turf)
+					final_message = message + howl_details
+					to_chat(Garou, final_message, confidential = TRUE)
+
+
+/datum/action/gift/howling/proc/get_message(mob/living/carbon/Garou, turf/origin_turf)
+
+	var/distance = get_dist(Garou, origin_turf)
+	var/dirtext = " to the "
+	var/direction = get_dir(Garou, origin_turf)
+
+	switch(direction)
+		if(NORTH)
+			dirtext += "north"
+		if(SOUTH)
+			dirtext += "south"
+		if(EAST)
+			dirtext += "east"
+		if(WEST)
+			dirtext += "west"
+		if(NORTHWEST)
+			dirtext += "northwest"
+		if(NORTHEAST)
+			dirtext += "northeast"
+		if(SOUTHWEST)
+			dirtext += "southwest"
+		if(SOUTHEAST)
+			dirtext += "southeast"
+		else //Where ARE you.
+			dirtext = "although I cannot make out an exact direction"
+
+	var/disttext
+	switch(distance)
+		if(0 to 20)
+			disttext = " within 20 feet"
+		if(20 to 40)
+			disttext = " 20 to 40 feet away"
+		if(40 to 80)
+			disttext = " 40 to 80 feet away"
+		if(80 to 160)
+			disttext = " far"
+		else
+			disttext = " very far"
+
+	var/place = get_area_name(origin_turf)
+
+	var/returntext = "[disttext],[dirtext], at [place]."
+
+	return returntext
+
+#undef DOGGY_ANIMATION_COOLDOWN

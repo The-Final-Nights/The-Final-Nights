@@ -12,6 +12,8 @@
 #define JOB_UNAVAILABLE_CLAN 10
 #define JOB_UNAVAILABLE_AGE 11
 #define JOB_UNAVAILABLE_WHITELISTED 12
+#define JOB_UNAVAILABLE_RANK 13
+#define JOB_UNAVAILABLE_TRIBE 14
 #define JOB_UNAVAILABLE_CHARACTER_AGE 13
 
 #define DEFAULT_RELIGION "Christianity"
@@ -66,6 +68,9 @@
 #define JOB_DISPLAY_ORDER_VOIVODE 43
 #define JOB_DISPLAY_ORDER_BOGATYR 44
 #define JOB_DISPLAY_ORDER_ZADRUGA 45
+#define JOB_DISPLAY_ORDER_AMBERGLADE 46
+#define JOB_DISPLAY_ORDER_PAINTEDCITY 47
+#define JOB_DISPLAY_ORDER_ENDRON 48
 
 // ~guestbook_flags variable on datum/job
 /// We will know absolutely everyone, no matter the department
@@ -77,8 +82,6 @@
 /// We will not be known by others, even if they pass checks in any way otherwise
 #define GUESTBOOK_FORGETMENOT (1 << 3)
 
-// #define JOB_DISPLAY_ORDER_INVESTIGATOR 25
-// #define JOB_DISPLAY_ORDER_CHAPLAIN 26
 /*
 #define JOB_DISPLAY_ORDER_ASSISTANT 1
 #define JOB_DISPLAY_ORDER_CAPTAIN 2
