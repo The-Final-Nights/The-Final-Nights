@@ -122,6 +122,12 @@
 /obj/item/reagent_containers/blood/o_plus
 	blood_type = "O+"
 
+/obj/item/reagent_containers/blood/ab_plus
+	blood_type = "AB+"
+
+/obj/item/reagent_containers/blood/ab_minus
+	blood_type = "AB-"
+
 /obj/item/reagent_containers/blood/elite
 	name = "\improper elite blood pack (full)"
 	blood_type = "O-"
@@ -136,7 +142,7 @@
 /obj/item/reagent_containers/blood/random
 
 /obj/item/reagent_containers/blood/random/Initialize()
-	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-")
+	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
 	return ..()
 
 /obj/item/reagent_containers/blood/bweedpack
