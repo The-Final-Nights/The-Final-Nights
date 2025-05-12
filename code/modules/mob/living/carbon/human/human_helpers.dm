@@ -65,7 +65,7 @@
 	var/obj/item/modular_computer/tablet/tablet = wear_id
 	if(istype(wallet))
 		id = wallet.front_id
-	if(istype(id))
+	if(istype(id) && id.registered_name_is_public)
 		. = id.registered_name
 	else if(istype(pda))
 		. = pda.owner
