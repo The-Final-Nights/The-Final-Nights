@@ -829,6 +829,18 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 	"})
 	browser.open()
 
+/client/proc/allow_browser_inspect()
+	set category = "Debug"
+	set name = "Allow Browser Inspect"
+	set desc = "Allow browser debugging via inspect"
+	if (!check_rights(R_DEBUG))
+		return
+	if(usr.client.byond_version < 516)
+		to_chat(usr, span_warning("You can only use this on 516!"))
+		return
+	to_chat(usr, span_notice("You can now right click to use inspect on browsers."))
+	winset(usr, null, list("browser-options" = "+devtools"))
+
 /proc/generate_timer_source_output(list/datum/timedevent/events)
 	var/list/per_source = list()
 

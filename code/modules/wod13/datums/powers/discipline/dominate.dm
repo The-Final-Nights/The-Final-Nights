@@ -6,7 +6,7 @@
 
 /datum/discipline/dominate/post_gain()
 	. = ..()
-	if(level >= 1)
+	if(level >= 5)
 		var/obj/effect/proc_holder/spell/voice_of_god/voice_of_domination = new(owner)
 		owner.mind.AddSpell(voice_of_domination)
 		RegisterSignal(owner, COMSIG_MOB_EMOTE, PROC_REF(on_snap))
