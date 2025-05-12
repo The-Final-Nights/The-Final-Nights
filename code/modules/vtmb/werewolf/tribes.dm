@@ -257,9 +257,9 @@
 				var/matrix/ntransform = matrix(owner.transform)
 				ntransform.Scale(0.95, 0.95)
 				animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
-				addtimer(CALLBACK(src, PROC_REF(trans_doggy), lopor), 3 SECONDS)
+				addtimer(CALLBACK(src, PROC_REF(transform_lupus), lopor), 3 SECONDS)
 
-/datum/action/gift/guise_of_the_hound/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/guise_of_the_hound/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -390,26 +390,31 @@
 	rage_req = 2
 	cool_down = 21 SECONDS
 
+
+
+
 /datum/action/gift/suns_guard/Trigger()
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/human/caster = owner
+		var/mob/living/carbon/caster = owner
 		var/storeburnmod = caster.dna.species.burnmod
-
 		caster.dna.species.burnmod = 0
 		caster.set_fire_stacks(0)
 		ADD_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
 		animate(caster, color = "#ff8800", time = 10, loop = 1)
 		playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
 		to_chat(caster, "Sun's Guard activated, you have become immune to fire.")
+		addtimer(CALLBACK(src, PROC_REF(end_guard)), 140, storeburnmod)
 
-		addtimer(14 SECONDS)
-			caster.dna.species.burnmod = storeburnmod
-			caster.set_fire_stacks(0)
-			REMOVE_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
-			caster.color = initial(caster.color)
-			playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
-			to_chat(caster, "Sun's Guard is no longer active, you are no longer immune to fire.")
+
+/datum/action/gift/suns_guard/proc/end_guard(storedburnmodifier)
+	var/mob/living/carbon/caster = owner
+	caster.dna.species.burnmod = storedburnmodifier
+	caster.set_fire_stacks(0)
+	REMOVE_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
+	caster.color = initial(caster.color)
+	playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
+	to_chat(caster, "Sun's Guard is no longer active, you are no longer immune to fire.")
 
 /datum/action/gift/eye_drink
 	name = "Eye-Drinking"

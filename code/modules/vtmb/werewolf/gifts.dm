@@ -439,13 +439,13 @@
 		if(H.hispo)
 			ntransform.Scale(0.95, 0.95)
 			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
-			addtimer(CALLBACK(src, PROC_REF(trans_doggy), H), DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(transform_lupus), H), DOGGY_ANIMATION_COOLDOWN)
 		else
 			ntransform.Scale(1.05, 1.05)
 			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
-			addtimer(CALLBACK(src, PROC_REF(trans_hispo), H), DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(transform_hispo), H), DOGGY_ANIMATION_COOLDOWN)
 
-/datum/action/gift/hispo/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -461,7 +461,7 @@
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 
-/datum/action/gift/hispo/proc/trans_hispo(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_hispo(mob/living/carbon/werewolf/lupus/H)
 	H.icon = 'code/modules/wod13/hispo.dmi'
 	H.pixel_w = -16
 	H.pixel_z = -16
