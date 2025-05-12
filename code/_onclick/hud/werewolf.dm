@@ -24,7 +24,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
-		C.transformator.trans_gender(C, "Homid")
+		C.transformator.transform(C, "Homid")
 
 /atom/movable/screen/transform_crinos
 	name = "Crinos"
@@ -39,7 +39,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
-		C.transformator.trans_gender(C, "Crinos")
+		C.transformator.transform(C, "Crinos")
 
 /atom/movable/screen/transform_lupus
 	name = "Lupus"
@@ -54,7 +54,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
-		C.transformator.trans_gender(C, "Lupus")
+		C.transformator.transform(C, "Lupus")
 
 
 /atom/movable/screen/transform_corax_crinos
@@ -71,7 +71,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
-		C.transformator.trans_gender(C, "Corax Crinos")
+		C.transformator.transform(C, "Corax Crinos")
 
 /atom/movable/screen/transform_corvid
 	name = "corvid"
@@ -87,7 +87,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return
 	if(C.transformator)
-		C.transformator.trans_gender(C, "Corvid")
+		C.transformator.transform(C, "Corvid")
 
 
 

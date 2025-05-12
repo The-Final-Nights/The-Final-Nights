@@ -35,17 +35,17 @@
 				if(auspice.base_breed == "Crinos")
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0) //! [ChillRaccoon] - FIXME
-			//	transformator.trans_gender(src, auspice.base_breed)
+			//	transformator.transform(src, auspice.base_breed)
 			if(islupus(src))
 				if(auspice.base_breed == "Lupus")
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0)
-			//	transformator.trans_gender(src, auspice.base_breed)
+			//	transformator.transform(src, auspice.base_breed)
 			if(ishuman(src))
 				if(auspice.base_breed == "Homid" || HAS_TRAIT(src, TRAIT_CORAX)) // Corvid-born Corax don't generate rage when in homid passively, the hope is to make talking more relaxed and the Corax weaker in combat.
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0)
-			//	transformator.trans_gender(src, auspice.base_breed)
+			//	transformator.transform(src, auspice.base_breed)
 			if (iscorvid(src))
 				gaining_rage = FALSE // Corax will ideally be talking a lot, not having passive rage generation should also make them weaker in combat.
 			if (iscoraxcrinos(src))

@@ -55,7 +55,7 @@
 	second.adjustToxLoss(round((first.getToxLoss()/100)*percentage)-second.getToxLoss())
 	second.adjustCloneLoss(round((first.getCloneLoss()/100)*percentage)-second.getCloneLoss())
 
-/datum/werewolf_holder/transformation/proc/trans_gender(mob/living/carbon/trans, form) //does not actually change your gender, as far as I'm aware.
+/datum/werewolf_holder/transformation/proc/transform(mob/living/carbon/trans, form) //does not actually change your gender, as far as I'm aware.
 	if(trans.stat == DEAD)
 		return
 	if(transformating)
@@ -165,7 +165,7 @@
 				if(B)
 					qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_lupus), trans, lupus), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_lupus), trans, lupus), 3 SECONDS)
 		if("Crinos")
 			if(iscrinos(trans))
 				transformating = FALSE
@@ -185,7 +185,7 @@
 				if(B)
 					qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_crinos), trans, crinos), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_crinos), trans, crinos), 3 SECONDS)
 
 		if("Corvid")
 			if(iscorvid(trans))
@@ -246,7 +246,7 @@
 				if(B)
 					qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_homid), trans, homid), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_homid), trans, homid), 3 SECONDS)
 
 /datum/werewolf_holder/transformation/proc/transform_lupus(mob/living/carbon/trans, mob/living/carbon/werewolf/lupus/lupus)
 	PRIVATE_PROC(TRUE)
