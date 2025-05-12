@@ -88,11 +88,11 @@
 /obj/item/reagent_containers/blood/attack(mob/living/M, mob/living/user)
 	. = ..()
 	if(!canconsume(M, user))
-		return ..()
+		return
 	if(!reagents.holder_full())
-		return ..()
+		return
 	if(!do_after(user, 3 SECONDS, M))
-		return ..()
+		return
 	reagents.trans_to(M, reagents.total_volume, transfered_by = user, methods = VAMPIRE, show_message = FALSE)
 
 	playsound(M.loc,'sound/items/drink.ogg', 50, TRUE)
