@@ -333,8 +333,8 @@ Dancer
 
 ///Very similar to squish, but for dwarves and shorties
 /datum/element/dwarfism
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
@@ -377,8 +377,8 @@ Dancer
 
 
 /datum/element/children
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
@@ -628,8 +628,8 @@ Dancer
 
 ///Very similar to squish, but for dwarves and shorties
 /datum/element/giantism
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 

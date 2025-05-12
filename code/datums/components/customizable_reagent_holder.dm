@@ -125,8 +125,8 @@
 		var/atom/replacement_parent = new replacement(atom_parent.loc)
 		ingredient.forceMove(replacement_parent)
 		replacement = null
-		RemoveComponent()
 		replacement_parent.TakeComponent(src)
+		handle_reagents(ingredient)
 		qdel(atom_parent)
 	handle_reagents(ingredient)
 	add_ingredient(ingredient)

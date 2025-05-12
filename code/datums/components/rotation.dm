@@ -87,10 +87,6 @@
 	//Signals + verbs removed via UnRegister
 	. = ..()
 
-/datum/component/simple_rotation/RemoveComponent()
-	remove_verbs()
-	. = ..()
-
 /datum/component/simple_rotation/proc/ExamineMessage(datum/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
