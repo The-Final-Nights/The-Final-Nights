@@ -14,6 +14,10 @@ GLOBAL_VAR_INIT(lasombranumber, "")
 GLOBAL_VAR_INIT(tremerenumber, "")
 GLOBAL_VAR_INIT(voivodenumber, "")
 GLOBAL_VAR_INIT(harpynumber, "")
+GLOBAL_VAR_INIT(endronleadnumber, "")
+GLOBAL_VAR_INIT(endronexecnumber, "")
+GLOBAL_VAR_INIT(endronaffairsnumber, "")
+GLOBAL_VAR_INIT(endronsecchiefnumber, "")
 
 // Important Names for contacts
 
@@ -31,3 +35,7 @@ GLOBAL_VAR_INIT(lasombraname, "")
 GLOBAL_VAR_INIT(tremerename, "")
 GLOBAL_VAR_INIT(voivodename, "")
 GLOBAL_VAR_INIT(harpyname, "")
+GLOBAL_VAR_INIT(endronleadname, "")
+GLOBAL_VAR_INIT(endronexecname, "")
+GLOBAL_VAR_INIT(endronaffairsname, "")
+GLOBAL_VAR_INIT(endronsecchiefname, "")

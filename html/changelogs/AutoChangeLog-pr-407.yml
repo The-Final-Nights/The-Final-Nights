@@ -1,4 +1,0 @@
-author: "XeonMations, Arokha, jlsnow301, Aylong"
-delete-after: True
-changes:
-  - code_imp: "TGUI dev server now works. Just ignore the warning it keeps spamming."

@@ -67,3 +67,12 @@
 		"Tower Personal Driver",
 		"Tower Personal Attendant"
 	)
+
+/datum/job/vamp/garou/spiral/employee
+	alt_titles = list(
+		"Endron Janitor",
+		"Endron Secretary",
+		"Endron Researcher",
+		"Endron Labourer"
+	)
+
