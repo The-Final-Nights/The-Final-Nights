@@ -431,7 +431,7 @@
 			var/mob/living/carbon/victim = caster.pulling
 			var/obj/item/organ/eyes/victim_eyeballs = victim.getorganslot(ORGAN_SLOT_EYES)
 			var/isNPC = TRUE
-			if(!iscarbon(caster.pulling) && !victim.stat == DEAD )
+			if(!iscarbon(victim) || victim.stat != DEAD )
 				to_chat(caster, "<span class='warning'>You aren't currently pulling a corpse!</span>")
 				return
 			else
