@@ -94,12 +94,18 @@
 	if(!do_after(user, 3 SECONDS, M))
 		return ..()
 	reagents.trans_to(M, reagents.total_volume, transfered_by = user, methods = VAMPIRE, show_message = FALSE)
-	M.bloodpool = min(M.maxbloodpool, M.bloodpool+amount_of_bloodpoints)
-	M.adjustBruteLoss(-20, TRUE)
-	M.adjustFireLoss(-20, TRUE)
-	M.update_blood_hud()
+
 	playsound(M.loc,'sound/items/drink.ogg', 50, TRUE)
 	update_appearance()
+	if(ishumanbasic(M) || isghoul(M))
+		to_chat(M, span_notice("That didn't taste very good..."))
+		M.adjust_disgust(DISGUST_LEVEL_DISGUSTED)
+		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "toxic_food", /datum/mood_event/disgusting_food)
+	if(iskindred(M))
+		M.bloodpool = min(M.maxbloodpool, M.bloodpool+amount_of_bloodpoints)
+		M.adjustBruteLoss(-20, TRUE)
+		M.adjustFireLoss(-20, TRUE)
+		M.update_blood_hud()
 
 /obj/item/reagent_containers/blood/a_plus
 	blood_type = "A+"
