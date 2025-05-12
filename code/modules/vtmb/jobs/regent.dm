@@ -22,6 +22,7 @@
 	minimal_masquerade = 4
 	minimal_generation = 10
 //	minimum_character_age = 150 //Uncomment if age-restriction wanted
+	minimum_vampire_age = 60
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Tremere")
 	experience_addition = 20

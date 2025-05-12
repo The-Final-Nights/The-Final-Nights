@@ -81,3 +81,8 @@
   necti-dev:
   - bugfix: Anarch, Tzmisce, Primogen, Noddist and Bahari id/pins no longer identify
       their users at a glance.
+2025-05-12:
+  BlindPoet:
+  - balance: Dominate 5 is now prerequisite for the Voice of Domination power.
+  Icarus-The-Sun:
+  - qol: Underwear is selectable regardless of gender
