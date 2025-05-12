@@ -1,0 +1,5 @@
+author: "necti-dev"
+delete-after: True
+changes:
+  - rscadd: "Some vampire jobs now have vampire-age restrictions (how long since embrace)"
+  - rscadd: "Primogen generation requirements lowered a bit, Capo's increased"
