@@ -428,55 +428,57 @@
 	if(allowed_to_proceed)
 		var/mob/living/carbon/caster = owner
 		if(caster.pulling)
-			if(iscarbon(caster.pulling))
-				var/mob/living/carbon/victim = caster.pulling
-				var/obj/item/organ/eyes/victim_eyeballs = victim.getorganslot(ORGAN_SLOT_EYES)
-				var/isNPC = TRUE
-				if(victim.stat == DEAD)
-					if(victim_eyeballs)
-						if (!do_after(caster, 3 SECONDS)) //timer to cast
-							return
-						var/permission = tgui_input_list(victim, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
-						var/victim_two = victim
-
-						if (!permission) //returns null if no soul in body
-							for (var/mob/dead/observer/ghost in GLOB.player_list)
-								if (ghost.mind == victim.last_mind)
-									//ask again if null
-									permission = tgui_input_list(ghost, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
-									victim_two = ghost
-									break //no need to do further iterations if you found the right person
-
-						if(permission == "Yes")
-							if(ishuman(caster)) //listen buddy, hulking ravenmen and ravens can eat those eyes just fine, but a human? DISGUSTING.
-								if(caster.CheckEyewitness(caster, caster, 7, FALSE))
-									caster.adjust_veil(-1)
-							playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //itadakimasu! :D
-							qdel(victim_eyeballs)
-							caster.adjust_nutrition(5) //organ nutriment value is 5
-							to_chat(caster, "You drink of the eyes of [victim.name] and a vision fills your mind...")
-							var/deathdesc = tgui_input_text(victim_two, "", "How did you die?", "", 300, TRUE, TRUE, 5 MINUTES)
-							if (deathdesc == "")
-								to_chat(caster, "The vision is hazy, you can't make out many details...")
-							else
-								to_chat(caster, "<i>[deathdesc]</i>")
-							//discount scanner
-							to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
-							to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
-							isNPC = FALSE
-
-						else if(permission == "No")
-							to_chat(caster,"<span class='warning'>The spirit seems relunctact to let you consume their eyes... so you refrain from doing so.</span>")
-							isNPC = FALSE
-
-						if(isNPC)
-							playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //yummers
-							qdel(victim_eyeballs)
-							caster.adjust_nutrition(5) //organ nutriment value is 5
-							to_chat(caster, "You drink of the eyes of [victim.name] but no vision springs to mind...")
-							to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
-							to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
-					else
-						to_chat(caster, "<span class='warning'>You cannot drink the eyes of a corpse that has no eyes!</span>")
+			var/mob/living/carbon/victim = caster.pulling
+			var/obj/item/organ/eyes/victim_eyeballs = victim.getorganslot(ORGAN_SLOT_EYES)
+			var/isNPC = TRUE
+			if(!iscarbon(caster.pulling) || !victim.stat == DEAD )
+				to_chat(caster, "<span class='warning'>You aren't currently pulling a corpse!</span>")
+				return
+			else
+				if(!victim_eyeballs)
+					to_chat(caster, "<span class='warning'>You cannot drink the eyes of a corpse that has no eyes!</span>")
+					return
 				else
-					to_chat(caster, "<span class='warning'>You aren't currently pulling a corpse!</span>")
+					if (!do_after(caster, 3 SECONDS)) //timer to cast
+						return
+					var/permission = tgui_input_list(victim, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+					var/victim_two = victim
+
+					if (!permission) //returns null if no soul in body
+						for (var/mob/dead/observer/ghost in GLOB.player_list)
+							if (ghost.mind == victim.last_mind)
+								//ask again if null
+								permission = tgui_input_list(ghost, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+								victim_two = ghost
+								break //no need to do further iterations if you found the right person
+
+					if(permission == "Yes")
+						if(ishuman(caster)) //listen buddy, hulking ravenmen and ravens can eat those eyes just fine, but a human? DISGUSTING.
+							if(caster.CheckEyewitness(caster, caster, 7, FALSE))
+								caster.adjust_veil(-1)
+						playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //itadakimasu! :D
+						qdel(victim_eyeballs)
+						caster.adjust_nutrition(5) //organ nutriment value is 5
+						to_chat(caster, "You drink of the eyes of [victim.name] and a vision fills your mind...")
+						var/deathdesc = tgui_input_text(victim_two, "", "How did you die?", "", 300, TRUE, TRUE, 5 MINUTES)
+						if (deathdesc == "")
+							to_chat(caster, "The vision is hazy, you can't make out many details...")
+						else
+							to_chat(caster, "<i>[deathdesc]</i>")
+						//discount scanner
+						to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
+						to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
+						isNPC = FALSE
+
+					else if(permission == "No")
+						to_chat(caster,"<span class='warning'>The spirit seems relunctact to let you consume their eyes... so you refrain from doing so.</span>")
+						isNPC = FALSE
+
+					if(isNPC)
+						playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //yummers
+						qdel(victim_eyeballs)
+						caster.adjust_nutrition(5) //organ nutriment value is 5
+						to_chat(caster, "You drink of the eyes of [victim.name] but no vision springs to mind...")
+						to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
+						to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
+
