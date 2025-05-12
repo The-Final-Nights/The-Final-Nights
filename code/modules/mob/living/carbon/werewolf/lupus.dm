@@ -42,9 +42,6 @@
 
 
 /datum/movespeed_modifier/lupusform
-	/*if(HAS_TRAIT(src, TRAIT_CORAX))
-		multiplicative_slowdown = 0.0 // you do not get bonuses for being a landed raven.
-	else*/
 		multiplicative_slowdown = -0.7
 
 /mob/living/carbon/werewolf/lupus/update_icons()

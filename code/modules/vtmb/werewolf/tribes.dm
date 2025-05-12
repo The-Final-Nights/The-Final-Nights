@@ -403,7 +403,7 @@
 		playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
 		to_chat(caster, "Sun's Guard activated, you have become immune to fire.")
 
-		spawn(14 SECONDS)
+		addtimer(14 SECONDS)
 			caster.dna.species.burnmod = storeburnmod
 			caster.set_fire_stacks(0)
 			REMOVE_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
@@ -425,10 +425,10 @@
 		if(caster.pulling)
 			if(iscarbon(caster.pulling))
 				var/mob/living/carbon/victim = caster.pulling
-				var/obj/item/organ/eyes/eyeballs = victim.getorganslot(ORGAN_SLOT_EYES)
+				var/obj/item/organ/eyes/victim_eyeballs = victim.getorganslot(ORGAN_SLOT_EYES)
 				var/isNPC = TRUE
 				if(victim.stat == DEAD)
-					if(eyeballs)
+					if(victim_eyeballs)
 						if (!do_after(caster, 3 SECONDS)) //timer to cast
 							return
 						var/permission = tgui_input_list(victim, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
@@ -447,7 +447,7 @@
 								if(caster.CheckEyewitness(caster, caster, 7, FALSE))
 									caster.adjust_veil(-1)
 							playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //itadakimasu! :D
-							qdel(eyeballs)
+							qdel(victim_eyeballs)
 							caster.adjust_nutrition(5) //organ nutriment value is 5
 							to_chat(caster, "You drink of the eyes of [victim.name] and a vision fills your mind...")
 							var/deathdesc = tgui_input_text(victim_two, "", "How did you die?", "", 300, TRUE, TRUE, 5 MINUTES)
@@ -466,7 +466,7 @@
 
 						if(isNPC)
 							playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //yummers
-							qdel(eyeballs)
+							qdel(victim_eyeballs)
 							caster.adjust_nutrition(5) //organ nutriment value is 5
 							to_chat(caster, "You drink of the eyes of [victim.name] but no vision springs to mind...")
 							to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")

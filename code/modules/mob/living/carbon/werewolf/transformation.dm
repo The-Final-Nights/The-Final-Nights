@@ -121,21 +121,11 @@
 			if(ishuman(trans))
 				ntransform.Scale(1.25, 1.5)
 		if("Corvid")
-			/*for(var/spoken_language in garou_lang.spoken_languages)
-				garou_lang.remove_language(spoken_language, FALSE, TRUE) // We do not remove known languages from were-ravens, their whole shtick is "talking".
-
-			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
-			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)*/
 			if(iscoraxcrinos(trans))
 				ntransform.Scale(0.75, 0.75)
 			if(ishuman(trans))
 				ntransform.Scale(1, 0.75)
 		if("Corax Crinos")
-			/*for(var/spoken_language in garou_lang.spoken_languages)
-				garou_lang.remove_language(spoken_language, FALSE, TRUE)
-
-			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
-			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)*/
 			if(iscorvid(trans))
 				ntransform.Scale(1, 1.75)
 			if(ishuman(trans))
@@ -214,10 +204,9 @@
 			playsound(get_turf(trans), 'code/modules/wod13/sounds/corax_transform.ogg', 100, FALSE)
 
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
-				if(B)
-					qdel(B)
+				qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_corvid), trans, corvid), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_corvid), trans, corvid), 3 SECONDS)
 		if("Corax Crinos")
 			if(iscoraxcrinos(trans))
 				transformating = FALSE
@@ -234,10 +223,9 @@
 			animate(trans, transform = ntransform, color = "#000000", time = 30)
 			playsound(get_turf(trans), 'code/modules/wod13/sounds/corax_transform.ogg', 100, FALSE)
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in trans.beastmaster)
-				if(B)
-					qdel(B)
+				qdel(B)
 
-			addtimer(CALLBACK(src, PROC_REF(transform_cor_crinos), trans, cor_crinos), 30 DECISECONDS)
+			addtimer(CALLBACK(src, PROC_REF(transform_cor_crinos), trans, cor_crinos), 3 SECONDS)
 
 		if("Homid")
 			if(ishuman(trans))
@@ -347,8 +335,6 @@
 	cor_crinos.bloodpool = trans.bloodpool
 	cor_crinos.masquerade = trans.masquerade
 	cor_crinos.nutrition = trans.nutrition
-	//if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED)) //can't be relevant since you cannot be both Corax and BSD, but might be helpful later
-	//	cor_crinos.wyrm_tainted = 1
 	cor_crinos.mind = trans.mind
 	cor_crinos.update_blood_hud()
 	cor_crinos.physique = cor_crinos.physique+3
@@ -409,8 +395,6 @@
 	corvid.bloodpool = trans.bloodpool
 	corvid.masquerade = trans.masquerade
 	corvid.nutrition = trans.nutrition
-	//if(trans.auspice.tribe.name == "Black Spiral Dancers" || HAS_TRAIT(trans, TRAIT_WYRMTAINTED)) //check not useful for now, we can't be Corax and BSD
-	//	corvid.wyrm_tainted = 1
 	corvid.mind = trans.mind
 	corvid.update_blood_hud()
 	transfer_damage(trans, corvid)
