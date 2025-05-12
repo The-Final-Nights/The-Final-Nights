@@ -59,7 +59,7 @@
 			if(masquerade == 0)
 				if(!is_special_character(src))
 					if(auspice.gnosis)
-						to_chat(src, "<span class='warning'>My Veil is too low to connect with the spirits of Umbra!</span>")
+						to_chat(src, "<span class='warning'>My Veil is too low to connect with the spirits of the Umbra!</span>")
 						adjust_gnosis(-1, src, FALSE)
 
 			if(auspice.rage >= 9)
