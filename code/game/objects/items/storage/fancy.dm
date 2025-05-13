@@ -22,6 +22,7 @@
 	var/spawn_type = null
 	var/fancy_open = FALSE
 	var/obj/fold_result = /obj/item/stack/sheet/cardboard
+	var/has_open_closed_states = TRUE
 
 /obj/item/storage/fancy/PopulateContents()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
@@ -29,11 +30,8 @@
 		new spawn_type(src)
 
 /obj/item/storage/fancy/update_icon_state()
-	. = ..()
-	if(fancy_open)
-		icon_state = "[icon_type]box[contents.len]"
-	else
-		icon_state = "[icon_type]box"
+    icon_state = "[base_icon_state][has_open_closed_states && fancy_open ? contents.len : null]"
+    return ..()
 
 /obj/item/storage/fancy/examine(mob/user)
 	. = ..()
@@ -362,22 +360,18 @@
 	w_class = WEIGHT_CLASS_TINY
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig_paper_pack"
+	base_icon_state = "cig_paper_pack"
 	///The value in here has NOTHING to do with icons. It needs to be this for the proper examine.
 	icon_type = "rolling paper"
 	spawn_type = /obj/item/rollingpaper
 	custom_price = PAYCHECK_PRISONER
+	has_open_closed_states = FALSE
 
 /obj/item/storage/fancy/rollingpapers/ComponentInitialize()
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_items = 10
 	STR.set_holdable(list(/obj/item/rollingpaper))
-
-///Overrides to do nothing because fancy boxes are fucking insane.
-/obj/item/storage/fancy/rollingpapers/update_icon_state()
-	. = ..()
-	//reset any changes the parent call may have made
-	icon_state = base_icon_state
 
 /obj/item/storage/fancy/rollingpapers/update_overlays()
 	. = ..()

@@ -45,7 +45,6 @@
 		new /datum/data/mining_equipment("zippo lighter",	/obj/item/lighter,	20),
 		new /datum/data/mining_equipment("lighter",		/obj/item/lighter/greyscale,	10),
 		new	/datum/data/mining_equipment("Rolling papers",	/obj/item/storage/fancy/rollingpapers,	10),
-		new /datum/data/mining_equipment("Rolling paper, individual",	/obj/item/rollingpaper,	1),
 		new /datum/data/mining_equipment("Circinus Vape",	/obj/item/clothing/mask/vape,	10),
 		new /datum/data/mining_equipment("Circinus Gum",	/obj/item/storage/box/gum/nicotine,	10),
 	)
