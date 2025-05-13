@@ -208,7 +208,8 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/datum/admins/proc/view_del_failures,
 #endif
 	/client/proc/check_timer_sources,
-	/client/proc/toggle_cdn
+	/client/proc/toggle_cdn,
+	/client/proc/allow_browser_inspect
 	)
 GLOBAL_LIST_INIT(admin_verbs_possess, list(GLOBAL_PROC_REF(possess), GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)
@@ -519,8 +520,10 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	var/value = input(usr, "Enter the Masquerade adjustment value for [key_name(M)]:", "Masquerade Adjustment", 0) as num|null
 	if(!value)
 		return
-
-	M.AdjustMasquerade(value, TRUE)
+	if(isgarou(M) || iswerewolf(M))
+		M.adjust_veil(value, forced = TRUE)
+	else
+		M.AdjustMasquerade(value, TRUE)
 	var/msg = "<span class='adminnotice'><b>Masquerade Adjustment: [key_name_admin(usr)] adjusted [key_name_admin(M)]'s masquerade by [value] to [M.masquerade]</b></span>"
 	log_admin("MasqAdjust: [key_name(usr)] has adjusted [key_name(M)]'s masquerade by [value] to [M.masquerade]")
 	message_admins(msg)

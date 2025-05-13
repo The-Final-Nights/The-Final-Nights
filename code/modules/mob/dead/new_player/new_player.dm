@@ -300,12 +300,16 @@
 			return "[jobtitle] is already filled to capacity."
 		if(JOB_UNAVAILABLE_GENERATION)
 			return "Your generation is too young for [jobtitle]."
+		if(JOB_UNAVAILABLE_RANK)
+			return "Your renown rank is too low for [jobtitle]."
 		if(JOB_UNAVAILABLE_SPECIES)
 			return "Your species cannot be [jobtitle]."
 		if(JOB_UNAVAILABLE_SPECIES_LIMITED)
 			return "Your species has a limit on how many can be [jobtitle]."
 		if(JOB_UNAVAILABLE_CHARACTER_AGE)
 			return "Your character is too young for [jobtitle]"
+		if(JOB_UNAVAILABLE_VAMPIRE_AGE)
+			return "Your character is too young as a vampire for [jobtitle]"
 	return "Error: Unknown job availability."
 
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
@@ -334,6 +338,8 @@
 		return JOB_UNAVAILABLE_GENERIC
 	if(!job.is_character_old_enough(client.prefs.total_age) && !bypass)
 		return JOB_UNAVAILABLE_CHARACTER_AGE
+	if(!job.is_vampire_old_enough(client.prefs.age, client.prefs.total_age) && !bypass)
+		return JOB_UNAVAILABLE_VAMPIRE_AGE
 	if((client.prefs.generation > job.minimal_generation) && !bypass)
 		return JOB_UNAVAILABLE_GENERATION
 	if((client.prefs.masquerade < job.minimal_masquerade) && !bypass)
@@ -348,6 +354,17 @@
 				if(i == client.prefs.clane.name)
 					return JOB_AVAILABLE
 			return JOB_UNAVAILABLE_CLAN
+	if((client.prefs.pref_species.name == "Werewolf") && !bypass)
+
+		if(client.prefs.tribe && !bypass)
+			if(job.allowed_tribes.len)
+				if(!job.allowed_tribes.Find(client.prefs.tribe.name))
+					return JOB_UNAVAILABLE_RANK
+
+		if(job.minimal_renownrank && !bypass)
+			if(client.prefs.renownrank < job.minimal_renownrank)
+				return JOB_UNAVAILABLE_RANK
+
 	return JOB_AVAILABLE
 
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
@@ -558,10 +575,6 @@
 					H.add_quirk(/datum/quirk/skittish)
 					H.add_quirk(/datum/quirk/pushover)
 				H.create_disciplines()
-				if(isgarou(H))
-					for(var/obj/structure/werewolf_totem/S in GLOB.totems)
-						if(S.tribe == H.auspice.tribe)
-							H.forceMove(get_turf(S))
 				if(iscathayan(H))
 					if(H.mind)
 						H.mind.dharma = new H.client.prefs.dharma_type()

@@ -58,6 +58,8 @@ GLOBAL_VAR(restart_counter)
 	SSdbcore.SetRoundID()
 	load_poll_data()
 
+	populate_gear_list() // TFN ADDITION START: loadout
+
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
 #else
@@ -136,7 +138,7 @@ GLOBAL_VAR(restart_counter)
 
 	logger.init_logging()
 
-	var/latest_changelog = file("[global.config.directory]/../html/changelogs/archive/" + time2text(world.timeofday, "YYYY-MM", 0) + ".yml")
+	var/latest_changelog = file("[global.config.directory]/../html/changelogs/archive/" + time2text(world.timeofday, "YYYY-MM", TIMEZONE_UTC) + ".yml")
 	GLOB.changelog_hash = fexists(latest_changelog) ? md5(latest_changelog) : 0 //for telling if the changelog has changed recently
 
 	if(GLOB.round_id)

@@ -105,9 +105,13 @@ SUBSYSTEM_DEF(job)
 			return FALSE
 		if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
 			return FALSE
+		if(!bypass && !job.is_vampire_old_enough(player.client.prefs.age, player.client.prefs.total_age))
+			return FALSE
 		if((player.client.prefs.generation > job.minimal_generation) && !bypass)
 			return FALSE
 		if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
+			return FALSE
+		if((player.client.prefs.renownrank < job.minimal_renownrank) && !bypass)
 			return FALSE
 		if(!job.allowed_species.Find(player.client.prefs.pref_species.name) && !bypass)
 			return FALSE
@@ -150,8 +154,14 @@ SUBSYSTEM_DEF(job)
 		if(!job.is_character_old_enough(player.client.prefs.total_age) && !bypass)
 			JobDebug("FOC character not old enough, Player: [player]")
 			continue
+		if(!bypass && !job.is_vampire_old_enough(player.client.prefs.age, player.client.prefs.total_age))
+			JobDebug("FOC character not old enough since embrace, Player: [player]")
+			continue
 		if((player.client.prefs.generation > job.minimal_generation) && !bypass)
 			JobDebug("FOC player not enough generation, Player: [player]")
+			continue
+		if((player.client.prefs.renownrank < job.minimal_renownrank) && !bypass)
+			JobDebug("FOC player not enough renown rank, Player: [player]")
 			continue
 		if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
 			JobDebug("FOC player not enough masquerade, Player: [player]")
@@ -222,8 +232,16 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ character not old enough, Player: [player]")
 			continue
 
+		if(!job.is_vampire_old_enough(player.client.prefs.age, player.client.prefs.total_age))
+			JobDebug("GRJ character not old enough since embrace, Player: [player]")
+			continue
+
 		if(player.client.prefs.generation > job.minimal_generation)
 			JobDebug("GRJ player not enough generation, Player: [player]")
+			continue
+
+		if(player.client.prefs.renownrank < job.minimal_renownrank)
+			JobDebug("GRJ player not enough renown rank, Player: [player]")
 			continue
 
 		if(player.client.prefs.masquerade < job.minimal_masquerade)
@@ -415,8 +433,15 @@ SUBSYSTEM_DEF(job)
 					JobDebug("DO character not old enough, Player: [player], Job:[job.title]")
 					continue
 
+				if(!bypass && !job.is_vampire_old_enough(player.client.prefs.age, player.client.prefs.total_age))
+					JobDebug("DO character not old enough since embrace, Player: [player], Job:[job.title]")
+
 				if((player.client.prefs.generation > job.minimal_generation) && !bypass)
 					JobDebug("DO player not enough generation, Player: [player]")
+					continue
+
+				if((player.client.prefs.renownrank > job.minimal_renownrank) && !bypass)
+					JobDebug("DO player not enough renown rank, Player: [player]")
 					continue
 
 				if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
@@ -757,11 +782,6 @@ SUBSYSTEM_DEF(job)
 		if(H.clane)
 			if(H.clane.violating_appearance)
 				destination = pick(GLOB.masquerade_latejoin)
-		if(isgarou(H))
-			for(var/obj/structure/werewolf_totem/W in GLOB.totems)
-				if(W)
-					if(W.tribe == H.auspice.tribe)
-						destination = W
 		destination.JoinPlayerHere(M, buckle)
 		return TRUE
 

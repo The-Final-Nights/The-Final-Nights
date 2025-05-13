@@ -206,6 +206,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	READ_FILE(S["player_experience"], player_experience)
 
+	READ_FILE(S["purchased_gear"], purchased_gear) // TFN ADDITION: loadout
+
 	// Custom hotkeys
 	READ_FILE(S["key_bindings"], key_bindings)
 	check_keybindings()
@@ -262,6 +264,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_keybindings(key_bindings)
+	purchased_gear  = sanitize_each_inlist(purchased_gear, GLOB.gear_datums) // TFN ADDITION: loadout
 	nsfw_content_pref = sanitize_integer(nsfw_content_pref, FALSE, TRUE, src::nsfw_content_pref)
 
 	player_experience   = sanitize_integer(player_experience, 0, 100000, 0)
@@ -344,6 +347,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["hearted_until"], (hearted_until > world.realtime ? hearted_until : null))
 	WRITE_FILE(S["nsfw_content_pref"], nsfw_content_pref)
 	WRITE_FILE(S["player_experience"], player_experience)
+	WRITE_FILE(S["purchased_gear"], purchased_gear) // TFN ADDITION: loadout
 	return TRUE
 
 /datum/preferences/proc/load_character(slot)
@@ -397,8 +401,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(newtype)
 			auspice = new newtype
 
+	var/tribe_id
+	READ_FILE(S["tribe"], tribe_id)
+	if(tribe_id)
+		var/newtype = GLOB.tribes_list[tribe_id]
+		if(newtype)
+			tribe = new newtype
+
 	READ_FILE(S["breed"], breed)
-	READ_FILE(S["tribe"], tribe)
 	READ_FILE(S["werewolf_color"], werewolf_color)
 	READ_FILE(S["werewolf_scar"], werewolf_scar)
 	READ_FILE(S["werewolf_hair"], werewolf_hair)
@@ -445,6 +455,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["generation"], generation)
 	READ_FILE(S["generation_bonus"], generation_bonus)
 	READ_FILE(S["masquerade"], masquerade)
+	READ_FILE(S["renownrank"], renownrank)
+	READ_FILE(S["honor"], honor)
+	READ_FILE(S["glory"], glory)
+	READ_FILE(S["wisdom"], wisdom)
 	READ_FILE(S["real_name"], real_name)
 	READ_FILE(S["werewolf_name"], werewolf_name)
 	READ_FILE(S["gender"], gender)
@@ -500,6 +514,16 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	else
 		READ_FILE(S["feature_human_tail"], features["tail_human"])
 		READ_FILE(S["feature_human_ears"], features["ears"])
+
+
+	// TFN ADDITION START: loadout
+	READ_FILE(S["equipped_gear"], equipped_gear)
+	if(config) //This should *probably* always be there, but just in case.
+		if(length(equipped_gear) > CONFIG_GET(number/max_loadout_items))
+			to_chat(parent, span_userdanger("Loadout maximum items exceeded in loaded slot, Your loadout has been cleared! You had [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)] equipped items!"))
+			equipped_gear = list()
+			WRITE_FILE(S["equipped_gear"], equipped_gear)
+	// TFN ADDITION END
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -557,10 +581,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(!custom_names[custom_name_id])
 			custom_names[custom_name_id] = get_default_name(custom_name_id)
 
-	if(!features["mcolor"] || features["mcolor"] == "#000")
-		features["mcolor"] = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F")
+	if(!features["mcolor"] || features["mcolor"] == "#000000")
+		features["mcolor"] = pick("#FFFFFF","#7F7F7F", "#7FFF7F", "#7F7FFF", "#FF7F7F", "#7FFFFF", "#FF7FFF", "#FFFF7F")
 
-	if(!features["ethcolor"] || features["ethcolor"] == "#000")
+	if(!features["ethcolor"] || features["ethcolor"] == "#000000")
 		features["ethcolor"] = GLOB.color_list_ethereal[pick(GLOB.color_list_ethereal)]
 
 	randomise = SANITIZE_LIST(randomise)
@@ -584,12 +608,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	archetype 		= sanitize_inlist(archetype, subtypesof(/datum/archetype))
 
 	breed			= sanitize_inlist(breed, list("Homid", "Lupus", "Metis"))
-	tribe			= sanitize_inlist(tribe, list("Wendigo", "Glasswalkers", "Black Spiral Dancers"))
 	werewolf_color	= sanitize_inlist(werewolf_color, list("black", "gray", "red", "white", "ginger", "brown"))
 	werewolf_scar	= sanitize_integer(werewolf_scar, 0, 7, initial(werewolf_scar))
 	werewolf_hair	= sanitize_integer(werewolf_hair, 0, 4, initial(werewolf_hair))
-	werewolf_hair_color		= sanitize_ooccolor(werewolf_hair_color, 3, 0)
-	werewolf_eye_color		= sanitize_ooccolor(werewolf_eye_color, 3, 0)
+	werewolf_hair_color		= sanitize_hexcolor(werewolf_hair_color)
+	werewolf_eye_color		= sanitize_hexcolor(werewolf_eye_color)
 	flavor_text	= sanitize_text(flavor_text)
 	flavor_text_nsfw = sanitize_text(flavor_text_nsfw)
 	ooc_notes = sanitize_text(ooc_notes)
@@ -643,19 +666,23 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// TFN EDIT START: gen tweaks
 	generation				= sanitize_integer(generation, 7, 14, initial(generation))
 	generation_bonus				= sanitize_integer(generation_bonus, 0, 5, initial(generation_bonus))
+	glory = sanitize_integer(glory, 0, 10, initial(glory))
+	wisdom = sanitize_integer(wisdom, 0, 10, initial(wisdom))
+	honor = sanitize_integer(honor, 0, 10, initial(honor))
+	renownrank = sanitize_integer(renownrank, 0, 5, initial(renownrank))
 	// TFN EDIT END
-	hair_color			= sanitize_hexcolor(hair_color, 3, 0)
-	facial_hair_color			= sanitize_hexcolor(facial_hair_color, 3, 0)
-	underwear_color			= sanitize_hexcolor(underwear_color, 3, 0)
-	eye_color		= sanitize_hexcolor(eye_color, 3, 0)
+	hair_color			= sanitize_hexcolor(hair_color)
+	facial_hair_color			= sanitize_hexcolor(facial_hair_color)
+	underwear_color			= sanitize_hexcolor(underwear_color)
+	eye_color		= sanitize_hexcolor(eye_color)
 	skin_tone		= sanitize_inlist(skin_tone, GLOB.skin_tones)
 	backpack			= sanitize_inlist(backpack, GLOB.backpacklist, initial(backpack))
 	jumpsuit_style	= sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
 	clane_accessory = sanitize_inlist(clane_accessory, clane.accessories, null)
 	playtime_reward_cloak = sanitize_integer(playtime_reward_cloak)
-	features["mcolor"]	= sanitize_hexcolor(features["mcolor"], 3, 0)
-	features["ethcolor"]	= copytext_char(features["ethcolor"], 1, 7)
+	features["mcolor"]	= sanitize_hexcolor(features["mcolor"])
+	features["ethcolor"]	= sanitize_hexcolor(features["ethcolor"])
 	features["tail_lizard"]	= sanitize_inlist(features["tail_lizard"], GLOB.tails_list_lizard)
 	features["tail_human"] 	= sanitize_inlist(features["tail_human"], GLOB.tails_list_human, "None")
 	features["snout"]	= sanitize_inlist(features["snout"], GLOB.snouts_list)
@@ -669,6 +696,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["moth_antennae"] 	= sanitize_inlist(features["moth_antennae"], GLOB.moth_antennae_list, "Plain")
 	features["moth_markings"] 	= sanitize_inlist(features["moth_markings"], GLOB.moth_markings_list, "None")
 	experience_used_on_character = sanitize_integer(experience_used_on_character, 0, 100000, 0)
+	equipped_gear	= sanitize_each_inlist(equipped_gear, GLOB.gear_datums) // TFN ADDITION: loadout
 
 	derangement = sanitize_integer(derangement, 0, 1, 1)
 
@@ -729,7 +757,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["version"]			, SAVEFILE_VERSION_MAX)	//load_character will sanitize any bad data, so assume up-to-date.)
 
 	WRITE_FILE(S["breed"], breed)
-	WRITE_FILE(S["tribe"], tribe)
+	WRITE_FILE(S["tribe"], tribe.name)
 	WRITE_FILE(S["werewolf_color"], werewolf_color)
 	WRITE_FILE(S["werewolf_scar"], werewolf_scar)
 	WRITE_FILE(S["werewolf_hair"], werewolf_hair)
@@ -773,6 +801,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["enemy_text"]			, enemy_text)
 	WRITE_FILE(S["lover_text"]			, lover_text)
 	WRITE_FILE(S["reason_of_death"]			, reason_of_death)
+	WRITE_FILE(S["renownrank"]			, renownrank)
+	WRITE_FILE(S["honor"]			, honor)
+	WRITE_FILE(S["glory"]			, glory)
+	WRITE_FILE(S["wisdom"]			, wisdom)
 	WRITE_FILE(S["clane"]			, clane.name)
 	WRITE_FILE(S["generation"]			, generation)
 	WRITE_FILE(S["generation_bonus"]			, generation_bonus)
@@ -838,6 +870,14 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	WRITE_FILE(S["preferred_ai_core_display"] ,  preferred_ai_core_display)
 	WRITE_FILE(S["prefered_security_department"] , prefered_security_department)
+
+	// TFN ADDITION START: Getting rid of the previewed items before writing
+	if(equipped_gear)
+		for(var/gear in equipped_gear)
+			if(!(gear in purchased_gear))
+				equipped_gear -= gear
+	WRITE_FILE(S["equipped_gear"], equipped_gear)
+	// TFN ADDITION END
 
 	//Jobs
 	WRITE_FILE(S["joblessrole"]		, joblessrole)

@@ -193,53 +193,53 @@
 	. = 0
 	switch(skin_tone)
 		if("caucasian1")
-			. = "ffe0d1"
+			. = "#ffe0d1"
 		if("caucasian2")
-			. = "fcccb3"
+			. = "#fcccb3"
 		if("caucasian3")
-			. = "e8b59b"
+			. = "#e8b59b"
 		if("latino")
-			. = "d9ae96"
+			. = "#d9ae96"
 		if("mediterranean")
-			. = "c79b8b"
+			. = "#c79b8b"
 		if("asian1")
-			. = "ffdeb3"
+			. = "#ffdeb3"
 		if("asian2")
-			. = "e3ba84"
+			. = "#e3ba84"
 		if("arab")
-			. = "c4915e"
+			. = "#c4915e"
 		if("indian")
-			. = "b87840"
+			. = "#b87840"
 		if("african1")
-			. = "754523"
+			. = "#754523"
 		if("african2")
-			. = "471c18"
+			. = "#471c18"
 		if("albino")
-			. = "fff4e6"
+			. = "#fff4e6"
 		if("orange")
-			. = "ffc905"
+			. = "#ffc905"
 		if("vamp1")
-			. = "decdc4"
+			. = "#decdc4"
 		if("vamp2")
-			. = "cdb0a1"
+			. = "#cdb0a1"
 		if("vamp3")
-			. = "a59085"
+			. = "#a59085"
 		if("vamp4")
-			. = "978073"
+			. = "#978073"
 		if("vamp5")
-			. = "7a6c64"
+			. = "#7a6c64"
 		if("vamp6")
-			. = "ceceb1"
+			. = "#ceceb1"
 		if("vamp7")
-			. = "a6a67f"
+			. = "#a6a67f"
 		if("vamp8")
-			. = "7e7262"
+			. = "#7e7262"
 		if("vamp9")
-			. = "6f6553"
+			. = "#6f6553"
 		if("vamp10")
-			. = "4c4136"
+			. = "#4c4136"
 		if("vamp11")
-			. = "2b2722"
+			. = "#2b2722"
 
 /mob/living/carbon/proc/Digitigrade_Leg_Swap(swap_back)
 	var/body_plan_changed = FALSE
