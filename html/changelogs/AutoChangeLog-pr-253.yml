@@ -1,0 +1,6 @@
+author: "Hardly"
+delete-after: True
+changes:
+  - rscadd: "added loadouts"
+  - spellcheck: "fixed a few misspellings on the clothing store"
+  - spellcheck: "de-ss13s a few items (eg. red letterman is no longer syndicate flavored)"
