@@ -208,7 +208,7 @@
 
 /obj/item/clothing/suit/vampire/coat/alt
 	name = "green coat"
-	desc = "A warm and heavy brown coat."
+	desc = "A warm and heavy green coat."
 	icon_state = "coat2"
 
 /obj/item/clothing/suit/vampire/coat/winter

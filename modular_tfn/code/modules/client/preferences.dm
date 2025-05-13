@@ -1,8 +1,17 @@
 /datum/preferences
 	var/headshot_link
 
+	//Whenever the loadout should be shown on preferences
+	var/show_loadout = TRUE
+	//Gear the client has purchased
+	var/list/purchased_gear = list()
+	//Gear the client has equipped
+	var/list/equipped_gear = list()
+	//Gear tab currently being viewed
+	var/gear_tab = "General"
+
 /proc/valid_headshot_link(mob/user, value, silent = FALSE)
-	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, discord, lensdump, imgbox, catbox
+	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, lensdump, imgbox, catbox
 	var/static/list/valid_extensions = list("jpg", "png", "jpeg") // Regex works fine, if you know how it works
 
 	if(!length(value))
