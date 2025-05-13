@@ -696,7 +696,7 @@ SUBSYSTEM_DEF(carpool)
 	baggage_max = WEIGHT_CLASS_BULKY
 	light_system = MOVABLE_LIGHT
 	light_color = "#ff0000"
-	light_range = 4
+	light_range = 6
 	light_power = 6
 	light_on = FALSE
 	var/color_blue = FALSE
