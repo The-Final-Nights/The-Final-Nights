@@ -1,4 +1,0 @@
-author: "necti-dev"
-delete-after: True
-changes:
-  - bugfix: "Butterflies no longer have 5 blood points for vamps to feed on."
