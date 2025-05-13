@@ -146,10 +146,17 @@
 	return reagents.maximum_volume
 
 /obj/item/reagent_containers/glass/beaker/jar
-	name = "honey jar"
-	desc = "A jar for honey. It can hold up to 50 units of sweet delight."
+	name = "empty jar"
+	desc = "A jar for whatever your heart desires. It can hold up to 50 units of sweet delight."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "vapour"
+
+/obj/item/reagent_containers/glass/beaker/jar/honey
+	name = "honey jar"
+	desc = "A jar of honey."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "vapour"
+	list_reagents = list(/datum/reagent/consumable/honey = 50)
 
 /obj/item/reagent_containers/glass/beaker/large
 	name = "large beaker"

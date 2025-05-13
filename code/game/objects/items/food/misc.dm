@@ -803,8 +803,8 @@
 	icon = 'icons/obj/food/food.dmi'
 	icon_state = "kuzumochi"
 	bite_consumption = 3
-	max_volume = 15
-	food_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/medicine/c2/multiver = 5)
+	max_volume = 20
+	food_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/medicine/c2/multiver = 5) //40u mutliver = death by lung failure
 	tastes = list("sweetness" = 1)
 	foodtypes = GRAIN | SUGAR
 	trash_type = /obj/item/trash/plate

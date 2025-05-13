@@ -9892,6 +9892,9 @@
 /obj/structure/flora/ausbushes/leafybush{
 	pixel_y = 7
 	},
+/obj/effect/overlay/palmtree_r{
+	pixel_y = 8
+	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
 "cEq" = (
@@ -17647,6 +17650,7 @@
 /area/vtm/pacificheights/forest)
 "eLK" = (
 /obj/structure/table,
+/obj/item/storage/box/drinkingglasses,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility/restricted)
 "eLP" = (
@@ -19737,6 +19741,8 @@
 /obj/item/storage/box/beakers,
 /obj/item/storage/box/ingredients/american,
 /obj/item/storage/box/ingredients/vegetarian,
+/obj/item/reagent_containers/glass/beaker/jar/honey,
+/obj/item/reagent_containers/glass/beaker/jar/honey,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "fof" = (
@@ -22684,6 +22690,11 @@
 /obj/structure/curtain/bounty,
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/hotel)
+"gaL" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/interior/shop)
 "gaR" = (
 /obj/structure/fluff/hedge,
 /obj/structure/railing{
@@ -27138,9 +27149,6 @@
 	},
 /obj/effect/decal/bordur{
 	dir = 8
-	},
-/obj/effect/overlay/palmtree_r{
-	pixel_y = 8
 	},
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/vampgrass,
@@ -38463,7 +38471,6 @@
 /turf/open/floor/carpet/red,
 /area/vtm/hotel)
 "kqS" = (
-/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/shop)
 "kqV" = (
@@ -39127,6 +39134,13 @@
 	dir = 8;
 	pixel_x = 16
 	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/unionsquare)
+"kBl" = (
+/obj/effect/decal/bordur{
+	dir = 8
+	},
+/obj/item/reagent_containers/glass/beaker/jar,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
 "kBn" = (
@@ -78870,6 +78884,10 @@
 	name = "full cream milk"
 	},
 /obj/item/storage/box/ingredients/carnivore,
+/obj/item/reagent_containers/food/condiment/flour/honkuzu,
+/obj/item/reagent_containers/food/condiment/flour/honkuzu,
+/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/reagent_containers/glass/beaker/jar/honey,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility/restricted)
 "uZs" = (
@@ -188874,7 +188892,7 @@ tYg
 iog
 fLw
 uXM
-ylZ
+gaL
 xjO
 ylZ
 wbD
@@ -195806,7 +195824,7 @@ kdy
 kdy
 kdy
 kdy
-kdy
+kBl
 kdy
 kdy
 kdy
