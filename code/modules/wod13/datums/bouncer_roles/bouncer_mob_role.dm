@@ -23,19 +23,19 @@
 	surnames = null
 
 	hair_colors = list(
-		"040404",	//Black
-		"120b05",	//Dark Brown
-		"342414",	//Brown
-		"554433",	//Light Brown
-		"695c3b",	//Dark Blond
-		"ad924e",	//Blond
-		"dac07f",	//Light Blond
-		"802400",	//Ginger
-		"a5380e",	//Ginger alt
-		"ffeace",	//Albino
-		"650b0b",	//Punk Red
-		"14350e",	//Punk Green
-		"080918"	//Punk Blue
+		"#040404",	//Black
+		"#120b05",	//Dark Brown
+		"#342414",	//Brown
+		"#554433",	//Light Brown
+		"#695c3b",	//Dark Blond
+		"#ad924e",	//Blond
+		"#dac07f",	//Light Blond
+		"#802400",	//Ginger
+		"#a5380e",	//Ginger alt
+		"#ffeace",	//Albino
+		"#650b0b",	//Punk Red
+		"#14350e",	//Punk Green
+		"#080918"	//Punk Blue
 	)
 	male_hair = list(
 		"Balding Hair",

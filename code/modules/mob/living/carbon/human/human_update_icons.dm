@@ -95,19 +95,6 @@ There are several things that need to be remembered:
 //	update_body_parts_head_only()
 	remove_overlay(BODY_LAYER)
 	dna.species.handle_body(src)
-	/*
-	if(gender == MALE)
-		if(!given_penis)
-			var/obj/item/organ/replacement = new /obj/item/organ/penis()
-			replacement.Insert(src, TRUE, FALSE)
-			given_penis = TRUE
-	else
-		given_penis = FALSE
-		var/obj/item/organ/I = getorgan(/obj/item/organ/penis)
-		if(I)
-			I.Remove(src)
-			QDEL_NULL(I)
-	*/
 	..()
 
 /mob/living/carbon/human/update_fire()
@@ -694,7 +681,7 @@ generate/load female uniform sprites matching all previously decided variables
 				if(base_body_mod == "s")
 					eye_overlay = mutable_appearance('icons/mob/human_face_f.dmi', E.eye_icon_state, -BODY_LAYER)
 			if((EYECOLOR in dna.species.species_traits) && E)
-				eye_overlay.color = "#" + eye_color
+				eye_overlay.color = eye_color
 			if(OFFSET_FACE in dna.species.offset_features)
 				eye_overlay.pixel_x += dna.species.offset_features[OFFSET_FACE][1]
 				eye_overlay.pixel_y += dna.species.offset_features[OFFSET_FACE][2]

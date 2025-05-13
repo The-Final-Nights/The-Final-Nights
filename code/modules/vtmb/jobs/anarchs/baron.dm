@@ -17,8 +17,9 @@
 	display_order = JOB_DISPLAY_ORDER_BARKEEPER
 	bounty_types = CIV_JOB_DRINK
 
-//	minimal_generation = 11	//Uncomment when players get exp enough
-	minimum_character_age = 70
+//	minimal_generation = 13
+//	minimum_character_age = 70 //Uncomment if age-restriction wanted.
+	minimum_vampire_age = 1
 
 	my_contact_is_important = TRUE
 	known_contacts = list(
@@ -44,7 +45,7 @@
 	id = /obj/item/card/id/baron
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	uniform = /obj/item/clothing/under/vampire/bar
-	suit = /obj/item/clothing/suit/vampire/jacket/better
+	suit = /obj/item/clothing/suit/vampire/jacket/punk
 	shoes = /obj/item/clothing/shoes/vampire
 	gloves = /obj/item/clothing/gloves/vampire/work
 	l_pocket = /obj/item/vamp/phone/barkeeper

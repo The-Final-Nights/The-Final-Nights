@@ -14,7 +14,7 @@
 	if(randomise[RANDOM_UNDERWEAR])
 		underwear = random_underwear(gender)
 	if(randomise[RANDOM_UNDERWEAR_COLOR])
-		underwear_color = random_short_color()
+		underwear_color = "#[random_color()]"
 	if(randomise[RANDOM_UNDERSHIRT])
 		undershirt = random_undershirt(gender)
 	if(randomise[RANDOM_SOCKS])
@@ -36,9 +36,9 @@
 		else
 			facial_hairstyle = random_facial_hairstyle(gender)
 	if(randomise[RANDOM_HAIR_COLOR])
-		hair_color = random_short_color()
+		hair_color = "#[random_color()]"
 	if(randomise[RANDOM_FACIAL_HAIR_COLOR])
-		facial_hair_color = random_short_color()
+		facial_hair_color = "#[random_color()]"
 	if(randomise[RANDOM_SKIN_TONE])
 		skin_tone = random_skin_tone()
 	if(randomise[RANDOM_EYE_COLOR])
@@ -124,7 +124,7 @@
 		hardcore_survival_score += available_hardcore_quirks[picked_quirk]
 		available_hardcore_quirks -= picked_quirk
 
-/datum/preferences/proc/update_preview_icon()
+/datum/preferences/proc/update_preview_icon(show_loadout = FALSE) // TFN EDIT - ORIGINAL: remove "show_loadout = FALSE"
 	if(!parent) // If we don't have anyone to show, don't waste our time making a preview
 		return
 	// Determine what job is marked as 'High' priority, and dress them up as such.
@@ -153,7 +153,7 @@
 	var/mutable_appearance/MAMA = mutable_appearance('code/modules/wod13/64x32.dmi', "slot", layer = SPACE_LAYER)
 	MAMA.pixel_x = -16
 	mannequin.add_overlay(MAMA)
-	copy_to(mannequin, 1, TRUE, TRUE)
+	copy_to(mannequin, 1, TRUE, TRUE, loadout = show_loadout) // TFN EDIT - ORIGINAL: remove "loadout = show_loadout"
 	if(clane.alt_sprite)
 		mannequin.dna.species.limbs_id = clane.alt_sprite
 //	else

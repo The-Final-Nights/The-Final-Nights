@@ -35,8 +35,3 @@
 	winset(src, "browseroutput", "is-disabled=0;is-visible=1")
 	if(byond_version >= 516)
 		winset(src, null, list("browser-options" = "find,refresh,byondstorage"))
-
-/client/verb/panel_devtools()
-	set name = "Enable TGUI Devtools"
-	set category = "OOC"
-	winset(src, "", "browser-options=devtools")

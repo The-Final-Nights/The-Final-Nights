@@ -417,9 +417,6 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	for(var/i=1, i<=times, i++)
 		. += string
 
-/proc/random_short_color()
-	return random_string(3, GLOB.hex_characters)
-
 /proc/random_color()
 	return random_string(6, GLOB.hex_characters)
 
