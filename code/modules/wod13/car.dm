@@ -700,7 +700,7 @@ SUBSYSTEM_DEF(carpool)
 	light_power = 6
 	light_on = FALSE
 	var/color_blue = FALSE
-	var/last_color_change = 0
+	COOLDOWN_DECLARE(last_color_change)
 
 /obj/vampire_car/police/unmarked
 	icon_state = "unmarked"
@@ -722,9 +722,9 @@ SUBSYSTEM_DEF(carpool)
 /obj/vampire_car/police/handle_caring()
 	if(!light_on)
 		return ..()
-	if(last_color_change + 1 SECONDS > world.time)
+	if(!COOLDOWN_FINISHED(src, last_color_change))
 		return ..()
-	last_color_change = world.time
+	COOLDOWN_START(src, last_color_change, 1 SECONDS)
 	if(color_blue)
 		color_blue = FALSE
 		set_light_color("#ff0000")
