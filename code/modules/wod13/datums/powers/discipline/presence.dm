@@ -1,8 +1,12 @@
 /datum/discipline/presence
 	name = "Presence"
-	desc = "Makes targets in radius more vulnerable to damages."
+	desc = "Allows you to attract, sway, and control crowds through supernatural allure and emotional manipulation."
 	icon_state = "presence"
 	power_type = /datum/discipline_power/presence
+
+/datum/discipline/presence/post_gain()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_CHARMER, /datum/discipline/presence)
 
 /datum/discipline_power/presence
 	name = "Presence power name"

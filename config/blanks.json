@@ -815,5 +815,176 @@
 			"<font color=\"grey\"><div align=\"justify\">This payment document is the property of Transamerica corporation. You must deliver this document to the head of the Transamerica corporation facility staff within 24 hours of service for independent tax accounting.</div></font></p>",
 			"<div style=\"all: initial;\" class=\"notranslate\"></div>"
 		]
+	},
+	{
+		"code": "END-EMP",
+		"category": "Endron International",
+		"name": "Application for Corporate Employment",
+		"info": [
+"<head>",
+"<table bgcolor=\"0a3d0a\" width=\"100%\" height=\"5%\">",
+  "<th>",
+    "<div align=\"center\">",
+      "<font size=\"5\" color=\"white\"> <br>Endron International Corporate Office</font> </code> <br>",
+      "<font size=\"2\" color=\"white\">for the</font><br><font color=\"white\">Global Resource Requisition Division</font>",
+    "</div>",
+  "</th>",
+"<head>",
+"<table bgcolor=\"0a3d0a\" width=\"100%\" height=\"15%\">",
+  "<th>",
+    "<div align=\"left\">",
+      "<font size=\"3\" color=\"white\"><br>In the Matter of the Application from: [_____________________________________]</font>",
+      "<font size=\"2\" color=\"white\"> <br><i>(Name of the prospective asset and role applied for)</i></font></code>",
+      "<br>",
+      "<font size=\"4\" color=\"white\">In RE: Employment Consideration Under Endron Directive 41(b) <br></font>",
+    "</div>",
+  "</th>",
+  "<th>",
+    "<div align=\"right\">",
+      "<font color=\"white\" size=2>",
+        "<font size=4>",
+          "<center><code><em>File No. : <br>[________________]</em></code></center>",
+        "</font><br>",
+         "<font size=3>",
+          "<center><code>MM/DD/YY</code></center>",
+        "</font><br>",
+        "<font size=2>",
+          "<center><code>[_______________]</code></center>",
+  "</th>",
+"</table>",
+"</head>",
+"<th>",
+ "<font color=\"Black\" size=6>",
+    "<b>",
+    "<center>APPLICATION FOR CORPORATE EMPLOYMENT</center>",
+    "</b>",
+    "<hr color=\"0a3d0a\" size=\"4\">",
+  "</font>",
+"</th>",
+"<br>",
+"<font color=\"black\" size=4>",
+  "<center>",
+    "I, a willing and obedient candidate, request employment under the authority of Endron International and submit myself to augmentation, reassignment, or liquidation as deemed necessary by Corporate. I affirm that I have reason to believe I possess value to the following division or project: [_____________________________]<br>",
+    "Located in the [__________________] Deployment Zone",
+  "</center>",
+"<hr color=\"0a3d0a\" size=\"4\">",
+"<br> The basis for asset requisition under Endron Directive 41(b) is <font color=\"black\" size=2><i> (check one or more) </i> </font>",
+
+"<br>[_] Unwavering loyalty and compliance",
+
+"<br>[_] Genetic compatibility with Project Thanatos",
+
+"<br>[_] Combat readiness and/or expendability",
+
+"<br>[_] Capacity for indefinite off-world deployment",
+"<hr color=\"0a3d0a\" size=\"4\">",
+"<br> This application is in relation to:",
+"<br> [___________________________________________________________]",
+"<br> [___________________________________________________________]",
+"<br> [___________________________________________________________]",
+"<head>",
+"<table bgcolor=\"0a3d0a\" width=\"100%\" height=\"10%\">",
+  "<br>",
+  "<font size=\"5\" color=\"white\">",
+    "<th>",
+      "<div align=\"left\">",
+        "<font color=\"white\" size=2>",
+          "<font size=5><right><code><em>Sworn before the Corporate Board and logged in the employment database</em></code> <br>",
+            "<code><em>Branch and Division: [_____________________________] </em></code>",
+    "<th>",
+      "<div align=\"right\">",
+        "<font color=\"white\" size=3>",
+          "<font size=4>",
+            "<center>",
+              "<code><em>Applicant's Signature: [___________________]</em></code><br>",
+              "<code>Acting Supervisor's Signature: [___________________]</code>",
+            "</center>"
+		]
+	},
+	{
+		"code": "END-ADV",
+		"category": "Endron International",
+		"name": "Endron Advertisement",
+		"info": [
+			"<center><font size=\"5\" color=\"green\"><b>WELCOME TO A CLEANER, STRONGER SAN FRANCISCO</b></font></center>",
+
+"<hr>",
+
+"<center><b>POWERING PROGRESS – THE ENDRON WAY</b></center>",
+
+"Endron International is proud to fuel San Francisco’s bright future. Through clean development and active local investment, we’re delivering real results for real citizens:",
+
+"<ul>",
+"<li><b>LOWER GAS PRICES:</b> Endron fuel stations across the Bay now offer some of the <font color=\"green\">lowest prices in the nation</font>. That’s energy you can afford.</li>",
+
+"<li><b>HEALTHY HIRING:</b> Our new Employee Health Integration Program ensures all new hires receive full biometric screening, orientation wellness, and support. Join the <i>Endron family</i>.</li>",
+
+"<li><b>CELEBRATING DIVERSITY:</b> Endron proudly recruits from all communities. Language, heritage, and background are strengths — not obstacles.</li>",
+
+"<li><b>SAFETY THROUGH PARTNERSHIP:</b> We work hand-in-hand with <i>San Francisco Police Department</i> and emergency services to ensure your streets — and our sites — remain safe, secure, and trusted.</li>",
+"</ul>",
+
+"<hr>",
+
+"<center><font color=\"green\"><b>ENERGY THAT WORKS. PEOPLE WHO CARE. A FUTURE THAT LASTS.</b></font></center>",
+
+"<center><font size=\"2\">For local opportunities or inquiries, please contact your regional Endron Civic Liaison or your district’s Forward Outreach Officer.</font></center>"
+]
+},
+{
+	"code": "END-DISC",
+	"category": "Endron International",
+	"name": "Endron Disciplinary Action Record",
+	"info": [
+		"<center><font size=\"5\" color=\"green\"><b>ENDRON INTERNATIONAL - DISCIPLINARY ACTION PLAN</b></font></center>",
+
+"<hr>",
+
+"<center><b>EMPLOYEE DISCIPLINE RECORD</b></center>",
+
+"<b>Employee Name:</b> [_________________________]",
+"<b>Employee ID Number:</b> [_____________________]",
+
+"<b>Department:</b> [______________________________]",
+"<b>Supervisor Name:</b> [_________________________]",
+
+"<br>",
+
+"<b>Tier of Disciplinary Action (Select One):</b>",
+
+"<ul>",
+"<li>[_] Tier Zero — Verbal Warning",
+"<i> Informal correction issued. No file record created. Employee advised to improve immediately.</i></li>",
+
+"<li>[_] Tier One — Written Warning",
+"<i> Formal reprimand issued. Action Plan created and signed. Two strikes remaining.</i></li>",
+
+"<li>[_] Tier Two — Suspension",
+"<i> Temporary removal from duty without pay. Mandatory Action Plan revision required upon return.</i></li>",
+
+"<li>[_] Tier Three — Termination",
+"<i> Employment terminated. All company property reclaimed. Subject transferred to Medical Research Division as applicable.</i></li>",
+"</ul>",
+
+"<br>",
+
+"<b>Primary Infraction Type (Select One or More):</b>",
+
+"<ul>",
+"<li>[_] Class C — Minor (e.g., tardiness, low performance)</li>",
+"<li>[_] Class B — Serious (e.g., insubordination, contraband)</li>",
+"<li>[_] Class A — Critical (e.g., violence, corporate sabotage)</li>",
+"</ul>",
+
+"<br>",
+
+"<b>Notes/Additional Observations:</b>",
+"[___________________________________________________________________]",
+"[___________________________________________________________________]",
+
+"<hr>",
+
+"<center><font size=\"2\" color=\"gray\">For HR use only: All disciplinary actions are final pending executive orders.</font></center>"
+		]
 	}
 ]

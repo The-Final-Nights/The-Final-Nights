@@ -36,5 +36,57 @@
   Sparrowbird611:
   - balance: Makes melee weapons stronger.
 2025-05-07:
+  ShadeAware:
+  - image: Gangrel claws are no longer huge.
   maaacha:
   - bugfix: sanitizes garou renown integers before saving them
+  molly!:
+  - rscadd: Dom 1 no longer automatically adds an exclamation point at the end of
+      your command, regardless of the punctuation you choose. Its range hasn't been
+      changed.
+  - rscadd: Dom 2's "GET DOWN!!" has been changed to a much simpler "Fall." Its secondary
+      effect has been changed from "STAY DOWN!!" to "Stay down."
+  - rscadd: Dom 3's "THINK TWICE!!" has been changed to "Think twice."
+  - rscadd: Dom 5's "YOU SHOULD HARM YOURSELF NOW!!" has been changed to "Hit yourself."
+2025-05-08:
+  EmilyFontaine:
+  - rscadd: coffee & tea reagents to the soda dispenser list
+  necti-dev:
+  - bugfix: Butterflies no longer have 5 blood points for vamps to feed on.
+  - rscadd: Having the Presence disciplines gives you the Charmer trait, so that NPCs
+      respond more favorably to you when you grab them.
+2025-05-10:
+  darkincarnate:
+  - rscadd: Endron templates
+2025-05-11:
+  BlindPoet:
+  - balance: increased damage of Protean 2's claws
+  - rscdel: removed red screen filter from Protean 1 and 2
+  CalamaBanana:
+  - rscadd: Endron phones start with numbers
+  XeonMations:
+  - code_imp: Made our CI/CD checks work again.
+  - bugfix: Fixed silver bullets being invisible when on the ground
+  XeonMations, Arokha, jlsnow301, Aylong:
+  - code_imp: TGUI dev server now works. Just ignore the warning it keeps spamming.
+  bomby, axietheaxolotl:
+  - rscadd: duty belts have finally been issued to the police, 15 years too late
+  - rscadd: SWAT units will now come equipped with a new uniform for looking tacticool
+  - rscadd: grappling gloves and binoculars have been added to the requisitions officer
+  darkincarnate:
+  - rscadd: new endron HQ
+  - rscadd: a light outside the tower front door per request
+  - rscdel: old endron HQ
+  - rscadd: Endron Employee alt titles
+  necti-dev:
+  - bugfix: Anarch, Tzmisce, Primogen, Noddist and Bahari id/pins no longer identify
+      their users at a glance.
+2025-05-12:
+  BlindPoet:
+  - balance: Dominate 5 is now prerequisite for the Voice of Domination power.
+  Icarus-The-Sun:
+  - qol: Underwear is selectable regardless of gender
+2025-05-13:
+  necti-dev:
+  - rscadd: Some vampire jobs now have vampire-age restrictions (how long since embrace)
+  - rscadd: Primogen generation requirements lowered a bit, Capo's increased
