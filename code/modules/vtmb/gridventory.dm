@@ -70,6 +70,10 @@ VENTORY!
 	screen_max_columns = 2
 	screen_max_rows = 2
 
+/datum/component/storage/concrete/vtm/belt
+	screen_max_columns = 2
+	screen_max_rows = 4
+
 /datum/component/storage/concrete/vtm/hardcase
 	screen_max_columns = 4
 	screen_max_rows = 4
