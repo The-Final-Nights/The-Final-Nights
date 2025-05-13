@@ -48,7 +48,7 @@
 			AM.moveToNullspace()
 
 /datum/component/storage/concrete/PostTransfer()
-	if(!isatom(parent))
+	if(!isatom(get_parent()))
 		return COMPONENT_INCOMPATIBLE
 	if(transfer_contents_on_component_transfer)
 		for(var/i in _contents_limbo)
@@ -59,6 +59,9 @@
 		for(var/i in _user_limbo)
 			show_to(i)
 		_user_limbo = null
+
+/datum/component/storage/concrete/proc/get_parent()
+	return parent
 
 /datum/component/storage/concrete/_insert_physical_item(obj/item/I, override = FALSE)
 	. = TRUE
