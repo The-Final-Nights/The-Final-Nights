@@ -48,7 +48,7 @@ will need these:
 - [Node v22.11+](https://nodejs.org/en/download/)
   - **LTS** release is recommended instead of latest
   - **DO NOT install Chocolatey if Node installer asks you to!**
-- [Yarn v4.5.1+](https://yarnpkg.com/getting-started/install)
+- [Yarn v4.8.1+](https://yarnpkg.com/getting-started/install)
   - You can run `npm install -g yarn` to install it.
 
 ## Usage
