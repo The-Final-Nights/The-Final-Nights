@@ -58,6 +58,8 @@ GLOBAL_VAR(restart_counter)
 	SSdbcore.SetRoundID()
 	load_poll_data()
 
+	populate_gear_list() // TFN ADDITION START: loadout
+
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
 #else
