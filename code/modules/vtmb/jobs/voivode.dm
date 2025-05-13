@@ -19,7 +19,8 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Tzimisce")
 	minimal_generation = 10
-	minimum_character_age = 150
+//	minimum_character_age = 150 //Uncomment if age-restriction wanted
+	minimum_vampire_age = 75
 
 	v_duty = "You are a Childe of the Voivode-in-Waiting, the ancient Tzimisce Elder who has rested beneath the Earth for an age longer than the city that now rests on their bones, and thus the master of your Haven. Honor them in all your actions, and remember that you walk with their favor."
 	experience_addition = 20

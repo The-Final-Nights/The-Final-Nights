@@ -993,3 +993,58 @@
 	contacts += Z
 	var/datum/phonecontact/ventrue/V = new()
 	contacts += V
+
+/obj/item/vamp/phone/endronlead/Initialize()
+	..()
+	GLOB.endronleadnumber = number
+	GLOB.endronleadname = owner
+	var/datum/phonecontact/endronexec/ENDRONEXEC = new()
+	contacts += ENDRONEXEC
+	var/datum/phonecontact/endronaffairs/ENDRONAFFAIRS = new()
+	contacts += ENDRONAFFAIRS
+	var/datum/phonecontact/endronsecchief/ENDRONSECCHIEF = new()
+	contacts += ENDRONSECCHIEF
+
+/obj/item/vamp/phone/endronexec/Initialize()
+	..()
+	GLOB.endronexecnumber = number
+	GLOB.endronexecname = owner
+	var/datum/phonecontact/endronlead/ENDRONLEAD = new()
+	contacts += ENDRONLEAD
+	var/datum/phonecontact/endronaffairs/ENDRONAFFAIRS = new()
+	contacts += ENDRONAFFAIRS
+	var/datum/phonecontact/endronsecchief/ENDRONSECCHIEF = new()
+	contacts += ENDRONSECCHIEF
+
+/obj/item/vamp/phone/endronaffairs/Initialize()
+	..()
+	GLOB.endronaffairsnumber = number
+	GLOB.endronaffairsname = owner
+	var/datum/phonecontact/endronlead/ENDRONLEAD = new()
+	contacts += ENDRONLEAD
+	var/datum/phonecontact/endronexec/ENDRONEXEC = new()
+	contacts += ENDRONEXEC
+	var/datum/phonecontact/endronsecchief/ENDRONSECCHIEF = new()
+	contacts += ENDRONSECCHIEF
+
+/obj/item/vamp/phone/endronsecchief/Initialize()
+	..()
+	GLOB.endronsecchiefnumber = number
+	GLOB.endronsecchiefname = owner
+	var/datum/phonecontact/endronlead/ENDRONLEAD = new()
+	contacts += ENDRONLEAD
+	var/datum/phonecontact/endronexec/ENDRONEXEC = new()
+	contacts += ENDRONEXEC
+	var/datum/phonecontact/endronaffairs/ENDRONAFFAIRS = new()
+	contacts += ENDRONAFFAIRS
+
+/obj/item/vamp/phone/endron/Initialize()
+	..()
+	var/datum/phonecontact/endronlead/ENDRONLEAD = new()
+	contacts += ENDRONLEAD
+	var/datum/phonecontact/endronexec/ENDRONEXEC = new()
+	contacts += ENDRONEXEC
+	var/datum/phonecontact/endronaffairs/ENDRONAFFAIRS = new()
+	contacts += ENDRONAFFAIRS
+	var/datum/phonecontact/endronsecchief/ENDRONSECCHIEF = new()
+	contacts += ENDRONSECCHIEF
