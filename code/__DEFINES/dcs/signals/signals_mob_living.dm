@@ -15,6 +15,9 @@
 /// Called when an organ gets surgically removed (mob/living/user, mob/living/carbon/new_owner, target_zone, obj/item/tool)
 #define COMSIG_ORGAN_SURGICALLY_INSERTED "organ_surgically_inserted"
 
+///from base of /mob/living/regenerate_limbs(): (noheal, excluded_limbs)
+#define COMSIG_LIVING_REGENERATE_LIMBS "living_regen_limbs"
+
 ///Called when movement intent is toggled.
 #define COMSIG_MOVE_INTENT_TOGGLED "move_intent_toggled"
 
@@ -45,6 +48,8 @@
 #define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
 ///from base of mob/living/set_body_position(): (new_position, old_position)
 #define COMSIG_LIVING_SET_BODY_POSITION  "living_set_body_position"
+///From post-can inject check of syringe after attack (mob/user)
+#define COMSIG_LIVING_TRY_SYRINGE "living_try_syringe"
 /// Sent to a mob being injected with a syringe when the do_after initiates
 #define COMSIG_LIVING_TRY_SYRINGE_INJECT "living_try_syringe_inject"
 /// Sent to a mob being withdrawn from with a syringe when the do_after initiates
@@ -55,8 +60,11 @@
 #define COMSIG_LIVING_LIFE "living_life"
 	/// Block the Life() proc from proceeding... this should really only be done in some really wacky situations.
 	#define COMPONENT_LIVING_CANCEL_LIFE_PROCESSING (1<<0)
+
 ///From living/set_resting(): (new_resting, silent, instant)
 #define COMSIG_LIVING_RESTING "living_resting"
+/// Called when a living mob has its resting updated: (resting_state)
+#define COMSIG_LIVING_RESTING_UPDATED "resting_updated"
 
 ///from base of element/bane/activate(): (item/weapon, mob/user)
 #define COMSIG_LIVING_BANED "living_baned"
@@ -325,3 +333,15 @@
 
 /// From /mob/living/set_blood_type : (mob/living/user, datum/blood_type, update_cached_blood_dna_info)
 #define COMSIG_LIVING_CHANGED_BLOOD_TYPE "living_set_blood_type"
+
+///from base of /mob/living/attack_hand(mob/living/carbon/human/user)
+///SEND_SIGNAL(user, COMSIG_MOB_LIVING_ATTACK_HAND, /*target =*/src)
+#define COMSIG_MOB_LIVING_ATTACK_HAND "mob_living_attack_hand"
+
+///Sent when bloodcrawl ends in mob/living/phasein(): (phasein_decal)
+#define COMSIG_LIVING_AFTERPHASEIN "living_phasein"
+
+///called on /living when someone starts pulling (atom/movable/pulled, state, force)
+#define COMSIG_LIVING_START_PULL "living_start_pull"
+///called on /living when someone is pulled (mob/living/puller)
+#define COMSIG_LIVING_GET_PULLED "living_start_pulled"

@@ -250,10 +250,7 @@
 #define COMSIG_ATOM_INTERCEPT_Z_FALL "movable_intercept_z_impact"
 ///called on a movable (NOT living) when it starts pulling (atom/movable/pulled, state, force)
 #define COMSIG_ATOM_START_PULL "movable_start_pull"
-///called on /living when someone starts pulling (atom/movable/pulled, state, force)
-#define COMSIG_LIVING_START_PULL "living_start_pull"
-///called on /living when someone is pulled (mob/living/puller)
-#define COMSIG_LIVING_GET_PULLED "living_start_pulled"
+
 
 /// from /datum/component/singularity/proc/can_move(), as well as /obj/energy_ball/proc/can_move()
 /// if a callback returns `SINGULARITY_TRY_MOVE_BLOCK`, then the singularity will not move to that turf
@@ -267,8 +264,6 @@
 #define COMSIG_MOVABLE_PULLED "movable_pulled"						//! signal sent out by an atom when it is being pulled by something else : (atom/puller)
 #define COMSIG_MOVABLE_NO_LONGER_PULLED "movable_no_longer_pulled"	//! signal sent out by an atom when it is no longer being pulled by something else : (atom/puller)
 
-///From living/set_resting(): (new_resting, silent, instant)
-#define COMSIG_LIVING_RESTING "living_resting"
 
 /////////////////
 
@@ -458,47 +453,9 @@
 #define COMSIG_MOB_SWAP_HANDS "mob_swap_hands"
 	#define COMPONENT_BLOCK_SWAP (1<<0)
 ///from /obj/structure/door/crush(): (mob/living/crushed, /obj/machinery/door/crushing_door)
-#define COMSIG_LIVING_DOORCRUSHED "living_doorcrush"
 
 /// From base of /client/Move()
 #define COMSIG_MOB_CLIENT_MOVED "mob_client_moved"
-
-///from base of mob/living/resist() (/mob/living)
-#define COMSIG_LIVING_RESIST "living_resist"
-///from base of mob/living/IgniteMob() (/mob/living)
-#define COMSIG_LIVING_IGNITED "living_ignite"
-///from base of mob/living/extinguish_mob() (/mob/living)
-#define COMSIG_LIVING_EXTINGUISHED "living_extinguished"
-///from base of mob/living/electrocute_act(): (shock_damage, source, siemens_coeff, flags)
-#define COMSIG_LIVING_ELECTROCUTE_ACT "living_electrocute_act"
-///sent when items with siemen coeff. of 0 block a shock: (power_source, source, siemens_coeff, dist_check)
-#define COMSIG_LIVING_SHOCK_PREVENTED "living_shock_prevented"
-///sent by stuff like stunbatons and tasers: ()
-#define COMSIG_LIVING_MINOR_SHOCK "living_minor_shock"
-///from base of mob/living/revive() (full_heal, admin_revive)
-#define COMSIG_LIVING_REVIVE "living_revive"
-///from base of /mob/living/regenerate_limbs(): (noheal, excluded_limbs)
-#define COMSIG_LIVING_REGENERATE_LIMBS "living_regen_limbs"
-///from base of mob/living/set_buckled(): (new_buckled)
-#define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
-///from base of mob/living/set_body_position()
-#define COMSIG_LIVING_SET_BODY_POSITION  "living_set_body_position"
-///From post-can inject check of syringe after attack (mob/user)
-#define COMSIG_LIVING_TRY_SYRINGE "living_try_syringe"
-
-
-///Sent when bloodcrawl ends in mob/living/phasein(): (phasein_decal)
-#define COMSIG_LIVING_AFTERPHASEIN "living_phasein"
-
-///from base of mob/living/death(): (gibbed)
-#define COMSIG_LIVING_DEATH "living_death"
-
-///from /obj/item/hand_item/slapper/attack_atom(): (source=mob/living/slammer, obj/structure/table/slammed_table)
-#define COMSIG_LIVING_SLAM_TABLE "living_slam_table"
-///from /obj/item/hand_item/slapper/attack(): (source=mob/living/slapper, mob/living/slapped)
-#define COMSIG_LIVING_SLAP_MOB "living_slap_mob"
-///from /obj/item/hand_item/slapper/attack(): (source=mob/living/slapper, mob/living/slapped)
-#define COMSIG_LIVING_SLAPPED "living_slapped"
 
 ///from /obj/item/hand_item/slapper/attack_atom(): (source=obj/structure/table/slammed_table, mob/living/slammer)
 #define COMSIG_TABLE_SLAMMED "table_slammed"
@@ -509,31 +466,6 @@
 #define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"
 ///sent from borg mobs to itself, for tools to catch an upcoming destroy() due to safe decon (rather than detonation)
 #define COMSIG_BORG_SAFE_DECONSTRUCT "borg_safe_decon"
-
-//ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
-
-///from base of mob/living/Stun() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_STUN "living_stun"
-///from base of mob/living/Knockdown() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_KNOCKDOWN "living_knockdown"
-///from base of mob/living/Paralyze() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_PARALYZE "living_paralyze"
-///from base of mob/living/Immobilize() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_IMMOBILIZE "living_immobilize"
-///from base of mob/living/Unconscious() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_UNCONSCIOUS "living_unconscious"
-///from base of mob/living/Sleeping() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_SLEEP "living_sleeping"
-	#define COMPONENT_NO_STUN (1<<0)									//For all of them
-///from base of /mob/living/can_track(): (mob/user)
-#define COMSIG_LIVING_CAN_TRACK "mob_cantrack"
-	#define COMPONENT_CANT_TRACK (1<<0)
-
-/// From /mob/living/proc/stop_leaning()
-#define COMSIG_LIVING_STOPPED_LEANING "living_stopped_leaning"
-
-/// Called when a living mob has its resting updated: (resting_state)
-#define COMSIG_LIVING_RESTING_UPDATED "resting_updated"
 
 ///From /datum/component/creamed/Initialize()
 #define COMSIG_MOB_CREAMED "mob_creamed"
@@ -1077,9 +1009,7 @@
 #define COMSIG_MOB_ATTACKING_MELEE "mob_attacking_melee"
 ///from base of atom/attack_hand(): (mob/user)
 #define COMSIG_MOB_ATTACK_HAND "mob_attack_hand"
-///from base of /mob/living/attack_hand(mob/living/carbon/human/user)
-///SEND_SIGNAL(user, COMSIG_MOB_LIVING_ATTACK_HAND, /*target =*/src)
-#define COMSIG_MOB_LIVING_ATTACK_HAND "mob_living_attack_hand"
+
 ///SEND_SIGNAL(src, COMSIG_MOB_ATTACKED_HAND, /*attacker =*/user)
 #define COMSIG_MOB_ATTACKED_HAND "mob_attacked_hand"
 ///from base of /obj/item/attack(): (mob/M, mob/user)
