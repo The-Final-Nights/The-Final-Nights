@@ -86,3 +86,7 @@
   - balance: Dominate 5 is now prerequisite for the Voice of Domination power.
   Icarus-The-Sun:
   - qol: Underwear is selectable regardless of gender
+2025-05-13:
+  necti-dev:
+  - rscadd: Some vampire jobs now have vampire-age restrictions (how long since embrace)
+  - rscadd: Primogen generation requirements lowered a bit, Capo's increased
