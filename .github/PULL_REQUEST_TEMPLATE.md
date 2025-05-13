@@ -24,21 +24,23 @@ Put screenshots and videos here with an empty line between the screenshots and t
 <!-- If your PR modifies aspects of the game that can be concretely observed by players or admins you should add a changelog. If your change does NOT meet this description, remove this section. Be sure to properly mark your PRs to prevent unnecessary GBP loss. You can read up on GBP and its effects on PRs in the tgstation guides for contributors. Please note that maintainers freely reserve the right to remove and add tags should they deem it appropriate. You can attempt to finagle the system all you want, but it's best to shoot for clear communication right off the bat. -->
 
 :cl:
-add: Added new mechanics or gameplay changes
-add: Added more things
-del: Removed old things
-qol: made something easier to use
-balance: rebalanced something
-fix: fixed a few things
-sound: added/modified/removed audio or sound effects
-image: added/modified/removed some icons or images
-map: added/modified/removed map content
-spellcheck: fixed a few typos
-code: changed some code
-refactor: refactored some code
-config: changed some config setting
-admin: messed with admin stuff
-server: something server ops should know
+bugfix: fixes bugs or runtimes
+wip: one piece of a greater project
+qol: quality of life changes
+soundadd: adds sounds
+sounddel: deletes sounds
+imageadd: adds images. sprites. etc
+imagedel: deletes images
+spellcheck: fixes typos
+experiment: experimental changes
+balance: balance changes
+code_imp: improves code
+refactor: refactors code
+config: config changes
+admin: changes for admins
+server: server code changes
+sound: adds or removes sounds
+map: mapping changes
 /:cl:
 
 <!-- Both :cl:'s are required for the changelog to work! You can put your name to the right of the first :cl: if you want to overwrite your GitHub username as author ingame. -->
