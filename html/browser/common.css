@@ -52,7 +52,7 @@ a.white:hover
 .linkOn, a.linkOn:link, a.linkOn:visited, a.linkOn:active, a.linkOn:hover
 {
 	color: #ffffff;
-	background: #161616;
+	background: #404040;
 	border-color: #ffffff;
 }
 
