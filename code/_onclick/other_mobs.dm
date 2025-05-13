@@ -228,8 +228,8 @@
 					target.adjustCloneLoss(src.agg_damage_plus)
 					to_chat(src, "<span class='notice'>Your razor sharp claws rip through [target]'s flesh!</span>")
 			return ..()
-	A.attack_hand(src)
-	update_inv_hands()
+		A.attack_hand(src)
+		update_inv_hands()
 
 /atom/proc/attack_crinos(mob/user)
 	return

@@ -80,7 +80,7 @@
 
 	var/assigned_quirks = FALSE
 
-/mob/living/carbon/werewolf/corax // the Corax variety of the Crinos form, a subtype of the main one
+/mob/living/carbon/werewolf/corax // the Corax variety of werewolves, also refers to the Crinos form in a roundabout way, not exactly clean.
 	name = "Corax"
 	icon = 'code/modules/wod13/corax_crinos.dmi'
 	verb_say = "caws"
@@ -210,10 +210,10 @@
 	limb_destroyer = 1
 
 	hud_type = /datum/hud/werewolf
-	melee_damage_lower = 35
-	melee_damage_upper = 45 // less damage for were-ravens
-	health = 250
-	maxHealth = 250
+	melee_damage_lower = 45 // more reliable damage because I believe that's also a change staged for normal werewolves, also screw RNG
+	melee_damage_upper = 50 // less damage for were-ravens
+	health = 200 // a lot less HP
+	maxHealth = 200
 //	speed = -1  doesn't work on carbons
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null

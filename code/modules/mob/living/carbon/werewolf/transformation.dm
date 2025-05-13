@@ -326,6 +326,7 @@
 			if(!ismob(item_worn.loc))
 				continue
 			trans.dropItemToGround(item_worn, TRUE)
+
 	var/turf/current_loc = get_turf(trans)
 	cor_crinos.color = "#000000"
 	cor_crinos.forceMove(current_loc)
@@ -335,6 +336,8 @@
 	cor_crinos.bloodpool = trans.bloodpool
 	cor_crinos.masquerade = trans.masquerade
 	cor_crinos.nutrition = trans.nutrition
+	if(HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
+		cor_crinos.wyrm_tainted = 1
 	cor_crinos.mind = trans.mind
 	cor_crinos.update_blood_hud()
 	cor_crinos.physique = cor_crinos.physique+3
@@ -395,6 +398,8 @@
 	corvid.bloodpool = trans.bloodpool
 	corvid.masquerade = trans.masquerade
 	corvid.nutrition = trans.nutrition
+	if(HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
+		corvid.wyrm_tainted = 1
 	corvid.mind = trans.mind
 	corvid.update_blood_hud()
 	transfer_damage(trans, corvid)
