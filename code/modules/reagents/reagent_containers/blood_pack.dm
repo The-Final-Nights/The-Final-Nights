@@ -95,13 +95,13 @@
 		return
 	reagents.trans_to(M, reagents.total_volume, transfered_by = user, methods = VAMPIRE, show_message = FALSE)
 
-	playsound(M.loc,'sound/items/drink.ogg', 50, TRUE)
+	playsound(M.loc, 'sound/items/drink.ogg', 50, TRUE)
 	update_appearance()
-	if(ishumanbasic(M) || isghoul(M))
+	if(ishumanbasic(M) || (isghoul(M) && !vitae))
 		to_chat(M, span_notice("That didn't taste very good..."))
 		M.adjust_disgust(DISGUST_LEVEL_DISGUSTED)
 		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "toxic_food", /datum/mood_event/disgusting_food)
-	if(iskindred(M))
+	if(iskindred(M) || (isghoul(M) && vitae))
 		M.bloodpool = min(M.maxbloodpool, M.bloodpool+amount_of_bloodpoints)
 		M.adjustBruteLoss(-20, TRUE)
 		M.adjustFireLoss(-20, TRUE)
@@ -130,12 +130,12 @@
 
 /obj/item/reagent_containers/blood/elite
 	name = "\improper elite blood pack (full)"
-	blood_type = "O-"
+	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
 	amount_of_bloodpoints = 4
 
 /obj/item/reagent_containers/blood/vitae
 	name = "\improper vampire vitae pack (full)"
-	blood_type = "O-"
+	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
 	amount_of_bloodpoints = 4
 	vitae = TRUE
 
@@ -157,7 +157,7 @@
 		list("donor" = null,
 			"viruses" = null,
 			"blood_DNA" = null,
-			"blood_type" = "O-",
+			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
 
@@ -172,7 +172,7 @@
 		list("donor" = null,
 			"viruses" = null,
 			"blood_DNA" = null,
-			"blood_type" = "O-",
+			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
 
@@ -188,7 +188,7 @@
 		list("donor" = null,
 			"viruses" = null,
 			"blood_DNA" = null,
-			"blood_type" = "O-",
+			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
 
@@ -203,6 +203,6 @@
 		list("donor" = null,
 			"viruses" = null,
 			"blood_DNA" = null,
-			"blood_type" = "O-",
+			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
