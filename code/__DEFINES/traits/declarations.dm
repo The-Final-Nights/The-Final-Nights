@@ -165,7 +165,10 @@
 #define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
 ///When people are floating from zero-grav or something, we can move around freely!
 
-
+/// This mobs bodyparts are invisible but still clickable.
+#define TRAIT_INVISIBLE_MAN "invisible_man"
+/// Don't draw external organs/species features like wings, horns, frills and stuff
+#define TRAIT_HIDE_EXTERNAL_ORGANS "hide_external_organs"
 #define TRAIT_FREE_FLOAT_MOVEMENT "free_float_movement"
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
