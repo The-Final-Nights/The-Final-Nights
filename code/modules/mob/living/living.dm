@@ -10,6 +10,9 @@
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
 
+	//recalculates maxbloodpool
+	maxbloodpool = 10 + ((13 - generation) * 3)
+
 /mob/living/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/movetype_handler)
