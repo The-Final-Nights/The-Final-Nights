@@ -33,7 +33,6 @@
 	implements = list(
 		/obj/item/shockpaddles = 100,
 		/obj/item/melee/touch_attack/shock = 100,
-		/obj/item/melee/baton/security = 75,
 		/obj/item/gun/energy = 60)
 	repeatable = TRUE
 	time = 5 SECONDS
@@ -46,11 +45,6 @@
 		var/obj/item/shockpaddles/paddles = tool
 		if((paddles.req_defib && !paddles.defib.powered) || !paddles.wielded || paddles.cooldown || paddles.busy)
 			to_chat(user, span_warning("You need to wield both paddles, and [paddles.defib] must be powered!"))
-			return FALSE
-	if(istype(tool, /obj/item/melee/baton/security))
-		var/obj/item/melee/baton/security/baton = tool
-		if(!baton.active)
-			to_chat(user, span_warning("[baton] needs to be active!"))
 			return FALSE
 	if(istype(tool, /obj/item/gun/energy))
 		var/obj/item/gun/energy/egun = tool
