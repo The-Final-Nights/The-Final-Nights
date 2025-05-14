@@ -106,7 +106,12 @@ SUBSYSTEM_DEF(carpool)
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	throwforce = 150
+	glide_size = 96
 
+	var/movement_vector = 0		//0-359 degrees
+	var/speed_in_pixels = 0		// 16 pixels (turf is 2x2m) = 1 meter per 1 SECOND (process fire). Minus equals to reverse, max should be 444
+	var/last_pos = list("x" = 0, "y" = 0, "x_pix" = 0, "y_pix" = 0, "x_frwd" = 0, "y_frwd" = 0)
+	var/impact_delay = 0
 	var/last_vzhzh = 0
 
 	var/image/Fari
@@ -331,6 +336,18 @@ SUBSYSTEM_DEF(carpool)
 		for(var/mob/living/rider in src)
 			. += "<span class='notice'>* [rider]</span>"
 
+
+/obj/vampire_car/proc/set_fari_on(new_value)
+	if(fari_on == new_value)
+		return
+	. = fari_on
+	fari_on = new_value
+	if(fari_on)
+		add_overlay(Fari)
+	else
+		cut_overlay(Fari)
+
+
 /obj/vampire_car/proc/get_damage(cost)
 	if(cost > 0)
 		health = max(0, health-cost)
@@ -339,7 +356,7 @@ SUBSYSTEM_DEF(carpool)
 
 	if(health == 0)
 		on = FALSE
-		set_light(0)
+		set_fari_on(FALSE)
 		color = "#919191"
 		if(!exploded && prob(10))
 			exploded = TRUE
@@ -367,7 +384,7 @@ SUBSYSTEM_DEF(carpool)
 			GLOB.car_list -= src
 	else if(prob(50) && health <= maxhealth/2)
 		on = FALSE
-		set_light(0)
+		set_fari_on(FALSE)
 	return
 
 /datum/action/carr/fari_vrubi
@@ -376,18 +393,12 @@ SUBSYSTEM_DEF(carpool)
 	button_icon_state = "lights"
 
 /datum/action/carr/fari_vrubi/Trigger()
-	if(istype(owner.loc, /obj/vampire_car))
-		var/obj/vampire_car/V = owner.loc
-		if(!V.fari_on)
-			V.fari_on = TRUE
-			V.add_overlay(V.Fari)
-			to_chat(owner, "<span class='notice'>You toggle [V]'s lights.</span>")
-			playsound(V, 'sound/weapons/magin.ogg', 40, TRUE)
-		else
-			V.fari_on = FALSE
-			V.cut_overlay(V.Fari)
-			to_chat(owner, "<span class='notice'>You toggle [V]'s lights.</span>")
-			playsound(V, 'sound/weapons/magout.ogg', 40, TRUE)
+	var/obj/vampire_car/car = owner.loc
+	if(!istype(car))
+		return
+	car.set_fari_on(!car.fari_on)
+	to_chat(owner, "<span class='notice'>You toggle [car]'s lights.</span>")
+	playsound(car, 'sound/weapons/magout.ogg', 40, TRUE)
 
 /datum/action/carr/beep
 	name = "Signal"
@@ -457,7 +468,7 @@ SUBSYSTEM_DEF(carpool)
 			V.on = FALSE
 			playsound(V, 'code/modules/wod13/sounds/stop.ogg', 50, TRUE)
 			to_chat(owner, "<span class='notice'>You stop [V]'s engine.</span>")
-			V.set_light(0)
+			V.set_fari_on(FALSE)
 			return
 
 /datum/action/carr/exit_car
@@ -615,20 +626,20 @@ SUBSYSTEM_DEF(carpool)
 	icon_state = "3"
 
 /obj/vampire_car/retro/rand/Initialize()
+	. = ..()
 	icon_state = "[pick(1, 3, 5)]"
 	if(access == "none")
 		access = "npc[rand(1, 20)]"
-	..()
 
 /obj/vampire_car/rand
 	icon_state = "4"
 	dir = WEST
 
 /obj/vampire_car/rand/Initialize()
+	. = ..()
 	icon_state = "[pick(2, 4, 6)]"
 	if(access == "none")
 		access = "npc[rand(1, 20)]"
-	..()
 
 /obj/vampire_car/rand/camarilla
 	access = "camarilla"
@@ -683,8 +694,13 @@ SUBSYSTEM_DEF(carpool)
 	access = "police"
 	baggage_limit = 45
 	baggage_max = WEIGHT_CLASS_BULKY
+	light_system = MOVABLE_LIGHT
+	light_color = "#ff0000"
+	light_range = 6
+	light_power = 6
+	light_on = FALSE
 	var/color_blue = FALSE
-	var/last_color_change = 0
+	COOLDOWN_DECLARE(last_color_change)
 
 /obj/vampire_car/police/unmarked
 	icon_state = "unmarked"
@@ -695,23 +711,27 @@ SUBSYSTEM_DEF(carpool)
 	baggage_limit = 45
 	baggage_max = WEIGHT_CLASS_BULKY
 
+
+/obj/vampire_car/police/set_fari_on(new_value)
+	. = ..()
+	if(isnull(.))
+		return
+	set_light_on(fari_on)
+
+
 /obj/vampire_car/police/handle_caring()
-	if(fari_on)
-		if(last_color_change+10 <= world.time)
-			last_color_change = world.time
-			if(color_blue)
-				color_blue = FALSE
-				set_light(0)
-				set_light(4, 6, "#ff0000")
-			else
-				color_blue = TRUE
-				set_light(0)
-				set_light(4, 6, "#0000ff")
+	if(!light_on)
+		return ..()
+	if(!COOLDOWN_FINISHED(src, last_color_change))
+		return ..()
+	COOLDOWN_START(src, last_color_change, 1 SECONDS)
+	if(color_blue)
+		color_blue = FALSE
+		set_light_color("#ff0000")
 	else
-		if(last_color_change+10 <= world.time)
-			last_color_change = world.time
-			set_light(0)
-	..()
+		color_blue = TRUE
+		set_light_color("#0000ff")
+	return ..()
 
 /obj/vampire_car/taxi
 	icon_state = "taxi"
@@ -731,9 +751,9 @@ SUBSYSTEM_DEF(carpool)
 	component_type = /datum/component/storage/concrete/vtm/car/track
 
 /obj/vampire_car/track/Initialize()
+	. = ..()
 	if(access == "none")
 		access = "npc[rand(1, 20)]"
-	..()
 
 /obj/vampire_car/track/volkswagen
 	icon_state = "volkswagen"
@@ -762,13 +782,6 @@ SUBSYSTEM_DEF(carpool)
 
 /proc/get_angle_diff(angle_a, angle_b)
 	return ((angle_b - angle_a) + 180) % 360 - 180;
-
-/obj/vampire_car
-	var/movement_vector = 0		//0-359 degrees
-	var/speed_in_pixels = 0		// 16 pixels (turf is 2x2m) = 1 meter per 1 SECOND (process fire). Minus equals to reverse, max should be 444
-	var/last_pos = list("x" = 0, "y" = 0, "x_pix" = 0, "y_pix" = 0, "x_frwd" = 0, "y_frwd" = 0)
-	var/impact_delay = 0
-	glide_size = 96
 
 /obj/vampire_car/Initialize()
 	. = ..()
@@ -847,7 +860,7 @@ SUBSYSTEM_DEF(carpool)
 
 	if(gas <= 0)
 		on = FALSE
-		set_light(0)
+		set_fari_on(FALSE)
 		if(driver)
 			to_chat(driver, "<span class='warning'>No fuel in the tank!</span>")
 	if(on)

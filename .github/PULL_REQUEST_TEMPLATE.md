@@ -25,20 +25,19 @@ Put screenshots and videos here with an empty line between the screenshots and t
 
 :cl:
 add: Added new mechanics or gameplay changes
-add: Added more things
-del: Removed old things
-qol: made something easier to use
-balance: rebalanced something
-fix: fixed a few things
-sound: added/modified/removed audio or sound effects
-image: added/modified/removed some icons or images
-map: added/modified/removed map content
-spellcheck: fixed a few typos
-code: changed some code
-refactor: refactored some code
-config: changed some config setting
-admin: messed with admin stuff
-server: something server ops should know
+bugfix: fixed runtimes or bugs
+fix: fixed a feature
+del: Removed things
+qol: quality of life changes
+sound: added or removed sounds
+image: added icons or images
+map: mapping changes
+spellcheck: fixed grammar
+balance: rebalances something
+code: misc code changes
+refactor: refactored code somewhere
+admin: changed admin facing stuff
+server: something the host should know
 /:cl:
 
 <!-- Both :cl:'s are required for the changelog to work! You can put your name to the right of the first :cl: if you want to overwrite your GitHub username as author ingame. -->
