@@ -342,3 +342,23 @@
 #define TRAIT_HARDENED_SOLES "trait_hardened_soles"
 //For handcuff breaking speed.
 #define TRAIT_CUFFBREAKER		"cuffbreaker"
+
+// Radiation defines
+
+/// Marks that this object is irradiated
+#define TRAIT_IRRADIATED "iraddiated"
+
+/// Immune to being irradiated
+#define TRAIT_RADIMMUNE "rad_immunity"
+
+/// Harmful radiation effects, the toxin damage and the burns, will not occur while this trait is active
+#define TRAIT_HALT_RADIATION_EFFECTS "halt_radiation_effects"
+
+/// This clothing protects the user from radiation.
+/// This should not be used on clothing_traits, but should be applied to the clothing itself.
+#define TRAIT_RADIATION_PROTECTED_CLOTHING "radiation_protected_clothing"
+
+/// Whether or not this item will allow the radiation SS to go through standard
+/// radiation processing as if this wasn't already irradiated.
+/// Basically, without this, COMSIG_IN_RANGE_OF_IRRADIATION won't fire once the object is irradiated.
+#define TRAIT_BYPASS_EARLY_IRRADIATED_CHECK "radiation_bypass_early_irradiated_check"
