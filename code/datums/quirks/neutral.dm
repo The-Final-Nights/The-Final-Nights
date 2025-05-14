@@ -154,22 +154,6 @@
 /datum/quirk/monochromatic/remove()
 	quirk_holder.remove_client_colour(/datum/client_colour/monochrome)
 
-/datum/quirk/phobia
-	name = "Phobia"
-	desc = "You are irrationally afraid of something."
-	value = 0
-	medical_record_text = "Patient has an irrational fear of something."
-	mood_quirk = TRUE
-
-/datum/quirk/phobia/post_add()
-	if(!phobia)
-		var/mob/living/carbon/human/human_holder = quirk_holder
-		phobia = human_holder.client.prefs.phobia
-		human_holder.gain_trauma(new /datum/brain_trauma/mild/phobia(phobia), TRAUMA_RESILIENCE_ABSOLUTE)
-
-/datum/quirk/phobia/remove()
-	var/mob/living/carbon/human/human_holder = quirk_holder
-	human_holder.cure_trauma_type(/datum/brain_trauma/mild/phobia, TRAUMA_RESILIENCE_ABSOLUTE)
 
 /datum/quirk/item_quirk/needswayfinder
 	name = "Navigationally Challenged"
@@ -201,14 +185,6 @@
 	mood_quirk = TRUE
 	///The user's starting hairstyle
 	var/old_hair
-
-/datum/quirk/bald/add()
-	var/mob/living/carbon/human/H = quirk_holder
-	old_hair = H.hairstyle
-	H.hairstyle = "Bald"
-	H.update_hair()
-	RegisterSignal(H, COMSIG_CARBON_EQUIP_HAT, PROC_REF(equip_hat))
-	RegisterSignal(H, COMSIG_CARBON_UNEQUIP_HAT, PROC_REF(unequip_hat))
 
 /datum/quirk/item_quirk/bald/add_unique()
 	var/obj/item/clothing/head/wig/natural/baldie_wig = new(get_turf(quirk_holder))
@@ -265,30 +241,3 @@
 
 /datum/quirk/item_quirk/tongue_tied/post_add()
 	to_chat(quirk_holder, "<span class='boldannounce'>Because you speak with your hands, having them full hinders your ability to communicate!</span>")
-
-/datum/quirk/item_quirk/photographer
-	name = "Photographer"
-	desc = "You carry your camera and personal photo album everywhere you go, and your scrapbooks are legendary among your coworkers."
-	value = 0
-	mob_trait = TRAIT_PHOTOGRAPHER
-	gain_text = "<span class='notice'>You know everything about photography.</span>"
-	lose_text = "<span class='danger'>You forget how photo cameras work.</span>"
-	medical_record_text = "Patient mentions photography as a stress-relieving hobby."
-	mood_quirk = TRUE
-
-/datum/quirk/item_quirk/photographer/add_unique()
-	var/mob/living/carbon/human/human_holder = quirk_holder
-	var/obj/item/storage/photo_album/personal/photo_album = new(get_turf(human_holder))
-	photo_album.persistence_id = "personal_[human_holder.mind.key]" // this is a persistent album, the ID is tied to the account's key to avoid tampering
-	photo_album.persistence_load()
-	photo_album.name = "[H.real_name]'s photo album"
-	var/obj/item/camera/camera = new(get_turf(H))
-	var/list/camera_slots = list (
-		"neck" = ITEM_SLOT_NECK,
-		"left pocket" = ITEM_SLOT_LPOCKET,
-		"right pocket" = ITEM_SLOT_RPOCKET,
-		"backpack" = ITEM_SLOT_BACKPACK,
-		"hands" = ITEM_SLOT_HANDS
-	)
-	H.equip_in_one_of_slots(camera, camera_slots , qdel_on_fail = TRUE)
-	H.regenerate_icons()

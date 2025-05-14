@@ -149,7 +149,7 @@
 	mood_quirk = TRUE
 	hardcore_value = 1
 
-/datum/quirk/depression/on_process(delta_time)
+/datum/quirk/depression/process(delta_time)
 	if(DT_PROB(0.05, delta_time))
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "depression_mild", /datum/mood_event/depression_mild)
 
@@ -164,7 +164,7 @@
 	medical_record_text = "Patient demonstrates an unnatural attachment to a ground."
 	hardcore_value = 1
 
-/datum/quirk/ground_heirloom/on_spawn()
+/datum/quirk/ground_heirloom/post_add()
 	var/mob/living/carbon/human/H = quirk_holder
 	heirloom = new(get_turf(quirk_holder))
 	var/list/slots = list(
@@ -187,7 +187,7 @@
 
 	heirloom.AddComponent(/datum/component/heirloom, quirk_holder.mind, family_name)
 
-/datum/quirk/ground_heirloom/on_process()
+/datum/quirk/ground_heirloom/process()
 	if(!(heirloom in quirk_holder.GetAllContents()))
 		if(last_notice+300 < world.time)
 			to_chat(quirk_holder, "<span class='warning'>You are missing your domain...</span>")
@@ -199,7 +199,6 @@
 	desc = "You are the current owner of an heirloom, passed down for generations. You have to keep it safe!"
 	value = -2
 	mood_quirk = TRUE
-	var/obj/item/heirloom
 	var/where
 	medical_record_text = "Patient demonstrates an unnatural attachment to a family heirloom."
 	hardcore_value = 1
@@ -388,7 +387,7 @@
 	hardcore_value = 5
 	mood_quirk = TRUE
 
-/datum/quirk/lightophobia/on_process()
+/datum/quirk/lightophobia/process()
 	var/turf/T = get_turf(quirk_holder)
 	if(T)
 		var/lums = T.get_lumcount()
@@ -559,7 +558,7 @@
 /datum/quirk/social_anxiety/remove()
 	UnregisterSignal(quirk_holder, list(COMSIG_MOB_EYECONTACT, COMSIG_MOB_EXAMINATE))
 
-/datum/quirk/social_anxiety/on_process(delta_time)
+/datum/quirk/social_anxiety/process(delta_time)
 	if(HAS_TRAIT(quirk_holder, TRAIT_FEARLESS))
 		return
 	var/nearby_people = 0
@@ -852,7 +851,7 @@
 	hardcore_value = 6
 	mood_quirk = TRUE
 
-/datum/quirk/derangement/on_process(delta_time)
+/datum/quirk/derangement/process(delta_time)
 	if(DT_PROB(2, delta_time)) //we'll all be mad soon enough
 		quirk_holder.hallucination += rand(10, 20)
 	handle_malk_floors()

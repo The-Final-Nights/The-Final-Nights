@@ -412,7 +412,7 @@ GENE SCANNER
 			render_list += "<span class='notice ml-1'>Detected cybernetic modifications:</span>\n"
 			render_list += "<span class='notice ml-2'>[cyberimp_detect]</span>\n"
 
-	SEND_SIGNAL(M, COMSIG_NANITE_SCAN, user, FALSE)
+	SEND_SIGNAL(target, COMSIG_NANITE_SCAN, user, FALSE)
 	to_chat(user, jointext(render_list, ""), trailing_newline = FALSE) // we handled the last <br> so we don't need handholding
 
 /proc/chemscan(mob/living/user, mob/living/target)

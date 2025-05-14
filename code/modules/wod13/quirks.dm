@@ -23,7 +23,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel more financial stable.</span>"
 	lose_text = "<span class='warning'>You don't feel rich anymore.</span>"
 
-/datum/quirk/broker/on_spawn()
+/datum/quirk/broker/post_add()
 	if(!iswerewolf(quirk_holder))
 		var/mob/living/carbon/human/H = quirk_holder
 		var/obj/item/stocks_license/pills = new()
@@ -52,7 +52,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel more anonymus.</span>"
 	lose_text = "<span class='warning'>You don't feel anonymous anymore.</span>"
 
-/datum/quirk/annonymus/on_spawn()
+/datum/quirk/annonymus/post_add()
 	if(!iswerewolf(quirk_holder))
 		var/mob/living/carbon/human/H = quirk_holder
 		H.equip_to_slot_or_del(new /obj/item/clothing/mask/vampire/balaclava(H), ITEM_SLOT_MASK)
@@ -84,7 +84,7 @@ Dancer
 	gain_text = "<span class='warning'>You feel slo-o-o-o-o-o-o-o-o-o-o-o-ow.</span>"
 	lose_text = "<span class='notice'>You can feel a normal speed again.</span>"
 
-/datum/quirk/slowpoke/on_spawn()
+/datum/quirk/slowpoke/post_add()
 	var/mob/living/carbon/H = quirk_holder
 	H.add_movespeed_modifier(/datum/movespeed_modifier/slowpoke)
 
@@ -112,7 +112,7 @@ Dancer
 	gain_text = "<span class='warning'>You don't feel one of your arms.</span>"
 	lose_text = "<span class='notice'>You feel both of your arms again.</span>"
 
-/datum/quirk/one_hand/on_spawn()
+/datum/quirk/one_hand/post_add()
 	if(!iswerewolf(quirk_holder))
 		var/mob/living/carbon/human/H = quirk_holder
 		var/obj/item/bodypart/B1 = H.get_bodypart(BODY_ZONE_R_ARM)
@@ -247,7 +247,7 @@ Dancer
 	lose_text = "<span class='notice'>You feel subtly enervated.</span>"
 	allowed_species = list("Ghoul","Human")
 
-/datum/quirk/potent_blood/on_spawn()
+/datum/quirk/potent_blood/post_add()
 	var/mob/living/carbon/H = quirk_holder
 	H.bloodquality = BLOOD_QUALITY_POTENT
 
@@ -278,7 +278,7 @@ Dancer
 	gain_text = "<span class='notice'>You want to dance.</span>"
 	lose_text = "<span class='warning'>You don't want to dance anymore.</span>"
 
-/datum/quirk/dancer/on_spawn()
+/datum/quirk/dancer/post_add()
 	var/mob/living/carbon/H = quirk_holder
 	var/datum/action/dance/DA = new()
 	DA.Grant(H)
@@ -318,7 +318,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel short.</span>"
 	lose_text = "<span class='notice'>You don't feel short anymore.</span>"
 
-/datum/quirk/dwarf/on_spawn()
+/datum/quirk/dwarf/post_add()
 	var/mob/living/carbon/human/H = quirk_holder
 	if(H.age < 16)
 		to_chat(H, "<span class='userdanger'>You can't be a dwarf kid, looser!</span>")
@@ -548,7 +548,7 @@ Dancer
 	medical_record_text = "Patient has aggressive flesh eating bacteria in their boody."
 	allowed_species = list("Vampire", "Ghoul", "Human", "Kuei-Jin")
 
-/datum/quirk/consumption/on_process(delta_time)
+/datum/quirk/consumption/process(delta_time)
 	if(prob(5))
 		quirk_holder.adjustBruteLoss(5, TRUE)
 
@@ -563,7 +563,7 @@ Dancer
 /datum/quirk/badvision/add()
 	quirk_holder.become_nearsighted(ROUNDSTART_TRAIT)
 
-/datum/quirk/badvision/on_spawn()
+/datum/quirk/badvision/post_add()
 	if(iswerewolf(quirk_holder))
 		return
 	var/mob/living/carbon/human/H = quirk_holder
@@ -602,7 +602,7 @@ Dancer
 	value = 0
 	allowed_species = list("Vampire")
 
-/datum/quirk/diablerist/on_spawn()
+/datum/quirk/diablerist/post_add()
 	var/mob/living/carbon/human/H = quirk_holder
 	H.diablerist = TRUE
 
@@ -613,7 +613,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel tall.</span>"
 	lose_text = "<span class='notice'>You don't feel tall anymore.</span>"
 
-/datum/quirk/tower/on_spawn()
+/datum/quirk/tower/post_add()
 	var/mob/living/carbon/human/H = quirk_holder
 	if(H.age < 16)
 		to_chat(H, "<span class='userdanger'>You can't be a tall kid, looser!</span>")
