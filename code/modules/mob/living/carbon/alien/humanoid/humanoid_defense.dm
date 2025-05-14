@@ -16,7 +16,7 @@
 
 /mob/living/carbon/alien/humanoid/attack_hand(mob/living/carbon/human/M, modifiers)
 	if(..())
-		if(M.a_intent = INTENT_HARM)
+		if(M.a_intent == INTENT_HARM)
 			if(LAZYACCESS(modifiers, RIGHT_CLICK))
 				if (body_position == STANDING_UP)
 					if (prob(5))

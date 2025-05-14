@@ -31,8 +31,7 @@
 
 /obj/structure/railing/ComponentInitialize()
 	. = ..()
-	AddComponent(/datum/component/simple_rotation,ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_VERBS ,null,CALLBACK(src, PROC_REF(can_be_rotated)),CALLBACK(src, PROC_REF(after_rotation)))
-
+	AddComponent(/datum/component/simple_rotation, ROTATION_NEEDS_ROOM)
 
 /obj/structure/railing/Initialize()
 	. = ..()
@@ -45,7 +44,6 @@
 
 	if(!climbable)
 		LoadComponent(/datum/component/leanable, dropping)
-	AddComponent(/datum/component/simple_rotation, ROTATION_NEEDS_ROOM)
 
 /obj/structure/railing/attackby(obj/item/I, mob/living/user, params)
 	..()

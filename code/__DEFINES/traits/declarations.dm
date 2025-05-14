@@ -149,6 +149,8 @@
 /// Trait that tracks if something has been renamed. Typically holds a REF() to the object itself (AKA src) for wide addition/removal.
 #define TRAIT_WAS_RENAMED "was_renamed"
 
+/// Properly wielded two handed item
+#define TRAIT_WIELDED "wielded"
 /// A transforming item that is actively extended / transformed
 #define TRAIT_TRANSFORM_ACTIVE "active_transform"
 
