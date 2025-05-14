@@ -905,7 +905,7 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "lasombra"
 	damtype = TOX
-	force = 45
+	force = 16
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 10
 	armour_penetration = 10
@@ -924,7 +924,7 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "lasombra"
 	damtype = BURN
-	force = 25
+	force = 8
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 10
 	armour_penetration = 10
