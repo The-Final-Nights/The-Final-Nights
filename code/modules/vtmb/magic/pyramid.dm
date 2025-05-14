@@ -849,6 +849,8 @@
 		message += "Seduction and allure are in the blood. Ah, one of the snakes.\n"
 	else if (clan == "Caitiff")
 		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"
+	else if(clan == "Nagaraja")
+		message += "This blood has an unsettling hunger to it, cold and stained with death.\n"
 	else
 		message += "The blood's origin is hard to trace.\n"
 

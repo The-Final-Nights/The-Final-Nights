@@ -21,7 +21,7 @@
 	species_slots = list("Vampire" = 6)
 
 	v_duty = "One of the few Healer Salubri left within the city, maybe even in the world! You operate the Vet for any diseased or sick animals. You may have been an escaped member of The Seven or not. Regardless, you must hide and lay low."
-	duty = "You work in the local privately owned Veterinary Clinic, in the old ghetto. You might notice some oddities with the other workers, but they help people and are generally nice, right? Either way, you dont care enough to out them."
+	duty = "You work in the local privately owned Veterinary Clinic, in the old ghetto. You might notice some oddities with the other workers, but they help people and are generally nice, right? Either way, you don't care enough to out them."
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Salubri")
 

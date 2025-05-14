@@ -17,8 +17,9 @@
 	display_order = JOB_DISPLAY_ORDER_BARKEEPER
 	bounty_types = CIV_JOB_DRINK
 
-//	minimal_generation = 11	//Uncomment when players get exp enough
+//	minimal_generation = 13
 //	minimum_character_age = 70 //Uncomment if age-restriction wanted.
+	minimum_vampire_age = 1
 
 	my_contact_is_important = TRUE
 	known_contacts = list(

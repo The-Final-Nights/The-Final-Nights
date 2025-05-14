@@ -35,6 +35,7 @@
 
 	minimal_generation = 12
 //	minimum_character_age = 70 //Uncomment if age-restriction wanted
+	minimum_vampire_age = 30
 	minimal_masquerade = 5
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("True Brujah", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Tzimisce", "Ministry", "Lasombra")

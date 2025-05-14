@@ -208,7 +208,7 @@
 
 /obj/item/clothing/suit/vampire/coat/alt
 	name = "green coat"
-	desc = "A warm and heavy brown coat."
+	desc = "A warm and heavy green coat."
 	icon_state = "coat2"
 
 /obj/item/clothing/suit/vampire/coat/winter
@@ -231,13 +231,22 @@
 	desc = "True clothing for any punk. Provides some kind of protection."
 	icon_state = "jacket1"
 	armor = list(MELEE = 25, BULLET = 25, LASER = 10, ENERGY = 10, BOMB = 25, BIO = 0, RAD = 0, FIRE = 25, ACID = 10, WOUND = 25)
+	allowed = list(
+		/obj/item/card/id,
+		/obj/item/flashlight,
+	)
 
 /obj/item/clothing/suit/vampire/jacket/fbi
 	name = "Federal Bureau of Investigation jacket"
 	desc = "\"FBI OPEN UP!!\""
 	icon_state = "fbi"
 	armor = list(MELEE = 25, BULLET = 25, LASER = 10, ENERGY = 10, BOMB = 25, BIO = 0, RAD = 0, FIRE = 25, ACID = 10, WOUND = 25)
-
+	allowed = list(
+		/obj/item/card/id,
+		/obj/item/flashlight,
+		/obj/item/melee/classic_baton/vampire,
+		/obj/item/restraints/handcuffs
+	)
 /obj/item/clothing/suit/vampire/jacket/punk
 	icon_state = "punk"
 	armor = list(MELEE = 50, BULLET = 50, LASER = 10, ENERGY = 10, BOMB = 50, BIO = 0, RAD = 0, FIRE = 25, ACID = 10, WOUND = 25)

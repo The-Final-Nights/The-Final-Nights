@@ -457,8 +457,8 @@
 	species_exception = list(/datum/species/golem)
 
 /obj/item/clothing/suit/jacket/letterman_syndie
-	name = "blood-red letterman jacket"
-	desc = "Oddly, this jacket seems to have a large S on the back..."
+	name = "red letterman jacket"
+	desc = "Whoa, it even has a cool S on its back!"
 	icon_state = "letterman_s"
 	inhand_icon_state = "letterman_s"
 	species_exception = list(/datum/species/golem)
