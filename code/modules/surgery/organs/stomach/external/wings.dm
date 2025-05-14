@@ -219,3 +219,6 @@
 	if(burnt)
 		burnt = FALSE
 		set_sprite(original_sprite)
+
+/obj/item/organ/external/wings/functional/leather
+	name = "leather wings"

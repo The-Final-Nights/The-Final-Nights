@@ -447,7 +447,8 @@
 			user.remove_overlay(PROTEAN_LAYER)
 			QDEL_NULL(upgrade_overlay)
 		if ("Leather wings")
-			user.dna.species.RemoveSpeciesFlight(user)
+			var/obj/item/organ/external/wings/functional/leather/wings = target.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)
+			wings.Remove(user, FALSE)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
