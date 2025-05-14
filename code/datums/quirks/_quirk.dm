@@ -18,7 +18,7 @@
 	/// When making an abstract quirk (in OOP terms), don't forget to set this var to the type path for that abstract quirk.
 	var/abstract_parent_type = /datum/quirk
 	var/list/allowed_species = list()
-	var/list/allowed_clans = list()
+	var/list/excluded_clans = list()
 	var/list/allowed_tribes = list()
 
 /datum/quirk/Destroy()

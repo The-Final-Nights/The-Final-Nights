@@ -101,11 +101,16 @@
 2025-05-14:
   Cre77:
   - balance: Garou Homid punch damage is now 10-20, on level with other splats.
+  ShadeAware:
+  - image: Medkits have been given a facelift.
   Singul0:
   - rscadd: Baali's Daimonion discipline is now reworked completely, Curse people!
       Find out their clane's moral failings! Shoot fireballs! And More!
   buffyuwu:
   - bugfix: fixed the changelog template on github
+  necti-dev:
+  - bugfix: Police cars no longer spam lights in upper z-levels causing lag. They
+      use movable lights instead.
   tzui5020:
   - rscadd: 'Adds Kindred to the Species list for Tower Employee.
 
