@@ -53,7 +53,8 @@
 
 /datum/discipline_power/daimonion/fear_of_the_void_below/deactivate()
 	. = ..()
-	owner.dna.species.RemoveSpeciesFlight(owner)
+	var/obj/item/organ/external/wings/functional/wings = owner.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)
+	wings.Remove(owner, FALSE)
 
 //CONFLAGRATION
 /datum/discipline_power/daimonion/conflagration

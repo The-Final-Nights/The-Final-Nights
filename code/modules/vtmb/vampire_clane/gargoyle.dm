@@ -16,12 +16,12 @@
 	accessories = list("gargoyle_full", "gargoyle_left", "gargoyle_right", "gargoyle_broken", "gargoyle_round", "gargoyle_devil", "gargoyle_oni", "none")
 	accessories_layers = list("gargoyle_full" = UNICORN_LAYER, "gargoyle_left" = UNICORN_LAYER, "gargoyle_right" = UNICORN_LAYER, "gargoyle_broken" = UNICORN_LAYER, "gargoyle_round" = UNICORN_LAYER, "gargoyle_devil" = UNICORN_LAYER, "gargoyle_oni" = UNICORN_LAYER, "none" = UNICORN_LAYER)
 	whitelisted = FALSE
-	external_organs = list(/obj/item/organ/external/functional/wings = "Gargoyle")
-	flying_species = TRUE
 
 /datum/vampireclane/gargoyle/on_gain(mob/living/carbon/human/H)
 	. = ..()
 	H.physiology.brute_mod = 0.8
+	var/obj/item/organ/external/wings/functional/wings = new()
+	wings.Insert(H, FALSE, FALSE)
 
 /datum/vampireclane/gargoyle/post_gain(mob/living/carbon/human/gargoyle)
 	. = ..()

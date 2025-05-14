@@ -275,3 +275,6 @@
 	dismemberable = 0
 	max_damage = 50
 	animal_origin = LARVA_BODYPART
+
+/obj/item/bodypart/head/crinos
+	max_damage = 125
