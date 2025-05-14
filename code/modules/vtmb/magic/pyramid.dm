@@ -557,13 +557,17 @@
 	var/list/valid_bodies = list()
 
 	for(var/mob/living/carbon/human/H in loc)
-		if(H && (istype(H, /mob/living/carbon/human/species/kindred)))
-			if(H.stat > SOFT_CRIT)
+		if(H && H.dna && istype(H.dna.species, /datum/species/kindred))
+			if(H == usr)
+				to_chat(usr, span_warning("You may not turn yourself into a Gargoyle!"))
+				return
+			else if(H.stat > SOFT_CRIT)
 				valid_bodies += H
 			else
 				H.adjustCloneLoss(50)
 				playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 10, FALSE)
 				to_chat(usr, "Your specimen must be incapacitated! The ritual has merely hurt them!")
+				return
 
 
 	if(valid_bodies.len < 1)
@@ -648,7 +652,7 @@
 			if(A && A.vampiric)
 				A.Remove(target_body)
 
-		var/original_location = target_body.loc
+		var/original_location = get_turf(target_body)
 
 		// Revive the specimen and turn them into a gargoyle kindred
 		target_body.revive(TRUE)
@@ -657,21 +661,17 @@
 		target_body.clane.on_gain(target_body)
 		target_body.clane.post_gain(target_body)
 		target_body.apply_status_effect(STATUS_EFFECT_INLOVE, usr)
-		target_body.setToxLoss(0)
-		target_body.setOxyLoss(0)
-		target_body.setCloneLoss(0)
-
 		target_body.real_name = old_name // the ritual for some reason is deleting their old name and replacing it with a random name.
 		target_body.name = old_name
 		target_body.update_name()
 
+		target_body.create_disciplines(FALSE, target_body.clane.clane_disciplines)
+
+		if(target_body.loc != original_location)
+			target_body.forceMove(original_location)
+
 		playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 		playsound(target_body.loc, 'code/modules/wod13/sounds/vicissitude.ogg', 50, FALSE)
-
-		// Move the gargoyle back to the original location preventing a bug where turning a kindred player into a gargoyle would spawn them into the sewers.
-		target_body.forceMove(original_location)
-
-		target_body.create_disciplines(FALSE, target_body.clane.clane_disciplines)
 
 		// Handle key assignment
 		if(!target_body.key)
