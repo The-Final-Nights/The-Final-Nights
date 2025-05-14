@@ -348,9 +348,6 @@
 /// Marks that this object is irradiated
 #define TRAIT_IRRADIATED "iraddiated"
 
-/// Immune to being irradiated
-#define TRAIT_RADIMMUNE "rad_immunity"
-
 /// Harmful radiation effects, the toxin damage and the burns, will not occur while this trait is active
 #define TRAIT_HALT_RADIATION_EFFECTS "halt_radiation_effects"
 

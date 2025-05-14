@@ -288,12 +288,6 @@
 
 /// Called by medical scanners to get a simple summary of how healthy the organ is. Returns an empty string if things are fine.
 /obj/item/organ/proc/get_status_text(advanced, add_tooltips)
-	if(advanced && (organ_flags & ORGAN_HAZARDOUS))
-		return conditional_tooltip("<font color='#cc3333'>Harmful Foreign Body</font>", "Remove surgically.", add_tooltips)
-
-	if(organ_flags & ORGAN_EMP)
-		return conditional_tooltip("<font color='#cc3333'>EMP-Derived Failure</font>", "Repair or replace surgically.", add_tooltips)
-
 	var/tech_text = ""
 	if(owner.has_reagent(/datum/reagent/inverse/technetium))
 		tech_text = "[round((damage / maxHealth) * 100, 1)]% damaged"

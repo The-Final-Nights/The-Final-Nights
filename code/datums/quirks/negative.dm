@@ -210,16 +210,6 @@
 	var/mob/living/carbon/human/human_holder = quirk_holder
 	var/obj/item/heirloom_type
 
-	// The quirk holder's species - we have a 50% chance, if we have a species with a set heirloom, to choose a species heirloom.
-	var/datum/species/holder_species = human_holder.dna?.species
-	if(holder_species && LAZYLEN(holder_species.family_heirlooms) && prob(50))
-		heirloom_type = pick(holder_species.family_heirlooms)
-	else
-		// Our quirk holder's job
-		var/datum/job/holder_job = SSjob.GetJob(human_holder.mind?.assigned_role)
-		if(holder_job && LAZYLEN(holder_job.family_heirlooms))
-			heirloom_type = pick(holder_job.family_heirlooms)
-
 	if(!heirloom_type)
 		heirloom_type = pick(/obj/item/toy/cards/deck, /obj/item/lighter, /obj/item/dice/d20)
 

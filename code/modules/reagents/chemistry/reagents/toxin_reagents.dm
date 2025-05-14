@@ -294,7 +294,7 @@
 	addiction_types = list(/datum/addiction/hallucinogens = 18)  //7.2 per 2 seconds
 
 /datum/reagent/toxin/mindbreaker/on_mob_life(mob/living/carbon/M, delta_time, times_fired)
-	if(HAS_TRAIT(M, TRAIT_INSANITY))
+	if(M.has_quirk(/datum/quirk/derangement))
 		M.hallucination = 0
 	else
 		M.hallucination += 5 * REM * delta_time
