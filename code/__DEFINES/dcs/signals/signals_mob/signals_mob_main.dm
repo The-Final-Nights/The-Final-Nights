@@ -135,3 +135,34 @@
 /// From /atom/movable/screen/zone_sel/proc/set_selected_zone.
 /// Fires when the user has changed their selected body target.
 #define COMSIG_MOB_SELECTED_ZONE_SET "mob_set_selected_zone"
+
+///from base of obj/allowed(mob/M): (/obj) returns bool, if TRUE the mob has id access to the obj
+#define COMSIG_MOB_ALLOWED "mob_allowed"
+
+///from base of /obj/item/toy/crayon/spraycan/afterattack() (mob/user, atom/target)
+#define COMSIG_MOB_USING_SPAYPRAINT "mob_using_spraypaint"
+
+///from base of /mob/living/proc/apply_damage(): (damage, damagetype, def_zone)
+#define COMSIG_MOB_APPLY_DAMGE	"mob_apply_damage"
+///from base of /atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, gentle = FALSE, quickstart = TRUE)
+//SEND_SIGNAL(thrower, COMSIG_MOB_THREW_MOVABLE, target, TT)
+#define COMSIG_MOB_THREW_MOVABLE "mob_threw_movable"
+
+///Mob is trying to emote, from /datum/emote/proc/run_emote(): (key, params, type_override, intentional, emote)
+#define COMSIG_MOB_PRE_EMOTED "mob_pre_emoted"
+	#define COMPONENT_CANT_EMOTE (1<<0)
+
+/// A mob has just equipped an item. Called on [/mob] from base of [/obj/item/equipped()]: (/obj/item/equipped_item, slot)
+#define COMSIG_MOB_EQUIPPED_ITEM "mob_equipped_item"
+///called in /obj/item/gun/process_fire (user, target, params, zone_override)
+#define COMSIG_MOB_FIRED_GUN "mob_fired_gun"
+///from base of /mob/proc/melee_swing()
+#define COMSIG_MOB_MELEE_SWING "mob_melee_swing"
+///from base of /mob/living/attackby(obj/item/I, mob/living/user, params)
+///	SEND_SIGNAL(src, COMSIG_MOB_ATTACKED_BY_MELEE, /*attacker =*/user, /*item =*/I, /*params =*/params)
+#define COMSIG_MOB_ATTACKED_BY_MELEE "mob_attacked_by_melee"
+///	SEND_SIGNAL(user, COMSIG_MOB_ATTACKING_MELEE, /*target =*/src, /*item =*/I, params)
+#define COMSIG_MOB_ATTACKING_MELEE "mob_attacking_melee"
+
+///SEND_SIGNAL(src, COMSIG_MOB_ATTACKED_HAND, /*attacker =*/user)
+#define COMSIG_MOB_ATTACKED_HAND "mob_attacked_hand"
