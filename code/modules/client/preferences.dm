@@ -3775,8 +3775,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.transformator.corvid_form = null
 				CRASH("[key_name(character)]'s corvid_form weakref contained no corvid mob!")
 
-			//cor_crinos.sprite_color = werewolf_color
-			cor_crinos.icon_state = werewolf_color // gotta use Icon state for this one apparently
+			cor_crinos.sprite_color = werewolf_color
+			//cor_crinos.icon_state = werewolf_color // gotta use Icon state for this one apparently
 			cor_crinos.sprite_scar = werewolf_scar
 			cor_crinos.sprite_hair = werewolf_hair
 			cor_crinos.sprite_hair_color = werewolf_hair_color
