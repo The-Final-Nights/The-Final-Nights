@@ -86,3 +86,39 @@
   - balance: Dominate 5 is now prerequisite for the Voice of Domination power.
   Icarus-The-Sun:
   - qol: Underwear is selectable regardless of gender
+2025-05-13:
+  Hardly:
+  - rscadd: added loadouts
+  - spellcheck: fixed a few misspellings on the clothing store
+  - spellcheck: de-ss13s a few items (eg. red letterman is no longer syndicate flavored)
+  SoreYew:
+  - rscadd: hollow point 45acp
+  - rscadd: fbi spawn items
+  - bugfix: fixed 45 glocks
+  necti-dev:
+  - rscadd: Some vampire jobs now have vampire-age restrictions (how long since embrace)
+  - rscadd: Primogen generation requirements lowered a bit, Capo's increased
+2025-05-14:
+  Cre77:
+  - balance: Garou Homid punch damage is now 10-20, on level with other splats.
+  ShadeAware:
+  - image: Medkits have been given a facelift.
+  Singul0:
+  - rscadd: Baali's Daimonion discipline is now reworked completely, Curse people!
+      Find out their clane's moral failings! Shoot fireballs! And More!
+  buffyuwu:
+  - bugfix: fixed the changelog template on github
+  necti-dev:
+  - bugfix: Police cars no longer spam lights in upper z-levels causing lag. They
+      use movable lights instead.
+  tzui5020:
+  - rscadd: 'Adds Kindred to the Species list for Tower Employee.
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->'

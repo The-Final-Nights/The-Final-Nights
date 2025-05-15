@@ -529,6 +529,8 @@
 		message += "The blood of our stone servants."
 	else if(clan == "Ministry")
 		message += "Seduction and allure are in the blood. Ah, one of the snakes."
+	else if(clan == "Nagaraja")
+		message += "This blood has an unsettling hunger to it, cold and stained with death."
 	else
 		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?"
 	return message
