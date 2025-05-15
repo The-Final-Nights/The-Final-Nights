@@ -101,9 +101,6 @@
 	// if the component is reparented to a jumpsuit, the items still go in the protector
 	return original_parent
 
-/datum/component/storage/concrete/pockets/pocketprotector/get_parent()
-	return original_parent
-
 /datum/component/storage/concrete/pockets/helmet
 	quickdraw = TRUE
 	max_combined_w_class = 6
