@@ -107,7 +107,7 @@
 	if(istype(loc, /obj/effect/dummy/phased_mob))
 		bloodspell.phased = TRUE
 	if(bloodpool)
-		bloodpool.RegisterSignal(src, list(COMSIG_LIVING_AFTERPHASEIN,COMSIG_PARENT_QDELETING), TYPE_PROC_REF(/obj/effect/dummy/phased_mob, deleteself))
+		bloodpool.RegisterSignals(src, list(COMSIG_LIVING_AFTERPHASEIN,COMSIG_PARENT_QDELETING), TYPE_PROC_REF(/obj/effect/dummy/phased_mob, deleteself))
 
 /mob/living/simple_animal/hostile/imp/slaughter/CtrlShiftClickOn(atom/A)
 	if(!isliving(A))

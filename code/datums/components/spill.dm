@@ -22,8 +22,8 @@
 		_dropsound = list(_dropsound)
 	dropsound = _dropsound
 
-/datum/component/spill/PostTransfer()
-	if(!isitem(parent))
+/datum/component/spill/PostTransfer(datum/new_parent)
+	if(!isitem(new_parent))
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/spill/RegisterWithParent()
