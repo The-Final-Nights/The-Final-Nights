@@ -3,7 +3,7 @@
 	name = "Gargoyle"
 	id = "gargoyle"
 	default_color = "FFFFFF"
-	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE)
+	species_traits = list(EYECOLOR)
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE)
 	mutant_bodyparts = list("wings" = "Gargoyle", "tail_human" = "None", "horns" = "Gargoyle", "legs" = "Digitigrade Legs")
 	limbs_id = "gargoyle"
