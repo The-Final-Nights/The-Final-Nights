@@ -2589,7 +2589,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if (tgui_alert(user, "Are you sure you want to change your Subtype? This will reset your Disciplines.", "Confirmation", list("Yes", "No")) != "Yes")
 						return
 
-					var/list/available_subtypes = subtypesof(/datum/vampireclane/gargoyle)
+					var/list/available_subtypes = list()
+					for(var/i as anything in subtypesof(/datum/vampireclane/gargoyle))
+						var/a = GLOB.clanes_list[i]
+						var/datum/vampireclane/V = new a
+						if (V.whitelisted)
+							if (SSwhitelists.is_whitelisted(user.ckey, V.name))
+								available_subtypes[V.name] += GLOB.clanes_list
+						else
+							available_subtypes[V.name] += GLOB.clanes_list[i]
+						qdel(V)
 					var/result = tgui_input_list(user, "Select a subtype", "Subtype Selection", sort_list(available_subtypes))
 					if(result)
 						var/newtype = GLOB.clanes_list[result]
