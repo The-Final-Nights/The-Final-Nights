@@ -4,7 +4,7 @@
  */
 /datum/element/deferred_aquarium_content
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	var/aquarium_content_type
 
 /datum/element/deferred_aquarium_content/Attach(datum/target, aquarium_content_type)
