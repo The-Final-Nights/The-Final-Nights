@@ -6,7 +6,6 @@
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE)
 	mutant_bodyparts = list("wings" = "Gargoyle", "tail_human" = "None", "horns" = "Gargoyle", "legs" = "Digitigrade Legs")
-	use_skintones = FALSE
 	limbs_id = "gargoyle"
 	wings_icon = "Gargoyle"
 	brutemod = 0.8
