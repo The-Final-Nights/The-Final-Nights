@@ -65,6 +65,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel more experienced in love.</span>"
 	lose_text = "<span class='warning'>You feel more clueless in love.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
+	excluded_clans = list("Nagaraja")
 
 /datum/quirk/tough_flesh
 	name = "Tough Flesh"
@@ -96,6 +97,7 @@ Dancer
 	gain_text = "<span class='warning'>You feel anxious about the way you feed.</span>"
 	lose_text = "<span class='warning'>You can feed normal again.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
+	excluded_clans = list("Nagaraja")
 
 /datum/quirk/lazy
 	name = "Lazy"
@@ -210,6 +212,7 @@ Dancer
 	gain_text = "<span class='warning'>Your fangs feel awkward in your mouth.</span>"
 	lose_text = "<span class='notice'>You fangs feel comfortable in your mouth.</span>"
 	allowed_species = list("Vampire","Kuei-jin")
+	excluded_clans = list("Nagaraja")
 
 /datum/quirk/animal_repulsion
 	name = "Animal Repulsion"
@@ -259,6 +262,7 @@ Dancer
 	gain_text = "<span class='warning'>You have a craving for liver.</span>"
 	lose_text = "<span class='notice'>Your craving subsides...</span>"
 	allowed_species = list("Vampire")
+	excluded_clans = list("Nagaraja")
 
 /datum/action/fly_upper
 	name = "Fly Up"
@@ -333,8 +337,8 @@ Dancer
 
 ///Very similar to squish, but for dwarves and shorties
 /datum/element/dwarfism
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
@@ -377,8 +381,8 @@ Dancer
 
 
 /datum/element/children
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
@@ -586,6 +590,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel necroresistant.</span>"
 	lose_text = "<span class='notice'>You don't want necrophilia anymore.</span>"
 	allowed_species = list("Vampire")
+	excluded_clans = list("Nagaraja")
 
 /datum/quirk/charmer
 	name = "Abnormal Charmer"
@@ -628,8 +633,8 @@ Dancer
 
 ///Very similar to squish, but for dwarves and shorties
 /datum/element/giantism
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
