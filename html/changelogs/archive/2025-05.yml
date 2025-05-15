@@ -122,3 +122,7 @@
       ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
       generally represent how a player might be affected by the changes rather than
       a summary of the PR''s contents. -->'
+2025-05-15:
+  necti-dev:
+  - bugfix: LOOC works again. To avoid collision, hotkeys to look up and down are
+      bound by default to "I" (upper-case i) and "K".

@@ -30,8 +30,8 @@
 /datum/component/forensics/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_COMPONENT_CLEAN_ACT))
 
-/datum/component/forensics/PostTransfer()
-	if(!isatom(parent))
+/datum/component/forensics/PostTransfer(datum/new_parent)
+	if(!isatom(new_parent))
 		return COMPONENT_INCOMPATIBLE
 
 /datum/component/forensics/proc/wipe_fingerprints()

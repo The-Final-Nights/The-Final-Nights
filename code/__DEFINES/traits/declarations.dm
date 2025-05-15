@@ -170,6 +170,11 @@
 /// Don't draw external organs/species features like wings, horns, frills and stuff
 #define TRAIT_HIDE_EXTERNAL_ORGANS "hide_external_organs"
 #define TRAIT_FREE_FLOAT_MOVEMENT "free_float_movement"
+
+///generic atom traits
+/// Trait from being under the floor in some manner
+#define TRAIT_UNDERFLOOR "underfloor"
+
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
 #define TRAIT_DOGWOLF			"dogwolf"

@@ -784,7 +784,7 @@ SUBSYSTEM_DEF(carpool)
 	return ((angle_b - angle_a) + 180) % 360 - 180;
 
 /obj/vampire_car/Initialize()
-	. = ..()
+	..()
 	Fari = new (src)
 	Fari.icon = 'icons/effects/light_overlays/light_cone_car.dmi'
 	Fari.icon_state = "light"
@@ -806,8 +806,14 @@ SUBSYSTEM_DEF(carpool)
 			movement_vector = 90
 		if(WEST)
 			movement_vector = 270
+	return INITIALIZE_HINT_LATELOAD
+
+
+/obj/vampire_car/LateInitialize()
+	. = ..()
 	add_overlay(image(icon = src.icon, icon_state = src.icon_state, pixel_x = -32, pixel_y = -32))
 	icon_state = "empty"
+
 
 /turf
 	var/list/unpassable = list()
