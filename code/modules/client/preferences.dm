@@ -695,7 +695,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "Hair: <a href='byond://?_src_=prefs;preference=werewolf_hair;task=input'>[werewolf_hair]</a><BR>"
 				dat += "Hair Color: <a href='byond://?_src_=prefs;preference=werewolf_hair_color;task=input'>[werewolf_hair_color]</a><BR>"
 				dat += "Eyes: <a href='byond://?_src_=prefs;preference=werewolf_eye_color;task=input'>[werewolf_eye_color]</a><BR>"
-			if(pref_species.name == "Vampire" || pref_species.name == "Gargoyle")
+			if(pref_species.name == "Vampire")
 				dat += "<h2>[make_font_cool("CLANE")]</h2>"
 				dat += "<b>Clane/Bloodline:</b> <a href='byond://?_src_=prefs;preference=clane;task=input'>[clane.name]</a><BR>"
 				if(clane.name == CLAN_MALKAVIAN)
@@ -747,7 +747,44 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						qdel(discipline)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
+			if(pref_species.name == "Gargoyle")
+				dat += "<h2>[make_font_cool("CLANE")]</h2>"
+				dat += "<b>Subtype:</b> <a href='byond://?_src_=prefs;preference=subtype;task=input'>[clane.name]</a><BR>"
+				dat += "<b>Description:</b> [clane.desc]<BR>"
+				dat += "<b>Curse:</b> [clane.curse]<BR>"
+				if(length(clane.accessories))
+					if(clane_accessory in clane.accessories)
+						dat += "<b>Marks:</b> <a href='byond://?_src_=prefs;preference=clane_acc;task=input'>[clane_accessory]</a><BR>"
+					else
+						if("none" in clane_accessory)
+							clane_accessory = "none"
+						else
+							clane_accessory = pick(clane.accessories)
+						dat += "<b>Marks:</b> <a href='byond://?_src_=prefs;preference=clane_acc;task=input'>[clane_accessory]</a><BR>"
+				else
+					clane_accessory = null
+				dat += "<h2>[make_font_cool("DISCIPLINES")]</h2>"
 
+				for (var/i in 1 to discipline_types.len)
+					var/discipline_type = discipline_types[i]
+					var/datum/discipline/discipline = new discipline_type
+					var/discipline_level = discipline_levels[i]
+
+					var/cost
+					if (discipline_level <= 0)
+						cost = 10
+					else if (clane.clane_disciplines.Find(discipline_type))
+						cost = discipline_level * 5
+					else
+						cost = discipline_level * 7
+
+					dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"]([discipline_level])"
+					if((player_experience >= cost) && (discipline_level != 5))
+						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
+					else
+						dat += "<BR>"
+					dat += "-[discipline.desc]<BR>"
+					qdel(discipline)
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
@@ -2545,7 +2582,32 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								clane_accessory = "none"
 							else
 								clane_accessory = pick(clane.accessories)
+				if("subtype")
+					if(slotlocked)
+						return
 
+					if (tgui_alert(user, "Are you sure you want to change your Subtype? This will reset your Disciplines.", "Confirmation", list("Yes", "No")) != "Yes")
+						return
+
+					var/list/available_subtypes = subtypesof(/datum/vampireclane/gargoyle)
+					var/result = tgui_input_list(user, "Select a subtype", "Subtype Selection", sort_list(available_subtypes))
+					if(result)
+						var/newtype = GLOB.clanes_list[result]
+						clane = new newtype()
+						discipline_types = list()
+						discipline_levels = list()
+						for (var/i in 1 to clane.clane_disciplines.len)
+							discipline_types += clane.clane_disciplines[i]
+							discipline_levels += 1
+						if(clane.no_hair)
+							hairstyle = "Bald"
+						if(clane.no_facial)
+							facial_hairstyle = "Shaved"
+						if(length(clane.accessories))
+							if("none" in clane.accessories)
+								clane_accessory = "none"
+							else
+								clane_accessory = pick(clane.accessories)
 				if("derangement")
 
 					if(!(pref_species.id == "kindred" ) || clane.name != CLAN_MALKAVIAN)
@@ -2924,9 +2986,17 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							if("ghoul","human","kuei-jin")
 								discipline_types.Cut()
 								discipline_levels.Cut()
-							if("kindred", "gargoyle")
+							if("kindred")
 								qdel(clane)
 								clane = new /datum/vampireclane/brujah()
+								discipline_types.Cut()
+								discipline_levels.Cut()
+								for (var/i in 1 to clane.clane_disciplines.len)
+									discipline_types += clane.clane_disciplines[i]
+									discipline_levels += 1
+							if("gargoyle")
+								qdel(clane)
+								clane = new /datum/vampireclane/gargoyle/sentinel()
 								discipline_types.Cut()
 								discipline_levels.Cut()
 								for (var/i in 1 to clane.clane_disciplines.len)
