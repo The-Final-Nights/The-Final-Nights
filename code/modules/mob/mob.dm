@@ -415,6 +415,7 @@
 	if(qdel_on_fail)
 		qdel(W)
 	return FALSE
+
 /**
  * Reset the attached clients perspective (viewpoint)
  *

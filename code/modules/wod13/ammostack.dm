@@ -54,6 +54,13 @@
 	name = ".45 ACP bullet"
 	damage = 24
 
+/obj/projectile/beam/beam_rifle/vampire/vamp45acp/HP
+	name = "45acp hollow point bullet"
+	damage = 25
+	armour_penetration = 0
+	bare_wound_bonus = 5
+	wound_bonus = 5
+
 /obj/projectile/beam/beam_rifle/vampire/vamp44
 	name = ".44 bullet"
 	damage = 30
@@ -159,6 +166,9 @@
 	icon_state = "45"
 	base_iconstate = "45"
 
+/obj/item/ammo_casing/vampire/c45acp/HP
+	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp45acp/HP
+
 /obj/item/ammo_casing/vampire/c44
 	name = ".44 bullet casing"
 	desc = "A .44 bullet casing."
@@ -239,6 +249,11 @@
 	name = "ammo box (.45 ACP)"
 	icon_state = "45box"
 	ammo_type = /obj/item/ammo_casing/vampire/c45acp
+	max_ammo = 100
+
+/obj/item/ammo_box/vampire/c45acp/HP
+	name = "ammo box (.45 ACP HP)"
+	ammo_type = /obj/item/ammo_casing/vampire/c45acp/HP
 	max_ammo = 100
 
 /obj/item/ammo_box/vampire/c44
@@ -332,7 +347,7 @@
 
 /obj/projectile/beam/beam_rifle/vampire/vamp44/silver
 	name = ".44 silver bullet"
-	icon_state = "s44"
+	icon_state = "44"
 
 /obj/projectile/beam/beam_rifle/vampire/vamp44/silver/on_hit(atom/target, blocked = FALSE)
 	. = ..()
@@ -349,8 +364,8 @@
 	name = "9mm silver bullet casing"
 	desc = "A 9mm silver bullet casing."
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp9mm/silver
-	icon_state = "s9"
-	base_iconstate = "s9"
+	icon_state = "9"
+	base_iconstate = "9"
 
 /obj/item/ammo_casing/vampire/c45acp/silver
 	name = ".45 ACP silver bullet casing"
@@ -361,15 +376,15 @@
 	name = ".44 silver bullet casing"
 	desc = "A .44 silver bullet casing."
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp44/silver
-	icon_state = "s44"
-	base_iconstate = "s44"
+	icon_state = "44"
+	base_iconstate = "44"
 
 /obj/item/ammo_casing/vampire/c556mm/silver
 	name = "5.56mm silver bullet casing"
 	desc = "A 5.56mm silver bullet casing."
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp556mm/silver
-	icon_state = "s556"
-	base_iconstate = "s556"
+	icon_state = "556"
+	base_iconstate = "556"
 
 /obj/item/ammo_box/vampire/c9mm/silver
 	name = "ammo box (9mm silver)"

@@ -16,8 +16,9 @@
 	display_order = JOB_DISPLAY_ORDER_GIOVANNI
 	exp_type_department = EXP_TYPE_GIOVANNI
 
-	minimal_generation = 11
+	minimal_generation = 10
 //	minimum_character_age = 130 //Uncomment if age restriction wanted
+	minimum_vampire_age = 60
 
 	v_duty = "Pure blood runs through your veins and, with it, old power. Throughout your long life you have learnt to hold onto two things and never let go: money, and family."
 	minimal_masquerade = 0
