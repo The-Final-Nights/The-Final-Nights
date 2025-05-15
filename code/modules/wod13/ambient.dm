@@ -448,6 +448,25 @@
 	yin_chi = 2
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/sewer/nosferatu_warren
+	name = "Underground Warren"
+	icon_state = "hotel"
+	upper = FALSE
+	music = /datum/vampiremusic/nosferatu
+	zone_type = "elysium"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/sewer/nosferatu_bar
+	name = "Underground Bar"
+	icon_state = "hotel"
+	upper = FALSE
+	zone_type = "elysium"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/sewer/cappadocian
 	name = "Cappadocian Crypt"
 	icon_state = "graveyard"
