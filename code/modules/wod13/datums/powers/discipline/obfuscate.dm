@@ -75,7 +75,7 @@
 
 /datum/discipline_power/obfuscate/cloak_of_shadows/activate()
 	. = ..()
-	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
+	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
 
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
@@ -124,7 +124,7 @@
 
 /datum/discipline_power/obfuscate/unseen_presence/activate()
 	. = ..()
-	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
+	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 	RegisterSignal(owner, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
 
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
@@ -175,7 +175,7 @@
 
 /datum/discipline_power/obfuscate/mask_of_a_thousand_faces/activate()
 	. = ..()
-	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
+	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
 		if (NPC.danger_source == owner)
@@ -209,7 +209,7 @@
 
 /datum/discipline_power/obfuscate/vanish_from_the_minds_eye/activate()
 	. = ..()
-	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
+	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
 		if (NPC.danger_source == owner)
@@ -243,7 +243,7 @@
 
 /datum/discipline_power/obfuscate/cloak_the_gathering/activate()
 	. = ..()
-	RegisterSignal(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
+	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)
 
 	for(var/mob/living/carbon/human/npc/NPC in GLOB.npc_list)
 		if (NPC.danger_source == owner)

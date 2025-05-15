@@ -1,4 +1,0 @@
-author: "necti-dev"
-delete-after: True
-changes:
-  - bugfix: "LOOC works again. To avoid collision, hotkeys to look up and down are bound by default to \"I\" (upper-case i) and \"K\"."

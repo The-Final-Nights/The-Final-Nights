@@ -144,10 +144,10 @@
 	//Slippery components don't transfer due to callbacks
 	qdel(O.GetComponent(/datum/component/slippery))
 
-/datum/component/wet_floor/PostTransfer()
-	if(!isopenturf(parent))
+/datum/component/wet_floor/PostTransfer(datum/new_parent)
+	if(!isopenturf(new_parent))
 		return COMPONENT_INCOMPATIBLE
-	var/turf/T = parent
+	var/turf/T = new_parent
 	T.add_overlay(current_overlay)
 	//Make sure to add/update any slippery component on the new turf (update_flags calls LoadComponent)
 	update_flags()
