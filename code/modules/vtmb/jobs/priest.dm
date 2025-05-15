@@ -18,7 +18,7 @@
 	exp_type_department = EXP_TYPE_CHURCH
 
 	allowed_species = list("Human", "Ghoul", "Vampire")
-	allowed_bloodlines = list("Lasombra","Toreador","Malkavian","Salubri","Cappadocian","Banu Haqim","Caitiff")
+	allowed_bloodlines = list("Lasombra", "Toreador", "Malkavian", "Salubri", "Nagaraja", "Cappadocian", "Banu Haqim", "Caitiff")
 	species_slots = list("Vampire" = 2)
 	minimal_generation = 13
 

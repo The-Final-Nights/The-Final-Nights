@@ -47,13 +47,13 @@
 			_contents_limbo += AM
 			AM.moveToNullspace()
 
-/datum/component/storage/concrete/PostTransfer()
-	if(!isatom(parent))
+/datum/component/storage/concrete/PostTransfer(datum/new_parent)
+	if(!isatom(new_parent))
 		return COMPONENT_INCOMPATIBLE
 	if(transfer_contents_on_component_transfer)
 		for(var/i in _contents_limbo)
 			var/atom/movable/AM = i
-			AM.forceMove(parent)
+			AM.forceMove(new_parent)
 		_contents_limbo = null
 	if(_user_limbo)
 		for(var/i in _user_limbo)

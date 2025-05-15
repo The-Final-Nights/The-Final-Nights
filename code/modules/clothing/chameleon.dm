@@ -226,7 +226,7 @@
 		I.inhand_icon_state = initial(picked_item.inhand_icon_state)
 		I.worn_icon = initial(picked_item.worn_icon)
 		I.worn_icon_state = initial(picked_item.worn_icon_state)
-		if(istype(I, /obj/item/clothing) && istype(initial(picked_item), /obj/item/clothing))
+		if(istype(I, /obj/item/clothing) && istype(picked_item, /obj/item/clothing))
 			var/obj/item/clothing/CL = I
 			var/obj/item/clothing/PCL = picked_item
 			CL.flags_cover = initial(PCL.flags_cover)

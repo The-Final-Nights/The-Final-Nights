@@ -34,24 +34,10 @@
 //////////////////////////////////////////////////////////////////
 
 // /datum signals
-/// when a component is added to a datum: (/datum/component)
-#define COMSIG_COMPONENT_ADDED "component_added"
-/// before a component is removed from a datum because of RemoveComponent: (/datum/component)
-#define COMSIG_COMPONENT_REMOVING "component_removing"
 /// before a datum's Destroy() is called: (force), returning a nonzero value will cancel the qdel operation
 #define COMSIG_PARENT_PREQDELETED "parent_preqdeleted"
 /// just before a datum's Destroy() is called: (force), at this point none of the other components chose to interrupt qdel and Destroy will be called
 #define COMSIG_PARENT_QDELETING "parent_qdeleting"
-/// generic topic handler (usr, href_list)
-#define COMSIG_TOPIC "handle_topic"
-/// handler for vv_do_topic (usr, href_list)
-#define COMSIG_VV_TOPIC "vv_topic"
-	#define COMPONENT_VV_HANDLED (1<<0)
-
-/// fires on the target datum when an element is attached to it (/datum/element)
-#define COMSIG_ELEMENT_ATTACH "element_attach"
-/// fires on the target datum when an element is attached to it  (/datum/element)
-#define COMSIG_ELEMENT_DETACH "element_detach"
 
 // /atom signals
 ///from base of atom/proc/Initialize(): sent any time a new atom is created
@@ -72,6 +58,7 @@
 #define COMSIG_ATOM_HULK_ATTACK "hulk_attack"
 ///from base of atom/animal_attack(): (/mob/user)
 #define COMSIG_ATOM_ATTACK_ANIMAL "attack_animal"
+
 ///from base of atom/examine(): (/mob)
 #define COMSIG_PARENT_EXAMINE "atom_examine"
 ///from base of atom/get_examine_name(): (/mob, list/overrides)
@@ -591,8 +578,6 @@
 
 ///from base of [/obj/proc/take_damage]: (damage_amount, damage_type, damage_flag, sound_effect, attack_dir, aurmor_penetration)
 #define COMSIG_OBJ_TAKE_DAMAGE	"obj_take_damage"
-	/// Return bitflags for the above signal which prevents the object taking any damage.
-	#define COMPONENT_NO_TAKE_DAMAGE	(1<<0)
 ///from base of obj/deconstruct(): (disassembled)
 #define COMSIG_OBJ_DECONSTRUCT "obj_deconstruct"
 ///from base of code/game/machinery
@@ -1032,18 +1017,6 @@
 /// (atom/container, mob/user) - returns bool
 #define COMSIG_CONTAINER_TRY_ATTACH "container_try_attach"
 
-/* Attack signals. They should share the returned flags, to standardize the attack chain. */
-/// tool_act -> pre_attack -> target.attackby (item.attack) -> afterattack
-	///Ends the attack chain. If sent early might cause posterior attacks not to happen.
-	#define COMPONENT_CANCEL_ATTACK_CHAIN (1<<0)
-	///Skips the specific attack step, continuing for the next one to happen.
-	#define COMPONENT_SKIP_ATTACK (1<<1)
-///from base of atom/attack_ghost(): (mob/dead/observer/ghost)
-#define COMSIG_ATOM_ATTACK_GHOST "atom_attack_ghost"
-///from base of atom/attack_hand(): (mob/user)
-#define COMSIG_ATOM_ATTACK_HAND "atom_attack_hand"
-///from base of atom/attack_paw(): (mob/user)
-#define COMSIG_ATOM_ATTACK_PAW "atom_attack_paw"
 ///from base of obj/item/attack(): (/mob/living/target, /mob/living/user)
 #define COMSIG_ITEM_ATTACK "item_attack"
 ///from base of obj/item/attack_self(): (/mob)

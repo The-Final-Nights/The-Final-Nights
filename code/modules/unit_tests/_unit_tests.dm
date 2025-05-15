@@ -101,6 +101,7 @@
 #include "container_sanity.dm"
 #include "create_and_destroy.dm"
 #include "designs.dm"
+#include "dcs_check_list_arguments.dm"
 #include "emoting.dm"
 #include "focus_only_tests.dm"
 #include "heretic_knowledge.dm"

@@ -1,8 +1,8 @@
 /** Object integrity regeneration element added by alien alloy.
  */
 /datum/element/obj_regen
-	element_flags = ELEMENT_BESPOKE | ELEMENT_DETACH
-	id_arg_index = 2
+	element_flags = ELEMENT_BESPOKE | ELEMENT_DETACH_ON_HOST_DESTROY
+	argument_hash_start_idx = 2
 	/// The rate of regeneration as a function of maximum integrity.
 	var/rate
 	/// The objects that are regenerating due to this element.
@@ -28,7 +28,8 @@
 		processing |= target
 
 /datum/element/obj_regen/Detach(obj/target)
-	UnregisterSignal(target, COMSIG_OBJ_TAKE_DAMAGE)
+	. = ..()
+	UnregisterSignal(target, COMSIG_ATOM_TAKE_DAMAGE)
 	processing -= target
 	if(!length(processing))
 		STOP_PROCESSING(SSobj, src)
