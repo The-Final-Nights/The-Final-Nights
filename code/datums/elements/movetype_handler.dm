@@ -9,7 +9,7 @@
  * before adding them to non-living movables.
  */
 /datum/element/movetype_handler
-	element_flags = ELEMENT_DETACH
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 
 	var/list/attached_atoms = list()
 	var/list/paused_floating_anim_atoms = list()
@@ -22,8 +22,8 @@
 		return
 
 	var/atom/movable/movable_target = target
-	RegisterSignal(movable_target, GLOB.movement_type_addtrait_signals, PROC_REF(on_movement_type_trait_gain))
-	RegisterSignal(movable_target, GLOB.movement_type_removetrait_signals, PROC_REF(on_movement_type_trait_loss))
+	RegisterSignals(movable_target, GLOB.movement_type_addtrait_signals, PROC_REF(on_movement_type_trait_gain))
+	RegisterSignals(movable_target, GLOB.movement_type_removetrait_signals, PROC_REF(on_movement_type_trait_loss))
 	RegisterSignal(movable_target, SIGNAL_ADDTRAIT(TRAIT_NO_FLOATING_ANIM), PROC_REF(on_no_floating_anim_trait_gain))
 	RegisterSignal(movable_target, SIGNAL_REMOVETRAIT(TRAIT_NO_FLOATING_ANIM), PROC_REF(on_no_floating_anim_trait_loss))
 	RegisterSignal(movable_target, COMSIG_PAUSE_FLOATING_ANIM, PROC_REF(pause_floating_anim))
@@ -33,13 +33,15 @@
 		DO_FLOATING_ANIM(movable_target)
 
 /datum/element/movetype_handler/Detach(datum/source)
-	UnregisterSignal(source, list(
-		GLOB.movement_type_addtrait_signals,
-		GLOB.movement_type_removetrait_signals,
+	var/list/signals_to_remove = list(
 		SIGNAL_ADDTRAIT(TRAIT_NO_FLOATING_ANIM),
 		SIGNAL_REMOVETRAIT(TRAIT_NO_FLOATING_ANIM),
 		COMSIG_PAUSE_FLOATING_ANIM
-	))
+	)
+	signals_to_remove += GLOB.movement_type_addtrait_signals
+	signals_to_remove += GLOB.movement_type_removetrait_signals
+	UnregisterSignal(source, signals_to_remove)
+
 	attached_atoms -= source
 	paused_floating_anim_atoms -= source
 	stop_floating(source)
