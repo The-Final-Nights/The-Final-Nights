@@ -1,6 +1,6 @@
 /datum/element/empprotection
-	element_flags = ELEMENT_DETACH | ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY | ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/flags = NONE
 
 /datum/element/empprotection/Attach(datum/target, _flags)
