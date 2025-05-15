@@ -71,7 +71,7 @@
 		adjusted_climb_time *= 0.8
 	var/datum/weakref/climbed_thing_ref = WEAKREF(climbed_thing)
 	var/datum/weakref/user_ref = WEAKREF(user)
-	LAZYADDASSOC(current_climbers, climbed_thing_ref, user_ref)
+	LAZYADDASSOCLIST(current_climbers, climbed_thing_ref, user_ref)
 	if(!do_after(user, adjusted_climb_time, climbed_thing) || QDELETED(climbed_thing) || QDELETED(user) || HAS_TRAIT(user, TRAIT_LEANING))
 		LAZYREMOVEASSOC(current_climbers, climbed_thing_ref, user_ref)
 		return
