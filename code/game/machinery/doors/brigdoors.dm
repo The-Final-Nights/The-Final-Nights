@@ -59,8 +59,6 @@
 			if(C.id == id)
 				targets += C
 
-	if(!targets.len)
-		obj_break()
 	update_appearance()
 
 

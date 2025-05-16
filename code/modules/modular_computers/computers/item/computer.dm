@@ -160,10 +160,10 @@
 
 /obj/item/modular_computer/examine(mob/user)
 	. = ..()
-	if(obj_integrity <= integrity_failure * max_integrity)
-		. += "<span class='danger'>It is heavily damaged!</span>"
-	else if(obj_integrity < max_integrity)
-		. += "<span class='warning'>It is damaged.</span>"
+	if(atom_integrity <= integrity_failure * max_integrity)
+		. += span_danger("It is heavily damaged!")
+	else if(atom_integrity < max_integrity)
+		. += span_warning("It is damaged.")
 
 	. += get_modular_computer_parts_examine(user)
 
@@ -178,7 +178,7 @@
 
 	if(enabled)
 		. += active_program?.program_icon_state || icon_state_menu
-	if(obj_integrity <= integrity_failure * max_integrity)
+	if(atom_integrity <= integrity_failure * max_integrity)
 		. += "bsod"
 		. += "broken"
 
@@ -192,7 +192,7 @@
 
 /obj/item/modular_computer/proc/turn_on(mob/user)
 	var/issynth = issilicon(user) // Robots and AIs get different activation messages.
-	if(obj_integrity <= integrity_failure * max_integrity)
+	if(atom_integrity <= integrity_failure * max_integrity)
 		if(issynth)
 			to_chat(user, "<span class='warning'>You send an activation signal to \the [src], but it responds with an error code. It must be damaged.</span>")
 		else
@@ -228,7 +228,7 @@
 		last_power_usage = 0
 		return
 
-	if(obj_integrity <= integrity_failure * max_integrity)
+	if(atom_integrity <= integrity_failure * max_integrity)
 		shutdown_computer()
 		return
 
@@ -462,8 +462,8 @@
 		return
 
 	if(W.tool_behaviour == TOOL_WELDER)
-		if(obj_integrity == max_integrity)
-			to_chat(user, "<span class='warning'>\The [src] does not require repairs.</span>")
+		if(atom_integrity == max_integrity)
+			to_chat(user, span_warning("\The [src] does not require repairs."))
 			return
 
 		if(!W.tool_start_check(user, amount=1))
@@ -471,8 +471,8 @@
 
 		to_chat(user, "<span class='notice'>You begin repairing damage to \the [src]...</span>")
 		if(W.use_tool(src, user, 20, volume=50, amount=1))
-			obj_integrity = max_integrity
-			to_chat(user, "<span class='notice'>You repair \the [src].</span>")
+			atom_integrity = max_integrity
+			to_chat(user, span_notice("You repair \the [src]."))
 		return
 
 	..()

@@ -1,0 +1,6 @@
+author: "anything86"
+delete-after: True
+changes:
+  - balance: "Incendiary ammo now has a limit to how much it can set you on fire."
+  - balance: "Clothing is no longer incredibly flammable."
+  - balance: "Rolling to extinguish yourself is now a knockdown instead of a stun."

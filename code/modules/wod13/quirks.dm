@@ -204,6 +204,20 @@ Dancer
 	gain_text = "<span class='warning'>You feel poorer.</span>"
 	lose_text = "<span class='notice'>You feel hope for your future finances.</span>"
 
+/datum/quirk/debtor/add()
+	. = ..()
+	if(!ishuman(quirk_holder))
+		return
+	var/mob/living/carbon/human/debtor = quirk_holder
+	for(var/datum/vtm_bank_account/account as anything in GLOB.bank_account_list)
+		if(debtor.bank_id != account.bank_id)
+			continue
+		if(debtor.clane?.name == CLAN_VENTRUE)
+			account.balance = 5 // Extra loss of dignitas.
+		else
+			account.balance = floor(account.balance * 0.5)
+		break
+
 /datum/quirk/messy_eater
 	name = "Messy Eater"
 	desc = "Blood doesn't make it in around your fangs correctly. Create bloodstains when you feed, and reduce your blood intake."
@@ -240,6 +254,21 @@ Dancer
 	value = 0
 	gain_text = "<span class='warning'>You feel legally unprepared.</span>"
 	lose_text = "<span class='notice'>You feel bureaucratically legitimate.</span>"
+
+/datum/quirk/illegal_identity/add()
+	. = ..()
+	if(!ishuman(quirk_holder))
+		return
+	var/mob/living/carbon/human/debtor = quirk_holder
+	var/obj/item/passport/passport = locate() in debtor // In pockets
+	if(!passport && debtor.back)
+		passport = locate() in debtor.back // In backpack
+	if(passport && passport.owner == debtor.real_name)
+		passport.fake = TRUE
+		if(debtor.dna?.species)
+			passport.owner = debtor.dna.species.random_name(debtor.gender, unique = TRUE)
+		else
+			passport.owner = random_unique_name(debtor.gender)
 
 /datum/quirk/potent_blood
 	name = "Potent Blood"
@@ -337,8 +366,8 @@ Dancer
 
 ///Very similar to squish, but for dwarves and shorties
 /datum/element/dwarfism
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
@@ -381,8 +410,8 @@ Dancer
 
 
 /datum/element/children
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
@@ -633,8 +662,8 @@ Dancer
 
 ///Very similar to squish, but for dwarves and shorties
 /datum/element/giantism
-	element_flags = ELEMENT_DETACH|ELEMENT_BESPOKE
-	id_arg_index = 2
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
+	argument_hash_start_idx = 2
 	var/comsig
 	var/list/attached_targets = list()
 
