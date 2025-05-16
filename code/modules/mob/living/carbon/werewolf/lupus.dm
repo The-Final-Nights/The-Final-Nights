@@ -12,8 +12,9 @@
 //	dextrous = FALSE
 //	speed = -1.5     doesn't work on carbons
 //	var/move_delay_add = -1.5 // movement delay to add    also didn't work
-	melee_damage_lower = 15
-	melee_damage_upper = 35
+	melee_damage_lower = 30
+	melee_damage_upper = 30
+	armour_penetration = 35
 	health = 150
 	maxHealth = 150
 	werewolf_armor = 10

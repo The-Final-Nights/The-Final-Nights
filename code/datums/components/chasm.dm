@@ -22,7 +22,7 @@
 		))
 
 /datum/component/chasm/Initialize(turf/target)
-	RegisterSignal(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_ENTERED), PROC_REF(Entered))
+	RegisterSignals(parent, list(COMSIG_MOVABLE_CROSSED, COMSIG_ATOM_ENTERED), PROC_REF(Entered))
 	target_turf = target
 	START_PROCESSING(SSobj, src) // process on create, in case stuff is still there
 

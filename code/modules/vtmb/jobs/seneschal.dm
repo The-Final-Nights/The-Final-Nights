@@ -172,8 +172,8 @@
 	display_order = JOB_DISPLAY_ORDER_TOWERWORK
 	bounty_types = CIV_JOB_SEC
 	known_contacts = list("Prince", "Sheriff", "Seneschal")
-	allowed_species = list("Ghoul", "Human")
-
+	allowed_species = list("Ghoul", "Human", "Vampire")
+	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Kiasyd", "Cappadocian", "Tzimisce")
 	duty = "You work directly for the Millenium Tower and its administrative staff in a variety of ways, you may even be a personal retainer of one of the top three, to the point that any oddities that you may see over night or hear are either things you are already aware or you simply laugh them off and try not to think about it."
 	minimal_masquerade = 4
 	experience_addition = 10
