@@ -17,7 +17,7 @@
 	var/squeak = TRUE
 
 /obj/vehicle/sealed/mecha/combat/honker/get_stats_part(mob/user)
-	var/integrity = obj_integrity/max_integrity*100
+	var/integrity = atom_integrity/max_integrity*100
 	var/cell_charge = get_charge()
 	var/output = {"[report_internal_damage()]
 						[integrity<30?"<font color='red'><b>DAMAGE LEVEL CRITICAL</b></font><br>":null]

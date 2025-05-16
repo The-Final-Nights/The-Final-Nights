@@ -243,6 +243,30 @@
 #define COMSIG_LIVING_START_PULL "living_start_pull"
 ///called on /living when someone is pulled (mob/living/puller)
 #define COMSIG_LIVING_GET_PULLED "living_start_pulled"
+///called on /living, when pull is attempted, but before it completes, from base of [/mob/living/start_pulling]: (atom/movable/thing, force)
+#define COMSIG_LIVING_TRY_PULL "living_try_pull"
+	#define COMSIG_LIVING_CANCEL_PULL (1 << 0)
+///from base of [/atom/proc/interact]: (mob/user)
+#define COMSIG_ATOM_UI_INTERACT "atom_ui_interact"
+///called on /living when attempting to pick up an item, from base of /mob/living/put_in_hand_check(): (obj/item/I)
+#define COMSIG_LIVING_TRY_PUT_IN_HAND "living_try_put_in_hand"
+	/// Can't pick up
+	#define COMPONENT_LIVING_CANT_PUT_IN_HAND (1<<0)
+/// from /atom/proc/atom_break: ()
+#define COMSIG_ATOM_BREAK "atom_break"
+/// from base of [/atom/proc/atom_fix]: ()
+#define COMSIG_ATOM_FIX "atom_fix"
+///from base of [/atom/proc/update_integrity]: (old_value, new_value)
+#define COMSIG_ATOM_INTEGRITY_CHANGED "atom_integrity_changed"
+///from base of [/atom/proc/take_damage]: (damage_amount, damage_type, damage_flag, sound_effect, attack_dir, aurmor_penetration)
+#define COMSIG_ATOM_TAKE_DAMAGE "atom_take_damage"
+	/// Return bitflags for the above signal which prevents the atom taking any damage.
+	#define COMPONENT_NO_TAKE_DAMAGE (1<<0)
+
+///Basic mob signals
+///Called on /basic when updating its speed, from base of /mob/living/basic/update_basic_mob_varspeed(): ()
+#define POST_BASIC_MOB_UPDATE_VARSPEED "post_basic_mob_update_varspeed"
+
 
 /// from /datum/component/singularity/proc/can_move(), as well as /obj/energy_ball/proc/can_move()
 /// if a callback returns `SINGULARITY_TRY_MOVE_BLOCK`, then the singularity will not move to that turf
@@ -375,7 +399,7 @@
 #define COMSIG_MOVABLE_LIGHT_OVERLAY_TOGGLE_ON "movable_light_overlay_toggle_on"
 ///called when the movable's glide size is updated: (new_glide_size)
 #define COMSIG_MOVABLE_UPDATE_GLIDE_SIZE "movable_glide_size"
-///Called when a movable is hit by a plunger in layer mode, from /obj/item/plunger/attack_obj()
+///Called when a movable is hit by a plunger in layer mode, from /obj/item/plunger/attack_atom()
 #define COMSIG_MOVABLE_CHANGE_DUCT_LAYER "movable_change_duct_layer"
 
 // /mob signals
@@ -570,12 +594,18 @@
 ///Called when someone attempts to cuff a carbon
 #define COMSIG_CARBON_CUFF_ATTEMPTED "carbon_attempt_cuff"
 
-// /mob/living/simple_animal/hostile signals
-#define COMSIG_HOSTILE_ATTACKINGTARGET "hostile_attackingtarget"
-	#define COMPONENT_HOSTILE_NO_ATTACK (1<<0)
 
 // /obj signals
 
+///before attackingtarget has happened, source is the attacker and target is the attacked
+#define COMSIG_HOSTILE_PRE_ATTACKINGTARGET "hostile_pre_attackingtarget"
+	#define COMPONENT_HOSTILE_NO_ATTACK (1<<0) //cancel the attack, only works before attack happens
+///after attackingtarget has happened, source is the attacker and target is the attacked, extra argument for if the attackingtarget was successful
+#define COMSIG_HOSTILE_POST_ATTACKINGTARGET "hostile_post_attackingtarget"
+///from base of mob/living/simple_animal/hostile/regalrat: (mob/living/simple_animal/hostile/regalrat/king)
+#define COMSIG_RAT_INTERACT "rat_interaction"
+
+// /obj signals
 ///from base of [/obj/proc/take_damage]: (damage_amount, damage_type, damage_flag, sound_effect, attack_dir, aurmor_penetration)
 #define COMSIG_OBJ_TAKE_DAMAGE	"obj_take_damage"
 ///from base of obj/deconstruct(): (disassembled)
@@ -589,7 +619,7 @@
 
 // /obj/machinery signals
 
-///from /obj/machinery/obj_break(damage_flag): (damage_flag)
+///from /obj/machinery/atom_break(damage_flag): (damage_flag)
 #define COMSIG_MACHINERY_BROKEN "machinery_broken"
 ///from base power_change() when power is lost
 #define COMSIG_MACHINERY_POWER_LOST "machinery_power_lost"
@@ -1021,7 +1051,9 @@
 #define COMSIG_ITEM_ATTACK "item_attack"
 ///from base of obj/item/attack_self(): (/mob)
 #define COMSIG_ITEM_ATTACK_SELF "item_attack_self"
-///from base of obj/item/attack_obj(): (/obj, /mob)
+//from base of obj/item/attack_self_secondary(): (/mob)
+#define COMSIG_ITEM_ATTACK_SELF_SECONDARY "item_attack_self_secondary"
+///from base of obj/item/attack_atom(): (/obj, /mob)
 #define COMSIG_ITEM_ATTACK_OBJ "item_attack_obj"
 ///from base of obj/item/pre_attack(): (atom/target, mob/user, params)
 #define COMSIG_ITEM_PRE_ATTACK "item_pre_attack"

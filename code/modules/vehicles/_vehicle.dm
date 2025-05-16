@@ -43,8 +43,8 @@
 /obj/vehicle/examine(mob/user)
 	. = ..()
 	if(resistance_flags & ON_FIRE)
-		. += "<span class='warning'>It's on fire!</span>"
-	var/healthpercent = obj_integrity/max_integrity * 100
+		. += span_warning("It's on fire!")
+	var/healthpercent = atom_integrity/max_integrity * 100
 	switch(healthpercent)
 		if(50 to 99)
 			. += "It looks slightly damaged."

@@ -19,7 +19,7 @@
 	make_ridable()
 	AddComponent(/datum/component/simple_rotation) //Since it's technically a chair I want it to have chair properties
 
-/obj/vehicle/ridden/wheelchair/obj_destruction(damage_flag)
+/obj/vehicle/ridden/wheelchair/atom_destruction(damage_flag)
 	new /obj/item/stack/rods(drop_location(), 1)
 	new /obj/item/stack/sheet/metal(drop_location(), 1)
 	..()

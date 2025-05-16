@@ -91,14 +91,14 @@
  * Called on an object being hit by an item
  *
  * Arguments:
- * * obj/item/W - The item hitting this atom
+ * * obj/item/attacking_item - The item hitting this atom
  * * mob/user - The wielder of this item
  * * params - click params such as alt/shift etc
  *
  * See: [/obj/item/proc/melee_attack_chain]
  */
-/atom/proc/attackby(obj/item/W, mob/user, params)
-	if(SEND_SIGNAL(src, COMSIG_PARENT_ATTACKBY, W, user, params) & COMPONENT_NO_AFTERATTACK)
+/atom/proc/attackby(obj/item/attacking_item, mob/user, params)
+	if(SEND_SIGNAL(src, COMSIG_PARENT_ATTACKBY, attacking_item, user, params) & COMPONENT_NO_AFTERATTACK)
 		return TRUE
 	return FALSE
 
@@ -124,7 +124,7 @@
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 /obj/attackby(obj/item/I, mob/living/user, params)
-	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_obj(src, user))
+	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_atom(src, user, params))
 
 /mob/living/attackby(obj/item/I, mob/living/user, params)
 	if(..())
@@ -193,9 +193,9 @@
 /obj/item/proc/attack_secondary(mob/living/victim, mob/living/user, params)
 	return SECONDARY_ATTACK_CALL_NORMAL
 
-/// The equivalent of the standard version of [/obj/item/proc/attack] but for object targets.
-/obj/item/proc/attack_obj(obj/O, mob/living/user)
-	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_OBJ, O, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
+/// The equivalent of the standard version of [/obj/item/proc/attack] but for non mob targets.
+/obj/item/proc/attack_atom(atom/attacked_atom, mob/living/user, params)
+	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_OBJ, attacked_atom, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return
 	if(item_flags & NOBLUDGEON)
 		return
@@ -276,7 +276,6 @@
 
 
 	return TRUE
-
 
 /**
  * Last proc in the [/obj/item/proc/melee_attack_chain]

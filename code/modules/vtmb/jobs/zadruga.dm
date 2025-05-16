@@ -20,7 +20,6 @@
 	duty = "You were born in servitude to the Master of the Manor: your father served the Voivode, as did his father. Now, you carry their blood, and with it their responsibilities."
 	experience_addition = 20
 	minimal_masquerade = 2
-	my_contact_is_important = FALSE
 	known_contacts = list("Prince", "Baron", "Sheriff")
 
 
@@ -34,7 +33,7 @@
 	uniform = /obj/item/clothing/under/vampire/bogatyr
 	suit = /obj/item/clothing/suit/vampire/jacket/punk
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/vamp/phone/zadruga
 	r_pocket = /obj/item/cockclock
 	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
