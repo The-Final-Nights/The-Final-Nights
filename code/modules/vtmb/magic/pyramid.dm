@@ -221,7 +221,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 // **************************************************************** WHY IS THIS IN PYRAMID.DM *************************************************************
 
@@ -235,7 +234,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/structure/tzijelly
 	name = "jelly thing"
@@ -247,7 +245,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 // **************************************************************** ARTIFACT IDENTIFICATION *************************************************************
 
