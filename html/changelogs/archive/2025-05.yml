@@ -122,3 +122,45 @@
       ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
       generally represent how a player might be affected by the changes rather than
       a summary of the PR''s contents. -->'
+2025-05-15:
+  necti-dev:
+  - bugfix: LOOC works again. To avoid collision, hotkeys to look up and down are
+      bound by default to "I" (upper-case i) and "K".
+2025-05-16:
+  Magisterium2022:
+  - rscadd: Added new parts for fleshcrafting
+  - rscadd: Added armblade at boneshaping (Vicissitude 4)
+  - rscadd: Added new craftable implants
+  - balance: rebalanced speed of a few augments, allowing for faster flying and movement
+      in some cases
+  - code_imp: modified Vicissitude, Augments, Melee Weapon, and Tzimisce files.
+  Sparrowbird611:
+  - balance: Hispo form moves faster.
+  - balance: Makes garou forms do consistent damage. This makes them stronger in melee.
+  - balance: Reduces AP on hispo and lupus to more reasonable levels.
+  - bugfix: Prevents crinos from being one punch KO'd by unarmed attacks.
+  XeonMations:
+  - code_imp: obj integrity moved to atom level, no player facing changes should be
+      seen
+  anything86:
+  - balance: Incendiary ammo now has a limit to how much it can set you on fire.
+  - balance: Clothing is no longer incredibly flammable.
+  - balance: Rolling to extinguish yourself is now a knockdown instead of a stun.
+  necti-dev:
+  - rscadd: Passports now show your name on them, they actually identify you. Unless
+      you have the Illegal Identity quirk and hail from Cobrastan.
+  - rscadd: Decapitation no longer happens by damage alone. One must aggro-grab with
+      harm intent, targeting the head, with certain cutting implements (those that
+      have the butchering component). It will only works after the throat has been
+      sliced properly. Victims needs not be dead for this to happen.
+  - rscadd: Debtor quirk now works as advertised.
+  - rscadd: Ventrue no longer get $100 in their backpacks. Instead, their bank accounts
+      are fatter.
+  - rscadd: Ventrue with the Debtor quirk get an extra loss of dignitas, reflected
+      in their savings.
+  - rscadd: Vampires have in their memory the phone contact of their Clane leader,
+      when there is one.
+  - rscadd: More vampire leaders should now have each other's phone contacts, properly
+      updated on joining.
+  - rscadd: Triads, Giovanni, Tremere, Anarchs, Millenium Tower, Lasombra and Tzmisce
+      networks added. Members have each other's contacts.

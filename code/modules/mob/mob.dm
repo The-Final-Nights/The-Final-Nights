@@ -747,11 +747,9 @@
 //			return
 
 	if(!usr.can_respawn())
-		if(istype(usr.client.mob, /mob/dead/observer))
-			var/mob/dead/observer/obs = usr.client.mob
-			if(obs.auspex_ghosted)
-				to_chat(usr, "<span class='notice'>You cannot respawn while astrally projecting!</span>")
-				return
+		if(isavatar(usr.client.mob))
+			to_chat(usr, span_notice("You cannot respawn while astrally projecting!"))
+			return
 
 		to_chat(usr, "<span class='notice'>You need to wait [DisplayTimeText(GLOB.respawn_timers[usr.client.ckey] + 10 MINUTES - world.time)] before you can respawn.</span>")
 

@@ -91,8 +91,6 @@
 			return
 
 	var/mob/dead/observer/O = src
-	if(isobserver(src) && O.auspex_ghosted) //[Lucifernix] - Makes it so you can't talk to ghosts in auspex
-		return
 	if(isobserver(src) && O.deadchat_name)
 		name = "[O.deadchat_name]"
 	else
