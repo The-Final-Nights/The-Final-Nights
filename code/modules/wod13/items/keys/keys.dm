@@ -327,6 +327,13 @@
 	)
 	color = "#99620e"
 
+/obj/item/vamp/keys/sabbat
+	name = "Dirty keys"
+	accesslocks = list(
+		"sabbat"
+	)
+	color = "#6a2e1d"
+
 //===========================CLINIC KEYS===========================
 /obj/item/vamp/keys/clinic
 	name = "Clinic keys"

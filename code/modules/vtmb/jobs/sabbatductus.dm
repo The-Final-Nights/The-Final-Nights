@@ -24,6 +24,7 @@
 	jobtype = /datum/job/vamp/sabbatductus
 	l_pocket = /obj/item/vamp/phone
 	id = /obj/item/cockclock
+	r_pocket = /obj/item/vamp/keys/sabbat
 
 
 

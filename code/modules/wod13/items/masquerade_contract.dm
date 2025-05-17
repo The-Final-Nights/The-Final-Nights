@@ -14,6 +14,8 @@
 	var/list/masq_breakers = list()
 	if(GLOB.masquerade_breakers_list.len)
 		for(var/mob/living/carbon/human/breakor in GLOB.masquerade_breakers_list)
+			if(breakor.mind && (breakor.mind.has_antag_datum(/datum/antagonist/sabbatist) || breakor.mind.has_antag_datum(/datum/antagonist/sabbatductus) || breakor.mind.has_antag_datum(/datum/antagonist/sabbatpriest)))
+				continue
 			masq_breakers += breakor
 
 	if(masq_breakers.len)

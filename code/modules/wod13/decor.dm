@@ -1540,29 +1540,95 @@
 				burying = FALSE
 				if(icon_state == "pit0")
 					var/dead_amongst = FALSE
+					var/kindred_buried = FALSE
+					var/list/buried_kindred = list() // Track buried kindred for frenzy
+
 					for(var/mob/living/L in get_turf(src))
-						L.forceMove(src)
+						L.forceMove(src) // Move the mob into the pit
 						if(L.stat == DEAD)
 							dead_amongst = TRUE
-						icon_state = "pit1"
-						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
-					if(!dead_amongst)
+
+						// Check if the buried mob is kindred
+						if(istype(L, /mob/living/carbon) && ishuman(L))
+							var/mob/living/carbon/human/H = L
+							if(istype(H.dna.species, /datum/species/kindred))
+								kindred_buried = TRUE
+								buried_kindred += L
+								// Visual message for being buried
+								to_chat(L, "<span class='userdanger'>You are buried alive! The weight of the earth presses down on you, and panic begins to rise!</span>")
+								user.visible_message("<span class='warning'>[L] struggles as they are buried!</span>")
+
+					// Update the pit state
+					icon_state = "pit1"
+					user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
+
+					if(dead_amongst)
+						call_dharma("respect", user)
+
+					// Process each buried kindred
+					for(var/mob/living/carbon/K in buried_kindred)
+						// Wait 20 seconds, then have the kindred enter frenzy and dig out
+						addtimer(CALLBACK(src, PROC_REF(kindred_frenzy_escape), K), 20 SECONDS)
+
+					// Only refill the pit if no one is buried
+					if(!dead_amongst && !kindred_buried)
 						user.visible_message("<span class='warning'>[user] refills [src].</span>", "<span class='warning'>You refill [src].</span>")
 						qdel(src)
 				else
+					// Digging up the pit
 					var/dead_amongst = FALSE
-					for(var/mob/living/L in src)
+					for(var/mob/living/L in src) // This ensures we actually get the mobs from inside the pit
 						L.forceMove(get_turf(src))
 						if(L.stat == DEAD)
 							dead_amongst = TRUE
+
 					icon_state = "pit0"
-					user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
+					user.visible_message("<span class='warning'>[user] digs open [src].</span>", "<span class='warning'>You dig open [src].</span>")
+
 					if(dead_amongst)
 						call_dharma("disrespect", user)
 			else
 				burying = FALSE
+
+/// Process for kindred to enter frenzy and escape the burial pit
+/obj/structure/bury_pit/proc/kindred_frenzy_escape(mob/living/carbon/kindred)
+	if(!kindred || !istype(kindred) || kindred.stat == DEAD || !(kindred in src))
+		return
+
+	kindred.enter_frenzymod()
+	to_chat(kindred, "<span class='userdanger'>The Beast within you awakens with primal fury! You will NOT be contained!</span>")
+
+	//playsound(src, 'sound/effects/gravesoil.ogg', 100, TRUE)
+	visible_message("<span class='danger'>[src] begins to shake violently as something struggles underneath!</span>")
+
+	// After a brief delay, the kindred breaks free
+	addtimer(CALLBACK(src, PROC_REF(complete_kindred_escape), kindred), 5 SECONDS)
+
+	// Exit frenzy after 30 seconds
+	addtimer(CALLBACK(kindred, TYPE_PROC_REF(/mob/living/carbon, exit_frenzymod)), 30 SECONDS)
+
+/// Completes the kindred's escape from the burial pit
+/obj/structure/bury_pit/proc/complete_kindred_escape(mob/living/carbon/kindred)
+	if(!kindred || !istype(kindred) || !(kindred in src))
+		return
+	kindred.SetParalyzed(0)
+	kindred.SetStun(0)
+	kindred.SetUnconscious(0)
+	kindred.SetSleeping(0)
+	kindred.SetImmobilized(0)
+
+	kindred.adjustBruteLoss(-50)
+	kindred.adjustFireLoss(-50)
+
+	// Move the kindred out of the pit
+	kindred.forceMove(get_turf(src))
+	icon_state = "pit0" // Pit is now open
+
+	// Visual effects
+	visible_message("<span class='danger'>[kindred] bursts from [src] in a frenzy, dirt flying everywhere!</span>")
+	//playsound(src, 'sound/effects/explosion1.ogg', 50, TRUE)
+
+
 
 /obj/structure/bury_pit/container_resist_act(mob/living/user)
 	if(!burying)

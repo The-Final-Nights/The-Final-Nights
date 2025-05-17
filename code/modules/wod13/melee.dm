@@ -664,7 +664,7 @@
 		return
 	if(!target.IsStun() && prob(25))
 		visible_message("<span class='warning'>[user] bonks [src]'s head!</span>", "<span class='warning'>You bonk[target]'s head!</span>")
-		target.Stun(5)
+		target.Stun(3 SECONDS)
 		target.drop_all_held_items()
 
 /obj/item/melee/vampirearms/katana/kosa

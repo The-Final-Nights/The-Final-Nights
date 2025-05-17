@@ -215,7 +215,7 @@
 //	Formatting is the same as food.
 
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet
+/obj/item/reagent_containers/food/drinks/silver_goblet
 	name = "silver goblet"
 	desc = "A gleaming goblet used in ancient vampire rites."
 	icon_state = "pewter_cup"
@@ -233,22 +233,22 @@
 	reagent_flags = OPENCONTAINER // Set the reagent flags to make it always open
 	var/list/blood_donors = list() // Store all who poured blood in the cup
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet/is_drainable()
+/obj/item/reagent_containers/food/drinks/silver_goblet/is_drainable()
 	return TRUE
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet/New()
+/obj/item/reagent_containers/food/drinks/silver_goblet/New()
 	..()
 	reagents = new /datum/reagents(src.volume)
 	blood_donors = list() // Initialize the list
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet/update_icon_state()
+/obj/item/reagent_containers/food/drinks/silver_goblet/update_icon_state()
 	if(reagents && reagents.has_reagent(/datum/reagent/blood))
 		icon_state = "pewter_cup_filled_blood"
 	else
 		icon_state = "pewter_cup"
 	return TRUE // Return TRUE instead of ..() to ensure proper icon updating
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet/attack_self(mob/living/carbon/human/user)
+/obj/item/reagent_containers/food/drinks/silver_goblet/attack_self(mob/living/carbon/human/user)
 	if(!istype(user))
 		return ..()
 
@@ -293,7 +293,7 @@
 
 	update_icon_state()
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet/on_reagent_change(changetype)
+/obj/item/reagent_containers/food/drinks/silver_goblet/on_reagent_change(changetype)
 	. = ..()
 	update_icon_state()
 
@@ -301,7 +301,7 @@
 	if(!reagents.has_reagent(/datum/reagent/blood))
 		blood_donors.Cut()
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet/attack(mob/living/carbon/M, mob/user)
+/obj/item/reagent_containers/food/drinks/silver_goblet/attack(mob/living/carbon/M, mob/user)
 	if(!reagents.has_reagent(/datum/reagent/blood))
 		return ..()
 
@@ -317,7 +317,7 @@
 		// If multiple donors, it's a proper Vaulderie ritual
 		if(length(blood_donors) >= 2)
 			// Ask confirmation via tgui_alert
-			var/choice = tgui_alert(M, "Do you wish to take part in the Vaulderie? This will bind you to the other participants.", "Vaulderie Ritual", list("Yes", "No"), 10 SECONDS)
+			var/choice = tgui_alert(M, "Do you wish to take part in the Vaulderie? This will bind you to the other participants, and remove any previous bonds...", "Vaulderie Ritual", list("Yes", "No"), 10 SECONDS)
 			if(choice != "Yes")
 				to_chat(M, span_warning("You decide not to participate in the Vaulderie."))
 				return
@@ -348,7 +348,7 @@
 			for(var/mob/living/carbon/human/donor in blood_donors)
 				if(M != donor) // Don't blood bond to self
 					M.apply_status_effect(STATUS_EFFECT_INLOVE, donor)
-					to_chat(M, span_warning("You feel a strange connection to <b>[donor]</b> forming as their blood mingles with yours!"))
+					to_chat(M, span_warning("You feel a strange connection to <b>[donor]</b> forming as their blood mingles with yours! You feel your previous blood bonds vanishing..."))
 					to_chat(donor, span_notice("You sense that <b>[M]</b> has consumed your blood and is now bound to you."))
 					M.visible_message(span_notice("[M]'s eyes flash briefly as they become bound to [donor]."), "", span_notice("Your eyes flash as the blood bond forms."))
 					playsound(M, 'sound/magic/smoke.ogg', 20, TRUE)
@@ -364,11 +364,11 @@
 					M.mind.add_antag_datum(new_sabbat)
 					antag_transferred = TRUE
 				else if(donor.mind.has_antag_datum(/datum/antagonist/sabbatpriest))
-					var/datum/antagonist/sabbatpriest/new_sabbat = new /datum/antagonist/sabbatpriest(M.mind)
+					var/datum/antagonist/sabbatpriest/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
 					M.mind.add_antag_datum(new_sabbat)
 					antag_transferred = TRUE
 				else if(donor.mind.has_antag_datum(/datum/antagonist/sabbatductus))
-					var/datum/antagonist/sabbatductus/new_sabbat = new /datum/antagonist/sabbatductus(M.mind)
+					var/datum/antagonist/sabbatductus/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
 					M.mind.add_antag_datum(new_sabbat)
 					antag_transferred = TRUE
 
@@ -376,16 +376,29 @@
 					to_chat(M, span_warning("<span class='danger'>Your mind floods with alien thoughts and philosophies. You now serve the Sabbat!</span>"))
 					break  // Only need to transfer one antag datum type
 
-/obj/item/reagent_containers/food/drinks/vaulderie_goblet/afterattack(obj/target, mob/user, proximity)
+/obj/item/reagent_containers/food/drinks/silver_goblet/afterattack(obj/target, mob/user, proximity)
 	if(!proximity || !check_allowed_items(target, 1))
 		return
 
-	if(target.is_refillable() && !istype(target, /obj/item/reagent_containers/food/drinks/vaulderie_goblet))
+	if(target.is_refillable() && !istype(target, /obj/item/reagent_containers/food/drinks/silver_goblet))
 		// If emptying into another container, reset the blood donors
 		if(reagents.total_volume > 0 && target.reagents.total_volume < target.reagents.maximum_volume)
 			blood_donors.Cut()
 
 	return ..()
+
+/obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet
+	name = "Vaulderie Goblet"
+	desc = "An obsidian-black goblet used in ancient vampire rites."
+	icon_state = "vaulderie_goblet"
+
+/obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet/update_icon_state()
+	if(reagents && reagents.has_reagent(/datum/reagent/blood))
+		icon_state = "vaulderie_goblet_filled"
+	else
+		icon_state = "vaulderie_goblet"
+	return TRUE // Return TRUE instead of ..() to ensure proper icon updating
+
 
 /obj/item/reagent_containers/food/drinks/coffee
 	name = "robust coffee"

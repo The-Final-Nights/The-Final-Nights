@@ -324,6 +324,10 @@
 	name = "Hospital - Psych Ward"
 	zone_type = "elysium"
 
+/area/vtm/sabbat_lair
+	name = "Interior"
+	zone_type = "elysium"
+
 /area/vtm/supply
 	name = "Supply Depot"
 	icon_state = "supply"
