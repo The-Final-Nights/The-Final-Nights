@@ -35,7 +35,7 @@
 	..()
 
 /obj/item/Initialize()
-	..()
+	. = ..()
 	if(isturf(loc) && onflooricon)
 		icon = onflooricon
 		update_appearance()
