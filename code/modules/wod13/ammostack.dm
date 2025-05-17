@@ -126,12 +126,12 @@
 /obj/projectile/beam/beam_rifle/vampire/vamp556mm/incendiary
 	armour_penetration = 0
 	damage = 35
-	var/fire_stacks = 4
+	var/fire_stacks = 2 //These always come in guns that fire in bursts.
 
 /obj/projectile/beam/beam_rifle/vampire/vamp556mm/incendiary/on_hit(atom/target, blocked = FALSE)
 	if(iscarbon(target))
 		var/mob/living/carbon/M = target
-		M.adjust_fire_stacks(fire_stacks)
+		M.adjust_fire_stacks(fire_stacks, 5) //No more than one roll.
 		M.IgniteMob()
 
 /obj/projectile/bullet/crossbow_bolt
