@@ -357,7 +357,7 @@
 	preload_cell_type = /obj/item/stock_parts/cell/high
 
 /obj/item/melee/baton/handtaser
-	name = "SNEKTEK Handheld Taser"
+	name = "\improper SNEKTEK Handheld Taser"
 	desc = "A small stun gun designed to momentarily incapacitate assailants. To avoid continuous misfire, the button has a safety and must be pressed every few seconds."
 	icon_state = "handtaser"
 	icon = 'modular_tfn/modules/taser_tfn13/taser.dmi'
@@ -371,7 +371,7 @@
 	throwforce = 2
 	throw_stun_chance = 5
 	preload_cell_type = /obj/item/stock_parts/cell
-	cell_hit_cost = 5
+	cell_hit_cost = 50
 	can_remove_cell = TRUE
 	stun_sound = 'sound/wod13/electric_zap.ogg'
 	activate_sound = 'sound/wod13/handtaser_activate.ogg'
