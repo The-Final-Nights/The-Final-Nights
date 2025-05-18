@@ -21,7 +21,6 @@
 //	minimum_character_age = 70 //Uncomment if age-restriction wanted.
 	minimum_vampire_age = 1
 
-	my_contact_is_important = TRUE
 	known_contacts = list(
 		"Prince",
 		"Sheriff",
@@ -48,7 +47,7 @@
 	suit = /obj/item/clothing/suit/vampire/jacket/punk
 	shoes = /obj/item/clothing/shoes/vampire
 	gloves = /obj/item/clothing/gloves/vampire/work
-	l_pocket = /obj/item/vamp/phone/barkeeper
+	l_pocket = /obj/item/vamp/phone/baron
 	r_pocket = /obj/item/vamp/keys/bar
 	backpack_contents = list(/obj/item/passport=1, /obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
 

@@ -162,14 +162,14 @@
 
 	add_fingerprint(user)
 
-	if(I.tool_behaviour == TOOL_WELDER && user.a_intent == INTENT_HELP)
-		if(obj_integrity < max_integrity)
-			if(!I.tool_start_check(user, amount=0))
+	if(I.tool_behaviour == TOOL_WELDER)
+		if(atom_integrity < max_integrity)
+			if(!I.tool_start_check(user, amount = 0))
 				return
 
-			to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
-			if(I.use_tool(src, user, 40, volume=50))
-				obj_integrity = max_integrity
+			to_chat(user, span_notice("You begin repairing [src]..."))
+			if(I.use_tool(src, user, 40, volume = 50))
+				atom_integrity = max_integrity
 				update_nearby_icons()
 				to_chat(user, "<span class='notice'>You repair [src].</span>")
 		else
@@ -295,23 +295,19 @@
 		QUEUE_SMOOTH_NEIGHBORS(src)
 
 //merges adjacent full-tile windows into one
-/obj/structure/window/update_overlays()
+/obj/structure/window/update_overlays(updates=ALL)
 	. = ..()
-	if(!QDELETED(src))
-		if(!fulltile)
-			return
+	if(QDELETED(src) || !fulltile)
+		return
 
-		var/ratio = obj_integrity / max_integrity
-		ratio = CEILING(ratio*4, 1) * 25
+	if(smoothing_flags & (SMOOTH_CORNERS|SMOOTH_BITMASK))
+		QUEUE_SMOOTH(src)
 
-		if(smoothing_flags & (SMOOTH_CORNERS|SMOOTH_BITMASK))
-			QUEUE_SMOOTH(src)
-
-		cut_overlay(crack_overlay)
-		if(ratio > 75)
-			return
-		crack_overlay = mutable_appearance('code/modules/wod13/32x48.dmi', "damage[ratio]", -(layer+0.1))
-		. += crack_overlay
+	var/ratio = atom_integrity / max_integrity
+	ratio = CEILING(ratio*4, 1) * 25
+	if(ratio > 75)
+		return
+	. += mutable_appearance('icons/obj/structures.dmi', "damage[ratio]", -(layer+0.1))
 
 /obj/structure/window/get_dumping_location(obj/item/storage/source,mob/user)
 	return null
@@ -562,7 +558,7 @@
 	name = "frosted window"
 	icon_state = "fwindow"
 
-/* Full Tile Windows (more obj_integrity) */
+/* Full Tile Windows (more atom_integrity) */
 
 /obj/structure/window/fulltile
 	icon = 'icons/obj/smooth_structures/window.dmi'
@@ -737,8 +733,8 @@
 
 /obj/structure/window/paperframe/examine(mob/user)
 	. = ..()
-	if(obj_integrity < max_integrity)
-		. += "<span class='info'>It looks a bit damaged, you may be able to fix it with some <b>paper</b>.</span>"
+	if(atom_integrity < max_integrity)
+		. += span_info("It looks a bit damaged, you may be able to fix it with some <b>paper</b>.")
 
 /obj/structure/window/paperframe/spawnDebris(location)
 	. = list(new /obj/item/stack/sheet/mineral/wood(location))
@@ -754,19 +750,18 @@
 		if(!QDELETED(src))
 			update_icon()
 
-/obj/structure/window/paperframe/update_icon()
+/obj/structure/window/paperframe/update_appearance(updates)
 	. = ..()
-	if(obj_integrity < max_integrity)
-		cut_overlay(paper)
-		add_overlay(torn)
-		set_opacity(FALSE)
-	else
-		cut_overlay(torn)
-		add_overlay(paper)
-		set_opacity(TRUE)
+	set_opacity(atom_integrity >= max_integrity)
+
+/obj/structure/window/paperframe/update_icon(updates=ALL)
+	. = ..()
 	if(smoothing_flags & (SMOOTH_CORNERS|SMOOTH_BITMASK))
 		QUEUE_SMOOTH(src)
 
+/obj/structure/window/paperframe/update_overlays()
+	. = ..()
+	. += (atom_integrity < max_integrity) ? torn : paper
 
 /obj/structure/window/paperframe/attackby(obj/item/W, mob/user)
 	if(W.get_temperature())
@@ -774,14 +769,14 @@
 		return
 	if(user.a_intent == INTENT_HARM)
 		return ..()
-	if(istype(W, /obj/item/paper) && obj_integrity < max_integrity)
-		user.visible_message("<span class='notice'>[user] starts to patch the holes in \the [src].</span>")
+	if(istype(W, /obj/item/paper) && atom_integrity < max_integrity)
+		user.visible_message(span_notice("[user] starts to patch the holes in \the [src]."))
 		if(do_after(user, 20, target = src))
-			obj_integrity = min(obj_integrity+4,max_integrity)
+			atom_integrity = min(atom_integrity+4,max_integrity)
 			qdel(W)
-			user.visible_message("<span class='notice'>[user] patches some of the holes in \the [src].</span>")
-			if(obj_integrity == max_integrity)
-				update_icon()
+			user.visible_message(span_notice("[user] patches some of the holes in \the [src]."))
+			if(atom_integrity == max_integrity)
+				update_appearance()
 			return
 	..()
 	update_icon()
