@@ -76,7 +76,7 @@
 	if(wielded)
 		if(istype(A, /obj/structure/window) || istype(A, /obj/structure/grille))
 			var/obj/structure/W = A
-			W.obj_destruction("fireaxe")
+			W.atom_destruction("fireaxe")
 
 /obj/item/melee/vampirearms/fireaxe/axetzi
 	icon = 'code/modules/wod13/48x32weapons.dmi'
@@ -881,3 +881,67 @@
 		grid_width = 2 GRID_BOXES
 		grid_height = 1 GRID_BOXES
 
+/obj/item/melee/vampirearms/tzimisce
+	name = "armblade"
+	desc = "A monstrous weapon, made out of sharpened bone."
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "armblade"
+	force = 35
+	w_class = WEIGHT_CLASS_BULKY
+	block_chance = 40
+	armour_penetration = 40
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 5
+	bare_wound_bonus = 25
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = TRUE
+
+/obj/item/melee/vampirearms/tzimisce/venom
+	name = "nematocyst whip"
+	desc = "An elongated tendril covered with stinging cells."
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "lasombra"
+	damtype = TOX
+	force = 16
+	w_class = WEIGHT_CLASS_BULKY
+	block_chance = 10
+	armour_penetration = 10
+	sharpness = SHARP_NONE
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 0
+	bare_wound_bonus = 0
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = TRUE
+
+/obj/item/melee/vampirearms/tzimisce/shock
+	name = "electrocyte whip"
+	desc = "An elongated tendril covered with electricity generating cells."
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "lasombra"
+	damtype = BURN
+	force = 8
+	w_class = WEIGHT_CLASS_BULKY
+	block_chance = 10
+	armour_penetration = 10
+	sharpness = SHARP_NONE
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 0
+	bare_wound_bonus = 0
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = TRUE
+
+/obj/item/melee/vampirearms/tzimisce/shock/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity)
+		return
+	if(isliving(target))
+		var/mob/living/L = target
+		L.adjustStaminaLoss(50)
+		L.Jitter(20)
+	return ..()

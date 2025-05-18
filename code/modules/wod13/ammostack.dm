@@ -54,6 +54,13 @@
 	name = ".45 ACP bullet"
 	damage = 24
 
+/obj/projectile/beam/beam_rifle/vampire/vamp45acp/HP
+	name = "45acp hollow point bullet"
+	damage = 25
+	armour_penetration = 0
+	bare_wound_bonus = 5
+	wound_bonus = 5
+
 /obj/projectile/beam/beam_rifle/vampire/vamp44
 	name = ".44 bullet"
 	damage = 30
@@ -119,12 +126,12 @@
 /obj/projectile/beam/beam_rifle/vampire/vamp556mm/incendiary
 	armour_penetration = 0
 	damage = 35
-	var/fire_stacks = 4
+	var/fire_stacks = 2 //These always come in guns that fire in bursts.
 
 /obj/projectile/beam/beam_rifle/vampire/vamp556mm/incendiary/on_hit(atom/target, blocked = FALSE)
 	if(iscarbon(target))
 		var/mob/living/carbon/M = target
-		M.adjust_fire_stacks(fire_stacks)
+		M.adjust_fire_stacks(fire_stacks, 5) //No more than one roll.
 		M.IgniteMob()
 
 /obj/projectile/bullet/crossbow_bolt
@@ -158,6 +165,9 @@
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp45acp
 	icon_state = "45"
 	base_iconstate = "45"
+
+/obj/item/ammo_casing/vampire/c45acp/HP
+	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp45acp/HP
 
 /obj/item/ammo_casing/vampire/c44
 	name = ".44 bullet casing"
@@ -239,6 +249,11 @@
 	name = "ammo box (.45 ACP)"
 	icon_state = "45box"
 	ammo_type = /obj/item/ammo_casing/vampire/c45acp
+	max_ammo = 100
+
+/obj/item/ammo_box/vampire/c45acp/HP
+	name = "ammo box (.45 ACP HP)"
+	ammo_type = /obj/item/ammo_casing/vampire/c45acp/HP
 	max_ammo = 100
 
 /obj/item/ammo_box/vampire/c44

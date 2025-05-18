@@ -75,12 +75,10 @@
 					return
 				to_chat(user, "<span class='notice'>You repair [src].</span>")
 				set_machine_stat(machine_stat & ~BROKEN)
-				obj_integrity = max_integrity
-				update_appearance()
-
-		else
-			return ..()
-
+				atom_integrity = max_integrity
+				update_appearance(UPDATE_ICON)
+			return
+		return ..()
 	else if(default_unfasten_wrench(user, O))
 		power_change()
 		return
@@ -99,7 +97,7 @@
 		return ..()
 
 /obj/machinery/pdapainter/deconstruct(disassembled = TRUE)
-	obj_break()
+	atom_break()
 
 /obj/machinery/pdapainter/attack_hand(mob/user)
 	. = ..()

@@ -454,25 +454,30 @@
 	H.pixel_z = 0
 	H.melee_damage_lower = initial(H.melee_damage_lower)
 	H.melee_damage_upper = initial(H.melee_damage_upper)
+	H.armour_penetration = initial(H.armour_penetration)
 	H.hispo = FALSE
 	H.regenerate_icons()
 	H.update_transform()
 	animate(H, transform = null, color = "#FFFFFF", time = 1)
-	H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/hispoform)
 	H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 
 /datum/action/gift/hispo/proc/trans_hispo(mob/living/carbon/werewolf/lupus/H)
 	H.icon = 'code/modules/wod13/hispo.dmi'
 	H.pixel_w = -16
 	H.pixel_z = -16
-	H.melee_damage_lower = 35
-	H.melee_damage_upper = 55
+	H.melee_damage_lower = 45
+	H.melee_damage_upper = 45
+	H.armour_penetration = 50
 	H.hispo = TRUE
 	H.regenerate_icons()
 	H.update_transform()
 	animate(H, transform = null, color = "#FFFFFF", time = 1)
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
-	H.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	H.add_movespeed_modifier(/datum/movespeed_modifier/hispoform)
+
+/datum/movespeed_modifier/hispoform
+	multiplicative_slowdown = -0.5
 
 
 /datum/action/gift/glabro

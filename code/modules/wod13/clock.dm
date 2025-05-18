@@ -28,19 +28,37 @@
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_ID
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	var/closed = TRUE
+	var/owner = ""
+	var/fake = FALSE
 
-	var/clozed = TRUE
+
+/obj/item/passport/Initialize()
+	. = ..()
+	var/mob/living/carbon/human/user = null
+	if(ishuman(loc)) // In pockets
+		user = loc
+	else if(ishuman(loc?.loc)) // In backpack
+		user = loc
+	if(!isnull(user))
+		owner = user.real_name
+
+
+/obj/item/passport/examine(mob/user)
+	. = ..()
+	if(!closed && owner)
+		. += span_notice("It reads as belonging to [owner].")
+		if(fake)
+			. += span_notice("It looks like a crude counterfeit.")
+
 
 /obj/item/passport/attack_self(mob/user)
 	. = ..()
-	if(clozed)
-		clozed = FALSE
+	if(closed)
+		closed = FALSE
 		icon_state = "passport0"
 		to_chat(user, "<span class='notice'>You open [src].</span>")
 	else
-		clozed = TRUE
+		closed = TRUE
 		icon_state = "passport1"
 		to_chat(user, "<span class='notice'>You close [src].</span>")
-
-/obj/item/passport/fake
-	desc = "A book with a license, photo, and identifying information."

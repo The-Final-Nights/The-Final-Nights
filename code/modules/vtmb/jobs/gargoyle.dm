@@ -36,7 +36,7 @@
 	suit = /obj/item/clothing/suit/hooded/robes/tremere
 	mask = /obj/item/clothing/mask/vampire/venetian_mask
 	r_pocket = /obj/item/vamp/keys/archive
-	l_pocket = /obj/item/vamp/phone/archivist
+	l_pocket = /obj/item/vamp/phone/gargoyle
 	accessory = /obj/item/clothing/accessory/pocketprotector/full
 	backpack_contents = list(
 		/obj/item/cockclock=1,

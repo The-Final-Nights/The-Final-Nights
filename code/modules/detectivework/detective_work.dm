@@ -26,19 +26,27 @@
 		. = D.fibers
 
 /atom/proc/add_fingerprint_list(list/fingerprints)		//ASSOC LIST FINGERPRINT = FINGERPRINT
+	if (QDELETED(src))
+		return
 	if(length(fingerprints))
 		. = AddComponent(/datum/component/forensics, fingerprints)
 
 //Set ignoregloves to add prints irrespective of the mob having gloves on.
 /atom/proc/add_fingerprint(mob/M, ignoregloves = FALSE)
+	if (QDELETED(src))
+		return
 	var/datum/component/forensics/D = AddComponent(/datum/component/forensics)
 	. = D.add_fingerprint(M, ignoregloves)
 
 /atom/proc/add_fiber_list(list/fibertext)				//ASSOC LIST FIBERTEXT = FIBERTEXT
+	if (QDELETED(src))
+		return
 	if(length(fibertext))
 		. = AddComponent(/datum/component/forensics, null, null, null, fibertext)
 
 /atom/proc/add_fibers(mob/living/carbon/human/M)
+	if (QDELETED(src))
+		return
 	var/old = 0
 	if(M.gloves && istype(M.gloves, /obj/item/clothing))
 		var/obj/item/clothing/gloves/G = M.gloves
@@ -54,33 +62,48 @@
 	. = D.add_fibers(M)
 
 /atom/proc/add_hiddenprint_list(list/hiddenprints)	//NOTE: THIS IS FOR ADMINISTRATION FINGERPRINTS, YOU MUST CUSTOM SET THIS TO INCLUDE CKEY/REAL NAMES! CHECK FORENSICS.DM
+	if (QDELETED(src))
+		return
 	if(length(hiddenprints))
 		. = AddComponent(/datum/component/forensics, null, hiddenprints)
 
 /atom/proc/add_hiddenprint(mob/M)
+	if (QDELETED(src))
+		return
 	var/datum/component/forensics/D = AddComponent(/datum/component/forensics)
 	. = D.add_hiddenprint(M)
 
 /atom/proc/add_blood_DNA(list/dna)						//ASSOC LIST DNA = BLOODTYPE
+	if (QDELETED(src))
+		return
 	return FALSE
 
 /obj/add_blood_DNA(list/dna)
 	. = ..()
+	if(!.)
+		return
 	if(length(dna))
 		. = AddComponent(/datum/component/forensics, null, null, dna)
 
 /obj/item/clothing/gloves/add_blood_DNA(list/blood_dna, list/datum/disease/diseases)
 	. = ..()
+	if(!.)
+		return
 	transfer_blood = rand(2, 4)
 
 /turf/add_blood_DNA(list/blood_dna, list/datum/disease/diseases)
-	var/obj/effect/decal/cleanable/blood/splatter/B = locate() in src
-	if(!B)
-		B = new /obj/effect/decal/cleanable/blood/splatter(src, diseases)
-	B.add_blood_DNA(blood_dna) //give blood info to the blood decal.
-	return TRUE //we bloodied the floor
+	var/obj/effect/decal/cleanable/blood/splatter/blood_splatter = locate() in src
+	if(!blood_splatter)
+		blood_splatter = new /obj/effect/decal/cleanable/blood/splatter(src, diseases)
+	if(!QDELETED(blood_splatter))
+		blood_splatter.add_blood_DNA(blood_dna) //give blood info to the blood decal.
+		return TRUE //we bloodied the floor
+	return FALSE
 
 /mob/living/carbon/human/add_blood_DNA(list/blood_dna, list/datum/disease/diseases)
+	. = ..()
+	if(!.)
+		return
 	if(wear_suit)
 		wear_suit.add_blood_DNA(blood_dna)
 		update_inv_wear_suit()

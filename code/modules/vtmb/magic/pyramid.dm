@@ -201,7 +201,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/structure/fleshwall
 	name = "flesh wall"
@@ -213,7 +212,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/structure/tzijelly
 	name = "jelly thing"
@@ -225,7 +223,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/ritualrune/identification
 	name = "Identification Rune"
@@ -529,6 +526,8 @@
 		message += "The blood of our stone servants."
 	else if(clan == "Ministry")
 		message += "Seduction and allure are in the blood. Ah, one of the snakes."
+	else if(clan == "Nagaraja")
+		message += "This blood has an unsettling hunger to it, cold and stained with death."
 	else
 		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?"
 	return message

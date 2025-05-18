@@ -1806,11 +1806,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(species_restricted)
 						lock_reason = "[pref_species.name] restricted."
 						quirk_conflict = TRUE
-				if(Q.allowed_clans.len && "Kindred" == pref_species.name)
-					var/clan_restricted = TRUE
-					for(var/i in Q.allowed_clans)
+				if(Q.excluded_clans.len && "Vampire" == pref_species.name)
+					var/clan_restricted = FALSE
+					for(var/i in Q.excluded_clans)
 						if(i == clane.name)
-							clan_restricted = FALSE
+							clan_restricted = TRUE
 					if(clan_restricted)
 						lock_reason = "[clane.name] restricted."
 						quirk_conflict = TRUE
@@ -3319,9 +3319,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					toggles ^= SOUND_ENDOFROUND
 
 				if("ghost_ears")
-					if(istype(user.client.mob, /mob/dead/observer))
-						var/mob/dead/observer/obs = user.client.mob
-						if(obs.auspex_ghosted)
+					if(isobserver(user.client.mob))
+						if(isavatar(user.client.mob))
 							return
 						else
 							chat_toggles ^= CHAT_GHOSTEARS
@@ -3332,9 +3331,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					chat_toggles ^= CHAT_GHOSTSIGHT
 
 				if("ghost_whispers")
-					if(istype(user.client.mob, /mob/dead/observer))
-						var/mob/dead/observer/obs = user.client.mob
-						if(obs.auspex_ghosted)
+					if(isobserver(user.client.mob))
+						if(isavatar(user.client.mob))
 							return
 						else
 							chat_toggles ^= CHAT_GHOSTWHISPER
