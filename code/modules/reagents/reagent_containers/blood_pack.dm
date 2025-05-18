@@ -130,14 +130,20 @@
 
 /obj/item/reagent_containers/blood/elite
 	name = "\improper elite blood pack (full)"
-	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
 	amount_of_bloodpoints = 4
+
+/obj/item/reagent_containers/blood/random/Initialize()
+	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+	return ..()
 
 /obj/item/reagent_containers/blood/vitae
 	name = "\improper vampire vitae pack (full)"
-	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
 	amount_of_bloodpoints = 4
 	vitae = TRUE
+
+/obj/item/reagent_containers/blood/random/Initialize()
+	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+	return ..()
 
 /obj/item/reagent_containers/blood/random
 
