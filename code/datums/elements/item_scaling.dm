@@ -9,7 +9,7 @@
  */
 /datum/element/item_scaling
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	/// Scaling value when the attached item is in the overworld (on a turf).
 	var/overworld_scaling
 	/// Scaling value when the attached item is in a storage component or inventory slot.
@@ -39,9 +39,9 @@
 	src.storage_scaling = storage_scaling
 
 	// Object scaled when dropped/thrown OR when exiting a storage component.
-	RegisterSignal(target, list(COMSIG_ITEM_DROPPED, COMSIG_STORAGE_EXITED), PROC_REF(scale_overworld))
+	RegisterSignals(target, list(COMSIG_ITEM_DROPPED, COMSIG_STORAGE_EXITED), PROC_REF(scale_overworld))
 	// Object scaled when placed in an inventory slot OR when entering a storage component.
-	RegisterSignal(target, list(COMSIG_ITEM_EQUIPPED, COMSIG_STORAGE_ENTERED), PROC_REF(scale_storage))
+	RegisterSignals(target, list(COMSIG_ITEM_EQUIPPED, COMSIG_STORAGE_ENTERED), PROC_REF(scale_storage))
 
 /**
  * Detach proc for the item_scaling element.

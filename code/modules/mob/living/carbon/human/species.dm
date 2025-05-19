@@ -738,7 +738,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 	//Underwear, Undershirts & Socks
 	if(!(NO_UNDERWEAR in species_traits))
-		if(H.underwear)
+		if(H.underwear && !(H.underwear_visibility & UNDERWEAR_HIDE_UNDIES))
 			var/datum/sprite_accessory/underwear/underwear = GLOB.underwear_list[H.underwear]
 			var/mutable_appearance/underwear_overlay
 			if(underwear)
@@ -754,7 +754,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 					underwear_overlay.color = H.underwear_color
 				standing += underwear_overlay
 
-		if(H.undershirt)
+		if(H.undershirt && !(H.underwear_visibility & UNDERWEAR_HIDE_SHIRT))
 			var/datum/sprite_accessory/undershirt/undershirt = GLOB.undershirt_list[H.undershirt]
 			var/mutable_appearance/undershirt_overlay
 			if(undershirt)
@@ -768,7 +768,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 					undershirt_overlay = mutable_appearance('icons/mob/clothing/underwear_f.dmi', undershirt.icon_state, -BODY_LAYER)
 				standing += undershirt_overlay
 
-		if(H.socks && H.num_legs >= 2 && !(DIGITIGRADE in species_traits))
+		if(H.socks && H.num_legs >= 2 && !(DIGITIGRADE in species_traits) && !(H.underwear_visibility & UNDERWEAR_HIDE_SOCKS))
 			var/datum/sprite_accessory/socks/socks = GLOB.socks_list[H.socks]
 			var/mutable_appearance/socks_overlay
 			if(socks)

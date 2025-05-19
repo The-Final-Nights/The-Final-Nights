@@ -206,7 +206,8 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/datum/admins/proc/view_del_failures,
 #endif
 	/client/proc/check_timer_sources,
-	/client/proc/toggle_cdn
+	/client/proc/toggle_cdn,
+	/client/proc/allow_browser_inspect
 	)
 GLOBAL_LIST_INIT(admin_verbs_possess, list(GLOBAL_PROC_REF(possess), GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)

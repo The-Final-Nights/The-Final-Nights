@@ -308,6 +308,8 @@
 			return "Your species has a limit on how many can be [jobtitle]."
 		if(JOB_UNAVAILABLE_CHARACTER_AGE)
 			return "Your character is too young for [jobtitle]"
+		if(JOB_UNAVAILABLE_VAMPIRE_AGE)
+			return "Your character is too young as a vampire for [jobtitle]"
 	return "Error: Unknown job availability."
 
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
@@ -336,6 +338,8 @@
 		return JOB_UNAVAILABLE_GENERIC
 	if(!job.is_character_old_enough(client.prefs.total_age) && !bypass)
 		return JOB_UNAVAILABLE_CHARACTER_AGE
+	if(!job.is_vampire_old_enough(client.prefs.age, client.prefs.total_age) && !bypass)
+		return JOB_UNAVAILABLE_VAMPIRE_AGE
 	if((client.prefs.generation > job.minimal_generation) && !bypass)
 		return JOB_UNAVAILABLE_GENERATION
 	if((client.prefs.masquerade < job.minimal_masquerade) && !bypass)

@@ -48,3 +48,13 @@
 	new /obj/item/ammo_box/magazine/sniper_rounds/soporific(src)
 	new /obj/item/suppressor/specialoffer(src)
 
+/obj/item/storage/secure/briefcase/fbi
+	name = "official looking briefcase"
+	desc =  "This briefcase looks important, and has a lock."
+/obj/item/storage/secure/briefcase/fbi/PopulateContents()
+	..()
+	new /obj/item/stack/dollar/thousand(src)
+	new /obj/item/stack/dollar/thousand(src)
+	new /obj/item/stack/dollar/thousand(src)
+	new /obj/item/vamp/phone(src)
+	new /obj/item/ammo_box/vampire/c45acp/HP(src)

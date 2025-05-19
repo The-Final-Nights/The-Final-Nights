@@ -15,12 +15,12 @@
 	. = ..()
 	AddElement(/datum/element/ridable, /datum/component/riding/vehicle/secway)
 
-/obj/vehicle/ridden/secway/obj_break()
+/obj/vehicle/ridden/secway/atom_break()
 	START_PROCESSING(SSobj, src)
 	return ..()
 
 /obj/vehicle/ridden/secway/process(delta_time)
-	if(obj_integrity >= integrity_failure * max_integrity)
+	if(atom_integrity >= integrity_failure * max_integrity)
 		return PROCESS_KILL
 	if(DT_PROB(10, delta_time))
 		return
@@ -28,14 +28,27 @@
 	smoke.set_up(0, src)
 	smoke.start()
 
-/obj/vehicle/ridden/secway/attackby(obj/item/W, mob/user, params)
-	if(W.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM)
-		if(obj_integrity < max_integrity)
-			if(W.use_tool(src, user, 0, volume = 50, amount = 1))
-				user.visible_message("<span class='notice'>[user] repairs some damage to [name].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				obj_integrity += min(10, max_integrity-obj_integrity)
-				if(obj_integrity == max_integrity)
-					to_chat(user, "<span class='notice'>It looks to be fully repaired now.</span>")
+/obj/vehicle/ridden/secway/welder_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(.)
+		return
+	if(atom_integrity >= max_integrity)
+		to_chat(user, span_notice("It is fully repaired already!"))
+		return
+	if(!I.use_tool(src, user, 0, volume = 50, amount = 1))
+		return
+	user.visible_message(span_notice("[user] repairs some damage to [name]."), span_notice("You repair some damage to \the [src]."))
+	atom_integrity += min(10, max_integrity-atom_integrity)
+	if(atom_integrity >= max_integrity)
+		to_chat(user, span_notice("It looks to be fully repaired now."))
+		STOP_PROCESSING(SSobj, src)
+
+/obj/vehicle/ridden/secway/attackby(obj/item/W, mob/living/user, params)
+	if(!istype(W, /obj/item/food/grown/banana))
+		return ..()
+	// ignore the occupants because they're presumably too distracted to notice the guy stuffing fruit into their vehicle's exhaust. do segways have exhausts? they do now!
+	user.visible_message(span_warning("[user] begins stuffing [W] into [src]'s tailpipe."), span_warning("You begin stuffing [W] into [src]'s tailpipe..."), ignored_mobs = occupants)
+	if(!do_after(user, 3 SECONDS, src))
 		return TRUE
 
 	if(istype(W, /obj/item/food/grown/banana))
@@ -64,8 +77,8 @@
 	if(eddie_murphy)
 		. += "<span class='warning'>Something appears to be stuck in its exhaust...</span>"
 
-/obj/vehicle/ridden/secway/obj_destruction()
-	explosion(src, -1, 0, 2, 4, flame_range = 3)
+/obj/vehicle/ridden/secway/atom_destruction()
+	explosion(src, devastation_range = -1, light_impact_range = 2, flame_range = 3, flash_range = 4)
 	return ..()
 
 /obj/vehicle/ridden/secway/Destroy()
