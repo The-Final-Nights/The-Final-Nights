@@ -77,7 +77,7 @@
 	///Assoc list for possible layers
 	var/list/layers = list("Alternate Layer" = SECOND_DUCT_LAYER, "Default Layer" = DUCT_LAYER_DEFAULT)
 
-/obj/item/plunger/attack_obj(obj/O, mob/living/user)
+/obj/item/plunger/attack_atom(obj/O, mob/living/user, params)
 	if(layer_mode)
 		SEND_SIGNAL(O, COMSIG_MOVABLE_CHANGE_DUCT_LAYER, O, target_layer)
 		return ..()

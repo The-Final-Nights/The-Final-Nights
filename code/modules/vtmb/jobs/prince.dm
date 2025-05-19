@@ -32,7 +32,6 @@
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Tremere", "Ventrue", "Nosferatu", "Toreador", "Malkavian", "Brujah", "Lasombra", "Gangrel", "True Brujah")
 
-	my_contact_is_important = TRUE
 	known_contacts = list(
 		"Sheriff",
 		"Seneschal",

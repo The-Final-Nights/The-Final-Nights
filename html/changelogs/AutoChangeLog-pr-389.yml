@@ -1,7 +1,0 @@
-author: "Sparrowbird611"
-delete-after: True
-changes:
-  - balance: "Hispo form moves faster."
-  - balance: "Makes garou forms do consistent damage. This makes them stronger in melee."
-  - balance: "Reduces AP on hispo and lupus to more reasonable levels."
-  - bugfix: "Prevents crinos from being one punch KO'd by unarmed attacks."

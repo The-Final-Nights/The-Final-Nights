@@ -254,7 +254,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 
 /obj/item/blob_act(obj/structure/blob/B)
 	if(B && B.loc == loc)
-		qdel(src)
+		atom_destruction(MELEE)
 
 /obj/item/ComponentInitialize()
 	. = ..()

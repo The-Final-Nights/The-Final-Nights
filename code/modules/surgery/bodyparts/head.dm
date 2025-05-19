@@ -101,6 +101,12 @@
 		return FALSE
 	return ..()
 
+
+/obj/item/bodypart/head/try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	// Heads cannot be dismembered by direct damage alone.
+	// We want final death to be intentional, through a timed action, instead.
+	return FALSE
+
 /obj/item/bodypart/head/drop_organs(mob/user, violent_removal)
 	var/turf/head_turf = get_turf(src)
 	if(status != BODYPART_ROBOTIC)
