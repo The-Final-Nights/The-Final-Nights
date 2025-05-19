@@ -376,7 +376,6 @@
 			QDEL_NULL(helmet)
 			QDEL_NULL(suit)
 			QDEL_NULL(mask)
-			QDEL_NULL(mod)
 			QDEL_NULL(storage)
 			// The wires get damaged too.
 			wires.cut_all()

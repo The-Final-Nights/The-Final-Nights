@@ -138,7 +138,7 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 		smoke.set_up(2, location = get_turf(src))
 		smoke.start()
 		qdel(src)
-		qdel(other)
+		qdel(clong)
 
 /obj/effect/immovablerod/proc/penetrate(mob/living/smeared_mob)
 	smeared_mob.visible_message("<span class='danger'>[smeared_mob] is penetrated by an immovable rod!</span>" , "<span class='userdanger'>The rod penetrates you!</span>" , "<span class='danger'>You hear a CLANG!</span>")

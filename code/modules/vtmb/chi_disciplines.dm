@@ -441,13 +441,13 @@
 	cost_yin = 1
 	activate_sound = 'code/modules/wod13/sounds/boneshintai_activate.ogg'
 
-/obj/effect/particle_effect/smoke/bad/green/bone_shintai
+/obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai
 	name = "green dangerous smoke"
 
 /datum/effect_system/smoke_spread/bad/green/bone_shintai
-	effect_type = /obj/effect/particle_effect/smoke/bad/green/bone_shintai
+	effect_type = /obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai
 
-/obj/effect/particle_effect/smoke/bad/green/bone_shintai/smoke_mob(mob/living/carbon/inhaling_mob)
+/obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai/smoke_mob(mob/living/carbon/inhaling_mob)
 	. = ..()
 	if(.)
 		inhaling_mob.adjustToxLoss(15, TRUE)
@@ -1128,15 +1128,14 @@
 	. = ..()
 	dir = pick(NORTH, EAST, WEST, SOUTH, SOUTHEAST, SOUTHWEST, NORTHEAST, NORTHWEST)
 
-/obj/effect/particle_effect/smoke/bad/yomi
+/obj/effect/particle_effect/fluid/smoke/bad/yomi
 	name = "dark red smoke"
 	color = "#6f0000"
-	opaque = FALSE
 
 /datum/effect_system/smoke_spread/bad/yomi
-	effect_type = /obj/effect/particle_effect/smoke/bad/yomi
+	effect_type = /obj/effect/particle_effect/fluid/smoke/bad/yomi
 
-/obj/effect/particle_effect/smoke/bad/yomi/smoke_mob(mob/living/carbon/inhaling_mob)
+/obj/effect/particle_effect/fluid/smoke/bad/yomi/smoke_mob(mob/living/carbon/inhaling_mob)
 	. = ..()
 	if(.)
 		inhaling_mob.adjustCloneLoss(10, TRUE)

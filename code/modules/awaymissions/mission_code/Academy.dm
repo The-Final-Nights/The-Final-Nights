@@ -331,7 +331,6 @@
 		if(18)
 			//Captain ID
 			T.visible_message(span_userdanger("A golden identification card appears!"))
-			new /obj/item/card/id/advanced/gold/captains_spare(drop_location())
 			do_smoke(DIAMOND_AREA(0), drop_location())
 		if(19)
 			//Instrinct Resistance

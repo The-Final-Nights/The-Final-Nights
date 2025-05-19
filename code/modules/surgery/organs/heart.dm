@@ -444,7 +444,7 @@
 	update_icon()
 
 
-/obj/structure/ethereal_crystal/obj_destruction(damage_flag)
+/obj/structure/ethereal_crystal/atom_destruction(damage_flag)
 	playsound(get_turf(ethereal_heart.owner), 'sound/mobs/humanoids/ethereal/ethereal_revive_fail.ogg', 100)
 	return ..()
 

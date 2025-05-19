@@ -486,71 +486,99 @@
 #define SIGN_TRAIT_BLOCKED 3
 #define SIGN_CUFFED 4
 
-// Mob Overlays Indexes
+//Human Overlays Indexes/////////
 /// Total number of layers for mob overlays
-#define TOTAL_LAYERS 32 //KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+#define TOTAL_LAYERS 45 //KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+
+#define UNDERSHADOW_LAYER 45
+
+#define LUZHA_LAYER 44
 /// Mutations layer - Tk headglows, cold resistance glow, etc
-#define MUTATIONS_LAYER 32
+#define MUTATIONS_LAYER 43
 /// Mutantrace features (tail when looking south) that must appear behind the body parts
-#define BODY_BEHIND_LAYER 31
+#define BODY_BEHIND_LAYER 42
 /// Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
-#define BODYPARTS_LAYER 30
+#define BODYPARTS_LAYER 41
 /// Mutantrace features (snout, body markings) that must appear above the body parts
-#define BODY_ADJ_LAYER 29
+#define BODY_ADJ_LAYER 40
 /// Underwear, undershirts, socks, eyes, lips(makeup)
-#define BODY_LAYER 28
+#define BODY_LAYER 39
 /// Mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
-#define FRONT_MUTATIONS_LAYER 27
+#define FRONT_MUTATIONS_LAYER 38
 /// Damage indicators (cuts and burns)
-#define DAMAGE_LAYER 26
+#define DAMAGE_LAYER 37
+//For WoD-specific clanmarks etc
+#define MARKS_LAYER 36
 /// Jumpsuit clothing layer
-#define UNIFORM_LAYER 25
+#define UNIFORM_LAYER 35
 /// ID card layer (might be deprecated)
-#define ID_LAYER 24
+#define ID_LAYER 34
 /// ID card layer
-#define ID_CARD_LAYER 23
+#define ID_CARD_LAYER 33
 /// Hands body part layer (or is this for the arm? not sure...)
-#define HANDS_PART_LAYER 22
+#define HANDS_PART_LAYER 32
 /// Gloves layer
-#define GLOVES_LAYER 21
+#define GLOVES_LAYER 31
 /// Shoes layer
-#define SHOES_LAYER 20
+#define SHOES_LAYER 30
 /// Ears layer (Spessmen have ears? Wow)
-#define EARS_LAYER 19
+#define EARS_LAYER 29
 /// Suit layer (armor, hardsuits, etc.)
-#define SUIT_LAYER 18
+#define SUIT_LAYER 28
 /// Glasses layer
-#define GLASSES_LAYER 17
+#define GLASSES_LAYER 27
+
+#define UPPER_EARS_LAYER 26
 /// Belt layer
-#define BELT_LAYER 16 //Possible make this an overlay of somethign required to wear a belt?
+#define BELT_LAYER 25
 /// Suit storage layer (tucking a gun or baton underneath your armor)
-#define SUIT_STORE_LAYER 15
+#define SUIT_STORE_LAYER 24
 /// Neck layer (for wearing ties and bedsheets)
-#define NECK_LAYER 14
+#define NECK_LAYER 23
 /// Back layer (for backpacks and equipment on your back)
-#define BACK_LAYER 13
+#define BACK_LAYER 22
 /// Hair layer (mess with the fro and you got to go!)
-#define HAIR_LAYER 12 //TODO: make part of head layer?
+#define HAIR_LAYER 21
 /// Facemask layer (gas masks, breath masks, etc.)
-#define FACEMASK_LAYER 11
+#define FACEMASK_LAYER 120
+
+#define DECAPITATION_BLOOD_LAYER 19
 /// Head layer (hats, helmets, etc.)
-#define HEAD_LAYER 10
+#define HEAD_LAYER 18
+
+#define PROTEAN_LAYER 17
+
 /// Handcuff layer (when your hands are cuffed)
-#define HANDCUFF_LAYER 9
+#define HANDCUFF_LAYER 16
 /// Legcuff layer (when your feet are cuffed)
-#define LEGCUFF_LAYER 8
+#define LEGCUFF_LAYER 15
+
+#define UNICORN_LAYER 14
+
+#define POTENCE_LAYER 13
+
+#define FORTITUDE_LAYER	12
+
+#define FIRING_EFFECT_LAYER	11
+
+#define BITE_LAYER 10
+
+#define FIGHT_LAYER	9
+
 /// Hands layer (for the actual hand, not the arm... I think?)
-#define HANDS_LAYER 7
+#define HANDS_LAYER 8
 /// Body front layer. Usually used for mutant bodyparts that need to be in front of stuff (e.g. cat ears)
-#define BODY_FRONT_LAYER 6
+#define BODY_FRONT_LAYER 7
 /// Special body layer that actually require to be above the hair (e.g. lifted welding goggles)
-#define ABOVE_BODY_FRONT_GLASSES_LAYER 5
+#define ABOVE_BODY_FRONT_GLASSES_LAYER 6
 /// Special body layer for the rare cases where something on the head needs to be above everything else (e.g. flowers)
-#define ABOVE_BODY_FRONT_HEAD_LAYER 4
+#define ABOVE_BODY_FRONT_HEAD_LAYER 5
 /// Bleeding wound icons
-#define WOUND_LAYER 3
+#define WOUND_LAYER 4
 /// Blood cult ascended halo layer, because there's currently no better solution for adding/removing
-#define HALO_LAYER 2
+#define HALO_LAYER 3
+
+#define SAY_LAYER 2
 /// Fire layer when you're on fire
 #define FIRE_LAYER 1
 
@@ -598,6 +626,13 @@
 #define VOMIT_TOXIC 1
 /// The mob will vomit a purple color
 #define VOMIT_PURPLE 2
+#define VOMIT_NANITE 3
 
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
+
+//Bitflags for
+//The layer external organs draw. These are drawn on the limbs, so the layers are relative to the limb theyre being drawn on
+#define EXTERNAL_FRONT_LAYER 2
+#define EXTERNAL_ADJACENT_LAYER 1
+#define EXTERNAL_BEHIND_LAYER -1

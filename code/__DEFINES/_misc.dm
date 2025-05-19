@@ -12,72 +12,6 @@
 /// Inverse direction, taking into account UP|DOWN if necessary.
 #define REVERSE_DIR(dir) ( ((dir & 85) << 1) | ((dir & 170) >> 1) )
 
-//Human Overlays Indexes/////////
-#define LUZHA_LAYER				41
-#define UNDERSHADOW_LAYER		40
-#define MUTATIONS_LAYER			39		//mutations. Tk headglows, cold resistance glow, etc
-#define BODY_BEHIND_LAYER		38		//certain mutantrace features (tail when looking south) that must appear behind the body parts
-#define BODYPARTS_LAYER			37		//Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
-#define BODY_ADJ_LAYER			36		//certain mutantrace features (snout, body markings) that must appear above the body parts
-#define BODY_LAYER				35		//underwear, undershirts, socks, eyes, lips(makeup)
-#define FRONT_MUTATIONS_LAYER	34		//mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
-#define DAMAGE_LAYER			33		//damage indicators (cuts and burns)
-#define UNIFORM_LAYER			32
-#define ID_LAYER				31 //lmao at the idiot who put both ids and hands on the same layer
-#define HANDS_PART_LAYER		30
-#define GLOVES_LAYER			29
-#define SHOES_LAYER				28
-#define MARKS_LAYER				27 //For WoD-specific clanmarks etc
-#define EARS_LAYER				26
-#define SUIT_LAYER				25
-#define GLASSES_LAYER			24
-#define BELT_LAYER				23		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		22
-#define NECK_LAYER				21
-#define BACK_LAYER				20
-#define HAIR_LAYER				19		//TODO: make part of head layer?
-#define UPPER_EARS_LAYER		18
-#define FACEMASK_LAYER			17
-#define HEAD_LAYER				16
-#define HANDCUFF_LAYER			15
-#define LEGCUFF_LAYER			14
-#define HANDS_LAYER				13
-#define BODY_FRONT_LAYER		12
-#define DECAPITATION_BLOOD_LAYER	11
-#define PROTEAN_LAYER			10
-#define UNICORN_LAYER			9
-#define POTENCE_LAYER			8
-#define FORTITUDE_LAYER			7
-#define FIRING_EFFECT_LAYER		6
-#define HALO_LAYER				5		//blood cult ascended halo, because there's currently no better solution for adding/removing
-#define FIRE_LAYER				4		//If you're on fire
-#define BITE_LAYER				3
-#define FIGHT_LAYER				2
-#define SAY_LAYER				1
-#define TOTAL_LAYERS			41		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
-
-//Bitflags for the layers an external organ can draw on
-#define EXTERNAL_FRONT (1 << 1)
-#define EXTERNAL_ADJACENT (1 << 2)
-#define EXTERNAL_BEHIND (1 << 3)
-#define ALL_EXTERNAL_OVERLAYS EXTERNAL_FRONT | EXTERNAL_ADJACENT | EXTERNAL_BEHIND
-
-//The layer external organs draw. These are drawn on the limbs, so the layers are relative to the limb theyre being drawn on
-#define EXTERNAL_FRONT_LAYER 2
-#define EXTERNAL_ADJACENT_LAYER 1
-#define EXTERNAL_BEHIND_LAYER -1
-
-//Human Overlay Index Shortcuts for alternate_worn_layer, layers
-//Because I *KNOW* somebody will think layer+1 means "above"
-//IT DOESN'T OK, IT MEANS "UNDER"
-#define UNDER_SUIT_LAYER			(SUIT_LAYER+1)
-#define UNDER_HEAD_LAYER			(HEAD_LAYER+1)
-
-//AND -1 MEANS "ABOVE", OK?, OK!?!
-#define ABOVE_SHOES_LAYER			(SHOES_LAYER-1)
-#define ABOVE_BODY_FRONT_LAYER		(BODY_FRONT_LAYER-1)
-
-
 //Security levels
 #define SEC_LEVEL_GREEN	0
 #define SEC_LEVEL_BLUE	1
@@ -91,12 +25,6 @@
 #define MANIFEST_ERROR_ITEM			4
 
 #define TRANSITIONEDGE			7 //Distance from edge to move to another z-level
-
-//used by canUseTopic()
-#define BE_CLOSE TRUE		//in the case of a silicon, to select if they need to be next to the atom
-#define NO_DEXTERITY TRUE	//if other mobs (monkeys, aliens, etc) can use this // I had to change 20+ files because some non-dnd-playing fuckchumbis can't spell "dexterity"
-#define NO_TK TRUE			// if you can't use it from a distance with telekinesis
-#define FLOOR_OKAY TRUE		// if you can use it while resting
 
 //singularity defines
 #define STAGE_ONE 1
@@ -113,7 +41,6 @@
 #define GAME_STATE_PLAYING		3
 #define GAME_STATE_FINISHED		4
 
-#define RESIZE_DEFAULT_SIZE 1
 
 //transfer_ai() defines. Main proc in ai_core.dm
 #define AI_TRANS_TO_CARD	1 //Downloading AI to InteliCard.
@@ -464,7 +391,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 #define CAMERA_SEE_GHOSTS_BASIC 1
 #define CAMERA_SEE_GHOSTS_ORBIT 2
 
-#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (istype(I, /client) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
 
 #define AREASELECT_CORNERA "corner A"
 #define AREASELECT_CORNERB "corner B"
@@ -477,10 +403,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 #define DICE_NOT_RIGGED 1
 #define DICE_BASICALLY_RIGGED 2
 #define DICE_TOTALLY_RIGGED 3
-
-#define VOMIT_TOXIC 1
-#define VOMIT_PURPLE 2
-#define VOMIT_NANITE 3
 
 //chem grenades defines
 #define GRENADE_EMPTY 1
@@ -522,10 +444,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 
 #define ANON_DISABLED "" //so it's falsey
 #define ANON_RANDOMNAMES "Random Default"
-
-/// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
-#define NO_BUCKLE_LYING -1
-
 
 // timed_action_flags parameter for `/proc/do_after_mob`, `/proc/do_mob` and `/proc/do_after`
 #define IGNORE_USER_LOC_CHANGE (1<<0)

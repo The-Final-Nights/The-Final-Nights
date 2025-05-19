@@ -1448,7 +1448,7 @@
 /mob/living/carbon/proc/disarm_precollide(datum/source, mob/living/carbon/shover, mob/living/carbon/target)
 	SIGNAL_HANDLER
 	if(can_be_shoved_into)
-		return COMSIG_CARBON_ACT_SOLID
+		return TRUE
 
 /mob/living/carbon/proc/disarm_collision(datum/source, mob/living/carbon/shover, mob/living/carbon/target, shove_blocked)
 	SIGNAL_HANDLER
@@ -1461,7 +1461,7 @@
 		span_userdanger("You're shoved into [name] by [shover]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
 	to_chat(src, span_danger("You shove [target.name] into [name]!"))
 	log_combat(src, target, "shoved", "into [name]")
-	return COMSIG_CARBON_SHOVE_HANDLED
+	return TRUE
 
 // Checks to see how many hands this person has to sign with.
 /mob/living/carbon/proc/check_signables_state()

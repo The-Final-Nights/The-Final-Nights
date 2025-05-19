@@ -1355,6 +1355,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			target.dismembering_strike(user, affecting.body_zone)
 
 		var/attack_direction = get_dir(user, target)
+		var/atk_effect = null
 		if(atk_effect == ATTACK_EFFECT_KICK)//kicks deal 1.1x raw damage
 			target.apply_damage(damage*1.1, user.dna.species.attack_type, affecting, armor_block, attack_direction = attack_direction)
 			log_combat(user, target, "kicked")

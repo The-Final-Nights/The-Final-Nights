@@ -215,7 +215,7 @@
 	return
 
 /datum/plant_gene/trait/proc/on_squash(obj/item/food/grown/G, atom/target)
-	SEND_SIGNAL(our_plant, COMSIG_PLANT_ON_SQUASH, target)
+	SEND_SIGNAL(G, COMSIG_PLANT_ON_SQUASH, target)
 	return
 
 /datum/plant_gene/trait/proc/on_attackby(obj/item/food/grown/G, obj/item/I, mob/user)
@@ -467,7 +467,7 @@
 /datum/plant_gene/trait/smoke
 	name = "Gaseous Decomposition"
 
-/datum/plant_gene/trait/smoke/on_new_plant(obj/item/our_plant, newloc)
+/datum/plant_gene/trait/smoke/on_new(obj/item/our_plant, newloc)
 	. = ..()
 	if(!.)
 		return
