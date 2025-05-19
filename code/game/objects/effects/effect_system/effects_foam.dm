@@ -35,24 +35,6 @@
 
 /obj/effect/particle_effect/foam/firefighting/Initialize(mapload)
 	. = ..()
-	RemoveElement(/datum/element/atmos_sensitive)
-
-/obj/effect/particle_effect/foam/firefighting/process()
-	..()
-
-	var/turf/open/T = get_turf(src)
-	var/obj/effect/hotspot/hotspot = (locate(/obj/effect/hotspot) in T)
-	if(hotspot && istype(T) && T.air)
-		qdel(hotspot)
-		var/datum/gas_mixture/G = T.air
-		if(G.gases[/datum/gas/plasma])
-			var/plas_amt = min(30,G.gases[/datum/gas/plasma][MOLES]) //Absorb some plasma
-			G.gases[/datum/gas/plasma][MOLES] -= plas_amt
-			absorbed_plasma += plas_amt
-		if(G.temperature > T20C)
-			G.temperature = max(G.temperature/2,T20C)
-		G.garbage_collect()
-		T.air_update_turf(FALSE, FALSE)
 
 /obj/effect/particle_effect/foam/firefighting/kill_foam()
 	STOP_PROCESSING(SSfastprocess, src)
@@ -96,7 +78,6 @@
 	create_reagents(1000) //limited by the size of the reagent holder anyway.
 	START_PROCESSING(SSfastprocess, src)
 	playsound(src, 'sound/effects/bubbles2.ogg', 80, TRUE, -3)
-	AddElement(/datum/element/atmos_sensitive, mapload)
 
 /obj/effect/particle_effect/foam/ComponentInitialize()
 	. = ..()
@@ -144,10 +125,10 @@
 	for(var/obj/O in range(0,src))
 		if(O.type == src.type)
 			continue
-		if(isturf(O.loc))
-			var/turf/T = O.loc
-			if(T.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(O, TRAIT_T_RAY_VISIBLE))
-				continue
+		//if(isturf(O.loc))
+		//	var/turf/T = O.loc
+		//	if(T.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(O, TRAIT_T_RAY_VISIBLE))
+		//		continue
 		if(lifetime % reagent_divisor)
 			reagents.expose(O, VAPOR, fraction)
 	var/hit = 0
@@ -192,14 +173,6 @@
 		reagents.copy_to(F, (reagents.total_volume))
 		F.add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 		F.metal = metal
-
-/obj/effect/particle_effect/foam/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > 475
-
-/obj/effect/particle_effect/foam/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	if(prob(max(0, exposed_temperature - 475)))   //foam dissolves when heated
-		kill_foam()
-
 
 ///////////////////////////////////////////////
 //FOAM EFFECT DATUM
