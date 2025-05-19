@@ -662,10 +662,12 @@
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		return
-	if(!target.IsStun() && prob(25))
+	if(!target.IsStun() && prob(20))
 		visible_message("<span class='warning'>[user] bonks [src]'s head!</span>", "<span class='warning'>You bonk[target]'s head!</span>")
-		target.Stun(3 SECONDS)
-		target.drop_all_held_items()
+		if(user.mind && (user.mind.has_antag_datum(/datum/antagonist/sabbatist) || user.mind.has_antag_datum(/datum/antagonist/sabbatductus) || user.mind.has_antag_datum(/datum/antagonist/sabbatpriest)))
+			target.Stun(3 SECONDS)
+			target.emote("collapse")
+			target.drop_all_held_items()
 
 /obj/item/melee/vampirearms/katana/kosa
 	name = "scythe"

@@ -1419,6 +1419,146 @@
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 
+/obj/structure/bath/sabbatbath
+	name = "sabbat bath"
+	desc = "A large ceremonial bath, commonly used in Sabbat rituals. It appears to be designed to hold blood."
+	icon_state = "tub"
+	can_buckle = TRUE
+	buckle_lying = 90
+	var/blood_level = 0 // Current amount of blood in the tub
+	var/max_blood = 500 // Maximum blood capacity
+	var/list/blood_donors = list() // List to store blood donors
+	var/blood_color = "#C80000" // Default blood color
+
+/obj/structure/bath/sabbatbath/Initialize()
+	. = ..()
+	create_reagents(max_blood, INJECTABLE)
+	reagents.add_reagent(/datum/reagent/blood, 0) // Start with no blood
+
+/obj/structure/bath/sabbatbath/examine(mob/user)
+	. = ..()
+	if(blood_level <= 0)
+		. += "<span class='notice'>The bath is empty.</span>"
+	else if(blood_level < max_blood * 0.25)
+		. += "<span class='notice'>The bath has a small amount of blood in it.</span>"
+	else if(blood_level < max_blood * 0.75)
+		. += "<span class='notice'>The bath is partially filled with blood.</span>"
+	else
+		. += "<span class='notice'>The bath is filled with blood.</span>"
+
+	if(length(blood_donors) > 0)
+		. += "<span class='notice'>You can sense [length(blood_donors)] different blood donor[length(blood_donors) == 1 ? "" : "s"] in the mixture.</span>"
+
+/obj/structure/bath/sabbatbath/attackby(obj/item/W, mob/living/carbon/user, params)
+	if(istype(W, /obj/item/melee/vampirearms/knife))
+		if(user.bloodpool <= 0)
+			to_chat(user, "<span class='warning'>You have no blood to donate!</span>")
+			return
+
+		user.visible_message("<span class='notice'>[user] cuts [user.p_their()] wrist and lets blood flow into the bath.</span>",
+							"<span class='notice'>You cut your wrist and let blood flow into the bath.</span>")
+
+		// Calculate how much blood to transfer
+		var/amount_to_donate = min(user.bloodpool, 5)
+
+		// Subtract blood from user
+		user.bloodpool -= amount_to_donate
+		user.update_inv_hands()
+
+		// Add blood to bath
+		blood_level = min(blood_level + amount_to_donate, max_blood)
+		reagents.add_reagent(/datum/reagent/blood, amount_to_donate)
+
+		// Add donor to list if not already there
+		var/donor_info = user.real_name
+		if(!(donor_info in blood_donors))
+			blood_donors += donor_info
+
+		//playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
+		return TRUE
+
+// Handle vaulderie goblet specifically
+	if(istype(W, /obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet))
+		var/obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet/goblet = W
+		if(blood_level <= 0)
+			to_chat(user, "<span class='warning'>The bath is empty.</span>")
+			return
+
+		var/transfer_amount = min(goblet.volume - goblet.reagents.total_volume, blood_level)
+		if(transfer_amount <= 0)
+			to_chat(user, "<span class='warning'>The goblet is already full.</span>")
+			return
+
+		user.visible_message("<span class='notice'>[user] scoops blood from the bath into [goblet].</span>",
+							"<span class='notice'>You scoop blood from the bath into [goblet].</span>")
+
+		// Transfer blood
+		reagents.trans_to(goblet, transfer_amount)
+		blood_level -= transfer_amount
+
+		// Transfer donor information
+		if(length(blood_donors) > 0)
+			goblet.blood_donors |= blood_donors
+
+		//playsound(src, 'sound/effects/slosh.ogg', 25, TRUE)
+		return TRUE
+
+	// Handle generic container
+	if(istype(W, /obj/item/reagent_containers))
+		var/obj/item/reagent_containers/container = W
+
+		if(blood_level <= 0)
+			to_chat(user, "<span class='warning'>The bath is empty.</span>")
+			return
+
+		// Calculate transfer amount
+		var/transfer_amount = min(container.volume - container.reagents.total_volume, blood_level)
+		if(transfer_amount <= 0)
+			to_chat(user, "<span class='warning'>The container is already full!</span>")
+			return
+
+		// Perform transfer
+		user.visible_message("<span class='notice'>[user] scoops blood from the bath into [container].</span>",
+							"<span class='notice'>You scoop blood from the bath into [container].</span>")
+
+		// Transfer blood
+		reagents.trans_to(container, transfer_amount)
+		blood_level -= transfer_amount
+
+		playsound(src, 'sound/items/drink.ogg', 25, TRUE)
+		return TRUE
+
+	return ..()
+
+/obj/structure/bath/sabbatbath/user_buckle_mob(mob/living/M, mob/user, check_loc = TRUE)
+	. = ..()
+	if(. && blood_level > 0)
+		if(M == user)
+			M.visible_message("<span class='notice'>[user] climbs into the blood-filled bath.</span>",
+							"<span class='notice'>You climb into the blood-filled bath.</span>")
+		else
+			M.visible_message("<span class='notice'>[user] places [M] in the blood-filled bath.</span>",
+							"<span class='notice'>[user] places you in the blood-filled bath.</span>")
+
+		//playsound(src, 'sound/effects/splash.ogg', 50, TRUE)
+		add_blood_overlay(M)
+
+/obj/structure/bath/sabbatbath/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
+	. = ..()
+	if(.)
+		if(buckled_mob == user)
+			buckled_mob.visible_message("<span class='notice'>[buckled_mob] climbs out of the bath.</span>",
+									"<span class='notice'>You climb out of the bath.</span>")
+		else
+			buckled_mob.visible_message("<span class='notice'>[user] pulls [buckled_mob] out of the bath.</span>",
+									"<span class='notice'>[user] pulls you out of the bath.</span>")
+
+/obj/structure/bath/sabbatbath/proc/add_blood_overlay(mob/living/M)
+	M.add_mob_blood()
+	M.add_splatter_floor()
+	M.update_inv_gloves()
+
+
 /obj/weapon_showcase
 	name = "weapon showcase"
 	desc = "Look, a gun."
@@ -1564,11 +1704,11 @@
 
 					if(dead_amongst)
 						call_dharma("respect", user)
-
-					// Process each buried kindred
 					for(var/mob/living/carbon/K in buried_kindred)
-						// Wait 20 seconds, then have the kindred enter frenzy and dig out
-						addtimer(CALLBACK(src, PROC_REF(kindred_frenzy_escape), K), 20 SECONDS)
+						if(do_after(K, 120 SECONDS, target = K, progress = TRUE))
+							kindred_frenzy_escape(K)
+						else
+							to_chat(K, "<span class='warning'>Your escape was interrupted!</span>")
 
 					// Only refill the pit if no one is buried
 					if(!dead_amongst && !kindred_buried)
@@ -1607,7 +1747,6 @@
 	// Exit frenzy after 30 seconds
 	addtimer(CALLBACK(kindred, TYPE_PROC_REF(/mob/living/carbon, exit_frenzymod)), 30 SECONDS)
 
-/// Completes the kindred's escape from the burial pit
 /obj/structure/bury_pit/proc/complete_kindred_escape(mob/living/carbon/kindred)
 	if(!kindred || !istype(kindred) || !(kindred in src))
 		return
