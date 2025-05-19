@@ -37436,7 +37436,7 @@
 /area/vtm/interior/strip)
 "jap" = (
 /obj/structure/dresser{
-	pixel_x = ssssss
+	pixel_x = 0
 	},
 /obj/item/flashlight/lamp/green{
 	pixel_x = 2;
