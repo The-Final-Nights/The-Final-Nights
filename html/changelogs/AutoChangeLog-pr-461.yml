@@ -1,0 +1,4 @@
+author: "CalamaBanana"
+delete-after: True
+changes:
+  - rscadd: "Adds IC verb to toggle underwear/short/socks visibilty on/off."
