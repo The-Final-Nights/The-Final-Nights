@@ -17,7 +17,6 @@
 	anchored = TRUE
 	density = FALSE
 	layer = EDGED_TURF_LAYER
-	plane = GAME_PLANE_UPPER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	animate_movement = NO_STEPS
 	/// The types of turfs that this foam cannot spread to.
@@ -40,7 +39,6 @@
 	. = ..()
 	create_reagents(1000)
 	playsound(src, 'sound/effects/bubbles2.ogg', 80, TRUE, -3)
-	AddElement(/datum/element/atmos_sensitive, mapload)
 	SSfoam.start_processing(src)
 
 /obj/effect/particle_effect/fluid/foam/ComponentInitialize()
@@ -89,8 +87,8 @@
 	for(var/obj/object in location)
 		if(object == src)
 			continue
-		if(location.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(object, TRAIT_T_RAY_VISIBLE))
-			continue
+		//if(location.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(object, TRAIT_T_RAY_VISIBLE))
+		//	continue
 		reagents.expose(object, VAPOR, fraction)
 
 	var/hit = 0
@@ -146,13 +144,6 @@
 		spread_foam.add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 		spread_foam.result_type = result_type
 		SSfoam.queue_spread(spread_foam)
-
-/obj/effect/particle_effect/fluid/foam/should_atmos_process(datum/gas_mixture/air, exposed_temperature)
-	return exposed_temperature > 475
-
-/obj/effect/particle_effect/fluid/foam/atmos_expose(datum/gas_mixture/air, exposed_temperature)
-	if(prob(max(0, exposed_temperature - 475)))   //foam dissolves when heated
-		kill_foam()
 
 /// A factory for foam fluid floods.
 /datum/effect_system/fluid_spread/foam
@@ -215,30 +206,6 @@
 
 /obj/effect/particle_effect/fluid/foam/firefighting/Initialize(mapload)
 	. = ..()
-	RemoveElement(/datum/element/atmos_sensitive)
-
-/obj/effect/particle_effect/fluid/foam/firefighting/process()
-	..()
-
-	var/turf/open/location = loc
-	if(!istype(location))
-		return
-
-	var/obj/effect/hotspot/hotspot = locate() in location
-	if(!(hotspot && location.air))
-		return
-
-	QDEL_NULL(hotspot)
-	var/datum/gas_mixture/air = location.air
-	var/list/gases = air.gases
-	if (gases[/datum/gas/plasma])
-		var/scrub_amt = min(30, gases[/datum/gas/plasma][MOLES]) //Absorb some plasma
-		gases[/datum/gas/plasma][MOLES] -= scrub_amt
-		absorbed_plasma += scrub_amt
-	if (air.temperature > T20C)
-		air.temperature = max(air.temperature / 2, T20C)
-	air.garbage_collect()
-	location.air_update_turf(FALSE, FALSE)
 
 /obj/effect/particle_effect/fluid/foam/firefighting/make_result()
 	var/atom/movable/deposit = ..()
@@ -274,29 +241,14 @@
 	opacity = TRUE // changed in New()
 	anchored = TRUE
 	layer = EDGED_TURF_LAYER
-	plane = GAME_PLANE_UPPER
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	name = "foamed metal"
 	desc = "A lightweight foamed metal wall that can be used as base to construct a wall."
 	gender = PLURAL
 	max_integrity = 20
-	can_atmos_pass = ATMOS_PASS_DENSITY
 	obj_flags = CAN_BE_HIT | BLOCK_Z_IN_DOWN | BLOCK_Z_IN_UP
 	///Var used to prevent spamming of the construction sound
 	var/next_beep = 0
-
-/obj/structure/foamedmetal/Initialize(mapload)
-	. = ..()
-	air_update_turf(TRUE, TRUE)
-
-/obj/structure/foamedmetal/Destroy()
-	air_update_turf(TRUE, FALSE)
-	. = ..()
-
-/obj/structure/foamedmetal/Move()
-	var/turf/T = loc
-	. = ..()
-	move_update_air(T)
 
 /obj/structure/foamedmetal/attack_paw(mob/user, list/modifiers)
 	return attack_hand(user, modifiers)
@@ -327,7 +279,7 @@
 		return ..()
 
 	var/obj/item/stack/sheet/sheet_for_plating = W
-	if(istype(sheet_for_plating, /obj/item/stack/sheet/iron))
+	if(istype(sheet_for_plating, /obj/item/stack/sheet/metal))
 		if(sheet_for_plating.get_amount() < 2)
 			to_chat(user, span_warning("You need two sheets of iron to finish a wall on [src]!"))
 			return
@@ -402,27 +354,6 @@
 		return
 
 	location.ClearWet()
-	if(location.air)
-		var/datum/gas_mixture/air = location.air
-		air.temperature = 293.15
-		for(var/obj/effect/hotspot/fire in location)
-			qdel(fire)
-
-		var/list/gases = air.gases
-		for(var/gas_type in gases)
-			switch(gas_type)
-				if(/datum/gas/oxygen, /datum/gas/nitrogen)
-					continue
-				else
-					gases[gas_type][MOLES] = 0
-		air.garbage_collect()
-
-	for(var/obj/machinery/atmospherics/components/unary/comp in location)
-		if(!comp.welded)
-			comp.welded = TRUE
-			comp.update_appearance()
-			comp.visible_message(span_danger("[comp] sealed shut!"))
-
 	for(var/mob/living/potential_tinder in location)
 		potential_tinder.extinguish_mob()
 	for(var/obj/item/potential_tinder in location)

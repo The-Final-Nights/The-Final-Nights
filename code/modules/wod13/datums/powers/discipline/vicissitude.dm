@@ -526,11 +526,9 @@
 			user.apply_overlay(PROTEAN_LAYER)
 		if ("Membrane wings")
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
-			user.dna.species.GiveSpeciesFlight(user)
+			var/obj/item/organ/external/wings/functional/membrane/wings = user.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)
+			wings.Insert(user, FALSE)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
-/*		if ("Cuttlefish skin")
-			var/datum/action/active_camo/camo= new()
-			camo.Grant(owner)*/
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -564,14 +562,9 @@
 			QDEL_NULL(upgrade_overlay)
 		if ("Membrane wings")
 			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
-			user.dna.species.RemoveSpeciesFlight(user)
+			var/obj/item/organ/external/wings/functional/membrane/wings = user.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)
+			wings.Remove(user, FALSE)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/membranewings)
-/*		if ("Cuttlefish skin")
-			for(var/datum/action/active_camo/camo in owner.actions)
-				camo.Remove(owner)
-			if(owner.alpha == 30)
-				animate(owner, alpha = 255, time = 1.5 SECONDS)*/
-
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)

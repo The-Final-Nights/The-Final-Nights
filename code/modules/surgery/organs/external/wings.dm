@@ -220,5 +220,5 @@
 		burnt = FALSE
 		set_sprite(original_sprite)
 
-/obj/item/organ/external/wings/functional/leather
-	name = "leather wings"
+/obj/item/organ/external/wings/functional/membrane
+	name = "membrane wings"

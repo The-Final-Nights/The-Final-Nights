@@ -8,7 +8,6 @@
 	pixel_x = -32
 	pixel_y = -32
 	opacity = TRUE
-	plane = ABOVE_GAME_PLANE
 	layer = FLY_LAYER
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -72,7 +71,7 @@
 	if(!t_loc)
 		return
 
-	for(var/turf/spread_turf in t_loc.get_atmos_adjacent_turfs())
+	for(var/turf/spread_turf in t_loc.reachableAdjacentAtmosTurfs())
 		if(group.total_size > group.target_size)
 			break
 		if(locate(type) in spread_turf)
@@ -178,7 +177,7 @@
 	var/static/list/loc_connections = list(
 		COMSIG_ATOM_ENTERED = .proc/on_entered,
 	)
-	AddElement(/datum/element/connect_loc, loc_connections)
+	//AddElement(/datum/element/connect_loc, loc_connections)
 
 /obj/effect/particle_effect/fluid/smoke/bad/smoke_mob(mob/living/carbon/smoker)
 	. = ..()
@@ -269,29 +268,6 @@
 	if(!istype(chilly))
 		return
 
-	if(chilly.air)
-		var/datum/gas_mixture/air = chilly.air
-		if(!distcheck || get_dist(location, chilly) < blast) // Otherwise we'll get silliness like people using Nanofrost to kill people through walls with cold air
-			air.temperature = temperature
-
-		var/list/gases = air.gases
-		if(gases[/datum/gas/plasma])
-			air.assert_gas(/datum/gas/nitrogen)
-			gases[/datum/gas/nitrogen][MOLES] += gases[/datum/gas/plasma][MOLES]
-			gases[/datum/gas/plasma][MOLES] = 0
-			air.garbage_collect()
-
-		for(var/obj/effect/hotspot/fire in chilly)
-			qdel(fire)
-		chilly.air_update_turf(FALSE, FALSE)
-
-	if(weldvents)
-		for(var/obj/machinery/atmospherics/components/unary/comp in chilly)
-			if(!isnull(comp.welded) && !comp.welded) //must be an unwelded vent pump or vent scrubber.
-				comp.welded = TRUE
-				comp.update_appearance()
-				comp.visible_message(span_danger("[comp] is frozen shut!"))
-
 	// Extinguishes everything in the turf
 	for(var/mob/living/potential_tinder in chilly)
 		potential_tinder.extinguish_mob()
@@ -354,8 +330,8 @@
 	for(var/atom/movable/thing as anything in location)
 		if(thing == src)
 			continue
-		if(location.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(thing, TRAIT_T_RAY_VISIBLE))
-			continue
+		//if(location.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(thing, TRAIT_T_RAY_VISIBLE))
+		//	continue
 		reagents.expose(thing, TOUCH, fraction)
 
 	reagents.expose(location, TOUCH, fraction)

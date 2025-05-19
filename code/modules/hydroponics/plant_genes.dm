@@ -215,6 +215,7 @@
 	return
 
 /datum/plant_gene/trait/proc/on_squash(obj/item/food/grown/G, atom/target)
+	SEND_SIGNAL(our_plant, COMSIG_PLANT_ON_SQUASH, target)
 	return
 
 /datum/plant_gene/trait/proc/on_attackby(obj/item/food/grown/G, obj/item/I, mob/user)
@@ -280,6 +281,7 @@
 		C.electrocute_act(round(power), G, 1, SHOCK_NOGLOVES)
 
 /datum/plant_gene/trait/cell_charge/on_squash(obj/item/food/grown/G, atom/target)
+	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
 		var/power = G.seed.potency*rate
@@ -376,6 +378,7 @@
 	rate = 0.1
 
 /datum/plant_gene/trait/teleport/on_squash(obj/item/food/grown/G, atom/target)
+	. = ..()
 	if(isliving(target))
 		var/teleport_radius = max(round(G.seed.potency / 10), 1)
 		var/turf/T = get_turf(target)
@@ -469,7 +472,7 @@
 	if(!.)
 		return
 
-	RegisterSignal(our_plant, COMSIG_PLANT_ON_SQUASH, .proc/make_smoke)
+	RegisterSignal(our_plant, COMSIG_PLANT_ON_SQUASH, PROC_REF(make_smoke))
 
 /*
  * Makes a cloud of reagent smoke.
@@ -482,9 +485,8 @@
 
 	our_plant.investigate_log("made smoke at [AREACOORD(target)]. Last touched by: [our_plant.fingerprintslast].", INVESTIGATE_BOTANY)
 	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new ()
-	var/obj/item/seeds/our_seed = our_plant.get_plant_seed()
 	var/splat_location = get_turf(target)
-	var/range = sqrt(our_seed.potency * 0.1)
+	var/range = sqrt(5 * 0.1)
 	smoke.attach(splat_location)
 	smoke.set_up(round(range), location = splat_location, carry = our_plant.reagents, silent = FALSE)
 	smoke.start()
