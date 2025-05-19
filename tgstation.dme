@@ -2325,6 +2325,7 @@
 #include "code\modules\mob\dead\observer\observer_movement.dm"
 #include "code\modules\mob\dead\observer\observer_say.dm"
 #include "code\modules\mob\dead\observer\orbit.dm"
+#include "code\modules\mob\dead\observer\auspex_avatar\auspex_avatar.dm"
 #include "code\modules\mob\living\blood.dm"
 #include "code\modules\mob\living\bloodcrawl.dm"
 #include "code\modules\mob\living\damage_procs.dm"

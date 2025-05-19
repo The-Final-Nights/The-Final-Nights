@@ -1219,6 +1219,39 @@
 /mob/living/carbon/human/monkeybrain
 	ai_controller = /datum/ai_controller/monkey
 
+
+/mob/living/carbon/human/verb/toggle_undies()
+	set category = "IC"
+	set name = "Toggle underwear visibility"
+	set desc = "Allows you to toggle which underwear should show or be hidden."
+
+	if(stat != CONSCIOUS)
+		to_chat(usr, span_warning("You can't toggle underwear visibility right now..."))
+		return
+
+	var/underwear_button = underwear_visibility & UNDERWEAR_HIDE_UNDIES ? "Show underwear" : "Hide underwear"
+	var/undershirt_button = underwear_visibility & UNDERWEAR_HIDE_SHIRT ? "Show shirt" : "Hide shirt"
+	var/socks_button = underwear_visibility & UNDERWEAR_HIDE_SOCKS ? "Show socks" : "Hide socks"
+	var/list/choice_list = list("[underwear_button]" = "underwear", "[undershirt_button]" = "shirt", "[socks_button]" = "socks","Show all" = "show", "Hide all" = "hide")
+	var/picked_visibility = tgui_input_list(src, "Choose visibility setting", "Show/Hide underwear", choice_list)
+	if(picked_visibility)
+		var/picked_choice = choice_list[picked_visibility]
+		switch(picked_choice)
+			if("underwear")
+				underwear_visibility ^= UNDERWEAR_HIDE_UNDIES
+			if("shirt")
+				underwear_visibility ^= UNDERWEAR_HIDE_SHIRT
+			if("socks")
+				underwear_visibility ^= UNDERWEAR_HIDE_SOCKS
+			if("show")
+				underwear_visibility = NONE
+			if("hide")
+				underwear_visibility = UNDERWEAR_HIDE_UNDIES | UNDERWEAR_HIDE_SHIRT | UNDERWEAR_HIDE_SOCKS
+		update_body()
+	return
+
+
+
 /mob/living/carbon/human/species
 	var/race = null
 	var/use_random_name = TRUE
