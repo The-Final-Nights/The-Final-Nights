@@ -64,7 +64,7 @@ GLOBAL_LIST_EMPTY(gravity_generators)
 	qdel(src)
 
 /obj/machinery/gravity_generator/proc/set_broken()
-	obj_break()
+	atom_break()
 
 /obj/machinery/gravity_generator/proc/set_fix()
 	set_machine_stat(machine_stat & ~BROKEN)

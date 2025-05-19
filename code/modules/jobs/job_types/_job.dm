@@ -94,10 +94,8 @@
 	var/list/allowed_auspice = list("Philodox", "Galliard", "Ragabash", "Theurge", "Ahroun")
 	///If this job requires whitelisting before it can be selected for characters.
 	var/whitelisted = FALSE
-	// List for phone shit
-	var/my_contact_is_important = FALSE
 	// Only for display in memories
-	var/list/known_contacts = list()
+	var/list/known_contacts = null
 
 	var/duty
 	var/v_duty
@@ -210,12 +208,7 @@
 		for(var/i in roundstart_experience)
 			experiencer.mind.adjust_experience(i, roundstart_experience[i], TRUE)
 
-	if(my_contact_is_important)
-		for(var/obj/item/vamp/phone/PHONE in GLOB.phones_list)
-			if(PHONE)
-				PHONE.add_important_contacts()
-
-	if(length(known_contacts) > 0)
+	if(LAZYLEN(known_contacts) > 0)
 		H.knowscontacts = known_contacts
 
 /datum/job/proc/announce(mob/living/carbon/human/H)

@@ -3319,9 +3319,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					toggles ^= SOUND_ENDOFROUND
 
 				if("ghost_ears")
-					if(istype(user.client.mob, /mob/dead/observer))
-						var/mob/dead/observer/obs = user.client.mob
-						if(obs.auspex_ghosted)
+					if(isobserver(user.client.mob))
+						if(isavatar(user.client.mob))
 							return
 						else
 							chat_toggles ^= CHAT_GHOSTEARS
@@ -3332,9 +3331,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					chat_toggles ^= CHAT_GHOSTSIGHT
 
 				if("ghost_whispers")
-					if(istype(user.client.mob, /mob/dead/observer))
-						var/mob/dead/observer/obs = user.client.mob
-						if(obs.auspex_ghosted)
+					if(isobserver(user.client.mob))
+						if(isavatar(user.client.mob))
 							return
 						else
 							chat_toggles ^= CHAT_GHOSTWHISPER

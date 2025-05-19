@@ -33,10 +33,14 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/settings/ghost/chatterbox, toggle_ghost_ears)(
 	set name = "Show/Hide GhostEars"
 	set category = "Preferences"
 	set desc = "See All Speech"
+
+	if(isavatar(usr)) //This is a bit of a hack, but it works for now.
+		return
 	usr.client.prefs.chat_toggles ^= CHAT_GHOSTEARS
 	to_chat(usr, "As a ghost, you will now [(usr.client.prefs.chat_toggles & CHAT_GHOSTEARS) ? "see all speech in the world" : "only see speech from nearby mobs"].")
 	usr.client.prefs.save_preferences()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost Ears", "[usr.client.prefs.chat_toggles & CHAT_GHOSTEARS ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/verbs/menu/settings/ghost/chatterbox/toggle_ghost_ears/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_GHOSTEARS
 
@@ -44,10 +48,14 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/settings/ghost/chatterbox, toggle_ghost_sight)
 	set name = "Show/Hide GhostSight"
 	set category = "Preferences"
 	set desc = "See All Emotes"
+
+	if(isavatar(usr)) //This is a bit of a hack, but it works for now.
+		return
 	usr.client.prefs.chat_toggles ^= CHAT_GHOSTSIGHT
 	to_chat(usr, "As a ghost, you will now [(usr.client.prefs.chat_toggles & CHAT_GHOSTSIGHT) ? "see all emotes in the world" : "only see emotes from nearby mobs"].")
 	usr.client.prefs.save_preferences()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost Sight", "[usr.client.prefs.chat_toggles & CHAT_GHOSTSIGHT ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/verbs/menu/settings/ghost/chatterbox/toggle_ghost_sight/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_GHOSTSIGHT
 
@@ -55,10 +63,14 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/settings/ghost/chatterbox, toggle_ghost_whispe
 	set name = "Show/Hide GhostWhispers"
 	set category = "Preferences"
 	set desc = "See All Whispers"
+
+	if(isavatar(usr)) //This is a bit of a hack, but it works for now.
+		return
 	usr.client.prefs.chat_toggles ^= CHAT_GHOSTWHISPER
 	to_chat(usr, "As a ghost, you will now [(usr.client.prefs.chat_toggles & CHAT_GHOSTWHISPER) ? "see all whispers in the world" : "only see whispers from nearby mobs"].")
 	usr.client.prefs.save_preferences()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost Whispers", "[usr.client.prefs.chat_toggles & CHAT_GHOSTWHISPER ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/verbs/menu/settings/ghost/chatterbox/toggle_ghost_whispers/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_GHOSTWHISPER
 
@@ -66,10 +78,14 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/settings/ghost/chatterbox, toggle_ghost_radio)
 	set name = "Show/Hide GhostRadio"
 	set category = "Preferences"
 	set desc = "See All Radio Chatter"
+
+	if(isavatar(usr)) //This is a bit of a hack, but it works for now.
+		return
 	usr.client.prefs.chat_toggles ^= CHAT_GHOSTRADIO
 	to_chat(usr, "As a ghost, you will now [(usr.client.prefs.chat_toggles & CHAT_GHOSTRADIO) ? "see radio chatter" : "not see radio chatter"].")
 	usr.client.prefs.save_preferences()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost Radio", "[usr.client.prefs.chat_toggles & CHAT_GHOSTRADIO ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc! //social experiment, increase the generation whenever you copypaste this shamelessly GENERATION 1
+
 /datum/verbs/menu/settings/ghost/chatterbox/toggle_ghost_radio/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_GHOSTRADIO
 
@@ -77,10 +93,14 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/settings/ghost/chatterbox, toggle_ghost_pda)()
 	set name = "Show/Hide GhostPDA"
 	set category = "Preferences"
 	set desc = "See All PDA Messages"
+
+	if(isavatar(usr)) //This is a bit of a hack, but it works for now.
+		return
 	usr.client.prefs.chat_toggles ^= CHAT_GHOSTPDA
 	to_chat(usr, "As a ghost, you will now [(usr.client.prefs.chat_toggles & CHAT_GHOSTPDA) ? "see all pda messages in the world" : "only see pda messages from nearby mobs"].")
 	usr.client.prefs.save_preferences()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost PDA", "[usr.client.prefs.chat_toggles & CHAT_GHOSTPDA ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/verbs/menu/settings/ghost/chatterbox/toggle_ghost_pda/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_GHOSTPDA
 
@@ -88,10 +108,14 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/settings/ghost/chatterbox, toggle_ghost_laws)(
 	set name = "Show/Hide GhostLaws"
 	set category = "Preferences"
 	set desc = "See All Law Changes"
+
+	if(isavatar(usr)) //This is a bit of a hack, but it works for now.
+		return
 	usr.client.prefs.chat_toggles ^= CHAT_GHOSTLAWS
 	to_chat(usr, "As a ghost, you will now [(usr.client.prefs.chat_toggles & CHAT_GHOSTLAWS) ? "be notified of all law changes" : "no longer be notified of law changes"].")
 	usr.client.prefs.save_preferences()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost Laws", "[usr.client.prefs.chat_toggles & CHAT_GHOSTLAWS ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/verbs/menu/settings/ghost/chatterbox/toggle_ghost_laws/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_GHOSTLAWS
 
@@ -99,10 +123,14 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/settings/ghost/chatterbox, toggle_hear_login_l
 	set name = "Show/Hide Login/Logout messages"
 	set category = "Preferences"
 	set desc = "As a ghost, see when someone reconnects or disconnects"
+
+	if(isavatar(usr)) //This is a bit of a hack, but it works for now.
+		return
 	usr.client.prefs.chat_toggles ^= CHAT_LOGIN_LOGOUT
 	to_chat(usr, "As a ghost, you will now [(usr.client.prefs.chat_toggles & CHAT_LOGIN_LOGOUT) ? "be notified" : "no longer be notified"] when someone disconnects or reconnects.")
 	usr.client.prefs.save_preferences()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Hearing Login/Logout", "[usr.client.prefs.chat_toggles & CHAT_LOGIN_LOGOUT ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/verbs/menu/settings/ghost/chatterbox/toggle_hear_login_logout/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_LOGIN_LOGOUT
 

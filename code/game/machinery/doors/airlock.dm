@@ -140,10 +140,10 @@
 	if(glass)
 		airlock_material = "glass"
 	if(security_level > AIRLOCK_SECURITY_IRON)
-		obj_integrity = normal_integrity * AIRLOCK_INTEGRITY_MULTIPLIER
+		atom_integrity = normal_integrity * AIRLOCK_INTEGRITY_MULTIPLIER
 		max_integrity = normal_integrity * AIRLOCK_INTEGRITY_MULTIPLIER
 	else
-		obj_integrity = normal_integrity
+		atom_integrity = normal_integrity
 		max_integrity = normal_integrity
 	if(damage_deflection == AIRLOCK_DAMAGE_DEFLECTION_N && security_level > AIRLOCK_SECURITY_IRON)
 		damage_deflection = AIRLOCK_DAMAGE_DEFLECTION_R
@@ -960,20 +960,20 @@
 				log_game("[key_name(user)] [welded ? "welded":"unwelded"] airlock [src] with [W] at [AREACOORD(src)]")
 				update_icon()
 		else
-			if(obj_integrity < max_integrity)
+			if(atom_integrity < max_integrity)
 				if(!W.tool_start_check(user, amount=0))
 					return
-				user.visible_message("<span class='notice'>[user] begins welding the airlock.</span>", \
-								"<span class='notice'>You begin repairing the airlock...</span>", \
-								"<span class='hear'>You hear welding.</span>")
-				if(W.use_tool(src, user, 40, volume=50, extra_checks = CALLBACK(src, PROC_REF(weld_checks), W, user)))
-					obj_integrity = max_integrity
+				user.visible_message(span_notice("[user] begins welding the airlock."), \
+								span_notice("You begin repairing the airlock..."), \
+								span_hear("You hear welding."))
+				if(W.use_tool(src, user, 40, volume=50, extra_checks = CALLBACK(src, .proc/weld_checks, W, user)))
+					atom_integrity = max_integrity
 					set_machine_stat(machine_stat & ~BROKEN)
-					user.visible_message("<span class='notice'>[user] finishes welding [src].</span>", \
-										"<span class='notice'>You finish repairing the airlock.</span>")
-					update_icon()
+					user.visible_message(span_notice("[user] finishes welding [src]."), \
+										span_notice("You finish repairing the airlock."))
+					update_appearance()
 			else
-				to_chat(user, "<span class='notice'>The airlock doesn't need repairing.</span>")
+				to_chat(user, span_notice("The airlock doesn't need repairing."))
 
 /obj/machinery/door/airlock/proc/weld_checks(obj/item/weldingtool/W, mob/user)
 	return !operating && density
@@ -1282,11 +1282,11 @@
 		add_hiddenprint(user)
 
 /obj/machinery/door/airlock/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
-	if((damage_amount >= obj_integrity) && (damage_flag == BOMB))
+	if((damage_amount >= atom_integrity) && (damage_flag == BOMB))
 		flags_1 |= NODECONSTRUCT_1  //If an explosive took us out, don't drop the assembly
 	. = ..()
-	if(obj_integrity < (0.75 * max_integrity))
-		update_icon()
+	if(atom_integrity < (0.75 * max_integrity))
+		update_appearance()
 
 
 /obj/machinery/door/airlock/deconstruct(disassembled = TRUE, mob/user)
@@ -1308,7 +1308,7 @@
 
 		if(!disassembled)
 			if(A)
-				A.obj_integrity = A.max_integrity * 0.5
+				A.update_integrity(A.max_integrity * 0.5)
 		else if(obj_flags & EMAGGED)
 			if(user)
 				to_chat(user, "<span class='warning'>You discard the damaged electronics.</span>")
