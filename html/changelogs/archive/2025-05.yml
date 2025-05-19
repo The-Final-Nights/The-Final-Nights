@@ -164,3 +164,12 @@
       updated on joining.
   - rscadd: Triads, Giovanni, Tremere, Anarchs, Millenium Tower, Lasombra and Tzmisce
       networks added. Members have each other's contacts.
+2025-05-18:
+  XeonMations, ComradeNiobe:
+  - bugfix: You can no longer hear all sounds in auspex 5
+  - refactor: Refactored auspex 5 avatars
+2025-05-19:
+  CalamaBanana:
+  - rscadd: Adds IC verb to toggle underwear/short/socks visibilty on/off.
+  XeonMations, buffyuwu:
+  - bugfix: fixed CI/CD AGAIN
