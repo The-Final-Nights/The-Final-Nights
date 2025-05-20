@@ -168,3 +168,8 @@
   XeonMations, ComradeNiobe:
   - bugfix: You can no longer hear all sounds in auspex 5
   - refactor: Refactored auspex 5 avatars
+2025-05-19:
+  CalamaBanana:
+  - rscadd: Adds IC verb to toggle underwear/short/socks visibilty on/off.
+  XeonMations, buffyuwu:
+  - bugfix: fixed CI/CD AGAIN
