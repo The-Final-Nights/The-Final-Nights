@@ -1425,6 +1425,7 @@
 	icon_state = "tub"
 	can_buckle = TRUE
 	buckle_lying = 90
+	layer = BELOW_MOB_LAYER  // This makes the bath appear behind the mob when someone is buckled
 	var/blood_level = 0 // Current amount of blood in the tub
 	var/max_blood = 500 // Maximum blood capacity
 	var/list/blood_donors = list() // List to store blood donors
@@ -1434,6 +1435,7 @@
 	. = ..()
 	create_reagents(max_blood, INJECTABLE)
 	reagents.add_reagent(/datum/reagent/blood, 0) // Start with no blood
+	update_icon()  // Make sure the icon is updated on initialization
 
 /obj/structure/bath/sabbatbath/examine(mob/user)
 	. = ..()
@@ -1449,33 +1451,47 @@
 	if(length(blood_donors) > 0)
 		. += "<span class='notice'>You can sense [length(blood_donors)] different blood donor[length(blood_donors) == 1 ? "" : "s"] in the mixture.</span>"
 
+/obj/structure/bath/sabbatbath/update_icon()
+	. = ..()
+	// Change the sprite when it contains blood
+	if(blood_level > 0)
+		icon_state = "bath_full_blood"
+	else
+		icon_state = "tub"
+
 /obj/structure/bath/sabbatbath/attackby(obj/item/W, mob/living/carbon/user, params)
 	if(istype(W, /obj/item/melee/vampirearms/knife))
-		if(user.bloodpool <= 0)
-			to_chat(user, "<span class='warning'>You have no blood to donate!</span>")
-			return
+		if(do_after(user, 100))
+			if(user.bloodpool <= 0)
+				to_chat(user, "<span class='warning'>You have no blood to donate!</span>")
+				return
 
-		user.visible_message("<span class='notice'>[user] cuts [user.p_their()] wrist and lets blood flow into the bath.</span>",
-							"<span class='notice'>You cut your wrist and let blood flow into the bath.</span>")
+			user.visible_message("<span class='notice'>[user] cuts [user.p_their()] wrist and lets blood flow into the bath.</span>",
+								"<span class='notice'>You cut your wrist and let blood flow into the bath.</span>")
 
-		// Calculate how much blood to transfer
-		var/amount_to_donate = min(user.bloodpool, 5)
+			// Calculate how much blood to transfer
+			var/amount_to_donate = min(user.bloodpool, 5)
 
-		// Subtract blood from user
-		user.bloodpool -= amount_to_donate
-		user.update_inv_hands()
+			// Subtract blood from user
+			user.bloodpool -= amount_to_donate
+			user.update_inv_hands()
 
-		// Add blood to bath
-		blood_level = min(blood_level + amount_to_donate, max_blood)
-		reagents.add_reagent(/datum/reagent/blood, amount_to_donate)
+			// Add blood to bath
+			blood_level = min(blood_level + amount_to_donate, max_blood)
+			reagents.add_reagent(/datum/reagent/blood, amount_to_donate)
 
-		// Add donor to list if not already there
-		var/donor_info = user.real_name
-		if(!(donor_info in blood_donors))
-			blood_donors += donor_info
+			// Add donor to list if not already there
+			var/donor_info = user.real_name
+			if(!(donor_info in blood_donors))
+				blood_donors += donor_info
 
-		//playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
-		return TRUE
+			// Update the icon to show blood
+			update_icon()
+
+			//playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
+			return TRUE
+		else
+			to_chat(user, span_warning("You decide not to add your blood to the bathtub..."))
 
 // Handle vaulderie goblet specifically
 	if(istype(W, /obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet))
@@ -1500,48 +1516,28 @@
 		if(length(blood_donors) > 0)
 			goblet.blood_donors |= blood_donors
 
-		//playsound(src, 'sound/effects/slosh.ogg', 25, TRUE)
-		return TRUE
-
-	// Handle generic container
-	if(istype(W, /obj/item/reagent_containers))
-		var/obj/item/reagent_containers/container = W
-
+		// Update icon if the bath is now empty
 		if(blood_level <= 0)
-			to_chat(user, "<span class='warning'>The bath is empty.</span>")
-			return
+			update_icon()
 
-		// Calculate transfer amount
-		var/transfer_amount = min(container.volume - container.reagents.total_volume, blood_level)
-		if(transfer_amount <= 0)
-			to_chat(user, "<span class='warning'>The container is already full!</span>")
-			return
-
-		// Perform transfer
-		user.visible_message("<span class='notice'>[user] scoops blood from the bath into [container].</span>",
-							"<span class='notice'>You scoop blood from the bath into [container].</span>")
-
-		// Transfer blood
-		reagents.trans_to(container, transfer_amount)
-		blood_level -= transfer_amount
-
-		playsound(src, 'sound/items/drink.ogg', 25, TRUE)
+		//playsound(src, 'sound/effects/slosh.ogg', 25, TRUE)
 		return TRUE
 
 	return ..()
 
 /obj/structure/bath/sabbatbath/user_buckle_mob(mob/living/M, mob/user, check_loc = TRUE)
 	. = ..()
+	playsound(loc, 'code/modules/wod13/sounds/catched.ogg', 50, FALSE)
 	if(. && blood_level > 0)
-		if(M == user)
-			M.visible_message("<span class='notice'>[user] climbs into the blood-filled bath.</span>",
-							"<span class='notice'>You climb into the blood-filled bath.</span>")
-		else
-			M.visible_message("<span class='notice'>[user] places [M] in the blood-filled bath.</span>",
-							"<span class='notice'>[user] places you in the blood-filled bath.</span>")
+		if(do_after(user, 100))
+			if(M == user)
+				M.visible_message("<span class='notice'>[user] climbs into the blood-filled bath.</span>",
+								"<span class='notice'>You climb into the blood-filled bath.</span>")
+			else
+				M.visible_message("<span class='notice'>[user] places [M] in the blood-filled bath.</span>",
+								"<span class='notice'>[user] places you in the blood-filled bath.</span>")
 
 		//playsound(src, 'sound/effects/splash.ogg', 50, TRUE)
-		add_blood_overlay(M)
 
 /obj/structure/bath/sabbatbath/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	. = ..()
@@ -1553,10 +1549,6 @@
 			buckled_mob.visible_message("<span class='notice'>[user] pulls [buckled_mob] out of the bath.</span>",
 									"<span class='notice'>[user] pulls you out of the bath.</span>")
 
-/obj/structure/bath/sabbatbath/proc/add_blood_overlay(mob/living/M)
-	M.add_mob_blood()
-	M.add_splatter_floor()
-	M.update_inv_gloves()
 
 
 /obj/weapon_showcase
