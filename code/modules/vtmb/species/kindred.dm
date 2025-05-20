@@ -568,7 +568,7 @@
 		client.prefs.save_preferences()
 		client.prefs.save_character()
 
-	if((dna.species.id == "kindred") || (dna.species.id == "ghoul")) //only splats that have Disciplines qualify
+	if((dna.species.id == "kindred") || (dna.species.id == "ghoul") || (dna.species.id == "gargoyle")) //only splats that have Disciplines qualify
 		var/list/datum/discipline/adding_disciplines = list()
 
 		if (discipline_pref) //initialise player's own disciplines
