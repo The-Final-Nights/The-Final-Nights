@@ -94,6 +94,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 41)
 		if(clane_id == "Gargoyle")
 			clane_id = "Sentinel"
+			species_id = "gargoyle"
 
 /// checks through keybindings for outdated unbound keys and updates them
 /datum/preferences/proc/check_keybindings()
