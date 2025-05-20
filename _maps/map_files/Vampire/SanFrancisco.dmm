@@ -10765,18 +10765,6 @@
 "cCn" = (
 /turf/closed/wall/vampwall,
 /area/vtm/fishermanswharf/lower)
-"cCp" = (
-/obj/structure/vampfence/rich{
-	alpha = 155;
-	density = 0;
-	dir = 4;
-	pixel_y = 8
-	},
-/turf/open/floor/plating/grate,
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "cCC" = (
 /mob/living/simple_animal/deer,
 /obj/item/food/grown/moonflower,
@@ -46779,6 +46767,19 @@
 /obj/structure/chair/comfy,
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/tzimisce_manor)
+"lmS" = (
+/obj/effect/decal/trash,
+/obj/structure/vampfence/rich{
+	dir = 4;
+	layer = 5;
+	name = "window bars";
+	pixel_y = 32
+	},
+/turf/open/floor/plating/shit,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "lmZ" = (
 /obj/structure/vampipe{
 	icon_state = "piping32"
@@ -54854,6 +54855,7 @@
 /obj/effect/landmark/start/citizen{
 	name = "Primogen Nosferatu"
 	},
+/obj/structure/chair/comfy/black,
 /turf/open/floor/carpet/black,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -70279,7 +70281,7 @@
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/tzimisce_manor)
 "qNr" = (
-/obj/structure/chair/plastic{
+/obj/structure/chair{
 	dir = 1
 	},
 /turf/open/floor/carpet/black,
@@ -113832,8 +113834,8 @@ vLG
 bEQ
 nbI
 nbI
-cCp
-ewX
+ecO
+lmS
 arp
 cBZ
 nYS
