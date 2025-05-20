@@ -1,6 +1,6 @@
 // Important Contacts
 
-GLOBAL_LIST_INIT(important_contacts, list())
+GLOBAL_LIST_INIT(important_contacts, alist())
 
 // Contact Networks
 
