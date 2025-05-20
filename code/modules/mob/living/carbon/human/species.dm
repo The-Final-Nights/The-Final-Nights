@@ -856,7 +856,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			bodyparts_to_add -= "ears"
 
 	if(mutant_bodyparts["wings"])
-		if(!H.dna.features["wings"] || H.dna.features["wings"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))))
+		if(!H.dna.features["wings"] || H.dna.features["wings"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))) || (H.w_uniform && (H.w_uniform.body_parts_covered & CHEST)))
 			bodyparts_to_add -= "wings"
 
 	if(mutant_bodyparts["wings_open"])

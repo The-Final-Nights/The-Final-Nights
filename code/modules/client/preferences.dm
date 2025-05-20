@@ -1160,9 +1160,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "<a href='byond://?_src_=prefs;preference=phobia;task=input'>[phobia]</a><BR>"
 
-			if(CONFIG_GET(flag/join_with_mutant_humans))
-
-				if(pref_species.mutant_bodyparts["wings"] && GLOB.r_wings_list.len >1)
+			if(pref_species.mutant_bodyparts["wings"] && GLOB.r_wings_list.len >1)
+				if(pref_species.id == "gargoyle")
 					if(!mutant_category)
 						dat += APPEARANCE_CATEGORY_COLUMN
 
@@ -3067,7 +3066,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				if("wings")
 					var/new_wings
-					new_wings = input(user, "Choose your character's wings:", "Character Preference") as null|anything in GLOB.r_wings_list
+					new_wings = tgui_input_list(user, "Choose your character's wings:", "Character Preference", GLOB.r_wings_list)
 					if(new_wings)
 						features["wings"] = new_wings
 
