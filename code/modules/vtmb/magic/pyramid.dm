@@ -201,7 +201,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/structure/fleshwall
 	name = "flesh wall"
@@ -213,7 +212,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/structure/tzijelly
 	name = "jelly thing"
@@ -225,7 +223,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/ritualrune/identification
 	name = "Identification Rune"

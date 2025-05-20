@@ -109,7 +109,6 @@
 		to_chat(sucker, span_userdanger("[owner] bops you with [owner.p_their()] [src.name]!"))
 	qdel(src)
 
-
 /obj/item/hand_item/noogie
 	name = "noogie"
 	desc = "Get someone in an aggressive grab then use this on them to ruin their day."
