@@ -474,9 +474,9 @@
 					var/mob/living/carbon/human/thrall = grabbed_victim
 					var/mob/living/carbon/human/regnant = vampire
 
-					if(thrall.has_status_effect(STATUS_EFFECT_INLOVE))
-						thrall.remove_status_effect(STATUS_EFFECT_INLOVE)
-					thrall.apply_status_effect(STATUS_EFFECT_INLOVE, owner)
+					if(thrall.has_status_effect(STATUS_EFFECT_BLOOD_BONDED))
+						thrall.remove_status_effect(STATUS_EFFECT_BLOOD_BONDED)
+					thrall.apply_status_effect(STATUS_EFFECT_BLOOD_BONDED, owner)
 					to_chat(owner, "<span class='notice'>You successfuly fed [thrall] with vitae.</span>")
 					to_chat(thrall, "<span class='userlove'>You feel good when you drink this <b>BLOOD</b>...</span>")
 
