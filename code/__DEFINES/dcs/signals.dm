@@ -232,6 +232,15 @@
 #define COMSIG_ATOM_START_PULL "movable_start_pull"
 ///from base of [/atom/proc/interact]: (mob/user)
 #define COMSIG_ATOM_UI_INTERACT "atom_ui_interact"
+///called on /living when attempting to pick up an item, from base of /mob/living/put_in_hand_check(): (obj/item/I)
+#define COMSIG_LIVING_TRY_PUT_IN_HAND "living_try_put_in_hand"
+	/// Can't pick up
+	#define COMPONENT_LIVING_CANT_PUT_IN_HAND (1<<0)
+
+
+///Basic mob signals
+///Called on /basic when updating its speed, from base of /mob/living/basic/update_basic_mob_varspeed(): ()
+#define POST_BASIC_MOB_UPDATE_VARSPEED "post_basic_mob_update_varspeed"
 
 
 /// from /datum/component/singularity/proc/can_move(), as well as /obj/energy_ball/proc/can_move()

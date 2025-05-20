@@ -1,0 +1,4 @@
+author: "XeonMations"
+delete-after: True
+changes:
+  - bugfix: "Fixed strongdmm failing to load the map due to alist()"
