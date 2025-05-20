@@ -3999,6 +3999,13 @@
 /obj/effect/turf_decal/siding/thinplating/dark,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
+"aZY" = (
+/obj/structure/table/wood,
+/obj/vampire_computer{
+	owner = "Street Janitor"
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/sabbat_lair)
 "bac" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -5077,6 +5084,13 @@
 	},
 /turf/closed/wall/vampwall/rich/low,
 /area/vtm/interior/millennium_tower/ventrue)
+"boz" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/structure/hydrant,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "boD" = (
 /obj/effect/decal/bordur,
 /obj/structure/vampfence/corner{
@@ -18544,6 +18558,10 @@
 /obj/item/clothing/under/vampire/graveyard,
 /turf/open/floor/plating/saint,
 /area/vtm/church/interior/staff)
+"eUW" = (
+/obj/effect/decal/cardboard,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/sabbat_lair)
 "eUZ" = (
 /obj/effect/decal/litter,
 /obj/structure/table,
@@ -18559,6 +18577,13 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/setite)
+"eVe" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/effect/decal/trash,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "eVt" = (
 /obj/structure/railing,
 /obj/effect/decal/shadow{
@@ -22993,6 +23018,12 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/upstairs)
+"gcp" = (
+/obj/effect/decal/trash{
+	icon_state = "trash5"
+	},
+/turf/open/floor/plating/dirt/jungle/dark,
+/area/vtm/sabbat_lair)
 "gcq" = (
 /obj/effect/decal/bordur,
 /obj/effect/decal/bordur{
@@ -29198,6 +29229,10 @@
 /obj/structure/vampfence/rich,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/park)
+"hHC" = (
+/obj/item/chair/wood,
+/turf/open/floor/plating/dirt/dark,
+/area/vtm/sabbat_lair)
 "hHF" = (
 /obj/machinery/light/small{
 	light_power = 0.5
@@ -31374,6 +31409,13 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/financialdistrict/construction)
+"ins" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/structure/fire_barrel,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "inz" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -36474,6 +36516,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
+"jGl" = (
+/obj/effect/decal/pallet{
+	pixel_x = -3;
+	pixel_y = -4
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "jGq" = (
 /obj/elevator_button_down{
 	id = 2;
@@ -47832,6 +47881,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/red,
 /area/vtm/clinic/haven)
+"mJE" = (
+/obj/effect/decal/cardboard,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/sabbat_lair)
 "mJH" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
@@ -62829,6 +62882,10 @@
 /obj/effect/decal/cleanable/oil/streak,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/techshop)
+"qDo" = (
+/obj/effect/decal/cardboard,
+/turf/open/floor/plating/dirt,
+/area/vtm/sabbat_lair)
 "qDr" = (
 /obj/structure/flora/ausbushes/grassybush,
 /obj/effect/decal/bordur,
@@ -64993,6 +65050,17 @@
 /obj/effect/decal/bordur,
 /turf/open/water,
 /area/vtm/forest)
+"reG" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/structure/bricks,
+/obj/effect/decal/pallet{
+	pixel_x = -3;
+	pixel_y = -4
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "reJ" = (
 /mob/living/simple_animal/sloth,
 /turf/open/floor/plating/vampgrass,
@@ -66559,6 +66627,10 @@
 /obj/vampire_car/track/volkswagen,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
+"ryC" = (
+/obj/structure/bed/maint,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/sabbat_lair)
 "ryE" = (
 /obj/vampire_car/retro/rand{
 	access = "church"
@@ -73658,6 +73730,7 @@
 /area/vtm/interior/cog/pantry)
 "trC" = (
 /obj/structure/bricks,
+/obj/effect/decal/pallet,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sabbat_lair)
 "trG" = (
@@ -81855,6 +81928,9 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict/construction)
 "vCT" = (
+/obj/effect/decal/trash{
+	icon_state = "trash5"
+	},
 /turf/open/floor/plating/dirt/dark,
 /area/vtm/sabbat_lair)
 "vDe" = (
@@ -82750,6 +82826,10 @@
 /obj/effect/decal/rugs,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"vOC" = (
+/obj/vampire_car/retro/rand,
+/turf/open/floor/plating/asphalt,
+/area/vtm/pacificheights)
 "vOM" = (
 /obj/effect/decal/wallpaper/blue,
 /obj/machinery/light,
@@ -87072,10 +87152,6 @@
 /obj/vampire_car/retro/rand,
 /turf/open/floor/plating/asphalt,
 /area/vtm/ghetto)
-"wWX" = (
-/obj/effect/decal/wallpaper/light,
-/turf/closed/wall/vampwall/old,
-/area/vtm/sabbat_lair)
 "wWZ" = (
 /obj/effect/decal/wallpaper/paper/stripe,
 /obj/machinery/light,
@@ -127149,9 +127225,9 @@ wTq
 nYS
 dhc
 jcc
-vCT
+hHC
 hKz
-hKz
+eUW
 hKz
 hKz
 hKz
@@ -127414,7 +127490,7 @@ hKz
 wov
 mag
 buF
-hKz
+ryC
 hKz
 nYZ
 dhc
@@ -128695,10 +128771,10 @@ mag
 jhJ
 ufd
 hKz
+gcp
 pVv
 pVv
-pVv
-pVv
+gcp
 liB
 lNg
 jcc
@@ -128948,7 +129024,7 @@ wTq
 nYS
 dhc
 jcc
-mag
+qDo
 hKz
 eHX
 eHX
@@ -190110,7 +190186,7 @@ ntw
 pdi
 jMv
 pdi
-bUo
+boz
 oiT
 oiT
 oiT
@@ -190881,13 +190957,13 @@ ntw
 pdi
 jMv
 pdi
-bUo
+eVe
 oiT
 lpG
 eND
 bxh
 fQf
-wWX
+azN
 uvR
 gEh
 tgt
@@ -191395,7 +191471,7 @@ ntw
 pdi
 jMv
 pdi
-bUo
+ins
 oiT
 uWK
 uoU
@@ -191915,7 +191991,7 @@ wtC
 jJA
 jJA
 jJA
-jJA
+mJE
 jJA
 gEh
 tgt
@@ -192677,10 +192753,10 @@ gcj
 mLS
 fGm
 ntw
-pdi
+vOC
 jMv
 pdi
-bUo
+reG
 oiT
 uWK
 npX
@@ -193195,7 +193271,7 @@ pdi
 jMv
 pdi
 bUo
-oiT
+jGl
 uWK
 cTh
 aUl
@@ -193452,7 +193528,7 @@ pdi
 jMv
 pdi
 bUo
-oiT
+jGl
 uWK
 xIB
 xIB
@@ -193709,7 +193785,7 @@ pdi
 jMv
 pdi
 bUo
-oiT
+pRs
 uWK
 jJA
 jJA
@@ -194739,8 +194815,8 @@ pdi
 bUo
 oiT
 uWK
-cTh
 aUl
+aZY
 jJA
 dff
 jJA
