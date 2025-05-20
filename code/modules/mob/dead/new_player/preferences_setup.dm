@@ -68,6 +68,14 @@
 		for (var/i in 1 to clane.clane_disciplines.len)
 			discipline_types += clane.clane_disciplines[i]
 			discipline_levels += 1
+	if(pref_species.id == "gargoyle")
+		qdel(clane)
+		clane = new /datum/vampireclane/gargoyle/sentinel()
+		discipline_types = list()
+		discipline_levels = list()
+		for (var/i in 1 to clane.clane_disciplines.len)
+			discipline_types += clane.clane_disciplines[i]
+			discipline_levels += 1
 
 ///Setup a hardcore random character and calculate their hardcore random score
 /datum/preferences/proc/hardcore_random_setup(mob/living/carbon/human/character, antagonist, is_latejoiner)

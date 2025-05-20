@@ -2590,15 +2590,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					var/list/available_subtypes = list()
-					for(var/i as anything in subtypesof(/datum/vampireclane/gargoyle))
-						var/a = GLOB.clanes_list[i]
-						var/datum/vampireclane/V = new a
-						if (V.whitelisted)
-							if (SSwhitelists.is_whitelisted(user.ckey, V.name))
-								available_subtypes[V.name] += GLOB.clanes_list
+					for(var/datum/vampireclane/clans as anything in subtypesof(/datum/vampireclane/gargoyle))
+						if (clans.whitelisted)
+							if (SSwhitelists.is_whitelisted(user.ckey, clans.name))
+								available_subtypes += clans.name
 						else
-							available_subtypes[V.name] += GLOB.clanes_list[i]
-						qdel(V)
+							available_subtypes += clans.name
 					var/result = tgui_input_list(user, "Select a subtype", "Subtype Selection", sort_list(available_subtypes))
 					if(result)
 						var/newtype = GLOB.clanes_list[result]
