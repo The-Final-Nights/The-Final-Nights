@@ -50496,6 +50496,15 @@
 	},
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/bianchiBank)
+"mhs" = (
+/obj/effect/landmark/npcwall,
+/obj/structure/big_vamprocks{
+	icon_state = "rock3";
+	density = 0
+	},
+/obj/manholedown,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/northbeach)
 "mht" = (
 /obj/structure/table/wood,
 /obj/item/phone_book,
@@ -175314,7 +175323,7 @@ ozP
 daK
 ozP
 ozP
-ozP
+mhs
 aoa
 noj
 hOP
