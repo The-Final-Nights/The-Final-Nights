@@ -1,6 +1,6 @@
 // Important Contacts
 
-GLOBAL_LIST_INIT(important_contacts, alist())
+GLOBAL_LIST_INIT(important_contacts, list())
 
 // Contact Networks
 
@@ -19,7 +19,7 @@ GLOBAL_LIST_INIT(endron_network, list())
 #define MILLENIUM_TOWER_NETWORK 1
 #define LASOMBRA_NETWORK 2
 #define TREMERE_NETWORK 3
-#define GIOVANNI_NETWORK 4 
+#define GIOVANNI_NETWORK 4
 #define TZMISCE_NETWORK 5
 #define ANARCH_NETWORK 6
 #define WAREHOUSE_NETWORK 7
