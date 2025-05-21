@@ -1461,6 +1461,7 @@
 
 /obj/structure/bath/sabbatbath/attackby(obj/item/W, mob/living/carbon/user, params)
 	if(istype(W, /obj/item/melee/vampirearms/knife))
+		playsound(loc,'sound/weapons/bladeslice.ogg', 50, FALSE)
 		if(do_after(user, 100))
 			if(user.bloodpool <= 0)
 				to_chat(user, "<span class='warning'>You have no blood to donate!</span>")
@@ -1481,9 +1482,8 @@
 			reagents.add_reagent(/datum/reagent/blood, amount_to_donate)
 
 			// Add donor to list if not already there
-			var/donor_info = user.real_name
-			if(!(donor_info in blood_donors))
-				blood_donors += donor_info
+			if(!(user in blood_donors))
+				blood_donors += user
 
 			// Update the icon to show blood
 			update_icon()
@@ -1514,7 +1514,7 @@
 
 		// Transfer donor information
 		if(length(blood_donors) > 0)
-			goblet.blood_donors |= blood_donors
+			goblet.blood_donors = blood_donors
 
 		// Update icon if the bath is now empty
 		if(blood_level <= 0)
@@ -1527,8 +1527,8 @@
 
 /obj/structure/bath/sabbatbath/user_buckle_mob(mob/living/M, mob/user, check_loc = TRUE)
 	. = ..()
-	playsound(loc, 'code/modules/wod13/sounds/catched.ogg', 50, FALSE)
 	if(. && blood_level > 0)
+		playsound(loc, 'code/modules/wod13/sounds/catched.ogg', 50, FALSE)
 		if(do_after(user, 100))
 			if(M == user)
 				M.visible_message("<span class='notice'>[user] climbs into the blood-filled bath.</span>",
@@ -1537,7 +1537,6 @@
 				M.visible_message("<span class='notice'>[user] places [M] in the blood-filled bath.</span>",
 								"<span class='notice'>[user] places you in the blood-filled bath.</span>")
 
-		//playsound(src, 'sound/effects/splash.ogg', 50, TRUE)
 
 /obj/structure/bath/sabbatbath/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	. = ..()
@@ -1549,6 +1548,12 @@
 			buckled_mob.visible_message("<span class='notice'>[user] pulls [buckled_mob] out of the bath.</span>",
 									"<span class='notice'>[user] pulls you out of the bath.</span>")
 
+		// Create blood splatters as they exit
+		if(blood_level > 0 && ishuman(buckled_mob))
+			var/turf/T = get_turf(src)
+			for(var/turf/adjacent in RANGE_TURFS(1, T))
+				if(prob(40) && adjacent != T)
+					buckled_mob.add_splatter_floor(adjacent)
 
 
 /obj/weapon_showcase
