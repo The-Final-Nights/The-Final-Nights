@@ -127,7 +127,7 @@
 	var/mob/living/target = null
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		// if the target is not dead, is the challenger isnt targeting themselves, if the target is a sabbatist, and if one of the name datums match the name input
-		if(H.stat != DEAD && is_sabbatist(H) && (findtext(H.real_name, challenged_name) || findtext(H.name, challenged_name)))
+		if(H.stat != DEAD && H != challenger && is_sabbatist(H) && (findtext(H.real_name, challenged_name) || findtext(H.name, challenged_name)))
 			target = H
 
 	if(!target)
