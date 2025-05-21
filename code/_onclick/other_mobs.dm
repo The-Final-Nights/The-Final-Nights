@@ -70,13 +70,6 @@
 
 	return attack_target.attack_hand(src, modifiers)
 
-		if (secondary_result == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN || secondary_result == SECONDARY_ATTACK_CONTINUE_CHAIN)
-			return
-		else if (secondary_result != SECONDARY_ATTACK_CALL_NORMAL)
-			CRASH("attack_hand_secondary did not return a SECONDARY_ATTACK_* define.")
-
-	A.attack_hand(src, modifiers)
-
 /// Return TRUE to cancel other attack hand effects that respect it. Modifiers is the assoc list for click info such as if it was a right click.
 /atom/proc/attack_hand(mob/user, modifiers)
 	. = FALSE
