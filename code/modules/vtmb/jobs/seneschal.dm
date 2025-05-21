@@ -41,7 +41,6 @@
 
 	minimal_masquerade = 5
 
-	my_contact_is_important = TRUE
 	known_contacts = list("Prince","Sheriff","Tremere Regent","Dealer","Primogens")
 
 	v_duty = "You are the right hand man or woman of the most powerful vampire in the city. The Camarilla trusts you to run the city, even in their stead."
@@ -57,7 +56,7 @@
 	id = /obj/item/card/id/clerk
 	uniform = /obj/item/clothing/under/vampire/clerk
 	shoes = /obj/item/clothing/shoes/vampire/brown
-	l_pocket = /obj/item/vamp/phone/clerk
+	l_pocket = /obj/item/vamp/phone/seneschal
 	r_pocket = /obj/item/vamp/keys/clerk
 	backpack_contents = list(/obj/item/passport=1, /obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/seneschal=1)
 
@@ -117,7 +116,6 @@
 //	minimal_generation = 12	//Uncomment when players get exp enough
 	minimal_masquerade = 5
 
-	my_contact_is_important = TRUE
 	known_contacts = list("Prince","Sheriff","Tremere Regent","Dealer","Emissary","Baron","Primogens")
 
 	v_duty = "You are an expert on the nightlife of Cainite society. Acting as the chief advisor on all things related to boons and diplomacy, the Prince defers quite the amount of judgement to you. Don't squander it."
@@ -172,8 +170,8 @@
 	display_order = JOB_DISPLAY_ORDER_TOWERWORK
 	bounty_types = CIV_JOB_SEC
 	known_contacts = list("Prince", "Sheriff", "Seneschal")
-	allowed_species = list("Ghoul", "Human")
-
+	allowed_species = list("Ghoul", "Human", "Vampire")
+	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Kiasyd", "Cappadocian", "Tzimisce")
 	duty = "You work directly for the Millenium Tower and its administrative staff in a variety of ways, you may even be a personal retainer of one of the top three, to the point that any oddities that you may see over night or hear are either things you are already aware or you simply laugh them off and try not to think about it."
 	minimal_masquerade = 4
 	experience_addition = 10
@@ -190,7 +188,7 @@
 	suit = /obj/item/clothing/suit/vampire/trench
 	shoes = /obj/item/clothing/shoes/vampire
 	r_pocket = /obj/item/vamp/keys/camarilla/ghoul
-	l_pocket = /obj/item/vamp/phone/camarilla
+	l_pocket = /obj/item/vamp/phone/tower_employee
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 	backpack = /obj/item/storage/backpack

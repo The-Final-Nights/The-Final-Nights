@@ -335,25 +335,6 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	surplus = 0
 	include_modes = list(/datum/game_mode/nuclear/clown_ops)
 
-/datum/uplink_item/dangerous/bananashield
-	name = "Bananium Energy Shield"
-	desc = "A clown's most powerful defensive weapon, this personal shield provides near immunity to ranged energy attacks \
-		by bouncing them back at the ones who fired them. It can also be thrown to bounce off of people, slipping them, \
-		and returning to you even if you miss. WARNING: DO NOT ATTEMPT TO STAND ON SHIELD WHILE DEPLOYED, EVEN IF WEARING ANTI-SLIP SHOES."
-	item = /obj/item/shield/energy/bananium
-	cost = 16
-	surplus = 0
-	include_modes = list(/datum/game_mode/nuclear/clown_ops)
-
-/datum/uplink_item/dangerous/clownsword
-	name = "Bananium Energy Sword"
-	desc = "An energy sword that deals no damage, but will slip anyone it contacts, be it by melee attack, thrown \
-	impact, or just stepping on it. Beware friendly fire, as even anti-slip shoes will not protect against it."
-	item = /obj/item/melee/transforming/energy/sword/bananium
-	cost = 3
-	surplus = 0
-	include_modes = list(/datum/game_mode/nuclear/clown_ops)
-
 /datum/uplink_item/dangerous/clownoppin
 	name = "Ultra Hilarious Firing Pin"
 	desc = "A firing pin that, when inserted into a gun, makes that gun only useable by clowns and clumsy people and makes that gun honk whenever anyone tries to fire it."
