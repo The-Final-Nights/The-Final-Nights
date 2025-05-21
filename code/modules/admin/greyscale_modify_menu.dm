@@ -347,8 +347,5 @@ This is highly likely to cause massive amounts of lag as every object in the gam
 
 /datum/greyscale_modify_menu/spray_paint/ui_status(mob/user, datum/ui_state/state)
 	return min(
-		ui_status_only_living(user, target),
-		ui_status_user_is_abled(user, target),
-		ui_status_user_strictly_adjacent(user, target),
 		user.is_holding(spraycan)? UI_INTERACTIVE : UI_CLOSE
 	)
