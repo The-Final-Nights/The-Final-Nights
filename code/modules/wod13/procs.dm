@@ -9,9 +9,9 @@
 				return
 		if(!CheckZoneMasquerade(src))
 			return
-	if(!is_special_character(src) || forced)
-		if(((last_masquerade_violation + 10 SECONDS) < world.time) || forced)
-			last_masquerade_violation = world.time
+	if(forced || !is_special_character(src))
+		if(forced || COOLDOWN_FINISHED(src, last_masquerade_violation))
+			COOLDOWN_START(src, last_masquerade_violation, 10 SECONDS)
 			if(value < 0)
 				if(masquerade > 0)
 					masquerade = max(0, masquerade+value)
@@ -57,29 +57,43 @@
 		else
 			return TRUE
 
-/mob/living/proc/CheckEyewitness(var/mob/living/source, var/mob/attacker, var/range = 0, var/affects_source = FALSE)
+/mob/living/proc/CheckEyewitness(mob/living/source, mob/attacker, range = 0, affects_source = FALSE)
 	var/actual_range = max(1, round(range*(attacker.alpha/255)))
 	var/list/seenby = list()
 	for(var/mob/living/carbon/human/npc/NPC in oviewers(1, source))
-		if(!NPC.CheckMove())
+		if(NPC.can_see_masq_breaches())
 			if(get_turf(src) != turn(NPC.dir, 180))
 				seenby |= NPC
-				NPC.Aggro(attacker, FALSE)
+				INVOKE_ASYNC(NPC, TYPE_PROC_REF(/mob/living/carbon/human/npc, Aggro), attacker, FALSE)
 	for(var/mob/living/carbon/human/npc/NPC in viewers(actual_range, source))
-		if(!NPC.CheckMove())
+		if(NPC.can_see_masq_breaches())
 			if(affects_source)
 				if(NPC == source)
-					NPC.Aggro(attacker, TRUE)
+					INVOKE_ASYNC(NPC, TYPE_PROC_REF(/mob/living/carbon/human/npc, Aggro), attacker, TRUE)
 					seenby |= NPC
 			if(!NPC.pulledby)
 				var/turf/LC = get_turf(attacker)
 				if(LC.get_lumcount() > 0.25 || get_dist(NPC, attacker) <= 1)
 					if(NPC.backinvisible(attacker))
 						seenby |= NPC
-						NPC.Aggro(attacker, FALSE)
+						INVOKE_ASYNC(NPC, TYPE_PROC_REF(/mob/living/carbon/human/npc, Aggro), attacker, FALSE)
 	if(length(seenby) >= 1)
 		return TRUE
 	return FALSE
+
+/mob/living/carbon/human/npc/proc/can_see_masq_breaches()
+	if(key || ghoulificated || conditioned)
+		return FALSE // Already a knower, an addict or conditioned into being a placid doll.
+	if(stat > SOFT_CRIT)
+		return FALSE
+	if(HAS_TRAIT(src, TRAIT_BLIND))
+		return FALSE
+	if(pulledby)
+		if(HAS_TRAIT(pulledby, TRAIT_CHARMER))
+			return FALSE // Is charmed.
+		if(grab_state >= GRAB_AGGRESSIVE && iskindred(pulledby))
+			return FALSE // Has bigger problems right now. Likely being fed on.
+	return TRUE
 
 /mob/proc/can_respawn()
 	if (client?.ckey)

@@ -884,44 +884,34 @@
 	switch(level_casting)
 		if(1)
 			caster.add_movespeed_modifier(/datum/movespeed_modifier/celerity)
-			caster.celerity_visual = TRUE
 			spawn((delay)+caster.discipline_time_plus)
 				if(caster)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/blackwind_deactivate.ogg', 50, FALSE)
 					caster.remove_movespeed_modifier(/datum/movespeed_modifier/celerity)
-					caster.celerity_visual = FALSE
 		if(2)
 			caster.add_movespeed_modifier(/datum/movespeed_modifier/celerity2)
-			caster.celerity_visual = TRUE
 			spawn((delay)+caster.discipline_time_plus)
 				if(caster)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/blackwind_deactivate.ogg', 50, FALSE)
 					caster.remove_movespeed_modifier(/datum/movespeed_modifier/celerity2)
-					caster.celerity_visual = FALSE
 		if(3)
 			caster.add_movespeed_modifier(/datum/movespeed_modifier/celerity3)
-			caster.celerity_visual = TRUE
 			spawn((delay)+caster.discipline_time_plus)
 				if(caster)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/blackwind_deactivate.ogg', 50, FALSE)
 					caster.remove_movespeed_modifier(/datum/movespeed_modifier/celerity3)
-					caster.celerity_visual = FALSE
 		if(4)
 			caster.add_movespeed_modifier(/datum/movespeed_modifier/celerity4)
-			caster.celerity_visual = TRUE
 			spawn((delay)+caster.discipline_time_plus)
 				if(caster)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/blackwind_deactivate.ogg', 50, FALSE)
 					caster.remove_movespeed_modifier(/datum/movespeed_modifier/celerity4)
-					caster.celerity_visual = FALSE
 		if(5)
 			caster.add_movespeed_modifier(/datum/movespeed_modifier/celerity5)
-			caster.celerity_visual = TRUE
 			spawn((delay)+caster.discipline_time_plus)
 				if(caster)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/blackwind_deactivate.ogg', 50, FALSE)
 					caster.remove_movespeed_modifier(/datum/movespeed_modifier/celerity5)
-					caster.celerity_visual = FALSE
 
 /datum/chi_discipline/demon_shintai
 	name = "Demon Shintai"
@@ -1784,7 +1774,7 @@
 				affected_mob.athletics += 2
 				affected_mob.lockpicking += 2
 				ADD_TRAIT(affected_mob, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
-				var/obj/effect/celerity/celerity_effect = new(get_turf(affected_mob))
+				var/obj/effect/afterimage/celerity_effect = new(get_turf(affected_mob))
 				celerity_effect.appearance = affected_mob.appearance
 				celerity_effect.dir = affected_mob.dir
 				var/matrix/double_size = matrix(affected_mob.transform)
@@ -2120,11 +2110,12 @@
 			var/matrix/double_size = matrix()
 			double_size.Scale(2, 2)
 			for (var/i in 1 to 3)
-				var/obj/effect/celerity/celerity_effect = new(get_turf(caster))
+				var/obj/effect/afterimage/celerity_effect = new(get_turf(caster))
 				celerity_effect.appearance = caster.appearance
 				celerity_effect.dir = caster.dir
 				celerity_effect.color = "#000000"
 				animate(celerity_effect, pixel_x = pick(-16, 0, 16), pixel_y = pick(-16, 0, 16), alpha = 0, transform = double_size, time = 2 SECONDS)
+				QDEL_IN(celerity_effect, 0.5 SECONDS)
 		if(4)
 			caster.drop_all_held_items()
 			caster.put_in_active_hand(new /obj/item/melee/touch_attack/yin_touch(caster))

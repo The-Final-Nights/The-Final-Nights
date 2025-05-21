@@ -294,8 +294,7 @@
 				H.voted_for |= dna.real_name
 				if(masquerade_votes > 1)
 					masquerade_votes = 0
-					last_masquerade_violation = 0
-					AdjustMasquerade(-1)
+					AdjustMasquerade(-1, forced = TRUE)
 ///////HUDs///////
 	if(href_list["hud"])
 		if(!ishuman(usr))

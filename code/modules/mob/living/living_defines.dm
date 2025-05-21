@@ -259,7 +259,7 @@
 	var/masquerade = 5
 	var/datum/weakref/conditioner
 	var/conditioned = FALSE
-	var/last_masquerade_violation = 0
+	COOLDOWN_DECLARE(last_masquerade_violation)
 
 	var/obj/effect/overlay/gnosis
 

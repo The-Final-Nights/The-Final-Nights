@@ -121,7 +121,6 @@
 
 	var/next_veil_time = 0
 
-	var/celerity_visual = FALSE
 	var/potential = 0
 
 	var/in_frenzy = FALSE

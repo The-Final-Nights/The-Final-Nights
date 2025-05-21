@@ -68,12 +68,13 @@
 	if(inspired)
 		if(stat != DEAD)
 			adjustBruteLoss(-10, TRUE)
-			var/obj/effect/celerity/C = new(get_turf(src))
+			var/obj/effect/afterimage/C = new(get_turf(src))
 			C.appearance = appearance
 			C.dir = dir
 			var/matrix/ntransform = matrix(C.transform)
 			ntransform.Scale(2, 2)
 			animate(C, transform = ntransform, alpha = 0, time = 3)
+			QDEL_IN(C, 0.3 SECONDS)
 
 /mob/living/carbon/proc/inspired()
 	inspired = TRUE
