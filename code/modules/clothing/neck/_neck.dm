@@ -39,7 +39,6 @@
 	if(clip_on)
 		return
 	update_appearance(UPDATE_ICON)
-	register_context()
 
 /obj/item/clothing/neck/tie/examine(mob/user)
 	. = ..()
@@ -59,9 +58,6 @@
 	// Mirrors give you a boost to your tying speed. I realize this stacks and I think that's hilarious.
 	for(var/obj/structure/mirror/reflection in view(2, user))
 		tie_timer_actual /= 1.25
-	// Heads of staff are experts at tying their ties.
-	if(user.mind?.assigned_role.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND)
-		tie_timer_actual /= 2
 	// Tie/Untie our tie
 	if(!do_after(user, tie_timer_actual))
 		to_chat(user, span_notice("Your fingers fumble away from [src] as your concentration breaks."))
@@ -77,7 +73,7 @@
 		span_notice("You successfully [is_tied ? "tied" : "untied"] [src]!"),
 	)
 	update_appearance(UPDATE_ICON)
-	user.update_clothing(ITEM_SLOT_NECK)
+	user.update_inv_neck()
 
 /obj/item/clothing/neck/tie/update_icon()
 	. = ..()
@@ -161,7 +157,7 @@
 	icon_state = "scarf"
 	desc = "A stylish scarf. The perfect winter accessory for those with a keen fashion sense, and those who just can't handle a cold breeze on their necks."
 	w_class = WEIGHT_CLASS_TINY
-	custom_price = PAYCHECK_CREW
+	custom_price = PAYCHECK_ASSISTANT
 	greyscale_colors = "#EEEEEE#EEEEEE"
 	greyscale_config = /datum/greyscale_config/scarf
 	greyscale_config_worn = /datum/greyscale_config/scarf/worn
@@ -237,13 +233,12 @@
 	name = "suspicious looking striped scarf"
 	desc = "Ready to operate."
 	greyscale_colors = "#B40000#545350"
-	armor_type = /datum/armor/large_scarf_syndie
 
 /obj/item/clothing/neck/infinity_scarf
 	name = "infinity scarf"
 	icon_state = "infinity_scarf"
 	w_class = WEIGHT_CLASS_TINY
-	custom_price = PAYCHECK_CREW
+	custom_price = PAYCHECK_ASSISTANT
 	greyscale_colors = "#EEEEEE"
 	greyscale_config = /datum/greyscale_config/infinity_scarf
 	greyscale_config_worn = /datum/greyscale_config/infinity_scarf/worn
