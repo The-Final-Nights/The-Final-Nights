@@ -18,7 +18,6 @@
 	desc = "A nondescript pair of tough jean shorts."
 	icon_state = "jeanshorts"
 	can_adjust = FALSE
-	female_sprite_flags = NO_FEMALE_UNIFORM
 	greyscale_config = /datum/greyscale_config/jeanshorts
 	greyscale_config_worn = /datum/greyscale_config/jeanshorts/worn
 	greyscale_colors = "#787878#723E0E#4D7EAC"

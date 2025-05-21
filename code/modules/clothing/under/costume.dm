@@ -260,33 +260,6 @@
 	fire = 30
 	acid = 30
 
-/obj/item/clothing/under/costume/buttondown
-	gender = PLURAL
-	female_sprite_flags = NO_FEMALE_UNIFORM
-	custom_price = PAYCHECK_ASSISTANT
-	icon = 'icons/obj/clothing/under/shorts_pants_shirts.dmi'
-	worn_icon = 'icons/mob/clothing/under/shorts_pants_shirts.dmi'
-	species_exception = list(/datum/species/golem)
-	can_adjust = FALSE
-
-/obj/item/clothing/under/costume/buttondown/slacks
-	name = "buttondown shirt with slacks"
-	desc = "A fancy buttondown shirt with slacks."
-	icon_state = "buttondown_slacks"
-	greyscale_config = /datum/greyscale_config/buttondown_slacks
-	greyscale_config_worn = /datum/greyscale_config/buttondown_slacks/worn
-	greyscale_colors = "#EEEEEE#EE8E2E#222227#D8D39C"
-	flags_1 = IS_PLAYER_COLORABLE_1
-
-/obj/item/clothing/under/costume/buttondown/shorts
-	name = "buttondown shirt with shorts"
-	desc = "A fancy buttondown shirt with shorts."
-	icon_state = "buttondown_shorts"
-	greyscale_config = /datum/greyscale_config/buttondown_shorts
-	greyscale_config_worn = /datum/greyscale_config/buttondown_shorts/worn
-	greyscale_colors = "#EEEEEE#EE8E2E#222227#D8D39C"
-	flags_1 = IS_PLAYER_COLORABLE_1
-
 /obj/item/clothing/under/costume/jackbros
 	name = "jack bros outfit"
 	desc = "For when it's time to hee some hos."
