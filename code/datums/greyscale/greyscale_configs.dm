@@ -28,40 +28,6 @@
 	icon_file = 'icons/obj/atmospherics/prototype_canister.dmi'
 	json_config = 'code/datums/greyscale/json_configs/canister_proto.json'
 
-/datum/greyscale_config/carp
-	name = "Space Carp"
-	icon_file = 'icons/mob/carp.dmi'
-	json_config = 'code/datums/greyscale/json_configs/carp.json'
-
-/datum/greyscale_config/carp/disk_mouth
-	name = "Space Carp, Disk in Mouth"
-	json_config = 'code/datums/greyscale/json_configs/carp_disk_mouth.json'
-
-/datum/greyscale_config/wirecutters
-	name = "Wirecutters"
-	icon_file = 'icons/obj/tools.dmi'
-	json_config = 'code/datums/greyscale/json_configs/wirecutters.json'
-
-/datum/greyscale_config/screwdriver
-	name = "Screwdriver"
-	icon_file = 'icons/obj/tools.dmi'
-	json_config = 'code/datums/greyscale/json_configs/screwdriver.json'
-
-/datum/greyscale_config/screwdriver_inhand_left
-	name = "Held Screwdriver, Left"
-	icon_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
-	json_config = 'code/datums/greyscale/json_configs/screwdriver_worn.json'
-
-/datum/greyscale_config/screwdriver_inhand_right
-	name = "Held Screwdriver, Right"
-	icon_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
-	json_config = 'code/datums/greyscale/json_configs/screwdriver_worn.json'
-
-/datum/greyscale_config/screwdriver_belt
-	name = "Belt Worn Screwdriver"
-	icon_file = 'icons/obj/clothing/belt_overlays.dmi'
-	json_config = 'code/datums/greyscale/json_configs/screwdriver_worn.json'
-
 /datum/greyscale_config/jumpsuit
 	name = "Jumpsuit"
 	icon_file = 'icons/obj/clothing/under/color.dmi'
@@ -102,39 +68,6 @@
 	icon_file = 'icons/mob/inhands/clothing_righthand.dmi'
 	json_config = 'code/datums/greyscale/json_configs/jumpsuit_prison_inhand.json'
 
-/datum/greyscale_config/pda
-	name = "PDA"
-	icon_file = 'icons/obj/pda.dmi'
-	json_config = 'code/datums/greyscale/json_configs/pda.json'
-
-/datum/greyscale_config/pda/chaplain
-	name = "Chaplain PDA"
-	json_config = 'code/datums/greyscale/json_configs/pda_chaplain.json'
-
-/datum/greyscale_config/pda/clown
-	name = "Clown PDA"
-	json_config = 'code/datums/greyscale/json_configs/pda_clown.json'
-
-/datum/greyscale_config/pda/head
-	name = "Head PDA"
-	json_config = 'code/datums/greyscale/json_configs/pda_head.json'
-
-/datum/greyscale_config/pda/mime
-	name = "Mime PDA"
-	json_config = 'code/datums/greyscale/json_configs/pda_mime.json'
-
-/datum/greyscale_config/pda/stripe_split
-	name = "Split Stripe PDA"
-	json_config = 'code/datums/greyscale/json_configs/pda_stripe_split.json'
-
-/datum/greyscale_config/pda/stripe_thick
-	name = "Thick Stripe PDA"
-	json_config = 'code/datums/greyscale/json_configs/pda_stripe_thick.json'
-
-/datum/greyscale_config/pda/stripe_thick/head
-	name = "Head Thick Stripe PDA"
-	json_config = 'code/datums/greyscale/json_configs/pda_stripe_thick_head.json'
-
 /datum/greyscale_config/sneakers
 	name = "Sneakers"
 	icon_file = 'icons/obj/clothing/shoes.dmi'
@@ -165,40 +98,3 @@
 	icon_file = 'icons/obj/clothing/shoes.dmi'
 	json_config = 'code/datums/greyscale/json_configs/sneakers_marisa.json'
 
-/datum/greyscale_config/circuit
-	name = "Circuit Board"
-	icon_file = 'icons/obj/module.dmi'
-	json_config = 'code/datums/greyscale/json_configs/circuit.json'
-
-/datum/greyscale_config/sombrero
-	name = "Sombrero"
-	icon_file = 'icons/obj/clothing/head/sombrero.dmi'
-	json_config = 'code/datums/greyscale/json_configs/sombrero.json'
-
-/datum/greyscale_config/sombrero/base
-	name = "Base Sombrero Style"
-	json_config = 'code/datums/greyscale/json_configs/sombrero_base.json'
-
-/datum/greyscale_config/sombrero/lefthand
-	name = "Held Sombrero, Left"
-	json_config = 'code/datums/greyscale/json_configs/sombrero_lefthand.json'
-
-/datum/greyscale_config/sombrero/base_lefthand
-	name = "Base Held Sombrero Style, Left"
-	json_config = 'code/datums/greyscale/json_configs/sombrero_base_lefthand.json'
-
-/datum/greyscale_config/sombrero/righthand
-	name = "Held Sombrero, Right"
-	json_config = 'code/datums/greyscale/json_configs/sombrero_righthand.json'
-
-/datum/greyscale_config/sombrero/base_righthand
-	name = "Base Held Sombrero Style, Right"
-	json_config = 'code/datums/greyscale/json_configs/sombrero_base_righthand.json'
-
-/datum/greyscale_config/sombrero/worn
-	name = "Worn Sombrero"
-	json_config = 'code/datums/greyscale/json_configs/sombrero_worn.json'
-
-/datum/greyscale_config/sombrero/base_worn
-	name = "Base Worn Sombrero Style"
-	json_config = 'code/datums/greyscale/json_configs/sombrero_base_worn.json'

@@ -127,12 +127,6 @@
 	var/base_pixel_y = 0
 	///Used for changing icon states for different base sprites.
 	var/base_icon_state
-
-	///The config type to use for greyscaled sprites. Both this and greyscale_colors must be assigned to work.
-	var/greyscale_config
-	///A string of hex format colors to be used by greyscale sprites, ex: "#0054aa#badcff"
-	var/greyscale_colors
-
 	///Icon-smoothing behavior.
 	var/smoothing_flags = NONE
 	///What directions this is currently smoothing with. IMPORTANT: This uses the smoothing direction flags as defined in icon_smoothing.dm, instead of the BYOND flags.
@@ -718,45 +712,11 @@
 	SHOULD_CALL_PARENT(TRUE)
 	return SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_ICON_STATE)
 
-/atom/proc/update_greyscale()
-	SHOULD_CALL_PARENT(TRUE)
-	. = list()
-	var/list/raw_rgb = splittext(greyscale_colors, "#")
-	for(var/i in 2 to length(raw_rgb))
-		. += "#[raw_rgb[i]]"
-	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_GREYSCALE, .)
-
 /// Updates the overlays of the atom
 /atom/proc/update_overlays()
 	SHOULD_CALL_PARENT(TRUE)
 	. = list()
 	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_OVERLAYS, .)
-
-/// Checks if the colors given are different and if so causes a greyscale icon update
-/// The colors argument can be either a list or the full color string
-/atom/proc/set_greyscale_colors(list/colors, update=TRUE)
-	SHOULD_CALL_PARENT(TRUE)
-	if(istype(colors))
-		colors = colors.Join("")
-	if(greyscale_colors == colors)
-		return
-	greyscale_colors = colors
-	if(!greyscale_config)
-		return
-	if(update && greyscale_config && greyscale_colors)
-		update_greyscale()
-
-/// Checks if the greyscale config given is different and if so causes a greyscale icon update
-/atom/proc/set_greyscale_config(new_config, update=TRUE)
-	if(greyscale_config == new_config)
-		return
-	greyscale_config = new_config
-	if(update && greyscale_config && greyscale_colors)
-		update_greyscale()
-
-/// Checks if this atom uses the GAS system and if so updates the icon
-/atom/proc/update_greyscale()
-	icon = SSgreyscale.GetColoredIconByType(greyscale_config, greyscale_colors)
 
 /**
  * An atom we are buckled or is contained within us has tried to move
