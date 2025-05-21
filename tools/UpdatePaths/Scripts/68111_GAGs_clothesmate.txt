@@ -9,3 +9,5 @@
 /obj/item/clothing/under/pants/youngfolksjeans : /obj/item/clothing/under/pants/jeans{@OLD}
 /obj/item/clothing/under/pants/classicjeans : /obj/item/clothing/under/pants/jeans{@OLD}
 /obj/item/clothing/under/dress/blacktango : /obj/item/clothing/under/dress/tango{@OLD}
+
+/obj/item/clothing/under/costume/yakuza : /obj/item/clothing/suit/yakuza{@OLD}

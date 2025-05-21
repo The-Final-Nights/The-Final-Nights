@@ -18276,9 +18276,9 @@
 "eQL" = (
 /obj/item/clothing/suit/yakuza,
 /obj/item/clothing/shoes/yakuza,
-/obj/item/clothing/under/costume/yakuza,
-/obj/item/clothing/under/costume/yakuza,
-/obj/item/clothing/under/costume/yakuza,
+/obj/item/clothing/suit/yakuza,
+/obj/item/clothing/suit/yakuza,
+/obj/item/clothing/suit/yakuza,
 /obj/structure/closet/cabinet,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
