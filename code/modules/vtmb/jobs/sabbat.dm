@@ -59,7 +59,11 @@
 	antag_hud_name = "rev"
 
 /datum/antagonist/sabbatist/on_gain()
-	add_antag_hud(ANTAG_HUD_REV, "rev", owner.current)
+/datum/antagonist/sabbatist/on_gain()
+	if(antag_hud_type && antag_hud_name)
+		add_antag_hud(antag_hud_type, antag_hud_name, owner.current)
+	else
+		add_antag_hud(ANTAG_HUD_REV, "rev", owner.current)
 	owner.special_role = src
 	//var/datum/objective/custom/custom_objective = new
 	//custom_objective.owner = owner
@@ -77,5 +81,5 @@
 	owner.special_role = null
 
 /datum/antagonist/sabbatist/greet()
-	to_chat(owner.current, "<span class='alertsyndie'>You are the part of Sabbat.</span>")
+	to_chat(owner.current, "<span class='alertsyndie'>You are now part of the Sabbat.</span>")
 	owner.announce_objectives()

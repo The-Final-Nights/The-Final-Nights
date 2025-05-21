@@ -350,16 +350,27 @@
 					M.visible_message(span_notice("[M]'s eyes flash briefly as they become bound to [donor]."), "", span_notice("Your eyes flash as the blood bond forms."))
 					playsound(M, 'sound/magic/smoke.ogg', 20, TRUE)
 
-		if(length(blood_donors) > 1)
-			to_chat(M, span_warning("You feel your previous blood bonds vanishing..."))
-
-		// Check if any blood donors have the antag datum and transfer it
+	// Handle vaulderie
+	// First check if there are multiple donors for the vaulderie effect
+	if(length(blood_donors) > 1)
+		// Multiple donors case - Creates sabbat pack if the drinker doesn't already have a sabbat datum
+		if(!M.mind.has_antag_datum(/datum/antagonist/sabbatist) || !M.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus || !M.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest)))
+			to_chat(M, span_warning("You feel your previous blood bonds vanishing as you take part in the Vaulderie and join the Sabbat..."))
+			var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
+			M.mind.add_antag_datum(new_sabbat)
+	else
+		// Single donor case - Transfer sabbat status from donor if they have it
 		var/antag_transferred = FALSE
 		for(var/mob/living/carbon/human/donor in blood_donors)
-			if(donor.mind & (donor.mind.has_antag_datum(/datum/antagonist/sabbatist) | donor.mind.has_antag_datum(/datum/antagonist/sabbatpriest) | donor.mind.has_antag_datum(/datum/antagonist/sabbatductus)))
-					var/datum/antagonist/sabbatductus/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
+			// Check if donor has any sabbat datum
+			if(donor.mind & (donor.mind.has_antag_datum(/datum/antagonist/sabbatist) || donor.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest) || donor.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus)))
+				// Only add the antag datum if the drinker doesn't already have any sabbat datum
+				if(!M.mind.has_antag_datum(/datum/antagonist/sabbatist) || !M.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || !M.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
+					to_chat(M, span_warning("You feel a strange connection to [donor.real_name] as you drink their blood..."))
+					var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
 					M.mind.add_antag_datum(new_sabbat)
 					antag_transferred = TRUE
+					break  // Exit after first successful transfer
 
 				if(antag_transferred)
 					to_chat(M, span_warning("<span class='danger'>Your mind floods with alien thoughts and philosophies. You now serve the Sabbat!</span>"))

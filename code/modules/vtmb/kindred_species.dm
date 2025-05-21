@@ -466,8 +466,8 @@
 
 							childe_prefs_v.save_character()
 							// Sabbatist Embrace Logic
-							if(sire.mind && sire.mind.has_antag_datum(/datum/antagonist/sabbatist | /datum/antagonist/sabbatpriest | /datum/antagonist/sabbatductus))
-								if(childe.mind && !childe.mind.has_antag_datum(/datum/antagonist/sabbatist))
+							if(sire.mind && sire.mind.has_antag_datum(/datum/antagonist/sabbatist) || sire.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || sire.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
+								if(childe.mind && !childe.mind.has_antag_datum(/datum/antagonist/sabbatist) || !childe.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || !childe.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
 									var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(childe.mind)
 									childe.mind.add_antag_datum(new_sabbat)
 									log_game("[key_name(sire)] has spread Sabbatism to [key_name(childe)] via Embrace.")
@@ -493,8 +493,8 @@
 						log_game("[key_name(regnant)] has attempted to bloodbond [key_name(thrall)] (UNBONDABLE).")
 
 					// Sabbatist Ghouling Logic
-					if(regnant.mind && regnant.mind.has_antag_datum(/datum/antagonist/sabbatist | /datum/antagonist/sabbatpriest | /datum/antagonist/sabbatductus))
-						if(thrall.mind && !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist))
+					if(regnant.mind && 	regnant.mind.has_antag_datum(/datum/antagonist/sabbatist) || regnant.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || regnant.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
+						if(thrall.mind && !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist) || !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
 							var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(thrall.mind)
 							thrall.mind.add_antag_datum(new_sabbat)
 							log_game("[key_name(regnant)] has spread Sabbatism to [key_name(thrall)] via vitae.")

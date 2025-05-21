@@ -664,7 +664,7 @@
 		return
 	if(!target.IsStun() && prob(20))
 		visible_message("<span class='warning'>[user] bonks [src]'s head!</span>", "<span class='warning'>You bonk[target]'s head!</span>")
-		if(user.mind && (user.mind.has_antag_datum(/datum/antagonist/sabbatist) || user.mind.has_antag_datum(/datum/antagonist/sabbatductus) || user.mind.has_antag_datum(/datum/antagonist/sabbatpriest)))
+		if(user.mind && (user.mind.has_antag_datum(/datum/antagonist/sabbatist) || user.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || user.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest)))
 			target.Stun(3 SECONDS)
 			target.emote("collapse")
 			target.drop_all_held_items()
