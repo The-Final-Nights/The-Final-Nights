@@ -173,3 +173,6 @@
   - rscadd: Adds IC verb to toggle underwear/short/socks visibilty on/off.
   XeonMations, buffyuwu:
   - bugfix: fixed CI/CD AGAIN
+2025-05-21:
+  XeonMations:
+  - bugfix: Fixed strongdmm failing to load the map due to alist()
