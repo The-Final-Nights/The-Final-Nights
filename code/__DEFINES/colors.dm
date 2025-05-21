@@ -1,5 +1,8 @@
 // This is eventually for wjohn to add more color standardization stuff like I keep asking him >:(
 
+#define COLOR_INPUT_DISABLED			"#000000"
+#define COLOR_INPUT_ENABLED				"#000000"
+
 //different types of atom colorations
 /// Only used by rare effects like greentext coloring mobs and when admins varedit color
 #define ADMIN_COLOUR_PRIORITY 1
@@ -279,6 +282,8 @@
 #define LIGHT_COLOR_DIM_YELLOW "#E1E17D"
 /// Bright yellow. rgb(255, 255, 150)
 #define LIGHT_COLOR_BRIGHT_YELLOW "#FFFF99"
+/// Dimmed yellow, leaning kaki. rgb(225, 225, 125)
+#define LIGHT_COLOR_YELLOW     "#E1E17D"
 /// Clear brown, mostly dim. rgb(150, 100, 50)
 #define LIGHT_COLOR_BROWN "#966432"
 /// Mostly pure orange. rgb(250, 150, 50)
