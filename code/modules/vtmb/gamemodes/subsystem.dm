@@ -110,11 +110,11 @@ SUBSYSTEM_DEF(bad_guys_party)
 /datum/controller/subsystem/bad_guys_party/fire()
 	switch(SSmasquerade.total_level)
 		if(0 to 250)
-			wait = 2000
+			wait = 3000
 		if(251 to 500)
-			wait = 4000
+			wait = 6000
 		if(501 to 1000)
-			wait = 9000
+			wait = 12000
 	if(!setted_up)
 		setup_occupations()
 		setted_up = TRUE

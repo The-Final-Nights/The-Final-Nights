@@ -1725,7 +1725,6 @@
 	kindred.enter_frenzymod()
 	to_chat(kindred, "<span class='userdanger'>The Beast within you awakens with primal fury! You will NOT be contained!</span>")
 
-	//playsound(src, 'sound/effects/gravesoil.ogg', 100, TRUE)
 	visible_message("<span class='danger'>[src] begins to shake violently as something struggles underneath!</span>")
 
 	// After a brief delay, the kindred breaks free
@@ -1752,7 +1751,6 @@
 
 	// Visual effects
 	visible_message("<span class='danger'>[kindred] bursts from [src] in a frenzy, dirt flying everywhere!</span>")
-	//playsound(src, 'sound/effects/explosion1.ogg', 50, TRUE)
 
 
 
