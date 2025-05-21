@@ -650,4 +650,28 @@
 
 	return returntext
 
+/datum/action/gift/close_distance
+	name = "Dash"
+	desc = "With rage as a motivator, the Garou can push themselves to great speeds."
+	button_icon_state = "close_distance"
+	rage_req = 1
+	cool_down = 5
+	check_flags = null
+
+/datum/movespeed_modifier/garou_dash
+	multiplicative_slowdown = -0.5
+
+/datum/action/gift/close_distance/Trigger()
+	. = ..()
+	if(allowed_to_proceed)
+		var/mob/living/carbon/C = owner
+		if(C.stat != DEAD)
+			SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_activate.ogg', 0, 0, 75))
+			C.add_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
+			to_chat(owner, "<span class='warning'>You feel <b>PUMPED UP!</b></span>")
+			spawn(6 SECONDS)
+				C.remove_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
+				SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_deactivate.ogg', 0, 0, 75))
+				to_chat(owner, "<span class='warning'>You feel yourself slow down again...</span>")
+
 #undef DOGGY_ANIMATION_COOLDOWN
