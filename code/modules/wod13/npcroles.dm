@@ -927,7 +927,6 @@
 /mob/living/simple_animal/hostile/beastmaster/rat/flying/UnarmedAttack(atom/A)
 	. = ..()
 	if(iscrinos(A))
-		var/mob/living/simple_animal/hostile/beastmaster/rat/flying/bat = src
 		src.apply_damage(20, BRUTE) //No swarmspam. Bats become single use.
 		visible_message("<span class='danger'>The bat breaks its teeth on [A]!</span>", \
 								"<span class='userdanger'>The bat breaks its teeth on your skin!</span>")
