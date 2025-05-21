@@ -225,12 +225,12 @@
 	amount_per_transfer_from_this = 5
 	custom_materials = list(/datum/material/iron=100)
 	possible_transfer_amounts = list(1, 5)
-	volume = 50 // more generous volume for blood mixing
+	volume = 50
 	flags_1 = CONDUCT_1
 	spillable = TRUE
 	resistance_flags = FIRE_PROOF
 	isGlass = FALSE
-	reagent_flags = OPENCONTAINER // Set the reagent flags to make it always open
+	reagent_flags = OPENCONTAINER
 	var/list/blood_donors = list() // Store all who poured blood in the cup
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/is_drainable()
@@ -246,7 +246,7 @@
 		icon_state = "pewter_cup_filled_blood"
 	else
 		icon_state = "pewter_cup"
-	return TRUE // Return TRUE instead of ..() to ensure proper icon updating
+	return TRUE
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/attack_self(mob/living/carbon/human/user)
 	if(!istype(user))
@@ -270,22 +270,20 @@
 		to_chat(user, span_warning("You don't have enough blood to spare!"))
 		return
 
-	user.visible_message(span_notice("[user] prepares to cut their wrist to add blood to the [src]."),
-	span_notice("You prepare to cut your wrist and add your blood to the [src]."))
+	user.visible_message(span_notice("[user] prepares to cut their wrist to add blood to the [src]."), span_notice("You prepare to cut your wrist and add your blood to the [src]."))
 
 	if(!do_after(user, 100, target = src)) // 10 seconds to add blood
 		to_chat(user, span_warning("You decide not to add your blood to the [src]."))
 		return
 
-	user.visible_message(span_notice("[user] cuts their wrist and lets blood drip into the [src]."),
-	span_notice("You cut your wrist and let your blood flow into the [src]."))
+	user.visible_message(span_notice("[user] cuts their wrist and lets blood drip into the [src]."), span_notice("You cut your wrist and let your blood flow into the [src]."))
 
 	playsound(user, 'sound/weapons/bladeslice.ogg', 30, TRUE)
 	user.adjustBruteLoss(5) // Small damage from cutting wrist
 
 	// Transfer blood to the cup
 	reagents.add_reagent(/datum/reagent/blood, 15)
-	user.bloodpool -= 2 // Use bloodpool instead of blood_volume
+	user.bloodpool -= 2 // Use bloodpool
 
 	// Add this user to the list of blood donors if not already present
 	if(!(user in blood_donors))
@@ -322,18 +320,17 @@
 				to_chat(M, span_warning("You decide not to participate in the Vaulderie."))
 				return
 
-			user.visible_message(span_notice("[user] offers the [src] to [M]."),
-				span_notice("You offer the [src] to [M]."))
+			user.visible_message(span_notice("[user] offers the [src] to [M]."), span_notice("You offer the [src] to [M]."))
 			to_chat(M, span_notice("You begin to take part in the Vaulderie..."))
 
 			if(!do_after(M, 100, target = src)) // 10 seconds for Vaulderie
 				to_chat(M, span_warning("You stop drinking from the [src]."))
 				return
-		// Regular blood drinking
+		// Regular blood drinking, no vaulderie
 		else
 			to_chat(M, span_notice("You begin to drink the blood from the cup..."))
 
-			if(!do_after(M, 100, target = src)) // 10 seconds for regular drinking
+			if(!do_after(M, 100, target = src)) // 10 seconds
 				to_chat(M, span_warning("You stop drinking from the [src]."))
 				return
 
@@ -360,17 +357,6 @@
 		var/antag_transferred = FALSE
 		for(var/mob/living/carbon/human/donor in blood_donors)
 			if(donor.mind & (donor.mind.has_antag_datum(/datum/antagonist/sabbatist) | donor.mind.has_antag_datum(/datum/antagonist/sabbatpriest) | donor.mind.has_antag_datum(/datum/antagonist/sabbatductus)))
-
-				// Determine which antag datum to give based on what the donor has
-				if(donor.mind.has_antag_datum(/datum/antagonist/sabbatist))
-					var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
-					M.mind.add_antag_datum(new_sabbat)
-					antag_transferred = TRUE
-				else if(donor.mind.has_antag_datum(/datum/antagonist/sabbatpriest))
-					var/datum/antagonist/sabbatpriest/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
-					M.mind.add_antag_datum(new_sabbat)
-					antag_transferred = TRUE
-				else if(donor.mind.has_antag_datum(/datum/antagonist/sabbatductus))
 					var/datum/antagonist/sabbatductus/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
 					M.mind.add_antag_datum(new_sabbat)
 					antag_transferred = TRUE

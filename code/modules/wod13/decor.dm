@@ -1425,17 +1425,16 @@
 	icon_state = "tub"
 	can_buckle = TRUE
 	buckle_lying = 90
-	layer = BELOW_MOB_LAYER  // This makes the bath appear behind the mob when someone is buckled
-	var/blood_level = 0 // Current amount of blood in the tub
-	var/max_blood = 500 // Maximum blood capacity
+	layer = BELOW_MOB_LAYER
+	var/blood_level = 0
+	var/max_blood = 500
 	var/list/blood_donors = list() // List to store blood donors
-	var/blood_color = "#C80000" // Default blood color
 
 /obj/structure/bath/sabbatbath/Initialize()
 	. = ..()
 	create_reagents(max_blood, INJECTABLE)
-	reagents.add_reagent(/datum/reagent/blood, 0) // Start with no blood
-	update_icon()  // Make sure the icon is updated on initialization
+	reagents.add_reagent(/datum/reagent/blood, 0)
+	update_icon()
 
 /obj/structure/bath/sabbatbath/examine(mob/user)
 	. = ..()
@@ -1467,15 +1466,13 @@
 				to_chat(user, "<span class='warning'>You have no blood to donate!</span>")
 				return
 
-			user.visible_message("<span class='notice'>[user] cuts [user.p_their()] wrist and lets blood flow into the bath.</span>",
-								"<span class='notice'>You cut your wrist and let blood flow into the bath.</span>")
+			user.visible_message(span_notice("[user] cuts [user.p_their()] wrist and lets blood flow into the bath."), span_notice("You cut your wrist and let blood flow into the bath."))
 
 			// Calculate how much blood to transfer
-			var/amount_to_donate = min(user.bloodpool, 5)
+			var/amount_to_donate = min(user.bloodpool, 3)
 
 			// Subtract blood from user
 			user.bloodpool -= amount_to_donate
-			user.update_inv_hands()
 
 			// Add blood to bath
 			blood_level = min(blood_level + amount_to_donate, max_blood)
@@ -1485,28 +1482,26 @@
 			if(!(user in blood_donors))
 				blood_donors += user
 
-			// Update the icon to show blood
+			// Update the tub to show blood
 			update_icon()
 
-			//playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
 			return TRUE
 		else
 			to_chat(user, span_warning("You decide not to add your blood to the bathtub..."))
 
-// Handle vaulderie goblet specifically
+// Handle vaulderie goblet specifically so that the Priest can use the tub's blood for vaulderie (part of the blood bath rite)
 	if(istype(W, /obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet))
 		var/obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet/goblet = W
 		if(blood_level <= 0)
-			to_chat(user, "<span class='warning'>The bath is empty.</span>")
+			to_chat(user, span_warning("The bath is empty."))
 			return
 
 		var/transfer_amount = min(goblet.volume - goblet.reagents.total_volume, blood_level)
 		if(transfer_amount <= 0)
-			to_chat(user, "<span class='warning'>The goblet is already full.</span>")
+			to_chat(user, span_warning("The goblet is already full."))
 			return
 
-		user.visible_message("<span class='notice'>[user] scoops blood from the bath into [goblet].</span>",
-							"<span class='notice'>You scoop blood from the bath into [goblet].</span>")
+		user.visible_message(span_notice("[user] scoops blood from the bath into [goblet]."), span_notice("You scoop blood from the bath into [goblet]."))
 
 		// Transfer blood
 		reagents.trans_to(goblet, transfer_amount)
@@ -1520,7 +1515,6 @@
 		if(blood_level <= 0)
 			update_icon()
 
-		//playsound(src, 'sound/effects/slosh.ogg', 25, TRUE)
 		return TRUE
 
 	return ..()
@@ -1531,22 +1525,18 @@
 		playsound(loc, 'code/modules/wod13/sounds/catched.ogg', 50, FALSE)
 		if(do_after(user, 100))
 			if(M == user)
-				M.visible_message("<span class='notice'>[user] climbs into the blood-filled bath.</span>",
-								"<span class='notice'>You climb into the blood-filled bath.</span>")
+				M.visible_message(span_notice("[user] climbs into the blood-filled bath."), span_notice("You climb into the blood-filled bath."))
 			else
-				M.visible_message("<span class='notice'>[user] places [M] in the blood-filled bath.</span>",
-								"<span class='notice'>[user] places you in the blood-filled bath.</span>")
+				M.visible_message(span_notice("[user] places [M] in the blood-filled bath."), span_notice("[user] places you in the blood-filled bath."))
 
 
 /obj/structure/bath/sabbatbath/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	. = ..()
 	if(.)
 		if(buckled_mob == user)
-			buckled_mob.visible_message("<span class='notice'>[buckled_mob] climbs out of the bath.</span>",
-									"<span class='notice'>You climb out of the bath.</span>")
+			buckled_mob.visible_message(span_notice("[buckled_mob] climbs out of the bath."), span_notice("You climb out of the bath."))
 		else
-			buckled_mob.visible_message("<span class='notice'>[user] pulls [buckled_mob] out of the bath.</span>",
-									"<span class='notice'>[user] pulls you out of the bath.</span>")
+			buckled_mob.visible_message(span_notice("[user] pulls [buckled_mob] out of the bath."), span_notice("[user] pulls you out of the bath."))
 
 		// Create blood splatters as they exit
 		if(blood_level > 0 && ishuman(buckled_mob))
