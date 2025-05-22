@@ -764,8 +764,7 @@
 						if(blood_data)
 							var/generation = blood_data["generation"]
 							var/clan = blood_data["clan"]
-							var/species = blood_data["species"]
-							var/message = generate_message(species, generation, clan)
+							var/message = generate_message(generation, clan)
 							to_chat(user, "[message]")
 						else
 							to_chat(user, "The blood speaks not-it is empty of power!")
@@ -778,18 +777,6 @@
 
 /obj/ritualrune/bloodwalk/proc/generate_message(species, generation, clan, disciplines)
 	var/message = ""
-
-	//species
-	if(species == "Human")
-		message += "This is the weak blood of the Kine.\n"
-	else if(species == "Vampire")
-		message += "This is Kindred blood.\n"
-	else if(species == "Ghoul")
-		message += "This is the blood of a ghoul servant.\n"
-	else if(species == "Werewolf")
-		message += "This is not normal blood... it feels too alive, filled with rage...\n"
-	else if (species == "Kuei-Jin")
-		message += "This blood has a strange quality, it appears to have a mixture of death and life itself...\n"
 
 	//generation
 	if(generation == 4)
@@ -844,12 +831,10 @@
 		message += "The blood of our stone servants.\n"
 	else if(clan == "Ministry")
 		message += "Seduction and allure are in the blood. Ah, one of the snakes.\n"
-	else if (clan == "Caitiff")
-		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"
 	else if(clan == "Nagaraja")
 		message += "This blood has an unsettling hunger to it, cold and stained with death.\n"
 	else
-		message += "The blood's origin is hard to trace.\n"
+		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"
 
 	return message
 
