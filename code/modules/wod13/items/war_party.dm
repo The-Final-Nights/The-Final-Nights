@@ -19,7 +19,7 @@
 
 	// Check if the user is a Sabbat Ductus or Priest
 	if(!(H.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || H.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest)))
-		to_chat(H, span_warning("Only the Ductus or the Priest may call a War Party from the Totem!"))
+		to_chat(H, span_cult("Only the Ductus or the Priest may call a War Party from the Totem!"))
 		return
 
 	var/choice = tgui_alert(H, "Do you wish to summon all Sabbat in the city to the Sabbat lair for the purposes of a War Party?", "War Party", list("Yes", "No"), 10 SECONDS)
@@ -30,13 +30,13 @@
 		// Inform the user about the current status of the totem
 		to_chat(H, span_notice("The skull's eyes flare with crimson light as you invoke its power. [activations > 1 ? "The light seems dimmer than before." : ""]"))
 		if(activations > 1)
-			to_chat(H, span_warning("The War Party Totem has been used [activations] times. Its power to compel Sabbat is weakening."))
+			to_chat(H, span_cult("The War Party Totem has been used [activations] times. Its power to compel Sabbat is weakening."))
 
 		for(var/mob/living/carbon/human/sabbat_member in GLOB.player_list)
 			if(sabbat_member.mind && (sabbat_member.mind.has_antag_datum(/datum/antagonist/sabbatist)))
 				// Roll for each Sabbat member to see if they receive the call
 				if(activations == 1 || prob(success_chance))
-					to_chat(sabbat_member, span_warning("The Ductus is calling all pack members to return to the lair at once! A war party has been called! The Sword of Caine shall fall on the Elders!"))
+					to_chat(sabbat_member, span_cult("The Ductus is calling all pack members to return to the lair at once! A war party has been called! The Sword of Caine shall fall on the Elders!"))
 					SEND_SOUND(sabbat_member, sound('code/modules/wod13/sounds/announce.ogg'))
 					sabbat_member.emote("twitch")
 
@@ -48,7 +48,7 @@
 			// Send the power message to the Sabbat Priest
 			for(var/mob/living/carbon/human/priest in GLOB.player_list)
 				if(priest.mind && priest.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
-					to_chat(priest, span_warning("[power_message] Only you, as the Priest, can sense this weakening."))
+					to_chat(priest, span_cult("[power_message] Only you, as the Priest, can sense this weakening. As the totem's power fades, so too does the Ductus' authority. Perhaps it is time for a new Ductus..."))
 					break // Only send to one priest, assuming there's only one, which there should be
 	else
 		to_chat(user, span_warning("You decide not to call a war party."))

@@ -1459,6 +1459,14 @@
 		icon_state = "tub"
 
 /obj/structure/bath/sabbatbath/attackby(obj/item/W, mob/living/carbon/user, params)
+	if(istype(W, /obj/item/sabbat_priest_tome))
+		if(user.mind && user.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest) && has_buckled_mobs())
+			var/mob/living/buckled_mob = buckled_mobs[1]
+			if(buckled_mob.mind)
+				buckled_mob.mind.add_antag_datum(/datum/antagonist/sabbatist/sabbatductus)
+				to_chat(user, span_notice("[buckled_mob] has been anointed as the new Ductus."))
+				to_chat(buckled_mob, span_cult("You have been anointed as the new Ductus of the pack!"))
+		return
 	if(istype(W, /obj/item/melee/vampirearms/knife))
 		playsound(loc,'sound/weapons/bladeslice.ogg', 50, FALSE)
 		if(do_after(user, 100))

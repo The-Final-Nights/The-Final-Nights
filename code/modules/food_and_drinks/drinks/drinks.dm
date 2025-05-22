@@ -317,14 +317,14 @@
 			// Ask confirmation via tgui_alert
 			var/choice = tgui_alert(M, "Do you wish to take part in the Vaulderie? This will bind you to the other participants, and remove any previous bonds...", "Vaulderie Ritual", list("Yes", "No"), 10 SECONDS)
 			if(choice != "Yes")
-				to_chat(M, span_warning("You decide not to participate in the Vaulderie."))
+				to_chat(M, span_cult("You decide not to participate in the Vaulderie."))
 				return
 
 			user.visible_message(span_notice("[user] offers the [src] to [M]."), span_notice("You offer the [src] to [M]."))
 			to_chat(M, span_notice("You begin to take part in the Vaulderie..."))
 
 			if(!do_after(M, 100, target = src)) // 10 seconds for Vaulderie
-				to_chat(M, span_warning("You stop drinking from the [src]."))
+				to_chat(M, span_cult("You stop drinking from the [src]."))
 				return
 		// Regular blood drinking, no vaulderie
 		else
@@ -355,7 +355,7 @@
 	if(length(blood_donors) > 1)
 		// Multiple donors case - Creates sabbat pack if the drinker doesn't already have a sabbat datum
 		if(!M.mind.has_antag_datum(/datum/antagonist/sabbatist) || !M.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus || !M.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest)))
-			to_chat(M, span_warning("You feel your previous blood bonds vanishing as you take part in the Vaulderie and join the Sabbat..."))
+			to_chat(M, span_cult("You feel your previous blood bonds vanishing as you take part in the Vaulderie and join the Sabbat..."))
 			var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(M.mind)
 			M.mind.add_antag_datum(new_sabbat)
 	else
@@ -373,7 +373,7 @@
 					break  // Exit after first successful transfer
 
 				if(antag_transferred)
-					to_chat(M, span_warning("<span class='danger'>Your mind floods with alien thoughts and philosophies. You now serve the Sabbat!</span>"))
+					to_chat(M, span_cult("Your mind floods with alien thoughts and philosophies. You now serve the Sabbat!"))
 					break  // Only need to transfer one antag datum type
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/afterattack(obj/target, mob/user, proximity)

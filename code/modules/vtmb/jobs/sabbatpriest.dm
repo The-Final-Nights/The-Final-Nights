@@ -132,28 +132,28 @@
 			target = H
 
 	if(!target)
-		to_chat(challenger, span_warning("Could not find anyone with that name to challenge! Only members of the Sabbat may engage in Monomacy."))
+		to_chat(challenger, span_cult("Could not find anyone with that name to challenge! Only members of the Sabbat may engage in Monomacy."))
 		return
 
 
 	// Notify the challenger
-	to_chat(challenger, span_notice("You have challenged [target.real_name] to a duel of Monomacy!"))
+	to_chat(challenger, span_cult("You have challenged [target.real_name] to a duel of Monomacy!"))
 	SEND_SOUND(challenger, sound('code/modules/wod13/sounds/announce.ogg'))
 
 	// Notify the target
-	to_chat(target, span_warning("[challenger.real_name] challenges you to a duel of Monomacy! Return to the lair at once!"))
+	to_chat(target, span_cult("[challenger.real_name] challenges you to a duel of Monomacy! Return to the lair at once!"))
 	SEND_SOUND(target, sound('code/modules/wod13/sounds/announce.ogg'))
 
 	// Announce the challenge to everyone nearby
 	for(var/mob/M in viewers(7, src))
 		if(M != challenger && M != target)
-			to_chat(M, span_notice("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy!"))
+			to_chat(M, span_cult("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy!"))
 			SEND_SOUND(M, sound('code/modules/wod13/sounds/announce.ogg'))
 
 	// Notify the priest
 	for(var/mob/living/carbon/human/priest in GLOB.player_list)
 		if(priest.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
-			to_chat(priest, span_warning("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy! Return to the lair at once to ensure Caine's will is done."))
+			to_chat(priest, span_cult("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy! Return to the lair at once to ensure Caine's will is done."))
 			SEND_SOUND(priest, sound('code/modules/wod13/sounds/announce.ogg'))
 
 	// Visual and audio effects for the rune itself
@@ -228,7 +228,7 @@
 				var/new_credo = tgui_input_text(user, "Enter your interpretation of the Sabbat's goals:", "Edit Pack Credo", current_credo) as text|null
 				if(new_credo && new_credo != current_credo)
 					pack_credo = new_credo
-					to_chat(user, span_notice("You update your pack's interpretation of the Sabbat Credo."))
+					to_chat(user, span_cult("You update your pack's interpretation of the Sabbat Credo."))
 
 		if("Pack Credo")
 			to_chat(user, span_cult("<b>Pack Credo:</b>"))
