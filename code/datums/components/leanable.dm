@@ -84,7 +84,7 @@
 		span_notice("You lean against [lean_target]."),
 	)
 	leaned_object = lean_target
-	RegisterSignal(src, list(
+	RegisterSignals(src, list(
 		COMSIG_MOB_CLIENT_MOVED,
 		COMSIG_HUMAN_DISARM_HIT,
 		COMSIG_MOVABLE_PULLED,

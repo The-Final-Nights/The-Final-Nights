@@ -478,13 +478,13 @@
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
-				msg += "<span class='deadsay'>[t_He] do[t_es]n't appear to be [t_him]self.</span>\n"
-			if(!key && !istype(src, /mob/living/carbon/human/npc) && (src.soul_state != SOUL_PROJECTING))
-				msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
-			else if(!client && !istype(src, /mob/living/carbon/human/npc) && (src.soul_state != SOUL_PROJECTING))
-				msg += "[t_He] [t_has] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon.\n"
-			if(src.soul_state == SOUL_PROJECTING)
-				msg += "<span class='deadsay'>[t_He] [t_is] staring blanky into space, [t_his] eyes are slightly grayed out.</span>\n"
+				msg += span_deadsay("[t_He] do[t_es]n't appear to be [t_him]self.<br>")
+			if(!key && !isnpc(src) && !(soul_state & SOUL_PROJECTING))
+				msg += span_deadsay("[t_He] [t_is] totally catatonic. The stresses of life must have been too much for [t_him]. Any recovery is unlikely.<br>")
+			else if(!client && !isnpc(src) && !(soul_state & SOUL_PROJECTING))
+				msg += span_deadsay("[t_He] [t_has] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon.<br>")
+			if(soul_state & SOUL_PROJECTING)
+				msg += span_deadsay("[t_He] [t_is] staring blanky into space, [t_his] eyes are slightly grayed out.<br>")
 
 	//examine text for garou detecting Triatic influences on others
 	if (isgarou(user) || iswerewolf(user) || HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
@@ -651,7 +651,7 @@
 					"<a href='byond://?src=[REF(src)];hud=s;add_comment=1'>\[Add comment\]</a>"), "")
 	else if(isobserver(user))
 		var/mob/dead/observer/observer_user = user
-		if(!observer_user.auspex_ghosted)
+		if(!isavatar(observer_user))
 			. += "<span class='info'><b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]</span>"
 	. += "*---------*</span>"
 
