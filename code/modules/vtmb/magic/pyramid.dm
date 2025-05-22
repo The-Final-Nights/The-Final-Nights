@@ -61,12 +61,6 @@
 			last_activator = user
 			activator_bonus = L.thaum_damage_plus
 
-			// Create a light source
-			//if(!src.light)
-			//	src.light = new /obj/light(src)
-			//	src.light.set_brightness(3)
-			//	src.light.set_color(255, 0, 0)
-			//	src.light.on()
 
 			// (Optionally a rune animation to glow brighter)
 			animate(src, color = rgb(255, 64, 64), time = 10)
