@@ -32122,6 +32122,10 @@
 "ixp" = (
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/tzimisce_manor)
+"ixu" = (
+/obj/sabbatrune,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/sabbat_lair)
 "ixy" = (
 /obj/effect/turf_decal/siding/thinplating/dark,
 /obj/structure/vampdoor/simple,
@@ -48299,6 +48303,10 @@
 /obj/structure/chair/office,
 /turf/open/floor/carpet,
 /area/vtm/interior/shop)
+"mPc" = (
+/obj/item/sabbat_priest_tome,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/sabbat_lair)
 "mPk" = (
 /obj/item/newspaper,
 /turf/open/floor/plating/sidewalk/poor,
@@ -66629,6 +66637,7 @@
 /area/vtm/pacificheights)
 "ryC" = (
 /obj/structure/bed/maint,
+/obj/item/vampirebook/noddist,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sabbat_lair)
 "ryE" = (
@@ -127229,7 +127238,7 @@ hHC
 hKz
 eUW
 hKz
-hKz
+mPc
 hKz
 vsB
 mag
@@ -127486,7 +127495,7 @@ vEh
 pSk
 hKz
 hAB
-hKz
+ixu
 wov
 mag
 buF

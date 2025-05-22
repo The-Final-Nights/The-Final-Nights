@@ -18,6 +18,7 @@
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Tzimisce", "Baali")
 	display_order = JOB_DISPLAY_ORDER_SABBATDUCTUS
+	whitelisted = TRUE
 
 /datum/outfit/job/sabbatductus
 	name = "Sabbat Ductus"

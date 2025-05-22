@@ -21,6 +21,7 @@
 	minimal_masquerade = 0
 	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Tzimisce", "Baali")
 	display_order = JOB_DISPLAY_ORDER_SABBATPACK
+	whitelisted = TRUE
 
 /datum/outfit/job/sabbatpack
 	name = "Sabbat Pack"
