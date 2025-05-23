@@ -31,7 +31,7 @@
 	color = rgb(141,70,0)
 	name = "old sofa"
 	desc = "An old design, but it still does the job of being a sofa."
-	icon_state = "sofa_middle"
+	icon_state = "sofamiddle"
 
 /obj/structure/chair/sofa/old/left
 	icon_state = "sofaend_left"
