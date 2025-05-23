@@ -2342,9 +2342,3 @@ GLOBAL_LIST_EMPTY(selectable_races)
 				'sound/mobs/humanoids/human/giggle/male_giggle_2.ogg',
 				'sound/mobs/humanoids/human/giggle/male_giggle_3.ogg',
 			)
-
-
-/datum/species/proc/get_species()
-	return name
-
-

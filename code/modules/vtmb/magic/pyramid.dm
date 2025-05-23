@@ -772,63 +772,65 @@
 /obj/ritualrune/bloodwalk/proc/generate_message(species, generation, clan, disciplines)
 	var/message = ""
 
-	//generation
-	if(generation == 4)
-		message += "The blood is incredibly ancient and powerful! It must be from an ancient Methuselah!\n"
-	else if(generation == 5)
-		message += "The blood is incredibly ancient and powerful! It must be from a Methuselah!\n"
-	else if(generation == 6)
-		message += "The blood is incredibly ancient and powerful! It must be from an Elder!\n"
-	else if(generation == 7 || generation == 8 || generation == 9)
-		message += "The blood is powerful. It must come from an Ancilla or Elder!\n"
-	else if(generation == 10 || generation == 11)
-		message += "The blood is of middling strength. It must come from someone young.\n"
-	else if(generation == 12 || generation == 13)
-		message += "The blood is of waning strength. It must come from a neonate.\n"
-	else if (generation >= 14)
-		message += "This is the vitae of a thinblood!\n"
+	switch(generation)
+		if(4)
+			message += "The blood is incredibly ancient and powerful! It must be from an ancient Methuselah!\n"
+		if(5)
+			message += "The blood is incredibly ancient and powerful! It must be from a Methuselah!\n"
+		if(6)
+			message += "The blood is incredibly ancient and powerful! It must be from an Elder!\n"
+		if(7, 8, 9)
+			message += "The blood is powerful. It must come from an Ancilla or Elder!\n"
+		if(10, 11)
+			message += "The blood is of middling strength. It must come from someone young.\n"
+		if(12, 13)
+			message += "The blood is of waning strength. It must come from a neonate.\n"
+		else
+			if(generation >= 14)
+				message += "This is the vitae of a thinblood!\n"
 
 	//clan
-	if(clan == "Toreador" || clan == "Daughters of Cacophony")
-		message += "The blood is sweet and rich. The owner must, too, be beautiful.\n"
-	else if(clan == "Ventrue")
-		message += "The blood has kingly power in it, descending from Mithras or Hardestadt.\n"
-	else if(clan == "Lasombra")
-		message += "Cold and dark, this blood has a mystical connection to the Abyss.\n"
-	else if(clan == "Tzimisce")
-		message += "The vitae is mutable and twisted. Is there any doubt to the cursed line it belongs to?\n"
-	else if (clan == "Old Clan Tzimisce")
-		message += "This vitae is old and ancient. It reminds you of a more twisted and cursed blood...\n"
-	else if(clan == "Gangrel")
-		message += "The blood emits a primal and feral aura. The same is likely of the owner.\n"
-	else if(clan == "Malkavian")
-		message += "You can sense chaos and madness within this blood. It's owner must be maddened too.\n"
-	else if(clan == "Brujah")
-		message += "The blood is filled with passion and anger. So must be the owner of the blood.\n"
-	else if(clan == "Nosferatu")
-		message += "The blood is foul and disgusting. Same must apply to the owner.\n"
-	else if(clan == "Tremere")
-		message += "The blood is filled with the power of magic. The owner must be a thaumaturge.\n"
-	else if(clan == "Baali")
-		message += "Tainted and corrupt. Vile and filthy. You see your reflection in the blood, but something else stares back.\n"
-	else if(clan == "Assamite")
-		message += "Potent... deadly... and cursed. You know well the curse laid by Tremere on the assassins.\n"
-	else if(clan == "True Brujah")
-		message += "The blood is cold and static... It's hard to feel any emotion within it.\n"
-	else if(clan == "Salubri")
-		message += "The cursed blood of the Salubri! The owner of this blood must be slain.\n"
-	else if(clan == "Giovanni" || clan == "Cappadocian")
-		message += "The blood is very cold and filled with death. The owner must be a necromancer.\n"
-	else if(clan == "Kiasyd")
-		message += "The blood is filled with traces of fae magic.\n"
-	else if(clan == "Gargoyle")
-		message += "The blood of our stone servants.\n"
-	else if(clan == "Ministry")
-		message += "Seduction and allure are in the blood. Ah, one of the snakes.\n"
-	else if(clan == "Nagaraja")
-		message += "This blood has an unsettling hunger to it, cold and stained with death.\n"
-	else
-		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"
+	switch(clan)
+		if("Toreador", "Daughters of Cacophony")
+			message += "The blood is sweet and rich. The owner must, too, be beautiful.\n"
+		if("Ventrue")
+			message += "The blood has kingly power in it, descending from Mithras or Hardestadt.\n"
+		if("Lasombra")
+			message += "Cold and dark, this blood has a mystical connection to the Abyss.\n"
+		if("Tzimisce")
+			message += "The vitae is mutable and twisted. Is there any doubt to the cursed line it belongs to?\n"
+		if("Old Clan Tzimisce")
+			message += "This vitae is old and ancient. It reminds you of a more twisted and cursed blood...\n"
+		if("Gangrel")
+			message += "The blood emits a primal and feral aura. The same is likely of the owner.\n"
+		if("Malkavian")
+			message += "You can sense chaos and madness within this blood. It's owner must be maddened too.\n"
+		if("Brujah")
+			message += "The blood is filled with passion and anger. So must be the owner of the blood.\n"
+		if("Nosferatu")
+			message += "The blood is foul and disgusting. Same must apply to the owner.\n"
+		if("Tremere")
+			message += "The blood is filled with the power of magic. The owner must be a thaumaturge.\n"
+		if("Baali")
+			message += "Tainted and corrupt. Vile and filthy. You see your reflection in the blood, but something else stares back.\n"
+		if("Assamite")
+			message += "Potent... deadly... and cursed. You know well the curse laid by Tremere on the assassins.\n"
+		if("True Brujah")
+			message += "The blood is cold and static... It's hard to feel any emotion within it.\n"
+		if("Salubri")
+			message += "The cursed blood of the Salubri! The owner of this blood must be slain.\n"
+		if("Giovanni", "Cappadocian")
+			message += "The blood is very cold and filled with death. The owner must be a necromancer.\n"
+		if("Kiasyd")
+			message += "The blood is filled with traces of fae magic.\n"
+		if("Gargoyle")
+			message += "The blood of our stone servants.\n"
+		if("Ministry")
+			message += "Seduction and allure are in the blood. Ah, one of the snakes.\n"
+		if("Nagaraja")
+			message += "This blood has an unsettling hunger to it, cold and stained with death.\n"
+		else
+			message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"
 
 	return message
 
