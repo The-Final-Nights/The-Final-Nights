@@ -1,6 +1,6 @@
 /obj/machinery/bitcoin_miner
 	name = "bitcoin miner"
-	desc = "It's a rig designed for mining cryptocurrency with a monitor connected to it.\nIt has an output for withdrawing the cash obtained from mining, somehow."
+	desc = "It's a rig designed to mine cryptocurrency with a monitor connected to it.\nIt has an output for withdrawing the cash obtained from mining, somehow."
 	icon = 'modular_tfn/modules/bitcoinminer/icons/bitcoinminer.dmi'
 	icon_state = "miner_off"
 	density = TRUE
