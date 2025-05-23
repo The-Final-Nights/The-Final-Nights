@@ -1,9 +1,10 @@
 /obj/structure/chair/sofa
-	name = "old ratty sofa"
+	name = "old sofa"
 	icon_state = "sofamiddle"
 	icon = 'icons/obj/sofa.dmi'
 	buildstackamount = 1
 	item_chair = null
+	color = rgb(141,70,0)
 	var/mutable_appearance/armrest
 
 /obj/structure/chair/sofa/Initialize()
