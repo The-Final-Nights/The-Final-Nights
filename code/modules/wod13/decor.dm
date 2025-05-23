@@ -1671,7 +1671,7 @@
 		if(!burying)
 			burying = TRUE
 			user.visible_message("<span class='warning'>[user] starts to dig [src]</span>", "<span class='warning'>You start to dig [src].</span>")
-			if(do_mob(user, src, 10 SECONDS))
+			if(do_mob(user, src, 20 SECONDS))
 				burying = FALSE
 				if(icon_state == "pit0")
 					var/dead_amongst = FALSE
