@@ -1,4 +1,0 @@
-author: "XeonMations"
-delete-after: True
-changes:
-  - bugfix: "Fixed NPC mobs not being able to attack anyone."

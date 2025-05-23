@@ -1,0 +1,4 @@
+author: "XeonMations, san7890"
+delete-after: True
+changes:
+  - map: "Added Map Merge Markers to indicate where merge conflicts are for mapmerge2"
