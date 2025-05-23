@@ -27,7 +27,7 @@
 /obj/structure/chair/sofa/corner/handle_layer() //only the armrest/back of this chair should cover the mob.
 	return
 
-/obj/structure/chair/fancy/sofa/old
+/obj/structure/chair/sofa/old
 	color = rgb(141,70,0)
 	name = "old sofa"
 	desc = "An old design, but it still does the job of being a sofa."
