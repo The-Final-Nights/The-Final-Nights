@@ -1,0 +1,4 @@
+author: "necti-dev"
+delete-after: True
+changes:
+  - balance: "Kindred cannot maintain two of the following disciplines active at the same time: fortitude, potence, celerity, obfuscate"

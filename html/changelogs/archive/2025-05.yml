@@ -142,6 +142,10 @@
   XeonMations:
   - code_imp: obj integrity moved to atom level, no player facing changes should be
       seen
+  anything86:
+  - balance: Incendiary ammo now has a limit to how much it can set you on fire.
+  - balance: Clothing is no longer incredibly flammable.
+  - balance: Rolling to extinguish yourself is now a knockdown instead of a stun.
   necti-dev:
   - rscadd: Passports now show your name on them, they actually identify you. Unless
       you have the Illegal Identity quirk and hail from Cobrastan.
@@ -160,3 +164,15 @@
       updated on joining.
   - rscadd: Triads, Giovanni, Tremere, Anarchs, Millenium Tower, Lasombra and Tzmisce
       networks added. Members have each other's contacts.
+2025-05-18:
+  XeonMations, ComradeNiobe:
+  - bugfix: You can no longer hear all sounds in auspex 5
+  - refactor: Refactored auspex 5 avatars
+2025-05-19:
+  CalamaBanana:
+  - rscadd: Adds IC verb to toggle underwear/short/socks visibilty on/off.
+  XeonMations, buffyuwu:
+  - bugfix: fixed CI/CD AGAIN
+2025-05-21:
+  XeonMations:
+  - bugfix: Fixed strongdmm failing to load the map due to alist()
