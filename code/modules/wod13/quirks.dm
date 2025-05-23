@@ -147,7 +147,7 @@ Dancer
 	name = "Lively Aura"
 	desc = "You don't SEEM dead enough to readings, fooling a few forms of detection as to whether or not you're a walking corpse."
 	mob_trait = TRAIT_WARM_AURA
-	value = 3 //Honestly a vamp taking warm aura is sabotaging themselves, it shouldn't be cost 3. Unlike cold aura which is just a flat benefit to mortals who have it.
+	value = 3
 	gain_text = "<span class='warning'>You feel your heart beat, for a moment.</span>"
 	lose_text = "<span class='notice'>You feel a subtle chill.</span>"
 	allowed_species = list("Kuei-Jin", "Vampire")
