@@ -169,7 +169,7 @@
 	icon_state = "mining_drone_offense"
 	to_chat(src, "<span class='info'>You are set to attack mode. You can now attack from range.</span>")
 
-/mob/living/simple_animal/hostile/mining_drone/AttackingTarget()
+/mob/living/simple_animal/hostile/mining_drone/AttackingTarget(atom/attacked_target)
 	if(istype(target, /obj/item/stack/ore) && mode == MINEDRONE_COLLECT)
 		CollectOre()
 		return
