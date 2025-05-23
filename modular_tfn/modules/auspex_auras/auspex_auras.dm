@@ -11,6 +11,9 @@
 
 	var/mob/living/carbon/human/H = src
 
+	if(HAS_TRAIT(src, TRAIT_FRENETIC_AURA))
+		holder.icon_state = "aura_bright"
+
 	if(client)
 		switch(a_intent)
 			if(INTENT_HARM)
@@ -51,7 +54,7 @@
 		//garou have bright auras due to their spiritual potence
 		holder.icon_state = AURA_GAROU
 
-	if(isghoul(src))
+	if(isghoul(src) && !HAS_TRAIT(src, TRAIT_FRENETIC_AURA))
 		//Pale spots in the aura, had to be done manually since holder.color will show only a type of color
 		holder.icon_state = AURA_GHOUL
 
