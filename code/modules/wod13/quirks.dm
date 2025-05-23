@@ -147,7 +147,7 @@ Dancer
 	name = "Lively Aura"
 	desc = "You don't SEEM dead enough to readings, fooling a few forms of detection as to whether or not you're a walking corpse."
 	mob_trait = TRAIT_WARM_AURA
-	value = 2 //Honestly a vamp taking warm aura is sabotaging themselves, it shouldn't be cost 3. Unlike cold aura which is just a flat benefit to mortals who have it.
+	value = 3 //Honestly a vamp taking warm aura is sabotaging themselves, it shouldn't be cost 3. Unlike cold aura which is just a flat benefit to mortals who have it.
 	gain_text = "<span class='warning'>You feel your heart beat, for a moment.</span>"
 	lose_text = "<span class='notice'>You feel a subtle chill.</span>"
 	allowed_species = list("Kuei-Jin", "Vampire")
@@ -248,7 +248,7 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>Your fangs feel awkward in your mouth.</span>"
 	lose_text = "<span class='notice'>You fangs feel comfortable in your mouth.</span>"
-	allowed_species = list("Vampire","Kuei-Jin")
+	allowed_species = list("Vampire","Kuei-jin")
 	excluded_clans = list("Nagaraja")
 
 /datum/quirk/animal_repulsion
@@ -258,7 +258,7 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>You can feel hostile eyes watching you.</span>"
 	lose_text = "<span class='notice'>Cats walk by you unphased.</span>"
-	allowed_species = list("Vampire","Ghoul","Human","Kuei-Jin")
+	allowed_species = list("Vampire","Ghoul","Human","Kuei-jin")
 
 /datum/quirk/wyrm_tainted
 	name = "Wyrm Tainted"
