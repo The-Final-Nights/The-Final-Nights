@@ -4,7 +4,6 @@
 	icon = 'icons/obj/sofa.dmi'
 	buildstackamount = 1
 	item_chair = null
-	color = rgb(141,70,0)
 	var/mutable_appearance/armrest
 
 /obj/structure/chair/sofa/Initialize()
@@ -28,13 +27,19 @@
 /obj/structure/chair/sofa/corner/handle_layer() //only the armrest/back of this chair should cover the mob.
 	return
 
-/obj/structure/chair/sofa/left
+/obj/structure/chair/fancy/sofa/old
+	color = rgb(141,70,0)
+	name = "old sofa"
+	desc = "An old design, but it still does the job of being a sofa."
+	icon_state = "sofa_middle"
+
+/obj/structure/chair/sofa/old/left
 	icon_state = "sofaend_left"
 
-/obj/structure/chair/sofa/right
+/obj/structure/chair/sofa/old/right
 	icon_state = "sofaend_right"
 
-/obj/structure/chair/sofa/corner
+/obj/structure/chair/sofa/old/corner
 	icon_state = "sofacorner"
 
 // Original icon ported from Eris(?) and updated to work here.
