@@ -79,16 +79,32 @@
  * post_gain effects.
  *
  * Arguments:
- * * owner - the mob to assign the Discipline to
+ * * new_owner - the mob to assign the Discipline to
  */
-/datum/discipline/proc/assign(mob/owner)
-	src.owner = owner
+/datum/discipline/proc/assign(mob/new_owner)
+	if(new_owner == owner)
+		return
+	if(owner)
+		UnregisterSignal(owner, COMSIG_PARENT_QDELETING)
+	RegisterSignal(new_owner, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_qdel))
+	owner = new_owner
 	for (var/datum/discipline_power/power in known_powers)
-		power.owner = owner
+		power.set_owner(owner)
 
 	if (!post_gain_applied)
 		post_gain()
 	post_gain_applied = TRUE
+
+/**
+ * Proc to handle potential hard dels.
+ * Cleans up any remaining references to avoid circular reference memory leaks.
+ * The GC will handle the rest.
+ */
+/datum/discipline/proc/on_owner_qdel()
+	SIGNAL_HANDLER
+	owner = null
+	current_power = null
+	known_powers = null
 
 /**
  * Returns a known Discipline power in this Discipline
