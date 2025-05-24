@@ -93,15 +93,15 @@
 
 /obj/item/clothing/neck/tie/blue
 	name = "blue tie"
-	icon_state = "bluetie"
+	greyscale_colors = "#5275b6ff"
 
 /obj/item/clothing/neck/tie/red
 	name = "red tie"
-	icon_state = "redtie"
+	greyscale_colors = "#c23838ff"
 
 /obj/item/clothing/neck/tie/black
 	name = "black tie"
-	icon_state = "blacktie"
+	greyscale_colors = "#151516ff"
 
 /obj/item/clothing/neck/tie/horrible
 	name = "horrible tie"
