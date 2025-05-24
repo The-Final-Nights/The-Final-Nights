@@ -21,6 +21,8 @@
 		to_chat(user, span_warning("The [src] isn't ready yet!"))
 		return
 	COOLDOWN_START(src, last_extracted, 20 SECONDS)
+	if(!do_after(src, 5 SECONDS, target))
+		return
 	if(iskindred(src))
 		if(target.bloodpool < 4)
 			to_chat(user, span_warning("The [src] can't find enough blood in [target]'s body!"))
