@@ -15,7 +15,7 @@
 		return
 	say(message)
 // TFN EDIT START
-/mob/living/verb/flavor_verb()
+/mob/living/carbon/human/verb/flavor_verb()
 	set name = "Flavor Text"
 	set category = "IC"
 	var/flavor = tgui_input_text(usr, "Choose your character's flavor text:", "Flavor Text", max_length = MAX_MESSAGE_LEN, multiline = TRUE, encode = FALSE)

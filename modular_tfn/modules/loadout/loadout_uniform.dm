@@ -255,3 +255,19 @@
 	display_name = "red skirt"
 	path = /obj/item/clothing/under/vampire/bar/female
 	allowed_roles = list("Baron")
+
+/datum/gear/uniform/scenepink
+	display_name = "popular outfit"
+	path = /obj/item/clothing/under/vampire/scenepink
+
+/datum/gear/uniform/scenemoody
+	display_name = "moody attire"
+	path = /obj/item/clothing/under/vampire/scenemoody
+
+/datum/gear/uniform/sceneleopard
+	display_name = "revealing outfit"
+	path = /obj/item/clothing/under/vampire/sceneleopard
+
+/datum/gear/uniform/scenezim
+	display_name = "pim attire"
+	path = /obj/item/clothing/under/vampire/scenezim

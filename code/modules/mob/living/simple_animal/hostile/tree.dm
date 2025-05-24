@@ -49,7 +49,7 @@
 	. = ..()
 	add_cell_sample()
 
-/mob/living/simple_animal/hostile/tree/AttackingTarget()
+/mob/living/simple_animal/hostile/tree/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
