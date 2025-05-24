@@ -1,0 +1,8 @@
+author: "TheTrueSilverRat"
+delete-after: True
+changes:
+  - rscadd: "Added Warrior Salubri Clan"
+  - rscadd: "Added Warrior Valeren"
+  - rscadd: "Added Code of Samiel to the Morality Stuff"
+  - qol: "Healer Valeren 3 can heal corpses now like Theurge's Mother Touch"
+  - rscadd: "Salubri Third Eyes wohoo"

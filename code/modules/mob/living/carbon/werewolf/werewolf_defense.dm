@@ -109,9 +109,19 @@
 		visual_effect_icon = ATTACK_EFFECT_CLAW
 	..()
 
+/mob/living/carbon/werewolf/corax/corax_crinos/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+	if(!no_effect && !visual_effect_icon)
+		visual_effect_icon = ATTACK_EFFECT_CLAW
+	..()
+
 /mob/living/carbon/werewolf/lupus/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && !visual_effect_icon)
 		visual_effect_icon = ATTACK_EFFECT_BITE
+	..()
+
+/mob/living/carbon/werewolf/lupus/corvid/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+	if(!no_effect && !visual_effect_icon)
+		visual_effect_icon = ATTACK_EFFECT_CLAW // Ravens attack with their claw, or somesuch.
 	..()
 
 /mob/living/carbon/werewolf/getarmor(def_zone, type)
