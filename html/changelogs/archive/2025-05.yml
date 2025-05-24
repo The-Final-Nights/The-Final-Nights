@@ -173,3 +173,32 @@
   - rscadd: Adds IC verb to toggle underwear/short/socks visibilty on/off.
   XeonMations, buffyuwu:
   - bugfix: fixed CI/CD AGAIN
+2025-05-21:
+  XeonMations:
+  - bugfix: Fixed strongdmm failing to load the map due to alist()
+2025-05-23:
+  Sparrowbird611:
+  - rscadd: Wearing a mask now conceals your voice. This can be toggled by alt clicking
+      the mask.
+  XeonMations:
+  - rscadd: Added a new preference to flavor text, to hide it when your character's
+      identity is hidden.
+  - bugfix: Renamed the cards in the tarot deck.
+  - bugfix: Fixed NPC mobs not being able to attack anyone.
+  XeonMations, san7890:
+  - map: Added Map Merge Markers to indicate where merge conflicts are for mapmerge2
+  necti-dev:
+  - balance: 'Kindred cannot maintain two of the following disciplines active at the
+      same time: fortitude, potence, celerity, obfuscate'
+  tzui5020:
+  - rscadd: New outfits have been added to the loadout and shop inspired by the scene
+      girl era.
+  - rscadd: Three new shoes.
+  - rscadd: Two new hoodies.
+2025-05-24:
+  Kevak:
+  - bugfix: Fixed KJ being unable to select intended quirks due to spelling error
+      in code.
+  - bugfix: Fixed a weird little oversight with citizen role kindred.
+  XeonMations:
+  - code_imp: CI/CD checks now use a private byond instance.

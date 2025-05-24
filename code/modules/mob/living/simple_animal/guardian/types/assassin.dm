@@ -32,7 +32,7 @@
 	if(stealthcooldown >= world.time)
 		. += "Stealth Cooldown Remaining: [DisplayTimeText(stealthcooldown - world.time)]"
 
-/mob/living/simple_animal/hostile/guardian/assassin/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/assassin/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(.)
 		if(toggle && (isliving(target) || istype(target, /obj/structure/window) || istype(target, /obj/structure/grille)))

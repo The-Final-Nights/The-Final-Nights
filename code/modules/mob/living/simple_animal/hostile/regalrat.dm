@@ -82,7 +82,7 @@
 	else if(user != src && istype(user,/mob/living/simple_animal/hostile/regalrat))
 		. += "<span class='warning'>Who is this foolish false king? This will not stand!</span>"
 
-/mob/living/simple_animal/hostile/regalrat/AttackingTarget()
+/mob/living/simple_animal/hostile/regalrat/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(istype(target, /obj/item/food/cheesewedge))
 		cheese_heal(target, MINOR_HEAL, "<span class='green'>You eat [target], restoring some health.</span>")
@@ -301,7 +301,7 @@
 				playsound(src, 'sound/effects/sparks2.ogg', 100, TRUE)
 				C.deconstruct()
 
-/mob/living/simple_animal/hostile/rat/AttackingTarget()
+/mob/living/simple_animal/hostile/rat/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(istype(target, /obj/item/food/cheesewedge))
 		if (health >= maxHealth)
