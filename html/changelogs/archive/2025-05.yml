@@ -195,3 +195,10 @@
       girl era.
   - rscadd: Three new shoes.
   - rscadd: Two new hoodies.
+2025-05-24:
+  Kevak:
+  - bugfix: Fixed KJ being unable to select intended quirks due to spelling error
+      in code.
+  - bugfix: Fixed a weird little oversight with citizen role kindred.
+  XeonMations:
+  - code_imp: CI/CD checks now use a private byond instance.

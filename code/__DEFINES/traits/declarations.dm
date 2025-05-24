@@ -161,6 +161,7 @@
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
 #define TRAIT_DOGWOLF			"dogwolf"
+#define TRAIT_CORAX				"corax" // this is used to apply the Corax Crinos/Corvid, as well as make being in "corvid" not veil-damaging
 
 #define TRAIT_DANCER			"dancer"
 #define TRAIT_EXP_DRIVER		"experienced_driver"
