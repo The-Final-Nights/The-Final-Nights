@@ -250,9 +250,9 @@
 
 /mob/living/simple_animal/hostile/eldritch/armsy/Shoot(atom/targeted_atom)
 	target = targeted_atom
-	AttackingTarget()
+	AttackingTarget(target)
 
-/mob/living/simple_animal/hostile/eldritch/armsy/AttackingTarget()
+/mob/living/simple_animal/hostile/eldritch/armsy/AttackingTarget(atom/attacked_target)
 	if(istype(target,/obj/item/bodypart/r_arm) || istype(target,/obj/item/bodypart/l_arm))
 		qdel(target)
 		heal()
@@ -261,7 +261,7 @@
 		return
 	if(back)
 		back.target = target
-		back.AttackingTarget()
+		back.AttackingTarget(target)
 	if(!Adjacent(target))
 		return
 	do_attack_animation(target)
