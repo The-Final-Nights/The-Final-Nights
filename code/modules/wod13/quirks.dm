@@ -150,7 +150,7 @@ Dancer
 	value = 3
 	gain_text = "<span class='warning'>You feel your heart beat, for a moment.</span>"
 	lose_text = "<span class='notice'>You feel a subtle chill.</span>"
-	allowed_species = list("Kuei-jin", "Vampire")
+	allowed_species = list("Kuei-Jin", "Vampire")
 
 //I could do something more elegent and rework the backend of species quirk visibility, or I could just do this and save myself a week of refactoring. I'll stick refactoring quirks on the 'Do Eventually' list tho.
 /datum/quirk/frenetic_aura_mortal
@@ -248,7 +248,7 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>Your fangs feel awkward in your mouth.</span>"
 	lose_text = "<span class='notice'>You fangs feel comfortable in your mouth.</span>"
-	allowed_species = list("Vampire","Kuei-jin")
+	allowed_species = list("Vampire","Kuei-Jin")
 	excluded_clans = list("Nagaraja")
 
 /datum/quirk/animal_repulsion
@@ -258,7 +258,7 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>You can feel hostile eyes watching you.</span>"
 	lose_text = "<span class='notice'>Cats walk by you unphased.</span>"
-	allowed_species = list("Vampire","Ghoul","Human","Kuei-jin")
+	allowed_species = list("Vampire","Ghoul","Human","Kuei-Jin")
 
 /datum/quirk/wyrm_tainted
 	name = "Wyrm Tainted"
