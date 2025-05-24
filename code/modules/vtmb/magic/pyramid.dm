@@ -276,7 +276,7 @@
 /obj/ritualrune/question/complete()
 	var/text_question = tgui_input_text(usr, "Enter your question to the Ancestors:", "Question to Ancestors")
 	visible_message("<span class='notice'>A call rings out to the dead from the [src.name] rune...</span>")
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to answer a question? (You are allowed to spread meta information) <br> The question is : [text_question]", null, null, null, 20 SECONDS, src)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to answer a question? (You are allowed to spread meta information) The question is : [text_question]", null, null, null, 20 SECONDS, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
 			to_chat(G, span_ghostalert("Question rune has been triggered."))
