@@ -38,7 +38,6 @@
 
 /obj/machinery/bitcoin_miner/proc/toggle_on(mob/user)
 	starting = TRUE
-	icon_state = "miner_starting"
 	playsound(src, 'sound/machines/computer/computer_boot.ogg', 40)
 	update_appearance()
 	sleep(5 SECONDS)
@@ -49,7 +48,6 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/machinery/bitcoin_miner/proc/toggle_off(mob/user)
-	icon_state = "miner_off"
 	active = FALSE
 	playsound(src, 'sound/machines/computer/computer_boot.ogg', 40)
 	update_appearance()
