@@ -769,7 +769,7 @@
 		activated = TRUE
 		qdel(src)
 
-/obj/ritualrune/bloodwalk/proc/generate_message(species, generation, clan, disciplines)
+/obj/ritualrune/bloodwalk/proc/generate_message(generation, clan)
 	var/message = ""
 
 	switch(generation)
