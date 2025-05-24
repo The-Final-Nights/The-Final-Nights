@@ -466,10 +466,10 @@
 
 							childe_prefs_v.save_character()
 							// Sabbatist Embrace Logic
-							if(sire.mind && sire.mind.has_antag_datum(/datum/antagonist/sabbatist) || sire.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || sire.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
-								if(childe.mind && !childe.mind.has_antag_datum(/datum/antagonist/sabbatist) || !childe.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || !childe.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
-									var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(childe.mind)
-									childe.mind.add_antag_datum(new_sabbat)
+							if(sire.mind && is_sabbatist(sire))
+								if(childe.mind && !is_sabbatist(childe))
+									childe.mind.assigned_role = "Sabbat Pack"
+									add_antag_hud(ANTAG_HUD_REV, "rev", childe)
 									log_game("[key_name(sire)] has spread Sabbatism to [key_name(childe)] via Embrace.")
 					else
 						to_chat(owner, span_notice("[childe] is totally <b>DEAD</b>!"))
@@ -493,10 +493,10 @@
 						log_game("[key_name(regnant)] has attempted to bloodbond [key_name(thrall)] (UNBONDABLE).")
 
 					// Sabbatist Ghouling Logic
-					if(regnant.mind && 	regnant.mind.has_antag_datum(/datum/antagonist/sabbatist) || regnant.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || regnant.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
-						if(thrall.mind && !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist) || !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || !thrall.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
-							var/datum/antagonist/sabbatist/new_sabbat = new /datum/antagonist/sabbatist(thrall.mind)
-							thrall.mind.add_antag_datum(new_sabbat)
+					if(regnant.mind && 	is_sabbatist(regnant))
+						if(thrall.mind && !is_sabbatist(thrall))
+							thrall.mind.assigned_role = "Sabbat Pack"
+							add_antag_hud(ANTAG_HUD_REV, "rev", thrall)
 							log_game("[key_name(regnant)] has spread Sabbatism to [key_name(thrall)] via vitae.")
 
 					if(length(regnant.reagents?.reagent_list))

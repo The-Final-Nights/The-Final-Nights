@@ -552,11 +552,7 @@
 		mind.transfer_to(H)					//won't transfer key since the mind is not active
 		mind.original_character = H
 
-	if(is_antag)
-		if(client.prefs.antagonist_name && client.prefs.antagonist_name != "")
-			H.fully_replace_character_name(null, H.antagonist_name)
-	else
-		H.name = real_name
+	H.name = real_name
 
 	client.init_verbs()
 	. = H

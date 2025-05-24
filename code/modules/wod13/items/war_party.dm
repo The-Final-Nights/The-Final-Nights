@@ -18,7 +18,7 @@
 	var/mob/living/carbon/human/H = user
 
 	// Check if the user is a Sabbat Ductus or Priest
-	if(!(H.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatductus) || H.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest)))
+	if(!is_sabbat_ductus(user) || !is_sabbat_priest(user))
 		to_chat(H, span_cult("Only the Ductus or the Priest may call a War Party from the Totem!"))
 		return
 
@@ -33,7 +33,7 @@
 			to_chat(H, span_cult("The War Party Totem has been used [activations] times. Its power to compel Sabbat is weakening."))
 
 		for(var/mob/living/carbon/human/sabbat_member in GLOB.player_list)
-			if(sabbat_member.mind && (sabbat_member.mind.has_antag_datum(/datum/antagonist/sabbatist)))
+			if(sabbat_member.mind && is_sabbatist(sabbat_member))
 				// Roll for each Sabbat member to see if they receive the call
 				if(activations == 1 || prob(success_chance))
 					to_chat(sabbat_member, span_cult("The Ductus is calling all pack members to return to the lair at once! A war party has been called! The Sword of Caine shall fall on the Elders!"))
@@ -47,7 +47,7 @@
 
 			// Send the power message to the Sabbat Priest
 			for(var/mob/living/carbon/human/priest in GLOB.player_list)
-				if(priest.mind && priest.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest))
+				if(priest.mind && is_sabbat_priest(priest))
 					to_chat(priest, span_cult("[power_message] Only you, as the Priest, can sense this weakening. As the totem's power fades, so too does the Ductus' authority. Perhaps it is time for a new Ductus..."))
 					break // Only send to one priest, assuming there's only one, which there should be
 	else

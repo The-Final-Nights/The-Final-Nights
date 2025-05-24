@@ -31,8 +31,6 @@
 	r_pocket = /obj/item/vamp/keys/sabbat
 
 
-
-
 /datum/outfit/job/sabbatpack/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.clane)
@@ -58,14 +56,14 @@
 	if(H.clane && H.clane.name != "Lasombra")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 	if(H.mind)
-		H.mind.add_antag_datum(/datum/antagonist/sabbatist)
+		add_antag_hud(ANTAG_HUD_REV, "rev", H)
 
 
 /obj/effect/landmark/start/sabbatpack
 	name = "Sabbat Pack"
 	icon_state = "Assistant"
 
-
+// keeping this for lateparty sabbat
 /datum/antagonist/sabbatist
 	name = "Sabbatist"
 	roundend_category = "sabbattites"
@@ -80,3 +78,8 @@
 	owner.special_role = src
 	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, use_reverb = FALSE)
 	return ..()
+
+/datum/antagonist/proc/add_antag_hud(antag_hud_type, antag_hud_name, mob/living/mob_override)
+	var/datum/atom_hud/antag/hud = GLOB.huds[antag_hud_type]
+	hud.join_hud(mob_override)
+	set_antag_hud(mob_override, antag_hud_name)

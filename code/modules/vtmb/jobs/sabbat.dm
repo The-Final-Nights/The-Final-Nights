@@ -27,17 +27,13 @@
 		H.mind.add_antag_datum(/datum/antagonist/sabbatist)
 	GLOB.sabbatites += H
 
-	var/antagonist_name = H.antagonist_name
-	if(H.antagonist_name)
-		H.fully_replace_character_name(null,"[antagonist_name]")
-	else if (H.antagonist_name == "" | H.antagonist_name == null)
-		var/my_name = "Tyler"
-		if(H.gender == MALE)
-			my_name = pick(GLOB.first_names_male)
-		else
-			my_name = pick(GLOB.first_names_female)
-		var/my_surname = pick(GLOB.last_names)
-		H.fully_replace_character_name(null,"[my_name] [my_surname]")
+	var/my_name = "Tyler"
+	if(H.gender == MALE)
+		my_name = pick(GLOB.first_names_male)
+	else
+		my_name = pick(GLOB.first_names_female)
+	var/my_surname = pick(GLOB.last_names)
+	H.fully_replace_character_name(null,"[my_name] [my_surname]")
 	var/list/landmarkslist = list()
 	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
 		if(S.name == name)

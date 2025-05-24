@@ -1460,10 +1460,11 @@
 
 /obj/structure/bath/sabbatbath/attackby(obj/item/W, mob/living/carbon/user, params)
 	if(istype(W, /obj/item/sabbat_priest_tome))
-		if(user.mind && user.mind.has_antag_datum(/datum/antagonist/sabbatist/sabbatpriest) && has_buckled_mobs())
+		if(user.mind && is_sabbat_priest(user) && has_buckled_mobs())
 			var/mob/living/buckled_mob = buckled_mobs[1]
 			if(buckled_mob.mind)
-				buckled_mob.mind.add_antag_datum(/datum/antagonist/sabbatist/sabbatductus)
+				buckled_mob.mind.assigned_role = "Sabbat Ductus"
+				add_antag_hud(ANTAG_HUD_REV, "rev_head", buckled_mob)
 				to_chat(user, span_notice("[buckled_mob] has been anointed as the new Ductus."))
 				to_chat(buckled_mob, span_cult("You have been anointed as the new Ductus of the pack!"))
 		return
@@ -1497,7 +1498,7 @@
 		else
 			to_chat(user, span_warning("You decide not to add your blood to the bathtub..."))
 
-// Handle vaulderie goblet specifically so that the Priest can use the tub's blood for vaulderie (part of the blood bath rite)
+	// Handle vaulderie goblet specifically so that the Priest can use the tub's blood for vaulderie (part of the blood bath rite)
 	if(istype(W, /obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet))
 		var/obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet/goblet = W
 		if(blood_level <= 0)
@@ -1671,7 +1672,7 @@
 		if(!burying)
 			burying = TRUE
 			user.visible_message("<span class='warning'>[user] starts to dig [src]</span>", "<span class='warning'>You start to dig [src].</span>")
-			if(do_mob(user, src, 20 SECONDS))
+			if(do_after(user, 20 SECONDS))
 				burying = FALSE
 				if(icon_state == "pit0")
 					var/dead_amongst = FALSE
