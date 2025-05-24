@@ -313,7 +313,7 @@
 		if(last_activator != user)
 			to_chat(user, span_warning("You are not the one who activated this rune!"))
 			return
-		var/direction = tgui_input_list(user, "Choose direction:", "Teleportation Rune") in list("North", "East", "South", "West")
+		var/direction = tgui_input_list(user, "Choose direction:", "Teleportation Rune", list("North", "East", "South", "West"))
 		if(direction)
 			var/x_dir = user.x
 			var/y_dir = user.y
