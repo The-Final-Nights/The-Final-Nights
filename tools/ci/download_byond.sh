@@ -2,4 +2,4 @@
 set -e
 source dependencies.sh
 echo "Downloading BYOND version $BYOND_MAJOR.$BYOND_MINOR"
-curl "www.thefinalnights.com/516.1663_byond.zip" -o C:/byond.zip -A "The-Final-Nights/2.0 Continuous Integration"
+curl "http://www.thefinalnights.com/516.1663_byond.zip" -o C:/byond.zip -A "The-Final-Nights/2.0 Continuous Integration"
