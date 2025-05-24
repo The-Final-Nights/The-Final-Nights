@@ -844,7 +844,7 @@
 
 		//skip this if they can't access it due to whitelists
 		if (clan_checking.whitelisted)
-			if (!SSwhitelists.is_whitelisted(checked_ckey = vampire_checking.ckey, checked_whitelist = clan_checking.name))
+			if (!SSwhitelists.is_whitelisted(checked_ckey = vampire_checking.ckey, checked_whitelist = TRUSTED_PLAYER))
 				qdel(clan_checking)
 				continue
 
