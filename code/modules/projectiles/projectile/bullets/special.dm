@@ -74,15 +74,16 @@
 
 /obj/projectile/bullet/hod/on_hit(atom/target, blocked = FALSE)
 	. = ..()
-	if(!target.IsParalyzed() && iskindred(target) && !target.stakeimmune)
+	var/mob/living/carbon/human/H = target
+	if(!H.IsParalyzed() && iskindred(H) && !H.stakeimmune)
 		if(HAS_TRAIT(target, TRAIT_STAKE_RESISTANT))
-			visible_message("<span class='warning'>the round splinters as it touches [target]'s heart!</span>")
-			REMOVE_TRAIT(target, TRAIT_STAKE_RESISTANT, MAGIC_TRAIT)
+			visible_message("<span class='warning'>the round splinters as it touches [H]'s heart!</span>")
+			REMOVE_TRAIT(H, TRAIT_STAKE_RESISTANT, MAGIC_TRAIT)
 			qdel(src)
 		else
-			var/mob/living/carbon/human/H = target
 			visible_message("<span class='warning'>The round splits apart in [H]'s torso!</span>")
 			H.Paralyze(paralysetime)
 			H.Sleeping(paralysetime)
 			qdel(src)
+
 
