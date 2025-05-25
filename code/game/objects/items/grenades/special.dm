@@ -26,8 +26,8 @@
 /obj/item/grenade/equaliser
 	name = "Equaliser Grenade"
 	desc = "An odd looking grenade."
-	icon_state = "emp"
-	inhand_icon_state = "emp"
+	icon_state = "syndicate"
+	inhand_icon_state = "syndicate"
 
 /obj/item/grenade/equaliser/detonate()
 	var/detonate_turf = get_turf(src)
