@@ -243,3 +243,11 @@
 	icon_state = "sun"
 	inhand_icon_state = "sunglasses"
 
+/obj/item/clothing/glasses/hud/security/etheric
+	name = "Etheric Goggles"
+	desc = "An advanced set of night vision goggles that permit the detection of anomalous entities."
+	icon_state = "securityhud"
+	hud_type = DATA_HUD_ABDUCTOR
+	vision_flags = OBFUSCATE_INVISIBILITY
+	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+	glass_colour_type = /datum/client_colour/glass_colour/red
