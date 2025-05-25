@@ -22,3 +22,23 @@
 		else
 			C.visible_message("<b><span class='danger'>The grenade erupts in a flash of light!")
 	qdel(src)
+
+/obj/item/grenade/equaliser
+	name = "Equaliser Grenade"
+	desc = "An odd looking grenade."
+	icon_state = "emp"
+	inhand_icon_state = "emp"
+
+/obj/item/grenade/equaliser/detonate()
+	var/detonate_turf = get_turf(src)
+	if(!detonate_turf)
+		return
+	do_sparks(rand(5, 9), FALSE, src)
+	playsound(detonate_turf, 'sound/weapons/flashbang.ogg', 100, TRUE, 8, 0.9)
+	for(var/mob/living/carbon/C in range(5, detonate_turf)) //Five tile range
+		if(isgarou(C))
+			C.transformation_blocked += 600
+			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise, distrupting your focus. You can't transform!")
+		else
+			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise!")
+	qdel(src)
