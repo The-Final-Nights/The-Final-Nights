@@ -16,6 +16,9 @@
 		return 1
 
 /mob/living/carbon/human/proc/drinksomeblood(mob/living/mob)
+	if(HAS_TRAIT(src, TRAIT_BABY_TEETH))
+		to_chat(usr, span_warning("[src] With which fangs, Dumbass?"))
+		return FALSE
 	var/bloodgain = max(1, mob.bloodquality-1)
 	var/fumbled = FALSE
 	last_drinkblood_use = world.time

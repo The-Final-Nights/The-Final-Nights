@@ -91,6 +91,8 @@
 
 #define STATUS_EFFECT_CLOUDSTRUCK /datum/status_effect/cloudstruck //blinds and applies an overlay.
 
+#define STATUS_EFFECT_BABY_TEETH /datum/status_effect/babyteeth //takes away the ability to suck blood from people
+
 /// Makes the mob move randomly.
 /// Read the documentation for /datum/status_effect/confusion for more information.
 #define STATUS_EFFECT_CONFUSION /datum/status_effect/confusion

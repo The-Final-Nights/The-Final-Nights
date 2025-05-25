@@ -1043,3 +1043,20 @@
 	owner.additional_mentality += 1
 	if(HAS_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN))
 		REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
+
+/datum/status_effect/babyteeth
+	id = "fangs pulled"
+	status_type = STATUS_EFFECT_REPLACE
+	duration = 3600 SECONDS
+
+/datum/status_effect/babyteeth/on_creation(mob/living/new_owner, set_duration)
+	if(isnum(set_duration))
+		duration = set_duration
+	. = ..()
+
+/datum/status_effect/babyteeth/on_apply()
+	ADD_TRAIT(owner, TRAIT_BABY_TEETH, "fangs pulled")
+
+/datum/status_effect/babyteeth/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_BABY_TEETH, "fangs pulled")
