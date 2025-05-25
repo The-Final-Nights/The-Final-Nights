@@ -1,4 +1,0 @@
-author: "Kevak"
-delete-after: True
-changes:
-  - bugfix: "Fixed KJ being unable to select intended quirks due to spelling error in code."
