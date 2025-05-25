@@ -47,7 +47,11 @@
 mob/living/carbon/proc/transformation_blocked_update()
 	if(src.transformation_blocked > 0)
 		sleep(10)
+		if(src.auspice.rage > 0)
+			src.auspice.rage -= 1
+			src.visible_message("<b><span class='danger'>The noise makes it hard to concentrate, even on your anger")
 		src.transformation_blocked -= 1
 		src.transformation_blocked_update()
 	else
+		src.visible_message("<b><span class='danger'>You regain your focus, you can transform again!")
 		return
