@@ -327,6 +327,24 @@
 	var/drawing = FALSE
 	var/level = 1
 
+
+/datum/action/thaumaturgy/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
+	if(owner && ismob(owner))
+		var/mob/M = owner
+		if(M?.client?.prefs?.old_discipline)
+			button_icon = 'code/modules/wod13/disciplines.dmi'
+			icon_icon = 'code/modules/wod13/disciplines.dmi'
+			button_icon_state = "ritual-thaumaturgy"
+			background_icon_state = "ritual-thaumaturgy" // optional; adjust if you have a matching background
+		else
+			button_icon = 'code/modules/wod13/UI/actions.dmi'
+			icon_icon = 'code/modules/wod13/UI/actions.dmi'
+			button_icon_state = "thaumaturgy"
+			background_icon_state = ACTION_BUTTON_DEFAULT_BACKGROUND
+
+	// apply the new settings
+	..(current_button, force)
+
 /datum/action/thaumaturgy/Trigger()
 	. = ..()
 	var/mob/living/carbon/human/H = owner
@@ -381,6 +399,21 @@
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
 	var/abuse_fix = 0
+
+
+/datum/action/bloodshield/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
+	if(owner && ismob(owner))
+		var/mob/M = owner
+		if(M?.client?.prefs?.old_discipline)
+			button_icon = 'code/modules/wod13/disciplines.dmi'
+			icon_icon = 'code/modules/wod13/disciplines.dmi'
+			background_icon_state = 'code/modules/wod13/disciplines.dmi'
+		else
+			button_icon = 'code/modules/wod13/UI/actions.dmi'
+			icon_icon = 'code/modules/wod13/UI/actions.dmi'
+
+	// now call the parent for the actual overlay logic
+	..(current_button, force)
 
 /datum/action/bloodshield/Trigger()
 	. = ..()
