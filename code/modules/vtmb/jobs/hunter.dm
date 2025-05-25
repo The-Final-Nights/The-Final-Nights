@@ -142,7 +142,7 @@
 		/obj/item/ammo_box/magazine/m556/incendiary = 2,
 		/obj/item/ammo_box/magazine/m556/silver = 2,
 		/obj/item/grenade/sunlight = 3,
-		/obj/item/grenade/equalizer = 3,
+		/obj/item/grenade/equaliser = 3,
 		/obj/item/vampire_stake = 1,
 		/obj/item/radio/military = 1,
 		/obj/item/vamp/keys/hack=1
@@ -173,7 +173,7 @@
 		/obj/item/ammo_box/magazine/m556/silver = 2,
 		/obj/item/ammo_box/magazine/m75 = 2,
 		/obj/item/grenade/sunlight = 3,
-		/obj/item/grenade/equalizer = 3,
+		/obj/item/grenade/equaliser = 3,
 		/obj/item/vampire_stake = 1,
 		/obj/item/gun/ballistic/automatic/gyropistol = 1,
 		/obj/item/radio/military = 1,
