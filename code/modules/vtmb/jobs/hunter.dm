@@ -101,3 +101,19 @@
 /datum/antagonist/hunter/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>You are the Hunter.</span>")
 	owner.announce_objectives()
+
+/obj/item/card/id/valkyrie
+	name = "SOF Task Force Badge"
+	desc = "SOF Operator"
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id3"
+
+/obj/item/card/id/valkyrie/sergeant
+	name = "SOF Task Force NCO Badge"
+	desc = "SOF Sergeant"
