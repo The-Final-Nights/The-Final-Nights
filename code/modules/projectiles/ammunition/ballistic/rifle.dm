@@ -23,6 +23,21 @@
 	desc = "A 5.56mm phasic bullet casing."
 	projectile_type = /obj/projectile/bullet/a556/phasic
 
+/obj/item/ammo_casing/a556/bleeder
+	name = "5.56mm Bleeder bullet casing"
+	desc = "A 5.56mm Bleeder bullet casing."
+	projectile_type = /obj/projectile/bullet/bleeder
+
+/obj/item/ammo_casing/a556/compound
+	name = "5.56mm Compound bullet casing"
+	desc = "A 5.56mm Compound bullet casing."
+	projectile_type = /obj/projectile/bullet/compound
+
+/obj/item/ammo_casing/a556/hod
+	name = "5.56mm Hod bullet casing"
+	desc = "A 5.56mm Hod bullet casing."
+	projectile_type = /obj/projectile/bullet/hod
+
 // 40mm (Grenade Launcher)
 
 /obj/item/ammo_casing/a40mm
