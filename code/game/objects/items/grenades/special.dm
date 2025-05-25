@@ -47,6 +47,5 @@
 mob/living/carbon/proc/transformation_blocked_update()
 	if(src.transformation_blocked > 0)
 		src.transformation_blocked -= 1
-		src.transformation_blocked_update()
 	else
 		return
