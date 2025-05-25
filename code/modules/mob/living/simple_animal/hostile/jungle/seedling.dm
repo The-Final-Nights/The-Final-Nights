@@ -109,7 +109,7 @@
 		return
 	return ..()
 
-/mob/living/simple_animal/hostile/jungle/seedling/AttackingTarget()
+/mob/living/simple_animal/hostile/jungle/seedling/AttackingTarget(atom/attacked_target)
 	if(isliving(target))
 		if(ranged_cooldown <= world.time && combatant_state == SEEDLING_STATE_NEUTRAL)
 			OpenFire(target)

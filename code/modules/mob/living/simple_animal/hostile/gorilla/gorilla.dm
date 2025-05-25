@@ -58,7 +58,7 @@
 						parts += BP
 			return parts
 
-/mob/living/simple_animal/hostile/gorilla/AttackingTarget()
+/mob/living/simple_animal/hostile/gorilla/AttackingTarget(atom/attacked_target)
 	if(client)
 		oogaooga()
 	var/list/parts = target_bodyparts(target)
