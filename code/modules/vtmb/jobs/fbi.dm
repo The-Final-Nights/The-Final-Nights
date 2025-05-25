@@ -23,7 +23,6 @@
 	duty = "You are here on an officially unofficial assignment, to look into local oddities and sort them out as deemed reasonable, whatever that means. To the point you arent even assigned a proper office, as much a ghetto hideout in the local Hotel, quietly paid for with some renovations. If anyone asks? Make something mundane up, they wouldnt believe the truth anyways."
 	minimal_masquerade = 0
 	known_contacts = list("Police Chief")
-	whitelisted = TRUE
 
 /datum/outfit/job/fbi
 	name = "Federal Investigator"
