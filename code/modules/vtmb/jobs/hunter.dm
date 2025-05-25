@@ -118,18 +118,6 @@
 	name = "SOF Task Force NCO Badge"
 	desc = "SOF Sergeant"
 
-/obj/item/gun/ballistic/automatic/ar/valkyrie
-	name = "Helsing Assault Rifle"
-	desc = "A robust assault rifle used by SOF personnel."
-	icon_state = "arg"
-	inhand_icon_state = "arg"
-	slot_flags = 0
-	mag_type = /obj/item/ammo_box/magazine/m556/compound
-	can_unsuppress = TRUE
-	can_suppress = TRUE
-	burst_size = 3
-	fire_delay = 1
-
 /datum/outfit/job/hunter/valkyrie
 	name = "Task Force Valkyrie Operator"
 	uniform = /obj/item/clothing/under/vampire/military_fatigues/valkyrie
@@ -138,12 +126,12 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	ears = /obj/item/p25radio/police/government
 	l_pocket = /obj/item/vamp/keys/hunter
-	suit = /obj/item/clothing/suit/vampire/vest/army
+	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
 	suit_store = /obj/item/gun/ballistic/automatic/ar/valkyrie
 	back = /obj/item/storage/backpack/security
 	glasses = /obj/item/clothing/glasses/hud/security/etheric
 	mask = /obj/item/clothing/mask/vampire/balaclava
-	head = /obj/item/clothing/head/vampire/army
+	head = /obj/item/clothing/head/vampire/army/valkyrie
 
 	backpack_contents = list(
 		/obj/item/storage/book/bible = 1,
