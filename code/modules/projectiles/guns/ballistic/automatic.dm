@@ -402,8 +402,9 @@
 	icon_state = "arg"
 	inhand_icon_state = "arg"
 	slot_flags = 0
-	mag_type = /obj/item/ammo_box/magazine/m556/compound
+	mag_type = /obj/item/ammo_box/magazine/m556 || /obj/item/ammo_box/magazine/m556/bleeder || /obj/item/ammo_box/magazine/m556/compound || /obj/item/ammo_box/magazine/m556/hod
 	can_unsuppress = TRUE
 	can_suppress = TRUE
-	burst_size = 3
+	tac_reloads = TRUE
+	burst_size = 1
 	fire_delay = 1
