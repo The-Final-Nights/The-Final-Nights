@@ -129,6 +129,7 @@
 	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
 	suit_store = /obj/item/gun/ballistic/automatic/ar/valkyrie
 	back = /obj/item/storage/backpack/security
+	belt = /obj/item/storage/belt/holster/valkyrie
 	glasses = /obj/item/clothing/glasses/hud/security/etheric
 	mask = /obj/item/clothing/mask/vampire/balaclava
 	head = /obj/item/clothing/head/vampire/army/valkyrie
@@ -153,6 +154,7 @@
 	l_pocket = /obj/item/vamp/keys/hunter
 	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
 	suit_store = /obj/item/gun/ballistic/automatic/ar/valkyrie
+	belt = /obj/item/storage/belt/holster/valkyrie
 	back = /obj/item/storage/backpack/security
 	glasses = /obj/item/clothing/glasses/hud/security/etheric
 	mask = /obj/item/clothing/mask/vampire/balaclava
