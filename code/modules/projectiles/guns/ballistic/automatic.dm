@@ -406,6 +406,6 @@
 	can_unsuppress = TRUE
 	can_suppress = TRUE
 	tac_reloads = TRUE
-	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_SUITSTORE
+	slot_flags = ITEM_SLOT_SUITSTORE
 	burst_size = 1
 	fire_delay = 1
