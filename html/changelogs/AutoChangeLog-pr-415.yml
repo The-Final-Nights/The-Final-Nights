@@ -1,7 +1,0 @@
-author: "Somniworld"
-delete-after: True
-changes:
-  - rscadd: "A placeholder Corax \"Tribe\", that allows people to play the new Fera. This is EXTREMELY barebones and is currently a new flavour of Garou. Note that many features (flying, specific gifts) are missing. You are encouraged to help out and make your own PRs to add features, if you wish!"
-  - rscadd: "Corax-Specific cawing emotes and transformation effects! Sound courtesy of Machinepixie on Discord"
-  - rscadd: "Corax-Specific breed HUD elements, sprites made by Boltersam on discord"
-  - rscadd: "Two Corax specific gifts : Eye Drinking and Sun's guard! Massive thanks to Machinepixie for the code!"
