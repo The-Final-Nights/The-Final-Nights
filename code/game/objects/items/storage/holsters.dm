@@ -149,6 +149,6 @@
 	STR.max_items = 4
 	STR.max_w_class = WEIGHT_CLASS_NORMAL
 	STR.set_holdable(list(
-		/obj/item/gun/ballistic
+		/obj/item/gun/ballistic,
 		/obj/item/ammo_box/magazine
 		))
