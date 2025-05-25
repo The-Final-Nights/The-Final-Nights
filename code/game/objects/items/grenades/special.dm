@@ -42,3 +42,10 @@
 		else
 			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise!")
 	qdel(src)
+
+mob/living/carbon/proc/transformation_blocked_update()
+	if(src.transformation_blocked > 0)
+		src.transformation_blocked -= 1
+		src.transformation_blocked_update()
+	else
+		return
