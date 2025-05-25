@@ -77,7 +77,9 @@
 	if(trans.in_frenzy)
 		to_chat(trans, "You can't transform while in frenzy.")
 		return
-
+	if(trans.transformation_blocked > 0 
+		to_chat(trans, "You can't seem to focus enough to transform!")
+		return
 	trans.inspired = FALSE
 	if(ishuman(trans))
 		var/datum/species/garou/G = trans.dna.species
