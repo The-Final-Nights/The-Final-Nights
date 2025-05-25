@@ -102,7 +102,7 @@
 	to_chat(owner.current, "<span class='alertsyndie'>You are the Hunter.</span>")
 	owner.announce_objectives()
 
-/obj/item/card/id/valkyrie
+/obj/item/card/id/hunter/valkyrie
 	name = "SOF Task Force Badge"
 	desc = "SOF Operator"
 	icon = 'code/modules/wod13/items.dmi'
@@ -114,6 +114,43 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "id3"
 
-/obj/item/card/id/valkyrie/sergeant
+/obj/item/card/id/hunter/valkyrie/sergeant
 	name = "SOF Task Force NCO Badge"
 	desc = "SOF Sergeant"
+
+/obj/item/gun/ballistic/automatic/ar/valkyrie
+	name = "Helsing Assault Rifle"
+	desc = "A robust assault rifle used by SOF personnel."
+	icon_state = "arg"
+	inhand_icon_state = "arg"
+	slot_flags = 0
+	mag_type = /obj/item/ammo_box/magazine/m556/compound
+	can_unsuppress = TRUE
+	can_suppress = TRUE
+	burst_size = 3
+	fire_delay = 1
+
+/datum/outfit/job/hunter/valkyrie
+	name = "Task Force Valkyrie Operator"
+	uniform = /obj/item/clothing/under/vampire/military_fatigues/valkyrie
+	r_pocket = /obj/item/ammo_box/magazine/m556/compound
+	id = /obj/item/card/id/hunter/valkyrie
+	shoes = /obj/item/clothing/shoes/vampire/jackboots
+	ears = /obj/item/p25radio/police/government
+	l_pocket = /obj/item/vamp/keys/hunter
+	suit = /obj/item/clothing/suit/vampire/vest/army
+	suit_store = /obj/item/gun/ballistic/automatic/ar/valkyrie
+	back = /obj/item/storage/backpack/security
+	glasses = /obj/item/clothing/glasses/hud/security/etheric
+	mask = /obj/item/clothing/mask/vampire/balaclava
+	head = /obj/item/clothing/head/vampire/army
+
+	backpack_contents = list(
+		/obj/item/storage/book/bible = 1,
+		/obj/item/ammo_box/magazine/m556/compound = 3,
+		/obj/item/ammo_box/magazine/m556/bleeder = 2,
+		/obj/item/ammo_box/magazine/m556/hod = 2,
+		/obj/item/grenade/sunlight = 2,
+		/obj/item/vampire_stake = 1,
+		/obj/item/vamp/keys/hack=1
+		)
