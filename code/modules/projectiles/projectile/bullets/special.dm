@@ -36,7 +36,7 @@
 
 /obj/projectile/bullet/bleeder //Base object here, split off pistol/rifle/sniper variants, etc.
 	name = "bleeder round"
-	damage = 35
+	damage = 25  //Variants should deal less base damage than their equivalents.
 	armour_penetration = 30
 	wound_bonus = -40
 	var/bloodloss = 1
@@ -64,3 +64,25 @@
 		var/mob/living/carbon/C = target
 		C.adjustFireLoss(supernaturalbonus)
 		to_chat(C, span_warning("You feel the round burning as it hits you!"))
+
+/obj/projectile/bullet/hod //Base object here, split off pistol/rifle/sniper variants, etc.
+	name = "hod round"
+	damage = 25 //Variants should deal less base damage than their equivalents.
+	armour_penetration = 30
+	wound_bonus = -40
+	var/paralysetime = 100 //How long should the round paralyse vamps for? In ticks, so approximately 10 to a second.
+
+/obj/projectile/bullet/hod/on_hit(atom/target, blocked = FALSE)
+	. = ..()
+	if(!target.IsParalyzed() && iskindred(target) && !target.stakeimmune)
+		if(HAS_TRAIT(target, TRAIT_STAKE_RESISTANT))
+			visible_message("<span class='warning'>the round splinters as it touches [target]'s heart!</span>")
+			REMOVE_TRAIT(target, TRAIT_STAKE_RESISTANT, MAGIC_TRAIT)
+			qdel(src)
+		else
+		var/mob/living/carbon/human/H = target
+		visible_message("<span class='warning'>The round splits apart in [H]'s torso!</span>")
+		H.Paralyze(paralysetime)
+		H.Sleeping(paralysetime)
+		qdel(src)
+
