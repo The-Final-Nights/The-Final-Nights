@@ -103,7 +103,7 @@
 					client.images -= suckbar
 				qdel(suckbar)
 				return
-		if(HAS_TRAIT(src, TRAIT_ORGANOVORE)) // think this is fine?
+		if(HAS_TRAIT(src, TRAIT_ORGANOVORE))
 			mob.adjustBruteLoss(20, TRUE) // sharp teeth
 			to_chat(src, span_warning("You can't drink this disgusting <b>BLOOD</b>. Go find something meatier!"))
 			visible_message(span_danger("[src] throws up!"), span_userdanger("You throw up!"))
@@ -115,6 +115,14 @@
 				client.images -= suckbar
 			qdel(suckbar)
 			return
+		if(clane.name == "Salubri Warrior" && (ishumanbasic(mob) || isghoul(mob))) //passes by if it's not a supernatural
+			if( (!HAS_TRAIT_FROM(mob, TRAIT_INCAPACITATED, STAMINA)) && mob.stat < SOFT_CRIT) //Needs to be KO'd to feed on
+				to_chat(src, span_warning("I HAVE NOT BESTED THIS ONE IN COMBAT!! I FEED ON WARRIORS, NOT CATTLE!!"))
+				stop_sound_channel(CHANNEL_BLOOD)
+				if(client)
+					client.images -= suckbar
+				qdel(suckbar)
+				return
 		if(iskindred(mob))
 			to_chat(src, "<span class='userlove'>[mob]'s blood tastes HEAVENLY...</span>")
 			adjustBruteLoss(-25, TRUE)
