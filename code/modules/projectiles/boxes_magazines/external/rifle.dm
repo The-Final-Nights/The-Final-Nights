@@ -33,3 +33,7 @@
 /obj/item/ammo_box/magazine/m556/hod
 	name = "toploader magazine (5.56mm Hod)"
 	ammo_type = /obj/item/ammo_casing/a556/hod
+
+/obj/item/ammo_box/magazine/m556/incendiary
+	name = "toploader magazine (5.56mm Incendiary)"
+	ammo_type = /obj/item/ammo_casing/a556/incendiary
