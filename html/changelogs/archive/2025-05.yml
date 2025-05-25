@@ -200,5 +200,24 @@
   - bugfix: Fixed KJ being unable to select intended quirks due to spelling error
       in code.
   - bugfix: Fixed a weird little oversight with citizen role kindred.
+  Somniworld:
+  - rscadd: A placeholder Corax "Tribe", that allows people to play the new Fera.
+      This is EXTREMELY barebones and is currently a new flavour of Garou. Note that
+      many features (flying, specific gifts) are missing. You are encouraged to help
+      out and make your own PRs to add features, if you wish!
+  - rscadd: Corax-Specific cawing emotes and transformation effects! Sound courtesy
+      of Machinepixie on Discord
+  - rscadd: Corax-Specific breed HUD elements, sprites made by Boltersam on discord
+  - rscadd: 'Two Corax specific gifts : Eye Drinking and Sun''s guard! Massive thanks
+      to Machinepixie for the code!'
   XeonMations:
   - code_imp: CI/CD checks now use a private byond instance.
+2025-05-25:
+  TheTrueSilverRat:
+  - rscadd: Added Warrior Salubri Clan
+  - rscadd: Added Warrior Valeren
+  - rscadd: Added Code of Samiel to the Morality Stuff
+  - qol: Healer Valeren 3 can heal corpses now like Theurge's Mother Touch
+  - rscadd: Salubri Third Eyes wohoo
+  buffyuwu, XeonMations:
+  - code_imp: CI/CD checks MAY work now. Please. I Hope.

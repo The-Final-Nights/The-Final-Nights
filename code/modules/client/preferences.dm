@@ -759,6 +759,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
+				switch(clane.name)
+
+					if("Salubri")
+
+						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
+						possible_new_valerens -= discipline_types
+
+						if (possible_new_valerens.len && (player_experience >= 10))
+							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
+
+					if("Salubri Warrior")
+
+						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
+						possible_new_valerens -= discipline_types
+
+						if (possible_new_valerens.len && (player_experience >= 10))
+							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
+
+
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
@@ -2363,6 +2382,20 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						player_experience -= 10
 						experience_used_on_character += 10
 
+				if("newvaleren")
+					if((player_experience < 10) || !(pref_species.id == "kindred") || !((clane.name == "Salubri") || (clane.name == "Salubri Warrior")))
+						return
+
+					var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
+					possible_new_valerens -= discipline_types
+
+					var/new_discipline = tgui_input_list(user, "Select your new Valeren Path", "Discipline Selection", sort_list(possible_new_valerens))
+					if(new_discipline)
+						discipline_types += new_discipline
+						discipline_levels += 1
+						player_experience -= 10
+						experience_used_on_character += 10
+
 				if("newghouldiscipline")
 					if((player_experience < 10) || !(pref_species.id == "ghoul"))
 						return
@@ -2502,7 +2535,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/a = GLOB.clanes_list[i]
 						var/datum/vampireclane/V = new a
 						if (V.whitelisted)
-							if (SSwhitelists.is_whitelisted(user.ckey, V.name))
+							if (SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 								available_clans[V.name] += GLOB.clanes_list
 						else
 							available_clans[V.name] += GLOB.clanes_list[i]
@@ -2544,6 +2577,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 									morality_path = new /datum/morality/heart()
 								if(CLAN_BAALI)
 									morality_path = new /datum/morality/hive()
+								if(CLAN_SALUBRI_WARRIOR)
+									morality_path = new /datum/morality/samiel()
 						path_score = morality_path.score
 						if(clane.no_hair)
 							hairstyle = "Bald"
@@ -2669,6 +2704,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (discipline_level <= 0)
 							cost = 10
 						else if (clane.name == "Caitiff")
+							cost = discipline_level * 6
+						else if (clane.common_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 6
 						else if (clane.clane_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 5
