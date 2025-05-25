@@ -17,3 +17,4 @@
 		else
 			C.visible_message("<b><span class='danger'>The grenade erupts in a flash of light!")
 			C.Paralyze(10) 
+		qdel(src)
