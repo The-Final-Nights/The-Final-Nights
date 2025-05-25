@@ -39,6 +39,7 @@
 		if(isgarou(C))
 			C.transformation_blocked += 60
 			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise, distrupting your focus. You can't transform!")
+			qdel(src)
 			C.transformation_blocked_update()
 		else
 			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise!")
