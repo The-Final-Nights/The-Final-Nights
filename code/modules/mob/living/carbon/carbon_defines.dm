@@ -149,4 +149,6 @@
 	var/diablerist = FALSE
 	var/antifrenzy = FALSE
 
+	var/transformation_blocked = 0 //Time transformations are blocked for, in ticks.
+
 	COOLDOWN_DECLARE(bleeding_message_cd)
