@@ -390,7 +390,7 @@
 //	clothing_traits = list(TRAIT_UNMASQUERADE)
 	masquerade_violating = TRUE
 
-/obj/item/clothing/suit/vampire/vest/army
+/obj/item/clothing/suit/vampire/vest/army/valkyrie
 	name = "SOF Vest"
 	desc = "Special Forces Equipment. Highly classified."
 	icon_state = "army"
