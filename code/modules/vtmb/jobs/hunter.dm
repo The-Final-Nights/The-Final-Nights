@@ -127,7 +127,7 @@
 	ears = /obj/item/p25radio/police/government
 	l_pocket = /obj/item/vamp/keys/hunter
 	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
-	belt = /obj/item/gun/ballistic/automatic/ar/valkyrie
+	suit_store = /obj/item/gun/ballistic/automatic/ar/valkyrie
 	back = /obj/item/storage/backpack/security
 	glasses = /obj/item/clothing/glasses/hud/security/etheric
 	mask = /obj/item/clothing/mask/vampire/balaclava
@@ -152,7 +152,7 @@
 	ears = /obj/item/p25radio/police/government
 	l_pocket = /obj/item/vamp/keys/hunter
 	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
-	belt = /obj/item/gun/ballistic/automatic/ar/valkyrie
+	suit_store = /obj/item/gun/ballistic/automatic/ar/valkyrie
 	back = /obj/item/storage/backpack/security
 	glasses = /obj/item/clothing/glasses/hud/security/etheric
 	mask = /obj/item/clothing/mask/vampire/balaclava
