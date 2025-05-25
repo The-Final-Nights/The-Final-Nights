@@ -106,7 +106,7 @@
 	name = "SOF Task Force Badge"
 	desc = "SOF Operator"
 	icon = 'code/modules/wod13/items.dmi'
-	icon_state = "id"
+	icon_state = "id3"
 	inhand_icon_state = "card-id"
 	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
