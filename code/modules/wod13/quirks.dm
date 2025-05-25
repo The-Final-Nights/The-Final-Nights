@@ -159,7 +159,7 @@ Dancer
 	value = 3
 	gain_text = "<span class='warning'>You feel your heart beat, for a moment.</span>"
 	lose_text = "<span class='notice'>You feel a subtle chill.</span>"
-	allowed_species = list("Kuei-jin", "Vampire")
+	allowed_species = list("Kuei-Jin", "Vampire")
 
 /datum/quirk/blush_of_health
 	name = "Blush of Health"
@@ -234,7 +234,7 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>Your fangs feel awkward in your mouth.</span>"
 	lose_text = "<span class='notice'>You fangs feel comfortable in your mouth.</span>"
-	allowed_species = list("Vampire","Kuei-jin")
+	allowed_species = list("Vampire","Kuei-Jin")
 	excluded_clans = list("Nagaraja")
 
 /datum/quirk/animal_repulsion
@@ -244,7 +244,7 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>You can feel hostile eyes watching you.</span>"
 	lose_text = "<span class='notice'>Cats walk by you unphased.</span>"
-	allowed_species = list("Vampire","Ghoul","Human","Kuei-jin")
+	allowed_species = list("Vampire","Ghoul","Human","Kuei-Jin")
 
 /datum/quirk/wyrm_tainted
 	name = "Wyrm Tainted"
@@ -254,7 +254,7 @@ Dancer
 	gain_text = "<span class='warning'>You feel wrongness crawling beneath your skin.</span>"
 	lose_text = "<span class='notice'>You feel relief and warmth.</span>"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers")
+	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers", "Corax")
 
 /datum/quirk/illegal_identity
 	name = "Illegal Identity"
