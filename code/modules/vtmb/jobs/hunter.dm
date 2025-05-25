@@ -166,5 +166,6 @@
 		/obj/item/ammo_box/magazine/m75 = 2,
 		/obj/item/grenade/sunlight = 2,
 		/obj/item/vampire_stake = 1,
+		/obj/item/gun/ballistic/automatic/gyropistol = 1,
 		/obj/item/vamp/keys/hack=1
 		)
