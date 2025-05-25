@@ -80,9 +80,9 @@
 			REMOVE_TRAIT(target, TRAIT_STAKE_RESISTANT, MAGIC_TRAIT)
 			qdel(src)
 		else
-		var/mob/living/carbon/human/H = target
-		visible_message("<span class='warning'>The round splits apart in [H]'s torso!</span>")
-		H.Paralyze(paralysetime)
-		H.Sleeping(paralysetime)
-		qdel(src)
+			var/mob/living/carbon/human/H = target
+			visible_message("<span class='warning'>The round splits apart in [H]'s torso!</span>")
+			H.Paralyze(paralysetime)
+			H.Sleeping(paralysetime)
+			qdel(src)
 
