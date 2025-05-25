@@ -5,7 +5,12 @@
 	inhand_icon_state = "emp"
 
 /obj/item/grenade/sunlight/detonate()
-	for(var/mob/living/carbon/C in range(5)) //Five tile range
+	var/detonate_turf = get_turf(src)
+	if(!detonate_turf)
+		return
+	do_sparks(rand(5, 9), FALSE, src)
+	playsound(detonate_turf, 'sound/weapons/flashbang.ogg', 100, TRUE, 8, 0.9)
+	for(var/mob/living/carbon/C in range(5, detonate_turf)) //Five tile range
 		if(iskindred(C))
 			C.visible_message("<b><span class='danger'>The grenade erupts in a flash of burning light!")
 			C.adjustFireLoss(80) //Sunlight REALLY hurts.
@@ -16,4 +21,4 @@
 			C.Paralyze(30)
 		else
 			C.visible_message("<b><span class='danger'>The grenade erupts in a flash of light!")
-		qdel(src)
+	qdel(src)
