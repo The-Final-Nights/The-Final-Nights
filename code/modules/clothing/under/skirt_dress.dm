@@ -38,13 +38,20 @@
 /obj/item/clothing/under/dress/redeveninggown
 	name = "red evening gown"
 	desc = "Fancy dress for space bar singers."
-	icon_state = "red_evening_gown"
-	inhand_icon_state = "red_evening_gown"
+	inhand_icon_state = null
+	greyscale_config = /datum/greyscale_config/evening_dress
+	greyscale_config_worn = /datum/greyscale_config/evening_dress/worn
+	flags_1 = IS_PLAYER_COLORABLE_1
+	greyscale_colors = "#e11f1f"
 
 /obj/item/clothing/under/dress/skirt
 	name = "black skirt"
 	desc = "A black skirt, very fancy!"
-	icon_state = "blackskirt"
+	greyscale_config = /datum/greyscale_config/cardiganskirt
+	greyscale_config_worn = /datum/greyscale_config/cardiganskirt/worn
+	greyscale_colors = "#bf504d#545454"
+	inhand_icon_state = "blackskirt"
+	flags_1 = IS_PLAYER_COLORABLE_1
 
 /obj/item/clothing/under/dress/skirt/plaid
 	name = "plaid skirt"
