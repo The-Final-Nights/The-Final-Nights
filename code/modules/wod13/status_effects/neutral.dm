@@ -20,7 +20,3 @@
 	if(.)
 		regent = src.regent
 		linked_alert.desc = "You're blood bonded to [regent.real_name]!"
-
-/datum/status_effect/blood_bonded/tick()
-	if(regent)
-		new /obj/effect/temp_visual/love_heart/invisible(regent.drop_location(), owner)
