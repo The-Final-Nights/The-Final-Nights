@@ -1,0 +1,4 @@
+author: "Merek2"
+delete-after: True
+changes:
+  - bugfix: "Added a period to sweat and eyeroll emote."

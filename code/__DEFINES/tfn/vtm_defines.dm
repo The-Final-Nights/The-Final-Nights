@@ -55,6 +55,7 @@
 #define CLAN_DAUGHTERS_OF_CACOPHONY "Daughters of Cacophony"
 #define CLAN_CAPPADOCIAN "Cappadocian"
 #define CLAN_NAGARAJA "Nagaraja"
+#define CLAN_SALUBRI_WARRIOR "Salubri Warrior"
 
 /**
  * Auspex aura defines
