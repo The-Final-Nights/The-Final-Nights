@@ -1,7 +1,7 @@
 /datum/discipline/valeren
 	name = "Healer Valeren"
 	desc = "Use your third eye in healing or protecting needs."
-	icon_state = "valeren"
+	icon_state = "healer"
 	clan_restricted = TRUE
 	power_type = /datum/discipline_power/valeren
 
@@ -10,6 +10,19 @@
 	desc = "Valeren power description"
 
 	activate_sound = 'code/modules/wod13/sounds/valeren.ogg'
+
+/datum/discipline/valeren/post_gain()
+	. = ..()
+	if(level >= 2)
+		ADD_TRAIT(owner, TRAIT_SALUBRI_EYE, TRAIT_GENERIC)
+
+/datum/discipline_power/valeren/can_activate_untargeted(alert)
+	. = ..()
+	if(level >=3 && !(HAS_TRAIT_FROM(owner, TRAIT_SALUBRI_EYE_OPEN, SALUBRI_EYE_TRAIT)))
+		if(alert)
+			to_chat(owner, span_warning("You can only use this ability with your third eye open!"))
+		return FALSE
+
 
 //SENSE VITALITY
 /datum/discipline_power/valeren/sense_vitality
@@ -28,7 +41,8 @@
 	. = ..()
 	healthscan(owner, target, 1, FALSE)
 	chemscan(owner, target)
-	to_chat(owner, "<b>[target]</b> has <b>[num2text(target.bloodpool)]/[target.maxbloodpool]</b> blood points.")
+	if(iskindred(target) || isghoul(target))
+		to_chat(owner, "<b>[target]</b> has <b>[num2text(target.bloodpool)]/[target.maxbloodpool]</b> blood points.")
 	if(iskindred(target))
 		to_chat(owner, "<b>[target]</b> has a rating of <b>[target.morality_path?.score]</b> on their path.")
 
@@ -64,7 +78,7 @@
 
 	level = 3
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_FREE_HAND | DISC_CHECK_IMMOBILE
-	target_type = TARGET_LIVING
+	target_type = TARGET_MOB
 	range = 1
 
 	violates_masquerade = TRUE
