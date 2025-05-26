@@ -47,7 +47,7 @@
 		if("f")
 			body_shape = "fat"
 
-	. = list("<span class='info'>*---------*\nThis is <EM>[!obscure_name ? name : "Unknown"]</EM>, [age2agedescription(age)] [body_shape] [gender_title]!")
+	. = list("<span class='info'>This is <EM>[!obscure_name ? name : "Unknown"]</EM>, [age2agedescription(age)] [body_shape] [gender_title]!")
 	// TFN EDIT REFACTOR END
 	var/obscured = check_obscured_slots()
 	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
@@ -85,14 +85,14 @@
 		switch(renownrank)
 			if(1)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(2)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(3,4,5,6)
-				. += "<b>You know [p_them()] as an [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe.name].</b>"
+				. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] [auspice.name] of the [auspice.tribe.name].</b>"
 				isknown = 1
 		if(isknown)
 			switch(honor)
@@ -641,8 +641,8 @@
 	else if(isobserver(user))
 		var/mob/dead/observer/observer_user = user
 		if(!isavatar(observer_user))
-			. += "<span class='info'><b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]</span>"
-	. += "*---------*</span>"
+			. += span_info("<b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]")
+	. += "</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 
