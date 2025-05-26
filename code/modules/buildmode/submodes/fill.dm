@@ -1,15 +1,15 @@
 /datum/buildmode_mode/fill
 	key = "fill"
-	
+
 	use_corner_selection = TRUE
 	var/objholder = null
 
-/datum/buildmode_mode/fill/show_help(client/c)
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select corner</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button + Alt on turf/obj/mob = Delete region</span>")
-	to_chat(c, "<span class='notice'>Right Mouse Button on buildmode button = Select object type</span>")
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
+/datum/buildmode_mode/fill/show_help(client/builder)
+	to_chat(builder, span_purple(boxed_message(
+		"[span_bold("Select corner")] -> Left Mouse Button on turf/obj/mob\n\
+		[span_bold("Delete region")] -> Left Mouse Button + Alt on turf/obj/mob\n\
+		[span_bold("Select object type")] -> Right Mouse Button on buildmode button"))
+	)
 
 /datum/buildmode_mode/fill/change_settings(client/c)
 	var/target_path = input(c, "Enter typepath:" ,"Typepath","/obj/structure/closet")

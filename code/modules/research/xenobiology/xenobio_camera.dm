@@ -348,11 +348,15 @@
 /datum/action/innate/hotkey_help/Activate()
 	if(!target || !isliving(owner))
 		return
-	to_chat(owner, "<b>Click shortcuts:</b>")
-	to_chat(owner, "Shift-click a slime to pick it up, or the floor to drop all held slimes.")
-	to_chat(owner, "Ctrl-click a slime to scan it.")
-	to_chat(owner, "Alt-click a slime to feed it a potion.")
-	to_chat(owner, "Ctrl-click or a dead monkey to recycle it, or the floor to place a new monkey.")
+
+	var/render_list = list()
+	render_list += "<b>Click shortcuts:</b>"
+	render_list += "&bull; Shift-click a slime to pick it up, or the floor to drop all held slimes."
+	render_list += "&bull; Ctrl-click a slime to scan it."
+	render_list += "&bull; Alt-click a slime to feed it a potion."
+	render_list += "&bull; Ctrl-click or a dead monkey to recycle it, or the floor to place a new monkey."
+
+	to_chat(owner, boxed_message(jointext(render_list, "\n")))
 
 //
 // Alternate clicks for slime, monkey and open turf if using a xenobio console

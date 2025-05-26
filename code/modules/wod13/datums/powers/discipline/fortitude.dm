@@ -10,6 +10,9 @@
 
 	activate_sound = 'code/modules/wod13/sounds/fortitude_activate.ogg'
 	deactivate_sound = 'code/modules/wod13/sounds/fortitude_deactivate.ogg'
+	
+	power_group = DISCIPLINE_POWER_GROUP_COMBAT
+
 
 //FORTITUDE 1
 /datum/discipline_power/fortitude/one

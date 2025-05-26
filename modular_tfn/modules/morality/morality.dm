@@ -85,3 +85,9 @@
 	desc = "The Path of the Beast is a Path of Enlightenment practiced especially by members of Clan Gangrel. It controls the Beast by accepting its urges as natural and accepting their role as a hunter among hunters. Adherents are called Bestials or Beasts."
 	alignment = MORALITY_ENLIGHTENMENT
 	bearing = BEARING_MENACE
+
+/datum/morality/samiel
+	name = "Code of Samiel"
+	desc = "The Code of Samiel is a doctrine that formalized the tenets of the Warrior Salubri and of the Path of Retribution. It was designed by Saulot's greatest childe warrior, Samiel himself. Adherents swear to bring retribution to all manner of evil, chief among which are Infernalists, Demons and the Followers of Set. Vengeance, vigilance and righteousness are all held as core virtues."
+	alignment = MORALITY_ENLIGHTENMENT
+	bearing = BEARING_JUSTICE //I have no idea what this actually does

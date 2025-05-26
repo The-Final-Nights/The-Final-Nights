@@ -55,6 +55,7 @@
 #define CLAN_DAUGHTERS_OF_CACOPHONY "Daughters of Cacophony"
 #define CLAN_CAPPADOCIAN "Cappadocian"
 #define CLAN_NAGARAJA "Nagaraja"
+#define CLAN_SALUBRI_WARRIOR "Salubri Warrior"
 
 /**
  * Auspex aura defines
@@ -131,3 +132,7 @@
 // Rituals
 #define COOLDOWN_RITUAL_INVOKE "ritual_invoke"
 
+//Defines for toggling underwear
+#define UNDERWEAR_HIDE_SOCKS (1<<0)
+#define UNDERWEAR_HIDE_SHIRT (1<<1)
+#define UNDERWEAR_HIDE_UNDIES (1<<2)
