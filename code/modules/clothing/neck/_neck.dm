@@ -19,7 +19,7 @@
 	name = "tie"
 	desc = "A neosilk clip-on tie."
 	icon = 'icons/obj/clothing/neck.dmi'
-	icon_state = "bluetie"
+	icon_state = "tie_greyscale_tied"
 	inhand_icon_state = ""	//no inhands
 	w_class = WEIGHT_CLASS_SMALL
 	custom_price = PAYCHECK_EASY
