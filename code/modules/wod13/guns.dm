@@ -426,7 +426,7 @@
 
 /obj/item/gun/ballistic/automatic/vampire/mp7
 	name = "\improper HK MP7"
-	desc = "A lightweight, burst-fire submachine gun, let's see what the germans like about this. Uses 4.6mm."
+	desc = "A lightweight, burst-fire submachine gun. Uses 4.6mm."
 	icon_state = "mp7"
 	icon = 'code/modules/wod13/48x32weapons.dmi'
 	inhand_icon_state = "mp7"
