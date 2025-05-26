@@ -9,14 +9,23 @@
 	name = "striped dress"
 	desc = "Fashion in space."
 	icon_state = "striped_dress"
-	inhand_icon_state = "striped_dress"
+	inhand_icon_state = null
 	fitted = FEMALE_UNIFORM_FULL
+	greyscale_config = /datum/greyscale_config/striped_dress
+	greyscale_config_worn = /datum/greyscale_config/striped_dress/worn
+	flags_1 = IS_PLAYER_COLORABLE_1
+	greyscale_colors = "#003284#000000#ffffff"
 
 /obj/item/clothing/under/dress/sailor
 	name = "sailor dress"
 	desc = "Formal wear for a leading lady."
 	icon_state = "sailor_dress"
-	inhand_icon_state = "sailor_dress"
+	greyscale_config = /datum/greyscale_config/sailor_dress
+	greyscale_config_worn = /datum/greyscale_config/sailor_dress/worn
+	greyscale_colors = "#0000ff#cc0000#eaeaea"
+	inhand_icon_state = null
+	flags_1 = IS_PLAYER_COLORABLE_1
+
 
 /obj/item/clothing/under/dress/wedding_dress
 	name = "wedding dress"
