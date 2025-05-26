@@ -22,7 +22,7 @@
 	seed = /obj/item/seeds/poppy
 	name = "poppy"
 	desc = "Long-used as a symbol of rest, peace, and death."
-	icon_state = "map_flower"
+	icon_state = "rainbow_flower"
 	slot_flags = ITEM_SLOT_HEAD
 	bite_consumption_mod = 3
 	foodtypes = VEGETABLES | GROSS
