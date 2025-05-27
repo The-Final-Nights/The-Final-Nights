@@ -6,7 +6,7 @@
 	if(!isatom(target))
 		return ELEMENT_INCOMPATIBLE
 	RegisterSignal(target, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-	RegisterSignal(target, COMSIG_ATOM_EXAMINE_MORE, PROC_REF(on_examine))
+	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/element/gags_recolorable/proc/on_examine(atom/source, mob/user, list/examine_text)
 	SIGNAL_HANDLER
