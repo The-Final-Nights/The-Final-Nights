@@ -18,24 +18,34 @@
 
 /datum/crew_manifest/ui_data(mob/user)
 	var/list/positions = list(
-		"Command" = 0,
-		"Security" = 0,
-		"Engineering" = 0,
-		"Medical" = 0,
-		"Science" = 0,
-		"Supply" = 0,
-		"Service" = 0,
-		"Silicon" = 0
+		"Prince" = 0,
+		"Primogen Council" = 0,
+		"Camarilla" = 0,
+		"Chantry" = 0,
+		"Clinic" = 0,
+		"Police" = 0,
+		"Warehouse" = 0,
+		"Giovanni" = 0,
+		"Manor" = 0,
+		"Endron" = 0,
+		"Painted City" = 0,
+		"Amberglade" = 0,
+		"Citizen" = 0
 	)
 	var/list/departments = list(
-		list("flag" = DEPARTMENT_COMMAND, "name" = "Command"),
-		list("flag" = DEPARTMENT_SECURITY, "name" = "Security"),
-		list("flag" = DEPARTMENT_ENGINEERING, "name" = "Engineering"),
-		list("flag" = DEPARTMENT_MEDICAL, "name" = "Medical"),
-		list("flag" = DEPARTMENT_SCIENCE, "name" = "Science"),
-		list("flag" = DEPARTMENT_CARGO, "name" = "Supply"),
-		list("flag" = DEPARTMENT_SERVICE, "name" = "Service"),
-		list("flag" = DEPARTMENT_SILICON, "name" = "Silicon")
+		list("flag" = DEPARTMENT_PRINCE, "name" = "Prince"),
+		list("flag" = DEPARTMENT_PRIMOGEN_COUNCIL, "name" = "Primogen Council"),
+		list("flag" = DEPARTMENT_CAMARILLA, "name" = "Camarilla"),
+		list("flag" = DEPARTMENT_CHANTRY, "name" = "Chantry"),
+		list("flag" = DEPARTMENT_CLINIC, "name" = "Clinic"),
+		list("flag" = DEPARTMENT_POLICE, "name" = "Police"),
+		list("flag" = DEPARTMENT_WAREHOUSE, "name" = "Warehouse"),
+		list("flag" = DEPARTMENT_GIOVANNI, "name" = "Giovanni"),
+		list("flag" = DEPARTMENT_MANOR, "name" = "Manor"),
+		list("flag" = DEPARTMENT_ENDRON, "name" = "Endron"),
+		list("flag" = DEPARTMENT_PAINTED_CITY, "name" = "Painted City"),
+		list("flag" = DEPARTMENT_AMBERGLADE, "name" = "Amberglade"),
+		list("flag" = DEPARTMENT_CITIZEN, "name" = "Citizen")
 	)
 
 	for(var/job in SSjob.occupations)
