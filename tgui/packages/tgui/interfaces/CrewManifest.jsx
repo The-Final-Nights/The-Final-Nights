@@ -1,6 +1,7 @@
 import { classes } from 'tgui-core/react';
 import { useBackend } from "../backend";
 import { Icon, Section, Table, Tooltip } from "tgui-core/components";
+import { Window } from "../layouts";
 
 const commandJobs = [
   'Primogen Malkavian',
@@ -13,9 +14,7 @@ const commandJobs = [
 ];
 
 export const CrewManifest = (props) => {
-  const {
-    data: { manifest, positions },
-  } = useBackend();
+  const { data: { manifest, positions } } = useBackend();
 
   return (
     <Window title="Crew Manifest" width={350} height={500}>
