@@ -40,16 +40,16 @@
 		list("flag" = DEPARTMENT_POLICE, "name" = "Police"),
 		list("flag" = DEPARTMENT_WAREHOUSE, "name" = "Warehouse"),
 		list("flag" = DEPARTMENT_GIOVANNI, "name" = "Giovanni"),
-		list("flag" = DEPARTMENT_MANOR, "name" = "Manor"),
+		list("flag" = DEPARTMENT_TZIMISCE, "name" = "Manor"),
 		list("flag" = DEPARTMENT_ENDRON, "name" = "Endron"),
 		list("flag" = DEPARTMENT_PAINTED_CITY, "name" = "Painted City"),
 		list("flag" = DEPARTMENT_AMBERGLADE, "name" = "Amberglade"),
 		list("flag" = DEPARTMENT_CITIZEN, "name" = "Citizen")
 	)
 
-	for(var/job in SSjob.occupations)
+	for(var/datum/job/job in SSjob.occupations)
 		// Check if there are additional open positions or if there is no limit
-		if ((job["total_positions"] > 0 && job["total_positions"] > job["current_positions"]) || (job["total_positions"] == -1))
+		if (((job.total_positions > 0) && (job.total_positions > job.current_positions)) || (job.total_positions == -1))
 			for(var/department in departments)
 				// Check if the job is part of a department using its flag
 				// Will return true for Research Director if the department is Science or Command, for example
