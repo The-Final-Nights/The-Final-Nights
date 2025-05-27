@@ -140,12 +140,52 @@
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
 	name = "Siren's Beckoning"
-	desc = "Sing an unearthly song to stun those around you."
+	desc = "Sing an unearthly song to stun those around you, and force their voice, or reaction, *emote."
 
 	level = 4
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
 
+var/new_say = input(owner, "What will [target] say?") as null|text
+	if(!new_say)
+		return
+
 	effect_sound = 'code/modules/wod13/sounds/killscream.ogg'
+
+
+	if (CHAT_FILTER_CHECK(new_say))
+		to_chat(owner, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[new_say]\"</span>"))
+		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
+		return
+
+	target.say(message = new_say, forced = "melpominee 1")
+
+	if (!isliving(target))
+		return
+
+//viewers are able to detect if a person's words aren't their own
+	var/base_difficulty = 5
+	var/difficulty_malus = 0
+	var/masked = FALSE
+	if (ishuman(target)) //apply a malus and different text if victim's mouth isn't visible, and a malus if they're already typing
+		var/mob/living/carbon/human/victim = target
+		if (!victim.is_face_visible())
+			masked = TRUE
+			base_difficulty += 2
+		if (victim.overlays_standing[SAY_LAYER]) //ugly way to check for if the victim is currently typing
+			base_difficulty += 2
+
+	for (var/mob/living/hearer in (oviewers(7, target) - owner))
+		if (!hearer.client)
+			continue
+		difficulty_malus = 0
+		if (get_dist(hearer, target) > 3)
+			difficulty_malus += 1
+		if (SSroll.storyteller_roll(hearer.get_total_mentality(), base_difficulty + difficulty_malus, mobs_to_show_output = hearer) == ROLL_SUCCESS)
+			if (masked)
+				to_chat(hearer, span_warning("[target]'s isn't moving to match [target.p_their()] sounds."))
+			else
+				to_chat(hearer, span_warning("[target]'s aren't moving to match [target.p_their()] sounds."))
+
 
 	duration_length = 2 SECONDS
 	cooldown_length = 7.5 SECONDS
@@ -170,7 +210,7 @@
 //SHATTERING CRESCENDO
 /datum/discipline_power/melpominee/shattering_crescendo
 	name = "Shattering Crescendo"
-	desc = "Scream at an unnatural pitch, shattering the bodies of your enemies."
+	desc = "Scream at an unnatural pitch, shattering the bodies of your enemies, and sending them into primal fear."
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
@@ -185,7 +225,8 @@
 	. = ..()
 	for(var/mob/living/carbon/human/listener in oviewers(7, owner))
 		listener.Stun(2 SECONDS)
-		listener.apply_damage(50, BRUTE, BODY_ZONE_HEAD)
+		listener.apply_damage(30, BRUTE, BODY_ZONE_HEAD)
+		listener.effects.add_effect(/datum/add_effect/Frenzy, 2 SECONDS)
 
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
