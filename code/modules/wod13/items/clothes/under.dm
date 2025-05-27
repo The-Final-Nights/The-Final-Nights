@@ -127,6 +127,26 @@
 	desc = "Some military clothes."
 	icon_state = "milfatigues"
 
+/obj/item/clothing/under/vampire/sceneleopard
+	name = "revealing outfit"
+	desc = "You never thought you needed spaghetti straps."
+	icon_state = "scenetop_leopard"
+
+/obj/item/clothing/under/vampire/scenemoody
+	name = "moody attire"
+	desc = "A classic My Laboratory Romance top."
+	icon_state = "scenetop_moody"
+
+/obj/item/clothing/under/vampire/scenezim
+	name = "pim attire"
+	desc = "A top from your favorite show, Intruder Pim"
+	icon_state = "scenetop_zim"
+
+/obj/item/clothing/under/vampire/scenepink
+	name = "popular Outfit"
+	desc = "It almost makes you feel like a mean girl"
+	icon_state = "scenetop_pink"
+
 //FOR NPC
 
 //GANGSTERS AND BANDITS
@@ -233,6 +253,11 @@
 	name = "police officer uniform"
 	desc = "The clothes of the boys in blue. Did you know that 44% of Cops have heard of Pentex? Google 44% of Cops for more information."
 	icon_state = "police"
+
+/obj/item/clothing/under/vampire/police/utility
+	name = "police fatigues"
+	desc = "The clothes of the boys in blue. Did you know that 44% of Cops have heard of Pentex? Google 44% of Cops for more information."
+	icon_state = "policeutil"
 
 /obj/item/clothing/under/vampire/guard
 	name = "security guard uniform"

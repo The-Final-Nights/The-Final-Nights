@@ -156,7 +156,7 @@
 	return FALSE
 
 
-/mob/living/simple_animal/hostile/poison/bees/AttackingTarget()
+/mob/living/simple_animal/hostile/poison/bees/AttackingTarget(atom/attacked_target)
 	//Pollinate
 	if(istype(target, /obj/machinery/hydroponics))
 		var/obj/machinery/hydroponics/Hydro = target
@@ -262,7 +262,7 @@
 
 
 //leave pollination for the peasent bees
-/mob/living/simple_animal/hostile/poison/bees/queen/AttackingTarget()
+/mob/living/simple_animal/hostile/poison/bees/queen/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(. && beegent && isliving(target))
 		var/mob/living/L = target

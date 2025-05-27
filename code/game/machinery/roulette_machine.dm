@@ -54,7 +54,11 @@
 	jackpot_loop = new(list(src), FALSE)
 	wires = new /datum/wires/roulette(src)
 
-/obj/machinery/roulette/obj_break(damage_flag)
+/obj/machinery/roulette/Destroy()
+	QDEL_NULL(jackpot_loop)
+	. = ..()
+
+/obj/machinery/roulette/atom_break(damage_flag)
 	prize_theft(0.05)
 	. = ..()
 

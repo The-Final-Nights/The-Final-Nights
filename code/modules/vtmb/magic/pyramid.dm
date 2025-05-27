@@ -201,7 +201,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/structure/fleshwall
 	name = "flesh wall"
@@ -213,7 +212,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/structure/tzijelly
 	name = "jelly thing"
@@ -225,7 +223,6 @@
 	anchored = TRUE
 	density = TRUE
 	max_integrity = 100
-	obj_integrity = 100
 
 /obj/ritualrune/identification
 	name = "Identification Rune"
@@ -521,6 +518,8 @@
 		message += "The blood is cold and static... It's hard to feel any emotion within it."
 	else if(clan == "Salubri")
 		message += "The cursed blood of the Salubri! The owner of this blood must be slain."
+	else if(clan == "Salubri Warrior")
+		message += "The avatar of Samiel's vengeance stands before you, do you dare return their bitter hatred?"
 	else if(clan == "Giovanni" || clan == "Cappadocian")
 		message += "The blood is very cold and filled with death. The owner must be a necromancer."
 	else if(clan == "Kiasyd")
@@ -529,6 +528,8 @@
 		message += "The blood of our stone servants."
 	else if(clan == "Ministry")
 		message += "Seduction and allure are in the blood. Ah, one of the snakes."
+	else if(clan == "Nagaraja")
+		message += "This blood has an unsettling hunger to it, cold and stained with death."
 	else
 		message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?"
 	return message

@@ -22,9 +22,7 @@
 
 	duty = "You are here on an officially unofficial assignment, to look into local oddities and sort them out as deemed reasonable, whatever that means. To the point you arent even assigned a proper office, as much a ghetto hideout in the local Hotel, quietly paid for with some renovations. If anyone asks? Make something mundane up, they wouldnt believe the truth anyways."
 	minimal_masquerade = 0
-	my_contact_is_important = FALSE
 	known_contacts = list("Police Chief")
-	whitelisted = TRUE
 
 /datum/outfit/job/fbi
 	name = "Federal Investigator"
@@ -38,8 +36,8 @@
 	id = /obj/item/card/id/police/fbi
 	gloves = /obj/item/clothing/gloves/vampire/investigator
 	l_pocket = /obj/item/vamp/phone
-	r_pocket = /obj/item/radio/cop
+	r_pocket = /obj/item/binoculars
 	l_hand = /obj/item/vamp/keys/police/federal
-	r_hand = /obj/item/police_radio
-	backpack_contents = list(/obj/item/card/id/police/sergeant=1, /obj/item/passport=1, /obj/item/camera/detective=1, /obj/item/camera_film=1, /obj/item/taperecorder=1, /obj/item/tape=1, /obj/item/vamp/creditcard=1, /obj/item/ammo_box/vampire/c45acp=1, /obj/item/storage/firstaid/ifak=1)
+	r_hand = /obj/item/storage/secure/briefcase/fbi
+	backpack_contents = list(/obj/item/ammo_box/magazine/glock45acp=1, /obj/item/police_radio=1, /obj/item/flashlight=1, /obj/item/cockclock=1, /obj/item/card/id/police/sergeant=1, /obj/item/passport=1, /obj/item/camera=1, /obj/item/camera_film=1, /obj/item/taperecorder=1, /obj/item/ammo_box/vampire/c45acp=1, /obj/item/tape=3, /obj/item/vamp/creditcard=1, /obj/item/storage/firstaid/ifak=1)
 

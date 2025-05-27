@@ -12,10 +12,6 @@
 	. = ..()
 	set_holdable(list(/obj/item/tcgcard))
 
-/datum/component/storage/concrete/tcg/PostTransfer()
-	. = ..()
-	handle_empty_deck()
-
 /datum/component/storage/concrete/tcg/remove_from_storage(atom/movable/AM, atom/new_location)
 	. = ..()
 	handle_empty_deck()
