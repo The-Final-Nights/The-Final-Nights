@@ -24,7 +24,7 @@ export const CrewManifest = (props) => {
             className={"CrewManifest--" + dept}
             key={dept}
             title={
-              dept + (dept !== "Misc"
+              dept + (dept !== "Citizen"
                 ? ` (${positions[dept].open} positions open)` : "")
             }
           >
