@@ -165,7 +165,7 @@
 
 /datum/sabbat_ritae/ritae_description/pack_credo
 	name = "Pack Credo"
-	desc = "We are the Sword of Caine. We do not bow to the Masquerade. We are not slaves to the Elders, nor tools of the Antediluvians. Through blood and fire, we bring about Gehenna. We act not in secrecy, but in strength, united as one Pack. Death to traitors. Death to tyrants. Caine wills it.\n"
+	desc = "We are the Sword of Caine. We do not bow to the Masquerade. We are not slaves to the Elders, nor tools of the Antediluvians. Through blood and fire, we prepare for Gehenna. We act not in secrecy, but in strength, united as one Pack. Death to traitors. Death to tyrants. Caine wills it.\n"
 
 /datum/sabbat_ritae/ritae_description/vaulderie_info
 	name = "The Vaulderie"
