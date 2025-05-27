@@ -152,15 +152,15 @@
 		"Triad"
 	)
 	var/list/departments = list(
-		"Camarilla" = GLOB.command_positions,
-		"Primogen Council" = GLOB.camarilla_council_positions,
+		"Camarilla" = GLOB.camarilla_positions,
+		"Primogen Council" = GLOB.primogen_council_positions,
 		"Tremere" = GLOB.tremere_positions,
 		"Anarch" = GLOB.anarch_positions,
 		"Giovanni" = GLOB.giovanni_positions,
 		"Clan Tzimisce" = GLOB.tzimisce_positions,
 		"Law Enforcement" = GLOB.police_positions + GLOB.national_security_positions,
 		"Warehouse" = GLOB.warehouse_positions,
-		"Triad" = GLOB.gang_positions
+		"Triad" = GLOB.triad_positions
 	)
 	for(var/datum/data/record/t in GLOB.data_core.general)
 		var/name = t.fields["name"]
@@ -172,7 +172,7 @@
 				if(!manifest_out[department])
 					manifest_out[department] = list()
 				// Append to beginning of list if captain or department head
-				if (rank == "Captain" || (department != "Command" && (rank in GLOB.command_positions)))
+				if (rank == "Captain" || (department != "Command" && (rank in GLOB.camarilla_positions)))
 					manifest_out[department] = list(list(
 						"name" = name,
 						"rank" = rank

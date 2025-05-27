@@ -19,7 +19,7 @@
 /datum/antagonist/rev/can_be_owned(datum/mind/new_owner)
 	. = ..()
 	if(.)
-		if(new_owner.assigned_role in GLOB.command_positions)
+		if(new_owner.assigned_role in GLOB.camarilla_positions)
 			return FALSE
 		if(new_owner.unconvertable)
 			return FALSE
@@ -402,7 +402,7 @@
 			if (isnull(mind))
 				continue
 
-			if (!(mind.assigned_role in GLOB.command_positions + GLOB.ss13))
+			if (!(mind.assigned_role in GLOB.camarilla_positions + GLOB.ss13))
 				continue
 
 			var/mob/living/carbon/target_body = mind.current
@@ -417,7 +417,7 @@
 			else
 				mind.announce_objectives()
 
-		for (var/job_name in GLOB.command_positions + GLOB.ss13)
+		for (var/job_name in GLOB.camarilla_positions + GLOB.ss13)
 			var/datum/job/job = SSjob.GetJob(job_name)
 			job.allow_bureaucratic_error = FALSE
 			job.total_positions = 0

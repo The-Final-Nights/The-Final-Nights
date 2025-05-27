@@ -75,7 +75,7 @@
 #define EXP_TYPE_CREW			"Kindred"
 #define EXP_TYPE_GAROU     "Garou"
 #define EXP_TYPE_CAMARILLIA		"Camarilla Authorities"
-#define EXP_TYPE_GANG			"Gangs"
+#define EXP_TYPE_TRIAD			"Gangs"
 #define EXP_TYPE_TREMERE		"Tremere"
 #define EXP_TYPE_ANARCH			"Anarchs"
 #define EXP_TYPE_OTHER_CITIZEN "Unaligned"

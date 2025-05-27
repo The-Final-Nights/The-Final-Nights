@@ -3870,7 +3870,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		parent << browse(null, "window=preferences_browser")
 
 /datum/preferences/proc/can_be_random_hardcore()
-	if(parent && (parent.mob.mind?.assigned_role in GLOB.command_positions)) //No command staff
+	if(parent && (parent.mob.mind?.assigned_role in GLOB.camarilla_positions)) //No command staff
 		return FALSE
 	for(var/A in parent?.mob.mind?.antag_datums)
 		var/datum/antagonist/antag

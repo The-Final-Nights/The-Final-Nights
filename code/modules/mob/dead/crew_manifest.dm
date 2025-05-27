@@ -36,7 +36,7 @@
 		list("flag" = DEPARTMENT_PRINCE, "name" = "Prince"),
 		list("flag" = DEPARTMENT_PRIMOGEN_COUNCIL, "name" = "Primogen Council"),
 		list("flag" = DEPARTMENT_CAMARILLA, "name" = "Camarilla"),
-		list("flag" = DEPARTMENT_CHANTRY, "name" = "Chantry"),
+		list("flag" = DEPARTMENT_TREMERE, "name" = "Chantry"),
 		list("flag" = DEPARTMENT_CLINIC, "name" = "Clinic"),
 		list("flag" = DEPARTMENT_POLICE, "name" = "Police"),
 		list("flag" = DEPARTMENT_WAREHOUSE, "name" = "Warehouse"),

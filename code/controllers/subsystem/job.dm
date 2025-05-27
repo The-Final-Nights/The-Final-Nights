@@ -202,7 +202,7 @@ SUBSYSTEM_DEF(job)
 		if(istype(job, GetJob(SSjob.overflow_role))) // We don't want to give him assistant, that's boring!
 			continue
 
-		if(job.title in GLOB.command_positions) //If you want a command position, select it!
+		if(job.title in GLOB.camarilla_positions) //If you want a command position, select it!
 			continue
 
 		if(is_banned_from(player.ckey, job.title) || QDELETED(player))
@@ -290,7 +290,7 @@ SUBSYSTEM_DEF(job)
 //This proc is called at the start of the level loop of DivideOccupations() and will cause head jobs to be checked before any other jobs of the same level
 //This is also to ensure we get as many heads as possible
 /datum/controller/subsystem/job/proc/CheckHeadPositions(level)
-	for(var/command_position in GLOB.command_positions)
+	for(var/command_position in GLOB.camarilla_positions)
 		var/datum/job/job = GetJob(command_position)
 		if(!job)
 			continue
@@ -828,7 +828,7 @@ SUBSYSTEM_DEF(job)
 	. = list()
 	for(var/i in GLOB.human_list)
 		var/mob/living/carbon/human/player = i
-		if(player.stat != DEAD && player.mind && (player.mind.assigned_role in GLOB.command_positions))
+		if(player.stat != DEAD && player.mind && (player.mind.assigned_role in GLOB.camarilla_positions))
 			. |= player.mind
 
 
@@ -839,7 +839,7 @@ SUBSYSTEM_DEF(job)
 	. = list()
 	for(var/i in GLOB.mob_list)
 		var/mob/player = i
-		if(player.mind && (player.mind.assigned_role in GLOB.command_positions))
+		if(player.mind && (player.mind.assigned_role in GLOB.camarilla_positions))
 			. |= player.mind
 
 //////////////////////////////////////////////
