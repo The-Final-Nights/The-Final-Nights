@@ -16,6 +16,9 @@
 	paycheck = PAYCHECK_EASY
 	paycheck_department = ACCOUNT_CAR
 	display_order = JOB_DISPLAY_ORDER_SUPPLY
+
+	departments = DEPARTMENT_BITFLAG_WAREHOUSE
+
 	bounty_types = CIV_JOB_RANDOM
 	allowed_species = list("Vampire", "Ghoul", "Human", "Kuei-Jin")
 	known_contacts = list("Dealer")

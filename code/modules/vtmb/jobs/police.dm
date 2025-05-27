@@ -17,6 +17,8 @@
 	display_order = JOB_DISPLAY_ORDER_POLICE
 	exp_type_department = EXP_TYPE_POLICE
 
+	departments = DEPARTMENT_BITFLAG_POLICE
+
 	allowed_species = list("Ghoul", "Human")
 	species_slots = list("Ghoul" = 1)
 
@@ -57,6 +59,8 @@
 	display_order = JOB_DISPLAY_ORDER_POLICE_SERGEANT
 	exp_type_department = EXP_TYPE_POLICE
 
+	departments = DEPARTMENT_BITFLAG_POLICE
+
 	allowed_species = list("Human")
 
 	duty = "Enforce the law. Keep the officers in line. Follow what the Chief says."
@@ -95,6 +99,8 @@
 	paycheck_department = ACCOUNT_SRV
 	display_order = JOB_DISPLAY_ORDER_POLICE_CHIEF
 	exp_type_department = EXP_TYPE_POLICE
+
+	departments = DEPARTMENT_BITFLAG_POLICE
 
 	allowed_species = list("Human")
 

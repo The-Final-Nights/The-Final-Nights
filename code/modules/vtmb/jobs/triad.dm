@@ -17,6 +17,8 @@
 	display_order = JOB_DISPLAY_ORDER_TRIAD_GANGSTER
 	exp_type_department = EXP_TYPE_TRIAD
 
+	departments = DEPARTMENT_BITFLAG_TRIAD
+
 	allowed_species = list("Human", "Werewolf", "Kuei-Jin")
 	minimal_generation = 13
 

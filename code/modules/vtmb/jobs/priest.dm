@@ -17,6 +17,8 @@
 	display_order = JOB_DISPLAY_ORDER_PRIEST
 	exp_type_department = EXP_TYPE_CHURCH
 
+	departments = DEPARTMENT_BITFLAG_CHURCH
+
 	allowed_species = list("Human", "Ghoul", "Vampire")
 	allowed_bloodlines = list("Lasombra", "Toreador", "Malkavian", "Salubri", "Salubri Warrior", "Nagaraja", "Cappadocian", "Banu Haqim", "Caitiff")
 	species_slots = list("Vampire" = 2)

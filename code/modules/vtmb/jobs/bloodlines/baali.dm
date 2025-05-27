@@ -17,6 +17,8 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_BAALI
 
+	departments = DEPARTMENT_BITFLAG_CITIZEN
+
 	allowed_species = list("Vampire")
 
 	v_duty = "You are a member of the Order of Moloch! Acting as an alcoholics anonymous counselor, your kin have etched out a cover as members of alcoholics anonymous. Good luck."

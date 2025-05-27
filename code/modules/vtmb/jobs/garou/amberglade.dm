@@ -27,6 +27,8 @@
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC
 
+	departments = DEPARTMENT_BITFLAG_AMBERGLADE
+
 	liver_traits = list(TRAIT_ROYAL_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_AMBERGLADE
@@ -77,6 +79,8 @@
 	minimal_player_age = 25
 	exp_requirements = 100
 	exp_type_department = EXP_TYPE_AMBERGLADE
+
+	departments = DEPARTMENT_BITFLAG_AMBERGLADE
 
 	outfit = /datum/outfit/job/garou/gladekeeper
 
@@ -135,6 +139,8 @@
 	minimal_player_age = 25
 	exp_requirements = 100
 	exp_type_department = EXP_TYPE_AMBERGLADE
+
+	departments = DEPARTMENT_BITFLAG_AMBERGLADE
 
 	outfit = /datum/outfit/job/garou/gladecatcher
 
@@ -201,6 +207,8 @@
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC
 
+	departments = DEPARTMENT_BITFLAG_AMBERGLADE
+
 	mind_traits = list(TRAIT_DONUT_LOVER)
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
 
@@ -254,6 +262,8 @@
 	minimal_player_age = 25
 	exp_requirements = 50
 	exp_type_department = EXP_TYPE_AMBERGLADE
+
+	departments = DEPARTMENT_BITFLAG_AMBERGLADE
 
 	outfit = /datum/outfit/job/garou/gladeguardian
 

@@ -27,6 +27,8 @@
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC
 
+	departments = DEPARTMENT_BITFLAG_PAINTED_CITY
+
 	liver_traits = list(TRAIT_ROYAL_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_PAINTEDCITY
@@ -77,6 +79,8 @@
 	minimal_player_age = 25
 	exp_requirements = 100
 	exp_type_department = EXP_TYPE_PAINTED_CITY
+
+	departments = DEPARTMENT_BITFLAG_PAINTED_CITY
 
 	outfit = /datum/outfit/job/garou/citykeeper
 
@@ -143,6 +147,8 @@
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC
 
+	departments = DEPARTMENT_BITFLAG_PAINTED_CITY
+
 	liver_traits = list(TRAIT_ROYAL_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_PAINTEDCITY
@@ -199,6 +205,8 @@
 	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_WEAPONS, ACCESS_MECH_SECURITY, ACCESS_MINERAL_STOREROOM)
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC
+
+	departments = DEPARTMENT_BITFLAG_PAINTED_CITY
 
 	mind_traits = list(TRAIT_DONUT_LOVER)
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
@@ -260,6 +268,8 @@
 	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_WEAPONS, ACCESS_MECH_SECURITY, ACCESS_MINERAL_STOREROOM)
 	paycheck = PAYCHECK_HARD
 	paycheck_department = ACCOUNT_SEC
+
+	departments = DEPARTMENT_BITFLAG_PAINTED_CITY
 
 	mind_traits = list(TRAIT_DONUT_LOVER)
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)

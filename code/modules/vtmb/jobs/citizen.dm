@@ -17,6 +17,7 @@
 
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_CITIZEN
+	departments = DEPARTMENT_BITFLAG_CITIZEN
 
 	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf", "Kuei-Jin")
 

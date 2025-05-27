@@ -13,6 +13,8 @@
 	paycheck = PAYCHECK_ASSISTANT // Get a job. Job reassignment changes your paycheck now. Get over it.
 	exp_type_department = EXP_TYPE_SERVICES
 
+	departments = DEPARTMENT_SERVICES
+
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_STRIP
 	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf", "Kuei-Jin")

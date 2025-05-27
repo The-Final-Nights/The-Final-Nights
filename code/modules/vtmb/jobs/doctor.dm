@@ -17,6 +17,8 @@
 	paycheck = PAYCHECK_MEDIUM
 	paycheck_department = ACCOUNT_MED
 
+	departments = DEPARTMENT_BITFLAG_CLINIC
+
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)
 
 	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf", "Kuei-Jin")
@@ -71,6 +73,8 @@
 	minimal_access = list(ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_MECH_MEDICAL, ACCESS_MINERAL_STOREROOM, ACCESS_PHARMACY)
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_MED
+
+	departments = DEPARTMENT_BITFLAG_CLINIC
 
 	liver_traits = list(TRAIT_MEDICAL_METABOLISM)
 

@@ -17,6 +17,8 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_SALUBRI
 
+	departments = DEPARTMENT_BITFLAG_CLINIC
+
 	allowed_species = list("Vampire", "Ghoul", "Human")
 	species_slots = list("Vampire" = 6)
 

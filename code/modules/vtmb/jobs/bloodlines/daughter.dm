@@ -17,6 +17,8 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_DAUGHTER
 
+	departments = DEPARTMENT_BITFLAG_CITIZEN
+
 	allowed_species = list("Vampire","Ghoul")
 	species_slots = list("Vampire" = 6)
 
