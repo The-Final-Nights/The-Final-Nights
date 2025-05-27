@@ -17092,7 +17092,7 @@
 	color = "#ED8181"
 	},
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "ewD" = (
 /obj/structure/chair/sofa/right{
 	dir = 1
@@ -35546,9 +35546,6 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/graveyard/interior)
-"jqg" = (
-/turf/open/floor/plating/concrete,
-/area/space)
 "jqn" = (
 /obj/structure/chair/wood{
 	dir = 4;
@@ -35664,7 +35661,7 @@
 	pixel_y = 6
 	},
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "jrM" = (
 /obj/structure/vampdoor,
 /turf/open/floor/plating/vampplating/mono,
@@ -37873,7 +37870,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "jVq" = (
 /obj/structure/table,
 /obj/machinery/light{
@@ -46252,7 +46249,7 @@
 	},
 /obj/structure/table,
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "miV" = (
 /obj/structure/sink{
 	pixel_y = 16
@@ -48648,9 +48645,6 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
-"mOZ" = (
-/turf/open/floor/plating/gummaguts,
-/area/space)
 "mPa" = (
 /obj/structure/chair/office,
 /turf/open/floor/carpet,
@@ -56606,9 +56600,6 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/anarch)
-"oPr" = (
-/turf/closed/wall/vampwall/bar,
-/area/space)
 "oPw" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -57143,7 +57134,7 @@
 	pixel_x = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "oVy" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -64532,7 +64523,7 @@
 	brightness = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "qQG" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
@@ -68287,7 +68278,7 @@
 	name = "Tech basement door"
 	},
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "rLH" = (
 /obj/machinery/vamp/atm{
 	pixel_y = 25
@@ -80719,7 +80710,7 @@
 /obj/item/ammo_box/vampire/c556,
 /obj/item/ammo_box/magazine/vamp556/hunt,
 /turf/open/floor/plating/concrete,
-/area/space)
+/area/vtm/interior/techshop)
 "uZZ" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/plating/parquetry/rich,
@@ -137912,9 +137903,9 @@ dhc
 nYS
 nYS
 nYS
-oPr
+pgL
 miT
-jqg
+ewg
 ewj
 oVw
 pgL
@@ -138169,15 +138160,15 @@ dhc
 dhc
 dhc
 nYS
-oPr
+pgL
 jrJ
-jqg
-jqg
-jqg
+ewg
+ewg
+ewg
 rLD
-mOZ
-mOZ
-oPr
+uoc
+uoc
+pgL
 nYS
 dhc
 dhc
@@ -138426,15 +138417,15 @@ dhc
 dhc
 dhc
 nYS
-oPr
+pgL
 uZW
-jqg
-jqg
-jqg
-oPr
-oPr
-oPr
-oPr
+ewg
+ewg
+ewg
+pgL
+pgL
+pgL
+pgL
 nYS
 dhc
 dhc
@@ -138683,12 +138674,12 @@ dhc
 dhc
 dhc
 nYS
-oPr
-oPr
-jqg
+pgL
+pgL
+ewg
 qQA
 jVb
-oPr
+pgL
 tiZ
 nYS
 nYS
@@ -138941,11 +138932,11 @@ dhc
 dhc
 nYS
 nYS
-oPr
-oPr
-oPr
-oPr
-oPr
+pgL
+pgL
+pgL
+pgL
+pgL
 nYS
 dhc
 dhc
