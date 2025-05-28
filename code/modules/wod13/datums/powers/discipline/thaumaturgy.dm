@@ -9,12 +9,12 @@
 	. = ..()
 	owner.faction |= "Tremere"
 	if(level >= 1)
-		var/datum/action/thaumaturgy/thaumaturgy = new()
+		var/datum/action/secondary_power/thaumaturgy/thaumaturgy = new()
 		thaumaturgy.Grant(owner)
 		thaumaturgy.level = level
 		owner.thaumaturgy_knowledge = TRUE
 	if(level >= 3)
-		var/datum/action/bloodshield/bloodshield = new()
+		var/datum/action/secondary_power/bloodshield/bloodshield = new()
 		bloodshield.Grant(owner)
 
 /datum/discipline_power/thaumaturgy
@@ -318,7 +318,7 @@
 	target.emote("collapse")
 
 //MISCELLANEOUS BULLSHIT
-/datum/action/thaumaturgy
+/datum/action/secondary_power/thaumaturgy
 	name = "Thaumaturgy"
 	desc = "Blood magic rune drawing."
 	button_icon_state = "thaumaturgy"
@@ -326,26 +326,10 @@
 	vampiric = TRUE
 	var/drawing = FALSE
 	var/level = 1
+	old_discipline_icon_state = "ritual-thaumaturgy"  // Different icon state for old discipline icons
 
 
-/datum/action/thaumaturgy/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	if(owner && ismob(owner))
-		var/mob/M = owner
-		if(M?.client?.prefs?.old_discipline)
-			button_icon = 'code/modules/wod13/disciplines.dmi'
-			icon_icon = 'code/modules/wod13/disciplines.dmi'
-			button_icon_state = "ritual-thaumaturgy"
-			background_icon_state = "ritual-thaumaturgy" // optional; adjust if you have a matching background
-		else
-			button_icon = 'code/modules/wod13/UI/actions.dmi'
-			icon_icon = 'code/modules/wod13/UI/actions.dmi'
-			button_icon_state = "thaumaturgy"
-			background_icon_state = ACTION_BUTTON_DEFAULT_BACKGROUND
-
-	// apply the new settings
-	..(current_button, force)
-
-/datum/action/thaumaturgy/Trigger()
+/datum/action/secondary_power/thaumaturgy/Trigger()
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(H.bloodpool < 2)
@@ -392,7 +376,7 @@
 			else
 				drawing = FALSE
 
-/datum/action/bloodshield
+/datum/action/secondary_power/bloodshield
 	name = "Bloodshield"
 	desc = "Gain armor with blood."
 	button_icon_state = "bloodshield"
@@ -401,21 +385,7 @@
 	var/abuse_fix = 0
 
 
-/datum/action/bloodshield/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	if(owner && ismob(owner))
-		var/mob/M = owner
-		if(M?.client?.prefs?.old_discipline)
-			button_icon = 'code/modules/wod13/disciplines.dmi'
-			icon_icon = 'code/modules/wod13/disciplines.dmi'
-			background_icon_state = 'code/modules/wod13/disciplines.dmi'
-		else
-			button_icon = 'code/modules/wod13/UI/actions.dmi'
-			icon_icon = 'code/modules/wod13/UI/actions.dmi'
-
-	// now call the parent for the actual overlay logic
-	..(current_button, force)
-
-/datum/action/bloodshield/Trigger()
+/datum/action/secondary_power/bloodshield/Trigger()
 	. = ..()
 	if((abuse_fix + 25 SECONDS) > world.time)
 		return

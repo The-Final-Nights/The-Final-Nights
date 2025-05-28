@@ -132,7 +132,7 @@
 
 /datum/discipline_power/obtenebration/tenebrous_form/post_gain()
 	. = ..()
-	var/datum/action/mysticism/mystic = new()
+	var/datum/action/secondary_power/mysticism/mystic = new()
 	owner.mysticism_knowledge = TRUE
 	mystic.Grant(owner)
 	mystic.level = level
@@ -146,7 +146,7 @@
 	always_available = FALSE
 	category = CAT_MISC
 
-/datum/action/mysticism
+/datum/action/secondary_power/mysticism
 	name = "Mysticism"
 	desc = "Abyss Mysticism rune drawing."
 	button_icon_state = "mysticism"
@@ -155,7 +155,7 @@
 	var/drawing = FALSE
 	var/level = 1
 
-/datum/action/mysticism/Trigger()
+/datum/action/secondary_power/mysticism/Trigger()
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(H.bloodpool < 2)
