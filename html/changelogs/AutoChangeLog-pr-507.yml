@@ -1,0 +1,4 @@
+author: "TheTrueSilverRat"
+delete-after: True
+changes:
+  - bugfix: "Fixed the Salubri Traits runtime by changing RegisterSignal to RegisterSignals"

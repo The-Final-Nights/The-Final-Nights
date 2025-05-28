@@ -226,3 +226,6 @@
   - code_imp: FBI agents are no longer a whitelisted role.
   tzui5020:
   - bugfix: Fixed the hoodie in the loadout
+2025-05-27:
+  Merek2:
+  - bugfix: Added a period to sweat and eyeroll emote.
