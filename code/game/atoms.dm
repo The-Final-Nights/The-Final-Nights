@@ -829,10 +829,10 @@
 
 ///to add blood from a mob onto something, and transfer their dna info
 /atom/proc/add_mob_blood(mob/living/M)
-	var/list/blood_dna = M.get_blood_dna_list()
-	if(!blood_dna)
-		return FALSE
-	return add_blood_DNA(blood_dna)
+    var/list/blood_dna = M.get_blood_dna_list()
+    if(!blood_dna)
+        return FALSE
+    return add_blood_DNA(blood_dna)
 
 ///Is this atom in space
 /atom/proc/isinspace()
