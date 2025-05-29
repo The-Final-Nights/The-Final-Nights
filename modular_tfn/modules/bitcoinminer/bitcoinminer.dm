@@ -61,7 +61,7 @@
 	if(money_stored)
 		new /obj/item/stack/dollar(drop_location(), money_stored)
 		playsound(src, 'sound/machines/eject.ogg', 30)
-		to_chat(user,"<span class='notice'>You withdraw $[money_stored] from \the [src]!</span>")
+		to_chat(user, span_notice("You withdraw $[money_stored] from \the [src]!"))
 		money_stored = 0
 	else
 		to_chat(user,"<span class='notice'>The balance is empty!.</span>")
@@ -74,7 +74,7 @@
 			to_chat(user, span_warning("\the [src] is starting!"))
 			return
 		if(tgui_alert(user, "Would you like to turn \the [src] on?", "Mining", list("Yes", "No")) == "Yes")
-			to_chat(user, span_notice("You turn \the [src] on.</span>"))
+			to_chat(user, span_notice("You turn \the [src] on."))
 			toggle_on(user)
 	else
 		dump_loot(user)
@@ -82,5 +82,5 @@
 /obj/machinery/bitcoin_miner/AltClick(mob/user)
 	if(active)
 		if(tgui_alert(user, "Would you like to turn \the [src] off?", "Mining", list("Yes", "No")) == "Yes")
-			to_chat(user,"<span class='notice'>You turn \the [src] off.</span>")
+			to_chat(user, span_notice("You turn \the [src] off."))
 			toggle_off()
