@@ -1,6 +1,6 @@
 /mob/living/carbon/human/register_init_signals()
 	. = ..()
-	RegisterSignal(src, list(SIGNAL_ADDTRAIT(TRAIT_SALUBRI_EYE), SIGNAL_REMOVETRAIT(TRAIT_SALUBRI_EYE)), PROC_REF(on_salubri_eye))
+	RegisterSignals(src, list(SIGNAL_ADDTRAIT(TRAIT_SALUBRI_EYE), SIGNAL_REMOVETRAIT(TRAIT_SALUBRI_EYE)), PROC_REF(on_salubri_eye))
 
 /mob/living/carbon/human/proc/on_salubri_eye()
 	SIGNAL_HANDLER
