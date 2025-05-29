@@ -64,7 +64,7 @@
 		to_chat(user, span_notice("You withdraw $[money_stored] from \the [src]!"))
 		money_stored = 0
 	else
-		to_chat(user,"<span class='notice'>The balance is empty!.</span>")
+		to_chat(user, span_notice("The balance is empty!"))
 
 /obj/machinery/bitcoin_miner/interact(mob/user)
 	if(!active)
