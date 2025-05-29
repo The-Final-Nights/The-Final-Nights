@@ -241,7 +241,7 @@
 				else
 					M.climbing = FALSE
 		if(istype(A, /obj/structure/vampdoor))
-			if(iscrinos(src))
+			if(iscrinos(src) || iscoraxcrinos(src))
 				var/obj/structure/vampdoor/V = A
 				playsound(get_turf(A), 'code/modules/wod13/sounds/get_bent.ogg', 100, FALSE)
 				var/obj/item/shield/door/D = new(get_turf(A))
@@ -250,7 +250,7 @@
 				D.throw_at(throw_target, rand(2, 4), 4, src)
 				qdel(A)
 
-	if(iscrinos(src))
+	if(iscrinos(src) || iscoraxcrinos(src))
 		if(!W)
 			var/mob/living/carbon/werewolf/wolf = src
 			var/allowed_to_proceed = FALSE

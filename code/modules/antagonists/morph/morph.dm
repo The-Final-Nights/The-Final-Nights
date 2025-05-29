@@ -175,7 +175,7 @@
 		return FALSE
 	return ..()
 
-/mob/living/simple_animal/hostile/morph/AttackingTarget()
+/mob/living/simple_animal/hostile/morph/AttackingTarget(atom/attacked_target)
 	if(morphed && !melee_damage_disguised)
 		to_chat(src, "<span class='warning'>You can not attack while disguised!</span>")
 		return
