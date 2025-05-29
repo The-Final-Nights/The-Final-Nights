@@ -1,0 +1,4 @@
+author: "chazzyjazzy"
+delete-after: True
+changes:
+  - bugfix: "fixes clothes not becoming bloody after stepping in blood / being in combat"
