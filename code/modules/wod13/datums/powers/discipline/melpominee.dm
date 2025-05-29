@@ -107,7 +107,7 @@
 //MADRIGAL
 /datum/discipline_power/melpominee/madrigal
 	name = "Madrigal"
-	desc = "Project a raw emotion into nearby minds through your melodic voice, inspiring emotional reactions."
+	desc = "Project raw emotion into nearby minds through your melodic sounding voice, inspiring emotional reactions."
 	level = 3
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
 	cooldown_length = 6 SECONDS
@@ -117,50 +117,58 @@
 
 /datum/discipline_power/melpominee/madrigal/activate()
 	. = ..()
+	//var/userSong = lowertext(trim(input(owner, "What are the words of your melodic voice, Madrigal? (This can be a song, or subtle poetic speaking, if you word it right.)") as null|text))
+	//if (!userSong || userSong == "")
+		//return
+
+		// Example: "Disrespect your Suroundings!!!" , emotion; Anger.
+		//The reason for this, is to make make this power much less spammable.
+		//As well, IF there is no song entered, it will only work on NPCs.
 
 	var/emotion = lowertext(trim(input(owner, "What emotion do you wish to project to those around you through your voice? (e.g., fear, joy, sorrow, anger, awe)", "Project Emotion") as null|text))
 	if (!emotion || emotion == "")
 		return
 
+	var/song = sanitize(userSong)
 	var/newEmote = ""
 	var/emote_text = ""
 	var/client_feedback = ""
 
 	switch(emotion)
 		if ("fear")
-			newEmote = "begins to tremble, in response to [owner]'s melodic voice."
+			newEmote = " begins to tremble, in response to [owner]'s melodic voice."
 			emote_text = "tremble"
-			client_feedback = "You feel fear seep into the cracks of your mind, its source is [owner]."
+			client_feedback = "You feel fear begin to seep into the cracks of your mind, pangs of anxiety about the subject defined by [owner]'s voice."
 		if ("joy")
-			newEmote = "grows a smile on their face, in response to [owner]'s melodic voice."
+			newEmote = " begins to smile, in response to [owner]'s melodic voice."
 			emote_text = "smile"
-			client_feedback = "You feel joy warms your thoughts, bliss, brought upon by [owner]."
+			client_feedback = "You feel joy begin to warm your thoughts, an unmistakeable hint of genuine bliss, brought upon by [owner]'s voice."
 		if ("sorrow")
-			newEmote = "forms tears in their eyes, in response to [owner]'s melodic voice."
-			emote_text = "cry"
-			client_feedback = "You feel a wave of sorrow weigh down your heart by [owner]'s melodic voice.."
+			newEmote = "'s eyes begin to water, in response to [owner]'s melodic voice."
+			emote_text = "mumble"
+			client_feedback = "You feel sorrow begin to weigh down your heart brought by [owner]'s melodic voice."
 		if ("anger")
-			newEmote = "grumbles angrily, in response to [owner]'s melodic voice."
+			newEmote = " starts to grumble angrily, in response to [owner]'s melodic voice."
 			emote_text = "grumble"
-			client_feedback = "You feel your blood boil with sudden directionless rage, you turn to [owner]'s voice."
+			client_feedback = "You feel anger, as your blood begins to boil with sudden directionless rage, you turn to [owner]'s their voice guides it, somewhat."
 		if ("awe")
 			newEmote = "looks at [owner] with wide eyes, in response to [owner]'s melodic voice."
 			emote_text = "stare"
-			client_feedback = "You are struck with overwhelming awe for [owner]'s melodic voice'."
+			client_feedback = "You are struck with overwhelming awe for [owner]'s melodic voice."
 		if ("humor")
-			newEmote = "chuckles heartily, in response to [owner]'s melodic voice."
+			newEmote = "begins chuckling heartily, in response to [owner]'s melodic voice."
 			emote_text = "chuckle"
-			client_feedback = "You are struck with overwhelming humor for [owner]'s joke.'"
+			client_feedback = "You feel overwhelming humor for [owner]'s voice.'"
 		else
 			to_chat(owner, span_warning("Invalid emotion. Try: fear, joy, sorrow, anger, awe, humor."))
 			return
 
-	// Apply effects to nearby targets
+	// Apply effects to nearby targets, needs to always work on NPCs, a chance for players depending on distance and/or Species/Clan.
 	for(var/mob/living/carbon/human/listener in oviewers(7, owner))
 		listener.create_walk_to(2 SECONDS, owner)
 		listener.Stun(1.5 SECONDS)
 		listener.emote(emote_text)
-		listener.visible_message(span_warning(newEmote), span_userdanger(client_feedback))
+		listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger(client_feedback))
 		listener.visible_message(
 			span_warning("[listener] appears overcome by [emotion]!"),
 			span_userdanger("[client_feedback]"))
@@ -170,14 +178,17 @@
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
-
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
+
+	// Admin.Log([owner] is casting Madrigal, emotion = [emotion], on a crowd [(no) player(s) (targetted)].
+
+
 
 /datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	if(target)
 		target.remove_overlay(MUTATIONS_LAYER)
-		to_chat(target, "<span class='subtle'>The emotional projection fades.</span>")
+		to_chat(target, "<span class='subtle'>The emotional projection fades, the feeling of [emotion] leaves you.</span>")
 
 /mob/living/carbon/human/proc/create_walk_to(duration, mob/living/walk_to)
 	var/datum/cb = CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, walk_to_caster), walk_to)
