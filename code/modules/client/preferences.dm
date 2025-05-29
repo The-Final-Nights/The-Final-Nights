@@ -2777,23 +2777,23 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if("kindred", "gargoyle")
 							var/i = text2num(href_list["upgradediscipline"])
 
-						var/discipline_level = discipline_levels[i]
-						var/cost = discipline_level * 7
-						if (discipline_level <= 0)
-							cost = 10
-						else if (clane.name == "Caitiff")
-							cost = discipline_level * 6
-						else if (clane.common_disciplines.Find(discipline_types[i]))
-							cost = discipline_level * 6
-						else if (clane.clane_disciplines.Find(discipline_types[i]))
-							cost = discipline_level * 5
+							var/discipline_level = discipline_levels[i]
+							var/cost = discipline_level * 7
+							if (discipline_level <= 0)
+								cost = 10
+							else if (clane.name == "Caitiff")
+								cost = discipline_level * 6
+							else if (clane.common_disciplines.Find(discipline_types[i]))
+								cost = discipline_level * 6
+							else if (clane.clane_disciplines.Find(discipline_types[i]))
+								cost = discipline_level * 5
 
-							if ((player_experience < cost) || (discipline_level >= 5))
-								return
+								if ((player_experience < cost) || (discipline_level >= 5))
+									return
 
-							player_experience -= cost
-							experience_used_on_character += cost
-							discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
+								player_experience -= cost
+								experience_used_on_character += cost
+								discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
 
 						if("kuei-jin")
 							var/a = text2num(href_list["upgradechidiscipline"])
