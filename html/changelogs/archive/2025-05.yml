@@ -229,3 +229,11 @@
 2025-05-27:
   Merek2:
   - bugfix: Added a period to sweat and eyeroll emote.
+2025-05-28:
+  TheTrueSilverRat:
+  - bugfix: Fixed the Salubri Traits runtime by changing RegisterSignal to RegisterSignals
+2025-05-29:
+  XeonMations:
+  - server: Server's database updated to TG modern.
+  chazzyjazzy:
+  - bugfix: fixes clothes not becoming bloody after stepping in blood / being in combat
