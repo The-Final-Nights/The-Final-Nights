@@ -795,13 +795,14 @@ GLOBAL_LIST_EMPTY(vending_products)
 			.["user"]["job"] = "No Job"
 			.["user"]["department"] = "No Department"
 	.["stock"] = list()
-	for (var/datum/data/vending_product/R in product_records + coin_records + hidden_records)
+	for (var/datum/data/vending_product/product_record in product_records + coin_records + hidden_records)
 		var/list/product_data = list(
-			name = R.name,
-			amount = R.amount,
-			colorable = R.colorable,
+			name = product_record.name,
+			path = replacetext(replacetext("[product_record.product_path]", "/obj/item/", ""), "/", "-"),
+			amount = product_record.amount,
+			colorable = product_record.colorable,
 		)
-		.["stock"][R.name] = product_data
+		.["stock"][product_data["path"]] = product_data
 	.["extended_inventory"] = extended_inventory
 
 /obj/machinery/vending/ui_act(action, params)
