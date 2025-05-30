@@ -40,7 +40,7 @@
 	if(target.physique >= 5)
 		target.physique = 4
 	var/mob/living/carbon/human/vampire = target
-	for (var/datum/action/blood_power/blood_power in vampire.actions)
+	for (var/datum/action/secondary_power/blood_power/blood_power in vampire.actions)
 		blood_power.Remove(vampire)
 	to_chat(target, span_userdanger(span_bold("You feel like a great curse was placed on you!")))
 

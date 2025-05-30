@@ -181,31 +181,19 @@
 				to_chat(owner, "<span class='warning'>You don't sense the <b>VITAE</b> in [VIT].</span>")
 				return
 
-/datum/action/blood_heal
+/datum/action/secondary_power/blood_heal
 	name = "Blood Heal"
 	desc = "Use vitae in your blood to heal your wounds."
 	button_icon_state = "bloodheal"
-	button_icon = 'code/modules/wod13/UI/actions.dmi'
+	//button_icon = 'code/modules/wod13/UI/actions.dmi'
 	background_icon_state = "discipline"
-	icon_icon = 'code/modules/wod13/UI/actions.dmi'
+	//icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
 	var/last_heal = 0
 	var/level = 1
 
-/datum/action/blood_heal/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	if(owner)
-		if(owner.client)
-			if(owner.client.prefs)
-				if(owner.client.prefs.old_discipline)
-					button_icon = 'code/modules/wod13/disciplines.dmi'
-					icon_icon = 'code/modules/wod13/disciplines.dmi'
-				else
-					button_icon = 'code/modules/wod13/UI/actions.dmi'
-					icon_icon = 'code/modules/wod13/UI/actions.dmi'
-	. = ..()
-
-/datum/action/blood_heal/Trigger()
+/datum/action/secondary_power/blood_heal/Trigger()
 	if(istype(owner, /mob/living/carbon/human))
 		if (HAS_TRAIT(owner, TRAIT_TORPOR))
 			return
