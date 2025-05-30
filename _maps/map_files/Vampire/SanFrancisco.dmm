@@ -5849,6 +5849,8 @@
 "bxm" = (
 /obj/structure/table,
 /obj/item/gun/ballistic/shotgun/vampire,
+/obj/item/gun/ballistic/shotgun/vampire,
+/obj/item/gun/ballistic/shotgun/vampire,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "bxo" = (
@@ -9431,6 +9433,7 @@
 	pixel_y = -13
 	},
 /obj/structure/table,
+/obj/machinery/p25transceiver/anarch,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
 "ctI" = (
@@ -45763,6 +45766,11 @@
 "mdY" = (
 /obj/structure/table,
 /obj/item/gun/ballistic/automatic/vampire/uzi,
+/obj/item/ammo_box/magazine/vamp9mm,
+/obj/item/ammo_box/magazine/vamp9mm,
+/obj/item/ammo_box/magazine/vamp9mm,
+/obj/item/ammo_box/magazine/vamp9mm,
+/obj/item/gun/ballistic/automatic/vampire/uzi,
 /obj/item/gun/ballistic/automatic/vampire/uzi,
 /obj/item/ammo_box/magazine/vamp9mm,
 /obj/item/ammo_box/magazine/vamp9mm,
@@ -61325,6 +61333,9 @@
 /obj/item/vamp/keys/anarch,
 /obj/item/vamp/keys/anarch,
 /obj/item/vamp/keys/anarch,
+/obj/item/p25radio,
+/obj/item/p25radio,
+/obj/item/p25radio,
 /turf/open/floor/carpet/red,
 /area/vtm/anarch/basement)
 "qbY" = (
@@ -63234,6 +63245,11 @@
 /obj/item/gun/ballistic/automatic/vampire/ak74,
 /obj/item/ammo_box/magazine/vamp545,
 /obj/item/ammo_box/magazine/vamp545,
+/obj/item/ammo_box/magazine/vamp545,
+/obj/item/ammo_box/magazine/vamp545,
+/obj/item/ammo_box/magazine/vamp545,
+/obj/item/ammo_box/magazine/vamp545,
+/obj/item/gun/ballistic/automatic/vampire/ak74,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
 "qAL" = (
@@ -85936,6 +85952,8 @@
 /obj/item/ammo_box/magazine/vamp45acp,
 /obj/item/gun/ballistic/automatic/vampire/m1911,
 /obj/item/gun/ballistic/automatic/vampire/m1911,
+/obj/item/ammo_box/magazine/vamp45acp,
+/obj/item/ammo_box/magazine/vamp45acp,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/anarch/basement)
 "wxt" = (
@@ -87216,6 +87234,8 @@
 	},
 /obj/structure/table,
 /obj/item/ammo_box/vampire/c12g,
+/obj/item/ammo_box/vampire/c12g/buck,
+/obj/item/ammo_box/vampire/c12g/buck,
 /obj/item/ammo_box/vampire/c12g/buck,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch/basement)
