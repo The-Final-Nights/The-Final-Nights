@@ -4,6 +4,6 @@
 	curse = "All injuries are doubled when becoming immobile stone. (Unimplemented)"
 	clane_disciplines = list(
 		/datum/discipline/auspex,
-		/datum/discipline/protean,
+		/datum/discipline/obfuscate,
 		/datum/discipline/visceratika
 	)
