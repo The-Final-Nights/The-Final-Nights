@@ -1772,7 +1772,6 @@
 #include "code\modules\asset_cache\asset_list_items.dm"
 #include "code\modules\asset_cache\assets\paper.dm"
 #include "code\modules\asset_cache\assets\tgui.dm"
-#include "code\modules\asset_cache\assets\vending.dm"
 #include "code\modules\asset_cache\transports\asset_transport.dm"
 #include "code\modules\asset_cache\transports\webroot_transport.dm"
 #include "code\modules\awaymissions\away_props.dm"

@@ -853,12 +853,9 @@ GLOBAL_LIST_EMPTY(vending_products)
 /obj/machinery/vending/ui_static_data(mob/user)
 	var/list/data = list()
 	data["onstation"] = onstation
-	data["all_products_free"] = all_products_free
 	data["department"] = payment_department
 	data["jobDiscount"] = 0.2
 	data["product_records"] = list()
-	data["displayed_currency_icon"] = displayed_currency_icon
-	data["displayed_currency_name"] = displayed_currency_name
 
 	var/list/categories = list()
 
@@ -870,13 +867,6 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 	return data
 
-/**
- * Returns a list of given product records of the vendor to be used in UI.
- * arguments:
- * records - list of records available
- * categories - list of categories available
- * premium - bool of whether a record should be priced by a custom/premium price or not
- */
 /obj/machinery/vending/proc/collect_records_for_static_data(list/records, list/categories, premium)
 	var/static/list/default_category = list(
 		"name" = "Products",
