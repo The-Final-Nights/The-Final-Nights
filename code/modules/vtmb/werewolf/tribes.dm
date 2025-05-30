@@ -257,9 +257,9 @@
 				var/matrix/ntransform = matrix(owner.transform)
 				ntransform.Scale(0.95, 0.95)
 				animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
-				addtimer(CALLBACK(src, PROC_REF(trans_doggy), lopor), 3 SECONDS)
+				addtimer(CALLBACK(src, PROC_REF(transform_lupus), lopor), 3 SECONDS)
 
-/datum/action/gift/guise_of_the_hound/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/guise_of_the_hound/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -267,6 +267,8 @@
 	H.regenerate_icons()
 	H.update_transform()
 	animate(H, transform = null, color = "#FFFFFF", time = 1)
+
+
 
 /datum/action/gift/infest
 	name = "Infest"
@@ -379,3 +381,104 @@
 				targetted.auspice.gnosis = 0
 				to_chat(targetted, span_userdanger("You feel your tie to your totem snap, gnosis leaving you...!"))
 				to_chat(owner, span_danger("You feel [target.name]'s gnostic ties fray...!"))
+
+
+/datum/action/gift/suns_guard // MASSIVE thanks to MachinePixie for coding this and the eye-drinking gifts, as well as making the relevant sprites
+	name = "Sun's Guard"
+	desc = "Gain the blessing of Helios, and become immune to spark and inferno both"
+	button_icon_state = "sunblock"
+	rage_req = 2
+	cool_down = 21 SECONDS
+
+
+
+
+/datum/action/gift/suns_guard/Trigger()
+	. = ..()
+	if(allowed_to_proceed)
+		var/mob/living/carbon/caster = owner
+		var/storeburnmod = caster.dna.species.burnmod
+		caster.dna.species.burnmod = 0
+		caster.set_fire_stacks(0)
+		ADD_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
+		animate(caster, color = "#ff8800", time = 10, loop = 1)
+		playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
+		to_chat(caster, "Sun's Guard activated, you have become immune to fire.")
+		addtimer(CALLBACK(src, PROC_REF(end_guard)), 140, storeburnmod)
+
+
+/datum/action/gift/suns_guard/proc/end_guard(storedburnmodifier)
+	var/mob/living/carbon/caster = owner
+	caster.dna.species.burnmod = storedburnmodifier
+	caster.set_fire_stacks(0)
+	REMOVE_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
+	caster.color = initial(caster.color)
+	playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
+	to_chat(caster, "Sun's Guard is no longer active, you are no longer immune to fire.")
+
+/datum/action/gift/eye_drink
+	name = "Eye-Drinking"
+	desc = "Consumes the eyes of a corpse to unlock the secrets of its demise. Will risk breaching the veil if used in homid."
+	button_icon_state = "eye_drink"
+	rage_req = 0
+	cool_down = 1 MINUTES
+
+/datum/action/gift/eye_drink/Trigger()
+	. = ..()
+	if(allowed_to_proceed)
+		var/mob/living/carbon/caster = owner
+		if(caster.pulling)
+			var/mob/living/carbon/victim = caster.pulling
+			var/obj/item/organ/eyes/victim_eyeballs = victim.getorganslot(ORGAN_SLOT_EYES)
+			var/isNPC = TRUE
+			if(!iscarbon(victim) || victim.stat != DEAD )
+				to_chat(caster, "<span class='warning'>You aren't currently pulling a corpse!</span>")
+				return
+			else
+				if(!victim_eyeballs)
+					to_chat(caster, "<span class='warning'>You cannot drink the eyes of a corpse that has no eyes!</span>")
+					return
+				else
+					if (!do_after(caster, 3 SECONDS)) //timer to cast
+						return
+					var/permission = tgui_input_list(victim, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+					var/victim_two = victim
+
+					if (!permission) //returns null if no soul in body
+						for (var/mob/dead/observer/ghost in GLOB.player_list)
+							if (ghost.mind == victim.last_mind)
+								//ask again if null
+								permission = tgui_input_list(ghost, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+								victim_two = ghost
+								break //no need to do further iterations if you found the right person
+
+					if(permission == "Yes")
+						if(ishuman(caster)) //listen buddy, hulking ravenmen and ravens can eat those eyes just fine, but a human? DISGUSTING.
+							if(caster.CheckEyewitness(caster, caster, 7, FALSE))
+								caster.adjust_veil(-1)
+						playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //itadakimasu! :D
+						qdel(victim_eyeballs)
+						caster.adjust_nutrition(5) //organ nutriment value is 5
+						to_chat(caster, "You drink of the eyes of [victim.name] and a vision fills your mind...")
+						var/deathdesc = tgui_input_text(victim_two, "", "How did you die?", "", 300, TRUE, TRUE, 5 MINUTES)
+						if (deathdesc == "")
+							to_chat(caster, "The vision is hazy, you can't make out many details...")
+						else
+							to_chat(caster, "<i>[deathdesc]</i>")
+						//discount scanner
+						to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
+						to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
+						isNPC = FALSE
+
+					else if(permission == "No")
+						to_chat(caster,"<span class='warning'>The spirit seems relunctact to let you consume their eyes... so you refrain from doing so.</span>")
+						isNPC = FALSE
+
+					if(isNPC)
+						playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //yummers
+						qdel(victim_eyeballs)
+						caster.adjust_nutrition(5) //organ nutriment value is 5
+						to_chat(caster, "You drink of the eyes of [victim.name] but no vision springs to mind...")
+						to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
+						to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
+

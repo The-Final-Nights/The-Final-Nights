@@ -109,7 +109,7 @@
 						dat += "Their number is [host.Myself.Lover.phone_number].<BR>"
 					if(host.Myself.Lover.lover_text)
 						dat += "[host.Myself.Lover.lover_text]<BR>"
-		if(length(host.knowscontacts) > 0)
+		if(LAZYLEN(host.knowscontacts) > 0)
 			dat += "<b>I know some other of my kind in this city. Need to check my phone, there definetely should be:</b><BR>"
 			for(var/i in host.knowscontacts)
 				dat += "-[i] contact<BR>"
@@ -139,20 +139,29 @@
 
 	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
 	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+	var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
+	var/mob/living/carbon/werewolf/corax/corax_crinos/corax_crinos = C.transformator.corax_form?.resolve()
 
 	//garou resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
 	RegisterSignal(lupus, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
 	RegisterSignal(crinos, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
+	RegisterSignal(corvid, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
+	RegisterSignal(corax_crinos, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
 
 /datum/species/garou/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
 	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+	var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
+	var/mob/living/carbon/werewolf/corax/corax_crinos/corax_crinos = C.transformator.corax_form?.resolve()
 
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
 	UnregisterSignal(lupus, COMSIG_MOB_VAMPIRE_SUCKED)
 	UnregisterSignal(crinos, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(corvid, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(corax_crinos, COMSIG_MOB_VAMPIRE_SUCKED)
+
 	for(var/datum/action/garouinfo/VI in C.actions)
 		if(VI)
 			VI.Remove(C)

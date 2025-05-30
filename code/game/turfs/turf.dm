@@ -124,6 +124,14 @@ GLOBAL_LIST_EMPTY(station_turfs)
 
 	ComponentInitialize()
 
+	if(uses_integrity)
+		atom_integrity = max_integrity
+
+		if (islist(armor))
+			armor = getArmor(arglist(armor))
+		else if (!armor)
+			armor = getArmor()
+
 	return INITIALIZE_HINT_NORMAL
 
 /turf/Destroy(force)
