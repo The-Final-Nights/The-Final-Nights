@@ -56,4 +56,4 @@
 /obj/item/organ/cyberimp/eyes/hud/aura
 	name = "Etheric Eyes"
 	desc = "These cybernetic eye implants allow for aura sight."
-	hud_type = DATA_HUD_ABDUCTOR
+	HUD_type = DATA_HUD_ABDUCTOR
