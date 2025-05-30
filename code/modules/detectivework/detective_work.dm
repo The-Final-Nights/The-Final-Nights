@@ -73,10 +73,10 @@
 	var/datum/component/forensics/D = AddComponent(/datum/component/forensics)
 	. = D.add_hiddenprint(M)
 
-/atom/proc/add_blood_DNA(list/dna)						//ASSOC LIST DNA = BLOODTYPE
+/atom/proc/add_blood_DNA(list/dna)
 	if (QDELETED(src))
 		return
-	return FALSE
+	return TRUE
 
 /obj/add_blood_DNA(list/dna)
 	. = ..()

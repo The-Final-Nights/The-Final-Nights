@@ -53,9 +53,9 @@ DROP TABLE IF EXISTS `SS13_admin_ranks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SS13_admin_ranks` (
   `rank` varchar(32) NOT NULL,
-  `flags` smallint(5) unsigned NOT NULL,
-  `exclude_flags` smallint(5) unsigned NOT NULL,
-  `can_edit_flags` smallint(5) unsigned NOT NULL,
+  `flags` mediumint(5) unsigned NOT NULL,
+  `exclude_flags` mediumint(5) unsigned NOT NULL,
+  `can_edit_flags` mediumint(5) unsigned NOT NULL,
   PRIMARY KEY (`rank`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `SS13_citation` (
   `sender_ic` varchar(64) NOT NULL DEFAULT '' COMMENT 'Longer because this is the character name, not the ckey',
   `recipient` varchar(64) NOT NULL DEFAULT '' COMMENT 'Longer because this is the character name, not the ckey',
   `crime` text NOT NULL,
+	`crime_desc` text NULL DEFAULT NULL,
   `fine` int(4) DEFAULT NULL,
   `paid` int(4) DEFAULT 0,
   `timestamp` datetime NOT NULL,
@@ -172,7 +173,7 @@ CREATE TABLE `SS13_death` (
   `fireloss` smallint(5) unsigned NOT NULL,
   `oxyloss` smallint(5) unsigned NOT NULL,
   `toxloss` smallint(5) unsigned NOT NULL,
-  `cloneloss` smallint(5) unsigned NOT NULL,
+  `cloneloss` smallint(5) unsigned DEFAULT '0',
   `staminaloss` smallint(5) unsigned NOT NULL,
   `last_words` varchar(255) DEFAULT NULL,
   `suicide` tinyint(1) NOT NULL DEFAULT '0',
@@ -212,6 +213,19 @@ CREATE TABLE `SS13_ipintel` (
   `intel` double NOT NULL DEFAULT '0',
   PRIMARY KEY (`ip`),
   KEY `idx_ipintel` (`ip`,`intel`,`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+--
+-- Table structure for table `ipintel_whitelist`
+--
+
+DROP TABLE IF EXISTS `SS13_ipintel_whitelist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SS13_ipintel_whitelist` (
+	`ckey` varchar(32) NOT NULL,
+	`admin_ckey` varchar(32) NOT NULL,
+	PRIMARY KEY (`ckey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -270,12 +284,34 @@ CREATE TABLE `SS13_library_action` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `book` int(10) unsigned NOT NULL,
   `reason` longtext DEFAULT NULL,
-  `ckey` varchar(11) NOT NULL DEFAULT '',
+  `ckey` varchar(32) NOT NULL DEFAULT '',
   `datetime` datetime NOT NULL DEFAULT current_timestamp(),
   `action` varchar(11) NOT NULL DEFAULT '',
-  `ip_addr` int(11) NOT NULL,
+  `ip_addr` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `SS13_manifest`
+--
+
+DROP TABLE IF EXISTS `SS13_manifest`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `SS13_manifest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `server_ip` int(10) unsigned NOT NULL,
+  `server_port` smallint(5) NOT NULL,
+  `round_id` int(11) NOT NULL,
+  `ckey` text NOT NULL,
+  `character` text NOT NULL,
+  `job` text NOT NULL,
+  `special` text DEFAULT NULL,
+  `latejoin` tinyint(1) NOT NULL DEFAULT 0,
+	`timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -577,6 +613,16 @@ CREATE TABLE `SS13_achievement_metadata` (
 	PRIMARY KEY (`achievement_key`)
 ) ENGINE=InnoDB;
 
+-- Table structure for table 'SS13_x_progress'
+
+DROP TABLE IF EXISTS `SS13_fish_progress`;
+CREATE TABLE `fish_progress` (
+  `ckey` VARCHAR(32) NOT NULL,
+  `progress_entry` VARCHAR(32) NOT NULL,
+  `datetime` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ckey`,`progress_entry`)
+) ENGINE=InnoDB;
+
 --
 -- Table structure for table `SS13_ticket`
 --
@@ -638,19 +684,6 @@ CREATE TABLE `SS13_discord_links` (
 ) ENGINE=InnoDB;
 
 --
--- Table structure for table `text_adventures`
---
-DROP TABLE IF EXISTS `SS13_text_adventures`;
-CREATE TABLE `SS13_text_adventures` (
-	`id` int(11) NOT NULL AUTO_INCREMENT,
-	`adventure_data` LONGTEXT NOT NULL,
-	`uploader` VARCHAR(32) NOT NULL,
-	`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`approved` TINYINT(1) NOT NULL DEFAULT FALSE,
-	PRIMARY KEY (`id`)
-) ENGINE=InnoDB;
-
---
 -- Table structure for table `admin_connections`
 --
 DROP TABLE IF EXISTS `SS13_admin_connections`;
@@ -693,20 +726,13 @@ CREATE TABLE `SS13_telemetry_connections` (
     UNIQUE INDEX `unique_constraints` (`ckey` , `telemetry_ckey` , `address` , `computer_id`)
 );
 
---
--- Table structure for table `whitelist`
---
-DROP TABLE IF EXISTS `SS13_whitelist`;
-CREATE TABLE `SS13_whitelist` (
-    `id` INT NOT NULL AUTO_INCREMENT,
-    `ckey` VARCHAR(32) NOT NULL,
-    `whitelist` VARCHAR(100) NOT NULL,
-    `approver_ckey` VARCHAR(32) NOT NULL,
-    `ticket_link` VARCHAR(100) NOT NULL,
-    `approval_reason` VARCHAR(2048) NOT NULL,
-    `date_whitelisted` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
-);
+DROP TABLE IF EXISTS `SS13_tutorial_completions`;
+CREATE TABLE `SS13_tutorial_completions` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `ckey` VARCHAR(32) NOT NULL,
+  `tutorial_key` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ckey_tutorial_unique` (`ckey`, `tutorial_key`));
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

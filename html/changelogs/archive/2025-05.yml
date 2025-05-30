@@ -221,3 +221,27 @@
   - rscadd: Salubri Third Eyes wohoo
   buffyuwu, XeonMations:
   - code_imp: CI/CD checks MAY work now. Please. I Hope.
+2025-05-26:
+  Marshmellow105:
+  - code_imp: FBI agents are no longer a whitelisted role.
+  tzui5020:
+  - bugfix: Fixed the hoodie in the loadout
+2025-05-27:
+  Merek2:
+  - bugfix: Added a period to sweat and eyeroll emote.
+2025-05-28:
+  TheTrueSilverRat:
+  - bugfix: Fixed the Salubri Traits runtime by changing RegisterSignal to RegisterSignals
+2025-05-29:
+  XeonMations:
+  - server: Server's database updated to TG modern.
+  chazzyjazzy:
+  - bugfix: fixes clothes not becoming bloody after stepping in blood / being in combat
+2025-05-30:
+  ShadeAware:
+  - rscadd: SNEKTEK has just released their new line of budget handheld tasers. Defense
+      for the common man and woman!
+  - rscadd: Gun stores have started carrying less-than-lethal alternatives, such as
+      hand-tasers and pepperspray.
+  buffyuwu:
+  - bugfix: fixed the flame master hunter loadout not giving items
