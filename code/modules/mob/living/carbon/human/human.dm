@@ -1297,6 +1297,47 @@
 	equip_to_slot_or_del(new /obj/item/clothing/under/vampire/bouncer(src), ITEM_SLOT_ICLOTHING)
 	equip_to_slot_or_del(new /obj/item/clothing/suit/vampire/trench/alt(src), ITEM_SLOT_OCLOTHING)
 
+// This sets up NPC SUPERFAN behavior, and can be modified for use in other TFN behaviors, currently for Melpominee Discipline.
+/mob/living/carbon/human
+	var/tmp/superfan_active = FALSE
+	var/tmp/superfan_target = null
+
+/mob/living/carbon/human/proc/create_superfan(duration, mob/living/walk_to_target)
+	if (!walk_to_target || superfan_active)
+		return
+
+	superfan_active = TRUE
+	superfan_target = walk_to_target
+
+	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(walk_to_superfan_target), walk_to_target)
+	for (var/i in 1 to duration)
+		addtimer(follow_cb, (i - 1) * total_multiplicative_slowdown())
+
+	// End Superfan behavior
+	addtimer(CALLBACK(src, PROC_REF(end_superfan_effect)), duration * total_multiplicative_slowdown())
+
+/mob/living/carbon/human/proc/end_superfan_effect()
+	superfan_active = FALSE
+	superfan_target = null
+
+/mob/living/carbon/human/proc/walk_to_superfan_target(mob/living/walk_to_target)
+	if (!src || !walk_to_target || !superfan_active)
+		return
+
+	var/distance = get_dist(src, walk_to_target)
+
+	if (distance > 5)
+		step_towards(src, walk_to_target)
+	else if (distance > 1)
+		step_to(src, walk_to_target)
+	else
+		// Within 1 tile: just turn to face the target, no movement
+		src.dir = get_dir(src, walk_to_target)
+
+	// Optional: small chance to emote while entranced
+	if (prob(10))
+		emote("stare") // or "stare", "smile", etc.
+
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor
 
