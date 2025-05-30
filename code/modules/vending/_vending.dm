@@ -867,6 +867,13 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 	return data
 
+/**
+ * Returns a list of given product records of the vendor to be used in UI.
+ * arguments:
+ * records - list of records available
+ * categories - list of categories available
+ * premium - bool of whether a record should be priced by a custom/premium price or not
+ */
 /obj/machinery/vending/proc/collect_records_for_static_data(list/records, list/categories, premium)
 	var/static/list/default_category = list(
 		"name" = "Products",
