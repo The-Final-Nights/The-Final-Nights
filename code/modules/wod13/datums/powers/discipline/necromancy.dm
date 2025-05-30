@@ -109,10 +109,10 @@
 
 /datum/discipline_power/necromancy/awaken_the_homuncular_servant/post_gain()
 	. = ..()
-	var/datum/action/ghost_hear/see_ghosts = new()
+	var/datum/action/secondary_power/ghost_hear/see_ghosts = new()
 	see_ghosts.Grant(owner)
 
-/datum/action/ghost_hear
+/datum/action/secondary_power/ghost_hear
 	name = "See Ghosts"
 	desc = "Allows you to see ghosts."
 	button_icon_state = "ghost"
@@ -120,14 +120,14 @@
 	vampiric = TRUE
 	var/ghosts_visible = FALSE
 
-/datum/action/ghost_hear/Trigger()
+/datum/action/secondary_power/ghost_hear/Trigger()
 	. = ..()
 	if(ghosts_visible == TRUE)
 		deactivate()
 	else
 		activate()
 
-/datum/action/ghost_hear/proc/activate()
+/datum/action/secondary_power/ghost_hear/proc/activate()
 	if(!isliving(owner))
 		return
 	ghosts_visible = TRUE
@@ -135,7 +135,7 @@
 	user.see_invisible = SEE_INVISIBLE_OBSERVER
 	to_chat(owner, span_notice("You peek beyond the Shroud to see ghosts."))
 
-/datum/action/ghost_hear/proc/deactivate()
+/datum/action/secondary_power/ghost_hear/proc/deactivate()
 	if(!isliving(owner))
 		return
 	ghosts_visible = FALSE
