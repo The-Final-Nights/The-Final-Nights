@@ -46,8 +46,8 @@
 		RegisterSignal(parent, COMSIG_ADD_MOOD_EVENT_RND, PROC_REF(add_event)) //Mood events that are only for RnD members
 
 /datum/component/mood/proc/print_mood(mob/user)
-	var/msg = "<span class='info'>*---------*\n<EM>My current mental status:</EM></span>\n"
-	msg += "<span class='notice'>My current sanity: </span>" //Long term
+	var/msg = "[span_info("<EM>My current mental status:</EM>")]\n"
+	msg += span_notice("My current sanity: ") //Long term
 	switch(sanity)
 		if(SANITY_GREAT to INFINITY)
 			msg += "<span class='nicegreen'>My mind feels like a temple!</span>\n"
@@ -89,8 +89,8 @@
 			var/datum/mood_event/event = mood_events[i]
 			msg += event.description
 	else
-		msg += "<span class='nicegreen'>I don't have much of a reaction to anything right now.</span>\n"
-	to_chat(user, msg)
+		msg += "[span_grey("I don't have much of a reaction to anything right now.")]\n"
+	to_chat(user, boxed_message(msg))
 
 ///Called after moodevent/s have been added/removed.
 /datum/component/mood/proc/update_mood()

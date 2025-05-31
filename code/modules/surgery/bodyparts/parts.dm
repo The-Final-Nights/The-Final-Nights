@@ -170,6 +170,8 @@
 	max_stamina_damage = 50
 	can_be_disabled = TRUE
 
+/obj/item/bodypart/r_arm/corvid_corax //the talons of a raven, used to pick up stuff, hopefully.
+	max_damage = 125
 
 /obj/item/bodypart/r_arm/set_owner(new_owner)
 	. = ..()

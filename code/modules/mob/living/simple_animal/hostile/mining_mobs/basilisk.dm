@@ -68,7 +68,7 @@
 		if(3)
 			adjustBruteLoss(110)
 
-/mob/living/simple_animal/hostile/asteroid/basilisk/AttackingTarget()
+/mob/living/simple_animal/hostile/asteroid/basilisk/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(lava_drinker && !warmed_up && istype(target, /turf/open/lava))
 		visible_message("<span class='warning'>[src] begins to drink from [target]...</span>")

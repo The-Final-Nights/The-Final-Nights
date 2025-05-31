@@ -483,3 +483,22 @@
 	name = "kiasyd eyes"
 	desc = "These eyes are a bit too big for your head."
 	icon_state = "eyes_kiasyd"
+
+/obj/item/organ/eyes/salubri
+	eye_icon_state = "salubri"
+	var/datum/action/salubri_eye/salubri_opener
+
+/obj/item/organ/eyes/salubri/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising)
+	. = ..()
+	salubri_opener = new()
+	salubri_opener.Grant(M)
+
+/obj/item/organ/eyes/salubri/Remove(mob/living/carbon/M, special = 0)
+	. = ..()
+	if(salubri_opener)
+		salubri_opener.Remove(M)
+	if(HAS_TRAIT(M, TRAIT_SALUBRI_EYE_OPEN))
+		REMOVE_TRAIT(M, TRAIT_SALUBRI_EYE_OPEN, SALUBRI_EYE_TRAIT)
+/obj/item/organ/eyes/night_vision/kiasyd
+	eye_icon_state = "kiasyd"
+
