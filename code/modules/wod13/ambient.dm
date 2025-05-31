@@ -351,6 +351,14 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/anarch/garage
+	name = "Garage"
+	icon_state = "anarch"
+	ambience_index = AMBIENCE_INTERIOR
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/hotel
 	name = "Hotel"
 	icon_state = "hotel"

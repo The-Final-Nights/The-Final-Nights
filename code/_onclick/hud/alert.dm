@@ -98,6 +98,9 @@
 	var/override_alerts = FALSE //If it is overriding other alerts of the same type
 	var/mob/owner //Alert owner
 
+	/// Boolean. If TRUE, the Click() proc will attempt to Click() on the master first if there is a master.
+	var/click_master = TRUE
+
 
 /atom/movable/screen/alert/MouseEntered(location,control,params)
 	if(!QDELETED(src))
@@ -765,10 +768,12 @@ so as to remain in compliance with the most up-to-date laws."
 /atom/movable/screen/alert/restrained/handcuffed
 	name = "Handcuffed"
 	desc = "You're handcuffed and can't act. If anyone drags you, you won't be able to move. Click the alert to free yourself."
+	click_master = FALSE
 
 /atom/movable/screen/alert/restrained/legcuffed
 	name = "Legcuffed"
 	desc = "You're legcuffed, which slows you down considerably. Click the alert to free yourself."
+	click_master = FALSE
 
 /atom/movable/screen/alert/restrained/Click()
 	var/mob/living/L = usr
@@ -847,8 +852,12 @@ so as to remain in compliance with the most up-to-date laws."
 		to_chat(usr, "<span class='boldnotice'>[name]</span> - <span class='info'>[desc]</span>")
 		return
 	if(usr != owner)
-		return
-	if(master)
+		return FALSE
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, "shift")) // screen objects don't do the normal Click() stuff so we'll cheat
+		to_chat(usr, boxed_message(jointext(examine(usr), "\n")))
+		return FALSE
+	if(master && click_master)
 		return usr.client.Click(master, location, control, params)
 
 	return TRUE
