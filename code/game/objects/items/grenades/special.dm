@@ -45,7 +45,7 @@
 			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise!")
 	qdel(src)
 
-mob/living/carbon/proc/transformation_blocked_update()
+/mob/living/carbon/proc/transformation_blocked_update()
 	if(src.transformation_blocked > 0)
 		sleep(10)
 		if(src.auspice.rage > 0)
