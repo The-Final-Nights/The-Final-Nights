@@ -193,61 +193,92 @@
 	var/affectedCrowdmembers = 0
 
 	// Apply the Madrigal effect to all viewers within range
+	// Apply the Madrigal effect to all viewers within range
 	for (var/mob/living/carbon/human/listener in oviewers(7, owner))
 		//Is the listener alive?
 		if (!listener || !listener.is_alive())
 			continue
 
 		//Happens to everyone, even if they fail the roll.
-		listener.Stun(1.5 SECONDS)
 		//listener.emote(emote_text)
 		//listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
+		var/is_npc = istype(listener, /mob/living/carbon/human/npc)
+		var/is_player = listener.client != null
+
+		// Happens to everyone, even if they fail the roll.
+		listener.Stun(2 SECONDS)
 		affectedCrowdmembers++
 
 		//Cosmetic overlay
+		// Cosmetic overlay
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
 
-		//Remove the overlay after a short duration. Effect is planned to last longer and be a icon.
+		// Remove the overlay after a short duration. Effect is planned to last longer and be a icon.
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
+
+		if (is_npc)
+			var/mob/living/carbon/human/npc/N = listener
+			walk(N, 0)            // Stop NPC movement
+			N.old_movement = TRUE     // Prevent automatic ChoosePath() rerouting
+			N.walktarget = null       // Block handle_automated_movement()
 
 		var/is_kindred = iskindred(listener)
 		var/is_garou = isgarou(listener)
-		var/is_player = listener.client != null
 
-		// Determine the base difficulty for resisting the powers emotional pull
-		var/base_difficulty = 4
-		if (is_kindred) base_difficulty += 4
-		else if (is_garou) base_difficulty += 2
-		else if (is_player) base_difficulty += 0
-		else base_difficulty = 0 // NPCs auto-fail
+		var/base_difficulty = 6
+
+		if (base_difficulty < 0)
+			if (is_npc)
+				var/mob/living/carbon/human/npc/N = listener
+				if (!N.is_talking)
+					spawn(rand(3, 7))
+						N.RealisticSay(pick(N.socialrole?.random_phrases))
+			else if (is_player)
+				listener.emote("stagger")
+				listener.visible_message(span_warning("[listener] stumbles!"), span_userdanger("The music shakes you."))
+			continue
 
 		var/critical_failure = FALSE
 
+		// Listener rolls to resist the emotional pull
 		if (base_difficulty > 0)
 			var/result = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, mobs_to_show_output = listener)
-			if (result > 0)
+
+			if (result > 0) // Success
 				to_chat(listener, span_notice("(Success) You resist the emotional pull."))
 				continue
-			else if (result == 0)
+
+			else if (result == 0) // Failure
 				if (is_player && !is_kindred && !is_garou)
 					to_chat(listener, span_danger("(Failure) You feel [emotion] fill your mind."))
 					continue
-			else if (result < 0)
+
+			else if (result < 0) // Critical Failure
 				critical_failure = TRUE
 				if (is_player)
-					to_chat(listener, span_danger("(Critical Failure) You are completely overwhelmed!"))
+					to_chat(listener, span_danger("(Critical Failure) You are completely overwhelmed with emotion and enamored with [owner]!"))
 
+		// Superfan creation
 		if (super_fans < super_fan_limit)
-			if (!listener.client)
+			if (!listener.client) // NPC superfan
 				listener.create_superfan(60, owner)
 				super_fans++
-			else if (critical_failure)
+			else if (critical_failure) // Player superfan
 				to_chat(listener, span_warning("You feel drawn toward [owner]..."))
 				listener.create_superfan(20, owner)
 				super_fans++
+
+/datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
+	. = ..()
+	target.remove_overlay(MUTATIONS_LAYER)
+	if (istype(target, /mob/living/carbon/human/npc))
+		var/mob/living/carbon/human/npc/N = target
+		N.old_movement = FALSE
+		N.walktarget = N.ChoosePath()
+
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
@@ -275,9 +306,7 @@
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-/datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
-	. = ..()
-	target.remove_overlay(MUTATIONS_LAYER)
+
 
 //SHATTERING CRESCENDO
 /datum/discipline_power/melpominee/shattering_crescendo

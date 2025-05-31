@@ -1302,12 +1302,17 @@
 	var/tmp/superfan_active = FALSE
 	var/tmp/superfan_target = null
 
+var/tmp/walktarget
+
 /mob/living/carbon/human/proc/create_superfan(duration, mob/living/walk_to_target)
 	if (!walk_to_target || superfan_active)
 		return
 
 	superfan_active = TRUE
 	superfan_target = walk_to_target
+
+	walktarget = null // ← ADD THIS LINE to clear AI's goal
+	walk(src, 0)      // ← Stop any current path
 
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(walk_to_superfan_target), walk_to_target)
 	for (var/i in 1 to duration)
@@ -1319,6 +1324,11 @@
 /mob/living/carbon/human/proc/end_superfan_effect()
 	superfan_active = FALSE
 	superfan_target = null
+
+	if (isnpc(src))
+		walktarget = src:ChoosePath()
+
+
 
 /mob/living/carbon/human/proc/walk_to_superfan_target(mob/living/walk_to_target)
 	if (!src || !walk_to_target || !superfan_active)
