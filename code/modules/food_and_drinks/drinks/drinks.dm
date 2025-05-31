@@ -255,7 +255,7 @@
 	// Check if the user is a vampire or kindred
 	var/is_vampire_species = FALSE
 	if(istype(user, /mob/living/carbon/human))
-		if(istype(user.dna.species, /datum/species/vampire) || istype(user.dna.species, /datum/species/kindred))
+		if(istype(user.dna.species, /datum/species/kindred))
 			is_vampire_species = TRUE
 
 	if(!is_vampire_species)
@@ -291,13 +291,7 @@
 
 	update_icon_state()
 
-/obj/item/reagent_containers/food/drinks/silver_goblet/on_reagent_change(changetype)
-	. = ..()
-	update_icon_state()
 
-	// If all blood is removed, clear the blood donors list
-	if(!reagents.has_reagent(/datum/reagent/blood))
-		blood_donors.Cut()
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/attack(mob/living/carbon/M, mob/user)
 	if(!reagents.has_reagent(/datum/reagent/blood))
@@ -307,7 +301,7 @@
 	var/is_vampire_species = FALSE
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(istype(H.dna.species, /datum/species/vampire) || istype(H.dna.species, /datum/species/kindred))
+		if(istype(H.dna.species, /datum/species/kindred))
 			is_vampire_species = TRUE
 
 	// Special handling for vampires drinking blood
@@ -337,7 +331,7 @@
 	. = ..()
 	if(length(blood_donors) > 0 && reagents.has_reagent(/datum/reagent/blood))
 		if(istype(M, /mob/living/carbon/human))
-			if(istype(M.dna.species, /datum/species/vampire) || istype(M.dna.species, /datum/species/kindred))
+			if(istype(M.dna.species, /datum/species/kindred))
 				is_vampire_species = TRUE
 
 		if(is_vampire_species)
@@ -404,7 +398,7 @@
 		icon_state = "vaulderie_goblet_filled"
 	else
 		icon_state = "vaulderie_goblet"
-	return TRUE // Return TRUE instead of ..() to ensure proper icon updating
+	return TRUE
 
 
 /obj/item/reagent_containers/food/drinks/coffee

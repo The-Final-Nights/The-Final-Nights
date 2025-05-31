@@ -60,7 +60,7 @@ SUBSYSTEM_DEF(job_scaling)
 	scaling_rules["Endron Security Agent"] = list(10, 30, 3) // 1 slot per 10 players over 30 players, up to 3 extra slots (10 max since 7 is the base)
 	scaling_rules["Painted City Guardian"] = list(10, 30, 3) // 1 slot per 10 players over 30 players, up to 3 extra slots (10 max since 7 is the base)
 	scaling_rules["Amberglade Guardian"] = list(10, 30, 3) // 1 slot per 10 players over 30 players, up to 3 extra slots (10 max since 7 is the base)
-	scaling_rules["Sabbat Pack"] = list(20, 30, 3) // 1 slot per 10 players over 30 players, up to 3 extra slots (10 max since 7 is the base)
+	scaling_rules["Sabbat Pack"] = list(20, 30, 3) // 1 slot per 20 players over 30 players, up to 3 extra slots (10 max since 7 is the base)
 
 	message_admins("Job Scaling: Rules initialized")
 

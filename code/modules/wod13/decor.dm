@@ -1472,7 +1472,7 @@
 		playsound(loc,'sound/weapons/bladeslice.ogg', 50, FALSE)
 		if(do_after(user, 100))
 			if(user.bloodpool <= 0)
-				to_chat(user, "<span class='warning'>You have no blood to donate!</span>")
+				to_chat(user, span_warning("You have no blood to donate!"))
 				return
 
 			user.visible_message(span_notice("[user] cuts [user.p_their()] wrist and lets blood flow into the bath."), span_notice("You cut your wrist and let blood flow into the bath."))
@@ -1671,7 +1671,7 @@
 	if(istype(I, /obj/item/melee/vampirearms/shovel))
 		if(!burying)
 			burying = TRUE
-			user.visible_message("<span class='warning'>[user] starts to dig [src]</span>", "<span class='warning'>You start to dig [src].</span>")
+			user.visible_message(span_warning("[user] starts to dig [src]"), span_warning("You start to dig [src]."))
 			if(do_after(user, 20 SECONDS))
 				burying = FALSE
 				if(icon_state == "pit0")
@@ -1691,12 +1691,12 @@
 								kindred_buried = TRUE
 								buried_kindred += L
 								// Visual message for being buried
-								to_chat(L, "<span class='userdanger'>You are buried alive! The weight of the earth presses down on you, and panic begins to rise!</span>")
-								user.visible_message("<span class='warning'>[L] struggles as they are buried!</span>")
+								to_chat(L, span_userdanger("You are buried alive! The weight of the earth presses down on you, and panic begins to rise!"))
+								user.visible_message(span_warning("[L] struggles as they are buried!"))
 
 					// Update the pit state
 					icon_state = "pit1"
-					user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
+					user.visible_message(span_warning("[user] digs a hole in [src]."), span_warning("You dig a hole in [src]."))
 
 					if(dead_amongst)
 						call_dharma("respect", user)
@@ -1704,11 +1704,11 @@
 						if(do_after(K, 120 SECONDS, target = K, progress = TRUE))
 							kindred_frenzy_escape(K)
 						else
-							to_chat(K, "<span class='warning'>Your escape was interrupted!</span>")
+							to_chat(K, span_warning("Your escape was interrupted!"))
 
 					// Only refill the pit if no one is buried
 					if(!dead_amongst && !kindred_buried)
-						user.visible_message("<span class='warning'>[user] refills [src].</span>", "<span class='warning'>You refill [src].</span>")
+						user.visible_message(span_warning("[user] refills [src]."), span_warning("You refill [src]."))
 						qdel(src)
 				else
 					// Digging up the pit
@@ -1719,7 +1719,7 @@
 							dead_amongst = TRUE
 
 					icon_state = "pit0"
-					user.visible_message("<span class='warning'>[user] digs open [src].</span>", "<span class='warning'>You dig open [src].</span>")
+					user.visible_message(span_warning("[user] digs open [src]."), span_warning("You dig open [src]."))
 
 					if(dead_amongst)
 						call_dharma("disrespect", user)

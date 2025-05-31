@@ -245,7 +245,7 @@
 		to_chat(user, span_cult("<b>Pack Credo:</b>"))
 		to_chat(user, span_cult("[credo.desc]"))
 
-		var/new_credo = tgui_input_text(user, "Enter your interpretation of the Sabbat's goals:", "Edit Pack Credo", credo.desc) as text|null
+		var/new_credo = tgui_input_text(user, "Enter your interpretation of the Sabbat's goals:", "Edit Pack Credo", credo.desc)
 		if(new_credo && new_credo != credo.desc)
 			credo.desc = new_credo
 			to_chat(user, span_cult("You update your pack's interpretation of the Sabbat Credo."))
