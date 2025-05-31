@@ -245,3 +245,11 @@
       hand-tasers and pepperspray.
   buffyuwu:
   - bugfix: fixed the flame master hunter loadout not giving items
+2025-05-31:
+  Kevak:
+  - balance: Lively Aura now costs 2 qp rather than 3.
+  - balance: Latin now costs 1qp rather than 2.
+  TheTrueSilverRat:
+  - rscadd: Eye color change when you use Protean Rank 1
+  buffyuwu:
+  - server: updated hub entry
