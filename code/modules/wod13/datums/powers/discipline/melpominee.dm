@@ -116,17 +116,12 @@
 	duration_override = TRUE
 	multi_activate = TRUE
 
+// Helper function to check if a mob is alive
 /mob/proc/is_alive()
 	return istype(src, /mob/living) && !isdead(src)
 
 /datum/discipline_power/melpominee/madrigal/activate()
 	. = ..()
-
-		//Example: userSong: "Disrespect your Suroundings!!!" , emotion: Anger.
-		//Crowd is compelled to express the emotion, and subject of the song.
-		//Crowd around the user will emote and feel the emotion, based on the song and emotion entered.
-		//The reason for this, is to make make this power much less spammable.
-		//As well, IF there is no song entered, it will only work on NPCs.
 
 	// Prompt song and emotion
 	var/userSong = lowertext(trim(input(owner, "What are the words of your melodic voice, Madrigal?") as null|text))
@@ -195,31 +190,39 @@
 
 	var/super_fan_limit = 5
 	var/super_fans = 0
+	var/affectedCrowdmembers = 0
 
+	// Apply the Madrigal effect to all viewers within range
 	for (var/mob/living/carbon/human/listener in oviewers(7, owner))
+		//Is the listener alive?
 		if (!listener || !listener.is_alive())
 			continue
 
+		//Happens to everyone, even if they fail the roll.
 		listener.Stun(1.5 SECONDS)
-		listener.emote(emote_text)
-		listener.visible_message(span_warning("[owner]'s melodic voice affects the crowd!"))
-		listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
+		//listener.emote(emote_text)
+		//listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
+		affectedCrowdmembers++
 
+		//Cosmetic overlay
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
+
+		//Remove the overlay after a short duration. Effect is planned to last longer and be a icon.
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
 
 		var/is_kindred = iskindred(listener)
 		var/is_garou = isgarou(listener)
 		var/is_player = listener.client != null
 
-		var/base_difficulty = 6
-		if (is_kindred) base_difficulty += 2
-		else if (is_garou) base_difficulty += 4
+		// Determine the base difficulty for resisting the powers emotional pull
+		var/base_difficulty = 4
+		if (is_kindred) base_difficulty += 4
+		else if (is_garou) base_difficulty += 2
 		else if (is_player) base_difficulty += 0
-		else base_difficulty = 0 // NPC auto-fail
+		else base_difficulty = 0 // NPCs auto-fail
 
 		var/critical_failure = FALSE
 
@@ -245,7 +248,6 @@
 				to_chat(listener, span_warning("You feel drawn toward [owner]..."))
 				listener.create_superfan(20, owner)
 				super_fans++
-
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
