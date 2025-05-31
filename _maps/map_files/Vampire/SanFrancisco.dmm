@@ -1231,7 +1231,6 @@
 "aqr" = (
 /obj/machinery/door/poddoor/shutters{
 	damage_deflection = 60;
-	id = 1;
 	max_integrity = 300;
 	name = "Parking Shutter"
 	},
@@ -37286,9 +37285,6 @@
 "jPn" = (
 /obj/structure/coclock,
 /obj/structure/table/wood,
-/obj/machinery/computer/libraryconsole/bookmanagement{
-	pixel_y = 9
-	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
 "jPo" = (
@@ -49863,7 +49859,6 @@
 	},
 /obj/vampire_computer{
 	icon_state = "computerprince";
-	pixel_y = 0;
 	pixel_x = -5
 	},
 /turf/open/floor/carpet/purple,
