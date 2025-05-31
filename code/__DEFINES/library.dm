@@ -19,5 +19,3 @@
 #define BOOK_CATEGORY_KUEIJIN "Kuei-Jin"
 /// If making a book of this category it will be randomly selected from all categories
 #define BOOK_CATEGORY_RANDOM "Random"
-
-#define BOOK_CATEGORY_RESTRICTED BOOK_CATEGORY_KINDRED | BOOK_CATEGORY_LUPINE | BOOK_CATEGORY_KUEIJIN | BOOK_CATEGORY_ADULT
