@@ -52,7 +52,7 @@
 	if(load_random_books)
 		var/randomizing_categories = prob(category_prob) || random_category == BOOK_CATEGORY_RANDOM
 		// We only need to run this special logic if we're randomizing a non-adult bookshelf
-		if(randomizing_categories && random_category != BOOK_CATEGORY_ADULT)
+		if(randomizing_categories && random_category != BOOK_CATEGORY_RESTRICTED)
 			// Category is manually randomized rather than using BOOK_CATEGORY_RANDOM
 			// So we can exclude adult books in non-adult bookshelves
 			// And also weight the prime category more heavily
