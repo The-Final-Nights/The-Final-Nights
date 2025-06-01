@@ -116,14 +116,13 @@
 	duration_override = TRUE
 	multi_activate = TRUE
 
-// Helper function to check if a mob is alive
 /mob/proc/is_alive()
 	return istype(src, /mob/living) && !isdead(src)
 
 /datum/discipline_power/melpominee/madrigal/activate()
 	. = ..()
 
-	// Prompt song and emotion
+	// Prompt User for Song and Emotion
 	var/userSong = lowertext(trim(input(owner, "What are the words of your melodic voice, Madrigal?") as null|text))
 	if (!userSong || userSong == "")
 		return
@@ -135,16 +134,12 @@
 	// Validate song input
 	var/song = sanitize(userSong)
 	var/min_message = 10
-	var/max_message = 4000
 
 	if (findtext(song, "*"))
 		to_chat(owner, span_danger("No *'s are allowed in vocal powers!"))
 		return
 	if (length(song) < min_message)
 		to_chat(owner, span_danger("Your song is too short! Must be at least [min_message] characters."))
-		return
-	if (length(song) > max_message)
-		to_chat(owner, span_danger("Your song is too long! Must be less than [max_message] characters."))
 		return
 	if (CHAT_FILTER_CHECK(song))
 		to_chat(owner, span_warning("That song contains a prohibited word. Naughty! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[song]\"</span>"))
@@ -153,7 +148,6 @@
 	//Sings the Song for the user after checks.
 	owner.say(message = userSong, forced = "melpominee 3")
 
-	// Init effect vars
 	var/newEmote = ""
 	var/emote_text = ""
 	var/client_feedback = ""
@@ -163,7 +157,7 @@
 		if ("fear")
 			newEmote = " begins to tremble, in response to [owner]'s melodic voice."
 			emote_text = "tremble"
-			client_feedback = "You feel fear begin to seep into the cracks of your mind, bringing with it pangs of anxiety about the subject of [owner]'s voice."
+			client_feedback = "You feel slight pangs of fear begin to seep into the cracks of your mind, bringing with it anxiety about the subject of [owner]'s voice."
 		if ("joy")
 			newEmote = " begins to grin slightly, in response to [owner]'s melodic voice."
 			emote_text = "grin"
@@ -175,7 +169,7 @@
 		if ("anger")
 			newEmote = " starts to grumble angrily, in response to [owner]'s melodic voice."
 			emote_text = "grumble"
-			client_feedback = "You feel anger, as your blood begins to boil with sudden directionless rage, you turn to [owner]'s their voice guides it, somewhat."
+			client_feedback = "You feel anger, as your blood begins to boil with sudden directionless rage, you turn to [owner], their voice guides your anger, somewhat."
 		if ("awe")
 			newEmote = " looks at [owner] with wide eyes, in response to [owner]'s melodic voice."
 			emote_text = "stare"
@@ -183,7 +177,7 @@
 		if ("humor")
 			newEmote = " begins chuckling slightly, in response to [owner]'s melodic voice."
 			emote_text = "chuckle"
-			client_feedback = "You feel overwhelming humor for the topic of [owner]'s voice.'"
+			client_feedback = "You feel overwhelming humor for the topic of [owner]'s voice."
 		else
 			to_chat(owner, span_warning("Invalid emotion. Try: fear, joy, sorrow, anger, awe, humor."))
 			return
@@ -192,84 +186,96 @@
 	var/super_fans = 0
 	var/affectedCrowdmembers = 0
 
-	// Apply the Madrigal effect to all viewers within range
-	// Apply the Madrigal effect to all viewers within range
+	//rolls for owners social, used to set the difficulty of the roll for player/npc listeners.
+	var/casterRoll = SSroll.storyteller_roll(owner.get_total_social(), mobs_to_show_output = owner, numerical = TRUE)
+
+	//Minimum roll to affect the crowd.
+	if(casterRoll < 3)
+		to_chat(span_notice("(Poor Roll: [casterRoll]) You feel your voice is not strong enough to affect the crowd, try again later."))
+		return //Hardstop on the power if the caster roll is too low.
+
+
+	// Attempts to apply the Madrigal effect to all viewers within range
 	for (var/mob/living/carbon/human/listener in oviewers(7, owner))
-		//Is the listener alive?
-		if (!listener || !listener.is_alive())
+		if (!listener || !listener.is_alive()) //This works on dead people without this check. Lol.
 			continue
 
-		//Happens to everyone, even if they fail the roll.
-		//listener.emote(emote_text)
+		//Storage.
 		//listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
 		var/is_npc = istype(listener, /mob/living/carbon/human/npc)
 		var/is_player = listener.client != null
+		var/is_kindred = iskindred(listener)
+		var/is_garou = isgarou(listener)
+		var/base_difficulty = 6
+		var/botched_roll = FALSE
 
-		// Happens to everyone, even if they fail the roll.
+		//Happens to all listeners, even if they resist, they feel a hint of something.
 		listener.Stun(2 SECONDS)
 		affectedCrowdmembers++
 
-		//Cosmetic overlay
 		// Cosmetic overlay
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
-
-		// Remove the overlay after a short duration. Effect is planned to last longer and be a icon.
+		// Remove the overlay after a short duration. Actual effects can lasts longer with strong RP.
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
 
-		if (is_npc)
+		//NPCs Superfans
+		if (is_npc && casterRoll >= 3) //will move some of this to NPC_movement.dm later, probably.
 			var/mob/living/carbon/human/npc/N = listener
-			walk(N, 0)            // Stop NPC movement
-			N.old_movement = TRUE     // Prevent automatic ChoosePath() rerouting
-			N.walktarget = null       // Block handle_automated_movement()
+			walk(N, 0)            // Stops NPC movement
+			N.old_movement = TRUE
+			N.walktarget = null
 
-		var/is_kindred = iskindred(listener)
-		var/is_garou = isgarou(listener)
+			//Sets the NPC to be a Superfan, if the caster passes the roll.
+			botched_roll = TRUE
+			listener.create_superfan(60, owner)
+			super_fans++
 
-		var/base_difficulty = 6
-
-		if (base_difficulty < 0)
-			if (is_npc)
-				var/mob/living/carbon/human/npc/N = listener
-				if (!N.is_talking)
-					spawn(rand(3, 7))
-						N.RealisticSay(pick(N.socialrole?.random_phrases))
-			else if (is_player)
-				listener.emote("stagger")
-				listener.visible_message(span_warning("[listener] stumbles!"), span_userdanger("The music shakes you."))
+		//Player Rolls:
+		if (is_player && !is_npc)
+			if (is_kindred)
+				base_difficulty = 4
+			else if (is_garou)
+				base_difficulty = 5
+			else //mortals/other/catchall
+				base_difficulty = 6
 			continue
 
-		var/critical_failure = FALSE
+		// Player Listener's Roll
+			var/result = SSroll.storyteller_roll( listener.get_total_mentality(), base_difficulty, mobs_to_show_output = listener, numerical = TRUE)
+			to_chat(owner, span_warning("[listener] rolled [result] successes your [casterRoll] casted Madrigal!")) //Debug Stuff
 
-		// Listener rolls to resist the emotional pull
-		if (base_difficulty > 0)
-			var/result = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, mobs_to_show_output = listener)
-
-			if (result > 0) // Success
-				to_chat(listener, span_notice("(Success) You resist the emotional pull."))
+			if (result <= 0) // Botched roll (0 successes, assumed to have at least one, natural 1, for now. Not sure how to check that, yet.)
+				botched_roll = TRUE
+				listener.emote(emote_text)
+				listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
+				to_chat(listener, span_danger("(Botched Failure: [result]) You are completely overwhelmed with emotion and enamored with [owner]!"))
 				continue
 
-			else if (result == 0) // Failure
-				if (is_player && !is_kindred && !is_garou)
-					to_chat(listener, span_danger("(Failure) You feel [emotion] fill your mind."))
-					continue
+			else if (result >= casterRoll) // Success, compares the caster roll to the listener roll.
+				to_chat(listener, span_notice("(Success: [result]) You resist the emotional pull of [owner]'s voice, and might notice a shift in the crowd."))
+				continue
 
-			else if (result < 0) // Critical Failure
-				critical_failure = TRUE
-				if (is_player)
-					to_chat(listener, span_danger("(Critical Failure) You are completely overwhelmed with emotion and enamored with [owner]!"))
+			else if (result < casterRoll) // Failure, listener roll is less than the caster rolled successes.
+				if (is_player && !is_kindred && !is_garou)
+					to_chat(listener, span_danger("(Failure: [result]) You feel [emotion] fill your mind."))
+					listener.emote(emote_text)
+					listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
+					continue
 
 		// Superfan creation
 		if (super_fans < super_fan_limit)
-			if (!listener.client) // NPC superfan
-				listener.create_superfan(60, owner)
+			if (botched_roll) // Player becomes a superfan temporarily, compelled to be near the caster.
+				to_chat(listener, span_warning("You feel drawn toward [owner], you can't seem to leave their side..."))
+				listener.create_superfan(20, owner) // Superfan lasts for only 20 seconds for players, should still have control,
+				//but compelled to walk to the cast when too far away, like superfans.
 				super_fans++
-			else if (critical_failure) // Player superfan
-				to_chat(listener, span_warning("You feel drawn toward [owner]..."))
-				listener.create_superfan(20, owner)
-				super_fans++
+
+	//After the effected listeners have been processed, we can give feedback to the caster, and Logging.
+	to_chat(owner, span_warning("Successes [casterRoll] : You affected [affectedCrowdmembers] member(s) of the crowd with [emotion]!"))
+
 
 /datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
 	. = ..()

@@ -1345,7 +1345,7 @@ var/tmp/walktarget
 		src.dir = get_dir(src, walk_to_target)
 
 	// Optional: small chance to emote while entranced
-	if (prob(10))
+	if (prob(5))
 		emote("stare") // or "stare", "smile", etc.
 
 /mob/living/carbon/human/species/abductor
