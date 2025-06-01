@@ -668,15 +668,19 @@
 
 /datum/action/gift/close_distance/Trigger()
 	. = ..()
-	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
-		if(C.stat != DEAD)
-			SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_activate.ogg', 0, 0, 75))
-			C.add_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
-			to_chat(owner, "<span class='warning'>You feel <b>PUMPED UP!</b></span>")
-			spawn(6 SECONDS)
-				C.remove_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
-				SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_deactivate.ogg', 0, 0, 75))
-				to_chat(owner, "<span class='warning'>You feel yourself slow down again...</span>")
+	if(!allowed_to_proceed)
+		return
+	var/mob/living/carbon/C = owner
+	if(owner.stat == DEAD)
+		return
+	SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_activate.ogg', 0, 0, 75))
+	C.add_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
+	to_chat(owner, "<span class='warning'>You feel <b>PUMPED UP!</b></span>")
+	addtimer(CALLBACK(src, PROC_REF(end_dash), C), 6 SECONDS)
+
+/datum/action/gift/close_distance/proc/end_dash(mob/living/carbon/C)
+	C.remove_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
+	SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_deactivate.ogg', 0, 0, 75))
+	to_chat(owner, "<span class='warning'>You feel yourself slow down again...</span>")
 
 #undef DOGGY_ANIMATION_COOLDOWN
