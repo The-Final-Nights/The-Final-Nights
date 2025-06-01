@@ -34,7 +34,7 @@
 	//prevent forceful emoting and whatnot
 	new_say = trim(copytext_char(sanitize(new_say), 1, MAX_MESSAGE_LEN))
 	if (findtext(new_say, "*"))
-		to_chat(owner, span_danger("You can't force others to perform emotes!"))
+		to_chat(owner, span_userdanger("You can't force others to perform emotes!"))
 		return
 
 	if (CHAT_FILTER_CHECK(new_say))
@@ -127,10 +127,10 @@
 	var/song = sanitize(userSong)
 	var/min_message = 10
 	if (findtext(song, "*"))
-		to_chat(owner, span_danger("No *'s are allowed in vocal powers!"))
+		to_chat(owner, span_warning("No *'s are allowed in vocal powers!"))
 		return
 	if (length(song) < min_message)
-		to_chat(owner, span_danger("Your song is too short! Must be at least [min_message] characters."))
+		to_chat(owner, span_warning("Your song is too short! Must be at least [min_message] characters."))
 		return
 	if (CHAT_FILTER_CHECK(song))
 		to_chat(owner, span_warning("That song contains a prohibited word. Naughty! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[song]\"</span>"))
@@ -215,24 +215,25 @@
 			botched_roll = TRUE //used to igonore the roll for NPCs later.
 
 		// Listener's Roll to Resist.
-		if (!botched_roll) //Ignore Rolls, if prebotched.
+		if (!botched_roll) //Ignore Rolls, if Pre-Botched, like for npcs.
 			var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
 
-			if (targetRoll <= 0) // Botched roll (0 successes, assumed to have at least one, natural 1, for now. Not sure how to check that, yet.)
+			if (targetRoll <= 0) // Botched roll (0 successes, are assumed to have at least one, natural 1, for now. Not sure how to check that, yet.)
 				botched_roll = TRUE //Will be a Superfan.
 				listener.emote(emote_text)
 				listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
-				to_chat(listener, span_danger("(Botched Failure: [targetRoll]) You are completely overwhelmed with emotion and enamored with [owner]!"))
+				to_chat(listener, span_danger("(Botched Failure: [targetRoll]) You are completely overwhelmed with [emotion] and enamored with [owner]!"))
 				continue
 
 			if (targetRoll > casterRoll) // Success, compares the caster roll to the listener roll.
-				to_chat(listener, span_notice("(Success: [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a shift in the crowd."))
+				to_chat(listener, span_notice("(Success: [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a strange shift in the crowd."))
+				listener.visible_message(listener, span_userdanger("[client_feedback]"))
 				continue
 
 			if (targetRoll <= casterRoll) // Failure, listener roll is less than the caster rolled successes.
 				to_chat(listener, span_danger("(Failure: [targetRoll]) You feel [emotion] fill your mind."))
 				listener.emote(emote_text)
-				//listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
+				listener.visible_message(span_userdanger("[client_feedback]"))
 				continue
 			continue
 
