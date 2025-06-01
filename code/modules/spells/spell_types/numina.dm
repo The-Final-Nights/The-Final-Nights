@@ -7,8 +7,7 @@
 	clothes_req = FALSE
 	charge_max = 100
 	cooldown_min = 50
-	invocation = ""
-	invocation_type = INVOCATION_WHISPER
+	invocation_type = "none"
 	school = "Boni Spiritus"
 	sound = 'sound/magic/staff_healing.ogg'
 
