@@ -86,7 +86,7 @@
 
 /datum/discipline_power/mytherceria/goblinism/post_gain()
 	. = ..()
-	var/datum/action/mytherceria/changeling_rune = new()
+	var/datum/action/secondary_power/mytherceria/changeling_rune = new()
 	changeling_rune.Grant(owner)
 
 /obj/item/clothing/mask/facehugger/kiasyd
@@ -142,14 +142,15 @@
 		to_chat(C, span_warning("[src] is eating your face!"))
 		C.apply_damage(5, BRUTE)
 
-/datum/action/mytherceria
+/datum/action/secondary_power/mytherceria
 	name = "Mytherceria Traps"
 	desc = "Create a trap."
 	button_icon_state = "mytherceria"
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
+	old_discipline_icon_state = "mytherceria-traps"
 
-/datum/action/mytherceria/Trigger()
+/datum/action/secondary_power/mytherceria/Trigger()
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	var/try_trap = input(H, "Select a Trap:", "Trap") as null|anything in list("Brutal", "Spin", "Drop")

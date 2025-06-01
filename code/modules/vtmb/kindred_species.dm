@@ -208,7 +208,7 @@
 	var/datum/discipline/bloodheal/giving_bloodheal = new(clamp(11 - C.generation, 1, 10))
 	C.give_discipline(giving_bloodheal)
 
-	var/datum/action/blood_power/bloodpower = new()
+	var/datum/action/secondary_power/blood_power/bloodpower = new()
 	bloodpower.Grant(C)
 
 	add_verb(C, /mob/living/carbon/human/verb/teach_discipline)
@@ -244,26 +244,19 @@
 		if(A?.vampiric)
 			A.Remove(C)
 
-/datum/action/blood_power
+/datum/action/secondary_power/blood_power
 	name = "Blood Power"
 	desc = "Use vitae to gain supernatural abilities."
 	button_icon_state = "bloodpower"
-	button_icon = 'code/modules/wod13/UI/actions.dmi'
+	//button_icon = 'code/modules/wod13/UI/actions.dmi'
 	background_icon_state = "discipline"
-	icon_icon = 'code/modules/wod13/UI/actions.dmi'
+	//icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
 
-/datum/action/blood_power/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	if(owner?.client?.prefs?.old_discipline)
-		button_icon = 'code/modules/wod13/disciplines.dmi'
-		icon_icon = 'code/modules/wod13/disciplines.dmi'
-	else
-		button_icon = 'code/modules/wod13/UI/actions.dmi'
-		icon_icon = 'code/modules/wod13/UI/actions.dmi'
-	. = ..()
 
-/datum/action/blood_power/Trigger()
+
+/datum/action/secondary_power/blood_power/Trigger()
 	if(iskindred(owner))
 		if(HAS_TRAIT(owner, TRAIT_TORPOR))
 			return
@@ -295,7 +288,7 @@
 			SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 			to_chat(BD, span_warning("You don't have enough <b>BLOOD</b> to become more powerful."))
 
-/datum/action/blood_power/proc/end_bloodpower()
+/datum/action/secondary_power/blood_power/proc/end_bloodpower()
 	if(owner && ishuman(owner))
 		var/mob/living/carbon/human/BD = owner
 		to_chat(BD, span_warning("You feel like your <b>BLOOD</b>-powers slowly decrease."))

@@ -341,7 +341,7 @@
 
 /datum/discipline_power/vicissitude/bonecrafting/post_gain()
 	. = ..()
-	var/datum/action/basic_vicissitude/vicissitude_upgrade = new()
+	var/datum/action/secondary_power/basic_vicissitude/vicissitude_upgrade = new()
 	vicissitude_upgrade.Grant(owner)
 	var/obj/item/organ/cyberimp/arm/tzimisce/armblade = new()
 	armblade.Insert(owner)
@@ -359,7 +359,7 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzicreature)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/cattzi)
 
-/datum/action/basic_vicissitude
+/datum/action/secondary_power/basic_vicissitude
 	name = "Vicissitude Upgrade"
 	desc = "Upgrade your body..."
 	button_icon_state = "basic"
@@ -370,8 +370,9 @@
 	var/original_skin_tone
 	var/original_hairstyle
 	var/original_body_mod
+	old_discipline_icon_state = "fleshcrafting"
 
-/datum/action/basic_vicissitude/Trigger()
+/datum/action/secondary_power/basic_vicissitude/Trigger()
 	. = ..()
 	if (selected_upgrade)
 		remove_upgrade()
@@ -380,7 +381,7 @@
 
 	owner.update_body()
 
-/datum/action/basic_vicissitude/proc/give_upgrade()
+/datum/action/secondary_power/basic_vicissitude/proc/give_upgrade()
 	var/mob/living/carbon/human/user = owner
 	var/upgrade = input(owner, "Choose basic upgrade:", "Vicissitude Upgrades") as null|anything in list("Skin armor", "Centipede legs", "Second pair of arms", "Leather wings")
 	if(!upgrade)
@@ -426,7 +427,7 @@
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
 
-/datum/action/basic_vicissitude/proc/remove_upgrade()
+/datum/action/secondary_power/basic_vicissitude/proc/remove_upgrade()
 	var/mob/living/carbon/human/user = owner
 	if (!selected_upgrade)
 		return
@@ -461,7 +462,7 @@
 
 	selected_upgrade = null
 
-/datum/action/advanced_vicissitude
+/datum/action/secondary_power/advanced_vicissitude
 	name = "Advanced Vicissitude Upgrade"
 	desc = "Upgrade your body further..."
 	button_icon_state = "basic"
@@ -472,8 +473,9 @@
 	var/advanced_original_skin_tone //Shouldn't be necessary most of the time, but in case someone combines the changes for the two armours.
 	var/advanced_original_hairstyle
 	var/advanced_original_body_mod
+	old_discipline_icon_state = "fleshcrafting"
 
-/datum/action/advanced_vicissitude/Trigger()
+/datum/action/secondary_power/advanced_vicissitude/Trigger()
 	. = ..()
 	if (selected_advanced_upgrade)
 		remove_advanced_upgrade()
@@ -482,7 +484,7 @@
 
 	owner.update_body()
 
-/datum/action/advanced_vicissitude/proc/give_advanced_upgrade()
+/datum/action/secondary_power/advanced_vicissitude/proc/give_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
 	var/advancedupgrade = input(owner, "Choose basic upgrade:", "Advanced Vicissitude Upgrades") as null|anything in list("Bone armour", "Centipede legs", "Second pair of arms", "Membrane wings")
 	if(!advancedupgrade)
@@ -534,7 +536,7 @@
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
 
-/datum/action/advanced_vicissitude/proc/remove_advanced_upgrade()
+/datum/action/secondary_power/advanced_vicissitude/proc/remove_advanced_upgrade()
 	var/mob/living/carbon/human/user = owner
 	if (!selected_advanced_upgrade)
 		return
@@ -645,10 +647,10 @@
 
 /datum/discipline_power/vicissitude/bloodform/post_gain()
 	. = ..()
-	for(var/datum/action/basic_vicissitude/vicissitude_upgrade in owner.actions)
+	for(var/datum/action/secondary_power/basic_vicissitude/vicissitude_upgrade in owner.actions)
 		vicissitude_upgrade.Remove(owner)
 
-	var/datum/action/advanced_vicissitude/vicissitude_upgrade_advanced = new()
+	var/datum/action/secondary_power/advanced_vicissitude/vicissitude_upgrade_advanced = new()
 	vicissitude_upgrade_advanced.Grant(owner)
 
 // REWORK ABILITIES AND VERBS
