@@ -165,8 +165,8 @@
 	maxHealth = 20
 	health = 20
 	harm_intent_damage = 10
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	melee_damage_lower = 8
+	melee_damage_upper = 14
 	emote_see = list("chitters menacingly", "rubs its digit-limbs together", "squeaks")
 	attack_verb_continuous = "nibbles"
 	attack_verb_simple = "nibble"
@@ -179,7 +179,7 @@
 	pixel_w = rand(-8, 8)
 	pixel_z = rand(-8, 8)
 
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3 //Middling dog-level threat. Maxhealth to summon: 20 to 50
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3 //Middling dog-level threat. Maxhealth to summon: 20 to 70
 	name = "compagno"
 	desc = "Four legs and a menacing set of jaws is all this shambling thing shares with a canine."
 	icon = 'code/modules/wod13/mobs.dmi'
@@ -208,7 +208,7 @@
 	speak_emote = list("borks")
 	deathmessage = "falls apart in a pile of fur and bones!"
 
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4 //Tanky, but slowed bruiser. Maxhealth to summon: 50 to 150
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4 //Tanky, but slowed bruiser. Maxhealth to summon: 70 to 150
 	name = "verme"
 	desc = "Husk of a man, puppeteered by some sadistic force."
 	icon = 'code/modules/wod13/mobs.dmi'
