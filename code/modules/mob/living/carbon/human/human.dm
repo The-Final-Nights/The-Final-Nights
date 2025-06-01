@@ -1297,7 +1297,7 @@
 	equip_to_slot_or_del(new /obj/item/clothing/under/vampire/bouncer(src), ITEM_SLOT_ICLOTHING)
 	equip_to_slot_or_del(new /obj/item/clothing/suit/vampire/trench/alt(src), ITEM_SLOT_OCLOTHING)
 
-// This sets up NPC SUPERFAN behavior, and can be modified for use in other TFN behaviors, currently for Melpominee Discipline.
+// This sets up NPC SUPERFAN behavior, and can be called for use in other TFN behaviors, currently for the Melpominee Discipline.
 /mob/living/carbon/human
 	var/tmp/superfan_active = FALSE
 	var/tmp/superfan_target = null
@@ -1310,15 +1310,14 @@ var/tmp/walktarget
 
 	superfan_active = TRUE
 	superfan_target = walk_to_target
-
-	walktarget = null // ← ADD THIS LINE to clear AI's goal
-	walk(src, 0)      // ← Stop any current path
+	walktarget = null
+	walk(src, 0)
 
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(walk_to_superfan_target), walk_to_target)
 	for (var/i in 1 to duration)
 		addtimer(follow_cb, (i - 1) * total_multiplicative_slowdown())
 
-	// End Superfan behavior
+	// Ends Superfan behavior after the set time.
 	addtimer(CALLBACK(src, PROC_REF(end_superfan_effect)), duration * total_multiplicative_slowdown())
 
 /mob/living/carbon/human/proc/end_superfan_effect()
@@ -1328,8 +1327,6 @@ var/tmp/walktarget
 	if (isnpc(src))
 		walktarget = src:ChoosePath()
 
-
-
 /mob/living/carbon/human/proc/walk_to_superfan_target(mob/living/walk_to_target)
 	if (!src || !walk_to_target || !superfan_active)
 		return
@@ -1337,16 +1334,14 @@ var/tmp/walktarget
 	var/distance = get_dist(src, walk_to_target)
 
 	if (distance > 5)
-		step_towards(src, walk_to_target)
-	else if (distance > 1)
-		step_to(src, walk_to_target)
-	else
-		// Within 1 tile: just turn to face the target, no movement
-		src.dir = get_dir(src, walk_to_target)
+		step_towards(src, walk_to_target) // too far, close the distance
+	else if (distance <= 2)
+		src.dir = get_dir(src, walk_to_target) // very close — just face them
+		return
 
-	// Optional: small chance to emote while entranced
-	if (prob(5))
-		emote("stare") // or "stare", "smile", etc.
+	// Small chance to emote when entranced
+	if (prob(3))
+		emote(pick("stare", "smile", "sway"))
 
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor
