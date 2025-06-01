@@ -9,12 +9,12 @@
 	valueholder = null
 	return ..()
 
-/datum/buildmode_mode/varedit/show_help(client/c)
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
-	to_chat(c, "<span class='notice'>Right Mouse Button on buildmode button = Select var(type) & value</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Set var(type) & value</span>")
-	to_chat(c, "<span class='notice'>Right Mouse Button on turf/obj/mob     = Reset var's value</span>")
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
+/datum/buildmode_mode/varedit/show_help(client/builder)
+	to_chat(builder, span_purple(boxed_message(
+		"[span_bold("Select var(type) & value")] -> Right Mouse Button on buildmode button\n\
+		[span_bold("Set var(type) & value")] -> Left Mouse Button on turf/obj/mob\n\
+		[span_bold("Reset var's value")] -> Right Mouse Button on turf/obj/mob"))
+	)
 
 /datum/buildmode_mode/varedit/Reset()
 	. = ..()
@@ -23,7 +23,7 @@
 
 /datum/buildmode_mode/varedit/change_settings(client/c)
 	varholder = input(c, "Enter variable name:" ,"Name", "name")
-	
+
 	if(!vv_varname_lockcheck(varholder))
 		return
 
