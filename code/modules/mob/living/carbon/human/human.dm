@@ -1333,9 +1333,9 @@ var/tmp/walktarget
 
 	var/distance = get_dist(src, walk_to_target)
 
-	if (distance > 5)
+	if (distance > 2)
 		step_towards(src, walk_to_target) // too far, close the distance
-	else if (distance <= 2)
+	else if (distance <= 0)
 		src.dir = get_dir(src, walk_to_target) // very close — just face them
 		return
 
