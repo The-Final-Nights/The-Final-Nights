@@ -2375,6 +2375,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (discipline.clan_restricted)
 							possible_new_disciplines -= discipline_type
 						qdel(discipline)
+					if(length(discipline_types) >= 3)
+						to_chat(user, span_notice("You cannot select more than three disciplines! Acquire more through roleplay!"))
+						return
 					var/new_discipline = tgui_input_list(user, "Select your new Discipline", "Discipline Selection", sort_list(possible_new_disciplines))
 					if(new_discipline)
 						discipline_types += new_discipline
