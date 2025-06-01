@@ -733,6 +733,11 @@
 		to_chat(teacher, span_warning("You need to have fed your student your blood to teach them Disciplines!"))
 		return
 
+	if(length(student_prefs.discipline_types) >= 5 && !SSwhitelists.is_whitelisted(student.ckey, TRUSTED_PLAYER))
+		to_chat(teacher, span_warning("Your student must be whitelisted to learn more than five disciplines!"))
+		to_chat(student, span_warning("You must be whitelisted to learn more than five disciplines!"))
+		return
+
 	var/possible_disciplines = teacher_prefs.discipline_types - student_prefs.discipline_types
 	var/teaching_discipline = input(teacher, "What Discipline do you want to teach [student.name]?", "Discipline Selection") as null|anything in possible_disciplines
 
