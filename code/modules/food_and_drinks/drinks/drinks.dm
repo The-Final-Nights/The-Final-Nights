@@ -242,6 +242,7 @@
 	blood_donors = list() // Initialize the list
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/update_icon_state()
+	. = ..()
 	if(reagents && reagents.has_reagent(/datum/reagent/blood))
 		icon_state = "pewter_cup_filled_blood"
 	else
@@ -351,7 +352,9 @@
 		if(!is_sabbatist(M))
 			to_chat(M, span_cult("You feel your previous blood bonds vanishing as you take part in the Vaulderie and join the Sabbat..."))
 			M.mind.assigned_role = "Sabbat Pack"
-			add_antag_hud(ANTAG_HUD_REV, "rev", M)
+			var/datum/antagonist/temp_antag = new()
+			temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", M)
+			qdel(temp_antag)
 	else
 		// Single donor case - Transfer sabbat status from donor if they have it
 		var/antag_transferred = FALSE
@@ -363,7 +366,9 @@
 				if(M.mind && !is_sabbatist(M))
 					to_chat(M, span_warning("You feel a strange connection to [donor] as you drink their blood..."))
 					M.mind.assigned_role = "Sabbat Pack"
-					add_antag_hud(ANTAG_HUD_REV, "rev", M)
+					var/datum/antagonist/temp_antag = new()
+					temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", M)
+					qdel(temp_antag)
 					antag_transferred = TRUE
 					break
 
@@ -394,6 +399,7 @@
 	icon_state = "vaulderie_goblet"
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet/update_icon_state()
+	. = ..()
 	if(reagents && reagents.has_reagent(/datum/reagent/blood))
 		icon_state = "vaulderie_goblet_filled"
 	else

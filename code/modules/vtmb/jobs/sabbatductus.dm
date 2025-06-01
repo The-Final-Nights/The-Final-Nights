@@ -54,16 +54,15 @@
 	if(H.clane && H.clane.name != "Lasombra")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 	if(H.mind)
-		add_antag_hud(ANTAG_HUD_REV, "rev_head", H)
+		var/datum/antagonist/temp_antag = new()
+		temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev_head", H)
+		qdel(temp_antag)
 
 /obj/effect/landmark/start/sabbatductus
 	name = "Sabbat Ductus"
 	icon_state = "Assistant"
 
-
-
 /datum/antagonist/sabbatist/sabbatductus/on_gain()
-
 	owner.special_role = src
 	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, use_reverb = FALSE)
 	return ..()

@@ -56,7 +56,9 @@
 	if(H.clane && H.clane.name != "Lasombra")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 	if(H.mind)
-		add_antag_hud(ANTAG_HUD_REV, "rev", H)
+		var/datum/antagonist/temp_antag = new()
+		temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", H)
+		qdel(temp_antag)
 
 
 /obj/effect/landmark/start/sabbatpack
@@ -79,7 +81,3 @@
 	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, use_reverb = FALSE)
 	return ..()
 
-/datum/antagonist/proc/add_antag_hud(antag_hud_type, antag_hud_name, mob/living/mob_override)
-	var/datum/atom_hud/antag/hud = GLOB.huds[antag_hud_type]
-	hud.join_hud(mob_override)
-	set_antag_hud(mob_override, antag_hud_name)

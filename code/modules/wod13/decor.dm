@@ -1433,22 +1433,17 @@
 /obj/structure/bath/sabbatbath/Initialize()
 	. = ..()
 	create_reagents(max_blood, INJECTABLE)
-	reagents.add_reagent(/datum/reagent/blood, 0)
 	update_icon()
 
 /obj/structure/bath/sabbatbath/examine(mob/user)
 	. = ..()
 	if(blood_level <= 0)
-		. += "<span class='notice'>The bath is empty.</span>"
-	else if(blood_level < max_blood * 0.25)
-		. += "<span class='notice'>The bath has a small amount of blood in it.</span>"
-	else if(blood_level < max_blood * 0.75)
-		. += "<span class='notice'>The bath is partially filled with blood.</span>"
+		. += span_notice("The bath is empty.")
 	else
-		. += "<span class='notice'>The bath is filled with blood.</span>"
+		. += span_notice("The bath is filled with blood.")
 
 	if(length(blood_donors) > 0)
-		. += "<span class='notice'>You can sense [length(blood_donors)] different blood donor[length(blood_donors) == 1 ? "" : "s"] in the mixture.</span>"
+		. += span_notice("You can sense [length(blood_donors)] different blood donor[length(blood_donors) == 1 ? "" : "s"] in the mixture.")
 
 /obj/structure/bath/sabbatbath/update_icon()
 	. = ..()
@@ -1464,7 +1459,9 @@
 			var/mob/living/buckled_mob = buckled_mobs[1]
 			if(buckled_mob.mind)
 				buckled_mob.mind.assigned_role = "Sabbat Ductus"
-				add_antag_hud(ANTAG_HUD_REV, "rev_head", buckled_mob)
+				var/datum/antagonist/temp_antag = new()
+				temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev_head", buckled_mob)
+				qdel(temp_antag)
 				to_chat(user, span_notice("[buckled_mob] has been anointed as the new Ductus."))
 				to_chat(buckled_mob, span_cult("You have been anointed as the new Ductus of the pack!"))
 		return
@@ -1732,9 +1729,9 @@
 		return
 
 	kindred.enter_frenzymod()
-	to_chat(kindred, "<span class='userdanger'>The Beast within you awakens with primal fury! You will NOT be contained!</span>")
+	to_chat(kindred, span_userdanger("The Beast within you awakens with primal fury! You will NOT be contained!"))
 
-	visible_message("<span class='danger'>[src] begins to shake violently as something struggles underneath!</span>")
+	visible_message(span_danger("[src] begins to shake violently as something struggles underneath!"))
 
 	// After a brief delay, the kindred breaks free
 	addtimer(CALLBACK(src, PROC_REF(complete_kindred_escape), kindred), 5 SECONDS)
