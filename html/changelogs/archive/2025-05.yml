@@ -224,3 +224,36 @@
 2025-05-26:
   Marshmellow105:
   - code_imp: FBI agents are no longer a whitelisted role.
+  tzui5020:
+  - bugfix: Fixed the hoodie in the loadout
+2025-05-27:
+  Merek2:
+  - bugfix: Added a period to sweat and eyeroll emote.
+2025-05-28:
+  TheTrueSilverRat:
+  - bugfix: Fixed the Salubri Traits runtime by changing RegisterSignal to RegisterSignals
+2025-05-29:
+  XeonMations:
+  - server: Server's database updated to TG modern.
+  chazzyjazzy:
+  - bugfix: fixes clothes not becoming bloody after stepping in blood / being in combat
+2025-05-30:
+  ShadeAware:
+  - rscadd: SNEKTEK has just released their new line of budget handheld tasers. Defense
+      for the common man and woman!
+  - rscadd: Gun stores have started carrying less-than-lethal alternatives, such as
+      hand-tasers and pepperspray.
+  buffyuwu:
+  - bugfix: fixed the flame master hunter loadout not giving items
+2025-05-31:
+  Kevak:
+  - balance: Lively Aura now costs 2 qp rather than 3.
+  - balance: Latin now costs 1qp rather than 2.
+  - qol: Mechanically enforces Discipline Cap
+  - balance: Caitiffs can no longer select eight disciplines out the gate.
+  - admin: Trusted players can bypass discipline learning softcap, as can admin discipline
+      rewards.
+  TheTrueSilverRat:
+  - rscadd: Eye color change when you use Protean Rank 1
+  buffyuwu:
+  - server: updated hub entry
