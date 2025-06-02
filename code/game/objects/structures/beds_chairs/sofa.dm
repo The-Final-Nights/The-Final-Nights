@@ -28,7 +28,7 @@
 	return
 
 /obj/structure/chair/sofa/old
-	color = #8d4600
+	color = "#8d4600"
 	name = "old sofa"
 	desc = "An old design, but it still does the job of being a sofa."
 	icon_state = "sofamiddle"
