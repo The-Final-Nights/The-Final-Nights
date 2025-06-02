@@ -8,6 +8,11 @@
 /datum/discipline/necromancy/post_gain()
 	. = ..()
 	owner.faction |= "Giovanni"
+	var/datum/action/necroritualism/ritualist = new()
+	owner.necromancy_knowledge = TRUE
+	ritualist.Grant(owner)
+	ritualist.level = level
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/necrotome)
 
 /datum/discipline_power/necromancy
 	name = "Necromancy power name"
@@ -290,14 +295,6 @@
 
 
 // RITUALISM
-
-/datum/discipline_power/necromancy/ashes_to_ashes/post_gain()
-	. = ..()
-	var/datum/action/necroritualism/ritualist = new()
-	owner.necromancy_knowledge = TRUE
-	ritualist.Grant(owner)
-	ritualist.level = level
-	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/necrotome)
 
 /datum/crafting_recipe/necrotome
 	name = "Necromantic Ritualism Tome"
