@@ -511,6 +511,11 @@
 					wyrm_taint++
 				named_splat = "You scent the dark journey through Erebus permeating this body, the mark of the Wan Kuei."
 
+			if(iszombie(src))
+				seems_alive = 0
+				wyrm_taint++
+				named_splat = "You scent nothing but the stench of death and decay - this is no living creature."
+
 			if (iskindred(src))
 				named_splat = "You scent the shiveringly addictive vitae of the children of Caine."
 				var/mob/living/carbon/human/vampire = src
