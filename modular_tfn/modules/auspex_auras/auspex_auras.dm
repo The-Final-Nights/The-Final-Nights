@@ -28,7 +28,7 @@
 		else
 			holder.color = AURA_MORTAL_DISARM
 
-	if (iskindred(src) || HAS_TRAIT(src, TRAIT_COLD_AURA) || (iscathayan(src) && !H.check_kuei_jin_alive()))
+	if (iskindred(src) || HAS_TRAIT(src, TRAIT_COLD_AURA) || (iscathayan(src) && !H.check_kuei_jin_alive()) || iszombie(src))
 		//pale aura for vampires
 		if(!HAS_TRAIT(src, TRAIT_WARM_AURA))
 			switch(a_intent)
