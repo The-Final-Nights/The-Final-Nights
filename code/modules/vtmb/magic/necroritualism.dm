@@ -261,14 +261,14 @@
 	var/mob/living/carbon/victim = pick(valid_bodies)
 
 	var/isNPC = TRUE
-	var/permission = tgui_input_list(victim, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+	var/permission = tgui_input_list(victim, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"No", 1 MINUTES)
 	var/victim_two = victim
 
 	if (!permission) //returns null if no soul in body
 		for (var/mob/dead/observer/ghost in GLOB.player_list)
 			if (ghost.mind == victim.last_mind)
 				//ask again if null
-				permission = tgui_input_list(ghost, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+				permission = tgui_input_list(ghost, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"No", 1 MINUTES)
 				victim_two = ghost
 				break //no need to do further iterations if you found the right person
 
