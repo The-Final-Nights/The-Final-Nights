@@ -1,0 +1,11 @@
+2025-06-01:
+  SoreYew:
+  - rscadd: Redesigned the Anarch Bar
+  - rscadd: Garage building east of the bar, west of the hospital
+2025-06-02:
+  XeonMations:
+  - bugfix: Fixed contraband books spawning where they shouldn't.
+  - map: Fixed there being duplicate camarilla faxes
+  - map: Removed glasswalker library computer
+  - map: Fixed general bookshelves not being random
+  - server: Disabled BYOND side authentication.

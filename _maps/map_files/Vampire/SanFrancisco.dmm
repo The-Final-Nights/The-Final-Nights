@@ -1231,7 +1231,6 @@
 "aqr" = (
 /obj/machinery/door/poddoor/shutters{
 	damage_deflection = 60;
-	id = 1;
 	max_integrity = 300;
 	name = "Parking Shutter"
 	},
@@ -27551,12 +27550,11 @@
 	pixel_y = 14;
 	pixel_x = 19
 	},
-/obj/item/pen/fountain/captain{
-	name = "director's fountain pen";
-	desc = "It's an expensive Oak fountain pen. The nib is quite sharp. The letter V is embossed."
-	},
 /obj/item/paper_bin{
 	pixel_y = 6
+	},
+/obj/item/pen/fourcolor{
+	pixel_y = 7
 	},
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/millennium_tower/f4)
@@ -29145,9 +29143,9 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/cog/caern)
 "hEr" = (
-/obj/structure/bookcase/random/religion,
+/obj/structure/bookcase/random,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/banu/haven)
+/area/vtm/interior/chantry/basement)
 "hEA" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/glass/rag,
@@ -33710,10 +33708,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
-"iSI" = (
-/obj/structure/bookcase/random/religion,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/trujah)
 "iSR" = (
 /obj/structure/railing{
 	dir = 10
@@ -37286,9 +37280,6 @@
 "jPn" = (
 /obj/structure/coclock,
 /obj/structure/table/wood,
-/obj/machinery/computer/libraryconsole/bookmanagement{
-	pixel_y = 9
-	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
 "jPo" = (
@@ -47734,7 +47725,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/chinatown)
 "mFU" = (
-/obj/structure/bookcase/random/nonfiction,
+/obj/structure/bookcase/random,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/trujah)
 "mGb" = (
@@ -49863,7 +49854,6 @@
 	},
 /obj/vampire_computer{
 	icon_state = "computerprince";
-	pixel_y = 0;
 	pixel_x = -5
 	},
 /turf/open/floor/carpet/purple,
@@ -51116,7 +51106,7 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower)
 "nwX" = (
-/obj/structure/bookcase/random/nonfiction,
+/obj/structure/bookcase/random,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f3)
 "nxa" = (
@@ -54880,7 +54870,6 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 8
 	},
-/obj/machinery/fax/camarilla,
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/millennium_tower/ventrue)
 "ovO" = (
@@ -56661,7 +56650,7 @@
 /turf/closed/wall/vampwall/wood/low/window,
 /area/vtm/interior)
 "oRt" = (
-/obj/structure/bookcase/random/nonfiction,
+/obj/structure/bookcase/random,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "oRz" = (
@@ -62259,10 +62248,6 @@
 	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
-"qnV" = (
-/obj/structure/bookcase/random/fiction,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/trujah)
 "qnW" = (
 /obj/american_flag{
 	pixel_y = 32
@@ -72779,7 +72764,7 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/f4)
 "sXr" = (
-/obj/structure/bookcase/random/reference,
+/obj/structure/bookcase/random,
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
 "sXJ" = (
@@ -72859,7 +72844,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f2)
 "sYq" = (
-/obj/structure/bookcase,
+/obj/structure/bookcase/random,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "sYv" = (
@@ -73245,10 +73230,6 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/laundromat)
-"tdk" = (
-/obj/structure/bookcase/random/fiction,
-/turf/open/floor/plating/parquetry,
-/area/vtm/interior/millennium_tower/f3)
 "tdp" = (
 /obj/structure/chair/sofa/corp/left{
 	dir = 1
@@ -79819,7 +79800,7 @@
 /turf/closed/wall/vampwall/city,
 /area/vtm/interior/laundromat)
 "uRV" = (
-/obj/structure/bookcase/random/kindred,
+/obj/structure/bookcase/random,
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/chantry/basement)
 "uRY" = (
@@ -86825,7 +86806,6 @@
 /area/vtm/interior/mansion)
 "wId" = (
 /obj/structure/table/glass,
-/obj/machinery/fax/camarilla,
 /turf/open/floor/carpet/red,
 /area/vtm/interior/millennium_tower/ventrue)
 "wIe" = (
@@ -140427,7 +140407,7 @@ gHF
 gHF
 ayI
 vXE
-pYb
+hEr
 raq
 bLR
 mCO
@@ -232663,7 +232643,7 @@ ruG
 ruG
 ruG
 uYa
-iSI
+mFU
 bzp
 bzp
 uNY
@@ -232920,7 +232900,7 @@ kno
 fuh
 kno
 uYa
-qnV
+mFU
 bzp
 bzp
 uNY
@@ -233177,7 +233157,7 @@ kno
 bgM
 kno
 uYa
-qnV
+mFU
 bzp
 bzp
 vUz
@@ -281431,7 +281411,7 @@ ntq
 ntq
 ntq
 pwN
-hEr
+oRt
 nfs
 sSX
 mov
@@ -281688,7 +281668,7 @@ ntq
 ntq
 ntq
 pwN
-hEr
+oRt
 mov
 mxu
 euC
@@ -320334,7 +320314,7 @@ oXo
 fuh
 kno
 pOu
-tdk
+nwX
 bAK
 bAK
 bAK
