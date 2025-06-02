@@ -1,7 +1,0 @@
-author: "XeonMations"
-delete-after: True
-changes:
-  - bugfix: "Fixed contraband books spawning where they shouldn't."
-  - map: "Fixed there being duplicate camarilla faxes"
-  - map: "Removed glasswalker library computer"
-  - map: "Fixed general bookshelves not being random"
