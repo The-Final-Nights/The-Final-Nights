@@ -44,7 +44,7 @@
 		if (antifrenzy)
 			holder.icon = 'icons/effects/32x64.dmi'
 		//black aura for diablerists
-		if (diablerist)
+		if (diablerist || fakediablerist)
 			holder.icon_state = "diablerie_aura"
 
 	if(isgarou(src) || iswerewolf(src))
