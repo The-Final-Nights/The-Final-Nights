@@ -1303,8 +1303,8 @@
 	var/tmp/superfan_target = null
 
 var/tmp/walktarget
-
-/mob/living/carbon/human/proc/create_superfan(duration, mob/living/walk_to_target)
+var/tmp/emotion = "stare" // Default emotion for the superfan behavior
+/mob/living/carbon/human/proc/create_superfan(duration, mob/living/walk_to_target, emotion)
 	if (!walk_to_target || superfan_active)
 		return
 
@@ -1341,7 +1341,7 @@ var/tmp/walktarget
 
 	// Small chance to emote when entranced
 	if (prob(3))
-		emote(pick("stare", "smile", "sway"))
+		emote(emotion)
 
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor

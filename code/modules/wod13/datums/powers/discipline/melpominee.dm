@@ -159,7 +159,7 @@
 			client_feedback = "You feel sorrow begin to weigh down your heart brought on by the subject of [owner]'s melodic words."
 		if ("anger")
 			newEmote = " starts to grumble angrily, in response to [owner]'s melodic voice."
-			emote_text = "grumble"
+			emote_text = pick("grumble", "frown")
 			client_feedback = "You feel anger, as your blood begins to boil with sudden directionless rage, you turn to [owner], their voice guides your anger, somewhat."
 		if ("awe")
 			newEmote = " looks at [owner] with wide eyes, in response to [owner]'s melodic voice."
@@ -222,16 +222,16 @@
 				botched_roll = TRUE //Will be a Superfan.
 				listener.emote(emote_text)
 				listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
-				to_chat(listener, span_danger("(Botched Failure: [targetRoll]) You are completely overwhelmed with [emotion] and enamored with [owner]!"))
+				to_chat(listener, span_danger("(Contested Roll: Botched: [casterRoll] vs [targetRoll]) You are completely overwhelmed with [emotion] and enamored with [owner]!"))
 				continue
 
 			if (targetRoll > casterRoll) // Success, compares the caster roll to the listener roll.
-				to_chat(listener, span_notice("(Success: [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a strange shift in the crowd."))
+				to_chat(listener, span_notice("(Contested Roll: Success: [casterRoll] vs [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a strange shift in the crowd."))
 				listener.visible_message(listener, span_userdanger("[client_feedback]"))
 				continue
 
 			if (targetRoll <= casterRoll) // Failure, listener roll is less than the caster rolled successes.
-				to_chat(listener, span_danger("(Failure: [targetRoll]) You feel [emotion] fill your mind."))
+				to_chat(listener, span_danger("(Contested Roll: Failure: [casterRoll] vs [targetRoll]) You feel [emotion] fill your mind."))
 				listener.emote(emote_text)
 				listener.visible_message(span_userdanger("[client_feedback]"))
 				continue
@@ -240,16 +240,21 @@
 		// Superfan Limiter; Applys Superfan effect to botched listeners.
 		if (super_fans < super_fan_limit)
 			if (botched_roll)
-				to_chat(listener, span_warning("You feel drawn toward [owner], you can't seem to leave their side..."))
+				to_chat(listener, span_warning("You feel enamored by and drawn toward [owner], you can't seem to leave their side..."))
 				if (is_npc)
-					listener.create_superfan(30, owner) // NPCs get a longer Superfan duration.
+					listener.emote(emote_text)
+					listener.create_superfan(30, owner, emote_text) // NPCs get a longer Superfan duration.
 				else
 					// Players/Non-NPCs get a shorter Superfan duration, and only if they botch the roll.
-					listener.create_superfan(10, owner)
+					listener.emote(emote_text)
+					listener.create_superfan(10, owner, emote_text)
 					to_chat(listener, span_warning("You feel drawn toward [owner], you can't seem to leave their side..."))
 				super_fans++
 
-	to_chat(owner, span_warning("Your Successes [casterRoll] : You affected [affectedCrowdmembers] member(s) of the crowd with [emotion], and now have [super_fans] more Superfans!"))
+	to_chat(owner, span_warning("Your Successes: [casterRoll] : You affected [affectedCrowdmembers] member(s) of the crowd with [emotion], and now have [super_fans] more Superfans!"))
+	message_admins("[ADMIN_LOOKUPFLW(owner)] cast the Madrigal DoC Power: With [casterRoll] successes, vocalizing '[song].' They affected [affectedCrowdmembers], and made [super_fans] new Superfans, with a focus on [emotion].")
+	log_game("[key_name(owner)] has used Madrigal DoC power, vocalizing '[song],' with emotion [emotion], and affecting [affectedCrowdmembers] npcs/players.")
+	SSblackbox.record_feedback("tally", "madrigal", 1, song)
 
 /datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
 	. = ..()
