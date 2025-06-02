@@ -115,7 +115,7 @@
 	for(var/obj/item/vtm_artifact/VA in loc)
 		if(VA)
 			VA.identificate()
-			playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
+			playsound(loc, 'code/modules/wod13/sounds/necromancy4.ogg', 50, FALSE)
 			qdel(src)
 			return
 
