@@ -96,13 +96,6 @@
 		zombie2.beastmaster = owner
 
 
-/datum/discipline_power/necromancy/ethereal_horde/post_gain()
-	. = ..()
-
-	var/datum/action/ghost_hear/see_ghosts = new()
-	see_ghosts.Grant(owner)
-
-
 //ASHES TO ASHES
 /datum/discipline_power/necromancy/ashes_to_ashes
 	name = "Ashes to Ashes"
@@ -173,7 +166,7 @@
 	owner.visible_message(span_warning("[owner] motions towards [target]."))
 	if(iscarbon(target))
 		var/mob/living/carbon/human/corpsebuff = target
-		if(iskindred(target) || iscathayan(target)) //undead become spongier, but move slightly slower
+		if(iskindred(target) || iscathayan(target) || iszombie(target)) //undead become spongier, but move slightly slower
 			corpsebuff.visible_message(span_danger("[target]'s body seizes with rigor mortis."), span_danger("Your senses dull to pain and everything else."))
 			corpsebuff.physiology.armor.melee += 35
 			corpsebuff.physiology.armor.bullet += 35 //halfway-fortitude. much worse than blood/shadow shield, but is cheaper and lasts a little longer. edge slowdown uses
@@ -212,6 +205,7 @@
 		else
 			corpsebuff.remove_movespeed_modifier(/datum/movespeed_modifier/corpsenerf)
 			corpsebuff.visible_message(span_notice("[target]'s body regains its luster."), span_notice("Your unnatural ailing abates."))
+
 
 //SHAMBLING HORDE
 /datum/discipline_power/necromancy/shambling_horde
