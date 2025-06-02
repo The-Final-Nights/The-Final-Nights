@@ -1758,8 +1758,6 @@
 	// Visual effects
 	visible_message("<span class='danger'>[kindred] bursts from [src] in a frenzy, dirt flying everywhere!</span>")
 
-
-
 /obj/structure/bury_pit/container_resist_act(mob/living/user)
 	if(!burying)
 		burying = TRUE

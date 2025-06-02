@@ -329,7 +329,6 @@
 				to_chat(M, span_warning("You stop drinking from the [src]."))
 				return
 
-	. = ..()
 	if(length(blood_donors) > 0 && reagents.has_reagent(/datum/reagent/blood))
 		if(istype(M, /mob/living/carbon/human))
 			if(istype(M.dna.species, /datum/species/kindred))
@@ -375,6 +374,7 @@
 				if(antag_transferred)
 					to_chat(M, span_cult("Your mind floods with alien thoughts and philosophies. You now serve the Sabbat!"))
 					break  // Only need to transfer one antag datum type
+	. = ..()
 
 //on_reagant_change so if all blood is emptied from the cup it empties the blood donors list
 /obj/item/reagent_containers/food/drinks/silver_goblet/on_reagent_change()

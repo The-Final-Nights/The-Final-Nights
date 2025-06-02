@@ -30,7 +30,6 @@
 	id = /obj/item/cockclock
 	r_pocket = /obj/item/vamp/keys/sabbat
 
-
 /datum/outfit/job/sabbatpack/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.clane)
@@ -59,7 +58,6 @@
 		var/datum/antagonist/temp_antag = new()
 		temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", H)
 		qdel(temp_antag)
-
 
 /obj/effect/landmark/start/sabbatpack
 	name = "Sabbat Pack"

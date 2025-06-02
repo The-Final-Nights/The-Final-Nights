@@ -27,8 +27,6 @@
 	id = /obj/item/cockclock
 	r_pocket = /obj/item/vamp/keys/sabbat
 
-
-
 /datum/outfit/job/sabbatductus/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.clane)

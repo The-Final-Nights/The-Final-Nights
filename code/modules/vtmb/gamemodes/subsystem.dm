@@ -19,7 +19,6 @@ SUBSYSTEM_DEF(bad_guys_party)
 
 	var/setted_up = FALSE
 	var/list/datum/job/jobs = list()
-	var/current_party_type = null
 
 /datum/controller/subsystem/bad_guys_party/proc/setup_occupations()
 	var/list/all_jobs = subtypesof(/datum/job)
@@ -51,7 +50,6 @@ SUBSYSTEM_DEF(bad_guys_party)
 				max_candidates = 2
 				go_on_next_fire = TRUE
 				Next = new /datum/outfit/job/sabbatist()
-				current_party_type = "sabbat"
 				setting = null
 			if("hunter")
 				if(Next)
@@ -60,7 +58,6 @@ SUBSYSTEM_DEF(bad_guys_party)
 				max_candidates = 5
 				go_on_next_fire = TRUE
 				Next = new /datum/outfit/job/hunter()
-				current_party_type = "hunter"
 				setting = null
 	else if(setting == null)
 		// Randomly choose between sabbat and hunters only
@@ -72,7 +69,6 @@ SUBSYSTEM_DEF(bad_guys_party)
 			max_candidates = 3
 			go_on_next_fire = TRUE
 			Next = new /datum/outfit/job/sabbatist()
-			current_party_type = "sabbat"
 		else
 			// Hunters
 			if(Next)
@@ -81,7 +77,6 @@ SUBSYSTEM_DEF(bad_guys_party)
 			max_candidates = 5
 			go_on_next_fire = TRUE
 			Next = new /datum/outfit/job/hunter()
-			current_party_type = "hunter"
 
 /mob/dead/new_player/proc/ForceLateSpawn()
 	if(SSticker.late_join_disabled)
