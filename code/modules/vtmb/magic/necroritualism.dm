@@ -59,7 +59,7 @@
 			L.say(word)
 			L.Immobilize(30)
 			last_activator = user
-			activator_bonus = L.thaum_damage_plus
+	//		activator_bonus = L.thaum_damage_plus
 
 			animate(src, color = rgb(72, 230, 106), time = 10)
 
@@ -261,14 +261,14 @@
 	var/mob/living/carbon/victim = pick(valid_bodies)
 
 	var/isNPC = TRUE
-	var/permission = tgui_input_list(victim, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"No", 1 MINUTES)
+	var/permission = tgui_input_list(victim, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
 	var/victim_two = victim
 
 	if (!permission) //returns null if no soul in body
 		for (var/mob/dead/observer/ghost in GLOB.player_list)
 			if (ghost.mind == victim.last_mind)
 				//ask again if null
-				permission = tgui_input_list(ghost, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"No", 1 MINUTES)
+				permission = tgui_input_list(ghost, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
 				victim_two = ghost
 				break //no need to do further iterations if you found the right person
 
@@ -302,7 +302,7 @@
 	desc = "Place a wraith inside of a dead body and raise it as a sentient zombie."
 	icon_state = "rune7"
 	word = "GI'TI FOA'HP"
-	necrolevel = 3
+	necrolevel = 5
 
 /obj/necrorune/zombie/complete()
 
@@ -387,13 +387,14 @@
 	var/list/valid_bodies = list()
 
 	for(var/mob/living/carbon/human/targetbody in loc)
-	//	if(targetbody == usr)
-	//		to_chat(usr, span_warning("You cannot invoke this ritual upon yourself."))
-	//		return
-	//	if(targetbody.stat == DEAD)
-	//		to_chat(usr, span_warning("The target is dead, and has taken its secrets to the grave!"))
-	//		return
-		valid_bodies += targetbody
+		if(targetbody == usr)
+			to_chat(usr, span_warning("You cannot invoke this ritual upon yourself."))
+			return
+		if(targetbody.stat == DEAD)
+			to_chat(usr, span_warning("The target is dead, and has taken its secrets to the grave!"))
+			return
+		else
+			valid_bodies += targetbody
 
 	if(valid_bodies.len < 1)
 		to_chat(usr, span_warning("The ritual's victim must remain over the rune."))
@@ -423,25 +424,30 @@
 /obj/necrorune/fireprotection
 	name = "Chill of Oblivion"
 	desc = "Invite the cold of the Shadowlands into your soul to undo the body's fire-weakness. This profane blessing <b>taints the recipient's aura</b>."
-	icon_state = "rune9"
+	icon_state = "rune1"
 	word = "DHAI'AD BHA'II DAWH'N"
-	necrolevel = 3
+	necrolevel = 4
 
 /obj/necrorune/fireprotection/complete()
 
 	var/list/valid_bodies = list()
 
 	for(var/mob/living/carbon/human/targetbody in loc)
-	//	if(targetbody.stat == DEAD)
-	//		to_chat(usr, span_warning("The target is dead, the cold has long settled inside."))
-	//		return
-		valid_bodies += targetbody
+		if(targetbody.stat == DEAD)
+			to_chat(usr, span_warning("The target is dead, the cold has long settled inside."))
+			return
+
+		else valid_bodies += targetbody
 
 	if(valid_bodies.len < 1)
 		to_chat(usr, span_warning("The ritual's target must remain over the rune."))
 		return
 
 	var/mob/living/carbon/victim = pick(valid_bodies)
+
+	if(victim.fakediablerist)
+		to_chat(usr, span_warning("The ritual's target has already been claimed by the cold."))
+		return
 
 	playsound(loc, 'sound/effects/ghost.ogg', 50, FALSE)
 	victim.emote("shiver")
@@ -454,7 +460,3 @@
 	else
 		victim.dna.species.burnmod = victim.dna.species.burnmod-0.5
 	qdel(src)
-
-
-
-
