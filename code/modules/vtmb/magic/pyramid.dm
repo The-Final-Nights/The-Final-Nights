@@ -552,6 +552,9 @@
 			if(H == usr)
 				to_chat(usr, span_warning("You may not turn yourself into a Gargoyle!"))
 				return
+			else if(H.clane?.name == "Gargoyle")
+				to_chat(usr, span_warning("You may not use this ritual on a Gargoyle!"))
+				return
 			else if(H.stat > SOFT_CRIT)
 				valid_bodies += H
 			else
