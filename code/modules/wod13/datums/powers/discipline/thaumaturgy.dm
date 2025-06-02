@@ -317,7 +317,8 @@
 	target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
 	target.emote("collapse")
 
-//MISCELLANEOUS BULLSHIT
+
+//RUNE DRAWING
 /datum/action/thaumaturgy
 	name = "Thaumaturgy"
 	desc = "Blood magic rune drawing."
@@ -337,18 +338,19 @@
 		return
 
 	if(istype(H.get_active_held_item(), /obj/item/arcane_tome))
-		var/list/shit = list()
+		var/list/rune_names = list()
 		for(var/i in subtypesof(/obj/ritualrune))
 			var/obj/ritualrune/R = new i(owner)
 			if(R.thaumlevel <= level)
-				shit += i
+				rune_names[R.name] = i
 			qdel(R)
-		var/ritual = input(owner, "Choose rune to draw:", "Thaumaturgy") as null|anything in shit
+		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Thaumaturgy", rune_names)
 		if(ritual)
 			drawing = TRUE
 			if(do_after(H, 3 SECONDS * max(1, 5 - H.get_total_mentality()), H))
 				drawing = FALSE
-				new ritual(H.loc)
+				var/ritual_type = rune_names[ritual]
+				new ritual_type(H.loc)
 				H.bloodpool = max(H.bloodpool - 2, 0)
 				if(H.CheckEyewitness(H, H, 7, FALSE))
 					H.AdjustMasquerade(-1)
