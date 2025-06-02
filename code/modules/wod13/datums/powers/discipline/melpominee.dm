@@ -140,34 +140,103 @@
 	var/client_feedback = ""
 
 	//Emotional Storage <3
+	// Core emotional input, and responses to [owner]'s melodic voice
 	switch(emotion)
-		if ("fear")
-			newEmote = " begins to tremble, in response to [owner]'s melodic voice."
-			emote_text = "tremble"
-			client_feedback = "You feel slight pangs of fear begin to seep into the cracks of your mind, bringing with it anxiety about the subject of [owner]'s voice."
-		if ("joy")
-			newEmote = " begins to grin slightly, in response to [owner]'s melodic voice."
-			emote_text = "grin"
-			client_feedback = "You feel joy begin to warm your thoughts, an unmistakeable hint of genuine bliss, brought on by the topic of [owner]'s voice."
-		if ("sorrow")
-			newEmote = "'s eyes begin to water, in response to [owner]'s melodic voice."
-			emote_text = "mumble"
-			client_feedback = "You feel sorrow begin to weigh down your heart brought on by the subject of [owner]'s melodic words."
+		if ("admiration")
+			newEmote = " looks at [owner] in wonder."
+			emote_text = pick("stare")
+			client_feedback = "You are struck with awe for [owner]'s melodic voice."
+
 		if ("anger")
 			newEmote = " starts to grumble angrily, in response to [owner]'s melodic voice."
-			emote_text = pick("grumble", "frown")
-			client_feedback = "You feel anger, as your blood begins to boil with sudden directionless rage, you turn to [owner], their voice guides your anger, somewhat."
-		if ("awe")
-			newEmote = " looks at [owner] with wide eyes, in response to [owner]'s melodic voice."
-			emote_text = "stare"
-			client_feedback = "You are struck with awe for [owner]'s melodic voice."
+			emote_text = pick("scowl", "frown")
+			client_feedback = "Your blood runs hot. [owner]'s words sting and ignite your anger."
+
+		if ("confusion")
+			newEmote = " furrows their brow, clearly confused by [owner]'s melodic voice."
+			emote_text = pick("blink", "tilt")
+			client_feedback = "[owner]'s voice leaves you feeling disoriented, trying to understand the meaning behind the words."
+
+		if ("desire")
+			newEmote = " bites their lip, overcome with desire from [owner]'s melodic voice."
+			emote_text = pick("blush")
+			client_feedback = "[owner]'s voice awakens something deeper... a craving, hard to ignore."
+
+		if ("disgust")
+			newEmote = " recoils slightly, a look of disgust crossing their face at [owner]'s voice."
+			emote_text = pick("grimace", "gag")
+			client_feedback = "A sharp distaste rises within you. Something in [owner]'s tone repels you."
+
+		if ("elation")
+			newEmote = " beams brightly, lifted by [owner]'s melodic voice."
+			emote_text = pick("grin")
+			client_feedback = "A rush of joy and energy bursts from within you, stoked by [owner]'s voice."
+
+		if ("empathy")
+			newEmote = " nods slowly, visibly moved by [owner]'s melodic voice."
+			emote_text = pick("nod", "sigh")
+			client_feedback = "You feel compassion swell in your chest from the sincerity in [owner]'s voice."
+
+		if ("envy")
+			newEmote = " glares with barely concealed envy at [owner]."
+			emote_text = pick("glare")
+			client_feedback = "[owner]'s voice digs at you. Why do they have what you don’t?"
+
+		if ("fear")
+			newEmote = " begins to tremble, in response to [owner]'s melodic voice."
+			emote_text = pick("tremble", "shiver")
+			client_feedback = "Panic scratches at the edge of your mind, seeded by [owner]'s voice."
+
 		if ("humor")
 			newEmote = " begins chuckling slightly, in response to [owner]'s melodic voice."
-			emote_text = "chuckle"
-			client_feedback = "You feel overwhelming humor for the topic of [owner]'s voice."
+			emote_text = pick("chuckle", "giggle", "laugh", "snicker", "snort", "clap")
+			client_feedback = "You can't help but laugh. Something in [owner]'s tone amuses you deeply."
+
+		if ("joy")
+			newEmote = " begins to grin slightly, in response to [owner]'s melodic voice."
+			emote_text = pick("grin", "smile")
+			client_feedback = "A gentle joy flows through you, like sunlight in your chest."
+
+		if ("love")
+			newEmote = " gazes warmly at [owner], clearly touched."
+			emote_text = pick("smile", "blush")
+			client_feedback = "There’s a softness that overtakes you. You feel love bloom from [owner]'s words."
+
+		if ("pride")
+			newEmote = " stands tall, inspired by [owner]'s melodic voice."
+			emote_text = pick("smirk", "grin", "nod")
+			client_feedback = "A swelling of pride rushes through you. [owner]'s voice reinforces your strength."
+
+		if ("relief")
+			newEmote = " exhales slowly, tension draining at [owner]'s voice."
+			emote_text = pick("exhale", "sigh")
+			client_feedback = "Peace washes over you. [owner]'s words settle something deep within."
+
+		if ("sadness")
+			newEmote = "'s eyes begin to water, in response to [owner]'s melodic voice."
+			emote_text = pick("sigh", "sulk")
+			client_feedback = "[owner]'s voice conjures heavy memories. You feel sorrow settle over you."
+
+		if ("shame")
+			newEmote = " lowers their head in shame, avoiding [owner]'s gaze."
+			emote_text = pick("sigh", "blush", "frown")
+			client_feedback = "[owner]'s voice feels like a mirror reflecting your flaws. You can't look directly."
+
+		if ("surprise")
+			newEmote = " blinks rapidly, surprised by [owner]'s melodic voice."
+			emote_text = pick("blink", "gasp", "scream")
+			client_feedback = "The words hit harder than expected. [owner]'s voice caught you off guard."
+
+		if ("trust")
+			newEmote = " stands a little closer to [owner], visibly comforted."
+			emote_text = pick("nod")
+			client_feedback = "[owner]'s voice assures you. You feel protected, somehow."
+
 		else
-			to_chat(owner, span_warning("Invalid emotion. Try: fear, joy, sorrow, anger, awe, humor."))
+			to_chat(owner, span_warning("Invalid emotion. Try: admiration, anger, confusion, desire, disgust, elation, empathy, envy, fear, humor, joy, love, pride, relief, sadness, shame, surprise, trust."))
 			return
+
+
 
 	var/super_fan_limit = 5
 	var/super_fans = 0

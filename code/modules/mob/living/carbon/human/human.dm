@@ -1298,12 +1298,11 @@
 	equip_to_slot_or_del(new /obj/item/clothing/suit/vampire/trench/alt(src), ITEM_SLOT_OCLOTHING)
 
 // This sets up NPC SUPERFAN behavior, and can be called for use in other TFN behaviors, currently for the Melpominee Discipline.
-/mob/living/carbon/human
-	var/tmp/superfan_active = FALSE
-	var/tmp/superfan_target = null
-
+var/tmp/superfan_active = FALSE
+var/tmp/superfan_target = null
 var/tmp/walktarget
 var/tmp/emotion = "stare" // Default emotion for the superfan behavior
+
 /mob/living/carbon/human/proc/create_superfan(duration, mob/living/walk_to_target, emotion)
 	if (!walk_to_target || superfan_active)
 		return
@@ -1330,13 +1329,11 @@ var/tmp/emotion = "stare" // Default emotion for the superfan behavior
 /mob/living/carbon/human/proc/walk_to_superfan_target(mob/living/walk_to_target)
 	if (!src || !walk_to_target || !superfan_active)
 		return
-
 	var/distance = get_dist(src, walk_to_target)
-
 	if (distance > 2)
-		step_towards(src, walk_to_target) // too far, close the distance
+		step_towards(src, walk_to_target) // too far
 	else if (distance <= 0)
-		src.dir = get_dir(src, walk_to_target) // very close — just face them
+		src.dir = get_dir(src, walk_to_target) // very close, face them
 		return
 
 	// Small chance to emote when entranced
