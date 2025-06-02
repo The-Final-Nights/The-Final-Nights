@@ -1841,6 +1841,10 @@
 /obj/structure/urinal,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch/basement)
+"axM" = (
+/obj/effect/decal/wallpaper/lightpadded/low,
+/turf/closed/wall/vampwall/rich/low/window,
+/area/vtm/financialdistrict)
 "axN" = (
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk,
@@ -2168,6 +2172,10 @@
 "aBF" = (
 /turf/open/floor/plating/sidewalk,
 /area/vtm/fishermanswharf/ghetto)
+"aBG" = (
+/obj/item/wirecutters,
+/turf/open/floor/plating/asphalt,
+/area/vtm/financialdistrict)
 "aBI" = (
 /obj/structure/fluff/beach_umbrella/cap,
 /turf/open/floor/plating/vampbeach,
@@ -9407,6 +9415,10 @@
 /obj/structure/sign/poster/vampire/wotw,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
+"ctv" = (
+/obj/effect/decal/wallpaper/padded,
+/turf/closed/wall/vampwall/rich,
+/area/vtm/financialdistrict)
 "ctx" = (
 /obj/structure/table/abductor{
 	name = "elegant table";
@@ -39234,6 +39246,10 @@
 /obj/item/drinkable_bloodpack,
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic/haven)
+"kqI" = (
+/obj/effect/decal/wallpaper/lightpadded/low,
+/turf/closed/wall/vampwall/rich/low,
+/area/vtm/financialdistrict)
 "kqJ" = (
 /obj/effect/landmark/start/citizen,
 /turf/open/floor/carpet/red,
@@ -40128,6 +40144,10 @@
 	},
 /turf/open/water,
 /area/vtm/interior/millennium_tower)
+"kDl" = (
+/obj/effect/decal/wallpaper/padded/low,
+/turf/closed/wall/vampwall/rich/low,
+/area/vtm/financialdistrict)
 "kDn" = (
 /obj/effect/turf_decal/siding/brown{
 	dir = 5
@@ -66456,6 +66476,10 @@
 /obj/machinery/light/small,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
+"rpR" = (
+/obj/effect/decal/wallpaper/padded/low,
+/turf/closed/wall/vampwall/rich/low/window,
+/area/vtm/financialdistrict)
 "rpU" = (
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/carpet/black,
@@ -67431,6 +67455,10 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
+"rCD" = (
+/obj/structure/lattice/grate,
+/turf/open/openspace,
+/area/vtm/financialdistrict)
 "rCR" = (
 /obj/machinery/light/prince{
 	pixel_y = -13
@@ -78469,6 +78497,10 @@
 /obj/structure/flora/ausbushes,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/ghetto/old)
+"uxH" = (
+/obj/effect/decal/wallpaper/lightpadded,
+/turf/closed/wall/vampwall/rich,
+/area/vtm/financialdistrict)
 "uxV" = (
 /turf/closed/wall/vampwall/rock{
 	density = 0
@@ -187988,7 +188020,7 @@ cif
 vZw
 lld
 nhT
-wbX
+uxH
 wbX
 dmU
 wbX
@@ -188245,10 +188277,10 @@ yhp
 yhp
 lld
 nhT
-wbX
-wbX
-dmU
-wbX
+kqI
+rCD
+rCD
+rCD
 wbX
 wcJ
 fzQ
@@ -188502,10 +188534,10 @@ noM
 wYw
 lld
 fhm
-wbX
-wbX
-dmU
-wbX
+axM
+rCD
+rCD
+rCD
 wbX
 wcJ
 fzQ
@@ -188759,10 +188791,10 @@ noM
 wYw
 wQw
 wIE
-wbX
-wbX
-dmU
-wbX
+ctv
+rCD
+rCD
+rCD
 wbX
 wcJ
 fzQ
@@ -189016,10 +189048,10 @@ noM
 wYw
 lld
 fhm
-wbX
-wbX
-dmU
-wbX
+kDl
+rCD
+rCD
+rCD
 wbX
 wcJ
 fzQ
@@ -189273,8 +189305,8 @@ yhp
 yhp
 lld
 nhT
-wbX
-wbX
+rpR
+aBG
 dmU
 wbX
 wbX
