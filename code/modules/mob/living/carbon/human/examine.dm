@@ -476,6 +476,9 @@
 				if ("rotten4")
 					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a skeletonised corpse!</b></span><br>"
 
+		if (iszombie(src) && is_face_visible())
+			msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a decayed corpse!</b></span><br>"
+
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
 				msg += span_deadsay("[t_He] do[t_es]n't appear to be [t_him]self.<br>")
