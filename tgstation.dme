@@ -3413,6 +3413,7 @@
 #include "code\modules\vtmb\jobs\garou\paintedcity.dm"
 #include "code\modules\vtmb\jobs\garou\poisonshore.dm"
 #include "code\modules\vtmb\magic\mysticism.dm"
+#include "code\modules\vtmb\magic\necroritualism.dm"
 #include "code\modules\vtmb\magic\pyramid.dm"
 #include "code\modules\vtmb\npc\beastmaster.dm"
 #include "code\modules\vtmb\setites\counterfeit.dm"
