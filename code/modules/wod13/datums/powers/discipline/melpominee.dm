@@ -27,12 +27,11 @@
 
 /datum/discipline_power/melpominee/the_missing_voice/activate(atom/movable/target)
 	. = ..()
-	var/new_say = input(owner, "What will [target] say?") as null|text
+	var/new_say = tgui_input_text(owner, "What will [target] say?", "The Missing Voice:", FALSE, 500, TRUE, FALSE, 0)
 	if(!new_say)
 		return
 
 	//prevent forceful emoting and whatnot
-	new_say = trim(copytext_char(sanitize(new_say), 1, MAX_MESSAGE_LEN))
 	if (findtext(new_say, "*"))
 		to_chat(owner, span_userdanger("You can't force others to perform emotes!"))
 		return
@@ -88,12 +87,9 @@
 	if(!target)
 		return
 
-	var/input_message = input(owner, "What message will you project to them?") as null|text
+	var/input_message = tgui_input_text(owner, "What message will you project to them?", "Madrigal: Emotion", FALSE, 500, TRUE, FALSE, 0) as null|text
 	if (!input_message)
 		return
-
-	//sanitisation!
-	input_message = trim(copytext_char(sanitize(input_message), 1, MAX_MESSAGE_LEN))
 	if(CHAT_FILTER_CHECK(input_message))
 		to_chat(owner, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[input_message]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
@@ -118,13 +114,13 @@
 
 /datum/discipline_power/melpominee/madrigal/activate()
 	. = ..()
-	var/userSong = lowertext(trim(input(owner, "What are the words of your melodic voice, Madrigal?") as null|text))
+	var/userSong = tgui_input_text(owner, "What are the words of your melodic voice, Madrigal?", "Madrigal:", FALSE, 500, TRUE, FALSE, 0)
 	if (!userSong || userSong == "")
 		return
-	var/emotion = lowertext(trim(input(owner, "What emotion do you wish to project through your voice? (fear, joy, sorrow, anger, awe, humor)") as null|text))
+	var/emotion = tgui_input_text(owner, "What emotion do you wish to project through your voice? (fear, joy, sorrow, anger, awe, humor)", "Madrigal: Emotion", FALSE, 500, TRUE, FALSE, 0)
 	if (!emotion || emotion == "")
 		return
-	var/song = sanitize(userSong)
+	var/song = userSong
 	var/min_message = 10
 	if (findtext(song, "*"))
 		to_chat(owner, span_warning("No *'s are allowed in vocal powers!"))
@@ -173,12 +169,10 @@
 			to_chat(owner, span_warning("Invalid emotion. Try: fear, joy, sorrow, anger, awe, humor."))
 			return
 
-
 	var/super_fan_limit = 5
 	var/super_fans = 0
 	var/affectedCrowdmembers = 0
 	var/casterRoll = SSroll.storyteller_roll(owner.get_total_social(), mobs_to_show_output = owner, numerical = TRUE)
-
 
 	if(casterRoll <= 0)
 		to_chat(owner, span_warning("Botched/Failled Roll [casterRoll] : You feel your voice is not resonating, try again later."))
@@ -222,16 +216,16 @@
 				botched_roll = TRUE //Will be a Superfan.
 				listener.emote(emote_text)
 				listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
-				to_chat(listener, span_danger("(Contested Roll: Botched: [casterRoll] vs [targetRoll]) You are completely overwhelmed with [emotion] and enamored with [owner]!"))
+				to_chat(listener, span_danger("(Contested Roll: Botched: You [casterRoll] vs [targetRoll]) You are completely overwhelmed with [emotion] and enamored with [owner]!"))
 				continue
 
 			if (targetRoll > casterRoll) // Success, compares the caster roll to the listener roll.
-				to_chat(listener, span_notice("(Contested Roll: Success: [casterRoll] vs [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a strange shift in the crowd."))
+				to_chat(listener, span_notice("(Contested Roll: Success: You [casterRoll] vs [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a strange shift in the crowd."))
 				listener.visible_message(listener, span_userdanger("[client_feedback]"))
 				continue
 
 			if (targetRoll <= casterRoll) // Failure, listener roll is less than the caster rolled successes.
-				to_chat(listener, span_danger("(Contested Roll: Failure: [casterRoll] vs [targetRoll]) You feel [emotion] fill your mind."))
+				to_chat(listener, span_danger("(Contested Roll: Failure: You [casterRoll] vs [targetRoll]) You feel [emotion] fill your mind."))
 				listener.emote(emote_text)
 				listener.visible_message(span_userdanger("[client_feedback]"))
 				continue
@@ -243,11 +237,11 @@
 				to_chat(listener, span_warning("You feel enamored by and drawn toward [owner], you can't seem to leave their side..."))
 				if (is_npc)
 					listener.emote(emote_text)
-					listener.create_superfan(30, owner, emote_text) // NPCs get a longer Superfan duration.
+					listener.create_superfan(30 SECONDS, owner, emote_text) // NPCs get a longer Superfan duration.
 				else
 					// Players/Non-NPCs get a shorter Superfan duration, and only if they botch the roll.
 					listener.emote(emote_text)
-					listener.create_superfan(10, owner, emote_text)
+					listener.create_superfan(10 SECONDS, owner, emote_text)
 					to_chat(listener, span_warning("You feel drawn toward [owner], you can't seem to leave their side..."))
 				super_fans++
 
