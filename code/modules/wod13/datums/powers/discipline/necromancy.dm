@@ -102,36 +102,6 @@
 	var/datum/action/ghost_hear/see_ghosts = new()
 	see_ghosts.Grant(owner)
 
-/datum/action/ghost_hear
-	name = "See Ghosts"
-	desc = "Allows you to see ghosts."
-	button_icon_state = "ghost"
-	check_flags = AB_CHECK_CONSCIOUS
-	vampiric = TRUE
-	var/ghosts_visible = FALSE
-
-/datum/action/ghost_hear/Trigger()
-	. = ..()
-	if(ghosts_visible == TRUE)
-		deactivate()
-	else
-		activate()
-
-/datum/action/ghost_hear/proc/activate()
-	if(!isliving(owner))
-		return
-	ghosts_visible = TRUE
-	var/mob/living/user = owner
-	user.see_invisible = SEE_INVISIBLE_OBSERVER
-	to_chat(owner, span_notice("You peek beyond the Shroud to see ghosts."))
-
-/datum/action/ghost_hear/proc/deactivate()
-	if(!isliving(owner))
-		return
-	ghosts_visible = FALSE
-	var/mob/living/user = owner
-	user.see_invisible = initial(owner.see_invisible)
-	to_chat(owner, span_warning("Your vision returns to the mortal realm."))
 
 //ASHES TO ASHES
 /datum/discipline_power/necromancy/ashes_to_ashes
@@ -291,13 +261,13 @@
 					owner.beastmaster |= zombie
 					zombie.beastmaster = owner
 					qdel(target)
-				if (20 to 50) //cats and whatnot
+				if (20 to 70) //cats and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
 					zombie.beastmaster = owner
 					qdel(target)
-				if (50 to 150) //dogs/biters and whatnot
+				if (70 to 150) //dogs/biters and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
