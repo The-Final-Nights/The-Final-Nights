@@ -259,8 +259,6 @@
 	if(iscarbon(target))
 		new /obj/effect/temp_visual/tremere(target.loc, "gib")
 
-
-
 		target.visible_message(span_danger("[target] reddens and quakes!"), span_userdanger("Your veins feel like they're on fire!"))
 
 		var/dice = clamp(target.get_total_physique(), 1, 8)
@@ -302,6 +300,7 @@
 	target.apply_damage(20, BURN, owner.zone_selected)
 	target.emote("twitch")
 	target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
+	playsound(target, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 
 /datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/blood_burn_stage2(mob/living/target)
 	if(!target) return
