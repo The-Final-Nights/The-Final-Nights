@@ -54,7 +54,6 @@
 
 	to_chat(owner, span_warning("Your vision returns to the mortal realm."))
 
-
 //ETHEREAL HORDE
 /datum/discipline_power/necromancy/ethereal_horde
 	name = "Ethereal Horde"
@@ -96,6 +95,43 @@
 		owner.beastmaster |= zombie2
 		zombie2.beastmaster = owner
 
+
+/datum/discipline_power/necromancy/ethereal_horde/post_gain()
+	. = ..()
+
+	var/datum/action/ghost_hear/see_ghosts = new()
+	see_ghosts.Grant(owner)
+
+/datum/action/ghost_hear
+	name = "See Ghosts"
+	desc = "Allows you to see ghosts."
+	button_icon_state = "ghost"
+	check_flags = AB_CHECK_CONSCIOUS
+	vampiric = TRUE
+	var/ghosts_visible = FALSE
+
+/datum/action/ghost_hear/Trigger()
+	. = ..()
+	if(ghosts_visible == TRUE)
+		deactivate()
+	else
+		activate()
+
+/datum/action/ghost_hear/proc/activate()
+	if(!isliving(owner))
+		return
+	ghosts_visible = TRUE
+	var/mob/living/user = owner
+	user.see_invisible = SEE_INVISIBLE_OBSERVER
+	to_chat(owner, span_notice("You peek beyond the Shroud to see ghosts."))
+
+/datum/action/ghost_hear/proc/deactivate()
+	if(!isliving(owner))
+		return
+	ghosts_visible = FALSE
+	var/mob/living/user = owner
+	user.see_invisible = initial(owner.see_invisible)
+	to_chat(owner, span_warning("Your vision returns to the mortal realm."))
 
 //ASHES TO ASHES
 /datum/discipline_power/necromancy/ashes_to_ashes
@@ -168,7 +204,7 @@
 	if(iscarbon(target))
 		var/mob/living/carbon/human/corpsebuff = target
 		if(iskindred(target) || iscathayan(target)) //undead become spongier, but move slightly slower
-			corpsebuff.visible_message(span_danger("[target]'s body seizes with rigor mortis."), span_userdanger("Your senses dull to pain and everything else."))
+			corpsebuff.visible_message(span_danger("[target]'s body seizes with rigor mortis."), span_danger("Your senses dull to pain and everything else."))
 			corpsebuff.physiology.armor.melee += 35
 			corpsebuff.physiology.armor.bullet += 35 //halfway-fortitude. much worse than blood/shadow shield, but is cheaper and lasts a little longer. edge slowdown uses
 			ADD_TRAIT(corpsebuff, TRAIT_NOSOFTCRIT, MAGIC_TRAIT)
@@ -206,7 +242,6 @@
 		else
 			corpsebuff.remove_movespeed_modifier(/datum/movespeed_modifier/corpsenerf)
 			corpsebuff.visible_message(span_notice("[target]'s body regains its luster."), span_notice("Your unnatural ailing abates."))
-
 
 //SHAMBLING HORDE
 /datum/discipline_power/necromancy/shambling_horde
@@ -256,13 +291,13 @@
 					owner.beastmaster |= zombie
 					zombie.beastmaster = owner
 					qdel(target)
-				if (20 to 70) //cats and whatnot
+				if (20 to 50) //cats and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
 					zombie.beastmaster = owner
 					qdel(target)
-				if (70 to 150) //dogs/biters and whatnot
+				if (50 to 150) //dogs/biters and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
@@ -275,9 +310,92 @@
 					zombie.beastmaster = owner
 					qdel(target)
 
-
+	else if(iszombie(target))
+		owner.visible_message(span_warning("[owner] aggressively gestures at [target]!"))
+		target.visible_message(span_warning("[target]'s flesh knits together'!"), span_danger("Your rotten flesh reconstitutes!"))
+		var/mob/living/carbon/human/zombie = target
+		zombie.heal_ordered_damage(120, list(BRUTE, TOX, BURN, CLONE, OXY, BRAIN))
+		if(length(zombie.all_wounds))
+			var/datum/wound/wound = pick(zombie.all_wounds)
+			wound.remove_wound()
 	else
 		owner.visible_message(span_warning("[owner] aggressively gestures at [target]!"))
-		target.visible_message(span_warning("[target] is assaulted by necromantic energies!"), span_userdanger("You feel yourself rot from within!"))
+		target.visible_message(span_warning("[target] is assaulted by necromantic energies!"), span_danger("You feel yourself rot from within!"))
 		target.apply_damage(55, CLONE, owner.zone_selected) // 1/5 of a 5-dot "healthbar" in aggravated damage, on level with thaumaturgy's average output
 		target.emote("scream")
+
+
+// RITUALISM
+
+/datum/discipline_power/necromancy/ashes_to_ashes/post_gain()
+	. = ..()
+	var/datum/action/necroritualism/ritualist = new()
+	owner.necromancy_knowledge = TRUE
+	ritualist.Grant(owner)
+	ritualist.level = level
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/necrotome)
+
+/datum/crafting_recipe/necrotome
+	name = "Necromantic Ritualism Tome"
+	time = 10 SECONDS
+	reqs = list(/obj/item/paper = 3, /obj/item/ectoplasm = 1)
+	result = /obj/item/necromancy_tome
+	always_available = FALSE
+	category = CAT_MISC
+
+/datum/action/necroritualism
+	name = "necroritualism"
+	desc = "Draw runes to perform Necromancy Rituals."
+	button_icon_state = "necroritualism"
+	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
+	vampiric = TRUE
+	var/drawing = FALSE
+	var/level = 1
+
+/datum/action/necroritualism/Trigger()
+	. = ..()
+	var/mob/living/carbon/human/H = owner
+	if(H.bloodpool < 2)
+		to_chat(H, span_warning("You need more <b>BLOOD</b> to do that!"))
+		return
+	if(drawing)
+		return
+
+	if(istype(H.get_active_held_item(), /obj/item/necromancy_tome))
+		var/list/rune_names = list()
+		for(var/i in subtypesof(/obj/necrorune))
+			var/obj/necrorune/R = new i(owner)
+			if(R.necrolevel <= level)
+				rune_names[R.name] = i
+			qdel(R)
+		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Necromancy", rune_names)
+		if(ritual)
+			drawing = TRUE
+			if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
+				drawing = FALSE
+				var/ritual_type = rune_names[ritual]
+				new ritual_type(H.loc)
+				H.bloodpool = max(H.bloodpool - 2, 0)
+				if(H.CheckEyewitness(H, H, 7, FALSE))
+					H.AdjustMasquerade(-1)
+			else
+				drawing = FALSE
+	else
+		var/list/rune_names = list()
+		for(var/i in subtypesof(/obj/necrorune))
+			var/obj/necrorune/R = new i(owner)
+			if(R.necrolevel <= level)
+				rune_names += i
+			qdel(R)
+		var/ritual = input(owner, "Choose rune to draw:", "necroritualism") as null|anything in list("???")
+		if(ritual)
+			drawing = TRUE
+			if(do_after(H, 30*max(1, 5-H.mentality), H))
+				drawing = FALSE
+				var/rune = pick(rune_names)
+				new rune(H.loc)
+				H.bloodpool = max(H.bloodpool - 2, 0)
+				if(H.CheckEyewitness(H, H, 7, FALSE))
+					H.AdjustMasquerade(-1)
+			else
+				drawing = FALSE
