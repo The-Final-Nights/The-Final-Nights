@@ -371,6 +371,8 @@
 				call_dharma("desire", target)
 			if(istype(i, /datum/reagent/drug))
 				call_dharma("desire", target)
+	if(iszombie(target))
+		return
 
 
 	var/atom/target_atom
