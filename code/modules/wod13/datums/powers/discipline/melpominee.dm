@@ -112,42 +112,48 @@
 	duration_override = TRUE
 	multi_activate = TRUE
 
-var/temp/all_listeners = list()
-/datum/discipline_power/melpominee/madrigal/pre_activation()
-	. = ..()
-	return TRUE // Allow the power to be activated multiple times in a row.
+//storage land!
+var/all_listeners = list()
+var/song = ""
+var/isYelling = FALSE
+var/emotion = ""
+var/casterRoll = 0
+var/newEmote = ""
+var/emote_text = ""
+var/client_feedback = ""
+var/super_fan_limit = 5
+var/super_fans = 0
 
-
-/datum/discipline_power/melpominee/madrigal/activate()
+/datum/discipline_power/melpominee/madrigal/pre_activation_checks()
 	. = ..()
-	var/userSong = tgui_input_text(owner, "What are the words of your melodic voice, Madrigal?", "Madrigal:", FALSE, 500, TRUE, FALSE, 0)
-	if (!userSong || userSong == "")
+	song = tgui_input_text(owner, "What are the words of your melodic voice, Madrigal?", "Madrigal:", FALSE, 500, TRUE, FALSE, 0)
+	if (!song || song == "")
 		return
-	var/emotion = tgui_input_text(owner, "What emotion do you wish to project through your voice? Listeners who fail will be given a prompt to work with.", "Madrigal: Emotion", FALSE, 500, TRUE, FALSE, 0)
+	emotion = tgui_input_text(owner, "What emotion do you wish to project through your voice? Listeners who fail will be given a prompt to work with.", "Madrigal: Emotion", FALSE, 500, TRUE, FALSE, 0)
 	if (!emotion || emotion == "")
 		return
-	var/song = userSong
-	var/min_message = 10
+	emotion = lowertext(trim(emotion))
+	if (findtext(song, "!"))
+		isYelling = TRUE
+	if (!findtext(song, "!"))
+		isYelling = FALSE
+	//Filtering
 	if (findtext(song, "*"))
 		to_chat(owner, span_warning("No *'s are allowed in vocal powers!"))
 		return
-	if (length(song) < min_message)
-		to_chat(owner, span_warning("Your song is too short! Must be at least [min_message] characters."))
+	if (length(song) < 10)
+		to_chat(owner, span_warning("Your song is too short! Must be at least [10] characters."))
 		return
 	if (CHAT_FILTER_CHECK(song))
 		to_chat(owner, span_warning("That song contains a prohibited word. Naughty! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[song]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
+	// HARDSTOP:
+	casterRoll = SSroll.storyteller_roll(owner.get_total_social(), mobs_to_show_output = owner, numerical = TRUE)
+	if(casterRoll <= 0)
+		to_chat(owner, span_warning("Botched/Failled Roll [casterRoll] : You feel your voice is not resonating, try again later."))
+		return FALSE
 
-	owner.say(message = userSong, forced = "melpominee 3")
-
-	var/newEmote = ""
-	var/emote_text = ""
-	var/client_feedback = ""
-
-	//Emotional Storage <3
-	// Core emotional input, and responses to [owner]'s melodic voice
-	emotion = lowertext(trim(emotion))
 	if (emotion in list("awe", "admiration", "wonder", "amazement", "astonishment", "marvel"))
 		newEmote = " looks at [owner] in [emotion]."
 		emote_text = pick("stare")
@@ -237,34 +243,85 @@ var/temp/all_listeners = list()
 		newEmote = " stands a little closer to [owner], visibly comforted."
 		emote_text = pick("nod")
 		client_feedback = "[owner]'s voice assures you, by their words of [emotion]."
-
 	else
 		to_chat(owner, span_warning("Invalid emotion. Try: There are TONS."))
-		return
 
-	to_chat(owner, span_notice("DEBUG::: Listener Feels: [client_feedback]"))
-	to_chat(owner, span_notice("DEBUG::: Listener Emotes: [newEmote]"))
+	//Sets all the listeners, based on isYelling.
+	if(!isYelling)
+		for (var/mob/living/carbon/human/listener in oviewers(7, owner))
+			if (listener.stat == DEAD)
+				continue
+			all_listeners += listener
+	if(isYelling)
+		for (var/mob/living/carbon/human/listener in oviewers(10, owner))
+			if (listener.stat == DEAD)
+				continue
+			all_listeners += listener
 
-	var/super_fan_limit = 5
-	var/super_fans = 0
-	var/affectedCrowdmembers = 0
-	var/casterRoll = SSroll.storyteller_roll(owner.get_total_social(), mobs_to_show_output = owner, numerical = TRUE)
+/datum/discipline_power/melpominee/madrigal/activate()
+	. = ..()
+	owner.say( song, forced = "melpominee 3")
+	to_chat(owner, span_notice("DEBUG::: Listeners Feel: [client_feedback]"))
+	to_chat(owner, span_notice("DEBUG::: Listeners Emote: [newEmote]"))
 
-	if(casterRoll <= 0)
-		to_chat(owner, span_warning("Botched/Failled Roll [casterRoll] : You feel your voice is not resonating, try again later."))
-		return
+	//Listeners Roll to Save
+	var/totalListeners = 0
+	var/base_difficulty = 6
 
-// Attempts Madrigal effect on all listeners. Might expand range for Yelling/Exclaiming.
-	for (var/mob/living/carbon/human/listener in oviewers(7, owner))
-		if (listener.stat == DEAD)
-			continue
-		var/is_npc = istype(listener, /mob/living/carbon/human/npc)
-		var/base_difficulty = 6
+	//If playing an instrument, the difficulty is raised for listeners?
+
+
+	for (var/mob/living/carbon/human/listener in all_listeners)
+		totalListeners++
 		var/botched_roll = FALSE
+		//base_difficulty adjustments per species.
+		//Highchances for resistance, because of the scope of the power.
+		if (iskindred(listener))
+			base_difficulty -= 2 //4
+		if (isgarou(listener))
+			base_difficulty -= 2 //4
 
-		//Happens to all listeners.
-		listener.Stun(2 SECONDS)
-		affectedCrowdmembers++ //All who hear it can give in to the emtion.
+		var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
+
+		//Botched Rolls
+		if (targetRoll <= 0 || isnpc(listener) && casterRoll >= 3 && !listener.client)
+			botched_roll = TRUE //Will be a Superfan.
+
+		//Contested Roll.
+		if (!botched_roll)
+			if (targetRoll > casterRoll) // Success.
+				to_chat(listener, span_notice("(Contested Roll: Success: You [casterRoll] vs [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a strange shift in the crowd."))
+				listener.visible_message(listener, span_userdanger("[client_feedback]"))
+				continue
+
+			if (targetRoll <= casterRoll) // Failure.
+				to_chat(listener, span_danger("(Contested Roll: Failure: You [casterRoll] vs [targetRoll]) You feel [emotion] fill your mind."))
+				listener.emote(emote_text)
+				listener.visible_message(span_userdanger("[client_feedback]"))
+				continue
+
+
+		// Superfan Limiter; Applys Superfan effect to botched listeners.
+		if (super_fans < super_fan_limit && botched_roll)
+			if (istype(listener, /mob/living/carbon/human))
+				var/mob/living/carbon/human/H = listener
+				if (H.superfan_active) //Already a Superfan.
+					continue
+
+			if (listener.client)
+				listener.emote(emote_text)
+				listener.create_superfan(20, owner, emote_text)
+				listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
+				to_chat(listener, span_warning("(Contested Roll: Botched: You [targetRoll] vs [casterRoll]) You are completely overwhelmed with [emotion] and you can't seem to leave [owner]'s side..."))
+			if (isnpc(listener))
+				listener.emote(emote_text)
+				listener.create_superfan(60, owner, emote_text) // NPCs get a longer Superfan duration.
+				to_chat(listener, span_warning("You feel drawn toward [owner], you can't seem to leave their side..."))
+			else
+				listener.emote(emote_text)
+				listener.create_superfan(20, owner, emote_text)
+				to_chat(listener, span_warning("You feel drawn toward [owner], you can't seem to leave their side..."))
+			super_fans++
 
 		// Cosmetic overlays, UI/Songs etc.
 		listener.remove_overlay(MUTATIONS_LAYER)
@@ -273,64 +330,17 @@ var/temp/all_listeners = list()
 		listener.apply_overlay(MUTATIONS_LAYER)
 		// Remove the overlay after a short duration. Actual effects can lasts longer with strong RP.
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
+		//Happens to all listeners.
+		listener.Stun(2 SECONDS)
 
-		//NPCs Superfans
-		if (is_npc && casterRoll >= 3) //Auto Botch NPCs if the caster successes is more than 3.
-			botched_roll = TRUE
-
-		// Listener's Roll to Resist.
-		if (!botched_roll) //Ignore Rolls, if Pre-Botched, like for npcs.
-			var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
-			if (targetRoll <= 0) // Botched roll (0 successes, are assumed to have at least one, natural 1, for now. Not sure how to check that, yet.)
-				botched_roll = TRUE //Will be a Superfan.
-				listener.emote(emote_text)
-				listener.visible_message(span_warning("[listener][newEmote]"), span_userdanger("[client_feedback]"))
-				to_chat(listener, span_danger("(Contested Roll: Botched: You [casterRoll] vs [targetRoll]) You are completely overwhelmed with [emotion] and enamored with [owner]!"))
-				continue
-
-			if (targetRoll > casterRoll) // Success, compares the caster roll to the listener roll.
-				to_chat(listener, span_notice("(Contested Roll: Success: You [casterRoll] vs [targetRoll]) You resist the emotional pull of [owner]'s voice, and might notice a strange shift in the crowd."))
-				listener.visible_message(listener, span_userdanger("[client_feedback]"))
-				continue
-
-			if (targetRoll <= casterRoll) // Failure, listener roll is less than the caster rolled successes.
-				to_chat(listener, span_danger("(Contested Roll: Failure: You [casterRoll] vs [targetRoll]) You feel [emotion] fill your mind."))
-				listener.emote(emote_text)
-				listener.visible_message(span_userdanger("[client_feedback]"))
-				continue
-
-		// Superfan Limiter; Applys Superfan effect to botched listeners.
-		if (super_fans < super_fan_limit)
-			if (botched_roll)
-				to_chat(listener, span_warning("You feel enamored by and drawn toward [owner], you can't seem to leave their side..."))
-				if (is_npc)
-					var/mob/living/carbon/human/npc/N = listener
-					listener.emote(emote_text)
-					listener.create_superfan(60, owner, emote_text) // NPCs get a longer Superfan duration.
-					N.old_movement = TRUE
-					walk(N, 0)
-				else
-					// Players/Non-NPCs get a shorter Superfan duration, and only if they botch the roll.
-					listener.emote(emote_text)
-					listener.create_superfan(20, owner, emote_text)
-					to_chat(listener, span_warning("You feel drawn toward [owner], you can't seem to leave their side..."))
-				super_fans++
-
-
-
-	to_chat(owner, span_warning("Your Successes: [casterRoll] : You affected [affectedCrowdmembers] member(s) of the crowd with [emotion], and now have [super_fans] more Superfans!"))
-	message_admins("[ADMIN_LOOKUPFLW(owner)] cast the Madrigal DoC Power: With [casterRoll] successes, vocalizing '[song].' They affected [affectedCrowdmembers], and made [super_fans] new Superfans, with a focus on [emotion].")
-	log_game("[key_name(owner)] has used Madrigal DoC power, vocalizing '[song],' with emotion [emotion], and affecting [affectedCrowdmembers] npcs/players.")
+	to_chat(owner, span_warning("Your Successes: [casterRoll] : You affected [totalListeners] member(s) of the crowd with [emotion], and now have [super_fans] more Superfans!"))
+	message_admins("[ADMIN_LOOKUPFLW(owner)] cast the Madrigal DoC Power: With [casterRoll] successes, vocalizing '[song].' They affected [totalListeners], and made [super_fans] new Superfans, with a focus on [emotion].")
+	log_game("[key_name(owner)] has used Madrigal DoC power, vocalizing '[song],' with emotion [emotion], and affecting [totalListeners] npcs/players.")
 	SSblackbox.record_feedback("tally", "madrigal", 1, song)
 
 /datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
-	if (istype(target, /mob/living/carbon/human/npc))
-		var/mob/living/carbon/human/npc/N = target
-		N.old_movement = FALSE
-		N.walktarget = N.ChoosePath()
-
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
