@@ -3483,6 +3483,7 @@
 #include "code\modules\wod13\packadulteration.dm"
 #include "code\modules\wod13\pigs.dm"
 #include "code\modules\wod13\postal.dm"
+#include "code\modules\wod13\posters.dm"
 #include "code\modules\wod13\procs.dm"
 #include "code\modules\wod13\quirks.dm"
 #include "code\modules\wod13\stonks.dm"

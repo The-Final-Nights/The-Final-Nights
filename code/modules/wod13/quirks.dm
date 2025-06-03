@@ -156,7 +156,7 @@ Dancer
 	name = "Lively Aura"
 	desc = "You don't SEEM dead enough to readings, fooling a few forms of detection as to whether or not you're a walking corpse."
 	mob_trait = TRAIT_WARM_AURA
-	value = 3
+	value = 2
 	gain_text = "<span class='warning'>You feel your heart beat, for a moment.</span>"
 	lose_text = "<span class='notice'>You feel a subtle chill.</span>"
 	allowed_species = list("Kuei-Jin", "Vampire")
@@ -538,7 +538,7 @@ Dancer
 /datum/quirk/latin
 	name = "Latin"
 	desc = "You know the ancient holy language OF THE ROMANS AND THE CLERGY!!"
-	value = 2
+	value = 1
 
 /datum/quirk/latin/add()
 	var/mob/living/carbon/H = quirk_holder

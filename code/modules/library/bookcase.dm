@@ -22,6 +22,13 @@
 	var/category_prob = 25
 	/// How many random books to generate.
 	var/books_to_load = 0
+	// What books we don't want to generate on not their respective bookshelves
+	var/restricted_categories = list(
+		BOOK_CATEGORY_ADULT,
+		BOOK_CATEGORY_KINDRED,
+		BOOK_CATEGORY_LUPINE,
+		BOOK_CATEGORY_KUEIJIN,
+	)
 
 /obj/structure/bookcase/Initialize(mapload)
 	. = ..()
@@ -52,7 +59,7 @@
 	if(load_random_books)
 		var/randomizing_categories = prob(category_prob) || random_category == BOOK_CATEGORY_RANDOM
 		// We only need to run this special logic if we're randomizing a non-adult bookshelf
-		if(randomizing_categories && random_category != BOOK_CATEGORY_ADULT)
+		if(randomizing_categories && !(random_category in restricted_categories))
 			// Category is manually randomized rather than using BOOK_CATEGORY_RANDOM
 			// So we can exclude adult books in non-adult bookshelves
 			// And also weight the prime category more heavily
