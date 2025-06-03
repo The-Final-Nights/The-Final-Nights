@@ -61,7 +61,7 @@
 	SShumannpcpool.npclost()
 
 /mob/living/carbon/human/npc/Life()
-	if (stat == DEAD)
+	if(stat == DEAD)
 		return
 	..()
 	if(pulledby)
@@ -208,7 +208,7 @@
 	return TRUE
 
 /mob/living/carbon/human/npc/proc/handle_automated_movement()
-	if (CheckMove())
+	if(CheckMove())
 		return
 	var/fire_danger = FALSE
 	for(var/obj/effect/fire/F in range(7, src))
