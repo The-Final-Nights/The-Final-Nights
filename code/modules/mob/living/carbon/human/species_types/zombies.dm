@@ -142,7 +142,7 @@
 			for(var/datum/antagonist/A in host.mind.antag_datums)
 				if(A.objectives)
 					dat += "[printobjectives(A.objectives)]<BR>"
-		var/masquerade_level = " been a perfect tool for my Necromancer."
+		var/masquerade_level = " have been a perfect tool for my Necromancer."
 		switch(host.masquerade)
 			if(4)
 				masquerade_level = " have let my true nature slip once."
