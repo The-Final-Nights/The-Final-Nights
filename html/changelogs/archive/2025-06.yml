@@ -9,3 +9,6 @@
   - map: Removed glasswalker library computer
   - map: Fixed general bookshelves not being random
   - server: Disabled BYOND side authentication.
+2025-06-03:
+  XeonMations:
+  - bugfix: Dead bodies now cool down to room temperature.
