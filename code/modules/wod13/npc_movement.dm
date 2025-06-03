@@ -63,8 +63,6 @@
 /mob/living/carbon/human/npc/Life()
 	if (stat == DEAD)
 		return
-	if (superfan_active)
-		return
 	..()
 	if(pulledby)
 		if(prob(25))
@@ -109,8 +107,6 @@
 				return get_step(location, direction)
 
 /mob/living/carbon/human/npc/proc/ChoosePath()
-	if (superfan_active)
-		return null // No pathing allowed while entranced
 	if(!old_movement)
 		var/list/possible_list = list()
 		for(var/obj/effect/landmark/npcactivity/N in GLOB.npc_activities)
@@ -212,8 +208,6 @@
 	return TRUE
 
 /mob/living/carbon/human/npc/proc/handle_automated_movement()
-	if (superfan_active)
-		return
 	if (CheckMove())
 		return
 	var/fire_danger = FALSE

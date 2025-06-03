@@ -1300,29 +1300,29 @@
 // This sets up NPC SUPERFAN behavior, and can be called for use in other TFN behaviors, currently for the Melpominee Discipline.
 var/tmp/superfan_active = FALSE
 var/tmp/superfan_target = null
+var/tmp/superfan_emotion = null // The emotion to be used when the superfan is active.
 var/tmp/walktarget
-var/tmp/emotion = "stare" // Default emotion for the superfan behavior
 
 /mob/living/carbon/human/proc/create_superfan(duration, mob/living/walk_to_target, emotion)
 	if (!walk_to_target || superfan_active)
 		return
 
+	superfan_emotion = emotion
 	superfan_active = TRUE
 	superfan_target = walk_to_target
 	walktarget = null
 	walk(src, 0)
-
+	//This loops through the duration of the superfan effect, and checks if the target is far enough away to move again.
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(walk_to_superfan_target), walk_to_target)
 	for (var/i in 1 to duration)
 		addtimer(follow_cb, (i - 1) * total_multiplicative_slowdown())
 
-	// Ends Superfan behavior after the set time.
+	// This ends the superfan effect.
 	addtimer(CALLBACK(src, PROC_REF(end_superfan_effect)), duration * total_multiplicative_slowdown())
 
 /mob/living/carbon/human/proc/end_superfan_effect()
 	superfan_active = FALSE
 	superfan_target = null
-
 	if (isnpc(src))
 		walktarget = src:ChoosePath()
 
@@ -1335,10 +1335,9 @@ var/tmp/emotion = "stare" // Default emotion for the superfan behavior
 	else if (distance <= 0)
 		src.dir = get_dir(src, walk_to_target) // very close, face them
 		return
-
 	// Small chance to emote when entranced
 	if (prob(3))
-		emote(emotion)
+		emote(superfan_emotion)
 
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor
