@@ -3,7 +3,8 @@
 // Gravity Generator
 //
 
-GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding new gravity generators to the list, and keying it with the z level.
+/// We will keep track of this by adding new gravity generators to the list, and keying it with the z level.
+GLOBAL_LIST_EMPTY(gravity_generators)
 
 #define POWER_IDLE 0
 #define POWER_UP 1
@@ -132,7 +133,14 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	var/charge_count = 100
 	var/current_overlay = null
 	var/broken_state = 0
-	var/setting = 1	//Gravity value when on
+	///Gravity value when on
+	var/setting = 1
+
+///Station generator that spawns with gravity turned off.
+/obj/machinery/gravity_generator/main/station/off
+	on = FALSE
+	breaker = FALSE
+	charge_count = 0
 
 /obj/machinery/gravity_generator/main/Destroy() // If we somehow get deleted, remove all of our other parts.
 	investigate_log("was destroyed!", INVESTIGATE_GRAVITY)
@@ -159,6 +167,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 		if(count <= 3) // Their sprite is the top part of the generator
 			part.density = FALSE
 			part.layer = WALL_OBJ_LAYER
+			SET_PLANE(part, GAME_PLANE_UPPER, our_turf)
 		part.sprite_number = count
 		part.main_part = src
 		parts += part
@@ -359,14 +368,16 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 /obj/machinery/gravity_generator/main/proc/shake_everyone()
 	var/turf/T = get_turf(src)
 	var/sound/alert_sound = sound('sound/effects/alert.ogg')
-	for(var/i in GLOB.mob_list)
-		var/mob/M = i
-		if(M.z != z && !(SSmapping.level_trait(z, ZTRAITS_STATION) && SSmapping.level_trait(M.z, ZTRAITS_STATION)))
+	for(var/mob/mobs as anything in GLOB.mob_list)
+		var/turf/mob_turf = get_turf(mobs)
+		if(!istype(mob_turf))
+			continue
+		if(!is_valid_z_level(T, mob_turf))
 			continue
 		M.update_gravity(M.mob_has_gravity())
 		if(M.client)
 			shake_camera(M, 15, 1)
-			M.playsound_local(T, null, 100, 1, 0.5, S = alert_sound)
+			M.playsound_local(T, null, 100, 1, 0.5, sound_to_use = alert_sound)
 
 /obj/machinery/gravity_generator/main/proc/gravity_in_level()
 	var/turf/T = get_turf(src)
@@ -393,11 +404,40 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 				GLOB.gravity_generators["[z]"] |= src
 			else
 				GLOB.gravity_generators["[z]"] -= src
+			SSmapping.calculate_z_level_gravity(z)
 
 /obj/machinery/gravity_generator/main/proc/change_setting(value)
 	if(value != setting)
 		setting = value
 		shake_everyone()
+
+/obj/machinery/gravity_generator/main/proc/blackout()
+	charge_count = 0
+	breaker = FALSE
+	set_power()
+	disable()
+	investigate_log("was turned off by blackout event or a gravity anomaly detonation.", INVESTIGATE_GRAVITY)
+
+/obj/machinery/gravity_generator/main/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
+	. = ..()
+	disable()
+
+/obj/machinery/gravity_generator/main/afterShuttleMove(turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
+	. = ..()
+	if(charge_count != 0 && charging_state != POWER_UP)
+		enable()
+
+/obj/machinery/gravity_generator/main/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
+	. = ..()
+	if(same_z_layer)
+		return
+	for(var/obj/machinery/gravity_generator/part as anything in generator_parts)
+		SET_PLANE(part, PLANE_TO_TRUE(part.plane), new_turf)
+
+//prevents shuttles attempting to rotate this since it messes up sprites
+/obj/machinery/gravity_generator/main/shuttleRotate(rotation, params)
+	params = NONE
+	return ..()
 
 // Misc
 

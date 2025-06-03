@@ -82,8 +82,17 @@
 /obj/effect/decal/cleanable/blood/splatter
 	icon_state = "floor1" //MOJAVE SUN EDIT - Blood Sprites
 	random_icon_states = list("floor1", "floor2", "floor3", "floor4", "floor5", "floor6", "floor7","splatter1","splatter2","splatter3","splatter4","splatter5","splatter6") //MOJAVE SUN EDIT - Blood Sprites
+
 /obj/effect/decal/cleanable/blood/splatter/replace_decal(obj/effect/decal/cleanable/C) //MOJAVE SUN EDIT - Blood Sprites
 	return FALSE
+
+/obj/effect/decal/cleanable/blood/splatter/over_window // special layer/plane set to appear on windows
+	layer = ABOVE_WINDOW_LAYER
+	plane = GAME_PLANE
+	vis_flags = VIS_INHERIT_PLANE
+	turf_loc_check = FALSE
+	alpha = 180
+
 /obj/effect/decal/cleanable/blood/tracks
 	icon_state = "tracks"
 	desc = "They look like tracks left by wheels."

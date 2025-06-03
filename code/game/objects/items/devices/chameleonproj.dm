@@ -92,9 +92,21 @@
 		return
 	if(target.invisibility != 0)
 		return
-	playsound(get_turf(src), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
-	to_chat(user, "<span class='notice'>Scanned [target].</span>")
-	saved_appearance = target.appearance
+	if(iseffect(target))
+		if(!(istype(target, /obj/effect/decal))) //be a footprint
+			return
+	playsound(get_turf(src), 'sound/weapons/flash.ogg', 100, TRUE, -6)
+	to_chat(user, span_notice("Scanned [target]."))
+	var/obj/temp = new /obj()
+	temp.appearance = target.appearance
+	temp.layer = initial(target.layer) // scanning things in your inventory
+	SET_PLANE_EXPLICIT(temp, initial(plane), src)
+	saved_appearance = temp.appearance
+
+/obj/item/chameleon/proc/check_sprite(atom/target)
+	if(target.icon_state in icon_states(target.icon))
+		return TRUE
+	return FALSE
 
 /obj/item/chameleon/proc/toggle(mob/user)
 	if(!can_use || !saved_appearance)

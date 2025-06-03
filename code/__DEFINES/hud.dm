@@ -8,3 +8,11 @@
 
 /// Used in show_hud(); Please ensure this is the same as the maximum index.
 #define HUD_VERSIONS 3
+
+
+// Plane group keys, used to group swaths of plane masters that need to appear in subwindows
+/// The primary group, holds everything on the main window
+#define PLANE_GROUP_MAIN "main"
+/// A secondary group, used when a client views a generic window
+#define PLANE_GROUP_POPUP_WINDOW(screen) "popup-[REF(screen)]"
+

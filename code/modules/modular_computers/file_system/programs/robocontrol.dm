@@ -19,7 +19,6 @@
 /datum/computer_file/program/robocontrol/ui_data(mob/user)
 	var/list/data = get_header_data()
 	var/turf/current_turf = get_turf(ui_host())
-	var/zlevel = current_turf.z
 	var/list/botlist = list()
 	var/list/mulelist = list()
 
@@ -34,9 +33,8 @@
 	botcount = 0
 	current_user = user
 
-	for(var/B in GLOB.bots_list)
-		var/mob/living/simple_animal/bot/Bot = B
-		if(!Bot.on || Bot.z != zlevel || Bot.remote_disabled) //Only non-emagged bots on the same Z-level are detected!
+	for(var/mob/living/simple_animal/bot/simple_bot as anything in GLOB.bots_list)
+		if(!is_valid_z_level(current_turf, get_turf(simple_bot)) || !(simple_bot.bot_mode_flags & BOT_MODE_REMOTE_ENABLED)) //Only non-emagged bots on the same Z-level are detected!
 			continue
 		else if(computer) //Also, the inserted ID must have access to the bot type
 			var/obj/item/card/id/id_card = card_slot ? card_slot.stored_card : null
@@ -52,6 +50,19 @@
 				data["load"] = MULE.load.name
 			newbot["mule_check"] = TRUE
 		botlist += list(newbot)
+
+	for(var/mob/living/simple_animal/drone/all_drones as anything in GLOB.drones_list)
+		if(all_drones.hacked)
+			continue
+		if(!is_valid_z_level(current_turf, get_turf(all_drones)))
+			continue
+		var/list/drone_data = list(
+			"name" = all_drones.name,
+			"status" = all_drones.stat,
+			"drone_ref" = REF(all_drones),
+		)
+		data["drones"] += list(drone_data)
+
 
 	data["bots"] = botlist
 	data["mules"] = mulelist

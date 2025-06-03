@@ -94,6 +94,9 @@
 	user.remote_control = null
 	current_user = null
 	user.unset_machine()
+	var/atom/movable/screen/plane_master/plane_static = user.hud_used?.get_plane_master(CAMERA_STATIC_PLANE)
+	if(plane_static)
+		plane_static.hide_plane(user)
 	playsound(src, 'sound/machines/terminal_off.ogg', 25, FALSE)
 
 /obj/machinery/computer/camera_advanced/check_eye(mob/user)
@@ -177,8 +180,12 @@
 	user.remote_control = eyeobj
 	user.reset_perspective(eyeobj)
 	eyeobj.setLoc(eyeobj.loc)
-	if(should_supress_view_changes )
+	if(should_supress_view_changes)
 		user.client.view_size.supress()
+	// Who passes control like this god I hate static code
+	var/atom/movable/screen/plane_master/plane_static = user.hud_used?.get_plane_master(CAMERA_STATIC_PLANE)
+	if(plane_static)
+		plane_static.unhide_plane(user)
 
 /mob/camera/ai_eye/remote
 	name = "Inactive Camera Eye"
@@ -193,10 +200,10 @@
 	var/image/user_image = null
 
 /mob/camera/ai_eye/remote/update_remote_sight(mob/living/user)
-	user.see_invisible = SEE_INVISIBLE_LIVING //can't see ghosts through cameras
-	user.sight = SEE_TURFS | SEE_BLACKNESS
-	user.see_in_dark = 2
-	return 1
+	user.set_invis_see(SEE_INVISIBLE_LIVING) //can't see ghosts through cameras
+	user.set_sight(SEE_TURFS)
+	user.set_see_in_dark(2)
+	return TRUE
 
 /mob/camera/ai_eye/remote/Destroy()
 	if(origin && eye_user)
@@ -210,13 +217,7 @@
 		return eye_user.client
 	return null
 
-/mob/camera/ai_eye/remote/xenobio/canZMove(direction, turf/target)
-	var/area/new_area = get_area(target)
-	if(new_area && new_area.name == allowed_area || new_area && (new_area.area_flags & XENOBIOLOGY_COMPATIBLE))
-		return TRUE
-	return FALSE
-
-/mob/camera/ai_eye/remote/setLoc(T)
+/mob/camera/ai_eye/remote/setLoc(turf/destination, force_update = FALSE)
 	if(eye_user)
 		T = get_turf(T)
 		if (T)
@@ -229,7 +230,8 @@
 		if(visible_icon)
 			if(eye_user.client)
 				eye_user.client.images -= user_image
-				user_image = image(icon,loc,icon_state,FLY_LAYER)
+				user_image = image(icon,loc,icon_state, FLY_LAYER)
+				SET_PLANE(user_image, ABOVE_GAME_PLANE, destination)
 				eye_user.client.images += user_image
 
 /mob/camera/ai_eye/remote/relaymove(mob/living/user, direction)
@@ -313,8 +315,8 @@
 		return
 	var/mob/living/user_mob = target
 	var/mob/camera/ai_eye/remote/remote_eye = user_mob.remote_control
-	if(remote_eye.zMove(UP, FALSE))
-		to_chat(user_mob, "<span class='notice'>You move upwards.</span>")
+	if(remote_eye.zMove(UP))
+		to_chat(user_mob, span_notice("You move upwards."))
 	else
 		to_chat(user_mob, "<span class='notice'>You couldn't move upwards!</span>")
 
@@ -328,7 +330,7 @@
 		return
 	var/mob/living/user_mob = target
 	var/mob/camera/ai_eye/remote/remote_eye = user_mob.remote_control
-	if(remote_eye.zMove(DOWN, FALSE))
-		to_chat(user_mob, "<span class='notice'>You move downwards.</span>")
+	if(remote_eye.zMove(DOWN))
+		to_chat(user_mob, span_notice("You move downwards."))
 	else
 		to_chat(user_mob, "<span class='notice'>You couldn't move downwards!</span>")

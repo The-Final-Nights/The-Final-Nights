@@ -20,7 +20,7 @@ the new instance inside the host to be updated to the template's stats.
 	see_invisible = SEE_INVISIBLE_LIVING
 	layer = BELOW_MOB_LAYER
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
-	sight = SEE_SELF|SEE_THRU
+	sight = SEE_SELF|SEE_THRU|SEE_BLACKNESS
 	initial_language_holder = /datum/language_holder/universal
 
 	var/freemove = TRUE
@@ -117,6 +117,9 @@ the new instance inside the host to be updated to the template's stats.
 		if(world.time > (last_move_tick + disease_move_delay))
 			follow_next(Dir & NORTHWEST)
 			last_move_tick = world.time
+
+/mob/camera/disease/can_z_move(direction, turf/start, turf/destination, z_move_flags = NONE, mob/living/rider)
+	return FALSE
 
 /mob/camera/disease/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
 	. = ..()
@@ -218,7 +221,7 @@ the new instance inside the host to be updated to the template's stats.
 			A.Buy(src, TRUE, FALSE)
 	if(freemove_end_timerid)
 		deltimer(freemove_end_timerid)
-	sight = SEE_SELF
+	set_sight(SEE_SELF)
 
 /mob/camera/disease/proc/add_infection(datum/disease/advance/sentient_disease/V)
 	disease_instances += V

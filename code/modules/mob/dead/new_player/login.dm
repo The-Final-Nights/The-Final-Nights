@@ -24,7 +24,7 @@
 	if(spc && living_player_count() >= spc)
 		to_chat(src, "<span class='notice'><b>Server Notice:</b>\n \t [CONFIG_GET(string/soft_popcap_message)]</span>")
 
-	sight |= SEE_TURFS
+	add_sight(SEE_TURFS)
 
 	client.playtitlemusic()
 

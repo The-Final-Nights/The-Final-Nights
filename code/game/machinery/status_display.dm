@@ -68,7 +68,29 @@
 		message2 = ""
 		index2 = 0
 
-// Timed process - performs default marquee action if so needed.
+	switch(current_mode)
+		if(SD_BLANK)
+			remove_messages()
+			// Turn off backlight.
+			return
+		if(SD_PICTURE)
+			remove_messages()
+			. += mutable_appearance(icon, current_picture)
+		else
+			var/overlay = update_message(message1_overlay, LINE1_Y, message1)
+			if(overlay)
+				message1_overlay = overlay
+			overlay = update_message(message2_overlay, LINE2_Y, message2)
+			if(overlay)
+				message2_overlay = overlay
+
+			// Turn off backlight if message is blank
+			if(message1 == "" && message2 == "")
+				return
+
+	. += emissive_appearance(icon, "outline", src, alpha = src.alpha)
+
+// Timed process - performs nothing in the base class
 /obj/machinery/status_display/process()
 	if(machine_stat & NOPOWER)
 		// No power, no processing.

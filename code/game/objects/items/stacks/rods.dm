@@ -9,9 +9,9 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 	))
 
 /obj/item/stack/rods
-	name = "metal rod"
+	name = "iron rod"
 	desc = "Some rods. Can be used for building or something."
-	singular_name = "metal rod"
+	singular_name = "iron rod"
 	icon_state = "rods"
 	inhand_icon_state = "rods"
 	flags_1 = CONDUCT_1
@@ -29,7 +29,7 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 	novariants = TRUE
 	matter_amount = 2
 	cost = 250
-	source = /datum/robot_energy_storage/metal
+	source = /datum/robot_energy_storage/iron
 	merge_type = /obj/item/stack/rods
 
 /obj/item/stack/rods/suicide_act(mob/living/carbon/user)
@@ -39,6 +39,11 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 /obj/item/stack/rods/Initialize(mapload, new_amount, merge = TRUE, list/mat_override=null, mat_amt=1)
 	. = ..()
 	update_appearance()
+	AddElement(/datum/element/openspace_item_click_handler)
+
+/obj/item/stack/rods/handle_openspace_click(turf/target, mob/user, proximity_flag, click_parameters)
+	if(proximity_flag)
+		target.attackby(src, user, click_parameters)
 
 /obj/item/stack/rods/get_main_recipes()
 	. = ..()
@@ -59,9 +64,9 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 			return
 
 		if(W.use_tool(src, user, 0, volume=40))
-			var/obj/item/stack/sheet/metal/new_item = new(usr.loc)
-			user.visible_message("<span class='notice'>[user.name] shaped [src] into metal with [W].</span>", \
-				"<span class='notice'>You shape [src] into metal with [W].</span>", \
+			var/obj/item/stack/sheet/iron/new_item = new(usr.loc)
+			user.visible_message("<span class='notice'>[user.name] shaped [src] into iron sheets with [W].</span>", \
+				"<span class='notice'>You shape [src] into iron sheets with [W].</span>", \
 				"<span class='hear'>You hear welding.</span>")
 			var/obj/item/stack/rods/R = src
 			src = null
@@ -87,7 +92,7 @@ GLOBAL_LIST_INIT(rod_recipes, list ( \
 
 /obj/item/stack/rods/lava
 	name = "heat resistant rod"
-	desc = "Treated, specialized metal rods. When exposed to the vaccum of space their coating breaks off, but they can hold up against the extreme heat of active lava."
+	desc = "Treated, specialized iron rods. When exposed to the vaccum of space their coating breaks off, but they can hold up against the extreme heat of active lava."
 	singular_name = "heat resistant rod"
 	icon_state = "rods"
 	inhand_icon_state = "rods"

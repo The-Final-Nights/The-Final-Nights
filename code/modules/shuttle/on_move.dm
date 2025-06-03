@@ -87,7 +87,7 @@ All ShuttleMove procs go here
 /atom/movable/proc/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
 	return move_mode
 
-// Called on atoms to move the atom to the new location
+/// Called on atoms to move the atom to the new location
 /atom/movable/proc/onShuttleMove(turf/newT, turf/oldT, list/movement_force, move_dir, obj/docking_port/stationary/old_dock, obj/docking_port/mobile/moving_dock)
 	if(newT == oldT) // In case of in place shuttle rotation shenanigans.
 		return
@@ -105,7 +105,8 @@ All ShuttleMove procs go here
 
 	var/turf/newT = get_turf(src)
 	if (newT.z != oldT.z)
-		onTransitZ(oldT.z, newT.z)
+		var/same_z_layer = (GET_TURF_PLANE_OFFSET(oldT) == GET_TURF_PLANE_OFFSET(newT))
+		on_changed_z_level(oldT, newT, same_z_layer)
 
 	if(light)
 		update_light()
@@ -319,9 +320,6 @@ All ShuttleMove procs go here
 
 /************************************Misc move procs************************************/
 
-/atom/movable/lighting_object/onShuttleMove()
-	return FALSE
-
 /obj/docking_port/mobile/beforeShuttleMove(turf/newT, rotation, move_mode, obj/docking_port/mobile/moving_dock)
 	. = ..()
 	if(moving_dock == src)
@@ -329,6 +327,10 @@ All ShuttleMove procs go here
 
 // Never move the stationary docking port, otherwise things get WEIRD
 /obj/docking_port/stationary/onShuttleMove()
+	return FALSE
+
+// Holy shit go away
+/obj/effect/abstract/z_holder/onShuttleMove()
 	return FALSE
 
 // Special movable stationary port, for your mothership shenanigans

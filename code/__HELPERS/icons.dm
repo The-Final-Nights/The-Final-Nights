@@ -204,7 +204,7 @@ mob
 	icon_state = "blue"
 	pixel_x = -24
 	pixel_y = 24
-	layer = TURF_LAYER // Should appear below the rest of the overlays
+	layer = ABOVE_OPEN_TURF_LAYER // Should appear below the rest of the overlays
 
 world
 	view = "7x7"
@@ -1081,23 +1081,23 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 
 GLOBAL_LIST_INIT(freon_color_matrix, list("#2E5E69", "#60A2A8", "#A1AFB1", rgb(0,0,0)))
 
-/obj/proc/make_frozen_visual()
-	// Used to make the frozen item visuals for Freon.
-	if(resistance_flags & FREEZE_PROOF)
-		return
-	if(!(obj_flags & FROZEN))
-		name = "frozen [name]"
-		add_atom_colour(GLOB.freon_color_matrix, TEMPORARY_COLOUR_PRIORITY)
-		alpha -= 25
-		obj_flags |= FROZEN
-
 //Assumes already frozed
 /obj/proc/make_unfrozen()
-	if(obj_flags & FROZEN)
-		name = replacetext(name, "frozen ", "")
-		remove_atom_colour(TEMPORARY_COLOUR_PRIORITY, GLOB.freon_color_matrix)
-		alpha += 25
-		obj_flags &= ~FROZEN
+	SEND_SIGNAL(src, COMSIG_OBJ_UNFREEZE)
+
+/// generates a filename for a given asset.
+/// like generate_asset_name(), except returns the rsc reference and the rsc file hash as well as the asset name (sans extension)
+/// used so that certain asset files dont have to be hashed twice
+/proc/generate_and_hash_rsc_file(file, dmi_file_path)
+	var/rsc_ref = fcopy_rsc(file)
+	var/hash
+	//if we have a valid dmi file path we can trust md5'ing the rsc file because we know it doesnt have the bug described in http://www.byond.com/forum/post/2611357
+	if(dmi_file_path)
+		hash = md5(rsc_ref)
+	else //otherwise, we need to do the expensive fcopy() workaround
+		hash = md5asfile(rsc_ref)
+
+	return list(rsc_ref, hash, "asset.[hash]")
 
 /// Generate a filename for this asset
 /// The same asset will always lead to the same asset name
@@ -1241,9 +1241,8 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
  * result_appearance - End result appearance/atom/image
  * time - Animation duration
  * transform_overlay - Appearance/atom/image of effect that moves along the animation - should be horizonatally centered
- * reset_after - If FALSE, filters won't be reset and helper vis_objects will not be removed after animation duration expires. Cleanup must be handled by the caller!
  */
-/atom/movable/proc/transformation_animation(result_appearance,time = 3 SECONDS,transform_overlay,reset_after=TRUE)
+/atom/movable/proc/transformation_animation(result_appearance,time = 3 SECONDS,transform_overlay)
 	var/list/transformation_objects = GLOB.transformation_animation_objects[src] || list()
 	//Disappearing part
 	var/top_part_filter = filter(type="alpha",icon=icon('icons/effects/alphacolors.dmi',"white"),y=0)
@@ -1272,8 +1271,7 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
 	GLOB.transformation_animation_objects[src] = transformation_objects
 	for(var/A in transformation_objects)
 		vis_contents += A
-	if(reset_after)
-		addtimer(CALLBACK(src, PROC_REF(_reset_transformation_animation),filter_index),time)
+	addtimer(CALLBACK(src, PROC_REF(_reset_transformation_animation),filter_index),time)
 
 /*
  * Resets filters and removes transformation animations helper objects from vis contents.

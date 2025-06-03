@@ -24,6 +24,19 @@
 	update_ai_detect_hud()
 	setLoc(loc, TRUE)
 
+/mob/camera/ai_eye/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
+	. = ..()
+	if(same_z_layer)
+		return
+	update_ai_detect_hud()
+
+/mob/camera/ai_eye/examine(mob/user) //Displays a silicon's laws to ghosts
+	. = ..()
+	if(istype(ai) && ai.laws && isobserver(user))
+		. += "<b>[ai] has the following laws:</b>"
+		for(var/law in ai.laws.get_law_list(include_zeroth = TRUE))
+			. += law
+
 /mob/camera/ai_eye/proc/update_ai_detect_hud()
 	var/datum/atom_hud/ai_detector/hud = GLOB.huds[DATA_HUD_AI_DETECT]
 	var/list/old_images = hud_list[AI_DETECT_HUD]
@@ -37,12 +50,17 @@
 		return
 	hud.remove_from_hud(src)
 
-	var/static/list/vis_contents_objects = list()
-	var/obj/effect/overlay/ai_detect_hud/hud_obj = vis_contents_objects[ai_detector_color]
+	var/static/list/vis_contents_opaque = list()
+	var/turf/our_turf = get_turf(src)
+	var/our_z_offset = GET_TURF_PLANE_OFFSET(our_turf)
+	var/key = "[our_z_offset]-[ai_detector_color]"
+
+	var/obj/effect/overlay/ai_detect_hud/hud_obj = vis_contents_opaque[key]
 	if(!hud_obj)
 		hud_obj = new /obj/effect/overlay/ai_detect_hud()
+		SET_PLANE_W_SCALAR(hud_obj, PLANE_TO_TRUE(hud_obj.plane), our_z_offset)
 		hud_obj.color = ai_detector_color
-		vis_contents_objects[ai_detector_color] = hud_obj
+		vis_contents_opaque[key] = hud_obj
 
 	var/list/new_images = list()
 	var/list/turfs = get_visible_turfs()
@@ -82,7 +100,7 @@
 		if(use_static != USE_STATIC_NONE)
 			ai.camera_visibility(src)
 		if(ai.client && !ai.multicam_on)
-			ai.client.eye = src
+			ai.client.set_eye(src)
 		update_ai_detect_hud()
 		update_parallax_contents()
 		//Holopad
@@ -94,24 +112,14 @@
 		if(ai.master_multicam)
 			ai.master_multicam.refresh_view()
 
-//it uses setLoc not forceMove, talks to the sillycone and not the camera mob
-/mob/camera/ai_eye/zMove(dir, feedback = FALSE)
-	if(dir != UP && dir != DOWN)
-		return FALSE
-	var/turf/target = get_step_multiz(src, dir)
-	if(!target)
-		if(feedback)
-			to_chat(ai, "<span class='warning'>There's nowhere to go in that direction!</span>")
-		return FALSE
-	if(!canZMove(dir, target))
-		if(feedback)
-			to_chat(ai, "<span class='warning'>You couldn't move there!</span>")
-		return FALSE
-	setLoc(target, TRUE)
-	return TRUE
+/mob/camera/ai_eye/zMove(dir, turf/target, z_move_flags = NONE, recursions_left = 1, list/falling_movs)
+	. = ..()
+	if(.)
+		setLoc(loc, force_update = TRUE)
 
-/mob/camera/ai_eye/canZMove(direction, turf/target) //cameras do not respect these FLOORS you speak so much of
-	return TRUE
+/mob/camera/ai_eye/can_z_move(direction, turf/start, turf/destination, z_move_flags = NONE, mob/living/rider)
+	z_move_flags |= ZMOVE_IGNORE_OBSTACLES  //cameras do not respect these FLOORS you speak so much of
+	return ..()
 
 /mob/camera/ai_eye/Move()
 	return

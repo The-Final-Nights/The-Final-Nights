@@ -66,6 +66,17 @@
     }
   }
 
+  .Button--disabled {
+    color: #c5c5c2;
+    font-family: monospace;
+    &:hover {
+      color: #ffffff;
+    }
+    &:focus {
+      color: #ffffff;
+    }
+  }
+
   .Layout__content {
     background-image: none;
   }

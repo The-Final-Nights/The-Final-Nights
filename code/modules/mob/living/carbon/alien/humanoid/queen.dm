@@ -12,7 +12,20 @@
 
 	var/alt_inhands_file = 'icons/mob/alienqueen.dmi'
 
-/mob/living/carbon/alien/humanoid/royal/can_inject()
+/mob/living/carbon/alien/humanoid/royal/Initialize(mapload)
+	. = ..()
+	// as a wise man once wrote: "pull over that ass too fat"
+	REMOVE_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
+
+/mob/living/carbon/alien/humanoid/royal/on_lying_down(new_lying_angle)
+	. = ..()
+	SET_PLANE_IMPLICIT(src, GAME_PLANE_FOV_HIDDEN) //So it won't hide smaller mobs.
+
+/mob/living/carbon/alien/humanoid/royal/on_standing_up(new_lying_angle)
+	. = ..()
+	SET_PLANE_IMPLICIT(src, initial(plane))
+
+/mob/living/carbon/alien/humanoid/royal/can_inject(mob/user, target_zone, injection_flags)
 	return FALSE
 
 /mob/living/carbon/alien/humanoid/royal/queen

@@ -185,7 +185,7 @@
 
 /mob/living/simple_animal/bot/mulebot/update_icon_state() //if you change the icon_state names, please make sure to update /datum/wires/mulebot/on_pulse() as well. <3
 	. = ..()
-	icon_state = "[base_icon][on ? wires.is_cut(WIRE_AVOIDANCE) : 0]"
+	icon_state = "[base_icon][(bot_mode_flags & BOT_MODE_ON) ? wires.is_cut(WIRE_AVOIDANCE) : 0]"
 
 /mob/living/simple_animal/bot/mulebot/update_overlays()
 	. = ..()
@@ -492,7 +492,7 @@
 		load.forceMove(loc)
 		load.pixel_y = initial(load.pixel_y)
 		load.layer = initial(load.layer)
-		load.plane = initial(load.plane)
+		SET_PLANE_EXPLICIT(load, initial(load.plane), src)
 		load = null
 
 	if(dirn) //move the thing to the delivery point.
@@ -518,13 +518,7 @@
 		pathset = 1 //Indicates the AI's custom path is initialized.
 		start()
 
-/mob/living/simple_animal/bot/mulebot/Move(atom/newloc, direct) //handle leaving bloody tracks. can't be done via Moved() since that can end up putting the tracks somewhere BEFORE we get bloody.
-	if(!has_power((client || paicard))) //turn off if we ran out of power.
-		turn_off()
-		return FALSE
-	if(!bloodiness) //important to check this first since Bump() is called in the Move() -> Entered() chain
-		return ..()
-	var/atom/oldLoc = loc
+/mob/living/simple_animal/bot/mulebot/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
 	if(!last_move || isspaceturf(oldLoc)) //if we didn't sucessfully move, or if our old location was a spaceturf.
 		return

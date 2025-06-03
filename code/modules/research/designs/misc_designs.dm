@@ -287,7 +287,7 @@
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING
 
 /datum/design/lavarods
-	name = "Lava-Resistant Metal Rods"
+	name = "Lava-Resistant Iron Rods"
 	id = "lava_rods"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron=1000, /datum/material/plasma=500, /datum/material/titanium=2000)

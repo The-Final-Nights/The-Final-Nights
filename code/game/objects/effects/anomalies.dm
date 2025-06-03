@@ -102,7 +102,13 @@
 	var/boing = 0
 	aSignal = /obj/item/assembly/signaler/anomaly/grav
 
-/obj/effect/anomaly/grav/anomalyEffect()
+/obj/effect/anomaly/grav/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
+	. = ..()
+	if(same_z_layer)
+		return
+	SET_PLANE(warp, PLANE_TO_TRUE(warp.plane), new_turf)
+
+/obj/effect/anomaly/grav/anomalyEffect(delta_time)
 	..()
 	boing = 1
 	for(var/obj/O in orange(4, src))
@@ -177,6 +183,10 @@
 
 /obj/effect/anomaly/flux/Crossed(atom/movable/AM)
 	. = ..()
+	. += emissive_appearance(icon, icon_state, src, alpha=src.alpha)
+
+/obj/effect/anomaly/flux/proc/on_entered(datum/source, atom/movable/AM)
+	SIGNAL_HANDLER
 	mobShock(AM)
 
 /obj/effect/anomaly/flux/Bump(atom/A)

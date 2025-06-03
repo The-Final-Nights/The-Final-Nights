@@ -334,7 +334,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		return INITIALIZE_HINT_QDEL
 	feedback_details += "Source: [wall.x],[wall.y],[wall.z]"
 
-	fakebroken = image('icons/turf/floors.dmi', wall, "plating", layer = TURF_LAYER)
+	fakebroken = image('icons/turf/floors.dmi', wall, "plating", layer = LOW_FLOOR_LAYER)
 	landing = get_turf(target)
 	var/turf/landing_image_turf = get_step(landing, SOUTHWEST) //the icon is 3x3
 	fakerune = image('icons/effects/96x96.dmi', landing_image_turf, "landing", layer = ABOVE_OPEN_TURF_LAYER)
@@ -1334,7 +1334,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	name = "lava"
 
 /obj/effect/hallucination/danger/lava/show_icon()
-	image = image('icons/turf/floors/lava.dmi', src, "lava-0", TURF_LAYER)
+	image = image('icons/turf/floors/lava.dmi', src, "lava-0", ABOVE_OPEN_TURF_LAYER)
 	if(target.client)
 		target.client.images += image
 
@@ -1349,7 +1349,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 
 /obj/effect/hallucination/danger/chasm/show_icon()
 	var/turf/target_loc = get_turf(target)
-	image = image('icons/turf/floors/chasms.dmi', src, "chasms-[target_loc.smoothing_junction]", TURF_LAYER)
+	image = image('icons/turf/floors/chasms.dmi', src, "chasms-[target_loc.smoothing_junction]", ABOVE_OPEN_TURF_LAYER)
 	if(target.client)
 		target.client.images += image
 
@@ -1562,13 +1562,13 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		var/turf/open/floor/husk_point = pick(possible_points)
 		switch(rand(1,4))
 			if(1, 2)
-				var/image/body = image('icons/mob/human.dmi',husk_point,"husk",TURF_LAYER)
+				var/image/body = image('icons/mob/human.dmi',husk_point,"husk",ABOVE_OPEN_TURF_LAYER)
 				var/matrix/M = matrix()
 				M.Turn(90)
 				body.transform = M
 				halbody = body
 			if(3,4)
-				halbody = image('icons/mob/human.dmi',husk_point,"husk",TURF_LAYER)
+				halbody = image('icons/mob/human.dmi',husk_point,"husk",ABOVE_OPEN_TURF_LAYER)
 
 		if(target.client)
 			target.client.images += halbody
@@ -1725,7 +1725,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 
 	if(possible_points.len)
 		var/turf/open/floor/auspex_turf = pick(possible_points)
-		auspex_aura = image('icons/mob/hud.dmi', auspex_turf, "aura", TURF_LAYER)
+		auspex_aura = image('icons/mob/hud.dmi', auspex_turf, "aura", ABOVE_OPEN_TURF_LAYER)
 
 		switch(pick(1, 2))
 			if(1)

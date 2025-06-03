@@ -104,11 +104,70 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 		if(istype(ghost))
 			ghost.ManualFollow(src)
 
-/obj/effect/immovablerod/Moved()
-	if((z != z_original))
-		qdel(src)
-	if(special_target && loc == get_turf(special_target))
-		complete_trajectory()
+/obj/effect/immovablerod/proc/on_entered_over_movable(datum/source, atom/movable/atom_crossed_over)
+	SIGNAL_HANDLER
+	if((atom_crossed_over.density || isliving(atom_crossed_over)) && !QDELETED(atom_crossed_over))
+		Bump(atom_crossed_over)
+
+/obj/effect/immovablerod/proc/on_entering_atom(datum/source, atom/destination, atom/old_loc, list/atom/old_locs)
+	SIGNAL_HANDLER
+	if(destination.density && isturf(destination))
+		Bump(destination)
+
+/obj/effect/immovablerod/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	if(!loc)
+		return ..()
+
+	for(var/atom/movable/to_bump in loc)
+		if((to_bump != src) && !QDELETED(to_bump) && (to_bump.density || isliving(to_bump)))
+			Bump(to_bump)
+
+	// If we have a special target, we should definitely make an effort to go find them.
+	if(special_target)
+		var/turf/target_turf = get_turf(special_target)
+
+		// Did they escape the z-level? Let's see if we can chase them down!
+		var/z_diff = target_turf.z - z
+
+		if(z_diff)
+			var/direction = z_diff > 0 ? UP : DOWN
+			var/turf/target_z_turf = get_step_multiz(src, direction)
+
+			visible_message(span_danger("[src] phases out of reality."))
+
+			if(!do_teleport(src, target_z_turf))
+				// We failed to teleport. Might as well admit defeat.
+				qdel(src)
+				return
+
+			visible_message(span_danger("[src] phases into reality."))
+			SSmove_manager.home_onto(src, special_target)
+
+		if(loc == target_turf)
+			complete_trajectory()
+
+		return ..()
+
+	// If we have a destination turf, let's make sure it's also still valid.
+	if(destination_turf)
+
+		// If the rod is a loopy_rod, run complete_trajectory() to get a new edge turf to fly to.
+		// Otherwise, qdel the rod.
+		if(destination_turf.z != z)
+			if(loopy_rod)
+				complete_trajectory()
+				return ..()
+
+			qdel(src)
+			return
+
+		// Did we reach our destination? We're probably on Icebox. Let's get rid of ourselves.
+		// Ordinarily this won't happen as the average destination is the edge of the map and
+		// the rod will auto transition to a new z-level.
+		if(loc == destination_turf)
+			qdel(src)
+			return
+
 	return ..()
 
 /obj/effect/immovablerod/proc/complete_trajectory()

@@ -210,7 +210,8 @@
 	charge = new
 	AddAbility(charge)
 
-/mob/living/simple_animal/hostile/poison/giant_spider/tarantula/Moved(atom/oldloc, dir)
+
+/mob/living/simple_animal/hostile/giant_spider/tarantula/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()
 	var/obj/structure/spider/stickyweb/web = locate() in loc
 	if(web && !silk_walking)

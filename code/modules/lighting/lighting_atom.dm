@@ -41,8 +41,8 @@
 
 #undef NONSENSICAL_VALUE
 
-// Will update the light (duh).
-// Creates or destroys it if needed, makes it update values, makes sure it's got the correct source turf...
+/// Will update the light (duh).
+/// Creates or destroys it if needed, makes it update values, makes sure it's got the correct source turf...
 /atom/proc/update_light()
 	set waitfor = FALSE
 	if (QDELETED(src))
@@ -95,27 +95,6 @@
 	if(isnull(.))
 		return
 	recalculate_directional_opacity()
-
-
-/atom/Destroy()
-	. = ..()
-	if(parent_multiz_light)
-		qdel(parent_multiz_light)
-
-/atom/movable/Moved(atom/OldLoc, Dir)
-	. = ..()
-	var/datum/light_source/L
-	var/thing
-	for (thing in light_sources) // Cycle through the light sources on this atom and tell them to update.
-		L = thing
-		L.source_atom.update_light()
-		if(L.source_atom.parent_multiz_light)
-			L.source_atom.parent_multiz_light.forceMove(get_step_multiz(src, UP))
-			if(!istype(L.source_atom.parent_multiz_light.loc, /turf/open/openspace))
-				qdel(L.source_atom.parent_multiz_light)
-		else if(istype(get_step_multiz(L.source_atom, UP), /turf/open/openspace))
-			L.source_atom.parent_multiz_light = new(get_step_multiz(L.source_atom, UP))
-
 
 /atom/proc/flash_lighting_fx(_range = FLASH_LIGHT_RANGE, _power = FLASH_LIGHT_POWER, _color = COLOR_WHITE, _duration = FLASH_LIGHT_DURATION)
 	return

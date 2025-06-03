@@ -18,7 +18,7 @@
 /obj/structure/reagent_dispensers/examine(mob/user)
 	. = ..()
 	if(can_be_tanked)
-		. += "<span class='notice'>Use a sheet of metal to convert this into a plumbing-compatible tank.</span>"
+		. += "<span class='notice'>Use a sheet of iron to convert this into a plumbing-compatible tank.</span>"
 
 /obj/structure/reagent_dispensers/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
 	. = ..()

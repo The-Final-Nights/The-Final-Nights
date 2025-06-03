@@ -17,7 +17,7 @@
 	var/heat_proof_finished = 0 //whether to heat-proof the finished airlock
 	var/previous_assembly = /obj/structure/door_assembly
 	var/noglass = FALSE //airlocks with no glass version, also cannot be modified with sheets
-	var/material_type = /obj/item/stack/sheet/metal
+	var/material_type = /obj/item/stack/sheet/iron
 	var/material_amt = 4
 
 /obj/structure/door_assembly/Initialize()
@@ -273,10 +273,10 @@
 /obj/structure/door_assembly/update_overlays()
 	. = ..()
 	if(!glass)
-		. += get_airlock_overlay("fill_construction", icon)
+		. += get_airlock_overlay("fill_construction", icon, src, TRUE)
 	else
-		. += get_airlock_overlay("glass_construction", overlays_file)
-	. += get_airlock_overlay("panel_c[state+1]", overlays_file)
+		. += get_airlock_overlay("glass_construction", overlays_file, src, TRUE)
+	. += get_airlock_overlay("panel_c[state+1]", overlays_file, src, TRUE)
 
 /obj/structure/door_assembly/update_name()
 	name = ""

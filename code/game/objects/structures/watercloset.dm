@@ -9,7 +9,7 @@
 	var/cistern = 0			//if the cistern bit is open
 	var/w_items = 0			//the combined w_class of all the items in the cistern
 	var/mob/living/swirlie = null	//the mob being given a swirlie
-	var/buildstacktype = /obj/item/stack/sheet/metal //they're metal now, shut up
+	var/buildstacktype = /obj/item/stack/sheet/iron //they're iron now, shut up
 	var/buildstackamount = 1
 
 /obj/structure/toilet/Initialize()
@@ -259,7 +259,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 	///What kind of reagent is produced by this sink by default? (We now have actual plumbing, Arcane, August 2020)
 	var/dispensedreagent = /datum/reagent/water
 	///Material to drop when broken or deconstructed.
-	var/buildstacktype = /obj/item/stack/sheet/metal
+	var/buildstacktype = /obj/item/stack/sheet/iron
 	///Number of sheets of material to drop when broken or deconstructed.
 	var/buildstackamount = 1
 	///Does the sink have a water recycler to recollect it's water supply?
@@ -645,15 +645,15 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 
 /obj/structure/curtain/proc/toggle()
 	open = !open
-	update_icon()
-
-/obj/structure/curtain/update_icon()
-	. = ..()
-	if(!open)
-		icon_state = "[icon_type]-closed"
-		layer = ABOVE_ALL_MOB_LAYERS_LAYER
-		density = TRUE
-		open = FALSE
+	if(open)
+		layer = SIGN_LAYER
+		SET_PLANE_IMPLICIT(src, GAME_PLANE)
+		set_density(FALSE)
+		set_opacity(FALSE)
+	else
+		layer = WALL_OBJ_LAYER
+		SET_PLANE_IMPLICIT(src, GAME_PLANE_UPPER)
+		set_density(TRUE)
 		if(opaque_closed)
 			set_opacity(TRUE)
 	else
@@ -753,15 +753,17 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 
 /obj/structure/curtain/cloth/fancy/mechanical/proc/open()
 	icon_state = "[icon_type]-open"
-	layer = ABOVE_ALL_MOB_LAYERS_LAYER
-	density = FALSE
+	layer = SIGN_LAYER
+	SET_PLANE_IMPLICIT(src, GAME_PLANE)
+	set_density(FALSE)
 	open = TRUE
 	set_opacity(FALSE)
 
 /obj/structure/curtain/cloth/fancy/mechanical/proc/close()
 	icon_state = "[icon_type]-closed"
-	layer = ABOVE_ALL_MOB_LAYERS_LAYER
-	density = TRUE
+	layer = WALL_OBJ_LAYER
+	SET_PLANE_IMPLICIT(src, GAME_PLANE_UPPER)
+	set_density(TRUE)
 	open = FALSE
 	if(opaque_closed)
 		set_opacity(TRUE)
