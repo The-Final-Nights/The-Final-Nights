@@ -45,14 +45,21 @@
 	if(!dna || !dna.species)
 		return
 	icon_state = "[sprite_color]_flying"
-	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[in_flight]")
-
+	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes_flying")
+	eye_overlay.color = sprite_eye_color
+	eye_overlay.plane = ABOVE_LIGHTING_PLANE
+	eye_overlay.layer = ABOVE_LIGHTING_LAYER
+	add_overlay(eye_overlay)
 
 /mob/living/carbon/werewolf/lupus/corvid/proc/CloseWings()
 	if(!dna || !dna.species)
 		return
 	icon_state = "[sprite_color]"
 	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes")
+	eye_overlay.color = sprite_eye_color
+	eye_overlay.plane = ABOVE_LIGHTING_PLANE
+	eye_overlay.layer = ABOVE_LIGHTING_LAYER
+	add_overlay(eye_overlay)
 	if(isturf(loc))
 		var/turf/T = loc
 		T.Entered(src)
@@ -65,7 +72,7 @@
 	cut_overlays()
 
 	var/laid_down = FALSE
-	var/in_flight = FALSE // differnt from "FLYING"
+	var/in_flight = FALSE // different from "FLYING"
 
 	if((stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN) && !HAS_TRAIT(src, TRAIT_MOVE_FLYING))
 		icon_state = "[sprite_color]_rest"
