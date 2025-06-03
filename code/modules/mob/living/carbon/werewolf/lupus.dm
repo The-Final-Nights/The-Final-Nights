@@ -41,19 +41,22 @@
 	health = 100
 	maxHealth = 100 // I predict that the sprites will be hell to click, no extra HP compared to homid
 
-/mob/living/carbon/werewolf/lupus/corvid/proc/OpenWings() //openwing and closewing simply change the sprite of the corax to be that of a flying or landed bird.
+/mob/living/carbon/werewolf/lupus/corvid/proc/OpenWings() //openwing and closewing change our sprite to be that of the corresponding status, not having them causes a delay in sprite update as we wait for update_icons
 	if(!dna || !dna.species)
 		return
 	icon_state = "[sprite_color]_flying"
+	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[in_flight]")
 
 
 /mob/living/carbon/werewolf/lupus/corvid/proc/CloseWings()
 	if(!dna || !dna.species)
 		return
 	icon_state = "[sprite_color]"
+	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes")
 	if(isturf(loc))
 		var/turf/T = loc
 		T.Entered(src)
+
 
 /datum/movespeed_modifier/lupusform
 		multiplicative_slowdown = -0.7
@@ -62,12 +65,17 @@
 	cut_overlays()
 
 	var/laid_down = FALSE
+	var/in_flight = FALSE // differnt from "FLYING"
 
-	if(stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN)
+	if((stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN) && !HAS_TRAIT(src, TRAIT_MOVE_FLYING))
 		icon_state = "[sprite_color]_rest"
 		laid_down = TRUE
+	if(HAS_TRAIT(src, TRAIT_MOVE_FLYING)) // important to have or our bird will just stop flapping his wings and walk in the air.
+		icon_state = icon_state = "[sprite_color]_flying"
+		in_flight = TRUE
 	else
 		icon_state = "[sprite_color]"
+
 
 	switch(getFireLoss()+getBruteLoss())
 		if(25 to 75)
@@ -80,7 +88,7 @@
 			var/mutable_appearance/damage_overlay = mutable_appearance(icon, "damage3[laid_down ? "_rest" : ""]")
 			add_overlay(damage_overlay)
 
-	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : ""]")
+	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : in_flight ? "_flying" : ""]")
 	eye_overlay.color = sprite_eye_color
 	eye_overlay.plane = ABOVE_LIGHTING_PLANE
 	eye_overlay.layer = ABOVE_LIGHTING_LAYER
@@ -104,3 +112,4 @@
 			if(CheckEyewitness(src, src, 4, FALSE))
 				src.adjust_veil(-1,threshold = 4)
 	..()
+
