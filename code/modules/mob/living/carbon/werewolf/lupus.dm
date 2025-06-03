@@ -45,6 +45,7 @@
 	if(!dna || !dna.species)
 		return
 	icon_state = "[sprite_color]_flying"
+	cut_overlays()
 	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes_flying")
 	eye_overlay.color = sprite_eye_color
 	eye_overlay.plane = ABOVE_LIGHTING_PLANE
@@ -55,6 +56,7 @@
 	if(!dna || !dna.species)
 		return
 	icon_state = "[sprite_color]"
+	cut_overlays()
 	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes")
 	eye_overlay.color = sprite_eye_color
 	eye_overlay.plane = ABOVE_LIGHTING_PLANE
