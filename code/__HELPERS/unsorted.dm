@@ -328,49 +328,6 @@ Turf and target are separate in case you want to teleport some distance from a t
 		if(M.ckey == key)
 			return M
 
-// returns the turf located at the map edge in the specified direction relative to A
-// used for mass driver
-/proc/get_edge_target_turf(atom/A, direction)
-	var/turf/target = locate(A.x, A.y, A.z)
-	if(!A || !target)
-		return 0
-		//since NORTHEAST == NORTH|EAST, etc, doing it this way allows for diagonal mass drivers in the future
-		//and isn't really any more complicated
-
-	var/x = A.x
-	var/y = A.y
-	if(direction & NORTH)
-		y = world.maxy
-	else if(direction & SOUTH) //you should not have both NORTH and SOUTH in the provided direction
-		y = 1
-	if(direction & EAST)
-		x = world.maxx
-	else if(direction & WEST)
-		x = 1
-	if(ISDIAGONALDIR(direction)) //let's make sure it's accurately-placed for diagonals
-		var/lowest_distance_to_map_edge = min(abs(x - A.x), abs(y - A.y))
-		return get_ranged_target_turf(A, direction, lowest_distance_to_map_edge)
-	return locate(x,y,A.z)
-
-// returns turf relative to A in given direction at set range
-// result is bounded to map size
-// note range is non-pythagorean
-// used for disposal system
-/proc/get_ranged_target_turf(atom/A, direction, range)
-
-	var/x = A.x
-	var/y = A.y
-	if(direction & NORTH)
-		y = min(world.maxy, y + range)
-	else if(direction & SOUTH)
-		y = max(1, y - range)
-	if(direction & EAST)
-		x = min(world.maxx, x + range)
-	else if(direction & WEST) //if you have both EAST and WEST in the provided direction, then you're gonna have issues
-		x = max(1, x - range)
-
-	return locate(x,y,A.z)
-
 /**
  * Get ranged target turf, but with direct targets as opposed to directions
  *
@@ -863,8 +820,6 @@ rough example of the "cone" made by the 3 dirs checked
 				L.Cut(I,I+1)
 		if (target)
 			return target
-
-
 
 //gives us the stack trace from CRASH() without ending the current proc.
 /proc/stack_trace(msg)

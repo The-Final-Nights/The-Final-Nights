@@ -133,6 +133,9 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	var/current_overlay = null
 	var/broken_state = 0
 	var/setting = 1	//Gravity value when on
+	/// The gravity field created by the generator.
+	var/datum/proximity_monitor/advanced/gravity/gravity_field
+
 
 /obj/machinery/gravity_generator/main/Destroy() // If we somehow get deleted, remove all of our other parts.
 	investigate_log("was destroyed!", INVESTIGATE_GRAVITY)
@@ -280,6 +283,43 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	charging_state = new_state ? POWER_UP : POWER_DOWN // Startup sequence animation.
 	investigate_log("is now [charging_state == POWER_UP ? "charging" : "discharging"].", INVESTIGATE_GRAVITY)
 	update_icon()
+
+/obj/machinery/gravity_generator/main/proc/enable()
+	charging_state = POWER_IDLE
+	on = TRUE
+
+	if (!SSticker.IsRoundInProgress())
+		return
+
+	soundloop.start()
+	if (!gravity_in_level())
+		investigate_log("was brought online and is now producing gravity for this level.", INVESTIGATE_GRAVITY)
+		message_admins("The gravity generator was brought online [ADMIN_VERBOSEJMP(src)]")
+		shake_everyone()
+	gravity_field = new(src, 2, TRUE, 6)
+
+	complete_state_update()
+
+/obj/machinery/gravity_generator/main/proc/disable()
+	charging_state = POWER_IDLE
+	on = FALSE
+
+	if (!SSticker.IsRoundInProgress())
+		return
+
+	soundloop.stop()
+	if (gravity_in_level())
+		investigate_log("was brought offline and there is now no gravity for this level.", INVESTIGATE_GRAVITY)
+		message_admins("The gravity generator was brought offline with no backup generator. [ADMIN_VERBOSEJMP(src)]")
+		shake_everyone()
+
+	QDEL_NULL(gravity_field)
+	complete_state_update()
+
+/obj/machinery/gravity_generator/main/proc/complete_state_update()
+	update_icon()
+	update_list()
+	updateUsrDialog()
 
 // Set the state of the gravity.
 /obj/machinery/gravity_generator/main/proc/set_state(new_state)
