@@ -456,7 +456,7 @@
 	to_chat(victim, span_revendanger("Burning ice bleeds out of your soul and into everything else. Paralyzed, you stand in the cold as death lingers."))
 	victim.fakediablerist = TRUE
 	if(iskindred(victim) || iscathayan(victim) || iszombie(victim)) //made this a deduction rather than a flat set because of an artifact that independently changes damage mods
-		victim.dna.species.burnmod = victim.dna.species.burnmod-1
+		victim.dna.species.burnmod = max(0.5, victim.dna.species.burnmod-1)
 	else
-		victim.dna.species.burnmod = victim.dna.species.burnmod-0.5
+		victim.dna.species.burnmod = max(0.5, victim.dna.species.burnmod-0.5)
 	qdel(src)
