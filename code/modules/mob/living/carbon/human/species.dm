@@ -479,6 +479,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		QDEL_NULL(fly)
 		if(C.movement_type & FLYING)
 			ToggleFlight(C)
+			ToggleCoraxFlight(C)
 	if(C.dna && C.dna.species && (C.dna.features["wings"] == wings_icon))
 		C.dna.species.mutant_bodyparts -= "wings"
 		C.dna.features["wings"] = "None"
@@ -2040,11 +2041,12 @@ GLOBAL_LIST_EMPTY(selectable_races)
 //  Stun  //
 ////////////
 
-/datum/species/proc/spec_stun(mob/living/carbon/human/H,amount)
+/datum/species/proc/spec_stun(mob/living/carbon/human/H,amount) // needs a variation defined for Corax, otherwise might runtime when someone punts a flying raven.
 	if(flying_species && H.movement_type & FLYING)
 		ToggleFlight(H)
 //		flyslip(H)
 	. = stunmod * H.physiology.stun_mod * amount
+
 
 //////////////
 //Space Move//
@@ -2095,6 +2097,8 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	var/datum/action/fly_upper/DA = new()
 	DA.Grant(H)
 
+
+
 /datum/species/proc/RemoveSpeciesFlight(mob/living/carbon/human/H)
 	if(flying_species)
 		flying_species = FALSE
@@ -2110,13 +2114,41 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			H.dna.features["wings"] = "None"
 			H.update_body()
 
+/datum/species/proc/GiveCoraxFlight(mob/living/carbon/werewolf/corax/target) // making a whole new proc cuz I don't want the raven to sprout a second pair of wings, this can only target Corax as it will not add a new "wings" sprite, just change the active one.
+	if(flying_species) //species that already have flying traits should not work with this proc
+		return
+	flying_species = TRUE
+	if(isnull(fly))
+		fly = new
+		fly.Grant(target)
+	var/datum/action/fly_upper/A = locate() in target.actions
+	if(A)
+		return
+	var/datum/action/fly_upper/DA = new()
+	DA.Grant(target)
+
+
+/datum/species/proc/RemoveCoraxFlight(mob/living/carbon/werewolf/corax/target) // shouldn't ever have to be called, but, you know
+	if(flying_species)
+		flying_species = FALSE
+		fly.Remove(target)
+		QDEL_NULL(fly)
+		if(target.movement_type & FLYING)
+			ToggleFlight(target)
+		var/datum/action/fly_upper/A = locate() in target.actions
+		if(A)
+			qdel(A)
+
 /datum/species
 	var/animation_goes_up = FALSE	//
 
-/datum/species/proc/HandleFlight(mob/living/carbon/human/H)
+/datum/species/proc/HandleFlight(mob/living/carbon/H)
 	if(H.movement_type & FLYING)
 		if(!CanFly(H))
 			ToggleFlight(H)
+			return FALSE
+		if(!CoraxCanFly(H))
+			ToggleCoraxFlight(H)
 			return FALSE
 		if(animation_goes_up)
 			switch(H.pixel_z)
@@ -2152,7 +2184,16 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 	return TRUE
 
-/datum/species/proc/flyslip(mob/living/carbon/human/H)
+/datum/species/proc/CoraxCanFly(mob/living/carbon/H) // another version for corax, who are carbon and thus do not have suit slots
+	if(H.stat || H.body_position == LYING_DOWN)
+		return FALSE
+	var/turf/T = get_turf(H)
+	if(!T)
+		return FALSE
+
+	return TRUE
+
+/datum/species/proc/flyslip(mob/living/carbon/H)
 	var/obj/buckled_obj
 	if(H.buckled)
 		buckled_obj = H.buckled
@@ -2196,6 +2237,26 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		H.remove_movespeed_modifier(/datum/movespeed_modifier/wing)
 		H.CloseWings()
 
+
+/datum/species/proc/ToggleCoraxFlight(mob/living/carbon/werewolf/lupus/corvid/target) // yet another version for Corax specifically
+	if(!HAS_TRAIT_FROM(target, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT))
+		stunmod *= 2
+		speedmod -= 0.35
+		ADD_TRAIT(target, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
+		ADD_TRAIT(target, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
+		passtable_on(target, SPECIES_TRAIT)
+		target.add_movespeed_modifier(/datum/movespeed_modifier/wing)
+		target.OpenWings()
+	else
+		stunmod *= 0.5
+		speedmod += 0.35
+		REMOVE_TRAIT(target, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
+		REMOVE_TRAIT(target, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
+		passtable_off(target, SPECIES_TRAIT)
+		target.remove_movespeed_modifier(/datum/movespeed_modifier/wing)
+		target.CloseWings()
+
+
 /datum/action/innate/flight
 	name = "Toggle Flight"
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_IMMOBILE
@@ -2203,15 +2264,24 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	button_icon_state = "flight"
 
 /datum/action/innate/flight/Activate()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/carbon/H = owner
 	var/datum/species/S = H.dna.species
-	if(S.CanFly(H))
-		S.ToggleFlight(H)
-		if(!(H.movement_type & FLYING))
-			to_chat(H, "<span class='notice'>You settle gently back onto the ground...</span>")
-		else
-			to_chat(H, "<span class='notice'>You beat your wings and begin to hover gently above the ground...</span>")
-			H.set_resting(FALSE, TRUE)
+	if(!iscorvid(H))
+		if(S.CanFly(H))
+			S.ToggleFlight(H)
+			if(!(H.movement_type & FLYING))
+				to_chat(H, "<span class='notice'>You settle gently back onto the ground...</span>")
+			else
+				to_chat(H, "<span class='notice'>You beat your wings and begin to hover gently above the ground...</span>")
+				H.set_resting(FALSE, TRUE)
+	else
+		if(S.CoraxCanFly(H)) // another sub-version for Corax, yippeeee
+			S.ToggleCoraxFlight(H)
+			if(!(H.movement_type & FLYING))
+				to_chat(H, "<span class='notice'>You settle gently back onto the ground...</span>")
+			else
+				to_chat(H, "<span class='notice'>You beat your wings and begin to hover gently above the ground...</span>")
+				H.set_resting(FALSE, TRUE)
 
 /**
  * The human species version of [/mob/living/carbon/proc/get_biological_state]. Depends on the HAS_FLESH and HAS_BONE species traits, having bones lets you have bone wounds, having flesh lets you have burn, slash, and piercing wounds
@@ -2299,49 +2369,23 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 /datum/species/proc/get_laugh_sound(mob/living/carbon/human/human)
 	if(human.body_type == FEMALE)
-		return pick('sound/mobs/humanoids/human/laugh/female_laugh_1.ogg',
-		'sound/mobs/humanoids/human/laugh/female_laugh_2.ogg',
-		)
+		return 'sound/mobs/humanoids/human/laugh/womanlaugh.ogg'
 	return pick(
-		'sound/mobs/humanoids/human/laugh/male_laugh_1.ogg',
-		'sound/mobs/humanoids/human/laugh/male_laugh_2.ogg',
-	)
-
-/datum/species/proc/get_chuckle_sound(mob/living/carbon/human/human)
-	if(human.body_type == FEMALE)
-		return pick(
-		'sound/mobs/humanoids/human/laugh/chuckle/female_chuckle_1.ogg',
-		'sound/mobs/humanoids/human/laugh/chuckle/female_chuckle_2.ogg',
-		'sound/mobs/humanoids/human/laugh/chuckle/female_chuckle_3.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/laugh/chuckle/male_chuckle_1.ogg',
-	)
-
-/datum/species/proc/get_crazylaugh_sound(mob/living/carbon/human/human)
-	if(human.body_type == FEMALE)
-		return pick(
-		'sound/mobs/humanoids/human/laugh/crazy/female_crazylaugh_1.ogg',
-		'sound/mobs/humanoids/human/laugh/crazy/female_crazylaugh_2.ogg',
-		)
-	return pick(
-		'sound/mobs/humanoids/human/laugh/crazy/male_crazylaugh_1.ogg',
-		'sound/mobs/humanoids/human/laugh/crazy/male_crazylaugh_2.ogg',
-		'sound/mobs/humanoids/human/laugh/crazy/male_crazylaugh_3.ogg',
-		'sound/mobs/humanoids/human/laugh/crazy/male_crazylaugh_4.ogg',
+		'sound/mobs/humanoids/human/laugh/manlaugh1.ogg',
+		'sound/mobs/humanoids/human/laugh/manlaugh2.ogg',
 	)
 
 /datum/species/proc/get_sigh_sound(mob/living/carbon/human/human)
 	if(human.body_type == FEMALE)
 		return pick(
-				'sound/mobs/humanoids/human/sigh/female_sigh_1.ogg',
-				'sound/mobs/humanoids/human/sigh/female_sigh_2.ogg',
-				'sound/mobs/humanoids/human/sigh/female_sigh_3.ogg',
+				'sound/mobs/humanoids/human/sigh/female_sigh1.ogg',
+				'sound/mobs/humanoids/human/sigh/female_sigh2.ogg',
+				'sound/mobs/humanoids/human/sigh/female_sigh3.ogg',
 			)
 	return pick(
-				'sound/mobs/humanoids/human/sigh/male_sigh_1.ogg',
-				'sound/mobs/humanoids/human/sigh/male_sigh_2.ogg',
-				'sound/mobs/humanoids/human/sigh/male_sigh_3.ogg',
+				'sound/mobs/humanoids/human/sigh/male_sigh1.ogg',
+				'sound/mobs/humanoids/human/sigh/male_sigh2.ogg',
+				'sound/mobs/humanoids/human/sigh/male_sigh3.ogg',
 			)
 
 /datum/species/proc/get_sniff_sound(mob/living/carbon/human/human)
@@ -2362,8 +2406,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		return pick(
 				'sound/mobs/humanoids/human/giggle/female_giggle_1.ogg',
 				'sound/mobs/humanoids/human/giggle/female_giggle_2.ogg',
-				'sound/mobs/humanoids/human/giggle/female_giggle_3.ogg',
-				'sound/mobs/humanoids/human/giggle/female_giggle_4.ogg',
 			)
 	return pick(
 				'sound/mobs/humanoids/human/giggle/male_giggle_1.ogg',

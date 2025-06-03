@@ -41,6 +41,19 @@
 	health = 100
 	maxHealth = 100 // I predict that the sprites will be hell to click, no extra HP compared to homid
 
+/mob/living/carbon/werewolf/lupus/corvid/proc/OpenWings() //openwing and closewing simply change the sprite of the corax to be that of a flying or landed bird.
+	if(!dna || !dna.species)
+		return
+	icon_state = "[sprite_color]_flying"
+
+
+/mob/living/carbon/werewolf/lupus/corvid/proc/CloseWings()
+	if(!dna || !dna.species)
+		return
+	icon_state = "[sprite_color]"
+	if(isturf(loc))
+		var/turf/T = loc
+		T.Entered(src)
 
 /datum/movespeed_modifier/lupusform
 		multiplicative_slowdown = -0.7
