@@ -310,7 +310,7 @@
 		// If multiple donors, it's a proper Vaulderie ritual
 		if(length(blood_donors) >= 2)
 			// Ask confirmation via tgui_alert
-			var/choice = tgui_alert(M, "Do you wish to take part in the Vaulderie? This will bind you to the other participants, and remove any previous bonds...", "Vaulderie Ritual", list("Yes", "No"), 10 SECONDS)
+			var/choice = tgui_alert(M, "Do you wish to take part in the Vaulderie? This will bind you to the other participants, and remove any previous bonds... (This will cause your character to change sects to the Sabbat!)", "Vaulderie Ritual", list("Yes", "No"), 10 SECONDS)
 			if(choice != "Yes")
 				to_chat(M, span_cult("You decide not to participate in the Vaulderie."))
 				return

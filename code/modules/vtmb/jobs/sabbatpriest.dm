@@ -100,7 +100,7 @@
 
 /datum/sabbat_ritae/ritae_description/bloodbath_info
 	name = "Blood Bath"
-	desc = "The Rite of the Blood Bath is the rite by which the Priest may select a new Ductus, usually taking place after the previous Ductus was challenged to Monomacy. Each Sabbat Cainite who wishes to serve the new Ductus approaches our bathtub, and contributes a large amount of vitae using the ritual knife. The new Ductus then bathes in the blood of the pack which recognizes them, and upon exiting the bathtub, the Priest is to scoop up the blood in a Vaulderie Goblet, for all to drink of, consecrating the new Pack formation's vinculum. \n"
+	desc = "The Rite of the Blood Bath is the rite by which the Priest may select a new Ductus, usually taking place after the previous Ductus was challenged to Monomacy. Each Sabbat Cainite who wishes to serve the new Ductus approaches our bathtub, and contributes a large amount of vitae using the ritual knife. The new Ductus then bathes in the blood of the pack which recognizes them, where the Priest then uses the Tome on the bathtub, and upon exiting the bathtub, the Priest is to scoop up the blood in a Vaulderie Goblet, for all to drink of, consecrating the new Pack formation's vinculum. \n"
 
 /datum/sabbat_ritae/ritae_description/war_party_hunt_info
 	name = "War Party"

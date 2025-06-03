@@ -1458,11 +1458,26 @@
 		if(user.mind && is_sabbat_priest(user) && has_buckled_mobs())
 			var/mob/living/buckled_mob = buckled_mobs[1]
 			if(buckled_mob.mind)
+				// First, demote any existing Ductus to regular Sabbat Pack
+				for(var/mob/living/carbon/human/H in GLOB.player_list)
+					if(H.mind && is_sabbat_ductus(H))
+						H.mind.assigned_role = "Sabbat Pack"
+						var/datum/antagonist/temp_antag = new()
+						temp_antag.remove_antag_hud(ANTAG_HUD_REV, H)
+						temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", H)
+						qdel(temp_antag)
+
+						to_chat(H, span_cult("You feel your authority as Ductus slipping away... You are now a regular pack member..."))
+				// Then promote the new Ductus
 				buckled_mob.mind.assigned_role = "Sabbat Ductus"
 				var/datum/antagonist/temp_antag = new()
 				temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev_head", buckled_mob)
 				qdel(temp_antag)
-				to_chat(user, span_notice("[buckled_mob] has been anointed as the new Ductus."))
+				// Notify all Sabbat members of the new Ductus
+				for(var/mob/living/carbon/human/sabbat_member in GLOB.player_list)
+					if(sabbat_member.mind && is_sabbatist(sabbat_member))
+						to_chat(sabbat_member, span_cult("[buckled_mob] has been anointed as the new Ductus of the pack!"))
+
 				to_chat(buckled_mob, span_cult("You have been anointed as the new Ductus of the pack!"))
 		return
 	if(istype(W, /obj/item/melee/vampirearms/knife))
