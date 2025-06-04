@@ -27,13 +27,14 @@
 
 /datum/discipline_power/melpominee/the_missing_voice/activate(atom/movable/target)
 	. = ..()
-	var/new_say = tgui_input_text(owner, "What will [target] say?", "The Missing Voice:", FALSE, 500, TRUE, FALSE, 0)
+	var/new_say = tgui_input_text(owner, "What will [target] say?", "The Missing Voice:", FALSE, 500, TRUE, FALSE, 0) as null|text
 	if(!new_say)
 		return
 
 	//prevent forceful emoting and whatnot
+	new_say = trim(copytext_char(new_say, 1, MAX_MESSAGE_LEN))
 	if (findtext(new_say, "*"))
-		to_chat(owner, span_userdanger("You can't force others to perform emotes!"))
+		to_chat(owner, span_danger("You can't force others to perform emotes!"))
 		return
 
 	if (CHAT_FILTER_CHECK(new_say))
@@ -94,6 +95,7 @@
 	var/input_message = tgui_input_text(owner, "What message will you project to them?", "Madrigal: Emotion", FALSE, 500, TRUE, FALSE, 0) as null|text
 	if (!input_message)
 		return
+	input_message = trim(copytext_char(input_message, 1, MAX_MESSAGE_LEN))
 	if(CHAT_FILTER_CHECK(input_message))
 		to_chat(owner, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[input_message]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
@@ -359,10 +361,15 @@
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
+/mob/living/carbon/human/proc/create_walk_to(duration, mob/living/walk_to)
+	var/datum/cb = CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, walk_to_caster), walk_to)
+	for(var/i in 1 to duration)
+		addtimer(cb, (i - 1) * total_multiplicative_slowdown())
+
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
 	name = "Siren's Beckoning"
-	desc = "Siren's Beckoning is a power that allows the user to stun and mesmerize those around them with their voice, drawing them in like moths to a flame."
+	desc = "Siren's Beckoning is a power that allows the user to stun and drawing others in like moths to a flame."
 	level = 4
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
 	cooldown_length = 6 SECONDS
@@ -375,6 +382,7 @@
 	for(var/mob/living/carbon/human/listener in oviewers(7, owner))
 		listenerCount++
 		listener.Stun(4 SECONDS)
+		create_walk_to(4, listener)
 
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
@@ -394,7 +402,7 @@
 //SHATTERING CRESCENDO
 /datum/discipline_power/melpominee/shattering_crescendo
 	name = "Shattering Crescendo"
-	desc = "Scream at an unnatural pitch, shattering the bodies of your enemies, and sending them into primal fear."
+	desc = "Scream at an unnatural pitch, shattering the bodies of your enemies."
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
