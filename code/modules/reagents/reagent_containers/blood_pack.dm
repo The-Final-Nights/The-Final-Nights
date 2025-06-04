@@ -131,10 +131,12 @@
 /obj/item/reagent_containers/blood/elite
 	name = "\improper elite blood pack (full)"
 	amount_of_bloodpoints = 4
+	blood_type = "O-"
 
 /obj/item/reagent_containers/blood/vitae
 	name = "\improper vampire vitae pack (full)"
 	amount_of_bloodpoints = 4
+	blood_type = "O-"
 	vitae = TRUE
 
 /obj/item/reagent_containers/blood/random
