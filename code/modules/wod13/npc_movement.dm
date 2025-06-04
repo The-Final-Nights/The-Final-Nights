@@ -63,8 +63,6 @@
 /mob/living/carbon/human/npc/Life()
 	if(stat == DEAD)
 		return
-	if (superfan_active) //Makes Superfans Mindless
-		return
 	..()
 	if(pulledby)
 		if(prob(25))
@@ -210,8 +208,6 @@
 	return TRUE
 
 /mob/living/carbon/human/npc/proc/handle_automated_movement()
-	if (superfan_active) //Makes Superfans Mindless
-		return
 	if(CheckMove())
 		return
 	var/fire_danger = FALSE

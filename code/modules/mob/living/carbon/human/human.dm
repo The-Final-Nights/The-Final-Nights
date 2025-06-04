@@ -1297,46 +1297,11 @@
 	equip_to_slot_or_del(new /obj/item/clothing/under/vampire/bouncer(src), ITEM_SLOT_ICLOTHING)
 	equip_to_slot_or_del(new /obj/item/clothing/suit/vampire/trench/alt(src), ITEM_SLOT_OCLOTHING)
 
-//SuperFans Player & NPC Bahavior. Reusable, one proc to engage and end this behavior. Superfans are mindless for now.
-//Players should still have control, but will be drawn to a distance of the target, and able to navigate some.
-/mob/living/carbon/human
-	var/tmp/superfan_active = FALSE
-	var/tmp/superfan_target = null
-	var/superfan_emotion = null
-
-/mob/living/carbon/human/proc/create_superfan(duration, mob/living/walk_to_target, emotion)
-	if (superfan_active)
-		return
-	superfan_active = TRUE
-	superfan_target = walk_to_target
-	superfan_emotion = emotion
-	walk(src, 0)
-	if (isnpc(src))
-		var/mob/living/carbon/human/npc/N = src
-		N.old_movement = TRUE
-		N.walktarget = null
-	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(superfan_behavior), superfan_target)
-	for (var/i in 1 to (duration * 2))
-		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
-	addtimer(CALLBACK(src, PROC_REF(end_superfan_effect)), duration * 1 SECONDS)
-
-/mob/living/carbon/human/proc/superfan_behavior(mob/living/superfan_target)
-	var/distance = get_dist(src, superfan_target)
-	if (distance > 1)
-		step_towards(src, superfan_target)
-	else if (distance <= 0)
-		src.dir = get_dir(src, superfan_target)
-		return
-	if (prob(3))
-		emote(superfan_emotion)
-
-/mob/living/carbon/human/proc/end_superfan_effect()
-	superfan_active = FALSE
-	superfan_target = null
-	if (isnpc(src))
-		var/mob/living/carbon/human/npc/N = src
-		N.old_movement = FALSE
-		N.walktarget = N.ChoosePath()
+/mob/living/carbon/human/proc/create_superfan(duration, mob/living/target, emotion)
+	var/datum/component/superfan/C = GetComponent(/datum/component/superfan)
+	if (!C)
+		C = AddComponent(/datum/component/superfan)
+	C.start(duration, target, emotion)
 
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor

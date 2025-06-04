@@ -294,7 +294,6 @@
 	//Resistance Rolls:
 	for (var/mob/living/carbon/human/listener in all_listeners)
 		totalListeners++
-		listener.Stun(2 SECONDS)
 		var/botched_roll = FALSE //used to make Superfans.
 		if (isnpc(listener))
 			base_difficulty += 2 //NPCs are easier to affect.
@@ -323,8 +322,8 @@
 		//Players will be drawn to the caster if they leave a certain range, retaining control.
 		if (super_fans < super_fan_perCast && botched_roll)
 			if (istype(listener, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = listener
-				if (H.superfan_active) //Already a Superfan, Skip.
+				var/datum/component/superfan/SF = listener.GetComponent(/datum/component/superfan)
+				if (SF && SF.superfan_active)
 					continue
 			if (listener.client) //is player
 				listener.emote(emote_text)
@@ -359,6 +358,61 @@
 /datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
+
+
+/datum/component/superfan
+	parent_type = /datum/component
+	var/mob/living/_owner
+	var/mob/living/superfan_target
+	var/superfan_active = FALSE
+	var/superfan_emotion
+	var/superfan_duration
+
+/datum/component/superfan/Initialize(mob/living/M)
+	. = ..()
+	_owner = M
+
+/datum/component/superfan/proc/start(duration, mob/living/target, emotion)
+	if (superfan_active)
+		return
+	superfan_active = TRUE
+	superfan_target = target
+	superfan_emotion = emotion
+
+	var/datum/callback/follow_cb = CALLBACK(_owner, PROC_REF(superfan_behavior), superfan_target)
+	for (var/i in 1 to (duration * 2))
+		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
+	addtimer(CALLBACK(_owner, PROC_REF(end)), duration * 1 SECONDS)
+
+/datum/component/superfan/proc/superfan_behavior(mob/living/superfan_target)
+	var/distance = get_dist(_owner, superfan_target)
+	var/mob/living/carbon/human/npc/N
+	if (isnpc(_owner))
+		N = _owner
+		N.staying = FALSE
+		N.walktarget = superfan_target
+
+		if (distance > 1)
+			if (isnpc(_owner) && !N.walktarget)
+				N.staying = FALSE
+				N.walktarget = superfan_target
+
+		if (distance <= 0)
+			if (isnpc(_owner))
+				N.staying = TRUE
+				N.dir = get_dir(N, superfan_target)
+
+	if (prob(3))
+		N.emote(superfan_emotion)
+
+/datum/component/superfan/proc/end()
+	superfan_active = FALSE
+	superfan_target = null
+	var/mob/living/carbon/human/npc/N
+	if (isnpc(_owner))
+		N = _owner
+		N.staying = FALSE
+		N.walktarget = N.ChoosePath()
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
