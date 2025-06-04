@@ -2041,7 +2041,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 //  Stun  //
 ////////////
 
-/datum/species/proc/spec_stun(mob/living/carbon/human/H,amount) // needs a variation defined for Corax, otherwise might runtime when someone punts a flying raven.
+/datum/species/proc/spec_stun(mob/living/carbon/human/H,amount)
 	if(flying_species && H.movement_type & FLYING)
 		ToggleFlight(H)
 //		flyslip(H)
