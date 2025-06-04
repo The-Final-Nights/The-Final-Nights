@@ -9,7 +9,6 @@
 	name = "Melpominee power name"
 	desc = "Melpominee power description"
 
-
 	activate_sound = 'code/modules/wod13/sounds/melpominee.ogg'
 
 //THE MISSING VOICE
