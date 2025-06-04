@@ -1109,7 +1109,6 @@
 /obj/structure/fire_barrel,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/trash,
@@ -11174,7 +11173,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /turf/open/floor/plating/vampgrass,
@@ -11716,7 +11714,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/wallpaper/paper/darkred,
@@ -13593,7 +13590,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /turf/open/floor/plating/sidewalk/poor,
@@ -19588,7 +19584,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/litter,
@@ -22307,7 +22302,6 @@
 /obj/structure/barrels/rand,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/chair/sofa/corp/corner,
@@ -23693,10 +23687,8 @@
 /obj/item/reagent_containers/glass/wateringcan,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
-/obj/item/bailer,
 /obj/effect/decal/litter,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
@@ -33019,7 +33011,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /turf/open/floor/plating/sidewalk/poor,
@@ -34713,7 +34704,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/litter,
@@ -36826,7 +36816,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /turf/closed/wall/vampwall/bar,
@@ -38526,13 +38515,6 @@
 	},
 /turf/open/openspace,
 /area/vtm/interior/bianchiBank)
-"jYL" = (
-/obj/effect/decal/bordur{
-	dir = 8
-	},
-/obj/item/reagent_containers/glass/beaker/jar,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/unionsquare)
 "jYN" = (
 /obj/structure/vampfence/corner/rich{
 	pixel_y = 6
@@ -38608,7 +38590,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/trash,
@@ -40311,19 +40292,10 @@
 /obj/structure/flora/ausbushes/lavendergrass{
 	pixel_y = 10
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/sofa/left{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_x = -16
 	},
-/obj/effect/landmark/start/nagaraja,
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
 "kyB" = (
@@ -43354,9 +43326,6 @@
 	pixel_y = 13
 	},
 /obj/structure/table/wood,
-/obj/item/food/grown/moonflower{
-	pixel_x = -13
-	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/cabaret)
 "lmZ" = (
@@ -66052,7 +66021,6 @@
 /obj/item/seeds/cannabis,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/litter,
@@ -69623,6 +69591,11 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
+"rTa" = (
+/obj/structure/chair/sofa/right,
+/obj/effect/landmark/start/nagaraja,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "rTc" = (
 /obj/structure/window/reinforced/indestructable{
 	alpha = 0;
@@ -69806,7 +69779,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/cardboard,
@@ -78232,17 +78204,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f4)
-"ujX" = (
-/obj/structure/table/glass,
-/obj/item/food/grown/poppy,
-/obj/item/food/grown/poppy/lily{
-	pixel_y = 6
-	},
-/obj/item/food/grown/poppy/geranium{
-	pixel_y = 13
-	},
-/turf/open/floor/carpet/purple,
-/area/vtm/cabaret)
 "uka" = (
 /obj/structure/table/wood,
 /obj/effect/decal/wallpaper/paper/darkred/low,
@@ -80343,10 +80304,6 @@
 /area/vtm/clinic)
 "uKX" = (
 /obj/structure/table,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -198515,7 +198472,7 @@ kdy
 kdy
 kdy
 kdy
-jYL
+kdy
 kdy
 kdy
 kdy
@@ -231470,7 +231427,7 @@ mIh
 bbP
 bbP
 tra
-ujX
+feM
 hcS
 iSq
 cWg
@@ -260951,7 +260908,7 @@ ntq
 ntq
 ntq
 oeJ
-ltC
+rTa
 ruY
 pdN
 kno
