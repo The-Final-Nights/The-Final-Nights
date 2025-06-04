@@ -175,6 +175,16 @@
 	list_reagents = list(/datum/reagent/consumable/flour = 30)
 	fill_icon_thresholds = null
 
+/obj/item/reagent_containers/food/condiment/flour/honkuzu
+	name = "honkuzu sack"
+	desc = "A big bag of 100% pure kudzu flour. Good for tea and mochi!"
+	icon_state = "flour"
+	inhand_icon_state = "carton"
+	lefthand_file = 'icons/mob/inhands/equipment/kitchen_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/kitchen_righthand.dmi'
+	list_reagents = list(/datum/reagent/consumable/flour/honkuzu = 30)
+	fill_icon_thresholds = null
+
 /obj/item/reagent_containers/food/condiment/soymilk
 	name = "soy milk"
 	desc = "It's soy milk. White and nutritious goodness!"

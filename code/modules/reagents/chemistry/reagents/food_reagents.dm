@@ -520,6 +520,13 @@
 	if(reagentdecal)
 		reagentdecal.reagents.add_reagent(/datum/reagent/consumable/flour, reac_volume)
 
+/datum/reagent/consumable/flour/honkuzu // kudzu flour for making kudzu tea or mochi
+	name = "Honkuzu"
+	description = "Clumping flour made from the root of the kudzu plant."
+	reagent_state = SOLID
+	color = "#FFFFFF" // rgb: 0, 0, 0
+	taste_description = "chalky clumps"
+
 /datum/reagent/consumable/cherryjelly
 	name = "Cherry Jelly"
 	description = "Totally the best. Only to be spread on foods with excellent lateral symmetry."
