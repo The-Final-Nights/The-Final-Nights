@@ -20,7 +20,7 @@
 	var/amount_of_bloodpoints = 2
 	var/vitae = FALSE
 
-/obj/item/reagent_containers/blood/Initialize()
+/obj/item/reagent_containers/blood/Initialize(mapload)
 	. = ..()
 	if(blood_type != null)
 		reagents.add_reagent(/datum/reagent/blood, 200,
@@ -131,25 +131,35 @@
 /obj/item/reagent_containers/blood/elite
 	name = "\improper elite blood pack (full)"
 	amount_of_bloodpoints = 4
-	blood_type = "O-"
+
+/obj/item/reagent_containers/blood/elite/Initialize(mapload)
+	if(mapload)
+		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+	return ..()
+
 
 /obj/item/reagent_containers/blood/vitae
 	name = "\improper vampire vitae pack (full)"
 	amount_of_bloodpoints = 4
-	blood_type = "O-"
 	vitae = TRUE
+
+/obj/item/reagent_containers/blood/vitae/Initialize(mapload)
+	if(mapload)
+		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+	return ..()
 
 /obj/item/reagent_containers/blood/random
 
-/obj/item/reagent_containers/blood/random/Initialize()
-	blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+/obj/item/reagent_containers/blood/random/Initialize(mapload)
+	if(mapload)
+		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
 	return ..()
 
 /obj/item/reagent_containers/blood/bweedpack
 	name = "\improper elite blood pack (full)"
 	blood_type = null
 
-/obj/item/reagent_containers/blood/bweedpack/Initialize()
+/obj/item/reagent_containers/blood/bweedpack/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drug/cannabis, 20)
 	reagents.add_reagent(/datum/reagent/toxin/lipolicide, 20)
@@ -165,7 +175,7 @@
 	name = "\improper elite blood pack (full)"
 	blood_type = null
 
-/obj/item/reagent_containers/blood/cokepack/Initialize()
+/obj/item/reagent_containers/blood/cokepack/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drug/methamphetamine/cocaine, 15)
 	reagents.add_reagent(/datum/reagent/blood, 185,
@@ -180,7 +190,7 @@
 	name = "\improper elite blood pack (full)"
 	blood_type = null
 
-/obj/item/reagent_containers/blood/morphpack/Initialize()
+/obj/item/reagent_containers/blood/morphpack/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/chloralhydrate, 10)
 	reagents.add_reagent(/datum/reagent/medicine/morphine, 10)
@@ -196,7 +206,7 @@
 	name = "\improper elite blood pack (full)"
 	blood_type = null
 
-/obj/item/reagent_containers/blood/methpack/Initialize()
+/obj/item/reagent_containers/blood/methpack/Initialize(mapload)
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drug/methamphetamine, 15)
 	reagents.add_reagent(/datum/reagent/blood, 185,
