@@ -23,6 +23,7 @@
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'sound/weapons/bite.ogg'
+	attack_vis_effect = ATTACK_EFFECT_BITE
 	vision_range = 7
 	aggro_vision_range = 7
 	move_force = MOVE_FORCE_WEAK
@@ -52,9 +53,9 @@
 		retreat_message_said = TRUE
 	retreat_distance = 30
 
-/mob/living/simple_animal/hostile/asteroid/wolf/Life()
+/mob/living/simple_animal/hostile/asteroid/wolf/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
 	if(!. || target)
 		return
-	adjustHealth(-maxHealth*0.025)
+	adjustHealth(-0.0125 * maxHealth * delta_time)
 	retreat_message_said = FALSE

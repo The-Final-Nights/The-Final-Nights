@@ -1,4 +1,8 @@
 /proc/chem_recipes_do_conflict(datum/chemical_reaction/r1, datum/chemical_reaction/r2)
+	//We have to check to see if either is competitive so can ignore it (competitive reagents are supposed to conflict)
+	if((r1.reaction_flags & REACTION_COMPETITIVE) || (r2.reaction_flags & REACTION_COMPETITIVE))
+		return FALSE
+
 	//do the non-list tests first, because they are cheaper
 	if(r1.required_container != r2.required_container)
 		return FALSE
@@ -75,13 +79,127 @@
 	GLOB.chemical_reactions_list[primary_reagent] += R
 
 //Creates foam from the reagent. Metaltype is for metal foam, notification is what to show people in textbox
-/datum/reagents/proc/create_foam(foamtype,foam_volume,metaltype = 0,notification = null)
+/datum/reagents/proc/create_foam(foamtype, foam_volume, result_type = null, notification = null)
 	var/location = get_turf(my_atom)
-	var/datum/effect_system/foam_spread/foam = new foamtype()
-	foam.set_up(foam_volume, location, src, metaltype)
+
+	var/datum/effect_system/fluid_spread/foam/foam = new foamtype()
+	foam.set_up(amount = foam_volume, location = location, carry = src, result_type = result_type)
 	foam.start()
+
 	clear_reagents()
 	if(!notification)
 		return
 	for(var/mob/M in viewers(5, location))
 		to_chat(M, notification)
+
+#define CONVERT_PH_TO_COLOR(pH, color) \
+	switch(pH) {\
+		if(14 to INFINITY)\
+			{ color = "#462c83" }\
+		if(13 to 14)\
+			{ color = "#63459b" }\
+		if(12 to 13)\
+			{ color = "#5a51a2" }\
+		if(11 to 12)\
+			{ color = "#3853a4" }\
+		if(10 to 11)\
+			{ color = "#3f93cf" }\
+		if(9 to 10)\
+			{ color = "#0bb9b7" }\
+		if(8 to 9)\
+			{ color = "#23b36e" }\
+		if(7 to 8)\
+			{ color = "#3aa651" }\
+		if(6 to 7)\
+			{ color = "#4cb849" }\
+		if(5 to 6)\
+			{ color = "#b5d335" }\
+		if(4 to 5)\
+			{ color = "#f7ec1e" }\
+		if(3 to 4)\
+			{ color = "#fbc314" }\
+		if(2 to 3)\
+			{ color = "#f26724" }\
+		if(1 to 2)\
+			{ color = "#ef1d26" }\
+		if(-INFINITY to 1)\
+			{ color = "#c6040c" }\
+		}
+
+///Returns a list of chemical_reaction datums that have the input STRING as a product
+/proc/get_reagent_type_from_product_string(string)
+	var/input_reagent = replacetext(LOWER_TEXT(string), " ", "") //95% of the time, the reagent id is a lowercase/no spaces version of the name
+	if (isnull(input_reagent))
+		return
+
+	var/list/shortcuts = list("meth" = /datum/reagent/drug/methamphetamine)
+	if(shortcuts[input_reagent])
+		input_reagent = shortcuts[input_reagent]
+	else
+		input_reagent = find_reagent(input_reagent)
+	return input_reagent
+
+///Returns reagent datum from typepath
+/proc/find_reagent(input)
+	. = FALSE
+	if(GLOB.chemical_reagents_list[input]) //prefer IDs!
+		return input
+	else
+		return get_chem_id(input)
+
+/proc/find_reagent_object_from_type(input)
+	if(GLOB.chemical_reagents_list[input]) //prefer IDs!
+		return GLOB.chemical_reagents_list[input]
+	else
+		return null
+
+///Returns a random reagent object, with the option to blacklist reagents.
+/proc/get_random_reagent_id(list/blacklist)
+	var/static/list/reagent_static_list = list() //This is static, and will be used by default if a blacklist is not passed.
+	var/list/reagent_list_to_process
+	if(blacklist) //If we do have a blacklist, we recompile a new list with the excluded reagents not present and pick from there.
+		reagent_list_to_process = list()
+	else
+		reagent_list_to_process = reagent_static_list
+
+	if(!reagent_list_to_process.len)
+		for(var/datum/reagent/reagent_path as anything in subtypesof(/datum/reagent))
+			if(is_path_in_list(reagent_path, blacklist))
+				continue
+			if(initial(reagent_path.chemical_flags) & REAGENT_CAN_BE_SYNTHESIZED)
+				reagent_list_to_process += reagent_path
+
+	var/picked_reagent = pick(reagent_list_to_process)
+	return picked_reagent
+
+///Returns a random reagent consumable ethanol object minus blacklisted reagents
+/proc/get_random_drink_id()
+	var/static/list/random_drinks = list()
+	if(!random_drinks.len)
+		for(var/datum/reagent/drink_path as anything in subtypesof(/datum/reagent/consumable/ethanol))
+			if(initial(drink_path.chemical_flags) & REAGENT_CAN_BE_SYNTHESIZED)
+				random_drinks += drink_path
+	var/picked_drink = pick(random_drinks)
+	return picked_drink
+
+///Returns reagent datum from reagent name string
+/proc/get_chem_id(chem_name)
+	for(var/X in GLOB.chemical_reagents_list)
+		var/datum/reagent/R = GLOB.chemical_reagents_list[X]
+		if(ckey(chem_name) == ckey(LOWER_TEXT(R.name)))
+			return X
+
+///Takes a type in and returns a list of associated recipes
+/proc/get_recipe_from_reagent_product(input_type)
+	if(!input_type)
+		return
+	var/list/matching_reactions = GLOB.chemical_reactions_list_product_index[input_type]
+	return matching_reactions
+
+/proc/reagent_paths_list_to_text(list/reagents, addendum)
+	var/list/temp = list()
+	for(var/datum/reagent/R as anything in reagents)
+		temp |= initial(R.name)
+	if(addendum)
+		temp += addendum
+	return jointext(temp, ", ")

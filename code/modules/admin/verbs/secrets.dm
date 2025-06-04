@@ -154,7 +154,7 @@
 			for(var/i in GLOB.human_list)
 				var/mob/living/carbon/human/H = i
 				if(H.ckey)
-					dat += "<tr><td>[H]</td><td>[md5(H.dna.uni_identity)]</td></tr>"
+					dat += "<tr><td>[H]</td><td>[md5(H.dna.unique_identity)]</td></tr>"
 			dat += "</table>"
 			holder << browse(HTML_SKELETON(dat), "window=fingerprints;size=440x410")
 		if("ctfbutton")

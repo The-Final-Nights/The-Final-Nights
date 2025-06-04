@@ -138,3 +138,5 @@
 
 	///The Examine Panel TGUI.
 	var/datum/examine_panel/tgui = new() //create the datum
+	///human specific screwyhuds from hallucinations (define key (bodypart) to int value (severity)) - see /datum/hallucination/fake_health_doll
+	var/hal_screwydoll

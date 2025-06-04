@@ -130,23 +130,15 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 	if(special_target && clong == special_target)
 		complete_trajectory()
 
-	if(isturf(clong) || isobj(clong))
-		if(clong.density)
-			if(isturf(clong))
-				SSexplosions.medturf += clong
-			if(isobj(clong))
-				SSexplosions.med_mov_atom += clong
-
-	else if(isliving(clong))
-		penetrate(clong)
-	else if(istype(clong, type))
-		var/obj/effect/immovablerod/other = clong
-		visible_message("<span class='danger'>[src] collides with [other]!</span>")
-		var/datum/effect_system/smoke_spread/smoke = new
-		smoke.set_up(2, get_turf(src))
+	// If rod meets rod, they collapse into a singularity. Yes, this means that if two wizard rods collide,
+	// they ALSO collapse into a singulo.
+	if(istype(clong, /obj/effect/immovablerod))
+		visible_message(span_danger("[src] collides with [clong]! This cannot end well."))
+		var/datum/effect_system/fluid_spread/smoke/smoke = new
+		smoke.set_up(2, location = get_turf(src))
 		smoke.start()
 		qdel(src)
-		qdel(other)
+		qdel(clong)
 
 /obj/effect/immovablerod/proc/penetrate(mob/living/smeared_mob)
 	smeared_mob.visible_message("<span class='danger'>[smeared_mob] is penetrated by an immovable rod!</span>" , "<span class='userdanger'>The rod penetrates you!</span>" , "<span class='danger'>You hear a CLANG!</span>")

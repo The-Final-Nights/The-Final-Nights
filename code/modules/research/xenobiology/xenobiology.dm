@@ -320,8 +320,8 @@
 			return 250
 
 		if(SLIME_ACTIVATE_MAJOR)
-			user.reagents.create_foam(/datum/effect_system/foam_spread,20)
-			user.visible_message("<span class='danger'>Foam spews out from [user]'s skin!</span>", "<span class='warning'>You activate [src], and foam bursts out of your skin!</span>")
+			user.reagents.create_foam(/datum/effect_system/fluid_spread/foam, 20)
+			user.visible_message(span_danger("Foam spews out from [user]'s skin!"), span_warning("You activate [src], and foam bursts out of your skin!"))
 			return 600
 
 /obj/item/slime_extract/darkblue
@@ -616,7 +616,8 @@
 /obj/item/slime_extract/rainbow/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
 		if(SLIME_ACTIVATE_MINOR)
-			user.dna.features["mcolor"] = "#[pick("7F", "FF")][pick("7F", "FF")][pick("7F", "FF")]"
+			user.dna.features["mcolor"] = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F")
+			user.dna.update_uf_block(DNA_MUTANT_COLOR_BLOCK)
 			user.updateappearance(mutcolor_update=1)
 			species.update_glow(user)
 			to_chat(user, "<span class='notice'>You feel different...</span>")

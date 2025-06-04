@@ -968,8 +968,9 @@
 /mob/living/carbon/fully_heal(admin_revive = FALSE)
 	if(reagents)
 		reagents.clear_reagents()
-		for(var/addi in reagents.addiction_list)
-			reagents.remove_addiction(addi)
+	if(mind)
+		for(var/addiction_type in subtypesof(/datum/addiction))
+			mind.remove_addiction_points(addiction_type, MAX_ADDICTION_POINTS) //Remove the addiction!
 	for(var/O in internal_organs)
 		var/obj/item/organ/organ = O
 		organ.setOrganDamage(0)
@@ -990,8 +991,6 @@
 		for(var/obj/item/restraints/R in contents) //actually remove cuffs from inventory
 			qdel(R)
 		update_handcuffed()
-		if(reagents)
-			reagents.addiction_list = list()
 	cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
 	..()
 
@@ -1307,7 +1306,7 @@
 /mob/living/carbon/proc/is_bleeding()
 	for(var/i in bodyparts)
 		var/obj/item/bodypart/BP = i
-		if(BP.get_bleed_rate())
+		if(BP.get_part_bleed_rate())
 			return TRUE
 
 /// get our total bleedrate
@@ -1315,7 +1314,7 @@
 	var/total_bleed_rate = 0
 	for(var/i in bodyparts)
 		var/obj/item/bodypart/BP = i
-		total_bleed_rate += BP.get_bleed_rate()
+		total_bleed_rate += BP.get_part_bleed_rate()
 
 	return total_bleed_rate
 
@@ -1445,6 +1444,60 @@
 
 /mob/living/carbon/proc/attach_rot(mapload)
 	AddComponent(/datum/component/rot/corpse)
+
+/mob/living/carbon/proc/disarm_precollide(datum/source, mob/living/carbon/shover, mob/living/carbon/target)
+	SIGNAL_HANDLER
+	if(can_be_shoved_into)
+		return TRUE
+
+/mob/living/carbon/proc/disarm_collision(datum/source, mob/living/carbon/shover, mob/living/carbon/target, shove_blocked)
+	SIGNAL_HANDLER
+	if(src == target || LAZYFIND(target.buckled_mobs, src) || !can_be_shoved_into)
+		return
+	target.Knockdown(SHOVE_KNOCKDOWN_HUMAN)
+	if(!is_shove_knockdown_blocked())
+		Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
+	target.visible_message(span_danger("[shover] shoves [target.name] into [name]!"),
+		span_userdanger("You're shoved into [name] by [shover]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
+	to_chat(src, span_danger("You shove [target.name] into [name]!"))
+	log_combat(src, target, "shoved", "into [name]")
+	return TRUE
+
+// Checks to see how many hands this person has to sign with.
+/mob/living/carbon/proc/check_signables_state()
+	var/obj/item/bodypart/left_arm = get_bodypart(BODY_ZONE_L_ARM)
+	var/obj/item/bodypart/right_arm = get_bodypart(BODY_ZONE_R_ARM)
+	var/empty_indexes = get_empty_held_indexes()
+	var/exit_right = (!right_arm || right_arm.bodypart_disabled)
+	var/exit_left = (!left_arm || left_arm.bodypart_disabled)
+	if(length(empty_indexes) == 0 || (length(empty_indexes) < 2 && (exit_left || exit_right)))//All existing hands full, can't sign
+		return SIGN_HANDS_FULL // These aren't booleans
+	if(exit_left && exit_right)//Can't sign with no arms!
+		return SIGN_ARMLESS
+	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED) || HAS_TRAIT(src, TRAIT_EMOTEMUTE))
+		return SIGN_TRAIT_BLOCKED
+	if(handcuffed) // Cuffed, usually will show visual effort to sign
+		return SIGN_CUFFED
+	if(length(empty_indexes) == 1 || exit_left || exit_right) // One arm gone
+		return SIGN_ONE_HAND
+
+/**
+ * This proc is a helper for spraying blood for things like slashing/piercing wounds and dismemberment.
+ *
+ * The strength of the splatter in the second argument determines how much it can dirty and how far it can go
+ *
+ * Arguments:
+ * * splatter_direction: Which direction the blood is flying
+ * * splatter_strength: How many tiles it can go, and how many items it can pass over and dirty
+ */
+/mob/living/carbon/proc/spray_blood(splatter_direction, splatter_strength = 3)
+	if(!isturf(loc))
+		return
+	var/obj/effect/decal/cleanable/blood/hitsplatter/our_splatter = new(loc)
+	our_splatter.add_blood_DNA(return_blood_DNA())
+	our_splatter.blood_dna_info = get_blood_dna_list()
+	var/turf/targ = get_ranged_target_turf(src, splatter_direction, splatter_strength)
+	INVOKE_ASYNC(our_splatter, /obj/effect/decal/cleanable/blood/hitsplatter/.proc/fly_towards, targ, splatter_strength)
 
 #undef JUMP_DELAY
 #undef MAX_JUMP_DISTANCE

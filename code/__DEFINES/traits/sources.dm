@@ -14,6 +14,8 @@
 #define ROUNDSTART_TRAIT "roundstart" //cannot be removed without admin intervention
 #define JOB_TRAIT "job"
 #define CYBORG_ITEM_TRAIT "cyborg-item"
+/// Any traits granted by quirks.
+#define QUIRK_TRAIT "quirk_trait"
 #define ADMIN_TRAIT "admin" // (B)admins only.
 #define CHANGELING_TRAIT "changeling"
 #define CULT_TRAIT "cult"
@@ -24,6 +26,8 @@
 #define HELMET_TRAIT "helmet"
 #define MASK_TRAIT "mask" //inherited from the mask
 #define SHOES_TRAIT "shoes" //inherited from your sweet kicks
+/// Trait inherited by implants
+#define IMPLANT_TRAIT "implant"
 #define GLASSES_TRAIT "glasses"
 #define VEHICLE_TRAIT "vehicle" // inherited from riding vehicles
 #define INNATE_TRAIT "innate"
@@ -112,7 +116,7 @@
 /// Trait applied to brain mobs when they lack external aid for locomotion, such as being inside a mech.
 #define BRAIN_UNAIDED "brain-unaided"
 /// Trait applied by element
-#define ELEMENT_TRAIT "element_trait"
+#define ELEMENT_TRAIT(source) "element_trait_[source]"
 /// Trait granted by [/obj/item/clothing/head/helmet/space/hardsuit/berserker]
 #define BERSERK_TRAIT "berserk_trait"
 

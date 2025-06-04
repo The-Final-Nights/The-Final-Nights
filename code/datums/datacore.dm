@@ -262,7 +262,7 @@
 		G.fields["truerank"] = trueassignment // TFN EDIT: alt job titles
 		G.fields["age"]			= H.age
 		G.fields["species"]	= H.dna.species.name
-		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
+		G.fields["fingerprint"]	= md5(H.dna.unique_identity)
 		G.fields["p_stat"]		= "Active"
 		G.fields["m_stat"]		= "Stable"
 		G.fields["gender"]			= H.gender
@@ -315,13 +315,13 @@
 			G.fields["gender"]  = "Female"
 		else
 			G.fields["gender"]  = "Other"
-		L.fields["blood_type"]	= H.dna.blood_type
-		L.fields["b_dna"]		= H.dna.unique_enzymes
-		L.fields["identity"]	= H.dna.uni_identity
-		L.fields["species"]		= H.dna.species.type
-		L.fields["features"]	= H.dna.features
-		L.fields["image"]		= image
-		L.fields["mindref"]		= H.mind
+		L.fields["blood_type"] = H.dna.blood_type
+		L.fields["b_dna"] = H.dna.unique_enzymes
+		L.fields["identity"] = H.dna.unique_identity
+		L.fields["species"] = H.dna.species.type
+		L.fields["features"] = H.dna.features
+		L.fields["image"] = image
+		L.fields["mindref"] = H.mind
 		locked += L
 	return
 

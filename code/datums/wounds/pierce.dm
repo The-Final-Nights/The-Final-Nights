@@ -23,14 +23,17 @@
 	/// If we let off blood when hit, the max blood lost is this * the incoming damage
 	var/internal_bleeding_coefficient
 
-/datum/wound/pierce/wound_injury(datum/wound/old_wound)
+/datum/wound/pierce/wound_injury(datum/wound/old_wound = null, attack_direction = null)
 	blood_flow = initial_flow
+	if(attack_direction && victim.blood_volume > BLOOD_VOLUME_OKAY)
+		victim.spray_blood(attack_direction, severity)
+
 
 /datum/wound/pierce/receive_damage(wounding_type, wounding_dmg, wound_bonus)
 	if(victim.stat == DEAD || wounding_dmg < 5)
 		return
-	if(victim.bloodpool && prob(internal_bleeding_chance + wounding_dmg))
-		if(limb.current_gauze && limb.current_gauze.splint_factor)
+	if(victim.blood_volume && prob(internal_bleeding_chance + wounding_dmg))
+		if(limb.current_gauze?.splint_factor)
 			wounding_dmg *= (1 - limb.current_gauze.splint_factor)
 		var/blood_bled = rand(1, wounding_dmg * internal_bleeding_coefficient) // 12 brute toolbox can cause up to 15/18/21 bloodloss on mod/sev/crit
 		switch(blood_bled)
@@ -59,25 +62,25 @@
 		return BLOOD_FLOW_DECREASING
 	return BLOOD_FLOW_STEADY
 
-/datum/wound/pierce/handle_process()
+/datum/wound/pierce/handle_process(delta_time, times_fired)
 	blood_flow = min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW)
 
 	if(victim.bodytemperature < (BODYTEMP_NORMAL -  10))
-		blood_flow -= 0.2
-		if(prob(5))
+		blood_flow -= 0.1 * delta_time
+		if(DT_PROB(2.5, delta_time))
 			to_chat(victim, "<span class='notice'>You feel the [lowertext(name)] in your [limb.name] firming up from the cold!</span>")
 
 	if(HAS_TRAIT(victim, TRAIT_BLOODY_MESS))
-		blood_flow += 0.5 // old heparin used to just add +2 bleed stacks per tick, this adds 0.5 bleed flow to all open cuts which is probably even stronger as long as you can cut them first
+		blood_flow += 0.25 * delta_time // old heparin used to just add +2 bleed stacks per tick, this adds 0.5 bleed flow to all open cuts which is probably even stronger as long as you can cut them first
 
 	if(limb.current_gauze)
-		blood_flow -= limb.current_gauze.absorption_rate * gauzed_clot_rate
-		limb.current_gauze.absorption_capacity -= limb.current_gauze.absorption_rate
+		blood_flow -= limb.current_gauze.absorption_rate * gauzed_clot_rate * delta_time
+		limb.current_gauze.absorption_capacity -= limb.current_gauze.absorption_rate * delta_time
 
 	if(blood_flow <= 0)
 		qdel(src)
 
-/datum/wound/pierce/on_stasis()
+/datum/wound/pierce/on_stasis(delta_time, times_fired)
 	. = ..()
 	if(blood_flow <= 0)
 		qdel(src)
@@ -98,7 +101,7 @@
 
 /datum/wound/pierce/on_synthflesh(power)
 	. = ..()
-	blood_flow -= 0.05 * power // 20u * 0.05 = -1 blood flow, less than with slashes but still good considering smaller bleed rates
+	blood_flow -= 0.025 * power // 20u * 0.05 = -1 blood flow, less than with slashes but still good considering smaller bleed rates
 
 /// If someone is using a suture to close this puncture
 /datum/wound/pierce/proc/suture(obj/item/stack/medical/suture/I, mob/user)

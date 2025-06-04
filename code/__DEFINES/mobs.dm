@@ -28,6 +28,9 @@
 #define BLOOD_VOLUME_BAD			224
 #define BLOOD_VOLUME_SURVIVE		122
 
+/// How efficiently humans regenerate blood.
+#define BLOOD_REGEN_FACTOR 0.25
+
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
 #define MOB_SIZE_SMALL 1
@@ -71,17 +74,17 @@
 #define MAX_LIVING_HEALTH 100
 
 #define HUMAN_MAX_OXYLOSS 3
-#define HUMAN_CRIT_MAX_OXYLOSS (SSmobs.wait/30)
+#define HUMAN_CRIT_MAX_OXYLOSS (SSMOBS_DT/3)
 
 #define STAMINA_REGEN_BLOCK_TIME (10 SECONDS)
 
-#define HEAT_DAMAGE_LEVEL_1 2 //Amount of damage applied when your body temperature just passes the 360.15k safety point
-#define HEAT_DAMAGE_LEVEL_2 3 //Amount of damage applied when your body temperature passes the 400K point
-#define HEAT_DAMAGE_LEVEL_3 8 //Amount of damage applied when your body temperature passes the 460K point and you are on fire
+#define HEAT_DAMAGE_LEVEL_1 1 //Amount of damage applied when your body temperature just passes the 360.15k safety point
+#define HEAT_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when your body temperature passes the 400K point
+#define HEAT_DAMAGE_LEVEL_3 4 //Amount of damage applied when your body temperature passes the 460K point and you are on fire
 
-#define COLD_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when your body temperature just passes the 260.15k safety point
-#define COLD_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when your body temperature passes the 200K point
-#define COLD_DAMAGE_LEVEL_3 3 //Amount of damage applied when your body temperature passes the 120K point
+#define COLD_DAMAGE_LEVEL_1 0.25 //Amount of damage applied when your body temperature just passes the 260.15k safety point
+#define COLD_DAMAGE_LEVEL_2 0.75 //Amount of damage applied when your body temperature passes the 200K point
+#define COLD_DAMAGE_LEVEL_3 1.5 //Amount of damage applied when your body temperature passes the 120K point
 
 //Note that gas heat damage is only applied once every FOUR ticks.
 #define HEAT_GAS_DAMAGE_LEVEL_1 2 //Amount of damage applied when the current breath's temperature just passes the 360.15k safety point
@@ -132,6 +135,14 @@
 #define SCREWYHUD_DEAD 2
 #define SCREWYHUD_HEALTHY 3
 
+//Health doll screws for human mobs
+#define SCREWYDOLL_HEAD /obj/item/bodypart/head
+#define SCREWYDOLL_CHEST /obj/item/bodypart/chest
+#define SCREWYDOLL_L_ARM /obj/item/bodypart/l_arm
+#define SCREWYDOLL_R_ARM /obj/item/bodypart/r_arm
+#define SCREWYDOLL_L_LEG /obj/item/bodypart/l_leg
+#define SCREWYDOLL_R_LEG /obj/item/bodypart/r_leg
+
 //Threshold levels for beauty for humans
 #define BEAUTY_LEVEL_HORRID -66
 #define BEAUTY_LEVEL_BAD -33
@@ -179,14 +190,27 @@
 //Used as an upper limit for species that continuously gain nutriment
 #define NUTRITION_LEVEL_ALMOST_FULL 535
 
-//Charge levels for Ethereals
+// The standard charge all other Ethereal charge defines are scaled against.
+#define STANDARD_ETHEREAL_CHARGE (1 * STANDARD_CELL_CHARGE)
+// Charge levels for Ethereals, in joules.
 #define ETHEREAL_CHARGE_NONE 0
-#define ETHEREAL_CHARGE_LOWPOWER 400
-#define ETHEREAL_CHARGE_NORMAL 1000
-#define ETHEREAL_CHARGE_ALMOSTFULL 1500
-#define ETHEREAL_CHARGE_FULL 2000
-#define ETHEREAL_CHARGE_OVERLOAD 2500
-#define ETHEREAL_CHARGE_DANGEROUS 3000
+#define ETHEREAL_CHARGE_LOWPOWER (0.4 * STANDARD_ETHEREAL_CHARGE)
+#define ETHEREAL_CHARGE_NORMAL (1 * STANDARD_ETHEREAL_CHARGE)
+#define ETHEREAL_CHARGE_ALMOSTFULL (1.5 * STANDARD_ETHEREAL_CHARGE)
+#define ETHEREAL_CHARGE_FULL (2 * STANDARD_ETHEREAL_CHARGE)
+#define ETHEREAL_CHARGE_OVERLOAD (2.5 * STANDARD_ETHEREAL_CHARGE)
+#define ETHEREAL_CHARGE_DANGEROUS (3 * STANDARD_ETHEREAL_CHARGE)
+
+#define CRYSTALIZE_COOLDOWN_LENGTH (120 SECONDS)
+#define CRYSTALIZE_PRE_WAIT_TIME (40 SECONDS)
+#define CRYSTALIZE_DISARM_WAIT_TIME (120 SECONDS)
+#define CRYSTALIZE_HEAL_TIME (60 SECONDS)
+
+#define BRUTE_DAMAGE_REQUIRED_TO_STOP_CRYSTALIZATION 30
+
+#define CRYSTALIZE_STAGE_ENGULFING 100 //Can't use second defines
+#define CRYSTALIZE_STAGE_ENCROACHING 300 //In switches
+#define CRYSTALIZE_STAGE_SMALL 600 //Because they're not static
 
 //Slime evolution threshold. Controls how fast slimes can split/grow
 #define SLIME_EVOLUTION_THRESHOLD 10
@@ -295,10 +319,13 @@
 #define POCKET_STRIP_DELAY			40	//time taken (in deciseconds) to search somebody's pockets
 #define DOOR_CRUSH_DAMAGE	15	//the amount of damage that airlocks deal when they crush you
 
-#define	HUNGER_FACTOR		0.1	//factor at which mob nutrition decreases
-#define	ETHEREAL_CHARGE_FACTOR	1.6 //factor at which ethereal's charge decreases
-#define	REAGENTS_METABOLISM 0.4	//How many units of reagent are consumed per tick, by default.
-#define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4)	// By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
+#define HUNGER_FACTOR 0.05 //factor at which mob nutrition decreases
+#define ETHEREAL_DISCHARGE_RATE (1e-3 * STANDARD_ETHEREAL_CHARGE) // Rate at which ethereal stomach charge decreases
+/// How much nutrition eating clothes as moth gives and drains
+#define CLOTHING_NUTRITION_GAIN 15
+#define REAGENTS_METABOLISM 0.2 //How many units of reagent are consumed per second, by default.
+#define REAGENTS_EFFECT_MULTIPLIER (REAGENTS_METABOLISM / 0.4) // By defining the effect multiplier this way, it'll exactly adjust all effects according to how they originally were with the 0.4 metabolism
+#define REM REAGENTS_EFFECT_MULTIPLIER //! Shorthand for the above define for ease of use in equations and the like
 
 // Eye protection
 #define FLASH_PROTECTION_SENSITIVE -1
@@ -436,3 +463,179 @@
 #define SOUL_PRESENT (1 << 0)
 #define SOUL_ABSENT (1 << 1)
 #define SOUL_PROJECTING ( 1<< 2)
+
+/// Throw modes, defines whether or not to turn off throw mode after
+#define THROW_MODE_DISABLED 0
+#define THROW_MODE_TOGGLE 1
+#define THROW_MODE_HOLD 2
+
+//Saves a proc call, life is suffering. If who has no targets_from var, we assume it's just who
+#define GET_TARGETS_FROM(who) (who.targets_from ? who.get_targets_from() : who)
+
+//defines for grad_color and grad_styles list access keys
+#define GRADIENT_HAIR_KEY 1
+#define GRADIENT_FACIAL_HAIR_KEY 2
+//Keep up to date with the highest key value
+#define GRADIENTS_LEN 2
+
+// /datum/sprite_accessory/gradient defines
+#define GRADIENT_APPLIES_TO_HAIR (1<<0)
+#define GRADIENT_APPLIES_TO_FACIAL_HAIR (1<<1)
+
+/// Sign Language defines
+#define SIGN_ONE_HAND 0
+#define SIGN_HANDS_FULL 1
+#define SIGN_ARMLESS 2
+#define SIGN_TRAIT_BLOCKED 3
+#define SIGN_CUFFED 4
+
+//Human Overlays Indexes/////////
+/// Total number of layers for mob overlays
+#define TOTAL_LAYERS 45 //KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+
+#define UNDERSHADOW_LAYER 45
+
+#define LUZHA_LAYER 44
+/// Mutations layer - Tk headglows, cold resistance glow, etc
+#define MUTATIONS_LAYER 43
+/// Mutantrace features (tail when looking south) that must appear behind the body parts
+#define BODY_BEHIND_LAYER 42
+/// Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
+#define BODYPARTS_LAYER 41
+/// Mutantrace features (snout, body markings) that must appear above the body parts
+#define BODY_ADJ_LAYER 40
+/// Underwear, undershirts, socks, eyes, lips(makeup)
+#define BODY_LAYER 39
+/// Mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
+#define FRONT_MUTATIONS_LAYER 38
+/// Damage indicators (cuts and burns)
+#define DAMAGE_LAYER 37
+//For WoD-specific clanmarks etc
+#define MARKS_LAYER 36
+/// Jumpsuit clothing layer
+#define UNIFORM_LAYER 35
+/// ID card layer (might be deprecated)
+#define ID_LAYER 34
+/// ID card layer
+#define ID_CARD_LAYER 33
+/// Hands body part layer (or is this for the arm? not sure...)
+#define HANDS_PART_LAYER 32
+/// Gloves layer
+#define GLOVES_LAYER 31
+/// Shoes layer
+#define SHOES_LAYER 30
+/// Ears layer (Spessmen have ears? Wow)
+#define EARS_LAYER 29
+/// Suit layer (armor, hardsuits, etc.)
+#define SUIT_LAYER 28
+/// Glasses layer
+#define GLASSES_LAYER 27
+
+#define UPPER_EARS_LAYER 26
+/// Belt layer
+#define BELT_LAYER 25
+/// Suit storage layer (tucking a gun or baton underneath your armor)
+#define SUIT_STORE_LAYER 24
+/// Neck layer (for wearing ties and bedsheets)
+#define NECK_LAYER 23
+/// Back layer (for backpacks and equipment on your back)
+#define BACK_LAYER 22
+/// Hair layer (mess with the fro and you got to go!)
+#define HAIR_LAYER 21
+/// Facemask layer (gas masks, breath masks, etc.)
+#define FACEMASK_LAYER 120
+
+#define DECAPITATION_BLOOD_LAYER 19
+/// Head layer (hats, helmets, etc.)
+#define HEAD_LAYER 18
+
+#define PROTEAN_LAYER 17
+
+/// Handcuff layer (when your hands are cuffed)
+#define HANDCUFF_LAYER 16
+/// Legcuff layer (when your feet are cuffed)
+#define LEGCUFF_LAYER 15
+
+#define UNICORN_LAYER 14
+
+#define POTENCE_LAYER 13
+
+#define FORTITUDE_LAYER	12
+
+#define FIRING_EFFECT_LAYER	11
+
+#define BITE_LAYER 10
+
+#define FIGHT_LAYER	9
+
+/// Hands layer (for the actual hand, not the arm... I think?)
+#define HANDS_LAYER 8
+/// Body front layer. Usually used for mutant bodyparts that need to be in front of stuff (e.g. cat ears)
+#define BODY_FRONT_LAYER 7
+/// Special body layer that actually require to be above the hair (e.g. lifted welding goggles)
+#define ABOVE_BODY_FRONT_GLASSES_LAYER 6
+/// Special body layer for the rare cases where something on the head needs to be above everything else (e.g. flowers)
+#define ABOVE_BODY_FRONT_HEAD_LAYER 5
+/// Bleeding wound icons
+#define WOUND_LAYER 4
+/// Blood cult ascended halo layer, because there's currently no better solution for adding/removing
+#define HALO_LAYER 3
+
+#define SAY_LAYER 2
+/// Fire layer when you're on fire
+#define FIRE_LAYER 1
+
+//Bitflags for the layers an external organ can draw on (organs can be drawn on multiple layers)
+/// Draws organ on the BODY_FRONT_LAYER
+#define EXTERNAL_FRONT (1 << 1)
+/// Draws organ on the BODY_ADJ_LAYER
+#define EXTERNAL_ADJACENT (1 << 2)
+/// Draws organ on the BODY_BEHIND_LAYER
+#define EXTERNAL_BEHIND (1 << 3)
+/// Draws organ on all EXTERNAL layers
+#define ALL_EXTERNAL_OVERLAYS EXTERNAL_FRONT | EXTERNAL_ADJACENT | EXTERNAL_BEHIND
+
+//Mob Overlay Index Shortcuts for alternate_worn_layer, layers
+//Because I *KNOW* somebody will think layer+1 means "above"
+//IT DOESN'T OK, IT MEANS "UNDER"
+/// The layer underneath the suit
+#define UNDER_SUIT_LAYER (SUIT_LAYER+1)
+/// The layer underneath the head (for hats)
+#define UNDER_HEAD_LAYER (HEAD_LAYER+1)
+
+//AND -1 MEANS "ABOVE", OK?, OK!?!
+/// The layer above shoes
+#define ABOVE_SHOES_LAYER (SHOES_LAYER-1)
+/// The layer above mutant body parts
+#define ABOVE_BODY_FRONT_LAYER (BODY_FRONT_LAYER-1)
+
+//used by canUseTopic()
+/// If silicons need to be next to the atom to use this
+#define BE_CLOSE TRUE
+/// If other mobs (monkeys, aliens, etc) can use this
+#define NO_DEXTERITY TRUE // I had to change 20+ files because some non-dnd-playing fuckchumbis can't spell "dexterity"
+// If telekinesis you can use it from a distance
+#define NO_TK TRUE
+/// If mobs can use this while resting
+#define FLOOR_OKAY TRUE
+
+/// The default mob sprite size (used for shrinking or enlarging the mob sprite to regular size)
+#define RESIZE_DEFAULT_SIZE 1
+
+/// Get the client from the var
+#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (istype(I, /client) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
+
+/// The mob will vomit a green color
+#define VOMIT_TOXIC 1
+/// The mob will vomit a purple color
+#define VOMIT_PURPLE 2
+#define VOMIT_NANITE 3
+
+/// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
+#define NO_BUCKLE_LYING -1
+
+//Bitflags for
+//The layer external organs draw. These are drawn on the limbs, so the layers are relative to the limb theyre being drawn on
+#define EXTERNAL_FRONT_LAYER 2
+#define EXTERNAL_ADJACENT_LAYER 1
+#define EXTERNAL_BEHIND_LAYER -1

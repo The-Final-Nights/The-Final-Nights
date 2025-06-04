@@ -22,7 +22,7 @@
 	activated = TRUE
 	create_reagents(max_volume, DRAINABLE)
 	reagents.add_reagent(reagent_id, start_volume)
-	START_PROCESSING(SSfluids, src) //It's main function is to be plumbed, so use SSfluids
+	START_PROCESSING(SSplumbing, src) //It's main function is to be plumbed, so use SSplumbing
 	if(erupting_state)
 		icon_state = erupting_state
 	else
@@ -75,8 +75,7 @@
 	var/target_layer = DUCT_LAYER_DEFAULT
 
 	///Assoc list for possible layers
-	var/list/layers = list("First Layer" = FIRST_DUCT_LAYER, "Second Layer" = SECOND_DUCT_LAYER, "Default Layer" = DUCT_LAYER_DEFAULT,
-		"Fourth Layer" = FOURTH_DUCT_LAYER, "Fifth Layer" = FIFTH_DUCT_LAYER)
+	var/list/layers = list("Alternate Layer" = SECOND_DUCT_LAYER, "Default Layer" = DUCT_LAYER_DEFAULT)
 
 /obj/item/plunger/attack_atom(obj/O, mob/living/user, params)
 	if(layer_mode)

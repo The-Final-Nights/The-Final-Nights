@@ -205,6 +205,8 @@
 #define COMSIG_REAGENTS_TEMP_CHANGE		"reagents_temp_change"
 ///from base of [/datum/reagents/proc/handle_reactions]: (num_reactions)
 #define COMSIG_REAGENTS_REACTED			"reagents_reacted"
+///from base of [/datum/reagents/proc/process]: (num_reactions)
+#define COMSIG_REAGENTS_REACTION_STEP	"reagents_time_step"
 ///from base of [/atom/proc/expose_reagents]: (/atom, /list, methods, volume_modifier, show_message)
 #define COMSIG_REAGENTS_EXPOSE_ATOM		"reagents_expose_atom"
 ///from base of [/obj/proc/expose_reagents]: (/obj, /list, methods, volume_modifier, show_message)
@@ -230,13 +232,6 @@
 #define COMSIG_ATOM_INTERCEPT_Z_FALL "movable_intercept_z_impact"
 ///called on a movable (NOT living) when it starts pulling (atom/movable/pulled, state, force)
 #define COMSIG_ATOM_START_PULL "movable_start_pull"
-///called on /living when someone starts pulling (atom/movable/pulled, state, force)
-#define COMSIG_LIVING_START_PULL "living_start_pull"
-///called on /living when someone is pulled (mob/living/puller)
-#define COMSIG_LIVING_GET_PULLED "living_start_pulled"
-///called on /living, when pull is attempted, but before it completes, from base of [/mob/living/start_pulling]: (atom/movable/thing, force)
-#define COMSIG_LIVING_TRY_PULL "living_try_pull"
-	#define COMSIG_LIVING_CANCEL_PULL (1 << 0)
 ///from base of [/atom/proc/interact]: (mob/user)
 #define COMSIG_ATOM_UI_INTERACT "atom_ui_interact"
 ///called on /living when attempting to pick up an item, from base of /mob/living/put_in_hand_check(): (obj/item/I)
@@ -261,8 +256,6 @@
 #define COMSIG_MOVABLE_PULLED "movable_pulled"						//! signal sent out by an atom when it is being pulled by something else : (atom/puller)
 #define COMSIG_MOVABLE_NO_LONGER_PULLED "movable_no_longer_pulled"	//! signal sent out by an atom when it is no longer being pulled by something else : (atom/puller)
 
-///From living/set_resting(): (new_resting, silent, instant)
-#define COMSIG_LIVING_RESTING "living_resting"
 
 /////////////////
 
@@ -383,156 +376,11 @@
 ///Called when a movable is hit by a plunger in layer mode, from /obj/item/plunger/attack_atom()
 #define COMSIG_MOVABLE_CHANGE_DUCT_LAYER "movable_change_duct_layer"
 
-// /mob signals
-
-///from base of /mob/Login(): ()
-#define COMSIG_MOB_LOGIN "mob_login"
-///from base of /mob/Logout(): ()
-#define COMSIG_MOB_LOGOUT "mob_logout"
-///from base of mob/set_stat(): (new_stat)
-#define COMSIG_MOB_STATCHANGE "mob_statchange"
-///from base of mob/clickon(): (atom/A, params)
-#define COMSIG_MOB_CLICKON "mob_clickon"
-///from base of mob/MiddleClickOn(): (atom/A)
-#define COMSIG_MOB_MIDDLECLICKON "mob_middleclickon"
-///from base of mob/AltClickOn(): (atom/A)
-#define COMSIG_MOB_ALTCLICKON "mob_altclickon"
-	#define COMSIG_MOB_CANCEL_CLICKON (1<<0)
-
-///from base of obj/allowed(mob/M): (/obj) returns bool, if TRUE the mob has id access to the obj
-#define COMSIG_MOB_ALLOWED "mob_allowed"
-///from base of mob/anti_magic_check(): (mob/user, magic, holy, tinfoil, chargecost, self, protection_sources)
-#define COMSIG_MOB_RECEIVE_MAGIC "mob_receive_magic"
-	#define COMPONENT_BLOCK_MAGIC (1<<0)
-///from base of mob/create_mob_hud(): ()
-#define COMSIG_MOB_HUD_CREATED "mob_hud_created"
-
-///from base of /obj/item/toy/crayon/spraycan/afterattack() (mob/user, atom/target)
-#define COMSIG_MOB_USING_SPAYPRAINT "mob_using_spraypaint"
-
-///from base of /mob/living/proc/apply_damage(): (damage, damagetype, def_zone)
-#define COMSIG_MOB_APPLY_DAMGE	"mob_apply_damage"
-///from base of /mob/throw_item(): (atom/target)
-#define COMSIG_MOB_THROW "mob_throw"
-///from base of /atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, gentle = FALSE, quickstart = TRUE)
-//SEND_SIGNAL(thrower, COMSIG_MOB_THREW_MOVABLE, target, TT)
-#define COMSIG_MOB_THREW_MOVABLE "mob_threw_movable"
-///from base of TYPE_VERB_REF(/mob, examinate)(): (atom/target)
-#define COMSIG_MOB_EXAMINATE "mob_examinate"
-///from /mob/living/handle_eye_contact(): (mob/living/other_mob)
-#define COMSIG_MOB_EYECONTACT "mob_eyecontact"
-	/// return this if you want to block printing this message to this person, if you want to print your own (does not affect the other person's message)
-	#define COMSIG_BLOCK_EYECONTACT (1<<0)
-///from base of /mob/update_sight(): ()
-#define COMSIG_MOB_UPDATE_SIGHT "mob_update_sight"
-////from /mob/living/say(): ()
-#define COMSIG_MOB_SAY "mob_say"
-	#define COMPONENT_UPPERCASE_SPEECH (1<<0)
-	// used to access COMSIG_MOB_SAY argslist
-	#define SPEECH_MESSAGE 1
-	// #define SPEECH_BUBBLE_TYPE 2
-	#define SPEECH_SPANS 3
-	/* #define SPEECH_SANITIZE 4
-	#define SPEECH_LANGUAGE 5
-	#define SPEECH_IGNORE_SPAM 6
-	#define SPEECH_FORCED 7 */
-
-///from /mob/say_dead(): (mob/speaker, message)
-#define COMSIG_MOB_DEADSAY "mob_deadsay"
-	#define MOB_DEADSAY_SIGNAL_INTERCEPT (1<<0)
-
-///from /mob/living/emote(): ()
-#define COMSIG_MOB_EMOTE "mob_emote"
-///Mob is trying to emote, from /datum/emote/proc/run_emote(): (key, params, type_override, intentional, emote)
-#define COMSIG_MOB_PRE_EMOTED "mob_pre_emoted"
-	#define COMPONENT_CANT_EMOTE (1<<0)
-#define COMSIG_MOB_EMOTED(emote_key) "mob_emoted_[emote_key]"
-
-///from base of mob/swap_hand(): (obj/item)
-#define COMSIG_MOB_SWAP_HANDS "mob_swap_hands"
-	#define COMPONENT_BLOCK_SWAP (1<<0)
-///from /obj/structure/door/crush(): (mob/living/crushed, /obj/machinery/door/crushing_door)
-#define COMSIG_LIVING_DOORCRUSHED "living_doorcrush"
-
-/// From base of /client/Move()
-#define COMSIG_MOB_CLIENT_MOVED "mob_client_moved"
-
-///from base of mob/living/resist() (/mob/living)
-#define COMSIG_LIVING_RESIST "living_resist"
-///from base of mob/living/IgniteMob() (/mob/living)
-#define COMSIG_LIVING_IGNITED "living_ignite"
-///from base of mob/living/extinguish_mob() (/mob/living)
-#define COMSIG_LIVING_EXTINGUISHED "living_extinguished"
-///from base of mob/living/electrocute_act(): (shock_damage, source, siemens_coeff, flags)
-#define COMSIG_LIVING_ELECTROCUTE_ACT "living_electrocute_act"
-///sent when items with siemen coeff. of 0 block a shock: (power_source, source, siemens_coeff, dist_check)
-#define COMSIG_LIVING_SHOCK_PREVENTED "living_shock_prevented"
-///sent by stuff like stunbatons and tasers: ()
-#define COMSIG_LIVING_MINOR_SHOCK "living_minor_shock"
-///from base of mob/living/revive() (full_heal, admin_revive)
-#define COMSIG_LIVING_REVIVE "living_revive"
-///from base of /mob/living/regenerate_limbs(): (noheal, excluded_limbs)
-#define COMSIG_LIVING_REGENERATE_LIMBS "living_regen_limbs"
-///from base of mob/living/set_buckled(): (new_buckled)
-#define COMSIG_LIVING_SET_BUCKLED "living_set_buckled"
-///from base of mob/living/set_body_position()
-#define COMSIG_LIVING_SET_BODY_POSITION  "living_set_body_position"
-///From post-can inject check of syringe after attack (mob/user)
-#define COMSIG_LIVING_TRY_SYRINGE "living_try_syringe"
-
-
-///Sent when bloodcrawl ends in mob/living/phasein(): (phasein_decal)
-#define COMSIG_LIVING_AFTERPHASEIN "living_phasein"
-
-///from base of mob/living/death(): (gibbed)
-#define COMSIG_LIVING_DEATH "living_death"
-
-///from /obj/item/hand_item/slapper/attack_atom(): (source=mob/living/slammer, obj/structure/table/slammed_table)
-#define COMSIG_LIVING_SLAM_TABLE "living_slam_table"
-///from /obj/item/hand_item/slapper/attack(): (source=mob/living/slapper, mob/living/slapped)
-#define COMSIG_LIVING_SLAP_MOB "living_slap_mob"
-///from /obj/item/hand_item/slapper/attack(): (source=mob/living/slapper, mob/living/slapped)
-#define COMSIG_LIVING_SLAPPED "living_slapped"
-
-///from /obj/item/hand_item/slapper/attack_atom(): (source=obj/structure/table/slammed_table, mob/living/slammer)
-#define COMSIG_TABLE_SLAMMED "table_slammed"
-
 ///sent from borg recharge stations: (amount, repairs)
 #define COMSIG_PROCESS_BORGCHARGER_OCCUPANT "living_charge"
-///sent when a mob/login() finishes: (client)
-#define COMSIG_MOB_CLIENT_LOGIN "comsig_mob_client_login"
 ///sent from borg mobs to itself, for tools to catch an upcoming destroy() due to safe decon (rather than detonation)
 #define COMSIG_BORG_SAFE_DECONSTRUCT "borg_safe_decon"
 
-//ALL OF THESE DO NOT TAKE INTO ACCOUNT WHETHER AMOUNT IS 0 OR LOWER AND ARE SENT REGARDLESS!
-
-///from base of mob/living/Stun() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_STUN "living_stun"
-///from base of mob/living/Knockdown() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_KNOCKDOWN "living_knockdown"
-///from base of mob/living/Paralyze() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_PARALYZE "living_paralyze"
-///from base of mob/living/Immobilize() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_IMMOBILIZE "living_immobilize"
-///from base of mob/living/Unconscious() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_UNCONSCIOUS "living_unconscious"
-///from base of mob/living/Sleeping() (amount, ignore_canstun)
-#define COMSIG_LIVING_STATUS_SLEEP "living_sleeping"
-	#define COMPONENT_NO_STUN (1<<0)									//For all of them
-///from base of /mob/living/can_track(): (mob/user)
-#define COMSIG_LIVING_CAN_TRACK "mob_cantrack"
-	#define COMPONENT_CANT_TRACK (1<<0)
-
-/// From /mob/living/proc/stop_leaning()
-#define COMSIG_LIVING_STOPPED_LEANING "living_stopped_leaning"
-
-/// Called when a living mob has its resting updated: (resting_state)
-#define COMSIG_LIVING_RESTING_UPDATED "resting_updated"
-
-///From /datum/component/creamed/Initialize()
-#define COMSIG_MOB_CREAMED "mob_creamed"
-///From /obj/item/gun/proc/check_botched()
-#define COMSIG_MOB_CLUMSY_SHOOT_FOOT "mob_clumsy_shoot_foot"
 
 ///When a carbon mob hugs someone, this is called on the carbon that is hugging. (mob/living/hugger, mob/living/hugged)
 #define COMSIG_CARBON_HUG "carbon_hug"
@@ -541,40 +389,8 @@
 ///When a carbon mob is headpatted, this is called on the carbon that is headpatted. (mob/living/headpatter)
 #define COMSIG_CARBON_HEADPAT "carbon_headpatted"
 
-///When a carbon slips. Called on /turf/open/handle_slip()
-#define COMSIG_ON_CARBON_SLIP "carbon_slip"
 ///When a carbon gets a vending machine tilted on them
 #define COMSIG_ON_VENDOR_CRUSH "carbon_vendor_crush"
-// /mob/living/carbon physiology signals
-#define COMSIG_CARBON_GAIN_WOUND "carbon_gain_wound"				//from /datum/wound/proc/apply_wound() (/mob/living/carbon/C, /datum/wound/W, /obj/item/bodypart/L)
-#define COMSIG_CARBON_LOSE_WOUND "carbon_lose_wound"				//from /datum/wound/proc/remove_wound() (/mob/living/carbon/C, /datum/wound/W, /obj/item/bodypart/L)
-///from base of /obj/item/bodypart/proc/attach_limb(): (new_limb, special) allows you to fail limb attachment
-#define COMSIG_CARBON_ATTACH_LIMB "carbon_attach_limb"
-	#define COMPONENT_NO_ATTACH (1<<0)
-#define COMSIG_CARBON_REMOVE_LIMB "carbon_remove_limb"			//from base of /obj/item/bodypart/proc/drop_limb(special, dismembered)
-#define COMSIG_BODYPART_GAUZED	"bodypart_gauzed" // from /obj/item/bodypart/proc/apply_gauze(/obj/item/stack/gauze)
-#define COMSIG_BODYPART_GAUZE_DESTROYED	"bodypart_degauzed" // from [/obj/item/bodypart/proc/seep_gauze] when it runs out of absorption
-
-///from base of mob/living/carbon/soundbang_act(): (list(intensity))
-#define COMSIG_CARBON_SOUNDBANG "carbon_soundbang"
-///from /item/organ/proc/Insert() (/obj/item/organ/)
-#define COMSIG_CARBON_GAIN_ORGAN "carbon_gain_organ"
-///from /item/organ/proc/Remove() (/obj/item/organ/)
-#define COMSIG_CARBON_LOSE_ORGAN "carbon_lose_organ"
-///from /mob/living/carbon/doUnEquip(obj/item/I, force, newloc, no_move, invdrop, silent)
-#define COMSIG_CARBON_EQUIP_HAT "carbon_equip_hat"
-///from /mob/living/carbon/doUnEquip(obj/item/I, force, newloc, no_move, invdrop, silent)
-#define COMSIG_CARBON_UNEQUIP_HAT "carbon_unequip_hat"
-///from /mob/living/carbon/doUnEquip(obj/item/I, force, newloc, no_move, invdrop, silent)
-#define COMSIG_CARBON_UNEQUIP_SHOECOVER "carbon_unequip_shoecover"
-#define COMSIG_CARBON_EQUIP_SHOECOVER "carbon_equip_shoecover"
-///defined twice, in carbon and human's topics, fired when interacting with a valid embedded_object to pull it out (mob/living/carbon/target, /obj/item, /obj/item/bodypart/L)
-#define COMSIG_CARBON_EMBED_RIP "item_embed_start_rip"
-///called when removing a given item from a mob, from mob/living/carbon/remove_embedded_object(mob/living/carbon/target, /obj/item)
-#define COMSIG_CARBON_EMBED_REMOVAL "item_embed_remove_safe"
-///Called when someone attempts to cuff a carbon
-#define COMSIG_CARBON_CUFF_ATTEMPTED "carbon_attempt_cuff"
-
 
 // /obj signals
 
@@ -631,6 +447,12 @@
 
 ///from base of obj/item/equipped(): (/mob/equipper, slot)
 #define COMSIG_ITEM_EQUIPPED "item_equip"
+///called on [/obj/item] before unequip from base of [mob/proc/doUnEquip]: (force, atom/newloc, no_move, invdrop, silent)
+#define COMSIG_ITEM_PRE_UNEQUIP "item_pre_unequip"
+	///only the pre unequip can be cancelled
+	#define COMPONENT_ITEM_BLOCK_UNEQUIP (1<<0)
+///called on [/obj/item] AFTER unequip from base of [mob/proc/doUnEquip]: (force, atom/newloc, no_move, invdrop, silent)
+#define COMSIG_ITEM_POST_UNEQUIP "item_post_unequip"
 ///from base of obj/item/on_grind(): ())
 #define COMSIG_ITEM_ON_GRIND "on_grind"
 ///from base of obj/item/on_juice(): ()
@@ -692,6 +514,16 @@
 #define COMSIG_MINE_TRIGGERED "minegoboom"
 ///from [/obj/structure/closet/supplypod/proc/preOpen]:
 #define COMSIG_SUPPLYPOD_LANDED "supplypodgoboom"
+
+///Closets
+///From base of [/obj/structure/closet/proc/insert]: (atom/movable/inserted)
+#define COMSIG_CLOSET_INSERT "closet_insert"
+	///used to interrupt insertion
+	#define COMPONENT_CLOSET_INSERT_INTERRUPT (1<<0)
+
+///Eigenstasium
+///From base of [/datum/controller/subsystem/eigenstates/proc/use_eigenlinked_atom]: (var/target)
+#define COMSIG_EIGENSTATE_ACTIVATE "eigenstate_activate"
 
 // /obj signals for economy
 ///called when the payment component tries to charge an account.
@@ -763,8 +595,6 @@
 // /obj/item/gun signals
 
 ///called in /obj/item/gun/process_fire (user, target, params, zone_override)
-#define COMSIG_MOB_FIRED_GUN "mob_fired_gun"
-///called in /obj/item/gun/process_fire (user, target, params, zone_override)
 #define COMSIG_GUN_FIRED "gun_fired"
 
 // /obj/item/grenade signals
@@ -800,13 +630,6 @@
 ///sent from mecha action buttons to the mecha they're linked to
 #define COMSIG_MECHA_ACTION_TRIGGER "mecha_action_activate"
 
-
-// /mob/living/carbon/human signals
-
-///Hit by successful disarm attack (mob/living/carbon/human/attacker,zone_targeted)
-#define COMSIG_HUMAN_DISARM_HIT	"human_disarm_hit"
-///Whenever EquipRanked is called, called after job is set
-#define COMSIG_JOB_RECEIVED "job_received"
 
 // /datum/species signals
 
@@ -1042,30 +865,6 @@
 #define COMSIG_ITEM_AFTERATTACK "item_afterattack"
 ///from base of obj/item/attack_qdeleted(): (atom/target, mob/user, params)
 #define COMSIG_ITEM_ATTACK_QDELETED "item_attack_qdeleted"
-///from base of /mob/proc/melee_swing()
-#define COMSIG_MOB_MELEE_SWING "mob_melee_swing"
-///from base of /mob/living/attackby(obj/item/I, mob/living/user, params)
-///	SEND_SIGNAL(src, COMSIG_MOB_ATTACKED_BY_MELEE, /*attacker =*/user, /*item =*/I, /*params =*/params)
-#define COMSIG_MOB_ATTACKED_BY_MELEE "mob_attacked_by_melee"
-///	SEND_SIGNAL(user, COMSIG_MOB_ATTACKING_MELEE, /*target =*/src, /*item =*/I, params)
-#define COMSIG_MOB_ATTACKING_MELEE "mob_attacking_melee"
-///from base of atom/attack_hand(): (mob/user)
-#define COMSIG_MOB_ATTACK_HAND "mob_attack_hand"
-///from base of /mob/living/attack_hand(mob/living/carbon/human/user)
-///SEND_SIGNAL(user, COMSIG_MOB_LIVING_ATTACK_HAND, /*target =*/src)
-#define COMSIG_MOB_LIVING_ATTACK_HAND "mob_living_attack_hand"
-///SEND_SIGNAL(src, COMSIG_MOB_ATTACKED_HAND, /*attacker =*/user)
-#define COMSIG_MOB_ATTACKED_HAND "mob_attacked_hand"
-///from base of /obj/item/attack(): (mob/M, mob/user)
-#define COMSIG_MOB_ITEM_ATTACK "mob_item_attack"
-///from base of obj/item/afterattack(): (atom/target, mob/user, proximity_flag, click_parameters)
-#define COMSIG_MOB_ITEM_AFTERATTACK "mob_item_afterattack"
-///from base of obj/item/attack_qdeleted(): (atom/target, mob/user, proxiumity_flag, click_parameters)
-#define COMSIG_MOB_ITEM_ATTACK_QDELETED "mob_item_attack_qdeleted"
-///from base of mob/RangedAttack(): (atom/A, params)
-#define COMSIG_MOB_ATTACK_RANGED "mob_attack_ranged"
-///From base of atom/ctrl_click(): (atom/A)
-#define COMSIG_MOB_CTRL_CLICKED "mob_ctrl_clicked"
 ///from mob/living/carbon/human/UnarmedAttack(): (atom/target, proximity)
 #define COMSIG_HUMAN_EARLY_UNARMED_ATTACK "human_early_unarmed_attack"
 ///from mob/living/carbon/human/UnarmedAttack(): (atom/target, proximity)

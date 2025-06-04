@@ -406,10 +406,8 @@
 					REMOVE_TRAIT(caster, TRAIT_PASS_THROUGH_WALLS, "jade shintai 3")
 					caster.remove_movespeed_modifier(/datum/movespeed_modifier/wall_passing)
 		if(4)
-			caster.dna.species.ToggleFlight(caster)
-			spawn(delay+caster.discipline_time_plus)
-				if(caster)
-					caster.dna.species.ToggleFlight(caster)
+			caster.dna.species.fly.Activate()
+			addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/action/innate/flight, Activate)), delay + caster.discipline_time_plus)
 		if(5)
 			caster.remove_overlay(POTENCE_LAYER)
 			var/mutable_appearance/fortitude_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "[caster.base_body_mod]rock", -POTENCE_LAYER)
@@ -443,13 +441,13 @@
 	cost_yin = 1
 	activate_sound = 'code/modules/wod13/sounds/boneshintai_activate.ogg'
 
-/obj/effect/particle_effect/smoke/bad/green/bone_shintai
+/obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai
 	name = "green dangerous smoke"
 
 /datum/effect_system/smoke_spread/bad/green/bone_shintai
-	effect_type = /obj/effect/particle_effect/smoke/bad/green/bone_shintai
+	effect_type = /obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai
 
-/obj/effect/particle_effect/smoke/bad/green/bone_shintai/smoke_mob(mob/living/carbon/inhaling_mob)
+/obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai/smoke_mob(mob/living/carbon/inhaling_mob)
 	. = ..()
 	if(.)
 		inhaling_mob.adjustToxLoss(15, TRUE)
@@ -1130,15 +1128,14 @@
 	. = ..()
 	dir = pick(NORTH, EAST, WEST, SOUTH, SOUTHEAST, SOUTHWEST, NORTHEAST, NORTHWEST)
 
-/obj/effect/particle_effect/smoke/bad/yomi
+/obj/effect/particle_effect/fluid/smoke/bad/yomi
 	name = "dark red smoke"
 	color = "#6f0000"
-	opaque = FALSE
 
 /datum/effect_system/smoke_spread/bad/yomi
-	effect_type = /obj/effect/particle_effect/smoke/bad/yomi
+	effect_type = /obj/effect/particle_effect/fluid/smoke/bad/yomi
 
-/obj/effect/particle_effect/smoke/bad/yomi/smoke_mob(mob/living/carbon/inhaling_mob)
+/obj/effect/particle_effect/fluid/smoke/bad/yomi/smoke_mob(mob/living/carbon/inhaling_mob)
 	. = ..()
 	if(.)
 		inhaling_mob.adjustCloneLoss(10, TRUE)
@@ -1652,16 +1649,15 @@
 			caster.drop_all_held_items()
 			caster.put_in_active_hand(new /obj/item/gun/magic/hook/storm_shintai(caster))
 		if(4)
-			caster.dna.species.ToggleFlight(caster)
+			var/obj/item/organ/external/wings/functional/wings = new()
+			wings.Insert(caster, FALSE, FALSE)
 			caster.remove_overlay(FORTITUDE_LAYER)
 			var/mutable_appearance/fortitude_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "tornado", -FORTITUDE_LAYER)
 			fortitude_overlay.pixel_y = -16
 			caster.overlays_standing[FORTITUDE_LAYER] = fortitude_overlay
 			caster.apply_overlay(FORTITUDE_LAYER)
 			spawn(delay+caster.discipline_time_plus)
-				if(caster)
-					caster.dna.species.ToggleFlight(caster)
-					caster.remove_overlay(FORTITUDE_LAYER)
+			addtimer(CALLBACK(src, PROC_REF(undo_storm_shintai_wings), caster), delay + caster.discipline_time_plus)
 		if(5)
 			caster.remove_overlay(FORTITUDE_LAYER)
 			var/mutable_appearance/fortitude_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "puff_const", -FORTITUDE_LAYER)
@@ -1673,6 +1669,11 @@
 			spawn(delay+caster.discipline_time_plus)
 				if(caster)
 					caster.remove_overlay(FORTITUDE_LAYER)
+
+/datum/chi_discipline/storm_shintai/proc/undo_storm_shintai_wings(mob/living/carbon/human/caster)
+	var/obj/item/organ/external/wings/functional/wings = caster.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)
+	wings.Remove(caster, FALSE)
+	caster.remove_overlay(FORTITUDE_LAYER)
 
 /datum/chi_discipline/storm_shintai/proc/wind_aura_loop(mob/living/carbon/human/caster, duration)
 	var/loop_started_time = world.time

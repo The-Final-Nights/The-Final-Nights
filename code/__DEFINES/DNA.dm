@@ -58,8 +58,9 @@
 #define HARS		/datum/mutation/human/headless
 #define BIOTECHCOMPAT /datum/mutation/human/biotechcompat
 
-#define UI_CHANGED "ui changed"
 #define UE_CHANGED "ue changed"
+#define UI_CHANGED "ui changed"
+#define UF_CHANGED "uf changed"
 
 #define CHAMELEON_MUTATION_DEFAULT_TRANSPARENCY 204
 
@@ -88,9 +89,26 @@
 #define DNA_FACIAL_HAIRSTYLE_BLOCK	6
 #define DNA_HAIRSTYLE_BLOCK		7
 
-#define DNA_SEQUENCE_LENGTH			4
-#define DNA_MUTATION_BLOCKS			8
-#define DNA_UNIQUE_ENZYMES_LEN		32
+#define DNA_FEATURE_BLOCKS 15
+#define DNA_MUTANT_COLOR_BLOCK 1
+#define DNA_ETHEREAL_COLOR_BLOCK 2
+#define DNA_LIZARD_MARKINGS_BLOCK 3
+#define DNA_LIZARD_TAIL_BLOCK 4
+#define DNA_SNOUT_BLOCK 5
+#define DNA_HORNS_BLOCK 6
+#define DNA_FRILLS_BLOCK 7
+#define DNA_SPINES_BLOCK 8
+#define DNA_HUMAN_TAIL_BLOCK 9
+#define DNA_EARS_BLOCK 10
+#define DNA_MOTH_WINGS_BLOCK 11
+#define DNA_MOTH_ANTENNAE_BLOCK 12
+#define DNA_MOTH_MARKINGS_BLOCK 13
+#define DNA_MUSHROOM_CAPS_BLOCK 14
+#define DNA_MONKEY_TAIL_BLOCK 15
+
+#define DNA_SEQUENCE_LENGTH 4
+#define DNA_MUTATION_BLOCKS 8
+#define DNA_UNIQUE_ENZYMES_LEN 32
 
 //species traits for mutantraces
 #define MUTCOLORS		1
@@ -152,6 +170,16 @@
 #define ORGAN_SLOT_PARASITE_EGG "parasite_egg"
 #define ORGAN_SLOT_REGENERATIVE_CORE "hivecore"
 
+/// Organ slot external
+#define ORGAN_SLOT_EXTERNAL_TAIL "tail"
+#define ORGAN_SLOT_EXTERNAL_SPINES "spines"
+#define ORGAN_SLOT_EXTERNAL_SNOUT "snout"
+#define ORGAN_SLOT_EXTERNAL_FRILLS "frills"
+#define ORGAN_SLOT_EXTERNAL_HORNS "horns"
+#define ORGAN_SLOT_EXTERNAL_WINGS "wings"
+#define ORGAN_SLOT_EXTERNAL_ANTENNAE "antennae"
+#define ORGAN_SLOT_EXTERNAL_BODYMARKINGS "bodymarkings"
+
 /// Xenomorph organ slots
 #define ORGAN_SLOT_XENO_PLASMAVESSEL "plasma_vessel"
 #define ORGAN_SLOT_XENO_HIVENODE "hive_node"
@@ -161,10 +189,10 @@
 #define ORGAN_SLOT_XENO_EGGSAC "eggsac"
 
 //organ defines
-#define STANDARD_ORGAN_THRESHOLD 	100
-#define STANDARD_ORGAN_HEALING 		0.001
+#define STANDARD_ORGAN_THRESHOLD 100
+#define STANDARD_ORGAN_HEALING 0.0005
 /// designed to fail organs when left to decay for ~15 minutes
-#define STANDARD_ORGAN_DECAY		0.00222
+#define STANDARD_ORGAN_DECAY 0.00111
 
 //used for the can_chromosome var on mutations
 #define CHROMOSOME_NEVER 0

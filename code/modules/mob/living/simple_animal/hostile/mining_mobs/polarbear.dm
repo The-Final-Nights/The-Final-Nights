@@ -20,6 +20,7 @@
 	attack_verb_continuous = "claws"
 	attack_verb_simple = "claw"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
+	attack_vis_effect = ATTACK_EFFECT_CLAW
 	vision_range = 2 // don't aggro unless you basically antagonize it, though they will kill you worse than a goliath will
 	aggro_vision_range = 9
 	move_force = MOVE_FORCE_VERY_STRONG
@@ -45,11 +46,11 @@
 		aggressive_message_said = TRUE
 	rapid_melee = 2
 
-/mob/living/simple_animal/hostile/asteroid/polarbear/Life()
+/mob/living/simple_animal/hostile/asteroid/polarbear/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
 	if(!. || target)
 		return
-	adjustHealth(-maxHealth*0.025)
+	adjustHealth(-0.0125 * maxHealth * delta_time)
 	aggressive_message_said = FALSE
 
 /mob/living/simple_animal/hostile/asteroid/polarbear/death(gibbed)

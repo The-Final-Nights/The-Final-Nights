@@ -116,7 +116,7 @@
 	///Currently ejecting, and unable to do things
 	var/is_currently_ejecting = FALSE
 
-	var/datum/effect_system/smoke_spread/smoke_system = new
+	var/datum/effect_system/fluid_spread/smoke/smoke_system = new
 
 	////Action vars
 	///Ref to any active thrusters we might have
@@ -165,7 +165,8 @@
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(play_stepsound))
 	spark_system.set_up(2, 0, src)
 	spark_system.attach(src)
-	smoke_system.set_up(3, src)
+
+	smoke_system.set_up(3, location = src)
 	smoke_system.attach(src)
 	add_cell()
 	add_scanmod()

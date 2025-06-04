@@ -34,6 +34,7 @@
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'sound/weapons/bite.ogg'
+	attack_vis_effect = ATTACK_EFFECT_BITE
 	speak_emote = list("gnashes")
 
 	//Space carp aren't affected by cold.
@@ -115,7 +116,7 @@
 		adjustBruteLoss(5)
 		qdel(tasty_plastic)
 
-/mob/living/simple_animal/hostile/carp/Life()
+/mob/living/simple_animal/hostile/carp/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
 	if(stat == CONSCIOUS)
 		chomp_plastic()
@@ -213,10 +214,10 @@
 	can_buckle = TRUE
 	buckle_lying = 0
 
-/mob/living/simple_animal/hostile/carp/megacarp/Life()
+/mob/living/simple_animal/hostile/carp/megacarp/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
 	if(regen_cooldown < world.time)
-		heal_overall_damage(4)
+		heal_overall_damage(2 * delta_time)
 
 /mob/living/simple_animal/hostile/carp/cayenne
 	name = "Cayenne"

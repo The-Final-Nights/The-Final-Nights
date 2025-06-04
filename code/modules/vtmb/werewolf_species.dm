@@ -7,7 +7,6 @@
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_VIRUSIMMUNE, TRAIT_PERFECT_ATTACKER)
 	use_skintones = TRUE
 	limbs_id = "human"
-	wings_icon = "Dragon"
 	brutemod = 0.75
 	heatmod = 1
 	burnmod = 1
