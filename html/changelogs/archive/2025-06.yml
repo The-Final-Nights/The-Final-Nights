@@ -12,3 +12,10 @@
 2025-06-03:
   XeonMations:
   - bugfix: Dead bodies now cool down to room temperature.
+2025-06-04:
+  Kevak:
+  - rscadd: Frenetic Aura, a costly quirk for mortals and a negative quirk for vamps.
+  XeonMations:
+  - rscadd: Added Advanced Greyscale Sprite Generation to the game.
+  confusedhurricane:
+  - rscadd: Adds the Pyxis Medstation to St John's Community Clinic
