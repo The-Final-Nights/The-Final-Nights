@@ -152,6 +152,29 @@ Dancer
 	lose_text = "<span class='notice'>You feel a subtle chill.</span>"
 	allowed_species = list("Kuei-Jin", "Vampire")
 
+//I could do something more elegent and rework the backend of species quirk visibility, or I could just do this and save myself a week of refactoring. I'll stick refactoring quirks on the 'Do Eventually' list tho.
+/datum/quirk/frenetic_aura_mortal
+	name = "Frenetic Aura (Mortal)"
+	desc = "Your aura seems.. Unusually energetic and active to various forms of detection, this may get you mistaken for a garou and implies one's emotions are volatile in the extreme."
+	mob_trait = TRAIT_FRENETIC_AURA
+	value = 3 //For mortals and ghouls, this is expensive, as it provides benefit akin to cold aura with no penalties.
+	gain_text = "<span class='warning'>You feel tense and jittery.</span>"
+	lose_text = "<span class='notice'>You feel your emotions quell to something more manageable.</span>"
+	allowed_species = list("Ghoul", "Human")
+
+/datum/quirk/frenetic_aura
+	name = "Frenetic Aura (Undead)"
+	desc = "Your aura seems.. Unusually energetic and active to various forms of detection, this may get you mistaken for a Garou or Abomination and implies one's emotions are volatile in the extreme, you are more susceptible to frenzy."
+	mob_trait = TRAIT_FRENETIC_AURA
+	value = -1 //For vampires and KJ. This makes them notably more vulnerable to frenzy- on par with brujah. For Brujah, it makes them even more volatile and even more frenzy prone. Consequentially, it is a negative. There are no real benefits to it.
+	gain_text = "<span class='warning'>You feel tense and jittery.</span>"
+	lose_text = "<span class='notice'>You feel your emotions quell to something more manageable.</span>"
+	allowed_species = list("Vampire", "Kuei-Jin")
+
+/datum/quirk/frenetic_aura/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.clane.frenzymod += 1
+
 /datum/quirk/blush_of_health
 	name = "Blush of Health"
 	desc = "You're a little more lively than others. Makes you look less dead to onlookers."
