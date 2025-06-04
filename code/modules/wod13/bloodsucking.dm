@@ -7,14 +7,6 @@
 		if(src)
 			remove_overlay(BITE_LAYER)
 
-/proc/get_needed_difference_between_numbers(number1, number2)
-	if(number1 > number2)
-		return number1 - number2
-	else if(number1 < number2)
-		return number2 - number1
-	else
-		return 1
-
 /mob/living/carbon/human/proc/drinksomeblood(mob/living/mob)
 	var/bloodgain = max(1, mob.bloodquality-1)
 	var/fumbled = FALSE
@@ -230,3 +222,72 @@
 		stop_sound_channel(CHANNEL_BLOOD)
 		if(!(SEND_SIGNAL(mob, COMSIG_MOB_VAMPIRE_SUCKED, mob) & COMPONENT_RESIST_VAMPIRE_KISS))
 			mob.SetSleeping(50)
+
+
+
+/mob/living/carbon/human/proc/drinksomeblood(mob/living/victim)
+	if(BD.grab_state > GRAB_PASSIVE)
+		if(ishuman(BD.pulling))
+			var/mob/living/carbon/human/PB = BD.pulling
+			if(isghoul(user.mob))
+				if(!iskindred(PB))
+					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
+					return
+			if(!isghoul(user.mob) && !iskindred(user.mob) && !iscathayan(user.mob))
+				SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+				to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
+				return
+			if(PB.stat == DEAD && !HAS_TRAIT(BD, TRAIT_GULLET) && !iscathayan(user.mob))
+				SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+				to_chat(BD, "<span class='warning'>This creature is <b>DEAD</b>.</span>")
+				return
+			if(PB.bloodpool <= 0 && (!iskindred(BD.pulling) || !iskindred(BD)))
+				SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+				to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
+				return
+			if(BD.clane)
+				var/special_clan = FALSE
+				if(BD.clane.name == "Salubri")
+					if(!PB.IsSleeping())
+						to_chat(BD, "<span class='warning'>You can't drink from aware targets!</span>")
+						return
+					special_clan = TRUE
+					PB.emote("moan")
+				if(BD.clane.name == "Giovanni")
+					PB.emote("scream")
+					special_clan = TRUE
+				if(!special_clan)
+					PB.emote("groan")
+			PB.add_bite_animation()
+		if(isliving(BD.pulling))
+			if(!iskindred(BD) && !iscathayan(BD))
+				SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+				to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
+				return
+			var/mob/living/LV = BD.pulling
+			if(LV.bloodpool <= 0 && (!iskindred(BD.pulling) || !iskindred(BD)))
+				SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+				to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
+				return
+			if(LV.stat == DEAD && !HAS_TRAIT(BD, TRAIT_GULLET) && !iscathayan(user.mob))
+				SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+				to_chat(BD, "<span class='warning'>This creature is <b>DEAD</b>.</span>")
+				return
+			var/skipface = (BD.wear_mask && (BD.wear_mask.flags_inv & HIDEFACE)) || (BD.head && (BD.head.flags_inv & HIDEFACE))
+			if(!skipface)
+				if(!HAS_TRAIT(BD, TRAIT_BLOODY_LOVER))
+					playsound(BD, 'code/modules/wod13/sounds/drinkblood1.ogg', 50, TRUE)
+					LV.visible_message("<span class='warning'><b>[BD] bites [LV]'s neck!</b></span>", "<span class='warning'><b>[BD] bites your neck!</b></span>")
+				if(!HAS_TRAIT(BD, TRAIT_BLOODY_LOVER))
+					if(BD.CheckEyewitness(LV, BD, 7, FALSE))
+						BD.AdjustMasquerade(-1)
+				else
+					playsound(BD, 'code/modules/wod13/sounds/kiss.ogg', 50, TRUE)
+					LV.visible_message("<span class='italics'><b>[BD] kisses [LV]!</b></span>", "<span class='userlove'><b>[BD] kisses you!</b></span>")
+				if(iskindred(LV))
+					var/mob/living/carbon/human/HV = BD.pulling
+					if(HV.stakeimmune)
+						to_chat(BD, "<span class='warning'>There is no <b>HEART</b> in this creature.</span>")
+						return
+				BD.drinksomeblood(LV)
