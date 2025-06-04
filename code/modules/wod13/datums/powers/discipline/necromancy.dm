@@ -26,36 +26,29 @@
 
 	level = 1
 	check_flags = DISC_CHECK_CONSCIOUS
-	vitae_cost = 1
+	vitae_cost = 0
 
 	activate_sound = 'code/modules/wod13/sounds/necromancy1on.ogg'
 	deactivate_sound = 'code/modules/wod13/sounds/necromancy1off.ogg'
 
 	toggled = TRUE
-	duration_length = 6 TURNS //1 vitae per 30 seconds, 20 vitae for 10 minutes
 
 
 /datum/discipline_power/necromancy/shroudsight/activate()
 	. = ..()
 
-	owner.add_client_colour(/datum/client_colour/glass_colour/lightblue)
-
-	ADD_TRAIT(owner, TRAIT_SIXTHSENSE, TRAIT_GENERIC)
 	ADD_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
 
-	owner.see_invisible = SEE_INVISIBLE_OBSERVER
+	owner.see_invisible = SEE_INVISIBLE_OBSERVER //for some reason owner.update_sight() resets this, so it's omitted from this discipline. you can still stack this with auspex by popping it first, and shroudsight second.
 
-	to_chat(owner, span_notice("You peek beyond the Shroud to commune with the dead."))
+	to_chat(owner, span_notice("You peek beyond the Shroud."))
 
 /datum/discipline_power/necromancy/shroudsight/deactivate()
 	. = ..()
 
-	owner.remove_client_colour(/datum/client_colour/glass_colour/lightblue)
-
-	REMOVE_TRAIT(owner, TRAIT_SIXTHSENSE, TRAIT_GENERIC)
 	REMOVE_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
 
-	owner.see_invisible = initial(owner.see_invisible)
+	owner.see_invisible = SEE_INVISIBLE_LIVING
 
 	to_chat(owner, span_warning("Your vision returns to the mortal realm."))
 
@@ -109,8 +102,8 @@
 	level = 3
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_FREE_HAND | DISC_CHECK_IMMOBILE
 	target_type = TARGET_MOB | TARGET_GHOST
-	range = 5
-	vitae_cost = 1
+	range = 3 //to not wallbang people mid-surgery at the hospital
+	vitae_cost = 0
 
 	activate_sound = 'code/modules/wod13/sounds/necromancy3.ogg'
 
@@ -127,7 +120,7 @@
 	if (isobserver(target))
 		to_chat(target, span_notice("[owner] siphons your plasm; [owner.p_they()] steal from your being to sustain [owner.p_their()] own."))
 		to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b>."))
-		owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool) //1 point per ghost sip.
+		owner.bloodpool = min(owner.bloodpool + 1, owner.maxbloodpool) //1 point per ghost sip.
 		return
 	if (isliving(target) && target.stat == DEAD)
 		var/mob/living/dusted = target
@@ -135,7 +128,7 @@
 		dusted.visible_message(span_danger("[target]'s body dissolves into dust before your very eyes!"))
 		to_chat(owner, span_warning("You've absorbed the body's residual lifeforce. You gain <b>BLOOD</b>."))
 		dusted.dust()
-		owner.bloodpool = min(owner.bloodpool + 3, owner.maxbloodpool) //2 points per body. works on simplemobs for now.
+		owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool) //2 points per body. works on simplemobs for now.
 	else
 		to_chat(owner, span_warning("Death has not yet claimed this one - there is nothing to pillage."))
 
@@ -217,12 +210,12 @@
 //SHAMBLING HORDE
 /datum/discipline_power/necromancy/shambling_horde
 	name = "Shambling Horde"
-	desc = "Raise savage zombies from corpses, their lethality determined by source material."
+	desc = "Raise savage zombies from corpses, their lethality determined by source material. Attack the living, and rebuild sentient undead."
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_FREE_HAND | DISC_CHECK_IMMOBILE
 	target_type = TARGET_MOB
-	range = 4
+	range = 5 //less range than thaum, nerf if 2stronk
 
 	effect_sound = 'code/modules/wod13/sounds/necromancy5.ogg'
 
