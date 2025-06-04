@@ -327,19 +327,19 @@
 					continue
 			if (listener.client) //is player
 				listener.emote(emote_text)
-				listener.create_superfan(20, owner, emote_text)
+				listener.create_superfan(10, owner, emote_text)
 				super_fans++
 				listener.visible_message("[listener][newEmote]")
 				continue
 			if (isnpc(listener)) //is an NPC
 				listener.emote(emote_text)
-				listener.create_superfan(120, owner, emote_text) // NPCs get a longer Superfan duration.
+				listener.create_superfan(30, owner, emote_text) // NPCs get a longer Superfan duration.
 				super_fans++
 				listener.visible_message("[listener][newEmote]")
 				continue
 			else //its human so...
 				listener.emote(emote_text)
-				listener.create_superfan(20, owner, emote_text)
+				listener.create_superfan(10, owner, emote_text)
 				super_fans++
 				listener.visible_message("[listener][newEmote]")
 
@@ -362,8 +362,8 @@
 
 /datum/component/superfan
 	parent_type = /datum/component
-	var/mob/living/_owner
-	var/mob/living/superfan_target
+	var/mob/living/_owner //The Fan
+	var/mob/living/superfan_target //The Star
 	var/superfan_active = FALSE
 	var/superfan_emotion
 	var/superfan_duration
@@ -371,6 +371,10 @@
 /datum/component/superfan/Initialize(mob/living/M)
 	. = ..()
 	_owner = M
+	if (!_owner)
+		//message_admins("Superfan Initialize failed: no owner.")
+	else
+		//message_admins("[ADMIN_LOOKUPFLW(_owner)] Superfan component initialized.")
 
 /datum/component/superfan/proc/start(duration, mob/living/target, emotion)
 	if (superfan_active)
@@ -379,40 +383,37 @@
 	superfan_target = target
 	superfan_emotion = emotion
 
-	var/datum/callback/follow_cb = CALLBACK(_owner, PROC_REF(superfan_behavior), superfan_target)
+	//message_admins("[ADMIN_LOOKUPFLW(_owner)] Superfan effect STARTED for [duration]s.") //Debug
+
+	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(superfan_behavior))
 	for (var/i in 1 to (duration * 2))
 		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
-	addtimer(CALLBACK(_owner, PROC_REF(end)), duration * 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(end)), duration * 1 SECONDS)
 
-/datum/component/superfan/proc/superfan_behavior(mob/living/superfan_target)
+/datum/component/superfan/proc/superfan_behavior()
 	var/distance = get_dist(_owner, superfan_target)
-	var/mob/living/carbon/human/npc/N
 	if (isnpc(_owner))
+		var/mob/living/carbon/human/npc/N
 		N = _owner
-		N.staying = FALSE
-		N.walktarget = superfan_target
+		if (distance > 2)
+			N.walk_to_caster(superfan_target)
+			N.staying = TRUE
+		if (distance <= 1)
+			N.walktarget = superfan_target
+			N.staying = TRUE
+		if (prob(3))
+			N.emote(superfan_emotion)
 
-		if (distance > 1)
-			if (isnpc(_owner) && !N.walktarget)
-				N.staying = FALSE
-				N.walktarget = superfan_target
-
-		if (distance <= 0)
-			if (isnpc(_owner))
-				N.staying = TRUE
-				N.dir = get_dir(N, superfan_target)
-
-	if (prob(3))
-		N.emote(superfan_emotion)
 
 /datum/component/superfan/proc/end()
 	superfan_active = FALSE
 	superfan_target = null
-	var/mob/living/carbon/human/npc/N
 	if (isnpc(_owner))
-		N = _owner
-		N.staying = FALSE
+		var/mob/living/carbon/human/npc/N = _owner
 		N.walktarget = N.ChoosePath()
+		N.staying = FALSE
+	message_admins("Superfan effect has ended.") // Debug
+
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning

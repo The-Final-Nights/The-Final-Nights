@@ -1300,8 +1300,16 @@
 /mob/living/carbon/human/proc/create_superfan(duration, mob/living/target, emotion)
 	var/datum/component/superfan/C = GetComponent(/datum/component/superfan)
 	if (!C)
-		C = AddComponent(/datum/component/superfan)
-	C.start(duration, target, emotion)
+		AddComponent(/datum/component/superfan)
+		C = GetComponent(/datum/component/superfan)
+		//message_admins("A Superfan component has been created.") // Debug
+		C.Initialize(src)
+		C.start(duration, target, emotion)
+
+	if (C)
+		//message_admins("Component already exsists, calling Superfan start().") // Debug
+		C.start(duration, target, emotion)
+
 
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor
