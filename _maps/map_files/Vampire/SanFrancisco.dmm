@@ -3826,7 +3826,7 @@
 /obj/item/vamp/phone/clean{
 	desc = "A red landline phone."
 	},
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = -7
@@ -5706,9 +5706,9 @@
 /area/vtm/interior/laundromat)
 "bvb" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/carpet,
 /area/vtm/interior/strip/toreador)
 "bvc" = (
@@ -7399,7 +7399,7 @@
 /area/vtm/cabaret)
 "bSH" = (
 /obj/effect/decal/cleanable/crayon,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/carpet/red,
 /area/vtm/interior/banu/haven)
 "bSK" = (
@@ -8780,28 +8780,28 @@
 /area/vtm)
 "cma" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = 2;
 	pixel_y = 4
 	},
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)"
 	},
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = -7
 	},
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = 2;
 	pixel_y = 4
 	},
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = 2;
@@ -10133,9 +10133,9 @@
 /area/vtm/pacificheights/forest)
 "cDQ" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "cDU" = (
@@ -11730,10 +11730,10 @@
 /area/vtm/interior)
 "cXF" = (
 /obj/structure/closet/secure_closet/freezer,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood,
 /obj/item/reagent_containers/food/drinks/meth/cocaine,
 /obj/item/reagent_containers/food/drinks/meth,
 /obj/item/storage/box/aquarium_props,
@@ -12403,8 +12403,8 @@
 /area/vtm/interior/endron_facility/restricted)
 "dhm" = (
 /obj/structure/table/wood/fancy/red,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/item/arcane_tome,
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/chantry/basement)
@@ -13659,7 +13659,7 @@
 /area/vtm/interior)
 "dyd" = (
 /obj/structure/table/wood/fancy/blue,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/blue,
 /area/vtm/interior/strip/toreador)
 "dyh" = (
@@ -15764,13 +15764,13 @@
 /area/vtm/clinic/haven)
 "ecR" = (
 /obj/structure/closet/crate/freezer/blood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
 "ecV" = (
@@ -16402,7 +16402,7 @@
 "elR" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/vampirebook,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/wood,
 /area/vtm/church/interior/haven)
 "elW" = (
@@ -17550,7 +17550,7 @@
 	pixel_y = 32
 	},
 /obj/structure/table/wood/fancy/black,
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = -7
@@ -17746,7 +17746,7 @@
 /obj/structure/table/wood,
 /obj/item/grenade/smokebomb,
 /obj/item/grenade/smokebomb,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/blue,
 /area/vtm/clinic/haven)
 "eGa" = (
@@ -17868,10 +17868,10 @@
 	pixel_y = 32
 	},
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f3)
 "eIv" = (
@@ -19240,7 +19240,7 @@
 /area/vtm/interior/endron_facility)
 "fbS" = (
 /obj/structure/table,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/millennium_tower)
 "fbU" = (
@@ -20932,9 +20932,9 @@
 /area/vtm/financialdistrict)
 "fxz" = (
 /obj/structure/closet/crate,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
 "fxD" = (
@@ -21371,7 +21371,7 @@
 /obj/structure/table/wood/fancy/green,
 /obj/item/reagent_containers/glass/rag,
 /obj/item/vtm_artifact/key_of_alamut,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "fCs" = (
@@ -22728,8 +22728,8 @@
 /area/vtm/interior/baali)
 "fUC" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
@@ -23751,7 +23751,7 @@
 /area/vtm/interior/chantry)
 "giH" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/millennium_tower/f3)
 "giO" = (
@@ -23782,9 +23782,9 @@
 /area/vtm/interior/cog/caern)
 "gjb" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch)
 "gjd" = (
@@ -26416,11 +26416,11 @@
 /area/vtm/interior/techshop)
 "gRn" = (
 /obj/structure/table/reinforced,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "gRq" = (
@@ -26881,17 +26881,17 @@
 /area/vtm/interior/endron_facility)
 "gXF" = (
 /obj/structure/closet/crate/freezer/blood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/item/organ/heart,
 /obj/item/organ/heart,
 /turf/open/floor/plating/circled,
@@ -28938,9 +28938,9 @@
 /obj/underplate{
 	pixel_y = 8
 	},
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/millennium_tower)
 "hCP" = (
@@ -31576,19 +31576,19 @@
 /area/vtm/interior/millennium_tower)
 "ioE" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/setite/basement)
 "ioQ" = (
@@ -32377,7 +32377,7 @@
 	pixel_x = 16
 	},
 /obj/structure/closet/secure_closet/freezer,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/trujah)
 "iAm" = (
@@ -35532,9 +35532,9 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "jrc" = (
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/structure/closet/secure_closet/freezer/fridge/open,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/strip/toreador)
@@ -39224,11 +39224,11 @@
 /area/vtm/interior/ghetto)
 "kqG" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic/haven)
 "kqJ" = (
@@ -40573,8 +40573,8 @@
 /area/vtm/hotel)
 "kJS" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /obj/structure/closet/mini_fridge,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
@@ -42118,10 +42118,10 @@
 /turf/open/space/basic,
 /area/space)
 "leK" = (
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/structure/closet/crate/freezer/fridge,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
@@ -42994,9 +42994,9 @@
 /area/vtm/interior/tzimisce_manor)
 "lsq" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry/basement)
 "lsu" = (
@@ -43498,11 +43498,11 @@
 /area/vtm/interior/tzimisce_manor)
 "lAb" = (
 /obj/structure/closet/secure_closet/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "lAv" = (
@@ -44592,7 +44592,7 @@
 /obj/structure/bed/maint{
 	pixel_y = 2
 	},
-/obj/item/drinkable_bloodpack/vitae,
+/obj/item/reagent_containers/blood/vitae,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
 "lOh" = (
@@ -46003,13 +46003,13 @@
 /area/vtm/jazzclub)
 "miG" = (
 /obj/structure/closet/crate/freezer/blood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/item/organ/ears,
 /obj/item/organ/eyes,
 /obj/item/organ/tongue,
@@ -46275,8 +46275,8 @@
 	pixel_y = 32
 	},
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch)
 "mmE" = (
@@ -46936,19 +46936,19 @@
 /area/vtm/interior/millennium_tower/ventrue)
 "mwq" = (
 /obj/structure/closet/secure_closet/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/item/storage/fancy/egg_box,
 /obj/item/reagent_containers/food/condiment/milk,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/millennium_tower)
 "mwy" = (
@@ -49614,12 +49614,12 @@
 /area/vtm/interior/shop)
 "ndJ" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
@@ -52004,7 +52004,7 @@
 /area/vtm/sewer)
 "nHT" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/black,
 /area/vtm/sewer/nosferatu_town)
 "nHW" = (
@@ -52241,11 +52241,11 @@
 /area/vtm/interior/theatre)
 "nKZ" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "nLa" = (
@@ -53981,9 +53981,9 @@
 /area/vtm/cabaret)
 "ojt" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "ojC" = (
@@ -55712,9 +55712,9 @@
 /area/vtm/pacificheights/forest)
 "oGc" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/giovanni)
 "oGk" = (
@@ -56816,9 +56816,9 @@
 /area/vtm/chinatown)
 "oTG" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/garage)
 "oTH" = (
@@ -57099,9 +57099,9 @@
 /area/vtm/interior/baali)
 "oXG" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/indestructible/necropolis/air,
 /area/vtm/sewer)
 "oXN" = (
@@ -60483,7 +60483,7 @@
 /area/vtm/unionsquare)
 "pQu" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /obj/vampire_computer,
 /turf/open/floor/carpet/green,
 /area/vtm/interior/millennium_tower/f3)
@@ -63875,7 +63875,7 @@
 "qKs" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/chair/wood/wings,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/wood,
 /area/vtm/church/interior/haven)
 "qKv" = (
@@ -64061,9 +64061,9 @@
 /area/vtm/interior/laundromat)
 "qMp" = (
 /obj/structure/closet/crate,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "qMr" = (
@@ -64860,9 +64860,9 @@
 	pixel_x = 16
 	},
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "qVJ" = (
@@ -67500,7 +67500,7 @@
 "rEu" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/card/id/hunter,
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = 2;
@@ -67619,18 +67619,18 @@
 /area/vtm/unionsquare)
 "rFU" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = 2;
 	pixel_y = 4
 	},
 /obj/structure/closet/mini_fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior)
 "rFX" = (
@@ -68378,7 +68378,7 @@
 /area/vtm/interior)
 "rPD" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/carpet/green,
 /area/vtm/interior/millennium_tower/f3)
 "rPG" = (
@@ -69221,7 +69221,7 @@
 /area/vtm/interior/millennium_tower/ventrue)
 "rZc" = (
 /obj/structure/table/wood/fancy/black,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/church,
 /area/vtm/church/interior/haven)
 "rZd" = (
@@ -69445,8 +69445,8 @@
 /area/vtm/interior/laundromat)
 "sbp" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
 "sbv" = (
@@ -70184,14 +70184,14 @@
 /area/vtm/interior)
 "slQ" = (
 /obj/structure/closet/secure_closet/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/green,
 /area/vtm/interior/millennium_tower)
 "slV" = (
@@ -70383,7 +70383,7 @@
 /area/vtm/financialdistrict/library)
 "soO" = (
 /obj/structure/table/wood,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/indestructible/necropolis/air,
 /area/vtm/sewer/tzimisce_sanctum)
 "spc" = (
@@ -73443,11 +73443,11 @@
 /area/space)
 "tgP" = (
 /obj/structure/closet/crate,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer/nosferatu_town)
 "tgR" = (
@@ -73726,7 +73726,7 @@
 /area/vtm/church)
 "tkF" = (
 /obj/structure/table/wood/fancy/black,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior/haven)
 "tkI" = (
@@ -77543,25 +77543,25 @@
 /area/vtm/church/interior/haven)
 "umT" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)";
 	pixel_x = 2;
 	pixel_y = 4
 	},
-/obj/item/drinkable_bloodpack/vitae{
+/obj/item/reagent_containers/blood/vitae{
 	amount_of_bloodpoints = 8;
 	name = "Elder vitae pack (full)"
 	},
@@ -78254,13 +78254,13 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "uvL" = (
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/church,
 /area/vtm/church/interior/haven)
 "uvM" = (
@@ -78944,8 +78944,8 @@
 	pixel_y = 5
 	},
 /obj/item/reagent_containers/food/drinks/bottle/whiskey,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/granite,
 /area/vtm/cabaret/basement)
 "uEO" = (
@@ -79577,11 +79577,11 @@
 /area/vtm/interior/setite)
 "uOw" = (
 /obj/structure/table,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/item/melee/vampirearms/katana,
 /obj/item/melee/vampirearms/knife,
 /obj/item/melee/vampirearms/knife,
@@ -80004,13 +80004,13 @@
 /area/vtm/church/interior/haven)
 "uUj" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "uUn" = (
@@ -82406,10 +82406,10 @@
 /area/vtm)
 "vBf" = (
 /obj/structure/table,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/millennium_tower/f2)
 "vBh" = (
@@ -83000,7 +83000,7 @@
 "vIa" = (
 /obj/structure/curtain/cloth,
 /obj/structure/table,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/baali)
 "vIq" = (
@@ -85385,15 +85385,15 @@
 /obj/structure/closet/secure_closet/freezer/fridge{
 	req_access = list(0)
 	},
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/carpet/red,
 /area/vtm/interior/strip/toreador)
 "wpx" = (
@@ -89868,10 +89868,10 @@
 /area/vtm/clinic/haven)
 "xBf" = (
 /obj/structure/closet/crate,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/trujah)
 "xBj" = (
@@ -90176,18 +90176,18 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f2)
 "xFi" = (
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /obj/structure/closet/crate/freezer,
 /turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/f4)
@@ -90545,11 +90545,11 @@
 /area/vtm/interior/millennium_tower/f4)
 "xJy" = (
 /obj/structure/table,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/millennium_tower/f4)
 "xJA" = (
@@ -91895,9 +91895,9 @@
 /area/vtm/interior/millennium_tower/ventrue)
 "ybt" = (
 /obj/structure/closet/crate,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /obj/machinery/light{
 	dir = 4;
 	light_color = "#6488EA"
