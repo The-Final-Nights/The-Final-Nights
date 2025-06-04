@@ -360,15 +360,10 @@
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-/mob/living/carbon/human/proc/create_walk_to(duration, mob/living/walk_to)
-	var/datum/cb = CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, walk_to_caster), walk_to)
-	for(var/i in 1 to duration)
-		addtimer(cb, (i - 1) * total_multiplicative_slowdown())
-
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
 	name = "Siren's Beckoning"
-	desc = "Siren's Beckoning is a power that allows the user to stun and drawing others in like moths to a flame."
+	desc = "Siren's Beckoning is a power that allows the user to stun the crowd."
 	level = 4
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
 	cooldown_length = 6 SECONDS
@@ -381,7 +376,6 @@
 	for(var/mob/living/carbon/human/listener in oviewers(7, owner))
 		listenerCount++
 		listener.Stun(4 SECONDS)
-		create_walk_to(4, listener)
 
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
