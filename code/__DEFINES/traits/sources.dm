@@ -148,5 +148,8 @@
 //salubri stuff
 #define SALUBRI_EYE_TRAIT "Salubri Eye"
 
+/// Trait aquired from being painted a certain color
+#define ATOM_COLOR_TRAIT "atom_color"
+
 
 // END TRAIT DEFINES
