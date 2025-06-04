@@ -42,6 +42,8 @@
 
 /mob/living/carbon/check_projectile_dismemberment(obj/projectile/P, def_zone)
 	var/obj/item/bodypart/affecting = get_bodypart(def_zone)
+	if(istype(affecting, /obj/item/bodypart/head))
+		return // No decaps from projectiles. Final death needs to be intentional, not accidental.
 	if(affecting && affecting.dismemberable && affecting.get_damage() >= (affecting.max_damage - P.dismemberment))
 		affecting.dismember(P.damtype)
 
@@ -242,7 +244,7 @@
 				continue
 			if(!affecting || ((affecting.get_damage() / affecting.max_damage) < (bodypart.get_damage() / bodypart.max_damage)))
 				affecting = bodypart
-	if(affecting)
+	if(affecting && !istype(affecting, /obj/item/bodypart/head)) // No accidental decaps. Final death should be intentional.
 		dam_zone = affecting.body_zone
 		if(affecting.get_damage() >= affecting.max_damage)
 			affecting.dismember()
@@ -773,7 +775,7 @@
 	grasped_part = grasping_part
 	grasped_part.grasped_by = src
 	RegisterSignal(user, COMSIG_PARENT_QDELETING, PROC_REF(qdel_void))
-	RegisterSignal(grasped_part, list(COMSIG_CARBON_REMOVE_LIMB, COMSIG_PARENT_QDELETING), PROC_REF(qdel_void))
+	RegisterSignals(grasped_part, list(COMSIG_CARBON_REMOVE_LIMB, COMSIG_PARENT_QDELETING), PROC_REF(qdel_void))
 
 	user.visible_message("<span class='danger'>[user] grasps at [user.p_their()] [grasped_part.name], trying to stop the bleeding.</span>", "<span class='notice'>You grab hold of your [grasped_part.name] tightly.</span>", vision_distance=COMBAT_MESSAGE_RANGE)
 	playsound(get_turf(src), 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)

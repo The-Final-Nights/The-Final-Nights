@@ -372,8 +372,11 @@
 #define DOING_INTERACTION_WITH_TARGET(user, target) (LAZYACCESS(user.do_afters, target))
 #define DOING_INTERACTION_WITH_TARGET_LIMIT(user, target, max_interaction_count) ((LAZYACCESS(user.do_afters, target) || 0) >= max_interaction_count)
 
+// recent examine defines
+/// How long it takes for an examined atom to be removed from recent_examines. Should be the max of the below time windows
+#define RECENT_EXAMINE_MAX_WINDOW (2 SECONDS)
 /// If you examine the same atom twice in this timeframe, we call examine_more() instead of examine()
-#define EXAMINE_MORE_TIME	1 SECONDS
+#define EXAMINE_MORE_TIME (1 SECONDS)
 /// How far away you can be to make eye contact with someone while examining
 #define EYE_CONTACT_RANGE	5
 
@@ -399,10 +402,14 @@
 
 ///Squash flags. For squashable element
 
-///Whether or not the squashing requires the squashed mob to be lying down
+/// Squashing will not occur if the mob is not lying down (bodyposition is LYING_DOWN)
 #define SQUASHED_SHOULD_BE_DOWN (1<<0)
-///Whether or not to gib when the squashed mob is moved over
-#define SQUASHED_SHOULD_BE_GIBBED (1<<0)
+/// If present, outright gibs the squashed mob instead of just dealing damage
+#define SQUASHED_SHOULD_BE_GIBBED (1<<1)
+/// If squashing always passes if the mob is dead
+#define SQUASHED_ALWAYS_IF_DEAD (1<<2)
+/// Don't squash our mob if its not located in a turf
+#define SQUASHED_DONT_SQUASH_IN_CONTENTS (1<<3)
 
 /*
  * Defines for "AI emotions", allowing the AI to expression emotions
@@ -426,6 +433,6 @@
 #define AI_EMOTION_BLUE_GLOW "Blue Glow"
 #define AI_EMOTION_RED_GLOW "Red Glow"
 
-#define SOUL_PRESENT 1
-#define SOUL_ABSENT 2
-#define SOUL_PROJECTING 3
+#define SOUL_PRESENT (1 << 0)
+#define SOUL_ABSENT (1 << 1)
+#define SOUL_PROJECTING ( 1<< 2)

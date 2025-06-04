@@ -3,6 +3,7 @@
 	var/key_third_person = "" //This will also call the emote
 	var/name = "" /// Needed for more user-friendly emote names, so emotes with keys like "aflap" will show as "flap angry". Defaulted to key.
 	var/message = "" //Message displayed when emote is used
+	var/message_alternates //Messages, plural? Optional
 	var/message_mime = "" //Message displayed if the user is a mime
 	var/message_alien = "" //Message displayed if the user is a grown alien
 	var/message_larva = "" //Message displayed if the user is an alien larva
@@ -196,6 +197,8 @@
 	else if(isanimal(user) && message_simple)
 		. = message_simple
 
+	if(islist(message_alternates)) //If there's a list of alternate messages to pick from, pick one
+		. = pick(message_alternates)
 	return .
 
 /datum/emote/proc/select_param(mob/user, params)

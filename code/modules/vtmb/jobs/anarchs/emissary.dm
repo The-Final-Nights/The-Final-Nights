@@ -19,9 +19,8 @@
 	liver_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
 
 	display_order = JOB_DISPLAY_ORDER_EMISSARY
-	my_contact_is_important = TRUE
 	known_contacts = list("Baron","Bouncer","Emissary","Sweeper","Prince","Sheriff")
-	allowed_bloodlines = list("Daughters of Cacophony", "True Brujah", "Brujah", "Nosferatu", "Gangrel", "Tremere", "Toreador", "Malkavian", "Banu Haqim", "Tzimisce", "Caitiff", "Ventrue", "Lasombra", "Gargoyle", "Kiasyd", "Cappadocian", "Ministry", "Salubri")
+	allowed_bloodlines = list("Daughters of Cacophony", "True Brujah", "Brujah", "Nosferatu", "Gangrel", "Tremere", "Toreador", "Malkavian", "Banu Haqim", "Tzimisce", "Caitiff", "Ventrue", "Lasombra", "Gargoyle", "Kiasyd", "Cappadocian", "Ministry", "Salubri", "Salubri Warrior")
 
 	v_duty = "You are a diplomat for the anarchs. Make deals, keep the peace, all through words, not violence. But the latter may come to pass if the former fails."
 	minimal_masquerade = 2
@@ -31,12 +30,13 @@
 	name = "emissary"
 	jobtype = /datum/job/vamp/emissary
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/emissary
 	uniform = /obj/item/clothing/under/vampire/bouncer
 	suit = /obj/item/clothing/suit/vampire/jacket
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	r_pocket = /obj/item/vamp/keys/anarch
-	l_pocket = /obj/item/vamp/phone/anarch
+	l_pocket = /obj/item/vamp/phone/emissary
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/keys/hack=1, /obj/item/vamp/creditcard/rich=1)
 
 /datum/outfit/job/emissary/pre_equip(mob/living/carbon/human/H)

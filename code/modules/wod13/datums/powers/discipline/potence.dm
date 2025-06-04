@@ -11,6 +11,9 @@
 	activate_sound = 'code/modules/wod13/sounds/potence_activate.ogg'
 	deactivate_sound = 'code/modules/wod13/sounds/potence_deactivate.ogg'
 
+	power_group = DISCIPLINE_POWER_GROUP_COMBAT
+
+
 /datum/discipline/potence/post_gain()
 	. = ..()
 	owner.dna.species.punchdamagelow += (1 * level)

@@ -39,7 +39,7 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_SPACEWALK, INNATE_TRAIT)
 
-/mob/living/simple_animal/hostile/faithless/AttackingTarget()
+/mob/living/simple_animal/hostile/faithless/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(. && prob(12) && iscarbon(target))
 		var/mob/living/carbon/C = target

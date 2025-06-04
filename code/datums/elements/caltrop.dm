@@ -5,7 +5,7 @@
  */
 /datum/element/caltrop
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 
 	///Minimum damage done when crossed
 	var/min_damage

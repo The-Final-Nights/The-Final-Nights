@@ -10,6 +10,9 @@
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
 
+	//recalculates maxbloodpool
+	maxbloodpool = 10 + ((13 - generation) * 3)
+
 /mob/living/ComponentInitialize()
 	. = ..()
 	AddElement(/datum/element/movetype_handler)
@@ -1246,7 +1249,10 @@
  * Vars:
  * * add_fire_stacks: int The amount to modify the fire stacks
  */
-/mob/living/proc/adjust_fire_stacks(add_fire_stacks)
+/mob/living/proc/adjust_fire_stacks(add_fire_stacks, max = 20)
+	if(fire_stacks >= max)
+		return
+	add_fire_stacks = min(add_fire_stacks, (max - fire_stacks))
 	set_fire_stacks(fire_stacks + add_fire_stacks)
 
 /**

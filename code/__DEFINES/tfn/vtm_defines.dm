@@ -54,6 +54,8 @@
 #define CLAN_GARGOYLE "Gargoyle"
 #define CLAN_DAUGHTERS_OF_CACOPHONY "Daughters of Cacophony"
 #define CLAN_CAPPADOCIAN "Cappadocian"
+#define CLAN_NAGARAJA "Nagaraja"
+#define CLAN_SALUBRI_WARRIOR "Salubri Warrior"
 
 /**
  * Auspex aura defines
@@ -70,6 +72,7 @@
 #define AURA_GAROU "aura_bright"
 #define AURA_GHOUL "aura_ghoul"
 #define AURA_TRUE_FAITH "#ffe12f"
+#define AURA_DIAB "#000000"
 
 /**
  * Morality defines
@@ -130,3 +133,7 @@
 // Rituals
 #define COOLDOWN_RITUAL_INVOKE "ritual_invoke"
 
+//Defines for toggling underwear
+#define UNDERWEAR_HIDE_SOCKS (1<<0)
+#define UNDERWEAR_HIDE_SHIRT (1<<1)
+#define UNDERWEAR_HIDE_UNDIES (1<<2)
