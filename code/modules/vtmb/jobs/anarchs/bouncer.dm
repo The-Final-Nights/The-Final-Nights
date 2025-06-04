@@ -32,6 +32,7 @@
 	name = "Bruiser"
 	jobtype = /datum/job/vamp/bruiser
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/bruiser
 	uniform = /obj/item/clothing/under/vampire/bouncer
 	suit = /obj/item/clothing/suit/vampire/jacket

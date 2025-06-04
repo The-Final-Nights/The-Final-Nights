@@ -1,6 +1,0 @@
-author: "Kevak"
-delete-after: True
-changes:
-  - qol: "Mechanically enforces Discipline Cap"
-  - balance: "Caitiffs can no longer select eight disciplines out the gate."
-  - admin: "Trusted players can bypass discipline learning softcap, as can admin discipline rewards."
