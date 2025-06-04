@@ -126,12 +126,14 @@
 		return
 	if (isobserver(target))
 		to_chat(target, span_notice("[owner] siphons your plasm; [owner.p_they()] steal from your being to sustain [owner.p_their()] own."))
+		to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b>."))
 		owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool) //1 point per ghost sip.
 		return
 	if (isliving(target) && target.stat == DEAD)
 		var/mob/living/dusted = target
 		owner.visible_message(span_warning("[owner] motions towards [target]."))
 		dusted.visible_message(span_danger("[target]'s body dissolves into dust before your very eyes!"))
+		to_chat(owner, span_warning("You've absorbed the body's residual lifeforce. You gain <b>BLOOD</b>."))
 		dusted.dust()
 		owner.bloodpool = min(owner.bloodpool + 3, owner.maxbloodpool) //2 points per body. works on simplemobs for now.
 	else
