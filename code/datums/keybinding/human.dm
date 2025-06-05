@@ -113,6 +113,10 @@
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>This creature is <b>DEAD</b>.</span>")
 					return
+				if(iszombie(PB) && !HAS_TRAIT(BD, TRAIT_GULLET))
+					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+					to_chat(BD, "<span class='warning'>Eww, that is <b>GROSS</b>.</span>")
+					return
 				if(PB.bloodpool <= 0 && (!iskindred(BD.pulling) || !iskindred(BD)))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
