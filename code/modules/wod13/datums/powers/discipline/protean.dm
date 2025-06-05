@@ -121,13 +121,15 @@
 	name = "Gangrel Form"
 	desc = "Take on the shape a wolf."
 	charge_max = 50
-	cooldown_min = 5 SECONDS
+	cooldown_min = 20 SECONDS
 	revert_on_death = TRUE
 	die_with_shapeshifted_form = FALSE
-	shapeshift_type = /mob/living/simple_animal/hostile/gangrel
+	possible_shapes = list(/mob/living/simple_animal/hostile/bear/wod13,\
+		/mob/living/simple_animal/hostile/beastmaster/rat/flying,\
+		/mob/living/simple_animal/hostile/beastmaster/shapeshift)
 
 /datum/discipline_power/protean/earth_meld
-	name = "Earth Meld"
+	name = "Animal Shapeshift"
 	desc = "Hide yourself in the earth itself."
 
 	level = 3
@@ -136,9 +138,13 @@
 
 	violates_masquerade = TRUE
 
+
+	vitae_cost = 3
+	violates_masquerade = TRUE
+
 	cancelable = TRUE
 	duration_length = 20 SECONDS
-	cooldown_length = 20 SECONDS
+	cooldown_length = 10 SECONDS
 
 	grouped_powers = list(
 		/datum/discipline_power/protean/feral_claws,
@@ -153,10 +159,16 @@
 	if (!GA)
 		GA = new(owner)
 	owner.drop_all_held_items()
-	GA.Shapeshift(owner)
+	if(GA.shapeshift_type)
+		GA.shapeshift_type = null
+	if(!(GA in owner.mind.spell_list))
+		owner.mind.AddSpell(GA)
+	GA.cast(list(owner), owner)
+
 
 /datum/discipline_power/protean/earth_meld/deactivate()
 	. = ..()
+	owner.mind.RemoveSpell(GA)
 	GA.Restore(GA.myshape)
 	owner.Stun(1.5 SECONDS)
 	owner.do_jitter_animation(30)
@@ -180,10 +192,9 @@
 
 	check_flags = DISC_CHECK_IMMOBILE | DISC_CHECK_CAPABLE
 
+	vitae_cost = 3
 	violates_masquerade = TRUE
 
-	cancelable = TRUE
-	duration_length = 20 SECONDS
 	cooldown_length = 20 SECONDS
 
 	grouped_powers = list(
@@ -201,12 +212,13 @@
 	owner.drop_all_held_items()
 	GA.Shapeshift(owner)
 
+/*
 /datum/discipline_power/protean/shape_of_the_beast/deactivate()
 	. = ..()
 	GA.Restore(GA.myshape)
 	owner.Stun(1 SECONDS)
 	owner.do_jitter_animation(15)
-
+*/
 /mob/living/simple_animal/hostile/gangrel/best
 	icon_state = "gangrel_m"
 	icon_living = "gangrel_m"

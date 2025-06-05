@@ -12,7 +12,7 @@
 	action_icon_state = "shapeshift"
 
 	var/mob/living/myshape
-
+	var/vampiric = FALSE
 	var/revert_on_death = TRUE
 	var/die_with_shapeshifted_form = TRUE
 	var/convert_damage = TRUE //If you want to convert the caster's health and blood to the shift, and vice versa.
