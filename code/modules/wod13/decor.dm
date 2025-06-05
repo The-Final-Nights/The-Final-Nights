@@ -764,6 +764,8 @@
 				if(bloodpool < 4)
 					V.visible_message("<span class='warning'>[V] can't find enough blood in [src]!</span>")
 					return
+			if(iszombie(src))
+				V.visible_message("<span class='warning'>[V]'s still blood is unusable!</span>")
 			if(V.last_extracted+1200 > world.time)
 				V.visible_message("<span class='warning'>[V] isn't ready!</span>")
 				return
