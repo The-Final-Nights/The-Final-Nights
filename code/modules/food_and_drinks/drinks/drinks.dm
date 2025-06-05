@@ -331,7 +331,7 @@
 
 	if(length(blood_donors) > 0 && reagents.has_reagent(/datum/reagent/blood))
 		if(istype(M, /mob/living/carbon/human))
-			if(istype(M.dna.species, /datum/species/kindred))
+			if(iskindred(M))
 				is_vampire_species = TRUE
 
 		if(is_vampire_species)
