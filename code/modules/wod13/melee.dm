@@ -475,6 +475,10 @@
 	if(isliving(target))
 		var/mob/living/L = target
 		L.apply_damage(30, CLONE)
+	if(HAS_TRAIT(user,TRAIT_WARRIOR))
+		user.changeNext_move(CLICK_CD_MELEE * 0.5)
+	else
+		user.changeNext_move(CLICK_CD_MELEE)
 
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"

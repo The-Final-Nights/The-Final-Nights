@@ -8,6 +8,7 @@
 	var/start_blood = 1
 	var/start_lockpicking = 0
 	var/start_athletics = 0
+	var/list/mind_traits
 
 	//Used in building the attribute score for the stats by also taking the archetype's stat boosts into consideration
 	var/archetype_additional_physique = 0
@@ -40,7 +41,7 @@
 	start_blood = 2
 
 /datum/archetype/warrior/special_skill(mob/living/carbon/human/H)
-	H.melee_professional = TRUE
+	ADD_TRAIT(H, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 /datum/archetype/gunfighter
 	name = "Gunfighter"
