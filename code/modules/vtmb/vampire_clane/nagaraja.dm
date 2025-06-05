@@ -14,3 +14,7 @@
 /datum/vampireclane/nagaraja/on_gain(mob/living/carbon/human/H)
 	. = ..()
 	H.add_quirk(/datum/quirk/organovore)
+
+	var/obj/item/necromancy_tome/necrotome = new(get_turf(H))
+	H.put_in_hands(necrotome)
+	H.equip_to_slot(necrotome, ITEM_SLOT_BACKPACK)
