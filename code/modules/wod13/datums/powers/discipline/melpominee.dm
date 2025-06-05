@@ -127,6 +127,7 @@
 	var/song = ""
 	var/isYelling = FALSE
 	var/emotion = ""
+	var/isSin = FALSE
 	var/casterRoll = 0
 	var/newEmote = ""
 	var/emote_text = ""
@@ -138,20 +139,19 @@
 	. = ..()
 	song = ""
 	emotion = ""
+	isSin = FALSE //checks in a bit
 	super_fans = 0 //zeros out the super_fans variable, so it can be used again this cast.
 
-	//input
-	song = tgui_input_text(owner, "What are the words of your melodic voice, Madrigal?", "Madrigal:", FALSE, 500, TRUE, FALSE, 0)
+	//Input
+	song = tgui_input_text(owner, "What are the words does your melodic voice Madrigal contain?", "Madrigal: Input Melodic Words/Song", FALSE, 500, TRUE, FALSE, 0)
 	if (!song || song == "")
 		to_chat(owner, span_warning("You must provide a song to sing!"))
 		return FALSE
-
-	emotion = tgui_input_text(owner, "What emotion do you wish to project through your voice? Listeners who fail will be given a prompt to work with.", "Madrigal: Emotion", FALSE, 500, TRUE, FALSE, 0)
+	emotion = tgui_input_text(owner, "Type a Sin or Virtue you wish to project through your voice. Listeners who fail will be given a prompt to work with.", "Madrigal: Input A Sin or Virtue", FALSE, 500, TRUE, FALSE, 0)
 	emotion = lowertext(trim(emotion))
 	if (!emotion || emotion == "")
 		to_chat(owner, span_warning("You must provide an emotion to project!"))
 		return FALSE
-
 	//Filtering
 	if (findtext(song, "!"))
 		isYelling = TRUE
@@ -159,116 +159,121 @@
 		isYelling = FALSE
 	if (findtext(song, "*"))
 		to_chat(owner, span_warning("No *'s are allowed in vocal powers!"))
-		return
+		return FALSE
 	if (length(song) < 10)
 		to_chat(owner, span_warning("Your song is too short! Must be at least [10] characters."))
-		return
+		return FALSE
 	if (CHAT_FILTER_CHECK(song))
 		to_chat(owner, span_warning("That song contains a prohibited word. Naughty! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[song]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
-		return
+		return FALSE
 
 	// HARDSTOP: Caster Botched Roll.
 	casterRoll = SSroll.storyteller_roll(owner.get_total_social(), mobs_to_show_output = owner, numerical = TRUE)
 	if(casterRoll <= 0)
 		to_chat(owner, span_warning("You feel your voice is not resonating, try again later."))
 		return FALSE
-
-	//Emotional Filter
-	if (emotion in list("awe", "admiration", "wonder", "amazement", "astonishment", "marvel"))
-		newEmote = " looks at [owner] in [emotion]."
-		emote_text = pick("stare")
-		client_feedback = "You are struck with [emotion], for [owner]'s melodic voice."
-
-	else if (emotion in list("anger", "rage", "fury", "wrath", "irritation", "annoyance"))
-		newEmote = " starts to grumble with [emotion], in response to [owner]'s melodic voice."
-		emote_text = pick("scowl", "frown")
-		client_feedback = "Your blood runs hot. [owner]'s words sting and ignite your [emotion]."
-
-	else if (emotion in list("confusion", "bewilderment", "puzzlement", "perplext", "bafflement"))
-		newEmote = " furrows their brow, clearly confused by [owner]'s melodic voice."
-		emote_text = pick("blink", "tilt")
-		client_feedback = "[owner]'s voice leaves you feeling [emotion], trying to understand the meaning behind the words."
-
-	else if (emotion in list("desire", "lust", "longing", "yearning", "craving"))
-		newEmote = " bites their lip, overcome with desire from [owner]'s melodic voice."
-		emote_text = pick("blush")
-		client_feedback = "[owner]'s voice awakens something deeper... a [emotion], hard to ignore."
-
-	else if (emotion in list("disgust", "revulsion", "aversion", "loathing", "abhorrence"))
-		newEmote = " recoils slightly, a look of disgust crossing their face at [owner]'s voice."
-		emote_text = pick("grimace", "gag")
-		client_feedback = "A sharp [emotion] rises within you. Something in [owner]'s tone exposes it."
-
-	else if (emotion in list("elation", "exhilaration", "ecstasy", "excitement", "enthusiasm"))
-		newEmote = " beams brightly, lifted by [owner]'s melodic voice."
-		emote_text = pick("grin")
-		client_feedback = "A rush of [emotion] and energy bursts from within you, stoked by [owner]'s voice."
-
-	else if (emotion in list("empathy", "compassion", "sympathy", "understanding", "kindness"))
-		newEmote = " nods slowly, visibly moved by [owner]'s melodic voice."
-		emote_text = pick("nod", "sigh")
-		client_feedback = "You feel [emotion] swell in your chest from the sincerity in [owner]'s voice."
-
-	else if (emotion in list("envy", "jealousy", "covetousness", "resentment", "spite"))
-		newEmote = " glares with barely concealed envy at [owner]."
-		emote_text = pick("glare")
-		client_feedback = "[owner]'s voice digs at your [emotion]. Why do they have what you don’t?"
-
-	else if (emotion in list("panic", "fear", "terror", "horror", "dread", "fright"))
-		newEmote = " begins to tremble, in response to [owner]'s melodic voice."
-		emote_text = pick("tremble", "shiver", "shudder", "scream")
-		client_feedback = "Pangs of [emotion] scratch at the edges of your mind, seeded by [owner]'s voice."
-
-	else if (emotion in list("humor", "laughter", "comedy", "amusement", "joviality", "mirth"))
-		newEmote = " begins chuckling slightly, in response to [owner]'s melodic voice."
-		emote_text = pick("chuckle", "giggle", "laugh", "snicker", "snort", "clap")
-		client_feedback = "You can't help but find [emotion] in [owner]'s tone, it amuses you deeply."
-
-	else if (emotion in list("joy", "happiness", "contentment", "pleasure", "satisfaction", "delight"))
-		newEmote = " begins to grin slightly, in response to [owner]'s melodic voice."
-		emote_text = pick("grin", "smile")
-		client_feedback = "A gentle [emotion] warms you, like morning sunlight in your chest."
-
-	else if (emotion in list("love", "affection", "adoration", "fondness", "devotion", "attachment"))
-		newEmote = " gazes warmly at [owner], clearly touched."
-		emote_text = pick("smile", "blush")
-		client_feedback = "You feel [emotion] for [owner]'s words."
-
-	else if (emotion in list("pride", "self-esteem", "confidence", "self-worth", "self-respect", "dignity"))
-		newEmote = " stands tall, inspired by [owner]'s melodic voice."
-		emote_text = pick("smirk", "grin", "nod")
-		client_feedback = "A swell as [emotion] rushes through you. [owner]'s voice reinforces your strength."
-
-	else if (emotion in list("relief", "calm", "peace", "tranquility", "serenity", "composure"))
-		newEmote = " exhales slowly, tension draining at [owner]'s voice."
-		emote_text = pick("exhale", "sigh")
-		client_feedback = "You feel a sense of [emotion] wash over you. [owner]'s words settle something deep within you for a time."
-
-	else if (emotion in list("sadness", "sorrow", "grief", "melancholy", "depression", "heartbreak"))
-		newEmote = "'s eyes begin to water, in response to [owner]'s melodic voice."
-		emote_text = pick("sigh", "sulk")
-		client_feedback = "[owner]'s voice conjures clouds of [emotion], and you feel it settle over you."
-
-	else if (emotion in list("shame", "guilt", "embarrassment", "humiliation", "mortification", "self-consciousness"))
-		newEmote = " lowers their head in shame, avoiding [owner]'s gaze."
-		emote_text = pick("sigh", "blush", "frown")
-		client_feedback = "[owner]'s voice feels like a mirror reflecting your [emotion]."
-
-	else if (emotion in list("surprise", "astonishment", "amazement", "shock", "stuned", "startlement"))
-		newEmote = " blinks rapidly, surprised by [owner]'s melodic voice."
-		emote_text = pick("blink", "gasp", "scream")
-		client_feedback = "The words hit harder than expected. [owner]'s voice leaves you in [emotion]."
-
-	else if (emotion in list("trust", "faith", "confidence", "belief"))
-		newEmote = " stands a little closer to [owner], visibly comforted."
-		emote_text = pick("nod")
-		client_feedback = "[owner]'s voice assures you, by their words of [emotion]."
-	else
-		to_chat(owner, span_warning("Invalid emotion: Try: awe, anger, confusion, desire, disgust, elation, empathy, envy, panic, humor, joy, love, pride, relief, sadness, shame, surprise, trust"))
+	if (emotion in list("pride", "envy", "wrath", "sloth", "greed", "lust", "gluttony"))
+		isSin = TRUE
+	// Valid Sin or Virtue?
+	if(!emotion in list("humility", "pride", "kindness", "envy", "patience", "wrath", "charity", "greed", "chastity", "lust", "diligence", "sloth", "gratitude", "gluttony"))
+		to_chat(owner, span_warning("You must pick one of the Seven Heavenly Virtues or the Seven Deadly Sins. Valid: humility, pride, kindness, envy, patience, wrath, charity, greed, chastity, lust, diligence, sloth, gratitude, gluttony"))
 		return FALSE
 
-	//Range: Lists all listeners.
+	var/found_emotion = FALSE //if it finds it, it stops checking.
+	// HUMILITY vs PRIDE :
+	if (emotion == ("humility") && !found_emotion)
+		emotion = pick("humility", "modesty", "meekness", "selflessness")
+		newEmote = " lowers their gaze, their [emotion] stirring softly under the grace of [owner]'s voice."
+		emote_text = pick("nod", "bow", "smile")
+		client_feedback = "You feel a quiet [emotion] settle over you, called forth by the reverence in [owner]'s voice."
+		found_emotion = TRUE
+	if (emotion == ("pride") && !found_emotion)
+		emotion = pick("pride", "vanity", "arrogance", "ego")
+		newEmote = "'s chin lifts faintly, the [emotion] in [owner]'s voice swelling their confidence."
+		emote_text = pick("smirk", "grin", "stare")
+		client_feedback = "[owner]'s voice feeds your [emotion], bold and affirming in its cadence."
+		found_emotion = TRUE
+	// KINDNESS vs ENVY
+	if (emotion == ("kindness") && !found_emotion)
+		emotion = pick("kindness", "compassion", "empathy", "mercy")
+		newEmote = "'s expression eases, touched by the [emotion] carried gently by [owner]'s tone."
+		emote_text = pick("smile", "sigh", "hug")
+		client_feedback = "A wave of [emotion] moves through you, stirred by the warmth in [owner]'s voice."
+		found_emotion = TRUE
+	if (emotion == ("envy") && !found_emotion)
+		emotion = pick("envy", "jealousy", "resentment", "covetousness")
+		newEmote = " glances aside, their [emotion] prickling under the velvet edge of [owner]'s voice."
+		emote_text = pick("glare", "frown", "stare")
+		client_feedback = "Something in [owner]'s voice claws at you, awakening a bitter [emotion] within."
+		found_emotion = TRUE
+	// PATIENCE vs WRATH
+	if (emotion == ("patience") && !found_emotion)
+		emotion = pick("patience", "tolerance", "calm", "serenity", "composure")
+		newEmote = " breathes in slow rhythm, [emotion] threading through them as [owner]'s voice calms the air."
+		emote_text = pick("exhale", "nod", "blink")
+		client_feedback = "The melody of [owner]'s voice centers you, ushering in a sense of [emotion]."
+		found_emotion = TRUE
+	if (emotion == ("wrath") && !found_emotion)
+		emotion = pick("wrath", "anger", "rage", "fury", "irritation")
+		newEmote = "'s jaw tenses for a moment, [emotion] sparked by the undercurrent in [owner]'s tone."
+		emote_text = pick("scowl", "frown", "growl")
+		client_feedback = "[owner]'s tone burns at the edges of your thoughts, drawing out a dangerous [emotion]."
+		found_emotion = TRUE
+	// CHARITY vs GREED
+	if (emotion == ("charity") && !found_emotion)
+		emotion = pick("charity", "generosity", "altruism")
+		newEmote = " places a hand near their heart, the [emotion] in [owner]'s voice not going unnoticed."
+		emote_text = pick("smile", "bow", "clap")
+		client_feedback = "The kindness in [owner]'s words awakens a sense of [emotion] you hadn't expected."
+		found_emotion = TRUE
+	if (emotion == ("greed") && !found_emotion)
+		emotion = pick("greed", "avarice", "materialism", "hoarding")
+		newEmote = "'s gaze lingers, [emotion] whispering at the edges of [owner]'s inviting cadence."
+		emote_text = pick("grin", "lick_lips", "stare")
+		client_feedback = "[owner]'s voice hints at promise and gain — your [emotion] stirs in response."
+		found_emotion = TRUE
+	// CHASTITY vs LUST
+	if (emotion == ("chastity") && !found_emotion)
+		emotion = pick("chastity", "purity", "temperance", "restraint")
+		newEmote = " composes themselves, recognizing the restraint and [emotion] woven into [owner]'s voice."
+		emote_text = pick("nod", "fold_hands", "exhale")
+		client_feedback = "A quiet [emotion] anchors you as [owner]'s words brush the edge of temptation."
+		found_emotion = TRUE
+	if (emotion == ("lust") && !found_emotion)
+		emotion = pick("lust", "desire", "yearning", "craving")
+		newEmote = " shifts their stance, [emotion] flickering briefly in response to [owner]'s sultry tone."
+		emote_text = pick("blush", "stare", "bite_lip")
+		client_feedback = "Your senses quicken — [owner]'s voice dances with [emotion] just beneath the surface."
+		found_emotion = TRUE
+	// DILIGENCE vs SLOTH
+	if (emotion == ("diligence") && !found_emotion)
+		emotion = pick("diligence", "drive", "determination", "focus")
+		newEmote = " straightens subtly, [emotion] kindled at the edges by [owner]'s steady tone."
+		emote_text = pick("nod", "clench", "straighten")
+		client_feedback = "[owner]'s presence sharpens your resolve, fanning the flame of [emotion]."
+		found_emotion = TRUE
+	if (emotion == ("sloth") && !found_emotion)
+		emotion = pick("sloth", "laziness", "apathy", "lethargy", "indifference")
+		newEmote = " slows slightly, the drawl of [owner]'s voice tempting a quiet [emotion]."
+		emote_text = pick("sigh", "yawn", "droop")
+		client_feedback = "The lull of [owner]'s voice weighs on you, coaxing forth a creeping [emotion]."
+		found_emotion = TRUE
+	// GRATITUDE vs GLUTTONY
+	if (emotion == ("gratitude") && !found_emotion)
+		emotion = pick("gratitude", "thankfulness", "appreciation")
+		newEmote = " dips their head slightly, [emotion] rising quietly in response to [owner]'s resonant voice."
+		emote_text = pick("smile", "bow")
+		client_feedback = "[owner]'s words resonate deep, and a sincere [emotion] finds its way to the surface."
+		found_emotion = TRUE
+	if (emotion == ("gluttony") && !found_emotion)
+		emotion = pick("gluttony", "overindulgence", "excess", "binge")
+		newEmote = "'s lips part almost imperceptibly, [emotion] echos to them faintly from [owner]'s indulgent voice."
+		emote_text = pick("grin", "snicker", "lick_lips")
+		client_feedback = "Every syllable from [owner] feels like a feast — [emotion] curls inside you, wanting more."
+		found_emotion = TRUE
+
+	//Collect Targets
 	all_listeners = list()
 	if(!isYelling)
 		for (var/mob/living/carbon/human/listener in oviewers(7, owner))
@@ -280,6 +285,7 @@
 			if (listener.stat == DEAD)
 				continue
 			all_listeners += listener
+
 	spend_resources()
 
 /datum/discipline_power/melpominee/madrigal/activate()
@@ -298,12 +304,13 @@
 			base_difficulty -= 2
 		if (isgarou(listener))
 			base_difficulty -= 2
-		var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
+		if (listener.mind.holy_role) //Have to roll, extremely poorly to fail.
+			base_difficulty -= 6
 
+		var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
 		if (targetRoll <= 0) //Botched Roll
 			botched_roll = TRUE
 			to_chat(listener, span_warning("You are completely overwhelmed with [emotion] and you can't seem to leave [owner]'s side..."))
-
 		if (!botched_roll) //Contested Roll, Casters Social vs Listener's Mentality.
 			if (targetRoll >= casterRoll) // Success, senses the emotion mildly, but resists. No forced emote.
 				to_chat(listener, span_notice("You resist any emotional pull of [owner]'s voice of [emotion], but their voice still may hold weight."))
@@ -328,7 +335,6 @@
 				super_fans++
 				listener.visible_message("[listener][newEmote]")
 				continue
-
 
 		// Quick Fire Cosmetics for each Listener, only last for two seconds.
 		listener.remove_overlay(MUTATIONS_LAYER)
