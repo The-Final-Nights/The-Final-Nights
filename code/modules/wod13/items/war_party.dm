@@ -36,7 +36,7 @@
 			if(sabbat_member.mind && is_sabbatist(sabbat_member))
 				// Roll for each Sabbat member to see if they receive the call
 				if(activations == 1 || prob(success_chance))
-					to_chat(sabbat_member, span_cult("The Ductus is calling all pack members to return to the lair at once! A war party has been called! The Sword of Caine shall fall on the Elders!"))
+					to_chat(sabbat_member, span_cult("The Ductus calls all pack members back to the lair, return at once!"))
 					SEND_SOUND(sabbat_member, sound('code/modules/wod13/sounds/announce.ogg'))
 					sabbat_member.emote("twitch")
 
