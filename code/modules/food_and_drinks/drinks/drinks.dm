@@ -302,7 +302,7 @@
 	var/is_vampire_species = FALSE
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(istype(H.dna.species, /datum/species/kindred))
+		if(iskindred(H))
 			is_vampire_species = TRUE
 
 	// Special handling for vampires drinking blood
