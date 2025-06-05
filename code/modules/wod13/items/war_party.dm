@@ -18,7 +18,7 @@
 	var/mob/living/carbon/human/H = user
 
 	// Check if the user is a Sabbat Ductus or Priest
-	if(!is_sabbat_ductus(user) || !is_sabbat_priest(user))
+	if(!is_sabbat_ductus(user) && !is_sabbat_priest(user))
 		to_chat(H, span_cult("Only the Ductus or the Priest may call a War Party from the Totem!"))
 		return
 
