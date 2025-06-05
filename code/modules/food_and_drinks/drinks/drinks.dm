@@ -256,7 +256,7 @@
 	// Check if the user is a vampire or kindred
 	var/is_vampire_species = FALSE
 	if(istype(user, /mob/living/carbon/human))
-		if(istype(user.dna.species, /datum/species/kindred))
+		if(iskindred(user))
 			is_vampire_species = TRUE
 
 	if(!is_vampire_species)
