@@ -303,6 +303,7 @@
 	icon_state = "rune7"
 	word = "GI'TI FOA'HP"
 	necrolevel = 5
+	var/duration_length = 15 SECONDS
 
 /obj/necrorune/zombie/complete()
 
@@ -322,56 +323,64 @@
 		to_chat(usr, span_warning("There is no body that can undergo this Ritual."))
 		return
 
-	var/mob/living/target_body = pick(valid_bodies)
+	usr.visible_message(span_notice("[usr] begins chanting in vile tongues..."), span_notice("You begin the resurrection ritual."))
+	playsound(loc, 'code/modules/wod13/sounds/necromancy2.ogg', 50, FALSE)
 
-	var/old_name = target_body.real_name
+	if(do_after(usr, duration_length, usr))
 
-	// Transform the body into a zombie
-	if(!target_body || QDELETED(target_body) || target_body.stat > DEAD)
-		return
+		activated = TRUE
+		last_activator = usr
 
-	// Remove any vampiric actions
-	for(var/datum/action/A in target_body.actions)
-		if(A && A.vampiric)
-			A.Remove(target_body)
+		var/mob/living/target_body = pick(valid_bodies)
 
-	var/original_location = get_turf(target_body)
+		var/old_name = target_body.real_name
 
-	// Revive the specimen and turn them into a zombie
-	target_body.revive(TRUE)
-	target_body.set_species(/datum/species/zombie)
-	target_body.real_name = old_name // the ritual for some reason is deleting their old name and replacing it with a random name.
-	target_body.name = old_name
-	target_body.update_name()
-
-	if(target_body.loc != original_location)
-		target_body.forceMove(original_location)
-
-	playsound(loc, 'code/modules/wod13/sounds/necromancy.ogg', 50, FALSE)
-
-	// Handle key assignment
-	if(!target_body.key)
-		var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to play as Sentient Zombie?", null, null, null, 20 SECONDS, src)
-		for(var/mob/dead/observer/G in GLOB.player_list)
-			if(G.key)
-				to_chat(G, span_ghostalert("Zombie rune has been triggered."))
-		if(LAZYLEN(candidates))
-			var/mob/dead/observer/C = pick(candidates)
-			target_body.key = C.key
-
-		var/choice = tgui_alert(target_body, "Do you want to pick a new name as a Zombie?", "Zombie Choose Name", list("Yes", "No"), 10 SECONDS)
-		if(choice == "Yes")
-			var/chosen_zombie_name = tgui_input_text(target_body, "What is your new name as a Zombie?", "Zombie Name Input")
-			target_body.real_name = chosen_zombie_name
-			target_body.name = chosen_zombie_name
-			target_body.update_name()
-		else
-			target_body.visible_message(span_ghostalert("[target_body.name] twitches to unlife!"))
-			qdel(src)
+		// Transform the body into a zombie
+		if(!target_body || QDELETED(target_body) || target_body.stat > DEAD)
 			return
 
-	target_body.visible_message(span_ghostalert("[target_body.name] twitches to unlife!"))
-	qdel(src)
+		// Remove any vampiric actions
+		for(var/datum/action/A in target_body.actions)
+			if(A && A.vampiric)
+				A.Remove(target_body)
+
+		var/original_location = get_turf(target_body)
+
+		// Revive the specimen and turn them into a zombie
+		target_body.revive(TRUE)
+		target_body.set_species(/datum/species/zombie)
+		target_body.real_name = old_name // the ritual for some reason is deleting their old name and replacing it with a random name.
+		target_body.name = old_name
+		target_body.update_name()
+
+		if(target_body.loc != original_location)
+			target_body.forceMove(original_location)
+
+		playsound(loc, 'code/modules/wod13/sounds/necromancy.ogg', 50, FALSE)
+
+		// Handle key assignment
+		if(!target_body.key)
+			var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to play as Sentient Zombie?", null, null, null, 20 SECONDS, src)
+			for(var/mob/dead/observer/G in GLOB.player_list)
+				if(G.key)
+					to_chat(G, span_ghostalert("Zombie rune has been triggered."))
+			if(LAZYLEN(candidates))
+				var/mob/dead/observer/C = pick(candidates)
+				target_body.key = C.key
+
+			var/choice = tgui_alert(target_body, "Do you want to pick a new name as a Zombie?", "Zombie Choose Name", list("Yes", "No"), 10 SECONDS)
+			if(choice == "Yes")
+				var/chosen_zombie_name = tgui_input_text(target_body, "What is your new name as a Zombie?", "Zombie Name Input")
+				target_body.real_name = chosen_zombie_name
+				target_body.name = chosen_zombie_name
+				target_body.update_name()
+			else
+				target_body.visible_message(span_ghostalert("[target_body.name] twitches to unlife!"))
+				qdel(src)
+				return
+
+		target_body.visible_message(span_ghostalert("[target_body.name] twitches to unlife!"))
+		qdel(src)
 
 // **************************************************************** CALL UPON THE SHADOW'S GRACE *************************************************************
 
