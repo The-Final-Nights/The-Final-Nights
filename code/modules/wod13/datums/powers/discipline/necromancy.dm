@@ -168,8 +168,7 @@
 		var/mob/living/carbon/human/corpsebuff = target
 		if(iskindred(target) || iscathayan(target) || iszombie(target)) //undead become spongier, but move slightly slower
 			corpsebuff.visible_message(span_danger("[target]'s body seizes with rigor mortis."), span_danger("Your senses dull to pain and everything else."))
-			corpsebuff.physiology.armor.melee += 35
-			corpsebuff.physiology.armor.bullet += 35 //halfway-fortitude. much worse than blood/shadow shield, but is cheaper and lasts a little longer. edge slowdown uses
+			corpsebuff.dna.species.brutemod = max(0.2, corpsebuff.dna.species.brutemod-0.3) //equivalent of the existing artifact
 			ADD_TRAIT(corpsebuff, TRAIT_NOSOFTCRIT, MAGIC_TRAIT)
 			ADD_TRAIT(corpsebuff, TRAIT_NOHARDCRIT, MAGIC_TRAIT)
 			ADD_TRAIT(corpsebuff, TRAIT_IGNOREDAMAGESLOWDOWN, MAGIC_TRAIT)
@@ -196,8 +195,7 @@
 		var/mob/living/carbon/human/corpsebuff = target
 		if(iskindred(target) || iscathayan(target))
 			corpsebuff.visible_message(span_notice("[target]'s body regains its luster."), span_notice("Feeling comes flooding back into your body."))
-			corpsebuff.physiology.armor.melee -= 35
-			corpsebuff.physiology.armor.bullet -= 35
+			corpsebuff.dna.species.brutemod = initial(corpsebuff.dna.species.brutemod)
 			REMOVE_TRAIT(corpsebuff, TRAIT_NOSOFTCRIT, MAGIC_TRAIT)
 			REMOVE_TRAIT(corpsebuff, TRAIT_NOHARDCRIT, MAGIC_TRAIT)
 			REMOVE_TRAIT(corpsebuff, TRAIT_IGNOREDAMAGESLOWDOWN, MAGIC_TRAIT)
@@ -279,6 +277,7 @@
 		target.visible_message(span_warning("[target]'s flesh knits together'!"), span_danger("Your rotten flesh reconstitutes!"))
 		var/mob/living/carbon/human/zombie = target
 		zombie.heal_ordered_damage(120, list(BRUTE, TOX, BURN, CLONE, OXY, BRAIN))
+		zombie.bloodpool = min(zombie.maxbloodpool, zombie.bloodpool+3)
 		if(length(zombie.all_wounds))
 			var/datum/wound/wound = pick(zombie.all_wounds)
 			wound.remove_wound()
@@ -343,7 +342,7 @@
 			if(R.necrolevel <= level)
 				rune_names += i
 			qdel(R)
-		var/ritual = input(owner, "Choose rune to draw:", "necroritualism") as null|anything in list("???")
+		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "necroritualism") as null|anything in list("???")
 		if(ritual)
 			drawing = TRUE
 			if(do_after(H, 30*max(1, 5-H.mentality), H))
