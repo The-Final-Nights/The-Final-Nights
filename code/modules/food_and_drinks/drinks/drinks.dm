@@ -341,7 +341,7 @@
 					M.apply_status_effect(STATUS_EFFECT_INLOVE, donor)
 					to_chat(M, span_warning("You feel a strange connection to <b>[donor]</b> forming as their blood mingles with yours!"))
 					to_chat(donor, span_notice("You sense that <b>[M]</b> has consumed your blood and is now bound to you."))
-					M.visible_message(span_notice("[M]'s eyes flash briefly as they become bound to [donor]."), "", span_notice("Your eyes flash as the blood bond forms."))
+					M.visible_message(span_notice("[M]'s eyes flash briefly as they become bound to [donor]."), span_notice("Your eyes flash as the blood bond forms."))
 					playsound(M, 'sound/magic/smoke.ogg', 20, TRUE)
 
 	// Handle vaulderie
