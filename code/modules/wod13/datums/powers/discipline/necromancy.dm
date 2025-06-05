@@ -342,7 +342,7 @@
 			if(R.necrolevel <= level)
 				rune_names += i
 			qdel(R)
-		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "necroritualism") as null|anything in list("???")
+		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "necroritualism", list("???"))
 		if(ritual)
 			drawing = TRUE
 			if(do_after(H, 30*max(1, 5-H.mentality), H))
