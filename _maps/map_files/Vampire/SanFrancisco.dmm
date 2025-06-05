@@ -12813,7 +12813,7 @@
 /obj/item/clothing/suit/cheongsam_red,
 /obj/item/clothing/suit/cheongsam_blue,
 /obj/item/clothing/under/costume/geisha,
-/obj/item/clothing/under/dress/blacktango,
+/obj/item/clothing/under/dress/tango,
 /obj/item/clothing/under/dress/redeveninggown,
 /obj/item/clothing/suit/changshan_blue,
 /obj/item/clothing/suit/changshan_red,
@@ -18481,9 +18481,9 @@
 "eQL" = (
 /obj/item/clothing/suit/yakuza,
 /obj/item/clothing/shoes/yakuza,
-/obj/item/clothing/under/costume/yakuza,
-/obj/item/clothing/under/costume/yakuza,
-/obj/item/clothing/under/costume/yakuza,
+/obj/item/clothing/suit/yakuza,
+/obj/item/clothing/suit/yakuza,
+/obj/item/clothing/suit/yakuza,
 /obj/structure/closet/cabinet,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
