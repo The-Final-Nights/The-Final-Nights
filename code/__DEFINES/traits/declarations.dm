@@ -176,6 +176,7 @@
 #define TRAIT_STAKE_RESISTANT	"stake_resistant"
 #define TRAIT_COLD_AURA			"cold_aura"
 #define TRAIT_WARM_AURA			"warm_aura"
+#define TRAIT_FRENETIC_AURA		"frenetic_aura"
 #define TRAIT_UNBONDABLE		"unbondable"
 #define TRAIT_BLUSH_OF_HEALTH	"blush_of_health"
 #define TRAIT_POTENT_BLOOD		"potent_blood"

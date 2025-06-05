@@ -30,6 +30,7 @@
 	name = "Sweeper"
 	jobtype = /datum/job/vamp/sweeper
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/sweeper
 	uniform = /obj/item/clothing/under/vampire/bouncer
 	suit = /obj/item/clothing/suit/vampire/jacket
