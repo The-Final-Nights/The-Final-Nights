@@ -233,10 +233,6 @@
 		if (H.CheckEyewitness(H, H, 5, FALSE)) //it's san fran, there are crackheads everywhere
 			H.AdjustMasquerade(-1)
 
-	if((H.last_bloodpool_restore + 60 SECONDS) <= world.time)
-		H.last_bloodpool_restore = world.time
-		H.bloodpool = min(H.maxbloodpool, H.bloodpool+1)
-
 /datum/species/zombie/proc/on_zombie_bitten(datum/source, mob/living/carbon/being_bitten)
 	SIGNAL_HANDLER
 
