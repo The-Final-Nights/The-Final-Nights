@@ -91,7 +91,7 @@
 	if(!target)
 		return
 
-	var/input_message = tgui_input_text(owner, "What message will you project to them?", "Madrigal: Emotion", FALSE, 500, TRUE, FALSE, 0) as null|text
+	var/input_message = tgui_input_text(owner, "What message will you project to them?", "Madrigal: sin_virtue", FALSE, 500, TRUE, FALSE, 0) as null|text
 	if (!input_message)
 		return
 	input_message = trim(copytext_char(input_message, 1, MAX_MESSAGE_LEN))
@@ -113,7 +113,7 @@
 //MADRIGAL
 /datum/discipline_power/melpominee/madrigal
 	name = "Madrigal"
-	desc = "Project raw emotion into nearby minds through your melodic voice, inspiring compelling emotional reactions."
+	desc = "Project raw emotion into nearby minds through your melodic voice, inspiring compelling sinful or virtuos reactions."
 	level = 3
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
 	target_type = NONE
@@ -121,38 +121,24 @@
 	duration_length = 2 SECONDS
 	duration_override = TRUE
 	multi_activate = TRUE
-
-	//storage land!
 	var/all_listeners = list()
 	var/song = ""
-	var/isYelling = FALSE
-	var/emotion = ""
+	var/sin_virtue = ""
 	var/isSin = FALSE
 	var/casterRoll = 0
-	var/newEmote = ""
 	var/emote_text = ""
-	var/client_feedback = ""
 	var/super_fan_perCast = 5
 	var/super_fans = 0
-
 /datum/discipline_power/melpominee/madrigal/pre_activation_checks()
 	. = ..()
 	song = ""
-	emotion = ""
-	isSin = FALSE //checks in a bit
-	super_fans = 0 //zeros out the super_fans variable, so it can be used again this cast.
-
-	//Input
-	song = tgui_input_text(owner, "What are the words does your melodic voice Madrigal contain?", "Madrigal: Input Melodic Words/Song", FALSE, 500, TRUE, FALSE, 0)
+	sin_virtue = ""
+	var/isYelling = FALSE
+	super_fans = 0
+	song = tgui_input_text(owner, "What words fill your voice with sin or virtue?", "Madrigal: Melodic Voice/Song", FALSE, 500, TRUE, FALSE, 0)
 	if (!song || song == "")
-		to_chat(owner, span_warning("You must provide a song to sing!"))
+		to_chat(owner, span_warning("You must provide an answer..."))
 		return FALSE
-	emotion = tgui_input_text(owner, "Type a Sin or Virtue you wish to project through your voice. Listeners who fail will be given a prompt to work with.", "Madrigal: Input A Sin or Virtue", FALSE, 500, TRUE, FALSE, 0)
-	emotion = lowertext(trim(emotion))
-	if (!emotion || emotion == "")
-		to_chat(owner, span_warning("You must provide an emotion to project!"))
-		return FALSE
-	//Filtering
 	if (findtext(song, "!"))
 		isYelling = TRUE
 	if (!findtext(song, "!"))
@@ -167,218 +153,176 @@
 		to_chat(owner, span_warning("That song contains a prohibited word. Naughty! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[song]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return FALSE
-
-	// HARDSTOP: Caster Botched Roll.
+	sin_virtue = tgui_input_text(owner, ":: Enter One Deadly Sin or Heavenly Virtue :: Your words should support this theme.", ":Madrigal: Project a Sin or Virtue:", FALSE, 500, TRUE, FALSE, 0)
+	sin_virtue = lowertext(trim(sin_virtue))
+	if (!sin_virtue || sin_virtue == "")
+		to_chat(owner, span_warning("You must provide an answer..."))
+		return FALSE
 	casterRoll = SSroll.storyteller_roll(owner.get_total_social(), mobs_to_show_output = owner, numerical = TRUE)
-	if(casterRoll <= 0)
+	if(casterRoll <= 0) //Caster Botched Roll.
 		to_chat(owner, span_warning("You feel your voice is not resonating, try again later."))
 		return FALSE
-	if (emotion in list("pride", "envy", "wrath", "sloth", "greed", "lust", "gluttony"))
-		isSin = TRUE
-	// Valid Sin or Virtue?
-	if(!emotion in list("humility", "pride", "kindness", "envy", "patience", "wrath", "charity", "greed", "chastity", "lust", "diligence", "sloth", "gratitude", "gluttony"))
-		to_chat(owner, span_warning("You must pick one of the Seven Heavenly Virtues or the Seven Deadly Sins. Valid: humility, pride, kindness, envy, patience, wrath, charity, greed, chastity, lust, diligence, sloth, gratitude, gluttony"))
+
+	if(!(sin_virtue in list("humility", "kindness", "patience", "charity", "chastity", "diligence", "gratitude", "pride", "envy", "wrath", "sloth", "greed", "lust", "gluttony")))
+		to_chat(owner, span_warning("You must enter a Heavenly Virtue or Deadly Sin; humility, kindness, patience, charity, chastity, diligence, gratitude, pride, envy, wrath, sloth, greed, lust, gluttony."))
 		return FALSE
-
-	var/found_emotion = FALSE //if it finds it, it stops checking.
-	// HUMILITY vs PRIDE :
-	if (emotion == ("humility") && !found_emotion)
-		emotion = pick("humility", "modesty", "meekness", "selflessness")
-		newEmote = " lowers their gaze, their [emotion] stirring softly under the grace of [owner]'s voice."
+	if (sin_virtue in list("humility", "kindness", "patience", "charity", "chastity", "diligence", "gratitude"))
+		isSin = FALSE
+	if (sin_virtue in list("pride", "envy", "wrath", "sloth", "greed", "lust", "gluttony"))
+		isSin = TRUE
+	//Sins & Virtues
+	var/found_sin_virtue = FALSE
+	if (sin_virtue == ("humility") && !found_sin_virtue)
+		sin_virtue = pick("humility", "modesty", "meekness", "selflessness")
 		emote_text = pick("nod", "bow", "smile")
-		client_feedback = "You feel a quiet [emotion] settle over you, called forth by the reverence in [owner]'s voice."
-		found_emotion = TRUE
-	if (emotion == ("pride") && !found_emotion)
-		emotion = pick("pride", "vanity", "arrogance", "ego")
-		newEmote = "'s chin lifts faintly, the [emotion] in [owner]'s voice swelling their confidence."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("pride") && !found_sin_virtue)
+		sin_virtue = pick("pride", "vanity", "arrogance", "ego")
 		emote_text = pick("smirk", "grin", "stare")
-		client_feedback = "[owner]'s voice feeds your [emotion], bold and affirming in its cadence."
-		found_emotion = TRUE
-	// KINDNESS vs ENVY
-	if (emotion == ("kindness") && !found_emotion)
-		emotion = pick("kindness", "compassion", "empathy", "mercy")
-		newEmote = "'s expression eases, touched by the [emotion] carried gently by [owner]'s tone."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("kindness") && !found_sin_virtue)
+		sin_virtue = pick("kindness", "compassion", "empathy", "mercy")
 		emote_text = pick("smile", "sigh", "hug")
-		client_feedback = "A wave of [emotion] moves through you, stirred by the warmth in [owner]'s voice."
-		found_emotion = TRUE
-	if (emotion == ("envy") && !found_emotion)
-		emotion = pick("envy", "jealousy", "resentment", "covetousness")
-		newEmote = " glances aside, their [emotion] prickling under the velvet edge of [owner]'s voice."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("envy") && !found_sin_virtue)
+		sin_virtue = pick("envy", "jealousy", "resentment", "covetousness")
 		emote_text = pick("glare", "frown", "stare")
-		client_feedback = "Something in [owner]'s voice claws at you, awakening a bitter [emotion] within."
-		found_emotion = TRUE
-	// PATIENCE vs WRATH
-	if (emotion == ("patience") && !found_emotion)
-		emotion = pick("patience", "tolerance", "calm", "serenity", "composure")
-		newEmote = " breathes in slow rhythm, [emotion] threading through them as [owner]'s voice calms the air."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("patience") && !found_sin_virtue)
+		sin_virtue = pick("patience", "tolerance", "calm", "serenity", "composure")
 		emote_text = pick("exhale", "nod", "blink")
-		client_feedback = "The melody of [owner]'s voice centers you, ushering in a sense of [emotion]."
-		found_emotion = TRUE
-	if (emotion == ("wrath") && !found_emotion)
-		emotion = pick("wrath", "anger", "rage", "fury", "irritation")
-		newEmote = "'s jaw tenses for a moment, [emotion] sparked by the undercurrent in [owner]'s tone."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("wrath") && !found_sin_virtue)
+		sin_virtue = pick("wrath", "anger", "rage", "fury", "irritation")
 		emote_text = pick("scowl", "frown", "growl")
-		client_feedback = "[owner]'s tone burns at the edges of your thoughts, drawing out a dangerous [emotion]."
-		found_emotion = TRUE
-	// CHARITY vs GREED
-	if (emotion == ("charity") && !found_emotion)
-		emotion = pick("charity", "generosity", "altruism")
-		newEmote = " places a hand near their heart, the [emotion] in [owner]'s voice not going unnoticed."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("charity") && !found_sin_virtue)
+		sin_virtue = pick("charity", "generosity", "altruism")
 		emote_text = pick("smile", "bow", "clap")
-		client_feedback = "The kindness in [owner]'s words awakens a sense of [emotion] you hadn't expected."
-		found_emotion = TRUE
-	if (emotion == ("greed") && !found_emotion)
-		emotion = pick("greed", "avarice", "materialism", "hoarding")
-		newEmote = "'s gaze lingers, [emotion] whispering at the edges of [owner]'s inviting cadence."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("greed") && !found_sin_virtue)
+		sin_virtue = pick("greed", "avarice", "materialism", "hoarding")
 		emote_text = pick("grin", "lick_lips", "stare")
-		client_feedback = "[owner]'s voice hints at promise and gain — your [emotion] stirs in response."
-		found_emotion = TRUE
-	// CHASTITY vs LUST
-	if (emotion == ("chastity") && !found_emotion)
-		emotion = pick("chastity", "purity", "temperance", "restraint")
-		newEmote = " composes themselves, recognizing the restraint and [emotion] woven into [owner]'s voice."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("chastity") && !found_sin_virtue)
+		sin_virtue = pick("chastity", "purity", "temperance", "restraint")
 		emote_text = pick("nod", "fold_hands", "exhale")
-		client_feedback = "A quiet [emotion] anchors you as [owner]'s words brush the edge of temptation."
-		found_emotion = TRUE
-	if (emotion == ("lust") && !found_emotion)
-		emotion = pick("lust", "desire", "yearning", "craving")
-		newEmote = " shifts their stance, [emotion] flickering briefly in response to [owner]'s sultry tone."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("lust") && !found_sin_virtue)
+		sin_virtue = pick("lust", "desire", "yearning", "craving")
 		emote_text = pick("blush", "stare", "bite_lip")
-		client_feedback = "Your senses quicken — [owner]'s voice dances with [emotion] just beneath the surface."
-		found_emotion = TRUE
-	// DILIGENCE vs SLOTH
-	if (emotion == ("diligence") && !found_emotion)
-		emotion = pick("diligence", "drive", "determination", "focus")
-		newEmote = " straightens subtly, [emotion] kindled at the edges by [owner]'s steady tone."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("diligence") && !found_sin_virtue)
+		sin_virtue = pick("diligence", "drive", "determination", "focus")
 		emote_text = pick("nod", "clench", "straighten")
-		client_feedback = "[owner]'s presence sharpens your resolve, fanning the flame of [emotion]."
-		found_emotion = TRUE
-	if (emotion == ("sloth") && !found_emotion)
-		emotion = pick("sloth", "laziness", "apathy", "lethargy", "indifference")
-		newEmote = " slows slightly, the drawl of [owner]'s voice tempting a quiet [emotion]."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("sloth") && !found_sin_virtue)
+		sin_virtue = pick("sloth", "laziness", "apathy", "lethargy", "indifference")
 		emote_text = pick("sigh", "yawn", "droop")
-		client_feedback = "The lull of [owner]'s voice weighs on you, coaxing forth a creeping [emotion]."
-		found_emotion = TRUE
-	// GRATITUDE vs GLUTTONY
-	if (emotion == ("gratitude") && !found_emotion)
-		emotion = pick("gratitude", "thankfulness", "appreciation")
-		newEmote = " dips their head slightly, [emotion] rising quietly in response to [owner]'s resonant voice."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("gratitude") && !found_sin_virtue)
+		sin_virtue = pick("gratitude", "thankfulness", "appreciation")
 		emote_text = pick("smile", "bow")
-		client_feedback = "[owner]'s words resonate deep, and a sincere [emotion] finds its way to the surface."
-		found_emotion = TRUE
-	if (emotion == ("gluttony") && !found_emotion)
-		emotion = pick("gluttony", "overindulgence", "excess", "binge")
-		newEmote = "'s lips part almost imperceptibly, [emotion] echos to them faintly from [owner]'s indulgent voice."
+		found_sin_virtue = TRUE
+	if (sin_virtue == ("gluttony") && !found_sin_virtue)
+		sin_virtue = pick("gluttony", "overindulgence", "excess", "binge")
 		emote_text = pick("grin", "snicker", "lick_lips")
-		client_feedback = "Every syllable from [owner] feels like a feast — [emotion] curls inside you, wanting more."
-		found_emotion = TRUE
-
-	//Collect Targets
+		found_sin_virtue = TRUE
 	all_listeners = list()
 	if(!isYelling)
 		for (var/mob/living/carbon/human/listener in oviewers(7, owner))
-			if (listener.stat == DEAD)
-				continue
-			all_listeners += listener
+			if (listener.stat != DEAD)
+				all_listeners += listener
 	if(isYelling)
 		for (var/mob/living/carbon/human/listener in oviewers(10, owner))
-			if (listener.stat == DEAD)
-				continue
-			all_listeners += listener
-
+			if (listener.stat != DEAD)
+				all_listeners += listener
 	spend_resources()
 
 /datum/discipline_power/melpominee/madrigal/activate()
 	. = ..()
 	owner.say( song, forced = "melpominee 3")
 	var/totalListeners = 0
-	var/base_difficulty = 6
-
-	//Listener Resistance Rolls:
+	var/base_difficulty = 5
 	for (var/mob/living/carbon/human/listener in all_listeners)
 		totalListeners++
-		var/botched_roll = FALSE //Used to make Superfans.
+		var/botched_roll = FALSE
 		if (isnpc(listener))
-			base_difficulty += 2
+			base_difficulty += 1
 		if (iskindred(listener))
-			base_difficulty -= 2
+			base_difficulty -= 1
 		if (isgarou(listener))
-			base_difficulty -= 2
-		if (listener.mind.holy_role) //Have to roll, extremely poorly to fail.
-			base_difficulty -= 6
-
+			base_difficulty -= 1
+		if(listener.mind)
+			if (listener.mind.holy_role == HOLY_ROLE_PRIEST && isSin) //Have to roll EXTREMELY poorly to fail.
+				base_difficulty -= 3
 		var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
-		if (targetRoll <= 0) //Botched Roll
+		if (targetRoll <= 0) // Botched Target Roll
 			botched_roll = TRUE
-			to_chat(listener, span_warning("You are completely overwhelmed with [emotion] and you can't seem to leave [owner]'s side..."))
-		if (!botched_roll) //Contested Roll, Casters Social vs Listener's Mentality.
-			if (targetRoll >= casterRoll) // Success, senses the emotion mildly, but resists. No forced emote.
-				to_chat(listener, span_notice("You resist any emotional pull of [owner]'s voice of [emotion], but their voice still may hold weight."))
-				listener.visible_message(span_userdanger("[client_feedback]"))
+			to_chat(listener, span_danger("You lose yourself in the [sin_virtue] stirred by [owner]'s voice — all reason slipping away."))
+			listener.visible_message(span_notice("[owner]'s voice overwhelms [listener], who appears completely lost in [sin_virtue]."))
+		if (!botched_roll) // Contested Rolls
+			if (targetRoll >= casterRoll) // Success
+				to_chat(listener, span_notice("You resist the pull of [owner]'s melodic voice. The [sin_virtue] they project doesn't take hold, but it lingers."))
+				listener.visible_message(span_notice("[listener] visibly wavers, but resists the full weight of [owner]'s [sin_virtue]."))
 				continue
-			if (targetRoll < casterRoll) // Failure, senses the emotion with more intensity. One forced emote.
-				to_chat(listener, span_danger("You feel [emotion] fill your mind, and [owner]'s voice guides it."))
-				listener.emote(emote_text) //only once
-				listener.visible_message(span_userdanger("[client_feedback]"))
+			if (targetRoll < casterRoll) // Failure
+				to_chat(listener, span_danger("The sound of [owner]'s voice strikes deep — [sin_virtue] rises within you, undeniable and fierce."))
+				listener.emote(emote_text)
+				listener.visible_message(span_notice("[listener] shows a clear reaction to [owner]'s voice — [sin_virtue] written on their face."))
 				continue
-
-		// Superfan Limiter/Creator: Superfans, can be Players or NPCs.
 		if (super_fans < super_fan_perCast && botched_roll)
 			if (istype(listener, /mob/living/carbon/human))
 				var/datum/component/superfan/SF = listener.GetComponent(/datum/component/superfan)
-				if (SF && SF.superfan_active) //Skips Active Superfans
-					SF.superfan_emotion = emote_text //updates exsisting fans mood to current cast.
-					listener.visible_message("[listener][newEmote]")
+				if (SF && SF.superfan_active)
+					SF.superfan_sin_virtue = emote_text
 					continue
-			if (listener.client || isnpc(listener))
+			if (listener.client)
 				listener.create_superfan(20, owner, emote_text)
 				super_fans++
-				listener.visible_message("[listener][newEmote]")
 				continue
-
-		// Quick Fire Cosmetics for each Listener, only last for two seconds.
+			if (isnpc(listener))
+				listener.create_superfan(60, owner, emote_text)
+				super_fans++
+				to_chat()
+				continue
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
-
-	to_chat(owner, span_warning("You feel your voice resonate with [emotion], lets hope your words carry it too. You affected [totalListeners] member(s) of the crowd with [emotion], and now have [super_fans] more Superfans!"))
-	message_admins("[ADMIN_LOOKUPFLW(owner)] used Madrigal, a Melpominee 3 Power: Roll : [casterRoll], Emotion : [emotion], Song : '[song].',  Mobs Affected: [totalListeners], SuperFans Made: [super_fans].")
-	log_game("[key_name(owner)] used Madrigal, Melpominee 3 Power: Roll : [casterRoll], Emotion : [emotion], Song : '[song].',  Mobs Affected: [totalListeners], SuperFans Made: [super_fans].")
+	to_chat(owner, span_warning("You feel your voice resonates with [sin_virtue]."))
+	message_admins("[ADMIN_LOOKUPFLW(owner)] used Madrigal, a Melpominee 3 Power: Roll : [casterRoll], sin_virtue : [sin_virtue], Song : '[song].',  Mobs Affected: [totalListeners], SuperFans Made: [super_fans].")
+	log_game("[key_name(owner)] used Madrigal, Melpominee 3 Power: Roll : [casterRoll], sin_virtue : [sin_virtue], Song : '[song].',  Mobs Affected: [totalListeners], SuperFans Made: [super_fans].")
 	SSblackbox.record_feedback("tally", "madrigal", 1, song)
 
 /datum/discipline_power/melpominee/madrigal/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-//SuperFan: NPCs and Players. Compelled to stay near caster.
+//SuperFan: NPCs and Players.
 /datum/component/superfan
 	parent_type = /datum/component
-	var/mob/living/_owner //The Fan
-	var/mob/living/superfan_target //The Star
-	var/superfan_active = FALSE //for outside checks
-	var/superfan_emotion //repeated emote string
-	var/superfan_duration //Length
-
+	var/mob/living/_owner
+	var/mob/living/superfan_target
+	var/superfan_active = FALSE
+	var/superfan_sin_virtue
+	var/superfan_duration
 /datum/component/superfan/Initialize(mob/living/M)
 	. = ..()
 	_owner = M
-
-/datum/component/superfan/proc/start(duration, mob/living/target, emotion)
+/datum/component/superfan/proc/start(duration, mob/living/target, sin_virtue)
 	if (superfan_active)
 		return
 	superfan_active = TRUE
 	superfan_target = target
-	superfan_emotion = emotion
+	superfan_sin_virtue = sin_virtue
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(superfan_behavior))
 	for (var/i in 1 to (duration * 2))
 		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(end)), duration * 1 SECONDS)
-
 /datum/component/superfan/proc/superfan_behavior()
 	var/distance = get_dist(_owner, superfan_target)
-
 	if (isnpc(_owner)) //NPC
 		var/mob/living/carbon/human/npc/N
 		N = _owner
@@ -388,22 +332,20 @@
 		if (distance <= 1)
 			N.walktarget = superfan_target
 		if (prob(2))
-			N.emote(superfan_emotion)
-
+			N.emote(superfan_sin_virtue)
 	if(_owner.client) //Player Client
 		var/mob/living/carbon/human/P
-		if (distance > 2)
+		if (distance > 3)
 			P.walk_to_caster(superfan_target)
 		if (prob(1))
-			P.emote(superfan_emotion)
-
+			P.emote(superfan_sin_virtue)
 /datum/component/superfan/proc/end()
 	superfan_active = FALSE
 	superfan_target = null
 	if (isnpc(_owner))
 		var/mob/living/carbon/human/npc/N = _owner
-		N.walktarget = N.ChoosePath()
 		N.staying = FALSE
+		N.walktarget = N.ChoosePath()
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
