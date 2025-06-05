@@ -3,6 +3,26 @@
 // WEAPONS
 //
 
+/datum/greyscale_config/cleric_mace
+	name = "Base Cleric Mace"
+	icon_file = 'icons/obj/weapons/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace.json'
+
+/datum/greyscale_config/cleric_mace_lefthand
+	name = "Base Held Cleric Mace, Left"
+	icon_file = 'icons/obj/weapons/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_lefthand.json'
+
+/datum/greyscale_config/cleric_mace_righthand
+	name = "Base Held Cleric Mace, Right"
+	icon_file = 'icons/obj/weapons/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_righthand.json'
+
+/datum/greyscale_config/cleric_mace_worn
+	name = "Base Worn Cleric Mace"
+	icon_file = 'icons/obj/weapons/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_worn.json'
+
 /datum/greyscale_config/cleric_mace/gold
 	name = "Gold Cleric Mace"
 	material_skin = /datum/material/gold
@@ -17,6 +37,26 @@
 	name = "Gold Held Cleric Mace, Right"
 	material_skin = /datum/material/gold
 	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_righthand_gold.json'
+
+/datum/greyscale_config/cleric_mace_worn/gold
+	name = "Gold Worn Cleric Mace"
+	icon_file = 'icons/obj/weapons/cleric_mace.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/cleric_mace_worn_gold.json'
+
+/datum/greyscale_config/ceremonial_blade
+	name = "Base Ceremonial Blade"
+	icon_file = 'icons/obj/weapons/ritual_weapon.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/ceremonial_blade.json'
+
+/datum/greyscale_config/ceremonial_blade_lefthand
+	name = "Base Held Ceremonial Blade, Left"
+	icon_file = 'icons/obj/weapons/ritual_weapon.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/ceremonial_blade_lefthand.json'
+
+/datum/greyscale_config/ceremonial_blade_righthand
+	name = "Base Held Ceremonial Blade, Right"
+	icon_file = 'icons/obj/weapons/ritual_weapon.dmi'
+	json_config = 'code/datums/greyscale/json_configs/items/ceremonial_blade_righthand.json'
 
 
 //
@@ -92,9 +132,6 @@
 	name = "Circuit Board"
 	icon_file = 'icons/obj/module.dmi'
 	json_config = 'code/datums/greyscale/json_configs/circuit.json'
-
-/datum/greyscale_config/janicart_upgrade/installed
-	json_config = 'code/datums/greyscale/json_configs/janicart_upgrade_installed.json'
 
 /datum/greyscale_config/flower_simple
 	name = "Flower"
