@@ -1302,12 +1302,9 @@
 	if (!C)
 		AddComponent(/datum/component/superfan)
 		C = GetComponent(/datum/component/superfan)
-		//message_admins("A Superfan component has been created.") // Debug
 		C.Initialize(src)
 		C.start(duration, target, emotion)
-
 	if (C)
-		//message_admins("Component already exsists, calling Superfan start().") // Debug
 		C.start(duration, target, emotion)
 
 

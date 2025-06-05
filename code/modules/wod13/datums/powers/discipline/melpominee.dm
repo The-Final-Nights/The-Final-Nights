@@ -139,6 +139,8 @@
 	song = ""
 	emotion = ""
 	super_fans = 0 //zeros out the super_fans variable, so it can be used again this cast.
+
+	//input
 	song = tgui_input_text(owner, "What are the words of your melodic voice, Madrigal?", "Madrigal:", FALSE, 500, TRUE, FALSE, 0)
 	if (!song || song == "")
 		to_chat(owner, span_warning("You must provide a song to sing!"))
@@ -172,7 +174,7 @@
 		to_chat(owner, span_warning("You feel your voice is not resonating, try again later."))
 		return FALSE
 
-	//Will move this soon, but for now, this is the best place to put it.
+	//Emotional Filter
 	if (emotion in list("awe", "admiration", "wonder", "amazement", "astonishment", "marvel"))
 		newEmote = " looks at [owner] in [emotion]."
 		emote_text = pick("stare")
@@ -266,7 +268,7 @@
 		to_chat(owner, span_warning("Invalid emotion: Try: awe, anger, confusion, desire, disgust, elation, empathy, envy, panic, humor, joy, love, pride, relief, sadness, shame, surprise, trust"))
 		return FALSE
 
-	//Range, captures all listeners.
+	//Range: Lists all listeners.
 	all_listeners = list()
 	if(!isYelling)
 		for (var/mob/living/carbon/human/listener in oviewers(7, owner))
@@ -278,34 +280,30 @@
 			if (listener.stat == DEAD)
 				continue
 			all_listeners += listener
-
 	spend_resources()
 
 /datum/discipline_power/melpominee/madrigal/activate()
 	. = ..()
 	owner.say( song, forced = "melpominee 3")
-	to_chat(owner, span_warning("You feel your voice resonate with [emotion], lets hope your words carry it too."))
-	//Listeners Roll to Save
 	var/totalListeners = 0
 	var/base_difficulty = 6
-	//Caster Improvements:
-	//If caster is playing an instrument, the difficulty is raised for listeners?
 
-	//Resistance Rolls:
+	//Listener Resistance Rolls:
 	for (var/mob/living/carbon/human/listener in all_listeners)
 		totalListeners++
-		var/botched_roll = FALSE //used to make Superfans.
+		var/botched_roll = FALSE //Used to make Superfans.
 		if (isnpc(listener))
-			base_difficulty += 2 //NPCs are easier to affect.
+			base_difficulty += 2
 		if (iskindred(listener))
-			base_difficulty -= 2 //4
+			base_difficulty -= 2
 		if (isgarou(listener))
-			base_difficulty -= 2 //4
+			base_difficulty -= 2
 		var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
 
-		if (targetRoll <= 0) //Botched Roll, makes a superfan, intense emotion, follow behaviors.
-			botched_roll = TRUE //Will be a Superfan.
+		if (targetRoll <= 0) //Botched Roll
+			botched_roll = TRUE
 			to_chat(listener, span_warning("You are completely overwhelmed with [emotion] and you can't seem to leave [owner]'s side..."))
+
 		if (!botched_roll) //Contested Roll, Casters Social vs Listener's Mentality.
 			if (targetRoll >= casterRoll) // Success, senses the emotion mildly, but resists. No forced emote.
 				to_chat(listener, span_notice("You resist any emotional pull of [owner]'s voice of [emotion], but their voice still may hold weight."))
@@ -313,44 +311,33 @@
 				continue
 			if (targetRoll < casterRoll) // Failure, senses the emotion with more intensity. One forced emote.
 				to_chat(listener, span_danger("You feel [emotion] fill your mind, and [owner]'s voice guides it."))
-				listener.emote(emote_text)
+				listener.emote(emote_text) //only once
 				listener.visible_message(span_userdanger("[client_feedback]"))
 				continue
 
-		// Superfan Limiter/Creator: Superfans, can be players or NPCs.
-		//Create superfans, is a behavior that starts and ends itself. Short time for clients, longer for NPCs.
-		//Players will be drawn to the caster if they leave a certain range, retaining control.
+		// Superfan Limiter/Creator: Superfans, can be Players or NPCs.
 		if (super_fans < super_fan_perCast && botched_roll)
 			if (istype(listener, /mob/living/carbon/human))
 				var/datum/component/superfan/SF = listener.GetComponent(/datum/component/superfan)
-				if (SF && SF.superfan_active)
+				if (SF && SF.superfan_active) //Skips Active Superfans
+					SF.superfan_emotion = emote_text //updates exsisting fans mood to current cast.
+					listener.visible_message("[listener][newEmote]")
 					continue
-			if (listener.client) //is player
-				listener.emote(emote_text)
-				listener.create_superfan(10, owner, emote_text)
+			if (listener.client || isnpc(listener))
+				listener.create_superfan(20, owner, emote_text)
 				super_fans++
 				listener.visible_message("[listener][newEmote]")
 				continue
-			if (isnpc(listener)) //is an NPC
-				listener.emote(emote_text)
-				listener.create_superfan(30, owner, emote_text) // NPCs get a longer Superfan duration.
-				super_fans++
-				listener.visible_message("[listener][newEmote]")
-				continue
-			else //its human so...
-				listener.emote(emote_text)
-				listener.create_superfan(10, owner, emote_text)
-				super_fans++
-				listener.visible_message("[listener][newEmote]")
 
-		// Quick Fire Cosmetics, soung and showing who is affected, for two seconds.
+
+		// Quick Fire Cosmetics for each Listener, only last for two seconds.
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
 
-	to_chat(owner, span_warning("You affected [totalListeners] member(s) of the crowd with [emotion], and now have [super_fans] more Superfans!"))
+	to_chat(owner, span_warning("You feel your voice resonate with [emotion], lets hope your words carry it too. You affected [totalListeners] member(s) of the crowd with [emotion], and now have [super_fans] more Superfans!"))
 	message_admins("[ADMIN_LOOKUPFLW(owner)] used Madrigal, a Melpominee 3 Power: Roll : [casterRoll], Emotion : [emotion], Song : '[song].',  Mobs Affected: [totalListeners], SuperFans Made: [super_fans].")
 	log_game("[key_name(owner)] used Madrigal, Melpominee 3 Power: Roll : [casterRoll], Emotion : [emotion], Song : '[song].',  Mobs Affected: [totalListeners], SuperFans Made: [super_fans].")
 	SSblackbox.record_feedback("tally", "madrigal", 1, song)
@@ -359,22 +346,18 @@
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-
+//SuperFan: NPCs and Players. Compelled to stay near caster.
 /datum/component/superfan
 	parent_type = /datum/component
 	var/mob/living/_owner //The Fan
 	var/mob/living/superfan_target //The Star
-	var/superfan_active = FALSE
-	var/superfan_emotion
-	var/superfan_duration
+	var/superfan_active = FALSE //for outside checks
+	var/superfan_emotion //repeated emote string
+	var/superfan_duration //Length
 
 /datum/component/superfan/Initialize(mob/living/M)
 	. = ..()
 	_owner = M
-	if (!_owner)
-		//message_admins("Superfan Initialize failed: no owner.")
-	else
-		//message_admins("[ADMIN_LOOKUPFLW(_owner)] Superfan component initialized.")
 
 /datum/component/superfan/proc/start(duration, mob/living/target, emotion)
 	if (superfan_active)
@@ -382,9 +365,6 @@
 	superfan_active = TRUE
 	superfan_target = target
 	superfan_emotion = emotion
-
-	//message_admins("[ADMIN_LOOKUPFLW(_owner)] Superfan effect STARTED for [duration]s.") //Debug
-
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(superfan_behavior))
 	for (var/i in 1 to (duration * 2))
 		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
@@ -392,18 +372,24 @@
 
 /datum/component/superfan/proc/superfan_behavior()
 	var/distance = get_dist(_owner, superfan_target)
-	if (isnpc(_owner))
+
+	if (isnpc(_owner)) //NPC
 		var/mob/living/carbon/human/npc/N
 		N = _owner
+		N.staying = TRUE
 		if (distance > 2)
 			N.walk_to_caster(superfan_target)
-			N.staying = TRUE
 		if (distance <= 1)
 			N.walktarget = superfan_target
-			N.staying = TRUE
-		if (prob(3))
+		if (prob(2))
 			N.emote(superfan_emotion)
 
+	if(_owner.client) //Player Client
+		var/mob/living/carbon/human/P
+		if (distance > 2)
+			P.walk_to_caster(superfan_target)
+		if (prob(1))
+			P.emote(superfan_emotion)
 
 /datum/component/superfan/proc/end()
 	superfan_active = FALSE
@@ -412,8 +398,6 @@
 		var/mob/living/carbon/human/npc/N = _owner
 		N.walktarget = N.ChoosePath()
 		N.staying = FALSE
-	message_admins("Superfan effect has ended.") // Debug
-
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
