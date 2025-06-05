@@ -22,7 +22,7 @@
 		to_chat(H, span_cult("Only the Ductus or the Priest may call a War Party from the Totem!"))
 		return
 
-	var/choice = tgui_alert(H, "Do you wish to summon all Sabbat in the city to the Sabbat lair for the purposes of a War Party?", "War Party", list("Yes", "No"), 10 SECONDS)
+	var/choice = tgui_alert(H, "Do you wish to send a message to all Sabbat in the city instructing them to return to the Sabbat lair?", "Return", list("Yes", "No"), 10 SECONDS)
 	if(choice == "Yes")
 		activations++
 		var/success_chance = max(0, 100 - (activations - 1) * 33) // Reduce by 33% for each activation after the first
