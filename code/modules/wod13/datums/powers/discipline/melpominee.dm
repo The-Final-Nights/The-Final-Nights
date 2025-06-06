@@ -136,7 +136,7 @@
 	var/isYelling = FALSE
 	super_fans = 0
 	song = tgui_input_text(owner, ":: Elegant Words Laced with Sin / Virtue ::", "Madrigal: Melodic Voice/Song", FALSE, 500, TRUE, FALSE, 0)
-	if (!song , song == "")
+	if (song == "")
 		to_chat(owner, span_warning("You must provide an answer..."))
 		return FALSE
 	if (findtext(song, "!"))
@@ -155,7 +155,7 @@
 		return FALSE
 	sin_virtue = tgui_input_text(owner, ":: Enter One Deadly Sin or Heavenly Virtue :: Your words should support this theme.", ":Madrigal: Project a Sin or Virtue:", FALSE, 500, TRUE, FALSE, 0)
 	sin_virtue = lowertext(trim(sin_virtue))
-	if (!sin_virtue , sin_virtue == "")
+	if (sin_virtue == "")
 		to_chat(owner, span_warning("You must provide an answer..."))
 		return FALSE
 	casterRoll = SSroll.storyteller_roll(owner.get_total_social(), mobs_to_show_output = owner, numerical = TRUE)
@@ -268,7 +268,10 @@
 				base_difficulty -= 3
 				to_chat(listener, span_notice("You sense [owner]'s melodic voice is full of candy coated sin..."))
 		var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
-		if (targetRoll < 0 , isnpc(listener) && casterRoll >= 3) // Botched, npcs don't have wisdom.
+		botched_roll = FALSE
+		if (isnpc(listener) && casterRoll >= 3) // Botched, npcs don't have wisom.
+			botched_roll = TRUE
+		if (targetRoll < 0) // Botched, npcs don't have wisom.
 			botched_roll = TRUE
 		if (targetRoll > casterRoll && !botched_roll) // Success
 			to_chat(listener, span_notice("You resist the pull of [owner]'s melodic voice. The feelings of [sin_virtue] their words project don't take hold of you, but linger..."))
