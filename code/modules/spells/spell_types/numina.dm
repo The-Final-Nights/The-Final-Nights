@@ -7,8 +7,7 @@
 	clothes_req = FALSE
 	charge_max = 100
 	cooldown_min = 50
-	invocation = "Sancta Lux, corpus redintegra, animam sana."
-	invocation_type = INVOCATION_WHISPER
+	invocation_type = "none"
 	school = "Boni Spiritus"
 	sound = 'sound/magic/staff_healing.ogg'
 
@@ -24,8 +23,7 @@
 	clothes_req = FALSE
 	charge_max = 100
 	cooldown_min = 50
-	invocation = "Lacrimae Martyris!"
-	invocation_type = INVOCATION_WHISPER
+	invocation_type = "none"
 	school = "Boni Spiritus"
 	range = 5
 
