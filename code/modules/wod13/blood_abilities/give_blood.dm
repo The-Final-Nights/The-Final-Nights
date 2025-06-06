@@ -1,8 +1,3 @@
-/*
-// This entire file is where all of blood bond code will be located.
-// Im sorry in advance.
-*/
-
 /datum/action/give_vitae
 	name = "Give Vitae"
 	desc = "Give your vitae to someone, make the Blood Bond."

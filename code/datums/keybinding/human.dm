@@ -89,6 +89,5 @@
 	if(!COOLDOWN_FINISHED(src, bite_cooldown))
 		return
 	COOLDOWN_START(src, bite_cooldown, 3 SECONDS)
-	if(ishuman(user.mob.pulling))
-		var/mob/living/carbon/human/PB = user.mob.pulling
-	attempt_bite(user.mob)
+	var/victim = user.mob?.pulling
+	user.mob.attempt_bite(victim)
