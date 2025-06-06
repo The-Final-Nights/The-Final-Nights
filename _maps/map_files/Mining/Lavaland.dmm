@@ -1139,10 +1139,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"mn" = (
-/obj/structure/table/wood,
-/turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
 "mo" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/carpet{
@@ -3170,10 +3166,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"Iz" = (
-/obj/structure/table,
-/turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
 "IG" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -4076,11 +4068,6 @@
 /turf/open/floor/plating/sidewalkalt{
 	umbra = 1
 	},
-/area/vtm/interior/penumbra)
-"TI" = (
-/obj/structure/vamptree/pine,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "TK" = (
 /obj/effect/decal/remains/human,
@@ -22446,7 +22433,7 @@ qF
 qF
 dC
 dO
-TI
+rP
 bJ
 qF
 qF
@@ -26702,7 +26689,7 @@ qF
 tD
 tD
 tD
-Iz
+tD
 yU
 yU
 SS
@@ -28480,7 +28467,7 @@ ox
 ox
 ox
 XC
-mn
+kS
 kS
 qF
 qF
@@ -34716,7 +34703,7 @@ qF
 ss
 tD
 tD
-Iz
+tD
 yU
 yU
 yU
