@@ -28,7 +28,6 @@
 	playsound(loc, 'code/modules/wod13/sounds/necromancy1on.ogg', 50, FALSE)
 	var/mob/living/carbon/victim = pick(valid_bodies)
 
-	var/isNPC = TRUE
 	var/permission = tgui_input_list(victim, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"No", 1 MINUTES)
 	var/victim_two = victim
 
@@ -50,14 +49,12 @@
 		//discount scanner
 		to_chat(usr, span_notice("<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]"))
 		to_chat(usr, span_notice("Last melee attacker: [victim.lastattacker]")) //guns behave weirdly
-		isNPC = FALSE
 		qdel(src)
 
 	else if(permission == "No")
 		to_chat(usr, span_danger("The wraith turns from you. It will not surrender its secrets."))
-		isNPC = FALSE
 
-	if(isNPC)
+	if(isnpc(victim))
 		to_chat(usr, span_notice("[victim.name] is a waning, base Drone. There is no greater knowledge to gleam from this one."))
 		to_chat(usr, span_notice("<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]"))
 		to_chat(usr, span_notice("Last melee attacker: [victim.lastattacker]"))
