@@ -24,6 +24,46 @@
 
 	cooldown_length = 5 SECONDS
 
+/datum/discipline/melpominee/post_gain()
+	. = ..()
+	if(level >= 3)
+		RegisterSignal(owner, COMSIG_MOB_EMOTE, PROC_REF(on_snap))
+
+/datum/discipline/melpominee/proc/on_snap(atom/source, datum/emote/emote_args)
+	SIGNAL_HANDLER
+	INVOKE_ASYNC(src, PROC_REF(handle_sf_snap), source, emote_args)
+
+/datum/discipline/melpominee/proc/handle_sf_snap(atom/source, datum/emote/emote_args)
+	var/list/emote_list = list("snap", "snap2", "snap3", "whistle")
+	if(!emote_list.Find(emote_args.key))
+		return
+	// Look for all nearby mobs who can hear
+	for (var/mob/living/carbon/human/target in get_hearers_in_view(6, owner))
+		var/datum/component/superfan/SF = target.GetComponent(/datum/component/superfan)
+		if (!SF)
+			continue // skip if they're not a superfan
+		switch(emote_args.key)
+			if("snap")
+				target.SetSleeping(0)
+				target.silent = 3
+				target.dir = get_dir(target, owner)
+				target.emote("me", 1, "faces towards <b>[owner]</b> attentively.", TRUE)
+				to_chat(target, span_danger("ATTENTION"))
+			if("snap2")
+				target.dir = get_dir(target, owner)
+				target.Immobilize(50)
+				target.emote("me",1,"flinches in response to <b>[owner]'s</b> snapping.", TRUE)
+				to_chat(target, span_danger("HALT"))
+			if("snap3")
+				target.Knockdown(50)
+				target.Immobilize(80)
+				target.emote("me",1,"'s knees buckle under the weight of their body.",TRUE)
+				target.do_jitter_animation(0.1 SECONDS)
+				to_chat(target, span_danger("DROP"))
+			if("whistle")
+				target.apply_status_effect(STATUS_EFFECT_AWE, owner)
+				to_chat(target, span_danger("HITHER"))
+
 /datum/discipline_power/melpominee/the_missing_voice/activate(atom/movable/target)
 	. = ..()
 	var/new_say = tgui_input_text(owner, "What will [target] say?", "The Missing Voice:", FALSE, 500, TRUE, FALSE, 0)
@@ -286,6 +326,8 @@
 				var/datum/component/superfan/SF = listener.GetComponent(/datum/component/superfan)
 				if (SF && SF.superfan_active)
 					SF.superfan_emote = emote_text //updates current fans to match emotion
+					to_chat(listener, span_danger("You lose yourself in primal feelings of [sin_virtue]."))
+					listener.visible_message(span_notice("[listener] seems to give in to feelings of [sin_virtue]."))
 					continue
 			if (listener.client)
 				listener.create_superfan(20, owner, emote_text)
@@ -315,15 +357,13 @@
 
 //SuperFan Component: NPCs and Players.
 /datum/component/superfan
-	parent_type = /datum/component
-	var/mob/living/_owner
 	var/mob/living/superfan_target
 	var/superfan_active = FALSE
 	var/superfan_emote
 	var/superfan_duration
-/datum/component/superfan/Initialize()
+/datum/component/superfan/Initialize(superfan_duration, mob/living/target, sin_virtue)
+	start(superfan_duration, target, sin_virtue)
 	. = ..()
-	_owner = M
 /datum/component/superfan/proc/start(duration, mob/living/target, sin_virtue)
 	if (superfan_active)
 		return
@@ -335,30 +375,32 @@
 		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(end)), duration * 1 SECONDS)
 /datum/component/superfan/proc/superfan_behavior()
-	var/distance = get_dist(_owner, superfan_target)
-	if (isnpc(_owner)) //NPC
-		var/mob/living/carbon/human/npc/N
-		N = _owner
+	var/distance = get_dist(src, superfan_target)
+	var/mob/living/carbon/human/SF = parent
+	if (isnpc(SF)) //NPC
+		var/mob/living/carbon/human/npc/N = SF
 		N.staying = TRUE
-		if (distance > 2)
-			N.walk_to_caster(superfan_target)
-		if (distance <= 1)
-			N.walktarget = superfan_target
+		if (distance > 5)
+			SF.walk_to_caster(superfan_target)
+		if (distance <= 2)
+			SF.face_atom(superfan_target)
 		if (prob(2))
-			N.emote(superfan_emote)
-	if(_owner.client) //Player Client
-		var/mob/living/carbon/human/P
-		if (distance > 3)
-			P.walk_to_caster(superfan_target)
+			SF.emote(superfan_emote)
+	if(SF.client) //Player Client
+		if (distance > 5)
+			SF.walk_to_caster(superfan_target)
 		if (prob(1))
-			P.emote(superfan_emote)
+			SF.emote(superfan_emote)
 /datum/component/superfan/proc/end()
-	superfan_active = FALSE
-	superfan_target = null
-	if (isnpc(_owner))
-		var/mob/living/carbon/human/npc/N = _owner
+	if(!QDELETED(src))
+		qdel(src)
+/datum/component/superfan/Destroy()
+	if (isnpc(parent))
+		var/mob/living/carbon/human/npc/N = parent
 		N.staying = FALSE
 		N.walktarget = N.ChoosePath()
+	message_admins("SUPERFAN Destroyed")
+	..()
 
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
@@ -376,14 +418,11 @@
 	for(var/mob/living/carbon/human/listener in oviewers(7, owner))
 		listenerCount++
 		listener.Stun(4 SECONDS)
-
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
-
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
-
 	message_admins("[ADMIN_LOOKUPFLW(owner)] used sirens_beckoning, stunning all [listenerCount] mobs in range for 4 seconds.")
 	log_game("[key_name(owner)]  used sirens_beckoning, stunning [listenerCount] mobs in range with for 4 seconds.")
 	SSblackbox.record_feedback("tally", "sirens beckoning", 1, "affected listeners [listenerCount]")
@@ -396,12 +435,9 @@
 /datum/discipline_power/melpominee/shattering_crescendo
 	name = "Shattering Crescendo"
 	desc = "Scream at an unnatural pitch, shattering the bodies of your enemies."
-
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
-
 	effect_sound = 'code/modules/wod13/sounds/killscream.ogg'
-
 	duration_length = 2 SECONDS
 	cooldown_length = 7.5 SECONDS
 	duration_override = TRUE
@@ -413,14 +449,11 @@
 		listenerCount++
 		listener.Stun(2 SECONDS)
 		listener.apply_damage(50, BRUTE, BODY_ZONE_HEAD)
-
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
 		listener.overlays_standing[MUTATIONS_LAYER] = song_overlay
 		listener.apply_overlay(MUTATIONS_LAYER)
-
 		addtimer(CALLBACK(src, PROC_REF(deactivate), listener), 2 SECONDS)
-
 	message_admins("[ADMIN_LOOKUPFLW(owner)] used shattering_cresendo, affecting [listenerCount] mobs in range with 50 Brute damage.")
 	log_game("[key_name(owner)]  used shattering_cresendo, affecting [listenerCount] mobs in range with 50 Brute damage.")
 	SSblackbox.record_feedback("tally", "shattering crescendo", 1, "affected listeners [listenerCount]")

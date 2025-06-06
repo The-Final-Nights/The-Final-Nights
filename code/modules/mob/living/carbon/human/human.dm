@@ -1297,16 +1297,8 @@
 	equip_to_slot_or_del(new /obj/item/clothing/under/vampire/bouncer(src), ITEM_SLOT_ICLOTHING)
 	equip_to_slot_or_del(new /obj/item/clothing/suit/vampire/trench/alt(src), ITEM_SLOT_OCLOTHING)
 
-/mob/living/carbon/human/proc/create_superfan(duration, mob/living/target, sin_virtue)
-	var/datum/component/superfan/C = GetComponent(/datum/component/superfan)
-	if (!C)
-		AddComponent(/datum/component/superfan)
-		C = GetComponent(/datum/component/superfan)
-		C.Initialize(src)
-		C.start(duration, target, sin_virtue)
-	if (C)
-		C.start(duration, target, sin_virtue)
-
+/mob/living/carbon/human/proc/create_superfan(superfan_duration, mob/living/target, sin_virtue)
+	AddComponent(/datum/component/superfan, superfan_duration, target, sin_virtue)
 
 /mob/living/carbon/human/species/abductor
 	race = /datum/species/abductor
