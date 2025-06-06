@@ -135,7 +135,6 @@
 /obj/item/reagent_containers/blood/elite/Initialize(mapload)
 	if(mapload)
 		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
-	update_appearance()
 	return ..()
 
 /obj/item/reagent_containers/blood/vitae
@@ -146,7 +145,6 @@
 /obj/item/reagent_containers/blood/vitae/Initialize(mapload)
 	if(mapload)
 		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
-	update_appearance()
 	return ..()
 
 /obj/item/reagent_containers/blood/random
@@ -154,7 +152,6 @@
 /obj/item/reagent_containers/blood/random/Initialize(mapload)
 	if(mapload)
 		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
-	update_appearance()
 	return ..()
 
 /obj/item/reagent_containers/blood/bweedpack
