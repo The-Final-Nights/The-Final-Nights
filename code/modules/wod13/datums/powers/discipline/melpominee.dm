@@ -371,8 +371,8 @@
 	superfan_target = target
 	superfan_emote = sin_virtue
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(superfan_behavior))
-	for (var/i in 1 to (duration * 2))
-		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
+	for (var/i in 1 to (duration))
+		addtimer(follow_cb, (i - 1) * 1 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(end)), duration * 1 SECONDS)
 /datum/component/superfan/proc/superfan_behavior()
 	var/distance = get_dist(src, superfan_target)
@@ -382,10 +382,9 @@
 		N.staying = TRUE
 		if (distance > 5)
 			SF.walk_to_caster(superfan_target)
-		if (distance <= 2)
-			SF.face_atom(superfan_target)
-		if (prob(2))
-			SF.emote(superfan_emote)
+		if (distance < 2)
+			if (prob(2))
+				SF.emote(superfan_emote)
 	if(SF.client) //Player Client
 		if (distance > 5)
 			SF.walk_to_caster(superfan_target)
@@ -399,7 +398,6 @@
 		var/mob/living/carbon/human/npc/N = parent
 		N.staying = FALSE
 		N.walktarget = N.ChoosePath()
-	message_admins("SUPERFAN Destroyed")
 	..()
 
 //SIREN'S BECKONING
