@@ -1,0 +1,64 @@
+// **************************************************************** INSIGHT *************************************************************
+
+/obj/necrorune/insight
+	name = "Insight"
+	desc = "Determine a cadaver's passing by questioning its soul."
+	icon_state = "rune6"
+	word = "IH'DET ULYSS RES'SAR"
+	necrolevel = 2
+
+/obj/necrorune/insight/complete()
+
+	var/list/valid_bodies = list()
+
+	for(var/mob/living/carbon/human/targetbody in loc)
+		if(targetbody == usr)
+			to_chat(usr, span_warning("You cannot invoke this ritual upon yourself."))
+			return
+		else if(targetbody.stat == DEAD)
+			valid_bodies += targetbody
+		else
+			to_chat(usr, span_warning("The target lives still! Ask them yourself!"))
+			return
+
+	if(valid_bodies.len < 1)
+		to_chat(usr, span_warning("There is no body that can undergo this Ritual."))
+		return
+
+	playsound(loc, 'code/modules/wod13/sounds/necromancy1on.ogg', 50, FALSE)
+	var/mob/living/carbon/victim = pick(valid_bodies)
+
+	var/isNPC = TRUE
+	var/permission = tgui_input_list(victim, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"No", 1 MINUTES)
+	var/victim_two = victim
+
+	if (!permission) //returns null if no soul in body
+		for (var/mob/dead/observer/ghost in GLOB.player_list)
+			if (ghost.mind == victim.last_mind)
+				//ask again if null
+				permission = tgui_input_list(ghost, "[usr.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall") ,"No", 1 MINUTES)
+				victim_two = ghost
+				break //no need to do further iterations if you found the right person
+
+	if(permission == "Yes")
+		to_chat(usr, span_ghostalert("[victim.name]'s haunting whispers flood your mind..."))
+		var/deathdesc = tgui_input_text(victim_two, "", "How did you die?", "", 300, TRUE, TRUE, 5 MINUTES)
+		if (deathdesc == "")
+			to_chat(usr, span_warning("The Shroud is too thick, their whispers too raving to gleam anything useful."))
+		else
+			to_chat(usr, span_ghostalert("<i>[deathdesc]</i>"))
+		//discount scanner
+		to_chat(usr, span_notice("<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]"))
+		to_chat(usr, span_notice("Last melee attacker: [victim.lastattacker]")) //guns behave weirdly
+		isNPC = FALSE
+		qdel(src)
+
+	else if(permission == "No")
+		to_chat(usr, span_danger("The wraith turns from you. It will not surrender its secrets."))
+		isNPC = FALSE
+
+	if(isNPC)
+		to_chat(usr, span_notice("[victim.name] is a waning, base Drone. There is no greater knowledge to gleam from this one."))
+		to_chat(usr, span_notice("<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]"))
+		to_chat(usr, span_notice("Last melee attacker: [victim.lastattacker]"))
+		qdel(src)
