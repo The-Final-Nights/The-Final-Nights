@@ -81,6 +81,8 @@
 #define COMSIG_ATOM_UPDATE_ICON_STATE "atom_update_icon_state"
 ///from base of [/atom/update_overlays]: (list/new_overlays)
 #define COMSIG_ATOM_UPDATE_OVERLAYS "atom_update_overlays"
+///from base of [/atom/update_greyscale]: (list/colors)
+#define COMSIG_ATOM_UPDATE_GREYSCALE "atom_update_greyscale"
 ///from base of [/atom/update_icon]: (signalOut, did_anything)
 #define COMSIG_ATOM_UPDATED_ICON "atom_updated_icon"
 #define COMSIG_ATOM_SET_SMOOTHED_ICON_STATE "set_smoothed_icon_state"
@@ -1073,3 +1075,5 @@
 #define COMSIG_AQUARIUM_BEFORE_INSERT_CHECK "aquarium_about_to_be_inserted"
 #define COMSIG_AQUARIUM_SURFACE_CHANGED "aquarium_surface_changed"
 #define COMSIG_AQUARIUM_FLUID_CHANGED "aquarium_fluid_changed"
+
+#define COMSIG_GREYSCALE_CONFIG_REFRESHED "greyscale_config_refreshed"
