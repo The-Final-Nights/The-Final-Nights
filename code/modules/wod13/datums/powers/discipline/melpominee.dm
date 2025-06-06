@@ -113,7 +113,7 @@
 //MADRIGAL
 /datum/discipline_power/melpominee/madrigal
 	name = "Madrigal"
-	desc = "Project raw emotion into nearby minds through your melodic voice, inspiring compelling sinful or virtuos reactions."
+	desc = "Project raw emotion into nearby minds through your melodic voice, inspiring compelling sinful or virtuous reactions."
 	level = 3
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_SPEAK
 	target_type = NONE
@@ -127,7 +127,7 @@
 	var/isSin = FALSE
 	var/casterRoll = 0
 	var/emote_text = ""
-	var/super_fan_perCast = 5
+	var/super_fan_perCast = 3
 	var/super_fans = 0
 /datum/discipline_power/melpominee/madrigal/pre_activation_checks()
 	. = ..()
@@ -135,7 +135,7 @@
 	sin_virtue = ""
 	var/isYelling = FALSE
 	super_fans = 0
-	song = tgui_input_text(owner, "What words fill your voice with sin or virtue?", "Madrigal: Melodic Voice/Song", FALSE, 500, TRUE, FALSE, 0)
+	song = tgui_input_text(owner, ":: Elegant Words Laced with Sin / Virtue ::", "Madrigal: Melodic Voice/Song", FALSE, 500, TRUE, FALSE, 0)
 	if (!song || song == "")
 		to_chat(owner, span_warning("You must provide an answer..."))
 		return FALSE
@@ -163,6 +163,7 @@
 		to_chat(owner, span_warning("You feel your voice is not resonating, try again later."))
 		return FALSE
 
+	//Sins & Virtues
 	if(!(sin_virtue in list("humility", "kindness", "patience", "charity", "chastity", "diligence", "gratitude", "pride", "envy", "wrath", "sloth", "greed", "lust", "gluttony")))
 		to_chat(owner, span_warning("You must enter a Heavenly Virtue or Deadly Sin; humility, kindness, patience, charity, chastity, diligence, gratitude, pride, envy, wrath, sloth, greed, lust, gluttony."))
 		return FALSE
@@ -170,7 +171,6 @@
 		isSin = FALSE
 	if (sin_virtue in list("pride", "envy", "wrath", "sloth", "greed", "lust", "gluttony"))
 		isSin = TRUE
-	//Sins & Virtues
 	var/found_sin_virtue = FALSE
 	if (sin_virtue == ("humility") && !found_sin_virtue)
 		sin_virtue = pick("humility", "modesty", "meekness", "selflessness")
@@ -243,48 +243,58 @@
 	. = ..()
 	owner.say( song, forced = "melpominee 3")
 	var/totalListeners = 0
-	var/base_difficulty = 5
+	var/base_difficulty = 4
 	for (var/mob/living/carbon/human/listener in all_listeners)
 		totalListeners++
 		var/botched_roll = FALSE
 		if (isnpc(listener))
-			base_difficulty += 1
-		if (iskindred(listener))
 			base_difficulty -= 1
+		if (iskindred(listener))
+			var/datum/species/kindred/kindred_data = listener.dna.species
+			if (listener.morality_path.score > 6 && isSin)
+				if(!kindred_data.clane.is_enlightened) //Humanity
+					base_difficulty -= 2
+				if(kindred_data.clane.is_enlightened) //Enlightenment
+					base_difficulty += 2
+			if (listener.morality_path.score > 6 && !isSin)
+				if(!kindred_data.clane.is_enlightened) //Humanity
+					base_difficulty += 2
+				if(kindred_data.clane.is_enlightened) //Enlightenment
+					base_difficulty -= 2
 		if (isgarou(listener))
 			base_difficulty -= 1
-		if(listener.mind)
+		if(listener.mind) //Hunter and Priest Sin Resistance
 			if (listener.mind.holy_role == HOLY_ROLE_PRIEST && isSin) //Have to roll EXTREMELY poorly to fail.
 				base_difficulty -= 3
+				to_chat(listener, span_notice("You sense [owner]'s melodic voice is full of candy coated sin..."))
 		var/targetRoll = SSroll.storyteller_roll(listener.get_total_mentality(), base_difficulty, numerical = TRUE, mobs_to_show_output = listener)
-		if (targetRoll <= 0) // Botched Target Roll
+		if (targetRoll < 0 || isnpc(listener) && casterRoll >= 3) // Botched, npcs don't have wisdom.
 			botched_roll = TRUE
-			to_chat(listener, span_danger("You lose yourself in the [sin_virtue] stirred by [owner]'s voice — all reason slipping away."))
-			listener.visible_message(span_notice("[owner]'s voice overwhelms [listener], who appears completely lost in [sin_virtue]."))
-		if (!botched_roll) // Contested Rolls
-			if (targetRoll >= casterRoll) // Success
-				to_chat(listener, span_notice("You resist the pull of [owner]'s melodic voice. The [sin_virtue] they project doesn't take hold, but it lingers."))
-				listener.visible_message(span_notice("[listener] visibly wavers, but resists the full weight of [owner]'s [sin_virtue]."))
-				continue
-			if (targetRoll < casterRoll) // Failure
-				to_chat(listener, span_danger("The sound of [owner]'s voice strikes deep — [sin_virtue] rises within you, undeniable and fierce."))
-				listener.emote(emote_text)
-				listener.visible_message(span_notice("[listener] shows a clear reaction to [owner]'s voice — [sin_virtue] written on their face."))
-				continue
-		if (super_fans < super_fan_perCast && botched_roll)
+		if (targetRoll > casterRoll && !botched_roll) // Success
+			to_chat(listener, span_notice("You resist the pull of [owner]'s melodic voice. The feelings of [sin_virtue] their words project don't take hold of you, but linger..."))
+			continue
+		if (targetRoll <= casterRoll && !botched_roll) // Failure
+			to_chat(listener, span_danger("The sound of [owner]'s voice strikes something deep and primal within you — [sin_virtue] rises within you, undeniable and fierce."))
+			listener.emote(emote_text)
+			listener.visible_message(span_notice("[listener] shows hints of [sin_virtue]."))
+			continue
+		if (super_fans < super_fan_perCast && botched_roll) //Superfan Generator
 			if (istype(listener, /mob/living/carbon/human))
 				var/datum/component/superfan/SF = listener.GetComponent(/datum/component/superfan)
 				if (SF && SF.superfan_active)
-					SF.superfan_sin_virtue = emote_text
+					SF.superfan_emote = emote_text //updates current fans to match emotion
 					continue
 			if (listener.client)
 				listener.create_superfan(20, owner, emote_text)
 				super_fans++
+				to_chat(listener, span_danger("You lose yourself in primal feelings of [sin_virtue] stirred by [owner]'s voice, and are compelled to hear more."))
+				listener.visible_message(span_notice("[listener] seems to give in to feelings of [sin_virtue]."))
 				continue
 			if (isnpc(listener))
 				listener.create_superfan(60, owner, emote_text)
 				super_fans++
-				to_chat()
+				to_chat(listener, span_danger("You lose yourself in primal feelings of [sin_virtue] stirred by [owner]'s voice, and are compelled to hear more."))
+				listener.visible_message(span_notice("[listener] seems to give in to feelings of [sin_virtue]."))
 				continue
 		listener.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/song_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "song", -MUTATIONS_LAYER)
@@ -300,13 +310,13 @@
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-//SuperFan: NPCs and Players.
+//SuperFan Component: NPCs and Players.
 /datum/component/superfan
 	parent_type = /datum/component
 	var/mob/living/_owner
 	var/mob/living/superfan_target
 	var/superfan_active = FALSE
-	var/superfan_sin_virtue
+	var/superfan_emote
 	var/superfan_duration
 /datum/component/superfan/Initialize(mob/living/M)
 	. = ..()
@@ -316,7 +326,7 @@
 		return
 	superfan_active = TRUE
 	superfan_target = target
-	superfan_sin_virtue = sin_virtue
+	superfan_emote = sin_virtue
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(superfan_behavior))
 	for (var/i in 1 to (duration * 2))
 		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
@@ -332,13 +342,13 @@
 		if (distance <= 1)
 			N.walktarget = superfan_target
 		if (prob(2))
-			N.emote(superfan_sin_virtue)
+			N.emote(superfan_emote)
 	if(_owner.client) //Player Client
 		var/mob/living/carbon/human/P
 		if (distance > 3)
 			P.walk_to_caster(superfan_target)
 		if (prob(1))
-			P.emote(superfan_sin_virtue)
+			P.emote(superfan_emote)
 /datum/component/superfan/proc/end()
 	superfan_active = FALSE
 	superfan_target = null
