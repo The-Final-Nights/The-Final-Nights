@@ -37,7 +37,7 @@
 
 /obj/item/reagent_containers/blood/update_appearance(updates)
 	. = ..()
-	var/percent = round((reagents.total_volume / volume) * 100)
+	var/percent = round((reagents?.total_volume / volume) * 100)
 	switch(percent)
 		if(100)
 			icon_state = "blood100"
@@ -135,8 +135,8 @@
 /obj/item/reagent_containers/blood/elite/Initialize(mapload)
 	if(mapload)
 		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+	update_appearance()
 	return ..()
-
 
 /obj/item/reagent_containers/blood/vitae
 	name = "\improper vampire vitae pack (full)"
@@ -146,6 +146,7 @@
 /obj/item/reagent_containers/blood/vitae/Initialize(mapload)
 	if(mapload)
 		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+	update_appearance()
 	return ..()
 
 /obj/item/reagent_containers/blood/random
@@ -153,6 +154,7 @@
 /obj/item/reagent_containers/blood/random/Initialize(mapload)
 	if(mapload)
 		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
+	update_appearance()
 	return ..()
 
 /obj/item/reagent_containers/blood/bweedpack
@@ -170,6 +172,7 @@
 			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
+	update_appearance()
 
 /obj/item/reagent_containers/blood/cokepack
 	name = "\improper elite blood pack (full)"
@@ -185,6 +188,7 @@
 			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
+	update_appearance()
 
 /obj/item/reagent_containers/blood/morphpack
 	name = "\improper elite blood pack (full)"
@@ -201,6 +205,7 @@
 			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
+	update_appearance()
 
 /obj/item/reagent_containers/blood/methpack
 	name = "\improper elite blood pack (full)"
@@ -216,3 +221,4 @@
 			"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
 			"resistances" = null,
 			"trace_chem" = null))
+	update_appearance()
