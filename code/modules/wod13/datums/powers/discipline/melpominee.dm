@@ -321,7 +321,7 @@
 	var/superfan_active = FALSE
 	var/superfan_emote
 	var/superfan_duration
-/datum/component/superfan/Initialize(mob/living/M)
+/datum/component/superfan/Initialize()
 	. = ..()
 	_owner = M
 /datum/component/superfan/proc/start(duration, mob/living/target, sin_virtue)
