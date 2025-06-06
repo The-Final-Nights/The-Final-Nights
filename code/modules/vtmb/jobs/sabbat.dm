@@ -1,6 +1,6 @@
 /datum/outfit/job/sabbatist
 	name = "Sabbatist"
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/flashlight
 	suit = /obj/item/clothing/suit/vampire/trench
 	id = /obj/item/cockclock

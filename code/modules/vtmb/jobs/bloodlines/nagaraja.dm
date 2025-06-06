@@ -26,7 +26,7 @@
 	name = "nagaraja"
 	jobtype = /datum/job/vamp/nagaraja
 	r_pocket = /obj/item/vamp/keys/mortician
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	gloves = /obj/item/clothing/gloves/vampire/latex
 	id = /obj/item/cockclock
 	backpack_contents = list(

@@ -29,6 +29,6 @@
 	shoes = /obj/item/clothing/shoes/vampire/businessblack
 	gloves = /obj/item/cockclock
 	id = /obj/item/card/id/government
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/vamp/keys/dispatch
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/creditcard=1, /obj/item/flashlight=1)

@@ -35,7 +35,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/latex
 	uniform = /obj/item/clothing/under/vampire/archivist
 	r_pocket = /obj/item/vamp/keys/archive
-	l_pocket = /obj/item/vamp/phone/archivist
+	l_pocket = /obj/item/smartphone/archivist
 	accessory = /obj/item/clothing/accessory/pocketprotector/full
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/arcane_tome=1, /obj/item/vamp/creditcard=1, /obj/item/melee/vampirearms/katana/kosa=1)
 

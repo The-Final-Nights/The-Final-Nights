@@ -164,7 +164,7 @@
 	uniform = /obj/item/clothing/under/vampire/sport
 	shoes = /obj/item/clothing/shoes/vampire/sneakers
 	id = /obj/item/cockclock
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/flashlight
 	l_hand = /obj/item/vamp/keys/npc/fix
 	back = /obj/item/storage/backpack/satchel
@@ -174,7 +174,7 @@
 	uniform = /obj/item/clothing/under/vampire/office
 	shoes = /obj/item/clothing/shoes/vampire
 	id = /obj/item/cockclock
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/flashlight
 	l_hand = /obj/item/vamp/keys/npc/fix
 	back = /obj/item/storage/backpack/satchel
@@ -184,7 +184,7 @@
 	uniform = /obj/item/clothing/under/vampire/emo
 	shoes = /obj/item/clothing/shoes/vampire
 	id = /obj/item/cockclock
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/flashlight
 	l_hand = /obj/item/vamp/keys/npc/fix
 	back = /obj/item/storage/backpack/satchel
@@ -194,7 +194,7 @@
 	uniform = /obj/item/clothing/under/vampire/bandit
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	id = /obj/item/cockclock
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/flashlight
 	l_hand = /obj/item/vamp/keys/npc/fix
 	back = /obj/item/storage/backpack/satchel
@@ -286,7 +286,7 @@
 	suit = /obj/item/clothing/suit/vampire/vest
 	belt = /obj/item/melee/classic_baton
 	id = /obj/item/cockclock
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/radio/cop
 	l_hand = /obj/item/vamp/keys/police
 	r_hand = /obj/item/police_radio
@@ -322,7 +322,7 @@
 	uniform = /obj/item/clothing/under/vampire/graveyard
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	id = /obj/item/card/id/hunter
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/flashlight
 	l_hand = /obj/item/vamp/keys/church
 	r_hand = /obj/item/gun/ballistic/shotgun/vampire
@@ -358,7 +358,7 @@
 	uniform = /obj/item/clothing/under/vampire/guard
 	shoes = /obj/item/clothing/shoes/vampire
 	belt = /obj/item/gun/ballistic/automatic/vampire/m1911
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/vamp/keys/camarilla
 	back = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/flashlight=1, /obj/item/vamp/creditcard=1,/obj/item/food/vampire/donut=5,/obj/item/card/id/chunk=1)

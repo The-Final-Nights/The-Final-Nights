@@ -43,7 +43,7 @@
 	uniform =  /obj/item/clothing/under/pentex/pentex_executive_suit
 	shoes = /obj/item/clothing/shoes/vampire/businessblack
 	suit = /obj/item/clothing/suit/pentex/pentex_labcoat_alt
-	l_pocket = /obj/item/vamp/phone/endron_lead
+	l_pocket = /obj/item/smartphone/endron_lead
 	r_pocket = /obj/item/vamp/keys/pentex
 	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/prince=1)
 
@@ -106,7 +106,7 @@
 	id = /obj/item/card/id/garou/spiral/executive
 	uniform =  /obj/item/clothing/under/pentex/pentex_executive_suit
 	shoes = /obj/item/clothing/shoes/vampire/businessblack
-	l_pocket = /obj/item/vamp/phone/endron_exec
+	l_pocket = /obj/item/smartphone/endron_exec
 	r_pocket = /obj/item/vamp/keys/pentex
 	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/seneschal=1)
 
@@ -168,7 +168,7 @@
 	id = /obj/item/card/id/garou/spiral/affairs
 	uniform =  /obj/item/clothing/under/pentex/pentex_suit
 	shoes = /obj/item/clothing/shoes/vampire/businessblack
-	l_pocket = /obj/item/vamp/phone/endron_affairs
+	l_pocket = /obj/item/smartphone/endron_affairs
 	r_pocket = /obj/item/vamp/keys/pentex
 	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/veil_contract, /obj/item/vamp/creditcard/rich=1)
 
@@ -235,7 +235,7 @@
 	head = /obj/item/clothing/head/pentex/pentex_beret
 	suit = /obj/item/clothing/suit/vampire/vest
 	glasses = /obj/item/clothing/glasses/vampire/sun
-	l_pocket = /obj/item/vamp/phone/endron_sec_chief
+	l_pocket = /obj/item/smartphone/endron_sec_chief
 	r_pocket = /obj/item/vamp/keys/pentex
 	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/phone_book=1, /obj/item/veil_contract, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
 
@@ -294,7 +294,7 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	gloves = /obj/item/clothing/gloves/vampire/work
 	suit = /obj/item/clothing/suit/vampire/vest
-	l_pocket = /obj/item/vamp/phone/endron_security
+	l_pocket = /obj/item/smartphone/endron_security
 	r_pocket = /obj/item/vamp/keys/pentex
 	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
@@ -352,7 +352,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/work
 	shoes = /obj/item/clothing/shoes/vampire
 	r_pocket = /obj/item/vamp/keys/pentex
-	l_pocket = /obj/item/vamp/phone/endron_employee
+	l_pocket = /obj/item/smartphone/endron_employee
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 	backpack = /obj/item/storage/backpack

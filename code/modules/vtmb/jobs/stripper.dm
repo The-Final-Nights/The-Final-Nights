@@ -26,7 +26,7 @@
 /datum/outfit/job/strip
 	name = "Club Worker"
 	jobtype = /datum/job/vamp/citizen
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/vamp/keys/strip
 	id = /obj/item/cockclock
 	backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)

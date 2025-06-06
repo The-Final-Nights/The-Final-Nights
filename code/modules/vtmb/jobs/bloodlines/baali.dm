@@ -27,7 +27,7 @@
 /datum/outfit/job/baali
 	name = "Counselor"
 	jobtype = /datum/job/vamp/baali
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	id = /obj/item/cockclock
 	backpack_contents = list(
 		/obj/item/passport=1,

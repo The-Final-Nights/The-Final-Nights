@@ -1,4 +1,3 @@
-
 /datum/phonehistory
 	var/name = "Unknown"
 	var/number = ""

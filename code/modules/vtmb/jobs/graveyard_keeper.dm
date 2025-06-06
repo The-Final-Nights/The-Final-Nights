@@ -37,7 +37,7 @@
 	suit = /obj/item/clothing/suit/vampire/trench
 	glasses = /obj/item/clothing/glasses/vampire/yellow
 	gloves = /obj/item/clothing/gloves/vampire/work
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/vamp/keys/graveyard
 	r_hand = /obj/item/melee/vampirearms/shovel
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1, /obj/item/melee/vampirearms/katana/kosa=1)

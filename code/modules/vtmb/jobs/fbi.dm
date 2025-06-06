@@ -35,7 +35,7 @@
 	belt = /obj/item/storage/belt/holster/detective/vampire/fbi
 	id = /obj/item/card/id/police/fbi
 	gloves = /obj/item/clothing/gloves/vampire/investigator
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/binoculars
 	l_hand = /obj/item/vamp/keys/police/federal
 	r_hand = /obj/item/storage/secure/briefcase/fbi

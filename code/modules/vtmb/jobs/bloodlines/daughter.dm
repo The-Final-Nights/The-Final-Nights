@@ -28,7 +28,7 @@
 /datum/outfit/job/daughterof
 	name = "Cabaret Worker"
 	jobtype = /datum/job/vamp/daughterof
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	id = /obj/item/cockclock
 	backpack_contents = list(
 		/obj/item/passport=1,

@@ -28,7 +28,7 @@
 /datum/outfit/job/citizen
 	name = "Citizen"
 	jobtype = /datum/job/vamp/citizen
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	id = /obj/item/cockclock
 
 /datum/outfit/job/citizen/pre_equip(mob/living/carbon/human/H)

@@ -33,7 +33,7 @@
 	uniform = /obj/item/clothing/under/vampire/bogatyr
 	suit = /obj/item/clothing/suit/vampire/jacket/punk
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	l_pocket = /obj/item/vamp/phone/zadruga
+	l_pocket = /obj/item/smartphone/zadruga
 	r_pocket = /obj/item/cockclock
 	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 

@@ -59,7 +59,7 @@
 	head = /obj/item/clothing/head/hos/beret
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	r_pocket = /obj/item/vamp/keys/sheriff
-	l_pocket = /obj/item/vamp/phone/sheriff
+	l_pocket = /obj/item/smartphone/sheriff
 	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/vampire_stake=3, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/masquerade_contract=1, /obj/item/vamp/creditcard/elder=1)
 
 	backpack = /obj/item/storage/backpack

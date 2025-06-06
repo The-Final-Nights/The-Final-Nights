@@ -56,5 +56,5 @@
 	new /obj/item/stack/dollar/thousand(src)
 	new /obj/item/stack/dollar/thousand(src)
 	new /obj/item/stack/dollar/thousand(src)
-	new /obj/item/vamp/phone(src)
+	new /obj/item/smartphone(src)
 	new /obj/item/ammo_box/vampire/c45acp/HP(src)

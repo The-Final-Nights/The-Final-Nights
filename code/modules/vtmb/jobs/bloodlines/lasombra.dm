@@ -28,7 +28,7 @@
 /datum/outfit/job/lasombra
 	name = "lasombra"
 	jobtype = /datum/job/vamp/lasombra
-	l_pocket = /obj/item/vamp/phone/lasombra_caretaker
+	l_pocket = /obj/item/smartphone/lasombra
 	id = /obj/item/cockclock
 	backpack_contents = list(
 		/obj/item/passport=1,

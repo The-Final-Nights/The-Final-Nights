@@ -1,6 +1,6 @@
 /datum/outfit/job/caitiff
 	name = "Caitiff"
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/smartphone
 	r_pocket = /obj/item/flashlight
 	id = /obj/item/cockclock
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vampire_stake=1, /obj/item/vamp/keys/hack=1)

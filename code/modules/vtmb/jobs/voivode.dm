@@ -37,7 +37,7 @@
 	suit = /obj/item/clothing/suit/vampire/trench/voivode
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	belt = /obj/item/storage/belt/vampire/sheathe/longsword
-	l_pocket = /obj/item/vamp/phone/voivode
+	l_pocket = /obj/item/smartphone/voivode
 	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/melee/vampirearms/eguitar=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1)
 
 /obj/effect/landmark/start/voivode

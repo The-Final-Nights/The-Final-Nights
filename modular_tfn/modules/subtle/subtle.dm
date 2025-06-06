@@ -117,7 +117,7 @@
 				continue
 			in_view.Remove(mob)
 		for(var/obj/item/vamp/vamp_item in in_view) // Removes phone and debit card, which show up for some odd reason.
-			if(istype(vamp_item, /obj/item/vamp/phone) || istype(vamp_item, /obj/item/vamp/creditcard))
+			if(istype(vamp_item, /obj/item/smartphone) || istype(vamp_item, /obj/item/vamp/creditcard))
 				in_view.Remove(vamp_item)
 
 		if(ishuman(user) || ismonkey(user))
