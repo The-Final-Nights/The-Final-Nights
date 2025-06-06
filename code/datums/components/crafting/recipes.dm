@@ -27,6 +27,18 @@
 /datum/crafting_recipe/proc/check_requirements(mob/user, list/collected_requirements)
 	return TRUE
 
+
+///WORLD OF DARKNESS RECIPES!!
+
+///Recipe for Typhon's Brew
+/datum/crafting_recipe/typhon_brew
+	name = "Thyphon's Brew"
+	reqs = list(/obj/item/reagent_containers/food/drinks/beer/vampire = 1, /obj/item/drinkable_bloodpack/vitae = 1)
+	result = /obj/item/reagent_containers/drug/typhon_brew//type path of item resulting from this craft
+	time = 1 SECONDS
+	category = CAT_DRUGS
+	always_available = FALSE
+
 /*
 
 /datum/crafting_recipe/improv_explosive
