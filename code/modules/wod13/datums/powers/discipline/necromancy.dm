@@ -169,9 +169,9 @@
 		if(iskindred(target) || iscathayan(target) || iszombie(target)) //undead become spongier, but move slightly slower
 			corpsebuff.visible_message(span_danger("[target]'s body seizes with rigor mortis."), span_danger("Your senses dull to pain and everything else."))
 			corpsebuff.dna.species.brutemod = max(0.2, corpsebuff.dna.species.brutemod-0.3) //equivalent of the existing artifact
-			ADD_TRAIT(corpsebuff, TRAIT_NOSOFTCRIT, MAGIC_TRAIT)
-			ADD_TRAIT(corpsebuff, TRAIT_NOHARDCRIT, MAGIC_TRAIT)
-			ADD_TRAIT(corpsebuff, TRAIT_IGNOREDAMAGESLOWDOWN, MAGIC_TRAIT)
+			ADD_TRAIT(corpsebuff, TRAIT_NOSOFTCRIT, NECROMANCY_TRAIT)
+			ADD_TRAIT(corpsebuff, TRAIT_NOHARDCRIT, NECROMANCY_TRAIT)
+			ADD_TRAIT(corpsebuff, TRAIT_IGNOREDAMAGESLOWDOWN, NECROMANCY_TRAIT)
 			corpsebuff.add_movespeed_modifier(/datum/movespeed_modifier/corpsebuff)
 			corpsebuff.do_jitter_animation(2 SECONDS)
 		else //everyone else eats tox and CC
@@ -196,9 +196,9 @@
 		if(iskindred(target) || iscathayan(target))
 			corpsebuff.visible_message(span_notice("[target]'s body regains its luster."), span_notice("Feeling comes flooding back into your body."))
 			corpsebuff.dna.species.brutemod = initial(corpsebuff.dna.species.brutemod)
-			REMOVE_TRAIT(corpsebuff, TRAIT_NOSOFTCRIT, MAGIC_TRAIT)
-			REMOVE_TRAIT(corpsebuff, TRAIT_NOHARDCRIT, MAGIC_TRAIT)
-			REMOVE_TRAIT(corpsebuff, TRAIT_IGNOREDAMAGESLOWDOWN, MAGIC_TRAIT)
+			REMOVE_TRAIT(corpsebuff, TRAIT_NOSOFTCRIT, NECROMANCY_TRAIT)
+			REMOVE_TRAIT(corpsebuff, TRAIT_NOHARDCRIT, NECROMANCY_TRAIT)
+			REMOVE_TRAIT(corpsebuff, TRAIT_IGNOREDAMAGESLOWDOWN, NECROMANCY_TRAIT)
 			corpsebuff.remove_movespeed_modifier(/datum/movespeed_modifier/corpsebuff)
 		else
 			corpsebuff.remove_movespeed_modifier(/datum/movespeed_modifier/corpsenerf)
