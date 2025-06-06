@@ -9,7 +9,6 @@
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_NOMETABOLISM, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE, TRAIT_FAKEDEATH)
 	use_skintones = TRUE
 	limbs_id = "rotten2"
-	wings_icon = "Dragon"
 	mutantbrain = /obj/item/organ/brain/vampire //to prevent brain transplant surgery
 	mutanteyes = /obj/item/organ/eyes/night_vision/zombie
 	brutemod = 0.5
@@ -239,4 +238,4 @@
 	if(iszombie(being_bitten))
 		return COMPONENT_RESIST_VAMPIRE_KISS
 
-	#undef REGENERATION_DELAY
+#undef REGENERATION_DELAY
