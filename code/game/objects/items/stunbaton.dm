@@ -25,6 +25,7 @@
 	var/can_remove_cell = TRUE
 
 	var/turned_on = FALSE
+	var/active_stun_timer_turnoff = FALSE
 	var/activate_sound = "sparks"
 
 	var/attack_cooldown_check = 0 SECONDS
@@ -159,16 +160,22 @@
 /obj/item/melee/baton/proc/toggle_on(mob/user)
 	if(cell && cell.charge >= cell_hit_cost)
 		turned_on = !turned_on
-		to_chat(user, "<span class='notice'>[src] is now [turned_on ? "on" : "off"].</span>")
-		playsound(src, activate_sound, 75, TRUE, -1)
+		//to_chat(user, "<span class='notice'>[src] is now [turned_on ? "on" : "off"].</span>") I don't think we really need this and working around it would be a pain.
+		playsound(src, turned_on ? activate_sound : "sparks", 75, TRUE, -1)
 	else
 		turned_on = FALSE
 		if(!cell)
 			to_chat(user, "<span class='warning'>[src] does not have a power source!</span>")
 		else
 			to_chat(user, "<span class='warning'>[src] is out of charge.</span>")
+	if(active_stun_timer_turnoff)
+		addtimer(CALLBACK(src, PROC_REF(active_timer_switch)), 3 SECONDS)
 	update_icon()
 	add_fingerprint(user)
+
+/obj/item/melee/baton/proc/active_timer_switch(mob/user)
+	turned_on = FALSE
+	update_icon()
 
 /obj/item/melee/baton/proc/clumsy_check(mob/living/carbon/human/user)
 	if(turned_on && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
@@ -253,6 +260,8 @@
 	addtimer(TRAIT_CALLBACK_REMOVE(L, TRAIT_IWASBATONED, user), attack_cooldown)
 
 	return 1
+
+
 
 /// After the initial stun period, we check to see if the target needs to have the stun applied.
 /obj/item/melee/baton/proc/apply_stun_effect_end(mob/living/target)
@@ -346,3 +355,29 @@
 
 /obj/item/melee/baton/boomerang/loaded //Same as above, comes with a cell.
 	preload_cell_type = /obj/item/stock_parts/cell/high
+
+/obj/item/melee/baton/handtaser
+	name = "\improper SNEKTEK Handheld Taser"
+	desc = "A small stun gun designed to momentarily incapacitate assailants. To avoid continuous misfire, the button has a safety and must be pressed every few seconds."
+	icon_state = "handtaser"
+	icon = 'modular_tfn/modules/taser_tfn13/taser.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	inhand_icon_state = "emp"
+	worn_icon_state = "baton"
+	force = 1
+	attack_verb_continuous = list("stabs")
+	attack_verb_simple = list("stab")
+	w_class = WEIGHT_CLASS_SMALL
+	throwforce = 2
+	throw_stun_chance = 5
+	preload_cell_type = /obj/item/stock_parts/cell
+	cell_hit_cost = 50
+	can_remove_cell = TRUE
+	stun_sound = 'sound/wod13/electric_zap.ogg'
+	activate_sound = 'sound/wod13/handtaser_activate.ogg'
+	confusion_amt = 4
+	stamina_loss_amt = 25
+	apply_stun_delay = 2 SECONDS
+	stun_time = 2 SECONDS
+	convertible = FALSE
+	active_stun_timer_turnoff = TRUE //Hacky way of doing it but fuck it man.
