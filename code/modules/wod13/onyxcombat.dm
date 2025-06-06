@@ -454,6 +454,45 @@
 	level5.layer = ABOVE_HUD_LAYER+5
 	level5.plane = HUD_PLANE
 
+
+///VERSION OF ABOVE BUT FOR KJs
+/atom/movable/screen/chi_disciplines
+	layer = HUD_LAYER
+	plane = HUD_PLANE
+	var/datum/discipline/chi_discipline/dscpln
+	var/last_discipline_click = 0
+	var/last_discipline_use = 0
+	var/main_state = ""
+	var/active = FALSE
+	var/obj/effect/overlay/level2
+	var/obj/effect/overlay/level3
+	var/obj/effect/overlay/level4
+	var/obj/effect/overlay/level5
+
+/atom/movable/screen/chi_disciplines/Initialize()
+	. = ..()
+	level2 = new(src)
+	level2.icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+	level2.icon_state = "2"
+	level2.layer = ABOVE_HUD_LAYER+5
+	level2.plane = HUD_PLANE
+	level3 = new(src)
+	level3.icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+	level3.icon_state = "3"
+	level3.layer = ABOVE_HUD_LAYER+5
+	level3.plane = HUD_PLANE
+	level4 = new(src)
+	level4.icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+	level4.icon_state = "4"
+	level4.layer = ABOVE_HUD_LAYER+5
+	level4.plane = HUD_PLANE
+	level5 = new(src)
+	level5.icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+	level5.icon_state = "5"
+	level5.layer = ABOVE_HUD_LAYER+5
+	level5.plane = HUD_PLANE
+
+
 /atom/MouseEntered(location,control,params)
 	if(isturf(src) || ismob(src) || isobj(src))
 		if(loc && iscarbon(usr))

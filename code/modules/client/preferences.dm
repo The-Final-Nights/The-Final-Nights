@@ -793,30 +793,32 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if (pref_species.name == "Kuei-Jin")
 				dat += "<h2>[make_font_cool("DISCIPLINES")]</h2><BR>"
 				for (var/i in 1 to discipline_types.len)
-					var/discipline_type = discipline_types[i]
-					var/datum/chi_discipline/discipline = new discipline_type
-					var/discipline_level = discipline_levels[i]
+					var/chi_discipline_type = discipline_types[i]
+					var/datum/discipline/chi_discipline/chi_discipline = new chi_discipline_type
+					var/chi_discipline_level = discipline_levels[i]
 
 					var/cost
-					if (discipline_level <= 0)
-						cost = 10
+					if (chi_discipline_level <= 0)
+						cost = 0
 					else
-						cost = discipline_level * 6
+						cost = chi_discipline_level * 6
 
-					dat += "<b>[discipline.name]</b> ([discipline.discipline_type]): [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"]([discipline_level])"
-					if((player_experience >= cost) && (discipline_level != 5))
+					dat += "<b>[chi_discipline.name]</b> ([chi_discipline.discipline_type]): [chi_discipline_level > 0 ? "•" : "o"][chi_discipline_level > 1 ? "•" : "o"][chi_discipline_level > 2 ? "•" : "o"][chi_discipline_level > 3 ? "•" : "o"][chi_discipline_level > 4 ? "•" : "o"]([chi_discipline_level])"
+					if((player_experience >= cost) && (chi_discipline_level != 5))
 						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradechidiscipline=[i]'>Learn ([cost])</a><BR>"
 					else
 						dat += "<BR>"
-					dat += "-[discipline.desc]. Yin:[discipline.cost_yin], Yang:[discipline.cost_yang], Demon:[discipline.cost_demon]<BR>"
-					qdel(discipline)
-				var/list/possible_new_disciplines = subtypesof(/datum/chi_discipline) - discipline_types
+					dat += "-[chi_discipline.desc]. Yin:[chi_discipline.cost_yin], Yang:[chi_discipline.cost_yang], Demon:[chi_discipline.cost_demon]<BR>"
+					qdel(chi_discipline)
+
+				var/list/possible_new_disciplines = subtypesof(/datum/discipline/chi_discipline) - discipline_types
 				var/has_chi_one = FALSE
 				var/has_demon_one = FALSE
 				var/how_much_usual = 0
+				//Editing stuff for testing purposes (MUHAHAHA I GET ALL THE DISCIPLINES EHEHHEHEHEHEHEH!!!)
 				for(var/i in discipline_types)
 					if(i)
-						var/datum/chi_discipline/C = i
+						var/datum/discipline/chi_discipline/C = i
 						if(initial(C.discipline_type) == "Shintai")
 							how_much_usual += 1
 						if(initial(C.discipline_type) == "Demon")
@@ -825,9 +827,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							has_chi_one = TRUE
 				for(var/i in possible_new_disciplines)
 					if(i)
-						var/datum/chi_discipline/C = i
+						var/datum/discipline/chi_discipline/C = i
 						if(initial(C.discipline_type) == "Shintai")
-							if(how_much_usual >= 3)
+							if(how_much_usual >= 20)
 								possible_new_disciplines -= i
 						if(initial(C.discipline_type) == "Demon")
 							if(has_demon_one)
@@ -835,8 +837,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if(initial(C.discipline_type) == "Chi")
 							if(has_chi_one)
 								possible_new_disciplines -= i
-				if (possible_new_disciplines.len && (player_experience >= 10))
-					dat += "<a href='byond://?_src_=prefs;preference=newchidiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
+				if (possible_new_disciplines.len)
+					dat += "<a href='byond://?_src_=prefs;preference=newchidiscipline;task=input'>Learn a new Discipline (FREE)</a><BR>"
 
 			if(slotlocked)
 				dat += "<a href='byond://?_src_=prefs;preference=change_appearance;task=input'>Change Appearance (Free)</a><BR>"
@@ -2415,13 +2417,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if((player_experience < 10) || !(pref_species.id == "kuei-jin"))
 						return
 
-					var/list/possible_new_disciplines = subtypesof(/datum/chi_discipline) - discipline_types
+					var/list/possible_new_disciplines = subtypesof(/datum/discipline/chi_discipline) - discipline_types
 					var/has_chi_one = FALSE
 					var/has_demon_one = FALSE
 					var/how_much_usual = 0
 					for(var/i in discipline_types)
 						if(i)
-							var/datum/chi_discipline/C = i
+							var/datum/discipline/chi_discipline/C = i
 							if(initial(C.discipline_type) == "Shintai")
 								how_much_usual += 1
 							if(initial(C.discipline_type) == "Demon")
@@ -2430,7 +2432,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								has_chi_one = TRUE
 					for(var/i in possible_new_disciplines)
 						if(i)
-							var/datum/chi_discipline/C = i
+							var/datum/discipline/chi_discipline/C = i
 							if(initial(C.discipline_type) == "Shintai")
 								if(how_much_usual >= 3)
 									possible_new_disciplines -= i

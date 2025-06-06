@@ -256,9 +256,15 @@
 
 /datum/action/blood_power/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
 	if(owner?.client?.prefs?.old_discipline)
+		if(iscathayan(owner))
+			button_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+			icon_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
 		button_icon = 'code/modules/wod13/disciplines.dmi'
 		icon_icon = 'code/modules/wod13/disciplines.dmi'
 	else
+		if(iscathayan(owner))
+			button_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
+			icon_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
 		button_icon = 'code/modules/wod13/UI/actions.dmi'
 		icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	. = ..()
@@ -597,18 +603,17 @@
 			clane.post_gain(src)
 
 	if((dna.species.id == "kuei-jin")) //only splats that have Disciplines qualify
-		var/list/datum/chi_discipline/adding_disciplines = list()
+		var/list/datum/discipline/chi_discipline/adding_chi_disciplines = list()
 
 		if (discipline_pref) //initialise character's own disciplines
 			for (var/i in 1 to client.prefs.discipline_types.len)
 				var/type_to_create = client.prefs.discipline_types[i]
-				var/datum/chi_discipline/discipline = new type_to_create
-				discipline.level = client.prefs.discipline_levels[i]
-				adding_disciplines += discipline
+				var/level = client.prefs.discipline_levels[i]
+				var/datum/discipline/chi_discipline/chi_discipline = new type_to_create(level)
+				adding_chi_disciplines += chi_discipline
 
-		for (var/datum/chi_discipline/discipline in adding_disciplines)
-			give_chi_discipline(discipline)
-
+		for (var/datum/discipline/chi_discipline/chi_discipline in adding_chi_disciplines)
+			give_chi_discipline(chi_discipline)
 /**
  * Creates an action button and applies post_gain effects of the given Discipline.
  *
@@ -622,12 +627,24 @@
 	var/datum/species/kindred/species = dna.species
 	species.disciplines += discipline
 
-/mob/living/carbon/human/proc/give_chi_discipline(datum/chi_discipline/discipline)
+/mob/living/carbon/human/proc/give_chi_discipline(datum/discipline/chi_discipline/discipline)
 	if (discipline.level > 0)
-		var/datum/action/chi_discipline/action = new
-		action.discipline = discipline
+		var/datum/action/discipline/chi_discipline/action = new(discipline)
 		action.Grant(src)
-	discipline.post_gain(src)
+	var/datum/species/kuei_jin/species = dna.species
+	species.chi_disciplines += discipline
+//	discipline.post_gain(src)
+
+/* For some bloody reason this doesn't work, will have to comment this  to see if the og code would've worked
+		var/datum/action/chi_discipline/action = new(discipline)
+		action.Grant(src)
+	var/datum/species/kuei_jin/species = dna.species
+	species.chi_disciplines += discipline
+
+*/
+
+//	discipline.post_gain(src)
+
 
 /**
  * Accesses a certain Discipline that a Kindred has. Returns false if they don't.
@@ -643,6 +660,22 @@
 		else if (istext(searched_discipline))
 			if (discipline.name == searched_discipline)
 				return discipline
+
+
+/**
+ * Attempting to see if I can work for this with KJ
+ *
+ * Arguments:
+ * * searched_chi_discipline - Name or typepath of the Chi Discipline being searched for.
+ */s
+/datum/species/kuei_jin/proc/get_chi_discipline(searched_chi_discipline)
+	for(var/datum/discipline/chi_discipline/chi_discipline in chi_disciplines)
+		if (ispath(searched_chi_discipline, /datum/discipline/chi_discipline))
+			if (istype(chi_discipline, searched_chi_discipline))
+				return chi_discipline
+		else if (istext(searched_chi_discipline))
+			if (chi_discipline.name == searched_chi_discipline)
+				return chi_discipline
 
 	return FALSE
 

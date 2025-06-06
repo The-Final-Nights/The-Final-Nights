@@ -145,8 +145,8 @@
 /obj/projectile/magic/aoe/fireball/firebreath
 	name = "fire breath"
 	exp_heavy = 0
-	exp_light = 0
-	exp_flash = 0
+	exp_light = 1
+	exp_flash = 2
 	exp_fire= 4
 
 /datum/mutation/human/void

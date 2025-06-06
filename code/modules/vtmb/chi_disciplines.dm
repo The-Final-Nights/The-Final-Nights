@@ -1,3 +1,5 @@
+/*
+
 /datum/action/chi_discipline
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_CONSCIOUS
 	button_icon = 'code/modules/wod13/UI/kuei_jin.dmi' //This is the file for the BACKGROUND icon
@@ -1672,7 +1674,7 @@
 				storm_aura_loop(caster, delay + caster.discipline_time_plus)
 			spawn(delay+caster.discipline_time_plus)
 				if(caster)
-					caster.remove_overlay(FORTITUDE_LAYER)
+					d
 
 /datum/chi_discipline/storm_shintai/proc/wind_aura_loop(mob/living/carbon/human/caster, duration)
 	var/loop_started_time = world.time
@@ -2155,11 +2157,9 @@
 			new_say = sanitize_text(new_say)
 			if(new_say)
 				caster.say(new_say)
-
 				for(var/mob/living/carbon/human/victim in oviewers(7, caster))
 					victim.cure_trauma_type(/datum/brain_trauma/hypnosis, TRAUMA_RESILIENCE_MAGIC)
 					victim.gain_trauma(new /datum/brain_trauma/hypnosis(new_say), TRAUMA_RESILIENCE_MAGIC)
-
 					spawn(30 SECONDS)
 						if(victim)
 							victim.cure_trauma_type(/datum/brain_trauma/hypnosis, TRAUMA_RESILIENCE_MAGIC)
@@ -2211,3 +2211,5 @@
 				viewing_mantle.flash_act(affect_silicon = 1)
 
 		sleep(2 SECONDS)
+
+*/

@@ -184,7 +184,10 @@
 	//the user cannot afford the power's vitae expenditure
 	if (!can_afford())
 		if (alert)
-			to_chat(owner, span_warning("You do not have enough blood to cast [src]!"))
+			if(iscathayan(owner))
+				to_chat(owner, span_warning("You do not have enough Chi to cast [src]!"))
+			else
+				to_chat(owner, span_warning("You do not have enough Blood to cast [src]!"))
 		return FALSE
 
 	//the power's cooldown has not elapsed
@@ -196,7 +199,10 @@
 	//status checks
 	if ((check_flags & DISC_CHECK_TORPORED) && HAS_TRAIT(owner, TRAIT_TORPOR))
 		if (alert)
-			to_chat(owner, span_warning("You cannot cast [src] while in Torpor!"))
+			if(iscathayan(owner))
+				to_chat(owner, span_warning("You cannot cast [src] while in Little Death!"))
+			else
+				to_chat(owner, span_warning("You cannot cast [src] while in Torpor!"))
 		return FALSE
 
 	if ((check_flags & DISC_CHECK_CONSCIOUS) && HAS_TRAIT(owner, TRAIT_KNOCKEDOUT))

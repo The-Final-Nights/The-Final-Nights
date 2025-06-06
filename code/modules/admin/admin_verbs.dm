@@ -37,7 +37,9 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/toggle_canon,
 	/client/proc/reward_exp,
 	/client/proc/grant_discipline,
+	/client/proc/grant_chi_discipline,
 	/client/proc/remove_discipline,
+	/client/proc/remove_chi_discipline,
 	/client/proc/whitelist_panel,
 	/*
 	/client/proc/encipher_word,
@@ -626,7 +628,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		if ((preferences.pref_species.id != "kindred") && (preferences.pref_species.id != "ghoul"))
 			to_chat(usr, "<span class='warning'>Your target is not a vampire or a ghoul.</span>")
 			return
-		var/giving_discipline = input("What Discipline do you want to give [player]?") as null|anything in (subtypesof(/datum/discipline) - preferences.discipline_types - /datum/discipline/bloodheal)
+		var/giving_discipline = input("What Discipline do you want to give [player]?") as null|anything in (subtypesof(/datum/discipline) - preferences.discipline_types - /datum/discipline/bloodheal - /datum/discipline/chi_discipline)
 		if (giving_discipline)
 			var/giving_discipline_level = input("What rank of this Discipline do you want to give [player]?") as null|anything in list(0, 1, 2, 3, 4, 5)
 			if (!isnull(giving_discipline_level))
@@ -654,7 +656,47 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 					else
 						qdel(discipline)
 
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Grant Discipline") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+/client/proc/grant_chi_discipline()
+	set name = "Grant Chi Discipline"
+	set category = "Admin"
+	if (!check_rights(R_ADMIN))
+		return
+
+	var/client/player = input("What player do you want to give a Discipline?") as null|anything in GLOB.clients
+	if (player)
+		if (!player.prefs)
+			to_chat(usr, "<span class='warning'>Could not find preferences for [player].")
+			return
+		var/datum/preferences/preferences = player.prefs
+		if ((preferences.pref_species.id != "kuei-jin"))
+			to_chat(usr, "<span class='warning'>Your target is not a Kuei Jin.</span>")
+			return
+		var/giving_discipline = input("What Discipline do you want to give [player]?") as null|anything in (subtypesof(/datum/discipline/chi_discipline) - preferences.discipline_types)
+		if (giving_discipline)
+			var/giving_discipline_level = input("What rank of this Discipline do you want to give [player]?") as null|anything in list(0, 1, 2, 3, 4, 5)
+			if (!isnull(giving_discipline_level))
+				var/reason = input("Why are you giving [player] this Discipline?") as null|text
+				if (reason)
+					preferences.discipline_types += giving_discipline
+					preferences.discipline_levels += giving_discipline_level
+					preferences.save_character()
+
+					var/datum/discipline/chi_discipline/discipline = new giving_discipline(giving_discipline_level)
+
+					message_admins("[ADMIN_LOOKUPFLW(usr)] gave [ADMIN_LOOKUPFLW(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
+					log_admin("[key_name(usr)] gave [key_name(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
+					SSoverwatch.record_action(usr, "[key_name(usr)] gave [key_name(player)] the Discipline [discipline.name] at rank [discipline.level]. Reason: [reason]")
+
+					if ((giving_discipline_level > 0) && player.mob)
+						if (ishuman(player.mob))
+							var/mob/living/carbon/human/human = player.mob
+							human.give_discipline(discipline)
+						else
+							qdel(discipline)
+					else
+						qdel(discipline)
+
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Grant Chi Discipline") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/remove_discipline()
 	set name = "Remove Discipline"
@@ -671,7 +713,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		if ((preferences.pref_species.id != "kindred") && (preferences.pref_species.id != "ghoul"))
 			to_chat(usr, "<span class='warning'>Your target is not a vampire or a ghoul.</span>")
 			return
-		var/removing_discipline = input("What Discipline do you want to give [player]?") as null|anything in preferences.discipline_types
+		var/removing_discipline = input("What Discipline do you want to remove from [player]?") as null|anything in preferences.discipline_types
 		if (removing_discipline)
 			var/reason = input("Why are you removing this Discipline from [player]?") as null|text
 			if (reason)
@@ -689,6 +731,40 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 				qdel(discipline)
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Remove Discipline") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/remove_chi_discipline()
+	set name = "Remove Chi Discipline"
+	set category = "Admin"
+	if (!check_rights(R_ADMIN))
+		return
+
+	var/client/player = input("What player do you want to remove a Discipline from?") as null|anything in GLOB.clients
+	if (player)
+		if (!player.prefs)
+			to_chat(usr, "<span class='warning'>Could not find preferences for [player].")
+			return
+		var/datum/preferences/preferences = player.prefs
+		if ((preferences.pref_species.id != "kuei-jin"))
+			to_chat(usr, "<span class='warning'>Your target is not a Kuei Jin.</span>")
+			return
+		var/removing_discipline = input("What Discipline do you want to remove from [player]?") as null|anything in preferences.discipline_types
+		if (removing_discipline)
+			var/reason = input("Why are you removing this Discipline from [player]?") as null|text
+			if (reason)
+				var/datum/discipline/discipline = new removing_discipline
+
+				var/i = preferences.discipline_types.Find(removing_discipline)
+				preferences.discipline_types.Cut(i, i + 1)
+				preferences.discipline_levels.Cut(i, i + 1)
+				preferences.save_character()
+
+				message_admins("[ADMIN_LOOKUPFLW(usr)] removed the Discipline [discipline.name] from [ADMIN_LOOKUPFLW(player)]. Reason: [reason]")
+				log_admin("[key_name(usr)] removed the Discipline [discipline.name] from [key_name(player)]. Reason: [reason]")
+				SSoverwatch.record_action(usr, "[key_name(usr)] removed the Discipline [discipline.name] from [key_name(player)]. Reason: [reason]")
+
+				qdel(discipline)
+
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Remove Chi Discipline") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/whitelist_panel()
 	set name = "Whitelist Management"
