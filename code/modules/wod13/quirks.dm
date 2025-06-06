@@ -653,6 +653,15 @@ Dancer
 	lose_text = "<span class='notice'>You don't feel charismatic anymore.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
 
+/datum/quirk/unbonding
+	name = "Unbonding"
+	desc = "Your vitae, for one reason or another, doesn't produce blood bonds."
+	value = 0
+	mob_trait = TRAIT_UNBONDING
+	gain_text = "<span class='notice'>Your blood feels vacant.</span>"
+	lose_text = "<span class='notice'>You feel like something that was missing just came back to you.</span>"
+	allowed_species = list("Vampire")
+
 /datum/quirk/diablerist
 	name = "Diablerist"
 	desc = "For one reason or another, you have committed Diablerie in your past, a great crime within Kindred society. <b>This is not a license to Diablerize without proper reason!</b>"
