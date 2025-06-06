@@ -26,7 +26,7 @@
 
 /datum/discipline_power/melpominee/the_missing_voice/activate(atom/movable/target)
 	. = ..()
-	var/new_say = tgui_input_text(owner, "What will [target] say?", "The Missing Voice:", FALSE, 500, TRUE, FALSE, 0) as null|text
+	var/new_say = tgui_input_text(owner, "What will [target] say?", "The Missing Voice:", FALSE, 500, TRUE, FALSE, 0)
 	if(!new_say)
 		return
 
@@ -91,7 +91,7 @@
 	if(!target)
 		return
 
-	var/input_message = tgui_input_text(owner, "What message will you project to them?", "Madrigal: sin_virtue", FALSE, 500, TRUE, FALSE, 0) as null|text
+	var/input_message = tgui_input_text(owner, "What message will you project to them?", "Madrigal: sin_virtue", FALSE, 500, TRUE, FALSE, 0)
 	if (!input_message)
 		return
 	input_message = trim(copytext_char(input_message, 1, MAX_MESSAGE_LEN))
