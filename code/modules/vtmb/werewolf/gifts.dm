@@ -675,12 +675,12 @@
 		return
 	SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_activate.ogg', 0, 0, 75))
 	C.add_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
-	to_chat(owner, "<span class='warning'>You feel <b>PUMPED UP!</b></span>")
+	to_chat(owner, span_warning("You feel <b>PUMPED UP!</b>"))
 	addtimer(CALLBACK(src, PROC_REF(end_dash), C), 6 SECONDS)
 
 /datum/action/gift/close_distance/proc/end_dash(mob/living/carbon/C)
 	C.remove_movespeed_modifier(/datum/movespeed_modifier/garou_dash)
 	SEND_SOUND(owner, sound('code/modules/wod13/sounds/fleshshintai_deactivate.ogg', 0, 0, 75))
-	to_chat(owner, "<span class='warning'>You feel yourself slow down again...</span>")
+	to_chat(owner, span_warning("You feel yourself slow down again..."))
 
 #undef DOGGY_ANIMATION_COOLDOWN
