@@ -29,7 +29,7 @@
 				else if(is_sabbatist(H))
 					location_info = "[get_area_name(H)]"
 				if(TT)
-					to_chat(user, "[H.true_real_name], Masquerade: [H.masquerade], Diablerist: [H.diablerist ? "<b>YES</b>" : "NO"], [location_info]")
+					to_chat(user, "[H.real_name], Masquerade: [H.masquerade], Diablerist: [H.diablerist ? "<b>YES</b>" : "NO"], [location_info]")
 	else
 		to_chat(user, "No available Masquerade breakers in city...")
 
