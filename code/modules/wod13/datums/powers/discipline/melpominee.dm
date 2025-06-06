@@ -326,7 +326,7 @@
 				var/datum/component/superfan/SF = listener.GetComponent(/datum/component/superfan)
 				if (SF && SF.superfan_active)
 					SF.superfan_emote = emote_text //updates current fans to match emotion
-					to_chat(listener, span_danger("You lose yourself in primal feelings of [sin_virtue]."))
+					to_chat(listener, span_danger("You lose yourself in primal feelings of [sin_virtue] stirred by [owner]'s voice, and are compelled to hear more."))
 					listener.visible_message(span_notice("[listener] seems to give in to feelings of [sin_virtue]."))
 					continue
 			if (listener.client)
@@ -361,6 +361,7 @@
 	var/superfan_active = FALSE
 	var/superfan_emote
 	var/superfan_duration
+	var/walk_started
 /datum/component/superfan/Initialize(superfan_duration, mob/living/target, sin_virtue)
 	start(superfan_duration, target, sin_virtue)
 	. = ..()
@@ -371,31 +372,44 @@
 	superfan_target = target
 	superfan_emote = sin_virtue
 	var/datum/callback/follow_cb = CALLBACK(src, PROC_REF(superfan_behavior))
-	for (var/i in 1 to (duration))
-		addtimer(follow_cb, (i - 1) * 1 SECONDS)
+	for (var/i in 1 to (duration * 2)) //2 ticks per second
+		addtimer(follow_cb, (i - 1) * 1/2 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(end)), duration * 1 SECONDS)
 /datum/component/superfan/proc/superfan_behavior()
-	var/distance = get_dist(src, superfan_target)
 	var/mob/living/carbon/human/SF = parent
-	if (isnpc(SF)) //NPC
+	var/distance = get_dist(SF, superfan_target)
+	if (isnpc(SF)) // NPC logic, works from staying and walk target
 		var/mob/living/carbon/human/npc/N = SF
-		N.staying = TRUE
-		if (distance > 5)
-			SF.walk_to_caster(superfan_target)
-		if (distance < 2)
-			if (prob(2))
+		if (distance > 2 && !walk_started)
+			N.staying = FALSE
+			N.walktarget = superfan_target
+			walk_started = TRUE
+		if (distance <= 2)
+			walk(SF, 0)
+			N.staying = TRUE
+			SF.dir = get_dir(SF, superfan_target)
+			if (prob(1))
 				SF.emote(superfan_emote)
-	if(SF.client) //Player Client
-		if (distance > 5)
-			SF.walk_to_caster(superfan_target)
+			walk_started = FALSE
+	if (SF.client) // Player logic
+		if (distance > 3 && !walk_started)
+			step_towards(SF, superfan_target)
+			walk_started = TRUE
+		if (distance <= 3)
+			walk(SF, 0)
+			SF.dir = get_dir(SF, superfan_target)
+			walk_started = FALSE
+
 		if (prob(1))
 			SF.emote(superfan_emote)
+
 /datum/component/superfan/proc/end()
 	if(!QDELETED(src))
 		qdel(src)
 /datum/component/superfan/Destroy()
 	if (isnpc(parent))
 		var/mob/living/carbon/human/npc/N = parent
+		walk(N, 0)
 		N.staying = FALSE
 		N.walktarget = N.ChoosePath()
 	..()
