@@ -73,7 +73,7 @@
 						if(istype(I, item_type))
 							if(istype(I, /obj/item/reagent_containers/blood))
 								var/obj/item/reagent_containers/blood/bloodpack = I
-								if(!bloodpack.reagents)
+								if(bloodpack.reagents && bloodpack.reagents.total_volume > 0)
 									found_items += I
 									break
 							else
