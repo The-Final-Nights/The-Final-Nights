@@ -12,9 +12,9 @@
 	var/list/valid_bodies = list()
 
 	for(var/mob/living/carbon/human/targetbody in loc)
-//		if(targetbody == usr)
-//			to_chat(usr, span_warning("You cannot invoke this ritual upon yourself."))
-//			return
+		if(targetbody == usr)
+			to_chat(usr, span_warning("You cannot invoke this ritual upon yourself."))
+			return
 		if(targetbody.stat == DEAD)
 			to_chat(usr, span_warning("The target is dead, and has taken its secrets to the grave!"))
 			return
