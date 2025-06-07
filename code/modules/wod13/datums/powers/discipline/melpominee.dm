@@ -110,7 +110,7 @@
 			else
 				to_chat(hearer, span_warning("[target]'s lips aren't moving to match [target.p_their()] words."))
 
-	message_admins("[ADMIN_LOOKUPFLW(owner)] used missing_voice, saying '[new_say]' through [ADMIN_LOOKUPFLW(target)].")
+	message_admins("[ADMIN_LOOKUPFLW(owner)] used missing_voice, saying '[new_say]' through [target].")
 	log_game("[key_name(owner)] used missing_voice, saying '[new_say]' through [key_name(target)].")
 	SSblackbox.record_feedback("tally", "missing voice", 1, "[key_name(owner)] used missing_voice, saying '[new_say]' through [key_name(target)].")
 
