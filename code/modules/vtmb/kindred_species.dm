@@ -334,6 +334,9 @@
 			if(iscathayan(grabbed_victim))
 				to_chat(owner, span_warning("[grabbed_victim] vomits the vitae back!"))
 				return
+			if(!grabbed_victim.client && !isnpc(vampire.pulling))
+				to_chat(owner, span_warning("You need [grabbed_victim]'s attention to do that!"))
+				return
 			if(grabbed_victim.stat == DEAD)
 				if(!grabbed_victim.key)
 					to_chat(owner, span_warning("You need [grabbed_victim]'s mind to Embrace!"))
