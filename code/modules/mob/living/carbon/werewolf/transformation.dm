@@ -68,6 +68,8 @@
 			DA.Grant(lupus_form)
 			var/datum/action/dance/NE = new()
 			NE.Grant(crinos_form)
+		if(HAS_TRAIT(trans, TRAIT_WARRIOR))
+			ADD_TRAIT(trans.mind, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 	var/matrix/ntransform = matrix(trans.transform) //aka transform.Copy()
 
