@@ -1282,7 +1282,7 @@
 		to_chat(src, span_warning("You try to write, but don't know how to spell anything!"))
 		return FALSE
 
-	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION))
+	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_ALT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_PROTEAN_VISION))
 		to_chat(src, span_warning("It's too dark in here to write anything!"))
 		return FALSE
 
@@ -1311,7 +1311,7 @@
 		to_chat(src, span_warning("You try to read [O], but can't comprehend any of it."))
 		return FALSE
 
-	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION))
+	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_ALT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_PROTEAN_VISION))
 		to_chat(src, span_warning("It's too dark in here to read!"))
 		return FALSE
 
