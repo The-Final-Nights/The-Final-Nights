@@ -476,6 +476,9 @@
 				if ("rotten4")
 					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a skeletonised corpse!</b></span><br>"
 
+		if (iszombie(src) && is_face_visible())
+			msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a decayed corpse!</b></span><br>"
+
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
 				msg += span_deadsay("[t_He] do[t_es]n't appear to be [t_him]self.<br>")
@@ -510,6 +513,11 @@
 					seems_alive = 0
 					wyrm_taint++
 				named_splat = "You scent the dark journey through Erebus permeating this body, the mark of the Wan Kuei."
+
+			if(iszombie(src))
+				seems_alive = 0
+				wyrm_taint++
+				named_splat = "You scent nothing but the stench of death and decay - this is no living creature."
 
 			if (iskindred(src))
 				named_splat = "You scent the shiveringly addictive vitae of the children of Caine."

@@ -7,6 +7,7 @@
 #define GENETIC_MUTATION "genetic"
 #define OBESITY "obesity"
 #define MAGIC_TRAIT "magic"
+#define NECROMANCY_TRAIT "necromancy"
 #define TRAUMA_TRAIT "trauma"
 #define DISEASE_TRAIT "disease"
 #define SPECIES_TRAIT "species"

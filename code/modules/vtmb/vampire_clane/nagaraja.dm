@@ -14,3 +14,6 @@
 /datum/vampireclane/nagaraja/on_gain(mob/living/carbon/human/H)
 	. = ..()
 	H.add_quirk(/datum/quirk/organovore)
+
+	var/obj/item/necromancy_tome/necrotome = new(H.loc)
+	H.equip_to_slot_if_possible(necrotome, ITEM_SLOT_BACKPACK, TRUE)

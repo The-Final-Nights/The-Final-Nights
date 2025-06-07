@@ -31,6 +31,9 @@
 /datum/vampireclane/cappadocian/post_gain(mob/living/carbon/human/H)
 	. = ..()
 
+	var/obj/item/necromancy_tome/necrotome = new(H.loc)
+	H.equip_to_slot_if_possible(necrotome, ITEM_SLOT_BACKPACK, TRUE)
+
 	if ((alt_sprite == "rotten1") || (alt_sprite == "rotten2"))
 		return
 
