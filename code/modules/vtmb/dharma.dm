@@ -204,7 +204,7 @@
 						if(isliving(frenzy_target))
 							var/mob/living/L = frenzy_target
 							if(L.stat != DEAD)
-								a_intent = INTENT_HARM
+								set_combat_mode(TRUE)
 								if(last_rage_hit+5 < world.time)
 									last_rage_hit = world.time
 									UnarmedAttack(L)
@@ -220,7 +220,7 @@
 						if(isliving(mind?.dharma?.Po_Focus))
 							var/mob/living/L = mind?.dharma?.Po_Focus
 							if(L.stat != DEAD)
-								a_intent = INTENT_GRAB
+								set_combat_mode(TRUE)
 								dropItemToGround(get_active_held_item())
 								if(last_rage_hit+5 < world.time)
 									last_rage_hit = world.time
@@ -231,7 +231,7 @@
 			if("Monkey")
 				if(mind?.dharma?.Po_Focus)
 					if(get_dist(mind?.dharma?.Po_Focus, src) <= 1)
-						a_intent = INTENT_HELP
+						set_combat_mode(FALSE)
 						if(!istype(get_active_held_item(), /obj/item/toy))
 							dropItemToGround(get_active_held_item())
 						else
@@ -248,7 +248,7 @@
 			if("Demon")
 				if(mind?.dharma?.Po_Focus)
 					if(get_dist(mind?.dharma?.Po_Focus, src) <= 1)
-						a_intent = INTENT_GRAB
+						set_combat_mode(TRUE)
 						dropItemToGround(get_active_held_item())
 						if(last_rage_hit+5 < world.time)
 							last_rage_hit = world.time
@@ -269,7 +269,7 @@
 				if(isliving(frenzy_target))
 					var/mob/living/L = frenzy_target
 					if(L.stat != DEAD)
-						a_intent = INTENT_HARM
+						set_combat_mode(TRUE)
 						if(last_rage_hit+5 < world.time)
 							last_rage_hit = world.time
 							UnarmedAttack(L)

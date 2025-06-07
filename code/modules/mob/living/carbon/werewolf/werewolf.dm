@@ -150,10 +150,6 @@
 /mob/living/carbon/werewolf/reagent_check(datum/reagent/R) //can metabolize all reagents
 	return 0
 
-/mob/living/carbon/werewolf/get_status_tab_items()
-	. = ..()
-	. += "Intent: [a_intent]"
-
 /mob/living/carbon/werewolf/getTrail()
 	return pick (list("trails_1", "trails2"))
 
@@ -176,7 +172,6 @@
 	icon_state = "black"
 	mob_size = MOB_SIZE_HUGE
 	butcher_results = list(/obj/item/food/meat/slab = 5)
-	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
 	limb_destroyer = 1
 	hud_type = /datum/hud/werewolf
 	melee_damage_lower = 65
@@ -206,7 +201,6 @@
 	icon_state = "black"
 	mob_size = MOB_SIZE_HUGE
 	butcher_results = list(/obj/item/food/meat/slab = 5)
-	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
 	limb_destroyer = 1
 
 	hud_type = /datum/hud/werewolf

@@ -18,6 +18,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/cmd_admin_pm_panel,		/*admin-pm list*/
 	/client/proc/stop_sounds,
 	/client/proc/mark_datum_mapview,
+	/client/proc/tag_datum_mapview,
 	/client/proc/debugstatpanel,
 	// TFN MODULAR START
 	/client/proc/addbunkerbypass,
@@ -96,7 +97,8 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/open_borgopanel,
 	/client/proc/log_viewer_new,
 	/client/proc/fax_panel, /*send a paper to fax*/
-	/client/proc/openTicketManager
+	/client/proc/openTicketManager,
+	/datum/admins/proc/display_tags
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
 GLOBAL_PROTECT(admin_verbs_ban)

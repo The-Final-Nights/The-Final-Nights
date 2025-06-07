@@ -128,7 +128,7 @@
 	START_PROCESSING(SSobj, src)
 	RegisterSignal(owner, COMSIG_CLICK_SHIFT, PROC_REF(examinate_check))
 	RegisterSignal(src, COMSIG_ATOM_HEARER_IN_VIEW, PROC_REF(include_owner))
-	RegisterSignal(owner, COMSIG_LIVING_REGENERATE_LIMBS, PROC_REF(unlist_head))
+	RegisterSignal(owner, COMSIG_CARBON_REGENERATE_LIMBS, PROC_REF(unlist_head))
 	RegisterSignal(owner, COMSIG_LIVING_REVIVE, PROC_REF(retrieve_head))
 
 /obj/item/dullahan_relay/process()
@@ -138,7 +138,7 @@
 
 /obj/item/dullahan_relay/proc/examinate_check(atom/source, mob/user)
 	if(user.client.eye == src)
-		return COMPONENT_ALLOW_EXAMINATE
+		return COMSIG_MOB_EXAMINATE
 
 //Adds the owner to the list of hearers in hearers_in_view(), for visible/hearable on top of say messages
 /obj/item/dullahan_relay/proc/include_owner(datum/source, list/processing_list, list/hearers)

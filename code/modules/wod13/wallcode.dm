@@ -71,16 +71,18 @@
 	. = ..()
 	if(islupus(user))
 		return
-	if(user.a_intent != INTENT_HARM)
+	if(ishuman(user))
+		return
+	var/mob/living/carbon/human/carbon_human = user
+	if(!(carbon_human.combat_mode))
 		LoadComponent(/datum/component/leanable, dropping)
 	else
-		if(get_dist(user, src) < 2)
-			var/turf/above_turf = locate(user.x, user.y, user.z + 1)
+		if(get_dist(carbon_human, src) < 2)
+			var/turf/above_turf = locate(carbon_human.x, carbon_human.y, carbon_human.z + 1)
 			if(above_turf && istype(above_turf, /turf/open/openspace))
-				var/mob/living/carbon_human = user
 				carbon_human.climb_wall(above_turf)
 			else
-				to_chat(user, "<span class='warning'>You can't climb there!</span>")
+				to_chat(carbon_human, "<span class='warning'>You can't climb there!</span>")
 
 /turf/closed/wall/vampwall/ex_act(severity, target)
 	return

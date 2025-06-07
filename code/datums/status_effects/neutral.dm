@@ -345,6 +345,7 @@
 	icon_state = "buckled"
 
 /atom/movable/screen/alert/status_effect/leaning/Click()
+	. = ..()
 	var/mob/living/L = usr
 	if(!istype(L) || L != owner)
 		return

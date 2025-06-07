@@ -73,7 +73,7 @@
 	return TRUE
 
 /datum/keybinding/human/bite
-	hotkey_keys = list("F")
+	hotkey_keys = list("N")
 	name = "bite"
 	full_name = "Bite"
 	description = "Bite whoever you're aggressively grabbing, and feed on them if possible."

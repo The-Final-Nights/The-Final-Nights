@@ -15,15 +15,10 @@
 		holder.icon_state = "aura_bright"
 
 	if(client)
-		switch(a_intent)
-			if(INTENT_HARM)
-				holder.color = AURA_MORTAL_HARM
-			if(INTENT_GRAB)
-				holder.color = AURA_MORTAL_GRAB
-			if(INTENT_DISARM)
-				holder.color = AURA_MORTAL_DISARM
-			else
-				holder.color = AURA_MORTAL_HELP
+		if(combat_mode)
+			holder.color = AURA_MORTAL_HARM
+		else
+			holder.color = AURA_MORTAL_HELP
 	else if (isnpc(src))
 		var/mob/living/carbon/human/npc/N = src
 		if (N.danger_source)
@@ -34,15 +29,10 @@
 	if (iskindred(src) || HAS_TRAIT(src, TRAIT_COLD_AURA) || (iscathayan(src) && !H.check_kuei_jin_alive()))
 		//pale aura for vampires
 		if(!HAS_TRAIT(src, TRAIT_WARM_AURA) && !diablerist)
-			switch(a_intent)
-				if(INTENT_HARM)
-					holder.color = AURA_UNDEAD_HARM
-				if(INTENT_GRAB)
-					holder.color = AURA_UNDEAD_GRAB
-				if(INTENT_DISARM)
-					holder.color = AURA_UNDEAD_DISARM
-				else
-					holder.color = AURA_UNDEAD_HELP
+			if(combat_mode)
+				holder.color = AURA_UNDEAD_HARM
+			else
+				holder.color = AURA_UNDEAD_HELP
 		//only Baali can get antifrenzy through selling their soul, so this gives them the unholy halo (MAKE THIS BETTER)
 		if (antifrenzy)
 			holder.icon = 'icons/effects/32x64.dmi' //I'm not fucking with this until GAGS are done being ported, antifrenzy aura has some weird colorized components.

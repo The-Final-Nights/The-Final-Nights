@@ -604,15 +604,15 @@
 		if(user)
 			attack_ai(user)
 
-/obj/machinery/door/airlock/attack_animal(mob/user)
+/obj/machinery/door/airlock/attack_animal(mob/user, list/modifiers)
 	if(isElectrified() && shock(user, 100))
 		return
 	return ..()
 
-/obj/machinery/door/airlock/attack_paw(mob/user)
-	return attack_hand(user)
+/obj/machinery/door/airlock/attack_paw(mob/user, list/modifiers)
+	return attack_hand(user, modifiers)
 
-/obj/machinery/door/airlock/attack_hand(mob/user)
+/obj/machinery/door/airlock/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -857,12 +857,12 @@
 		return ..()
 
 
-/obj/machinery/door/airlock/try_to_weld(obj/item/weldingtool/W, mob/user)
+/obj/machinery/door/airlock/try_to_weld(obj/item/weldingtool/W, mob/living/user)
 	if(!operating && density)
 		if(seal)
 			to_chat(user, "<span class='warning'>[src] is blocked by a seal!</span>")
 			return
-		if(user.a_intent != INTENT_HELP)
+		if(user.combat_mode)
 			if(!W.tool_start_check(user, amount=0))
 				return
 			user.visible_message("<span class='notice'>[user] begins [welded ? "unwelding":"welding"] the airlock.</span>", \
@@ -1124,14 +1124,14 @@
 		loseMainPower()
 		loseBackupPower()
 
-/obj/machinery/door/airlock/attack_alien(mob/living/carbon/alien/humanoid/user)
+/obj/machinery/door/airlock/attack_alien(mob/living/carbon/alien/humanoid/user, list/modifiers)
 	if(isElectrified() && shock(user, 100)) //Mmm, fried xeno!
 		add_fingerprint(user)
 		return
 	if(!density) //Already open
 		return ..()
 	if(locked || welded || seal) //Extremely generic, as aliens only understand the basics of how airlocks work.
-		if(user.a_intent == INTENT_HARM)
+		if(user.combat_mode)
 			return ..()
 		to_chat(user, "<span class='warning'>[src] refuses to budge!</span>")
 		return

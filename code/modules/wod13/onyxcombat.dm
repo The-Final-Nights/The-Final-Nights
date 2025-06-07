@@ -1,5 +1,54 @@
-/datum/preferences
-	var/last_torpor = 0
+/mob/proc/claw_swing()
+	next_click = world.time+5
+	new /obj/effect/temp_visual/dir_setting/claw_effect(get_turf(src), dir)
+	playsound(loc, 'code/modules/wod13/sounds/swing.ogg', 50, TRUE)
+	var/atom/M
+	var/turf/T = get_step(src, dir)
+	var/turf/T1 = get_step(T, turn(dir, -90))
+	var/turf/T2 = get_step(T, turn(dir, 90))
+	for(var/mob/living/MB in T)
+		if(MB)
+			M = MB
+	if(!M)
+		for(var/mob/living/MB in T1)
+			if(MB)
+				M = MB
+		for(var/mob/living/MB in T2)
+			if(MB)
+				M = MB
+
+	if(M)
+		return M
+	for(var/obj/OB in T)
+		if(OB)
+			M = OB
+	return M
+
+/mob/proc/melee_swing()
+	next_click = world.time+5
+	new /obj/effect/temp_visual/dir_setting/swing_effect(get_turf(src), dir)
+	playsound(loc, 'code/modules/wod13/sounds/swing.ogg', 50, TRUE)
+	var/atom/M
+	var/turf/T = get_step(src, dir)
+	var/turf/T1 = get_step(T, turn(dir, -90))
+	var/turf/T2 = get_step(T, turn(dir, 90))
+	for(var/mob/living/MB in T)
+		if(MB)
+			M = MB
+	if(!M)
+		for(var/mob/living/MB in T1)
+			if(MB)
+				M = MB
+		for(var/mob/living/MB in T2)
+			if(MB)
+				M = MB
+
+	if(M)
+		return M
+	for(var/obj/OB in T)
+		if(OB)
+			M = OB
+	return M
 
 /mob/living/carbon/human/death()
 	. = ..()
@@ -114,7 +163,7 @@
 		SwitchBlocking()
 	if(CheckFrenzyMove() && blocking)
 		SwitchBlocking()
-	if(user.a_intent == INTENT_GRAB && ishuman(user))
+	if(user.combat_mode && ishuman(user))
 		var/mob/living/carbon/human/ZIG = user
 		if(ZIG.getStaminaLoss() < 50 && !ZIG.CheckFrenzyMove())
 			ZIG.parry_class = W.w_class
@@ -173,19 +222,19 @@
 				return
 	..()
 
-/mob/living/carbon/human/attack_hand(mob/user)
+/mob/living/carbon/human/attack_hand(mob/living/carbon/human/user)
 	if(getStaminaLoss() >= 50 && blocking)
 		SwitchBlocking()
 	if(CheckFrenzyMove() && blocking)
 		SwitchBlocking()
-	if(user.a_intent == INTENT_HARM && HAS_TRAIT(src, TRAIT_ENHANCED_MELEE_DODGE))
+	if(user.combat_mode && HAS_TRAIT(src, TRAIT_ENHANCED_MELEE_DODGE))
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		apply_damage(3, STAMINA)
 		user.do_attack_animation(src)
 		emote("flip")
 		visible_message("<span class='danger'>[src] dodges the punch!</span>", "<span class='danger'>You dodge the punch!</span>")
 		return
-	if(user.a_intent == INTENT_HARM && blocking)
+	if(user.combat_mode && blocking)
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		apply_damage(10, STAMINA)
 		user.do_attack_animation(src)
@@ -458,14 +507,14 @@
 	if(isturf(src) || ismob(src) || isobj(src))
 		if(loc && iscarbon(usr))
 			var/mob/living/carbon/H = usr
-			if(H.a_intent == INTENT_HARM)
+			if(H.combat_mode)
 				if(!H.IsSleeping() && !H.IsUnconscious() && !H.IsParalyzed() && !H.IsKnockdown() && !H.IsStun() && !HAS_TRAIT(H, TRAIT_RESTRAINED))
 					H.face_atom(src)
 					H.harm_focus = H.dir
 
 /mob/living/carbon/Move(atom/newloc, direct, glide_size_override)
 	. = ..()
-	if(a_intent == INTENT_HARM && client)
+	if(combat_mode && client)
 		setDir(harm_focus)
 	else
 		harm_focus = dir

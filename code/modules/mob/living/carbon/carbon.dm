@@ -68,14 +68,15 @@
 	else
 		mode() // Activate held item
 
-/mob/living/carbon/attackby(obj/item/I, mob/user, params)
+/mob/living/carbon/attackby(obj/item/I, mob/living/user, params)
 	for(var/datum/surgery/S in surgeries)
 		if(body_position == LYING_DOWN || !S.lying_required)
-			if((S.self_operable || user != src) && (user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM))
-				if(S.next_step(user,user.a_intent))
+			var/list/modifiers = params2list(params)
+			if((S.self_operable || user != src) && !user.combat_mode)
+				if(S.next_step(user, modifiers))
 					return 1
 
-	if(!all_wounds || !(user.a_intent == INTENT_HELP || user == src))
+	if(!all_wounds || !(!user.combat_mode || user == src))
 		return ..()
 
 	for(var/i in shuffle(all_wounds))
@@ -124,20 +125,22 @@
 /mob/living/carbon/proc/toggle_throw_mode()
 	if(stat)
 		return
-	if(in_throw_mode)
-		throw_mode_off()
+	if(throw_mode)
+		throw_mode_off(THROW_MODE_TOGGLE)
 	else
-		throw_mode_on()
+		throw_mode_on(THROW_MODE_TOGGLE)
 
 
-/mob/living/carbon/proc/throw_mode_off()
-	in_throw_mode = FALSE
+/mob/living/carbon/proc/throw_mode_off(method)
+	if(throw_mode > method) //A toggle doesnt affect a hold
+		return
+	throw_mode = THROW_MODE_DISABLED
 	if(hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_off"
 
 
-/mob/living/carbon/proc/throw_mode_on()
-	in_throw_mode = TRUE
+/mob/living/carbon/proc/throw_mode_on(mode = THROW_MODE_TOGGLE)
+	throw_mode = mode
 	if(hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_on"
 
@@ -147,7 +150,7 @@
 
 /mob/living/carbon/throw_item(atom/target)
 	. = ..()
-	throw_mode_off()
+	throw_mode_off(THROW_MODE_TOGGLE)
 	if(!target || !isturf(loc))
 		return
 	if(istype(target, /atom/movable/screen))
@@ -543,7 +546,7 @@
 	. = ..()
 	. += add_abilities_to_panel()
 
-/mob/living/carbon/attack_ui(slot)
+/mob/living/carbon/attack_ui(slot, params)
 	if(!has_hand_for_held_index(active_hand_index))
 		return 0
 	return ..()

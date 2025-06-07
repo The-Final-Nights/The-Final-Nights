@@ -22,27 +22,27 @@
 	ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, GENETIC_MUTATION)
 	ADD_TRAIT(owner, TRAIT_HULK, GENETIC_MUTATION)
 	owner.update_body_parts()
-	SEND_SIGNAL(owner, COMSIG_ADD_MOOD_EVENT, "hulk", /datum/mood_event/hulk)
-	RegisterSignal(owner, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, PROC_REF(on_attack_hand))
+	RegisterSignal(owner, COMSIG_LIVING_EARLY_UNARMED_ATTACK, PROC_REF(on_attack_hand))
 	RegisterSignal(owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	RegisterSignal(owner, COMSIG_MOB_CLICKON, PROC_REF(check_swing))
 
-/datum/mutation/human/hulk/proc/on_attack_hand(mob/living/carbon/human/source, atom/target, proximity)
+/datum/mutation/human/hulk/proc/on_attack_hand(mob/living/carbon/human/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
-	if(!proximity)
-		return
-	if(source.a_intent != INTENT_HARM)
-		return
-	if(target.attack_hulk(owner))
-		if(world.time > (last_scream + scream_delay))
-			last_scream = world.time
-			INVOKE_ASYNC(src, PROC_REF(scream_attack), source)
-		log_combat(source, target, "punched", "hulk powers")
-		source.do_attack_animation(target, ATTACK_EFFECT_SMASH)
-		source.changeNext_move(CLICK_CD_MELEE)
+	if(!source.combat_mode || !proximity || LAZYACCESS(modifiers, RIGHT_CLICK))
+		return NONE
+	if(!source.can_unarmed_attack())
+		return COMPONENT_SKIP_ATTACK
+	if(!target.attack_hulk(owner))
+		return NONE
 
-		return COMPONENT_CANCEL_ATTACK_CHAIN
+	if(world.time > (last_scream + scream_delay))
+		last_scream = world.time
+		INVOKE_ASYNC(src, PROC_REF(scream_attack), source)
+	log_combat(source, target, "punched", "hulk powers")
+	source.do_attack_animation(target, ATTACK_EFFECT_SMASH)
+	source.changeNext_move(CLICK_CD_MELEE)
+	return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /datum/mutation/human/hulk/proc/scream_attack(mob/living/carbon/human/source)
 	source.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ), forced="hulk")
@@ -79,8 +79,7 @@
 	REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, GENETIC_MUTATION)
 	REMOVE_TRAIT(owner, TRAIT_HULK, GENETIC_MUTATION)
 	owner.update_body_parts()
-	SEND_SIGNAL(owner, COMSIG_CLEAR_MOOD_EVENT, "hulk")
-	UnregisterSignal(owner, COMSIG_HUMAN_EARLY_UNARMED_ATTACK)
+	UnregisterSignal(owner, COMSIG_LIVING_EARLY_UNARMED_ATTACK)
 	UnregisterSignal(owner, COMSIG_MOB_SAY)
 	UnregisterSignal(owner, COMSIG_MOB_CLICKON)
 
@@ -97,14 +96,13 @@
 #define HULK_TAILTHROW_STEPS 28
 
 /// Run a barrage of checks to see if any given click is actually able to swing
-/datum/mutation/human/hulk/proc/check_swing(mob/living/carbon/human/user, atom/clicked_atom, params)
+/datum/mutation/human/hulk/proc/check_swing(mob/living/carbon/human/user, atom/clicked_atom, list/modifiers)
 	SIGNAL_HANDLER
 
 	/// Basically, we only proceed if we're in throw mode with a tailed carbon in our grasp with at least a neck grab and we're not restrained in some way
-	var/list/modifiers = params2list(params)
-	if(modifiers["alt"] || modifiers["shift"] || modifiers["ctrl"] || modifiers["middle"])
+	if(LAZYACCESS(modifiers, ALT_CLICK) || LAZYACCESS(modifiers, SHIFT_CLICK) || LAZYACCESS(modifiers, CTRL_CLICK) || LAZYACCESS(modifiers, MIDDLE_CLICK))
 		return
-	if(!user.in_throw_mode || user.get_active_held_item() || user.zone_selected != BODY_ZONE_PRECISE_GROIN)
+	if(!user.throw_mode || user.get_active_held_item() || user.zone_selected != BODY_ZONE_PRECISE_GROIN)
 		return
 	if(user.grab_state < GRAB_NECK || !iscarbon(user.pulling) || user.buckled || user.incapacitated())
 		return

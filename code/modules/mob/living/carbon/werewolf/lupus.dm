@@ -5,7 +5,6 @@
 	pass_flags = PASSTABLE
 	mob_size = MOB_SIZE_SMALL
 	butcher_results = list(/obj/item/food/meat/slab = 5)
-	possible_a_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, INTENT_HARM)
 	hud_type = /datum/hud/werewolf
 	limb_destroyer = 1
 	has_limbs = 0

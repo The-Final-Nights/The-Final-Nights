@@ -153,7 +153,7 @@
 			if(isliving(frenzy_target))
 				var/mob/living/L = frenzy_target
 				if(L.stat != DEAD)
-					a_intent = INTENT_HARM
+					set_combat_mode(TRUE)
 					if(last_rage_hit+5 < world.time)
 						last_rage_hit = world.time
 						UnarmedAttack(L)

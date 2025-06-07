@@ -232,12 +232,11 @@
 		using.hud = src
 		static_inventory += using
 
-	using = new /atom/movable/screen/act_intent()
-	using.icon_state = mymob.a_intent
-	using.icon = 'code/modules/wod13/UI/buttons32.dmi'
-	using.hud = src
-	static_inventory += using
-	action_intent = using
+	action_intent = new /atom/movable/screen/combattoggle/flashy()
+	action_intent.hud = src
+	action_intent.icon = ui_style
+	action_intent.screen_loc = ui_combat_toggle
+	static_inventory += action_intent
 
 	using = new/atom/movable/screen/language_menu
 	using.screen_loc = ui_language_menu
