@@ -18,6 +18,14 @@
 			user.Paralyze(1)
 
 
+/obj/item/melee/vampirearms/afterattack(atom/A, mob/living/carbon/human/user, proximity)
+	. = ..()
+	if(!proximity)
+		return
+	if(quieted && isliving(A))
+		user.bloodpool -= 1
+
+
 /obj/item
 	var/masquerade_violating = FALSE
 
@@ -124,30 +132,20 @@
 	icon_state = "firetana"
 	pixel_w = -8
 	cost = 0
+	damtype = BURN
 	item_flags = DROPDEL
 	is_iron = FALSE
 	masquerade_violating = TRUE
-
-/obj/item/melee/vampirearms/katana/fire/afterattack(atom/target, mob/living/carbon/user, proximity)
-	. = ..()
-	if (isliving(target) && proximity)
-		var/mob/living/burnt_mob = target
-		burnt_mob.apply_damage(20, BURN)
 
 /obj/item/melee/vampirearms/katana/blood
 	name = "bloody katana"
 	color = "#bb0000"
 	pixel_w = -8
 	cost = 0
+	damtype = CLONE
 	item_flags = DROPDEL
 	is_iron = FALSE
 	masquerade_violating = TRUE
-
-/obj/item/melee/vampirearms/katana/blood/afterattack(atom/target, mob/living/carbon/user, proximity)
-	. = ..()
-	if (isliving(target) && proximity)
-		var/mob/living/burnt_mob = target
-		burnt_mob.apply_damage(20, CLONE)
 
 /obj/item/melee/vampirearms/rapier
 	name = "rapier"
@@ -462,8 +460,9 @@
 	name = "claws"
 	icon_state = "gangrel"
 	w_class = WEIGHT_CLASS_BULKY
-	force = 20
-	armour_penetration = 100	//It's magical damage
+	force = 35
+	armour_penetration = 50
+	damtype = CLONE
 	block_chance = 20
 	item_flags = DROPDEL
 	masquerade_violating = TRUE
@@ -472,18 +471,24 @@
 /obj/item/melee/vampirearms/knife/gangrel/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)
 		return
-	if(isliving(target))
-		var/mob/living/L = target
-		L.apply_damage(30, CLONE)
 	if(HAS_TRAIT(user, TRAIT_WARRIOR))
 		user.changeNext_move(CLICK_CD_MELEE * 0.5)
 	else
 		user.changeNext_move(CLICK_CD_MELEE)
 
+/obj/item/melee/vampirearms/knife/gangrel/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity)
+		return
+	if(isliving(target))
+		var/mob/living/L = target
+		L.apply_damage(30, CLONE)
+
+
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"
-	force = 15
-	armour_penetration = 100
+	force = 20
+	damtype = BURN
+	armour_penetration = 0
 	block_chance = 0
 	icon_state = "lasombra"
 	masquerade_violating = TRUE
@@ -491,9 +496,6 @@
 /obj/item/melee/vampirearms/knife/gangrel/lasombra/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)
 		return
-	if(isliving(target))
-		var/mob/living/L = target
-		L.apply_damage(20, BURN)
 	if(HAS_TRAIT(user, TRAIT_WARRIOR))
 		user.changeNext_move(CLICK_CD_MELEE * 0.5)
 	else
