@@ -192,7 +192,6 @@
 #define TRAIT_HUNTED			"hunted"
 #define TRAIT_VIOLATOR			"violator"
 #define TRAIT_DIABLERIE			"diablerie"
-#define TRAIT_ALT_NIGHT_VISION  "alt_night_vision"
 #define TRAIT_GULLET			"gullet"
 #define TRAIT_CHARMER			"charmer"
 #define TRAIT_UNBONDING         "unbonding"
