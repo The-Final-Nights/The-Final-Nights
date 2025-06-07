@@ -16,6 +16,8 @@
 	display_order = JOB_DISPLAY_ORDER_MALKAVIAN
 	exp_type_department = EXP_TYPE_COUNCIL
 
+	departments = DEPARTMENT_BITFLAG_PRIMOGEN_COUNCIL
+
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Malkavian")
 	minimal_generation = 12
@@ -68,6 +70,8 @@
 	display_order = JOB_DISPLAY_ORDER_NOSFERATU
 	exp_type_department = EXP_TYPE_COUNCIL
 
+	departments = DEPARTMENT_BITFLAG_PRIMOGEN_COUNCIL
+
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Nosferatu")
 	minimal_generation = 12
@@ -116,6 +120,8 @@
 	display_order = JOB_DISPLAY_ORDER_VENTRUE
 	exp_type_department = EXP_TYPE_COUNCIL
 
+	departments = DEPARTMENT_BITFLAG_PRIMOGEN_COUNCIL
+
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Ventrue")
 	minimal_generation = 12
@@ -162,6 +168,8 @@
 	paycheck_department = ACCOUNT_SRV
 	display_order = JOB_DISPLAY_ORDER_TOREADOR
 	exp_type_department = EXP_TYPE_COUNCIL
+
+	departments = DEPARTMENT_BITFLAG_PRIMOGEN_COUNCIL
 
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Toreador")
@@ -211,6 +219,8 @@
 	display_order = JOB_DISPLAY_ORDER_BANUPRIM
 	exp_type_department = EXP_TYPE_COUNCIL
 
+	departments = DEPARTMENT_BITFLAG_PRIMOGEN_COUNCIL
+
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Banu Haqim")
 	minimal_generation = 12
@@ -256,6 +266,8 @@
 	paycheck_department = ACCOUNT_SRV
 	display_order = JOB_DISPLAY_ORDER_LASOMBRAPRIM
 	exp_type_department = EXP_TYPE_COUNCIL
+
+	departments = DEPARTMENT_BITFLAG_PRIMOGEN_COUNCIL
 
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Lasombra")

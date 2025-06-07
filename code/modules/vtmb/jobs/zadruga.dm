@@ -16,6 +16,8 @@
 	display_order = JOB_DISPLAY_ORDER_ZADRUGA
 	exp_type_department = EXP_TYPE_TZIMISCE
 
+	departments = DEPARTMENT_BITFLAG_TZIMISCE
+
 	allowed_species = list("Ghoul")
 	duty = "You were born in servitude to the Master of the Manor: your father served the Voivode, as did his father. Now, you carry their blood, and with it their responsibilities."
 	experience_addition = 20

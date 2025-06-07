@@ -17,6 +17,8 @@
 	display_order = JOB_DISPLAY_ORDER_BOGATYR
 	exp_type_department = EXP_TYPE_TZIMISCE
 
+	departments = DEPARTMENT_BITFLAG_TZIMISCE
+
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list("Tzimisce")
 	minimal_generation = 13	//Uncomment when players get exp enough

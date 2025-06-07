@@ -152,16 +152,18 @@
 		"Triad"
 	)
 	var/list/departments = list(
-		"Camarilla" = GLOB.command_positions,
-		"Primogen Council" = GLOB.camarilla_council_positions,
+		"Camarilla" = GLOB.camarilla_positions,
+		"Primogen Council" = GLOB.primogen_council_positions,
 		"Tremere" = GLOB.tremere_positions,
 		"Anarch" = GLOB.anarch_positions,
 		"Giovanni" = GLOB.giovanni_positions,
 		"Clan Tzimisce" = GLOB.tzimisce_positions,
 		"Law Enforcement" = GLOB.police_positions + GLOB.national_security_positions,
 		"Warehouse" = GLOB.warehouse_positions,
-		"Triad" = GLOB.gang_positions
+		"Triad" = GLOB.triad_positions
 	)
+	var/list/heads = GLOB.primogen_council_positions
+
 	for(var/datum/data/record/t in GLOB.data_core.general)
 		var/name = t.fields["name"]
 		var/rank = t.fields["rank"]
@@ -171,12 +173,18 @@
 			if(rank in jobs || (t.fields["truerank"] && (t.fields["truerank"] in jobs))) // TFN EDIT: alt job titles
 				if(!manifest_out[department])
 					manifest_out[department] = list()
-				manifest_out[department] += list(list(
-					"name" = name,
-					"rank" = rank
-				))
+				// Append to beginning of list if captain or department head
+				if (rank == "Prince" || (department != "Command" && (rank in heads)))
+					manifest_out[department] = list(list(
+						"name" = name,
+						"rank" = rank
+					)) + manifest_out[department]
+				else
+					manifest_out[department] += list(list(
+						"name" = name,
+						"rank" = rank
+					))
 				has_department = TRUE
-				break
 		if(!has_department)
 			if(!manifest_out["Misc"])
 				manifest_out["Misc"] = list()
