@@ -14,7 +14,7 @@
 			to_chat(src, "<span class='userdanger'>[penetrated_text]</span>")
 		else
 			to_chat(src, "<span class='userdanger'>Your armor was penetrated!</span>")
-	else if(armor >= 200)
+	else if(armor >= 100)
 		if(absorb_text)
 			to_chat(src, "<span class='notice'>[absorb_text]</span>")
 		else
