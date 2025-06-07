@@ -101,3 +101,81 @@
 /datum/antagonist/hunter/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>You are the Hunter.</span>")
 	owner.announce_objectives()
+
+/obj/item/card/id/valkyrie
+	name = "SOF Task Force Badge"
+	desc = "SOF Operator"
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id3"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id3"
+
+/obj/item/card/id/valkyrie/sergeant
+	name = "SOF Task Force NCO Badge"
+	desc = "SOF Sergeant"
+
+/datum/outfit/job/hunter/valkyrie
+	name = "Task Force Valkyrie Operator"
+	uniform = /obj/item/clothing/under/vampire/military_fatigues/valkyrie
+	r_pocket = /obj/item/ammo_box/magazine/m556/compound
+	id = /obj/item/card/id/valkyrie
+	shoes = /obj/item/clothing/shoes/vampire/jackboots
+	ears = /obj/item/p25radio/police/government
+	l_pocket = /obj/item/vamp/keys/hunter
+	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
+	belt = /obj/item/gun/ballistic/automatic/ar/valkyrie
+	back = /obj/item/storage/backpack/security
+	glasses = /obj/item/clothing/glasses/hud/security/etheric
+	mask = /obj/item/clothing/mask/vampire/balaclava
+	head = /obj/item/clothing/head/vampire/army/valkyrie
+	gloves = /obj/item/clothing/gloves/combat
+
+	backpack_contents = list(
+		/obj/item/storage/book/bible = 1,
+		/obj/item/ammo_box/magazine/m556/compound = 5,
+		/obj/item/ammo_box/magazine/m556/bleeder = 3,
+		/obj/item/ammo_box/magazine/m556/hod = 3,
+		/obj/item/ammo_box/magazine/m556/incendiary = 2,
+		/obj/item/ammo_box/magazine/m556/silver = 2,
+		/obj/item/grenade/sunlight = 3,
+		/obj/item/grenade/equaliser = 3,
+		/obj/item/vampire_stake = 1,
+		/obj/item/radio/military = 1,
+		/obj/item/vamp/keys/hack=1
+		)
+
+/datum/outfit/job/hunter/valkyrie/sergeant
+	name = "Task Force Valkyrie Sergeant"
+	uniform = /obj/item/clothing/under/vampire/military_fatigues/valkyrie
+	r_pocket = /obj/item/ammo_box/magazine/m75
+	id = /obj/item/card/id/valkyrie/sergeant
+	shoes = /obj/item/clothing/shoes/vampire/jackboots
+	ears = /obj/item/p25radio/police/government
+	l_pocket = /obj/item/vamp/keys/hunter
+	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
+	belt = /obj/item/gun/ballistic/automatic/ar/valkyrie
+	back = /obj/item/storage/backpack/security
+	glasses = /obj/item/clothing/glasses/hud/security/etheric
+	mask = /obj/item/clothing/mask/vampire/balaclava
+	head = /obj/item/clothing/head/vampire/army/valkyrie
+	gloves = /obj/item/clothing/gloves/combat
+
+	backpack_contents = list(
+		/obj/item/storage/book/bible = 1,
+		/obj/item/ammo_box/magazine/m556/compound = 5,
+		/obj/item/ammo_box/magazine/m556/bleeder = 3,
+		/obj/item/ammo_box/magazine/m556/hod = 3,
+		/obj/item/ammo_box/magazine/m556/incendiary = 2,
+		/obj/item/ammo_box/magazine/m556/silver = 2,
+		/obj/item/ammo_box/magazine/m75 = 2,
+		/obj/item/grenade/sunlight = 3,
+		/obj/item/grenade/equaliser = 3,
+		/obj/item/vampire_stake = 1,
+		/obj/item/gun/ballistic/automatic/gyropistol = 1,
+		/obj/item/radio/military = 1,
+		/obj/item/vamp/keys/hack=1
+		)
