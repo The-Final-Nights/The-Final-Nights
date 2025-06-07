@@ -516,7 +516,7 @@
 							new_master = TRUE
 						if(HAS_TRAIT(thrall, TRAIT_UNBONDABLE))
 							to_chat(thrall, "<span class='danger'><i>Precious vitae enters your mouth, an addictive drug. But for you, you feel no loyalty to the source; only the substance.</i></span>")
-						if(HAS_TRAIT(thrall, TRAIT_UNBONDING))
+						if(HAS_TRAIT(regnant, TRAIT_UNBONDING))
 							to_chat(thrall, "<span class='danger'><i>Precious vitae enters your mouth, an addictive drug. You feel no loyalty, though, to the source; only the substance.</i></span>")
 					if(isghoul(thrall))
 						var/datum/species/ghoul/ghoul = thrall.dna.species
