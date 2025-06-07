@@ -191,9 +191,11 @@
 #define TRAIT_HUNTED			"hunted"
 #define TRAIT_VIOLATOR			"violator"
 #define TRAIT_DIABLERIE			"diablerie"
+#define TRAIT_ALT_NIGHT_VISION  "alt_night_vision"
 #define TRAIT_GULLET			"gullet"
 #define TRAIT_CHARMER			"charmer"
 #define TRAIT_UNBONDING         "unbonding"
+#define TRAIT_PERMAFANGS        "permafangs"
 #define TRAIT_ORGANOVORE		"organovore"
 #define TRAIT_SALUBRI_EYE_OPEN	"eye_open" //This is for Salubri Stuff in regards to oepning and closing it
 #define TRAIT_SALUBRI_EYE		"salubri_eye" //This is for whhen you want to like actually know if you have the eye or not

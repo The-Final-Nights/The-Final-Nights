@@ -661,6 +661,16 @@ Dancer
 	gain_text = "<span class='notice'>Your blood feels vacant.</span>"
 	lose_text = "<span class='notice'>You feel like something that was missing just came back to you.</span>"
 	allowed_species = list("Vampire")
+	excluded_clans = list("Tremere")
+
+/datum/quirk/permafangs
+	name = "Permanent Fangs"
+	desc = "Your fangs do not retract, making it impossible for you to hide your true nature. While some mortals may think you’ve had your teeth filed or are wearing prosthetics, sooner or later you’re going to run into someone who knows what you truly are."
+	value = 0
+	mob_trait = TRAIT_PERMAFANGS
+	gain_text = "<span class='notice'>Your fangs become stuck.</span>"
+	lose_text = "<span class='notice'>You feel your fangs retract again.</span>"
+	allowed_species = list("Vampire")
 
 /datum/quirk/diablerist
 	name = "Diablerist"
@@ -668,7 +678,7 @@ Dancer
 	value = 0
 	allowed_species = list("Vampire")
 
-/datum/quirk/diablerist/on_spawn()
+/datum/quirk/diablerist/add()
 	var/mob/living/carbon/human/H = quirk_holder
 	H.diablerist = TRUE
 
