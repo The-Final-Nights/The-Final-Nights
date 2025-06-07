@@ -136,7 +136,6 @@
 		apply_damage(3, STAMINA)
 		user.do_attack_animation(src)
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
-		emote("flip")
 		visible_message("<span class='danger'>[src] dodges the attack!</span>", "<span class='danger'>You dodge the attack!</span>")
 		return
 	if(blocking)
