@@ -178,6 +178,7 @@
 #define TRAIT_WARM_AURA			"warm_aura"
 #define TRAIT_FRENETIC_AURA		"frenetic_aura"
 #define TRAIT_UNBONDABLE		"unbondable"
+#define TRAIT_DEFICIENT_VITAE   "deficient_vitae"
 #define TRAIT_BLUSH_OF_HEALTH	"blush_of_health"
 #define TRAIT_POTENT_BLOOD		"potent_blood"
 #define TRAIT_CAN_EAT			"can_eat" // this is for kindred. not normal people. normal people do not need this flag.

@@ -655,13 +655,12 @@ Dancer
 
 /datum/quirk/unbonding
 	name = "Unbonding"
-	desc = "Your vitae, for one reason or another, doesn't produce blood bonds."
+	desc = "Your vitae, for one reason or another, doesn't produce blood bonds with anybody."
 	value = 0
 	mob_trait = TRAIT_UNBONDING
 	gain_text = "<span class='notice'>Your blood feels vacant.</span>"
 	lose_text = "<span class='notice'>You feel like something that was missing just came back to you.</span>"
 	allowed_species = list("Vampire")
-	excluded_clans = list("Tremere")
 
 /datum/quirk/permafangs
 	name = "Permanent Fangs"
