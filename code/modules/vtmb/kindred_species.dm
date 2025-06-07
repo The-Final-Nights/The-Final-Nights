@@ -474,17 +474,27 @@
 					var/mob/living/carbon/human/thrall = grabbed_victim
 					var/mob/living/carbon/human/regnant = vampire
 
-					if(thrall.has_status_effect(STATUS_EFFECT_INLOVE))
-						thrall.remove_status_effect(STATUS_EFFECT_INLOVE)
-					thrall.apply_status_effect(STATUS_EFFECT_INLOVE, owner)
-					to_chat(owner, "<span class='notice'>You successfuly fed [thrall] with vitae.</span>")
-					to_chat(thrall, "<span class='userlove'>You feel good when you drink this <b>BLOOD</b>...</span>")
 
-					message_admins("[ADMIN_LOOKUPFLW(regnant)] has bloodbonded [ADMIN_LOOKUPFLW(thrall)].")
-					if(HAS_TRAIT(thrall,TRAIT_UNBONDABLE))
-						log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
+					if(HAS_TRAIT(thrall, TRAIT_UNBONDABLE) || HAS_TRAIT(regnant, TRAIT_UNBONDING))
+						to_chat(owner, "<span class='warning'>You successfuly fed [thrall] with vitae.</span>")
+						to_chat(thrall, "<span class='warning'>You feel good when you drink this <b>BLOOD</b>... but you feel no connection to its source.</span>")
+					else if(iskindred(thrall) && HAS_TRAIT(regnant, TRAIT_DEFICIENT_VITAE))
+						to_chat(owner, "<span class='warning'>You successfuly fed [thrall] with vitae.</span>")
+						to_chat(thrall, "<span class='warning'>You feel good when you drink this <b>BLOOD</b>... but you feel no connection to its source.</span>")
 					else
-						log_game("[key_name(regnant)] has attempted to bloodbond [key_name(thrall)] (UNBONDABLE).")
+						thrall.apply_status_effect(STATUS_EFFECT_INLOVE, owner)
+						to_chat(owner, "<span class='warning'>You successfuly fed [thrall] with vitae.</span>")
+						to_chat(thrall, "<span class='warning'>You feel good when you drink this <b>BLOOD</b>...</span>")
+
+					if(HAS_TRAIT(thrall, TRAIT_UNBONDABLE) || HAS_TRAIT(regnant, TRAIT_UNBONDING))
+						message_admins("[ADMIN_LOOKUPFLW(regnant)] has attempted to bloodbond [ADMIN_LOOKUPFLW(thrall)] (UNBONDABLE/UNBONDING).")
+						log_game("[key_name(regnant)] has attempted to bloodbond [key_name(thrall)] (UNBONDABLE/UNBONDING).")
+					else if(iskindred(thrall) && HAS_TRAIT(regnant, TRAIT_DEFICIENT_VITAE))
+						message_admins("[ADMIN_LOOKUPFLW(regnant)] has attempted to bloodbond [ADMIN_LOOKUPFLW(thrall)] (UNBONDABLE/UNBONDING).")
+						log_game("[key_name(regnant)] has attempted to bloodbond [key_name(thrall)] (UNBONDABLE/UNBONDING).")
+					else
+						message_admins("[ADMIN_LOOKUPFLW(regnant)] has bloodbonded [ADMIN_LOOKUPFLW(thrall)].")
+						log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
 
 					if(length(regnant.reagents?.reagent_list))
 						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = regnant, methods = VAMPIRE)
@@ -504,15 +514,20 @@
 					if(!isghoul(thrall) && istype(thrall, /mob/living/carbon/human/npc))
 						var/mob/living/carbon/human/npc/NPC = thrall
 						if(NPC.ghoulificate(owner))
-							new_master = TRUE
-							NPC.roundstart_vampire = FALSE
+							if(!HAS_TRAIT(regnant, TRAIT_UNBONDING))
+								new_master = TRUE
+								NPC.roundstart_vampire = FALSE
 					if(thrall.mind)
-						if(thrall.mind.enslaved_to != owner && !HAS_TRAIT(thrall,TRAIT_UNBONDABLE))
+						if(iskindred(thrall) && HAS_TRAIT(regnant, TRAIT_DEFICIENT_VITAE))
+							to_chat(thrall, "<span class='warning'><i>Precious vitae enters your mouth, an addictive drug. You feel no loyalty, though, to the source; only the substance.</i></span>")
+						else if(thrall.mind.enslaved_to != owner && !HAS_TRAIT(thrall, TRAIT_UNBONDABLE) && !HAS_TRAIT(regnant, TRAIT_UNBONDING))
 							thrall.mind.enslave_mind_to_creator(owner)
-							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [regnant]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
+							to_chat(thrall, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTERS YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [regnant]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
 							new_master = TRUE
-						if(HAS_TRAIT(thrall,TRAIT_UNBONDABLE))
-							to_chat(thrall, "<span class='danger'><i>Precious vitae enters your mouth, an addictive drug. But for you, you feel no loyalty to the source; only the substance.</i></span>")
+						else if(HAS_TRAIT(thrall, TRAIT_UNBONDABLE))
+							to_chat(thrall, "<span class='warning'><i>Precious vitae enters your mouth, an addictive drug. But for you, you feel no loyalty to the source; only the substance.</i></span>")
+						else if(HAS_TRAIT(regnant, TRAIT_UNBONDING))
+							to_chat(thrall, "<span class='warning'><i>Precious vitae enters your mouth, an addictive drug. You feel no loyalty, though, to the source; only the substance.</i></span>")
 					if(isghoul(thrall))
 						var/datum/species/ghoul/ghoul = thrall.dna.species
 						ghoul.master = owner
