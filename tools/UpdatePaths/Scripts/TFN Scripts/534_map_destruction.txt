@@ -1,0 +1,3 @@
+/obj/structure/window/reinforced/tinted : @DELETE
+/turf/closed/wall/vampwall/rich/low/window/reinforced : /turf/closed/wall/vampwall/rich/low/window{@OLD}
+/obj/structure/window/reinforced/indestructable : @DELETE
