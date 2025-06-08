@@ -39,5 +39,47 @@
 	r_pocket = /obj/item/binoculars
 	l_hand = /obj/item/vamp/keys/police/federal
 	r_hand = /obj/item/storage/secure/briefcase/fbi
+
 	backpack_contents = list(/obj/item/ammo_box/magazine/glock45acp=1, /obj/item/police_radio=1, /obj/item/flashlight=1, /obj/item/cockclock=1, /obj/item/card/id/police/sergeant=1, /obj/item/passport=1, /obj/item/camera=1, /obj/item/camera_film=1, /obj/item/taperecorder=1, /obj/item/ammo_box/vampire/c45acp=1, /obj/item/tape=3, /obj/item/vamp/creditcard=1, /obj/item/storage/firstaid/ifak=1)
 
+//Ranger Job Addition for Forest Remap
+
+/datum/job/vamp/ranger
+	title = "National Park Ranger"
+	department_head = list("National Park Services")
+	faction = "Vampire"
+	total_positions = 3
+	spawn_positions = 3
+	supervisors = " Senior Rangers and the National Park Services"
+	selection_color = "#1a1d8a"
+
+	outfit = /datum/outfit/job/ranger
+
+	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_ARMORY, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
+	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
+	paycheck = PAYCHECK_EASY
+	paycheck_department = ACCOUNT_SRV
+	display_order = JOB_DISPLAY_ORDER_RANGER
+	exp_type_department = EXP_TYPE_RANGER
+
+	allowed_species = list("Human")
+
+	duty = "Enforce the federal laws of the NPS. You have jurisdictional authority in the park, yet should work with other agencies when dealing with matters within the park. Assist with hunting licenses. Ensure poachers are punished. Maintain the hunting lodge."
+	minimal_masquerade = 0
+	known_contacts = null
+
+/obj/effect/landmark/start/ranger
+	name = "National Park Ranger"
+
+/datum/outfit/job/ranger
+	name = "National Park Ranger"
+	jobtype = /datum/job/vamp/ranger
+
+	uniform = /obj/item/clothing/under/vampire/guard //replace with proper ranger uniform in future
+	shoes = /obj/item/clothing/shoes/vampire
+	belt = /obj/item/storage/belt/police
+	id = /obj/item/card/id/garou/glade/guardian
+	gloves = /obj/item/clothing/gloves/vampire/work
+	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/ranger
+	backpack_contents = list(/obj/item/card/id/police/sergeant=1, /obj/item/passport=1, /obj/item/camera/detective=1, /obj/item/camera_film=1, /obj/item/taperecorder=1, /obj/item/tape=1, /obj/item/vamp/creditcard=1, /obj/item/ammo_box/vampire/c9mm=1, /obj/item/storage/firstaid/ifak=1)

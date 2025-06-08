@@ -47,6 +47,7 @@
 	suit = /obj/item/clothing/suit/vampire/coat/winter/alt
 	shoes = /obj/item/clothing/shoes/vampire/jackboots/work
 	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/amberglade
 	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
 
 
@@ -105,6 +106,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/work
 	shoes = /obj/item/clothing/shoes/vampire/jackboots/work
 	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/amberglade
 	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
 
 
@@ -163,6 +165,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/work
 	shoes = /obj/item/clothing/shoes/vampire/jackboots/work
 	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/amberglade
 	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/veil_contract, /obj/item/vamp/creditcard/rich=1)
 
 
@@ -225,6 +228,7 @@
 	suit = /obj/item/clothing/suit/vampire/vest/medieval
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/amberglade
 	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/passport=1, /obj/item/veil_contract, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
 
 
@@ -285,6 +289,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/leather
 	suit = /obj/item/clothing/suit/vampire/jacket
 	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/amberglade
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 
@@ -295,5 +300,46 @@
 /obj/effect/landmark/start/garou/glade/guardian
 	name = "Amberglade Guardian"
 	icon_state = "Hound"
+
+/datum/job/vamp/garou/amberglade/garou
+	title = "Amberglade Garou"
+	faction = "Vampire"
+	total_positions = -1
+	spawn_positions = -1
+	supervisors = "The Litany"
+	selection_color = "#69e430"
+	access = list()			//See /datum/job/assistant/get_access()
+	minimal_access = list()	//See /datum/job/assistant/get_access()
+	outfit = /datum/outfit/job/amberglade_garou
+	paycheck = PAYCHECK_ASSISTANT // Get a job. Job reassignment changes your paycheck now. Get over it.
+
+	access = list(ACCESS_MAINT_TUNNELS)
+	liver_traits = list(TRAIT_GREYTIDE_METABOLISM)
+
+	paycheck_department = ACCOUNT_CIV
+	display_order = JOB_DISPLAY_ORDER_AMBERGLADE
+	exp_type_department = EXP_TYPE_AMBERGLADE
+
+	allowed_species = list("Werewolf")
+	allowed_tribes = AMBERGLADE_ALLOWED_TRIBES
+
+	known_contacts = null
+
+	v_duty = "Obey the Litany"
+	duty = "Obey the Litany"
+	minimal_masquerade = 0
+
+/datum/outfit/job/amberglade_garou
+	name = "Amberglade Garou"
+	jobtype = /datum/job/vamp/citizen
+	uniform = /obj/item/clothing/under/vampire/emo
+	shoes = /obj/item/clothing/shoes/vampire
+	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/amberglade
+	id = /obj/item/cockclock
+
+/obj/effect/landmark/start/amberglade_garou
+	name = "Amberglade Garou"
+	icon_state = "Assistant"
 
 #undef AMBERGLADE_ALLOWED_TRIBES

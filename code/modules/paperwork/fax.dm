@@ -51,6 +51,9 @@
 		list(fax_name = "Pentex Corporate", fax_id = "endronadmin", color = "green", emag_needed = FALSE),
 		list(fax_name = "Element Relay", fax_id = "aasimitesadmin", color = "purple", emag_needed = FALSE),
 		list(fax_name = "Nightwolf Corporate", fax_id = "glasswalkeradmin", color = "grey", emag_needed = FALSE),
+		list(fax_name = "Office of NPS - Oversight Committee Chair", fax_id = "ambergladeadmin", color = "grey", emag_needed = FALSE),
+		list(fax_name = "National Park Services Administration", fax_id = "rangeradmin", color = "orange", emag_needed = FALSE),
+		list(fax_name = "NPS Fish and Game Authority", fax_id = "huntlodgeadmin", color = "blue", emag_needed = FALSE),
 	)
 
 /obj/machinery/fax/admin
@@ -83,6 +86,22 @@
 /obj/machinery/fax/admin/glasswalker
 	fax_name = "Nightwolf Corporate"
 	fax_id = "glasswalkeradmin"
+
+//Forest Remap Admin Faxes
+//All three are under the 'National Park Service' sphere of influence to differing degrees, which is infiltrated by the Garou.
+//NPS for Rangers is Normal, NPS for Amberglade is Garou entirely, NPS for the Hunting Lodge is a veil.
+
+/obj/machinery/fax/admin/amberglade
+	fax_name = "Office of NPS - Oversight Committee Chair"
+	fax_id = "ambergladeadmin"
+
+/obj/machinery/fax/admin/ranger
+	fax_name = "National Park Services Administration"
+	fax_id = "rangeradmin"
+
+/obj/machinery/fax/admin/huntlodge
+	fax_name = "NPS Fish and Game Authority"
+	fax_id = "huntlodgeadmin"
 
 /////////////////////////////////////////////
 
@@ -120,6 +139,25 @@
 	fax_name = "Nightwolf Tech Shop"
 	fax_id = "glasswalkers"
 	special_networks = list(list(fax_name = "Nightwolf Corporate", fax_id = "glasswalkeradmin", color = "grey", emag_needed = FALSE))
+
+//Forest Remap Faxes
+
+/obj/machinery/fax/amberglade
+	fax_name = "Amberglade Reservation"
+	fax_id = "amberglade"
+	special_networks = list(list(fax_name = "Office of NPS - Oversight Committee Chair", fax_id = "ambergladeadmin", color = "grey", emag_needed = FALSE))
+
+/obj/machinery/fax/ranger
+	fax_name = "Ranger Station"
+	fax_id = "ranger"
+	special_networks = list(list(fax_name = "National Park Services Administration", fax_id = "rangeradmin", color = "orange", emag_needed = FALSE))
+
+/obj/machinery/fax/huntlodge
+	fax_name = "Lone Wolf Lodge"
+	fax_id = "huntlodge"
+	special_networks = list(list(fax_name = "NPS Fish and Game Authority", fax_id = "huntlodgeadmin", color = "blue", emag_needed = FALSE))
+
+// End of forest remap faxes
 
 /obj/machinery/fax/Initialize(mapload)
 	. = ..()

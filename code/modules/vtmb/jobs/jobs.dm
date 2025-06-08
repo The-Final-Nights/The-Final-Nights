@@ -3,6 +3,13 @@
 
 /datum/outfit/job/post_equip(mob/living/carbon/human/H)
 	. = ..()
+	if(H.clane)
+		if(H.clane.name == "Ventrue")
+			var/obj/item/stack/dollar/hundred/HUN = new(H.loc)
+			for(var/obj/item/storage/backpack/B in H)
+				if(B)
+					HUN.forceMove(B)
+
 	var/obj/item/storage/backpack/b = locate() in H
 	if(b)
 		var/obj/item/vamp/creditcard/card = locate() in b.contents
@@ -386,6 +393,7 @@
 	name = "fbi special agent badge"
 	desc = "Sponsored by the Government. This one has all the bells and whistles."
 
+
 /obj/item/card/id/bahari
 	name = "cultist badge"
 	id_type_name = "cultist badge"
@@ -527,23 +535,24 @@
 
 /obj/item/card/id/garou/glade/council
 	name = "NPS Oversight Committee badge"
-	desc = "You have been out in the woods to know that you arent afraid of anything but one specific topic out there. Leadership."
+	desc = "Sponsored by the Government, yet unable to secure the same budget as other Federal Agencies, will your leadership change that?"
 
 /obj/item/card/id/garou/glade/keeper
 	name = "NPS Biologist badge"
-	desc = "You love the outdoors? Good, you are now taking care of a wide outdoors area."
+	desc = "Sponsored by the Government. You were good enough to land a government contract, yet it was with the forestry departments."
 
 /obj/item/card/id/garou/glade/truthcatcher
 	name = "Park Guide badge"
-	desc = "Remember, Dire Wolves arent real, as far as you tell people."
+	desc = "Sponsored by the Government. Remember, Dire Wolves arent real, as far as you tell people."
 
 /obj/item/card/id/garou/glade/warder
 	name = "Lead Park Ranger badge"
-	desc = "These are your woods and your lands. Keep them safe."
+	desc = "Sponsored by the Government. Held to a higher standard, yet still overlooked."
 
 /obj/item/card/id/garou/glade/guardian
 	name = "Park Ranger badge"
-	desc = "Only you can prevent forest fires."
+	desc = "Sponsored by the Government, yet oft overlooked for their niche jurisdiction."
+
 
 //ENDRON
 /obj/item/card/id/garou/spiral

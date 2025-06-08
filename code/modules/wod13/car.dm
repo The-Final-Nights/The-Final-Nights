@@ -686,6 +686,17 @@ SUBSYSTEM_DEF(carpool)
 	access = "camarilla"
 	baggage_limit = 45
 
+/obj/vampire_car/ranger
+	icon_state = "police"
+	max_passengers = 3
+	dir = WEST
+	beep_sound = 'code/modules/wod13/sounds/migalka.ogg'
+	access = "ranger"
+	baggage_limit = 45
+	baggage_max = WEIGHT_CLASS_BULKY
+	var/color_blue = FALSE
+	var/last_color_change = 0
+
 /obj/vampire_car/police
 	icon_state = "police"
 	max_passengers = 3
@@ -1051,3 +1062,4 @@ SUBSYSTEM_DEF(carpool)
 	var/matrix/M = matrix()
 	M.Turn(movement_vector - minus_angle)
 	transform = M
+

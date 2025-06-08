@@ -45,6 +45,11 @@
 	lock_id = "wolftech"
 	lockpick_difficulty = 12
 
+/obj/structure/vampdoor/glass/ranger_station
+	lock_id = "ranger"
+	lockpick_difficulty = 12
+	locked = TRUE
+
 /obj/structure/vampdoor/glass/pentex
 	lock_id = "pentex"
 	lockpick_difficulty = 12

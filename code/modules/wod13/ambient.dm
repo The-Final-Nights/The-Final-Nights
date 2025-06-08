@@ -561,6 +561,329 @@
 	music = /datum/vampiremusic/forest
 	wall_rating = LOW_WALL_RATING
 
+//FOREST REMAP AREAS
+/area/vtm/temple
+	name = "Temple Generic"
+	icon_state = "church"
+
+/area/vtm/temple/temple_underground
+	name = "Buddhist Temple Underground"
+	icon_state = "church"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/chinatown
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 1
+	yin_chi = 1
+	fire_controled = TRUE
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/temple/temple_grounds
+	name = "Buddhist Temple Grounds"
+	icon_state = "church"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/chinatown
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 1
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/temple/temple_grounds_interior
+	name = "Buddhist Temple Grounds Interior"
+	icon_state = "church"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/chinatown
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 1
+	yin_chi = 1
+	fire_controled = TRUE
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/temple/temple_exterior
+	name = "Buddhist Temple Exterior"
+	icon_state = "church"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/chinatown
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 1
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/amberglade
+	name = "Amberglade Generic"
+	icon_state = "cog_pantry"
+
+/area/vtm/amberglade/amberglade_bawn
+	name = "Amberglade Bawn"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/amberglade/amberglade_bawn_interior
+	name = "Amberglade Bawn Interior"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	requires_power = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/amberglade/amberglade_bawn_medical
+	name = "Amberglade Bawn Medical"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/amberglade/amberglade_caern
+	name = "Amberglade Caern"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 3
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/amberglade/amberglade_exterior
+	name = "Amberglade Exterior"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/native_reserve
+	name = "Native American Reserve Generic"
+	icon_state = "cog_pantry"
+
+/area/vtm/native_reserve/native_reserve_exterior
+	name = "Native American Reserve Exterior"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/native_reserve/native_reserve_interior
+	name = "Native American Reserve Interior"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/rangerstation
+	name = "Ranger Station Generic"
+	icon_state = "cog_caern"
+
+/area/vtm/rangerstation/ranger_exterior
+	name = "Ranger Station Exterior"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/rangerstation/ranger_interior
+	name = "Ranger Station Interior"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	fire_controled = TRUE
+	yang_chi = 1
+	yin_chi = 1
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/huntlodge
+	name = "Lone Wolf Lodge Generic"
+	icon_state = "cog_pantry"
+
+/area/vtm/huntlodge/lodge_exterior
+	name = "Lone Wolf Lodge Exterior"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/huntlodge/lodge_interior
+	name = "Lone Wolf Lodge Interior"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/gangrelhaven
+	name = "Gangrel Haven Generic"
+	icon_state = "cog_pantry"
+
+/area/vtm/gangrelhaven/gangrel_exterior
+	name = "Gangrel Haven Exterior"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/gangrelhaven/gangrel_interior
+	name = "Gangrel Haven Interior"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/lakeshore
+	name = "Lakeshore Generic"
+	icon_state = "cog_pantry"
+
+/area/vtm/lakeshore/lakeshore_cabins_exterior
+	name = "Lakeshore Cabins Exterior"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/lakeshore/lakeshore_cabins_interior
+	name = "Lakeshore Cabins Interior"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/lakeshore/lakeshore_caves
+	name = "Lakeshore Caves"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/forestmap
+	name = "Forest Generic"
+	icon_state = "cog_pantry"
+
+/area/vtm/forestmap/timber_claim
+	name = "Abandoned Timber Claim"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/forestmap/timbe_claim_caves
+	name = "Abandoned Timber Claim Caves"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/forestmap/mountain_region
+	name = "Mountain Region"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/forestmap/mountain_region_caves
+	name = "Mountain Region Caves"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/forestmap/forest_caves
+	name = "Forest Caves"
+	icon_state = "cog_caern"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/forestmap/thoroughfare
+	name = "Main Thoroughfare"
+	icon_state = "cog_pantry"
+	ambience_index = AMBIENCE_NATURE
+	music = /datum/vampiremusic/forest
+	upper = TRUE
+	zone_type = "masquerade"
+	yang_chi = 1
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
 //MISC AND CONTINUED AREAS
 /area/vtm/interior/penumbra
 	name = "Penumbra"

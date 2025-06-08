@@ -112,3 +112,44 @@
 	lock_id = "coggie"
 	burnable = TRUE
 	lockpick_difficulty = 4
+
+// Forest Remap Doors
+
+/obj/structure/vampdoor/outhouse
+	icon_state = "wood-1"
+	baseicon = "wood"
+
+/obj/structure/vampdoor/native_reservation
+	icon_state = "wood-1"
+	baseicon = "wood"
+
+/obj/structure/vampdoor/lakeshore_cabin
+	icon_state = "oldwood-1"
+	baseicon = "oldwood"
+
+/obj/structure/vampdoor/amberglade_wood_door
+	icon_state = "oldwood-1"
+	baseicon = "oldwood"
+	locked = TRUE
+	lock_id = "amberglade"
+	burnable = TRUE
+	lockpick_difficulty = 10
+
+/obj/structure/vampdoor/gangrel
+	icon_state = "old-1"
+	baseicon = "old"
+	locked = TRUE
+	lock_id = "gangrel"
+	lockpick_difficulty = 10
+
+/obj/structure/vampdoor/huntlodge
+	icon_state = "wood-1"
+	baseicon = "wood"
+	locked = FALSE
+	lock_id = "huntlodge"
+	lockpick_difficulty = 6
+
+/obj/structure/vampdoor/bathroom
+	icon_state = "cam-1"
+	baseicon = "cam"
+	locked = FALSE

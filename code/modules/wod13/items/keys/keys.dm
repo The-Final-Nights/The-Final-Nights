@@ -327,14 +327,14 @@
 	)
 	color = "#99620e"
 
-//===========================CLINIC KEYS===========================
-
-/obj/item/vamp/keys/mortician // same as clinic but here for future stuff
-	name = "Mortician keys"
+/obj/item/vamp/keys/gangrel
+	name = "Beastly keys"
 	accesslocks = list(
-		"clinic"
+		"gangrel"
 	)
+	color = "#303030"
 
+//===========================CLINIC KEYS===========================
 /obj/item/vamp/keys/clinic
 	name = "Clinic keys"
 	accesslocks = list(
@@ -347,6 +347,12 @@
 		"clinic",
 		"director",
 		"malkav"
+	)
+
+/obj/item/vamp/keys/mortician // same as clinic but here for future stuff
+	name = "Mortician keys"
+	accesslocks = list(
+		"clinic"
 	)
 
 //===========================POLICE KEYS===========================
@@ -394,6 +400,12 @@
 		"laundromat"
 	)
 
+/obj/item/vamp/keys/kuei_jin
+	name = "Monastic keys"
+	accesslocks = list(
+		"kj"
+	)
+
 //GAROU KEYS
 /obj/item/vamp/keys/techstore
 	name = "Tech Store keys"
@@ -416,7 +428,24 @@
 	)
 	color = "#339933"
 
+/obj/item/vamp/keys/amberglade
+	name = "Woodland keys"
+	accesslocks = list(
+		"amberglade",
+		"ranger",
+		"huntlodge"
+	)
+	color = "#339933"
+
 //JOB KEYS
+
+/obj/item/vamp/keys/ranger
+	name = "NPS Ranger keys"
+	accesslocks = list(
+		"ranger",
+		"huntlodge"
+	)
+	color = "#A0A0A0"
 
 /obj/item/vamp/keys/graveyard
 	name = "Graveyard keys"
@@ -439,7 +468,8 @@
 /obj/item/vamp/keys/hunter
 	name = "Creed-Bound keys"
 	accesslocks = list(
-		"hunter"
+		"hunter",
+		"huntlodge"
 	)
 
 /obj/item/vamp/keys/supply

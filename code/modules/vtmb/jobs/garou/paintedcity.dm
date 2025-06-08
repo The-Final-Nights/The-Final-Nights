@@ -295,4 +295,51 @@
 	name = "Painted City Guardian"
 	icon_state = "Hound"
 
+/datum/job/vamp/garou/paintedcity/garou
+	title = "Painted City Garou"
+	faction = "Vampire"
+	total_positions = -1
+	spawn_positions = -1
+	supervisors = "The Litany"
+	selection_color = "#7195ad"
+	access = list()			//See /datum/job/assistant/get_access()
+	minimal_access = list()	//See /datum/job/assistant/get_access()
+	outfit = /datum/outfit/job/paintedcity_garou
+	paycheck = PAYCHECK_ASSISTANT // Get a job. Job reassignment changes your paycheck now. Get over it.
+
+	access = list(ACCESS_MAINT_TUNNELS)
+	liver_traits = list(TRAIT_GREYTIDE_METABOLISM)
+
+	paycheck_department = ACCOUNT_SEC
+	display_order = JOB_DISPLAY_ORDER_PAINTEDCITY
+	exp_type_department = EXP_TYPE_PAINTED_CITY
+
+	allowed_species = list("Werewolf")
+	allowed_tribes = PAINTED_CITY_TRIBES
+
+	known_contacts = null
+
+	v_duty = "Obey the Litany"
+	duty = "Obey the Litany"
+	minimal_masquerade = 0
+
+/datum/outfit/job/paintedcity_garou
+	name = "Painted City Garou"
+	jobtype = /datum/job/vamp/citizen
+	uniform = /obj/item/clothing/under/vampire/emo
+	shoes = /obj/item/clothing/shoes/vampire
+	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/children_of_gaia
+	id = /obj/item/cockclock
+	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/keys/techstore=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
+
+
+	backpack = /obj/item/storage/backpack
+	satchel = /obj/item/storage/backpack/satchel
+	duffelbag = /obj/item/storage/backpack/duffelbag
+
+/obj/effect/landmark/start/paintedcity_garou
+	name = "Painted City Garou"
+	icon_state = "Assistant"
+
 #undef PAINTED_CITY_TRIBES
