@@ -2246,7 +2246,14 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		ADD_TRAIT(target, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
 		passtable_on(target, SPECIES_TRAIT)
 		target.add_movespeed_modifier(/datum/movespeed_modifier/wing)
-		target.OpenWings()
+		target.icon_state = "[target.sprite_color]_flying"
+		target.cut_overlays()
+		var/mutable_appearance/eye_overlay = mutable_appearance(target.icon, "eyes_flying")
+		eye_overlay.color = target.sprite_eye_color
+		eye_overlay.plane = ABOVE_LIGHTING_PLANE
+		eye_overlay.layer = ABOVE_LIGHTING_LAYER
+		target.add_overlay(eye_overlay)
+
 	else
 		stunmod *= 0.5
 		speedmod += 0.35
@@ -2254,8 +2261,16 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		REMOVE_TRAIT(target, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
 		passtable_off(target, SPECIES_TRAIT)
 		target.remove_movespeed_modifier(/datum/movespeed_modifier/wing)
-		target.CloseWings()
-
+		target.icon_state = "[target.sprite_color]"
+		target.cut_overlays()
+		var/mutable_appearance/eye_overlay = mutable_appearance(target.icon, "eyes")
+		eye_overlay.color = target.sprite_eye_color
+		eye_overlay.plane = ABOVE_LIGHTING_PLANE
+		eye_overlay.layer = ABOVE_LIGHTING_LAYER
+		target.add_overlay(eye_overlay)
+		/*if(isturf(loc))
+			var/turf/T = loc
+			T.Entered(src)*/
 
 /datum/action/innate/flight
 	name = "Toggle Flight"

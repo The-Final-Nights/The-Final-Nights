@@ -41,30 +41,8 @@
 	health = 100
 	maxHealth = 100 // I predict that the sprites will be hell to click, no extra HP compared to homid
 
-/mob/living/carbon/werewolf/lupus/corvid/proc/OpenWings() //openwing and closewing change our sprite to be that of the corresponding status, not having them causes a delay in sprite update as we wait for update_icons
-	if(!dna || !dna.species)
-		return
-	icon_state = "[sprite_color]_flying"
-	cut_overlays()
-	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes_flying")
-	eye_overlay.color = sprite_eye_color
-	eye_overlay.plane = ABOVE_LIGHTING_PLANE
-	eye_overlay.layer = ABOVE_LIGHTING_LAYER
-	add_overlay(eye_overlay)
 
-/mob/living/carbon/werewolf/lupus/corvid/proc/CloseWings()
-	if(!dna || !dna.species)
-		return
-	icon_state = "[sprite_color]"
-	cut_overlays()
-	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes")
-	eye_overlay.color = sprite_eye_color
-	eye_overlay.plane = ABOVE_LIGHTING_PLANE
-	eye_overlay.layer = ABOVE_LIGHTING_LAYER
-	add_overlay(eye_overlay)
-	if(isturf(loc))
-		var/turf/T = loc
-		T.Entered(src)
+
 
 
 /datum/movespeed_modifier/lupusform
