@@ -595,6 +595,9 @@
 	if (!isnull(trait_exam))
 		. += trait_exam
 
+	if(custom_examine_message)
+		. += span_purple(custom_examine_message)
+
 	if(ishuman(user))
 		. += "<a href='byond://?src=[REF(src)];masquerade=1'>Spot a Masquerade violation</a>"
 
