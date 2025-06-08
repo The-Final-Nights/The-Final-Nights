@@ -397,15 +397,22 @@
 	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 	faction = list("Tremere")
 
-/mob/living/simple_animal/hostile/gargoyle/proc/gain_nigs()
+/mob/living/simple_animal/hostile/gargoyle/proc/gain_sentience()
 	set waitfor = FALSE
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as Embraced Gargoyle?", null, null, null, 50, src)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as a Perfect Gargoyle?", null, null, null, 50, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
 			to_chat(G, "<span class='ghostalert'>New Gargoyle has been made.</span>")
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		key = C.key
+		var/choice = tgui_alert(C, "Do you want to pick a new name as a Gargoyle?", "Gargoyle Choose Name", list("Yes", "No"), 10)
+		if(choice == "Yes")
+			var/chosen_gargoyle_name = tgui_input_text(C, "What is your new name as a Gargoyle?", "Gargoyle Name Input")
+			name = chosen_gargoyle_name
+			update_name()
+		else
+			return
 
 /mob/living/simple_animal/hostile/gargoyle/Initialize()
 	. = ..()
