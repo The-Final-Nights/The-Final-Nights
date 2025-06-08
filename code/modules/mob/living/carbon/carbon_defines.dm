@@ -150,3 +150,9 @@
 	var/antifrenzy = FALSE
 
 	COOLDOWN_DECLARE(bleeding_message_cd)
+
+	//Custom examine text, set via IC verb.
+	var/custom_examine_message = null
+
+	//For ghosts
+	var/soul_state = SOUL_PRESENT
