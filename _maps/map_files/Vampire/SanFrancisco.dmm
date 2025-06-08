@@ -50662,9 +50662,8 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "nsf" = (
-/obj/machinery/shuttle_scrambler{
-	desc = "Some sort of jury-rigged telnet system; it looks like it's harvesting someone's data illegally."
-	},
+/obj/structure/table/wood,
+/obj/machinery/bitcoin_miner,
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
 "nsu" = (
