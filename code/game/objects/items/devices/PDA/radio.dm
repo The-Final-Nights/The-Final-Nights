@@ -32,7 +32,9 @@
 
 	var/time = time2text(world.realtime,"hh:mm:ss")
 	var/turf/T = get_turf(src)
-	GLOB.lastsignalers.Add("[time] <B>:</B> [usr.key] used [src] @ location [AREACOORD(T)] <B>:</B> [format_frequency(frequency)]/[code]")
+
+	var/loggable_string = "[time] <B>:</B> [usr.key] used [src] @ location [AREACOORD(T)] <B>:</B> [format_frequency(frequency)]/[code]"
+	add_to_signaler_investigate_log(loggable_string)
 
 	var/datum/signal/signal = new(list("code" = code))
 	radio_connection.post_signal(src, signal, filter = RADIO_SIGNALER)
