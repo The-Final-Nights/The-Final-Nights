@@ -21,6 +21,22 @@
 	desc = "Looks sturdy enough and made of advanced materials."
 	icon = 'code/modules/wod13/pentexcatwalk.dmi'
 
+/obj/structure/lattice/grate
+	name = "grate"
+	desc = "A metal grate, who knows what kind of sewer clowns might dwell underneath it?"
+	icon = 'code/modules/wod13/tiles.dmi'
+	icon_state = "lattice_grate"
+	base_icon_state = "lattice_grate"
+	density = FALSE
+	anchored = TRUE
+	armor = list(MELEE = 50, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 80, ACID = 50)
+	max_integrity = 50
+	layer = LATTICE_LAYER //under pipes
+	plane = FLOOR_PLANE
+	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN
+	smoothing_flags = null
+	smoothing_groups = null
+	canSmoothWith = null
 
 /obj/structure/lattice/examine(mob/user)
 	. = ..()

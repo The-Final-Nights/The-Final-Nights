@@ -306,7 +306,7 @@
 	var/dry = FALSE
 
 /obj/structure/flora/ausbushes/tallgrass/dry
-	icon_state = "dry_tallgrass_1"
+	icon_state = "drytallgrass_1"
 	dry = TRUE
 
 /obj/structure/flora/ausbushes/tallgrass/Initialize()

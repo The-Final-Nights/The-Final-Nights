@@ -1101,6 +1101,18 @@
 /obj/effect/decal/wallpaper/gold/low
 	icon_state = "wallpaper-gold_low"
 
+/obj/effect/decal/wallpaper/padded
+	icon_state = "wallpaper-padded"
+
+/obj/effect/decal/wallpaper/padded/low
+	icon_state = "wallpaper-padded_low"
+
+/obj/effect/decal/wallpaper/lightpadded
+	icon_state = "wallpaper-lightpadded"
+
+/obj/effect/decal/wallpaper/lightpadded/low
+	icon_state = "wallpaper-lightpadded_low"
+
 /obj/effect/decal/wallpaper/papers
 	name = "papers"
 	plane = GAME_PLANE
