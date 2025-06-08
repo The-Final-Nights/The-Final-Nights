@@ -1,8 +1,8 @@
 //NORTH default dir
 /obj/docking_port
 	invisibility = INVISIBILITY_ABSTRACT
-	icon = 'icons/obj/device.dmi'
-	icon_state = "pinonfar"
+	icon = 'icons/effects/docking_ports.dmi'
+	icon_state = "static"
 
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	anchored = TRUE
@@ -67,6 +67,12 @@
 
 /obj/docking_port/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
 	return
+
+/obj/docking_port/singularity_pull(atom/singularity, current_size)
+	return
+
+/obj/docking_port/singularity_act()
+	return FALSE
 
 /obj/docking_port/shuttleRotate()
 	return //we don't rotate with shuttles via this code.
@@ -140,12 +146,10 @@
 
 //Debug proc used to highlight bounding area
 /obj/docking_port/proc/highlight(_color = "#f00")
-	invisibility = 0
+	SetInvisibility(INVISIBILITY_NONE)
 	SET_PLANE_IMPLICIT(src, GHOST_PLANE)
-	var/list/L = return_coords()
-	var/turf/T0 = locate(L[1],L[2],z)
-	var/turf/T1 = locate(L[3],L[4],z)
-	for(var/turf/T in block(T0,T1))
+	var/list/coords = return_coords()
+	for(var/turf/T in block(coords[1], coords[2], z, coords[3], coords[4], z))
 		T.color = _color
 		LAZYINITLIST(T.atom_colours)
 		T.maptext = null

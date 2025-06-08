@@ -13,7 +13,7 @@
 	icon_keyboard = "tech_key"
 	light_color = LIGHT_COLOR_CYAN
 	req_access = list()
-	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON|INTERACT_MACHINE_SET_MACHINE
+	interaction_flags_machine = INTERACT_MACHINE_ALLOW_SILICON
 	/// ID of the attached shuttle
 	var/shuttleId
 	/// Possible destinations of the attached shuttle
@@ -33,10 +33,33 @@
 
 /obj/machinery/computer/shuttle/Initialize(mapload)
 	. = ..()
-	if(!mapload)
-		connect_to_shuttle(SSshuttle.get_containing_shuttle(src))
+	AddElement(/datum/element/nav_computer_icon, 'icons/effects/nav_computer_indicators.dmi', "computer", FALSE)
+	connect_to_shuttle(mapload, SSshuttle.get_containing_shuttle(src))
 
 /obj/machinery/computer/shuttle/ui_interact(mob/user, datum/tgui/ui)
+	. = ..()
+	if(is_station_level(user.z) && user.mind && IS_HEAD_REVOLUTIONARY(user) && !(user.mind in dumb_rev_heads)) //Rev heads will get a one-time warning that they shouldn't leave
+		to_chat(user, span_warning("You get a feeling that leaving the station might be a REALLY dumb idea..."))
+		dumb_rev_heads += user.mind
+		return
+	if (HAS_TRAIT(user, TRAIT_FORBID_MINING_SHUTTLE_CONSOLE_OUTSIDE_STATION) && !is_station_level(user.z)) //Free golems and other mobs with this trait will not be able to use the shuttle from outside the station Z
+		to_chat(user, span_warning("You get the feeling you shouldn't mess with this."))
+		return
+	if(!user.can_read(src, reading_check_flags = READING_CHECK_LITERACY)) //Illiterate mobs which aren't otherwise blocked from using computers will send the shuttle to a random valid destination
+		to_chat(user, span_warning("You start mashing buttons at random!"))
+		if(do_after(user, 10 SECONDS, target = src))
+			var/list/dest_list = get_valid_destinations()
+			if(!dest_list.len) //No valid destinations
+				to_chat(user, span_warning("The console shows a flashing error message, but you can't comprehend it."))
+				return
+			var/list/destination = pick(dest_list)
+			switch (send_shuttle(destination["id"], user))
+				if (SHUTTLE_CONSOLE_SUCCESS)
+					return
+				else
+					to_chat(user, span_warning("The console shows a flashing error message, but you can't comprehend it."))
+					return
+		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "ShuttleConsole", name)
@@ -76,6 +99,9 @@
 	if(!length(data["locations"]))
 		data["locked"] = TRUE
 		data["status"] = "Locked"
+	if(!mobile_docking_port.canMove())
+		data["locked"] = TRUE
+		data["status"] = "Immobile"
 	return data
 
 /**
@@ -96,11 +122,14 @@
 /obj/machinery/computer/shuttle/proc/get_valid_destinations()
 	var/list/destination_list = params2list(possible_destinations)
 	var/obj/docking_port/mobile/mobile_docking_port = SSshuttle.getShuttle(shuttleId)
+	var/obj/docking_port/stationary/current_destination = mobile_docking_port.destination
 	var/list/valid_destinations = list()
 	for(var/obj/docking_port/stationary/stationary_docking_port in SSshuttle.stationary_docking_ports)
 		if(!destination_list.Find(stationary_docking_port.port_destinations))
 			continue
 		if(!mobile_docking_port.check_dock(stationary_docking_port, silent = TRUE))
+			continue
+		if(stationary_docking_port == current_destination)
 			continue
 		var/list/location_data = list(
 			id = stationary_docking_port.shuttle_id,
@@ -135,8 +164,11 @@
 			validdest = TRUE //Found our destination, we can skip ahead now
 			break
 	if(!validdest) //Didn't find our destination in the list of valid destinations, something bad happening
-		log_admin("[user] attempted to href dock exploit on [src] with target location \"[dest_id]\"")
-		message_admins("[user] just attempted to href dock exploit on [src] with target location \"[dest_id]\"")
+		if(!isnull(user.client))
+			log_admin("Warning: possible href exploit by [key_name(user)] - Attempted to dock [src] to illegal target location \"[url_encode(dest_id)]\"")
+			message_admins("Warning: possible href exploit by [key_name_admin(user)] [ADMIN_FLW(user)] - Attempted to dock [src] to illegal target location \"[url_encode(dest_id)]\"")
+		else
+			stack_trace("[user] ([user.type]) tried to send the shuttle [src] to the target location [dest_id], but the target location was not found in the list of valid destinations.")
 		return SHUTTLE_CONSOLE_DESTINVALID
 	switch(SSshuttle.moveShuttle(shuttleId, dest_id, TRUE))
 		if(DOCKING_SUCCESS)
@@ -146,12 +178,12 @@
 		else
 			return SHUTTLE_CONSOLE_ERROR
 
-/obj/machinery/computer/shuttle/ui_act(action, params)
+/obj/machinery/computer/shuttle/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
 	if(!allowed(usr))
-		to_chat(usr, "<span class='danger'>Access denied.</span>")
+		to_chat(usr, span_danger("Access denied."))
 		return
 
 	switch(action)
@@ -184,19 +216,20 @@
 				return TRUE
 		if("request")
 			if(!COOLDOWN_FINISHED(src, request_cooldown))
-				to_chat(usr, "<span class='warning'>CentCom is still processing last authorization request!</span>")
+				to_chat(usr, span_warning("CentCom is still processing last authorization request!"))
 				return
 			COOLDOWN_START(src, request_cooldown, 1 MINUTES)
-			to_chat(usr, "<span class='notice'>Your request has been received by CentCom.</span>")
-			to_chat(GLOB.admins, "<b>SHUTTLE: <font color='#3d5bc3'>[ADMIN_LOOKUPFLW(usr)] (<A HREF='byond://?_src_=holder;[HrefToken()];move_shuttle=[shuttleId]'>Move Shuttle</a>)(<A HREF='byond://?_src_=holder;[HrefToken()];unlock_shuttle=[REF(src)]'>Lock/Unlock Shuttle</a>)</b> is requesting to move or unlock the shuttle.</font>")
+			to_chat(usr, span_notice("Your request has been received by CentCom."))
+			to_chat(GLOB.admins, "<b>SHUTTLE: <font color='#3d5bc3'>[ADMIN_LOOKUPFLW(usr)] (<A href='byond://?_src_=holder;[HrefToken()];move_shuttle=[shuttleId]'>Move Shuttle</a>)(<A href='byond://?_src_=holder;[HrefToken()];unlock_shuttle=[REF(src)]'>Lock/Unlock Shuttle</a>)</b> is requesting to move or unlock the shuttle.</font>")
 			return TRUE
 
-/obj/machinery/computer/shuttle/emag_act(mob/user)
+/obj/machinery/computer/shuttle/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
-		return
+		return FALSE
 	req_access = list()
 	obj_flags |= EMAGGED
-	to_chat(user, "<span class='notice'>You fried the consoles ID checking system.</span>")
+	balloon_alert(user, "id checking system fried")
+	return TRUE
 
 /obj/machinery/computer/shuttle/connect_to_shuttle(mapload, obj/docking_port/mobile/port, obj/docking_port/stationary/dock)
 	if(!mapload)
@@ -209,11 +242,12 @@
 		possible_destinations = replacetext(replacetextEx(possible_destinations, "[shuttleId]_custom", ""), ";;", ";")
 	shuttleId = port.shuttle_id
 	possible_destinations += ";[port.shuttle_id]_custom"
+	return TRUE
 
 #undef SHUTTLE_CONSOLE_ACCESSDENIED
-#undef  SHUTTLE_CONSOLE_ENDGAME
-#undef  SHUTTLE_CONSOLE_RECHARGING
-#undef  SHUTTLE_CONSOLE_INTRANSIT
-#undef  SHUTTLE_CONSOLE_DESTINVALID
-#undef  SHUTTLE_CONSOLE_SUCCESS
-#undef  SHUTTLE_CONSOLE_ERROR
+#undef SHUTTLE_CONSOLE_ENDGAME
+#undef SHUTTLE_CONSOLE_RECHARGING
+#undef SHUTTLE_CONSOLE_INTRANSIT
+#undef SHUTTLE_CONSOLE_DESTINVALID
+#undef SHUTTLE_CONSOLE_SUCCESS
+#undef SHUTTLE_CONSOLE_ERROR

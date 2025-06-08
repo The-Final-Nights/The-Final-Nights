@@ -2,7 +2,6 @@
 	icon = 'code/modules/wod13/UI/buttons32.dmi'
 
 /atom/movable/screen/fullscreen_hud
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 	icon = 'code/modules/wod13/UI/full.dmi'
 
