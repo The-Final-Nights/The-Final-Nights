@@ -111,6 +111,48 @@
 	tribe = "Bone Gnawers"
 	totem_overlay_color = "#FFA500"
 
+/obj/structure/werewolf_totem/hart_wardens
+	name = "Hart Wardens Totem"
+	desc = "Gives power to all Garou of that tribe and steals it from others."
+	icon_state = "wendigo"
+	tribe = "Hart Wardens"
+	totem_overlay_color = "#FF6A00"
+
+/obj/structure/werewolf_totem/black_furies
+	name = "Black Furies Totem"
+	desc = "Gives power to all Garou of that tribe and steals it from others."
+	icon_state = "wendigo"
+	tribe = "Black Furies"
+	totem_overlay_color = "#303030"
+
+/obj/structure/werewolf_totem/ghost_council
+	name = "Ghost Council Totem"
+	desc = "Gives power to all Garou of that tribe and steals it from others."
+	icon_state = "wendigo"
+	tribe = "Ghost Council"
+	totem_overlay_color = "#00137F"
+
+/obj/structure/werewolf_totem/red_talons
+	name = "Red Talons Totem"
+	desc = "Gives power to all Garou of that tribe and steals it from others."
+	icon_state = "wendigo"
+	tribe = "Red Talons"
+	totem_overlay_color = "#FF0000"
+
+/obj/structure/werewolf_totem/get_of_fenris
+	name = "Get of Fenris Totem"
+	desc = "Gives power to all Garou of that tribe and steals it from others."
+	icon_state = "wendigo"
+	tribe = "Get of Fenris"
+	totem_overlay_color = "#F0F0F0"
+
+/obj/structure/werewolf_totem/stargazer
+	name = "Stargazer Totem"
+	desc = "Gives power to all Garou of that tribe and steals it from others."
+	icon_state = "wendigo"
+	tribe = "Stargazers"
+	totem_overlay_color = "#FFFFFF"
+
 /obj/structure/werewolf_totem/glasswalker
 	name = "Glasswalker Totem"
 	desc = "Gives power to all Garou of that tribe and steals it from others."
