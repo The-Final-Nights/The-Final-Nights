@@ -39,4 +39,3 @@
 	else
 		victim.dna.species.burnmod = max(0.5, victim.dna.species.burnmod-0.5)
 	qdel(src)
-	
