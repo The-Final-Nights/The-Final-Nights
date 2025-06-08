@@ -15887,7 +15887,7 @@
 /obj/machinery/light{
 	pixel_y = 32
 	},
-/obj/structure/chair/sofa,
+/obj/structure/chair/sofa/old,
 /obj/effect/landmark/start/bruiser,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
@@ -50170,7 +50170,7 @@
 /turf/open/openspace,
 /area/vtm)
 "nts" = (
-/obj/structure/chair/sofa/right,
+/obj/structure/chair/sofa/old/right,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "ntt" = (
@@ -71792,7 +71792,7 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/bianchiBank)
 "sUN" = (
-/obj/structure/chair/sofa/left,
+/obj/structure/chair/sofa/old/left,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "sUY" = (
