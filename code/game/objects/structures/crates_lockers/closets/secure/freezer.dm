@@ -79,6 +79,21 @@
 	name = "refrigerator"
 	req_access = list(ACCESS_KITCHEN)
 
+//No access needed fridge
+/obj/structure/closet/secure_closet/freezer/fridge_no_access_restrictions
+	name = "refrigerator"
+	req_access = null
+
+/obj/structure/closet/secure_closet/freezer/fridge_no_access_restrictions/PopulateContents()
+	..()
+	for(var/i = 0, i < 5, i++)
+		new /obj/item/reagent_containers/food/condiment/milk(src)
+	for(var/i = 0, i < 5, i++)
+		new /obj/item/reagent_containers/food/condiment/soymilk(src)
+	for(var/i = 0, i < 2, i++)
+		new /obj/item/storage/fancy/egg_box(src)
+	
+
 /obj/structure/closet/secure_closet/freezer/fridge/PopulateContents()
 	..()
 	for(var/i = 0, i < 5, i++)
