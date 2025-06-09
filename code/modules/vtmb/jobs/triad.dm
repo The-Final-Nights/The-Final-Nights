@@ -313,3 +313,4 @@
 /obj/effect/landmark/start/temple/novitiate
 	name = "Novitiate"
 	icon_state = "Assistant"
+	
