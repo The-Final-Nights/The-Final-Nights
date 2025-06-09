@@ -305,8 +305,6 @@
 	if(H.bloodpool < 2)
 		to_chat(H, span_warning("You need more <b>BLOOD</b> to do that!"))
 		return
-	if(drawing)
-		return
 
 	if(istype(H.get_active_held_item(), /obj/item/necromancy_tome))
 		var/list/rune_names = list()
@@ -316,17 +314,15 @@
 				rune_names[R.name] = i
 			qdel(R)
 		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Necromancy", rune_names)
-		if(ritual)
-			drawing = TRUE
-			if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
-				drawing = FALSE
-				var/ritual_type = rune_names[ritual]
-				new ritual_type(H.loc)
-				H.bloodpool = max(H.bloodpool - 2, 0)
-				if(H.CheckEyewitness(H, H, 7, FALSE))
-					H.AdjustMasquerade(-1)
-			else
-				drawing = FALSE
+		if(!ritual)
+			return
+		if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
+			var/ritual_type = rune_names[ritual]
+			new ritual_type(H.loc)
+			H.bloodpool = max(H.bloodpool - 2, 0)
+			if(H.CheckEyewitness(H, H, 7, FALSE))
+				H.AdjustMasquerade(-1)
+
 	else
 		var/list/rune_names = list()
 		for(var/i in subtypesof(/obj/necrorune))
@@ -335,14 +331,11 @@
 				rune_names += i
 			qdel(R)
 		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "necroritualism", list("???"))
-		if(ritual)
-			drawing = TRUE
-			if(do_after(H, 30*max(1, 5-H.mentality), H))
-				drawing = FALSE
-				var/rune = pick(rune_names)
-				new rune(H.loc)
-				H.bloodpool = max(H.bloodpool - 2, 0)
-				if(H.CheckEyewitness(H, H, 7, FALSE))
-					H.AdjustMasquerade(-1)
-			else
-				drawing = FALSE
+		if(!ritual)
+			return
+		if(do_after(H, 30*max(1, 5-H.mentality), H))
+			var/rune = pick(rune_names)
+			new rune(H.loc)
+			H.bloodpool = max(H.bloodpool - 2, 0)
+			if(H.CheckEyewitness(H, H, 7, FALSE))
+				H.AdjustMasquerade(-1)
