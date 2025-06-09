@@ -57,7 +57,11 @@
 	new_dna.uni_identity = uni_identity
 	new_dna.blood_type = blood_type
 	new_dna.features = features.Copy()
-	new_dna.species = new species.type
+	//if the new DNA has a holder, transform them immediately, otherwise save it
+	if(new_dna.holder)
+		new_dna.holder.set_species(species.type, icon_update = 0)
+	else
+		new_dna.species = species
 	new_dna.real_name = real_name
 	new_dna.mutations = mutations.Copy()
 
