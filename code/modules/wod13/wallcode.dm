@@ -136,10 +136,6 @@
 	icon_state = "rich-window"
 	window = /obj/structure/window/fulltile
 
-/turf/closed/wall/vampwall/rich/low/window/reinforced
-	icon_state = "rich-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
-
 /turf/closed/wall/vampwall/junk
 	name = "junk brick wall"
 	desc = "A huge chunk of dirty bricks used to separate rooms."
@@ -186,10 +182,6 @@
 	icon_state = "market-window"
 	window = /obj/structure/window/fulltile
 
-/turf/closed/wall/vampwall/market/low/window/reinforced
-	icon_state = "market-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
-
 /turf/closed/wall/vampwall/old
 	name = "old brick wall"
 	desc = "A huge chunk of old bricks used to separate rooms."
@@ -205,10 +197,6 @@
 /turf/closed/wall/vampwall/old/low/window
 	icon_state = "old-window"
 	window = /obj/structure/window/fulltile
-
-/turf/closed/wall/vampwall/old/low/window/reinforced
-	icon_state = "old-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
 
 /turf/closed/wall/vampwall/painted
 	name = "painted brick wall"
@@ -226,10 +214,6 @@
 	icon_state = "painted-window"
 	window = /obj/structure/window/fulltile
 
-/turf/closed/wall/vampwall/painted/low/window/reinforced
-	icon_state = "painted-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
-
 /turf/closed/wall/vampwall/rich/old
 	name = "old rich-looking wall"
 	desc = "A huge chunk of old bricks used to separate rooms."
@@ -245,10 +229,6 @@
 /turf/closed/wall/vampwall/rich/old/low/window
 	icon_state = "theater-window"
 	window = /obj/structure/window/fulltile
-
-/turf/closed/wall/vampwall/rich/old/low/window/reinforced
-	icon_state = "theater-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
 
 /turf/closed/wall/vampwall/brick
 	name = "brick wall"
@@ -1100,6 +1080,18 @@
 
 /obj/effect/decal/wallpaper/gold/low
 	icon_state = "wallpaper-gold_low"
+
+/obj/effect/decal/wallpaper/padded
+	icon_state = "wallpaper-padded"
+
+/obj/effect/decal/wallpaper/padded/low
+	icon_state = "wallpaper-padded_low"
+
+/obj/effect/decal/wallpaper/lightpadded
+	icon_state = "wallpaper-lightpadded"
+
+/obj/effect/decal/wallpaper/lightpadded/low
+	icon_state = "wallpaper-lightpadded_low"
 
 /obj/effect/decal/wallpaper/papers
 	name = "papers"
