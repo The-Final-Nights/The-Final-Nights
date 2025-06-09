@@ -13,6 +13,7 @@
 	current_accessory = "none"
 	accessories = list("beast_legs", "beast_tail", "beast_tail_and_legs", "none")
 	accessories_layers = list("beast_legs" = MARKS_LAYER, "beast_tail" = UNICORN_LAYER, "beast_tail_and_legs" = MARKS_LAYER, "none" = UNICORN_LAYER)
+	clan_keys = /obj/item/vamp/keys/gangrel
 
 /mob/living/simple_animal/hostile/werewolf
 	name = "Werewolf"
