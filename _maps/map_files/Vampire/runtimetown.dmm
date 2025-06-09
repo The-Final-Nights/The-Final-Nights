@@ -166,7 +166,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "eR" = (
-/turf/closed/wall/vampwall/rich/old/low/window/reinforced,
+/turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/pacificheights)
 "fd" = (
 /obj/effect/decal/bordur{
@@ -834,12 +834,12 @@
 /obj/structure/closet/crate/freezer/blood{
 	name = "vampire blood freezer"
 	},
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
-/obj/item/drinkable_bloodpack/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
+/obj/item/reagent_containers/blood/vitae,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
 "Dh" = (
@@ -1082,12 +1082,12 @@
 /area/vtm/pacificheights)
 "Jo" = (
 /obj/structure/closet/crate/freezer/blood,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
 "Jv" = (
@@ -1212,12 +1212,12 @@
 /obj/structure/closet/crate/freezer/blood{
 	name = "blue blood freezer"
 	},
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
 "Of" = (
@@ -1225,9 +1225,6 @@
 /obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
-"Oi" = (
-/turf/closed/wall/vampwall/market/low/window/reinforced,
-/area/vtm/interior/shop)
 "On" = (
 /mob/living/carbon/human/npc/shop,
 /turf/open/floor/plating/rough,
@@ -2923,7 +2920,7 @@ fi
 jW
 oU
 wm
-Oi
+zx
 NR
 NR
 NR
@@ -2991,7 +2988,7 @@ GB
 jW
 oU
 yt
-Oi
+zx
 NR
 NR
 NR
@@ -3026,8 +3023,8 @@ jW
 yt
 yt
 kS
-Oi
-Oi
+zx
+zx
 kS
 NR
 NR
