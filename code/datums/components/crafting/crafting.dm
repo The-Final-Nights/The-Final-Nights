@@ -70,6 +70,7 @@
 	var/list/item_instances = contents["instances"]
 	contents = contents["other"]
 
+
 	var/list/requirements_list = list()
 
 	// Process all requirements
@@ -167,6 +168,7 @@
 					if(ispath(I, A))
 						continue main_loop
 			return FALSE
+
 	return TRUE
 
 /datum/component/personal_crafting/proc/construct_item(atom/a, datum/crafting_recipe/R)

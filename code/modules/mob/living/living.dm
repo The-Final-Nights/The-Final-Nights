@@ -771,6 +771,10 @@
 /mob/living/proc/update_damage_overlays()
 	return
 
+/// Proc that only really gets called for humans, to handle bleeding overlays.
+/mob/living/proc/update_wound_overlays()
+	return
+
 /mob/living/Move(atom/newloc, direct, glide_size_override)
 	if(lying_angle != 0)
 		lying_angle_on_movement(direct)
@@ -973,7 +977,7 @@
 		if(has_gravity == 1)
 			clear_alert("gravity")
 		else
-			if(has_gravity >= GRAVITY_DAMAGE_TRESHOLD)
+			if(has_gravity >= GRAVITY_DAMAGE_THRESHOLD)
 				throw_alert("gravity", /atom/movable/screen/alert/veryhighgravity)
 			else
 				throw_alert("gravity", /atom/movable/screen/alert/highgravity)
@@ -1870,7 +1874,7 @@
 
 	// Trait removal if obese
 	if(HAS_TRAIT_FROM(src, TRAIT_FAT, OBESITY))
-		if(overeatduration >= 100)
+		if(overeatduration >= (200 SECONDS))
 			to_chat(src, "<span class='notice'>Your transformation restores your body's natural fitness!</span>")
 
 		REMOVE_TRAIT(src, TRAIT_FAT, OBESITY)

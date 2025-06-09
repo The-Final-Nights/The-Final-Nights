@@ -18,13 +18,13 @@
 	whitelisted = FALSE
 
 /datum/vampireclane/gargoyle/on_gain(mob/living/carbon/human/H)
-	..()
-	H.dna.species.wings_icon = "Gargoyle"
+	. = ..()
 	H.physiology.brute_mod = 0.8
+	var/obj/item/organ/external/wings/functional/wings = new()
+	wings.Insert(H, FALSE, FALSE)
 
 /datum/vampireclane/gargoyle/post_gain(mob/living/carbon/human/gargoyle)
-	..()
-	gargoyle.dna.species.GiveSpeciesFlight(gargoyle)
+	. = ..()
 
 	if(gargoyle.shoes)
 		qdel(gargoyle.shoes)

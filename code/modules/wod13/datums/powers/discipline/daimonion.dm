@@ -185,6 +185,9 @@
 /datum/discipline_power/daimonion/fear_of_the_void_below/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.exit_frenzymod()
+	var/obj/item/organ/external/wings/functional/wings = target.getorganslot(ORGAN_SLOT_EXTERNAL_WINGS)
+	wings.Remove(target, FALSE)
+
 
 //CONFLAGRATION
 /datum/discipline_power/daimonion/conflagration

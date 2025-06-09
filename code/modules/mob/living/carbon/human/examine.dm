@@ -231,8 +231,6 @@
 	if(get_bodypart(BODY_ZONE_HEAD) && !getorgan(/obj/item/organ/brain) && surgeries.len)
 		. += "<span class='deadsay'>It appears that [t_his] brain is missing...</span>"
 
-	var/temp = getBruteLoss() //no need to calculate each of these twice
-
 	var/list/msg = list()
 
 	var/list/missing = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
@@ -285,6 +283,11 @@
 		msg += "[t_He] [p_do()]n't seem all there.\n"
 
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
+		var/temp
+		if(user == src && src.hal_screwyhud == SCREWYHUD_CRIT)//fake damage
+			temp = 50
+		else
+			temp = getBruteLoss()
 		if(temp)
 			if(temp < 25)
 				msg += "[t_He] [t_has] minor bruising.\n"
@@ -358,7 +361,7 @@
 
 		for(var/i in bodyparts)
 			var/obj/item/bodypart/body_part = i
-			if(body_part.get_bleed_rate())
+			if(body_part.get_part_bleed_rate())
 				bleeding_limbs += body_part
 			if(body_part.grasped_by)
 				grasped_limbs += body_part

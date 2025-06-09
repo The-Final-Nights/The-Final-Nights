@@ -870,9 +870,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	inhand_icon_state = null
 	w_class = WEIGHT_CLASS_TINY
 	var/chem_volume = 100
-	var/vapetime = 0 //this so it won't puff out clouds every tick
-	/// How often we take a drag in seconds
-	var/vapedelay = 8
+	/// The amount of time between drags.
+	var/dragtime = 8 SECONDS
+	COOLDOWN_DECLARE(drag_cooldown)
 	var/screw = FALSE // kinky
 	var/super = FALSE //for the fattest vapes dude.
 
@@ -992,28 +992,23 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(isliving(loc))
 		M.IgniteMob()
 
-	vapetime += delta_time
-
 	if(!reagents.total_volume)
 		if(ismob(loc))
-			to_chat(M, "<span class='warning'>[src] is empty!</span>")
+			to_chat(M, span_warning("[src] is empty!"))
 			STOP_PROCESSING(SSobj, src)
 			//it's reusable so it won't unequip when empty
 		return
-	//open flame removed because vapes are a closed system, they won't light anything on fire
 
-	if(super && vapetime >= vapedelay)//Time to start puffing those fat vapes, yo.
-		var/datum/effect_system/smoke_spread/chem/smoke_machine/s = new
-		s.set_up(reagents, 1, 24, loc)
-		s.start()
-		vapetime -= vapedelay
+	if(!COOLDOWN_FINISHED(src, drag_cooldown))
+		return
 
-	if((obj_flags & EMAGGED) && vapetime >= vapedelay)
-		var/datum/effect_system/smoke_spread/chem/smoke_machine/s = new
-		s.set_up(reagents, 4, 24, loc)
-		s.start()
-		vapetime -= vapedelay
-		if(prob(5))//small chance for the vape to break and deal damage if it's emagged
+	//Time to start puffing those fat vapes, yo.
+	COOLDOWN_START(src, drag_cooldown, dragtime)
+	if(obj_flags & EMAGGED)
+		var/datum/effect_system/fluid_spread/smoke/chem/smoke_machine/puff = new
+		puff.set_up(4, location = loc, carry = reagents, efficiency = 24)
+		puff.start()
+		if(prob(5)) //small chance for the vape to break and deal damage if it's emagged
 			playsound(get_turf(src), 'sound/effects/pop_expl.ogg', 50, FALSE)
 			M.apply_damage(20, BURN, BODY_ZONE_HEAD)
 			M.Paralyze(300)
@@ -1023,6 +1018,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			to_chat(M, "<span class='userdanger'>[src] suddenly explodes in your mouth!</span>")
 			qdel(src)
 			return
+	else if(super)
+		var/datum/effect_system/fluid_spread/smoke/chem/smoke_machine/puff = new
+		puff.set_up(1, location = loc, carry = reagents, efficiency = 24)
+		puff.start()
 
 	if(reagents?.total_volume)
 		hand_reagents()
