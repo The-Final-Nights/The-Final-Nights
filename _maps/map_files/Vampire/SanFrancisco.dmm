@@ -6853,9 +6853,9 @@
 /turf/open/floor/plating/asphalt,
 /area/space)
 "bEa" = (
-/obj/machinery/seed_extractor,
-/turf/open/floor/wood,
-/area/vtm/amberglade/amberglade_bawn_interior)
+/obj/structure/spacevine,
+/turf/closed/wall/vampwall/wood,
+/area/vtm/amberglade/amberglade_caern)
 "bEi" = (
 /obj/effect/landmark/start/garou/glade/keeper,
 /turf/open/floor/wood,
@@ -10183,6 +10183,10 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
+"cuU" = (
+/obj/structure/closet/crate/bin,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/amberglade/amberglade_bawn)
 "cuW" = (
 /obj/structure/chair/sofa/corner,
 /turf/open/floor/plating/parquetry/old,
@@ -34212,6 +34216,7 @@
 /obj/item/candle/infinite,
 /obj/item/veil_contract,
 /obj/item/key/atv,
+/obj/item/veil_contract,
 /turf/open/floor/plating/parquetry,
 /area/vtm/amberglade/amberglade_bawn_interior)
 "iub" = (
@@ -62204,6 +62209,10 @@
 	},
 /turf/closed/wall/vampwall,
 /area/vtm)
+"pkr" = (
+/obj/structure/closet/crate/bin,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/amberglade/amberglade_bawn)
 "pks" = (
 /obj/effect/decal/wallpaper/red,
 /turf/closed/wall/vampwall/city,
@@ -64946,6 +64955,11 @@
 "pSl" = (
 /obj/structure/table/wood,
 /obj/item/candle/infinite,
+/obj/item/clothing/head/vampire/cowboy{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/item/veil_contract,
 /turf/open/floor/wood,
 /area/vtm/amberglade/amberglade_bawn_interior)
 "pSs" = (
@@ -67551,11 +67565,6 @@
 /area/vtm/pacificheights/forest)
 "qzt" = (
 /obj/structure/table/wood,
-/obj/item/veil_contract,
-/obj/item/clothing/head/vampire/cowboy{
-	pixel_x = -3;
-	pixel_y = 7
-	},
 /obj/machinery/fax/amberglade{
 	name = "Amberglade Reservation"
 	},
@@ -75710,6 +75719,13 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/police/fed)
+"stk" = (
+/obj/structure/flora/ausbushes/sparsegrass{
+	icon_state = "lavendergrass_3"
+	},
+/obj/machinery/hydroponics/soil,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/temple/temple_grounds_interior)
 "sto" = (
 /obj/structure/railing{
 	dir = 1;
@@ -509769,7 +509785,7 @@ uTF
 dRf
 uTF
 xLo
-aaD
+pkr
 txt
 ydW
 ydW
@@ -511043,7 +511059,7 @@ jSr
 jSr
 tUA
 sDZ
-duy
+nMF
 bIR
 aaD
 aaD
@@ -511825,7 +511841,7 @@ uTF
 dRf
 uTF
 uTF
-aaD
+pkr
 cRj
 aaD
 cRj
@@ -512091,7 +512107,7 @@ fvr
 bkJ
 qYI
 ndV
-nTa
+bEa
 rFH
 cjV
 nTa
@@ -512351,7 +512367,7 @@ kFh
 nTa
 cjV
 pcD
-nTa
+bEa
 xoX
 enI
 xoX
@@ -512608,7 +512624,7 @@ kFh
 nTa
 ndw
 pcD
-nTa
+bEa
 xoX
 xoX
 kFh
@@ -513116,10 +513132,10 @@ aaD
 aaD
 aaD
 aaD
+bEa
 nTa
 nTa
-nTa
-nTa
+bEa
 ndV
 cjV
 nTa
@@ -513133,7 +513149,7 @@ ast
 xoX
 xoX
 xoX
-xoX
+oAt
 xoX
 xoX
 wfP
@@ -513373,7 +513389,7 @@ aaD
 aaD
 aaD
 roZ
-nTa
+bEa
 oAf
 qYI
 cjV
@@ -513892,7 +513908,7 @@ ohk
 kkH
 nTa
 nTa
-nTa
+bEa
 nTa
 xoX
 xoX
@@ -514401,7 +514417,7 @@ aaD
 aaD
 fEL
 ffc
-nTa
+bEa
 pcD
 xoX
 xoX
@@ -514658,7 +514674,7 @@ txt
 aaD
 rWO
 bsV
-nTa
+bEa
 xoX
 xoX
 kFh
@@ -514909,7 +514925,7 @@ uTF
 dRf
 uTF
 uTF
-aaD
+pkr
 aaD
 txt
 aaD
@@ -515194,7 +515210,7 @@ xoX
 enI
 xoX
 pcD
-xoX
+oAt
 xoX
 kFh
 oAf
@@ -516204,6 +516220,16 @@ nTa
 nTa
 nTa
 nTa
+bEa
+nTa
+bEa
+nTa
+nTa
+nTa
+nTa
+nTa
+bEa
+bEa
 nTa
 nTa
 nTa
@@ -516212,19 +516238,9 @@ nTa
 nTa
 nTa
 nTa
+bEa
 nTa
-nTa
-nTa
-nTa
-nTa
-nTa
-nTa
-nTa
-nTa
-nTa
-nTa
-nTa
-nTa
+bEa
 nTa
 nTa
 nTa
@@ -518013,8 +518029,8 @@ aaD
 rWO
 rWO
 uTF
-bEa
 ocY
+qMT
 iSH
 uTF
 aaD
@@ -518265,7 +518281,7 @@ uTF
 uTF
 uTF
 uTF
-txt
+cuU
 bSn
 aaD
 vNh
@@ -521096,16 +521112,16 @@ rWO
 bSn
 rWO
 duy
+nMF
+nMF
 duy
 duy
 duy
 duy
 duy
 duy
-duy
-duy
-duy
-duy
+nMF
+nMF
 aaD
 aaD
 uGP
@@ -521362,7 +521378,7 @@ rWO
 qzZ
 txt
 msf
-duy
+nMF
 aaD
 ebV
 uGP
@@ -522117,9 +522133,9 @@ duy
 duy
 duy
 duy
-duy
-duy
-duy
+nMF
+nMF
+nMF
 duy
 duy
 duy
@@ -522135,12 +522151,12 @@ duy
 duy
 duy
 duy
+nMF
+nMF
 duy
+nMF
 duy
-duy
-duy
-duy
-duy
+nMF
 duy
 duy
 duy
@@ -556445,7 +556461,7 @@ kYr
 aog
 iFU
 iFU
-rCD
+stk
 asE
 asE
 llR
