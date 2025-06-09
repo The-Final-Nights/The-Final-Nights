@@ -25,11 +25,28 @@
 	speed = 1
 	AIStatus = AI_OFF
 	var/mob/living/target_to_zombebe
+	var/mob/last_attacker
 
 /mob/living/simple_animal/hostile/zombie/Destroy()
 	. = ..()
+	if(last_attacker && ishuman(last_attacker))
+		var/mob/living/H = last_attacker
+		if(H.mind && H.masquerade < 5)
+			if(H.killedzombies < 9)
+				H.killedzombies++
+				to_chat(H, span_notice(":Graveyard Duty: Zombies killed: [H.killedzombies]/10."))
+			else
+				H.killedzombies = 0
+				H.masquerade += 1
+				to_chat(H, span_notice("You slew 10 undead. Masquerade Point Restored."))
+				message_admins("[H] has improved their masquerade by killing Zombies in the graveyard.")
 	SSgraveyard.alive_zombies = max(0, SSgraveyard.alive_zombies-1)
 	GLOB.zombie_list -= src
+
+/mob/living/simple_animal/hostile/zombie/attackby(obj/item/I, mob/user, params)
+	if(ishuman(user))
+		last_attacker = user
+	. = ..()
 
 /mob/living/simple_animal/hostile/zombie/Initialize()
 	. = ..()
