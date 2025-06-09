@@ -1,7 +1,6 @@
 #define REGENERATION_DELAY 60  // After taking damage, how long it takes for automatic regeneration to begin
 
 /datum/species/zombie
-	// 1spooky
 	name = "Zombie"
 	id = "zombie"
 	default_color = "FFFFFF"
@@ -30,7 +29,6 @@
 	var/heal_rate = 1
 	var/regen_cooldown = 0
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | ERT_SPAWN
-	var/static/list/spooks = list('sound/hallucinations/growl1.ogg','sound/hallucinations/growl2.ogg','sound/hallucinations/growl3.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/wail.ogg')
 
 /// Zombies do not stabilize body temperature they are the walking dead and are cold blooded
 /datum/species/zombie/body_temperature_core(mob/living/carbon/human/humi)
@@ -63,8 +61,6 @@
 			var/datum/wound/iter_wound = i
 			if(prob(4-iter_wound.severity))
 				iter_wound.remove_wound()
-	if(!HAS_TRAIT(C, TRAIT_CRITICAL_CONDITION) && prob(4))
-		playsound(C, pick(spooks), 50, TRUE, 10)
 
 //Congrats you somehow died so hard you stopped being a zombie
 /datum/species/zombie/infectious/spec_death(gibbed, mob/living/carbon/C)
