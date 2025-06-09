@@ -1605,7 +1605,7 @@
 	dir = 4
 	},
 /obj/effect/decal/litter,
-/obj/item/toy/plush/lizardplushie/space,
+/obj/item/toy/plush/shark,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
@@ -2289,15 +2289,6 @@
 	},
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/interior/giovanni/outside)
-"azI" = (
-/obj/structure/table/optable,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "azK" = (
 /obj/structure/table,
 /obj/item/paper{
@@ -5278,6 +5269,16 @@
 /obj/structure/curtain,
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch/basement)
+"bjQ" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 9
+	},
+/obj/structure/flora/grass/jungle/b,
+/turf/open/floor/plating/shit,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "bjS" = (
 /obj/structure/fluff/hedge,
 /obj/structure/railing,
@@ -7642,6 +7643,19 @@
 /obj/effect/decal/trash,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
+"bLO" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 5
+	},
+/obj/structure/lamppost/sidewalk,
+/obj/structure/flora/grass/jungle/b,
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "bLP" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/sidewalk/poor,
@@ -10419,16 +10433,6 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/financialdistrict)
-"cts" = (
-/obj/machinery/camera/directional/west,
-/obj/effect/decal/rugs,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "ctt" = (
 /obj/effect/decal/wallpaper/red,
 /obj/structure/sign/poster/vampire/wotw,
@@ -10788,6 +10792,13 @@
 	},
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/bianchiBank)
+"cxv" = (
+/obj/effect/decal/graffiti,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "cxE" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalk,
@@ -14077,15 +14088,6 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/forest)
-"dnq" = (
-/obj/structure/closet/crate/freezer/fridge,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "dnv" = (
 /obj/effect/decal/wallpaper/low,
 /turf/closed/wall/vampwall/market/low/window/reinforced,
@@ -14135,18 +14137,6 @@
 /obj/structure/table/wood,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/baali)
-"dnR" = (
-/obj/machinery/light/small/red{
-	dir = 8;
-	pixel_x = 16
-	},
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "dnT" = (
 /obj/effect/decal/wallpaper/stone/low,
 /obj/structure/curtain/cloth/fancy,
@@ -15599,6 +15589,11 @@
 	pixel_y = 4
 	},
 /obj/effect/decal/rugs,
+/obj/effect/decal/carpet{
+	pixel_x = -14;
+	pixel_y = -13;
+	icon_state = "greencarpet"
+	},
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -16076,20 +16071,6 @@
 /obj/effect/decal/cleanable/cobweb,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
-"dNE" = (
-/obj/structure/sink{
-	pixel_y = 16
-	},
-/obj/machinery/light/dim{
-	pixel_y = 32
-	},
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "dNN" = (
 /obj/structure/toilet{
 	dir = 4;
@@ -16738,6 +16719,11 @@
 "dWv" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
+	},
+/obj/item/kirbyplants{
+	icon_state = "plant-18";
+	pixel_y = 15;
+	pixel_x = -10
 	},
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
@@ -17819,7 +17805,7 @@
 /area/vtm/sewer)
 "ejl" = (
 /obj/structure/chair/sofa/right,
-/obj/item/toy/plush/beeplushie,
+/obj/item/toy/plush/human,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "ejm" = (
@@ -18224,6 +18210,7 @@
 	pixel_y = 32
 	},
 /obj/effect/decal/trash,
+/obj/structure/flora/grass/jungle/b,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -19283,6 +19270,14 @@
 "eDf" = (
 /turf/closed/wall/vampwall/painted,
 /area/vtm/clinic/haven)
+"eDj" = (
+/obj/effect/decal/wallpaper/paper/stripe/low,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "eDk" = (
 /obj/effect/turf_decal/siding/wideplating/dark,
 /obj/structure/chair/comfy{
@@ -20566,6 +20561,14 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
+"eUN" = (
+/obj/effect/decal/wallpaper/red,
+/obj/effect/decal/wallpaper/papers/six,
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "eUQ" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/suit/vampire/orthodox,
@@ -23459,6 +23462,19 @@
 /obj/structure/railing,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"fDq" = (
+/obj/effect/turf_decal/siding/wideplating/dark,
+/obj/item/toy/plush/abductor{
+	pixel_y = 10;
+	pixel_x = 10
+	},
+/turf/open/floor/plating/rough{
+	icon_state = "carpet_black"
+	},
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "fDt" = (
 /obj/structure/bed,
 /obj/item/bedsheet/random,
@@ -25678,6 +25694,13 @@
 /obj/item/candle/infinite,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/forest)
+"gfY" = (
+/obj/effect/decal/wallpaper,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/junk/alt,
+/area/vtm/nosferatu_office{
+	color = "#f76abf"
+	})
 "gge" = (
 /mob/living/carbon/human/npc/walkby,
 /turf/open/floor/plating/sidewalk/old,
@@ -27526,6 +27549,9 @@
 	icon_state = "plant2";
 	pixel_y = 13;
 	pixel_x = 7
+	},
+/obj/item/toy/plush/horse{
+	pixel_y = 10
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
@@ -29943,16 +29969,6 @@
 /area/vtm/nosferatu_office{
 	color = "#f76abf"
 	})
-"hgR" = (
-/obj/structure/coclock,
-/obj/machinery/computer/operating,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "hgT" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/effect/turf_decal/siding/wood{
@@ -30341,17 +30357,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/cog/caern)
-"hlK" = (
-/obj/structure/coclock,
-/obj/effect/decal/rugs,
-/obj/structure/closet,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "hlL" = (
 /obj/effect/decal/litter,
 /obj/effect/decal/trash,
@@ -30897,17 +30902,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/tzimisce_manor)
-"hsP" = (
-/obj/machinery/light/dim{
-	dir = 4
-	},
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "hsV" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -34117,6 +34111,10 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/fishermanswharf)
+"ikc" = (
+/obj/structure/roadsign/stop,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/sewer)
 "ikt" = (
 /obj/structure/noticeboard{
 	desc = "A board with pamphlets of Saint John's Community Health Clinic.";
@@ -34577,9 +34575,12 @@
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/tzimisce_manor)
 "iqV" = (
-/obj/machinery/washing_machine,
 /obj/machinery/light/warm{
 	dir = 4
+	},
+/obj/machinery/washing_machine{
+	pixel_y = 15;
+	density = 0
 	},
 /turf/open/floor/plating/industrial,
 /area/vtm/sewer/nosferatu_town)
@@ -34903,6 +34904,11 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
 	},
+/obj/item/kirbyplants{
+	icon_state = "plant-18";
+	pixel_y = 15;
+	pixel_x = -10
+	},
 /turf/open/floor/plating/concrete,
 /area/vtm/nosferatu_office{
 	color = "#f76abf"
@@ -35066,6 +35072,9 @@
 	icon_state = "bounty-closed";
 	open = 0;
 	pixel_y = 33
+	},
+/obj/item/toy/plush/horse{
+	pixel_y = 10
 	},
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
@@ -36228,17 +36237,6 @@
 	},
 /turf/open/floor/plating,
 /area/vtm/interior)
-"iLc" = (
-/obj/effect/decal/rugs,
-/obj/structure/vampdoor/wood/old{
-	dir = 8;
-	lock_id = "nosferatu"
-	},
-/turf/open/floor/plating/vampcanalplating,
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "iLl" = (
 /obj/structure/table,
 /obj/machinery/button/door{
@@ -37439,17 +37437,6 @@
 /obj/structure/stairs/east,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
-"jaH" = (
-/obj/structure/extinguisher_cabinet{
-	pixel_y = 32
-	},
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "jaN" = (
 /mob/living/simple_animal/deer,
 /turf/open/floor/plating/vampgrass,
@@ -43147,15 +43134,6 @@
 /obj/structure/curtain,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/setite/basement)
-"kuY" = (
-/obj/effect/decal/rugs,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "kuZ" = (
 /obj/structure/vampdoor/wood/old{
 	dir = 4;
@@ -43684,20 +43662,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/strip/elysium)
-"kBw" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table/wood,
-/obj/item/reagent_containers/blood/elite,
-/turf/open/floor/plating/rough/cave{
-	icon_state = "stone4"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "kBC" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/effect/landmark/npcwall,
@@ -45043,6 +45007,14 @@
 	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower)
+"kSI" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/structure/flora/grass/jungle/b,
+/turf/open/floor/plating/shit,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "kSR" = (
 /turf/closed/wall/vampwall/old/low/window,
 /area/vtm/interior/techshop)
@@ -48806,6 +48778,13 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/giovanni/outside)
+"lOr" = (
+/obj/structure/flora/grass/jungle/b,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "lOt" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -49885,24 +49864,6 @@
 /obj/item/weedpack,
 /turf/open/floor/carpet/red,
 /area/vtm/anarch/basement)
-"mcN" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table/wood,
-/obj/item/reagent_containers/blood,
-/obj/item/reagent_containers/blood,
-/obj/item/reagent_containers/blood,
-/obj/item/reagent_containers/blood,
-/obj/item/reagent_containers/blood,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_plating4"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "mcS" = (
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/wood,
@@ -53764,7 +53725,7 @@
 /obj/effect/decal/stock{
 	dir = 8
 	},
-/obj/item/soap/homemade,
+/obj/item/soap/deluxe,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
@@ -55549,6 +55510,9 @@
 "ntO" = (
 /obj/structure/table/wood,
 /obj/machinery/mineral/equipment_vendor/fastfood/costumes,
+/obj/underplate{
+	pixel_y = 8
+	},
 /turf/closed/wall/vampwall/junk/alt/low,
 /area/vtm/nosferatu_office{
 	color = "#f76abf"
@@ -59857,18 +59821,6 @@
 /obj/vampire_computer,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
-"ots" = (
-/obj/structure/table{
-	color = "#CD5C5C"
-	},
-/obj/item/reagent_containers/spray,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "otz" = (
 /obj/effect/landmark/npcactivity,
 /turf/open/floor/plating/sidewalk/poor,
@@ -64270,7 +64222,6 @@
 /obj/structure/chair/sofa/corner{
 	dir = 4
 	},
-/obj/item/toy/plush/pkplush,
 /obj/machinery/light/dim{
 	pixel_y = 32
 	},
@@ -68854,27 +68805,6 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/shop)
-"qwa" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/crate,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/turf/open/floor/plating/rough/cave{
-	icon_state = "stone8"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "qwc" = (
 /obj/structure/railing{
 	dir = 4
@@ -68892,15 +68822,6 @@
 /obj/structure/billiard_table,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f2)
-"qwj" = (
-/obj/structure/chair/stool/bar,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "qwm" = (
 /obj/effect/decal/wallpaper/paper/low,
 /turf/closed/wall/vampwall/junk/alt,
@@ -69134,6 +69055,14 @@
 /obj/item/cardboard_cutout,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/banu/haven)
+"qyL" = (
+/obj/effect/decal/wallpaper,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "qyO" = (
 /obj/item/stack/dollar/ten,
 /obj/item/stack/dollar/hundred,
@@ -69853,7 +69782,7 @@
 /obj/item/restraints/handcuffs/fake,
 /obj/effect/decal/wallpaper/paper/darkgreen/low,
 /obj/structure/coclock,
-/obj/item/bedsheet/random,
+/obj/item/bedsheet/yellow,
 /turf/open/floor/carpet/green,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -71143,16 +71072,6 @@
 /obj/effect/decal/bordur/corner,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/church)
-"qWi" = (
-/obj/effect/decal/rugs,
-/obj/structure/closet,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "qWr" = (
 /obj/effect/turf_decal/siding/wideplating/dark,
 /obj/effect/turf_decal/siding/wideplating/dark,
@@ -71205,6 +71124,7 @@
 	dir = 4;
 	pixel_x = -2
 	},
+/obj/structure/flora/grass/jungle/b,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -72173,6 +72093,10 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/laundromat)
+"riU" = (
+/mob/living/simple_animal/deer,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/sewer)
 "riW" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -72639,6 +72563,14 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/hotel)
+"rok" = (
+/obj/effect/decal/wallpaper,
+/obj/effect/decal/wallpaper/papers/six,
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "ron" = (
 /obj/structure/curtain/cloth/fancy/mechanical{
 	id = 26
@@ -76238,6 +76170,13 @@
 	color = "#df6220";
 	fire_controled = 1
 	})
+"sdN" = (
+/obj/effect/decal/wallpaper,
+/obj/effect/decal/wallpaper/papers/three,
+/turf/closed/wall/vampwall/junk/alt,
+/area/vtm/nosferatu_office{
+	color = "#f76abf"
+	})
 "sdO" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -77341,16 +77280,6 @@
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/financialdistrict/construction)
-"srO" = (
-/obj/effect/decal/rugs,
-/obj/structure/closet/crate/freezer/fridge,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "srT" = (
 /obj/structure/flora/rock/jungle,
 /obj/effect/turf_decal/weather/dirt{
@@ -78877,7 +78806,10 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/ghetto)
 "sKl" = (
-/obj/machinery/washing_machine,
+/obj/machinery/washing_machine{
+	pixel_y = 15;
+	density = 0
+	},
 /obj/structure/window/reinforced/indestructable{
 	alpha = 0;
 	dir = 4
@@ -79574,6 +79506,13 @@
 /obj/item/melee/vampirearms/knife,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/giovanni/basement)
+"sVP" = (
+/obj/effect/decal/wallpaper/paper/low,
+/obj/effect/decal/wallpaper/papers/eight,
+/turf/closed/wall/vampwall/junk/alt,
+/area/vtm/nosferatu_office{
+	color = "#f76abf"
+	})
 "sVR" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/junglebush/c,
@@ -82949,6 +82888,20 @@
 	dir = 1
 	},
 /obj/machinery/camera/directional/east,
+/obj/structure/roadsign{
+	icon_state = "wrongway";
+	pixel_y = 10
+	},
+/obj/structure/trashcan{
+	pixel_x = 3;
+	pixel_y = 10
+	},
+/obj/structure/trashbag{
+	pixel_x = -6;
+	pixel_y = -6
+	},
+/obj/effect/decal/cardboard,
+/obj/effect/decal/trash,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal1"
 	},
@@ -83248,7 +83201,8 @@
 /obj/effect/decal/carpet,
 /obj/effect/decal/carpet{
 	pixel_x = -14;
-	pixel_y = -13
+	pixel_y = -13;
+	icon_state = "greencarpet"
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_warren{
@@ -83891,6 +83845,7 @@
 	pixel_y = 13
 	},
 /obj/effect/decal/rugs,
+/obj/effect/decal/wallpaper/papers/one,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -87815,7 +87770,6 @@
 /turf/open/floor/plating/asphalt,
 /area/vtm/ghetto)
 "uWI" = (
-/obj/effect/decal/graffiti,
 /obj/machinery/light/small/red{
 	dir = 8;
 	pixel_x = 16
@@ -87823,6 +87777,11 @@
 /obj/structure/clothinghanger{
 	pixel_x = -10;
 	density = 0
+	},
+/obj/item/kirbyplants{
+	icon_state = "plant-18";
+	pixel_y = 15;
+	pixel_x = -10
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer/nosferatu_bar{
@@ -90183,7 +90142,6 @@
 /area/vtm/forest)
 "vzf" = (
 /obj/structure/table/wood,
-/obj/item/kirbyplants/random,
 /turf/open/floor/plating/concrete,
 /area/vtm/nosferatu_office{
 	color = "#f76abf"
@@ -91708,6 +91666,7 @@
 "vQG" = (
 /obj/structure/chair/sofa/left,
 /obj/structure/coclock,
+/obj/item/toy/plush/unicorn,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -91833,18 +91792,6 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/chinatown)
-"vRL" = (
-/obj/structure/table{
-	color = "#CD5C5C"
-	},
-/obj/item/storage/backpack/duffelbag/med/surgery,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "vRQ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -93283,6 +93230,10 @@
 /obj/manholedown,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/fishermanswharf/ghetto)
+"wjT" = (
+/obj/structure/roadsign/nopedestrian,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/sewer)
 "wkc" = (
 /obj/structure/rack,
 /obj/item/detective_scanner,
@@ -93647,11 +93598,6 @@
 /obj/item/reagent_containers/spray/cleaner,
 /obj/item/reagent_containers/spray/cleaner,
 /obj/item/kirbyplants{
-	icon_state = "plant3";
-	pixel_x = 6;
-	pixel_y = 20
-	},
-/obj/item/kirbyplants{
 	icon_state = "plant4";
 	pixel_y = 18;
 	pixel_x = -14
@@ -93660,6 +93606,12 @@
 	icon_state = "plant5";
 	pixel_y = 5;
 	pixel_x = -10
+	},
+/obj/effect/decal/graffiti,
+/obj/item/kirbyplants{
+	icon_state = "plant3";
+	pixel_x = 6;
+	pixel_y = 20
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer/nosferatu_bar{
@@ -94324,6 +94276,13 @@
 /obj/item/trash/plate,
 /turf/open/floor/carpet/cyan,
 /area/vtm/clinic)
+"wxR" = (
+/obj/structure/flora/grass/jungle/b,
+/turf/open/floor/plating/dirt,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "wxT" = (
 /obj/structure/rack,
 /obj/item/storage/box/handcuffs,
@@ -95391,6 +95350,11 @@
 "wIz" = (
 /obj/structure/bed,
 /obj/item/bedsheet/random,
+/obj/effect/decal/carpet{
+	pixel_x = -14;
+	pixel_y = -13;
+	icon_state = "greencarpet"
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
@@ -97972,15 +97936,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
-"xoA" = (
-/obj/structure/curtain/bounty,
-/turf/open/floor/plating/vampcanalplating{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "xoJ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -103013,13 +102968,13 @@ dhc
 dhc
 dhc
 dhc
-nYS
-nYS
-nYS
-nYS
-nYS
-nYS
-tiZ
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
 dhc
 dhc
 dhc
@@ -103270,16 +103225,16 @@ dhc
 dhc
 dhc
 dhc
-nYS
-wBT
-wBT
-wBT
-wBT
-wBT
-nYS
-nYS
-nYS
-nYS
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
 dhc
 dhc
 dhc
@@ -103527,16 +103482,16 @@ dhc
 dhc
 dhc
 dhc
-nYS
-wBT
-hgR
-wna
-ots
-wBT
-wBT
-wBT
-wBT
-nYS
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
 dhc
 dhc
 dhc
@@ -103784,16 +103739,16 @@ dhc
 dhc
 dhc
 dhc
-nYS
-wBT
-azI
-qwj
-vRL
-wBT
-srO
-cts
-wBT
-nYS
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
 dhc
 dhc
 dhc
@@ -104042,15 +103997,15 @@ nYS
 nYS
 nYS
 nYS
-wBT
-dNE
-pcl
-dnq
-wBT
-hlK
-kuY
-wBT
 nYS
+nYS
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
 dhc
 dhc
 dhc
@@ -104300,14 +104255,14 @@ wBT
 wBT
 wBT
 wBT
-xoA
-xoA
-xoA
-wBT
-qWi
-kuY
-wBT
 nYS
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
+dhc
 dhc
 dhc
 dhc
@@ -104557,14 +104512,14 @@ vYy
 unK
 jId
 wBT
-jaH
-hsP
-pcl
-pcl
-pcl
-dnR
-wBT
-tiZ
+nYS
+nYS
+nYS
+nYS
+nYS
+nYS
+nYS
+nYS
 nYS
 nYS
 dhc
@@ -104814,7 +104769,7 @@ qyd
 lMf
 blT
 wBT
-iLc
+wBT
 wBT
 wBT
 wBT
@@ -107939,7 +107894,7 @@ snI
 bRb
 uma
 snI
-qxs
+ikc
 snI
 snI
 snI
@@ -108453,7 +108408,7 @@ snI
 kUR
 snI
 bVP
-sLN
+riU
 iIx
 vMC
 dnU
@@ -109176,7 +109131,7 @@ mqK
 dUl
 xtb
 epw
-nfd
+lOr
 pqL
 jsg
 skw
@@ -109426,11 +109381,11 @@ aUs
 aUs
 aUs
 otY
-nfd
+lOr
 gfC
 xAO
 lKV
-kBw
+dUl
 xtb
 epw
 bhC
@@ -109682,7 +109637,7 @@ woj
 vrm
 kyt
 aUs
-nfd
+cxv
 gfC
 dXu
 xAO
@@ -109698,7 +109653,7 @@ xys
 cZi
 xtb
 xSD
-jsg
+bjQ
 oMx
 rCr
 wyx
@@ -109974,7 +109929,7 @@ iBp
 lKV
 gHO
 hzJ
-raP
+kSI
 pJb
 gpF
 wBT
@@ -110197,7 +110152,7 @@ aUs
 aUs
 aUs
 xAO
-qwa
+wpK
 ldb
 xtb
 xtb
@@ -110717,7 +110672,7 @@ xAO
 qkj
 xAO
 jkg
-xAO
+wxR
 rSE
 vZG
 bUE
@@ -110744,7 +110699,7 @@ rPM
 rPM
 sfw
 meS
-nfd
+lOr
 nfd
 lKV
 mTO
@@ -110959,7 +110914,7 @@ nYS
 (36,1,1) = {"
 dhc
 nYS
-dlV
+rok
 bqT
 kOZ
 nSf
@@ -111234,7 +111189,7 @@ dNN
 mYe
 aUs
 oQP
-sFw
+bLO
 lKV
 mmt
 xtb
@@ -111996,7 +111951,7 @@ qVf
 wAa
 npJ
 xAO
-tba
+eUN
 vqE
 woj
 hMo
@@ -112035,7 +111990,7 @@ eMj
 dcS
 pyu
 ehu
-mcN
+lMf
 lMf
 snI
 lKY
@@ -112266,7 +112221,7 @@ aUs
 lfm
 qJb
 pmx
-tfS
+sdN
 asz
 sCa
 uPT
@@ -112536,7 +112491,7 @@ qwm
 kvD
 iNU
 jDo
-nfd
+lOr
 rSE
 dUl
 dUl
@@ -113025,7 +112980,7 @@ nfd
 odB
 jZn
 rSc
-tLg
+eDj
 yjv
 qMW
 woj
@@ -113037,7 +112992,7 @@ gUv
 ewy
 oGS
 xTi
-tfS
+gfY
 mcw
 wKe
 xYF
@@ -113287,7 +113242,7 @@ qXw
 woj
 pcl
 uQA
-dlV
+qyL
 qIN
 vqk
 kaj
@@ -113301,7 +113256,7 @@ puJ
 xvB
 nsY
 qQA
-qwm
+sVP
 aKc
 qZh
 ohs
@@ -113803,7 +113758,7 @@ ppC
 uvR
 dlV
 gEo
-dZI
+fDq
 kIH
 rDO
 aUs
@@ -118969,7 +118924,7 @@ iqV
 vyg
 vCK
 wJn
-sLN
+wjT
 wkU
 sLN
 sLN
