@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(CLINIC_category_access, list(
 		list("name" = "Epinephrine Auto-Injector", "path" = /obj/item/reagent_containers/hypospray/medipen, "stock" = 6, "cost" = 30),
 		list("name" = "Atropine Auto-Injector", "path" = /obj/item/reagent_containers/hypospray/medipen/atropine, "stock" = 6, "cost" = 45),
 		list("name" = "Mannitol Pill Bottle", "path" = /obj/item/storage/pill_bottle/mannitol, "stock" = 4, "cost" = 50),
-		list("name" = "O- Blood Pack", "path" = /obj/item/reagent_containers/blood/o_minus, "stock" = 6, "cost" = 75),
+		list("name" = "O- Blood Pack", "path" = /obj/item/reagent_containers/blood, "stock" = 6, "cost" = 75),
 		list("name" = "Pax Pill Bottle (PSYCHIATRIC)", "path" = /obj/item/storage/pill_bottle/paxpsych, "stock" = 2, "cost" = 100),
 		list("name" = "Ephedrine Pill Bottle", "path" = /obj/item/storage/pill_bottle/ephedrine, "stock" = 4, "cost" = 45)
 	)
