@@ -31,7 +31,7 @@
 	. = ..()
 	if(last_attacker && ishuman(last_attacker))
 		var/mob/living/H = last_attacker
-		if(H.mind && H.masquerade < 5)
+		if(H.mind && H.masquerade < 5 && get_area_name(H) == "Graveyard")
 			if(H.killedzombies < 9)
 				H.killedzombies++
 				to_chat(H, span_notice(":Graveyard Duty: Zombies killed: [H.killedzombies]/10."))
