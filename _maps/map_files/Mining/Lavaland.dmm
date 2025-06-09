@@ -21,12 +21,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"ah" = (
-/obj/effect/decal/coastline/corner,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "aj" = (
 /turf/closed/wall/vampwall/city{
 	umbra = 1
@@ -38,7 +32,8 @@
 /area/vtm/interior/penumbra)
 "aq" = (
 /obj/structure/chair/pew/right{
-	dir = 8
+	dir = 8;
+	icon_state = "pewend_right"
 	},
 /turf/open/floor/plating/church{
 	umbra = 1
@@ -60,20 +55,11 @@
 /area/vtm/interior/penumbra)
 "ax" = (
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/old{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"aB" = (
-/obj/structure/flora/bush,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -101,7 +87,8 @@
 /area/vtm/interior/penumbra)
 "aP" = (
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk{
 	umbra = 1
@@ -122,7 +109,8 @@
 /area/vtm/interior/penumbra)
 "bb" = (
 /obj/structure/arc{
-	dir = 6
+	dir = 6;
+	icon_state = "ark1"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -143,20 +131,6 @@
 "bi" = (
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/old{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"bn" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -211,26 +185,10 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"bP" = (
-/obj/structure/fermenting_barrel,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"bT" = (
-/obj/structure/vampdoor/kj_gate{
-	name = "Temple Gate"
-	},
-/turf/open/floor/plating/sidewalkalt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "bW" = (
 /obj/structure/arc{
-	dir = 9
+	dir = 9;
+	icon_state = "ark1"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -250,31 +208,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"ch" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"ci" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "ck" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -290,12 +223,6 @@
 /area/vtm/interior/penumbra)
 "cm" = (
 /obj/structure/lamppost/sidewalk,
-/turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"cn" = (
-/obj/effect/decal/bordur/corner{
-	dir = 8
-	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "cr" = (
@@ -323,27 +250,10 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"cF" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"cH" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "cI" = (
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/rich{
@@ -405,10 +315,12 @@
 /area/vtm/interior/penumbra)
 "dn" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_line"
 	},
 /obj/structure/vampdoor/npc{
-	dir = 8
+	dir = 8;
+	icon_state = "wood-1"
 	},
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalkalt{
@@ -430,30 +342,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"dt" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"dv" = (
-/obj/item/food/grown/moonflower,
-/obj/structure/flora/ausbushes/ywflowers,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"dB" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "dC" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
@@ -470,14 +358,6 @@
 	dir = 8
 	},
 /turf/open/floor/plating/vampplating/mono{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"dL" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "reedbush_4"
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -521,15 +401,6 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"el" = (
-/obj/structure/vampfence/rich{
-	dir = 4;
-	pixel_y = 6
-	},
-/turf/open/floor/plasteel/dark{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "em" = (
 /obj/cargocrate,
 /turf/open/floor/plating/vampdirt/rails{
@@ -540,15 +411,6 @@
 /obj/effect/decal/litter,
 /obj/effect/decal/trash,
 /turf/open/floor/plating/vampplating/mono{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"ep" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -607,7 +469,8 @@
 /area/vtm/interior/penumbra)
 "eF" = (
 /obj/structure/arc{
-	dir = 8
+	dir = 8;
+	icon_state = "ark1"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -667,7 +530,8 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/siding/wood{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_wood_line"
 	},
 /turf/open/floor/plating/vampdirt{
 	icon_state = "snow1"
@@ -675,7 +539,8 @@
 /area/vtm/interior/penumbra)
 "fb" = (
 /obj/effect/decal/bordur{
-	dir = 10
+	dir = 10;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -683,7 +548,8 @@
 /area/vtm/interior/penumbra)
 "fc" = (
 /obj/effect/decal/bordur{
-	dir = 5
+	dir = 5;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -691,34 +557,15 @@
 /area/vtm/interior/penumbra)
 "fe" = (
 /obj/police_department{
-	dir = 1
+	dir = 1;
+	icon_state = "police"
 	},
 /obj/structure/trashcan,
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
-"ff" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/landmark/teleport_mark{
-	tribe = "Black Furies"
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "fg" = (
 /obj/structure/trashbag,
 /turf/open/floor/grass/fakebasalt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"fl" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"fm" = (
-/turf/open/floor/plating/woodfancy{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -740,33 +587,6 @@
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
 	},
-/area/vtm/interior/penumbra)
-"fO" = (
-/obj/structure/flora/ausbushes/lavendergrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"fV" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"fX" = (
-/obj/item/food/grown/moonflower,
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "ga" = (
 /obj/effect/decal/litter,
@@ -824,16 +644,11 @@
 /area/vtm/interior/penumbra)
 "gD" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /obj/item/chair/wood,
 /turf/open/floor/plating/sidewalk/rich{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"gG" = (
-/obj/structure/stone_tile/slab,
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -845,24 +660,14 @@
 /area/vtm/interior/penumbra)
 "gR" = (
 /obj/structure/vampfence/corner/rich{
-	dir = 4
+	dir = 4;
+	icon_state = "fence_corner"
 	},
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"gT" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	name = "bushS";
-	pixel_y = -9
-	},
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -892,15 +697,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"hh" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/obj/structure/flora/ausbushes/brflowers,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "hi" = (
 /obj/effect/decal/bordur,
 /obj/effect/decal/trash,
@@ -924,7 +720,8 @@
 /area/vtm/interior/penumbra)
 "hu" = (
 /obj/effect/decal/bordur{
-	dir = 9
+	dir = 9;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -940,19 +737,11 @@
 /area/vtm/interior/penumbra)
 "hz" = (
 /obj/police_department{
-	dir = 8
+	dir = 8;
+	icon_state = "police"
 	},
 /obj/structure/trashcan,
 /turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"hC" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "hG" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -975,27 +764,10 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"hK" = (
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/beach/sand{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"hL" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "hO" = (
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 8
+	dir = 8;
+	icon_state = "chinese"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -1010,14 +782,6 @@
 "hW" = (
 /turf/closed/wall/vampwall/bar/low/window,
 /area/vtm/interior/penumbra)
-"if" = (
-/obj/structure/table/wood,
-/obj/item/lighter,
-/obj/item/key/atv,
-/turf/open/floor/plating/woodfancy{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "ih" = (
 /obj/vampire_car/rand/anarch,
 /turf/open/floor/plating/umbra,
@@ -1029,14 +793,6 @@
 "ik" = (
 /turf/open/floor/plating/sidewalk,
 /area/vtm/interior/penumbra)
-"il" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "is" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -1045,22 +801,10 @@
 	density = 0
 	},
 /area/vtm/interior/penumbra)
-"it" = (
-/obj/structure/flora/tree/pine,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "iu" = (
 /obj/structure/chair/wood{
-	dir = 4
+	dir = 4;
+	icon_state = "wooden_chair"
 	},
 /turf/open/floor/plating/parquetry/old{
 	umbra = 1
@@ -1080,37 +824,6 @@
 	},
 /obj/structure/flora/ausbushes/shortgrass,
 /turf/open/floor/plating/vampdirt,
-/area/vtm/interior/penumbra)
-"iF" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"iG" = (
-/obj/effect/landmark/teleport_mark{
-	tribe = "Ghost Council"
-	},
-/turf/open/floor/plating/vampocean{
-	umbra = 1;
-	density = 0
-	},
-/area/vtm/interior/penumbra)
-"iH" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "iU" = (
 /obj/structure/table/wood,
@@ -1134,61 +847,25 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"iZ" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "je" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"jg" = (
-/obj/structure/flora/bush,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "jj" = (
 /obj/structure/chair/wood{
-	dir = 8
+	dir = 8;
+	icon_state = "wooden_chair"
 	},
 /turf/open/floor/plating/parquetry/old{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"jn" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/structure/fermenting_barrel,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1225,17 +902,6 @@
 /area/vtm/interior/penumbra)
 "jC" = (
 /turf/open/floor/plating/vampocean{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"jD" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1276,40 +942,10 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"jN" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 13
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "jO" = (
 /obj/item/chair/stool/bar,
 /obj/structure/trashbag,
 /turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"jP" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"jQ" = (
-/obj/structure/vamptree/pine{
-	layer = 2.5;
-	pixel_x = -12;
-	pixel_y = -1
-	},
-/turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "jR" = (
 /obj/structure/flora/ausbushes/grassybush,
@@ -1364,77 +1000,34 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"kB" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "ywflowers_4"
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "kE" = (
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"kN" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "kO" = (
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"kP" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"kR" = (
-/obj/structure/fermenting_barrel,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "kS" = (
-/obj/structure/glowshroom/glowcap,
-/turf/open/floor/plating/vampgrass,
+/obj/structure/table/wood,
+/turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "kV" = (
 /obj/structure/vampdoor/simple,
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalkalt{
@@ -1478,14 +1071,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"lo" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "lp" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -1511,18 +1096,10 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"lG" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "lI" = (
 /obj/structure/arc/add{
-	dir = 4
+	dir = 4;
+	icon_state = "ark2"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -1562,24 +1139,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"mh" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	name = "bushS";
-	pixel_y = -9
-	},
-/obj/structure/flora/ausbushes/brflowers,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"mn" = (
-/obj/structure/table/wood,
-/turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
 "mo" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/carpet{
@@ -1589,14 +1148,6 @@
 "ms" = (
 /obj/structure/big_vamprocks,
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"mu" = (
-/obj/structure/vampdoor/huntlodge{
-	name = "Lone Wolf Lodge"
-	},
-/turf/open/floor/plating/woodfancy{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "mz" = (
 /obj/structure/trashcan,
@@ -1615,28 +1166,6 @@
 "mD" = (
 /obj/structure/table/wood,
 /turf/open/floor/carpet{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"mH" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/structure/vamptree/pine{
-	layer = 2.5;
-	pixel_x = -12;
-	pixel_y = -1
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"mN" = (
-/obj/structure/flora/tree/jungle,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1665,30 +1194,12 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"ni" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "nm" = (
 /obj/effect/decal/bordur{
-	dir = 6
+	dir = 6;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"nt" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1698,7 +1209,8 @@
 /area/vtm/interior/penumbra)
 "nw" = (
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/old{
@@ -1717,12 +1229,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"nQ" = (
-/obj/structure/flora/junglebush,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "nR" = (
 /obj/structure/vampdoor/chantry{
 	locked = 0
@@ -1737,15 +1243,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"nV" = (
-/obj/structure/flora/junglebush,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "oe" = (
 /obj/effect/decal/trash,
 /obj/effect/decal/trash,
@@ -1753,55 +1250,12 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"of" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "oj" = (
 /obj/structure/vampdoor/chantry,
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/penumbra)
-"os" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/junglebush,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"ou" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "ox" = (
 /turf/open/floor/plating/parquetry/old{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"oA" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1822,7 +1276,8 @@
 /area/vtm/interior/penumbra)
 "oO" = (
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -1865,18 +1320,11 @@
 /area/vtm/interior/penumbra)
 "pl" = (
 /obj/effect/turf_decal/siding/wood{
-	dir = 8
+	dir = 8;
+	icon_state = "siding_wood_line"
 	},
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/plating/vampwood{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"pt" = (
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1896,34 +1344,12 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"pE" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "pJ" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"pR" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "pT" = (
 /obj/item/clothing/mask/gas/clown_hat{
@@ -1945,21 +1371,11 @@
 /area/vtm/interior/penumbra)
 "pX" = (
 /obj/effect/turf_decal/siding/wood{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_wood_line"
 	},
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/plating/vampwood{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"pY" = (
-/obj/structure/vampfence/rich{
-	pixel_y = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1971,11 +1387,6 @@
 "qf" = (
 /turf/open/floor/plasteel/stairs/medium{
 	dir = 8;
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"qj" = (
-/turf/open/floor/plating/beach/sand{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -1999,13 +1410,6 @@
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"qv" = (
-/obj/structure/flora/ausbushes/brflowers,
-/obj/transfer_point_vamp/umbral{
-	id = 903
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
@@ -2043,31 +1447,6 @@
 "qO" = (
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/plating/vampwood{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"qP" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"qT" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/obj/structure/flora/ausbushes/brflowers,
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -2115,14 +1494,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"rB" = (
-/obj/transfer_point_vamp/umbral{
-	id = 904
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "rD" = (
 /obj/structure/vamptree,
 /turf/open/floor/plating/vampgrass{
@@ -2141,7 +1512,8 @@
 /obj/structure/vampmap,
 /obj/structure/lamppost/sidewalk,
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -2165,22 +1537,6 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"rS" = (
-/obj/effect/decal/bordur/corner{
-	dir = 4
-	},
-/turf/open/floor/plating/beach/sand{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"rT" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "rV" = (
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/vampgrass,
@@ -2188,7 +1544,8 @@
 "sb" = (
 /obj/structure/vampfence/rich,
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
@@ -2197,7 +1554,8 @@
 "se" = (
 /obj/structure/vampfence/rich,
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
@@ -2205,15 +1563,6 @@
 /area/vtm/interior/penumbra)
 "sg" = (
 /turf/open/floor/plating/shit{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"sh" = (
-/obj/structure/fermenting_barrel,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -2233,10 +1582,12 @@
 /area/vtm/interior/penumbra)
 "so" = (
 /obj/structure/vampfence/corner/rich{
-	dir = 8
+	dir = 8;
+	icon_state = "fence_corner"
 	},
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
@@ -2257,15 +1608,6 @@
 	pixel_y = 32
 	},
 /turf/open/floor/plating/sidewalkalt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"sx" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -2295,7 +1637,8 @@
 /area/vtm/interior/penumbra)
 "sQ" = (
 /obj/effect/turf_decal/siding/wood{
-	dir = 10
+	dir = 10;
+	icon_state = "siding_wood_line"
 	},
 /obj/structure/railing,
 /turf/open/floor/plating/vampwood{
@@ -2343,20 +1686,10 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"ta" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "tc" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk{
 	umbra = 1
@@ -2368,7 +1701,8 @@
 /area/vtm/interior/penumbra)
 "tl" = (
 /obj/structure/arc{
-	dir = 1
+	dir = 1;
+	icon_state = "ark1"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -2376,24 +1710,11 @@
 /area/vtm/interior/penumbra)
 "tm" = (
 /obj/effect/turf_decal/siding/wood{
-	dir = 6
+	dir = 6;
+	icon_state = "siding_wood_line"
 	},
 /obj/structure/railing,
 /turf/open/floor/plating/vampwood{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"ts" = (
-/obj/structure/fireplace,
-/turf/open/floor/plating/vampplating/stone{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"tv" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -2412,49 +1733,17 @@
 /area/vtm/interior/penumbra)
 "tI" = (
 /obj/structure/chinesesign{
-	dir = 1
+	dir = 1;
+	icon_state = "chinese1"
 	},
 /turf/open/floor/plating/sidewalkalt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"tM" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
 "tP" = (
 /turf/open/floor/plasteel/stairs/medium{
 	dir = 4;
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"tS" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"tT" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
+	icon_state = "stairs-m";
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -2466,34 +1755,9 @@
 /obj/item/candle/infinite,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"tY" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "ua" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/sidewalk/poor{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"ub" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/fakespace{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -2503,12 +1767,6 @@
 	},
 /obj/item/candle/infinite,
 /turf/open/floor/plating/vampdirt,
-/area/vtm/interior/penumbra)
-"ud" = (
-/obj/effect/decal/bordur/corner,
-/turf/open/floor/plating/beach/sand{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "ug" = (
 /obj/effect/decal/cardboard,
@@ -2531,12 +1789,6 @@
 	},
 /obj/structure/vamptree/pine,
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"uu" = (
-/obj/effect/decal/bordur/corner{
-	dir = 4
-	},
-/turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "uv" = (
 /obj/item/stack/dollar{
@@ -2574,13 +1826,10 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"uG" = (
-/obj/structure/glowshroom/shadowshroom,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
 "uK" = (
 /obj/police_department{
-	dir = 4
+	dir = 4;
+	icon_state = "police"
 	},
 /obj/structure/trashcan,
 /obj/structure/trashbag,
@@ -2711,14 +1960,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"vx" = (
-/obj/effect/decal/coastline/corner{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "vA" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/concrete{
@@ -2758,28 +1999,6 @@
 	dir = 4
 	},
 /turf/open/floor/plating/vampdirt,
-/area/vtm/interior/penumbra)
-"vP" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/obj/structure/flora/junglebush/b,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"vR" = (
-/obj/structure/vampfence/corner/rich{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"vU" = (
-/obj/item/grown/sunflower,
-/obj/structure/flora/ausbushes/ywflowers,
-/turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "vV" = (
 /obj/structure/chair/wood/wings{
@@ -2835,11 +2054,6 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"wv" = (
-/turf/open/floor/plasteel/dark{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "ww" = (
 /obj/structure/trashcan,
 /turf/open/floor/plating/umbra,
@@ -2856,7 +2070,8 @@
 /area/vtm/interior/penumbra)
 "wA" = (
 /turf/open/floor/plasteel/stairs/left{
-	dir = 1
+	dir = 1;
+	icon_state = "stairs-l"
 	},
 /area/vtm/interior/penumbra)
 "wI" = (
@@ -2896,16 +2111,8 @@
 /area/vtm/interior/penumbra)
 "xa" = (
 /turf/open/floor/plasteel/stairs/right{
-	dir = 1
-	},
-/area/vtm/interior/penumbra)
-"xc" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/obj/structure/flora/ausbushes/sparsegrass,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
+	dir = 1;
+	icon_state = "stairs-r"
 	},
 /area/vtm/interior/penumbra)
 "xd" = (
@@ -2933,15 +2140,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"xh" = (
-/obj/structure/flora/ausbushes/lavendergrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "xm" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plasteel/stairs{
@@ -2954,14 +2152,6 @@
 	dir = 8
 	},
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"xq" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "xt" = (
 /obj/item/stack/dollar{
@@ -2976,34 +2166,10 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"xw" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "xx" = (
 /obj/minespot/playable,
 /obj/minespot/playable,
 /turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"xG" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"xL" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "xP" = (
 /obj/structure/railing{
@@ -3016,7 +2182,8 @@
 /area/vtm/interior/penumbra)
 "xV" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /obj/minespot/playable,
 /turf/open/floor/plating/umbra,
@@ -3032,12 +2199,6 @@
 	dir = 1;
 	pixel_y = 6
 	},
-/turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"ym" = (
-/obj/minespot/playable,
-/obj/minespot/playable,
-/obj/minespot/playable,
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "yn" = (
@@ -3084,48 +2245,11 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"yv" = (
-/obj/effect/decal/coastline{
-	dir = 4
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "yx" = (
 /obj/structure/chair/wood{
 	dir = 1
 	},
 /turf/open/floor/plating/concrete{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"yJ" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"yN" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "ywflowers_1"
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"yS" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/structure/fermenting_barrel,
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -3139,21 +2263,6 @@
 /area/vtm/interior/penumbra)
 "yU" = (
 /turf/open/floor/plating/concrete{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"yV" = (
-/obj/item/grown/sunflower,
-/obj/structure/flora/ausbushes/lavendergrass,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"yX" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -3183,7 +2292,8 @@
 /area/vtm/interior/penumbra)
 "zf" = (
 /obj/structure/vampfence/rich{
-	dir = 4
+	dir = 4;
+	icon_state = "fence"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
@@ -3210,38 +2320,12 @@
 	dir = 8
 	},
 /obj/effect/turf_decal/siding/wood{
-	dir = 8
+	dir = 8;
+	icon_state = "siding_wood_line"
 	},
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/vampdirt{
 	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"zm" = (
-/turf/closed/wall/vampwall/wood,
-/area/vtm/interior/penumbra)
-"zn" = (
-/obj/structure/flora/ausbushes/grassybush,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"zo" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"zp" = (
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -3267,37 +2351,6 @@
 "zw" = (
 /obj/structure/vamprocks,
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"zy" = (
-/obj/effect/decal/coastline/corner{
-	dir = 1
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"zO" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"zS" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "zT" = (
 /obj/effect/decal/asphaltline,
@@ -3356,6 +2409,7 @@
 	pixel_y = 32
 	},
 /obj/structure/vampipe{
+	pixel_x = 0;
 	pixel_y = 32
 	},
 /turf/open/floor/plating/vampcanal{
@@ -3365,35 +2419,10 @@
 "Aq" = (
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/penumbra)
-"At" = (
-/obj/structure/chair/comfy/brown{
-	dir = 4
-	},
-/turf/open/floor/plating/woodfancy{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Ax" = (
-/obj/structure/flora/ausbushes/lavendergrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Az" = (
 /obj/structure/table,
 /obj/machinery/photocopier,
 /turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"AA" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "AB" = (
 /obj/structure/chair/sofa/corp,
@@ -3467,18 +2496,6 @@
 /obj/item/candle/infinite,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"Bf" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Bi" = (
 /turf/open/floor/plating/vampcanalplating{
 	umbra = 1
@@ -3498,25 +2515,6 @@
 	},
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/vampdirt,
-/area/vtm/interior/penumbra)
-"Bw" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Bz" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/stone{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "BC" = (
 /obj/structure/vampipe{
@@ -3545,6 +2543,7 @@
 "Ca" = (
 /obj/structure/milleniumsign{
 	dir = 1;
+	icon_state = "millenium";
 	pixel_y = 32
 	},
 /turf/open/floor/plating/umbra,
@@ -3555,7 +2554,8 @@
 /area/vtm/interior/penumbra)
 "Cg" = (
 /obj/structure/chair/sofa/corp/corner{
-	dir = 4
+	dir = 4;
+	icon_state = "corp_sofacorner"
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/penumbra)
@@ -3598,21 +2598,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Cv" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "ywflowers_1"
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Cw" = (
 /obj/item/stack/dollar/hundred{
 	amount = 1000;
@@ -3620,22 +2605,6 @@
 	},
 /obj/effect/decal/litter,
 /turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"Cz" = (
-/obj/structure/rack,
-/obj/item/stack/sheet/mineral/wood/fifty,
-/turf/open/floor/plating/vampplating/stone{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"CL" = (
-/obj/structure/flora/ausbushes/grassybush,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "CM" = (
 /obj/structure/table,
@@ -3649,18 +2618,6 @@
 /turf/open/floor/plating/saint{
 	umbra = 1
 	},
-/area/vtm/interior/penumbra)
-"CR" = (
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/turf/open/floor/plating/beach/sand{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"CS" = (
-/obj/machinery/light/warm/no_nightlight,
-/turf/closed/wall/vampwall/wood,
 /area/vtm/interior/penumbra)
 "CT" = (
 /obj/structure/flora/ausbushes/brflowers,
@@ -3720,7 +2677,8 @@
 /area/vtm/interior/penumbra)
 "Dw" = (
 /obj/effect/decal/coastline{
-	dir = 4
+	dir = 4;
+	icon_state = "coastline"
 	},
 /turf/open/floor/plating/vampbeach{
 	umbra = 1
@@ -3764,13 +2722,14 @@
 	},
 /area/vtm/interior/penumbra)
 "DT" = (
-/turf/closed/wall/vampwall/market/low/window/reinforced{
+/turf/closed/wall/vampwall/market/low/window{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
 "DV" = (
 /obj/structure/chair/sofa/corp{
-	dir = 4
+	dir = 4;
+	icon_state = "corp_sofamiddle"
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/penumbra)
@@ -3787,32 +2746,14 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/penumbra)
-"Ee" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/structure/vamptree/pine{
-	layer = 2.5;
-	pixel_x = -12;
-	pixel_y = -1
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Eg" = (
-/obj/effect/turf_decal/siding/wood,
-/turf/open/floor/wood{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "El" = (
 /obj/structure/vampdoor/police{
 	lock_id = "none";
 	locked = 0
 	},
 /obj/effect/turf_decal/siding/white{
-	dir = 1
+	dir = 1;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/sidewalk/poor{
 	umbra = 1
@@ -3842,35 +2783,9 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"Ex" = (
-/obj/structure/bed/maint,
-/obj/item/bedsheet/random,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "EB" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalkalt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"EF" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"EG" = (
-/obj/effect/decal/coastline{
-	dir = 1
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -3894,7 +2809,8 @@
 /area/vtm/interior/penumbra)
 "EN" = (
 /obj/structure/chair/sofa/corp/right{
-	dir = 4
+	dir = 4;
+	icon_state = "corp_sofaend_right"
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/penumbra)
@@ -3921,12 +2837,6 @@
 /obj/structure/table,
 /obj/effect/decal/litter,
 /turf/open/floor/plating/concrete{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Fb" = (
-/obj/item/candle/infinite,
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -3978,20 +2888,10 @@
 /area/vtm/interior/penumbra)
 "Fy" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/rough{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Fz" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -4000,10 +2900,6 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"FD" = (
-/obj/structure/glowshroom/single,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "FS" = (
@@ -4033,10 +2929,12 @@
 /area/vtm/interior/penumbra)
 "Gj" = (
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -4049,25 +2947,14 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Go" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Gp" = (
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk{
 	umbra = 1
 	},
-/area/vtm/interior/penumbra)
-"Gq" = (
-/obj/structure/curtain/bounty,
-/turf/closed/wall/vampwall/wood/low/window,
 /area/vtm/interior/penumbra)
 "Gv" = (
 /obj/transfer_point_vamp/umbral{
@@ -4086,10 +2973,12 @@
 /area/vtm/interior/penumbra)
 "GA" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 1
+	dir = 1;
+	icon_state = "siding_line"
 	},
 /obj/structure/railing{
 	dir = 1;
+	icon_state = "railing";
 	pixel_y = 12
 	},
 /obj/effect/decal/shadow,
@@ -4107,10 +2996,12 @@
 /area/vtm/interior/penumbra)
 "GF" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 5
+	dir = 5;
+	icon_state = "siding_line"
 	},
 /obj/structure/railing{
 	dir = 5;
+	icon_state = "railing";
 	pixel_y = 8
 	},
 /obj/effect/decal/shadow,
@@ -4128,15 +3019,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"GM" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "GP" = (
 /obj/weapon_showcase,
 /turf/open/floor/plating/umbra,
@@ -4147,33 +3029,13 @@
 /area/vtm/interior/penumbra)
 "GT" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_line"
 	},
 /obj/structure/chair/e_chair{
 	dir = 8
 	},
 /turf/open/floor/plating/rough{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"GU" = (
-/obj/structure/flora/ausbushes/lavendergrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"GV" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -4187,10 +3049,12 @@
 /area/vtm/interior/penumbra)
 "Hj" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 9
+	dir = 9;
+	icon_state = "siding_line"
 	},
 /obj/structure/railing{
 	dir = 9;
+	icon_state = "railing";
 	pixel_y = 8
 	},
 /obj/effect/decal/shadow,
@@ -4269,17 +3133,6 @@
 "Ib" = (
 /turf/open/floor/plating/shit,
 /area/vtm/interior/penumbra)
-"Ic" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Ie" = (
 /obj/item/ammo_casing/caseless{
 	pixel_x = 8;
@@ -4298,32 +3151,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"If" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Il" = (
-/obj/transfer_point_vamp/umbral{
-	id = 905
-	},
-/turf/open/floor/plating/woodfancy{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Ip" = (
-/obj/structure/flora/ausbushes/ywflowers,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Is" = (
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/vampdirt{
@@ -4339,19 +3166,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"Iz" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/obj/structure/vamptree/pine{
-	layer = 2.5;
-	pixel_x = -12;
-	pixel_y = -1
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "IG" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
@@ -4364,47 +3178,8 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"II" = (
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"IJ" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "ywflowers_1"
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "IN" = (
 /turf/open/floor/plating/granite{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"IP" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	base_icon_state = "greenerdirt";
-	icon = 'icons/turf/floors.dmi';
-	icon_state = "greenerdirt";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"IQ" = (
-/obj/structure/flora/junglebush/b,
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -4430,10 +3205,12 @@
 /area/vtm/interior/penumbra)
 "Jh" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_line"
 	},
 /obj/structure/railing{
-	dir = 4
+	dir = 4;
+	icon_state = "railing"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -4456,14 +3233,6 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"Jx" = (
-/obj/effect/landmark/teleport_mark{
-	tribe = "Red Talons"
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Jz" = (
 /obj/item/stack/dollar{
 	anchored = 1
@@ -4474,7 +3243,8 @@
 /area/vtm/interior/penumbra)
 "JB" = (
 /obj/structure/chair/pew/left{
-	dir = 8
+	dir = 8;
+	icon_state = "pewend_left"
 	},
 /turf/open/floor/plating/church{
 	umbra = 1
@@ -4488,15 +3258,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"JK" = (
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/obj/structure/vamprocks,
-/turf/open/floor/plating/beach/sand{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "JO" = (
 /turf/open/floor/plating/vampplating{
 	umbra = 1
@@ -4504,10 +3265,12 @@
 /area/vtm/interior/penumbra)
 "JQ" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 8
+	dir = 8;
+	icon_state = "siding_line"
 	},
 /obj/structure/railing{
-	dir = 8
+	dir = 8;
+	icon_state = "railing"
 	},
 /turf/open/floor/plating/granite{
 	umbra = 1
@@ -4531,15 +3294,12 @@
 /area/vtm/interior/penumbra)
 "JU" = (
 /obj/structure/chinesesign/alt{
-	dir = 4
+	dir = 4;
+	icon_state = "chinese2"
 	},
 /turf/open/floor/plating/sidewalkalt{
 	umbra = 1
 	},
-/area/vtm/interior/penumbra)
-"JW" = (
-/obj/effect/decal/wallpaper/stone,
-/turf/closed/wall/vampwall/wood,
 /area/vtm/interior/penumbra)
 "JX" = (
 /obj/structure/table,
@@ -4566,7 +3326,8 @@
 /area/vtm/interior/penumbra)
 "Kb" = (
 /obj/structure/chair/plastic{
-	dir = 8
+	dir = 8;
+	icon_state = "plastic_chair"
 	},
 /turf/open/floor/plating/vampbeach{
 	umbra = 1
@@ -4596,7 +3357,8 @@
 /area/vtm/interior/penumbra)
 "Kt" = (
 /obj/effect/decal/asphaltline/alt{
-	dir = 8
+	dir = 8;
+	icon_state = "line_alt"
 	},
 /turf/open/floor/plating/asphalt{
 	umbra = 1
@@ -4611,7 +3373,8 @@
 /area/vtm/interior/penumbra)
 "KB" = (
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 4
+	dir = 4;
+	icon_state = "chinese"
 	},
 /turf/open/floor/plating/sidewalkalt{
 	umbra = 1
@@ -4629,7 +3392,8 @@
 /area/vtm/interior/penumbra)
 "KW" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 1
+	dir = 1;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -4646,17 +3410,10 @@
 /obj/item/candle/infinite,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/penumbra)
-"Le" = (
-/obj/effect/landmark/teleport_mark{
-	tribe = "Stargazers"
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Lf" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 5
+	dir = 5;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -4666,19 +3423,14 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Lr" = (
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Lt" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_line"
 	},
 /obj/structure/railing{
-	dir = 4
+	dir = 4;
+	icon_state = "railing"
 	},
 /turf/open/floor/plating/granite{
 	umbra = 1
@@ -4694,17 +3446,10 @@
 /area/vtm/interior/penumbra)
 "Ly" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 9
+	dir = 9;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"Lz" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "LC" = (
 /obj/structure/trashbag,
@@ -4717,15 +3462,6 @@
 	dir = 8
 	},
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"LF" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "LK" = (
 /obj/effect/decal/cleanable/blood{
@@ -4750,17 +3486,6 @@
 	dir = 6
 	},
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"LP" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "LT" = (
 /obj/effect/decal/litter,
@@ -4801,17 +3526,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Mm" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Mo" = (
 /obj/structure/table,
 /obj/item/storage/backpack/duffelbag/med/surgery,
@@ -4821,10 +3535,12 @@
 /area/vtm/interior/penumbra)
 "Mq" = (
 /obj/structure/vampfence/corner/rich{
-	dir = 1
+	dir = 1;
+	icon_state = "fence_corner"
 	},
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
@@ -4864,15 +3580,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"MQ" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/obj/structure/flora/ausbushes/sparsegrass,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "MR" = (
 /obj/structure/vamptree/pine,
 /obj/structure/flora/ausbushes/ywflowers,
@@ -4884,33 +3591,6 @@
 "MS" = (
 /obj/structure/glowshroom/single,
 /turf/open/floor/plating/rough/cave,
-/area/vtm/interior/penumbra)
-"MZ" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Nc" = (
-/obj/effect/landmark/teleport_mark{
-	tribe = "Hart Wardens"
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Ni" = (
-/obj/structure/fermenting_barrel,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "Nm" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -4926,7 +3606,8 @@
 /area/vtm/interior/penumbra)
 "Nn" = (
 /obj/structure/vampdoor/npc{
-	dir = 8
+	dir = 8;
+	icon_state = "wood-1"
 	},
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/sidewalk/poor{
@@ -4951,28 +3632,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"NL" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"NO" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "NT" = (
 /obj/effect/decal/trash,
 /obj/effect/decal/graffiti,
@@ -4993,23 +3652,10 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Oi" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "reedbush_4"
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Ok" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -5019,43 +3665,10 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Ot" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Ow" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/grassybush,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Oy" = (
 /obj/effect/turf_decal/siding/white,
 /obj/structure/vampdoor/wood,
 /turf/open/floor/plating/vampplating/mono{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"OK" = (
-/obj/effect/decal/coastline{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -5071,63 +3684,16 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"OO" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"OR" = (
-/obj/minespot/playable,
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"OS" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "OX" = (
 /obj/structure/fluff/beach_umbrella/syndi,
 /turf/open/floor/plating/vampbeach{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"OY" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/obj/structure/flora/ausbushes/lavendergrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Pc" = (
-/obj/structure/table,
-/obj/structure/window/reinforced/indestructable,
-/turf/open/floor/plating/concrete{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Pd" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -5155,7 +3721,8 @@
 /area/vtm/interior/penumbra)
 "Ps" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 8
+	dir = 8;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -5237,26 +3804,12 @@
 "PV" = (
 /turf/closed/wall/vampwall/bar,
 /area/vtm/interior/penumbra)
-"Qa" = (
-/obj/structure/bed/dogbed,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Qe" = (
 /obj/effect/turf_decal/weather/dirt,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
 	},
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"Ql" = (
-/obj/effect/decal/bordur/corner{
-	dir = 1
-	},
-/turf/open/floor/plating/beach/sand{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "Qo" = (
 /obj/effect/decal/bordur,
@@ -5267,17 +3820,6 @@
 "Qz" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/rough/cave{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"QM" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -5293,15 +3835,6 @@
 	dir = 6
 	},
 /turf/open/floor/plating/vampdirt,
-/area/vtm/interior/penumbra)
-"QR" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "QY" = (
 /obj/effect/decal/bordur,
@@ -5323,46 +3856,15 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Ro" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Rp" = (
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/concrete{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Rt" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/obj/transfer_point_vamp/umbral{
-	id = 901
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
 "Rv" = (
 /obj/structure/arc/add,
 /turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
-"Rx" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "Ry" = (
 /obj/structure/vamptree/pine,
@@ -5374,7 +3876,8 @@
 /area/vtm/interior/penumbra)
 "Rz" = (
 /obj/effect/decal/coastline{
-	dir = 6
+	dir = 6;
+	icon_state = "coastline"
 	},
 /turf/open/floor/plating/vampbeach{
 	umbra = 1
@@ -5389,36 +3892,16 @@
 	density = 0
 	},
 /area/vtm/interior/penumbra)
-"RB" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "RL" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"RM" = (
-/obj/effect/turf_decal/siding/wood,
-/turf/open/floor/fakespace{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"RR" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "ywflowers_4"
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -5444,7 +3927,8 @@
 /area/vtm/interior/penumbra)
 "Sd" = (
 /obj/effect/decal/bordur{
-	dir = 4
+	dir = 4;
+	icon_state = "border"
 	},
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalk/rich{
@@ -5468,17 +3952,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Sj" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 8
-	},
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Sm" = (
 /obj/effect/decal/litter,
 /obj/structure/chair/greyscale{
@@ -5490,7 +3963,8 @@
 /area/vtm/interior/penumbra)
 "So" = (
 /obj/structure/arc{
-	dir = 5
+	dir = 5;
+	icon_state = "ark1"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -5499,26 +3973,6 @@
 "Ss" = (
 /obj/structure/fluff/beach_umbrella,
 /turf/open/floor/plating/vampbeach{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Sz" = (
-/obj/item/grown/sunflower,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"SA" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/turf/open/floor/plating/beach/sand{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"SK" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -5542,7 +3996,8 @@
 /area/vtm/interior/penumbra)
 "SS" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 1
+	dir = 1;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/sidewalk{
 	umbra = 1
@@ -5574,41 +4029,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Ta" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Tc" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/sparsegrass{
-	pixel_y = 12
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Ti" = (
-/obj/effect/decal/coastline/corner{
-	dir = 4
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Tl" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalk/rich{
@@ -5617,23 +4037,10 @@
 /area/vtm/interior/penumbra)
 "Tm" = (
 /obj/structure/arc{
-	dir = 10
+	dir = 10;
+	icon_state = "ark1"
 	},
 /turf/open/floor/plating/sidewalk/rich{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Tn" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 4
-	},
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -5650,23 +4057,6 @@
 "Tu" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalkalt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Ty" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"TI" = (
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampdirt{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -5750,25 +4140,11 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/penumbra)
-"Ue" = (
-/obj/effect/decal/coastline,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Um" = (
-/obj/effect/turf_decal/weather/dirt,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Un" = (
 /obj/structure/vampfence/corner/rich,
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
@@ -5783,14 +4159,6 @@
 	dir = 1
 	},
 /turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
-"Uq" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "Ut" = (
 /obj/structure/bed/roller,
@@ -5825,7 +4193,8 @@
 /area/vtm/interior/penumbra)
 "UP" = (
 /obj/structure/arc{
-	dir = 4
+	dir = 4;
+	icon_state = "ark1"
 	},
 /turf/open/floor/plating/sidewalk/rich{
 	umbra = 1
@@ -5848,35 +4217,9 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"UY" = (
-/obj/structure/flora/bush,
-/obj/effect/turf_decal/weather/dirt{
-	dir = 10
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Vb" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/vampcanal{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Vc" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/obj/structure/vamptree/pine{
-	layer = 2.5;
-	pixel_x = -12;
-	pixel_y = -1
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -5897,7 +4240,8 @@
 /area/vtm/interior/penumbra)
 "Vl" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /obj/structure/chair/pew/left,
 /turf/open/floor/plating/sidewalk/rich{
@@ -5923,6 +4267,7 @@
 /area/vtm/interior/penumbra)
 "Vt" = (
 /obj/structure/vampipe{
+	pixel_x = 0;
 	pixel_y = 32
 	},
 /turf/open/floor/plating/vampcanal{
@@ -5974,26 +4319,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"VH" = (
-/turf/open/floor/wood{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"VL" = (
-/obj/effect/landmark/teleport_mark{
-	tribe = "Get of Fenris"
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"VO" = (
-/obj/structure/musician/piano,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Wg" = (
 /obj/structure/trashcan,
 /turf/open/floor/plating/sidewalk{
@@ -6007,7 +4332,7 @@
 	},
 /area/vtm/interior/penumbra)
 "Wl" = (
-/turf/closed/wall/vampwall/rich/low/window/reinforced,
+/turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/penumbra)
 "Wp" = (
 /obj/effect/decal/graffiti,
@@ -6017,7 +4342,8 @@
 /area/vtm/interior/penumbra)
 "Wq" = (
 /obj/effect/decal/bordur{
-	dir = 8
+	dir = 8;
+	icon_state = "border"
 	},
 /obj/effect/decal/litter,
 /obj/effect/decal/trash,
@@ -6065,7 +4391,8 @@
 /area/vtm/interior/penumbra)
 "WV" = (
 /obj/structure/arc/add{
-	dir = 8
+	dir = 8;
+	icon_state = "ark2"
 	},
 /obj/minespot,
 /turf/open/floor/plating/umbra,
@@ -6085,13 +4412,6 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"Xh" = (
-/obj/structure/flora/ausbushes/ppflowers,
-/obj/transfer_point_vamp/umbral{
-	id = 902
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
 "Xj" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
@@ -6100,18 +4420,6 @@
 	dir = 9
 	},
 /turf/open/floor/plating/vampdirt,
-/area/vtm/interior/penumbra)
-"Xk" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 5
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
 /area/vtm/interior/penumbra)
 "Xm" = (
 /obj/structure/trashbag,
@@ -6142,9 +4450,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
-"XB" = (
-/turf/closed/wall/vampwall/redbrick,
-/area/vtm/interior/penumbra)
 "XC" = (
 /turf/open/floor/carpet{
 	umbra = 1
@@ -6152,7 +4457,8 @@
 /area/vtm/interior/penumbra)
 "XD" = (
 /obj/structure/arc/add{
-	dir = 4
+	dir = 4;
+	icon_state = "ark2"
 	},
 /obj/minespot,
 /turf/open/floor/plating/umbra,
@@ -6166,20 +4472,6 @@
 	},
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"XH" = (
-/obj/structure/flora/ausbushes/sparsegrass{
-	icon_state = "lavendergrass_3"
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 9
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -6223,32 +4515,9 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"XV" = (
-/obj/effect/landmark/teleport_mark{
-	tribe = "Galestalkers"
-	},
-/turf/open/floor/plating/vampdirt{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"XW" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampdirt{
-	icon_state = "snow1";
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "XZ" = (
 /obj/structure/vampdoor/police,
 /turf/open/floor/plating/concrete{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Yi" = (
-/obj/structure/flora/ausbushes/grassybush,
-/turf/open/floor/plating/vampgrass{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -6258,12 +4527,6 @@
 /area/vtm/interior/penumbra)
 "Yn" = (
 /turf/open/floor/plating/vampplating/mono{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Yq" = (
-/obj/effect/decal/kopatich,
-/turf/open/floor/plating/woodfancy{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -6277,36 +4540,17 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Yw" = (
-/obj/structure/vampdoor/amberglade_secure{
-	name = "Amberglade Gate"
-	},
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"Yy" = (
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
 "Yz" = (
 /turf/closed/wall/vampwall/rock,
 /area/vtm/interior/penumbra)
 "YA" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 6
+	dir = 6;
+	icon_state = "siding_line"
 	},
 /turf/open/floor/plating/rough{
 	umbra = 1
 	},
-/area/vtm/interior/penumbra)
-"YC" = (
-/obj/item/grown/sunflower,
-/obj/structure/flora/ausbushes/ppflowers,
-/turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "YD" = (
 /obj/minespot/playable,
@@ -6338,7 +4582,8 @@
 /area/vtm/interior/penumbra)
 "YN" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/sidewalk/old{
 	umbra = 1
@@ -6362,6 +4607,7 @@
 "YQ" = (
 /obj/structure/vampfence/rich{
 	dir = 4;
+	icon_state = "fence";
 	pixel_y = 8
 	},
 /turf/open/floor/plating/concrete{
@@ -6392,12 +4638,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Zr" = (
-/obj/structure/flora/ausbushes/brflowers,
-/turf/open/floor/plating/vampgrass{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Zt" = (
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/rough{
@@ -6412,7 +4652,8 @@
 /area/vtm/interior/penumbra)
 "Zw" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /obj/structure/chair/pew/right,
 /turf/open/floor/plating/sidewalk/rich{
@@ -6437,7 +4678,8 @@
 /area/vtm/interior/penumbra)
 "ZG" = (
 /obj/effect/decal/bordur{
-	dir = 1
+	dir = 1;
+	icon_state = "border"
 	},
 /turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
@@ -6448,14 +4690,6 @@
 /area/vtm/interior/penumbra)
 "ZK" = (
 /turf/closed/wall/vampwall/rich/old{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
-"ZN" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/turf/open/floor/fakespace{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -6483,7 +4717,8 @@
 /area/vtm/interior/penumbra)
 "ZY" = (
 /obj/effect/turf_decal/siding/white{
-	dir = 4
+	dir = 4;
+	icon_state = "siding_line"
 	},
 /obj/effect/decal/cardboard,
 /turf/open/floor/plating/rough{
@@ -16931,13 +15166,13 @@ Vv
 Vv
 Vv
 Vv
-EH
-EH
-FD
-kS
-FD
-EH
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 EO
 qF
@@ -17188,13 +15423,13 @@ Vv
 Vv
 Vv
 WB
-EH
-uG
-pw
-uP
-uP
-uG
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 Vv
 qF
@@ -17445,13 +15680,13 @@ Vv
 Vv
 Vv
 Vv
-FD
-AT
-AT
-cs
-cs
-AT
-FD
+Vv
+Vv
+Vv
+Vv
+Vv
+WB
+Vv
 Vv
 Vv
 qF
@@ -17702,13 +15937,13 @@ Vv
 Vv
 Vv
 Vv
-kS
-pw
-AT
-qv
-pw
-pw
-kS
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 Vv
 qF
@@ -17959,13 +16194,13 @@ Vv
 Vv
 Vv
 Vv
-FD
-uP
-cs
-cs
-cs
-pw
-FD
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 EO
 qF
@@ -18216,13 +16451,13 @@ Vv
 Vv
 Vv
 Vv
-EH
-uG
-uP
-uP
-cs
-uG
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 qF
 qF
@@ -18473,13 +16708,13 @@ Vv
 Vv
 Vv
 Vv
-EH
-EH
-FD
-kS
-FD
-EH
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 EO
 qF
 qF
@@ -22067,13 +20302,13 @@ Vv
 Vv
 Vv
 Vv
-jQ
-EH
-kS
-uG
-kS
-EH
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 EO
 qF
 qF
@@ -22324,13 +20559,13 @@ EO
 Vv
 Vv
 Vv
-EH
-FD
-uP
-pw
-pw
-FD
-EH
+Vv
+Vv
+WB
+Vv
+Vv
+Vv
+Vv
 EO
 qF
 qF
@@ -22581,13 +20816,13 @@ Tr
 Vv
 Vv
 Vv
-kS
-uP
-vU
-AT
-Sz
-uP
-kS
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 EO
 qF
 qF
@@ -22838,13 +21073,13 @@ Tr
 Vv
 Vv
 Vv
-uG
-pw
-AT
-Xh
-cs
-pw
-uG
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 qF
 qF
 qF
@@ -23095,13 +21330,13 @@ Tr
 Tr
 Vv
 Vv
-kS
-uP
-YC
-cs
-yV
-uP
-kS
+Vv
+WB
+Vv
+Vv
+Vv
+Vv
+Vv
 qF
 qF
 qF
@@ -23352,13 +21587,13 @@ Tr
 Tr
 Vv
 Vv
-EH
-FD
-uP
-pw
-pw
-FD
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 qF
 qF
 qF
@@ -23609,13 +21844,13 @@ Tr
 EO
 Vv
 Vv
-EH
-EH
-kS
-uG
-kS
-EH
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 qF
 qF
 qF
@@ -28169,7 +26404,7 @@ qF
 qF
 qF
 qF
-mn
+kS
 qF
 qF
 qF
@@ -28681,7 +26916,7 @@ TP
 qF
 qF
 jO
-mn
+kS
 qF
 qF
 qF
@@ -29257,8 +27492,8 @@ qF
 qF
 qF
 qF
-XB
-XB
+qF
+qF
 qF
 qF
 qF
@@ -29516,8 +27751,8 @@ qF
 qF
 qF
 qF
-XB
-XB
+qF
+qF
 qF
 qF
 qF
@@ -29709,7 +27944,7 @@ qF
 qF
 qF
 ks
-mn
+kS
 qF
 qF
 qF
@@ -29966,7 +28201,7 @@ ox
 ox
 ox
 ks
-mn
+kS
 qF
 qF
 qF
@@ -30037,16 +28272,16 @@ qF
 qF
 qF
 qF
-Tr
 qF
 qF
 qF
 qF
 qF
+qF
+qF
+qF
 Tr
-Tr
-Tr
-Tr
+qF
 Tr
 Tr
 Tr
@@ -30223,8 +28458,8 @@ ox
 ox
 ox
 XC
-mn
-mn
+kS
+kS
 qF
 qF
 qF
@@ -30284,25 +28519,25 @@ qF
 qF
 qF
 qF
-ud
-EH
 qF
 qF
-Vv
-CR
-qF
-Yy
-Vv
 qF
 qF
-Tr
-xx
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 Tr
 Tr
 Tr
@@ -30539,26 +28774,26 @@ qF
 qF
 qF
 qF
-qj
-qF
-hK
-EH
 qF
 qF
-rD
-CR
-qF
-hK
-rD
 qF
 qF
-Tr
 qF
-Tr
-xx
-xx
-xx
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 Tr
 Tr
 Tr
@@ -30791,33 +29026,33 @@ ZK
 qF
 qF
 qF
-Tr
-Tr
-qF
-qF
-qj
-qj
-qj
-hK
-EH
-EH
-qF
-Vv
-JK
-qF
-hK
-Vv
 qF
 qF
 qF
-Tr
-xx
-xx
-xx
-Tr
 qF
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 Tr
 Tr
@@ -31047,39 +29282,8 @@ ZK
 ZK
 ZK
 qF
-Tr
 qF
 qF
-Tr
-qF
-qF
-qF
-qF
-hK
-EH
-EH
-XB
-Vv
-Ql
-SA
-rS
-Vv
-qF
-Tr
-Vv
-Tr
-xx
-Tr
-Tr
-qF
-qF
-qF
-qF
-qF
-Tr
-Tr
-Tr
-Tr
 qF
 qF
 qF
@@ -31110,6 +29314,37 @@ qF
 Tr
 Tr
 Tr
+Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+Tr
+Tr
+Tr
 qF
 Tr
 qF
@@ -31124,9 +29359,9 @@ qF
 qF
 qF
 qF
-fV
-dB
-tv
+qF
+qF
+qF
 qF
 qF
 qF
@@ -31303,40 +29538,10 @@ DP
 qF
 ZK
 qF
-Tr
 qF
 qF
 qF
 qF
-qF
-qF
-qF
-qF
-hK
-EH
-EH
-XB
-Vv
-Vv
-rB
-Vv
-Vv
-Tr
-Tr
-Vv
-Vv
-Tr
-Tr
-Tr
-Tr
-Tr
-qF
-qF
-Tr
-Tr
-Tr
-Tr
-Tr
 qF
 qF
 qF
@@ -31379,11 +29584,41 @@ qF
 qF
 qF
 qF
-iH
-Ow
-OY
-LF
-cF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+Tr
+Tr
+Tr
+Tr
+Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -31560,41 +29795,13 @@ Tr
 Tr
 qF
 qF
-Tr
-Tr
 qF
 qF
 qF
 qF
-wv
-qF
-qF
-Yy
-II
-jq
-jq
-jq
-Vv
-Vv
-Vv
-rD
-Tr
-Vv
-Tr
-Vv
-Vv
-qF
-qF
-Tr
 qF
 qF
 qF
-Tr
-qF
-Tr
-Tr
-Tr
-Tr
 qF
 qF
 qF
@@ -31618,11 +29825,39 @@ qF
 qF
 qF
 Tr
+qF
+Tr
+Tr
+Tr
+Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 Tr
 Tr
 Tr
 Tr
 Tr
+Tr
 qF
 qF
 qF
@@ -31635,13 +29870,13 @@ qF
 qF
 qF
 qF
-Xk
-fO
-vx
-OK
-zy
-Bw
-tv
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -31817,63 +30052,63 @@ Tr
 qF
 qF
 qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 Tr
 Tr
 Tr
 Tr
-wv
+Tr
 Tr
 qF
-wv
 qF
-uu
-EH
-jq
-wv
-jq
-Vv
-Vv
-Vv
-Vv
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 EO
 EO
 EO
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-EO
-EO
-EO
 Vv
 Vv
 Vv
@@ -31893,12 +30128,12 @@ qF
 qF
 qF
 qF
-Lz
-EG
-iG
-Ue
-xh
-Um
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32073,31 +30308,31 @@ Tr
 Tr
 Tr
 Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-wv
-Tr
-Tr
-Tr
-wv
-wv
-wv
-el
-wv
-el
-Vv
-Vv
-Vv
-Vv
-Tr
-Tr
 qF
-EO
 qF
-EO
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32149,13 +30384,13 @@ qF
 qF
 qF
 qF
-tS
-sx
-Ti
-yv
-ah
-zp
-Um
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32329,31 +30564,31 @@ Tr
 Tr
 Tr
 Tr
-Tr
-Tr
-Tr
-Tr
 qF
 qF
 qF
-wv
-Tr
-Tr
-Tr
-DP
-DP
-bT
-DP
-bT
-DP
-DP
-DP
-DP
-Tr
 qF
 qF
-EO
-EO
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32406,13 +30641,13 @@ qF
 qF
 qF
 qF
-Bw
-tv
-il
-GU
-GU
-yX
-zO
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32589,7 +30824,6 @@ Tr
 qF
 qF
 qF
-Tr
 qF
 qF
 qF
@@ -32597,21 +30831,22 @@ qF
 qF
 qF
 qF
-wv
-wv
-el
-wv
-el
-Vv
-Vv
-Vv
-Vv
 qF
 qF
 qF
-EO
-EO
-EO
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32664,12 +30899,12 @@ qF
 qF
 qF
 qF
-Bw
-jP
-nt
-jP
-of
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32846,23 +31081,23 @@ Tr
 Tr
 qF
 qF
-Tr
-Tr
-qF
-Tr
 qF
 qF
 qF
 qF
-ud
-EH
-OR
-OR
-jq
-Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -32920,15 +31155,15 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
-OO
-Tr
-Tr
-Tr
-xL
-tv
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -33105,22 +31340,22 @@ Tr
 qF
 qF
 qF
-Tr
 qF
 qF
-cn
 qF
 qF
-hK
-EH
-OR
-OR
-OR
-Vv
-Tr
-Tr
-Tr
-Vv
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -33176,18 +31411,18 @@ qF
 qF
 qF
 qF
-Tr
-xx
-xx
-Tr
 qF
 qF
-Tr
-fV
-SK
-SK
-dB
-jD
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -33365,19 +31600,19 @@ qF
 qF
 qF
 qF
-ZG
 qF
 qF
 qF
-EH
 qF
-Tr
-jq
 qF
-Vv
-Tr
-Vv
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 ss
 qF
 qF
@@ -33406,13 +31641,13 @@ Vv
 WB
 Vv
 Vv
-EH
-EH
-uG
-FD
-uG
-EH
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 WB
 Vv
@@ -33432,20 +31667,20 @@ qF
 qF
 qF
 qF
-Tr
-ym
-xx
-Tr
 qF
 qF
 qF
-qP
-mN
-tM
-Ip
-tM
-GM
-NL
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -33622,20 +31857,20 @@ qF
 qF
 qF
 qF
-CR
-qj
 qF
 qF
 qF
 qF
-jq
 qF
 qF
 qF
-Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 ss
 qF
@@ -33663,13 +31898,13 @@ Vv
 Vv
 Vv
 Vv
-EH
-kS
-uP
-pw
-uP
-kS
-EH
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 Vv
 Vv
@@ -33688,21 +31923,21 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
-Tr
 qF
 qF
-Tr
-Tr
-Tr
-mh
-zo
-Vv
-Vv
-zp
-Um
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -33880,20 +32115,20 @@ qF
 qF
 qF
 qF
-qj
 qF
 qF
 qF
-jq
-qF
-XB
 qF
 qF
 qF
-Tr
+qF
+qF
+qF
+qF
+qF
 ss
-Tr
-Tr
+qF
+qF
 qF
 qF
 qF
@@ -33920,13 +32155,13 @@ Vv
 Vv
 Vv
 Vv
-uG
-uP
-fX
-AT
-dv
-uP
-uG
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 Vv
 Vv
@@ -33941,25 +32176,25 @@ qF
 qF
 qF
 qF
-mH
-tv
 qF
 qF
-IJ
-Tr
-QM
 qF
 qF
-Tr
-xx
-Tr
-Tr
-nV
-zo
-ff
-VO
-CL
-Um
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -34143,14 +32378,14 @@ qF
 qF
 qF
 qF
-XB
 qF
 qF
 qF
-Tr
-Tr
-Tr
-xx
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 ss
@@ -34177,13 +32412,13 @@ Vv
 Vv
 Vv
 Vv
-FD
-pw
-pw
-Rt
-fl
-pw
-FD
+Vv
+Vv
+Vv
+WB
+Vv
+Vv
+Vv
 Vv
 Vv
 Vv
@@ -34197,26 +32432,26 @@ qF
 qF
 qF
 qF
-xL
-rT
-EO
-EO
-EO
-RR
-nt
-EO
-Ee
-Tr
-xx
-xx
-Tr
-Tr
-pY
-vR
-RB
-gT
-pE
-TI
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -34404,10 +32639,10 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
 Gx
 qF
 qF
@@ -34434,13 +32669,13 @@ Vv
 Vv
 Vv
 Vv
-uG
-uP
-fX
-AT
-fX
-uP
-uG
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 Vv
 Vv
 Vv
@@ -34454,26 +32689,26 @@ qF
 qF
 qF
 qF
-lo
-ep
-kN
-xL
-Yi
-tv
-zo
-zo
-EO
-tv
-xx
-Tr
 qF
-Xk
-Ex
-Yw
-QM
-sx
-Tc
-Go
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -34662,9 +32897,9 @@ ss
 ss
 ss
 ss
-Tr
-Tr
-Tr
+qF
+qF
+qF
 qF
 qF
 qF
@@ -34691,45 +32926,45 @@ Vv
 Vv
 Vv
 WB
-EH
-kS
-pw
-pw
-uP
-kS
-EH
 Vv
 Vv
 Vv
 Vv
 Vv
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-lo
-kN
-xL
-IQ
 Vv
-rT
-tv
 Vv
-zo
-dt
-Tr
+Vv
+Vv
+Vv
+Vv
+Vv
 qF
 qF
 qF
 qF
-pE
-Go
-Tr
-ch
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -34919,7 +33154,7 @@ Gx
 Gx
 qF
 Gx
-Tr
+qF
 yU
 yU
 qF
@@ -34948,35 +33183,18 @@ Vv
 Vv
 Vv
 Vv
-EH
-EH
-uG
-FD
-uG
-EH
-EH
 Vv
 Vv
 Vv
 Vv
 Vv
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-Uq
 Vv
-xL
-yN
-Fb
-gG
-Fb
-nQ
-tv
-TI
+Vv
+Vv
+Vv
+Vv
+Vv
+Vv
 qF
 qF
 qF
@@ -34984,9 +33202,26 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -35217,33 +33452,33 @@ Vv
 WB
 Vv
 EO
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
-vP
-Yi
-Vv
-zo
-gG
-XV
-gG
-zo
-Vv
-EO
-MQ
-Cv
-Tr
-Tr
-Tr
-Tr
-Tr
-fV
-jD
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -35480,29 +33715,29 @@ qF
 qF
 qF
 qF
-os
-qT
-EO
-Bw
-yN
-Fb
-gG
-Fb
-Vv
-Go
-Vv
-SK
-MZ
-Tr
-Tr
-Tr
-Tr
-Mm
-Bf
-OS
-Ot
-Mm
-NL
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -35739,27 +33974,27 @@ qF
 qF
 qF
 qF
-lo
-hh
-Bw
-Zr
-Vv
-Yi
-Go
-Vv
-TI
-Tr
-Tr
-Tr
-Tr
-Tr
-tS
-XH
-ou
-II
-xq
-Ro
-zO
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -35995,27 +34230,27 @@ qF
 qF
 qF
 qF
-Tr
-Bw
-Iz
-Vv
-Bw
-EO
-Go
-Vv
-Vv
-Go
-Tr
 qF
 qF
 qF
 qF
-cH
-pR
-II
-Le
-II
-ub
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -36251,29 +34486,29 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
-Bw
-Go
-Tr
-Bw
-RB
-SK
-Vc
-Tr
-Tr
-Tr
 qF
 qF
 qF
 qF
-kB
-EF
-II
-ZN
-iZ
-tY
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -36507,29 +34742,29 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
-Tr
 qF
 qF
-Tr
-Tr
-Tr
-qF
-Tr
-Tr
-Tr
-Tn
 qF
 qF
-Tr
-Xk
-iF
-Bz
-ta
-Oi
-iF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -36739,7 +34974,7 @@ qF
 qF
 qF
 qF
-Tr
+qF
 qF
 qF
 qF
@@ -36763,29 +34998,29 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
-Tr
 qF
 qF
 qF
-Tr
-Tr
-Tr
 qF
 qF
-Tr
-iH
-lG
-LF
-kP
-Tr
-Tr
-Rx
-of
 qF
-ch
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -36991,17 +35226,17 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-qF
-qF
-Tr
 qF
 qF
 qF
 qF
 qF
-Gq
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -37020,26 +35255,26 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
 qF
 qF
 qF
 qF
-it
-pt
-Tr
 qF
 qF
 qF
-Uq
-dL
-Qa
-LF
-kP
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -37247,14 +35482,6 @@ qF
 qF
 qF
 qF
-Tr
-qF
-qF
-Tr
-qF
-qF
-Tr
-Tr
 qF
 qF
 qF
@@ -37262,7 +35489,15 @@ qF
 qF
 qF
 qF
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 Vv
 Vv
 Vv
@@ -37271,31 +35506,31 @@ Vv
 Vv
 Vv
 Vv
-Tr
-Tr
-Tr
-Tr
-jn
-qF
-fV
-jD
-Tr
 qF
 qF
 qF
-IP
-xw
-hC
-zS
-Tr
-Tr
-qP
-NO
-Qa
-Jx
-Qa
-AA
-tY
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -37507,19 +35742,19 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-qF
-qF
-Tr
 qF
 qF
 qF
 qF
 qF
 qF
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 EO
 Vv
 Vv
@@ -37528,30 +35763,30 @@ Vv
 Vv
 Vv
 EO
-Tr
-Tr
-Tr
-tS
-lG
-Sj
-Ax
-jN
-zn
-Tr
-Tr
-tT
-jg
-Wk
-Wk
-QR
-yJ
-Tr
-Tr
-LP
-NO
-Qa
-yN
-zp
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -37764,20 +35999,20 @@ qF
 qF
 qF
 qF
-Tr
-fm
-fm
 qF
-fm
 qF
-fm
 qF
-VH
-RM
-Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 EO
 Vv
 Vv
@@ -37785,31 +36020,31 @@ Vv
 Vv
 Vv
 EO
-Tr
-Tr
-oA
-TI
-Lz
-kN
-Vv
-xG
-iH
-Tr
-Tr
-Tr
-Fz
-xw
-VL
-Lr
-pt
-bn
-Tr
-Ta
-kP
-il
-RB
-ci
-NL
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -38022,20 +36257,20 @@ qF
 qF
 qF
 qF
-CS
-fm
 qF
-zm
-fm
-fm
-Gq
-VH
-Eg
-Vv
-Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 EO
 Vv
 Vv
@@ -38045,28 +36280,28 @@ EO
 qF
 qF
 qF
-cF
-Lz
-Vv
-Nc
-Vv
-LF
-NL
-Tr
-Tr
-GV
-Wk
-Wk
-Wk
-UY
 qF
 qF
 qF
 qF
-ch
 qF
-Rx
-Go
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -38279,19 +36514,19 @@ qF
 qF
 qF
 qF
-zm
-fm
-At
-if
-At
-fm
-Gq
-II
-Eg
-EO
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 Vv
@@ -38302,20 +36537,20 @@ qF
 qF
 qF
 qF
-cH
-If
-Vv
-kN
-yN
-Ni
-kR
 qF
 qF
-Ic
-aB
-Wk
-XW
-ni
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -38536,18 +36771,18 @@ qF
 qF
 qF
 qF
-JW
-Cz
-fm
-Il
-II
-fm
-zm
-VH
-II
-II
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -38560,17 +36795,17 @@ qF
 qF
 qF
 qF
-sh
-xc
-Hm
-bP
-yS
 qF
 qF
 qF
 qF
 qF
-hL
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -38793,17 +37028,6 @@ qF
 qF
 qF
 qF
-JW
-ts
-fm
-Yq
-fm
-fm
-mu
-VH
-Eg
-EO
-EO
 qF
 qF
 qF
@@ -38816,11 +37040,22 @@ qF
 qF
 qF
 qF
-oA
-Ty
 qF
-Bw
-of
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -39050,18 +37285,18 @@ qF
 qF
 qF
 qF
-JW
-Cz
-fm
-fm
 qF
-fm
-zm
-VH
-zm
-EO
-EO
-EO
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -39308,18 +37543,18 @@ qF
 qF
 qF
 qF
-Tr
-Tr
-Tr
 qF
 qF
 qF
 qF
 qF
-EO
-EO
-EO
-EO
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -39563,20 +37798,20 @@ Tr
 Tr
 Tr
 qF
-Tr
-xx
-Tr
-Tr
-Tr
-qF
-qF
-Gq
 qF
 qF
 qF
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -39820,24 +38055,24 @@ Tr
 Tr
 Tr
 qF
-Tr
-Tr
-Tr
-Tr
-Tr
-qF
-Gq
 qF
 qF
 qF
 qF
-EO
-Tr
-EO
-Tr
 qF
 qF
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -40078,22 +38313,22 @@ Tr
 Tr
 Tr
 Tr
-Tr
-Tr
-Tr
 qF
 qF
 qF
 qF
 qF
-EO
 qF
 qF
-Tr
-Tr
-Tr
 qF
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -40334,24 +38569,24 @@ Tr
 Tr
 Tr
 Tr
-Tr
-Tr
-Tr
-qF
-Gq
 qF
 qF
 qF
 qF
-EO
-EO
-EO
-Tr
-Tr
-Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -40591,23 +38826,23 @@ Tr
 Tr
 Tr
 Tr
-Tr
-Tr
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
-qF
 qF
 Tr
-Tr
-Tr
-Tr
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
+qF
 qF
 qF
 qF
@@ -42833,9 +41068,9 @@ XC
 xP
 yU
 ZK
-mn
-mn
-mn
+kS
+kS
+kS
 qF
 ZK
 LT
@@ -43092,7 +41327,7 @@ yU
 ZK
 XC
 qF
-mn
+kS
 qF
 ZK
 DP
@@ -43349,7 +41584,7 @@ yU
 ZK
 XC
 qF
-mn
+kS
 qF
 qF
 DP
@@ -43605,8 +41840,8 @@ xP
 yU
 ZK
 mD
-mn
-mn
+kS
+kS
 qF
 ZK
 DP
@@ -43640,7 +41875,7 @@ qF
 qF
 yU
 qF
-Pc
+Hx
 Gg
 yU
 kV
