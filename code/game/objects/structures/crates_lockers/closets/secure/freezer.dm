@@ -80,7 +80,7 @@
 	req_access = list(ACCESS_KITCHEN)
 
 //No access needed fridge
-/obj/structure/closet/secure_closet/freezer/fridge_no_access_restrictions
+/obj/structure/closet/secure_closet/freezer/fridge/unlocked
 	name = "refrigerator"
 	req_access = null
 
