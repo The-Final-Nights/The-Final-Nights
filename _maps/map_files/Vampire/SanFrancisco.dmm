@@ -5605,7 +5605,7 @@
 /area/vtm/interior/strip/toreador)
 "bmT" = (
 /obj/structure/closet/crate/large,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
 "bmV" = (
@@ -14191,11 +14191,11 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/cabaret)
 "doU" = (
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /obj/structure/closet/crate,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
@@ -22884,8 +22884,8 @@
 "fwS" = (
 /obj/structure/closet/secure_closet/freezer,
 /obj/effect/decal/litter,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/item/kitchen/knife,
 /obj/machinery/light/warm{
 	dir = 4
@@ -29435,8 +29435,8 @@
 /area/vtm/supply)
 "gZZ" = (
 /obj/structure/table,
-/obj/item/drinkable_bloodpack/elite,
-/obj/item/drinkable_bloodpack/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/black,
 /area/vtm/nosferatu_office{
 	color = "#f76abf"
@@ -43687,7 +43687,6 @@
 "kBw" = (
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/table/wood,
@@ -49889,7 +49888,6 @@
 "mcN" = (
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/table/wood,
@@ -64324,8 +64322,8 @@
 "pus" = (
 /obj/structure/closet/crate/freezer/fridge,
 /obj/item/food/breadslice/moldy,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial4"
 	},
@@ -68862,7 +68860,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/closet/crate,
@@ -73975,11 +73972,11 @@
 /area/vtm/financialdistrict/library)
 "rEr" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/effect/decal/litter,
 /obj/machinery/camera{
 	dir = 4
@@ -96025,8 +96022,8 @@
 "wQi" = (
 /obj/structure/rack/bubway/east,
 /obj/structure/closet/mini_fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /obj/item/food/pizzaslice/moldy,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
@@ -96757,9 +96754,9 @@
 "wZE" = (
 /obj/effect/decal/rugs,
 /obj/structure/closet/mini_fridge,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
-/obj/item/drinkable_bloodpack,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
+/obj/item/reagent_containers/blood,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
