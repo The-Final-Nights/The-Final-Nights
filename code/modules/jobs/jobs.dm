@@ -49,7 +49,8 @@ GLOBAL_LIST_INIT(police_positions, list(
 	"Police Chief",
 	"Police Sergeant",
 	"Police Officer",
-	"Emergency Dispatcher"
+	"Emergency Dispatcher",
+	"District Attorney"
 ))
 
 GLOBAL_LIST_INIT(national_security_positions, list(
