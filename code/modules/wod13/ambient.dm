@@ -569,7 +569,6 @@
 /area/vtm/temple/temple_underground
 	name = "Buddhist Temple Underground"
 	icon_state = "church"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/chinatown
 	upper = FALSE
 	zone_type = "battle"
@@ -581,7 +580,6 @@
 /area/vtm/temple/temple_grounds
 	name = "Buddhist Temple Grounds"
 	icon_state = "church"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/chinatown
 	upper = TRUE
 	zone_type = "battle"
@@ -592,7 +590,6 @@
 /area/vtm/temple/temple_grounds_interior
 	name = "Buddhist Temple Grounds Interior"
 	icon_state = "church"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/chinatown
 	upper = FALSE
 	zone_type = "battle"
@@ -604,7 +601,6 @@
 /area/vtm/temple/temple_exterior
 	name = "Buddhist Temple Exterior"
 	icon_state = "church"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/chinatown
 	upper = TRUE
 	zone_type = "battle"
@@ -619,7 +615,6 @@
 /area/vtm/amberglade/amberglade_bawn
 	name = "Amberglade Bawn"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -630,7 +625,6 @@
 /area/vtm/amberglade/amberglade_bawn_interior
 	name = "Amberglade Bawn Interior"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	requires_power = FALSE
@@ -642,7 +636,6 @@
 /area/vtm/amberglade/amberglade_bawn_medical
 	name = "Amberglade Bawn Medical"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -653,7 +646,6 @@
 /area/vtm/amberglade/amberglade_caern
 	name = "Amberglade Caern"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -664,7 +656,6 @@
 /area/vtm/amberglade/amberglade_exterior
 	name = "Amberglade Exterior"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -679,7 +670,6 @@
 /area/vtm/native_reserve/native_reserve_exterior
 	name = "Native American Reserve Exterior"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -690,7 +680,6 @@
 /area/vtm/native_reserve/native_reserve_interior
 	name = "Native American Reserve Interior"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -705,7 +694,6 @@
 /area/vtm/rangerstation/ranger_exterior
 	name = "Ranger Station Exterior"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -716,7 +704,6 @@
 /area/vtm/rangerstation/ranger_interior
 	name = "Ranger Station Interior"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -732,7 +719,6 @@
 /area/vtm/huntlodge/lodge_exterior
 	name = "Lone Wolf Lodge Exterior"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -743,7 +729,6 @@
 /area/vtm/huntlodge/lodge_interior
 	name = "Lone Wolf Lodge Interior"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -758,7 +743,6 @@
 /area/vtm/gangrelhaven/gangrel_exterior
 	name = "Gangrel Haven Exterior"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -769,7 +753,6 @@
 /area/vtm/gangrelhaven/gangrel_interior
 	name = "Gangrel Haven Interior"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -784,7 +767,6 @@
 /area/vtm/lakeshore/lakeshore_cabins_exterior
 	name = "Lakeshore Cabins Exterior"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -795,7 +777,6 @@
 /area/vtm/lakeshore/lakeshore_cabins_interior
 	name = "Lakeshore Cabins Interior"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -806,7 +787,6 @@
 /area/vtm/lakeshore/lakeshore_caves
 	name = "Lakeshore Caves"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -821,7 +801,6 @@
 /area/vtm/forestmap/timber_claim
 	name = "Abandoned Timber Claim"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -832,7 +811,6 @@
 /area/vtm/forestmap/timbe_claim_caves
 	name = "Abandoned Timber Claim Caves"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -843,7 +821,6 @@
 /area/vtm/forestmap/mountain_region
 	name = "Mountain Region"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "battle"
@@ -854,7 +831,6 @@
 /area/vtm/forestmap/mountain_region_caves
 	name = "Mountain Region Caves"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -865,7 +841,6 @@
 /area/vtm/forestmap/forest_caves
 	name = "Forest Caves"
 	icon_state = "cog_caern"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = FALSE
 	zone_type = "battle"
@@ -876,7 +851,6 @@
 /area/vtm/forestmap/thoroughfare
 	name = "Main Thoroughfare"
 	icon_state = "cog_pantry"
-	ambience_index = AMBIENCE_NATURE
 	music = /datum/vampiremusic/forest
 	upper = TRUE
 	zone_type = "masquerade"
@@ -888,7 +862,6 @@
 /area/vtm/interior/penumbra
 	name = "Penumbra"
 	icon_state = "church"
-	ambience_index = AMBIENCE_NATURE
 	upper = FALSE
 	zone_type = "battle"
 	music = /datum/vampiremusic/penumbra

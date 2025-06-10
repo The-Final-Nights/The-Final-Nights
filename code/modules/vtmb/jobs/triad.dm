@@ -142,7 +142,7 @@
 	suit = /obj/item/clothing/suit/vampire/kasaya
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/kuei_jin
-	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1)
 
 
 	backpack = /obj/item/storage/backpack
@@ -161,8 +161,8 @@
 	faction = "Vampire"
 	allowed_species = list("Kuei-Jin")
 
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "Your Dharma, The Elder and Ancestors."
 
 	minimal_player_age = 25
@@ -195,7 +195,7 @@
 	suit = /obj/item/clothing/suit/vampire/kasaya
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/kuei_jin
-	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 
 	backpack = /obj/item/storage/backpack
@@ -250,7 +250,7 @@
 	belt = /obj/item/storage/belt/vampire/sheathe/longsword
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/kuei_jin
-	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 
 	backpack = /obj/item/storage/backpack
@@ -269,8 +269,8 @@
 	faction = "Vampire"
 	allowed_species = list("Kuei-Jin")
 
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "Your Dharma, The Elder and Ancestors."
 
 	minimal_player_age = 25
@@ -303,7 +303,7 @@
 	suit = /obj/item/clothing/suit/vampire/kasaya
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/kuei_jin
-	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	backpack_contents = list(/obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 
 	backpack = /obj/item/storage/backpack
@@ -313,4 +313,3 @@
 /obj/effect/landmark/start/temple/novitiate
 	name = "Novitiate"
 	icon_state = "Assistant"
-	

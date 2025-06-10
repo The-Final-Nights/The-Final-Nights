@@ -304,8 +304,8 @@
 /datum/job/vamp/garou/amberglade/garou
 	title = "Amberglade Garou"
 	faction = "Vampire"
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "The Litany"
 	selection_color = "#69e430"
 	access = list()			//See /datum/job/assistant/get_access()

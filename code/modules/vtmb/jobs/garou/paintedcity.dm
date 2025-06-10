@@ -298,8 +298,8 @@
 /datum/job/vamp/garou/paintedcity/garou
 	title = "Painted City Garou"
 	faction = "Vampire"
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "The Litany"
 	selection_color = "#7195ad"
 	access = list()			//See /datum/job/assistant/get_access()
