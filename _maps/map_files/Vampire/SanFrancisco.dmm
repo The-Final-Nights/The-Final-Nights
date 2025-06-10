@@ -2458,6 +2458,9 @@
 /obj/item/clothing/head/cone,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/camera/directional/west,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
 /turf/open/floor/plating/dirt,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -3945,6 +3948,9 @@
 /obj/structure/railing{
 	layer = 4
 	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -4836,6 +4842,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
+/obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone4"
 	},
@@ -7643,7 +7650,6 @@
 	dir = 4;
 	pixel_y = 4
 	},
-/obj/structure/window/reinforced/indestructable,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial6"
 	},
@@ -12334,6 +12340,7 @@
 /obj/machinery/light/dim{
 	pixel_y = 32
 	},
+/obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -14384,6 +14391,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -20153,6 +20163,17 @@
 /obj/item/reagent_containers/food/drinks/coffee/vampire/robust,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower)
+"eJS" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone4"
+	},
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "eJT" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1;
@@ -23805,6 +23826,9 @@
 /area/vtm/interior/endron_facility/restricted)
 "fCf" = (
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -36142,6 +36166,9 @@
 "iEx" = (
 /obj/effect/decal/trash,
 /obj/machinery/camera/directional/west,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 9
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone4"
 	},
@@ -37881,6 +37908,9 @@
 	pixel_y = 7
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
 /turf/open/floor/plating/dirt,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -42556,6 +42586,9 @@
 	pixel_y = 7
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -44981,6 +45014,9 @@
 "kOJ" = (
 /obj/structure/railing,
 /obj/effect/decal/trash,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -54243,6 +54279,11 @@
 /area/vtm/clinic)
 "mWU" = (
 /obj/structure/chair/plastic,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6;
+	pixel_x = 5;
+	pixel_y = -5
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -62667,6 +62708,9 @@
 "oTc" = (
 /obj/effect/decal/trash,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -66407,10 +66451,6 @@
 /obj/machinery/shower{
 	pixel_y = 18
 	},
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
 /obj/effect/decal/stock{
 	dir = 1
 	},
@@ -69146,7 +69186,7 @@
 	layer = 5;
 	name = "window bars"
 	},
-/turf/closed/wall/vampwall/rich/old/low/window/reinforced,
+/turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
 	fire_controled = 1
@@ -78265,7 +78305,6 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/fishermanswharf)
 "sxR" = (
-/obj/structure/window/reinforced/indestructable,
 /obj/structure/chair/plastic,
 /mob/living/carbon/human/npc/shop,
 /turf/open/floor/plating/rough,
@@ -84296,7 +84335,6 @@
 /obj/machinery/light/warm{
 	dir = 4
 	},
-/obj/structure/window/reinforced/indestructable,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
@@ -85235,6 +85273,16 @@
 	},
 /turf/open/floor/plating/shit,
 /area/vtm/sewer)
+"und" = (
+/obj/machinery/camera/directional/west,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
+/turf/open/floor/plating/rough/cave,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "uni" = (
 /obj/structure/table,
 /obj/underplate,
@@ -89157,10 +89205,6 @@
 	pixel_y = 15;
 	density = 0
 	},
-/obj/structure/window/reinforced/indestructable{
-	alpha = 0;
-	dir = 4
-	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
@@ -92086,6 +92130,17 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto)
+"vTk" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/graffiti,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "vTo" = (
 /obj/structure/table/wood,
 /obj/item/clothing/gloves/vampire/latex,
@@ -92753,6 +92808,9 @@
 /area/vtm/graveyard/interior)
 "waK" = (
 /obj/effect/decal/trash,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone4"
 	},
@@ -100515,7 +100573,6 @@
 	dir = 8;
 	pixel_y = 12
 	},
-/obj/structure/window/reinforced/indestructable,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
@@ -101040,6 +101097,16 @@
 /obj/item/stack/sheet/mineral/wood,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
+"yck" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "ycm" = (
 /obj/effect/decal/wallpaper/paper/stripe,
 /turf/closed/wall/vampwall/junk/alt,
@@ -101382,11 +101449,6 @@
 /obj/vampire_computer,
 /turf/open/floor/carpet/red,
 /area/vtm/interior/millennium_tower)
-"yfW" = (
-/obj/structure/window/reinforced/indestructable,
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating/rough,
-/area/vtm/sewer/nosferatu_town)
 "ygd" = (
 /obj/item/toy/cards/deck,
 /obj/structure/table/wood/poker,
@@ -107307,7 +107369,7 @@ iCp
 vUT
 eTT
 xPb
-mZc
+hin
 tOP
 vJQ
 eyo
@@ -107565,7 +107627,7 @@ vUT
 eTT
 cbw
 vVR
-qBu
+pyE
 kOJ
 tAQ
 cCa
@@ -108053,7 +108115,7 @@ kGt
 tAL
 lQc
 mZc
-kkW
+und
 mEa
 mEa
 qfL
@@ -108311,11 +108373,11 @@ odG
 puF
 mZc
 eCt
-eCt
-eCt
-eCt
-mZc
-qBu
+cDj
+cDj
+cDj
+kDH
+pyE
 qBu
 qBu
 qBu
@@ -109107,7 +109169,7 @@ knI
 vCr
 wjT
 eTT
-wyF
+yck
 foU
 cMg
 ohz
@@ -110873,7 +110935,7 @@ sqC
 uof
 uEH
 wyF
-qBu
+vVR
 ncb
 eDH
 hCb
@@ -111129,7 +111191,7 @@ uof
 uof
 uof
 ghb
-eCt
+frO
 rbG
 tit
 jHE
@@ -111385,8 +111447,8 @@ doK
 jaz
 jaz
 aDE
-eCt
-eCt
+ubg
+eJS
 rbG
 uof
 uof
@@ -112149,7 +112211,7 @@ mHl
 "}
 (41,1,1) = {"
 sTo
-cXw
+vTk
 kKy
 mLg
 ohi
@@ -116795,7 +116857,7 @@ nYS
 wJn
 nPR
 gwR
-yfW
+jZs
 yjO
 hkQ
 eir
