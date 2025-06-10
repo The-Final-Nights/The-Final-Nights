@@ -141,7 +141,7 @@
 	exp_type_department = EXP_TYPE_POLICE
 
 	allowed_species = list("Human")
-	duty = "You are a district attorney, a federal lawyer working directly with the PD to process criminals. Help maintain law and order in the city, using the infinite power of buerocracy to make people's lives easier!"
+	duty = "You are a district attorney, a federal lawyer working directly with the PD to process criminals. Help maintain law and order in the city, using the infinite power of bureaucracy to make people's lives easier!"
 	minimal_masquerade = 0
 	known_contacts = list("Police Chief", "Public Defender", "Prince")
 
