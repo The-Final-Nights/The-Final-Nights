@@ -26,10 +26,13 @@
 	AIStatus = AI_OFF
 	var/mob/living/target_to_zombebe
 
+/mob/living/simple_animal/hostile
+	var/mob/last_attacker
+
 /mob/living/simple_animal/hostile/zombie/Destroy()
 	. = ..()
-	if(lastattacker && ishuman(lastattacker))
-		var/mob/living/H = lastattacker
+	if(last_attacker && ishuman(last_attacker))
+		var/mob/living/H = last_attacker
 		if(H.mind && H.masquerade < 5 && get_area_name(H) == "Graveyard")
 			if(H.killedzombies < 9)
 				H.killedzombies++
@@ -44,12 +47,12 @@
 
 /mob/living/simple_animal/hostile/zombie/attackby(obj/item/I, mob/user, params)
 	if(ishuman(user))
-		lastattacker = user
+		last_attacker = user
 	. = ..()
 
 /mob/living/simple_animal/hostile/bullet_act(obj/projectile/P)
 	if(P.firer)
-		lastattacker = P.firer
+		last_attacker = P.firer
 	return ..()
 
 /mob/living/simple_animal/hostile/zombie/Initialize()
