@@ -291,7 +291,7 @@
 	prof.social = H.social
 	prof.mentality = H.mentality
 	prof.athletics = H.athletics
-	prof.body_shape = H.body_shape
+	prof.base_body_mod = H.base_body_mod
 	prof.headshot_link = H.headshot_link
 	prof.flavor_text = H.flavor_text
 	prof.flavor_text_nsfw = H.flavor_text_nsfw
@@ -526,7 +526,7 @@
 	var/social
 	var/mentality
 	var/athletics
-	var/body_shape
+	var/base_body_mod
 	var/headshot_link
 	var/flavor_text
 	var/flavor_text_nsfw
@@ -566,7 +566,7 @@
 	newprofile.social = social
 	newprofile.mentality = mentality
 	newprofile.athletics = athletics
-	newprofile.body_shape = body_shape
+	newprofile.base_body_mod = base_body_mod
 	newprofile.headshot_link = headshot_link
 	newprofile.flavor_text = flavor_text
 	newprofile.flavor_text_nsfw = flavor_text_nsfw
