@@ -3,7 +3,6 @@
 	desc = "I feel bad for the heartless bastard who lost this."
 	base_icon_state = "heart"
 	icon_state = "heart-on"
-	base_icon_state = "heart"
 	illegal = TRUE
 	cost = 750
 	zone = BODY_ZONE_CHEST
