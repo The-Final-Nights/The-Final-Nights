@@ -50,7 +50,7 @@
 		if(0)
 			icon_state = "blood0"
 	inhand_icon_state = icon_state
-	onflooricon_state = icon_state
+	onflooricon_state = onflooricon
 
 /// Handles updating the container when the reagents change.
 /obj/item/reagent_containers/blood/on_reagent_change(datum/reagents/holder, ...)
