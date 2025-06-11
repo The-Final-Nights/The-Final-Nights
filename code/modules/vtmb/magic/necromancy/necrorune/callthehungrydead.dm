@@ -15,12 +15,11 @@
 	faction = list("Giovanni")
 
 /obj/necrorune/question/complete()
-	var/text_question = tgui_input_text(usr, "Enter your summons to the wraiths:", "Call the Hungry Dead")
-	visible_message(span_notice("A call rings out to the dead from the [src.name] rune..."))
+	var/text_question = tgui_input_text(last_activator, "Enter your summons to the wraiths:", "Call the Hungry Dead")
+	visible_message(span_notice("A call rings out to the dead from the rune..."))
 	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you wish to speak with a necromancer? (You are allowed to spread meta information) Their summons is : [text_question]", null, null, null, 20 SECONDS, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
-		if(G.key)
-			notify_ghosts("Question rune has been triggered.", source = src, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Question Rune Triggered")
+		notify_ghosts("Question rune has been triggered.", source = src, action = NOTIFY_ORBIT, flashwindow = FALSE, header = "Question Rune Triggered")
 	if(!length(candidates))
 		visible_message(span_notice("No one answers the [src.name] rune's call."))
 		return
