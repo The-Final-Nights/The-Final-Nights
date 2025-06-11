@@ -96,9 +96,9 @@ GLOBAL_LIST_INIT(slot2type, list("head" = /obj/item/clothing/head/changeling, "w
 	user.mentality = chosen_prof.mentality
 	user.athletics = chosen_prof.athletics
 	user.body_shape = chosen_prof.body_shape
-	user.headshot_link = headshot_link
-	user.flavor_text = flavor_text
-	user.flavor_text_nsfw = flavor_text_nsfw
+	user.headshot_link = chosen_prof.headshot_link
+	user.flavor_text = chosen_prof.flavor_text
+	user.flavor_text_nsfw = chosen_prof.flavor_text_nsfw
 
 	chosen_dna.transfer_identity(user, 1)
 	user.updateappearance(mutcolor_update=1)
