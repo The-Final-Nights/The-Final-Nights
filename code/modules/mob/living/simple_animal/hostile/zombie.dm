@@ -24,15 +24,18 @@
 	maxbloodpool = 0
 	speed = 1
 	AIStatus = AI_OFF
+	lastattacker = null
 	var/mob/living/target_to_zombebe
-
-/mob/living/simple_animal/hostile
-	var/mob/last_attacker
+	var/last_zombie_ai_check = 0
+	var/mob/living/last_attacker = null
 
 /mob/living/simple_animal/hostile/zombie/Destroy()
 	. = ..()
-	if(last_attacker && ishuman(last_attacker))
-		var/mob/living/H = last_attacker
+	if(lastattacker)
+		var/mob/living/H = lastattacker
+		if(last_attacker != null)
+			H = last_attacker
+			last_attacker = null
 		if(H.mind && H.masquerade < 5 && get_area_name(H) == "Graveyard")
 			if(H.killedzombies < 9)
 				H.killedzombies++
@@ -45,64 +48,60 @@
 	SSgraveyard.alive_zombies = max(0, SSgraveyard.alive_zombies-1)
 	GLOB.zombie_list -= src
 
-/mob/living/simple_animal/hostile/zombie/attackby(obj/item/I, mob/user, params)
-	if(ishuman(user))
-		last_attacker = user
+//punch attack
+/mob/living/simple_animal/hostile/zombie/attack_hand(mob/living/user)
+	lastattacker = user
 	. = ..()
-
+//melee weapon
+/mob/living/simple_animal/hostile/zombie/attackby(obj/item/I, mob/living/user, params)
+	lastattacker = user
+	last_attacker = lastattacker
+	. = ..()
+//bullets
 /mob/living/simple_animal/hostile/bullet_act(obj/projectile/P)
 	if(P.firer)
-		last_attacker = P.firer
+		lastattacker = P.firer
 	return ..()
 
 /mob/living/simple_animal/hostile/zombie/Initialize()
 	. = ..()
 	GLOB.zombie_list += src
 
-/mob/living/simple_animal/hostile/zombie/proc/handle_automated_patriotification()
-	if(target_to_zombebe)
-		if(get_dist(src, target_to_zombebe) > 7)
-			target_to_zombebe = null
+//This runs only on the graveyard zombies, manged by the file, za_rozziu.dm, I'll change that file to zombie_graveyard or something.
+/mob/living/simple_animal/hostile/zombie/proc/graveyard_ai()
+	// Runs every 2 seconds
+	// Check for living targets in the area, prioritizes attacking them.
+	for(var/mob/living/L in oviewers(6, src))
+		if(!iszomboid(L))
+			target_to_zombebe = L
+			break
 		else
-			var/totalshit = 1
-			if(total_multiplicative_slowdown() > 0)
-				totalshit = total_multiplicative_slowdown()
+			target_to_zombebe = GLOB.vampgate
 
-			var/reqsteps = round((SSzombiepool.next_fire-world.time)/totalshit)
-			walk_to(src, target_to_zombebe, reqsteps+1, total_multiplicative_slowdown())
-			if(get_dist(src, target_to_zombebe) <= 1)
-				ClickOn(target_to_zombebe)
-			//code to attack pepol
-	else
-		//code to find target
-		for(var/mob/living/L in oviewers(6, src))
-			if(!iszomboid(L))
-				target_to_zombebe = L
-		//else, if we have no target :((( NO ONE TO BITE... BRAAAAAAAAAHH(ins)... FUCK IM LOOKING FOR GATE TO BRRRRRRR
-		if(!target_to_zombebe)
-			if(GLOB.vampgate)
-				var/obj/structure/vampgate/V = GLOB.vampgate
-				if(get_area(V) == get_area(src))
-					var/totalshit = 1
-					if(total_multiplicative_slowdown() > 0)
-						totalshit = total_multiplicative_slowdown()
-					var/reqsteps = round((SSzombiepool.next_fire-world.time)/totalshit)
-					walk_to(src, V, reqsteps, total_multiplicative_slowdown())
-					if(get_dist(V, src) <= 1)
-						if(!V.density)
-							if(prob(20))
-								for(var/mob/living/carbon/human/L in GLOB.player_list)
-									if(L)
-										if(L.mind)
-											if(L.mind.assigned_role == "Graveyard Keeper")
-												if(L.client)
-													if(istype(get_area(L), /area/vtm/graveyard))
-														L.AdjustMasquerade(-1)
-														SSgraveyard.total_bad += 1
-								qdel(src)
-						else
-							V.punched()
-							do_attack_animation(V)
+	// Move toward target if one exists
+	if(target_to_zombebe)
+		if(get_dist(src, target_to_zombebe) > 1)
+			var/move_cost = total_multiplicative_slowdown()
+			set_glide_size(DELAY_TO_GLIDE_SIZE(move_cost))
+
+			// Add chance to veer or idle slightly
+			if(prob(10)) // 10% chance to step randomly
+				var/list/dirs = list(NORTH, SOUTH, EAST, WEST)
+				step(src, pick(dirs))
+			else if(get_dist(src, target_to_zombebe) <= 5)
+				walk_to(src, target_to_zombebe, 1, move_cost)
+			else
+				step_towards(src, target_to_zombebe)
+		else
+			// Attack!
+			ClickOn(target_to_zombebe)
+			if(target_to_zombebe == GLOB.vampgate)
+				GLOB.vampgate.punched()
+		return
+
+	if(prob(10))
+		src.say(pick("Braaaains...", "Grrrrrr...", "Uuuuuurgh...", "Mmmmmm..."))
+
 
 /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie
 	name = "Shambling Corpse"

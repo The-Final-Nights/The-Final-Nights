@@ -13,15 +13,9 @@ SUBSYSTEM_DEF(graveyard)
 	var/total_bad = 0
 
 /datum/controller/subsystem/graveyard/fire()
-	var/continue_the_shift = FALSE
-	for(var/mob/living/carbon/human/L in GLOB.player_list)
-		if(L)
-			if(L.mind)
-				if(L.mind.assigned_role == "Graveyard Keeper")
-					if(L.client)
-						continue_the_shift = TRUE
-	if(!continue_the_shift)
+	if (!has_active_keeper())
 		return
+
 	if(alive_zombies < 10)
 		for(var/mob/living/carbon/human/L in GLOB.player_list)
 			if(L)
@@ -44,6 +38,12 @@ SUBSYSTEM_DEF(graveyard)
 					if(L.mind.assigned_role == "Graveyard Keeper")
 						if(L.client && L.key)
 							total_good += 1
+
+/datum/controller/subsystem/graveyard/proc/has_active_keeper()
+	for(var/mob/living/carbon/human/L in GLOB.player_list)
+		if(L?.mind?.assigned_role == "Graveyard Keeper" && L.client)
+			return TRUE
+	return FALSE
 
 /obj/vampgrave
 	icon = 'code/modules/wod13/props.dmi'

@@ -14950,7 +14950,9 @@
 /area/vtm/anarch)
 "dUC" = (
 /obj/structure/flora/ausbushes/fullgrass,
-/obj/structure/vampfence/rich,
+/obj/structure/vampfence/corner/rich{
+	icon_state = "fence_end"
+	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/graveyard)
 "dUF" = (
@@ -48346,6 +48348,7 @@
 /area/vtm/pacificheights/old)
 "mSq" = (
 /obj/effect/decal/cleanable/blood/drip,
+/obj/structure/vamptree,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/graveyard)
 "mSr" = (
@@ -54315,6 +54318,7 @@
 	dir = 8
 	},
 /obj/effect/decal/litter,
+/obj/structure/lamppost/sidewalk,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/graveyard)
 "otV" = (
@@ -62956,6 +62960,7 @@
 /area/vtm/interior/millennium_tower/f4)
 "qFj" = (
 /obj/effect/decal/bordur/corner,
+/obj/structure/lamppost/sidewalk,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/graveyard)
 "qFk" = (
@@ -67695,6 +67700,11 @@
 /obj/structure/chair/comfy/beige,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"rOf" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/lamppost/sidewalk,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/graveyard)
 "rOj" = (
 /obj/structure/vamprocks,
 /turf/open/floor/plating/vampgrass,
@@ -73642,10 +73652,6 @@
 /obj/item/restraints/handcuffs/fake,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/strip/elysium)
-"tse" = (
-/obj/effect/decal/pallet,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/graveyard)
 "tsf" = (
 /obj/structure/railing{
 	dir = 8
@@ -78225,7 +78231,7 @@
 /area/vtm/cabaret/basement)
 "uEO" = (
 /obj/effect/decal/bordur{
-	dir = 5
+	dir = 4
 	},
 /obj/structure/lamppost/sidewalk,
 /turf/open/floor/plating/sidewalk/old,
@@ -86701,6 +86707,7 @@
 /obj/effect/decal/bordur{
 	dir = 9
 	},
+/obj/structure/lamppost/sidewalk,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/graveyard)
 "wSF" = (
@@ -88823,10 +88830,8 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "xwD" = (
+/obj/effect/decal/bordur,
 /obj/structure/lamppost/sidewalk,
-/obj/effect/decal/bordur{
-	dir = 4
-	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/graveyard)
 "xwJ" = (
@@ -142964,11 +142969,11 @@ qyz
 ahN
 qyz
 fpX
-ncN
 fpX
-ayF
-peQ
-ayF
+fpX
+tFp
+fpX
+tFp
 fpX
 fpX
 nys
@@ -143222,7 +143227,7 @@ aWz
 qyz
 mSq
 ayF
-peQ
+fpX
 ayF
 fpX
 ayF
@@ -143734,7 +143739,7 @@ feW
 lIE
 aWz
 qyz
-fpX
+gEV
 ncN
 fpX
 ncN
@@ -144762,7 +144767,7 @@ aFG
 gSQ
 aWz
 qyz
-fpX
+gEV
 ncN
 fpX
 ncN
@@ -145513,14 +145518,14 @@ tPG
 tPG
 tPG
 tPG
+uEO
 tPG
 tPG
 tPG
 tPG
 tPG
 tPG
-tPG
-tPG
+uEO
 tPG
 tPG
 mgL
@@ -145790,7 +145795,7 @@ feW
 bdx
 aWz
 qyz
-fpX
+gEV
 ncN
 fpX
 ncN
@@ -146037,7 +146042,7 @@ kKJ
 kKJ
 kKJ
 kKJ
-mxw
+keN
 mKL
 vTt
 fMR
@@ -146047,8 +146052,8 @@ rTP
 mUM
 aWz
 qyz
-cWc
-qyz
+tFp
+fpX
 fpX
 qyz
 fpX
@@ -146303,12 +146308,12 @@ frW
 lrI
 wjm
 aWz
-utI
-dUC
 qyz
+dUC
 utI
-utI
-utI
+fpX
+fpX
+fpX
 utI
 nys
 nys
@@ -146532,10 +146537,10 @@ uZb
 uZb
 iav
 rwM
+rwM
+rwM
+rwM
 liq
-rwM
-rwM
-rwM
 rwM
 rwM
 rwM
@@ -146551,7 +146556,7 @@ rwM
 qFj
 kKJ
 kKJ
-keN
+mxw
 mKL
 vTt
 xsp
@@ -146561,8 +146566,8 @@ rph
 xlS
 aWz
 qyz
-qyz
-qyz
+fpX
+fpX
 fpX
 fpX
 fpX
@@ -146796,7 +146801,6 @@ tPG
 tPG
 tPG
 tPG
-xwD
 tPG
 tPG
 tPG
@@ -146804,7 +146808,8 @@ tPG
 tPG
 tPG
 tPG
-uEO
+tPG
+mgL
 esY
 kKJ
 kKJ
@@ -147058,7 +147063,7 @@ qyz
 fpX
 fpX
 utI
-utI
+fpX
 utI
 peM
 keN
@@ -147333,7 +147338,7 @@ vlA
 aWz
 qyz
 fpX
-joH
+fpX
 uzd
 nqf
 qyz
@@ -147560,7 +147565,7 @@ uZb
 nYS
 iav
 esY
-joH
+fpX
 fpX
 tFp
 tFp
@@ -147817,7 +147822,7 @@ uZb
 nYS
 iav
 esY
-joH
+fpX
 tFp
 tFp
 fpX
@@ -148861,7 +148866,7 @@ fpX
 fpX
 fpX
 keN
-esY
+xwD
 kKJ
 kKJ
 mxw
@@ -149618,7 +149623,7 @@ iav
 lbj
 joH
 fpX
-tse
+fpX
 fpX
 fpX
 fpX
@@ -149902,7 +149907,7 @@ fpX
 ncN
 joH
 qyz
-fpX
+gEV
 fpX
 fpX
 fpX
@@ -150645,7 +150650,7 @@ nYS
 iav
 esY
 joH
-uzd
+fpX
 peQ
 uzd
 fpX
@@ -150915,14 +150920,14 @@ fpX
 fpX
 fpX
 fpX
-pRO
+cgk
 cmO
 esY
 kKJ
 kKJ
 keN
 esY
-joH
+fpX
 ncN
 fpX
 fpX
@@ -151415,8 +151420,8 @@ dhc
 nYS
 iav
 lbj
-jpE
-fpX
+eCp
+qyz
 qyz
 qyz
 qyz
@@ -151444,7 +151449,7 @@ dPB
 ncN
 iNx
 qyz
-jpE
+rOf
 fpX
 fpX
 fpX
@@ -151710,8 +151715,8 @@ peQ
 nys
 fpX
 nys
-peQ
 fpX
+peQ
 fpX
 qyz
 qyz
@@ -151929,7 +151934,7 @@ dhc
 nYS
 iav
 esY
-joH
+fpX
 fpX
 qyz
 fpX
@@ -151950,7 +151955,7 @@ kKJ
 kKJ
 keN
 esY
-joH
+fpX
 fpX
 fpX
 peQ
@@ -151964,7 +151969,7 @@ fpX
 fpX
 fpX
 qyz
-fpX
+peQ
 fpX
 nys
 fpX
@@ -152201,8 +152206,8 @@ uzd
 qyz
 uzd
 fpX
-mxw
-esY
+keN
+xwD
 kKJ
 kKJ
 mxw
@@ -152221,7 +152226,7 @@ fpX
 fpX
 peQ
 fpX
-peQ
+fpX
 fpX
 nys
 fpX
@@ -152443,7 +152448,7 @@ dhc
 nYS
 iav
 esY
-joH
+fpX
 fpX
 led
 tFp
@@ -152957,7 +152962,7 @@ dhc
 nYS
 iav
 esY
-joH
+fpX
 fpX
 fpX
 fpX
@@ -152986,7 +152991,7 @@ fpX
 ncN
 joH
 qyz
-fpX
+gEV
 fpX
 fpX
 fpX
@@ -153243,7 +153248,7 @@ utI
 utI
 uxb
 eCp
-gEV
+fpX
 fpX
 qyz
 fpX
