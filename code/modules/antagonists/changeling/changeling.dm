@@ -78,10 +78,6 @@
 	ADD_TRAIT(owner, TRAIT_CHARMER, CHANGELING_TRAIT) //Allows them to get NPCs to follow them.
 	ADD_TRAIT(owner, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT) //Allows them to identify who's what.
 	ADD_TRAIT(owner, TRAIT_NIGHT_VISION, CHANGELING_TRAIT) // Allows them to see.
-	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
-	abductor_hud.add_hud_to(owner)
-	owner.see_invisible = OBFUSCATE_INVISIBILITY //Yes, it's a bit hacky, but Tzimisce get Auspex.
-	owner.update_sight()
 	. = ..()
 
 /datum/antagonist/changeling/on_removal()
@@ -97,11 +93,6 @@
 	REMOVE_TRAIT(owner, TRAIT_CHARMER, CHANGELING_TRAIT)
 	REMOVE_TRAIT(owner, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT)
 	REMOVE_TRAIT(owner, TRAIT_NIGHT_VISION, CHANGELING_TRAIT)
-	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
-	abductor_hud.remove_hud_from(owner)
-	owner.see_invisible = SEE_INVISIBLE_LIVING
-	owner.update_sight()
-	remove_changeling_powers()
 	. = ..()
 
 /datum/antagonist/changeling/proc/reset_properties()
@@ -301,8 +292,9 @@
 	prof.mentality = H.mentality
 	prof.athletics = H.athletics
 	prof.body_shape = H.body_shape
-	prof.flavor_text
-	prof.flavor_text_nsfw
+	prof.headshot_link = H.headshot_link
+	prof.flavor_text = H.flavor_text
+	prof.flavor_text_nsfw = H.flavor_text_nsfw
 
 	prof.skillchips = H.clone_skillchip_list(TRUE)
 
