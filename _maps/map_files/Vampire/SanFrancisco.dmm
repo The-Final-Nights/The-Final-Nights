@@ -53087,7 +53087,6 @@
 	pixel_y = 13
 	},
 /obj/effect/decal/rugs,
-/obj/effect/decal/wallpaper/papers/one,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
