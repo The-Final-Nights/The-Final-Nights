@@ -285,6 +285,8 @@
 	prof.mentality = H.mentality
 	prof.athletics = H.athletics
 	prof.body_shape = H.body_shape
+	prof.flavor_text
+	prof.flavor_text_nsfw
 
 	prof.skillchips = H.clone_skillchip_list(TRUE)
 
@@ -517,6 +519,9 @@
 	var/mentality
 	var/athletics
 	var/body_shape
+	var/headshot_link
+	var/flavor_text
+	var/flavor_text_nsfw
 
 	var/list/skillchips = list()
 	/// What scars the target had when we copied them, in string form (like persistent scars)
@@ -554,6 +559,9 @@
 	newprofile.mentality = mentality
 	newprofile.athletics = athletics
 	newprofile.body_shape = body_shape
+	newprofile.headshot_link = headshot_link
+	newprofile.flavor_text = flavor_text
+	newprofile.flavor_text_nsfw = flavor_text_nsfw
 	newprofile.worn_icon_list = worn_icon_list.Copy()
 	newprofile.worn_icon_state_list = worn_icon_state_list.Copy()
 	newprofile.skillchips = skillchips.Copy()
