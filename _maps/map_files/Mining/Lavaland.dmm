@@ -2722,7 +2722,7 @@
 	},
 /area/vtm/interior/penumbra)
 "DT" = (
-/turf/closed/wall/vampwall/market/low/window/reinforced{
+/turf/closed/wall/vampwall/market/low/window{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
