@@ -29,4 +29,4 @@
 		else
 			for(var/item_name in required_items)
 				required_list += (required_list == "" ? item_name : ", [item_name]")
-		to_chat(user, "[R.necrolevel] [R.name] - [R.desc] Requirements: ["None" ? length(required_list) : required_list].")
+		to_chat(user, "[R.necrolevel] [R.name] - [R.desc] Requirements: [length(required_list) ? required_list : "None"].")
