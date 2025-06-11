@@ -417,7 +417,7 @@
 		update_body()
 		update_hair()
 		update_body_parts()
-		update_dna_identity()
+		dna.update_dna_identity()
 
 	var/datum/outfit/O = new()
 	if(length(socialrole.backpacks))
