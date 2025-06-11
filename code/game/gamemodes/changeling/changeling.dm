@@ -86,8 +86,16 @@ GLOBAL_LIST_INIT(slot2type, list("head" = /obj/item/clothing/head/changeling, "w
 	var/datum/dna/chosen_dna = chosen_prof.dna
 	user.real_name = chosen_prof.name
 	user.underwear = chosen_prof.underwear
+	user.underwear_color = chosen_prof.underwear_color
 	user.undershirt = chosen_prof.undershirt
 	user.socks = chosen_prof.socks
+	user.age = chosen_prof.age
+	user.physique = chosen_prof.physique
+	user.dexterity = chosen_prof.dexterity
+	user.social = chosen_prof.social
+	user.mentality = chosen_prof.mentality
+	user.athletics = chosen_prof.athletics
+	user.body_shape = chosen_prof.body_shape
 
 	chosen_dna.transfer_identity(user, 1)
 	user.updateappearance(mutcolor_update=1)
