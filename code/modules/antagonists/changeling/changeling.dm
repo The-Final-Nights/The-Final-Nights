@@ -73,11 +73,17 @@
 	if(give_objectives)
 		forge_objectives()
 	owner.current.grant_all_languages(FALSE, FALSE, TRUE)	//Grants omnitongue. We are able to transform our body after all.
-	owner.current.physiology.brute_mod *= 0.1 //Very low brute mod, they're fleshcrafters.
-	ADD_TRAIT(owner, TRAIT_STRONG_GRABBER, CHANGELING_TRAIT) //Allows them to easily grab victims.
-	ADD_TRAIT(owner, TRAIT_CHARMER, CHANGELING_TRAIT) //Allows them to get NPCs to follow them.
-	ADD_TRAIT(owner, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT) //Allows them to identify who's what.
-	ADD_TRAIT(owner, TRAIT_NIGHT_VISION, CHANGELING_TRAIT) // Allows them to see.
+	if(ishuman(owner.current))
+		var/mob/living/carbon/human/H = owner.current
+		H.physiology.brute_mod *= 0.1 //Very low brute mod, they're fleshcrafters.
+		ADD_TRAIT(H, TRAIT_STRONG_GRABBER, CHANGELING_TRAIT) //Allows them to easily grab victims.
+		ADD_TRAIT(H, TRAIT_CHARMER, CHANGELING_TRAIT) //Allows them to get NPCs to follow them.
+		ADD_TRAIT(H, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT) //Allows them to identify who's what.
+		ADD_TRAIT(H, TRAIT_NIGHT_VISION, CHANGELING_TRAIT) // Allows them to see.
+		var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
+		abductor_hud.add_hud_to(H)
+		H.see_invisible = OBFUSCATE_INVISIBILITY
+		H.update_sight()
 	. = ..()
 
 /datum/antagonist/changeling/on_removal()
@@ -88,11 +94,17 @@
 		if(B && (B.decoy_override != initial(B.decoy_override)))
 			B.organ_flags |= ORGAN_VITAL
 			B.decoy_override = FALSE
-	owner.current.physiology.brute_mod *= 10 //Returns it to normal.
-	REMOVE_TRAIT(owner, TRAIT_STRONG_GRABBER, CHANGELING_TRAIT)
-	REMOVE_TRAIT(owner, TRAIT_CHARMER, CHANGELING_TRAIT)
-	REMOVE_TRAIT(owner, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT)
-	REMOVE_TRAIT(owner, TRAIT_NIGHT_VISION, CHANGELING_TRAIT)
+	if(ishuman(owner.current))
+		var/mob/living/carbon/human/H = owner.current
+		H.physiology.brute_mod *= 10 //Returns it to normal.
+		REMOVE_TRAIT(H, TRAIT_STRONG_GRABBER, CHANGELING_TRAIT)
+		REMOVE_TRAIT(H, TRAIT_CHARMER, CHANGELING_TRAIT)
+		REMOVE_TRAIT(H, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT)
+		REMOVE_TRAIT(H, TRAIT_NIGHT_VISION, CHANGELING_TRAIT)
+		var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
+		abductor_hud.remove_hud_from(H)
+		H.see_invisible = SEE_INVISIBLE_LIVING
+		H.update_sight()
 	. = ..()
 
 /datum/antagonist/changeling/proc/reset_properties()
