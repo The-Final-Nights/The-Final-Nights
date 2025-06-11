@@ -265,9 +265,9 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 
 ///Setter macro used to modify unique identity blocks.
 /datum/dna/proc/set_uni_identity_block(blocknum, input)
-	var/precesing_blocks = copytext(unique_identity, 1, GLOB.total_ui_len_by_block[blocknum])
-	var/succeeding_blocks = blocknum < GLOB.total_ui_len_by_block.len ? copytext(unique_identity, GLOB.total_ui_len_by_block[blocknum+1]) : ""
-	unique_identity = precesing_blocks + input + succeeding_blocks
+	var/precesing_blocks = copytext(uni_identity, 1, GLOB.total_ui_len_by_block[blocknum])
+	var/succeeding_blocks = blocknum < GLOB.total_ui_len_by_block.len ? copytext(uni_identity, GLOB.total_ui_len_by_block[blocknum+1]) : ""
+	uni_identity = precesing_blocks + input + succeeding_blocks
 
 /* //Commenting out until/unless uf is re-implemented.
 ///Setter macro used to modify unique features blocks.
@@ -447,7 +447,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	if(!has_dna())
 		return
 
-	switch(deconstruct_block(get_uni_identity_block(dna.unique_identity, DNA_GENDER_BLOCK), 3))
+	switch(deconstruct_block(get_uni_identity_block(dna.uni_identity, DNA_GENDER_BLOCK), 3))
 		if(G_MALE)
 			gender = MALE
 		if(G_FEMALE)
@@ -579,10 +579,9 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 
 /mob/living/carbon/proc/randmuti()
 	if(!has_dna())
-		return
+		CRASH("[src] does not have DNA")
 	var/num = rand(1, DNA_UNI_IDENTITY_BLOCKS)
-	var/newdna = setblock(dna.uni_identity, num, random_string(DNA_BLOCK_SIZE, GLOB.hex_characters))
-	dna.uni_identity = newdna
+	dna.set_se(num, random_string(GET_UI_BLOCK_LEN(num), GLOB.hex_characters))
 	updateappearance(mutations_overlay_update=1)
 
 /mob/living/carbon/proc/clean_dna()
