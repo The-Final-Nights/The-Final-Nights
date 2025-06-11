@@ -547,7 +547,7 @@
 	icon_state = "lingarmor"
 	item_flags = DROPDEL
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	armor = list(MELEE = 80, BULLET = 80, LASER = 40, ENERGY = 50, BOMB = 10, BIO = 4, RAD = 0, FIRE = 90, ACID = 90,  WOUND = 40) //Slightly better than Voivode suit, since it's from a dedicated fleshcrafter.
+	armor = list(MELEE = 80, BULLET = 80, LASER = 40, ENERGY = 50, BOMB = 10, BIO = 4, RAD = 0, FIRE = 90, ACID = 90,  WOUND = 40) //Slightly better than Voivode suit.
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = 0
 	heat_protection = 0
