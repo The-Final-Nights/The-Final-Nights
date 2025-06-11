@@ -73,6 +73,7 @@
 	if(give_objectives)
 		forge_objectives()
 	owner.current.grant_all_languages(FALSE, FALSE, TRUE)	//Grants omnitongue. We are able to transform our body after all.
+	owner.current.physiology.brute_mod *= 0.1 //Very low brute mod, they're fleshcrafters.
 	. = ..()
 
 /datum/antagonist/changeling/on_removal()
@@ -83,6 +84,7 @@
 		if(B && (B.decoy_override != initial(B.decoy_override)))
 			B.organ_flags |= ORGAN_VITAL
 			B.decoy_override = FALSE
+	owner.current.physiology.brute_mod *= 10 //Returns it to normal.
 	remove_changeling_powers()
 	. = ..()
 
