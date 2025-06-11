@@ -243,7 +243,7 @@
 	name = "Lethargic Sting"
 	desc = "We silently sting our victim with a chemical that will gradually drain their stamina and cause drowsiness. Costs 15 chemicals."
 	helptext = "Does not provide a warning to the victim, though they will quickly realize they have been poisoned."
-	button_overlay_icon_state = "sting_lsd"
+	button_icon_state = "sting_lsd"
 	chemical_cost = 15
 	dna_cost = 2
 
@@ -258,12 +258,12 @@
 	name = "Pneumonic Sting"
 	desc = "We silently sting our victim with a chemical that will stop their lungs. This will work against all living beings, although it will only briefly stun Kindred. Costs 50 chemicals."
 	helptext = "Does not provide a warning to the victim, though they will quickly realize they have been poisoned."
-	button_overlay_icon_state = "sting_poison"
+	button_icon_state = "sting_poison"
 	chemical_cost = 50
 	dna_cost = 4
 
 /datum/action/changeling/sting/pneumonic/sting_action(mob/user, mob/target)
-	log_combat(user, target, "stung", "Pneumonic Sting")")
+	log_combat(user, target, "stung", "Pneumonic Sting")
 	target.silent = 10
 	target.Paralyse(10)
 	target.make_jittery(100)
@@ -275,12 +275,12 @@
 	name = "Fluorosulfuric Acid Sting"
 	desc = "We silently sting our victim with a chemical that will burn through their internal organs. They will notice this rather swiftly. Costs 50 chemicals."
 	helptext = "Does not provide a warning to the victim, though they will quickly realize they have been poisoned."
-	button_overlay_icon_state = "sting_poison"
+	button_icon_state = "sting_poison"
 	chemical_cost = 50
 	dna_cost = 4
 
 /datum/action/changeling/sting/fluacid/sting_action(mob/user, mob/target)
-	log_combat(user, target, "stung", "Fluorosulfuric Acid Sting")")
+	log_combat(user, target, "stung", "Fluorosulfuric Acid Sting")
 	if(target.reagents)
 		target.reagents.add_reagent(/datum/reagent/toxin/acid/fluacid, 20)
 	return TRUE
