@@ -477,7 +477,7 @@
 					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a skeletonised corpse!</b></span><br>"
 
 		if (iszombie(src) && is_face_visible())
-			msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a decayed corpse!</b></span><br>"
+			msg += span_danger("<b>[p_they(TRUE)] [p_are()] a decayed corpse!</b><br>")
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
