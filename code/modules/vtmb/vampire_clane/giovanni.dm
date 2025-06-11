@@ -14,5 +14,12 @@
 /datum/vampireclane/giovanni/post_gain(mob/living/carbon/human/H)
 	. = ..()
 	H.grant_language(/datum/language/italian)
-	var/obj/item/necromancy_tome/necrotome = new(H.loc)
-	H.equip_to_slot_if_possible(necrotome, ITEM_SLOT_BACKPACK, TRUE)
+
+	var/obj/item/necromancy_tome/necrotome = new()
+	var/list/slots = list(
+		LOCATION_LPOCKET = ITEM_SLOT_LPOCKET,
+		LOCATION_RPOCKET = ITEM_SLOT_RPOCKET,
+		LOCATION_BACKPACK = ITEM_SLOT_BACKPACK,
+		LOCATION_HANDS = ITEM_SLOT_HANDS
+	)
+	H.equip_in_one_of_slots(necrotome, slots, FALSE)
