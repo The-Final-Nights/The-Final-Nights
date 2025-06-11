@@ -15395,7 +15395,7 @@
 "dHV" = (
 /obj/structure/bookcase/random/lupine,
 /turf/open/floor/plating/parquetry/rich,
-/area/vtm/amberglade/amberglade_bawn)
+/area/vtm/amberglade/amberglade_caern)
 "dHW" = (
 /obj/effect/decal/bordur,
 /obj/structure/flora/ausbushes/brflowers,
@@ -59045,7 +59045,7 @@
 	},
 /obj/structure/spacevine,
 /turf/closed/wall/vampwall/wood,
-/area/vtm/amberglade/amberglade_exterior)
+/area/vtm/amberglade/amberglade_bawn)
 "oiT" = (
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
@@ -81227,9 +81227,9 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/cog/caern)
 "tuz" = (
-/obj/structure/bookcase/random/lupine,
-/turf/open/floor/plating/parquetry,
-/area/vtm/amberglade/amberglade_bawn)
+/obj/structure/vamptree,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/amberglade/amberglade_exterior)
 "tuQ" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -97678,10 +97678,6 @@
 	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/bianchiBank)
-"xvO" = (
-/obj/structure/spacevine,
-/turf/closed/wall/vampwall/wood,
-/area/vtm/amberglade/amberglade_exterior)
 "xvP" = (
 /obj/structure/railing{
 	dir = 1;
@@ -510596,8 +510592,8 @@ hwy
 spo
 spo
 fiY
-spo
-spo
+iLp
+iLp
 fNp
 jal
 rXS
@@ -510854,7 +510850,7 @@ fEL
 spo
 fiY
 fiY
-spo
+iLp
 bIQ
 rXS
 sFu
@@ -511110,8 +511106,8 @@ hwy
 hwy
 spo
 spo
-spo
-spo
+iLp
+iLp
 qih
 sFu
 tWL
@@ -511367,7 +511363,7 @@ duy
 hwy
 hvp
 txt
-spo
+iLp
 dHV
 sFu
 nrc
@@ -511624,8 +511620,8 @@ xLo
 sPY
 txt
 spo
-spo
-tuz
+iLp
+oPg
 rXS
 oPg
 nrc
@@ -511881,7 +511877,7 @@ loz
 sYX
 hwy
 fEL
-spo
+iLp
 dHV
 sFu
 rXS
@@ -512138,8 +512134,8 @@ rxp
 txt
 txt
 spo
-spo
-spo
+iLp
+iLp
 iLp
 oPg
 rXS
@@ -520091,7 +520087,7 @@ jSr
 jSr
 szM
 fbM
-hwy
+sOa
 boS
 boS
 phm
@@ -520348,8 +520344,8 @@ jSr
 jSr
 xUt
 sOa
-hwy
-hwy
+sOa
+sOa
 boS
 boS
 rUE
@@ -520605,9 +520601,9 @@ jSr
 jSr
 xUt
 sOa
-hwy
-hwy
-rWO
+sOa
+sOa
+sAa
 boS
 boS
 vNh
@@ -520862,10 +520858,10 @@ jSr
 jSr
 xUt
 sOa
-hwy
-fEL
-hwy
-hwy
+sOa
+tuz
+sOa
+sOa
 tFg
 boS
 hwy
@@ -521119,11 +521115,11 @@ jSr
 jSr
 xUt
 sOa
-hwy
-hwy
-hwy
-hwy
-hwy
+sOa
+sOa
+sOa
+sOa
+sOa
 boS
 boS
 boS
@@ -521388,10 +521384,10 @@ sOa
 sOa
 sOa
 wlm
-pcD
-pcD
-sOa
-meI
+boS
+boS
+hwy
+roZ
 hwy
 rUE
 fBO
@@ -521646,9 +521642,9 @@ sOa
 sOa
 sOa
 sOa
-pcD
+boS
 oiR
-sOa
+hwy
 hwy
 fBO
 hwy
@@ -521904,8 +521900,8 @@ sOa
 meI
 sOa
 wlm
-pcD
-pcD
+boS
+boS
 hwy
 hwy
 hwy
@@ -522162,7 +522158,7 @@ sOa
 sOa
 sOa
 sOa
-pcD
+boS
 boS
 hwy
 rUE
@@ -524228,13 +524224,13 @@ meI
 sOa
 sOa
 sOa
-pcD
-pcD
-sOa
-sOa
-sOa
-pcD
-pcD
+boS
+boS
+hwy
+hwy
+hwy
+boS
+boS
 jIA
 eBc
 dUU
@@ -524242,13 +524238,13 @@ ddO
 sOa
 jIA
 eBc
-xvO
-xvO
-sOa
-sOa
-sOa
-pcD
-xvO
+mOG
+mOG
+hwy
+hwy
+hwy
+boS
+mOG
 sOa
 sOa
 sOa
@@ -524486,11 +524482,11 @@ sOa
 sOa
 sOa
 sOa
-pcD
-pcD
-pcD
-pcD
-pcD
+boS
+boS
+boS
+boS
+boS
 sOa
 hVZ
 sOa
@@ -524500,11 +524496,11 @@ sOa
 hVZ
 sOa
 sOa
-pcD
-pcD
-pcD
-pcD
-xvO
+boS
+boS
+boS
+boS
+mOG
 sOa
 sOa
 sOa
