@@ -80,6 +80,7 @@
 		ADD_TRAIT(H, TRAIT_CHARMER, CHANGELING_TRAIT) //Allows them to get NPCs to follow them.
 		ADD_TRAIT(H, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT) //Allows them to identify who's what.
 		ADD_TRAIT(H, TRAIT_NIGHT_VISION, CHANGELING_TRAIT) // Allows them to see.
+		ADD_TRAIT(owner, TRAIT_THERMAL_VISION, CHANGELING_TRAIT)
 		var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 		abductor_hud.add_hud_to(H)
 		H.see_invisible = OBFUSCATE_INVISIBILITY
@@ -101,6 +102,7 @@
 		REMOVE_TRAIT(H, TRAIT_CHARMER, CHANGELING_TRAIT)
 		REMOVE_TRAIT(H, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT)
 		REMOVE_TRAIT(H, TRAIT_NIGHT_VISION, CHANGELING_TRAIT)
+		REMOVE_TRAIT(owner, TRAIT_THERMAL_VISION, CHANGELING_TRAIT)
 		var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 		abductor_hud.remove_hud_from(H)
 		H.see_invisible = SEE_INVISIBLE_LIVING
