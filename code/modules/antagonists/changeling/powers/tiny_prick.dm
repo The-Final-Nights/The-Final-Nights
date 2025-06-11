@@ -256,16 +256,14 @@
 
 /datum/action/changeling/sting/pneumonic
 	name = "Pneumonic Sting"
-	desc = "We silently sting our victim with a chemical that will stop their lungs. This will work against all living beings, although it will only briefly stun Kindred. Costs 50 chemicals."
+	desc = "We silently sting our victim with a chemical that will stop their lungs. This will work against all living beings, although it will not harm Kindred. Costs 50 chemicals."
 	helptext = "Does not provide a warning to the victim, though they will quickly realize they have been poisoned."
-	button_icon_state = "sting_poison"
+	button_icon_state = "sting_poison_pneumonic"
 	chemical_cost = 50
 	dna_cost = 4
 
 /datum/action/changeling/sting/pneumonic/sting_action(mob/user, mob/living/carbon/target)
 	log_combat(user, target, "stung", "Pneumonic Sting")
-	target.silent = 10
-	target.Paralyze(20)
 	if(target.reagents)
 		target.reagents.add_reagent(/datum/reagent/toxin/lexorin, 40)
 	return TRUE
