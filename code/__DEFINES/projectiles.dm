@@ -22,6 +22,7 @@
 #define CALIBER_556			"5.56mm"
 #define CALIBER_12G			"12g"
 #define CALIBER_10MM		"10mm"
+#define CALIBER_46			"4.6mm"
 /// The caliber used by most revolver variants.
 #define CALIBER_357			".357"
 /// The caliber used by the detective's revolver.
