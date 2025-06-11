@@ -7,5 +7,5 @@
 	word = "Y'HO 'LLOH"
 
 /obj/necrorune/death/complete()
-	last_activator.dust()
+	last_activator.death()
 	qdel(src)
