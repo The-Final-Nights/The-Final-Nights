@@ -42,7 +42,7 @@
 	to_chat(victim, span_hypnophrase("YOU CANNOT LIE."))
 
 	visible_message(span_danger("[victim.name]'s shadow thrashes underneath [victim.p_them()], as if a separate being!"))
-	addtimer(CALLBACK(victim, /datum/necrorune/truth/proc/wearoff, victim), 2 MINUTES)
+	addtimer(CALLBACK(victim, TYPE_PROC_REF(/datum/necrorune/truth, wearoff), victim), 2 MINUTES)
 	qdel(src)
 
 /datum/necrorune/truth/proc/wearoff(mob/living/carbon/victim)
