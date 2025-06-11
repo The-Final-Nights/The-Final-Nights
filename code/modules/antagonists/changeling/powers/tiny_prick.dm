@@ -262,11 +262,10 @@
 	chemical_cost = 50
 	dna_cost = 4
 
-/datum/action/changeling/sting/pneumonic/sting_action(mob/user, mob/target)
+/datum/action/changeling/sting/pneumonic/sting_action(mob/user, mob/living/carbon/target)
 	log_combat(user, target, "stung", "Pneumonic Sting")
 	target.silent = 10
-	target.Paralyse(10)
-	target.make_jittery(100)
+	target.Paralyze(20)
 	if(target.reagents)
 		target.reagents.add_reagent(/datum/reagent/toxin/lexorin, 40)
 	return TRUE
