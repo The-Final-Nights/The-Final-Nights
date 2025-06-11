@@ -47,7 +47,7 @@
 				if(HS.my_creator)
 					SEND_SIGNAL(HS.my_creator, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 			else
-				if(ishuman(last_attacker))
+				if(ishuman(last_attacker) && !isnpc(last_attacker))
 					var/mob/living/carbon/human/HM = last_attacker
 					SEND_SIGNAL(HM, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 
@@ -109,6 +109,8 @@
 /mob/living/carbon/human/npc/proc/ChoosePath()
 	if(!old_movement)
 		var/list/possible_list = list()
+		if(length(GLOB.npc_activities) <= 0)
+			return
 		for(var/obj/effect/landmark/npcactivity/N in GLOB.npc_activities)
 			if(get_dist(src, N) < 64)
 				var/turf/T = get_step(N, turn(get_dir(src, N), 180))
