@@ -273,8 +273,16 @@
 	prof.protected = protect
 
 	prof.underwear = H.underwear
+	prof.underwear_color = H.underwear_color
 	prof.undershirt = H.undershirt
 	prof.socks = H.socks
+	prof.age = H.age
+	prof.physique = H.physique
+	prof.dexterity = H.dexterity
+	prof.social = H.social
+	prof.mentality = H.mentality
+	prof.athletics = H.athletics
+	prof.body_shape = H.body_shape
 
 	prof.skillchips = H.clone_skillchip_list(TRUE)
 
@@ -497,8 +505,16 @@
 	var/list/worn_icon_state_list = list()
 
 	var/underwear
+	var/underwear_color
 	var/undershirt
 	var/socks
+	var/age
+	var/physique
+	var/dexterity
+	var/social
+	var/mentality
+	var/athletics
+	var/body_shape
 
 	var/list/skillchips = list()
 	/// What scars the target had when we copied them, in string form (like persistent scars)
@@ -526,8 +542,16 @@
 	newprofile.righthand_file_list = righthand_file_list.Copy()
 	newprofile.inhand_icon_state_list = inhand_icon_state_list.Copy()
 	newprofile.underwear = underwear
+	newprofile.underwear_color  = underwear_color
 	newprofile.undershirt = undershirt
 	newprofile.socks = socks
+	newprofile.age = age
+	newprofile.physique = physique
+	newprofile.dexterity = dexterity
+	newprofile.social = social
+	newprofile.mentality = mentality
+	newprofile.athletics = athletics
+	newprofile.body_shape = body_shape
 	newprofile.worn_icon_list = worn_icon_list.Copy()
 	newprofile.worn_icon_state_list = worn_icon_state_list.Copy()
 	newprofile.skillchips = skillchips.Copy()
