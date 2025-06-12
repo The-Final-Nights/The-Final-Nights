@@ -272,6 +272,17 @@
 							if(isliving(A))
 								var/mob/living/living = A
 								living.grabbedby(wolf)
+								var/old_grab_state = null
+								old_grab_state = wolf.grab_state
+								living.grabbedby(wolf, 1)
+								if(old_grab_state == GRAB_PASSIVE) //Oh, Crinos. Why are you like this.
+									living.drop_all_held_items()
+									wolf.setGrabState(GRAB_AGGRESSIVE) //Instant agressive grab if on grab intent
+									log_combat(wolf, living, "grabbed", addition="aggressively")
+									playsound(loc, 'sound/effects/hit_kick.ogg', 25, TRUE, -1)
+									living.visible_message("<span class='warning'>[wolf] violently grabs [living]!</span>", \
+													"<span class='userdanger'>You're grabbed violently by [wolf]!</span>", "<span class='hear'>You hear sounds of aggressive fondling!</span>", COMBAT_MESSAGE_RANGE, wolf)
+									to_chat(wolf, "<span class='danger'>You violently grab [living]!</span>")
 								return
 							else
 								UnarmedAttack(A)
