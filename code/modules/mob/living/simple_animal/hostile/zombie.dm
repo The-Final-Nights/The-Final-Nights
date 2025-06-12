@@ -25,84 +25,37 @@
 	speed = 1
 	AIStatus = AI_OFF
 	lastattacker = null
-	var/mob/living/target_to_zombebe
-	var/last_zombie_ai_check = 0
 	var/mob/living/last_attacker = null
 
 /mob/living/simple_animal/hostile/zombie/Destroy()
-	. = ..()
-	if(lastattacker)
-		var/mob/living/H = lastattacker
-		if(last_attacker != null)
-			H = last_attacker
-			last_attacker = null
-		if(H.mind && H.masquerade < 5 && get_area_name(H) == "Graveyard")
-			if(H.killedzombies < 9)
-				H.killedzombies++
-				to_chat(H, span_notice(":Graveyard Duty: Zombies killed: [H.killedzombies]/10."))
-			else
-				H.killedzombies = 0
-				H.masquerade += 1
-				to_chat(H, span_notice("You slew 10 undead. Masquerade Point Restored."))
-				message_admins("[H] has improved their masquerade by killing Zombies in the graveyard.")
-	SSgraveyard.alive_zombies = max(0, SSgraveyard.alive_zombies-1)
+	var/datum/component/graveyard_zombie/comp = GetComponent(/datum/component/graveyard_zombie)
+	if(comp)
+		comp.on_death() //GraveYardDuty, graveyard.dm
+	SSgraveyard.alive_zombies = max(0, SSgraveyard.alive_zombies - 1)
 	GLOB.zombie_list -= src
-
-//punch attack
-/mob/living/simple_animal/hostile/zombie/attack_hand(mob/living/user)
-	lastattacker = user
-	. = ..()
-//melee weapon
-/mob/living/simple_animal/hostile/zombie/attackby(obj/item/I, mob/living/user, params)
-	lastattacker = user
-	last_attacker = lastattacker
-	. = ..()
-//bullets
-/mob/living/simple_animal/hostile/bullet_act(obj/projectile/P)
-	if(P.firer)
-		lastattacker = P.firer
 	return ..()
 
-/mob/living/simple_animal/hostile/zombie/Initialize()
-	. = ..()
-	GLOB.zombie_list += src
+// punch attack
+/mob/living/simple_animal/hostile/zombie/attack_hand(mob/living/user)
+	var/mob/living/H = user
+	last_attacker = H
+	return ..()
 
-//This runs only on the graveyard zombies, manged by the file, za_rozziu.dm, I'll change that file to zombie_graveyard or something.
-/mob/living/simple_animal/hostile/zombie/proc/graveyard_ai()
-	// Runs every 2 seconds
-	// Check for living targets in the area, prioritizes attacking them.
-	for(var/mob/living/L in oviewers(6, src))
-		if(!iszomboid(L))
-			target_to_zombebe = L
-			break
-		else
-			target_to_zombebe = GLOB.vampgate
+// melee weapon
+/mob/living/simple_animal/hostile/zombie/attackby(obj/item/I, mob/living/user, params)
+	var/mob/living/H = user
+	last_attacker = H
+	return ..()
 
-	// Move toward target if one exists
-	if(target_to_zombebe)
-		if(get_dist(src, target_to_zombebe) > 1)
-			var/move_cost = total_multiplicative_slowdown()
-			set_glide_size(DELAY_TO_GLIDE_SIZE(move_cost))
-
-			// Add chance to veer or idle slightly
-			if(prob(10)) // 10% chance to step randomly
-				var/list/dirs = list(NORTH, SOUTH, EAST, WEST)
-				step(src, pick(dirs))
-			else if(get_dist(src, target_to_zombebe) <= 5)
-				walk_to(src, target_to_zombebe, 1, move_cost)
-			else
-				step_towards(src, target_to_zombebe)
-		else
-			// Attack!
-			ClickOn(target_to_zombebe)
-			if(target_to_zombebe == GLOB.vampgate)
-				GLOB.vampgate.punched()
-		return
-
-	if(prob(10))
-		src.say(pick("Braaaains...", "Grrrrrr...", "Uuuuuurgh...", "Mmmmmm..."))
+// bullets
+/mob/living/simple_animal/hostile/zombie/bullet_act(obj/projectile/P)
+	if(P.firer)
+		var/mob/living/H = P.firer
+		last_attacker = H
+	return ..()
 
 
+//Other Zombies, not the graveyard ones. Graveyard.dm adds a graveyard zombie component to them.
 /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie
 	name = "Shambling Corpse"
 	desc = "When there is no more room in hell, the dead will walk on Earth."

@@ -31,10 +31,8 @@ SUBSYSTEM_DEF(zombiepool)
 			continue
 
 		//!NPC.route_optimisation()
-		//Sure lets do that.
 		if(MC_TICK_CHECK)
 			return
-		Z.graveyard_ai()
 
 /obj/structure/vampgate
 	name = "Graveyard Gate"
