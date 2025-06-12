@@ -124,10 +124,12 @@
 	var/celerity_visual = FALSE
 	var/potential = 0
 
+	COOLDOWN_DECLARE(frenzy_bite_cooldown)
+	COOLDOWN_DECLARE(frenzy_attack_cooldown)
 	var/in_frenzy = FALSE
 	var/frenzy_hardness = 6
 	var/last_frenzy_check = 0
-	var/atom/frenzy_target = null
+	var/mob/living/frenzy_target = null
 	var/last_experience = 0
 
 	var/last_rage_hit = 0
@@ -150,3 +152,9 @@
 	var/antifrenzy = FALSE
 
 	COOLDOWN_DECLARE(bleeding_message_cd)
+
+	//Custom examine text, set via IC verb.
+	var/custom_examine_message = null
+
+	//For ghosts
+	var/soul_state = SOUL_PRESENT
