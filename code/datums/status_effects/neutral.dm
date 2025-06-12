@@ -359,8 +359,8 @@
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/leaning
 
-/datum/status_effect/leaning/on_creation(mob/living/carbon/new_owner, atom/object, leaning_offset = 11)
+/datum/status_effect/leaning/on_creation(mob/living/carbon/new_owner, atom/object, leaning_offset = 11, forced_mob)
 	. = ..()
 	if(!.)
 		return
-	new_owner.start_leaning(object, leaning_offset)
+	new_owner.start_leaning(object, leaning_offset, forced_mob)
