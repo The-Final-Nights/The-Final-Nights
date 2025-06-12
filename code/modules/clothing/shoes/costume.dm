@@ -5,7 +5,6 @@
 	inhand_icon_state = "wizshoe"
 	strip_delay = 100
 	equip_delay_other = 100
-	armor_type = /datum/armor/shoes_roman
 	can_be_tied = FALSE
 
 /obj/item/clothing/shoes/griffin
@@ -17,11 +16,6 @@
 
 /datum/armor/shoes_roman
 	bio = 10
-
-/obj/item/clothing/shoes/griffin/Initialize(mapload)
-	. = ..()
-
-	create_storage(storage_type = /datum/storage/pockets/shoes)
 
 /obj/item/clothing/shoes/singery
 	name = "yellow performer's boots"
@@ -81,6 +75,7 @@
 	AddElement(/datum/element/gags_recolorable)
 	update_icon(UPDATE_OVERLAYS)
 
+/*
 /obj/item/clothing/shoes/glow/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
 	. = ..()
 	if(!isinhands)
@@ -89,6 +84,7 @@
 /obj/item/clothing/shoes/glow/update_overlays()
 	. = ..()
 	. += emissive_appearance('icons/obj/clothing/shoes.dmi', "glow_shoes_emissive", offset_spokesman = src, alpha = src.alpha)
+*/
 
 /obj/item/clothing/shoes/jackbros
 	name = "frosty boots"
@@ -108,22 +104,11 @@
 	icon_state = "green_jester_shoes"
 	inhand_icon_state = null
 
-/obj/item/clothing/shoes/jester_shoes/Initialize(mapload)
-	. = ..()
-
-	LoadComponent(/datum/component/squeak, list('sound/effects/jingle.ogg' = 1), 50, falloff_exponent = 20, step_delay_override = 0)
-
 /obj/item/clothing/shoes/ducky_shoes
 	name = "ducky shoes"
 	desc = "I got boots, that go *quack quack quack quack quack."
 	icon_state = "ducky_shoes"
 	inhand_icon_state = "ducky_shoes"
-
-/obj/item/clothing/shoes/ducky_shoes/Initialize(mapload)
-	. = ..()
-
-	create_storage(storage_type = /datum/storage/pockets/shoes)
-	LoadComponent(/datum/component/squeak, list('sound/effects/quack.ogg' = 1), 50, falloff_exponent = 20)
 
 /obj/item/clothing/shoes/ducky_shoes/equipped(mob/living/user, slot)
 	. = ..()

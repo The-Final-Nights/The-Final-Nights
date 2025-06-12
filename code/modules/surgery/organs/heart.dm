@@ -1,6 +1,7 @@
 /obj/item/organ/heart
 	name = "heart"
 	desc = "I feel bad for the heartless bastard who lost this."
+	base_icon_state = "heart"
 	icon_state = "heart-on"
 	illegal = TRUE
 	cost = 750

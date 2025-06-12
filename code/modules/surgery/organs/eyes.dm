@@ -94,6 +94,13 @@
 	actions_types = list(/datum/action/item_action/organ_action/use)
 	var/night_vision = TRUE
 
+/obj/item/organ/eyes/night_vision/Insert(mob/living/carbon/M, special = FALSE)
+	. = ..()
+	ADD_TRAIT(M, TRAIT_ALT_NIGHT_VISION, ORGAN_TRAIT)
+
+/obj/item/organ/eyes/night_vision/Remove(mob/living/carbon/M, special = FALSE)
+	REMOVE_TRAIT(M, TRAIT_ALT_NIGHT_VISION, ORGAN_TRAIT)
+
 /obj/item/organ/eyes/salubri
 	eye_icon_state = "salubri"
 /obj/item/organ/eyes/salubri

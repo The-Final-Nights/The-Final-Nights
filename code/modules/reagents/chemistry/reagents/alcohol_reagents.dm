@@ -298,8 +298,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_icon_state = "wineglass"
 	glass_name = "glass of wine"
 	glass_desc = "A very classy looking drink."
-	shot_glass_icon_state = "shotglassred"
-	empty_glass_icon_state = "wine_glass"
 
 /datum/reagent/consumable/ethanol/wine/wine_glass
 	name = "red wine"
