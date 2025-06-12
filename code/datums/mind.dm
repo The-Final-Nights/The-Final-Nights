@@ -54,6 +54,7 @@
 	var/holy_role = NONE //is this person a chaplain or admin role allowed to use bibles, Any rank besides 'NONE' allows for this.
 
 	var/mob/living/enslaved_to //If this mind's master is another mob (i.e. adamantine golems)
+	var/mob/living/ingested_blood //Used for allowing discipline teaching.
 	var/datum/language_holder/language_holder
 	var/unconvertable = FALSE
 	var/late_joiner = FALSE
@@ -441,6 +442,9 @@
 	if(creator.mind.special_role)
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
 		to_chat(current, "<span class='userdanger'>Despite your creator's current allegiances, your true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless your creator's body is destroyed.</span>")
+
+/datum/mind/proc/link_blood_of_creator(mob/living/creator)
+	ingested_blood = creator
 
 /datum/mind/proc/show_memory(mob/recipient, window=1)
 	if(!recipient)

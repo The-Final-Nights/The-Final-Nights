@@ -461,22 +461,22 @@
 		if (iskindred(src) && is_face_visible())
 			switch(clane.alt_sprite)
 				if ("nosferatu")
-					msg += "<span class='boldwarning'>[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!</span></b><br>"
+					msg += span_warning("[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!<br>")
 				if ("gargoyle")
-					msg += "<span class='boldwarning'><b>[p_they(TRUE)] seem[p_s()] to be made out of stone!</span></b><br>"
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] to be made out of stone!<br>")
 				if ("kiasyd")
 					if (!is_eyes_covered())
-						msg += "<span class='boldwarning'><b>[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!</span></b><br>"
+						msg += span_boldwarning("[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!</b><br>")
 				if ("rotten1")
-					msg += "<span class ='warning'>[p_they(TRUE)] seem[p_s()] oddly gaunt.</span><br>"
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] oddly gaunt.<br>")
 				if ("rotten2")
-					msg += "<span class ='warning'>[p_they(TRUE)] [p_have()] a corpselike complexion.</span><br>"
+					msg += span_warning("[p_they(TRUE)] [p_have()] a corpselike complexion.<br>")
 				if ("rotten3")
-					msg += "<span class='boldwarning'>[p_they(TRUE)] [p_are()] a decayed corpse!</span></b><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a decayed corpse!<br>")
 				if ("rotten4")
-					msg += "<span class='boldwarning'>[p_they(TRUE)] [p_are()] a skeletonised corpse!</span></b><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a skeletonised corpse!</b><br>")
 			if (HAS_TRAIT(src, TRAIT_PERMAFANGS))
-				msg += "<span class='warning'>[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>"
+				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
