@@ -11,41 +11,49 @@
 /obj/necrorune/locate/complete()
 
 	var/chosen_name = tgui_input_text(usr, "Invoke the true name of the soul you seek:", "Minestra di Morte")
+	var/target = find_target(chosen_name)
 
-	for(var/mob/target in GLOB.player_list) //there's probably a better way to do all of this
+	if(!target)
+		to_chat(usr, span_warning("No such soul is present beyond the Shroud, nor here in the Skinlands!"))
+		return
+	
+	var/area/targetarea = get_area(target)
 
-		if(target.real_name != chosen_name)
-			to_chat(usr, span_warning("No such soul is present beyond the Shroud, nor here in the Skinlands!"))
-			return
+	if(isavatar(target))
+		to_chat(usr, span_ghostalert("This soul has bridged the two realities - their astral projection wanders [targetarea.name]."))
+		playsound(loc, 'code/modules/wod13/sounds/necromancy1on.ogg', 50, FALSE)
+		qdel(src)
+		return
 
-		var/area/targetarea = get_area(target)
+	if(isobserver(target))
+		to_chat(usr, span_ghostalert("This soul has departed the realm of the living - they wander [targetarea.name]."))
+		playsound(loc, 'code/modules/wod13/sounds/necromancy1off.ogg', 50, FALSE)
+		qdel(src)
+		return
 
-		if(isavatar(target))
-			to_chat(usr, span_ghostalert("This soul has bridged the two realities - their astral projection wanders [targetarea.name]."))
+	if(isliving(target))
+		var/mob/living/livetarget = target
+		if(livetarget.stat != DEAD)
+			to_chat(usr, span_ghostalert("This soul yet persists in the Skinlands at [targetarea.name]."))
 			playsound(loc, 'code/modules/wod13/sounds/necromancy1on.ogg', 50, FALSE)
-			qdel(src)
-			return
-
-		if(isobserver(target))
-			to_chat(usr, span_ghostalert("This soul has departed the realm of the living - they wander [targetarea.name]."))
-			playsound(loc, 'code/modules/wod13/sounds/necromancy1off.ogg', 50, FALSE)
-			qdel(src)
-			return
-
-		if(isliving(target))
-			if(target.stat != DEAD)
-				to_chat(usr, span_ghostalert("This soul yet persists in the Skinlands at [targetarea.name]."))
-				playsound(loc, 'code/modules/wod13/sounds/necromancy1on.ogg', 50, FALSE)
 			
-				if(target.stat > SOFT_CRIT)
-					to_chat(usr, span_ghostalert("Their connection to this is realm weak, and fading. Death waits for them."))
-				var/mob/living/necromancer = target
-				if(necromancer.necromancy_knowledge) //other necromancers catch onto it if targeted
-					var/area/userarea = get_area(usr)
-					to_chat(target, span_notice("A chill and a whisper. A fellow necromancer has sought out your soul - their own calling out from <b>[userarea.name]</b>."))
-				qdel(src)
-				return
+			if(livetarget.stat > SOFT_CRIT)
+				to_chat(usr, span_ghostalert("Their connection to this is realm weak, and fading. Death waits for them."))
+			if(livetarget.necromancy_knowledge) //other necromancers catch onto it if targeted
+				var/area/userarea = get_area(usr)
+				to_chat(livetarget, span_notice("A chill and a whisper. A fellow necromancer has sought out your soul - their own calling out from <b>[userarea.name]</b>."))
+			qdel(src)
+			return
 
-			if (target.stat == DEAD) //for when they haven't ghosted yet
-				to_chat(usr, span_ghostalert("This soul remains caged to its perished vessel at [targetarea.name]."))
-				qdel(src)
+		if (livetarget.stat == DEAD) //for when they haven't ghosted yet
+			to_chat(usr, span_ghostalert("This soul remains caged to its perished vessel at [targetarea.name]."))
+			qdel(src)
+			return
+
+/obj/necrorune/locate/proc/find_target(chosen_name)
+	var/mob/target_found
+	for(var/mob/target in GLOB.player_list)
+		if(target.real_name == chosen_name)
+			target_found = target
+			break
+	return target_found 
