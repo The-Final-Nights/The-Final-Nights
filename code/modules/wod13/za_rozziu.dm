@@ -101,12 +101,15 @@ SUBSYSTEM_DEF(zombiepool)
 		if(!repairing)
 			repairing = TRUE
 			if(do_mob(user, src, 5 SECONDS))
+				if(punches_to_break >= 1)
+					to_chat(user, "<span class='notice'>You repair some dents on [src].</span>")
+				if(punches_to_break == 0)
+					to_chat(user, "<span class='notice'>You repair some dents on [src], and you close it.</span>")
 				punches_to_break = min(punches_to_break+25, initial(punches_to_break))
 				if(punches_to_break)
 					density = TRUE
 					icon_state = "gate"
 				playsound(src, 'code/modules/wod13/sounds/repair.ogg', 50, TRUE)
-				to_chat(user, "<span class='notice'>You repair some dents on [src].</span>")
 				repairing = FALSE
 			else
 				to_chat(user, "<span class='warning'>You failed to repair [src].</span>")
