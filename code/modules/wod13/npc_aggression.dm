@@ -3,7 +3,7 @@
 		walk(src,0)
 	if(victim == src)
 		return
-	if (istype(victim, /mob/living/carbon/human/npc))
+	if (istype(victim, /mob/living/carbon/human/npc) && !istype(victim, /mob/living/carbon/human/npc/sabbat)) // Don't aggro other NPCs, unless they're Sabbat
 		return
 	if((stat != DEAD) && !HAS_TRAIT(victim, TRAIT_DEATHCOMA))
 		danger_source = victim
