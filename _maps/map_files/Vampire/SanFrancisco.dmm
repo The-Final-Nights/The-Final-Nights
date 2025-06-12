@@ -185,15 +185,9 @@
 	icon_state = "piping3";
 	pixel_y = 32
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/machinery/light/small{
 	pixel_y = 32
 	},
-/obj/structure/chair/sofa/old/right,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_plating3"
 	},
@@ -12416,6 +12410,11 @@
 	pixel_x = 4
 	},
 /obj/underplate,
+/obj/item/kirbyplants{
+	icon_state = "plant4";
+	pixel_y = 18;
+	pixel_x = 11
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
@@ -12424,7 +12423,7 @@
 	fire_controled = 1
 	})
 "cPT" = (
-/obj/structure/chair/sofa{
+/obj/structure/chair/sofa/old{
 	dir = 8
 	},
 /turf/open/floor/plating/rough,
@@ -12508,7 +12507,7 @@
 /turf/open/floor/plating/circled,
 /area/vtm/interior)
 "cRe" = (
-/obj/structure/chair/sofa/corner{
+/obj/structure/chair/sofa/old/corner{
 	dir = 4
 	},
 /obj/machinery/light/dim{
@@ -19190,6 +19189,9 @@
 /obj/structure/sink{
 	pixel_y = 16
 	},
+/obj/effect/decal/stock{
+	dir = 1
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial6"
 	},
@@ -19678,7 +19680,7 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/oldchurch)
 "eDO" = (
-/obj/structure/chair/sofa/right,
+/obj/structure/chair/sofa/old/right,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "eDS" = (
@@ -21221,8 +21223,7 @@
 /obj/machinery/light/small{
 	dir = 8;
 	pixel_x = 16;
-	color = "#ED8181";
-	brightness = 4
+	color = "#ED8181"
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/techshop)
@@ -33280,7 +33281,7 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 6
 	},
-/obj/structure/chair/sofa/left{
+/obj/structure/chair/sofa/old/left{
 	dir = 8
 	},
 /turf/open/floor/plating/vampcarpet,
@@ -34038,10 +34039,7 @@
 /obj/machinery/light{
 	pixel_y = 30
 	},
-/turf/open/floor/plating/vampplating/mono{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/techshop)
 "iaj" = (
 /obj/structure/rack/tacobell/horizontal,
@@ -34427,8 +34425,7 @@
 	dir = 1
 	},
 /obj/machinery/light/small{
-	pixel_y = 32;
-	brightness = 4
+	pixel_y = 32
 	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
@@ -34531,8 +34528,10 @@
 	lockpick_difficulty = 6;
 	name = "house-1"
 	},
-/turf/open/floor/plating/rough/cave{
-	icon_state = "stone8"
+/obj/effect/decal/bordur,
+/obj/effect/decal/rugs,
+/turf/open/floor/plating/rough{
+	icon_state = "carpet_black"
 	},
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -34951,7 +34950,7 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police/fed)
 "inu" = (
-/obj/structure/chair/sofa{
+/obj/structure/chair/sofa/old{
 	dir = 1
 	},
 /turf/open/floor/plating/concrete,
@@ -37469,8 +37468,13 @@
 "iSH" = (
 /obj/structure/closet,
 /obj/structure/coclock,
-/obj/item/clothing/under/vampire/janitor,
+/obj/item/clothing/glasses/sunglasses/garb,
+/obj/item/clothing/glasses/sunglasses/gar,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas/space_ninja,
 /obj/item/clothing/under/vampire/military_fatigues,
+/obj/item/clothing/under/vampire/graveyard,
+/obj/item/clothing/under/vampire/bubway,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial6"
 	},
@@ -39123,11 +39127,11 @@
 	},
 /area/vtm/interior/trujah)
 "jmQ" = (
-/obj/structure/table/wood,
 /obj/machinery/light/small/pink{
 	dir = 8;
 	pixel_x = 16
 	},
+/obj/structure/table/wood,
 /turf/open/floor/plating/concrete,
 /area/vtm/nosferatu_office{
 	color = "#f76abf"
@@ -39286,7 +39290,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/baali)
 "joj" = (
-/obj/structure/chair/sofa/right,
+/obj/structure/chair/sofa/old/right,
 /obj/item/toy/plush/human,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
@@ -41819,13 +41823,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
 "jTK" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/coclock,
-/obj/structure/chair/sofa/old/right,
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone4"
 	},
@@ -43871,7 +43869,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
 "kvc" = (
-/obj/structure/chair/sofa/corner,
+/obj/structure/chair/sofa/old/corner,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial3"
 	},
@@ -43923,7 +43921,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "kvR" = (
-/obj/structure/chair/sofa/corner,
+/obj/structure/chair/sofa/old/corner,
 /obj/structure/coclock,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
@@ -44204,6 +44202,9 @@
 /obj/machinery/washing_machine{
 	pixel_y = 15;
 	density = 0
+	},
+/obj/structure/window{
+	dir = 4
 	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
@@ -45292,6 +45293,7 @@
 /obj/item/melee/vampirearms/knife,
 /obj/item/melee/vampirearms/knife,
 /obj/item/storage/box/lights/mixed,
+/obj/effect/decal/trash,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -46555,8 +46557,7 @@
 "lbI" = (
 /obj/machinery/griddle,
 /obj/machinery/light/small{
-	pixel_y = 32;
-	brightness = 4
+	pixel_y = 32
 	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/techshop)
@@ -48919,7 +48920,7 @@
 	fire_controled = 1
 	})
 "lGA" = (
-/obj/structure/chair/sofa/left{
+/obj/structure/chair/sofa/old/left{
 	dir = 8
 	},
 /turf/open/floor/plating/industrial{
@@ -49142,7 +49143,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
 "lII" = (
-/obj/structure/chair/sofa/left,
+/obj/structure/chair/sofa/old/left,
 /obj/effect/decal/litter,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
@@ -49208,6 +49209,13 @@
 	},
 /turf/open/space/basic,
 /area/vtm/sewer/nosferatu_town)
+"lJs" = (
+/obj/effect/decal/trash,
+/turf/open/floor/plating/concrete,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "lJy" = (
 /obj/structure/vampfence/rich,
 /turf/open/floor/plating/vampgrass,
@@ -49368,7 +49376,7 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/supply)
 "lLr" = (
-/obj/structure/chair/sofa/corner{
+/obj/structure/chair/sofa/old/corner{
 	dir = 8
 	},
 /obj/machinery/light/small/red{
@@ -52866,19 +52874,6 @@
 /obj/structure/lattice/catwalk,
 /turf/open/openspace,
 /area/vtm)
-"mDq" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/sofa/old/right,
-/turf/open/floor/plating/rough,
-/area/vtm/sewer/nosferatu_bar{
-	color = "#2596be";
-	fire_controled = 1;
-	music = null
-	})
 "mDr" = (
 /obj/structure/table,
 /obj/vampire_computer,
@@ -55234,6 +55229,7 @@
 	dir = 4;
 	pixel_y = 4
 	},
+/obj/structure/window,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial6"
 	},
@@ -55987,7 +55983,7 @@
 /area/vtm/supply)
 "nnu" = (
 /obj/structure/coclock,
-/obj/structure/chair/sofa/right,
+/obj/structure/chair/sofa/old/right,
 /obj/item/vamp/keys/nosferatu,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial4"
@@ -56826,15 +56822,9 @@
 	pixel_x = -2
 	},
 /obj/item/vtm_artifact/rand,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/machinery/light/small/red{
 	pixel_y = 24
 	},
-/obj/structure/chair/sofa/old/left,
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -58308,7 +58298,7 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
 	},
-/obj/structure/chair/sofa/corner,
+/obj/structure/chair/sofa/old/corner,
 /obj/effect/decal/litter,
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/sewer/nosferatu_town)
@@ -58941,7 +58931,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "nVe" = (
-/obj/structure/chair/sofa/right{
+/obj/structure/chair/sofa/old/right{
 	dir = 8
 	},
 /turf/open/floor/plating/concrete,
@@ -58975,6 +58965,7 @@
 	dir = 8;
 	pixel_y = 12
 	},
+/obj/structure/window,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
@@ -61394,7 +61385,7 @@
 /turf/open/floor/plating/roofwalk,
 /area/vtm)
 "oyK" = (
-/obj/structure/chair/sofa/left{
+/obj/structure/chair/sofa/old/left{
 	dir = 8
 	},
 /obj/effect/decal/trash,
@@ -63729,7 +63720,7 @@
 /turf/open/floor/plating/asphalt,
 /area/vtm/financialdistrict/construction)
 "oZI" = (
-/obj/structure/chair/sofa/corner{
+/obj/structure/chair/sofa/old/corner{
 	dir = 4
 	},
 /obj/effect/decal/litter,
@@ -66057,6 +66048,11 @@
 	pixel_x = -32
 	},
 /obj/structure/chair/office,
+/obj/item/kirbyplants{
+	icon_state = "plant-18";
+	pixel_y = 23;
+	pixel_x = -10
+	},
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
@@ -70928,7 +70924,7 @@
 	fire_controled = 1
 	})
 "qIF" = (
-/obj/structure/chair/sofa/right,
+/obj/structure/chair/sofa/old/right,
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/sewer/nosferatu_town)
 "qII" = (
@@ -72992,14 +72988,8 @@
 	dir = 5
 	},
 /obj/vampire_computer,
-/obj/structure/table/wood{
-	pixel_x = 0;
-	pixel_y = 0
-	},
-/turf/open/floor/plating/vampcarpet{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/obj/structure/table/wood,
+/turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/techshop)
 "rgl" = (
 /obj/structure/lamppost/sidewalk,
@@ -75878,7 +75868,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/glasswalker)
 "rND" = (
-/obj/structure/chair/sofa/left{
+/obj/structure/chair/sofa/old/left{
 	dir = 1
 	},
 /turf/open/floor/plating/concrete,
@@ -76071,6 +76061,9 @@
 	dir = 1
 	},
 /obj/item/soap/nanotrasen,
+/obj/structure/window{
+	dir = 4
+	},
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
@@ -76084,8 +76077,7 @@
 /area/vtm/cabaret)
 "rQu" = (
 /obj/machinery/light/small{
-	pixel_y = 32;
-	brightness = 4
+	pixel_y = 32
 	},
 /obj/structure/table,
 /obj/machinery/bitcoin_miner,
@@ -76795,7 +76787,7 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/financialdistrict/library)
 "rXp" = (
-/obj/structure/chair/sofa/left,
+/obj/structure/chair/sofa/old/left,
 /obj/structure/coclock,
 /obj/item/toy/plush/unicorn,
 /turf/open/floor/plating/rough,
@@ -82622,7 +82614,7 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/supply)
 "tuc" = (
-/obj/structure/chair/sofa{
+/obj/structure/chair/sofa/old{
 	dir = 4
 	},
 /obj/effect/decal/trash{
@@ -83952,13 +83944,7 @@
 	dir = 4
 	},
 /obj/item/bong,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/coclock,
-/obj/structure/chair/sofa/old/left,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -84849,6 +84835,7 @@
 /obj/machinery/light/warm{
 	dir = 4
 	},
+/obj/structure/window,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
@@ -85580,6 +85567,14 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
+"ugd" = (
+/obj/structure/window{
+	dir = 4
+	},
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial8"
+	},
+/area/vtm/sewer/nosferatu_town)
 "ugp" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/rough/cave,
@@ -88867,13 +88862,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/community)
 "uVf" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/coclock,
-/obj/structure/chair/sofa/old/left,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -90180,7 +90169,7 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
 	},
-/obj/structure/chair/sofa{
+/obj/structure/chair/sofa/old{
 	dir = 8
 	},
 /turf/open/floor/plating/vampcarpet,
@@ -90389,7 +90378,7 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/setite)
 "vml" = (
-/obj/structure/chair/sofa{
+/obj/structure/chair/sofa/old{
 	dir = 4
 	},
 /turf/open/floor/plating/industrial{
@@ -91605,6 +91594,9 @@
 /obj/structure/sink{
 	pixel_y = 16
 	},
+/obj/effect/decal/stock{
+	dir = 1
+	},
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_plating3"
 	},
@@ -92611,7 +92603,7 @@
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior/banu)
 "vMx" = (
-/obj/structure/chair/sofa/right{
+/obj/structure/chair/sofa/old/right{
 	dir = 4
 	},
 /obj/effect/decal/pallet,
@@ -94163,7 +94155,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry/basement)
 "weT" = (
-/obj/structure/chair/sofa/right{
+/obj/structure/chair/sofa/old/right{
 	dir = 4
 	},
 /obj/machinery/light/small/pink{
@@ -94704,7 +94696,7 @@
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/fishermanswharf/lower)
 "wmp" = (
-/obj/structure/chair/sofa/left,
+/obj/structure/chair/sofa/old/left,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "wmA" = (
@@ -96858,13 +96850,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/graffiti,
-/obj/structure/chair/sofa/old/left,
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone4"
 	},
@@ -99110,6 +99096,9 @@
 /obj/structure/sink{
 	pixel_y = 16
 	},
+/obj/effect/decal/stock{
+	dir = 1
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
@@ -99391,8 +99380,7 @@
 /obj/structure/table,
 /obj/machinery/light/small{
 	pixel_y = 32;
-	color = "#ED8181";
-	brightness = 4
+	color = "#ED8181"
 	},
 /obj/item/ammo_box/vampire/c12g/buck{
 	pixel_y = 6
@@ -101108,12 +101096,6 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/sofa/old/right,
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren{
@@ -110418,7 +110400,7 @@ lmP
 hxY
 nfc
 etH
-mDq
+rav
 pyh
 rvD
 rav
@@ -116052,7 +116034,7 @@ mpu
 jdV
 hrB
 eKB
-eKB
+lJs
 gyx
 mFe
 mFe
@@ -124309,7 +124291,7 @@ eir
 eir
 pEh
 fcP
-efK
+ugd
 wJn
 nYS
 dhc
