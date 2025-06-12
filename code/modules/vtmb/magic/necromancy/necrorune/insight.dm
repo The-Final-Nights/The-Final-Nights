@@ -33,6 +33,13 @@
 
 	var/permission = null
 
+	if(isnpc(victim))
+		to_chat(last_activator, span_notice("[victim.name] is a waning, base Drone. There is no greater knowledge to gleam from this one."))
+		to_chat(last_activator, span_notice("<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]"))
+		to_chat(last_activator, span_notice("Last melee attacker: [victim.lastattacker]"))
+		qdel(src)
+		return
+
 	if(victim_ghost)
 		permission = tgui_input_list(victim_ghost, "[last_activator.real_name] wishes to know of your passing. Will you give answers?", "Select", list("Yes","No","I don't recall"), "No", 1 MINUTES)
 
@@ -50,9 +57,3 @@
 
 	else if(permission == "No")
 		to_chat(last_activator, span_danger("The wraith turns from you. It will not surrender its secrets."))
-
-	if(isnpc(victim))
-		to_chat(last_activator, span_notice("[victim.name] is a waning, base Drone. There is no greater knowledge to gleam from this one."))
-		to_chat(last_activator, span_notice("<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]"))
-		to_chat(last_activator, span_notice("Last melee attacker: [victim.lastattacker]"))
-		qdel(src)
