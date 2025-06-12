@@ -236,7 +236,7 @@
 
 /obj/machinery/drone_dispenser/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
-		new /obj/item/stack/sheet/metal(loc, 5)
+		new /obj/item/stack/sheet/iron(loc, 5)
 	qdel(src)
 
 #undef DRONE_PRODUCTION
