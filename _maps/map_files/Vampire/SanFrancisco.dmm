@@ -21124,6 +21124,10 @@
 	id = 5467;
 	name = "Warrens Gate"
 	},
+/obj/machinery/light/small/pink{
+	dir = 1;
+	pixel_x = 10
+	},
 /turf/closed/wall/vampwall/junk/low,
 /area/vtm/sewer/nosferatu_bar{
 	color = "#2596be";
@@ -24672,19 +24676,6 @@
 	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/f4)
-"fLP" = (
-/obj/machinery/light/small/pink{
-	dir = 4;
-	pixel_x = -16
-	},
-/turf/open/floor/plating/industrial{
-	icon_state = "industrial8"
-	},
-/area/vtm/sewer/nosferatu_bar{
-	color = "#2596be";
-	fire_controled = 1;
-	music = null
-	})
 "fLV" = (
 /turf/open/floor/plasteel/stairs/left,
 /area/vtm/church/interior/haven)
@@ -25581,10 +25572,6 @@
 	dir = 4
 	},
 /obj/effect/decal/graffiti,
-/obj/machinery/light/small/pink{
-	dir = 4;
-	pixel_x = -16
-	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_bar{
 	color = "#2596be";
@@ -33616,6 +33603,10 @@
 /obj/structure/chair/old/tzimisce{
 	dir = 4
 	},
+/obj/machinery/light/small/pink{
+	dir = 4;
+	pixel_x = -16
+	},
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -35430,10 +35421,6 @@
 /area/vtm/chinatown)
 "isM" = (
 /obj/machinery/jukebox,
-/obj/machinery/light/small/pink{
-	dir = 8;
-	pixel_x = 16
-	},
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -37508,7 +37495,6 @@
 /obj/structure/coclock,
 /obj/item/clothing/glasses/sunglasses/gar,
 /obj/item/clothing/mask/gas,
-/obj/item/clothing/mask/gas/space_ninja,
 /obj/item/clothing/under/vampire/military_fatigues,
 /obj/item/clothing/under/vampire/graveyard,
 /obj/item/clothing/under/vampire/bubway,
@@ -37810,6 +37796,15 @@
 /obj/item/clothing/under/vampire/bouncer,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
+"iVH" = (
+/obj/effect/decal/wallpaper/grey/low,
+/obj/machinery/light/small/red,
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_bar{
+	color = "#2596be";
+	fire_controled = 1;
+	music = null
+	})
 "iVJ" = (
 /obj/effect/decal/bordur{
 	dir = 9
@@ -66494,6 +66489,17 @@
 /obj/structure/coclock,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/clinic/haven)
+"pGU" = (
+/obj/machinery/light/small/pink{
+	dir = 8;
+	pixel_x = 16
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/sewer/nosferatu_bar{
+	color = "#2596be";
+	fire_controled = 1;
+	music = null
+	})
 "pGW" = (
 /obj/structure/vampdoor/simple{
 	dir = 8
@@ -66998,6 +67004,15 @@
 /obj/effect/decal/wallpaper/light,
 /turf/closed/wall/vampwall/junk/alt,
 /area/vtm)
+"pLQ" = (
+/obj/effect/decal/wallpaper/grey/low,
+/obj/machinery/light/dim,
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_bar{
+	color = "#2596be";
+	fire_controled = 1;
+	music = null
+	})
 "pLS" = (
 /obj/structure/sink{
 	pixel_y = 9;
@@ -97856,6 +97871,10 @@
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 1
 	},
+/obj/machinery/light/small/pink{
+	dir = 4;
+	pixel_x = -16
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial5"
 	},
@@ -108440,7 +108459,7 @@ ast
 nfc
 pfJ
 mHn
-nfc
+pLQ
 qzq
 unr
 lBc
@@ -109470,7 +109489,7 @@ hUo
 rav
 kLE
 wYR
-fLP
+kmZ
 yjc
 unr
 cGw
@@ -110235,7 +110254,7 @@ nfc
 ras
 pyh
 rav
-nfc
+iVH
 klJ
 koW
 pyh
@@ -110751,7 +110770,7 @@ tKd
 rav
 nfc
 isM
-rav
+pGU
 pyh
 vXJ
 prO
