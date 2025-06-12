@@ -4,21 +4,21 @@ SUBSYSTEM_DEF(graveyard)
 	wait = 3000
 	priority = FIRE_PRIORITY_DEFAULT
 
-	var/max_graveyard_zombies = 20
+	var/max_graveyard_zombies = 50
 	var/alive_zombies = 0
 	var/lost_points = 0
 	var/clear_runs = 0
 	var/list/graves = list()
 	var/total_good = 0
 	var/total_bad = 0
-	var/zombie_type_targets = list("default"=6, "siege"=6, "shrieker"=3, "wonderer"=6)
+	var/zombie_type_targets = list("default"=10, "siege"=6, "shrieker"=3, "wanderer"=10)
 
-// Core update loop
+//
+//Graveyard Core, and update loop, every 5 minutes.
+//
 /datum/controller/subsystem/graveyard/fire()
 	if (!has_active_keeper()) return
-
-	var/spawned_counts = list("default"=0, "siege"=0, "shrieker"=0, "wonderer"=0)
-
+	var/spawned_counts = list("default"=0, "siege"=0, "shrieker"=0, "wanderer"=0)
 	if(alive_zombies < 10)
 		announce_to_keepers("WALKING DEAD ARE RISING...")
 		var/current_counts = get_current_zombie_counts()
@@ -40,7 +40,6 @@ SUBSYSTEM_DEF(graveyard)
 
 	message_admins("Graveyard Spawn Summary: [json_encode(spawned_counts)]")
 
-// Support functions
 /datum/controller/subsystem/graveyard/proc/has_active_keeper()
 	for(var/mob/living/carbon/human/L in GLOB.player_list)
 		if(L?.mind?.assigned_role == "Graveyard Keeper" && L.client)
@@ -51,14 +50,14 @@ SUBSYSTEM_DEF(graveyard)
 	var/counts = list()
 	for(var/mob/living/simple_animal/hostile/zombie/Z in GLOB.zombie_list)
 		var/datum/component/graveyard_zombie/comp = Z.GetComponent(/datum/component/graveyard_zombie)
-		if(comp) counts[comp.zombie_behavior] = (counts[comp.zombie_behavior] || 0) + 1
+		if(comp) counts[comp.zombie_type] = (counts[comp.zombie_type] || 0) + 1
 	return counts
 
 /datum/controller/subsystem/graveyard/proc/spawn_graveyard_zombie(atom/grave, behavior)
 	var/turf/T = get_turf(grave)
 	var/Z = new /mob/living/simple_animal/hostile/zombie(T)
 	if(Z)
-		new /datum/component/graveyard_zombie(Z, list("zombie_behavior" = behavior))
+		new /datum/component/graveyard_zombie(Z, list("zombie_type" = behavior))
 		GLOB.zombie_list += Z
 	return Z
 
@@ -75,53 +74,36 @@ SUBSYSTEM_DEF(graveyard)
 			count++
 	return count
 
-
 //
 // Graveyard Zombie Component
 //
-
 /datum/component/graveyard_zombie
 	var/mob/living/simple_animal/hostile/zombie/owner
 	var/loop_started = FALSE
-	var/zombie_behavior = "default"
+	var/zombie_type = "default"
 	var/can_rally = TRUE
 	var/visiting_grave = FALSE
-	var/current_task = "idle"
-
+	var/current_task = "wander"
+	var/mob/living/ai_target = null
 	New(atom/parent, list/args)
 		..()
 		owner = parent
-		zombie_behavior = args["zombie_behavior"] || "default"
+		zombie_type = args["zombie_type"] || "default"
 		owner.name = setup_graveyardzombie()
 		StartBehaviorLoop()
-		message_admins("zombie [owner] spawned with behavior: [zombie_behavior]")
-
 	proc/setup_graveyardzombie()
 		var/names = list(
 			"default" = list("Zombu", "Zombie", "Corpse"),
 			"siege" = list("Siege Zombie", "Siege Corpse"),
 			"shrieker" = list("Shrieker", "Shrieking Zombie", "Screaming Corpse"),
-			"wonderer" = list("Shambling Corpse", "Wondering Zombie", "Wandering Corpse")
+			"wanderer" = list("Shambling Corpse", "wandering Zombie", "Wandering Corpse")
 		)
-		return pick(names[zombie_behavior] || list("Zombie"))
-
-	//Handles death of the zombie and rewards the last attacker if they are in the Graveyard area.
-	proc/on_death()
-		var/mob/living/H = owner.last_attacker
-		if(H && get_area_name(H) == "Graveyard")
-			H.killedzombies++
-			if(H.killedzombies >= 10)
-				H.killedzombies = 0
-				H.masquerade++
-				to_chat(H, "You slew 10 undead. Masquerade Point Restored.")
-			else
-				to_chat(H, "Graveyard Duty: Zombies killed: [H.killedzombies]/10.")
+		return pick(names[zombie_type] || list("Zombie"))
 
 
-//
-// Graveyard Zombie Behavior:
-//
-	//Prime the zombie behavior loop, which will run every 20 ticks if the zombie is alive.
+	//
+	// Graveyard Zombie Behavior: The "AI's", handles setting the Tasks, based on their contents.
+	//
 	proc/StartBehaviorLoop()
 		if(loop_started) return
 		loop_started = TRUE
@@ -129,64 +111,87 @@ SUBSYSTEM_DEF(graveyard)
 			while(ismob(owner) && !QDELETED(owner))
 				if(prob(5)) owner.say(pick("urrrgh...", "braaains...", "gruhhh..."))
 				RunBehavior()
-				sleep(20)
+				sleep(10)
 
-	/// Decides what  AI logic to run.
+	//AI's return the current task, tasks try to get done.
 	proc/RunBehavior()
-		switch(zombie_behavior)
-			if("default")   default_zombie_ai()
-			if("siege")     siege_zombie_ai()
-			if("shrieker")  shrieker_zombie_ai()
-			if("wonderer")  wonderer_zombie_ai()
-			else            default_zombie_ai()
+		ai_target = owner.locate_nearest_attack_target() //checks for valid attack targets
 
-	//Sets the zombie's current task and handles it accordingly until its done, or interupted.
+		// Global stumble chance for all zombies
+		if(prob(20)) // 20% chance to stumble
+			var/dir = pick(NORTH, SOUTH, EAST, WEST)
+			step(owner, dir)
+			if(prob(25)) // 25% chance to actually fall
+				owner.emote("trips and falls to the ground with a wet thud.")
+				owner.Paralyze(60 * 1)
+			return
+
+		switch(zombie_type)
+			if("default")   current_task = default_zombie_ai()
+			if("siege")     current_task = siege_zombie_ai()
+			if("shrieker")  current_task = shrieker_zombie_ai()
+			if("wanderer")  current_task = wanderer_zombie_ai()
+			else            current_task = "wander"
+		HandleTask(current_task)
+
+	//Sets the zombie's current task and handles it until its done, or interupts itself, etc.
 	proc/HandleTask(task)
 		switch(task)
-			if("attack")      owner.attack_target(owner.locate_nearest_living_target())
-			if("go_to_gate")  owner.path_attack_vampgate()
-			if("wonder")      owner.wonder_randomly()
-			if("flee_and_rally") owner.start_zombie_rally()
+			if("attack")          perform_attack() //attack until the target isn't worth attacking.
+			if("go_to_gate")      perform_gate_rush() //Rush to the gate, punch it to open it, walk through if open.
+			if("wander")          perform_wander() //wander around, maybe visit a grave and say something funny.
+			if("flee_and_rally")  perform_rally() //Screamers cause zombies near them to target, their target, and avoid the target, unless trapped, then attacks.
+	//There's many places to expand behaviors, this Tasks are the place to call the bare minimum behaviors needed in that tick.
+	proc/perform_attack()
+		owner.attack_target(ai_target)
+	proc/perform_gate_rush()
+		owner.charge_gate()
+	proc/perform_wander()
+		owner.wander_randomly()
+	proc/perform_rally()
+		owner.start_zombie_rally(ai_target)
+		owner.follow_at_range(ai_target)
 
-//
-// These are the actual "AI" They call HandleTask() when they need to.
-//
+	//
+	// GYZombie AI's, This is the BRAIN, and sets the Current Task based on conditions, and type of zombie. Like Attacking, Screaming, etc.
+	//
+
 /datum/component/graveyard_zombie/proc/default_zombie_ai()
-	var/mob/living/target = owner.locate_nearest_living_target()
-	if(target)
-		current_task = "attack"
-	else
-		current_task = "go_to_gate"
-	HandleTask(current_task)
+	if (ai_target) //if it has a target, keep attacking.
+		return "attack"
+	if (!ai_target && GLOB.vampgate) //No target, break the gate or walk through it to damage global masquerade.
+		return "go_to_gate"
+	else //if its stupid or broken, wander i guess
+		return "wander"
 
 /datum/component/graveyard_zombie/proc/siege_zombie_ai()
-	if(owner.last_attacker && get_dist(owner, owner.last_attacker) <= 7)
-		current_task = "attack"
+	if (ai_target)
+		return "attack"
+	if (!ai_target && GLOB.vampgate) //if they're far from the gate, then just wander, they might get there.
+		return "go_to_gate"
 	else
-		current_task = "go_to_gate"
-	HandleTask(current_task)
+		return "wander"
 
 /datum/component/graveyard_zombie/proc/shrieker_zombie_ai()
-	if(owner.locate_nearest_living_target())
-		current_task = "attack"
+	if (ai_target) //if i gets a target, it will try to avoid them, but stay close, calling other zombies to attack, attacks if cornered
+		return "flee_and_rally"
 	else
-		current_task = "wonder"
-	HandleTask(current_task)
+		return "wander"
 
-/datum/component/graveyard_zombie/proc/wonderer_zombie_ai()
-	if(owner.locate_nearest_living_target())
-		current_task = "attack"
+/datum/component/graveyard_zombie/proc/wanderer_zombie_ai()
+	if (ai_target) //sad little zombie that kicks rocks and mopes around the graveyard, meant for backing up skriekers, and populating the graveyard.
+		return "attack"
 	else
-		current_task = "wonder"
-	HandleTask(current_task)
+		return "wander"
 
 
 //
-// Graveyard Zombie Behaviors: Used to build tasks for the zombies, and to handle other actions.
+// Graveyard Zombie Shared Behaviors: used mostly for Performing tasks, some are support, some are the tasks themselves.
 //
+/// Finds the closest valid living target for the zombie to pursue. Only sets the target, the brain decides if it wants to attack, or something else.
 
-/// Finds the closest valid living target for the zombie to pursue.
-/mob/living/simple_animal/hostile/zombie/proc/locate_nearest_living_target()
+
+/mob/living/simple_animal/hostile/zombie/proc/locate_nearest_attack_target()
 	var/mob/living/closest
 	var/best_dist = 99
 	for(var/mob/living/M in view(7, src))
@@ -206,39 +211,69 @@ SUBSYSTEM_DEF(graveyard)
 	else
 		step_towards(src, target)
 
+
 /// Makes the zombie wander aimlessly, or occasionally visit a nearby grave.
-/mob/living/simple_animal/hostile/zombie/proc/wonder_randomly()
+/mob/living/simple_animal/hostile/zombie/proc/wander_randomly()
+	// Chance to initiate grave visiting task
+	if(prob(10))
+		start_grave_wander()
+		return
+
+	// Otherwise, 50% chance to stumble
+	if(prob(50))
+		var/dir = pick(NORTH, SOUTH, EAST, WEST)
+		step(src, dir)
+
+/mob/living/simple_animal/hostile/zombie/proc/start_grave_wander()
 	var/datum/component/graveyard_zombie/comp = src.GetComponent(/datum/component/graveyard_zombie)
-	if(!comp || comp.visiting_grave) return
-	if(prob(10) && length(SSgraveyard.graves))
-		var/list/nearby = list()
-		for(var/obj/vampgrave/G in SSgraveyard.graves)
-			if(get_dist(src, G) <= 20)
-				nearby += G
+	if(!comp) return
+	if(comp.visiting_grave) return
+	var/list/nearby = list()
+	for(var/obj/vampgrave/G in SSgraveyard.graves)
+		if(get_dist(src, G) <= 20)
+			nearby += G
+	if(!length(nearby)) return
+	var/obj/vampgrave/G = pick(nearby)
+	comp.visiting_grave = TRUE
+	spawn(0)
+		if(get_dist(src, G) <= 1)
+			sleep(20) // Already there, just linger
+		else
+			while(get_dist(src, G) > 1 && !QDELETED(G) && !QDELETED(src))
+				step_towards(src, G)
+				sleep(5)
+		// Linger behavior within a radius
+		var/turf/origin = get_turf(src)
+		for(var/i = 0, i < rand(4, 8), i++)
+			if(QDELETED(src) || QDELETED(G)) break
+			var/turf/T = get_turf(src)
+			if(get_dist(T, origin) > 2)
+				step_to(src, origin)
+			else
+				var/dir = pick(NORTH, SOUTH, EAST, WEST)
+				step(src, dir)
+			sleep(rand(10, 20))
+		comp.visiting_grave = FALSE
 
-		if(length(nearby))
-			var/obj/vampgrave/G = pick(nearby)
-			step_towards(src, G)
-			comp.visiting_grave = TRUE
-			spawn(120)
-				comp.visiting_grave = FALSE
-			return
-
-	step_to(src, get_step(src, pick(NORTH, SOUTH, EAST, WEST)))
 
 /// Rallies nearby zombies to move toward a target or the vampgate.
 /mob/living/simple_animal/hostile/zombie/proc/start_zombie_rally(mob/living/target = null)
-	if(!target && GLOB.vampgate) target = GLOB.vampgate
-
+	if(!target && GLOB.vampgate)
+		target = GLOB.vampgate
+	// The initiator lets out a distinct screech to begin the rally
+	emote("scream")
+	// Rally nearby zombies
 	for(var/mob/living/simple_animal/hostile/zombie/Z in view(7, src))
 		if(Z == src) continue
-		if(target)
-			step_towards(Z, target)
-			Z.path_attack_vampgate()
-			Z.emote("moans and shuffles toward the gate...")
 
-	src.emote("screeches in a piercing tone!")
-	src.emote("scream")
+		var/datum/component/graveyard_zombie/comp = Z.GetComponent(/datum/component/graveyard_zombie)
+		if(!comp || comp.current_task == "attack") continue
+
+		comp.ai_target = target
+		comp.current_task = "go_to_gate"
+
+		Z.emote(pick("moans hungrily...", "lets out a rasping groan...", "lurches toward the sound..."))
+		step_towards(Z, target)
 
 /// Makes the zombie maintain a position within a certain range of a target.
 /mob/living/simple_animal/hostile/zombie/proc/follow_at_range(mob/living/target, min_range = 3, max_range = 5)
@@ -252,24 +287,29 @@ SUBSYSTEM_DEF(graveyard)
 	else
 		src.dir = get_dir(src, target)
 
-/// Directs the zombie to approach and attack the vampgate, or wander if none exists.
-/mob/living/simple_animal/hostile/zombie/proc/path_attack_vampgate()
-	if(!GLOB.vampgate)
-		wonder_randomly()
-		return
-
-	if(get_dist(src, GLOB.vampgate) > 1)
-		step_towards(src, GLOB.vampgate)
+//CHARGE THE GATE.
+/mob/living/simple_animal/hostile/zombie/proc/charge_gate()
+	if(!GLOB.vampgate || QDELETED(GLOB.vampgate)) return
+	var/gate_open = GLOB.vampgate.icon_state == "gate-open"
+	if(get_dist(src, GLOB.vampgate) <= 1)
+		if(!gate_open)
+			UnarmedAttack(GLOB.vampgate) //visual
+			GLOB.vampgate.punched() //actually what damages the gates HP, and triggers gate stuff.
+		else
+			// Loiter near the gate for a bit
+			for(var/i = 0, i < rand(4, 8); i++)
+				if(QDELETED(src)) break
+				var/dir = pick(NORTH, SOUTH, EAST, WEST)
+				step(src, dir)
+				sleep(rand(5, 10))
 	else
-		UnarmedAttack(GLOB.vampgate)
-
-
-
+		step_towards(src, GLOB.vampgate)
+		if(prob(10))
+			emote(pick("moans...", "shuffles forward...", "growls lowly..."))
 
 //
 // Graves
 //
-
 /obj/vampgrave
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "grave1"

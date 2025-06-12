@@ -25,15 +25,25 @@
 	speed = 1
 	AIStatus = AI_OFF
 	lastattacker = null
-	var/mob/living/last_attacker = null
+	var/mob/living/last_attacker
 
 /mob/living/simple_animal/hostile/zombie/Destroy()
-	var/datum/component/graveyard_zombie/comp = GetComponent(/datum/component/graveyard_zombie)
-	if(comp)
-		comp.on_death() //GraveYardDuty, graveyard.dm
 	SSgraveyard.alive_zombies = max(0, SSgraveyard.alive_zombies - 1)
 	GLOB.zombie_list -= src
+	on_death(last_attacker)
 	return ..()
+
+// Handles the death rewards for Graveyard Duty. Only works in Graveyard.
+proc/on_death(last_attacker)
+	var/mob/living/H = last_attacker
+	if(H && get_area_name(H) == "Graveyard")
+		H.killedzombies++
+		if(H.killedzombies >= 10)
+			H.killedzombies = 0
+			H.masquerade++
+			to_chat(H, "You slew 10 undead. Masquerade Point Restored.")
+		else
+			to_chat(H, "Graveyard Duty: Zombies killed: [H.killedzombies]/10.")
 
 // punch attack
 /mob/living/simple_animal/hostile/zombie/attack_hand(mob/living/user)
