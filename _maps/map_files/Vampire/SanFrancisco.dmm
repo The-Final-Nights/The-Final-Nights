@@ -12424,11 +12424,6 @@
 	pixel_x = 4
 	},
 /obj/underplate,
-/obj/item/kirbyplants{
-	icon_state = "plant4";
-	pixel_y = 18;
-	pixel_x = 11
-	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
@@ -48059,16 +48054,16 @@
 	pixel_x = 6;
 	pixel_y = 20
 	},
-/obj/item/kirbyplants{
-	icon_state = "plant5";
-	pixel_y = 14;
-	pixel_x = -7
-	},
 /obj/item/paper_bin{
 	pixel_y = 6;
 	pixel_x = 7
 	},
 /obj/item/pen,
+/obj/item/kirbyplants{
+	icon_state = "plant4";
+	pixel_y = 13;
+	pixel_x = -8
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
