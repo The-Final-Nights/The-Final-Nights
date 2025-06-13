@@ -41857,15 +41857,6 @@
 /obj/structure/filingcabinet/chestdrawer,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
-"jTK" = (
-/obj/structure/coclock,
-/turf/open/floor/plating/rough/cave{
-	icon_state = "stone4"
-	},
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "jTM" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -84032,7 +84023,6 @@
 	dir = 4
 	},
 /obj/item/bong,
-/obj/structure/coclock,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -88954,13 +88944,6 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/community)
-"uVf" = (
-/obj/structure/coclock,
-/turf/open/floor/plating/vampcanalplating,
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "uVg" = (
 /obj/structure/closet/crate/bin,
 /turf/open/floor/carpet/royalblue,
@@ -96952,7 +96935,6 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
 	},
-/obj/effect/decal/graffiti,
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone4"
 	},
@@ -110007,7 +109989,7 @@ vyv
 yjM
 aFm
 lUi
-jTK
+cLS
 wCC
 qYs
 uZJ
@@ -113347,7 +113329,7 @@ hZH
 hZH
 qbF
 vrw
-uVf
+eBB
 eBB
 sJL
 eBB
