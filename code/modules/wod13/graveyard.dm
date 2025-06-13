@@ -304,13 +304,20 @@ SUBSYSTEM_DEF(graveyard)
 
 /obj/effect/landmark/graveyardbeacon
 	name = "Grave Yard Beacon"
+/obj/effect/landmark/graveyardbeacon/escapebeacon
+	name = "Escape Grave Yard Beacon"
 /obj/effect/landmark/graveyardbeacon/nozombies
-	name = "Grave Yard No Zombie Zones"
+	name = "Grave Yard No-Zombie-Zone"
 	icon_state = "x"
+/obj/effect/landmark/graveyardbeacon/gatebeacon
+	name = "Gate Beacon"
+	var/directionwalk
+	icon_state = "ability"
 /obj/effect/landmark/graveyardbeacon/gatepath
 	name = "Gate Path Beacon"
 	var/directionwalk
 	icon_state = "npc"
+
 
 //
 // Graves
