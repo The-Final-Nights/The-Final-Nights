@@ -4888,11 +4888,11 @@
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/interior/giovanni/outside)
 "bhv" = (
-/obj/structure/table/greyscale{
-	name = "metal table"
-	},
-/obj/item/ammo_box/vampire/c556/incendiary,
-/obj/item/toy/crayon/spraycan,
+/obj/structure/table,
+/obj/item/gun/ballistic/automatic/vampire/huntrifle,
+/obj/item/ammo_box/magazine/vamp556/hunt,
+/obj/item/ammo_box/magazine/vamp556/hunt,
+/obj/item/ammo_box/magazine/vamp556/hunt,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/amberglade/amberglade_caern)
 "bhG" = (
@@ -21752,10 +21752,10 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
 "fmC" = (
-/obj/structure/table/greyscale{
-	name = "metal table"
-	},
-/obj/item/ammo_box/vampire/c556/silver,
+/obj/structure/table,
+/obj/item/ammo_box/magazine/semi9mm,
+/obj/item/ammo_box/magazine/semi9mm,
+/obj/item/gun/ballistic/automatic/vampire/beretta,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/amberglade/amberglade_caern)
 "fmD" = (
@@ -23155,7 +23155,6 @@
 /area/vtm/interior/millennium_tower)
 "fCn" = (
 /obj/structure/vampdoor/gangrel{
-	name = "Wolves of Caine";
 	dir = 1
 	},
 /turf/open/floor/plating/stone,
@@ -50953,7 +50952,6 @@
 /area/vtm/interior/police)
 "mqh" = (
 /obj/structure/vampdoor/gangrel{
-	name = "Wolves of Caine";
 	dir = 1
 	},
 /turf/open/floor/plating/woodrough,
@@ -78227,9 +78225,7 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "sGH" = (
-/obj/structure/table/greyscale{
-	name = "metal table"
-	},
+/obj/structure/table,
 /obj/item/ammo_box/vampire/c12g/buck,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/amberglade/amberglade_caern)
@@ -79230,9 +79226,7 @@
 /turf/open/floor/plating/bacotell,
 /area/vtm/clinic/haven)
 "sVs" = (
-/obj/structure/table/greyscale{
-	name = "metal table"
-	},
+/obj/structure/table,
 /obj/item/ammo_box/vampire/c12g,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/amberglade/amberglade_caern)
@@ -89790,9 +89784,8 @@
 /turf/open/floor/plating/rough,
 /area/vtm/anarch)
 "vyN" = (
-/obj/structure/table/greyscale{
-	name = "metal table"
-	},
+/obj/structure/table,
+/obj/item/ammo_box/vampire/c9mm,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/amberglade/amberglade_caern)
 "vyZ" = (
@@ -90778,7 +90771,6 @@
 /area/vtm/graveyard)
 "vKT" = (
 /obj/structure/vampdoor/gangrel{
-	name = "Wolves of Caine";
 	dir = 4
 	},
 /turf/open/floor/plating/vampdirt{
@@ -95852,11 +95844,11 @@
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/strip)
 "wYp" = (
-/obj/structure/vampdoor/gangrel{
-	name = "Wolves of Caine"
-	},
-/turf/open/floor/plating/stone,
-/area/vtm/gangrelhaven/gangrel_interior)
+/obj/structure/table,
+/obj/item/toy/crayon/spraycan,
+/obj/item/ammo_box/vampire/c556,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/amberglade/amberglade_caern)
 "wYs" = (
 /obj/structure/pole{
 	pixel_w = -16
@@ -510887,7 +510879,7 @@ eqB
 tUA
 joO
 tUA
-vyN
+wYp
 iLp
 mIV
 "}
@@ -537979,7 +537971,7 @@ wHf
 rnZ
 aJr
 aJr
-wYp
+fCn
 vcF
 tiw
 tiw
@@ -539007,7 +538999,7 @@ oZo
 sVd
 sVd
 sVd
-wYp
+fCn
 vcF
 tiw
 vcF
