@@ -37616,10 +37616,6 @@
 /obj/item/lighter,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/forest)
-"iTM" = (
-/mob/living/simple_animal/deer,
-/turf/open/floor/plating/rough/cave,
-/area/vtm/sewer)
 "iTO" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
@@ -56861,9 +56857,6 @@
 	pixel_x = -2
 	},
 /obj/item/vtm_artifact/rand,
-/obj/machinery/light/small/red{
-	pixel_y = 24
-	},
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -109754,7 +109747,7 @@ snI
 sWB
 snI
 wBR
-iTM
+sLN
 pzF
 ugH
 dnU
