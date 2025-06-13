@@ -85,72 +85,66 @@ SUBSYSTEM_DEF(graveyard)
 	var/visiting_grave = FALSE
 	var/current_task = "wander"
 	var/mob/living/ai_target = null
-	New(atom/parent, list/args)
-		..()
-		owner = parent
-		zombie_type = args["zombie_type"] || "default"
-		owner.name = setup_graveyardzombie()
-		StartBehaviorLoop()
-	proc/setup_graveyardzombie()
-		var/names = list(
-			"default" = list("Zombu", "Zombie", "Corpse"),
-			"siege" = list("Siege Zombie", "Siege Corpse"),
-			"shrieker" = list("Shrieker", "Shrieking Zombie", "Screaming Corpse"),
-			"wanderer" = list("Shambling Corpse", "wandering Zombie", "Wandering Corpse")
-		)
-		return pick(names[zombie_type] || list("Zombie"))
-
-
-	//
-	// Graveyard Zombie Behavior: The "AI's", handles setting the Tasks, based on their contents.
-	//
-	proc/StartBehaviorLoop()
-		if(loop_started) return
-		loop_started = TRUE
-		spawn()
-			while(ismob(owner) && !QDELETED(owner))
-				if(prob(5)) owner.say(pick("urrrgh...", "braaains...", "gruhhh..."))
-				RunBehavior()
-				sleep(10)
-
-	//AI's return the current task, tasks try to get done.
-	proc/RunBehavior()
-		ai_target = owner.locate_nearest_attack_target() //checks for valid attack targets
-
-		// Global stumble chance for all zombies
-		if(prob(20)) // 20% chance to stumble
-			var/dir = pick(NORTH, SOUTH, EAST, WEST)
-			step(owner, dir)
-			if(prob(25)) // 25% chance to actually fall
-				owner.emote("trips and falls to the ground with a wet thud.")
-				owner.Paralyze(60 * 1)
-			return
-
-		switch(zombie_type)
-			if("default")   current_task = default_zombie_ai()
-			if("siege")     current_task = siege_zombie_ai()
-			if("shrieker")  current_task = shrieker_zombie_ai()
-			if("wanderer")  current_task = wanderer_zombie_ai()
-			else            current_task = "wander"
-		HandleTask(current_task)
-
-	//Sets the zombie's current task and handles it until its done, or interupts itself, etc.
-	proc/HandleTask(task)
-		switch(task)
-			if("attack")          perform_attack() //attack until the target isn't worth attacking.
-			if("go_to_gate")      perform_gate_rush() //Rush to the gate, punch it to open it, walk through if open.
-			if("wander")          perform_wander() //wander around, maybe visit a grave and say something funny.
-			if("flee_and_rally")  perform_rally() //Screamers cause zombies near them to target, their target, and avoid the target, unless trapped, then attacks.
-	//There's many places to expand behaviors, this Tasks are the place to call the bare minimum behaviors needed in that tick.
-	proc/perform_attack()
-		owner.attack_target(ai_target)
-	proc/perform_gate_rush()
-		owner.charge_gate()
-	proc/perform_wander()
-		owner.wander_randomly()
-	proc/perform_rally()
-		owner.start_zombie_rally(ai_target)
-		owner.follow_at_range(ai_target)
+/datum/component/graveyard_zombie/New(atom/parent, list/args)
+	..()
+	owner = parent
+	zombie_type = args["zombie_type"] || "default"
+	owner.name = setup_graveyardzombie()
+	StartBehaviorLoop()
+/datum/component/graveyard_zombie/proc/setup_graveyardzombie()
+	var/names = list(
+		"default" = list("Zombu", "Zombie", "Corpse"),
+		"siege" = list("Siege Zombie", "Siege Corpse"),
+		"shrieker" = list("Shrieker", "Shrieking Zombie", "Screaming Corpse"),
+		"wanderer" = list("Shambling Corpse", "wandering Zombie", "Wandering Corpse")
+	)
+	return pick(names[zombie_type] || list("Zombie"))
+//
+// Graveyard Zombie Behavior: The "AI's", handles setting the Tasks, based on their contents.
+//
+/datum/component/graveyard_zombie/proc/StartBehaviorLoop()
+	if(loop_started) return
+	loop_started = TRUE
+	spawn()
+		while(ismob(owner) && !QDELETED(owner))
+			if(prob(5)) owner.say(pick("urrrgh...", "braaains...", "gruhhh..."))
+			RunBehavior()
+			sleep(10)
+//AI's return the current task, tasks try to get done.
+/datum/component/graveyard_zombie/proc/RunBehavior()
+	ai_target = owner.locate_nearest_attack_target() //checks for valid attack targets
+	// Global stumble chance for all zombies
+	if(prob(20)) // 20% chance to stumble
+		var/dir = pick(NORTH, SOUTH, EAST, WEST)
+		step(owner, dir)
+		if(prob(25)) // 25% chance to actually fall
+			owner.emote("trips and falls to the ground with a wet thud.")
+			owner.Paralyze(60 * 1)
+		return
+	switch(zombie_type)
+		if("default")   current_task = default_zombie_ai()
+		if("siege")     current_task = siege_zombie_ai()
+		if("shrieker")  current_task = shrieker_zombie_ai()
+		if("wanderer")  current_task = wanderer_zombie_ai()
+		else            current_task = "wander"
+	HandleTask(current_task)
+//Sets the zombie's current task and handles it until its done, or interupts itself, etc.
+/datum/component/graveyard_zombie/proc/HandleTask(task)
+	switch(task)
+		if("attack")          perform_attack() //attack until the target isn't worth attacking.
+		if("go_to_gate")      perform_gate_rush() //Rush to the gate, punch it to open it, walk through if open.
+		if("wander")          perform_wander() //wander around, maybe visit a grave and say something funny.
+		if("flee_and_rally")  perform_rally() //Screamers cause zombies near them to target, their target, and avoid the target, unless trapped, then attacks.
+//There's many places to expand behaviors, this Tasks are the place to call the bare minimum behaviors needed in that tick.
+/datum/component/graveyard_zombie/proc/perform_attack()
+	owner.attack_target(ai_target)
+/datum/component/graveyard_zombie/proc/perform_gate_rush()
+	owner.charge_gate()
+/datum/component/graveyard_zombie/proc/perform_wander()
+	owner.wander_randomly()
+/datum/component/graveyard_zombie/proc/perform_rally()
+	owner.start_zombie_rally(ai_target)
+	owner.follow_at_range(ai_target)
 
 	//
 	// GYZombie AI's, This is the BRAIN, and sets the Current Task based on conditions, and type of zombie. Like Attacking, Screaming, etc.
@@ -306,6 +300,17 @@ SUBSYSTEM_DEF(graveyard)
 		step_towards(src, GLOB.vampgate)
 		if(prob(10))
 			emote(pick("moans...", "shuffles forward...", "growls lowly..."))
+
+
+/obj/effect/landmark/graveyardbeacon
+	name = "Grave Yard Beacon"
+/obj/effect/landmark/graveyardbeacon/nozombies
+	name = "Grave Yard No Zombie Zones"
+	icon_state = "x"
+/obj/effect/landmark/graveyardbeacon/gatepath
+	name = "Gate Path Beacon"
+	var/directionwalk
+	icon_state = "npc"
 
 //
 // Graves

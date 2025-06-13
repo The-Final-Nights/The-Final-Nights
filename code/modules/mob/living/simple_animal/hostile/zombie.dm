@@ -34,7 +34,7 @@
 	return ..()
 
 // Handles the death rewards for Graveyard Duty. Only works in Graveyard.
-proc/on_death(last_attacker)
+/mob/living/simple_animal/hostile/zombie/proc/on_death(last_attacker)
 	var/mob/living/H = last_attacker
 	if(H && get_area_name(H) == "Graveyard")
 		H.killedzombies++
