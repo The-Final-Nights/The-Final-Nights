@@ -16,6 +16,8 @@
 	paycheck_department = ACCOUNT_SRV
 	exp_type_department = EXP_TYPE_TREMERE
 
+	departments = DEPARTMENT_BITFLAG_TREMERE
+
 	display_order = JOB_DISPLAY_ORDER_ARCHIVIST
 
 	v_duty = "Keep a census of events and provide information to neonates. Listen to the Regent Carefully. Study blood magic and protect the chantry."

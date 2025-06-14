@@ -14,6 +14,8 @@
 	exp_type = EXP_TYPE_CREW
 	exp_type_department = EXP_TYPE_CAMARILLIA
 
+	departments = DEPARTMENT_CAMARILLA
+
 	outfit = /datum/outfit/job/sheriff
 
 	mind_traits = list(TRAIT_DONUT_LOVER)

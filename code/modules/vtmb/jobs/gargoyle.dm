@@ -15,6 +15,8 @@
 	paycheck_department = ACCOUNT_SRV
 	exp_type_department = EXP_TYPE_TREMERE
 
+	departments = DEPARTMENT_BITFLAG_TREMERE
+
 	display_order = JOB_DISPLAY_ORDER_GARGOYLE
 
 	v_duty = "An agent of the Chantry, you are a Tremere Gargoyle who was made legally having existed before their creation was banned. Serve the Regent well!"

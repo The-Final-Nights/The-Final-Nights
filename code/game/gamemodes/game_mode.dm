@@ -385,10 +385,10 @@
 	valid_positions += GLOB.ss13
 	valid_positions += GLOB.neutral_positions
 	valid_positions += GLOB.ss13
-	if(CONFIG_GET(flag/reopen_roundstart_suicide_roles_command_positions))
-		valid_positions += GLOB.command_positions //add any remaining command positions
+	if(CONFIG_GET(flag/reopen_roundstart_suicide_roles_camarilla_positions))
+		valid_positions += GLOB.camarilla_positions //add any remaining command positions
 	else
-		valid_positions -= GLOB.command_positions //remove all command positions that were added from their respective department positions lists.
+		valid_positions -= GLOB.camarilla_positions //remove all command positions that were added from their respective department positions lists.
 
 	var/list/reopened_jobs = list()
 	for(var/X in GLOB.suicided_mob_list)

@@ -17,6 +17,8 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_KIASYD
 
+	departments = DEPARTMENT_BITFLAG_CHURCH
+
 	allowed_species = list("Vampire")
 
 	v_duty = "You are a member of the Kiasyd bloodline! You maintain the Library on the top floor of the Church, sharing space with the local Lasombra, and conduct arcane rituals out of sight. Good luck."
