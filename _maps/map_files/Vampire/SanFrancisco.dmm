@@ -39,9 +39,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "aaD" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -1105,7 +1105,9 @@
 /area/vtm/pacificheights/forest)
 "amz" = (
 /obj/effect/decal/wallpaper,
-/obj/effect/decal/wallpaper/papers/eight,
+/obj/effect/decal/wallpaper/papers/eight{
+	pixel_y = -3
+	},
 /turf/closed/wall/vampwall/junk,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -1149,12 +1151,21 @@
 	name = "primogen hideout";
 	dir = 4
 	},
+/obj/effect/turf_decal/siding/white{
+	dir = 8;
+	icon_state = "siding_corner";
+	color = "#636363"
+	},
+/obj/effect/turf_decal/siding/white{
+	dir = 4;
+	color = "#636363"
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "amO" = (
 /obj/effect/decal/bordur/corner{
@@ -1498,9 +1509,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "aro" = (
 /obj/effect/decal/bordur{
@@ -1796,6 +1807,18 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
+"auN" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
+	},
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial7"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "auP" = (
 /obj/structure/curtain/cloth,
 /obj/structure/table,
@@ -2861,9 +2884,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "aGn" = (
 /obj/effect/decal/bordur{
@@ -3720,9 +3743,9 @@
 	pixel_y = 32
 	},
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "aRi" = (
 /obj/structure/vampdoor/npc{
@@ -4089,9 +4112,9 @@
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "aUv" = (
 /obj/effect/turf_decal/siding/white{
@@ -4467,6 +4490,18 @@
 /obj/effect/landmark/npcwall,
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
+"aZh" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 3;
+	color = "#636363"
+	},
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial7"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "aZm" = (
 /obj/item/kirbyplants/dead{
 	desc = "It doesn't look very healthy... And smells like piss!!";
@@ -4713,9 +4748,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "bcj" = (
 /obj/structure/table/glass,
@@ -5790,9 +5825,9 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "boD" = (
 /obj/effect/decal/bordur,
@@ -8077,9 +8112,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "bRF" = (
 /obj/effect/turf_decal/siding/white{
@@ -8728,9 +8763,9 @@
 /area/vtm/interior/gnawer)
 "bZY" = (
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "bZZ" = (
 /obj/effect/decal/wallpaper/paper/darkred,
@@ -8851,9 +8886,9 @@
 "ccc" = (
 /obj/machinery/camera/directional/east,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "ccn" = (
 /obj/item/stack/rods,
@@ -9266,9 +9301,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "cgg" = (
 /obj/structure/chair/greyscale,
@@ -9676,9 +9711,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial3"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "ckz" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
@@ -10338,12 +10373,16 @@
 /turf/closed/wall/vampwall,
 /area/vtm/interior/vjanitor)
 "crd" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 4;
+	color = "#636363"
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "crg" = (
 /obj/effect/decal/bordur{
@@ -11590,14 +11629,6 @@
 	},
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/bianchiBank)
-"cGN" = (
-/obj/structure/noticeboard{
-	desc = "A board with pamphlets of Saint John's Community Health Clinic.";
-	icon_state = "nboard05";
-	pixel_y = 32
-	},
-/turf/open/floor/plating/rough,
-/area/vtm/sewer/nosferatu_town)
 "cGT" = (
 /obj/effect/decal/pallet,
 /obj/effect/landmark/npcwall,
@@ -13691,9 +13722,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "dgo" = (
 /obj/effect/decal/cardboard,
@@ -14572,9 +14603,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "dqA" = (
 /obj/structure/table/reinforced,
@@ -15445,6 +15476,12 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/coffeevendor,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/endron_facility/restricted)
+"dBK" = (
+/obj/effect/decal/wallpaper/papers/eight{
+	pixel_y = -3
+	},
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_town)
 "dBU" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -15577,9 +15614,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "dDp" = (
 /obj/structure/toilet{
@@ -16604,9 +16641,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "dRW" = (
 /obj/effect/decal/bordur{
@@ -16846,9 +16883,9 @@
 "dVe" = (
 /obj/effect/decal/trash,
 /turf/closed/wall/vampwall/rock,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "dVk" = (
 /obj/structure/flora/rock/jungle,
@@ -17746,9 +17783,9 @@
 	},
 /obj/structure/table,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "egb" = (
 /obj/structure/chair/comfy/black{
@@ -18147,9 +18184,9 @@
 "ekY" = (
 /obj/effect/decal/wallpaper,
 /turf/closed/wall/vampwall/junk,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "eld" = (
 /obj/structure/railing{
@@ -19551,9 +19588,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "eCD" = (
 /obj/structure/bodycontainer/morgue{
@@ -19926,9 +19963,9 @@
 /obj/item/reagent_containers/blood/elite,
 /obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "eGT" = (
 /obj/vehicle/ridden/scooter{
@@ -20909,9 +20946,9 @@
 	pixel_y = 8
 	},
 /turf/closed/wall/vampwall/junk/alt/low,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "eTj" = (
 /obj/structure/fluff/hedge,
@@ -20991,6 +21028,16 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/strip)
+"eUz" = (
+/obj/effect/decal/wallpaper/paper/low,
+/obj/effect/decal/wallpaper/papers/eight{
+	pixel_y = -4
+	},
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "eUA" = (
 /obj/structure/chair/pew/right,
 /obj/effect/decal/bordur{
@@ -23026,9 +23073,9 @@
 	pixel_y = 20
 	},
 /turf/closed/wall/vampwall/junk/alt/low,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "ftg" = (
 /obj/structure/table,
@@ -23264,9 +23311,9 @@
 "fvv" = (
 /obj/effect/decal/wallpaper,
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "fvx" = (
 /obj/item/kirbyplants/random,
@@ -23902,6 +23949,12 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
+"fBM" = (
+/obj/effect/decal/wallpaper/papers/six{
+	pixel_y = -5
+	},
+/turf/closed/wall/vampwall/junk,
+/area/vtm/sewer/nosferatu_town)
 "fBO" = (
 /obj/structure/vamprocks{
 	icon_state = "rock9";
@@ -25226,9 +25279,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "fSv" = (
 /obj/structure/vamptree/pine,
@@ -25352,6 +25405,9 @@
 /obj/structure/coclock,
 /obj/structure/bed,
 /obj/item/bedsheet/dorms,
+/obj/item/toy/plush/horse{
+	pixel_y = 10
+	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
 "fUf" = (
@@ -25572,6 +25628,7 @@
 	dir = 4
 	},
 /obj/effect/decal/graffiti,
+/obj/effect/decal/litter,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_bar{
 	color = "#2596be";
@@ -25605,6 +25662,18 @@
 /obj/item/food/baguette,
 /turf/open/floor/plating/roofwalk/cobblestones,
 /area/vtm/jazzclub)
+"fXt" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 3;
+	color = "#636363"
+	},
+/turf/open/floor/plating/vampcanalplating{
+	icon_state = "canal_concrete"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "fXv" = (
 /obj/structure/vampdoor/reinf{
 	dir = 4;
@@ -26167,7 +26236,6 @@
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/interior)
 "geJ" = (
-/obj/effect/decal/graffiti,
 /obj/item/kirbyplants{
 	icon_state = "plant4";
 	pixel_y = 18;
@@ -26227,9 +26295,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial9"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gfB" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -27035,9 +27103,9 @@
 	pixel_y = 29
 	},
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gor" = (
 /obj/structure/coclock,
@@ -27460,9 +27528,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gtk" = (
 /obj/structure/fluff/hedge,
@@ -27941,9 +28009,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gzr" = (
 /obj/machinery/light{
@@ -27955,9 +28023,9 @@
 "gzt" = (
 /obj/structure/table,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gzu" = (
 /obj/structure/reagent_dispensers/water_cooler{
@@ -28365,9 +28433,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gDZ" = (
 /obj/structure/table/wood/fancy,
@@ -29114,9 +29182,9 @@
 /area/vtm/interior/police)
 "gNr" = (
 /turf/closed/wall/vampwall/junk,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gNw" = (
 /obj/structure/railing,
@@ -29247,9 +29315,9 @@
 	name = "Primogen Nosferatu"
 	},
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gPu" = (
 /obj/effect/decal/bordur{
@@ -29259,11 +29327,13 @@
 /area/vtm/pacificheights/community)
 "gPD" = (
 /obj/effect/decal/wallpaper,
-/obj/effect/decal/wallpaper/papers/eight,
+/obj/effect/decal/wallpaper/papers/eight{
+	pixel_y = -4
+	},
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gPG" = (
 /obj/structure/table/wood,
@@ -29484,9 +29554,9 @@
 /area/vtm/clinic/haven)
 "gRF" = (
 /turf/closed/wall/vampwall/rock,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "gRG" = (
 /obj/structure/lamppost/sidewalk,
@@ -30668,9 +30738,9 @@
 /obj/effect/decal/wallpaper/paper/low,
 /obj/effect/decal/wallpaper/papers/eight,
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "hhq" = (
 /obj/vampire_car/retro/rand,
@@ -31968,9 +32038,6 @@
 	icon_state = "plant2";
 	pixel_y = 13;
 	pixel_x = 7
-	},
-/obj/item/toy/plush/horse{
-	pixel_y = 10
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
@@ -33414,9 +33481,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial3"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "hSg" = (
 /obj/machinery/shower{
@@ -33789,9 +33856,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial9"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "hWQ" = (
 /obj/structure/closet/cabinet,
@@ -34570,9 +34637,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial7"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "igE" = (
 /obj/structure/chair,
@@ -35508,9 +35575,9 @@
 "itB" = (
 /obj/structure/vampipe,
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "itE" = (
 /obj/effect/decal/bordur{
@@ -37052,9 +37119,9 @@
 /obj/effect/decal/wallpaper,
 /obj/effect/decal/wallpaper/papers/three,
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "iNK" = (
 /obj/structure/chair/plastic{
@@ -37501,9 +37568,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial6"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "iSR" = (
 /obj/structure/railing{
@@ -38568,9 +38635,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "jfM" = (
 /obj/structure/flora/ausbushes/sparsegrass,
@@ -39163,9 +39230,9 @@
 	},
 /obj/structure/table/wood,
 /turf/open/floor/plating/concrete,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "jmR" = (
 /obj/structure/table,
@@ -41282,6 +41349,7 @@
 /obj/structure/coclock,
 /obj/structure/table/wood/poker,
 /obj/effect/decal/rugs,
+/obj/item/toy/cards/deck/cas/black,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_bar{
 	color = "#2596be";
@@ -42531,6 +42599,15 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"kcZ" = (
+/obj/effect/decal/trash,
+/turf/open/floor/plating/vampcanalplating{
+	icon_state = "canal1"
+	},
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
+	fire_controled = 1
+	})
 "kdd" = (
 /obj/structure/fluff/hedge,
 /obj/effect/turf_decal/siding/wood{
@@ -43360,9 +43437,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "kns" = (
 /obj/structure/trashbag{
@@ -43512,9 +43589,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "kpG" = (
 /obj/structure/clothingrack/rand{
@@ -43777,9 +43854,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial5"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "ktx" = (
 /obj/effect/decal/gut_floor,
@@ -44498,9 +44575,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial7"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "kCM" = (
 /obj/structure/vampdoor/glass/clinic{
@@ -44761,6 +44838,8 @@
 "kFG" = (
 /obj/structure/table,
 /obj/item/clothing/glasses/blindfold,
+/obj/item/clothing/glasses/blindfold,
+/obj/item/clothing/glasses/blindfold,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -44769,9 +44848,9 @@
 "kFH" = (
 /obj/effect/decal/bordur,
 /turf/closed/wall/vampwall/rock,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "kFJ" = (
 /obj/effect/decal/wallpaper/grey{
@@ -45165,6 +45244,9 @@
 	pixel_x = 1
 	},
 /obj/item/soap,
+/obj/effect/decal/stock{
+	dir = 4
+	},
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
@@ -46024,9 +46106,9 @@
 /obj/structure/table,
 /obj/vampire_computer,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "kVN" = (
 /obj/structure/chair/sofa/corp/right{
@@ -47133,6 +47215,7 @@
 /area/vtm/pacificheights/forest)
 "liA" = (
 /obj/machinery/camera/directional/east,
+/obj/effect/decal/trash,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal1"
 	},
@@ -47384,6 +47467,14 @@
 /mob/living/carbon/human/npc/incel,
 /turf/open/floor/carpet,
 /area/vtm/interior/strip/elysium)
+"lmv" = (
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial8"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "lmH" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -47945,9 +48036,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "lva" = (
 /obj/machinery/light{
@@ -48104,15 +48195,6 @@
 /obj/vampire_car/police,
 /turf/open/floor/plating/asphalt,
 /area/vtm/interior/police)
-"lxh" = (
-/obj/structure/table/wood,
-/obj/item/modular_computer/laptop,
-/turf/closed/wall/vampwall/junk/low,
-/area/vtm/sewer/nosferatu_bar{
-	color = "#2596be";
-	fire_controled = 1;
-	music = null
-	})
 "lxi" = (
 /obj/machinery/light{
 	dir = 4;
@@ -49177,9 +49259,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "lIL" = (
 /obj/effect/decal/wallpaper/paper/rich,
@@ -49507,6 +49589,19 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/church/interior/staff)
+"lMI" = (
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
+	},
+/turf/open/floor/plating/vampcanalplating{
+	icon_state = "canal_concrete"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "lMJ" = (
 /obj/structure/chair/comfy/brown{
 	dir = 8
@@ -50503,7 +50598,9 @@
 /area/vtm/interior/millennium_tower)
 "lZc" = (
 /obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/papers/six,
+/obj/effect/decal/wallpaper/papers/six{
+	pixel_y = -3
+	},
 /turf/closed/wall/vampwall/junk,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -52332,9 +52429,9 @@
 "mwG" = (
 /obj/effect/decal/wallpaper/paper/low,
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "mwJ" = (
 /obj/effect/turf_decal/siding/white,
@@ -53337,6 +53434,18 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/chantry)
+"mHO" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
+	},
+/turf/open/floor/plating/vampcanalplating{
+	icon_state = "canal_concrete"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "mHT" = (
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk,
@@ -53948,9 +54057,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "mPv" = (
 /obj/structure/closet/secure_closet,
@@ -54686,9 +54795,9 @@
 /area/vtm/interior/techshop)
 "mXv" = (
 /turf/closed/wall/vampwall/bar,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "mXx" = (
 /obj/effect/turf_decal/siding/wood{
@@ -55702,9 +55811,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial9"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "nkn" = (
 /obj/effect/decal/cardboard,
@@ -55782,9 +55891,9 @@
 	name = "window bars"
 	},
 /turf/closed/wall/vampwall/bar/low/window,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "nln" = (
 /obj/fusebox,
@@ -56618,6 +56727,19 @@
 /obj/item/clothing/suit/hazardvest,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"nuF" = (
+/obj/item/kirbyplants/random,
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
+	},
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial9"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "nuJ" = (
 /turf/open/openspace,
 /area/vtm/interior/vjanitor)
@@ -56994,9 +57116,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "nyL" = (
 /obj/structure/table/wood/fancy/black,
@@ -57205,9 +57327,9 @@
 "nBr" = (
 /obj/effect/decal/wallpaper,
 /turf/closed/wall/vampwall/bar,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "nBy" = (
 /obj/structure/fluff/hedge{
@@ -59194,7 +59316,7 @@
 "nXF" = (
 /obj/structure/bed/pod,
 /obj/structure/coclock,
-/obj/item/bedsheet/random,
+/obj/item/bedsheet/dorms,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -59503,9 +59625,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "obu" = (
 /obj/structure/vampipe{
@@ -61893,9 +62015,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial9"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "oEy" = (
 /obj/structure/fluff/hedge,
@@ -62377,9 +62499,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial5"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "oJK" = (
 /obj/structure/table/wood,
@@ -62941,9 +63063,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "oPU" = (
 /obj/effect/decal/wallpaper/paper/darkred,
@@ -63766,9 +63888,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "paa" = (
 /turf/open/floor/plating/toilet,
@@ -64132,9 +64254,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "pep" = (
 /obj/structure/chair/office/light{
@@ -64215,9 +64337,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "pfv" = (
 /obj/effect/turf_decal/siding/white{
@@ -64908,7 +65030,9 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/f3)
 "pol" = (
-/mob/living/simple_animal/pet/cat/vampire,
+/mob/living/simple_animal/pet/cat/vampire{
+	name = "Mr Chef"
+	},
 /obj/structure/bed/dogbed,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
@@ -65643,15 +65767,6 @@
 /obj/structure/roadsign/crosswalk,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
-"pwW" = (
-/obj/structure/table/wood,
-/obj/underplate,
-/turf/closed/wall/vampwall/junk/low,
-/area/vtm/sewer/nosferatu_bar{
-	color = "#2596be";
-	fire_controled = 1;
-	music = null
-	})
 "pxc" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8;
@@ -66085,14 +66200,15 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto)
 "pBT" = (
-/obj/structure/curtain/bounty{
-	pixel_x = -32
-	},
 /obj/structure/chair/office,
 /obj/item/kirbyplants{
 	icon_state = "plant-18";
 	pixel_y = 23;
 	pixel_x = -10
+	},
+/obj/structure/curtain/bounty{
+	pixel_x = -32;
+	pixel_y = 15
 	},
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
@@ -67620,9 +67736,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "pTI" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -67734,9 +67850,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "pUP" = (
 /obj/structure/toilet{
@@ -67848,9 +67964,9 @@
 /area/vtm/anarch)
 "pWq" = (
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "pWs" = (
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -67923,7 +68039,9 @@
 /area/vtm/interior/cog/caern)
 "pXh" = (
 /obj/effect/decal/wallpaper/paper/stripe/low,
-/obj/effect/decal/wallpaper/papers/eight,
+/obj/effect/decal/wallpaper/papers/eight{
+	pixel_y = -4
+	},
 /turf/closed/wall/vampwall/junk,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -69309,9 +69427,9 @@
 	dir = 4
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "qnd" = (
 /obj/effect/turf_decal/siding/wideplating/dark,
@@ -69328,9 +69446,9 @@
 "qni" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "qnl" = (
 /obj/effect/turf_decal/siding/thinplating/dark/corner,
@@ -69800,9 +69918,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "qtN" = (
 /obj/structure/chair/sofa/corp/left,
@@ -70426,6 +70544,7 @@
 /obj/machinery/light/dim{
 	pixel_y = 32
 	},
+/obj/effect/decal/trash,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_plating2"
 	},
@@ -70615,9 +70734,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial8"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "qDr" = (
 /obj/structure/flora/ausbushes/grassybush,
@@ -70704,6 +70823,18 @@
 "qEE" = (
 /turf/open/floor/plating/toilet,
 /area/vtm/anarch/basement)
+"qEH" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 3;
+	color = "#636363"
+	},
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial8"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "qEX" = (
 /obj/machinery/light/small/red{
 	dir = 8;
@@ -72325,9 +72456,6 @@
 	pixel_x = -11
 	},
 /obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/barrels{
-	icon_state = "barrels13"
-	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -72987,6 +73115,18 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior/baali)
+"rfd" = (
+/obj/effect/turf_decal/siding/white{
+	icon_state = "siding_corner";
+	color = "#636363"
+	},
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial7"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "rfe" = (
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
@@ -73023,9 +73163,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "rfF" = (
 /obj/effect/decal/bordur{
@@ -74707,9 +74847,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "ryd" = (
 /obj/structure/flora/ausbushes/fullgrass,
@@ -77383,9 +77523,9 @@
 	},
 /obj/structure/table,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "sdp" = (
 /obj/machinery/light{
@@ -77406,8 +77546,18 @@
 /obj/effect/decal/wallpaper,
 /obj/structure/sign/painting/library,
 /turf/closed/wall/vampwall/junk/alt,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
+"sdE" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/trash,
+/turf/open/floor/plating/vampcanalplating{
+	icon_state = "canal_plating3"
+	},
+/area/vtm/sewer/nosferatu_warren{
+	color = "#df6220";
 	fire_controled = 1
 	})
 "sdJ" = (
@@ -80137,7 +80287,8 @@
 /area/vtm/graveyard)
 "sLv" = (
 /obj/structure/curtain/bounty{
-	pixel_x = -32
+	pixel_x = -32;
+	pixel_y = 15
 	},
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
@@ -84465,11 +84616,13 @@
 /obj/structure/roadblock/alt{
 	dir = 4;
 	pixel_y = 5;
-	pixel_x = -11
+	pixel_x = -15
 	},
-/obj/structure/roadblock/alt,
 /obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/roadsign/warningtrafficlight,
+/obj/structure/roadblock/alt{
+	density = 0;
+	pixel_x = 7
+	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -84564,9 +84717,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial5"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "tRJ" = (
 /obj/structure/closet/crate/grave/lead_researcher,
@@ -85079,6 +85232,7 @@
 	color = "#CD5C5C"
 	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/trash,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal1"
 	},
@@ -86011,9 +86165,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "ukJ" = (
 /obj/structure/roadsign/speedlimit25,
@@ -86493,9 +86647,9 @@
 	pixel_x = -10
 	},
 /turf/open/floor/plating/concrete,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "uqy" = (
 /obj/effect/decal/litter,
@@ -86680,9 +86834,9 @@
 /obj/structure/table,
 /obj/item/vamp/keys/hack,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "usM" = (
 /obj/effect/decal/trash,
@@ -87029,9 +87183,9 @@
 	pixel_y = 29
 	},
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "uwT" = (
 /obj/structure/railing{
@@ -89218,9 +89372,9 @@
 "uXC" = (
 /obj/machinery/camera/directional/west,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "uXE" = (
 /obj/effect/decal/cleanable/blood,
@@ -90036,6 +90190,7 @@
 /obj/structure/table/wood/poker,
 /obj/effect/decal/litter,
 /obj/effect/decal/graffiti,
+/obj/item/toy/cards/deck/cas,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -90198,9 +90353,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "vjk" = (
 /obj/effect/decal/cleanable/blood/drip,
@@ -90455,9 +90610,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "vmq" = (
 /obj/effect/decal/cleanable/oil/streak,
@@ -92592,12 +92747,16 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/ghetto)
 "vLn" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial6"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "vLo" = (
 /obj/effect/decal/wallpaper/paper/rich/low,
@@ -94199,9 +94358,9 @@
 /obj/structure/table,
 /obj/item/vtm_artifact/rand,
 /turf/open/floor/carpet/black,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "weI" = (
 /obj/effect/turf_decal/siding/wood{
@@ -94239,9 +94398,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "wfa" = (
 /turf/open/floor/carpet/royalblue,
@@ -94560,9 +94719,9 @@
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "wjM" = (
 /obj/machinery/light/warm{
@@ -96159,9 +96318,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "wDG" = (
 /turf/open/floor/plating/asphalt,
@@ -96497,6 +96656,15 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
+"wIb" = (
+/obj/structure/table/wood,
+/obj/item/storage/box/drinkingglasses,
+/turf/closed/wall/vampwall/junk/low,
+/area/vtm/sewer/nosferatu_bar{
+	color = "#2596be";
+	fire_controled = 1;
+	music = null
+	})
 "wId" = (
 /obj/structure/table/glass,
 /turf/open/floor/carpet/red,
@@ -96838,9 +97006,9 @@
 "wMl" = (
 /obj/structure/table/wood,
 /turf/open/floor/plating/concrete,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "wMq" = (
 /obj/structure/table/wood,
@@ -98438,9 +98606,9 @@
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "xfm" = (
 /obj/structure/table/wood/fancy/black,
@@ -99354,6 +99522,18 @@
 /obj/structure/barricade/wooden/crude,
 /turf/closed/wall/vampwall/brick/low/window,
 /area/vtm/interior)
+"xqK" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 4;
+	color = "#636363"
+	},
+/turf/open/floor/plating/industrial{
+	icon_state = "industrial7"
+	},
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
+	})
 "xqR" = (
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
@@ -99835,6 +100015,17 @@
 /obj/structure/table/wood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm)
+"xyd" = (
+/obj/structure/table/wood,
+/obj/item/modular_computer/laptop{
+	pixel_y = 4
+	},
+/turf/closed/wall/vampwall/junk/low,
+/area/vtm/sewer/nosferatu_bar{
+	color = "#2596be";
+	fire_controled = 1;
+	music = null
+	})
 "xye" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -100272,11 +100463,14 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer)
 "xCA" = (
-/obj/item/soap,
 /obj/machinery/shower{
 	dir = 8;
 	pixel_x = 1
 	},
+/obj/effect/decal/stock{
+	dir = 4
+	},
+/obj/item/soap,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
 	},
@@ -101026,9 +101220,9 @@
 /area/vtm/interior/bianchiBank)
 "xLc" = (
 /turf/open/floor/plating/concrete,
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "xLe" = (
 /obj/machinery/light{
@@ -101175,16 +101369,6 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic/haven)
-"xMD" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1
-	},
-/obj/effect/decal/graffiti,
-/turf/open/floor/plating/shit,
-/area/vtm/sewer/nosferatu_warren{
-	color = "#df6220";
-	fire_controled = 1
-	})
 "xMN" = (
 /obj/structure/vampdoor/old{
 	dir = 8;
@@ -101848,9 +102032,9 @@
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial2"
 	},
-/area/vtm/nosferatu_office{
-	color = "#f76abf";
-	fire_controled = 1
+/area/vtm/interior/nosferatu_office{
+	fire_controled = 1;
+	color = "#636363"
 	})
 "xVB" = (
 /obj/structure/closet/cabinet,
@@ -106372,7 +106556,7 @@ tYe
 wuu
 yiG
 kKu
-bUI
+kcZ
 nSj
 nYS
 dhc
@@ -107633,10 +107817,10 @@ dhc
 nYS
 nBr
 pem
+lmv
+rfd
 crd
-kCG
-crd
-kCG
+xqK
 mXv
 lfa
 xTB
@@ -107890,8 +108074,8 @@ dhc
 nYS
 nBr
 aGf
-crd
-dDo
+lmv
+fXt
 bZY
 bZY
 mXv
@@ -108148,7 +108332,7 @@ nYS
 nBr
 fSu
 dDo
-kCG
+aZh
 qni
 bZY
 mXv
@@ -108170,7 +108354,7 @@ nSj
 gFk
 bKg
 paS
-wuu
+sdE
 wvM
 nSj
 eCZ
@@ -108405,7 +108589,7 @@ nYS
 mXv
 nBr
 obq
-crd
+qEH
 bZY
 ccc
 mXv
@@ -108923,7 +109107,7 @@ bZY
 uXC
 usA
 bZY
-ukC
+lMI
 nld
 qfm
 pcZ
@@ -109180,7 +109364,7 @@ bZY
 bZY
 weG
 bZY
-kCG
+auN
 mXv
 iOK
 qbF
@@ -109694,7 +109878,7 @@ bZY
 kVL
 gzt
 bZY
-dDo
+mHO
 mXv
 crg
 qbF
@@ -109951,7 +110135,7 @@ bZY
 bZY
 bZY
 ccc
-nkc
+nuF
 nld
 qbF
 qbF
@@ -109977,7 +110161,7 @@ jMy
 srF
 rav
 oMB
-pwW
+prO
 vyv
 yjM
 aFm
@@ -110234,7 +110418,7 @@ klJ
 koW
 pyh
 vXJ
-prO
+xyd
 brj
 vpA
 aFm
@@ -110491,7 +110675,7 @@ rav
 pyh
 rav
 oMB
-lxh
+prO
 mYW
 tBH
 unr
@@ -110748,7 +110932,7 @@ isM
 pGU
 pyh
 vXJ
-prO
+wIb
 eWo
 unr
 unr
@@ -111524,7 +111708,7 @@ inu
 aFm
 jZn
 wRE
-xMD
+qYs
 lAO
 diU
 qcE
@@ -117394,7 +117578,7 @@ nYS
 dhc
 dhc
 nYS
-dMm
+eUz
 qQM
 hEa
 hEa
@@ -117930,8 +118114,8 @@ tFO
 pjA
 jpb
 eir
-wJn
-cGN
+fBM
+eir
 gMo
 oIH
 sjv
@@ -118187,7 +118371,7 @@ dZg
 lmV
 jpb
 eir
-wJn
+dBK
 eir
 gMo
 kGi
@@ -119749,7 +119933,7 @@ oVm
 wJn
 wJn
 wJn
-snI
+sLN
 snI
 snI
 snI
@@ -120007,8 +120191,8 @@ bjV
 cJp
 wJn
 snI
+snI
 ppR
-sLN
 eCI
 snI
 sLN
@@ -120774,7 +120958,7 @@ aZd
 fZO
 fZO
 snI
-snI
+sLN
 sLN
 sLN
 sLN

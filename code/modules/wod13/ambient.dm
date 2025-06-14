@@ -475,7 +475,7 @@
 	yin_chi = 2
 	wall_rating = HIGH_WALL_RATING
 
-/area/vtm/nosferatu_office
+/area/vtm/interior/nosferatu_office
 	name = "Underground Office"
 	icon_state = "hotel"
 	upper = FALSE
