@@ -129,11 +129,13 @@
 
 	create_internal_organs()
 
-	update_senseworm_hud() // we only update the HUD once : wyrm taint should not change over the course of a round (yeah rites of cleansing are a thing but they're always RPed and not mechanical yet)
+
 
 	ADD_TRAIT(src, TRAIT_NEVER_WOUNDED, ROUNDSTART_TRAIT)
 
 	. = ..()
+
+
 
 /mob/living/carbon/werewolf/create_internal_organs()
 	internal_organs += new /obj/item/organ/brain
@@ -351,3 +353,5 @@
 			step_variable = 0
 			playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_step.ogg', 50, FALSE) // feel free to change the noise to something more avian later.
 	..()
+
+

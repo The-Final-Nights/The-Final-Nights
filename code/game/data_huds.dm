@@ -216,6 +216,7 @@ Medical HUD! Basic mode needs suit sensors on.
 				holder.icon_state = "hudhealthy"
 
 
+
 /***********************************************
 FAN HUDs! For identifying other fans on-sight.
 ************************************************/

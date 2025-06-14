@@ -278,6 +278,12 @@
 	. = ..()
 	var/datum/atom_hud/sense_wyrm_hud = GLOB.huds[DATA_HUD_SENSEWYRM]
 	sense_wyrm_hud.add_hud_to(owner)
+	/*if(iscorax(src))
+		sense_wyrm_hud.add_hud_to(owner.werewolf.cor_crinos)
+		sense_wyrm_hud.add_hud_to(owner.werewolf.corvid)
+	else
+		sense_wyrm_hud.add_hud_to(owner.werewolf.crinos)
+		sense_wyrm_hud.add_hud_to(owner.werewolf.lupus)*/
 	owner.update_sight()
 
 /datum/action/gift/spirit_speech
