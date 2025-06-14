@@ -242,6 +242,8 @@
 	. = ..()
 	var/datum/action/change_apparel/A = new()
 	A.Grant(src)
+	var/datum/action/gift/close_distance/dash = new()
+	dash.Grant(src)
 
 //	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_CLAW, 0.5, -11)
 
