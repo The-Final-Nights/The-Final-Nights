@@ -66,6 +66,9 @@
 /datum/atom_hud/abductor
 	hud_icons = list(GLAND_HUD)
 
+/datum/atom_hud/sense_wyrm
+	hud_icons = list(SENSEWYRM_HUD)
+
 /datum/atom_hud/sentient_disease
 	hud_icons = list(SENTIENT_DISEASE_HUD)
 

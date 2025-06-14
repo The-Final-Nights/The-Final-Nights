@@ -276,29 +276,9 @@
 
 /datum/action/gift/sense_wyrm/Trigger()
 	. = ..()
-	if(allowed_to_proceed)
-		var/list/mobs_in_range = list()
-		for(var/mob/living/carbon/target in orange(owner, 30))
-			mobs_in_range += target
-		for(var/mob/living/carbon/target in mobs_in_range)
-			var/is_wyrm = 0
-			if(iscathayan(target))
-				var/mob/living/carbon/human/kj = target
-				if(!kj.check_kuei_jin_alive())
-					is_wyrm = 1
-			if (iskindred(target))
-				var/mob/living/carbon/human/vampire = target
-				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
-					is_wyrm = 1
-				if ((vampire.clane?.name == "Baali") || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
-					is_wyrm = 1
-			if (isgarou(target) || iswerewolf(target))
-				var/mob/living/carbon/wolf = target
-				if(wolf.auspice.tribe.name == "Black Spiral Dancers")
-					is_wyrm = 1
-			if(is_wyrm)
-				to_chat(owner, "A stain is found at [get_area_name(target)], X:[target.x] Y:[target.y].")
-				is_wyrm = 0
+	var/datum/atom_hud/sense_wyrm_hud = GLOB.huds[DATA_HUD_SENSEWYRM]
+	sense_wyrm_hud.add_hud_to(owner)
+	owner.update_sight()
 
 /datum/action/gift/spirit_speech
 	name = "Spirit Speech"

@@ -129,6 +129,8 @@
 
 	create_internal_organs()
 
+	update_senseworm_hud() // we only update the HUD once : wyrm taint should not change over the course of a round (yeah rites of cleansing are a thing but they're always RPed and not mechanical yet)
+
 	ADD_TRAIT(src, TRAIT_NEVER_WOUNDED, ROUNDSTART_TRAIT)
 
 	. = ..()
