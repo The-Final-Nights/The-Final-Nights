@@ -605,7 +605,7 @@ SUBSYSTEM_DEF(job)
 
 		to_chat(M, "<b>As the [display_rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>")
 		var/mob/living/carbon/human/human = living_mob
-		if((iskindred(human) && human.clane) || iscathayan(human) || isgarou(human))
+		if((iskindred(human) && human.clane) || iscathayan(human) || isgarou(human) || iszombie(human))
 			if(job.v_duty && job.v_duty != "")
 				to_chat(M, span_notice("<b>[job.v_duty]</b>"))
 			if(job.title != "Prince")
