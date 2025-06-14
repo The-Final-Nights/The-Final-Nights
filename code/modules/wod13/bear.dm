@@ -16,12 +16,7 @@
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 8
 	maxbloodpool = 8
-	maxHealth = 500
-	health = 500
 	cached_multiplicative_slowdown = 2
-
-	bloodpool = 1
-	maxbloodpool = 1
 	maxHealth = 850
 	health = 850
 

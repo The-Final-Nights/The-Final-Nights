@@ -100,6 +100,14 @@ SUBSYSTEM_DEF(beastmastering)
 	var/list/enemies = list()
 	var/mob/living/targa
 
+/mob/living/simple_animal/hostile/beastmaster/shapeshift // ONLY USED FOR SHAPESHIFTING!!
+	speed = -0.35
+	maxHealth = 110 //Killable in two swings from a proper melee.
+	health = 110
+	harm_intent_damage = 20
+	melee_damage_lower = 24
+	melee_damage_upper = 42
+
 /mob/living/simple_animal/hostile/beastmaster/proc/handle_automated_beasting()
 	if(client)
 		return
