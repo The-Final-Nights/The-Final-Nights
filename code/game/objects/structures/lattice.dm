@@ -97,6 +97,53 @@
 	canSmoothWith = list(SMOOTH_GROUP_CATWALK)
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 
+	// storing original turf sounds so that catwalks may make appropriate noises
+	var/original_footstep
+	var/original_barefootstep
+	var/original_clawfootstep
+	var/original_heavyfootstep
+
+/obj/structure/lattice/catwalk/Initialize(mapload)
+	. = ..() //uses parent initialize
+	if(. == INITIALIZE_HINT_QDEL) // if parent initialize wants to delete this catwalk dont modify the turf underneath
+		return
+
+	var/turf/T = get_turf(src)
+	if(T)
+		// Store original sounds if they exist
+		if("footstep" in T.vars)
+			original_footstep = T.vars["footstep"]
+		if("barefootstep" in T.vars)
+			original_barefootstep = T.vars["barefootstep"]
+		if("clawfootstep" in T.vars)
+			original_clawfootstep = T.vars["clawfootstep"]
+		if("heavyfootstep" in T.vars)
+			original_heavyfootstep = T.vars["heavyfootstep"]
+
+		// Set catwalk sounds if possible
+		if("footstep" in T.vars)
+			T.vars["footstep"] = FOOTSTEP_PLATING
+		if("barefootstep" in T.vars)
+			T.vars["barefootstep"] = FOOTSTEP_HARD_BAREFOOT
+		if("clawfootstep" in T.vars)
+			T.vars["clawfootstep"] = FOOTSTEP_HARD_CLAW
+		if("heavyfootstep" in T.vars)
+			T.vars["heavyfootstep"] = FOOTSTEP_GENERIC_HEAVY
+
+/obj/structure/lattice/catwalk/Destroy()
+	var/turf/T = get_turf(src)
+	if(T)
+		// Restore original sounds
+		if("footstep" in T.vars)
+			T.vars["footstep"] = original_footstep
+		if("barefootstep" in T.vars)
+			T.vars["barefootstep"] = original_barefootstep
+		if("clawfootstep" in T.vars)
+			T.vars["clawfootstep"] = original_clawfootstep
+		if("heavyfootstep" in T.vars)
+			T.vars["heavyfootstep"] = original_heavyfootstep
+	. = ..() // Call parent Destroy
+
 /obj/structure/lattice/catwalk/deconstruction_hints(mob/user)
 	return "<span class='notice'>The supporting rods look like they could be <b>cut</b>.</span>"
 
