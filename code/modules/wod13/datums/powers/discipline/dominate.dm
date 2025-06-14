@@ -122,7 +122,7 @@
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
-	custom_command = tgui_input_text(owner, "Dominate Command", "What is your command?")
+	custom_command = tgui_input_text(owner, "Dominate Command", "What is your command?", encode = FALSE)
 
 	if (!custom_command)
 		return FALSE // No message, no dominate

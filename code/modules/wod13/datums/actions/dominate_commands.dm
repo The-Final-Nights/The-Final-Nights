@@ -1,7 +1,4 @@
-#define COOLDOWN_STUN 1200
-#define COOLDOWN_DAMAGE 600
-#define COOLDOWN_MEME 300
-#define COOLDOWN_NONE 100
+
 
 //removed some keywords as they don't fit mental domination
 var/static/regex/stun_words = regex("stop|wait|stand still|hold on|halt|cease")
@@ -359,8 +356,3 @@ var/static/regex/multispin_words = regex("like a record baby|right round")
 		cooldown = COOLDOWN_NONE
 
 	return cooldown
-
-#undef COOLDOWN_STUN
-#undef COOLDOWN_DAMAGE
-#undef COOLDOWN_MEME
-#undef COOLDOWN_NONE
