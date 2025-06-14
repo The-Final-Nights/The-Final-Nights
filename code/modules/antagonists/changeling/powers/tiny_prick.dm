@@ -238,3 +238,46 @@
 	if(target.reagents)
 		target.reagents.add_reagent(/datum/reagent/consumable/frostoil, 30)
 	return TRUE
+
+/datum/action/changeling/sting/lethargic
+	name = "Lethargic Sting"
+	desc = "We silently sting our victim with a chemical that will gradually drain their stamina and cause drowsiness. Costs 15 chemicals."
+	helptext = "Does not provide a warning to the victim, though they will quickly realize they have been poisoned."
+	button_icon_state = "sting_lsd"
+	chemical_cost = 15
+	dna_cost = 2
+
+/datum/action/changeling/sting/lethargic/sting_action(mob/user, mob/target)
+	log_combat(user, target, "stung", "Lethargic Sting")
+	if(target.reagents)
+		target.reagents.add_reagent(/datum/reagent/toxin/staminatoxin, 10)
+		target.reagents.add_reagent(/datum/reagent/toxin/chloralhydrate, 10)
+	return TRUE
+
+/datum/action/changeling/sting/pneumonic
+	name = "Pneumonic Sting"
+	desc = "We silently sting our victim with a chemical that will stop their lungs. This will work against all living beings, although it will not harm Kindred. Costs 50 chemicals."
+	helptext = "Does not provide a warning to the victim, though they will quickly realize they have been poisoned."
+	button_icon_state = "sting_poison_pneumonic"
+	chemical_cost = 50
+	dna_cost = 4
+
+/datum/action/changeling/sting/pneumonic/sting_action(mob/user, mob/living/carbon/target)
+	log_combat(user, target, "stung", "Pneumonic Sting")
+	if(target.reagents)
+		target.reagents.add_reagent(/datum/reagent/toxin/lexorin, 40)
+	return TRUE
+
+/datum/action/changeling/sting/fluacid
+	name = "Fluorosulfuric Acid Sting"
+	desc = "We silently sting our victim with a chemical that will burn through their internal organs. They will notice this rather swiftly. Costs 50 chemicals."
+	helptext = "Does not provide a warning to the victim, though they will quickly realize they have been poisoned."
+	button_icon_state = "sting_poison"
+	chemical_cost = 50
+	dna_cost = 4
+
+/datum/action/changeling/sting/fluacid/sting_action(mob/user, mob/target)
+	log_combat(user, target, "stung", "Fluorosulfuric Acid Sting")
+	if(target.reagents)
+		target.reagents.add_reagent(/datum/reagent/toxin/acid/fluacid, 20)
+	return TRUE
