@@ -339,7 +339,7 @@
 					if (!islist(GLOB.published_number_names))
 						GLOB.published_number_names = list()
 
-					var/name = tgui_input_text(usr, "Input name", "Publish Number")
+					var/name = tgui_input_text(usr, "Input name", "Publish Number", encode = FALSE)
 					if(name && src.number)
 						name = trim(copytext_char(sanitize(name), 1, MAX_MESSAGE_LEN))
 						if(src.number in GLOB.published_numbers)
@@ -385,7 +385,7 @@
 						new_contact = replacetext(new_contact, " ", "") //Removes spaces
 						NEWC.number = "[new_contact]"
 						contacts += NEWC
-						var/new_contact_name = tgui_input_text(usr, "Input name", "Add Contact")
+						var/new_contact_name = tgui_input_text(usr, "Input name", "Add Contact", encode = FALSE)
 						if(new_contact_name)
 							NEWC.name = "[new_contact_name]"
 						else
@@ -422,7 +422,7 @@
 						block_number = replacetext(block_number, " ", "") //Removes spaces
 						BlockC.number = "[block_number]"
 						blocked_contacts += BlockC
-						var/block_contact_name = tgui_input_text(usr, "Input name", "Add name of the Blocked number")
+						var/block_contact_name = tgui_input_text(usr, "Input name", "Add name of the Blocked number", encode = FALSE)
 						if(block_contact_name)
 							BlockC.name = "[block_contact_name]"
 						else

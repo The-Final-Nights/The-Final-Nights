@@ -51,9 +51,11 @@
 	if(H.clane)
 		if(H.clane.name == "Lasombra")
 			backpack_contents = list(/obj/item/passport =1, /obj/item/vamp/creditcard=1)
+		if(H.clane.name == "Kiasyd")
+			backpack_contents = list(/obj/item/passport =1, /obj/item/vamp/creditcard=1)
 	if(!H.clane)
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
-	if(H.clane && H.clane.name != "Lasombra")
+	if(H.clane && H.clane.name != "Lasombra" && H.clane.name != "Kiasyd")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /obj/effect/landmark/start/citizen

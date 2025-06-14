@@ -72,6 +72,7 @@
 #define AURA_GAROU "aura_bright"
 #define AURA_GHOUL "aura_ghoul"
 #define AURA_TRUE_FAITH "#ffe12f"
+#define AURA_DIAB "#000000"
 
 /**
  * Morality defines

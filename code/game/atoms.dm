@@ -38,14 +38,6 @@
 	///Value used to increment ex_act() if reactionary_explosions is on
 	var/explosion_block = 0
 
-	/**
-	 * used to store the different colors on an atom
-	 *
-	 * its inherent color, the colored paint applied on it, special color effect etc...
-	 */
-	var/list/atom_colours
-
-
 	/// a very temporary list of overlays to remove
 	var/list/remove_overlays
 	/// a very temporary list of overlays to add
@@ -127,7 +119,6 @@
 	var/base_pixel_y = 0
 	///Used for changing icon states for different base sprites.
 	var/base_icon_state
-
 	///Icon-smoothing behavior.
 	var/smoothing_flags = NONE
 	///What directions this is currently smoothing with. IMPORTANT: This uses the smoothing direction flags as defined in icon_smoothing.dm, instead of the BYOND flags.
@@ -229,6 +220,9 @@
 
 	if(loc)
 		SEND_SIGNAL(loc, COMSIG_ATOM_CREATED, src) /// Sends a signal that the new atom `src`, has been created at `loc`
+
+	if(greyscale_config && greyscale_colors)
+		update_greyscale()
 
 	//atom color stuff
 	if(color)
@@ -1001,56 +995,6 @@
 	if(loc)
 		loc.on_log(login)
 
-
-/*
-	Atom Colour Priority System
-	A System that gives finer control over which atom colour to colour the atom with.
-	The "highest priority" one is always displayed as opposed to the default of
-	"whichever was set last is displayed"
-*/
-
-
-///Adds an instance of colour_type to the atom's atom_colours list
-/atom/proc/add_atom_colour(coloration, colour_priority)
-	if(!atom_colours || !atom_colours.len)
-		atom_colours = list()
-		atom_colours.len = COLOUR_PRIORITY_AMOUNT //four priority levels currently.
-	if(!coloration)
-		return
-	if(colour_priority > atom_colours.len)
-		return
-	atom_colours[colour_priority] = coloration
-	update_atom_colour()
-
-
-///Removes an instance of colour_type from the atom's atom_colours list
-/atom/proc/remove_atom_colour(colour_priority, coloration)
-	if(!atom_colours)
-		return
-	if(colour_priority > atom_colours.len)
-		return
-	if(coloration && atom_colours[colour_priority] != coloration)
-		return //if we don't have the expected color (for a specific priority) to remove, do nothing
-	atom_colours[colour_priority] = null
-	update_atom_colour()
-
-
-///Resets the atom's color to null, and then sets it to the highest priority colour available
-/atom/proc/update_atom_colour()
-	color = null
-	if(!atom_colours)
-		return
-	for(var/C in atom_colours)
-		if(islist(C))
-			var/list/L = C
-			if(L.len)
-				color = L
-				return
-		else if(C)
-			color = C
-			return
-
-
 /**
  * Wash this atom
  *
@@ -1154,6 +1098,8 @@
 	VV_DROPDOWN_OPTION(VV_HK_RADIATE, "Radiate")
 	VV_DROPDOWN_OPTION(VV_HK_EDIT_FILTERS, "Edit Filters")
 	VV_DROPDOWN_OPTION(VV_HK_ADD_AI, "Add AI controller")
+	if(greyscale_colors)
+		VV_DROPDOWN_OPTION(VV_HK_MODIFY_GREYSCALE, "Modify greyscale colors")
 
 /atom/vv_do_topic(list/href_list)
 	. = ..()

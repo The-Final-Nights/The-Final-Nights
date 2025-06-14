@@ -12,3 +12,20 @@
 2025-06-03:
   XeonMations:
   - bugfix: Dead bodies now cool down to room temperature.
+2025-06-04:
+  Kevak:
+  - rscadd: Frenetic Aura, a costly quirk for mortals and a negative quirk for vamps.
+  Magisterium2022:
+  - bugfix: Fixed bug with ENHANCED_MELEE_DODGE
+  TheTrueSilverRat:
+  - code_imp: Made three clans whitelisted now
+  XeonMations:
+  - rscadd: Added Advanced Greyscale Sprite Generation to the game.
+  babamandaa:
+  - rscdel: Numina no longer has invocations. (This means your character will no longer
+      automatically say something when using Numina spells.)
+  buffyuwu:
+  - server: commented out the roundend report until we put something meaningful in
+      there
+  confusedhurricane:
+  - rscadd: Adds the Pyxis Medstation to St John's Community Clinic
