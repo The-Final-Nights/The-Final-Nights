@@ -160,6 +160,9 @@
 	var/icon/head_icon = 'icons/mob/pets_held.dmi'//what it looks like on your head
 	var/held_state = ""//icon state for the above
 
+	///If combat mode is on or not
+	var/combat_mode = FALSE
+
 	/// Is this mob allowed to be buckled/unbuckled to/from things?
 	var/can_buckle_to = TRUE
 
@@ -191,7 +194,6 @@
 	var/additional_lockpicking = 0
 	var/additional_athletics = 0
 	var/more_companions = 0
-	var/melee_professional = FALSE
 
 	var/info_known = INFO_KNOWN_UNKNOWN
 

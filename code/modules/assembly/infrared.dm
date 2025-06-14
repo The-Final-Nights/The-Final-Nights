@@ -18,13 +18,9 @@
 	. = ..()
 	beams = list()
 	START_PROCESSING(SSobj, src)
+	AddComponent(/datum/component/simple_rotation, AfterRotation = CALLBACK(src, .proc/AfterRotation))
 
-/obj/item/assembly/infra/ComponentInitialize()
-	. = ..()
-	var/static/rotation_flags = ROTATION_ALTCLICK | ROTATION_CLOCKWISE | ROTATION_COUNTERCLOCKWISE | ROTATION_FLIP | ROTATION_VERBS
-	AddComponent(/datum/component/simple_rotation, rotation_flags, after_rotation=CALLBACK(src, PROC_REF(after_rotation)))
-
-/obj/item/assembly/infra/proc/after_rotation()
+/obj/item/assembly/infra/proc/AfterRotation(mob/user, degrees)
 	refreshBeam()
 
 /obj/item/assembly/infra/Destroy()
@@ -124,7 +120,7 @@
 		return
 	refreshBeam()
 
-/obj/item/assembly/infra/attack_hand()
+/obj/item/assembly/infra/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	refreshBeam()
 

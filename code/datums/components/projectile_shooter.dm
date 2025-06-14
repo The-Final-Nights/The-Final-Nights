@@ -18,8 +18,8 @@
 	src.shot_prob = shot_prob
 
 	// unarmed attack is a special case for gunboots so they can shoot someone you stomp on. This happens 100% of the time you kick, ignoring shot_prob
-	if(islist(signal_or_sig_list) && (COMSIG_HUMAN_MELEE_UNARMED_ATTACK in signal_or_sig_list))
-		signal_or_sig_list -= COMSIG_HUMAN_MELEE_UNARMED_ATTACK
+	if(islist(signal_or_sig_list) && (COMSIG_LIVING_EARLY_UNARMED_ATTACK in signal_or_sig_list))
+		signal_or_sig_list -= COMSIG_LIVING_EARLY_UNARMED_ATTACK
 		RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(check_equip))
 		RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(check_dropped))
 
@@ -68,9 +68,9 @@
 /// As above, special case for gun shoes so they can kick and shoot
 /datum/component/projectile_shooter/proc/check_equip(datum/source, mob/living/user, slot)
 	SIGNAL_HANDLER
-	RegisterSignal(user, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, PROC_REF(check_kick))
+	RegisterSignal(user, COMSIG_LIVING_EARLY_UNARMED_ATTACK, PROC_REF(check_kick))
 
 /// As above, special case for gun shoes so they can kick and shoot
 /datum/component/projectile_shooter/proc/check_dropped(datum/source, mob/living/user)
 	SIGNAL_HANDLER
-	UnregisterSignal(user, COMSIG_HUMAN_MELEE_UNARMED_ATTACK)
+	UnregisterSignal(user, COMSIG_LIVING_EARLY_UNARMED_ATTACK)

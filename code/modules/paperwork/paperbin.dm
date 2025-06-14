@@ -207,32 +207,10 @@
 	///Cable this bundle is held together with.
 	var/obj/item/stack/cable_coil/binding_cable
 
-/obj/item/paper_bin/bundlenatural/Initialize(mapload)
-	binding_cable = new /obj/item/stack/cable_coil(src, 2)
-	binding_cable.color = COLOR_ORANGE_BROWN
-	binding_cable.cable_color = "brown"
-	binding_cable.desc += " Non-natural."
-	return ..()
-
-/obj/item/paper_bin/bundlenatural/dump_contents(atom/droppoint)
-	. = ..()
-	binding_cable.forceMove(droppoint)
-	binding_cable = null
-	qdel(src)
-
-/obj/item/paper_bin/bundlenatural/update_overlays()
-	bin_overlay = mutable_appearance(icon, bin_overlay_string)
-	bin_overlay.color = binding_cable.color
-	return ..()
-
 /obj/item/paper_bin/bundlenatural/attack_hand(mob/user, list/modifiers)
-	. = ..()
-	if(total_paper == 0)
-		deconstruct(FALSE)
-
-/obj/item/paper_bin/bundlenatural/deconstruct(disassembled)
-	dump_contents(drop_location())
-	return ..()
+	..()
+	if(total_paper < 1)
+		qdel(src)
 
 /obj/item/paper_bin/bundlenatural/fire_act(exposed_temperature, exposed_volume)
 	qdel(src)

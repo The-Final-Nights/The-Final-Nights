@@ -98,9 +98,9 @@
 
 
 /obj/machinery/iv_drip/attackby(obj/item/W, mob/user, params)
-	if(is_type_in_typecache(W, drip_containers))
+	if(is_type_in_typecache(W, drip_containers) || IS_EDIBLE(W))
 		if(beaker)
-			to_chat(user, "<span class='warning'>There is already a reagent container loaded!</span>")
+			to_chat(user, "<span class='warning'>[beaker] is already loaded on [src]!</span>")
 			return
 		if(!user.transferItemToLoc(W, src))
 			return
@@ -160,7 +160,7 @@
 			attached.bloodpool = attached.maxbloodpool
 			update_icon()
 
-/obj/machinery/iv_drip/attack_hand(mob/user)
+/obj/machinery/iv_drip/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -176,9 +176,11 @@
 	else
 		toggle_mode()
 
-/obj/machinery/iv_drip/AltClick(mob/living/user)
-	if(!user.canUseTopic(src, be_close=TRUE))
+/obj/machinery/iv_drip/attack_hand_secondary(mob/user, modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+
 	if(dripfeed)
 		dripfeed = FALSE
 		to_chat(usr, "<span class='notice'>You loosen the valve to speed up the [src].</span>")
@@ -194,7 +196,8 @@
 	if(!isliving(usr))
 		to_chat(usr, "<span class='warning'>You can't do that!</span>")
 		return
-
+	if (!usr.canUseTopic())
+		return
 	if(usr.incapacitated())
 		return
 	if(beaker)
@@ -210,7 +213,8 @@
 	if(!isliving(usr))
 		to_chat(usr, "<span class='warning'>You can't do that!</span>")
 		return
-
+	if (!usr.canUseTopic())
+		return
 	if(usr.incapacitated())
 		return
 	mode = !mode

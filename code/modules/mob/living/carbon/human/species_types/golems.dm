@@ -336,27 +336,9 @@
 		radiation_pulse(H, 50)
 		COOLDOWN_START(src, radiation_emission_cooldown, 2 SECONDS)
 
-/datum/species/golem/uranium/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	. = ..()
-	var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected))
-	var/radiation_block = target.run_armor_check(affecting, RAD)
-	///standard damage roll for use in determining how much you irradiate per punch
-	var/attacker_irradiate_value = rand(user.dna.species.punchdamagelow, user.dna.species.punchdamagehigh)
-	target.apply_effect(attacker_irradiate_value*5, EFFECT_IRRADIATE, radiation_block)
-
 /datum/species/golem/uranium/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)
 	..()
-	if(COOLDOWN_FINISHED(src, radiation_emission_cooldown) && M != H &&  M.a_intent != INTENT_HELP)
-		radiation_emission(H)
-
-/datum/species/golem/uranium/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
-	..()
-	if(COOLDOWN_FINISHED(src, radiation_emission_cooldown) && user != H)
-		radiation_emission(H)
-
-/datum/species/golem/uranium/on_hit(obj/projectile/P, mob/living/carbon/human/H)
-	..()
-	if(COOLDOWN_FINISHED(src, radiation_emission_cooldown))
+	if(COOLDOWN_FINISHED(src, radiation_emission_cooldown) && M != H &&  M.combat_mode)
 		radiation_emission(H)
 
 //Immune to physical bullets and resistant to brute, but very vulnerable to burn damage. Dusts on death.
@@ -381,15 +363,6 @@
 		new /obj/item/stack/ore/glass(get_turf(H))
 	qdel(H)
 
-/datum/species/golem/sand/bullet_act(obj/projectile/P, mob/living/carbon/human/H)
-	if(!(P.original == H && P.firer == H))
-		if(P.flag == BULLET || P.flag == BOMB)
-			playsound(H, 'sound/effects/shovel_dig.ogg', 70, TRUE)
-			H.visible_message("<span class='danger'>The [P.name] sinks harmlessly in [H]'s sandy body!</span>", \
-			"<span class='userdanger'>The [P.name] sinks harmlessly in [H]'s sandy body!</span>")
-			return BULLET_ACT_BLOCK
-	return ..()
-
 //Reflects lasers and resistant to burn damage, but very vulnerable to brute damage. Shatters on death.
 /datum/species/golem/glass
 	name = "Glass Golem"
@@ -412,20 +385,6 @@
 	for(var/i=1, i <= rand(3,5), i++)
 		new /obj/item/shard(get_turf(H))
 	qdel(H)
-
-/datum/species/golem/glass/bullet_act(obj/projectile/P, mob/living/carbon/human/H)
-	if(!(P.original == H && P.firer == H)) //self-shots don't reflect
-		if(P.flag == LASER || P.flag == ENERGY)
-			H.visible_message("<span class='danger'>The [P.name] gets reflected by [H]'s glass skin!</span>", \
-			"<span class='userdanger'>The [P.name] gets reflected by [H]'s glass skin!</span>")
-			if(P.starting)
-				var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
-				var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
-				// redirect the projectile
-				P.firer = H
-				P.preparePixelProjectile(locate(clamp(new_x, 1, world.maxx), clamp(new_y, 1, world.maxy), H.z), H)
-			return BULLET_ACT_FORCE_PIERCE
-	return ..()
 
 //Teleports when hit or when it wants to
 /datum/species/golem/bluespace
@@ -462,18 +421,9 @@
 
 /datum/species/golem/bluespace/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)
 	..()
-	if(world.time > last_teleport + teleport_cooldown && M != H &&  M.a_intent != INTENT_HELP)
+	if(world.time > last_teleport + teleport_cooldown && M != H &&  M.combat_mode)
 		reactive_teleport(H)
 
-/datum/species/golem/bluespace/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
-	..()
-	if(world.time > last_teleport + teleport_cooldown && user != H)
-		reactive_teleport(H)
-
-/datum/species/golem/bluespace/on_hit(obj/projectile/P, mob/living/carbon/human/H)
-	..()
-	if(world.time > last_teleport + teleport_cooldown)
-		reactive_teleport(H)
 
 /datum/species/golem/bluespace/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
@@ -581,19 +531,7 @@
 
 /datum/species/golem/bananium/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)
 	..()
-	if(world.time > last_banana + banana_cooldown && M != H &&  M.a_intent != INTENT_HELP)
-		new/obj/item/grown/bananapeel/specialpeel(get_turf(H))
-		last_banana = world.time
-
-/datum/species/golem/bananium/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
-	..()
-	if(world.time > last_banana + banana_cooldown && user != H)
-		new/obj/item/grown/bananapeel/specialpeel(get_turf(H))
-		last_banana = world.time
-
-/datum/species/golem/bananium/on_hit(obj/projectile/P, mob/living/carbon/human/H)
-	..()
-	if(world.time > last_banana + banana_cooldown)
+	if(world.time > last_banana + banana_cooldown && M != H &&  M.combat_mode)
 		new/obj/item/grown/bananapeel/specialpeel(get_turf(H))
 		last_banana = world.time
 
@@ -820,13 +758,6 @@
 	var/last_gong_time = 0
 	var/gong_cooldown = 150
 
-/datum/species/golem/bronze/bullet_act(obj/projectile/P, mob/living/carbon/human/H)
-	if(!(world.time > last_gong_time + gong_cooldown))
-		return ..()
-	if(P.flag == BULLET || P.flag == BOMB)
-		gong(H)
-		return ..()
-
 /datum/species/golem/bronze/spec_hitby(atom/movable/AM, mob/living/carbon/human/H)
 	..()
 	if(world.time > last_gong_time + gong_cooldown)
@@ -834,18 +765,10 @@
 
 /datum/species/golem/bronze/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)
 	..()
-	if(world.time > last_gong_time + gong_cooldown &&  M.a_intent != INTENT_HELP)
+	if(world.time > last_gong_time + gong_cooldown && M.combat_mode)
 		gong(H)
 
-/datum/species/golem/bronze/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
-	..()
-	if(world.time > last_gong_time + gong_cooldown)
-		gong(H)
 
-/datum/species/golem/bronze/on_hit(obj/projectile/P, mob/living/carbon/human/H)
-	..()
-	if(world.time > last_gong_time + gong_cooldown)
-		gong(H)
 
 /datum/species/golem/bronze/proc/gong(mob/living/carbon/human/H)
 	last_gong_time = world.time
@@ -899,27 +822,6 @@
 	var/last_creation = 0
 	var/brother_creation_cooldown = 300
 
-/datum/species/golem/cardboard/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
-	. = ..()
-	if(user != H)
-		return FALSE //forced reproduction is rape.
-	if(istype(I, /obj/item/stack/sheet/cardboard))
-		var/obj/item/stack/sheet/cardboard/C = I
-		if(last_creation + brother_creation_cooldown > world.time) //no cheesing dork
-			return
-		if(C.amount < 10)
-			to_chat(H, "<span class='warning'>You do not have enough cardboard!</span>")
-			return FALSE
-		to_chat(H, "<span class='notice'>You attempt to create a new cardboard brother.</span>")
-		if(do_after(user, 30, target = user))
-			if(last_creation + brother_creation_cooldown > world.time) //no cheesing dork
-				return
-			if(!C.use(10))
-				to_chat(H, "<span class='warning'>You do not have enough cardboard!</span>")
-				return FALSE
-			to_chat(H, "<span class='notice'>You create a new cardboard golem shell.</span>")
-			create_brother(H.loc)
-
 /datum/species/golem/cardboard/proc/create_brother(location)
 	new /obj/effect/mob_spawn/human/golem/servant(location, /datum/species/golem/cardboard, owner)
 	last_creation = world.time
@@ -945,10 +847,6 @@
 	fixed_mut_color = null
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER,TRAIT_NOBREATH, TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_CHUNKYFINGERS,TRAIT_RADIMMUNE,TRAIT_GENELESS,TRAIT_PIERCEIMMUNE,TRAIT_NODISMEMBER, TRAIT_NOFLASH)
 	info_text = "As a <span class='danger'>Durathread Golem</span>, your strikes will cause those your targets to start choking, but your woven body won't withstand fire as well."
-
-/datum/species/golem/durathread/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	. = ..()
-	target.apply_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
 
 /datum/species/golem/bone
 	name = "Bone Golem"

@@ -305,7 +305,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 	if(panel_open)
 		. += "wm_panel"
 
-/obj/machinery/washing_machine/attackby(obj/item/W, mob/user, params)
+/obj/machinery/washing_machine/attackby(obj/item/W, mob/living/user, params)
 	if(panel_open && !busy && default_unfasten_wrench(user, W))
 		return
 
@@ -313,7 +313,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		update_icon()
 		return
 
-	else if(user.a_intent != INTENT_HARM)
+	else if(!user.combat_mode)
 		if (!state_open)
 			to_chat(user, "<span class='warning'>Open the door first!</span>")
 			return TRUE
@@ -336,7 +336,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 	else
 		return ..()
 
-/obj/machinery/washing_machine/attack_hand(mob/user)
+/obj/machinery/washing_machine/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -344,7 +344,7 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		to_chat(user, "<span class='warning'>[src] is busy!</span>")
 		return
 
-	if(user.pulling && user.a_intent == INTENT_GRAB && isliving(user.pulling))
+	if(user.pulling && isliving(user.pulling))
 		var/mob/living/L = user.pulling
 		if(L.buckled || L.has_buckled_mobs())
 			return
@@ -358,7 +358,32 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		open_machine()
 	else
 		state_open = FALSE //close the door
-		update_icon()
+		update_appearance()
+
+/obj/machinery/washing_machine/attack_hand_secondary(mob/user, modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+
+	if(!user.canUseTopic(src, !issilicon(user)))
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
+	if(busy)
+		to_chat(user, span_warning("[src] is busy!"))
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
+	if(state_open)
+		to_chat(user, span_warning("Close the door first!"))
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
+	if(bloody_mess)
+		to_chat(user, span_warning("[src] must be cleaned up first!"))
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
+	busy = TRUE
+	update_appearance()
+	addtimer(CALLBACK(src, .proc/wash_cycle), 20 SECONDS)
+	START_PROCESSING(SSfastprocess, src)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/machinery/washing_machine/attack_ai_secondary(mob/user, modifiers)
+	return attack_hand_secondary(user, modifiers)
 
 /obj/machinery/washing_machine/deconstruct(disassembled = TRUE)
 	if (!(flags_1 & NODECONSTRUCT_1))

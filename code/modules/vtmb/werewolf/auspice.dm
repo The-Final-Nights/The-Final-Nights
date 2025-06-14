@@ -14,10 +14,10 @@
 /datum/auspice/proc/on_gain(var/mob/living/carbon/C)
 	C.update_rage_hud()
 
-	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
-	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
-	var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = C.transformator.corax_form?.resolve()
-	var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
+	var/mob/living/carbon/human/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+	var/mob/living/carbon/human/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+	var/mob/living/carbon/human/werewolf/corax/corax_crinos/cor_crinos = C.transformator.corax_form?.resolve()
+	var/mob/living/carbon/human/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
 	lupus?.auspice = src
 	lupus?.dna = C.dna
 	crinos?.auspice = src

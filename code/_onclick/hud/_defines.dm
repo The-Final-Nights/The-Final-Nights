@@ -64,6 +64,7 @@
 #define ui_block "WEST-2:11,SOUTH+4:2"
 #define ui_movi "WEST-3:15,SOUTH+2:26"
 #define ui_acti "WEST-3:16,SOUTH+1:16"
+#define ui_combat_toggle "WEST-3:16,SOUTH+1:16"
 #define ui_zonesel "WEST-4:16,SOUTH+1:16"
 #define ui_acti_alt "WEST-3:16,SOUTH+1:16"	//alternative intent switcher for when the interface is hidden (F12)
 #define ui_crafting	"WEST-2:11,SOUTH+3:4"

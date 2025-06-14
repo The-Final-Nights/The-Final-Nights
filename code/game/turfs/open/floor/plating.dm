@@ -146,6 +146,3 @@
 /turf/open/floor/plating/foam/ex_act()
 	..()
 	ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
-
-/turf/open/floor/plating/foam/tool_act(mob/living/user, obj/item/I, tool_type)
-	return

@@ -46,7 +46,10 @@
 
 /obj/item/energy_katana/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
-	if(dash_toggled && !Adjacent(target) && !target.density)
+
+	var/list/modifiers = params2list(click_parameters)
+
+	if(LAZYACCESS(modifiers, RIGHT_CLICK) && !target.density)
 		jaunt.Teleport(user, target)
 
 /obj/item/energy_katana/pickup(mob/living/user)

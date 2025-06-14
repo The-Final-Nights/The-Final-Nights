@@ -17,6 +17,8 @@
 
 /mob/living/toggle_move_intent()
 	. = ..()
+	if(blocking)
+		m_intent = MOVE_INTENT_WALK
 	update_move_intent_slowdown()
 
 /mob/living/update_config_movespeed()

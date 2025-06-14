@@ -13,22 +13,22 @@
 // if this were a datum we'd just use New()
 // but since it's an atom subtype we have to use INITIALIZE_IMMEDIATE
 /datum/werewolf_holder/transformation/New()
-	var/mob/living/carbon/werewolf/crinos/crinos = new()
+	var/mob/living/carbon/human/werewolf/crinos/crinos = new()
 	crinos_form = WEAKREF(crinos)
 	crinos = crinos_form.resolve()
 	crinos?.transformator = src
 
-	var/mob/living/carbon/werewolf/lupus/lupus = new()
+	var/mob/living/carbon/human/werewolf/lupus/lupus = new()
 	lupus_form = WEAKREF(lupus)
 	lupus = lupus_form.resolve()
 	lupus?.transformator = src
 
-	var/mob/living/carbon/werewolf/corax/corax_crinos/corax = new()
+	var/mob/living/carbon/human/werewolf/corax/corax_crinos/corax = new()
 	corax_form = WEAKREF(corax)
 	corax = corax_form.resolve()
 	corax?.transformator = src
 
-	var/mob/living/carbon/werewolf/lupus/corvid/corvid = new()
+	var/mob/living/carbon/human/werewolf/lupus/corvid/corvid = new()
 	corvid_form = WEAKREF(corvid)
 	corvid = corvid_form.resolve()
 	corvid?.transformator = src
@@ -79,7 +79,7 @@
 		return
 
 	trans.inspired = FALSE
-	if(ishuman(trans))
+	if(trans.type == /mob/living/carbon/human)
 		var/datum/species/garou/G = trans.dna.species
 		var/mob/living/carbon/human/H = trans
 		if(G.glabro)
@@ -104,7 +104,7 @@
 			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)
 			if(iscrinos(trans))
 				ntransform.Scale(0.75, 0.75)
-			if(ishuman(trans))
+			if(trans.type == /mob/living/carbon/human)
 				ntransform.Scale(1, 0.75)
 		if("Crinos")
 			for(var/spoken_language in garou_lang.spoken_languages)
@@ -113,22 +113,22 @@
 			garou_lang.grant_language(/datum/language/primal_tongue, TRUE, TRUE)
 			garou_lang.grant_language(/datum/language/garou_tongue, TRUE, TRUE)
 			if(islupus(trans))
-				var/mob/living/carbon/werewolf/lupus/lupor = trans
+				var/mob/living/carbon/human/werewolf/lupus/lupor = trans
 				if(lupor.hispo)
 					ntransform.Scale(0.95, 1.25)
 				else
 					ntransform.Scale(1, 1.75)
-			if(ishuman(trans))
+			if(trans.type == /mob/living/carbon/human)
 				ntransform.Scale(1.25, 1.5)
 		if("Corvid")
 			if(iscoraxcrinos(trans))
 				ntransform.Scale(0.75, 0.75)
-			if(ishuman(trans))
+			if(trans.type == /mob/living/carbon/human)
 				ntransform.Scale(1, 0.75)
 		if("Corax Crinos")
 			if(iscorvid(trans))
 				ntransform.Scale(1, 1.75)
-			if(ishuman(trans))
+			if(trans.type == /mob/living/carbon/human)
 				ntransform.Scale(1.25, 1.5)
 
 		if("Homid")
@@ -151,7 +151,7 @@
 				return
 			if(!lupus_form)
 				return
-			var/mob/living/carbon/werewolf/lupus/lupus = lupus_form.resolve()
+			var/mob/living/carbon/human/werewolf/lupus/lupus = lupus_form.resolve()
 			if(!lupus)
 				lupus_form = null
 				return
@@ -172,7 +172,7 @@
 				return
 			if(!crinos_form)
 				return
-			var/mob/living/carbon/werewolf/crinos/crinos = crinos_form.resolve()
+			var/mob/living/carbon/human/werewolf/crinos/crinos = crinos_form.resolve()
 			if(!crinos)
 				crinos_form = null
 				return
@@ -193,7 +193,7 @@
 				return
 			if(!corvid_form)
 				return
-			var/mob/living/carbon/werewolf/lupus/corvid/corvid = corvid_form.resolve()
+			var/mob/living/carbon/human/werewolf/lupus/corvid/corvid = corvid_form.resolve()
 			if(!corvid)
 				corvid_form = null
 				return
@@ -213,7 +213,7 @@
 				return
 			if(!corax_form)
 				return
-			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = corax_form.resolve()
+			var/mob/living/carbon/human/werewolf/corax/corax_crinos/cor_crinos = corax_form.resolve()
 			if(!cor_crinos)
 				corax_form = null
 				return
@@ -228,7 +228,7 @@
 			addtimer(CALLBACK(src, PROC_REF(transform_cor_crinos), trans, cor_crinos), 3 SECONDS)
 
 		if("Homid")
-			if(ishuman(trans))
+			if(trans.type == /mob/living/carbon/human)
 				transformating = FALSE
 				return
 			if(!human_form)
@@ -248,7 +248,7 @@
 
 			addtimer(CALLBACK(src, PROC_REF(transform_homid), trans, homid), 3 SECONDS)
 
-/datum/werewolf_holder/transformation/proc/transform_lupus(mob/living/carbon/trans, mob/living/carbon/werewolf/lupus/lupus)
+/datum/werewolf_holder/transformation/proc/transform_lupus(mob/living/carbon/trans, mob/living/carbon/human/werewolf/lupus/lupus)
 	PRIVATE_PROC(TRUE)
 
 	if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues
@@ -278,12 +278,13 @@
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	lupus.update_icons()
+	ADD_TRAIT(lupus, TRAIT_NO_HANDS, "lupus")
 	if(lupus.hispo)
 		lupus.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 		lupus.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	lupus.mind.current = lupus
 
-/datum/werewolf_holder/transformation/proc/transform_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/crinos/crinos)
+/datum/werewolf_holder/transformation/proc/transform_crinos(mob/living/carbon/trans, mob/living/carbon/human/werewolf/crinos/crinos)
 	PRIVATE_PROC(TRUE)
 
 	if(trans.stat == DEAD)
@@ -315,8 +316,9 @@
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	crinos.update_icons()
 	crinos.mind.current = crinos
+	crinos.set_combat_mode(TRUE)
 
-/datum/werewolf_holder/transformation/proc/transform_cor_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos)
+/datum/werewolf_holder/transformation/proc/transform_cor_crinos(mob/living/carbon/trans, mob/living/carbon/human/werewolf/corax/corax_crinos/cor_crinos)
 	PRIVATE_PROC(TRUE)
 
 	if(trans.stat == DEAD)
@@ -349,6 +351,7 @@
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	cor_crinos.update_icons()
 	cor_crinos.mind.current = cor_crinos
+	cor_crinos.set_combat_mode(TRUE)
 
 /datum/werewolf_holder/transformation/proc/transform_homid(mob/living/carbon/trans, mob/living/carbon/human/homid)
 	PRIVATE_PROC(TRUE)
@@ -381,7 +384,7 @@
 	homid.update_body()
 	homid.mind.current = homid
 
-/datum/werewolf_holder/transformation/proc/transform_corvid(mob/living/carbon/trans, mob/living/carbon/werewolf/lupus/corvid/corvid)
+/datum/werewolf_holder/transformation/proc/transform_corvid(mob/living/carbon/trans, mob/living/carbon/human/werewolf/lupus/corvid/corvid)
 	PRIVATE_PROC(TRUE)
 
 	if(trans.stat == DEAD || !trans.client) // [ChillRaccoon] - preventing non-player transform issues

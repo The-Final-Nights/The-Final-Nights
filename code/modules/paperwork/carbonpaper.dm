@@ -39,5 +39,14 @@
 	update_icon_state()
 	user.put_in_hands(copy)
 
+/obj/item/paper/carbon/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+
+	if(loc == user && user.is_holding(src))
+		removecopy(user)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /obj/item/paper/carbon_copy
 	icon_state = "cpaper"

@@ -4,7 +4,7 @@
 #define VEIL_COOLDOWN 20 SECONDS
 #define RAGE_LIFE_COOLDOWN 30 SECONDS
 
-/mob/living/carbon/werewolf/Life()
+/mob/living/carbon/human/werewolf/Life()
 	update_icons()
 	update_rage_hud()
 	return..()
@@ -116,27 +116,27 @@
 		if(H.CheckEyewitness(H, H, 3, FALSE))
 			H.adjust_veil(-1,random = -1)
 
-/mob/living/carbon/werewolf/crinos/Life()
+/mob/living/carbon/human/werewolf/crinos/Life()
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
-/mob/living/carbon/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
+/mob/living/carbon/human/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
 
-/mob/living/carbon/werewolf/handle_status_effects()
+/mob/living/carbon/human/werewolf/handle_status_effects()
 	..()
 	//natural reduction of movement delay due to stun.
 	if(move_delay_add > 0)
 		move_delay_add = max(0, move_delay_add - rand(1, 2))
 
-/mob/living/carbon/werewolf/handle_changeling()
+/mob/living/carbon/human/werewolf/handle_changeling()
 	return
 
-/mob/living/carbon/werewolf/handle_fire()//Aliens on fire code
+/mob/living/carbon/human/werewolf/handle_fire()//Aliens on fire code
 	. = ..()
 	if(.) //if the mob isn't on fire anymore
 		return

@@ -4,8 +4,8 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	/obj/item/clothing/head/chameleon/broken \
 	)))
 
-/mob/living/silicon/robot/attackby(obj/item/W, mob/user, params)
-	if(W.tool_behaviour == TOOL_WELDER && (user.a_intent != INTENT_HARM || user == src))
+/mob/living/silicon/robot/attackby(obj/item/W, mob/living/user, params)
+	if(W.tool_behaviour == TOOL_WELDER && (!user.combat_mode || user == src))
 		user.changeNext_move(CLICK_CD_MELEE)
 		if (!getBruteLoss())
 			to_chat(user, "<span class='warning'>[src] is already in good condition!</span>")
@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 			deconstruct()
 		return
 
-	if(W.slot_flags & ITEM_SLOT_HEAD && hat_offset != INFINITY && user.a_intent == INTENT_HELP && !is_type_in_typecache(W, GLOB.blacklisted_borg_hats))
+	if(W.slot_flags & ITEM_SLOT_HEAD && hat_offset != INFINITY && !user.combat_mode && !is_type_in_typecache(W, GLOB.blacklisted_borg_hats))
 		if(hat && HAS_TRAIT(hat, TRAIT_NODROP))
 			to_chat(user, "<span class='warn'>You can't seem to remove [src]'s existing headwear!</span>")
 			return
@@ -109,7 +109,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 			if (user.temporarilyRemoveItemFromInventory(W, TRUE))
 				place_on_head(W)
 		return
-	if(istype(W, /obj/item/defibrillator) && user.a_intent == "help")
+	if(istype(W, /obj/item/defibrillator) && !user.combat_mode)
 		if(!opened)
 			to_chat(user, "<span class='warning'>You must access the cyborg's internals!</span>")
 			return
@@ -231,32 +231,30 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 		if(modularInterface.install_component(floppy, user))
 			return
 
-	if(W.force && W.damtype != STAMINA && stat != DEAD) //only sparks if real damage is dealt.
-		spark_system.start()
 	return ..()
 
-/mob/living/silicon/robot/attack_alien(mob/living/carbon/alien/humanoid/M)
-	if (M.a_intent == INTENT_DISARM)
+/mob/living/silicon/robot/attack_alien(mob/living/carbon/alien/humanoid/user, list/modifiers)
+	if (LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(body_position == STANDING_UP)
-			M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
+			user.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 			var/obj/item/I = get_active_held_item()
 			if(I)
 				uneq_active()
-				visible_message("<span class='danger'>[M] disarmed [src]!</span>", \
-					"<span class='userdanger'>[M] has disabled [src]'s active module!</span>", null, COMBAT_MESSAGE_RANGE)
-				log_combat(M, src, "disarmed", "[I ? " removing \the [I]" : ""]")
+				visible_message("<span class='danger'>[user] disarmed [src]!</span>", \
+					"<span class='userdanger'>[user] has disabled [src]'s active module!</span>", null, COMBAT_MESSAGE_RANGE)
+				log_combat(user, src, "disarmed", "[I ? " removing \the [I]" : ""]")
 			else
 				Stun(40)
-				step(src,get_dir(M,src))
-				log_combat(M, src, "pushed")
-				visible_message("<span class='danger'>[M] forces back [src]!</span>", \
-					"<span class='userdanger'>[M] forces back [src]!</span>", null, COMBAT_MESSAGE_RANGE)
+				step(src,get_dir(user,src))
+				log_combat(user, src, "pushed")
+				visible_message("<span class='danger'>[user] forces back [src]!</span>", \
+					"<span class='userdanger'>[user] forces back [src]!</span>", null, COMBAT_MESSAGE_RANGE)
 			playsound(loc, 'sound/weapons/pierce.ogg', 50, TRUE, -1)
 	else
 		..()
 	return
 
-/mob/living/silicon/robot/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/silicon/robot/attack_slime(mob/living/simple_animal/slime/M, list/modifiers)
 	if(..()) //successful slime shock
 		flash_act()
 		var/stunprob = M.powerlevel * 7 + 10
@@ -275,7 +273,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	return
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/mob/living/silicon/robot/attack_hand(mob/living/carbon/human/user)
+/mob/living/silicon/robot/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	add_fingerprint(user)
 	if(opened && !wiresexposed && !issilicon(user))
 		if(cell)

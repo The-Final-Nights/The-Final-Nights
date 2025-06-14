@@ -146,7 +146,7 @@
 		if(prob(25))
 			emote("scream")
 		return
-	a_intent = INTENT_HARM
+	set_combat_mode(TRUE)
 	if(get_dist(frenzy_target, src) <= 1)
 		if(iskindred(src))
 			try_frenzy_bite(frenzy_target)

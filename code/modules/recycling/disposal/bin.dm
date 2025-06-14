@@ -67,7 +67,7 @@
 /obj/machinery/disposal/LateInitialize()
 	trunk_check()
 
-/obj/machinery/disposal/attackby(obj/item/I, mob/user, params)
+/obj/machinery/disposal/attackby(obj/item/I, mob/living/user, params)
 	add_fingerprint(user)
 	if(!pressure_charging && !full_pressure && !flush)
 		if(I.tool_behaviour == TOOL_SCREWDRIVER)
@@ -85,7 +85,7 @@
 				deconstruct()
 			return
 
-	if(user.a_intent != INTENT_HARM)
+	if(!user.combat_mode)
 		if((I.item_flags & ABSTRACT) || !user.temporarilyRemoveItemFromInventory(I))
 			return
 		place_item_in_disposal(I, user)
@@ -155,7 +155,7 @@
 	update_icon()
 
 // clumsy monkeys and xenos can only pull the flush lever
-/obj/machinery/disposal/attack_paw(mob/user)
+/obj/machinery/disposal/attack_paw(mob/user, list/modifiers)
 	if(ISADVANCEDTOOLUSER(user))
 		return ..()
 	if(machine_stat & BROKEN)

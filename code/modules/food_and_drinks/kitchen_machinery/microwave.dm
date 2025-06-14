@@ -106,7 +106,7 @@
 	icon_state = "mw"
 	return ..()
 
-/obj/machinery/microwave/attackby(obj/item/O, mob/user, params)
+/obj/machinery/microwave/attackby(obj/item/O, mob/living/user, params)
 	if(operating)
 		return
 	if(default_deconstruction_crowbar(O))
@@ -183,7 +183,7 @@
 			to_chat(user, "<span class='notice'>You insert [loaded] items into \the [src].</span>")
 		return
 
-	if(O.w_class <= WEIGHT_CLASS_NORMAL && !istype(O, /obj/item/storage) && user.a_intent == INTENT_HELP)
+	if(O.w_class <= WEIGHT_CLASS_NORMAL && !istype(O, /obj/item/storage) && !user.combat_mode)
 		if(ingredients.len >= max_n_of_items)
 			to_chat(user, "<span class='warning'>\The [src] is full, you can't put anything in!</span>")
 			return TRUE
@@ -197,7 +197,7 @@
 
 	..()
 
-/obj/machinery/microwave/AltClick(mob/user)
+/obj/machinery/microwave/attack_hand_secondary(mob/user, list/modifiers)
 	if(user.canUseTopic(src, !issilicon(usr)))
 		cook()
 

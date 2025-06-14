@@ -54,10 +54,10 @@ GLOBAL_LIST_EMPTY(bodycontainers) //Let them act as spawnpoints for revenants an
 		return
 	open()
 
-/obj/structure/bodycontainer/attack_paw(mob/user)
-	return attack_hand(user)
+/obj/structure/bodycontainer/attack_paw(mob/user, list/modifiers)
+	return attack_hand(user, modifiers)
 
-/obj/structure/bodycontainer/attack_hand(mob/user)
+/obj/structure/bodycontainer/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -340,10 +340,10 @@ GLOBAL_LIST_EMPTY(crematoriums)
 	new /obj/item/stack/sheet/metal (loc, 2)
 	qdel(src)
 
-/obj/structure/tray/attack_paw(mob/user)
-	return attack_hand(user)
+/obj/structure/tray/attack_paw(mob/user, list/modifiers)
+	return attack_hand(user, modifiers)
 
-/obj/structure/tray/attack_hand(mob/user)
+/obj/structure/tray/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
