@@ -145,7 +145,7 @@
 /datum/discipline_power/dominate/command/activate(mob/living/target)
 	. = ..()
 	to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-	owner.say("[custom_command]")
+	owner.say(custom_command)
 	to_chat(target, span_big("[custom_command]"))
 	to_chat(target,span_warning("[owner] has successfully dominated your mind!"))
 	SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
