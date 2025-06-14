@@ -22774,16 +22774,14 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
 "fyD" = (
-/obj/item/seeds/watermelon,
-/obj/item/seeds/coffee,
 /obj/item/seeds/cotton,
-/obj/item/seeds/grape,
-/obj/item/seeds/bamboo,
-/obj/item/seeds/onion,
-/obj/item/seeds/garlic,
 /obj/item/seeds/cocoapod,
-/obj/item/seeds/orange,
-/obj/item/seeds/lemon,
+/obj/item/seeds/corn,
+/obj/item/seeds/cotton,
+/obj/item/seeds/cotton,
+/obj/item/seeds/cocoapod,
+/obj/item/seeds/cocoapod,
+/obj/item/seeds/corn,
 /obj/item/seeds/corn,
 /turf/open/floor/wood,
 /area/vtm/amberglade/amberglade_bawn_interior)
@@ -25842,7 +25840,6 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/forest)
 "gil" = (
-/obj/item/seeds/sunflower/moonflower,
 /obj/item/seeds/sunflower,
 /turf/open/floor/wood,
 /area/vtm/amberglade/amberglade_bawn_interior)
