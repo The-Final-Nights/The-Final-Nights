@@ -11,6 +11,11 @@
 
 	activate_sound = 'code/modules/wod13/sounds/serpentis.ogg'
 
+/datum/discipline/serpentis/post_gain()
+	. = ..()
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/typhon_brew)
+
+
 //THE EYES OF THE SERPENT
 /datum/discipline_power/serpentis/the_eyes_of_the_serpent
 	name = "The Eyes of the Serpent"

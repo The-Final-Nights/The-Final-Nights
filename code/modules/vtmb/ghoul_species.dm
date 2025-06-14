@@ -3,6 +3,7 @@
 	id = "ghoul"
 	default_color = "FFFFFF"
 	toxic_food = RAW
+	liked_food = SANGUINE
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_VIRUSIMMUNE, TRAIT_NOCRITDAMAGE)
 	use_skintones = TRUE

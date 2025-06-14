@@ -191,6 +191,17 @@
 	icon_state = "beer_blue"
 	list_reagents = list(/datum/reagent/consumable/ethanol/beer = 40, /datum/reagent/toxin/amatoxin = 10)
 
+/obj/item/reagent_containers/food/drinks/beer/vampire/typhon
+	name = "Typhon's Beer"
+	desc = "A sanguine drink to sate those of vampiric tastes"
+	icon_state = "typhon"
+	foodtype = SANGUINE
+	list_reagents = list(/datum/reagent/consumable/ethanol/beer/typhon = 30)
+
+/obj/item/reagent_containers/food/drinks/beer/vampire/typhon/attack(mob/living/M, mob/user, def_zone)
+	. = ..()
+	reagents.trans_to(M, gulp_size, transfered_by = user, methods = VAMPIRE)
+
 /obj/item/reagent_containers/food/drinks/bottle/vampirecola
 	name = "two liter cola bottle"
 	desc = "Coca cola espuma..."
