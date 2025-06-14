@@ -455,11 +455,17 @@ SUBSYSTEM_DEF(carpool)
 				V.on = TRUE
 				playsound(V, 'code/modules/wod13/sounds/start.ogg', 50, TRUE)
 				to_chat(owner, "<span class='notice'>You managed to start [V]'s engine.</span>")
+				if(istype(V, /obj/vampire_car/emergency))
+					var/obj/vampire_car/emergency/emergency_vehicle = V
+					emergency_vehicle.start_emergency_systems()
 				return
 			if(prob(100*(V.health/V.maxhealth)))
 				V.on = TRUE
 				playsound(V, 'code/modules/wod13/sounds/start.ogg', 50, TRUE)
 				to_chat(owner, "<span class='notice'>You managed to start [V]'s engine.</span>")
+				if(istype(V, /obj/vampire_car/emergency))
+					var/obj/vampire_car/emergency/emergency_vehicle = V
+					emergency_vehicle.start_emergency_systems()
 				return
 			else
 				to_chat(owner, "<span class='warning'>You failed to start [V]'s engine.</span>")
@@ -469,6 +475,13 @@ SUBSYSTEM_DEF(carpool)
 			playsound(V, 'code/modules/wod13/sounds/stop.ogg', 50, TRUE)
 			to_chat(owner, "<span class='notice'>You stop [V]'s engine.</span>")
 			V.set_fari_on(FALSE)
+			// properly handle emergency systems when engine turns off
+			if(istype(V, /obj/vampire_car/emergency))
+				var/obj/vampire_car/emergency/emergency_vehicle = V
+				emergency_vehicle.stop_siren()
+				if(emergency_vehicle.emergency_code == 3)
+					emergency_vehicle.emergency_code = 2
+					emergency_vehicle.start_emergency_systems()
 			return
 
 /datum/action/carr/exit_car
@@ -481,6 +494,15 @@ SUBSYSTEM_DEF(carpool)
 		var/obj/vampire_car/V = owner.loc
 		if(V.driver == owner)
 			V.driver = null
+			// downgrade emergency code from Lights + Siren to Lights only when driver exits
+			if(istype(V, /obj/vampire_car/emergency))
+				var/obj/vampire_car/emergency/emergency_vehicle = V
+				if(emergency_vehicle.emergency_code == 3)
+					emergency_vehicle.emergency_code = 2
+					emergency_vehicle.stop_siren()
+					emergency_vehicle.start_emergency_systems()
+				else
+					emergency_vehicle.stop_siren()
 		if(owner in V.passengers)
 			V.passengers -= owner
 		owner.forceMove(V.loc)
@@ -541,11 +563,14 @@ SUBSYSTEM_DEF(carpool)
 				B.Grant(src)
 				var/datum/action/carr/baggage/G = new()
 				G.Grant(src)
+				if(istype(V, /obj/vampire_car/emergency))
+					var/datum/action/carr/emergency_response/ER = new()
+					ER.Grant(src)
 			else if(length(V.passengers) < V.max_passengers)
 				forceMove(over_object)
 				V.passengers += src
-				var/datum/action/carr/exit_car/E = new()
-				E.Grant(src)
+				var/datum/action/carr/exit_car/PE = new()
+				PE.Grant(src)
 			visible_message("<span class='notice'>[src] enters [V].</span>", \
 				"<span class='notice'>You enter [V].</span>")
 			playsound(V, 'code/modules/wod13/sounds/door.ogg', 50, TRUE)
@@ -686,53 +711,6 @@ SUBSYSTEM_DEF(carpool)
 	access = "camarilla"
 	baggage_limit = 45
 
-/obj/vampire_car/police
-	icon_state = "police"
-	max_passengers = 3
-	dir = WEST
-	beep_sound = 'code/modules/wod13/sounds/migalka.ogg'
-	access = "police"
-	baggage_limit = 45
-	baggage_max = WEIGHT_CLASS_BULKY
-	light_system = MOVABLE_LIGHT
-	light_color = "#ff0000"
-	light_range = 6
-	light_power = 6
-	light_on = FALSE
-	var/color_blue = FALSE
-	COOLDOWN_DECLARE(last_color_change)
-
-/obj/vampire_car/police/unmarked
-	icon_state = "unmarked"
-	max_passengers = 3
-	dir = WEST
-	beep_sound = 'code/modules/wod13/sounds/migalka.ogg'
-	access = "police"
-	baggage_limit = 45
-	baggage_max = WEIGHT_CLASS_BULKY
-
-
-/obj/vampire_car/police/set_fari_on(new_value)
-	. = ..()
-	if(isnull(.))
-		return
-	set_light_on(fari_on)
-
-
-/obj/vampire_car/police/handle_caring()
-	if(!light_on)
-		return ..()
-	if(!COOLDOWN_FINISHED(src, last_color_change))
-		return ..()
-	COOLDOWN_START(src, last_color_change, 1 SECONDS)
-	if(color_blue)
-		color_blue = FALSE
-		set_light_color("#ff0000")
-	else
-		color_blue = TRUE
-		set_light_color("#0000ff")
-	return ..()
-
 /obj/vampire_car/taxi
 	icon_state = "taxi"
 	max_passengers = 3
@@ -757,11 +735,6 @@ SUBSYSTEM_DEF(carpool)
 
 /obj/vampire_car/track/volkswagen
 	icon_state = "volkswagen"
-	baggage_limit = 60
-
-/obj/vampire_car/track/ambulance
-	icon_state = "ambulance"
-	access = "clinic"
 	baggage_limit = 60
 
 /proc/get_dist_in_pixels(pixel_starts_x, pixel_starts_y, pixel_ends_x, pixel_ends_y)

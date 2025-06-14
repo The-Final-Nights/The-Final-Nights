@@ -95,7 +95,7 @@
 
 /obj/structure/bed/roller/Moved()
 	. = ..()
-	if(has_gravity())
+	if(has_gravity() && !istype(loc, /obj/vampire_car/emergency/ambulance))
 		playsound(src, 'sound/effects/roll.ogg', 100, TRUE)
 
 
