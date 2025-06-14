@@ -21,3 +21,23 @@
 /obj/item/ammo_box/magazine/m556/phasic
 	name = "toploader magazine (5.56mm Phasic)"
 	ammo_type = /obj/item/ammo_casing/a556/phasic
+
+/obj/item/ammo_box/magazine/m556/bleeder
+	name = "toploader magazine (5.56mm Bleeder)"
+	ammo_type = /obj/item/ammo_casing/a556/bleeder
+
+/obj/item/ammo_box/magazine/m556/compound
+	name = "toploader magazine (5.56mm Compound)"
+	ammo_type = /obj/item/ammo_casing/a556/compound
+
+/obj/item/ammo_box/magazine/m556/hod
+	name = "toploader magazine (5.56mm Hod)"
+	ammo_type = /obj/item/ammo_casing/a556/hod
+
+/obj/item/ammo_box/magazine/m556/incendiary
+	name = "toploader magazine (5.56mm Incendiary)"
+	ammo_type = /obj/item/ammo_casing/a556/incendiary
+
+/obj/item/ammo_box/magazine/m556/silver
+	name = "toploader magazine (5.56mm Silver)"
+	ammo_type = /obj/item/ammo_casing/a556/silver
