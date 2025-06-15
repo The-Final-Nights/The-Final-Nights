@@ -33,7 +33,6 @@ SUBSYSTEM_DEF(zombiepool)
 		//!NPC.route_optimisation()
 		if(MC_TICK_CHECK)
 			return
-		Z.handle_automated_patriotification()
 
 /obj/structure/vampgate
 	name = "Graveyard Gate"
@@ -49,6 +48,22 @@ SUBSYSTEM_DEF(zombiepool)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	var/punches_to_break = 500
 	var/repairing = FALSE
+	var/masquerade_timer_running = FALSE
+
+/obj/structure/vampgate/proc/start_masquerade_leak() //only started if the gate opens.
+	if(masquerade_timer_running)
+		return
+	masquerade_timer_running = TRUE //Keeps it checking the gate every 60 seconds to see if it is still open.
+	spawn while(masquerade_timer_running)
+		if(icon_state != "gate-open")
+			masquerade_timer_running = FALSE
+			break
+		for(var/mob/living/carbon/human/H in GLOB.player_list) //All Graveyard Keepers lose a masquerade point, every minute.
+			if(H?.mind?.assigned_role == "Graveyard Keeper" && H.client && istype(get_area(H), /area/vtm/graveyard))
+				H.masquerade -= 1
+				to_chat(H, "<span class='danger'>You failed your duty, the graveyard gate is broken and spews darkness... Your Masquerade is quickly slipping away.</span>")
+				SSgraveyard.total_bad += 1
+		sleep(60 SECONDS)
 
 /obj/structure/vampgate/proc/punched()
 	playsound(get_turf(src), 'code/modules/wod13/sounds/get_bent.ogg', 100, FALSE)
@@ -61,6 +76,7 @@ SUBSYSTEM_DEF(zombiepool)
 		if(punches_to_break == 0)
 			density = FALSE
 			icon_state = "gate-open"
+			start_masquerade_leak()
 
 /obj/structure/vampgate/examine(mob/user)
 	. = ..()
@@ -75,6 +91,7 @@ SUBSYSTEM_DEF(zombiepool)
 		if(76 to 100)
 			. += "<span class='notice'><b>Density: [punches_to_break]/[initial(punches_to_break)]</b></span>"
 
+
 /obj/structure/vampgate/Initialize()
 	. = ..()
 	GLOB.vampgate = src
@@ -84,12 +101,15 @@ SUBSYSTEM_DEF(zombiepool)
 		if(!repairing)
 			repairing = TRUE
 			if(do_mob(user, src, 5 SECONDS))
-				punches_to_break = min(punches_to_break+5, initial(punches_to_break))
+				if(punches_to_break >= 1)
+					to_chat(user, "<span class='notice'>You repair some dents on [src].</span>")
+				if(punches_to_break == 0)
+					to_chat(user, "<span class='notice'>You repair some dents on [src], and you close it.</span>")
+				punches_to_break = min(punches_to_break+25, initial(punches_to_break))
 				if(punches_to_break)
 					density = TRUE
 					icon_state = "gate"
 				playsound(src, 'code/modules/wod13/sounds/repair.ogg', 50, TRUE)
-				to_chat(user, "<span class='notice'>You repair some dents on [src].</span>")
 				repairing = FALSE
 			else
 				to_chat(user, "<span class='warning'>You failed to repair [src].</span>")
