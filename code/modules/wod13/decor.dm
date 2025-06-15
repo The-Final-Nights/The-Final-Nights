@@ -1212,6 +1212,11 @@
 	desc = "The flag of the State of Japan."
 	icon_state = "flag_japan"
 
+/obj/flag/anarchy
+	name = "anarchist flag"
+	desc = "The flag of the anarchist movement."
+	icon_state = "flag_anarchy"
+
 /obj/effect/decal/graffiti
 	name = "graffiti"
 	icon = 'code/modules/wod13/32x48.dmi'
