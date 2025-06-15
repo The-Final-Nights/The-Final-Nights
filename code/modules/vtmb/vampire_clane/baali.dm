@@ -15,14 +15,14 @@
 
 /datum/vampireclane/baali/on_gain(mob/living/carbon/human/H)
 	..()
-	H.faction |= "Baali"
+	H.faction |= CLAN_BAALI
 
 /mob/living/simple_animal/hostile/baali_guard
 	name = "Infernal Creature"
 	desc = "The peak of abominations armor. Unbelievably undamagable..."
 	icon = 'code/modules/wod13/32x48.dmi'
-	icon_state = "baali"
-	icon_living = "baali"
+	icon_state = CLAN_BAALI
+	icon_living = CLAN_BAALI
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speak_chance = 0
 	speed = 0
@@ -40,7 +40,7 @@
 	minbodytemp = 0
 	bloodpool = 10
 	maxbloodpool = 10
-	faction = list("Baali")
+	faction = list(CLAN_BAALI)
 
 /mob/living/simple_animal/hostile/baali_guard/Initialize()
 	. = ..()

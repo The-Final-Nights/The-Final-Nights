@@ -24,7 +24,7 @@
 	minimal_masquerade = 0
 	experience_addition = 15
 	allowed_species = list("Vampire", "Ghoul", "Kuei-Jin")
-	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Salubri",  "Salubri Warrior", "Nagaraja", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Cappadocian", "Gargoyle")
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI,  CLAN_SALUBRI_WARRIOR, CLAN_NAGARAJA, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE, CLAN_CAPPADOCIAN, CLAN_GARGOYLE)
 
 /datum/outfit/job/graveyard
 	name = "Graveyard Keeper"
