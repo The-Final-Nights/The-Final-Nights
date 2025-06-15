@@ -422,7 +422,7 @@
 /datum/action/gargoyle
 	name = "Turn into stone"
 	desc = "Save some time till healing..."
-	button_icon_state = CLAN_GARGOYLE
+	button_icon_state = "gargoyle"
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	var/abuse_fix = 0
 
