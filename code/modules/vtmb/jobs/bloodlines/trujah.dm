@@ -17,6 +17,8 @@
 	paycheck_department = ACCOUNT_CIV
 	display_order = JOB_DISPLAY_ORDER_TRUJAH
 
+	departments = DEPARTMENT_BITFLAG_CITIZEN
+
 	allowed_species = list("Vampire")
 
 	v_duty = "Openly follow the traditions, ensure the coming of Gehenna so that you might fight along the side of the righteous."

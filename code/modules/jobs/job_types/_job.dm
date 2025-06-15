@@ -68,6 +68,9 @@
 
 	var/bounty_types = CIV_JOB_BASIC
 
+	///Bitfield of departments this job belongs wit
+	var/departments = NONE
+
 	///Should this job be allowed to be picked for the bureaucratic error event?
 	var/allow_bureaucratic_error = FALSE
 
@@ -232,7 +235,7 @@
 	if(!H)
 		return FALSE
 /*
-	if(CONFIG_GET(flag/enforce_human_authority) && (title in GLOB.command_positions))
+	if(CONFIG_GET(flag/enforce_human_authority) && (title in GLOB.camarilla_positions))
 		if(H.dna.species.id != "human")
 			H.set_species(/datum/species/human)
 			H.apply_pref_name("human", preference_source)

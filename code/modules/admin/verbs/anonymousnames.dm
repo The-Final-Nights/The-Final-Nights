@@ -97,7 +97,7 @@
 	announcement_alert = "As punishment for this station's poor productivity when compared to neighbor stations, names and identities will be restricted until further notice."
 
 /datum/anonymous_theme/employees/anonymous_name(mob/M)
-	var/is_head_of_staff = (M.mind.assigned_role in GLOB.command_positions)
+	var/is_head_of_staff = (M.mind.assigned_role in GLOB.camarilla_positions)
 	var/name = "[is_head_of_staff ? "Manager" : "Employee"] "
 	for(var/i in 1 to 6)
 		if(prob(30) || i == 1)
