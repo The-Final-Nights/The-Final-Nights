@@ -681,8 +681,8 @@
 	if(panel_open)
 		switch(security_level)
 			if(AIRLOCK_SECURITY_NONE)
-				if(istype(C, /obj/item/stack/sheet/metal))
-					var/obj/item/stack/sheet/metal/S = C
+				if(istype(C, /obj/item/stack/sheet/iron))
+					var/obj/item/stack/sheet/iron/S = C
 					if(S.get_amount() < 2)
 						to_chat(user, "<span class='warning'>You need at least 2 metal sheets to reinforce [src].</span>")
 						return
@@ -723,7 +723,7 @@
 										"<span class='notice'>You cut through \the [src]'s shielding.</span>",
 										"<span class='hear'>You hear welding.</span>")
 						security_level = AIRLOCK_SECURITY_NONE
-						spawn_atom_to_turf(/obj/item/stack/sheet/metal, user.loc, 2)
+						spawn_atom_to_turf(/obj/item/stack/sheet/iron, user.loc, 2)
 						update_icon()
 					return
 			if(AIRLOCK_SECURITY_PLASTEEL_I_S)

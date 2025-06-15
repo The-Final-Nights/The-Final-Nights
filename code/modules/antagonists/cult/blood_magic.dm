@@ -576,7 +576,7 @@
 			to_chat(user, "<span class='cultitalic'>You are already invoking twisted construction!</span>")
 			return
 		var/turf/T = get_turf(target)
-		if(istype(target, /obj/item/stack/sheet/metal))
+		if(istype(target, /obj/item/stack/sheet/iron))
 			var/obj/item/stack/sheet/candidate = target
 			if(candidate.use(METAL_TO_CONSTRUCT_SHELL_CONVERSION))
 				uses--

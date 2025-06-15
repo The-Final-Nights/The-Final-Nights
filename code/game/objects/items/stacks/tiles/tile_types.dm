@@ -67,7 +67,7 @@
 				return
 
 			if (mineralType == "metal")
-				var/obj/item/stack/sheet/metal/new_item = new(user.loc)
+				var/obj/item/stack/sheet/iron/new_item = new(user.loc)
 				user.visible_message("<span class='notice'>[user.name] shaped [src] into metal with the welding tool.</span>", \
 					"<span class='notice'>You shaped [src] into metal with the welding tool.</span>", \
 					"<span class='hear'>You hear welding.</span>")
