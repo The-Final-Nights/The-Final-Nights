@@ -65,7 +65,7 @@
 
 /mob/living/proc/update_sensewyrm_hud()
 	var/image/holder = hud_list[SENSEWYRM_HUD]
-	var/wyrm_taint = NONE
+	var/wyrm_taint = 0
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
 	holder.icon_state = "" // no aura if you're not wyrmtainted
@@ -87,7 +87,7 @@
 		var/mob/living/carbon/wolf = src
 
 		if (wolf.auspice.tribe.name == "Black Spiral Dancers")
-			wyrm_taint = VERY_TAINTED
+			wyrm_taint = 2
 
 		if(HAS_TRAIT(wolf,TRAIT_WYRMTAINTED))
 			wyrm_taint++
@@ -97,11 +97,11 @@
 			if(werewolf.wyrm_tainted)
 				wyrm_taint++
 
-	if (wyrm_taint == TAINTED)
+	if (wyrm_taint == 1)
 		holder.color = AURA_WYRM_LIGHT
 		holder.icon_state = "aura"
 
-	else if (wyrm_taint >= VERY_TAINTED)
+	else if (wyrm_taint >= 2)
 		holder.color = AURA_WYRM_HEAVY
 		holder.icon_state = "aura"
 

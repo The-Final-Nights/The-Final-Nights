@@ -272,19 +272,28 @@
 	name = "Sense Wyrm"
 	desc = "This Gift allows the werewolf to trace the location of all wyrm-tainted entities within the area."
 	button_icon_state = "sense_wyrm"
-	rage_req = 1
+	rage_req = 0
 
 /datum/action/gift/sense_wyrm/Trigger()
 	. = ..()
 	var/datum/atom_hud/sense_wyrm_hud = GLOB.huds[DATA_HUD_SENSEWYRM]
-	sense_wyrm_hud.add_hud_to(owner)
-	/*if(iscorax(src))
-		sense_wyrm_hud.add_hud_to(owner.werewolf.cor_crinos)
-		sense_wyrm_hud.add_hud_to(owner.werewolf.corvid)
+	var/mob/living/carbon/werewolf/theurge = owner
+	var/mob/living/carbon/human/homid = theurge.transformator.human_form?.resolve()
+	if (HAS_TRAIT(theurge, TRAIT_CORAX) || iscorvid(theurge)) // we add the aura vision to every used form. Corax don't use werewolf forms, so we don't care.
+		var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = theurge.transformator.corax_form?.resolve()
+		var/mob/living/carbon/werewolf/lupus/corvid/corvid = theurge.transformator.corvid_form?.resolve()
+		sense_wyrm_hud.add_hud_to(corvid)
+		sense_wyrm_hud.add_hud_to(cor_crinos)
 	else
-		sense_wyrm_hud.add_hud_to(owner.werewolf.crinos)
-		sense_wyrm_hud.add_hud_to(owner.werewolf.lupus)*/
-	owner.update_sight()
+
+		var/mob/living/carbon/werewolf/lupus/lupus = theurge.transformator.lupus_form?.resolve()
+		var/mob/living/carbon/werewolf/crinos/crinos = theurge.transformator.crinos_form?.resolve()
+		sense_wyrm_hud.add_hud_to(lupus)
+		sense_wyrm_hud.add_hud_to(crinos)
+	sense_wyrm_hud.add_hud_to(homid)
+	theurge.update_sight()
+	to_chat(owner, span_purple("You open your eyes to the wyrm's corruption, it will be impossible to unsee for the remainder of the night.")) // you can't stop seeing wyrm taint once you learn the gift, this is a lazy way of making this work.
+
 
 /datum/action/gift/spirit_speech
 	name = "Spirit Speech"
