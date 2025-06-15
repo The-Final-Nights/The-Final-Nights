@@ -129,9 +129,13 @@
 
 	create_internal_organs()
 
+
+
 	ADD_TRAIT(src, TRAIT_NEVER_WOUNDED, ROUNDSTART_TRAIT)
 
 	. = ..()
+
+
 
 /mob/living/carbon/werewolf/create_internal_organs()
 	internal_organs += new /obj/item/organ/brain
@@ -349,3 +353,5 @@
 			step_variable = 0
 			playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_step.ogg', 50, FALSE) // feel free to change the noise to something more avian later.
 	..()
+
+

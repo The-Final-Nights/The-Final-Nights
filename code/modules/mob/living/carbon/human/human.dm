@@ -25,6 +25,8 @@
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/human)
 	GLOB.human_list += src
 	phonevoicetag = length(GLOB.human_list)+10
+	if(isnpc(src))
+		NPC_wyrm_taint()
 
 /mob/living/carbon/human/proc/setup_human_dna()
 	//initialize dna. for spawned humans; overwritten by other code
