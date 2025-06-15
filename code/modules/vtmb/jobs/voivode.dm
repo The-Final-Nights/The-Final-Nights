@@ -17,7 +17,7 @@
 	exp_type_department = EXP_TYPE_TZIMISCE
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Tzimisce")
+	allowed_bloodlines = list(CLAN_TZIMISCE)
 	minimal_generation = 10
 //	minimum_character_age = 150 //Uncomment if age-restriction wanted
 	minimum_vampire_age = 75

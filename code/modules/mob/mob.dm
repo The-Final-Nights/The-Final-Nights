@@ -562,13 +562,11 @@
 	return TRUE
 
 
-/mob/proc/clear_from_recent_examines(atom/A)
+/mob/proc/clear_from_recent_examines(ref_to_clear)
 	SIGNAL_HANDLER
-
 	if(!client)
 		return
-	UnregisterSignal(A, COMSIG_PARENT_QDELETING)
-	LAZYREMOVE(client.recent_examines, A)
+	LAZYREMOVE(client.recent_examines, ref_to_clear)
 
 /**
  * handle_eye_contact() is called when we examine() something. If we examine an alive mob with a mind who has examined us in the last second within 5 tiles, we make eye contact!
@@ -1282,7 +1280,7 @@
 		to_chat(src, span_warning("You try to write, but don't know how to spell anything!"))
 		return FALSE
 
-	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION))
+	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_ALT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_PROTEAN_VISION))
 		to_chat(src, span_warning("It's too dark in here to write anything!"))
 		return FALSE
 
@@ -1311,7 +1309,7 @@
 		to_chat(src, span_warning("You try to read [O], but can't comprehend any of it."))
 		return FALSE
 
-	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION))
+	if(!has_light_nearby() && !HAS_TRAIT(src, TRAIT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_ALT_NIGHT_VISION) && !HAS_TRAIT(src, TRAIT_PROTEAN_VISION))
 		to_chat(src, span_warning("It's too dark in here to read!"))
 		return FALSE
 

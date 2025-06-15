@@ -566,7 +566,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!real_name)
 		real_name = random_unique_name(gender)
 //	if(!clane)
-//		var/newtype = GLOB.clanes_list["Brujah"]
+//		var/newtype = GLOB.clanes_list[CLAN_BRUJAH]
 //		clane = new newtype()
 
 	//Prevent Wighting upon joining a round
