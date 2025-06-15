@@ -10,9 +10,13 @@
 
 	activate_sound = 'code/modules/wod13/sounds/fortitude_activate.ogg'
 	deactivate_sound = 'code/modules/wod13/sounds/fortitude_deactivate.ogg'
-	
-	power_group = DISCIPLINE_POWER_GROUP_COMBAT
 
+	power_group = DISCIPLINE_POWER_GROUP_COMBAT
+	var/fortitude_DR
+
+/datum/discipline/fortitude/post_gain()
+	. = ..()
+	owner.physiology.damage_resistance += (5+(5*level))
 
 //FORTITUDE 1
 /datum/discipline_power/fortitude/one
@@ -32,18 +36,15 @@
 		/datum/discipline_power/fortitude/four,
 		/datum/discipline_power/fortitude/five
 	)
+	fortitude_DR = 10
 
 /datum/discipline_power/fortitude/one/activate()
 	. = ..()
-	owner.physiology.armor.melee += 15
-	owner.physiology.armor.bullet += 15
-	owner.physiology.armor.fire += 10
+	owner.physiology.damage_resistance = min(60, (owner.physiology.damage_resistance+fortitude_DR) )
 
 /datum/discipline_power/fortitude/one/deactivate()
 	. = ..()
-	owner.physiology.armor.melee -= 15
-	owner.physiology.armor.bullet -= 15
-	owner.physiology.armor.fire -= 10
+	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-fortitude_DR) )
 
 //FORTITUDE 2
 /datum/discipline_power/fortitude/two
@@ -63,18 +64,15 @@
 		/datum/discipline_power/fortitude/four,
 		/datum/discipline_power/fortitude/five
 	)
+	fortitude_DR = 15
 
 /datum/discipline_power/fortitude/two/activate()
 	. = ..()
-	owner.physiology.armor.melee += 30
-	owner.physiology.armor.bullet += 30
-	owner.physiology.armor.fire += 20
+	owner.physiology.damage_resistance = min(60, (owner.physiology.damage_resistance+fortitude_DR) )
 
 /datum/discipline_power/fortitude/two/deactivate()
 	. = ..()
-	owner.physiology.armor.melee -= 30
-	owner.physiology.armor.bullet -= 30
-	owner.physiology.armor.fire -= 20
+	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-fortitude_DR) )
 
 //FORTITUDE 3
 /datum/discipline_power/fortitude/three
@@ -94,18 +92,15 @@
 		/datum/discipline_power/fortitude/four,
 		/datum/discipline_power/fortitude/five
 	)
+	fortitude_DR = 20
 
 /datum/discipline_power/fortitude/three/activate()
 	. = ..()
-	owner.physiology.armor.melee += 45
-	owner.physiology.armor.bullet += 45
-	owner.physiology.armor.fire += 30
+	owner.physiology.damage_resistance = min(60, (owner.physiology.damage_resistance+fortitude_DR) )
 
 /datum/discipline_power/fortitude/three/deactivate()
 	. = ..()
-	owner.physiology.armor.melee -= 45
-	owner.physiology.armor.bullet -= 45
-	owner.physiology.armor.fire -= 30
+	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-fortitude_DR) )
 
 //FORTITUDE 4
 /datum/discipline_power/fortitude/four
@@ -125,18 +120,16 @@
 		/datum/discipline_power/fortitude/three,
 		/datum/discipline_power/fortitude/five
 	)
+	fortitude_DR = 25
 
 /datum/discipline_power/fortitude/four/activate()
 	. = ..()
-	owner.physiology.armor.melee += 60
-	owner.physiology.armor.bullet += 60
-	owner.physiology.armor.fire += 40
+	owner.physiology.damage_resistance = min(60, (owner.physiology.damage_resistance+fortitude_DR) )
 
 /datum/discipline_power/fortitude/four/deactivate()
 	. = ..()
-	owner.physiology.armor.melee -= 60
-	owner.physiology.armor.bullet -= 60
-	owner.physiology.armor.fire -= 40
+	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-fortitude_DR) )
+
 
 //FORTITUDE 5
 /datum/discipline_power/fortitude/five
@@ -156,15 +149,13 @@
 		/datum/discipline_power/fortitude/three,
 		/datum/discipline_power/fortitude/four
 	)
+	fortitude_DR = 30
 
 /datum/discipline_power/fortitude/five/activate()
 	. = ..()
-	owner.physiology.armor.melee += 75
-	owner.physiology.armor.bullet += 75
-	owner.physiology.armor.fire += 50
+	owner.physiology.damage_resistance = min(60, (owner.physiology.damage_resistance+fortitude_DR) )
 
 /datum/discipline_power/fortitude/five/deactivate()
 	. = ..()
-	owner.physiology.armor.melee -= 75
-	owner.physiology.armor.bullet -= 75
-	owner.physiology.armor.fire -= 50
+	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-fortitude_DR) )
+

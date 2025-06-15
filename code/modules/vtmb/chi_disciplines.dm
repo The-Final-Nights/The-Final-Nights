@@ -1200,17 +1200,17 @@
 	cost_demon = 1
 	discipline_type = "Demon"
 
+/datum/chi_discipline/iron_mountain/post_gain(mob/living/carbon/human/user)
+	user.physiology.damage_resistance += (5+(5*level))
+
 /datum/chi_discipline/iron_mountain/activate(mob/living/target, mob/living/carbon/human/caster)
 	..()
-	var/mod = level_casting
-	var/bonus = 15 * mod
-	caster.physiology.armor.melee += bonus
-	caster.physiology.armor.bullet += bonus
+	var/bonus = (5+(5*level))
+	caster.physiology.damage_resistance = min(60, (caster.physiology.damage_resistance+bonus) )
 	spawn(delay+caster.discipline_time_plus)
 		if(caster)
 			caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/ironmountain_deactivate.ogg', 50, FALSE)
-			caster.physiology.armor.melee -= bonus
-			caster.physiology.armor.bullet -= bonus
+		caster.physiology.damage_resistance = max(0, (caster.physiology.damage_resistance-bonus) )
 
 /datum/chi_discipline/kiai
 	name = "Kiai"
