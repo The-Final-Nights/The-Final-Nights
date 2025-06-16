@@ -60,7 +60,7 @@
 		if(G.master)
 			dat += "My Regnant is [G.master.real_name], I should obey their wants.<BR>"
 			if(G.master.clane)
-				if(G.master.clane.name != "Caitiff")
+				if(G.master.clane.name != CLAN_NONE)
 					dat += "Regnant's clan is [G.master.clane], maybe I can try some of it's disciplines..."
 		if(host.mind.special_role)
 			for(var/datum/antagonist/A in host.mind.antag_datums)

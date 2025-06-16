@@ -24,7 +24,7 @@
 	minimal_masquerade = 0
 	experience_addition = 10
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Giovanni", "Cappadocian")
+	allowed_bloodlines = list(CLAN_GIOVANNI, CLAN_CAPPADOCIAN)
 
 /datum/outfit/job/giovannielder
 	name = "Capo"
@@ -70,7 +70,7 @@
 	minimal_masquerade = 0
 	experience_addition = 10
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Giovanni", "Cappadocian")
+	allowed_bloodlines = list(CLAN_GIOVANNI, CLAN_CAPPADOCIAN)
 
 /datum/outfit/job/giovanni
 	name = "La Squadra"

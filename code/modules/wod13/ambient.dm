@@ -767,7 +767,7 @@
 			if(iskindred(src))
 				var/mob/living/carbon/human/H = src
 				if(H.clane)
-					if(H.clane.name == "Daughters of Cacophony")
+					if(H.clane.name == CLAN_DAUGHTERS_OF_CACOPHONY)
 						cacophony = FALSE //This Variable was TRUE, which makes the DoC music loop play.
 
 			if(!cacophony)

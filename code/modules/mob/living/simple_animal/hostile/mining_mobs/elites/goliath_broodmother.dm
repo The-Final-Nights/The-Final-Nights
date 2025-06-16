@@ -210,7 +210,7 @@
 			continue
 		var/krill = TRUE
 		if(L.clane)
-			if(L.clane.name == "Lasombra")
+			if(L.clane.name == CLAN_LASOMBRA)
 				krill = FALSE
 		if(krill)
 			visible_message("<span class='danger'>[src] grabs hold of [L]!</span>")

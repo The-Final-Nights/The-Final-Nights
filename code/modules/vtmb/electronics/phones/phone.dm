@@ -573,7 +573,7 @@
 					var/mob/living/carbon/human/SPK = hearing_args[HEARING_SPEAKER]
 					voice_saying = "[age2agedescription(SPK.age)] [SPK.gender] voice ([SPK.phonevoicetag])"
 
-					if(SPK.clane?.name == "Lasombra")
+					if(SPK.clane?.name == CLAN_LASOMBRA)
 						message = scramble_lasombra_message(message,SPK)
 						playsound(src, 'code/modules/wod13/sounds/lasombra_whisper.ogg', 5, FALSE, ignore_walls = FALSE)
 					else
