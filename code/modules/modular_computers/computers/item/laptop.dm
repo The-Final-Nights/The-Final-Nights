@@ -74,7 +74,7 @@
 			return
 		M.put_in_hand(src, H.held_index)
 
-/obj/item/modular_computer/laptop/attack_hand(mob/user)
+/obj/item/modular_computer/laptop/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -93,6 +93,9 @@
 
 
 /obj/item/modular_computer/laptop/AltClick(mob/user)
+	. = ..()
+	if(!can_interact(user))
+		return
 	if(screen_on) // Close it.
 		try_toggle_open(user)
 	else

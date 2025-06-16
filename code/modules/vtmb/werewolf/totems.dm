@@ -135,7 +135,7 @@
 	. = ..()
 	if(iswerewolf(user) || isgarou(user))
 		var/mob/living/carbon/C = user
-		if(C.a_intent != INTENT_HARM)
+		if(!(C.combat_mode))
 			if(totem_health <= 0)
 				to_chat(C, "<span class='warning'>[src] is broken!</span>")
 				return

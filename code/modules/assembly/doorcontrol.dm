@@ -2,22 +2,24 @@
 	name = "blast door controller"
 	desc = "A small electronic device able to control a blast door remotely."
 	icon_state = "control"
-	attachable = TRUE
+	/// The ID of the blast door electronics to match to the ID of the blast door being used.
 	var/id = null
-	var/can_change_id = 0
-	var/cooldown = FALSE //Door cooldowns
+	/// Cooldown of the door's controller. Updates when pressed (activate())
+	var/cooldown = FALSE
 	var/sync_doors = TRUE
 
 /obj/item/assembly/control/examine(mob/user)
 	. = ..()
 	if(id)
-		. += "<span class='notice'>Its channel ID is '[id]'.</span>"
+		. += span_notice("Its channel ID is '[id]'.")
 
 /obj/item/assembly/control/multitool_act(mob/living/user)
-	var/change_id = input("Set the shutters/blast door/blast door controllers ID. It must be a number between 1 and 100.", "ID", id) as num|null
-	if(change_id)
-		id = clamp(round(change_id, 1), 1, 100)
-		to_chat(user, "<span class='notice'>You change the ID to [id].</span>")
+	var/change_id = tgui_input_number(user, "Set the door controllers ID", "Door ID", id, 100)
+	if(!change_id || QDELETED(user) || QDELETED(src) || !usr.canUseTopic(src, no_tk = TRUE))
+		return
+	id = change_id
+	balloon_alert(user, "id changed")
+	to_chat(user, span_notice("You change the ID to [id]."))
 
 /obj/item/assembly/control/activate()
 	var/openclose
@@ -29,7 +31,7 @@
 			if(openclose == null || !sync_doors)
 				openclose = M.density
 			INVOKE_ASYNC(M, openclose ? TYPE_PROC_REF(/obj/machinery/door/poddoor, open) : TYPE_PROC_REF(/obj/machinery/door/poddoor, close))
-	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 10)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 1 SECONDS)
 
 /obj/item/assembly/control/curtain
 	name = "curtain controller"
@@ -38,7 +40,7 @@
 /obj/item/assembly/control/curtain/examine(mob/user)
 	. = ..()
 	if(id)
-		. += "<span class='notice'>Its channel ID is '[id]'.</span>"
+		. += span_notice("Its channel ID is '[id]'.")
 
 /obj/item/assembly/control/curtain/activate()
 	var/openclose
@@ -50,7 +52,7 @@
 			if(openclose == null || !sync_doors)
 				openclose = M.density
 			INVOKE_ASYNC(M, openclose ? TYPE_PROC_REF(/obj/structure/curtain/cloth/fancy/mechanical, open) : TYPE_PROC_REF(/obj/structure/curtain/cloth/fancy/mechanical, close))
-	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 5)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 0.5 SECONDS)
 
 
 /obj/item/assembly/control/airlock
@@ -59,7 +61,7 @@
 	id = "badmin" // Set it to null for MEGAFUN.
 	var/specialfunctions = OPEN
 	/*
-	Bitflag, 	1= open (OPEN)
+	Bitflag, 1= open (OPEN)
 				2= idscan (IDSCAN)
 				4= bolts (BOLTS)
 				8= shock (SHOCK)
@@ -82,7 +84,10 @@
 				D.aiDisabledIdScanner = !D.aiDisabledIdScanner
 			if(specialfunctions & BOLTS)
 				if(!D.wires.is_cut(WIRE_BOLTS) && D.hasPower())
-					D.locked = !D.locked
+					if(D.locked)
+						D.unlock()
+					else
+						D.lock()
 					D.update_appearance()
 			if(specialfunctions & SHOCK)
 				if(D.secondsElectrified)
@@ -93,9 +98,9 @@
 				D.safe = !D.safe
 
 	for(var/D in open_or_close)
-		INVOKE_ASYNC(D, doors_need_closing ? TYPE_PROC_REF(/obj/machinery/door/airlock, close) : TYPE_PROC_REF(/obj/machinery/door/airlock, open))
+		INVOKE_ASYNC(D,  doors_need_closing ? TYPE_PROC_REF(/obj/machinery/door/airlock, close) : TYPE_PROC_REF(/obj/machinery/door/airlock, open))
 
-	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 10)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 1 SECONDS)
 
 
 /obj/item/assembly/control/massdriver
@@ -110,19 +115,21 @@
 		if (M.id == src.id)
 			INVOKE_ASYNC(M, TYPE_PROC_REF(/obj/machinery/door/poddoor, open))
 
-	sleep(10)
+	addtimer(CALLBACK(src, PROC_REF(activate_stage2)), 1 SECONDS)
 
+/obj/item/assembly/control/massdriver/proc/activate_stage2()
 	for(var/obj/machinery/mass_driver/M in GLOB.machines)
 		if(M.id == src.id)
 			M.drive()
 
-	sleep(60)
+	addtimer(CALLBACK(src, PROC_REF(activate_stage3)), 6 SECONDS)
 
+/obj/item/assembly/control/massdriver/proc/activate_stage3()
 	for(var/obj/machinery/door/poddoor/M in GLOB.machines)
 		if (M.id == src.id)
 			INVOKE_ASYNC(M, TYPE_PROC_REF(/obj/machinery/door/poddoor, close))
 
-	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 10)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 1 SECONDS)
 
 
 /obj/item/assembly/control/igniter
@@ -144,6 +151,7 @@
 			M.icon_state = "igniter[M.on]"
 
 	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 30)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 3 SECONDS)
 
 /obj/item/assembly/control/flasher
 	name = "flasher controller"
@@ -157,7 +165,7 @@
 		if(M.id == src.id)
 			INVOKE_ASYNC(M, TYPE_PROC_REF(/obj/machinery/flasher, flash))
 
-	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 50)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 5 SECONDS)
 
 
 /obj/item/assembly/control/crematorium
@@ -172,7 +180,7 @@
 		if (C.id == id)
 			C.cremate(usr)
 
-	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 50)
+	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 5 SECONDS)
 
 //how long it spends on each floor when moving somewhere, so it'd take 4 seconds to reach you if it had to travel up 2 floors
 #define FLOOR_TRAVEL_TIME 2 SECONDS

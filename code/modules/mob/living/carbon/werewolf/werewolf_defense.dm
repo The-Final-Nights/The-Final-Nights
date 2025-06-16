@@ -1,26 +1,20 @@
 
-/mob/living/carbon/werewolf/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
+/mob/living/carbon/human/werewolf/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	..(AM, skipcatch = TRUE, hitpush = FALSE)
 
-/mob/living/carbon/werewolf/attack_hand(mob/living/carbon/human/M)
+/mob/living/carbon/human/werewolf/attack_hand(mob/living/carbon/human/M)
 	. = ..()
 	if(.)	//to allow surgery to return properly.
 		return FALSE
 
-	switch(M.a_intent)
-		if("help")
-			help_shake_act(M)
-		if("grab")
-			grabbedby(M)
-		if ("harm")
-			M.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
-			return TRUE
-		if("disarm")
-			M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
-			return TRUE
-	return FALSE
+	if(M.combat_mode)
+		M.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
+		return TRUE
+	else
+		help_shake_act(M)
+		return TRUE
 
-/mob/living/carbon/werewolf/attack_animal(mob/living/simple_animal/M)
+/mob/living/carbon/human/werewolf/attack_animal(mob/living/simple_animal/M)
 	. = ..()
 	do_rage_from_attack()
 	if(.)
@@ -39,7 +33,7 @@
 			if(STAMINA)
 				adjustStaminaLoss(damage)
 
-/mob/living/carbon/werewolf/ex_act(severity, target, origin)
+/mob/living/carbon/human/werewolf/ex_act(severity, target, origin)
 	if(origin && istype(origin, /datum/spacevine_mutation) && isvineimmune(src))
 		return
 	..()
@@ -63,68 +57,33 @@
 			if(ears)
 				ears.adjustEarDamage(15,60)
 
-/mob/living/carbon/werewolf/soundbang_act(intensity = 1, stun_pwr = 20, damage_pwr = 5, deafen_pwr = 15)
+/mob/living/carbon/human/werewolf/soundbang_act(intensity = 1, stun_pwr = 20, damage_pwr = 5, deafen_pwr = 15)
 	return 0
 
-/mob/living/carbon/werewolf/acid_act(acidpwr, acid_volume)
+/mob/living/carbon/human/werewolf/acid_act(acidpwr, acid_volume)
 	return FALSE//aliens are immune to acid.
 
-/mob/living/carbon/werewolf/attack_hand(mob/living/carbon/human/M)
-	if(..())
-		switch(M.a_intent)
-			if ("harm")
-				var/damage = M.dna.species.punchdamagelow
-				if (prob(90))
-					playsound(loc, "punch", 25, TRUE, -1)
-					visible_message("<span class='danger'>[M] punches [src]!</span>", \
-									"<span class='userdanger'>[M] punches you!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, M)
-					to_chat(M, "<span class='danger'>You punch [src]!</span>")
-					var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.zone_selected))
-					apply_damage(damage, BRUTE, affecting)
-					log_combat(M, src, "attacked")
-				else
-					playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
-					visible_message("<span class='danger'>[M]'s punch misses [src]!</span>", \
-									"<span class='danger'>You avoid [M]'s punch!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
-					to_chat(M, "<span class='warning'>Your punch misses [src]!</span>")
-
-			if ("disarm")
-				if (body_position == STANDING_UP)
-					if (prob(50))
-						dropItemToGround(get_active_held_item())
-						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
-						visible_message("<span class='danger'>[M] disarms [src]!</span>", \
-										"<span class='userdanger'>[M] disarms you!</span>", "<span class='hear'>You hear aggressive shuffling!</span>", COMBAT_MESSAGE_RANGE, M)
-						to_chat(M, "<span class='danger'>You disarm [src]!</span>")
-					else
-						playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
-						visible_message("<span class='danger'>[M] fails to disarm [src]!</span>",\
-										"<span class='danger'>[M] fails to disarm you!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
-						to_chat(M, "<span class='warning'>You fail to disarm [src]!</span>")
-
-
-
-/mob/living/carbon/werewolf/crinos/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/carbon/human/werewolf/crinos/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && !visual_effect_icon)
 		visual_effect_icon = ATTACK_EFFECT_CLAW
 	..()
 
-/mob/living/carbon/werewolf/corax/corax_crinos/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/carbon/human/werewolf/corax/corax_crinos/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && !visual_effect_icon)
 		visual_effect_icon = ATTACK_EFFECT_CLAW
 	..()
 
-/mob/living/carbon/werewolf/lupus/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/carbon/human/werewolf/lupus/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && !visual_effect_icon)
 		visual_effect_icon = ATTACK_EFFECT_BITE
 	..()
 
-/mob/living/carbon/werewolf/lupus/corvid/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+/mob/living/carbon/human/werewolf/lupus/corvid/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
 	if(!no_effect && !visual_effect_icon)
 		visual_effect_icon = ATTACK_EFFECT_CLAW // Ravens attack with their claw, or somesuch.
 	..()
 
-/mob/living/carbon/werewolf/getarmor(def_zone, type)
+/mob/living/carbon/human/werewolf/getarmor(def_zone, type)
 	if(type == BRUTE)
 		return werewolf_armor
 	else

@@ -1,13 +1,13 @@
-/mob/living/carbon/werewolf/update_damage_overlays() //aliens don't have damage overlays.
+/mob/living/carbon/human/werewolf/update_damage_overlays() //aliens don't have damage overlays.
 	return
 
-/mob/living/carbon/werewolf/update_body() // we don't use the bodyparts or body layers for aliens.
+/mob/living/carbon/human/werewolf/update_body() // we don't use the bodyparts or body layers for aliens.
 	return
 
-/mob/living/carbon/werewolf/update_body_parts()//we don't use the bodyparts layer for aliens.
+/mob/living/carbon/human/werewolf/update_body_parts()//we don't use the bodyparts layer for aliens.
 	return
 
-/mob/living/carbon/werewolf/crinos/update_icons()
+/mob/living/carbon/human/werewolf/crinos/update_icons()
 	cut_overlays()
 
 	var/laid_down = FALSE
@@ -61,17 +61,17 @@
 
 	update_inv_hands()
 
-/mob/living/carbon/werewolf/crinos/regenerate_icons()
+/mob/living/carbon/human/werewolf/crinos/regenerate_icons()
 	if(!..())
 	//	update_icons() //Handled in update_transform(), leaving this here as a reminder
 		update_transform()
 
-/mob/living/carbon/werewolf/crinos/update_transform() //The old method of updating lying/standing was update_icons(). Aliens still expect that.
+/mob/living/carbon/human/werewolf/crinos/update_transform() //The old method of updating lying/standing was update_icons(). Aliens still expect that.
 	. = ..()
 	update_icons()
 
 
-/mob/living/carbon/werewolf/corax/corax_crinos/update_icons()
+/mob/living/carbon/human/werewolf/corax/corax_crinos/update_icons()
 	cut_overlays()
 
 	var/laid_down = FALSE
@@ -119,11 +119,11 @@
 
 	update_inv_hands()
 
-/mob/living/carbon/werewolf/corax/corax_crinos/regenerate_icons()
+/mob/living/carbon/human/werewolf/corax/corax_crinos/regenerate_icons()
 	if(!..())
 	//	update_icons() //Handled in update_transform(), leaving this here as a reminder
 		update_transform()
 
-/mob/living/carbon/werewolf/corax/corax_crinos/update_transform() //The old method of updating lying/standing was update_icons(). Aliens still expect that.
+/mob/living/carbon/human/werewolf/corax/corax_crinos/update_transform() //The old method of updating lying/standing was update_icons(). Aliens still expect that.
 	. = ..()
 	update_icons()

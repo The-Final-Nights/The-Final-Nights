@@ -89,7 +89,7 @@ SUBSYSTEM_DEF(carpool)
 	. = ..()
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(H.a_intent == INTENT_HARM && H.potential >= 4)
+		if(H.combat_mode && H.potential >= 4)
 			var/atom/throw_target = get_edge_target_turf(src, user.dir)
 			playsound(get_turf(src), 'code/modules/wod13/sounds/bump.ogg', 100, FALSE)
 			get_damage(10)
@@ -229,7 +229,6 @@ SUBSYSTEM_DEF(carpool)
 						if(ishuman(user))
 							var/mob/living/carbon/human/H = user
 							SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 6)
-							call_dharma("steal", H)
 						return
 				else
 					to_chat(user, "<span class='warning'>You've failed to open [src]'s lock.</span>")

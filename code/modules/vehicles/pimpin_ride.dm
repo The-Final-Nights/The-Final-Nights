@@ -71,7 +71,7 @@
 	if(mybag)
 		. += "cart_garbage"
 
-/obj/vehicle/ridden/janicart/attack_hand(mob/user)
+/obj/vehicle/ridden/janicart/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return

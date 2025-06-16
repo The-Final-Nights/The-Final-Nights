@@ -37,37 +37,19 @@
 
 	return randname
 
-/datum/species/moth/handle_fire(mob/living/carbon/human/H, no_protection = FALSE)
+/datum/species/moth/on_species_gain(mob/living/carbon/human/human_who_gained_species, datum/species/old_species, pref_load)
 	. = ..()
-	if(.) //if the mob is immune to fire, don't burn wings off.
-		return
-	if(H.dna.features["moth_wings"] != "Burnt Off" && H.bodytemperature >= 800 && H.fire_stacks > 0) //do not go into the extremely hot light. you will not survive
-		to_chat(H, "<span class='danger'>Your precious wings burn to a crisp!</span>")
-		if(!H.dna.features["original_moth_wings"]) //Fire apparently destroys DNA, so let's preserve that elsewhere, checks if an original was already stored to prevent bugs
-			H.dna.features["original_moth_wings"] = H.dna.features["moth_wings"]
-		H.dna.features["moth_wings"] = "Burnt Off"
-		if(!H.dna.features["original_moth_antennae"]) //Stores antennae type for if they get restored later
-			H.dna.features["original_moth_antennae"] = H.dna.features["moth_antennae"]
-		H.dna.features["moth_antennae"] = "Burnt Off"
-		if(flying_species) //This is all exclusive to if the person has the effects of a potion of flight
-			if(H.movement_type & FLYING)
-				ToggleFlight(H)
-				H.Knockdown(1.5 SECONDS)
-			fly.Remove(H)
-			QDEL_NULL(fly)
-			H.dna.features["wings"] = "None"
-		handle_mutant_bodyparts(H)
+	RegisterSignal(human_who_gained_species, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_weakness))
 
-/datum/species/moth/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
+/datum/species/moth/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
-	if(chem.type == /datum/reagent/toxin/pestkiller)
-		H.adjustToxLoss(3)
-		H.reagents.remove_reagent(chem.type, REAGENTS_METABOLISM)
+	UnregisterSignal(C, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS)
 
-/datum/species/moth/check_species_weakness(obj/item/weapon, mob/living/attacker)
-	if(istype(weapon, /obj/item/melee/flyswatter))
-		return 10 //flyswatters deal 10x damage to moths
-	return 1
+/datum/species/moth/proc/damage_weakness(datum/source, list/damage_mods, damage_amount, damagetype, def_zone, sharpness, attack_direction, obj/item/attacking_item)
+	SIGNAL_HANDLER
+
+	if(istype(attacking_item, /obj/item/melee/flyswatter))
+		damage_mods += 10 // Yes, a 10x damage modifier
 
 /datum/species/moth/space_move(mob/living/carbon/human/H)
 	. = ..()

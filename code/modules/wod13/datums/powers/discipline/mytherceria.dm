@@ -343,6 +343,7 @@
 	var/bad_answers = 0
 
 /atom/movable/screen/alert/riddle/Click()
+	. = ..()
 	if(iscarbon(usr) && (usr == owner))
 		var/mob/living/carbon/M = usr
 		if(riddle)

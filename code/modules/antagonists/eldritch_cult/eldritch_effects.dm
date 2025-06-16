@@ -6,7 +6,7 @@
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	layer = SIGIL_LAYER
 
-/obj/effect/heretic_rune/attack_hand(mob/living/user)
+/obj/effect/heretic_rune/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -168,7 +168,7 @@
 /obj/effect/broken_illusion/proc/show_presence()
 	animate(src,alpha = 255,time = 15 SECONDS)
 
-/obj/effect/broken_illusion/attack_hand(mob/living/user)
+/obj/effect/broken_illusion/attack_hand(mob/living/user, list/modifiers)
 	if(!ishuman(user))
 		return ..()
 	var/mob/living/carbon/human/human_user = user

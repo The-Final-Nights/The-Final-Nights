@@ -174,17 +174,21 @@
 	owner.discipline_targeting = TRUE
 	client.mouse_pointer_icon = 'icons/effects/mouse_pointers/discipline.dmi'
 
+//TODO: middle click to swap loadout
 /atom/movable/screen/movable/action_button/Click(location, control, params)
+	. = ..()
+	var/list/modifiers = params2list(params)
 	if(istype(linked_action, /datum/action/discipline))
-		var/list/modifiers = params2list(params)
-
 		//increase on right click, decrease on shift right click
-		if(LAZYACCESS(modifiers, "right"))
+		if(LAZYACCESS(modifiers, RIGHT_CLICK))
 			var/datum/action/discipline/discipline = linked_action
-			if (LAZYACCESS(modifiers, "alt"))
+			if (LAZYACCESS(modifiers, ALT_CLICK))
 				discipline.switch_level(-1)
 			else
 				discipline.switch_level(1)
 			return
-		//TODO: middle click to swap loadout
-	. = ..()
+	if(istype(linked_action, /datum/action/chi_discipline))
+		if(LAZYACCESS(modifiers, RIGHT_CLICK))
+			var/datum/action/chi_discipline/D = linked_action
+			D.switch_level()
+			return

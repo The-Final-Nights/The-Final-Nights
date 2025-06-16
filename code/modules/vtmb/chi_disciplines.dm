@@ -72,15 +72,6 @@
 			L.chi_ranged = null
 	. = ..()
 
-/atom/movable/screen/movable/action_button/Click(location,control,params)
-	if(istype(linked_action, /datum/action/chi_discipline))
-		var/list/modifiers = params2list(params)
-		if(LAZYACCESS(modifiers, "right"))
-			var/datum/action/chi_discipline/D = linked_action
-			D.switch_level()
-			return
-	. = ..()
-
 /datum/chi_discipline
 	///Name of this Discipline.
 	var/name = "Chi Discipline"
@@ -221,7 +212,6 @@
 	health = 100
 	melee_damage_lower = 1
 	melee_damage_upper = 1
-	a_intent = INTENT_HELP
 	attack_verb_continuous = "splashes"
 	attack_verb_simple = "splash"
 
@@ -1228,7 +1218,7 @@
 		set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 		step_to(src,caster,0)
 		face_atom(caster)
-		a_intent = INTENT_HARM
+		set_combat_mode(TRUE)
 		drop_all_held_items()
 		UnarmedAttack(caster)
 
@@ -1336,7 +1326,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 10
@@ -1446,7 +1435,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 0

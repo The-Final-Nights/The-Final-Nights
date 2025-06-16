@@ -1,6 +1,5 @@
 /mob/living/carbon/human/npc/sabbat/shovelhead
 	name = "Shovelhead"
-	a_intent = INTENT_HARM
 	hostile = TRUE
 	fights_anyway = TRUE
 	old_movement = TRUE //dont start pathing down the sidewalk

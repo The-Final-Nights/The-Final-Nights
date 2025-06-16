@@ -87,6 +87,7 @@
 #define CLICK_CD_THROW 8
 #define CLICK_CD_RANGE 4
 #define CLICK_CD_RAPID 2
+#define CLICK_CD_HYPER_RAPID 1
 #define CLICK_CD_CLICK_ABILITY 6
 #define CLICK_CD_BREAKOUT 100
 #define CLICK_CD_HANDCUFFED 10
@@ -112,12 +113,21 @@
 //slowdown when crawling
 #define CRAWLING_ADD_SLOWDOWN 4
 
-//Attack types for checking shields/hit reactions
+//Attack types for checking block reactions
+/// Attack was made with a melee weapon
 #define MELEE_ATTACK 1
+/// Attack is a punch or kick.
+/// Mob attacks are not classified as unarmed (currently).
 #define UNARMED_ATTACK 2
+/// A projectile is hitting us.
 #define PROJECTILE_ATTACK 3
+/// A thrown item is hitting us.
 #define THROWN_PROJECTILE_ATTACK 4
+/// We're being tackled or leaped at.
 #define LEAP_ATTACK 5
+
+/// Used in check block to get what mob is attacking the blocker.
+#define GET_ASSAILANT(weapon) (get(weapon, /mob/living))
 
 //attack visual effects
 #define ATTACK_EFFECT_PUNCH		"punch"
@@ -131,19 +141,17 @@
 #define ATTACK_EFFECT_MECHTOXIN	"mech_toxin"
 #define ATTACK_EFFECT_BOOP		"boop" //Honk
 
-//intent defines
-#define INTENT_HELP   "help"
-#define INTENT_GRAB   "grab"
-#define INTENT_DISARM "disarm"
-#define INTENT_HARM   "harm"
-//NOTE: INTENT_HOTKEY_* defines are not actual intents!
-//they are here to support hotkeys
-#define INTENT_HOTKEY_LEFT  "left"
-#define INTENT_HOTKEY_RIGHT "right"
-
 //the define for visible message range in combat
 #define COMBAT_MESSAGE_RANGE 3
 #define DEFAULT_MESSAGE_RANGE 7
+
+/// IF an object is weak against armor, this is the value that any present armor is multiplied by
+#define ARMOR_WEAKENED_MULTIPLIER 2
+/// Armor can't block more than this as a percentage
+#define ARMOR_MAX_BLOCK 90
+/// Calculates the new armour value after armour penetration. Can return negative values, and those must be caught.
+#define PENETRATE_ARMOUR(armour, penetration) (penetration == 100 ? 0 : 100 * (armour - penetration) / (100 - penetration))
+
 
 //Shove knockdown lengths (deciseconds)
 #define SHOVE_KNOCKDOWN_SOLID 20
@@ -289,3 +297,28 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 
 /// If a carbon is thrown at a speed faster than normal and impacts something solid, they take extra damage for every extra speed up to this number (see [/mob/living/carbon/proc/throw_impact])
 #define CARBON_MAX_IMPACT_SPEED_BONUS	5
+
+/// Alternate attack defines. Return these at the end of procs like afterattack_secondary.
+/// Calls the normal attack proc. For example, if returned in afterattack_secondary, will call afterattack.
+/// Will continue the chain depending on the return value of the non-alternate proc, like with normal attacks.
+#define SECONDARY_ATTACK_CALL_NORMAL 1
+
+/// Cancels the attack chain entirely.
+#define SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN 2
+
+/// Proceed with the attack chain, but don't call the normal methods.
+#define SECONDARY_ATTACK_CONTINUE_CHAIN 3
+
+/// Martial arts attack requested but is not available, allow a check for a regular attack.
+#define MARTIAL_ATTACK_INVALID NONE
+
+/// Martial arts attack happened but failed, do not allow a check for a regular attack.
+#define MARTIAL_ATTACK_FAIL COMPONENT_SKIP_ATTACK
+
+/// Martial arts attack happened and succeeded, do not allow a check for a regular attack.
+#define MARTIAL_ATTACK_SUCCESS COMPONENT_CANCEL_ATTACK_CHAIN
+
+/// Get the active martial art of a mob.
+#define GET_ACTIVE_MARTIAL_ART(goku) (LAZYACCESS(goku.martial_arts, 1))
+/// Get what martial art will be used after cycling through the active martial art.
+#define GET_NEXT_MARTIAL_ART(goku) (LAZYACCESS(goku.martial_arts, 2))

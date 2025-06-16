@@ -45,6 +45,7 @@
 	H.equip_to_appropriate_slot(new_glasses, TRUE)
 
 /obj/item/afterattack(atom/target, mob/living/carbon/user, proximity)
+	. = ..()
 	if(!proximity)
 		return
 	if(iskindred(target) && is_iron)
@@ -65,4 +66,3 @@
 		if(L.max_yin_chi > L.max_yang_chi + 2)
 			to_chat(L, "<span class='danger'><b>WOOD!</b></span>")
 			L.adjustBruteLoss(15, TRUE)
-	..()

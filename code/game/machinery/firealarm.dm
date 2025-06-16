@@ -143,9 +143,10 @@
 	if(user)
 		log_game("[user] reset a fire alarm at [COORD(src)]")
 
-/obj/machinery/firealarm/attack_hand(mob/user)
+/obj/machinery/firealarm/attack_hand(mob/user, list/modifiers)
 	if(buildstage != 2)
-		return ..()
+		return
+	. = ..()
 	add_fingerprint(user)
 	var/area/A = get_area(src)
 	if(A.fire)
@@ -159,7 +160,7 @@
 /obj/machinery/firealarm/attack_robot(mob/user)
 	return attack_hand(user)
 
-/obj/machinery/firealarm/attackby(obj/item/W, mob/user, params)
+/obj/machinery/firealarm/attackby(obj/item/W, mob/living/user, params)
 	add_fingerprint(user)
 
 	if(W.tool_behaviour == TOOL_SCREWDRIVER && buildstage == 2)
@@ -171,7 +172,7 @@
 
 	if(panel_open)
 
-		if(W.tool_behaviour == TOOL_WELDER && user.a_intent == INTENT_HELP)
+		if(W.tool_behaviour == TOOL_WELDER && !user.combat_mode)
 			if(atom_integrity < max_integrity)
 				if(!W.tool_start_check(user, amount=0))
 					return

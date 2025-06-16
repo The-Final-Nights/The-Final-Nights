@@ -87,7 +87,6 @@ SUBSYSTEM_DEF(beastmastering)
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'code/modules/wod13/sounds/dog.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 2
@@ -150,9 +149,9 @@ SUBSYSTEM_DEF(beastmastering)
 	if(!targa)
 		targa = L
 
-/mob/living/carbon/human/attack_hand(mob/user)
+/mob/living/carbon/human/attack_hand(mob/living/carbon/human/user)
 	if(user)
-		if(user.a_intent != INTENT_HELP)
+		if(!(user.combat_mode))
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster)
 				B.add_beastmaster_enemies(user)
 	..()
@@ -195,9 +194,9 @@ SUBSYSTEM_DEF(beastmastering)
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster)
 				B.add_beastmaster_enemies(A)
 
-/mob/living/simple_animal/hostile/beastmaster/attack_hand(mob/user)
+/mob/living/simple_animal/hostile/beastmaster/attack_hand(mob/living/carbon/human/user)
 	if(user)
-		if(user.a_intent != INTENT_HELP)
+		if(user.combat_mode)
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster.beastmaster)
 				B.add_beastmaster_enemies(user)
 	..()

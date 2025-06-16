@@ -39,6 +39,11 @@
 ///Used to check when doing audible emotes, like screaming
 #define COOLDOWN_MOB_AUDIO "mob_audio_cooldown"
 
+// item cooldowns
+#define COOLDOWN_SIGNALLER_SEND "cooldown_signaller_send"
+#define COOLDOWN_TOOL_SOUND "cooldown_tool_sound"
+
+
 //TIMER COOLDOWN MACROS
 
 #define COMSIG_CD_STOP(cd_index) "cooldown_[cd_index]"
@@ -46,7 +51,11 @@
 
 #define TIMER_COOLDOWN_START(cd_source, cd_index, cd_time) LAZYSET(cd_source.cooldowns, cd_index, addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(end_cooldown), cd_source, cd_index), cd_time))
 
+/// Checks if a timer based cooldown is NOT finished.
 #define TIMER_COOLDOWN_CHECK(cd_source, cd_index) LAZYACCESS(cd_source.cooldowns, cd_index)
+
+/// Checks if a timer based cooldown is finished.
+#define TIMER_COOLDOWN_FINISHED(cd_source, cd_index) (!TIMER_COOLDOWN_CHECK(cd_source, cd_index))
 
 #define TIMER_COOLDOWN_END(cd_source, cd_index) LAZYREMOVE(cd_source.cooldowns, cd_index)
 

@@ -213,8 +213,8 @@
 							"<b>Effects:</b> [span_notice("[scannerreport()]")]")
 
 
-/obj/structure/blob/attack_animal(mob/living/simple_animal/M)
-	if(ROLE_BLOB in M.faction) //sorry, but you can't kill the blob as a blobbernaut
+/obj/structure/blob/attack_animal(mob/living/simple_animal/user, list/modifiers)
+	if(ROLE_BLOB in user.faction) //sorry, but you can't kill the blob as a blobbernaut
 		return
 	..()
 
@@ -345,7 +345,7 @@
 	// Spore production vars: for core, factories, and nodes (with strains)
 	var/mob/living/simple_animal/hostile/blob/blobbernaut/naut = null
 	var/max_spores = 0
-	var/list/spores	= list()
+	var/list/spores = list()
 	COOLDOWN_DECLARE(spore_delay)
 	var/spore_cooldown = BLOBMOB_SPORE_SPAWN_COOLDOWN
 
