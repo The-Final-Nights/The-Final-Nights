@@ -18,7 +18,7 @@
 	var/obj/item/organ/eyes/night_vision/NV = new()
 	NV.Insert(H, TRUE, FALSE)
 	H.vis_flags |= VIS_HIDE
-	H.faction |= "Lasombra"
+	H.faction |= CLAN_LASOMBRA
 
 /mob/living/simple_animal/hostile/biter/lasombra /// moved here from tzimisce.dm, as per request. not used anywhere.
 	name = "shadow abomination"
@@ -31,7 +31,7 @@
 	health = 100
 	bloodpool = 0
 	maxbloodpool = 0
-	faction = list("Lasombra")
+	faction = list(CLAN_LASOMBRA)
 
 /mob/living/simple_animal/hostile/biter/lasombra/better
 	icon_state = "shadow2"
