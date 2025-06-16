@@ -468,6 +468,21 @@
 	masquerade_violating = TRUE
 	is_iron = FALSE
 
+/obj/item/melee/vampirearms/knife/gangrel/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity)
+		return
+	if(HAS_TRAIT(user, TRAIT_WARRIOR))
+		user.changeNext_move(CLICK_CD_MELEE * 0.5)
+	else
+		user.changeNext_move(CLICK_CD_MELEE)
+
+/obj/item/melee/vampirearms/knife/gangrel/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity)
+		return
+	if(isliving(target))
+		var/mob/living/L = target
+		L.apply_damage(30, CLONE)
+
 
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"
@@ -478,7 +493,13 @@
 	icon_state = "lasombra"
 	masquerade_violating = TRUE
 
-
+/obj/item/melee/vampirearms/knife/gangrel/lasombra/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity)
+		return
+	if(HAS_TRAIT(user, TRAIT_WARRIOR))
+		user.changeNext_move(CLICK_CD_MELEE * 0.5)
+	else
+		user.changeNext_move(CLICK_CD_MELEE)
 
 /obj/item/melee/touch_attack/werewolf
 	name = "\improper falling touch"
@@ -888,6 +909,14 @@
 	resistance_flags = FIRE_PROOF
 	masquerade_violating = TRUE
 
+/obj/item/melee/vampirearms/tzimisce/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity)
+		return
+	if(HAS_TRAIT(user, TRAIT_WARRIOR))
+		user.changeNext_move(CLICK_CD_MELEE * 0.5)
+	else
+		user.changeNext_move(CLICK_CD_MELEE)
+
 /obj/item/melee/vampirearms/tzimisce/venom
 	name = "nematocyst whip"
 	desc = "An elongated tendril covered with stinging cells."
@@ -929,6 +958,10 @@
 /obj/item/melee/vampirearms/tzimisce/shock/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)
 		return
+	if(HAS_TRAIT(user, TRAIT_WARRIOR))
+		user.changeNext_move(CLICK_CD_MELEE * 0.5)
+	else
+		user.changeNext_move(CLICK_CD_MELEE)
 	if(isliving(target))
 		var/mob/living/L = target
 		L.adjustStaminaLoss(50)
