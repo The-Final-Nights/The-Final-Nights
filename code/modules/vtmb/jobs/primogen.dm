@@ -17,7 +17,7 @@
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Malkavian")
+	allowed_bloodlines = list(CLAN_MALKAVIAN)
 	minimal_generation = 12
 //	minimum_character_age = 100
 	minimum_vampire_age = 5 // Actually Malkavian Primo is whoever showed for work that day. Crazy bunch.
@@ -69,7 +69,7 @@
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Nosferatu")
+	allowed_bloodlines = list(CLAN_NOSFERATU)
 	minimal_generation = 12
 //	minimum_character_age = 100 //Uncomment if age restriction wanted
 	minimum_vampire_age = 50
@@ -117,7 +117,7 @@
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Ventrue")
+	allowed_bloodlines = list(CLAN_VENTRUE)
 	minimal_generation = 12
 //	minimum_character_age = 100 //Uncomment if age restriction wanted
 	minimum_vampire_age = 50
@@ -164,7 +164,7 @@
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Toreador")
+	allowed_bloodlines = list(CLAN_TOREADOR)
 	minimal_generation = 12
 //	minimum_character_age = 100 //Uncomment if age restriction wanted
 	minimum_vampire_age = 50
@@ -212,7 +212,7 @@
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Banu Haqim")
+	allowed_bloodlines = list(CLAN_BANU_HAQIM)
 	minimal_generation = 12
 //	minimum_character_age = 100 //Uncomment if age restriction wanted
 	minimum_vampire_age = 50
@@ -258,7 +258,7 @@
 	exp_type_department = EXP_TYPE_COUNCIL
 
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Lasombra")
+	allowed_bloodlines = list(CLAN_LASOMBRA)
 	minimal_generation = 12
 //	minimum_character_age = 100
 	minimum_vampire_age = 5 // Heavily meritocratic and new to the Camarilla, plus, Julia Sowinski *shrug
