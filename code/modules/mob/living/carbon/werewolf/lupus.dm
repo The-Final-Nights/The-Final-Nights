@@ -42,6 +42,9 @@
 	maxHealth = 100 // I predict that the sprites will be hell to click, no extra HP compared to homid
 
 
+
+
+
 /datum/movespeed_modifier/lupusform
 		multiplicative_slowdown = -0.7
 
@@ -49,12 +52,17 @@
 	cut_overlays()
 
 	var/laid_down = FALSE
+	var/in_flight = FALSE // different from "FLYING"
 
-	if(stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN)
+	if((stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN) && !HAS_TRAIT(src, TRAIT_MOVE_FLYING))
 		icon_state = "[sprite_color]_rest"
 		laid_down = TRUE
+	if(HAS_TRAIT(src, TRAIT_MOVE_FLYING)) // important to have or our bird will just stop flapping his wings and walk in the air.
+		icon_state = icon_state = "[sprite_color]_flying"
+		in_flight = TRUE
 	else
 		icon_state = "[sprite_color]"
+
 
 	switch(getFireLoss()+getBruteLoss())
 		if(25 to 75)
@@ -67,7 +75,7 @@
 			var/mutable_appearance/damage_overlay = mutable_appearance(icon, "damage3[laid_down ? "_rest" : ""]")
 			add_overlay(damage_overlay)
 
-	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : ""]")
+	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : in_flight ? "_flying" : ""]")
 	eye_overlay.color = sprite_eye_color
 	eye_overlay.plane = ABOVE_LIGHTING_PLANE
 	eye_overlay.layer = ABOVE_LIGHTING_LAYER
@@ -91,3 +99,4 @@
 			if(CheckEyewitness(src, src, 4, FALSE))
 				src.adjust_veil(-1,threshold = 4)
 	..()
+

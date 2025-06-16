@@ -1,3 +1,4 @@
+
 /datum/auspice
 	var/name = "Loh"
 	var/desc = "Furry ebaka"
@@ -28,8 +29,7 @@
 	corvid?.auspice = src
 	corvid?.dna = C.dna
 	ADD_TRAIT(corvid, TRAIT_CORAX, tribe)
-
-
+	corvid.dna.species.GiveCoraxFlight(corvid)
 	rage = start_rage
 	if(length(gifts)) // This grants the auspice gifts, I believe
 		for(var/i in gifts)
@@ -62,6 +62,7 @@
 		C.put_in_hands(new tribe.tribe_keys(C))
 	if(tribe.tribe_trait==TRAIT_CORAX)
 		ADD_TRAIT(C,TRAIT_CORAX, tribe)
+
 
 
 /datum/auspice/ahroun
