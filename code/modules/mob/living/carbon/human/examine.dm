@@ -460,11 +460,11 @@
 		//examine text for unusual appearances
 		if (iskindred(src) && is_face_visible())
 			switch(clane.alt_sprite)
-				if ("nosferatu")
+				if (CLAN_NOSFERATU)
 					msg += span_warning("[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!<br>")
-				if ("gargoyle")
+				if (CLAN_GARGOYLE)
 					msg += span_warning("[p_they(TRUE)] seem[p_s()] to be made out of stone!<br>")
-				if ("kiasyd")
+				if (CLAN_KIASYD)
 					if (!is_eyes_covered())
 						msg += span_boldwarning("[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!</b><br>")
 				if ("rotten1")
@@ -524,7 +524,7 @@
 				if ((vampire.morality_path.score < 7) || client?.prefs?.is_enlightened)
 					wyrm_taint++
 
-				if ((vampire.clane?.name == "Baali") || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
+				if ((vampire.clane?.name == CLAN_BAALI) || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
 					wyrm_taint++
 
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
@@ -596,6 +596,9 @@
 	var/trait_exam = common_trait_examine()
 	if (!isnull(trait_exam))
 		. += trait_exam
+
+	if(custom_examine_message)
+		. += span_purple(custom_examine_message)
 
 	if(ishuman(user))
 		. += "<a href='byond://?src=[REF(src)];masquerade=1'>Spot a Masquerade violation</a>"

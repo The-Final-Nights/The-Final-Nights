@@ -240,7 +240,14 @@
 							"Clan Tzimisce" = GLOB.tzimisce_positions,
 							"Law Enforcement" = GLOB.police_positions + GLOB.national_security_positions,
 							"Warehouse" = GLOB.warehouse_positions,
-							"Triad" = GLOB.gang_positions)
+							"Triad" = GLOB.gang_positions,
+							"Unaligned" = GLOB.citizen_positions,
+							"City Services" = GLOB.services_positions,
+							"St Johns" = GLOB.clinic_positions,
+							"Church" = GLOB.church_positions,
+							"Painted City" = GLOB.painted_positions,
+							"Amberglade" = GLOB.amberglade_positions,
+							"Endron" = GLOB.spiral_positions)
 		for(var/department in job_lists)
 			output += "<div class='column'><label class='rolegroup [ckey(department)]'><input type='checkbox' name='[department]' class='hidden' [usr.client.prefs.tgui_fancy ? " onClick='toggle_checkboxes(this, \"_com\")'" : ""]>[department]</label><div class='content'>"
 			break_counter = 0
