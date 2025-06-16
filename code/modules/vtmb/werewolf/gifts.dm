@@ -276,6 +276,7 @@
 
 /datum/action/gift/sense_wyrm/Trigger()
 	. = ..()
+
 	var/datum/atom_hud/sense_wyrm_hud = GLOB.huds[DATA_HUD_SENSEWYRM]
 	var/mob/living/carbon/werewolf/theurge = owner
 	var/mob/living/carbon/human/homid = theurge.transformator.human_form?.resolve()
@@ -285,7 +286,6 @@
 		sense_wyrm_hud.add_hud_to(corvid)
 		sense_wyrm_hud.add_hud_to(cor_crinos)
 	else
-
 		var/mob/living/carbon/werewolf/lupus/lupus = theurge.transformator.lupus_form?.resolve()
 		var/mob/living/carbon/werewolf/crinos/crinos = theurge.transformator.crinos_form?.resolve()
 		sense_wyrm_hud.add_hud_to(lupus)
@@ -293,7 +293,6 @@
 	sense_wyrm_hud.add_hud_to(homid)
 	theurge.update_sight()
 	to_chat(owner, span_purple("You open your eyes to the wyrm's corruption, it will be impossible to unsee for the remainder of the night.")) // you can't stop seeing wyrm taint once you learn the gift, this is a lazy way of making this work.
-
 
 /datum/action/gift/spirit_speech
 	name = "Spirit Speech"

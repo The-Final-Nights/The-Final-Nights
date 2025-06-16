@@ -29,7 +29,7 @@
 	v_duty = "You are the Prince's enforcer. You report to the Sheriff and uphold the Traditions."
 	minimal_masquerade = 4
 	experience_addition = 10
-	allowed_bloodlines = list("True Brujah", "Daughters of Cacophony", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Kiasyd", "Cappadocian", "Tzimisce")
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_SETITES, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_TZIMISCE)
 
 /datum/outfit/job/hound
 	name = "Hound"
