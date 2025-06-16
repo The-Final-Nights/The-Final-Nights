@@ -310,7 +310,7 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
-	faction = list("Tzimisce")
+	faction = list(CLAN_TZIMISCE)
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 2
 	maxbloodpool = 2
@@ -337,7 +337,7 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	status_flags = CANPUSH
-	faction = list("Tzimisce")
+	faction = list(CLAN_TZIMISCE)
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 5
 	maxbloodpool = 5
@@ -363,13 +363,13 @@
 	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
-	faction = list("Tzimisce")
+	faction = list(CLAN_TZIMISCE)
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 7
 	maxbloodpool = 7
 
 /mob/living/simple_animal/hostile/gargoyle
-	name = "Gargoyle"
+	name = CLAN_GARGOYLE
 	desc = "Stone-skinned..."
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "gargoyle_m"
@@ -395,17 +395,24 @@
 	dextrous = TRUE
 	held_items = list(null, null)
 	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
-	faction = list("Tremere")
+	faction = list(CLAN_TREMERE)
 
-/mob/living/simple_animal/hostile/gargoyle/proc/gain_nigs()
+/mob/living/simple_animal/hostile/gargoyle/proc/gain_sentience()
 	set waitfor = FALSE
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as Embraced Gargoyle?", null, null, null, 50, src)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as a Perfect Gargoyle?", null, null, null, 50, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
 			to_chat(G, "<span class='ghostalert'>New Gargoyle has been made.</span>")
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		key = C.key
+		var/choice = tgui_alert(C, "Do you want to pick a new name as a Gargoyle?", "Gargoyle Choose Name", list("Yes", "No"), 10)
+		if(choice == "Yes")
+			var/chosen_gargoyle_name = tgui_input_text(C, "What is your new name as a Gargoyle?", "Gargoyle Name Input")
+			name = chosen_gargoyle_name
+			update_name()
+		else
+			return
 
 /mob/living/simple_animal/hostile/gargoyle/Initialize()
 	. = ..()

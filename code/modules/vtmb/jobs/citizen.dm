@@ -23,7 +23,7 @@
 	v_duty = "Follow the traditions of the Camarilla. Obey the Prince and their authority. The city belongs to him. Aligning yourself with your clan members would be of benefit."
 	duty = "Obey the authorities... Or don't. You are up late tonight for one reason or another."
 	minimal_masquerade = 0
-	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Ministry", "Caitiff", "Cappadocian", "Gargoyle", "Lasombra", "Tzimisce", "Daughters of Cacaphony", "Salubri", "Nagaraja", "Baali", "Kiasyd", "Banu Haqim", "Giovanni", "Old Clan Tzimisce", "True Brujah")
+	allowed_bloodlines = list(CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_SETITES, CLAN_NONE, CLAN_CAPPADOCIAN, CLAN_GARGOYLE, CLAN_LASOMBRA, CLAN_TZIMISCE, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_NAGARAJA, CLAN_BAALI, CLAN_KIASYD, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_OLD_TZIMISCE, CLAN_TRUE_BRUJAH)
 
 /datum/outfit/job/citizen
 	name = "Citizen"
@@ -49,11 +49,13 @@
 		else
 			shoes = /obj/item/clothing/shoes/vampire/heels
 	if(H.clane)
-		if(H.clane.name == "Lasombra")
+		if(H.clane.name == CLAN_LASOMBRA)
+			backpack_contents = list(/obj/item/passport =1, /obj/item/vamp/creditcard=1)
+		if(H.clane.name == CLAN_KIASYD)
 			backpack_contents = list(/obj/item/passport =1, /obj/item/vamp/creditcard=1)
 	if(!H.clane)
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
-	if(H.clane && H.clane.name != "Lasombra")
+	if(H.clane && H.clane.name != CLAN_LASOMBRA && H.clane.name != CLAN_KIASYD)
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /obj/effect/landmark/start/citizen
