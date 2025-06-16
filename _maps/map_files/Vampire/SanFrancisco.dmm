@@ -19876,9 +19876,11 @@
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/pacificheights/old)
 "fjF" = (
-/obj/vampire_car/police,
+/obj/vampire_car/emergency/ambulance{
+	dir = 1
+	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/ghetto)
+/area/vtm/clinic)
 "fjK" = (
 /obj/effect/decal/crosswalk{
 	dir = 4
@@ -24825,10 +24827,12 @@
 	},
 /area/vtm/interior/tzimisce_manor)
 "gvv" = (
-/obj/effect/decal/bordur,
-/obj/vampire_car/police,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/ghetto)
+/obj/effect/decal/asphaltline/alt{
+	dir = 8
+	},
+/obj/vampire_car/emergency/police,
+/turf/open/floor/plating/asphalt,
+/area/vtm/interior/police)
 "gvA" = (
 /obj/machinery/vamp/atm{
 	pixel_y = 25
@@ -38299,11 +38303,11 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/tzimisce_manor)
 "kco" = (
-/obj/vampire_car/track/ambulance{
-	dir = 1
+/obj/vampire_car/emergency/police/unmarked{
+	dir = 4
 	},
 /turf/open/floor/plating/asphalt,
-/area/vtm/clinic)
+/area/vtm/interior/police)
 "kcs" = (
 /obj/structure/stairs/east,
 /obj/structure/railing,
@@ -42113,10 +42117,6 @@
 /obj/item/vampire_stake,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
-"ldy" = (
-/obj/vampire_car/police/unmarked,
-/turf/open/floor/plating/asphalt,
-/area/vtm/interior/police)
 "ldz" = (
 /obj/structure/vampdoor/simple{
 	dir = 4
@@ -43369,7 +43369,13 @@
 /turf/open/floor/carpet/red,
 /area/vtm/clinic)
 "lxf" = (
-/obj/vampire_car/police,
+/obj/effect/decal/asphaltline/alt{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/vampire_car/emergency/police,
 /turf/open/floor/plating/asphalt,
 /area/vtm/interior/police)
 "lxi" = (
@@ -68830,10 +68836,9 @@
 /turf/closed/wall/vampwall/rich,
 /area/vtm/interior/millennium_tower/f4)
 "rTw" = (
-/obj/effect/decal/bordur,
-/obj/vampire_car/police,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/pacificheights)
+/obj/vampire_car/emergency/police,
+/turf/open/floor/plating/asphalt,
+/area/vtm/interior/police)
 "rTz" = (
 /obj/structure/table,
 /obj/item/ammo_box/vampire/c12g,
@@ -92360,8 +92365,12 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic/haven)
 "yeE" = (
-/obj/effect/decal/cleanable/oil,
-/obj/vampire_car/police,
+/obj/effect/decal/asphaltline/alt{
+	dir = 8
+	},
+/obj/vampire_car/emergency/police/unmarked{
+	dir = 4
+	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/interior/police)
 "yeI" = (
@@ -193186,8 +193195,8 @@ mHu
 mHu
 bUt
 uDj
+fjF
 uDj
-kco
 uDj
 bUt
 upT
@@ -193700,7 +193709,7 @@ fQP
 fQP
 ipA
 uDj
-uDj
+fjF
 uDj
 mqz
 bUt
@@ -193958,7 +193967,7 @@ fQP
 ipA
 uDj
 uDj
-kco
+uDj
 uDj
 uTu
 qDR
@@ -194649,7 +194658,7 @@ pdi
 pdi
 ceJ
 qcO
-rTw
+xBO
 jdF
 vuW
 pXK
@@ -205811,8 +205820,8 @@ nVZ
 pxy
 bJU
 siX
-bJU
-siX
+kco
+yeE
 qTP
 jlv
 jlv
@@ -206068,7 +206077,7 @@ gtA
 jjN
 bJU
 siX
-ldy
+bJU
 siX
 qTP
 jlv
@@ -206592,7 +206601,7 @@ mwS
 mwS
 miR
 xcu
-fjF
+mwS
 xcu
 wWS
 xcu
@@ -207350,11 +207359,11 @@ yhf
 yhf
 qTP
 lGS
-siX
-bJU
-siX
-bJU
-pBs
+gvv
+rTw
+gvv
+rTw
+lxf
 bXU
 xFV
 xFV
@@ -207606,11 +207615,11 @@ yhf
 yhf
 oao
 qTP
-lxf
+bJU
 siX
-lxf
+bJU
 siX
-yeE
+keU
 siX
 qTP
 jlv
@@ -209157,7 +209166,7 @@ qTP
 qTP
 jlv
 jlv
-gvv
+avt
 mwS
 mwS
 ulT
