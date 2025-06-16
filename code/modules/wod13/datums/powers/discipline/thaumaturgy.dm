@@ -7,7 +7,7 @@
 
 /datum/discipline/thaumaturgy/post_gain()
 	. = ..()
-	owner.faction |= "Tremere"
+	owner.faction |= CLAN_TREMERE
 	if(level >= 1)
 		var/datum/action/thaumaturgy/thaumaturgy = new()
 		thaumaturgy.Grant(owner)
