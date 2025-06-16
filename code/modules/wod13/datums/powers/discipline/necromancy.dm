@@ -7,12 +7,14 @@
 
 /datum/discipline/necromancy/post_gain()
 	. = ..()
-	owner.faction |= "Giovanni"
+
+	owner.faction |= CLAN_GIOVANNI
 	var/datum/action/necroritualism/ritualist = new()
 	owner.necromancy_knowledge = TRUE
 	ritualist.Grant(owner)
 	ritualist.level = level
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/necrotome)
+
 
 /datum/discipline_power/necromancy
 	name = "Necromancy power name"
