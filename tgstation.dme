@@ -268,6 +268,7 @@
 #include "code\__DEFINES\dcs\signals\signals_mob\signals_mob_silicon.dm"
 #include "code\__DEFINES\dcs\signals\signals_mob\signals_mob_simple.dm"
 #include "code\__DEFINES\dcs\signals\signals_mob\signals_mob_spawner.dm"
+#include "code\__DEFINES\dcs\signals\tfn_signals\signals_masquerade.dm"
 #include "code\__DEFINES\research\anomalies.dm"
 #include "code\__DEFINES\tfn\vtm_defines.dm"
 #include "code\__DEFINES\traits\_traits.dm"
