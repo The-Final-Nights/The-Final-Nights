@@ -131,17 +131,9 @@
 
 	//patch up an RCE exploit by sanitizing input
 	message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
-
 	var/log_message = uppertext(message)
-	if(!span_list || !span_list.len)
-		if(iscultist(user))
-			span_list = list("narsiesmall")
-		else
-			span_list = list()
+	user.say(message, spans = list("dominate-hard"), sanitize = FALSE)
 
-	user.say(message, spans = span_list, sanitize = FALSE)
-
-	message = lowertext(message)
 	var/list/mob/living/listeners = list()
 	for(var/mob/living/L in get_hearers_in_view(8, user))
 		if(L.can_hear() && !L.anti_magic_check(FALSE, TRUE) && L.stat != DEAD)
@@ -166,7 +158,7 @@
 			var/theirpower = SSroll.storyteller_roll(L.get_total_mentality(), difficulty = 6, mobs_to_show_output = L, numerical = 1)
 
 			if(conditioner && user != conditioner)
-				theirpower += 3
+				theirpower -= 3 //Takes away three successes from their role, making it VERY hard, but not impossible to resist.
 
 			if(user != conditioner)
 				if((theirpower >= mypower) && !dominate_me)
@@ -243,7 +235,7 @@
 			addtimer(CALLBACK(dominate_target, TYPE_PROC_REF(/mob/living/carbon/human, post_dominate_checks), dominate_target), 2 SECONDS)
 
 	//removed some keywords as they don't fit mental domination
-	var/static/regex/stun_words = regex("stop|wait|stand still|hold on|halt|cease")
+	var/static/regex/stun_words = regex("stop|wait|stand still|hold on|halt|cease|listen|hear me|attention|")
 	var/static/regex/knockdown_words = regex("drop|fall|trip|knockdown")
 	var/static/regex/sleep_words = regex("sleep|slumber|rest")
 	//var/static/regex/vomit_words = regex("vomit|throw up|sick")

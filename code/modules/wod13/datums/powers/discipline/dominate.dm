@@ -93,7 +93,7 @@
 		return TRUE
 
 	if(target.conditioned)
-		theirpower += 3
+		theirpower -= 3 //Takes away three successes from their role, making it VERY hard, but not impossible to resist.
 
 	return (mypower > theirpower && owner.generation <= target.generation)
 
@@ -128,7 +128,7 @@
 /datum/discipline_power/dominate/command/activate(mob/living/target)
 	. = ..()
 
-	custom_command = tgui_input_text(owner, "Dominate Command", "What is your command?", "FORGET ABOUT IT")
+	custom_command = tgui_input_text(owner, "Enter a short, subtle, one target command. Examples: Sit, Relax, Drop it, Come here, etc.", "Dominate Minor Command Say:", "Be Calm.")
 	if (!custom_command)
 		return  // No message, no dominate
 
@@ -137,13 +137,13 @@
 
 	if(dominate_check(owner, target, base_difficulty = extra_words_difficulty))
 		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-		owner.say("[custom_command]")
-		to_chat(target, span_big("[custom_command]"))
+		to_chat(target, span_warning("[owner]'s Commanding Voice fills every space of your mind and thoughts. Whispered, spoken, or shouted, you are compelled to complete the command, to your character's understanding and satsifaction. If needed, use LOOC or Ahelp for clarity, character conflicts, or if you are uncomfortable."))
+		to_chat(target, span_big("You Hear [owner]'s Command clearly: '[custom_command]'"))
+		owner.say(custom_command, spans = list("dominate-soft"), sanitize = FALSE)
 		SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 	else
 		to_chat(owner, span_warning("[target] has resisted your domination!"))
-		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
-
+		to_chat(target, span_warning("Your thoughts blur — [owner] subtly attempts to command you with their voice, but you resisted, your will is your own."))
 
 //MESMERIZE
 /datum/discipline_power/dominate/mesmerize

@@ -129,6 +129,9 @@
 #define span_subtler(str) ("<span class='subtler'>" + str + "</span>")
 #define span_emote(str) ("<span class='emote'>" + str + "</span>")
 
+#define span_dominate_soft(str) ("<span class='dominate-soft'>" + str + "</span>")
+#define span_dominate_hard(str) ("<span class='dominate-hard'>" + str + "</span>")
+
 
 // Spans that use embedded tgui components:
 // Sorted alphabetically
