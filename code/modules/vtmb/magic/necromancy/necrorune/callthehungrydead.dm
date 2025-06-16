@@ -1,6 +1,6 @@
 // **************************************************************** CALL THE HUNGRY DEAD *************************************************************
 
-/obj/necrorune/callthehungrydead //No bloodpack requirement, but the wraiths aren't implied to owe answers.
+/obj/necrorune/question //No bloodpack requirement, but the wraiths aren't implied to owe answers.
 	name = "Call the Hungry Dead"
 	desc = "Summon a wraith from the Shadowlands to converse."
 	icon_state = "rune4"
