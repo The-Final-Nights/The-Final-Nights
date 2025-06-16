@@ -19,9 +19,9 @@
 	can_be_held = TRUE
 	pet_bonus = TRUE
 	pet_bonus_emote = "woofs happily!"
-	ai_controller = /datum/ai_controller/dog
+	var/turns_since_scan = 0
+	var/obj/movement_target
 	stop_automated_movement = TRUE
-	///In the case 'melee_damage_upper' is somehow raised above 0
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'sound/weapons/bite.ogg'

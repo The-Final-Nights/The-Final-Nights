@@ -288,7 +288,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 				return
 			if(new_eye_color)
 				H.eye_color = sanitize_hexcolor(new_eye_color)
-				H.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+				H.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
 				H.update_body()
 	if(choice)
 		curse(user)

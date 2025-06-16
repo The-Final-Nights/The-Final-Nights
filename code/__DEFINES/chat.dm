@@ -52,6 +52,3 @@
 #define CHAT_LAYER_MAX_Z			(CHAT_LAYER_MAX - CHAT_LAYER) / CHAT_LAYER_Z_STEP
 /// The dimensions of the chat message icons
 #define CHAT_MESSAGE_ICON_SIZE		9
-
-/// Helper which creates a chat message which may have a tooltip in some contexts, but not others.
-#define conditional_tooltip(normal_text, tooltip_text, condition) ((condition) ? (span_tooltip(tooltip_text, normal_text)) : (normal_text))

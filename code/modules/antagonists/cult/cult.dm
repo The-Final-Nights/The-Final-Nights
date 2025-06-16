@@ -134,7 +134,7 @@
 	if(ishuman(current))
 		var/mob/living/carbon/human/H = current
 		H.eye_color = initial(H.eye_color)
-		H.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+		H.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
 		REMOVE_TRAIT(H, CULT_EYES, null)
 		H.remove_overlay(HALO_LAYER)
 		H.update_body()
@@ -233,7 +233,7 @@
 	if(ishuman(current))
 		var/mob/living/carbon/human/H = current
 		H.eye_color = initial(H.eye_color)
-		H.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+		H.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
 		REMOVE_TRAIT(H, CULT_EYES, null)
 		H.remove_overlay(HALO_LAYER)
 		H.update_body()
@@ -285,7 +285,7 @@
 	if(ishuman(cultist))
 		var/mob/living/carbon/human/H = cultist
 		H.eye_color = "#ff0000"
-		H.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+		H.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
 		ADD_TRAIT(H, CULT_EYES, CULT_TRAIT)
 		H.update_body()
 
