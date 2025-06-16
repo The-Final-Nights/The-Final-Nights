@@ -36,7 +36,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 //	if(ishuman(AM) && ref)
 //		var/mob/living/carbon/human/H = AM
 //		if(H.clane)
-//			if(H.clane.name == "Lasombra")
+//			if(H.clane.name == CLAN_LASOMBRA)
 //				var/obj/effect/reflection/reflection = ref.resolve()
 //				if(istype(reflection))
 //					qdel(reflection)
@@ -62,7 +62,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 
 		//Sorry, you can't see yourself in front of the mirror!
 		if(H.clane)
-			if(H.clane.name == "Lasombra")
+			if(H.clane.name == CLAN_LASOMBRA)
 				return
 
 		//see code/modules/mob/dead/new_player/preferences.dm at approx line 545 for comments!

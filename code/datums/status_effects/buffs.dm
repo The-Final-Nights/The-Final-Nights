@@ -172,7 +172,7 @@
 
 
 //Used by changelings to rapidly heal
-//Heals 10 brute and oxygen damage every second, and 5 fire
+//Heals 20 brute and oxygen damage every second, and 5 fire
 //Being on fire will suppress this healing
 /datum/status_effect/fleshmend
 	id = "fleshmend"
@@ -185,9 +185,9 @@
 		return
 	else
 		linked_alert.icon_state = "fleshmend"
-	owner.adjustBruteLoss(-10, FALSE)
+	owner.adjustBruteLoss(-20, FALSE)
 	owner.adjustFireLoss(-5, FALSE)
-	owner.adjustOxyLoss(-10)
+	owner.adjustOxyLoss(-20)
 	if(!iscarbon(owner))
 		return
 	var/mob/living/carbon/C = owner

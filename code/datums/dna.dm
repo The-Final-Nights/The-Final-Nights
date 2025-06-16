@@ -1,4 +1,52 @@
 
+/**
+ * Some identity blocks (basically pieces of the unique_identity string variable of the dna datum, commonly abbreviated with ui)
+ * may have a length that differ from standard length of 3 ASCII characters. This list is necessary
+ * for these non-standard blocks to work, as well as the entire unique identity string.
+ * Should you add a new ui block which size differ from the standard (again, 3 ASCII characters), like for example, a color,
+ * please do not forget to also include it in this list in the following format:
+ *  "[dna block number]" = dna block size,
+ * Failure to do that may result in bugs. Thanks.
+ */
+GLOBAL_LIST_INIT(identity_block_lengths, list(
+		"[DNA_HAIR_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
+		"[DNA_FACIAL_HAIR_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
+		"[DNA_EYE_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
+	))
+
+//Commenting uf code out unless/until it's used in this codebase.
+/**
+ * The same rules of the above also apply here, with the exception that this is for the unique_features string variable
+ * (commonly abbreviated with uf) and its blocks. Both ui and uf have a standard block length of 3 ASCII characters.
+
+GLOBAL_LIST_INIT(features_block_lengths, list(
+		"[DNA_MUTANT_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
+		"[DNA_ETHEREAL_COLOR_BLOCK]" = DNA_BLOCK_SIZE_COLOR,
+	))
+
+
+ * A list of numbers that keeps track of where ui blocks start in the unique_identity string variable of the dna datum.
+ * Commonly used by the datum/dna/set_uni_identity_block and datum/dna/get_uni_identity_block procs.
+ */
+GLOBAL_LIST_INIT(total_ui_len_by_block, populate_total_ui_len_by_block())
+
+/proc/populate_total_ui_len_by_block()
+	. = list()
+	var/total_block_len = 1
+	for(var/blocknumber in 1 to DNA_UNI_IDENTITY_BLOCKS)
+		. += total_block_len
+		total_block_len += GET_UI_BLOCK_LEN(blocknumber)
+/*
+///Ditto but for unique features. Used by the datum/dna/set_uni_feature_block and datum/dna/get_uni_feature_block procs.
+GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
+
+/proc/populate_total_uf_len_by_block()
+	. = list()
+	var/total_block_len = 1
+	for(var/blocknumber in 1 to DNA_FEATURE_BLOCKS)
+		. += total_block_len
+		total_block_len += GET_UF_BLOCK_LEN(blocknumber)
+*/
 /////////////////////////// DNA DATUM
 /datum/dna
 	///An md5 hash of the dna holder's real name
@@ -65,7 +113,11 @@
 	new_dna.unique_features = unique_features
 	new_dna.blood_type = blood_type
 	new_dna.features = features.Copy()
-	new_dna.species = new species.type
+	//if the new DNA has a holder, transform them immediately, otherwise save it
+	if(new_dna.holder)
+		new_dna.holder.set_species(species.type, icon_update = 0)
+	else
+		new_dna.species = species
 	new_dna.real_name = real_name
 	new_dna.mutations = mutations.Copy()
 
@@ -112,20 +164,16 @@
 		if(!GLOB.hairstyles_list.len)
 			init_sprite_accessory_subtypes(/datum/sprite_accessory/hair,GLOB.hairstyles_list, GLOB.hairstyles_male_list, GLOB.hairstyles_female_list)
 		L[DNA_HAIRSTYLE_BLOCK] = construct_block(GLOB.hairstyles_list.Find(H.hairstyle), GLOB.hairstyles_list.len)
-		L[DNA_HAIR_COLOR_BLOCK] = sanitize_hexcolor(H.hair_color)
+		L[DNA_HAIR_COLOR_BLOCK] = sanitize_hexcolor(H.hair_color, include_crunch = FALSE)
 		if(!GLOB.facial_hairstyles_list.len)
 			init_sprite_accessory_subtypes(/datum/sprite_accessory/facial_hair, GLOB.facial_hairstyles_list, GLOB.facial_hairstyles_male_list, GLOB.facial_hairstyles_female_list)
 		L[DNA_FACIAL_HAIRSTYLE_BLOCK] = construct_block(GLOB.facial_hairstyles_list.Find(H.facial_hairstyle), GLOB.facial_hairstyles_list.len)
-		L[DNA_FACIAL_HAIR_COLOR_BLOCK] = sanitize_hexcolor(H.facial_hair_color)
+		L[DNA_FACIAL_HAIR_COLOR_BLOCK] = sanitize_hexcolor(H.facial_hair_color, include_crunch = FALSE)
 		L[DNA_SKIN_TONE_BLOCK] = construct_block(GLOB.skin_tones.Find(H.skin_tone), GLOB.skin_tones.len)
-		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.eye_color)
+		L[DNA_EYE_COLOR_BLOCK] = sanitize_hexcolor(H.eye_color, include_crunch = FALSE)
 
-	for(var/i=1, i<=DNA_UNI_IDENTITY_BLOCKS, i++)
-		if(L[i])
-			. += L[i]
-		else
-			. += random_string(DNA_BLOCK_SIZE,GLOB.hex_characters)
-	return .
+	for(var/blocknum in 1 to DNA_UNI_IDENTITY_BLOCKS)
+		. += L[blocknum] || random_string(GET_UI_BLOCK_LEN(blocknum), GLOB.hex_characters)
 
 /datum/dna/proc/generate_unique_features()
 	var/list/data = list()
@@ -303,6 +351,19 @@
 		update_instability(FALSE)
 		return
 
+///Setter macro used to modify unique identity blocks.
+/datum/dna/proc/set_uni_identity_block(blocknum, input)
+	var/precesing_blocks = copytext(uni_identity, 1, GLOB.total_ui_len_by_block[blocknum])
+	var/succeeding_blocks = blocknum < GLOB.total_ui_len_by_block.len ? copytext(uni_identity, GLOB.total_ui_len_by_block[blocknum+1]) : ""
+	uni_identity = precesing_blocks + input + succeeding_blocks
+
+/* //Commenting out until/unless uf is re-implemented.
+///Setter macro used to modify unique features blocks.
+/datum/dna/proc/set_uni_feature_block(blocknum, input)
+	var/precesing_blocks = copytext(unique_features, 1, GLOB.total_uf_len_by_block[blocknum])
+	var/succeeding_blocks = blocknum < GLOB.total_uf_len_by_block.len ? copytext(unique_features, GLOB.total_uf_len_by_block[blocknum+1]) : ""
+	unique_features = precesing_blocks + input + succeeding_blocks
+*/
 /**
  * Checks if two DNAs are practically the same by comparing their most defining features
  *
@@ -477,7 +538,7 @@
 	if(!has_dna())
 		return
 
-	switch(deconstruct_block(getblock(dna.unique_identity, DNA_GENDER_BLOCK), 3))
+	switch(deconstruct_block(get_uni_identity_block(dna.uni_identity, DNA_GENDER_BLOCK), 3))
 		if(G_MALE)
 			gender = MALE
 		if(G_FEMALE)
@@ -602,22 +663,6 @@
 
 /////////////////////////// DNA HELPER-PROCS //////////////////////////////
 
-/proc/getleftblocks(input,blocknumber,blocksize)
-	if(blocknumber > 1)
-		return copytext(input,1,((blocksize*blocknumber)-(blocksize-1)))
-
-/proc/getrightblocks(input,blocknumber,blocksize)
-	if(blocknumber < (length(input)/blocksize))
-		return copytext(input,blocksize*blocknumber+1,length(input)+1)
-
-/proc/getblock(input, blocknumber, blocksize=DNA_BLOCK_SIZE)
-	return copytext(input, blocksize*(blocknumber-1)+1, (blocksize*blocknumber)+1)
-
-/proc/setblock(istring, blocknumber, replacement, blocksize=DNA_BLOCK_SIZE)
-	if(!istring || !blocknumber || !replacement || !blocksize)
-		return 0
-	return getleftblocks(istring, blocknumber, blocksize) + replacement + getrightblocks(istring, blocknumber, blocksize)
-
 /datum/dna/proc/mutation_in_sequence(mutation)
 	if(!mutation)
 		return
@@ -666,8 +711,7 @@
 	if(!has_dna())
 		CRASH("[src] does not have DNA")
 	var/num = rand(1, DNA_UNI_IDENTITY_BLOCKS)
-	var/newdna = setblock(dna.unique_identity, num, random_string(DNA_BLOCK_SIZE, GLOB.hex_characters))
-	dna.unique_identity = newdna
+	dna.set_se(num, random_string(GET_UI_BLOCK_LEN(num), GLOB.hex_characters))
 	updateappearance(mutations_overlay_update=1)
 
 /mob/living/carbon/proc/random_mutate_unique_features()
@@ -696,7 +740,7 @@
 				M.dna.generate_dna_blocks()
 		M.domutcheck()
 	if(ui)
-		for(var/i=1, i<=DNA_UNI_IDENTITY_BLOCKS, i++)
+		for(var/blocknum in 1 to DNA_UNI_IDENTITY_BLOCKS)
 			if(prob(probability))
 				M.dna.unique_identity = setblock(M.dna.unique_identity, i, random_string(DNA_BLOCK_SIZE, GLOB.hex_characters))
 	if(uf)
@@ -723,6 +767,13 @@
 		value = values
 	return value
 
+/proc/get_uni_identity_block(identity, blocknum)
+	return copytext(identity, GLOB.total_ui_len_by_block[blocknum], LAZYACCESS(GLOB.total_ui_len_by_block, blocknum+1))
+
+/* //COmmenting this out until/unless uf is re-implemented.
+/proc/get_uni_feature_block(features, blocknum)
+	return copytext(features, GLOB.total_uf_len_by_block[blocknum], LAZYACCESS(GLOB.total_uf_len_by_block, blocknum+1))
+*/
 /////////////////////////// DNA HELPER-PROCS
 
 /mob/living/carbon/human/proc/something_horrible(ignore_stability)

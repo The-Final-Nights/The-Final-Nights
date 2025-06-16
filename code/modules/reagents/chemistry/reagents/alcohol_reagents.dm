@@ -382,6 +382,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	ph = 3.45
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+/datum/reagent/consumable/ethanol/wine/wine_glass
+	name = "red wine"
+	glass_icon_state = "wine"
+	glass_name = "glass of wine"
+	glass_desc = "The glass contain wine"
+
 /datum/reagent/consumable/ethanol/wine/on_merge(data)
 	. = ..()
 	if(src.data && data && data["vintage"] != src.data["vintage"])

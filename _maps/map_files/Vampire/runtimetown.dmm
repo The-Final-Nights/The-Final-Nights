@@ -166,7 +166,7 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "eR" = (
-/turf/closed/wall/vampwall/rich/old/low/window/reinforced,
+/turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/pacificheights)
 "fd" = (
 /obj/effect/decal/bordur{
@@ -1225,9 +1225,6 @@
 /obj/item/gun/ballistic/shotgun/toy/crossbow/vampire,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
-"Oi" = (
-/turf/closed/wall/vampwall/market/low/window/reinforced,
-/area/vtm/interior/shop)
 "On" = (
 /mob/living/carbon/human/npc/shop,
 /turf/open/floor/plating/rough,
@@ -2923,7 +2920,7 @@ fi
 jW
 oU
 wm
-Oi
+zx
 NR
 NR
 NR
@@ -2991,7 +2988,7 @@ GB
 jW
 oU
 yt
-Oi
+zx
 NR
 NR
 NR
@@ -3026,8 +3023,8 @@ jW
 yt
 yt
 kS
-Oi
-Oi
+zx
+zx
 kS
 NR
 NR
