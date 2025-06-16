@@ -54,7 +54,7 @@
 		if(wyrm_tainted)
             icon_state = "spiral[sprite_color]_rest"
         else
-            icon_state = "[sprite_color]_rest"
+        icon_state = "[sprite_color]_rest"
 		laid_down = TRUE
 	else
         if(wyrm_tainted)
