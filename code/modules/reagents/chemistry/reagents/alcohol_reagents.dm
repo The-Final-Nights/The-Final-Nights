@@ -139,7 +139,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	. = 1
 
 /datum/reagent/consumable/ethanol/beer/typhon
-
 	name = "Typhon's Beer"
 	description = "An alcoholic beverage brewed with a sicekningly addictive sanguine taste"
 	color = "#660000"
