@@ -245,6 +245,8 @@
 	var/status = GROWING	//can be GROWING, GROWN or BURST; all mutually exclusive
 	layer = MOB_LAYER
 	var/obj/item/clothing/mask/facehugger/child
+	///Proximity monitor associated with this atom, needed for proximity checks.
+	var/datum/proximity_monitor/proximity_monitor
 
 /obj/structure/alien/egg/Initialize(mapload)
 	. = ..()
@@ -299,13 +301,13 @@
 /obj/structure/alien/egg/proc/Grow()
 	status = GROWN
 	update_appearance()
-	proximity_monitor.SetRange(1)
+	proximity_monitor.set_range(1)
 
 //drops and kills the hugger if any is remaining
 /obj/structure/alien/egg/proc/Burst(kill = TRUE)
 	if(status == GROWN || status == GROWING)
-		proximity_monitor.SetRange(0)
 		status = BURST
+		proximity_monitor.set_range(0)
 		update_appearance()
 		flick("egg_opening", src)
 		addtimer(CALLBACK(src, PROC_REF(finish_bursting), kill), 15)
