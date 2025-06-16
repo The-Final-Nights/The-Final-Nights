@@ -209,6 +209,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/enemy = FALSE
 	var/lover = FALSE
 
+	var/show_flavor_text_when_masked = FALSE
 	var/flavor_text
 	var/flavor_text_nsfw
 	var/ooc_notes
@@ -236,7 +237,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/werewolf_name
 	var/auspice_level = 1
-
 	var/clane_accessory
 
 	var/dharma_type = /datum/dharma
@@ -351,39 +351,73 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		var/coolfont = "<font face='Percolator'>[text]</font>"
 		return coolfont
 
-/proc/RankName(rank)
-	switch(rank)
-		if(0)
-			return "Cub"
-		if(1)
-			return "Cliath"
-		if(2)
-			return "Fostern"
-		if(3)
-			return "Adren"
-		if(4)
-			return "Athro"
-		if(5)
-			return "Elder"
-		if(6)
-			return "Legend"
+/proc/RankName(rank, tribe)
+	if(tribe != "Corax")
+		switch(rank)
+			if(0)
+				return "cub" // in lowercase so that \a might function during the character examine
+			if(1)
+				return "cliath"
+			if(2)
+				return "fostern"
+			if(3)
+				return "adren"
+			if(4)
+				return "athro"
+			if(5)
+				return "elder"
+			if(6)
+				return "legend"
+	else
+		switch(rank)
+			if(0)
+				return "fledgling"
+			if(1)
+				return "oviculum"
+			if(2)
+				return "neocornix"
+			if(3)
+				return "ales"
+			if(4)
+				return "volucris"
+			if(5)
+				return "corvus"
+			if(6)
+				return "grey eminence"
 
-/proc/RankDesc(rank)
-	switch(rank)
-		if(0)
-			return "You are not known to other Garou. Why?"
-		if(1)
-			return "You have completed your rite of passage as a Cliath."
-		if(2)
-			return "Fosterns have challenged for their rank and become proven members of Garou society."
-		if(3)
-			return "With proven work, wit, and function, Adren are higher echelons of Garou society, better known for control."
-		if(4)
-			return "A disciplined lieutenant and trusted Garou to your peers, you have respect and renown within the city as an Athro."
-		if(5)
-			return "One of the renowned names of the region, you are known as outstanding in California to some degree, worthy of the title of Elder."
-		if(6)
-			return "You're a Legendary NPC."
+/proc/RankDesc(rank, tribe)
+	if(tribe != "Corax")
+		switch(rank)
+			if(0)
+				return "You are not known to other Garou. Why?"
+			if(1)
+				return "You have completed your rite of passage as a Cliath."
+			if(2)
+				return "Fosterns have challenged for their rank and become proven members of Garou society."
+			if(3)
+				return "With proven work, wit, and function, Adren are higher echelons of Garou society, better known for control."
+			if(4)
+				return "A disciplined lieutenant and trusted Garou to your peers, you have respect and renown within the city as an Athro."
+			if(5)
+				return "One of the renowned names of the region, you are known as outstanding in California to some degree, worthy of the title of Elder."
+			if(6)
+				return "You're a Legendary NPC."
+	else
+		switch(rank)
+			if(0)
+				return "You are barely known to other Corax, and sit on the lower branches during Parliament"
+			if(1)
+				return "Other Corax have indulged in your secrets, and consider you Oviculum."
+			if(2)
+				return "You usually get to speak before the afternoon, and have shared remarkable intel several times, making you Neocornix ."
+			if(3)
+				return "You are witty, knowledgeable and have started making your mark accross the state, earning you the title of Ales"
+			if(4)
+				return "Not only do you posess juicy info over the state's big players, but you've gotten into dangerous scraps and came out in (mostly) one piece. \nOther Corax respectfully refer to you as Volucris"
+			if(5)
+				return "You sit on the highest branches of the tree whenever a Parliament's ongoing. You have shared devastating secrets with the rest of the Corax, and have shaped the fate of this region. \n You have the influence and prestige that makes the rest of your kind quiet down and listen, earning you the illustrious title of Corvus."
+			if(6)
+				return "Though you are officially still Corvus, your name is known worldwide, and your words can make or break nations, you should ideally be an NPC"
 
 /datum/preferences/proc/ShowChoices(mob/user)
 	show_loadout = (current_tab != 1) ? show_loadout : FALSE // TFN EDIT: loadout
@@ -555,8 +589,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							dat += "<b>Wisdom:</b> [wisdom]/10<BR>"
 							if(wisdomXP <= player_experience && wisdom < 10)
 								dat +=" <a href='byond://?_src_=prefs;preference=renownwisdom;task=input'>Raise Wisdom ([wisdomXP])</a><BR>"
-					dat += "<b>Renown Rank:</b> [RankName(renownrank)]<br>"
-					dat += "[RankDesc(renownrank)]<BR>"
+					dat += "<b>Renown Rank:</b> [RankName(renownrank,src.tribe.name)]<br>"
+					dat += "[RankDesc(renownrank, src.tribe.name)]<BR>"
 					var/canraise = 0
 					if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 						if(renownrank < MAX_TRUSTED_RANK)
@@ -700,7 +734,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/cost
 					if (discipline_level <= 0)
 						cost = 10
-					else if (clane.name == "Caitiff")
+					else if (clane.name == CLAN_NONE)
 						cost = discipline_level * 6
 					else if (clane.clane_disciplines.Find(discipline_type))
 						cost = discipline_level * 5
@@ -715,7 +749,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "-[discipline.desc]<BR>"
 					qdel(discipline)
 
-				if (clane.name == "Caitiff")
+				if (clane.name == CLAN_NONE)
 					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
 					for (var/discipline_type in possible_new_disciplines)
 						var/datum/discipline/discipline = new discipline_type
@@ -724,6 +758,25 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						qdel(discipline)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
+
+				switch(clane.name)
+
+					if(CLAN_SALUBRI)
+
+						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
+						possible_new_valerens -= discipline_types
+
+						if (possible_new_valerens.len && (player_experience >= 10))
+							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
+
+					if(CLAN_SALUBRI_WARRIOR)
+
+						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
+						possible_new_valerens -= discipline_types
+
+						if (possible_new_valerens.len && (player_experience >= 10))
+							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
+
 
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
@@ -820,6 +873,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				else
 					dat += "<BR><b>Flavor Text (NSFW):</b> [preview_text_nsfw]... <a href='byond://?_src_=prefs;preference=flavor_text_nsfw;task=input'>Change</a>"
 				dat += "<BR><b>OOC Notes:</b> [ooc_notes] <a href='byond://?_src_=prefs;preference=ooc_notes;task=input'>Change</a>"
+
+			dat += "<BR><b>Show flavor text while identity hidden:</b> <a href='byond://?_src_=prefs;preference=show_flavor_text_when_masked'>[(show_flavor_text_when_masked) ? "Enabled" : "Disabled"]</A>"
 
 			// TFN EDIT ADDITION END
 			dat += "<h2>[make_font_cool("EQUIP")]</h2>"
@@ -2311,7 +2366,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						eye_color = sanitize_hexcolor(new_eyes)
 
 				if("newdiscipline")
-					if((player_experience < 10) || !(pref_species.id == "kindred") || !(clane.name == "Caitiff"))
+					if((player_experience < 10) || !(pref_species.id == "kindred") || !(clane.name == CLAN_NONE))
 						return
 
 					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
@@ -2320,7 +2375,24 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (discipline.clan_restricted)
 							possible_new_disciplines -= discipline_type
 						qdel(discipline)
+					if(length(discipline_types) >= 3)
+						to_chat(user, span_notice("You cannot select more than three disciplines! Acquire more through roleplay!"))
+						return
 					var/new_discipline = tgui_input_list(user, "Select your new Discipline", "Discipline Selection", sort_list(possible_new_disciplines))
+					if(new_discipline)
+						discipline_types += new_discipline
+						discipline_levels += 1
+						player_experience -= 10
+						experience_used_on_character += 10
+
+				if("newvaleren")
+					if((player_experience < 10) || !(pref_species.id == "kindred") || !((clane.name == CLAN_SALUBRI) || (clane.name == CLAN_SALUBRI_WARRIOR)))
+						return
+
+					var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
+					possible_new_valerens -= discipline_types
+
+					var/new_discipline = tgui_input_list(user, "Select your new Valeren Path", "Discipline Selection", sort_list(possible_new_valerens))
 					if(new_discipline)
 						discipline_types += new_discipline
 						discipline_levels += 1
@@ -2427,18 +2499,21 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("auspice")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
-
-					var/list/auspice_choices = list()
-					for(var/i in GLOB.auspices_list)
-						var/a = GLOB.auspices_list[i]
-						var/datum/auspice/V = new a
-						auspice_choices[V.name] += GLOB.auspices_list[i]
-						qdel(V)
-					var/result = tgui_input_list(user, "Select an Auspice", "Auspice Selection", auspice_choices)
-					if(result)
-						var/newtype = GLOB.auspices_list[result]
-						var/datum/auspice/Auspic = new newtype()
-						auspice = Auspic
+					if(src.tribe.name == "Corax")
+						auspice=/datum/auspice/theurge
+						return
+					else
+						var/list/auspice_choices = list()
+						for(var/i in GLOB.auspices_list)
+							var/a = GLOB.auspices_list[i]
+							var/datum/auspice/V = new a
+							auspice_choices[V.name] += GLOB.auspices_list[i]
+							qdel(V)
+						var/result = tgui_input_list(user, "Select an Auspice", "Auspice Selection", auspice_choices)
+						if(result)
+							var/newtype = GLOB.auspices_list[result]
+							var/datum/auspice/Auspic = new newtype()
+							auspice = Auspic
 
 				if("clane_acc")
 					if(pref_species.id != "kindred")	//Due to a lot of people being locked to furries
@@ -2463,7 +2538,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/a = GLOB.clanes_list[i]
 						var/datum/vampireclane/V = new a
 						if (V.whitelisted)
-							if (SSwhitelists.is_whitelisted(user.ckey, V.name))
+							if (SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 								available_clans[V.name] += GLOB.clanes_list
 						else
 							available_clans[V.name] += GLOB.clanes_list[i]
@@ -2474,7 +2549,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						clane = new newtype()
 						discipline_types = list()
 						discipline_levels = list()
-						if(result == "Caitiff")
+						if(result == CLAN_NONE)
 							generation = 13
 							for (var/i = clane.clane_disciplines.len; i < 3; i++)
 								if (slotlocked)
@@ -2505,6 +2580,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 									morality_path = new /datum/morality/heart()
 								if(CLAN_BAALI)
 									morality_path = new /datum/morality/hive()
+								if(CLAN_SALUBRI_WARRIOR)
+									morality_path = new /datum/morality/samiel()
 						path_score = morality_path.score
 						if(clane.no_hair)
 							hairstyle = "Bald"
@@ -2581,6 +2658,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/newtype = GLOB.tribes_list[new_tribe]
 						new_tribe = new newtype()
 						tribe = new_tribe
+						if (tribe.name == "Corax")
+							ADD_TRAIT(user,TRAIT_CORAX,tribe) //This might be redundant considering we also add this trait in auspice.dm
+
+							auspice=/datum/auspice/theurge // we do not want player to have a choice in the auspice, Corax being theurges is already silly enough
+						else
+							if HAS_TRAIT(user,TRAIT_CORAX)
+								REMOVE_TRAIT(user, TRAIT_CORAX,tribe)
+
 
 				if("breed")
 					if(slotlocked || !(pref_species.id == "garou"))
@@ -2621,7 +2706,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/cost = discipline_level * 7
 						if (discipline_level <= 0)
 							cost = 10
-						else if (clane.name == "Caitiff")
+						else if (clane.name == CLAN_NONE)
+							cost = discipline_level * 6
+						else if (clane.common_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 6
 						else if (clane.clane_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 5
@@ -2768,7 +2855,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						po = max_limit-sett
 
 				if("generation")
-					if((clane?.name == "Caitiff") || (player_experience < 20))
+					if((clane?.name == CLAN_NONE) || (player_experience < 20))
 						return
 
 					player_experience -= 20
@@ -2851,7 +2938,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					slotlocked = FALSE
 
 				if("reset_with_bonus")
-					if((clane?.name == "Caitiff") || !generation_bonus)
+					if((clane?.name == CLAN_NONE) || !generation_bonus)
 						return
 
 					var/bonus = generation-generation_bonus
@@ -3297,6 +3384,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("nsfw_content_preference")
 					nsfw_content_pref = !nsfw_content_pref
 
+				if("show_flavor_text_when_masked")
+					show_flavor_text_when_masked = !show_flavor_text_when_masked
+
 				if("persistent_scars")
 					persistent_scars = !persistent_scars
 
@@ -3319,9 +3409,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					toggles ^= SOUND_ENDOFROUND
 
 				if("ghost_ears")
-					if(istype(user.client.mob, /mob/dead/observer))
-						var/mob/dead/observer/obs = user.client.mob
-						if(obs.auspex_ghosted)
+					if(isobserver(user.client.mob))
+						if(isavatar(user.client.mob))
 							return
 						else
 							chat_toggles ^= CHAT_GHOSTEARS
@@ -3332,9 +3421,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					chat_toggles ^= CHAT_GHOSTSIGHT
 
 				if("ghost_whispers")
-					if(istype(user.client.mob, /mob/dead/observer))
-						var/mob/dead/observer/obs = user.client.mob
-						if(obs.auspex_ghosted)
+					if(isobserver(user.client.mob))
+						if(isavatar(user.client.mob))
 							return
 						else
 							chat_toggles ^= CHAT_GHOSTWHISPER
@@ -3558,7 +3646,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if(pref_species.name == "Werewolf")
 		switch(tribe.name)
-			if("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens")
+			if("Galestalkers","Children of Gaia","Ghost Council","Hart Wardens", "Corax")
 				character.yin_chi = 1
 				character.max_yin_chi = 1
 				character.yang_chi = 5 + (auspice_level * 2)
@@ -3592,6 +3680,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.flavor_text_nsfw = sanitize_text(flavor_text_nsfw)
 	character.ooc_notes = sanitize_text(ooc_notes)
 	character.character_notes = sanitize_text(character_notes)
+	character.show_flavor_text_when_masked = show_flavor_text_when_masked
 	character.gender = gender
 	character.age = age
 	character.chronological_age = total_age
@@ -3664,6 +3753,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.auspice.level = auspice_level
 		character.auspice.tribe = tribe
 		character.auspice.on_gain(character)
+
 		switch(breed)
 			if("Homid")
 				character.auspice.gnosis = 1
@@ -3677,7 +3767,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.auspice.gnosis = 3
 				character.auspice.start_gnosis = 3
 				character.auspice.base_breed = "Crinos"
-		if(character.transformator?.crinos_form && character.transformator?.lupus_form)
+		if(character.transformator?.crinos_form && character.transformator?.lupus_form && !HAS_TRAIT(character,TRAIT_CORAX))
 			var/mob/living/carbon/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
 			var/mob/living/carbon/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
 
@@ -3719,7 +3809,50 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			lupus.health = lupus.maxHealth
 			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
 			crinos.health = crinos.maxHealth
+		else if(HAS_TRAIT(character,TRAIT_CORAX)/*character.transformator?.corax_form && character.transformator?.corvid_form*/) // if we have the Corax tribe, use the Corax forms instead..
+			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
 
+			if(!cor_crinos)
+				character.transformator.corax_form = null
+				CRASH("[key_name(character)]'s corax_form weakref contained no corax crinos mob!")
+			if(!corvid)
+				character.transformator.corvid_form = null
+				CRASH("[key_name(character)]'s corvid_form weakref contained no corvid mob!")
+
+			cor_crinos.sprite_color = werewolf_color
+			//cor_crinos.icon_state = werewolf_color // gotta use Icon state for this one apparently
+			cor_crinos.sprite_scar = werewolf_scar
+			cor_crinos.sprite_hair = werewolf_hair
+			cor_crinos.sprite_hair_color = werewolf_hair_color
+			cor_crinos.sprite_eye_color = werewolf_eye_color
+			corvid.sprite_color = werewolf_color
+			corvid.sprite_eye_color = werewolf_eye_color
+
+			if(werewolf_name)
+				cor_crinos.name = werewolf_name
+				corvid.name = werewolf_name
+			else
+				cor_crinos.name = real_name
+				corvid.name = real_name
+
+			cor_crinos.physique = physique
+			cor_crinos.dexterity = dexterity
+			cor_crinos.mentality = mentality
+			cor_crinos.social = social
+			cor_crinos.blood = blood
+
+			corvid.physique = physique
+			corvid.dexterity = dexterity
+			corvid.mentality = mentality
+			corvid.social = social
+			corvid.athletics = athletics // corvid also get athletics so that they can jump further, might be absolutely batshit though
+			corvid.blood = blood
+
+			corvid.maxHealth = round((corvid::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			corvid.health = corvid.maxHealth
+			cor_crinos.maxHealth = round((cor_crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
+			cor_crinos.health = cor_crinos.maxHealth
 	if(pref_species.mutant_bodyparts["tail_lizard"])
 		character.dna.species.mutant_bodyparts["tail_lizard"] = pref_species.mutant_bodyparts["tail_lizard"]
 	if(pref_species.mutant_bodyparts["spines"])

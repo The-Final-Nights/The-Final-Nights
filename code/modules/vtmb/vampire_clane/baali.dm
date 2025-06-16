@@ -10,12 +10,12 @@
 	male_clothes = /obj/item/clothing/under/vampire/baali
 	female_clothes = /obj/item/clothing/under/vampire/baali/female
 	is_enlightened = TRUE
-	whitelisted = FALSE
+	whitelisted = TRUE
 	clan_keys = /obj/item/vamp/keys/baali
 
 /datum/vampireclane/baali/on_gain(mob/living/carbon/human/H)
 	..()
-	H.faction |= "Baali"
+	H.faction |= CLAN_BAALI
 
 /mob/living/simple_animal/hostile/baali_guard
 	name = "Infernal Creature"
@@ -40,7 +40,7 @@
 	minbodytemp = 0
 	bloodpool = 10
 	maxbloodpool = 10
-	faction = list("Baali")
+	faction = list(CLAN_BAALI)
 
 /mob/living/simple_animal/hostile/baali_guard/Initialize()
 	. = ..()

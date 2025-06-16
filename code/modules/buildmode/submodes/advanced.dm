@@ -2,19 +2,15 @@
 	key = "advanced"
 	var/objholder = null
 
-// FIXME: add logic which adds a button displaying the icon
-// of the currently selected path
-
-/datum/buildmode_mode/advanced/show_help(client/c)
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
-	to_chat(c, "<span class='notice'>Right Mouse Button on buildmode button = Set object type</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button + alt on turf/obj    = Copy object type</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button on turf/obj          = Place objects</span>")
-	to_chat(c, "<span class='notice'>Right Mouse Button                     = Delete objects</span>")
-	to_chat(c, "")
-	to_chat(c, "<span class='notice'>Use the button in the upper left corner to</span>")
-	to_chat(c, "<span class='notice'>change the direction of built objects.</span>")
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
+/datum/buildmode_mode/advanced/show_help(client/builder)
+	to_chat(builder, span_purple(boxed_message(
+		"[span_bold("Set object type")] -> Right Mouse Button on buildmode button\n\
+		[span_bold("Copy object type")] -> Left Mouse Button + Alt on turf/obj\n\
+		[span_bold("Place objects")] -> Left Mouse Button on turf/obj\n\
+		[span_bold("Delete objects")] -> Right Mouse Button\n\
+		\n\
+		Use the button in the upper left corner to change the direction of built objects."))
+	)
 
 /datum/buildmode_mode/advanced/change_settings(client/c)
 	var/target_path = input(c, "Enter typepath:", "Typepath", "/obj/structure/closet")

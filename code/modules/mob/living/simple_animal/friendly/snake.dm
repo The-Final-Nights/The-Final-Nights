@@ -2,7 +2,7 @@
 	var/poison_per_bite = 0
 	var/poison_type = /datum/reagent/toxin
 
-/mob/living/simple_animal/hostile/retaliate/poison/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/poison/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(. && isliving(target))
 		var/mob/living/L = target
@@ -63,7 +63,7 @@
 		return  living_mobs & enemies
 	return mice
 
-/mob/living/simple_animal/hostile/retaliate/poison/snake/AttackingTarget()
+/mob/living/simple_animal/hostile/retaliate/poison/snake/AttackingTarget(atom/attacked_target)
 	if(istype(target, /mob/living/simple_animal/mouse))
 		visible_message("<span class='notice'>[name] consumes [target] in a single gulp!</span>", "<span class='notice'>You consume [target] in a single gulp!</span>")
 		QDEL_NULL(target)

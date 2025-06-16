@@ -36,6 +36,3 @@
 #define COMSIG_POWER_DEACTIVATE "power_deactivate"
 ///from datum/discipline_power/deactivate()
 #define COMSIG_POWER_DEACTIVATE_ON "power_deactivate_on"
-
-#define CELERITY_POWER_ACTIVATE "celerity_power_activate"
-#define CELERITY_POWER_DEACTIVATE "celerity_power_deactivate"

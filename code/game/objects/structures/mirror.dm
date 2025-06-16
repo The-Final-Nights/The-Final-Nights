@@ -29,17 +29,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 			name = "mirror ([A.name] [unique_number])"
 			GLOB.las_mirrors += src
 	if(icon_state == "mirror_broke" && !broken)
-		obj_break(null, mapload)
-	var/obj/effect/reflection/reflection = new(src.loc)
-	reflection.setup_visuals(src)
-	ref = WEAKREF(reflection)
+		atom_break(null, mapload)
 
 /obj/structure/mirror/Crossed(atom/movable/AM)
 	. = ..()
 //	if(ishuman(AM) && ref)
 //		var/mob/living/carbon/human/H = AM
 //		if(H.clane)
-//			if(H.clane.name == "Lasombra")
+//			if(H.clane.name == CLAN_LASOMBRA)
 //				var/obj/effect/reflection/reflection = ref.resolve()
 //				if(istype(reflection))
 //					qdel(reflection)
@@ -65,7 +62,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 
 		//Sorry, you can't see yourself in front of the mirror!
 		if(H.clane)
-			if(H.clane.name == "Lasombra")
+			if(H.clane.name == CLAN_LASOMBRA)
 				return
 
 		//see code/modules/mob/dead/new_player/preferences.dm at approx line 545 for comments!
@@ -97,22 +94,16 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 		return list()// no message spam
 	return ..()
 
-/obj/structure/mirror/obj_break(damage_flag, mapload)
-	if(!broken && !(flags_1 & NODECONSTRUCT_1))
-		icon_state = "mirror_broke"
-		if(!mapload)
-			playsound(src, "shatter", 70, TRUE)
-		if(desc == initial(desc))
-			desc = "Oh no, seven years of bad luck!"
-		broken = TRUE
-		if(!ref)
-			var/obj/effect/reflection/reflection = new(src.loc)
-			reflection.setup_visuals(src)
-			ref = WEAKREF(reflection)
-		var/obj/effect/reflection/reflection = ref.resolve()
-		if(istype(reflection))
-			reflection.alpha_icon_state = "mirror_mask_broken"
-			reflection.update_mirror_filters()
+/obj/structure/mirror/atom_break(damage_flag, mapload)
+	. = ..()
+	if(broken || (flags_1 & NODECONSTRUCT_1))
+		return
+	icon_state = "mirror_broke"
+	if(!mapload)
+		playsound(src, "shatter", 70, TRUE)
+	if(desc == initial(desc))
+		desc = "Oh no, seven years of bad luck!"
+	broken = TRUE
 
 /obj/structure/mirror/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))

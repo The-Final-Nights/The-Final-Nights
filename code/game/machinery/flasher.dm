@@ -140,7 +140,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/flasher, 26)
 			bulb.burn_out()
 			power_change()
 
-/obj/machinery/flasher/obj_break(damage_flag)
+/obj/machinery/flasher/atom_break(damage_flag)
 	. = ..()
 	if(. && bulb)
 		bulb.burn_out()

@@ -253,6 +253,12 @@
 	strip_delay = 50
 	sensor_mode = SENSOR_COORDS
 	random_sensor = FALSE
+	can_adjust = FALSE
+
+/datum/armor/clothing_under/costume_russian_officer
+	melee = 10
+	fire = 30
+	acid = 30
 
 /obj/item/clothing/under/costume/jackbros
 	name = "jack bros outfit"
@@ -261,11 +267,45 @@
 	inhand_icon_state = "JackFrostUniform"
 	can_adjust = FALSE
 
-/obj/item/clothing/under/costume/yakuza
-	name = "tojo clan pants"
-	desc = "For those long nights under the traffic cone."
-	icon_state = "MajimaPants"
-	inhand_icon_state = "MajimaPants"
+/obj/item/clothing/under/costume/deckers
+	name = "deckers outfit"
+	icon_state = "decker_jumpsuit"
+	inhand_icon_state = null
+	can_adjust = FALSE
+
+/obj/item/clothing/under/costume/football_suit
+	name = "football uniform"
+	icon_state = "football_suit"
+	can_adjust = FALSE
+	greyscale_config = /datum/greyscale_config/football_suit
+	greyscale_config_worn = /datum/greyscale_config/football_suit/worn
+	greyscale_colors = "#D74722"
+	flags_1 = IS_PLAYER_COLORABLE_1
+
+/obj/item/clothing/under/costume/swagoutfit
+	name = "Swag outfit"
+	desc = "Why don't you go secure some bitches?"
+	icon_state = "SwagOutfit"
+	inhand_icon_state = null
+	can_adjust = FALSE
+
+/obj/item/clothing/under/costume/referee
+	name = "referee uniform"
+	desc = "A standard black and white striped uniform to signal authority."
+	icon_state = "referee"
+	inhand_icon_state = null
+	can_adjust = FALSE
+
+/obj/item/clothing/under/costume/joker
+	name = "comedian suit"
+	desc = "The worst part of having a mental illness is people expect you to behave as if you don't."
+	icon_state = "joker"
+	can_adjust = FALSE
+
+/obj/item/clothing/under/costume/yuri
+	name = "yuri initiate jumpsuit"
+	icon_state = "yuri_uniform"
+	inhand_icon_state = null
 	can_adjust = FALSE
 
 /obj/item/clothing/under/costume/dutch

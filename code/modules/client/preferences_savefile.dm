@@ -444,6 +444,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["friend"], friend)
 	READ_FILE(S["enemy"], enemy)
 	READ_FILE(S["lover"], lover)
+	READ_FILE(S["show_flavor_text_when_masked"], show_flavor_text_when_masked)
 	READ_FILE(S["flavor_text"], flavor_text)
 	READ_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	READ_FILE(S["ooc_notes"], ooc_notes)
@@ -565,7 +566,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!real_name)
 		real_name = random_unique_name(gender)
 //	if(!clane)
-//		var/newtype = GLOB.clanes_list["Brujah"]
+//		var/newtype = GLOB.clanes_list[CLAN_BRUJAH]
 //		clane = new newtype()
 
 	//Prevent Wighting upon joining a round
@@ -793,6 +794,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["friend"]			, friend)
 	WRITE_FILE(S["enemy"]			, enemy)
 	WRITE_FILE(S["lover"]			, lover)
+	WRITE_FILE(S["show_flavor_text_when_masked"], show_flavor_text_when_masked)
 	WRITE_FILE(S["flavor_text"], flavor_text)
 	WRITE_FILE(S["flavor_text_nsfw"], flavor_text_nsfw)
 	WRITE_FILE(S["ooc_notes"], ooc_notes)

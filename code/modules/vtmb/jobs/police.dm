@@ -22,7 +22,6 @@
 
 	duty = "Enforce the Law."
 	minimal_masquerade = 0
-	my_contact_is_important = FALSE
 	known_contacts = list("Police Chief")
 
 /datum/outfit/job/police_officer
@@ -58,11 +57,11 @@
 	display_order = JOB_DISPLAY_ORDER_POLICE_SERGEANT
 	exp_type_department = EXP_TYPE_POLICE
 
-	allowed_species = list("Human")
+	allowed_species = list("Ghoul", "Human")
+	species_slots = list("Ghoul" = 1)
 
 	duty = "Enforce the law. Keep the officers in line. Follow what the Chief says."
 	minimal_masquerade = 0
-	my_contact_is_important = FALSE
 	known_contacts = list("Police Chief")
 
 /datum/outfit/job/police_sergeant
@@ -102,7 +101,6 @@
 
 	duty = "Underpaid, overworked, and understrength. Do your best to keep the order in San Francisco. Keep the officers in line."
 	minimal_masquerade = 0
-	my_contact_is_important = FALSE
 
 /datum/outfit/job/police_chief
 	name = "Police Chief"

@@ -34,8 +34,8 @@
 	update_appearance()
 	..()
 
-/obj/item/Initialize()
-	..()
+/obj/item/Initialize(mapload)
+	. = ..()
 	if(isturf(loc) && onflooricon)
 		icon = onflooricon
 		update_appearance()

@@ -35,17 +35,21 @@
 				if(auspice.base_breed == "Crinos")
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0) //! [ChillRaccoon] - FIXME
-			//	transformator.trans_gender(src, auspice.base_breed)
+			//	transformator.transform(src, auspice.base_breed)
 			if(islupus(src))
 				if(auspice.base_breed == "Lupus")
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0)
-			//	transformator.trans_gender(src, auspice.base_breed)
+			//	transformator.transform(src, auspice.base_breed)
 			if(ishuman(src))
-				if(auspice.base_breed == "Homid")
+				if(auspice.base_breed == "Homid" || HAS_TRAIT(src, TRAIT_CORAX)) // Corvid-born Corax don't generate rage when in homid passively, the hope is to make talking more relaxed and the Corax weaker in combat.
 					gaining_rage = FALSE
 			//else if(auspice.rage == 0)
-			//	transformator.trans_gender(src, auspice.base_breed)
+			//	transformator.transform(src, auspice.base_breed)
+			if (iscorvid(src))
+				gaining_rage = FALSE // Corax will ideally be talking a lot, not having passive rage generation should also make them weaker in combat.
+			if (iscoraxcrinos(src))
+				gaining_rage = TRUE // Corax have no Metis, Crinos is uneasy no matter your breed, no "buts" about it.
 
 			if(gaining_rage && client)
 				if(((last_rage_gain + RAGE_LIFE_COOLDOWN) < world.time) && (auspice.rage <= 6))
@@ -55,7 +59,7 @@
 			if(masquerade == 0)
 				if(!is_special_character(src))
 					if(auspice.gnosis)
-						to_chat(src, "<span class='warning'>My Veil is too low to connect with the spirits of Umbra!</span>")
+						to_chat(src, "<span class='warning'>My Veil is too low to connect with the spirits of the Umbra!</span>")
 						adjust_gnosis(-1, src, FALSE)
 
 			if(auspice.rage >= 9)
@@ -79,17 +83,17 @@
 			return
 
 	switch(auspice.tribe.name)
-		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
+		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers", "Corax")
 			if(istype(get_area(src), /area/vtm/forest))
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
-		if("Bone Gnawers", "Children of Gaia", "Shadow Lords")
+		if("Bone Gnawers", "Children of Gaia", "Shadow Lords", "Corax")
 			if(istype(get_area(src), /area/vtm/interior/cog/caern))
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
 
-		if("Glass Walkers")
+		if("Glass Walkers", "Corax")
 			if(istype(get_area(src), /area/vtm/interior/glasswalker))
 				adjust_veil(1, random = -1)
 				last_veil_restore = world.time
@@ -116,6 +120,12 @@
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
+
+/mob/living/carbon/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
+	. = ..()
+	if(CheckEyewitness(src, src, 5, FALSE))
+		adjust_veil(-1, honoradj = -1)
+
 
 /mob/living/carbon/werewolf/handle_status_effects()
 	..()

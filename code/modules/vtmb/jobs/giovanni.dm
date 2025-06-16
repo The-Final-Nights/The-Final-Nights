@@ -24,7 +24,7 @@
 	minimal_masquerade = 0
 	experience_addition = 10
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Giovanni", "Cappadocian")
+	allowed_bloodlines = list(CLAN_GIOVANNI, CLAN_CAPPADOCIAN)
 
 /datum/outfit/job/giovannielder
 	name = "Capo"
@@ -35,7 +35,7 @@
 	uniform = /obj/item/clothing/under/vampire/suit
 	suit = /obj/item/clothing/suit/vampire/trench
 	shoes = /obj/item/clothing/shoes/vampire
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/vamp/phone/giovanni_capo
 	r_pocket = /obj/item/vamp/keys/capo
 	backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/giovanniboss=1)
 
@@ -70,7 +70,7 @@
 	minimal_masquerade = 0
 	experience_addition = 10
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Giovanni", "Cappadocian")
+	allowed_bloodlines = list(CLAN_GIOVANNI, CLAN_CAPPADOCIAN)
 
 /datum/outfit/job/giovanni
 	name = "La Squadra"
@@ -81,7 +81,7 @@
 	uniform = /obj/item/clothing/under/vampire/suit
 	suit = /obj/item/clothing/suit/vampire/trench
 	shoes = /obj/item/clothing/shoes/vampire
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/vamp/phone/giovanni_squadra
 	r_pocket = /obj/item/vamp/keys/giovanni
 	backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
 
@@ -128,7 +128,7 @@
 	uniform = /obj/item/clothing/under/vampire/suit
 	suit = /obj/item/clothing/suit/vampire/trench
 	shoes = /obj/item/clothing/shoes/vampire
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/vamp/phone/giovanni_famiglia
 	r_pocket = /obj/item/vamp/keys/giovanni
 	backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 

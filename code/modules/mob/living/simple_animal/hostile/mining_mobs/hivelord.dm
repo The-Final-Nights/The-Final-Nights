@@ -44,7 +44,7 @@
 		A.faction = faction.Copy()
 		ranged_cooldown = world.time + ranged_cooldown_time
 
-/mob/living/simple_animal/hostile/asteroid/hivelord/AttackingTarget()
+/mob/living/simple_animal/hostile/asteroid/hivelord/AttackingTarget(atom/attacked_target)
 	OpenFire()
 	return TRUE
 

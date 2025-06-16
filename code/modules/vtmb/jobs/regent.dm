@@ -16,7 +16,6 @@
 	paycheck_department = ACCOUNT_SRV
 	exp_type_department = EXP_TYPE_TREMERE
 
-	my_contact_is_important = TRUE
 	display_order = JOB_DISPLAY_ORDER_REGENT
 	v_duty = "Lead the Chantry. You serve as both the Regent and Tremere Primogen. You report to the Tremere Lord of this region first, Prince second."
 	minimal_masquerade = 4
@@ -24,7 +23,7 @@
 //	minimum_character_age = 150 //Uncomment if age-restriction wanted
 	minimum_vampire_age = 60
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Tremere")
+	allowed_bloodlines = list(CLAN_TREMERE)
 	experience_addition = 20
 	known_contacts = list("Prince")
 
@@ -39,7 +38,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/latex
 	uniform = /obj/item/clothing/under/vampire/archivist
 	r_pocket = /obj/item/vamp/keys/regent
-	l_pocket = /obj/item/vamp/phone/tremere
+	l_pocket = /obj/item/vamp/phone/tremere_regent
 	accessory = /obj/item/clothing/accessory/pocketprotector/full
 	backpack_contents = list(
 		/obj/item/passport=1,

@@ -120,7 +120,7 @@
 		destroy_rifts()
 		QDEL_NULL(src)
 
-/mob/living/simple_animal/hostile/space_dragon/AttackingTarget()
+/mob/living/simple_animal/hostile/space_dragon/AttackingTarget(atom/attacked_target)
 	if(using_special)
 		return
 	if(target == src)
@@ -311,7 +311,7 @@
  * Handles consuming and storing consumed things inside Space Dragon
  *
  * Plays a sound and then stores the consumed thing inside Space Dragon.
- * Used in AttackingTarget(), paired with a heal should it succeed.
+ * Used in AttackingTarget(atom/attacked_target), paired with a heal should it succeed.
  * Arguments:
  * * atom/movable/A - The thing being consumed
  */
@@ -604,8 +604,8 @@
 	if(time_charged >= max_charge)
 		charge_state = CHARGE_COMPLETED
 		var/area/A = get_area(src)
-		priority_announce("Spatial object has reached peak energy charge in [initial(A.name)], please stand-by.", "Central Command Spatial Corps")
-		obj_integrity = INFINITY
+		priority_announce("Spatial object has reached peak energy charge in [initial(A.name)], please stand-by.", "Central Command Wildlife Observations")
+		atom_integrity = INFINITY
 		icon_state = "carp_rift_charged"
 		set_light_color(LIGHT_COLOR_YELLOW)
 		update_light()

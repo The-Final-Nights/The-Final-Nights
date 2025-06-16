@@ -117,3 +117,11 @@
 	if(!SSticker?.mode)
 		return
 	SSticker.mode.current_players[CURRENT_LIVING_ANTAGS] -= src
+
+///Adds the mob reference to the list of all Auspex avatars.
+/mob/proc/add_to_avatar_list()
+	GLOB.avatar_list |= src
+
+///Removes the mob reference to the list of all Auspex avatars.
+/mob/proc/remove_from_avatar_list()
+	GLOB.avatar_list -= src

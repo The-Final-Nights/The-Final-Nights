@@ -33,9 +33,7 @@
 
 	minimal_masquerade = 5
 
-	my_contact_is_important = TRUE
-	known_contacts = list(
-	)
+	known_contacts = null
 
 	v_duty = "You, along with any of the other two council members present, oversee the fate of the Sept. Your duty is to ensure the Keeper, the Truthfinder, and the Warder are able to keep the peace in the Sept, and to do your utmost to keep your territory clean of banes."
 	experience_addition = 25
@@ -93,9 +91,7 @@
 
 	minimal_masquerade = 5
 
-	my_contact_is_important = TRUE
-	known_contacts = list(
-	)
+	known_contacts = null
 
 	v_duty = "You are the keeper of your Sept's grounds. Your duty is to look after those with access to the caerns and bawns to ensure things remain pleasing to the spirits, and to ensure rites and rituals go well. Keep an eye on the land, and entrust your sept with keeping others in line."
 
@@ -153,9 +149,7 @@
 
 	minimal_masquerade = 5
 
-	my_contact_is_important = TRUE
-	known_contacts = list(
-	)
+	known_contacts = null
 
 	v_duty = "You are the Truthcatcher of your sept. Your duty is to mediate in internal disputes, and work with the sept's Council to see deeds exonerated and punished. Keep an ear out to the people, and keep your heart a judge's balance."
 
@@ -213,9 +207,7 @@
 
 	minimal_masquerade = 5
 
-	my_contact_is_important = TRUE
-	known_contacts = list(
-	)
+	known_contacts = null
 
 	v_duty = "You are the overseer of the sept's force. In times where Gaia's warriors are needed, you pull them together and direct them onto the field, under the Council's direction. You must conserve your strength for fights glorious and honorable."
 
@@ -276,8 +268,7 @@
 
 	minimal_masquerade = 3
 
-	known_contacts = list(
-	)
+	known_contacts = null
 
 	v_duty = "You have put yourself forward as a force for the Sept. Working under the Warder, your duty is to defend and protect the sacred grounds of Gaia, and assist in bringing to heel those who have breached the veil for the Truthcatcher."
 

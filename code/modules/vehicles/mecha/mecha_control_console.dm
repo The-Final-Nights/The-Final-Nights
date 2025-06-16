@@ -26,7 +26,7 @@
 		var/obj/vehicle/sealed/mecha/M = MT.chassis
 		var/list/mech_data = list(
 			name = M.name,
-			integrity = round((M.obj_integrity / M.max_integrity) * 100),
+			integrity = round((M.get_integrity() / M.max_integrity) * 100),
 			charge = M.cell ? round(M.cell.percent()) : null,
 			pilot = M.return_drivers(),
 			location = get_area_name(M, TRUE),
@@ -93,7 +93,7 @@
 
 	var/cell_charge = chassis.get_charge()
 	var/answer = {"<b>Name:</b> [chassis.name]<br>
-				<b>Integrity:</b> [round((chassis.obj_integrity/chassis.max_integrity * 100), 0.01)]%<br>
+				<b>Integrity:</b> [round((chassis.get_integrity() / chassis.max_integrity * 100), 0.01)]%<br>
 				<b>Cell Charge:</b> [isnull(cell_charge) ? "Not Found":"[chassis.cell.percent()]%"]<br>
 				<b>Pilot:</b> [chassis.return_drivers() || "None"]<br>
 				<b>Location:</b> [get_area_name(chassis, TRUE) || "Unknown"]<br>

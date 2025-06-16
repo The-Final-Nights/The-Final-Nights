@@ -161,6 +161,7 @@
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
 #define TRAIT_DOGWOLF			"dogwolf"
+#define TRAIT_CORAX				"corax" // this is used to apply the Corax Crinos/Corvid, as well as make being in "corvid" not veil-damaging
 
 #define TRAIT_DANCER			"dancer"
 #define TRAIT_EXP_DRIVER		"experienced_driver"
@@ -175,6 +176,7 @@
 #define TRAIT_STAKE_RESISTANT	"stake_resistant"
 #define TRAIT_COLD_AURA			"cold_aura"
 #define TRAIT_WARM_AURA			"warm_aura"
+#define TRAIT_FRENETIC_AURA		"frenetic_aura"
 #define TRAIT_UNBONDABLE		"unbondable"
 #define TRAIT_BLUSH_OF_HEALTH	"blush_of_health"
 #define TRAIT_POTENT_BLOOD		"potent_blood"
@@ -192,6 +194,8 @@
 #define TRAIT_GULLET			"gullet"
 #define TRAIT_CHARMER			"charmer"
 #define TRAIT_ORGANOVORE		"organovore"
+#define TRAIT_SALUBRI_EYE_OPEN	"eye_open" //This is for Salubri Stuff in regards to oepning and closing it
+#define TRAIT_SALUBRI_EYE		"salubri_eye" //This is for whhen you want to like actually know if you have the eye or not
 #define TRAIT_UNMASQUERADE		"unmasquerade"	//For tzi clothing
 #define TRAIT_NONMASQUERADE		"nonmasquerade"	//For tzi mods
 #define TRAIT_GUNFIGHTER        "gunfighter"    //Halves firing delay and cooldown between burst fire shots
@@ -288,6 +292,7 @@
 #define TRAIT_AGEUSIA			"ageusia"
 #define TRAIT_HEAVY_SLEEPER		"heavy_sleeper"
 #define TRAIT_NIGHT_VISION		"night_vision"
+#define TRAIT_ALT_NIGHT_VISION  "alt_night_vision"
 #define TRAIT_LIGHT_STEP		"light_step"
 #define TRAIT_SPIRITUAL			"spiritual"
 #define TRAIT_FAN_CLOWN			"fan_clown"

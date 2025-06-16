@@ -383,7 +383,9 @@
 /obj/item/toy/plush/carpplushie
 	name = "space carp plushie"
 	desc = "An adorable stuffed toy that resembles a space carp."
-	icon_state = "carpplush"
+	icon_state = "map_plushie_carp"
+	greyscale_config = /datum/greyscale_config/plush_carp
+	greyscale_colors = "#cc99ff#000000"
 	inhand_icon_state = "carp_plushie"
 	attack_verb_continuous = list("bites", "eats", "fin slaps")
 	attack_verb_simple = list("bite", "eat", "fin slap")
@@ -498,26 +500,54 @@
 	if(P && istype(P.loc, /turf/open) && !P.clash_target && !clashing)
 		P.clash_of_the_plushies(src)
 
-/obj/item/toy/plush/lizardplushie
+/obj/item/toy/plush/lizard_plushie
 	name = "lizard plushie"
 	desc = "An adorable stuffed toy that resembles a lizardperson."
-	icon_state = "plushie_lizard"
-	inhand_icon_state = "plushie_lizard"
+	icon_state = "map_plushie_lizard"
+	greyscale_config = /datum/greyscale_config/plush_lizard
 	attack_verb_continuous = list("claws", "hisses", "tail slaps")
 	attack_verb_simple = list("claw", "hiss", "tail slap")
 	squeak_override = list('sound/weapons/slash.ogg' = 1)
 
-/obj/item/toy/plush/lizardplushie/space
+/obj/item/toy/plush/lizard_plushie/Initialize()
+	. = ..()
+	if(!greyscale_colors)
+		// Generate a random valid lizard color for our plushie friend
+		var/generated_lizard_color = "#" + random_color()
+		var/temp_hsv = RGBtoHSV(generated_lizard_color)
+
+		// If our color is too dark, use the classic green lizard plush color
+		if(ReadHSV(temp_hsv)[3] < ReadHSV("#7F7F7F")[3])
+			generated_lizard_color = "#66ff33"
+
+		// Set our greyscale colors to the lizard color we made + black eyes
+		set_greyscale(colors = list(generated_lizard_color, "#000000"))
+
+// Preset lizard plushie that uses the original lizard plush green. (Or close to it)
+/obj/item/toy/plush/lizard_plushie/green
+	desc = "An adorable stuffed toy that resembles a green lizardperson. This one fills you with nostalgia and soul."
+	greyscale_colors = "#66ff33#000000"
+
+/obj/item/toy/plush/lizard_plushie/space
 	name = "space lizard plushie"
 	desc = "An adorable stuffed toy that resembles a very determined spacefaring lizardperson. To infinity and beyond, little guy."
-	icon_state = "plushie_spacelizard"
-	inhand_icon_state = "plushie_spacelizard"
+	icon_state = "map_plushie_spacelizard"
+	greyscale_config = /datum/greyscale_config/plush_spacelizard
+	// space lizards can't hit people with their tail, it's stuck in their suit
+	attack_verb_continuous = list("claws", "hisses", "bops")
+	attack_verb_simple = list("claw", "hiss", "bop")
+
+/obj/item/toy/plush/lizard_plushie/space/green
+	desc = "An adorable stuffed toy that resembles a very determined spacefaring green lizardperson. To infinity and beyond, little guy. This one fills you with nostalgia and soul."
+	greyscale_colors = "#66ff33#000000"
 
 /obj/item/toy/plush/snakeplushie
 	name = "snake plushie"
 	desc = "An adorable stuffed toy that resembles a snake. Not to be mistaken for the real thing."
-	icon_state = "plushie_snake"
-	inhand_icon_state = "plushie_snake"
+	icon_state = "map_plushie_snake"
+	greyscale_config = /datum/greyscale_config/plush_snake
+	greyscale_colors = "#99ff99#000000"
+	inhand_icon_state = null
 	attack_verb_continuous = list("bites", "hisses", "tail slaps")
 	attack_verb_simple = list("bite", "hiss", "tail slap")
 	squeak_override = list('sound/weapons/bite.ogg' = 1)
@@ -543,8 +573,10 @@
 /obj/item/toy/plush/slimeplushie
 	name = "slime plushie"
 	desc = "An adorable stuffed toy that resembles a slime. It is practically just a hacky sack."
-	icon_state = "plushie_slime"
-	inhand_icon_state = "plushie_slime"
+	icon_state = "map_plushie_slime"
+	greyscale_config = /datum/greyscale_config/plush_slime
+	greyscale_colors = "#aaaaff#000000"
+	inhand_icon_state = null
 	attack_verb_continuous = list("blorbles", "slimes", "absorbs")
 	attack_verb_simple = list("blorble", "slime", "absorb")
 	squeak_override = list('sound/effects/blobattack.ogg' = 1)
@@ -564,7 +596,7 @@
 	name = "bee plushie"
 	desc = "A cute toy that resembles an even cuter bee."
 	icon_state = "plushie_h"
-	inhand_icon_state = "plushie_h"
+	inhand_icon_state = null
 	attack_verb_continuous = list("stings")
 	attack_verb_simple = list("sting")
 	gender = FEMALE
@@ -580,7 +612,7 @@
 	name = "moth plushie"
 	desc = "A plushie depicting an adorable mothperson. It's a huggable bug!"
 	icon_state = "moffplush"
-	inhand_icon_state = "moffplush"
+	inhand_icon_state = null
 	attack_verb_continuous = list("flutters", "flaps")
 	attack_verb_simple = list("flutter", "flap")
 	squeak_override = list('sound/voice/moth/scream_moth.ogg'=1)
@@ -608,7 +640,6 @@
 	name = "peacekeeper plushie"
 	desc = "A plushie depicting a peacekeeper cyborg. Only you can prevent human harm!"
 	icon_state = "pkplush"
-	inhand_icon_state = "pkplush"
 	attack_verb_continuous = list("hugs", "squeezes")
 	attack_verb_simple = list("hug", "squeeze")
 	squeak_override = list('sound/weapons/thudswoosh.ogg'=1)
@@ -618,7 +649,80 @@
 	desc = "A horrid flesh-thing with a still functioning brain. Perfect for working intricate meat contraptions!"
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "plushtzi"
-	inhand_icon_state = "plushtzi"
 	attack_verb_continuous = list("tortures", "scourges")
 	attack_verb_simple = list("torture", "scourge")
 	squeak_override = list('code/modules/wod13/sounds/femurbreaker.ogg'=1)
+
+/obj/item/toy/plush/rouny
+	name = "runner plushie"
+	desc = "A plushie depicting a xenomorph runner, made to commemorate the centenary of the Battle of LV-426. Much cuddlier than the real thing."
+	icon_state = "rouny"
+	item_flags = XENOMORPH_HOLDABLE
+	inhand_icon_state = null
+	attack_verb_continuous = list("slashes", "bites", "charges")
+	attack_verb_simple = list("slash", "bite", "charge")
+	squeak_override = list('sound/misc/Help.ogg' = 1)
+
+/obj/item/toy/plush/abductor
+	name = "abductor plushie"
+	desc = "A plushie depicting an alien abductor. The tag on it is in an indecipherable language."
+	icon_state = "abductor"
+	inhand_icon_state = null
+	attack_verb_continuous = list("abducts", "probes")
+	attack_verb_continuous = list("abduct", "probe")
+	squeak_override = list('sound/weather/ashstorm/inside/weak_end.ogg' = 1) //very faint sound since abductors are silent as far as "speaking" is concerned.
+
+/obj/item/toy/plush/abductor/agent
+	name = "abductor agent plushie"
+	desc = "A plushie depicting an alien abductor agent. The stun baton is attached to the hand of the plushie, and appears to be inert. I wouldn't stay alone with it."
+	icon_state = "abductor_agent"
+	inhand_icon_state = null
+	attack_verb_continuous = list("abducts", "probes", "stuns")
+	attack_verb_continuous = list("abduct", "probe", "stun")
+	squeak_override = list(
+		'sound/weapons/egloves.ogg' = 2,
+		'sound/weapons/cablecuff.ogg' = 1,
+	)
+
+/obj/item/toy/plush/shark
+	name = "shark plushie"
+	desc = "A plushie depicting a somewhat cartoonish shark. The tag calls it a 'hákarl', noting that it was made by an obscure furniture manufacturer in old Scandinavia."
+	lefthand_file = 'icons/mob/inhands/items/plushes_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/items/plushes_righthand.dmi'
+	icon_state = "blahaj"
+	inhand_icon_state = "blahaj"
+	attack_verb_continuous = list("gnaws", "gnashes", "chews")
+	attack_verb_simple = list("gnaw", "gnash", "chew")
+
+/obj/item/toy/plush/donkpocket
+	name = "donk pocket plushie"
+	desc = "The stuffed companion of choice for the seasoned traitor."
+	icon_state = "donkpocket"
+	attack_verb_continuous = list("donks")
+	attack_verb_simple = list("donk")
+
+/obj/item/toy/plush/human
+	name = "human plushie"
+	desc = "This is a felt plush of a human. All craftsmanship is of the lowest quality. The human is crying. The human is screaming."
+	icon_state = "plushie_human"
+	inhand_icon_state = null //i would rather not have a blue coder plushie inhand
+	attack_verb_continuous = list("screams at", "strikes", "bashes")
+	attack_verb_simple = list("scream at", "strike", "bash")
+	squeak_override = list(
+		'sound/mobs/humanoids/human/scream/malescream_2.ogg' = 10, //10% chance to scream, rare but not abysmal
+		'sound/weapons/smash.ogg' = 90,
+		)
+
+/obj/item/toy/plush/horse
+	name = "horse plushie"
+	desc = "A squishy soft horse plushie. This one is bay with white socks."
+	icon_state = "horse"
+	attack_verb_continuous = list("whinnies", "gallops", "prances", "horses")  // Yes I'm using horse as a verb
+	attack_verb_simple = list("whinny", "gallop", "prance", "horse")
+
+/obj/item/toy/plush/unicorn
+	name = "unicorn plushie"
+	desc = "A squishy soft unicorn plushie. It has a magical aura."
+	icon_state = "unicorn"
+	attack_verb_continuous = list("whinnies", "gallops", "prances", "magicks")
+	attack_verb_simple = list("whinny", "gallop", "prance", "magick")

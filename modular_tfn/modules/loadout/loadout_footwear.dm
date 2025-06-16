@@ -62,3 +62,15 @@
 /datum/gear/footwear/high_heels_red
 	display_name = "high heels, red"
 	path = /obj/item/clothing/shoes/vampire/heels/red
+
+/datum/gear/footwear/blackfur
+	display_name = "black fur boots"
+	path = /obj/item/clothing/shoes/vampire/blackfur
+
+/datum/gear/footwear/brownfur
+	display_name = "brown fur boots"
+	path = /obj/item/clothing/shoes/vampire/brownfur
+
+/datum/gear/footwear/pumped
+	display_name = "knee-high sneakers"
+	path = /obj/item/clothing/shoes/vampire/pumped

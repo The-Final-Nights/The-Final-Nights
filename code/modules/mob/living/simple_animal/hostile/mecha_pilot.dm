@@ -121,7 +121,7 @@
 		return FALSE
 	if(!M.has_charge(required_mecha_charge))
 		return FALSE
-	if(M.obj_integrity < M.max_integrity*0.5)
+	if(M.get_integrity() < M.max_integrity*0.5)
 		return FALSE
 	return TRUE
 
@@ -168,7 +168,7 @@
 		..()
 
 
-/mob/living/simple_animal/hostile/syndicate/mecha_pilot/AttackingTarget()
+/mob/living/simple_animal/hostile/syndicate/mecha_pilot/AttackingTarget(atom/attacked_target)
 	if(mecha)
 		var/list/possible_weapons = get_mecha_equip_by_flag(MECHA_MELEE)
 		if(possible_weapons.len)
@@ -215,7 +215,7 @@
 			return
 
 			//Too Much Damage - Eject
-		if(mecha.obj_integrity < mecha.max_integrity*0.1)
+		if(mecha.get_integrity() < mecha.max_integrity*0.1)
 			exit_mecha(mecha)
 			return
 
@@ -226,7 +226,7 @@
 				action.Trigger()
 
 		//Heavy damage - Defense Power or Retreat
-		if(mecha.obj_integrity < mecha.max_integrity*0.25)
+		if(mecha.get_integrity() < mecha.max_integrity*0.25)
 			if(prob(defense_mode_chance))
 				if(LAZYACCESSASSOC(mecha.occupant_actions, src, /datum/action/vehicle/sealed/mecha/mech_defense_mode) && !mecha.defense_mode)
 					var/datum/action/action = mecha.occupant_actions[src][/datum/action/vehicle/sealed/mecha/mech_defense_mode]

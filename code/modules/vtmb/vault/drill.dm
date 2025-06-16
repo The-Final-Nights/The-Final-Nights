@@ -49,8 +49,8 @@
 	var/drill_sound = 'code/modules/wod13/sounds/vault_drilling.ogg'
 
 /obj/structure/drill/proc/health_status()
-	if(obj_integrity < max_integrity)
-		switch(obj_integrity)
+	if(atom_integrity < max_integrity)
+		switch(atom_integrity)
 			if(2500 to 3000)
 				return "slightly damaged"
 			if(2000 to 2500)
@@ -66,7 +66,7 @@
 	. = ..()
 	var/health_status = health_status()
 	. += "[src] has [gas] gas left."
-	if(obj_integrity < max_integrity)
+	if(atom_integrity < max_integrity)
 		. += "<span class='notice'>[src] is [health_status].</span>"
 
 /obj/structure/drill/MouseDrop(over_object, src_location, over_location)

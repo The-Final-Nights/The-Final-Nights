@@ -59,7 +59,7 @@
 		if(G.master)
 			dat += "My Regnant is [G.master.real_name], I should obey their wants.<BR>"
 			if(G.master.clane)
-				if(G.master.clane.name != "Caitiff")
+				if(G.master.clane.name != CLAN_NONE)
 					dat += "Regnant's clan is [G.master.clane], maybe I can try some of it's disciplines..."
 		if(host.mind.special_role)
 			for(var/datum/antagonist/A in host.mind.antag_datums)
@@ -105,7 +105,7 @@
 						dat += "Their number is [host.Myself.Lover.phone_number].<BR>"
 					if(host.Myself.Lover.lover_text)
 						dat += "[host.Myself.Lover.lover_text]<BR>"
-		if(length(host.knowscontacts) > 0)
+		if(LAZYLEN(host.knowscontacts) > 0)
 			dat += "<b>I know some other of my kind in this city. Need to check my phone, there definetely should be:</b><BR>"
 			for(var/i in host.knowscontacts)
 				dat += "-[i] contact<BR>"

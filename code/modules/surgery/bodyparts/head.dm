@@ -98,9 +98,16 @@
 		return FALSE
 //	if(!prob(I.cruelness))
 //		return FALSE
-//	if(owner.stat < HARD_CRIT)
-//		return FALSE
+	if(owner.stat < HARD_CRIT)
+		return FALSE
 	return ..()
+
+
+/obj/item/bodypart/head/try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	// Heads cannot be dismembered by direct damage alone.
+	// We want final death to be intentional, through a timed action, instead.
+	return FALSE
+
 
 //obj/item/bodypart/head/drop_limb(special, dismembered)
 //	var/mob/living/carbon/human/C

@@ -47,7 +47,7 @@
 		if("f")
 			body_shape = "fat"
 
-	. = list("<span class='info'>*---------*\nThis is <EM>[!obscure_name ? name : "Unknown"]</EM>, [age2agedescription(age)] [body_shape] [gender_title]!")
+	. = list("<span class='info'>This is <EM>[!obscure_name ? name : "Unknown"]</EM>, [age2agedescription(age)] [body_shape] [gender_title]!")
 	// TFN EDIT REFACTOR END
 	var/obscured = check_obscured_slots()
 	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
@@ -85,14 +85,14 @@
 		switch(renownrank)
 			if(1)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(2)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(3,4,5,6)
-				. += "<b>You know [p_them()] as an [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe.name].</b>"
+				. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] [auspice.name] of the [auspice.tribe.name].</b>"
 				isknown = 1
 		if(isknown)
 			switch(honor)
@@ -460,11 +460,11 @@
 		//examine text for unusual appearances
 		if (iskindred(src) && is_face_visible())
 			switch(clane.alt_sprite)
-				if ("nosferatu")
+				if (CLAN_NOSFERATU)
 					msg += "<span class='danger'><b>[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!</b></span><br>"
-				if ("gargoyle")
+				if (CLAN_GARGOYLE)
 					msg += "<span class='danger'><b>[p_they(TRUE)] seem[p_s()] to be made out of stone!</b></span><br>"
-				if ("kiasyd")
+				if (CLAN_KIASYD)
 					if (!is_eyes_covered())
 						msg += "<span class='danger'><b>[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!<b></span><br>"
 				if ("rotten1")
@@ -478,13 +478,13 @@
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
-				msg += "<span class='deadsay'>[t_He] do[t_es]n't appear to be [t_him]self.</span>\n"
-			if(!key && !istype(src, /mob/living/carbon/human/npc) && (src.soul_state != SOUL_PROJECTING))
-				msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
-			else if(!client && !istype(src, /mob/living/carbon/human/npc) && (src.soul_state != SOUL_PROJECTING))
-				msg += "[t_He] [t_has] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon.\n"
-			if(src.soul_state == SOUL_PROJECTING)
-				msg += "<span class='deadsay'>[t_He] [t_is] staring blanky into space, [t_his] eyes are slightly grayed out.</span>\n"
+				msg += span_deadsay("[t_He] do[t_es]n't appear to be [t_him]self.<br>")
+			if(!key && !isnpc(src) && !(soul_state & SOUL_PROJECTING))
+				msg += span_deadsay("[t_He] [t_is] totally catatonic. The stresses of life must have been too much for [t_him]. Any recovery is unlikely.<br>")
+			else if(!client && !isnpc(src) && !(soul_state & SOUL_PROJECTING))
+				msg += span_deadsay("[t_He] [t_has] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon.<br>")
+			if(soul_state & SOUL_PROJECTING)
+				msg += span_deadsay("[t_He] [t_is] staring blanky into space, [t_his] eyes are slightly grayed out.<br>")
 
 	//examine text for garou detecting Triatic influences on others
 	if (isgarou(user) || iswerewolf(user) || HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
@@ -522,7 +522,7 @@
 				if ((vampire.morality_path.score < 7) || client?.prefs?.is_enlightened)
 					wyrm_taint++
 
-				if ((vampire.clane?.name == "Baali") || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
+				if ((vampire.clane?.name == CLAN_BAALI) || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
 					wyrm_taint++
 
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
@@ -595,22 +595,14 @@
 	if (!isnull(trait_exam))
 		. += trait_exam
 
+	if(custom_examine_message)
+		. += span_purple(custom_examine_message)
+
 	if(ishuman(user))
 		. += "<a href='byond://?src=[REF(src)];masquerade=1'>Spot a Masquerade violation</a>"
-	// TFN EDIT ADDITION START: view headshot & big flavortext via examine
-	var/flavor_text_link
-	var/preview_text = copytext_char(flavor_text, 1, 110)
-	// What examine_tgui.dm uses to determine if flavor text appears as "Obscured".
-	var/face_obscured = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
 
-	if (!(face_obscured))
-		flavor_text_link = span_notice("[preview_text]... <a href='byond://?src=[REF(src)];view_flavortext=1'>\[Look closer?\]</a>")
-	else
-		flavor_text_link = span_notice("<a href='byond://?src=[REF(src)];view_flavortext=1'>\[Examine closely...\]</a>")
-	if (flavor_text_link)
-		. += flavor_text_link
+	. += flavor_text_creation()
 
-	// TFN EDIT ADDITION END
 	var/perpname = get_face_name(get_id_name(""))
 	if(perpname && (HAS_TRAIT(user, TRAIT_SECURITY_HUD) || HAS_TRAIT(user, TRAIT_MEDICAL_HUD)))
 		var/datum/data/record/R = find_record("name", perpname, GLOB.data_core.general)
@@ -651,9 +643,9 @@
 					"<a href='byond://?src=[REF(src)];hud=s;add_comment=1'>\[Add comment\]</a>"), "")
 	else if(isobserver(user))
 		var/mob/dead/observer/observer_user = user
-		if(!observer_user.auspex_ghosted)
-			. += "<span class='info'><b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]</span>"
-	. += "*---------*</span>"
+		if(!isavatar(observer_user))
+			. += span_info("<b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]")
+	. += "</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 
@@ -670,3 +662,12 @@
 	if(dat.len)
 		return dat.Join()
 
+/mob/living/carbon/human/proc/flavor_text_creation()
+	var/flavor_text_to_show
+	var/preview_text = copytext_char(flavor_text, 1, 110)
+	// What examine_tgui.dm uses to determine if flavor text appears as "Obscured".
+	var/face_obscured = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
+	if(!face_obscured || (face_obscured && client?.prefs.show_flavor_text_when_masked))
+		flavor_text_to_show = span_notice("[preview_text]... <a href='byond://?src=[REF(src)];view_flavortext=1'>\[Look closer?\]</a>")
+
+	return flavor_text_to_show

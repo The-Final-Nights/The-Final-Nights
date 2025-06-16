@@ -60,9 +60,6 @@
 
 //other construction-related things
 
-//windows affected by Nar'Sie turn this color.
-#define NARSIE_WINDOW_COLOUR "#7D1919"
-
 //The amount of materials you get from a sheet of mineral like iron/diamond/glass etc
 #define MINERAL_MATERIAL_AMOUNT 2000
 //The maximum size of a stack object.

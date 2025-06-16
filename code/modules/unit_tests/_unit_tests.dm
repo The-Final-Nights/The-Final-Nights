@@ -104,6 +104,7 @@
 #include "dcs_check_list_arguments.dm"
 #include "emoting.dm"
 #include "focus_only_tests.dm"
+#include "greyscale_config.dm"
 #include "heretic_knowledge.dm"
 #include "holidays.dm"
 #include "keybinding_init.dm"

@@ -58,11 +58,12 @@
 
 /obj/vehicle/sealed/car/clowncar/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
-	if(istype(I, /obj/item/food/grown/banana))
-		var/obj/item/food/grown/banana/banana = I
-		obj_integrity += min(banana.seed.potency, max_integrity-obj_integrity)
-		to_chat(user, "<span class='danger'>You use the [banana] to repair the [src]!</span>")
-		qdel(banana)
+	if(!istype(I, /obj/item/food/grown/banana))
+		return
+	var/obj/item/food/grown/banana/banana = I
+	atom_integrity += min(banana.seed.potency, max_integrity-atom_integrity)
+	to_chat(user, span_danger("You use the [banana] to repair the [src]!"))
+	qdel(banana)
 
 /obj/vehicle/sealed/car/clowncar/Bump(atom/A)
 	. = ..()
@@ -93,7 +94,7 @@
 	initialize_controller_action_type(/datum/action/vehicle/sealed/cannon, VEHICLE_CONTROL_DRIVE)
 	AddElement(/datum/element/waddling)
 
-/obj/vehicle/sealed/car/clowncar/Destroy()
+/obj/vehicle/sealed/car/clowncar/atom_destruction(damage_flag)
 	playsound(src, 'sound/vehicles/clowncar_fart.ogg', 100)
 	return ..()
 

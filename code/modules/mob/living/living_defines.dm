@@ -218,7 +218,7 @@
 
 	var/last_bloodpool_restore = 0
 
-	var/list/knowscontacts = list()
+	var/list/knowscontacts = null
 
 	var/mysticism_knowledge = FALSE
 
@@ -249,7 +249,6 @@
 	var/harm_focus = SOUTH
 	var/masquerade_votes = 0
 	var/list/voted_for = list()
-	var/flavor_text
 	var/true_real_name
 	var/died_already = FALSE
 

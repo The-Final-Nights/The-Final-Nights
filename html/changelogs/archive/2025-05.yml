@@ -126,3 +126,134 @@
   necti-dev:
   - bugfix: LOOC works again. To avoid collision, hotkeys to look up and down are
       bound by default to "I" (upper-case i) and "K".
+2025-05-16:
+  Magisterium2022:
+  - rscadd: Added new parts for fleshcrafting
+  - rscadd: Added armblade at boneshaping (Vicissitude 4)
+  - rscadd: Added new craftable implants
+  - balance: rebalanced speed of a few augments, allowing for faster flying and movement
+      in some cases
+  - code_imp: modified Vicissitude, Augments, Melee Weapon, and Tzimisce files.
+  Sparrowbird611:
+  - balance: Hispo form moves faster.
+  - balance: Makes garou forms do consistent damage. This makes them stronger in melee.
+  - balance: Reduces AP on hispo and lupus to more reasonable levels.
+  - bugfix: Prevents crinos from being one punch KO'd by unarmed attacks.
+  XeonMations:
+  - code_imp: obj integrity moved to atom level, no player facing changes should be
+      seen
+  anything86:
+  - balance: Incendiary ammo now has a limit to how much it can set you on fire.
+  - balance: Clothing is no longer incredibly flammable.
+  - balance: Rolling to extinguish yourself is now a knockdown instead of a stun.
+  necti-dev:
+  - rscadd: Passports now show your name on them, they actually identify you. Unless
+      you have the Illegal Identity quirk and hail from Cobrastan.
+  - rscadd: Decapitation no longer happens by damage alone. One must aggro-grab with
+      harm intent, targeting the head, with certain cutting implements (those that
+      have the butchering component). It will only works after the throat has been
+      sliced properly. Victims needs not be dead for this to happen.
+  - rscadd: Debtor quirk now works as advertised.
+  - rscadd: Ventrue no longer get $100 in their backpacks. Instead, their bank accounts
+      are fatter.
+  - rscadd: Ventrue with the Debtor quirk get an extra loss of dignitas, reflected
+      in their savings.
+  - rscadd: Vampires have in their memory the phone contact of their Clane leader,
+      when there is one.
+  - rscadd: More vampire leaders should now have each other's phone contacts, properly
+      updated on joining.
+  - rscadd: Triads, Giovanni, Tremere, Anarchs, Millenium Tower, Lasombra and Tzmisce
+      networks added. Members have each other's contacts.
+2025-05-18:
+  XeonMations, ComradeNiobe:
+  - bugfix: You can no longer hear all sounds in auspex 5
+  - refactor: Refactored auspex 5 avatars
+2025-05-19:
+  CalamaBanana:
+  - rscadd: Adds IC verb to toggle underwear/short/socks visibilty on/off.
+  XeonMations, buffyuwu:
+  - bugfix: fixed CI/CD AGAIN
+2025-05-21:
+  XeonMations:
+  - bugfix: Fixed strongdmm failing to load the map due to alist()
+2025-05-23:
+  Sparrowbird611:
+  - rscadd: Wearing a mask now conceals your voice. This can be toggled by alt clicking
+      the mask.
+  XeonMations:
+  - rscadd: Added a new preference to flavor text, to hide it when your character's
+      identity is hidden.
+  - bugfix: Renamed the cards in the tarot deck.
+  - bugfix: Fixed NPC mobs not being able to attack anyone.
+  XeonMations, san7890:
+  - map: Added Map Merge Markers to indicate where merge conflicts are for mapmerge2
+  necti-dev:
+  - balance: 'Kindred cannot maintain two of the following disciplines active at the
+      same time: fortitude, potence, celerity, obfuscate'
+  tzui5020:
+  - rscadd: New outfits have been added to the loadout and shop inspired by the scene
+      girl era.
+  - rscadd: Three new shoes.
+  - rscadd: Two new hoodies.
+2025-05-24:
+  Kevak:
+  - bugfix: Fixed KJ being unable to select intended quirks due to spelling error
+      in code.
+  - bugfix: Fixed a weird little oversight with citizen role kindred.
+  Somniworld:
+  - rscadd: A placeholder Corax "Tribe", that allows people to play the new Fera.
+      This is EXTREMELY barebones and is currently a new flavour of Garou. Note that
+      many features (flying, specific gifts) are missing. You are encouraged to help
+      out and make your own PRs to add features, if you wish!
+  - rscadd: Corax-Specific cawing emotes and transformation effects! Sound courtesy
+      of Machinepixie on Discord
+  - rscadd: Corax-Specific breed HUD elements, sprites made by Boltersam on discord
+  - rscadd: 'Two Corax specific gifts : Eye Drinking and Sun''s guard! Massive thanks
+      to Machinepixie for the code!'
+  XeonMations:
+  - code_imp: CI/CD checks now use a private byond instance.
+2025-05-25:
+  TheTrueSilverRat:
+  - rscadd: Added Warrior Salubri Clan
+  - rscadd: Added Warrior Valeren
+  - rscadd: Added Code of Samiel to the Morality Stuff
+  - qol: Healer Valeren 3 can heal corpses now like Theurge's Mother Touch
+  - rscadd: Salubri Third Eyes wohoo
+  buffyuwu, XeonMations:
+  - code_imp: CI/CD checks MAY work now. Please. I Hope.
+2025-05-26:
+  Marshmellow105:
+  - code_imp: FBI agents are no longer a whitelisted role.
+  tzui5020:
+  - bugfix: Fixed the hoodie in the loadout
+2025-05-27:
+  Merek2:
+  - bugfix: Added a period to sweat and eyeroll emote.
+2025-05-28:
+  TheTrueSilverRat:
+  - bugfix: Fixed the Salubri Traits runtime by changing RegisterSignal to RegisterSignals
+2025-05-29:
+  XeonMations:
+  - server: Server's database updated to TG modern.
+  chazzyjazzy:
+  - bugfix: fixes clothes not becoming bloody after stepping in blood / being in combat
+2025-05-30:
+  ShadeAware:
+  - rscadd: SNEKTEK has just released their new line of budget handheld tasers. Defense
+      for the common man and woman!
+  - rscadd: Gun stores have started carrying less-than-lethal alternatives, such as
+      hand-tasers and pepperspray.
+  buffyuwu:
+  - bugfix: fixed the flame master hunter loadout not giving items
+2025-05-31:
+  Kevak:
+  - balance: Lively Aura now costs 2 qp rather than 3.
+  - balance: Latin now costs 1qp rather than 2.
+  - qol: Mechanically enforces Discipline Cap
+  - balance: Caitiffs can no longer select eight disciplines out the gate.
+  - admin: Trusted players can bypass discipline learning softcap, as can admin discipline
+      rewards.
+  TheTrueSilverRat:
+  - rscadd: Eye color change when you use Protean Rank 1
+  buffyuwu:
+  - server: updated hub entry

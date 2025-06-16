@@ -2,7 +2,6 @@
 
 /obj/item/clothing
 	name = "clothing"
-	resistance_flags = FLAMMABLE
 	max_integrity = 200
 	integrity_failure = 0.4
 	var/damaged_clothes = CLOTHING_PRISTINE //similar to machine's BROKEN stat and structure's broken var
@@ -159,7 +158,7 @@
 /// Set the clothing's integrity back to 100%, remove all damage to bodyparts, and generally fix it up
 /obj/item/clothing/proc/repair(mob/user, params)
 	update_clothes_damaged_state(CLOTHING_PRISTINE)
-	obj_integrity = max_integrity
+	atom_integrity = max_integrity
 	name = initial(name) // remove "tattered" or "shredded" if there's a prefix
 	body_parts_covered = initial(body_parts_covered)
 	slot_flags = initial(slot_flags)
@@ -203,7 +202,7 @@
  *
  * Arguments:
  * * def_zone: The bodypart zone we're disabling
- * * damage_type: Only really relevant for the verb for describing the breaking, and maybe obj_destruction()
+ * * damage_type: Only really relevant for the verb for describing the breaking, and maybe atom_destruction()
  */
 /obj/item/clothing/proc/disable_zone(def_zone, damage_type)
 	var/list/covered_limbs = body_parts_covered2organ_names(body_parts_covered)
@@ -223,7 +222,7 @@
 		body_parts_covered &= ~i
 
 	if(body_parts_covered == NONE) // if there are no more parts to break then the whole thing is kaput
-		obj_destruction((damage_type == BRUTE ? MELEE : LASER)) // melee/laser is good enough since this only procs from direct attacks anyway and not from fire/bombs
+		atom_destruction((damage_type == BRUTE ? MELEE : LASER)) // melee/laser is good enough since this only procs from direct attacks anyway and not from fire/bombs
 		return
 
 	switch(zones_disabled)
@@ -395,7 +394,8 @@
 			. = "X"
 	return .
 
-/obj/item/clothing/obj_break(damage_flag)
+/obj/item/clothing/atom_break(damage_flag)
+	. = ..()
 	update_clothes_damaged_state(CLOTHING_DAMAGED)
 
 	if(isliving(loc)) //It's not important enough to warrant a message if it's not on someone
@@ -414,13 +414,12 @@
 	if(!damaged_clothes)
 		return
 
-	var/initial_icon = initial(icon)
-	var/index = "[REF(initial_icon)]-[initial(icon_state)]"
+	var/index = "[REF(icon)]-[icon_state]"
 	var/static/list/damaged_clothes_icons = list()
 	var/icon/damaged_clothes_icon = damaged_clothes_icons[index]
 	if(!damaged_clothes_icon)
-		damaged_clothes_icon = icon(icon, icon_state, null, 1)
-		damaged_clothes_icon.Blend("#fff", ICON_ADD) 	//fills the icon_state with white (except where it's transparent)
+		damaged_clothes_icon = icon(icon, icon_state, , 1)
+		damaged_clothes_icon.Blend("#fff", ICON_ADD) //fills the icon_state with white (except where it's transparent)
 		damaged_clothes_icon.Blend(icon('icons/effects/item_damage.dmi', "itemdamaged"), ICON_MULTIPLY) //adds damage effect and the remaining white areas become transparant
 		damaged_clothes_icon = fcopy_rsc(damaged_clothes_icon)
 		damaged_clothes_icons[index] = damaged_clothes_icon
@@ -436,9 +435,9 @@ SEE_PIXELS// if an object is located on an unlit area, but some of its pixels ar
 BLIND     // can't see anything
 */
 
-/proc/generate_female_clothing(index,t_color,icon,type)
-	var/icon/female_clothing_icon	= icon("icon"=icon, "icon_state"=t_color)
-	var/icon/female_s				= icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="[(type == FEMALE_UNIFORM_FULL) ? "female_full" : "female_top"]")
+/proc/generate_female_clothing(index, t_color, icon, type)
+	var/icon/female_clothing_icon = icon("icon"=icon, "icon_state"=t_color)
+	var/icon/female_s = icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="[(type == FEMALE_UNIFORM_FULL) ? "female_full" : "female_top"]")
 	female_clothing_icon.Blend(female_s, ICON_MULTIPLY)
 	female_clothing_icon 			= fcopy_rsc(female_clothing_icon)
 	GLOB.female_clothing_icons[index] = female_clothing_icon
@@ -486,7 +485,7 @@ BLIND     // can't see anything
 			return 1
 	return 0
 
-/obj/item/clothing/obj_destruction(damage_flag)
+/obj/item/clothing/atom_destruction(damage_flag)
 	if(damage_flag == BOMB)
 		var/turf/T = get_turf(src)
 		//so the shred survives potential turf change from the explosion.

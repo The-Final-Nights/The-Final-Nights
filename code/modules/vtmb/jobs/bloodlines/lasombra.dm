@@ -23,12 +23,12 @@
 	v_duty = "You are a member of the local Lasombra! You maintain the haven set up in the attic of the local Church, owned by your Clan Primogen."
 	duty = "You are a Ghoul in service to the local Lasombra or its Primogen, get used to the dark of the upper floors and good luck with what you will endure. They rely on you, as much as they may say otherwise."
 	minimal_masquerade = 0
-	allowed_bloodlines = list("Lasombra")
+	allowed_bloodlines = list(CLAN_LASOMBRA)
 
 /datum/outfit/job/lasombra
-	name = "lasombra"
+	name = CLAN_LASOMBRA
 	jobtype = /datum/job/vamp/lasombra
-	l_pocket = /obj/item/vamp/phone
+	l_pocket = /obj/item/vamp/phone/lasombra_caretaker
 	id = /obj/item/cockclock
 	backpack_contents = list(
 		/obj/item/passport=1,

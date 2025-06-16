@@ -21,7 +21,7 @@ RUN apt-get install -y --no-install-recommends \
 COPY dependencies.sh .
 
 RUN . ./dependencies.sh \
-    && curl "http://www.byond.com/download/build/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -o byond.zip \
+    && curl "https://thefinalnights.com/516.1663_byond_linux.zip" -o byond.zip -A "The-Final-Nights/2.0 Continuous Integration" \
     && unzip byond.zip \
     && cd byond \
     && sed -i 's|install:|&\n\tmkdir -p $(MAN_DIR)/man6|' Makefile \

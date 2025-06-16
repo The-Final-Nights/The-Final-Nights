@@ -412,7 +412,7 @@
 		return
 	var/mob/living/carbon/user = src.loc
 	///check hp
-	if(obj_integrity == 0)
+	if(atom_integrity == 0)
 		user.dropItemToGround(src, TRUE)
 	hunger++
 	///check hunger
@@ -425,7 +425,7 @@
 				///poisoned food damages it
 				if(istype(F, /obj/item/food/badrecipe))
 					to_chat(user, "<span class='warning'>The [name] grumbles!</span>")
-					obj_integrity -= 50
+					atom_integrity -= 50
 				else
 					to_chat(user, "<span class='notice'>The [name] eats your [F]!</span>")
 				qdel(F)
@@ -437,7 +437,7 @@
 		hunger = initial(hunger)
 		playsound(src, 'sound/items/eatfood.ogg', 20, TRUE)
 		to_chat(user, "<span class='warning'>The [name] eats your back!</span>")
-		obj_integrity -= 25
+		atom_integrity -= 25
 
 /obj/item/storage/backpack/duffelbag/captain
 	name = "captain's duffel bag"

@@ -290,7 +290,7 @@
 				var/mob/living/carbon/human/vampire = target
 				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
 					is_wyrm = 1
-				if ((vampire.clane?.name == "Baali") || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
+				if ((vampire.clane?.name == CLAN_BAALI) || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
 					is_wyrm = 1
 			if (isgarou(target) || iswerewolf(target))
 				var/mob/living/carbon/wolf = target
@@ -439,13 +439,13 @@
 		if(H.hispo)
 			ntransform.Scale(0.95, 0.95)
 			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
-			addtimer(CALLBACK(src, PROC_REF(trans_doggy), H), DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(transform_lupus), H), DOGGY_ANIMATION_COOLDOWN)
 		else
 			ntransform.Scale(1.05, 1.05)
 			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
-			addtimer(CALLBACK(src, PROC_REF(trans_hispo), H), DOGGY_ANIMATION_COOLDOWN)
+			addtimer(CALLBACK(src, PROC_REF(transform_hispo), H), DOGGY_ANIMATION_COOLDOWN)
 
-/datum/action/gift/hispo/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -462,7 +462,7 @@
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/hispoform)
 	H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 
-/datum/action/gift/hispo/proc/trans_hispo(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_hispo(mob/living/carbon/werewolf/lupus/H)
 	H.icon = 'code/modules/wod13/hispo.dmi'
 	H.pixel_w = -16
 	H.pixel_z = -16
@@ -490,7 +490,8 @@
 	if(allowed_to_proceed)
 		var/mob/living/carbon/human/H = owner
 		var/datum/species/garou/G = H.dna.species
-		playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
+		if (!HAS_TRAIT(owner, TRAIT_CORAX))
+			playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
 		if(G.glabro)
 			H.remove_overlay(PROTEAN_LAYER)
 			G.punchdamagelow -= 15
@@ -504,21 +505,25 @@
 			G.glabro = FALSE
 			H.update_icons()
 		else
-			H.remove_overlay(PROTEAN_LAYER)
-			var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
-			var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
-			H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
-			H.apply_overlay(PROTEAN_LAYER)
-			G.punchdamagelow += 15
-			G.punchdamagehigh += 15
-			H.physique = H.physique+2
-			H.physiology.armor.melee += 15
-			H.physiology.armor.bullet += 15
-			var/matrix/M = matrix()
-			M.Scale(1.23)
-			animate(H, transform = M, time = 1 SECONDS)
-			G.glabro = TRUE
-			H.update_icons()
+			if (HAS_TRAIT(owner, TRAIT_CORAX))
+				to_chat(owner,"<span class='warning'>Corax do not have a Glabro form to shift into.</span>")
+				return
+			else
+				H.remove_overlay(PROTEAN_LAYER)
+				var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
+				var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
+				H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
+				H.apply_overlay(PROTEAN_LAYER)
+				G.punchdamagelow += 15
+				G.punchdamagehigh += 15
+				H.physique = H.physique+2
+				H.physiology.armor.melee += 15
+				H.physiology.armor.bullet += 15
+				var/matrix/M = matrix()
+				M.Scale(1.23)
+				animate(H, transform = M, time = 1 SECONDS)
+				G.glabro = TRUE
+				H.update_icons()
 
 /datum/action/gift/howling
 	name = "Howl"

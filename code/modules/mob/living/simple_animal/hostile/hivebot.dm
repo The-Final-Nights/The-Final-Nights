@@ -115,15 +115,15 @@
 	foam = new
 	foam.Grant(src)
 
-/mob/living/simple_animal/hostile/hivebot/mechanic/AttackingTarget()
+/mob/living/simple_animal/hostile/hivebot/mechanic/AttackingTarget(atom/attacked_target)
 	if(istype(target, /obj/machinery))
 		var/obj/machinery/fixable = target
-		if(fixable.obj_integrity >= fixable.max_integrity)
+		if(fixable.get_integrity() >= fixable.max_integrity)
 			to_chat(src, "<span class='warning'>Diagnostics indicate that this machine is at peak integrity.</span>")
 			return
 		to_chat(src, "<span class='warning'>You begin repairs...</span>")
 		if(do_after(src, 50, target = fixable))
-			fixable.obj_integrity = fixable.max_integrity
+			fixable.update_integrity(fixable.max_integrity)
 			do_sparks(3, TRUE, fixable)
 			to_chat(src, "<span class='warning'>Repairs complete.</span>")
 		return

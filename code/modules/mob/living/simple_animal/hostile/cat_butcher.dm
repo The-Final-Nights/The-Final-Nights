@@ -29,7 +29,7 @@
 	status_flags = CANPUSH
 	del_on_death = 1
 
-/mob/living/simple_animal/hostile/cat_butcherer/AttackingTarget()
+/mob/living/simple_animal/hostile/cat_butcherer/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(. && prob(35) && iscarbon(target))
 		var/mob/living/carbon/human/L = target

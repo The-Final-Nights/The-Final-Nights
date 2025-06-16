@@ -58,7 +58,7 @@
 	message += keys.Join(", ")
 	message += "."
 	message = message.Join("")
-	to_chat(user, message)
+	to_chat(user, boxed_message(message))
 
 /datum/emote/flip
 	key = "flip"

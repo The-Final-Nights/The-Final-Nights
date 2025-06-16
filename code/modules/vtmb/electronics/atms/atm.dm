@@ -36,11 +36,9 @@
 	var/bank_id = 0
 	var/balance = 0
 	var/code = ""
-	var/list/credit_cards = list()
 
 
 /datum/vtm_bank_account/New()
-	..()
 	if(!code || code == "")
 		code = create_bank_code()
 		var/random_id = rand(1, 999999)
@@ -64,49 +62,61 @@
 
 	var/owner = ""
 	var/datum/vtm_bank_account/account
-	var/code
-	var/balance = 0
 	var/has_checked = FALSE
+	var/min_starting_wealth = 600
+	var/max_starting_wealth = 1000
 
 /obj/item/vamp/creditcard/prince
 	icon_state = "card2"
 	inhand_icon_state = "card2"
+	min_starting_wealth = 10000
+	max_starting_wealth = 15000
 
 /obj/item/vamp/creditcard/seneschal
 	icon_state = "card2"
 	inhand_icon_state = "card2"
+	min_starting_wealth = 4000
+	max_starting_wealth = 8000
 
 /obj/item/vamp/creditcard/elder
 	icon_state = "card3"
 	inhand_icon_state = "card3"
+	min_starting_wealth = 3000
+	max_starting_wealth = 7000
 
 /obj/item/vamp/creditcard/giovanniboss
 	icon_state = "card2"
 	inhand_icon_state = "card2"
+	min_starting_wealth = 8000
+	max_starting_wealth = 15000
 
 /obj/item/vamp/creditcard/rich
+	min_starting_wealth = 1000
+	max_starting_wealth = 4000
 
-/obj/item/vamp/creditcard/New(mob/user)
-	..()
-	if(!account || code == "")
+
+/obj/item/vamp/creditcard/Initialize(mapload)
+	. = ..()
+	if(!account)
 		account = new /datum/vtm_bank_account()
-	if(user)
-		owner = user.ckey
-	if(istype(src, /obj/item/vamp/creditcard/prince))
-		account.balance = rand(10000, 15000)
-	else if(istype(src, /obj/item/vamp/creditcard/elder))
-		account.balance = rand(3000, 7000)
-	else if(istype(src, /obj/item/vamp/creditcard/rich))
-		account.balance = rand(1000, 4000)
-	else if(istype(src, /obj/item/vamp/creditcard/giovanniboss))
-		account.balance = rand(8000, 15000)
-	else if(istype(src, /obj/item/vamp/creditcard/seneschal))
-		account.balance = rand(4000, 8000)
-	else
-		account.balance = rand(600, 1000)
+	var/mob/living/carbon/human/user = null
+	if(ishuman(loc)) // In pockets
+		user = loc
+	else if(ishuman(loc?.loc)) // In backpack
+		user = loc
+	if(!isnull(user))
+		owner = user.real_name
+		if(user.clane?.name == CLAN_VENTRUE)
+			min_starting_wealth = max(min_starting_wealth, 1000)
+			max_starting_wealth = clamp(max_starting_wealth * 1.5, 4000, 20000)
+	account.balance = rand(min_starting_wealth, max_starting_wealth)
 
-/obj/machinery/vamp/atm/Initialize()
-	..()
+
+/obj/item/vamp/creditcard/examine(mob/user)
+	. = ..()
+	if(owner)
+		. += span_notice("The card bears a name: [owner].")
+
 
 /obj/machinery/vamp/atm/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/vamp/creditcard))

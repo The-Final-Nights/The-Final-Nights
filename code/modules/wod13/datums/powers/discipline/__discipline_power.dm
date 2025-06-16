@@ -47,6 +47,8 @@
 	var/cooldown_override = FALSE
 	/// List of Discipline power types that cannot be activated alongside this power and share a cooldown with it.
 	var/list/grouped_powers
+	/// Group this Discipline belongs to. Only one discipline of a group may be active at a time. No cooldown is shared.
+	var/power_group = DISCIPLINE_POWER_GROUP_NONE
 
 	/* NOT MEANT TO BE OVERRIDDEN */
 	/// Timer(s) tracking the duration of the power. Can have multiple if multi_activate is true.
@@ -65,7 +67,29 @@
 		CRASH("discipline_power [src.name] created without a parent discipline!")
 
 	src.discipline = discipline
-	src.owner = discipline.owner
+
+/**
+ * Setter to handle registering of signals.
+ */
+/datum/discipline_power/proc/set_owner(mob/living/carbon/human/new_owner)
+	if(owner == new_owner)
+		return
+	if(owner)
+		UnregisterSignal(owner, list(COMSIG_PARENT_QDELETING, COMSIG_POWER_ACTIVATE))
+	RegisterSignal(new_owner, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_qdel))
+	owner = new_owner
+	if(power_group != DISCIPLINE_POWER_GROUP_NONE)
+		RegisterSignal(owner, COMSIG_POWER_ACTIVATE, PROC_REF(on_other_power_activate))
+
+/**
+ * Proc to handle potential hard dels.
+ * Cleans up any remaining references to avoid circular reference memory leaks.
+ * The GC will handle the rest.
+ */
+/datum/discipline_power/proc/on_owner_qdel()
+	SIGNAL_HANDLER
+	owner = null
+	discipline = null
 
 /**
  * Returns the time left the cooldown timer, or
@@ -425,6 +449,21 @@
 	owner.update_action_buttons()
 
 	return TRUE
+
+
+/**
+ * Signal handler for members of a power_group to react to the activation of other disciplines.
+ */
+/datum/discipline_power/proc/on_other_power_activate(mob/living/carbon/human/source, datum/discipline_power/power, atom/target)
+	SIGNAL_HANDLER
+	if(power == src || power.power_group != power_group)
+		return
+	if(!active)
+		return
+	try_deactivate(direct = TRUE)
+	if(!active)
+		to_chat(source, span_danger("As [power.name] is activated, [name] is deactivated!"))
+
 
 /**
  * Overridable proc handling the sound played to the owner

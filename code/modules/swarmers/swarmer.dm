@@ -122,7 +122,7 @@
 		return TRUE
 
 ////CTRL CLICK FOR SWARMERS AND SWARMER_ACT()'S////
-/mob/living/simple_animal/hostile/swarmer/AttackingTarget()
+/mob/living/simple_animal/hostile/swarmer/AttackingTarget(atom/attacked_target)
 	if(!isliving(target))
 		return target.swarmer_act(src)
 	if(iscyborg(target))

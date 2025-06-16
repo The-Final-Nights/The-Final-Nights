@@ -577,7 +577,7 @@ GLOBAL_LIST_INIT(paper_blanks, init_paper_blanks())
 	balloon_alert(user, "copy object inserted")
 	flick("photocopier1", src)
 
-/obj/machinery/photocopier/obj_break(damage_flag)
+/obj/machinery/photocopier/atom_break(damage_flag)
 	. = ..()
 	if(. && toner_cartridge.charges)
 		new /obj/effect/decal/cleanable/oil(get_turf(src))

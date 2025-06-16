@@ -87,17 +87,15 @@
 	///List of species that are limited to a certain amount of that species doing this job.
 	var/list/species_slots = list()
 	///List of Bloodlines that are allowed to do this job.
-	var/list/allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry")
+	var/list/allowed_bloodlines = list(CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_SETITES)
 	///List of Tribes that are allowed to do this job.
-	var/list/allowed_tribes = list("Galestalkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Glass Walkers", "Bone Gnawers", "Ronin", "Black Spiral Dancers","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Shadow Lords","Red Talons","Stargazers")
+	var/list/allowed_tribes = list("Galestalkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Glass Walkers", "Bone Gnawers", "Ronin", "Black Spiral Dancers","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Shadow Lords","Red Talons","Stargazers", "Corax")
 	///List of Auspices that are allowed to do this job.
 	var/list/allowed_auspice = list("Philodox", "Galliard", "Ragabash", "Theurge", "Ahroun")
 	///If this job requires whitelisting before it can be selected for characters.
 	var/whitelisted = FALSE
-	// List for phone shit
-	var/my_contact_is_important = FALSE
 	// Only for display in memories
-	var/list/known_contacts = list()
+	var/list/known_contacts = null
 
 	var/duty
 	var/v_duty
@@ -210,12 +208,7 @@
 		for(var/i in roundstart_experience)
 			experiencer.mind.adjust_experience(i, roundstart_experience[i], TRUE)
 
-	if(my_contact_is_important)
-		for(var/obj/item/vamp/phone/PHONE in GLOB.phones_list)
-			if(PHONE)
-				PHONE.add_important_contacts()
-
-	if(length(known_contacts) > 0)
+	if(LAZYLEN(known_contacts) > 0)
 		H.knowscontacts = known_contacts
 
 /datum/job/proc/announce(mob/living/carbon/human/H)
