@@ -24,7 +24,7 @@
 //	minimal_generation = 12	//Uncomment when players get exp enough
 
 	known_contacts = list("Prince","Seneschal", "Sheriff", "Baron")
-	allowed_bloodlines = list("True Brujah", "Brujah", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Tzimisce", "Caitiff", "Ventrue", "Ministry", "Kiasyd", "Cappadocian", "Nagaraja")
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_TZIMISCE, CLAN_NONE, CLAN_VENTRUE, CLAN_SETITES, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_NAGARAJA)
 
 	v_duty = "You provide both legal and illegal supplies to those that get busy during the night. You are your own man yet you know people are out for you. Time to buckle in..."
 	minimal_masquerade = 3

@@ -281,6 +281,7 @@
 	if(lupus.hispo)
 		lupus.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 		lupus.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	lupus.mind.current = lupus
 
 /datum/werewolf_holder/transformation/proc/transform_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/crinos/crinos)
 	PRIVATE_PROC(TRUE)
@@ -313,6 +314,7 @@
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	crinos.update_icons()
+	crinos.mind.current = crinos
 
 /datum/werewolf_holder/transformation/proc/transform_cor_crinos(mob/living/carbon/trans, mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos)
 	PRIVATE_PROC(TRUE)
@@ -346,6 +348,7 @@
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	cor_crinos.update_icons()
+	cor_crinos.mind.current = cor_crinos
 
 /datum/werewolf_holder/transformation/proc/transform_homid(mob/living/carbon/trans, mob/living/carbon/human/homid)
 	PRIVATE_PROC(TRUE)
@@ -376,6 +379,7 @@
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
 	homid.update_body()
+	homid.mind.current = homid
 
 /datum/werewolf_holder/transformation/proc/transform_corvid(mob/living/carbon/trans, mob/living/carbon/werewolf/lupus/corvid/corvid)
 	PRIVATE_PROC(TRUE)
@@ -410,3 +414,4 @@
 	if(corvid.hispo) // shouldn't ever be called, but you know..
 		corvid.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 		corvid.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
+	corvid.mind.current = corvid

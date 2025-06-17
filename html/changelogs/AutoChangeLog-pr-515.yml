@@ -1,4 +1,0 @@
-author: "babamandaa"
-delete-after: True
-changes:
-  - rscdel: "Numina no longer has invocations. (This means your character will no longer automatically say something when using Numina spells.)"

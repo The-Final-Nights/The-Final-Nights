@@ -154,7 +154,7 @@
 			if(ishuman(L))
 				var/mob/living/carbon/human/H = L
 				conditioner = H.conditioner?.resolve()
-				if(H.clane?.name == "Gargoyle")
+				if(H.clane?.name == CLAN_GARGOYLE)
 					dominate_me = TRUE
 				if(istype(H.ears, /obj/item/clothing/ears/earmuffs))
 					continue

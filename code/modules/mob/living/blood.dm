@@ -252,10 +252,15 @@
 		blood_data["viruses"] = list()
 
 		blood_data["generation"] = src.generation
+
 		if(istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
+
 			if(H.clane)
 				blood_data["clan"] = H.clane.name
+
+			if(H.dna && H.dna.species)
+				blood_data["species"] = H.dna.species.name
 
 		for(var/thing in diseases)
 			var/datum/disease/D = thing
