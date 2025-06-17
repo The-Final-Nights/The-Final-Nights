@@ -135,8 +135,6 @@
 
 /datum/discipline_power/serpentis/the_form_of_the_cobra/activate()
 	. = ..()
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		ADD_TRAIT(owner.mind, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 	if(!BC)
 		BC = new(owner)
 	BC.Shapeshift(owner)

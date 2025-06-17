@@ -150,8 +150,6 @@
 
 /datum/discipline_power/protean/earth_meld/activate()
 	. = ..()
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		ADD_TRAIT(owner.mind, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 	if (!GA)
 		GA = new(owner)
 	owner.drop_all_held_items()
@@ -198,8 +196,6 @@
 
 /datum/discipline_power/protean/shape_of_the_beast/activate()
 	. = ..()
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		ADD_TRAIT(owner.mind, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 	if (!GA)
 		GA = new(owner)
 	owner.drop_all_held_items()

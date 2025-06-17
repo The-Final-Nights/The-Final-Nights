@@ -261,13 +261,17 @@
 			if(allowed_to_proceed)
 				switch(wolf.a_intent)
 					if(INTENT_HARM)
-						if(HAS_TRAIT(wolf.mind, TRAIT_WARRIOR))
+						if(HAS_TRAIT(src, TRAIT_WARRIOR))
 							changeNext_move(CLICK_CD_MELEE * 0.5)
 						else
 							changeNext_move(CLICK_CD_MELEE)
 						var/atom/B = claw_swing()
 						UnarmedAttack(B)
 					if(INTENT_HELP)
+						if(HAS_TRAIT(src, TRAIT_WARRIOR))
+							changeNext_move(CLICK_CD_MELEE * 0.5)
+						else
+							changeNext_move(CLICK_CD_MELEE)
 						UnarmedAttack(A)
 					if(INTENT_GRAB)
 						changeNext_move(CLICK_CD_GRABBING)
@@ -279,7 +283,10 @@
 							else
 								UnarmedAttack(A)
 					if(INTENT_DISARM)
-						changeNext_move(CLICK_CD_MELEE)
+						if(HAS_TRAIT(src, TRAIT_WARRIOR))
+							changeNext_move(CLICK_CD_MELEE * 0.5)
+						else
+							changeNext_move(CLICK_CD_MELEE)
 						if(A != src)
 							if(iscarbon(A))
 								var/mob/living/carbon/living = A
@@ -326,8 +333,8 @@
 							changeNext_move(CLICK_CD_MELEE * 0.5)
 						else
 							changeNext_move(CLICK_CD_MELEE)
-					else
-						changeNext_move(CLICK_CD_MELEE)
+				else
+					changeNext_move(CLICK_CD_MELEE)
 				UnarmedAttack(A,1)
 		else
 			if(W)
@@ -445,7 +452,7 @@
 /mob/proc/UnarmedAttack(atom/A, proximity_flag)
 	if(ismob(A))
 		var/mob/simple = src
-		if(HAS_TRAIT(simple.mind, TRAIT_WARRIOR))
+		if(HAS_TRAIT(simple, TRAIT_WARRIOR))
 			changeNext_move(CLICK_CD_MELEE * 0.5)
 		else
 			changeNext_move(CLICK_CD_MELEE)

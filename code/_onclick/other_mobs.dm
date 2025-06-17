@@ -100,7 +100,7 @@
 	Animals & All Unspecified
 */
 /mob/living/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src.mind, TRAIT_WARRIOR))
+	if(HAS_TRAIT(src, TRAIT_WARRIOR))
 		changeNext_move(CLICK_CD_MELEE * 0.5)
 	else
 		changeNext_move(CLICK_CD_MELEE)
@@ -190,6 +190,10 @@
 */
 
 /mob/living/simple_animal/UnarmedAttack(atom/A, proximity)
+	if(HAS_TRAIT(src, TRAIT_WARRIOR))
+		changeNext_move(CLICK_CD_MELEE * 0.5)
+	else
+		changeNext_move(CLICK_CD_MELEE)
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		return
 	if(!dextrous)
@@ -244,7 +248,7 @@
 */
 
 /mob/living/simple_animal/hostile/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src.mind, TRAIT_WARRIOR))
+	if(HAS_TRAIT(src, TRAIT_WARRIOR))
 		changeNext_move(CLICK_CD_MELEE * 0.5)
 	else
 		changeNext_move(CLICK_CD_MELEE)

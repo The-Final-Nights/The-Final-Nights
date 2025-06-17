@@ -595,8 +595,6 @@
 
 /datum/discipline_power/vicissitude/horrid_form/activate()
 	. = ..()
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		ADD_TRAIT(owner.mind, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 	if (!horrid_form_shapeshift)
 		horrid_form_shapeshift = new(owner)
 
