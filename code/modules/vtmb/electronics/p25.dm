@@ -597,7 +597,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	var/garble = FALSE
 	if(iskindred(speaker))
 		var/mob/living/carbon/human/speaker_man = speaker
-		if(speaker_man.clane?.name == "Lasombra")
+		if(speaker_man.clane?.name == CLAN_LASOMBRA)
 			message = scramble_lasombra_message(message,speaker_man)
 			garble = TRUE
 

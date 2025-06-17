@@ -64,59 +64,59 @@
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire))
 		switch(vampire.clane?.name)
-			if("Toreador")
+			if(CLAN_TOREADOR)
 				to_chat(owner, span_notice("[target] is obsessive to a fault."))
 				return
-			if("Daughters of Cacophony")
+			if(CLAN_DAUGHTERS_OF_CACOPHONY)
 				to_chat(owner, span_notice("[target]'s mind is envelopped by nonstopping music."))
-			if("Ventrue")
+			if(CLAN_VENTRUE)
 				to_chat(owner, span_notice("[target] finds no pleasure in poor's blood."))
 				return
-			if("Lasombra")
+			if(CLAN_LASOMBRA)
 				to_chat(owner, span_notice("[target] fears change itself evermore."))
 				return
-			if("Tzimisce")
+			if(CLAN_TZIMISCE)
 				to_chat(owner, span_notice("[target] is consumed by a singular desire."))
 				return
-			if("Gangrel")
+			if(CLAN_GANGREL)
 				to_chat(owner, span_notice("[target] is unable to control their impulses."))
 				return
-			if("Malkavian")
+			if(CLAN_MALKAVIAN)
 				to_chat(owner, span_notice("[target] frightens people near them."))
 				return
-			if("Brujah")
+			if(CLAN_BRUJAH)
 				to_chat(owner, span_notice("[target] is cursed to anger for their shame at carthage.."))
-			if("Nosferatu")
+			if(CLAN_NOSFERATU)
 				to_chat(owner, span_notice("[target] is entranced by that which is unknown."))
 				return
-			if("Tremere")
+			if(CLAN_TREMERE)
 				to_chat(owner, span_notice("[target] has a sense of perfectionism by their own actions."))
 				return
-			if("Baali")
+			if(CLAN_BAALI)
 				to_chat(owner, span_notice("[target] is scared of the lord's presence."))
 				return
-			if("Banu Haqim")
+			if(CLAN_BANU_HAQIM)
 				to_chat(owner, span_notice("[target] sees themselves as absolute judgement."))
 				return
-			if("True Brujah")
+			if(CLAN_TRUE_BRUJAH)
 				to_chat(owner, span_notice("[target] cant express emotions."))
 				return
-			if("Salubri")
+			if(CLAN_SALUBRI)
 				to_chat(owner, span_notice("[target] is ruled by consent."))
 				return
-			if("Giovanni")
+			if(CLAN_GIOVANNI)
 				to_chat(owner, span_notice("[target] never considers any action too great for their family."))
 				return
-			if("Cappadocian")
+			if(CLAN_CAPPADOCIAN)
 				to_chat(owner, span_notice("[target] will never escape the appearance of a corpse."))
 				return
-			if("Kiasyd")
+			if(CLAN_KIASYD)
 				to_chat(owner, span_notice("[target] is afraid of cold iron."))
 				return
-			if("Gargoyle")
+			if(CLAN_GARGOYLE)
 				to_chat(owner, span_notice("[target]'s mind is a fortress with gates open and unbarred."))
 				return
-			if("Ministry")
+			if(CLAN_SETITES)
 				to_chat(owner, span_notice("[target] believes every stain of sin is a virtue."))
 				return
 
@@ -130,29 +130,29 @@
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire))
 		var/datum/species/kindred/clan = vampire.dna.species
-		if(clan.get_discipline("Quietus") && vampire.clane?.name != "Banu Haqim")
+		if(clan.get_discipline("Quietus") && vampire.clane?.name != CLAN_BANU_HAQIM)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Banu Haqim's Quietus will be known."))
-		if(clan.get_discipline("Protean") && vampire.clane?.name != "Gangrel")
+		if(clan.get_discipline("Protean") && vampire.clane?.name != CLAN_GANGREL)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Gangrel's Protean will be known."))
-		if(clan.get_discipline("Serpentis") && vampire.clane?.name != "Ministry")
+		if(clan.get_discipline("Serpentis") && vampire.clane?.name != CLAN_SETITES)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Ministry's Serpentis will be known."))
-		if(clan.get_discipline("Necromancy") && vampire.clane?.name != "Giovanni" || clan.get_discipline("Necromancy") && vampire.clane?.name != "Cappadocian")
+		if(clan.get_discipline("Necromancy") && vampire.clane?.name != CLAN_GIOVANNI || clan.get_discipline("Necromancy") && vampire.clane?.name != CLAN_CAPPADOCIAN)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Giovanni's Necromancy will be known."))
-		if(clan.get_discipline("Obtenebration") && vampire.clane?.name != "Lasombra")
+		if(clan.get_discipline("Obtenebration") && vampire.clane?.name != CLAN_LASOMBRA)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Lasombra's Obtenebration will be known."))
-		if(clan.get_discipline("Dementation") && vampire.clane?.name != "Malkavian")
+		if(clan.get_discipline("Dementation") && vampire.clane?.name != CLAN_MALKAVIAN)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Malkavian's Dementation will be known."))
-		if(clan.get_discipline("Vicissitude") && vampire.clane?.name != "Tzimisce")
+		if(clan.get_discipline("Vicissitude") && vampire.clane?.name != CLAN_TZIMISCE)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Tzimisce's Vicissitude will be known."))
-		if(clan.get_discipline("Melpominee") && vampire.clane?.name != "Daughters of Cacophony")
+		if(clan.get_discipline("Melpominee") && vampire.clane?.name != CLAN_DAUGHTERS_OF_CACOPHONY)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Daughters of Cacophony's Melpominee will be known."))
-		if(clan.get_discipline("Daimonion") && vampire.clane?.name != "Baali")
+		if(clan.get_discipline("Daimonion") && vampire.clane?.name != CLAN_BAALI)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Baali's Daimonion will be known."))
-		if(clan.get_discipline("Temporis") && vampire.clane?.name != "True Brujah")
+		if(clan.get_discipline("Temporis") && vampire.clane?.name != CLAN_TRUE_BRUJAH)
 			to_chat(owner, span_notice("[target] fears that the fact they stole True Brujah's Temporis will be known."))
-		if(clan.get_discipline("Valeren") && vampire.clane?.name != "Salubri")
+		if(clan.get_discipline("Valeren") && vampire.clane?.name != CLAN_SALUBRI)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Salubri's Valeren will be known."))
-		if(clan.get_discipline("Mytherceria") && vampire.clane?.name != "Kiasyd")
+		if(clan.get_discipline("Mytherceria") && vampire.clane?.name != CLAN_KIASYD)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Kiasyd's Mytherceria will be known."))
 
 //FEAR OF THE VOID BELOW

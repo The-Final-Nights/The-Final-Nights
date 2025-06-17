@@ -461,6 +461,35 @@
 	yin_chi = 2
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/sewer/nosferatu_warren
+	name = "Underground Warren"
+	icon_state = "hotel"
+	upper = FALSE
+	music = /datum/vampiremusic/nosferatu
+	zone_type = "elysium"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/sewer/nosferatu_bar
+	name = "Underground Bar"
+	icon_state = "hotel"
+	upper = FALSE
+	zone_type = "elysium"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/nosferatu_office
+	name = "Underground Office"
+	icon_state = "hotel"
+	upper = FALSE
+	music = /datum/vampiremusic/nosferatu
+	zone_type = "elysium"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/sewer/cappadocian
 	name = "Cappadocian Crypt"
 	icon_state = "graveyard"
@@ -772,7 +801,7 @@
 			if(iskindred(src))
 				var/mob/living/carbon/human/H = src
 				if(H.clane)
-					if(H.clane.name == "Daughters of Cacophony")
+					if(H.clane.name == CLAN_DAUGHTERS_OF_CACOPHONY)
 						cacophony = FALSE //This Variable was TRUE, which makes the DoC music loop play.
 
 			if(!cacophony)

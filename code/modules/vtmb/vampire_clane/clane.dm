@@ -5,7 +5,7 @@ This datum stores a declarative description of clans, in order to make an instan
 And it also helps for the character set panel
 */
 /datum/vampireclane
-	var/name = "Caitiff"
+	var/name = CLAN_NONE
 	var/desc = "The clanless. The rabble. Of no importance."
 	var/list/clane_disciplines = list() //discipline datums
 	var/list/restricted_disciplines = list()
