@@ -39,18 +39,20 @@
 /datum/discipline_power/necromancy/shroudsight/activate()
 	. = ..()
 
-	ADD_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_NIGHT_VISION, NECROMANCY_TRAIT)
+	ADD_TRAIT(owner, TRAIT_GHOST_VISION, NECROMANCY_TRAIT)
 
-	owner.see_invisible = SEE_INVISIBLE_OBSERVER //for some reason owner.update_sight() resets this, so it's omitted from this discipline. you can still stack this with auspex by popping it first, and shroudsight second.
+	owner.update_sight()
 
 	to_chat(owner, span_notice("You peek beyond the Shroud."))
 
 /datum/discipline_power/necromancy/shroudsight/deactivate()
 	. = ..()
 
-	REMOVE_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_NIGHT_VISION, NECROMANCY_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_GHOST_VISION, NECROMANCY_TRAIT)
 
-	owner.see_invisible = SEE_INVISIBLE_LIVING
+	owner.update_sight()
 
 	to_chat(owner, span_warning("Your vision returns to the mortal realm."))
 
