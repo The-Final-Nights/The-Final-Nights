@@ -65,7 +65,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel more experienced in love.</span>"
 	lose_text = "<span class='warning'>You feel more clueless in love.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
-	excluded_clans = list("Nagaraja")
+	excluded_clans = list(CLAN_NAGARAJA)
 
 /datum/quirk/tough_flesh
 	name = "Tough Flesh"
@@ -97,7 +97,7 @@ Dancer
 	gain_text = "<span class='warning'>You feel anxious about the way you feed.</span>"
 	lose_text = "<span class='warning'>You can feed normal again.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
-	excluded_clans = list("Nagaraja")
+	excluded_clans = list(CLAN_NAGARAJA)
 
 /datum/quirk/lazy
 	name = "Lazy"
@@ -147,10 +147,33 @@ Dancer
 	name = "Lively Aura"
 	desc = "You don't SEEM dead enough to readings, fooling a few forms of detection as to whether or not you're a walking corpse."
 	mob_trait = TRAIT_WARM_AURA
-	value = 3
+	value = 2
 	gain_text = "<span class='warning'>You feel your heart beat, for a moment.</span>"
 	lose_text = "<span class='notice'>You feel a subtle chill.</span>"
-	allowed_species = list("Kuei-jin", "Vampire")
+	allowed_species = list("Kuei-Jin", "Vampire")
+
+//I could do something more elegent and rework the backend of species quirk visibility, or I could just do this and save myself a week of refactoring. I'll stick refactoring quirks on the 'Do Eventually' list tho.
+/datum/quirk/frenetic_aura_mortal
+	name = "Frenetic Aura (Mortal)"
+	desc = "Your aura seems.. Unusually energetic and active to various forms of detection, this may get you mistaken for a garou and implies one's emotions are volatile in the extreme."
+	mob_trait = TRAIT_FRENETIC_AURA
+	value = 3 //For mortals and ghouls, this is expensive, as it provides benefit akin to cold aura with no penalties.
+	gain_text = "<span class='warning'>You feel tense and jittery.</span>"
+	lose_text = "<span class='notice'>You feel your emotions quell to something more manageable.</span>"
+	allowed_species = list("Ghoul", "Human")
+
+/datum/quirk/frenetic_aura
+	name = "Frenetic Aura (Undead)"
+	desc = "Your aura seems.. Unusually energetic and active to various forms of detection, this may get you mistaken for a Garou or Abomination and implies one's emotions are volatile in the extreme, you are more susceptible to frenzy."
+	mob_trait = TRAIT_FRENETIC_AURA
+	value = -1 //For vampires and KJ. This makes them notably more vulnerable to frenzy- on par with brujah. For Brujah, it makes them even more volatile and even more frenzy prone. Consequentially, it is a negative. There are no real benefits to it.
+	gain_text = "<span class='warning'>You feel tense and jittery.</span>"
+	lose_text = "<span class='notice'>You feel your emotions quell to something more manageable.</span>"
+	allowed_species = list("Vampire", "Kuei-Jin")
+
+/datum/quirk/frenetic_aura/on_spawn()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.clane.frenzymod += 1
 
 /datum/quirk/blush_of_health
 	name = "Blush of Health"
@@ -225,8 +248,8 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>Your fangs feel awkward in your mouth.</span>"
 	lose_text = "<span class='notice'>You fangs feel comfortable in your mouth.</span>"
-	allowed_species = list("Vampire","Kuei-jin")
-	excluded_clans = list("Nagaraja")
+	allowed_species = list("Vampire","Kuei-Jin")
+	excluded_clans = list(CLAN_NAGARAJA)
 
 /datum/quirk/animal_repulsion
 	name = "Animal Repulsion"
@@ -235,7 +258,7 @@ Dancer
 	value = -2
 	gain_text = "<span class='warning'>You can feel hostile eyes watching you.</span>"
 	lose_text = "<span class='notice'>Cats walk by you unphased.</span>"
-	allowed_species = list("Vampire","Ghoul","Human","Kuei-jin")
+	allowed_species = list("Vampire","Ghoul","Human","Kuei-Jin")
 
 /datum/quirk/wyrm_tainted
 	name = "Wyrm Tainted"
@@ -245,7 +268,7 @@ Dancer
 	gain_text = "<span class='warning'>You feel wrongness crawling beneath your skin.</span>"
 	lose_text = "<span class='notice'>You feel relief and warmth.</span>"
 	allowed_species = list("Werewolf")
-	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers")
+	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers", "Corax")
 
 /datum/quirk/illegal_identity
 	name = "Illegal Identity"
@@ -291,7 +314,7 @@ Dancer
 	gain_text = "<span class='warning'>You have a craving for liver.</span>"
 	lose_text = "<span class='notice'>Your craving subsides...</span>"
 	allowed_species = list("Vampire")
-	excluded_clans = list("Nagaraja")
+	excluded_clans = list(CLAN_NAGARAJA)
 
 /datum/action/fly_upper
 	name = "Fly Up"
@@ -529,7 +552,7 @@ Dancer
 /datum/quirk/latin
 	name = "Latin"
 	desc = "You know the ancient holy language OF THE ROMANS AND THE CLERGY!!"
-	value = 2
+	value = 1
 
 /datum/quirk/latin/add()
 	var/mob/living/carbon/H = quirk_holder
@@ -619,7 +642,7 @@ Dancer
 	gain_text = "<span class='notice'>You feel necroresistant.</span>"
 	lose_text = "<span class='notice'>You don't want necrophilia anymore.</span>"
 	allowed_species = list("Vampire")
-	excluded_clans = list("Nagaraja")
+	excluded_clans = list(CLAN_NAGARAJA)
 
 /datum/quirk/charmer
 	name = "Abnormal Charmer"

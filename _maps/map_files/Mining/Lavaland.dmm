@@ -1139,10 +1139,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"mn" = (
-/obj/structure/table/wood,
-/turf/open/floor/plating/umbra,
-/area/vtm/interior/penumbra)
 "mo" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/carpet{
@@ -2726,7 +2722,7 @@
 	},
 /area/vtm/interior/penumbra)
 "DT" = (
-/turf/closed/wall/vampwall/market/low/window/reinforced{
+/turf/closed/wall/vampwall/market/low/window{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -3169,10 +3165,6 @@
 	dir = 6
 	},
 /turf/open/floor/plating/vampdirt,
-/area/vtm/interior/penumbra)
-"Iz" = (
-/obj/structure/table,
-/turf/open/floor/plating/umbra,
 /area/vtm/interior/penumbra)
 "IG" = (
 /obj/effect/turf_decal/weather/dirt,
@@ -3698,15 +3690,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"Pc" = (
-/obj/structure/table,
-/obj/structure/window/reinforced/indestructable{
-	icon_state = "rwindow"
-	},
-/turf/open/floor/plating/concrete{
-	umbra = 1
-	},
-/area/vtm/interior/penumbra)
 "Pd" = (
 /obj/effect/decal/bordur{
 	dir = 1;
@@ -4077,11 +4060,6 @@
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
-"TI" = (
-/obj/structure/vamptree/pine,
-/obj/effect/turf_decal/weather/dirt,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/penumbra)
 "TK" = (
 /obj/effect/decal/remains/human,
 /obj/effect/decal/remains/human{
@@ -4354,7 +4332,7 @@
 	},
 /area/vtm/interior/penumbra)
 "Wl" = (
-/turf/closed/wall/vampwall/rich/low/window/reinforced,
+/turf/closed/wall/vampwall/rich/low/window,
 /area/vtm/interior/penumbra)
 "Wp" = (
 /obj/effect/decal/graffiti,
@@ -22446,7 +22424,7 @@ qF
 qF
 dC
 dO
-TI
+rP
 bJ
 qF
 qF
@@ -26702,7 +26680,7 @@ qF
 tD
 tD
 tD
-Iz
+tD
 yU
 yU
 SS
@@ -28480,7 +28458,7 @@ ox
 ox
 ox
 XC
-mn
+kS
 kS
 qF
 qF
@@ -34716,7 +34694,7 @@ qF
 ss
 tD
 tD
-Iz
+tD
 yU
 yU
 yU
@@ -41897,7 +41875,7 @@ qF
 qF
 yU
 qF
-Pc
+Hx
 Gg
 yU
 kV

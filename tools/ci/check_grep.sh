@@ -60,8 +60,36 @@ if $grep '//' $map_files | $grep -v '//MAP CONVERTED BY dmm2tgm.py THIS HEADER C
 	echo -e "${RED}ERROR: Unexpected commented out line detected in this map file. Please remove it.${NC}"
 	st=1
 fi;
-part "iconstate tags"
-if $grep '^\ttag = "icon' $map_files;	then
+if grep -P 'Merge Conflict Marker' _maps/**/*.dmm; then
+    echo "ERROR: Merge conflict markers detected in map, please resolve all merge failures!"
+    st=1
+fi;
+# We check for this as well to ensure people aren't actually using this mapping effect in their maps.
+if grep -P '/obj/merge_conflict_marker' _maps/**/*.dmm; then
+    echo "ERROR: Merge conflict markers detected in map, please resolve all merge failures!"
+    st=1
+fi;
+if grep -P '^\ttag = \"icon' _maps/**/*.dmm;	then
+    echo "ERROR: tag vars from icon state generation detected in maps, please remove them."
+    st=1
+fi;
+if grep -P 'step_[xy]' _maps/**/*.dmm;	then
+    echo "ERROR: step_x/step_y variables detected in maps, please remove them."
+    st=1
+fi;
+if grep -P 'pixel_[^xy]' _maps/**/*.dmm;	then
+    echo "ERROR: incorrect pixel offset variables detected in maps, please remove them."
+    st=1
+fi;
+if grep -P '/obj/structure/cable(/\w+)+\{' _maps/**/*.dmm;	then
+    echo "ERROR: vareditted cables detected, please remove them."
+    st=1
+fi;
+if grep -P '\td[1-2] =' _maps/**/*.dmm;	then
+    echo "ERROR: d1/d2 cable variables detected in maps, please remove them."
+    st=1
+fi;
+if grep -Pzo '"\w+" = \(\n[^)]*?/obj/structure/cable,\n[^)]*?/obj/structure/cable,\n[^)]*?/area/.+?\)' _maps/**/*.dmm;	then
 	echo
     echo -e "${RED}ERROR: Tag vars from icon state generation detected in maps, please remove them.${NC}"
     st=1

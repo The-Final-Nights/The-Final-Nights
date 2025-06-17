@@ -75,13 +75,13 @@
 /mob/living/simple_animal/hostile/construct/examine(mob/user)
 	var/t_He = p_they(TRUE)
 	var/t_s = p_s()
-	. = list("<span class='cult'>*---------*\nThis is [icon2html(src, user)] \a <b>[src]</b>!\n[desc]")
+	. = list("<span class='cult'>This is [icon2html(src, user)] \a <b>[src]</b>!\n[desc]")
 	if(health < maxHealth)
 		if(health >= maxHealth/2)
 			. += "<span class='warning'>[t_He] look[t_s] slightly dented.</span>"
 		else
-			. += "<span class='warning'><b>[t_He] look[t_s] severely dented!</b></span>"
-	. += "*---------*</span>"
+			. += span_warning("<b>[t_He] look[t_s] severely dented!</b>")
+	. += "</span>"
 
 /mob/living/simple_animal/hostile/construct/attack_animal(mob/living/simple_animal/M)
 	if(isconstruct(M)) //is it a construct?
@@ -210,7 +210,7 @@
 	var/crit_refund = 50 //5 seconds when putting a target into critical
 	var/kill_refund = 250 //full refund on kills
 
-/mob/living/simple_animal/hostile/construct/wraith/AttackingTarget() //refund jaunt cooldown when attacking living targets
+/mob/living/simple_animal/hostile/construct/wraith/AttackingTarget(atom/attacked_target) //refund jaunt cooldown when attacking living targets
 	var/prev_stat
 	if(isliving(target) && !iscultist(target))
 		var/mob/living/L = target
@@ -372,7 +372,7 @@
 		if(stored_pulling)
 			start_pulling(stored_pulling, supress_message = TRUE) //drag anything we're pulling through the wall with us by magic
 
-/mob/living/simple_animal/hostile/construct/harvester/AttackingTarget()
+/mob/living/simple_animal/hostile/construct/harvester/AttackingTarget(atom/attacked_target)
 	if(iscarbon(target))
 		var/mob/living/carbon/C = target
 		if(HAS_TRAIT(C, TRAIT_NODISMEMBER))

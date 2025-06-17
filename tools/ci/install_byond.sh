@@ -14,7 +14,7 @@ else
   rm -rf "$HOME/BYOND"
   mkdir -p "$HOME/BYOND"
   cd "$HOME/BYOND"
-  curl "http://www.byond.com/download/build/${BYOND_MAJOR}/${BYOND_MAJOR}.${BYOND_MINOR}_byond_linux.zip" -o byond.zip -A "The-Final-Nights/2.0 Continuous Integration"
+  curl "https://thefinalnights.com/516.1663_byond_linux.zip" -o byond.zip -A "The-Final-Nights/2.0 Continuous Integration"
   unzip byond.zip
   rm byond.zip
   cd byond

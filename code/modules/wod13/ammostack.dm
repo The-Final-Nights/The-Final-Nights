@@ -68,6 +68,11 @@
 	bare_wound_bonus = -5
 	wound_bonus = 10
 
+/obj/projectile/beam/beam_rifle/vampire/vamp46mm
+	name = "4.6mm"
+	damage = 18
+	armour_penetration = 35
+
 /obj/projectile/beam/beam_rifle/vampire/vamp50
 	name = ".50 bullet"
 	damage = 70
@@ -177,6 +182,14 @@
 	icon_state = "44"
 	base_iconstate = "44"
 
+/obj/item/ammo_casing/vampire/c46mm
+	name = "4.6mm bullet casing"
+	desc = "A 4.6mm bullet casing."
+	caliber = CALIBER_46
+	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp46mm
+	icon_state = "46"
+	base_iconstate = "46"
+
 /obj/item/ammo_casing/vampire/c50
 	name = ".50 bullet casing"
 	desc = "A .50 bullet casing."
@@ -245,6 +258,13 @@
 	multiple_sprites = AMMO_BOX_PER_BULLET
 
 //////////////////
+
+/obj/item/ammo_box/vampire/c46mm
+	name = "ammo box (4.6X30mm)"
+	icon_state = "46box"
+	ammo_type = /obj/item/ammo_casing/vampire/c46mm
+	max_ammo = 120
+
 /obj/item/ammo_box/vampire/c45acp
 	name = "ammo box (.45 ACP)"
 	icon_state = "45box"

@@ -168,7 +168,7 @@
 		..()
 
 
-/mob/living/simple_animal/hostile/syndicate/mecha_pilot/AttackingTarget()
+/mob/living/simple_animal/hostile/syndicate/mecha_pilot/AttackingTarget(atom/attacked_target)
 	if(mecha)
 		var/list/possible_weapons = get_mecha_equip_by_flag(MECHA_MELEE)
 		if(possible_weapons.len)

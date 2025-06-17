@@ -115,7 +115,7 @@
 	foam = new
 	foam.Grant(src)
 
-/mob/living/simple_animal/hostile/hivebot/mechanic/AttackingTarget()
+/mob/living/simple_animal/hostile/hivebot/mechanic/AttackingTarget(atom/attacked_target)
 	if(istype(target, /obj/machinery))
 		var/obj/machinery/fixable = target
 		if(fixable.get_integrity() >= fixable.max_integrity)

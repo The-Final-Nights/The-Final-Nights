@@ -196,7 +196,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 		..()
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/resource/AttackingTarget()
+/mob/living/simple_animal/hostile/swarmer/ai/resource/AttackingTarget(atom/attacked_target)
 	if(target.swarmer_act(src))
 		add_type_to_wanted(target.type)
 		return TRUE
@@ -263,7 +263,7 @@ GLOBAL_LIST_INIT(AISwarmerCapsByType, list(/mob/living/simple_animal/hostile/swa
 	summon_backup(15, TRUE)
 
 
-/mob/living/simple_animal/hostile/swarmer/ai/melee_combat/AttackingTarget()
+/mob/living/simple_animal/hostile/swarmer/ai/melee_combat/AttackingTarget(atom/attacked_target)
 	if(isliving(target))
 		if(prob(35))
 			StartAction(30)

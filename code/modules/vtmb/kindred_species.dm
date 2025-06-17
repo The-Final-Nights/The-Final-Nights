@@ -267,7 +267,7 @@
 	if(iskindred(owner))
 		if(HAS_TRAIT(owner, TRAIT_TORPOR))
 			return
-		var/mob/living/carbon/human/BD = usr
+		var/mob/living/carbon/human/BD = owner
 		if(world.time < BD.last_bloodpower_use+110)
 			return
 		var/plus = 0
@@ -733,6 +733,11 @@
 		to_chat(teacher, span_warning("You need to have fed your student your blood to teach them Disciplines!"))
 		return
 
+	if(length(student_prefs.discipline_types) >= 5 && !SSwhitelists.is_whitelisted(student.ckey, TRUSTED_PLAYER))
+		to_chat(teacher, span_warning("Your student must be whitelisted to learn more than five disciplines!"))
+		to_chat(student, span_warning("You must be whitelisted to learn more than five disciplines!"))
+		return
+
 	var/possible_disciplines = teacher_prefs.discipline_types - student_prefs.discipline_types
 	var/teaching_discipline = input(teacher, "What Discipline do you want to teach [student.name]?", "Discipline Selection") as null|anything in possible_disciplines
 
@@ -844,7 +849,7 @@
 
 		//skip this if they can't access it due to whitelists
 		if (clan_checking.whitelisted)
-			if (!SSwhitelists.is_whitelisted(checked_ckey = vampire_checking.ckey, checked_whitelist = clan_checking.name))
+			if (!SSwhitelists.is_whitelisted(checked_ckey = vampire_checking.ckey, checked_whitelist = TRUSTED_PLAYER))
 				qdel(clan_checking)
 				continue
 

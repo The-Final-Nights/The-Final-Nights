@@ -17,7 +17,7 @@
 	for(var/i in gravito_targets)
 		remove_gravity(i)
 
-/mob/living/simple_animal/hostile/guardian/gravitokinetic/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/gravitokinetic/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(isliving(target) && target != src && target != summoner)
 		to_chat(src, "<span class='danger'><B>Your punch has applied heavy gravity to [target]!</span></B>")

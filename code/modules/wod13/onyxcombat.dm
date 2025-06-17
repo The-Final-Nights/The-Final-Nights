@@ -136,7 +136,6 @@
 		apply_damage(3, STAMINA)
 		user.do_attack_animation(src)
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
-		emote("flip")
 		visible_message("<span class='danger'>[src] dodges the attack!</span>", "<span class='danger'>You dodge the attack!</span>")
 		return
 	if(blocking)
@@ -327,13 +326,13 @@
 					return
 				if(BD.clane)
 					var/special_clan = FALSE
-					if(BD.clane.name == "Salubri")
+					if(BD.clane.name == CLAN_SALUBRI)
 						if(!PB.IsSleeping())
 							to_chat(BD, "<span class='warning'>You can't drink from aware targets!</span>")
 							return
 						special_clan = TRUE
 						PB.emote("moan")
-					if(BD.clane.name == "Giovanni")
+					if(BD.clane.name == CLAN_GIOVANNI)
 						PB.emote("scream")
 						special_clan = TRUE
 					if(!special_clan)

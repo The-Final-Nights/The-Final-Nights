@@ -165,7 +165,7 @@
 	. = ..()
 	AddElement(/datum/element/cleaning)
 
-/mob/living/simple_animal/hostile/alien/maid/AttackingTarget()
+/mob/living/simple_animal/hostile/alien/maid/AttackingTarget(atom/attacked_target)
 	if(ismovable(target))
 		target.wash(CLEAN_SCRUB)
 		if(istype(target, /obj/effect/decal/cleanable))

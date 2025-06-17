@@ -23,7 +23,7 @@
 	if(bomb_cooldown >= world.time)
 		. += "Bomb Cooldown Remaining: [DisplayTimeText(bomb_cooldown - world.time)]"
 
-/mob/living/simple_animal/hostile/guardian/bomb/AttackingTarget()
+/mob/living/simple_animal/hostile/guardian/bomb/AttackingTarget(atom/attacked_target)
 	. = ..()
 	if(. && prob(40) && isliving(target))
 		var/mob/living/M = target

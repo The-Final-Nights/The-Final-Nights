@@ -28,7 +28,7 @@
 /datum/emote/living/carbon/eyeroll
 	key = "eyeroll"
 	key_third_person = "eyerolls"
-	message = "rolls their eyes"
+	message = "rolls their eyes."
 	vary = TRUE
 	mob_type_blacklist_typecache = list(/mob/living/carbon/alien)
 
@@ -88,7 +88,7 @@
 /datum/emote/living/carbon/sweatdrop
 	key = "sweatdrop"
 	key_third_person = "sweatdrops"
-	message = "sweats"
+	message = "sweats."
 	emote_type = EMOTE_VISIBLE
 	vary = TRUE
 

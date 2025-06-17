@@ -716,7 +716,7 @@
 	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medsensor.add_hud_to(src)
 
-/mob/living/simple_animal/hostile/lightgeist/AttackingTarget()
+/mob/living/simple_animal/hostile/lightgeist/AttackingTarget(atom/attacked_target)
 	if(isliving(target) && target != src)
 		var/mob/living/L = target
 		if(L.stat != DEAD)

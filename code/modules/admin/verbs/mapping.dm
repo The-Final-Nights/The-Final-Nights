@@ -316,10 +316,14 @@ GLOBAL_VAR_INIT(say_disabled, FALSE)
 /client/proc/debug_z_levels()
 	set name = "Debug Z-Levels"
 	set category = "Mapping"
+	to_chat(usr, boxed_message(gather_z_level_information(append_grid = TRUE)), confidential = TRUE)
+
+/// Returns all necessary z-level information. Argument `append_grid` allows the user to see a table showing all of the z-level linkages, which is only visible and useful in-game.
+/proc/gather_z_level_information(append_grid = FALSE)
 
 	var/list/z_list = SSmapping.z_list
 	var/list/messages = list()
-	messages += "<b>World</b>: [world.maxx] x [world.maxy] x [world.maxz]<br>"
+	messages += "<b>World</b>: [world.maxx] x [world.maxy] x [world.maxz]<br><br>"
 
 	var/list/linked_levels = list()
 	var/min_x = INFINITY
@@ -363,7 +367,7 @@ GLOBAL_VAR_INIT(say_disabled, FALSE)
 	for(var/datum/space_level/S in linked_levels)
 		grid[S.xi - min_x + 1][S.yi - min_y + 1] = S.z_value
 
-	messages += "<table border='1'>"
+	messages += "<br><table border='1'>"
 	for(var/y in max_y to min_y step -1)
 		var/list/part = list()
 		for(var/x in min_x to max_x)
@@ -371,4 +375,5 @@ GLOBAL_VAR_INIT(say_disabled, FALSE)
 		messages += "<tr><td>[part.Join("</td><td>")]</td></tr>"
 	messages += "</table>"
 
-	to_chat(src, messages.Join(""), confidential = TRUE)
+	to_chat(usr, boxed_message(messages.Join("")), confidential = TRUE)
+

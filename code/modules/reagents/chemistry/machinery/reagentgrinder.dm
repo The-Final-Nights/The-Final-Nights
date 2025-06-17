@@ -222,7 +222,7 @@
 		if("mix")
 			mix(user)
 		if("examine")
-			examine(user)
+			to_chat(user, boxed_message(jointext(examine(user), "\n")))
 
 /obj/machinery/reagentgrinder/proc/eject(mob/user)
 	for(var/i in holdingitems)

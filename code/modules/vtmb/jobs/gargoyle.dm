@@ -20,7 +20,7 @@
 	v_duty = "An agent of the Chantry, you are a Tremere Gargoyle who was made legally having existed before their creation was banned. Serve the Regent well!"
 	minimal_masquerade = 3
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Gargoyle")
+	allowed_bloodlines = list(CLAN_GARGOYLE)
 	known_contacts = list("Tremere Regent")
 	experience_addition = 15
 
