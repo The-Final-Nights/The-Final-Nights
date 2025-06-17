@@ -1751,16 +1751,15 @@
 /datum/reagent/colorful_reagent/proc/UpdateColor()
 	color = pick(random_color_list)
 
-/datum/reagent/colorful_reagent/on_mob_life(mob/living/carbon/M)
+/datum/reagent/colorful_reagent/on_mob_life(mob/living/carbon/affected_mob)
 	if(can_colour_mobs)
-		M.add_atom_colour(pick(random_color_list), WASHABLE_COLOUR_PRIORITY)
-	return ..()
+		affected_mob.add_atom_colour(color_transition_filter(pick(random_color_list), SATURATION_OVERRIDE), WASHABLE_COLOUR_PRIORITY)
 
 /// Colors anything it touches a random color.
 /datum/reagent/colorful_reagent/expose_atom(atom/exposed_atom, reac_volume)
 	. = ..()
 	if(!isliving(exposed_atom) || can_colour_mobs)
-		exposed_atom.add_atom_colour(pick(random_color_list), WASHABLE_COLOUR_PRIORITY)
+		exposed_atom.add_atom_colour(color_transition_filter(pick(random_color_list), SATURATION_OVERRIDE), WASHABLE_COLOUR_PRIORITY)
 
 /datum/reagent/hair_dye
 	name = "Quantum Hair Dye"

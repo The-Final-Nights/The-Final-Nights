@@ -52,11 +52,14 @@
 	seed = /obj/item/seeds/poppy
 	name = "poppy"
 	desc = "Long-used as a symbol of rest, peace, and death."
-	icon_state = "poppy"
+	icon_state = "rainbow_flower"
 	slot_flags = ITEM_SLOT_HEAD
 	bite_consumption_mod = 3
 	foodtypes = VEGETABLES | GROSS
 	distill_reagent = /datum/reagent/consumable/ethanol/vermouth
+	greyscale_config = /datum/greyscale_config/flower_simple
+	greyscale_config_worn = /datum/greyscale_config/flower_simple_worn
+	greyscale_colors = "#d23838"
 
 /obj/item/food/grown/flower/poppy/examine(mob/user) //when examined...
 	. = ..() //makes current proc the parent proc and once it returns, return to this point and continues the lines below -XeonMations
@@ -79,7 +82,7 @@
 	seed = /obj/item/seeds/poppy/lily
 	name = "lily"
 	desc = "A beautiful orange flower."
-	icon_state = "lily"
+	greyscale_colors = "#fe881f"
 
 /obj/item/food/grown/flower/lily/examine(mob/user)
 	. = ..()
@@ -149,7 +152,7 @@
 	seed = /obj/item/seeds/poppy/geranium
 	name = "geranium"
 	desc = "A beautiful blue flower."
-	icon_state = "geranium"
+	greyscale_colors = "#1499bb"
 
 /obj/item/food/grown/flower/geranium/examine(mob/user)
 	. = ..()
@@ -177,6 +180,9 @@
 	desc = "A beautiful light pink flower."
 	icon_state = "fraxinella"
 	distill_reagent = /datum/reagent/ash
+	greyscale_config = null
+	greyscale_config_worn = null
+	greyscale_colors = null
 
 /obj/item/food/grown/flower/fraxinella/examine(mob/user)
 	if(HAS_TRAIT(user, TRAIT_FLOWER_LANGUAGE))

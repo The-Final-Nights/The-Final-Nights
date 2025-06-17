@@ -1181,6 +1181,11 @@
 /obj/item/food/grown/cannabis,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/sewer/nosferatu_town)
+"apH" = (
+/obj/structure/chair/sofa/right,
+/obj/effect/landmark/start/nagaraja,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "apI" = (
 /obj/structure/railing{
 	pixel_y = -5
@@ -12732,17 +12737,6 @@
 	},
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/chantry)
-"dmD" = (
-/obj/structure/closet,
-/obj/item/clothing/suit/cheongsam_red,
-/obj/item/clothing/suit/cheongsam_blue,
-/obj/item/clothing/under/costume/geisha,
-/obj/item/clothing/under/dress/blacktango,
-/obj/item/clothing/under/dress/redeveninggown,
-/obj/item/clothing/suit/changshan_blue,
-/obj/item/clothing/suit/changshan_red,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/laundromat)
 "dmK" = (
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/sidewalk/poor,
@@ -18499,15 +18493,6 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
-"eQL" = (
-/obj/item/clothing/suit/yakuza,
-/obj/item/clothing/shoes/yakuza,
-/obj/item/clothing/under/costume/yakuza,
-/obj/item/clothing/under/costume/yakuza,
-/obj/item/clothing/under/costume/yakuza,
-/obj/structure/closet/cabinet,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/laundromat)
 "eQU" = (
 /obj/american_flag{
 	pixel_y = 32
@@ -23683,15 +23668,6 @@
 /obj/item/clothing/neck/vampire/prayerbeads,
 /turf/open/floor/plating/saint,
 /area/vtm/church/interior)
-"ggI" = (
-/obj/item/reagent_containers/glass/wateringcan,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/litter,
-/turf/open/floor/plating/rough,
-/area/vtm/anarch/basement)
 "ggL" = (
 /obj/structure/table,
 /obj/machinery/light/cold{
@@ -36222,6 +36198,22 @@
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/interior/tzimisce_manor)
+"juh" = (
+/obj/effect/decal/bordur{
+	dir = 4
+	},
+/obj/structure/fluff/hedge{
+	pixel_y = 6
+	},
+/obj/structure/flora/ausbushes/lavendergrass{
+	pixel_y = 10
+	},
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_x = -16
+	},
+/turf/open/floor/plating/vampgrass,
+/area/vtm)
 "jui" = (
 /obj/structure/roadsign/crosswalk,
 /obj/effect/landmark/npcability,
@@ -40282,22 +40274,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior)
-"kyv" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/obj/structure/fluff/hedge{
-	pixel_y = 6
-	},
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_x = -16
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm)
 "kyB" = (
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/giovanni)
@@ -43313,21 +43289,6 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/fishermanswharf)
-"lmW" = (
-/obj/structure/mirror{
-	pixel_y = 24
-	},
-/obj/item/reagent_containers/glass/rag{
-	pixel_x = 5;
-	pixel_y = 5
-	},
-/obj/item/reagent_containers/glass/rag{
-	pixel_x = 11;
-	pixel_y = 13
-	},
-/obj/structure/table/wood,
-/turf/open/floor/plating/parquetry,
-/area/vtm/cabaret)
 "lmZ" = (
 /obj/structure/vampipe{
 	icon_state = "piping32"
@@ -45487,6 +45448,17 @@
 /obj/structure/glowshroom/single,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior)
+"lPQ" = (
+/obj/structure/closet,
+/obj/item/clothing/suit/cheongsam_red,
+/obj/item/clothing/suit/cheongsam_blue,
+/obj/item/clothing/under/costume/geisha,
+/obj/item/clothing/under/dress/tango,
+/obj/item/clothing/under/dress/redeveninggown,
+/obj/item/clothing/suit/changshan_blue,
+/obj/item/clothing/suit/changshan_red,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/laundromat)
 "lPS" = (
 /obj/vampire_car/rand{
 	access = "triad"
@@ -61975,6 +61947,13 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/financialdistrict/construction)
+"pYk" = (
+/obj/structure/table,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/open/floor/plating/rough,
+/area/vtm/anarch/basement)
 "pYq" = (
 /obj/effect/turf_decal/siding/white,
 /obj/structure/vampdoor/cleaning{
@@ -64042,6 +64021,15 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/graveyard)
+"qAG" = (
+/obj/item/clothing/suit/yakuza,
+/obj/item/clothing/shoes/yakuza,
+/obj/item/clothing/suit/yakuza,
+/obj/item/clothing/suit/yakuza,
+/obj/item/clothing/suit/yakuza,
+/obj/structure/closet/cabinet,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/laundromat)
 "qAH" = (
 /obj/effect/decal/pallet{
 	pixel_x = -3;
@@ -65379,6 +65367,21 @@
 /obj/structure/bookcase/random,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
+"qSa" = (
+/obj/structure/mirror{
+	pixel_y = 24
+	},
+/obj/item/reagent_containers/glass/rag{
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/glass/rag{
+	pixel_x = 11;
+	pixel_y = 13
+	},
+/obj/structure/table/wood,
+/turf/open/floor/plating/parquetry,
+/area/vtm/cabaret)
 "qSb" = (
 /obj/machinery/light/small{
 	dir = 4;
@@ -69591,11 +69594,6 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
-"rTa" = (
-/obj/structure/chair/sofa/right,
-/obj/effect/landmark/start/nagaraja,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm)
 "rTc" = (
 /obj/structure/window/reinforced/indestructable{
 	alpha = 0;
@@ -80302,13 +80300,6 @@
 /obj/item/melee/vampirearms/tire,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
-"uKX" = (
-/obj/structure/table,
-/obj/machinery/light/small{
-	dir = 1
-	},
-/turf/open/floor/plating/rough,
-/area/vtm/anarch/basement)
 "uLt" = (
 /obj/structure/table,
 /turf/open/floor/plating/granite/black,
@@ -93188,6 +93179,15 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
+"ygB" = (
+/obj/item/reagent_containers/glass/wateringcan,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/effect/decal/litter,
+/turf/open/floor/plating/rough,
+/area/vtm/anarch/basement)
 "ygK" = (
 /obj/structure/stairs/north,
 /turf/open/floor/plating/concrete,
@@ -115473,7 +115473,7 @@ vzD
 vzD
 tIB
 klB
-ggI
+ygB
 vzD
 vzD
 oKl
@@ -115991,7 +115991,7 @@ vzD
 hcP
 vzD
 gnU
-uKX
+pYk
 mLp
 nYS
 dhc
@@ -199629,7 +199629,7 @@ rfe
 rfe
 rGm
 qgy
-dmD
+lPQ
 fYa
 rGm
 gSG
@@ -212203,7 +212203,7 @@ rfe
 nCf
 rfe
 vPj
-eQL
+qAG
 lym
 jTk
 jTk
@@ -230910,7 +230910,7 @@ ntq
 ntq
 ntq
 loH
-lmW
+qSa
 aYL
 mds
 waI
@@ -260394,7 +260394,7 @@ vvM
 vvM
 kYl
 bUt
-kyv
+juh
 uHA
 uHA
 aJO
@@ -260908,7 +260908,7 @@ ntq
 ntq
 ntq
 oeJ
-rTa
+apH
 ruY
 pdN
 kno
