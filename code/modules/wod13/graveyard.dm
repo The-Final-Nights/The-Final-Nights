@@ -103,7 +103,8 @@ SUBSYSTEM_DEF(graveyard)
 // Graveyard Zombie Behavior: The "AI's", handles setting the Tasks, based on their contents.
 //
 /datum/component/graveyard_zombie/proc/StartBehaviorLoop()
-	if(loop_started) return
+	if(loop_started)
+	   return
 	loop_started = TRUE
 	spawn()
 		while(ismob(owner) && !QDELETED(owner))
