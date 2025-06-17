@@ -3618,6 +3618,8 @@
 #include "code\modules\wod13\datums\bouncer_roles\bouncer_endron_role.dm"
 #include "code\modules\wod13\datums\bouncer_roles\bouncer_giovanni_role.dm"
 #include "code\modules\wod13\datums\bouncer_roles\bouncer_mob_role.dm"
+#include "code\modules\wod13\datums\curses\__curse.dm"
+#include "code\modules\wod13\datums\curses\daimonion_curses.dm"
 #include "code\modules\wod13\datums\powers\discipline\__discipline.dm"
 #include "code\modules\wod13\datums\powers\discipline\__discipline_power.dm"
 #include "code\modules\wod13\datums\powers\discipline\animalism.dm"
