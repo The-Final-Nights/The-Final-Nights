@@ -47441,10 +47441,6 @@
 /obj/item/clothing/suit/vampire/noddist,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/trujah)
-"lgQ" = (
-/obj/item/grown/sunflower,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/unionsquare)
 "lgW" = (
 /obj/item/reagent_containers/food/drinks/beer/vampire,
 /turf/open/floor/plating/vampcarpet,
@@ -211117,7 +211113,7 @@ qGw
 qtG
 gWy
 gWy
-lgQ
+gWy
 qtG
 tAC
 uBL
@@ -211372,7 +211368,7 @@ qHD
 qHD
 qGw
 gWy
-lgQ
+gWy
 oBA
 beC
 gWy
@@ -213174,7 +213170,7 @@ uBF
 qtG
 gWy
 bCV
-lgQ
+gWy
 gWy
 gWy
 gWy
