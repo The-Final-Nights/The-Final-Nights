@@ -674,6 +674,21 @@ mentor {
   font-size: 310%;
 }
 
+.dominate-soft {
+  font-size: 100%;
+  font-weight: bold;
+  font-style: italic;
+  color: hsl(32, 98%, 41%); // Gentle psychic blue
+}
+
+.dominate-hard {
+  font-size: 200%;
+  font-weight: bold;
+  font-style: normal;
+  text-transform: uppercase;
+  color: hsl(0, 73.6%, 44.5%); // Shares tone with .danger for aggression
+}
+
 .hierophant {
   color: hsl(279.9, 83.6%, 59.4%);
   font-weight: bold;
