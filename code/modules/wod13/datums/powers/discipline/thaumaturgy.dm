@@ -17,6 +17,7 @@
 	if(level >= 3)
 		var/datum/action/bloodshield/bloodshield = new()
 		bloodshield.Grant(owner)
+
 /datum/discipline_power/thaumaturgy
 	name = "Thaumaturgy power name"
 	desc = "Thaumaturgy power description"
