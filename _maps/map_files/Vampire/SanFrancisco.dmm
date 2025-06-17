@@ -8359,7 +8359,6 @@
 /obj/effect/decal/pallet,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/table/wood,
@@ -16667,7 +16666,7 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/chantry/basement)
 "dSn" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial9"
 	},
@@ -26380,18 +26379,9 @@
 /area/vtm)
 "gdE" = (
 /obj/structure/table,
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
-/obj/item/weedpack{
-	desc = "Green and smelly... It's a special one, maybe costs hundreds of dollars...";
-	name = "Unique green package"
-	},
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
+/obj/item/food/grown/cannabis,
 /obj/item/vamp/keys/hack,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
@@ -42271,7 +42261,6 @@
 /obj/effect/decal/pallet,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/barrels{
@@ -44249,7 +44238,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/chair/sofa/old/right{
@@ -50436,13 +50424,13 @@
 /area/vtm/interior/techshop)
 "lTq" = (
 /obj/structure/rack,
-/obj/item/bailer,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
-/obj/item/weedseed,
+/obj/item/reagent_containers/glass/wateringcan,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
+/obj/item/seeds/cannabis,
 /obj/machinery/camera/directional/west,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal_concrete"
@@ -54224,7 +54212,7 @@
 /area/vtm/sewer/tzimisce_sanctum)
 "mNy" = (
 /obj/structure/flora/ausbushes/lavendergrass,
-/obj/item/bailer,
+/obj/item/reagent_containers/glass/wateringcan,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -57124,7 +57112,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/chair/sofa/old/left{
@@ -57987,7 +57974,6 @@
 /obj/item/seeds/cannabis,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/machinery/camera/directional/west,
@@ -63484,7 +63470,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -64468,7 +64453,7 @@
 /area/vtm/ghetto)
 "per" = (
 /obj/structure/table/wood,
-/obj/item/weedpack,
+/obj/item/food/grown/cannabis,
 /obj/machinery/light/small/blacklight{
 	pixel_y = 25
 	},
@@ -66770,7 +66755,6 @@
 /obj/item/food/grown/cannabis,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/turf_decal/weather/dirt{
@@ -69451,7 +69435,7 @@
 /turf/closed/wall/vampwall/old/low,
 /area/vtm/interior/techshop)
 "qlt" = (
-/obj/structure/chair/sofa/right{
+/obj/structure/chair/sofa/old/right{
 	dir = 1
 	},
 /turf/open/floor/plating/sidewalk/poor,
@@ -81160,7 +81144,6 @@
 /obj/item/reagent_containers/glass/wateringcan,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/chair/sofa/old/left{
@@ -81366,10 +81349,6 @@
 /obj/structure/stairs/east,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/bianchiBank)
-"sUN" = (
-/obj/structure/chair/sofa/left,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm)
 "sUY" = (
 /obj/structure/sign/poster/random,
 /turf/closed/wall/vampwall/rich/old,
@@ -87609,11 +87588,10 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/mansion)
 "urz" = (
-/obj/structure/chair/sofa/right,
+/obj/structure/chair/sofa/old/right,
 /obj/effect/landmark/start/nagaraja,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/structure/chair/sofa/old/right{
@@ -92118,7 +92096,6 @@
 /obj/item/food/grown/cannabis,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /turf/open/floor/plating/shit,
@@ -96838,7 +96815,6 @@
 /obj/item/bong,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /turf/open/floor/plating/vampcanalplating,
@@ -98206,7 +98182,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
 "wMw" = (
-/obj/structure/chair/sofa/left{
+/obj/structure/chair/sofa/old/left{
 	dir = 1
 	},
 /turf/open/floor/plating/sidewalk/poor,
@@ -100819,7 +100795,7 @@
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/bianchiBank)
 "xuv" = (
-/obj/structure/weedshit,
+/obj/machinery/hydroponics/constructable,
 /turf/open/floor/plating/industrial{
 	icon_state = "industrial3"
 	},
@@ -272085,7 +272061,7 @@ ntq
 ntq
 ntq
 nMo
-sUN
+vMe
 uoK
 qlt
 kno
