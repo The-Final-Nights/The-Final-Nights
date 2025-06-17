@@ -60,7 +60,6 @@
 			playsound(get_turf(src), pick('sound/weapons/bulletflyby.ogg', 'sound/weapons/bulletflyby2.ogg', 'sound/weapons/bulletflyby3.ogg'), 75, TRUE)
 			P.firer = src
 			P.setAngle(rand(0, 360))//SHING
-			emote("flip")
 			return BULLET_ACT_FORCE_PIERCE
 	if(dna?.species)
 		var/spec_return = dna.species.bullet_act(P, src)
