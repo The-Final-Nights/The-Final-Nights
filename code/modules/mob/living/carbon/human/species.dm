@@ -2079,17 +2079,19 @@ GLOBAL_LIST_EMPTY(selectable_races)
 //FLIGHT SHIT//
 ///////////////
 
-/datum/species/proc/GiveSpeciesFlight(mob/living/carbon/human/H)
+/datum/species/proc/GiveSpeciesFlight(mob/living/carbon/H)
 	if(flying_species) //species that already have flying traits should not work with this proc
 		return
 	flying_species = TRUE
 	if(isnull(fly))
 		fly = new
 		fly.Grant(H)
-	if(H.dna.features["wings"] != wings_icon)
-		mutant_bodyparts["wings"] = wings_icon
-		H.dna.features["wings"] = wings_icon
-		H.update_body()
+	if(!HAS_TRAIT(H, TRAIT_CORAX))
+		var/mob/living/carbon/human/flyinghuman = H
+		if(flyinghuman.dna.features["wings"] != wings_icon)
+			mutant_bodyparts["wings"] = wings_icon
+			flyinghuman.dna.features["wings"] = wings_icon
+			flyinghuman.update_body()
 	var/datum/action/fly_upper/A = locate() in H.actions
 	if(A)
 		return
@@ -2098,7 +2100,8 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 
 
-/datum/species/proc/RemoveSpeciesFlight(mob/living/carbon/human/H)
+
+/datum/species/proc/RemoveSpeciesFlight(mob/living/carbon/H)
 	if(flying_species)
 		flying_species = FALSE
 		fly.Remove(H)
@@ -2108,35 +2111,14 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		var/datum/action/fly_upper/A = locate() in H.actions
 		if(A)
 			qdel(A)
-		if(H.dna && H.dna.species && (H.dna.features["wings"] == wings_icon))
-			H.dna.species.mutant_bodyparts -= "wings"
-			H.dna.features["wings"] = "None"
-			H.update_body()
-
-/datum/species/proc/GiveCoraxFlight(mob/living/carbon/werewolf/corax/target) // making a whole new proc cuz I don't want the raven to sprout a second pair of wings, this can only target Corax as it will not add a new "wings" sprite, just change the active one.
-	if(flying_species) //species that already have flying traits should not work with this proc
-		return
-	flying_species = TRUE
-	if(isnull(fly))
-		fly = new
-		fly.Grant(target)
-	var/datum/action/fly_upper/A = locate() in target.actions
-	if(A)
-		return
-	var/datum/action/fly_upper/DA = new()
-	DA.Grant(target)
+		if(!HAS_TRAIT(H, TRAIT_CORAX))
+			var/mob/living/carbon/human/flyinghuman = H
+			if(flyinghuman.dna && flyinghuman.dna.species && (flyinghuman.dna.features["wings"] == wings_icon))
+				flyinghuman.dna.species.mutant_bodyparts -= "wings"
+				flyinghuman.dna.features["wings"] = "None"
+				flyinghuman.update_body()
 
 
-/datum/species/proc/RemoveCoraxFlight(mob/living/carbon/werewolf/corax/target) // shouldn't ever have to be called, but, you know
-	if(flying_species)
-		flying_species = FALSE
-		fly.Remove(target)
-		QDEL_NULL(fly)
-		if(target.movement_type & FLYING)
-			ToggleFlight(target)
-		var/datum/action/fly_upper/A = locate() in target.actions
-		if(A)
-			qdel(A)
 
 /datum/species
 	var/animation_goes_up = FALSE	//
@@ -2144,9 +2126,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 /datum/species/proc/HandleFlight(mob/living/carbon/H)
 	if(H.movement_type & FLYING)
 		if(!CanFly(H))
-			ToggleFlight(H)
-			return FALSE
-		if(!CoraxCanFly(H))
 			ToggleFlight(H)
 			return FALSE
 		if(animation_goes_up)
@@ -2171,26 +2150,20 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	else
 		return FALSE
 
-/datum/species/proc/CanFly(mob/living/carbon/human/H)
+/datum/species/proc/CanFly(mob/living/carbon/H)
 	if(H.stat || H.body_position == LYING_DOWN)
 		return FALSE
-	if(H.wear_suit && ((H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))))	//Jumpsuits have tail holes, so it makes sense they have wing holes too
-		to_chat(H, "<span class='warning'>Your suit blocks your wings from extending!</span>")
-		return FALSE
+	if (!iscorvid(H)) // this proc was originally defined for humans only, if we're not a corvid-form corax, then we assume we're human.
+		var/mob/living/carbon/human/flyinghuman = H
+		if(flyinghuman.wear_suit && ((flyinghuman.wear_suit.flags_inv & HIDEJUMPSUIT) && (!flyinghuman.wear_suit.species_exception || !is_type_in_list(src, flyinghuman.wear_suit.species_exception))))	//Jumpsuits have tail holes, so it makes sense they have wing holes too
+			to_chat(H, "<span class='warning'>Your suit blocks your wings from extending!</span>")
+			return FALSE
 	var/turf/T = get_turf(H)
 	if(!T)
 		return FALSE
 
 	return TRUE
 
-/datum/species/proc/CoraxCanFly(mob/living/carbon/H) // another version for corax, who are carbon and thus do not have suit slots
-	if(H.stat || H.body_position == LYING_DOWN)
-		return FALSE
-	var/turf/T = get_turf(H)
-	if(!T)
-		return FALSE
-
-	return TRUE
 
 /datum/species/proc/flyslip(mob/living/carbon/H)
 	var/obj/buckled_obj
@@ -2272,15 +2245,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 /datum/action/innate/flight/Activate()
 	var/mob/living/carbon/H = owner
 	var/datum/species/S = H.dna.species
-	var/able_to_fly = FALSE // we do use the CanFly check, but this var is used in order to avoid copy pasting code or check CanFly with a Corvid mob.
-	if(!iscorvid(H))
-		if(S.CanFly(H))
-			able_to_fly = TRUE
-	else
-		if(S.CoraxCanFly(H)) // We use a specific Corax version to avoid runtimes.
-			able_to_fly = TRUE
-
-	if(able_to_fly == TRUE)
+	if(S.CanFly(H))
 		S.ToggleFlight(H)
 		if(!(H.movement_type & FLYING))
 			to_chat(H, "<span class='notice'>You settle gently back onto the ground...</span>")

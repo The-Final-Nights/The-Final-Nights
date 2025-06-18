@@ -29,7 +29,7 @@
 	corvid?.auspice = src
 	corvid?.dna = C.dna
 	ADD_TRAIT(corvid, TRAIT_CORAX, tribe)
-	corvid.dna.species.GiveCoraxFlight(corvid)
+	corvid.dna.species.GiveSpeciesFlight(corvid)
 	rage = start_rage
 	if(length(gifts)) // This grants the auspice gifts, I believe
 		for(var/i in gifts)
