@@ -173,4 +173,5 @@
 		new /datum/data/mining_equipment("backpack",	/obj/item/storage/backpack,		100),
 		new /datum/data/mining_equipment("satchel",		/obj/item/storage/backpack/satchel,		100),
 		new /datum/data/mining_equipment("leather satchel",		/obj/item/storage/backpack/satchel/leather,		150),
+		new /datum/data/mining_equipment("briefcase",		/obj/item/storage/briefcase,		100),
 	)
