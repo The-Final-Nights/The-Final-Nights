@@ -131,14 +131,15 @@
 	var/obj/item/melee/vampirearms/I = owner.get_active_held_item()
 	if(!I.quieted)
 		I.quieted = TRUE
-		I.damtype = CLONE
+		I.damtype = BURN
 		I.color = "#72b27c"
 		I.owner = WEAKREF(src.owner)
 		return
 	if(I.quieted)
-		I.quieted = FALSE
+		I.quieted = BURN
 		I.damtype = initial(I.damtype)
 		I.color = initial(I.color)
+		I.armour_penetration -= 30
 		return
 
 //TASTE OF DEATH
