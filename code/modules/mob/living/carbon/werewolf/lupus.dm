@@ -54,10 +54,7 @@
 		icon_state = wyrm_tainted ? "spiral[sprite_color]_rest" : "[sprite_color]_rest"
 		laid_down = TRUE
 	else
-		if(wyrm_tainted)
-			icon_state = "spiral[sprite_color]"
-		else
-			icon_state = "[sprite_color]"
+		icon_state = wyrm_tainted ? "spiral[sprite_color]" : "[sprite_color]"
 
 	switch(getFireLoss()+getBruteLoss())
 		if(25 to 75)
