@@ -245,7 +245,7 @@
 	return
 
 /mob/living/carbon/get_blood_data(blood_id)
-	if(blood_id == /datum/reagent/blood) //actual blood reagent
+	if(blood_id == /datum/reagent/blood || blood_id == /datum/reagent/blood/vitae) //actual blood reagent
 		var/blood_data = list()
 		//set the blood data
 		blood_data["donor"] = src
