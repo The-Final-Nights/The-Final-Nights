@@ -51,10 +51,7 @@
 	var/laid_down = FALSE
 
 	if(stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN)
-		if(wyrm_tainted)
-			icon_state = "spiral[sprite_color]_rest"
-		else
-			icon_state = "[sprite_color]_rest"
+		icon_state = wyrm_tainted ? "spiral[sprite_color]_rest" : "[sprite_color]_rest"
 		laid_down = TRUE
 	else
 		if(wyrm_tainted)
