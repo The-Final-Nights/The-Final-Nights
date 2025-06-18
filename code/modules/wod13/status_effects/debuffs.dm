@@ -1046,21 +1046,22 @@
 
 
 /datum/status_effect/babyteeth
-	id = "fangs pulled"
-	status_type = STATUS_EFFECT_REPLACE
-	duration = 3600 SECONDS
+	id = "fangs_pulled"
+	status_type = STATUS_EFFECT_UNIQUE
+	duration = 60 MINUTES
+	alert_type = /atom/movable/screen/alert/status_effect/babyteeth
 
-/datum/status_effect/babyteeth/on_creation(mob/living/new_owner, set_duration)
-	if(isnum(set_duration))
-		duration = set_duration
-	. = ..()
+/atom/movable/screen/alert/status_effect/babyteeth
+	name = "Baby Teeth"
+	desc = "You fucked up bad to get your teeth pulled"
 
 /datum/status_effect/babyteeth/on_apply()
-	ADD_TRAIT(owner, TRAIT_BABY_TEETH, "fangs pulled")
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_BABY_TEETH, MAGIC_TRAIT)
 
 /datum/status_effect/babyteeth/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_BABY_TEETH, "fangs pulled")
+	REMOVE_TRAIT(owner, TRAIT_BABY_TEETH, MAGIC_TRAIT)
 
 
 //WARRIOR VALEREN 3 - BURNING TOUCH

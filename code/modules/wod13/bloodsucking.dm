@@ -17,7 +17,7 @@
 
 /mob/living/carbon/human/proc/drinksomeblood(mob/living/mob)
 	if(HAS_TRAIT(src, TRAIT_BABY_TEETH))
-		to_chat(usr, span_warning("You're fangs won't manage to pierce the skin let alone suck in their state."))
+		to_chat(usr, span_warning("Your fangs won't manage to pierce the skin let alone suck in their state."))
 		return FALSE
 	var/bloodgain = max(1, mob.bloodquality-1)
 	var/fumbled = FALSE
