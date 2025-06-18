@@ -36626,6 +36626,10 @@
 	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/clinic/haven)
+"iGG" = (
+/obj/structure/chair/green,
+/turf/open/floor/plating/asphalt,
+/area/vtm/financialdistrict)
 "iGI" = (
 /obj/item/arcane_tome{
 	desc = "The great Electrodyne Engineer Nikola Tesla. He struck out against the Ivory Tower with his genius, but was destroyed by the powers that be.";
@@ -46122,6 +46126,10 @@
 /obj/item/reagent_containers/food/drinks/beer/vampire/blue_stripe,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
+"kVZ" = (
+/obj/structure/chair/office/red,
+/turf/open/floor/plating/asphalt,
+/area/vtm/financialdistrict)
 "kWa" = (
 /obj/structure/chair/sofa/corp/right{
 	dir = 8
@@ -49505,6 +49513,10 @@
 /obj/structure/curtain/bounty,
 /turf/open/floor/plating/granite,
 /area/vtm/cabaret/basement)
+"lLA" = (
+/obj/structure/chair,
+/turf/open/floor/plating/asphalt,
+/area/vtm/financialdistrict)
 "lLE" = (
 /obj/structure/fence/corner{
 	dir = 8
@@ -50556,6 +50568,10 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
+"lYy" = (
+/obj/structure/chair/office,
+/turf/open/floor/plating/asphalt,
+/area/vtm/financialdistrict)
 "lYC" = (
 /obj/structure/trashbag,
 /turf/open/floor/plating/vampdirt,
@@ -52712,6 +52728,10 @@
 	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/endron_facility)
+"mzm" = (
+/obj/structure/chair/office/blue,
+/turf/open/floor/plating/asphalt,
+/area/vtm/financialdistrict)
 "mzn" = (
 /obj/structure/railing{
 	layer = 4;
@@ -86169,6 +86189,10 @@
 	fire_controled = 1;
 	color = "#636363"
 	})
+"ukI" = (
+/obj/structure/chair/red,
+/turf/open/floor/plating/asphalt,
+/area/vtm/financialdistrict)
 "ukJ" = (
 /obj/structure/roadsign/speedlimit25,
 /turf/open/floor/plating/sidewalk/poor,
@@ -199191,8 +199215,8 @@ noM
 wYw
 lld
 fhm
-wbX
-wbX
+mzm
+lLA
 dmU
 wbX
 wbX
@@ -199448,8 +199472,8 @@ noM
 wYw
 wQw
 wIE
-wbX
-wbX
+lYy
+iGG
 dmU
 wbX
 wbX
@@ -199705,8 +199729,8 @@ noM
 wYw
 lld
 fhm
-wbX
-wbX
+kVZ
+ukI
 dmU
 wbX
 wbX
