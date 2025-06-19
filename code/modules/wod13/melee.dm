@@ -693,7 +693,7 @@
 		return
 	if(!target.IsParalyzed() && iskindred(target))
 		if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
-			visible_message("<span class='warning'>[user] crush the fangs of [target] because they are already deformed!</span>")
+			visible_message("<span class='warning'>[user] can't crush the fangs of [target] because they are already deformed!</span>")
 		else
 			visible_message("<span class='warning'>[user] takes [src] straight to the [target]'s Fangs!</span>", "<span class='warning'>You take [src] straight to the [target]'s Fangs!</span>")
 			if(do_after(user, 20, target))
