@@ -647,6 +647,7 @@
 	desc = "You can pull some teeth out with these."
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "neat_ripper"
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 	force = 5
@@ -679,6 +680,7 @@
 	icon_state = "ripper"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	force = 5
 	throwforce = 5
 	attack_verb_continuous = list("beats", "hits")
