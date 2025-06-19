@@ -283,6 +283,27 @@
 	contains = list(/obj/item/ammo_box/vampire/c9mm = 2)
 	crate_name = "ammo crate"
 
+/datum/supply_pack/vampire/ammo762x51
+	name = "Ammo (7.62x51mm)"
+	desc = "Contains a box of 7.62x51mm ammunition."
+	cost = 2000
+	contains = list(/obj/item/ammo_box/vampire/c762x51mm)
+	crate_name = "ammo crate"
+
+/datum/supply_pack/vampire/ammo762x51
+	name = "Ammo (7.62x51mm, Silver)"
+	desc = "Contains a box of silver 7.62x51mm ammunition."
+	cost = 4500
+	contains = list(/obj/item/ammo_box/vampire/c762x51mm/silver)
+	crate_name = "ammo crate"
+
+/datum/supply_pack/vampire/ammo762x51
+	name = "Ammo (7.62x51mm, incendiary)"
+	desc = "Contains a box of incendiary 7.62x51mm ammunition."
+	cost = 5000
+	contains = list(/obj/item/ammo_box/vampire/c762x51mm/incendiary)
+	crate_name = "ammo crate"
+
 /datum/supply_pack/vampire/ammo12g
 	name = "Ammo (12g, slug)"
 	desc = "Contains a box of 12 gauge shotgun slugs."
