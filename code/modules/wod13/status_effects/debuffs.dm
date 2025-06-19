@@ -1052,8 +1052,8 @@
 	alert_type = /atom/movable/screen/alert/status_effect/babyteeth
 
 /atom/movable/screen/alert/status_effect/babyteeth
-	name = "baby Teeth"
-	desc = "You fucked up bad to get your teeth pulled"
+	name = "Baby Teeth"
+	desc = "Your teeth are deformed! You can't bite people anymore!"
 
 /datum/status_effect/babyteeth/on_apply()
 	. = ..()
