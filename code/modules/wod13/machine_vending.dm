@@ -281,6 +281,7 @@
 		new /datum/data/mining_equipment("12ga buckshot", /obj/item/ammo_box/vampire/c12g/buck, 15),
 		new /datum/data/mining_equipment("mp5 magazine", /obj/item/ammo_box/magazine/vamp9mp5, 20),
 		new /datum/data/mining_equipment("4.6mm ammo box", /obj/item/ammo_box/vampire/c46mm, 40),
+		new /datum/data/mining_equipment("mp7 magazine", /obj/item/ammo_box/magazine/vamp46mp7, 20),
 		new /datum/data/mining_equipment("PSG1 magazine", /obj/item/ammo_box/magazine/vamp762x51PSG1, 35),
 		new /datum/data/mining_equipment("guerrilla gloves", /obj/item/clothing/gloves/tackler/combat/insulated, 20),
 		new /datum/data/mining_equipment("binoculars", /obj/item/binoculars, 25),

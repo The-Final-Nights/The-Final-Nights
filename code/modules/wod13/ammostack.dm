@@ -243,7 +243,7 @@
 /obj/item/ammo_casing/vampire/c556mm/incendiary
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp556mm/incendiary
 
-obj/item/ammo_casing/vampire/c762x51mm/incendiary
+/obj/item/ammo_casing/vampire/c762x51mm/incendiary
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp762x51mm/incendiary
 
 /obj/item/ammo_casing/vampire/c12g
