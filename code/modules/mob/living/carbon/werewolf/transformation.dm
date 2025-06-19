@@ -47,13 +47,15 @@
 
 	return ..()
 
-/datum/werewolf_holder/transformation/proc/transfer_damage(mob/living/carbon/first, mob/living/carbon/second)
+/datum/werewolf_holder/transformation/proc/transfer_damage_and_traits(mob/living/carbon/first, mob/living/carbon/second)
 	second.masquerade = first.masquerade
 	var/percentage = (100/first.maxHealth)*second.maxHealth
 	second.adjustBruteLoss(round((first.getBruteLoss()/100)*percentage)-second.getBruteLoss())
 	second.adjustFireLoss(round((first.getFireLoss()/100)*percentage)-second.getFireLoss())
 	second.adjustToxLoss(round((first.getToxLoss()/100)*percentage)-second.getToxLoss())
 	second.adjustCloneLoss(round((first.getCloneLoss()/100)*percentage)-second.getCloneLoss())
+	if(HAS_TRAIT(first, TRAIT_WARRIOR) && !HAS_TRAIT(second, TRAIT_WARRIOR))
+		ADD_TRAIT(second, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 /datum/werewolf_holder/transformation/proc/transform(mob/living/carbon/trans, form) //does not actually change your gender, as far as I'm aware.
 	if(trans.stat == DEAD)
@@ -273,7 +275,7 @@
 		lupus.wyrm_tainted = 1
 	lupus.mind = trans.mind
 	lupus.update_blood_hud()
-	transfer_damage(trans, lupus)
+	transfer_damage_and_traits(trans, lupus)
 	lupus.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
@@ -309,7 +311,7 @@
 	crinos.mind = trans.mind
 	crinos.update_blood_hud()
 	crinos.physique = crinos.physique+3
-	transfer_damage(trans, crinos)
+	transfer_damage_and_traits(trans, crinos)
 	crinos.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
@@ -343,7 +345,7 @@
 	cor_crinos.mind = trans.mind
 	cor_crinos.update_blood_hud()
 	cor_crinos.physique = cor_crinos.physique+3
-	transfer_damage(trans, cor_crinos)
+	transfer_damage_and_traits(trans, cor_crinos)
 	cor_crinos.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)
@@ -373,7 +375,7 @@
 	homid.nutrition = trans.nutrition
 	homid.mind = trans.mind
 	homid.update_blood_hud()
-	transfer_damage(trans, homid)
+	transfer_damage_and_traits(trans, homid)
 	homid.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	homid.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 	transformating = FALSE
@@ -406,7 +408,7 @@
 		corvid.wyrm_tainted = 1
 	corvid.mind = trans.mind
 	corvid.update_blood_hud()
-	transfer_damage(trans, corvid)
+	transfer_damage_and_traits(trans, corvid)
 	corvid.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 	transformating = FALSE
 	animate(trans, transform = null, color = "#FFFFFF", time = 1)

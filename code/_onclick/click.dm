@@ -189,8 +189,8 @@
 			if(ismob(A))
 				if(isliving(src))
 					var/mob/living/L = src
-					if(L.melee_professional)
-						changeNext_move(CLICK_CD_RANGE)
+					if(HAS_TRAIT(L, TRAIT_WARRIOR))
+						changeNext_move(CLICK_CD_MELEE * 0.5)
 					else
 						changeNext_move(CLICK_CD_MELEE)
 				else
@@ -261,10 +261,17 @@
 			if(allowed_to_proceed)
 				switch(wolf.a_intent)
 					if(INTENT_HARM)
-						changeNext_move(CLICK_CD_MELEE)
+						if(HAS_TRAIT(src, TRAIT_WARRIOR))
+							changeNext_move(CLICK_CD_MELEE * 0.5)
+						else
+							changeNext_move(CLICK_CD_MELEE)
 						var/atom/B = claw_swing()
 						UnarmedAttack(B)
 					if(INTENT_HELP)
+						if(HAS_TRAIT(src, TRAIT_WARRIOR))
+							changeNext_move(CLICK_CD_MELEE * 0.5)
+						else
+							changeNext_move(CLICK_CD_MELEE)
 						UnarmedAttack(A)
 					if(INTENT_GRAB)
 						changeNext_move(CLICK_CD_GRABBING)
@@ -276,7 +283,10 @@
 							else
 								UnarmedAttack(A)
 					if(INTENT_DISARM)
-						changeNext_move(CLICK_CD_MELEE)
+						if(HAS_TRAIT(src, TRAIT_WARRIOR))
+							changeNext_move(CLICK_CD_MELEE * 0.5)
+						else
+							changeNext_move(CLICK_CD_MELEE)
 						if(A != src)
 							if(iscarbon(A))
 								var/mob/living/carbon/living = A
@@ -319,12 +329,12 @@
 				if(ismob(A))
 					if(isliving(src))
 						var/mob/living/L = src
-						if(L.melee_professional)
-							changeNext_move(CLICK_CD_RANGE)
+						if(HAS_TRAIT(L, TRAIT_WARRIOR))
+							changeNext_move(CLICK_CD_MELEE * 0.5)
 						else
 							changeNext_move(CLICK_CD_MELEE)
-					else
-						changeNext_move(CLICK_CD_MELEE)
+				else
+					changeNext_move(CLICK_CD_MELEE)
 				UnarmedAttack(A,1)
 		else
 			if(W)
@@ -441,7 +451,11 @@
  */
 /mob/proc/UnarmedAttack(atom/A, proximity_flag)
 	if(ismob(A))
-		changeNext_move(CLICK_CD_MELEE)
+		var/mob/simple = src
+		if(HAS_TRAIT(simple, TRAIT_WARRIOR))
+			changeNext_move(CLICK_CD_MELEE * 0.5)
+		else
+			changeNext_move(CLICK_CD_MELEE)
 	return
 
 /**

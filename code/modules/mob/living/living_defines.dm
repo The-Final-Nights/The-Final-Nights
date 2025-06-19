@@ -191,7 +191,6 @@
 	var/additional_lockpicking = 0
 	var/additional_athletics = 0
 	var/more_companions = 0
-	var/melee_professional = FALSE
 
 	var/info_known = INFO_KNOWN_UNKNOWN
 
