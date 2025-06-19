@@ -27,6 +27,8 @@
 #define TRAIT_NEARSIGHT			"nearsighted"
 #define TRAIT_FAT				"fat"
 #define TRAIT_HUSK				"husk"
+///Blacklisted from being revived via defibrillator
+#define TRAIT_DEFIB_BLACKLISTED "defib_blacklisted"
 #define TRAIT_BADDNA			"baddna"
 #define TRAIT_CLUMSY			"clumsy"
 #define TRAIT_CHUNKYFINGERS		"chunkyfingers" //means that you can't use weapons with normal trigger guards.
@@ -50,6 +52,8 @@
 #define TRAIT_SHOCKIMMUNE		"shock_immunity"
 #define TRAIT_TESLA_SHOCKIMMUNE	"tesla_shock_immunity"
 #define TRAIT_STABLEHEART		"stable_heart"
+/// Prevents you from leaving your corpse
+#define TRAIT_CORPSELOCKED "corpselocked"
 #define TRAIT_STABLELIVER		"stable_liver"
 #define TRAIT_RESISTHEAT		"resist_heat"
 #define TRAIT_RESISTHEATHANDS	"resist_heat_handsonly" //For when you want to be able to touch hot things, but still want fire to be an issue.
@@ -143,8 +147,16 @@
 #define TRAIT_CANT_RIDE			"cant_ride"
 #define TRAIT_BLOODY_MESS		"bloody_mess" //from heparin, makes open bleeding wounds rapidly spill more blood
 #define TRAIT_COAGULATING		"coagulating" //from coagulant reagents, this doesn't affect the bleeding itself but does affect the bleed warning messages
+/// From anti-convulsant medication against seizures.
+#define TRAIT_ANTICONVULSANT "anticonvulsant"
 /// The holder of this trait has antennae or whatever that hurt a ton when noogied
 #define TRAIT_ANTENNAE	"antennae"
+
+/// Their eyes glow an unnatural red colour. Currently used to set special examine text on humans. Does not guarantee the mob's eyes are coloured red, nor that there is any visible glow on their character sprite.
+#define TRAIT_UNNATURAL_RED_GLOWY_EYES "unnatural_red_glowy_eyes"
+/// Their eyes are bloodshot. Currently used to set special examine text on humans. Examine text is overridden by TRAIT_UNNATURAL_RED_GLOWY_EYES.
+#define TRAIT_BLOODSHOT_EYES "bloodshot_eyes"
+
 
 /// Trait that tracks if something has been renamed. Typically holds a REF() to the object itself (AKA src) for wide addition/removal.
 #define TRAIT_WAS_RENAMED "was_renamed"
@@ -153,6 +165,13 @@
 #define TRAIT_TRANSFORM_ACTIVE "active_transform"
 
 #define TRAIT_NOBLEED "nobleed" //This carbon doesn't bleed
+///When people are floating from zero-grav or something, we can move around freely!
+
+/// This mobs bodyparts are invisible but still clickable.
+#define TRAIT_INVISIBLE_MAN "invisible_man"
+/// Don't draw external organs/species features like wings, horns, frills and stuff
+#define TRAIT_HIDE_EXTERNAL_ORGANS "hide_external_organs"
+#define TRAIT_FREE_FLOAT_MOVEMENT "free_float_movement"
 
 ///generic atom traits
 /// Trait from being under the floor in some manner
@@ -335,3 +354,20 @@
 #define TRAIT_HARDENED_SOLES "trait_hardened_soles"
 //For handcuff breaking speed.
 #define TRAIT_CUFFBREAKER		"cuffbreaker"
+
+// Radiation defines
+
+/// Marks that this object is irradiated
+#define TRAIT_IRRADIATED "iraddiated"
+
+/// Harmful radiation effects, the toxin damage and the burns, will not occur while this trait is active
+#define TRAIT_HALT_RADIATION_EFFECTS "halt_radiation_effects"
+
+/// This clothing protects the user from radiation.
+/// This should not be used on clothing_traits, but should be applied to the clothing itself.
+#define TRAIT_RADIATION_PROTECTED_CLOTHING "radiation_protected_clothing"
+
+/// Whether or not this item will allow the radiation SS to go through standard
+/// radiation processing as if this wasn't already irradiated.
+/// Basically, without this, COMSIG_IN_RANGE_OF_IRRADIATION won't fire once the object is irradiated.
+#define TRAIT_BYPASS_EARLY_IRRADIATED_CHECK "radiation_bypass_early_irradiated_check"

@@ -9,9 +9,16 @@
 	var/list/chems_needed = list()  //list of chems needed to complete the step. Even on success, the step will have no effect if there aren't the chems required in the mob.
 	var/require_all_chems = TRUE    //any on the list or all on the list?
 	var/silicons_obey_prob = FALSE
+	var/preop_sound //Sound played when the step is started
+	var/success_sound //Sound played if the step succeeded
+	var/failure_sound //Sound played if the step fails
 
 /datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	var/success = FALSE
+	if(surgery.organ_to_manipulate && !target.getorganslot(surgery.organ_to_manipulate))
+		to_chat(user, span_warning("[target] seems to be missing the organ necessary to complete this surgery!"))
+		return FALSE
+
 	if(accept_hand)
 		if(!tool)
 			success = TRUE
@@ -71,6 +78,8 @@
 		surgery.step_in_progress = FALSE
 		return FALSE
 
+	play_preop_sound(user, target, target_zone, tool, surgery) // Here because most steps overwrite preop
+
 	if(tool)
 		speed_mod = tool.toolspeed
 
@@ -78,7 +87,7 @@
 	if(implement_type)	//this means it isn't a require hand or any item step.
 		implement_speed_mod = implements[implement_type] / 100.0
 
-	speed_mod /= (get_location_modifier(target) * (1 + surgery.speed_modifier) * implement_speed_mod)
+	speed_mod /= (get_location_modifier(target) * (1 + surgery.speed_modifier) * implement_speed_mod) * target.mob_surgery_speed_mod
 	var/modded_time = time * speed_mod
 
 
@@ -96,9 +105,11 @@
 		if((prob(100-fail_prob) || (iscyborg(user) && !silicons_obey_prob)) && chem_check_result && !try_to_fail)
 
 			if(success(user, target, target_zone, tool, surgery))
+				play_success_sound(user, target, target_zone, tool, surgery)
 				advance = TRUE
 		else
 			if(failure(user, target, target_zone, tool, surgery, fail_prob))
+				play_failure_sound(user, target, target_zone, tool, surgery)
 				advance = TRUE
 			if(chem_check_result)
 				return .(user, target, target_zone, tool, surgery, try_to_fail) //automatically re-attempt if failed for reason other than lack of required chemical
@@ -118,12 +129,22 @@
 		"<span class='notice'>[user] begins to perform surgery on [target].</span>",
 		"<span class='notice'>[user] begins to perform surgery on [target].</span>")
 
+/datum/surgery_step/proc/play_preop_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	if(!preop_sound)
+		return
+	playsound(get_turf(target), preop_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
+
 /datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = TRUE)
 	if(default_display_results)
 		display_results(user, target, "<span class='notice'>You succeed.</span>",
 				"<span class='notice'>[user] succeeds!</span>",
 				"<span class='notice'>[user] finishes.</span>")
 	return TRUE
+
+/datum/surgery_step/proc/play_success_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	if(!success_sound)
+		return
+	playsound(get_turf(target), success_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
 
 /datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, fail_prob = 0)
 	var/screwedmessage = ""
@@ -140,6 +161,11 @@
 		"<span class='notice'>[user] finishes.</span>", TRUE) //By default the patient will notice if the wrong thing has been cut
 	return FALSE
 
+/datum/surgery_step/proc/play_failure_sound(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	if(!failure_sound)
+		return
+	playsound(get_turf(target), failure_sound, 75, TRUE, falloff_exponent = 12, falloff_distance = 1)
+
 /datum/surgery_step/proc/tool_check(mob/user, obj/item/tool)
 	return TRUE
 
@@ -149,21 +175,21 @@
 
 	if(require_all_chems)
 		. = TRUE
-		for(var/R in chems_needed)
-			if(!target.reagents.has_reagent(R))
+		for(var/reagent in chems_needed)
+			if(!target.reagents.has_reagent(reagent))
 				return FALSE
 	else
 		. = FALSE
-		for(var/R in chems_needed)
-			if(target.reagents.has_reagent(R))
+		for(var/reagent in chems_needed)
+			if(target.reagents.has_reagent(reagent))
 				return TRUE
 
 /datum/surgery_step/proc/get_chem_list()
 	if(!LAZYLEN(chems_needed))
 		return
 	var/list/chems = list()
-	for(var/R in chems_needed)
-		var/datum/reagent/temp = GLOB.chemical_reagents_list[R]
+	for(var/reagent in chems_needed)
+		var/datum/reagent/temp = GLOB.chemical_reagents_list[reagent]
 		if(temp)
 			var/chemname = temp.name
 			chems += chemname
@@ -175,3 +201,29 @@
 	if(!target_detailed)
 		var/you_feel = pick("a brief pain", "your body tense up", "an unnerving sensation")
 		target.show_message(vague_message, MSG_VISUAL, "<span class='notice'>You feel [you_feel] as you are operated on.</span>")
+
+/**
+ * Sends a pain message to the target, including a chance of screaming.
+ *
+ * Arguments:
+ * * target - Who the message will be sent to
+ * * pain_message - The message to be displayed
+ * * mechanical_surgery - Boolean flag that represents if a surgery step is done on a mechanical limb (therefore does not force scream)
+ */
+/datum/surgery_step/proc/display_pain(mob/living/target, pain_message, mechanical_surgery = FALSE)
+	// Determine how drunk our patient is
+	var/drunken_patient = target.get_drunk_amount()
+	// Create a probability to ignore the pain based on drunkenness level
+	var/drunken_ignorance_probability = clamp(drunken_patient, 0, 90)
+
+	if(target.stat < UNCONSCIOUS)
+		if(drunken_patient && prob(drunken_ignorance_probability))
+			if(!pain_message)
+				return
+			to_chat(target, span_notice("You feel a dull, numb sensation as your body is surgically operated on."))
+		else
+			if(!pain_message)
+				return
+			to_chat(target, span_userdanger(pain_message))
+			if(prob(30) && !mechanical_surgery)
+				target.emote("scream")

@@ -32,7 +32,7 @@
 		H.AddElement(/datum/element/giantism, COMSIG_PARENT_PREQDELETED, src)
 		H.istower = TRUE
 	var/obj/item/organ/eyes/night_vision/kiasyd/NV = new()
-	NV.Insert(H, TRUE, FALSE)
+	NV.Insert(H, TRUE, FALSE, TRUE)
 	if(H.base_body_mod == "f")
 		H.base_body_mod = ""
 	H.update_body()

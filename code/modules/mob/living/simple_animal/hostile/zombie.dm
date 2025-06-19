@@ -14,7 +14,8 @@
 	melee_damage_upper = 21
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
-	attack_sound = 'code/modules/wod13/sounds/zombuzi.ogg'
+	attack_sound = 'sound/hallucinations/growl1.ogg'
+	attack_vis_effect = ATTACK_EFFECT_BITE
 	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0

@@ -226,6 +226,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 
 					if(ReadHSV(temp_hsv)[3] >= ReadHSV("#7F7F7F")[3]) // mutantcolors must be bright
 						H.dna.features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
+						H.dna.update_uf_block(DNA_MUTANT_COLOR_BLOCK)
 
 					else
 						to_chat(H, "<span class='notice'>Invalid color. Your color is not bright enough.</span>")
@@ -287,7 +288,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 				return
 			if(new_eye_color)
 				H.eye_color = sanitize_hexcolor(new_eye_color)
-				H.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+				H.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
 				H.update_body()
 	if(choice)
 		curse(user)

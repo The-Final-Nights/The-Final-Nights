@@ -35,6 +35,7 @@
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
 	attack_sound = 'sound/magic/demon_attack1.ogg'
+	attack_vis_effect = ATTACK_EFFECT_BITE
 	deathsound = 'sound/magic/demon_dies.ogg'
 	icon = 'icons/mob/spacedragon.dmi'
 	icon_state = "spacedragon"
@@ -97,9 +98,9 @@
 		color_selection()
 
 
-/mob/living/simple_animal/hostile/space_dragon/Life(mapload)
+/mob/living/simple_animal/hostile/space_dragon/Life(delta_time = SSMOBS_DT, times_fired)
 	. = ..()
-	tiredness = max(tiredness - 1, 0)
+	tiredness = max(tiredness - (0.5 * delta_time), 0)
 	for(var/mob/living/consumed_mob in src)
 		if(consumed_mob.stat == DEAD)
 			continue

@@ -170,21 +170,6 @@
 		if(WP.owner != user.real_name)
 			itsmypinpointer = FALSE
 
-			if(synth_acc.has_money(refund_amt) && !WP.roundstart) //can it afford to refund and is the pinpointer not from the quirk
-				refundiscredits = TRUE
-				qdel(WP)
-				synth_acc._adjust_money(-refund_amt)
-				var/obj/item/holochip/holochip = new (loc)
-				holochip.credits = refund_amt
-				holochip.name = "[holochip.credits] credit holochip"
-				if(ishuman(user))
-					var/mob/living/carbon/human/customer = user
-					customer.put_in_hands(holochip)
-
-		if(!refundiscredits)
-			qdel(WP)
-			var/costume = pick(subtypesof(/obj/effect/spawner/bundle/costume))
-			new costume(user.loc)
 
 		set_expression("veryhappy", 2 SECONDS)
 
@@ -248,7 +233,7 @@
 	icon_state = "pinpointer_way"
 	var/owner = null
 	var/list/beacons = list()
-	var/roundstart = FALSE
+	var/from_quirk = FALSE
 
 /obj/item/pinpointer/wayfinding/attack_self(mob/living/user)
 	if(active)

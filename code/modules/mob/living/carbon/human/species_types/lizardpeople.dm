@@ -6,8 +6,10 @@
 	default_color = "#00FF00"
 	species_traits = list(MUTCOLORS,EYECOLOR,LIPS,HAS_FLESH,HAS_BONE)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_REPTILE
-	mutant_bodyparts = list("tail_lizard" = "Smooth", "snout" = "Round", "horns" = "None",
-						"frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs")
+	mutant_bodyparts = list("tail_lizard" = "Smooth", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs")
+	external_organs = list(/obj/item/organ/external/horns = "None",
+		/obj/item/organ/external/frills = "None",
+		/obj/item/organ/external/snout = "Round")
 	mutanttongue = /obj/item/organ/tongue/lizard
 	mutant_organs = list(/obj/item/organ/tail/lizard)
 	coldmod = 1.5
@@ -15,6 +17,7 @@
 	payday_modifier = 0.75
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	attack_verb = "slash"
+	attack_effect = ATTACK_EFFECT_CLAW
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	meat = /obj/item/food/meat/slab/human/mutant/lizard
@@ -24,7 +27,6 @@
 	liked_food = GROSS | MEAT
 	inert_mutation = FIREBREATH
 	deathsound = 'sound/voice/lizard/deathsound.ogg'
-	wings_icon = "Dragon"
 	species_language_holder = /datum/language_holder/lizard
 	// Lizards are coldblooded and can stand a greater temperature range than humans
 	bodytemp_heat_damage_limit = (BODYTEMP_HEAT_DAMAGE_LIMIT + 20) // This puts lizards 10 above lavaland max heat for ash lizards.
@@ -33,7 +35,7 @@
 	ass_image = 'icons/ass/asslizard.png'
 
 /// Lizards are cold blooded and do not stabilize body temperature naturally
-/datum/species/lizard/body_temperature_core(mob/living/carbon/human/humi)
+/datum/species/lizard/body_temperature_core(mob/living/carbon/human/humi, delta_time, times_fired)
 	return
 
 /datum/species/lizard/random_name(gender,unique,lastname)
@@ -100,6 +102,12 @@
 		// organ.Insert will qdel any existing organs in the same slot, so
 		// we don't need to manage that.
 		new_tail.Insert(C, TRUE, FALSE)
+
+/datum/species/lizard/randomize_main_appearance_element(mob/living/carbon/human/human_mob)
+	var/tail = pick(GLOB.tails_list_lizard)
+	human_mob.dna.features["tail_lizard"] = tail
+	mutant_bodyparts["tail_lizard"] = tail
+	human_mob.update_body()
 
 /*
 Lizard subspecies: ASHWALKERS
