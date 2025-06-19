@@ -290,14 +290,14 @@
 	contains = list(/obj/item/ammo_box/vampire/c762x51mm)
 	crate_name = "ammo crate"
 
-/datum/supply_pack/vampire/ammo762x51
+/datum/supply_pack/vampire/ammo762x51/silver
 	name = "Ammo (7.62x51mm, Silver)"
 	desc = "Contains a box of silver 7.62x51mm ammunition."
 	cost = 4500
 	contains = list(/obj/item/ammo_box/vampire/c762x51mm/silver)
 	crate_name = "ammo crate"
 
-/datum/supply_pack/vampire/ammo762x51
+/datum/supply_pack/vampire/ammo762x51/incendiary
 	name = "Ammo (7.62x51mm, incendiary)"
 	desc = "Contains a box of incendiary 7.62x51mm ammunition."
 	cost = 5000
