@@ -7,7 +7,7 @@
 
 /datum/discipline/necromancy/post_gain()
 	. = ..()
-	owner.faction |= "Giovanni"
+	owner.faction |= CLAN_GIOVANNI
 
 /datum/discipline_power/necromancy
 	name = "Necromancy power name"

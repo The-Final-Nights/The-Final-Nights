@@ -26,7 +26,7 @@
 	v_duty = "Help your fellow kindred in all matters medicine related. Sell blood. Keep your human colleagues ignorant. Remember, this is a Malkavian Domain."
 	duty = "You are on the night shift at the local clinic. Your eccentric bosses seem to be keeping a close eye on your work."
 	experience_addition = 15
-	allowed_bloodlines = list("Daughters of Cacophony", "Salubri", "Nagaraja", "Salubri Warrior", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
+	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_NAGARAJA, CLAN_SALUBRI_WARRIOR, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE, CLAN_KIASYD)
 	known_contacts = list("Clinic Director")
 
 /datum/outfit/job/vdoctor
@@ -81,7 +81,7 @@
 	v_duty = "Keep Saint John's clinic up and running, and sell blood to the vegan kindred who need it. Keep your human colleagues ignorant. Serve the best interests of the hospital's generous eccentric Malkavian Primogen patron who finances everything."
 	duty = "Keep Saint John's Hospital up and running on behalf of your hospital's eccentric patron who finances it. Keep your underlings and colleagues ignorant of the truth, as much as possible. Collect blood donations from locals for the day shift."
 	experience_addition = 15
-	// allowed_bloodlines = list("Daughters of Cacophony", "Salubri", "Baali", "Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Giovanni", "Ministry", "Tzimisce", "Lasombra", "Caitiff", "Kiasyd")
+	// allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE, CLAN_KIASYD)
 	known_contacts = list("Primogen Malkavian")
 
 /datum/outfit/job/vdirector

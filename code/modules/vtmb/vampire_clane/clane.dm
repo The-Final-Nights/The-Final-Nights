@@ -5,7 +5,7 @@ This datum stores a declarative description of clans, in order to make an instan
 And it also helps for the character set panel
 */
 /datum/vampireclane
-	var/name = "Caitiff"
+	var/name = CLAN_NONE
 	var/desc = "The clanless. The rabble. Of no importance."
 	var/list/clane_disciplines = list() //discipline datums
 	var/list/restricted_disciplines = list()
@@ -54,7 +54,8 @@ And it also helps for the character set panel
 
 /datum/vampireclane/proc/post_gain(mob/living/carbon/human/H)
 	SHOULD_CALL_PARENT(TRUE)
-
+	if(!H.client) //dont give npcs keys or special gameplay related quirky things
+		return
 	if(violating_appearance && H.roundstart_vampire)
 		if(length(GLOB.masquerade_latejoin))
 			var/obj/effect/landmark/latejoin_masquerade/LM = pick(GLOB.masquerade_latejoin)
