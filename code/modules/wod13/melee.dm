@@ -653,24 +653,32 @@
 		return
 	if(iskindred(target))
 		if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
-			visible_message("<span class='warning'>[user] can't pull out the fangs of [target] because they are already deformed!</span>")
+			to_chat(usr, span_warning("[user] can't pull out the fangs of [target] because they are already deformed!"))
 		else
-			visible_message("<span class='warning'>[user] takes [src] straight to the [target]'s Fangs!</span>", "<span class='warning'>You take [src] straight to the [target]'s Fangs!</span>")
+			to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
+			to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
 			if(do_after(user, 30, target))
 				user.do_attack_animation(target)
-				visible_message("<span class='warning'>[user] rips out [target]'s Fangs and stuffs in bone putty!</span>", "<span class='warning'>You rip out [target]'s fangs and stuff in Bone putty so they can't regrow!</span>")
+				to_chat(span_warning("[user] rips out [target]'s Fangs and stuffs in bone putty!"))
+				to_chat(usr, span_warning("You rip out [target]'s fangs and stuff in Bone putty so they can't regrow!"))
 				target.emote("scream")
 				ADD_TRAIT(target, TRAIT_BABY_TEETH, MAGIC_TRAIT)
 
-/obj/item/pliers/bad_pliers
+/obj/item/bad_pliers
 	name = "cheap pliers"
 	desc = "You can crush teeth out with these."
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "ripper"
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
 	force = 5
 	throwforce = 5
+	attack_verb_continuous = list("beats", "hits")
+	attack_verb_simple = list("beat", "hit")
+	w_class = WEIGHT_CLASS_SMALL
 
-/obj/item/pliers/bad_pliers/attack(mob/living/target, mob/living/user)
+/obj/item/bad_pliers/attack(mob/living/target, mob/living/user)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		return
@@ -678,11 +686,15 @@
 		return
 	if(iskindred(target))
 		if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
-			visible_message("<span class='warning'>[user] can't crush the fangs of [target] because they are already deformed!</span>")
+			to_chat(usr, span_warning("[user] can't crush the fangs of [target] because they are already deformed!"))
 		else
-			visible_message("<span class='warning'>[user] takes [src] straight to the [target]'s Fangs!</span>", "<span class='warning'>You take [src] straight to the [target]'s Fangs!</span>")
-			if(do_after(user, 20, target))
-				visible_message("<span class='warning'>[user] crushes [target]'s Fangs</span>", "<span class='warning'>You crush [target]'s fangs/span>")
+			to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
+			to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
+			if(do_after(user, 30, target))
+				user.do_attack_animation(target)
+				to_chat(span_warning("[user] crushes [target]'s fangs!"))
+				to_chat(usr, span_warning("You crush [target]'s fangs!"))
+				target.emote("scream")
 				target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)
 
 /obj/item/melee/vampirearms/shovel
