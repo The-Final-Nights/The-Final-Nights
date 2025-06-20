@@ -658,10 +658,12 @@
 		ghoulificated = TRUE
 		set_species(/datum/species/ghoul)
 		if(mind)
-			if(mind.enslaved_to != owner)
+			if(mind.enslaved_to != owner && !HAS_TRAIT(owner, TRAIT_UNBONDING))
 				mind.enslave_mind_to_creator(owner)
 				to_chat(src, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [owner]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
 				return TRUE
+			if(HAS_TRAIT(owner, TRAIT_UNBONDING))
+				to_chat(src, "<span class='danger'><i>Precious vitae enters your mouth, an addictive drug. You feel no loyalty, though, to the source; only the substance.</i></span>")
 	return FALSE
 
 
