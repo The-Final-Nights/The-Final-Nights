@@ -91,6 +91,14 @@
 	icon_state = "neat_ripper"
 	toolspeed = 2 //isn't meant for cutting wires
 	random_color = FALSE
+	permanent = TRUE
+
+/obj/item/wirecutters/pliers/bad_pliers
+	name = "pliers"
+	desc = "Meant for pulling wires but you could definetly crush something with these."
+	icon_state = "ripper"
+	toolspeed = 1.2 //is an actual tool but can't actually
+	permanent = FALSE
 
 /obj/item/wirecutters/pliers/attack(mob/living/target, mob/living/user)
 	. = ..()
@@ -106,33 +114,11 @@
 			to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
 			if(do_after(user, 30, target))
 				user.do_attack_animation(target)
-				to_chat(span_warning("[user] rips out [target]'s Fangs and stuffs in bone putty!"))
-				to_chat(usr, span_warning("You rip out [target]'s fangs and stuff in Bone putty so they can't regrow!"))
+				to_chat(span_warning("[user] rips out [target]'s fangs!"))
+				to_chat(usr, span_warning("You rip out [target]'s fangs!"))
 				target.emote("scream")
-				ADD_TRAIT(target, TRAIT_BABY_TEETH, MAGIC_TRAIT)
-
-/obj/item/wirecutters/bad_pliers
-	name = "pliers"
-	desc = "Meant for pulling wires but you could definetly crush something with these."
-	icon_state = "ripper"
-	toolspeed = 1.2 //is an actual tool but can't actually
-	random_color = FALSE
-
-/obj/item/wirecutters/bad_pliers/attack(mob/living/target, mob/living/user)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		return
-	if(isgarou(target) || iswerewolf(target) || isanimal(target))
-		return
-	if(iskindred(target))
-		if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
-			to_chat(usr, span_warning("[user] can't crush the fangs of [target] because they are already deformed!"))
-		else
-			to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
-			to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
-			if(do_after(user, 30, target))
-				user.do_attack_animation(target)
-				to_chat(span_warning("[user] crushes [target]'s fangs!"))
-				to_chat(usr, span_warning("You crush [target]'s fangs!"))
-				target.emote("scream")
-				target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)
+				if (permanent == TRUE)
+					ADD_TRAIT(target, TRAIT_BABY_TEETH, MAGIC_TRAIT)
+					visible_message(span_warning("[user] stuff's in Bone putty into [target] to stop their fangs from regrowing!"))
+				else
+					target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)
