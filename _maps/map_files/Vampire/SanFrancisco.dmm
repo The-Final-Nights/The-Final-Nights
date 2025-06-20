@@ -340,6 +340,12 @@
 "adM" = (
 /obj/structure/coclock,
 /obj/machinery/photocopier,
+/obj/item/reagent_containers/food/drinks/trophy/bronze_cup{
+	pixel_y = 23;
+	pixel_x = 31;
+	name = "regional care cup";
+	desc = "A small bronze trophy for the third place position in the regional care outcome rankings. Not the best, but not the worst."
+	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
 "adT" = (
@@ -13972,6 +13978,10 @@
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
+"dgw" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating/concrete,
+/area/vtm/clinic/haven)
 "dgA" = (
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalk,
@@ -22569,6 +22579,12 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto)
+"fhP" = (
+/obj/structure/chair/sofa/old/left{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "fhS" = (
 /obj/structure/chair,
 /turf/open/floor/plating/sidewalk/poor,
@@ -24824,9 +24840,10 @@
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
 "fIi" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/fusebox,
-/turf/open/floor/plating/concrete,
+/obj/effect/turf_decal/siding/wood{
+	color = "#9a704a"
+	},
+/turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
 "fIj" = (
 /obj/machinery/light{
@@ -30099,9 +30116,11 @@
 /turf/open/floor/plating/shit/border,
 /area/vtm/sewer)
 "gRt" = (
-/obj/effect/turf_decal/siding/white,
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/clinic)
+/obj/structure/chair/sofa/old/right{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "gRv" = (
 /obj/structure/table/wood/fancy,
 /turf/open/floor/plating/granite/black,
@@ -39478,12 +39497,6 @@
 	pixel_y = 0;
 	pixel_x = -6
 	},
-/obj/item/reagent_containers/food/drinks/trophy/bronze_cup{
-	pixel_y = 23;
-	pixel_x = -1;
-	name = "regional care cup";
-	desc = "A small bronze trophy for the third place position in the regional care outcome rankings. Not the best, but not the worst."
-	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
 "jgd" = (
@@ -40404,6 +40417,10 @@
 "jqn" = (
 /obj/structure/tank_holder/extinguisher{
 	pixel_y = 5
+	},
+/obj/machinery/light{
+	pixel_y = 0;
+	dir = 4
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior)
@@ -41790,7 +41807,9 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/strip/toreador)
 "jGM" = (
-/obj/machinery/jukebox,
+/obj/machinery/jukebox{
+	anchored = 0
+	},
 /turf/open/floor/carpet/green,
 /area/vtm/clinic/haven)
 "jGO" = (
@@ -61692,6 +61711,9 @@
 /obj/structure/vampipe{
 	icon_state = "piping41"
 	},
+/obj/fusebox{
+	pixel_y = 0
+	},
 /turf/closed/wall/vampwall/painted,
 /area/vtm/clinic)
 "olO" = (
@@ -67373,7 +67395,8 @@
 	pixel_y = 25;
 	anchored = 1;
 	anchorable = 0;
-	name = "shelter key closet"
+	name = "shelter key closet";
+	density = 0
 	},
 /obj/item/vamp/keys/clinic{
 	pixel_y = 25;
@@ -69747,7 +69770,7 @@
 "qaI" = (
 /obj/structure/sink{
 	pixel_y = 16;
-	dir = 6
+	dir = 2
 	},
 /obj/structure/mirror{
 	pixel_y = 32
@@ -74397,7 +74420,7 @@
 "rbf" = (
 /obj/structure/sink{
 	pixel_y = 16;
-	dir = 6
+	dir = 2
 	},
 /obj/structure/mirror{
 	pixel_y = 32
@@ -76751,9 +76774,11 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
 "rCk" = (
-/obj/item/reagent_containers/spray/hercuri,
-/turf/open/floor/plating/parquetry,
-/area/vtm/clinic)
+/obj/structure/chair/sofa/old/right{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm)
 "rCo" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -86794,13 +86819,11 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
 "tVb" = (
-/obj/structure/fluff/hedge{
+/obj/structure/showcase/machinery/tv{
 	icon = 'icons/obj/computer.dmi';
 	icon_state = "arcade";
-	dir = 4;
 	color = "#917357";
-	name = "broken arcade machine";
-	desc = "An old, battered arcade machine. The screen is shattered, and the buttons are missing."
+	dir = 4
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/clinic/haven)
@@ -95080,7 +95103,7 @@
 	},
 /obj/structure/sink{
 	pixel_y = 16;
-	dir = 6
+	dir = 2
 	},
 /obj/machinery/light/small{
 	dir = 4;
@@ -95891,6 +95914,7 @@
 	locked = 1;
 	name = "Psychologist's Office"
 	},
+/obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood,
 /area/vtm/clinic)
 "vZZ" = (
@@ -98612,6 +98636,9 @@
 	pixel_x = -16
 	},
 /obj/effect/landmark/start/nagaraja,
+/obj/structure/chair/sofa/old/left{
+	dir = 4
+	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "wHU" = (
@@ -101480,6 +101507,7 @@
 /area/vtm/interior/millennium_tower)
 "xqf" = (
 /obj/effect/turf_decal/siding/white,
+/obj/elevator_door,
 /turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "xqj" = (
@@ -136165,7 +136193,7 @@ dnC
 dnC
 dnC
 olN
-fIi
+dgw
 fcb
 uCb
 jro
@@ -136427,8 +136455,8 @@ vZZ
 uCb
 iAz
 tlG
-tlG
 xye
+tlG
 iGa
 eDf
 nYS
@@ -201441,7 +201469,7 @@ vvM
 vvM
 vvM
 vvM
-ggt
+fIi
 jcx
 jcx
 mPC
@@ -266978,7 +267006,7 @@ jcx
 jcx
 jcx
 jcx
-gRt
+jcx
 jcx
 nwd
 jJf
@@ -335090,7 +335118,7 @@ kCX
 jga
 fRm
 jNM
-rCk
+vvM
 vvM
 iUx
 fuO
@@ -337910,7 +337938,7 @@ rOK
 rOK
 bUt
 wHQ
-kno
+gRt
 kno
 kno
 kno
@@ -338423,8 +338451,8 @@ rCs
 rOK
 uuG
 bUt
-kno
-kno
+rCk
+fhP
 kno
 kno
 huU

@@ -105,5 +105,5 @@
 	skillchips = list(/obj/item/skillchip/entrails_reader, /obj/item/skillchip/quickcarry)
 
 /obj/effect/landmark/start/vdirector
-	name = "Director"
+	name = "Clinic Director"
 	icon_state = "Doctor"
