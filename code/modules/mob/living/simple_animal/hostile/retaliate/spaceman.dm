@@ -90,7 +90,7 @@
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
 	attack_sound = 'sound/weapons/punch1.ogg'
-	faction = list("Malkavian")
+	faction = list(CLAN_MALKAVIAN)
 	a_intent = INTENT_HARM
 	loot = list()
 	del_on_death = 1

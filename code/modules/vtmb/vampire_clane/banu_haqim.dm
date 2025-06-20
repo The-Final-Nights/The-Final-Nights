@@ -7,7 +7,7 @@
 		/datum/discipline/obfuscate,
 		/datum/discipline/quietus
 	)
-	male_clothes = /obj/item/clothing/under/vampire/bandit
-	female_clothes = /obj/item/clothing/under/vampire/bandit
+	male_clothes = /obj/item/clothing/under/vampire/turtleneck_navy
+	female_clothes = /obj/item/clothing/under/vampire/turtleneck_navy
 	clan_keys = /obj/item/vamp/keys/banuhaqim
 	whitelisted = FALSE
