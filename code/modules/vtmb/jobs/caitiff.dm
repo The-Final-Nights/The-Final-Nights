@@ -1,5 +1,5 @@
 /datum/outfit/job/caitiff
-	name = "Caitiff"
+	name = CLAN_NONE
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/flashlight
 	id = /obj/item/cockclock
@@ -39,13 +39,13 @@
 	H.fully_replace_character_name(null,"[my_name] [my_surname]")
 
 /obj/effect/landmark/start/caitiff
-	name = "Caitiff"
+	name = CLAN_NONE
 	delete_after_roundstart = FALSE
 
 /datum/antagonist/caitiff
-	name = "Caitiff"
+	name = CLAN_NONE
 	roundend_category = "caitiffs"
-	antagpanel_category = "Caitiff"
+	antagpanel_category = CLAN_NONE
 	job_rank = ROLE_TRAITOR
 	antag_moodlet = /datum/mood_event/focused
 	antag_hud_type = ANTAG_HUD_TRAITOR
