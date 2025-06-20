@@ -39,7 +39,7 @@
 		if(isgarou(C))
 			addtimer(CALLBACK(C, PROC_REF(transformation_unblock)), 60 SECONDS)
 			to_chat(C, span_userdanger("The grenade erupts in a screech of noise, distrupting your focus. You can't transform!"))
-			C.transformation_blocked == TRUE
+			C.transformation_blocked = TRUE
 			C.auspice_drain()
 		else
 			to_chat(C, span_userdanger("The grenade erupts in a screech of noise!"))
