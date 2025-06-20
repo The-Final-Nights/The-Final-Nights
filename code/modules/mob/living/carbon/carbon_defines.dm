@@ -92,8 +92,8 @@
 	/// Protection (insulation) from the cold, Value 0-1 corresponding to the percentage of protection
 	var/cold_protection = 0 // No cold protection
 
-	/// Is transformation blocked?
-	var/transformation_blocked = FALSE
+	/// Timer id of any transformation
+	var/transformation_timer = 0
 
 	/// All of the wounds a carbon has afflicted throughout their limbs
 	var/list/all_wounds
@@ -151,7 +151,7 @@
 	var/diablerist = FALSE
 	var/antifrenzy = FALSE
 
-	var/transformation_blocked = 0 //Time transformations are blocked for, in ticks.
+	var/transformation_blocked = 0 //Are transformations blocked?
 
 	COOLDOWN_DECLARE(bleeding_message_cd)
 
