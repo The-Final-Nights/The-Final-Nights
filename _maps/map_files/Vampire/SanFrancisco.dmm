@@ -7846,6 +7846,12 @@
 "bKE" = (
 /turf/closed/wall/vampwall/wood/low,
 /area/vtm/pacificheights/forest)
+"bKH" = (
+/obj/structure/sign/warning/nosmoking{
+	pixel_y = 32
+	},
+/turf/open/floor/plating/vampplating/mono,
+/area/vtm/clinic)
 "bKJ" = (
 /obj/structure/table/wood,
 /obj/item/instrument/violin,
@@ -53913,9 +53919,9 @@
 /area/vtm/pacificheights)
 "mBm" = (
 /obj/structure/sign/warning/nosmoking{
-	pixel_y = -32
+	pixel_y = 32
 	},
-/turf/open/floor/plating/vampplating/stone,
+/turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
 "mBp" = (
 /obj/effect/decal/litter,
@@ -93878,6 +93884,9 @@
 	desc = "A trash bin for hazardous waste.";
 	name = "biohazard bin"
 	},
+/obj/structure/sign/warning/nosmoking{
+	pixel_y = 32
+	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "vDo" = (
@@ -102272,6 +102281,9 @@
 /obj/item/newspaper,
 /obj/item/newspaper,
 /obj/item/newspaper,
+/obj/structure/sign/warning/nosmoking{
+	pixel_y = 32
+	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "xAj" = (
@@ -201724,7 +201736,7 @@ fhi
 miG
 mwF
 kCX
-vvM
+mBm
 vvM
 vvM
 jNM
@@ -204307,7 +204319,7 @@ vvM
 uxs
 pkx
 pkx
-mBm
+pkx
 bUt
 bUt
 bUt
@@ -335887,7 +335899,7 @@ bUt
 bUt
 bUt
 kCX
-jcx
+bKH
 jcx
 nwd
 kLO
