@@ -1456,7 +1456,7 @@
 			to_chat(src, span_userdanger("The noise makes it hard to concentrate, even on your anger."))
 		else
 			to_chat(src, span_userdanger("Your head swims. You can barely think, let alone feel anger."))
-		addtimer(CALLBACK(C, PROC_REF(auspice_drain)), 1 SECONDS) //Yes, I know the singular is "Second", but it's a define. 
+		addtimer(CALLBACK(src, PROC_REF(auspice_drain)), 1 SECONDS) //Yes, I know the singular is "Second", but it's a define. 
 
 /mob/living/carbon/proc/transformation_unblock()
 		transformation_blocked == FALSE
