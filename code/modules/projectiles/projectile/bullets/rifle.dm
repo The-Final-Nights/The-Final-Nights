@@ -5,12 +5,14 @@
 	damage = 35
 	armour_penetration = 30
 	wound_bonus = -40
+	speed = 0.1			//Amount of deciseconds it takes for projectile to travel
 
 /obj/projectile/bullet/a556/phasic
 	name = "5.56mm phasic bullet"
 	icon_state = "gaussphase"
 	damage = 20
 	armour_penetration = 70
+	speed = 0.1			//Amount of deciseconds it takes for projectile to travel
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE | PASSCLOSEDTURF | PASSMACHINE | PASSSTRUCTURE
 
 // 7.62 (Nagant Rifle)
