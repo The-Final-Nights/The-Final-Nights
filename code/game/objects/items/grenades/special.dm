@@ -36,7 +36,7 @@
 	do_sparks(rand(5, 9), FALSE, src)
 	playsound(detonate_turf, 'sound/weapons/flashbang.ogg', 100, TRUE, 8, 0.9)
 	for(var/mob/living/carbon/C in range(5, detonate_turf)) //Five tile range
-		if(isgarou(C))
+		if(isgarou(C) || iswerewolf(C))
 			addtimer(CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon, transformation_unblock)), 60 SECONDS)
 			to_chat(C, span_userdanger("The grenade erupts in a screech of noise, distrupting your focus. You can't transform!"))
 			C.transformation_blocked = TRUE
