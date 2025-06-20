@@ -1450,9 +1450,9 @@
 #undef MAX_JUMP_DISTANCE
 
 /mob/living/carbon/proc/auspice_drain()
-	if(transformation_blocked == TRUE)
+	if(transformation_blocked = TRUE)
 		if(auspice.rage > 0)
-			auspice.rage adjust_rage(-1, src, TRUE)
+			adjust_rage(-1, src, TRUE)
 			to_chat(src, span_userdanger("The noise makes it hard to concentrate, even on your anger."))
 		else
 			to_chat(src, span_userdanger("Your head swims. You can barely think, let alone feel anger."))
