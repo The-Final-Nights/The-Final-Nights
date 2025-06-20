@@ -57,7 +57,7 @@
 	damage = 25 //Variants should deal less base damage than their equivalents.
 	armour_penetration = 30
 	wound_bonus = -40
-	speed = 0.1			//Amount of deciseconds it takes for projectile to travel
+	speed = 0.1
 	var/supernaturalbonus = 30
 
 /obj/projectile/bullet/compound/on_hit(atom/target, blocked = FALSE)
@@ -72,7 +72,7 @@
 	damage = 25 //Variants should deal less base damage than their equivalents.
 	armour_penetration = 30
 	wound_bonus = -40
-	speed = 0.1			//Amount of deciseconds it takes for projectile to travel
+	speed = 0.1
 	var/paralysetime = 100 //How long should the round paralyse vamps for? In ticks, so approximately 10 to a second.
 
 /obj/projectile/bullet/hod/on_hit(atom/target, blocked = FALSE)
