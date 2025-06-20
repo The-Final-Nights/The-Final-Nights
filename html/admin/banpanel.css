@@ -75,15 +75,15 @@
 }
 
 .camarilla {
-	background-color: #00008B
+	background-color: #4e0404
 }
 
 .primogencouncil{
-	background-color: #FF8C00
+	background-color: #63174a
 }
 
 .tremere {
-	background-color: #B22222
+	background-color: #c22a2a
 }
 
 .giovanni {
@@ -105,4 +105,32 @@
 
 .triad {
 	background-color: #C69DD2
+}
+
+.unaligned {
+	background-color: #929292;
+}
+
+.cityservices {
+	background-color: #686868;
+}
+
+.stjohns {
+	background-color: #009fd4;
+}
+
+.church {
+	background-color: #fbff03;
+}
+
+.paintedcity {
+	background-color: #856116;
+}
+
+.amberglade {
+	background-color: #154e03;
+}
+
+.endron {
+	background-color: #24ff07;
 }
