@@ -662,6 +662,24 @@ Dancer
 	lose_text = "<span class='notice'>You don't feel charismatic anymore.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
 
+/datum/quirk/unbonding
+	name = "Unbonding"
+	desc = "Your vitae, for one reason or another, doesn't produce blood bonds with anybody."
+	value = -1
+	mob_trait = TRAIT_UNBONDING
+	gain_text = "<span class='notice'>Your blood feels vacant.</span>"
+	lose_text = "<span class='notice'>You feel like something that was missing just came back to you.</span>"
+	allowed_species = list("Vampire")
+
+/datum/quirk/permafangs
+	name = "Permanent Fangs"
+	desc = "Your fangs do not retract, making it impossible for you to hide your true nature. While some mortals may think you’ve had your teeth filed or are wearing prosthetics, sooner or later you’re going to run into someone who knows what you truly are."
+	value = 0
+	mob_trait = TRAIT_PERMAFANGS
+	gain_text = "<span class='notice'>Your fangs become stuck.</span>"
+	lose_text = "<span class='notice'>You feel your fangs retract again.</span>"
+	allowed_species = list("Vampire")
+
 /datum/quirk/diablerist
 	name = "Diablerist"
 	desc = "For one reason or another, you have committed Diablerie in your past, a great crime within Kindred society. <b>This is not a license to Diablerize without proper reason!</b>"
