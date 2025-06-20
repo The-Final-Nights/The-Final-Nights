@@ -77,11 +77,11 @@
 	var/mob/living/carbon/human/H = target
 	if(!H.IsParalyzed() && iskindred(H) && !H.stakeimmune)
 		if(HAS_TRAIT(target, TRAIT_STAKE_RESISTANT))
-			visible_message("<span class='warning'>the round splinters as it touches [H]'s heart!</span>")
+			to_chat(H, span_warning("the round splinters as it touches [H]'s heart!"))
 			REMOVE_TRAIT(H, TRAIT_STAKE_RESISTANT, MAGIC_TRAIT)
 			qdel(src)
 		else
-			visible_message("<span class='warning'>The round splits apart in [H]'s torso!</span>")
+			to_chat(H, span_warning("The round splits apart in [H]'s torso!"))
 			H.Paralyze(paralysetime)
 			H.Sleeping(paralysetime)
 			qdel(src)
