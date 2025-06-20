@@ -1459,5 +1459,5 @@
 		addtimer(CALLBACK(C, PROC_REF(auspice_drain)), 1 SECONDS) //Yes, I know the singular is "Second", but it's a define. 
 
 /mob/living/carbon/proc/transformation_unblock()
-		transformation_blocked == TRUE)
+		transformation_blocked == FALSE
 		visible_message("<b><span class='danger'>You regain your focus, you can transform again!")
