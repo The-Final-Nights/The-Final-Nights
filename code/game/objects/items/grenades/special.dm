@@ -13,12 +13,12 @@
 	for(var/mob/living/carbon/C in range(5, detonate_turf)) //Five tile range
 		if(iskindred(C))
 			to_chat(C, span_userdanger("The grenade erupts in a flash of burning light!"))
-			C.adjustFireLoss(80) //Sunlight REALLY hurts.
-			C.Paralyze(30)
+			C.adjustFireLoss(200) //Sunlight REALLY hurts.
+			C.Paralyze(5 SECONDS)
 		else if(iscathayan(C))
 			to_chat(C, span_userdanger("The grenade erupts in a flash of searing light!"))
-			C.adjustCloneLoss(80) //Sunlight REALLY hurts. Kuei Jin rot, instead of burning.
-			C.Paralyze(30)
+			C.adjustCloneLoss(200) //Sunlight REALLY hurts. Kuei Jin rot, instead of burning.
+			C.Paralyze(5 SECONDS)
 		else
 			to_chat(C, span_userdanger("The grenade erupts in a flash of light!"))
 	qdel(src)
