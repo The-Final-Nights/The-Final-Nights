@@ -158,7 +158,7 @@
 	l_pocket = /obj/item/vamp/keys/hunter
 	suit = /obj/item/clothing/suit/vampire/vest/army/valkyrie
 	belt = /obj/item/gun/ballistic/automatic/ar/valkyrie
-	back = /obj/item/storage/backpack/security
+	back = /obj/item/storage/backpack/duffelbag/military
 	glasses = /obj/item/clothing/glasses/hud/security/etheric
 	mask = /obj/item/clothing/mask/vampire/balaclava
 	head = /obj/item/clothing/head/vampire/army/valkyrie
