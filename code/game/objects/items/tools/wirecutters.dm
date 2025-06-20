@@ -1,11 +1,9 @@
 /obj/item/wirecutters
 	name = "wirecutters"
 	desc = "This cuts wires."
-	icon = 'icons/obj/tools.dmi'
-	icon_state = "cutters_map"
-	inhand_icon_state = "cutters"
-	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
+	icon_state = "fixer"
+	icon = 'code/modules/wod13/items.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
 
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
@@ -24,7 +22,7 @@
 	tool_behaviour = TOOL_WIRECUTTER
 	toolspeed = 1
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 50, ACID = 30)
-	var/random_color = TRUE
+	var/random_color = FALSE
 	var/static/list/wirecutter_colors = list(
 		"blue" = "#1861d5",
 		"red" = "#951710",
@@ -86,3 +84,55 @@
 	worn_icon_state = "cutters"
 	toolspeed = 0.5
 	random_color = FALSE
+
+/obj/item/wirecutters/pliers
+	name = "dental pliers"
+	desc = "Meant for taking out teeth."
+	icon_state = "neat_ripper"
+	toolspeed = 2 //isn't meant for cutting wires
+	random_color = FALSE
+
+/obj/item/wirecutters/pliers/attack(mob/living/target, mob/living/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_PACIFISM))
+		return
+	if(isgarou(target) || iswerewolf(target) || isanimal(target))
+		return
+	if(iskindred(target))
+		if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
+			to_chat(usr, span_warning("[user] can't pull out the fangs of [target] because they are already deformed!"))
+		else
+			to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
+			to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
+			if(do_after(user, 30, target))
+				user.do_attack_animation(target)
+				to_chat(span_warning("[user] rips out [target]'s Fangs and stuffs in bone putty!"))
+				to_chat(usr, span_warning("You rip out [target]'s fangs and stuff in Bone putty so they can't regrow!"))
+				target.emote("scream")
+				ADD_TRAIT(target, TRAIT_BABY_TEETH, MAGIC_TRAIT)
+
+/obj/item/wirecutters/bad_pliers
+	name = "pliers"
+	desc = "Meant for pulling wires but you could definetly crush something with these."
+	icon_state = "ripper"
+	toolspeed = 12 //is an actual tool but can't actually
+	random_color = FALSE
+
+/obj/item/wirecutters/bad_pliers/attack(mob/living/target, mob/living/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_PACIFISM))
+		return
+	if(isgarou(target) || iswerewolf(target) || isanimal(target))
+		return
+	if(iskindred(target))
+		if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
+			to_chat(usr, span_warning("[user] can't crush the fangs of [target] because they are already deformed!"))
+		else
+			to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
+			to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
+			if(do_after(user, 30, target))
+				user.do_attack_animation(target)
+				to_chat(span_warning("[user] crushes [target]'s fangs!"))
+				to_chat(usr, span_warning("You crush [target]'s fangs!"))
+				target.emote("scream")
+				target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)
