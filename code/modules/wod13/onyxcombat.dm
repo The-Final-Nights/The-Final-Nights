@@ -475,6 +475,7 @@
 	update_blood_hud()
 	update_rage_hud()
 	update_auspex_hud()
+	update_sensewyrm_hud() // I realize that this is called everytime for something that is defined at character creation, however I cannot find a way to call a client's stats on mob creation, so we update it everytime hoping to have a client instead
 
 /mob/living/carbon/human/Life()
 	if(!iskindred(src) && !iscathayan(src))
@@ -486,6 +487,8 @@
 	update_shadow()
 	handle_vampire_music()
 	update_auspex_hud()
+	if(!isnpc(src)) //otherwise NPCs will constantly change their taint.
+		update_sensewyrm_hud()
 	..()
 
 /mob/living/Initialize()
