@@ -193,7 +193,7 @@
 	if(H.athletics < 5)
 		H.athletics = 5 //Peak physical fitness, no slackers.
 	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.physique+3)) //Slight boost here, because these individuals are the very peak of physical fitness.
-	H.health = maxHealth //No idea why they did the whole thing over again.
+	H.health = H.maxHealth //No idea why they did the whole thing over again.
 	for(var/datum/action/A in H.actions)
 		if(A.vampiric)
 			A.Remove(H)
