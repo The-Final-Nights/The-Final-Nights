@@ -12,7 +12,7 @@
 	icon_state = "gaussphase"
 	damage = 20
 	armour_penetration = 70
-	speed = 0.1			//Amount of deciseconds it takes for projectile to travel
+	speed = 0.1
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE | PASSCLOSEDTURF | PASSMACHINE | PASSSTRUCTURE
 
 // 7.62 (Nagant Rifle)
