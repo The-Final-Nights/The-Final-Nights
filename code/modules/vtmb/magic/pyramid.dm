@@ -165,7 +165,7 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
-	faction = list("Tremere")
+	faction = list(CLAN_TREMERE)
 	bloodpool = 1
 	maxbloodpool = 1
 
@@ -271,7 +271,7 @@
 	health = 1
 	melee_damage_lower = 1
 	melee_damage_upper = 1
-	faction = list("Tremere")
+	faction = list(CLAN_TREMERE)
 
 /obj/ritualrune/question/complete()
 	var/text_question = tgui_input_text(usr, "Enter your question to the Ancestors:", "Question to Ancestors")
@@ -552,7 +552,7 @@
 			if(H == usr)
 				to_chat(usr, span_warning("You may not turn yourself into a Gargoyle!"))
 				return
-			else if(H.clane?.name == "Gargoyle")
+			else if(H.clane?.name == CLAN_GARGOYLE)
 				to_chat(usr, span_warning("You may not use this ritual on a Gargoyle!"))
 				return
 			else if(H.stat > SOFT_CRIT)
@@ -794,45 +794,45 @@
 
 	//clan
 	switch(clan)
-		if("Toreador", "Daughters of Cacophony")
+		if(CLAN_TOREADOR, CLAN_DAUGHTERS_OF_CACOPHONY)
 			message += "The blood is sweet and rich. The owner must, too, be beautiful.\n"
-		if("Ventrue")
+		if(CLAN_VENTRUE)
 			message += "The blood has kingly power in it, descending from Mithras or Hardestadt.\n"
-		if("Lasombra")
+		if(CLAN_LASOMBRA)
 			message += "Cold and dark, this blood has a mystical connection to the Abyss.\n"
-		if("Tzimisce")
+		if(CLAN_TZIMISCE)
 			message += "The vitae is mutable and twisted. Is there any doubt to the cursed line it belongs to?\n"
-		if("Old Clan Tzimisce")
+		if(CLAN_OLD_TZIMISCE)
 			message += "This vitae is old and ancient. It reminds you of a more twisted and cursed blood...\n"
-		if("Gangrel")
+		if(CLAN_GANGREL)
 			message += "The blood emits a primal and feral aura. The same is likely of the owner.\n"
-		if("Malkavian")
+		if(CLAN_MALKAVIAN)
 			message += "You can sense chaos and madness within this blood. It's owner must be maddened too.\n"
-		if("Brujah")
+		if(CLAN_BRUJAH)
 			message += "The blood is filled with passion and anger. So must be the owner of the blood.\n"
-		if("Nosferatu")
+		if(CLAN_NOSFERATU)
 			message += "The blood is foul and disgusting. Same must apply to the owner.\n"
-		if("Tremere")
+		if(CLAN_TREMERE)
 			message += "The blood is filled with the power of magic. The owner must be a thaumaturge.\n"
-		if("Baali")
+		if(CLAN_BAALI)
 			message += "Tainted and corrupt. Vile and filthy. You see your reflection in the blood, but something else stares back.\n"
 		if("Assamite")
 			message += "Potent... deadly... and cursed. You know well the curse laid by Tremere on the assassins.\n"
-		if("True Brujah")
+		if(CLAN_TRUE_BRUJAH)
 			message += "The blood is cold and static... It's hard to feel any emotion within it.\n"
-		if("Salubri")
+		if(CLAN_SALUBRI)
 			message += "The cursed blood of the Salubri! The owner of this blood must be slain.\n"
-		if("Salubri Warrior")
+		if(CLAN_SALUBRI_WARRIOR)
 			message += "The avatar of Samiel's vengeance stands before you, do you dare return their bitter hatred?\n"
-		if("Giovanni", "Cappadocian")
+		if(CLAN_GIOVANNI, CLAN_CAPPADOCIAN)
 			message += "The blood is very cold and filled with death. The owner must be a necromancer.\n"
-		if("Kiasyd")
+		if(CLAN_KIASYD)
 			message += "The blood is filled with traces of fae magic.\n"
-		if("Gargoyle")
+		if(CLAN_GARGOYLE)
 			message += "The blood of our stone servants.\n"
-		if("Ministry")
+		if(CLAN_SETITES)
 			message += "Seduction and allure are in the blood. Ah, one of the snakes.\n"
-		if("Nagaraja")
+		if(CLAN_NAGARAJA)
 			message += "This blood has an unsettling hunger to it, cold and stained with death.\n"
 		else
 			message += "The blood's origin is hard to trace. Perhaps it is one of the clanless?\n"

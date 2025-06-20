@@ -460,21 +460,23 @@
 		//examine text for unusual appearances
 		if (iskindred(src) && is_face_visible())
 			switch(clane.alt_sprite)
-				if ("nosferatu")
-					msg += "<span class='danger'><b>[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!</b></span><br>"
-				if ("gargoyle")
-					msg += "<span class='danger'><b>[p_they(TRUE)] seem[p_s()] to be made out of stone!</b></span><br>"
-				if ("kiasyd")
+				if (CLAN_NOSFERATU)
+					msg += span_warning("[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!<br>")
+				if (CLAN_GARGOYLE)
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] to be made out of stone!<br>")
+				if (CLAN_KIASYD)
 					if (!is_eyes_covered())
-						msg += "<span class='danger'><b>[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!<b></span><br>"
+						msg += span_boldwarning("[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!</b><br>")
 				if ("rotten1")
-					msg += "[p_they(TRUE)] seem[p_s()] oddly gaunt.<br>"
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] oddly gaunt.<br>")
 				if ("rotten2")
-					msg += "[p_they(TRUE)] [p_have()] a corpselike complexion.<br>"
+					msg += span_warning("[p_they(TRUE)] [p_have()] a corpselike complexion.<br>")
 				if ("rotten3")
-					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a decayed corpse!</b></span><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a decayed corpse!<br>")
 				if ("rotten4")
-					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a skeletonised corpse!</b></span><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a skeletonised corpse!</b><br>")
+			if (HAS_TRAIT(src, TRAIT_PERMAFANGS))
+				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
@@ -522,7 +524,7 @@
 				if ((vampire.morality_path.score < 7) || client?.prefs?.is_enlightened)
 					wyrm_taint++
 
-				if ((vampire.clane?.name == "Baali") || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
+				if ((vampire.clane?.name == CLAN_BAALI) || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
 					wyrm_taint++
 
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most

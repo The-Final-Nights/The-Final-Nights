@@ -204,7 +204,7 @@
 
 /datum/species/kindred/spec_life(mob/living/carbon/human/H)
 	. = ..()
-	if(H.clane?.name == "Baali")
+	if(H.clane?.name == CLAN_BAALI)
 		if(istype(get_area(H), /area/vtm/church))
 			if(prob(25))
 				to_chat(H, "<span class='warning'>You don't belong here!</span>")
@@ -262,14 +262,14 @@
 		H.bloodpool = max(0, H.bloodpool-1)
 		to_chat(H, "<span class='warning'>Necromancy Vision reduces your blood points too sustain itself.</span>")
 
-	if(H.clane?.name == "Tzimisce" || H.clane?.name == "Old Clan Tzimisce")
+	if(H.clane?.name == CLAN_TZIMISCE || H.clane?.name == CLAN_OLD_TZIMISCE)
 		var/datum/vampireclane/tzimisce/TZ = H.clane
 		if(TZ.heirl)
 			if(!(TZ.heirl in H.GetAllContents()))
 				if(prob(5))
 					to_chat(H, "<span class='warning'>You are missing your home soil...</span>")
 					H.bloodpool = max(0, H.bloodpool-1)
-	if(H.clane?.name == "Kiasyd")
+	if(H.clane?.name == CLAN_KIASYD)
 		var/datum/vampireclane/kiasyd/kiasyd = H.clane
 		for(var/obj/item/I in H.contents)
 			if(I?.is_iron)
@@ -297,7 +297,7 @@
 					P.reason_of_death = "Lost control to the Beast ([time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")])."
 
 	if(H.clane && !H.antifrenzy && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
-		if(H.clane.name == "Banu Haqim")
+		if(H.clane.name == CLAN_BANU_HAQIM)
 			if(H.mind)
 				if(H.mind.enslaved_to)
 					if(get_dist(H, H.mind.enslaved_to) > 10)
