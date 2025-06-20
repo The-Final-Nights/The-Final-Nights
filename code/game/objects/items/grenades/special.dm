@@ -12,15 +12,15 @@
 	playsound(detonate_turf, 'sound/weapons/flashbang.ogg', 100, TRUE, 8, 0.9)
 	for(var/mob/living/carbon/C in range(5, detonate_turf)) //Five tile range
 		if(iskindred(C))
-			C.visible_message("<b><span class='danger'>The grenade erupts in a flash of burning light!")
+			to_chat(C, span_userdanger("The grenade erupts in a flash of burning light!"))
 			C.adjustFireLoss(80) //Sunlight REALLY hurts.
 			C.Paralyze(30)
 		else if(iscathayan(C))
-			C.visible_message("<b><span class='danger'>The grenade erupts in a flash of searing light!")
+			to_chat(C, span_userdanger("The grenade erupts in a flash of searing light!"))
 			C.adjustCloneLoss(80) //Sunlight REALLY hurts. Kuei Jin rot, instead of burning.
 			C.Paralyze(30)
 		else
-			C.visible_message("<b><span class='danger'>The grenade erupts in a flash of light!")
+			to_chat(C, span_userdanger("The grenade erupts in a flash of light!"))
 	qdel(src)
 
 /obj/item/grenade/equaliser
@@ -37,22 +37,24 @@
 	playsound(detonate_turf, 'sound/weapons/flashbang.ogg', 100, TRUE, 8, 0.9)
 	for(var/mob/living/carbon/C in range(5, detonate_turf)) //Five tile range
 		if(isgarou(C))
-			C.transformation_blocked += 60
-			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise, distrupting your focus. You can't transform!")
-			qdel(src)
-			C.transformation_blocked_update()
+			addtimer(CALLBACK(C, PROC_REF(transformation_unblock)), 60 SECONDS)
+			to_chat(C, span_userdanger("The grenade erupts in a screech of noise, distrupting your focus. You can't transform!"))
+			C.transformation_blocked == TRUE
+			C.auspice_drain()
 		else
-			C.visible_message("<b><span class='danger'>The grenade erupts in a screech of noise!")
+			to_chat(C, span_userdanger("The grenade erupts in a screech of noise!"))
 	qdel(src)
+	
 
-/mob/living/carbon/proc/transformation_blocked_update()
-	if(src.transformation_blocked > 0)
-		sleep(10)
-		if(src.auspice.rage > 0)
-			src.auspice.rage -= 1
-			src.visible_message("<b><span class='danger'>The noise makes it hard to concentrate, even on your anger")
-		src.transformation_blocked -= 1
-		src.transformation_blocked_update()
-	else
-		src.visible_message("<b><span class='danger'>You regain your focus, you can transform again!")
-		return
+/mob/living/carbon/proc/auspice_drain()
+	if(transformation_blocked == TRUE)
+		if(auspice.rage > 0)
+			auspice.rage adjust_rage(-1, src, TRUE)
+			to_chat(src, span_userdanger("The noise makes it hard to concentrate, even on your anger."))
+		else
+			to_chat(src, span_userdanger("Your head swims. You can barely think, let alone feel anger."))
+		addtimer(CALLBACK(C, PROC_REF(auspice_drain)), 1 SECONDS) //Yes, I know the singular is "Second", but it's a define. 
+
+/mob/living/carbon/proc/transformation_unblock()
+		transformation_blocked == TRUE)
+		visible_message("<b><span class='danger'>You regain your focus, you can transform again!")
