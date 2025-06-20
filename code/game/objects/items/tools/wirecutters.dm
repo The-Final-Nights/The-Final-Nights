@@ -115,7 +115,7 @@
 	name = "pliers"
 	desc = "Meant for pulling wires but you could definetly crush something with these."
 	icon_state = "ripper"
-	toolspeed = 12 //is an actual tool but can't actually
+	toolspeed = 1.2 //is an actual tool but can't actually
 	random_color = FALSE
 
 /obj/item/wirecutters/bad_pliers/attack(mob/living/target, mob/living/user)
