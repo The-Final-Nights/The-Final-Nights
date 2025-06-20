@@ -80,7 +80,7 @@
 	show_to_ghosts = TRUE
 
 /datum/antagonist/hunter/on_gain()
-	owner.holy_role = HOLY_ROLE_PRIEST
+	//owner.holy_role = HOLY_ROLE_PRIEST //No more True Faith by default for now.
 	add_antag_hud(ANTAG_HUD_OPS, "synd", owner.current)
 	owner.special_role = src
 	var/datum/objective/custom/custom_objective = new
@@ -179,3 +179,29 @@
 		/obj/item/radio/military = 1,
 		/obj/item/vamp/keys/hack=1
 		)
+
+/datum/outfit/job/hunter/valkyrie/post_equip(mob/living/carbon/human/H)
+	..()
+	if(H.clane)
+		qdel(H.clane)
+	H.set_species(/datum/species/human)
+	H.generation = 13
+	if(H.physique < 5)
+		H.physique = 5
+	if(H.dexterity < 5)
+		H.dexterity = 5
+	if(H.athletics < 5)
+		H.athletics = 5 //Peak physical fitness, no slackers.
+	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.physique+3)) //Slight boost here, because these individuals are the very peak of physical fitness.
+	H.health = maxHealth //No idea why they did the whole thing over again.
+	for(var/datum/action/A in H.actions)
+		if(A.vampiric)
+			A.Remove(H)
+	ADD_TRAIT(H, TRAIT_MINDSHIELD, JOB_TRAIT)
+	H.additional_mentality += 3
+	H.additional_lockpicking += 5
+	H.thaumaturgy_knowledge = FALSE
+	QDEL_NULL(H.clane)
+
+	if(H.mind)
+		H.mind.add_antag_datum(/datum/antagonist/hunter)
