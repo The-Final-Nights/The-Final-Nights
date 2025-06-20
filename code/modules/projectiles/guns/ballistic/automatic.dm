@@ -407,5 +407,5 @@
 	can_suppress = TRUE
 	tac_reloads = TRUE
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
-	burst_size = 1
+	burst_size = 3
 	fire_delay = 0.25
