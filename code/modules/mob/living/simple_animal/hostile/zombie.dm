@@ -158,7 +158,6 @@
 	density = FALSE
 	anchored = FALSE
 	footstep_type = FOOTSTEP_MOB_CLAW
-	a_intent = INTENT_HARM
 	speed = 0
 	maxHealth = 20
 	health = 20
@@ -192,7 +191,6 @@
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
 	footstep_type = FOOTSTEP_MOB_CLAW
-	a_intent = INTENT_HARM
 	speed = 0
 	maxHealth = 80 //Two attacks with a dedicated melee weapon or 4 9mm bullets
 	health = 80
@@ -221,7 +219,6 @@
 	response_harm_continuous = "punches"
 	response_harm_simple = "punch"
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
-	a_intent = INTENT_HARM
 	speed = 1.5 //the tankier, the slower
 	maxHealth = 120 //three attacks with a dedicated melee weapon or 6 9mm bullets
 	health = 120
@@ -250,7 +247,6 @@
 	response_harm_continuous = "slaps"
 	response_harm_simple = "slap"
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
-	a_intent = INTENT_HARM
 	speed = 3 //really slow
 	maxHealth = 300 //six attacks with a dedicated melee weapon or 15 9mm bullets
 	health = 300
