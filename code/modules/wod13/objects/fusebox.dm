@@ -73,7 +73,7 @@
 	var/repairing = FALSE
 	//If our shit is open/closed. bool
 	var/open = FALSE
-	var/datum/looping_sound/generator/soundloop
+	var/datum/looping_sound/generator/transformer/soundloop
 
 /obj/transformer/Initialize()
 	. = ..()
@@ -108,6 +108,7 @@
 			playsound(get_turf(src),'code/modules/wod13/sounds/fix.ogg', 75, FALSE)
 			var/area/power_area = get_area(src)
 			power_area.requires_power = FALSE
+			soundloop.play()
 			if(initial(power_area.fire_controled))
 				power_area.fire_controled = TRUE
 			for(var/obj/machinery/light/L in power_area)
