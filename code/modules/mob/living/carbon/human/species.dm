@@ -452,7 +452,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
  * * new_species - The new species that the carbon became, used for genetics mutations.
  * * pref_load - Preferences to be loaded from character setup, loads in preferred mutant things like bodyparts, digilegs, skin color, etc.
  */
-/datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
+/datum/species/proc/on_species_loss(mob/living/carbon/C, datum/species/new_species, pref_load)
 	if(C.dna.species.exotic_bloodtype)
 		C.dna.blood_type = random_blood_type()
 	if(DIGITIGRADE in species_traits)
@@ -2046,6 +2046,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 //		flyslip(H)
 	. = stunmod * H.physiology.stun_mod * amount
 
+
 //////////////
 //Space Move//
 //////////////
@@ -2078,24 +2079,29 @@ GLOBAL_LIST_EMPTY(selectable_races)
 //FLIGHT SHIT//
 ///////////////
 
-/datum/species/proc/GiveSpeciesFlight(mob/living/carbon/human/H)
+/datum/species/proc/GiveSpeciesFlight(mob/living/carbon/H)
 	if(flying_species) //species that already have flying traits should not work with this proc
 		return
 	flying_species = TRUE
 	if(isnull(fly))
 		fly = new
 		fly.Grant(H)
-	if(H.dna.features["wings"] != wings_icon)
-		mutant_bodyparts["wings"] = wings_icon
-		H.dna.features["wings"] = wings_icon
-		H.update_body()
+	if(!HAS_TRAIT(H, TRAIT_CORAX))
+		var/mob/living/carbon/human/flyinghuman = H
+		if(flyinghuman.dna.features["wings"] != wings_icon)
+			mutant_bodyparts["wings"] = wings_icon
+			flyinghuman.dna.features["wings"] = wings_icon
+			flyinghuman.update_body()
 	var/datum/action/fly_upper/A = locate() in H.actions
 	if(A)
 		return
 	var/datum/action/fly_upper/DA = new()
 	DA.Grant(H)
 
-/datum/species/proc/RemoveSpeciesFlight(mob/living/carbon/human/H)
+
+
+
+/datum/species/proc/RemoveSpeciesFlight(mob/living/carbon/H)
 	if(flying_species)
 		flying_species = FALSE
 		fly.Remove(H)
@@ -2105,15 +2111,19 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		var/datum/action/fly_upper/A = locate() in H.actions
 		if(A)
 			qdel(A)
-		if(H.dna && H.dna.species && (H.dna.features["wings"] == wings_icon))
-			H.dna.species.mutant_bodyparts -= "wings"
-			H.dna.features["wings"] = "None"
-			H.update_body()
+		if(!HAS_TRAIT(H, TRAIT_CORAX))
+			var/mob/living/carbon/human/flyinghuman = H
+			if(flyinghuman.dna && flyinghuman.dna.species && (flyinghuman.dna.features["wings"] == wings_icon))
+				flyinghuman.dna.species.mutant_bodyparts -= "wings"
+				flyinghuman.dna.features["wings"] = "None"
+				flyinghuman.update_body()
+
+
 
 /datum/species
 	var/animation_goes_up = FALSE	//
 
-/datum/species/proc/HandleFlight(mob/living/carbon/human/H)
+/datum/species/proc/HandleFlight(mob/living/carbon/H)
 	if(H.movement_type & FLYING)
 		if(!CanFly(H))
 			ToggleFlight(H)
@@ -2140,19 +2150,22 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	else
 		return FALSE
 
-/datum/species/proc/CanFly(mob/living/carbon/human/H)
+/datum/species/proc/CanFly(mob/living/carbon/H)
 	if(H.stat || H.body_position == LYING_DOWN)
 		return FALSE
-	if(H.wear_suit && ((H.wear_suit.flags_inv & HIDEJUMPSUIT) && (!H.wear_suit.species_exception || !is_type_in_list(src, H.wear_suit.species_exception))))	//Jumpsuits have tail holes, so it makes sense they have wing holes too
-		to_chat(H, "<span class='warning'>Your suit blocks your wings from extending!</span>")
-		return FALSE
+	if (!iscorvid(H)) // this proc was originally defined for humans only, if we're not a corvid-form corax, then we assume we're human.
+		var/mob/living/carbon/human/flyinghuman = H
+		if(flyinghuman.wear_suit && ((flyinghuman.wear_suit.flags_inv & HIDEJUMPSUIT) && (!flyinghuman.wear_suit.species_exception || !is_type_in_list(src, flyinghuman.wear_suit.species_exception))))	//Jumpsuits have tail holes, so it makes sense they have wing holes too
+			to_chat(H, "<span class='warning'>Your suit blocks your wings from extending!</span>")
+			return FALSE
 	var/turf/T = get_turf(H)
 	if(!T)
 		return FALSE
 
 	return TRUE
 
-/datum/species/proc/flyslip(mob/living/carbon/human/H)
+
+/datum/species/proc/flyslip(mob/living/carbon/H)
 	var/obj/buckled_obj
 	if(H.buckled)
 		buckled_obj = H.buckled
@@ -2178,23 +2191,50 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	multiplicative_slowdown = -0.25
 
 //UNSAFE PROC, should only be called through the Activate or other sources that check for CanFly
-/datum/species/proc/ToggleFlight(mob/living/carbon/human/H)
-	if(!HAS_TRAIT_FROM(H, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT))
+/datum/species/proc/ToggleFlight(mob/living/carbon/flying_mob)
+	if(!HAS_TRAIT_FROM(flying_mob, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT))
 		stunmod *= 2
 		speedmod -= 0.35
-		ADD_TRAIT(H, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
-		ADD_TRAIT(H, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
-		passtable_on(H, SPECIES_TRAIT)
-		H.add_movespeed_modifier(/datum/movespeed_modifier/wing)
-		H.OpenWings()
+		ADD_TRAIT(flying_mob, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
+		ADD_TRAIT(flying_mob, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
+		passtable_on(flying_mob, SPECIES_TRAIT)
+		flying_mob.add_movespeed_modifier(/datum/movespeed_modifier/wing)
+		if(!HAS_TRAIT(flying_mob, TRAIT_CORAX))
+			flying_mob.OpenWings()
+		else
+			TweakCoraxSpriteFlight(flying_mob)
+
 	else
 		stunmod *= 0.5
 		speedmod += 0.35
-		REMOVE_TRAIT(H, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
-		REMOVE_TRAIT(H, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
-		passtable_off(H, SPECIES_TRAIT)
-		H.remove_movespeed_modifier(/datum/movespeed_modifier/wing)
-		H.CloseWings()
+		REMOVE_TRAIT(flying_mob, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
+		REMOVE_TRAIT(flying_mob, TRAIT_MOVE_FLYING, SPECIES_FLIGHT_TRAIT)
+		passtable_off(flying_mob, SPECIES_TRAIT)
+		flying_mob.remove_movespeed_modifier(/datum/movespeed_modifier/wing)
+		if(!HAS_TRAIT(flying_mob, TRAIT_CORAX))
+			flying_mob.CloseWings()
+		else
+			TweakCoraxSpriteLand(flying_mob)
+
+/datum/species/proc/TweakCoraxSpriteFlight(mob/living/carbon/werewolf/lupus/corvid/target) // yet another version for Corax specifically
+	target.icon_state = "[target.sprite_color]_flying"
+	target.cut_overlays()
+	var/mutable_appearance/eye_overlay = mutable_appearance(target.icon, "eyes_flying")
+	eye_overlay.color = target.sprite_eye_color
+	eye_overlay.plane = ABOVE_LIGHTING_PLANE
+	eye_overlay.layer = ABOVE_LIGHTING_LAYER
+	target.add_overlay(eye_overlay)
+
+/datum/species/proc/TweakCoraxSpriteLand(mob/living/carbon/werewolf/lupus/corvid/target)
+	target.icon_state = "[target.sprite_color]"
+	target.cut_overlays()
+	var/mutable_appearance/eye_overlay = mutable_appearance(target.icon, "eyes")
+	eye_overlay.color = target.sprite_eye_color
+	eye_overlay.plane = ABOVE_LIGHTING_PLANE
+	eye_overlay.layer = ABOVE_LIGHTING_LAYER
+	target.add_overlay(eye_overlay)
+
+
 
 /datum/action/innate/flight
 	name = "Toggle Flight"
@@ -2203,7 +2243,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	button_icon_state = "flight"
 
 /datum/action/innate/flight/Activate()
-	var/mob/living/carbon/human/H = owner
+	var/mob/living/carbon/H = owner
 	var/datum/species/S = H.dna.species
 	if(S.CanFly(H))
 		S.ToggleFlight(H)
@@ -2212,7 +2252,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		else
 			to_chat(H, "<span class='notice'>You beat your wings and begin to hover gently above the ground...</span>")
 			H.set_resting(FALSE, TRUE)
-
 /**
  * The human species version of [/mob/living/carbon/proc/get_biological_state]. Depends on the HAS_FLESH and HAS_BONE species traits, having bones lets you have bone wounds, having flesh lets you have burn, slash, and piercing wounds
  */

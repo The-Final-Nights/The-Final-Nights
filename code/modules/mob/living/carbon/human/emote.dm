@@ -206,7 +206,7 @@
 	if(H.dna && H.dna.species && (H.dna.features["wings"] != "None"))
 		return TRUE
 
-/mob/living/carbon/human/proc/OpenWings()
+/mob/living/carbon/proc/OpenWings()
 	if(!dna || !dna.species)
 		return
 	if(dna.species.mutant_bodyparts["wings"])
@@ -214,7 +214,7 @@
 		dna.species.mutant_bodyparts -= "wings"
 	update_body()
 
-/mob/living/carbon/human/proc/CloseWings()
+/mob/living/carbon/proc/CloseWings()
 	if(!dna || !dna.species)
 		return
 	if(dna.species.mutant_bodyparts["wingsopen"])
