@@ -35,7 +35,7 @@
 	paycheck_department = ACCOUNT_SRV
 	bounty_types = CIV_JOB_RANDOM
 
-	departments = DEPARTMENT_CAMARILLA
+	departments = DEPARTMENT_BITFLAG_CAMARILLA
 
 	liver_traits = list(TRAIT_ROYAL_METABOLISM)
 
