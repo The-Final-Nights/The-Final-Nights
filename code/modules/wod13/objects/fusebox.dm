@@ -66,7 +66,7 @@
 
 /obj/transformer/Initialize()
 	. = ..()
-	soundloop = new(list(src), damaged)
+	soundloop = new(list(src), TRUE)
 
 /obj/transformer/proc/check_damage(mob/living/user)
 	if(damaged > 100 && icon_state != "sstation_off")
