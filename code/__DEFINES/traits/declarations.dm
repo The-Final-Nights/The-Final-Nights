@@ -205,6 +205,7 @@
 #define TRAIT_UNMASQUERADE		"unmasquerade"	//For tzi clothing
 #define TRAIT_NONMASQUERADE		"nonmasquerade"	//For tzi mods
 #define TRAIT_GUNFIGHTER        "gunfighter"    //Halves firing delay and cooldown between burst fire shots
+#define TRAIT_BABY_TEETH		"baby_teeth"
 #define TRAIT_WARRIOR			"warrior"
 
 /// Makes gambling incredibly effective, and causes random beneficial events to happen for the mob.
