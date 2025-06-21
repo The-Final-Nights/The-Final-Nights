@@ -14819,10 +14819,6 @@
 	},
 /turf/open/indestructible/necropolis/air,
 /area/vtm/sewer/tzimisce_sanctum)
-"dqg" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/closed/wall/vampwall/painted,
-/area/vtm/clinic/haven)
 "dqh" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/sidewalk/old,
@@ -69830,12 +69826,6 @@
 /obj/structure/vampstatue/angel,
 /turf/open/water,
 /area/vtm/sewer/cappadocian)
-"qbo" = (
-/obj/effect/decal/bordur/corner{
-	dir = 4
-	},
-/turf/closed/wall/vampwall/junk,
-/area/vtm/sewer/nosferatu_town)
 "qbs" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/junglebush,
@@ -129798,7 +129788,7 @@ nxc
 nxc
 wJn
 eEe
-qbo
+wJn
 nxc
 nxc
 nxc
@@ -130318,9 +130308,9 @@ eDf
 eDf
 eDf
 nYS
-oIa
-oIa
-oIa
+nYS
+nYS
+nYS
 eDf
 eDf
 eDf
@@ -130574,8 +130564,8 @@ rro
 iXi
 iXi
 eDf
-dqg
-dqg
+eDf
+eDf
 eDf
 eDf
 uCb
