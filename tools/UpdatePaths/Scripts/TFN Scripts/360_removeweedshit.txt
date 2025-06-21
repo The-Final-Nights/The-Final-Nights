@@ -1,5 +1,5 @@
-/obj/structure/weedshit : /obj/machinery/hydroponics/constructable
-/obj/item/weedpack : /obj/item/food/grown/cannabis
-/obj/item/weedseed : /obj/item/seeds/cannabis
-/obj/item/food/vampire/weed : /obj/item/food/grown/cannabis
-/obj/item/bailer : /obj/item/reagent_containers/glass/wateringcan
+/obj/structure/weedshit : /obj/machinery/hydroponics/constructable{@OLD}
+/obj/item/weedpack : /obj/item/food/grown/cannabis{@OLD}
+/obj/item/weedseed : /obj/item/seeds/cannabis{@OLD}
+/obj/item/food/vampire/weed : /obj/item/food/grown/cannabis{@OLD}
+/obj/item/bailer : /obj/item/reagent_containers/glass/wateringcan{@OLD}

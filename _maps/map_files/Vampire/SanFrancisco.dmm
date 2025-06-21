@@ -16107,7 +16107,7 @@
 /obj/item/clothing/under/suit/charcoal,
 /obj/item/clothing/under/suit/black_really/skirt,
 /obj/item/clothing/under/suit/black/female,
-/obj/item/clothing/under/suit/black,
+/obj/item/clothing/under/suit/blacktwopiece,
 /obj/item/clothing/under/suit/black/skirt,
 /obj/item/clothing/suit/vampire/orthodox,
 /obj/item/clothing/suit/vampire/noddist,
@@ -60991,9 +60991,9 @@
 /area/vtm/interior)
 "osG" = (
 /obj/structure/table/wood,
-/obj/item/clothing/under/suit/black,
-/obj/item/clothing/under/suit/black,
-/obj/item/clothing/under/suit/black,
+/obj/item/clothing/under/suit/blacktwopiece,
+/obj/item/clothing/under/suit/blacktwopiece,
+/obj/item/clothing/under/suit/blacktwopiece,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "osT" = (
