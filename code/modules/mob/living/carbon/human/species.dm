@@ -81,6 +81,10 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		BODY_ZONE_L_LEG = /obj/item/bodypart/l_leg,\
 		BODY_ZONE_R_LEG = /obj/item/bodypart/r_leg,\
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest)
+
+	/// Flat modifier on all damage taken via [apply_damage][/mob/living/proc/apply_damage] (so being punched, shot, etc.)
+	/// IE: 10 = 10% less damage taken.
+	var/damage_modifier = 0
 	///Multiplier for the race's speed. Positive numbers make it move slower, negative numbers make it move faster.
 	var/speedmod = 0
 	///Percentage modifier for overall defense of the race, or less defense, if it's negative.
@@ -1201,9 +1205,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	if(chem.overdose_threshold && chem.volume >= chem.overdose_threshold)
 		chem.overdosed = TRUE
 
-/datum/species/proc/check_species_weakness(obj/item, mob/living/attacker)
-	return 1 //This is not a boolean, it's the multiplier for the damage that the user takes from the item. The force of the item is multiplied by this value
-
 /**
  * Equip the outfit required for life. Replaces items currently worn.
  */
@@ -1365,22 +1366,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 
 	user.do_cpr(target)
 
-
-/datum/species/proc/grab(mob/living/carbon/human/user, mob/living/target, datum/martial_art/attacker_style)
-	if(ishuman(target))
-		var/mob/living/carbon/human/human = target
-		if(human.check_block())
-			human.visible_message("<span class='warning'>[human] blocks [user]'s grab!</span>", \
-							"<span class='userdanger'>You block [user]'s grab!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, "<span class='warning'>Your grab at [human] was blocked!</span>")
-			return FALSE
-	if(attacker_style?.grab_act(user,target))
-		return TRUE
-	else
-		target.grabbedby(user)
-		return TRUE
-
-///This proc handles punching damage. IMPORTANT: Our owner is the TARGET and not the USER in this proc. For whatever reason...
 /datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
@@ -1416,8 +1401,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 				user.do_attack_animation(target, ATTACK_EFFECT_PUNCH)
 
 		var/damage = (rand(user.dna.species.punchdamagelow, user.dna.species.punchdamagehigh)/3)*(user.get_total_physique())
-		if(user.age < 16)
-			damage = round(damage/2)
 
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected))
 
@@ -1451,18 +1434,22 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
 		user.lastattacked = target
-		user.dna.species.spec_unarmedattacked(user, target)
 
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
 
+		var/meleemod = 1
+		meleemod = user.dna.species.meleemod
+		if(user.get_total_physique() > 4)
+			meleemod = (meleemod)+((user.get_total_physique() + 1)/5 - 1) //1.2x at Physique 5, increasing by 0.2x per point higher than that.
+
 		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.1x raw damage
-			target.apply_damage(damage*1.1, user.dna.species.attack_type, affecting, armor_block)
+			target.apply_damage(damage*1.1*meleemod, user.dna.species.attack_type, affecting, armor_block)
 			if((damage * 1.5) >= 9)
 				target.force_say()
 			log_combat(user, target, "kicked")
 		else//other attacks deal full damage
-			target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block)
+			target.apply_damage(damage*meleemod, user.dna.species.attack_type, affecting, armor_block)
 			if(damage >= 9)
 				target.force_say()
 			log_combat(user, target, "punched")
@@ -1472,7 +1459,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			//Compare puncher's physique to the greater between the target's physique (robust enough to tank it) or dexterity (rolls with the punches)
 			var/roll = SSroll.storyteller_roll(
 			dice = target.get_total_physique() + round(min(target.get_total_athletics(), target.get_total_dexterity()) / 2),
-			difficulty = clamp(user.get_total_physique(), 1, 4) + (user.melee_professional ? rand(1,4) : 0),
+			difficulty = clamp(user.get_total_physique(), 1, 4) + (HAS_TRAIT(user, TRAIT_WARRIOR) ? rand(1,4) : 0),
 			mobs_to_show_output = user)
 
 			if(roll == ROLL_FAILURE)
@@ -1480,17 +1467,9 @@ GLOBAL_LIST_EMPTY(selectable_races)
 				to_chat(user, "<span class='danger'>You knock [target] down!</span>")
 				target.apply_effect(2 SECONDS, EFFECT_KNOCKDOWN, armor_block)
 				log_combat(user, target, "got a stun punch with their previous punch")
-
-
-/datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	return
+	return TRUE
 
 /datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
-	if(target.check_block())
-		target.visible_message("<span class='warning'>[user]'s shove is blocked by [target]!</span>", \
-						"<span class='danger'>You block [user]'s shove!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, user)
-		to_chat(user, "<span class='warning'>Your shove at [target] was blocked!</span>")
-		return FALSE
 	if(attacker_style?.disarm_act(user,target))
 		return TRUE
 	if(user.body_position != STANDING_UP)
@@ -1505,219 +1484,32 @@ GLOBAL_LIST_EMPTY(selectable_races)
 /datum/species/proc/spec_hitby(atom/movable/AM, mob/living/carbon/human/H)
 	return
 
-/datum/species/proc/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)
-	if(!istype(M))
+/datum/species/proc/spec_attack_hand(mob/living/carbon/human/owner, mob/living/carbon/human/target, datum/martial_art/attacker_style, modifiers)
+	if(!istype(owner))
 		return
-	CHECK_DNA_AND_SPECIES(M)
-	CHECK_DNA_AND_SPECIES(H)
+	CHECK_DNA_AND_SPECIES(owner)
+	CHECK_DNA_AND_SPECIES(target)
 
-	if(!istype(M)) //sanity check for drones.
+	if(!istype(owner)) //sanity check for drones.
 		return
-	if(M.mind)
-		attacker_style = M.mind.martial_art
-	if((M != H) && M.a_intent != INTENT_HELP && H.check_shields(M, 0, M.name, attack_type = UNARMED_ATTACK))
-		log_combat(M, H, "attempted to touch")
-		H.visible_message("<span class='warning'>[M] attempts to touch [H]!</span>", \
-						"<span class='danger'>[M] attempts to touch you!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, M)
-		to_chat(M, "<span class='warning'>You attempt to touch [H]!</span>")
+	if(owner.mind)
+		attacker_style = owner.mind.martial_art
+	if((owner != target) && target.check_block(owner, 0, owner.name, attack_type = UNARMED_ATTACK))
+		log_combat(owner, target, "attempted to touch")
+		target.visible_message("<span class='warning'>[owner] attempts to touch [target]!</span>", \
+						"<span class='danger'>[owner] attempts to touch you!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, owner)
+		to_chat(owner, "<span class='warning'>You attempt to touch [target]!</span>")
 		return
-	SEND_SIGNAL(M, COMSIG_MOB_ATTACK_HAND, M, H, attacker_style)
-	SEND_SIGNAL(H, COMSIG_MOB_ATTACKED_HAND, M, H, attacker_style)
-	switch(M.a_intent)
-		if("help")
-			help(M, H, attacker_style)
 
-		if("grab")
-			grab(M, H, attacker_style)
+	SEND_SIGNAL(owner, COMSIG_MOB_ATTACK_HAND, owner, target, attacker_style)
 
-		if("harm")
-			harm(M, H, attacker_style)
-
-		if("disarm")
-			disarm(M, H, attacker_style)
-
-/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H)
-	// Allows you to put in item-specific reactions based on species
-	var/meleemod = 1
-	if(ishuman(user))
-		var/mob/living/carbon/human/M = user
-		if(M.dna)
-			if(M.dna.species)
-				meleemod = M.dna.species.meleemod
-		if(user.get_total_physique() > 4)
-			meleemod = (meleemod)+((user.get_total_physique() + 1)/5 - 1) //1.2x at Physique 5, increasing by 0.2x per point higher than that.
-	if(user != H)
-		if(H.check_shields(I, I.force, "the [I.name]", MELEE_ATTACK, I.armour_penetration))
-			return FALSE
-	if(H.check_block())
-		H.visible_message("<span class='warning'>[H] blocks [I]!</span>", \
-						"<span class='userdanger'>You block [I]!</span>")
-		return FALSE
-
-	var/hit_area
-	if(!affecting) //Something went wrong. Maybe the limb is missing?
-		affecting = H.bodyparts[1]
-
-	hit_area = affecting.name
-	var/def_zone = affecting.body_zone
-
-	var/armor_block = H.run_armor_check(affecting, MELEE, "<span class='notice'>Your armor has protected your [hit_area]!</span>", "<span class='warning'>Your armor has softened a hit to your [hit_area]!</span>",I.armour_penetration)
-	armor_block = min(90,armor_block) //cap damage reduction at 90%
-	var/Iwound_bonus = I.wound_bonus
-
-	// this way, you can't wound with a surgical tool on help intent if they have a surgery active and are lying down, so a misclick with a circular saw on the wrong limb doesn't bleed them dry (they still get hit tho)
-	if((I.item_flags & SURGICAL_TOOL) && user.a_intent == INTENT_HELP && H.body_position == LYING_DOWN && (LAZYLEN(H.surgeries) > 0))
-		Iwound_bonus = CANT_WOUND
-
-	var/weakness = check_species_weakness(I, user)
-
-	H.send_item_attack_message(I, user, hit_area, affecting)
-
-	if(prob(50) && I.force > 5)
-		for(var/obj/item/vtm_artifact/odious_chalice/OC in user.GetAllContents())
-			if(OC)
-				if(OC.identified)
-					if(H.bloodpool)
-						H.bloodpool = max(0, H.bloodpool-1)
-						OC.stored_blood = OC.stored_blood+1
-	apply_damage((I.force*meleemod) * weakness, I.damtype, def_zone, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
-
-	if(!I.force)
-		return FALSE //item force is zero
-
-	var/bloody = FALSE
-	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
-		if(affecting.status == BODYPART_ORGANIC)
-			I.add_mob_blood(H)	//Make the weapon bloody, not the person.
-			if(prob(I.force * 2))	//blood spatter!
-				bloody = TRUE
-				var/turf/location = H.loc
-				if(istype(location))
-					H.add_splatter_floor(location)
-				if(get_dist(user, H) <= 1)	//people with TK won't get smeared with blood
-					user.add_mob_blood(H)
-
-		switch(hit_area)
-			if(BODY_ZONE_HEAD)
-				if(!I.get_sharpness() && armor_block < 50)
-					if(prob(I.force))
-						H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 20)
-						if(H.stat == CONSCIOUS)
-							H.visible_message("<span class='danger'>[H] is knocked senseless!</span>", \
-											"<span class='userdanger'>You're knocked senseless!</span>")
-							H.set_confusion(max(H.get_confusion(), 20))
-							H.adjust_blurriness(10)
-						if(prob(10))
-							H.gain_trauma(/datum/brain_trauma/mild/concussion)
-					else
-						H.adjustOrganLoss(ORGAN_SLOT_BRAIN, I.force * 0.2)
-
-					if(H.mind && H.stat == CONSCIOUS && H != user && prob(I.force + ((100 - H.health) * 0.5))) // rev deconversion through blunt trauma.
-						var/datum/antagonist/rev/rev = H.mind.has_antag_datum(/datum/antagonist/rev)
-						if(rev)
-							rev.remove_revolutionary(FALSE, user)
-
-				if(bloody)	//Apply blood
-					if(H.wear_mask)
-						H.wear_mask.add_mob_blood(H)
-						H.update_inv_wear_mask()
-					if(H.head)
-						H.head.add_mob_blood(H)
-						H.update_inv_head()
-					if(H.glasses && prob(33))
-						H.glasses.add_mob_blood(H)
-						H.update_inv_glasses()
-
-			if(BODY_ZONE_CHEST)
-				if(H.stat == CONSCIOUS && !I.get_sharpness() && armor_block < 50)
-					if(prob(I.force))
-						H.visible_message("<span class='danger'>[H] is knocked down!</span>", \
-									"<span class='userdanger'>You're knocked down!</span>")
-						H.apply_effect(60, EFFECT_KNOCKDOWN, armor_block)
-
-				if(bloody)
-					if(H.wear_suit)
-						H.wear_suit.add_mob_blood(H)
-						H.update_inv_wear_suit()
-					if(H.w_uniform)
-						H.w_uniform.add_mob_blood(H)
-						H.update_inv_w_uniform()
-
-		/// Triggers force say events
-		if(I.force > 10 || I.force >= 5 && prob(33))
-			H.force_say(user)
-
-	return TRUE
-
-/datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, spread_damage = FALSE, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE)
-	SEND_SIGNAL(H, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone, wound_bonus, bare_wound_bonus, sharpness) // make sure putting wound_bonus here doesn't screw up other signals or uses for this signal
-	var/hit_percent = (100-(blocked+armor))/100
-	hit_percent = (hit_percent * (100-H.physiology.damage_resistance))/100
-	if(!damage || (!forced && hit_percent <= 0))
-		return 0
-
-	var/obj/item/bodypart/BP = null
-	if(!spread_damage)
-		if(isbodypart(def_zone))
-			BP = def_zone
-		else
-			if(!def_zone)
-				def_zone = ran_zone(def_zone)
-			BP = H.get_bodypart(check_zone(def_zone))
-			if(!BP)
-				BP = H.bodyparts[1]
-
-	switch(damagetype)
-		if(BRUTE)
-			H.damageoverlaytemp = 20
-			var/damage_amount = forced ? damage : damage * hit_percent * brutemod * H.physiology.brute_mod
-			if(BP)
-				if(BP.receive_damage(damage_amount, 0, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness))
-					H.update_damage_overlays()
-			else//no bodypart, we deal damage with a more general method.
-				H.adjustBruteLoss(damage_amount)
-		if(BURN)
-			H.damageoverlaytemp = 20
-			var/damage_amount = forced ? damage : damage * hit_percent * burnmod * H.physiology.burn_mod
-			if(BP)
-				if(BP.receive_damage(0, damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness))
-					H.update_damage_overlays()
-			else
-				H.adjustFireLoss(damage_amount)
-		if(TOX)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.tox_mod
-			H.adjustToxLoss(damage_amount)
-		if(OXY)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.oxy_mod
-			H.adjustOxyLoss(damage_amount)
-		if(CLONE)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.clone_mod
-			H.adjustCloneLoss(damage_amount)
-		if(STAMINA)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.stamina_mod
-			if(BP)
-				if(BP.receive_damage(0, 0, damage_amount))
-					H.update_stamina()
-			else
-				H.adjustStaminaLoss(damage_amount)
-		if(BRAIN)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.brain_mod
-			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_amount)
-	return 1
-
-/datum/species/proc/on_hit(obj/projectile/P, mob/living/carbon/human/H)
-	// called when hit by a projectile
-	switch(P.type)
-		if(/obj/projectile/energy/floramut) // overwritten by plants/pods
-			H.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
-		if(/obj/projectile/energy/florayield)
-			H.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
-		if(/obj/projectile/energy/florarevolution)
-			H.show_message("<span class='notice'>The radiation beam dissipates harmlessly through your body.</span>")
-
-/datum/species/proc/bullet_act(obj/projectile/P, mob/living/carbon/human/H)
-	// called before a projectile hit
-	return 0
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		disarm(owner, target, attacker_style)
+		return // dont attack after
+	if(owner.combat_mode)
+		harm(owner, target, attacker_style)
+	else
+		help(owner, target, attacker_style)
 
 /////////////
 //BREATHING//
@@ -2222,11 +2014,6 @@ GLOBAL_LIST_EMPTY(selectable_races)
 		. |= BIO_JUST_FLESH
 	if(HAS_BONE in species_traits)
 		. |= BIO_JUST_BONE
-
-///Species override for unarmed attacks because the attack_hand proc was made by a mouth-breathing troglodyte on a tricycle. Also to whoever thought it would be a good idea to make it so the original spec_unarmedattack was not actually linked to unarmed attack needs to be checked by a doctor because they clearly have a vast empty space in their head.
-/datum/species/proc/spec_unarmedattack(mob/living/carbon/human/user, atom/target)
-	return FALSE
-
 
 ///Removes any non-native limbs from the mob
 /datum/species/proc/fix_non_native_limbs(mob/living/carbon/human/H)

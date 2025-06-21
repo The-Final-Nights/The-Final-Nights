@@ -83,7 +83,7 @@
 	blade_secured = !blade_secured
 	return TRUE
 
-/obj/item/papercutter/attack_hand(mob/user)
+/obj/item/papercutter/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(!stored_blade)
 		balloon_alert(user, "no blade!")

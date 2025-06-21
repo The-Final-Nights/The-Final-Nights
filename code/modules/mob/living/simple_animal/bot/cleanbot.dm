@@ -52,6 +52,8 @@
 
 	var/ascended = FALSE // if we have all the top titles, grant achievements to living mobs that gaze upon our cleanbot god
 
+/mob/living/simple_animal/bot/cleanbot/Initialize(mapload)
+	. = ..()
 
 /mob/living/simple_animal/bot/cleanbot/proc/deputize(obj/item/W, mob/user)
 	if(in_range(src, user))
@@ -159,7 +161,7 @@
 		weapon.attack(C, src)
 		C.Knockdown(20)
 
-/mob/living/simple_animal/bot/cleanbot/attackby(obj/item/W, mob/user, params)
+/mob/living/simple_animal/bot/cleanbot/attackby(obj/item/W, mob/living/user, params)
 	if(W.GetID())
 		if(bot_core.allowed(user) && !open && !emagged)
 			locked = !locked
@@ -171,7 +173,7 @@
 				to_chat(user, "<span class='warning'>Please close the access panel before locking it.</span>")
 			else
 				to_chat(user, "<span class='notice'>\The [src] doesn't seem to respect your authority.</span>")
-	else if(istype(W, /obj/item/kitchen/knife) && user.a_intent != INTENT_HARM)
+	else if(istype(W, /obj/item/kitchen/knife) && !user.combat_mode)
 		to_chat(user, "<span class='notice'>You start attaching \the [W] to \the [src]...</span>")
 		if(do_after(user, 25, target = src))
 			deputize(W, user)
@@ -211,7 +213,6 @@
 
 			if(prob(15)) // Wets floors and spawns foam randomly
 				UnarmedAttack(src)
-
 	else if(prob(5))
 		audible_message("[src] makes an excited beeping booping sound!")
 
@@ -259,8 +260,6 @@
 					target = null
 					mode = BOT_IDLE
 					return
-			else
-				shuffle = TRUE	//Shuffle the list the next time we scan so we dont both go the same way.
 			path = list()
 
 		if(!path || path.len == 0) //No path, need a new one
@@ -311,19 +310,17 @@
 
 	target_types = typecacheof(target_types)
 
-/mob/living/simple_animal/bot/cleanbot/UnarmedAttack(atom/A)
+/mob/living/simple_animal/bot/cleanbot/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		return
 	if(ismopable(A))
 		icon_state = "cleanbot-c"
 		mode = BOT_CLEANING
-
 		var/turf/T = get_turf(A)
 		if(do_after(src, 1, target = T))
 			T.wash(CLEAN_SCRUB)
 			visible_message("<span class='notice'>[src] cleans \the [T].</span>")
 			target = null
-
 		mode = BOT_IDLE
 		icon_state = "cleanbot[on]"
 	else if(istype(A, /obj/item) || istype(A, /obj/effect/decal/remains))

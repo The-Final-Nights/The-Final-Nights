@@ -3697,7 +3697,6 @@
 #include "code\modules\wod13\npcs\sabbat_npc.dm"
 #include "code\modules\wod13\objects\fusebox.dm"
 #include "code\modules\wod13\objects\generator.dm"
-#include "code\modules\wod13\objects\sabbatrunes.dm"
 #include "code\modules\wod13\status_effects\debuffs.dm"
 #include "code\modules\wod13\structures\hydroponics.dm"
 #include "code\modules\wod13\structures\methlab.dm"

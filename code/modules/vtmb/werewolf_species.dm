@@ -26,7 +26,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/host
 
-/datum/action/garouinfo/Trigger()
+/datum/action/garouinfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">
@@ -137,10 +137,10 @@
 	C.transformator = new(C)
 	C.transformator.human_form = WEAKREF(C)
 
-	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
-	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
-	var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
-	var/mob/living/carbon/werewolf/corax/corax_crinos/corax_crinos = C.transformator.corax_form?.resolve()
+	var/mob/living/simple_animal/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+	var/mob/living/simple_animal/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+	var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
+	var/mob/living/simple_animal/werewolf/corax/corax_crinos/corax_crinos = C.transformator.corax_form?.resolve()
 
 	//garou resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_garou_bitten))
@@ -151,10 +151,10 @@
 
 /datum/species/garou/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
-	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
-	var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
-	var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
-	var/mob/living/carbon/werewolf/corax/corax_crinos/corax_crinos = C.transformator.corax_form?.resolve()
+	var/mob/living/simple_animal/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+	var/mob/living/simple_animal/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+	var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
+	var/mob/living/simple_animal/werewolf/corax/corax_crinos/corax_crinos = C.transformator.corax_form?.resolve()
 
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
 	UnregisterSignal(lupus, COMSIG_MOB_VAMPIRE_SUCKED)

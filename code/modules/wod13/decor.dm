@@ -883,17 +883,14 @@
 	opacity = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
-	var/matrixing = FALSE
 
 /obj/matrix/attack_hand(mob/user)
 	if(user.client)
-		if(!matrixing)
-			matrixing = TRUE
-			if(do_after(user, 100, src))
-				cryoMob(user, src)
-				matrixing = FALSE
-			else
-				matrixing = FALSE
+		if(iswerewolf(user))
+			to_chat(user, span_warning("Return to your homid form before you matrix!"))
+			return TRUE
+		if(do_after(user, 100, src))
+			cryoMob(user, src)
 	return TRUE
 
 /obj/matrix/proc/cryoMob(mob/living/mob_occupant)

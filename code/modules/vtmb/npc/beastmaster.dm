@@ -43,12 +43,12 @@ SUBSYSTEM_DEF(beastmastering)
 	. = ..()
 	if(stat < 1)
 		if(beastmaster)
-			beastmaster.beastmaster -= src
-			if(!length(beastmaster.beastmaster))
-				for(var/datum/action/beastmaster_stay/E in beastmaster.actions)
+			beastmaster_owner.beastmaster -= src
+			if(!length(beastmaster_owner.beastmaster))
+				for(var/datum/action/beastmaster_stay/E in beastmaster_owner.actions)
 					if(E)
 						qdel(E)
-				for(var/datum/action/beastmaster_deaggro/E in beastmaster.actions)
+				for(var/datum/action/beastmaster_deaggro/E in beastmaster_owner.actions)
 					if(E)
 						qdel(E)
 		GLOB.beast_list -= src
@@ -56,12 +56,12 @@ SUBSYSTEM_DEF(beastmastering)
 /mob/living/simple_animal/hostile/beastmaster/death(gibbed)
 	. = ..()
 	if(beastmaster)
-		beastmaster.beastmaster -= src
-		if(!length(beastmaster.beastmaster))
-			for(var/datum/action/beastmaster_stay/E in beastmaster.actions)
+		beastmaster_owner.beastmaster -= src
+		if(!length(beastmaster_owner.beastmaster))
+			for(var/datum/action/beastmaster_stay/E in beastmaster_owner.actions)
 				if(E)
 					qdel(E)
-			for(var/datum/action/beastmaster_deaggro/E in beastmaster.actions)
+			for(var/datum/action/beastmaster_deaggro/E in beastmaster_owner.actions)
 				if(E)
 					qdel(E)
 	GLOB.beast_list -= src
@@ -87,7 +87,6 @@ SUBSYSTEM_DEF(beastmastering)
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'code/modules/wod13/sounds/dog.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 2
@@ -96,7 +95,7 @@ SUBSYSTEM_DEF(beastmastering)
 	AIStatus = AI_OFF
 
 	var/follow = TRUE
-	var/mob/living/carbon/human/beastmaster
+	var/mob/living/carbon/human/beastmaster_owner
 	var/list/enemies = list()
 	var/mob/living/targa
 
@@ -130,29 +129,29 @@ SUBSYSTEM_DEF(beastmastering)
 		if(get_dist(src, targa) <= 1)
 			ClickOn(targa)
 	else
-		if(follow && isturf(beastmaster?.loc))
-			if( (z != beastmaster.z) & (get_dist(beastmaster.loc, loc) <= 10) )
-				forceMove(get_turf(beastmaster))
+		if(follow && isturf(beastmaster_owner?.loc))
+			if( (z != beastmaster_owner.z) & (get_dist(beastmaster_owner.loc, loc) <= 10) )
+				forceMove(get_turf(beastmaster_owner))
 			else
 				var/reqsteps = round((SSbeastmastering.next_fire-world.time)/totalshit)
-				walk_to(src, beastmaster, reqsteps, total_multiplicative_slowdown())
+				walk_to(src, beastmaster_owner, reqsteps, total_multiplicative_slowdown())
 		else
 			walk(src, 0)
 
 /mob/living/simple_animal/hostile/beastmaster/proc/add_beastmaster_enemies(mob/living/L)
 	if(istype(L, /mob/living/simple_animal/hostile/beastmaster))
 		var/mob/living/simple_animal/hostile/beastmaster/M = L
-		if(M.beastmaster == beastmaster)
+		if(M.beastmaster_owner == beastmaster_owner)
 			return
-	if(L == beastmaster)
+	if(L == beastmaster_owner)
 		return
 	enemies |= L
 	if(!targa)
 		targa = L
 
-/mob/living/carbon/human/attack_hand(mob/user)
+/mob/living/carbon/human/attack_hand(mob/living/carbon/human/user)
 	if(user)
-		if(user.a_intent != INTENT_HELP)
+		if(!(user.combat_mode))
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster)
 				B.add_beastmaster_enemies(user)
 	..()
@@ -195,10 +194,10 @@ SUBSYSTEM_DEF(beastmastering)
 			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster)
 				B.add_beastmaster_enemies(A)
 
-/mob/living/simple_animal/hostile/beastmaster/attack_hand(mob/user)
+/mob/living/simple_animal/hostile/beastmaster/attack_hand(mob/living/carbon/human/user)
 	if(user)
-		if(user.a_intent != INTENT_HELP)
-			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster.beastmaster)
+		if(user.combat_mode)
+			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster_owner.beastmaster)
 				B.add_beastmaster_enemies(user)
 	..()
 
@@ -206,32 +205,32 @@ SUBSYSTEM_DEF(beastmastering)
 	. = ..()
 	if(P)
 		if(P.firer)
-			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster.beastmaster)
+			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster_owner.beastmaster)
 				B.add_beastmaster_enemies(P.firer)
 
 /mob/living/simple_animal/hostile/beastmaster/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
 	. = ..()
 	if(throwingdatum)
 		if(throwingdatum.thrower)
-			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster.beastmaster)
+			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster_owner.beastmaster)
 				B.add_beastmaster_enemies(throwingdatum.thrower)
 
 /mob/living/simple_animal/hostile/beastmaster/attackby(obj/item/W, mob/living/user, params)
 	. = ..()
 	if(user)
 		if(W.force)
-			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster.beastmaster)
+			for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster_owner.beastmaster)
 				B.add_beastmaster_enemies(user)
 
 /mob/living/simple_animal/hostile/beastmaster/grabbedby(mob/living/carbon/user, supress_message = FALSE)
 	. = ..()
 	if(user)
-		for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster.beastmaster)
+		for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster_owner.beastmaster)
 			B.add_beastmaster_enemies(user)
 
 /mob/living/simple_animal/hostile/beastmaster/attack_animal(mob/user)
 	if(user)
-		for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster.beastmaster)
+		for(var/mob/living/simple_animal/hostile/beastmaster/B in beastmaster_owner.beastmaster)
 			B.add_beastmaster_enemies(user)
 	..()
 
@@ -243,7 +242,7 @@ SUBSYSTEM_DEF(beastmastering)
 	var/cool_down = 0
 	var/following = FALSE
 
-/datum/action/beastmaster_stay/Trigger()
+/datum/action/beastmaster_stay/Trigger(trigger_flags)
 	. = ..()
 	if(ishuman(owner))
 		if(cool_down+10 >= world.time)
@@ -268,7 +267,7 @@ SUBSYSTEM_DEF(beastmastering)
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	var/cool_down = 0
 
-/datum/action/beastmaster_deaggro/Trigger()
+/datum/action/beastmaster_deaggro/Trigger(trigger_flags)
 	. = ..()
 	if(ishuman(owner))
 		if(cool_down+10 >= world.time)

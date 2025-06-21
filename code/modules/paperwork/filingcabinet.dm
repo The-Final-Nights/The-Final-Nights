@@ -44,8 +44,8 @@
 
 /obj/structure/filingcabinet/attackby(obj/item/P, mob/living/user, params)
 	var/list/modifiers = params2list(params)
-	if(P.tool_behaviour == TOOL_WRENCH && LAZYACCESS(modifiers, "right"))
-		to_chat(user, span_notice("You begin to [anchored ? "unwrench" : "wrench"] [src]."))
+	if(P.tool_behaviour == TOOL_WRENCH && LAZYACCESS(modifiers, RIGHT_CLICK))
+		to_chat(user, "<span class='notice'>You begin to [anchored ? "unwrench" : "wrench"] [src].</span>")
 		if(P.use_tool(src, user, 20, volume=50))
 			to_chat(user, span_notice("You successfully [anchored ? "unwrench" : "wrench"] [src]."))
 			set_anchored(!anchored)
@@ -56,8 +56,9 @@
 		icon_state = "[initial(icon_state)]-open"
 		sleep(0.5 SECONDS)
 		icon_state = initial(icon_state)
-	else if(!(user.a_intent == INTENT_HARM) || (P.item_flags & NOBLUDGEON))
-		to_chat(user, span_warning("You can't put [P] in [src]!"))
+		updateUsrDialog()
+	else if(!user.combat_mode)
+		to_chat(user, "<span class='warning'>You can't put [P] in [src]!</span>")
 	else
 		return ..()
 
