@@ -1649,14 +1649,11 @@
 			if(do_after(user, 20 SECONDS))
 				burying = FALSE
 				if(icon_state == "pit0")
-					var/dead_amongst = FALSE
 					var/kindred_buried = FALSE
 					var/list/buried_kindred = list() // Track buried kindred for frenzy
 
 					for(var/mob/living/L in get_turf(src))
 						L.forceMove(src) // Move the mob into the pit
-						if(L.stat == DEAD)
-							dead_amongst = TRUE
 
 						// Check if the buried mob is kindred
 						if(istype(L, /mob/living/carbon) && ishuman(L))
@@ -1672,8 +1669,7 @@
 					icon_state = "pit1"
 					user.visible_message(span_warning("[user] digs a hole in [src]."), span_warning("You dig a hole in [src]."))
 
-					if(dead_amongst)
-						call_dharma("respect", user)
+
 					for(var/mob/living/carbon/K in buried_kindred)
 						if(do_after(K, 120 SECONDS, target = K, progress = TRUE))
 							kindred_frenzy_escape(K)
@@ -1681,22 +1677,19 @@
 							to_chat(K, span_warning("Your escape was interrupted!"))
 
 					// Only refill the pit if no one is buried
-					if(!dead_amongst && !kindred_buried)
+					if(!kindred_buried)
 						user.visible_message(span_warning("[user] refills [src]."), span_warning("You refill [src]."))
 						qdel(src)
 				else
 					// Digging up the pit
-					var/dead_amongst = FALSE
 					for(var/mob/living/L in src) // This ensures we actually get the mobs from inside the pit
 						L.forceMove(get_turf(src))
-						if(L.stat == DEAD)
-							dead_amongst = TRUE
+
 
 					icon_state = "pit0"
 					user.visible_message(span_warning("[user] digs open [src]."), span_warning("You dig open [src]."))
 
-					if(dead_amongst)
-						call_dharma("disrespect", user)
+
 			else
 				burying = FALSE
 
