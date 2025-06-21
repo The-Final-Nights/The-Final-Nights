@@ -282,6 +282,7 @@
 		new /datum/data/mining_equipment("mp5 magazine", /obj/item/ammo_box/magazine/vamp9mp5, 20),
 		new /datum/data/mining_equipment("4.6mm ammo box", /obj/item/ammo_box/vampire/c46mm, 40),
 		new /datum/data/mining_equipment("mp7 magazine", /obj/item/ammo_box/magazine/vamp46mp7, 20),
+		new /datum/data/mining_equipment("PSG1 magazine", /obj/item/ammo_box/magazine/vamp762x51PSG1, 35),
 		new /datum/data/mining_equipment("guerrilla gloves", /obj/item/clothing/gloves/tackler/combat/insulated, 20),
 		new /datum/data/mining_equipment("binoculars", /obj/item/binoculars, 25),
 		new /datum/data/mining_equipment("Glock19", /obj/item/gun/ballistic/automatic/vampire/glock19, 25),
@@ -295,6 +296,7 @@
 		new /datum/data/mining_equipment("assault rifle", /obj/item/gun/ballistic/automatic/vampire/ar15, 125),
 		new /datum/data/mining_equipment("SPAS15", /obj/item/gun/ballistic/automatic/vampire/autoshotgun, 200),
 		new /datum/data/mining_equipment("sniper rifle", /obj/item/gun/ballistic/automatic/vampire/sniper, 300),
+		new /datum/data/mining_equipment("semi auto sniper rifle", /obj/item/gun/ballistic/automatic/vampire/PSG1, 350),
 	)	//PSEUDO_M todo: add .50 ammo to this list
 
 /obj/machinery/mineral/equipment_vendor/proc/RedeemVoucher(obj/item/mining_voucher/voucher, mob/redeemer)
