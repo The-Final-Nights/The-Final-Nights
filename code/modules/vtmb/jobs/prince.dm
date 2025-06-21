@@ -20,7 +20,7 @@
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SEC
 
-	departments = DEPARTMENT_PRIMOGEN_COUNCIL
+	departments = DEPARTMENT_BITFLAG_PRINCE
 
 	liver_traits = list(TRAIT_ROYAL_METABOLISM)
 

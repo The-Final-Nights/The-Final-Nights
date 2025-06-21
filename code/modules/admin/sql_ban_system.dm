@@ -245,9 +245,9 @@
 							"City Services" = GLOB.services_positions,
 							"St Johns" = GLOB.clinic_positions,
 							"Church" = GLOB.church_positions,
-							"Painted City" = GLOB.painted_positions,
+							"Painted City" = GLOB.painted_city_positions,
 							"Amberglade" = GLOB.amberglade_positions,
-							"Endron" = GLOB.spiral_positions)
+							"Endron" = GLOB.endron_positions)
 		for(var/department in job_lists)
 			output += "<div class='column'><label class='rolegroup [ckey(department)]'><input type='checkbox' name='[department]' class='hidden' [usr.client.prefs.tgui_fancy ? " onClick='toggle_checkboxes(this, \"_com\")'" : ""]>[department]</label><div class='content'>"
 			break_counter = 0
