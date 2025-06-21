@@ -149,7 +149,7 @@
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
 
-/datum/action/mytherceria/Trigger()
+/datum/action/mytherceria/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	var/try_trap = input(H, "Select a Trap:", "Trap") as null|anything in list("Brutal", "Spin", "Drop")
@@ -343,6 +343,7 @@
 	var/bad_answers = 0
 
 /atom/movable/screen/alert/riddle/Click()
+	. = ..()
 	if(iscarbon(usr) && (usr == owner))
 		var/mob/living/carbon/M = usr
 		if(riddle)

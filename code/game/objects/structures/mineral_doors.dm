@@ -37,10 +37,10 @@
 		if(get_dist(user,src) <= 1) //not remotely though
 			return TryToSwitchState(user)
 
-/obj/structure/mineral_door/attack_paw(mob/user)
-	return attack_hand(user)
+/obj/structure/mineral_door/attack_paw(mob/user, list/modifiers)
+	return attack_hand(user, modifiers)
 
-/obj/structure/mineral_door/attack_hand(mob/user)
+/obj/structure/mineral_door/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -110,10 +110,10 @@
 	. = ..()
 	icon_state = "[initial(icon_state)][door_opened ? "open":""]"
 
-/obj/structure/mineral_door/attackby(obj/item/I, mob/user)
+/obj/structure/mineral_door/attackby(obj/item/I, mob/living/user)
 	if(pickaxe_door(user, I))
 		return
-	else if(user.a_intent != INTENT_HARM)
+	else if(!user.combat_mode)
 		return attack_hand(user)
 	else
 		return ..()
@@ -308,8 +308,8 @@
 		fire_act(I.get_temperature())
 		return
 
-	if((user.a_intent != INTENT_HARM) && istype(I, /obj/item/paper) && (atom_integrity < max_integrity))
-		user.visible_message(span_notice("[user] starts to patch the holes in [src]."), span_notice("You start patching some of the holes in [src]!"))
+	if((!user.combat_mode) && istype(I, /obj/item/paper) && (atom_integrity < max_integrity))
+		user.visible_message("<span class='notice'>[user] starts to patch the holes in [src].</span>", "<span class='notice'>You start patching some of the holes in [src]!</span>")
 		if(do_after(user, 2 SECONDS, src))
 			atom_integrity = min(atom_integrity+4,max_integrity)
 			qdel(I)

@@ -125,12 +125,12 @@
 				mob_swap = TRUE
 		else
 			//You can swap with the person you are dragging on grab intent, and restrained people in most cases
-			if(M.pulledby == src && a_intent == INTENT_GRAB && !too_strong)
+			if(M.pulledby == src && !too_strong)
 				mob_swap = TRUE
 			else if(
 				!(HAS_TRAIT(M, TRAIT_NOMOBSWAP) || HAS_TRAIT(src, TRAIT_NOMOBSWAP))&&\
-				((HAS_TRAIT(M, TRAIT_RESTRAINED) && !too_strong) || M.a_intent == INTENT_HELP) &&\
-				(HAS_TRAIT(src, TRAIT_RESTRAINED) || a_intent == INTENT_HELP)
+				((HAS_TRAIT(M, TRAIT_RESTRAINED) && !too_strong) || !combat_mode) &&\
+				(HAS_TRAIT(src, TRAIT_RESTRAINED) || !combat_mode)
 			)
 				mob_swap = TRUE
 		if(mob_swap)
@@ -171,8 +171,10 @@
 		if(HAS_TRAIT(L, TRAIT_PUSHIMMUNE))
 			return TRUE
 	//If they're a human, and they're not in help intent, block pushing
-	if(ishuman(M) && (M.a_intent != INTENT_HELP))
-		return TRUE
+	if(ishuman(M))
+		var/mob/living/carbon/human/human = M
+		if(human.combat_mode)
+			return TRUE
 	//anti-riot equipment is also anti-push
 	for(var/obj/item/I in M.held_items)
 		if(!istype(M, /obj/item/clothing))
@@ -253,7 +255,11 @@
 		return FALSE
 	if(throwing || !(mobility_flags & MOBILITY_PULL))
 		return FALSE
-
+	if(SEND_SIGNAL(src, COMSIG_LIVING_TRY_PULL, AM, force) & COMSIG_LIVING_CANCEL_PULL)
+		return FALSE
+	if(SEND_SIGNAL(AM, COMSIG_LIVING_TRYING_TO_PULL, src, force) & COMSIG_LIVING_CANCEL_PULL)
+		return FALSE
+	
 	AM.add_fingerprint(src)
 
 	// If we're pulling something then drop what we're currently pulling and pull this instead.
@@ -303,6 +309,7 @@
 			M.LAssailant = usr
 		if(isliving(M))
 			var/mob/living/L = M
+
 			SEND_SIGNAL(M, COMSIG_LIVING_GET_PULLED, src)
 			//Share diseases that are spread by touch
 			for(var/thing in diseases)
@@ -365,7 +372,7 @@
 
 	if(istype(AM) && Adjacent(AM))
 		start_pulling(AM)
-	else
+	else if(!combat_mode) //Don;'t cancel pulls if misclicking in combat mode.
 		stop_pulling()
 
 /mob/living/stop_pulling()
@@ -608,9 +615,29 @@
 		ret |= F.contents
 	return ret
 
-// Living mobs use can_inject() to make sure that the mob is not syringe-proof in general.
-/mob/living/proc/can_inject()
+/**
+ * Returns whether or not the mob can be injected. Should not perform any side effects.
+ *
+ * Arguments:
+ * * user - The user trying to inject the mob.
+ * * target_zone - The zone being targeted.
+ * * injection_flags - A bitflag for extra properties to check.
+ *   Check __DEFINES/injection.dm for more details, specifically the ones prefixed INJECT_CHECK_*.
+ */
+/mob/living/proc/can_inject(mob/user, target_zone, injection_flags)
 	return TRUE
+
+/**
+ * Like can_inject, but it can perform side effects.
+ *
+ * Arguments:
+ * * user - The user trying to inject the mob.
+ * * target_zone - The zone being targeted.
+ * * injection_flags - A bitflag for extra properties to check. Check __DEFINES/injection.dm for more details.
+ *   Check __DEFINES/injection.dm for more details. Unlike can_inject, the INJECT_TRY_* defines will behave differently.
+ */
+/mob/living/proc/try_inject(mob/user, target_zone, injection_flags)
+	return can_inject(user, target_zone, injection_flags)
 
 /mob/living/is_injectable(mob/user, allowmobs = TRUE)
 	return (allowmobs && reagents && can_inject(user))
@@ -635,7 +662,30 @@
 	med_hud_set_status()
 	update_health_hud()
 
-/mob/living/update_health_hud()
+/mob/living/update_health_hud(shown_health_amount)
+	if(!client || !hud_used)
+		return
+	if(hud_used.healths)
+		if(stat != DEAD)
+			. = 1
+			if(shown_health_amount == null)
+				shown_health_amount = health
+			if(shown_health_amount >= maxHealth)
+				hud_used.healths.icon_state = "health0"
+			else if(shown_health_amount > maxHealth*0.8)
+				hud_used.healths.icon_state = "health1"
+			else if(shown_health_amount > maxHealth*0.6)
+				hud_used.healths.icon_state = "health2"
+			else if(shown_health_amount > maxHealth*0.4)
+				hud_used.healths.icon_state = "health3"
+			else if(shown_health_amount > maxHealth*0.2)
+				hud_used.healths.icon_state = "health4"
+			else if(shown_health_amount > 0)
+				hud_used.healths.icon_state = "health5"
+			else
+				hud_used.healths.icon_state = "health6"
+		else
+			hud_used.healths.icon_state = "health7"
 	var/severity = 0
 	var/healthpercent = (health/maxHealth) * 100
 	switch(healthpercent)
@@ -653,17 +703,6 @@
 			severity = 5
 		else
 			severity = 6
-	if(hud_used?.healths) //to really put you in the boots of a simplemob
-		var/atom/movable/screen/healthdoll/living/livingdoll = hud_used.healths
-		livingdoll.icon_state = "living[severity]"
-		if(!livingdoll.filtered)
-			livingdoll.filtered = TRUE
-			var/icon/mob_mask = icon(icon, icon_state)
-			if(mob_mask.Height() > world.icon_size || mob_mask.Width() > world.icon_size)
-				var/health_doll_icon_state = health_doll_icon ? health_doll_icon : "megasprite"
-				mob_mask = icon('icons/hud/screen_gen.dmi', health_doll_icon_state) //swap to something generic if they have no special doll
-			livingdoll.add_filter("mob_shape_mask", 1, alpha_mask_filter(icon = mob_mask))
-			livingdoll.add_filter("inset_drop_shadow", 2, drop_shadow_filter(size = -1))
 	if(severity > 0)
 		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
@@ -1009,7 +1048,6 @@
 				if(NPC.stat < SOFT_CRIT)
 					if(istype(what, /obj/item/clothing) || istype(what, /obj/item/vamp/keys) || istype(what, /obj/item/stack/dollar))
 						SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 6)
-						call_dharma("steal", H)
 			if(islist(where))
 				var/list/L = where
 				if(what == who.get_item_for_held_index(L[2]))
@@ -1936,7 +1974,7 @@
  * It is also used to process martial art attacks by nonhumans, even against humans
  * Human vs human attacks are handled in species code right now.
  */
-/mob/living/proc/apply_martial_art(mob/living/target)
+/mob/living/proc/apply_martial_art(mob/living/target, modifiers, is_grab)
 	if(HAS_TRAIT(target, TRAIT_MARTIAL_ARTS_IMMUNE))
 		return FALSE
 	if(ishuman(target) && ishuman(src)) //Human vs human are handled in species code
@@ -1944,17 +1982,18 @@
 	var/datum/martial_art/style = mind?.martial_art
 	var/attack_result = FALSE
 	if (style)
-		switch (a_intent)
-			if (INTENT_GRAB)
-				attack_result = style.grab_act(src, target)
-			if (INTENT_HARM)
-				if (HAS_TRAIT(src, TRAIT_PACIFISM))
-					return FALSE
-				attack_result = style.harm_act(src, target)
-			if (INTENT_DISARM)
-				attack_result = style.disarm_act(src, target)
-			if (INTENT_HELP)
-				attack_result = style.help_act(src, target)
+		if (is_grab)
+			attack_result = style.grab_act(src, target)
+		if(LAZYACCESS(modifiers, RIGHT_CLICK))
+			attack_result = style.disarm_act(src, target)
+		if(combat_mode)
+			if (HAS_TRAIT(src, TRAIT_PACIFISM))
+				return FALSE
+			attack_result = style.harm_act(src, target)
+		else
+			attack_result = style.help_act(src, target)
+
+
 	return attack_result
 
 //Making a proc for each of these.

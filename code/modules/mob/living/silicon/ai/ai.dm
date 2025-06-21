@@ -20,7 +20,7 @@
 	move_resist = MOVE_FORCE_OVERPOWERING
 	density = TRUE
 	status_flags = CANSTUN|CANPUSH
-	a_intent = INTENT_HARM //so we always get pushed instead of trying to swap
+	combat_mode = TRUE //so we always get pushed instead of trying to swap
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
 	see_in_dark = 8
 	hud_type = /datum/hud/ai
@@ -101,6 +101,11 @@
 	var/cam_prev
 
 	var/datum/robot_control/robot_control
+	/// Station alert datum for showing alerts UI
+	var/datum/station_alert/alert_control
+	///remember AI's last location
+	var/atom/lastloc
+	interaction_range = null
 
 /mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, mob/target_ai)
 	. = ..()
@@ -779,7 +784,8 @@
 		new_core.circuit.battery = battery
 		ai_restore_power()//So the AI initially has power.
 		control_disabled = TRUE //Can't control things remotely if you're stuck in a card!
-		radio_enabled = FALSE 	//No talking on the built-in radio for you either!
+		interaction_range = 0
+		radio_enabled = FALSE //No talking on the built-in radio for you either!
 		forceMove(card)
 		card.AI = src
 		to_chat(src, "You have been downloaded to a mobile storage device. Remote device connection severed.")
@@ -957,7 +963,7 @@
 	icon_icon = 'icons/mob/actions/actions_AI.dmi'
 	button_icon_state = "ai_shell"
 
-/datum/action/innate/deploy_shell/Trigger()
+/datum/action/innate/deploy_shell/Trigger(trigger_flags)
 	var/mob/living/silicon/ai/AI = owner
 	if(!AI)
 		return
@@ -970,7 +976,7 @@
 	button_icon_state = "ai_last_shell"
 	var/mob/living/silicon/robot/last_used_shell
 
-/datum/action/innate/deploy_last_shell/Trigger()
+/datum/action/innate/deploy_last_shell/Trigger(trigger_flags)
 	if(!owner)
 		return
 	if(last_used_shell)
