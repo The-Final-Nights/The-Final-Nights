@@ -122,8 +122,6 @@
 	var/diablerist = FALSE
 	var/antifrenzy = FALSE
 
-	var/transformation_blocked = 0 //Are transformations blocked?
-
 	COOLDOWN_DECLARE(bleeding_message_cd)
 
 	//Custom examine text, set via IC verb.
