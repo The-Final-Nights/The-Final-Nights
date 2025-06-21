@@ -55,6 +55,7 @@
 			for(var/obj/machinery/light/L in A)
 				L.update(FALSE)
 		repairing = FALSE
+		update_icon()
 		return
 
 	..()
