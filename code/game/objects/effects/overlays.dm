@@ -57,15 +57,12 @@
 	appearance_flags = RESET_TRANSFORM | TILE_BOUND
 	invisibility = INVISIBILITY_ABSTRACT
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-
-	layer = ATMOS_GROUP_LAYER
-	plane = ATMOS_GROUP_PLANE
+	plane = HIGH_GAME_PLANE
 
 /obj/effect/overlay/light_visible
 	name = ""
 	icon = 'icons/effects/light_overlays/light_32.dmi'
 	icon_state = "light"
-	layer = O_LIGHTING_VISUAL_LAYER
 	plane = O_LIGHTING_VISUAL_PLANE
 	appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -76,7 +73,6 @@
 	name = ""
 	icon = 'icons/effects/light_overlays/light_cone.dmi'
 	icon_state = "light"
-	layer = O_LIGHTING_VISUAL_LAYER
 	plane = O_LIGHTING_VISUAL_PLANE
 	appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT

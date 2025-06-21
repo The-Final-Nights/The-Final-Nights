@@ -92,7 +92,7 @@
 	var/obj/effect/overlay/AM = new(DAMAP)
 	AM.icon = 'code/modules/wod13/disciplines.dmi'
 	AM.icon_state = "target"
-	AM.layer = ABOVE_HUD_LAYER
+	AM.plane = ABOVE_HUD_PLANE
 	AM.pixel_x = x-4
 	AM.pixel_y = y-4
 	DAMAP.overlays |= AM

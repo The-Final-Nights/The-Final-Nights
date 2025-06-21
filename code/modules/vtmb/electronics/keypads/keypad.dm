@@ -10,7 +10,7 @@
 	icon = 'icons/obj/terminals_vtm.dmi'
 	icon_state = "keypad"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	var/obj/machinery/door/poddoor/shutters/connected_shutter
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF

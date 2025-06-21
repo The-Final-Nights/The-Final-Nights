@@ -92,7 +92,7 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	//We do this here so anything that doesn't want to persist can clear itself
 	var/list/old_listen_lookup = _listen_lookup?.Copy()
 	var/list/old_signal_procs = _signal_procs?.Copy()
-	var/carryover_turf_flags = UNUSED_RESERVATION_TURF_1 & flags_1
+	var/carryover_turf_flags = UNUSED_RESERVATION_TURF & flags_1
 	var/turf/new_turf = new path(src)
 	new_turf.flags_1 |= carryover_turf_flags
 

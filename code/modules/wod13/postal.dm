@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	var/money = 0
 

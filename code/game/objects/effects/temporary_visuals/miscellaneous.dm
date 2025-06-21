@@ -57,7 +57,6 @@
 	pixel_z = -16
 	duration = 2
 	plane = ABOVE_LIGHTING_PLANE
-	layer = ABOVE_LIGHTING_LAYER
 
 /obj/effect/temp_visual/dir_setting/swing_effect
 	icon = 'icons/effects/96x96.dmi'
@@ -81,7 +80,7 @@
 	duration = 5
 	alpha = 128
 	plane = GAME_PLANE
-	layer = HIGH_SIGIL_LAYER
+	layer = RUNE_LAYER
 
 /obj/effect/temp_visual/dir_setting/crack_effect
 	icon = 'icons/effects/96x96.dmi'
@@ -91,7 +90,7 @@
 	duration = 50
 	alpha = 196
 	plane = GAME_PLANE
-	layer = HIGH_SIGIL_LAYER
+	layer = RUNE_LAYER
 
 /obj/effect/temp_visual/dir_setting/crack_effect/Initialize()
 	. = ..()

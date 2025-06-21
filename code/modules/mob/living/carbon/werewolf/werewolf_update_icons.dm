@@ -56,7 +56,6 @@
 	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : ""]")
 	eye_overlay.color = sprite_eye_color
 	eye_overlay.plane = ABOVE_LIGHTING_PLANE
-	eye_overlay.layer = ABOVE_LIGHTING_LAYER
 	add_overlay(eye_overlay)
 
 	update_inv_hands()
@@ -114,7 +113,6 @@
 	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : ""]")
 	eye_overlay.color = sprite_eye_color
 	eye_overlay.plane = ABOVE_LIGHTING_PLANE
-	eye_overlay.layer = ABOVE_LIGHTING_LAYER
 	add_overlay(eye_overlay)
 
 	update_inv_hands()

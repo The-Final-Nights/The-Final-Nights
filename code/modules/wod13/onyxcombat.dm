@@ -221,7 +221,6 @@
 	name = "jump"
 	icon = 'code/modules/wod13/UI/buttons_wide.dmi'
 	icon_state = "act_jump_off"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/jump/Click()
@@ -247,7 +246,6 @@
 	name = "block"
 	icon = 'code/modules/wod13/UI/buttons_wide.dmi'
 	icon_state = "act_block_off"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/block/Click()
@@ -260,7 +258,6 @@
 	name = "zone"
 	icon = 'code/modules/wod13/48x48.dmi'
 	icon_state = "masquerade"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 	alpha = 64
 
@@ -268,11 +265,9 @@
 	name = "bloodpool"
 	icon = 'code/modules/wod13/UI/bloodpool.dmi'
 	icon_state = "blood0"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/addinv
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/blood/Click()
@@ -288,7 +283,6 @@
 /atom/movable/screen/drinkblood
 	name = "Drink Blood"
 	icon = 'code/modules/wod13/disciplines.dmi'
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/drinkblood/Click()
@@ -374,7 +368,6 @@
 	name = "Bloodpower"
 	icon = 'code/modules/wod13/disciplines.dmi'
 	icon_state = "bloodpower"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/bloodpower/Click()
@@ -419,7 +412,6 @@
 	icon_state = initial(icon_state)
 
 /atom/movable/screen/disciplines
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 	var/datum/discipline/dscpln
 	var/last_discipline_click = 0
@@ -436,22 +428,18 @@
 	level2 = new(src)
 	level2.icon = 'code/modules/wod13/disciplines.dmi'
 	level2.icon_state = "2"
-	level2.layer = ABOVE_HUD_LAYER+5
 	level2.plane = HUD_PLANE
 	level3 = new(src)
 	level3.icon = 'code/modules/wod13/disciplines.dmi'
 	level3.icon_state = "3"
-	level3.layer = ABOVE_HUD_LAYER+5
 	level3.plane = HUD_PLANE
 	level4 = new(src)
 	level4.icon = 'code/modules/wod13/disciplines.dmi'
 	level4.icon_state = "4"
-	level4.layer = ABOVE_HUD_LAYER+5
 	level4.plane = HUD_PLANE
 	level5 = new(src)
 	level5.icon = 'code/modules/wod13/disciplines.dmi'
 	level5.icon_state = "5"
-	level5.layer = ABOVE_HUD_LAYER+5
 	level5.plane = HUD_PLANE
 
 /atom/MouseEntered(location,control,params)
@@ -493,7 +481,6 @@
 	gnosis = new(src)
 	gnosis.icon = 'code/modules/wod13/48x48.dmi'
 	gnosis.plane = ABOVE_HUD_PLANE
-	gnosis.layer = ABOVE_HUD_LAYER
 
 /mob/living/proc/update_rage_hud()
 	if(!client || !hud_used)

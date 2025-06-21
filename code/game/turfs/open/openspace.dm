@@ -7,9 +7,9 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 
 	icon            = 'icons/turf/floors.dmi'
 	icon_state      = "grey"
-	plane           = OPENSPACE_BACKDROP_PLANE
-	mouse_opacity 	= MOUSE_OPACITY_TRANSPARENT
-	layer           = SPLASHSCREEN_LAYER
+	plane = TRANSPARENT_FLOOR_PLANE
+	layer = SPACE_LAYER
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	//I don't know why the others are aligned but I shall do the same.
 	vis_flags		= VIS_INHERIT_ID
 
@@ -158,7 +158,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 /turf/open/openspace/icemoon/Initialize()
 	. = ..()
 	var/turf/T = below()
-	if(T.flags_1 & NO_RUINS_1)
+	if(T.turf_flags & NO_RUINS)
 		ChangeTurf(replacement_turf, null, CHANGETURF_IGNORE_AIR)
 		return
 	if(!ismineralturf(T))

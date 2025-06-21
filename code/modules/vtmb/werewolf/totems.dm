@@ -38,7 +38,6 @@
 	totem_light_overlay.icon = icon
 	totem_light_overlay.icon_state = "[icon_state]_overlay"
 	totem_light_overlay.plane = ABOVE_LIGHTING_PLANE
-	totem_light_overlay.layer = ABOVE_LIGHTING_LAYER
 	totem_light_overlay.color = totem_overlay_color
 	overlays |= totem_light_overlay
 

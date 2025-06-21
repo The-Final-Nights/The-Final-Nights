@@ -328,7 +328,8 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	appearance_flags = KEEP_TOGETHER|TILE_BOUND|PIXEL_SCALE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	vis_flags = VIS_INHERIT_ID
-	layer = GATEWAY_UNDERLAY_LAYER //Slightly lower than gateway itself
+	layer = 200
+	plane = HIGHEST_EVER_PLANE
 	var/alpha_icon = 'icons/obj/machines/gateway.dmi'
 	var/alpha_icon_state = "portal_mask"
 	var/datum/gateway_destination/our_destination

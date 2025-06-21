@@ -144,7 +144,6 @@
 	density = TRUE
 	anchored = TRUE
 	plane = ABOVE_LIGHTING_PLANE
-	layer = ABOVE_LIGHTING_LAYER
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	pixel_w = -8
 	var/obj/umbra_portal/exit
