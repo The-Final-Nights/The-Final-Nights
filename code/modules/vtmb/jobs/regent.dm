@@ -25,7 +25,7 @@
 //	minimum_character_age = 150 //Uncomment if age-restriction wanted
 	minimum_vampire_age = 60
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list("Tremere")
+	allowed_bloodlines = list(CLAN_TREMERE)
 	experience_addition = 20
 	known_contacts = list("Prince")
 

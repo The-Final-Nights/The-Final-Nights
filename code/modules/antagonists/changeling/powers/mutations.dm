@@ -155,7 +155,9 @@
 	righthand_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
 	item_flags = NEEDS_PERMIT | ABSTRACT | DROPDEL
 	w_class = WEIGHT_CLASS_HUGE
-	force = 25
+	force = 45 //Slightly stronger than the Tzimisce one.
+	block_chance = 50
+	armour_penetration = 50
 	throwforce = 0 //Just to be on the safe side
 	throw_range = 0
 	throw_speed = 0
@@ -163,7 +165,7 @@
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
 	sharpness = SHARP_EDGED
-	wound_bonus = -20
+	wound_bonus = 10
 	bare_wound_bonus = 20
 	var/can_drop = FALSE
 	var/fake = FALSE
@@ -266,7 +268,9 @@
 /obj/item/gun/magic/tentacle/shoot_with_empty_chamber(mob/living/user as mob|obj)
 	to_chat(user, "<span class='warning'>The [name] is not ready yet.</span>")
 
-/obj/item/gun/magic/tentacle/process_fire()
+/obj/item/gun/magic/tentacle/process_fire(atom/target, mob/living/user, message, params, zone_override, bonus_spread)
+	var/obj/projectile/tentacle/tentacle_shot = chambered.BB //Gets the actual projectile we will fire
+	tentacle_shot.fire_modifiers = params2list(params)
 	. = ..()
 	if(charges == 0)
 		qdel(src)
@@ -300,13 +304,15 @@
 	name = "tentacle"
 	icon_state = "tentacle_end"
 	pass_flags = PASSTABLE
-	damage = 25
+	damage = 45
 	damage_type = BRUTE
-	range = 8
+	range = 9
 	hitsound = 'sound/weapons/thudswoosh.ogg'
 	var/state_icon = "tentacle"
 	var/chain
 	var/obj/item/ammo_casing/magic/tentacle/source //the item that shot it
+	///Click params that were used to fire the tentacle shot
+	var/list/fire_modifiers
 
 /obj/projectile/tentacle/Initialize()
 	source = loc
@@ -318,8 +324,8 @@
 	..()
 
 /obj/projectile/tentacle/proc/reset_throw(mob/living/carbon/human/H)
-	if(H.in_throw_mode)
-		H.throw_mode_off() //Don't annoy the changeling if he doesn't catch the item
+	if(H.throw_mode)
+		H.throw_mode_off(THROW_MODE_TOGGLE) //Don't annoy the changeling if he doesn't catch the item
 
 /obj/projectile/tentacle/proc/tentacle_grab(mob/living/carbon/human/H, mob/living/carbon/C)
 	if(H.Adjacent(C))
@@ -349,7 +355,7 @@
 		var/obj/item/I = target
 		if(!I.anchored)
 			to_chat(firer, "<span class='notice'>You pull [I] towards yourself.</span>")
-			H.throw_mode_on()
+			H.throw_mode_on(THROW_MODE_TOGGLE)
 			I.throw_at(H, 10, 2)
 			. = BULLET_ACT_HIT
 
@@ -358,39 +364,31 @@
 		if(!L.anchored && !L.throwing)//avoid double hits
 			if(iscarbon(L))
 				var/mob/living/carbon/C = L
-				var/firer_intent = INTENT_HARM
-				var/mob/M = firer
-				if(istype(M))
-					firer_intent = M.a_intent
-				switch(firer_intent)
-					if(INTENT_HELP)
-						C.visible_message("<span class='danger'>[L] is pulled by [H]'s tentacle!</span>","<span class='userdanger'>A tentacle grabs you and pulls you towards [H]!</span>")
-						C.throw_at(get_step_towards(H,C), 8, 2)
-						return BULLET_ACT_HIT
-
-					if(INTENT_DISARM)
-						var/obj/item/I = C.get_active_held_item()
-						if(I)
-							if(C.dropItemToGround(I))
-								C.visible_message("<span class='danger'>[I] is yanked off [C]'s hand by [src]!</span>","<span class='userdanger'>A tentacle pulls [I] away from you!</span>")
-								on_hit(I) //grab the item as if you had hit it directly with the tentacle
-								return BULLET_ACT_HIT
-							else
-								to_chat(firer, "<span class='warning'>You can't seem to pry [I] off [C]'s hands!</span>")
-								return BULLET_ACT_BLOCK
-						else
-							to_chat(firer, "<span class='danger'>[C] has nothing in hand to disarm!</span>")
+				var/firer_combat_mode = TRUE
+				var/mob/living/living_shooter = firer
+				if(istype(living_shooter))
+					firer_combat_mode = living_shooter.combat_mode
+				if(fire_modifiers && fire_modifiers["right"])
+					var/obj/item/I = C.get_active_held_item()
+					if(I)
+						if(C.dropItemToGround(I))
+							C.visible_message("<span class='danger'>[I] is yanked off [C]'s hand by [src]!</span>","<span class='userdanger'>A tentacle pulls [I] away from you!</span>")
+							on_hit(I) //grab the item as if you had hit it directly with the tentacle
 							return BULLET_ACT_HIT
-
-					if(INTENT_GRAB)
-						C.visible_message("<span class='danger'>[L] is grabbed by [H]'s tentacle!</span>","<span class='userdanger'>A tentacle grabs you and pulls you towards [H]!</span>")
-						C.throw_at(get_step_towards(H,C), 8, 2, H, TRUE, TRUE, callback=CALLBACK(src, PROC_REF(tentacle_grab), H, C))
+						else
+							to_chat(firer, "<span class='warning'>You can't seem to pry [I] off [C]'s hands!</span>")
+							return BULLET_ACT_BLOCK
+					else
+						to_chat(firer, "<span class='danger'>[C] has nothing in hand to disarm!</span>")
 						return BULLET_ACT_HIT
-
-					if(INTENT_HARM)
-						C.visible_message("<span class='danger'>[L] is thrown towards [H] by a tentacle!</span>","<span class='userdanger'>A tentacle grabs you and throws you towards [H]!</span>")
-						C.throw_at(get_step_towards(H,C), 8, 2, H, TRUE, TRUE, callback=CALLBACK(src, PROC_REF(tentacle_stab), H, C))
-						return BULLET_ACT_HIT
+				if(firer_combat_mode)
+					C.visible_message("<span class='danger'>[L] is thrown towards [H] by a tentacle!</span>","<span class='userdanger'>A tentacle grabs you and throws you towards [H]!</span>")
+					C.throw_at(get_step_towards(H,C), 8, 2, H, TRUE, TRUE, callback=CALLBACK(src, .proc/tentacle_stab, H, C))
+					return BULLET_ACT_HIT
+				else
+					C.visible_message("<span class='danger'>[L] is grabbed by [H]'s tentacle!</span>","<span class='userdanger'>A tentacle grabs you and pulls you towards [H]!</span>")
+					C.throw_at(get_step_towards(H,C), 8, 2, H, TRUE, TRUE, callback=CALLBACK(src, .proc/tentacle_grab, H, C))
+					return BULLET_ACT_HIT
 			else
 				L.visible_message("<span class='danger'>[L] is pulled by [H]'s tentacle!</span>","<span class='userdanger'>A tentacle grabs you and pulls you towards [H]!</span>")
 				L.throw_at(get_step_towards(H,L), 8, 2)
@@ -438,7 +436,7 @@
 	icon_state = "ling_shield"
 	lefthand_file = 'icons/mob/inhands/antag/changeling_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
-	block_chance = 50
+	block_chance = 90 //Very effective, but requires you going loud, and has a limited number of uses. 
 
 	var/remaining_uses //Set by the changeling ability.
 
@@ -461,12 +459,12 @@
 
 
 /***************************************\
-|*********SPACE SUIT + HELMET***********|
+|*********SPACE SUIT + HELMET***********| //Now assistive suit to boost speed, as space suits aren't needed.
 \***************************************/
 /datum/action/changeling/suit/organic_space_suit
-	name = "Organic Space Suit"
-	desc = "We grow an organic suit to protect ourselves from space exposure. Costs 20 chemicals."
-	helptext = "We must constantly repair our form to make it space-proof, reducing chemical production while we are protected. Cannot be used in lesser form."
+	name = "Organic Assistive Suit"
+	desc = "We grow an organic suit full of muscle tissue to improve our speed. Costs 20 chemicals."
+	helptext = "We must constantly repair our form due to the damage its enhanced strength deals to itself, reducing chemical production while we are protected. Cannot be used in lesser form."
 	button_icon_state = "organic_suit"
 	chemical_cost = 20
 	dna_cost = 2
@@ -482,19 +480,20 @@
 /obj/item/clothing/suit/space/changeling
 	name = "flesh mass"
 	icon_state = "lingspacesuit"
-	desc = "A huge, bulky mass of pressure and temperature-resistant organic tissue, evolved to facilitate space travel."
+	desc = "A huge, bulky mass of pressure and temperature-resistant organic tissue, swollen with muscle."
 	item_flags = DROPDEL
 	clothing_flags = STOPSPRESSUREDAMAGE //Not THICKMATERIAL because it's organic tissue, so if somebody tries to inject something into it, it still ends up in your blood. (also balance but muh fluff)
 	allowed = list(/obj/item/flashlight)
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 90, ACID = 90) //No armor at all.
 	actions_types = list()
 	cell = null
+	slowdown = -1.6
 
 /obj/item/clothing/suit/space/changeling/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CHANGELING_TRAIT)
 	if(ismob(loc))
-		loc.visible_message("<span class='warning'>[loc.name]\'s flesh rapidly inflates, forming a bloated mass around [loc.p_their()] body!</span>", "<span class='warning'>We inflate our flesh, creating a spaceproof suit!</span>", "<span class='hear'>You hear organic matter ripping and tearing!</span>")
+		loc.visible_message("<span class='warning'>[loc.name]\'s flesh rapidly inflates, forming a bloated mass around [loc.p_their()] body!</span>", "<span class='warning'>We inflate our flesh, creating a muscle-filled suit!</span>", "<span class='hear'>You hear organic matter ripping and tearing!</span>")
 	START_PROCESSING(SSobj, src)
 
 // seal the cell door
@@ -544,7 +543,7 @@
 	icon_state = "lingarmor"
 	item_flags = DROPDEL
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
-	armor = list(MELEE = 40, BULLET = 40, LASER = 40, ENERGY = 50, BOMB = 10, BIO = 4, RAD = 0, FIRE = 90, ACID = 90)
+	armor = list(MELEE = 80, BULLET = 80, LASER = 40, ENERGY = 50, BOMB = 10, BIO = 4, RAD = 0, FIRE = 90, ACID = 90,  WOUND = 40) //Slightly better than Voivode suit.
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = 0
 	heat_protection = 0
@@ -560,7 +559,7 @@
 	desc = "A tough, hard covering of black chitin with transparent chitin in front."
 	icon_state = "lingarmorhelmet"
 	item_flags = DROPDEL
-	armor = list(MELEE = 40, BULLET = 40, LASER = 40, ENERGY = 50, BOMB = 10, BIO = 4, RAD = 0, FIRE = 90, ACID = 90)
+	armor = list(MELEE = 80, BULLET = 80, LASER = 40, ENERGY = 50, BOMB = 10, BIO = 4, RAD = 0, FIRE = 90, ACID = 90,  WOUND = 40)
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEEYES|HIDEFACIALHAIR|HIDEFACE|HIDESNOUT
 
 /obj/item/clothing/head/helmet/changeling/Initialize()

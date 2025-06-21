@@ -78,7 +78,7 @@
 	foodtypes = FRUIT
 	wine_power = 50
 
-/obj/item/food/grown/ghost_chili/attack_hand(mob/user)
+/obj/item/food/grown/ghost_chili/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return

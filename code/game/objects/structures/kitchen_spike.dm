@@ -47,8 +47,8 @@
 	can_buckle = 1
 	max_integrity = 250
 
-/obj/structure/kitchenspike/attack_paw(mob/user)
-	return attack_hand(user)
+/obj/structure/kitchenspike/attack_paw(mob/user, list/modifiers)
+	return attack_hand(user, modifiers)
 
 /obj/structure/kitchenspike/crowbar_act(mob/living/user, obj/item/I)
 	if(has_buckled_mobs())
@@ -61,8 +61,8 @@
 	return TRUE
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/structure/kitchenspike/attack_hand(mob/user)
-	if(VIABLE_MOB_CHECK(user.pulling) && user.a_intent == INTENT_GRAB && !has_buckled_mobs())
+/obj/structure/kitchenspike/attack_hand(mob/living/user, list/modifiers)
+	if(VIABLE_MOB_CHECK(user.pulling) && user.combat_mode && !has_buckled_mobs())
 		var/mob/living/L = user.pulling
 		if(do_mob(user, src, 120))
 			if(has_buckled_mobs()) //to prevent spam/queing up attacks
@@ -83,8 +83,6 @@
 			m180.Turn(180)
 			animate(L, transform = m180, time = 3)
 			L.pixel_y = L.base_pixel_y + PIXEL_Y_OFFSET_LYING
-			if(ishuman(L))
-				call_dharma("torture", user)
 	else if (has_buckled_mobs())
 		for(var/mob/living/L in buckled_mobs)
 			user_unbuckle_mob(L, user)

@@ -251,10 +251,6 @@ Works together with spawning an observer, noted above.
 
 /mob/proc/ghostize(can_reenter_corpse = TRUE, aghosted = FALSE)
 	if(key)
-	/*
-		if(client)
-			client.show_popup_menus = TRUE // [ChillRaccoon] - i a little bit rewrote that system, so we do not need it here anymore, else it can broke the things
-	*/
 		//if(key[1] != "@") // Skip aghosts.
 		stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
 		var/mob/dead/observer/ghost = new(src)	// Transfer safety to observer spawning proc.
@@ -326,7 +322,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='warning'>You cannot re-enter your body.</span>")
 		return
 
-	var/mob/living/carbon/human/original_body = mind.current
+	var/mob/living/carbon/original_body = mind.current
 
 	if(mind.current.key && mind.current.key[1] != "@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body...It is resisting you.</span>")

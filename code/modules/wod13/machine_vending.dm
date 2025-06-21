@@ -244,8 +244,8 @@
 		new /datum/data/mining_equipment("bruise pack", /obj/item/stack/medical/bruise_pack, 20),
 		new /datum/data/mining_equipment("Compact Defibillator", /obj/item/defibrillator/compact, 25),
 		new /datum/data/mining_equipment("surgery dufflebag", /obj/item/storage/backpack/duffelbag/med/surgery, 50),
-		new /datum/data/mining_equipment("high quality blood pack", /obj/item/drinkable_bloodpack/elite, 200),
-		new /datum/data/mining_equipment("blood pack", /obj/item/drinkable_bloodpack, 50),
+		new /datum/data/mining_equipment("high quality blood pack", /obj/item/reagent_containers/blood/elite, 200),
+		new /datum/data/mining_equipment("blood pack", /obj/item/reagent_containers/blood, 50),
 		new /datum/data/mining_equipment("Hospital Radio", /obj/item/p25radio, 50)
 	)
 
@@ -274,11 +274,14 @@
 		new /datum/data/mining_equipment("Colt M1911 magazine", /obj/item/ammo_box/magazine/vamp45acp, 10),
 		new /datum/data/mining_equipment("AUG Magazines", /obj/item/ammo_box/magazine/vampaug, 10),
 		new /datum/data/mining_equipment("AR-15 Magazines", /obj/item/ammo_box/magazine/vamp556, 10),
+		new /datum/data/mining_equipment("50. Ammo box", /obj/item/ammo_box/vampire/c50, 50),
 		new /datum/data/mining_equipment("desert eagle magazine", /obj/item/ammo_box/magazine/m44, 10),
 		new /datum/data/mining_equipment("Glock19 magazine", /obj/item/ammo_box/magazine/glock9mm, 10),
 		new /datum/data/mining_equipment("IFAK", /obj/item/storage/firstaid/ifak, 15),
 		new /datum/data/mining_equipment("12ga buckshot", /obj/item/ammo_box/vampire/c12g/buck, 15),
 		new /datum/data/mining_equipment("mp5 magazine", /obj/item/ammo_box/magazine/vamp9mp5, 20),
+		new /datum/data/mining_equipment("4.6mm ammo box", /obj/item/ammo_box/vampire/c46mm, 40),
+		new /datum/data/mining_equipment("mp7 magazine", /obj/item/ammo_box/magazine/vamp46mp7, 20),
 		new /datum/data/mining_equipment("guerrilla gloves", /obj/item/clothing/gloves/tackler/combat/insulated, 20),
 		new /datum/data/mining_equipment("binoculars", /obj/item/binoculars, 25),
 		new /datum/data/mining_equipment("Glock19", /obj/item/gun/ballistic/automatic/vampire/glock19, 25),
@@ -288,6 +291,7 @@
 		new /datum/data/mining_equipment("PD Radio", /obj/item/p25radio/police, 50),
 		new /datum/data/mining_equipment("shotgun", /obj/item/gun/ballistic/shotgun/vampire, 50),
 		new /datum/data/mining_equipment("submachine gun", /obj/item/gun/ballistic/automatic/vampire/mp5, 100),
+		new /datum/data/mining_equipment("AP submachine gun", /obj/item/gun/ballistic/automatic/vampire/mp7, 100),
 		new /datum/data/mining_equipment("assault rifle", /obj/item/gun/ballistic/automatic/vampire/ar15, 125),
 		new /datum/data/mining_equipment("SPAS15", /obj/item/gun/ballistic/automatic/vampire/autoshotgun, 200),
 		new /datum/data/mining_equipment("sniper rifle", /obj/item/gun/ballistic/automatic/vampire/sniper, 300),

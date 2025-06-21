@@ -55,7 +55,6 @@ GLOBAL_LIST_INIT(avatar_banned_verbs, list(
 	auspex_avatar.client.prefs.chat_toggles &= ~CHAT_GHOSTLAWS
 	auspex_avatar.client.prefs.chat_toggles &= ~CHAT_LOGIN_LOGOUT
 	auspex_avatar.client.prefs.chat_toggles &= ~CHAT_DEAD
-	auspex_avatar.client.show_popup_menus = 0
 
 	auspex_avatar.overlay_fullscreen("film_grain", /atom/movable/screen/fullscreen/film_grain, rand(1, 9))
 

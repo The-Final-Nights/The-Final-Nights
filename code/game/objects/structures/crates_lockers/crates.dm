@@ -46,7 +46,7 @@
 	if(manifest)
 		. += "manifest"
 
-/obj/structure/closet/crate/attack_hand(mob/user)
+/obj/structure/closet/crate/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -183,11 +183,11 @@
 	. = ..()
 	new /obj/item/reagent_containers/blood(src)
 	new /obj/item/reagent_containers/blood(src)
+	new /obj/item/reagent_containers/blood(src)
 	new /obj/item/reagent_containers/blood/a_minus(src)
 	new /obj/item/reagent_containers/blood/a_plus(src)
 	new /obj/item/reagent_containers/blood/b_minus(src)
 	new /obj/item/reagent_containers/blood/b_plus(src)
-	new /obj/item/reagent_containers/blood/o_minus(src)
 	new /obj/item/reagent_containers/blood/o_plus(src)
 	for(var/i in 1 to 3)
 		new /obj/item/reagent_containers/blood/random(src)

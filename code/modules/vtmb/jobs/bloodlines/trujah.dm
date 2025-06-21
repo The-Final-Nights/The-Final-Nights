@@ -24,7 +24,7 @@
 	v_duty = "Openly follow the traditions, ensure the coming of Gehenna so that you might fight along the side of the righteous."
 	duty = "You serve the True Blackhand! Operating out of the antique shop, you engage in extremely subtle political moves against the local sects. Good luck, and don't be discovered."
 	minimal_masquerade = 0
-	allowed_bloodlines = list("True Brujah", "Old Clan Tzimisce")
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_OLD_TZIMISCE)
 
 /datum/outfit/job/trujah
 	name = "Antique Shop Worker"

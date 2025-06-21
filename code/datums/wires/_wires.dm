@@ -1,15 +1,25 @@
 #define MAXIMUM_EMP_WIRES 3
 
-/proc/is_wire_tool(obj/item/I)
-	if(!I)
-		return
-
-	if(I.tool_behaviour == TOOL_WIRECUTTER || I.tool_behaviour == TOOL_MULTITOOL)
+/**
+ * Is the passed item a tool that would interact with wires?
+ *
+ * Arguments:
+ * * tool - The item to check.
+ * * check_secured - If TRUE, and the item ends up being an assembly,
+ * we will only return TRUE if the assembly is not secured.
+ * "Secured" is used to indicate an assembly that may have a use outside of wire interactions,
+ * so we don't want to falsely identify it as a wire tool in some contexts.
+ */
+/proc/is_wire_tool(obj/item/tool, check_secured = FALSE)
+	if(!istype(tool))
+		return FALSE
+	if(tool.tool_behaviour == TOOL_WIRECUTTER || tool.tool_behaviour == TOOL_MULTITOOL)
 		return TRUE
-	if(istype(I, /obj/item/assembly))
-		var/obj/item/assembly/A = I
-		if(A.attachable)
+	if(isassembly(tool))
+		var/obj/item/assembly/assembly = tool
+		if(!check_secured || !assembly.secured)
 			return TRUE
+	return FALSE
 
 /atom/proc/attempt_wire_interaction(mob/user)
 	if(!wires)
@@ -179,10 +189,11 @@
 			return TRUE
 
 /datum/wires/proc/attach_assembly(color, obj/item/assembly/S)
-	if(S && istype(S) && S.attachable && !is_attached(color))
+	if(S && istype(S) && S.assembly_behavior && !is_attached(color) && !(SEND_SIGNAL(S, COMSIG_ASSEMBLY_PRE_ATTACH, holder) & COMPONENT_CANCEL_ATTACH))
 		assemblies[color] = S
 		S.forceMove(holder)
 		S.connected = src
+		S.on_attach() // Notify assembly that it is attached
 		return S
 
 /datum/wires/proc/detach_assembly(color)
@@ -330,15 +341,15 @@
 					. = TRUE
 			else
 				I = L.get_active_held_item()
-				if(istype(I, /obj/item/assembly))
+				if(isassembly(I))
 					var/obj/item/assembly/A = I
-					if(A.attachable)
+					if(A.assembly_behavior)
 						if(!L.temporarilyRemoveItemFromInventory(A))
 							return
 						if(!attach_assembly(target_wire, A))
 							A.forceMove(L.drop_location())
 						. = TRUE
 					else
-						to_chat(L, "<span class='warning'>You need an attachable assembly!</span>")
+						to_chat(L, span_warning("You cannot attach this assembly to these wires!"))
 
 #undef MAXIMUM_EMP_WIRES

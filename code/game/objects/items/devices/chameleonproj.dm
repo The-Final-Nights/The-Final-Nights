@@ -1,48 +1,21 @@
 /mob/living/carbon/human/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	. = ..()
 	if(message)
-//		if(istype(loc, /obj/effect/dummy/chameleon))
-//			var/obj/effect/dummy/chameleon/C = loc
-//			C.say("[message]")
-//			return
 		if(say_mod(message) == verb_yell)
 			for(var/mob/living/carbon/human/hum in hearers(5, src))
 				if(hum != src)
 					if(iscathayan(hum))
 						if(hum.mind?.dharma?.Po == "Legalist")
 							hum.mind.dharma.roll_po(src, hum)
-		if(length(GLOB.auspex_list))
-			for(var/mob/living/carbon/human/H in GLOB.auspex_list)
-				if(H)
-					to_chat(H, "<span class='scream_away'><b>[name]</b> says, \"[sanitize_text(message)]\"</span>")
 		if(prob(25))
 			if(iskindred(src))
 				if(clane)
-					if(clane.name == "Malkavian")
+					if(clane.name == CLAN_MALKAVIAN)
 						for(var/letter in GLOB.malkavian_character_replacements)
 							message = replacetextEx(message, letter, GLOB.malkavian_character_replacements[letter])
 						for(var/mob/living/carbon/human/H in GLOB.malkavian_list)
 							if(H)
 								to_chat(H, "<span class='ghostalert'>[sanitize_text(message)]</span>")
-//		var/ending = copytext_char(message, -1)
-//		var/list/message_mods = list()
-//		message = get_message_mods(message, message_mods)
-//		if(message_mods[WHISPER_MODE] != MODE_WHISPER)
-//			if(ending == "?")
-//				if(gender == FEMALE)
-//					playsound(get_turf(src), pick('code/modules/wod13/sounds/female_ask1.ogg', 'code/modules/wod13/sounds/female_ask2.ogg'), 75, TRUE)
-//				else
-//					playsound(get_turf(src), pick('code/modules/wod13/sounds/male_ask1.ogg', 'code/modules/wod13/sounds/male_ask2.ogg'), 75, TRUE)
-//			else if(ending == "!")
-//				if(gender == FEMALE)
-//					playsound(get_turf(src), pick('code/modules/wod13/sounds/female_yell1.ogg', 'code/modules/wod13/sounds/female_yell2.ogg'), 100, TRUE)
-//				else
-//					playsound(get_turf(src), pick('code/modules/wod13/sounds/male_yell1.ogg', 'code/modules/wod13/sounds/male_yell2.ogg'), 100, TRUE)
-//			else
-//				if(gender == FEMALE)
-//					playsound(get_turf(src), 'code/modules/wod13/sounds/female_speak.ogg', 75, TRUE)
-//				else
-//					playsound(get_turf(src), 'code/modules/wod13/sounds/male_speak.ogg', 75, TRUE)
 
 /obj/item/chameleon
 	name = "Appearance Projector"
@@ -150,16 +123,16 @@
 	master.disrupt()
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/effect/dummy/chameleon/attack_hand()
+/obj/effect/dummy/chameleon/attack_hand(mob/user, list/modifiers)
 	master.disrupt()
 
-/obj/effect/dummy/chameleon/attack_animal()
+/obj/effect/dummy/chameleon/attack_animal(mob/user, list/modifiers)
 	master.disrupt()
 
-/obj/effect/dummy/chameleon/attack_slime()
+/obj/effect/dummy/chameleon/attack_slime(mob/user, list/modifiers)
 	master.disrupt()
 
-/obj/effect/dummy/chameleon/attack_alien()
+/obj/effect/dummy/chameleon/attack_alien(mob/user, list/modifiers)
 	master.disrupt()
 
 /obj/effect/dummy/chameleon/ex_act(S, T)

@@ -25,7 +25,7 @@
 	v_duty = "You are a childe of Haqim! You are one of the many Banu Haqim within the city and judge kindred where they stand. The Banu Haqim operate a coffee shop as a clan cover within the city."
 	duty = "You work at a little quiet coffee shop in the ghetto, and you have some inkling of what goes on there - Perhaps you are a retainer or ghoul of one of the higher-tier members - Either way, you turn a blind eye to it for one reason or another."
 	minimal_masquerade = 0
-	allowed_bloodlines = list("Banu Haqim")
+	allowed_bloodlines = list(CLAN_BANU_HAQIM)
 
 /datum/outfit/job/banu
 	name = "banu"

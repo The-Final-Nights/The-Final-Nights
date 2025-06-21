@@ -25,7 +25,7 @@
 	v_duty = "You are either a Daughter of Cacophony or a Son of Discord. You work at the Cabaret and sing masterful songs yet the singing never stops within your head..."
 	duty = "You work at the local Cabaret, and have some inkling of the oddities going on with the owners, but for one reason or another you don't really care enough to bring it up. Perhaps the pay is nice, or you are personally involved with one of them."
 	minimal_masquerade = 0
-	allowed_bloodlines = list("Daughters of Cacophony")
+	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY)
 
 /datum/outfit/job/daughterof
 	name = "Cabaret Worker"
