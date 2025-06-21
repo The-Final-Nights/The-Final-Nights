@@ -57786,10 +57786,6 @@
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/ghetto/old)
-"nKq" = (
-/obj/transformer,
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/baali)
 "nKB" = (
 /obj/structure/table,
 /obj/item/trash/raisins,
@@ -58073,6 +58069,7 @@
 /turf/open/floor/carpet,
 /area/vtm/interior/strip/toreador)
 "nNh" = (
+/obj/fusebox,
 /obj/structure/table/wood,
 /obj/item/wire_cutters,
 /turf/open/floor/plating/vampplating/mono,
@@ -180130,7 +180127,7 @@ hwp
 obM
 oWV
 grS
-nKq
+jmb
 jmb
 xCH
 xCH
