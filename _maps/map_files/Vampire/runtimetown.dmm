@@ -102,7 +102,7 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights)
 "cz" = (
-/obj/transformer,
+/obj/fusebox/transformer,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior/shop)
 "cQ" = (
@@ -211,7 +211,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/shop)
 "hl" = (
-/obj/transformer,
+/obj/fusebox/transformer,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/supply)
 "ht" = (
