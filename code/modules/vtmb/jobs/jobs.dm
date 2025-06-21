@@ -374,6 +374,10 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "id1"
 
+/obj/item/card/id/government/districtattorney
+	name = "SFPD DA Badge"
+	desc = "Sponsored by the Government. District Attorney. Watermarked with the seal of the Judiciary Committee."
+
 /obj/item/card/id/police/sergeant
 	name = "police sergeant badge"
 	desc = "Sponsored by the Government. This one seems slightly more worn down than all the others."
