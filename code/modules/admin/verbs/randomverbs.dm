@@ -912,14 +912,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins("[ADMIN_LOOKUPFLW(usr)] [N.timing ? "activated" : "deactivated"] a nuke at [ADMIN_VERBOSEJMP(N)].")
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggle Nuke", "[N.timing]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/toggle_RMB() // [ChillRaccoon] - i fucking evil when i have no choice
-	set name = "Toggle RMB Interaction"
-	set category = "Admin"
-	set desc = "This should be helpfull for testing purposes"
-	show_popup_menus = !show_popup_menus
-
-	to_chat(src, "Current RMB interaction = [show_popup_menus]")
-
 /client/proc/toggle_combo_hud()
 	set category = "Admin.Game"
 	set name = "Toggle Combo HUD"

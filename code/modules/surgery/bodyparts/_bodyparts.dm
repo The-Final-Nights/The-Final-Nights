@@ -95,6 +95,9 @@
 	/// If something is currently grasping this bodypart and trying to staunch bleeding (see [/obj/item/hand_item/self_grasp])
 	var/obj/item/hand_item/self_grasp/grasped_by
 
+	/// The noun to use when referring to this arm's appendage, e.g. "hand" or "paw"
+	var/appendage_noun = "hand"
+
 
 /obj/item/bodypart/Initialize(mapload)
 	. = ..()
