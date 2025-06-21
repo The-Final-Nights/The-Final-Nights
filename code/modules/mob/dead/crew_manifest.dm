@@ -29,22 +29,23 @@
 		"Manor" = list("exceptions" = list(), "open" = 0),
 		"Endron" = list("exceptions" = list(), "open" = 0),
 		"Painted City"= list("exceptions" = list(), "open" = 0),
-		"Amberglade" = list("exceptions" = list(), "open" = 0)
+		"Amberglade" = list("exceptions" = list(), "open" = 0),
+		"Citizen" = list("exceptions" = list(), "open" = 0)
 	)
 	var/list/departments = list(
-		list("flag" = DEPARTMENT_PRINCE, "name" = "Prince"),
+		list("flag" = DEPARTMENT_BITFLAG_PRINCE, "name" = "Prince"),
 		list("flag" = DEPARTMENT_PRIMOGEN_COUNCIL, "name" = "Primogen Council"),
-		list("flag" = DEPARTMENT_CAMARILLA, "name" = "Camarilla"),
-		list("flag" = DEPARTMENT_TREMERE, "name" = "Chantry"),
-		list("flag" = DEPARTMENT_CLINIC, "name" = "Clinic"),
-		list("flag" = DEPARTMENT_POLICE, "name" = "Police"),
-		list("flag" = DEPARTMENT_WAREHOUSE, "name" = "Warehouse"),
-		list("flag" = DEPARTMENT_GIOVANNI, "name" = "Giovanni"),
-		list("flag" = DEPARTMENT_TZIMISCE, "name" = "Manor"),
-		list("flag" = DEPARTMENT_ENDRON, "name" = "Endron"),
-		list("flag" = DEPARTMENT_PAINTED_CITY, "name" = "Painted City"),
-		list("flag" = DEPARTMENT_AMBERGLADE, "name" = "Amberglade"),
-		list("flag" = DEPARTMENT_CITIZEN, "name" = "Citizen")
+		list("flag" = DEPARTMENT_BITFLAG_CAMARILLA, "name" = "Camarilla"),
+		list("flag" = DEPARTMENT_BITFLAG_TREMERE, "name" = "Chantry"),
+		list("flag" = DEPARTMENT_BITFLAG_CLINIC, "name" = "Clinic"),
+		list("flag" = DEPARTMENT_BITFLAG_POLICE, "name" = "Police"),
+		list("flag" = DEPARTMENT_BITFLAG_WAREHOUSE, "name" = "Warehouse"),
+		list("flag" = DEPARTMENT_BITFLAG_GIOVANNI, "name" = "Giovanni"),
+		list("flag" = DEPARTMENT_BITFLAG_TZIMISCE, "name" = "Manor"),
+		list("flag" = DEPARTMENT_BITFLAG_ENDRON, "name" = "Endron"),
+		list("flag" = DEPARTMENT_BITFLAG_PAINTED_CITY, "name" = "Painted City"),
+		list("flag" = DEPARTMENT_BITFLAG_AMBERGLADE, "name" = "Amberglade"),
+		list("flag" = DEPARTMENT_BITFLAG_CITIZEN, "name" = "Citizen")
 	)
 
 	for(var/job in SSjob.occupations)

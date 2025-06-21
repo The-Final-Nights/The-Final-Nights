@@ -141,40 +141,44 @@
 
 /datum/datacore/proc/get_manifest()
 	var/list/manifest_out = list(
-		"Camarilla",
+		"Prince",
 		"Primogen Council",
-		"Tremere",
-		"Anarch",
-		"Giovanni",
-		"Clan Tzimisce",
-		"Law Enforcement",
+		"Camarilla",
+		"Chantry",
+		"Clinic",
+		"Police",
 		"Warehouse",
-		"Triad"
+		"Giovanni",
+		"Manor",
+		"Endron",
+		"Painted City",
+		"Amberglade"
 	)
 	var/list/departments = list(
-		"Camarilla" = GLOB.camarilla_positions,
+		"Prince" = GLOB.leader_positions,
 		"Primogen Council" = GLOB.primogen_council_positions,
-		"Tremere" = GLOB.tremere_positions,
-		"Anarch" = GLOB.anarch_positions,
-		"Giovanni" = GLOB.giovanni_positions,
-		"Clan Tzimisce" = GLOB.tzimisce_positions,
-		"Law Enforcement" = GLOB.police_positions + GLOB.national_security_positions,
+		"Camarilla" = GLOB.camarilla_positions,
+		"Chantry" = GLOB.tremere_positions,
+		"Clinic" = GLOB.clinic_positions,
+		"Police" = GLOB.police_positions,
 		"Warehouse" = GLOB.warehouse_positions,
-		"Triad" = GLOB.triad_positions
+		"Giovanni" = GLOB.giovanni_positions, 
+		"Manor" = GLOB.tzimisce_positions, 
+		"Endron" = GLOB.endron_positions, 
+		"Painted City" = GLOB.painted_city_positions,
+		"Amberglade" = GLOB.amberglade_positions
 	)
-	var/list/heads = GLOB.primogen_council_positions
-
 	for(var/datum/data/record/t in GLOB.data_core.general)
 		var/name = t.fields["name"]
 		var/rank = t.fields["rank"]
 		var/has_department = FALSE
 		for(var/department in departments)
 			var/list/jobs = departments[department]
-			if(rank in jobs || (t.fields["truerank"] && (t.fields["truerank"] in jobs))) // TFN EDIT: alt job titles
+			if((rank in jobs) || (t.fields["truerank"] && (t.fields["truerank"] in jobs))) // TFN EDIT: alt job titles
 				if(!manifest_out[department])
 					manifest_out[department] = list()
 				// Append to beginning of list if captain or department head
-				if (rank == "Prince" || (department != "Command" && (rank in heads)))
+				if (rank == "Prince" || (department != "Command" && (rank in GLOB.primogen_council_positions)))
 					manifest_out[department] = list(list(
 						"name" = name,
 						"rank" = rank
@@ -186,9 +190,9 @@
 					))
 				has_department = TRUE
 		if(!has_department)
-			if(!manifest_out["Misc"])
-				manifest_out["Misc"] = list()
-			manifest_out["Misc"] += list(list(
+			if(!manifest_out["Citizen"])
+				manifest_out["Citizen"] = list()
+			manifest_out["Citizen"] += list(list(
 				"name" = name,
 				"rank" = rank
 			))
