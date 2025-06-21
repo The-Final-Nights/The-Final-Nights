@@ -2064,3 +2064,16 @@
 			to_chat(src, "<span class='warning'>You fail to climb up.</span>")
 
 	return
+
+/mob/living/proc/auspice_drain()
+	if(transformation_blocked == TRUE)
+		if(auspice.rage > 0)
+			adjust_rage(-1, src, TRUE)
+			to_chat(src, span_userdanger("The noise makes it hard to concentrate, even on your anger."))
+		else
+			to_chat(src, span_userdanger("Your head swims. You can barely think, let alone feel anger."))
+		addtimer(CALLBACK(src, PROC_REF(auspice_drain)), 1 SECONDS) //Yes, I know the singular is "Second", but it's a define. 
+
+/mob/living/proc/transformation_unblock()
+		transformation_blocked = FALSE
+		visible_message("<b><span class='danger'>You regain your focus, you can transform again!")
