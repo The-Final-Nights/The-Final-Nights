@@ -94,11 +94,11 @@
 				playsound(get_turf(src),'code/modules/wod13/sounds/fix.ogg', 75, FALSE)
 				var/area/A = get_area(src)
 				A.requires_power = FALSE
-				soundloop.play()
 				if(initial(A.fire_controled))
 					A.fire_controled = TRUE
 				for(var/obj/machinery/light/L in A)
 					L.update(FALSE)
+				soundloop.start()
 				repairing = FALSE
 			else
 				repairing = FALSE
