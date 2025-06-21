@@ -124,6 +124,7 @@
 	inhand_icon_state = "eggbox"
 	icon_state = "eggbox"
 	icon_type = "egg"
+	base_icon_state = "eggbox"
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	name = "egg box"
@@ -179,6 +180,7 @@
 	throwforce = 0
 	slot_flags = ITEM_SLOT_BELT
 	icon_type = "cigarette"
+	base_icon_state = "cig"
 	spawn_type = /obj/item/clothing/mask/cigarette/space_cigarette
 	custom_price = PAYCHECK_MEDIUM
 	age_restricted = TRUE
@@ -278,42 +280,49 @@
 	name = "\improper Camel packet"
 	desc = "A packet of six imported Camel cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	icon_state = "dromedary"
+	base_icon_state = "dromedary"
 	spawn_type = /obj/item/clothing/mask/cigarette/dromedary
 
 /obj/item/storage/fancy/cigarettes/cigpack_uplift
 	name = "\improper Uplift Smooth packet"
 	desc = "Your favorite brand, now menthol flavored."
 	icon_state = "uplift"
+	base_icon_state = "uplift"
 	spawn_type = /obj/item/clothing/mask/cigarette/uplift
 
 /obj/item/storage/fancy/cigarettes/cigpack_robust
 	name = "\improper Malboro packet"
 	desc = "Smoked by the robust."
 	icon_state = "robust"
+	base_icon_state = "robust"
 	spawn_type = /obj/item/clothing/mask/cigarette/robust
 
 /obj/item/storage/fancy/cigarettes/cigpack_robustgold
 	name = "\improper Robust Gold packet"
 	desc = "Smoked by the truly robust."
 	icon_state = "robustg"
+	base_icon_state = "robustg"
 	spawn_type = /obj/item/clothing/mask/cigarette/robustgold
 
 /obj/item/storage/fancy/cigarettes/cigpack_carp
 	name = "\improper Carp Classic packet"
 	desc = "Since 2313."
 	icon_state = "carp"
+	base_icon_state = "carp"
 	spawn_type = /obj/item/clothing/mask/cigarette/carp
 
 /obj/item/storage/fancy/cigarettes/cigpack_syndicate
 	name = "cigarette packet"
 	desc = "An obscure brand of cigarettes."
 	icon_state = "syndie"
+	base_icon_state = "syndie"
 	spawn_type = /obj/item/clothing/mask/cigarette/syndicate
 
 /obj/item/storage/fancy/cigarettes/cigpack_midori
 	name = "\improper Midori Tabako packet"
 	desc = "You can't understand the runes, but the packet smells funny."
 	icon_state = "midori"
+	base_icon_state = "midori"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/nicotine
 
 /obj/item/storage/fancy/cigarettes/cigpack_candy
@@ -321,6 +330,7 @@
 	desc = "Unsure about smoking? Want to bring your children safely into the family tradition? Look no more with this special packet! Includes 100%* Nicotine-Free candy cigarettes."
 	icon_state = "candy"
 	icon_type = "candy cigarette"
+	base_icon_state = "candy"
 	spawn_type = /obj/item/clothing/mask/cigarette/candy
 	candy = TRUE
 	age_restricted = FALSE
@@ -334,24 +344,28 @@
 	name = "\improper Shady Jim's Super Slims packet"
 	desc = "Is your weight slowing you down? Having trouble running away from gravitational singularities? Can't stop stuffing your mouth? Smoke Shady Jim's Super Slims and watch all that fat burn away. Guaranteed results!"
 	icon_state = "shadyjim"
+	base_icon_state = "shadyjim"
 	spawn_type = /obj/item/clothing/mask/cigarette/shadyjims
 
 /obj/item/storage/fancy/cigarettes/cigpack_xeno
 	name = "\improper Newport packet"
 	desc = "Loaded with 100% pure tabacco. And also nicotine."
 	icon_state = "slime"
+	base_icon_state = "slime"
 	spawn_type = /obj/item/clothing/mask/cigarette/xeno
 
 /obj/item/storage/fancy/cigarettes/cigpack_cannabis
 	name = "\improper Circinus Green Indiva packet"
 	desc = "A label on the packaging reads, \"Endorsed by Phineas, Freddy and Franklin.\""
 	icon_state = "midori"
+	base_icon_state = "midori"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/cannabis
 
 /obj/item/storage/fancy/cigarettes/cigpack_mindbreaker
 	name = "\improper Leary's Delight packet"
 	desc = "Banned in over 36 galaxies."
 	icon_state = "shadyjim"
+	base_icon_state = "sahdyjim"
 	spawn_type = /obj/item/clothing/mask/cigarette/rollie/mindbreaker
 
 /obj/item/storage/fancy/rollingpapers
@@ -437,6 +451,7 @@
 	inhand_icon_state = "chocolatebox"
 	icon_state = "chocolatebox"
 	icon_type = "chocolate"
+	base_icon_state = "chocolatebox"
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
 	spawn_type = /obj/item/food/tinychocolate
@@ -467,9 +482,10 @@
 	name = "5.56 magazine hardcase"
 	desc = "A small metal hardcase specifically designed to carry 5.56 magazines."
 	icon = 'icons/obj/storage.dmi'
-	icon_state = "hardcasbox"
+	icon_state = "hardcasebox"
 	icon_type = "hardcase"
 	inhand_icon_state = "syringe_kit"
+	base_icon_state = "hardcasebox"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	spawn_type = /obj/item/ammo_box/magazine/vamp556
@@ -487,6 +503,7 @@
 	icon_state = "hardcasebox"
 	inhand_icon_state = "syringe_kit"
 	icon_type = "hardcase"
+	base_icon_state = "hardcasebox"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	spawn_type = /obj/item/ammo_box/magazine/vamp9mp5
