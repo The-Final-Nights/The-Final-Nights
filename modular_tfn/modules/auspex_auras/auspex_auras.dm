@@ -28,7 +28,7 @@
 
 	if (iskindred(src) || HAS_TRAIT(src, TRAIT_COLD_AURA) || (iscathayan(src) && !H.check_kuei_jin_alive()) || iszombie(src))
 		//pale aura for vampires
-		if(!HAS_TRAIT(src, TRAIT_WARM_AURA) && !H.diablerist)
+		if(!HAS_TRAIT(src, TRAIT_WARM_AURA) && !H.diablerist && !H.fakediablerist)
 			if(combat_mode)
 				holder.color = AURA_UNDEAD_HARM
 			else
