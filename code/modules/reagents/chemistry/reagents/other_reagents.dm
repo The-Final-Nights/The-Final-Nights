@@ -1467,8 +1467,8 @@
 //////////////////////////////////Hydroponics stuff///////////////////////////////
 
 /datum/reagent/plantnutriment
-	name = "Generic nutriment"
-	description = "Some kind of nutriment. You can't really tell what it is. You should probably report it, along with how you obtained it."
+	name = "Fetterless Nutrients"
+	description = "Simple and easy starter nutrients from Unfettered Nightbloom, the local flower shop."
 	color = "#000000" // RBG: 0, 0, 0
 	var/tox_prob = 0
 	taste_description = "plant food"
@@ -1480,8 +1480,8 @@
 	..()
 
 /datum/reagent/plantnutriment/eznutriment
-	name = "E-Z-Nutrient"
-	description = "Contains electrolytes. It's what plants crave."
+	name = "Forever Gro™"
+	description = "Electrolyte rich bargain mulch."
 	color = "#376400" // RBG: 50, 100, 0
 	tox_prob = 10
 
@@ -1493,8 +1493,8 @@
 		myseed.adjust_yield(round(chems.get_reagent_amount(src.type) * 0.1))
 
 /datum/reagent/plantnutriment/left4zednutriment
-	name = "Left 4 Zed"
-	description = "Unstable nutriment that makes plants mutate more often than usual."
+	name = "Ethyl methanesulfonate"
+	description = "Unstable nutriment that makes plants mutate more often than usual. Toxic health risk."
 	color = "#1A1E4D" // RBG: 26, 30, 77
 	tox_prob = 25
 
@@ -1505,8 +1505,8 @@
 		myseed.adjust_instability(round(chems.get_reagent_amount(src.type) * 0.2))
 
 /datum/reagent/plantnutriment/robustharvestnutriment
-	name = "Robust Harvest"
-	description = "Very potent nutriment that slows plants from mutating."
+	name = "Allemand Farm Fertilizer"
+	description = "Nutrimentally potent fertilizer from the local co-operative initiative."
 	color = "#9D9D00" // RBG: 157, 157, 0
 	tox_prob = 15
 
@@ -2263,7 +2263,7 @@
 
 /datum/reagent/gravitum
 	name = "Gravitum"
-	description = "A rare kind of null fluid, capable of temporalily removing all weight of whatever it touches." //i dont even
+	description = "A rare kind of null fluid, capable of temporaily removing all weight of whatever it touches." //i dont even
 	color = "#050096" // rgb: 5, 0, 150
 	taste_mult = 0 // oderless and tasteless
 	metabolization_rate = 0.1 * REAGENTS_METABOLISM //20 times as long, so it's actually viable to use

@@ -272,8 +272,17 @@
 	icon_state = "drying_rack"
 	resistance_flags = FLAMMABLE
 	visible_contents = FALSE
+	anchored = TRUE
+	drag_slowdown = 1.5		// Same as a prone mob
+	max_integrity = 300	// so people can't just use them as walls or fixed blockages with no remedy beyond fire
+	integrity_failure = 0.25
+	armor = list(MELEE = 20, BULLET = 10, LASER = 0, ENERGY = 0, BOMB = 10, BIO = 0, RAD = 0, FIRE = 0, ACID = 60)
 	base_build_path = /obj/machinery/smartfridge/drying_rack //should really be seeing this without admin fuckery.
 	var/drying = FALSE
+
+/obj/machinery/smartfridge/drying_rack/examine(mob/user)
+	. = ..()
+	. += span_notice("Turn on and then insert material. <b>Right-Click<b> to anchor and unanchor it.")
 
 /obj/machinery/smartfridge/drying_rack/Initialize()
 	. = ..()
@@ -306,6 +315,24 @@
 	.["verb"] = "Take"
 	.["drying"] = drying
 
+/obj/machinery/smartfridge/drying_rack/Click(location, control, params) //Due to the absence of wrenches, this permits you to un/anchor by hand.
+	var/list/modifiers = params2list(params)
+	if(!modifiers["right"])
+		return ..()
+
+	if(!ishuman(usr) || !usr.canUseTopic(src, BE_CLOSE))
+		return
+	var/mob/living/carbon/human/user = usr
+	if(do_after(user, 15))
+		playsound(src, 'sound/items/ratchet.ogg', 50, TRUE)
+		if(anchored)
+			to_chat(user, span_notice("You unsecure [src] from the ground."))
+			anchored = FALSE
+			return
+		else
+			to_chat(user, span_notice("You secure [src] to the ground."))
+			anchored = TRUE
+			return
 
 /obj/machinery/smartfridge/drying_rack/ui_act(action, params)
 	. = ..()
@@ -320,7 +347,7 @@
 
 /obj/machinery/smartfridge/drying_rack/powered()
 	if(!anchored)
-		return FALSE
+		return TRUE
 	return ..()
 
 /obj/machinery/smartfridge/drying_rack/power_change()

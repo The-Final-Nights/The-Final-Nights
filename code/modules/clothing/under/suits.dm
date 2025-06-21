@@ -35,14 +35,6 @@
 	icon_state = "black_suit"
 	inhand_icon_state = "black_suit"
 
-/obj/item/clothing/under/suit/black
-	name = "black suit"
-	desc = "A professional looking black suit. Ready for some serious law."
-	icon_state = "blacksuit"
-	inhand_icon_state = "blacksuit"
-	can_adjust = TRUE
-	alt_covers_chest = TRUE
-
 /obj/item/clothing/under/suit/black/skirt
 	name = "black suitskirt"
 	desc = "A professional black suitskirt. Nanotrasen Investigation Bureau approved!"

@@ -359,6 +359,38 @@
 	..()
 	. = 1
 
+/datum/reagent/consumable/kuzuyu // Kuzuyu - Kudzu Tea
+	name = "kuzuyu"
+	description = "Made from Kudzu root."
+	color = "#fdfcf4" // rgb: 16, 64, 56
+	nutriment_factor = 0
+	taste_description = "slightly sweet"
+	glass_icon_state = "teaglass"
+	glass_name = "glass of kuzuyu"
+	glass_desc = "Pale white tea with the gooey consistency of honey."
+
+/datum/reagent/consumable/kuzuyu/on_mob_life(mob/living/carbon/M) //multiver that also does tea stuff
+	M.dizziness = max(0,M.dizziness-2)
+	M.drowsyness = max(0,M.drowsyness-1)
+	M.AdjustSleeping(-40)
+	var/medibonus = 0 //it will always have itself which makes it REALLY start @ 1
+	for(var/r in M.reagents.reagent_list)
+		var/datum/reagent/the_reagent = r
+		if(istype(the_reagent, /datum/reagent/medicine))
+			medibonus += 1
+	M.adjustToxLoss(-1 * min(medibonus, 3)) //not great at healing but if you have nothing else it will work
+	M.adjustOrganLoss(ORGAN_SLOT_LUNGS, 1.0) //kills at 40u
+	for(var/r2 in M.reagents.reagent_list)
+		var/datum/reagent/the_reagent2 = r2
+		if(the_reagent2 == src)
+			continue
+		var/amount2purge = 3
+		if(medibonus >= 3 && istype(the_reagent2, /datum/reagent/medicine)) //3 unique meds (2+multiver) will make it not purge medicines
+			continue
+		M.reagents.remove_reagent(the_reagent2.type, amount2purge)
+	..()
+	return TRUE
+
 /datum/reagent/consumable/space_cola
 	name = "Cola"
 	description = "A refreshing beverage."
