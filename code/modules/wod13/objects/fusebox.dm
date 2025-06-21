@@ -58,10 +58,15 @@
 	plane = GAME_PLANE
 	layer = CAR_LAYER
 	anchored = TRUE
+	density = 1
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	var/damaged = 0
 	var/repairing = FALSE
 	var/datum/looping_sound/generator/soundloop
+
+/obj/transformer/Initialize()
+	. = ..()
+	soundloop = new(list(src), active)
 
 /obj/transformer/proc/check_damage(mob/living/user)
 	if(damaged > 100 && icon_state != "sstation_off")
@@ -75,6 +80,7 @@
 		for(var/obj/machinery/light/L in A)
 			L.update(FALSE)
 		playsound(loc, 'code/modules/wod13/sounds/explode.ogg', 100, TRUE)
+		QDEL_NULL(soundloop)
 		if(user)
 			user.electrocute_act(50, src, siemens_coeff = 1, flags = NONE)
 
