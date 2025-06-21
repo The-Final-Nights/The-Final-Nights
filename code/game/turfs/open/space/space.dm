@@ -85,8 +85,8 @@
 			return
 		set_light(0)
 
-/turf/open/space/attack_paw(mob/user)
-	return attack_hand(user)
+/turf/open/space/attack_paw(mob/user, list/modifiers)
+	return attack_hand(user, modifiers)
 
 /turf/open/space/proc/CanBuildHere()
 	return TRUE

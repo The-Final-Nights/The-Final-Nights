@@ -21,7 +21,6 @@
 			/obj/item/gun/ballistic/automatic/vampire/ar15 = 100,
 		)
 	)
-	a_intent = INTENT_HELP
 	var/datum/socialrole/socialrole
 
 	var/is_talking = FALSE
@@ -510,7 +509,7 @@
 	. = ..()
 	var/mob/living/carbon/human/npc/NPC = locate() in get_turf(Obstacle)
 	if(NPC)
-		if(a_intent != INTENT_HELP)
+		if(!combat_mode)
 			NPC.Annoy(src)
 
 /mob/living/carbon/Move(NewLoc, direct)
@@ -548,16 +547,15 @@
 	else if(overlays_standing[UNDERSHADOW_LAYER])
 		remove_overlay(UNDERSHADOW_LAYER)
 
-/mob/living/carbon/human/npc/attack_hand(mob/user)
-	if(user)
-		if(user.a_intent == INTENT_HELP)
-			Annoy(user)
-		if(user.a_intent == INTENT_DISARM)
-			Aggro(user, TRUE)
-		if(user.a_intent == INTENT_HARM)
-			for(var/mob/living/carbon/human/npc/NEPIC in oviewers(7, src))
-				NEPIC.Aggro(user)
-			Aggro(user, TRUE)
+/mob/living/carbon/human/npc/attack_hand(mob/living/carbon/human/user)
+	if(!user)
+		return ..()
+	if(user.combat_mode)
+		for(var/mob/living/carbon/human/npc/NEPIC in oviewers(7, src))
+			NEPIC.Aggro(user)
+		Aggro(user, TRUE)
+	else
+		Annoy(user)
 	..()
 
 /mob/living/carbon/human/npc/on_hit(obj/projectile/P)

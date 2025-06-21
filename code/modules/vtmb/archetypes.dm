@@ -40,7 +40,7 @@
 	start_blood = 2
 
 /datum/archetype/warrior/special_skill(mob/living/carbon/human/H)
-	H.melee_professional = TRUE
+	ADD_TRAIT(H, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 /datum/archetype/gunfighter
 	name = "Gunfighter"

@@ -326,7 +326,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/computer/auxiliary_base, 32)
 	var/anti_spam_cd = 0 //The linking process might be a bit intensive, so this here to prevent over use.
 	var/console_range = 15 //Wifi range of the beacon to find the aux base console
 
-/obj/structure/mining_shuttle_beacon/attack_hand(mob/user)
+/obj/structure/mining_shuttle_beacon/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return

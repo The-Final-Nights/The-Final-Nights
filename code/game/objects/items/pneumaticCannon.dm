@@ -67,8 +67,8 @@
 		CHECK_TICK
 	. += out.Join("\n")
 
-/obj/item/pneumatic_cannon/attackby(obj/item/W, mob/user, params)
-	if(user.a_intent == INTENT_HARM)
+/obj/item/pneumatic_cannon/attackby(obj/item/W, mob/living/user, params)
+	if(user.combat_mode)
 		return ..()
 	else if(W.type == type)
 		to_chat(user, "<span class='warning'>You're fairly certain that putting a pneumatic cannon inside another pneumatic cannon would cause a spacetime disruption.</span>")
@@ -122,7 +122,7 @@
 
 /obj/item/pneumatic_cannon/afterattack(atom/target, mob/living/user, flag, params)
 	. = ..()
-	if(flag && user.a_intent == INTENT_HARM) //melee attack
+	if(flag && user.combat_mode)//melee attack
 		return
 	if(!istype(user))
 		return

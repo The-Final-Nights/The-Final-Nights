@@ -931,7 +931,7 @@
 		if(H.bloodpool)
 			if(prob(10))
 				H.bloodpool = max(0, H.bloodpool-1)
-				beastmaster.bloodpool = min(beastmaster.maxbloodpool, beastmaster.bloodpool+1)
+				beastmaster_owner.bloodpool = min(beastmaster_owner.maxbloodpool, beastmaster_owner.bloodpool+1)
 
 /mob/living/simple_animal/hostile/beastmaster/cockroach
 	name = "cockroach"
