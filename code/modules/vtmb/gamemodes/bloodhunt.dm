@@ -3,6 +3,7 @@
 	icon_state = "bloodhunt"
 
 /atom/movable/screen/alert/bloodhunt/Click()
+	. = ..()
 	for(var/mob/living/carbon/human/H in SSbloodhunt.hunted)
 		if(H)
 			var/area/A = get_area(H)

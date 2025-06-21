@@ -43,7 +43,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/human/host
 
-/datum/action/vampireinfo/Trigger()
+/datum/action/vampireinfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">
@@ -264,7 +264,7 @@
 		icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	. = ..()
 
-/datum/action/blood_power/Trigger()
+/datum/action/blood_power/Trigger(trigger_flags)
 	if(iskindred(owner))
 		if(HAS_TRAIT(owner, TRAIT_TORPOR))
 			return
@@ -318,7 +318,7 @@
 	vampiric = TRUE
 	var/giving = FALSE
 
-/datum/action/give_vitae/Trigger()
+/datum/action/give_vitae/Trigger(trigger_flags)
 	if(iskindred(owner))
 		var/mob/living/carbon/human/vampire = owner
 		if(vampire.bloodpool < 2)

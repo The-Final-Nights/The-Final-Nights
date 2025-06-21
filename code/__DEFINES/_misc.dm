@@ -345,11 +345,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 #define BEAT_SLOW 2
 #define BEAT_NONE 0
 
-//https://secure.byond.com/docs/ref/info.html#/atom/var/mouse_opacity
-#define MOUSE_OPACITY_TRANSPARENT 0
-#define MOUSE_OPACITY_ICON 1
-#define MOUSE_OPACITY_OPAQUE 2
-
 //server security mode
 #define SECURITY_SAFE 1
 #define SECURITY_ULTRASAFE 2
@@ -364,9 +359,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 									//This makes sure that a single person can only spam 3 reopens and 3 closes before being ignored
 
 #define MAX_PROC_DEPTH 195 // 200 proc calls deep and shit breaks, this is a bit lower to give some safety room
-
-#define SYRINGE_DRAW 0
-#define SYRINGE_INJECT 1
 
 //gold slime core spawning
 #define NO_SPAWN 0

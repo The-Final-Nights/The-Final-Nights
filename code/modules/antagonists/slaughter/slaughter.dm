@@ -18,7 +18,7 @@
 	icon_living = "imp"
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speed = 1
-	a_intent = INTENT_HARM
+	combat_mode = TRUE
 	stop_automated_movement = TRUE
 	status_flags = CANPUSH
 	attack_sound = 'sound/magic/demon_attack1.ogg'
@@ -109,20 +109,21 @@
 	if(bloodpool)
 		bloodpool.RegisterSignals(src, list(COMSIG_LIVING_AFTERPHASEIN,COMSIG_PARENT_QDELETING), TYPE_PROC_REF(/obj/effect/dummy/phased_mob, deleteself))
 
-/mob/living/simple_animal/hostile/imp/slaughter/CtrlShiftClickOn(atom/A)
-	if(!isliving(A))
-		return ..()
+/// Performs the classic slaughter demon bodyslam on the attack_target. Yeets them a screen away.
+/mob/living/simple_animal/hostile/imp/slaughter/proc/bodyslam(atom/attack_target)
+	if(!isliving(attack_target))
+		return
 
-	if(!Adjacent(A))
-		to_chat(src, "<span class='warning'>You are too far away to use your slam attack on [A]!</span>")
+	if(!Adjacent(attack_target))
+		to_chat(src, span_warning("You are too far away to use your slam attack on [attack_target]!"))
 		return
 
 	if(slam_cooldown + slam_cooldown_time > world.time)
 		to_chat(src, "<span class='warning'>Your slam ability is still on cooldown!</span>")
 		return
 
-	face_atom(A)
-	var/mob/living/victim = A
+	face_atom(attack_target)
+	var/mob/living/victim = attack_target
 	victim.take_bodypart_damage(brute=20, wound_bonus=wound_bonus) // don't worry, there's more punishment when they hit something
 	visible_message("<span class='danger'>[src] slams into [victim] with monstrous strength!</span>", "<span class='danger'>You slam into [victim] with monstrous strength!</span>", ignored_mobs=victim)
 	to_chat(victim, "<span class='userdanger'>[src] slams into you with monstrous strength, sending you flying like a ragdoll!</span>")
@@ -131,11 +132,16 @@
 	slam_cooldown = world.time
 	log_combat(src, victim, "slaughter slammed")
 
-/mob/living/simple_animal/hostile/imp/slaughter/UnarmedAttack(atom/A, proximity)
+/mob/living/simple_animal/hostile/imp/slaughter/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		bodyslam(attack_target)
+		return
+
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		return
-	if(iscarbon(A))
-		var/mob/living/carbon/target = A
+
+	if(iscarbon(attack_target))
+		var/mob/living/carbon/target = attack_target
 		if(target.stat != DEAD && target.mind && current_hitstreak < wound_bonus_hitstreak_max)
 			current_hitstreak++
 			wound_bonus += wound_bonus_per_hit

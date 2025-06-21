@@ -17,6 +17,7 @@
 /// adds hiddenprints instead of fingerprints on interact
 #define INTERACT_ATOM_NO_FINGERPRINT_INTERACT 		(1<<8)
 
+
 /// attempt pickup on attack_hand for items
 #define INTERACT_ITEM_ATTACK_HAND_PICKUP (1<<0)
 
@@ -39,8 +40,3 @@
 /// the user must have vision to interact (blind people need not apply)
 #define INTERACT_MACHINE_REQUIRES_SIGHT		(1<<7)
 
-//Thiiink this is the right define file for this. Migrated to global from action.dm due to widespread use. Used for checking if an action can be used based on various flags
-#define AB_CHECK_HANDS_BLOCKED (1<<0)
-#define AB_CHECK_IMMOBILE (1<<1)
-#define AB_CHECK_LYING (1<<2)
-#define AB_CHECK_CONSCIOUS (1<<3)

@@ -31,6 +31,7 @@
 /obj/item/soap/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/slippery, 80)
+	AddComponent(/datum/component/cleaner, cleanspeed, 0.1, pre_clean_callback=CALLBACK(src, .proc/should_clean), on_cleaned_callback=CALLBACK(src, .proc/decreaseUses)) //less scaling for soapies
 
 /obj/item/soap/examine(mob/user)
 	. = ..()
@@ -97,6 +98,9 @@
 	new /obj/effect/particle_effect/foam(loc)
 	return (TOXLOSS)
 
+/obj/item/soap/proc/should_clean(datum/cleaning_source, atom/atom_to_clean, mob/living/cleaner)
+	return check_allowed_items(atom_to_clean)
+
 /**
  * Decrease the number of uses the bar of soap has.
  *
@@ -114,55 +118,11 @@
 		to_chat(user, "<span class='warning'>[src] crumbles into tiny bits!</span>")
 		qdel(src)
 
-/obj/item/soap/afterattack(atom/target, mob/user, proximity)
-	. = ..()
-	if(!proximity || !check_allowed_items(target))
+/obj/item/soap/nanotrasen/cyborg/afterattack(atom/target, mob/user, proximity)
+	if(uses <= 0)
+		to_chat(user, span_warning("No good, you need to recharge!"))
 		return
-	var/clean_speedies = 1 * cleanspeed
-	if(user.mind)
-		clean_speedies = cleanspeed * min(user.mind.get_skill_modifier(/datum/skill/cleaning, SKILL_SPEED_MODIFIER)+0.1,1) //less scaling for soapies
-	//I couldn't feasibly  fix the overlay bugs caused by cleaning items we are wearing.
-	//So this is a workaround. This also makes more sense from an IC standpoint. ~Carn
-	if(user.client && ((target in user.client.screen) && !user.is_holding(target)))
-		to_chat(user, "<span class='warning'>You need to take that [target.name] off before cleaning it!</span>")
-	else if(istype(target, /obj/effect/decal/cleanable))
-		user.visible_message("<span class='notice'>[user] begins to scrub \the [target.name] out with [src].</span>", "<span class='warning'>You begin to scrub \the [target.name] out with [src]...</span>")
-		if(do_after(user, clean_speedies, target = target))
-			to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
-			var/obj/effect/decal/cleanable/cleanies = target
-			user.mind?.adjust_experience(/datum/skill/cleaning, max(round(cleanies.beauty/CLEAN_SKILL_BEAUTY_ADJUSTMENT),0)) //again, intentional that this does NOT round but mops do.
-			qdel(target)
-			decreaseUses(user)
-
-	else if(ishuman(target) && user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-		var/mob/living/carbon/human/human_user = user
-		user.visible_message("<span class='warning'>\the [user] washes \the [target]'s mouth out with [src.name]!</span>", "<span class='notice'>You wash \the [target]'s mouth out with [src.name]!</span>") //washes mouth out with soap sounds better than 'the soap' here			if(user.zone_selected == "mouth")
-		if(human_user.lip_style)
-			user.mind?.adjust_experience(/datum/skill/cleaning, CLEAN_SKILL_GENERIC_WASH_XP)
-			human_user.lip_style = null //removes lipstick
-			human_user.update_body()
-		decreaseUses(user)
-		return
-	else if(istype(target, /obj/structure/window))
-		user.visible_message("<span class='notice'>[user] begins to clean \the [target.name] with [src]...</span>", "<span class='notice'>You begin to clean \the [target.name] with [src]...</span>")
-		if(do_after(user, clean_speedies, target = target))
-			to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
-			target.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
-			target.set_opacity(initial(target.opacity))
-			user.mind?.adjust_experience(/datum/skill/cleaning, CLEAN_SKILL_GENERIC_WASH_XP)
-			decreaseUses(user)
-	else
-		user.visible_message("<span class='notice'>[user] begins to clean \the [target.name] with [src]...</span>", "<span class='notice'>You begin to clean \the [target.name] with [src]...</span>")
-		if(do_after(user, clean_speedies, target = target))
-			to_chat(user, "<span class='notice'>You clean \the [target.name].</span>")
-			if(user && isturf(target))
-				for(var/obj/effect/decal/cleanable/cleanable_decal in target)
-					user.mind?.adjust_experience(/datum/skill/cleaning, round(cleanable_decal.beauty / CLEAN_SKILL_BEAUTY_ADJUSTMENT))
-			target.wash(CLEAN_SCRUB)
-			target.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)
-			user.mind?.adjust_experience(/datum/skill/cleaning, CLEAN_SKILL_GENERIC_WASH_XP)
-			decreaseUses(user)
-	return
+	return ..()
 
 
 /*

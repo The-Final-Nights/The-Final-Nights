@@ -343,7 +343,7 @@
 
 /mob/living/carbon/human/proc/attack_myself_command()
 	if(!CheckFrenzyMove())
-		a_intent = INTENT_HARM
+		set_combat_mode(TRUE)
 		var/obj/item/I = get_active_held_item()
 		if(I)
 			if(I.force)
