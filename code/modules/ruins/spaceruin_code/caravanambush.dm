@@ -19,7 +19,6 @@
 	name = "experimental wirecutters"
 	worn_icon_state = "cutters"
 	toolspeed = 0.3
-	random_color = FALSE
 
 /obj/item/crowbar/red/caravan
 	color = "#ff0000"

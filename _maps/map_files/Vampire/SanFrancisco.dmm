@@ -7434,7 +7434,7 @@
 /area/vtm/pacificheights/forest)
 "bIh" = (
 /obj/item/storage/box/lights/mixed,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/structure/table/wood/fancy/red,
 /turf/open/floor/carpet/lone,
 /area/vtm/interior/chantry)
@@ -13679,9 +13679,9 @@
 /obj/item/storage/box/lights/mixed,
 /obj/item/storage/box/lights/mixed,
 /obj/item/storage/box/lights/mixed,
-/obj/item/wire_cutters,
-/obj/item/wire_cutters,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
+/obj/item/wirecutters,
+/obj/item/wirecutters,
 /obj/machinery/light{
 	dir = 4;
 	light_color = "#6488EA"
@@ -20267,7 +20267,7 @@
 /obj/item/screwdriver{
 	pixel_y = 6
 	},
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/techshop)
 "eNI" = (
@@ -23597,7 +23597,7 @@
 /obj/item/reagent_containers/spray/cleaner,
 /obj/item/lightreplacer,
 /obj/item/reagent_containers/spray/cleaner,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/item/storage/bag/trash,
 /obj/item/storage/bag/trash,
 /turf/open/floor/plating/vampplating,
@@ -23676,7 +23676,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
 	},
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/item/storage/box/lights/mixed,
 /turf/open/floor/plating/saint,
 /area/vtm/church/interior/staff)
@@ -31829,7 +31829,7 @@
 /area/vtm/interior/millennium_tower/f3)
 "hzp" = (
 /obj/structure/table,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/shop)
 "hzq" = (
@@ -33863,9 +33863,9 @@
 /area/vtm/cabaret)
 "iac" = (
 /obj/structure/rack,
-/obj/item/wire_cutters,
-/obj/item/wire_cutters,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
+/obj/item/wirecutters,
+/obj/item/wirecutters,
 /obj/item/screwdriver,
 /obj/item/screwdriver,
 /obj/machinery/light{
@@ -39475,7 +39475,7 @@
 	icon_state = "bounty-closed";
 	open = 0
 	},
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/millennium_tower/ventrue)
 "jtE" = (
@@ -40512,7 +40512,7 @@
 /area/vtm/sewer)
 "jFx" = (
 /obj/structure/table,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/item/mop,
 /obj/item/reagent_containers/glass/bucket,
 /turf/open/floor/plating/toilet,
@@ -40557,7 +40557,7 @@
 /area/vtm/anarch)
 "jGc" = (
 /obj/item/storage/box/lights/mixed,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/structure/table/wood,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior/staff)
@@ -46356,7 +46356,7 @@
 	},
 /obj/structure/coclock,
 /obj/structure/table,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/millennium_tower/f2)
 "lcG" = (
@@ -53656,7 +53656,7 @@
 /obj/item/restraints/handcuffs,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/storage/box/lights/mixed,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/carpet/red,
 /area/vtm/interior/millennium_tower/f3)
 "mPx" = (
@@ -56438,7 +56438,7 @@
 /area/vtm)
 "nwt" = (
 /obj/structure/table,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/item/vamp/keys/setite,
 /obj/item/vamp/keys/setite,
 /obj/item/vamp/keys/setite,
@@ -56522,7 +56522,7 @@
 "nxi" = (
 /obj/structure/table/wood,
 /obj/item/storage/box/lights/mixed,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/bronze,
 /area/vtm/interior/giovanni)
 "nxq" = (
@@ -58071,7 +58071,7 @@
 "nNh" = (
 /obj/fusebox,
 /obj/structure/table/wood,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/baali)
 "nNk" = (
@@ -66053,7 +66053,7 @@
 	pixel_y = 32
 	},
 /obj/item/vtm_artifact/rand,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/item/storage/box/lights/mixed,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/strip)
@@ -67205,7 +67205,7 @@
 "pTC" = (
 /obj/structure/table,
 /obj/item/storage/box/lights/mixed,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police)
 "pTE" = (
@@ -68031,7 +68031,7 @@
 "qdk" = (
 /obj/structure/table,
 /obj/structure/coclock,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower)
 "qdo" = (
@@ -68339,7 +68339,7 @@
 /area/vtm/interior/giovanni/outside)
 "qgn" = (
 /obj/fusebox,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "qgt" = (
@@ -77484,7 +77484,7 @@
 	dir = 9
 	},
 /obj/structure/table,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/item/storage/box/drinkingglasses,
 /turf/open/floor/light,
 /area/vtm/interior/strip)
@@ -78410,7 +78410,7 @@
 	pixel_y = -2;
 	pixel_x = 16
 	},
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "suV" = (
@@ -82067,7 +82067,7 @@
 "trZ" = (
 /obj/structure/table/wood,
 /obj/item/storage/box/lights/mixed,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/giovanni)
 "tsb" = (
@@ -87392,7 +87392,7 @@
 "uGV" = (
 /obj/structure/closet/crate/large,
 /obj/item/storage/box/lights/bulbs,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "uHa" = (
@@ -98690,7 +98690,7 @@
 /obj/machinery/light{
 	pixel_y = 32
 	},
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /turf/open/floor/plating/granite,
 /area/vtm/interior/millennium_tower)
 "xqf" = (
@@ -98931,7 +98931,7 @@
 	pixel_y = 32
 	},
 /obj/structure/closet/secure_closet,
-/obj/item/wire_cutters,
+/obj/item/wirecutters,
 /obj/item/storage/box/lights/mixed,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/restraints/handcuffs,
