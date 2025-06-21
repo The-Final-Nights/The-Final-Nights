@@ -32,6 +32,7 @@
 #define TRAIT_CHUNKYFINGERS		"chunkyfingers" //means that you can't use weapons with normal trigger guards.
 #define TRAIT_DUMB				"dumb"
 #define TRAIT_ADVANCEDTOOLUSER	"advancedtooluser" //Whether a mob is dexterous enough to use machines and certain items or not.
+#define TRAIT_NO_HANDS			"no_hands" // For stuff like lupus.
 #define TRAIT_MONKEYLIKE		"monkeylike" //Antagonizes the above.
 #define TRAIT_PACIFISM			"pacifism"
 #define TRAIT_ELYSIUM			"elysium"
@@ -158,6 +159,8 @@
 ///generic atom traits
 /// Trait from being under the floor in some manner
 #define TRAIT_UNDERFLOOR "underfloor"
+/// Marks an atom when the cleaning of it is first started, so that the cleaning overlay doesn't get removed prematurely
+#define TRAIT_CURRENTLY_CLEANING "currently_cleaning"
 
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
@@ -179,6 +182,7 @@
 #define TRAIT_WARM_AURA			"warm_aura"
 #define TRAIT_FRENETIC_AURA		"frenetic_aura"
 #define TRAIT_UNBONDABLE		"unbondable"
+#define TRAIT_DEFICIENT_VITAE   "deficient_vitae"
 #define TRAIT_BLUSH_OF_HEALTH	"blush_of_health"
 #define TRAIT_POTENT_BLOOD		"potent_blood"
 #define TRAIT_CAN_EAT			"can_eat" // this is for kindred. not normal people. normal people do not need this flag.
@@ -194,12 +198,16 @@
 #define TRAIT_DIABLERIE			"diablerie"
 #define TRAIT_GULLET			"gullet"
 #define TRAIT_CHARMER			"charmer"
+#define TRAIT_UNBONDING         "unbonding"
+#define TRAIT_PERMAFANGS        "permafangs"
 #define TRAIT_ORGANOVORE		"organovore"
 #define TRAIT_SALUBRI_EYE_OPEN	"eye_open" //This is for Salubri Stuff in regards to oepning and closing it
 #define TRAIT_SALUBRI_EYE		"salubri_eye" //This is for whhen you want to like actually know if you have the eye or not
 #define TRAIT_UNMASQUERADE		"unmasquerade"	//For tzi clothing
 #define TRAIT_NONMASQUERADE		"nonmasquerade"	//For tzi mods
 #define TRAIT_GUNFIGHTER        "gunfighter"    //Halves firing delay and cooldown between burst fire shots
+#define TRAIT_WARRIOR			"warrior"
+
 /// Makes gambling incredibly effective, and causes random beneficial events to happen for the mob.
 #define TRAIT_SUPERNATURAL_LUCK	"supernatural_luck"
 /// Lets the mob block projectiles like bullets using only their hands.
@@ -336,3 +344,6 @@
 #define TRAIT_HARDENED_SOLES "trait_hardened_soles"
 //For handcuff breaking speed.
 #define TRAIT_CUFFBREAKER		"cuffbreaker"
+
+/// Properly wielded two handed item
+#define TRAIT_WIELDED "wielded"

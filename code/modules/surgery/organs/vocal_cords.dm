@@ -35,7 +35,7 @@
 	actions_types = list(/datum/action/item_action/organ_action/use/adamantine_vocal_cords)
 	icon_state = "adamantine_cords"
 
-/datum/action/item_action/organ_action/use/adamantine_vocal_cords/Trigger()
+/datum/action/item_action/organ_action/use/adamantine_vocal_cords/Trigger(trigger_flags)
 	if(!IsAvailable())
 		return
 	var/message = input(owner, "Resonate a message to all nearby golems.", "Resonate")
@@ -87,7 +87,7 @@
 			return FALSE
 	return TRUE
 
-/datum/action/item_action/organ_action/colossus/Trigger()
+/datum/action/item_action/organ_action/colossus/Trigger(trigger_flags)
 	. = ..()
 	if(!IsAvailable())
 		if(world.time < cords.next_command)
@@ -464,43 +464,11 @@
 			if(L.m_intent != MOVE_INTENT_RUN)
 				L.toggle_move_intent()
 
-	//HELP INTENT
-	else if((findtext(message, helpintent_words)))
-		cooldown = COOLDOWN_MEME
-		for(var/mob/living/carbon/human/H in listeners)
-			addtimer(CALLBACK(H, /mob/verb/a_intent_change, INTENT_HELP), i * 2)
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, click_random_mob)), i * 2)
-			i++
-
-	//DISARM INTENT
-	else if((findtext(message, disarmintent_words)))
-		cooldown = COOLDOWN_MEME
-		for(var/mob/living/carbon/human/H in listeners)
-			addtimer(CALLBACK(H, /mob/verb/a_intent_change, INTENT_DISARM), i * 2)
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, click_random_mob)), i * 2)
-			i++
-
-	//GRAB INTENT
-	else if((findtext(message, grabintent_words)))
-		cooldown = COOLDOWN_MEME
-		for(var/mob/living/carbon/human/H in listeners)
-			addtimer(CALLBACK(H, /mob/verb/a_intent_change, INTENT_GRAB), i * 2)
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, click_random_mob)), i * 2)
-			i++
-
-	//HARM INTENT
-	else if((findtext(message, harmintent_words)))
-		cooldown = COOLDOWN_MEME
-		for(var/mob/living/carbon/human/H in listeners)
-			addtimer(CALLBACK(H, /mob/verb/a_intent_change, INTENT_HARM), i * 2)
-			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob, click_random_mob)), i * 2)
-			i++
-
 	//THROW/CATCH
 	else if((findtext(message, throwmode_words)))
 		cooldown = COOLDOWN_MEME
 		for(var/mob/living/carbon/C in listeners)
-			C.throw_mode_on()
+			C.throw_mode_on(THROW_MODE_TOGGLE)
 
 	//FLIP
 	else if((findtext(message, flip_words)))

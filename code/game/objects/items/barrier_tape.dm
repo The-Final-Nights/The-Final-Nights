@@ -49,7 +49,7 @@
 	return FALSE
 
 /obj/structure/barrier_tape/attack_hand(mob/living/user)
-	if(user.a_intent != INTENT_HARM)
+	if(!(user.combat_mode))
 		user.visible_message("<span class='notice'>[user] lifts [src], allowing passage.</span>")
 		lift_tape()
 	else

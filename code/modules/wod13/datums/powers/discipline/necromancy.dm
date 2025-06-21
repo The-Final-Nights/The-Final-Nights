@@ -249,7 +249,7 @@
 			var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
 			zombie.my_creator = owner
 			owner.beastmaster |= zombie
-			zombie.beastmaster = owner
+			zombie.beastmaster_owner = owner
 			qdel(target)
 		else
 			switch(target.maxHealth)
@@ -257,25 +257,25 @@
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level2(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
-					zombie.beastmaster = owner
+					zombie.beastmaster_owner = owner
 					qdel(target)
 				if (20 to 70) //cats and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
-					zombie.beastmaster = owner
+					zombie.beastmaster_owner = owner
 					qdel(target)
 				if (70 to 150) //dogs/biters and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
-					zombie.beastmaster = owner
+					zombie.beastmaster_owner = owner
 					qdel(target)
 				if (150 to INFINITY) //szlachta and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
-					zombie.beastmaster = owner
+					zombie.beastmaster_owner = owner
 					qdel(target)
 
 	else if(iszombie(target))

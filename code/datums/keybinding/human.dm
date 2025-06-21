@@ -68,12 +68,14 @@
 	. = ..()
 	if(.)
 		return
-	var/mob/living/carbon/human/H = user.mob
-	H.SwitchBlocking()
-	return TRUE
+	if(ishuman(user.mob) && !ispath(user.mob, /mob/living/simple_animal/werewolf))
+		var/mob/living/carbon/human/H = user.mob
+		H.SwitchBlocking()
+		return TRUE
+	return
 
 /datum/keybinding/human/bite
-	hotkey_keys = list("F")
+	hotkey_keys = list("N")
 	name = "bite"
 	full_name = "Bite"
 	description = "Bite whoever you're aggressively grabbing, and feed on them if possible."

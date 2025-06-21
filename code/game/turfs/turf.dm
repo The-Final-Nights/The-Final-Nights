@@ -158,7 +158,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	requires_activation = FALSE
 	..()
 
-/turf/attack_hand(mob/user)
+/turf/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -315,23 +315,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		mover.Bump(firstbump)
 		return (mover.movement_type & PHASING)
 	return TRUE
-
-/turf/Exit(atom/movable/mover, atom/newloc)
-	. = ..()
-	if(!. || QDELETED(mover))
-		return FALSE
-	for(var/i in contents)
-		if(i == mover)
-			continue
-		var/atom/movable/thing = i
-		if(!thing.Uncross(mover, newloc))
-			if(thing.flags_1 & ON_BORDER_1)
-				mover.Bump(thing)
-			if(!(mover.movement_type & PHASING))
-				return FALSE
-		if(QDELETED(mover))
-			return FALSE		//We were deleted.
-
 
 /turf/open/Entered(atom/movable/AM)
 	..()
