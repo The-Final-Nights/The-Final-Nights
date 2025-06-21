@@ -121,6 +121,7 @@
 
 	var/diablerist = FALSE
 	var/antifrenzy = FALSE
+	var/fakediablerist = FALSE
 
 	COOLDOWN_DECLARE(bleeding_message_cd)
 

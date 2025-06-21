@@ -332,7 +332,7 @@
 			animal.adjustFireLoss(-25)
 		if(ishuman(vampire.pulling))
 			var/mob/living/carbon/human/grabbed_victim = vampire.pulling
-			if(iscathayan(grabbed_victim))
+			if(iscathayan(grabbed_victim) || iszombie(grabbed_victim))
 				to_chat(owner, span_warning("[grabbed_victim] vomits the vitae back!"))
 				return
 			if(!grabbed_victim.client && !isnpc(vampire.pulling))
