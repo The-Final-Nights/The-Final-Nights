@@ -101,10 +101,6 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights)
-"cz" = (
-/obj/fusebox/transformer,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/interior/shop)
 "cQ" = (
 /obj/structure/table,
 /obj/item/storage/firstaid/ifak,
@@ -210,10 +206,6 @@
 "gF" = (
 /turf/open/floor/plating/rough,
 /area/vtm/interior/shop)
-"hl" = (
-/obj/fusebox/transformer,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/supply)
 "ht" = (
 /obj/effect/decal/trash{
 	icon_state = "trash5"
@@ -331,10 +323,6 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/turf/open/floor/plating/vampbeach,
-/area/vtm/pacificheights)
-"lC" = (
-/obj/item/wire_cutters,
 /turf/open/floor/plating/vampbeach,
 /area/vtm/pacificheights)
 "lN" = (
@@ -2637,9 +2625,9 @@ NR
 NR
 NR
 NR
-hl
 NR
-cz
+NR
+NR
 NR
 NR
 cj
@@ -2672,7 +2660,7 @@ NR
 NR
 NR
 NR
-lC
+NR
 NR
 NR
 NR
