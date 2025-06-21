@@ -21,8 +21,8 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, ABSTRACT_ITEM_TRAIT)
 
-/obj/item/melee/touch_attack/attack(mob/target, mob/living/carbon/user)
-	if(!iscarbon(user)) //Look ma, no hands
+/obj/item/melee/touch_attack/attack(mob/target, mob/living/user)
+	if(!isliving(target)) //Look ma, no hands
 		return
 	if(!(user.mobility_flags & MOBILITY_USE))
 		to_chat(user, "<span class='warning'>You can't reach out!</span>")
@@ -118,18 +118,15 @@
 	icon_state = "fleshtostone"
 	inhand_icon_state = "fleshtostone"
 
-/obj/item/melee/touch_attack/mothers_touch/afterattack(atom/target, mob/living/carbon/user, proximity)
-	if(!proximity || target == user || !isliving(target) || !iscarbon(user)) //getting hard after touching yourself would also be bad
-		return
-	if(!(user.mobility_flags & MOBILITY_USE))
-		to_chat(user, "<span class='warning'>You can't reach out!</span>")
-		return
+/obj/item/melee/touch_attack/mothers_touch/attack(mob/target, mob/living/user)
+	. = ..()
+	if(target == user && isliving(target))
+		return COMPONENT_CANCEL_ATTACK_CHAIN
 	var/mob/living/M = target
 	if(M.anti_magic_check())
 		to_chat(user, "<span class='warning'>The spell can't seem to affect [M]!</span>")
 		to_chat(M, "<span class='warning'>You feel your flesh turn to stone for a moment, then revert back!</span>")
-		..()
-		return
+		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(user.CheckEyewitness(user, user, 7, FALSE))
 		user.adjust_veil(-1)
 	M.adjustBruteLoss(-100, TRUE)
@@ -154,7 +151,7 @@
 		if(length(BD.all_wounds))
 			var/datum/wound/W = pick(BD.all_wounds)
 			W.remove_wound()
-	return ..()
+	return
 
 /obj/item/melee/touch_attack/duffelbag
 	name = "\improper burdening touch"
