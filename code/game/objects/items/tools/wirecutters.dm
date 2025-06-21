@@ -91,7 +91,7 @@
 	icon_state = "neat_ripper"
 	toolspeed = 2 //isn't meant for cutting wires
 	random_color = FALSE
-	permanent = TRUE
+	var/permanent = TRUE ///if something lasts for the entire ROUND or not. very important just the ROUND.
 
 /obj/item/wirecutters/pliers/bad_pliers
 	name = "pliers"

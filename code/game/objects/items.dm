@@ -221,8 +221,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	var/is_wood = FALSE
 	///If this item is magical and thus picked up on magic senses
 	var/is_magic = FALSE
-	///if something lasts for the entire ROUND or not. very important just the ROUND.
-	var/permanent = FALSE
 
 	//WoD13 vars end here :3
 
