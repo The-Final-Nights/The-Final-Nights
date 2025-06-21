@@ -332,7 +332,7 @@ Dancer
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	var/last_acrobate = 0
 
-/datum/action/fly_upper/Trigger()
+/datum/action/fly_upper/Trigger(trigger_flags)
 	owner.up()
 
 /datum/quirk/dancer
@@ -355,7 +355,7 @@ Dancer
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	var/last_added_humanity = 0
 
-/datum/action/dance/Trigger()
+/datum/action/dance/Trigger(trigger_flags)
 	if(HAS_TRAIT(owner, TRAIT_INCAPACITATED))
 		to_chat(owner, "<span class='warning'>You're a little too close to being dead to get down!</span>")
 		return
