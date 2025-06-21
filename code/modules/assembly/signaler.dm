@@ -1,14 +1,10 @@
-#define COOLDOWN_SIGNALLER_SEND "cooldown_signaller_send"
-
 /obj/item/assembly/signaler
 	name = "remote signaling device"
 	desc = "Used to remotely activate devices. Allows for syncing when using a secure signaler on another."
 	icon_state = "signaller"
 	inhand_icon_state = "signaler"
-	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
 	custom_materials = list(/datum/material/iron=400, /datum/material/glass=120)
-	wires = WIRE_RECEIVE | WIRE_PULSE | WIRE_RADIO_PULSE | WIRE_RADIO_RECEIVE
+	assembly_behavior = ASSEMBLY_ALL
 	drop_sound = 'sound/items/handling/component_drop.ogg'
 	pickup_sound = 'sound/items/handling/component_pickup.ogg'
 
@@ -133,6 +129,19 @@
 			to_chat(user, "You transfer the frequency and code of \the [signaler2.name] to \the [name]")
 	..()
 
+/obj/item/assembly/signaler/attack_self_secondary(mob/user, modifiers)
+	. = ..()
+	if(!can_interact(user))
+		return
+	if(!ishuman(user))
+		return
+	if(TIMER_COOLDOWN_CHECK(src, COOLDOWN_SIGNALLER_SEND))
+		balloon_alert(user, "still recharging...")
+		return
+	TIMER_COOLDOWN_START(src, COOLDOWN_SIGNALLER_SEND, 1 SECONDS)
+	INVOKE_ASYNC(src, PROC_REF(signal))
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /obj/item/assembly/signaler/proc/signal()
 	if(!radio_connection)
 		return
@@ -156,6 +165,7 @@
 		manual_suicide(suicider)
 		return
 
+	// If the holder is a TTV, we want to store the last received signal to incorporate it into TTV logging, else wipe it.
 	last_receive_signal_log = null
 
 	pulse()
@@ -198,5 +208,3 @@
 	name = "low-power remote signaling device"
 	desc = "Used to remotely activate devices, within a small range of 9 tiles. Allows for syncing when using a secure signaler on another."
 	range = 9
-
-#undef COOLDOWN_SIGNALLER_SEND

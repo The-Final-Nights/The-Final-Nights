@@ -227,7 +227,7 @@
 		face_atom(walktarget)
 	if(isturf(loc))
 		if(danger_source)
-			a_intent = INTENT_HARM
+			set_combat_mode(TRUE)
 			if(m_intent == MOVE_INTENT_WALK)
 				toggle_move_intent(src)
 			if(!has_weapon && !fights_anyway)
@@ -261,7 +261,7 @@
 						else
 							has_weapon = FALSE
 					walktarget = ChoosePath()
-					a_intent = INTENT_HELP
+					set_combat_mode(FALSE)
 
 			if(last_danger_meet+300 <= world.time)
 				danger_source = null
@@ -271,7 +271,7 @@
 					else
 						has_weapon = FALSE
 				walktarget = ChoosePath()
-				a_intent = INTENT_HELP
+				set_combat_mode(FALSE)
 		else if(less_danger)
 			var/reqsteps = round((SShumannpcpool.next_fire-world.time)/total_multiplicative_slowdown())
 			set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
