@@ -1,8 +1,9 @@
 /obj/item/wirecutters
 	name = "wirecutters"
 	desc = "This cuts wires."
-	icon = 'icons/obj/tools.dmi'
-	icon_state = "cutters_map"
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "fixer"
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	inhand_icon_state = "cutters"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
