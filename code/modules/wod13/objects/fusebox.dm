@@ -62,7 +62,7 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	var/damaged = 0
 	var/repairing = FALSE
-	var/datum/looping_sound/generator/soundloop
+	var/datum/looping_sound/generator/transformer/soundloop
 
 /obj/transformer/Initialize()
 	. = ..()
@@ -94,6 +94,7 @@
 				playsound(get_turf(src),'code/modules/wod13/sounds/fix.ogg', 75, FALSE)
 				var/area/A = get_area(src)
 				A.requires_power = FALSE
+				soundloop.play()
 				if(initial(A.fire_controled))
 					A.fire_controled = TRUE
 				for(var/obj/machinery/light/L in A)
