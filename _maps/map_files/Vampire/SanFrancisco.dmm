@@ -1795,16 +1795,6 @@
 /obj/item/candle,
 /turf/open/floor/carpet/green,
 /area/vtm/jazzclub)
-"auL" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/northbeach)
 "auM" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -1929,13 +1919,6 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/ghetto)
 "avZ" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/litter,
 /turf/closed/wall/vampwall,
 /area/vtm/northbeach)
@@ -8357,10 +8340,6 @@
 	pixel_x = 16
 	},
 /obj/effect/decal/pallet,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/table/wood,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren{
@@ -10302,10 +10281,6 @@
 /obj/item/seeds/cannabis,
 /obj/item/seeds/cannabis,
 /obj/item/seeds/cannabis,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/litter,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
@@ -12979,16 +12954,6 @@
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/graveyard)
-"cWk" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/northbeach)
 "cWn" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8
@@ -18081,7 +18046,7 @@
 "eig" = (
 /obj/structure/railing,
 /turf/open/floor/plating/vampwood,
-/area/vtm/sewer/cappadocian)
+/area/space)
 "eir" = (
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_town)
@@ -21520,16 +21485,6 @@
 /obj/effect/decal/trash,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/techshop)
-"faq" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/fishermanswharf)
 "fas" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 4
@@ -24850,14 +24805,7 @@
 /turf/open/floor/plasteel/stairs/left,
 /area/vtm/church/interior/haven)
 "fMa" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
 /obj/structure/fire_barrel,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/fishermanswharf)
@@ -34611,18 +34559,6 @@
 	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/endron_facility/restricted)
-"idb" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/litter,
-/obj/effect/decal/trash,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/northbeach)
 "idd" = (
 /obj/structure/table/wood,
 /obj/item/storage/pill_bottle/lsd,
@@ -42252,17 +42188,12 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower)
 "jTQ" = (
-/obj/machinery/hydroponics/constructable,
 /obj/machinery/light/small/pink{
 	dir = 4;
 	pixel_x = -16
 	},
 /obj/effect/decal/graffiti,
 /obj/effect/decal/pallet,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/barrels{
 	icon_state = "barrels9"
 	},
@@ -44226,25 +44157,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/interior/tzimisce_manor)
-"ksE" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/obj/structure/fluff/hedge{
-	pixel_y = 6
-	},
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/sofa/old/right{
-	dir = 4
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm)
 "ksJ" = (
 /obj/structure/chair/plastic{
 	dir = 4;
@@ -49519,16 +49431,6 @@
 	dir = 1
 	},
 /turf/open/floor/carpet,
-/area/vtm/anarch)
-"lIa" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
 "lIb" = (
 /obj/effect/decal/litter,
@@ -57106,18 +57008,10 @@
 	dir = 4;
 	pixel_x = -16
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/sofa/old/left{
-	dir = 4
-	},
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_x = -16
 	},
-/obj/effect/landmark/start/nagaraja,
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
 "nva" = (
@@ -57968,10 +57862,6 @@
 /obj/item/seeds/cannabis,
 /obj/item/seeds/cannabis,
 /obj/item/seeds/cannabis,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/machinery/camera/directional/west,
 /turf/open/floor/plating/vampcanalplating{
 	icon_state = "canal1"
@@ -63464,10 +63354,6 @@
 /obj/structure/flora/ausbushes/lavendergrass{
 	pixel_y = 10
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -66749,10 +66635,6 @@
 "pGE" = (
 /obj/structure/table/wood,
 /obj/item/food/grown/cannabis,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
 	},
@@ -77555,17 +77437,6 @@
 /obj/structure/vampgate,
 /turf/open/floor/plating/asphalt,
 /area/vtm/graveyard)
-"rXZ" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/cardboard,
-/turf/open/floor/plating/sidewalk/poor,
-/area/vtm/northbeach)
 "rYb" = (
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/sidewalk,
@@ -81138,13 +81009,6 @@
 	pixel_y = 18
 	},
 /obj/item/reagent_containers/glass/wateringcan,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/sofa/old/left{
-	dir = 8
-	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "sRZ" = (
@@ -87016,10 +86880,6 @@
 /area/vtm/sewer)
 "ule" = (
 /obj/item/reagent_containers/glass/wateringcan,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/litter,
 /turf/open/floor/plating/rough,
 /area/vtm/anarch/basement)
@@ -87586,13 +87446,6 @@
 "urz" = (
 /obj/structure/chair/sofa/old/right,
 /obj/effect/landmark/start/nagaraja,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/sofa/old/right{
-	dir = 8
-	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "urC" = (
@@ -92090,10 +91943,6 @@
 /obj/item/food/grown/cannabis,
 /obj/item/food/grown/cannabis,
 /obj/item/food/grown/cannabis,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -92121,14 +91970,6 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
 "vtF" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/structure/barrels/rand,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/chair/sofa/corp/corner,
 /turf/open/floor/carpet,
 /area/vtm/anarch)
@@ -94469,17 +94310,6 @@
 /obj/item/newspaper,
 /turf/open/floor/plating/rough,
 /area/vtm/supply)
-"vUH" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/trash,
-/turf/closed/wall/vampwall,
-/area/vtm/northbeach)
 "vUJ" = (
 /obj/effect/decal/wallpaper/blue,
 /obj/structure/extinguisher_cabinet,
@@ -96809,10 +96639,6 @@
 /obj/structure/table,
 /obj/item/reagent_containers/glass/wateringcan,
 /obj/item/bong,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren{
 	color = "#df6220";
@@ -101064,18 +100890,6 @@
 /obj/item/storage/book/bible,
 /turf/open/floor/plating/church,
 /area/vtm/church/interior/staff)
-"xys" = (
-/obj/structure/flora/ausbushes/lavendergrass{
-	pixel_y = 10
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/paper/darkred,
-/obj/machinery/light/small,
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch)
 "xyu" = (
 /obj/machinery/light/small/red{
 	dir = 8;
@@ -186735,7 +186549,7 @@ qIX
 lBM
 svg
 bhM
-lIa
+fkk
 fkk
 fkk
 fkk
@@ -188017,9 +187831,9 @@ mmb
 vJc
 qIX
 qIX
-vUH
+vlm
 mVa
-auL
+svD
 nzB
 bAs
 rqQ
@@ -188533,7 +188347,7 @@ aUi
 lBM
 tWk
 cgA
-rXZ
+iYD
 fHT
 bAs
 rqQ
@@ -189043,12 +188857,12 @@ dnj
 dnj
 bsR
 mPD
-cWk
+kPF
 lBM
 svD
 svg
 fkk
-xys
+gtq
 iSy
 cFc
 iSy
@@ -189302,8 +189116,8 @@ xEC
 poF
 lBM
 lBM
-auL
-idb
+svD
+vYU
 oku
 iSy
 iSy
@@ -190330,7 +190144,7 @@ xEC
 bvZ
 gtI
 iSr
-faq
+vpB
 sjZ
 jch
 sVf
@@ -271287,7 +271101,7 @@ vvM
 kYl
 bUt
 nuZ
-ksE
+jaf
 jaf
 nKo
 kno
