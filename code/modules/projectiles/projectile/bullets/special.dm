@@ -63,9 +63,9 @@
 /obj/projectile/bullet/compound/on_hit(atom/target, blocked = FALSE)
 	. = ..()
 	if(iskindred(target) || isghoul(target) || iscathayan(target) || isgarou(target) || iswerewolf(target))
-		var/mob/living/carbon/C = target
-		C.adjustFireLoss(supernaturalbonus)
-		to_chat(C, span_warning("You feel the round burning as it hits you!"))
+		var/mob/living/L = target
+		L.adjustFireLoss(supernaturalbonus)
+		to_chat(L, span_warning("You feel the round burning as it hits you!"))
 
 /obj/projectile/bullet/hod //Base object here, split off pistol/rifle/sniper variants, etc.
 	name = "hod round"
