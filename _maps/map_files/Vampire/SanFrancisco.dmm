@@ -20056,9 +20056,6 @@
 /obj/structure/table/wood,
 /obj/item/storage/pill_bottle/lsd,
 /obj/structure/coclock,
-/obj/item/vamp/keys/clinic,
-/obj/item/vamp/keys/clinic,
-/obj/item/vamp/keys/clinic,
 /obj/structure/fluff/paper{
 	dir = 9
 	},
@@ -20066,6 +20063,13 @@
 /obj/item/toy/dummy{
 	pixel_y = 2;
 	pixel_x = 6
+	},
+/obj/item/vamp/keys/clinic{
+	pixel_y = 0;
+	accesslocks = list("fireshelter");
+	name = "Fire Shelter keys";
+	desc = "Keys to the clinic's fire shelter.";
+	color = "#e06224"
 	},
 /turf/open/floor/carpet/lone,
 /area/vtm/clinic/haven)
@@ -31249,7 +31253,8 @@
 "hgn" = (
 /obj/structure/curtain,
 /obj/machinery/light{
-	dir = 4
+	dir = 4;
+	pixel_y = 9
 	},
 /turf/open/floor/plating/industrial,
 /area/vtm/clinic/haven)
@@ -35064,23 +35069,15 @@
 /obj/machinery/light/small{
 	pixel_y = 32
 	},
-/obj/item/vamp/keys/archive{
-	accesslocks = list("malkav1");
-	name = "malkavian room1 keys";
-	pixel_x = -6;
-	pixel_y = -6
-	},
-/obj/item/vamp/keys/archive{
-	accesslocks = list("malkav2");
-	name = "malkavian room2 keys";
-	pixel_x = 6
-	},
 /obj/structure/fluff/paper{
 	dir = 1
 	},
 /obj/item/pen{
 	pixel_y = 8
 	},
+/obj/item/vamp/keys/clinic,
+/obj/item/vamp/keys/clinic,
+/obj/item/vamp/keys/clinic,
 /turf/open/floor/carpet/lone,
 /area/vtm/clinic/haven)
 "idm" = (
@@ -40431,7 +40428,8 @@
 /area/vtm/interior/techshop)
 "jqn" = (
 /obj/structure/tank_holder/extinguisher{
-	pixel_y = 5
+	pixel_y = 5;
+	anchored = 1
 	},
 /obj/machinery/light{
 	pixel_y = 0;
@@ -64248,7 +64246,9 @@
 /turf/closed/wall/vampwall/old,
 /area/vtm/interior)
 "oOM" = (
-/obj/structure/tank_holder/anesthetic,
+/obj/structure/tank_holder/anesthetic{
+	anchored = 1
+	},
 /turf/open/floor/plating/circled,
 /area/vtm/clinic)
 "oOR" = (
