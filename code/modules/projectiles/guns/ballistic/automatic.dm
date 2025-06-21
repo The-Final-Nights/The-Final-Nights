@@ -393,3 +393,19 @@
 	actions_types = list()
 	fire_sound = 'sound/weapons/laser.ogg'
 	casing_ejector = FALSE
+
+//Automatic rifle for Hunters.
+
+/obj/item/gun/ballistic/automatic/ar/valkyrie
+	name = "Helsing Assault Rifle"
+	desc = "A robust assault rifle used by SOF personnel."
+	icon_state = "arg"
+	inhand_icon_state = "arg"
+	slot_flags = 0
+	mag_type = /obj/item/ammo_box/magazine/m556 || /obj/item/ammo_box/magazine/m556/bleeder || /obj/item/ammo_box/magazine/m556/compound || /obj/item/ammo_box/magazine/m556/hod
+	can_unsuppress = TRUE
+	can_suppress = TRUE
+	tac_reloads = TRUE
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
+	burst_size = 3
+	fire_delay = 0.25

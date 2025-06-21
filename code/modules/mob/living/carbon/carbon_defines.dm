@@ -92,7 +92,7 @@
 	var/cold_protection = 0 // No cold protection
 
 	/// Timer id of any transformation
-	var/transformation_timer
+	var/transformation_timer = 0
 
 	/// All of the wounds a carbon has afflicted throughout their limbs
 	var/list/all_wounds

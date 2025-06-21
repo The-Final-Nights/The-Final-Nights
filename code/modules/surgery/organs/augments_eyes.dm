@@ -52,3 +52,8 @@
 	name = "Contraband Security HUD Implant"
 	desc = "A Cybersun Industries brand Security HUD Implant. These illicit cybernetic eye implants will display a security HUD over everything you see."
 	syndicate_implant = TRUE
+
+/obj/item/organ/cyberimp/eyes/hud/aura
+	name = "Etheric Eyes"
+	desc = "These cybernetic eye implants allow for aura sight."
+	HUD_type = DATA_HUD_ABDUCTOR
