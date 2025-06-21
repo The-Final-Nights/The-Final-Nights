@@ -454,6 +454,7 @@
 	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "nuggetbox"
 	icon_type = "nugget"
+	base_icon_state = "nuggetbox"
 	spawn_type = /obj/item/food/vampire/nugget
 
 /obj/item/storage/fancy/nugget_box/ComponentInitialize()
