@@ -69,8 +69,8 @@
 		to_chat(human, span_notice("It's just where I left it..."))
 	return TRUE
 
-/obj/structure/vampdoor/New()
-	..()
+/obj/structure/vampdoor/Initialize(mapload)
+	. = ..()
 	switch(lockpick_difficulty) //This is fine because any overlap gets intercepted before
 		if(LOCKDIFFICULTY_7 to INFINITY)
 			lockpick_timer = LOCKTIMER_7
@@ -98,18 +98,18 @@
 	var/difference = (H.lockpicking * 2 + H.dexterity) - lockpick_difficulty //Lower number = higher difficulty
 	switch(difference) //Because rand(1,20) always adds a minimum of 1 we take that into consideration for our theoretical roll ranges, which really makes it a random range of 19.
 		if(-INFINITY to -11) //Roll can never go above 10 (-11 + 20 = 9), impossible to lockpick.
-			message = "<span class='warning'>You don't have any chance of lockpicking this with your current skills!</span>"
+			message = span_warning("You don't have any chance of lockpicking this with your current skills!")
 		if(-10 to -7)
-			message = "<span class='warning'>This door looks extremely complicated. You figure you will have to be lucky to break it open."
+			message = span_warning("This door looks extremely complicated. You figure you will have to be lucky to break it open.")
 		if(-6 to -3)
-			message = "<span class='notice'>This door looks very complicated. You might need a few tries to lockpick it.</span>"
+			message = span_notice("This door looks very complicated. You might need a few tries to lockpick it.")
 		if(-2 to 0) //Only 3 numbers here instead of 4.
-			message = "<span class='notice'>This door looks mildly complicated. It shouldn't be too hard to lockpick it.</span>"
+			message = span_notice("This door looks mildly complicated. It shouldn't be too hard to lockpick it.")
 		if(1 to 4) //Impossible to break the lockpick from here on because minimum rand(1,20) will always move the value to 2.
-			message = "<span class='nicegreen'>This door is somewhat simple. It should be pretty easy for you to lockpick it.</span>"
+			message = span_nicegreen("This door is somewhat simple. It should be pretty easy for you to lockpick it.")
 		if(5 to INFINITY) //Becomes guaranteed to lockpick at 9.
-			message = "<span class='nicegreen'>This door is really simple to you. It should be very easy to lockpick it.</span>"
-	. += "[message]"
+			message = span_nicegreen("This door is really simple to you. It should be very easy to lockpick it.")
+	. += message
 	if(H.lockpicking >= 5) //The difference between a 1/19 and a 4/19 is about 4x. An expert in lockpicks is more discerning.
 		//Converting the difference into a number that can be divided by the max value of the rand() used in lockpicking calculations.
 		var/max_rand_value = 20
@@ -121,74 +121,70 @@
 		//I'm sure there has to be a better method for this because it's ugly, but it works.
 		//Putting a condition here to avoid dividing 0.
 		var/odds = value ? clamp((value/max_rand_value), 0, 1) : 0
-		. += "<span class='notice'>As an expert in lockpicking, you estimate that you have a [round(odds*100, 1)]% chance to lockpick this door successfully.</span>"
+		. += span_notice("As an expert in lockpicking, you estimate that you have a [round(odds*100, 1)]% chance to lockpick this door successfully.")
 
 /obj/structure/vampdoor/MouseDrop_T(atom/dropping, mob/user, params)
 	. = ..()
-
 	LoadComponent(/datum/component/leanable, dropping)
 
-/obj/structure/vampdoor/attack_hand(mob/user)
+/obj/structure/vampdoor/attack_hand(mob/living/user)
 	. = ..()
-	var/mob/living/N = user
+	if(.)
+		return
+	user.changeNext_move(0)
 	if(try_award_apartment_key(user))
 		return
-	if(locked)
-		if(N.a_intent != INTENT_HARM)
-			playsound(src, lock_sound, 75, TRUE)
-			to_chat(user, "<span class='warning'>[src] is locked!</span>")
+	if(!locked)
+		if(closed)
+			playsound(src, open_sound, 75, TRUE)
+			icon_state = "[baseicon]-0"
+			set_density(FALSE)
+			opacity = FALSE
+			layer = OPEN_DOOR_LAYER
+			to_chat(user, span_notice("You open [src]."))
+			SEND_SIGNAL(src, COMSIG_AIRLOCK_OPEN)
+			closed = FALSE
+			return
 		else
-			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
-				if(H.potential > 0)
-					if((H.potential * 2) >= lockpick_difficulty)
-						playsound(get_turf(src), 'code/modules/wod13/sounds/get_bent.ogg', 100, FALSE)
-						var/obj/item/shield/door/D = new(get_turf(src))
-						D.icon_state = baseicon
-						var/atom/throw_target = get_edge_target_turf(src, user.dir)
-						D.throw_at(throw_target, rand(2, 4), 4, user)
-						qdel(src)
-					else
-						pixel_z = pixel_z+rand(-1, 1)
-						pixel_w = pixel_w+rand(-1, 1)
-						playsound(get_turf(src), 'code/modules/wod13/sounds/get_bent.ogg', 50, TRUE)
-						to_chat(user, "<span class='warning'>[src] is locked, and you aren't strong enough to break it down!</span>")
-						spawn(2)
-							pixel_z = initial(pixel_z)
-							pixel_w = initial(pixel_w)
-				else
-					pixel_z = pixel_z+rand(-1, 1)
-					pixel_w = pixel_w+rand(-1, 1)
-					playsound(src, 'code/modules/wod13/sounds/knock.ogg', 75, TRUE)
-					to_chat(user, "<span class='warning'>[src] is locked!</span>")
-					spawn(2)
-						pixel_z = initial(pixel_z)
-						pixel_w = initial(pixel_w)
+			for(var/mob/living/L in loc)
+				playsound(src, lock_sound, 75, TRUE)
+				to_chat(user, span_warning("[L] is preventing you from closing [src]."))
+				return
+			playsound(src, close_sound, 75, TRUE)
+			icon_state = "[baseicon]-1"
+			set_density(TRUE)
+			if(!glass)
+				opacity = TRUE
+			layer = ABOVE_ALL_MOB_LAYER
+			to_chat(user, span_notice("You close [src]."))
+			closed = TRUE
+			return
+
+	if(iscrinos(user))
+		break_door(user)
+
+	var/mob/living/carbon/human/door_user = user
+	if(!(door_user.combat_mode))
+		playsound(src, lock_sound, 75, TRUE)
+		to_chat(user, span_warning("[src] is locked!"))
 		return
 
-	if(closed)
-		playsound(src, open_sound, 75, TRUE)
-		icon_state = "[baseicon]-0"
-		set_density(FALSE)
-		opacity = FALSE
-		layer = OPEN_DOOR_LAYER
-		to_chat(user, "<span class='notice'>You open [src].</span>")
-		SEND_SIGNAL(src, COMSIG_AIRLOCK_OPEN)
-		closed = FALSE
-	else
-		for(var/mob/living/L in src.loc)
-			if(L)
-				playsound(src, lock_sound, 75, TRUE)
-				to_chat(user, "<span class='warning'>[L] is preventing you from closing [src].</span>")
-				return
-		playsound(src, close_sound, 75, TRUE)
-		icon_state = "[baseicon]-1"
-		set_density(TRUE)
-		if(!glass)
-			opacity = TRUE
-		layer = ABOVE_ALL_MOB_LAYER
-		to_chat(user, "<span class='notice'>You close [src].</span>")
-		closed = TRUE
+	if(door_user.potential)
+		if((door_user.potential * 2) >= lockpick_difficulty)
+			break_door(door_user)
+			return
+		else
+			pixel_z = pixel_z+rand(-1, 1)
+			pixel_w = pixel_w+rand(-1, 1)
+			addtimer(CALLBACK(src, PROC_REF(reset_transform)), 2)
+			playsound(get_turf(src), 'code/modules/wod13/sounds/get_bent.ogg', 50, TRUE)
+			to_chat(user, span_warning("[src] is locked, and you aren't strong enough to break it down!"))
+			return
+	pixel_z = pixel_z+rand(-1, 1)
+	pixel_w = pixel_w+rand(-1, 1)
+	addtimer(CALLBACK(src, PROC_REF(reset_transform)), 2)
+	playsound(src, 'code/modules/wod13/sounds/knock.ogg', 75, TRUE)
+	to_chat(user, span_warning("[src] is locked!"))
 
 /obj/structure/vampdoor/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/vamp/keys/hack))
@@ -196,32 +192,30 @@
 			hacking = TRUE
 			playsound(src, 'code/modules/wod13/sounds/hack.ogg', 100, TRUE)
 			for(var/mob/living/carbon/human/npc/police/P in oviewers(7, src))
-				if(P)
-					P.Aggro(user)
+				P.Aggro(user)
 			var/total_lockpicking = user.get_total_lockpicking()
-			if(do_mob(user, src, (lockpick_timer - total_lockpicking * 2) SECONDS))
+			if(do_after(user, (lockpick_timer - total_lockpicking * 2) SECONDS, src))
 				var/roll = rand(1, 20) + (total_lockpicking * 2 + user.get_total_dexterity()) - lockpick_difficulty
 				if(roll <=1)
-					to_chat(user, "<span class='warning'>Your lockpick broke!</span>")
+					to_chat(user, span_warning("Your lockpick broke!"))
 					qdel(W)
 					hacking = FALSE
 				if(roll >=10)
-					to_chat(user, "<span class='notice'>You pick the lock.</span>")
+					to_chat(user, span_notice("You pick the lock."))
 					locked = FALSE
 					hacking = FALSE
 					return
-
 				else
-					to_chat(user, "<span class='warning'>You failed to pick the lock.</span>")
+					to_chat(user, span_warning("You failed to pick the lock."))
 					hacking = FALSE
 					return
 			else
-				to_chat(user, "<span class='warning'>You failed to pick the lock.</span>")
+				to_chat(user, span_warning("You failed to pick the lock."))
 				hacking = FALSE
 				return
 		else
 			if (closed && lock_id) //yes, this is a thing you can extremely easily do in real life... FOR DOORS WITH LOCKS!
-				to_chat(user, "<span class='notice'>You re-lock the door with your lockpick.</span>")
+				to_chat(user, span_notice("You re-lock the door with your lockpick."))
 				locked = TRUE
 				playsound(src, 'code/modules/wod13/sounds/hack.ogg', 100, TRUE)
 				return
@@ -233,46 +227,58 @@
 		if(KEY.accesslocks)
 			for(var/i in KEY.accesslocks)
 				if(i == lock_id)
-					if(!locked)
-						playsound(src, lock_sound, 75, TRUE)
-						to_chat(user, "[src] is now locked.")
-						locked = TRUE
-					else
-						playsound(src, lock_sound, 75, TRUE)
-						to_chat(user, "[src] is now unlocked.")
-						locked = FALSE
+					toggle_lock(user)
 
-/obj/structure/vampdoor/Click(location, control, params)
-	var/list/modifiers = params2list(params)
-	if(!modifiers["right"])
-		return ..()
-
-	if(!ishuman(usr) || !usr.canUseTopic(src, BE_CLOSE))
-		return
-
-	var/mob/living/carbon/human/H = usr
-	var/obj/item/vamp/keys/found_key = locate(/obj/item/vamp/keys) in H.contents
+/obj/structure/vampdoor/attack_hand_secondary(mob/user, list/modifiers)
+	user.changeNext_move(0)
+	var/mob/living/carbon/carbon_user = user
+	var/obj/item/vamp/keys/found_key = locate(/obj/item/vamp/keys) in carbon_user.contents
 	if(!found_key)
-		to_chat(usr, span_warning("You need a key to lock/unlock this door!"))
-		return
-
+		to_chat(user, span_warning("You need a key to lock/unlock this door!"))
+		pixel_z = pixel_z+rand(-1, 1)
+		pixel_w = pixel_w+rand(-1, 1)
+		addtimer(CALLBACK(src, PROC_REF(reset_transform)), 2)
+		playsound(src, 'code/modules/wod13/sounds/knock.ogg', 75, TRUE)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(found_key.roundstart_fix)
 		found_key.roundstart_fix = FALSE
 		lock_id = pick(found_key.accesslocks)
 
 	if(!found_key.accesslocks)
-		to_chat(usr, span_warning("Your key doesn't fit this lock!"))
-		return
+		to_chat(user, span_warning("Your key doesn't fit this lock!"))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	for(var/i in found_key.accesslocks)
 		if(i == lock_id)
-			locked = !locked
-			playsound(src, lock_sound, 75, TRUE)
-			to_chat(usr, span_notice("You [locked ? "lock" : "unlock"] [src]."))
-			return
+			toggle_lock(user)
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	to_chat(usr, span_warning("Your key doesn't fit this lock!"))
-	return ..()
+	to_chat(user, span_warning("Your key doesn't fit this lock!"))
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/structure/vampdoor/attack_animal(mob/living/simple_animal/user, list/modifiers)
+	if(iscrinos(user))
+		break_door(user)
+	..()
+
+/obj/structure/vampdoor/proc/reset_transform()
+	pixel_z = initial(pixel_z)
+	pixel_w = initial(pixel_w)
+
+/obj/structure/vampdoor/proc/toggle_lock(mob/user)
+	locked = !locked
+	playsound(src, lock_sound, 75, TRUE)
+	to_chat(user, span_notice("You [locked ? "lock" : "unlock"] [src]."))
+
+/obj/structure/vampdoor/proc/break_door(mob/user)
+	playsound(get_turf(src), 'code/modules/wod13/sounds/get_bent.ogg', 100, FALSE)
+	var/obj/item/shield/door/D = new(get_turf(src))
+	D.icon_state = baseicon
+	var/atom/throw_target = get_edge_target_turf(src, user.dir)
+	D.throw_at(throw_target, rand(2, 4), 4, user)
+	qdel(src)
+
+/// SUBTYPES
 
 /obj/structure/vampdoor/wood/apartment
 	locked = TRUE

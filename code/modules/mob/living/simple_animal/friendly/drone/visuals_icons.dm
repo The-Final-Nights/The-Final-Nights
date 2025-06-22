@@ -6,12 +6,12 @@
 //Drone visuals
 
 
-/mob/living/simple_animal/drone/proc/apply_overlay(cache_index)
+/mob/living/simple_animal/drone/apply_overlay(cache_index)
 	if((. = drone_overlays[cache_index]))
 		add_overlay(.)
 
 
-/mob/living/simple_animal/drone/proc/remove_overlay(cache_index)
+/mob/living/simple_animal/drone/remove_overlay(cache_index)
 	var/I = drone_overlays[cache_index]
 	if(I)
 		cut_overlay(I)

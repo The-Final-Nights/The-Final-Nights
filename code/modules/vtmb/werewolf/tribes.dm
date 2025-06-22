@@ -5,11 +5,11 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/stoic_pose/Trigger()
+/datum/action/gift/stoic_pose/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/ice_blocking.ogg', 100, FALSE)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		if(isgarou(C))
 			var/obj/were_ice/W = new (get_turf(owner))
 			C.Stun(12 SECONDS)
@@ -38,7 +38,7 @@
 	button_icon_state = "freezing_wind"
 	rage_req = 1
 
-/datum/action/gift/freezing_wind/Trigger()
+/datum/action/gift/freezing_wind/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/wind_cast.ogg', 100, FALSE)
@@ -57,7 +57,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/bloody_feast/Trigger()
+/datum/action/gift/bloody_feast/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/C = owner
@@ -74,7 +74,7 @@
 	desc = "Garou creates an aura of very toxic smell, which disorientates everyone around."
 	button_icon_state = "stinky_fur"
 
-/datum/action/gift/stinky_fur/Trigger()
+/datum/action/gift/stinky_fur/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/necromancy.ogg', 75, FALSE)
@@ -91,7 +91,7 @@
 	button_icon_state = "venom_claws"
 	rage_req = 1
 
-/datum/action/gift/venom_claws/Trigger()
+/datum/action/gift/venom_claws/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(ishuman(owner))
@@ -126,7 +126,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/burning_scars/Trigger()
+/datum/action/gift/burning_scars/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		owner.visible_message(span_warning("[owner.name] crackles with heat!</span>"), span_danger("You crackle with heat, charging up your Gift!"))
@@ -144,7 +144,7 @@
 	desc = "Garou jumps forward, avoiding every damage for a moment."
 	button_icon_state = "smooth_move"
 
-/datum/action/gift/smooth_move/Trigger()
+/datum/action/gift/smooth_move/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/turf/T = get_turf(get_step(get_step(get_step(owner, owner.dir), owner.dir), owner.dir))
@@ -164,7 +164,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/digital_feelings/Trigger()
+/datum/action/gift/digital_feelings/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		owner.visible_message(span_danger("[owner.name] crackles with static electricity!"), span_danger("You crackle with static electricity, charging up your Gift!"))
@@ -172,7 +172,7 @@
 			playsound(owner, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
 			if(CheckZoneMasquerade(owner))
 				var/mob/living/carbon/human/H
-				var/mob/living/carbon/werewolf/W
+				var/mob/living/simple_animal/werewolf/W
 				if(ishuman(owner))
 					H = owner
 				else
@@ -191,7 +191,7 @@
 	button_icon_state = "hands_full_of_thunder"
 	gnosis_req = 1
 
-/datum/action/gift/hands_full_of_thunder/Trigger()
+/datum/action/gift/hands_full_of_thunder/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		ADD_TRAIT(owner, TRAIT_THUNDERSHOT, "thunder")
@@ -207,7 +207,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/elemental_improvement/Trigger()
+/datum/action/gift/elemental_improvement/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		animate(owner, color = "#6a839a", time = 10)
@@ -224,7 +224,7 @@
 				owner.color = "#FFFFFF"
 		else
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/electro_cast.ogg', 75, FALSE)
-			var/mob/living/carbon/werewolf/H = owner
+			var/mob/living/simple_animal/werewolf/H = owner
 			H.werewolf_armor = 45
 			to_chat(owner, span_notice("You feel your skin replaced with the machine..."))
 			spawn(20 SECONDS)
@@ -239,7 +239,7 @@
 	button_icon_state = "guise_of_the_hound"
 	rage_req = 1
 
-/datum/action/gift/guise_of_the_hound/Trigger()
+/datum/action/gift/guise_of_the_hound/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(!HAS_TRAIT(owner,TRAIT_DOGWOLF))
@@ -249,8 +249,8 @@
 			REMOVE_TRAIT(owner, TRAIT_DOGWOLF, src)
 			to_chat(owner, span_notice("You feel your lupine nature intensifying!"))
 
-		if(istype(owner, /mob/living/carbon/werewolf/lupus))
-			var/mob/living/carbon/werewolf/lupus/lopor = owner
+		if(istype(owner, /mob/living/simple_animal/werewolf/lupus))
+			var/mob/living/simple_animal/werewolf/lupus/lopor = owner
 
 			if(lopor && !lopor.hispo)
 				playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
@@ -259,7 +259,7 @@
 				animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
 				addtimer(CALLBACK(src, PROC_REF(transform_lupus), lopor), 3 SECONDS)
 
-/datum/action/gift/guise_of_the_hound/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/guise_of_the_hound/proc/transform_lupus(mob/living/simple_animal/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -276,7 +276,7 @@
 	button_icon_state = "infest"
 	rage_req = 4
 
-/datum/action/gift/infest/Trigger()
+/datum/action/gift/infest/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/limit
@@ -298,12 +298,12 @@
 				var/mob/living/simple_animal/hostile/beastmaster/rat/ratto = new(get_turf(H))
 				ratto.my_creator = H
 				H.beastmaster |= ratto
-				ratto.beastmaster = H
+				ratto.beastmaster_owner = H
 			else
 				var/mob/living/simple_animal/hostile/beastmaster/cockroach/roach = new(get_turf(H))
 				roach.my_creator = H
 				H.beastmaster |= roach
-				roach.beastmaster = H
+				roach.beastmaster_owner = H
 
 /datum/action/gift/gift_of_the_termite
 	name = "Gift of the Termite"
@@ -312,7 +312,7 @@
 	rage_req = 3
 	gnosis_req = 2
 
-/datum/action/gift/gift_of_the_termite/Trigger()
+/datum/action/gift/gift_of_the_termite/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/H = owner
@@ -325,7 +325,7 @@
 	button_icon_state = "shroud"
 	rage_req = 1
 
-/datum/action/gift/shroud/Trigger()
+/datum/action/gift/shroud/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/atom/movable/shadow
@@ -341,7 +341,7 @@
 	button_icon_state = "coils_of_the_serpent"
 	rage_req = 1
 
-/datum/action/gift/coils_of_the_serpent/Trigger()
+/datum/action/gift/coils_of_the_serpent/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(ishuman(owner))
@@ -364,12 +364,12 @@
 	rage_req = 3
 	gnosis_req = 2
 
-/datum/action/gift/banish_totem/Trigger()
+/datum/action/gift/banish_totem/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/valid_tribe = FALSE
 		var/list/targets = list()
-		for(var/mob/living/carbon/werewolf/wtarget in orange(7,owner))
+		for(var/mob/living/simple_animal/werewolf/wtarget in orange(7,owner))
 			targets += wtarget
 		for(var/mob/living/carbon/human/htarget in orange(7,owner))
 			targets += htarget
@@ -393,7 +393,7 @@
 
 
 
-/datum/action/gift/suns_guard/Trigger()
+/datum/action/gift/suns_guard/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/caster = owner
@@ -423,7 +423,7 @@
 	rage_req = 0
 	cool_down = 1 MINUTES
 
-/datum/action/gift/eye_drink/Trigger()
+/datum/action/gift/eye_drink/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/caster = owner

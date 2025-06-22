@@ -19,7 +19,7 @@
 	name = "Eject From Mech"
 	button_icon_state = "mech_eject"
 
-/datum/action/vehicle/sealed/mecha/mech_eject/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_eject/Trigger(trigger_flags)
 	if(!owner)
 		return
 	if(!chassis || !(owner in chassis.occupants))
@@ -30,7 +30,7 @@
 	name = "Cycle Equipment"
 	button_icon_state = "mech_cycle_equip_off"
 
-/datum/action/vehicle/sealed/mecha/mech_cycle_equip/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_cycle_equip/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 
@@ -72,7 +72,7 @@
 	name = "Toggle Lights"
 	button_icon_state = "mech_lights_off"
 
-/datum/action/vehicle/sealed/mecha/mech_toggle_lights/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_toggle_lights/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 	if(!(chassis.mecha_flags & HAS_LIGHTS))
@@ -92,7 +92,7 @@
 	name = "View Stats"
 	button_icon_state = "mech_view_stats"
 
-/datum/action/vehicle/sealed/mecha/mech_view_stats/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_view_stats/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 	var/datum/browser/popup = new(owner , "exosuit")
@@ -104,7 +104,7 @@
 	name = "Toggle Strafing. Disabled when Alt is held."
 	button_icon_state = "strafe"
 
-/datum/action/vehicle/sealed/mecha/strafe/Trigger()
+/datum/action/vehicle/sealed/mecha/strafe/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 
@@ -135,14 +135,14 @@
 	name = "Toggle an energy shield that blocks all attacks from the faced direction at a heavy power cost."
 	button_icon_state = "mech_defense_mode_off"
 
-/datum/action/vehicle/sealed/mecha/mech_defense_mode/Trigger(forced_state = FALSE)
+/datum/action/vehicle/sealed/mecha/mech_defense_mode/Trigger(forced_state = FALSE, trigger_flags)
 	SEND_SIGNAL(chassis, COMSIG_MECHA_ACTION_TRIGGER, owner, args) //Signal sent to the mech, to be handed to the shield. See durand.dm for more details
 
 /datum/action/vehicle/sealed/mecha/mech_overload_mode
 	name = "Toggle leg actuators overload"
 	button_icon_state = "mech_overload_off"
 
-/datum/action/vehicle/sealed/mecha/mech_overload_mode/Trigger(forced_state = null)
+/datum/action/vehicle/sealed/mecha/mech_overload_mode/Trigger(forced_state = null, trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 	if(!isnull(forced_state))
@@ -165,7 +165,7 @@
 	name = "Smoke"
 	button_icon_state = "mech_smoke"
 
-/datum/action/vehicle/sealed/mecha/mech_smoke/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_smoke/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 	if(!TIMER_COOLDOWN_CHECK(src, COOLDOWN_MECHA_SMOKE) && chassis.smoke_charges>0)
@@ -178,7 +178,7 @@
 	name = "Zoom"
 	button_icon_state = "mech_zoom_off"
 
-/datum/action/vehicle/sealed/mecha/mech_zoom/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_zoom/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 	if(owner.client)
@@ -197,7 +197,7 @@
 	name = "Reconfigure arm microtool arrays"
 	button_icon_state = "mech_damtype_brute"
 
-/datum/action/vehicle/sealed/mecha/mech_switch_damtype/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_switch_damtype/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 	var/new_damtype
@@ -220,7 +220,7 @@
 	name = "Toggle Phasing"
 	button_icon_state = "mech_phasing_off"
 
-/datum/action/vehicle/sealed/mecha/mech_toggle_phasing/Trigger()
+/datum/action/vehicle/sealed/mecha/mech_toggle_phasing/Trigger(trigger_flags)
 	if(!owner || !chassis || !(owner in chassis.occupants))
 		return
 	chassis.phasing = !chassis.phasing
