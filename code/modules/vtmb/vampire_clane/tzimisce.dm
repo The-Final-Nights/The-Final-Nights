@@ -101,7 +101,7 @@
 /datum/crafting_recipe/tzi_koldun
 	name = "Koldun Sorcery (Firebreath)"
 	time = 50
-	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/vampire_stake = 1, /obj/item/drinkable_bloodpack = 1)
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/vampire_stake = 1, /obj/item/reagent_containers/blood = 1)
 	result = /obj/item/dnainjector/koldun
 	always_available = FALSE
 	category = CAT_TZIMISCE
@@ -109,7 +109,7 @@
 /datum/crafting_recipe/tzi_implant
 	name = "Implanting Flesh Device"
 	time = 50
-	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/melee/vampirearms/knife = 1, /obj/item/drinkable_bloodpack = 1)
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/melee/vampirearms/knife = 1, /obj/item/reagent_containers/blood = 1)
 	result = /obj/item/autosurgeon/organ/vicissitude
 	always_available = FALSE
 	category = CAT_TZIMISCE
@@ -125,7 +125,7 @@
 /datum/crafting_recipe/tziregenerativecore
 	name = "Pulsating Heart"
 	time = 50
-	reqs = list(/obj/item/organ/heart = 1, /obj/item/drinkable_bloodpack/elite = 1)
+	reqs = list(/obj/item/organ/heart = 1, /obj/item/reagent_containers/blood/elite = 1)
 	result = /obj/item/organ/regenerative_core/legion/tzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
@@ -310,7 +310,7 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = 1500
-	faction = list("Tzimisce")
+	faction = list(CLAN_TZIMISCE)
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 2
 	maxbloodpool = 2
@@ -333,11 +333,10 @@
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
 	attack_sound = 'sound/weapons/punch1.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	status_flags = CANPUSH
-	faction = list("Tzimisce")
+	faction = list(CLAN_TZIMISCE)
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 5
 	maxbloodpool = 5
@@ -360,16 +359,15 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
-	faction = list("Tzimisce")
+	faction = list(CLAN_TZIMISCE)
 	bloodquality = BLOOD_QUALITY_LOW
 	bloodpool = 7
 	maxbloodpool = 7
 
 /mob/living/simple_animal/hostile/gargoyle
-	name = "Gargoyle"
+	name = CLAN_GARGOYLE
 	desc = "Stone-skinned..."
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "gargoyle_m"
@@ -387,25 +385,30 @@
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
 	attack_sound = 'sound/weapons/punch1.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 10
 	maxbloodpool = 10
 	dextrous = TRUE
 	held_items = list(null, null)
-	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
-	faction = list("Tremere")
+	faction = list(CLAN_TREMERE)
 
-/mob/living/simple_animal/hostile/gargoyle/proc/gain_nigs()
+/mob/living/simple_animal/hostile/gargoyle/proc/gain_sentience()
 	set waitfor = FALSE
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as Embraced Gargoyle?", null, null, null, 50, src)
+	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as a Perfect Gargoyle?", null, null, null, 50, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
 		if(G.key)
 			to_chat(G, "<span class='ghostalert'>New Gargoyle has been made.</span>")
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		key = C.key
+		var/choice = tgui_alert(C, "Do you want to pick a new name as a Gargoyle?", "Gargoyle Choose Name", list("Yes", "No"), 10)
+		if(choice == "Yes")
+			var/chosen_gargoyle_name = tgui_input_text(C, "What is your new name as a Gargoyle?", "Gargoyle Name Input")
+			name = chosen_gargoyle_name
+			update_name()
+		else
+			return
 
 /mob/living/simple_animal/hostile/gargoyle/Initialize()
 	. = ..()
@@ -419,7 +422,7 @@
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	var/abuse_fix = 0
 
-/datum/action/gargoyle/Trigger()
+/datum/action/gargoyle/Trigger(trigger_flags)
 	. = ..()
 	if(abuse_fix+100 > world.time)
 		return
@@ -451,7 +454,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 10
@@ -476,7 +478,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 20
@@ -511,7 +512,7 @@
 	armor_modifiers = list(MELEE = 0.3, BULLET = 0.3, LASER = 1.2, ENERGY = 1.2, BOMB = 0.3, BIO = 0, RAD = 0.7, FIRE = 1, ACID = 1)
 	item_sound_override = 'sound/effects/meatslap.ogg'
 	turf_sound_override = FOOTSTEP_MEAT
-	
+
 /datum/material/vicissitude_flesh/on_removed(atom/source, amount, material_flags)
 	. = ..()
 	qdel(source.GetComponent(/datum/component/edible))

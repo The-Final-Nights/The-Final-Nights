@@ -111,10 +111,10 @@
 		rewarded.adjustCloneLoss(-25)
 
 // heldup is for the person being aimed at
-/datum/status_effect/heldup
+/datum/status_effect/grouped/heldup
 	id = "heldup"
-	duration = -1
-	tick_interval = -1
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_MULTIPLE
 	alert_type = /atom/movable/screen/alert/status_effect/heldup
 
@@ -123,26 +123,33 @@
 	desc = "Making any sudden moves would probably be a bad idea!"
 	icon_state = "aimed"
 
-/datum/status_effect/heldup/on_apply()
-	owner.apply_status_effect(STATUS_EFFECT_SURRENDER)
+/datum/status_effect/grouped/heldup/on_apply()
+	owner.apply_status_effect(/datum/status_effect/grouped/surrender, REF(src))
 	return ..()
 
-/datum/status_effect/heldup/on_remove()
-	owner.remove_status_effect(STATUS_EFFECT_SURRENDER)
+/datum/status_effect/grouped/heldup/on_remove()
+	owner.remove_status_effect(/datum/status_effect/grouped/surrender, REF(src))
 	return ..()
 
 // holdup is for the person aiming
 /datum/status_effect/holdup
 	id = "holdup"
-	duration = -1
-	tick_interval = -1
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/holdup
 
 /atom/movable/screen/alert/status_effect/holdup
 	name = "Holding Up"
-	desc = "You're currently pointing a gun at someone."
+	desc = "You're currently pointing a gun at someone. Click to cancel."
 	icon_state = "aimed"
+
+/atom/movable/screen/alert/status_effect/holdup/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+	var/datum/component/gunpoint/gunpoint = owner.GetComponent(/datum/component/gunpoint)
+	gunpoint?.cancel()
 
 // this status effect is used to negotiate the high-fiving capabilities of all concerned parties
 /datum/status_effect/offering
@@ -307,10 +314,10 @@
 	offered_item = null
 
 //this effect gives the user an alert they can use to surrender quickly
-/datum/status_effect/surrender
+/datum/status_effect/grouped/surrender
 	id = "surrender"
-	duration = -1
-	tick_interval = -1
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/surrender
 
@@ -321,7 +328,25 @@
 
 /atom/movable/screen/alert/status_effect/surrender/Click(location, control, params)
 	. = ..()
+	if(!.)
+		return
+
 	owner.emote("surrender")
+
+///For when you need to make someone be prompted for surrender, but not forever
+/datum/status_effect/surrender_timed
+	id = "surrender_timed"
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = null
+
+/datum/status_effect/surrender_timed/on_apply()
+	owner.apply_status_effect(/datum/status_effect/grouped/surrender, REF(src))
+	return ..()
+
+/datum/status_effect/surrender_timed/on_remove()
+	owner.remove_status_effect(/datum/status_effect/grouped/surrender, REF(src))
+	return ..()
 
 /*
  * A status effect used for preventing caltrop message spam
@@ -345,6 +370,7 @@
 	icon_state = "buckled"
 
 /atom/movable/screen/alert/status_effect/leaning/Click()
+	. = ..()
 	var/mob/living/L = usr
 	if(!istype(L) || L != owner)
 		return

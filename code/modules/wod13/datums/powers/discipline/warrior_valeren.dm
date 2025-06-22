@@ -183,7 +183,7 @@
 		owner.dna.species.punchdamagelow += 100
 		owner.dna.species.punchdamagehigh += 100
 		owner.visible_message(span_bolddanger("[owner]'s third eye flashes open, delivering a masterful unarmed strike to [target]!"))
-		owner.a_intent = INTENT_HARM
+		owner.set_combat_mode(TRUE)
 		owner.dna.species.harm(owner, target)
 		if(!ishuman(target))
 			target.attack_hand(owner)

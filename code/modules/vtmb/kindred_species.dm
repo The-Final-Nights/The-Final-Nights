@@ -17,6 +17,7 @@
 	id = "kindred"
 	default_color = "FFFFFF"
 	toxic_food = MEAT | VEGETABLES | RAW | JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | ALCOHOL | SUGAR | PINEAPPLE
+	liked_food = SANGUINE
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE)
 	use_skintones = TRUE
@@ -42,7 +43,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/human/host
 
-/datum/action/vampireinfo/Trigger()
+/datum/action/vampireinfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">
@@ -263,11 +264,11 @@
 		icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	. = ..()
 
-/datum/action/blood_power/Trigger()
+/datum/action/blood_power/Trigger(trigger_flags)
 	if(iskindred(owner))
 		if(HAS_TRAIT(owner, TRAIT_TORPOR))
 			return
-		var/mob/living/carbon/human/BD = usr
+		var/mob/living/carbon/human/BD = owner
 		if(world.time < BD.last_bloodpower_use+110)
 			return
 		var/plus = 0
@@ -472,11 +473,11 @@
 	var/mob/living/carbon/human/teacher = src
 	var/datum/preferences/teacher_prefs = teacher.client.prefs
 	var/datum/species/kindred/teacher_species = teacher.dna.species
+	var/datum/preferences/student_prefs = student.client.prefs
 
 	if (!student.client)
 		to_chat(teacher, span_warning("Your student needs to be a player!"))
 		return
-	var/datum/preferences/student_prefs = student.client.prefs
 
 	if (!iskindred(student))
 		to_chat(teacher, span_warning("Your student needs to be a vampire!"))
@@ -487,8 +488,8 @@
 	if (teacher_prefs.player_experience < 100)
 		to_chat(teacher, span_warning("You don't have enough experience to teach them this Discipline!"))
 		return
-	//checks that the teacher has blood bonded the student, this is something that needs to be reworked when blood bonds are made better
-	if (student.mind.enslaved_to != teacher)
+	//checks that the teacher has given blood to the student, this is something that needs to be reworked when blood bonds are made better
+	if (student.mind.ingested_blood != teacher)
 		to_chat(teacher, span_warning("You need to have fed your student your blood to teach them Disciplines!"))
 		return
 

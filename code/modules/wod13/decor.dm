@@ -732,52 +732,12 @@
 			to_chat(user, "<span class='notice'>You fill [I].</span>")
 			say("Gas filled.")
 
-/obj/structure/bloodextractor
-	name = "blood extractor"
-	desc = "Extract blood in packs."
-	icon = 'code/modules/wod13/props.dmi'
-	icon_state = "bloodextractor"
-	plane = GAME_PLANE
-	layer = CAR_LAYER
-	anchored = TRUE
-	density = TRUE
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
-	var/last_extracted = 0
 
 /obj/structure/reagent_dispensers/cleaningfluid
 	name = "cleaning fluid tank"
 	desc = "A container filled with cleaning fluid."
 	reagent_id = /datum/reagent/space_cleaner
 	icon_state = "water"
-
-/mob/living/carbon/human/MouseDrop(atom/over_object)
-	. = ..()
-	if(istype(over_object, /obj/structure/bloodextractor))
-		if(get_dist(src, over_object) < 2)
-			var/obj/structure/bloodextractor/V = over_object
-			if(!buckled)
-				V.visible_message("<span class='warning'>Buckle [src] fist!</span>")
-			if(bloodpool < 2)
-				V.visible_message("<span class='warning'>[V] can't find enough blood in [src]!</span>")
-				return
-			if(iskindred(src))
-				if(bloodpool < 4)
-					V.visible_message("<span class='warning'>[V] can't find enough blood in [src]!</span>")
-					return
-			if(V.last_extracted+1200 > world.time)
-				V.visible_message("<span class='warning'>[V] isn't ready!</span>")
-				return
-			V.last_extracted = world.time
-			if(!iskindred(src))
-				if(HAS_TRAIT(src,TRAIT_POTENT_BLOOD))
-					new /obj/item/drinkable_bloodpack/elite(get_step(V, SOUTH))
-				else
-					new /obj/item/drinkable_bloodpack(get_step(V, SOUTH))
-				bloodpool = max(0, bloodpool-2)
-			else
-				new /obj/item/drinkable_bloodpack/vitae(get_step(V, SOUTH))
-				bloodpool = max(0, bloodpool-4)
-
 
 /obj/structure/rack/tacobell
 	name = "table"
@@ -923,17 +883,14 @@
 	opacity = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
-	var/matrixing = FALSE
 
 /obj/matrix/attack_hand(mob/user)
 	if(user.client)
-		if(!matrixing)
-			matrixing = TRUE
-			if(do_after(user, 100, src))
-				cryoMob(user, src)
-				matrixing = FALSE
-			else
-				matrixing = FALSE
+		if(iswerewolf(user))
+			to_chat(user, span_warning("Return to your homid form before you matrix!"))
+			return TRUE
+		if(do_after(user, 100, src))
+			cryoMob(user, src)
 	return TRUE
 
 /obj/matrix/proc/cryoMob(mob/living/mob_occupant)
@@ -1252,6 +1209,11 @@
 	desc = "The flag of the State of Japan."
 	icon_state = "flag_japan"
 
+/obj/flag/anarchy
+	name = "anarchist flag"
+	desc = "The flag of the anarchist movement."
+	icon_state = "flag_anarchy"
+
 /obj/effect/decal/graffiti
 	name = "graffiti"
 	icon = 'code/modules/wod13/32x48.dmi'
@@ -1546,21 +1508,14 @@
 							dead_amongst = TRUE
 						icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					if(!dead_amongst)
 						user.visible_message("<span class='warning'>[user] refills [src].</span>", "<span class='warning'>You refill [src].</span>")
 						qdel(src)
 				else
-					var/dead_amongst = FALSE
 					for(var/mob/living/L in src)
 						L.forceMove(get_turf(src))
-						if(L.stat == DEAD)
-							dead_amongst = TRUE
 					icon_state = "pit0"
 					user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-					if(dead_amongst)
-						call_dharma("disrespect", user)
 			else
 				burying = FALSE
 

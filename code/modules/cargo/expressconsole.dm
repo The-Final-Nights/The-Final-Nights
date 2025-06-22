@@ -117,7 +117,7 @@
 	if(iskindred(user))
 		var/mob/living/carbon/human/H = user
 		if(H.clane)
-			if(H.clane.name == "Lasombra")
+			if(H.clane.name == CLAN_LASOMBRA)
 				return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)

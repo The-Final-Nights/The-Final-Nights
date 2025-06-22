@@ -186,8 +186,23 @@
 		for(var/obj/O in contents)
 			O.emp_act(severity)
 
+/obj/item/gun/attack_secondary(atom/interacting_with, mob/living/user, params)
+	if(user.combat_mode && isliving(interacting_with))
+		return ITEM_INTERACT_SKIP_TO_ATTACK // Gun bash / bayonet attack
+
+	var/datum/component/gunpoint/gunpoint_component = user.GetComponent(/datum/component/gunpoint)
+	if (gunpoint_component)
+		balloon_alert(user, "already holding [gunpoint_component.target == interacting_with ? "them" : "someone"] up!")
+		return ITEM_INTERACT_BLOCKING
+	if (user == interacting_with)
+		balloon_alert(user, "can't hold yourself up!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(do_after(user, 0.5 SECONDS, interacting_with))
+		user.AddComponent(/datum/component/gunpoint, interacting_with, src)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
 /obj/item/gun/afterattack(atom/target, mob/living/user, flag, params)
-	. = ..()
 	if(QDELETED(target))
 		return
 	if(firing_burst)
@@ -195,17 +210,9 @@
 	if(flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
 			return
-		if(!ismob(target)) //melee attack
-			return
-		if(user.a_intent == INTENT_HARM && !isnpc(user))
+		if(!ismob(target) || !user.combat_mode) //melee attack
 			return
 		if(target == user && user.zone_selected != BODY_ZONE_PRECISE_MOUTH) //so we can't shoot ourselves (unless mouth selected)
-			return
-		if(ismob(target) && user.a_intent == INTENT_GRAB)
-			if(user.GetComponent(/datum/component/gunpoint))
-				to_chat(user, "<span class='warning'>You are already holding someone up!</span>")
-				return
-			user.AddComponent(/datum/component/gunpoint, target, src)
 			return
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
@@ -238,7 +245,7 @@
 	//DUAL (or more!) WIELDING
 	var/bonus_spread = 0
 	var/loop_counter = 0
-	if(ishuman(user) && user.a_intent == INTENT_HARM)
+	if(ishuman(user) && user.combat_mode)
 		var/mob/living/carbon/human/H = user
 		for(var/obj/item/gun/G in H.held_items)
 			if(G == src || G.weapon_weight >= WEAPON_MEDIUM)
@@ -364,25 +371,20 @@
 /obj/item/gun/proc/reset_semicd()
 	semicd = FALSE
 
-/obj/item/gun/attack(mob/M as mob, mob/user)
-	if(user.a_intent == INTENT_HARM) //Flogging
-		if(bayonet)
-			M.attackby(bayonet, user)
-			return
-		else
-			process_fire(M, user)
-			return ..()
-	return
-
-/obj/item/gun/attack_atom(obj/O, mob/living/user, params)
-	if(user.a_intent == INTENT_HARM)
-		if(bayonet)
-			O.attackby(bayonet, user)
-			return
+/obj/item/gun/attack(mob/M, mob/living/user)
+	if(bayonet)
+		M.attackby(bayonet, user)
+	process_fire(M, user)
 	return ..()
 
-/obj/item/gun/attackby(obj/item/I, mob/user, params)
-	if(user.a_intent == INTENT_HARM)
+/obj/item/gun/attack_atom(obj/O, mob/living/user, params)
+	if(bayonet)
+		O.attackby(bayonet, user)
+		return
+	return ..()
+
+/obj/item/gun/attackby(obj/item/I, mob/living/user, params)
+	if(user.combat_mode)
 		return ..()
 	else if(istype(I, /obj/item/flashlight/seclite))
 		if(!can_flashlight)
@@ -642,7 +644,7 @@
 	button_icon_state = "sniper_zoom"
 	var/obj/item/gun/gun = null
 
-/datum/action/toggle_scope_zoom/Trigger()
+/datum/action/toggle_scope_zoom/Trigger(trigger_flags)
 	gun.zoom(owner, owner.dir)
 
 /datum/action/toggle_scope_zoom/IsAvailable()

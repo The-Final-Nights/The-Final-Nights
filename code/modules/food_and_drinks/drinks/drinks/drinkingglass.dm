@@ -70,6 +70,7 @@
 	icon_state = "vodka_shot"
 	gulp_size = 15
 	amount_per_transfer_from_this = 15
+	possible_transfer_amounts = list(15)
 	volume = 15
 	custom_materials = list(/datum/material/glass=100)
 	custom_price = PAYCHECK_ASSISTANT * 0.4
@@ -163,25 +164,3 @@
 			return
 	else
 		..()
-
-/obj/item/reagent_containers/food/drinks/drinkingglass/attack(obj/target, mob/user)
-	if(user.a_intent == INTENT_HARM && ismob(target) && target.reagents && reagents.total_volume)
-		target.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [target]!</span>", \
-						"<span class='userdanger'>[user] splashes the contents of [src] onto you!</span>")
-		log_combat(user, target, "splashed", src)
-		reagents.expose(target, TOUCH)
-		reagents.clear_reagents()
-		return
-	..()
-
-/obj/item/reagent_containers/food/drinks/drinkingglass/afterattack(obj/target, mob/user, proximity)
-	. = ..()
-	if((!proximity) || !check_allowed_items(target,target_self=1))
-		return
-
-	else if(reagents.total_volume && user.a_intent == INTENT_HARM)
-		user.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [target]!</span>", \
-							"<span class='notice'>You splash the contents of [src] onto [target].</span>")
-		reagents.expose(target, TOUCH)
-		reagents.clear_reagents()
-		return

@@ -13,15 +13,6 @@
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
 
-	for(var/mob/living/carbon/human/H in oviewers(7, C))
-		if((H.real_name == C.lastattacker))
-			if(iscathayan(H)) //Cathayan, ding dharma
-				if(C.stat != DEAD)
-					call_dharma("torture", H)
-				else
-					call_dharma("disrespect", H)
-
-
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
 	affecting.receive_damage(clamp(brute_dam/2 * affecting.body_damage_coeff, 15, 50), clamp(burn_dam/2 * affecting.body_damage_coeff, 0, 50), wound_bonus=CANT_WOUND) //Damage the chest based on limb's existing damage
 	if(!silent)
@@ -444,13 +435,8 @@
 	C.update_hair()
 	C.update_damage_overlays()
 
-
-//Regenerates all limbs. Returns amount of limbs regenerated
-/mob/living/proc/regenerate_limbs(noheal = FALSE, list/excluded_zones = list())
-	SEND_SIGNAL(src, COMSIG_LIVING_REGENERATE_LIMBS, noheal, excluded_zones)
-
-/mob/living/carbon/regenerate_limbs(noheal = FALSE, list/excluded_zones = list())
-	. = ..()
+/mob/living/carbon/proc/regenerate_limbs(noheal = FALSE, list/excluded_zones = list())
+	SEND_SIGNAL(src, COMSIG_CARBON_REGENERATE_LIMBS, excluded_zones)
 	var/list/zone_list = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
 	if(length(excluded_zones))
 		zone_list -= excluded_zones

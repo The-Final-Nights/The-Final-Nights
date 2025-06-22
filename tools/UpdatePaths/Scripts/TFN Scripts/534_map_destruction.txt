@@ -1,0 +1,7 @@
+/obj/structure/window/reinforced/tinted : @DELETE
+/turf/closed/wall/vampwall/rich/low/window/reinforced : /turf/closed/wall/vampwall/rich/low/window{@OLD}
+/obj/structure/window/reinforced/indestructable : @DELETE
+/turf/closed/wall/vampwall/market/low/window/reinforced : /turf/closed/wall/vampwall/market/low/window{@OLD}
+/turf/closed/wall/vampwall/rich/old/low/window/reinforced : /turf/closed/wall/vampwall/rich/old/low/window{@OLD}
+/turf/closed/wall/vampwall/painted/low/window/reinforced : /turf/closed/wall/vampwall/painted/low/window{@OLD}
+/turf/closed/wall/vampwall/old/low/window/reinforced : /turf/closed/wall/vampwall/old/low/window{@OLD}
