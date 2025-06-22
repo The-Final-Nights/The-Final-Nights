@@ -371,7 +371,7 @@
 	var/original_hairstyle
 	var/original_body_mod
 
-/datum/action/basic_vicissitude/Trigger()
+/datum/action/basic_vicissitude/Trigger(trigger_flags)
 	. = ..()
 	if (selected_upgrade)
 		remove_upgrade()
@@ -473,7 +473,7 @@
 	var/advanced_original_hairstyle
 	var/advanced_original_body_mod
 
-/datum/action/advanced_vicissitude/Trigger()
+/datum/action/advanced_vicissitude/Trigger(trigger_flags)
 	. = ..()
 	if (selected_advanced_upgrade)
 		remove_advanced_upgrade()
@@ -658,7 +658,7 @@
 	var/stealth_alpha = 30
 	button_icon_state = "basic"
 
-/datum/action/active_camo/Trigger()
+/datum/action/active_camo/Trigger(trigger_flags)
 	var/mob/living/carbon/human/user = owner
 	if(owner.alpha == stealth_alpha)
 		animate(owner, alpha = 255, time = 1.5 SECONDS)
