@@ -2,7 +2,7 @@
 	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
 	see_in_dark = 2
-	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD)
+	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD,GLAND_HUD)
 
 	hud_type = /datum/hud/living
 
@@ -160,6 +160,9 @@
 	var/icon/head_icon = 'icons/mob/pets_held.dmi'//what it looks like on your head
 	var/held_state = ""//icon state for the above
 
+	///If combat mode is on or not
+	var/combat_mode = FALSE
+
 	/// Is this mob allowed to be buckled/unbuckled to/from things?
 	var/can_buckle_to = TRUE
 
@@ -167,6 +170,9 @@
 	var/body_position_pixel_x_offset = 0
 	///The x amount a mob's sprite should be offset due to the current position they're in
 	var/body_position_pixel_y_offset = 0
+
+	//imported from other areas around the code
+	var/list/overlays_standing[TOTAL_LAYERS]
 
 	//Shitty VtM vars I'm moving here so they're not strewn around the codebase
 	var/bloodquality = 1
@@ -269,6 +275,8 @@
 
 	///Whether the mob currently has the JUMP button selected
 	var/prepared_to_jump = FALSE
+	var/last_jump_time = 0
+	var/jump_range = 1
 	///If this mob can strip people from range with a delay of 0.1 seconds. Currently only activated by Mytherceria 2.
 	var/enhanced_strip = FALSE
 
@@ -287,6 +295,26 @@
 	var/wisdom = 0
 	var/honor = 0
 	var/glory = 0
+	var/last_moon_look = 0
+	var/last_rage_from_attack = 0
+	var/next_veil_time = 0
+	var/last_rage_hit = 0
+	var/datum/auspice/auspice
+	var/datum/werewolf_holder/transformation/transformator
+	var/inspired = FALSE
+	var/last_gnosis_buff = 0
+	var/last_rage_gain = 0
+	var/last_veil_restore = 0
+
+	var/list/beastmaster = list()
+
+	COOLDOWN_DECLARE(frenzy_bite_cooldown)
+	COOLDOWN_DECLARE(frenzy_attack_cooldown)
+	var/in_frenzy = FALSE
+	var/frenzy_hardness = 6
+	var/last_frenzy_check = 0
+	var/mob/living/frenzy_target = null
+
 
 	//If we are currently leaning on something, and what that object is
 	var/atom/leaned_object

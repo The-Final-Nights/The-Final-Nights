@@ -1,0 +1,4 @@
+/obj/structure/chair/sofa : /obj/structure/chair/sofa/old{@OLD}
+/obj/structure/chair/sofa/left : /obj/structure/chair/sofa/old/left{@OLD}
+/obj/structure/chair/sofa/right : /obj/structure/chair/sofa/old/right{@OLD}
+/obj/structure/chair/sofa/corner : /obj/structure/chair/sofa/old/corner{@OLD}

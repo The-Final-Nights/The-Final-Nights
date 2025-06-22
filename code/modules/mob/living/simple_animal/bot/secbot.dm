@@ -21,7 +21,7 @@
 	data_hud_type = DATA_HUD_SECURITY_ADVANCED
 	path_image_color = "#FF0000"
 
-	a_intent = "harm"
+	combat_mode = TRUE
 
 	var/baton_type = /obj/item/melee/baton
 	var/obj/item/weapon
@@ -196,26 +196,26 @@ Auto Patrol: []"},
 /mob/living/simple_animal/bot/secbot/proc/special_retaliate_after_attack(mob/user) //allows special actions to take place after being attacked.
 	return
 
-/mob/living/simple_animal/bot/secbot/attack_hand(mob/living/carbon/human/H)
-	if((H.a_intent == INTENT_HARM) || (H.a_intent == INTENT_DISARM))
-		retaliate(H)
-		if(special_retaliate_after_attack(H))
+/mob/living/simple_animal/bot/secbot/attack_hand(mob/living/carbon/human/user, list/modifiers)
+	if(user.combat_mode)
+		retaliate(user)
+		if(special_retaliate_after_attack(user))
 			return
 
 		// Turns an oversight into a feature. Beepsky will now announce when pacifists taunt him over sec comms.
-		if(HAS_TRAIT(H, TRAIT_PACIFISM))
-			H.visible_message("<span class='notice'>[H] taunts [src], daring [p_them()] to give chase!</span>", \
-				"<span class='notice'>You taunt [src], daring [p_them()] to chase you!</span>", "<span class='hear'>You hear someone shout a daring taunt!</span>", DEFAULT_MESSAGE_RANGE, H)
-			speak("Taunted by pacifist scumbag <b>[H]</b> in [get_area(src)].", radio_channel)
+		if(HAS_TRAIT(user, TRAIT_PACIFISM))
+			user.visible_message("<span class='notice'>[user] taunts [src], daring [p_them()] to give chase!</span>", \
+				"<span class='notice'>You taunt [src], daring [p_them()] to chase you!</span>", "<span class='hear'>You hear someone shout a daring taunt!</span>", DEFAULT_MESSAGE_RANGE, user)
+			speak("Taunted by pacifist scumbag <b>[user]</b> in [get_area(src)].", radio_channel)
 
 			// Interrupt the attack chain. We've already handled this scenario for pacifists.
 			return
 
 	return ..()
 
-/mob/living/simple_animal/bot/secbot/attackby(obj/item/W, mob/user, params)
+/mob/living/simple_animal/bot/secbot/attackby(obj/item/W, mob/living/user, params)
 	..()
-	if(W.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM) // Any intent but harm will heal, so we shouldn't get angry.
+	if(W.tool_behaviour == TOOL_WELDER && !user.combat_mode) // Any intent but harm will heal, so we shouldn't get angry.
 		return
 	if(W.tool_behaviour != TOOL_SCREWDRIVER && (W.force) && (!target) && (W.damtype != STAMINA) ) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
 		retaliate(user)
@@ -239,7 +239,7 @@ Auto Patrol: []"},
 				retaliate(Proj.firer)
 	return ..()
 
-/mob/living/simple_animal/bot/secbot/UnarmedAttack(atom/A)
+/mob/living/simple_animal/bot/secbot/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
 	if(!on)
 		return
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
@@ -489,8 +489,8 @@ Auto Patrol: []"},
 	new /obj/effect/decal/cleanable/oil(loc)
 	..()
 
-/mob/living/simple_animal/bot/secbot/attack_alien(mob/living/carbon/alien/user as mob)
-	..()
+/mob/living/simple_animal/bot/secbot/attack_alien(mob/living/carbon/alien/user, list/modifiers)
+	. = ..()
 	if(!isalien(target))
 		target = user
 		mode = BOT_HUNT

@@ -39,7 +39,7 @@
 	var/mob/living/simple_animal/hostile/beastmaster/rat/rat = new(get_turf(owner))
 	rat.my_creator = owner
 	owner.beastmaster |= rat
-	rat.beastmaster = owner
+	rat.beastmaster_owner = owner
 
 //SUMMON CAT
 /datum/discipline_power/animalism/summon_cat
@@ -70,7 +70,7 @@
 	var/mob/living/simple_animal/hostile/beastmaster/cat/cat = new(get_turf(owner))
 	cat.my_creator = owner
 	owner.beastmaster |= cat
-	cat.beastmaster = owner
+	cat.beastmaster_owner = owner
 
 //SUMMON WOLF
 /*
@@ -111,7 +111,7 @@
 	var/mob/living/simple_animal/hostile/beastmaster/dog = new(get_turf(owner))
 	dog.my_creator = owner
 	owner.beastmaster |= dog
-	dog.beastmaster = owner
+	dog.beastmaster_owner = owner
 
 //SUMMON BAT
 /datum/discipline_power/animalism/summon_bat
@@ -142,7 +142,7 @@
 	var/mob/living/simple_animal/hostile/beastmaster/rat/flying/bat = new(get_turf(owner))
 	bat.my_creator = owner
 	owner.beastmaster |= bat
-	bat.beastmaster = owner
+	bat.beastmaster_owner = owner
 
 //RAT SHAPESHIFT
 /obj/effect/proc_holder/spell/targeted/shapeshift/animalism

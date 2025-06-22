@@ -1,40 +1,80 @@
-/*
-	Humans:
-	Adds an exception for gloves, to allow special glove types like the ninja ones.
-
-	Otherwise pretty standard.
-*/
-/mob/living/carbon/human/UnarmedAttack(atom/A, proximity)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		if(src == A)
-			check_self_for_injuries()
+/// Checks for RIGHT_CLICK in modifiers and runs resolve_right_click_attack if so. Returns TRUE if normal chain blocked.
+/mob/living/proc/right_click_attack_chain(atom/target, list/modifiers)
+	if (!LAZYACCESS(modifiers, RIGHT_CLICK))
 		return
+	var/secondary_result = resolve_right_click_attack(target, modifiers)
+
+	if (secondary_result == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN || secondary_result == SECONDARY_ATTACK_CONTINUE_CHAIN)
+		return TRUE
+	else if (secondary_result != SECONDARY_ATTACK_CALL_NORMAL)
+		CRASH("resolve_right_click_attack (probably attack_hand_secondary) did not return a SECONDARY_ATTACK_* define.")
+
+/**
+ * Checks if this mob is in a valid state to punch someone.
+ */
+/mob/living/proc/can_unarmed_attack()
+	return !HAS_TRAIT(src, TRAIT_HANDS_BLOCKED)
+
+/mob/living/carbon/can_unarmed_attack()
+	. = ..()
+	if(!.)
+		return FALSE
+
 	if(!has_active_hand()) //can't attack without a hand.
 		var/obj/item/bodypart/check_arm = get_active_hand()
 		if(check_arm?.bodypart_disabled)
-			to_chat(src, "<span class='warning'>Your [check_arm.name] is in no condition to be used.</span>")
-			return
+			to_chat(src, span_warning("Your [check_arm.name] is in no condition to be used."))
+			return FALSE
 
-		to_chat(src, "<span class='notice'>You look at your arm and sigh.</span>")
-		return
+		to_chat(src, span_notice("You look at your arm and sigh."))
+		return FALSE
 
-	// Special glove functions:
-	// If the gloves do anything, have them return 1 to stop
-	// normal attack_hand() here.
-	var/obj/item/clothing/gloves/G = gloves // not typecast specifically enough in defines
-	if(proximity && istype(G) && G.Touch(A,1))
-		return
-	//This signal is needed to prevent gloves of the north star + hulk.
-	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity) & COMPONENT_CANCEL_ATTACK_CHAIN)
-		return
-	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity)
+	return TRUE
 
-	if(dna?.species?.spec_unarmedattack(src, A)) //Because species like monkeys dont use attack hand
-		return
-	A.attack_hand(src)
+/mob/living/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)
+	// The sole reason for this signal needing to exist is making FotNS incompatible with Hulk.
+	// Note that it is send before [proc/can_unarmed_attack] is called, keep this in mind.
+	var/sigreturn = SEND_SIGNAL(src, COMSIG_LIVING_EARLY_UNARMED_ATTACK, attack_target, modifiers)
+	if(sigreturn & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
+	if(sigreturn & COMPONENT_SKIP_ATTACK)
+		return FALSE
 
-/// Return TRUE to cancel other attack hand effects that respect it.
-/atom/proc/attack_hand(mob/user)
+	if(!can_unarmed_attack())
+		return FALSE
+
+	sigreturn = SEND_SIGNAL(src, COMSIG_LIVING_UNARMED_ATTACK, attack_target, proximity_flag, modifiers)
+	if(sigreturn & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
+	if(sigreturn & COMPONENT_SKIP_ATTACK)
+		return FALSE
+
+	if(!right_click_attack_chain(attack_target, modifiers))
+		resolve_unarmed_attack(attack_target, modifiers)
+	return TRUE
+
+/mob/living/carbon/human/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)
+	// Humans can always check themself regardless of having their hands blocked or w/e
+	if(src == attack_target && !combat_mode && HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
+		check_self_for_injuries()
+		return TRUE
+
+	return ..()
+
+/mob/living/carbon/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	return attack_target.attack_paw(src, modifiers)
+
+/mob/living/carbon/human/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	if(!ISADVANCEDTOOLUSER(src))
+		return ..()
+
+	return attack_target.attack_hand(src, modifiers)
+
+/mob/living/carbon/human/resolve_right_click_attack(atom/target, list/modifiers)
+	return target.attack_hand_secondary(src, modifiers)
+
+/// Return TRUE to cancel other attack hand effects that respect it. Modifiers is the assoc list for click info such as if it was a right click.
+/atom/proc/attack_hand(mob/user, list/modifiers)
 	. = FALSE
 	if(!(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND))
 		add_fingerprint(user)
@@ -42,6 +82,13 @@
 		. = TRUE
 	if(interaction_flags_atom & INTERACT_ATOM_ATTACK_HAND)
 		. = _try_interact(user)
+
+/// When the user uses their hand on an item while holding right-click
+/// Returns a SECONDARY_ATTACK_* value.
+/atom/proc/attack_hand_secondary(mob/user, list/modifiers)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	return SECONDARY_ATTACK_CALL_NORMAL
 
 //Return a non FALSE value to cancel whatever called this from propagating, if it respects it.
 /atom/proc/_try_interact(mob/user)
@@ -83,13 +130,13 @@
 	return FALSE
 
 
-/mob/living/carbon/human/RangedAttack(atom/A, mouseparams)
+/mob/living/carbon/human/RangedAttack(atom/A, modifiers)
 	. = ..()
 	if(.)
 		return
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
-		if(istype(G) && G.Touch(A,0)) // for magic gloves
+		if(istype(G) && G.Touch(A,0,modifiers)) // for magic gloves
 			return TRUE
 
 	if(isturf(A) && get_dist(src,A) <= 1)
@@ -99,21 +146,44 @@
 /*
 	Animals & All Unspecified
 */
-/mob/living/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src, TRAIT_WARRIOR))
-		changeNext_move(CLICK_CD_MELEE * 0.5)
-	else
-		changeNext_move(CLICK_CD_MELEE)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	A.attack_animal(src)
 
-/atom/proc/attack_animal(mob/user)
+/**
+ * Called when the unarmed attack hasn't been stopped by the LIVING_UNARMED_ATTACK_BLOCKED macro or the right_click_attack_chain proc.
+ * This will call an attack proc that can vary from mob type to mob type on the target.
+ */
+/mob/living/proc/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	attack_target.attack_animal(src, modifiers)
+
+/**
+ * Called when an unarmed attack performed with right click hasn't been stopped by the LIVING_UNARMED_ATTACK_BLOCKED macro.
+ * This will call a secondary attack proc that can vary from mob type to mob type on the target.
+ * Sometimes, a target is interacted differently when right_clicked, in that case the secondary attack proc should return
+ * a SECONDARY_ATTACK_* value that's not SECONDARY_ATTACK_CALL_NORMAL.
+ * Otherwise, it should just return SECONDARY_ATTACK_CALL_NORMAL. Failure to do so will result in an exception (runtime error).
+ */
+/mob/living/proc/resolve_right_click_attack(atom/target, list/modifiers)
+	return target.attack_animal_secondary(src, modifiers)
+
+/**
+ * Called when a simple animal is unarmed attacking / clicking on this atom.
+ */
+/atom/proc/attack_animal(mob/user, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, user)
 
-///Attacked by monkey
-/atom/proc/attack_paw(mob/user)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_PAW, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
+/**
+ * Called when a simple animal or basic mob right clicks an atom.
+ * Returns a SECONDARY_ATTACK_* value.
+ */
+/atom/proc/attack_animal_secondary(mob/user, list/modifiers)
+	return SECONDARY_ATTACK_CALL_NORMAL
+
+///Apparently this is only used by AI datums for basic mobs. A player controlling a basic mob will call attack_animal() when clicking another atom.
+/atom/proc/attack_basic_mob(mob/user, list/modifiers)
+	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_BASIC_MOB, user)
+
+///Attacked by monkey. It doesn't need its own *_secondary proc as it just uses attack_hand_secondary instead.
+/atom/proc/attack_paw(mob/user, list/modifiers)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_PAW, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 	return FALSE
 
@@ -122,58 +192,91 @@
 	Aliens
 	Defaults to same as monkey in most places
 */
-/mob/living/carbon/alien/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	A.attack_alien(src)
+/mob/living/carbon/alien/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	attack_target.attack_alien(src, modifiers)
 
-/atom/proc/attack_alien(mob/living/carbon/alien/user)
-	attack_paw(user)
-	return
+/mob/living/carbon/alien/resolve_right_click_attack(atom/target, list/modifiers)
+	return target.attack_alien_secondary(src, modifiers)
 
+/atom/proc/attack_alien(mob/living/carbon/alien/user, list/modifiers)
+	attack_paw(user, modifiers)
+
+/**
+ * Called when an alien right clicks an atom.
+ * Returns a SECONDARY_ATTACK_* value.
+ */
+/atom/proc/attack_alien_secondary(mob/living/carbon/alien/user, list/modifiers)
+	return SECONDARY_ATTACK_CALL_NORMAL
 
 // Babby aliens
-/mob/living/carbon/alien/larva/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	A.attack_larva(src)
+/mob/living/carbon/alien/larva/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	attack_target.attack_larva(src, modifiers)
 
-/atom/proc/attack_larva(mob/user)
+/mob/living/carbon/alien/larva/resolve_right_click_attack(atom/target, list/modifiers)
+	return target.attack_larva_secondary(src, modifiers)
+
+/atom/proc/attack_larva(mob/user, list/modifiers)
 	return
+
+/**
+ * Called when an alien larva right clicks an atom.
+ * Returns a SECONDARY_ATTACK_* value.
+ */
+/atom/proc/attack_larva_secondary(mob/user, list/modifiers)
+	return SECONDARY_ATTACK_CALL_NORMAL
 
 
 /*
 	Slimes
 	Nothing happening here
 */
-/mob/living/simple_animal/slime/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	if(isturf(A))
+/mob/living/simple_animal/slime/resolve_unarmed_attack(atom/attack_target, proximity_flag, list/modifiers)
+	if(isturf(attack_target))
 		return ..()
-	A.attack_slime(src)
+	attack_target.attack_slime(src, modifiers)
 
-/atom/proc/attack_slime(mob/user)
+/mob/living/simple_animal/slime/resolve_right_click_attack(atom/target, list/modifiers)
+	if(isturf(target))
+		return ..()
+	return target.attack_slime_secondary(src, modifiers)
+
+/atom/proc/attack_slime(mob/user, list/modifiers)
 	return
 
+/**
+ * Called when a slime mob right clicks an atom (that is not a turf).
+ * Returns a SECONDARY_ATTACK_* value.
+ */
+/atom/proc/attack_slime_secondary(mob/user, list/modifiers)
+	return SECONDARY_ATTACK_CALL_NORMAL
 
 /*
 	Drones
 */
-/mob/living/simple_animal/drone/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	A.attack_drone(src)
 
-/atom/proc/attack_drone(mob/living/simple_animal/drone/user)
-	attack_hand(user) //defaults to attack_hand. Override it when you don't want drones to do same stuff as humans.
+/mob/living/simple_animal/drone/resolve_unarmed_attack(atom/attack_target, proximity_flag, list/modifiers)
+	attack_target.attack_drone(src, modifiers)
 
+/mob/living/simple_animal/drone/resolve_right_click_attack(atom/target, list/modifiers)
+	return target.attack_drone_secondary(src, modifiers)
+
+/// Defaults to attack_hand. Override it when you don't want drones to do same stuff as humans.
+/atom/proc/attack_drone(mob/living/simple_animal/drone/user, list/modifiers)
+	attack_hand(user, modifiers)
+
+/**
+ * Called when a maintenance drone right clicks an atom.
+ * Defaults to attack_hand_secondary.
+ * When overriding it, remember that it ought to return a SECONDARY_ATTACK_* value.
+ */
+/atom/proc/attack_drone_secondary(mob/living/simple_animal/drone/user, list/modifiers)
+	return attack_hand_secondary(user, modifiers)
 
 /*
 	Brain
 */
 
-/mob/living/brain/UnarmedAttack(atom/A)//Stops runtimes due to attack_animal being the default
+/mob/living/brain/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)//Stops runtimes due to attack_animal being the default
 	return
 
 
@@ -181,7 +284,7 @@
 	pAI
 */
 
-/mob/living/silicon/pai/UnarmedAttack(atom/A)//Stops runtimes due to attack_animal being the default
+/mob/living/silicon/pai/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)//Stops runtimes due to attack_animal being the default
 	return
 
 
@@ -189,78 +292,29 @@
 	Simple animals
 */
 
-/mob/living/simple_animal/UnarmedAttack(atom/A, proximity)
-	if(HAS_TRAIT(src, TRAIT_WARRIOR))
-		changeNext_move(CLICK_CD_MELEE * 0.5)
+/mob/living/simple_animal/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	if(dextrous && (isitem(attack_target) || !combat_mode))
+		attack_target.attack_hand(src, modifiers)
+		update_inv_hands()
+	return ..()
+
+/mob/living/simple_animal/resolve_right_click_attack(atom/target, list/modifiers)
+	if(dextrous && (isitem(target) || !combat_mode))
+		. = target.attack_hand_secondary(src, modifiers)
+		update_inv_hands()
 	else
-		changeNext_move(CLICK_CD_MELEE)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	if(!dextrous)
 		return ..()
-	if(!ismob(A))
-		A.attack_hand(src)
-		update_inv_hands()
-
-
-/mob/living/carbon/werewolf/crinos/UnarmedAttack(atom/A, proximity)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	if(A)
-		if(a_intent == INTENT_HARM)
-			if(istype(A, /mob/living))
-				var/mob/living/target = A
-				target.adjustCloneLoss(2)
-				if(src.tox_damage_plus)
-					target.adjustToxLoss(src.tox_damage_plus)
-					to_chat(src, "<span class='notice'>Your toxic claws seep into [target]'s flesh!</span>")
-				if(src.agg_damage_plus)
-					target.adjustCloneLoss(src.agg_damage_plus)
-					to_chat(src, "<span class='notice'>Your razor sharp claws rip through [target]'s flesh!</span>")
-			return ..()
-		A.attack_hand(src)
-		update_inv_hands()
-
-/mob/living/carbon/werewolf/corax/corax_crinos/UnarmedAttack(atom/A, proximity)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	if(A) // not putting this here will cause a runtime, I do NOT know why
-		if(a_intent == INTENT_HARM)
-			if(istype(A, /mob/living))
-				var/mob/living/target = A
-				target.adjustCloneLoss(2)
-				if(src.tox_damage_plus)
-					target.adjustToxLoss(src.tox_damage_plus)
-					to_chat(src, "<span class='notice'>Your toxic claws seep into [target]'s flesh!</span>")
-				if(src.agg_damage_plus)
-					target.adjustCloneLoss(src.agg_damage_plus)
-					to_chat(src, "<span class='notice'>Your razor sharp claws rip through [target]'s flesh!</span>")
-			return ..()
-		A.attack_hand(src)
-		update_inv_hands()
-
-/atom/proc/attack_crinos(mob/user)
-	return
-
 
 /*
 	Hostile animals
 */
 
-/mob/living/simple_animal/hostile/UnarmedAttack(atom/A)
-	if(HAS_TRAIT(src, TRAIT_WARRIOR))
-		changeNext_move(CLICK_CD_MELEE * 0.5)
+/mob/living/simple_animal/hostile/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	GiveTarget(attack_target)
+	if(dextrous && (isitem(attack_target) || !combat_mode))
+		return ..()
 	else
-		changeNext_move(CLICK_CD_MELEE)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		return
-	target = A
-	if(dextrous && !ismob(A))
-		..()
-	else
-		AttackingTarget(A)
-
-
+		AttackingTarget(attack_target)
 
 /*
 	New Players:

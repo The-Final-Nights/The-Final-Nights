@@ -68,12 +68,14 @@
 	. = ..()
 	if(.)
 		return
-	var/mob/living/carbon/human/H = user.mob
-	H.SwitchBlocking()
-	return TRUE
+	if(ishuman(user.mob) && !ispath(user.mob, /mob/living/simple_animal/werewolf))
+		var/mob/living/carbon/human/H = user.mob
+		H.SwitchBlocking()
+		return TRUE
+	return
 
 /datum/keybinding/human/bite
-	hotkey_keys = list("F")
+	hotkey_keys = list("N")
 	name = "bite"
 	full_name = "Bite"
 	description = "Bite whoever you're aggressively grabbing, and feed on them if possible."
@@ -119,13 +121,13 @@
 					return
 				if(BD.clane)
 					var/special_clan = FALSE
-					if(BD.clane.name == "Salubri")
+					if(BD.clane.name == CLAN_SALUBRI)
 						if(!PB.IsSleeping())
 							to_chat(BD, "<span class='warning'>You can't drink from aware targets!</span>")
 							return
 						special_clan = TRUE
 						PB.emote("moan")
-					if(BD.clane.name == "Giovanni")
+					if(BD.clane.name == CLAN_GIOVANNI)
 						PB.emote("scream")
 						special_clan = TRUE
 					if(!special_clan)

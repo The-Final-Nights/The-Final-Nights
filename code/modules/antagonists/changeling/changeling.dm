@@ -73,6 +73,18 @@
 	if(give_objectives)
 		forge_objectives()
 	owner.current.grant_all_languages(FALSE, FALSE, TRUE)	//Grants omnitongue. We are able to transform our body after all.
+	if(ishuman(owner.current))
+		var/mob/living/carbon/human/H = owner.current
+		H.physiology.brute_mod *= 0.1 //Very low brute mod, they're fleshcrafters.
+		ADD_TRAIT(H, TRAIT_STRONG_GRABBER, CHANGELING_TRAIT) //Allows them to easily grab victims.
+		ADD_TRAIT(H, TRAIT_CHARMER, CHANGELING_TRAIT) //Allows them to get NPCs to follow them.
+		ADD_TRAIT(H, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT) //Allows them to identify who's what.
+		ADD_TRAIT(H, TRAIT_NIGHT_VISION, CHANGELING_TRAIT) // Allows them to see.
+		ADD_TRAIT(H, TRAIT_THERMAL_VISION, CHANGELING_TRAIT)
+		var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
+		abductor_hud.add_hud_to(H)
+		H.see_invisible = OBFUSCATE_INVISIBILITY
+		H.update_sight()
 	. = ..()
 
 /datum/antagonist/changeling/on_removal()
@@ -83,7 +95,18 @@
 		if(B && (B.decoy_override != initial(B.decoy_override)))
 			B.organ_flags |= ORGAN_VITAL
 			B.decoy_override = FALSE
-	remove_changeling_powers()
+	if(ishuman(owner.current))
+		var/mob/living/carbon/human/H = owner.current
+		H.physiology.brute_mod *= 10 //Returns it to normal.
+		REMOVE_TRAIT(H, TRAIT_STRONG_GRABBER, CHANGELING_TRAIT)
+		REMOVE_TRAIT(H, TRAIT_CHARMER, CHANGELING_TRAIT)
+		REMOVE_TRAIT(H, TRAIT_SCENTTRUEFORM, CHANGELING_TRAIT)
+		REMOVE_TRAIT(H, TRAIT_NIGHT_VISION, CHANGELING_TRAIT)
+		REMOVE_TRAIT(H, TRAIT_THERMAL_VISION, CHANGELING_TRAIT)
+		var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
+		abductor_hud.remove_hud_from(H)
+		H.see_invisible = SEE_INVISIBLE_LIVING
+		H.update_sight()
 	. = ..()
 
 /datum/antagonist/changeling/proc/reset_properties()
@@ -273,8 +296,19 @@
 	prof.protected = protect
 
 	prof.underwear = H.underwear
+	prof.underwear_color = H.underwear_color
 	prof.undershirt = H.undershirt
 	prof.socks = H.socks
+	prof.age = H.age
+	prof.physique = H.physique
+	prof.dexterity = H.dexterity
+	prof.social = H.social
+	prof.mentality = H.mentality
+	prof.athletics = H.athletics
+	prof.base_body_mod = H.base_body_mod
+	prof.headshot_link = H.headshot_link
+	prof.flavor_text = H.flavor_text
+	prof.flavor_text_nsfw = H.flavor_text_nsfw
 
 	prof.skillchips = H.clone_skillchip_list(TRUE)
 
@@ -497,8 +531,19 @@
 	var/list/worn_icon_state_list = list()
 
 	var/underwear
+	var/underwear_color
 	var/undershirt
 	var/socks
+	var/age
+	var/physique
+	var/dexterity
+	var/social
+	var/mentality
+	var/athletics
+	var/base_body_mod
+	var/headshot_link
+	var/flavor_text
+	var/flavor_text_nsfw
 
 	var/list/skillchips = list()
 	/// What scars the target had when we copied them, in string form (like persistent scars)
@@ -526,8 +571,19 @@
 	newprofile.righthand_file_list = righthand_file_list.Copy()
 	newprofile.inhand_icon_state_list = inhand_icon_state_list.Copy()
 	newprofile.underwear = underwear
+	newprofile.underwear_color  = underwear_color
 	newprofile.undershirt = undershirt
 	newprofile.socks = socks
+	newprofile.age = age
+	newprofile.physique = physique
+	newprofile.dexterity = dexterity
+	newprofile.social = social
+	newprofile.mentality = mentality
+	newprofile.athletics = athletics
+	newprofile.base_body_mod = base_body_mod
+	newprofile.headshot_link = headshot_link
+	newprofile.flavor_text = flavor_text
+	newprofile.flavor_text_nsfw = flavor_text_nsfw
 	newprofile.worn_icon_list = worn_icon_list.Copy()
 	newprofile.worn_icon_state_list = worn_icon_state_list.Copy()
 	newprofile.skillchips = skillchips.Copy()

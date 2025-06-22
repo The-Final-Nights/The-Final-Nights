@@ -660,8 +660,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					qdel(ACT)
 				dat += "<b>Initial Gifts:</b> [gifts_text]"
 				// These mobs should be made in nullspace to avoid dumping them onto the map somewhere.
-				var/mob/living/carbon/werewolf/crinos/DAWOF = new
-				var/mob/living/carbon/werewolf/lupus/DAWOF2 = new
+				var/mob/living/simple_animal/werewolf/crinos/DAWOF = new
+				var/mob/living/simple_animal/werewolf/lupus/DAWOF2 = new
 
 				DAWOF.sprite_color = werewolf_color
 				DAWOF2.sprite_color = werewolf_color
@@ -734,7 +734,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/cost
 					if (discipline_level <= 0)
 						cost = 10
-					else if (clane.name == "Caitiff")
+					else if (clane.name == CLAN_NONE)
 						cost = discipline_level * 6
 					else if (clane.clane_disciplines.Find(discipline_type))
 						cost = discipline_level * 5
@@ -749,7 +749,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "-[discipline.desc]<BR>"
 					qdel(discipline)
 
-				if (clane.name == "Caitiff")
+				if (clane.name == CLAN_NONE)
 					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
 					for (var/discipline_type in possible_new_disciplines)
 						var/datum/discipline/discipline = new discipline_type
@@ -761,7 +761,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				switch(clane.name)
 
-					if("Salubri")
+					if(CLAN_SALUBRI)
 
 						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
 						possible_new_valerens -= discipline_types
@@ -769,7 +769,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (possible_new_valerens.len && (player_experience >= 10))
 							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
 
-					if("Salubri Warrior")
+					if(CLAN_SALUBRI_WARRIOR)
 
 						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
 						possible_new_valerens -= discipline_types
@@ -1378,10 +1378,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<h2>[make_font_cool("OOC")]</h2>"
 			dat += "<b>Window Flashing:</b> <a href='byond://?_src_=prefs;preference=winflash'>[(windowflashing) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<br>"
-			dat += "<b>Play Admin MIDIs:</b> <a href='byond://?_src_=prefs;preference=hear_midis'>[(toggles & SOUND_MIDI) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>Play Lobby Music:</b> <a href='byond://?_src_=prefs;preference=lobby_music'>[(toggles & SOUND_LOBBY) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>Play End of Round Sounds:</b> <a href='byond://?_src_=prefs;preference=endofround_sounds'>[(toggles & SOUND_ENDOFROUND) ? "Enabled":"Disabled"]</a><br>"
-			dat += "<b>See Pull Requests:</b> <a href='byond://?_src_=prefs;preference=pull_requests'>[(chat_toggles & CHAT_PULLR) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>Play Admin MIDIs:</b> <a href='?_src_=prefs;preference=hear_midis'>[(toggles & SOUND_MIDI) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>Play Lobby Music:</b> <a href='?_src_=prefs;preference=lobby_music'>[(toggles & SOUND_LOBBY) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>Play End of Round Sounds:</b> <a href='?_src_=prefs;preference=endofround_sounds'>[(toggles & SOUND_ENDOFROUND) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>Play Combat Mode Sounds:</b> <a href='?_src_=prefs;preference=combat_mode_sound'>[(toggles & SOUND_COMBATMODE) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<b>See Pull Requests:</b> <a href='?_src_=prefs;preference=pull_requests'>[(chat_toggles & CHAT_PULLR) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<br>"
 
 
@@ -2366,7 +2367,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						eye_color = sanitize_hexcolor(new_eyes)
 
 				if("newdiscipline")
-					if((player_experience < 10) || !(pref_species.id == "kindred") || !(clane.name == "Caitiff"))
+					if((player_experience < 10) || !(pref_species.id == "kindred") || !(clane.name == CLAN_NONE))
 						return
 
 					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
@@ -2386,7 +2387,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						experience_used_on_character += 10
 
 				if("newvaleren")
-					if((player_experience < 10) || !(pref_species.id == "kindred") || !((clane.name == "Salubri") || (clane.name == "Salubri Warrior")))
+					if((player_experience < 10) || !(pref_species.id == "kindred") || !((clane.name == CLAN_SALUBRI) || (clane.name == CLAN_SALUBRI_WARRIOR)))
 						return
 
 					var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
@@ -2549,7 +2550,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						clane = new newtype()
 						discipline_types = list()
 						discipline_levels = list()
-						if(result == "Caitiff")
+						if(result == CLAN_NONE)
 							generation = 13
 							for (var/i = clane.clane_disciplines.len; i < 3; i++)
 								if (slotlocked)
@@ -2706,7 +2707,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/cost = discipline_level * 7
 						if (discipline_level <= 0)
 							cost = 10
-						else if (clane.name == "Caitiff")
+						else if (clane.name == CLAN_NONE)
 							cost = discipline_level * 6
 						else if (clane.common_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 6
@@ -2855,7 +2856,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						po = max_limit-sett
 
 				if("generation")
-					if((clane?.name == "Caitiff") || (player_experience < 20))
+					if((clane?.name == CLAN_NONE) || (player_experience < 20))
 						return
 
 					player_experience -= 20
@@ -2938,7 +2939,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					slotlocked = FALSE
 
 				if("reset_with_bonus")
-					if((clane?.name == "Caitiff") || !generation_bonus)
+					if((clane?.name == CLAN_NONE) || !generation_bonus)
 						return
 
 					var/bonus = generation-generation_bonus
@@ -3408,6 +3409,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("endofround_sounds")
 					toggles ^= SOUND_ENDOFROUND
 
+				if("combat_mode_sound")
+					toggles ^= SOUND_COMBATMODE
+
 				if("ghost_ears")
 					if(isobserver(user.client.mob))
 						if(isavatar(user.client.mob))
@@ -3768,8 +3772,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				character.auspice.start_gnosis = 3
 				character.auspice.base_breed = "Crinos"
 		if(character.transformator?.crinos_form && character.transformator?.lupus_form && !HAS_TRAIT(character,TRAIT_CORAX))
-			var/mob/living/carbon/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
-			var/mob/living/carbon/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
+			var/mob/living/simple_animal/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
+			var/mob/living/simple_animal/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
 
 			if(!crinos)
 				character.transformator.crinos_form = null
@@ -3787,10 +3791,18 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			lupus.sprite_eye_color = werewolf_eye_color
 
 			if(werewolf_name)
+				crinos.real_name = werewolf_name
+				crinos.true_real_name = werewolf_name
 				crinos.name = werewolf_name
+				lupus.real_name = werewolf_name
+				lupus.true_real_name = werewolf_name
 				lupus.name = werewolf_name
 			else
+				crinos.real_name = real_name
+				crinos.true_real_name = real_name
 				crinos.name = real_name
+				lupus.real_name = real_name
+				lupus.true_real_name = real_name
 				lupus.name = real_name
 
 			crinos.physique = physique
@@ -3810,8 +3822,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
 			crinos.health = crinos.maxHealth
 		else if(HAS_TRAIT(character,TRAIT_CORAX)/*character.transformator?.corax_form && character.transformator?.corvid_form*/) // if we have the Corax tribe, use the Corax forms instead..
-			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
-			var/mob/living/carbon/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
+			var/mob/living/simple_animal/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
+			var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
 
 			if(!cor_crinos)
 				character.transformator.corax_form = null

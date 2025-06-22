@@ -7,7 +7,7 @@
 
 /datum/discipline/thaumaturgy/post_gain()
 	. = ..()
-	owner.faction |= "Tremere"
+	owner.faction |= CLAN_TREMERE
 	if(level >= 1)
 		var/datum/action/thaumaturgy/thaumaturgy = new()
 		thaumaturgy.Grant(owner)
@@ -259,8 +259,6 @@
 	if(iscarbon(target))
 		new /obj/effect/temp_visual/tremere(target.loc, "gib")
 
-
-
 		target.visible_message(span_danger("[target] reddens and quakes!"), span_userdanger("Your veins feel like they're on fire!"))
 
 		var/dice = clamp(target.get_total_physique(), 1, 8)
@@ -302,6 +300,7 @@
 	target.apply_damage(20, BURN, owner.zone_selected)
 	target.emote("twitch")
 	target.visible_message(span_warning("[target] begins to violently shake!"), span_userdanger("You feel yourself trembling uncontrollably!"))
+	playsound(target, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 
 /datum/discipline_power/thaumaturgy/cauldron_of_blood/proc/blood_burn_stage2(mob/living/target)
 	if(!target) return
@@ -317,7 +316,8 @@
 	target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
 	target.emote("collapse")
 
-//MISCELLANEOUS BULLSHIT
+
+//RUNE DRAWING
 /datum/action/thaumaturgy
 	name = "Thaumaturgy"
 	desc = "Blood magic rune drawing."
@@ -327,7 +327,7 @@
 	var/drawing = FALSE
 	var/level = 1
 
-/datum/action/thaumaturgy/Trigger()
+/datum/action/thaumaturgy/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(H.bloodpool < 2)
@@ -337,18 +337,19 @@
 		return
 
 	if(istype(H.get_active_held_item(), /obj/item/arcane_tome))
-		var/list/shit = list()
+		var/list/rune_names = list()
 		for(var/i in subtypesof(/obj/ritualrune))
 			var/obj/ritualrune/R = new i(owner)
 			if(R.thaumlevel <= level)
-				shit += i
+				rune_names[R.name] = i
 			qdel(R)
-		var/ritual = input(owner, "Choose rune to draw:", "Thaumaturgy") as null|anything in shit
+		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Thaumaturgy", rune_names)
 		if(ritual)
 			drawing = TRUE
 			if(do_after(H, 3 SECONDS * max(1, 5 - H.get_total_mentality()), H))
 				drawing = FALSE
-				new ritual(H.loc)
+				var/ritual_type = rune_names[ritual]
+				new ritual_type(H.loc)
 				H.bloodpool = max(H.bloodpool - 2, 0)
 				if(H.CheckEyewitness(H, H, 7, FALSE))
 					H.AdjustMasquerade(-1)
@@ -361,7 +362,7 @@
 			if(R.thaumlevel <= level)
 				shit += i
 			qdel(R)
-		var/ritual = input(owner, "Choose rune to draw (You need an Arcane Tome to reduce random):", "Thaumaturgy") as null|anything in list("???")
+		var/ritual = tgui_input_list(owner, "Choose rune to draw (You need an Arcane Tome to reduce random):", "Thaumaturgy", list("???"))
 		if(ritual)
 			drawing = TRUE
 			if(do_after(H, 3 SECONDS * max(1, 5 - H.get_total_mentality()), H))
@@ -382,7 +383,7 @@
 	vampiric = TRUE
 	var/abuse_fix = 0
 
-/datum/action/bloodshield/Trigger()
+/datum/action/bloodshield/Trigger(trigger_flags)
 	. = ..()
 	if((abuse_fix + 25 SECONDS) > world.time)
 		return
