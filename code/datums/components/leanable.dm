@@ -18,14 +18,12 @@
 /datum/component/leanable/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_MOUSEDROPPED_ONTO, PROC_REF(mousedrop_receive))
 	RegisterSignal(leaning_mob, COMSIG_LIVING_STOPPED_LEANING, PROC_REF(stopped_leaning))
-	RegisterSignal(parent, COMSIG_ATOM_DENSITY_CHANGED, PROC_REF(on_density_change))
 	if(!mousedrop_receive(parent, leaning_mob, leaning_mob))
 		stopped_leaning(src)
 
 /datum/component/leanable/UnregisterFromParent()
 	UnregisterSignal(parent, COMSIG_MOUSEDROPPED_ONTO)
 	UnregisterSignal(leaning_mob, COMSIG_LIVING_STOPPED_LEANING)
-	UnregisterSignal(parent, COMSIG_ATOM_DENSITY_CHANGED)
 	leaning_mob = null
 
 /datum/component/leanable/proc/stopped_leaning(obj/source)
@@ -52,12 +50,6 @@
 
 	leaner.apply_status_effect(STATUS_EFFECT_LEANING, source, leaning_offset)
 	return TRUE
-
-/datum/component/leanable/proc/on_density_change()
-	SIGNAL_HANDLER
-	is_currently_leanable = !is_currently_leanable
-	if(!is_currently_leanable)
-		leaning_mob.stop_leaning(src)
 
 /**
  * Makes the mob lean on an atom
