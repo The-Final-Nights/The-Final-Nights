@@ -10,7 +10,11 @@
 	var/datum/chi_discipline/discipline
 	var/active_check = FALSE
 
-/datum/action/chi_discipline/Trigger()
+/datum/action/chi_discipline/Trigger(trigger_flags)
+	. = ..()
+	if(trigger_flags & TRIGGER_SECONDARY_ACTION)
+		switch_level()
+		return .
 	if(discipline && isliving(owner))
 		var/mob/living/owning = owner
 		if(discipline.ranged)
@@ -29,7 +33,6 @@
 			if(discipline)
 				if(discipline.check_activated(owner, owner))
 					discipline.activate(owner, owner)
-	. = ..()
 
 /datum/action/chi_discipline/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
 	button_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
@@ -70,15 +73,6 @@
 			if(L.chi_ranged.discipline.check_activated(src, usr))
 				L.chi_ranged.discipline.activate(src, usr)
 			L.chi_ranged = null
-	. = ..()
-
-/atom/movable/screen/movable/action_button/Click(location,control,params)
-	if(istype(linked_action, /datum/action/chi_discipline))
-		var/list/modifiers = params2list(params)
-		if(LAZYACCESS(modifiers, "right"))
-			var/datum/action/chi_discipline/D = linked_action
-			D.switch_level()
-			return
 	. = ..()
 
 /datum/chi_discipline
@@ -221,7 +215,6 @@
 	health = 100
 	melee_damage_lower = 1
 	melee_damage_upper = 1
-	a_intent = INTENT_HELP
 	attack_verb_continuous = "splashes"
 	attack_verb_simple = "splash"
 
@@ -659,7 +652,7 @@
 			var/mob/living/simple_animal/hostile/beastmaster/fireball/living_fireball = new(get_turf(caster))
 			living_fireball.my_creator = caster
 			caster.beastmaster |= living_fireball
-			living_fireball.beastmaster = caster
+			living_fireball.beastmaster_owner = caster
 		if(3)
 			caster.drop_all_held_items()
 			caster.put_in_active_hand(new /obj/item/gun/magic/ghostflame_shintai(caster))
@@ -947,7 +940,7 @@
 	icon_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
-/datum/action/choose_demon_form/Trigger()
+/datum/action/choose_demon_form/Trigger(trigger_flags)
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/user = usr
 		var/new_form = input(user, "Choose your Demon Form", "Demon Form") as null|anything in list("Samurai", "Tentacles", "Demon", "Giant", "Foul")
@@ -1228,7 +1221,7 @@
 		set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 		step_to(src,caster,0)
 		face_atom(caster)
-		a_intent = INTENT_HARM
+		set_combat_mode(TRUE)
 		drop_all_held_items()
 		UnarmedAttack(caster)
 
@@ -1336,7 +1329,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 10
@@ -1360,7 +1352,7 @@
 				deaggro_action.Grant(caster)
 			var/mob/living/simple_animal/hostile/beastmaster/rat/rat = new(get_turf(caster))
 			caster.beastmaster |= rat
-			rat.beastmaster = caster
+			rat.beastmaster_owner = caster
 		if(2)
 			if(!length(caster.beastmaster))
 				var/datum/action/beastmaster_stay/stay_action = new()
@@ -1369,7 +1361,7 @@
 				deaggro_action.Grant(caster)
 			var/mob/living/simple_animal/hostile/beastmaster/cat/cat = new(get_turf(caster))
 			caster.beastmaster |= cat
-			cat.beastmaster = caster
+			cat.beastmaster_owner = caster
 		if(3)
 			if(!length(caster.beastmaster))
 				var/datum/action/beastmaster_stay/stay_action = new()
@@ -1378,7 +1370,7 @@
 				deaggro_action.Grant(caster)
 			var/mob/living/simple_animal/hostile/beastmaster/dog = new(get_turf(caster))
 			caster.beastmaster |= dog
-			dog.beastmaster = caster
+			dog.beastmaster_owner = caster
 		if(4)
 			if(!length(caster.beastmaster))
 				var/datum/action/beastmaster_stay/stay_action = new()
@@ -1387,7 +1379,7 @@
 				deaggro_action.Grant(caster)
 			var/mob/living/simple_animal/hostile/beastmaster/rat/flying/bat = new(get_turf(caster))
 			caster.beastmaster |= bat
-			bat.beastmaster = caster
+			bat.beastmaster_owner = caster
 		if(5)
 			wolflike_shapeshift.Shapeshift(caster)
 			spawn(10 SECONDS + caster.discipline_time_plus)
@@ -1446,7 +1438,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 0
