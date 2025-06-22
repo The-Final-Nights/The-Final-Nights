@@ -44,6 +44,17 @@
 		highest_scar = new
 		highest_scar.generate(limb, src, add_to_scars=FALSE)
 
+/datum/wound/slash/proc/set_highest_scar(datum/scar/new_scar)
+	if(highest_scar)
+		UnregisterSignal(highest_scar, COMSIG_QDELETING)
+	if(new_scar)
+		RegisterSignal(new_scar, COMSIG_QDELETING, PROC_REF(clear_highest_scar))
+	highest_scar = new_scar
+
+/datum/wound/slash/proc/clear_highest_scar(datum/source)
+	SIGNAL_HANDLER
+	set_highest_scar(null)
+
 /datum/wound/slash/remove_wound(ignore_limb, replaced)
 	if(!replaced && highest_scar)
 		already_scarred = TRUE
