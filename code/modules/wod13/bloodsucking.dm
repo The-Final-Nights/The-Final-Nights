@@ -7,14 +7,6 @@
 		if(src)
 			remove_overlay(BITE_LAYER)
 
-/proc/get_needed_difference_between_numbers(number1, number2)
-	if(number1 > number2)
-		return number1 - number2
-	else if(number1 < number2)
-		return number2 - number1
-	else
-		return 1
-
 /mob/living/carbon/human/proc/drinksomeblood(mob/living/mob)
 	if(!mob)
 		return

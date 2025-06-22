@@ -40,8 +40,8 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/in_love
-	name = "In Blood Bond"
-	desc = "You feel so wonderfully in bond!"
+	name = "In Love"
+	desc = "You feel so wonderfully in love!"
 	icon_state = "in_love"
 
 /datum/status_effect/in_love
@@ -55,12 +55,12 @@
 	. = ..()
 	if(.)
 		date = love_interest
-		linked_alert.desc = "You're in blood bond with [date.real_name]! How lovely."
-/*
+		linked_alert.desc = "You're in love with [date.real_name]! How lovely."
+
 /datum/status_effect/in_love/tick()
 	if(date)
 		new /obj/effect/temp_visual/love_heart/invisible(date.drop_location(), owner)
-*/
+
 /datum/status_effect/throat_soothed
 	id = "throat_soothed"
 	duration = 60 SECONDS

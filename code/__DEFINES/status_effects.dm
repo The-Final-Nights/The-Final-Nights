@@ -124,6 +124,8 @@
 
 #define STATUS_EFFECT_LEANING /datum/status_effect/leaning //! Makes you lean on something
 
+#define STATUS_EFFECT_BLOOD_BONDED /datum/status_effect/blood_bonded // Used for when someone drinks a kindred's blood
+
 /////////////
 //  SLIME  //
 /////////////
