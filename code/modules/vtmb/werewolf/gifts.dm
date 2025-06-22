@@ -276,16 +276,16 @@
 	. = ..()
 
 	var/datum/atom_hud/sense_wyrm_hud = GLOB.huds[DATA_HUD_SENSEWYRM]
-	var/mob/living/carbon/werewolf/theurge = owner
+	var/mob/living/simple_animal/werewolf/theurge = owner
 	var/mob/living/carbon/human/homid = theurge.transformator.human_form?.resolve()
 	if (HAS_TRAIT(theurge, TRAIT_CORAX) || iscorvid(theurge)) // we add the aura vision to every used form. Corax don't use werewolf forms, so we don't care.
-		var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = theurge.transformator.corax_form?.resolve()
-		var/mob/living/carbon/werewolf/lupus/corvid/corvid = theurge.transformator.corvid_form?.resolve()
+		var/mob/living/simple_animal/werewolf/corax/corax_crinos/cor_crinos = theurge.transformator.corax_form?.resolve()
+		var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = theurge.transformator.corvid_form?.resolve()
 		sense_wyrm_hud.add_hud_to(corvid)
 		sense_wyrm_hud.add_hud_to(cor_crinos)
 	else
-		var/mob/living/carbon/werewolf/lupus/lupus = theurge.transformator.lupus_form?.resolve()
-		var/mob/living/carbon/werewolf/crinos/crinos = theurge.transformator.crinos_form?.resolve()
+		var/mob/living/simple_animal/werewolf/lupus/lupus = theurge.transformator.lupus_form?.resolve()
+		var/mob/living/simple_animal/werewolf/crinos/crinos = theurge.transformator.crinos_form?.resolve()
 		sense_wyrm_hud.add_hud_to(lupus)
 		sense_wyrm_hud.add_hud_to(crinos)
 	sense_wyrm_hud.add_hud_to(homid)

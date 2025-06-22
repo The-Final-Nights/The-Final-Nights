@@ -73,7 +73,7 @@
 		if (istype(vampire.clane, /datum/vampireclane/kiasyd)) //the fae are Wyld-tainted by default
 			wyrm_taint--
 
-	if (isgarou(src) || iswerewolf(src) || iscorax(src)) // werewolves have the taint of whatever Triat member they venerate most
+	if (isgarou(src) || iswerewolf(src)) // werewolves have the taint of whatever Triat member they venerate most
 		var/mob/living/carbon/wolf = src
 
 		if (wolf.auspice.tribe.name == "Black Spiral Dancers")
@@ -82,8 +82,8 @@
 		if(HAS_TRAIT(wolf,TRAIT_WYRMTAINTED))
 			wyrm_taint++
 
-		if(istype(wolf,/mob/living/carbon/werewolf))
-			var/mob/living/carbon/werewolf/werewolf = src
+		if(istype(wolf,/mob/living/simple_animal/werewolf))
+			var/mob/living/simple_animal/werewolf/werewolf = src
 			if(werewolf.wyrm_tainted)
 				wyrm_taint++
 
