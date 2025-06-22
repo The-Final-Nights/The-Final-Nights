@@ -285,11 +285,7 @@
 		return TRUE //bypass for borg tablets
 	if (low_power_mode)
 		return FALSE
-	var/turf/T0 = get_turf(src)
-	var/turf/T1 = get_turf(A)
-	if (!T0 || ! T1)
-		return FALSE
-	return ISINRANGE(T1.x, T0.x - interaction_range, T0.x + interaction_range) && ISINRANGE(T1.y, T0.y - interaction_range, T0.y + interaction_range)
+	return ..()
 
 /mob/living/silicon/robot/proc/allowed(mob/M)
 	//check if it doesn't require any access at all
@@ -824,7 +820,7 @@
 	icon_icon = 'icons/mob/actions/actions_AI.dmi'
 	button_icon_state = "ai_core"
 
-/datum/action/innate/undeployment/Trigger()
+/datum/action/innate/undeployment/Trigger(trigger_flags)
 	if(!..())
 		return FALSE
 	var/mob/living/silicon/robot/R = owner
@@ -861,7 +857,7 @@
 
 /mob/living/silicon/robot/mouse_buckle_handling(mob/living/M, mob/living/user)
 	//Don't try buckling on INTENT_HARM so that silicons can search people's inventories without loading them
-	if(can_buckle && isliving(user) && isliving(M) && !(M in buckled_mobs) && ((user != src) || (a_intent != INTENT_HARM)))
+	if(can_buckle && isliving(user) && isliving(M) && !(M in buckled_mobs) && ((user != src) || (!combat_mode)))
 		return user_buckle_mob(M, user, check_loc = FALSE)
 
 /mob/living/silicon/robot/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE, buckle_mob_flags= RIDER_NEEDS_ARM)

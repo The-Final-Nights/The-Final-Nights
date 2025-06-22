@@ -1,4 +1,4 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/carbon/human/examine(mob/living/user)
 //this is very slightly better than it was because you can use it more places. still can't do \his[src] though.
 	var/t_He = p_they(TRUE)
 	var/t_His = p_their(TRUE)
@@ -64,7 +64,6 @@
 					. += "<b>You know [p_them()] as a [job]. You are of the same bloodline.</b>"
 	if((isgarou(user) || iswerewolf(user)) && isgarou(src) && is_face_visible())
 		var/isknown = 0
-		var/mob/living/carbon/human/werewolf = user
 		var/same_tribe = FALSE
 		var/truescent
 
@@ -75,9 +74,9 @@
 		if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
 			truescent = TRUE
 
-		if(werewolf.auspice?.tribe.name == auspice?.tribe.name)
+		if(user.auspice?.tribe.name == auspice?.tribe.name)
 			same_tribe = TRUE
-			if(werewolf.auspice.tribe.name == "Black Spiral Dancers")
+			if(user.auspice.tribe.name == "Black Spiral Dancers")
 				honorr = list("strength and will", "complete defeat of [t_his] enemies", "awesome destruction in service of the Wyrm")
 				wisdomm = list("knowledge of twisted machinations", "ability to turn [t_his] enemies against themselves", "brilliantly depraved plots in service of the Wyrm")
 				gloryy = list("trials in service of the Wyrm", "many victories in name of the Wyrm", "great conquests in the Wyrm's service")
@@ -423,7 +422,7 @@
 
 		if(src != user)
 			if(HAS_TRAIT(user, TRAIT_EMPATH))
-				if (a_intent != INTENT_HELP)
+				if (combat_mode)
 					msg += "[t_He] seem[p_s()] to be on guard.\n"
 				if (getOxyLoss() >= 10)
 					msg += "[t_He] seem[p_s()] winded.\n"
@@ -541,8 +540,8 @@
 					wyrm_taint++
 					wyld_taint--
 					weaver_taint--
-				if(istype(wolf,/mob/living/carbon/werewolf))
-					var/mob/living/carbon/werewolf/werewolf = src
+				if(istype(wolf,/mob/living/simple_animal/werewolf))
+					var/mob/living/simple_animal/werewolf/werewolf = src
 					if(werewolf.wyrm_tainted)
 						wyrm_taint++
 						wyld_taint--

@@ -333,7 +333,6 @@
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
 	attack_sound = 'sound/weapons/punch1.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	status_flags = CANPUSH
@@ -360,7 +359,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	faction = list(CLAN_TZIMISCE)
@@ -387,14 +385,12 @@
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
 	attack_sound = 'sound/weapons/punch1.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 10
 	maxbloodpool = 10
 	dextrous = TRUE
 	held_items = list(null, null)
-	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 	faction = list(CLAN_TREMERE)
 
 /mob/living/simple_animal/hostile/gargoyle/proc/gain_sentience()
@@ -426,7 +422,7 @@
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	var/abuse_fix = 0
 
-/datum/action/gargoyle/Trigger()
+/datum/action/gargoyle/Trigger(trigger_flags)
 	. = ..()
 	if(abuse_fix+100 > world.time)
 		return
@@ -458,7 +454,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 10
@@ -483,7 +478,6 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 20

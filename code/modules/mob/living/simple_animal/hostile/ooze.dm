@@ -23,7 +23,7 @@
 	attack_verb_continuous = "slimes"
 	attack_verb_simple = "slime"
 	attack_sound = 'sound/effects/blobattack.ogg'
-	a_intent = INTENT_HARM
+	combat_mode = TRUE
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 	mob_size = MOB_SIZE_LARGE
 	initial_language_holder = /datum/language_holder/slime
@@ -49,7 +49,7 @@
 		return ..()
 	eat_atom(attacked_target)
 
-/mob/living/simple_animal/hostile/ooze/UnarmedAttack(atom/A)
+/mob/living/simple_animal/hostile/ooze/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
 	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
 		return
 	if(!check_edible(A))
@@ -168,7 +168,7 @@
 	return (ooze.ooze_nutrition >= nutrition_cost && !active)
 
 ///Give the mob a speed boost, heat it up every second, and end the ability in 6 seconds
-/datum/action/cooldown/metabolicboost/Trigger()
+/datum/action/cooldown/metabolicboost/Trigger(trigger_flags)
 	. = ..()
 	if(!.)
 		return
@@ -216,7 +216,7 @@
 	stop_consuming() //Shit out the vored mob before u go go
 
 ///Try to consume the pulled mob
-/datum/action/consume/Trigger()
+/datum/action/consume/Trigger(trigger_flags)
 	. = ..()
 	if(!.)
 		return
@@ -432,7 +432,7 @@
 	cooldown_time = 10 SECONDS
 
 ///Try to put the pulled mob in a cocoon
-/datum/action/cooldown/gel_cocoon/Trigger()
+/datum/action/cooldown/gel_cocoon/Trigger(trigger_flags)
 	. = ..()
 	if(!.)
 		return

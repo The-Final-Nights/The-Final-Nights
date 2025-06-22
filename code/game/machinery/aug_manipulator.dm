@@ -49,7 +49,7 @@
 		storedpart = null
 		update_appearance()
 
-/obj/machinery/aug_manipulator/attackby(obj/item/O, mob/user, params)
+/obj/machinery/aug_manipulator/attackby(obj/item/O, mob/living/user, params)
 	if(default_unfasten_wrench(user, O))
 		power_change()
 		return
@@ -70,7 +70,7 @@
 			O.add_fingerprint(user)
 			update_appearance()
 
-	else if(O.tool_behaviour == TOOL_WELDER && user.a_intent != INTENT_HARM)
+	else if(O.tool_behaviour == TOOL_WELDER && !user.combat_mode)
 		if(atom_integrity < max_integrity)
 			if(!O.tool_start_check(user, amount=0))
 				return
@@ -91,7 +91,7 @@
 	else
 		return ..()
 
-/obj/machinery/aug_manipulator/attack_hand(mob/user)
+/obj/machinery/aug_manipulator/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
