@@ -292,7 +292,7 @@
 		sense_wyrm_hud.add_hud_to(crinos)
 	sense_wyrm_hud.add_hud_to(homid)
 	theurge.update_sight()
-	to_chat(owner, span_purple("You open your eyes to the wyrm's corruption, it will be impossible to unsee for the remainder of the night.")) // you can't stop seeing wyrm taint once you learn the gift, this is a lazy way of making this work.
+	to_chat(owner, span_purple("You open your senses to the wyrm's corruption, it will be impossible to ignore for the remainder of the night.")) // you can't stop seeing wyrm taint once you learn the gift, this is a lazy way of making this work.
 
 /datum/action/gift/spirit_speech
 	name = "Spirit Speech"
