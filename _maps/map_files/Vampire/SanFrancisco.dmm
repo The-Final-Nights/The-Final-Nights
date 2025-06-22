@@ -24403,7 +24403,9 @@
 /area/vtm/forest)
 "fBP" = (
 /obj/structure/closet/crate,
-/obj/item/defibrillator/compact/combat/loaded/nanotrasen,
+/obj/item/defibrillator/compact/combat/loaded/nanotrasen{
+	name = "elite defibrillator"
+	},
 /obj/item/healthanalyzer/advanced,
 /obj/item/scalpel/advanced,
 /obj/item/cautery/advanced,
