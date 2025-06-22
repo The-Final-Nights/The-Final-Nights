@@ -53,8 +53,8 @@
 	component_type = /datum/component/storage/concrete/vtm/belt
 
 /obj/item/storage/belt/endron/full/PopulateContents()
-	new /obj/item/ammo_box/magazine/semi9mm (src)
-	new /obj/item/gun/ballistic/automatic/vampire/beretta (src)
+	new /obj/item/ammo_box/magazine/semi9mm(src)
+	new /obj/item/gun/ballistic/automatic/vampire/beretta(src)
 	new /obj/item/reagent_containers/spray/pepper(src)
 	new /obj/item/restraints/handcuffs(src)
 	new /obj/item/melee/baton/handtaser(src)

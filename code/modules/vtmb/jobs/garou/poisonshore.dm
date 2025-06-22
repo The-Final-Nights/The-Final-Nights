@@ -292,7 +292,6 @@
 
 	id = /obj/item/card/id/garou/spiral/sec
 	uniform =  /obj/item/clothing/under/pentex/pentex_shortsleeve
-	mask = /obj/item/clothing/mask/pentex/pentex_balaclava
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	gloves = /obj/item/clothing/gloves/vampire/work
 	suit = /obj/item/clothing/suit/vampire/vest
