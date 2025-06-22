@@ -205,13 +205,13 @@
 	list_reagents = list(/datum/reagent/spraytan = 50)
 
 
-//pepperspray
+//
 /obj/item/reagent_containers/spray/pepper
-	name = "pepperspray"
+	name = ""
 	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
 	icon = 'icons/obj/items_and_weapons.dmi'
-	icon_state = "pepperspray"
-	inhand_icon_state = "pepperspray"
+	icon_state = ""
+	inhand_icon_state = ""
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
 	volume = 50
@@ -226,7 +226,7 @@
 	user.visible_message("<span class='suicide'>[user] begins huffing \the [src]! It looks like [user.p_theyre()] getting a dirty high!</span>")
 	return OXYLOSS
 
-// Fix pepperspraying yourself
+// Fix ing yourself
 /obj/item/reagent_containers/spray/pepper/afterattack(atom/A as mob|obj, mob/user)
 	if (A.loc == user)
 		return
