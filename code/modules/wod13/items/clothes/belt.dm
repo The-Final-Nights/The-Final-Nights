@@ -54,7 +54,6 @@
 
 /obj/item/storage/belt/endron/full/PopulateContents()
 	new /obj/item/ammo_box/magazine/vamp45acp(src)
-	new /obj/item/ammo_box/magazine/vamp45acp(src)
 	new /obj/item/gun/ballistic/automatic/vampire/m1911(src)
 	new /obj/item/reagent_containers/spray/pepper(src)
 	new /obj/item/restraints/handcuffs(src)
