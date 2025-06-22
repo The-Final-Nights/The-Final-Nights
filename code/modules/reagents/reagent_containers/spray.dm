@@ -207,11 +207,11 @@
 
 //
 /obj/item/reagent_containers/spray/pepper
-	name = ""
+	name = "pepperspray"
 	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
 	icon = 'icons/obj/items_and_weapons.dmi'
-	icon_state = ""
-	inhand_icon_state = ""
+	icon_state = "pepperspray"
+	inhand_icon_state = "pepperspray"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
 	volume = 50

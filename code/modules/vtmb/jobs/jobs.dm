@@ -554,7 +554,6 @@
 	name = "Endron Branch Leader card"
 	icon_state = "endronexecutiveid"
 	worn_icon_state = "endronexecutiveid"
-	onflooricon = "id2"
 	desc = "How bad can you possibly be?"
 
 /obj/item/card/id/garou/spiral/executive
@@ -567,7 +566,6 @@
 	name = "Endron Internal Affairs card"
 	icon_state = "endroniaaid"
 	worn_icon_state = "endronemployeeid"
-	onflooricon = "id2"
 	desc = "And the Lawyers are denying."
 
 /obj/item/card/id/garou/spiral/secchief
@@ -580,7 +578,6 @@
 	name = "Endron Security Agent badge"
 	icon_state = "endronsecurityid"
 	worn_icon_state = "endronemployeeid"
-	onflooricon = "id2"
 	desc = "Corporate Security, a step above a mall cop. Better paid than a real cop."
 
 /obj/item/card/id/garou/spiral/employee
