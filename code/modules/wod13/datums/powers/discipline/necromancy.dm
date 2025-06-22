@@ -54,7 +54,7 @@
 		var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level1(owner.loc)
 		zombie.my_creator = owner
 		owner.beastmaster |= zombie
-		zombie.beastmaster = owner
+		zombie.beastmaster_owner = owner
 		qdel(target)
 	else
 		target.apply_damage(5, BRUTE, owner.zone_selected)
@@ -100,7 +100,7 @@
 		var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level2(owner.loc)
 		zombie.my_creator = owner
 		owner.beastmaster |= zombie
-		zombie.beastmaster = owner
+		zombie.beastmaster_owner = owner
 		qdel(target)
 	else
 		target.apply_damage(10, BRUTE, owner.zone_selected)
@@ -120,7 +120,7 @@
 	vampiric = TRUE
 	var/ghosts_visible = FALSE
 
-/datum/action/ghost_hear/Trigger()
+/datum/action/ghost_hear/Trigger(trigger_flags)
 	. = ..()
 	if(ghosts_visible == TRUE)
 		deactivate()
@@ -182,7 +182,7 @@
 		var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3(owner.loc)
 		zombie.my_creator = owner
 		owner.beastmaster |= zombie
-		zombie.beastmaster = owner
+		zombie.beastmaster_owner = owner
 		qdel(target)
 	else
 		target.apply_damage(15, BRUTE, owner.zone_selected)
@@ -228,7 +228,7 @@
 		var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
 		zombie.my_creator = owner
 		owner.beastmaster |= zombie
-		zombie.beastmaster = owner
+		zombie.beastmaster_owner = owner
 		qdel(target)
 	else
 		target.apply_damage(20, BRUTE, owner.zone_selected)
@@ -274,7 +274,7 @@
 		var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5(owner.loc)
 		zombie.my_creator = owner
 		owner.beastmaster |= zombie
-		zombie.beastmaster = owner
+		zombie.beastmaster_owner = owner
 		qdel(target)
 	else
 		target.apply_damage(25, BRUTE, owner.zone_selected)

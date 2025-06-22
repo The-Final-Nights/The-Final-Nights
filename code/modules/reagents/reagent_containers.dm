@@ -6,6 +6,8 @@
 	w_class = WEIGHT_CLASS_TINY
 	var/amount_per_transfer_from_this = 5
 	var/list/possible_transfer_amounts = list(5,10,15,20,25,30)
+	/// Where we are in the possible transfer amount list.
+	var/amount_list_position = 1
 	var/volume = 30
 	var/reagent_flags
 	var/list/list_reagents = null
@@ -28,12 +30,24 @@
 
 	add_initial_reagents()
 
+/obj/item/reagent_containers/examine()
+	. = ..()
+	if(possible_transfer_amounts.len > 1)
+		. += "<span class='notice'>Left-click or right-click in-hand to increase or decrease its transfer amount.</span>"
+	else if(possible_transfer_amounts.len)
+		. += "<span class='notice'>Left-click or right-click in-hand to view its transfer amount.</span>"
+
 /obj/item/reagent_containers/create_reagents(max_vol, flags)
 	. = ..()
 	RegisterSignals(reagents, list(COMSIG_REAGENTS_NEW_REAGENT, COMSIG_REAGENTS_ADD_REAGENT, COMSIG_REAGENTS_DEL_REAGENT, COMSIG_REAGENTS_REM_REAGENT), PROC_REF(on_reagent_change))
 	RegisterSignal(reagents, COMSIG_PARENT_QDELETING, PROC_REF(on_reagents_del))
 
 /obj/item/reagent_containers/Destroy()
+	return ..()
+
+/obj/item/reagent_containers/attack(mob/living/M, mob/living/user, params)
+	if (!user.combat_mode)
+		return
 	return ..()
 
 /obj/item/reagent_containers/proc/on_reagents_del(datum/reagents/reagents)
@@ -46,21 +60,74 @@
 		reagents.add_reagent_list(list_reagents)
 
 /obj/item/reagent_containers/attack_self(mob/user)
-	if(possible_transfer_amounts.len)
-		var/i=0
-		for(var/A in possible_transfer_amounts)
-			i++
-			if(A == amount_per_transfer_from_this)
-				if(i<possible_transfer_amounts.len)
-					amount_per_transfer_from_this = possible_transfer_amounts[i+1]
-				else
-					amount_per_transfer_from_this = possible_transfer_amounts[1]
-				balloon_alert(user, "transferring [amount_per_transfer_from_this]u")
-				return
+	change_transfer_amount(user, FORWARD)
 
-/obj/item/reagent_containers/attack(mob/M, mob/user, def_zone)
-	if(user.a_intent == INTENT_HARM)
+/obj/item/reagent_containers/attack_self_secondary(mob/user)
+	change_transfer_amount(user, BACKWARD)
+
+/obj/item/reagent_containers/proc/mode_change_message(mob/user)
+	return
+
+/obj/item/reagent_containers/proc/change_transfer_amount(mob/user, direction = FORWARD)
+	var/list_len = length(possible_transfer_amounts)
+	if(!list_len)
+		return
+	switch(direction)
+		if(FORWARD)
+			amount_list_position = (amount_list_position % list_len) + 1
+		if(BACKWARD)
+			amount_list_position = (amount_list_position - 1) || list_len
+		else
+			CRASH("change_transfer_amount() called with invalid direction value")
+	amount_per_transfer_from_this = possible_transfer_amounts[amount_list_position]
+	balloon_alert(user, "transferring [amount_per_transfer_from_this]u")
+	mode_change_message(user)
+
+/obj/item/reagent_containers/pre_attack_secondary(atom/target, mob/living/user, params)
+	if(!user.combat_mode)
 		return ..()
+	if (try_splash(user, target))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	return ..()
+
+/// Tries to splash the target. Used on both right-click and normal click when in combat mode.
+/obj/item/reagent_containers/proc/try_splash(mob/user, atom/target)
+	if (!spillable)
+		return FALSE
+
+	if (!reagents?.total_volume)
+		return FALSE
+
+	var/punctuation = ismob(target) ? "!" : "."
+
+	var/reagent_text
+	user.visible_message(
+		"<span class='danger'>[user] splashes the contents of [src] onto [target][punctuation]</span>",
+		"<span class='danger'>You splash the contents of [src] onto [target][punctuation]</span>",
+		ignored_mobs = target,
+	)
+
+	if (ismob(target))
+		var/mob/target_mob = target
+		target_mob.show_message(
+			"<span class='userdanger'>[user] splash the contents of [src] onto you!</span>",
+			MSG_VISUAL,
+			"<span class='userdanger'>You feel drenched!</span>",
+		)
+
+	for(var/datum/reagent/reagent as anything in reagents.reagent_list)
+		reagent_text += "[reagent] ([num2text(reagent.volume)]),"
+
+	if(isturf(target) && reagents.reagent_list.len && thrownby)
+		log_combat(thrownby, target, "splashed (thrown) [english_list(reagents.reagent_list)]")
+		message_admins("[ADMIN_LOOKUPFLW(thrownby)] splashed (thrown) [english_list(reagents.reagent_list)] on [target] at [ADMIN_VERBOSEJMP(target)].")
+
+	reagents.expose(target, TOUCH)
+	log_combat(user, target, "splashed", reagent_text)
+	reagents.clear_reagents()
+
+	return TRUE
 
 /obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user)
 	if(!iscarbon(eater))
