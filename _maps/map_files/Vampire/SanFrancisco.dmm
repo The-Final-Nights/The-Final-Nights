@@ -14654,6 +14654,14 @@
 "doa" = (
 /turf/closed/wall/vampwall/junk,
 /area/vtm/fishermanswharf/lower)
+"dod" = (
+/obj/machinery/iv_drip,
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
+	},
+/turf/open/floor/plating/vampplating,
+/area/vtm/clinic)
 "dof" = (
 /obj/structure/vamprocks,
 /turf/open/floor/plating/vampdirt,
@@ -29488,10 +29496,13 @@
 	fire_controled = 1
 	})
 "gKa" = (
-/obj/item/wheelchair,
-/obj/item/wheelchair,
-/obj/item/wheelchair,
-/turf/open/floor/plating/vampplating,
+/obj/structure/vampdoor/simple{
+	name = "Toilet"
+	},
+/obj/effect/turf_decal/siding/white{
+	dir = 1
+	},
+/turf/open/floor/plating/toilet,
 /area/vtm/clinic)
 "gKd" = (
 /obj/structure/small_vamprocks,
@@ -35243,12 +35254,15 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "ifd" = (
-/obj/structure/showcase/machinery/tv{
-	pixel_y = 14;
-	pixel_x = 25;
-	density = 0
+/obj/item/wheelchair,
+/obj/item/wheelchair,
+/obj/item/wheelchair,
+/obj/structure/rack,
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
 	},
-/turf/open/floor/carpet/green,
+/turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "ifh" = (
 /obj/vampire_car/track{
@@ -37744,11 +37758,8 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic/haven)
 "iLm" = (
-/obj/effect/decal/wallpaper/blue,
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/closed/wall/vampwall/painted,
+/obj/structure/filingcabinet/chestdrawer/wheeled,
+/turf/open/floor/carpet/blue,
 /area/vtm/clinic)
 "iLn" = (
 /obj/structure/table,
@@ -40438,9 +40449,10 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior)
 "jqo" = (
-/obj/structure/vampfence{
-	dir = 8
+/obj/structure/fence{
+	dir = 4
 	},
+/obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "jqq" = (
@@ -78963,8 +78975,12 @@
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/park)
 "sal" = (
-/obj/structure/filingcabinet/chestdrawer,
-/turf/open/floor/carpet/blue,
+/obj/machinery/iv_drip,
+/obj/machinery/light{
+	dir = 8;
+	pixel_y = 15
+	},
+/turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "sas" = (
 /obj/effect/decal/wallpaper/paper/darkred,
@@ -95889,6 +95905,7 @@
 /area/vtm/interior/millennium_tower/ventrue)
 "vZu" = (
 /obj/structure/fence/door,
+/obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "vZA" = (
@@ -103219,6 +103236,9 @@
 	dir = 2;
 	name = "Reception";
 	lock_id = "clinicsec"
+	},
+/obj/effect/turf_decal/siding/white{
+	dir = 1
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic)
@@ -265501,12 +265521,12 @@ jcx
 jcx
 jcx
 jcx
-bUt
+mPC
 kqG
 bUt
 bUt
 bUt
-bUt
+mPC
 kqG
 bUt
 bUt
@@ -266277,7 +266297,7 @@ bUt
 bUt
 bUt
 bUt
-bUt
+mPC
 jAZ
 bUt
 bUt
@@ -268058,8 +268078,8 @@ ntq
 ntq
 ntq
 mPC
+anc
 tNy
-ifd
 tNy
 aAt
 jcx
@@ -268314,7 +268334,7 @@ ntq
 ntq
 ntq
 ntq
-bUt
+mPC
 qqA
 bUt
 bUt
@@ -268581,7 +268601,7 @@ jcx
 kjJ
 kXR
 kXR
-sal
+kXR
 bcO
 jcx
 jcx
@@ -268838,7 +268858,7 @@ jcx
 kPL
 vDb
 aCK
-kXR
+iLm
 nZv
 jcx
 sSW
@@ -269600,8 +269620,8 @@ ntq
 ntq
 ntq
 mPC
+anc
 tNy
-ifd
 tNy
 kCX
 jcx
@@ -269856,18 +269876,18 @@ ntq
 ntq
 ntq
 ntq
-bUt
+mPC
 qqA
 bUt
 bUt
-bUt
+kCX
 hFv
 hFv
 bUt
 bUt
 bUt
 bUt
-bUt
+kCX
 hFv
 hFv
 bUt
@@ -270133,7 +270153,7 @@ jcx
 jcx
 jcx
 jcx
-jcx
+dod
 bUt
 bUt
 bUt
@@ -270390,7 +270410,7 @@ jcx
 qtX
 jcx
 jcx
-jcx
+ifd
 bUt
 bwi
 bUt
@@ -271415,11 +271435,11 @@ oOM
 axs
 axs
 axs
-bUt
+kCX
 ocf
 bUt
-iLm
-gKa
+kCX
+nwd
 nwd
 bUt
 ntq
@@ -271675,7 +271695,7 @@ axs
 kCX
 nwd
 vFc
-vFc
+sal
 nwd
 nwd
 bUt
@@ -333080,7 +333100,7 @@ ntq
 ntq
 ntq
 bUt
-bUt
+qBg
 uVe
 bUt
 bUt
@@ -333354,7 +333374,7 @@ jcx
 jcx
 jcx
 jcx
-pwv
+gKa
 rOK
 rOK
 leI
@@ -334365,7 +334385,7 @@ ntq
 ntq
 ntq
 bUt
-bUt
+qBg
 jWR
 bUt
 qBg
