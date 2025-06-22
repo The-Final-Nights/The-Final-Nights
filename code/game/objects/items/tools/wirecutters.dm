@@ -92,7 +92,7 @@
 	toolspeed = 2 //isn't meant for cutting wires
 	random_color = FALSE
 	/// If pulling fangs lasts for the entire ROUND or not.
-	var/permanent = TRUE 
+	var/permanent = TRUE
 
 /obj/item/wirecutters/pliers/bad_pliers
 	name = "pliers"
