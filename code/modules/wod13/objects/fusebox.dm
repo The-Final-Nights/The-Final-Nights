@@ -11,8 +11,6 @@
 
 	//If our shit damaged. bool
 	var/damaged = FALSE
-	//If our shit being repaired. bool
-	var/repairing = FALSE
 	//If our shit is open/closed. bool
 	var/open = FALSE
 
@@ -40,10 +38,6 @@
 
 /obj/fusebox/attackby(obj/item/I, mob/living/user, params)
 	if(I.tool_behaviour == TOOL_WIRECUTTER)
-		if(repairing)
-			return
-
-		repairing = TRUE
 		if(do_after(user, 100, src))
 			open = FALSE
 			damaged = FALSE
@@ -54,7 +48,6 @@
 				A.fire_controled = TRUE
 			for(var/obj/machinery/light/L in A)
 				L.update(FALSE)
-		repairing = FALSE
 		update_icon()
 		return
 
@@ -76,7 +69,7 @@
 	pixel_y = 0
 	density = 1
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
-	var/datum/looping_sound/generator/transformer/soundloop
+	var/datum/looping_sound/generator/soundloop
 
 /obj/fusebox/transformer/Initialize()
 	. = ..()
