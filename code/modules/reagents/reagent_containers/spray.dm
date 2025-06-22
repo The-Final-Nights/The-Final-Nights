@@ -205,7 +205,7 @@
 	list_reagents = list(/datum/reagent/spraytan = 50)
 
 
-//
+//pepperspray
 /obj/item/reagent_containers/spray/pepper
 	name = "pepperspray"
 	desc = "Manufactured by UhangInc, used to blind and down an opponent quickly."
@@ -226,7 +226,7 @@
 	user.visible_message("<span class='suicide'>[user] begins huffing \the [src]! It looks like [user.p_theyre()] getting a dirty high!</span>")
 	return OXYLOSS
 
-// Fix ing yourself
+// Fix pepperspraying yourself
 /obj/item/reagent_containers/spray/pepper/afterattack(atom/A as mob|obj, mob/user)
 	if (A.loc == user)
 		return
