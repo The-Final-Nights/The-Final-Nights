@@ -437,7 +437,7 @@
 /obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai
 	name = "green dangerous smoke"
 
-/datum/effect_system/smoke_spread/bad/green/bone_shintai
+/datum/effect_system/fluid_spread/smoke/bad/green/bone_shintai
 	effect_type = /obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai
 
 /obj/effect/particle_effect/fluid/smoke/bad/green/bone_shintai/smoke_mob(mob/living/carbon/inhaling_mob)
@@ -508,7 +508,7 @@
 					qdel(lefthand_boneknife)
 		if(4)
 			playsound(get_turf(caster), 'sound/effects/smoke.ogg', 50, TRUE)
-			var/datum/effect_system/smoke_spread/bad/green/bone_shintai/smoke = new
+			var/datum/effect_system/fluid_spread/smoke/bad/green/bone_shintai/smoke = new
 			smoke.set_up(4, caster)
 			smoke.start()
 			qdel(smoke)
@@ -1125,7 +1125,7 @@
 	name = "dark red smoke"
 	color = "#6f0000"
 
-/datum/effect_system/smoke_spread/bad/yomi
+/datum/effect_system/fluid_spread/smoke/bad/yomi
 	effect_type = /obj/effect/particle_effect/fluid/smoke/bad/yomi
 
 /obj/effect/particle_effect/fluid/smoke/bad/yomi/smoke_mob(mob/living/carbon/inhaling_mob)
@@ -1151,7 +1151,7 @@
 			target.clear_fullscreen("yomi", 5)
 		if(2)
 			playsound(get_turf(target), 'code/modules/wod13/sounds/portal.ogg', 100, TRUE)
-			var/datum/effect_system/smoke_spread/bad/yomi/smoke = new
+			var/datum/effect_system/fluid_spread/smoke/bad/yomi/smoke = new
 			smoke.set_up(2, target)
 			smoke.start()
 		if(3)
@@ -1452,7 +1452,7 @@
 		hidden_smoke_shapeshift = new(caster)
 	switch(level_casting)
 		if(1)
-			var/datum/effect_system/smoke_spread/bad/smoke = new
+			var/datum/effect_system/fluid_spread/smoke/bad/smoke = new
 			smoke.set_up(4, caster)
 			smoke.start()
 			playsound(get_turf(caster), 'sound/effects/smoke.ogg', 50, TRUE)
@@ -2025,7 +2025,7 @@
 				if(do_mob(caster, caster, delay))
 					var/area/thearea = GLOB.teleportlocs[teleport_to]
 
-					var/datum/effect_system/smoke_spread/smoke = new
+					var/datum/effect_system/fluid_spread/smoke/smoke = new
 					smoke.set_up(2, caster.loc)
 					smoke.attach(caster)
 					smoke.start()

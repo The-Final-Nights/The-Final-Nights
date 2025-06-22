@@ -171,7 +171,7 @@ Dancer
 	lose_text = "<span class='notice'>You feel your emotions quell to something more manageable.</span>"
 	allowed_species = list("Vampire", "Kuei-Jin")
 
-/datum/quirk/frenetic_aura/on_spawn()
+/datum/quirk/frenetic_aura/post_add()
 	var/mob/living/carbon/human/H = quirk_holder
 	H.clane.frenzymod += 1
 

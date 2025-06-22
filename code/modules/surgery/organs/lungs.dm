@@ -101,11 +101,11 @@
 	if(!HAS_TRAIT(breather, TRAIT_RESISTCOLD)) // COLD DAMAGE
 		var/cold_modifier = breather.dna.species.coldmod
 		if(breath_temperature < cold_level_3_threshold)
-			breather.apply_damage_type(cold_level_3_damage*cold_modifier, cold_damage_type)
+			breather.apply_damage(cold_level_3_damage * cold_modifier, cold_damage_type, spread_damage = TRUE)
 		if(breath_temperature > cold_level_3_threshold && breath_temperature < cold_level_2_threshold)
-			breather.apply_damage_type(cold_level_2_damage*cold_modifier, cold_damage_type)
+			breather.apply_damage(cold_level_2_damage * cold_modifier, cold_damage_type, spread_damage = TRUE)
 		if(breath_temperature > cold_level_2_threshold && breath_temperature < cold_level_1_threshold)
-			breather.apply_damage_type(cold_level_1_damage*cold_modifier, cold_damage_type)
+			breather.apply_damage(cold_level_1_damage * cold_modifier, cold_damage_type, spread_damage = TRUE)
 		if(breath_temperature < cold_level_1_threshold)
 			if(prob(20))
 				to_chat(breather, "<span class='warning'>You feel [cold_message] in your [name]!</span>")
@@ -113,11 +113,11 @@
 	if(!HAS_TRAIT(breather, TRAIT_RESISTHEAT)) // HEAT DAMAGE
 		var/heat_modifier = breather.dna.species.heatmod
 		if(breath_temperature > heat_level_1_threshold && breath_temperature < heat_level_2_threshold)
-			breather.apply_damage_type(heat_level_1_damage*heat_modifier, heat_damage_type)
+			breather.apply_damage(heat_level_1_damage*heat_modifier, heat_damage_type, spread_damage = TRUE)
 		if(breath_temperature > heat_level_2_threshold && breath_temperature < heat_level_3_threshold)
-			breather.apply_damage_type(heat_level_2_damage*heat_modifier, heat_damage_type)
+			breather.apply_damage(heat_level_2_damage*heat_modifier, heat_damage_type, spread_damage = TRUE)
 		if(breath_temperature > heat_level_3_threshold)
-			breather.apply_damage_type(heat_level_3_damage*heat_modifier, heat_damage_type)
+			breather.apply_damage(heat_level_3_damage*heat_modifier, heat_damage_type, spread_damage = TRUE)
 		if(breath_temperature > heat_level_1_threshold)
 			if(prob(20))
 				to_chat(breather, "<span class='warning'>You feel [hot_message] in your [name]!</span>")

@@ -586,7 +586,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	if(dna.features["spines"])
 		dna.features["spines"] = GLOB.spines_list[deconstruct_block(get_uni_identity_block(features, DNA_SPINES_BLOCK), GLOB.spines_list.len)]
 	if(dna.features["tail_human"])
-		dna.features["tail_human"] = GLOB.tails_list_human[deconstruct_block(get_uni_identity_block(features, DNA_HUMAN_TAIL_BLOCK), GLOB.tails_list_human.len)]
+		dna.features["tail_human"] = GLOB.tails_list_human[deconstruct_block(get_uni_identity_block(features, DNA_TAIL_BLOCK), GLOB.tails_list_human.len)]
 	if(dna.features["ears"])
 		dna.features["ears"] = GLOB.ears_list[deconstruct_block(get_uni_identity_block(features, DNA_EARS_BLOCK), GLOB.ears_list.len)]
 	if(dna.features["moth_wings"])
@@ -602,7 +602,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	if(dna.features["caps"])
 		dna.features["caps"] = GLOB.caps_list[deconstruct_block(get_uni_identity_block(features, DNA_MUSHROOM_CAPS_BLOCK), GLOB.caps_list.len)]
 	if(dna.features["tail_monkey"])
-		dna.features["tail_monkey"] = GLOB.tails_list_monkey[deconstruct_block(get_uni_identity_block(features, DNA_MONKEY_TAIL_BLOCK), GLOB.tails_list_monkey.len)]
+		dna.features["tail_monkey"] = GLOB.tails_list_monkey[deconstruct_block(get_uni_identity_block(features, DNA_TAIL_BLOCK), GLOB.tails_list_monkey.len)]
 
 	for(var/obj/item/organ/external/external_organ in internal_organs)
 		external_organ.mutate_feature(features, src)
@@ -755,7 +755,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	if(ui)
 		for(var/blocknum in 1 to DNA_UNI_IDENTITY_BLOCKS)
 			if(prob(probability))
-				M.dna.unique_identity = get_uni_identity_block(M.dna.unique_identity, i, random_string(DNA_BLOCK_SIZE, GLOB.hex_characters))
+				M.dna.unique_identity = get_uni_identity_block(M.dna.unique_identity, blocknum, random_string(DNA_BLOCK_SIZE, GLOB.hex_characters))
 	if(uf)
 		for(var/i in 1 to DNA_FEATURE_BLOCKS)
 			if(prob(probability))

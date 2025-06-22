@@ -72,7 +72,11 @@
 	. = ..()
 	if(prob(33))
 		visible_message(span_danger("[src] spews out a ton of space lube!"))
-		new /obj/effect/particle_effect/foam(loc) //YEET
+		var/datum/effect_system/fluid_spread/foam/foam = new
+		var/datum/reagents/foamreagent = new /datum/reagents(25)
+		foamreagent.add_reagent(/datum/reagent/lube, 25)
+		foam.set_up(range = 4, location = loc, carry = foamreagent)
+		foam.start()
 
 /obj/vehicle/sealed/car/clowncar/attacked_by(obj/item/I, mob/living/user)
 	. = ..()
@@ -144,7 +148,7 @@
 			var/datum/reagents/randomchems = new/datum/reagents(300)
 			randomchems.my_atom = src
 			randomchems.add_reagent(get_random_reagent_id(), 100)
-			var/datum/effect_system/foam_spread/foam = new
+			var/datum/effect_system/fluid_spread/smoke/foam = new
 			foam.set_up(200, loc, randomchems)
 			foam.start()
 		if(3)
@@ -157,7 +161,7 @@
 			var/datum/reagents/funnychems = new/datum/reagents(300)
 			funnychems.my_atom = src
 			funnychems.add_reagent(/datum/reagent/consumable/superlaughter, 50)
-			var/datum/effect_system/smoke_spread/chem/smoke = new()
+			var/datum/effect_system/fluid_spread/smoke/chem/smoke = new()
 			smoke.set_up(funnychems, 4)
 			smoke.attach(src)
 			smoke.start()

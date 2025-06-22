@@ -317,6 +317,40 @@
 		heal_bodypart_damage(MINOR_HEAL)
 		qdel(target)
 
+
+/**
+ *Spittle; harmless reagent that is added by rat king, and makes you disgusted.
+ */
+
+/datum/reagent/rat_spit
+	name = "Rat Spit"
+	description = "Something coming from a rat. Dear god! Who knows where it's been!"
+	color = "#C8C8C8"
+	metabolization_rate = 0.03 * REAGENTS_METABOLISM
+	taste_description = "something funny"
+	overdose_threshold = 20
+
+/datum/reagent/rat_spit/on_mob_metabolize(mob/living/affected_mob)
+	. = ..()
+	if(HAS_TRAIT(affected_mob, TRAIT_AGEUSIA))
+		return
+	to_chat(affected_mob, span_notice("This food has a funny taste!"))
+
+/datum/reagent/rat_spit/overdose_start(mob/living/affected_mob)
+	. = ..()
+	metabolization_rate = 10 * REAGENTS_METABOLISM
+
+/datum/reagent/rat_spit/on_mob_life(mob/living/carbon/affected_mob)
+	. = ..()
+	if(prob(15))
+		to_chat(affected_mob, span_notice("You feel queasy!"))
+		affected_mob.adjust_disgust(3)
+	else if(prob(10))
+		to_chat(affected_mob, span_warning("That food does not sit up well!"))
+		affected_mob.adjust_disgust(5)
+	else if(prob(5))
+		affected_mob.vomit()
+
 #undef MINOR_HEAL
 #undef MEDIUM_HEAL
 #undef MAJOR_HEAL
