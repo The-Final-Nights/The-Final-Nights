@@ -15,34 +15,33 @@
 	button_icon = 'code/modules/wod13/werewolf_abilities.dmi'
 	. = ..()
 
-/datum/action/gift/Trigger()
+/datum/action/gift/Trigger(trigger_flags)
 	. = ..()
-	if(istype(owner, /mob/living/carbon))
-		var/mob/living/carbon/H = owner
-		if(H.stat == DEAD)
+	var/mob/living/H = owner
+	if(H.stat == DEAD)
+		allowed_to_proceed = FALSE
+		return
+	if(rage_req)
+		if(H.auspice.rage < rage_req)
+			to_chat(owner, "<span class='warning'>You don't have enough <b>RAGE</b> to do that!</span>")
+			SEND_SOUND(owner, sound('code/modules/wod13/sounds/werewolf_cast_failed.ogg', 0, 0, 75))
 			allowed_to_proceed = FALSE
 			return
-		if(rage_req)
-			if(H.auspice.rage < rage_req)
-				to_chat(owner, "<span class='warning'>You don't have enough <b>RAGE</b> to do that!</span>")
-				SEND_SOUND(owner, sound('code/modules/wod13/sounds/werewolf_cast_failed.ogg', 0, 0, 75))
-				allowed_to_proceed = FALSE
-				return
-			if(H.auspice.gnosis < gnosis_req)
-				to_chat(owner, "<span class='warning'>You don't have enough <b>GNOSIS</b> to do that!</span>")
-				SEND_SOUND(owner, sound('code/modules/wod13/sounds/werewolf_cast_failed.ogg', 0, 0, 75))
-				allowed_to_proceed = FALSE
-				return
-		if(cool_down+150 >= world.time)
+		if(H.auspice.gnosis < gnosis_req)
+			to_chat(owner, "<span class='warning'>You don't have enough <b>GNOSIS</b> to do that!</span>")
+			SEND_SOUND(owner, sound('code/modules/wod13/sounds/werewolf_cast_failed.ogg', 0, 0, 75))
 			allowed_to_proceed = FALSE
 			return
-		cool_down = world.time
-		allowed_to_proceed = TRUE
-		if(rage_req)
-			adjust_rage(-rage_req, owner, FALSE)
-		if(gnosis_req)
-			adjust_gnosis(-gnosis_req, owner, FALSE)
-		to_chat(owner, "<span class='notice'>You activate the [name]...</span>")
+	if(cool_down+150 >= world.time)
+		allowed_to_proceed = FALSE
+		return
+	cool_down = world.time
+	allowed_to_proceed = TRUE
+	if(rage_req)
+		adjust_rage(-rage_req, owner, FALSE)
+	if(gnosis_req)
+		adjust_gnosis(-gnosis_req, owner, FALSE)
+	to_chat(owner, "<span class='notice'>You activate the [name]...</span>")
 
 /datum/action/gift/falling_touch
 	name = "Falling Touch"
@@ -50,10 +49,10 @@
 	button_icon_state = "falling_touch"
 	rage_req = 1
 
-/datum/action/gift/falling_touch/Trigger()
+/datum/action/gift/falling_touch/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/H = owner
+		var/mob/living/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/falling_touch.ogg', 75, FALSE)
 		H.put_in_active_hand(new /obj/item/melee/touch_attack/werewolf(H))
 
@@ -63,7 +62,7 @@
 	button_icon_state = "inspiration"
 	rage_req = 1
 
-/mob/living/carbon/Life()
+/mob/living/Life()
 	. = ..()
 	if(inspired)
 		if(stat != DEAD)
@@ -75,26 +74,25 @@
 			ntransform.Scale(2, 2)
 			animate(C, transform = ntransform, alpha = 0, time = 3)
 
-/mob/living/carbon/proc/inspired()
+/mob/living/proc/inspired()
 	inspired = TRUE
 	to_chat(src, "<span class='notice'>You feel inspired...</span>")
 	spawn(150)
 		to_chat(src, "<span class='warning'>You no longer feel inspired...</span>")
 		inspired = FALSE
 
-/datum/action/gift/inspiration/Trigger()
+/datum/action/gift/inspiration/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/H = owner
+		var/mob/living/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/inspiration.ogg', 75, FALSE)
 		H.emote("scream")
 		if(H.CheckEyewitness(H, H, 7, FALSE))
 			H.adjust_veil(-1)
-		for(var/mob/living/carbon/C in range(5, owner))
-			if(C)
-				if(iswerewolf(C) || isgarou(C))
-					if(C.auspice.tribe == H.auspice.tribe)
-						C.inspired()
+		for(var/mob/living/C in range(5, owner))
+			if(iswerewolf(C) || isgarou(C))
+				if(C.auspice.tribe == H.auspice.tribe)
+					C.inspired()
 
 /datum/action/gift/razor_claws
 	name = "Razor Claws"
@@ -102,7 +100,7 @@
 	button_icon_state = "razor_claws"
 	rage_req = 1
 
-/datum/action/gift/razor_claws/Trigger()
+/datum/action/gift/razor_claws/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(ishuman(owner))
@@ -127,15 +125,15 @@
 				to_chat(owner, "<span class='warning'>Your claws are not sharp anymore...</span>")
 		else
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/razor_claws.ogg', 75, FALSE)
-			var/mob/living/carbon/H = owner
+			var/mob/living/H = owner
 			H.melee_damage_lower = H.melee_damage_lower+15
 			H.melee_damage_upper = H.melee_damage_upper+15
-			H.agg_damage_plus = 3
+			//H.agg_damage_plus = 3
 			to_chat(owner, "<span class='notice'>You feel your claws sharpening...</span>")
 			spawn(150)
 				H.melee_damage_lower = initial(H.melee_damage_lower)
 				H.melee_damage_upper = initial(H.melee_damage_upper)
-				H.tox_damage_plus = 0
+				//H.tox_damage_plus = 0
 				to_chat(owner, "<span class='warning'>Your claws are not sharp anymore...</span>")
 
 /datum/action/gift/beast_speech
@@ -144,10 +142,10 @@
 	button_icon_state = "beast_speech"
 	rage_req = 1
 
-/datum/action/gift/beast_speech/Trigger()
+/datum/action/gift/beast_speech/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		if(length(C.beastmaster) > 3)
 			var/mob/living/simple_animal/hostile/beastmaster/B = pick(C.beastmaster)
 			qdel(B)
@@ -160,7 +158,7 @@
 		var/mob/living/simple_animal/hostile/beastmaster/D = new(get_turf(C))
 		D.my_creator = C
 		C.beastmaster |= D
-		D.beastmaster = C
+		D.beastmaster_owner = C
 
 /datum/action/gift/call_of_the_wyld
 	name = "Call Of The Wyld"
@@ -168,13 +166,13 @@
 	button_icon_state = "call_of_the_wyld"
 	rage_req = 1
 
-/datum/action/gift/call_of_the_wyld/Trigger()
+/datum/action/gift/call_of_the_wyld/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		C.emote("howl")
 		playsound(get_turf(C), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 100, FALSE)
-		for(var/mob/living/carbon/A in orange(6, owner))
+		for(var/mob/living/A in orange(6, owner))
 			if(A)
 				if(isgarou(A) || iswerewolf(A))
 					A.emote("howl")
@@ -187,14 +185,14 @@
 	desc = "By invoking the power of waking dreams, the Garou can place any chosen characters into silent communion."
 	button_icon_state = "mindspeak"
 
-/datum/action/gift/mindspeak/Trigger()
+/datum/action/gift/mindspeak/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/new_thought = input(owner, "What do you want to tell to your Tribe?") as text|null
 		if(new_thought)
-			var/mob/living/carbon/C = owner
+			var/mob/living/C = owner
 			to_chat(C, "You transfer this message to your tribe members nearby: <b>[sanitize_text(new_thought)]</b>")
-			for(var/mob/living/carbon/A in orange(9, owner))
+			for(var/mob/living/A in orange(9, owner))
 				if(A)
 					if(isgarou(A) || iswerewolf(A))
 						if(A.auspice.tribe == C.auspice.tribe)
@@ -206,7 +204,7 @@
 	button_icon_state = "resist_pain"
 	rage_req = 2
 
-/datum/action/gift/resist_pain/Trigger()
+/datum/action/gift/resist_pain/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(ishuman(owner))
@@ -221,7 +219,7 @@
 				to_chat(owner, "<span class='warning'>Your skin is thin again...</span>")
 		else
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
-			var/mob/living/carbon/werewolf/H = owner
+			var/mob/living/simple_animal/werewolf/H = owner
 			H.werewolf_armor = 40
 			to_chat(owner, "<span class='notice'>You feel your skin thickering...</span>")
 			spawn(15 SECONDS)
@@ -234,7 +232,7 @@
 	button_icon_state = "scent_of_the_true_form"
 	gnosis_req = 1
 
-/datum/action/gift/scent_of_the_true_form/Trigger()
+/datum/action/gift/scent_of_the_true_form/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(HAS_TRAIT(owner, TRAIT_SCENTTRUEFORM))
@@ -251,7 +249,7 @@
 	desc = "As judges of the Litany, Philodox have the ability to sense whether others have spoken truth or falsehood."
 	button_icon_state = "truth_of_gaia"
 
-/datum/action/gift/truth_of_gaia/Trigger()
+/datum/action/gift/truth_of_gaia/Trigger(trigger_flags)
 	. = ..()
 //	if(allowed_to_proceed)
 //
@@ -262,9 +260,9 @@
 	button_icon_state = "mothers_touch"
 	rage_req = 2
 
-/datum/action/gift/mothers_touch/Trigger()
+/datum/action/gift/mothers_touch/Trigger(trigger_flags)
 	. = ..()
-	if(allowed_to_proceed)
+	if(allowed_to_proceed && (iscarbon(owner) || iscrinos(owner)))
 		var/mob/living/carbon/H = owner
 		H.put_in_active_hand(new /obj/item/melee/touch_attack/mothers_touch(H))
 
@@ -274,13 +272,13 @@
 	button_icon_state = "sense_wyrm"
 	rage_req = 1
 
-/datum/action/gift/sense_wyrm/Trigger()
+/datum/action/gift/sense_wyrm/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/list/mobs_in_range = list()
-		for(var/mob/living/carbon/target in orange(owner, 30))
+		for(var/mob/living/target in orange(owner, 30))
 			mobs_in_range += target
-		for(var/mob/living/carbon/target in mobs_in_range)
+		for(var/mob/living/target in mobs_in_range)
 			var/is_wyrm = 0
 			if(iscathayan(target))
 				var/mob/living/carbon/human/kj = target
@@ -290,10 +288,10 @@
 				var/mob/living/carbon/human/vampire = target
 				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
 					is_wyrm = 1
-				if ((vampire.clane?.name == "Baali") || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
+				if ((vampire.clane?.name == CLAN_BAALI) || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
 					is_wyrm = 1
 			if (isgarou(target) || iswerewolf(target))
-				var/mob/living/carbon/wolf = target
+				var/mob/living/wolf = target
 				if(wolf.auspice.tribe.name == "Black Spiral Dancers")
 					is_wyrm = 1
 			if(is_wyrm)
@@ -305,10 +303,10 @@
 	desc = "This Gift allows the Garou to communicate with encountered spirits."
 	button_icon_state = "spirit_speech"
 
-/datum/action/gift/spirit_speech/Trigger()
+/datum/action/gift/spirit_speech/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		C.see_invisible = SEE_INVISIBLE_OBSERVER
 		spawn(200)
 			C.see_invisible = initial(C.see_invisible)
@@ -319,10 +317,10 @@
 	button_icon_state = "blur_of_the_milky_eye"
 	rage_req = 2
 
-/datum/action/gift/blur_of_the_milky_eye/Trigger()
+/datum/action/gift/blur_of_the_milky_eye/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		C.alpha = 36
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/milky_blur.ogg', 75, FALSE)
 		spawn(20 SECONDS)
@@ -333,7 +331,7 @@
 	desc = "With this Gift, the Garou can open nearly any sort of closed or locked physical device."
 	button_icon_state = "open_seal"
 
-/datum/action/gift/open_seal/Trigger()
+/datum/action/gift/open_seal/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		for(var/obj/structure/vampdoor/V in range(5, owner))
@@ -355,10 +353,10 @@
 	button_icon_state = "infectious_laughter"
 	rage_req = 1
 
-/datum/action/gift/infectious_laughter/Trigger()
+/datum/action/gift/infectious_laughter/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		C.emote("laugh")
 		C.Stun(10)
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/infectious_laughter.ogg', 100, FALSE)
@@ -374,10 +372,10 @@
 	rage_req = 1
 	check_flags = null
 
-/datum/action/gift/rage_heal/Trigger()
+/datum/action/gift/rage_heal/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		var/obj/item/organ/brain/brain = C.getorganslot(ORGAN_SLOT_BRAIN)
 		if(C.stat != DEAD)
 			SEND_SOUND(owner, sound('code/modules/wod13/sounds/rage_heal.ogg', 0, 0, 75))
@@ -416,9 +414,9 @@
 	icon_icon = 'code/modules/wod13/werewolf_abilities.dmi'
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_CONSCIOUS
 
-/datum/action/change_apparel/Trigger()
+/datum/action/change_apparel/Trigger(trigger_flags)
 	. = ..()
-	var/mob/living/carbon/werewolf/crinos/C = owner
+	var/mob/living/simple_animal/werewolf/crinos/C = owner
 	if(C.stat == CONSCIOUS)
 		if(C.sprite_apparel == 4)
 			C.sprite_apparel = 0
@@ -430,10 +428,10 @@
 	desc = "Change your Lupus form into Hispo and backwards."
 	button_icon_state = "hispo"
 
-/datum/action/gift/hispo/Trigger()
+/datum/action/gift/hispo/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/carbon/werewolf/lupus/H = owner
+		var/mob/living/simple_animal/werewolf/lupus/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
 		var/matrix/ntransform = matrix(owner.transform)
 		if(H.hispo)
@@ -445,7 +443,7 @@
 			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
 			addtimer(CALLBACK(src, PROC_REF(transform_hispo), H), DOGGY_ANIMATION_COOLDOWN)
 
-/datum/action/gift/hispo/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_lupus(mob/living/simple_animal/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -459,10 +457,11 @@
 	H.regenerate_icons()
 	H.update_transform()
 	animate(H, transform = null, color = "#FFFFFF", time = 1)
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/hispoform)
 	H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 
-/datum/action/gift/hispo/proc/transform_hispo(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_hispo(mob/living/simple_animal/werewolf/lupus/H)
 	H.icon = 'code/modules/wod13/hispo.dmi'
 	H.pixel_w = -16
 	H.pixel_z = -16
@@ -473,6 +472,7 @@
 	H.regenerate_icons()
 	H.update_transform()
 	animate(H, transform = null, color = "#FFFFFF", time = 1)
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 	H.add_movespeed_modifier(/datum/movespeed_modifier/hispoform)
 
@@ -485,9 +485,9 @@
 	desc = "Change your Homid form into Glabro and backwards."
 	button_icon_state = "glabro"
 
-/datum/action/gift/glabro/Trigger()
+/datum/action/gift/glabro/Trigger(trigger_flags)
 	. = ..()
-	if(allowed_to_proceed)
+	if(allowed_to_proceed && ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		var/datum/species/garou/G = H.dna.species
 		if (!HAS_TRAIT(owner, TRAIT_CORAX))
@@ -510,7 +510,7 @@
 				return
 			else
 				H.remove_overlay(PROTEAN_LAYER)
-				var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
+				var/mob/living/simple_animal/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
 				var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
 				H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
 				H.apply_overlay(PROTEAN_LAYER)
@@ -563,7 +563,7 @@
 		)
 	)
 
-/datum/action/gift/howling/Trigger()
+/datum/action/gift/howling/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 
@@ -571,7 +571,7 @@
 			to_chat(owner, span_warning("Your howl echoes and dissapates into the Umbra, it's sound blanketed by the spiritual energy of the Velvet Shadow."))
 			return
 
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		var/list/menu_options = list()
 		for (var/howl_key in howls)
 			menu_options += howls[howl_key]["menu"]
@@ -595,13 +595,13 @@
 			playsound(origin_turf, pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 50, FALSE)
 			var/list/sound_hearers = list()
 
-			for(var/mob/living/carbon/HearingGarou in range(17))
+			for(var/mob/living/HearingGarou in range(17))
 				if(isgarou(HearingGarou) || iswerewolf(HearingGarou))
 					sound_hearers += HearingGarou
 
 			var/howl_details
 			var/final_message
-			for(var/mob/living/carbon/Garou in GLOB.player_list)
+			for(var/mob/living/Garou in GLOB.player_list)
 				if(isgarou(Garou) || iswerewolf(Garou) && !owner)
 					if(!sound_hearers.Find(Garou))
 						Garou.playsound_local(get_turf(Garou), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 25, FALSE)
@@ -610,7 +610,7 @@
 					to_chat(Garou, final_message, confidential = TRUE)
 
 
-/datum/action/gift/howling/proc/get_message(mob/living/carbon/Garou, turf/origin_turf)
+/datum/action/gift/howling/proc/get_message(mob/living/Garou, turf/origin_turf)
 
 	var/distance = get_dist(Garou, origin_turf)
 	var/dirtext = " to the "

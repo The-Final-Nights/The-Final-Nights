@@ -7,7 +7,7 @@
 
 /datum/discipline/thaumaturgy/post_gain()
 	. = ..()
-	owner.faction |= "Tremere"
+	owner.faction |= CLAN_TREMERE
 	if(level >= 1)
 		var/datum/action/thaumaturgy/thaumaturgy = new()
 		thaumaturgy.Grant(owner)
@@ -327,7 +327,7 @@
 	var/drawing = FALSE
 	var/level = 1
 
-/datum/action/thaumaturgy/Trigger()
+/datum/action/thaumaturgy/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(H.bloodpool < 2)
@@ -383,7 +383,7 @@
 	vampiric = TRUE
 	var/abuse_fix = 0
 
-/datum/action/bloodshield/Trigger()
+/datum/action/bloodshield/Trigger(trigger_flags)
 	. = ..()
 	if((abuse_fix + 25 SECONDS) > world.time)
 		return

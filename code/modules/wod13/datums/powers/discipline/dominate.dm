@@ -82,7 +82,7 @@
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == "Gargoyle")
+		if(human_target.clane?.name == CLAN_GARGOYLE)
 			return TRUE
 
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
@@ -333,7 +333,7 @@
 
 /mob/living/carbon/human/proc/attack_myself_command()
 	if(!CheckFrenzyMove())
-		a_intent = INTENT_HARM
+		set_combat_mode(TRUE)
 		var/obj/item/I = get_active_held_item()
 		if(I)
 			if(I.force)

@@ -9,7 +9,7 @@
 	turns_per_move = 5
 	response_help_continuous = "passes through"
 	response_help_simple = "pass through"
-	a_intent = INTENT_HARM
+	combat_mode = TRUE
 	healable = 0
 	speed = 0
 	maxHealth = 40
@@ -33,7 +33,7 @@
 	light_system = MOVABLE_LIGHT
 	light_range = 1 // same glowing as visible player ghosts
 	light_power = 2
-	faction = list("Giovanni")
+	faction = list(CLAN_GIOVANNI)
 	bloodpool = 0
 	maxbloodpool = 0
 

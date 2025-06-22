@@ -10,7 +10,7 @@
 				return
 	..()
 
-/mob/living/carbon/proc/rollfrenzy(frenzyoverride = 0)
+/mob/living/proc/rollfrenzy(frenzyoverride = 0)
 	if(client)
 		var/mob/living/carbon/human/H
 		if(ishuman(src))
@@ -41,7 +41,7 @@
 		check = SSroll.storyteller_roll(frenzydicepool, difficulty = frenzydiff, mobs_to_show_output = src)
 		switch(check)
 			if(ROLL_FAILURE)
-				src.enter_frenzymod()
+				enter_frenzymod()
 				if(iskindred(src))
 					addtimer(CALLBACK(src, PROC_REF(exit_frenzymod)), 100*H.clane.frenzymod)
 					SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
@@ -49,7 +49,7 @@
 					addtimer(CALLBACK(src, PROC_REF(exit_frenzymod)), 100)
 				frenzy_hardness = initial(src.frenzy_hardness)
 			if(ROLL_BOTCH)
-				src.enter_frenzymod()
+				enter_frenzymod()
 				if(iskindred(src))
 					addtimer(CALLBACK(src, PROC_REF(exit_frenzymod)), 200*H.clane.frenzymod)
 					SEND_SIGNAL(H, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
@@ -59,7 +59,7 @@
 			else
 				frenzy_hardness = min(10, src.frenzy_hardness+1)
 
-/mob/living/carbon/proc/enter_frenzymod()
+/mob/living/proc/enter_frenzymod()
 	if (in_frenzy)
 		return
 
@@ -71,7 +71,7 @@
 		adjust_rage(-10, src, TRUE)
 	GLOB.frenzy_list += src
 
-/mob/living/carbon/proc/exit_frenzymod()
+/mob/living/proc/exit_frenzymod()
 	if (!in_frenzy)
 		return
 
@@ -80,7 +80,7 @@
 	remove_client_colour(/datum/client_colour/glass_colour/red)
 	GLOB.frenzy_list -= src
 
-/mob/living/carbon/proc/CheckFrenzyMove()
+/mob/living/proc/CheckFrenzyMove()
 	if(stat >= SOFT_CRIT)
 		return TRUE
 	if(IsSleeping())
@@ -96,7 +96,7 @@
 	if(HAS_TRAIT(src, TRAIT_RESTRAINED))
 		return TRUE
 
-/mob/living/carbon/proc/do_frenzy_bite(target)
+/mob/living/proc/do_frenzy_bite(target)
 	if(frenzy_target.client)
 		return
 	if(!frenzy_target?.bloodpool)
@@ -118,7 +118,7 @@
 	vamp.drinksomeblood(frenzy_target)
 	vamp.Immobilize(5 SECONDS) //ai like to move around, so hold still
 
-/mob/living/carbon/proc/try_frenzy_bite(target)
+/mob/living/proc/try_frenzy_bite(target)
 	frenzy_target = target
 	if(get_dist(frenzy_target, src) > 1) //check again to avoid biting people from 2 tiles away in some cases
 		return
@@ -130,7 +130,7 @@
 		frenzy_target = null
 		stop_pulling()
 
-/mob/living/carbon/proc/frenzystep()
+/mob/living/proc/frenzystep()
 	if(!isturf(loc) || CheckFrenzyMove())
 		return
 	if(m_intent == MOVE_INTENT_WALK)
@@ -146,7 +146,7 @@
 		if(prob(25))
 			emote("scream")
 		return
-	a_intent = INTENT_HARM
+	set_combat_mode(TRUE)
 	if(get_dist(frenzy_target, src) <= 1)
 		if(iskindred(src))
 			try_frenzy_bite(frenzy_target)
@@ -160,7 +160,7 @@
 		step_to(src,frenzy_target,0)
 		face_atom(frenzy_target)
 
-/mob/living/carbon/proc/get_frenzy_targets()
+/mob/living/proc/get_frenzy_targets()
 	var/list/ignore_list = list(
 	/mob/living/carbon/human/npc/shop,
 	/mob/living/carbon/human/npc/sabbat,
@@ -187,7 +187,7 @@
 	else
 		return null
 
-/mob/living/carbon/proc/handle_automated_frenzy()
+/mob/living/proc/handle_automated_frenzy()
 	for(var/mob/living/carbon/human/npc/NPC in oviewers(5, src))
 		NPC.Aggro(src)
 	if(frenzy_target)
@@ -204,7 +204,7 @@
 
 /datum/species/kindred/spec_life(mob/living/carbon/human/H)
 	. = ..()
-	if(H.clane?.name == "Baali")
+	if(H.clane?.name == CLAN_BAALI)
 		if(istype(get_area(H), /area/vtm/church))
 			if(prob(25))
 				to_chat(H, "<span class='warning'>You don't belong here!</span>")
@@ -262,14 +262,14 @@
 		H.bloodpool = max(0, H.bloodpool-1)
 		to_chat(H, "<span class='warning'>Necromancy Vision reduces your blood points too sustain itself.</span>")
 
-	if(H.clane?.name == "Tzimisce" || H.clane?.name == "Old Clan Tzimisce")
+	if(H.clane?.name == CLAN_TZIMISCE || H.clane?.name == CLAN_OLD_TZIMISCE)
 		var/datum/vampireclane/tzimisce/TZ = H.clane
 		if(TZ.heirl)
 			if(!(TZ.heirl in H.GetAllContents()))
 				if(prob(5))
 					to_chat(H, "<span class='warning'>You are missing your home soil...</span>")
 					H.bloodpool = max(0, H.bloodpool-1)
-	if(H.clane?.name == "Kiasyd")
+	if(H.clane?.name == CLAN_KIASYD)
 		var/datum/vampireclane/kiasyd/kiasyd = H.clane
 		for(var/obj/item/I in H.contents)
 			if(I?.is_iron)
@@ -297,7 +297,7 @@
 					P.reason_of_death = "Lost control to the Beast ([time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")])."
 
 	if(H.clane && !H.antifrenzy && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
-		if(H.clane.name == "Banu Haqim")
+		if(H.clane.name == CLAN_BANU_HAQIM)
 			if(H.mind)
 				if(H.mind.enslaved_to)
 					if(get_dist(H, H.mind.enslaved_to) > 10)

@@ -883,17 +883,14 @@
 	opacity = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
-	var/matrixing = FALSE
 
 /obj/matrix/attack_hand(mob/user)
 	if(user.client)
-		if(!matrixing)
-			matrixing = TRUE
-			if(do_after(user, 100, src))
-				cryoMob(user, src)
-				matrixing = FALSE
-			else
-				matrixing = FALSE
+		if(iswerewolf(user))
+			to_chat(user, span_warning("Return to your homid form before you matrix!"))
+			return TRUE
+		if(do_after(user, 100, src))
+			cryoMob(user, src)
 	return TRUE
 
 /obj/matrix/proc/cryoMob(mob/living/mob_occupant)
@@ -1212,6 +1209,11 @@
 	desc = "The flag of the State of Japan."
 	icon_state = "flag_japan"
 
+/obj/flag/anarchy
+	name = "anarchist flag"
+	desc = "The flag of the anarchist movement."
+	icon_state = "flag_anarchy"
+
 /obj/effect/decal/graffiti
 	name = "graffiti"
 	icon = 'code/modules/wod13/32x48.dmi'
@@ -1506,21 +1508,14 @@
 							dead_amongst = TRUE
 						icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					if(!dead_amongst)
 						user.visible_message("<span class='warning'>[user] refills [src].</span>", "<span class='warning'>You refill [src].</span>")
 						qdel(src)
 				else
-					var/dead_amongst = FALSE
 					for(var/mob/living/L in src)
 						L.forceMove(get_turf(src))
-						if(L.stat == DEAD)
-							dead_amongst = TRUE
 					icon_state = "pit0"
 					user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-					if(dead_amongst)
-						call_dharma("disrespect", user)
 			else
 				burying = FALSE
 

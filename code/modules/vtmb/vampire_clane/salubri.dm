@@ -27,7 +27,7 @@
 	icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	check_flags = AB_CHECK_CONSCIOUS
 
-/datum/action/salubri_eye/Trigger()
+/datum/action/salubri_eye/Trigger(trigger_flags)
 	if(!iskindred(owner))
 		return
 	var/obj/item/organ/eyes/salubri/salubri = owner.getorganslot(ORGAN_SLOT_EYES)

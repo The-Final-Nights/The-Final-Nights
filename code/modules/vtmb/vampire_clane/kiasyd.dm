@@ -45,11 +45,12 @@
 	H.equip_to_appropriate_slot(new_glasses, TRUE)
 
 /obj/item/afterattack(atom/target, mob/living/carbon/user, proximity)
+	. = ..()
 	if(!proximity)
 		return
 	if(iskindred(target) && is_iron)
 		var/mob/living/carbon/human/L = target
-		if(L.clane?.name == "Kiasyd")
+		if(L.clane?.name == CLAN_KIASYD)
 			var/datum/vampireclane/kiasyd/kiasyd = L.clane
 			if (COOLDOWN_FINISHED(kiasyd, cold_iron_frenzy))
 				COOLDOWN_START(kiasyd, cold_iron_frenzy, 10 SECONDS)
@@ -65,4 +66,3 @@
 		if(L.max_yin_chi > L.max_yang_chi + 2)
 			to_chat(L, "<span class='danger'><b>WOOD!</b></span>")
 			L.adjustBruteLoss(15, TRUE)
-	..()
