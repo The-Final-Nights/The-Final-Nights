@@ -137,6 +137,7 @@
 	wound_resistance = -10
 	px_x = -5
 	px_y = -3
+	appendage_noun = "paw"
 
 /obj/item/bodypart/l_arm/alien
 	icon = 'icons/mob/animal_parts.dmi'
@@ -237,6 +238,7 @@
 	wound_resistance = -10
 	px_x = 5
 	px_y = -3
+	appendage_noun = "paw"
 
 /obj/item/bodypart/r_arm/alien
 	icon = 'icons/mob/animal_parts.dmi'

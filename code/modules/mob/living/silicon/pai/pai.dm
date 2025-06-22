@@ -221,7 +221,7 @@
 	icon_icon = 'icons/mob/actions/actions_silicon.dmi'
 	var/mob/living/silicon/pai/P
 
-/datum/action/innate/pai/Trigger()
+/datum/action/innate/pai/Trigger(trigger_flags)
 	if(!ispAI(owner))
 		return 0
 	P = owner
@@ -231,7 +231,7 @@
 	button_icon_state = "pai"
 	background_icon_state = "bg_tech"
 
-/datum/action/innate/pai/software/Trigger()
+/datum/action/innate/pai/software/Trigger(trigger_flags)
 	..()
 	P.paiInterface()
 
@@ -240,7 +240,7 @@
 	button_icon_state = "pai_holoform"
 	background_icon_state = "bg_tech"
 
-/datum/action/innate/pai/shell/Trigger()
+/datum/action/innate/pai/shell/Trigger(trigger_flags)
 	..()
 	if(P.holoform)
 		P.fold_in(0)
@@ -252,7 +252,7 @@
 	button_icon_state = "pai_chassis"
 	background_icon_state = "bg_tech"
 
-/datum/action/innate/pai/chassis/Trigger()
+/datum/action/innate/pai/chassis/Trigger(trigger_flags)
 	..()
 	P.choose_chassis()
 
@@ -261,7 +261,7 @@
 	button_icon_state = "pai_rest"
 	background_icon_state = "bg_tech"
 
-/datum/action/innate/pai/rest/Trigger()
+/datum/action/innate/pai/rest/Trigger(trigger_flags)
 	..()
 	P.toggle_resting()
 
@@ -271,7 +271,7 @@
 	button_icon_state = "emp"
 	background_icon_state = "bg_tech"
 
-/datum/action/innate/pai/light/Trigger()
+/datum/action/innate/pai/light/Trigger(trigger_flags)
 	..()
 	P.toggle_integrated_light()
 

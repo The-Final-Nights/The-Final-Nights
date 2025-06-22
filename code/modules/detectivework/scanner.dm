@@ -22,7 +22,7 @@
 /datum/action/item_action/display_detective_scan_results
 	name = "Display Forensic Scanner Results"
 
-/datum/action/item_action/display_detective_scan_results/Trigger()
+/datum/action/item_action/display_detective_scan_results/Trigger(trigger_flags)
 	var/obj/item/detective_scanner/scanner = target
 	if(istype(scanner))
 		scanner.displayDetectiveScanResults(usr)
@@ -34,9 +34,6 @@
 		displayDetectiveScanResults(user)
 	else
 		to_chat(user, "<span class='notice'>You find nothing interesting.</span>")
-
-/obj/item/detective_scanner/attack(mob/living/M, mob/user)
-	return
 
 /obj/item/detective_scanner/proc/PrintReport()
 	// Create our paper
@@ -59,6 +56,10 @@
 	// Clear the logs
 	log = list()
 	scanning = FALSE
+
+/obj/item/detective_scanner/pre_attack_secondary(atom/A, mob/user, params)
+	scan(A, user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/detective_scanner/afterattack(atom/A, mob/user, params)
 	. = ..()

@@ -389,6 +389,13 @@
 		return
 
 	var/cached_amount = amount
+	var/allowed_to_kindred = FALSE
+	if(iskindred(target))
+		if(methods & VAMPIRE)
+			allowed_to_kindred = TRUE
+		if(!allowed_to_kindred)
+			return
+
 	var/atom/target_atom
 	var/datum/reagents/R
 	if(istype(target, /datum/reagents))

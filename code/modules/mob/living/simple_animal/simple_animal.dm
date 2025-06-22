@@ -48,8 +48,6 @@
 	///Harm-intent verb in present simple tense.
 	var/response_harm_simple = "hit"
 	var/harm_intent_damage = 3
-	///Minimum force required to deal any damage.
-	var/force_threshold = 0
 	///Maximum amount of stamina damage the mob can be inflicted with total
 	var/max_staminaloss = 200
 	///How much stamina the mob recovers per second
@@ -271,11 +269,10 @@
 /mob/living/simple_animal/update_stat()
 	if(status_flags & GODMODE)
 		return
-	if(stat != DEAD)
-		if(health <= 0)
-			death()
-		else
-			set_stat(CONSCIOUS)
+	if(health <= 0)
+		death()
+	else
+		set_stat(CONSCIOUS)
 	med_hud_set_status()
 
 /mob/living/simple_animal/handle_status_effects(delta_time, times_fired)
@@ -492,15 +489,6 @@
 			return FALSE
 	return TRUE
 
-/mob/living/simple_animal/handle_fire(delta_time, times_fired)
-	return TRUE
-
-/mob/living/simple_animal/IgniteMob()
-	return FALSE
-
-/mob/living/simple_animal/extinguish_mob()
-	return
-
 /mob/living/simple_animal/revive(full_heal = FALSE, admin_revive = FALSE)
 	. = ..()
 	if(!.)
@@ -551,14 +539,13 @@
 	else
 		..()
 
+/mob/living/simple_animal/on_lying_down()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_IMMOBILIZED, RESTING_TRAIT)
 
-/mob/living/simple_animal/update_resting()
-	if(resting)
-		ADD_TRAIT(src, TRAIT_IMMOBILIZED, RESTING_TRAIT)
-	else
-		REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, RESTING_TRAIT)
-	return ..()
-
+/mob/living/simple_animal/on_standing_up()
+	. = ..()
+	REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, RESTING_TRAIT)
 
 /mob/living/simple_animal/update_transform()
 	var/matrix/ntransform = matrix(transform) //aka transform.Copy()
@@ -585,15 +572,20 @@
 		see_invisible = SEE_INVISIBLE_OBSERVER
 		return
 
+	lighting_alpha = initial(lighting_alpha)
 	see_invisible = initial(see_invisible)
 	see_in_dark = initial(see_in_dark)
 	sight = initial(sight)
+
+	if(HAS_TRAIT(src, TRAIT_NIGHT_VISION))
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_NV_TRAIT)
+		see_in_dark = max(see_in_dark, 8)
 
 	if(client.eye != src)
 		var/atom/A = client.eye
 		if(A.update_remote_sight(src)) //returns 1 if we override all other sight updates.
 			return
-	sync_lighting_plane_alpha()
+	return ..()
 
 //Will always check hands first, because access_card is internal to the mob and can't be removed or swapped.
 /mob/living/simple_animal/get_idcard(hand_first)
@@ -682,7 +674,7 @@
 	if (pulledby || shouldwakeup)
 		toggle_ai(AI_ON)
 
-/mob/living/simple_animal/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/simple_animal/adjustHealth(brute_amount, updating_health = TRUE, forced = FALSE, fire_amount, toxin_amount, oxy_amount, clone_amount)
 	. = ..()
 	if(!ckey && !stat)//Not unconscious
 		if(AIStatus == AI_IDLE)

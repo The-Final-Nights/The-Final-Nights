@@ -491,7 +491,7 @@
 	if(. && isliving(user))
 		var/mob/living/L = user
 		L.Paralyze(20 SECONDS)
-		L.remove_status_effect(STATUS_EFFECT_SURRENDER)
+		L.remove_status_effect(/datum/status_effect/grouped/surrender)
 
 /datum/emote/living/sway
 	key = "sway"

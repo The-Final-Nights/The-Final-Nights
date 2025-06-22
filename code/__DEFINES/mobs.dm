@@ -460,6 +460,11 @@
 #define AI_EMOTION_BLUE_GLOW "Blue Glow"
 #define AI_EMOTION_RED_GLOW "Red Glow"
 
+/// Throw modes, defines whether or not to turn off throw mode after
+#define THROW_MODE_DISABLED 0
+#define THROW_MODE_TOGGLE 1
+#define THROW_MODE_HOLD 2
+
 #define SOUL_PRESENT (1 << 0)
 #define SOUL_ABSENT (1 << 1)
 #define SOUL_PROJECTING ( 1<< 2)

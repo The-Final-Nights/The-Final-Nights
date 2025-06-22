@@ -64,6 +64,7 @@
 			handle_status_effects(delta_time, times_fired) //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
 
 	handle_fire(delta_time, times_fired)
+	handle_environment(delta_time, times_fired)
 
 	if(machine)
 		machine.check_eye(src)
@@ -107,7 +108,9 @@
 		adjust_fire_stacks(-0.05 * delta_time) //the fire is slowly consumed
 	else
 		extinguish_mob()
-		return TRUE //mob was put out, on_fire = FALSE via extinguish_mob(), no need to update everything down the chain.
+	adjust_bodytemperature(BODYTEMP_HEATING_MAX + (fire_stacks * 12))
+	SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "on_fire", /datum/mood_event/on_fire)
+	return TRUE //mob was put out, on_fire = FALSE via extinguish_mob(), no need to update everything down the chain.
 
 /**
  * Get the fullness of the mob

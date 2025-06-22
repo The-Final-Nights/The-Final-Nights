@@ -62,7 +62,7 @@
 		display_results(user, target, "<span class='notice'>You successfully augment [target]'s [parse_zone(target_zone)].</span>",
 			"<span class='notice'>[user] successfully augments [target]'s [parse_zone(target_zone)] with [tool]!</span>",
 			"<span class='notice'>[user] successfully augments [target]'s [parse_zone(target_zone)]!</span>")
-		log_combat(user, target, "augmented", addition="by giving him new [parse_zone(target_zone)] HARM MODE: [uppertext(user.m_intent == INTENT_HARM)]")
+		log_combat(user, target, "augmented", addition="by giving him new [parse_zone(target_zone)] COMBAT MODE: [uppertext(user.combat_mode)]")
 	else
 		to_chat(user, "<span class='warning'>[target] has no organic [parse_zone(target_zone)] there!</span>")
 	return ..()

@@ -10,7 +10,7 @@
 	turns_per_move = 5
 	speak_emote = list("rattles")
 	emote_see = list("rattles")
-	a_intent = INTENT_HARM
+	combat_mode = TRUE
 	maxHealth = 40
 	health = 40
 	speed = 1
@@ -67,7 +67,6 @@
 	speed = 2
 	speak_chance = 1
 	speak = list("THE GODS WILL IT!","DEUS VULT!","REMOVE KABAB!")
-	force_threshold = 10 //trying to simulate actually having armor
 	obj_damage = 50
 	melee_damage_lower = 25
 	melee_damage_upper = 30

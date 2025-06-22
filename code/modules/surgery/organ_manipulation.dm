@@ -144,8 +144,6 @@
 
 
 /datum/surgery_step/manipulate_organs/success(mob/living/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results)
-	if (target_zone == BODY_ZONE_PRECISE_EYES)
-		target_zone = check_zone(target_zone)
 	if(current_type == "insert")
 		if(istype(tool, /obj/item/borg/apparatus/organ_storage))
 			target_organ = tool.contents[1]

@@ -135,7 +135,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/human/host
 
-/datum/action/kueijininfo/Trigger()
+/datum/action/kueijininfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">
@@ -380,7 +380,7 @@
 	var/cooldown = 10 SECONDS
 	COOLDOWN_DECLARE(use)
 
-/datum/action/breathe_chi/Trigger()
+/datum/action/breathe_chi/Trigger(trigger_flags)
 	if(!COOLDOWN_FINISHED(src, use))
 		to_chat(usr, "<span class='warning'>You need to wait [DisplayTimeText(COOLDOWN_TIMELEFT(src, use))] to Inhale Chi again!</span>")
 		return
@@ -413,7 +413,7 @@
 	//this one is on carbon instead of living which means it needs some annoying extra code
 	var/has_gnosis = FALSE
 	if (iscarbon(victim))
-		var/mob/living/carbon/werewolf_victim = victim
+		var/mob/living/simple_animal/werewolf_victim = victim
 		if (werewolf_victim.auspice?.gnosis > 0)
 			has_gnosis = TRUE
 
@@ -463,7 +463,7 @@
 	var/cooldown = 30 SECONDS
 	COOLDOWN_DECLARE(use)
 
-/datum/action/area_chi/Trigger()
+/datum/action/area_chi/Trigger(trigger_flags)
 	if(!COOLDOWN_FINISHED(src, use))
 		to_chat(usr, "<span class='warning'>You need to wait [DisplayTimeText(COOLDOWN_TIMELEFT(src, use))] to gather Chi again!</span>")
 		return
@@ -497,7 +497,7 @@
 	vampiric = TRUE
 	var/cooldown = 3 SECONDS
 
-/datum/action/reanimate_yin/Trigger()
+/datum/action/reanimate_yin/Trigger(trigger_flags)
 	if(!istype(owner, /mob/living/carbon/human))
 		return
 	var/mob/living/carbon/human/kueijin = usr
@@ -557,7 +557,7 @@
 	vampiric = TRUE
 	var/cooldown = 3 SECONDS
 
-/datum/action/reanimate_yang/Trigger()
+/datum/action/reanimate_yang/Trigger(trigger_flags)
 	if(!istype(owner, /mob/living/carbon/human))
 		return
 	var/mob/living/carbon/human/kueijin = usr
@@ -615,7 +615,7 @@
 	icon_icon = 'code/modules/wod13/UI/kuei_jin.dmi'
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
-/datum/action/rebalance/Trigger()
+/datum/action/rebalance/Trigger(trigger_flags)
 	if(!istype(owner, /mob/living/carbon/human))
 		return
 	var/mob/living/carbon/human/kueijin = usr

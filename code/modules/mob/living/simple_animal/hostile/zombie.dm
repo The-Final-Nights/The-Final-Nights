@@ -14,9 +14,7 @@
 	melee_damage_upper = 21
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
-	attack_sound = 'sound/hallucinations/growl1.ogg'
-	attack_vis_effect = ATTACK_EFFECT_BITE
-	a_intent = INTENT_HARM
+	attack_sound = 'code/modules/wod13/sounds/zombuzi.ogg'
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	status_flags = CANPUSH
@@ -100,7 +98,7 @@
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	attack_sound = 'sound/hallucinations/growl1.ogg'
-	a_intent = INTENT_HARM
+	combat_mode = TRUE
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	status_flags = CANPUSH
@@ -119,7 +117,6 @@
 	turns_per_move = 5
 	response_help_continuous = "passes through"
 	response_help_simple = "pass through"
-	a_intent = INTENT_HARM
 	healable = 0
 	speed = 2
 	maxHealth = 35

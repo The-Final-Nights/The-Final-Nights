@@ -111,8 +111,8 @@
 	to_chat(user, "The safety is [safety ? "on" : "off"].")
 	return
 
-/obj/item/extinguisher/attack(mob/M, mob/user)
-	if(user.a_intent == INTENT_HELP && !safety) //If we're on help intent and going to spray people, don't bash them.
+/obj/item/extinguisher/attack(mob/M, mob/living/user)
+	if(!user.combat_mode && !safety) //If we're on help intent and going to spray people, don't bash them.
 		return FALSE
 	else
 		return ..()
@@ -227,9 +227,6 @@
 		var/obj/effect/fire/F = locate() in get_turf(W)
 		if(F)
 			qdel(F)
-			if(W.Extinguisher)
-				call_dharma("extinguish", W.Extinguisher)
-				call_dharma("cleangrow", W.Extinguisher)
 		if(!W.reagents)
 			continue
 		W.reagents.expose(get_turf(W))

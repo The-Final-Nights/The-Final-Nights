@@ -60,7 +60,7 @@
 	obj_damage = 30
 	melee_damage_lower = 20
 	melee_damage_upper = 25
-	a_intent = INTENT_HARM
+	combat_mode = TRUE
 	faction = list("spiders")
 	pass_flags = PASSTABLE
 	move_to_delay = 6
@@ -575,7 +575,7 @@
 		return FALSE
 	return TRUE
 
-/datum/action/innate/spider/comm/Trigger()
+/datum/action/innate/spider/comm/Trigger(trigger_flags)
 	var/input = stripped_input(owner, "Input a command for your legions to follow.", "Command", "")
 	if(QDELETED(src) || !input || !IsAvailable())
 		return FALSE

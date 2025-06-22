@@ -13,11 +13,13 @@
 	GLOB.carbon_list += src
 	if(!mapload)  //I don't want no gas leaks on my space ruin you hear?
 		RegisterSignal(src, COMSIG_LIVING_DEATH, PROC_REF(attach_rot))
-
+	
+	RegisterSignal(src, COMSIG_MOB_ITEM_AFTERATTACK, PROC_REF(swing_attack))
+	
 /mob/living/carbon/Destroy()
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. =  ..()
-
+	UnregisterSignal(src, list(COMSIG_MOB_ITEM_AFTERATTACK))
 	QDEL_LIST(hand_bodyparts)
 	QDEL_LIST(internal_organs)
 	QDEL_LIST(bodyparts)
@@ -68,14 +70,15 @@
 	else
 		mode() // Activate held item
 
-/mob/living/carbon/attackby(obj/item/I, mob/user, params)
+/mob/living/carbon/attackby(obj/item/I, mob/living/user, params)
 	for(var/datum/surgery/S in surgeries)
 		if(body_position == LYING_DOWN || !S.lying_required)
-			if((S.self_operable || user != src) && (user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM))
-				if(S.next_step(user,user.a_intent))
+			var/list/modifiers = params2list(params)
+			if((S.self_operable || user != src) && !user.combat_mode)
+				if(S.next_step(user, modifiers))
 					return 1
 
-	if(!all_wounds || !(user.a_intent == INTENT_HELP || user == src))
+	if(!all_wounds || !(!user.combat_mode || user == src))
 		return ..()
 
 	for(var/i in shuffle(all_wounds))
@@ -124,20 +127,22 @@
 /mob/living/carbon/proc/toggle_throw_mode()
 	if(stat)
 		return
-	if(in_throw_mode)
-		throw_mode_off()
+	if(throw_mode)
+		throw_mode_off(THROW_MODE_TOGGLE)
 	else
-		throw_mode_on()
+		throw_mode_on(THROW_MODE_TOGGLE)
 
 
-/mob/living/carbon/proc/throw_mode_off()
-	in_throw_mode = FALSE
+/mob/living/carbon/proc/throw_mode_off(method)
+	if(throw_mode > method) //A toggle doesnt affect a hold
+		return
+	throw_mode = THROW_MODE_DISABLED
 	if(hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_off"
 
 
-/mob/living/carbon/proc/throw_mode_on()
-	in_throw_mode = TRUE
+/mob/living/carbon/proc/throw_mode_on(mode = THROW_MODE_TOGGLE)
+	throw_mode = mode
 	if(hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_on"
 
@@ -147,7 +152,7 @@
 
 /mob/living/carbon/throw_item(atom/target)
 	. = ..()
-	throw_mode_off()
+	throw_mode_off(THROW_MODE_TOGGLE)
 	if(!target || !isturf(loc))
 		return
 	if(istype(target, /atom/movable/screen))
@@ -194,7 +199,7 @@
 	SEND_SIGNAL(src, COMSIG_MOB_THROW, target)
 	return
 
-/mob/living/carbon/jump(atom/target)
+/mob/living/jump(atom/target)
 	. = ..()
 	if(!target || !isturf(loc))
 		return
@@ -203,13 +208,18 @@
 	if(lying_angle != STANDING_UP)
 		return
 
-	var/mob/living/carbon/H = src
+	var/mob/living/H = src
+	var/mob/living/carbon/carbon_mob = src
 	var/physique = H.get_total_physique()
 	var/dexterity = H.get_total_dexterity()
 	var/athletics = H.get_total_athletics()
 
-	if(HAS_TRAIT(H, TRAIT_IMMOBILIZED) || H.legcuffed)
+	if(HAS_TRAIT(H, TRAIT_IMMOBILIZED))
 		return
+	if(iscarbon(H))
+		
+		if(carbon_mob.legcuffed)
+			return
 	if(pulledby && H.pulledby.grab_state >= GRAB_PASSIVE)
 		return
 
@@ -262,14 +272,8 @@
 
 		var/travel_time = distance * 0.5
 		spawn(travel_time)
-			if(get_dist(loc, adjusted_target) <= 1 && H.potential > 0)
-				H.epic_fall(FALSE, FALSE)
-
-
-//		newtonian_move(get_dir(target, src))
-//		thrown_thing.safe_throw_at(target, thrown_thing.throw_range, thrown_thing.throw_speed + power_throw, src, null, null, null, move_force)
-//		visible_message("<span class='danger'>[src] jumps towards [target].</span>")
-
+			if(get_dist(loc, adjusted_target) <= 1 && carbon_mob?.potential > 0)
+				carbon_mob?.epic_fall(FALSE, FALSE)
 		last_jump_time = current_time
 
 /mob/living/carbon/proc/canBeHandcuffed()
@@ -543,7 +547,7 @@
 	. = ..()
 	. += add_abilities_to_panel()
 
-/mob/living/carbon/attack_ui(slot)
+/mob/living/carbon/attack_ui(slot, params)
 	if(!has_hand_for_held_index(active_hand_index))
 		return 0
 	return ..()
@@ -872,31 +876,6 @@
 		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")
-
-/mob/living/carbon/update_health_hud(shown_health_amount)
-	if(!client || !hud_used)
-		return
-	if(hud_used.healths)
-		if(stat != DEAD)
-			. = 1
-			if(shown_health_amount == null)
-				shown_health_amount = health
-			if(shown_health_amount >= maxHealth)
-				hud_used.healths.icon_state = "health0"
-			else if(shown_health_amount > maxHealth*0.8)
-				hud_used.healths.icon_state = "health1"
-			else if(shown_health_amount > maxHealth*0.6)
-				hud_used.healths.icon_state = "health2"
-			else if(shown_health_amount > maxHealth*0.4)
-				hud_used.healths.icon_state = "health3"
-			else if(shown_health_amount > maxHealth*0.2)
-				hud_used.healths.icon_state = "health4"
-			else if(shown_health_amount > 0)
-				hud_used.healths.icon_state = "health5"
-			else
-				hud_used.healths.icon_state = "health6"
-		else
-			hud_used.healths.icon_state = "health7"
 
 /mob/living/carbon/proc/update_internals_hud_icon(internal_state = 0)
 	return

@@ -6,6 +6,8 @@
 	w_class = WEIGHT_CLASS_TINY
 	var/amount_per_transfer_from_this = 5
 	var/list/possible_transfer_amounts = list(5,10,15,20,25,30)
+	/// Where we are in the possible transfer amount list.
+	var/amount_list_position = 1
 	var/volume = 30
 	var/reagent_flags
 	var/list/list_reagents = null
@@ -27,6 +29,13 @@
 
 	add_initial_reagents()
 
+/obj/item/reagent_containers/examine()
+	. = ..()
+	if(possible_transfer_amounts.len > 1)
+		. += "<span class='notice'>Left-click or right-click in-hand to increase or decrease its transfer amount.</span>"
+	else if(possible_transfer_amounts.len)
+		. += "<span class='notice'>Left-click or right-click in-hand to view its transfer amount.</span>"
+
 /obj/item/reagent_containers/create_reagents(max_vol, flags)
 	. = ..()
 	RegisterSignals(reagents, list(COMSIG_REAGENTS_NEW_REAGENT, COMSIG_REAGENTS_ADD_REAGENT, COMSIG_REAGENTS_DEL_REAGENT, COMSIG_REAGENTS_REM_REAGENT), PROC_REF(on_reagent_change))
@@ -34,6 +43,11 @@
 
 /obj/item/reagent_containers/attack(mob/living/M, mob/living/user, params)
 	if (!(user.a_intent == INTENT_HARM))
+		return
+	return ..()
+
+/obj/item/reagent_containers/attack(mob/living/M, mob/living/user, params)
+	if (!user.combat_mode)
 		return
 	return ..()
 
@@ -47,17 +61,36 @@
 		reagents.add_reagent_list(list_reagents)
 
 /obj/item/reagent_containers/attack_self(mob/user)
-	if(possible_transfer_amounts.len)
-		var/i=0
-		for(var/A in possible_transfer_amounts)
-			i++
-			if(A == amount_per_transfer_from_this)
-				if(i<possible_transfer_amounts.len)
-					amount_per_transfer_from_this = possible_transfer_amounts[i+1]
-				else
-					amount_per_transfer_from_this = possible_transfer_amounts[1]
-				to_chat(user, "<span class='notice'>[src]'s transfer amount is now [amount_per_transfer_from_this] units.</span>")
-				return
+	change_transfer_amount(user, FORWARD)
+
+/obj/item/reagent_containers/attack_self_secondary(mob/user)
+	change_transfer_amount(user, BACKWARD)
+
+/obj/item/reagent_containers/proc/mode_change_message(mob/user)
+	return
+
+/obj/item/reagent_containers/proc/change_transfer_amount(mob/user, direction = FORWARD)
+	var/list_len = length(possible_transfer_amounts)
+	if(!list_len)
+		return
+	switch(direction)
+		if(FORWARD)
+			amount_list_position = (amount_list_position % list_len) + 1
+		if(BACKWARD)
+			amount_list_position = (amount_list_position - 1) || list_len
+		else
+			CRASH("change_transfer_amount() called with invalid direction value")
+	amount_per_transfer_from_this = possible_transfer_amounts[amount_list_position]
+	balloon_alert(user, "transferring [amount_per_transfer_from_this]u")
+	mode_change_message(user)
+
+/obj/item/reagent_containers/pre_attack_secondary(atom/target, mob/living/user, params)
+	if(!user.combat_mode)
+		return ..()
+	if (try_splash(user, target))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	return ..()
 
 /// Tries to splash the target. Used on both right-click and normal click when in combat mode.
 /obj/item/reagent_containers/proc/try_splash(mob/user, atom/target)

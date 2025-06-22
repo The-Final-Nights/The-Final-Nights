@@ -14,7 +14,7 @@
 	speak_chance = 1
 	icon = 'icons/mob/cult.dmi'
 	speed = 0
-	a_intent = INTENT_HARM
+	combat_mode = TRUE
 	stop_automated_movement = 1
 	status_flags = CANPUSH
 	attack_sound = 'sound/weapons/punch1.ogg'
@@ -83,28 +83,28 @@
 			. += span_warning("<b>[t_He] look[t_s] severely dented!</b>")
 	. += "</span>"
 
-/mob/living/simple_animal/hostile/construct/attack_animal(mob/living/simple_animal/M)
-	if(isconstruct(M)) //is it a construct?
-		var/mob/living/simple_animal/hostile/construct/C = M
-		if(!C.can_repair_constructs || (C == src && !C.can_repair_self))
+/mob/living/simple_animal/hostile/construct/attack_animal(mob/living/simple_animal/user, list/modifiers)
+	if(isconstruct(user)) //is it a construct?
+		var/mob/living/simple_animal/hostile/construct/doll = user
+		if(!doll.can_repair_constructs || (doll == src && !doll.can_repair_self))
 			return ..()
-		if(holy != C.holy)
+		if(holy != doll.holy)
 			return ..()
 		if(health < maxHealth)
 			adjustHealth(-5)
-			if(src != M)
-				Beam(M, icon_state="sendbeam", time = 4)
-				M.visible_message("<span class='danger'>[M] repairs some of \the <b>[src]'s</b> dents.</span>", \
+			if(src != user)
+				Beam(user, icon_state="sendbeam", time = 4)
+				user.visible_message("<span class='danger'>[user] repairs some of \the <b>[src]'s</b> dents.</span>", \
 						   "<span class='cult'>You repair some of <b>[src]'s</b> dents, leaving <b>[src]</b> at <b>[health]/[maxHealth]</b> health.</span>")
 			else
-				M.visible_message("<span class='danger'>[M] repairs some of [p_their()] own dents.</span>", \
-						   "<span class='cult'>You repair some of your own dents, leaving you at <b>[M.health]/[M.maxHealth]</b> health.</span>")
+				user.visible_message("<span class='danger'>[user] repairs some of [p_their()] own dents.</span>", \
+						   "<span class='cult'>You repair some of your own dents, leaving you at <b>[user.health]/[user.maxHealth]</b> health.</span>")
 		else
-			if(src != M)
-				to_chat(M, "<span class='cult'>You cannot repair <b>[src]'s</b> dents, as [p_they()] [p_have()] none!</span>")
+			if(src != user)
+				to_chat(user, "<span class='cult'>You cannot repair <b>[src]'s</b> dents, as [p_they()] [p_have()] none!</span>")
 			else
-				to_chat(M, "<span class='cult'>You cannot repair your own dents, as you have none!</span>")
-	else if(src != M)
+				to_chat(user, "<span class='cult'>You cannot repair your own dents, as you have none!</span>")
+	else if(src != user)
 		return ..()
 
 /mob/living/simple_animal/hostile/construct/narsie_act()
@@ -140,7 +140,6 @@
 	attack_sound = 'sound/weapons/punch3.ogg'
 	status_flags = 0
 	mob_size = MOB_SIZE_LARGE
-	force_threshold = 10
 	construct_spells = list(/obj/effect/proc_holder/spell/targeted/forcewall/cult,
 							/obj/effect/proc_holder/spell/targeted/projectile/dumbfire/juggernaut)
 	runetype = /datum/action/innate/cult/create_rune/wall

@@ -150,6 +150,7 @@
 	desc = "Your body has sustained serious damage, click here to inspect yourself."
 
 /atom/movable/screen/alert/status_effect/wound/Click()
+	. = ..()
 	var/mob/living/carbon/C = usr
 	C.check_self_for_injuries()
 

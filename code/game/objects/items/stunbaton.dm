@@ -1,6 +1,6 @@
 /obj/item/melee/baton
 	name = "stun baton"
-	desc = "A stun baton for incapacitating people with."
+	desc = "A stun baton for incapacitating people with. Left click to harm, right click to stun."
 
 	icon_state = "stunbaton"
 	inhand_icon_state = "baton"
@@ -187,7 +187,7 @@
 		return TRUE
 	return FALSE
 
-/obj/item/melee/baton/attack(mob/M, mob/living/carbon/human/user)
+/obj/item/melee/baton/attack(mob/M, mob/living/carbon/human/user, params)
 	if(clumsy_check(user))
 		return FALSE
 
@@ -195,29 +195,25 @@
 		..()
 		return
 
-
-	if(ishuman(M))
-		var/mob/living/carbon/human/L = M
-		if(check_martial_counter(L, user))
-			return
-
-	if(user.a_intent != INTENT_HARM)
-		if(turned_on)
-			if(attack_cooldown_check <= world.time)
-				if(baton_effect(M, user))
-					user.do_attack_animation(M)
-					return
-			else
-				to_chat(user, "<span class='danger'>The baton is still charging!</span>")
-		else
-			M.visible_message("<span class='warning'>[user] prods [M] with [src]. Luckily it was off.</span>", \
-							"<span class='warning'>[user] prods you with [src]. Luckily it was off.</span>")
-	else
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(turned_on)
 			if(attack_cooldown_check <= world.time)
 				baton_effect(M, user)
 		..()
-
+		return
+	else if(turned_on)
+		if(attack_cooldown_check <= world.time)
+			if(baton_effect(M, user))
+				user.do_attack_animation(M)
+				return
+		else
+			to_chat(user, "<span class='danger'>The baton is still charging!</span>")
+			return
+	else
+		M.visible_message("<span class='warning'>[user] prods [M] with [src]. Luckily it was off.</span>", \
+					"<span class='warning'>[user] prods you with [src]. Luckily it was off.</span>")
+		return
 
 /obj/item/melee/baton/proc/baton_effect(mob/living/L, mob/user)
 	if(shields_blocked(L, user))
@@ -282,7 +278,7 @@
 /obj/item/melee/baton/proc/shields_blocked(mob/living/L, mob/user)
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		if(H.check_shields(src, 0, "[user]'s [name]", MELEE_ATTACK)) //No message; check_shields() handles that
+		if(H.check_block(src, 0, "[user]'s [name]", MELEE_ATTACK)) //No message; check_block() handles that
 			playsound(H, 'sound/weapons/genhit.ogg', 50, TRUE)
 			return TRUE
 	return FALSE
@@ -290,7 +286,7 @@
 //Makeshift stun baton. Replacement for stun gloves.
 /obj/item/melee/baton/cattleprod
 	name = "stunprod"
-	desc = "An improvised stun baton."
+	desc = "An improvised stun baton. Left click to harm, right click to stun."
 	icon_state = "stunprod"
 	inhand_icon_state = "prod"
 	worn_icon_state = null
@@ -332,6 +328,13 @@
 	throw_stun_chance = 99  //Have you prayed today?
 	convertible = FALSE
 	custom_materials = list(/datum/material/iron = 10000, /datum/material/glass = 4000, /datum/material/silver = 10000, /datum/material/gold = 2000)
+
+/obj/item/melee/baton/boomerang/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE, quickstart = TRUE)
+	if(turned_on)
+		if(ishuman(thrower))
+			var/mob/living/carbon/human/H = thrower
+			H.throw_mode_off(THROW_MODE_TOGGLE) //so they can catch it on the return.
+	return ..()
 
 /obj/item/melee/baton/boomerang/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	if(turned_on)

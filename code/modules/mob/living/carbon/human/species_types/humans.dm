@@ -19,7 +19,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/human/host
 
-/datum/action/humaninfo/Trigger()
+/datum/action/humaninfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">

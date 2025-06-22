@@ -166,6 +166,23 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	..()
 	. = TRUE
 
+/datum/reagent/consumable/ethanol/beer/typhon
+	name = "Typhon's Beer"
+	description = "An alcoholic beverage brewed with a sicekningly addictive sanguine taste"
+	color = "#660000"
+	nutriment_factor = 1 * REAGENTS_METABOLISM
+	boozepwr = 50
+	taste_description = "blood sweet"
+	glass_name = "glass of sanquine beer"
+	glass_desc = "A freezing pint of vitae."
+
+/datum/reagent/consumable/ethanol/beer/typhon/on_mob_life(mob/living/carbon/M)
+	if(iskindred(M))
+		M.bloodpool = min(M.maxbloodpool, M.bloodpool + 0.25)
+	if(isghoul(M))
+		M.bloodpool = min(M.maxbloodpool, M.bloodpool + 1)
+	..()
+
 /datum/reagent/consumable/ethanol/whiskey
 	name = "Whiskey"
 	description = "A superb and well-aged single-malt whiskey. Damn."
