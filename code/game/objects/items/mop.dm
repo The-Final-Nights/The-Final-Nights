@@ -21,6 +21,7 @@
 
 /obj/item/mop/Initialize()
 	. = ..()
+	AddComponent(/datum/component/cleaner, mopspeed, pre_clean_callback=CALLBACK(src, .proc/should_clean), on_cleaned_callback=CALLBACK(src, .proc/apply_reagents))
 	create_reagents(mopcap)
 
 /obj/item/mop/proc/clean(turf/A, mob/living/cleaner)
@@ -40,55 +41,33 @@
 			cleaner.mind.adjust_experience(/datum/skill/cleaning, total_experience_gain)
 		A.wash(CLEAN_SCRUB)
 
-	reagents.expose(A, TOUCH, 10)	//Needed for proper floor wetting.
+///Checks whether or not we should clean.
+/obj/item/mop/proc/should_clean(datum/cleaning_source, atom/atom_to_clean, mob/living/cleaner)
+	if(istype(atom_to_clean, /obj/item/reagent_containers/glass/bucket) || istype(atom_to_clean, /obj/structure/janitorialcart))
+		return DO_NOT_CLEAN
+	if(reagents.total_volume < 0.1)
+		to_chat(cleaner, span_warning("Your mop is dry!"))
+		return DO_NOT_CLEAN
+	return TRUE
+
+/**
+ * Applies reagents to the cleaned floor and removes them from the mop.
+ *
+ * Arguments
+ * * cleaning_source the source of the cleaning
+ * * cleaned_turf the turf that is being cleaned
+ * * cleaner the mob that is doing the cleaning
+ */
+/obj/item/mop/proc/apply_reagents(datum/cleaning_source, turf/cleaned_turf, mob/living/cleaner)
+	reagents.expose(cleaned_turf, TOUCH, 10) //Needed for proper floor wetting.
 	var/val2remove = 1
 	if(cleaner?.mind)
-		val2remove = round(cleaner.mind.get_skill_modifier(/datum/skill/cleaning, SKILL_SPEED_MODIFIER),0.1)
-	reagents.remove_any(val2remove)			//reaction() doesn't use up the reagents
+		val2remove = round(cleaner.mind.get_skill_modifier(/datum/skill/cleaning, SKILL_SPEED_MODIFIER), 0.1)
+	reagents.remove_any(val2remove) //reaction() doesn't use up the reagents
 
-
-/obj/item/mop/afterattack(atom/A, mob/user, proximity)
+/obj/item/mop/cyborg/Initialize(mapload)
 	. = ..()
-	if(!proximity)
-		return
-
-	if(reagents.total_volume < 0.1)
-		to_chat(user, "<span class='warning'>Your mop is dry!</span>")
-		return
-
-	var/turf/T = get_turf(A)
-
-	if(istype(A, /obj/item/reagent_containers/glass/bucket) || istype(A, /obj/structure/janitorialcart))
-		return
-
-	if(T)
-		user.visible_message("<span class='notice'>[user] begins to clean \the [T] with [src].</span>", "<span class='notice'>You begin to clean \the [T] with [src]...</span>")
-		var/clean_speedies = 1
-		if(user.mind)
-			clean_speedies = user.mind.get_skill_modifier(/datum/skill/cleaning, SKILL_SPEED_MODIFIER)
-		if(do_after(user, mopspeed*clean_speedies, target = T))
-			to_chat(user, "<span class='notice'>You finish mopping.</span>")
-			clean(T, user)
-
-
-/obj/effect/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/mop) || istype(I, /obj/item/soap))
-		return
-	else
-		return ..()
-
-
-/obj/item/mop/proc/janicart_insert(mob/user, obj/structure/janitorialcart/J)
-	if(insertable)
-		J.put_in_cart(src, user)
-		J.mymop=src
-		J.update_appearance()
-	else
-		to_chat(user, "<span class='warning'>You are unable to fit your [name] into the [J.name].</span>")
-		return
-
-/obj/item/mop/cyborg
-	insertable = FALSE
+	ADD_TRAIT(src, TRAIT_NODROP, CYBORG_ITEM_TRAIT)
 
 /obj/item/mop/advanced
 	desc = "The most advanced tool in a custodian's arsenal, complete with a condenser for self-wetting! Just think of all the viscera you will clean up with this!"

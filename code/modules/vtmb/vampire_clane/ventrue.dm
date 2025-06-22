@@ -19,7 +19,7 @@
 	vampiric = TRUE
 	var/cool_down = 0
 
-/datum/action/dominate/Trigger()
+/datum/action/dominate/Trigger(trigger_flags)
 	. = ..()
 	if((cool_down + 5 SECONDS) >= world.time)
 		return

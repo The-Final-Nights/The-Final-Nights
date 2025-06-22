@@ -31,4 +31,3 @@
 	SIGNAL_HANDLER
 
 	mutable_recipes += list(list(TOOL_PROCESSING_RESULT = result_atom_type, TOOL_PROCESSING_AMOUNT = amount_created, TOOL_PROCESSING_TIME = time_to_process))
-	return COMPONENT_NO_AFTERATTACK
