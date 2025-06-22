@@ -8837,9 +8837,6 @@
 	pixel_y = 5;
 	dir = 1
 	},
-/obj/structure/mirror{
-	pixel_y = -32
-	},
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic)
 "bXX" = (
@@ -11924,8 +11921,10 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/financialdistrict/construction)
 "cHx" = (
-/obj/vehicle/ridden/wheelchair{
-	dir = 8
+/obj/structure/table/wood,
+/obj/item/flashlight/lamp/green{
+	pixel_y = 12;
+	pixel_x = -8
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
@@ -16018,6 +16017,10 @@
 	pixel_y = 0;
 	layer = 3.7;
 	alpha = 125
+	},
+/obj/effect/turf_decal/siding/white{
+	dir = 3;
+	color = "#636363"
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/clinic)
@@ -28664,6 +28667,10 @@
 	layer = 3.7;
 	alpha = 125
 	},
+/obj/effect/turf_decal/siding/white{
+	dir = 2;
+	color = "#636363"
+	},
 /turf/open/floor/plating/rough,
 /area/vtm/clinic)
 "gBe" = (
@@ -39869,7 +39876,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 4
 	},
-/turf/open/floor/plating/parquetry,
+/turf/open/floor/plating/vampcarpet,
 /area/vtm/clinic)
 "jku" = (
 /obj/effect/decal/bordur{
@@ -52056,7 +52063,6 @@
 	dir = 8;
 	pixel_x = 11
 	},
-/obj/structure/mirror/directional/east,
 /obj/machinery/light/small{
 	pixel_y = 32
 	},
@@ -68570,7 +68576,6 @@
 	dir = 4;
 	pixel_x = -13
 	},
-/obj/structure/mirror/directional/west,
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic)
 "pLW" = (
@@ -71067,7 +71072,7 @@
 	locked = 1;
 	name = "Office"
 	},
-/turf/open/floor/plating/parquetry,
+/turf/open/floor/plating/vampcarpet,
 /area/vtm/clinic)
 "qos" = (
 /obj/structure/mirror{
@@ -78764,6 +78769,7 @@
 	pixel_y = 16;
 	pixel_x = -7
 	},
+/obj/item/clothing/under/vampire/nurse,
 /turf/open/floor/carpet/green,
 /area/vtm/clinic)
 "rYk" = (
@@ -78975,7 +78981,6 @@
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/park)
 "sal" = (
-/obj/machinery/iv_drip,
 /obj/machinery/light{
 	dir = 8;
 	pixel_y = 15
@@ -79999,7 +80004,7 @@
 	name = "Office"
 	},
 /obj/effect/turf_decal/siding/white,
-/turf/open/floor/plating/parquetry,
+/turf/open/floor/plating/vampcarpet,
 /area/vtm/clinic)
 "sne" = (
 /obj/structure/table/wood,
@@ -85670,7 +85675,10 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/ventrue)
 "tFl" = (
-/turf/closed/wall/vampwall/painted/low/window,
+/obj/vehicle/ridden/wheelchair{
+	dir = 4
+	},
+/turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "tFp" = (
 /obj/structure/flora/ausbushes/fullgrass,
@@ -100408,7 +100416,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 1
 	},
-/turf/open/floor/plating/parquetry,
+/turf/open/floor/plating/vampcarpet,
 /area/vtm/clinic)
 "xbN" = (
 /obj/machinery/light/small/pink{
@@ -202555,7 +202563,7 @@ jcx
 kCX
 sqQ
 clF
-tFl
+bUt
 kCX
 iAG
 pkx
@@ -266796,7 +266804,7 @@ kCX
 aYq
 clp
 nwd
-hVI
+cHx
 vPB
 hVI
 jcx
@@ -267306,21 +267314,21 @@ ntq
 ntq
 ntq
 iUu
-bUt
-bUt
 kCX
-sDf
-cHx
-jcx
-jcx
-jcx
-jcx
-jcx
-jcx
-jcx
-jcx
-jcx
+tFl
 nwd
+nwd
+jcx
+jcx
+jcx
+jcx
+jcx
+jcx
+jcx
+jcx
+jcx
+jcx
+sDf
 bUt
 bUt
 bUt
@@ -267563,8 +267571,8 @@ ntq
 ntq
 ntq
 ntq
-mPC
-htw
+bUt
+bUt
 bUt
 bUt
 vWr
@@ -271439,7 +271447,7 @@ kCX
 ocf
 bUt
 kCX
-nwd
+vFc
 nwd
 bUt
 ntq
@@ -271694,7 +271702,7 @@ axs
 axs
 kCX
 nwd
-vFc
+nwd
 sal
 nwd
 nwd
@@ -273485,7 +273493,7 @@ axs
 xXZ
 kCX
 vDh
-nwd
+vFc
 bUt
 xXZ
 axs
