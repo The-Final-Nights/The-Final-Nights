@@ -547,31 +547,37 @@
 
 //ENDRON
 /obj/item/card/id/garou/spiral
-	icon_state = "id9"
-	worn_icon_state = "id9"
+	icon_state = "endronemployeeid"
+	worn_icon_state = "endronemployeeid"
 
 /obj/item/card/id/garou/spiral/lead
 	name = "Endron Branch Leader card"
+	icon_state = "endronexecutiveid"
+	worn_icon_state = "endronexecutiveid"
 	desc = "How bad can you possibly be?"
 
 /obj/item/card/id/garou/spiral/executive
 	name = "Endron Executive card"
+	icon_state = "endronexecutiveid"
+	worn_icon_state = "endronexecutiveid"
 	desc = "All the customers are buying."
 
 /obj/item/card/id/garou/spiral/affairs
 	name = "Endron Internal Affairs card"
+	icon_state = "endroniaaid"
+	worn_icon_state = "endronemployeeid"
 	desc = "And the Lawyers are denying."
 
 /obj/item/card/id/garou/spiral/secchief
 	name = "Endron Chief of Security badge"
-	icon_state = "id3"
-	worn_icon_state = "id3"
+	icon_state = "endronsecurityid"
+	worn_icon_state = "endronemployeeid"
 	desc = "Its not illegal if nobody finds out about it. Now if only Endron would pay for a single tank for you."
 
 /obj/item/card/id/garou/spiral/sec
 	name = "Endron Security Agent badge"
-	icon_state = "id3"
-	worn_icon_state = "id3"
+	icon_state = "endronsecurityid"
+	worn_icon_state = "endronemployeeid"
 	desc = "Corporate Security, a step above a mall cop. Better paid than a real cop."
 
 /obj/item/card/id/garou/spiral/employee
