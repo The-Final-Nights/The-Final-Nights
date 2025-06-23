@@ -39,7 +39,8 @@
 		contents_list += turf.GetAllContents()
 	for(var/mob/living/possible_victim in contents_list)
 		INVOKE_ASYNC(signal_user, PROC_REF(UnarmedAttack), possible_victim)
-		return
+	if(HAS_TRAIT(src, TRAIT_WARRIOR))
+		changeNext_move(CLICK_CD_MELEE * 0.5)
 
 
 // Simple proc for playing an appropriate attack animation
