@@ -14,9 +14,6 @@
 	var/list/masq_breakers = list()
 	if(GLOB.masquerade_breakers_list.len)
 		for(var/mob/living/carbon/human/breakor in GLOB.masquerade_breakers_list)
-			//Masq contract shouldnt be used to insta-hunt all Sabbat players. Sabbat players should be allowed to unleash the Beast and have the Camarilla naturally hunt them down without GPS.
-			if(breakor.mind && is_sabbatist(breakor))
-				continue
 			masq_breakers += breakor
 
 	if(masq_breakers.len)
@@ -26,8 +23,13 @@
 		for(var/mob/living/carbon/human/H in masq_breakers)
 			if(iskindred(H) || isghoul(H) || iscathayan(H))
 				var/turf/TT = get_turf(H)
+				var/location_info = ""
+				if(TT && !is_sabbatist(H))
+					location_info = "[get_area_name(H)] X:[TT.x] Y:[TT.y]"
+				else if(is_sabbatist(H))
+					location_info = "[get_area_name(H)]"
 				if(TT)
-					to_chat(user, "[H.true_real_name], Masquerade: [H.masquerade], Diablerist: [H.diablerist ? "<b>YES</b>" : "NO"], [get_area_name(H)] X:[TT.x] Y:[TT.y]")
+					to_chat(user, "[H.real_name], Masquerade: [H.masquerade], Diablerist: [H.diablerist ? "<b>YES</b>" : "NO"], [location_info]")
 	else
 		to_chat(user, "No available Masquerade breakers in city...")
 

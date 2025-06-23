@@ -3704,6 +3704,7 @@
 #include "code\modules\wod13\npcs\sabbat_npc.dm"
 #include "code\modules\wod13\objects\fusebox.dm"
 #include "code\modules\wod13\objects\generator.dm"
+#include "code\modules\wod13\objects\sabbatrunes.dm"
 #include "code\modules\wod13\onyxcombat\blocking.dm"
 #include "code\modules\wod13\onyxcombat\blood_drinking.dm"
 #include "code\modules\wod13\onyxcombat\blood_pool.dm"

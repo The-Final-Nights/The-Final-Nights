@@ -553,7 +553,6 @@
 		mind.original_character = H
 
 	H.name = real_name
-
 	client.init_verbs()
 	. = H
 	new_character = .

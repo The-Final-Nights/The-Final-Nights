@@ -3,10 +3,6 @@
 	var/self_visible = TRUE
 	var/icon_color //will set the icon color to this
 
-//just use antag hud logic since it already exists
-/datum/atom_hud/role
-	parent_type = /datum/atom_hud/antag
-
 /datum/atom_hud/antag/hidden
 	self_visible = FALSE
 
@@ -36,26 +32,16 @@
 
 //GAME_MODE PROCS
 //called to set a mob's antag icon state
-/proc/set_role_hud(mob/living/M, new_icon_state, hudindex)
+/proc/set_antag_hud(mob/M, new_icon_state, hudindex)
 	if(!istype(M))
-		CRASH("set_role_hud(): [M] ([M.type]) is not a mob!")
-
-	// Get the image holder for the HUD icon
+		CRASH("set_antag_hud(): [M] ([M.type]) is not a mob!")
 	var/image/holder = M.hud_list[ANTAG_HUD]
 	var/datum/atom_hud/antag/specific_hud = hudindex ? GLOB.huds[hudindex] : null
-
 	if(holder)
 		holder.icon_state = new_icon_state
 		holder.color = specific_hud?.icon_color
-
-	if(M.mind || isnull(new_icon_state)) // Only allow null icon for mindless mobs
-		if(M.mind)
-			M.mind.antag_hud_icon_state = new_icon_state
-	else
-		CRASH("set_role_hud(): Tried to assign a non-null icon state to a mob with no mind: [M]")
-
-/proc/set_antag_hud(mob/M, new_icon_state, hudindex)
-	set_role_hud(M, new_icon_state, hudindex)
+	if(M.mind || new_icon_state) //in mindless mobs, only null is acceptable, otherwise we're antagging a mindless mob, meaning we should runtime
+		M.mind.antag_hud_icon_state = new_icon_state
 
 
 //MIND PROCS
@@ -70,5 +56,3 @@
 	for(var/datum/atom_hud/antag/hud in GLOB.huds)
 		if(hud.hudusers[current])
 			hud.leave_hud(current)
-
-

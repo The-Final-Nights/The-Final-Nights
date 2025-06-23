@@ -484,7 +484,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<br><b>Name:</b> "
 			dat += "<a href='byond://?_src_=prefs;preference=name;task=input'>[real_name]</a><BR>"
 
-
 			if(!(AGENDER in pref_species.species_traits))
 				var/dispGender
 				if(gender == MALE)
@@ -2206,8 +2205,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if (total_age < age)
 							age = total_age
 						update_preview_icon()
-
-
 
 				if("info_choose")
 					var/new_info_known = tgui_input_list(user, "Choose who knows your character:", "Fame", list(INFO_KNOWN_UNKNOWN, INFO_KNOWN_CLAN_ONLY, INFO_KNOWN_FACTION, INFO_KNOWN_PUBLIC))

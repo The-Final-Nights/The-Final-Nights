@@ -1,6 +1,6 @@
 /obj/item/sabbat_war_party
 	name = "Sabbat War Party Totem"
-	desc = "A totem made from a Vampire's skull, made to summon all Sabbat packs to the Ductus' lair to bring the Sword of Caine to their enemies."
+	desc = "A totem made from a Vampire's skull, made to summon all Sabbat packs to the Ductus' lair."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "sabbat_warparty"
 	item_flags = NOBLUDGEON
@@ -18,11 +18,11 @@
 	var/mob/living/carbon/human/H = user
 
 	// Check if the user is a Sabbat Ductus or Priest
-	if(!is_sabbat_ductus(user) || !is_sabbat_priest(user))
+	if(!is_sabbat_ductus(user) && !is_sabbat_priest(user))
 		to_chat(H, span_cult("Only the Ductus or the Priest may call a War Party from the Totem!"))
 		return
 
-	var/choice = tgui_alert(H, "Do you wish to summon all Sabbat in the city to the Sabbat lair for the purposes of a War Party?", "War Party", list("Yes", "No"), 10 SECONDS)
+	var/choice = tgui_alert(H, "Do you wish to send a message to all Sabbat in the city instructing them to return to the Sabbat lair?", "Return", list("Yes", "No"), 10 SECONDS)
 	if(choice == "Yes")
 		activations++
 		var/success_chance = max(0, 100 - (activations - 1) * 33) // Reduce by 33% for each activation after the first
@@ -36,7 +36,7 @@
 			if(sabbat_member.mind && is_sabbatist(sabbat_member))
 				// Roll for each Sabbat member to see if they receive the call
 				if(activations == 1 || prob(success_chance))
-					to_chat(sabbat_member, span_cult("The Ductus is calling all pack members to return to the lair at once! A war party has been called! The Sword of Caine shall fall on the Elders!"))
+					to_chat(sabbat_member, span_cult("The Ductus calls all pack members back to the lair, return at once!"))
 					SEND_SOUND(sabbat_member, sound('code/modules/wod13/sounds/announce.ogg'))
 					sabbat_member.emote("twitch")
 

@@ -327,6 +327,7 @@
 /area/vtm/sabbat_lair
 	name = "Interior"
 	zone_type = "elysium"
+	music = /datum/vampiremusic/sewer
 
 /area/vtm/supply
 	name = "Supply Depot"

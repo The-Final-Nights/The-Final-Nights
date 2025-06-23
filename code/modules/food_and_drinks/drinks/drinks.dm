@@ -242,6 +242,7 @@
 	blood_donors = list() // Initialize the list
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/update_icon_state()
+	. = ..()
 	if(reagents && reagents.has_reagent(/datum/reagent/blood))
 		icon_state = "pewter_cup_filled_blood"
 	else
@@ -255,7 +256,7 @@
 	// Check if the user is a vampire or kindred
 	var/is_vampire_species = FALSE
 	if(istype(user, /mob/living/carbon/human))
-		if(istype(user.dna.species, /datum/species/vampire) || istype(user.dna.species, /datum/species/kindred))
+		if(iskindred(user))
 			is_vampire_species = TRUE
 
 	if(!is_vampire_species)
@@ -291,13 +292,7 @@
 
 	update_icon_state()
 
-/obj/item/reagent_containers/food/drinks/silver_goblet/on_reagent_change(changetype)
-	. = ..()
-	update_icon_state()
 
-	// If all blood is removed, clear the blood donors list
-	if(!reagents.has_reagent(/datum/reagent/blood))
-		blood_donors.Cut()
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/attack(mob/living/carbon/M, mob/user)
 	if(!reagents.has_reagent(/datum/reagent/blood))
@@ -307,7 +302,7 @@
 	var/is_vampire_species = FALSE
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
-		if(istype(H.dna.species, /datum/species/vampire) || istype(H.dna.species, /datum/species/kindred))
+		if(iskindred(H))
 			is_vampire_species = TRUE
 
 	// Special handling for vampires drinking blood
@@ -315,7 +310,7 @@
 		// If multiple donors, it's a proper Vaulderie ritual
 		if(length(blood_donors) >= 2)
 			// Ask confirmation via tgui_alert
-			var/choice = tgui_alert(M, "Do you wish to take part in the Vaulderie? This will bind you to the other participants, and remove any previous bonds...", "Vaulderie Ritual", list("Yes", "No"), 10 SECONDS)
+			var/choice = tgui_alert(M, "Do you wish to take part in the Vaulderie? This will bind you to the other participants, and remove any previous bonds... (This will cause your character to change sects to the Sabbat!)", "Vaulderie Ritual", list("Yes", "No"), 10 SECONDS)
 			if(choice != "Yes")
 				to_chat(M, span_cult("You decide not to participate in the Vaulderie."))
 				return
@@ -334,10 +329,9 @@
 				to_chat(M, span_warning("You stop drinking from the [src]."))
 				return
 
-	. = ..()
 	if(length(blood_donors) > 0 && reagents.has_reagent(/datum/reagent/blood))
 		if(istype(M, /mob/living/carbon/human))
-			if(istype(M.dna.species, /datum/species/vampire) || istype(M.dna.species, /datum/species/kindred))
+			if(iskindred(M))
 				is_vampire_species = TRUE
 
 		if(is_vampire_species)
@@ -347,7 +341,7 @@
 					M.apply_status_effect(STATUS_EFFECT_INLOVE, donor)
 					to_chat(M, span_warning("You feel a strange connection to <b>[donor]</b> forming as their blood mingles with yours!"))
 					to_chat(donor, span_notice("You sense that <b>[M]</b> has consumed your blood and is now bound to you."))
-					M.visible_message(span_notice("[M]'s eyes flash briefly as they become bound to [donor]."), "", span_notice("Your eyes flash as the blood bond forms."))
+					M.visible_message(span_notice("[M]'s eyes flash briefly as they become bound to [donor]."), span_notice("Your eyes flash as the blood bond forms."))
 					playsound(M, 'sound/magic/smoke.ogg', 20, TRUE)
 
 	// Handle vaulderie
@@ -357,7 +351,9 @@
 		if(!is_sabbatist(M))
 			to_chat(M, span_cult("You feel your previous blood bonds vanishing as you take part in the Vaulderie and join the Sabbat..."))
 			M.mind.assigned_role = "Sabbat Pack"
-			add_antag_hud(ANTAG_HUD_REV, "rev", M)
+			var/datum/antagonist/temp_antag = new()
+			temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", M)
+			qdel(temp_antag)
 	else
 		// Single donor case - Transfer sabbat status from donor if they have it
 		var/antag_transferred = FALSE
@@ -369,13 +365,16 @@
 				if(M.mind && !is_sabbatist(M))
 					to_chat(M, span_warning("You feel a strange connection to [donor] as you drink their blood..."))
 					M.mind.assigned_role = "Sabbat Pack"
-					add_antag_hud(ANTAG_HUD_REV, "rev", M)
+					var/datum/antagonist/temp_antag = new()
+					temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", M)
+					qdel(temp_antag)
 					antag_transferred = TRUE
 					break
 
 				if(antag_transferred)
 					to_chat(M, span_cult("Your mind floods with alien thoughts and philosophies. You now serve the Sabbat!"))
 					break  // Only need to transfer one antag datum type
+	. = ..()
 
 //on_reagant_change so if all blood is emptied from the cup it empties the blood donors list
 /obj/item/reagent_containers/food/drinks/silver_goblet/on_reagent_change()
@@ -400,11 +399,12 @@
 	icon_state = "vaulderie_goblet"
 
 /obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet/update_icon_state()
+	. = ..()
 	if(reagents && reagents.has_reagent(/datum/reagent/blood))
 		icon_state = "vaulderie_goblet_filled"
 	else
 		icon_state = "vaulderie_goblet"
-	return TRUE // Return TRUE instead of ..() to ensure proper icon updating
+	return TRUE
 
 
 /obj/item/reagent_containers/food/drinks/coffee

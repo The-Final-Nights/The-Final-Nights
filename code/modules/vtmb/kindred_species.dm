@@ -470,7 +470,9 @@
 							if(sire.mind && is_sabbatist(sire))
 								if(childe.mind && !is_sabbatist(childe))
 									childe.mind.assigned_role = "Sabbat Pack"
-									add_antag_hud(ANTAG_HUD_REV, "rev", childe)
+									var/datum/antagonist/temp_antag = new()
+									temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", childe)
+									qdel(temp_antag)
 									log_game("[key_name(sire)] has spread Sabbatism to [key_name(childe)] via Embrace.")
 					else
 						to_chat(owner, span_notice("[childe] is totally <b>DEAD</b>!"))
@@ -507,7 +509,9 @@
 					if(regnant.mind && 	is_sabbatist(regnant))
 						if(thrall.mind && !is_sabbatist(thrall))
 							thrall.mind.assigned_role = "Sabbat Pack"
-							add_antag_hud(ANTAG_HUD_REV, "rev", thrall)
+							var/datum/antagonist/temp_antag = new()
+							temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", thrall)
+							qdel(temp_antag)
 							log_game("[key_name(regnant)] has spread Sabbatism to [key_name(thrall)] via vitae.")
 
 					if(length(regnant.reagents?.reagent_list))

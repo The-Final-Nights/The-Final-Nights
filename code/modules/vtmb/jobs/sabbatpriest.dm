@@ -19,7 +19,7 @@
 	v_duty = "You are the Sabbat Priest. You are charged with the supervision of the ritae of your pack. You also serve as the second-in-command to the Ductus. Consecrate the Vaulderie for new Sabbat, consult your tome for rites to aid your pack, and ensure the Sabbat live on in Caine's favor.  <br> <b> NOTE: BY PLAYING THIS ROLE YOU AGREE TO AND HAVE READ THE SERVER'S RULES ON ESCALATION FOR ANTAGS. KEEP THINGS INTERESTING AND ENGAGING FOR BOTH SIDES. KILLING PLAYERS JUST BECAUSE YOU CAN MAY RESULT IN A ROLEBAN. "
 	duty = "Down with the Camarilla. Down with the Elders. Down with the Jyhad! The Kindred are the true rulers of Earth, blessed by Caine, the Dark Father."
 	minimal_masquerade = 0
-	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Tzimisce", "Baali")
+	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Ministry", "Lasombra", "Gargoyle", "Tzimisce", "Baali", "Cappadocian", "Kiasyd", "Salubri", "Warrior Salubri", "Daughters of Cacophany", "True Brujah", "Nagaraja")
 	display_order = JOB_DISPLAY_ORDER_SABBATPRIEST
 	whitelisted = TRUE
 
@@ -55,40 +55,13 @@
 	if(H.clane && H.clane.name != "Lasombra")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 	if(H.mind)
-		add_antag_hud(ANTAG_HUD_REV, "rev_head", H)
-
+		var/datum/antagonist/temp_antag = new()
+		temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev_head", H)
+		qdel(temp_antag)
 
 /obj/effect/landmark/start/sabbatpriest
 	name = "Sabbat Priest"
 	icon_state = "Assistant"
-
-/obj/sabbatrune
-	name = "Monomacy Rune"
-	desc = "Monomacy is the rite of resolving disputes among pack mates. Challenge that curr to a duel!"
-	icon = 'icons/effects/crayondecal.dmi'
-	icon_state = "rune4"
-	color = rgb(64, 64, 64)
-	anchored = TRUE
-	var/activated = FALSE
-	var/mob/living/last_activator
-	var/list/sacrifices = list()
-	var/challenge_cooldown = FALSE
-	var/cooldown_duration = 600 SECONDS // 10 minute cooldown between challenges
-
-/obj/sabbatrune/attack_hand(mob/living/user)
-	. = ..()
-
-	// Check if user is a sabbatist, ductus, or priest
-	if(!is_sabbatist(user))
-		to_chat(user, span_warning("You do not understand the power of this rune."))
-		return
-
-	if(challenge_cooldown)
-		to_chat(user, span_warning("The rune is still cooling down from the last challenge."))
-		return
-
-	last_activator = user
-	issue_challenge(user)
 
 /proc/is_sabbatist(mob/living/user)
 	return user?.mind?.assigned_role in list("Sabbat Priest", "Sabbat Ductus", "Sabbat Pack")
@@ -98,60 +71,6 @@
 
 /proc/is_sabbat_ductus(mob/living/user)
 	return user?.mind?.assigned_role == "Sabbat Ductus"
-
-/obj/sabbatrune/proc/issue_challenge(mob/living/challenger)
-	// Ask for the name of the player to challenge
-	var/challenged_name = tgui_input_text(challenger, "Enter the name of the person you wish to challenge to Monomacy:", "Monomacy Challenge")
-	if(!challenged_name)
-		return
-
-	// Find the target based on the provided name
-	var/mob/living/target = null
-	for(var/mob/living/carbon/human/H in GLOB.player_list)
-		// if the target is not dead, is the challenger isnt targeting themselves, if the target is a sabbatist, and if one of the name datums match the name input
-		if(H.stat != DEAD && H != challenger && is_sabbatist(H) && (findtext(H.real_name, challenged_name) || findtext(H.name, challenged_name)))
-			target = H
-
-	if(!target)
-		to_chat(challenger, span_cult("Could not find anyone with that name to challenge! Only members of the Sabbat may engage in Monomacy."))
-		return
-
-
-	// Notify the challenger
-	to_chat(challenger, span_cult("You have challenged [target.real_name] to a duel of Monomacy!"))
-	SEND_SOUND(challenger, sound('code/modules/wod13/sounds/announce.ogg'))
-
-	// Notify the target
-	to_chat(target, span_cult("[challenger.real_name] challenges you to a duel of Monomacy! Return to the lair at once!"))
-	SEND_SOUND(target, sound('code/modules/wod13/sounds/announce.ogg'))
-
-	// Announce the challenge to everyone nearby
-	for(var/mob/M in viewers(7, src))
-		if(M != challenger && M != target)
-			to_chat(M, span_cult("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy!"))
-			SEND_SOUND(M, sound('code/modules/wod13/sounds/announce.ogg'))
-
-	// Notify the priest
-	for(var/mob/living/carbon/human/priest in GLOB.player_list)
-		if(is_sabbat_priest(priest))
-			to_chat(priest, span_cult("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy! Return to the lair at once to ensure Caine's will is done."))
-			SEND_SOUND(priest, sound('code/modules/wod13/sounds/announce.ogg'))
-
-	// Visual and audio effects for the rune itself
-	animate(src, color = rgb(192, 192, 192), time = 2) // Flash to a brighter gray
-	animate(color = rgb(64, 64, 64), time = 3) // Return to original color
-	playsound(src, 'sound/magic/smoke.ogg', 20, TRUE)
-
-	// Set cooldown
-	challenge_cooldown = TRUE
-	addtimer(CALLBACK(src, PROC_REF(reset_cooldown)), cooldown_duration)
-
-	// Log the challenge
-	log_game("[key_name(challenger)] has challenged [key_name(target)] to Monomacy via sabbatrune.")
-
-
-/obj/sabbatrune/proc/reset_cooldown()
-	challenge_cooldown = FALSE
 
 /obj/item/sabbat_priest_tome
 	name = "Sabbat Priest's Tome"
@@ -165,7 +84,7 @@
 
 /datum/sabbat_ritae/ritae_description/pack_credo
 	name = "Pack Credo"
-	desc = "We are the Sword of Caine. We do not bow to the Masquerade. We are not slaves to the Elders, nor tools of the Antediluvians. Through blood and fire, we bring about Gehenna. We act not in secrecy, but in strength, united as one Pack. Death to traitors. Death to tyrants. Caine wills it.\n"
+	desc = "We are the Sword of Caine. We do not bow to the Masquerade. We are not slaves to the Elders, nor tools of the Antediluvians. Through blood and fire, we prepare for Gehenna. We act not in secrecy, but in strength, united as one Pack. Death to traitors. Death to tyrants. Caine wills it.\n"
 
 /datum/sabbat_ritae/ritae_description/vaulderie_info
 	name = "The Vaulderie"
@@ -181,7 +100,7 @@
 
 /datum/sabbat_ritae/ritae_description/bloodbath_info
 	name = "Blood Bath"
-	desc = "The Rite of the Blood Bath is the rite by which the Priest may select a new Ductus, usually taking place after the previous Ductus was challenged to Monomacy. Each Sabbat Cainite who wishes to serve the new Ductus approaches our bathtub, and contributes a large amount of vitae using the ritual knife. The new Ductus then bathes in the blood of the pack which recognizes them, and upon exiting the bathtub, the Priest is to scoop up the blood in a Vaulderie Goblet, for all to drink of, consecrating the new Pack formation's vinculum. \n"
+	desc = "The Rite of the Blood Bath is the rite by which the Priest may select a new Ductus, usually taking place after the previous Ductus was challenged to Monomacy. Each Sabbat Cainite who wishes to serve the new Ductus approaches our bathtub, and contributes a large amount of vitae using the ritual knife. The new Ductus then bathes in the blood of the pack which recognizes them, where the Priest then uses the Tome on the bathtub, and upon exiting the bathtub, the Priest is to scoop up the blood in a Vaulderie Goblet, for all to drink of, consecrating the new Pack formation's vinculum. \n"
 
 /datum/sabbat_ritae/ritae_description/war_party_hunt_info
 	name = "War Party"
@@ -193,9 +112,7 @@
 
 /datum/sabbat_ritae/ritae_description/wild_hunt_info
 	name = "Wild Hunt"
-	desc = "None may defy Caine - especially not those who have undertaken the Vaulderie! Traitors and defectors to Caine and the Sabbat shall be struck down with a rightful war party, along with any who know of their treachery, but not before we have our fun with them, diablerie, burning them atop our ritual fire with a stake still in their putrid heart, or mutilation. None may defy Caine, and none may escape Caine's vengeance, not the Elders of the Camarilla or traitors to the pack.\n "
-
-
+	desc = "None may defy Caine - especially not those who have undertaken the Vaulderie! Traitors and defectors to Caine and the Sabbat shall be struck down with a rightful war party, along with any who know of their treachery. Diablerie, burning them atop our ritual fire with a stake still in their putrid heart, or mutilation may take place, before they are sentenced to death. None may defy Caine, and none may escape Caine's vengeance, not the Elders of the Camarilla or traitors to the pack.\n "
 
 /obj/item/sabbat_priest_tome/attack_self(mob/living/carbon/human/user)
 	if(!user.mind || !is_sabbatist(user))
@@ -245,7 +162,7 @@
 		to_chat(user, span_cult("<b>Pack Credo:</b>"))
 		to_chat(user, span_cult("[credo.desc]"))
 
-		var/new_credo = tgui_input_text(user, "Enter your interpretation of the Sabbat's goals:", "Edit Pack Credo", credo.desc) as text|null
+		var/new_credo = tgui_input_text(user, "Enter your interpretation of the Sabbat's goals:", "Edit Pack Credo", credo.desc)
 		if(new_credo && new_credo != credo.desc)
 			credo.desc = new_credo
 			to_chat(user, span_cult("You update your pack's interpretation of the Sabbat Credo."))

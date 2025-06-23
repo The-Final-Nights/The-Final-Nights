@@ -577,18 +577,3 @@
 /obj/item/card/id/garou/spiral/employee
 	name = "Endron Employee card"
 	desc = "Congratulations, Wagie."
-
-//global procs for adding role huds to certain jobs - needed for vaulderie and hunters
-/proc/add_role_hud(hud_type, icon_state, mob/living/mob_override)
-	var/datum/atom_hud/role/hud = GLOB.huds[hud_type]
-	if(!hud)
-		CRASH("add_role_hud(): Unknown HUD type '[hud_type]'")
-	hud.join_hud(mob_override)
-	set_role_hud(mob_override, icon_state, hud_type)
-
-/proc/remove_role_hud(hud_type, mob/living/mob_override)
-	var/datum/atom_hud/role/hud = GLOB.huds[hud_type]
-	if(!hud)
-		CRASH("remove_role_hud(): Unknown HUD type '[hud_type]'")
-	hud.leave_hud(mob_override)
-	set_role_hud(mob_override, null, hud_type)
