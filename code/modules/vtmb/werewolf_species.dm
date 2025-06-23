@@ -14,7 +14,7 @@
 	dust_anim = "dust-h"
 	punchdamagelow = 10
 	punchdamagehigh = 20
-	whitelisted = FALSE
+	whitelisted = TRUE
 	selectable = TRUE
 	species_language_holder = /datum/language_holder/werewolf
 	var/glabro = FALSE
