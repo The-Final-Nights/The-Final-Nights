@@ -13,6 +13,7 @@
 		thaumaturgy.Grant(owner)
 		thaumaturgy.level = level
 		owner.thaumaturgy_knowledge = TRUE
+		owner.mind.teach_crafting_recipe(/datum/crafting_recipe/arctome)
 	if(level >= 3)
 		var/datum/action/bloodshield/bloodshield = new()
 		bloodshield.Grant(owner)
