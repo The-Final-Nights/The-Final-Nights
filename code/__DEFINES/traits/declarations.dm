@@ -324,6 +324,9 @@
 #define TRAIT_BADTOUCH			"bad_touch"
 #define TRAIT_EXTROVERT			"extrovert"
 #define TRAIT_INTROVERT			"introvert"
+#define TRAIT_FLOWER_LANGUAGE			"floriography"
+#define TRAIT_FLOWER_LANGUAGE_JAPANESE	"hanakotoba"
+
 ///Trait for dryable items
 #define TRAIT_DRYABLE "trait_dryable"
 ///Trait for dried items

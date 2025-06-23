@@ -129,6 +129,15 @@
 	results = list(/datum/reagent/consumable/pancakebatter = 15)
 	required_reagents = list(/datum/reagent/consumable/eggyolk = 12, /datum/reagent/consumable/milk = 10, /datum/reagent/consumable/flour = 5)
 
+/datum/chemical_reaction/kuzumochi //ideally as cooking is mended, this will make a mix for the tea which is then cooled to make the mochi
+	required_reagents = list(/datum/reagent/consumable/flour/honkuzu = 5, /datum/reagent/water = 5, /datum/reagent/consumable/honey = 5)
+	mix_message = "The ingredients form a partially transluscent, sticky white treat."
+
+/datum/chemical_reaction/kuzumochi/on_reaction(datum/reagents/holder, created_volume)
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/food/kuzumochi(location)
+
 /datum/chemical_reaction/ricebowl
 	required_reagents = list(/datum/reagent/consumable/rice = 10, /datum/reagent/water = 10)
 	required_container = /obj/item/reagent_containers/glass/bowl
@@ -157,3 +166,8 @@
 /datum/chemical_reaction/gravy
 	results = list(/datum/reagent/consumable/gravy = 3)
 	required_reagents = list(/datum/reagent/consumable/milk = 1, /datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/flour = 1)
+
+/datum/chemical_reaction/kuzuyu
+	required_reagents = list(/datum/reagent/consumable/flour/honkuzu = 5, /datum/reagent/water = 5, /datum/reagent/consumable/sugar = 5)
+	results = list(/datum/reagent/consumable/kuzuyu = 25) //because this is a beverage which thickens, I'm treating this as an increase
+	mix_message = "The ingredients form a thick white tea."

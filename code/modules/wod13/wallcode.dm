@@ -321,6 +321,14 @@
 	low = TRUE
 	blocks_air = FALSE
 
+/turf/closed/wall/vampwall/wood/low/plantbeds //just slap /obj/machinery/hydroponics/soil @ pixel_y 5 on top of it.
+	icon = 'code/modules/wod13/lowwalls.dmi'
+	name = "raised plant beds"
+	desc = "A raised wooden bed used to keep cultivars somewhat separate from ground soil."
+	opacity = FALSE
+	low = TRUE
+	blocks_air = FALSE
+
 /turf/closed/wall/vampwall/wood/low/window
 	icon_state = "wood-window"
 	window = /obj/structure/window/fulltile

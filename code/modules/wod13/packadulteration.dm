@@ -33,7 +33,7 @@
 /datum/crafting_recipe/bweedpack
 	name = "Make Weed Adulterated Bloodpack"
 	time = 25
-	reqs = list(/obj/item/weedpack = 1, /obj/item/reagent_containers/blood = 1, /datum/reagent/blood = 200)
+	reqs = list(/obj/item/food/grown/cannabis = 1, /obj/item/reagent_containers/blood = 1, /datum/reagent/blood = 200)
 	result = /obj/item/reagent_containers/blood/bweedpack
 	always_available = TRUE
 	category = CAT_DRUGS

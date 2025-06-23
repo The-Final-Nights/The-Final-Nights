@@ -268,7 +268,7 @@
 	return ..()
 
 /datum/reagent/toxin/plantbgone
-	name = "Plant-B-Gone"
+	name = "Scour™"
 	description = "A harmful toxic mixture to kill plantlife. Do not ingest!"
 	color = "#49002E" // rgb: 73, 0, 46
 	toxpwr = 1

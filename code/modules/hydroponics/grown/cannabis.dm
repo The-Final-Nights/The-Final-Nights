@@ -10,12 +10,12 @@
 	potency = 20
 	growthstages = 1
 	instability = 40
-	growing_icon = 'icons/obj/power.dmi'
-	icon_grow = "smes" // Uses one growth icons set for all the subtypes
-	icon_dead = "smes" // Same for the dead icon
+	growing_icon = 'icons/obj/hydroponics/growing.dmi'
+	icon_grow = "cannabis-grow" // Uses one growth icons set for all the subtypes
+	icon_dead = "cannabis-dead" // Same for the dead icon
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
 	mutatelist = list(/obj/item/seeds/cannabis/rainbow,
-						/obj/item/seeds/cannabis/death,
+						// /obj/item/seeds/cannabis/death,
 						/obj/item/seeds/cannabis/white,
 						/obj/item/seeds/cannabis/ultimate)
 	reagents_add = list(/datum/reagent/drug/cannabis = 0.15, /datum/reagent/toxin/lipolicide = 0.35) // gives u the munchies
@@ -32,7 +32,7 @@
 	reagents_add = list(/datum/reagent/colorful_reagent = 0.05, /datum/reagent/medicine/psicodine = 0.03, /datum/reagent/drug/happiness = 0.1, /datum/reagent/toxin/mindbreaker = 0.1, /datum/reagent/toxin/lipolicide = 0.15)
 	rarity = 40
 
-/obj/item/seeds/cannabis/death
+/* /obj/item/seeds/cannabis/death
 	name = "pack of deathweed seeds"
 	desc = "These seeds grow into deathweed. Not groovy."
 	icon_state = "seed-blackcannabis"
@@ -41,7 +41,7 @@
 	product = /obj/item/food/grown/cannabis/death
 	mutatelist = list()
 	reagents_add = list(/datum/reagent/toxin/cyanide = 0.35, /datum/reagent/drug/space_drugs = 0.15, /datum/reagent/toxin/lipolicide = 0.15)
-	rarity = 40
+	rarity = 40 */
 
 /obj/item/seeds/cannabis/white
 	name = "pack of lifeweed seeds"
@@ -84,14 +84,16 @@
 
 /obj/item/food/grown/cannabis
 	seed = /obj/item/seeds/cannabis
-	icon = 'icons/obj/power.dmi'
+	icon = 'icons/obj/hydroponics/harvest.dmi'
 	name = "cannabis leaf"
-	desc = "Recently legalized in most galaxies."
+	desc = "They say that next year they're going to try to legalise it."
 	icon_state = "cannabis"
 	bite_consumption_mod = 2
 	foodtypes = VEGETABLES //i dont really know what else weed could be to be honest
 	tastes = list("cannabis" = 1)
 	wine_power = 20
+	cost = 100 //for selling, priced from average california cost per 3.5g leaf to aim for people to get at least $20/leaf
+	illegal = TRUE //In 2015 Cannabis was only legally distributed in California by medical dispensary. https://web.archive.org/web/20161109220853/http://www.times-standard.com/article/NJ/20161107/NEWS/161109826
 
 /obj/item/food/grown/cannabis/rainbow
 	seed = /obj/item/seeds/cannabis/rainbow
@@ -99,13 +101,16 @@
 	desc = "Is it supposed to be glowing like that...?"
 	icon_state = "megacannabis"
 	wine_power = 60
+	cost = 150 //for selling in the black market
 
-/obj/item/food/grown/cannabis/death
+/* /obj/item/food/grown/cannabis/death
 	seed = /obj/item/seeds/cannabis/death
 	name = "death cannabis leaf"
 	desc = "Looks a bit dark. Oh well."
 	icon_state = "blackcannabis"
 	wine_power = 40
+	cost = 400
+	var/illegal = TRUE */
 
 /obj/item/food/grown/cannabis/white
 	seed = /obj/item/seeds/cannabis/white
@@ -113,6 +118,7 @@
 	desc = "It feels smooth and nice to the touch."
 	icon_state = "whitecannabis"
 	wine_power = 10
+	cost = 150 //for selling in the black market
 
 /obj/item/food/grown/cannabis/ultimate
 	seed = /obj/item/seeds/cannabis/ultimate
@@ -121,3 +127,4 @@
 	icon_state = "ocannabis"
 	max_volume = 420
 	wine_power = 90
+	cost = 200  //for selling in the black market

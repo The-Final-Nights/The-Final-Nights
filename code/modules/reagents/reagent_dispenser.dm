@@ -61,6 +61,13 @@
 	icon_state = "water_high" //I was gonna clean my room...
 	tank_volume = 100000
 
+/obj/structure/reagent_dispensers/watertank/rainbarrel // I'd call it a water butt so if anyone else does, here it is so it shows in searches
+	name = "Rain Barrel"
+	desc = "A water barrel that collects rain water, intended for watering a garden."
+	icon_state = "rain_barrel"
+	anchored = TRUE
+	density = 0
+
 /obj/structure/reagent_dispensers/foamtank
 	name = "firefighting foam tank"
 	desc = "A tank full of firefighting foam."

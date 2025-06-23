@@ -124,10 +124,17 @@
 	return reagents.maximum_volume
 
 /obj/item/reagent_containers/glass/beaker/jar
-	name = "honey jar"
-	desc = "A jar for honey. It can hold up to 50 units of sweet delight."
+	name = "empty jar"
+	desc = "A jar for whatever your heart desires. It can hold up to 50 units of sweet delight."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "vapour"
+
+/obj/item/reagent_containers/glass/beaker/jar/honey
+	name = "honey jar"
+	desc = "A jar of honey."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "vapour"
+	list_reagents = list(/datum/reagent/consumable/honey = 50)
 
 /obj/item/reagent_containers/glass/beaker/large
 	name = "large beaker"
@@ -280,6 +287,33 @@
 		slot_equipment_priority.Insert(index, ITEM_SLOT_HEAD)
 		return
 	return ..()
+
+/obj/item/reagent_containers/glass/wateringcan //death to bailers
+	name = "watering can"
+	desc = "An unbranded garderner's pail with a spout."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "wateringcan"
+	/* inhand_icon_state = "wateringcan" //sprites not implemented
+	lefthand_file = 'code/modules/wod13/lefthand.dmi'
+	righthand_file = 'code/modules/wod13/righthand.dmi' */
+	custom_materials = list(/datum/material/iron=200)
+	w_class = WEIGHT_CLASS_NORMAL
+	amount_per_transfer_from_this = 10
+	possible_transfer_amounts = list(5,10,15,20,25,30)
+	volume = 33 // average bucket is 15l, ss13 bucket is 50u. 50 / 15 = 3.333(1l). Average w.can is 8 - 10l. 10 x 3.333 = 33.333... ~33u.
+	slot_flags = NONE
+	resistance_flags = NONE
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 75, ACID = 50)
+	slot_equipment_priority = list( \
+		ITEM_SLOT_BACK, ITEM_SLOT_ID,\
+		ITEM_SLOT_ICLOTHING, ITEM_SLOT_OCLOTHING,\
+		ITEM_SLOT_MASK, ITEM_SLOT_HEAD, ITEM_SLOT_NECK,\
+		ITEM_SLOT_FEET, ITEM_SLOT_GLOVES,\
+		ITEM_SLOT_EARS, ITEM_SLOT_EYES,\
+		ITEM_SLOT_BELT, ITEM_SLOT_SUITSTORE,\
+		ITEM_SLOT_LPOCKET, ITEM_SLOT_RPOCKET,\
+		ITEM_SLOT_DEX_STORAGE
+	)
 
 /obj/item/pestle
 	name = "pestle"

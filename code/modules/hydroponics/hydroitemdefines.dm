@@ -37,9 +37,9 @@
 // *************************************
 
 /obj/item/reagent_containers/spray/weedspray // -- Skie
-	desc = "It's a toxic mixture, in spray form, to kill small weeds."
+	desc = "Contains Endron brand aerosolised Scour™ herbicide for eliminating weeds."
 	icon = 'icons/obj/hydroponics/equipment.dmi'
-	name = "weed spray"
+	name = "Aero Scour™"
 	icon_state = "weedspray"
 	inhand_icon_state = "spraycan"
 	worn_icon_state = "spraycan"
@@ -53,9 +53,9 @@
 	return (TOXLOSS)
 
 /obj/item/reagent_containers/spray/pestspray // -- Skie
-	desc = "It's some pest eliminator spray! <I>Do not inhale!</I>"
+	desc = "A naturally formulated, minimally chemically intensive pesticide sold by the local flower shop, Unfettered Nightbloom. Judging by the scent, it's mostly lavender extract."
 	icon = 'icons/obj/hydroponics/equipment.dmi'
-	name = "pest spray"
+	name = "Vanguard"
 	icon_state = "pestspray"
 	inhand_icon_state = "plantbgone"
 	worn_icon_state = "spraycan"
@@ -63,11 +63,11 @@
 	righthand_file = 'icons/mob/inhands/equipment/hydroponics_righthand.dmi'
 	volume = 100
 	list_reagents = list(/datum/reagent/toxin/pestkiller = 100)
-
+/*
 /obj/item/reagent_containers/spray/pestspray/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is huffing [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (TOXLOSS)
-
+*/
 /obj/item/cultivator
 	name = "cultivator"
 	desc = "It's used for removing weeds or scratching your back."
@@ -243,9 +243,11 @@
 
 /obj/item/reagent_containers/glass/bottle/nutrient
 	name = "bottle of nutrient"
+	desc= "Simple and easy starter nutrients from Unfettered Nightbloom, the local flower shop. Guaranteed suitable for heirloom cultivars due to zero mutation risk."
 	volume = 50
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(1,2,5,10,15,25,50)
+	list_reagents = list(/datum/reagent/plantnutriment = 50)
 
 /obj/item/reagent_containers/glass/bottle/nutrient/Initialize()
 	. = ..()
@@ -254,17 +256,17 @@
 
 
 /obj/item/reagent_containers/glass/bottle/nutrient/ez
-	name = "bottle of E-Z-Nutrient"
-	desc = "Contains a fertilizer that causes mild mutations and gradual plant growth with each harvest."
+	name = "bottle of Forever Gro™"
+	desc = "Endron's latest brand in the Economulch™ product line. Known to result in gradual growth and some mutation."
 	list_reagents = list(/datum/reagent/plantnutriment/eznutriment = 50)
 
 /obj/item/reagent_containers/glass/bottle/nutrient/l4z
-	name = "bottle of Left 4 Zed"
-	desc = "Contains a fertilizer that lightly heals the plant but causes significant mutations in plants over generations."
+	name = "bottle of Auntie Ethel's Touch™"
+	desc = "Endron's Ethyl methanesulfonate home gardening product. Causes significant mutations in plants over generations. The bottle labels it carcinogenic, mutagenic and teratogenic."
 	list_reagents = list(/datum/reagent/plantnutriment/left4zednutriment = 50)
 
 /obj/item/reagent_containers/glass/bottle/nutrient/rh
-	name = "bottle of Robust Harvest"
+	name = "bottle of Allemand Farms Fertilizer"
 	desc = "Contains a fertilizer that increases the yield of a plant while gradually preventing mutations."
 	list_reagents = list(/datum/reagent/plantnutriment/robustharvestnutriment = 50)
 
@@ -277,11 +279,11 @@
 	possible_transfer_amounts = list(1,2,5)
 
 /obj/item/reagent_containers/glass/bottle/killer/weedkiller
-	name = "bottle of weed killer"
-	desc = "Contains a herbicide."
+	name = "bottle of Scour™"
+	desc = "Contains Endron brand Scour™ herbicide."
 	list_reagents = list(/datum/reagent/toxin/plantbgone/weedkiller = 30)
 
 /obj/item/reagent_containers/glass/bottle/killer/pestkiller
-	name = "bottle of pest spray"
-	desc = "Contains a pesticide."
+	name = "bottle of Vanguard"
+	desc = "A pesticide sold by the local flower shop, Unfettered Nightbloom. Judging by the scent, it's mostly lavender extract."
 	list_reagents = list(/datum/reagent/toxin/pestkiller = 30)

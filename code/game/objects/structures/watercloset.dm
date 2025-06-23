@@ -324,15 +324,9 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 	user.visible_message("<span class='notice'>[user] washes [user.p_their()] [washing_face ? "face" : "hands"] using [src].</span>", \
 						"<span class='notice'>You wash your [washing_face ? "face" : "hands"] using [src].</span>")
 
-/obj/structure/sink/attackby(obj/item/O, mob/living/user, params)
-	if(istype(O, /obj/item/bailer))
-		var/obj/item/bailer/bailer = O
-		bailer.amount_of_water = 10
-		to_chat(user, "<span class='notice'>You fill [O] from [src].</span>")
-		playsound(src, 'sound/effects/refill.ogg', 50, TRUE)
-		return
+/obj/structure/sink/attackby(obj/item/O, mob/living/user, list/modifiers)
 	if(busy)
-		to_chat(user, "<span class='warning'>Someone's already washing here!</span>")
+		to_chat(user, span_warning("Someone's already washing here!"))
 		return
 
 	if(istype(O, /obj/item/reagent_containers))
