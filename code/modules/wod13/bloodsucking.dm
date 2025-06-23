@@ -92,9 +92,9 @@
 					if(prob(50))
 						H.reagents.trans_to(src, min(10, H.reagents.total_volume), transfered_by = mob, methods = VAMPIRE)
 		if(clane)
-			if(clane.name == "Giovanni")
+			if(clane.name == CLAN_GIOVANNI)
 				mob.adjustBruteLoss(20, TRUE)
-			if(clane.name == "Ventrue" && mob.bloodquality < BLOOD_QUALITY_NORMAL)	//Ventrue can suck on normal people, but not homeless people and animals. BLOOD_QUALITY_LOV - 1, BLOOD_QUALITY_NORMAL - 2, BLOOD_QUALITY_HIGH - 3. Blue blood gives +1 to suction
+			if(clane.name == CLAN_VENTRUE && mob.bloodquality < BLOOD_QUALITY_NORMAL)	//Ventrue can suck on normal people, but not homeless people and animals. BLOOD_QUALITY_LOV - 1, BLOOD_QUALITY_NORMAL - 2, BLOOD_QUALITY_HIGH - 3. Blue blood gives +1 to suction
 				to_chat(src, "<span class='warning'>You are too privileged to drink that awful <b>BLOOD</b>. Go get something better.</span>")
 				visible_message("<span class='danger'>[src] throws up!</span>", "<span class='userdanger'>You throw up!</span>")
 				playsound(get_turf(src), 'code/modules/wod13/sounds/vomit.ogg', 75, TRUE)
@@ -117,7 +117,7 @@
 				client.images -= suckbar
 			qdel(suckbar)
 			return
-		if(clane.name == "Salubri Warrior" && (ishumanbasic(mob) || isghoul(mob))) //passes by if it's not a supernatural
+		if(clane.name == CLAN_SALUBRI_WARRIOR && (ishumanbasic(mob) || isghoul(mob))) //passes by if it's not a supernatural
 			if( (!HAS_TRAIT_FROM(mob, TRAIT_INCAPACITATED, STAMINA)) && mob.stat < SOFT_CRIT) //Needs to be KO'd to feed on
 				to_chat(src, span_warning("I HAVE NOT BESTED THIS ONE IN COMBAT!! I FEED ON WARRIORS, NOT CATTLE!!"))
 				stop_sound_channel(CHANNEL_BLOOD)

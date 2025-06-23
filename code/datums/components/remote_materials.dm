@@ -99,12 +99,12 @@ handles linking back and forth.
 	SIGNAL_HANDLER
 
 	if(!I.multitool_check_buffer(user, I))
-		return COMPONENT_BLOCK_TOOL_ATTACK
+		return ITEM_INTERACT_BLOCKING
 	var/obj/item/multitool/M = I
 	if (!QDELETED(M.buffer) && istype(M.buffer, /obj/machinery/ore_silo))
 		if (silo == M.buffer)
 			to_chat(user, "<span class='warning'>[parent] is already connected to [silo]!</span>")
-			return COMPONENT_BLOCK_TOOL_ATTACK
+			return ITEM_INTERACT_BLOCKING
 		if (silo)
 			silo.connected -= src
 			silo.updateUsrDialog()
@@ -116,7 +116,7 @@ handles linking back and forth.
 		silo.updateUsrDialog()
 		mat_container = silo.GetComponent(/datum/component/material_container)
 		to_chat(user, "<span class='notice'>You connect [parent] to [silo] from the multitool's buffer.</span>")
-		return COMPONENT_BLOCK_TOOL_ATTACK
+		return ITEM_INTERACT_BLOCKING
 
 /datum/component/remote_materials/proc/on_hold()
 	return silo?.holds["[get_area(parent)]/[category]"]

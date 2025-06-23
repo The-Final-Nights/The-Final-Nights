@@ -54,3 +54,8 @@ The TGS DMAPI API is licensed as a subproject under the MIT license.
 See the footer of [code/__DEFINES/tgs.dm](./code/__DEFINES/tgs.dm) and [code/modules/tgs/LICENSE](./code/modules/tgs/LICENSE) for the MIT license.
 
 All assets including icons and sound are under a [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated.
+
+The Final Nights is not official World of Darkness material. Portions of the materials are the copyrights and trademarks of Paradox Interactive AB, and are used with permission. All rights reserved. For more information please visit worldofdarkness.com.
+
+![darkpack_logo2](https://github.com/user-attachments/assets/643ce14e-066c-4c81-998f-2e7881f0518d)
+
