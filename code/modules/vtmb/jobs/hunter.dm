@@ -45,7 +45,7 @@
 	var/obj/effect/landmark/start/D = pick(landmarkslist)
 	H.forceMove(D.loc)
 
-	var/list/loadouts = list("Fire Fighter", "EOD Suit", "Holy Presence")
+	var/list/loadouts = list("Fire Master", "EOD Suit", "Holy Presence")
 	spawn()
 		var/loadout_type = input(H, "Choose the Lord's gift for you:", "Loadout") as anything in loadouts
 		switch(loadout_type)

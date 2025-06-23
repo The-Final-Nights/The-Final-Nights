@@ -45,7 +45,6 @@
 	icon_state = "drone_maint_grey"
 	icon_living = "drone_maint_grey"
 	icon_dead = "drone_maint_dead"
-	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	health = 30
 	maxHealth = 30
 	unsuitable_atmos_damage = 0
@@ -200,7 +199,7 @@
 	dust()
 
 /mob/living/simple_animal/drone/examine(mob/user)
-	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <b>[src]</b>!")
+	. = list("<span class='info'>This is [icon2html(src, user)] \a <b>[src]</b>!")
 
 	//Hands
 	for(var/obj/item/I in held_items)
@@ -235,8 +234,8 @@
 		if(client)
 			. += "<span class='deadsay'>A message repeatedly flashes on its display: \"REBOOT -- REQUIRED\".</span>"
 		else
-			. += "<span class='deadsay'>A message repeatedly flashes on its display: \"ERROR -- OFFLINE\".</span>"
-	. += "*---------*</span>"
+			. += span_deadsay("A message repeatedly flashes on its display: \"ERROR -- OFFLINE\".")
+	. += "</span>"
 
 
 /mob/living/simple_animal/drone/assess_threat(judgement_criteria, lasercolor = "", datum/callback/weaponcheck=null) //Secbots won't hunt maintenance drones.

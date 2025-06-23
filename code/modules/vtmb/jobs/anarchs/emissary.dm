@@ -20,7 +20,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_EMISSARY
 	known_contacts = list("Baron","Bouncer","Emissary","Sweeper","Prince","Sheriff")
-	allowed_bloodlines = list("Daughters of Cacophony", "True Brujah", "Brujah", "Nosferatu", "Gangrel", "Tremere", "Toreador", "Malkavian", "Banu Haqim", "Tzimisce", "Caitiff", "Ventrue", "Lasombra", "Gargoyle", "Kiasyd", "Cappadocian", "Ministry", "Salubri")
+	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TREMERE, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_TZIMISCE, CLAN_NONE, CLAN_VENTRUE, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_SETITES, CLAN_SALUBRI, CLAN_SALUBRI_WARRIOR)
 
 	v_duty = "You are a diplomat for the anarchs. Make deals, keep the peace, all through words, not violence. But the latter may come to pass if the former fails."
 	minimal_masquerade = 2
@@ -30,6 +30,7 @@
 	name = "emissary"
 	jobtype = /datum/job/vamp/emissary
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/emissary
 	uniform = /obj/item/clothing/under/vampire/bouncer
 	suit = /obj/item/clothing/suit/vampire/jacket

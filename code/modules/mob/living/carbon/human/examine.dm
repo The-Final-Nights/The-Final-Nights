@@ -1,4 +1,4 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/carbon/human/examine(mob/living/user)
 //this is very slightly better than it was because you can use it more places. still can't do \his[src] though.
 	var/t_He = p_they(TRUE)
 	var/t_His = p_their(TRUE)
@@ -47,7 +47,7 @@
 		if("f")
 			body_shape = "fat"
 
-	. = list("<span class='info'>*---------*\nThis is <EM>[!obscure_name ? name : "Unknown"]</EM>, [age2agedescription(age)] [body_shape] [gender_title]!")
+	. = list("<span class='info'>This is <EM>[!obscure_name ? name : "Unknown"]</EM>, [age2agedescription(age)] [body_shape] [gender_title]!")
 	// TFN EDIT REFACTOR END
 	var/obscured = check_obscured_slots()
 	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
@@ -64,7 +64,6 @@
 					. += "<b>You know [p_them()] as a [job]. You are of the same bloodline.</b>"
 	if((isgarou(user) || iswerewolf(user)) && isgarou(src) && is_face_visible())
 		var/isknown = 0
-		var/mob/living/carbon/human/werewolf = user
 		var/same_tribe = FALSE
 		var/truescent
 
@@ -75,9 +74,9 @@
 		if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
 			truescent = TRUE
 
-		if(werewolf.auspice?.tribe.name == auspice?.tribe.name)
+		if(user.auspice?.tribe.name == auspice?.tribe.name)
 			same_tribe = TRUE
-			if(werewolf.auspice.tribe.name == "Black Spiral Dancers")
+			if(user.auspice.tribe.name == "Black Spiral Dancers")
 				honorr = list("strength and will", "complete defeat of [t_his] enemies", "awesome destruction in service of the Wyrm")
 				wisdomm = list("knowledge of twisted machinations", "ability to turn [t_his] enemies against themselves", "brilliantly depraved plots in service of the Wyrm")
 				gloryy = list("trials in service of the Wyrm", "many victories in name of the Wyrm", "great conquests in the Wyrm's service")
@@ -85,14 +84,14 @@
 		switch(renownrank)
 			if(1)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a cliath of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(2)
 				if(same_tribe || truescent)
-					. += "<b>You know [p_them()] as a fostern of the [auspice.tribe.name].</b>"
+					. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] of the [auspice.tribe.name].</b>"
 					isknown = 1
 			if(3,4,5,6)
-				. += "<b>You know [p_them()] as an [RankName(src.renownrank)] [auspice.name] of the [auspice.tribe.name].</b>"
+				. += "<b>You know [p_them()] as \a [RankName(src.renownrank, src.auspice.tribe.name)] [auspice.name] of the [auspice.tribe.name].</b>"
 				isknown = 1
 		if(isknown)
 			switch(honor)
@@ -423,7 +422,7 @@
 
 		if(src != user)
 			if(HAS_TRAIT(user, TRAIT_EMPATH))
-				if (a_intent != INTENT_HELP)
+				if (combat_mode)
 					msg += "[t_He] seem[p_s()] to be on guard.\n"
 				if (getOxyLoss() >= 10)
 					msg += "[t_He] seem[p_s()] winded.\n"
@@ -460,21 +459,23 @@
 		//examine text for unusual appearances
 		if (iskindred(src) && is_face_visible())
 			switch(clane.alt_sprite)
-				if ("nosferatu")
-					msg += "<span class='danger'><b>[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!</b></span><br>"
-				if ("gargoyle")
-					msg += "<span class='danger'><b>[p_they(TRUE)] seem[p_s()] to be made out of stone!</b></span><br>"
-				if ("kiasyd")
+				if (CLAN_NOSFERATU)
+					msg += span_warning("[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!<br>")
+				if (CLAN_GARGOYLE)
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] to be made out of stone!<br>")
+				if (CLAN_KIASYD)
 					if (!is_eyes_covered())
-						msg += "<span class='danger'><b>[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!<b></span><br>"
+						msg += span_boldwarning("[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!</b><br>")
 				if ("rotten1")
-					msg += "[p_they(TRUE)] seem[p_s()] oddly gaunt.<br>"
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] oddly gaunt.<br>")
 				if ("rotten2")
-					msg += "[p_they(TRUE)] [p_have()] a corpselike complexion.<br>"
+					msg += span_warning("[p_they(TRUE)] [p_have()] a corpselike complexion.<br>")
 				if ("rotten3")
-					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a decayed corpse!</b></span><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a decayed corpse!<br>")
 				if ("rotten4")
-					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a skeletonised corpse!</b></span><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a skeletonised corpse!</b><br>")
+			if (HAS_TRAIT(src, TRAIT_PERMAFANGS))
+				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
@@ -522,7 +523,7 @@
 				if ((vampire.morality_path.score < 7) || client?.prefs?.is_enlightened)
 					wyrm_taint++
 
-				if ((vampire.clane?.name == "Baali") || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
+				if ((vampire.clane?.name == CLAN_BAALI) || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
 					wyrm_taint++
 
 			if (isgarou(src) || iswerewolf(src)) //werewolves have the taint of whatever Triat member they venerate most
@@ -539,8 +540,8 @@
 					wyrm_taint++
 					wyld_taint--
 					weaver_taint--
-				if(istype(wolf,/mob/living/carbon/werewolf))
-					var/mob/living/carbon/werewolf/werewolf = src
+				if(istype(wolf,/mob/living/simple_animal/werewolf))
+					var/mob/living/simple_animal/werewolf/werewolf = src
 					if(werewolf.wyrm_tainted)
 						wyrm_taint++
 						wyld_taint--
@@ -595,6 +596,9 @@
 	if (!isnull(trait_exam))
 		. += trait_exam
 
+	if(custom_examine_message)
+		. += span_purple(custom_examine_message)
+
 	if(ishuman(user))
 		. += "<a href='byond://?src=[REF(src)];masquerade=1'>Spot a Masquerade violation</a>"
 
@@ -641,8 +645,8 @@
 	else if(isobserver(user))
 		var/mob/dead/observer/observer_user = user
 		if(!isavatar(observer_user))
-			. += "<span class='info'><b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]</span>"
-	. += "*---------*</span>"
+			. += span_info("<b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]")
+	. += "</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 

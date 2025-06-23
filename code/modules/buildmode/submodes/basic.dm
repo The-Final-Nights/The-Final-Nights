@@ -1,23 +1,23 @@
 /datum/buildmode_mode/basic
 	key = "basic"
 
-/datum/buildmode_mode/basic/show_help(client/c)
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button        = Construct / Upgrade</span>")
-	to_chat(c, "<span class='notice'>Right Mouse Button       = Deconstruct / Delete / Downgrade</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button + ctrl = R-Window</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button + alt  = Airlock</span>")
-	to_chat(c, "")
-	to_chat(c, "<span class='notice'>Use the button in the upper left corner to</span>")
-	to_chat(c, "<span class='notice'>change the direction of built objects.</span>")
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
+/datum/buildmode_mode/basic/show_help(client/builder)
+	to_chat(builder, span_purple(boxed_message(
+		"[span_bold("Construct / Upgrade")] -> Left Mouse Button\n\
+		[span_bold("Deconstruct / Delete / Downgrade")] -> Right Mouse Button\n\
+		[span_bold("R-Window")] -> Left Mouse Button + Ctrl\n\
+		[span_bold("Airlock")] -> Left Mouse Button + Alt \n\
+		\n\
+		Use the button in the upper left corner to change the direction of built objects."))
+	)
 
 /datum/buildmode_mode/basic/handle_click(client/c, params, obj/object)
-	var/list/pa = params2list(params)
-	var/left_click = pa.Find("left")
-	var/right_click = pa.Find("right")
-	var/ctrl_click = pa.Find("ctrl")
-	var/alt_click = pa.Find("alt")
+	var/list/modifiers = params2list(params)
+	
+	var/left_click = LAZYACCESS(modifiers, LEFT_CLICK)
+	var/right_click = LAZYACCESS(modifiers, RIGHT_CLICK)
+	var/alt_click = LAZYACCESS(modifiers, ALT_CLICK)
+	var/ctrl_click = LAZYACCESS(modifiers, CTRL_CLICK)
 
 	if(istype(object,/turf) && left_click && !alt_click && !ctrl_click)
 		var/turf/T = object

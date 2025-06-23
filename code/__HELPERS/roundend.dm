@@ -442,7 +442,7 @@
 	GLOB.survivor_report = survivor_report(popcount)
 	log_roundend_report()
 	for(var/client/C in GLOB.clients)
-		show_roundend_report(C)
+		//show_roundend_report(C)
 		give_show_report_button(C)
 		CHECK_TICK
 
@@ -610,7 +610,7 @@
 	name = "Show roundend report"
 	button_icon_state = "round_end"
 
-/datum/action/report/Trigger()
+/datum/action/report/Trigger(trigger_flags)
 	if(owner && GLOB.common_report && SSticker.current_state == GAME_STATE_FINISHED)
 		SSticker.show_roundend_report(owner.client)
 

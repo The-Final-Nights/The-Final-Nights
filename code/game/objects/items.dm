@@ -31,10 +31,20 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 
 	///Icon file for mob worn overlays.
 	var/icon/worn_icon
-	///icon state for mob worn overlays, if null the normal icon_state will be used.
+	///Icon state for mob worn overlays, if null the normal icon_state will be used.
 	var/worn_icon_state
+	///Icon state for the belt overlay, if null the normal icon_state will be used.
+	var/belt_icon_state
 	///Forced mob worn layer instead of the standard preferred ssize.
 	var/alternate_worn_layer
+	///The config type to use for greyscaled worn sprites. Both this and greyscale_colors must be assigned to work.
+	var/greyscale_config_worn
+	///The config type to use for greyscaled left inhand sprites. Both this and greyscale_colors must be assigned to work.
+	var/greyscale_config_inhand_left
+	///The config type to use for greyscaled right inhand sprites. Both this and greyscale_colors must be assigned to work.
+	var/greyscale_config_inhand_right
+	///The config type to use for greyscaled belt overlays. Both this and greyscale_colors must be assigned to work.
+	var/greyscale_config_belt
 
 	/*	!!!!!!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!!
 
@@ -120,6 +130,10 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	var/armour_penetration = 0
 	///What objects the suit storage can store
 	var/list/allowed = null
+	/// The click cooldown given after attacking. Lower numbers means faster attacks
+	var/attack_speed = CLICK_CD_MELEE
+	/// The click cooldown on secondary attacks. Lower numbers mean faster attacks. Will use attack_speed if undefined.
+	var/secondary_attack_speed
 	///In deciseconds, how long an item takes to equip; counts only for normal clothing slots, not pockets etc.
 	var/equip_delay_self = 0
 	///In deciseconds, how long an item takes to put on another person
@@ -246,11 +260,20 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		qdel(X)
 	return ..()
 
-/obj/item/proc/check_allowed_items(atom/target, not_inside, target_self)
-	if(((src in target) && !target_self) || (!isturf(target.loc) && !isturf(target) && not_inside))
-		return 0
-	else
-		return 1
+/**
+ * Checks if an item is allowed to be used on an atom/target
+ * Returns TRUE if allowed.
+ *
+ * Args:
+ * target_self - Whether we will check if we (src) are in target, preventing people from using items on themselves.
+ * not_inside - Whether target (or target's loc) has to be a turf.
+ */
+/obj/item/proc/check_allowed_items(atom/target, not_inside = FALSE, target_self = FALSE)
+	if(!target_self && (src in target))
+		return FALSE
+	if(not_inside && !isturf(target.loc) && !isturf(target))
+		return FALSE
+	return TRUE
 
 /obj/item/blob_act(obj/structure/blob/B)
 	if(B && B.loc == loc)
@@ -283,6 +306,27 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
  */
 /obj/item/proc/suicide_act(mob/user)
 	return
+
+/obj/item/set_greyscale(list/colors, new_config, new_worn_config, new_inhand_left, new_inhand_right)
+	if(new_worn_config)
+		greyscale_config_worn = new_worn_config
+	if(new_inhand_left)
+		greyscale_config_inhand_left = new_inhand_left
+	if(new_inhand_right)
+		greyscale_config_inhand_right = new_inhand_right
+	return ..()
+
+/// Checks if this atom uses the GAGS system and if so updates the worn and inhand icons
+/obj/item/update_greyscale()
+	. = ..()
+	if(!greyscale_colors)
+		return
+	if(greyscale_config_worn)
+		worn_icon = SSgreyscale.GetColoredIconByType(greyscale_config_worn, greyscale_colors)
+	if(greyscale_config_inhand_left)
+		lefthand_file = SSgreyscale.GetColoredIconByType(greyscale_config_inhand_left, greyscale_colors)
+	if(greyscale_config_inhand_right)
+		righthand_file = SSgreyscale.GetColoredIconByType(greyscale_config_inhand_right, greyscale_colors)
 
 /obj/item/verb/move_to_top()
 	set name = "Move To Top"
@@ -364,13 +408,15 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	add_fingerprint(usr)
 	return ..()
 
-/obj/item/attack_hand(mob/user)
+/obj/item/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
 	if(!user)
 		return
 	if(anchored)
+		return
+	if(HAS_TRAIT(user, TRAIT_NO_HANDS))
 		return
 
 	. = TRUE
@@ -428,7 +474,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 /obj/item/proc/allow_attack_hand_drop(mob/user)
 	return TRUE
 
-/obj/item/attack_paw(mob/user)
+/obj/item/attack_paw(mob/user, list/modifiers)
 	if(!user)
 		return
 	if(anchored)
@@ -447,15 +493,15 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	if(!user.put_in_active_hand(src, FALSE, FALSE))
 		user.dropItemToGround(src)
 
-/obj/item/attack_alien(mob/user)
-	var/mob/living/carbon/alien/A = user
+/obj/item/attack_alien(mob/user, list/modifiers)
+	var/mob/living/carbon/alien/ayy = user
 
 	if(!user.can_hold_items(src))
-		if(src in A.contents) // To stop Aliens having items stuck in their pockets
-			A.dropItemToGround(src)
+		if(src in ayy.contents) // To stop Aliens having items stuck in their pockets
+			ayy.dropItemToGround(src)
 		to_chat(user, "<span class='warning'>Your claws aren't capable of such fine manipulation!</span>")
 		return
-	attack_paw(A)
+	attack_paw(ayy, modifiers)
 
 /obj/item/attack_ai(mob/user)
 	if(istype(src.loc, /obj/item/robot_model))
@@ -626,7 +672,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "eye_stab", /datum/mood_event/eye_stab)
 
-	log_combat(user, M, "attacked", "[src.name]", "(INTENT: [uppertext(user.a_intent)])")
+	log_combat(user, M, "attacked", "[src.name]", "(Combat Mode: [user.combat_mode ? "On" : "Off"])")
 
 	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
 	if(!eyes)
@@ -701,8 +747,12 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		return SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, newLoc, TRUE)
 	return FALSE
 
-/obj/item/proc/get_belt_overlay() //Returns the icon used for overlaying the object on a belt
-	return mutable_appearance('icons/obj/clothing/belt_overlays.dmi', icon_state)
+/// Returns the icon used for overlaying the object on a belt
+/obj/item/proc/get_belt_overlay()
+	var/icon_state_to_use = belt_icon_state || icon_state
+	if(greyscale_config_belt && greyscale_colors)
+		return mutable_appearance(SSgreyscale.GetColoredIconByType(greyscale_config_belt, greyscale_colors), icon_state_to_use)
+	return mutable_appearance('icons/obj/clothing/belt_overlays.dmi', icon_state_to_use)
 
 /obj/item/proc/update_slot_icon()
 	if(!ismob(loc))
@@ -770,7 +820,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 /obj/item/attack_hulk(mob/living/carbon/human/user)
 	return FALSE
 
-/obj/item/attack_animal(mob/living/simple_animal/M)
+/obj/item/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	if (obj_flags & CAN_BE_HIT)
 		return ..()
 	return 0

@@ -119,7 +119,7 @@
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie"
-	path = /obj/item/clothing/suit/hooded/hoodie/hoodie_pim
+	path = /obj/item/clothing/suit/hooded/hoodie
 
 /datum/gear/suit/hoodiezim
 	display_name = "intruder pim hoodie"

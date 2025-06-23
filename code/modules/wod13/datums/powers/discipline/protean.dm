@@ -24,16 +24,32 @@
 	violates_masquerade = FALSE
 
 	toggled = TRUE
+	var/original_eye_color
 
 /datum/discipline_power/protean/eyes_of_the_beast/activate()
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_PROTEAN_VISION, TRAIT_GENERIC)
 	owner.update_sight()
+	original_eye_color = owner.eye_color
+	owner.eye_color = "#ff0000"
+	var/obj/item/organ/eyes/organ_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
+	if(!organ_eyes)
+		return
+	else
+		organ_eyes.eye_color = owner.eye_color
+	owner.update_body()
 
 /datum/discipline_power/protean/eyes_of_the_beast/deactivate()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_PROTEAN_VISION, TRAIT_GENERIC)
 	owner.update_sight()
+	owner.eye_color = original_eye_color
+	var/obj/item/organ/eyes/organ_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
+	if(!organ_eyes)
+		return
+	else
+		organ_eyes.eye_color = owner.eye_color
+	owner.update_body()
 
 //FERAL CLAWS
 /datum/movespeed_modifier/protean2
@@ -91,14 +107,12 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/slash.ogg'
-	a_intent = INTENT_HARM
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	bloodpool = 10
 	maxbloodpool = 10
 	dextrous = TRUE
 	held_items = list(null, null)
-	possible_a_intents = list(INTENT_HELP, INTENT_GRAB, INTENT_DISARM, INTENT_HARM)
 
 //EARTH MELD
 /obj/effect/proc_holder/spell/targeted/shapeshift/gangrel

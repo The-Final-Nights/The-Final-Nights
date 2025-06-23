@@ -71,16 +71,16 @@
 	. = ..()
 	if(islupus(user))
 		return
-	if(user.a_intent != INTENT_HARM)
+	var/mob/living/carbon/human/carbon_human = user
+	if(!(carbon_human.combat_mode))
 		LoadComponent(/datum/component/leanable, dropping)
 	else
-		if(get_dist(user, src) < 2)
-			var/turf/above_turf = locate(user.x, user.y, user.z + 1)
+		if(get_dist(carbon_human, src) < 2)
+			var/turf/above_turf = locate(carbon_human.x, carbon_human.y, carbon_human.z + 1)
 			if(above_turf && istype(above_turf, /turf/open/openspace))
-				var/mob/living/carbon_human = user
 				carbon_human.climb_wall(above_turf)
 			else
-				to_chat(user, "<span class='warning'>You can't climb there!</span>")
+				to_chat(carbon_human, "<span class='warning'>You can't climb there!</span>")
 
 /turf/closed/wall/vampwall/ex_act(severity, target)
 	return
@@ -136,10 +136,6 @@
 	icon_state = "rich-window"
 	window = /obj/structure/window/fulltile
 
-/turf/closed/wall/vampwall/rich/low/window/reinforced
-	icon_state = "rich-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
-
 /turf/closed/wall/vampwall/junk
 	name = "junk brick wall"
 	desc = "A huge chunk of dirty bricks used to separate rooms."
@@ -186,10 +182,6 @@
 	icon_state = "market-window"
 	window = /obj/structure/window/fulltile
 
-/turf/closed/wall/vampwall/market/low/window/reinforced
-	icon_state = "market-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
-
 /turf/closed/wall/vampwall/old
 	name = "old brick wall"
 	desc = "A huge chunk of old bricks used to separate rooms."
@@ -205,10 +197,6 @@
 /turf/closed/wall/vampwall/old/low/window
 	icon_state = "old-window"
 	window = /obj/structure/window/fulltile
-
-/turf/closed/wall/vampwall/old/low/window/reinforced
-	icon_state = "old-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
 
 /turf/closed/wall/vampwall/painted
 	name = "painted brick wall"
@@ -226,10 +214,6 @@
 	icon_state = "painted-window"
 	window = /obj/structure/window/fulltile
 
-/turf/closed/wall/vampwall/painted/low/window/reinforced
-	icon_state = "painted-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
-
 /turf/closed/wall/vampwall/rich/old
 	name = "old rich-looking wall"
 	desc = "A huge chunk of old bricks used to separate rooms."
@@ -245,10 +229,6 @@
 /turf/closed/wall/vampwall/rich/old/low/window
 	icon_state = "theater-window"
 	window = /obj/structure/window/fulltile
-
-/turf/closed/wall/vampwall/rich/old/low/window/reinforced
-	icon_state = "theater-reinforced"
-	window = /obj/structure/window/reinforced/fulltile/indestructable
 
 /turf/closed/wall/vampwall/brick
 	name = "brick wall"
@@ -668,25 +648,15 @@
 				if(do_mob(user, src, 10 SECONDS))
 					P.burying = FALSE
 					if(P.icon_state == "pit0")
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in src)
 							L.forceMove(P)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					else
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in P)
 							L.forceMove(src)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit0"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("disrespect", user)
 				else
 					P.burying = FALSE
 		else
@@ -746,25 +716,15 @@
 				if(do_mob(user, src, 10 SECONDS))
 					P.burying = FALSE
 					if(P.icon_state == "pit0")
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in src)
 							L.forceMove(P)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					else
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in P)
 							L.forceMove(src)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit0"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("disrespect", user)
 				else
 					P.burying = FALSE
 		else
@@ -1101,6 +1061,48 @@
 /obj/effect/decal/wallpaper/gold/low
 	icon_state = "wallpaper-gold_low"
 
+/obj/effect/decal/wallpaper/padded
+	icon_state = "wallpaper-padded"
+
+/obj/effect/decal/wallpaper/padded/low
+	icon_state = "wallpaper-padded_low"
+
+/obj/effect/decal/wallpaper/lightpadded
+	icon_state = "wallpaper-lightpadded"
+
+/obj/effect/decal/wallpaper/lightpadded/low
+	icon_state = "wallpaper-lightpadded_low"
+
+/obj/effect/decal/wallpaper/papers
+	name = "papers"
+	plane = GAME_PLANE
+	layer = CAR_LAYER
+	anchored = TRUE
+
+/obj/effect/decal/wallpaper/papers/one
+	icon_state = "wall papers 1"
+
+/obj/effect/decal/wallpaper/papers/two
+	icon_state = "wall papers 2"
+
+/obj/effect/decal/wallpaper/papers/three
+	icon_state = "wall papers 3"
+
+/obj/effect/decal/wallpaper/papers/four
+	icon_state = "wall papers 4"
+
+/obj/effect/decal/wallpaper/papers/five
+	icon_state = "wall papers 5"
+
+/obj/effect/decal/wallpaper/papers/six
+	icon_state = "wall papers 6"
+
+/obj/effect/decal/wallpaper/papers/seven
+	icon_state = "wall papers 7"
+
+/obj/effect/decal/wallpaper/papers/eight
+	icon_state = "wall papers 8"
+
 /turf/open/floor/plating/vampwood
 	gender = PLURAL
 	name = "wood"
@@ -1149,25 +1151,15 @@
 				if(do_mob(user, src, 10 SECONDS))
 					P.burying = FALSE
 					if(P.icon_state == "pit0")
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in src)
 							L.forceMove(P)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					else
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in P)
 							L.forceMove(src)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit0"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("disrespect", user)
 				else
 					P.burying = FALSE
 		else

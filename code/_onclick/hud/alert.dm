@@ -98,6 +98,9 @@
 	var/override_alerts = FALSE //If it is overriding other alerts of the same type
 	var/mob/owner //Alert owner
 
+	/// Boolean. If TRUE, the Click() proc will attempt to Click() on the master first if there is a master.
+	var/click_master = TRUE
+
 
 /atom/movable/screen/alert/MouseEntered(location,control,params)
 	if(!QDELETED(src))
@@ -236,6 +239,7 @@ or something covering your eyes."
 	var/command
 
 /atom/movable/screen/alert/mind_control/Click()
+	. = ..()
 	var/mob/living/L = usr
 	if(L != owner)
 		return
@@ -253,6 +257,7 @@ If you're feeling frisky, examine yourself and click the underlined item to pull
 	icon_state = "embeddedobject"
 
 /atom/movable/screen/alert/embeddedobject/Click()
+	. = ..()
 	if(isliving(usr) && usr == owner)
 		var/mob/living/carbon/M = usr
 		return M.help_shake_act(M)
@@ -281,6 +286,7 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 	icon_state = "fire"
 
 /atom/movable/screen/alert/fire/Click()
+	. = ..()
 	var/mob/living/L = usr
 	if(!istype(L) || !L.can_resist() || L != owner)
 		return
@@ -432,6 +438,7 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 	icon_state = "succumb"
 
 /atom/movable/screen/alert/succumb/Click()
+	. = ..()
 	if (isobserver(usr))
 		return
 
@@ -451,6 +458,7 @@ or shoot a gun to move around via Newton's 3rd Law of Motion."
 	icon_state = "awaken"
 
 /atom/movable/screen/alert/untorpor/Click()
+	. = ..()
 	if(isobserver(usr))
 		return
 	var/mob/living/living_owner = owner
@@ -698,6 +706,7 @@ so as to remain in compliance with the most up-to-date laws."
 	var/atom/target = null
 
 /atom/movable/screen/alert/hackingapc/Click()
+	. = ..()
 	if(!usr || !usr.client || usr != owner)
 		return
 	if(!target)
@@ -724,6 +733,7 @@ so as to remain in compliance with the most up-to-date laws."
 	timeout = 300
 
 /atom/movable/screen/alert/notify_cloning/Click()
+	. = ..()
 	if(!usr || !usr.client || usr != owner)
 		return
 	var/mob/dead/observer/G = usr
@@ -738,6 +748,7 @@ so as to remain in compliance with the most up-to-date laws."
 	var/action = NOTIFY_JUMP
 
 /atom/movable/screen/alert/notify_action/Click()
+	. = ..()
 	if(!usr || !usr.client || usr != owner)
 		return
 	if(!target)
@@ -757,7 +768,7 @@ so as to remain in compliance with the most up-to-date laws."
 
 //OBJECT-BASED
 
-/atom/movable/screen/alert/restrained/buckled
+/atom/movable/screen/alert/buckled
 	name = "Buckled"
 	desc = "You've been buckled to something. Click the alert to unbuckle unless you're handcuffed."
 	icon_state = "buckled"
@@ -765,12 +776,15 @@ so as to remain in compliance with the most up-to-date laws."
 /atom/movable/screen/alert/restrained/handcuffed
 	name = "Handcuffed"
 	desc = "You're handcuffed and can't act. If anyone drags you, you won't be able to move. Click the alert to free yourself."
+	click_master = FALSE
 
 /atom/movable/screen/alert/restrained/legcuffed
 	name = "Legcuffed"
 	desc = "You're legcuffed, which slows you down considerably. Click the alert to free yourself."
+	click_master = FALSE
 
 /atom/movable/screen/alert/restrained/Click()
+	. = ..()
 	var/mob/living/L = usr
 	if(!istype(L) || !L.can_resist() || L != owner)
 		return
@@ -778,7 +792,8 @@ so as to remain in compliance with the most up-to-date laws."
 	if((L.mobility_flags & MOBILITY_MOVE) && (L.last_special <= world.time))
 		return L.resist_restraints()
 
-/atom/movable/screen/alert/restrained/buckled/Click()
+/atom/movable/screen/alert/buckled/Click()
+	. = ..()
 	var/mob/living/L = usr
 	if(!istype(L) || !L.can_resist() || L != owner)
 		return
@@ -797,6 +812,7 @@ so as to remain in compliance with the most up-to-date laws."
 	icon_state = "shoealert"
 
 /atom/movable/screen/alert/shoes/Click()
+	. = ..()
 	var/mob/living/carbon/C = usr
 	if(!istype(C) || !C.can_resist() || C != owner || !C.shoes)
 		return
@@ -840,15 +856,18 @@ so as to remain in compliance with the most up-to-date laws."
 	return 1
 
 /atom/movable/screen/alert/Click(location, control, params)
+	SHOULD_CALL_PARENT(TRUE)
+
+	..()
 	if(!usr || !usr.client)
-		return
-	var/paramslist = params2list(params)
-	if(paramslist["shift"]) // screen objects don't do the normal Click() stuff so we'll cheat
-		to_chat(usr, "<span class='boldnotice'>[name]</span> - <span class='info'>[desc]</span>")
-		return
+		return FALSE
 	if(usr != owner)
-		return
-	if(master)
+		return FALSE
+	var/list/modifiers = params2list(params)
+	if(LAZYACCESS(modifiers, SHIFT_CLICK)) // screen objects don't do the normal Click() stuff so we'll cheat
+		to_chat(usr, boxed_message(jointext(examine(usr), "\n")))
+		return FALSE
+	if(master && click_master)
 		return usr.client.Click(master, location, control, params)
 
 	return TRUE

@@ -1,11 +1,15 @@
 
-/mob/living/simple_animal/proc/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/simple_animal/proc/adjustHealth(brute_amount, updating_health = TRUE, forced = FALSE, fire_amount, toxin_amount, oxy_amount, clone_amount)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
-	bruteloss = round(clamp(bruteloss + amount, 0, maxHealth * 2), DAMAGE_PRECISION)
+	bruteloss = round(clamp(bruteloss + brute_amount, 0, maxHealth * 2), DAMAGE_PRECISION)
+	fireloss = round(clamp(fireloss + fire_amount, 0, maxHealth * 2), DAMAGE_PRECISION)
+	toxloss = round(clamp(toxloss + toxin_amount, 0, maxHealth * 2), DAMAGE_PRECISION)
+	oxyloss = round(clamp(oxyloss + oxy_amount, 0, maxHealth * 2), DAMAGE_PRECISION)
+	cloneloss = round(clamp(cloneloss + clone_amount, 0, maxHealth * 2), DAMAGE_PRECISION)
 	if(updating_health)
 		updatehealth()
-	return amount
+	return health
 
 /mob/living/simple_animal/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(forced)
@@ -15,27 +19,27 @@
 
 /mob/living/simple_animal/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(forced)
-		. = adjustHealth(amount * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(fire_amount = (amount * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 	else if(damage_coeff[BURN])
-		. = adjustHealth(amount * damage_coeff[BURN] * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(fire_amount = (amount * damage_coeff[BURN] * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 
 /mob/living/simple_animal/adjustOxyLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(forced)
-		. = adjustHealth(amount * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(oxy_amount = (amount * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 	else if(damage_coeff[OXY])
-		. = adjustHealth(amount * damage_coeff[OXY] * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(oxy_amount = (amount * damage_coeff[OXY] * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 
 /mob/living/simple_animal/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(forced)
-		. = adjustHealth(amount * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(toxin_amount = (amount * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 	else if(damage_coeff[TOX])
-		. = adjustHealth(amount * damage_coeff[TOX] * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(toxin_amount = (amount * damage_coeff[TOX] * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 
 /mob/living/simple_animal/adjustCloneLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(forced)
-		. = adjustHealth(amount * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(clone_amount = (amount * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 	else if(damage_coeff[CLONE])
-		. = adjustHealth(amount * damage_coeff[CLONE] * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+		. = adjustHealth(clone_amount = (amount * damage_coeff[CLONE] * CONFIG_GET(number/damage_multiplier)), updating_health = updating_health, forced = forced)
 
 /mob/living/simple_animal/adjustStaminaLoss(amount, updating_health = FALSE, forced = FALSE)
 	if(forced)

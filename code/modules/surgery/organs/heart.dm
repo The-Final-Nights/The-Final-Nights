@@ -1,6 +1,7 @@
 /obj/item/organ/heart
 	name = "heart"
 	desc = "I feel bad for the heartless bastard who lost this."
+	base_icon_state = "heart"
 	icon_state = "heart-on"
 	base_icon_state = "heart"
 	illegal = TRUE
@@ -152,7 +153,7 @@
 	name = "Pump your blood"
 
 //You are now brea- pumping blood manually
-/datum/action/item_action/organ_action/cursed_heart/Trigger()
+/datum/action/item_action/organ_action/cursed_heart/Trigger(trigger_flags)
 	. = ..()
 	if(. && istype(target, /obj/item/organ/heart/cursed))
 		var/obj/item/organ/heart/cursed/cursed_heart = target

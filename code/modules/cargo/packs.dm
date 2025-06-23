@@ -339,7 +339,7 @@
 					/obj/item/clothing/head/beret/sec/navywarden,
 					/obj/item/clothing/under/rank/security/head_of_security/formal,
 					/obj/item/clothing/suit/security/hos,
-					/obj/item/clothing/head/beret/sec/navyhos)
+					/obj/item/clothing/head/hos/beret/navyhos)
 	crate_name = "security clothing crate"
 
 /datum/supply_pack/security/stingpack
@@ -878,10 +878,7 @@
 					/obj/item/reagent_containers/blood/a_minus,
 					/obj/item/reagent_containers/blood/b_plus,
 					/obj/item/reagent_containers/blood/b_minus,
-					/obj/item/reagent_containers/blood/o_plus,
-					/obj/item/reagent_containers/blood/o_minus,
-					/obj/item/reagent_containers/blood/lizard,
-					/obj/item/reagent_containers/blood/ethereal)
+					/obj/item/reagent_containers/blood/o_plus)
 	crate_name = "blood freezer"
 	crate_type = /obj/structure/closet/crate/freezer
 
@@ -958,7 +955,6 @@
 					/obj/item/storage/firstaid/brute,
 					/obj/item/storage/firstaid/fire,
 					/obj/item/defibrillator/loaded,
-					/obj/item/reagent_containers/blood/o_minus,
 					/obj/item/storage/pill_bottle/mining,
 					/obj/item/reagent_containers/pill/neurine,
 					/obj/item/stack/medical/bone_gel,
@@ -1833,7 +1829,7 @@
 	name = "Formalwear Crate"
 	desc = "You're gonna like the way you look, I guaranteed it. Contains an asston of fancy clothing."
 	cost = CARGO_CRATE_VALUE * 4 //Lots of very expensive items. You gotta pay up to look good!
-	contains = list(/obj/item/clothing/under/dress/blacktango,
+	contains = list(/obj/item/clothing/under/dress/tango,
 					/obj/item/clothing/under/misc/assistantformal,
 					/obj/item/clothing/under/misc/assistantformal,
 					/obj/item/clothing/under/rank/civilian/lawyer/bluesuit,

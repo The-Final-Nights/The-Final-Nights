@@ -225,7 +225,7 @@
 	else
 		new_spawn.mind.assigned_role = "Free Golem"
 
-/obj/effect/mob_spawn/human/golem/attack_hand(mob/user)
+/obj/effect/mob_spawn/human/golem/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
@@ -695,7 +695,7 @@
 	glasses = /obj/item/clothing/glasses/sunglasses
 	r_pocket = /obj/item/storage/wallet/random
 	l_pocket = /obj/item/food/pizzaslice/dank
-	uniform = /obj/item/clothing/under/pants/youngfolksjeans
+	uniform = /obj/item/clothing/under/pants/jeans
 	id = /obj/item/card/id
 
 /datum/outfit/beachbum/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
@@ -772,7 +772,7 @@
 	outfit = /datum/outfit/spacebartender
 	assignedrole = "Space Bar Patron"
 
-/obj/effect/mob_spawn/human/alive/space_bar_patron/attack_hand(mob/user)
+/obj/effect/mob_spawn/human/alive/space_bar_patron/attack_hand(mob/user, list/modifiers)
 	var/despawn = alert("Return to cryosleep? (Warning, Your mob will be deleted!)", null, "Yes", "No")
 	if(despawn == "No" || !loc || !Adjacent(user))
 		return

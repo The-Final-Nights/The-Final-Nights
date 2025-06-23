@@ -270,10 +270,10 @@
 /mob/living/simple_animal/slime/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
 	return
 
-/mob/living/simple_animal/slime/attack_ui(slot)
+/mob/living/simple_animal/slime/attack_ui(slot, params)
 	return
 
-/mob/living/simple_animal/slime/attack_slime(mob/living/simple_animal/slime/M)
+/mob/living/simple_animal/slime/attack_slime(mob/living/simple_animal/slime/M, list/modifiers)
 	if(..()) //successful slime attack
 		if(M == src)
 			return
@@ -290,17 +290,16 @@
 			M.adjustBruteLoss(-10 + (-10 * M.is_adult))
 			M.updatehealth()
 
-/mob/living/simple_animal/slime/attack_animal(mob/living/simple_animal/M)
+/mob/living/simple_animal/slime/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	. = ..()
 	if(.)
 		attacked += 10
 
-
-/mob/living/simple_animal/slime/attack_paw(mob/living/carbon/human/M)
+/mob/living/simple_animal/slime/attack_paw(mob/living/carbon/human/user, list/modifiers)
 	if(..()) //successful monkey bite.
 		attacked += 10
 
-/mob/living/simple_animal/slime/attack_larva(mob/living/carbon/alien/larva/L)
+/mob/living/simple_animal/slime/attack_larva(mob/living/carbon/alien/larva/L, list/modifiers)
 	if(..()) //successful larva bite.
 		attacked += 10
 
@@ -310,54 +309,55 @@
 		return
 	discipline_slime(user)
 
-/mob/living/simple_animal/slime/attack_hand(mob/living/carbon/human/M)
+/mob/living/simple_animal/slime/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	if(buckled)
-		M.do_attack_animation(src, ATTACK_EFFECT_DISARM)
-		if(buckled == M)
+		user.do_attack_animation(src, ATTACK_EFFECT_DISARM)
+		if(buckled == user)
 			if(prob(60))
-				M.visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off!</span>", \
+				user.visible_message("<span class='warning'>[user] attempts to wrestle \the [name] off!</span>", \
 					"<span class='danger'>You attempt to wrestle \the [name] off!</span>")
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
 
 			else
-				M.visible_message("<span class='warning'>[M] manages to wrestle \the [name] off!</span>", \
+				user.visible_message("<span class='warning'>[user] manages to wrestle \the [name] off!</span>", \
 					"<span class='notice'>You manage to wrestle \the [name] off!</span>")
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
 
-				discipline_slime(M)
+				discipline_slime(user)
 
 		else
 			if(prob(30))
-				buckled.visible_message("<span class='warning'>[M] attempts to wrestle \the [name] off of [buckled]!</span>", \
-					"<span class='warning'>[M] attempts to wrestle \the [name] off of you!</span>")
+				buckled.visible_message("<span class='warning'>[user] attempts to wrestle \the [name] off of [buckled]!</span>", \
+					"<span class='warning'>[user] attempts to wrestle \the [name] off of you!</span>")
 				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, TRUE, -1)
 
 			else
-				buckled.visible_message("<span class='warning'>[M] manages to wrestle \the [name] off of [buckled]!</span>", \
-					"<span class='notice'>[M] manage to wrestle \the [name] off of you!</span>")
+				buckled.visible_message("<span class='warning'>[user] manages to wrestle \the [name] off of [buckled]!</span>", \
+					"<span class='notice'>[user] manage to wrestle \the [name] off of you!</span>")
 				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
 
-				discipline_slime(M)
+				discipline_slime(user)
 	else
 		if(stat == DEAD && surgeries.len)
-			if(M.a_intent == INTENT_HELP || M.a_intent == INTENT_DISARM)
+			if(!user.combat_mode || LAZYACCESS(modifiers, RIGHT_CLICK))
 				for(var/datum/surgery/S in surgeries)
-					if(S.next_step(M,M.a_intent))
+					if(S.next_step(user, modifiers))
 						return 1
 		if(..()) //successful attack
 			attacked += 10
 
-/mob/living/simple_animal/slime/attack_alien(mob/living/carbon/alien/humanoid/M)
+/mob/living/simple_animal/slime/attack_alien(mob/living/carbon/alien/humanoid/user, list/modifiers)
 	if(..()) //if harm or disarm intent.
 		attacked += 10
-		discipline_slime(M)
+		discipline_slime(user)
 
 
 /mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
 	if(stat == DEAD && surgeries.len)
-		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
+		var/list/modifiers = params2list(params)
+		if(!user.combat_mode || (LAZYACCESS(modifiers, RIGHT_CLICK)))
 			for(var/datum/surgery/S in surgeries)
-				if(S.next_step(user,user.a_intent))
+				if(S.next_step(user, modifiers))
 					return 1
 	if(istype(W, /obj/item/stack/sheet/mineral/plasma) && !stat) //Let's you feed slimes plasma.
 		if (user in Friends)
@@ -436,7 +436,7 @@
 	return
 
 /mob/living/simple_animal/slime/examine(mob/user)
-	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!")
+	. = list("<span class='info'>This is [icon2html(src, user)] \a <EM>[src]</EM>!")
 	if (stat == DEAD)
 		. += "<span class='deadsay'>It is limp and unresponsive.</span>"
 	else
@@ -463,7 +463,7 @@
 			if(10)
 				. += "<span class='warning'><B>It is radiating with massive levels of electrical activity!</B></span>"
 
-	. += "*---------*</span>"
+	. += "</span>"
 
 /mob/living/simple_animal/slime/proc/discipline_slime(mob/user)
 	if(stat)

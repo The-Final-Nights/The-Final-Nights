@@ -195,3 +195,65 @@
       girl era.
   - rscadd: Three new shoes.
   - rscadd: Two new hoodies.
+2025-05-24:
+  Kevak:
+  - bugfix: Fixed KJ being unable to select intended quirks due to spelling error
+      in code.
+  - bugfix: Fixed a weird little oversight with citizen role kindred.
+  Somniworld:
+  - rscadd: A placeholder Corax "Tribe", that allows people to play the new Fera.
+      This is EXTREMELY barebones and is currently a new flavour of Garou. Note that
+      many features (flying, specific gifts) are missing. You are encouraged to help
+      out and make your own PRs to add features, if you wish!
+  - rscadd: Corax-Specific cawing emotes and transformation effects! Sound courtesy
+      of Machinepixie on Discord
+  - rscadd: Corax-Specific breed HUD elements, sprites made by Boltersam on discord
+  - rscadd: 'Two Corax specific gifts : Eye Drinking and Sun''s guard! Massive thanks
+      to Machinepixie for the code!'
+  XeonMations:
+  - code_imp: CI/CD checks now use a private byond instance.
+2025-05-25:
+  TheTrueSilverRat:
+  - rscadd: Added Warrior Salubri Clan
+  - rscadd: Added Warrior Valeren
+  - rscadd: Added Code of Samiel to the Morality Stuff
+  - qol: Healer Valeren 3 can heal corpses now like Theurge's Mother Touch
+  - rscadd: Salubri Third Eyes wohoo
+  buffyuwu, XeonMations:
+  - code_imp: CI/CD checks MAY work now. Please. I Hope.
+2025-05-26:
+  Marshmellow105:
+  - code_imp: FBI agents are no longer a whitelisted role.
+  tzui5020:
+  - bugfix: Fixed the hoodie in the loadout
+2025-05-27:
+  Merek2:
+  - bugfix: Added a period to sweat and eyeroll emote.
+2025-05-28:
+  TheTrueSilverRat:
+  - bugfix: Fixed the Salubri Traits runtime by changing RegisterSignal to RegisterSignals
+2025-05-29:
+  XeonMations:
+  - server: Server's database updated to TG modern.
+  chazzyjazzy:
+  - bugfix: fixes clothes not becoming bloody after stepping in blood / being in combat
+2025-05-30:
+  ShadeAware:
+  - rscadd: SNEKTEK has just released their new line of budget handheld tasers. Defense
+      for the common man and woman!
+  - rscadd: Gun stores have started carrying less-than-lethal alternatives, such as
+      hand-tasers and pepperspray.
+  buffyuwu:
+  - bugfix: fixed the flame master hunter loadout not giving items
+2025-05-31:
+  Kevak:
+  - balance: Lively Aura now costs 2 qp rather than 3.
+  - balance: Latin now costs 1qp rather than 2.
+  - qol: Mechanically enforces Discipline Cap
+  - balance: Caitiffs can no longer select eight disciplines out the gate.
+  - admin: Trusted players can bypass discipline learning softcap, as can admin discipline
+      rewards.
+  TheTrueSilverRat:
+  - rscadd: Eye color change when you use Protean Rank 1
+  buffyuwu:
+  - server: updated hub entry

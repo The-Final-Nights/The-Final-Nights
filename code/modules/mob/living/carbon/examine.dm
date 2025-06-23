@@ -6,7 +6,7 @@
 	var/t_has = p_have()
 	var/t_is = p_are()
 
-	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>!")
+	. = list("<span class='info'>This is [icon2html(src, user)] \a <EM>[src]</EM>!>")
 	var/obscured = check_obscured_slots()
 
 	if (handcuffed)
@@ -150,7 +150,7 @@
 				if ((vampire.morality_path.score < 7) || client?.prefs?.is_enlightened)
 					wyrm_taint++
 
-				if ((vampire.clane.name == "Baali") || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
+				if ((vampire.clane.name == CLAN_BAALI) || ( (client?.prefs?.is_enlightened && (vampire.morality_path.score > 7)) || (!client?.prefs?.is_enlightened && (vampire.morality_path.score < 4)) ))
 					wyrm_taint++
 
 				if (istype(vampire.clane, /datum/vampireclane/kiasyd)) //the fae are Wyld-tainted by default
@@ -160,7 +160,7 @@
 				var/mob/living/carbon/wolf = src
 
 				switch(wolf.auspice.tribe.name)
-					if ("Galestalkers","Children of Gaia","Hart Wardens","Ghost Council","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Red Talons","Stargazers")
+					if ("Galestalkers","Children of Gaia","Hart Wardens","Ghost Council","Get of Fenris","Black Furies","Silver Fangs","Silent Striders","Red Talons","Stargazers", "Corax")
 						wyld_taint++
 					if ("Glass Walkers","Bone Gnawers","Shadow Lords")
 						weaver_taint++
@@ -170,8 +170,8 @@
 					wyrm_taint++
 					wyld_taint--
 					weaver_taint--
-				if(istype(wolf,/mob/living/carbon/werewolf))
-					var/mob/living/carbon/werewolf/werewolf = src
+				if(istype(wolf,/mob/living/simple_animal/werewolf))
+					var/mob/living/simple_animal/werewolf/werewolf = src
 					if(werewolf.wyrm_tainted)
 						wyrm_taint++
 						wyld_taint--
@@ -212,7 +212,7 @@
 				. += "[t_He] look[p_s()] very happy."
 			if(MOOD_LEVEL_HAPPY4 to INFINITY)
 				. += "[t_He] look[p_s()] ecstatic."
-	. += "*---------*</span>"
+	. += "</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 

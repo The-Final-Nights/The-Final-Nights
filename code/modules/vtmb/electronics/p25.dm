@@ -199,7 +199,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	return TRUE
 
 // ==============================
-// Clinic/Tower Transceivers
+// Clinic/Tower/Anarch Transceivers
 // ==============================
 
 /obj/machinery/p25transceiver/clinic
@@ -211,6 +211,11 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	name = "tower P25 transceiver"
 	desc = "A P25 radio transceiver configured for general communications."
 	p25_network = "tower"
+
+/obj/machinery/p25transceiver/anarch
+	name = "bar staff P25 transceiver"
+	desc = "A P25 radio transceiver configured for ... some waitresses and a barback?"
+	p25_network = "bar"
 
 // ==============================
 // Police Transceiver
@@ -592,7 +597,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	var/garble = FALSE
 	if(iskindred(speaker))
 		var/mob/living/carbon/human/speaker_man = speaker
-		if(speaker_man.clane?.name == "Lasombra")
+		if(speaker_man.clane?.name == CLAN_LASOMBRA)
 			message = scramble_lasombra_message(message,speaker_man)
 			garble = TRUE
 

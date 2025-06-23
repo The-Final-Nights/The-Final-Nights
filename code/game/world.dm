@@ -270,7 +270,7 @@ GLOBAL_VAR(restart_counter)
 		if (server_name)
 			s += "<a href=\"https://discord.gg/invite/hQHAK67Drd\"><b>[server_name] \[18+\] &#8212; Apply on Discord!</b></a>"
 
-	s += "<br>Persistent 18+ immersive roleplay set in the World of Darkness, running modified WoD13 code. <br>Hosted by <b>Alanii, the Dark God.</b>"
+	s += "<br>Persistent 18+ Heavy-RP immersive roleplay set in the World of Darkness, running modified WoD13 code. <br>Hosted by <b>The Regime</b>"
 
 	var/players = GLOB.clients.len
 

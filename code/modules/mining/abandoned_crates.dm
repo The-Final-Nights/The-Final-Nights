@@ -26,7 +26,7 @@
 		digits -= dig  //there are never matching digits in the answer
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/structure/closet/crate/secure/loot/attack_hand(mob/user)
+/obj/structure/closet/crate/secure/loot/attack_hand(mob/user, list/modifiers)
 	if(locked)
 		to_chat(user, "<span class='notice'>The crate is locked with a Deca-code lock.</span>")
 		var/input = input(usr, "Enter [codelen] digits. All digits must be unique.", "Deca-Code Lock", "") as text|null
@@ -182,7 +182,7 @@
 		if(75 to 76)
 			new /obj/item/bikehorn/airhorn(src)
 		if(77 to 78)
-			new /obj/item/toy/plush/lizardplushie(src)
+			new /obj/item/toy/plush/lizard_plushie(src)
 		if(79 to 80)
 			new /obj/item/stack/sheet/mineral/bananium(src, 10)
 		if(81 to 82)

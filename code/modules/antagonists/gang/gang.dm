@@ -182,7 +182,7 @@
 	/// The family antagonist datum of the "owner" of this action.
 	var/datum/antagonist/gang/my_gang_datum
 
-/datum/action/cooldown/spawn_induction_package/Trigger()
+/datum/action/cooldown/spawn_induction_package/Trigger(trigger_flags)
 	if(!..())
 		return FALSE
 	if(!IsAvailable())
@@ -259,12 +259,10 @@
 	acceptable_clothes = list(/obj/item/clothing/head/soft/purple,
 							/obj/item/clothing/under/color/lightpurple,
 							/obj/item/clothing/neck/scarf/purple,
-							/obj/item/clothing/head/beanie/purple,
 							/obj/item/clothing/suit/apron/purple_bartender,
 							/obj/item/clothing/mask/bandana/skull,
 							/obj/item/clothing/under/suit/green)
-	free_clothes = list(/obj/item/clothing/head/beanie/purple,
-						/obj/item/clothing/under/color/lightpurple,
+	free_clothes = list(/obj/item/clothing/under/color/lightpurple,
 						/obj/item/toy/crayon/spraycan)
 	var/list/cop_roles = list("Security Officer", "Warden", "Detective", "Head of Security")
 	gang_objective = "We're looking to make a deal with the security pigs on this station after the shift. We scratch their back, they scratch ours. You feel me? Keep all of security safe from any trouble, and make sure they get out alive."
@@ -286,7 +284,6 @@
 	acceptable_clothes = list(/obj/item/clothing/head/soft/green,
 							/obj/item/clothing/under/color/darkgreen,
 							/obj/item/clothing/neck/scarf/green,
-							/obj/item/clothing/head/beanie/green,
 							/obj/item/clothing/suit/poncho/green,
 							/obj/item/clothing/mask/bandana/green)
 	free_clothes = list(/obj/item/clothing/mask/bandana/green,
@@ -372,11 +369,9 @@
 	roundend_category = "The Tunnel Snakes"
 	gang_name = "Tunnel Snakes"
 	gang_id = "TS"
-	acceptable_clothes = list(/obj/item/clothing/under/pants/classicjeans,
-							/obj/item/clothing/suit/jacket,
+	acceptable_clothes = list(/obj/item/clothing/suit/jacket,
 							/obj/item/clothing/mask/bandana/skull)
 	free_clothes = list(/obj/item/clothing/suit/jacket,
-						/obj/item/clothing/under/pants/classicjeans,
 						/obj/item/toy/crayon/spraycan)
 	gang_objective = "TUNNEL SNAKES RULE!!! Make sure that everyone knows that, by getting 25% of people on station to wear any part of our uniform! TUNNEL SNAKES RULE!!!"
 	antag_hud_name = "Snakes"
@@ -462,15 +457,13 @@
 	gang_name = "Tojo Clan"
 	gang_id = "YAK"
 	acceptable_clothes = list(/obj/item/clothing/head/soft/yellow,
-							/obj/item/clothing/under/costume/yakuza,
 							/obj/item/clothing/shoes/yakuza,
 							/obj/item/clothing/neck/scarf/yellow,
 							/obj/item/clothing/head/beanie/yellow,
 							/obj/item/clothing/mask/bandana/gold,
 							/obj/item/clothing/head/hardhat,
 							/obj/item/clothing/suit/yakuza)
-	free_clothes = list(/obj/item/clothing/under/costume/yakuza,
-						/obj/item/clothing/shoes/yakuza,
+	free_clothes = list(/obj/item/clothing/shoes/yakuza,
 						/obj/item/clothing/suit/yakuza,
 						/obj/item/clothing/head/hardhat,
 						/obj/item/toy/crayon/spraycan)

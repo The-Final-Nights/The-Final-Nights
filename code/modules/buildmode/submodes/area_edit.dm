@@ -7,6 +7,14 @@
 	areaimage = image('icons/turf/areas.dmi', null, "yellow")
 	..()
 
+/datum/buildmode_mode/area_edit/show_help(client/builder)
+	to_chat(builder, span_purple(boxed_message(
+		"[span_bold("Select corner")] -> Left Mouse Button on obj/turf/mob\n\
+		[span_bold("Paint area")] -> Left Mouse Button + Alt on turf/obj/mob\n\
+		[span_bold("Select area to paint")] -> Right Mouse Button on obj/turf/mob\n\
+		[span_bold("Create new area")] -> Right Mouse Button on buildmode button"))
+	)
+
 /datum/buildmode_mode/area_edit/enter_mode(datum/buildmode/BM)
 	BM.holder.images += areaimage
 
@@ -43,11 +51,9 @@
 		areaimage.loc = storedarea // color our area
 
 /datum/buildmode_mode/area_edit/handle_click(client/c, params, object)
-	var/list/pa = params2list(params)
-	var/left_click = pa.Find("left")
-	var/right_click = pa.Find("right")
+	var/list/modifiers = params2list(params)
 
-	if(left_click)
+	if(LAZYACCESS(modifiers, LEFT_CLICK))
 		if(!storedarea)
 			to_chat(c, "<span class='warning'>Configure or select the area you want to paint first!</span>")
 			return
@@ -55,7 +61,7 @@
 		if(get_area(T) != storedarea)
 			log_admin("Build Mode: [key_name(c)] added [AREACOORD(T)] to [storedarea]")
 			storedarea.contents.Add(T)
-	else if(right_click)
+	else if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		var/turf/T = get_turf(object)
 		storedarea = get_area(T)
 		areaimage.loc = storedarea // color our area

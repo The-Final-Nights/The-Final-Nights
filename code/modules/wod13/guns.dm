@@ -411,6 +411,38 @@
 	fire_sound = 'code/modules/wod13/sounds/mp5.ogg'
 	cost = 200
 
+/obj/item/ammo_box/magazine/vamp46mp7
+	name = "mp7 magazine (4.6mm)"
+	icon = 'code/modules/wod13/ammo.dmi'
+//	lefthand_file = 'code/modules/wod13/righthand.dmi'
+//	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	icon_state = "mp7"
+	ammo_type = /obj/item/ammo_casing/vampire/c46mm
+	caliber = CALIBER_46
+	max_ammo = 40
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+
+/obj/item/gun/ballistic/automatic/vampire/mp7
+	name = "\improper HK MP7"
+	desc = "A lightweight, burst-fire submachine gun. Uses 4.6mm."
+	icon_state = "mp7"
+	icon = 'code/modules/wod13/48x32weapons.dmi'
+	inhand_icon_state = "mp7"
+	worn_icon_state = "mp7"
+	mag_type = /obj/item/ammo_box/magazine/vamp46mp7
+	burst_size = 4
+	spread = 2
+	recoil = 1
+	fire_delay = 1
+	bolt_type = BOLT_TYPE_LOCKING
+	show_bolt_icon = FALSE
+	mag_display = TRUE
+	rack_sound = 'sound/weapons/gun/pistol/slide_lock.ogg'
+	fire_sound = 'code/modules/wod13/sounds/mp5.ogg'
+	cost = 250
+
 /obj/item/ammo_box/magazine/vamp556
 	name = "carbine magazine (5.56mm)"
 	icon = 'code/modules/wod13/ammo.dmi'
@@ -728,7 +760,6 @@
 	masquerade_violating = TRUE
 
 /obj/item/molotov/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	call_dharma("grief", throwingdatum.thrower)
 	for(var/turf/open/floor/F in range(2, hit_atom))
 		if(F)
 			new /obj/effect/decal/cleanable/gasoline(F)
@@ -790,7 +821,6 @@
 		if(target_turf)
 			var/turflist = getline(user, target_turf)
 			log_combat(user, target, "flamethrowered", src)
-			call_dharma("grief", user)
 			for(var/turf/open/floor/F in turflist)
 				if(F)
 					if(F != user.loc)

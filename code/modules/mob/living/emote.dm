@@ -42,12 +42,6 @@
 	hands_use_check = TRUE
 	emote_type = EMOTE_VISIBLE
 
-/datum/emote/living/chuckle
-	key = "chuckle"
-	key_third_person = "chuckles"
-	message = "chuckles."
-	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-
 /datum/emote/living/collapse
 	key = "collapse"
 	key_third_person = "collapses"
@@ -266,6 +260,32 @@
 		return
 	return user.dna.species.get_laugh_sound(user)
 
+/datum/emote/living/laugh/chuckle
+	key = "chuckle"
+	key_third_person = "chuckles"
+	message = "chuckles."
+	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+
+/datum/emote/living/laugh/chuckle/get_sound(mob/living/carbon/human/user)
+	if(!istype(user))
+		return
+	return user.dna.species.get_chuckle_sound(user)
+
+/datum/emote/living/laugh/crazy
+	key = "crazylaugh"
+	key_third_person = "crazylaughs"
+	message = "laughs maniacally!"
+	message_alternates = list("lets out a maniacal laugh!",
+	"erupts into a fit of strange laughter!",
+	"laughs maniacally!",
+	"lets out an unhinged laugh!",
+	"bursts into a fit of uncontrollable laughter!")
+
+/datum/emote/living/laugh/crazy/get_sound(mob/living/carbon/human/user)
+	if(!istype(user))
+		return
+	return user.dna.species.get_crazylaugh_sound(user)
+
 /datum/emote/living/look
 	key = "look"
 	key_third_person = "looks"
@@ -470,7 +490,7 @@
 	if(. && isliving(user))
 		var/mob/living/L = user
 		L.Paralyze(20 SECONDS)
-		L.remove_status_effect(STATUS_EFFECT_SURRENDER)
+		L.remove_status_effect(/datum/status_effect/grouped/surrender)
 
 /datum/emote/living/sway
 	key = "sway"

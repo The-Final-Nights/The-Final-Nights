@@ -5,11 +5,11 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/stoic_pose/Trigger()
+/datum/action/gift/stoic_pose/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/ice_blocking.ogg', 100, FALSE)
-		var/mob/living/carbon/C = owner
+		var/mob/living/C = owner
 		if(isgarou(C))
 			var/obj/were_ice/W = new (get_turf(owner))
 			C.Stun(12 SECONDS)
@@ -38,7 +38,7 @@
 	button_icon_state = "freezing_wind"
 	rage_req = 1
 
-/datum/action/gift/freezing_wind/Trigger()
+/datum/action/gift/freezing_wind/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/wind_cast.ogg', 100, FALSE)
@@ -57,7 +57,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/bloody_feast/Trigger()
+/datum/action/gift/bloody_feast/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/C = owner
@@ -74,7 +74,7 @@
 	desc = "Garou creates an aura of very toxic smell, which disorientates everyone around."
 	button_icon_state = "stinky_fur"
 
-/datum/action/gift/stinky_fur/Trigger()
+/datum/action/gift/stinky_fur/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/necromancy.ogg', 75, FALSE)
@@ -91,7 +91,7 @@
 	button_icon_state = "venom_claws"
 	rage_req = 1
 
-/datum/action/gift/venom_claws/Trigger()
+/datum/action/gift/venom_claws/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(ishuman(owner))
@@ -126,7 +126,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/burning_scars/Trigger()
+/datum/action/gift/burning_scars/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		owner.visible_message(span_warning("[owner.name] crackles with heat!</span>"), span_danger("You crackle with heat, charging up your Gift!"))
@@ -144,7 +144,7 @@
 	desc = "Garou jumps forward, avoiding every damage for a moment."
 	button_icon_state = "smooth_move"
 
-/datum/action/gift/smooth_move/Trigger()
+/datum/action/gift/smooth_move/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/turf/T = get_turf(get_step(get_step(get_step(owner, owner.dir), owner.dir), owner.dir))
@@ -164,7 +164,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/digital_feelings/Trigger()
+/datum/action/gift/digital_feelings/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		owner.visible_message(span_danger("[owner.name] crackles with static electricity!"), span_danger("You crackle with static electricity, charging up your Gift!"))
@@ -172,7 +172,7 @@
 			playsound(owner, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
 			if(CheckZoneMasquerade(owner))
 				var/mob/living/carbon/human/H
-				var/mob/living/carbon/werewolf/W
+				var/mob/living/simple_animal/werewolf/W
 				if(ishuman(owner))
 					H = owner
 				else
@@ -191,7 +191,7 @@
 	button_icon_state = "hands_full_of_thunder"
 	gnosis_req = 1
 
-/datum/action/gift/hands_full_of_thunder/Trigger()
+/datum/action/gift/hands_full_of_thunder/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		ADD_TRAIT(owner, TRAIT_THUNDERSHOT, "thunder")
@@ -207,7 +207,7 @@
 	rage_req = 2
 	gnosis_req = 1
 
-/datum/action/gift/elemental_improvement/Trigger()
+/datum/action/gift/elemental_improvement/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		animate(owner, color = "#6a839a", time = 10)
@@ -224,7 +224,7 @@
 				owner.color = "#FFFFFF"
 		else
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/electro_cast.ogg', 75, FALSE)
-			var/mob/living/carbon/werewolf/H = owner
+			var/mob/living/simple_animal/werewolf/H = owner
 			H.werewolf_armor = 45
 			to_chat(owner, span_notice("You feel your skin replaced with the machine..."))
 			spawn(20 SECONDS)
@@ -239,7 +239,7 @@
 	button_icon_state = "guise_of_the_hound"
 	rage_req = 1
 
-/datum/action/gift/guise_of_the_hound/Trigger()
+/datum/action/gift/guise_of_the_hound/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(!HAS_TRAIT(owner,TRAIT_DOGWOLF))
@@ -249,17 +249,17 @@
 			REMOVE_TRAIT(owner, TRAIT_DOGWOLF, src)
 			to_chat(owner, span_notice("You feel your lupine nature intensifying!"))
 
-		if(istype(owner, /mob/living/carbon/werewolf/lupus))
-			var/mob/living/carbon/werewolf/lupus/lopor = owner
+		if(istype(owner, /mob/living/simple_animal/werewolf/lupus))
+			var/mob/living/simple_animal/werewolf/lupus/lopor = owner
 
 			if(lopor && !lopor.hispo)
 				playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
 				var/matrix/ntransform = matrix(owner.transform)
 				ntransform.Scale(0.95, 0.95)
 				animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
-				addtimer(CALLBACK(src, PROC_REF(trans_doggy), lopor), 3 SECONDS)
+				addtimer(CALLBACK(src, PROC_REF(transform_lupus), lopor), 3 SECONDS)
 
-/datum/action/gift/guise_of_the_hound/proc/trans_doggy(mob/living/carbon/werewolf/lupus/H)
+/datum/action/gift/guise_of_the_hound/proc/transform_lupus(mob/living/simple_animal/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -268,13 +268,15 @@
 	H.update_transform()
 	animate(H, transform = null, color = "#FFFFFF", time = 1)
 
+
+
 /datum/action/gift/infest
 	name = "Infest"
 	desc = "Call forth the vermin in the area to serve you against your enemies."
 	button_icon_state = "infest"
 	rage_req = 4
 
-/datum/action/gift/infest/Trigger()
+/datum/action/gift/infest/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/limit
@@ -296,12 +298,12 @@
 				var/mob/living/simple_animal/hostile/beastmaster/rat/ratto = new(get_turf(H))
 				ratto.my_creator = H
 				H.beastmaster |= ratto
-				ratto.beastmaster = H
+				ratto.beastmaster_owner = H
 			else
 				var/mob/living/simple_animal/hostile/beastmaster/cockroach/roach = new(get_turf(H))
 				roach.my_creator = H
 				H.beastmaster |= roach
-				roach.beastmaster = H
+				roach.beastmaster_owner = H
 
 /datum/action/gift/gift_of_the_termite
 	name = "Gift of the Termite"
@@ -310,7 +312,7 @@
 	rage_req = 3
 	gnosis_req = 2
 
-/datum/action/gift/gift_of_the_termite/Trigger()
+/datum/action/gift/gift_of_the_termite/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/mob/living/carbon/H = owner
@@ -323,7 +325,7 @@
 	button_icon_state = "shroud"
 	rage_req = 1
 
-/datum/action/gift/shroud/Trigger()
+/datum/action/gift/shroud/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/atom/movable/shadow
@@ -339,7 +341,7 @@
 	button_icon_state = "coils_of_the_serpent"
 	rage_req = 1
 
-/datum/action/gift/coils_of_the_serpent/Trigger()
+/datum/action/gift/coils_of_the_serpent/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		if(ishuman(owner))
@@ -362,12 +364,12 @@
 	rage_req = 3
 	gnosis_req = 2
 
-/datum/action/gift/banish_totem/Trigger()
+/datum/action/gift/banish_totem/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
 		var/valid_tribe = FALSE
 		var/list/targets = list()
-		for(var/mob/living/carbon/werewolf/wtarget in orange(7,owner))
+		for(var/mob/living/simple_animal/werewolf/wtarget in orange(7,owner))
 			targets += wtarget
 		for(var/mob/living/carbon/human/htarget in orange(7,owner))
 			targets += htarget
@@ -379,3 +381,104 @@
 				targetted.auspice.gnosis = 0
 				to_chat(targetted, span_userdanger("You feel your tie to your totem snap, gnosis leaving you...!"))
 				to_chat(owner, span_danger("You feel [target.name]'s gnostic ties fray...!"))
+
+
+/datum/action/gift/suns_guard // MASSIVE thanks to MachinePixie for coding this and the eye-drinking gifts, as well as making the relevant sprites
+	name = "Sun's Guard"
+	desc = "Gain the blessing of Helios, and become immune to spark and inferno both"
+	button_icon_state = "sunblock"
+	rage_req = 2
+	cool_down = 21 SECONDS
+
+
+
+
+/datum/action/gift/suns_guard/Trigger(trigger_flags)
+	. = ..()
+	if(allowed_to_proceed)
+		var/mob/living/carbon/caster = owner
+		var/storeburnmod = caster.dna.species.burnmod
+		caster.dna.species.burnmod = 0
+		caster.set_fire_stacks(0)
+		ADD_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
+		animate(caster, color = "#ff8800", time = 10, loop = 1)
+		playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
+		to_chat(caster, "Sun's Guard activated, you have become immune to fire.")
+		addtimer(CALLBACK(src, PROC_REF(end_guard)), 140, storeburnmod)
+
+
+/datum/action/gift/suns_guard/proc/end_guard(storedburnmodifier)
+	var/mob/living/carbon/caster = owner
+	caster.dna.species.burnmod = storedburnmodifier
+	caster.set_fire_stacks(0)
+	REMOVE_TRAIT(caster, TRAIT_RESISTHEAT, MAGIC_TRAIT)
+	caster.color = initial(caster.color)
+	playsound(get_turf(caster), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
+	to_chat(caster, "Sun's Guard is no longer active, you are no longer immune to fire.")
+
+/datum/action/gift/eye_drink
+	name = "Eye-Drinking"
+	desc = "Consumes the eyes of a corpse to unlock the secrets of its demise. Will risk breaching the veil if used in homid."
+	button_icon_state = "eye_drink"
+	rage_req = 0
+	cool_down = 1 MINUTES
+
+/datum/action/gift/eye_drink/Trigger(trigger_flags)
+	. = ..()
+	if(allowed_to_proceed)
+		var/mob/living/carbon/caster = owner
+		if(caster.pulling)
+			var/mob/living/carbon/victim = caster.pulling
+			var/obj/item/organ/eyes/victim_eyeballs = victim.getorganslot(ORGAN_SLOT_EYES)
+			var/isNPC = TRUE
+			if(!iscarbon(victim) || victim.stat != DEAD )
+				to_chat(caster, "<span class='warning'>You aren't currently pulling a corpse!</span>")
+				return
+			else
+				if(!victim_eyeballs)
+					to_chat(caster, "<span class='warning'>You cannot drink the eyes of a corpse that has no eyes!</span>")
+					return
+				else
+					if (!do_after(caster, 3 SECONDS)) //timer to cast
+						return
+					var/permission = tgui_input_list(victim, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+					var/victim_two = victim
+
+					if (!permission) //returns null if no soul in body
+						for (var/mob/dead/observer/ghost in GLOB.player_list)
+							if (ghost.mind == victim.last_mind)
+								//ask again if null
+								permission = tgui_input_list(ghost, "Will you allow [caster.real_name] to view your death? (Note: You are expected to tell the truth in your character's eyes!)", "Select", list("Yes","No","I don't recall") ,"Yes", 1 MINUTES)
+								victim_two = ghost
+								break //no need to do further iterations if you found the right person
+
+					if(permission == "Yes")
+						if(ishuman(caster)) //listen buddy, hulking ravenmen and ravens can eat those eyes just fine, but a human? DISGUSTING.
+							if(caster.CheckEyewitness(caster, caster, 7, FALSE))
+								caster.adjust_veil(-1)
+						playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //itadakimasu! :D
+						qdel(victim_eyeballs)
+						caster.adjust_nutrition(5) //organ nutriment value is 5
+						to_chat(caster, "You drink of the eyes of [victim.name] and a vision fills your mind...")
+						var/deathdesc = tgui_input_text(victim_two, "", "How did you die?", "", 300, TRUE, TRUE, 5 MINUTES)
+						if (deathdesc == "")
+							to_chat(caster, "The vision is hazy, you can't make out many details...")
+						else
+							to_chat(caster, "<i>[deathdesc]</i>")
+						//discount scanner
+						to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
+						to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
+						isNPC = FALSE
+
+					else if(permission == "No")
+						to_chat(caster,"<span class='warning'>The spirit seems relunctact to let you consume their eyes... so you refrain from doing so.</span>")
+						isNPC = FALSE
+
+					if(isNPC)
+						playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //yummers
+						qdel(victim_eyeballs)
+						caster.adjust_nutrition(5) //organ nutriment value is 5
+						to_chat(caster, "You drink of the eyes of [victim.name] but no vision springs to mind...")
+						to_chat(caster,"<b>Damage taken:<b><br>BRUTE: [victim.getBruteLoss()]<br>OXY: [victim.getOxyLoss()]<br>TOXIN: [victim.getToxLoss()]<br>BURN: [victim.getFireLoss()]<br>CLONE: [victim.getCloneLoss()]")
+						to_chat(caster, "Last melee attacker: [victim.lastattacker]") //guns behave weirdly
+

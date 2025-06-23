@@ -4,11 +4,11 @@
 	use_corner_selection = TRUE
 	var/generator_path
 
-/datum/buildmode_mode/mapgen/show_help(client/c)
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button on turf/obj/mob      = Select corner</span>")
-	to_chat(c, "<span class='notice'>Right Mouse Button on buildmode button = Select generator</span>")
-	to_chat(c, "<span class='notice'>***********************************************************</span>")
+/datum/buildmode_mode/mapgen/show_help(client/builder)
+	to_chat(builder, span_purple(boxed_message(
+		"[span_bold("Select corner")] -> Left Mouse Button on turf/obj/mob\n\
+		[span_bold("Select generator")] -> Right Mouse Button on buildmode button"))
+	)
 
 /datum/buildmode_mode/mapgen/change_settings(client/c)
 	var/list/gen_paths = subtypesof(/datum/map_generator)
@@ -31,9 +31,9 @@
 	..()
 
 /datum/buildmode_mode/mapgen/handle_selected_area(client/c, params)
-	var/list/pa = params2list(params)
-	var/left_click = pa.Find("left")
-	if(left_click)
+	var/list/modifiers = params2list(params)
+	
+	if(LAZYACCESS(modifiers, LEFT_CLICK))
 		var/datum/map_generator/G = new generator_path
 		if(istype(G, /datum/map_generator/repair/reload_station_map))
 			if(GLOB.reloading_map)

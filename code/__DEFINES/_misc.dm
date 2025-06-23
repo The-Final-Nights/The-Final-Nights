@@ -302,18 +302,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 //TODO Move to a pref
 #define STATION_GOAL_BUDGET  1
 
-//Luma coefficients suggested for HDTVs. If you change these, make sure they add up to 1.
-#define LUMA_R 0.213
-#define LUMA_G 0.715
-#define LUMA_B 0.072
-
-//different types of atom colorations
-#define ADMIN_COLOUR_PRIORITY 		1 //only used by rare effects like greentext coloring mobs and when admins varedit color
-#define TEMPORARY_COLOUR_PRIORITY 	2 //e.g. purple effect of the revenant on a mob, black effect when mob electrocuted
-#define WASHABLE_COLOUR_PRIORITY 	3 //color splashed onto an atom (e.g. paint on turf)
-#define FIXED_COLOUR_PRIORITY 		4 //color inherent to the atom (e.g. blob color)
-#define COLOUR_PRIORITY_AMOUNT 4 //how many priority levels there are.
-
 //Endgame Results
 #define NUKE_NEAR_MISS 1
 #define NUKE_MISS_STATION 2
@@ -357,11 +345,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 #define BEAT_SLOW 2
 #define BEAT_NONE 0
 
-//https://secure.byond.com/docs/ref/info.html#/atom/var/mouse_opacity
-#define MOUSE_OPACITY_TRANSPARENT 0
-#define MOUSE_OPACITY_ICON 1
-#define MOUSE_OPACITY_OPAQUE 2
-
 //server security mode
 #define SECURITY_SAFE 1
 #define SECURITY_ULTRASAFE 2
@@ -376,9 +359,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 									//This makes sure that a single person can only spam 3 reopens and 3 closes before being ignored
 
 #define MAX_PROC_DEPTH 195 // 200 proc calls deep and shit breaks, this is a bit lower to give some safety room
-
-#define SYRINGE_DRAW 0
-#define SYRINGE_INJECT 1
 
 //gold slime core spawning
 #define NO_SPAWN 0
@@ -436,10 +416,6 @@ GLOBAL_LIST_INIT(pda_styles, sort_list(list(MONO, VT, ORBITRON, SHARE)))
 
 // Used by PDA and cartridge code to reduce repetitiveness of spritesheets
 #define PDAIMG(what) {"<span class="pda16x16 [#what]"></span>"}
-
-//Filters
-#define AMBIENT_OCCLUSION filter(type="drop_shadow", x=0, y=-2, size=4, color="#04080FAA")
-#define GAUSSIAN_BLUR(filter_size) filter(type="blur", size=filter_size)
 
 #define STANDARD_GRAVITY 1 //Anything above this is high gravity, anything below no grav
 #define GRAVITY_DAMAGE_TRESHOLD 3 //Starting with this value gravity will start to damage mobs

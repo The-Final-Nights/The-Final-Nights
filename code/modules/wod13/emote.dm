@@ -15,11 +15,31 @@
 		return
 
 	if(iswerewolf(user))
-		var/mob/living/carbon/werewolf/wolf = user
+		var/mob/living/simple_animal/werewolf/wolf = user
 		if(iscrinos(wolf))
 			playsound(get_turf(wolf), 'code/modules/wod13/sounds/crinos_growl.ogg', 75, FALSE)
 		if(islupus(wolf))
 			playsound(get_turf(wolf), 'code/modules/wod13/sounds/lupus_growl.ogg', 75, FALSE)
+
+/datum/emote/living/caw
+		key = "caw"
+		key_third_person = "caws"
+		message = "caws!"
+		emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
+
+/datum/emote/living/caw/run_emote(mob/user, params , type_override, intentional)
+	. = ..()
+	if(isgarou(user) && HAS_TRAIT(user, TRAIT_CORAX))
+		var/mob/living/carbon/human/corax = user
+		playsound(get_turf(corax), 'code/modules/wod13/sounds/cawcorvid.ogg', 100, FALSE)
+
+	if(HAS_TRAIT(user, TRAIT_CORAX))
+		var/mob/living/simple_animal/werewolf/corax/corax = user
+		if(iscoraxcrinos(corax))
+			playsound(get_turf(corax), 'code/modules/wod13/sounds/cawcrinos.ogg', 100, FALSE)
+		if(iscorvid(corax))
+			playsound(get_turf(corax), 'code/modules/wod13/sounds/cawcorvid.ogg', 100, FALSE)
+
 
 /datum/emote/living/howl
 	key = "howl"

@@ -721,8 +721,7 @@
 					owner.log_message("used [I] due to a Muscle Spasm", LOG_ATTACK)
 					I.attack_self(owner)
 			if(3)
-				var/prev_intent = owner.a_intent
-				owner.a_intent = INTENT_HARM
+				owner.set_combat_mode(TRUE)
 
 				var/range = 1
 				if(istype(owner.get_active_held_item(), /obj/item/gun)) //get targets to shoot at
@@ -736,14 +735,13 @@
 					to_chat(owner, "<span class='warning'>Your arm spasms!</span>")
 					owner.log_message(" attacked someone due to a Muscle Spasm", LOG_ATTACK) //the following attack will log itself
 					owner.ClickOn(pick(targets))
-				owner.a_intent = prev_intent
+				owner.set_combat_mode(FALSE)
 			if(4)
-				var/prev_intent = owner.a_intent
-				owner.a_intent = INTENT_HARM
+				owner.set_combat_mode(TRUE)
 				to_chat(owner, "<span class='warning'>Your arm spasms!</span>")
 				owner.log_message("attacked [owner.p_them()]self to a Muscle Spasm", LOG_ATTACK)
 				owner.ClickOn(owner)
-				owner.a_intent = prev_intent
+				owner.set_combat_mode(FALSE)
 			if(5)
 				if(owner.incapacitated())
 					return
@@ -919,8 +917,8 @@
 
 /datum/status_effect/amok/tick()
 	. = ..()
-	var/prev_intent = owner.a_intent
-	owner.a_intent = INTENT_HARM
+	var/prev_combat_mode = owner.combat_mode
+	owner.set_combat_mode(TRUE)
 
 	var/list/mob/living/targets = list()
 	for(var/mob/living/potential_target in oview(owner, 1))
@@ -930,7 +928,7 @@
 	if(LAZYLEN(targets))
 		owner.log_message(" attacked someone due to the amok debuff.", LOG_ATTACK) //the following attack will log itself
 		owner.ClickOn(pick(targets))
-	owner.a_intent = prev_intent
+	owner.set_combat_mode(prev_combat_mode)
 
 /datum/status_effect/cloudstruck
 	id = "cloudstruck"
@@ -1043,3 +1041,33 @@
 	owner.additional_mentality += 1
 	if(HAS_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN))
 		REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
+
+
+//WARRIOR VALEREN 3 - BURNING TOUCH
+/datum/status_effect/burning_touch
+	id = "burning_touch"
+	status_type = STATUS_EFFECT_REFRESH
+	duration = 6 SECONDS //Two turns
+	tick_interval = 1 SECONDS
+	alert_type = /atom/movable/screen/alert/status_effect/burning_touch
+	var/mob/living/carbon/human/source
+
+/atom/movable/screen/alert/status_effect/burning_touch
+	name = "Burning Touch"
+	desc = "THE PAIN!!! IT HURTS!!!"
+	icon_state = "fire"
+
+/datum/status_effect/burning_touch/on_creation(mob/living/carbon/new_owner, mob/living/carbon/human/new_source)
+	. = ..()
+	source = new_source
+
+/datum/status_effect/burning_touch/tick()
+	var/mob/living/carbon/grabber = owner
+	if(source.pulling == grabber)
+		grabber.adjustStaminaLoss(60, forced = TRUE)
+		grabber.emote("scream")
+		grabber.apply_status_effect(STATUS_EFFECT_BURNING_TOUCH, owner)
+
+/datum/status_effect/burning_touch/Destroy()
+	source = null
+	return ..()
