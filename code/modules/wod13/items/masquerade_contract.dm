@@ -21,7 +21,7 @@
 		if(UT)
 			to_chat(user, "<b>YOU</b>, [get_area_name(user)] X:[UT.x] Y:[UT.y]")
 		for(var/mob/living/carbon/human/H in masq_breakers)
-			if(iskindred(H) || isghoul(H) || iscathayan(H))
+			if(iskindred(H) || isghoul(H) || iscathayan(H) || iszombie(H))
 				var/turf/TT = get_turf(H)
 				var/location_info = ""
 				if(TT && !is_sabbatist(H))
