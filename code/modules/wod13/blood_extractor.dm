@@ -17,6 +17,9 @@
 	if(!target.buckled)
 		to_chat(user, span_warning("You need to buckle [target] before using the extractor!"))
 		return
+	if(iszombie(target))
+		to_chat(user, span_warning("[target]'s still, rotten blood cannot be drawn!"))
+		return
 	if(!COOLDOWN_FINISHED(src, last_extracted))
 		to_chat(user, span_warning("The [src] isn't ready yet!"))
 		return
