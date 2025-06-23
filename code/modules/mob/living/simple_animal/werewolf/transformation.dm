@@ -47,7 +47,7 @@
 
 	return ..()
 
-/datum/werewolf_holder/transformation/proc/transfer_damage(mob/living/first, mob/living/second)
+/datum/werewolf_holder/transformation/proc/transfer_damage_and_traits(mob/living/first, mob/living/second)
 	second.masquerade = first.masquerade
 
 
@@ -61,6 +61,8 @@
 	second.setToxLoss(target_toxin_damage)
 	var/target_clone_damage = ceil(first.getCloneLoss() / division_parameter)
 	second.setCloneLoss(target_clone_damage)
+	if(HAS_TRAIT(first, TRAIT_WARRIOR) && !HAS_TRAIT(second, TRAIT_WARRIOR))
+		ADD_TRAIT(second, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 	first.fire_stacks = second.fire_stacks
 	first.on_fire = second.on_fire
@@ -394,7 +396,7 @@
 	homid.nutrition = trans.nutrition
 	homid.mind = trans.mind
 	homid.update_blood_hud()
-	transfer_damage(trans, homid)
+	transfer_damage_and_traits(trans, homid)
 	if(bypass)
 		homid.adjustBruteLoss(200) //Carbon humans also have crit, and crinos + lupus dont, so if you're dead in those, add an extra 200 damage homids to make sure they are dead and dont spontaneously come back to life
 	homid.remove_movespeed_modifier(/datum/movespeed_modifier/crinosform)

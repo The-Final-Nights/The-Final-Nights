@@ -145,7 +145,7 @@
 			W.melee_attack_chain(src, A, params)
 		else
 			if(ismob(A))
-				if(HAS_TRAIT(L, TRAIT_WARRIOR))
+				if(HAS_TRAIT(src, TRAIT_WARRIOR))
 					changeNext_move(CLICK_CD_MELEE * 0.5)
 				else
 					changeNext_move(CLICK_CD_MELEE)
@@ -163,10 +163,9 @@
 			W.melee_attack_chain(src, A, params)
 		else
 			if(ismob(A))
-				var/mob/living/L = src
-				if(HAS_TRAIT(L, TRAIT_WARRIOR))
+				if(HAS_TRAIT(src, TRAIT_WARRIOR))
 					changeNext_move(CLICK_CD_MELEE * 0.5)
-			else
+				else
 					changeNext_move(CLICK_CD_MELEE)
 			UnarmedAttack(A,1,modifiers)
 	else
