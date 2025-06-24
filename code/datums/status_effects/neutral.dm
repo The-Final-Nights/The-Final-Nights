@@ -381,7 +381,7 @@
 /datum/status_effect/leaning
 	id = "leaning"
 	duration = -1
-	tick_interval = -1
+	tick_interval = STATUS_EFFECT_NO_TICK
 	status_type = STATUS_EFFECT_UNIQUE
 	alert_type = /atom/movable/screen/alert/status_effect/leaning
 

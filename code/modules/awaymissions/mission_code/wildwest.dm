@@ -159,8 +159,8 @@
 	if(!C.stat)
 		to_chat(C, "<span class='notice'>You're not dead yet!</span>")
 		return
-	if(C.has_status_effect(STATUS_EFFECT_WISH_GRANTERS_GIFT))
-		to_chat(C, "<span class='warning'>You're already resurrecting!</span>")
+	if(C.has_status_effect(/datum/status_effect/wish_granters_gift))
+		to_chat(C, span_warning("You're already resurrecting!"))
 		return
-	C.apply_status_effect(STATUS_EFFECT_WISH_GRANTERS_GIFT)
+	C.apply_status_effect(/datum/status_effect/wish_granters_gift)
 	return 1

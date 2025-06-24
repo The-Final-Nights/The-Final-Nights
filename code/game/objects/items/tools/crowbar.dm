@@ -93,38 +93,17 @@
 				playsound(loc, "desecration", 50, TRUE, -1)
 	return (BRUTELOSS)
 
-/obj/item/crowbar/power/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/items/change_jaws.ogg', 50, TRUE)
-	if(tool_behaviour == TOOL_CROWBAR)
-		tool_behaviour = TOOL_WIRECUTTER
-		to_chat(user, "<span class='notice'>You attach the cutting jaws to [src].</span>")
-		usesound = 'sound/items/jaws_cut.ogg'
-		update_appearance()
-
-	else
-		tool_behaviour = TOOL_CROWBAR
-		to_chat(user, "<span class='notice'>You attach the prying jaws to [src].</span>")
-		usesound = 'sound/items/jaws_pry.ogg'
-		update_appearance()
-
-/obj/item/crowbar/power/update_icon_state()
-	if(tool_behaviour == TOOL_WIRECUTTER)
-		icon_state = "jaws_cutter"
-	else
-		icon_state = "jaws_pry"
-	return ..()
-
-/obj/item/crowbar/power/syndicate/update_icon_state()
-	if(tool_behaviour == TOOL_WIRECUTTER)
-		icon_state = "jaws_cutter_syndie"
-	else
-		icon_state = "jaws_pry_syndie"
-	return ..()
-
-/obj/item/crowbar/power/attack(mob/living/carbon/C, mob/user)
-	if(istype(C) && C.handcuffed && tool_behaviour == TOOL_WIRECUTTER)
-		user.visible_message("<span class='notice'>[user] cuts [C]'s restraints with [src]!</span>")
-		qdel(C.handcuffed)
+/obj/item/crowbar/power/attack(mob/living/carbon/attacked_carbon, mob/user)
+	if(istype(attacked_carbon) && attacked_carbon.handcuffed && tool_behaviour == TOOL_WIRECUTTER)
+		user.visible_message(span_notice("[user] cuts [attacked_carbon]'s restraints with [src]!"))
+		qdel(attacked_carbon.handcuffed)
+		return
+	else if(istype(attacked_carbon) && attacked_carbon.has_status_effect(/datum/status_effect/strandling) && tool_behaviour == TOOL_WIRECUTTER)
+		user.visible_message(span_notice("[user] attempts to cut the durathread strand from around [attacked_carbon]'s neck."))
+		if(do_after(user, 1.5 SECONDS, attacked_carbon))
+			user.visible_message(span_notice("[user] succesfully cuts the durathread strand from around [attacked_carbon]'s neck."))
+			attacked_carbon.remove_status_effect(/datum/status_effect/strandling)
+			playsound(loc, usesound, 50, TRUE, -1)
 		return
 	else
 		..()

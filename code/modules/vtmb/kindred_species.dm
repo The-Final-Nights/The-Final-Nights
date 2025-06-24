@@ -483,7 +483,7 @@
 						to_chat(owner, span_warning("You successfuly fed [thrall] with vitae."))
 						to_chat(thrall, span_warning("You feel good when you drink this <b>BLOOD</b>... but you feel no connection to its source."))
 					else
-						thrall.apply_status_effect(STATUS_EFFECT_INLOVE, owner)
+						thrall.apply_status_effect(/datum/status_effect/in_love, owner)
 						to_chat(owner, span_warning("You successfuly fed [thrall] with vitae."))
 						to_chat(thrall, span_warning("You feel good when you drink this <b>BLOOD</b>..."))
 

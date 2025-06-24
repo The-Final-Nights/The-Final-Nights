@@ -89,7 +89,7 @@
 	if(!owner.client || owner.body_position == LYING_DOWN || !owner.has_gravity() || (owner.movement_type & FLYING) || forced || owner.buckled)
 		return
 	// less limping while we have determination still
-	var/determined_mod = owner.has_status_effect(STATUS_EFFECT_DETERMINED) ? 0.25 : 1
+	var/determined_mod = owner.has_status_effect(/datum/status_effect/determined) ? 0.5 : 1
 
 	if(next_leg == left)
 		owner.client.move_delay += slowdown_left * determined_mod

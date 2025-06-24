@@ -226,13 +226,13 @@
 
 	if(fearstack)
 		H.do_jitter_animation(10)
-		H.apply_status_effect(STATUS_EFFECT_FEAR)
+		H.apply_status_effect(/datum/status_effect/fear)
 	if(fearstack > 10 && prob(5))
 		if(!H.in_frenzy)
 			H.rollfrenzy()
 
-	if(!fearstack && H.has_status_effect(STATUS_EFFECT_FEAR))
-		H.remove_status_effect(STATUS_EFFECT_FEAR)
+	if(!fearstack && H.has_status_effect(/datum/status_effect/fear))
+		H.remove_status_effect(/datum/status_effect/fear)
 
 	//masquerade violations due to unnatural appearances
 	if(H.is_face_visible() && H.clane?.violating_appearance)

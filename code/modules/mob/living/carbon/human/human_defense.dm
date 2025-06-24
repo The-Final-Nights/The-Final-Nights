@@ -539,11 +539,11 @@
 		return
 
 	if(src == M)
-		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
-			to_chat(src, "<span class='notice'>You attempt to remove the durathread strand from around your neck.</span>")
+		if(has_status_effect(/datum/status_effect/strandling))
+			to_chat(src, span_notice("You attempt to remove the durathread strand from around your neck."))
 			if(do_after(src, 3.5 SECONDS, src))
-				to_chat(src, "<span class='notice'>You succesfuly remove the durathread strand.</span>")
-				remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
+				to_chat(src, span_notice("You succesfuly remove the durathread strand."))
+				remove_status_effect(/datum/status_effect/strandling)
 			return
 		check_self_for_injuries()
 
