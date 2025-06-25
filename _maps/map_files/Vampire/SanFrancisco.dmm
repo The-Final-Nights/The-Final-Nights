@@ -49082,6 +49082,10 @@
 /obj/item/reagent_containers/glass/bottle/potassium,
 /obj/item/reagent_containers/glass/bottle/potassium,
 /obj/structure/closet/secure_closet/chemical,
+/obj/item/reagent_containers/glass/bottle/hydrogen,
+/obj/item/reagent_containers/glass/bottle/hydrogen,
+/obj/item/reagent_containers/glass/bottle/hydrogen,
+/obj/item/reagent_containers/glass/bottle/hydrogen,
 /turf/open/floor/plasteel/showroomfloor,
 /area/vtm/clinic)
 "lur" = (
@@ -84427,6 +84431,13 @@
 /obj/item/reagent_containers/glass/bottle/fluorine,
 /obj/item/reagent_containers/glass/bottle/fluorine,
 /obj/structure/closet/secure_closet/chemical,
+/obj/item/reagent_containers/glass/bottle/oxygen,
+/obj/item/reagent_containers/glass/bottle/oxygen,
+/obj/item/reagent_containers/glass/bottle/oxygen,
+/obj/item/reagent_containers/glass/bottle/oxygen,
+/obj/item/reagent_containers/glass/bottle/fluorine,
+/obj/item/reagent_containers/glass/bottle/fluorine,
+/obj/item/reagent_containers/glass/bottle/fluorine,
 /turf/open/floor/plasteel/showroomfloor,
 /area/vtm/clinic)
 "tqZ" = (
@@ -98385,6 +98396,12 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/community)
+"wDl" = (
+/obj/machinery/photocopier{
+	density = 0
+	},
+/turf/open/floor/carpet/blue,
+/area/vtm/clinic)
 "wDp" = (
 /obj/structure/closet,
 /turf/open/floor/plating/rough,
@@ -203102,7 +203119,7 @@ bUt
 bUt
 bUt
 mWM
-sXr
+wDl
 kXR
 pGq
 vPB
