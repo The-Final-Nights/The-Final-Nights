@@ -1930,9 +1930,9 @@
 				var/response = input(usr,"What were you just doing?","Query server hang report") as null|text
 				if(response)
 					data["response"] = response
-			logger.Log(LOG_CATEGORY_DEBUG_SQL, "server hang", data)
+			GLOB.logger.Log(LOG_CATEGORY_DEBUG_SQL, "server hang", data)
 		else if(answer == "no")
-			logger.Log(LOG_CATEGORY_DEBUG_SQL, "no server hang", data)
+			GLOB.logger.Log(LOG_CATEGORY_DEBUG_SQL, "no server hang", data)
 
 	else if(href_list["ctf_toggle"])
 		if(!check_rights(R_ADMIN))
