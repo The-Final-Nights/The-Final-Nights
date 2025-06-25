@@ -1,9 +1,13 @@
 /obj/item/wirecutters
 	name = "wirecutters"
 	desc = "This cuts wires."
-	icon_state = "fixer"
+  icon_state = "fixer"
 	icon = 'code/modules/wod13/items.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	inhand_icon_state = "cutters"
+	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
+
 
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
@@ -22,33 +26,6 @@
 	tool_behaviour = TOOL_WIRECUTTER
 	toolspeed = 1
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 50, ACID = 30)
-	var/random_color = FALSE
-	var/static/list/wirecutter_colors = list(
-		"blue" = "#1861d5",
-		"red" = "#951710",
-		"pink" = "#d5188d",
-		"brown" = "#a05212",
-		"green" = "#0e7f1b",
-		"cyan" = "#18a2d5",
-		"yellow" = "#d58c18"
-	)
-
-
-/obj/item/wirecutters/Initialize()
-	. = ..()
-	if(random_color) //random colors!
-		icon_state = "cutters"
-		var/our_color = pick(wirecutter_colors)
-		add_atom_colour(wirecutter_colors[our_color], FIXED_COLOUR_PRIORITY)
-		update_appearance()
-
-/obj/item/wirecutters/update_overlays()
-	. = ..()
-	if(!random_color) //icon override
-		return
-	var/mutable_appearance/base_overlay = mutable_appearance(icon, "cutters_cutty_thingy")
-	base_overlay.appearance_flags = RESET_COLOR
-	. += base_overlay
 
 /obj/item/wirecutters/attack(mob/living/carbon/C, mob/user)
 	if(istype(C) && C.handcuffed && istype(C.handcuffed, /obj/item/restraints/handcuffs/cable))
@@ -74,7 +51,6 @@
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "cutters"
 	toolspeed = 0.1
-	random_color = FALSE
 
 /obj/item/wirecutters/cyborg
 	name = "powered wirecutters"
@@ -83,14 +59,12 @@
 	icon_state = "wirecutters_cyborg"
 	worn_icon_state = "cutters"
 	toolspeed = 0.5
-	random_color = FALSE
 
 /obj/item/wirecutters/pliers
 	name = "dental pliers"
 	desc = "Meant for taking out teeth."
 	icon_state = "neat_ripper"
 	toolspeed = 2 //isn't meant for cutting wires
-	random_color = FALSE
 	/// If pulling fangs lasts for the entire ROUND or not.
 	var/permanent = TRUE
 
@@ -99,7 +73,6 @@
 	desc = "Meant for pulling wires but you could definetly crush something with these."
 	icon_state = "ripper"
 	toolspeed = 1.2 //is an actual tool but can't actually
-	permanent = FALSE
 
 /obj/item/wirecutters/pliers/attack(mob/living/target, mob/living/user)
 	. = ..()
@@ -123,3 +96,4 @@
 					visible_message(span_warning("[user] stuff's in Bone putty into [target] to stop their fangs from regrowing!"))
 				else
 					target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)
+

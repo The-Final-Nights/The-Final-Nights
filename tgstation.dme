@@ -3678,7 +3678,6 @@
 #include "code\modules\wod13\items\phone_book.dm"
 #include "code\modules\wod13\items\quran.dm"
 #include "code\modules\wod13\items\ravnos.dm"
-#include "code\modules\wod13\items\wire_cutters.dm"
 #include "code\modules\wod13\items\clothes\belt.dm"
 #include "code\modules\wod13\items\clothes\eyes.dm"
 #include "code\modules\wod13\items\clothes\feet.dm"
