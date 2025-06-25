@@ -140,13 +140,13 @@
 	limb_destroyer = 1
 	melee_damage_lower = 65
 	melee_damage_upper = 65
-	health = 250
-	maxHealth = 250
+	health = 450
+	maxHealth = 450
 	var/pounce_cooldown = 0
 	var/pounce_cooldown_time = 30
 	pixel_w = -8
 
-	werewolf_armor = 30
+	werewolf_armor = 40
 
 /mob/living/simple_animal/werewolf/corax/corax_crinos // The specific stats for the Corax variation of Crinos
 	name = "corax"
@@ -155,13 +155,15 @@
 	butcher_results = list(/obj/item/food/meat/slab = 5)
 	limb_destroyer = 1
 
-	melee_damage_lower = 45 // more reliable damage because I believe that's also a change staged for normal werewolves, also screw RNG
+	melee_damage_lower = 50 // more reliable damage because I believe that's also a change staged for normal werewolves, also screw RNG
 	melee_damage_upper = 50 // less damage for were-ravens
-	health = 200 // a lot less HP
-	maxHealth = 200
+	health = 350 // less HP than the Werewolf variation of Crinos
+	maxHealth = 350
 	var/pounce_cooldown = 0
 	var/pounce_cooldown_time = 30
 	pixel_w = -8
+	werewolf_armor = 30
+
 
 /datum/movespeed_modifier/crinosform
 	multiplicative_slowdown = -1.2
