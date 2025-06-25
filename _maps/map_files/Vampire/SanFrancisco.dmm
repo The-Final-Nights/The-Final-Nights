@@ -6831,11 +6831,16 @@
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
 "byv" = (
-/obj/effect/decal/wallpaper/light{
-	icon_state = "toilet1"
+/obj/structure/rack{
+	density = 0;
+	icon = 'icons/obj/tank.dmi';
+	icon_state = "holder";
+	name = "tank rack"
 	},
-/turf/closed/wall/vampwall/painted,
-/area/vtm/clinic/haven)
+/obj/item/anesthetic_tank,
+/obj/item/clothing/mask/breath/medical,
+/turf/open/floor/plating/circled,
+/area/vtm/clinic)
 "byz" = (
 /obj/structure/table,
 /obj/item/flashlight,
@@ -62171,6 +62176,7 @@
 	accesslocks = list("clinic", "clinicsec");
 	name = "Clinic Security keys"
 	},
+/obj/item/p25radio,
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic)
 "oqU" = (
@@ -64276,8 +64282,13 @@
 /turf/closed/wall/vampwall/old,
 /area/vtm/interior)
 "oOM" = (
-/obj/structure/tank_holder/anesthetic{
-	anchored = 1
+/obj/item/anesthetic_tank,
+/obj/item/clothing/mask/breath/medical,
+/obj/structure/rack{
+	density = 0;
+	icon = 'icons/obj/tank.dmi';
+	icon_state = "holder";
+	name = "tank rack"
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/clinic)
@@ -67427,6 +67438,11 @@
 /obj/structure/railing,
 /obj/structure/table,
 /obj/item/melee/vampirearms/tire,
+/obj/structure/vaultdoor/key{
+	door_health = 25;
+	name = "FIRE SHELTER";
+	lock_id = "fireshelter"
+	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "pzQ" = (
@@ -96230,10 +96246,7 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/financialdistrict)
 "wcM" = (
-/obj/effect/decal/wallpaper/light,
-/obj/effect/decal/wallpaper/light{
-	icon_state = "toilet1"
-	},
+/obj/effect/decal/wallpaper/lightpadded,
 /turf/closed/wall/vampwall/painted,
 /area/vtm/clinic/haven)
 "wcN" = (
@@ -96325,6 +96338,7 @@
 	accesslocks = list("clinic", "clinicsec");
 	name = "Clinic Security keys"
 	},
+/obj/item/p25radio,
 /turf/open/floor/plating/toilet,
 /area/vtm/clinic)
 "wdU" = (
@@ -131647,7 +131661,7 @@ tlG
 awd
 bTU
 bTU
-byv
+wcM
 vix
 vix
 vix
@@ -132161,7 +132175,7 @@ iGD
 uCb
 bTU
 bTU
-byv
+wcM
 vix
 vix
 vix
@@ -132675,7 +132689,7 @@ bTU
 uCb
 bTU
 bTU
-byv
+wcM
 vix
 vix
 vix
@@ -133189,7 +133203,7 @@ bTU
 uCb
 bTU
 bTU
-byv
+wcM
 vix
 vix
 vix
@@ -133703,7 +133717,7 @@ bTU
 uCb
 bTU
 bTU
-byv
+wcM
 vix
 vix
 vix
@@ -134731,7 +134745,7 @@ bTU
 uCb
 bTU
 bTU
-byv
+wcM
 gYh
 pOA
 liX
@@ -271447,7 +271461,7 @@ bUt
 axs
 axs
 axs
-oOM
+byv
 kCX
 nwd
 nwd
