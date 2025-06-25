@@ -100,6 +100,8 @@
 
 #define STATUS_EFFECT_BABY_TEETH /datum/status_effect/babyteeth //takes away the ability to suck blood from people
 
+#define STATUS_EFFECT_SEVERE_BABY_TEETH /datum/status_effect/pbabyteeth //takes away the ability to suck blood from people for the entire round
+
 /// Makes the mob move randomly.
 /// Read the documentation for /datum/status_effect/confusion for more information.
 #define STATUS_EFFECT_CONFUSION /datum/status_effect/confusion

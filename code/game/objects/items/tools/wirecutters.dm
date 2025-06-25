@@ -72,28 +72,28 @@
 	name = "pliers"
 	desc = "Meant for pulling wires but you could definetly crush something with these."
 	icon_state = "ripper"
-	toolspeed = 1.2 //is an actual tool but can't actually
+	toolspeed = 1.2 //is an actual tool but can't actually cut
+	permanent = FALSE
 
 /obj/item/wirecutters/pliers/attack(mob/living/target, mob/living/user)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		return
-	if(isgarou(target) || iswerewolf(target) || isanimal(target))
+	if(!iskindred(target))
 		return
-	if(iskindred(target))
-		if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
-			to_chat(usr, span_warning("[user] can't pull out the fangs of [target] because they are already deformed!"))
+	if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
+		to_chat(usr, span_warning("[user] can't pull out the fangs of [target] because they are already deformed!"))
+	else
+		to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
+		to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
+		if(!do_after(user, 30, target))
+			return
+		user.do_attack_animation(target)
+		to_chat(span_warning("[user] rips out [target]'s fangs!"))
+		to_chat(usr, span_warning("You rip out [target]'s fangs!"))
+		target.emote("scream")
+		if (permanent == TRUE)
+			target.apply_status_effect(STATUS_EFFECT_SEVERE_BABY_TEETH)
+			visible_message(span_warning("[user] stuff's in Bone putty into [target] to stop their fangs from regrowing!"))
 		else
-			to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
-			to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
-			if(do_after(user, 30, target))
-				user.do_attack_animation(target)
-				to_chat(span_warning("[user] rips out [target]'s fangs!"))
-				to_chat(usr, span_warning("You rip out [target]'s fangs!"))
-				target.emote("scream")
-				if (permanent == TRUE)
-					ADD_TRAIT(target, TRAIT_BABY_TEETH, MAGIC_TRAIT)
-					visible_message(span_warning("[user] stuff's in Bone putty into [target] to stop their fangs from regrowing!"))
-				else
-					target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)
-
+			target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)
