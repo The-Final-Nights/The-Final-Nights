@@ -44,10 +44,10 @@
 	var/laid_down = FALSE
 
 	if(stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN)
-		icon_state = "[sprite_color]_rest"
+		icon_state = wyrm_tainted ? "spiral[sprite_color]_rest" : "[sprite_color]_rest"
 		laid_down = TRUE
 	else
-		icon_state = "[sprite_color]"
+		icon_state = wyrm_tainted ? "spiral[sprite_color]" : "[sprite_color]"
 
 	switch(getFireLoss()+getBruteLoss())
 		if(25 to 75)

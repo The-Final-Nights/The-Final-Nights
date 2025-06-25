@@ -106,24 +106,24 @@
 	bloodpool = 0
 	maxbloodpool = 0
 
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level1
-	name = "ghost"
-	desc = "A soul of the dead, spooky."
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level1 //Low health, low damage distraction unit.
+	name = "drone"
+	desc = "A mindless, tormented wraith."
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "ghost"
 	icon_living = "ghost"
 	mob_biotypes = MOB_UNDEAD
-	speak_chance = 0
+	speak_chance = 1
 	turns_per_move = 5
 	response_help_continuous = "passes through"
 	response_help_simple = "pass through"
 	healable = 0
 	speed = 2
-	maxHealth = 35
-	health = 35
+	maxHealth = 60
+	health = 60
 	harm_intent_damage = 10
-	melee_damage_lower = 12
-	melee_damage_upper = 12
+	melee_damage_lower = 15
+	melee_damage_upper = 15  // Keep in mind most characters will take up to half less damage from such mobs due to brutemods.
 	del_on_death = 1
 	emote_see = list("weeps silently", "groans", "mumbles")
 	attack_verb_continuous = "grips"
@@ -136,68 +136,130 @@
 	minbodytemp = 0
 	maxbodytemp = 1500
 	is_flying_animal = TRUE
-	gold_core_spawnable = NO_SPAWN //too spooky for science
 	light_system = MOVABLE_LIGHT
 	light_range = 1 // same glowing as visible player ghosts
 	light_power = 2
-	faction = list(CLAN_GIOVANNI)
-	bloodpool = 0
-	maxbloodpool = 0
 
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level2
-	maxHealth = 60
-	health = 60
-	harm_intent_damage = 16
-	melee_damage_lower = 16
-	melee_damage_upper = 16
-/*
-/mob/living/simple_animal/hostile/giovanni_zombie/level2/Initialize()
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level2 //Fragile, low-damage harrass, rat equivalent. This and onward are dot5 summons. Maxhealth to summon: under 20
+	name = "parassita"
+	desc = "A skittering something of a myriad digits and small, sharp teeth."
+	icon = 'code/modules/wod13/mobs.dmi'
+	icon_state = "ratzombie"
+	icon_living = "ratzombie"
+	speak_chance = 1
+	turns_per_move = 5
+	response_help_continuous = "shoos away"
+	response_help_simple = "shoo away"
+	response_disarm_continuous = "knocks aside"
+	response_disarm_simple = "knock aside"
+	response_harm_continuous = "stamps"
+	response_harm_simple = "stamp"
+	can_be_held = TRUE
+	density = FALSE
+	anchored = FALSE
+	footstep_type = FOOTSTEP_MOB_CLAW
+	speed = 0
+	maxHealth = 20
+	health = 20
+	harm_intent_damage = 10
+	melee_damage_lower = 8
+	melee_damage_upper = 14
+	emote_see = list("chitters menacingly", "rubs its digit-limbs together", "squeaks")
+	attack_verb_continuous = "nibbles"
+	attack_verb_simple = "nibble"
+	attack_sound = 'code/modules/wod13/sounds/rat.ogg'
+	speak_emote = list("squeaks")
+	deathmessage = "rapidly shrivels up!"
+
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level2/Initialize()
 	. = ..()
-	give_player()
-*/
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3
-	maxHealth = 80
+	pixel_w = rand(-8, 8)
+	pixel_z = rand(-8, 8)
+
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3 //Middling dog-level threat. Maxhealth to summon: 20 to 70
+	name = "compagno"
+	desc = "Four legs and a menacing set of jaws is all this shambling thing shares with a canine."
+	icon = 'code/modules/wod13/mobs.dmi'
+	icon_state = "dogzombie"
+	icon_living = "dogzombie"
+	speak_chance = 1
+	turns_per_move = 5
+	response_help_continuous = "pets"
+	response_help_simple = "pet"
+	response_disarm_continuous = "drags aside"
+	response_disarm_simple = "drag aside"
+	response_harm_continuous = "kicks"
+	response_harm_simple = "kick"
+	footstep_type = FOOTSTEP_MOB_CLAW
+	speed = 0
+	maxHealth = 80 //Two attacks with a dedicated melee weapon or 4 9mm bullets
 	health = 80
-	icon_state = "zombieup"
-	icon_living = "zombieup"
-	icon_dead = "zombieup_dead"
-	harm_intent_damage = 22
-	melee_damage_lower = 22
-	melee_damage_upper = 22
-/*
-/mob/living/simple_animal/hostile/giovanni_zombie/level3/Initialize()
-	. = ..()
-	give_player()
-*/
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4
-	maxHealth = 120
-	health = 120
-	harm_intent_damage = 25
-	melee_damage_lower = 25
-	melee_damage_upper = 25
-	icon_state = "skeleton"
-	icon_living = "skeleton"
-	icon_dead = "skeleton_dead"
-/*
-/mob/living/simple_animal/hostile/giovanni_zombie/level4/Initialize()
-	. = ..()
-	give_player()
-*/
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5
-	maxHealth = 200
-	health = 200
-	harm_intent_damage = 30
-	melee_damage_lower = 30
+	harm_intent_damage = 15
+	melee_damage_lower = 20
 	melee_damage_upper = 30
-	icon_state = "zombietop"
-	icon_living = "zombietop"
-	icon_dead = "zombietop_dead"
-	speed = 4
-/*
-/mob/living/simple_animal/hostile/giovanni_zombie/level5/Initialize()
-	. = ..()
-	give_player()
-*/
+	emote_see = list("snarls", "dribbles with saliva", "wheezes")
+	attack_verb_continuous = "bites"
+	attack_verb_simple = "bite"
+	attack_sound = 'code/modules/wod13/sounds/dog.ogg'
+	speak_emote = list("borks")
+	deathmessage = "falls apart in a pile of fur and bones!"
+
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4 //Tanky, but slowed bruiser. Maxhealth to summon: 70 to 150
+	name = "verme"
+	desc = "Husk of a man, puppeteered by some sadistic force."
+	icon = 'code/modules/wod13/mobs.dmi'
+	icon_state = "manzombie"
+	icon_living = "manzombie"
+	speak_chance = 1
+	turns_per_move = 5
+	response_help_continuous = "shakes hands with"
+	response_help_simple = "shake hands with"
+	response_disarm_continuous = "pushes away"
+	response_disarm_simple = "push away"
+	response_harm_continuous = "punches"
+	response_harm_simple = "punch"
+	footstep_type = FOOTSTEP_MOB_BAREFOOT
+	speed = 1.5 //the tankier, the slower
+	maxHealth = 120 //three attacks with a dedicated melee weapon or 6 9mm bullets
+	health = 120
+	harm_intent_damage = 15
+	melee_damage_lower = 25
+	melee_damage_upper = 35
+	emote_see = list("shambles", "stumbles in place", "groans")
+	attack_verb_continuous = "batters"
+	attack_verb_simple = "batter"
+	attack_sound = 'code/modules/wod13/sounds/zombuzi.ogg'
+	speak_emote = list("rasps")
+	deathmessage = "decays away into fine paste!"
+
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5  //Chonkmaster, only really Tzimisce mobs can provide material for this. Maxhealth to summon: 150 and onward
+	name = "patrigno"
+	desc = "A nauseauting mountain of putrid flesh. On its face - a jolly smirk immortalized with rigor mortis."
+	icon = 'code/modules/wod13/mobs.dmi'
+	icon_state = "fatzombie"
+	icon_living = "fatzombie"
+	speak_chance = 1
+	turns_per_move = 5
+	response_help_continuous = "pats down"
+	response_help_simple = "pat down"
+	response_disarm_continuous = "tries to push"
+	response_disarm_simple = "try to push"
+	response_harm_continuous = "slaps"
+	response_harm_simple = "slap"
+	footstep_type = FOOTSTEP_MOB_BAREFOOT
+	speed = 3 //really slow
+	maxHealth = 300 //six attacks with a dedicated melee weapon or 15 9mm bullets
+	health = 300
+	harm_intent_damage = 5
+	melee_damage_lower = 40
+	melee_damage_upper = 50
+	emote_see = list("snorts", "guffaws", "gurgles")
+	attack_verb_continuous = "slams into"
+	attack_verb_simple = "slam into"
+	attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
+	speak_emote = list("gurgles")
+	deathmessage = "collapses down into a rancid puddle!"
+
 /mob/living/simple_animal/hostile/giovanni_zombie/proc/give_player()
 	set waitfor = FALSE
 	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as summoned ghost?", null, null, null, 50, src)
