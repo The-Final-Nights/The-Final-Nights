@@ -85,7 +85,7 @@
 	///List of species that are allowed to do this job.
 	var/list/allowed_species = list("Vampire")
 	///List of species that are limited to a certain amount of that species doing this job.
-	var/list/species_slots = list()
+	var/list/species_slots = list("Vampire" = 50, "Ghoul" = 50, "Human" = 50, "Kuei-Jin" = 50)
 	///List of Bloodlines that are allowed to do this job.
 	var/list/allowed_bloodlines = list(CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_SETITES)
 	///List of Tribes that are allowed to do this job.
