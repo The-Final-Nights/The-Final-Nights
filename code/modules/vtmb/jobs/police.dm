@@ -129,12 +129,12 @@
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "U.S. Judiciary Committee and the Police Chief/Seargeants"
+	supervisors = "U.S. Judiciary Committee"
 	selection_color = "#7e7e7e"
 
 	outfit = /datum/outfit/job/districtattorney
 
-	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_ARMORY, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
+	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SRV
@@ -144,7 +144,7 @@
 	allowed_species = list("Human")
 	duty = "You are a district attorney, a federal lawyer working directly with the PD to process criminals. Help maintain law and order in the city, using the infinite power of bureaucracy to make people's lives easier!"
 	minimal_masquerade = 0
-	known_contacts = list("Police Chief", "Public Defender", "Prince")
+	known_contacts = list("Police Chief", "Public Defender")
 
 /datum/outfit/job/districtattorney
 	name = "District Attorney"
