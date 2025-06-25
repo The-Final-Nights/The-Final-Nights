@@ -13,6 +13,7 @@
 		thaumaturgy.Grant(owner)
 		thaumaturgy.level = level
 		owner.thaumaturgy_knowledge = TRUE
+		owner.mind.teach_crafting_recipe(/datum/crafting_recipe/arctome)
 	if(level >= 3)
 		var/datum/action/bloodshield/bloodshield = new()
 		bloodshield.Grant(owner)
@@ -327,7 +328,7 @@
 	var/drawing = FALSE
 	var/level = 1
 
-/datum/action/thaumaturgy/Trigger()
+/datum/action/thaumaturgy/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(H.bloodpool < 2)
@@ -383,7 +384,7 @@
 	vampiric = TRUE
 	var/abuse_fix = 0
 
-/datum/action/bloodshield/Trigger()
+/datum/action/bloodshield/Trigger(trigger_flags)
 	. = ..()
 	if((abuse_fix + 25 SECONDS) > world.time)
 		return

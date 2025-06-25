@@ -4,13 +4,11 @@
 #define VEIL_COOLDOWN 20 SECONDS
 #define RAGE_LIFE_COOLDOWN 30 SECONDS
 
-/mob/living/carbon/werewolf/Life()
+/mob/living/Life()
+	. = ..()
 	update_icons()
 	update_rage_hud()
-	return..()
 
-/mob/living/carbon/Life()
-	. = ..()
 	if(isgarou(src) || iswerewolf(src))
 		if(key && stat <= HARD_CRIT)
 			var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
@@ -23,29 +21,22 @@
 		if(stat != DEAD)
 			var/gaining_rage = TRUE
 			for(var/obj/structure/werewolf_totem/W in GLOB.totems)
-				if(W)
-					if(W.totem_health)
-						if(W.tribe == auspice.tribe.name)
-							if(get_area(W) == get_area(src) && client)
-								gaining_rage = FALSE
-								if(last_gnosis_buff+300 < world.time)
-									last_gnosis_buff = world.time
-									adjust_gnosis(1, src, TRUE)
+				if(W.totem_health)
+					if(W.tribe == auspice.tribe.name)
+						if(get_area(W) == get_area(src) && client)
+							gaining_rage = FALSE
+							if(last_gnosis_buff+300 < world.time)
+								last_gnosis_buff = world.time
+								adjust_gnosis(1, src, TRUE)
 			if(iscrinos(src))
 				if(auspice.base_breed == "Crinos")
 					gaining_rage = FALSE
-			//else if(auspice.rage == 0) //! [ChillRaccoon] - FIXME
-			//	transformator.transform(src, auspice.base_breed)
 			if(islupus(src))
 				if(auspice.base_breed == "Lupus")
 					gaining_rage = FALSE
-			//else if(auspice.rage == 0)
-			//	transformator.transform(src, auspice.base_breed)
 			if(ishuman(src))
 				if(auspice.base_breed == "Homid" || HAS_TRAIT(src, TRAIT_CORAX)) // Corvid-born Corax don't generate rage when in homid passively, the hope is to make talking more relaxed and the Corax weaker in combat.
 					gaining_rage = FALSE
-			//else if(auspice.rage == 0)
-			//	transformator.transform(src, auspice.base_breed)
 			if (iscorvid(src))
 				gaining_rage = FALSE // Corax will ideally be talking a lot, not having passive rage generation should also make them weaker in combat.
 			if (iscoraxcrinos(src))
@@ -74,7 +65,7 @@
 
 // currently being in your caern restores veil to max because theres no other way of doing. remember to cap it to THREE once shame rituals are back
 
-/mob/living/carbon/proc/check_veil_adjust()
+/mob/living/proc/check_veil_adjust()
 
 	if(istype(get_area(src), /area/vtm/interior/penumbra))
 		if((last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
@@ -116,35 +107,26 @@
 		if(H.CheckEyewitness(H, H, 3, FALSE))
 			H.adjust_veil(-1,random = -1)
 
-/mob/living/carbon/werewolf/crinos/Life()
+/mob/living/simple_animal/werewolf/crinos/Life()
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
-/mob/living/carbon/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
+/mob/living/simple_animal/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
 
-/mob/living/carbon/werewolf/handle_status_effects()
+/mob/living/simple_animal/werewolf/handle_status_effects()
 	..()
 	//natural reduction of movement delay due to stun.
 	if(move_delay_add > 0)
 		move_delay_add = max(0, move_delay_add - rand(1, 2))
 
-/mob/living/carbon/werewolf/handle_changeling()
-	return
-
-/mob/living/carbon/werewolf/handle_fire()//Aliens on fire code
-	. = ..()
-	if(.) //if the mob isn't on fire anymore
-		return
-	adjust_bodytemperature(BODYTEMP_HEATING_MAX) //If you're on fire, you heat up!
-
-/mob/living/carbon/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, mob/living/carbon/vessel, forced)
+/mob/living/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, mob/living/carbon/vessel, forced)
 	if(iswerewolf(src))
-		var/mob/living/carbon/player = transformator.human_form.resolve()
+		var/mob/living/player = transformator.human_form.resolve()
 		player.adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, src)
 	if(!GLOB.canon_event)
 		return
@@ -204,7 +186,7 @@
 		P.save_preferences()
 
 
-/mob/living/carbon/proc/adjust_renown(attribute, amount, threshold, mob/living/carbon/vessel)
+/mob/living/proc/adjust_renown(attribute, amount, threshold, mob/living/vessel)
 	if(!GLOB.canon_event)
 		return
 	if(!is_special_character(src))
@@ -268,7 +250,7 @@
 
 
 
-/mob/living/carbon/proc/get_negative_emotion(attribute)
+/mob/living/proc/get_negative_emotion(attribute)
 	switch(attribute)
 		if("honor")
 			return "ashamed"
@@ -281,7 +263,7 @@
 
 	return "unsure"
 
-/mob/living/carbon/proc/get_positive_emotion(attribute)
+/mob/living/proc/get_positive_emotion(attribute)
 	switch(attribute)
 
 		if("honor")
@@ -295,7 +277,7 @@
 
 	return "confident"
 
-/mob/living/carbon/proc/AuspiceRankCheck(mob/living/carbon/user)
+/mob/living/proc/AuspiceRankCheck(mob/living/carbon/user)
 	switch(auspice.name)
 		if("Ahroun")
 			if(glory >= 10 && honor >= 9 && wisdom >= 4) return 5

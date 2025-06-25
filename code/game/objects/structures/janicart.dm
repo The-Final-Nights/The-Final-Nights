@@ -42,12 +42,12 @@
 	var/fail_msg = "<span class='warning'>There is already one of those in [src]!</span>"
 
 	if(istype(I, /obj/item/mop))
-		var/obj/item/mop/m=I
+		var/obj/item/mop/m = I
 		if(m.reagents.total_volume < m.reagents.maximum_volume)
 			if (wet_mop(m, user))
 				return
 		if(!mymop)
-			m.janicart_insert(user, src)
+			put_in_cart(m, user)
 		else
 			to_chat(user, fail_msg)
 	else if(istype(I, /obj/item/pushbroom))
@@ -93,7 +93,7 @@
 	else
 		return ..()
 
-/obj/structure/janitorialcart/attack_hand(mob/user)
+/obj/structure/janitorialcart/attack_hand(mob/user, list/modifiers)
 	. = ..()
 	if(.)
 		return

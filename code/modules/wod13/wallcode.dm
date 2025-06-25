@@ -71,16 +71,16 @@
 	. = ..()
 	if(islupus(user))
 		return
-	if(user.a_intent != INTENT_HARM)
+	var/mob/living/carbon/human/carbon_human = user
+	if(!(carbon_human.combat_mode))
 		LoadComponent(/datum/component/leanable, dropping)
 	else
-		if(get_dist(user, src) < 2)
-			var/turf/above_turf = locate(user.x, user.y, user.z + 1)
+		if(get_dist(carbon_human, src) < 2)
+			var/turf/above_turf = locate(carbon_human.x, carbon_human.y, carbon_human.z + 1)
 			if(above_turf && istype(above_turf, /turf/open/openspace))
-				var/mob/living/carbon_human = user
 				carbon_human.climb_wall(above_turf)
 			else
-				to_chat(user, "<span class='warning'>You can't climb there!</span>")
+				to_chat(carbon_human, "<span class='warning'>You can't climb there!</span>")
 
 /turf/closed/wall/vampwall/ex_act(severity, target)
 	return
@@ -648,25 +648,15 @@
 				if(do_mob(user, src, 10 SECONDS))
 					P.burying = FALSE
 					if(P.icon_state == "pit0")
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in src)
 							L.forceMove(P)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					else
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in P)
 							L.forceMove(src)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit0"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("disrespect", user)
 				else
 					P.burying = FALSE
 		else
@@ -726,25 +716,15 @@
 				if(do_mob(user, src, 10 SECONDS))
 					P.burying = FALSE
 					if(P.icon_state == "pit0")
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in src)
 							L.forceMove(P)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					else
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in P)
 							L.forceMove(src)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit0"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("disrespect", user)
 				else
 					P.burying = FALSE
 		else
@@ -1171,25 +1151,15 @@
 				if(do_mob(user, src, 10 SECONDS))
 					P.burying = FALSE
 					if(P.icon_state == "pit0")
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in src)
 							L.forceMove(P)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit1"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("respect", user)
 					else
-						var/dead_amongst = FALSE
 						for(var/mob/living/L in P)
 							L.forceMove(src)
-							if(L.stat == DEAD)
-								dead_amongst = TRUE
 						P.icon_state = "pit0"
 						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-						if(dead_amongst)
-							call_dharma("disrespect", user)
 				else
 					P.burying = FALSE
 		else

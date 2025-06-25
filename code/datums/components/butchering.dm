@@ -31,8 +31,6 @@
 /datum/component/butchering/proc/onItemAttack(obj/item/source, mob/living/M, mob/living/user)
 	SIGNAL_HANDLER
 
-	if(user.a_intent != INTENT_HARM)
-		return
 	if(M.stat == DEAD && (M.butcher_results || M.guaranteed_butcher_results)) //can we butcher it?
 		if(butchering_enabled && (can_be_blunt || source.get_sharpness()))
 			INVOKE_ASYNC(src, PROC_REF(startButcher), source, M, user)
@@ -86,7 +84,7 @@
 	if(DOING_INTERACTION_WITH_TARGET(user, victim))
 		to_chat(user, "<span class='warning'>You're already interacting with [victim]!</span>")
 		return
-	
+
 	if(!victim.get_bodypart(BODY_ZONE_HEAD))
 		user.show_message(
 			span_warning("[victim]'s has no neck left to cut!")
@@ -198,5 +196,38 @@
 	var/obj/machinery/recycler/eater = parent
 	if(eater.safety_mode || (eater.machine_stat & (BROKEN|NOPOWER))) //I'm so sorry.
 		return
-	if(L.stat == DEAD && (L.butcher_results || L.guaranteed_butcher_results))
-		Butcher(parent, L)
+
+/datum/component/butchering/wearable
+
+/datum/component/butchering/wearable/RegisterWithParent()
+	. = ..()
+	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(worn_enable_butchering))
+	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(worn_disable_butchering))
+
+/datum/component/butchering/wearable/UnregisterFromParent()
+	. = ..()
+	UnregisterSignal(parent, list(
+		COMSIG_ITEM_EQUIPPED,
+		COMSIG_ITEM_DROPPED,
+	))
+
+///Same as enable_butchering but for worn items
+/datum/component/butchering/wearable/proc/worn_enable_butchering(obj/item/source, mob/user, slot)
+	SIGNAL_HANDLER
+	//check if the item is being not worn
+	if(!(slot & source.slot_flags))
+		return
+	butchering_enabled = TRUE
+	RegisterSignal(user, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(butcher_target))
+
+///Same as disable_butchering but for worn items
+/datum/component/butchering/wearable/proc/worn_disable_butchering(obj/item/source, mob/user)
+	SIGNAL_HANDLER
+	butchering_enabled = FALSE
+	UnregisterSignal(user, COMSIG_LIVING_UNARMED_ATTACK)
+
+/datum/component/butchering/wearable/proc/butcher_target(mob/user, atom/target, proximity)
+	SIGNAL_HANDLER
+	if(!isliving(target))
+		return NONE
+	return onItemAttack(parent, target, user)

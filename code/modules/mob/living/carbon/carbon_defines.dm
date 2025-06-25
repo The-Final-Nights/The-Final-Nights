@@ -1,7 +1,6 @@
 /mob/living/carbon
 	blood_volume = BLOOD_VOLUME_NORMAL
 	gender = MALE
-	possible_a_intents = list(INTENT_HELP, INTENT_HARM)
 	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,GLAND_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD)
 	has_limbs = 1
 	held_items = list(null, null)
@@ -106,42 +105,14 @@
 	/// Can other carbons be shoved into this one to make it fall?
 	var/can_be_shoved_into = FALSE
 
-	//imported from other areas around the code
-	var/last_moon_look = 0
-	var/last_rage_from_attack = 0
-
-	var/last_jump_time = 0
-	var/jump_range = 1
-
-	var/last_gnosis_buff = 0
-	var/last_rage_gain = 0
-	var/last_veil_restore = 0
-
-	var/list/overlays_standing[TOTAL_LAYERS]
-
-	var/next_veil_time = 0
 
 	var/celerity_visual = FALSE
 	var/potential = 0
 
-	COOLDOWN_DECLARE(frenzy_bite_cooldown)
-	COOLDOWN_DECLARE(frenzy_attack_cooldown)
-	var/in_frenzy = FALSE
-	var/frenzy_hardness = 6
-	var/last_frenzy_check = 0
-	var/mob/living/frenzy_target = null
 	var/last_experience = 0
-
-	var/last_rage_hit = 0
-
-	var/datum/auspice/auspice
-	var/datum/werewolf_holder/transformation/transformator
-
-	var/list/beastmaster = list()
 
 	var/datum/relationship/MyRelationships
 
-	var/inspired = FALSE
 
 	var/tox_damage_plus = 0
 	var/agg_damage_plus = 0
@@ -150,6 +121,7 @@
 
 	var/diablerist = FALSE
 	var/antifrenzy = FALSE
+	var/fakediablerist = FALSE
 
 	COOLDOWN_DECLARE(bleeding_message_cd)
 

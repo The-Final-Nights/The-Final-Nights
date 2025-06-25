@@ -28,25 +28,11 @@
 		addtimer(CALLBACK(src, PROC_REF(RemoveFromLatejoin)), 0)
 	if(prob(0.2))
 		name = "tactical [name]"
+	MakeRotate()
 
-/obj/structure/chair/ComponentInitialize()
-	. = ..()
-	AddComponent(/datum/component/simple_rotation,ROTATION_ALTCLICK | ROTATION_CLOCKWISE, CALLBACK(src, PROC_REF(can_user_rotate)),CALLBACK(src, PROC_REF(can_be_rotated)),null)
-
-/obj/structure/chair/proc/can_be_rotated(mob/user)
-	return TRUE
-
-/obj/structure/chair/proc/can_user_rotate(mob/user)
-	var/mob/living/L = user
-
-	if(istype(L))
-		if(!user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY, FALSE, !iscyborg(user)))
-			return FALSE
-		else
-			return TRUE
-	else if(isobserver(user) && CONFIG_GET(flag/ghost_interaction))
-		return TRUE
-	return FALSE
+///This proc adds the rotate component, overwrite this if you for some reason want to change some specific args.
+/obj/structure/chair/proc/MakeRotate()
+	AddComponent(/datum/component/simple_rotation, ROTATION_IGNORE_ANCHORED|ROTATION_GHOSTS_ALLOWED)
 
 /obj/structure/chair/Destroy()
 	RemoveFromLatejoin()
@@ -66,8 +52,8 @@
 				new M.sheet_type(loc, FLOOR(custom_materials[M] / MINERAL_MATERIAL_AMOUNT, 1))
 	..()
 
-/obj/structure/chair/attack_paw(mob/user)
-	return attack_hand(user)
+/obj/structure/chair/attack_paw(mob/user, list/modifiers)
+	return attack_hand(user, modifiers)
 
 /obj/structure/chair/narsie_act()
 	var/obj/structure/chair/wood/W = new/obj/structure/chair/wood(get_turf(src))
@@ -126,6 +112,15 @@
 	handle_rotation(newdir)
 
 // Chair types
+
+// Coloured variants of the OG chair
+/obj/structure/chair/green
+	icon_state = "chair_green"
+	item_chair = /obj/item/chair/green
+
+/obj/structure/chair/red
+	icon_state = "chair_red"
+	item_chair = /obj/item/chair/red
 
 ///Material chair
 /obj/structure/chair/greyscale
@@ -218,6 +213,11 @@
 	item_chair = null
 	icon_state = "officechair_dark"
 
+/obj/structure/chair/office/red
+	icon_state = "officechair_red"
+
+/obj/structure/chair/office/blue
+	icon_state = "officechair_blue"
 
 /obj/structure/chair/office/Moved()
 	. = ..()
@@ -284,6 +284,12 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 	custom_materials = list(/datum/material/iron = 2000)
 	var/break_chance = 5 //Likely hood of smashing the chair.
 	var/obj/structure/chair/origin_type = /obj/structure/chair
+
+/obj/item/chair/green
+	icon_state = "chair_green_toppled"
+
+/obj/item/chair/red
+	icon_state = "chair_red_toppled"
 
 /obj/item/chair/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins hitting [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
