@@ -25,7 +25,7 @@
 	desc = "Contains wirecutters, lamps and other stuff to restore light in the area."
 	cost = 50
 	contains = list(
-		/obj/item/wire_cutters,
+		/obj/item/wirecutters,
 		/obj/item/storage/box/lights/mixed,
 	)
 	crate_name = "weapon crate"
