@@ -1,7 +1,7 @@
 /obj/item/wirecutters
 	name = "wirecutters"
 	desc = "This cuts wires."
-  icon_state = "fixer"
+	icon_state = "fixer"
 	icon = 'code/modules/wod13/items.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	inhand_icon_state = "cutters"
