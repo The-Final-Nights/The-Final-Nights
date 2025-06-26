@@ -14,7 +14,7 @@
 	exp_type_department = EXP_TYPE_POLICE
 
 	allowed_species = list("Ghoul", "Human")
-	species_slots = list("Ghoul" = 1)
+	species_slots = list("Ghoul" = 1, "Human" = 50)
 
 	duty = "Report emergencies to the correct emergency service."
 	minimal_masquerade = 0
