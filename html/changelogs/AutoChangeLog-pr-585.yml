@@ -1,0 +1,5 @@
+author: "ShadeAware"
+delete-after: True
+changes:
+  - map: "The Clinic's renovations have completed, wholly re-designing everything but the four walls themselves."
+  - image: "New sprites for a table sink basin and braceless shutters."
