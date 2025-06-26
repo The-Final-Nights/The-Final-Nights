@@ -345,6 +345,7 @@
 	name = "Clinic director keys"
 	accesslocks = list(
 		"clinic",
+		"clinicsec",
 		"director",
 		"malkav"
 	)
