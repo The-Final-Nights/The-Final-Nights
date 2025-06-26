@@ -33,3 +33,16 @@
   Marshmellow105:
   - rscadd: padded wall decoration
   - rscadd: seethrough grate as a lattice type
+2025-06-26:
+  ChristopherDAdams:
+  - rscadd: New Role, District Attorney, A lawyer employed by the city and SFPD to
+      help process criminal offenders in various ways.
+  ShadeAware:
+  - map: The Clinic's renovations have completed, wholly re-designing everything but
+      the four walls themselves.
+  - image: New sprites for a table sink basin and braceless shutters.
+  XeonMations:
+  - bugfix: Fixed our runtimes being hidden.
+  - bugfix: Fixed jobs closing whenever someone cryod.
+  tzui5020:
+  - rscadd: HK PSG1 and Ammo variants for the PD and Future Hunters.

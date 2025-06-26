@@ -6,31 +6,31 @@
 /// General logging for admin actions
 /proc/log_admin(text, list/data)
 	GLOB.admin_activities.Add(text)
-	logger.Log(LOG_CATEGORY_ADMIN, text, data)
-	logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMIN: [text]")
+	GLOB.logger.Log(LOG_CATEGORY_ADMIN, text, data)
+	GLOB.logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMIN: [text]")
 
 /// Logging for admin actions on or with circuits
 /proc/log_admin_circuit(text, list/data)
 	GLOB.admin_activities.Add(text)
-	logger.Log(LOG_CATEGORY_ADMIN_CIRCUIT, text, data)
-	logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMIN: CIRCUIT: [text]")
+	GLOB.logger.Log(LOG_CATEGORY_ADMIN_CIRCUIT, text, data)
+	GLOB.logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMIN: CIRCUIT: [text]")
 
 /// General logging for admin actions
 /proc/log_admin_private(text, list/data)
 	GLOB.admin_activities.Add(text)
-	logger.Log(LOG_CATEGORY_ADMIN_PRIVATE, text, data)
-	logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMINPRIVATE: [text]")
+	GLOB.logger.Log(LOG_CATEGORY_ADMIN_PRIVATE, text, data)
+	GLOB.logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMINPRIVATE: [text]")
 
 /// Logging for AdminSay (ASAY) messages
 /proc/log_adminsay(text, list/data)
 	GLOB.admin_activities.Add(text)
-	logger.Log(LOG_CATEGORY_ADMIN_PRIVATE_ASAY, text, data)
-	logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMINPRIVATE: ASAY: [text]")
+	GLOB.logger.Log(LOG_CATEGORY_ADMIN_PRIVATE_ASAY, text, data)
+	GLOB.logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMINPRIVATE: ASAY: [text]")
 
 /// Logging for DeachatSay (DSAY) messages
 /proc/log_dsay(text, list/data)
-	logger.Log(LOG_CATEGORY_ADMIN_DSAY, text, data)
-	logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMIN: DSAY: [text]")
+	GLOB.logger.Log(LOG_CATEGORY_ADMIN_DSAY, text, data)
+	GLOB.logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMIN: DSAY: [text]")
 
 /**
  * Writes to a special log file if the log_suspicious_login config flag is set,
@@ -40,10 +40,10 @@
  * doesn't need to be used alongside log_access and can replace it where appropriate.
  */
 /proc/log_suspicious_login(text, list/data, access_log_mirror = TRUE)
-	logger.Log(LOG_CATEGORY_SUSPICIOUS_LOGIN, text)
+	GLOB.logger.Log(LOG_CATEGORY_SUSPICIOUS_LOGIN, text)
 	if(access_log_mirror)
 		log_access(text)
 
 /proc/log_href_exploit(atom/user, data = "")
-	logger.Log(LOG_CATEGORY_ADMIN, "HREF: [key_name(user)] has potentially attempted an href exploit.[data]")
+	GLOB.logger.Log(LOG_CATEGORY_ADMIN, "HREF: [key_name(user)] has potentially attempted an href exploit.[data]")
 	message_admins("[key_name_admin(user)] has potentially attempted an href exploit.[data]")
