@@ -18,7 +18,7 @@
 	exp_type_department = EXP_TYPE_POLICE
 
 	allowed_species = list("Ghoul", "Human")
-	species_slots = list("Ghoul" = 1)
+	species_slots = list("Ghoul" = 1, "Human" = 50)
 
 	duty = "Enforce the Law."
 	minimal_masquerade = 0
@@ -58,7 +58,7 @@
 	exp_type_department = EXP_TYPE_POLICE
 
 	allowed_species = list("Ghoul", "Human")
-	species_slots = list("Ghoul" = 1)
+	species_slots = list("Ghoul" = 1, "Human" = 50)
 
 	duty = "Enforce the law. Keep the officers in line. Follow what the Chief says."
 	minimal_masquerade = 0
