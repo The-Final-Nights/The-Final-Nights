@@ -18,7 +18,7 @@
 	display_order = JOB_DISPLAY_ORDER_LASOMBRA
 
 	allowed_species = list("Vampire", "Ghoul")
-	species_slots = list("Vampire" = 6)
+	species_slots = list("Vampire" = 6, "Ghoul" = 50)
 
 	v_duty = "You are a member of the local Lasombra! You maintain the haven set up in the attic of the local Church, owned by your Clan Primogen."
 	duty = "You are a Ghoul in service to the local Lasombra or its Primogen, get used to the dark of the upper floors and good luck with what you will endure. They rely on you, as much as they may say otherwise."

@@ -15,7 +15,7 @@
 	display_order = JOB_DISPLAY_ORDER_NAGARAJA
 
 	allowed_species = list("Vampire", "Ghoul", "Human")
-	species_slots = list("Vampire" = 4)
+	species_slots = list("Vampire" = 4, "Ghoul" = 50, "Human" = 50)
 
 	v_duty = "One of the Nagaraja bloodline, you're hiding out in this city for one reason or another. You're laying low, acting as a Mortician for the local hospital, dealing with the bodies, and staying out of the other doctors way."
 	duty = "You work in the morgue for the local hospital, dealing with the dead bodies and keeping your workspace clean, while staying out of the way of the other doctors."
