@@ -629,14 +629,14 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	. = (status != DB_QUERY_BROKEN)
 	var/timed_out = !. && findtext(last_error, "Operation timed out")
 	if(!. && log_error)
-		logger.Log(LOG_CATEGORY_DEBUG_SQL, "sql query failed", list(
+		GLOB.logger.Log(LOG_CATEGORY_DEBUG_SQL, "sql query failed", list(
 			"query" = sql,
 			"arguments" = json_encode(arguments),
 			"error" = last_error,
 		))
 
 	if(!async && timed_out)
-		logger.Log(LOG_CATEGORY_DEBUG_SQL, "slow query timeout", list(
+		GLOB.logger.Log(LOG_CATEGORY_DEBUG_SQL, "slow query timeout", list(
 			"query" = sql,
 			"start_time" = start_time,
 			"end_time" = REALTIMEOFDAY,

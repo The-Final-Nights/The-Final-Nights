@@ -345,6 +345,7 @@
 	name = "Clinic director keys"
 	accesslocks = list(
 		"clinic",
+		"clinicsec",
 		"director",
 		"malkav"
 	)
@@ -361,6 +362,11 @@
 	accesslocks = list(
 		"police",
 		"glowie"
+	)
+/obj/item/vamp/keys/police/districtattorney
+	name = "District Attorney keys"
+	accesslocks = list(
+		"police"
 	)
 
 /obj/item/vamp/keys/dispatch
