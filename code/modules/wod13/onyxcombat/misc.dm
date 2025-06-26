@@ -1,5 +1,4 @@
 /atom/movable/screen/addinv
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/MouseEntered(location,control,params)

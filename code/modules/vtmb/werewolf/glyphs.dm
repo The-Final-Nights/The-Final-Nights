@@ -47,7 +47,7 @@
     icon_state = "garou"
     color = "#000000"
     resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
-    layer = SIGIL_LAYER
+    layer = RUNE_LAYER
 
 /obj/effect/decal/garou_glyph/examine(mob/user)
     . = ..()

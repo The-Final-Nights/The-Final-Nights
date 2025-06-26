@@ -3,7 +3,6 @@
 	name = "jump"
 	icon = 'code/modules/wod13/UI/buttons_wide.dmi'
 	icon_state = "act_jump_off"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/jump/Click()

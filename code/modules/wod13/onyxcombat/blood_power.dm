@@ -2,7 +2,6 @@
 	name = "Bloodpower"
 	icon = 'code/modules/wod13/disciplines.dmi'
 	icon_state = "bloodpower"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/bloodpower/Click()

@@ -38,7 +38,7 @@
 				I.forceMove(src)
 
 /obj/structure/filingcabinet/deconstruct(disassembled = TRUE)
-	new /obj/item/stack/sheet/metal(loc, 2)
+	new /obj/item/stack/sheet/iron(loc, 2)
 	for(var/obj/item/obj in src)
 		obj.forceMove(loc)
 

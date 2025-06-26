@@ -9,7 +9,7 @@
 	var/cistern = 0			//if the cistern bit is open
 	var/w_items = 0			//the combined w_class of all the items in the cistern
 	var/mob/living/swirlie = null	//the mob being given a swirlie
-	var/buildstacktype = /obj/item/stack/sheet/metal //they're metal now, shut up
+	var/buildstacktype = /obj/item/stack/sheet/iron //they're metal now, shut up
 	var/buildstackamount = 1
 
 /obj/structure/toilet/Initialize()
@@ -258,7 +258,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 	///What kind of reagent is produced by this sink by default? (We now have actual plumbing, Arcane, August 2020)
 	var/dispensedreagent = /datum/reagent/water
 	///Material to drop when broken or deconstructed.
-	var/buildstacktype = /obj/item/stack/sheet/metal
+	var/buildstacktype = /obj/item/stack/sheet/iron
 	///Number of sheets of material to drop when broken or deconstructed.
 	var/buildstackamount = 1
 	///Does the sink have a water recycler to recollect it's water supply?
@@ -629,7 +629,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 	var/icon_type = "bathroom"//used in making the icon state
 	color = "#ACD1E9" //Default color, didn't bother hardcoding other colors, mappers can and should easily change it.
 	alpha = 200 //Mappers can also just set this to 255 if they want curtains that can't be seen through
-	layer = ABOVE_ALL_MOB_LAYERS_LAYER
+	layer = ABOVE_MOB_LAYER
 	anchored = TRUE
 	opacity = FALSE
 	density = FALSE
@@ -645,14 +645,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 	. = ..()
 	if(!open)
 		icon_state = "[icon_type]-closed"
-		layer = ABOVE_ALL_MOB_LAYERS_LAYER
+		layer = ABOVE_MOB_LAYER
 		density = TRUE
 		open = FALSE
 		if(opaque_closed)
 			set_opacity(TRUE)
 	else
 		icon_state = "[icon_type]-open"
-		layer = ABOVE_ALL_MOB_LAYERS_LAYER
+		layer = ABOVE_MOB_LAYER
 		density = FALSE
 		open = TRUE
 		set_opacity(FALSE)
@@ -747,14 +747,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 
 /obj/structure/curtain/cloth/fancy/mechanical/proc/open()
 	icon_state = "[icon_type]-open"
-	layer = ABOVE_ALL_MOB_LAYERS_LAYER
+	layer = ABOVE_MOB_LAYER
 	density = FALSE
 	open = TRUE
 	set_opacity(FALSE)
 
 /obj/structure/curtain/cloth/fancy/mechanical/proc/close()
 	icon_state = "[icon_type]-closed"
-	layer = ABOVE_ALL_MOB_LAYERS_LAYER
+	layer = ABOVE_MOB_LAYER
 	density = TRUE
 	open = FALSE
 	if(opaque_closed)

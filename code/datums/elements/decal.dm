@@ -5,7 +5,7 @@
 	var/description
 	var/mutable_appearance/pic
 
-/datum/element/decal/Attach(atom/target, _icon, _icon_state, _dir, _cleanable=FALSE, _color, _layer=TURF_LAYER, _description, _alpha=255)
+/datum/element/decal/Attach(atom/target, _icon, _icon_state, _dir, _cleanable=FALSE, _color, _plane=FLOAT_PLANE, _layer=FLOAT_LAYER, _description, _alpha=255)
 	. = ..()
 	if(!isatom(target) || !generate_appearance(_icon, _icon_state, _dir, _layer, _color, _alpha, target))
 		return ELEMENT_INCOMPATIBLE

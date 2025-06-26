@@ -4,7 +4,7 @@
 	anchored = TRUE
 	icon_state = ""
 	resistance_flags = FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	layer = SIGIL_LAYER
+	layer = RUNE_LAYER
 
 /obj/effect/heretic_rune/attack_hand(mob/living/user, list/modifiers)
 	. = ..()

@@ -70,41 +70,22 @@
 
 /obj/machinery/firealarm/update_overlays()
 	. = ..()
-	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
-
 	if(machine_stat & NOPOWER)
 		return
 
-	. += "fire_overlay"
+	if(panel_open)
+		return
 
-	if(is_station_level(z))
-		. += "fire_[GLOB.security_level]"
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_[GLOB.security_level]", layer, plane, dir)
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_[GLOB.security_level]", layer, EMISSIVE_PLANE, dir)
-	else
-		. += "fire_[SEC_LEVEL_GREEN]"
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_[SEC_LEVEL_GREEN]", layer, plane, dir)
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_[SEC_LEVEL_GREEN]", layer, EMISSIVE_PLANE, dir)
+	if(obj_flags & EMAGGED)
+		. += mutable_appearance(icon, "fire_emag")
+		. += emissive_appearance(icon, "fire_emag_e", src, alpha = src.alpha)
+		set_light(l_color = LIGHT_COLOR_BLUE)
 
-	var/area/A = get_area(src)
 
-	if(!detecting || !A.fire)
-		. += "fire_off"
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_off", layer, plane, dir)
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_off", layer, EMISSIVE_PLANE, dir)
-	else if(obj_flags & EMAGGED)
-		. += "fire_emagged"
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_emagged", layer, plane, dir)
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_emagged", layer, EMISSIVE_PLANE, dir)
-	else
-		. += "fire_on"
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_on", layer, plane, dir)
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_on", layer, EMISSIVE_PLANE, dir)
-
-	if(!panel_open && detecting && triggered) //It just looks horrible with the panel open
-		. += "fire_detected"
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_detected", layer, plane, dir)
-		SSvis_overlays.add_vis_overlay(src, icon, "fire_detected", layer, EMISSIVE_PLANE, dir) //Pain
+	. += mutable_appearance(icon, "fire_offstation")
+	. += emissive_appearance(icon, "fire_level_e", src, alpha = src.alpha)
+	set_light(l_color = LIGHT_COLOR_FAINT_BLUE)
+	
 
 /obj/machinery/firealarm/emp_act(severity)
 	. = ..()
@@ -296,7 +277,7 @@
 
 /obj/machinery/firealarm/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))
-		new /obj/item/stack/sheet/metal(loc, 1)
+		new /obj/item/stack/sheet/iron(loc, 1)
 		if(!(machine_stat & BROKEN))
 			var/obj/item/I = new /obj/item/electronics/firealarm(loc)
 			if(!disassembled)

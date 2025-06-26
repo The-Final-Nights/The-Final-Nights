@@ -2,7 +2,6 @@
 	name = "zone"
 	icon = 'code/modules/wod13/48x48.dmi'
 	icon_state = "masquerade"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 	alpha = 64
 

@@ -102,7 +102,7 @@ SUBSYSTEM_DEF(carpool)
 	icon = 'code/modules/wod13/cars.dmi'
 	anchored = TRUE
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	throwforce = 150
@@ -789,7 +789,7 @@ SUBSYSTEM_DEF(carpool)
 	Fari.icon_state = "light"
 	Fari.pixel_x = -64
 	Fari.pixel_y = -64
-	Fari.layer = O_LIGHTING_VISUAL_LAYER
+	Fari.layer = O_LIGHTING_VISUAL_PLANE
 	Fari.plane = O_LIGHTING_VISUAL_PLANE
 	Fari.appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM
 	Fari.mouse_opacity = MOUSE_OPACITY_TRANSPARENT

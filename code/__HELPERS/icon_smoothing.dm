@@ -149,7 +149,7 @@ DEFINE_BITFIELD(smoothing_junction, list(
 	return ..()
 
 
-//do not use, use QUEUE_SMOOTH(atom)
+///do not use, use QUEUE_SMOOTH(atom)
 /atom/proc/smooth_icon()
 	smoothing_flags &= ~SMOOTH_QUEUED
 	if (!z)
@@ -367,7 +367,7 @@ DEFINE_BITFIELD(smoothing_junction, list(
 					var/junction_dir = reverse_ndir(smoothing_junction)
 					var/turned_adjacency = REVERSE_DIR(junction_dir)
 					var/turf/neighbor_turf = get_step(src, turned_adjacency & (NORTH|SOUTH))
-					var/mutable_appearance/underlay_appearance = mutable_appearance(layer = TURF_LAYER, plane = FLOOR_PLANE)
+					var/mutable_appearance/underlay_appearance = mutable_appearance(layer = LOW_FLOOR_LAYER, plane = FLOOR_PLANE)
 					if(!neighbor_turf.get_smooth_underlay_icon(underlay_appearance, src, turned_adjacency))
 						neighbor_turf = get_step(src, turned_adjacency & (EAST|WEST))
 						if(!neighbor_turf.get_smooth_underlay_icon(underlay_appearance, src, turned_adjacency))
@@ -377,7 +377,6 @@ DEFINE_BITFIELD(smoothing_junction, list(
 									underlay_appearance.icon = DEFAULT_UNDERLAY_ICON
 									underlay_appearance.icon_state = DEFAULT_UNDERLAY_ICON_STATE
 					underlays = list(underlay_appearance)
-
 
 /turf/open/floor/set_smoothed_icon_state(new_junction)
 	if(broken || burnt)

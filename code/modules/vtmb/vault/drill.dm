@@ -107,7 +107,7 @@
 					pixel_y = -5
 
 /obj/structure/drill/proc/update_effects()
-	var/mutable_appearance/sparks = mutable_appearance('code/modules/wod13/particle_effects.dmi', "welding_sparks", ABOVE_ALL_MOB_LAYERS_LAYER, ABOVE_LIGHTING_PLANE)
+	var/mutable_appearance/sparks = mutable_appearance('code/modules/wod13/particle_effects.dmi', "welding_sparks", ABOVE_MOB_LAYER, ABOVE_LIGHTING_PLANE)
 	if(active)
 		add_overlay(sparks)
 	else
@@ -164,4 +164,4 @@
 	if(dir == SOUTH)
 		layer = ABOVE_MOB_LAYER
 	else
-		layer = ABOVE_ALL_MOB_LAYERS_LAYER
+		layer = ABOVE_MOB_LAYER

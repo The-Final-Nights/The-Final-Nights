@@ -669,27 +669,27 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				var/obj/effect/overlay/eyes_crinos = new(DAWOF)
 				eyes_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				eyes_crinos.icon_state = "eyes"
-				eyes_crinos.layer = ABOVE_HUD_LAYER
+				eyes_crinos.plane = ABOVE_HUD_PLANE
 				eyes_crinos.color = werewolf_eye_color
 				DAWOF.overlays |= eyes_crinos
 
 				var/obj/effect/overlay/scar_crinos = new(DAWOF)
 				scar_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				scar_crinos.icon_state = "scar[werewolf_scar]"
-				scar_crinos.layer = ABOVE_HUD_LAYER
+				scar_crinos.plane = ABOVE_HUD_PLANE
 				DAWOF.overlays |= scar_crinos
 
 				var/obj/effect/overlay/hair_crinos = new(DAWOF)
 				hair_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				hair_crinos.icon_state = "hair[werewolf_hair]"
-				hair_crinos.layer = ABOVE_HUD_LAYER
+				hair_crinos.plane = ABOVE_HUD_PLANE
 				hair_crinos.color = werewolf_hair_color
 				DAWOF.overlays |= hair_crinos
 
 				var/obj/effect/overlay/eyes_lupus = new(DAWOF2)
 				eyes_lupus.icon = 'code/modules/wod13/tfn_lupus.dmi'
 				eyes_lupus.icon_state = "eyes"
-				eyes_lupus.layer = ABOVE_HUD_LAYER
+				eyes_lupus.plane = ABOVE_HUD_PLANE
 				eyes_lupus.color = werewolf_eye_color
 				DAWOF2.overlays |= eyes_lupus
 

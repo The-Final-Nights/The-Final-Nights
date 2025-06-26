@@ -88,7 +88,6 @@
 	name = "Chi Pool"
 	icon = 'code/modules/wod13/UI/chi.dmi'
 	icon_state = "base"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 	var/image/upper_layer
 
@@ -96,33 +95,29 @@
 	name = "Yang Chi"
 	icon = 'code/modules/wod13/UI/chi.dmi'
 	icon_state = "yang-0"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/yin_chi
 	name = "Yin Chi"
 	icon = 'code/modules/wod13/UI/chi.dmi'
 	icon_state = "yin-0"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/imbalance_chi
 	name = "Chi Imbalance"
 	icon = 'code/modules/wod13/UI/chi.dmi'
 	icon_state = "base"
-	layer = HUD_LAYER-1
 	plane = HUD_PLANE
 
 /atom/movable/screen/demon_chi
 	name = "Demon Chi"
 	icon = 'code/modules/wod13/UI/chi.dmi'
 	icon_state = "base"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/chi_pool/Initialize()
 	. = ..()
-	upper_layer = image(icon = 'code/modules/wod13/UI/chi.dmi', icon_state = "add", layer = HUD_LAYER+1)
+	upper_layer = image(icon = 'code/modules/wod13/UI/chi.dmi', icon_state = "add", layer = HUD_PLANE)
 	add_overlay(upper_layer)
 
 /atom/movable/screen/chi_pool/Click()

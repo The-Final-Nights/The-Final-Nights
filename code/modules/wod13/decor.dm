@@ -42,7 +42,7 @@
 	icon_state = "gargoyle"
 	pixel_z = 8
 	plane = GAME_PLANE
-	layer = ABOVE_ALL_MOB_LAYERS_LAYER
+	layer = ABOVE_MOB_LAYER
 	anchored = TRUE
 
 /obj/structure/lamppost
@@ -601,7 +601,7 @@
 	icon = 'code/modules/wod13/containers.dmi'
 	icon_state = "1"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	density = FALSE
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB | PASSGLASS | PASSCLOSEDTURF
@@ -628,7 +628,7 @@
 	icon = 'code/modules/wod13/containers.dmi'
 	icon_state = "1"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 
@@ -685,7 +685,7 @@
 	icon = 'code/modules/wod13/stonks.dmi'
 	icon_state = "marketplace"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	density = TRUE
 	pixel_w = -24
@@ -697,7 +697,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "fuelstation"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
@@ -797,7 +797,7 @@
 	icon = 'code/modules/wod13/fastfood.dmi'
 	icon_state = "bacotell"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	pixel_w = -16
 
@@ -807,7 +807,7 @@
 	icon = 'code/modules/wod13/fastfood.dmi'
 	icon_state = "bubway"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	pixel_w = -16
 
@@ -817,7 +817,7 @@
 	icon = 'code/modules/wod13/fastfood.dmi'
 	icon_state = "gummaguts"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	pixel_w = -16
 
@@ -837,7 +837,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "order"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 /obj/order1
@@ -845,7 +845,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "order1"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 /obj/order2
@@ -853,7 +853,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "order2"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 /obj/order3
@@ -861,7 +861,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "order3"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 /obj/order4
@@ -869,7 +869,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "order4"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 /obj/matrix
@@ -935,7 +935,7 @@
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "billiard1"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	density = TRUE
 
@@ -949,7 +949,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "police"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	pixel_z = 40
 
@@ -1058,7 +1058,7 @@
 	icon = 'code/modules/wod13/icons.dmi'
 	icon_state = "barrel"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	density = TRUE
 
@@ -1072,7 +1072,7 @@
 	icon = 'code/modules/wod13/fountain.dmi'
 	icon_state = "fountain"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	density = TRUE
 	pixel_w = -16
@@ -1084,7 +1084,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "clock"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	pixel_z = 32
 
@@ -1096,7 +1096,7 @@
 	icon = 'code/modules/wod13/grandpa_cock.dmi'
 	icon_state = "cock"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	density = TRUE
 	pixel_z = 0
@@ -1130,7 +1130,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "flag_usa"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 //flags
@@ -1141,7 +1141,7 @@
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "flag_usa"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 /obj/flag/usa
@@ -1220,7 +1220,7 @@
 	icon_state = "graffiti1"
 	pixel_z = 32
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	var/large = FALSE
 
@@ -1470,7 +1470,7 @@
 	icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	icon_state = "ice_man"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 
 /obj/were_ice/lupus

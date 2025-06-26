@@ -1,7 +1,6 @@
 /atom/movable/screen/drinkblood
 	name = "Drink Blood"
 	icon = 'code/modules/wod13/disciplines.dmi'
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/drinkblood/Click()

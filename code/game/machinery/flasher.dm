@@ -155,7 +155,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/flasher, 26)
 			F.id = id
 			playsound(loc, 'sound/items/deconstruct.ogg', 50, TRUE)
 		else
-			new /obj/item/stack/sheet/metal (loc, 2)
+			new /obj/item/stack/sheet/iron (loc, 2)
 	qdel(src)
 
 /obj/machinery/flasher/portable/Initialize()

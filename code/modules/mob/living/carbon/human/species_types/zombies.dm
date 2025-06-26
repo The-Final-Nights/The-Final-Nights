@@ -100,7 +100,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/human/host
 
-/datum/action/zombieinfo/Trigger()
+/datum/action/zombieinfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">

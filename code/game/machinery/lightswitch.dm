@@ -43,7 +43,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/light_switch, 26)
 /obj/machinery/light_switch/update_overlays()
 	. = ..()
 	if(!(machine_stat & NOPOWER))
-		SSvis_overlays.add_vis_overlay(src, icon, "[base_icon_state]-glow", EMISSIVE_LAYER, EMISSIVE_PLANE, dir, alpha)
+		. += emissive_appearance(icon, "[base_icon_state]-glow", alpha = src.alpha)
 
 /obj/machinery/light_switch/examine(mob/user)
 	. = ..()

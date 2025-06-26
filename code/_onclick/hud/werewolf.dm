@@ -8,14 +8,12 @@
 	name = "Rage"
 	icon = 'code/modules/wod13/48x48.dmi'
 	icon_state = "rage0"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/transform_homid
 	name = "Homid"
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "homid"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/transform_homid/Click()
@@ -30,7 +28,6 @@
 	name = "Crinos"
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "crinos"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/transform_crinos/Click()
@@ -45,7 +42,6 @@
 	name = "Lupus"
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "lupus"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/transform_lupus/Click()
@@ -61,7 +57,6 @@
 	name = "Corax Crinos"
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "corax_crinos"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 
@@ -77,7 +72,6 @@
 	name = "corvid"
 	icon = 'code/modules/wod13/32x48.dmi'
 	icon_state = "corvid"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 
@@ -93,7 +87,6 @@
 	name = "Auspice"
 	icon = 'code/modules/wod13/werewolf_ui.dmi'
 	icon_state = "auspice_bar"
-	layer = HUD_LAYER
 	plane = HUD_PLANE
 
 /atom/movable/screen/auspice/Click()

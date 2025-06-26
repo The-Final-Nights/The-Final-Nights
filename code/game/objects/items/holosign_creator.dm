@@ -18,6 +18,13 @@
 	var/holosign_type = /obj/structure/holosign/wetsign
 	var/holocreator_busy = FALSE //to prevent placing multiple holo barriers at once
 
+/obj/item/holosign_creator/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/openspace_item_click_handler)
+
+/obj/item/holosign_creator/handle_openspace_click(turf/target, mob/user, proximity_flag, click_parameters)
+	afterattack(target, user, proximity_flag, click_parameters)
+
 /obj/item/holosign_creator/examine(mob/user)
 	. = ..()
 	. += "<span class='notice'>It is currently maintaining <b>[signs.len]/[max_signs]</b> projections.</span>"

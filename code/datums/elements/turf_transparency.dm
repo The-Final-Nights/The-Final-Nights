@@ -1,3 +1,4 @@
+
 /datum/element/turf_z_transparency
 	var/show_bottom_level = FALSE
 
@@ -9,16 +10,10 @@
 
 	var/turf/our_turf = target
 
-	src.show_bottom_level = show_bottom_level
-
-	our_turf.plane = OPENSPACE_PLANE
-	our_turf.layer = OPENSPACE_LAYER
-
 	RegisterSignal(target, COMSIG_TURF_MULTIZ_DEL, PROC_REF(on_multiz_turf_del))
 	RegisterSignal(target, COMSIG_TURF_MULTIZ_NEW, PROC_REF(on_multiz_turf_new))
 
 	ADD_TRAIT(our_turf, TURF_Z_TRANSPARENT_TRAIT, TURF_TRAIT)
-
 
 	update_multiz(our_turf, TRUE, TRUE)
 
@@ -37,36 +32,31 @@
 			our_turf.ChangeTurf(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
 			return FALSE
 	if(init)
-		var/atom/movable/shitta = new(our_turf)
-		shitta.vis_contents += below_turf
-		if(get_step(get_step_multiz(shitta, DOWN), NORTH))
-			shitta.vis_contents += get_step(get_step_multiz(shitta, DOWN), NORTH)
-		shitta.pixel_y = -24
-		shitta.plane = our_turf.plane
-		shitta.layer = our_turf.layer
-		shitta.mouse_opacity = 0
-		shitta.anchored = TRUE
-//		shitta.add_filter("z_level_blur", 1, list(type = "blur", size = 0.75))
-//		our_turf.vis_contents += below_turf
+		our_turf.vis_contents += below_turf
+
 	if(isclosedturf(our_turf)) //Show girders below closed turfs
-		var/mutable_appearance/girder_underlay = mutable_appearance('icons/obj/structures.dmi', "girder", layer = TURF_LAYER-0.01)
+		var/mutable_appearance/girder_underlay = mutable_appearance('icons/obj/structures.dmi', "girder", layer = BELOW_CLOSED_TURF_LAYER)
 		girder_underlay.appearance_flags = RESET_ALPHA | RESET_COLOR
 		our_turf.underlays += girder_underlay
-		var/mutable_appearance/plating_underlay = mutable_appearance('icons/turf/floors.dmi', "plating", layer = TURF_LAYER-0.02)
+		var/mutable_appearance/plating_underlay = mutable_appearance('icons/turf/floors.dmi', "plating", layer = LOW_FLOOR_LAYER, plane = FLOOR_PLANE)
 		plating_underlay = RESET_ALPHA | RESET_COLOR
 		our_turf.underlays += plating_underlay
 	return TRUE
 
-/datum/element/turf_z_transparency/proc/on_multiz_turf_del(turf/our_turf, turf/T, dir)
+/datum/element/turf_z_transparency/proc/on_multiz_turf_del(turf/our_turf, turf/below_turf, dir)
 	SIGNAL_HANDLER
+
 	if(dir != DOWN)
 		return
+
 	update_multiz(our_turf)
 
-/datum/element/turf_z_transparency/proc/on_multiz_turf_new(turf/our_turf, turf/T, dir)
+/datum/element/turf_z_transparency/proc/on_multiz_turf_new(turf/our_turf, turf/below_turf, dir)
 	SIGNAL_HANDLER
+
 	if(dir != DOWN)
 		return
+
 	update_multiz(our_turf)
 
 ///Called when there is no real turf below this turf
@@ -79,7 +69,7 @@
 		if(!ispath(path))
 			warning("Z-level [our_turf.z] has invalid baseturf '[SSmapping.level_trait(our_turf.z, ZTRAIT_BASETURF)]'")
 			path = /turf/open/space
-	var/mutable_appearance/underlay_appearance = mutable_appearance(initial(path.icon), initial(path.icon_state), layer = TURF_LAYER-0.02, plane = PLANE_SPACE)
+	var/mutable_appearance/underlay_appearance = mutable_appearance(initial(path.icon), initial(path.icon_state), layer = SPACE_LAYER + 0.1, plane = PLANE_SPACE)
 	underlay_appearance.appearance_flags = RESET_ALPHA | RESET_COLOR
 	our_turf.underlays += underlay_appearance
 	return TRUE

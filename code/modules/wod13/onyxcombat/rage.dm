@@ -3,7 +3,6 @@
 	gnosis = new(src)
 	gnosis.icon = 'code/modules/wod13/48x48.dmi'
 	gnosis.plane = ABOVE_HUD_PLANE
-	gnosis.layer = ABOVE_HUD_LAYER
 
 
 /mob/living/simple_animal/werewolf/Life()

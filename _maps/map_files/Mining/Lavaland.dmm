@@ -1385,7 +1385,7 @@
 	},
 /area/vtm/interior/penumbra)
 "qf" = (
-/turf/open/floor/plasteel/stairs/medium{
+/turf/open/floor/iron/stairs/medium{
 	dir = 8;
 	umbra = 1
 	},
@@ -1741,7 +1741,7 @@
 	},
 /area/vtm/interior/penumbra)
 "tP" = (
-/turf/open/floor/plasteel/stairs/medium{
+/turf/open/floor/iron/stairs/medium{
 	dir = 4;
 	icon_state = "stairs-m";
 	umbra = 1
@@ -2069,7 +2069,7 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/penumbra)
 "wA" = (
-/turf/open/floor/plasteel/stairs/left{
+/turf/open/floor/iron/stairs/left{
 	dir = 1;
 	icon_state = "stairs-l"
 	},
@@ -2110,7 +2110,7 @@
 	},
 /area/vtm/interior/penumbra)
 "xa" = (
-/turf/open/floor/plasteel/stairs/right{
+/turf/open/floor/iron/stairs/right{
 	dir = 1;
 	icon_state = "stairs-r"
 	},
@@ -2142,7 +2142,7 @@
 /area/vtm/interior/penumbra)
 "xm" = (
 /obj/effect/decal/trash,
-/turf/open/floor/plasteel/stairs{
+/turf/open/floor/iron/stairs{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)
@@ -2903,7 +2903,7 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/penumbra)
 "FS" = (
-/turf/open/floor/plasteel/stairs{
+/turf/open/floor/iron/stairs{
 	umbra = 1
 	},
 /area/vtm/interior/penumbra)

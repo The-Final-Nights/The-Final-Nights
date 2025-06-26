@@ -6,7 +6,7 @@
 	icon = 'code/modules/wod13/addwalls.dmi'
 	base_icon_state = "wall"
 	plane = GAME_PLANE
-	layer = ABOVE_ALL_MOB_LAYERS_LAYER
+	layer = ABOVE_MOB_LAYER
 	anchored = TRUE
 	mouse_opacity = 0
 
@@ -1076,7 +1076,7 @@
 /obj/effect/decal/wallpaper/papers
 	name = "papers"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 
 /obj/effect/decal/wallpaper/papers/one

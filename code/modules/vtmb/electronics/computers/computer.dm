@@ -6,7 +6,7 @@ GLOBAL_LIST_EMPTY(vampire_computers)
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "computer"
 	plane = GAME_PLANE
-	layer = CAR_LAYER
+	layer = VEHICLE_LAYER
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	var/main = FALSE

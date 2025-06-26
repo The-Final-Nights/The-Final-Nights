@@ -328,7 +328,8 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	appearance_flags = KEEP_TOGETHER|TILE_BOUND|PIXEL_SCALE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	vis_flags = VIS_INHERIT_ID
-	layer = GATEWAY_UNDERLAY_LAYER //Slightly lower than gateway itself
+	layer = 200
+	plane = HIGHEST_EVER_PLANE
 	var/alpha_icon = 'icons/obj/machines/gateway.dmi'
 	var/alpha_icon_state = "portal_mask"
 	var/datum/gateway_destination/our_destination
@@ -349,7 +350,6 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	if(!our_destination)
 		return
 
-
 	add_filter("portal_alpha", 1, list("type" = "alpha", "icon" = icon(alpha_icon, alpha_icon_state), "x" = 32, "y" = 32))
 	add_filter("portal_blur", 1, list("type" = "blur", "size" = 0.5))
 	add_filter("portal_ripple", 1, list("type" = "ripple", "size" = 2, "radius" = 1, "falloff" = 1, "y" = 7))
@@ -357,5 +357,4 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 	animate(get_filter("portal_ripple"), time = 1.3 SECONDS, loop = -1, easing = LINEAR_EASING, radius = 32)
 
 	var/turf/center_turf = our_destination.get_target_turf()
-
 	vis_contents += block(locate(center_turf.x - 1, center_turf.y - 1, center_turf.z), locate(center_turf.x + 1, center_turf.y + 1, center_turf.z))
