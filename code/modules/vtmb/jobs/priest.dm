@@ -19,7 +19,7 @@
 
 	allowed_species = list("Human", "Ghoul", "Vampire")
 	allowed_bloodlines = list(CLAN_LASOMBRA, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_SALUBRI, CLAN_SALUBRI_WARRIOR, CLAN_NAGARAJA, CLAN_CAPPADOCIAN, CLAN_BANU_HAQIM, CLAN_NONE)
-	species_slots = list("Vampire" = 2)
+	species_slots = list("Vampire" = 2, "Ghoul" = 50, "Human" = 50)
 	minimal_generation = 13
 
 	duty = "Be the shepherd of the flock in San Francisco, lead them to salvation, piety and righteousness, despite whatever oddities you may notice from the restricted Top Floor, and the Patron of the Church that you answer to."
