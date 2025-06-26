@@ -233,7 +233,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/werewolf_hair = 0
 	var/werewolf_hair_color = "#000000"
 	var/werewolf_eye_color = "#FFFFFF"
-	var/werewolf_apparel = ""
+	var/werewolf_apparel = "nothing"
 
 	var/werewolf_name
 	var/auspice_level = 1
@@ -2509,7 +2509,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("werewolf_apparel")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
-					var/list/apparel = list("loincloth", "green_tribal", "beige_tribal", "leather_mantle", "studs", "dark_mantle", "loincloth_armband", "skull_necklace", "metal_armour", "fur_mantle", "fur_necklace_and_vambrace", "armour_loincloth")
+					var/list/apparel = list("nothing","loincloth", "green_tribal", "beige_tribal", "leather_mantle", "studs", "dark_mantle", "loincloth_armband", "skull_necklace", "metal_armour", "fur_mantle", "fur_necklace_and_vambrace", "armour_loincloth")
 					var/result = tgui_input_list(user, "Select your Crinos form's apparel:", "Appearance Selection", sort_list(apparel))
 					if(result)
 						werewolf_apparel = result
@@ -3804,7 +3804,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			crinos.sprite_hair = werewolf_hair
 			crinos.sprite_hair_color = werewolf_hair_color
 			crinos.sprite_eye_color = werewolf_eye_color
-			crinos.sprite_apparel = werewolf_apparel
+			if (werewolf_apparel) // if we have picked an apparel, let it show. Showing the apparel 100% of the time causes the crinos form to become pitch black on the character screen tee hee
+				crinos.sprite_apparel = werewolf_apparel
 			lupus.sprite_color = werewolf_color
 			lupus.sprite_eye_color = werewolf_eye_color
 
