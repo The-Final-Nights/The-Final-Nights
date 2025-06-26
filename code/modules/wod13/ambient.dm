@@ -496,9 +496,28 @@
 	yin_chi = 2
 	wall_rating = LOW_WALL_RATING
 
+/area/vtm/abandoned_manor
+	name = "Abandoned Manor"
+	icon_state = "graveyard"
+	ambience_index = AMBIENCE_INTERIOR
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/abandoned_courtyard
+	name = "Abandoned Courtyard"
+	icon_state = "graveyard"
+	upper = TRUE
+	zone_type = "battle"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = LOW_WALL_RATING
+
 // GAROU CENTRIC AREAS
-/area/vtm/forest
-	name = "Forest"
+/area/vtm/sanbruno
+	name = "San Bruno Mountain"
 	icon_state = "park"
 	upper = TRUE
 	zone_type = "battle"

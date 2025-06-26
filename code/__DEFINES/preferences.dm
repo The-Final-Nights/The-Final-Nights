@@ -93,6 +93,7 @@
 #define EXP_TYPE_PAINTED_CITY      "Sept of the Painted City"
 #define EXP_TYPE_AMBERGLADE    "Sept of the Amberglade"
 #define EXP_TYPE_SPIRAL    "Hive of the Poisoned Shore"
+#define EXP_TYPE_RANGER    "San Bruno Mountain State Park"
 #define EXP_TYPE_CHURCH         "Church"
 #define EXP_TYPE_SPECIAL		"Special"
 #define EXP_TYPE_GHOST			"Ghost"
