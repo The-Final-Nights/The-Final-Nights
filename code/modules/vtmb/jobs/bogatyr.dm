@@ -39,12 +39,10 @@
 	id = /obj/item/card/id/bogatyr
 	uniform = /obj/item/clothing/under/vampire/bogatyr
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	head = /obj/item/clothing/head/vampire/bogatyr
-	suit = /obj/item/clothing/suit/vampire/bogatyr
 	belt = /obj/item/storage/belt/vampire/sheathe/longsword
 	l_pocket = /obj/item/vamp/phone/bogatyr
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
+	backpack_contents = list(/obj/item/vamp/keys/tzimisce/manor=1, /obj/item/clothing/head/vampire/bogatyr, /obj/item/clothing/suit/vampire/bogatyr, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /obj/effect/landmark/start/bogatyr
 	name = "Bogatyr"

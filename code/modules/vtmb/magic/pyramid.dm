@@ -35,6 +35,14 @@
 			else
 				to_chat(user, "[R.thaumlevel] [R.name] - [R.desc]")
 
+/datum/crafting_recipe/arctome
+	name = "Arcane Tome"
+	time = 10 SECONDS
+	reqs = list(/obj/item/paper = 3, /obj/item/reagent_containers/blood = 2)
+	result = /obj/item/arcane_tome
+	always_available = FALSE
+	category = CAT_MISC
+
 /obj/ritualrune
 	name = "Tremere Rune"
 	desc = "Learn the secrets of blood, neonate..."
@@ -122,7 +130,7 @@
 		var/datum/action/beastmaster_deaggro/E2 = new()
 		E2.Grant(last_activator)
 	var/mob/living/simple_animal/hostile/beastmaster/blood_guard/BG = new(loc)
-	BG.beastmaster = last_activator
+	BG.beastmaster_owner = last_activator
 	H.beastmaster |= BG
 	BG.my_creator = last_activator
 	BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus

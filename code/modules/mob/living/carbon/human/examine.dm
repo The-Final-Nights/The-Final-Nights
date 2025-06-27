@@ -1,4 +1,4 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/carbon/human/examine(mob/living/user)
 //this is very slightly better than it was because you can use it more places. still can't do \his[src] though.
 	var/t_He = p_they(TRUE)
 	var/t_His = p_their(TRUE)
@@ -64,7 +64,6 @@
 					. += "<b>You know [p_them()] as a [job]. You are of the same bloodline.</b>"
 	if((isgarou(user) || iswerewolf(user)) && isgarou(src) && is_face_visible())
 		var/isknown = 0
-		var/mob/living/carbon/human/werewolf = user
 		var/same_tribe = FALSE
 		var/truescent
 
@@ -75,9 +74,9 @@
 		if(HAS_TRAIT(user, TRAIT_SCENTTRUEFORM))
 			truescent = TRUE
 
-		if(werewolf.auspice?.tribe.name == auspice?.tribe.name)
+		if(user.auspice?.tribe.name == auspice?.tribe.name)
 			same_tribe = TRUE
-			if(werewolf.auspice.tribe.name == "Black Spiral Dancers")
+			if(user.auspice.tribe.name == "Black Spiral Dancers")
 				honorr = list("strength and will", "complete defeat of [t_his] enemies", "awesome destruction in service of the Wyrm")
 				wisdomm = list("knowledge of twisted machinations", "ability to turn [t_his] enemies against themselves", "brilliantly depraved plots in service of the Wyrm")
 				gloryy = list("trials in service of the Wyrm", "many victories in name of the Wyrm", "great conquests in the Wyrm's service")
@@ -423,7 +422,7 @@
 
 		if(src != user)
 			if(HAS_TRAIT(user, TRAIT_EMPATH))
-				if (a_intent != INTENT_HELP)
+				if (combat_mode)
 					msg += "[t_He] seem[p_s()] to be on guard.\n"
 				if (getOxyLoss() >= 10)
 					msg += "[t_He] seem[p_s()] winded.\n"
@@ -461,20 +460,25 @@
 		if (iskindred(src) && is_face_visible())
 			switch(clane.alt_sprite)
 				if (CLAN_NOSFERATU)
-					msg += "<span class='danger'><b>[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!</b></span><br>"
+					msg += span_warning("[p_they(TRUE)] look[p_s()] utterly deformed and inhuman!<br>")
 				if (CLAN_GARGOYLE)
-					msg += "<span class='danger'><b>[p_they(TRUE)] seem[p_s()] to be made out of stone!</b></span><br>"
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] to be made out of stone!<br>")
 				if (CLAN_KIASYD)
 					if (!is_eyes_covered())
-						msg += "<span class='danger'><b>[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!<b></span><br>"
+						msg += span_boldwarning("[p_they(TRUE)] [p_have()] no whites in [p_their()] eyes!</b><br>")
 				if ("rotten1")
-					msg += "[p_they(TRUE)] seem[p_s()] oddly gaunt.<br>"
+					msg += span_warning("[p_they(TRUE)] seem[p_s()] oddly gaunt.<br>")
 				if ("rotten2")
-					msg += "[p_they(TRUE)] [p_have()] a corpselike complexion.<br>"
+					msg += span_warning("[p_they(TRUE)] [p_have()] a corpselike complexion.<br>")
 				if ("rotten3")
-					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a decayed corpse!</b></span><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a decayed corpse!<br>")
 				if ("rotten4")
-					msg += "<span class='danger'><b>[p_they(TRUE)] [p_are()] a skeletonised corpse!</b></span><br>"
+					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a skeletonised corpse!</b><br>")
+			if (HAS_TRAIT(src, TRAIT_PERMAFANGS))
+				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
+
+		if (iszombie(src) && is_face_visible())
+			msg += span_danger("<b>[p_they(TRUE)] [p_are()] a decayed corpse!</b><br>")
 
 		if(getorgan(/obj/item/organ/brain))
 			if(ai_controller?.ai_status == AI_STATUS_ON)
@@ -511,6 +515,11 @@
 					wyrm_taint++
 				named_splat = "You scent the dark journey through Erebus permeating this body, the mark of the Wan Kuei."
 
+			if(iszombie(src))
+				seems_alive = 0
+				wyrm_taint++
+				named_splat = "You scent nothing but the stench of death and decay - this is no living creature."
+
 			if (iskindred(src))
 				named_splat = "You scent the shiveringly addictive vitae of the children of Caine."
 				var/mob/living/carbon/human/vampire = src
@@ -539,8 +548,8 @@
 					wyrm_taint++
 					wyld_taint--
 					weaver_taint--
-				if(istype(wolf,/mob/living/carbon/werewolf))
-					var/mob/living/carbon/werewolf/werewolf = src
+				if(istype(wolf,/mob/living/simple_animal/werewolf))
+					var/mob/living/simple_animal/werewolf/werewolf = src
 					if(werewolf.wyrm_tainted)
 						wyrm_taint++
 						wyld_taint--

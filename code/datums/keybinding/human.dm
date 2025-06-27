@@ -68,12 +68,14 @@
 	. = ..()
 	if(.)
 		return
-	var/mob/living/carbon/human/H = user.mob
-	H.SwitchBlocking()
-	return TRUE
+	if(ishuman(user.mob) && !ispath(user.mob, /mob/living/simple_animal/werewolf))
+		var/mob/living/carbon/human/H = user.mob
+		H.SwitchBlocking()
+		return TRUE
+	return
 
 /datum/keybinding/human/bite
-	hotkey_keys = list("F")
+	hotkey_keys = list("N")
 	name = "bite"
 	full_name = "Bite"
 	description = "Bite whoever you're aggressively grabbing, and feed on them if possible."
@@ -112,6 +114,10 @@
 				if(PB.stat == DEAD && !HAS_TRAIT(BD, TRAIT_GULLET) && !iscathayan(user.mob))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>This creature is <b>DEAD</b>.</span>")
+					return
+				if(iszombie(PB) && !HAS_TRAIT(BD, TRAIT_GULLET))
+					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
+					to_chat(BD, span_warning("Eww, that is <b>GROSS</b>."))
 					return
 				if(PB.bloodpool <= 0 && (!iskindred(BD.pulling) || !iskindred(BD)))
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))

@@ -87,7 +87,7 @@
 		var/datum/action/beastmaster_deaggro/E2 = new()
 		E2.Grant(last_activator)
 	var/mob/living/simple_animal/hostile/beastmaster/shadow_guard/BG = new(loc)
-	BG.beastmaster = last_activator
+	BG.beastmaster_owner = last_activator
 	H.beastmaster |= BG
 	BG.my_creator = last_activator
 	BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus

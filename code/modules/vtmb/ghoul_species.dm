@@ -3,6 +3,7 @@
 	id = "ghoul"
 	default_color = "FFFFFF"
 	toxic_food = RAW
+	liked_food = SANGUINE
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE)
 	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_VIRUSIMMUNE, TRAIT_NOCRITDAMAGE)
 	use_skintones = TRUE
@@ -26,7 +27,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/human/host
 
-/datum/action/ghoulinfo/Trigger()
+/datum/action/ghoulinfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">
@@ -149,7 +150,7 @@
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	var/taking = FALSE
 
-/datum/action/take_vitae/Trigger()
+/datum/action/take_vitae/Trigger(trigger_flags)
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = owner
 		if(istype(H.pulling, /mob/living/carbon/human))
@@ -205,7 +206,7 @@
 					icon_icon = 'code/modules/wod13/UI/actions.dmi'
 	. = ..()
 
-/datum/action/blood_heal/Trigger()
+/datum/action/blood_heal/Trigger(trigger_flags)
 	if(istype(owner, /mob/living/carbon/human))
 		if (HAS_TRAIT(owner, TRAIT_TORPOR))
 			return

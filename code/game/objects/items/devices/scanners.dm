@@ -12,11 +12,11 @@ GENE SCANNER
 */
 
 // Describes the three modes of scanning available for health analyzers
-#define SCANMODE_HEALTH		0
-#define SCANMODE_CHEMICAL 	1
-#define SCANMODE_WOUND	 	2
-#define SCANNER_CONDENSED 	0
-#define SCANNER_VERBOSE 	1
+#define SCANMODE_HEALTH 0
+#define SCANMODE_WOUND 1
+#define SCANMODE_COUNT 2 // Update this to be the number of scan modes if you add more
+#define SCANNER_CONDENSED 0
+#define SCANNER_VERBOSE 1
 
 /obj/item/t_scanner
 	name = "\improper T-ray scanner"
@@ -85,7 +85,7 @@ GENE SCANNER
 	worn_icon_state = "healthanalyzer"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
-	desc = "A hand-held body scanner capable of distinguishing vital signs of the subject."
+	desc = "A hand-held body scanner capable of distinguishing vital signs of the subject. Has a side button to scan for chemicals, and can be toggled to scan wounds."
 	flags_1 = CONDUCT_1
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
@@ -104,12 +104,10 @@ GENE SCANNER
 	return BRUTELOSS
 
 /obj/item/healthanalyzer/attack_self(mob/user)
-	scanmode = (scanmode + 1) % 3
+	scanmode = (scanmode + 1) % SCANMODE_COUNT
 	switch(scanmode)
 		if(SCANMODE_HEALTH)
 			to_chat(user, "<span class='notice'>You switch the health analyzer to check physical health.</span>")
-		if(SCANMODE_CHEMICAL)
-			to_chat(user, "<span class='notice'>You switch the health analyzer to scan chemical contents.</span>")
 		if(SCANMODE_WOUND)
 			to_chat(user, "<span class='notice'>You switch the health analyzer to report extra info on wounds.</span>")
 
@@ -133,15 +131,17 @@ GENE SCANNER
 	user.visible_message("<span class='notice'>[user] analyzes [M]'s vitals.</span>", \
 						"<span class='notice'>You analyze [M]'s vitals.</span>")
 
-	if(scanmode == SCANMODE_HEALTH)
-		healthscan(user, M, mode, advanced)
-	else if(scanmode == SCANMODE_CHEMICAL)
-		chemscan(user, M)
-	else
-		woundscan(user, M, src)
+	switch (scanmode)
+		if (SCANMODE_HEALTH)
+			healthscan(user, M, mode, advanced)
+		if (SCANMODE_WOUND)
+			woundscan(user, M, src)
 
 	add_fingerprint(user)
 
+/obj/item/healthanalyzer/attack_secondary(mob/living/victim, mob/living/user, params)
+	chemscan(user, victim)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 // Used by the PDA medical scanner too
 /proc/healthscan(mob/user, mob/living/M, mode = SCANNER_VERBOSE, advanced = FALSE)
@@ -164,7 +164,7 @@ GENE SCANNER
 
 	var/mob/living/carbon/human/humhum = M
 
-	if(iskindred(M) || (iscathayan(M) && !humhum.check_kuei_jin_alive()))
+	if(iskindred(M) || (iscathayan(M) && !humhum.check_kuei_jin_alive()) || iszombie(M))
 		mob_status = "<span class='alert'><b>Deceased</b></span>"
 		oxy_loss = max(rand(1, 40), oxy_loss, (300 - (tox_loss + fire_loss + brute_loss)))
 
@@ -241,7 +241,7 @@ GENE SCANNER
 //			if(advanced)
 //				render_list += "<span class='info ml-1'>Subject Minor Disabilities: [C.get_quirk_string(FALSE, CAT_QUIRK_MINOR_DISABILITY)].</span>\n"
 	if(advanced)
-		if(iskindred(M) || (iscathayan(M) && !humhum.check_kuei_jin_alive()))
+		if(iskindred(M) || (iscathayan(M) && !humhum.check_kuei_jin_alive()) || iszombie(M))
 			render_list += "<span class='info ml-1'>Brain Activity Level: 0%.</span>\n"
 		else
 			render_list += "<span class='info ml-1'>Brain Activity Level: [(200 - M.getOrganLoss(ORGAN_SLOT_BRAIN))/2]%.</span>\n"
@@ -333,7 +333,7 @@ GENE SCANNER
 
 			for(var/obj/item/organ/organ in H.internal_organs)
 				var/status = ""
-				if (iskindred(H) || (iscathayan(H) && !H.check_kuei_jin_alive())) status = "<font color='#E42426'>Non-Functional</font>"
+				if (iskindred(M) || (iscathayan(M) && !H.check_kuei_jin_alive()) || iszombie(M)) status = "<font color='#E42426'>Non-Functional</font>"
 				else if (organ.organ_flags & ORGAN_FAILING) status = "<font color='#E42426'>Non-Functional</font>"
 				else if (organ.damage > organ.high_threshold) status = "<font color='#EC6224'>Severely Damaged</font>"
 				else if (organ.damage > organ.low_threshold) status = "<font color='#F28F1F'>Mildly Damaged</font>"
@@ -782,7 +782,7 @@ GENE SCANNER
 	return returned_target
 
 #undef SCANMODE_HEALTH
-#undef SCANMODE_CHEMICAL
 #undef SCANMODE_WOUND
+#undef SCANMODE_COUNT
 #undef SCANNER_CONDENSED
 #undef SCANNER_VERBOSE

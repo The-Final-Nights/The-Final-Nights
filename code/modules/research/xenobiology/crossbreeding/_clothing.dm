@@ -56,7 +56,7 @@ Slimecrossing Armor
 	set_light_color(newcolor)
 	set_light(5)
 
-/obj/structure/light_prism/attack_hand(mob/user)
+/obj/structure/light_prism/attack_hand(mob/user, list/modifiers)
 	to_chat(user, "<span class='notice'>You dispel [src].</span>")
 	qdel(src)
 
@@ -65,7 +65,7 @@ Slimecrossing Armor
 	icon_icon = 'icons/obj/slimecrossing.dmi'
 	button_icon_state = "prismcolor"
 
-/datum/action/item_action/change_prism_colour/Trigger()
+/datum/action/item_action/change_prism_colour/Trigger(trigger_flags)
 	if(!IsAvailable())
 		return
 	var/obj/item/clothing/glasses/prism_glasses/glasses = target
@@ -79,7 +79,7 @@ Slimecrossing Armor
 	icon_icon = 'icons/obj/slimecrossing.dmi'
 	button_icon_state = "lightprism"
 
-/datum/action/item_action/place_light_prism/Trigger()
+/datum/action/item_action/place_light_prism/Trigger(trigger_flags)
 	if(!IsAvailable())
 		return
 	var/obj/item/clothing/glasses/prism_glasses/glasses = target
@@ -109,7 +109,7 @@ Slimecrossing Armor
 	throw_speed = 1
 	throw_range = 3
 
-/obj/item/clothing/head/peaceflower/attack_hand(mob/user)
+/obj/item/clothing/head/peaceflower/attack_hand(mob/user, list/modifiers)
 	if(iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(src == C.head)

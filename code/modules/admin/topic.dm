@@ -1930,9 +1930,9 @@
 				var/response = input(usr,"What were you just doing?","Query server hang report") as null|text
 				if(response)
 					data["response"] = response
-			logger.Log(LOG_CATEGORY_DEBUG_SQL, "server hang", data)
+			GLOB.logger.Log(LOG_CATEGORY_DEBUG_SQL, "server hang", data)
 		else if(answer == "no")
-			logger.Log(LOG_CATEGORY_DEBUG_SQL, "no server hang", data)
+			GLOB.logger.Log(LOG_CATEGORY_DEBUG_SQL, "no server hang", data)
 
 	else if(href_list["ctf_toggle"])
 		if(!check_rights(R_ADMIN))
@@ -2166,6 +2166,28 @@
 			return
 
 		web_sound(usr, link_url, credit)
+
+	else if(href_list["del_tag"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/datum_to_remove = locate(href_list["del_tag"])
+		if(!datum_to_remove)
+			return
+		return remove_tagged_datum(datum_to_remove)
+
+	else if(href_list["show_tags"])
+		if(!check_rights(R_ADMIN))
+			return
+		return display_tags()
+
+	else if(href_list["mark_datum"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/datum/datum_to_mark = locate(href_list["mark_datum"])
+		if(!datum_to_mark)
+			return
+		return usr.client?.mark_datum(datum_to_mark)
+
 
 /datum/admins/proc/HandleCMode()
 	if(!check_rights(R_ADMIN))

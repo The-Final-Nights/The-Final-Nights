@@ -14,13 +14,13 @@
 
 /obj/item/clothing/gloves/butchering/equipped(mob/user, slot, initial = FALSE)
 	. = ..()
-	RegisterSignal(user, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, PROC_REF(butcher_target))
+	RegisterSignal(user, COMSIG_LIVING_EARLY_UNARMED_ATTACK, PROC_REF(butcher_target))
 	var/datum/component/butchering/butchering = src.GetComponent(/datum/component/butchering)
 	butchering.butchering_enabled = TRUE
 
 /obj/item/clothing/gloves/butchering/dropped(mob/user, silent = FALSE)
 	. = ..()
-	UnregisterSignal(user, COMSIG_HUMAN_EARLY_UNARMED_ATTACK)
+	UnregisterSignal(user, COMSIG_LIVING_EARLY_UNARMED_ATTACK)
 	var/datum/component/butchering/butchering = src.GetComponent(/datum/component/butchering)
 	butchering.butchering_enabled = FALSE
 
