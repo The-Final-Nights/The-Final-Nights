@@ -37,9 +37,6 @@ GLOBAL_VAR(restart_counter)
 	enable_reference_tracking()
 #endif
 
-	// Create the logger
-	logger = new
-
 	log_world("World loaded at [time_stamp()]!")
 
 	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
@@ -111,7 +108,7 @@ GLOBAL_VAR(restart_counter)
 	data["tick_usage"] = world.tick_usage
 	data["tick_lag"] = world.tick_lag
 	data["time"] = world.time
-	data["timestamp"] = logger.unix_timestamp_string()
+	data["timestamp"] = GLOB.logger.unix_timestamp_string()
 	return data
 
 /world/proc/SetupLogs()
@@ -136,7 +133,7 @@ GLOBAL_VAR(restart_counter)
 		GLOB.picture_logging_prefix = "O_[override_dir]_"
 		GLOB.picture_log_directory = "data/picture_logs/[override_dir]"
 
-	logger.init_logging()
+	GLOB.logger.init_logging()
 
 	var/latest_changelog = file("[global.config.directory]/../html/changelogs/archive/" + time2text(world.timeofday, "YYYY-MM", TIMEZONE_UTC) + ".yml")
 	GLOB.changelog_hash = fexists(latest_changelog) ? md5(latest_changelog) : 0 //for telling if the changelog has changed recently
