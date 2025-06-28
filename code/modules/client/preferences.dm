@@ -683,7 +683,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				apparel_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				apparel_crinos.icon_state = "[werewolf_apparel]"
 				apparel_crinos.layer = ABOVE_HUD_LAYER
-				apparel_crinos.color = werewolf_hair_color
 				DAWOF.overlays |= apparel_crinos
 
 				var/obj/effect/overlay/hair_crinos = new(DAWOF)
@@ -2509,7 +2508,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("werewolf_apparel")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
-					var/list/apparel = list("nothing","loincloth", "green_tribal", "beige_tribal", "leather_mantle", "studs", "dark_mantle", "loincloth_armband", "skull_necklace", "metal_armour", "fur_mantle", "fur_necklace_and_vambrace", "armour_loincloth")
+					var/list/apparel = list("nothing" = "Nothing", "loincloth" = "Simple loincloth", "green_tribal" = "Green tribal attire", "beige_tribal" = "Beige tribal attire", "leather_mantle" = "Leather mantle", "studs" = "Studded armbands", "dark_mantle" = "Dark mantle", "loincloth_armband" = "Loincloth with armbands", "skull_necklace" = "Skull necklace", "metal_armour" = "Metal armour", "fur_mantle" = "Furred mantle", "fur_necklace_and_vambrace" = "Fur necklace and vambrace", "armour_loincloth" = "Armour and loincloth")
 					var/result = tgui_input_list(user, "Select your Crinos form's apparel:", "Appearance Selection", sort_list(apparel))
 					if(result)
 						werewolf_apparel = result
