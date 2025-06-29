@@ -63,8 +63,10 @@
 /mob/living/simple_animal/werewolf/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NIGHT_VISION, "species")
-	var/datum/atom_hud/abductor/hud = GLOB.huds[DATA_HUD_ABDUCTOR]
-	hud.add_to_hud(src)
+	var/datum/atom_hud/abductor/hud_auspex = GLOB.huds[DATA_HUD_ABDUCTOR]
+	var/datum/atom_hud/sense_wyrm/hud_sensewyrm = GLOB.huds[DATA_HUD_SENSEWYRM]
+	hud_auspex.add_to_hud(src)
+	hud_sensewyrm.add_to_hud(src)
 
 /mob/living/simple_animal/werewolf/death(gibbed)
 	. = ..()
@@ -268,3 +270,5 @@
 			step_variable = 0
 			playsound(get_turf(src), 'code/modules/wod13/sounds/werewolf_step.ogg', 50, FALSE) // feel free to change the noise to something more avian later.
 	..()
+
+
