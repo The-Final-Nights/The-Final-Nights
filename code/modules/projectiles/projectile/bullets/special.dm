@@ -62,7 +62,7 @@
 
 /obj/projectile/bullet/compound/on_hit(atom/target, blocked = FALSE)
 	. = ..()
-	if(iskindred(target) || isghoul(target) || iscathayan(target) || isgarou(target) || iswerewolf(target))
+	if(issupernatural(target)
 		var/mob/living/L = target
 		L.adjustFireLoss(supernaturalbonus)
 		to_chat(L, span_warning("You feel the round burning as it hits you!"))
