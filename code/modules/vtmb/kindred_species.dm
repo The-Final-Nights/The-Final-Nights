@@ -30,6 +30,7 @@
 	burnmod = 2
 	punchdamagelow = 10
 	punchdamagehigh = 20
+	exotic_blood = /datum/reagent/blood/vitae
 	dust_anim = "dust-h"
 	var/datum/vampire_clan/clan
 	var/list/datum/discipline/disciplines = list()

@@ -18,7 +18,6 @@
 	var/blood_type = "O-"
 	var/labelled = FALSE
 	var/amount_of_bloodpoints = 2
-	var/vitae = FALSE
 
 /obj/item/reagent_containers/blood/Initialize(mapload)
 	. = ..()
@@ -33,6 +32,9 @@
 	update_appearance()
 
 /obj/item/reagent_containers/blood/is_drainable()
+	return TRUE
+
+/obj/item/reagent_containers/blood/is_drawable(mob/user, allowmobs)
 	return TRUE
 
 /obj/item/reagent_containers/blood/update_appearance(updates)
@@ -54,11 +56,12 @@
 
 /// Handles updating the container when the reagents change.
 /obj/item/reagent_containers/blood/on_reagent_change(datum/reagents/holder, ...)
-	var/datum/reagent/blood/B = holder.has_reagent(/datum/reagent/blood)
+	var/datum/reagent/blood/B = (holder.has_reagent(/datum/reagent/blood) || holder.has_reagent(/datum/reagent/blood/vitae))
 	if(B && B.data && B.data["blood_type"])
 		blood_type = B.data["blood_type"]
 	else
 		blood_type = null
+	update_name()
 	return ..()
 
 /obj/item/reagent_containers/blood/update_name(updates)
@@ -97,11 +100,11 @@
 
 	playsound(M.loc, 'sound/items/drink.ogg', 50, TRUE)
 	update_appearance()
-	if(ishumanbasic(M) || (isghoul(M) && !vitae))
+	if(ishumanbasic(M) || (isghoul(M) && !reagents.has_reagent(/datum/reagent/blood/vitae)))
 		to_chat(M, span_notice("That didn't taste very good..."))
-		M.adjust_disgust(DISGUST_LEVEL_DISGUSTED)
+		M.adjust_disgust(DISGUST_LEVEL_GROSS)
 		SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "toxic_food", /datum/mood_event/disgusting_food)
-	if(iskindred(M) || (isghoul(M) && vitae))
+	if(iskindred(M) || (isghoul(M) && reagents.has_reagent(/datum/reagent/blood/vitae)))
 		M.bloodpool = min(M.maxbloodpool, M.bloodpool+amount_of_bloodpoints)
 		M.adjustBruteLoss(-20, TRUE)
 		M.adjustFireLoss(-20, TRUE)
@@ -140,12 +143,18 @@
 /obj/item/reagent_containers/blood/vitae
 	name = "\improper vampire vitae pack (full)"
 	amount_of_bloodpoints = 4
-	vitae = TRUE
+	blood_type = null
 
 /obj/item/reagent_containers/blood/vitae/Initialize(mapload)
-	if(mapload)
-		blood_type = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-")
-	return ..()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/blood/vitae, 200,
+	list("donor" = null,
+		"viruses" = null,
+		"blood_DNA" = null,
+		"blood_type" = pick("A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"),
+		"resistances" = null,
+		"trace_chem" = null))
+	update_appearance()
 
 /obj/item/reagent_containers/blood/random
 

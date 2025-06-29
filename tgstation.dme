@@ -3629,6 +3629,7 @@
 #include "code\modules\wod13\quirks.dm"
 #include "code\modules\wod13\stonks.dm"
 #include "code\modules\wod13\umbra.dm"
+#include "code\modules\wod13\vitae.dm"
 #include "code\modules\wod13\wallcode.dm"
 #include "code\modules\wod13\witness.dm"
 #include "code\modules\wod13\za_rozziu.dm"
