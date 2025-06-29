@@ -86,7 +86,7 @@
 	var/matrix/ntransform = matrix(trans.transform) //aka transform.Copy()
   
 	if(trans.transformation_blocked > 0)
-		to_chat(trans, "You can't seem to focus enough to transform!")
+		to_chat(trans, span_notice("You can't seem to focus enough to transform!"))
 		return
 	if(trans.auspice.rage == 0 && form != trans.auspice.base_breed)
 		to_chat(trans, "Not enough rage to transform into anything but [trans.auspice.base_breed].")
