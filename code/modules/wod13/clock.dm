@@ -15,6 +15,10 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	cost = 50
 
+/obj/item/cockclock/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 50, "watch", FALSE)
+
 /obj/item/cockclock/examine(mob/user)
 	. = ..()
 	to_chat(user, "<b>[SScity_time.timeofnight]</b>")

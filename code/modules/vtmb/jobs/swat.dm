@@ -18,10 +18,8 @@
 	if(!ishuman(owner.current))
 		return
 	H.equipOutfit(swat_outfit)
-	if(H.clane)
-		H.remove_overlay(H.clane.accessories_layers[H.clane.current_accessory])
-		qdel(H.clane)
 	H.set_species(/datum/species/human)
+	H.set_clan(null)
 	H.generation = 13
 	H.lockpicking = 5
 	H.physique = 4
@@ -31,7 +29,6 @@
 		if(A.vampiric)
 			A.Remove(H)
 	H.thaumaturgy_knowledge = FALSE
-	QDEL_NULL(H.clane)
 	var/obj/item/organ/eyes/NV = new()
 	NV.Insert(H, TRUE, FALSE)
 

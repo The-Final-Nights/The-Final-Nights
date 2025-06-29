@@ -100,7 +100,7 @@
 	check_flags = NONE
 	var/mob/living/carbon/human/host
 
-/datum/action/zombieinfo/Trigger()
+/datum/action/zombieinfo/Trigger(trigger_flags)
 	if(host)
 		var/dat = {"
 			<style type="text/css">
@@ -186,7 +186,6 @@
 	..()
 	C.skin_tone = "albino"
 	C.hairstyle = "Bald"
-	C.unique_body_sprite = "rotten2"
 	C.base_body_mod = ""
 	C.update_body_parts()
 	C.update_body(0)
@@ -194,6 +193,7 @@
 	var/datum/action/zombieinfo/infor = new()
 	infor.host = C
 	infor.Grant(C)
+	C.set_body_sprite("rotten2")
 
 	C.maxHealth = 300 //tanky
 	C.health = 300

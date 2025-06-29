@@ -288,7 +288,7 @@
 				var/mob/living/carbon/human/vampire = target
 				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
 					is_wyrm = 1
-				if ((vampire.clane?.name == CLAN_BAALI) || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
+				if ((vampire.clan?.name == CLAN_BAALI) || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
 					is_wyrm = 1
 			if (isgarou(target) || iswerewolf(target))
 				var/mob/living/wolf = target
