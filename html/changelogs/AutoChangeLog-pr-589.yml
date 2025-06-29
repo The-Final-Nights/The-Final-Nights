@@ -1,5 +1,0 @@
-author: "XeonMations"
-delete-after: True
-changes:
-  - refactor: "Refactored Clan code, body model code, and alternative body sprite code."
-  - bugfix: "Kuei-jin can now rot or ash on death according to their age."
