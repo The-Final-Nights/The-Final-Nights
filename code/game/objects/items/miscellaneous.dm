@@ -398,6 +398,10 @@
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "mixedbouquet"
 
+/obj/item/bouquet/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 100, "bouquet", FALSE)
+
 /obj/item/bouquet/sunflower
 	name = "sunflower bouquet"
 	desc = "A bright bouquet of sunflowers."

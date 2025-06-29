@@ -275,6 +275,7 @@
 /datum/action/gift/sense_wyrm/Trigger(trigger_flags)
 	. = ..()
 
+
 	var/datum/atom_hud/sense_wyrm_hud = GLOB.huds[DATA_HUD_SENSEWYRM]
 	var/mob/living/simple_animal/werewolf/theurge = owner
 	var/mob/living/carbon/human/homid = theurge.transformator.human_form?.resolve()
