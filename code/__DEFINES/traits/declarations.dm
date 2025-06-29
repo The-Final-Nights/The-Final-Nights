@@ -206,8 +206,7 @@
 #define TRAIT_UNMASQUERADE		"unmasquerade"	//For tzi clothing
 #define TRAIT_NONMASQUERADE		"nonmasquerade"	//For tzi mods
 #define TRAIT_GUNFIGHTER        "gunfighter"    //Halves firing delay and cooldown between burst fire shots
-#define TRAIT_WARRIOR			"warrior"
-
+#define TRAIT_WARRIOR           "warrior"       //Lowers melee attack delay.
 /// Makes gambling incredibly effective, and causes random beneficial events to happen for the mob.
 #define TRAIT_SUPERNATURAL_LUCK	"supernatural_luck"
 /// Lets the mob block projectiles like bullets using only their hands.

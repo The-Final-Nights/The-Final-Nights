@@ -468,7 +468,6 @@
 	masquerade_violating = TRUE
 	is_iron = FALSE
 
-
 /obj/item/melee/vampirearms/knife/gangrel/lasombra
 	name = "shadow tentacle"
 	force = 20
@@ -477,8 +476,6 @@
 	block_chance = 0
 	icon_state = "lasombra"
 	masquerade_violating = TRUE
-
-
 
 /obj/item/melee/touch_attack/werewolf
 	name = "\improper falling touch"
@@ -521,6 +518,10 @@
 /obj/item/melee/vampirearms/knife/gangrel/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
+		src.attack_speed = CLICK_CD_MELEE * 0.5
+	else
+		src.attack_speed = CLICK_CD_MELEE
 
 /obj/item/melee/vampirearms/chainsaw
 	name = "chainsaw"
@@ -925,6 +926,14 @@
 	bare_wound_bonus = 0
 	resistance_flags = FIRE_PROOF
 	masquerade_violating = TRUE
+
+/obj/item/melee/vampirearms/tzimisce/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
+	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
+		src.attack_speed = CLICK_CD_MELEE * 0.5
+	else
+		src.attack_speed = CLICK_CD_MELEE
 
 /obj/item/melee/vampirearms/tzimisce/shock/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)
