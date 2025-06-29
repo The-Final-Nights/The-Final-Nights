@@ -363,6 +363,13 @@
 	slowdown = 1
 	component_type = /datum/component/storage/concrete/vtm/duffel
 
+/obj/item/storage/backpack/duffelbag/military
+	name = "military backpack"
+	desc = "A large backpack for holding extra things."
+	icon_state = "ert_security"
+	inhand_icon_state = "securitypack"
+	slowdown = 0
+
 //obj/item/storage/backpack/duffelbag/ComponentInitialize()
 //	. = ..()
 //	var/datum/component/storage/STR = GetComponent(/datum/component/storage)

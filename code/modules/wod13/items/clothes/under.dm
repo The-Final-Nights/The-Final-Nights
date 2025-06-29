@@ -130,6 +130,12 @@
 	desc = "Some military clothes."
 	icon_state = "milfatigues"
 
+/obj/item/clothing/under/vampire/military_fatigues/valkyrie
+	name = "military fatigues"
+	desc = "Some military clothes."
+	icon_state = "milfatigues"
+	armor = list(MELEE = 30, BULLET = 30, LASER = 0,ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 0, WOUND = 25) //Kevlar weave, plus Valkyrie tech/magic.
+
 /obj/item/clothing/under/vampire/sceneleopard
 	name = "revealing outfit"
 	desc = "You never thought you needed spaghetti straps."

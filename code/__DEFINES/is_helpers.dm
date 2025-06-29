@@ -85,6 +85,16 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isghoul(A) (is_species(A,/datum/species/ghoul))
 #define isgarou(A) (is_species(A,/datum/species/garou))
 
+GLOBAL_LIST_INIT(supernatural_species, typecacheof(list(
+	/datum/species/kindred,
+	/datum/species/kuei_jin,
+	/datum/species/ghoul,
+	/datum/species/garou,
+	/mob/living/simple_animal/werewolf
+	))
+
+#define issupernatural(A) (is_type_in_typecache(A, GLOB.supernatural_species))
+
 //more carbon mobs
 
 #define iswerewolf(A) (istype(A, /mob/living/simple_animal/werewolf))

@@ -2064,3 +2064,16 @@
 			to_chat(src, "<span class='warning'>You fail to climb up.</span>")
 
 	return
+
+/mob/living/proc/auspice_drain()
+	if(transformation_blocked == TRUE)
+		if(auspice.rage > 0)
+			adjust_rage(-1, src, TRUE)
+			to_chat(src, span_userdanger("The noise makes it hard to concentrate, even on your anger."))
+		else
+			to_chat(src, span_userdanger("Your head swims. You can barely think, let alone feel anger."))
+		addtimer(CALLBACK(src, PROC_REF(auspice_drain)), 1 SECONDS)
+
+/mob/living/proc/transformation_unblock()
+		transformation_blocked = FALSE
+		to_chat(src, span_userdanger("You regain your focus, you can transform again!")

@@ -186,6 +186,17 @@
 	armor = list(MELEE = 60, BULLET = 60, LASER = 60, ENERGY = 60, BOMB = 40, BIO = 0, RAD = 0, FIRE = 20, ACID = 40, WOUND = 25)
 	masquerade_violating = TRUE
 
+/obj/item/clothing/head/vampire/army/valkyrie
+	name = "SOF Helmet"
+	desc = "Special Forces Helmet. Highly classified."
+	icon_state = "viet"
+	flags_inv = HIDEEARS|HIDEHAIR
+	clothing_flags = NO_HAT_TRICKS|SNUG_FIT
+	dynamic_hair_suffix = ""
+	dynamic_fhair_suffix = ""
+	armor = list(MELEE = 90, BULLET = 90, LASER = 60, ENERGY = 60, BOMB = 40, BIO = 0, RAD = 0, FIRE = 20, ACID = 40, WOUND = 35)
+	masquerade_violating = FALSE
+
 /obj/item/clothing/head/vampire/hardhat
 	name = "construction helmet"
 	desc = "A thermoplastic hard helmet used to protect the head from injury."

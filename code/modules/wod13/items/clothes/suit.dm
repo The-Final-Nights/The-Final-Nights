@@ -393,6 +393,14 @@
 //	clothing_traits = list(TRAIT_UNMASQUERADE)
 	masquerade_violating = TRUE
 
+/obj/item/clothing/suit/vampire/vest/army/valkyrie
+	name = "SOF Vest"
+	desc = "Special Forces Equipment. Highly classified."
+	icon_state = "army"
+	w_class = WEIGHT_CLASS_BULKY
+	armor = list(MELEE = 110, BULLET = 110, LASER = 10, ENERGY = 10, BOMB = 80, BIO = 0, RAD = 0, FIRE = 45, ACID = 10, WOUND = 45) //Heavy kit for heavy duties.
+	masquerade_violating = FALSE
+
 /obj/item/clothing/suit/vampire/eod
 	name = "EOD suit"
 	desc = "Demoman equipment. Provides best protection against nearly everything."

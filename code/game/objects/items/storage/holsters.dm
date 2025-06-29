@@ -138,3 +138,17 @@
 		/obj/item/ammo_casing, // For shotgun shells, rockets, launcher grenades, and a few other things.
 		/obj/item/grenade, // All regular grenades, the big grenade launcher fires these.
 		))
+
+/obj/item/storage/belt/holster/valkyrie
+	name = "SOF holster"
+	desc = "A military grade holster."
+
+/obj/item/storage/belt/holster/valkyrie/ComponentInitialize()
+	. = ..()
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	STR.max_items = 4
+	STR.max_w_class = WEIGHT_CLASS_NORMAL
+	STR.set_holdable(list(
+		/obj/item/gun/ballistic,
+		/obj/item/ammo_box/magazine
+		))
