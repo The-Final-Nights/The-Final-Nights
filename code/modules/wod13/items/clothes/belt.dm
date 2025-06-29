@@ -44,3 +44,9 @@
 	new /obj/item/restraints/handcuffs(src)
 	new /obj/item/ammo_box/magazine/vamp556(src)
 	new /obj/item/ammo_box/magazine/vamp556(src)
+
+/obj/item/storage/belt/holster/detective/vampire/endron
+
+/obj/item/storage/belt/holster/detective/vampire/endron/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/vampire/glock19(src)
+	new /obj/item/ammo_box/magazine/glock9mm(src)

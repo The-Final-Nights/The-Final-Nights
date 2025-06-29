@@ -11,7 +11,7 @@
 	mutantbrain = /obj/item/organ/brain/vampire //to prevent brain transplant surgery
 	mutanteyes = /obj/item/organ/eyes/night_vision/zombie
 	brutemod = 0.5
-	heatmod = 1	
+	heatmod = 1
 	burnmod = 2
 	punchdamagelow = 10
 	punchdamagehigh = 20
@@ -218,7 +218,7 @@
 	if(HAS_TRAIT(H, TRAIT_UNMASQUERADE))
 		if(H.CheckEyewitness(H, H, 7, FALSE))
 			H.AdjustMasquerade(-1)
-	
+
 	if(H.is_face_visible())
 		if (H.CheckEyewitness(H, H, 5, FALSE)) //it's san fran, there are crackheads everywhere
 			H.AdjustMasquerade(-1)

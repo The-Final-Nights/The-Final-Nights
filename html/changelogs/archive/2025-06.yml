@@ -51,5 +51,10 @@
   XeonMations:
   - bugfix: fixed vampires not being able to latejoin as bruisers
 2025-06-29:
+  XeonMations:
+  - refactor: Refactored Clan code, body model code, and alternative body sprite code.
+  - bugfix: Kuei-jin can now rot or ash on death according to their age.
   darkincarnate:
   - rscadd: rich suits+suitskirts to shops
+  - rscadd: endron security holster
+  - qol: ID sprite changes
