@@ -14,7 +14,7 @@
 	var/power_mod = 1
 	var/list/spans = list("colossus","yell")
 	var/speech_sound = 'sound/magic/clockwork/invoke_general.ogg'
-	var/speech_volume = 300
+	var/speech_volume = 80
 	var/speech_vary = TRUE
 	var/reverb = FALSE
 
@@ -44,7 +44,7 @@
 		reverb = TRUE
 	else
 		speech_sound = 'sound/magic/clockwork/invoke_general.ogg'
-		speech_volume = 200
+		speech_volume = 80
 		speech_vary = TRUE
 		reverb = FALSE
 	playsound(get_turf(user), speech_sound, speech_volume, speech_vary, 5, use_reverb = reverb)
