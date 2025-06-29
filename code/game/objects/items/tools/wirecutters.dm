@@ -4,6 +4,7 @@
 	icon_state = "fixer"
 	icon = 'code/modules/wod13/items.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon_state = "fixer"
 	inhand_icon_state = "cutters"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
@@ -82,15 +83,13 @@
 	if(!iskindred(target))
 		return
 	if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
-		to_chat(usr, span_warning("[user] can't pull out the fangs of [target] because they are already deformed!"))
+		visible_message(usr, span_warning("[user] can't pull out the fangs of [target] because they are already deformed!"))
 	else
-		to_chat(span_warning("[user] takes [src] straight to the [target]'s Fangs!"))
-		to_chat(usr, span_warning ("You take [src] straight to the [target]'s Fangs!"))
+		user.visible_message(span_warning("[user] takes [src] straight to the [target]'s Fangs!"), span_warning("You take [src] straight to the [target]'s Fangs!"))
 		if(!do_after(user, 30, target))
 			return
 		user.do_attack_animation(target)
-		to_chat(span_warning("[user] rips out [target]'s fangs!"))
-		to_chat(usr, span_warning("You rip out [target]'s fangs!"))
+		user.visible_message(span_warning("[user] rips out [target]'s fangs!"), span_warning("You rip out [target]'s fangs!"))
 		target.emote("scream")
 		if (permanent == TRUE)
 			target.apply_status_effect(STATUS_EFFECT_SEVERE_BABY_TEETH)

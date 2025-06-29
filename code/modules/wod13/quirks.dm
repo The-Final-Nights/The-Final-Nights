@@ -106,7 +106,7 @@ Dancer
 	value = -4
 	gain_text = "<span class='warning'>You lost your fangs.</span>"
 	lose_text = "<span class='notice'>You regrow your fangs.</span>"
-	allowed_species = list("Vampire", "Kuei-Jin")
+	allowed_species = list("Vampire")
 
 /datum/quirk/lazy
 	name = "Lazy"
