@@ -28,7 +28,8 @@
 	perform(user=user)
 
 /obj/effect/proc_holder/spell/voice_of_god/perform(list/targets, recharge = 1, mob/user = usr)
-	command = input(user, "Speak with the Voice of Domination", "Command") as null|text
+	command = tgui_input_text(user, "Enter a powerful and dynamic RP focused command, using your character's own voice. Clarity and Subtly go a long way.", "Dominate Mass Command Say:", "Cease, and hear my words!")
+
 	if(QDELETED(src) || QDELETED(user))
 		return
 	if(!command)
@@ -44,7 +45,7 @@
 		reverb = TRUE
 	else
 		speech_sound = 'sound/magic/clockwork/invoke_general.ogg'
-		speech_volume = 200
+		speech_volume = 500
 		speech_vary = TRUE
 		reverb = FALSE
 	playsound(get_turf(user), speech_sound, speech_volume, speech_vary, 5, use_reverb = reverb)
