@@ -2735,6 +2735,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/i = text2num(href_list["upgradediscipline"])
 
 						var/discipline_level = discipline_levels[i]
+						var/max_discipline_level = max(13 - generation clamp(1, 10)
 						var/cost = discipline_level * 7
 						if (discipline_level <= 0)
 							cost = 10
@@ -2750,7 +2751,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 						player_experience -= cost
 						experience_used_on_character += cost
-						discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
+						discipline_levels[i] = min(max_discipline_level, max(1, discipline_levels[i] + 1))
 
 					if(pref_species.id == "kuei-jin")
 						var/a = text2num(href_list["upgradechidiscipline"])
