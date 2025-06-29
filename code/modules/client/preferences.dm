@@ -2745,7 +2745,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						else if (clan.clan_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 5
 
-						if ((player_experience < cost) || (discipline_level >= 5))
+						if ((player_experience < cost) || (discipline_level >= max_discipline_level))
 							return
 
 						player_experience -= cost
