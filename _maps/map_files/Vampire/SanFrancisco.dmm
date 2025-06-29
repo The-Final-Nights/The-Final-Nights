@@ -1897,10 +1897,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/structure/chair/sofa/old/right{
-	dir = 1
-	},
-/turf/open/floor/plating/vampcarpet,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "avQ" = (
 /obj/structure/table/wood,
@@ -6600,11 +6597,11 @@
 /area/vtm/fishermanswharf)
 "bwR" = (
 /obj/structure/vampdoor{
-	lock_id = "milleniumCommon";
+	lock_id = "primVentrue";
 	locked = 1
 	},
-/obj/effect/turf_decal/siding/thinplating/dark,
-/turf/open/floor/plating/vampplating,
+/obj/effect/turf_decal/siding/white,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "bxd" = (
 /turf/open/floor/mineral/plastitanium,
@@ -7639,11 +7636,18 @@
 /area/vtm/clinic/haven)
 "bJS" = (
 /obj/structure/closet,
-/obj/item/clothing/under/vampire/guard,
-/obj/item/restraints/handcuffs,
-/obj/item/reagent_containers/spray/pepper,
-/obj/item/hand_labeler,
-/turf/open/floor/plating/vampplating,
+/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/reagent_containers/food/condiment/rice,
+/obj/item/reagent_containers/food/condiment/rice,
+/obj/item/reagent_containers/food/condiment/rice,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "bJU" = (
 /turf/open/floor/plating/asphalt,
@@ -12654,17 +12658,6 @@
 /obj/structure/table/wood/fancy/royalblue,
 /turf/open/floor/carpet/royalblue,
 /area/vtm/clinic/haven)
-"cSr" = (
-/obj/machinery/microwave{
-	desc = "Cooks and boils stuff, somehow.";
-	pixel_y = 13;
-	pixel_x = -1
-	},
-/obj/structure/table,
-/turf/open/floor/plating/toilet{
-	icon_state = "toilet4"
-	},
-/area/vtm/jazzclub)
 "cSu" = (
 /obj/structure/chair/wood/wings,
 /turf/open/floor/plating/parquetry/rich,
@@ -13262,7 +13255,7 @@
 /obj/effect/decal/painting{
 	pixel_y = 32
 	},
-/turf/open/floor/carpet/royalblack,
+/turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "daA" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -15697,7 +15690,10 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/cabaret)
 "dEW" = (
-/obj/structure/bookcase/random/reference,
+/obj/structure/table/wood,
+/obj/item/phone_book,
+/obj/item/storage/photo_album,
+/obj/item/camera,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/ventrue)
 "dEX" = (
@@ -17378,8 +17374,9 @@
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/museum)
 "ebg" = (
-/obj/structure/toilet{
-	pixel_y = 16
+/obj/structure/sink{
+	dir = 8;
+	pixel_x = 11
 	},
 /turf/open/floor/plating/circled{
 	icon_state = "circle8"
@@ -19919,7 +19916,7 @@
 /obj/structure/chair/comfy/black{
 	dir = 8
 	},
-/turf/open/floor/carpet/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "eGm" = (
 /obj/structure/vampdoor/old{
@@ -20860,7 +20857,10 @@
 	dir = 4;
 	color = "#636363"
 	},
-/turf/open/floor/plating/granite/black,
+/obj/structure/chair/comfy/black{
+	dir = 8
+	},
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "eSo" = (
 /obj/structure/table/wood,
@@ -23573,7 +23573,7 @@
 /area/vtm/pacificheights/community)
 "fyW" = (
 /obj/structure/table/glass,
-/turf/open/floor/carpet/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "fzd" = (
 /obj/effect/turf_decal/weather/dirt{
@@ -29895,13 +29895,8 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/financialdistrict)
 "gWv" = (
-/obj/structure/closet/crate/freezer/fridge,
-/obj/item/storage/box/donkpockets/donkpocketpizza,
-/obj/item/storage/box/donkpockets/donkpocketteriyaki,
-/obj/item/storage/box/donkpockets,
-/turf/open/floor/plating/toilet{
-	icon_state = "toilet4"
-	},
+/obj/structure/table,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "gWy" = (
 /turf/open/floor/plating/vampgrass,
@@ -29993,7 +29988,7 @@
 /area/vtm/interior/shop)
 "gXq" = (
 /obj/structure/chair/comfy/black,
-/turf/open/floor/carpet/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "gXs" = (
 /obj/manholedown,
@@ -30417,7 +30412,7 @@
 /obj/machinery/button/curtain{
 	id = 2004
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "hdn" = (
 /obj/structure/foodrack,
@@ -32106,9 +32101,16 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights)
 "hAs" = (
-/obj/structure/table,
-/obj/vampire_computer,
-/turf/open/floor/plating/vampplating,
+/obj/structure/closet/crate/freezer/fridge,
+/obj/item/storage/fancy/egg_box,
+/obj/item/storage/fancy/egg_box,
+/obj/item/reagent_containers/food/condiment/milk{
+	name = "full cream milk"
+	},
+/obj/item/reagent_containers/food/condiment/milk{
+	name = "full cream milk"
+	},
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "hAN" = (
 /obj/structure/sink{
@@ -32511,9 +32513,13 @@
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/f4)
 "hEK" = (
-/obj/structure/chair/office/blue,
-/mob/living/carbon/human/npc/guard,
-/turf/open/floor/plating/vampplating,
+/obj/structure/closet/crate/freezer/fridge,
+/obj/item/storage/box/ingredients/american,
+/obj/item/storage/box/ingredients/carnivore,
+/obj/item/storage/box/ingredients/fruity,
+/obj/item/storage/box/ingredients/grains,
+/obj/item/storage/box/ingredients/vegetarian,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "hET" = (
 /obj/structure/table,
@@ -32561,7 +32567,7 @@
 /obj/item/storage/secure/briefcase{
 	pixel_y = -10
 	},
-/turf/open/floor/plating/parquetry,
+/turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/ventrue)
 "hGf" = (
 /obj/structure/railing,
@@ -32614,7 +32620,7 @@
 	dir = 6;
 	color = "#636363"
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "hGR" = (
 /obj/machinery/light/small/broken{
@@ -33350,11 +33356,11 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/baali)
 "hQU" = (
-/obj/structure/closet/crate/bin,
-/obj/structure/noticeboard{
+/obj/machinery/griddle,
+/obj/machinery/light{
 	pixel_y = 32
 	},
-/turf/open/floor/plating/vampcarpet,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "hRf" = (
 /obj/effect/decal/litter,
@@ -34224,8 +34230,8 @@
 	dir = 1;
 	color = "#636363"
 	},
-/obj/structure/chair/comfy,
-/turf/open/floor/plating/granite/black,
+/obj/structure/chair/comfy/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "ibL" = (
 /obj/effect/decal/support,
@@ -35686,10 +35692,8 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/ghetto/old)
 "ivu" = (
-/obj/structure/chair/sofa/old/left{
-	dir = 1
-	},
-/turf/open/floor/plating/vampcarpet,
+/obj/effect/decal/wallpaper/stone,
+/turf/closed/wall/vampwall/rich,
 /area/vtm/jazzclub)
 "ivz" = (
 /obj/structure/chair/wood{
@@ -36010,6 +36014,14 @@
 	light_power = 0.45;
 	name = "dim light fixture";
 	dir = 4
+	},
+/obj/item/reagent_containers/food/condiment/saltshaker{
+	pixel_y = 10;
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/food/condiment/peppermill{
+	pixel_y = 10;
+	pixel_x = 5
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
@@ -39110,7 +39122,9 @@
 /obj/item/pen/fourcolor{
 	pixel_y = 7
 	},
-/obj/structure/table/wood,
+/obj/item/pen/fountain{
+	pixel_y = 8
+	},
 /turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/ventrue)
 "jkY" = (
@@ -40169,7 +40183,7 @@
 	dir = 10;
 	color = "#636363"
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "jwO" = (
 /obj/structure/flora/ausbushes/brflowers,
@@ -43831,18 +43845,13 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "krS" = (
-/obj/structure/vampdoor/wood{
-	dir = 8;
-	lock_id = "primVentrue";
-	lockpick_difficulty = 16;
-	name = "\improper board chair's study";
-	locked = 1
+/obj/machinery/light/prince{
+	light_power = 0.45;
+	name = "dim light fixture";
+	dir = 1;
+	pixel_y = -7
 	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4;
-	color = "#8C6240"
-	},
-/turf/open/floor/plating/parquetry,
+/turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/ventrue)
 "krV" = (
 /obj/effect/turf_decal/siding/wood,
@@ -45110,10 +45119,15 @@
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/endron_facility/restricted)
 "kIs" = (
-/obj/structure/mopbucket,
-/obj/item/reagent_containers/glass/bucket,
-/obj/item/mop,
-/obj/item/pushbroom,
+/obj/structure/table/wood/fancy/royalblue,
+/obj/item/reagent_containers/food/condiment/saltshaker{
+	pixel_y = 10;
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/food/condiment/peppermill{
+	pixel_y = 10;
+	pixel_x = 5
+	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
 "kIv" = (
@@ -45275,8 +45289,7 @@
 "kKW" = (
 /obj/structure/vampdoor/wood/jazz_club{
 	dir = 1;
-	name = "\improper door";
-	locked = 1
+	name = "\improper door"
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
@@ -48017,7 +48030,7 @@
 	id = 29;
 	pixel_y = 25
 	},
-/turf/open/floor/plating/parquetry,
+/turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/ventrue)
 "luu" = (
 /obj/structure/table/wood,
@@ -48322,6 +48335,9 @@
 /obj/effect/turf_decal/siding/wood{
 	color = "#9a704a";
 	dir = 1
+	},
+/obj/structure/curtain/cloth/fancy/mechanical/luxurious{
+	id = 2004
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/ventrue)
@@ -49422,7 +49438,7 @@
 	dir = 9;
 	color = "#636363"
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "lLc" = (
 /turf/closed/wall/vampwall/market/low/window,
@@ -50262,8 +50278,12 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/ghetto)
 "lVk" = (
-/turf/open/floor/carpet/black,
-/area/vtm/interior/millennium_tower/ventrue)
+/obj/structure/filingcabinet/chestdrawer/wheeled,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/plating/vampcarpet,
+/area/vtm/interior/theatre)
 "lVs" = (
 /obj/structure/chair{
 	dir = 4
@@ -51812,7 +51832,7 @@
 	})
 "mpz" = (
 /obj/structure/table/abductor,
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "mpD" = (
 /obj/machinery/light{
@@ -52097,7 +52117,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/open/floor/plating/vampplating,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "mtU" = (
 /obj/structure/table,
@@ -53063,14 +53083,11 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/baali)
 "mET" = (
-/obj/effect/turf_decal/siding/thinplating/dark{
-	dir = 1
-	},
 /obj/structure/vampdoor/glass{
 	locked = 1;
 	lock_id = "milleniumCommon"
 	},
-/turf/open/floor/plating/vampplating,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "mEX" = (
 /obj/effect/decal/wallpaper/blue,
@@ -53677,17 +53694,7 @@
 /area/vtm/jazzclub)
 "mLu" = (
 /obj/structure/table/wood,
-/obj/item/storage/fancy/cigarettes/cigars{
-	pixel_y = 12
-	},
-/obj/item/storage/fancy/cigarettes/cigars{
-	pixel_y = 6
-	},
-/obj/item/storage/box/matches{
-	pixel_y = 11;
-	pixel_x = -3
-	},
-/turf/open/floor/carpet/royalblack,
+/turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "mLw" = (
 /obj/effect/decal/litter,
@@ -54186,7 +54193,7 @@
 	name = "\improper door";
 	locked = 1
 	},
-/turf/open/floor/plating/vampcarpet,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "mRd" = (
 /obj/structure/table,
@@ -54289,7 +54296,17 @@
 /area/vtm/graveyard)
 "mSr" = (
 /obj/structure/table/wood,
-/turf/open/floor/carpet/royalblack,
+/obj/item/storage/fancy/cigarettes/cigars{
+	pixel_y = 12
+	},
+/obj/item/storage/fancy/cigarettes/cigars{
+	pixel_y = 6
+	},
+/obj/item/storage/box/matches{
+	pixel_y = 11;
+	pixel_x = -3
+	},
+/turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "mSu" = (
 /obj/machinery/light{
@@ -56393,7 +56410,12 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/vjanitor)
 "nrS" = (
-/obj/structure/bookcase/random/kindred,
+/obj/structure/table/wood,
+/obj/machinery/fax/camarilla{
+	pixel_y = 6;
+	fax_name = "Crown Blue Records";
+	fax_id = "ventrue"
+	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/ventrue)
 "nrX" = (
@@ -59095,8 +59117,11 @@
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/bianchiBank)
 "nWD" = (
-/turf/open/floor/carpet/royalblack,
-/area/vtm/interior/millennium_tower/ventrue)
+/obj/structure/mopbucket,
+/obj/item/reagent_containers/glass/bucket,
+/obj/item/mop,
+/turf/open/floor/plating/bacotell,
+/area/vtm/jazzclub)
 "nWH" = (
 /obj/structure/table/wood,
 /obj/structure/extinguisher_cabinet{
@@ -60160,7 +60185,7 @@
 /obj/item/pen/fourcolor{
 	pixel_y = 7
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "ojl" = (
 /obj/item/kirbyplants/random,
@@ -60558,6 +60583,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/structure/chair/office/blue{
+	dir = 8
+	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/theatre)
 "omW" = (
@@ -60701,10 +60729,9 @@
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/millennium_tower/f2)
 "opq" = (
-/obj/machinery/light/prince{
-	light_power = 0.45;
-	name = "dim light fixture";
-	dir = 8
+/obj/structure/toilet{
+	dir = 8;
+	pixel_y = 11
 	},
 /turf/open/floor/plating/circled{
 	icon_state = "circle8"
@@ -61565,6 +61592,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior/staff)
 "ozt" = (
+/obj/machinery/photocopier,
 /obj/machinery/light/prince{
 	light_power = 0.45;
 	name = "dim light fixture";
@@ -63050,10 +63078,13 @@
 	fire_controled = 1
 	})
 "oPU" = (
-/obj/effect/turf_decal/siding/white,
-/turf/open/floor/plating/toilet{
-	icon_state = "toilet4"
+/obj/structure/table,
+/obj/structure/sink{
+	pixel_y = -1;
+	dir = 4;
+	icon_state = "basin"
 	},
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "oPV" = (
 /obj/structure/railing,
@@ -64824,7 +64855,7 @@
 	name = "dim light fixture"
 	},
 /obj/structure/bookcase/random,
-/turf/open/floor/carpet/royalblack,
+/turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "pms" = (
 /obj/effect/decal/bordur{
@@ -65997,13 +66028,9 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/setite)
 "pzZ" = (
-/obj/machinery/light/prince{
-	light_power = 0.45;
-	name = "dim light fixture";
-	dir = 4
-	},
-/turf/open/openspace,
-/area/vtm/interior/millennium_tower/ventrue)
+/obj/structure/table/wood,
+/turf/open/floor/plating/parquetry,
+/area/vtm/jazzclub)
 "pAc" = (
 /obj/structure/chair/sofa/corp{
 	pixel_x = -7;
@@ -66514,7 +66541,9 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/hotel)
 "pFX" = (
-/obj/machinery/jukebox,
+/obj/machinery/jukebox{
+	can_be_unanchored = 1
+	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/jazzclub)
 "pGa" = (
@@ -69600,10 +69629,10 @@
 	dir = 8;
 	color = "#636363"
 	},
-/obj/structure/chair/comfy{
+/obj/structure/chair/comfy/black{
 	dir = 4
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "qpl" = (
 /obj/machinery/light/small{
@@ -70535,7 +70564,11 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/giovanni)
 "qAl" = (
-/turf/open/floor/plating/vampcarpet,
+/obj/structure/table,
+/obj/item/clothing/suit/apron/chef,
+/obj/item/kitchen/knife,
+/obj/item/clothing/head/chefhat,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "qAn" = (
 /obj/machinery/light/prince{
@@ -72573,14 +72606,6 @@
 	},
 /turf/open/openspace,
 /area/vtm/interior)
-"qXE" = (
-/obj/machinery/light/prince{
-	light_power = 0.45;
-	name = "dim light fixture";
-	dir = 8
-	},
-/turf/open/openspace,
-/area/vtm/interior/millennium_tower/ventrue)
 "qXV" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/effect/turf_decal/siding/wood,
@@ -72662,7 +72687,7 @@
 	dir = 5;
 	color = "#636363"
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "qYM" = (
 /obj/structure/railing/metal{
@@ -82668,7 +82693,7 @@
 /obj/structure/chair/comfy/black{
 	dir = 4
 	},
-/turf/open/floor/carpet/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "trk" = (
 /obj/structure/table/wood,
@@ -84329,12 +84354,7 @@
 /turf/open/floor/wood,
 /area/vtm/interior/oldchurch)
 "tLz" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 6
-	},
-/turf/open/floor/plating/toilet{
-	icon_state = "toilet4"
-	},
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "tLD" = (
 /obj/structure/table/glass,
@@ -84406,7 +84426,9 @@
 /area/vtm/interior/tzimisce_manor)
 "tMT" = (
 /obj/structure/table/wood,
-/obj/item/police_radio,
+/obj/item/police_radio{
+	pixel_y = 10
+	},
 /turf/open/floor/carpet,
 /area/vtm/interior/millennium_tower/ventrue)
 "tMU" = (
@@ -85296,16 +85318,10 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior)
 "tYm" = (
-/obj/structure/sink{
-	pixel_y = 16
-	},
-/obj/structure/mirror/directional/north{
-	pixel_y = 32
-	},
-/turf/open/floor/plating/circled{
-	icon_state = "circle8"
-	},
-/area/vtm/jazzclub)
+/obj/structure/table/wood/fancy/blue,
+/obj/item/newspaper,
+/turf/open/floor/carpet/blue,
+/area/vtm/interior/millennium_tower/ventrue)
 "tYp" = (
 /obj/structure/table/wood,
 /obj/item/newspaper,
@@ -87402,13 +87418,8 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm)
 "uzp" = (
-/obj/structure/table,
-/obj/effect/turf_decal/siding/white{
-	dir = 4
-	},
-/turf/open/floor/plating/toilet{
-	icon_state = "toilet4"
-	},
+/obj/machinery/griddle,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "uzv" = (
 /obj/structure/table/wood/fancy/red,
@@ -89963,7 +89974,14 @@
 /area/vtm/ghetto)
 "vfi" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/food/drinks/bottle/cognac,
+/obj/item/reagent_containers/food/drinks/bottle/cognac{
+	pixel_y = 6;
+	pixel_x = -6
+	},
+/obj/item/reagent_containers/food/drinks/bottle/whiskey{
+	pixel_x = 6;
+	pixel_y = 6
+	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "vft" = (
@@ -91390,9 +91408,9 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/forest)
 "vwj" = (
-/obj/structure/bookcase/random,
-/turf/open/floor/carpet/royalblack,
-/area/vtm/interior/millennium_tower/ventrue)
+/obj/structure/closet/crate/bin,
+/turf/open/floor/plating/bacotell,
+/area/vtm/jazzclub)
 "vwl" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -92394,7 +92412,7 @@
 	pixel_y = -7
 	},
 /obj/structure/bookcase/random,
-/turf/open/floor/carpet/royalblack,
+/turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/ventrue)
 "vIt" = (
 /obj/effect/decal/trash,
@@ -93818,12 +93836,10 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/shop)
 "vZk" = (
-/obj/structure/vampdoor/wood/theatre{
-	dir = 4;
-	name = "\improper offices"
-	},
-/turf/open/floor/plating/vampcarpet,
-/area/vtm/interior/theatre)
+/obj/structure/table/glass,
+/obj/item/papercutter,
+/turf/open/floor/plating/parquetry,
+/area/vtm/interior/millennium_tower/ventrue)
 "vZu" = (
 /obj/structure/fence/door,
 /obj/effect/turf_decal/siding/white,
@@ -94035,8 +94051,7 @@
 	},
 /obj/structure/vampdoor/wood/jazz_club{
 	dir = 4;
-	name = "\improper door";
-	locked = 1
+	name = "\improper door"
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
@@ -94370,11 +94385,10 @@
 	fire_controled = 1
 	})
 "wfW" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/open/floor/plating/vampcarpet,
-/area/vtm/interior/theatre)
+/obj/structure/table/glass,
+/obj/item/clipboard,
+/turf/open/floor/plating/parquetry,
+/area/vtm/interior/millennium_tower/ventrue)
 "wfY" = (
 /obj/structure/chair/sofa/corp/right{
 	dir = 1
@@ -95050,10 +95064,10 @@
 	dir = 2;
 	color = "#636363"
 	},
-/obj/structure/chair/comfy{
+/obj/structure/chair/comfy/black{
 	dir = 1
 	},
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/carpet/blue,
 /area/vtm/interior/millennium_tower/ventrue)
 "wpo" = (
 /obj/effect/decal/bordur,
@@ -95273,8 +95287,9 @@
 /turf/open/floor/plating/asphalt,
 /area/vtm/fishermanswharf)
 "wsa" = (
-/obj/machinery/mineral/equipment_vendor/fastfood/snacks,
-/turf/open/floor/plating/vampcarpet,
+/obj/structure/table,
+/obj/item/kitchen/rollingpin,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "wsb" = (
 /obj/structure/bloodextractor,
@@ -98580,11 +98595,16 @@
 	fire_controled = 1
 	})
 "xfm" = (
-/obj/structure/table,
-/obj/machinery/recharger{
-	pixel_y = 6
+/obj/structure/table/wood/fancy/royalblue,
+/obj/item/reagent_containers/food/condiment/peppermill{
+	pixel_y = 10;
+	pixel_x = 5
 	},
-/turf/open/floor/plating/vampplating,
+/obj/item/reagent_containers/food/condiment/saltshaker{
+	pixel_y = 10;
+	pixel_x = -5
+	},
+/turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
 "xfo" = (
 /obj/machinery/vamp/atm{
@@ -99330,7 +99350,7 @@
 	color = "#9a704a";
 	dir = 8
 	},
-/turf/open/floor/plating/vampcarpet,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "xos" = (
 /obj/item/bikehorn/rubberducky,
@@ -99793,8 +99813,12 @@
 /turf/closed/wall/vampwall/rich/old/low,
 /area/vtm/interior/strip)
 "xvs" = (
-/obj/machinery/mineral/equipment_vendor/fastfood/coffeevendor,
-/turf/open/floor/plating/vampcarpet,
+/obj/structure/table,
+/obj/machinery/reagentgrinder{
+	pixel_y = 15;
+	pixel_x = 4
+	},
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "xvy" = (
 /obj/effect/decal/cardboard,
@@ -100223,7 +100247,21 @@
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch/basement)
 "xAx" = (
-/turf/open/floor/plating/vampplating,
+/obj/structure/closet/crate/freezer,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/food/drinks/bottle/champagne{
+	name = "1989 Dom Pérignon"
+	},
+/obj/item/reagent_containers/food/drinks/bottle/champagne{
+	name = "1989 Dom Pérignon"
+	},
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "xAA" = (
 /obj/structure/table/wood/fancy/purple,
@@ -102220,10 +102258,11 @@
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
 "xXm" = (
-/obj/item/kirbyplants{
-	icon_state = "plant3"
+/obj/machinery/processor,
+/obj/structure/extinguisher_cabinet{
+	dir = 8
 	},
-/turf/open/floor/plating/vampcarpet,
+/turf/open/floor/plating/bacotell,
 /area/vtm/jazzclub)
 "xXn" = (
 /obj/structure/chair/comfy/beige{
@@ -192477,7 +192516,7 @@ gFl
 gFl
 gFl
 gFl
-gFl
+pPs
 gFl
 gFl
 gFl
@@ -192485,7 +192524,7 @@ omW
 gFl
 gFl
 gFl
-gFl
+pPs
 gFl
 gFl
 gFl
@@ -195034,7 +195073,7 @@ hnC
 ims
 eci
 mYc
-aGu
+kIs
 tXb
 kWI
 aGu
@@ -195294,7 +195333,7 @@ iYl
 aGu
 fuP
 iYl
-aGu
+kIs
 fuP
 iYl
 aGu
@@ -196568,7 +196607,7 @@ cKN
 wcJ
 fzQ
 xMa
-aGu
+xfm
 aGu
 xJZ
 xJZ
@@ -197340,7 +197379,7 @@ fzQ
 fzQ
 cmk
 aGu
-aGu
+kIs
 xJZ
 sBJ
 wsc
@@ -198110,7 +198149,7 @@ wbX
 wcJ
 fzQ
 xMa
-aGu
+kIs
 aGu
 xJZ
 sBJ
@@ -198882,7 +198921,7 @@ wcJ
 fzQ
 cmk
 gHb
-hnC
+pzZ
 hnC
 hDi
 tCE
@@ -198896,7 +198935,7 @@ hnC
 hnC
 hnC
 hnC
-kIs
+hnC
 eiL
 gcj
 gcj
@@ -199402,7 +199441,7 @@ vaO
 hnC
 eiL
 eiL
-cmk
+fno
 xor
 eiL
 fno
@@ -199657,13 +199696,13 @@ hHf
 dfu
 geL
 hnC
-cmk
+fno
 gWv
 oPU
-qAl
-qAl
+tLz
+vwj
 fno
-tYm
+fxs
 fxs
 cmk
 hnC
@@ -199914,11 +199953,11 @@ vaO
 evP
 mdo
 hnC
-cmk
-cSr
-oPU
-qAl
-ivu
+fno
+gWv
+tLz
+tLz
+tLz
 fno
 ebg
 opq
@@ -200171,7 +200210,7 @@ hHf
 rij
 dkX
 hnC
-cmk
+fno
 uzp
 tLz
 qAl
@@ -200428,16 +200467,16 @@ vaO
 vaO
 vaO
 hnC
-cmk
+fno
 hQU
-qAl
-qAl
-qAl
-cmk
+tLz
+wsa
+tLz
+fno
 bJS
 hEK
 hAs
-cmk
+ivu
 gro
 eiL
 rLY
@@ -200685,16 +200724,16 @@ hnC
 hnC
 hnC
 hnC
-cmk
-wsa
-qAl
-qAl
-qAl
+fno
+gWv
+tLz
+tLz
+tLz
 mET
-xAx
-xAx
-xfm
-cmk
+tLz
+tLz
+tLz
+ivu
 pGK
 eiL
 gcj
@@ -200942,15 +200981,15 @@ vpQ
 xyy
 vpQ
 dZm
-cmk
+fno
 xvs
-qAl
-qAl
+tLz
+nWD
 xXm
-cmk
+fno
 xAx
 mtR
-xAx
+tLz
 bwR
 slo
 eiL
@@ -201200,7 +201239,7 @@ eiL
 eiL
 eiL
 eiL
-cmk
+fno
 mRc
 eiL
 eiL
@@ -260575,7 +260614,7 @@ phL
 fRj
 fRj
 fRj
-pzZ
+fRj
 fRj
 fRj
 rtk
@@ -261077,7 +261116,7 @@ ntq
 ntq
 jQM
 hFS
-hzq
+krS
 iNI
 dEW
 hzq
@@ -261334,7 +261373,7 @@ ntq
 ntq
 iNI
 lus
-hzq
+upf
 iNI
 nrS
 hzq
@@ -261590,8 +261629,8 @@ ntq
 ntq
 ntq
 rtk
-iNI
-krS
+rtk
+rtk
 rtk
 rtk
 iNI
@@ -261848,7 +261887,7 @@ ntq
 ntq
 iNI
 ukB
-wId
+tjp
 tjp
 tjp
 tjp
@@ -262878,7 +262917,7 @@ iNI
 vhw
 dsw
 eye
-val
+tYm
 wId
 wId
 val
@@ -263916,7 +263955,7 @@ hMn
 fRj
 fRj
 fRj
-qXE
+fRj
 fRj
 fRj
 rtk
@@ -264420,15 +264459,15 @@ iNI
 pmo
 mLu
 mSr
-mSr
+mLu
 vIq
 iNI
 vKp
 hzq
 hzq
 hzq
-hzq
-hzq
+vZk
+jEk
 ozt
 nHm
 qtT
@@ -264674,11 +264713,11 @@ ntq
 ntq
 ntq
 dUS
-nWD
-nWD
-nWD
-nWD
-nWD
+wId
+wId
+wId
+wId
+wId
 dUS
 hzq
 hzq
@@ -264931,11 +264970,11 @@ ntq
 ntq
 ntq
 dUS
-nWD
+wId
 lKZ
 qpk
 jwG
-nWD
+wId
 dUS
 hzq
 fyW
@@ -265188,18 +265227,18 @@ ntq
 ntq
 ntq
 iNI
-nWD
+wId
 ibJ
 hdi
 wpb
-nWD
+wId
 dUS
 hzq
 gXq
-lVk
-lVk
+dsw
+dsw
 hzq
-jEk
+fWY
 kha
 qIW
 fRj
@@ -265449,12 +265488,12 @@ dax
 ibJ
 ojk
 wpb
-nWD
+wId
 lyp
 hzq
-lVk
-lVk
-lVk
+dsw
+dsw
+dsw
 hzq
 pHq
 kZM
@@ -265702,18 +265741,18 @@ ntq
 ntq
 ntq
 iNI
-nWD
+wId
 ibJ
 mpz
 wpb
-nWD
+wId
 dUS
 hzq
 gXq
-lVk
-lVk
+dsw
+dsw
 hzq
-fWY
+wfW
 hzq
 iNI
 hzq
@@ -265959,11 +265998,11 @@ ntq
 ntq
 ntq
 dUS
-nWD
+wId
 qYL
 eSl
 hGK
-nWD
+wId
 dUS
 hzq
 fyW
@@ -266216,11 +266255,11 @@ ntq
 ntq
 ntq
 dUS
-nWD
-nWD
-nWD
-nWD
-nWD
+wId
+wId
+wId
+wId
+wId
 dUS
 hzq
 hzq
@@ -266474,9 +266513,9 @@ ntq
 ntq
 iNI
 pmo
-vwj
-vwj
-vwj
+tjp
+tjp
+tjp
 vIq
 iNI
 vKp
@@ -267758,8 +267797,8 @@ ntq
 ntq
 ntq
 iee
-ooV
 lkL
+ooV
 ezL
 urL
 iee
@@ -268531,8 +268570,8 @@ ntq
 iee
 isx
 urL
-urL
-urL
+kFk
+ahy
 iee
 lkL
 lkL
@@ -268788,8 +268827,8 @@ ntq
 iee
 qTD
 urL
-kFk
-ahy
+iit
+lVk
 iee
 lkL
 lkL
@@ -269045,8 +269084,8 @@ ntq
 wfa
 qTD
 urL
-iit
-fwm
+urL
+urL
 iee
 lkL
 lkL
@@ -269302,8 +269341,8 @@ ntq
 iee
 qTD
 urL
-urL
-wfW
+kFk
+ahy
 wfa
 lkL
 lkL
@@ -269559,8 +269598,8 @@ ntq
 iee
 joQ
 urL
-kFk
-ahy
+iit
+fwm
 wfa
 lkL
 lkL
@@ -269816,8 +269855,8 @@ ntq
 iee
 qTD
 urL
-iit
-fwm
+urL
+urL
 wfa
 lkL
 lkL
@@ -270073,8 +270112,8 @@ ntq
 wfa
 qTD
 urL
-urL
-urL
+kFk
+ahy
 iee
 lkL
 lkL
@@ -270327,11 +270366,11 @@ ntq
 ntq
 ntq
 ntq
-kWq
 iee
-vZk
-kWq
-kWq
+qTD
+urL
+iit
+lVk
 iee
 lkL
 lkL
@@ -270587,7 +270626,7 @@ ntq
 iee
 urL
 urL
-xNo
+urL
 urL
 iee
 lkL
@@ -270843,9 +270882,9 @@ ntq
 ntq
 iee
 urL
-lil
-sCV
-emm
+xNo
+xNo
+urL
 wfa
 lkL
 lkL
@@ -271099,8 +271138,8 @@ ntq
 ntq
 ntq
 wfa
-urL
 lil
+sCV
 sCV
 emm
 wfa
