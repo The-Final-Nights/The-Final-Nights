@@ -289,7 +289,7 @@
 	return ..()
 
 /datum/team/sabbat
-	name = "Revolution"
+	name = "Sabbat"
 	var/max_headrevs = 3
 	var/list/ex_headrevs = list() // Dynamic removes revs on loss, used to keep a list for the roundend report.
 	var/list/ex_revs = list()
