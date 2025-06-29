@@ -2735,7 +2735,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/i = text2num(href_list["upgradediscipline"])
 
 						var/discipline_level = discipline_levels[i]
-						var/max_discipline_level = max(13 - generation clamp(1, 10)
+						var/max_discipline_level = clamp(13 - generation, 5, 10)
+
 						var/cost = discipline_level * 7
 						if (discipline_level <= 0)
 							cost = 10
