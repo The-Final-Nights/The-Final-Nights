@@ -50,13 +50,13 @@
 /datum/action/innate/togglecorvidflight/Trigger(trigger_flags)
 	var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = owner
 	if (!(corvid.movement_type & FLYING))
-		to_chat(corvid, "<span class='notice'>You beat your wings and begin to hover gently above the ground...</span>")
+		to_chat(corvid, span_notice("You beat your wings and begin to hover gently above the ground..."))
 		corvid.set_resting(FALSE, TRUE)
 		ADD_TRAIT(corvid, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT) // sadly, "is flying animal" does not give us flying traits when life() is called, only during VV or upon Init. We're doing this the hard way.
 		ADD_TRAIT(corvid, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT) // the corax sprites already animate up-and-down bobbing, no need to float
 		corvid.icon_state = "[corvid.sprite_color]_flying" // we set this while we wait for the icons to update, otherwise there is latency
 	else
-		to_chat(corvid, "<span class='notice'>You settle gently back onto the ground...</span>")
+		to_chat(corvid, span_notice("You settle gently back onto the ground..."))
 		REMOVE_TRAIT(corvid, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT)
 		REMOVE_TRAIT(corvid, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
 		corvid.icon_state = "[corvid.sprite_color]"
