@@ -1,44 +1,41 @@
-
-* **Website:** TO_BE_DECLARED
-* **Code:** https://github.com/WorldOfDarknessXIII/World-of-Darkness-13
-* **Wiki:** UNDER_CONSTRUCTION
-* **Codedocs:** https://codedocs.tgstation13.org/ + For the time being +
-* **World of Darkness 13 Discord:** https://discord.gg/WBktth6Z8j
-* **Coderbus Discord:** https://discord.gg/Vh8TJp9
-* ~~**IRC:** irc://irc.rizon.net/coderbus~~ (dead)
+| Website                 | Link                                                                                                                                   |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Git / GitHub cheatsheet | [https://www.notion.so/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833](https://www.notion.so/Git-GitHub-61bc81766b2e4c7d9a346db3078ce833) |
+| Guide to Modularization | [./modular_tfn/readme.md](./modular_tfn/readme.md)                                                                	                   |
+| Guide to Mirroring      | [./modular_tfn/mirroring_guide.md](./modular_tfn/mirroring_guide.md)                                              	                   |
+| Code                    | [https://github.com/The-Final-Nights/The-Final-Nights](https://github.com/The-Final-Nights/The-Final-Nights)						   |
+| Wiki                    | [https://thefinalnights.com/wiki](https://thefinalnights.com/wiki)                                 									   |
+| The Final Nights Discord| [https://discord.gg/g85MURQKDK](https://discord.gg/g85MURQKDK)                                                                         |
+| Coderbus Discord        | [https://discord.gg/Vh8TJp9](https://discord.gg/Vh8TJp9)                                                                               |
 
 This is the codebase for the World of Darkness 13, a build of a fork of a downstream of a-- in any case...
 
-We are based on the Paradox Interactive World of Darkness(c) gamelines, with administrative oversight determining what we add to our game. Please see below for our guides on contributing.
-
-If you'd like to contribute to this codebase, consider uncommenting line 1 @ _maps\_basemap.dm for faster initialization.
-
-## Attribution: tgstation
-## The vast majority of our code was written by the maintainers and members of the /tg/station community up to February 3rd, 2021. We regularly pull and port features from /tg/station as well. We would like to officially recognize and pay our respect to the thousands of development hours that created the foundation and continue to create the function of our server.
-## Changes to the below files have taken place to amend references to /tg/station with our own where appropriate. These changes are not intended and should not be interpreted as any attempt to inappropriately misattribute credit for the efforts of the original developers, maintainers, artists, or community managers.
-## The commit for the point at which we diverged from /tg/station:
-
-## commit c0c39018f369fa4d4950a56d565dadb573be54f2 (tg-divergence-backup, tg-divergence)
-## Author: tgstation-server <tgstation-server@tgstation13.org>
-## Date:   Wed Feb 3 16:50:49 2021 -0800
-##
-##    Automatic changelog generation for PR #56506 [ci skip]
+We are based on the Paradox Interactive World of Darkness(c) gamelines, with administrative oversight determining what we add to our game. 
 
 ## DOWNLOADING
 [Downloading](.github/DOWNLOADING.md)
 
 [Running on the server](.github/RUNNING_A_SERVER.md)
 
-## Requirements for contributors
-[Guidelines for Contributors](.github/CONTRIBUTING.md)
+## Compilation
 
-[/tg/station HACKMD account](https://hackmd.io/@tgstation) - Design documentation here
+Find `BUILD.bat` here in the root folder of tgstation, and double click it to initiate the build. It consists of multiple steps and might take around 1-5 minutes to compile.
 
-[Documenting your code](.github/AUTODOC_GUIDE.md)
+**The long way**. Find `bin/build.cmd` in this folder, and double click it to initiate the build. It consists of multiple steps and might take around 1-5 minutes to compile. If it closes, it means it has finished its job. You can then [setup the server](.github/guides/RUNNING_A_SERVER.md) normally by opening `tgstation.dmb` in DreamDaemon.
 
-[Policy configuration system](.github/POLICYCONFIG.md)
+**Building tgstation in DreamMaker directly is deprecated and might produce errors**, such as `'tgui.bundle.js': cannot find file`.
 
-[Interested in some starting lore?](https://github.com/tgstation/common_core)
+**[How to compile in VSCode and other build options](tools/build/README.md).**
+
+If you'd like to contribute to this codebase, consider uncommenting line 1 @ _maps\_basemap.dm for faster initialization.
+
+## Getting started
+
+For contribution guidelines refer to the [Guides for Contributors](.github/CONTRIBUTING.md).
+
+For getting started (dev env, compilation) see the HackMD document [here](https://hackmd.io/@tgstation/HJ8OdjNBc#tgstation-Development-Guide).
+
+For overall design documentation see [HackMD](https://hackmd.io/@tgstation).
 
 ## LICENSE
 
