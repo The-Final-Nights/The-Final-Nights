@@ -1,0 +1,5 @@
+author: "darkincarnate"
+delete-after: True
+changes:
+  - rscadd: "endron security holster"
+  - qol: "ID sprite changes"

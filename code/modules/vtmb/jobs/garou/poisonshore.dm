@@ -234,6 +234,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/work
 	head = /obj/item/clothing/head/pentex/pentex_beret
 	suit = /obj/item/clothing/suit/vampire/vest
+	belt = /obj/item/storage/belt/holster/detective/vampire/endron
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	l_pocket = /obj/item/vamp/phone/endron_sec_chief
 	r_pocket = /obj/item/vamp/keys/pentex
@@ -294,6 +295,7 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	gloves = /obj/item/clothing/gloves/vampire/work
 	suit = /obj/item/clothing/suit/vampire/vest
+	belt = /obj/item/storage/belt/holster/detective/vampire/endron
 	l_pocket = /obj/item/vamp/phone/endron_security
 	r_pocket = /obj/item/vamp/keys/pentex
 	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)

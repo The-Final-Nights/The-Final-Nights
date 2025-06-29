@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	42
+#define SAVEFILE_VERSION_MAX	43
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -86,7 +86,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 		if (!found_block_movement)
 			LAZYADD(key_bindings["Ctrl"], "block_movement")
-
 	if (current_version < 41)
 		LAZYADD(key_bindings["F"], "toggle_combat_mode")
 		LAZYADD(key_bindings["4"], "toggle_combat_mode")
@@ -97,6 +96,20 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 40)
 		player_experience += true_experience
 		true_experience = 0
+	if (current_version < 43)
+		// Translate from misspelled clane name save to new clan typepath save
+		var/clan_name
+		READ_FILE(S["clane"], clan_name)
+		if (clan_name)
+			for (var/found_clan in GLOB.vampire_clans)
+				if (GLOB.vampire_clans[found_clan].name != clan_name)
+					continue
+				clan_name = found_clan
+
+			clan = GLOB.vampire_clans[clan_name]
+
+		// Translate from misspelled clane_accessory to new clan_accessory
+		READ_FILE(S["clane_accessory"], clan_accessory)
 
 /// checks through keybindings for outdated unbound keys and updates them
 /datum/preferences/proc/check_keybindings()
@@ -385,13 +398,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(newtype)
 			pref_species = new newtype
 
-
-	var/clane_id
-	READ_FILE(S["clane"], clane_id)
-	if(clane_id)
-		var/newtype = GLOB.clanes_list[clane_id]
-		if(newtype)
-			clane = new newtype
+	var/clan_type
+	READ_FILE(S["clan"], clan_type)
+	if (clan_type)
+		clan = GLOB.vampire_clans[clan_type]
 
 	var/path_id
 	READ_FILE(S["path"], path_id)
@@ -487,7 +497,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["backpack"], backpack)
 	READ_FILE(S["jumpsuit_style"], jumpsuit_style)
 	READ_FILE(S["uplink_loc"], uplink_spawn_loc)
-	READ_FILE(S["clane_accessory"], clane_accessory)
+	READ_FILE(S["clan_accessory"], clan_accessory)
 	READ_FILE(S["playtime_reward_cloak"], playtime_reward_cloak)
 	READ_FILE(S["phobia"], phobia)
 	READ_FILE(S["randomise"],  randomise)
@@ -568,12 +578,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	werewolf_name = reject_bad_name(werewolf_name)
 	gender = sanitize_gender(gender)
 	body_type = sanitize_gender(body_type, FALSE, FALSE, gender)
-	body_model = sanitize_integer(body_model, 1, 3, initial(body_model))
+	body_model = sanitize_integer(body_model, SLIM_BODY_MODEL_NUMBER, FAT_BODY_MODEL_NUMBER, initial(body_model))
 	if(!real_name)
 		real_name = random_unique_name(gender)
-//	if(!clane)
-//		var/newtype = GLOB.clanes_list[CLAN_BRUJAH]
-//		clane = new newtype()
 
 	//Prevent Wighting upon joining a round
 	if(path_score <= 0)
@@ -686,7 +693,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	backpack			= sanitize_inlist(backpack, GLOB.backpacklist, initial(backpack))
 	jumpsuit_style	= sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
 	uplink_spawn_loc = sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
-	clane_accessory = sanitize_inlist(clane_accessory, clane.accessories, null)
+	clan_accessory = sanitize_inlist(clan_accessory, clan.accessories, null)
 	playtime_reward_cloak = sanitize_integer(playtime_reward_cloak)
 	features["mcolor"]	= sanitize_hexcolor(features["mcolor"])
 	features["ethcolor"]	= sanitize_hexcolor(features["ethcolor"])
@@ -813,7 +820,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["honor"]			, honor)
 	WRITE_FILE(S["glory"]			, glory)
 	WRITE_FILE(S["wisdom"]			, wisdom)
-	WRITE_FILE(S["clane"]			, clane.name)
+	WRITE_FILE(S["clan"]			, clan.type)
 	WRITE_FILE(S["generation"]			, generation)
 	WRITE_FILE(S["generation_bonus"]			, generation_bonus)
 	WRITE_FILE(S["masquerade"]			, masquerade)
@@ -838,7 +845,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["backpack"]			, backpack)
 	WRITE_FILE(S["jumpsuit_style"]			, jumpsuit_style)
 	WRITE_FILE(S["uplink_loc"]			, uplink_spawn_loc)
-	WRITE_FILE(S["clane_accessory"]			, clane_accessory)
+	WRITE_FILE(S["clan_accessory"]			, clan_accessory)
 	WRITE_FILE(S["playtime_reward_cloak"]			, playtime_reward_cloak)
 	WRITE_FILE(S["randomise"]		, randomise)
 	WRITE_FILE(S["species"]			, pref_species.id)

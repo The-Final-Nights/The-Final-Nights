@@ -82,7 +82,7 @@
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
-		if(human_target.clane?.name == CLAN_GARGOYLE)
+		if(human_target.clan?.name == CLAN_GARGOYLE)
 			return TRUE
 
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
@@ -118,8 +118,7 @@
 	var/custom_command = "FORGET ABOUT IT"
 
 /datum/discipline_power/dominate/command/pre_activation_checks(mob/living/target)  // this pre-check includes some special checks
-
-	if(!dominate_hearing_check(owner, target))
+	if(!dominate_hearing_check(owner, target)) // putting the hearing check into the pre_activation so that if the target cant hear you it doesnt consume blood and alerts you
 		return FALSE
 
 	custom_command = tgui_input_text(owner, "Dominate Command", "What is your command?", encode = FALSE)
@@ -175,6 +174,9 @@
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
+	if (HAS_TRAIT(target, TRAIT_CANNOT_RESIST_MIND_CONTROL))
+		return TRUE
+
 	domination_succeeded = dominate_check(owner, target, base_difficulty = 5)
 	if(domination_succeeded)
 		return TRUE
@@ -223,6 +225,9 @@
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
 
+	if (HAS_TRAIT(target, TRAIT_CANNOT_RESIST_MIND_CONTROL))
+		return TRUE
+
 	domination_succeeded = dominate_check(owner, target, base_difficulty = 6)
 	if(domination_succeeded)
 		return TRUE
@@ -267,6 +272,9 @@
 
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
+
+	if (HAS_TRAIT(target, TRAIT_CANNOT_RESIST_MIND_CONTROL))
+		return TRUE
 
 	domination_succeeded = dominate_check(owner, target, base_difficulty = 6)
 	if(domination_succeeded)
@@ -316,6 +324,9 @@
 
 	if(!dominate_hearing_check(owner, target))
 		return FALSE
+
+	if (HAS_TRAIT(target, TRAIT_CANNOT_RESIST_MIND_CONTROL))
+		return TRUE
 
 	domination_succeeded = dominate_check(owner, target, base_difficulty = 7)
 	if(domination_succeeded)
