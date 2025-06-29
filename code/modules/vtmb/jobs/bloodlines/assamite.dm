@@ -18,7 +18,7 @@
 	display_order = JOB_DISPLAY_ORDER_BANU
 
 	allowed_species = list("Vampire", "Ghoul", "Human")
-	species_slots = list("Vampire" = 8)
+	species_slots = list("Vampire" = 8, "Ghoul" = 50, "Human" = 50)
 
 	v_duty = "You are a childe of Haqim! You are one of the many Banu Haqim within the city and judge kindred where they stand. The Banu Haqim operate a coffee shop as a clan cover within the city."
 	duty = "You work at a little quiet coffee shop in the ghetto, and you have some inkling of what goes on there - Perhaps you are a retainer or ghoul of one of the higher-tier members - Either way, you turn a blind eye to it for one reason or another."
@@ -38,15 +38,15 @@
 
 /datum/outfit/job/banu/pre_equip(mob/living/carbon/human/H)
 	..()
-	if(H.clane)
+	if(H.clan)
 		if(H.gender == MALE)
 			shoes = /obj/item/clothing/shoes/vampire
-			if(H.clane.male_clothes)
-				uniform = H.clane.male_clothes
+			if(H.clan.male_clothes)
+				uniform = H.clan.male_clothes
 		else
 			shoes = /obj/item/clothing/shoes/vampire/heels
-			if(H.clane.female_clothes)
-				uniform = H.clane.female_clothes
+			if(H.clan.female_clothes)
+				uniform = H.clan.female_clothes
 	else
 		uniform = /obj/item/clothing/under/vampire/emo
 		if(H.gender == MALE)

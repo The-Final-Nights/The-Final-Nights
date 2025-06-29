@@ -18,7 +18,7 @@
 	exp_type_department = EXP_TYPE_POLICE
 
 	allowed_species = list("Ghoul", "Human")
-	species_slots = list("Ghoul" = 1)
+	species_slots = list("Ghoul" = 1, "Human" = 50)
 
 	duty = "Enforce the Law."
 	minimal_masquerade = 0
@@ -58,7 +58,7 @@
 	exp_type_department = EXP_TYPE_POLICE
 
 	allowed_species = list("Ghoul", "Human")
-	species_slots = list("Ghoul" = 1)
+	species_slots = list("Ghoul" = 1, "Human" = 50)
 
 	duty = "Enforce the law. Keep the officers in line. Follow what the Chief says."
 	minimal_masquerade = 0
@@ -122,3 +122,37 @@
 	..()
 	var/datum/martial_art/martial_art = new /datum/martial_art/cqc
 	martial_art.teach(H)
+
+/datum/job/vamp/districtattorney
+	title = "District Attorney"
+	department_head = list("Police Department")
+	faction = "Vampire"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "U.S. Judiciary Committee"
+	selection_color = "#7e7e7e"
+
+	outfit = /datum/outfit/job/districtattorney
+
+	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
+	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
+	paycheck = PAYCHECK_COMMAND
+	paycheck_department = ACCOUNT_SRV
+	display_order = JOB_DISPLAY_ORDER_DISTRICT_ATTORNEY
+	exp_type_department = EXP_TYPE_POLICE
+
+	allowed_species = list("Human")
+	duty = "You are a district attorney, a federal lawyer working directly with the PD to process criminals. Help maintain law and order in the city, using the infinite power of bureaucracy to make people's lives easier!"
+	minimal_masquerade = 0
+	known_contacts = list("Police Chief", "Public Defender")
+
+/datum/outfit/job/districtattorney
+	name = "District Attorney"
+	jobtype = /datum/job/vamp/districtattorney
+	ears = /obj/item/p25radio/police/command
+	uniform = /obj/item/clothing/under/vampire/suit
+	shoes = /obj/item/clothing/shoes/vampire
+	id = /obj/item/card/id/government/districtattorney
+	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/police/districtattorney
+	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/creditcard=1, /obj/item/stamp/law/districtattorney=1)

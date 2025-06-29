@@ -18,7 +18,7 @@
 	display_order = JOB_DISPLAY_ORDER_LASOMBRA
 
 	allowed_species = list("Vampire", "Ghoul")
-	species_slots = list("Vampire" = 6)
+	species_slots = list("Vampire" = 6, "Ghoul" = 50)
 
 	v_duty = "You are a member of the local Lasombra! You maintain the haven set up in the attic of the local Church, owned by your Clan Primogen."
 	duty = "You are a Ghoul in service to the local Lasombra or its Primogen, get used to the dark of the upper floors and good luck with what you will endure. They rely on you, as much as they may say otherwise."
@@ -37,15 +37,15 @@
 
 /datum/outfit/job/lasombra/pre_equip(mob/living/carbon/human/H)
 	..()
-	if(H.clane)
+	if(H.clan)
 		if(H.gender == MALE)
 			shoes = /obj/item/clothing/shoes/vampire
-			if(H.clane.male_clothes)
-				uniform = H.clane.male_clothes
+			if(H.clan.male_clothes)
+				uniform = H.clan.male_clothes
 		else
 			shoes = /obj/item/clothing/shoes/vampire/heels
-			if(H.clane.female_clothes)
-				uniform = H.clane.female_clothes
+			if(H.clan.female_clothes)
+				uniform = H.clan.female_clothes
 	else
 		uniform = /obj/item/clothing/under/vampire/emo
 		if(H.gender == MALE)

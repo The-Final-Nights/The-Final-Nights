@@ -785,7 +785,7 @@
 /mob/living/carbon/human/npc/bandit/Initialize()
 	. = ..()
 	if(prob(50))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/bandit)
 
 /mob/living/carbon/human/npc/walkby
@@ -793,7 +793,7 @@
 /mob/living/carbon/human/npc/walkby/Initialize()
 	. = ..()
 	if(prob(50))
-		base_body_mod = pick("s", "f")
+		set_body_model(pick(SLIM_BODY_MODEL, FAT_BODY_MODEL))
 	AssignSocialRole(pick(/datum/socialrole/usualmale, /datum/socialrole/usualfemale))
 
 /mob/living/carbon/human/npc/hobo
@@ -803,7 +803,7 @@
 /mob/living/carbon/human/npc/hobo/Initialize()
 	. = ..()
 	if(prob(33))
-		base_body_mod = "s"
+		set_body_model(SLIM_BODY_MODEL)
 	AssignSocialRole(pick(/datum/socialrole/poormale, /datum/socialrole/poorfemale))
 
 /mob/living/carbon/human/npc/business
@@ -812,7 +812,7 @@
 /mob/living/carbon/human/npc/business/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "s"
+		set_body_model(SLIM_BODY_MODEL)
 	AssignSocialRole(pick(/datum/socialrole/richmale, /datum/socialrole/richfemale))
 
 /mob/living/simple_animal/pet/rat
@@ -1074,7 +1074,7 @@
 /mob/living/carbon/human/npc/shop/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/shop)
 
 /datum/socialrole/shop/bacotell
@@ -1086,7 +1086,7 @@
 /mob/living/carbon/human/npc/bacotell/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/shop/bacotell)
 
 /datum/socialrole/shop/bubway
@@ -1098,7 +1098,7 @@
 /mob/living/carbon/human/npc/bubway/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/shop/bubway)
 
 /datum/socialrole/shop/gummaguts
@@ -1110,7 +1110,7 @@
 /mob/living/carbon/human/npc/gummaguts/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/shop/gummaguts)
 
 /datum/socialrole/police
@@ -1214,7 +1214,7 @@
 /mob/living/carbon/human/npc/police/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/police)
 
 /datum/socialrole/endronsecurity
@@ -1323,7 +1323,7 @@
 /mob/living/carbon/human/npc/endronsecurity/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/endronsecurity)
 
 /datum/socialrole/guard
@@ -1427,7 +1427,7 @@
 /mob/living/carbon/human/npc/guard/Initialize()
 	. = ..()
 	if(prob(66))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/guard)
 
 /mob/living/carbon/human/npc/walkby/club/Life()
@@ -1572,7 +1572,7 @@
 
 /mob/living/carbon/human/npc/stripper/Initialize()
 	. = ..()
-	base_body_mod = "s"
+	set_body_model(SLIM_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/stripfemale)
 	underwear = "Nude"
 	undershirt = "Nude"
@@ -1594,7 +1594,7 @@
 /mob/living/carbon/human/npc/incel/Initialize()
 	. = ..()
 	if(prob(50))
-		base_body_mod = "f"
+		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/usualmale)
 
 /datum/socialrole/shop/illegal

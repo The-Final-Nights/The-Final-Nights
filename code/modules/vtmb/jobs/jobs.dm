@@ -83,11 +83,9 @@
 				if(H.mind)
 					if(H.mind.holy_role == HOLY_ROLE_PRIEST)
 						return
-		if(iskindred(H))
-			if(H.clane)
-				if(H.clane.name == CLAN_BAALI)
-					H.emote("scream")
-					H.pointed(user)
+		if (HAS_TRAIT(H, TRAIT_REPELLED_BY_HOLINESS))
+			H.emote("scream")
+			H.pointed(user)
 	M.show_message("<span class='warning'><b>GOD SEES YOU!</b></span>", MSG_AUDIBLE)
 	var/distance = max(0,get_dist(get_turf(src),T))
 
@@ -102,14 +100,13 @@
 		return
 	if(iskindred(target))
 		var/mob/living/carbon/human/H = target
-		if(H.clane)
-			if(H.clane.name == CLAN_BAALI)
-				last_detonated = world.time
-				var/turf/lightning_source = get_step(get_step(H, NORTH), NORTH)
-				lightning_source.Beam(H, icon_state="lightning[rand(1,12)]", time = 5)
-				H.adjustFireLoss(100)
-				H.electrocution_animation(50)
-				to_chat(H, "<span class='userdanger'>The God has punished you for your sins!</span>", confidential = TRUE)
+		if (HAS_TRAIT(H, TRAIT_REPELLED_BY_HOLINESS))
+			last_detonated = world.time
+			var/turf/lightning_source = get_step(get_step(H, NORTH), NORTH)
+			lightning_source.Beam(H, icon_state="lightning[rand(1,12)]", time = 5)
+			H.adjustFireLoss(100)
+			H.electrocution_animation(50)
+			to_chat(H, "<span class='userdanger'>The God has punished you for your sins!</span>", confidential = TRUE)
 
 /obj/item/card/id/prince
 	name = "leader badge"
@@ -373,6 +370,10 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "id1"
+
+/obj/item/card/id/government/districtattorney
+	name = "SFPD DA Badge"
+	desc = "Sponsored by the Government. District Attorney. Watermarked with the seal of the Judiciary Committee."
 
 /obj/item/card/id/police/sergeant
 	name = "police sergeant badge"
