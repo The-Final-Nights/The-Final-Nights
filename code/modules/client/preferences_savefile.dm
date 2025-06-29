@@ -430,6 +430,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["werewolf_hair"], werewolf_hair)
 	READ_FILE(S["werewolf_hair_color"], werewolf_hair_color)
 	READ_FILE(S["werewolf_eye_color"], werewolf_eye_color)
+	READ_FILE(S["werewolf_apparel"], werewolf_apparel)
 
 	//Character
 	READ_FILE(S["slotlocked"], slotlocked)
@@ -778,6 +779,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["werewolf_hair_color"], werewolf_hair_color)
 	WRITE_FILE(S["werewolf_eye_color"], werewolf_eye_color)
 	WRITE_FILE(S["auspice"]			, auspice.name)
+	WRITE_FILE(S["werewolf_apparel"]		, werewolf_apparel)
 
 	//Character
 	WRITE_FILE(S["slotlocked"]			, slotlocked)

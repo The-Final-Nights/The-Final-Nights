@@ -233,7 +233,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/werewolf_hair = 0
 	var/werewolf_hair_color = "#000000"
 	var/werewolf_eye_color = "#FFFFFF"
-	var/werewolf_apparel
+	var/werewolf_apparel = "nothing"
 
 	var/werewolf_name
 	var/auspice_level = 1
@@ -679,6 +679,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				scar_crinos.layer = ABOVE_HUD_LAYER
 				DAWOF.overlays |= scar_crinos
 
+				var/obj/effect/overlay/apparel_crinos = new(DAWOF)
+				apparel_crinos.icon = 'code/modules/wod13/werewolf.dmi'
+				apparel_crinos.icon_state = "[werewolf_apparel]"
+				apparel_crinos.layer = ABOVE_HUD_LAYER
+				DAWOF.overlays |= apparel_crinos
+
 				var/obj/effect/overlay/hair_crinos = new(DAWOF)
 				hair_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				hair_crinos.icon_state = "hair[werewolf_hair]"
@@ -706,6 +712,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "Hair: <a href='byond://?_src_=prefs;preference=werewolf_hair;task=input'>[werewolf_hair]</a><BR>"
 				dat += "Hair Color: <a href='byond://?_src_=prefs;preference=werewolf_hair_color;task=input'>[werewolf_hair_color]</a><BR>"
 				dat += "Eyes: <a href='byond://?_src_=prefs;preference=werewolf_eye_color;task=input'>[werewolf_eye_color]</a><BR>"
+				dat += "Apparel :<a href='byond://?_src_=prefs;preference=werewolf_apparel;task=input'>[werewolf_apparel]</a><BR> "
+
 			if(pref_species.name == "Vampire")
 				dat += "<h2>[make_font_cool("CLAN")]</h2>"
 				dat += "<b>Clan/Bloodline:</b> <a href='byond://?_src_=prefs;preference=clan;task=input'>[clan.name]</a><BR>"
@@ -2524,6 +2532,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_eye)
 						werewolf_eye_color = sanitize_ooccolor(new_eye)
 
+				if("werewolf_apparel")
+					if(slotlocked || !(pref_species.id == "garou"))
+						return
+					var/list/apparel = list("nothing" = "Nothing", "loincloth" = "Simple loincloth", "green_tribal" = "Green tribal attire", "beige_tribal" = "Beige tribal attire", "leather_mantle" = "Leather mantle", "studs" = "Studded armbands", "dark_mantle" = "Dark mantle", "loincloth_armband" = "Loincloth with armbands", "skull_necklace" = "Skull necklace", "metal_armour" = "Metal armour", "fur_mantle" = "Furred mantle", "fur_necklace_and_vambrace" = "Fur necklace and vambrace", "armour_loincloth" = "Armour and loincloth")
+					var/result = tgui_input_list(user, "Select your Crinos form's apparel:", "Appearance Selection", sort_list(apparel))
+					if(result)
+						werewolf_apparel = result
+
 				if("auspice")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
@@ -3799,6 +3815,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			crinos.sprite_hair = werewolf_hair
 			crinos.sprite_hair_color = werewolf_hair_color
 			crinos.sprite_eye_color = werewolf_eye_color
+			if (werewolf_apparel) // if we have picked an apparel, let it show. Showing the apparel 100% of the time causes the crinos form to become pitch black on the character screen tee hee
+				crinos.sprite_apparel = werewolf_apparel
 			lupus.sprite_color = werewolf_color
 			lupus.sprite_eye_color = werewolf_eye_color
 
