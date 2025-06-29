@@ -40,6 +40,9 @@ SUBSYSTEM_DEF(humannpcpool)
 		NPC.handle_automated_movement()
 
 /datum/controller/subsystem/humannpcpool/proc/npclost()
+	if (!length(GLOB.npc_spawn_points))
+		return
+
 	while(length(GLOB.alive_npc_list) < npc_max)
 		var/atom/kal
 		if(length(GLOB.npc_spawn_points) > 0)

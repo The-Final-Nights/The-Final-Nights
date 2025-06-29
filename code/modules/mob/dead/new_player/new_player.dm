@@ -349,9 +349,9 @@
 	if ((job.species_slots[client.prefs.pref_species.name] == 0) && !bypass)
 		return JOB_UNAVAILABLE_SPECIES_LIMITED
 	if((client.prefs.pref_species.name == "Vampire") && !bypass)
-		if(client.prefs.clane)
+		if(client.prefs.clan)
 			for(var/i in job.allowed_bloodlines)
-				if(i == client.prefs.clane.name)
+				if(i == client.prefs.clan.name)
 					return JOB_AVAILABLE
 			return JOB_UNAVAILABLE_CLAN
 	if((client.prefs.pref_species.name == "Werewolf") && !bypass)
@@ -569,11 +569,6 @@
 			var/mob/living/carbon/human/H = new_character
 			if(H.client)
 				H.true_real_name = H.client.prefs.real_name
-				if(H.age < 16)
-					H.add_quirk(/datum/quirk/freerunning)
-					H.add_quirk(/datum/quirk/light_step)
-					H.add_quirk(/datum/quirk/skittish)
-					H.add_quirk(/datum/quirk/pushover)
 				H.create_disciplines()
 				if(iscathayan(H))
 					if(H.mind)
@@ -582,7 +577,6 @@
 						H.mind.dharma.Po = H.client.prefs.po_type
 						H.mind.dharma.Hun = H.client.prefs.hun
 						H.mind.dharma.on_gain(H)
-//						H.mind.dharma.initial_skin_color = H.skin_tone
 				var/datum/relationship/R = new ()
 				H.Myself = R
 				R.owner = H

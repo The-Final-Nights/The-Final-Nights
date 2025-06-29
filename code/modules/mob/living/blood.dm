@@ -255,9 +255,8 @@
 
 		if(istype(src, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = src
-
-			if(H.clane)
-				blood_data["clan"] = H.clane.name
+			if(H.clan)
+				blood_data["clan"] = H.clan.name
 
 			if(H.dna && H.dna.species)
 				blood_data["species"] = H.dna.species.name
