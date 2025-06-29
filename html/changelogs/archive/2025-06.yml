@@ -37,8 +37,16 @@
   ChristopherDAdams:
   - rscadd: New Role, District Attorney, A lawyer employed by the city and SFPD to
       help process criminal offenders in various ways.
+  ShadeAware:
+  - map: The Clinic's renovations have completed, wholly re-designing everything but
+      the four walls themselves.
+  - image: New sprites for a table sink basin and braceless shutters.
+  - bugfix: DOOR???
   XeonMations:
   - bugfix: Fixed our runtimes being hidden.
   - bugfix: Fixed jobs closing whenever someone cryod.
   tzui5020:
   - rscadd: HK PSG1 and Ammo variants for the PD and Future Hunters.
+2025-06-28:
+  XeonMations:
+  - bugfix: fixed vampires not being able to latejoin as bruisers

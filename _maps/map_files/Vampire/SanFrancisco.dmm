@@ -67442,11 +67442,6 @@
 /obj/structure/railing,
 /obj/structure/table,
 /obj/item/melee/vampirearms/tire,
-/obj/structure/vaultdoor/key{
-	door_health = 25;
-	name = "FIRE SHELTER";
-	lock_id = "fireshelter"
-	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "pzQ" = (
