@@ -64,7 +64,6 @@ GLOBAL_LIST_EMPTY(respawn_timers)
 
 GLOBAL_LIST_EMPTY(police_radios)
 GLOBAL_LIST_EMPTY(cleanable_list)
-GLOBAL_LIST_EMPTY(malkavian_list)
 GLOBAL_LIST_EMPTY(stock_licenses)
 GLOBAL_LIST_EMPTY(npc_activities)
 GLOBAL_LIST_EMPTY(sabbatites)
@@ -75,5 +74,3 @@ GLOBAL_LIST_EMPTY(snow_suka)
 GLOBAL_LIST_EMPTY(beast_list)
 GLOBAL_LIST_EMPTY(weed_list)
 GLOBAL_LIST_EMPTY(zombie_list)
-
-GLOBAL_LIST_INIT(psychokids, list())

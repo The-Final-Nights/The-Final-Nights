@@ -560,7 +560,7 @@
 			if(H == usr)
 				to_chat(usr, span_warning("You may not turn yourself into a Gargoyle!"))
 				return
-			else if(H.clane?.name == CLAN_GARGOYLE)
+			else if(H.clan?.name == CLAN_GARGOYLE)
 				to_chat(usr, span_warning("You may not use this ritual on a Gargoyle!"))
 				return
 			else if(H.stat > SOFT_CRIT)
@@ -659,15 +659,13 @@
 		// Revive the specimen and turn them into a gargoyle kindred
 		target_body.revive(TRUE)
 		target_body.set_species(/datum/species/kindred)
-		target_body.clane = new /datum/vampireclane/gargoyle()
-		target_body.clane.on_gain(target_body)
-		target_body.clane.post_gain(target_body)
+		target_body.set_clan(/datum/vampire_clan/gargoyle)
 		target_body.apply_status_effect(STATUS_EFFECT_INLOVE, usr)
 		target_body.real_name = old_name // the ritual for some reason is deleting their old name and replacing it with a random name.
 		target_body.name = old_name
 		target_body.update_name()
 
-		target_body.create_disciplines(FALSE, target_body.clane.clane_disciplines)
+		target_body.create_disciplines(FALSE, target_body.clan.clan_disciplines)
 
 		if(target_body.loc != original_location)
 			target_body.forceMove(original_location)
