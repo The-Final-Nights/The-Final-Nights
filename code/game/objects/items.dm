@@ -205,13 +205,9 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 
 	var/canMouseDown = FALSE
 
-	//WoD13 vars start here :3
-
-	//lombard.dm VARIABLES
-	///Determines items sell price.
 	var/cost = 0
-	///Determines whether an item can be sold in the black market.
-	var/illegal = FALSE
+
+	//WoD13 vars start here :3
 
 	//gridventory.dm VARIABLES
 	///Width we occupy on the gridventory hud - Keep null to generate based on w_class
@@ -546,6 +542,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 /obj/item/proc/pickup(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
+	SEND_SIGNAL(user, COMSIG_LIVING_PICKED_UP_ITEM, src)
 	item_flags |= IN_INVENTORY
 
 /// called when "found" in pockets and storage items. Returns 1 if the search should end.

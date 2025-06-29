@@ -55,6 +55,8 @@
 		new /datum/data/mining_equipment("fancy red suit",	/obj/item/clothing/under/vampire/fancy_red,	150),
 		new /datum/data/mining_equipment("black luxury suit",	/obj/item/clothing/under/vampire/ventrue,	50),
 		new /datum/data/mining_equipment("black luxury suit skirt",	/obj/item/clothing/under/vampire/ventrue/female,	50),
+		new /datum/data/mining_equipment("fancy black suit", /obj/item/clothing/under/vampire/prince,	500),
+		new /datum/data/mining_equipment("fancy black suitskirt", /obj/item/clothing/under/vampire/prince/female,	500),
 		new /datum/data/mining_equipment("white business suit",	/obj/item/clothing/under/vampire/office,	50),
 		new /datum/data/mining_equipment("black overcoat",	/obj/item/clothing/under/vampire/rich,	45),
 		new /datum/data/mining_equipment("burgundy suit",	/obj/item/clothing/under/vampire/tremere,	35),

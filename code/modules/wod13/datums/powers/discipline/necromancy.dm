@@ -305,7 +305,7 @@
 	var/drawing = FALSE
 	var/level = 1
 
-/datum/action/necroritualism/Trigger()
+/datum/action/necroritualism/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	if(H.bloodpool < 2)

@@ -65,7 +65,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 
 	if(has_quirk(/datum/quirk/derangement))
 		var/mob/living/carbon/human/H = src
-		var/datum/vampireclane/malkavian/malk = H.clane
+		var/datum/vampire_clan/malkavian/malk = H.clan
 
 		if(!malk)
 			halpick = pickweight(GLOB.malk_hallucinations)

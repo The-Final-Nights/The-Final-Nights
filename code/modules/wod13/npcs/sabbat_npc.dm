@@ -6,28 +6,27 @@
 	var/datum/action/blood_heal_action
 	var/list/untargeted_disciplines = list()
 	var/list/targeted_disciplines = list()
-	var/list/possible_clan = list(/datum/vampireclane/toreador, /datum/vampireclane/brujah, /datum/vampireclane/malkavian, /datum/vampireclane/gangrel)
+	var/list/possible_clan = list(/datum/vampire_clan/toreador, /datum/vampire_clan/brujah, /datum/vampire_clan/malkavian, /datum/vampire_clan/gangrel)
 	var/datum/action/discipline/activated_action //mostly for debugging purposes, this stores the npc's last activated discipline action
 //============================================================
 // subtypes of shovelhead, each with a different clan
 /mob/living/carbon/human/npc/sabbat/shovelhead/toreador
-	possible_clan = list(/datum/vampireclane/toreador)
+	possible_clan = list(/datum/vampire_clan/toreador)
 /mob/living/carbon/human/npc/sabbat/shovelhead/brujah
-	possible_clan = list(/datum/vampireclane/brujah)
+	possible_clan = list(/datum/vampire_clan/brujah)
 /mob/living/carbon/human/npc/sabbat/shovelhead/malkavian
-	possible_clan = list(/datum/vampireclane/malkavian)
+	possible_clan = list(/datum/vampire_clan/malkavian)
 /mob/living/carbon/human/npc/sabbat/shovelhead/gangrel
-	possible_clan = list(/datum/vampireclane/gangrel)
+	possible_clan = list(/datum/vampire_clan/gangrel)
 //============================================================
 
 /mob/living/carbon/human/npc/sabbat/shovelhead/LateInitialize()
 	. = ..()
 	//assign their special stuff. species, clan, etc
-	roundstart_vampire = FALSE
 	set_species(/datum/species/kindred)
 	var/random_clan = pick(possible_clan)
-	clane = new random_clan()
-	create_disciplines(FALSE, clane.clane_disciplines)
+	clan = new random_clan()
+	create_disciplines(FALSE, clan.clan_disciplines)
 	generation = 12
 	ADD_TRAIT(src, TRAIT_MESSY_EATER, "sabbat_shovelhead")
 	is_criminal = TRUE
