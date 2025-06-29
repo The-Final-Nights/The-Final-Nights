@@ -37,15 +37,15 @@
 					SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 					to_chat(BD, "<span class='warning'>There is no <b>BLOOD</b> in this creature.</span>")
 					return
-				if(BD.clane)
+				if(BD.clan)
 					var/special_clan = FALSE
-					if(BD.clane.name == CLAN_SALUBRI)
+					if(BD.clan.name == CLAN_SALUBRI)
 						if(!PB.IsSleeping())
 							to_chat(BD, "<span class='warning'>You can't drink from aware targets!</span>")
 							return
 						special_clan = TRUE
 						PB.emote("moan")
-					if(BD.clane.name == CLAN_GIOVANNI)
+					if(BD.clan.name == CLAN_GIOVANNI)
 						PB.emote("scream")
 						special_clan = TRUE
 					if(!special_clan)

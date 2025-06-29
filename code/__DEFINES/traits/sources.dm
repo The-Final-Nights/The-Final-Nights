@@ -136,17 +136,10 @@
 //trait from /mob/living/carbon/human/npc
 #define NPC_ITEM_TRAIT "npc_item"
 
-// used by the obfuscate ability
-#define OBFUSCATE_TRAIT "obfuscate_trait"
-
 /// Trait when something was labelled by the /datum/element/tool_renaming element.
 #define RENAMING_TOOL_LABEL_TRAIT "renaming_tool_label"
 
-//salubri stuff
-#define SALUBRI_EYE_TRAIT "Salubri Eye"
-
 /// Trait aquired from being painted a certain color
 #define ATOM_COLOR_TRAIT "atom_color"
-
 
 // END TRAIT DEFINES

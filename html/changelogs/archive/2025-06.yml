@@ -47,3 +47,9 @@
   - bugfix: Fixed jobs closing whenever someone cryod.
   tzui5020:
   - rscadd: HK PSG1 and Ammo variants for the PD and Future Hunters.
+2025-06-28:
+  XeonMations:
+  - bugfix: fixed vampires not being able to latejoin as bruisers
+2025-06-29:
+  darkincarnate:
+  - rscadd: rich suits+suitskirts to shops
