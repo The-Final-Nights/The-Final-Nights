@@ -311,7 +311,8 @@
 	var/last_frenzy_check = 0
 	var/mob/living/frenzy_target = null
 
-	var/transformation_blocked = 0 //Are transformations blocked?
+	//Are transformations blocked?
+	var/transformation_blocked = FALSE
 
 
 	//If we are currently leaning on something, and what that object is
