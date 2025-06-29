@@ -3,8 +3,6 @@
 	desc = "I feel bad for the heartless bastard who lost this."
 	base_icon_state = "heart"
 	icon_state = "heart-on"
-	illegal = TRUE
-	cost = 750
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_HEART
 
@@ -23,6 +21,10 @@
 	var/beat = BEAT_NONE//is this mob having a heatbeat sound played? if so, which?
 	var/failed = FALSE		//to prevent constantly running failing code
 	var/operated = FALSE	//whether the heart's been operated on to fix some of its damages
+
+/obj/item/organ/heart/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling/organ, 750, "organ", TRUE, -1, 0)
 
 /obj/item/organ/heart/update_icon_state()
 	icon_state = "[base_icon_state]-[beating ? "on" : "off"]"

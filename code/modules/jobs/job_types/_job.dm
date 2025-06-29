@@ -191,8 +191,7 @@
 
 			to_chat(M, span_danger("Failed to locate a storage object on your mob, either you spawned with no hands free and no backpack or this is a bug."))
 			qdel(item)
-	if(spawnee.base_body_mod != "") // Is the user fat or slim? if so, let's regenerate their icons so they're scaled accordingly.
-		spawnee.regenerate_icons()
+	spawnee.regenerate_icons()
 	// TFN ADDITION END: loadout spawning
 
 	if(!config)	//Needed for robots.

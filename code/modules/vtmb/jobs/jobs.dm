@@ -83,11 +83,9 @@
 				if(H.mind)
 					if(H.mind.holy_role == HOLY_ROLE_PRIEST)
 						return
-		if(iskindred(H))
-			if(H.clane)
-				if(H.clane.name == CLAN_BAALI)
-					H.emote("scream")
-					H.pointed(user)
+		if (HAS_TRAIT(H, TRAIT_REPELLED_BY_HOLINESS))
+			H.emote("scream")
+			H.pointed(user)
 	M.show_message("<span class='warning'><b>GOD SEES YOU!</b></span>", MSG_AUDIBLE)
 	var/distance = max(0,get_dist(get_turf(src),T))
 
@@ -102,14 +100,13 @@
 		return
 	if(iskindred(target))
 		var/mob/living/carbon/human/H = target
-		if(H.clane)
-			if(H.clane.name == CLAN_BAALI)
-				last_detonated = world.time
-				var/turf/lightning_source = get_step(get_step(H, NORTH), NORTH)
-				lightning_source.Beam(H, icon_state="lightning[rand(1,12)]", time = 5)
-				H.adjustFireLoss(100)
-				H.electrocution_animation(50)
-				to_chat(H, "<span class='userdanger'>The God has punished you for your sins!</span>", confidential = TRUE)
+		if (HAS_TRAIT(H, TRAIT_REPELLED_BY_HOLINESS))
+			last_detonated = world.time
+			var/turf/lightning_source = get_step(get_step(H, NORTH), NORTH)
+			lightning_source.Beam(H, icon_state="lightning[rand(1,12)]", time = 5)
+			H.adjustFireLoss(100)
+			H.electrocution_animation(50)
+			to_chat(H, "<span class='userdanger'>The God has punished you for your sins!</span>", confidential = TRUE)
 
 /obj/item/card/id/prince
 	name = "leader badge"
@@ -551,31 +548,37 @@
 
 //ENDRON
 /obj/item/card/id/garou/spiral
-	icon_state = "id9"
-	worn_icon_state = "id9"
+	icon_state = "endronemployeeid"
+	worn_icon_state = "endronemployeeid"
 
 /obj/item/card/id/garou/spiral/lead
 	name = "Endron Branch Leader card"
+	icon_state = "endronexecutiveid"
+	worn_icon_state = "endronexecutiveid"
 	desc = "How bad can you possibly be?"
 
 /obj/item/card/id/garou/spiral/executive
 	name = "Endron Executive card"
+	icon_state = "endronexecutiveid"
+	worn_icon_state = "endronexecutiveid"
 	desc = "All the customers are buying."
 
 /obj/item/card/id/garou/spiral/affairs
 	name = "Endron Internal Affairs card"
+	icon_state = "endroniaaid"
+	worn_icon_state = "endronemployeeid"
 	desc = "And the Lawyers are denying."
 
 /obj/item/card/id/garou/spiral/secchief
 	name = "Endron Chief of Security badge"
-	icon_state = "id3"
-	worn_icon_state = "id3"
+	icon_state = "endronsecurityid"
+	worn_icon_state = "endronemployeeid"
 	desc = "Its not illegal if nobody finds out about it. Now if only Endron would pay for a single tank for you."
 
 /obj/item/card/id/garou/spiral/sec
 	name = "Endron Security Agent badge"
-	icon_state = "id3"
-	worn_icon_state = "id3"
+	icon_state = "endronsecurityid"
+	worn_icon_state = "endronemployeeid"
 	desc = "Corporate Security, a step above a mall cop. Better paid than a real cop."
 
 /obj/item/card/id/garou/spiral/employee

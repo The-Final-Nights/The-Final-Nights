@@ -172,8 +172,7 @@ Dancer
 	allowed_species = list("Vampire", "Kuei-Jin")
 
 /datum/quirk/frenetic_aura/on_spawn()
-	var/mob/living/carbon/human/H = quirk_holder
-	H.clane.frenzymod += 1
+	ADD_TRAIT(quirk_holder, TRAIT_LONGER_FRENZY, "frenetic_aura")
 
 /datum/quirk/blush_of_health
 	name = "Blush of Health"
@@ -235,7 +234,7 @@ Dancer
 	for(var/datum/vtm_bank_account/account as anything in GLOB.bank_account_list)
 		if(debtor.bank_id != account.bank_id)
 			continue
-		if(debtor.clane?.name == CLAN_VENTRUE)
+		if(debtor.clan?.name == CLAN_VENTRUE)
 			account.balance = 5 // Extra loss of dignitas.
 		else
 			account.balance = floor(account.balance * 0.5)
@@ -374,15 +373,15 @@ Dancer
 	gain_text = "<span class='notice'>You feel short.</span>"
 	lose_text = "<span class='notice'>You don't feel short anymore.</span>"
 
-/datum/quirk/dwarf/on_spawn()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(H.age < 16)
-		to_chat(H, "<span class='userdanger'>You can't be a dwarf kid, looser!</span>")
-		return
+/datum/quirk/dwarf/add()
 	if(iswerewolf(quirk_holder))
 		return
-	H.AddElement(/datum/element/dwarfism, COMSIG_PARENT_PREQDELETED, src)
-	H.isdwarfy = TRUE
+	quirk_holder.AddElement(/datum/element/dwarfism, COMSIG_PARENT_PREQDELETED, src)
+
+/datum/quirk/dwarf/remove()
+	if (!quirk_holder)
+		return
+	quirk_holder.RemoveElement(/datum/element/dwarfism)
 
 #define SHORT 4/5
 #define TALL 5/4
@@ -430,37 +429,6 @@ Dancer
 
 #undef SHORT
 #undef TALL
-
-
-/datum/element/children
-	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
-	argument_hash_start_idx = 2
-	var/comsig
-	var/list/attached_targets = list()
-
-/datum/element/children/Attach(datum/target, comsig, comsig_target)
-	. = ..()
-	if(!ishuman(target))
-		return ELEMENT_INCOMPATIBLE
-
-	src.comsig = comsig
-
-	var/mob/living/carbon/human/L = target
-	L.transform = L.transform.Scale(81/100, 81/100)
-	attached_targets[target] = comsig_target
-	RegisterSignal(target, comsig, PROC_REF(check_loss)) //Second arg of the signal will be checked against the comsig_target.
-
-/datum/element/children/proc/check_loss(mob/living/L, comsig_target)
-	if(attached_targets[L] == comsig_target)
-		Detach(L)
-
-/datum/element/children/Detach(mob/living/L)
-	. = ..()
-	if(QDELETED(L))
-		return
-	L.transform = L.transform.Scale(100/81, 100/81)
-	UnregisterSignal(L, comsig)
-	attached_targets -= L
 
 /datum/quirk/homosexual
 	name = "Homosexual"
@@ -688,15 +656,15 @@ Dancer
 	gain_text = "<span class='notice'>You feel tall.</span>"
 	lose_text = "<span class='notice'>You don't feel tall anymore.</span>"
 
-/datum/quirk/tower/on_spawn()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(H.age < 16)
-		to_chat(H, "<span class='userdanger'>You can't be a tall kid, looser!</span>")
-		return
+/datum/quirk/tower/add()
 	if(iswerewolf(quirk_holder))
 		return
-	H.AddElement(/datum/element/giantism, COMSIG_PARENT_PREQDELETED, src)
-	H.istower = TRUE
+	quirk_holder.AddElement(/datum/element/giantism, COMSIG_PARENT_PREQDELETED, src)
+
+/datum/quirk/tower/remove()
+	if (!quirk_holder)
+		return
+	quirk_holder.RemoveElement(/datum/element/giantism)
 
 #define TALL 1.16
 #define SHORT 0.86206896551

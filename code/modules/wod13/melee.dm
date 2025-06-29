@@ -5,7 +5,10 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	var/quieted = FALSE
 	var/datum/weakref/owner = null
-	cost = 25
+
+/obj/item/melee/vampirearms/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 25, "melee", FALSE)
 
 /obj/item/melee/vampirearms/pickup(mob/living/user)
 	. = ..()
@@ -124,28 +127,38 @@
 	pixel_w = -8
 	resistance_flags = FIRE_PROOF
 	masquerade_violating = FALSE
-	cost = 250
 	is_iron = TRUE
+
+/obj/item/melee/vampirearms/katana/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 250, "katana", FALSE)
 
 /obj/item/melee/vampirearms/katana/fire
 	name = "burning katana"
 	icon_state = "firetana"
 	pixel_w = -8
-	cost = 0
 	damtype = BURN
 	item_flags = DROPDEL
 	is_iron = FALSE
 	masquerade_violating = TRUE
 
+//Do not sell the magically summoned katanas for infinite cash
+/obj/item/melee/vampirearms/katana/fire/Initialize()
+	. = ..()
+	qdel(GetComponent(/datum/component/selling))
+
 /obj/item/melee/vampirearms/katana/blood
 	name = "bloody katana"
 	color = "#bb0000"
 	pixel_w = -8
-	cost = 0
 	damtype = CLONE
 	item_flags = DROPDEL
 	is_iron = FALSE
 	masquerade_violating = TRUE
+
+/obj/item/melee/vampirearms/katana/blood/Initialize()
+	. = ..()
+	qdel(GetComponent(/datum/component/selling))
 
 /obj/item/melee/vampirearms/rapier
 	name = "rapier"
@@ -166,8 +179,11 @@
 	resistance_flags = FIRE_PROOF
 	masquerade_violating = FALSE
 	w_class = WEIGHT_CLASS_NORMAL
-	cost = 800
 	is_iron = TRUE
+
+/obj/item/melee/vampirearms/rapier/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 800, "rapier", FALSE)
 
 /obj/item/melee/vampirearms/machete
 	name = "machete"
@@ -190,7 +206,10 @@
 	pixel_w = -8
 	resistance_flags = FIRE_PROOF
 	masquerade_violating = FALSE
-	cost = 150
+
+/obj/item/melee/vampirearms/machete/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 150, "machete", FALSE)
 
 /obj/item/melee/vampirearms/sabre
 	name = "sabre"
@@ -212,7 +231,10 @@
 	resistance_flags = FIRE_PROOF
 	masquerade_violating = FALSE
 	is_iron = TRUE
-	cost = 1000
+
+/obj/item/melee/vampirearms/sabre/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 1000, "sabre", FALSE)
 
 /obj/item/melee/vampirearms/longsword
 	name = "longsword"
@@ -234,7 +256,10 @@
 	resistance_flags = FIRE_PROOF
 	masquerade_violating = FALSE
 	is_iron = TRUE
-	cost = 1800
+
+/obj/item/melee/vampirearms/longsword/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 1800, "longsword", FALSE)
 
 /obj/item/melee/vampirearms/longsword/keeper
 	name = "The Brother's Keeper"
@@ -380,8 +405,11 @@
 	attack_verb_continuous = list("beats", "smacks")
 	attack_verb_simple = list("beat", "smack")
 	w_class = WEIGHT_CLASS_NORMAL
-	cost = 50
 	is_wood = TRUE
+
+/obj/item/melee/vampirearms/baseball/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 50, "baseball", FALSE)
 
 /obj/item/melee/vampirearms/baseball/attack(mob/living/target, mob/living/user)
 	. = ..()
