@@ -54,6 +54,8 @@
   XeonMations:
   - refactor: Refactored Clan code, body model code, and alternative body sprite code.
   - bugfix: Kuei-jin can now rot or ash on death according to their age.
+  - code_imp: Adjusted downstream requirements, follow "modular_tfn/readme.md" for
+      all future PRs.
   darkincarnate:
   - rscadd: rich suits+suitskirts to shops
   - rscadd: endron security holster
