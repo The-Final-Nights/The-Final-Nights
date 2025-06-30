@@ -1,4 +1,0 @@
-author: "XeonMations"
-delete-after: True
-changes:
-  - code_imp: "Adjusted downstream requirements, follow \"modular_tfn/readme.md\" for all future PRs."
