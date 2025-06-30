@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><base href="../../"><link rel="stylesheet" href="dmdoc.css"><title>/datum/component/kiasyd_iron_weakness - San Francisco</title></head><body><header><a href="index.html">San Francisco</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a> — <a href="datum/component/kiasyd_iron_weakness.html#var">Var Details</a> - <a href="datum/component/kiasyd_iron_weakness.html#proc">Proc Details</a></header><main><h1>kiasyd_iron_weakness <aside>/<a href="datum.html">datum</a>/<a href="datum/component.html">component</a>/<a href="datum/component/kiasyd_iron_weakness.html">kiasyd_iron_weakness</a></aside> <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L14"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 14"></a></h1><p>Kiasyd Iron Weakness Component</p>
+<p>Component to handle the Kiasyd vampire Clan's
+curse of becoming frenzied whenever they touch
+or are attacked with iron with a cooldown
+of 10 seconds between every roll to resist
+frenzy.</p>
+<p>Will trigger when attacked with an iron item,
+picking up an iron item, and repeatedly if
+an iron item is being held.</p><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Vars</h2></td></tr><tr><th><a href="datum/component/kiasyd_iron_weakness.html#var/holding_iron">holding_iron</a></th><td>List of items made of iron that the mob is holding or has equipped</td></tr><tr><th><a href="datum/component/kiasyd_iron_weakness.html#var/iron_frenzy">iron_frenzy</a></th><td>Cooldown for iron causing the parent to enter frenzy</td></tr><tr><td colspan="2"><h2>Procs</h2></td></tr><tr><th><a href="datum/component/kiasyd_iron_weakness.html#proc/check_contents_for_iron">check_contents_for_iron</a></th><td>Applies the iron weakness to all held or
+equipped items.</td></tr><tr><th><a href="datum/component/kiasyd_iron_weakness.html#proc/does_trigger_weakness">does_trigger_weakness</a></th><td>Checks if a mob and optionally an item can
+have the weakness triggered right now.</td></tr><tr><th><a href="datum/component/kiasyd_iron_weakness.html#proc/handle_attacked">handle_attacked</a></th><td>Triggers the iron weakness whenever the parent
+is attacked with an iron weapon.</td></tr><tr><th><a href="datum/component/kiasyd_iron_weakness.html#proc/handle_item_exited">handle_item_exited</a></th><td>Stops tracking an iron item for triggering
+the weakness when it's dropped or unequipped.</td></tr><tr><th><a href="datum/component/kiasyd_iron_weakness.html#proc/handle_pickup">handle_pickup</a></th><td>Triggers the iron weakness when an iron
+item is picked up.</td></tr></table><h2 id="var">Var Details</h2><h3 id="var/holding_iron"><aside class="declaration">var </aside>holding_iron <aside>– /list/obj/item</aside> <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L16"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 16"></a></h3><p>List of items made of iron that the mob is holding or has equipped</p><h3 id="var/iron_frenzy"><aside class="declaration">var </aside>iron_frenzy <aside>– </aside> <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L18"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 18"></a></h3><p>Cooldown for iron causing the parent to enter frenzy</p><h2 id="proc">Proc Details</h2><h3 id="proc/check_contents_for_iron"><aside class="declaration">proc </aside>check_contents_for_iron<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/checking_mob)  <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L51"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 51"></a></aside></h3><p>Applies the iron weakness to all held or
+equipped items.</p>
+<p>Checks the parent's direct contents for items
+that are made of iron, registering them to
+trigger the weakness on every process tick.
+Does not account for items in subcontents as
+these items are not directly touching the parent.</p>
+<p>Arguments:</p>
+<ul>
+<li>checking_mob - Mob whose contents are being checked for iron.</li>
+</ul><h3 id="proc/does_trigger_weakness"><aside class="declaration">proc </aside>does_trigger_weakness<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/source, /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/item)  <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L133"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 133"></a></aside></h3><p>Checks if a mob and optionally an item can
+have the weakness triggered right now.</p>
+<p>Checks for if the item is iron, checks
+cooldown and starts it if finished, and
+makes sure that the source can enter frenzy.
+Returns FALSE if conditions unmet and TRUE
+if met, and will delete the component if source
+is somehow not a Kindred.</p>
+<p>Arguments:</p>
+<ul>
+<li>source - Human being checked for proper conditions to frenzy</li>
+<li>item - Item being checked for if it's iron, optional</li>
+</ul><h3 id="proc/handle_attacked"><aside class="declaration">proc </aside>handle_attacked<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/source, /<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/attacker, /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/item)  <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L80"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 80"></a></aside></h3><p>Triggers the iron weakness whenever the parent
+is attacked with an iron weapon.</p>
+<p>Signal handler on COMSIG_MOB_ATTACKED_BY_MELEE to
+trigger frenzy on the parent whenever they're
+attacked with a melee weapon made of iron.</p>
+<p>Arguments:</p>
+<ul>
+<li>source - Human being attacked</li>
+<li>attacker - Mob doing the attack, unused</li>
+<li>item - Weapon used to attack the source with</li>
+</ul><h3 id="proc/handle_item_exited"><aside class="declaration">proc </aside>handle_item_exited<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/source, /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/item, /<a href="atom.html">atom</a>/newloc)  <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L167"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 167"></a></aside></h3><p>Stops tracking an iron item for triggering
+the weakness when it's dropped or unequipped.</p>
+<p>Signal handler for COMSIG_ATOM_EXITED that removes
+iron items from list of held or equipped items to
+stop repeatedly triggering the iron weakness on them
+when they're dropped or put into storage. Unregisters
+its own signal. If list of iron items is empty, stops
+processing.</p>
+<p>Arguments:</p>
+<ul>
+<li>source - Mob whose contents the item is exiting</li>
+<li>item - Item exiting the mob's contents</li>
+<li>newloc - Atom being entered by the item</li>
+</ul><h3 id="proc/handle_pickup"><aside class="declaration">proc </aside>handle_pickup<aside>(/<a href="mob.html">mob</a>/<a href="mob/living.html">living</a>/<a href="mob/living/carbon.html">carbon</a>/<a href="mob/living/carbon/human.html">human</a>/source, /<a href="obj.html">obj</a>/<a href="obj/item.html">item</a>/item)  <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/modules/wod13/datums/components/kiasyd_iron_weakness.dm#L104"><img src="git.png" width="16" height="16" title="code/modules/wod13/datums/components/kiasyd_iron_weakness.dm 104"></a></aside></h3><p>Triggers the iron weakness when an iron
+item is picked up.</p>
+<p>Signal handler on COMSIG_LIVING_PICKED_UP_ITEM
+that will immediately trigger frenzy if parent
+picks up an iron item, and then begins a process
+to keep triggering frenzy if the item is not
+dropped or put in a container.</p>
+<p>Arguments:</p>
+<ul>
+<li>source - Human picking the item up</li>
+<li>item - Item being picked up</li>
+</ul></main><footer>tgstation.dme <a href="https://github.com/The-Final-Nights/The-Final-Nights/tree/1ce3365f16625d6bdd76475b550ecd8453b8148e">1ce3365</a> (master) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.9.0</a></footer></body></html>

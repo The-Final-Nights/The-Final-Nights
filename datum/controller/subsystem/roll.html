@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><base href="../../../"><link rel="stylesheet" href="dmdoc.css"><title>/datum/controller/subsystem/roll - San Francisco</title></head><body><header><a href="index.html">San Francisco</a> - <a href="index.html#modules">Modules</a> - <a href="index.html#types">Types</a> — <a href="datum/controller/subsystem/roll.html#proc">Proc Details</a></header><main><h1>roll <aside>/<a href="datum.html">datum</a>/<a href="datum/controller/subsystem.html">controller/subsystem</a>/<a href="datum/controller/subsystem/roll.html">roll</a></aside> <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/controllers/subsystem/rolling.dm#L1"><img src="git.png" width="16" height="16" title="code/controllers/subsystem/rolling.dm 1"></a></h1><table class="summary" cellspacing="0"><tr><td colspan="2"><h2>Procs</h2></td></tr><tr><th><a href="datum/controller/subsystem/roll.html#proc/storyteller_roll">storyteller_roll</a></th><td>Rolls a number of dice according to Storyteller system rules to find
+success or number of successes.</td></tr></table><h2 id="proc">Proc Details</h2><h3 id="proc/storyteller_roll"><aside class="declaration">proc </aside>storyteller_roll<aside>(dice, difficulty, numerical, /list/mobs_to_show_output)  <a href="https://github.com/The-Final-Nights/The-Final-Nights/blob/1ce3365f16625d6bdd76475b550ecd8453b8148e/code/controllers/subsystem/rolling.dm#L23"><img src="git.png" width="16" height="16" title="code/controllers/subsystem/rolling.dm 23"></a></aside></h3><p>Rolls a number of dice according to Storyteller system rules to find
+success or number of successes.</p>
+<p>Rolls a number of 10-sided dice, counting them as a &quot;success&quot; if
+they land on a number equal to or greater than the difficulty. Dice
+that land on 1 subtract a success from the total, and the minimum
+difficulty is 2. The number of successes is returned if numerical
+is true, or the roll outcome (botch, failure, success) as a defined
+number if false.</p>
+<p>Arguments:</p>
+<ul>
+<li>dice - number of 10-sided dice to roll.</li>
+<li>difficulty - the number that a dice must come up as to count as a success.</li>
+<li>numerical - whether the proc returns number of successes or outcome (botch, failure, success)</li>
+<li>roll header:</li>
+</ul></main><footer>tgstation.dme <a href="https://github.com/The-Final-Nights/The-Final-Nights/tree/1ce3365f16625d6bdd76475b550ecd8453b8148e">1ce3365</a> (master) — <a href="https://github.com/SpaceManiac/SpacemanDMM/blob/master/crates/dmdoc/README.md">dmdoc 1.9.0</a></footer></body></html>
