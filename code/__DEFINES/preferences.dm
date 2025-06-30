@@ -81,6 +81,7 @@
 #define EXP_TYPE_ANARCH			"Anarchs"
 #define EXP_TYPE_OTHER_CITIZEN "Unaligned"
 #define EXP_TYPE_NEUTRALS		"Neutrals"
+#define EXP_TYPE_SABBAT         "Sabbat"
 #define EXP_TYPE_ANTAG			"Antag"
 #define EXP_TYPE_COUNCIL        "Camarilla Primogen Council"
 #define EXP_TYPE_POLICE         "Police Force"
