@@ -1,13 +1,14 @@
 /obj/item/wirecutters
 	name = "wirecutters"
 	desc = "This cuts wires."
-	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "fixer"
+	icon = 'code/modules/wod13/items.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	onflooricon_state = "fixer"
 	inhand_icon_state = "cutters"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
+
 
 	flags_1 = CONDUCT_1
 	slot_flags = ITEM_SLOT_BELT
@@ -59,3 +60,39 @@
 	icon_state = "wirecutters_cyborg"
 	worn_icon_state = "cutters"
 	toolspeed = 0.5
+
+/obj/item/wirecutters/pliers
+	name = "dental pliers"
+	desc = "Meant for taking out teeth."
+	icon_state = "neat_ripper"
+	toolspeed = 2 //isn't meant for cutting wires
+	/// If pulling fangs lasts for the entire ROUND or not.
+	var/permanent = TRUE
+
+/obj/item/wirecutters/pliers/bad_pliers
+	name = "pliers"
+	desc = "Meant for pulling wires but you could definetly crush something with these."
+	icon_state = "ripper"
+	toolspeed = 1.2 //is an actual tool but can't actually cut
+	permanent = FALSE
+
+/obj/item/wirecutters/pliers/attack(mob/living/target, mob/living/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_PACIFISM))
+		return
+	if(!iskindred(target))
+		return
+	if(HAS_TRAIT(target, TRAIT_BABY_TEETH))
+		visible_message(usr, span_warning("[user] can't pull out the fangs of [target] because they are already deformed!"))
+	else
+		user.visible_message(span_warning("[user] takes [src] straight to the [target]'s Fangs!"), span_warning("You take [src] straight to the [target]'s Fangs!"))
+		if(!do_after(user, 30, target))
+			return
+		user.do_attack_animation(target)
+		user.visible_message(span_warning("[user] rips out [target]'s fangs!"), span_warning("You rip out [target]'s fangs!"))
+		target.emote("scream")
+		if (permanent == TRUE)
+			target.apply_status_effect(STATUS_EFFECT_SEVERE_BABY_TEETH)
+			visible_message(span_warning("[user] stuff's in Bone putty into [target] to stop their fangs from regrowing!"))
+		else
+			target.apply_status_effect(STATUS_EFFECT_BABY_TEETH)

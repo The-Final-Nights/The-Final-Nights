@@ -163,6 +163,7 @@
 #define TRAIT_CURRENTLY_CLEANING "currently_cleaning"
 
 #define TRAIT_THUNDERSHOT		"thundershot" // Fire without ammo.
+#define TRAIT_BABY_TEETH		"baby_teeth"
 
 // You can stare into the abyss, but it does not stare back.
 // You're immune to the hallucination effect of the supermatter, either

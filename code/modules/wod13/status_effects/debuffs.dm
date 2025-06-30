@@ -1043,6 +1043,42 @@
 		REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
 
 
+/datum/status_effect/babyteeth
+	id = "fangs_pulled"
+	status_type = STATUS_EFFECT_UNIQUE
+	duration = 60 MINUTES
+	alert_type = /atom/movable/screen/alert/status_effect/babyteeth
+
+/atom/movable/screen/alert/status_effect/babyteeth
+	name = "Baby Teeth"
+	desc = "Your teeth are deformed! You can't bite people anymore!"
+
+/datum/status_effect/babyteeth/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_BABY_TEETH, MAGIC_TRAIT)
+
+/datum/status_effect/babyteeth/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_BABY_TEETH, MAGIC_TRAIT)
+
+/datum/status_effect/pbabyteeth
+	id = "fangs_pulled_round"
+	status_type = STATUS_EFFECT_UNIQUE
+	duration = -1
+	alert_type = /atom/movable/screen/alert/status_effect/pbabyteeth
+
+/atom/movable/screen/alert/status_effect/pbabyteeth
+	name = "Severe Baby Teeth"
+	desc = "Your teeth are deformed! You can't bite people anymore and you don't think these will heal on their own for the night!"
+
+/datum/status_effect/pbabyteeth/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_BABY_TEETH, MAGIC_TRAIT)
+
+/datum/status_effect/pbabyteeth/on_remove()
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_BABY_TEETH, MAGIC_TRAIT)
+
 //WARRIOR VALEREN 3 - BURNING TOUCH
 /datum/status_effect/burning_touch
 	id = "burning_touch"
@@ -1071,3 +1107,4 @@
 /datum/status_effect/burning_touch/Destroy()
 	source = null
 	return ..()
+
