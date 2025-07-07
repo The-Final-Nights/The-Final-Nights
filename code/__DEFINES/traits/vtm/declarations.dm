@@ -79,4 +79,4 @@
 /// If face is uncovered, they will be obviously supernatural to everyone nearby
 #define TRAIT_MASQUERADE_VIOLATING_FACE "masquerade_violating_face"
 /// Perfect defence - can't be harmed by any melee or ranged attack or shoved/disarmed, although explosions will still impact them.
-#define TRAIT_PERFECT_DEFENCE
+#define TRAIT_PERFECT_DEFENCE "perfect_defence" 
