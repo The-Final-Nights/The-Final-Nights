@@ -24,6 +24,11 @@
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		visible_message("<span class='danger'>[src] dodges the attack!</span>", "<span class='danger'>You dodge the attack!</span>")
 		return
+	if(HAS_TRAIT(src, TRAIT_PERFECT_DEFENCE))
+		user.do_attack_animation(src)
+		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
+		visible_message("<span class='danger'>[src] blocks!</span>", "<span class='danger'>You block the attack!</span>")
+		return
 	if(blocking)
 		if(istype(W, /obj/item/melee))
 			var/obj/item/melee/WEP = W
