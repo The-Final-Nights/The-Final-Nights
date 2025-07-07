@@ -63,7 +63,8 @@
 		/datum/discipline_power/celerity/two,
 		/datum/discipline_power/celerity/three,
 		/datum/discipline_power/celerity/four,
-		/datum/discipline_power/celerity/five
+		/datum/discipline_power/celerity/five,
+		/datum/discipline_power/celerity/six
 	)
 
 /datum/discipline_power/celerity/one/activate()
@@ -100,7 +101,8 @@
 		/datum/discipline_power/celerity/one,
 		/datum/discipline_power/celerity/three,
 		/datum/discipline_power/celerity/four,
-		/datum/discipline_power/celerity/five
+		/datum/discipline_power/celerity/five,
+		/datum/discipline_power/celerity/six
 	)
 
 /datum/discipline_power/celerity/two/activate()
@@ -136,7 +138,8 @@
 		/datum/discipline_power/celerity/one,
 		/datum/discipline_power/celerity/two,
 		/datum/discipline_power/celerity/four,
-		/datum/discipline_power/celerity/five
+		/datum/discipline_power/celerity/five,
+		/datum/discipline_power/celerity/six
 	)
 
 /datum/discipline_power/celerity/three/activate()
@@ -172,7 +175,8 @@
 		/datum/discipline_power/celerity/one,
 		/datum/discipline_power/celerity/two,
 		/datum/discipline_power/celerity/three,
-		/datum/discipline_power/celerity/five
+		/datum/discipline_power/celerity/five,
+		/datum/discipline_power/celerity/six
 	)
 
 /datum/discipline_power/celerity/four/activate()
@@ -208,7 +212,8 @@
 		/datum/discipline_power/celerity/one,
 		/datum/discipline_power/celerity/two,
 		/datum/discipline_power/celerity/three,
-		/datum/discipline_power/celerity/four
+		/datum/discipline_power/celerity/four,
+		/datum/discipline_power/celerity/six
 	)
 
 /datum/discipline_power/celerity/five/activate()
@@ -230,6 +235,17 @@
 /datum/discipline_power/celerity/six
 	name = "Flawless Parry"
 	desc = "Make perfect defensive motions at the expense of taking no other action."
+
+	toggled = TRUE
+	duration_length = 2 TURNS
+
+	grouped_powers = list(
+		/datum/discipline_power/celerity/one,
+		/datum/discipline_power/celerity/two,
+		/datum/discipline_power/celerity/three,
+		/datum/discipline_power/celerity/four,
+		/datum/discipline_power/celerity/five
+	)
 
 /datum/discipline_power/celerity/six/activate()
 	. = ..()
