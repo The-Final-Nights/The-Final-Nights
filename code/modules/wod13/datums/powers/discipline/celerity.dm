@@ -226,3 +226,19 @@
 
 	owner.celerity_visual = FALSE
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity5)
+
+/datum/discipline_power/celerity/six
+	name = "Flawless Parry"
+	desc = "Make perfect defensive motions at the expense of taking no other action."
+
+/datum/discipline_power/celerity/six/activate()
+	. = ..()
+	RegisterSignal(owner, COMSIG_POWER_PRE_ACTIVATION, PROC_REF(temporis_explode))
+
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity5)
+
+/datum/discipline_power/celerity/six/deactivate()
+	. = ..()
+	UnregisterSignal(owner, COMSIG_POWER_PRE_ACTIVATION)
+
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity5)
