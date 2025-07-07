@@ -679,10 +679,12 @@
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		return
-	if(!target.IsStun() && prob(25))
+	if(!target.IsStun() && prob(10))
 		visible_message("<span class='warning'>[user] bonks [src]'s head!</span>", "<span class='warning'>You bonk[target]'s head!</span>")
-		target.Stun(5)
-		target.drop_all_held_items()
+		if(user.mind && is_sabbatist(user))
+			target.Stun(3 SECONDS)
+			target.emote("collapse")
+			target.drop_all_held_items()
 
 /obj/item/melee/vampirearms/katana/kosa
 	name = "scythe"

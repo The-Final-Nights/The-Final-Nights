@@ -113,18 +113,5 @@
 		StartCooldown()
 		// replace some letters to make the font more closely resemble that of vtm: bloodlines' malkavian dialogue
 		// big thanks to Metek for helping me condense this from a bunch of ugly regex replace procs
-		var/list/replacements = list(
-			"a"    = "𝙖",            "A" = "𝘼",
-			"d"    = pick("𝓭","𝓓"), "D" = "𝓓",
-			"e"    = "𝙚",            "E" = "𝙀",
-			"i"    = "𝙞",            "I" = pick("ﾉ", "𝐼"), //rudimentary prob(50) to pick one or the other
-			"l"    = pick("𝙇","l"),  "L" = pick("𝙇","𝓛"),
-			"n"    = "𝙣",            "N" = pick("𝓝","𝙉"),
-			"o"    = "𝙤",            "O" = "𝙊",
-			"s"    = "𝘴",            "S" = "𝙎",
-			"u"    = "𝙪",            "U" = "𝙐",
-			"v"	   = "𝐯",            "V" = "𝓥",
-		)
-		for(var/letter in replacements)
-			mad_speak = replacetextEx(mad_speak, letter, replacements[letter])
+		mad_speak = spooky_font_replace(mad_speak)
 		owner.say(mad_speak, spans = list(SPAN_SANS)) // say() handles sanitation on its own

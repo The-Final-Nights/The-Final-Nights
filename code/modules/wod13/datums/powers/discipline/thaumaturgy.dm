@@ -177,22 +177,26 @@
 
 //THEFT OF VITAE
 /mob/living/proc/tremere_gib()
-	Stun(5 SECONDS)
-	new /obj/effect/temp_visual/tremere(loc, "gib")
-	animate(src, pixel_y = 16, color = "#ff0000", time = 5 SECONDS, loop = 1)
-
-	spawn(5 SECONDS)
-		if(stat != DEAD)
-			death()
-		var/list/items = list()
-		items |= get_equipped_items(TRUE)
-		for(var/obj/item/I in items)
-			dropItemToGround(I)
-		drop_all_held_items()
-		spawn_gibs()
-		spawn_gibs()
-		spawn_gibs()
-		qdel(src)
+	// TFN EDIT START - THAUMATURGYFIXES - Check for player control before gibbing
+	if(!ckey || ckey == "") // No player controlling this mob
+		Stun(5 SECONDS)
+		new /obj/effect/temp_visual/tremere(loc, "gib")
+		animate(src, pixel_y = 16, color = "#ff0000", time = 5 SECONDS, loop = 1)
+		spawn(5 SECONDS)
+			if(stat != DEAD)
+				death()
+			var/list/items = list()
+			items |= get_equipped_items(TRUE)
+			for(var/obj/item/I in items)
+				dropItemToGround(I)
+			drop_all_held_items()
+			spawn_gibs()
+			spawn_gibs()
+			spawn_gibs()
+			qdel(src)
+	else // Player-controlled mob
+		apply_damage(50, BURN)
+	// TFN EDIT END
 
 /datum/discipline_power/thaumaturgy/theft_of_vitae
 	name = "Theft of Vitae"
@@ -211,7 +215,9 @@
 
 /datum/discipline_power/thaumaturgy/theft_of_vitae/activate(mob/living/target)
 	. = ..()
-	if(iscarbon(target))
+	// TFN EDIT START -- Thaumaturgy fixes -- Original : if(iscarbon(target))
+	if(iscarbon(target) || istype(target, /mob/living/simple_animal/werewolf))
+	// TFN EDIT END -- Thaumaturgy fixes
 		target.visible_message(span_danger("[target] throws up!"), span_userdanger("You throw up!"))
 		target.add_splatter_floor(get_turf(target))
 		target.add_splatter_floor(get_turf(get_step(target, target.dir)))
@@ -257,7 +263,9 @@
 
 /datum/discipline_power/thaumaturgy/cauldron_of_blood/activate(mob/living/target)
 	. = ..()
-	if(iscarbon(target))
+	//TFN EDIT START -- Thaumaturgy fixes - original : if(iscarbon(target))
+	if(iscarbon(target) || istype(target, /mob/living/simple_animal/werewolf))
+	//TFN EDIT END -- Thaumaturgy fixes
 		new /obj/effect/temp_visual/tremere(target.loc, "gib")
 
 		target.visible_message(span_danger("[target] reddens and quakes!"), span_userdanger("Your veins feel like they're on fire!"))
@@ -315,8 +323,9 @@
 	target.Stun(2.5 SECONDS)
 	target.apply_damage(30, BURN, owner.zone_selected)
 	target.visible_message(span_warning("[target] collapses to the floor, thrashing in torment!"), span_userdanger("IT BURNS! IT BURNS!! IT BURNS!!!"))
+	/* // TFN EDIT REMOVAL START - Thaumaturgy Fixes - was causing the stun to last far longer than intended
 	target.emote("collapse")
-
+	*/
 
 //RUNE DRAWING
 /datum/action/thaumaturgy

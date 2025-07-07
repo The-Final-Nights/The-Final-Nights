@@ -459,6 +459,14 @@
 									childe_prefs_v.discipline_levels += 1
 
 							childe_prefs_v.save_character()
+							// Sabbatist Embrace Logic
+							if(sire.mind && is_sabbatist(sire))
+								if(childe.mind && !is_sabbatist(childe))
+									childe.mind.assigned_role = "Sabbat Pack"
+									var/datum/antagonist/temp_antag = new()
+									temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", childe)
+									qdel(temp_antag)
+									log_game("[key_name(sire)] has spread Sabbatism to [key_name(childe)] via Embrace.")
 					else
 						to_chat(owner, span_notice("[childe] is totally <b>DEAD</b>!"))
 						giving = FALSE
@@ -489,6 +497,15 @@
 					else
 						message_admins("[ADMIN_LOOKUPFLW(regnant)] has bloodbonded [ADMIN_LOOKUPFLW(thrall)].")
 						log_game("[key_name(regnant)] has bloodbonded [key_name(thrall)].")
+
+					// Sabbatist Ghouling Logic
+					if(regnant.mind && 	is_sabbatist(regnant))
+						if(thrall.mind && !is_sabbatist(thrall))
+							thrall.mind.assigned_role = "Sabbat Pack"
+							var/datum/antagonist/temp_antag = new()
+							temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", thrall)
+							qdel(temp_antag)
+							log_game("[key_name(regnant)] has spread Sabbatism to [key_name(thrall)] via vitae.")
 
 					if(length(regnant.reagents?.reagent_list))
 						regnant.reagents.trans_to(thrall, min(10, regnant.reagents.total_volume), transfered_by = regnant, methods = VAMPIRE)

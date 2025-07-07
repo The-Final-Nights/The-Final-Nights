@@ -22,6 +22,11 @@
 	if(!iscorvid(src))
 		var/datum/action/gift/hispo/hispo = new()
 		hispo.Grant(src)
+	else
+		var/datum/action/innate/togglecorvidflight/toggleflight = new()
+		toggleflight.Grant(src)
+		var/datum/action/fly_upper/fly_up = new()
+		fly_up.Grant(src)
 
 /mob/living/simple_animal/werewolf/lupus/corvid // yes, this is a subtype of lupus, god help us all
 	name = "corvid"
@@ -34,6 +39,34 @@
 	melee_damage_upper = 20 // less damage for silly ravens
 	health = 100
 	maxHealth = 100 // I predict that the sprites will be hell to click, no extra HP compared to homid
+
+/datum/action/innate/togglecorvidflight // this action handles corvid forms toggle their flight, and swaps their sprite to be of the relevant type, I'm making it a gift because it's also what Hispo is under
+	name = "Toggle Flight"
+	desc = "Unfurl or withdraw your wings, toggling your ability to fly"
+	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_IMMOBILE
+	icon_icon = 'icons/mob/actions/actions_items.dmi'
+	button_icon_state = "flight"
+
+/datum/action/innate/togglecorvidflight/Trigger(trigger_flags)
+	var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = owner
+	if (!(corvid.movement_type & FLYING))
+		to_chat(corvid, span_notice("You beat your wings and begin to hover gently above the ground..."))
+		corvid.set_resting(FALSE, TRUE)
+		ADD_TRAIT(corvid, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT) // sadly, "is flying animal" does not give us flying traits when life() is called, only during VV or upon Init. We're doing this the hard way.
+		ADD_TRAIT(corvid, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT) // the corax sprites already animate up-and-down bobbing, no need to float
+		corvid.icon_state = "[corvid.sprite_color]_flying" // we set this while we wait for the icons to update, otherwise there is latency
+	else
+		to_chat(corvid, span_notice("You settle gently back onto the ground..."))
+		REMOVE_TRAIT(corvid, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT)
+		REMOVE_TRAIT(corvid, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
+		corvid.icon_state = "[corvid.sprite_color]"
+
+	corvid.cut_overlays()
+	var/mutable_appearance/flight_overlay = mutable_appearance(corvid.icon, "eyes[HAS_TRAIT(corvid, TRAIT_MOVE_FLYING) ? "_flying" : ""]")
+	flight_overlay.color = corvid.sprite_eye_color
+	flight_overlay.plane = ABOVE_LIGHTING_PLANE
+	flight_overlay.layer = ABOVE_LIGHTING_LAYER
+	corvid.add_overlay(flight_overlay)
 
 /datum/movespeed_modifier/lupusform
 	multiplicative_slowdown = -1.7
@@ -48,6 +81,8 @@
 		laid_down = TRUE
 	else
 		icon_state = wyrm_tainted ? "spiral[sprite_color]" : "[sprite_color]"
+	if(HAS_TRAIT(src, TRAIT_MOVE_FLYING))
+		icon_state = "[sprite_color]_flying"
 
 	switch(getFireLoss()+getBruteLoss())
 		if(25 to 75)
@@ -60,7 +95,7 @@
 			var/mutable_appearance/damage_overlay = mutable_appearance(icon, "damage3[laid_down ? "_rest" : ""]")
 			add_overlay(damage_overlay)
 
-	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : ""]")
+	var/mutable_appearance/eye_overlay = mutable_appearance(icon, "eyes[laid_down ? "_rest" : HAS_TRAIT(src, TRAIT_MOVE_FLYING) ? "_flying" : ""]")
 	eye_overlay.color = sprite_eye_color
 	eye_overlay.plane = ABOVE_LIGHTING_PLANE
 	eye_overlay.layer = ABOVE_LIGHTING_LAYER

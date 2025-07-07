@@ -1,0 +1,7 @@
+author: "chazzyjazzy"
+delete-after: True
+changes:
+  - rscadd: "Adds Sabbat sect with three playable roles, Sabbat Pack, Sabbat Ductus, Sabbat Priest."
+  - rscadd: "Multiple ritae and flavor for Sabbat, including Vaulderie, war parties, initiation rites, shovelheading, monomacy, and blood baths"
+  - rscdel: "Removed redundant \"Caitiff\" lateparty setting, as we have Caitiff available for round-persistent characters already"
+  - map: "Adds a run-down Sabbat lair, home to only the most beastly of Cainites."

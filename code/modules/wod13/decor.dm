@@ -1381,6 +1381,154 @@
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 
+/obj/structure/bath/sabbatbath
+	name = "sabbat bath"
+	desc = "A large ceremonial bath, commonly used in Sabbat rituals. It appears to be designed to hold blood."
+	icon_state = "tub"
+	can_buckle = TRUE
+	buckle_lying = 90
+	layer = BELOW_MOB_LAYER
+	var/blood_level = 0
+	var/max_blood = 500
+	var/list/blood_donors = list() // List to store blood donors
+
+/obj/structure/bath/sabbatbath/Initialize()
+	. = ..()
+	create_reagents(max_blood, INJECTABLE)
+	update_icon()
+
+/obj/structure/bath/sabbatbath/examine(mob/user)
+	. = ..()
+	if(blood_level <= 0)
+		. += span_notice("The bath is empty.")
+	else
+		. += span_notice("The bath is filled with blood.")
+
+	if(length(blood_donors) > 0)
+		. += span_notice("You can sense [length(blood_donors)] different blood donor[length(blood_donors) == 1 ? "" : "s"] in the mixture.")
+
+/obj/structure/bath/sabbatbath/update_icon()
+	. = ..()
+	// Change the sprite when it contains blood
+	if(blood_level > 0)
+		icon_state = "bath_full_blood"
+	else
+		icon_state = "tub"
+
+/obj/structure/bath/sabbatbath/attackby(obj/item/W, mob/living/carbon/user, params)
+	if(istype(W, /obj/item/sabbat_priest_tome))
+		if(user.mind && is_sabbat_priest(user) && has_buckled_mobs())
+			var/mob/living/buckled_mob = buckled_mobs[1]
+			if(buckled_mob.mind)
+				// First, demote any existing Ductus to regular Sabbat Pack
+				for(var/mob/living/carbon/human/H in GLOB.player_list)
+					if(H.mind && is_sabbat_ductus(H))
+						H.mind.assigned_role = "Sabbat Pack"
+						var/datum/antagonist/temp_antag = new()
+						temp_antag.remove_antag_hud(ANTAG_HUD_REV, H)
+						temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", H)
+						qdel(temp_antag)
+
+						to_chat(H, span_cult("You feel your authority as Ductus slipping away... You are now a regular pack member..."))
+				// Then promote the new Ductus
+				buckled_mob.mind.assigned_role = "Sabbat Ductus"
+				var/datum/antagonist/temp_antag = new()
+				temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev_head", buckled_mob)
+				qdel(temp_antag)
+				// Notify all Sabbat members of the new Ductus
+				for(var/mob/living/carbon/human/sabbat_member in GLOB.player_list)
+					if(sabbat_member.mind && is_sabbatist(sabbat_member))
+						to_chat(sabbat_member, span_cult("[buckled_mob] has been anointed as the new Ductus of the pack!"))
+
+				to_chat(buckled_mob, span_cult("You have been anointed as the new Ductus of the pack!"))
+		return
+	if(istype(W, /obj/item/melee/vampirearms/knife))
+		playsound(loc,'sound/weapons/bladeslice.ogg', 50, FALSE)
+		if(do_after(user, 100))
+			if(user.bloodpool <= 0)
+				to_chat(user, span_warning("You have no blood to donate!"))
+				return
+
+			user.visible_message(span_notice("[user] cuts [user.p_their()] wrist and lets blood flow into the bath."), span_notice("You cut your wrist and let blood flow into the bath."))
+
+			// Calculate how much blood to transfer
+			var/amount_to_donate = min(user.bloodpool, 3)
+
+			// Subtract blood from user
+			user.bloodpool -= amount_to_donate
+
+			// Add blood to bath
+			blood_level = min(blood_level + amount_to_donate, max_blood)
+			reagents.add_reagent(/datum/reagent/blood, amount_to_donate)
+
+			// Add donor to list if not already there
+			if(!(user in blood_donors))
+				blood_donors += user
+
+			// Update the tub to show blood
+			update_icon()
+
+			return TRUE
+		else
+			to_chat(user, span_warning("You decide not to add your blood to the bathtub..."))
+
+	// Handle vaulderie goblet specifically so that the Priest can use the tub's blood for vaulderie (part of the blood bath rite)
+	if(istype(W, /obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet))
+		var/obj/item/reagent_containers/food/drinks/silver_goblet/vaulderie_goblet/goblet = W
+		if(blood_level <= 0)
+			to_chat(user, span_warning("The bath is empty."))
+			return
+
+		var/transfer_amount = min(goblet.volume - goblet.reagents.total_volume, blood_level)
+		if(transfer_amount <= 0)
+			to_chat(user, span_warning("The goblet is already full."))
+			return
+
+		user.visible_message(span_notice("[user] scoops blood from the bath into [goblet]."), span_notice("You scoop blood from the bath into [goblet]."))
+
+		// Transfer blood
+		reagents.trans_to(goblet, transfer_amount)
+		blood_level -= transfer_amount
+
+		// Transfer donor information
+		if(length(blood_donors) > 0)
+			goblet.blood_donors = blood_donors
+
+		// Update icon if the bath is now empty
+		if(blood_level <= 0)
+			update_icon()
+
+		return TRUE
+
+	return ..()
+
+/obj/structure/bath/sabbatbath/user_buckle_mob(mob/living/M, mob/user, check_loc = TRUE)
+	. = ..()
+	if(. && blood_level > 0)
+		playsound(loc, 'code/modules/wod13/sounds/catched.ogg', 50, FALSE)
+		if(do_after(user, 100))
+			if(M == user)
+				M.visible_message(span_notice("[user] climbs into the blood-filled bath."), span_notice("You climb into the blood-filled bath."))
+			else
+				M.visible_message(span_notice("[user] places [M] in the blood-filled bath."), span_notice("[user] places you in the blood-filled bath."))
+
+
+/obj/structure/bath/sabbatbath/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
+	. = ..()
+	if(.)
+		if(buckled_mob == user)
+			buckled_mob.visible_message(span_notice("[buckled_mob] climbs out of the bath."), span_notice("You climb out of the bath."))
+		else
+			buckled_mob.visible_message(span_notice("[user] pulls [buckled_mob] out of the bath."), span_notice("[user] pulls you out of the bath."))
+
+		// Create blood splatters as they exit
+		if(blood_level > 0 && ishuman(buckled_mob))
+			var/turf/T = get_turf(src)
+			for(var/turf/adjacent in RANGE_TURFS(1, T))
+				if(prob(40) && adjacent != T)
+					buckled_mob.add_splatter_floor(adjacent)
+
+
 /obj/weapon_showcase
 	name = "weapon showcase"
 	desc = "Look, a gun."
@@ -1497,27 +1645,88 @@
 	if(istype(I, /obj/item/melee/vampirearms/shovel))
 		if(!burying)
 			burying = TRUE
-			user.visible_message("<span class='warning'>[user] starts to dig [src]</span>", "<span class='warning'>You start to dig [src].</span>")
-			if(do_mob(user, src, 10 SECONDS))
+			user.visible_message(span_warning("[user] starts to dig [src]"), span_warning("You start to dig [src]."))
+			if(do_after(user, 20 SECONDS))
 				burying = FALSE
 				if(icon_state == "pit0")
-					var/dead_amongst = FALSE
+					var/kindred_buried = FALSE
+					var/list/buried_kindred = list() // Track buried kindred for frenzy
+
 					for(var/mob/living/L in get_turf(src))
-						L.forceMove(src)
-						if(L.stat == DEAD)
-							dead_amongst = TRUE
-						icon_state = "pit1"
-						user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
-					if(!dead_amongst)
-						user.visible_message("<span class='warning'>[user] refills [src].</span>", "<span class='warning'>You refill [src].</span>")
+						L.forceMove(src) // Move the mob into the pit
+
+						// Check if the buried mob is kindred
+						if(istype(L, /mob/living/carbon) && ishuman(L))
+							var/mob/living/carbon/human/H = L
+							if(istype(H.dna.species, /datum/species/kindred))
+								kindred_buried = TRUE
+								buried_kindred += L
+								// Visual message for being buried
+								to_chat(L, span_userdanger("You are buried alive! The weight of the earth presses down on you, and panic begins to rise!"))
+								user.visible_message(span_warning("[L] struggles as they are buried!"))
+
+					// Update the pit state
+					icon_state = "pit1"
+					user.visible_message(span_warning("[user] digs a hole in [src]."), span_warning("You dig a hole in [src]."))
+
+
+					for(var/mob/living/carbon/K in buried_kindred)
+						if(do_after(K, 120 SECONDS, target = K, progress = TRUE))
+							kindred_frenzy_escape(K)
+						else
+							to_chat(K, span_warning("Your escape was interrupted!"))
+
+					// Only refill the pit if no one is buried
+					if(!kindred_buried)
+						user.visible_message(span_warning("[user] refills [src]."), span_warning("You refill [src]."))
 						qdel(src)
 				else
-					for(var/mob/living/L in src)
+					// Digging up the pit
+					for(var/mob/living/L in src) // This ensures we actually get the mobs from inside the pit
 						L.forceMove(get_turf(src))
+
+
 					icon_state = "pit0"
-					user.visible_message("<span class='warning'>[user] digs a hole in [src].</span>", "<span class='warning'>You dig a hole in [src].</span>")
+					user.visible_message(span_warning("[user] digs open [src]."), span_warning("You dig open [src]."))
+
+
 			else
 				burying = FALSE
+
+/// Process for kindred to enter frenzy and escape the burial pit
+/obj/structure/bury_pit/proc/kindred_frenzy_escape(mob/living/carbon/kindred)
+	if(!kindred || !istype(kindred) || kindred.stat == DEAD || !(kindred in src))
+		return
+
+	kindred.enter_frenzymod()
+	to_chat(kindred, span_userdanger("The Beast within you awakens with primal fury! You will NOT be contained!"))
+
+	visible_message(span_danger("[src] begins to shake violently as something struggles underneath!"))
+
+	// After a brief delay, the kindred breaks free
+	addtimer(CALLBACK(src, PROC_REF(complete_kindred_escape), kindred), 5 SECONDS)
+
+	// Exit frenzy after 30 seconds
+	addtimer(CALLBACK(kindred, TYPE_PROC_REF(/mob/living/carbon, exit_frenzymod)), 30 SECONDS)
+
+/obj/structure/bury_pit/proc/complete_kindred_escape(mob/living/carbon/kindred)
+	if(!kindred || !istype(kindred) || !(kindred in src))
+		return
+	kindred.SetParalyzed(0)
+	kindred.SetStun(0)
+	kindred.SetUnconscious(0)
+	kindred.SetSleeping(0)
+	kindred.SetImmobilized(0)
+
+	kindred.adjustBruteLoss(-50)
+	kindred.adjustFireLoss(-50)
+
+	// Move the kindred out of the pit
+	kindred.forceMove(get_turf(src))
+	icon_state = "pit0" // Pit is now open
+
+	// Visual effects
+	visible_message("<span class='danger'>[kindred] bursts from [src] in a frenzy, dirt flying everywhere!</span>")
 
 /obj/structure/bury_pit/container_resist_act(mob/living/user)
 	if(!burying)

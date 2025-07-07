@@ -1,0 +1,16 @@
+2025-07-01:
+  tzui5020:
+  - bugfix: fixed the lefthand sprite for the PSG1
+2025-07-03:
+  buffyuwu:
+  - rscadd: adds auspex 5 demons. now wouldbe auspex spies must dodge malevolent spirits
+      or be sent back to their bodies
+  - refactor: malkavians get their fonts from a font replacer proc now, so other code
+      can use the spooky characters too
+  chazzyjazzy:
+  - qol: Dominate 1's 'blue halo' now appears only on a successful cast. Removed the
+      default 'FORGET ABOUT IT' command.
+  - sound: Decreased Voice of Domination's volume from 300 to 80.
+2025-07-06:
+  chazzyjazzy:
+  - bugfix: fixes thaumaturgy instagibbing crinos/lupus and other simplemob transforms

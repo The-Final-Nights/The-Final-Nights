@@ -23,8 +23,13 @@
 		for(var/mob/living/carbon/human/H in masq_breakers)
 			if(iskindred(H) || isghoul(H) || iscathayan(H) || iszombie(H))
 				var/turf/TT = get_turf(H)
+				var/location_info = ""
+				if(TT && !is_sabbatist(H))
+					location_info = "[get_area_name(H)] X:[TT.x] Y:[TT.y]"
+				else if(is_sabbatist(H))
+					location_info = "[get_area_name(H)]"
 				if(TT)
-					to_chat(user, "[H.true_real_name], Masquerade: [H.masquerade], Diablerist: [H.diablerist ? "<b>YES</b>" : "NO"], [get_area_name(H)] X:[TT.x] Y:[TT.y]")
+					to_chat(user, "[H.real_name], Masquerade: [H.masquerade], Diablerist: [H.diablerist ? "<b>YES</b>" : "NO"], [location_info]")
 	else
 		to_chat(user, "No available Masquerade breakers in city...")
 

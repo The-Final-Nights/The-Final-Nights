@@ -121,28 +121,38 @@
 	if(!dominate_hearing_check(owner, target)) // putting the hearing check into the pre_activation so that if the target cant hear you it doesnt consume blood and alerts you
 		return FALSE
 
-	// This dominate check has a special difficulty that is dependent on the words entered in the custom command.
-	return TRUE
+	custom_command = tgui_input_text(owner, "Dominate Command", "What is your command?", encode = FALSE)
+
+	if (!custom_command)
+		return FALSE // No message, no dominate
+
+	if(can_afford())
+		var/word_count = length(splittext(custom_command, " "))
+		var/extra_words_difficulty = 4 + max(0, word_count - 1) // Base 4 +1 per extra word
+
+		if(dominate_check(owner, target, base_difficulty = extra_words_difficulty))
+			return TRUE
+		else
+			to_chat(owner, span_warning("[target] has resisted your domination!"))
+			to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
+			do_cooldown(TRUE)
+			return FALSE
+	else
+		to_chat(owner, span_warning("You do not have enough blood to cast Dominate!"))
+		return FALSE
 
 /datum/discipline_power/dominate/command/activate(mob/living/target)
 	. = ..()
+	to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
+	owner.say(custom_command)
+	to_chat(target, span_big("[custom_command]"))
+	to_chat(target,span_warning("[owner] has successfully dominated your mind!"))
+	SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 
-	custom_command = tgui_input_text(owner, "Dominate Command", "What is your command?", "FORGET ABOUT IT")
-	if (!custom_command)
-		return  // No message, no dominate
-
-	var/word_count = length(splittext(custom_command, " "))
-	var/extra_words_difficulty = 4 + max(0, word_count - 1) // Base 4 +1 per extra word
-
-	if(dominate_check(owner, target, base_difficulty = extra_words_difficulty))
-		to_chat(owner, span_warning("You've successfully dominated [target]'s mind!"))
-		owner.say("[custom_command]")
-		to_chat(target, span_big("[custom_command]"))
-		SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
-	else
-		to_chat(owner, span_warning("[target] has resisted your domination!"))
-		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
-
+	// to use the same proc that voice of god uses we need a list of listeners as well as a power multiplier. just create a list with the target of dom 1 and power multiplier of 1
+	var/list/listeners = list(target)
+	var/power_multiplier = 1
+	apply_voice_of_god_effects(custom_command, owner, listeners, power_multiplier)
 
 //MESMERIZE
 /datum/discipline_power/dominate/mesmerize

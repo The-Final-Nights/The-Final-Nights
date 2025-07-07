@@ -4,7 +4,9 @@
 	r_pocket = /obj/item/flashlight
 	suit = /obj/item/clothing/suit/vampire/trench
 	id = /obj/item/cockclock
-	backpack_contents = list(/obj/item/passport=1, /obj/item/vampire_stake=3, /obj/item/gun/ballistic/vampire/revolver=1, /obj/item/melee/vampirearms/knife=1, /obj/item/vamp/keys/hack=1, /obj/item/melee/vampirearms/katana/kosa=1)
+	backpack_contents = list(/obj/item/passport=1, /obj/item/vampire_stake=3, /obj/item/gun/ballistic/vampire/revolver=1, /obj/item/melee/vampirearms/knife=1, /obj/item/vamp/keys/hack=1, /obj/item/melee/vampirearms/katana/kosa=1, /obj/item/vamp/keys/sabbat=1)
+	//v_duty = "You are a member of the Sabbat. You are charged with rebellion against the Elders and the Camarilla, against the Jyhad, against the Masquerade and the Traditions, and the recognition of Caine as the true Dark Father of all Kindred kind. <br> <b> NOTE: BY PLAYING THIS ROLE YOU AGREE TO AND HAVE READ THE SERVER'S RULES ON ESCALATION FOR ANTAGS. KEEP THINGS INTERESTING AND ENGAGING FOR BOTH SIDES. KILLING PLAYERS JUST BECAUSE YOU CAN MAY RESULT IN A ROLEBAN. </b>"
+
 
 /datum/outfit/job/sabbatist/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -32,7 +34,6 @@
 		my_name = pick(GLOB.first_names_female)
 	var/my_surname = pick(GLOB.last_names)
 	H.fully_replace_character_name(null,"[my_name] [my_surname]")
-
 	var/list/landmarkslist = list()
 	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
 		if(S.name == name)
@@ -54,15 +55,12 @@
 	antag_hud_name = "rev"
 
 /datum/antagonist/sabbatist/on_gain()
-	add_antag_hud(ANTAG_HUD_REV, "rev", owner.current)
+	. = ..()
+	if(antag_hud_type && antag_hud_name)
+		add_antag_hud(antag_hud_type, antag_hud_name, owner.current)
+	else
+		add_antag_hud(ANTAG_HUD_REV, "rev", owner.current)
 	owner.special_role = src
-	var/datum/objective/custom/custom_objective = new
-	custom_objective.owner = owner
-	custom_objective.explanation_text = "Sow chaos, maim, butcher and kill. When you're done The Ivory Tower should be but a distant memory."
-	objectives += custom_objective
-	var/datum/objective/survive/survive_objective = new
-	survive_objective.owner = owner
-	objectives += survive_objective
 	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, use_reverb = FALSE)
 	return ..()
 
@@ -72,5 +70,5 @@
 	owner.special_role = null
 
 /datum/antagonist/sabbatist/greet()
-	to_chat(owner.current, "<span class='alertsyndie'>You are the part of Sabbat.</span>")
+	to_chat(owner.current, "<span class='alertsyndie'>You are now part of the Sabbat.</span>")
 	owner.announce_objectives()
