@@ -235,10 +235,24 @@
 	. = ..()
 	RegisterSignal(owner, COMSIG_POWER_PRE_ACTIVATION, PROC_REF(temporis_explode))
 
-	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity5)
+	ADD_TRAIT(owner, TRAIT_STUNIMMUNE, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_IMMOBILIZED, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_HANDS_BLOCK_PROJECTILES, MAGIC_TRAIT)
+
+	for(var/obj/stuff in owner.contents) //no disarm
+		ADD_TRAIT(stuff, TRAIT_NODROP, MAGIC)
 
 /datum/discipline_power/celerity/six/deactivate()
 	. = ..()
 	UnregisterSignal(owner, COMSIG_POWER_PRE_ACTIVATION)
 
-	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity5)
+	REMOVE_TRAIT(owner, TRAIT_STUNIMMUNE, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_IMMOBILIZED, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCK_PROJECTILES, MAGIC_TRAIT)
+
+	for(var/obj/stuff in owner.contents)
+		REMOVE_TRAIT(stuff, TRAIT_NODROP, MAGIC)
