@@ -84,3 +84,7 @@
 #define TRAIT_WALLBREAKER "wallbreaker" 
 /// Wallbreaker - Gains more Vitae from animals
 #define TRAIT_ANIMAL_SUCCULENCE "animal_succulence"
+/// Is unable to heal via blood heals
+#define TRAIT_THINNED_BLOOD "thinned_blood"
+/// Gain an extra BP from humans
+#define TRAIT_QUICKEN_MORTAL_BLOOD "quicken_mortal_blood"
