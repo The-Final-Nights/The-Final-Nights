@@ -157,7 +157,7 @@
 	name = "Rockheart"
 	desc = "Solidify your innermost organs to prevent damage"
 
-	level = 4
+	level = 6
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_LYING
 
 	violates_masquerade = FALSE
