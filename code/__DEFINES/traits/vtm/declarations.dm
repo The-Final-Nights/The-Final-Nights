@@ -82,3 +82,5 @@
 #define TRAIT_PERFECT_DEFENCE "perfect_defence" 
 /// Wallbreaker - Can break (most) walls
 #define TRAIT_WALLBREAKER "wallbreaker" 
+/// Wallbreaker - Gains more Vitae from animals
+TRAIT_ANIMAL_SUCCULENCE "animal_succulence
