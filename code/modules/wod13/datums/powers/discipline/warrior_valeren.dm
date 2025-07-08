@@ -202,7 +202,7 @@
 	desc = "Cause a victim to feel continuous pain that can cause damage or drive them to frenzy."
 	level = 6
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
-	vitae_cost = 3 //Basically can't miss, hence same cost as tabletop.
+	vitae_cost = 3
 	target_type = TARGET_LIVING
 	range = 3
 
