@@ -180,3 +180,23 @@
 
 /datum/movespeed_modifier/temporis5
 	multiplicative_slowdown = -2.5
+
+//KISS OF LACHESIS
+/datum/discipline_power/temporis/kiss_of_lachesis
+	name = "Kiss of Lachesis"
+	desc = "Change a target's biological age."
+
+	level = 6
+	target_type = TARGET_HUMAN
+	range = 7
+
+	hostile = TRUE
+
+	cooldown_length = 15 SECONDS
+
+/datum/discipline_power/temporis/kiss_of_lachesis/activate(mob/living/target)
+	. = ..()
+		var/new_age = tgui_input_number(user, "Choose your target's biological age:\n([AGE_MIN]-[AGE_MAX])", "Kiss of Lachesis", age, AGE_MAX, AGE_MIN, round_value = TRUE)
+				age = clamp(new_age, AGE_MIN, AGE_MAX)
+				if (age > total_age)
+						total_age = age
