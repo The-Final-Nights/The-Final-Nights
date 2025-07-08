@@ -178,3 +178,22 @@
 	if(owner.stat != DEAD)
 		shapeshift.Restore(shapeshift.myshape)
 		owner.Stun(1.5 SECONDS)
+
+//SONG IN THE DARK
+/datum/discipline_power/animalism/song_in_the_dark
+	name = "Song in the Dark"
+	desc = "Summon huge worms from the deep earth to shift the earth, creating caverns or earthquakes."
+
+	level = 6
+	violates_masquerade = TRUE
+
+	cooldown_length = 30 SECONDS
+
+/datum/discipline_power/animalism/song_in_the_dark/activate()
+	. = ..()
+	for(var/mob/living/L in orange(7, owner))
+		to_chat(L, "<span class='danger'><B>The ground quakes beneath your feet!</B></span>")
+		L.Paralyze(100)
+		L.adjustBruteLoss(150)
+		var/obj/structure/flora/rock/giant_rock = new(get_turf(src))
+		QDEL_IN(giant_rock, 200)
