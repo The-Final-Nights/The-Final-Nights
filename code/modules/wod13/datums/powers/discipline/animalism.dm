@@ -197,3 +197,7 @@
 		L.adjustBruteLoss(150)
 		var/obj/structure/flora/rock/giant_rock = new(get_turf(src))
 		QDEL_IN(giant_rock, 200)
+
+/datum/discipline_power/animalism/song_in_the_dark/post_gain()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_ANIMAL_SUCCULENCE, TRAIT_MAGIC)
