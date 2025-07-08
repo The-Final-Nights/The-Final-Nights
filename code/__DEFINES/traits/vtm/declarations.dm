@@ -83,4 +83,4 @@
 /// Wallbreaker - Can break (most) walls
 #define TRAIT_WALLBREAKER "wallbreaker" 
 /// Wallbreaker - Gains more Vitae from animals
-#define TRAIT_ANIMAL_SUCCULENCE "animal_succulence
+#define TRAIT_ANIMAL_SUCCULENCE "animal_succulence"
