@@ -33,6 +33,8 @@
 		return
 	play_attack_animation(claw = TRUE)
 	changeNext_move(CLICK_CD_MELEE)
+	if(HAS_TRAIT(src, TRAIT_WARRIOR))
+		changeNext_move(CLICK_CD_MELEE * 0.5)
 	var/list/turfs_to_attack = get_nearest_attack_turfs()
 	var/list/contents_list = new()
 	for(var/turf/turf as anything in turfs_to_attack)

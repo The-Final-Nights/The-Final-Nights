@@ -145,7 +145,10 @@
 			W.melee_attack_chain(src, A, params)
 		else
 			if(ismob(A))
-				changeNext_move(CLICK_CD_MELEE)
+				if(HAS_TRAIT(src, TRAIT_WARRIOR))
+					changeNext_move(CLICK_CD_MELEE * 0.5)
+				else
+					changeNext_move(CLICK_CD_MELEE)
 
 			UnarmedAttack(A, FALSE, modifiers)
 		return
@@ -160,7 +163,10 @@
 			W.melee_attack_chain(src, A, params)
 		else
 			if(ismob(A))
-				changeNext_move(CLICK_CD_MELEE)
+				if(HAS_TRAIT(src, TRAIT_WARRIOR))
+					changeNext_move(CLICK_CD_MELEE * 0.5)
+				else
+					changeNext_move(CLICK_CD_MELEE)
 			UnarmedAttack(A,1,modifiers)
 	else
 		if(W)
@@ -289,7 +295,11 @@
  */
 /mob/proc/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
 	if(ismob(A))
-		changeNext_move(CLICK_CD_MELEE)
+		var/mob/simple = src
+		if(HAS_TRAIT(simple, TRAIT_WARRIOR))
+			changeNext_move(CLICK_CD_MELEE * 0.5)
+		else
+			changeNext_move(CLICK_CD_MELEE)
 	return
 
 /**

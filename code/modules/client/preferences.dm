@@ -156,6 +156,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	//Renown
 	var/renownrank = 0
+	var/extra_gnosis = 0
 	var/honor = 0
 	var/glory = 0
 	var/wisdom = 0
@@ -233,7 +234,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/werewolf_hair = 0
 	var/werewolf_hair_color = "#000000"
 	var/werewolf_eye_color = "#FFFFFF"
-	var/werewolf_apparel
+	var/werewolf_apparel = "nothing"
 
 	var/werewolf_name
 	var/auspice_level = 1
@@ -280,10 +281,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	yang = initial(yang)
 	chi_types = list()
 	chi_levels = list()
-	renownrank = 0
-	honor = 0
-	glory = 0
-	wisdom = 0
+	renownrank = initial(renownrank)
+	auspice_level = initial(auspice_level)
+	extra_gnosis = 0
+	honor = initial(honor)
+	glory = initial(glory)
+	wisdom = initial(wisdom)
 	archetype = pick(subtypesof(/datum/archetype))
 	var/datum/archetype/A = new archetype()
 	physique = A.start_physique
@@ -562,6 +565,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						wisdom = 0
 					if(!renownrank)
 						renownrank = 0
+					if(!extra_gnosis)
+						extra_gnosis = 0
 					var/gloryXP = 25
 					var/honorXP = 25
 					var/wisdomXP = 25
@@ -591,17 +596,23 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								dat +=" <a href='byond://?_src_=prefs;preference=renownwisdom;task=input'>Raise Wisdom ([wisdomXP])</a><BR>"
 					dat += "<b>Renown Rank:</b> [RankName(renownrank,src.tribe.name)]<br>"
 					dat += "[RankDesc(renownrank, src.tribe.name)]<BR>"
+					dat += "<b> Extra Gnosis:</b> ([extra_gnosis]/5) <br>"
 					var/canraise = 0
+					var/can_raise_gnosis = 0
 					if(SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER))
 						if(renownrank < MAX_TRUSTED_RANK)
-							canraise = 1
+							canraise = AuspiceRankUp()
+						if(extra_gnosis < renownrank)
+							can_raise_gnosis = 1
 					else
 						if(renownrank < MAX_PUBLIC_RANK)
-							canraise = 1
+							canraise = AuspiceRankUp()
+						if(extra_gnosis < renownrank)
+							can_raise_gnosis = 1
 					if(canraise)
-						canraise = AuspiceRankUp()
-					if(canraise)
-						dat += " <a href='byond://?_src_=prefs;preference=renownrank;task=input'>Raise Renown Rank</a><BR>"
+						dat += "<a href='byond://?_src_=prefs;preference=renownrank;task=input'>Raise Renown Rank</a><BR>"
+					if(can_raise_gnosis && player_experience >= 50)
+						dat += "<a href='byond://?_src_=prefs;preference=extra_gnosis;task=input'>Raise Extra Gnosis ([extra_gnosis]/5) Cost: 50 EXP </a><BR>"
 					else if(renownrank < MAX_PUBLIC_RANK)
 						var/renownrequirement = RenownRequirements()
 						dat += "<b>Needed To Raise Renown:</b> [renownrequirement]<BR>"
@@ -679,6 +690,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				scar_crinos.layer = ABOVE_HUD_LAYER
 				DAWOF.overlays |= scar_crinos
 
+				var/obj/effect/overlay/apparel_crinos = new(DAWOF)
+				apparel_crinos.icon = 'code/modules/wod13/werewolf.dmi'
+				apparel_crinos.icon_state = "[werewolf_apparel]"
+				apparel_crinos.layer = ABOVE_HUD_LAYER
+				DAWOF.overlays |= apparel_crinos
+
 				var/obj/effect/overlay/hair_crinos = new(DAWOF)
 				hair_crinos.icon = 'code/modules/wod13/werewolf.dmi'
 				hair_crinos.icon_state = "hair[werewolf_hair]"
@@ -706,6 +723,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "Hair: <a href='byond://?_src_=prefs;preference=werewolf_hair;task=input'>[werewolf_hair]</a><BR>"
 				dat += "Hair Color: <a href='byond://?_src_=prefs;preference=werewolf_hair_color;task=input'>[werewolf_hair_color]</a><BR>"
 				dat += "Eyes: <a href='byond://?_src_=prefs;preference=werewolf_eye_color;task=input'>[werewolf_eye_color]</a><BR>"
+				dat += "Apparel :<a href='byond://?_src_=prefs;preference=werewolf_apparel;task=input'>[werewolf_apparel]</a><BR> "
+
 			if(pref_species.name == "Vampire")
 				dat += "<h2>[make_font_cool("CLAN")]</h2>"
 				dat += "<b>Clan/Bloodline:</b> <a href='byond://?_src_=prefs;preference=clan;task=input'>[clan.name]</a><BR>"
@@ -2524,6 +2543,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(new_eye)
 						werewolf_eye_color = sanitize_ooccolor(new_eye)
 
+				if("werewolf_apparel")
+					if(slotlocked || !(pref_species.id == "garou"))
+						return
+					var/list/apparel = list("nothing" = "Nothing", "loincloth" = "Simple loincloth", "green_tribal" = "Green tribal attire", "beige_tribal" = "Beige tribal attire", "leather_mantle" = "Leather mantle", "studs" = "Studded armbands", "dark_mantle" = "Dark mantle", "loincloth_armband" = "Loincloth with armbands", "skull_necklace" = "Skull necklace", "metal_armour" = "Metal armour", "fur_mantle" = "Furred mantle", "fur_necklace_and_vambrace" = "Fur necklace and vambrace", "armour_loincloth" = "Armour and loincloth")
+					var/result = tgui_input_list(user, "Select your Crinos form's apparel:", "Appearance Selection", sort_list(apparel))
+					if(result)
+						werewolf_apparel = result
+
 				if("auspice")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
@@ -2806,6 +2833,14 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				if("renownrank")
 					renownrank = renownrank+1
+
+				if("extra_gnosis")
+					var/cost = 50
+					if ((player_experience < cost) || !(pref_species.id == "garou"))
+						return
+					player_experience -= cost
+					experience_used_on_character += cost
+					extra_gnosis = extra_gnosis+1
 
 				if("renownglory")
 					var/cost = 25
@@ -3765,6 +3800,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.wisdom = wisdom
 		character.glory = glory
 		character.renownrank = renownrank
+		character.extra_gnosis = extra_gnosis
 
 		var/datum/auspice/CLN = new auspice.type()
 		character.auspice = CLN
@@ -3774,16 +3810,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		switch(breed)
 			if("Homid")
-				character.auspice.gnosis = 1
-				character.auspice.start_gnosis = 1
+				character.auspice.gnosis = 1 + character.extra_gnosis
+				character.auspice.start_gnosis = 1 + character.extra_gnosis
 				character.auspice.base_breed = "Homid"
 			if("Lupus")
-				character.auspice.gnosis = 5
-				character.auspice.start_gnosis = 5
+				character.auspice.gnosis = 5 + character.extra_gnosis
+				character.auspice.start_gnosis = 5 + character.extra_gnosis
 				character.auspice.base_breed = "Lupus"
 			if("Metis")
-				character.auspice.gnosis = 3
-				character.auspice.start_gnosis = 3
+				character.auspice.gnosis = 3 + character.extra_gnosis
+				character.auspice.start_gnosis = 3 + character.extra_gnosis
 				character.auspice.base_breed = "Crinos"
 		if(character.transformator?.crinos_form && character.transformator?.lupus_form && !HAS_TRAIT(character,TRAIT_CORAX))
 			var/mob/living/simple_animal/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
@@ -3801,6 +3837,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			crinos.sprite_hair = werewolf_hair
 			crinos.sprite_hair_color = werewolf_hair_color
 			crinos.sprite_eye_color = werewolf_eye_color
+			if (werewolf_apparel) // if we have picked an apparel, let it show. Showing the apparel 100% of the time causes the crinos form to become pitch black on the character screen tee hee
+				crinos.sprite_apparel = werewolf_apparel
 			lupus.sprite_color = werewolf_color
 			lupus.sprite_eye_color = werewolf_eye_color
 

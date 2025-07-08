@@ -37,7 +37,7 @@
 #define TRAIT_UNMASQUERADE		"unmasquerade"	//For tzi clothing
 #define TRAIT_NONMASQUERADE		"nonmasquerade"	//For tzi mods
 #define TRAIT_GUNFIGHTER        "gunfighter"    //Halves firing delay and cooldown between burst fire shots
-#define TRAIT_WARRIOR			"warrior"
+#define TRAIT_WARRIOR			"warrior"       //Halves attack delay for 'unarmed' weapons - think fists, Crinos claws, Tzimisce/Lasombra whips, etc.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
 #define TRAIT_DOGWOLF			"dogwolf"
 #define TRAIT_CORAX				"corax" // this is used to apply the Corax Crinos/Corvid, as well as make being in "corvid" not veil-damaging

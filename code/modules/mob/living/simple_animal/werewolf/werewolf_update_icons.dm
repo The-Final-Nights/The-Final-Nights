@@ -42,7 +42,7 @@
 			add_overlay(damage_overlay)
 
 	if(sprite_apparel)
-		var/mutable_appearance/clothing_overlay = mutable_appearance(icon, "[auspice.tribe.name][sprite_apparel][laid_down ? "_rest" : ""]")
+		var/mutable_appearance/clothing_overlay = mutable_appearance(icon, "[sprite_apparel][laid_down ? "_rest" : ""]")
 		add_overlay(clothing_overlay)
 
 	if(sprite_hair)
