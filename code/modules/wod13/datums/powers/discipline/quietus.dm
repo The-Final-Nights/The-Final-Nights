@@ -202,18 +202,30 @@
 			H.remove_overlay(MUTATIONS_LAYER)
 */
 
-/datum/discipline_power/quietus/taste_of_death
-	name = "Taste of Death"
-	desc = "Spit a glob of caustic blood at your enemies."
+/THIN BLOOD
+/datum/discipline_power/quietus/thin_blood
+	name = "Thin Blood"
+	desc = "Make a vampire unable to heal their wounds with vitae."
 
-	level = 5
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING | DISC_CHECK_FREE_HAND
-
+	level = 6
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
 	violates_masquerade = TRUE
 
-	cooldown_length = 5 SECONDS
+	cooldown_length = 10 SECONDS
 
-/datum/discipline_power/quietus/taste_of_death/activate()
+/datum/discipline_power/quietus/thin_blood/activate(mob/living/target)
 	. = ..()
-	//should be changed to a ranged attack targeting turfs
-	owner.put_in_active_hand(new /obj/item/gun/magic/quietus(owner), TRUE)
+	if(iskindred(target) || isghoul(target))
+		ADD_TRAIT(target, TRAIT_THINNED_BLOOD, TRAIT_MAGIC)
+		to_chat(owner, span_warning("You feel your blood thin, and healing become impossible!"))
+		addtimer(CALLBACK(target, PROC_REF(thin_blood_cure), 1 MINUTES)
+	else
+		to_chat(owner, span_warning("You dizzy for a moment."))
+
+/datum/discipline_power/quietus/thin_blood/thin_blood_cure(mob/living/target)
+	REMOVE_TRAIT(target, TRAIT_THINNED_BLOOD, TRAIT_MAGIC)
+	to_chat(owner, span_warning("You feel your blood return to normal, and healing become possible again!"))
+
+/datum/discipline_power/quietus/thin_blood/post_gain()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_QUICKEN_MORTAL_BLOOD, TRAIT_MAGIC)
