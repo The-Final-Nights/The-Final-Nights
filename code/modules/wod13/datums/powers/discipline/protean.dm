@@ -252,3 +252,34 @@
 	GA.Restore(GA.myshape)
 	owner.Stun(1 SECONDS)
 	owner.do_jitter_animation(15)
+
+//EYES OF THE BEAST
+/datum/discipline_power/protean/shape_mastery
+	name = "Shape Mastery"
+	desc = "Cause shapeshifters to revert to their natural form."
+
+	level = 6
+
+	check_flags = DISC_CHECK_CONSCIOUS
+	target_type = TARGET_LIVING
+	vitae_cost = 1
+	violates_masquerade = FALSE
+
+/datum/discipline_power/protean/shape_mastery/activate()
+	. = ..()
+	target.Restore()
+	if(iswerewolf(target) || isgarou(target))
+		switch(target.client.prefs.auspice.base_breed)
+			if("Homid")
+				target.transform(target, "Homid")
+			if("Lupus")
+				target.transform(target, "Lupus")
+			if("Crinos")
+				target.transform(target, "Crinos")
+			if("Corvid")
+				target.transform(target, "Corvid")
+			if("Corax Crinos")
+				target.transform(target, "Corax Crinos")
+/datum/discipline_power/protean/shape_mastery/post_gain()
+	. = ..()
+	owner.physiology.brute_mod *= 0 //Flesh of Marble 6th dot trait.
