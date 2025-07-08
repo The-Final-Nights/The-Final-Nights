@@ -359,3 +359,7 @@
 	to_chat(owner, span_notice("You have damaged [target]'s soul slightly."))
 	SEND_SIGNAL(target, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
 	points_can_restore--
+
+/datum/discipline_power/daimonion/diabolic_lure/post_gain()
+	. = ..()
+	owner.physiology.burn_mod = 0 //Ignore the searing flame 6th dot trait.
