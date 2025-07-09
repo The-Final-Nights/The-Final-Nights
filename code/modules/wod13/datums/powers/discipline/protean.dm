@@ -265,21 +265,24 @@
 	vitae_cost = 1
 	violates_masquerade = FALSE
 
-/datum/discipline_power/protean/shape_mastery/activate()
+/datum/discipline_power/protean/shape_mastery/activate(mob/living/target)
 	. = ..()
-	target.Restore()
+	var/obj/shapeshift_holder/shapeshift = locate() in target
+	if(shapeshift)
+		target = shapeshift.stored
+		shapeshift.restore()
 	if(iswerewolf(target) || isgarou(target))
 		switch(target.client.prefs.auspice.base_breed)
 			if("Homid")
-				target.transform(target, "Homid")
+				target.transformator.transform(target, "Homid", TRUE)
 			if("Lupus")
-				target.transform(target, "Lupus")
+				target.transformator.transform(target, "Lupus", TRUE)
 			if("Crinos")
-				target.transform(target, "Crinos")
+				target.transformator.transform(target, "Crinos", TRUE)
 			if("Corvid")
-				target.transform(target, "Corvid")
+				target.transformator.transform(target, "Corvid", TRUE)
 			if("Corax Crinos")
-				target.transform(target, "Corax Crinos")
+				target.transformator.transform(target, "Corax Crinos", TRUE)
 /datum/discipline_power/protean/shape_mastery/post_gain()
 	. = ..()
-	owner.physiology.brute_mod *= 0 //Flesh of Marble 6th dot trait.
+	owner.physiology.brute_mod *= 0.5 //Flesh of Marble 6th dot trait.
