@@ -450,8 +450,8 @@
 	var/selected_trait = input(owner, "Choose trait to damage:", "Traits") as null|anything in list("Physique", "Dexterity", "Social", "Mentality", "Cruelty", "Lockpicking", "Athletics")
 	if(!selected_trait)
 		return
-	to_chat(user, span_notice("You focus on damaging the target's self!"))
-	if (!do_after(user, 10 SECONDS))
+	to_chat(owner, span_notice("You focus on damaging the target's self!"))
+	if (!do_after(owner, 10 SECONDS))
 		return
 	switch(selected_trait)
 		if("Physique")
