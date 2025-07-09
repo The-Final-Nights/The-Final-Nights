@@ -471,7 +471,7 @@
 				to_chat(owner, span_warning("You drain some of [target]'s dexterity!"))
 			to_chat(target, span_warning("You feel less dextrous!"))
 		if("Social")
-			if(target.social <= 2
+			if(target.social <= 2)
 				to_chat(owner, span_warning("You drain the last of [target]'s social!"))
 				target.social = 0
 			else 
@@ -482,7 +482,7 @@
 			if(target.mentality <= 2)
 				to_chat(owner, span_warning("You drain the last of [target]'s mentality!"))
 				target.mentality = 0
-			else 
+			else
 				target.mentality -= 2
 				to_chat(owner, span_warning("You drain some of [target]'s mentality!"))
 			to_chat(target, span_warning("Your will feels weaker!"))
@@ -511,3 +511,4 @@
 				to_chat(owner, span_warning("You drain some of [target]'s athletics!"))
 			to_chat(target, span_warning("You feel less athletic!"))
 	uses--
+
