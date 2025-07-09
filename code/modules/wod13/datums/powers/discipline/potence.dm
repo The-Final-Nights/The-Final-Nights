@@ -275,7 +275,7 @@
 	ADD_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
 	ADD_TRAIT(owner, TRAIT_WALLBREAKER, TRAUMA_TRAIT)
 
-/datum/discipline_power/potence/five/deactivate()
+/datum/discipline_power/potence/six/deactivate()
 	. = ..()
 	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
 	owner.dna.species.punchdamagelow -= 20
