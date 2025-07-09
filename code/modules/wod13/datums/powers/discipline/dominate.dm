@@ -3,7 +3,6 @@
 	desc = "Suppresses will of your targets and forces them to obey you, if their will is not more powerful than yours."
 	icon_state = "dominate"
 	power_type = /datum/discipline_power/dominate
-	var/domination_succeeded = FALSE
 
 
 /datum/discipline/dominate/post_gain()
@@ -54,6 +53,7 @@
 	desc = "Dominate power description"
 
 	activate_sound = 'code/modules/wod13/sounds/dominate.ogg'
+	var/domination_succeeded = FALSE
 
 /datum/discipline_power/dominate/activate(mob/living/target)
 	. = ..()
@@ -395,34 +395,35 @@
 		do_cooldown(cooldown_length)
 		return FALSE
 
-/datum/discipline_power/dominate/autonomic_mastery/activate(mob/living/target)
+/datum/discipline_power/dominate/autonomic_mastery/activate(mob/living/carbon/human/target)
 	. = ..()
 	if(domination_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s bodily functions!"))
 		var/orders = input("Select a Command","Command Selection") as null|anything in list("Sleep", "Wake", "Heart Attack", "Revive")
-			if(!orders)
-				return
-			if (!do_after(user, 10 SECONDS))
-				return
-			switch(orders)
-				if("Sleep")
-					target.Sleeping(200)
-					to_chat(target, span_danger("You feel suddenly exhausted"))
-					SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
-				if("Wake")
-					target.SetSleeping(0)
-					to_chat(target, span_danger("You feel suddenly energetic"))
-					SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
-				if("Heart Attack")
-					target.adjustStaminaLoss(60, FALSE)
-					target.set_heartattack(TRUE)
-					to_chat(target, span_danger("You feel a terrible pain in your chest!"))
-					SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
-				if("Revive")
-					target.set_heartattack(FALSE)
-					to_chat(target, span_danger("You feel your heart pound!"))
-					target.revive(full_heal = FALSE, admin_revive = FALSE)
-					SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+		if(!orders)
+			return
+		if (!do_after(owner, 10 SECONDS))
+			return
+		switch(orders)
+			if("Sleep")
+				target.Sleeping(200)
+				to_chat(target, span_danger("You feel suddenly exhausted"))
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+			if("Wake")
+				target.SetSleeping(0)
+				to_chat(target, span_danger("You feel suddenly energetic"))
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+			if("Heart Attack")
+				target.adjustStaminaLoss(60, FALSE)
+				target.set_heartattack(TRUE)
+				to_chat(target, span_danger("You feel a terrible pain in your chest!"))
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+			if("Revive")
+				target.set_heartattack(FALSE)
+				to_chat(target, span_danger("You feel your heart pound!"))
+				target.revive(full_heal = FALSE, admin_revive = FALSE)
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
 		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
+
