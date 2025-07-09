@@ -151,6 +151,7 @@
 	MAMA.pixel_x = -16
 	mannequin.add_overlay(MAMA)
 	copy_to(character = mannequin, icon_updates = TRUE, roundstart_checks = TRUE, character_setup = TRUE, loadout = show_loadout)
+	mannequin.set_body_sprite()
 	mannequin.update_body()
 	mannequin.update_body_parts()
 	mannequin.update_appearance()

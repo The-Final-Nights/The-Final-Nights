@@ -223,7 +223,7 @@
 	if(iscarbon(AM))
 		var/mob/living/carbon/C = AM
 		if(blood_id == C.get_blood_id())//both mobs have the same blood substance
-			if(blood_id == /datum/reagent/blood) //normal blood
+			if(blood_id in typesof(/datum/reagent/blood)) //TFN EDIT, ORGINAL: if(blood_id == /datum/reagent/blood) //normal blood
 				if(blood_data["viruses"])
 					for(var/thing in blood_data["viruses"])
 						var/datum/disease/D = thing
@@ -245,7 +245,7 @@
 	return
 
 /mob/living/carbon/get_blood_data(blood_id)
-	if(blood_id == /datum/reagent/blood) //actual blood reagent
+	if(blood_id in typesof(/datum/reagent/blood)) //TFN EDIT, ORGINAL: if(blood_id == /datum/reagent/blood) //actual blood reagent
 		var/blood_data = list()
 		//set the blood data
 		blood_data["donor"] = src
@@ -338,7 +338,7 @@
 
 //to add a splatter of blood or other mob liquid.
 /mob/living/proc/add_splatter_floor(turf/T, small_drip)
-	if(get_blood_id() != /datum/reagent/blood)
+	if(!(get_blood_id() in typesof(/datum/reagent/blood))) //TFN EDIT, ORGINAL: if(get_blood_id() != /datum/reagent/blood)
 		return
 	if(!T)
 		T = get_turf(src)

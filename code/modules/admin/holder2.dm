@@ -29,6 +29,7 @@ GLOBAL_PROTECT(href_token)
 	var/datum/help_ui/admin/admin_interface
 
 	var/datum/filter_editor/filteriffic
+	var/datum/particle_editor/particle_test
 
 
 	/// A lazylist of tagged datums, for quick reference with the View Tags verb

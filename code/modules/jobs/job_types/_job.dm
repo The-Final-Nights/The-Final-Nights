@@ -72,7 +72,7 @@
 	var/allow_bureaucratic_error = FALSE
 
 	///Minimum vampire Generation necessary to do this job.
-	var/minimal_generation = 13
+	var/minimal_generation = HIGHEST_GENERATION_LIMIT
 	///Minimum Masquerade level necessary to do this job.
 	var/minimal_masquerade = 1
 	///Minimum Renown Rank (garou) necessary to do this job.

@@ -59,8 +59,6 @@
 
 	var/spawned_backup_weapon = FALSE
 
-	var/ghoulificated = FALSE
-
 	var/staying = FALSE
 
 	var/lifespan = 0	//How many cycles. He'll be deleted if over than a ten thousand
@@ -644,7 +642,7 @@
 					N.is_talking = FALSE
 					N.RealisticSay(pick(N.socialrole.answer_phrases))
 
-/mob/living/carbon/human/npc/proc/ghoulificate(mob/owner)
+/mob/living/carbon/human/npc/proc/npc_ghoulificate(mob/owner)
 	set waitfor = FALSE
 	var/list/mob/dead/observer/candidates = pollCandidatesForMob("Do you want to play as [owner]`s ghoul?", null, null, null, 50, src)
 	for(var/mob/dead/observer/G in GLOB.player_list)
@@ -653,17 +651,8 @@
 	if(LAZYLEN(candidates))
 		var/mob/dead/observer/C = pick(candidates)
 		key = C.key
-		ghoulificated = TRUE
-		set_species(/datum/species/ghoul)
-		if(mind)
-			if(mind.enslaved_to != owner && !HAS_TRAIT(owner, TRAIT_UNBONDING))
-				mind.enslave_mind_to_creator(owner)
-				to_chat(src, "<span class='userdanger'><b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [owner]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b></span>")
-				return TRUE
-			if(HAS_TRAIT(owner, TRAIT_UNBONDING))
-				to_chat(src, "<span class='danger'><i>Precious vitae enters your mouth, an addictive drug. You feel no loyalty, though, to the source; only the substance.</i></span>")
+		ghoulificate(owner)
 	return FALSE
-
 
 #undef BANDIT_TYPE_NPC
 #undef POLICE_TYPE_NPC

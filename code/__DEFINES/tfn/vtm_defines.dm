@@ -4,8 +4,8 @@
  * Lower = stronger
  */
 
-/// Limit for highest generation possible
-#define HIGHEST_GENERATION_LIMIT 14
+/// Limit for highest generation possible, Based off v20 Beckket's Jyhad Diary
+#define HIGHEST_GENERATION_LIMIT 16
 /// Limit for lowest generation possible
 #define LOWEST_GENERATION_LIMIT 7
 /// Limit for public generation bonus

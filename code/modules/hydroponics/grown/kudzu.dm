@@ -84,7 +84,7 @@
 			mutations.Remove(pick(temp_mut_list))
 		temp_mut_list.Cut()
 
-	if(S.has_reagent(/datum/reagent/blood, 15))
+	if(S.has_reagent(typesof(/datum/reagent/blood), 15)) //TFN EDIT, ORIGINAL: 	if(S.has_reagent(/datum/reagent/blood, 15))
 		adjust_production(rand(15, -5))
 
 	if(S.has_reagent(/datum/reagent/toxin/amatoxin, 5))

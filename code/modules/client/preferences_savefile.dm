@@ -680,7 +680,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	lover				= sanitize_integer(lover, 0, 1, initial(lover))
 	masquerade				= sanitize_integer(masquerade, 0, 5, initial(masquerade))
 	// TFN EDIT START: gen tweaks
-	generation				= sanitize_integer(generation, 7, 14, initial(generation))
+	generation				= sanitize_integer(generation, 7, HIGHEST_GENERATION_LIMIT, initial(generation))
 	generation_bonus				= sanitize_integer(generation_bonus, 0, 5, initial(generation_bonus))
 	glory = sanitize_integer(glory, 0, 10, initial(glory))
 	wisdom = sanitize_integer(wisdom, 0, 10, initial(wisdom))

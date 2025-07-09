@@ -161,7 +161,80 @@
 		};\
 	} while(FALSE)
 
-//Returns a list in plain english as a string
+/**
+ * Custom binary search sorted insert utilising comparison procs instead of vars.
+ * INPUT: Object to be inserted
+ * LIST: List to insert object into
+ * TYPECONT: The typepath of the contents of the list
+ * COMPARE: The object to compare against, usualy the same as INPUT
+ * COMPARISON: The plaintext name of a proc on INPUT that takes a single argument to accept a single element from LIST and returns a positive, negative or zero number to perform a comparison.
+ * COMPTYPE: How should the values be compared? Either COMPARE_KEY or COMPARE_VALUE.
+ */
+#define BINARY_INSERT_PROC_COMPARE(INPUT, LIST, TYPECONT, COMPARE, COMPARISON, COMPTYPE) \
+	do {\
+		var/list/__BIN_LIST = LIST;\
+		var/__BIN_CTTL = length(__BIN_LIST);\
+		if(!__BIN_CTTL) {\
+			__BIN_LIST += INPUT;\
+		} else {\
+			var/__BIN_LEFT = 1;\
+			var/__BIN_RIGHT = __BIN_CTTL;\
+			var/__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+			var ##TYPECONT/__BIN_ITEM;\
+			while(__BIN_LEFT < __BIN_RIGHT) {\
+				__BIN_ITEM = COMPTYPE;\
+				if(__BIN_ITEM.##COMPARISON(COMPARE) <= 0) {\
+					__BIN_LEFT = __BIN_MID + 1;\
+				} else {\
+					__BIN_RIGHT = __BIN_MID;\
+				};\
+				__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+			};\
+			__BIN_ITEM = COMPTYPE;\
+			__BIN_MID = __BIN_ITEM.##COMPARISON(COMPARE) > 0 ? __BIN_MID : __BIN_MID + 1;\
+			__BIN_LIST.Insert(__BIN_MID, INPUT);\
+		};\
+	} while(FALSE)
+
+#define SORT_FIRST_INDEX(list) (list[1])
+#define SORT_COMPARE_DIRECTLY(thing) (thing)
+#define SORT_VAR_NO_TYPE(varname) var/varname
+/****
+	* Even more custom binary search sorted insert, using defines instead of vars
+	* INPUT: Item to be inserted
+	* LIST: List to insert INPUT into
+	* TYPECONT: A define setting the var to the typepath of the contents of the list
+	* COMPARE: The item to compare against, usualy the same as INPUT
+	* COMPARISON: A define that takes an item to compare as input, and returns their comparable value
+	* COMPTYPE: How should the list be compared? Either COMPARE_KEY or COMPARE_VALUE.
+	*/
+#define BINARY_INSERT_DEFINE(INPUT, LIST, TYPECONT, COMPARE, COMPARISON, COMPTYPE) \
+	do {\
+		var/list/__BIN_LIST = LIST;\
+		var/__BIN_CTTL = length(__BIN_LIST);\
+		if(!__BIN_CTTL) {\
+			__BIN_LIST += INPUT;\
+		} else {\
+			var/__BIN_LEFT = 1;\
+			var/__BIN_RIGHT = __BIN_CTTL;\
+			var/__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+			##TYPECONT(__BIN_ITEM);\
+			while(__BIN_LEFT < __BIN_RIGHT) {\
+				__BIN_ITEM = COMPTYPE;\
+				if(##COMPARISON(__BIN_ITEM) <= ##COMPARISON(COMPARE)) {\
+					__BIN_LEFT = __BIN_MID + 1;\
+				} else {\
+					__BIN_RIGHT = __BIN_MID;\
+				};\
+				__BIN_MID = (__BIN_LEFT + __BIN_RIGHT) >> 1;\
+			};\
+			__BIN_ITEM = COMPTYPE;\
+			__BIN_MID = ##COMPARISON(__BIN_ITEM) > ##COMPARISON(COMPARE) ? __BIN_MID : __BIN_MID + 1;\
+			__BIN_LIST.Insert(__BIN_MID, INPUT);\
+		};\
+	} while(FALSE)
+
+///Returns a list in plain english as a string
 /proc/english_list(list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
 	var/total = length(input)
 	switch(total)
@@ -183,10 +256,12 @@
 
 			return "[output][and_text][input[index]]"
 
-/// Return either pick(list) or null if list is not of type /list or is empty
-/proc/safepick(list/L)
-	if(LAZYLEN(L))
-		return pick(L)
+///Returns a list of atom types in plain english as a string of each type name
+/proc/type_english_list(list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = "" )
+	var/list/english_input = list()
+	for(var/atom/type as anything in input)
+		english_input += "[initial(type.name)]"
+	return english_list(english_input, nothing_text, and_text, comma_text, final_comma_text)
 
 //Checks for specific types in a list
 /proc/is_type_in_list(atom/A, list/L)
@@ -660,6 +735,14 @@
 
 	return TRUE
 
+/**
+ * Move a single element from position from_index within a list, to position to_index
+ * All elements in the range [1,to_index) before the move will be before the pivot afterwards
+ * All elements in the range [to_index, L.len+1) before the move will be after the pivot afterwards
+ * In other words, it's as if the range [from_index,to_index) have been rotated using a <<< operation common to other languages.
+ * from_index and to_index must be in the range [1,L.len+1]
+ * This will preserve associations ~Carnie
+**/
 /proc/move_element(list/inserted_list, from_index, to_index)
 	if(from_index == to_index || from_index + 1 == to_index) //no need to move
 		return
@@ -669,6 +752,15 @@
 	inserted_list.Insert(to_index, null)
 	inserted_list.Swap(from_index, to_index)
 	inserted_list.Cut(from_index, from_index + 1)
+
+///Returns a list with items filtered from a list that can call callback
+/proc/special_list_filter(list/list_to_filter, datum/callback/condition)
+	if(!islist(list_to_filter) || !length(list_to_filter) || !istype(condition))
+		return list()
+	. = list()
+	for(var/i in list_to_filter)
+		if(condition.Invoke(i))
+			. |= LIST_VALUE_WRAP_LISTS(i)
 
 /proc/move_range(list/inserted_list, from_index, to_index, len = 1)
 	var/distance = abs(to_index - from_index)

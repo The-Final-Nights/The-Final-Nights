@@ -1125,14 +1125,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		)
 	return pick(subtypesof(/obj/item/reagent_containers/food/drinks) - blocked)
 
-/proc/special_list_filter(list/L, datum/callback/condition)
-	if(!islist(L) || !length(L) || !istype(condition))
-		return list()
-	. = list()
-	for(var/i in L)
-		if(condition.Invoke(i))
-			. |= i
-
 /proc/CallAsync(datum/source, proctype, list/arguments)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))

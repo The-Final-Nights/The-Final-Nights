@@ -12,49 +12,7 @@
 /// Inverse direction, taking into account UP|DOWN if necessary.
 #define REVERSE_DIR(dir) ( ((dir & 85) << 1) | ((dir & 170) >> 1) )
 
-//Human Overlays Indexes/////////
-#define LUZHA_LAYER				41
-#define UNDERSHADOW_LAYER		40
-#define MUTATIONS_LAYER			39		//mutations. Tk headglows, cold resistance glow, etc
-#define BODY_BEHIND_LAYER		38		//certain mutantrace features (tail when looking south) that must appear behind the body parts
-#define BODYPARTS_LAYER			37		//Initially "AUGMENTS", this was repurposed to be a catch-all bodyparts flag
-#define BODY_ADJ_LAYER			36		//certain mutantrace features (snout, body markings) that must appear above the body parts
-#define BODY_LAYER				35		//underwear, undershirts, socks, eyes, lips(makeup)
-#define FRONT_MUTATIONS_LAYER	34		//mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
-#define DAMAGE_LAYER			33		//damage indicators (cuts and burns)
-#define UNIFORM_LAYER			32
-#define ID_LAYER				31 //lmao at the idiot who put both ids and hands on the same layer
-#define HANDS_PART_LAYER		30
-#define GLOVES_LAYER			29
-#define SHOES_LAYER				28
-#define MARKS_LAYER				27 //For WoD-specific clanmarks etc
-#define EARS_LAYER				26
-#define SUIT_LAYER				25
-#define GLASSES_LAYER			24
-#define BELT_LAYER				23		//Possible make this an overlay of somethign required to wear a belt?
-#define SUIT_STORE_LAYER		22
-#define NECK_LAYER				21
-#define BACK_LAYER				20
-#define HAIR_LAYER				19		//TODO: make part of head layer?
-#define UPPER_EARS_LAYER		18
-#define FACEMASK_LAYER			17
-#define HEAD_LAYER				16
-#define HANDCUFF_LAYER			15
-#define LEGCUFF_LAYER			14
-#define HANDS_LAYER				13
-#define BODY_FRONT_LAYER		12
-#define DECAPITATION_BLOOD_LAYER	11
-#define PROTEAN_LAYER			10
-#define UNICORN_LAYER			9
-#define POTENCE_LAYER			8
-#define FORTITUDE_LAYER			7
-#define FIRING_EFFECT_LAYER		6
-#define HALO_LAYER				5		//blood cult ascended halo, because there's currently no better solution for adding/removing
-#define FIRE_LAYER				4		//If you're on fire
-#define BITE_LAYER				3
-#define FIGHT_LAYER				2
-#define SAY_LAYER				1
-#define TOTAL_LAYERS			41		//KEEP THIS UP-TO-DATE OR SHIT WILL BREAK ;_;
+
 
 //Human Overlay Index Shortcuts for alternate_worn_layer, layers
 //Because I *KNOW* somebody will think layer+1 means "above"
@@ -164,11 +122,6 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 #define POLLTYPE_RATING		"NUMVAL"
 #define POLLTYPE_MULTI		"MULTICHOICE"
 #define POLLTYPE_IRV		"IRV"
-
-
-
-//subtypesof(), typesof() without the parent path
-#define subtypesof(typepath) ( typesof(typepath) - typepath )
 
 /**
  * Get the turf that `A` resides in, regardless of any containers.

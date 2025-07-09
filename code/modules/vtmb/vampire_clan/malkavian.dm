@@ -79,7 +79,7 @@
 	if (!(owner in clan_malkavian.madness_network))
 		return
 
-	var/new_thought = tgui_input_text(owner, "Have any thoughts about this, buddy?")
+	var/new_thought = tgui_input_text(owner, "Have any thoughts about this, buddy?", encode = FALSE)
 	if (!new_thought)
 		return
 
@@ -101,7 +101,7 @@
 	. = ..()
 	var/mad_speak = FALSE
 	if(IsAvailable())
-		mad_speak = tgui_input_text(owner, "What revelations do we wish to convey?")
+		mad_speak = tgui_input_text(owner, "What revelations do we wish to convey?", encode = FALSE)
 	if(CHAT_FILTER_CHECK(mad_speak))
 		//before we inadvertently obfuscate the message to pass filters, filter it first.
 		//as funny as malkavians saying "amogus" would be, the filter also includes slurs... how unfortunate.

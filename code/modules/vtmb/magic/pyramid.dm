@@ -759,20 +759,15 @@
 
 /obj/ritualrune/bloodwalk/attack_hand(mob/user)
 	for(var/obj/item/reagent_containers/syringe/S in loc)
-		if(S)
-			for(var/datum/reagent/blood/B in S.reagents.reagent_list)
-				if(B)
-					if(B.type == /datum/reagent/blood)
-						var/blood_data = B.data
-						if(blood_data)
-							var/generation = blood_data["generation"]
-							var/clan = blood_data["clan"]
-							var/message = generate_message(generation, clan)
-							to_chat(user, "[message]")
-						else
-							to_chat(user, "The blood speaks not-it is empty of power!")
-					else
-						to_chat(user, "This reagent is lifeless, unworthy of the ritual!")
+		for(var/datum/reagent/blood/B in S.reagents.reagent_list)
+			var/blood_data = B.data
+			if(blood_data)
+				var/generation = blood_data["generation"]
+				var/clan = blood_data["clan"]
+				var/message = generate_message(generation, clan)
+				to_chat(user, "[message]")
+			else
+				to_chat(user, "The blood speaks not; it is empty of power!")
 		playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
 		color = rgb(255,0,0)
 		activated = TRUE

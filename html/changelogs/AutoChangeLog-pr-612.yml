@@ -1,6 +1,0 @@
-author: "TheTrueSilverRat"
-delete-after: True
-changes:
-  - rscadd: "Added the ability to purchase more Gnosis"
-  - bugfix: "fixed power level not resetting properly"
-  - refactor: "made the werewolf perf vars in the reset proc, use initial(var)"

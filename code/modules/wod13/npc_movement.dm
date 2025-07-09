@@ -170,12 +170,13 @@
 					return pick(north_steps, south_steps, east_steps)
 				else
 					return pick(north_steps, south_steps, west_steps)
+
 /mob/living/carbon/human/npc/proc/CheckMove()
 	if(stat >= HARD_CRIT)
 		return TRUE
 	if(last_grab+15 > world.time)
 		return TRUE
-	if(ghoulificated)
+	if(isghoul(src))
 		return TRUE
 	if(key)
 		return TRUE

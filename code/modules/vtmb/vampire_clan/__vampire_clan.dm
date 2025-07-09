@@ -110,8 +110,9 @@
 		REMOVE_TRAIT(vampire, trait, CLAN_TRAIT)
 
 	var/datum/species/kindred/vampire_species = vampire?.dna.species
-	var/datum/discipline/bloodheal/removing_bloodheal = vampire_species.get_discipline(/datum/discipline/bloodheal)
-	qdel(removing_bloodheal)
+	var/datum/discipline/bloodheal/removing_bloodheal = vampire_species?.get_discipline(/datum/discipline/bloodheal)
+	if(removing_bloodheal)
+		qdel(removing_bloodheal)
 
 	// Sets the vampire back to their default body sprite
 	if (alt_sprite && (GET_BODY_SPRITE(vampire) == alt_sprite))
@@ -150,6 +151,8 @@
 
 	if (clan_keys)
 		vampire.put_in_r_hand(new clan_keys(vampire))
+
+	vampire.AddComponent(/datum/component/morality)
 
 	UnregisterSignal(vampire, COMSIG_MOB_LOGIN)
 

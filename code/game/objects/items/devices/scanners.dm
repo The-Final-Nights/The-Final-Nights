@@ -407,7 +407,7 @@ GENE SCANNER
 					render_list += "<span class='alert ml-1'><b>Subject is bleeding!</b></span>\n"
 			var/blood_percent =  round((C.blood_volume / BLOOD_VOLUME_NORMAL)*100)
 			var/blood_type = C.dna.blood_type
-			if(blood_id != /datum/reagent/blood) // special blood substance
+			if(!(blood_id in typesof(/datum/reagent/blood)))// special blood substance, TFN EDIT, ORIGINAL: if(blood_id != /datum/reagent/blood)
 				var/datum/reagent/R = GLOB.chemical_reagents_list[blood_id]
 				blood_type = R ? R.name : blood_id
 			if(iskindred(C))

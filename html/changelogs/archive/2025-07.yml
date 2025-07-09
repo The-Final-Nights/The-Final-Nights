@@ -23,3 +23,25 @@
   - rscdel: Removed redundant "Caitiff" lateparty setting, as we have Caitiff available
       for round-persistent characters already
   - map: Adds a run-down Sabbat lair, home to only the most beastly of Cainites.
+2025-07-08:
+  Lagomorphica:
+  - balance: Warrior archetype now affects Protean claws, Lasombra tentacles, Tzimisce
+      armblade/whips, Gangrel war forms, Setite snake form, Tzimisce horror form,
+      and all Garou/Corvax transformations, halving the delay after attacking for
+      all of them. The additional knockdown chance has been lost, though (as small
+      as it was).
+  - code_imp: Changes the usage of CLICK_CD_RANGE as the stand-in for Warrior to be
+      CLICK_CD_MELEE * 0.5 for more readability and to be more obvious. Also converts
+      it from a variable to a trait.
+  Somniworld:
+  - bugfix: Werewolves may choose the apparel of their crinos form again. No more
+      naked murdermachines! "Change Apparel" also lets you pick your outfit now.
+  TheTrueSilverRat:
+  - rscadd: Added the ability to purchase more Gnosis
+  - bugfix: fixed power level not resetting properly
+  - refactor: made the werewolf perf vars in the reset proc, use initial(var)
+  XeonMations:
+  - code_imp: TGS docker CI/CD check now functions correctly.
+  - bugfix: Kindred now have vitae instead of blood.
+  - bugfix: Fixed a bug where taking blood from a kindred with an IV drip maxed their
+      blood pool.

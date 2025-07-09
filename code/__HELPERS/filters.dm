@@ -22,15 +22,24 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 			"size" = 1
 		)
 	),
-	/* Not supported because making a proper matrix editor on the frontend would be a huge dick pain.
-		Uncomment if you ever implement it
+	"bloom" = list(
+		"defaults" = list(
+			"threshold" = COLOR_BLACK,
+			"size" = 1,
+			"offset" = 0,
+			"alpha" = 255
+		)
+	),
+	// Not implemented, but if this isn't uncommented some windows will just error
+	// Needs either a proper matrix editor, or just a hook to our existing one
+	// Issue is filterrific assumes variables will have the same value type if they share the same name, which this violates
+	// Gotta refactor this sometime
 	"color" = list(
 		"defaults" = list(
 			"color" = matrix(),
 			"space" = FILTER_COLOR_RGB
 		)
 	),
-	*/
 	"displace" = list(
 		"defaults" = list(
 			"x" = 0,
@@ -168,7 +177,7 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	if(!isnull(space))
 		.["space"] = space
 
-/proc/displacement_map_filter(icon, render_source, x, y, size = 32)
+/proc/displacement_map_filter(icon, render_source, x, y, size = ICON_SIZE_ALL)
 	. = list("type" = "displace")
 	if(!isnull(icon))
 		.["icon"] = icon
@@ -198,6 +207,17 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	. = list("type" = "blur")
 	if(!isnull(size))
 		.["size"] = size
+
+/proc/bloom_filter(threshold, size, offset, alpha)
+	. = list("type" = "bloom")
+	if(!isnull(threshold))
+		.["threshold"] = threshold
+	if(!isnull(size))
+		.["size"] = size
+	if(!isnull(offset))
+		.["offset"] = offset
+	if(!isnull(alpha))
+		.["alpha"] = alpha
 
 /proc/layering_filter(icon, render_source, x, y, flags, color, transform, blend_mode)
 	. = list("type" = "layer")
@@ -317,5 +337,14 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 	var/filter
 	for(var/i in 1 to 7)
 		filter = in_atom.get_filter("wibbly-[i]")
-		animate(filter)
-		in_atom.remove_filter("wibbly-[i]")
+		if(remove_duration == 0)
+			animate(filter)
+			in_atom.remove_filter("wibbly-[i]")
+			continue
+		animate(filter, x = 0, y = 0, size = 0, offset = 0, time = remove_duration)
+		addtimer(CALLBACK(in_atom, TYPE_PROC_REF(/datum, remove_filter), "wibbly-[i]"), remove_duration)
+
+/proc/convert_list_to_filter(list/list_filter)
+	var/list/arguments = list_filter.Copy()
+	arguments -= "priority"
+	return filter(arglist(arguments))

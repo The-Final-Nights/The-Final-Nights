@@ -441,3 +441,169 @@
 #define SOUL_PRESENT (1 << 0)
 #define SOUL_ABSENT (1 << 1)
 #define SOUL_PROJECTING ( 1<< 2)
+
+// Height defines
+// - They are numbers so you can compare height values (x height < y height)
+// - They do not start at 0 for futureproofing
+// - They skip numbers for futureproofing as well
+// Otherwise they are completely arbitrary
+#define HUMAN_HEIGHT_DWARF 2
+#define HUMAN_HEIGHT_SHORTEST 4
+#define HUMAN_HEIGHT_SHORT 6
+#define HUMAN_HEIGHT_MEDIUM 8
+#define HUMAN_HEIGHT_TALL 10
+#define HUMAN_HEIGHT_TALLEST 12
+
+/// Assoc list of all heights, cast to strings, to """"tuples"""""
+/// The first """tuple""" index is the upper body offset
+/// The second """tuple""" index is the lower body offset
+GLOBAL_LIST_INIT(human_heights_to_offsets, list(
+	"[HUMAN_HEIGHT_DWARF]" = list(-5, -4),
+	"[HUMAN_HEIGHT_SHORTEST]" = list(-2, -1),
+	"[HUMAN_HEIGHT_SHORT]" = list(-1, -1),
+	"[HUMAN_HEIGHT_MEDIUM]" = list(0, 0),
+	"[HUMAN_HEIGHT_TALL]" = list(1, 1),
+	"[HUMAN_HEIGHT_TALLEST]" = list(2, 2),
+))
+
+
+// Mob Overlays Indexes
+/// Total number of layers for mob overlays
+/// KEEP THIS UP-TO-DATE OR SHIT WILL BREAK
+/// Also consider updating layers_to_offset
+#define TOTAL_LAYERS 50
+#define LUZHA_LAYER 50
+#define UNDERSHADOW_LAYER 49
+/// Mutations layer - Tk headglows, cold resistance glow, etc
+#define MUTATIONS_LAYER 48
+/// Mutantrace features (tail when looking south) that must appear behind the body parts
+#define BODY_BEHIND_LAYER 47
+/// Layer for bodyparts that should appear behind every other bodypart - Mostly, legs when facing WEST or EAST
+#define BODYPARTS_LOW_LAYER 46
+/// Layer for most bodyparts, appears above BODYPARTS_LOW_LAYER and below BODYPARTS_HIGH_LAYER
+#define BODYPARTS_LAYER 45
+/// Mutantrace features (snout, body markings) that must appear above the body parts
+#define BODY_ADJ_LAYER 44
+/// Underwear, undershirts, socks, eyes, lips(makeup)
+#define BODY_LAYER 43
+/// Mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
+#define FRONT_MUTATIONS_LAYER 42
+/// Damage indicators (cuts and burns)
+#define DAMAGE_LAYER 41
+/// Jumpsuit clothing layer
+#define UNIFORM_LAYER 40
+/// ID card layer
+#define ID_LAYER 39
+/// ID card layer (might be deprecated)
+#define ID_CARD_LAYER 38
+/// Layer for bodyparts that should appear above every other bodypart - Currently only used for hands
+#define BODYPARTS_HIGH_LAYER 37
+/// Gloves layer
+#define GLOVES_LAYER 36
+/// Shoes layer
+#define SHOES_LAYER 35
+/// Layer for masks that are worn below ears and eyes (like Balaclavas) (layers below hair, use flagsinv=HIDEHAIR as needed)
+#define LOW_FACEMASK_LAYER 34
+//For WoD-specific clanmarks etc
+#define MARKS_LAYER	33
+/// Ears layer (Spessmen have ears? Wow)
+#define EARS_LAYER 32
+/// Layer for neck apperal that should appear below the suit slot (like neckties)
+#define LOW_NECK_LAYER 31
+/// Suit layer (armor, coats, etc.)
+#define SUIT_LAYER 30
+/// Glasses layer
+#define GLASSES_LAYER 29
+/// Belt layer
+#define BELT_LAYER 28 //Possible make this an overlay of something required to wear a belt?
+/// Suit storage layer (tucking a gun or baton underneath your armor)
+#define SUIT_STORE_LAYER 27
+/// Neck layer (for wearing capes and bedsheets)
+#define NECK_LAYER 26
+/// Back layer (for backpacks and equipment on your back)
+#define BACK_LAYER 25
+/// Hair layer (mess with the fro and you got to go!)
+#define HAIR_LAYER 24 //TODO: make part of head layer?
+#define UPPER_EARS_LAYER 23
+/// Facemask layer (gas masks, breath masks, etc.)
+#define FACEMASK_LAYER 22
+/// Head layer (hats, helmets, etc.)
+#define HEAD_LAYER 21
+/// Hair that layers out above clothing, including hats (high ponytails and such)
+#define OUTER_HAIR_LAYER 20
+/// Handcuff layer (when your hands are cuffed)
+#define HANDCUFF_LAYER 19
+/// Legcuff layer (when your feet are cuffed)
+#define LEGCUFF_LAYER 18
+/// Hands layer (for the actual hand, not the arm... I think?)
+#define HANDS_LAYER 17
+/// Body front layer. Usually used for mutant bodyparts that need to be in front of stuff (e.g. cat ears)
+#define BODY_FRONT_LAYER 16
+/// Special body layer that actually require to be above the hair (e.g. lifted welding goggles)
+#define ABOVE_BODY_FRONT_GLASSES_LAYER 15
+/// Special body layer for the rare cases where something on the head needs to be above everything else (e.g. flowers)
+#define ABOVE_BODY_FRONT_HEAD_LAYER 14
+#define DECAPITATION_BLOOD_LAYER 13
+#define PROTEAN_LAYER 12
+#define UNICORN_LAYER 11
+#define POTENCE_LAYER 10
+#define FORTITUDE_LAYER 9
+#define FIRING_EFFECT_LAYER	8
+//If you're on fire
+#define FIRE_LAYER 7
+#define BITE_LAYER 6
+#define FIGHT_LAYER 5
+#define SAY_LAYER 4
+/// Bleeding wound icons
+#define WOUND_LAYER 3
+/// Blood cult ascended halo layer, because there's currently no better solution for adding/removing
+#define HALO_LAYER 2
+/// The highest most layer for mob overlays. Unused
+#define HIGHEST_LAYER 1
+
+#define UPPER_BODY "upper body"
+#define LOWER_BODY "lower body"
+#define NO_MODIFY "do not modify"
+
+/// Used for human height overlay adjustments
+/// Certain standing overlay layers shouldn't have a filter applied and should instead just offset by a pixel y
+/// This list contains all the layers that must offset, with its value being whether it's a part of the upper half of the body (TRUE) or not (FALSE)
+GLOBAL_LIST_INIT(layers_to_offset, list(
+	// Weapons commonly cross the middle of the sprite so they get cut in half by the filter
+	"[HANDS_LAYER]" = LOWER_BODY,
+	// Very tall hats will get cut off by filter
+	"[HEAD_LAYER]" = UPPER_BODY,
+	// Hair will get cut off by filter
+	"[HAIR_LAYER]" = UPPER_BODY,
+	// Long belts (sabre sheathe) will get cut off by filter
+	"[BELT_LAYER]" = LOWER_BODY,
+	// Everything below looks fine with or without a filter, so we can skip it and just offset
+	// (In practice they'd be fine if they got a filter but we can optimize a bit by not.)
+	"[NECK_LAYER]" = UPPER_BODY,
+	"[GLASSES_LAYER]" = UPPER_BODY,
+	"[LOW_NECK_LAYER]" = UPPER_BODY,
+	"[ABOVE_BODY_FRONT_GLASSES_LAYER]" = UPPER_BODY, // currently unused
+	"[ABOVE_BODY_FRONT_HEAD_LAYER]" = UPPER_BODY, // only used for head stuff
+	"[GLOVES_LAYER]" = LOWER_BODY,
+	"[HALO_LAYER]" = UPPER_BODY, // above the head
+	"[HANDCUFF_LAYER]" = LOWER_BODY,
+	"[ID_CARD_LAYER]" = UPPER_BODY, // unused
+	"[ID_LAYER]" = UPPER_BODY,
+	"[FACEMASK_LAYER]" = UPPER_BODY,
+	"[LOW_FACEMASK_LAYER]" = UPPER_BODY,
+	// These two are cached, and have their appearance shared(?), so it's safer to just not touch it
+	"[MUTATIONS_LAYER]" = NO_MODIFY,
+	"[FRONT_MUTATIONS_LAYER]" = NO_MODIFY,
+	// These DO get a filter, I'm leaving them here as reference,
+	// to show how many filters are added at a glance
+	// BACK_LAYER (backpacks are big)
+	// BODYPARTS_HIGH_LAYER (arms)
+	// BODY_LAYER (body markings (full body), underwear (full body), eyes)
+	// BODY_ADJ_LAYER (external organs like wings)
+	// BODY_BEHIND_LAYER (external organs like wings)
+	// BODY_FRONT_LAYER (external organs like wings)
+	// DAMAGE_LAYER (full body)
+	// HIGHEST_LAYER (full body)
+	// UNIFORM_LAYER (full body)
+	// WOUND_LAYER (full body)
+))

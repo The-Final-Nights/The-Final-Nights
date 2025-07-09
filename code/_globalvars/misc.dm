@@ -1,5 +1,3 @@
-GLOBAL_VAR_INIT(admin_notice, "") // Admin notice that all clients see when joining the server
-
 GLOBAL_VAR_INIT(timezoneOffset, 0) // The difference betwen midnight (of the host computer) and 0 world.ticks.
 
 GLOBAL_VAR_INIT(year, time2text(world.realtime,"YYYY"))

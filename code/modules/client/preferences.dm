@@ -2246,7 +2246,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						age = clamp(new_age, AGE_MIN, AGE_MAX)
 						if (age > total_age)
 							total_age = age
-						update_preview_icon()
+						update_preview_icon(show_loadout) // TFN EDIT: original: update_preview_icon()
 
 				if("total_age")
 					if(slotlocked)
@@ -2257,7 +2257,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						total_age = clamp(new_age, age, age+1000)
 						if (total_age < age)
 							age = total_age
-						update_preview_icon()
+						update_preview_icon(show_loadout) // TFN EDIT: original: update_preview_icon()
 
 				if("info_choose")
 					var/new_info_known = tgui_input_list(user, "Choose who knows your character:", "Fame", list(INFO_KNOWN_UNKNOWN, INFO_KNOWN_CLAN_ONLY, INFO_KNOWN_FACTION, INFO_KNOWN_PUBLIC))

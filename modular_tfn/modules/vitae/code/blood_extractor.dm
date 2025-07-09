@@ -1,7 +1,7 @@
 /obj/structure/bloodextractor
 	name = "blood extractor"
 	desc = "Extract blood in packs."
-	icon = 'code/modules/wod13/props.dmi'
+	icon = 'modular_tfn/modules/vitae/icons/blood_extractor.dmi'
 	icon_state = "bloodextractor"
 	plane = GAME_PLANE
 	layer = CAR_LAYER
@@ -30,7 +30,8 @@
 		if(target.bloodpool < 4)
 			to_chat(user, span_warning("The [src] can't find enough blood in [target]'s body!"))
 			return
-		new /obj/item/reagent_containers/blood/vitae(get_turf(src))
+		var/obj/item/reagent_containers/blood/vitae/vitae_bloodpack = new /obj/item/reagent_containers/blood/vitae(get_turf(src))
+		generate_blood_pack(target, vitae_bloodpack)
 		target.bloodpool = max(0, target.bloodpool - 4)
 		return
 
@@ -38,7 +39,17 @@
 		to_chat(user, span_warning("The [src] can't find enough blood in [target]'s body!"))
 		return
 	if(HAS_TRAIT(target, TRAIT_POTENT_BLOOD))
-		new /obj/item/reagent_containers/blood/elite(get_turf(src))
+		var/obj/item/reagent_containers/blood/elite/elite_bloodpack = new /obj/item/reagent_containers/blood/elite(get_turf(src))
+		generate_blood_pack(target, elite_bloodpack)
 	else
-		new /obj/item/reagent_containers/blood(get_turf(src))
+		var/obj/item/reagent_containers/blood/empty/bloodpack = new /obj/item/reagent_containers/blood/empty(get_turf(src))
+		generate_blood_pack(target, bloodpack)
 	target.bloodpool = max(0, target.bloodpool - 2)
+
+/obj/structure/bloodextractor/proc/generate_blood_pack(mob/living/target, obj/item/reagent_containers/blood/blood_pack)
+	var/blood_id = target.get_blood_id()
+	if(!blood_id)
+		return FALSE
+	var/list/blood_data = target.get_blood_data(blood_id)
+	blood_pack.reagents.add_reagent(blood_id, 200, blood_data)
+	blood_pack.update_appearance()
