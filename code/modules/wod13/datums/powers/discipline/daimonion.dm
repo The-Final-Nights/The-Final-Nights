@@ -319,7 +319,7 @@
 /datum/discipline_power/daimonion/diabolic_lure/can_activate_untargeted(alert)
 	. = ..()
 
-	if (points_can_restore <= 0)
+	if (points_can_remove <= 0)
 		if (alert)
 			to_chat(owner, span_warning("You've exhausted yourself too much to damn more souls."))
 		return FALSE
@@ -358,7 +358,7 @@
 
 	to_chat(owner, span_notice("You have damaged [target]'s soul slightly."))
 	SEND_SIGNAL(target, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
-	points_can_restore--
+	points_can_remove--
 
 /datum/discipline_power/daimonion/diabolic_lure/post_gain()
 	. = ..()
