@@ -40,7 +40,7 @@
 		SwitchBlocking()
 	if(CheckFrenzyMove() && blocking)
 		SwitchBlocking()
-	if(user.TRAIT_PERFECT_DEFENCE)
+	if(HAS_TRAIT(user, TRAIT_PERFECT_DEFENCE))
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		user.do_attack_animation(src)
 		visible_message(span_danger("[src] blocks the punch!"), span_danger("You block the punch!"))
