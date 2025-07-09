@@ -196,7 +196,7 @@
 
 /datum/discipline_power/temporis/kiss_of_lachesis/activate(mob/living/carbon/human/target)
 	. = ..()
-		var/new_age = tgui_input_number(owner, "Choose your target's biological age:\n([AGE_MIN]-[AGE_MAX])", "Kiss of Lachesis", target.age, AGE_MAX, AGE_MIN, round_value = TRUE)
-			target.age = clamp(new_age, AGE_MIN, AGE_MAX)
-			target.update_hair()
-			target.update_body()
+	var/new_age = tgui_input_number(owner, "Choose your target's biological age:\n([AGE_MIN]-[AGE_MAX])", "Kiss of Lachesis", age, AGE_MAX, AGE_MIN, round_value = TRUE)
+	target.age = clamp(new_age, AGE_MIN, AGE_MAX)
+	target.update_hair()
+	target.update_body()
