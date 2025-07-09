@@ -218,7 +218,7 @@
 	if(iskindred(target) || isghoul(target))
 		ADD_TRAIT(target, TRAIT_THINNED_BLOOD, TRAIT_MAGIC)
 		to_chat(owner, span_warning("You feel your blood thin, and healing become impossible!"))
-		addtimer(CALLBACK(target, PROC_REF(thin_blood_cure), 1 MINUTES)
+		addtimer(CALLBACK(target, PROC_REF(thin_blood_cure), 1 MINUTES))
 	else
 		to_chat(owner, span_warning("You dizzy for a moment."))
 
