@@ -190,7 +190,7 @@
 		to_chat(owner, span_warning("[target] is not a Childe of Caine!"))
 		return FALSE
 	if (target.bloodpool >= vitae_removed)
-			to_chat(owner, span_warning("[target] lacks sufficient vitae!"))
+		to_chat(owner, span_warning("[target] lacks sufficient vitae!"))
 		return FALSE
 	else
 		to_chat(owner, span_warning("You cast the Father's Judgement onto [target]!"))
