@@ -260,7 +260,6 @@
 	var/bloodpool = 5
 	var/maxbloodpool = 5
 	var/generation = 13
-	var/generation_blood_bonus = 0
 	var/masquerade = 5
 	var/datum/weakref/conditioner
 	var/conditioned = FALSE
