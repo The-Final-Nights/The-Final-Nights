@@ -200,4 +200,4 @@
 
 /datum/discipline_power/animalism/song_in_the_dark/post_gain()
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_ANIMAL_SUCCULENCE, TRAIT_MAGIC)
+	ADD_TRAIT(owner, TRAIT_ANIMAL_SUCCULENCE, MAGIC_TRAIT)
