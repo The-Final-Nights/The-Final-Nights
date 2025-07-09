@@ -193,6 +193,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/discipline_types = list()
 	///Ranks of the Disciplines this character knows, corresponding to discipline_types.
 	var/list/discipline_levels = list()
+	///Maximum level the discipline can reach - based on generation.
+	var/max_discipline_levels = clamp(13 - generation, 5, 10)
+
 
 	var/physique = 1
 	var/dexterity = 1
@@ -767,7 +770,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						cost = discipline_level * 7
 
 					dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"][discipline_level > 5 ? "•" : "o"][discipline_level > 6 ? "•" : "o"][discipline_level > 7 ? "•" : "o"][discipline_level > 8 ? "•" : "o"][discipline_level > 9 ? "•" : "o"]([discipline_level])"
-					if((player_experience >= cost) && (discipline_level != max_discipline_level))
+					if((player_experience >= cost) && (discipline_level != max_discipline_levels))
 						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
 					else
 						dat += "<BR>"
