@@ -3760,7 +3760,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.morality_path = MOR
 
 		character.generation = generation
-		character.maxbloodpool = 10 + ((13 - generation) * 3)
+		character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_bonus)
 		character.bloodpool = rand(2, character.maxbloodpool)
 
 		character.set_clan(clan, TRUE)
