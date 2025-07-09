@@ -3760,7 +3760,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.morality_path = MOR
 
 		character.generation = generation
-		character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_bonus)
+		var/generation_blood_bonus
+		switch(generation) //Room for future expansion - 7th gen and lower scale in a manner that's hard to make an effective formula for.
+			if(>= 8)
+				generation_blood_bonus = 0
+			if(7)
+				generation_blood_bonus = 12
+		character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
 		character.bloodpool = rand(2, character.maxbloodpool)
 
 		character.set_clan(clan, TRUE)
