@@ -197,6 +197,6 @@
 /datum/discipline_power/temporis/kiss_of_lachesis/activate(mob/living/target)
 	. = ..()
 		var/new_age = tgui_input_number(user, "Choose your target's biological age:\n([AGE_MIN]-[AGE_MAX])", "Kiss of Lachesis", age, AGE_MAX, AGE_MIN, round_value = TRUE)
-				age = clamp(new_age, AGE_MIN, AGE_MAX)
-				if (age > total_age)
-						total_age = age
+			src.age = clamp(new_age, AGE_MIN, AGE_MAX)
+			if (age > total_age)
+				total_age = age
