@@ -347,7 +347,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
-#define ATTRIBUTE_BASE_LIMIT 5 //Highest level that a base attribute can be upgraded to. Bonus attributes can increase the actual amount past the limit.
+#define ATTRIBUTE_BASE_LIMIT clamp(13 - generation, 5, 10) //Highest level that a base attribute can be upgraded to. Bonus attributes can increase the actual amount past the limit.
 
 /proc/make_font_cool(text)
 	if(text)
@@ -767,8 +767,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						cost = discipline_level * 5
 					else
 						cost = discipline_level * 7
-
-					dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"][discipline_level > 5 ? "•" : "o"][discipline_level > 6 ? "•" : "o"][discipline_level > 7 ? "•" : "o"][discipline_level > 8 ? "•" : "o"][discipline_level > 9 ? "•" : "o"]([discipline_level])"
+					if(generation <= 7)
+						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"][discipline_level > 5 ? "•" : "o"][discipline_level > 6 ? "•" : "o"][discipline_level > 7 ? "•" : "o"][discipline_level > 8 ? "•" : "o"][discipline_level > 9 ? "•" : "o"]([discipline_level])"
+					else
+						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"])"				
+					if((player_experience >= cost) && (discipline_level != max_discipline_level))
 					if((player_experience >= cost) && (discipline_level != max_discipline_level))
 						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
 					else
@@ -1545,7 +1548,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		dat += "•"
 	for(var/b in 1 to bonus_number)
 		dat += "•"
-	var/leftover_circles = 5 - attribute //5 is the default number of blank circles
+	var/leftover_circles = ATTRIBUTE_BASE_LIMIT - attribute //5 is the default number of blank circles
 	for(var/c in 1 to leftover_circles)
 		dat += "o"
 	var/real_price = attribute ? (attribute*price) : price //In case we have an attribute of 0, we don't multiply by 0
