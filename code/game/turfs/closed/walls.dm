@@ -147,8 +147,7 @@
 					"<span class='hear'>You hear a booming smash!</span>")
 	return TRUE
 
-/turf/closed/wall/attack_potence(mob/living/carbon/user)
-	..()
+/turf/closed/wall/proc/attack_potence(mob/living/carbon/user)
 	var/obj/item/bodypart/arm = user.hand_bodyparts[user.active_hand_index]
 	if(!arm)
 		return
