@@ -35,7 +35,7 @@
 	if(HAS_TRAIT(src, TRAIT_BLOODY_SUCKER))
 		src.emote("moan")
 		Immobilize(30, TRUE)
-	if(isanimal(mob) && src.TRAIT_ANIMAL_SUCCULENCE)
+	if(isanimal(mob) && HAS_TRAIT(src, TRAIT_ANIMAL_SUCCULENCE))
 		bloodgain += 2
 	playsound_local(src, heartbeat, 75, 0, channel = CHANNEL_BLOOD, use_reverb = FALSE)
 	if(isnpc(mob))
