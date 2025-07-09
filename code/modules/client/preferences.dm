@@ -193,9 +193,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/list/discipline_types = list()
 	///Ranks of the Disciplines this character knows, corresponding to discipline_types.
 	var/list/discipline_levels = list()
-	///Maximum level the discipline can reach - based on generation.
-	var/max_discipline_levels = clamp(13 - generation, 5, 10)
-
 
 	var/physique = 1
 	var/dexterity = 1
@@ -758,6 +755,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/discipline_type = discipline_types[i]
 					var/datum/discipline/discipline = new discipline_type
 					var/discipline_level = discipline_levels[i]
+					///Maximum level the discipline can reach - based on generation.
+					var/max_discipline_level = clamp(13 - generation, 5, 10)
 
 					var/cost
 					if (discipline_level <= 0)
