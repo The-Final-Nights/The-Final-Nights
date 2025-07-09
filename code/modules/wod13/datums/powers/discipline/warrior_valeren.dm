@@ -211,15 +211,15 @@
 
 	cooldown_length = 1 MINUTES
 
-/datum/discipline_power/valeren_warrior/blissful_agony/activate(mob/target)
+/datum/discipline_power/valeren_warrior/blissful_agony/activate(mob/living/target)
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act)), 0)
-	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act)), 2.5 SECONDS)
-	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act)), 5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act), target), 0)
+	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act), target), 2.5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act), target), 5 SECONDS)
 
-/datum/discipline_power/valeren_warrior/blissful_agony/blissful_agony_act(mob/target)
-	. = ..()
+/datum/discipline_power/valeren_warrior/blissful_agony/proc/blissful_agony_act(mob/living/target)
 	target.emote("scream")
 	target.rollfrenzy()
 	target.do_jitter_animation(20)
 	target.Stun(10)
+
