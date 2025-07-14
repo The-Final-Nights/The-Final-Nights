@@ -3772,6 +3772,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if(4)
 				generation_blood_bonus = 93
 			if(1 to 3)
+				generation_blood_bonus = INFINITY
 		character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
 		character.bloodpool = rand(2, character.maxbloodpool)
 
