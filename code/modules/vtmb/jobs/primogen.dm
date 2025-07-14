@@ -229,7 +229,7 @@
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/yellow
 	uniform = /obj/item/clothing/under/vampire/turtleneck_navy
-	suit = /obj/item/clothing/suit/vampire/vest
+	suit = /obj/item/clothing/suit/vampire/jacket/banu
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone/banu_primo
 	r_pocket = /obj/item/cockclock

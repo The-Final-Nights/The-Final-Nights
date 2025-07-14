@@ -3775,6 +3775,7 @@
 #include "modular_tfn\modules\alt_job_titles\alt_job_titles.dm"
 #include "modular_tfn\modules\alt_job_titles\outfits.dm"
 #include "modular_tfn\modules\auspex_auras\auspex_auras.dm"
+#include "modular_tfn\modules\banujacket\banujacket.dm"
 #include "modular_tfn\modules\bitcoinminer\bitcoinminer.dm"
 #include "modular_tfn\modules\discord\account_link.dm"
 #include "modular_tfn\modules\discord\discord_embed.dm"

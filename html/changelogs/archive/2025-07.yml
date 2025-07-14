@@ -45,3 +45,10 @@
   - bugfix: Kindred now have vitae instead of blood.
   - bugfix: Fixed a bug where taking blood from a kindred with an IV drip maxed their
       blood pool.
+2025-07-10:
+  XeonMations:
+  - admin: Updated a lot of admin facing VV panel shenanigens. Report issues to Xeon,
+      admins!
+2025-07-11:
+  AlmostLikeClockwork:
+  - rscadd: Gives a second studded jacket with the Assamite logo to the BHP
