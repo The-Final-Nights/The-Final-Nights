@@ -3761,11 +3761,19 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 		character.generation = generation
 		var/generation_blood_bonus
-		switch(generation) //Room for future expansion - 7th gen and lower scale in a manner that's hard to make an effective formula for.
+		switch(generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
 			if(>= 8)
 				generation_blood_bonus = 0
 			if(7)
 				generation_blood_bonus = 12
+			if(6)
+				generation_blood_bonus = 39
+			if(5)
+				generation_blood_bonus = 56
+			if(4)
+				generation_blood_bonus = 93
+			if(<=3)
+				generation_blood_bonus = INFINITY
 		character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
 		character.bloodpool = rand(2, character.maxbloodpool)
 
