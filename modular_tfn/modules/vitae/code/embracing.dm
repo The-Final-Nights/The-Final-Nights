@@ -43,7 +43,7 @@
 	childe.create_disciplines(FALSE, disciplines_to_give)
 	var/generation_blood_bonus
 	switch(childe.generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
-		if(>= 8)
+		if(8 to HIGHEST_GENERATION_LIMIT)
 			generation_blood_bonus = 0
 		if(7)
 			generation_blood_bonus = 12
@@ -53,7 +53,7 @@
 			generation_blood_bonus = 56
 		if(4)
 			generation_blood_bonus = 93
-		if(<=3)
+		if(1 to 3)
 			generation_blood_bonus = INFINITY
 	childe.maxbloodpool = 10 + (((13 - childe.generation) * 3) + generation_blood_bonus)
 	childe.morality_path = morality_path
