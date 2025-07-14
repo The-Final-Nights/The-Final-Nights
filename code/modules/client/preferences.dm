@@ -772,7 +772,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					else
 						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"])"				
 					if((player_experience >= cost) && (discipline_level != max_discipline_level))
-					if((player_experience >= cost) && (discipline_level != max_discipline_level))
 						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
 					else
 						dat += "<BR>"
@@ -3762,7 +3761,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.generation = generation
 		var/generation_blood_bonus
 		switch(generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
-			if(>= 8)
+			if(8 to HIGHEST_GENERATION_LIMIT)
 				generation_blood_bonus = 0
 			if(7)
 				generation_blood_bonus = 12
@@ -3772,8 +3771,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				generation_blood_bonus = 56
 			if(4)
 				generation_blood_bonus = 93
-			if(<=3)
-				generation_blood_bonus = INFINITY
+			if(1 to 3)
 		character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
 		character.bloodpool = rand(2, character.maxbloodpool)
 
