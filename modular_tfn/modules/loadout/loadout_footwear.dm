@@ -52,7 +52,7 @@
 
 // High Boots
 /datum/gear/footwear/high_boots
-	subtype_path = /datum/gear/footwear/sneakers
+	subtype_path = /datum/gear/footwear/high_boots
 
 /datum/gear/footwear/high_boots/black
 	display_name = "high boots, black"
