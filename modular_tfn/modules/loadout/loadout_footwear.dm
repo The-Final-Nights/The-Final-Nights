@@ -33,11 +33,6 @@
 	display_name = "shoes, metal tip"
 	path = /obj/item/clothing/shoes/vampire/businesstip
 
-/datum/gear/footwear/shoes/swag
-	display_name = "shoes, swag"
-	path = /obj/item/clothing/shoes/swagshoes
-	cost = 3
-
 // Sneakers
 /datum/gear/footwear/sneakers
 	subtype_path = /datum/gear/footwear/sneakers
@@ -49,6 +44,11 @@
 /datum/gear/footwear/sneakers/red
 	display_name = "sneakers, red"
 	path = /obj/item/clothing/shoes/vampire/sneakers/red
+
+/datum/gear/footwear/sneakers/swag
+	display_name = "sneakers, swag"
+	path = /obj/item/clothing/shoes/swagshoes
+	cost = 3
 
 // High Boots
 /datum/gear/footwear/high_boots
