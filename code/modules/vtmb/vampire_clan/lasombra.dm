@@ -15,7 +15,6 @@
 	female_clothes = /obj/item/clothing/under/vampire/business
 	is_enlightened = TRUE
 	whitelisted = FALSE
-	clan_keys = /obj/item/vamp/keys/lasombra
 
 /datum/vampire_clan/lasombra/on_gain(mob/living/carbon/human/H)
 	. = ..()

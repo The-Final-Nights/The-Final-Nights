@@ -56,6 +56,20 @@
 	fire_controled = TRUE
 	wall_rating = LOW_WALL_RATING
 
+/area/vtm/interior/littleitaly
+	name = "Little Italy - Store"
+	icon_state = "shop"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/interior/littleitaly/apartments
+	name = "Little Italy - Apartments"
+	icon_state = "shop"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = LOW_WALL_RATING
+
 /area/vtm/interior/giovanni
 	name = "Giovanni Mansion"
 	icon_state = "giovanni"
@@ -123,8 +137,23 @@
 	wall_rating = HIGH_WALL_RATING
 
 /area/vtm/interior/police/fed
-	name = "Hotel"
+	name = "Reserved Room"
 	icon_state = "police"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/police/court
+	name = "Courthouse"
+	icon_state = "police"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/ranger
+	name = "Firewatch Tower"
+	icon_state = "police"
+	music = /datum/vampiremusic/forest
 	upper = FALSE
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
@@ -169,6 +198,13 @@
 /area/vtm/interior/apartment
 	name = "Millenium Apartments"
 	icon_state = "camarilla_interior"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/subway
+	name = "Subway Station"
+	icon_state = "financialdistrict"
 	upper = FALSE
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
@@ -224,6 +260,9 @@
 /area/vtm/pacificheights/community
 	name = "Pacific Heights - Community Road"
 
+/area/vtm/pacificheights/industrial
+	name = "Pacific Heights - Industrial District"
+
 /area/vtm/chinatown
 	name = "Chinatown"
 	icon_state = "chinatown"
@@ -246,8 +285,19 @@
 /area/vtm/fishermanswharf/lower
 	name = "Fisherman's Wharf - Lower Beachside"
 
+/area/vtm/fishermanswharf/industrial
+	name = "Fisherman's Wharf - Industrial District"
+
 /area/vtm/northbeach
 	name = "Beach"
+	icon_state = "northbeach"
+	ambience_index = AMBIENCE_BEACH
+	music = /datum/vampiremusic/santamonica
+	upper = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/baywalk
+	name = "Baywalk District"
 	icon_state = "northbeach"
 	ambience_index = AMBIENCE_BEACH
 	music = /datum/vampiremusic/santamonica
@@ -270,21 +320,12 @@
 	fire_controled = TRUE
 
 /area/vtm/interior/millennium_tower/f2
-	name = "Millennium Tower F2"
+	name = "Millennium Tower F2 - Security Wing"
 	icon_state = "millenniumtowerf2"
 
 /area/vtm/interior/millennium_tower/f3
-	name = "Millennium Tower F3 - Security Wing"
+	name = "Millennium Tower F3 - Executive Floor"
 	icon_state = "millenniumtowerf3"
-
-/area/vtm/interior/millennium_tower/f4
-	name = "Millennium Tower F4 - Executive Floor"
-	icon_state = "millenniumtowerf4"
-
-/area/vtm/interior/millennium_tower/f5
-	name = "Millennium Tower F5 - Roof Access"
-	icon_state = "millenniumtowerf5"
-	fire_controled = FALSE
 
 /area/vtm/interior/millennium_tower/ventrue
 	name = "Jazz Club Penthouse"
@@ -373,6 +414,24 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/cabdepot
+	name = "Cab Depot"
+	icon_state = "hotel"
+	music = /datum/vampiremusic/downtown
+	ambience_index = AMBIENCE_INTERIOR
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/substation
+	name = "Grid Substation"
+	icon_state = "hotel"
+	music = /datum/vampiremusic/downtown
+	ambience_index = AMBIENCE_INTERIOR
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/church
 	name = "Church Grounds"
 	icon_state = "church"
@@ -451,6 +510,17 @@
 	yin_chi = 2
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/sewer/police
+	name = "Police Station - Basement"
+	icon_state = "sewer"
+	ambience_index = AMBIENCE_SEWER
+	music = /datum/vampiremusic/sewer
+	upper = FALSE
+	zone_type = "battle"
+	yang_chi = 0
+	yin_chi = 2
+	wall_rating = HIGH_WALL_RATING
+
 /area/vtm/sewer/nosferatu_town
 	name = "Underground Town"
 	icon_state = "hotel"
@@ -512,6 +582,16 @@
 	yin_chi = 0
 	wall_rating = LOW_WALL_RATING	//for werewolves in future
 
+/area/vtm/forest/caves
+	name = "Forest Caverns"
+	icon_state = "park"
+	upper = TRUE
+	zone_type = "battle"
+	music = /datum/vampiremusic/forest
+	yang_chi = 2
+	yin_chi = 0
+	wall_rating = LOW_WALL_RATING
+
 /area/vtm/interior/glasswalker
 	name = "Glasswalker's Lab"
 	icon_state = "supply"
@@ -545,6 +625,16 @@
 	name = "Endron Forest Worksite"
 	icon_state = "supply"
 	zone_type = "battle"
+	music = /datum/vampiremusic/forest
+	fire_controled = TRUE
+	yang_chi = 0
+	yin_chi = 1
+	wall_rating = LOW_WALL_RATING
+
+/area/vtm/interior/endron_facility/plant
+	name = "Endron Processing Plant"
+	icon_state = "supply"
+	zone_type = "masquerade"
 	music = /datum/vampiremusic/forest
 	fire_controled = TRUE
 	yang_chi = 0

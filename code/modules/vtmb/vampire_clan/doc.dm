@@ -10,4 +10,3 @@
 	male_clothes = /obj/item/clothing/under/vampire/sexy
 	female_clothes = /obj/item/clothing/under/vampire/toreador/female
 	whitelisted = TRUE
-	clan_keys = /obj/item/vamp/keys/daughters

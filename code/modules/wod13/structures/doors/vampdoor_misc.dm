@@ -112,3 +112,11 @@
 	lock_id = "coggie"
 	burnable = TRUE
 	lockpick_difficulty = 4
+
+/obj/structure/vampdoor/nps
+	icon_state = "wood-1"
+	baseicon = "wood"
+	locked = TRUE
+	lock_id = "nps"
+	burnable = TRUE
+	lockpick_difficulty = 12

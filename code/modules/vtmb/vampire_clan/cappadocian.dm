@@ -11,7 +11,6 @@
 	alt_sprite_greyscale = TRUE
 
 	whitelisted = FALSE
-	clan_keys = /obj/item/vamp/keys/cappadocian
 
 /datum/vampire_clan/cappadocian/on_gain(mob/living/carbon/human/H)
 	. = ..()
