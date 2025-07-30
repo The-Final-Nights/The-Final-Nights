@@ -15685,6 +15685,7 @@
 /area/vtm/sewer/nosferatu_warren)
 "ekL" = (
 /obj/structure/fire_barrel,
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/concrete{
 	color = "#bfbfbf"
 	},
@@ -19501,6 +19502,11 @@
 /obj/effect/decal/wallpaper/paper/darkgreen/low,
 /turf/closed/wall/vampwall/rich/old/low/window,
 /area/vtm/interior/endron_facility)
+"fjw" = (
+/obj/structure/barrels/rand,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/supply)
 "fjE" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#574d46"
@@ -20070,6 +20076,12 @@
 	},
 /turf/open/floor/plating/woodrough,
 /area/vtm/interior/ghetto)
+"frR" = (
+/obj/structure/closet/crate/large,
+/obj/effect/decal/pallet,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/vampcanalplating,
+/area/vtm/sewer)
 "frT" = (
 /obj/item/reagent_containers/glass/bucket{
 	pixel_y = -5;
@@ -20762,6 +20774,11 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/community)
+"fCu" = (
+/obj/structure/trashcan,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/ghetto)
 "fCJ" = (
 /obj/effect/decal/rugs,
 /obj/structure/vampdoor/wood/old{
@@ -22453,6 +22470,10 @@
 /obj/structure/flora/rock/jungle,
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren)
+"fYY" = (
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/forest/caves)
 "fYZ" = (
 /obj/structure/lattice/grate,
 /obj/structure/vampipe{
@@ -22686,6 +22707,11 @@
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
+"gcu" = (
+/obj/structure/barrels/rand,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/sidewalk/poor,
+/area/vtm/interior/endron_facility/plant)
 "gcw" = (
 /obj/effect/turf_decal/siding/wideplating/corner{
 	color = "#802d29"
@@ -23849,6 +23875,11 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
+"gvv" = (
+/obj/structure/table/wood,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/vampwood,
+/area/vtm/interior/shop)
 "gvA" = (
 /obj/machinery/mineral/equipment_vendor/fastfood/snacks,
 /turf/open/floor/plating/vampplating/stone,
@@ -23944,6 +23975,11 @@
 /obj/structure/flora/ausbushes/fernybush,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
+"gwS" = (
+/obj/structure/closet/cabinet,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/ghetto)
 "gwT" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -29334,6 +29370,13 @@
 	color = "#919191"
 	},
 /area/vtm/church/interior/staff)
+"hRe" = (
+/obj/structure/fluff/hedge,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/circled{
+	color = "#b0b0b0"
+	},
+/area/vtm/interior/subway)
 "hRf" = (
 /obj/structure/vampipe{
 	icon_state = "piping41"
@@ -29566,6 +29609,7 @@
 	icon_state = "trails_1-old";
 	pixel_x = 4
 	},
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/millennium_tower)
 "hTL" = (
@@ -30833,6 +30877,10 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
+"ilx" = (
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/stone,
+/area/vtm/sewer)
 "ilH" = (
 /obj/effect/decal/bordur/corner{
 	dir = 8
@@ -34404,6 +34452,13 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/ghetto)
+"jgN" = (
+/obj/vampgrave{
+	pixel_y = 7
+	},
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/vampdirt,
+/area/vtm/graveyard)
 "jgV" = (
 /obj/effect/decal/cleanable/oil,
 /obj/effect/decal/bordur{
@@ -39596,6 +39651,7 @@
 	dir = 8;
 	pixel_y = 19
 	},
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/toilet{
 	color = "#919191"
 	},
@@ -41560,6 +41616,7 @@
 /obj/item/vamp/keys/giovanni,
 /obj/item/vamp/keys/giovanni,
 /obj/item/vamp/keys/giovanni,
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/church,
 /area/vtm/interior/giovanni)
 "kZM" = (
@@ -47242,6 +47299,7 @@
 	dir = 4;
 	pixel_x = -16
 	},
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/vampwood,
 /area/vtm/interior/ghetto)
 "mwc" = (
@@ -47398,6 +47456,11 @@
 /obj/effect/landmark/start/citizen,
 /turf/open/floor/carpet,
 /area/vtm/interior/shop)
+"mxX" = (
+/obj/structure/table/wood,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior)
 "myc" = (
 /obj/structure/chair/pew{
 	dir = 1
@@ -48339,6 +48402,12 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm)
+"mKV" = (
+/obj/structure/closet/crate/large,
+/obj/effect/decal/pallet,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/sewer)
 "mLc" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -50857,6 +50926,12 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/shop)
+"nqG" = (
+/obj/effect/decal/pallet,
+/obj/structure/closet/crate/large,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/dirt,
+/area/vtm/financialdistrict/construction)
 "nqH" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/vampgrass,
@@ -53088,6 +53163,7 @@
 	pixel_y = 3;
 	pixel_x = -1
 	},
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "nSf" = (
@@ -61469,6 +61545,7 @@
 /obj/effect/decal/trash,
 /obj/structure/closet/crate/large,
 /obj/effect/decal/pallet,
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
 "qbK" = (
@@ -65094,6 +65171,11 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"qVh" = (
+/obj/structure/closet/secure_closet/freezer,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/shop)
 "qVo" = (
 /obj/structure/weedshit,
 /turf/open/floor/plating/sidewalk/poor,
@@ -65165,6 +65247,11 @@
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/interior/laundromat)
+"qVU" = (
+/obj/effect/decal/trash,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/dirt,
+/area/vtm/sewer)
 "qWa" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -70455,6 +70542,11 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/graveyard)
+"str" = (
+/obj/item/kirbyplants/random,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/hotel)
 "stt" = (
 /obj/structure/table/wood/fancy/red,
 /obj/machinery/light/prince{
@@ -72020,6 +72112,10 @@
 /obj/structure/closet/crate/large,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/littleitaly)
+"sPN" = (
+/obj/item/vtm_artifact/rand,
+/turf/open/water,
+/area/vtm/park)
 "sPP" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 5;
@@ -83641,6 +83737,7 @@
 	color = "#802d29";
 	dir = 6
 	},
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/carpet/red,
 /area/vtm/interior/littleitaly)
 "vZu" = (
@@ -84350,6 +84447,11 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/shop)
+"wjk" = (
+/obj/structure/fire_barrel,
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/vampcanalplating,
+/area/vtm/sewer)
 "wjw" = (
 /obj/structure/vamptree{
 	icon_state = "tree10"
@@ -91925,6 +92027,7 @@
 /area/vtm/interior/police/fed)
 "yis" = (
 /obj/structure/table/wood/poker,
+/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
 "yit" = (
@@ -97795,7 +97898,7 @@ cBs
 kOa
 bEG
 nRp
-vFf
+vdK
 kRM
 tuX
 rCB
@@ -103312,7 +103415,7 @@ xyw
 cpt
 kSB
 rLP
-oDq
+qVU
 hev
 xyw
 cBs
@@ -105492,7 +105595,7 @@ rCB
 tuX
 kOa
 plN
-keA
+wjk
 ssR
 kOa
 nRp
@@ -108134,7 +108237,7 @@ xfw
 xfw
 rCB
 xyw
-brg
+ilx
 uSc
 cBs
 brg
@@ -123056,7 +123159,7 @@ ehJ
 aRJ
 tqT
 oZI
-fkh
+mKV
 cBs
 wMo
 oOl
@@ -124807,7 +124910,7 @@ qOW
 ojC
 ojC
 tuX
-qlP
+frR
 pHD
 pls
 tHb
@@ -130720,7 +130823,7 @@ feP
 feP
 feP
 ohq
-oEr
+hRe
 oHd
 feP
 feP
@@ -133784,7 +133887,7 @@ iVF
 goA
 goA
 wiu
-eEj
+gcu
 tvm
 tvm
 eEj
@@ -136364,7 +136467,7 @@ iUX
 iUX
 jeD
 rWR
-puz
+jgN
 ryD
 jeD
 qJs
@@ -138864,7 +138967,7 @@ oYt
 kKz
 cKr
 xiu
-dKt
+fjw
 gzj
 gzj
 iCp
@@ -148659,7 +148762,7 @@ aqb
 aqb
 aqb
 cLr
-cLr
+fYY
 atR
 aqb
 hPC
@@ -150756,7 +150859,7 @@ kOW
 czr
 gJb
 uQH
-hbR
+gvv
 qji
 psE
 gOL
@@ -157616,7 +157719,7 @@ hhw
 hhw
 kiu
 noy
-noy
+sPN
 kSP
 ekp
 hhw
@@ -159339,7 +159442,7 @@ kQM
 mLc
 keR
 sXi
-cOT
+qVh
 uod
 weZ
 dPQ
@@ -162315,7 +162418,7 @@ eQC
 gmC
 vhY
 pLS
-ncd
+gwS
 fAa
 vhY
 pLS
@@ -162912,7 +163015,7 @@ uWr
 gJr
 wML
 tTn
-xGC
+str
 vuM
 vuM
 eQC
@@ -163873,7 +163976,7 @@ aoD
 cOT
 weZ
 weZ
-cOT
+qVh
 gXN
 oqG
 iEh
@@ -164740,7 +164843,7 @@ eOC
 agC
 vbT
 hYu
-mge
+fCu
 eIo
 pJF
 pJF
@@ -164754,7 +164857,7 @@ agC
 qqZ
 jpZ
 agC
-mge
+fCu
 kpA
 agC
 eIo
@@ -170595,7 +170698,7 @@ kBM
 "}
 (189,1,2) = {"
 eOC
-mge
+fCu
 ePl
 dik
 dik
@@ -171514,7 +171617,7 @@ bMY
 tsB
 bMY
 bMY
-ncf
+nqG
 dtI
 azh
 jCX
@@ -171930,7 +172033,7 @@ pAy
 ncf
 cCG
 ewu
-vLp
+mxX
 cCG
 dtI
 gnO
@@ -207781,7 +207884,7 @@ gmC
 ebp
 uFq
 pLS
-ncd
+gwS
 ebp
 mjT
 mjT
