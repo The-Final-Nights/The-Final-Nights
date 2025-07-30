@@ -29609,7 +29609,6 @@
 	icon_state = "trails_1-old";
 	pixel_x = 4
 	},
-/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/millennium_tower)
 "hTL" = (
@@ -39651,7 +39650,6 @@
 	dir = 8;
 	pixel_y = 19
 	},
-/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/toilet{
 	color = "#919191"
 	},
@@ -41616,7 +41614,6 @@
 /obj/item/vamp/keys/giovanni,
 /obj/item/vamp/keys/giovanni,
 /obj/item/vamp/keys/giovanni,
-/obj/item/vtm_artifact/rand,
 /turf/open/floor/plating/church,
 /area/vtm/interior/giovanni)
 "kZM" = (
@@ -72112,10 +72109,6 @@
 /obj/structure/closet/crate/large,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/littleitaly)
-"sPN" = (
-/obj/item/vtm_artifact/rand,
-/turf/open/water,
-/area/vtm/park)
 "sPP" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 5;
@@ -157719,7 +157712,7 @@ hhw
 hhw
 kiu
 noy
-sPN
+noy
 kSP
 ekp
 hhw
