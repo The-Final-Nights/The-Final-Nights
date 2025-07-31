@@ -360,7 +360,7 @@
 		var/datum/wound/W = pick(childe.all_wounds)
 		W.remove_wound()
 	childe.adjustFireLoss(-25, TRUE)
-	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+2)
+	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+(2 * sire.bloodquality))
 	childe.drunked_of |= "[sire.dna.real_name]"
 
 	// Sabbatist Embrace Logic
