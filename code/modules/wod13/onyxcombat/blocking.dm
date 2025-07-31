@@ -36,11 +36,7 @@
 
 
 /mob/living/carbon/human/attack_hand(mob/living/carbon/human/user)
-	if(getStaminaLoss() >= 50 && blocking)
-		SwitchBlocking()
-	if(CheckFrenzyMove() && blocking)
-		SwitchBlocking()
-	if(HAS_TRAIT(user, TRAIT_PERFECT_DEFENCE))
+	if(HAS_TRAIT(src, TRAIT_PERFECT_DEFENCE))
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		user.do_attack_animation(src)
 		visible_message(span_danger("[src] blocks the punch!"), span_danger("You block the punch!"))
@@ -48,9 +44,12 @@
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		apply_damage(3, STAMINA)
 		user.do_attack_animation(src)
-		emote("flip")
 		visible_message(span_danger("[src] dodges the punch!"), span_danger("You dodge the punch!"))
 		return
+	if(getStaminaLoss() >= 50 && blocking)
+		SwitchBlocking()
+	if(CheckFrenzyMove() && blocking)
+		SwitchBlocking()
 	if(user.combat_mode && blocking)
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		apply_damage(10, STAMINA)
