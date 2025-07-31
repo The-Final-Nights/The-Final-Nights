@@ -303,9 +303,9 @@
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet-15
 			if(HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				REMOVE_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
-		BD.dexterity = BD.dexterity-2
-		BD.athletics = BD.athletics-2
-		BD.lockpicking = BD.lockpicking-2
+		BD.dexterity = BD.dexterity-BD.bloodquality
+		BD.athletics = BD.athletics-BD.bloodquality
+		BD.lockpicking = BD.lockpicking-BD.bloodquality
 
 /datum/action/give_vitae
 	name = "Give Vitae"
