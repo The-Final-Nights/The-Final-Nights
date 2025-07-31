@@ -42,20 +42,25 @@
 		disciplines_to_give += client?.prefs.discipline_types[i]
 	childe.create_disciplines(FALSE, disciplines_to_give)
 	var/generation_blood_bonus
-	switch(childe.generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
+	switch(generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
 		if(8 to HIGHEST_GENERATION_LIMIT)
 			generation_blood_bonus = 0
 		if(7)
 			generation_blood_bonus = 12
+			character.bloodquality += 1
 		if(6)
 			generation_blood_bonus = 39
+			character.bloodquality += 2
 		if(5)
 			generation_blood_bonus = 56
+			character.bloodquality += 3
 		if(4)
 			generation_blood_bonus = 93
+			character.bloodquality += 4
 		if(1 to 3)
 			generation_blood_bonus = INFINITY
-	childe.maxbloodpool = 10 + (((13 - childe.generation) * 3) + generation_blood_bonus)
+			character.bloodquality += 100
+	character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
 	childe.morality_path = morality_path
 	childe.clan.is_enlightened = clan.is_enlightened
 
