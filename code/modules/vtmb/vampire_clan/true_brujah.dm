@@ -10,6 +10,5 @@
 	is_enlightened = TRUE
 	male_clothes = /obj/item/clothing/under/vampire/rich
 	female_clothes = /obj/item/clothing/under/vampire/business
-	clan_keys = /obj/item/vamp/keys/trujah
 	restricted_disciplines = list(/datum/discipline/celerity)
 	whitelisted = TRUE

@@ -389,20 +389,8 @@
 			if(ishuman(owner))
 				var/mob/living/carbon/human/BD = owner
 				if(length(BD.all_wounds))
-					var/datum/wound/W = pick(BD.all_wounds)
-					W.remove_wound()
-				if(length(BD.all_wounds))
-					var/datum/wound/W = pick(BD.all_wounds)
-					W.remove_wound()
-				if(length(BD.all_wounds))
-					var/datum/wound/W = pick(BD.all_wounds)
-					W.remove_wound()
-				if(length(BD.all_wounds))
-					var/datum/wound/W = pick(BD.all_wounds)
-					W.remove_wound()
-				if(length(BD.all_wounds))
-					var/datum/wound/W = pick(BD.all_wounds)
-					W.remove_wound()
+					for(var/datum/wound/W as anything in BD.all_wounds)
+						W.remove_wound()
 			if (brain)
 				brain.applyOrganDamage(-30*C.auspice.level)
 				brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
@@ -537,31 +525,38 @@
 	var/list/howls = list(
 		"attack" = list(
 			"menu" = "Attack",
-			"message" = "A wolf howls a fierce call to attack"
+			"message" = "A wolf howls a fierce call to attack",
+			"corax_message" = "A raven hisses a fierce call to attack"
 		),
 		"retreat" = list(
 			"menu" = "Retreat",
-			"message" = "A wolf howls a warning to retreat"
+			"message" = "A wolf howls a warning to retreat",
+			"corax_message" = "A raven squawks a warning to retreat"
 		),
 		"help" = list(
 			"menu" = "Help",
-			"message" = "A wolf howls a desperate plea for help"
+			"message" = "A wolf howls a desperate plea for help",
+			"corax_message" = "A raven shrieks a a desperate plea for help"
 		),
 		"gather" = list(
 			"menu" = "Gather",
-			"message" = "A wolf howls to gather the pack"
+			"message" = "A wolf howls to gather the pack",
+			"corax_message" = "A raven beckons the conspiracy"
 		),
 		"victory" = list(
 			"menu" = "Victory",
-			"message" = "A wolf howls in celebration of victory"
+			"message" = "A wolf howls in celebration of victory",
+			"corax_message" = "A raven croaks in celebration of victory"
 		),
 		"dying" = list(
 			"menu" = "Dying",
-			"message" = "A wolf howls in pain and despair"
+			"message" = "A wolf howls in pain and despair",
+			"corax_message" = "A raven shrieks in pain and despair"
 		),
 		"mourning" = list(
 			"menu" = "Mourning",
-			"message" = "A wolf howls in deep mourning for the fallen"
+			"message" = "A wolf howls in deep mourning for the fallen",
+			"corax_message" = "A raven mourns the loss of the fallen"
 		)
 	)
 
@@ -570,7 +565,7 @@
 	if(allowed_to_proceed)
 
 		if(istype(get_area(owner), /area/vtm/interior/penumbra))
-			to_chat(owner, span_warning("Your howl echoes and dissapates into the Umbra, it's sound blanketed by the spiritual energy of the Velvet Shadow."))
+			to_chat(owner, span_warning("Your howl echoes and dissipates into the Umbra, it's sound blanketed by the spiritual energy of the Velvet Shadow."))
 			return
 
 		var/mob/living/C = owner
@@ -587,14 +582,17 @@
 					howl = howls[howl_key]
 					break
 
-			var/message = howl["message"]
+			var/message = howl[(HAS_TRAIT(C, TRAIT_CORAX)) ? "corax_message" : "message" ]
 			var/tribe = C.auspice.tribe.name
 			if (tribe)
 				message = replacetext(message, "tribe", tribe)
-
-			C.emote("howl")
 			var/origin_turf = get_turf(C)
-			playsound(origin_turf, pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 50, FALSE)
+			if(!HAS_TRAIT(C, TRAIT_CORAX))
+				C.emote("howl")
+				playsound(origin_turf, pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 50, FALSE)
+			else
+				C.emote("caw")
+				playsound(origin_turf, 'code/modules/wod13/sounds/cawcorvid.ogg', 50, FALSE)
 			var/list/sound_hearers = list()
 
 			for(var/mob/living/HearingGarou in range(17))
@@ -604,9 +602,12 @@
 			var/howl_details
 			var/final_message
 			for(var/mob/living/Garou in GLOB.player_list)
-				if(isgarou(Garou) || iswerewolf(Garou) && !owner)
+				if(isgarou(Garou) || iswerewolf(Garou)  || HAS_TRAIT(Garou, TRAIT_CORAX) && !owner)
 					if(!sound_hearers.Find(Garou))
-						Garou.playsound_local(get_turf(Garou), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 25, FALSE)
+						if(!HAS_TRAIT(C, TRAIT_CORAX))
+							Garou.playsound_local(get_turf(Garou), pick('code/modules/wod13/sounds/awo1.ogg', 'code/modules/wod13/sounds/awo2.ogg'), 25, FALSE)
+						else
+							Garou.playsound_local(get_turf(Garou), 'code/modules/wod13/sounds/cawcorvid.ogg', 25, FALSE)
 					howl_details = get_message(Garou, origin_turf)
 					final_message = message + howl_details
 					to_chat(Garou, final_message, confidential = TRUE)

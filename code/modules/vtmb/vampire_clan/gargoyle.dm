@@ -25,12 +25,3 @@
 	gargoyle.dna.species.wings_icon = "Gargoyle"
 	gargoyle.physiology.brute_mod = 0.8
 	gargoyle.dna.species.GiveSpeciesFlight(gargoyle)
-
-	if(gargoyle.shoes)
-		qdel(gargoyle.shoes)
-	gargoyle.Digitigrade_Leg_Swap(FALSE) //TODO: Remove shoes first
-
-	gargoyle.remove_overlay(MARKS_LAYER)
-	var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "gargoyle_legs_n_tails", -MARKS_LAYER)
-	gargoyle.overlays_standing[MARKS_LAYER] = acc_overlay
-	gargoyle.apply_overlay(MARKS_LAYER)

@@ -13,6 +13,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/ghostcouncil
 	name = "Ghost Council"
@@ -22,6 +23,7 @@
 		/datum/action/gift/coils_of_the_serpent = 2,
 		/datum/action/gift/banish_totem = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/hartwardens
 	name = "Hart Wardens"
@@ -31,6 +33,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/glasswalkers
 	name = "Glass Walkers"
@@ -50,6 +53,7 @@
 		/datum/action/gift/infest = 2,
 		/datum/action/gift/gift_of_the_termite = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/children_of_gaia
 
 /datum/garou_tribe/childrenofgaia
 	name = "Children of Gaia"
@@ -59,6 +63,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/children_of_gaia
 
 /datum/garou_tribe/getoffenris
 	name = "Get of Fenris"
@@ -68,6 +73,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/blackfuries
 	name = "Black Furies"
@@ -77,6 +83,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/silentstriders
 	name = "Silent Striders"
@@ -86,6 +93,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/shadowlords
 	name = "Shadow Lords"
@@ -114,6 +122,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/stargazers
 	name = "Stargazers"
@@ -123,6 +132,7 @@
 		/datum/action/gift/freezing_wind = 2,
 		/datum/action/gift/bloody_feast = 3
 	)
+	tribe_keys = /obj/item/vamp/keys/nps
 
 /datum/garou_tribe/blackspiraldancers
 	name = "Black Spiral Dancers"

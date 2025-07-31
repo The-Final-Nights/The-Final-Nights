@@ -83,3 +83,8 @@
 	display_name = "briefcase"
 	path = /obj/item/storage/briefcase
 	cost = 3
+
+/datum/gear/general/cane
+	display_name = "cane"
+	path = /obj/item/cane
+	cost = 3

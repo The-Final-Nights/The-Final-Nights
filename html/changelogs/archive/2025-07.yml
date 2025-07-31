@@ -52,3 +52,42 @@
 2025-07-11:
   AlmostLikeClockwork:
   - rscadd: Gives a second studded jacket with the Assamite logo to the BHP
+2025-07-14:
+  Somniworld:
+  - qol: Corax may now use the "howl" gift without actually howling. They will properly
+      "caw" instead.
+  darkincarnate:
+  - rscadd: more crinos hp
+2025-07-16:
+  Somniworld:
+  - bugfix: Rage/Blood healing, as well as bone gel, will now fix your limping status
+      effect correctly!
+  TheTrueSilverRat:
+  - code_imp: Changed how the damage proc for the shapeshift restore() proc was handled
+      so people didnt die hard when they came back (unless they died ish during the
+      transformation)
+  Tzui5020, Falloutfalcon:
+  - rscadd: Pliers to rip out fangs with, One will only give a status effect and the
+      other will remove them for the whole round.
+  - rscadd: Adds the Baby Teeth trait
+  - code_imp: Un-snowflakes the wirecutters we had before into the Tool wirecutter.
+      Ports PR#31 from ApocryphaXIII.
+  chazzyjazzy:
+  - bugfix: fixed meleemods not being applied to weapons besides completely unarmed
+  - qol: catwalks in the sewers and across rooftops now make catwalk-appropriate metal
+      footstep sounds
+  darkincarnate:
+  - rscadd: cane in loadout
+2025-07-17:
+  BlitzArde:
+  - spellcheck: pomp shotgun becomes pump shotgun and the luchador masks names are
+      corrected
+2025-07-20:
+  Dusk-a:
+  - image: Reverted the Gargoyle legs to the old version
+  SoreYew:
+  - bugfix: fixed sprite not showing up.
+2025-07-30:
+  Marshmellow105:
+  - rscadd: sanfrancisco 2
+  - rscdel: sanfrancisco 1

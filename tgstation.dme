@@ -3777,6 +3777,8 @@
 #include "modular_tfn\modules\auspex_auras\auspex_auras.dm"
 #include "modular_tfn\modules\banujacket\banujacket.dm"
 #include "modular_tfn\modules\bitcoinminer\bitcoinminer.dm"
+#include "modular_tfn\modules\catwalk_footstep_overrides\code\footstep_override.dm"
+#include "modular_tfn\modules\catwalk_footstep_overrides\code\lattice.dm"
 #include "modular_tfn\modules\discord\account_link.dm"
 #include "modular_tfn\modules\discord\discord_embed.dm"
 #include "modular_tfn\modules\discord\discord_link_record.dm"
