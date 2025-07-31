@@ -47,20 +47,20 @@
 			generation_blood_bonus = 0
 		if(7)
 			generation_blood_bonus = 12
-			character.bloodquality += 1
+			childe.bloodquality += 1
 		if(6)
 			generation_blood_bonus = 39
-			character.bloodquality += 2
+			childe.bloodquality += 2
 		if(5)
 			generation_blood_bonus = 56
-			character.bloodquality += 3
+			childe.bloodquality += 3
 		if(4)
 			generation_blood_bonus = 93
-			character.bloodquality += 4
+			childe.bloodquality += 4
 		if(1 to 3)
 			generation_blood_bonus = INFINITY
-			character.bloodquality += 100
-	character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
+			childe.bloodquality += 100
+	childe.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
 	childe.morality_path = morality_path
 	childe.clan.is_enlightened = clan.is_enlightened
 
