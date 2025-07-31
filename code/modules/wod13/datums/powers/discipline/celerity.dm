@@ -258,6 +258,8 @@
 	ADD_TRAIT(owner, TRAIT_PERFECT_DEFENCE, MAGIC_TRAIT)
 	ADD_TRAIT(owner, TRAIT_HANDS_BLOCK_PROJECTILES, MAGIC_TRAIT)
 
+	owner.status_flags |= GODMODE //Temp fix until hands_block_projectiles gets fixed.
+
 	for(var/obj/stuff in owner.contents) //no disarm
 		ADD_TRAIT(stuff, TRAIT_NODROP, MAGIC)
 
@@ -271,6 +273,8 @@
 	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
 	REMOVE_TRAIT(owner, TRAIT_PERFECT_DEFENCE, MAGIC_TRAIT)
 	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCK_PROJECTILES, MAGIC_TRAIT)
+
+	owner.status_flags &= ~GODMODE
 
 	for(var/obj/stuff in owner.contents)
 		REMOVE_TRAIT(stuff, TRAIT_NODROP, MAGIC)
