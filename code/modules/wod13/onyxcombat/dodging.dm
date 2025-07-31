@@ -1,10 +1,5 @@
 
 /mob/living/carbon/human/attackby(obj/item/W, mob/living/user, params)
-	if(HAS_TRAIT(src, TRAIT_PERFECT_DEFENCE))
-		user.do_attack_animation(src)
-		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
-		visible_message(span_danger("[src] blocks the punch!"), span_danger("You block the punch!"))
-		return
 	if(user.blocking)
 		return
 	if(getStaminaLoss() >= 50 && blocking)
@@ -28,6 +23,11 @@
 		user.do_attack_animation(src)
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
 		visible_message(span_danger("[src] dodges the punch!"), span_danger("You dodge the punch!"))
+		return
+	if(HAS_TRAIT(src, TRAIT_PERFECT_DEFENCE))
+		user.do_attack_animation(src)
+		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
+		visible_message(span_danger("[src] blocks the punch!"), span_danger("You block the punch!"))
 		return
 	if(blocking)
 		if(istype(W, /obj/item/melee))
