@@ -87,3 +87,7 @@
   - image: Reverted the Gargoyle legs to the old version
   SoreYew:
   - bugfix: fixed sprite not showing up.
+2025-07-30:
+  Marshmellow105:
+  - rscadd: sanfrancisco 2
+  - rscdel: sanfrancisco 1
