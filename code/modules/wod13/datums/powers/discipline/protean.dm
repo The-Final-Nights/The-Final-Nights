@@ -283,9 +283,9 @@
 				target.transformator.transform(target, "Corvid", TRUE)
 			if("Corax Crinos")
 				target.transformator.transform(target, "Corax Crinos", TRUE)
-		addtimer(CALLBACK(target, TYPE_PROC_REF(mob/living, transformation_unblock)), 60 SECONDS)
+/*		addtimer(CALLBACK(target, TYPE_PROC_REF(mob/living, transformation_unblock)), 60 SECONDS)
 		to_chat(target, span_userdanger("You feel your abilities suddenly drain. You can't transform!"))
-		target.transformation_blocked = TRUE
+		target.transformation_blocked = TRUE*/ //Uncomment when the Hunter PR is merged, since this relies on some additions from that PR.
 /datum/discipline_power/protean/shape_mastery/post_gain()
 	. = ..()
 	owner.physiology.brute_mod *= 0.5 //Flesh of Marble 6th dot trait.
