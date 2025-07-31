@@ -281,9 +281,9 @@
 			BD.dna.species.punchdamagehigh = BD.dna.species.punchdamagehigh+5
 			BD.physiology.armor.melee = BD.physiology.armor.melee+15
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet+15
-			BD.dexterity = BD.dexterity+2
-			BD.athletics = BD.athletics+2
-			BD.lockpicking = BD.lockpicking+2
+			BD.dexterity = BD.dexterity+BD.bloodquality
+			BD.athletics = BD.athletics+BD.bloodquality
+			BD.lockpicking = BD.lockpicking+BD.bloodquality
 			if(!HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				ADD_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 			BD.update_blood_hud()
