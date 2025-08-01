@@ -881,7 +881,7 @@
 	anchored = 1
 	},
 /obj/item/gun/ballistic/automatic/vampire/deagle/c50{
-	name = "Rioter";
+	name = "Rebellion";
 	desc = "An extremely powerful, and rare, handcannon. This one seems to bolster silver engravings with anti-authority sentiments."
 	},
 /obj/item/ammo_box/magazine/m50,
