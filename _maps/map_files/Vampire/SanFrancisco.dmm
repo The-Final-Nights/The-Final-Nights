@@ -28207,6 +28207,15 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/asphalt,
 /area/vtm/pacificheights)
+"hCA" = (
+/obj/effect/decal/asphaltline/alt{
+	pixel_x = -14
+	},
+/obj/vampire_car/rand/anarch{
+	dir = 2
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/baywalk)
 "hCB" = (
 /obj/structure/chair/sofa/old{
 	dir = 4
@@ -72923,6 +72932,14 @@
 /obj/effect/decal/litter,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
+"tcC" = (
+/obj/effect/decal/cleanable/oil,
+/obj/vampire_car/track/volkswagen{
+	dir = 2;
+	access = "anarch"
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/anarch/garage)
 "tcI" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8;
@@ -83186,6 +83203,12 @@
 /obj/fusebox,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/banu/haven)
+"vRM" = (
+/obj/vampire_car/rand/anarch{
+	dir = 2
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/anarch/garage)
 "vRP" = (
 /obj/structure/mirror{
 	pixel_y = 32
@@ -171443,7 +171466,7 @@ diP
 eWO
 eWO
 pFK
-rIQ
+hCA
 rIQ
 adJ
 adJ
@@ -171655,7 +171678,7 @@ lzh
 tfr
 iWP
 iWP
-iWP
+vRM
 wFZ
 lzl
 mTJ
@@ -171847,7 +171870,7 @@ vWT
 eWO
 eWO
 pFK
-rIQ
+hCA
 rIQ
 adJ
 adJ
@@ -172059,7 +172082,7 @@ iiw
 iWP
 iWP
 glB
-spy
+tcC
 iWP
 lzl
 pst
