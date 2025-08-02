@@ -13691,10 +13691,6 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
-/obj/item/ammo_box/vampire/c9mm/silver,
-/obj/item/ammo_box/vampire/c44/silver{
-	pixel_y = 11
-	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "dIZ" = (
@@ -55089,9 +55085,6 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
-/obj/item/ammo_box/vampire/c45acp/silver{
-	pixel_y = -10
-	},
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_x = -16;
@@ -90331,6 +90324,13 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 8;
 	color = "#636363"
+	},
+/obj/item/ammo_box/vampire/c9mm/silver,
+/obj/item/ammo_box/vampire/c44/silver{
+	pixel_y = 11
+	},
+/obj/item/ammo_box/vampire/c45acp/silver{
+	pixel_y = -10
 	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
