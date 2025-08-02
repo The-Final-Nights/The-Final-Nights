@@ -11,6 +11,7 @@
 		new /datum/data/mining_equipment("knife",	/obj/item/melee/vampirearms/knife,	85),
 		new /datum/data/mining_equipment("switchblade",	/obj/item/melee/vampirearms/knife/switchblade, 85),
 		new /datum/data/mining_equipment("stake",	/obj/item/vampire_stake,	100),
+		new /datum/data/mining_equipment("pliers",	/obj/item/wirecutters/pliers/bad_pliers,	200),
 		new /datum/data/mining_equipment("Surgery dufflebag", /obj/item/storage/backpack/duffelbag/med/surgery, 100),
 		new /datum/data/mining_equipment("Handcuffs", /obj/item/restraints/handcuffs, 50),
 		new /datum/data/mining_equipment("Black bag", /obj/item/clothing/head/vampire/blackbag, 50),

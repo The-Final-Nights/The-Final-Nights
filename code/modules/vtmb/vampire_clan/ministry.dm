@@ -9,7 +9,6 @@
 	)
 	male_clothes = /obj/item/clothing/under/vampire/slickback
 	female_clothes = /obj/item/clothing/under/vampire/burlesque
-	clan_keys = /obj/item/vamp/keys/setite
 
 /datum/vampire_clan/ministry/on_gain(mob/living/carbon/human/H)
 	. = ..()

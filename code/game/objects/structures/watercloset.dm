@@ -646,7 +646,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 	if(!open)
 		icon_state = "[icon_type]-closed"
 		layer = ABOVE_ALL_MOB_LAYERS_LAYER
-		density = TRUE
+		density = FALSE
 		open = FALSE
 		if(opaque_closed)
 			set_opacity(TRUE)
@@ -755,7 +755,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/urinal, 32)
 /obj/structure/curtain/cloth/fancy/mechanical/proc/close()
 	icon_state = "[icon_type]-closed"
 	layer = ABOVE_ALL_MOB_LAYERS_LAYER
-	density = TRUE
+	density = FALSE
 	open = FALSE
 	if(opaque_closed)
 		set_opacity(TRUE)

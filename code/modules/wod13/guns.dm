@@ -751,14 +751,14 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_MEDIUM
-	icon_state = "pomp"
-	inhand_icon_state = "pomp"
-	worn_icon_state = "pomp"
+	icon_state = "pump"
+	inhand_icon_state = "pump"
+	worn_icon_state = "pump"
 	recoil = 6
 	fire_delay = 6
 	mag_type = /obj/item/ammo_box/magazine/internal/vampshotgun
 	can_be_sawn_off	= FALSE
-	fire_sound = 'code/modules/wod13/sounds/pomp.ogg'
+	fire_sound = 'code/modules/wod13/sounds/pump.ogg'
 	recoil = 4
 	inhand_x_dimension = 32
 	inhand_y_dimension = 32
@@ -792,7 +792,7 @@
 	bolt_type = BOLT_TYPE_LOCKING
 	show_bolt_icon = FALSE
 	mag_display = TRUE
-	fire_sound = 'code/modules/wod13/sounds/pomp.ogg'
+	fire_sound = 'code/modules/wod13/sounds/pump.ogg'
 	slot_flags = ITEM_SLOT_BACK
 	projectile_damage_multiplier = 0.9
 	masquerade_violating = TRUE

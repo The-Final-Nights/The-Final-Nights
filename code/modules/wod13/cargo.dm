@@ -216,8 +216,8 @@
 	crate_name = "weapon crate"
 
 /datum/supply_pack/vampire/weaponshotgun
-	name = "Weapon (pomp shotgun)"
-	desc = "Contains a pomp shotgun."
+	name = "Weapon (pump shotgun)"
+	desc = "Contains a pump shotgun."
 	cost = 800
 	contains = list(/obj/item/gun/ballistic/shotgun/vampire)
 	crate_name = "weapon crate"
@@ -621,6 +621,6 @@
 		qdel(I)
 		playsound(src, 'sound/machines/machine_vend.ogg', 50, TRUE, extrarange = -3)
 		to_chat(user, span_notice("You place the box at [src]."))
-		new /obj/item/stack/dollar/five(get_turf(user))
+		new /obj/item/stack/dollar/fifty(get_turf(user))
 		return
 	..()

@@ -44,9 +44,8 @@
 	owner.heal_ordered_damage(HEAL_BASHING_LETHAL * vitae_cost, list(BRUTE, TOX, OXY, STAMINA))
 
 	if(length(owner.all_wounds))
-		for (var/i in 1 to min(vitae_cost, length(owner.all_wounds)))
-			var/datum/wound/wound = owner.all_wounds[i]
-			wound.remove_wound()
+		for(var/datum/wound/W as anything in owner.all_wounds)
+			W.remove_wound()
 
 	//aggravated damage
 	owner.heal_ordered_damage(HEAL_AGGRAVATED * vitae_cost, list(BURN, CLONE))

@@ -50,7 +50,17 @@
 
 	var/mob/living/LM = parent
 
-	if(!T.footstep || LM.buckled || LM.throwing || LM.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(LM, TRAIT_IMMOBILIZED))
+	// Check for movement restrictions first
+	if(LM.buckled || LM.throwing || LM.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(LM, TRAIT_IMMOBILIZED))
+		return
+
+	var/should_continue = T.footstep
+	if(!should_continue && istype(T, /turf/open/openspace)) // special exception for catwalks hanging over open spaces
+		for(var/obj/structure/lattice/catwalk/catwalk in T)
+			should_continue = TRUE
+			break
+
+	if(!should_continue)
 		return
 
 	if(LM.body_position == LYING_DOWN) //play crawling sound if we're lying
@@ -73,56 +83,69 @@
 
 	if(steps != 0 && !LM.has_gravity(T)) // don't need to step as often when you hop around
 		return
-	return T
+
+
+	. = list(FOOTSTEP_MOB_SHOE = T.footstep, FOOTSTEP_MOB_BAREFOOT = T.barefootstep, FOOTSTEP_MOB_HEAVY = T.heavyfootstep, FOOTSTEP_MOB_CLAW = T.clawfootstep, STEP_SOUND_PRIORITY = STEP_SOUND_NO_PRIORITY)
+	SEND_SIGNAL(T, COMSIG_TURF_PREPARE_STEP_SOUND, .)
+	return .
 
 /datum/component/footstep/proc/play_simplestep()
 	SIGNAL_HANDLER
 
-	var/turf/open/T = prepare_step()
-	if(!T)
+	var/list/prepared_steps = prepare_step()
+	if(!prepared_steps)
 		return
+
+	var/turf/open/T = get_turf(parent)  // Get the turf since prepare_step() no longer returns it
+
 	if(isfile(footstep_sounds) || istext(footstep_sounds))
 		playsound(T, footstep_sounds, volume, falloff_distance = 1, vary = sound_vary)
 		return
-	var/turf_footstep
-	switch(footstep_type)
-		if(FOOTSTEP_MOB_CLAW)
-			turf_footstep = T.clawfootstep
-		if(FOOTSTEP_MOB_BAREFOOT)
-			turf_footstep = T.barefootstep
-		if(FOOTSTEP_MOB_HEAVY)
-			turf_footstep = T.heavyfootstep
-		if(FOOTSTEP_MOB_SHOE)
-			turf_footstep = T.footstep
+
+	var/turf_footstep = prepared_steps[footstep_type]  // Use the list instead of switch
 	if(!turf_footstep)
 		return
 	playsound(T, pick(footstep_sounds[turf_footstep][1]), footstep_sounds[turf_footstep][2] * volume, TRUE, footstep_sounds[turf_footstep][3] + e_range, falloff_distance = 1, vary = sound_vary)
 
 /datum/component/footstep/proc/play_humanstep()
 	SIGNAL_HANDLER
-
 	if(HAS_TRAIT(parent, TRAIT_SILENT_FOOTSTEPS))
 		return
-	var/turf/open/T = prepare_step()
-	if(!T)
+	var/list/prepared_steps = prepare_step()
+	if(!prepared_steps)
 		return
 	var/mob/living/carbon/human/H = parent
 
+	//cache for sanic speed (lists are references anyways)
+	var/static/list/footstep_sounds = GLOB.footstep
+
 	if ((H.wear_suit?.body_parts_covered | H.w_uniform?.body_parts_covered | H.shoes?.body_parts_covered) & FEET)
 		// we are wearing shoes
-		playsound(T, pick(GLOB.footstep[T.footstep][1]),
-			GLOB.footstep[T.footstep][2] * volume,
-			TRUE,
-			GLOB.footstep[T.footstep][3] + e_range, falloff_distance = 1, vary = sound_vary)
-	else
-		if(H.dna.species.special_step_sounds)
-			playsound(T, pick(H.dna.species.special_step_sounds), 50, TRUE, falloff_distance = 1, vary = sound_vary)
-		else
-			playsound(T, pick(GLOB.barefootstep[T.barefootstep][1]),
-				GLOB.barefootstep[T.barefootstep][2] * volume,
-				TRUE,
-				GLOB.barefootstep[T.barefootstep][3] + e_range, falloff_distance = 1, vary = sound_vary)
+		var/shoestep_type = prepared_steps[FOOTSTEP_MOB_SHOE]
 
+		// Check if it's a heavy footstep type that needs special handling
+		if(shoestep_type == FOOTSTEP_MOB_HEAVY)
+			// Use the heavy footstep sound instead
+			var/heavy_type = prepared_steps[FOOTSTEP_MOB_HEAVY]
+			playsound(H.loc, pick(footstep_sounds[heavy_type][1]),
+				footstep_sounds[heavy_type][2] * volume,
+				TRUE,
+				footstep_sounds[heavy_type][3] + e_range, falloff_distance = 1, vary = sound_vary)
+		else
+			playsound(H.loc, pick(footstep_sounds[shoestep_type][1]),
+				footstep_sounds[shoestep_type][2] * volume,
+				TRUE,
+				footstep_sounds[shoestep_type][3] + e_range, falloff_distance = 1, vary = sound_vary)
+	else
+		var/barefoot_type = prepared_steps[FOOTSTEP_MOB_BAREFOOT]
+		if(H.dna.species.special_step_sounds)
+			playsound(H.loc, pick(H.dna.species.special_step_sounds), 50, TRUE, falloff_distance = 1, vary = sound_vary)
+		else
+			var/static/list/bare_footstep_sounds = GLOB.barefootstep
+			playsound(H.loc, pick(bare_footstep_sounds[barefoot_type][1]),
+				bare_footstep_sounds[barefoot_type][2] * volume,
+				TRUE,
+				bare_footstep_sounds[barefoot_type][3] + e_range, falloff_distance = 1, vary = sound_vary)
 
 ///Prepares a footstep for machine walking
 /datum/component/footstep/proc/play_simplestep_machine()
