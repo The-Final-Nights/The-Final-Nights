@@ -202,6 +202,22 @@
 			H.remove_overlay(MUTATIONS_LAYER)
 */
 
+/datum/discipline_power/quietus/taste_of_death
+	name = "Taste of Death"
+	desc = "Spit a glob of caustic blood at your enemies."
+
+	level = 5
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING | DISC_CHECK_FREE_HAND
+
+	violates_masquerade = TRUE
+
+	cooldown_length = 5 SECONDS
+
+/datum/discipline_power/quietus/taste_of_death/activate()
+	. = ..()
+	//should be changed to a ranged attack targeting turfs
+	owner.put_in_active_hand(new /obj/item/gun/magic/quietus(owner), TRUE)
+
 //THIN BLOOD
 /datum/discipline_power/quietus/thin_blood
 	name = "Thin Blood"
