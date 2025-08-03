@@ -131,13 +131,13 @@
 	. = ..()
 	playsound(owner.loc, 'sound/magic/voidblink.ogg', 50, FALSE)
 	saved_brute_mod = owner.physiology.brute_mod
-	owner.physiology.brute_mod *= 0
+	owner.physiology.brute_mod = 0
 	saved_clone_mod = owner.physiology.clone_mod
-	owner.physiology.clone_mod *= 0
+	owner.physiology.clone_mod = 0
 	saved_stamina_mod = owner.physiology.stamina_mod
-	owner.physiology.stamina_mod *= 0
+	owner.physiology.stamina_mod = 0
 	saved_brain_mod = owner.physiology.brain_mod
-	owner.physiology.brain_mod *= 0
+	owner.physiology.brain_mod = 0
 	animate(owner, color = "#000000", time = 1 SECONDS, loop = 1)
 
 	ADD_TRAIT(owner, TRAIT_STUNIMMUNE, MAGIC)
