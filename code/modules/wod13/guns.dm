@@ -346,7 +346,7 @@
 	AddComponent(/datum/component/selling, 70, "beretta", FALSE)
 
 /obj/item/gun/ballistic/automatic/vampire/beretta/toreador
-	name = "\improper Sword Series S 9mm"
+	name = "\improper The Bullfighter"
 	desc = "A handgun that has been heavily decorated and customized. The improvements seem almost supernaturally good, you feel like the engravings have given you a tactical advantage."
 	icon_state = "beretta_toreador"
 	inhand_icon_state = "beretta_toreador"
