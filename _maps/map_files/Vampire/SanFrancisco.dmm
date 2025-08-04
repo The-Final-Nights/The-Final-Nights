@@ -62860,6 +62860,8 @@
 /obj/item/flashlight/seclite,
 /obj/structure/closet/crate,
 /obj/item/gun/ballistic/automatic/vampire/glock21,
+/obj/item/ammo_box/magazine/glock45acp,
+/obj/item/ammo_box/magazine/glock45acp,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/bianchiBank)
 "qrK" = (
@@ -82050,6 +82052,7 @@
 "vCJ" = (
 /obj/structure/table,
 /obj/item/gun/ballistic/automatic/pistol/deagle,
+/obj/item/ammo_box/magazine/m50/ctf,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "vCP" = (
@@ -85361,6 +85364,8 @@
 "wwl" = (
 /obj/structure/table,
 /obj/item/gun/ballistic/automatic/vampire/glock21,
+/obj/item/ammo_box/magazine/glock45acp,
+/obj/item/ammo_box/magazine/glock45acp,
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/bianchiBank)
 "wwz" = (
