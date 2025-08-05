@@ -980,49 +980,15 @@
 			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "samurai", -UNICORN_LAYER)
 			caster.overlays_standing[UNICORN_LAYER] = potence_overlay
 			caster.apply_overlay(UNICORN_LAYER)
-			caster.physiology.armor.melee += mod
-			caster.physiology.armor.bullet += mod
+			caster.physiology.armor.melee += 20
+			caster.physiology.armor.bullet += 5
 			ADD_TRAIT(caster, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 			spawn((delay)+caster.discipline_time_plus)
 				if(caster)
-					caster.physiology.armor.melee -= mod
-					caster.physiology.armor.bullet -= mod
+					caster.physiology.armor.melee -= 20
+					caster.physiology.armor.bullet -= 5
 					caster.remove_overlay(UNICORN_LAYER)
 					REMOVE_TRAIT(caster, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
-					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/demonshintai_deactivate.ogg', 50, FALSE)
-		if("Tentacles")
-			var/mod = level_casting
-			caster.remove_overlay(UNICORN_LAYER)
-			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "tentacles", -UNICORN_LAYER)
-			caster.overlays_standing[UNICORN_LAYER] = potence_overlay
-			caster.apply_overlay(UNICORN_LAYER)
-			ADD_TRAIT(caster, TRAIT_SHOCKIMMUNE, SPECIES_TRAIT)
-			ADD_TRAIT(caster, TRAIT_PASSTABLE, SPECIES_TRAIT)
-			ADD_TRAIT(caster, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
-			if(mod > 1)
-				caster.add_movespeed_modifier(/datum/movespeed_modifier/tentacles1)
-				ADD_TRAIT(caster, TRAIT_PUSHIMMUNE, SPECIES_TRAIT)
-				ADD_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
-			if(mod > 2)
-				ADD_TRAIT(caster, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
-				ADD_TRAIT(caster, TRAIT_SLEEPIMMUNE, SPECIES_TRAIT)
-			if(mod > 4)
-				ADD_TRAIT(caster, TRAIT_STUNIMMUNE, SPECIES_TRAIT)
-			spawn((delay)+caster.discipline_time_plus)
-				if(caster)
-					caster.remove_overlay(UNICORN_LAYER)
-					REMOVE_TRAIT(caster, TRAIT_SHOCKIMMUNE, SPECIES_TRAIT)
-					REMOVE_TRAIT(caster, TRAIT_PASSTABLE, SPECIES_TRAIT)
-					REMOVE_TRAIT(caster, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
-					if(mod > 1)
-						caster.remove_movespeed_modifier(/datum/movespeed_modifier/tentacles1)
-						REMOVE_TRAIT(caster, TRAIT_PUSHIMMUNE, SPECIES_TRAIT)
-						REMOVE_TRAIT(caster, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
-					if(mod > 2)
-						REMOVE_TRAIT(caster, TRAIT_IGNOREDAMAGESLOWDOWN, SPECIES_TRAIT)
-						REMOVE_TRAIT(caster, TRAIT_SLEEPIMMUNE, SPECIES_TRAIT)
-					if(mod > 4)
-						REMOVE_TRAIT(caster, TRAIT_STUNIMMUNE, SPECIES_TRAIT)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/demonshintai_deactivate.ogg', 50, FALSE)
 		if("Demon")
 			var/mod = level_casting
@@ -1039,9 +1005,9 @@
 				if(3)
 					caster.add_movespeed_modifier(/datum/movespeed_modifier/demonform3)
 				if(4)
-					caster.add_movespeed_modifier(/datum/movespeed_modifier/demonform4)
+					caster.add_movespeed_modifier(/datum/movespeed_modifier/demonform3)
 				if(5)
-					caster.add_movespeed_modifier(/datum/movespeed_modifier/demonform5)
+					caster.add_movespeed_modifier(/datum/movespeed_modifier/demonform3)
 			spawn((delay)+caster.discipline_time_plus)
 				if(caster)
 					caster.remove_overlay(UNICORN_LAYER)
