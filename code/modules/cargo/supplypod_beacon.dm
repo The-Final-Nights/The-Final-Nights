@@ -13,6 +13,19 @@
 	var/ready = FALSE
 	var/launched = FALSE
 
+/obj/item/supplypod_beacon_origin
+	name = "Supply Pod Beacon Origin Point"
+	desc = "The supply pod spawns here then goes to the destination set by the supplypod_beacon if there is one nearby."
+	icon = 'icons/obj/device.dmi'
+	icon_state = "supplypod_beacon"
+	inhand_icon_state = "radio"
+	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
+	w_class = WEIGHT_CLASS_SMALL
+	mouse_opacity = 0
+	var/obj/machinery/computer/cargo/express/express_console
+
+
 /obj/item/supplypod_beacon/proc/update_status(consoleStatus)
 	switch(consoleStatus)
 		if (SP_LINKED)

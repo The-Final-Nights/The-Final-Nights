@@ -20,7 +20,8 @@
 	var/printed_beacons = 0 //number of beacons printed. Used to determine beacon names.
 	var/list/meme_pack_data
 	var/list/supply_packs = list()
-	var/obj/item/supplypod_beacon/beacon //the linked supplypod beacon
+	var/obj/item/supplypod_beacon/beacon //where the train goes to
+	var/obj/item/supplypod_beacon_origin/origin_beacon //where the train starts from
 	var/area/landingzone = /area/quartermaster/storage //where we droppin boys
 	var/podType = /obj/structure/closet/supplypod/centcompod
 	var/cooldown = 0 //cooldown to prevent printing supplypod beacon spam
@@ -33,10 +34,13 @@
 	. = ..()
 	packin_up()
 	for(var/obj/item/supplypod_beacon/sb in range(20, src))
-		if(sb)
-			if(sb.express_console != src)
-				sb.altlink_console(src)
-				sb.anchored = TRUE
+		if(sb.express_console != src)
+			sb.altlink_console(src)
+			sb.anchored = TRUE
+	for(var/obj/item/supplypod_beacon_origin/sbo in range(40, src)) //the train spawn tends to be further away than the delivery beacon
+		if(sbo.express_console != src)
+			origin_beacon = sbo
+			sbo.anchored = TRUE
 
 /obj/machinery/computer/cargo/express/on_construction()
 	. = ..()
@@ -163,6 +167,43 @@
 		cooldown--
 	return data
 
+/obj/machinery/computer/cargo/express/proc/process_train(list/final_order)
+	if(!beacon)
+		return
+	var/LZ
+	var/obj/cargotrain/train
+	var/trackLength
+	LZ = get_turf(beacon)
+	beacon.update_status(SP_LAUNCH)
+	TIMER_COOLDOWN_START(src, COOLDOWN_EXPRESSPOD_CONSOLE, 5 SECONDS)
+	if(origin_beacon)
+		trackLength = get_dist(get_turf(origin_beacon), LZ)*5
+		train = new(get_turf(origin_beacon))
+	else
+		trackLength = get_dist(get_nearest_free_turf(LZ), LZ)*5
+		train = new(get_nearest_free_turf(LZ))
+	train.starter = usr
+	train.glide_size = (32 / 3) * world.tick_lag
+	walk_to(train, LZ, 1, 3)
+	playsound(train, 'code/modules/wod13/sounds/train_arrive.ogg', 50, FALSE)
+	spawn(trackLength)
+		var/obj/structure/closet/crate/crate = new(get_turf(train))
+		crate.name = "Supply Crate"
+		for(var/datum/supply_pack/vampire/pack in final_order)
+			for(var/item_path in pack.contains)
+				if(!pack.contains[item_path])
+					pack.contains[item_path] = 1
+				for(var/iteration = 1 to pack.contains[item_path])
+					var/obj/item/item_instance = new item_path
+					item_instance.forceMove(crate)
+		playsound(train, 'code/modules/wod13/sounds/train_depart.ogg', 50, FALSE)
+		if(origin_beacon)
+			walk_to(train, origin_beacon, 1, 3)
+		else
+			walk_to(train, get_nearest_free_turf(LZ), 1, 3)
+		spawn(trackLength)
+			qdel(train)
+
 /obj/machinery/computer/cargo/express/ui_act(action, params, datum/tgui/ui)
 	. = ..()
 	if(.)
@@ -208,33 +249,9 @@
 				to_chat(usr, "Insufficient funds.")
 				return
 			account_balance -= total_order_cost()
-			var/LZ
-			if(istype(beacon) && usingBeacon)
-				LZ = get_turf(beacon)
-				beacon.update_status(SP_LAUNCH)
-				TIMER_COOLDOWN_START(src, COOLDOWN_EXPRESSPOD_CONSOLE, 5 SECONDS)
-				var/obj/cargotrain/train = new(get_nearest_free_turf(LZ))
-				train.starter = usr
-				train.glide_size = (32 / 3) * world.tick_lag
-				walk_to(train, LZ, 1, 3)
-				playsound(train, 'code/modules/wod13/sounds/train_arrive.ogg', 50, FALSE)
-				var/trackLength = get_dist(get_nearest_free_turf(LZ), LZ)*5
-				spawn(trackLength)
-					var/obj/structure/closet/crate/crate = new(get_turf(train))
-					crate.name = "Supply Crate"
-					for(var/datum/supply_pack/vampire/pack in final_order)
-						for(var/item_path in pack.contains)
-							if(!pack.contains[item_path])
-								pack.contains[item_path] = 1
-							for(var/iteration = 1 to pack.contains[item_path])
-								var/obj/item/item_instance = new item_path
-								item_instance.forceMove(crate)
-					playsound(train, 'code/modules/wod13/sounds/train_depart.ogg', 50, FALSE)
-					walk_to(train, get_nearest_free_turf(LZ), 1, 3)
-					spawn(trackLength)
-						qdel(train)
-					order_queue.Cut()
-				return
+			process_train(final_order)
+			order_queue.Cut()
+
 
 /obj/machinery/computer/cargo/express/proc/total_order_cost()
 	var/total = 0

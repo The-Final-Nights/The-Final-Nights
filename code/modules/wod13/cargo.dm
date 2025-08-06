@@ -621,6 +621,6 @@
 		qdel(I)
 		playsound(src, 'sound/machines/machine_vend.ogg', 50, TRUE, extrarange = -3)
 		to_chat(user, span_notice("You place the box at [src]."))
-		new /obj/item/stack/dollar/five(get_turf(user))
+		new /obj/item/stack/dollar/fifty(get_turf(user))
 		return
 	..()
