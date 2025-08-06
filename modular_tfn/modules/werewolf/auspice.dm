@@ -11,7 +11,7 @@
 	var/list/gifts = list()
 	var/force_abomination = FALSE
 
-/datum/auspice/proc/on_gain(var/mob/living/carbon/C)
+/datum/auspice/proc/on_gain(mob/living/carbon/C)
 	C.update_rage_hud()
 
 	var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
@@ -25,6 +25,12 @@
 	corvid?.auspice = src
 	ADD_TRAIT(corvid, TRAIT_CORAX, tribe)
 
+	// Register signals to gain Rage from
+	RegisterSignals(C, list(COMSIG_ATOM_HITBY, COMSIG_ATOM_BULLET_ACT), PROC_REF(handle_rage_trigger))
+	RegisterSignals(lupus, list(COMSIG_ATOM_HITBY, COMSIG_ATOM_BULLET_ACT), PROC_REF(handle_rage_trigger))
+	RegisterSignals(crinos, list(COMSIG_ATOM_HITBY, COMSIG_ATOM_BULLET_ACT), PROC_REF(handle_rage_trigger))
+	RegisterSignals(cor_crinos, list(COMSIG_ATOM_HITBY, COMSIG_ATOM_BULLET_ACT), PROC_REF(handle_rage_trigger))
+	RegisterSignals(corvid, list(COMSIG_ATOM_HITBY, COMSIG_ATOM_BULLET_ACT), PROC_REF(handle_rage_trigger))
 
 	rage = start_rage
 	if(length(gifts)) // This grants the auspice gifts, I believe
@@ -101,6 +107,11 @@
 		return
 
 	source.transformator?.transform(source, breed_form, TRUE)
+
+/datum/auspice/proc/handle_rage_trigger(mob/living/carbon/source)
+	SIGNAL_HANDLER
+
+	source.do_rage_from_attack()
 
 /datum/auspice/ahroun
 	name = "Ahroun"
