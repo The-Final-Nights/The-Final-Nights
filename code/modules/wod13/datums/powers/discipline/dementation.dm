@@ -409,9 +409,9 @@
 		return FALSE
 
 /datum/discipline_power/dementation/stain_the_soul/activate(mob/living/carbon/human/target)
-	. = ..()
-
-	if(dementation_succeeded)
+	if(..())
+		return
+	
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
 		dementation_overlay.pixel_z = 1
