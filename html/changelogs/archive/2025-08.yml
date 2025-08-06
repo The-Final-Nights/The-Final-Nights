@@ -1,0 +1,20 @@
+2025-08-04:
+  AlmostLikeClockwork:
+  - rscadd: Renames the TP's 92G to The Bullfighter & the Baron's McLusky to 'Rebellion'
+  Hardly:
+  - rscadd: 3 types of high boots can now be obtained in the loadout
+  - rscadd: The same goes for swag boots
+  XeonMations:
+  - code_imp: Updated SpacemannDMM to 1.10
+2025-08-05:
+  rye-rice, marshmellow105:
+  - image: P25 radios have new sprites, with onfloors and coloured distinctions for
+      police variants
+2025-08-06:
+  TheCarnalest:
+  - code_imp: Retyped werewolf mobs from /mob/living/simple_animal to /mob/living/carbon
+  - rscadd: Organs and organ damage now carries over between shifting forms
+  - rscadd: Corax now have their own breed selector
+  - bugfix: Werewolf armor has been fixed, so it will actually reduce incoming brute
+      damage
+  - bugfix: The warrior archetype works for non-Homid forms again

@@ -289,9 +289,6 @@
 	max_damage = 500
 	animal_origin = ALIEN_BODYPART
 
-/obj/item/bodypart/head/crinos
-	max_damage = 600
-
 /obj/item/bodypart/head/larva
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "larva_head"
