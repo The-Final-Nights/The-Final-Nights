@@ -348,7 +348,7 @@
 
 /datum/discipline_power/daimonion/diabolic_lure/pre_activation_checks(mob/living/carbon/human/target)
 	to_chat(owner, span_warning("You begin corrupting [target]'s soul..."))
-	if (do_mob(owner, target, 10 SECONDS))
+	if (do_after(owner, target, 10 SECONDS))
 		return TRUE
 
 /datum/discipline_power/daimonion/diabolic_lure/activate(mob/living/carbon/human/target)
