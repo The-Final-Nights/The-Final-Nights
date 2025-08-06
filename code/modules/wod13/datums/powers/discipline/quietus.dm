@@ -239,5 +239,6 @@
 		to_chat(target, span_warning("You dizzy for a moment."))
 
 /datum/discipline_power/quietus/thin_blood/deactivate(mob/living/target)
+	. = ..()
 	REMOVE_TRAIT(target, TRAIT_THINNED_BLOOD, MAGIC_TRAIT)
 	to_chat(target, span_warning("You feel your blood return to normal, and healing become possible again!"))
