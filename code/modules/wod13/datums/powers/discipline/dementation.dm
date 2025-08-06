@@ -401,12 +401,11 @@
 
 /datum/discipline_power/dementation/stain_the_soul/pre_activation_checks(mob/living/target)
 
-	dementation_succeeded = dementation_check(owner, target, base_difficulty = 6)
-	if(dementation_succeeded)
-		return TRUE
-	else
-		do_cooldown(cooldown_length)
+	if(dementation_check(owner, target, base_difficulty = 6))
+	       do_cooldown(cooldown_length)
 		return FALSE
+	else
+		return TRUE
 
 /datum/discipline_power/dementation/stain_the_soul/activate(mob/living/carbon/human/target)
 	if(..())
