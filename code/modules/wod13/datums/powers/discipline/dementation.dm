@@ -397,7 +397,6 @@
 	range = 7
 
 	cooldown_length = 1 MINUTES
-	var/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/stain_the_soul/pre_activation_checks(mob/living/target)
 
