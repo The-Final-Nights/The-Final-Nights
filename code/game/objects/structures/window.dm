@@ -146,6 +146,11 @@
 		return
 	. = ..()
 
+/obj/structure/window/attack_potence(mob/living/carbon/human/user, does_attack_animation = 0)
+	if(!can_be_reached(user))
+		return
+	. = ..()
+
 /obj/structure/window/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
