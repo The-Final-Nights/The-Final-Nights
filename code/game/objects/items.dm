@@ -412,8 +412,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		return
 	if(anchored)
 		return
-	if(HAS_TRAIT(user, TRAIT_NO_HANDS))
-		return
 
 	. = TRUE
 

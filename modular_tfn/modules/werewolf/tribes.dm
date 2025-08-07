@@ -172,7 +172,7 @@
 			playsound(owner, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
 			if(CheckZoneMasquerade(owner))
 				var/mob/living/carbon/human/H
-				var/mob/living/simple_animal/werewolf/W
+				var/mob/living/carbon/werewolf/W
 				if(ishuman(owner))
 					H = owner
 				else
@@ -224,7 +224,7 @@
 				owner.color = "#FFFFFF"
 		else
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/electro_cast.ogg', 75, FALSE)
-			var/mob/living/simple_animal/werewolf/H = owner
+			var/mob/living/carbon/werewolf/H = owner
 			H.werewolf_armor = 45
 			to_chat(owner, span_notice("You feel your skin replaced with the machine..."))
 			spawn(20 SECONDS)
@@ -249,8 +249,8 @@
 			REMOVE_TRAIT(owner, TRAIT_DOGWOLF, src)
 			to_chat(owner, span_notice("You feel your lupine nature intensifying!"))
 
-		if(istype(owner, /mob/living/simple_animal/werewolf/lupus))
-			var/mob/living/simple_animal/werewolf/lupus/lopor = owner
+		if(istype(owner, /mob/living/carbon/werewolf/lupus))
+			var/mob/living/carbon/werewolf/lupus/lopor = owner
 
 			if(lopor && !lopor.hispo)
 				playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
@@ -259,7 +259,7 @@
 				animate(owner, transform = ntransform, color = "#000000", time = 3 SECONDS)
 				addtimer(CALLBACK(src, PROC_REF(transform_lupus), lopor), 3 SECONDS)
 
-/datum/action/gift/guise_of_the_hound/proc/transform_lupus(mob/living/simple_animal/werewolf/lupus/H)
+/datum/action/gift/guise_of_the_hound/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -369,7 +369,7 @@
 	if(allowed_to_proceed)
 		var/valid_tribe = FALSE
 		var/list/targets = list()
-		for(var/mob/living/simple_animal/werewolf/wtarget in orange(7,owner))
+		for(var/mob/living/carbon/werewolf/wtarget in orange(7,owner))
 			targets += wtarget
 		for(var/mob/living/carbon/human/htarget in orange(7,owner))
 			targets += htarget
