@@ -168,8 +168,8 @@
 	limb_destroyer = 1
 	melee_damage_lower = 65
 	melee_damage_upper = 65
-	health = 650
-	maxHealth = 650
+	health = 450
+	maxHealth = 450
 	bodyparts = list(
 		/obj/item/bodypart/chest/crinos,
 		/obj/item/bodypart/head/crinos,
