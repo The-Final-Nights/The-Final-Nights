@@ -68,7 +68,7 @@
 	. = ..()
 	if(.)
 		return
-	if(ishuman(user.mob) && !ispath(user.mob, /mob/living/simple_animal/werewolf))
+	if(ishuman(user.mob) && !ispath(user.mob, /mob/living/carbon/werewolf))
 		var/mob/living/carbon/human/H = user.mob
 		H.SwitchBlocking()
 		return TRUE

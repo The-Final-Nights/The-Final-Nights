@@ -53,7 +53,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return ..()
 	if(C.transformator)
-		C.transformator.transform(C, "Lupus")
+		C.transformator.transform(C, FORM_LUPUS)
 	return ..()
 
 
@@ -70,7 +70,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return ..()
 	if(C.transformator)
-		C.transformator.transform(C, "Corax Crinos")
+		C.transformator.transform(C, FORM_CORAX_CRINOS)
 	return ..()
 
 /atom/movable/screen/transform_corvid
@@ -86,7 +86,7 @@
 	if(C.stat >= SOFT_CRIT || C.IsSleeping() || C.IsUnconscious() || C.IsParalyzed() || C.IsKnockdown() || C.IsStun())
 		return ..()
 	if(C.transformator)
-		C.transformator.transform(C, "Corvid")
+		C.transformator.transform(C, FORM_CORVID)
 	return ..()
 
 /atom/movable/screen/auspice
@@ -107,11 +107,11 @@
 		to_chat(C, span_warning("You need to be outside to look at the moon!"))
 		return
 	if(C.last_moon_look == 0 || C.last_moon_look+600 < world.time)
-		var/mob/living/simple_animal/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
-		var/mob/living/simple_animal/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
+		var/mob/living/carbon/werewolf/lupus/lupus = C.transformator.lupus_form?.resolve()
+		var/mob/living/carbon/werewolf/crinos/crinos = C.transformator.crinos_form?.resolve()
 		var/mob/living/carbon/human/homid = C.transformator.human_form?.resolve()
-		var/mob/living/simple_animal/werewolf/corax/corax_crinos = C.transformator.corax_form?.resolve()
-		var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
+		var/mob/living/carbon/werewolf/corax/corax_crinos = C.transformator.corax_form?.resolve()
+		var/mob/living/carbon/werewolf/lupus/corvid/corvid = C.transformator.corvid_form?.resolve()
 
 		lupus?.last_moon_look = world.time
 		crinos?.last_moon_look = world.time
@@ -135,7 +135,7 @@
 /datum/hud
 	var/atom/movable/screen/auspice_icon
 
-/datum/hud/werewolf/New(mob/living/simple_animal/werewolf/owner)
+/datum/hud/werewolf/New(mob/living/carbon/werewolf/owner)
 	..()
 
 	var/atom/movable/screen/using
@@ -268,7 +268,7 @@
 	healths.icon = 'code/modules/wod13/UI/buttons32.dmi'
 	healths.hud = src
 	infodisplay += healths
-	
+
 	blood_icon = new /atom/movable/screen/blood()
 	blood_icon.screen_loc = ui_bloodpool
 	blood_icon.hud = src
@@ -291,7 +291,7 @@
 		return
 	if(!iscrinos(mymob) && !iscoraxcrinos(mymob) && !iscorvid(mymob))
 		return
-	var/mob/living/simple_animal/werewolf/H = mymob
+	var/mob/living/carbon/werewolf/H = mymob
 	if(hud_version != HUD_STYLE_NOHUD)
 		for(var/obj/item/I in H.held_items)
 			I.screen_loc = ui_hand_position(H.get_held_index_of_item(I))

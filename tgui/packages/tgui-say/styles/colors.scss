@@ -5,6 +5,7 @@ $button: hsl(0, 0%, 12.2%);
 $lightMode: hsl(0, 0%, 100%);
 $lightBorder: hsl(0, 0%, 73.3%);
 $lightHover: hsl(0, 0%, 91.8%);
+$scrollbar-color-multiplier: 1 !default;
 
 $_channel_map: (
   'Admin': hsl(300, 100%, 86.7%),
@@ -27,6 +28,7 @@ $_channel_map: (
   'Supp': hsl(33.7, 44.9%, 49.8%),
   'Svc': hsl(88.1, 60.6%, 40.8%),
   'Synd': hsl(359.1, 31.8%, 42.5%),
+  'Whisper': hsl(176.1, 20%, 45.1%),
 );
 
 $channel_keys: map.keys($_channel_map) !default;
