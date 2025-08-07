@@ -1,72 +1,4 @@
-#define UMBRA_VEIL_COOLDOWN 40 MINUTES
-#define CAERN_VEIL_COOLDOWN 60 MINUTES
-#define GAROU_BP_REGEN 60 SECONDS
-#define VEIL_COOLDOWN 20 SECONDS
-#define RAGE_LIFE_COOLDOWN 30 SECONDS
-
-/mob/living/Life()
-	. = ..()
-	update_icons()
-	update_rage_hud()
-
-	if(isgarou(src) || iswerewolf(src))
-		if(key && stat <= HARD_CRIT)
-			var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
-			if(P)
-				if(P.masquerade != masquerade)
-					P.masquerade = masquerade
-					P.save_preferences()
-					P.save_character()
-
-		if(stat != DEAD)
-			var/gaining_rage = TRUE
-			for(var/obj/structure/werewolf_totem/W in GLOB.totems)
-				if(W.totem_health)
-					if(W.tribe == auspice.tribe.name)
-						if(get_area(W) == get_area(src) && client)
-							gaining_rage = FALSE
-							if(last_gnosis_buff+300 < world.time)
-								last_gnosis_buff = world.time
-								adjust_gnosis(1, src, TRUE)
-			if(iscrinos(src))
-				if(auspice.base_breed == "Crinos")
-					gaining_rage = FALSE
-			if(islupus(src))
-				if(auspice.base_breed == "Lupus")
-					gaining_rage = FALSE
-			if(ishuman(src))
-				if(auspice.base_breed == "Homid" || HAS_TRAIT(src, TRAIT_CORAX)) // Corvid-born Corax don't generate rage when in homid passively, the hope is to make talking more relaxed and the Corax weaker in combat.
-					gaining_rage = FALSE
-			if (iscorvid(src))
-				gaining_rage = FALSE // Corax will ideally be talking a lot, not having passive rage generation should also make them weaker in combat.
-			if (iscoraxcrinos(src))
-				gaining_rage = TRUE // Corax have no Metis, Crinos is uneasy no matter your breed, no "buts" about it.
-
-			if(gaining_rage && client)
-				if(((last_rage_gain + RAGE_LIFE_COOLDOWN) < world.time) && (auspice.rage <= 6))
-					last_rage_gain = world.time
-					adjust_rage(1, src, TRUE)
-
-			if(masquerade == 0)
-				if(!is_special_character(src))
-					if(auspice.gnosis)
-						to_chat(src, "<span class='warning'>My Veil is too low to connect with the spirits of the Umbra!</span>")
-						adjust_gnosis(-1, src, FALSE)
-
-			if(auspice.rage >= 9)
-				if(!in_frenzy)
-					if((last_frenzy_check + 40 SECONDS) <= world.time)
-						last_frenzy_check = world.time
-						rollfrenzy()
-
-			if(last_veil_restore == 0 || (last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
-				if(masquerade < 5)
-					check_veil_adjust()
-
-// currently being in your caern restores veil to max because theres no other way of doing. remember to cap it to THREE once shame rituals are back
-
 /mob/living/proc/check_veil_adjust()
-
 	if(istype(get_area(src), /area/vtm/interior/penumbra))
 		if((last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
 			adjust_veil(1, random = -1)
@@ -107,18 +39,18 @@
 		if(H.CheckEyewitness(H, H, 3, FALSE))
 			H.adjust_veil(-1,random = -1)
 
-/mob/living/simple_animal/werewolf/crinos/Life()
+/mob/living/carbon/werewolf/crinos/Life()
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
-/mob/living/simple_animal/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
+/mob/living/carbon/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
 	. = ..()
 	if(CheckEyewitness(src, src, 5, FALSE))
 		adjust_veil(-1, honoradj = -1)
 
 
-/mob/living/simple_animal/werewolf/handle_status_effects()
+/mob/living/carbon/werewolf/handle_status_effects()
 	..()
 	//natural reduction of movement delay due to stun.
 	if(move_delay_add > 0)
@@ -320,9 +252,3 @@
 			return FALSE
 
 	return FALSE
-
-#undef UMBRA_VEIL_COOLDOWN
-#undef CAERN_VEIL_COOLDOWN
-#undef GAROU_BP_REGEN
-#undef VEIL_COOLDOWN
-#undef RAGE_LIFE_COOLDOWN

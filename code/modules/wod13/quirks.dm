@@ -650,7 +650,7 @@ Dancer
 
 /datum/quirk/diablerist
 	name = "Diablerist"
-	desc = "For one reason or another, you have committed Diablerie in your past, a great crime within Kindred society. <b>This is not a license to Diablerize without proper reason!</b>"
+	desc = "For one reason or another, you have committed Diablerie in your past, a great crime within Kindred society. <b>This is not a license to Diablerize without proper reason! If you are found out, you can (and most likely will be) round removed. You have been warned.</b>"
 	value = 0
 	allowed_species = list("Vampire")
 
