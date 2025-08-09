@@ -26708,6 +26708,15 @@
 /mob/living/carbon/human/npc/stripper,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/strip)
+"hgF" = (
+/obj/effect/decal/asphaltline/alt{
+	pixel_x = -14
+	},
+/obj/vampire_car/retro/rand/anarch{
+	dir = 2
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/baywalk)
 "hgJ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -51794,7 +51803,7 @@
 /obj/effect/decal/asphaltline/alt{
 	pixel_x = -14
 	},
-/obj/vampire_car/retro/rand{
+/obj/vampire_car/rand/anarch{
 	dir = 2
 	},
 /turf/open/floor/plating/asphalt,
@@ -75969,6 +75978,13 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm)
+"tPB" = (
+/obj/vampire_car/track/volkswagen{
+	dir = 1;
+	access = "anarch"
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/anarch/garage)
 "tPD" = (
 /obj/structure/table/wood,
 /obj/machinery/mineral/equipment_vendor/fastfood/costumes,
@@ -171511,7 +171527,7 @@ diP
 eWO
 eWO
 pFK
-rIQ
+hgF
 rIQ
 adJ
 adJ
@@ -171915,7 +171931,7 @@ vWT
 eWO
 eWO
 pFK
-rIQ
+nCU
 rIQ
 adJ
 adJ
@@ -171925,7 +171941,7 @@ iiw
 iWP
 iWP
 iWP
-iWP
+tPB
 iWP
 lzl
 mnI
