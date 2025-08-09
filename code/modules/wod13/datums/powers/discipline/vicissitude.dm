@@ -108,6 +108,7 @@
 /obj/item/healthanalyzer/vicissitude
 	name = "synaptic tendrils"
 	desc = "A set of sensory tendrils that swiftly assess the health conditions of a patient"
+	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hivenode"
 	advanced = TRUE
 
@@ -116,9 +117,12 @@
 	desc = "A stack of electrocyte cells - they take too long to recharge for combat uses, but are able to produce powerful shocks."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "plasma_large"
+	inhand_icon_state = "syndiepaddles"
 	base_icon_state = "plasma_large"
-	inhand_icon_state = "defibpaddles0"
 	req_defib = FALSE
+
+/obj/item/shockpaddles/cyborg/vicissitude/update_icon_state()
+	return ..()
 
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
