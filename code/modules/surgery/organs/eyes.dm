@@ -447,3 +447,12 @@
 /obj/item/organ/eyes/fly/Remove(mob/living/carbon/M, special = FALSE)
 	REMOVE_TRAIT(M, TRAIT_FLASH_SENSITIVE, ORGAN_TRAIT)
 	return ..()
+
+/obj/item/organ/eyes/thermal
+	name = "thermal eyes"
+	desc = "Augmented eyes capable of seeing thermal signatures."
+	icon_state = "ling_thermal"
+	sight_flags = SEE_MOBS
+	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+	flash_protect = FLASH_PROTECTION_SENSITIVE
+	see_in_dark = 8
