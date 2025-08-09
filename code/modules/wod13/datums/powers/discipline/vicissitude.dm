@@ -17,7 +17,11 @@
 
 /obj/item/organ/cyberimp/arm/surgery/vicissitude
 	icon_state = "toolkit_implant_vic"
-	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude, /obj/item/bonesetter/augment/vicissitude, /obj/item/blood_filter/augment/vicissitude, /obj/item/healthanalyzer/vicissitude)
+	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude)
+
+/obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced
+	icon_state = "toolkit_implant_vic"
+	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude, /obj/item/bonesetter/augment/vicissitude, /obj/item/blood_filter/augment/vicissitude, /obj/item/healthanalyzer/vicissitude, /obj/item/shockpaddles/cyborg/vicissitude)
 
 /obj/item/retractor/augment/vicissitude
 	name = "retracting appendage"
@@ -106,6 +110,14 @@
 	desc = "A set of sensory tendrils that swiftly assess the health conditions of a patient"
 	icon_state = "hivenode"
 	advanced = TRUE
+
+/obj/item/shockpaddles/cyborg/vicissitude
+	name = "electrocyte stack"
+	desc = "A stack of electrocyte cells - they take too long to recharge for combat uses, but are able to produce powerful shocks."
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "plasma_large"
+	inhand_icon_state = "defibpaddles0"
+	req_defib = FALSE
 
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
@@ -405,6 +417,10 @@
 	ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 	switch (upgrade)
 		if ("Skin armor")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot add further armour to this form without preventing your movement!"))
+				selected_advanced_upgrade = null
+				return
 			user.set_body_sprite("tziarmor")
 			original_skin_tone = user.skin_tone
 			user.skin_tone = "albino"
@@ -431,6 +447,10 @@
 			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
 			user.apply_overlay(PROTEAN_LAYER)
 		if ("Leather wings")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot make wings strong enough to allow flight in this form!"))
+				selected_advanced_upgrade = null
+				return
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
 
@@ -506,6 +526,10 @@
 	selected_advanced_upgrade = advancedupgrade
 	switch (advancedupgrade)
 		if ("Bone armour")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot add further armour to this form without preventing your movement!"))
+				selected_advanced_upgrade = null
+				return
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.set_body_sprite("tziarmor")
 			advanced_original_skin_tone = user.skin_tone
@@ -535,6 +559,10 @@
 			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
 			user.apply_overlay(PROTEAN_LAYER)
 		if ("Membrane wings")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot make wings strong enough to allow flight in this form!"))
+				selected_advanced_upgrade = null
+				return
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
@@ -596,21 +624,30 @@
 
 	violates_masquerade = TRUE
 
-	duration_length = 20 SECONDS
-	cooldown_length = 20 SECONDS
+	toggled = TRUE
+	duration_override = TRUE //It actually lasts forever, as per RAW.
 
 	var/obj/effect/proc_holder/spell/targeted/shapeshift/tzimisce/horrid_form_shapeshift
 
 /datum/discipline_power/vicissitude/horrid_form/activate()
 	. = ..()
-	if (!horrid_form_shapeshift)
-		horrid_form_shapeshift = new(owner)
+	for(var/datum/action/basic_vicissitude/vicissitude_upgrade in owner.actions)
+		if ((selected_upgrade = "Skin armor") || (selected_upgrade = "Leather wings")
+			to_chat(user, span_warning("You cannot transform into Zulo form with that upgrade!"))
+			src.try_deactivate(direct = TRUE, alert = TRUE)
+			return
 
-	horrid_form_shapeshift.Shapeshift(owner)
+	for(var/datum/action/advanced_vicissitude/vicissitude_upgrade_advanced in owner.actions)
+		if ((selected_upgrade = "Bone armour") || (selected_upgrade = "Membrane wings")
+			to_chat(user, span_warning("You cannot transform into Zulo form with that upgrade!"))
+			src.try_deactivate(direct = TRUE, alert = TRUE)
+			return
+
+	owner.set_species(/datum/species/kindred/zulo)
 
 /datum/discipline_power/vicissitude/horrid_form/deactivate()
 	. = ..()
-	horrid_form_shapeshift.Restore(horrid_form_shapeshift.myshape)
+	owner.set_species(/datum/species/kindred)
 	owner.Stun(2 SECONDS)
 	owner.do_jitter_animation(50)
 
@@ -659,6 +696,12 @@
 
 	var/datum/action/advanced_vicissitude/vicissitude_upgrade_advanced = new()
 	vicissitude_upgrade_advanced.Grant(owner)
+
+	for(var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant in owner)
+		surgery_implant.qdel(owner)
+
+	var/obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced/surgery_implant_advanced = new()
+	surgery_implant_advanced.Insert(owner)
 
 // REWORK ABILITIES AND VERBS
 /*
