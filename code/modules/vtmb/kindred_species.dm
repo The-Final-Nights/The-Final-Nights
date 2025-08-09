@@ -731,6 +731,7 @@
 	brutemod = 0.5
 	heatmod = 1
 	burnmod = 2
+	attack_type = CLONE //Deals lethal damage, clone is current version of lethal.
 	punchdamagelow = 40
 	punchdamagehigh = 60
 	exotic_blood = /datum/reagent/blood/vitae
