@@ -44,6 +44,14 @@
 	hunger_threshold = NUTRITION_LEVEL_HUNGRY
 	poison_amount = 10
 
+/obj/item/organ/cyberimp/chest/nutriment/tzimisce
+	name = "Secondary Stomach"
+	desc = "This secondary stomach is capable of highly efficient digestion of stored biomatter reserves."
+	icon_state = "stomach-x"
+	hunger_threshold = NUTRITION_LEVEL_HUNGRY
+	poison_amount = 0
+	slot = ORGAN_SLOT_STOMACH_AID
+
 /obj/item/organ/cyberimp/chest/reviver
 	name = "Reviver implant"
 	desc = "This implant will attempt to revive and heal you if you lose consciousness. For the faint of heart!"
@@ -53,6 +61,7 @@
 	var/revive_cost = 0
 	var/reviving = FALSE
 	COOLDOWN_DECLARE(reviver_cooldown)
+	var/emp_vulnerability = 50 //Vulnerability to EMP effects, default is 50. Lower is more resistant.
 
 
 /obj/item/organ/cyberimp/chest/reviver/on_life()
@@ -63,7 +72,7 @@
 			else
 				COOLDOWN_START(src, reviver_cooldown, revive_cost)
 				reviving = FALSE
-				to_chat(owner, "<span class='notice'>Your reviver implant shuts down and starts recharging. It will be ready again in [DisplayTimeText(revive_cost)].</span>")
+				to_chat(owner, "<span class='notice'>Your [name] shuts down and starts recharging. It will be ready again in [DisplayTimeText(revive_cost)].</span>")
 		return
 
 	if(!COOLDOWN_FINISHED(src, reviver_cooldown) || owner.suiciding)
@@ -115,6 +124,12 @@
 	if(H.stat == CONSCIOUS)
 		to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
 
+/obj/item/organ/cyberimp/chest/reviver/tzimisce
+	name = "Second Heart"
+	desc = "This organ will automatically restart a cardiac system upon cessation of vital functions, alongside releasing mild regenerative chemicals. Implanted in the chest."
+	icon_state = "heart-tzi"
+	slot = ORGAN_SLOT_HEART_AID
+	emp_vulnerability = 0 //No EMP effects on pure biological material.
 
 /obj/item/organ/cyberimp/chest/thrusters
 	name = "implantable thrusters set"
