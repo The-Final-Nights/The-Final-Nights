@@ -6794,12 +6794,6 @@
 /obj/structure/closet/crate/bin,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/endron_facility/restricted)
-"bSN" = (
-/obj/structure/railing/metal{
-	dir = 4
-	},
-/turf/open/openspace,
-/area/vtm)
 "bSR" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -7401,9 +7395,6 @@
 /obj/effect/decal/bordur,
 /obj/structure/flora/ausbushes/fullgrass{
 	plane = 2.8
-	},
-/obj/structure/railing/metal{
-	plane = 4.1
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
@@ -9708,12 +9699,6 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/leafybush,
-/obj/structure/railing/metal{
-	dir = 6
-	},
-/obj/structure/railing/metal{
-	dir = 4
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "cDP" = (
@@ -10317,9 +10302,6 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/fernybush,
-/obj/structure/railing/metal{
-	dir = 4
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "cNM" = (
@@ -12621,9 +12603,6 @@
 	plane = 2.8
 	},
 /obj/structure/flora/ausbushes/sunnybush,
-/obj/structure/railing/metal{
-	plane = 4.1
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "dsw" = (
@@ -18430,9 +18409,6 @@
 /obj/structure/vamptree{
 	icon_state = "tree8"
 	},
-/obj/structure/railing/metal{
-	plane = 4.1
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "eVY" = (
@@ -21428,9 +21404,6 @@
 /obj/structure/flora/ausbushes/fullgrass{
 	plane = 2.8
 	},
-/obj/structure/railing/metal{
-	dir = 4
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "fMe" = (
@@ -23969,9 +23942,6 @@
 "gwR" = (
 /obj/effect/decal/bordur,
 /obj/structure/flora/ausbushes/fernybush,
-/obj/structure/railing/metal{
-	plane = 4.1
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "gwT" = (
@@ -49883,9 +49853,6 @@
 /obj/effect/decal/bordur{
 	dir = 4
 	},
-/obj/structure/railing/metal{
-	dir = 4
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "ncd" = (
@@ -55905,9 +55872,6 @@
 	plane = 2.8
 	},
 /obj/structure/flora/ausbushes/grassybush,
-/obj/structure/railing/metal{
-	plane = 4.1
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "oAL" = (
@@ -64942,12 +64906,7 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/grassybush,
-/obj/structure/railing/metal{
-	dir = 6
-	},
-/obj/structure/railing/metal{
-	dir = 4
-	},
+/obj/item/binoculars,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "qSD" = (
@@ -86247,10 +86206,6 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto)
-"wHW" = (
-/obj/item/binoculars,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/interior/millennium_tower/f3)
 "wId" = (
 /obj/structure/chair/wood{
 	dir = 8
@@ -240270,7 +240225,7 @@ oDe
 uaZ
 awM
 uaZ
-wHW
+aJI
 gwR
 mjT
 mjT
@@ -241078,7 +241033,7 @@ mjT
 mjT
 mjT
 mjT
-bSN
+mjT
 mjT
 mjT
 mjT
