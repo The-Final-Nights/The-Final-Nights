@@ -713,3 +713,28 @@
 		H.update_blood_hud()
 	if(plays_sound)
 		playsound(H.loc,'sound/items/drink.ogg', 50, TRUE)
+
+/datum/species/kindred/zulo
+	name = "Zulo"
+	id = "zulo"
+	default_color = "FFFFFF"
+	toxic_food = MEAT | VEGETABLES | RAW | JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | ALCOHOL | SUGAR | PINEAPPLE
+	liked_food = SANGUINE
+	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE, NO_UNDERWEAR)
+	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE)
+	no_equip = list(ITEM_SLOT_MASK, ITEM_SLOT_OCLOTHING, ITEM_SLOT_GLOVES, ITEM_SLOT_FEET, ITEM_SLOT_ICLOTHING, ITEM_SLOT_SUITSTORE)
+	use_skintones = TRUE
+	limbs_id = "human"
+	wings_icon = "Dragon"
+	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
+	mutantbrain = /obj/item/organ/brain/vampire
+	brutemod = 0.5
+	heatmod = 1
+	burnmod = 2
+	punchdamagelow = 40
+	punchdamagehigh = 60
+	exotic_blood = /datum/reagent/blood/vitae
+	selectable = FALSE
+	COOLDOWN_DECLARE(torpor_timer)
+	mob_size = MOB_SIZE_LARGE
+
