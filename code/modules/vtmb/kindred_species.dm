@@ -234,13 +234,14 @@
 
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
-	UnregisterSignal(C, COMSIG_ADD_VITAE)
-	for(var/datum/action/vampireinfo/VI in C.actions)
-		VI?.Remove(C)
-	for(var/datum/action/A in C.actions)
-		if(A?.vampiric)
-			A.Remove(C)
+	if(new_species != /datum/species/kindred) //Only remove them if you're shifting to a non-kindred species.
+		UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
+		UnregisterSignal(C, COMSIG_ADD_VITAE)
+		for(var/datum/action/vampireinfo/VI in C.actions)
+			VI?.Remove(C)
+		for(var/datum/action/A in C.actions)
+			if(A?.vampiric)
+				A.Remove(C)
 
 /datum/action/blood_power
 	name = "Blood Power"
@@ -721,14 +722,14 @@
 	toxic_food = MEAT | VEGETABLES | RAW | JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | ALCOHOL | SUGAR | PINEAPPLE
 	liked_food = SANGUINE
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE, NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE,TRAIT_MASQUERADE_VIOLATING_FACE )
+	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE,TRAIT_MASQUERADE_VIOLATING_FACE, TRAIT_HARDENED_SOLES)
 	no_equip = list(ITEM_SLOT_MASK, ITEM_SLOT_OCLOTHING, ITEM_SLOT_GLOVES, ITEM_SLOT_FEET, ITEM_SLOT_ICLOTHING, ITEM_SLOT_SUITSTORE)
 	use_skintones = TRUE
 	limbs_id = "tzi"
 	wings_icon = "Dragon"
 	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	mutantbrain = /obj/item/organ/brain/vampire
-	brutemod = 0.5
+	brutemod = 0.25 //Armoured plating and warform - You're going to be the biggest and most obvious target around.
 	heatmod = 1
 	burnmod = 2
 	punchdamagelow = 40
@@ -752,7 +753,7 @@
 	H.physiology.armor.bullet += 80
 	H.add_movespeed_modifier(/datum/movespeed_modifier/zulo)
 	var/matrix/M = matrix()
-	M.Scale(1.2)
+	M.Scale(1.4)
 
 /datum/species/kindred/zulo/on_species_loss(mob/living/carbon/human/H)
 	..()
