@@ -1,5 +1,0 @@
-author: "Marshmellow105"
-delete-after: True
-changes:
-  - bugfix: "a bug with a sewer dungeon is amended and more bandits should spawn"
-  - bugfix: "minor plane var fixes in the library and nostown"

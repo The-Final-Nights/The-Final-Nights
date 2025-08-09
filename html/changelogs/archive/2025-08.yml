@@ -19,5 +19,17 @@
       damage
   - bugfix: The warrior archetype works for non-Homid forms again
 2025-08-07:
+  AlmostLikeClockwork:
+  - rscadd: Adds 45acp to cargo orders for 400
+  - bugfix: fixed the price for 45acp at gunstores, from 2100 to 700
+  - rscadd: Added the rr part to diablerist quirk desc
+  Marshmellow105:
+  - bugfix: a bug with a sewer dungeon is amended and more bandits should spawn
+  - bugfix: minor plane var fixes in the library and nostown
+  TheTrueSilverRat:
+  - bugfix: changed stupid stupid idiotic op damage
   XeonMations:
   - bugfix: TGUI chat now auto-focuses on creation.
+2025-08-08:
+  AlmostLikeClockwork:
+  - bugfix: fixed Garou Crinos form hp, going back to 450

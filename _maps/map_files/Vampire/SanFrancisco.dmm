@@ -11859,6 +11859,14 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior)
+"djb" = (
+/obj/structure/railing/metal{
+	dir = 1
+	},
+/turf/open/floor/plasteel/stairs{
+	dir = 4
+	},
+/area/vtm/interior/wyrm_corrupted)
 "dji" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -19299,6 +19307,12 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/hotel)
+"fgp" = (
+/obj/structure/vampipe{
+	icon_state = "piping31"
+	},
+/turf/closed/wall/vampwall,
+/area/vtm/sewer)
 "fgx" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -23955,7 +23969,7 @@
 /area/vtm/church/interior)
 "gwN" = (
 /obj/structure/railing/metal{
-	dir = 1
+	dir = 9
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
@@ -33390,12 +33404,6 @@
 /obj/item/clothing/mask/vampire/venetian_mask/scary,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/baali)
-"iSx" = (
-/obj/effect/turf_decal/stripes{
-	dir = 4
-	},
-/turf/open/floor/plating/circled,
-/area/vtm/interior/wyrm_corrupted)
 "iSz" = (
 /obj/effect/decal/fakelattice{
 	density = 0
@@ -33726,22 +33734,6 @@
 	},
 /turf/open/floor/plating/church,
 /area/vtm/interior)
-"iWz" = (
-/obj/effect/turf_decal/siding/white{
-	color = "#636363"
-	},
-/obj/effect/turf_decal/siding/white{
-	color = "#636363";
-	dir = 1
-	},
-/obj/structure/vampdoor/reinf{
-	lock_id = "pentex";
-	lockpick_difficulty = 16;
-	dir = 1;
-	locked = 1
-	},
-/turf/open/floor/plating/grate,
-/area/vtm/interior/wyrm_corrupted)
 "iWC" = (
 /obj/structure/vampdoor/reinf{
 	locked = 1
@@ -35189,7 +35181,7 @@
 /area/vtm/ghetto)
 "jqf" = (
 /obj/structure/railing/metal{
-	plane = 4.1
+	dir = 10
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
@@ -36995,6 +36987,7 @@
 	},
 /obj/item/cautery,
 /obj/effect/decal/rugs,
+/obj/item/stack/medical/bone_gel,
 /turf/open/floor/plating/circled{
 	color = "#b0b0b0"
 	},
@@ -37665,6 +37658,14 @@
 /obj/structure/stairs/north,
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
+"jZC" = (
+/obj/structure/railing/metal{
+	plane = 4.1
+	},
+/turf/open/floor/plasteel/stairs{
+	dir = 4
+	},
+/area/vtm/interior/wyrm_corrupted)
 "jZG" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#004136";
@@ -42596,9 +42597,6 @@
 /area/vtm/pacificheights/community)
 "lkp" = (
 /obj/effect/decal/garou_glyph/dancers,
-/obj/machinery/light/red{
-	dir = 4
-	},
 /turf/open/indestructible/necropolis/air,
 /area/vtm/interior/wyrm_corrupted)
 "lkH" = (
@@ -43076,9 +43074,6 @@
 /area/vtm/interior/banu)
 "lqA" = (
 /obj/structure/bed/roller,
-/obj/effect/turf_decal/stripes{
-	dir = 4
-	},
 /obj/machinery/light/cold{
 	pixel_y = 32
 	},
@@ -46675,9 +46670,7 @@
 /obj/machinery/light/red{
 	pixel_y = 32
 	},
-/turf/open/floor/plasteel/stairs{
-	dir = 4
-	},
+/turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
 "mnG" = (
 /obj/structure/vampdoor/wood/sabbat,
@@ -52182,7 +52175,7 @@
 	pixel_y = 32;
 	plane = 2.9
 	},
-/turf/open/floor/plating/vampcanalplating,
+/turf/closed/wall/vampwall,
 /area/vtm/sewer)
 "nGJ" = (
 /obj/structure/chair/stool/bar,
@@ -52300,6 +52293,16 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/ghetto)
+"nIM" = (
+/obj/structure/closet,
+/obj/item/clothing/suit/hooded/heisenberg,
+/obj/item/clothing/suit/hooded/heisenberg,
+/obj/item/clothing/mask/vampire,
+/obj/item/clothing/mask/vampire,
+/obj/item/clothing/gloves/vampire/latex,
+/obj/item/clothing/gloves/vampire/latex,
+/turf/open/floor/plating/circled,
+/area/vtm/interior/wyrm_corrupted)
 "nIQ" = (
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/giovanni)
@@ -52876,13 +52879,6 @@
 	},
 /turf/closed/wall/vampwall/market/low/window,
 /area/vtm/interior/police/upstairs)
-"nOC" = (
-/obj/item/reagent_containers/food/drinks/meth/cocaine,
-/obj/machinery/light/red{
-	dir = 4
-	},
-/turf/open/indestructible/necropolis/air,
-/area/vtm/interior/wyrm_corrupted)
 "nOJ" = (
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/shop)
@@ -68103,15 +68099,6 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
-"rJN" = (
-/obj/effect/turf_decal/stripes{
-	dir = 4
-	},
-/obj/machinery/light/cold{
-	dir = 1
-	},
-/turf/open/floor/plating/circled,
-/area/vtm/interior/wyrm_corrupted)
 "rJP" = (
 /obj/structure/table,
 /obj/item/reagent_containers/food/drinks/drinkingglass{
@@ -82882,9 +82869,7 @@
 /obj/machinery/light/red{
 	dir = 1
 	},
-/turf/open/floor/plasteel/stairs{
-	dir = 4
-	},
+/turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
 "vNX" = (
 /obj/machinery/shower{
@@ -85462,21 +85447,9 @@
 /turf/open/floor/carpet/red,
 /area/vtm/interior/giovanni)
 "wvY" = (
-/obj/effect/turf_decal/siding/white{
-	dir = 4;
-	color = "#636363"
+/turf/closed/wall/vampwall/metal/reinforced{
+	density = 0
 	},
-/obj/effect/turf_decal/siding/white{
-	dir = 8;
-	color = "#636363"
-	},
-/obj/structure/vampdoor/reinf{
-	lock_id = "pentex";
-	lockpick_difficulty = 24;
-	dir = 8;
-	locked = 1
-	},
-/turf/open/floor/plating/grate,
 /area/vtm/interior/wyrm_corrupted)
 "wwl" = (
 /obj/structure/table,
@@ -87431,6 +87404,23 @@
 /obj/item/kitchen/rollingpin,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/giovanni)
+"wWw" = (
+/obj/effect/turf_decal/siding/white{
+	dir = 4;
+	color = "#636363"
+	},
+/obj/structure/vampdoor/reinf{
+	lock_id = "pentex";
+	lockpick_difficulty = 20;
+	dir = 8;
+	locked = 1
+	},
+/obj/effect/turf_decal/siding/white{
+	dir = 8;
+	color = "#636363"
+	},
+/turf/open/floor/plating/grate,
+/area/vtm/interior/wyrm_corrupted)
 "wWE" = (
 /obj/structure/table/wood/fancy/red,
 /obj/effect/turf_decal/siding/wood{
@@ -90292,6 +90282,22 @@
 	density = 0
 	},
 /area/vtm/forest)
+"xKk" = (
+/obj/structure/vampdoor/reinf{
+	lock_id = "pentex";
+	lockpick_difficulty = 16;
+	dir = 1;
+	locked = 1
+	},
+/obj/effect/turf_decal/siding/white{
+	color = "#636363"
+	},
+/obj/effect/turf_decal/siding/white{
+	color = "#636363";
+	dir = 1
+	},
+/turf/open/floor/plating/grate,
+/area/vtm/interior/wyrm_corrupted)
 "xKH" = (
 /obj/structure/chair/office{
 	dir = 1
@@ -125810,8 +125816,8 @@ jQK
 diT
 mNZ
 lqA
-iSx
-rJN
+sIV
+yec
 mNZ
 sto
 sto
@@ -126209,17 +126215,17 @@ eOS
 tuX
 rCB
 jmr
+xEJ
 uGf
-gwN
-iWz
-sIV
-sIV
-sIV
-sIV
-sIV
-iWz
-jqf
+jmr
+nIM
+jmr
+wWw
+jmr
+nIM
+jmr
 uGf
+xEJ
 jmr
 rCB
 rCB
@@ -126413,13 +126419,13 @@ rCB
 jmr
 xEJ
 gwN
-jmr
-qHS
-dIP
+xKk
 sIV
-fJb
-ahN
-jmr
+sIV
+sIV
+sIV
+sIV
+xKk
 jqf
 xEJ
 jmr
@@ -126616,11 +126622,11 @@ jmr
 xEJ
 vNB
 jmr
-iUv
-elD
-iUv
-naj
-iUv
+qHS
+dIP
+sIV
+fJb
+ahN
 jmr
 mnF
 lsk
@@ -126815,16 +126821,16 @@ eOS
 tuX
 rCB
 jmr
-lsk
 xEJ
+djb
 jmr
-pbw
-pbw
-pbw
-pbw
-pbw
+iUv
+elD
+iUv
+naj
+iUv
 jmr
-xEJ
+jZC
 xEJ
 jmr
 rCB
@@ -127019,13 +127025,13 @@ rCB
 jmr
 xEJ
 xEJ
-xEJ
-xEJ
-xEJ
-xEJ
-lsk
-xEJ
-ctd
+jmr
+pbw
+pbw
+pbw
+pbw
+pbw
+jmr
 mqd
 xEJ
 jmr
@@ -127224,9 +127230,9 @@ mqd
 xEJ
 hJa
 mqd
-sGw
 xEJ
 xEJ
+ctd
 xEJ
 xEJ
 xEJ
@@ -127421,17 +127427,17 @@ eOS
 tuX
 rCB
 jmr
-fhB
+xEJ
 xEJ
 lkp
 lsk
 xEJ
-jON
+sGw
 xEJ
 xEJ
-nOC
+lsk
 xEJ
-fhB
+xEJ
 jmr
 rCB
 rCB
@@ -127623,17 +127629,17 @@ eOS
 tuX
 rCB
 jmr
-jmr
-jmr
-jmr
-jmr
-jmr
-jmr
-jmr
-jmr
-jmr
-jmr
-jmr
+fhB
+xEJ
+jON
+xEJ
+xEJ
+xEJ
+xEJ
+xEJ
+jON
+xEJ
+fhB
 jmr
 rCB
 rCB
@@ -127824,19 +127830,19 @@ aej
 eOS
 tuX
 rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
+jmr
 rCB
 rCB
 tuX
@@ -128028,15 +128034,15 @@ tuX
 rCB
 rCB
 rCB
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 rCB
 rCB
 rCB
@@ -128231,13 +128237,13 @@ tuX
 tuX
 tuX
 tuX
-vRj
-kOa
-kOa
-kOa
-kOa
-kOa
-qLp
+tuX
+tuX
+tuX
+tuX
+tuX
+tuX
+fgp
 tuX
 tuX
 tuX
@@ -128432,14 +128438,14 @@ gVZ
 six
 six
 six
-ndy
-nRp
-nRp
-nRp
-nRp
-nRp
-nRp
-xIJ
+six
+six
+six
+six
+six
+six
+six
+six
 six
 six
 tnV
@@ -128837,13 +128843,13 @@ nyK
 nyK
 nyK
 sUt
-nRp
-nRp
-nRp
-nRp
-nRp
-nRp
 vKV
+nyK
+nyK
+nyK
+nyK
+nyK
+nyK
 nyK
 nyK
 nyK
@@ -129040,12 +129046,12 @@ tuX
 tuX
 tuX
 nGG
-kOa
-kOa
-kOa
-kOa
-kOa
-qLp
+tuX
+tuX
+tuX
+tuX
+tuX
+tuX
 tuX
 tuX
 tuX
@@ -129240,15 +129246,15 @@ rCB
 rCB
 rCB
 rCB
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
-tuX
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 rCB
 rCB
 rCB
