@@ -26,7 +26,6 @@
 	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
-	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/hemostat/augment/vicissitude
@@ -36,7 +35,6 @@
 	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
-	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/cautery/augment/vicissitude
@@ -46,7 +44,6 @@
 	inhand_icon_state = "cautery_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
-	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/surgicaldrill/augment/vicissitude
@@ -56,7 +53,6 @@
 	hitsound = 'sound/effects/wounds/blood2.ogg'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
-	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/scalpel/augment/vicissitude
@@ -66,7 +62,6 @@
 	inhand_icon_state = "scalpel_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
-	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/circular_saw/augment/vicissitude
@@ -77,7 +72,6 @@
 	hitsound = 'sound/effects/wounds/blood2.ogg'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
-	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/surgical_drapes/vicissitude
