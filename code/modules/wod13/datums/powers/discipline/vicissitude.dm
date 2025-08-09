@@ -122,7 +122,7 @@
 	req_defib = FALSE
 
 /obj/item/shockpaddles/cyborg/vicissitude/update_icon_state()
-	return ..()
+	return
 
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
@@ -652,7 +652,8 @@
 
 /datum/discipline_power/vicissitude/horrid_form/deactivate()
 	. = ..()
-	owner.set_species(/datum/species/kindred)
+	if(owner.dna.species = /datum/species/kindred/zulo)
+		owner.set_species(/datum/species/kindred)
 	owner.Stun(2 SECONDS)
 	owner.do_jitter_animation(50)
 
