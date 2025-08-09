@@ -735,39 +735,38 @@
 	punchdamagehigh = 60
 	exotic_blood = /datum/reagent/blood/vitae
 	selectable = FALSE
-	COOLDOWN_DECLARE(torpor_timer)
-	mob_size = MOB_SIZE_LARGE
+	var/old_social
 
-/datum/species/kindred/zulo/on_species_gain(mob/living/carbon/C)
+/datum/species/kindred/zulo/on_species_gain(mob/living/carbon/human/H)
 	..()
-	C.hairstyle = "Bald"
-	C.facial_hairstyle = "Shaved"
-	C.undershirt = "Nude"
-	C.underwear = "Nude"
-	C.socks = "Nude"
-	var/old_social = C.social //Used in case of some future abilities offering social bonuses.
-	C.social = 0
-	C.physique += 3
-	C.dexterity += 3
-	C.physiology.armor.melee += 80
-	C.physiology.armor.bullet += 80
-	C.add_movespeed_modifier(/datum/movespeed_modifier/zulo)
+	H.hairstyle = "Bald"
+	H.facial_hairstyle = "Shaved"
+	H.undershirt = "Nude"
+	H.underwear = "Nude"
+	H.socks = "Nude"
+	old_social = H.social //Used in case of some future abilities offering social bonuses.
+	H.social = 0
+	H.physique += 3
+	H.dexterity += 3
+	H.physiology.armor.melee += 80
+	H.physiology.armor.bullet += 80
+	H.add_movespeed_modifier(/datum/movespeed_modifier/zulo)
 	var/matrix/M = matrix()
 	M.Scale(1.2)
 
-/datum/species/kindred/zulo/on_species_loss(mob/living/carbon/C)
+/datum/species/kindred/zulo/on_species_loss(mob/living/carbon/human/H)
 	..()
-	C.hairstyle = C.client.preferences.hairstyle
-	C.facial_hairstyle = C.client.preferences.facial_hairstyle
-	C.undershirt = C.client.preferences.undershirt
-	C.underwear = C.client.preferences.underwear
-	C.socks = C.client.preferences.socks
-	C.social = old_social
-	C.physique -= 3
-	C.dexterity -= 3
-	C.physiology.armor.melee -= 80
-	C.physiology.armor.bullet -= 80
-	C.remove_movespeed_modifier(/datum/movespeed_modifier/zulo)
+	H.hairstyle = H.client.prefs.hairstyle
+	H.facial_hairstyle = H.client.prefs.facial_hairstyle
+	H.undershirt = H.client.prefs.undershirt
+	H.underwear = H.client.prefs.underwear
+	H.socks = H.client.prefs.socks
+	H.social = old_social
+	H.physique -= 3
+	H.dexterity -= 3
+	H.physiology.armor.melee -= 80
+	H.physiology.armor.bullet -= 80
+	H.remove_movespeed_modifier(/datum/movespeed_modifier/zulo)
 	var/matrix/M = matrix()
 	M.Scale(1)
 
