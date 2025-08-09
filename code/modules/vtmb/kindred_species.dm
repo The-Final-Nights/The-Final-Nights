@@ -194,53 +194,56 @@
 		host << browse(HTML_SKELETON(dat), "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
 		onclose(host, "vampire", src)
 
-/datum/species/kindred/on_species_gain(mob/living/carbon/human/C)
+/datum/species/kindred/on_species_gain(mob/living/carbon/human/C, datum/species/old_species)
 	. = ..()
 	C.update_body(0)
-	C.last_experience = world.time + 5 MINUTES
 
-	var/datum/action/vampireinfo/infor = new()
-	infor.host = C
-	infor.Grant(C)
+	if(!iskindred(old_species)) //No need to duplicate stuff if they already have it.
+		C.last_experience = world.time + 5 MINUTES
 
-	var/datum/action/give_vitae/vitae = new()
-	vitae.Grant(C)
+		var/datum/action/vampireinfo/infor = new()
+		infor.host = C
+		infor.Grant(C)
 
-	var/datum/action/blood_power/bloodpower = new()
-	bloodpower.Grant(C)
+		var/datum/action/give_vitae/vitae = new()
+		vitae.Grant(C)
 
-	add_verb(C, /mob/living/carbon/human/verb/teach_discipline)
+		var/datum/action/blood_power/bloodpower = new()
+		bloodpower.Grant(C)
 
-	C.yang_chi = 0
-	C.max_yang_chi = 0
-	C.yin_chi = 6
-	C.max_yin_chi = 6
+		add_verb(C, /mob/living/carbon/human/verb/teach_discipline)
 
-	//vampires go to -200 damage before dying
-	for (var/obj/item/bodypart/bodypart in C.bodyparts)
-		bodypart.max_damage *= 1.5
+		C.yang_chi = 0
+		C.max_yang_chi = 0
+		C.yin_chi = 6
+		C.max_yin_chi = 6
 
-	//vampires die instantly upon having their heart removed
-	RegisterSignal(C, COMSIG_CARBON_LOSE_ORGAN, PROC_REF(lose_organ))
+		//vampires go to -200 damage before dying
+		for (var/obj/item/bodypart/bodypart in C.bodyparts)
+			bodypart.max_damage *= 1.5
 
-	//vampires don't die while in crit, they just slip into torpor after 2 minutes of being critted
-	RegisterSignal(C, SIGNAL_ADDTRAIT(TRAIT_CRITICAL_CONDITION), PROC_REF(slip_into_torpor))
+		//vampires die instantly upon having their heart removed
+		RegisterSignal(C, COMSIG_CARBON_LOSE_ORGAN, PROC_REF(lose_organ))
 
-	//vampires resist vampire bites better than mortals
-	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
+		//vampires don't die while in crit, they just slip into torpor after 2 minutes of being critted
+		RegisterSignal(C, SIGNAL_ADDTRAIT(TRAIT_CRITICAL_CONDITION), PROC_REF(slip_into_torpor))
 
-	//putting this here for now not sure if elsewhere is better?
-	RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
+		//vampires resist vampire bites better than mortals
+		RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
+
+		//putting this here for now not sure if elsewhere is better?
+		RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
 
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
-/*	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
-	UnregisterSignal(C, COMSIG_ADD_VITAE)
-	for(var/datum/action/vampireinfo/VI in C.actions)
-		VI?.Remove(C)
-	for(var/datum/action/A in C.actions)
-		if(A?.vampiric)
-			A.Remove(C)*/
+	if(!iskindred(new_species)) //Only remove this if they're shifting to a non-vampire species.
+		UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
+		UnregisterSignal(C, COMSIG_ADD_VITAE)
+		for(var/datum/action/vampireinfo/VI in C.actions)
+			VI?.Remove(C)
+		for(var/datum/action/A in C.actions)
+			if(A?.vampiric)
+				A.Remove(C)
 
 /datum/action/blood_power
 	name = "Blood Power"
