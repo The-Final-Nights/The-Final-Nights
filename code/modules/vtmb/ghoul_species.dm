@@ -134,10 +134,14 @@
 
 /datum/species/ghoul/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
-	for(var/datum/action/A in C.actions)
-		if(A)
-			if(A.vampiric)
-				A.Remove(C)
+	if(!iskindred(new_species)) //Only remove this if they're shifting to a non-vampire species.
+		for(var/datum/action/A in C.actions)
+			if(A)
+				if(A.vampiric)
+					A.Remove(C)
+	if(iskindred(new_species)) //If they are shifting to a vampire, just remove their ghoul-specific ability.
+		for(var/datum/action/take_vitae/T in C.actions)
+			T.Remove(C)
 	for(var/datum/action/ghoulinfo/infor in C.actions)
 		if(infor)
 			infor.Remove(C)
