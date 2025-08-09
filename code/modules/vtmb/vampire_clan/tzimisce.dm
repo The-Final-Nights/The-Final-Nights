@@ -16,16 +16,6 @@
 	accessories = list("spines", "spines_slim", "animal_skull", "none")
 	accessories_layers = list("spines" = UNICORN_LAYER, "spines_slim" = UNICORN_LAYER, "animal_skull" = UNICORN_LAYER, "none" = UNICORN_LAYER)
 
-
-/obj/effect/proc_holder/spell/targeted/shapeshift/tzimisce
-	name = "Tzimisce Form"
-	desc = "Take on the shape a beast."
-	charge_max = 10 SECONDS
-	cooldown_min = 10 SECONDS
-	revert_on_death = TRUE
-	die_with_shapeshifted_form = FALSE
-	shapeshift_type = /mob/living/simple_animal/hostile/tzimisce_beast
-
 /obj/effect/proc_holder/spell/targeted/shapeshift/bloodcrawler
 	name = "Blood Crawler"
 	desc = "Take on the shape a beast."
