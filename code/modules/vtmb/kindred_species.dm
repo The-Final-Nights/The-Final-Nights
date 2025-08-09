@@ -732,8 +732,8 @@
 	brutemod = 0.25 //Armoured plating and warform - You're going to be the biggest and most obvious target around.
 	heatmod = 1
 	burnmod = 2
-	punchdamagelow = 40
-	punchdamagehigh = 60
+	punchdamagelow = 30 //A little more than Glabro, since this is a Crinos equivalent.
+	punchdamagehigh = 40
 	exotic_blood = /datum/reagent/blood/vitae
 	selectable = FALSE
 	var/old_social
