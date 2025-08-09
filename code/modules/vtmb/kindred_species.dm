@@ -721,10 +721,10 @@
 	toxic_food = MEAT | VEGETABLES | RAW | JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | ALCOHOL | SUGAR | PINEAPPLE
 	liked_food = SANGUINE
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE, NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE)
+	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE,TRAIT_MASQUERADE_VIOLATING_FACE )
 	no_equip = list(ITEM_SLOT_MASK, ITEM_SLOT_OCLOTHING, ITEM_SLOT_GLOVES, ITEM_SLOT_FEET, ITEM_SLOT_ICLOTHING, ITEM_SLOT_SUITSTORE)
 	use_skintones = TRUE
-	limbs_id = "human"
+	limbs_id = "tzi"
 	wings_icon = "Dragon"
 	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	mutantbrain = /obj/item/organ/brain/vampire
@@ -738,3 +738,39 @@
 	COOLDOWN_DECLARE(torpor_timer)
 	mob_size = MOB_SIZE_LARGE
 
+/datum/species/kindred/zulo/on_species_gain(mob/living/carbon/C)
+	..()
+	C.hairstyle = "Bald"
+	C.facial_hairstyle = "Shaved"
+	C.undershirt = "Nude"
+	C.underwear = "Nude"
+	C.socks = "Nude"
+	var/old_social = C.social //Used in case of some future abilities offering social bonuses.
+	C.social = 0
+	C.physique += 3
+	C.dexterity += 3
+	C.physiology.armor.melee += 80
+	C.physiology.armor.bullet += 80
+	C.add_movespeed_modifier(/datum/movespeed_modifier/zulo)
+	var/matrix/M = matrix()
+	M.Scale(1.2)
+
+/datum/species/kindred/zulo/on_species_loss(mob/living/carbon/C)
+	..()
+	C.hairstyle = C.client.preferences.hairstyle
+	C.facial_hairstyle = C.client.preferences.facial_hairstyle
+	C.undershirt = C.client.preferences.undershirt
+	C.underwear = C.client.preferences.underwear
+	C.socks = C.client.preferences.socks
+	C.social = old_social
+	C.physique -= 3
+	C.dexterity -= 3
+	C.physiology.armor.melee -= 80
+	C.physiology.armor.bullet -= 80
+	C.remove_movespeed_modifier(/datum/movespeed_modifier/zulo)
+	var/matrix/M = matrix()
+	M.Scale(1)
+
+/datum/movespeed_modifier/zulo
+	blacklisted_movetypes = FLOATING|FLYING
+	multiplicative_slowdown = -0.5
