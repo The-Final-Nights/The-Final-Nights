@@ -1289,9 +1289,6 @@
 /area/vtm/clinic/haven)
 "arw" = (
 /obj/structure/table,
-/obj/item/paper/fluff{
-	default_raw_text = "Okay, Steven, let me get this drilled into your thick skull. The 'cats falling from the penthouse level onto the street' issue will NOT be getting raised to the CEO. Your job is to watch the cameras, not police company morals. We will continue to buy new cats for the penthouse garden, and we will NOT be installing railings as the CEO has already stated they ruin the feng shui of the garden. Try to raise this to the PR team again and you are getting FIRED."
-	},
 /turf/open/floor/mineral/plastitanium,
 /area/vtm/interior/millennium_tower)
 "arx" = (
@@ -7406,6 +7403,7 @@
 /obj/structure/flora/ausbushes/fullgrass{
 	plane = 2.8
 	},
+/obj/structure/railing/metal,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "cbz" = (
@@ -9709,6 +9707,10 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/leafybush,
+/obj/structure/railing/metal,
+/obj/structure/railing/metal{
+	dir = 4
+	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "cDP" = (
@@ -10313,6 +10315,9 @@
 	dir = 4
 	},
 /obj/structure/flora/ausbushes/fernybush,
+/obj/structure/railing/metal{
+	dir = 4
+	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "cNM" = (
@@ -12620,6 +12625,7 @@
 	plane = 2.8
 	},
 /obj/structure/flora/ausbushes/sunnybush,
+/obj/structure/railing/metal,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "dsw" = (
@@ -13687,10 +13693,6 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
-/obj/item/ammo_box/vampire/c9mm/silver,
-/obj/item/ammo_box/vampire/c44/silver{
-	pixel_y = 11
-	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "dIZ" = (
@@ -16003,11 +16005,9 @@
 /area/vtm/sewer/nosferatu_warren)
 "epC" = (
 /obj/structure/table/wood/fancy/royalblack,
-/obj/item/paper_bin{
-	pixel_y = 6
-	},
-/obj/item/pen/fourcolor{
-	pixel_y = 5
+/obj/machinery/bitcoin_miner{
+	name = "money printer";
+	desc = "A machine that is designed to print counterfeit currency with impeccable accuracy, with a monitor connected to it.\nIt has an output for withdrawing the cash obtained from printing, somehow."
 	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/f3)
@@ -18436,6 +18436,7 @@
 /obj/structure/vamptree{
 	icon_state = "tree8"
 	},
+/obj/structure/railing/metal,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "eVY" = (
@@ -21435,6 +21436,9 @@
 /obj/structure/flora/ausbushes/fullgrass{
 	plane = 2.8
 	},
+/obj/structure/railing/metal{
+	dir = 4
+	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "fMe" = (
@@ -23975,6 +23979,7 @@
 "gwR" = (
 /obj/effect/decal/bordur,
 /obj/structure/flora/ausbushes/fernybush,
+/obj/structure/railing/metal,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "gwT" = (
@@ -49413,6 +49418,13 @@
 /obj/machinery/light/prince{
 	pixel_y = 32
 	},
+/obj/item/gun/ballistic/automatic/vampire/autoshotgun{
+	name = "\improper The Iron Hnad";
+	color = "#ccffff"
+	},
+/obj/item/ammo_box/magazine/vampautoshot,
+/obj/item/ammo_box/magazine/vampautoshot,
+/obj/item/ammo_box/vampire/c12g/buck,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f2)
 "mVH" = (
@@ -49917,6 +49929,9 @@
 	},
 /obj/effect/decal/shadow,
 /obj/effect/decal/bordur{
+	dir = 4
+	},
+/obj/structure/railing/metal{
 	dir = 4
 	},
 /turf/open/floor/plating/vampgrass,
@@ -55118,9 +55133,6 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
-/obj/item/ammo_box/vampire/c45acp/silver{
-	pixel_y = -10
-	},
 /obj/machinery/light/small{
 	dir = 4;
 	pixel_x = -16;
@@ -55937,6 +55949,7 @@
 	plane = 2.8
 	},
 /obj/structure/flora/ausbushes/grassybush,
+/obj/structure/railing/metal,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "oAL" = (
@@ -64992,6 +65005,10 @@
 	},
 /obj/structure/flora/ausbushes/grassybush,
 /obj/item/binoculars,
+/obj/structure/railing/metal{
+	dir = 4
+	},
+/obj/structure/railing/metal,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "qSD" = (
@@ -90394,6 +90411,9 @@
 	dir = 8;
 	color = "#636363"
 	},
+/obj/item/ammo_box/vampire/c44/silver,
+/obj/item/ammo_box/vampire/c9mm/silver,
+/obj/item/ammo_box/vampire/c45acp/silver,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
 "xME" = (
@@ -202751,7 +202771,7 @@ oAj
 uxM
 lPn
 yjk
-xEp
+xfw
 vdU
 xEp
 vdU
