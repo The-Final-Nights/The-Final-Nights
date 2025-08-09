@@ -393,7 +393,7 @@
 	button_icon_state = "basic"
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
-	var/selected_upgrade
+	var/selected_upgrade = null
 	var/mutable_appearance/upgrade_overlay
 	var/original_skin_tone
 	var/original_hairstyle
@@ -637,14 +637,14 @@
 /datum/discipline_power/vicissitude/horrid_form/activate()
 	. = ..()
 	for(var/datum/action/basic_vicissitude/V in owner.actions)
-		if ((V.selected_upgrade = "Skin armor") || (V.selected_upgrade = "Leather wings"))
+		if ((V.selected_upgrade == "Skin armor") || (V.selected_upgrade == "Leather wings"))
 			to_chat(owner, span_warning("You cannot transform into Zulo form with that upgrade!"))
 			src.deactivate()
 			return
 
 	for(var/datum/action/advanced_vicissitude/V in owner.actions)
-		if ((V.selected_advanced_upgrade = "Bone armour") || (V.selected_advanced_upgrade = "Membrane wings"))
-			to_chat(owner, span_warning("You cannot transform into Zulo form with that upgrade!"))
+		if ((V.selected_advanced_upgrade == "Bone armour") || (V.selected_advanced_upgrade == "Membrane wings"))
+			to_chat(owner, span_warning("You cannot transform into Zulo form with that advanced upgrade!"))
 			src.deactivate()
 			return
 
