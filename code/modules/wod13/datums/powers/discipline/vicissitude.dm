@@ -419,7 +419,7 @@
 		if ("Skin armor")
 			if (iszulo(owner))
 				to_chat(user, span_notice("You realise you cannot add further armour to this form without preventing your movement!"))
-				selected_advanced_upgrade = null
+				selected_upgrade = null
 				return
 			user.set_body_sprite("tziarmor")
 			original_skin_tone = user.skin_tone
@@ -449,7 +449,7 @@
 		if ("Leather wings")
 			if (iszulo(owner))
 				to_chat(user, span_notice("You realise you cannot make wings strong enough to allow flight in this form!"))
-				selected_advanced_upgrade = null
+				selected_upgrade = null
 				return
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
@@ -631,16 +631,16 @@
 
 /datum/discipline_power/vicissitude/horrid_form/activate()
 	. = ..()
-	for(var/datum/action/basic_vicissitude/vicissitude_upgrade in owner.actions)
-		if ((selected_upgrade = "Skin armor") || (selected_upgrade = "Leather wings")
-			to_chat(user, span_warning("You cannot transform into Zulo form with that upgrade!"))
-			src.try_deactivate(direct = TRUE, alert = TRUE)
+	for(var/datum/action/basic_vicissitude/V in owner.actions)
+		if ((V.selected_upgrade = "Skin armor") || (V.selected_upgrade = "Leather wings"))
+			to_chat(owner, span_warning("You cannot transform into Zulo form with that upgrade!"))
+			src.deactivate()
 			return
 
-	for(var/datum/action/advanced_vicissitude/vicissitude_upgrade_advanced in owner.actions)
-		if ((selected_upgrade = "Bone armour") || (selected_upgrade = "Membrane wings")
-			to_chat(user, span_warning("You cannot transform into Zulo form with that upgrade!"))
-			src.try_deactivate(direct = TRUE, alert = TRUE)
+	for(var/datum/action/advanced_vicissitude/V in owner.actions)
+		if ((V.selected_advanced_upgrade = "Bone armour") || (V.selected_advanced_upgrade = "Membrane wings"))
+			to_chat(owner, span_warning("You cannot transform into Zulo form with that upgrade!"))
+			src.deactivate()
 			return
 
 	owner.set_species(/datum/species/kindred/zulo)
@@ -698,7 +698,7 @@
 	vicissitude_upgrade_advanced.Grant(owner)
 
 	for(var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant in owner)
-		surgery_implant.qdel(owner)
+		qdel(surgery_implant)
 
 	var/obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced/surgery_implant_advanced = new()
 	surgery_implant_advanced.Insert(owner)
