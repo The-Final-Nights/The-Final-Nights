@@ -17,7 +17,7 @@
 
 /obj/item/organ/cyberimp/arm/surgery/vicissitude
 	icon_state = "toolkit_implant_vic"
-	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude)
+	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude, /obj/item/bonesetter/augment/vicissitude, /obj/item/blood_filter/augment/vicissitude, /obj/item/healthanalyzer/vicissitude)
 
 /obj/item/retractor/augment/vicissitude
 	name = "retracting appendage"
@@ -26,6 +26,7 @@
 	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/hemostat/augment/vicissitude
@@ -35,6 +36,7 @@
 	inhand_icon_state = "clamps_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/cautery/augment/vicissitude
@@ -44,6 +46,7 @@
 	inhand_icon_state = "cautery_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/surgicaldrill/augment/vicissitude
@@ -53,6 +56,7 @@
 	hitsound = 'sound/effects/wounds/blood2.ogg'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/scalpel/augment/vicissitude
@@ -62,6 +66,7 @@
 	inhand_icon_state = "scalpel_vic"
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/circular_saw/augment/vicissitude
@@ -72,6 +77,7 @@
 	hitsound = 'sound/effects/wounds/blood2.ogg'
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	toolspeed = 1
 	masquerade_violating = TRUE
 
 /obj/item/surgical_drapes/vicissitude
@@ -82,6 +88,30 @@
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 	masquerade_violating = TRUE
+
+/obj/item/bonesetter/augment/vicissitude
+	name = "bonesetting appendage"
+	desc = "A pair of organic clamps for setting bones."
+	icon_state = "bone setter_vic"
+	inhand_icon_state = "clamps_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/blood_filter/augment/vicissitude
+	name = "filtering organ"
+	desc = "A specialised set of organs capable of filtering blood non-harmfully."
+	icon_state = "bone-gel_vic"
+	inhand_icon_state = "clamps_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/healthanalyzer/vicissitude
+	name = "synaptic tendrils"
+	desc = "A set of sensory tendrils that swiftly assess the health conditions of a patient"
+	icon_state = "hivenode"
+	advanced = TRUE
 
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
@@ -595,6 +625,7 @@
 	if (!owner.mind)
 		return
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_heart)
+	ADD_TRAIT(owner, TRAIT_SURGEON, MAGIC)
 
 //BLOODFORM
 /datum/discipline_power/vicissitude/bloodform
