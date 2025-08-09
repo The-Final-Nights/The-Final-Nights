@@ -116,6 +116,7 @@
 	desc = "A stack of electrocyte cells - they take too long to recharge for combat uses, but are able to produce powerful shocks."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "plasma_large"
+	base_icon_state = "plasma_large"
 	inhand_icon_state = "defibpaddles0"
 	req_defib = FALSE
 
