@@ -234,14 +234,13 @@
 
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
-	if(new_species != /datum/species/kindred) //Only remove them if you're shifting to a non-kindred species.
-		UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
-		UnregisterSignal(C, COMSIG_ADD_VITAE)
-		for(var/datum/action/vampireinfo/VI in C.actions)
-			VI?.Remove(C)
-		for(var/datum/action/A in C.actions)
-			if(A?.vampiric)
-				A.Remove(C)
+/*	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
+	UnregisterSignal(C, COMSIG_ADD_VITAE)
+	for(var/datum/action/vampireinfo/VI in C.actions)
+		VI?.Remove(C)
+	for(var/datum/action/A in C.actions)
+		if(A?.vampiric)
+			A.Remove(C)*/
 
 /datum/action/blood_power
 	name = "Blood Power"
@@ -721,8 +720,8 @@
 	default_color = "FFFFFF"
 	toxic_food = MEAT | VEGETABLES | RAW | JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | ALCOHOL | SUGAR | PINEAPPLE
 	liked_food = SANGUINE
-	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, HAS_FLESH, HAS_BONE, NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE, TRAIT_MASQUERADE_VIOLATING_FACE, TRAIT_HARDENED_SOLES, TRAIT_STRONG_GRABBER, TRAIT_GIANT)
+	species_traits = list(EYECOLOR, HAS_FLESH, HAS_BONE, NO_UNDERWEAR)
+	inherent_traits = list(TRAIT_ADVANCEDTOOLUSER, TRAIT_LIMBATTACHMENT, TRAIT_VIRUSIMMUNE, TRAIT_NOBLEED, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_TOXIMMUNE, TRAIT_NOCRITDAMAGE, TRAIT_MASQUERADE_VIOLATING_FACE, TRAIT_HARDENED_SOLES, TRAIT_STRONG_GRABBER, TRAIT_GIANT, TRAIT_PUSHIMMUNE, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_HARDLY_WOUNDED)
 	no_equip = list(ITEM_SLOT_MASK, ITEM_SLOT_OCLOTHING, ITEM_SLOT_GLOVES, ITEM_SLOT_FEET, ITEM_SLOT_ICLOTHING, ITEM_SLOT_SUITSTORE)
 	use_skintones = TRUE
 	limbs_id = "tzi"
