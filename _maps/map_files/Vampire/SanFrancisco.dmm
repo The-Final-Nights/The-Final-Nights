@@ -49384,7 +49384,7 @@
 /obj/item/ammo_box/magazine/vampautoshot,
 /obj/item/ammo_box/magazine/vampautoshot,
 /obj/item/ammo_box/magazine/vampautoshot,
-/obj/item/ammo_box/vampire/c12g/buck,
+/obj/item/ammo_box/magazine/vampautoshot,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f2)
 "mVH" = (
@@ -88868,14 +88868,6 @@
 /obj/structure/closet/crate/freezer/blood,
 /turf/open/floor/plasteel/freezer,
 /area/vtm/clinic)
-"xqW" = (
-/obj/machinery/bitcoin_miner{
-	name = "money printer";
-	desc = "A machine that is designed to print counterfeit currency with impeccable accuracy, with a monitor connected to it.\nIt has an output for withdrawing the cash obtained from printing, somehow."
-	},
-/obj/structure/table/wood/fancy/royalblack,
-/turf/open/floor/plating/parquetry/rich,
-/area/vtm/interior/millennium_tower/f3)
 "xqY" = (
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior/cog/caern)
@@ -239873,7 +239865,7 @@ dlU
 oHr
 aQf
 joA
-xqW
+joA
 iMS
 gHo
 qOr
