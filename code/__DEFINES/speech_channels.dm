@@ -6,5 +6,5 @@
 #define ADMIN_CHANNEL "Admin"
 // TFN EDIT START
 #define LOOC_CHANNEL "LOOC"
-#define WHIS_CHANNEL "Whis"
+#define WHIS_CHANNEL "Whisper"
 // TFN EDIT END

@@ -226,7 +226,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/archetype = /datum/archetype/average
 
-	var/breed = "Homid"
+	var/breed = BREED_HOMID
 	var/datum/garou_tribe/tribe = new /datum/garou_tribe/galestalkers()
 	var/datum/auspice/auspice = new /datum/auspice/ahroun()
 	var/werewolf_color = "black"
@@ -671,8 +671,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					qdel(ACT)
 				dat += "<b>Initial Gifts:</b> [gifts_text]"
 				// These mobs should be made in nullspace to avoid dumping them onto the map somewhere.
-				var/mob/living/simple_animal/werewolf/crinos/DAWOF = new
-				var/mob/living/simple_animal/werewolf/lupus/DAWOF2 = new
+				var/mob/living/carbon/werewolf/crinos/DAWOF = new
+				var/mob/living/carbon/werewolf/lupus/DAWOF2 = new
 
 				DAWOF.sprite_color = werewolf_color
 				DAWOF2.sprite_color = werewolf_color
@@ -2718,11 +2718,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						new_tribe = new newtype()
 						tribe = new_tribe
 						if (tribe.name == "Corax")
-							ADD_TRAIT(user,TRAIT_CORAX,tribe) //This might be redundant considering we also add this trait in auspice.dm
-
-							auspice=/datum/auspice/theurge // we do not want player to have a choice in the auspice, Corax being theurges is already silly enough
+							ADD_TRAIT(user, TRAIT_CORAX, tribe) //This might be redundant considering we also add this trait in auspice.dm
+							// Convert Lupus to Corvid, and default Metis to Corvid since Corax don't have them
+							if (breed == BREED_LUPUS || breed == BREED_METIS)
+								breed = BREED_CORVID
+							auspice = /datum/auspice/theurge // we do not want player to have a choice in the auspice, Corax being theurges is already silly enough
 						else
-							if HAS_TRAIT(user,TRAIT_CORAX)
+							if (breed == BREED_CORVID)
+								breed = BREED_LUPUS
+							if (HAS_TRAIT(user,TRAIT_CORAX))
 								REMOVE_TRAIT(user, TRAIT_CORAX,tribe)
 
 
@@ -2730,7 +2734,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
 
-					var/new_breed = tgui_input_list(user, "Choose your Breed:", "Breed", sort_list(list("Homid", "Metis", "Lupus")))
+					var/available_breeds = list(BREED_HOMID, BREED_METIS, BREED_LUPUS)
+					// Alternative breed choices for the Corax
+					if (istype(tribe, /datum/garou_tribe/corax))
+						available_breeds = list(BREED_HOMID, BREED_CORVID)
+
+					var/new_breed = tgui_input_list(user, "Choose your Breed:", "Breed", sort_list(available_breeds))
 					if (new_breed)
 						breed = new_breed
 
@@ -3806,22 +3815,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.auspice.tribe = tribe
 		character.auspice.on_gain(character)
 
-		switch(breed)
-			if("Homid")
-				character.auspice.gnosis = 1 + character.extra_gnosis
-				character.auspice.start_gnosis = 1 + character.extra_gnosis
-				character.auspice.base_breed = "Homid"
-			if("Lupus")
-				character.auspice.gnosis = 5 + character.extra_gnosis
-				character.auspice.start_gnosis = 5 + character.extra_gnosis
-				character.auspice.base_breed = "Lupus"
-			if("Metis")
-				character.auspice.gnosis = 3 + character.extra_gnosis
-				character.auspice.start_gnosis = 3 + character.extra_gnosis
-				character.auspice.base_breed = "Crinos"
+		// TFN EDIT START: Enter breed form on death
+		character.auspice.set_breed(breed, character)
+
+		character.auspice.gnosis += character.extra_gnosis
+		character.auspice.start_gnosis += character.extra_gnosis
+		// TFN EDIT END: Enter breed form on death
 		if(character.transformator?.crinos_form && character.transformator?.lupus_form && !HAS_TRAIT(character,TRAIT_CORAX))
-			var/mob/living/simple_animal/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
-			var/mob/living/simple_animal/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
+			var/mob/living/carbon/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
 
 			if(!crinos)
 				character.transformator.crinos_form = null
@@ -3871,8 +3873,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
 			crinos.health = crinos.maxHealth
 		else if(HAS_TRAIT(character,TRAIT_CORAX)/*character.transformator?.corax_form && character.transformator?.corvid_form*/) // if we have the Corax tribe, use the Corax forms instead..
-			var/mob/living/simple_animal/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
-			var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
+			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
 
 			if(!cor_crinos)
 				character.transformator.corax_form = null

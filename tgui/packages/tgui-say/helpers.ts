@@ -1,56 +1,68 @@
 import { Channel } from './ChannelIterator';
-import { WINDOW_SIZES } from './constants';
+import { RADIO_PREFIXES, WindowSize } from './constants';
 
 /**
  * Once byond signals this via keystroke, it
  * ensures window size, visibility, and focus.
  */
-export const windowOpen = (channel: Channel) => {
-  setWindowSizeAndVisibility(true, WINDOW_SIZES.small);
+export function windowOpen(channel: Channel): void {
+  setWindowVisibility(true);
   Byond.sendMessage('open', { channel });
-};
+}
 
 /**
  * Resets the state of the window and hides it from user view.
  * Sending "close" logs it server side.
  */
-export const windowClose = () => {
-  setWindowSizeAndVisibility(false, WINDOW_SIZES.small);
+export function windowClose(): void {
+  setWindowVisibility(false);
   Byond.winset('map', {
     focus: true,
   });
   Byond.sendMessage('close');
-};
-
-/** Some QoL to hide the window on load. Doesn't log this event */
-export const windowLoad = () => {
-  Byond.winset('tgui_say', {
-    pos: '848,500',
-  });
-  setWindowSizeAndVisibility(false, WINDOW_SIZES.small);
-  Byond.winset('map', {
-    focus: true,
-  });
-};
+}
 
 /**
  * Modifies the window size.
  */
-export const windowSet = (size = WINDOW_SIZES.small) => {
-  setWindowSizeAndVisibility(true, size);
-};
-
-/** Helper function to set window size and visibility */
-const setWindowSizeAndVisibility = (isVisible: boolean, size: number) => {
-  const sizeStr = `${WINDOW_SIZES.width}x${size}`;
-
-  Byond.winset('tgui_say', {
-    'is-visible': isVisible,
-    size: sizeStr,
-  });
+export function windowSet(size = WindowSize.Small): void {
+  let sizeStr = `${WindowSize.Width}x${size}`;
 
   Byond.winset('tgui_say.browser', {
-    'is-visible': isVisible,
     size: sizeStr,
   });
-};
+
+  Byond.winset('tgui_say', {
+    size: sizeStr,
+  });
+}
+
+/** Helper function to set window size and visibility */
+function setWindowVisibility(visible: boolean): void {
+  Byond.winset('tgui_say', {
+    'is-visible': visible,
+    size: `${WindowSize.Width}x${WindowSize.Small}`,
+  });
+}
+
+const CHANNEL_REGEX = /^[:.]\w\s/;
+
+/** Tests for a channel prefix, returning it or none */
+export function getPrefix(
+  value: string,
+): keyof typeof RADIO_PREFIXES | undefined {
+  if (!value || value.length < 3 || !CHANNEL_REGEX.test(value)) {
+    return;
+  }
+
+  let adjusted = value
+    .slice(0, 3)
+    ?.toLowerCase()
+    ?.replace('.', ':') as keyof typeof RADIO_PREFIXES;
+
+  if (!RADIO_PREFIXES[adjusted]) {
+    return;
+  }
+
+  return adjusted;
+}

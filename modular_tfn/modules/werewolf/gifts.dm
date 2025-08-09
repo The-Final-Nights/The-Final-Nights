@@ -219,7 +219,7 @@
 				to_chat(owner, "<span class='warning'>Your skin is thin again...</span>")
 		else
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/resist_pain.ogg', 75, FALSE)
-			var/mob/living/simple_animal/werewolf/H = owner
+			var/mob/living/carbon/werewolf/H = owner
 			H.werewolf_armor = 40
 			to_chat(owner, "<span class='notice'>You feel your skin thickering...</span>")
 			spawn(15 SECONDS)
@@ -404,7 +404,7 @@
 
 /datum/action/change_apparel/Trigger(trigger_flags)
 	. = ..()
-	var/mob/living/simple_animal/werewolf/crinos/crinos = owner
+	var/mob/living/carbon/werewolf/crinos/crinos = owner
 	if(crinos.stat == CONSCIOUS)
 		var/list/apparel = list("nothing", "loincloth", "green_tribal", "beige_tribal", "leather_mantle", "studs", "dark_mantle", "loincloth_armband", "skull_necklace", "metal_armour", "fur_mantle", "fur_necklace_and_vambrace", "armour_loincloth")
 		var/result = tgui_input_list(crinos, "Select your Crinos form's apparel:", "Appearance Selection", sort_list(apparel))
@@ -421,7 +421,7 @@
 /datum/action/gift/hispo/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed)
-		var/mob/living/simple_animal/werewolf/lupus/H = owner
+		var/mob/living/carbon/werewolf/lupus/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
 		var/matrix/ntransform = matrix(owner.transform)
 		if(H.hispo)
@@ -433,7 +433,7 @@
 			animate(owner, transform = ntransform, color = "#000000", time = DOGGY_ANIMATION_COOLDOWN)
 			addtimer(CALLBACK(src, PROC_REF(transform_hispo), H), DOGGY_ANIMATION_COOLDOWN)
 
-/datum/action/gift/hispo/proc/transform_lupus(mob/living/simple_animal/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_lupus(mob/living/carbon/werewolf/lupus/H)
 	if(HAS_TRAIT(H, TRAIT_DOGWOLF))
 		H.icon = 'code/modules/wod13/werewolf_lupus.dmi'
 	else
@@ -442,7 +442,6 @@
 	H.pixel_z = 0
 	H.melee_damage_lower = initial(H.melee_damage_lower)
 	H.melee_damage_upper = initial(H.melee_damage_upper)
-	H.armour_penetration = initial(H.armour_penetration)
 	H.hispo = FALSE
 	H.regenerate_icons()
 	H.update_transform()
@@ -451,13 +450,12 @@
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/hispoform)
 	H.add_movespeed_modifier(/datum/movespeed_modifier/lupusform)
 
-/datum/action/gift/hispo/proc/transform_hispo(mob/living/simple_animal/werewolf/lupus/H)
+/datum/action/gift/hispo/proc/transform_hispo(mob/living/carbon/werewolf/lupus/H)
 	H.icon = 'code/modules/wod13/hispo.dmi'
 	H.pixel_w = -16
 	H.pixel_z = -16
 	H.melee_damage_lower = 45
 	H.melee_damage_upper = 45
-	H.armour_penetration = 50
 	H.hispo = TRUE
 	H.regenerate_icons()
 	H.update_transform()
@@ -500,7 +498,7 @@
 				return
 			else
 				H.remove_overlay(PROTEAN_LAYER)
-				var/mob/living/simple_animal/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
+				var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
 				var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
 				H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
 				H.apply_overlay(PROTEAN_LAYER)
