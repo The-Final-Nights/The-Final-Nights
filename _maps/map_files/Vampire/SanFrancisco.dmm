@@ -8273,6 +8273,14 @@
 /obj/effect/decal/rugs,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren)
+"clO" = (
+/obj/effect/decal/cleanable/oil,
+/obj/vampire_car/track/volkswagen{
+	dir = 1;
+	access = "anarch"
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/anarch/garage)
 "clQ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -75978,13 +75986,6 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm)
-"tPB" = (
-/obj/vampire_car/track/volkswagen{
-	dir = 1;
-	access = "anarch"
-	},
-/turf/open/floor/plating/asphalt,
-/area/vtm/anarch/garage)
 "tPD" = (
 /obj/structure/table/wood,
 /obj/machinery/mineral/equipment_vendor/fastfood/costumes,
@@ -171941,7 +171942,7 @@ iiw
 iWP
 iWP
 iWP
-tPB
+iWP
 iWP
 lzl
 mnI
@@ -172143,7 +172144,7 @@ iiw
 iWP
 iWP
 glB
-spy
+clO
 iWP
 lzl
 pst
