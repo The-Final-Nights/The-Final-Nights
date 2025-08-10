@@ -320,6 +320,7 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_implant)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_venom)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_stun)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_stomach)
 
 	// owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living) (Commented out because crafting it resulted in the crafting icon in tgui to go infinitely and stop the crafting menu from working)
 
@@ -386,6 +387,7 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzijelly)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzicreature)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/cattzi)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_ears)
 
 /datum/action/basic_vicissitude
 	name = "Vicissitude Upgrade"
@@ -661,7 +663,8 @@
 	. = ..()
 	if (!owner.mind)
 		return
-	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_heart)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_adrenal)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_eyes_thermal)
 	ADD_TRAIT(owner, TRAIT_SURGEON, MAGIC)
 
 //BLOODFORM
@@ -697,6 +700,9 @@
 
 /datum/discipline_power/vicissitude/bloodform/post_gain()
 	. = ..()
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_heart)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_med)
+
 	for(var/datum/action/basic_vicissitude/vicissitude_upgrade in owner.actions)
 		vicissitude_upgrade.Remove(owner)
 
