@@ -41,24 +41,40 @@
 /datum/crafting_recipe/tzi_trench
 	name = "Leather-Bone Trenchcoat (Armor)"
 	time = 50
-	reqs = list(/obj/item/stack/human_flesh = 50, /obj/item/spine = 1)
+	reqs = list(/obj/item/stack/human_flesh = 30, /obj/item/spine = 1)
 	result = /obj/item/clothing/suit/vampire/trench/tzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
 /datum/crafting_recipe/tzi_med
 	name = "Medical Hand (Healing)"
-	time = 50
+	time = 100
 	reqs = list(/obj/item/stack/human_flesh = 35, /obj/item/bodypart/r_arm = 1, /obj/item/organ/heart = 1, /obj/item/organ/tongue = 1)
 	result = /obj/item/organ/cyberimp/arm/medibeam
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
-/datum/crafting_recipe/tzi_heart
-	name = "Second Heart (Antistun)"
+/datum/crafting_recipe/tzi_adrenal
+	name = "Second Adrenal Gland (Antistun)"
 	time = 50
-	reqs = list(/obj/item/stack/human_flesh = 25, /obj/item/organ/heart = 1)
+	reqs = list(/obj/item/stack/human_flesh = 15, /obj/item/organ/heart = 1)
 	result = /obj/item/organ/cyberimp/brain/anti_stun/tzi
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzi_heart
+	name = "Second Heart"
+	time = 100
+	reqs = list(/obj/item/stack/human_flesh = 30, /obj/item/organ/heart = 1, )
+	result = /obj/item/organ/cyberimp/chest/reviver/tzimisce
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzi_stomach
+	name = "Secondary Stomach"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 15, /obj/item/organ/stomach = 1, )
+	result = /obj/item/organ/cyberimp/chest/nutriment/tzimisce
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -67,6 +83,14 @@
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 15, /obj/item/organ/eyes = 1)
 	result = /obj/item/organ/eyes/night_vision/nightmare
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzi_eyes_thermal
+	name = "Better Eyes (Thermal)"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 25, /obj/item/organ/eyes = 1)
+	result = /obj/item/organ/eyes/thermal
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -83,6 +107,14 @@
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 15, /obj/item/guts = 1)
 	result = /obj/item/organ/cyberimp/arm/tzimisce/shock
+	always_available = FALSE
+	category = CAT_TZIMISCE
+
+/datum/crafting_recipe/tzi_ears
+	name = "Feline Ears"
+	time = 50
+	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/organ/ears = 1)
+	result = /obj/item/organ/ears/cat
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
@@ -114,7 +146,7 @@
 /datum/crafting_recipe/tziregenerativecore
 	name = "Pulsating Heart"
 	time = 50
-	reqs = list(/obj/item/organ/heart = 1, /obj/item/reagent_containers/blood/elite = 1)
+	reqs = list(/obj/item/organ/heart = 1,  /obj/item/stack/human_flesh = 10)
 	result = /obj/item/organ/regenerative_core/legion/tzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
