@@ -34,8 +34,8 @@
 
 /datum/bioware/relocated_heart/on_gain()
 	..()
-  stakeimmune = TRUE
+	owner.stakeimmune = TRUE
 
 /datum/bioware/relocated_heart/on_lose()
 	..()
-  stakeimmune = FALSE
+	owner.stakeimmune = FALSE
