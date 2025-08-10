@@ -1,0 +1,4 @@
+author: "chazzyjazzy"
+delete-after: True
+changes:
+  - qol: "NPCs now only speak if annoyed by a player."

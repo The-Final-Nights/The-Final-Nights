@@ -37,3 +37,4 @@
   XeonMations:
   - balance: Canonized thaumaturgy's abilities, making them on par with path of blood
       v20 rules.
+  - bugfix: Fixed a bug related to trusted players and garou renown
