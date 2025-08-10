@@ -23,8 +23,8 @@
 	if(surgery.operated_bodypart)
 		var/obj/item/bodypart/target_limb = surgery.operated_bodypart
 		if(target_limb.wound_damage_multiplier == 0.5)
-			display_results(user, target, span_notice("You can't reinforce [target]'s limbs any further!",
-				span_notice("[user] starts doing something inside [target]'s [parse_zone(target_zone)].")
+			display_results(user, target, span_notice("You can't reinforce [target]'s limbs any further!",)
+				span_notice("[user] starts doing something inside [target]'s [parse_zone(target_zone)]."))
 	return ..()
 
 /datum/surgery_step/reinforce_limb/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
