@@ -20,25 +20,18 @@
 	display_results(user, target, span_notice("You start wrapping muscle and bone to reinforce [target]'s limbs.",
 		span_notice("[user] starts doing something inside [target]'s [parse_zone(target_zone)].",
 		span_notice("[user] starts manipulating [target]'s [parse_zone(target_zone)].")
+	if(surgery.operated_bodypart)
+		var/obj/item/bodypart/target_limb = surgery.operated_bodypart
+		if(target_limb.wound_damage_multiplier == 0.5)
+			display_results(user, target, span_notice("You can't reinforce [target]'s limbs any further!",
+				span_notice("[user] starts doing something inside [target]'s [parse_zone(target_zone)].")
+	return ..()
 
 /datum/surgery_step/reinforce_limb/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
-	display_results(user, target, span_notice("You reinforce [target]'s limbs, reinforcing the interior!",
+	display_results(user, target, span_notice("You reinforce [target]'s limbs, reinforcing the interior as much as possible!",
 		span_notice("[user] finishes manipulating [target]'s [parse_zone(target_zone)]!",
 		span_notice("[user] finishes manipulating [target]'s [parse_zone(target_zone)].")
   if(surgery.operated_bodypart)
 	var/obj/item/bodypart/target_limb = surgery.operated_bodypart
-	target_limb.drop_limb()
+	target_limb.wound_damage_multiplier = 0.5 //Just sets it once, so you can't stack it infinitely.
 	return ..()
-
-/datum/bioware/muscled_veins
-	name = "Threaded Veins"
-	desc = "The circulatory system is woven into a mesh, severely reducing the amount of blood lost from wounds."
-	mod_type = BIOWARE_CIRCULATION
-
-/datum/bioware/muscled_veins/on_gain()
-	..()
-	ADD_TRAIT(owner, TRAIT_STABLEHEART, "muscled_veins")
-
-/datum/bioware/muscled_veins/on_lose()
-	..()
-	REMOVE_TRAIT(owner, TRAIT_STABLEHEART, "muscled_veins")
