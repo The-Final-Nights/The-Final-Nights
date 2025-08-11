@@ -272,7 +272,7 @@
 		target = shapeshift.stored
 		shapeshift.restore()
 	if(iswerewolf(target) || isgarou(target))
-		switch(target.client.prefs.auspice.base_breed)
+		switch(target.client.prefs.auspice.breed_form)
 			if("Homid")
 				target.transformator.transform(target, "Homid", TRUE)
 			if("Lupus")
