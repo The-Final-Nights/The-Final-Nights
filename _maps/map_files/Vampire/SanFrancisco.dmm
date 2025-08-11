@@ -49425,6 +49425,7 @@
 /obj/item/ammo_box/magazine/vampautoshot,
 /obj/item/ammo_box/magazine/vampautoshot,
 /obj/item/ammo_box/vampire/c12g/buck,
+/obj/item/ammo_box/magazine/vampautoshot,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f2)
 "mVH" = (
