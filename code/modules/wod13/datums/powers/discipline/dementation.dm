@@ -401,7 +401,7 @@
 /datum/discipline_power/dementation/stain_the_soul/pre_activation_checks(mob/living/target)
 
 	if(dementation_check(owner, target, base_difficulty = 6))
-	       do_cooldown(cooldown_length)
+		do_cooldown(cooldown_length)
 		return FALSE
 	else
 		return TRUE
