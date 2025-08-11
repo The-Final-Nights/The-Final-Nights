@@ -87,3 +87,5 @@
 #define TRAIT_THINNED_BLOOD "thinned_blood"
 /// Gain an extra BP from humans
 #define TRAIT_QUICKEN_MORTAL_BLOOD "quicken_mortal_blood"
+// If the trait owner knows thaumaturgical rituals.
+#define TRAIT_THAUMATURGY_KNOWLEDGE "thaumaturgy_knowledge"

@@ -26,7 +26,7 @@
 
 	childe.set_species(/datum/species/kindred)
 	childe.set_clan(clan, FALSE)
-	childe.generation = generation + 1
+	childe.generation = initial(generation) + 1
 	if(prob(5))
 		childe.set_clan(/datum/vampire_clan/caitiff)
 

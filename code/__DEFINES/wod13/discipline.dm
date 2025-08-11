@@ -3,6 +3,8 @@
 #define TURNS * 5 SECONDS
 ///Duration of one "scene", which is 3 minutes according to us
 #define SCENES * 3 MINUTES
+//Duration of one ingame hour. Apparently this is 22.5 minutes.
+#define INGAME_HOURS * 22.5 MINUTES
 
 //targeting bitflags, NONE or 0 if targeting self exclusively
 ///Allows for self to also be selected in ranged targeting, SET TO 0 IF NOT TARGETED OR RANGED
@@ -45,6 +47,9 @@
 #define DISC_CHECK_SPEAK (1<<6)
 ///Caster must be able to see
 #define DISC_CHECK_SEE (1<<7)
+///Caster must see the target directly (without the usage of auspex for example)
+#define DISC_CHECK_DIRECT_SEE (1<<8)
+
 
 //power type defines, will be useful when it's made generic
 ///Power is a Discipline of the Vampire: The Masquerade game line

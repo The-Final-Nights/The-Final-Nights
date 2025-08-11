@@ -63,7 +63,7 @@
 /obj/ritualrune/attack_hand(mob/user)
 	if(!activated)
 		var/mob/living/L = user
-		if(L.thaumaturgy_knowledge)
+		if(HAS_TRAIT(L, TRAIT_THAUMATURGY_KNOWLEDGE))
 			L.say(word)
 			L.Immobilize(30)
 			last_activator = user
@@ -400,14 +400,15 @@
 /obj/ritualrune/curse/attack_hand(mob/user)
 	if(!activated)
 		var/mob/living/L = user
-		if(L.thaumaturgy_knowledge)
-			L.say(word)
-			L.Immobilize(30)
-			last_activator = user
-			activator_bonus = L.thaum_damage_plus
-			animate(src, color = rgb(255, 64, 64), time = 10)
-			complete()
-			addtimer(CALLBACK(src, PROC_REF(start_curse), user), 1 SECONDS)
+		if(!HAS_TRAIT(L, TRAIT_THAUMATURGY_KNOWLEDGE))
+			return
+		L.say(word)
+		L.Immobilize(30)
+		last_activator = user
+		activator_bonus = L.thaum_damage_plus
+		animate(src, color = rgb(255, 64, 64), time = 10)
+		complete()
+		addtimer(CALLBACK(src, PROC_REF(start_curse), user), 1 SECONDS)
 		return
 
 	// If already activated but not channeling, allow restarting

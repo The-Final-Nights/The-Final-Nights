@@ -261,7 +261,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	if(new_runlevel == RUNLEVEL_POSTGAME)
 		GLOB.canon_event = FALSE
 		// TFN EDIT REFACTOR START
-		for(var/mob/living/simple_animal/werewolf/W in GLOB.player_list)
+		for(var/mob/living/carbon/werewolf/W in GLOB.player_list)
 			if(W?.stat != DEAD && W?.key)
 				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(W.key)]
 				char_sheet?.add_experience(3)
