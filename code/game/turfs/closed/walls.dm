@@ -163,7 +163,7 @@
 		user.visible_message(
 			span_danger("[user] smashes the [src]!"),
 			span_userdanger("You smash the [src]"),
-			span_hear("You hear a booming smash!")
+			span_hear("You hear a booming smash!"))
 	return TRUE
 
 /**
