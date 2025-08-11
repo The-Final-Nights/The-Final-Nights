@@ -46,6 +46,9 @@
 	/// If this Clan needs a whitelist to select and play
 	var/whitelisted
 
+	/// If this Clan is actually vampiric or some secret second thing. Defaults to true.
+	var/vampiric = TRUE
+
 /**
  * Applies Clan-specific effects to the mob
  * gaining this Clan. Will alter the mob's
@@ -82,8 +85,9 @@
 		ADD_TRAIT(vampire, trait, CLAN_TRAIT)
 
 	//this needs to be adjusted to be more accurate for blood spending rates
-	var/datum/discipline/bloodheal/giving_bloodheal = new(clamp(11 - vampire.generation, 1, 10))
-	vampire.give_discipline(giving_bloodheal)
+	if (vampiric) //NUMINA ADDITION: Since we piggyback off the vampire clan system, need to make sure we aren't giving Humans bloodheal
+		var/datum/discipline/bloodheal/giving_bloodheal = new(clamp(11 - vampire.generation, 1, 10))
+		vampire.give_discipline(giving_bloodheal)
 
 	// Applies on_join_round effects when a client logs into this mob
 	if (joining_round)
@@ -109,10 +113,11 @@
 	for (var/trait in clan_traits)
 		REMOVE_TRAIT(vampire, trait, CLAN_TRAIT)
 
-	var/datum/species/kindred/vampire_species = vampire?.dna.species
-	var/datum/discipline/bloodheal/removing_bloodheal = vampire_species?.get_discipline(/datum/discipline/bloodheal)
-	if(removing_bloodheal)
-		qdel(removing_bloodheal)
+	if(isvampire(vampire)) //Runtimes if it runs on Humans with Numina. This sidesteps that. Numina users shouldn't have bloodheal to begin with.
+		var/datum/species/kindred/vampire_species = vampire?.dna.species
+		var/datum/discipline/bloodheal/removing_bloodheal = vampire_species?.get_discipline(/datum/discipline/bloodheal)
+		if(removing_bloodheal)
+			qdel(removing_bloodheal)
 
 	// Sets the vampire back to their default body sprite
 	if (alt_sprite && (GET_BODY_SPRITE(vampire) == alt_sprite))

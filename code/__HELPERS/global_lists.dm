@@ -3,6 +3,7 @@
 //////////////////////////
 
 GLOBAL_LIST_EMPTY_TYPED(vampire_clans, /datum/vampire_clan)	//>:3
+GLOBAL_LIST_EMPTY_TYPED(numina_clans, /datum/vampire_clan/numina) //TFN EDIT: Numina system
 GLOBAL_LIST_EMPTY(morality_list) // TFN EDIT: morality system
 GLOBAL_LIST_EMPTY(auspices_list)
 GLOBAL_LIST_EMPTY(tribes_list)
@@ -47,7 +48,7 @@ GLOBAL_LIST_EMPTY(glyph_list)
 		GLOB.species_list[S.id] = spath
 	sort_list(GLOB.species_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 
-	for(var/clan_type in subtypesof(/datum/vampire_clan))
+	for(var/clan_type in (subtypesof(/datum/vampire_clan) - subtypesof(/datum/vampire_clan/numina) - /datum/vampire_clan/numina))
 		var/datum/vampire_clan/clan = new clan_type
 		GLOB.vampire_clans[clan_type] = clan
 	sort_list(GLOB.vampire_clans)
@@ -72,6 +73,14 @@ GLOBAL_LIST_EMPTY(glyph_list)
 		var/datum/morality/S = new spath()
 		GLOB.morality_list[S.name] = spath
 	sort_list(GLOB.morality_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
+
+	// Numina clans
+
+	for(var/clan_type in subtypesof(/datum/vampire_clan/numina) + /datum/vampire_clan/numina)
+		var/datum/vampire_clan/numina/clan = new clan_type
+		GLOB.numina_clans[clan_type] = clan
+	sort_list(GLOB.numina_clans)
+
 	// TFN EDIT END
 
 	//Surgeries

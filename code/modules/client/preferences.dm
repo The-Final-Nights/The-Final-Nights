@@ -296,7 +296,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	blood = A.start_blood
 	lockpicking = A.start_lockpicking
 	athletics = A.start_athletics
-	clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
+	if(iskindred(src))
+		clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
+	else
+		clan = GLOB.numina_clans[/datum/vampire_clan/numina]
 	qdel(morality_path)
 	morality_path = new /datum/morality/humanity()
 	discipline_types = list()
@@ -801,6 +804,53 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 						if (possible_new_valerens.len && (player_experience >= 10))
 							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
+
+			if(pref_species.name == "Human")
+				dat += "<h2>[make_font_cool("GIFTS")]</h2>"
+				dat += "<b>Numina:</b> <a href='byond://?_src_=prefs;preference=numina;task=input'>[clan.name]</a><BR>"
+				dat += "<b>Description:</b> [clan.desc]<BR>"
+				dat += "<b>Curse:</b> [clan.curse]<BR>"
+				if (length(clan.accessories))
+					// No clan accessory, or unsupported one
+					if (!clan.accessories.Find(clan_accessory))
+						// Set to Clan's default accessory
+						if (clan.default_accessory)
+							clan_accessory = clan.default_accessory
+						// Can be null, so null it
+						else if (clan.accessories.Find("none"))
+							clan_accessory = null
+						// Must have an accessory, set to a random one
+						else
+							clan_accessory = pick(clan.accessories)
+
+					// Display clan accessory and allow selection
+					dat += "<b>Marks:</b> <a href='byond://?_src_=prefs;preference=clan_acc;task=input'>[clan_accessory ? clan_accessory : "none"]</a><BR>"
+				else
+					clan_accessory = null
+				dat += "<h2>[make_font_cool("DISCIPLINES")]</h2>"
+
+				for (var/i in 1 to discipline_types.len)
+					var/discipline_type = discipline_types[i]
+					var/datum/discipline/discipline = new discipline_type
+					var/discipline_level = discipline_levels[i]
+
+					var/cost
+					if (discipline_level <= 0)
+						cost = 10
+					else if (clan.name == NUMINA_BASE)
+						cost = discipline_level * 6
+					else if (clan.clan_disciplines.Find(discipline_type))
+						cost = discipline_level * 5
+					else
+						cost = discipline_level * 7
+
+					dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"]([discipline_level])"
+					if((player_experience >= cost) && (discipline_level != 5))
+						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
+					else
+						dat += "<BR>"
+					dat += "-[discipline.desc]<BR>"
+					qdel(discipline)
 
 
 			if(pref_species.name == "Ghoul")
@@ -2652,6 +2702,38 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						else
 							clan_accessory = pick(clan.accessories)
 
+				if("numina")
+					if(slotlocked || !(pref_species.id == "human"))
+						return
+
+					if(tgui_alert(user, "Are you sure you want to change your Numina? This will reset your Powers.", "Confirmation", list("Yes", "No")) != "Yes")
+						return
+
+					// Create a list of Clans that can be played by anyone or this user has a whitelist for
+					var/list/available_clans = list()
+					for(var/adding_clan in GLOB.numina_clans)
+						var/datum/vampire_clan/checking_clan = GLOB.numina_clans[adding_clan]
+						if(checking_clan.whitelisted && !SSwhitelists.is_whitelisted(user.ckey, checking_clan.name))
+							continue
+						available_clans += checking_clan
+					var/result = tgui_input_list(user, "Select a Numina", "Numina Selection", sort_list(available_clans))
+					if(!result)
+						return
+					clan = result
+
+					discipline_types = list()
+					discipline_levels = list()
+
+					if(clan.no_hair)
+						hairstyle = "Bald"
+					if(clan.no_facial)
+						facial_hairstyle = "Shaved"
+					if(length(clan.accessories))
+						if("none" in clan.accessories)
+							clan_accessory = null
+						else
+							clan_accessory = pick(clan.accessories)
+
 				if("derangement")
 
 					if(!(pref_species.id == "kindred" ) || clan.name != CLAN_MALKAVIAN)
@@ -3053,9 +3135,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/newtype = GLOB.species_list[result]
 						pref_species = new newtype()
 						switch(pref_species.id)
-							if("ghoul","human","kuei-jin")
+							if("ghoul","kuei-jin")
 								discipline_types.Cut()
 								discipline_levels.Cut()
+							if("human")
+								clan = GLOB.numina_clans[/datum/vampire_clan/numina]
+								discipline_types.Cut()
+								discipline_levels.Cut()
+								for (var/i in 1 to length(clan.clan_disciplines))
+									discipline_types += clan.clan_disciplines[i]
+									discipline_levels += 1
 							if("kindred")
 								clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
 								discipline_types.Cut()
