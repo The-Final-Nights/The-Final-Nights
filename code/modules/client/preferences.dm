@@ -613,8 +613,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "<a href='byond://?_src_=prefs;preference=renownrank;task=input'>Raise Renown Rank</a><BR>"
 					if(can_raise_gnosis && player_experience >= 50)
 						dat += "<a href='byond://?_src_=prefs;preference=extra_gnosis;task=input'>Raise Extra Gnosis ([extra_gnosis]/5) Cost: 50 EXP </a><BR>"
-					else if(renownrank < MAX_PUBLIC_RANK)
-						var/renownrequirement = RenownRequirements()
+					var/renownrequirement = RenownRequirements()
+					if(renownrank < MAX_PUBLIC_RANK || (SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER) && (renownrank < MAX_TRUSTED_RANK)))
 						dat += "<b>Needed To Raise Renown:</b> [renownrequirement]<BR>"
 					else
 						dat += "<BR>"

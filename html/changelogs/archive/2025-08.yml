@@ -37,3 +37,20 @@
   XeonMations:
   - balance: Canonized thaumaturgy's abilities, making them on par with path of blood
       v20 rules.
+  - bugfix: Fixed a bug related to trusted players and garou renown
+2025-08-10:
+  chazzyjazzy:
+  - qol: NPCs now only speak if annoyed by a player.
+  magicianofwands:
+  - bugfix: Setites no longer crawl like snails around lights and have a more appropriate
+      bane
+2025-08-11:
+  AlmostLikeClockwork:
+  - rscadd: Adds mags to the gio bank & warehouse
+  chazzyjazzy:
+  - bugfix: Cappadocian, Nosferatu, Kiasyd, and Gargoyle's slim and fat body models
+      now correctly work and are no longer invisible
+  - bugfix: Fixed Dominate 1's (Command) case sensitivity problem causing commands
+      to not have their effects apply
+  darkincarnate:
+  - rscadd: giovanni second/third floor/basement ritual room

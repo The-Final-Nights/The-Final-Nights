@@ -489,6 +489,10 @@
 		return
 	if(world.time <= last_annoy+50)
 		return
+	if(source && isliving(source))
+		var/mob/living/L = source
+		if(!L.ckey)
+			return
 	if(source)
 		spawn(rand(3, 7))
 			face_atom(source)

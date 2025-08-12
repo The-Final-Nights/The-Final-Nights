@@ -744,12 +744,9 @@
 		should_draw_greyscale = FALSE
 
 		var/datum/species/S = H.dna.species
-		if(S.limbs_id == "fhuman") //Snowflake code. I dont have the time or patience to figure out why specifically fat body types work differently than slim right now.
-			S.limbs_id = "human"
-		if(S.limbs_id == "shuman")
-			S.limbs_id = "human"
-		species_id = C.base_body_mod + S.limbs_id
-		S.limbs_id = species_id
+		// The species limbs_id should already be properly set by set_body_model()
+		species_id = S.limbs_id
+
 		species_flags_list = H.dna.species.species_traits
 
 		if(S.use_skintones)
