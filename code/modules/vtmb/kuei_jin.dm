@@ -414,7 +414,7 @@
 	//this one is on carbon instead of living which means it needs some annoying extra code
 	var/has_gnosis = FALSE
 	if (iscarbon(victim))
-		var/mob/living/simple_animal/werewolf_victim = victim
+		var/mob/living/carbon/werewolf_victim = victim
 		if (werewolf_victim.auspice?.gnosis > 0)
 			has_gnosis = TRUE
 

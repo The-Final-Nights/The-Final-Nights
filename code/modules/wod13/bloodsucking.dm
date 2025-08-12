@@ -158,6 +158,8 @@
 						SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 						AdjustMasquerade(-1)
 						if(do_after(src, 60 SECONDS, mob))
+							if(mob.has_status_effect(/datum/status_effect/blood_of_potency))
+								mob.remove_status_effect(/datum/status_effect/blood_of_potency)
 							if(K.generation >= generation)
 								message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(mob)]")
 								log_attack("[key_name(src)] successfully Diablerized [key_name(mob)].")

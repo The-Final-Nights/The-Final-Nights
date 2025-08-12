@@ -6,3 +6,51 @@
   - rscadd: The same goes for swag boots
   XeonMations:
   - code_imp: Updated SpacemannDMM to 1.10
+2025-08-05:
+  rye-rice, marshmellow105:
+  - image: P25 radios have new sprites, with onfloors and coloured distinctions for
+      police variants
+2025-08-06:
+  TheCarnalest:
+  - code_imp: Retyped werewolf mobs from /mob/living/simple_animal to /mob/living/carbon
+  - rscadd: Organs and organ damage now carries over between shifting forms
+  - rscadd: Corax now have their own breed selector
+  - bugfix: Werewolf armor has been fixed, so it will actually reduce incoming brute
+      damage
+  - bugfix: The warrior archetype works for non-Homid forms again
+2025-08-07:
+  AlmostLikeClockwork:
+  - rscadd: Adds 45acp to cargo orders for 400
+  - bugfix: fixed the price for 45acp at gunstores, from 2100 to 700
+  - rscadd: Added the rr part to diablerist quirk desc
+  Marshmellow105:
+  - bugfix: a bug with a sewer dungeon is amended and more bandits should spawn
+  - bugfix: minor plane var fixes in the library and nostown
+  TheTrueSilverRat:
+  - bugfix: changed stupid stupid idiotic op damage
+  XeonMations:
+  - bugfix: TGUI chat now auto-focuses on creation.
+2025-08-08:
+  AlmostLikeClockwork:
+  - bugfix: fixed Garou Crinos form hp, going back to 450
+2025-08-09:
+  XeonMations:
+  - balance: Canonized thaumaturgy's abilities, making them on par with path of blood
+      v20 rules.
+  - bugfix: Fixed a bug related to trusted players and garou renown
+2025-08-10:
+  chazzyjazzy:
+  - qol: NPCs now only speak if annoyed by a player.
+  magicianofwands:
+  - bugfix: Setites no longer crawl like snails around lights and have a more appropriate
+      bane
+2025-08-11:
+  AlmostLikeClockwork:
+  - rscadd: Adds mags to the gio bank & warehouse
+  chazzyjazzy:
+  - bugfix: Cappadocian, Nosferatu, Kiasyd, and Gargoyle's slim and fat body models
+      now correctly work and are no longer invisible
+  - bugfix: Fixed Dominate 1's (Command) case sensitivity problem causing commands
+      to not have their effects apply
+  darkincarnate:
+  - rscadd: giovanni second/third floor/basement ritual room
