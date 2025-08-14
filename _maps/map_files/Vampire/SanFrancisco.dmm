@@ -92004,9 +92004,9 @@
 	dir = 8;
 	color = "#636363"
 	},
-/obj/item/ammo_box/vampire/c44/silver,
 /obj/item/ammo_box/vampire/c9mm/silver,
 /obj/item/ammo_box/vampire/c45acp/silver,
+/obj/item/ammo_box/vampire/c556/silver,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
 "xME" = (
@@ -92612,6 +92612,7 @@
 /obj/structure/flora/ausbushes/fullgrass{
 	plane = 2.8
 	},
+/obj/structure/railing/metal/corner,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
 "xUH" = (
