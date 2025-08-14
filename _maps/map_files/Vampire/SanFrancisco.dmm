@@ -6215,6 +6215,25 @@
 /obj/effect/decal/cleanable/confetti,
 /turf/open/floor/light,
 /area/vtm/interior/strip)
+"bGZ" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/food/drinks/bottle/wine{
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/food/drinks/bottle/wine{
+	pixel_y = 10;
+	pixel_x = 8
+	},
+/obj/item/food/grown/berries{
+	pixel_y = 6;
+	pixel_x = 15
+	},
+/obj/item/food/grown/harebell{
+	pixel_y = 7;
+	pixel_x = -7
+	},
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "bHa" = (
 /obj/effect/decal/rugs,
 /obj/effect/turf_decal/siding/white{
@@ -8470,6 +8489,14 @@
 /obj/effect/decal/rugs,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren)
+"clO" = (
+/obj/effect/decal/cleanable/oil,
+/obj/vampire_car/track/volkswagen{
+	dir = 1;
+	access = "anarch"
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/anarch/garage)
 "clQ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -9574,9 +9601,6 @@
 /obj/item/food/grown/harebell{
 	pixel_y = 7;
 	pixel_x = 10
-	},
-/obj/machinery/light/prince{
-	dir = 1
 	},
 /obj/effect/turf_decal/siding/wood{
 	color = "#503e28";
@@ -27369,6 +27393,15 @@
 /mob/living/carbon/human/npc/stripper,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/strip)
+"hgF" = (
+/obj/effect/decal/asphaltline/alt{
+	pixel_x = -14
+	},
+/obj/vampire_car/retro/rand/anarch{
+	dir = 2
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/baywalk)
 "hgJ" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -27519,6 +27552,14 @@
 	color = "#636363"
 	},
 /obj/structure/table,
+/obj/machinery/recharger{
+	pixel_y = 5;
+	pixel_x = 6
+	},
+/obj/machinery/recharger{
+	pixel_y = 5;
+	pixel_x = -5
+	},
 /turf/closed/wall/vampwall/market/low,
 /area/vtm/interior/police/upstairs)
 "hiV" = (
@@ -33782,6 +33823,18 @@
 /obj/item/clothing/gloves/vampire/latex,
 /obj/item/clothing/gloves/vampire/latex,
 /obj/item/storage/box/masks,
+/obj/item/clothing/mask/gas/explorer{
+	name = "endron gas mask"
+	},
+/obj/item/clothing/mask/gas/explorer{
+	name = "endron gas mask"
+	},
+/obj/item/clothing/mask/gas/explorer{
+	name = "endron gas mask"
+	},
+/obj/item/clothing/mask/gas/explorer{
+	name = "endron gas mask"
+	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/wyrm_corrupted)
 "iOb" = (
@@ -52768,7 +52821,7 @@
 /obj/effect/decal/asphaltline/alt{
 	pixel_x = -14
 	},
-/obj/vampire_car/retro/rand{
+/obj/vampire_car/rand/anarch{
 	dir = 2
 	},
 /turf/open/floor/plating/asphalt,
@@ -173348,7 +173401,7 @@ diP
 eWO
 eWO
 pFK
-rIQ
+hgF
 rIQ
 adJ
 adJ
@@ -173752,7 +173805,7 @@ vWT
 eWO
 eWO
 pFK
-rIQ
+nCU
 rIQ
 adJ
 adJ
@@ -173964,7 +174017,7 @@ iiw
 iWP
 iWP
 glB
-spy
+clO
 iWP
 lzl
 pst
@@ -188126,7 +188179,7 @@ gxB
 eTw
 nIQ
 nIQ
-fVy
+bGZ
 oSl
 ijU
 eUP
