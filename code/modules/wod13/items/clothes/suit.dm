@@ -367,6 +367,12 @@
 	desc = "This'll give PETA something to cry about."
 	icon_state = "leopard_coat"
 //Police + Army
+
+/obj/item/clothing/suit/vampire/coat/police
+	name = "police raincoat"
+	icon_state = "policecoat"
+	desc = "A sturdy reflective raincoat tailored for wet weather patrols."
+
 /obj/item/clothing/suit/vampire/vest/police
 	name = "police duty vest"
 	icon_state = "pdvest"
