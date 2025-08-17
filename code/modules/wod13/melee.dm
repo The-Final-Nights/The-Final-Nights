@@ -137,7 +137,6 @@
 	name = "burning katana"
 	icon_state = "firetana"
 	pixel_w = -8
-	force = 40
 	damtype = BURN
 	item_flags = DROPDEL
 	is_iron = FALSE
@@ -152,7 +151,6 @@
 	name = "bloody katana"
 	color = "#bb0000"
 	pixel_w = -8
-	force = 40
 	damtype = CLONE
 	item_flags = DROPDEL
 	is_iron = FALSE
