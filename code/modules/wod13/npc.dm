@@ -81,7 +81,8 @@
 	if(!my_weapon && my_weapon_type)
 		my_weapon = new my_weapon_type(src)
 
-
+	if(!socialrole)
+		AssignSocialRole(pick(/datum/socialrole/usualmale, /datum/socialrole/usualfemale))
 
 	if(my_weapon)
 		has_weapon = TRUE

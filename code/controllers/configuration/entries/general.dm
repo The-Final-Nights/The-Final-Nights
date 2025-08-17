@@ -77,17 +77,32 @@
 /// log usage of tools
 /datum/config_entry/flag/log_tools
 
-/datum/config_entry/flag/log_game	// log game events
+/// log game events
+/datum/config_entry/flag/log_game
 
-/datum/config_entry/flag/log_mecha	// log mech data
+/// log mech data
+/datum/config_entry/flag/log_mecha
 
-/datum/config_entry/flag/log_virus	// log virology data
+/// log virology data
+/datum/config_entry/flag/log_virus
 
+/// log assets
 /datum/config_entry/flag/log_asset
 
-/datum/config_entry/flag/log_vote	// log voting
+/// log voting
+/datum/config_entry/flag/log_vote
 
-/datum/config_entry/flag/log_whisper	// log client whisper
+/// log manual zone switching
+/datum/config_entry/flag/log_zone_switch
+
+/// log client whisper
+/datum/config_entry/flag/log_whisper
+
+/// log attack messages
+/datum/config_entry/flag/log_attack
+
+/// log emotes
+/datum/config_entry/flag/log_emote
 
 /datum/config_entry/flag/log_subtle
 
@@ -130,6 +145,8 @@
 /datum/config_entry/flag/log_job_debug	// log roundstart divide occupations debug information to a file
 
 /datum/config_entry/flag/log_shuttle // log shuttle related actions, ie shuttle computers, shuttle manipulator, emergency console
+
+/datum/config_entry/flag/log_timers_on_bucket_reset // logs all timers in buckets on automatic bucket reset (Useful for timer debugging)
 
 /datum/config_entry/flag/allow_admin_asaycolor //Allows admins with relevant permissions to have a personalized asay color
 
@@ -542,7 +559,16 @@
 
 /datum/config_entry/flag/auto_profile
 
-/datum/config_entry/string/centcom_ban_db	// URL for the CentCom Galactic Ban DB API
+/datum/config_entry/number/profiler_interval
+	default = 300 SECONDS
+
+/datum/config_entry/number/drift_dump_threshold
+	default = 4 SECONDS
+
+/datum/config_entry/number/drift_profile_delay
+	default = 15 SECONDS
+
+/datum/config_entry/string/centcom_ban_db // URL for the CentCom Galactic Ban DB API
 
 /datum/config_entry/string/centcom_source_whitelist
 
