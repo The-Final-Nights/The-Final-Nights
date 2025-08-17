@@ -293,3 +293,6 @@
 
 /// Properly wielded two handed item
 #define TRAIT_WIELDED "wielded"
+
+//Doesn't enter Torpor (For Kindred and KJ only)
+#define TRAIT_NO_TORPOR "no_torpor"
