@@ -296,3 +296,6 @@
 
 //Doesn't enter Torpor (For Kindred and KJ only)
 #define TRAIT_NO_TORPOR "no_torpor"
+
+//Can't have their blood drunk
+#define TRAIT_NO_DRINK_FROM "no_drink_from"
