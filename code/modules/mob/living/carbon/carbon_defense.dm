@@ -66,7 +66,6 @@
 							"<span class='userdanger'>You catch [I] in mid-air!</span>")
 			throw_mode_off(THROW_MODE_TOGGLE)
 			return TRUE
-	do_rage_from_attack()
 	return ..()
 
 /mob/living/carbon/send_item_attack_message(obj/item/I, mob/living/user, hit_area, def_zone)
@@ -117,7 +116,7 @@
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /mob/living/carbon/attack_hand(mob/living/carbon/human/user, list/modifiers)
 
-	if(user.combat_mode)
+	if(user.combat_mode && (user != src))
 		do_rage_from_attack(user)
 
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_CANCEL_ATTACK_CHAIN)

@@ -272,6 +272,11 @@
 	if (!can_activate_untargeted(alert))
 		return FALSE
 
+	if ((check_flags & DISC_CHECK_DIRECT_SEE) && !can_see(owner, target, range))
+		if (alert)
+			to_chat(owner, span_warning("You cannot cast [src] without being in direct line of sight!"))
+		return FALSE
+
 	//self activated so target doesn't matter
 	if (target_type == NONE)
 		return TRUE

@@ -16,7 +16,7 @@
 
 /obj/structure/c_transit_tube/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/simple_rotation, AfterRotation = CALLBACK(src, .proc/AfterRotation))
+	AddComponent(/datum/component/simple_rotation, post_rotation = CALLBACK(src, PROC_REF(post_rotation)))
 
 /obj/structure/c_transit_tube/proc/can_wrench_in_loc(mob/user)
 	var/turf/source_turf = get_turf(loc)
@@ -28,7 +28,7 @@
 			return FALSE
 	return TRUE
 
-/obj/structure/c_transit_tube/proc/AfterRotation(mob/user, degrees)
+/obj/structure/c_transit_tube/proc/post_rotation(mob/user, degrees)
 	if(flipped_build_type && degrees == ROTATION_FLIP)
 		setDir(turn(dir, degrees)) //Turn back we don't actually flip
 		flipped = !flipped

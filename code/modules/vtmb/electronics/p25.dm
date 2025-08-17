@@ -230,7 +230,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	name = "police P25 linker"
 	desc = "A stationary P25 radio transceiver that handles radio connections."
 	icon = 'icons/obj/radio.dmi'
-	icon_state = "walkietalkie"
+	icon_state = "pwalkietalkie"
 	anchored = TRUE
 	density = TRUE
 	var/obj/machinery/p25transceiver/police/transceiver
@@ -272,6 +272,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 /obj/machinery/p25transceiver/police
 	name = "police P25 transceiver"
 	desc = "A P25 radio transceiver configured for police communications."
+	icon_state = "pwalkietalkie"
 	p25_network = "police"
 	var/last_emergency = 0
 	var/emergency_cooldown = 600
@@ -447,6 +448,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	desc = "A rugged, high-performance two-way radio designed for secure, clear communication in demanding environments, featuring a durable shoulder microphone for hands-free operation. Use .r to transmit through the radio and alt-click to toggle radio receiving."
 	icon = 'icons/obj/radio.dmi'
 	icon_state = "p25"
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_EARS
 	worn_icon = "blank" // needed so that weird pink default thing doesn't show up
@@ -677,6 +679,7 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 /obj/item/p25radio/police
 	name = "P25 police radio"
 	desc = "A police-issue high-performance two-way radio designed for secure, clear communication in demanding environments, featuring a durable shoulder microphone for hands-free operation. Use .r to transmit and alt-click to toggle receiving, dispatch monitoring, or press your panic button."
+	icon_state = "pp25"
 	var/dispatch_monitoring = TRUE
 	var/last_status_change = 0
 	var/status_cooldown = 100

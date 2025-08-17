@@ -176,7 +176,7 @@ SUBSYSTEM_DEF(traumas)
 		"aliens" = typecacheof(list(/turf/open/floor/plating/abductor, /turf/open/floor/plating/abductor2,
 			/turf/open/floor/mineral/abductor, /turf/closed/wall/mineral/abductor
 		)),
-		"security" = typecacheof(list(/turf/open/floor/plating/church, /turf/open/floor/plating/saint)),
+		//TFN Removal - Baali Fancy Plating Bugfix - Original Line : 	Line 179 : 	"security" = typecacheof(list(/turf/open/floor/plating/church, /turf/open/floor/plating/saint)),
 		"falling" = typecacheof(list(/turf/open/chasm, /turf/open/floor/fakepit))
 	)
 

@@ -6,10 +6,11 @@
 	var/component_type = /datum/component/storage/concrete
 
 	//WoD13 vars start here :3
-
-	var/grid = TRUE /// Determines whether the container uses grid-based inventory.
+	/// Determines whether the container uses grid-based inventory. Cant find anything acctually using this.
+	var/grid = TRUE
+	var/storage_max_columns
+	var/storage_max_rows
 	var/storage_flags = NONE /// Flags determining how the storage can be accessed.
-
 	//WoD13 vars end here :3
 
 /obj/item/storage/get_dumping_location(obj/item/storage/source,mob/user)
@@ -20,7 +21,8 @@
 	PopulateContents()
 
 /obj/item/storage/ComponentInitialize()
-	AddComponent(component_type)
+	//Storage shouldnt even be a component in this first place, tg handles it with a datum, you should tweak vars via init args not subtypes, yet here we are.
+	AddComponent(component_type, null, _screen_max_columns = storage_max_columns, _screen_max_rows = storage_max_rows)
 
 /obj/item/storage/AllowDrop()
 	return FALSE
