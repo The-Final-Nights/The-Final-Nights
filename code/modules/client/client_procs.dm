@@ -588,26 +588,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(!query_client_in_db.Execute())
 		qdel(query_client_in_db)
 		return
-	/*
-	//If we aren't an admin, and the flag is set
-	if(CONFIG_GET(flag/panic_bunker) && !holder && !GLOB.deadmins[ckey] && !bunker_bypass_check())
-		var/reject_message = "Failed Login: [key] - New account attempting to connect during panic bunker"
-		log_access(reject_message)
-		message_admins("<span class='adminnotice'>[reject_message]</span>")
-		var/message = CONFIG_GET(string/panic_bunker_message)
-		to_chat(src, message)
-		var/list/connectiontopic_a = params2list(connectiontopic)
-		var/list/panic_addr = CONFIG_GET(string/panic_server_address)
-		if(panic_addr && !connectiontopic_a["redirect"])
-			var/panic_name = CONFIG_GET(string/panic_server_name)
-			to_chat(src, "<span class='notice'>Sending you to [panic_name ? panic_name : panic_addr].</span>")
-			winset(src, null, "command=.options")
-			src << link("[panic_addr]?redirect=1")
-		qdel(query_client_in_db)
-		qdel(src)
-		return
-	// TFN EDIT END
-	*/
 
 	var/client_is_in_db = query_client_in_db.NextRow()
 	// TFN EDIT ADDITION START: code borrowed from bubberstation & skyrat
@@ -629,7 +609,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			return
 	// TFN EDIT ADDITION END
 
-	if(!query_client_in_db.NextRow())
+	if(!client_is_in_db)
 		new_player = 1
 		account_join_date = findJoinDate()
 		var/datum/db_query/query_add_player = SSdbcore.NewQuery({"
@@ -673,6 +653,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 					)
 					if(!query_datediff.Execute())
 						qdel(query_datediff)
+						qdel(query_get_client_age)
 						return
 					if(query_datediff.NextRow())
 						account_age = text2num(query_datediff.item[1])

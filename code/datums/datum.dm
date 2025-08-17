@@ -17,6 +17,10 @@
 	  */
 	var/gc_destroyed
 
+	/// Open uis owned by this datum
+	/// Lazy, since this case is semi rare
+	var/list/open_uis
+
 	/// Active timers with this datum as the target
 	var/list/active_timers
 	/// Status traits attached to this datum
@@ -298,7 +302,7 @@
 	ASSERT(isatom(src) || istype(src, /image))
 	var/atom/atom_cast = src // filters only work with images or atoms.
 	atom_cast.filters = null
-	filter_data = sortTim(filter_data, GLOBAL_PROC_REF(cmp_filter_data_priority), TRUE)
+	sortTim(filter_data, GLOBAL_PROC_REF(cmp_filter_data_priority), TRUE)
 	for(var/filter_raw in filter_data)
 		var/list/data = filter_data[filter_raw]
 		var/list/arguments = data.Copy()

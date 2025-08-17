@@ -48,6 +48,10 @@
 #error Your version of BYOND is too out-of-date to compile this project. Go to https://secure.byond.com/download and update.
 #error You need version 516.1658 or higher
 #endif
+//Log the full sendmaps profile on 514.1556+, any earlier and we get bugs or it not existing
+#if DM_VERSION >= 514 && DM_BUILD >= 1556
+#define SENDMAPS_PROFILE
+#endif
 
 //Additional code for the above flags.
 #ifdef TESTING

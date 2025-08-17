@@ -1,4 +1,0 @@
-author: "chazzyjazzy"
-delete-after: True
-changes:
-  - bugfix: "Baalis no longer fear certain floor tiles."
