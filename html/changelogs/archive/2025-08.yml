@@ -68,3 +68,6 @@
   - rscdel: kills salubri/DoC endronites
   magicianofwands:
   - rscadd: The Anarchs now have three cars and a van.
+2025-08-16:
+  chazzyjazzy:
+  - bugfix: Baalis no longer fear certain floor tiles.
