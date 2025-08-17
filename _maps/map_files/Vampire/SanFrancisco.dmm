@@ -3850,10 +3850,6 @@
 	},
 /turf/closed/wall/vampwall/junk/alt/low,
 /area/vtm/interior/ghetto)
-"bcw" = (
-/obj/structure/vamptree/pine,
-/turf/closed/wall/vampwall/rock,
-/area/vtm/forest)
 "bcy" = (
 /obj/structure/bricks,
 /turf/open/floor/plating/roofwalk,
@@ -5859,12 +5855,6 @@
 	icon_state = "canal_concrete"
 	},
 /area/vtm/sewer/nosferatu_warren)
-"bDV" = (
-/obj/effect/decal/asphaltline/alt{
-	dir = 8
-	},
-/turf/closed/wall/vampwall/painted,
-/area/vtm)
 "bDY" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 6
@@ -13136,17 +13126,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/techshop)
-"dvg" = (
-/obj/effect/decal/asphaltline/alt{
-	dir = 8
-	},
-/obj/transfer_point_vamp{
-	alpha = 0;
-	density = 0;
-	id = 999
-	},
-/turf/open/floor/plating/asphalt,
-/area/vtm)
 "dvm" = (
 /obj/effect/decal/wallpaper/papers/seven{
 	pixel_y = -4
@@ -14387,21 +14366,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/theatre)
-"dOn" = (
-/obj/effect/decal/asphaltline/alt{
-	dir = 8
-	},
-/obj/transfer_point_vamp{
-	alpha = 0;
-	density = 0;
-	id = 999
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/vampgrass,
-/area/vtm/pacificheights/community)
 "dOt" = (
 /mob/living/simple_animal/hostile/cockroach,
 /turf/open/floor/plating/concrete{
@@ -16306,14 +16270,6 @@
 /obj/machinery/gibber,
 /turf/open/floor/grass/snow/safe,
 /area/vtm/jazzclub)
-"eoJ" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/matrix,
-/turf/closed/wall/vampwall/painted,
-/area/vtm)
 "eoK" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#574d46"
@@ -27401,6 +27357,9 @@
 	icon_state = "canal_concrete"
 	},
 /area/vtm/sewer/nosferatu_bar)
+"hiF" = (
+/turf/closed/wall/vampwall/rock,
+/area/vtm/pacificheights/community)
 "hiV" = (
 /obj/structure/rack,
 /obj/item/clothing/under/vampire/mechanic,
@@ -134446,13 +134405,13 @@ xfw
 rCB
 rCB
 rCB
-uvs
-uvs
-uvs
-uvs
-rCB
-rCB
-rCB
+hiF
+hiF
+hiF
+hiF
+bal
+bal
+bal
 rCB
 rCB
 rCB
@@ -134647,13 +134606,13 @@ rCB
 rCB
 rCB
 bal
-uvs
-uvs
+hiF
+hiF
 otm
-dOn
 otm
-bcw
-bal
+otm
+mPm
+tcy
 bal
 bal
 bal
@@ -276119,9 +276078,9 @@ fwq
 rCB
 eGA
 fgd
-eoJ
-eoJ
-eoJ
+ajp
+ajp
+ajp
 fgd
 eGA
 rCB
@@ -276322,7 +276281,7 @@ rCB
 eGA
 ylv
 rdo
-dvg
+oGD
 rdo
 dTE
 eGA
@@ -295915,9 +295874,9 @@ rCB
 rCB
 eGA
 ylv
-eGA
-bDV
-eGA
+rdo
+oGD
+rdo
 dTE
 eGA
 rCB
