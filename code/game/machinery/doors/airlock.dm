@@ -881,7 +881,7 @@
 				user.visible_message(span_notice("[user] begins welding the airlock."), \
 								span_notice("You begin repairing the airlock..."), \
 								span_hear("You hear welding."))
-				if(W.use_tool(src, user, 40, volume=50, extra_checks = CALLBACK(src, .proc/weld_checks, W, user)))
+				if(W.use_tool(src, user, 40, volume=50, extra_checks = CALLBACK(src, PROC_REF(weld_checks), W, user)))
 					atom_integrity = max_integrity
 					set_machine_stat(machine_stat & ~BROKEN)
 					user.visible_message(span_notice("[user] finishes welding [src]."), \
