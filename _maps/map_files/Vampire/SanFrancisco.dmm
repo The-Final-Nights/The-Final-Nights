@@ -6010,8 +6010,7 @@
 /area/vtm/anarch/basement)
 "bFL" = (
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 4;
-	density = 0
+	dir = 4
 	},
 /obj/effect/landmark/npcability,
 /obj/effect/landmark/npcbeacon,
@@ -8015,8 +8014,7 @@
 /area/vtm/sewer)
 "cgT" = (
 /obj/structure/lamppost/sidewalk{
-	pixel_x = 9;
-	density = 0
+	pixel_x = 9
 	},
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -16189,8 +16187,7 @@
 /area/vtm/interior/bianchiBank)
 "enu" = (
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 4;
-	density = 0
+	dir = 4
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
@@ -16996,8 +16993,7 @@
 /area/vtm/interior/giovanni/outside)
 "eAi" = (
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 1;
-	density = 0
+	dir = 1
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
@@ -22430,8 +22426,7 @@
 /area/vtm)
 "fTs" = (
 /obj/structure/lamppost/sidewalk{
-	pixel_x = -9;
-	density = 0
+	pixel_x = -9
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/financialdistrict/library)
@@ -23333,7 +23328,6 @@
 /obj/structure/table/wood,
 /obj/structure/sink{
 	pixel_y = -1;
-	dir = 2;
 	icon_state = "basin"
 	},
 /turf/closed/wall/vampwall/junk/alt/low,
@@ -34322,8 +34316,7 @@
 	dir = 1
 	},
 /obj/structure/lamppost/one{
-	pixel_y = 16;
-	density = 0
+	pixel_y = 16
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
@@ -39416,7 +39409,6 @@
 /obj/structure/table,
 /obj/structure/sink{
 	pixel_y = -1;
-	dir = 2;
 	icon_state = "basin"
 	},
 /obj/item/clothing/neck/stethoscope{
@@ -45981,8 +45973,7 @@
 /area/vtm/interior/giovanni)
 "lVm" = (
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 1;
-	density = 0
+	dir = 1
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/chinatown)
@@ -51794,8 +51785,7 @@
 	dir = 1
 	},
 /obj/structure/lamppost/one{
-	pixel_y = 16;
-	density = 0
+	pixel_y = 16
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
@@ -65949,8 +65939,7 @@
 /area/vtm/interior/tzimisce_manor)
 "qPT" = (
 /obj/structure/lamppost/sidewalk{
-	pixel_x = 9;
-	density = 0
+	pixel_x = 9
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/financialdistrict/library)
@@ -68097,8 +68086,7 @@
 /area/vtm/interior)
 "rrR" = (
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 4;
-	density = 0
+	dir = 4
 	},
 /obj/effect/landmark/npcability,
 /obj/effect/landmark/npcbeacon,
@@ -77515,8 +77503,7 @@
 /area/vtm/interior/cog/caern)
 "tSp" = (
 /obj/structure/lamppost/sidewalk{
-	pixel_x = -9;
-	density = 0
+	pixel_x = -9
 	},
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -81767,8 +81754,7 @@
 	dir = 1
 	},
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 4;
-	density = 0
+	dir = 4
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
@@ -88772,8 +88758,7 @@
 	pixel_y = 32
 	},
 /obj/structure/lamppost/sidewalk/chinese{
-	dir = 1;
-	density = 0
+	dir = 1
 	},
 /obj/effect/landmark/start/citizen,
 /turf/open/floor/plating/sidewalkalt,
