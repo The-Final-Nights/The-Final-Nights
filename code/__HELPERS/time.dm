@@ -29,6 +29,9 @@
 /proc/SQLtime(timevar)
 	return time2text(timevar || world.timeofday, "YYYY-MM-DD hh:mm:ss")
 
+///returns timestamp in a sql and a not-quite-compliant ISO 8601 friendly format. Do not use for SQL, use NOW() instead
+/proc/ISOtime(timevar)
+	return time2text(timevar || world.timeofday, "YYYY-MM-DD hh:mm:ss", world.timezone)
 
 GLOBAL_VAR_INIT(midnight_rollovers, 0)
 GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
