@@ -3801,6 +3801,7 @@
 #include "modular_tfn\modules\werewolf\auspice.dm"
 #include "modular_tfn\modules\werewolf\gifts.dm"
 #include "modular_tfn\modules\werewolf\glyphs.dm"
+#include "modular_tfn\modules\werewolf\status_effects.dm"
 #include "modular_tfn\modules\werewolf\totems.dm"
 #include "modular_tfn\modules\werewolf\tribes.dm"
 #include "modular_tfn\modules\werewolf\werewolf_species.dm"

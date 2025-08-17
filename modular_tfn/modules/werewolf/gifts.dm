@@ -62,37 +62,18 @@
 	button_icon_state = "inspiration"
 	rage_req = 1
 
-/mob/living/Life()
-	. = ..()
-	if(inspired)
-		if(stat != DEAD)
-			adjustBruteLoss(-10, TRUE)
-			var/obj/effect/celerity/C = new(get_turf(src))
-			C.appearance = appearance
-			C.dir = dir
-			var/matrix/ntransform = matrix(C.transform)
-			ntransform.Scale(2, 2)
-			animate(C, transform = ntransform, alpha = 0, time = 3)
-
-/mob/living/proc/inspired()
-	inspired = TRUE
-	to_chat(src, "<span class='notice'>You feel inspired...</span>")
-	spawn(150)
-		to_chat(src, "<span class='warning'>You no longer feel inspired...</span>")
-		inspired = FALSE
-
 /datum/action/gift/inspiration/Trigger(trigger_flags)
 	. = ..()
-	if(allowed_to_proceed)
-		var/mob/living/H = owner
-		playsound(get_turf(owner), 'code/modules/wod13/sounds/inspiration.ogg', 75, FALSE)
-		H.emote("scream")
-		if(H.CheckEyewitness(H, H, 7, FALSE))
-			H.adjust_veil(-1)
-		for(var/mob/living/C in range(5, owner))
-			if(iswerewolf(C) || isgarou(C))
-				if(C.auspice.tribe == H.auspice.tribe)
-					C.inspired()
+	if(!allowed_to_proceed)
+		return
+	var/mob/living/H = owner
+	playsound(get_turf(owner), 'code/modules/wod13/sounds/inspiration.ogg', 75, FALSE)
+	H.emote("scream")
+	if(H.CheckEyewitness(H, H, 7, FALSE))
+		H.adjust_veil(-1)
+	for(var/mob/living/C in range(5, owner))
+		if((iswerewolf(C) || isgarou(C)) && (C.auspice.tribe == H.auspice.tribe))
+			C.apply_status_effect(/datum/status_effect/inspiration)
 
 /datum/action/gift/razor_claws
 	name = "Razor Claws"
