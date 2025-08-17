@@ -20528,6 +20528,7 @@
 	pixel_x = -7
 	},
 /obj/item/megaphone,
+/obj/item/masquerade_contract,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "frE" = (
