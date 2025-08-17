@@ -16226,6 +16226,13 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
+"enj" = (
+/obj/structure/vampipe{
+	icon_state = "piping35"
+	},
+/obj/item/candle/infinite,
+/turf/open/floor/plating/vampcanalplating,
+/area/vtm/sewer)
 "ent" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#665136"
@@ -50414,6 +50421,9 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/endron_facility/plant)
+"mWm" = (
+/turf/open/floor/plating/vampcanalplating,
+/area/vtm)
 "mWr" = (
 /obj/effect/decal/trash,
 /obj/item/cigbutt,
@@ -123500,7 +123510,7 @@ bmy
 bmy
 bmy
 bmy
-bmy
+enj
 bmy
 bmy
 bmy
@@ -123905,7 +123915,7 @@ rCB
 rCB
 rCB
 iXN
-xfw
+mWm
 iXN
 rCB
 rCB
@@ -124107,7 +124117,7 @@ xfw
 xfw
 rCB
 iXN
-xfw
+mWm
 iXN
 rCB
 xfw
@@ -124309,7 +124319,7 @@ rCB
 rCB
 rCB
 iXN
-xfw
+mWm
 iXN
 rCB
 rCB
