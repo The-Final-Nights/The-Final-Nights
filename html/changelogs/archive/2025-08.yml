@@ -77,3 +77,8 @@
   XeonMations:
   - refactor: Refactored MC and ticker SS, report any bugs to coding!
   - bugfix: Fixed all existing roundstart runtimes. Hoo-fucking-ray.
+  chazzyjazzy:
+  - sound: adds a small sound played whenever a non-whisper non-emote message is sent
+      that can be toggled in preferences
+  - qol: you can change the vocal sound your player makes, or disable hearing them
+      entirely, in the preferences tab of the statpanel
