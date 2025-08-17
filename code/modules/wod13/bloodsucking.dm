@@ -21,6 +21,9 @@
 	if(HAS_TRAIT(src, TRAIT_BABY_TEETH))
 		to_chat(src, span_warning("Your fangs won't manage to pierce the skin let alone suck in their state."))
 		return FALSE
+	if(HAS_TRAIT(mob, TRAIT_NO_DRINK_FROM))
+		to_chat(src, span_warning("Their skin seems too tough to pierce!"))
+		return FALSE
 	var/bloodgain = max(1, mob.bloodquality-1)
 	var/fumbled = FALSE
 	last_drinkblood_use = world.time
