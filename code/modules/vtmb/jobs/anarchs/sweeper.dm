@@ -20,6 +20,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_SWEEPER
 	known_contacts = list("Baron","Bouncer","Emissary","Sweeper")
+	allowed_species = list("Vampire", "Kuei-Jin")
 	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TREMERE, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_TZIMISCE, CLAN_NONE, CLAN_VENTRUE, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_SETITES, CLAN_SALUBRI_WARRIOR, CLAN_SALUBRI, CLAN_NAGARAJA)
 
 	v_duty = "You are the observer of the anarchs. You watch out for any new kindred, suspicious individuals, and any new rumors near the anarch turf, and then report it to your anarchs."
