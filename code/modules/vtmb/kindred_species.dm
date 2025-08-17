@@ -265,6 +265,8 @@
 	if(iskindred(owner))
 		if(HAS_TRAIT(owner, TRAIT_TORPOR))
 			return
+		if(HAS_TRAIT(owner, TRAIT_NO_TORPOR))
+			return
 		var/mob/living/carbon/human/BD = owner
 		if(world.time < BD.last_bloodpower_use+110)
 			return
