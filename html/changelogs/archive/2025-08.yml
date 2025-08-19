@@ -74,3 +74,15 @@
 2025-08-17:
   SoreYew:
   - balance: rebalances prince role
+  XeonMations:
+  - refactor: Refactored MC and ticker SS, report any bugs to coding!
+  - bugfix: Fixed all existing roundstart runtimes. Hoo-fucking-ray.
+  chazzyjazzy:
+  - sound: adds a small sound played whenever a non-whisper non-emote message is sent
+      that can be toggled in preferences
+  - qol: you can change the vocal sound your player makes, or disable hearing them
+      entirely, in the preferences tab of the statpanel
+2025-08-19:
+  chazzyjazzy:
+  - qol: Gargoyles can now enter 'statue form', Gargoyles can now toggle digitigrade
+      legs, Visceratika 2 is now fixed.
