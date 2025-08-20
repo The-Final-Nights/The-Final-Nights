@@ -226,7 +226,7 @@
 
 	owner.celerity_visual = TRUE
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity5)
-	owner.dexterity += 5
+	owner.additional_dexterity += 5
 
 /datum/discipline_power/celerity/five/deactivate()
 	. = ..()
