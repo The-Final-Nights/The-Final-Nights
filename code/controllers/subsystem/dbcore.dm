@@ -617,7 +617,7 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	Close()
 	status = DB_QUERY_STARTED
 	if(async)
-		if(!Master.current_runlevel || Master.processing == 0)
+		if(!MC_RUNNING(SSdbcore.init_stage))
 			SSdbcore.run_query_sync(src)
 		else
 			SSdbcore.run_or_queue_query(src)

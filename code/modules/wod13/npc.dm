@@ -81,7 +81,8 @@
 	if(!my_weapon && my_weapon_type)
 		my_weapon = new my_weapon_type(src)
 
-
+	if(!socialrole)
+		AssignSocialRole(pick(/datum/socialrole/usualmale, /datum/socialrole/usualfemale))
 
 	if(my_weapon)
 		has_weapon = TRUE
@@ -489,6 +490,10 @@
 		return
 	if(world.time <= last_annoy+50)
 		return
+	if(source && isliving(source))
+		var/mob/living/L = source
+		if(!L.ckey)
+			return
 	if(source)
 		spawn(rand(3, 7))
 			face_atom(source)
