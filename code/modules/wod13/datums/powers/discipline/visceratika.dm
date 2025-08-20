@@ -18,8 +18,7 @@
 
 	level = 1
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
-
-	cooldown_length = 5 SECONDS
+	cooldown_length = 1 SECONDS
 
 /datum/discipline_power/visceratika/whispers_of_the_chamber/activate()
 	. = ..()
@@ -28,7 +27,7 @@
 			var/their_name = player.name
 			if(ishuman(player))
 				var/mob/living/carbon/human/human_player = player
-				their_name = human_player.true_real_name
+				their_name = human_player.real_name
 			to_chat(owner, "- [their_name]")
 
 //SCRY THE HEARTHSTONE
@@ -38,18 +37,30 @@
 
 	level = 2
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_SEE
-
-	cancelable = TRUE
-	duration_length = 15 SECONDS
-	cooldown_length = 10 SECONDS
+	vitae_cost = 1
+	toggled = TRUE
+	var/area/starting_area
 
 /datum/discipline_power/visceratika/scry_the_hearthstone/activate()
 	. = ..()
+	starting_area = get_area(owner)
 	ADD_TRAIT(owner, TRAIT_THERMAL_VISION, "Visceratika Scry the Hearthstone")
+	owner.update_sight()
+	//visceratika 2 gives a gargoyle a heatmap of all living people in a building. if they leave the building, they need to re-cast it.
+	RegisterSignal(owner, COMSIG_EXIT_AREA, PROC_REF(on_area_exited))
 
 /datum/discipline_power/visceratika/scry_the_hearthstone/deactivate()
 	. = ..()
+	starting_area = null
 	REMOVE_TRAIT(owner, TRAIT_THERMAL_VISION, "Visceratika Scry the Hearthstone")
+	owner.update_sight()
+	UnregisterSignal(owner, COMSIG_EXIT_AREA)
+
+/datum/discipline_power/visceratika/scry_the_hearthstone/proc/on_area_exited(atom/movable/source, area/old_area)
+	SIGNAL_HANDLER
+
+	to_chat(owner, span_warning("You lose your connection to the hearthstone as you leave the area."))
+	try_deactivate()
 
 //BOND WITH THE MOUNTAIN
 /datum/discipline_power/visceratika/bond_with_the_mountain
