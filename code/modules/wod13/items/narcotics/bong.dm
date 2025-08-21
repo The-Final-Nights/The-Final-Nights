@@ -104,7 +104,6 @@
 			spawn_cloud(pos, smoke_range)
 	if(moan_chance > 0)
 		if(prob(moan_chance))
-			playsound(hit_mob, pick('code/modules/wod13/sounds/lungbust_moan1.ogg','code/modules/wod13/sounds/lungbust_moan2.ogg', 'code/modules/wod13/sounds/lungbust_moan3.ogg'), 50, TRUE)
 			hit_mob.emote("moan")
 		else
 			playsound(hit_mob, pick('code/modules/wod13/sounds/lungbust_cough1.ogg','code/modules/wod13/sounds/lungbust_cough2.ogg'), 50, TRUE)

@@ -82,3 +82,14 @@
       that can be toggled in preferences
   - qol: you can change the vocal sound your player makes, or disable hearing them
       entirely, in the preferences tab of the statpanel
+2025-08-19:
+  chazzyjazzy:
+  - qol: Gargoyles can now enter 'statue form', Gargoyles can now toggle digitigrade
+      legs, Visceratika 2 is now fixed.
+2025-08-20:
+  SoreYew:
+  - balance: Bumps harpy to three active players.
+  TheTrueSilverRat:
+  - rscadd: New Special Sprites for Evil Corvids
+  - rscdel: Removed Man Moans
+  - bugfix: Made the Hungry Dead/KJ's Masquerade Levels less Anglophobic

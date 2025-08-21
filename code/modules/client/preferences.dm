@@ -240,7 +240,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/auspice_level = 1
 
 	var/clan_accessory
-
+	var/digitigrade_legs = FALSE
 	var/dharma_type = /datum/dharma
 	var/dharma_level = 1
 	var/po_type = "Rebel"
@@ -749,6 +749,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<b>Marks:</b> <a href='byond://?_src_=prefs;preference=clan_acc;task=input'>[clan_accessory ? clan_accessory : "none"]</a><BR>"
 				else
 					clan_accessory = null
+				// Gargoyle Digitigrade Legs toggle
+				if(clan.name == "Gargoyle")
+					dat += "<b>Digitigrade Legs:</b> [digitigrade_legs ? "Enabled" : "Disabled"] "
+					dat += "<a href='byond://?_src_=prefs;preference=digitigradelegs;task=input'>Toggle</a><BR>"
 				dat += "<h2>[make_font_cool("DISCIPLINES")]</h2>"
 
 				for (var/i in 1 to discipline_types.len)
@@ -2654,6 +2658,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						else
 							clan_accessory = pick(clan.accessories)
 
+				if("digitigradelegs")
+					if(clan.name != "Gargoyle")
+						return
+
+					digitigrade_legs = !digitigrade_legs
+
 				if("derangement")
 
 					if(!(pref_species.id == "kindred" ) || clan.name != CLAN_MALKAVIAN)
@@ -3789,14 +3799,32 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.yin_chi = character.max_yin_chi
 
 		// TODO: detach is_enlightened from the clan datum
-		// Apply Clan accessory
+		// Apply digitigrade legs if pref is enabled
+		if(digitigrade_legs && character.clan?.name == "Gargoyle")
+
+			if(character.shoes)
+				qdel(character.shoes)
+
+			character.Digitigrade_Leg_Swap(FALSE)
+			character.remove_overlay(MARKS_LAYER)
+			var/mutable_appearance/legs_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "gargoyle_legs_n_tails", -MARKS_LAYER)
+			character.overlays_standing[MARKS_LAYER] = legs_overlay
+			character.apply_overlay(MARKS_LAYER)
+		else if(character.clan?.name == "Gargoyle")
+			character.Digitigrade_Leg_Swap(TRUE)
+
+		// Apply clan marks (accessories)
 		if (character.clan?.accessories?.Find(clan_accessory))
 			var/accessory_layer = character.clan.accessories_layers[clan_accessory]
-			character.remove_overlay(accessory_layer)
-			var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', clan_accessory, -accessory_layer)
-			character.overlays_standing[accessory_layer] = acc_overlay
-			character.apply_overlay(accessory_layer)
 
+			//gargoyle marks use unicorn_layer not marks_layer, marks_layer for gargoyles is being used for the digitigrade legs toggle. all other accessories use the else block
+			if(digitigrade_legs && character.clan?.name == "Gargoyle" && accessory_layer == MARKS_LAYER)
+				return
+			else
+				character.remove_overlay(accessory_layer)
+				var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', clan_accessory, -accessory_layer)
+				character.overlays_standing[accessory_layer] = acc_overlay
+				character.apply_overlay(accessory_layer)
 		character.morality_path.score = path_score
 	else
 		character.set_clan(null)
