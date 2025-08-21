@@ -3,7 +3,7 @@
 // /mob/living/Move() in /modules/mob/living/living.dm - hiding storage boxes on mob movement
 
 /datum/component/storage
-	dupe_mode = COMPONENT_DUPE_UNIQUE
+	dupe_mode = COMPONENT_DUPE_UNIQUE_PASSARGS
 	var/datum/component/storage/concrete/master		//If not null, all actions act on master and this is just an access point.
 
 	var/list/can_hold								//if this is set, only items, and their children, will fit
@@ -55,9 +55,13 @@
 	var/screen_start_y = 9
 	//End
 
-/datum/component/storage/Initialize(datum/component/storage/concrete/master)
+/datum/component/storage/Initialize(datum/component/storage/concrete/master, _screen_max_columns, _screen_max_rows)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
+	if(_screen_max_columns)
+		screen_max_columns = _screen_max_columns
+	if(_screen_max_rows)
+		screen_max_rows = _screen_max_rows
 	if(master)
 		change_master(master)
 	boxes = new(null, src)

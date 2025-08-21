@@ -73,6 +73,7 @@ SUBSYSTEM_DEF(city_time)
 		to_chat(world, "<span class='ghostalert'>THE NIGHT IS OVER.</span>")
 		SSticker.force_ending = 1
 		SSticker.current_state = GAME_STATE_FINISHED
+		GLOB.canon_event = FALSE
 		toggle_ooc(TRUE) // Turn it on
 		toggle_dooc(TRUE)
 		SSticker.declare_completion(SSticker.force_ending)
