@@ -15,7 +15,7 @@
 	level_req = 3
 
 /datum/surgery_step/shorten_spine
-	name = "Shorten Spine
+	name = "Shorten Spine"
 	accept_hand = TRUE
 	time = 100
 
@@ -25,12 +25,12 @@
 
 /datum/surgery_step/shorten_spine/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if (target.has_quirk(/datum/quirk/tower))
-    target.remove_quirk(/datum/quirk/tower)
-    display_results(user, target, span_notice("You sucessfully make [target] normal height! You'll need to do it again to make them shorter."
+		target.remove_quirk(/datum/quirk/tower)
+		display_results(user, target, span_notice("You sucessfully make [target] normal height! You'll need to do it again to make them shorter."))
 	else if (!target.has_quirk(/datum/quirk/dwarf))
 		target.add_quirk(/datum/quirk/dwarf)
-    display_results(user, target, span_notice("You sucessfully make [target] short! You can't make them any shorter for now!")
-  else 
-    display_results(user, target, span_notice("You can't find a way to make [target] any shorter!")
+		display_results(user, target, span_notice("You sucessfully make [target] short! You can't make them any shorter for now!"))
+	else 
+		display_results(user, target, span_notice("You can't find a way to make [target] any shorter!"))
 	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!</span>"))
 	return TRUE
