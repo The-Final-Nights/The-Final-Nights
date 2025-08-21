@@ -32,5 +32,5 @@
 		display_results(user, target, span_notice("You sucessfully make [target] short! You can't make them any shorter for now!"))
 	else 
 		display_results(user, target, span_notice("You can't find a way to make [target] any shorter!"))
-	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!</span>"))
+	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!</span>")
 	return TRUE
