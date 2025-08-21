@@ -15,7 +15,7 @@
 	level_req = 3
 
 /datum/surgery_step/extend_spine
-	name = "Extend Spine
+	name = "Extend Spine"
 	accept_hand = TRUE
 	time = 100
 
@@ -25,12 +25,12 @@
 
 /datum/surgery_step/extend_spine/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if (target.has_quirk(/datum/quirk/dwarf))
-    target.remove_quirk(/datum/quirk/dwarf)
-    display_results(user, target, span_notice("You sucessfully make [target] normal height! You'll need to do it again to make them huge."
+		target.remove_quirk(/datum/quirk/dwarf)
+		display_results(user, target, span_notice("You sucessfully make [target] normal height! You'll need to do it again to make them huge."))
 	else if (!target.has_quirk(/datum/quirk/tower))
 		target.add_quirk(/datum/quirk/tower)
-    display_results(user, target, span_notice("You sucessfully make [target] huge! You can't make them any taller for now!")
-  else 
-    display_results(user, target, span_notice("You can't find a way to make [target] any taller!")
-	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!</span>"))
+		display_results(user, target, span_notice("You sucessfully make [target] huge! You can't make them any taller for now!"))
+	else 
+		display_results(user, target, span_notice("You can't find a way to make [target] any taller!"))
+	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!</span>")
 	return TRUE
