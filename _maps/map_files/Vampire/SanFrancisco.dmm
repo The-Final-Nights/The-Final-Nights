@@ -72786,17 +72786,6 @@
 	pixel_y = 7
 	},
 /obj/structure/stone_tile/surrounding,
-/obj/structure/railing,
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/obj/structure/railing{
-	dir = 1;
-	pixel_y = 9
-	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "sHh" = (
@@ -90710,17 +90699,6 @@
 "xvi" = (
 /obj/structure/bonfire/prelit,
 /obj/structure/stone_tile/surrounding,
-/obj/structure/railing,
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/obj/structure/railing{
-	dir = 1;
-	pixel_y = 9
-	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "xvm" = (
