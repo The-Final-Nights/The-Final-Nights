@@ -28,13 +28,13 @@
 		target.set_body_model(NORMAL_BODY_MODEL)
 		var/obj/item/stack/human_flesh/F = new (get_turf(target), 3)
 		F.add_fingerprint(user)
-    	display_results(user, target, span_notice("You sucessfully make [target] normal weight! You'll need to do it again to make them thin."
+    	display_results(user, target, span_notice("You sucessfully make [target] normal weight! You'll need to do it again to make them thin."))
 	if (target.base_body_mod == NORMAL_BODY_MODEL)
 		target.set_body_model(SLIM_BODY_MODEL)
 		var/obj/item/stack/human_flesh/F = new (get_turf(target), 3)
 		F.add_fingerprint(user)
-    	display_results(user, target, span_notice("You sucessfully make [target] thin! You can't make them any thinner for now!")
+    	display_results(user, target, span_notice("You sucessfully make [target] thin! You can't make them any thinner for now!"))
 	else 
-    	display_results(user, target, span_notice("You can't find a way to make [target] any slimmer!")
-	span_notice("[user] pulls out [target]'s flesh in truly horrific ways!</span>"))
+    	display_results(user, target, span_notice("You can't find a way to make [target] any slimmer!"))
+	span_notice("[user] pulls out [target]'s flesh in truly horrific ways!</span>")
 	return TRUE
