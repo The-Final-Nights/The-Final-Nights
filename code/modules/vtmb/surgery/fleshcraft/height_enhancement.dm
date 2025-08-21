@@ -12,7 +12,7 @@
 		)
 
 	replaced_by = null
-	level_req = 2
+	level_req = 3
 
 /datum/surgery_step/extend_spine
 	name = "Extend Spine
@@ -23,7 +23,7 @@
 	display_results(user, target, span_notice("You begin to stretch out [target]'s spine like taffy."),
 		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!</span>"))
 
-/datum/surgery_step/relocate_heart/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/extend_spine/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if (target.has_quirk(/datum/quirk/dwarf))
     target.remove_quirk(/datum/quirk/dwarf)
     display_results(user, target, span_notice("You sucessfully make [target] normal height! You'll need to do it again to make them huge."
