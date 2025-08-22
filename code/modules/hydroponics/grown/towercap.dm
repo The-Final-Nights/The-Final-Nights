@@ -173,6 +173,14 @@
 	. = ..()
 	StartBurning()
 
+/obj/structure/bonfire/brazier
+	name = "brazier"
+	desc = "A metal pan standing on stone brick, where fire burns. Adorned with a strange symbol, it seems to be gas powered."
+	icon = 'code/modules/wod13/props.dmi'
+	icon_state = "brazier"
+	density = TRUE
+	var/burn_icon = "braizer_lit"
+
 /obj/structure/bonfire/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/stack/rods) && !can_buckle && !grill)
 		var/obj/item/stack/rods/R = W
