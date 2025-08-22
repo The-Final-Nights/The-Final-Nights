@@ -96,3 +96,20 @@
 2025-08-21:
   TheTrueSilverRat:
   - bugfix: Made KJ the Hungry Dead Splat Whitelisted
+2025-08-22:
+  AlmostLikeClockwork:
+  - rscadd: ~~Adds a spas to the Sheriff's closet, with mags and shells~~ Adds a McLusky
+      to the Sheriff's closet, with mags and a box
+  - rscadd: Adds a renamed bitcoin miner to the Prince's office
+  - rscadd: Adds rails to the roof garden
+  - rscadd: Adds silver ammo to the secure camarilla armoury
+  - rscdel: Removed the silver from the anarch base
+  SELFHELL:
+  - bugfix: Typhons Brew is now craftable again with 200 Units of Vampire Vitae in
+      a Beaker
+  Squagg:
+  - rscadd: adds salubri and salubri warrior as playable clans for warehouse
+  XeonMations:
+  - admin: Added the ability to 1984 words or phrases.
+  chazzyjazzy:
+  - qol: Updated bank vault keypad
