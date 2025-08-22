@@ -11690,6 +11690,9 @@
 /area/vtm/sewer)
 "dcb" = (
 /obj/structure/table/wood/fancy/royalblack,
+/obj/structure/bonfire/brazier{
+	pixel_y = 14
+	},
 /turf/open/floor/plating/granite{
 	color = "#BEAC90"
 	},
@@ -29786,6 +29789,12 @@
 /obj/item/storage/fancy/egg_box,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior)
+"hKF" = (
+/obj/structure/bonfire/brazier,
+/turf/open/floor/plating/granite{
+	color = "#3e423f"
+	},
+/area/vtm/interior/setite/basement)
 "hKH" = (
 /obj/effect/turf_decal/siding/white{
 	color = "#636363";
@@ -42023,13 +42032,10 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm)
 "kOp" = (
-/obj/machinery/light/prince{
-	light_power = 0.45;
-	name = "dim light fixture";
-	dir = 2;
-	light_color = "#06402B";
-	pixel_y = 22
+/obj/structure/bonfire/brazier{
+	pixel_y = 14
 	},
+/obj/structure/table/wood/fancy/red,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
 "kOD" = (
@@ -133893,7 +133899,7 @@ mpU
 dHE
 oQs
 dOM
-dOM
+hKF
 dOM
 oQs
 mpU
