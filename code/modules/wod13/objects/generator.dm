@@ -10,7 +10,7 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	var/on = TRUE
 	var/switching_on = FALSE
-	var/last_sound_played = 0
+	var/datum/looping_sound/generator/soundloop
 	var/fuel_remain = 1000
 
 /obj/generator/examine(mob/user)
@@ -30,10 +30,9 @@
 
 /obj/generator/proc/brek()
 	on = FALSE
+	soundloop.stop()
 	icon_state = "gen_off"
 	var/area/A = get_area(src)
-	for(var/mob/L in A)
-		SEND_SOUND(L, 'code/modules/wod13/sounds/fuck.ogg')
 	A.requires_power = TRUE
 	A.fire_controled = FALSE
 	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
@@ -47,34 +46,33 @@
 	if(fuel_remain == 0)
 		to_chat(user, "<span class='warning'>There is no fuel in [src].</span>")
 		return
-	if(!switching_on)
-		switching_on = TRUE
-		if(do_after(user, 50, src))
-			var/area/A = get_area(src)
-			on = TRUE
-			icon_state = "gen"
-			A.requires_power = FALSE
-			if(initial(A.fire_controled))
-				A.fire_controled = TRUE
-			for(var/obj/machinery/light/L in A)
-				L.update(FALSE)
-			switching_on = FALSE
-			to_chat(user, "<span class='notice'>You switch [src] on.</span>")
-		else
-			switching_on = FALSE
+	if(do_after(user, 50, src))
+		var/area/A = get_area(src)
+		on = TRUE
+		soundloop.start()
+		icon_state = "gen"
+		A.requires_power = FALSE
+		if(initial(A.fire_controled))
+			A.fire_controled = TRUE
+		for(var/obj/machinery/light/L in A)
+			L.update(FALSE)
+		to_chat(user, "<span class='notice'>You switch [src] on.</span>")
 
 /obj/generator/Initialize()
 	. = ..()
+	soundloop = new(list(src), on)
 	GLOB.generators += src
 	START_PROCESSING(SSobj, src)
 
 /obj/generator/Destroy()
 	. = ..()
+	QDEL_NULL(soundloop)
 	GLOB.generators -= src
 	STOP_PROCESSING(SSobj, src)
 
 /obj/generator/process(delta_time)
-	if(on)
-		if(last_sound_played+40 <= world.time)
-			last_sound_played = world.time
-			playsound(loc, 'code/modules/wod13/sounds/guh.ogg', 50, FALSE)
+	if(!on)
+		return
+	fuel_remain = max(0, fuel_remain - 0.01)
+	if(fuel_remain == 0)
+		brek()

@@ -382,7 +382,7 @@
 	display_name = "Computerized Recordkeeping"
 	description = "Organized record databases and how they're used."
 	prereq_ids = list("comptech")
-	design_ids = list("secdata", "med_data", "prisonmanage", "vendor", "automated_announcement", "accounting")
+	design_ids = list("secdata", "med_data", "prisonmanage", "vendor", "automated_announcement")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 1000)
 
 /datum/techweb_node/telecomms

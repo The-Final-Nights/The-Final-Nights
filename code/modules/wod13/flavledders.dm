@@ -79,10 +79,10 @@
 
 /obj/transfer_point_vamp/backrooms
 	id = "backrooms"
-	alpha = 0
+	alpha = 1
 
 /obj/transfer_point_vamp/backrooms/map
-	density = 0
+	density = 1
 
 /obj/transfer_point_vamp/umbral
 	name = "portal"
@@ -107,5 +107,4 @@
 
 /obj/transfer_point_vamp/Bumped(atom/movable/AM)
 	. = ..()
-	var/turf/T = get_step(exit, get_dir(AM, src))
-	AM.forceMove(T)
+	AM.forceMove(get_turf(exit))

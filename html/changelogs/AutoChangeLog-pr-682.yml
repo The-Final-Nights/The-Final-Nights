@@ -1,4 +1,0 @@
-author: "chazzyjazzy"
-delete-after: True
-changes:
-  - bugfix: "Fixed Dominate 1's (Command) case sensitivity problem causing commands to not have their effects apply"

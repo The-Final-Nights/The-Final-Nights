@@ -98,6 +98,8 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/log_viewer_new,
 	/client/proc/fax_panel, /*send a paper to fax*/
 	/client/proc/openTicketManager,
+	/client/proc/redact_word, //TFN ADDITION
+	/client/proc/allow_word, //TFN ADDITION
 	/datum/admins/proc/display_tags
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
@@ -151,7 +153,8 @@ GLOBAL_PROTECT(admin_verbs_server)
 	/client/proc/panicbunker,
 	/client/proc/toggle_interviews,
 	/client/proc/toggle_hub,
-	/client/proc/toggle_cdn
+	/client/proc/toggle_cdn,
+	/client/proc/cmd_controller_view_ui
 	)
 GLOBAL_LIST_INIT(admin_verbs_debug, world.AVerbsDebug())
 GLOBAL_PROTECT(admin_verbs_debug)
@@ -200,6 +203,9 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/print_cards,
 	#ifdef TESTING
 	/client/proc/check_missing_sprites,
+	#endif
+	#ifdef SENDMAPS_PROFILE
+	/client/proc/display_sendmaps,
 	#endif
 	/datum/admins/proc/create_or_modify_area,
 #ifdef REFERENCE_TRACKING
@@ -1105,3 +1111,11 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set category = "Debug"
 
 	src.stat_panel.send_message("create_debug")
+
+#ifdef SENDMAPS_PROFILE
+/client/proc/display_sendmaps()
+	set name = "Send Maps Profile"
+	set category = "Debug"
+
+	src << link("?debug=profile&type=sendmaps&window=test")
+#endif

@@ -50,3 +50,64 @@
   chazzyjazzy:
   - bugfix: Cappadocian, Nosferatu, Kiasyd, and Gargoyle's slim and fat body models
       now correctly work and are no longer invisible
+  - bugfix: Fixed Dominate 1's (Command) case sensitivity problem causing commands
+      to not have their effects apply
+  darkincarnate:
+  - rscadd: giovanni second/third floor/basement ritual room
+2025-08-13:
+  chazzyjazzy:
+  - bugfix: using *slap on a table now correctly slams the table and plays the noise,
+      previously wasnt working
+  darkincarnate:
+  - rscadd: pd rechargers, gas masks to endron
+  - bugfix: giovanni misplaced lights
+  tzui5020:
+  - bugfix: Makes it harder to detect if peeps are Vampires when using Pliers.
+2025-08-14:
+  AlmostLikeClockwork:
+  - rscdel: kills salubri/DoC endronites
+  magicianofwands:
+  - rscadd: The Anarchs now have three cars and a van.
+2025-08-16:
+  chazzyjazzy:
+  - bugfix: Baalis no longer fear certain floor tiles.
+2025-08-17:
+  SoreYew:
+  - balance: rebalances prince role
+  XeonMations:
+  - refactor: Refactored MC and ticker SS, report any bugs to coding!
+  - bugfix: Fixed all existing roundstart runtimes. Hoo-fucking-ray.
+  chazzyjazzy:
+  - sound: adds a small sound played whenever a non-whisper non-emote message is sent
+      that can be toggled in preferences
+  - qol: you can change the vocal sound your player makes, or disable hearing them
+      entirely, in the preferences tab of the statpanel
+2025-08-19:
+  chazzyjazzy:
+  - qol: Gargoyles can now enter 'statue form', Gargoyles can now toggle digitigrade
+      legs, Visceratika 2 is now fixed.
+2025-08-20:
+  SoreYew:
+  - balance: Bumps harpy to three active players.
+  TheTrueSilverRat:
+  - rscadd: New Special Sprites for Evil Corvids
+  - rscdel: Removed Man Moans
+  - bugfix: Made the Hungry Dead/KJ's Masquerade Levels less Anglophobic
+2025-08-21:
+  TheTrueSilverRat:
+  - bugfix: Made KJ the Hungry Dead Splat Whitelisted
+2025-08-22:
+  AlmostLikeClockwork:
+  - rscadd: ~~Adds a spas to the Sheriff's closet, with mags and shells~~ Adds a McLusky
+      to the Sheriff's closet, with mags and a box
+  - rscadd: Adds a renamed bitcoin miner to the Prince's office
+  - rscadd: Adds rails to the roof garden
+  - rscadd: Adds silver ammo to the secure camarilla armoury
+  - rscdel: Removed the silver from the anarch base
+  SELFHELL:
+  - bugfix: Typhons Brew is now craftable again with 200 Units of Vampire Vitae in
+      a Beaker
+  Squagg:
+  - rscadd: adds salubri and salubri warrior as playable clans for warehouse
+  XeonMations:
+  - admin: Added the ability to 1984 words or phrases.
