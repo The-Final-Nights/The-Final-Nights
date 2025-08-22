@@ -43279,7 +43279,6 @@
 /obj/structure/railing,
 /obj/structure/railing{
 	dir = 4;
-	plane = 4;
 	pixel_y = 6
 	},
 /turf/open/floor/plating/rough/cave,
