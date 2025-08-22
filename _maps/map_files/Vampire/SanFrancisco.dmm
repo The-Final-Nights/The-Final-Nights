@@ -4821,13 +4821,6 @@
 /obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f3)
-"bpg" = (
-/obj/machinery/light/small{
-	dir = 8;
-	pixel_x = 16
-	},
-/turf/open/floor/plating/parquetry,
-/area/vtm/interior/setite)
 "bpq" = (
 /obj/structure/fluff/hedge,
 /obj/structure/railing{
@@ -9087,13 +9080,12 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
 "csu" = (
-/obj/machinery/light/small{
-	dir = 8;
-	pixel_x = 16;
-	pixel_y = 10
-	},
 /obj/structure/table,
 /obj/structure/bedsheetbin,
+/obj/machinery/light{
+	dir = 4;
+	light_color = "#6488EA"
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/setite)
 "csv" = (
@@ -22881,7 +22873,10 @@
 /area/vtm/sewer/nosferatu_warren)
 "fUW" = (
 /obj/machinery/light/prince{
-	dir = 1
+	light_power = 0.45;
+	name = "dim light fixture";
+	dir = 1;
+	light_color = "#06402B"
 	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
@@ -25146,7 +25141,7 @@
 /area/vtm/interior/millennium_tower/f2)
 "gBi" = (
 /obj/structure/stairs/south,
-/turf/closed/wall/vampwall/brick,
+/turf/open/floor/plating/rough,
 /area/vtm/interior/setite/basement)
 "gBj" = (
 /turf/open/floor/plating/vampdirt,
@@ -41709,6 +41704,13 @@
 "kIU" = (
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/endron_facility)
+"kIV" = (
+/obj/machinery/light{
+	dir = 4;
+	light_color = "#6488EA"
+	},
+/turf/open/floor/plating/parquetry,
+/area/vtm/interior/setite)
 "kIY" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4;
@@ -42020,6 +42022,16 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm)
+"kOp" = (
+/obj/machinery/light/prince{
+	light_power = 0.45;
+	name = "dim light fixture";
+	dir = 2;
+	light_color = "#06402B";
+	pixel_y = 22
+	},
+/turf/open/floor/plating/granite/black,
+/area/vtm/interior/setite/basement)
 "kOD" = (
 /obj/effect/decal/graffiti{
 	pixel_y = -28
@@ -42903,6 +42915,13 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/forest)
+"lai" = (
+/obj/machinery/light{
+	dir = 8;
+	light_color = "#6488EA"
+	},
+/turf/open/floor/plating/parquetry,
+/area/vtm/interior/setite)
 "lak" = (
 /turf/closed/wall/vampwall/rock{
 	density = 0
@@ -46203,15 +46222,6 @@
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/interior/giovanni)
-"lPU" = (
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_x = -16
-	},
-/turf/open/floor/plating/industrial{
-	icon_state = "canal_concrete"
-	},
-/area/vtm/interior/setite)
 "lPW" = (
 /obj/structure/table/wood/fancy/red,
 /obj/structure/railing{
@@ -57292,6 +57302,10 @@
 	dir = 1;
 	pixel_y = 10
 	},
+/obj/machinery/light{
+	dir = 1;
+	pixel_y = -14
+	},
 /turf/open/floor/plating/industrial{
 	icon_state = "canal_concrete"
 	},
@@ -60526,13 +60540,6 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior)
-"ppd" = (
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_x = -16
-	},
-/turf/open/floor/plating/toilet,
-/area/vtm/interior/setite)
 "ppe" = (
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/concrete,
@@ -93475,6 +93482,13 @@
 	},
 /turf/open/floor/carpet/blue,
 /area/vtm/interior/museum)
+"xSk" = (
+/obj/machinery/light/small{
+	dir = 8;
+	pixel_x = 16
+	},
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/setite)
 "xSl" = (
 /obj/effect/decal/bordur/corner{
 	dir = 1
@@ -133874,7 +133888,7 @@ xfw
 xfw
 xfw
 cHj
-oQs
+kOp
 mpU
 dHE
 oQs
@@ -214312,7 +214326,7 @@ dub
 rQe
 uNX
 wwo
-aOx
+lai
 vxJ
 aOx
 vxJ
@@ -215118,12 +215132,12 @@ rQe
 cGo
 aOx
 bLU
-bpg
 aOx
+kIV
 tkx
 kjR
 kjR
-bpg
+aOx
 dub
 mjT
 mjT
@@ -215520,13 +215534,13 @@ aAg
 dub
 arj
 rNc
-lPU
+mJa
 rQe
 gZG
 pAy
 pAy
 vcT
-ppd
+xcN
 xcN
 dub
 mjT
@@ -215729,7 +215743,7 @@ pAy
 pAy
 viw
 xgS
-hkl
+xcN
 dub
 mjT
 mjT
@@ -215930,8 +215944,8 @@ eOj
 csu
 rUu
 dub
-dub
-dub
+xSk
+hkl
 dub
 mjT
 mjT
@@ -216132,9 +216146,9 @@ dub
 dub
 dub
 dub
-iXN
-iXN
-iXN
+dub
+dub
+dub
 iXN
 iXN
 iXN
