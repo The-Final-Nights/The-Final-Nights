@@ -1544,6 +1544,21 @@
 	. = ..()
 	icon_state = "showcase[rand(1, 7)]"
 
+/obj/structure/brazier
+    name = "brazier"
+    desc = "Lorem Ipsum Slop Slop Placeholder"
+    icon = 'code/modules/wod13/props.dmi'
+    icon_state = "brazier"
+    plane = GAME_PLANE
+    layer = SPACEVINE_LAYER
+    anchored = TRUE
+    density = TRUE
+    resistance_flags = FIRE_PROOF | LAVA_PROOF
+    var/lit = FALSE
+    var/light_range = 5
+    var/light_power = 3
+    var/light_color = "#ffa35c"
+
 /obj/effect/decal/carpet
 	name = "carpet"
 	pixel_w = -16
