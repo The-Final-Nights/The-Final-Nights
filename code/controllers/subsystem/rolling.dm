@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(roll)
  * * roll header:
  */
 
-/datum/controller/subsystem/roll/proc/storyteller_roll(dice = 1, difficulty = 6, numerical = FALSE, list/mobs_to_show_output = list())
+/datum/controller/subsystem/roll/proc/storyteller_roll(dice = 1, difficulty = 6, numerical = FALSE, list/mobs_to_show_output = list(), force_chat_result)
 	var/list/rolled_dice = roll_dice(dice)
 	if(!islist(mobs_to_show_output))
 		mobs_to_show_output = list(mobs_to_show_output)
@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(roll)
 
 	var/output = roll_answer(success_count, numerical, output_text)
 	for(var/mob/player_mob as anything in mobs_to_show_output)
-		if(player_mob.client?.prefs.chat_toggles & CHAT_ROLL_INFO)
+		if((player_mob.client?.prefs.chat_toggles & CHAT_ROLL_INFO) || force_chat_result)
 			to_chat(player_mob, jointext(output_text, ""), trailing_newline = FALSE)
 	return output
 

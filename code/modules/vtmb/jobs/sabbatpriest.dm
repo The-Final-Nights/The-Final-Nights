@@ -123,7 +123,7 @@
 
 	var/original_icon_state = icon_state
 	icon_state = "[original_icon_state]-open"
-	addtimer(CALLBACK(src, .proc/close_book), 10 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(close_book)), 10 SECONDS)
 
 	to_chat(user, "These are the Auctoritas Ritae given to you by Caine.")
 

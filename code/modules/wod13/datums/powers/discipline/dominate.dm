@@ -152,7 +152,7 @@
 	// to use the same proc that voice of god uses we need a list of listeners as well as a power multiplier. just create a list with the target of dom 1 and power multiplier of 1
 	var/list/listeners = list(target)
 	var/power_multiplier = 1
-	apply_voice_of_god_effects(custom_command, owner, listeners, power_multiplier)
+	apply_voice_of_god_effects(lowertext(custom_command), owner, listeners, power_multiplier)
 
 //MESMERIZE
 /datum/discipline_power/dominate/mesmerize
