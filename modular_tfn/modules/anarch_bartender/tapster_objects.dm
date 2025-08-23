@@ -9,7 +9,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
-	worn_icon_state = "emissary_badge"
+	worn_icon_state = "bruiser_badge"
 	registered_name_is_public = FALSE
 
 /obj/item/vamp/phone/tapster
