@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(city_time)
 	timeofnight = "[get_watch_number(hour)]:[get_watch_number(minutes)]"
 	// TFN EDIT REFACTOR START
 	if(minutes == 0)
-		for(var/mob/living/simple_animal/werewolf/W in GLOB.player_list)
+		for(var/mob/living/carbon/werewolf/W in GLOB.player_list)
 			if(W?.stat != DEAD && W?.key)
 				var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(W.key)]
 				char_sheet?.add_experience(2)
@@ -73,6 +73,7 @@ SUBSYSTEM_DEF(city_time)
 		to_chat(world, "<span class='ghostalert'>THE NIGHT IS OVER.</span>")
 		SSticker.force_ending = 1
 		SSticker.current_state = GAME_STATE_FINISHED
+		GLOB.canon_event = FALSE
 		toggle_ooc(TRUE) // Turn it on
 		toggle_dooc(TRUE)
 		SSticker.declare_completion(SSticker.force_ending)

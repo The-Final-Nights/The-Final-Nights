@@ -829,9 +829,9 @@
 			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "flesh_arms", -PROTEAN_LAYER)
 			caster.overlays_standing[PROTEAN_LAYER] = potence_overlay
 			caster.apply_overlay(PROTEAN_LAYER)
-			caster.dna.species.punchdamagelow += 20
-			caster.dna.species.punchdamagehigh += 20
-			caster.dna.species.meleemod += 1
+			caster.dna.species.punchdamagelow += 10
+			caster.dna.species.punchdamagehigh += 10
+			caster.dna.species.meleemod += 0.5
 			caster.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
 			tackler = caster.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 2+level_casting, speed = 1, skill_mod = 0, min_distance = 0)
 			caster.potential = 4
@@ -840,9 +840,9 @@
 				if(caster)
 					caster.remove_overlay(PROTEAN_LAYER)
 					caster.potential = 0
-					caster.dna.species.punchdamagelow -= 20
-					caster.dna.species.punchdamagehigh -= 20
-					caster.dna.species.meleemod -= 1
+					caster.dna.species.punchdamagelow -= 10
+					caster.dna.species.punchdamagehigh -= 10
+					caster.dna.species.meleemod -= 0.5
 					caster.dna.species.attack_sound = initial(caster.dna.species.attack_sound)
 					qdel(tackler)
 					REMOVE_TRAIT(caster, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
@@ -1059,8 +1059,8 @@
 							caster.remove_movespeed_modifier(/datum/movespeed_modifier/demonform5)
 					caster.playsound_local(caster.loc, 'code/modules/wod13/sounds/demonshintai_deactivate.ogg', 50, FALSE)
 		if("Giant")
-			var/mod = level_casting*10
-			var/meleemod = level_casting*0.5
+			var/mod = level_casting*5
+			var/meleemod = level_casting*0.2
 			caster.remove_overlay(UNICORN_LAYER)
 			var/mutable_appearance/potence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "giant", -UNICORN_LAYER)
 			caster.overlays_standing[UNICORN_LAYER] = potence_overlay
