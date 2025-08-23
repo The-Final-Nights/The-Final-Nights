@@ -1554,7 +1554,7 @@
     anchored = TRUE
     density = TRUE
     resistance_flags = FIRE_PROOF | LAVA_PROOF
-    lit = FALSE
+    var/lit = FALSE
     light_range = 5
     light_power = 3
     light_color = "#ffa35c"
