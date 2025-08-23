@@ -7,7 +7,7 @@
 	supervisors = "the Bar's Owner"
 	selection_color = "#434343"
 
-	outfit = /datum/outfit/job/bruiser
+	outfit = /datum/outfit/job/tapster
 
 	access = list(ACCESS_LAWYER, ACCESS_COURT, ACCESS_SEC_DOORS)
 	minimal_access = list(ACCESS_LAWYER, ACCESS_COURT, ACCESS_SEC_DOORS)
@@ -34,7 +34,7 @@
 	uniform = /obj/item/clothing/under/vampire/bouncer
 	suit = /obj/item/clothing/suit/vampire/jacket
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	r_pocket = /obj/item/vamp/keys/anarch
+	r_pocket = /obj/item/vamp/keys/anarch_limited
 	l_pocket = /obj/item/vamp/phone/tapster
 	r_hand = /obj/item/melee/vampirearms/baseball
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/keys/hack=1, /obj/item/vamp/creditcard=1)

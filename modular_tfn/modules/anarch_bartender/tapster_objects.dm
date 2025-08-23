@@ -1,6 +1,6 @@
 /obj/item/card/id/tapster
 	name = "bartender badge"
-	id_type_name = "emissary badge"
+	id_type_name = "bartender badge"
 	desc = "A badge displaying a beverage glass."
 	icon = 'modular_tfn/modules/anarch_bartender/tapster.dmi'
 	icon_state = "tapster_badge"
