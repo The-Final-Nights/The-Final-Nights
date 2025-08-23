@@ -1554,10 +1554,10 @@
     anchored = TRUE
     density = TRUE
     resistance_flags = FIRE_PROOF | LAVA_PROOF
-    var/lit = FALSE
-    var/light_range = 5
-    var/light_power = 3
-    var/light_color = "#ffa35c"
+    lit = FALSE
+    light_range = 5
+    light_power = 3
+    light_color = "#ffa35c"
 
 /obj/effect/decal/carpet
 	name = "carpet"
