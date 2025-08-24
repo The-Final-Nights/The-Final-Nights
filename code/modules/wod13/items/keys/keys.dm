@@ -154,7 +154,7 @@
 
 /obj/item/vamp/keys/ministry
 	name = "community center keys"
-	acessslocks = list(
+	accesslocks = list(
 		"setite"
 	)
 	color = "#09350cff"
