@@ -1559,6 +1559,40 @@
     light_power = 3
     light_color = "#ffa35c"
 
+/obj/structure/brazier/attack_hand(mob/living/carbon/human/user, list/modifiers)
+	. = ..()
+	if(.)
+    return
+
+	if(lit)
+    turn_off(user)
+	else
+    turn_on(user)
+
+/obj/structure/brazier/proc/turn_on(mob/user)
+    if(lit)
+        return
+
+    lit = TRUE
+    icon_state = "brazier_lit"
+    set_light(light_range, light_power, light_color)
+
+    if(user)
+        to_chat(user, span_notice("You light the [name]."))
+        user.visible_message(span_notice("[user] lights the [name]."), null, null, 3)
+
+/obj/structure/brazier/proc/turn_off(mob/user)
+    if(!lit)
+        return
+
+    lit = FALSE
+    icon_state = "brazier"
+    set_light(0)
+
+    if(user)
+        to_chat(user, span_notice("You extinguish the [name]."))
+        user.visible_message(span_notice("[user] extinguishes the [name]."), null, null, 3)
+
 /obj/effect/decal/carpet
 	name = "carpet"
 	pixel_w = -16
