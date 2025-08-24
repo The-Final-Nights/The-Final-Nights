@@ -116,5 +116,7 @@
 2025-08-24:
   AlmostLikeClockwork:
   - rscadd: Adds a boxing glove locker behind the anarch bar stage
+  SoreYew:
+  - bugfix: fixed runtimes on map
   TheTrueSilverRat:
   - map: Added Sabbat late party land marks
