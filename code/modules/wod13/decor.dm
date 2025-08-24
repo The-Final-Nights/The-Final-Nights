@@ -1545,19 +1545,19 @@
 	icon_state = "showcase[rand(1, 7)]"
 
 /obj/structure/brazier
-    name = "brazier"
-    desc = "Lorem Ipsum Slop Slop Placeholder"
-    icon = 'code/modules/wod13/props.dmi'
-    icon_state = "brazier"
-    plane = GAME_PLANE
-    layer = SPACEVINE_LAYER
-    anchored = TRUE
-    density = TRUE
-    resistance_flags = FIRE_PROOF | LAVA_PROOF
-    var/lit = FALSE
-    light_range = 5
-    light_power = 3
-    light_color = "#ffa35c"
+	name = "brazier"
+	desc = "Lorem Ipsum Slop Slop Placeholder"
+	icon = 'code/modules/wod13/props.dmi'
+	icon_state = "brazier"
+	plane = GAME_PLANE
+	layer = SPACEVINE_LAYER
+	anchored = TRUE
+	density = TRUE
+	resistance_flags = FIRE_PROOF | LAVA_PROOF
+	light_range = 0
+	light_power = 0
+	light_color = "null"
+	var/lit = FALSE
 
 /obj/structure/brazier/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
@@ -1570,28 +1570,31 @@
 		turn_on(user)
 
 /obj/structure/brazier/proc/turn_on(mob/user)
-    if(lit)
-        return
+	if(lit)
+		return
 
-    lit = TRUE
-    icon_state = "brazier_lit"
-    set_light(light_range, light_power, light_color)
+	lit = TRUE
+	icon_state = "brazier_lit"
+	light_range = 5
+	light_power = 3
+	light_color = "#ffa35c"
+	set_light(light_range, light_power, light_color)
 
-    if(user)
-        to_chat(user, span_notice("You light the [name]."))
-        user.visible_message(span_notice("[user] lights the [name]."), null, null, 3)
+	if(user)
+		to_chat(user, span_notice("You light the [name]."))
+		user.visible_message(span_notice("[user] lights the [name]."), null, null, 3)
 
 /obj/structure/brazier/proc/turn_off(mob/user)
-    if(!lit)
-        return
+	if(!lit)
+		return
 
-    lit = FALSE
-    icon_state = "brazier"
-    set_light(0)
+	lit = FALSE
+	icon_state = "brazier"
+	set_light(0)
 
-    if(user)
-        to_chat(user, span_notice("You extinguish the [name]."))
-        user.visible_message(span_notice("[user] extinguishes the [name]."), null, null, 3)
+	if(user)
+		to_chat(user, span_notice("You extinguish the [name]."))
+		user.visible_message(span_notice("[user] extinguishes the [name]."), null, null, 3)
 
 /obj/effect/decal/carpet
 	name = "carpet"
