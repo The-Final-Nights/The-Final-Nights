@@ -226,7 +226,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/archetype = /datum/archetype/average
 
-	var/breed = "Homid"
+	var/breed = BREED_HOMID
 	var/datum/garou_tribe/tribe = new /datum/garou_tribe/galestalkers()
 	var/datum/auspice/auspice = new /datum/auspice/ahroun()
 	var/werewolf_color = "black"
@@ -240,7 +240,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/auspice_level = 1
 
 	var/clan_accessory
-
+	var/digitigrade_legs = FALSE
 	var/dharma_type = /datum/dharma
 	var/dharma_level = 1
 	var/po_type = "Rebel"
@@ -613,8 +613,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "<a href='byond://?_src_=prefs;preference=renownrank;task=input'>Raise Renown Rank</a><BR>"
 					if(can_raise_gnosis && player_experience >= 50)
 						dat += "<a href='byond://?_src_=prefs;preference=extra_gnosis;task=input'>Raise Extra Gnosis ([extra_gnosis]/5) Cost: 50 EXP </a><BR>"
-					else if(renownrank < MAX_PUBLIC_RANK)
-						var/renownrequirement = RenownRequirements()
+					var/renownrequirement = RenownRequirements()
+					if(renownrank < MAX_PUBLIC_RANK || (SSwhitelists.is_whitelisted(user.ckey, TRUSTED_PLAYER) && (renownrank < MAX_TRUSTED_RANK)))
 						dat += "<b>Needed To Raise Renown:</b> [renownrequirement]<BR>"
 					else
 						dat += "<BR>"
@@ -671,8 +671,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					qdel(ACT)
 				dat += "<b>Initial Gifts:</b> [gifts_text]"
 				// These mobs should be made in nullspace to avoid dumping them onto the map somewhere.
-				var/mob/living/simple_animal/werewolf/crinos/DAWOF = new
-				var/mob/living/simple_animal/werewolf/lupus/DAWOF2 = new
+				var/mob/living/carbon/werewolf/crinos/DAWOF = new
+				var/mob/living/carbon/werewolf/lupus/DAWOF2 = new
 
 				DAWOF.sprite_color = werewolf_color
 				DAWOF2.sprite_color = werewolf_color
@@ -749,6 +749,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<b>Marks:</b> <a href='byond://?_src_=prefs;preference=clan_acc;task=input'>[clan_accessory ? clan_accessory : "none"]</a><BR>"
 				else
 					clan_accessory = null
+				// Gargoyle Digitigrade Legs toggle
+				if(clan.name == "Gargoyle")
+					dat += "<b>Digitigrade Legs:</b> [digitigrade_legs ? "Enabled" : "Disabled"] "
+					dat += "<a href='byond://?_src_=prefs;preference=digitigradelegs;task=input'>Toggle</a><BR>"
 				dat += "<h2>[make_font_cool("DISCIPLINES")]</h2>"
 
 				for (var/i in 1 to discipline_types.len)
@@ -1278,6 +1282,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				else
 					dat += "High"
 			dat += "</a><br>"
+			dat += "<b>Disable Vocal Sounds: </b> <a href= 'byond://?_src_=prefs;preference=disable_vocal_sounds'>[disable_vocal_sounds ? "Yes" : "No"]</a><br>" // TFN ADDITION - Vocal Sounds
+			dat += "<b>Preferred Vocal Sound: </b> <a href= 'byond://?_src_=prefs;preference=vocal_sound'>[vocal_sound]</a><br>" // TFN ADDITION - Vocal Sounds
 			dat += "<b>Use old discipline icons:</b> <a href='byond://?_src_=prefs;preference=old_discipline'>[old_discipline ? "Yes" : "No"]</a><br>"
 			dat += "<b>Ambient Occlusion:</b> <a href='byond://?_src_=prefs;preference=ambientocclusion'>[ambientocclusion ? "Enabled" : "Disabled"]</a><br>"
 			dat += "<b>Fit Viewport:</b> <a href='byond://?_src_=prefs;preference=auto_fit_viewport'>[auto_fit_viewport ? "Auto" : "Manual"]</a><br>"
@@ -2652,6 +2658,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						else
 							clan_accessory = pick(clan.accessories)
 
+				if("digitigradelegs")
+					if(clan.name != "Gargoyle")
+						return
+
+					digitigrade_legs = !digitigrade_legs
+
 				if("derangement")
 
 					if(!(pref_species.id == "kindred" ) || clan.name != CLAN_MALKAVIAN)
@@ -2718,11 +2730,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						new_tribe = new newtype()
 						tribe = new_tribe
 						if (tribe.name == "Corax")
-							ADD_TRAIT(user,TRAIT_CORAX,tribe) //This might be redundant considering we also add this trait in auspice.dm
-
-							auspice=/datum/auspice/theurge // we do not want player to have a choice in the auspice, Corax being theurges is already silly enough
+							ADD_TRAIT(user, TRAIT_CORAX, tribe) //This might be redundant considering we also add this trait in auspice.dm
+							// Convert Lupus to Corvid, and default Metis to Corvid since Corax don't have them
+							if (breed == BREED_LUPUS || breed == BREED_METIS)
+								breed = BREED_CORVID
+							auspice = /datum/auspice/theurge // we do not want player to have a choice in the auspice, Corax being theurges is already silly enough
 						else
-							if HAS_TRAIT(user,TRAIT_CORAX)
+							if (breed == BREED_CORVID)
+								breed = BREED_LUPUS
+							if (HAS_TRAIT(user,TRAIT_CORAX))
 								REMOVE_TRAIT(user, TRAIT_CORAX,tribe)
 
 
@@ -2730,7 +2746,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
 
-					var/new_breed = tgui_input_list(user, "Choose your Breed:", "Breed", sort_list(list("Homid", "Metis", "Lupus")))
+					var/available_breeds = list(BREED_HOMID, BREED_METIS, BREED_LUPUS)
+					// Alternative breed choices for the Corax
+					if (istype(tribe, /datum/garou_tribe/corax))
+						available_breeds = list(BREED_HOMID, BREED_CORVID)
+
+					var/new_breed = tgui_input_list(user, "Choose your Breed:", "Breed", sort_list(available_breeds))
 					if (new_breed)
 						breed = new_breed
 
@@ -3550,6 +3571,22 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("old_discipline")
 					old_discipline = !old_discipline
 
+				// TFN ADDITION START - Vocal Sounds
+				if("vocal_sound")
+					switch(vocal_sound)
+						if("Talk")
+							vocal_sound = "Pencil"
+						if("Pencil")
+							vocal_sound = "None"
+						if("None")
+							vocal_sound = "Talk"
+						else
+							vocal_sound = "Talk" // fallback to default
+
+				if("disable_vocal_sounds")
+					disable_vocal_sounds = !disable_vocal_sounds
+				// TFN ADDITION END - Vocal Sounds
+
 				if("widescreenpref")
 					widescreenpref = !widescreenpref
 					user.client.view_size.setDefault(getScreenSize(widescreenpref))
@@ -3762,14 +3799,32 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.yin_chi = character.max_yin_chi
 
 		// TODO: detach is_enlightened from the clan datum
-		// Apply Clan accessory
+		// Apply digitigrade legs if pref is enabled
+		if(digitigrade_legs && character.clan?.name == "Gargoyle")
+
+			if(character.shoes)
+				qdel(character.shoes)
+
+			character.Digitigrade_Leg_Swap(FALSE)
+			character.remove_overlay(MARKS_LAYER)
+			var/mutable_appearance/legs_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "gargoyle_legs_n_tails", -MARKS_LAYER)
+			character.overlays_standing[MARKS_LAYER] = legs_overlay
+			character.apply_overlay(MARKS_LAYER)
+		else if(character.clan?.name == "Gargoyle")
+			character.Digitigrade_Leg_Swap(TRUE)
+
+		// Apply clan marks (accessories)
 		if (character.clan?.accessories?.Find(clan_accessory))
 			var/accessory_layer = character.clan.accessories_layers[clan_accessory]
-			character.remove_overlay(accessory_layer)
-			var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', clan_accessory, -accessory_layer)
-			character.overlays_standing[accessory_layer] = acc_overlay
-			character.apply_overlay(accessory_layer)
 
+			//gargoyle marks use unicorn_layer not marks_layer, marks_layer for gargoyles is being used for the digitigrade legs toggle. all other accessories use the else block
+			if(digitigrade_legs && character.clan?.name == "Gargoyle" && accessory_layer == MARKS_LAYER)
+				return
+			else
+				character.remove_overlay(accessory_layer)
+				var/mutable_appearance/acc_overlay = mutable_appearance('code/modules/wod13/icons.dmi', clan_accessory, -accessory_layer)
+				character.overlays_standing[accessory_layer] = acc_overlay
+				character.apply_overlay(accessory_layer)
 		character.morality_path.score = path_score
 	else
 		character.set_clan(null)
@@ -3806,22 +3861,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.auspice.tribe = tribe
 		character.auspice.on_gain(character)
 
-		switch(breed)
-			if("Homid")
-				character.auspice.gnosis = 1 + character.extra_gnosis
-				character.auspice.start_gnosis = 1 + character.extra_gnosis
-				character.auspice.base_breed = "Homid"
-			if("Lupus")
-				character.auspice.gnosis = 5 + character.extra_gnosis
-				character.auspice.start_gnosis = 5 + character.extra_gnosis
-				character.auspice.base_breed = "Lupus"
-			if("Metis")
-				character.auspice.gnosis = 3 + character.extra_gnosis
-				character.auspice.start_gnosis = 3 + character.extra_gnosis
-				character.auspice.base_breed = "Crinos"
+		// TFN EDIT START: Enter breed form on death
+		character.auspice.set_breed(breed, character)
+
+		character.auspice.gnosis += character.extra_gnosis
+		character.auspice.start_gnosis += character.extra_gnosis
+		// TFN EDIT END: Enter breed form on death
 		if(character.transformator?.crinos_form && character.transformator?.lupus_form && !HAS_TRAIT(character,TRAIT_CORAX))
-			var/mob/living/simple_animal/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
-			var/mob/living/simple_animal/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
+			var/mob/living/carbon/werewolf/crinos/crinos = character.transformator.crinos_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/lupus = character.transformator.lupus_form?.resolve()
 
 			if(!crinos)
 				character.transformator.crinos_form = null
@@ -3871,8 +3919,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
 			crinos.health = crinos.maxHealth
 		else if(HAS_TRAIT(character,TRAIT_CORAX)/*character.transformator?.corax_form && character.transformator?.corvid_form*/) // if we have the Corax tribe, use the Corax forms instead..
-			var/mob/living/simple_animal/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
-			var/mob/living/simple_animal/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
+			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
+			var/mob/living/carbon/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
 
 			if(!cor_crinos)
 				character.transformator.corax_form = null

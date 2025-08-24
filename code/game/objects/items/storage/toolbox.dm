@@ -21,6 +21,8 @@
 	var/latches = "single_latch"
 	var/has_latches = TRUE
 	wound_bonus = 5
+	storage_max_columns = 5
+	storage_max_rows = 3
 
 /obj/item/storage/toolbox/Initialize()
 	. = ..()
@@ -79,7 +81,6 @@
 	new /obj/item/wrench(src)
 	new /obj/item/weldingtool(src)
 	new /obj/item/crowbar(src)
-	new /obj/item/analyzer(src)
 	new /obj/item/wirecutters(src)
 
 /obj/item/storage/toolbox/mechanical/old

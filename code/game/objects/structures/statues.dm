@@ -18,7 +18,7 @@
 /obj/structure/statue/Initialize()
 	. = ..()
 	AddElement(art_type, impressiveness)
-	AddElement(/datum/component/beauty, impressiveness * 75)
+	AddComponent(/datum/component/beauty, impressiveness * 75)
 	AddComponent(/datum/component/simple_rotation)
 
 /obj/structure/statue/attackby(obj/item/W, mob/living/user, params)

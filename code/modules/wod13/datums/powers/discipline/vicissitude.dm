@@ -159,7 +159,7 @@
 	impersonating_facialhaircolor = victim.facial_hair_color
 	impersonating_eyecolor = victim.eye_color
 	impersonating_body_mod = victim.base_body_mod
-	impersonating_body_sprite = GET_BODY_SPRITE(victim)
+	impersonating_body_sprite = victim.body_sprite
 
 /datum/discipline_power/vicissitude/malleable_visage/proc/initialize_original()
 	if (is_shapeshifted)
@@ -177,7 +177,7 @@
 	original_facialhaircolor = owner.facial_hair_color
 	original_eyecolor = owner.eye_color
 	original_body_mod = owner.base_body_mod
-	original_body_sprite = GET_BODY_SPRITE(owner)
+	original_body_sprite = owner.body_sprite
 
 /datum/discipline_power/vicissitude/malleable_visage/proc/shapeshift(to_original = FALSE, instant = FALSE)
 	if (!impersonating_dna)

@@ -12,21 +12,10 @@
 	var/drydesc = "Looks like it's been here a while. Eew."
 	var/drytime = 0
 
-//obj/effect/decal/cleanable/blood/Destroy()
-//	. = ..()
-//	if(istype(get_area(src), /area/vtm))
-//		var/area/vtm/V = get_area(src)
-//		if(V.zone_type == "masquerade")
-//			SSmasquerade.total_level = min(1000, SSmasquerade.total_level+0.5)
-
 /obj/effect/decal/cleanable/blood/Initialize(mapload, list/datum/disease/diseases)
 	. = ..()
 	pixel_x = rand(-8,8) //MOJAVE SUN EDIT - Blood Sprites
 	pixel_y = rand(-8,8) //MOJAVE SUN EDIT - Blood Sprites
-//	if(istype(get_area(src), /area/vtm))
-//		var/area/vtm/V = get_area(src)
-//		if(V.zone_type == "masquerade")
-//			SSmasquerade.total_level = max(0, SSmasquerade.total_level-0.5)
 	if(bloodiness)
 		start_drying()
 	else
