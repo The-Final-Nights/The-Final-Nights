@@ -94691,10 +94691,6 @@
 	color = "#c2c0bc"
 	},
 /area/vtm/interior/banu)
-"ygr" = (
-/obj/fusebox,
-/turf/open/floor/plating/rough,
-/area/vtm/interior/setite/basement)
 "ygu" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 10
@@ -134467,7 +134463,7 @@ xfw
 xfw
 xfw
 hNc
-ygr
+uDK
 uDK
 uDK
 uDK
