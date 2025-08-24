@@ -1482,6 +1482,10 @@
 /obj/machinery/griddle,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/shop)
+"VH" = (
+/obj/structure/brazier,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/pacificheights)
 "VK" = (
 /obj/structure/cargo_take,
 /turf/open/floor/plating/vampdirt,
@@ -3871,7 +3875,7 @@ eQ
 "}
 (3,1,2) = {"
 MS
-iH
+VH
 EN
 Hg
 iH

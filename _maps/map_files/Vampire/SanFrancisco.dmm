@@ -11690,9 +11690,6 @@
 /area/vtm/sewer)
 "dcb" = (
 /obj/structure/table/wood/fancy/royalblack,
-/obj/structure/bonfire/brazier{
-	pixel_y = 14
-	},
 /turf/open/floor/plating/granite{
 	color = "#BEAC90"
 	},
@@ -24051,6 +24048,12 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
+"glk" = (
+/obj/structure/brazier,
+/turf/open/floor/plating/granite{
+	color = "#3e423f"
+	},
+/area/vtm/interior/setite/basement)
 "gll" = (
 /obj/structure/closet/crate/bin,
 /turf/open/floor/plating/toilet,
@@ -29789,12 +29792,6 @@
 /obj/item/storage/fancy/egg_box,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior)
-"hKF" = (
-/obj/structure/bonfire/brazier,
-/turf/open/floor/plating/granite{
-	color = "#3e423f"
-	},
-/area/vtm/interior/setite/basement)
 "hKH" = (
 /obj/effect/turf_decal/siding/white{
 	color = "#636363";
@@ -42032,9 +42029,6 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm)
 "kOp" = (
-/obj/structure/bonfire/brazier{
-	pixel_y = 14
-	},
 /obj/structure/table/wood/fancy/red,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
@@ -86704,6 +86698,10 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/interior/giovanni/outside)
+"wgy" = (
+/obj/structure/brazier,
+/turf/open/floor/plating/rough,
+/area/vtm/interior/setite/basement)
 "wgD" = (
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
@@ -133899,7 +133897,7 @@ mpU
 dHE
 oQs
 dOM
-hKF
+glk
 dOM
 oQs
 mpU
@@ -133910,7 +133908,7 @@ mpU
 dOM
 dcb
 dOM
-dOM
+glk
 dOM
 dOM
 mpU
@@ -134326,7 +134324,7 @@ xfw
 xfw
 hIJ
 tcv
-vBl
+wgy
 vBl
 vBl
 hIJ
