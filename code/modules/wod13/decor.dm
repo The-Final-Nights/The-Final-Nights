@@ -1578,6 +1578,7 @@
 	light_range = 5
 	light_power = 3
 	light_color = "#ffa35c"
+	playsound(src, 'sound/wod13/pilotlight.ogg', 75, TRUE)
 	set_light(light_range, light_power, light_color)
 
 	if(user)
