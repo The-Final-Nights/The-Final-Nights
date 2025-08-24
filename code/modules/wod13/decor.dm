@@ -1562,12 +1562,12 @@
 /obj/structure/brazier/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
 	if(.)
-    return
+    	return
 
 	if(lit)
-    turn_off(user)
+    	turn_off(user)
 	else
-    turn_on(user)
+		turn_on(user)
 
 /obj/structure/brazier/proc/turn_on(mob/user)
     if(lit)
