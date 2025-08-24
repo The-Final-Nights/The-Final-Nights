@@ -98,6 +98,8 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/log_viewer_new,
 	/client/proc/fax_panel, /*send a paper to fax*/
 	/client/proc/openTicketManager,
+	/client/proc/redact_word, //TFN ADDITION
+	/client/proc/allow_word, //TFN ADDITION
 	/datum/admins/proc/display_tags
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
