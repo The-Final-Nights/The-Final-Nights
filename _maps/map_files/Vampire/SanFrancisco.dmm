@@ -2055,6 +2055,11 @@
 	dir = 8
 	},
 /obj/effect/landmark/start/garou/glade/warder,
+/obj/structure/railing{
+	dir = 4;
+	plane = 4;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "aBh" = (
@@ -2779,6 +2784,10 @@
 /area/vtm/interior)
 "aMk" = (
 /obj/structure/stone_tile/block/cracked,
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 9
+	},
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "aMy" = (
@@ -15315,6 +15324,11 @@
 /obj/structure/stone_tile/block{
 	dir = 8
 	},
+/obj/structure/railing{
+	dir = 4;
+	plane = 4;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -15932,6 +15946,10 @@
 /area/vtm/interior/littleitaly)
 "ekc" = (
 /obj/structure/stone_tile/block/cracked,
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 9
+	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "ekd" = (
@@ -16407,6 +16425,11 @@
 /area/vtm/jazzclub)
 "erJ" = (
 /obj/structure/stone_tile/slab/cracked,
+/obj/structure/railing{
+	dir = 4;
+	plane = 4;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "erV" = (
@@ -22380,6 +22403,7 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 1
 	},
+/obj/structure/railing,
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "fSu" = (
@@ -33492,6 +33516,15 @@
 /obj/effect/landmark/start/bruiser,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
+"iKR" = (
+/obj/structure/bed/dogbed,
+/mob/living/simple_animal/hostile/beastmaster,
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 9
+	},
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "iKX" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
@@ -33651,6 +33684,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/start/garou/glade/warder,
+/obj/structure/railing,
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "iNw" = (
@@ -37377,6 +37411,10 @@
 "jNE" = (
 /obj/structure/stone_tile/block,
 /obj/effect/turf_decal/weather/dirt,
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 9
+	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "jNL" = (
@@ -38973,6 +39011,10 @@
 "khC" = (
 /obj/structure/stone_tile/block/cracked,
 /obj/effect/turf_decal/weather/dirt,
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 9
+	},
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "khE" = (
@@ -39064,6 +39106,10 @@
 "kiD" = (
 /obj/structure/stone_tile/block{
 	dir = 4
+	},
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
 	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
@@ -43257,6 +43303,14 @@
 /obj/structure/chair/wood/wings,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/banu/haven)
+"ljD" = (
+/obj/structure/railing,
+/obj/structure/railing{
+	dir = 4;
+	pixel_y = 6
+	},
+/turf/open/floor/plating/rough/cave,
+/area/vtm/forest/caves)
 "ljG" = (
 /turf/closed/wall/vampwall/rich/old{
 	density = 0
@@ -48249,6 +48303,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
+/obj/structure/railing,
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "mxy" = (
@@ -51153,6 +51208,11 @@
 /obj/structure/stone_tile/block{
 	dir = 8
 	},
+/obj/structure/railing{
+	dir = 4;
+	plane = 4;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "ngs" = (
@@ -53014,6 +53074,10 @@
 	dir = 4
 	},
 /obj/effect/landmark/start/garou/glade/warder,
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "nGq" = (
@@ -55697,6 +55761,11 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 8
 	},
+/obj/structure/railing{
+	dir = 4;
+	plane = 4;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "omq" = (
@@ -56174,6 +56243,10 @@
 "oqy" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
+	},
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
 	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
@@ -57294,6 +57367,7 @@
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
+/obj/structure/railing,
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
 "oEQ" = (
@@ -59154,6 +59228,11 @@
 "pfk" = (
 /obj/structure/stone_tile/block{
 	dir = 8
+	},
+/obj/structure/railing{
+	dir = 4;
+	plane = 4;
+	pixel_y = 3
 	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
@@ -61431,6 +61510,10 @@
 "pHE" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
+	},
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/forest/caves)
@@ -67664,6 +67747,15 @@
 /obj/item/reagent_containers/food/drinks/soda_cans/monkey_energy,
 /turf/open/floor/plating/circled,
 /area/vtm/interior/subway)
+"rlm" = (
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
+	},
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/forest/caves)
 "rlA" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/item/bailer,
@@ -72349,6 +72441,7 @@
 /obj/structure/stone_tile/block{
 	dir = 1
 	},
+/obj/structure/railing,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "sAt" = (
@@ -72830,17 +72923,6 @@
 	pixel_y = 7
 	},
 /obj/structure/stone_tile/surrounding,
-/obj/structure/railing,
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/obj/structure/railing{
-	dir = 1;
-	pixel_y = 9
-	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "sHh" = (
@@ -74290,6 +74372,14 @@
 /obj/effect/turf_decal/siding/thinplating/dark,
 /turf/open/floor/glass,
 /area/vtm)
+"tbP" = (
+/obj/structure/stone_tile/slab,
+/obj/structure/railing{
+	dir = 1;
+	pixel_y = 9
+	},
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "tcb" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
@@ -85706,6 +85796,14 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
+"wfH" = (
+/obj/structure/stone_tile/slab,
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
+	},
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "wfQ" = (
 /obj/effect/decal/bordur,
 /obj/effect/decal/pallet,
@@ -86140,6 +86238,16 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/clinic)
+"wlE" = (
+/obj/structure/stone_tile/block{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
+	},
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "wlI" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	color = "#574d46";
@@ -88747,6 +88855,10 @@
 /obj/structure/stone_tile/block/cracked{
 	dir = 4
 	},
+/obj/structure/railing{
+	dir = 8;
+	pixel_y = 3
+	},
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone8"
 	},
@@ -90754,17 +90866,6 @@
 "xvi" = (
 /obj/structure/bonfire/prelit,
 /obj/structure/stone_tile/surrounding,
-/obj/structure/railing,
-/obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/obj/structure/railing{
-	dir = 1;
-	pixel_y = 9
-	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "xvm" = (
@@ -95899,7 +96000,7 @@ atR
 aqb
 aqb
 xvi
-gyH
+iKR
 atR
 rFS
 cZN
@@ -96100,7 +96201,7 @@ kaL
 qXk
 xJE
 oCm
-oiE
+rlm
 atR
 hfC
 atR
@@ -136092,7 +136193,7 @@ aqb
 aqb
 aqb
 sGK
-jjs
+tbP
 oVL
 kaL
 kWP
@@ -136293,7 +136394,7 @@ aqb
 aqb
 xYN
 aqb
-jjs
+wfH
 upV
 lxv
 qqR
@@ -136704,7 +136805,7 @@ muc
 atR
 aqb
 gif
-nvm
+ljD
 wbi
 wbi
 wbi
@@ -137914,7 +138015,7 @@ aqb
 bER
 atR
 pNg
-lMH
+wlE
 jEI
 jFw
 gDP
