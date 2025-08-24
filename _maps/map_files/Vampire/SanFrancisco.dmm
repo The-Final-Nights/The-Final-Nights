@@ -7996,6 +7996,16 @@
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/giovanni)
+"ceW" = (
+/obj/structure/closet/cabinet{
+	color = "#6d6d6d"
+	},
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/obj/item/flashlight/lantern,
+/turf/open/floor/plating/granite/black,
+/area/vtm/interior/setite/basement)
 "ceX" = (
 /obj/structure/flora/ausbushes/fullgrass{
 	plane = 2.8
@@ -22871,15 +22881,6 @@
 	icon_state = "stone8"
 	},
 /area/vtm/sewer/nosferatu_warren)
-"fUW" = (
-/obj/machinery/light/prince{
-	light_power = 0.45;
-	name = "dim light fixture";
-	dir = 1;
-	light_color = "#06402B"
-	},
-/turf/open/floor/plating/granite/black,
-/area/vtm/interior/setite/basement)
 "fUZ" = (
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/littleitaly)
@@ -30666,6 +30667,9 @@
 /obj/item/clothing/suit/hooded/robes/purple,
 /obj/item/clothing/suit/hooded/robes/black,
 /obj/item/clothing/suit/hooded/robes/red,
+/obj/item/clothing/suit/hooded/robes/red,
+/obj/item/clothing/suit/hooded/robes/purple,
+/obj/item/clothing/suit/hooded/robes/black,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
 "hUS" = (
@@ -34377,6 +34381,18 @@
 /obj/item/food/vampire/burger,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"iRi" = (
+/obj/item/candle/infinite{
+	light_color = "#06402B";
+	name = "green candle";
+	color = "#06402B";
+	pixel_y = 6
+	},
+/obj/structure/table/wood/fancy/royalblack,
+/turf/open/floor/plating/granite{
+	color = "#3e423f"
+	},
+/area/vtm/interior/setite/basement)
 "iRo" = (
 /obj/effect/decal/trash,
 /obj/effect/decal/graffiti,
@@ -38326,9 +38342,8 @@
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren)
 "jST" = (
-/obj/machinery/light{
-	dir = 1;
-	pixel_y = -14
+/obj/machinery/light/red{
+	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/setite)
@@ -41044,10 +41059,6 @@
 	color = "#b0b0b0"
 	},
 /area/vtm/interior/wyrm_corrupted)
-"kAb" = (
-/obj/item/clothing/head/hooded/robes_hood/blue,
-/turf/open/space/basic,
-/area/vtm)
 "kAn" = (
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/techshop)
@@ -66651,9 +66662,8 @@
 "qPy" = (
 /obj/structure/table,
 /obj/machinery/reagentgrinder,
-/obj/machinery/light{
-	dir = 1;
-	pixel_y = -14
+/obj/machinery/light/red{
+	dir = 1
 	},
 /turf/open/floor/plating/toilet{
 	color = "#636363"
@@ -69235,13 +69245,6 @@
 "rxR" = (
 /obj/effect/decal/bordur,
 /obj/structure/chair/pew/left,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/financialdistrict)
-"rxS" = (
-/obj/machinery/light{
-	dir = 4;
-	light_color = "#6488EA"
-	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
 "rxZ" = (
@@ -86280,13 +86283,6 @@
 	},
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
-"waV" = (
-/obj/machinery/light{
-	dir = 1;
-	pixel_y = -14
-	},
-/turf/open/floor/plating/rough,
-/area/vtm/interior/setite/basement)
 "wbc" = (
 /obj/structure/vampfence/rich{
 	dir = 4;
@@ -86698,10 +86694,6 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/interior/giovanni/outside)
-"wgy" = (
-/obj/structure/brazier,
-/turf/open/floor/plating/rough,
-/area/vtm/interior/setite/basement)
 "wgD" = (
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
@@ -88789,9 +88781,8 @@
 /obj/structure/railing/metal{
 	dir = 1
 	},
-/obj/machinery/light{
-	dir = 1;
-	pixel_y = -14
+/obj/machinery/light/red{
+	dir = 1
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/setite)
@@ -132689,7 +132680,7 @@ dZi
 dZi
 dZi
 xfw
-kAb
+xfw
 xfw
 xfw
 xfw
@@ -133506,7 +133497,7 @@ mpU
 mpU
 mpU
 mpU
-fUW
+oQs
 dZi
 dZi
 xfw
@@ -133907,7 +133898,7 @@ vOX
 mpU
 dOM
 dcb
-dOM
+iRi
 glk
 dOM
 dOM
@@ -134314,7 +134305,7 @@ mpU
 mpU
 mpU
 mpU
-fUW
+oQs
 dZi
 dZi
 xfw
@@ -134324,7 +134315,7 @@ xfw
 xfw
 hIJ
 tcv
-wgy
+vBl
 vBl
 vBl
 hIJ
@@ -134515,7 +134506,7 @@ oQs
 wmi
 hUN
 iNx
-uKi
+ceW
 eRe
 dZi
 xfw
@@ -134528,7 +134519,7 @@ hIJ
 vBl
 vBl
 vBl
-waV
+vBl
 hIJ
 hIJ
 hIJ
@@ -173522,10 +173513,10 @@ vtC
 tvt
 dCc
 tvt
-rxS
+vtC
 drv
 vtC
-rxS
+vtC
 vtC
 vtC
 vtC
@@ -173726,7 +173717,7 @@ tjo
 tjo
 rQe
 rFm
-rFm
+dub
 dub
 tjo
 dub
