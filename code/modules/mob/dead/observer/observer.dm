@@ -558,7 +558,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if (!ghostvision)
 		see_invisible = SEE_INVISIBLE_LIVING
 	else
-		see_invisible = OBSERVER_SIGHT
+		see_invisible = OBSERVER_SIGHT //TFN EDIT, ORIGINAL: see_invisible = SEE_INVISIBLE_OBSERVER
 
 
 	updateghostimages()
