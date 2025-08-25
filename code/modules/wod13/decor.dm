@@ -1546,7 +1546,7 @@
 
 /obj/structure/brazier
 	name = "brazier"
-	desc = "A metal pan atop stone brick, meant to hold fire. It is gas-powered, with a strange ensignia around the gas knob center."
+	desc = "A metal pan atop stone brick, meant to hold fire. It is gas-powered, with a strange insignia around the gas knob center."
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "brazier"
 	plane = GAME_PLANE
