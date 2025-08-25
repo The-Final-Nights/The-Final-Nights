@@ -73744,7 +73744,7 @@
 /area/vtm/sewer)
 "sTf" = (
 /obj/structure/vampdoor/prison{
-	lock_id = "bar";
+	lock_id = "baron";
 	lockpick_difficulty = 15;
 	opacity = 0;
 	dir = 1
