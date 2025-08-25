@@ -1546,7 +1546,7 @@
 
 /obj/structure/brazier
 	name = "brazier"
-	desc = "Lorem Ipsum Slop Slop Placeholder"
+	desc = "A metal pan atop stone brick, meant to hold fire. It is gas-powered, with a strange ensignia around the gas knob center."
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "brazier"
 	plane = GAME_PLANE
@@ -1582,8 +1582,8 @@
 	set_light(light_range, light_power, light_color)
 
 	if(user)
-		to_chat(user, span_notice("You light the [name]."))
-		user.visible_message(span_notice("[user] lights the [name]."), null, null, 3)
+		to_chat(user, span_notice("You turn the knob, lighting the [name]."))
+		user.visible_message(span_notice("[user] turns the knob, lighting the [name]."), null, null, 3)
 
 /obj/structure/brazier/proc/turn_off(mob/user)
 	if(!lit)
@@ -1594,7 +1594,7 @@
 	set_light(0)
 
 	if(user)
-		to_chat(user, span_notice("You extinguish the [name]."))
+		to_chat(user, span_notice("You turn the knob backwards, extinguishing the [name]."))
 		user.visible_message(span_notice("[user] extinguishes the [name]."), null, null, 3)
 
 /obj/effect/decal/carpet
