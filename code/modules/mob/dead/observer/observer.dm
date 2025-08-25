@@ -12,9 +12,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	stat = DEAD
 	alpha = 128
 	density = FALSE
-	//TFN EDIT START: Repacing with new sight value for Shroudsight fix
-	see_invisible = OBSERVER_SIGHT
-	//TFN EDIT END
+	see_invisible = OBSERVER_SIGHT //TFN EDIT, ORIGINAL: see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	invisibility = INVISIBILITY_OBSERVER
