@@ -877,6 +877,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<b>[morality_path.name]:</b> [path_score]/10"
 				if ((player_experience >= (path_score * 2)) && (path_score < 10))
 					dat += " <a href='byond://?_src_=prefs;preference=path;task=input'>Increase Path ([path_score * 2])</a>"
+				// TFN EDIT START: Adds a button to reduce path score
+				if ((path_score > 1))
+					dat += "<a href='byond://?_src_=prefs;preference=pathminus;task=input'>Lower Path (Free)</a>"
+				// TFN EDIT END
 				if(!slotlocked)
 					dat += "<a href='byond://?_src_=prefs;preference=pathof;task=input'>Switch Path</a>"
 				dat += "<BR><b>Description:</b> [morality_path.desc]<BR>"
@@ -2823,6 +2827,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					player_experience -= cost
 					experience_used_on_character += cost
 					path_score = clamp(path_score + 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
+
+				// TFN EDIT ADDITION START: Adding the ability to lower your path score
+				if("pathminus")
+					path_score = clamp(path_score - 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
+				// TFN EDIT ADDITION END
 
 				if("pathof")
 					if(slotlocked || !(pref_species.id == "kindred"))
