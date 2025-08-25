@@ -13,9 +13,9 @@
 	GLOB.carbon_list += src
 	if(!mapload)  //I don't want no gas leaks on my space ruin you hear?
 		RegisterSignal(src, COMSIG_LIVING_DEATH, PROC_REF(attach_rot))
-	
+
 	RegisterSignal(src, COMSIG_MOB_ITEM_AFTERATTACK, PROC_REF(swing_attack))
-	
+
 /mob/living/carbon/Destroy()
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. =  ..()
@@ -217,7 +217,7 @@
 	if(HAS_TRAIT(H, TRAIT_IMMOBILIZED))
 		return
 	if(iscarbon(H))
-		
+
 		if(carbon_mob.legcuffed)
 			return
 	if(pulledby && H.pulledby.grab_state >= GRAB_PASSIVE)
@@ -688,7 +688,9 @@
 	if(stat == DEAD)
 		sight = (SEE_TURFS|SEE_MOBS|SEE_OBJS)
 		see_in_dark = 8
-		see_invisible = SEE_INVISIBLE_OBSERVER
+		//TFN EDIT START: Replacing with new sight value for Shroudsight fix
+		see_invisible = OBSERVER_SIGHT
+		//TFN EDIT END
 		return
 
 	sight = initial(sight)
