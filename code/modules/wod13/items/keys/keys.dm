@@ -377,8 +377,8 @@
 		"police",
 		"glowie"
 	)
-/obj/item/vamp/keys/police/districtattorney
-	name = "District Attorney keys"
+/obj/item/vamp/keys/police/assistantdistrictattorney
+	name = "assistant District Attorney keys"
 	accesslocks = list(
 		"police"
 	)
