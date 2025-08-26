@@ -1,5 +1,0 @@
-author: "XeonMations"
-delete-after: True
-changes:
-  - balance: "molotvs now explode after 10s of being lit"
-  - refactor: "refactored molotov code"
