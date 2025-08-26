@@ -10,10 +10,9 @@
 	time = 64
 
 /datum/surgery_step/modify_skin/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	user.visible_message("<span class='notice'>[user] begins to alter [target]'s skin.</span>", "<span class='notice'>You begin to alter [target]'s skin...</span>")
-	display_results(user, target, "<span class='notice'>You begin to alter [target]'s skin...</span>",
-		"<span class='notice'>[user] begins to alter [target]'s skin.</span>",
-		"<span class='notice'>[user] begins to press against [target]'s skin.</span>")
+	display_results(user, target, span_notice("You begin to alter [target]'s skin..."),
+		span_notice("[user] begins to alter [target]'s skin."),
+		span_notice("[user] begins to press against [target]'s skin."))
 
 /datum/surgery_step/modify_skin/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/new_s_tone = input(user, "Choose [target]'s skin tone:", "Skin Tone Change")  as null|anything in GLOB.skin_tones
