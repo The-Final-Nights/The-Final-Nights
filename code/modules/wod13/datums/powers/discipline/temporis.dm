@@ -16,8 +16,7 @@
 
 	if (!istype(power, /datum/discipline_power/celerity))
 		return
-
-	to_chat(owner, "<span class='userdanger'>You try to use Celerity, but your active Temporis causes your body to wrench itself apart!</span>")
+	to_chat(owner, span_userdanger("You try to use Celerity, but your active Temporis causes your body to wrench itself apart!"))
 	INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob, emote), "scream")
 	addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living/carbon/human, gib)), 3 SECONDS)
 
@@ -36,7 +35,7 @@
 /datum/discipline_power/temporis/hourglass_of_the_mind/activate()
 	. = ..()
 	//Display time
-	to_chat(owner, "<span class='notice'><b>[SScity_time.timeofnight]</b></span>")
+	to_chat(owner, span_notice("<b>[SScity_time.timeofnight]</b>"))
 	//Check range for targets with Temporis and display them, if any exist
 	var/list/targets = list()
 	for(var/mob/living/carbon/human/target in view(range, owner))
@@ -55,9 +54,9 @@
 				target_list += ", "
 			else if(i == targets.len - 1)
 				target_list += " and "
-		to_chat(owner, "<span class='notice'>[english_list(targets)] [targets.len == 1 ? "has" : "have"] temporal distortions around [targets.len == 1 ? "themself" : "themselves"].</span>")
+		to_chat(owner, span_notice("[english_list(targets)] [targets.len == 1 ? "has" : "have"] temporal distortions around [targets.len == 1 ? "themself" : "themselves"]."))
 	else
-		to_chat(owner, "<span class='notice'>There are no temporal distortions nearby.</span>")
+		to_chat(owner, span_notice("There are no temporal distortions nearby."))
 	return TRUE
 
 //RECURRING CONTEMPLATION
@@ -83,7 +82,7 @@
 	if(rollsuccess > 0)
 		target.AddComponent(/datum/component/dejavu, rewinds = rollsuccess, interval = 2 SECONDS)
 	else
-		to_chat(owner, "<span class='userdanger'><b>You fail to affect your target!</b></span>")
+		to_chat(owner, span_userdanger("<b>You fail to affect your target!</b>"))
 		return
 
 //LEADEN MOMENT
@@ -130,12 +129,12 @@
 	//Determine targets, start timers
 	if(success > 0)
 		addtimer(CALLBACK(src, PROC_REF(deactivate),target), discduration)
-		to_chat(target, "<span class='userdanger'><b>Time seems to slow to a crawl around you...</b></span>")
+		to_chat(target, span_userdanger("<b>Time seems to slow to a crawl around you...</b>"))
 		affected_mob = target
 	else if(success < 0)
 		//Botch causes the owner to be slowed instead
 		addtimer(CALLBACK(src, PROC_REF(deactivate)), discduration)
-		to_chat(owner, "<span class='userdanger'><b>Your temporal manipulation backfires!</b></span>")
+		to_chat(owner, span_userdanger("<b>Your temporal manipulation backfires!</b>"))
 		affected_mob = owner
 
 	//Apply modifiers to target
