@@ -244,11 +244,9 @@
 /mob/living/proc/add_obficon()
 	if(!client)
 		return
-
 	var/image/icon = image('code/modules/wod13/icons.dmi', src, "shadow", FLY_LAYER)
 	icon.alpha = 100
-	icon.pixel_y = -3
-
+	icon.pixel_y = -4
 	LAZYINITLIST(obf_icons)
 	obf_icons += icon
 	client.images |= icon
@@ -278,7 +276,4 @@
 /mob/living/proc/on_client_lost(datum/source)
 	SIGNAL_HANDLER
 	remove_obficon()
-
-/mob/living
-	var/list/obf_icons
 // TFN EDIT END

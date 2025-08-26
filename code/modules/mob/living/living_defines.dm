@@ -313,3 +313,5 @@
 
 	//If we are currently leaning on something, and what that object is
 	var/atom/leaned_object
+
+	var/list/obf_icons
