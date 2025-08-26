@@ -1,1 +1,41 @@
+/datum/surgery/fleshcraft/hair
+	name = "Change Hair Colour"
+	steps = list(/datum/surgery_step/incise, /datum/surgery_step/retract_skin, /datum/surgery_step/modify_hair, /datum/surgery_step/close)
+	possible_locs = list(BODY_ZONE_HEAD)
+
+//reshape_face
+/datum/surgery_step/modify_hair
+	name = "Change Hair Colour"
+	accept_hand = TRUE
+	time = 20
+
+/datum/surgery_step/modify_hair/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	user.visible_message("<span class='notice'>[user] begins to alter [target]'s appearance.</span>", "<span class='notice'>You begin to alter [target]'s appearance...</span>")
+	display_results(user, target, "<span class='notice'>You begin to alter [target]'s hair...</span>",
+		"<span class='notice'>[user] begins to alter [target]'s hair.</span>",
+		"<span class='notice'>[user] begins to pull at the roots of [target]'s hair.</span>")
+
+/datum/surgery_step/modify_hair/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+	var/hairchoice = alert(user, "Hairstyle or hair color?", "Change Hair", "Style", "Color")
+	if(hairchoice == "Style")
+		var/new_style = input(user, "Select a hairstyle", "Grooming")  as null|anything in GLOB.hairstyles_list
+		if(new_style)
+			target.hairstyle = new_style
+		if(target.gender == "male")
+			var/new_style = input(user, "Select a facial hairstyle", "Grooming")  as null|anything in GLOB.facial_hairstyles_list
+			if(new_style)
+				target.facial_hairstyle = new_style
+		else
+			target.facial_hairstyle = "Shaved"
+	else
+		var/new_hair_color = input(user, "Choose [target]'s hair color", "Hair Color", target.hair_color) as color|null
+		if(new_hair_color)
+			target.hair_color = sanitize_hexcolor(new_hair_color)
+			target.dna.update_ui_block(DNA_HAIR_COLOR_BLOCK)
+		if(target.gender == "male")
+			var/new_face_color = input(user, "Choose [target]'s facial hair color", "Hair Color", target.facial_hair_color) as color|null
+			if(new_face_color)
+				target.facial_hair_color = sanitize_hexcolor(new_face_color)
+				target.dna.update_ui_block(DNA_FACIAL_HAIR_COLOR_BLOCK)
+	target.update_hair()
 
