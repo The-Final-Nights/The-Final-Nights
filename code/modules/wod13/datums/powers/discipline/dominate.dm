@@ -400,7 +400,7 @@
 	if(domination_succeeded)
 		to_chat(owner, span_warning("You've successfully dominated [target]'s bodily functions!"))
 		var/list/orders = list("Sleep", "Wake", "Heart Attack", "Revive")
-		var/order = tgui_input_list(user, "Select a Command","Command Selection", orders)
+		var/order = tgui_input_list(owner, "Select a Command","Command Selection", orders)
 		if(!order)
 			return
 		switch(order)
