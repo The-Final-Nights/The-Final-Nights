@@ -131,3 +131,6 @@
   - bugfix: Fixed a couple of TGUI related runtimes.
   - balance: molotvs now explode after 10s of being lit
   - refactor: refactored molotov code
+2025-08-26:
+  SoreYew:
+  - qol: Updates the DA to an ADA
