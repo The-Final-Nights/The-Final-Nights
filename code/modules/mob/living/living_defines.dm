@@ -315,4 +315,4 @@
 	var/atom/leaned_object
 
 	//List for icons created for obfuscated mobs
-	var/list/obf_icons
+	var/list/obf_icons // TFN ADDITION - Adding an Obfuscate Indicator
