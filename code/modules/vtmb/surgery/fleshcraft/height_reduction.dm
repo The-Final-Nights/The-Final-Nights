@@ -21,7 +21,7 @@
 
 /datum/surgery_step/shorten_spine/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to compress [target]'s spine like taffy."),
-		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!</span>"))
+		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!"))
 
 /datum/surgery_step/shorten_spine/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if (target.has_quirk(/datum/quirk/tower))
