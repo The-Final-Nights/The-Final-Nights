@@ -18,14 +18,19 @@
 			generation_blood_bonus = 0
 		if(7)
 			generation_blood_bonus = 12
+			bloodquality += 1
 		if(6)
 			generation_blood_bonus = 39
+			bloodquality += 2
 		if(5)
 			generation_blood_bonus = 56
+			bloodquality += 3
 		if(4)
 			generation_blood_bonus = 93
+			bloodquality += 4
 		if(1 to 3)
 			generation_blood_bonus = INFINITY
+			bloodquality += 100
 	maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
 
 /mob/living/ComponentInitialize()
