@@ -397,7 +397,6 @@
 	range = 7
 
 	cooldown_length = 1 MINUTES
-	var/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/stain_the_soul/pre_activation_checks(mob/living/target)
 
@@ -428,3 +427,7 @@
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
 		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))
+
+/datum/discipline_power/dementation/stain_the_soul/deactivate(mob/living/carbon/human/target)
+	. = ..()
+	target.remove_overlay(MUTATIONS_LAYER)
