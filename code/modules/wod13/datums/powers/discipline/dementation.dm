@@ -396,15 +396,21 @@
 	target_type = TARGET_HUMAN
 	range = 7
 
+	multi_activate = TRUE
+	duration_length = 3 SECONDS
 	cooldown_length = 1 MINUTES
+	var/dementation_succeeded = FALSE
 
 /datum/discipline_power/dementation/stain_the_soul/pre_activation_checks(mob/living/target)
 
-	if(dementation_check(owner, target, base_difficulty = 6))
-		do_cooldown(cooldown_length)
-		return FALSE
-	else
+	dementation_succeeded = dementation_check(owner, target, base_difficulty = 6)
+	if(dementation_succeeded)
 		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
+		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))
+		return FALSE
 
 /datum/discipline_power/dementation/stain_the_soul/activate(mob/living/carbon/human/target)
 	. = ..()
@@ -425,8 +431,7 @@
 		to_chat(target, span_warning("You feel your psyche jolt in agony."))
 		
 	else
-		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
-		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))
+		return
 
 /datum/discipline_power/dementation/stain_the_soul/deactivate(mob/living/carbon/human/target)
 	. = ..()
