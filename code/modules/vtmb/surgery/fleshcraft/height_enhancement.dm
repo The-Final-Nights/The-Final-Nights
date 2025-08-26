@@ -21,7 +21,7 @@
 
 /datum/surgery_step/extend_spine/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to stretch out [target]'s spine like taffy."),
-		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!</span>"))
+		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!"))
 
 /datum/surgery_step/extend_spine/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if (target.has_quirk(/datum/quirk/dwarf))
@@ -32,5 +32,5 @@
 		display_results(user, target, span_notice("You sucessfully make [target] huge! You can't make them any taller for now!"))
 	else 
 		display_results(user, target, span_notice("You can't find a way to make [target] any taller!"))
-	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!</span>")
+	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!")
 	return TRUE
