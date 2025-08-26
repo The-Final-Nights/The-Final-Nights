@@ -3805,26 +3805,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.morality_path = MOR
 
 		character.generation = generation
-		var/generation_blood_bonus
-		switch(generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
-			if(8 to HIGHEST_GENERATION_LIMIT)
-				generation_blood_bonus = 0
-			if(7)
-				generation_blood_bonus = 12
-				character.bloodquality += 1
-			if(6)
-				generation_blood_bonus = 39
-				character.bloodquality += 2
-			if(5)
-				generation_blood_bonus = 56
-				character.bloodquality += 3
-			if(4)
-				generation_blood_bonus = 93
-				character.bloodquality += 4
-			if(1 to 3)
-				generation_blood_bonus = INFINITY
-				character.bloodquality += 100
-		character.maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
+
+		character.calculate_max_bloodpool()
 		character.bloodpool = rand(2, character.maxbloodpool)
 		if(generation <= 3) //The INFINITY value messes with assignment - This works for a general patch.
 			character.bloodpool = character.maxbloodpool
