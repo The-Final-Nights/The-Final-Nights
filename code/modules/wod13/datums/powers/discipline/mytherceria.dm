@@ -448,7 +448,7 @@
 /datum/discipline_power/mytherceria/steal_the_mind/activate(mob/living/carbon/human/target)
 	. = ..()
 	var/list/traits = list("Physique", "Dexterity", "Social", "Mentality", "Cruelty", "Lockpicking", "Athletics")
-	var/selected_trait = tgui_input_list(user,  "Choose trait to damage:", "Traits", traits)
+	var/selected_trait = tgui_input_list(owner,  "Choose trait to damage:", "Traits", traits)
 	if(!selected_trait)
 		return
 	to_chat(owner, span_notice("You focus on damaging the target's self!"))
