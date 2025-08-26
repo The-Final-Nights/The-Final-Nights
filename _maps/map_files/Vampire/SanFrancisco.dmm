@@ -19311,12 +19311,6 @@
 	color = "#635d52"
 	},
 /area/vtm)
-"eZQ" = (
-/obj/structure/chair/sofa/old/left{
-	dir = 1
-	},
-/turf/open/floor/plating/parquetry,
-/area/vtm/interior/setite)
 "fab" = (
 /turf/closed/wall/vampwall,
 /area/vtm/sewer/nosferatu_warren)
@@ -20791,19 +20785,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
-"fsS" = (
-/obj/structure/railing/metal{
-	dir = 4
-	},
-/obj/structure/chair/sofa/old/right{
-	dir = 1
-	},
-/obj/effect/turf_decal/siding/wood{
-	color = "#9a704a";
-	dir = 4
-	},
-/turf/open/floor/plating/parquetry,
-/area/vtm/interior/setite)
 "fsY" = (
 /obj/structure/railing/metal{
 	dir = 1
@@ -22049,15 +22030,6 @@
 	},
 /turf/open/floor/plating/roofwalk,
 /area/vtm)
-"fKe" = (
-/obj/structure/table/wood,
-/obj/structure/showcase/machinery/tv{
-	icon_state = "tv_nature";
-	plane = 4.2;
-	pixel_y = 12
-	},
-/turf/open/floor/plating/parquetry,
-/area/vtm/interior/setite)
 "fKo" = (
 /obj/structure/vampdoor/wood{
 	lock_id = "camarilla";
@@ -27474,9 +27446,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "hfc" = (
-/obj/structure/vampdoor/setite{
-	color = "#CD5C5C"
-	},
+/obj/structure/vampdoor/setite,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
 "hfe" = (
@@ -38061,14 +38031,6 @@
 /mob/living/carbon/human/npc/walkby,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
-"jQl" = (
-/obj/item/kirbyplants{
-	icon_state = "plant3";
-	pixel_x = 9;
-	pixel_y = 21
-	},
-/turf/open/floor/plating/parquetry,
-/area/vtm/interior/setite)
 "jQs" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#503e28";
@@ -38924,13 +38886,6 @@
 	color = "#9c8064"
 	},
 /area/vtm/interior/police/fed)
-"kch" = (
-/obj/structure/bed{
-	pixel_y = 11
-	},
-/obj/structure/bed,
-/turf/open/floor/plating/parquetry,
-/area/vtm/interior/setite)
 "kci" = (
 /obj/structure/vampdoor/wood/old{
 	dir = 1;
@@ -40061,6 +40016,9 @@
 /obj/machinery/light{
 	dir = 8;
 	light_color = "#6488EA"
+	},
+/obj/structure/chair/sofa/old/left{
+	dir = 1
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/setite)
@@ -41504,9 +41462,7 @@
 /turf/open/floor/plating/rough,
 /area/vtm/cabdepot)
 "kGi" = (
-/obj/structure/vampdoor/setite{
-	color = "#3e423f"
-	},
+/obj/structure/vampdoor/setite,
 /obj/effect/turf_decal/siding/white{
 	color = "#636363"
 	},
@@ -47807,6 +47763,14 @@
 	},
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren)
+"mjQ" = (
+/obj/item/kirbyplants{
+	icon_state = "plant3";
+	pixel_y = 8;
+	pixel_x = -9
+	},
+/turf/open/floor/plating/parquetry,
+/area/vtm/interior/setite)
 "mjT" = (
 /turf/open/openspace,
 /area/vtm)
@@ -69690,6 +69654,12 @@
 /area/vtm/interior/police/upstairs)
 "rDu" = (
 /obj/structure/coclock,
+/obj/structure/table/wood,
+/obj/structure/showcase/machinery/tv{
+	icon_state = "tv_nature";
+	plane = 4.2;
+	pixel_y = 12
+	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/setite)
 "rDy" = (
@@ -84607,6 +84577,12 @@
 /obj/machinery/camera/directional/west,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
+"vCn" = (
+/obj/structure/chair/sofa/old/right{
+	dir = 1
+	},
+/turf/open/floor/plating/parquetry,
+/area/vtm/interior/setite)
 "vCo" = (
 /obj/structure/chair/wood{
 	dir = 8
@@ -132582,13 +132558,13 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -132782,17 +132758,17 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
 nlv
 nlv
 nlv
 nlv
 nlv
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -132983,8 +132959,8 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
+rCB
+rCB
 nlv
 nlv
 eKl
@@ -132994,17 +132970,17 @@ lbA
 nlv
 nlv
 nlv
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -133185,7 +133161,7 @@ xfw
 xfw
 xfw
 xfw
-xfw
+rCB
 nlv
 eKl
 gqT
@@ -133197,7 +133173,7 @@ gqT
 gqT
 nlv
 nlv
-xfw
+rCB
 nlv
 nlv
 nlv
@@ -133206,7 +133182,7 @@ nlv
 nlv
 nlv
 nlv
-xfw
+rCB
 xfw
 xfw
 xfw
@@ -133386,8 +133362,8 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
+rCB
+rCB
 eKl
 gqT
 kHH
@@ -133399,7 +133375,7 @@ kHH
 kHH
 eYj
 nlv
-xfw
+rCB
 oOr
 gqT
 plo
@@ -133408,8 +133384,8 @@ xVC
 fir
 yjB
 nlv
-xfw
-xfw
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -133588,7 +133564,7 @@ xfw
 xfw
 xfw
 xfw
-xfw
+rCB
 nlv
 eKl
 gqT
@@ -133611,17 +133587,17 @@ kHH
 gqT
 nlv
 nlv
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -133790,7 +133766,7 @@ xfw
 xfw
 xfw
 xfw
-xfw
+rCB
 eKl
 uxJ
 kHH
@@ -133823,8 +133799,8 @@ hNc
 hNc
 hNc
 hNc
-xfw
-xfw
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -133992,7 +133968,7 @@ xfw
 xfw
 xfw
 xfw
-xfw
+rCB
 eKl
 pkQ
 kHH
@@ -134026,7 +134002,7 @@ kDd
 inr
 hNc
 hNc
-xfw
+rCB
 xfw
 xfw
 xfw
@@ -134194,7 +134170,7 @@ xfw
 xfw
 xfw
 xfw
-xfw
+rCB
 eKl
 dbQ
 kHH
@@ -134228,7 +134204,7 @@ uDK
 uDK
 mbI
 hNc
-xfw
+rCB
 xfw
 xfw
 xfw
@@ -134396,7 +134372,7 @@ xfw
 xfw
 xfw
 xfw
-xfw
+rCB
 nlv
 eKl
 gqT
@@ -134419,21 +134395,21 @@ kHH
 gqT
 nlv
 nlv
-xfw
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
+rCB
+rCB
 hNc
 uDK
 uDK
 uDK
 uDK
 hNc
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 rCB
@@ -134598,8 +134574,8 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
+rCB
+rCB
 eKl
 gqT
 kHH
@@ -134611,7 +134587,7 @@ kHH
 kHH
 aXy
 nlv
-xfw
+rCB
 oOr
 gqT
 qwU
@@ -134620,12 +134596,12 @@ vll
 dnT
 yjB
 nlv
+rCB
+rCB
 xfw
 xfw
 xfw
-xfw
-xfw
-xfw
+rCB
 hNc
 uDK
 uDK
@@ -134635,7 +134611,7 @@ hNc
 hNc
 hNc
 hNc
-xfw
+rCB
 xfw
 xfw
 rCB
@@ -134801,7 +134777,7 @@ xfw
 xfw
 xfw
 xfw
-xfw
+rCB
 nlv
 eKl
 gqT
@@ -134813,7 +134789,7 @@ gqT
 gqT
 nlv
 nlv
-xfw
+rCB
 nlv
 nlv
 nlv
@@ -134822,12 +134798,12 @@ nlv
 nlv
 nlv
 nlv
-xfw
-xfw
-xfw
+rCB
 xfw
 xfw
 xfw
+xfw
+rCB
 hNc
 hNc
 omY
@@ -134837,7 +134813,7 @@ uDK
 uDK
 uKO
 hNc
-xfw
+rCB
 xfw
 xfw
 rCB
@@ -135003,8 +134979,8 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
+rCB
+rCB
 nlv
 nlv
 eKl
@@ -135014,23 +134990,23 @@ lbA
 nlv
 nlv
 nlv
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
 xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
 hNc
 ixM
 uDK
@@ -135039,7 +135015,7 @@ hNc
 hNc
 hNc
 hNc
-xfw
+rCB
 xfw
 xfw
 rCB
@@ -135206,14 +135182,17 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
 nlv
 nlv
 nlv
 nlv
 nlv
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -135229,19 +135208,16 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
-xfw
-xfw
+rCB
 hNc
 hNc
 hNc
 hNc
-xfw
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 rCB
@@ -135410,6 +135386,13 @@ xfw
 xfw
 xfw
 xfw
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -135427,19 +135410,12 @@ xfw
 xfw
 xfw
 xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
-xfw
+rCB
+rCB
+rCB
+rCB
+rCB
+rCB
 xfw
 xfw
 xfw
@@ -173829,9 +173805,9 @@ ydD
 mww
 jwS
 lFL
-lFL
 ydD
-lFL
+ydD
+ydD
 lFL
 lFL
 vtC
@@ -214431,10 +214407,10 @@ lFL
 lFL
 mww
 rDu
-kch
+jNr
 kov
 gph
-jNr
+gph
 gph
 lFL
 mjT
@@ -214632,9 +214608,9 @@ mww
 oYy
 fok
 kkB
+mjQ
 jNr
-jQl
-jNr
+vCn
 jNr
 jNr
 bMN
@@ -214834,9 +214810,9 @@ uLM
 oYy
 qOZ
 kkB
-fKe
 jNr
-eZQ
+jNr
+jNr
 jNr
 jNr
 jNr
@@ -215038,7 +215014,7 @@ jNr
 jNr
 jNr
 axi
-fsS
+cVj
 cVj
 hBW
 jNr
