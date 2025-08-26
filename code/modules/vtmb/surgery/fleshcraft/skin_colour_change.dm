@@ -1,1 +1,23 @@
+/datum/surgery/fleshcraft/skin_colour_change
+	name = "Change Skin Colour"
+	steps = list(/datum/surgery_step/incise, /datum/surgery_step/retract_skin, /datum/surgery_step/modify_eyes, /datum/surgery_step/close)
+	possible_locs = list(BODY_ZONE_CHEST)
 
+//reshape_face
+/datum/surgery_step/modify_skin
+	name = "Change Skin Colour"
+	accept_hand = TRUE
+	time = 64
+
+/datum/surgery_step/modify_skin/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	user.visible_message("<span class='notice'>[user] begins to alter [target]'s skin.</span>", "<span class='notice'>You begin to alter [target]'s skin...</span>")
+	display_results(user, target, "<span class='notice'>You begin to alter [target]'s skin...</span>",
+		"<span class='notice'>[user] begins to alter [target]'s skin.</span>",
+		"<span class='notice'>[user] begins to press against [target]'s skin.</span>")
+
+/datum/surgery_step/modify_skin/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+	var/new_s_tone = input(user, "Choose [target]'s skin tone:", "Skin Tone Change")  as null|anything in GLOB.skin_tones
+	if(new_s_tone)
+		target.skin_tone = new_s_tone
+		target.dna.update_ui_block(DNA_SKIN_TONE_BLOCK)
+		target.update_body()
