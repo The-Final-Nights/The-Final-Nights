@@ -188,9 +188,6 @@
 	. = ..()
 	if(.)
 		return
-	if(HAS_TRAIT(user, TRAIT_WALLBREAKER))
-		attack_potence()
-		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	to_chat(user, "<span class='notice'>You push the wall but nothing happens!</span>")
 	playsound(src, 'sound/weapons/genhit.ogg', 25, TRUE)
