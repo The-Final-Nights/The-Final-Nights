@@ -132,5 +132,7 @@
   - balance: molotvs now explode after 10s of being lit
   - refactor: refactored molotov code
 2025-08-26:
+  Kolibri-B:
+  - balance: Torpor timers are now a static 10 minutes.
   SoreYew:
   - qol: Updates the DA to an ADA
