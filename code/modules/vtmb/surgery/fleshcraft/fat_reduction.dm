@@ -21,7 +21,7 @@
 
 /datum/surgery_step/remove_fat/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to pull out [target]'s body fat."),
-		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!</span>"))
+		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!"))
 
 /datum/surgery_step/remove_fat/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if (target.base_body_mod == FAT_BODY_MODEL)
