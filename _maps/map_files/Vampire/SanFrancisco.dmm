@@ -28988,9 +28988,6 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/shop)
 "hAS" = (
-/obj/structure/table{
-	color = "#CD5C5C"
-	},
 /obj/structure/table/wood/fancy/red,
 /obj/item/candle/infinite{
 	light_color = "#06402B";
