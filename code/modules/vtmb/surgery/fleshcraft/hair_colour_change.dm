@@ -10,10 +10,9 @@
 	time = 20
 
 /datum/surgery_step/modify_hair/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	user.visible_message("<span class='notice'>[user] begins to alter [target]'s appearance.</span>", "<span class='notice'>You begin to alter [target]'s appearance...</span>")
-	display_results(user, target, "<span class='notice'>You begin to alter [target]'s hair...</span>",
-		"<span class='notice'>[user] begins to alter [target]'s hair.</span>",
-		"<span class='notice'>[user] begins to pull at the roots of [target]'s hair.</span>")
+	display_results(user, target, span_notice("You begin to reshape [target]'s hair..."),
+		span_notice("[user] begins to manipulate [target]'s head in truly horrific ways!"),
+		span_notice("[user] begins to manipulate [target]'s head in truly horrific ways!"))
 
 /datum/surgery_step/modify_hair/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/hairchoice = alert(user, "Hairstyle or hair color?", "Change Hair", "Style", "Color")
