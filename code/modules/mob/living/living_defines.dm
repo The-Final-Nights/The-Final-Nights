@@ -314,4 +314,5 @@
 	//If we are currently leaning on something, and what that object is
 	var/atom/leaned_object
 
+	//List for icons created for obfuscated mobs
 	var/list/obf_icons
