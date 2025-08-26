@@ -266,7 +266,7 @@
 /datum/discipline_power/potence/six/activate()
 	. = ..()
 	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
-	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 1 SECONDS, range = 7, speed = 2, skill_mod = 0, min_distance = 0)
+	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 2 SECONDS, range = 7, speed = 3, skill_mod = 0, min_distance = 0)
 	owner.dna.species.punchdamagelow += 20
 	owner.dna.species.punchdamagehigh += 20
 	owner.dna.species.meleemod += 1
