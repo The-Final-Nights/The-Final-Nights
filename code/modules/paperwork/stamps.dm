@@ -35,7 +35,7 @@
 	icon_state = "stamp-law"
 	dye_color = DYE_LAW
 
-/obj/item/stamp/law/districtattorney
+/obj/item/stamp/law/assistantdistrictattorney
 	name = "District Attorny's rubber stamp"
 	icon_state = "stamp-law"
 	dye_color = DYE_LAW
