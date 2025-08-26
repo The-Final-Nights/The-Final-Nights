@@ -268,7 +268,7 @@
 	ADD_TRAIT(owner, TRAIT_HANDS_BLOCK_PROJECTILES, MAGIC_TRAIT)
 
 	owner.status_flags |= GODMODE //Temp fix until hands_block_projectiles gets fixed.
-  owner.dexterity += 6
+	owner.dexterity += 6
 
 	for(var/obj/stuff in owner.contents) //no disarm
 		ADD_TRAIT(stuff, TRAIT_NODROP, MAGIC)
