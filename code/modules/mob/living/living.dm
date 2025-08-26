@@ -10,6 +10,7 @@
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
 
+/mob/living/calculate_max_bloodpool()
 	//recalculates maxbloodpool
 	var/generation_blood_bonus
 	switch(generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
