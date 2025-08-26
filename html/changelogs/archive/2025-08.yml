@@ -96,3 +96,41 @@
 2025-08-21:
   TheTrueSilverRat:
   - bugfix: Made KJ the Hungry Dead Splat Whitelisted
+2025-08-22:
+  AlmostLikeClockwork:
+  - rscadd: ~~Adds a spas to the Sheriff's closet, with mags and shells~~ Adds a McLusky
+      to the Sheriff's closet, with mags and a box
+  - rscadd: Adds a renamed bitcoin miner to the Prince's office
+  - rscadd: Adds rails to the roof garden
+  - rscadd: Adds silver ammo to the secure camarilla armoury
+  - rscdel: Removed the silver from the anarch base
+  SELFHELL:
+  - bugfix: Typhons Brew is now craftable again with 200 Units of Vampire Vitae in
+      a Beaker
+  Squagg:
+  - rscadd: adds salubri and salubri warrior as playable clans for warehouse
+  XeonMations:
+  - admin: Added the ability to 1984 words or phrases.
+  chazzyjazzy:
+  - qol: Updated bank vault keypad
+2025-08-24:
+  AlmostLikeClockwork:
+  - rscadd: Adds a boxing glove locker behind the anarch bar stage
+  SoreYew:
+  - bugfix: fixed runtimes on map
+  TheTrueSilverRat:
+  - map: Added Sabbat late party land marks
+2025-08-25:
+  AlmostLikeClockwork:
+  - rscadd: Added increasing skill modifiers to potence tackle, making it easier and
+      easier to land better tackles
+  - rscadd: each level of celerity now gives dex, scales
+  Kolibri-B:
+  - rscadd: Added a button for lowering path score.
+  XeonMations:
+  - bugfix: Fixed a couple of TGUI related runtimes.
+  - balance: molotvs now explode after 10s of being lit
+  - refactor: refactored molotov code
+2025-08-26:
+  SoreYew:
+  - qol: Updates the DA to an ADA
