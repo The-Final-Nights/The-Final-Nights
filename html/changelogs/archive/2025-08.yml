@@ -136,3 +136,4 @@
   - balance: Torpor timers are now a static 10 minutes.
   SoreYew:
   - qol: Updates the DA to an ADA
+  - qol: Commenting out some arcade rewards

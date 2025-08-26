@@ -32,6 +32,7 @@
 	jobtype = /datum/job/vamp/primogen_malkavian
 
 	ears = /obj/item/p25radio
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	uniform = /obj/item/clothing/under/vampire/primogen_malkavian
@@ -83,6 +84,7 @@
 	name = "Primogen Nosferatu"
 	jobtype = /datum/job/vamp/primogen_nosferatu
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/primogen
 	mask = /obj/item/clothing/mask/vampire/shemagh
 	glasses = /obj/item/clothing/glasses/vampire/sun
@@ -131,6 +133,7 @@
 	name = "Primogen Ventrue"
 	jobtype = /datum/job/vamp/primogen_ventrue
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	uniform = /obj/item/clothing/under/vampire/suit
@@ -178,6 +181,7 @@
 	name = "Primogen Toreador"
 	jobtype = /datum/job/vamp/primogen_toreador
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	uniform = /obj/item/clothing/under/vampire/primogen_toreador
@@ -226,6 +230,7 @@
 	name = "Primogen Banu Haqim"
 	jobtype = /datum/job/vamp/primogen_banu
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/yellow
 	uniform = /obj/item/clothing/under/vampire/turtleneck_navy
@@ -272,6 +277,7 @@
 	name = "Primogen Lasombra"
 	jobtype = /datum/job/vamp/primogen_lasombra
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	uniform = /obj/item/clothing/under/vampire/turtleneck_black
