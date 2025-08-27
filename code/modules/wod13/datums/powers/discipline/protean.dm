@@ -253,7 +253,7 @@
 	owner.Stun(1 SECONDS)
 	owner.do_jitter_animation(15)
 
-//EYES OF THE BEAST
+//SHAPE MASTERY
 /datum/discipline_power/protean/shape_mastery
 	name = "Shape Mastery"
 	desc = "Cause shapeshifters to revert to their natural form."
