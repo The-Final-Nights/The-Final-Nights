@@ -476,6 +476,8 @@
 					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a skeletonised corpse!</b><br>")
 			if (HAS_TRAIT(src, TRAIT_PERMAFANGS))
 				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
+			if (HAS_TRAIT(src, TRAIT_UNLIVING_HIVE))
+				msg += span_warning("[p_they(TRUE)] seems to be covered in bugs!<br>")
 
 		if (iszombie(src) && is_face_visible())
 			msg += span_danger("<b>[p_they(TRUE)] [p_are()] a decayed corpse!</b><br>")
