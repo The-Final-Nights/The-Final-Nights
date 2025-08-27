@@ -145,5 +145,8 @@
       lawsuit. Humans and Ghouls can now be brought on as a smaller 'bartender' role.
   SoreYew:
   - rscadd: Added radios to Primogens
+  chazzyjazzy:
+  - bugfix: the character preview screen should no longer stretch for everyone on
+      the server when selecting kiasyd characters
   darkincarnate:
   - rscadd: select vampire clans to La Famiglia role
