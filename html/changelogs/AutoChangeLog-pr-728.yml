@@ -1,4 +1,0 @@
-author: "Kolibri-B"
-delete-after: True
-changes:
-  - balance: "Torpor timers are now a static 10 minutes."
