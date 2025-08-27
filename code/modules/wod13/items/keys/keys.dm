@@ -89,15 +89,17 @@
 /obj/item/vamp/keys/anarch
 	name = "Anarch keys"
 	accesslocks = list(
-		"anarch"
+		"anarch",
+		"biker_bar"
 	)
 	color = "#434343"
 
 /obj/item/vamp/keys/bar
-	name = "Barkeeper keys"
+	name = "Bar Owner's keys"
 	accesslocks = list(
-		"bar",
+		"baron",
 		"anarch",
+		"biker_bar"
 	)
 	color = "#434343"
 
