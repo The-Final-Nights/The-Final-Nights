@@ -31,6 +31,7 @@
 	name = "Chantry Regent"
 	jobtype = /datum/job/vamp/regent
 
+	ears = /obj/item/p25radio
 	id = /obj/item/card/id/regent
 	glasses = /obj/item/clothing/glasses/vampire/red
 	suit = /obj/item/clothing/suit/vampire/trench/strauss
