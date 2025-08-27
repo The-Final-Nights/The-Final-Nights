@@ -138,7 +138,15 @@
   - qol: Updates the DA to an ADA
   - qol: Commenting out some arcade rewards
 2025-08-27:
+  AlmostLikeClockwork:
+  - balance: nerfs vici's upgraded bone armour from 60 to 40
+  ShadeAware:
+  - rscadd: The biker bar has updated its hiring practices following a discrimination
+      lawsuit. Humans and Ghouls can now be brought on as a smaller 'bartender' role.
   SoreYew:
   - rscadd: Added radios to Primogens
+  chazzyjazzy:
+  - bugfix: the character preview screen should no longer stretch for everyone on
+      the server when selecting kiasyd characters
   darkincarnate:
   - rscadd: select vampire clans to La Famiglia role
