@@ -148,5 +148,8 @@
   chazzyjazzy:
   - bugfix: the character preview screen should no longer stretch for everyone on
       the server when selecting kiasyd characters
+  - rscadd: adds a couple base ss13 /tg/ clothing to the shop including eyepatches,
+      different types of scarfs, and suits.
+  - rscadd: non Chantry gargoyles now spawn with a mask and robes by default
   darkincarnate:
   - rscadd: select vampire clans to La Famiglia role
