@@ -5687,6 +5687,7 @@
 /obj/machinery/light/small/red{
 	pixel_y = 32
 	},
+/obj/effect/landmark/start/tapster,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "bBd" = (
@@ -5799,7 +5800,7 @@
 "bDb" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	dir = 4;
 	locked = 1
 	},
@@ -34614,7 +34615,7 @@
 "jan" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 24;
-	lock_id = "bar";
+	lock_id = "baron";
 	locked = 1
 	},
 /turf/open/floor/plating/parquetry/old,
@@ -36678,7 +36679,7 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/pacificheights)
 "jCF" = (
-/obj/effect/landmark/start/barkeeper,
+/obj/effect/landmark/start/tapster,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "jCH" = (
@@ -46627,7 +46628,7 @@
 	},
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch"
+	lock_id = "biker_bar"
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -49457,7 +49458,7 @@
 	},
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	dir = 4;
 	locked = 1
 	},
@@ -54823,7 +54824,7 @@
 	},
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 24;
-	lock_id = "bar";
+	lock_id = "baron";
 	locked = 1;
 	dir = 4
 	},
@@ -58601,7 +58602,7 @@
 	},
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 16;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	dir = 4;
 	locked = 1
 	},
@@ -58742,7 +58743,7 @@
 /area/vtm/interior/bianchiBank)
 "oZb" = (
 /obj/structure/vampdoor/glass/prince{
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	lockpick_difficulty = 10;
 	dir = 8
 	},
@@ -60685,7 +60686,7 @@
 "pxI" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	dir = 4;
 	locked = 1
 	},
@@ -66335,7 +66336,7 @@
 	color = "#574d46"
 	},
 /obj/structure/vampdoor/glass/prince{
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	lockpick_difficulty = 6;
 	locked = 0
 	},
@@ -73743,7 +73744,7 @@
 /area/vtm/sewer)
 "sTf" = (
 /obj/structure/vampdoor/prison{
-	lock_id = "bar";
+	lock_id = "baron";
 	lockpick_difficulty = 15;
 	opacity = 0;
 	dir = 1
@@ -75112,7 +75113,7 @@
 	},
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	dir = 4;
 	locked = 1
 	},
@@ -77673,7 +77674,7 @@
 "tSv" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 16;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	locked = 1
 	},
 /turf/open/floor/plating/parquetry/old,
@@ -89222,7 +89223,7 @@
 "wXx" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	locked = 1
 	},
 /turf/open/floor/plating/parquetry/old,
