@@ -34161,6 +34161,10 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/industrial)
+"iGx" = (
+/obj/structure/coclock,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior)
 "iGy" = (
 /obj/structure/railing,
 /obj/machinery/light/prince{
@@ -37631,6 +37635,11 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower)
+"jzq" = (
+/obj/effect/decal/trash,
+/obj/structure/fire_barrel,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior)
 "jzs" = (
 /obj/structure/stone_tile/block/cracked{
 	dir = 8
@@ -71528,6 +71537,12 @@
 	icon_state = "stone8"
 	},
 /area/vtm/sewer)
+"rRB" = (
+/obj/structure/noticeboard{
+	pixel_y = 32
+	},
+/turf/open/floor/plating/bacotell,
+/area/vtm/interior)
 "rRF" = (
 /obj/machinery/light/small/red{
 	pixel_y = 32
@@ -78276,6 +78291,12 @@
 /obj/item/cigbutt,
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer/police)
+"tEX" = (
+/obj/structure/noticeboard{
+	pixel_y = 32
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior)
 "tFd" = (
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
@@ -82587,6 +82608,7 @@
 /area/vtm/interior/subway)
 "uJm" = (
 /obj/structure/table/wood,
+/obj/structure/coclock,
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior)
 "uJn" = (
@@ -89214,6 +89236,14 @@
 "wAc" = (
 /obj/effect/decal/cleanable/ash/large,
 /obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior)
+"wAn" = (
+/obj/item/kirbyplants{
+	icon_state = "plant0";
+	pixel_x = -11;
+	pixel_y = 16
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "wAo" = (
@@ -175652,7 +175682,7 @@ hYt
 veZ
 gcm
 gwE
-goS
+jzq
 cKU
 cDx
 tHJ
@@ -211204,7 +211234,7 @@ ajj
 iQg
 khA
 iQg
-baE
+tEX
 baE
 nof
 pxP
@@ -212012,7 +212042,7 @@ ajj
 ajj
 ajj
 wjl
-hTl
+rRB
 hTl
 hTl
 pxP
@@ -212618,7 +212648,7 @@ wjl
 gxh
 baE
 wjl
-baE
+iGx
 baE
 wLf
 vLp
@@ -215851,7 +215881,7 @@ cOp
 iMv
 baE
 gwE
-baE
+wAn
 baE
 oVB
 hjr
