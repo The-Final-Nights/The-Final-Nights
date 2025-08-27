@@ -101,6 +101,7 @@
 	owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool)
 	var/obj/item/ammo_casing/magic/tentacle/casing = new (get_turf(owner))
 	casing.fire_casing(target, owner, null, null, null, ran_zone(), 0,  owner)
+	target.grippedby(owner, instant = TRUE)
 	qdel(casing)
 
 //THE SKIN OF THE ADDER
