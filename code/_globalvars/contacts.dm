@@ -1,19 +1,19 @@
 // Important Contacts
 
-GLOBAL_LIST_INIT(important_contacts, list())
+GLOBAL_LIST_EMPTY(important_contacts)
 
 // Contact Networks
 
-GLOBAL_LIST_INIT(millenium_tower_network, list())
-GLOBAL_LIST_INIT(lasombra_network, list())
-GLOBAL_LIST_INIT(tremere_network, list())
-GLOBAL_LIST_INIT(giovanni_network, list())
-GLOBAL_LIST_INIT(tzmisce_network, list())
-GLOBAL_LIST_INIT(anarch_network, list())
-GLOBAL_LIST_INIT(warehouse_network, list())
-GLOBAL_LIST_INIT(triads_network, list())
-GLOBAL_LIST_INIT(vampire_leader_network, list())
-GLOBAL_LIST_INIT(endron_network, list())
+GLOBAL_LIST_EMPTY(millenium_tower_network)
+GLOBAL_LIST_EMPTY(lasombra_network)
+GLOBAL_LIST_EMPTY(tremere_network)
+GLOBAL_LIST_EMPTY(giovanni_network)
+GLOBAL_LIST_EMPTY(tzmisce_network)
+GLOBAL_LIST_EMPTY(anarch_network)
+GLOBAL_LIST_EMPTY(warehouse_network)
+GLOBAL_LIST_EMPTY(triads_network)
+GLOBAL_LIST_EMPTY(vampire_leader_network)
+GLOBAL_LIST_EMPTY(endron_network)
 
 
 #define MILLENIUM_TOWER_NETWORK 1
