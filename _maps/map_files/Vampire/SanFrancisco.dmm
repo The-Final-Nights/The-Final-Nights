@@ -47721,9 +47721,6 @@
 /obj/structure/stairs/north,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/ghetto)
-"mjs" = (
-/turf/open/space/basic,
-/area/vtm/interior/bianchiBank)
 "mjt" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1;
@@ -93808,7 +93805,7 @@
 	dir = 4;
 	light_color = "#6488EA"
 	},
-/turf/open/floor/plating/parquetry/old,
+/turf/open/floor/carpet,
 /area/vtm/interior/banu/haven)
 "xVx" = (
 /obj/effect/decal/wallpaper/stone/low{
@@ -170524,7 +170521,7 @@ mkv
 mkv
 mkv
 oln
-mjs
+mkv
 iAi
 iIB
 oAD
