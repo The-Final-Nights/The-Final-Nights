@@ -30,7 +30,8 @@ GLOBAL_LIST_INIT(anarch_positions, list(
 	"Baron",
 	"Emissary",
 	"Sweeper",
-	"Bruiser"
+	"Bruiser",
+	"Bartender"
 	))
 
 GLOBAL_LIST_INIT(citizen_positions, list(
