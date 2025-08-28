@@ -1,7 +1,7 @@
 /datum/vampire_clan/ministry
 	name = CLAN_SETITES
 	desc = "The Ministry, also called the Ministry of Set, Followers of Set, or Setites, are a clan of vampires who believe their founder was the Egyptian god Set."
-	curse = "Decreased moving speed in lighted areas."
+	curse = "Extra damage from fire, sensitivity to very bright lights."
 	clan_disciplines = list(
 		/datum/discipline/obfuscate,
 		/datum/discipline/presence,
@@ -9,6 +9,7 @@
 	)
 	male_clothes = /obj/item/clothing/under/vampire/slickback
 	female_clothes = /obj/item/clothing/under/vampire/burlesque
+	clan_keys = /obj/item/vamp/keys/ministry
 
 /datum/vampire_clan/ministry/on_gain(mob/living/carbon/human/H)
 	. = ..()

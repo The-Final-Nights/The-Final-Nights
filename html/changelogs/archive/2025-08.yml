@@ -138,5 +138,21 @@
   - qol: Updates the DA to an ADA
   - qol: Commenting out some arcade rewards
 2025-08-27:
+  AlmostLikeClockwork:
+  - balance: nerfs vici's upgraded bone armour from 60 to 40
+  ShadeAware:
+  - rscadd: The biker bar has updated its hiring practices following a discrimination
+      lawsuit. Humans and Ghouls can now be brought on as a smaller 'bartender' role.
   SoreYew:
   - rscadd: Added radios to Primogens
+  chazzyjazzy:
+  - bugfix: the character preview screen should no longer stretch for everyone on
+      the server when selecting kiasyd characters
+  - rscadd: adds a couple base ss13 /tg/ clothing to the shop including eyepatches,
+      different types of scarfs, and suits.
+  - rscadd: non Chantry gargoyles now spawn with a mask and robes by default
+  darkincarnate:
+  - rscadd: select vampire clans to La Famiglia role
+2025-08-28:
+  XeonMations:
+  - bugfix: Fixed phone contacts not showing appropriate contacts.
