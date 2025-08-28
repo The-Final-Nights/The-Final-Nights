@@ -153,3 +153,6 @@
   - rscadd: non Chantry gargoyles now spawn with a mask and robes by default
   darkincarnate:
   - rscadd: select vampire clans to La Famiglia role
+2025-08-28:
+  XeonMations:
+  - bugfix: Fixed phone contacts not showing appropriate contacts.
