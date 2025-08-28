@@ -117,7 +117,7 @@
 		var/datum/action/beastmaster_deaggro/deaggro = new()
 		deaggro.Grant(owner)
 
-	var/summon_option = /mob/living/simple_animal/hostile/beastmaster/cat
+	var/summon_option = /mob/living/simple_animal/hostile/beastmaster
 	if(HAS_TRAIT(owner, TRAIT_UNLIVING_HIVE))
 		summon_option = /mob/living/simple_animal/hostile/beastmaster/largespider
 	var/mob/living/simple_animal/hostile/beastmaster/summon = new summon_option(get_turf(owner))
