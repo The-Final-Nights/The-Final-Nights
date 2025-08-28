@@ -22,7 +22,11 @@
 /datum/vampire_clan/kiasyd/on_gain(mob/living/carbon/human/H)
 	. = ..()
 
-	// Kiasyd are made taller and thinner
+	// checks if the kiasyd has a location - basically asking 'are you on the setup screen' - this is gonna have to be changed when preferences menu is fixed
+	if(!H.loc)
+		return
+
+	// if the above doesnt pass then run the on_gain as usual - this is gonna have to be changed when preferences menu is fixed
 	if (H.has_quirk(/datum/quirk/dwarf))
 		H.remove_quirk(/datum/quirk/dwarf)
 	else if (!H.has_quirk(/datum/quirk/tower))
@@ -39,6 +43,11 @@
 
 /datum/vampire_clan/kiasyd/on_lose(mob/living/carbon/human/vampire)
 	. = ..()
+
+	// dont affect height while on the character preview screen - this is gonna have to be changed when preferences menu is fixed
+	if(!vampire.loc)
+		vampire.update_body()
+		return
 
 	if (vampire.has_quirk(/datum/quirk/tower))
 		vampire.remove_quirk(/datum/quirk/tower)
