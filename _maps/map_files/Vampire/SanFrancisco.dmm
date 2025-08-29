@@ -2895,19 +2895,6 @@
 	color = "#d6b390"
 	},
 /area/vtm/interior/tzimisce_manor)
-"aMA" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 24;
-	lock_id = "baron";
-	locked = 1
-	},
-/turf/open/space/basic,
-/area/vtm)
 "aMK" = (
 /obj/effect/turf_decal/siding/white{
 	color = "#636363";
@@ -4483,24 +4470,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
-"bhT" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4;
-	color = "#574d46"
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 10;
-	lock_id = "biker_bar";
-	dir = 4;
-	locked = 1
-	},
-/turf/open/floor/plating/asphalt,
-/area/vtm/interior)
 "bhY" = (
 /obj/structure/railing{
 	dir = 1;
@@ -5153,18 +5122,6 @@
 /mob/living/carbon/human/npc/police/static,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
-"bsi" = (
-/obj/structure/fence,
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/financialdistrict)
 "bsm" = (
 /obj/structure/railing/metal/corner{
 	dir = 1
@@ -6053,6 +6010,10 @@
 	},
 /turf/open/floor/plating/church,
 /area/vtm/interior/giovanni)
+"bCo" = (
+/obj/effect/landmark/start/tapster,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "bCr" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -10371,27 +10332,6 @@
 	},
 /turf/open/floor/carpet/orange,
 /area/vtm/interior/apartment)
-"cFg" = (
-/obj/structure/clothingrack/rand{
-	dir = 8
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table/wood,
-/obj/effect/decal/wallpaper/grey/low{
-	color = "#6d6d6d"
-	},
-/obj/item/reagent_containers/glass/bowl/mushroom_bowl{
-	name = "ashtray";
-	desc = "A discreet ashtray for keeping things clean.";
-	pixel_x = -4;
-	pixel_y = 6
-	},
-/turf/open/floor/carpet/blue,
-/area/vtm/interior/shop)
 "cFp" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -11062,18 +11002,6 @@
 "cOp" = (
 /obj/structure/vampdoor/wood,
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/interior)
-"cOr" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/structure/fence,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/brick,
 /area/vtm/interior)
 "cOs" = (
 /obj/effect/decal/bordur/corner{
@@ -13353,25 +13281,6 @@
 /obj/item/storage/box/matches,
 /turf/open/floor/plating/dirt,
 /area/vtm/forest/caves)
-"dpY" = (
-/obj/effect/landmark/npcwall,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 8;
-	color = "#574d46"
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 10;
-	lock_id = "biker_bar";
-	dir = 4;
-	locked = 1
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/baywalk)
 "dqd" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/concrete{
@@ -14107,7 +14016,7 @@
 "dAz" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	dir = 4
 	},
 /obj/effect/turf_decal/siding/wideplating/dark{
@@ -17220,24 +17129,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
-"erw" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/four{
-	pixel_y = -3;
-	pixel_x = -8
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "erG" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -17365,6 +17256,7 @@
 	dir = 4
 	},
 /obj/effect/decal/rugs,
+/obj/effect/landmark/start/tapster,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "etG" = (
@@ -21600,15 +21492,6 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
 "fsN" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/effect/decal/pallet,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/table/wood,
 /obj/effect/turf_decal/siding/white{
 	color = "#636363";
@@ -24059,23 +23942,6 @@
 	},
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/interior/giovanni/outside)
-"fXM" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/three{
-	pixel_y = -4
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "fXN" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -26310,22 +26176,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
-"gDF" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/structure/fence{
-	dir = 4
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/pallet,
-/obj/structure/closet/crate/large,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/financialdistrict)
 "gDP" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/dirt,
@@ -26763,17 +26613,6 @@
 /obj/effect/decal/wallpaper/red/low,
 /turf/closed/wall/vampwall/bar/low,
 /area/vtm/interior/shop)
-"gHR" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/financialdistrict)
 "gHS" = (
 /obj/effect/decal/pallet,
 /obj/structure/closet/crate/maint,
@@ -35212,23 +35051,6 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/shop)
-"iLu" = (
-/obj/effect/decal/bordur{
-	dir = 8
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 10;
-	lock_id = "biker_bar";
-	dir = 4;
-	locked = 1
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/baywalk)
 "iLB" = (
 /obj/effect/decal/graffiti,
 /obj/effect/decal/trash,
@@ -35944,24 +35766,6 @@
 	dir = 4
 	},
 /area/vtm/interior/endron_facility)
-"iVl" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/five{
-	pixel_x = 18;
-	pixel_y = -3
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "iVn" = (
 /turf/open/floor/glass,
 /area/vtm)
@@ -36269,7 +36073,7 @@
 "jan" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 24;
-	lock_id = "bar";
+	lock_id = "baron";
 	locked = 1
 	},
 /turf/open/floor/plating/parquetry/old,
@@ -37063,18 +36867,6 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/shop)
-"jkP" = (
-/obj/structure/fence,
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/redbrick,
-/area/vtm/interior/setite)
 "jkQ" = (
 /obj/effect/decal/fakelattice{
 	density = 0
@@ -37394,7 +37186,7 @@
 	},
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 10;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	locked = 1
 	},
 /turf/open/floor/plating/concrete,
@@ -38149,15 +37941,9 @@
 	pixel_x = 19;
 	pixel_y = -3
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+/obj/effect/decal/wallpaper/grey/low{
+	color = "#6d6d6d"
 	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
 "jxH" = (
@@ -42859,23 +42645,6 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
-"kEN" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/two{
-	pixel_y = -5
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "kEO" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1;
@@ -45309,7 +45078,7 @@
 "ljc" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 16;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	locked = 1
 	},
 /turf/open/floor/plating/concrete,
@@ -45826,15 +45595,9 @@
 /obj/effect/decal/wallpaper/papers/four{
 	pixel_y = -3
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+/obj/effect/decal/wallpaper/grey/low{
+	color = "#6d6d6d"
 	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch)
 "lpS" = (
@@ -46283,10 +46046,6 @@
 /area/vtm/jazzclub)
 "lvj" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/reagent_containers/blood/random,
-/obj/item/reagent_containers/blood/random,
-/obj/item/reagent_containers/blood/random,
-/obj/item/reagent_containers/blood/random,
 /obj/item/reagent_containers/food/drinks/beer/vampire,
 /obj/item/reagent_containers/food/drinks/beer/vampire,
 /obj/item/reagent_containers/food/drinks/beer/vampire,
@@ -46564,19 +46323,6 @@
 /obj/effect/decal/wallpaper/paper/green,
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior/techshop)
-"lyV" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/glass/prince{
-	lock_id = "biker_bar";
-	lockpick_difficulty = 10;
-	dir = 8
-	},
-/turf/closed/wall/vampwall,
-/area/vtm/interior/shop)
 "lze" = (
 /obj/machinery/mineral/equipment_vendor/fastfood/coffeevendor,
 /turf/open/floor/plating/toilet,
@@ -48067,20 +47813,6 @@
 "lUt" = (
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/police)
-"lUE" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/structure/fence{
-	dir = 4
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/financialdistrict/library)
 "lUG" = (
 /obj/structure/flora/ausbushes/sunnybush,
 /turf/open/floor/plating/vampgrass,
@@ -50790,21 +50522,6 @@
 	},
 /turf/open/floor/plating/grate,
 /area/vtm/interior/wyrm_corrupted)
-"mBT" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wideplating/dark{
-	dir = 1
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 10;
-	lock_id = "biker_bar"
-	},
-/turf/open/floor/plating/vampplating/stone,
-/area/vtm/interior/shop)
 "mBV" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1;
@@ -53868,19 +53585,6 @@
 "noy" = (
 /turf/open/water,
 /area/vtm/park)
-"noA" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 16;
-	lock_id = "biker_bar";
-	locked = 1
-	},
-/turf/closed/wall/vampwall/old,
-/area/vtm/interior)
 "noG" = (
 /obj/structure/vampfence/rich{
 	dir = 4;
@@ -54997,14 +54701,6 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/tzimisce_sanctum)
 "nDi" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/bath,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior)
@@ -56926,21 +56622,6 @@
 	icon_state = "tree10";
 	pixel_y = 13
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wideplating/dark,
-/obj/effect/turf_decal/siding/wood{
-	dir = 1;
-	color = "#574d46"
-	},
-/obj/structure/vampdoor/glass/prince{
-	lock_id = "biker_bar";
-	lockpick_difficulty = 6;
-	locked = 0
-	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/baywalk)
 "nYS" = (
@@ -57147,7 +56828,7 @@
 	},
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 24;
-	lock_id = "bar";
+	lock_id = "baron";
 	locked = 1;
 	dir = 4
 	},
@@ -58751,22 +58432,6 @@
 /obj/fusebox/transformer,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/millennium_tower/f2)
-"otc" = (
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 10;
-	lock_id = "biker_bar";
-	locked = 1
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/baywalk)
 "otd" = (
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/asphalt,
@@ -65290,20 +64955,6 @@
 /obj/fusebox/transformer,
 /turf/open/floor/plating/rough,
 /area/vtm/interior/endron_facility/restricted)
-"pZs" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 10;
-	lock_id = "biker_bar";
-	dir = 4;
-	locked = 1
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/baywalk)
 "pZu" = (
 /turf/closed/wall/vampwall/city,
 /area/vtm/interior)
@@ -66207,17 +65858,6 @@
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
-"qjy" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/brick,
-/area/vtm/interior)
 "qjB" = (
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
@@ -70346,18 +69986,6 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f2)
-"rlF" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/structure/barrels/rand,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/brick,
-/area/vtm/interior)
 "rlI" = (
 /obj/structure/railing/metal{
 	dir = 1
@@ -71071,17 +70699,6 @@
 /turf/closed/wall/vampwall/junk/low,
 /area/vtm/interior/shop)
 "rwx" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/structure/fence{
-	dir = 4
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
@@ -72469,21 +72086,6 @@
 /obj/effect/decal/fakelattice{
 	density = 0
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 4;
-	color = "#574d46"
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 16;
-	lock_id = "biker_bar";
-	dir = 4;
-	locked = 1
-	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior)
 "rNJ" = (
@@ -73089,20 +72691,6 @@
 /mob/living/carbon/human/npc/hobo,
 /turf/open/floor/plating/stone,
 /area/vtm/sewer)
-"rVX" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/prison{
-	lock_id = "baron";
-	lockpick_difficulty = 15;
-	opacity = 0;
-	dir = 1
-	},
-/turf/open/space/basic,
-/area/vtm)
 "rVZ" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/plating/vampcanalplating,
@@ -75208,19 +74796,6 @@
 /obj/effect/decal/shadow,
 /turf/open/floor/plating/rough,
 /area/space)
-"szK" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 10;
-	lock_id = "biker_bar";
-	locked = 1
-	},
-/turf/open/floor/plating/vampplating/stone,
-/area/vtm/interior/shop)
 "szL" = (
 /obj/structure/table,
 /turf/open/floor/plating/vampplating/mono,
@@ -75911,7 +75486,7 @@
 "sIX" = (
 /obj/structure/vampdoor/wood{
 	lockpick_difficulty = 16;
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	locked = 1;
 	dir = 4
 	},
@@ -76667,7 +76242,7 @@
 /area/vtm/sewer)
 "sTf" = (
 /obj/structure/vampdoor/prison{
-	lock_id = "bar";
+	lock_id = "baron";
 	lockpick_difficulty = 15;
 	opacity = 0;
 	dir = 1
@@ -79064,16 +78639,6 @@
 /obj/effect/decal/cleanable/ash,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/hotel)
-"txW" = (
-/obj/effect/decal/wallpaper/red/low,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/landmark/start/tapster,
-/turf/closed/wall/vampwall,
-/area/vtm/interior/shop)
 "txY" = (
 /obj/structure/roadsign/speedlimit25,
 /turf/open/floor/plating/sidewalk/rich,
@@ -79991,23 +79556,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/techshop)
-"tJE" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/six{
-	pixel_y = -3
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "tJO" = (
 /obj/structure/table,
 /turf/open/floor/plating/concrete{
@@ -82518,22 +82066,6 @@
 	},
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/shop)
-"usd" = (
-/obj/effect/decal/wallpaper/light/low,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/chair/office{
-	dir = 8
-	},
-/obj/machinery/light/small/red{
-	pixel_y = 32
-	},
-/obj/effect/landmark/start/tapster,
-/turf/closed/wall/vampwall/low/window,
-/area/vtm/interior/shop)
 "usf" = (
 /obj/effect/turf_decal/weather/snow/corner,
 /turf/open/floor/plasteel/freezer,
@@ -83908,18 +83440,6 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/tzimisce_sanctum)
-"uKC" = (
-/obj/structure/fence,
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/brick/low/window,
-/area/vtm/interior/setite)
 "uKH" = (
 /obj/effect/decal/bordur/corner,
 /obj/effect/decal/litter,
@@ -85295,7 +84815,7 @@
 /area/vtm)
 "vda" = (
 /obj/structure/vampdoor/glass/prince{
-	lock_id = "anarch";
+	lock_id = "biker_bar";
 	lockpick_difficulty = 10
 	},
 /turf/open/floor/plating/parquetry/old,
@@ -88473,18 +87993,6 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/interior/endron_facility/plant)
-"vXk" = (
-/obj/structure/fence,
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/brick,
-/area/vtm/interior)
 "vXs" = (
 /obj/structure/rack,
 /obj/item/storage/firstaid/regular,
@@ -89176,23 +88684,6 @@
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/financialdistrict/library)
-"whE" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/one{
-	pixel_y = -4
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "whH" = (
 /obj/effect/turf_decal/siding/white,
 /obj/machinery/door/poddoor/shutters{
@@ -90466,18 +89957,18 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
 "wyj" = (
-/obj/structure/vampdoor/glass/prince{
-	lock_id = "anarch";
-	lockpick_difficulty = 6;
-	locked = 0;
-	dir = 4
-	},
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
 	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 4;
 	color = "#574d46"
+	},
+/obj/structure/vampdoor/glass/prince{
+	lock_id = "biker_bar";
+	lockpick_difficulty = 6;
+	locked = 0;
+	dir = 4
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
@@ -90654,23 +90145,6 @@
 /obj/structure/barrels/rand,
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/industrial)
-"wAf" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/four{
-	pixel_y = -3
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "wAo" = (
 /obj/effect/decal/wallpaper/red,
 /turf/closed/wall/vampwall/rich{
@@ -93313,23 +92787,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
-"xeF" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wideplating/dark{
-	dir = 8
-	},
-/obj/structure/vampdoor/wood{
-	lockpick_difficulty = 24;
-	lock_id = "baron";
-	locked = 1;
-	dir = 4
-	},
-/turf/open/space/basic,
-/area/vtm)
 "xeM" = (
 /obj/structure/railing{
 	dir = 1;
@@ -93552,17 +93009,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/fed)
-"xhi" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/setite)
 "xho" = (
 /obj/structure/table,
 /obj/structure/showcase/machinery/tv{
@@ -93669,20 +93115,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/supply)
-"xix" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/open/space/basic,
-/area/vtm)
 "xiI" = (
 /obj/structure/table,
 /turf/open/floor/plating/parquetry,
@@ -97283,6 +96715,14 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
+"yfX" = (
+/obj/effect/decal/pallet,
+/obj/structure/closet/crate/freezer/fridge,
+/obj/item/reagent_containers/blood/random,
+/obj/item/reagent_containers/blood/random,
+/obj/item/reagent_containers/blood/random,
+/turf/open/floor/plating/concrete,
+/area/vtm/anarch/basement)
 "ygc" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1
@@ -97294,20 +96734,6 @@
 	color = "#c2c0bc"
 	},
 /area/vtm/interior/banu)
-"ygi" = (
-/obj/effect/decal/fakelattice{
-	density = 0
-	},
-/obj/structure/fence{
-	dir = 4
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/brick,
-/area/vtm/interior)
 "ygu" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 10
@@ -99346,7 +98772,7 @@ gFQ
 wZc
 lgD
 sit
-bwH
+yfX
 iPy
 bwH
 wtj
@@ -134544,12 +133970,12 @@ rCB
 xfw
 xfw
 xfw
-fXM
 xfw
 xfw
 xfw
 xfw
-xix
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -134746,12 +134172,12 @@ rCB
 xfw
 xfw
 xfw
-xix
 xfw
 xfw
 xfw
 xfw
-aMA
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -134948,12 +134374,12 @@ rCB
 xfw
 xfw
 xfw
-xix
 xfw
 xfw
 xfw
 xfw
-wAf
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -135150,12 +134576,12 @@ rCB
 xfw
 xfw
 xfw
-iVl
 xfw
 xfw
 xfw
 xfw
-whE
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -135352,7 +134778,7 @@ rCB
 xfw
 xfw
 xfw
-erw
+xfw
 xfw
 xfw
 xfw
@@ -135554,7 +134980,7 @@ rCB
 xfw
 xfw
 xfw
-whE
+xfw
 xfw
 xfw
 xfw
@@ -135756,7 +135182,7 @@ rCB
 xfw
 xfw
 xfw
-xix
+xfw
 xfw
 xfw
 xfw
@@ -135961,7 +135387,7 @@ xfw
 xfw
 xfw
 xfw
-xeF
+xfw
 xfw
 xfw
 xfw
@@ -136151,7 +135577,7 @@ xfw
 xfw
 xfw
 xfw
-rVX
+xfw
 xfw
 xfw
 xfw
@@ -137169,11 +136595,11 @@ xfw
 xfw
 xfw
 xfw
-xix
 xfw
 xfw
 xfw
-xix
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -137371,11 +136797,11 @@ xfw
 xfw
 xfw
 xfw
-fXM
 xfw
 xfw
 xfw
-xix
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -137573,11 +136999,11 @@ xfw
 xfw
 xfw
 xfw
-kEN
 xfw
 xfw
 xfw
-tJE
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -140949,7 +140375,7 @@ dSH
 uHB
 vJK
 hZi
-hZi
+bCo
 uSP
 uPS
 sGz
@@ -171316,7 +170742,7 @@ mEk
 nLa
 urr
 llh
-pZs
+eWO
 eWO
 urr
 "}
@@ -172120,7 +171546,7 @@ dMx
 kGt
 mEk
 mEk
-txW
+rrC
 hQF
 xQB
 mEk
@@ -172321,12 +171747,12 @@ aUD
 eGC
 ljC
 qii
-cFg
+vDZ
 mEk
 gSC
 spr
 mEk
-dpY
+wJN
 wJN
 urr
 "}
@@ -172931,7 +172357,7 @@ mEk
 mEk
 mEk
 mEk
-lyV
+mEk
 eWO
 eWO
 urr
@@ -173327,7 +172753,7 @@ eWO
 nYF
 hcV
 nMG
-mBT
+aRw
 aRw
 aRw
 aRw
@@ -173931,9 +173357,9 @@ adJ
 rAn
 eWO
 eWO
-usd
+hcV
 xaf
-szK
+aRw
 aRw
 aRw
 aRw
@@ -175351,7 +174777,7 @@ uQk
 uSY
 dHc
 gkZ
-otc
+rAn
 eWO
 eWO
 eWO
@@ -175753,7 +175179,7 @@ udP
 udP
 udP
 udP
-iLu
+udP
 mGA
 eWO
 eWO
@@ -176159,7 +175585,7 @@ lrP
 lrP
 lrP
 lrP
-noA
+tHJ
 fpo
 fpo
 fpo
@@ -176484,21 +175910,21 @@ wah
 sLI
 djK
 djK
-uKC
-jkP
+djK
+sLI
 sLI
 vtC
-bsi
 vtC
-bsi
-bsi
+vtC
+vtC
+vtC
 bMY
 bMY
-vXk
 bMY
 bMY
 bMY
-cOr
+bMY
+bMY
 iEh
 yhJ
 ulU
@@ -176685,12 +176111,12 @@ mqV
 aUF
 lKN
 aUF
-xhi
+aUF
 aUF
 cJc
 sLI
-gHR
-gHR
+vtC
+vtC
 vtC
 vtC
 bMY
@@ -176700,8 +176126,8 @@ xfy
 wMw
 jAV
 fsN
-rlF
-lUE
+bMY
+iEh
 iEh
 eMw
 gUE
@@ -176965,7 +176391,7 @@ veZ
 uUO
 veZ
 veZ
-bhT
+veZ
 veZ
 gwE
 tOj
@@ -177307,7 +176733,7 @@ bMY
 kkl
 wBs
 bMY
-gDF
+rwx
 iEh
 lGt
 yhz
@@ -177709,7 +177135,7 @@ aSt
 dQn
 bTn
 hKu
-qjy
+bMY
 nDi
 bMY
 wXf
@@ -177913,7 +177339,7 @@ mwn
 mxQ
 bMY
 voH
-ygi
+bMY
 iEh
 iEh
 wPt
@@ -178115,7 +177541,7 @@ baE
 baE
 hSa
 jqU
-ygi
+bMY
 lxz
 iEh
 hoW
