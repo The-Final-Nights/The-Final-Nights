@@ -30,7 +30,8 @@ GLOBAL_LIST_INIT(anarch_positions, list(
 	"Baron",
 	"Emissary",
 	"Sweeper",
-	"Bruiser"
+	"Bruiser",
+	"Bartender"
 	))
 
 GLOBAL_LIST_INIT(citizen_positions, list(
@@ -50,7 +51,7 @@ GLOBAL_LIST_INIT(police_positions, list(
 	"Police Sergeant",
 	"Police Officer",
 	"Emergency Dispatcher",
-	"District Attorney"
+	"Assistant District Attorney"
 ))
 
 GLOBAL_LIST_INIT(national_security_positions, list(
