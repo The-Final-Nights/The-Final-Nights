@@ -966,9 +966,6 @@
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/endron_facility)
 "anP" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/market,
 /area/vtm/interior/shop)
@@ -1040,9 +1037,6 @@
 /turf/open/floor/plating/circled,
 /area/vtm/interior/laundromat)
 "aoD" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/museum)
@@ -3499,13 +3493,6 @@
 /obj/structure/filingcabinet/chestdrawer,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
-"aWJ" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/grey,
-/turf/closed/wall/vampwall/old,
-/area/vtm/hotel)
 "aWK" = (
 /obj/effect/turf_decal/siding/wideplating/corner{
 	color = "#802d29";
@@ -4060,9 +4047,6 @@
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
 "beh" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/papers/four{
 	pixel_y = -3
 	},
@@ -7714,9 +7698,6 @@
 /turf/open/floor/carpet,
 /area/vtm/interior/chantry)
 "cdh" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior)
@@ -22277,15 +22258,6 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/chinatown)
-"fOK" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch/basement)
 "fOO" = (
 /obj/structure/table/wood,
 /turf/open/floor/plating/parquetry/old,
@@ -24106,18 +24078,6 @@
 /obj/effect/decal/trash,
 /turf/closed/wall/vampwall/junk/alt,
 /area/vtm/interior/nosferatu_office)
-"gnR" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/papers/three{
-	pixel_y = -4
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/turf/closed/wall/vampwall/bar,
-/area/vtm/anarch/basement)
 "gnV" = (
 /obj/item/chair,
 /turf/open/floor/plating/concrete,
@@ -28109,9 +28069,6 @@
 	},
 /area/vtm/interior)
 "hpw" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/old,
 /area/vtm/interior/shop)
@@ -28933,9 +28890,6 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/shop)
 "hAR" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior/techshop)
@@ -29950,9 +29904,6 @@
 /turf/open/floor/carpet/blue,
 /area/vtm/interior/techshop)
 "hOK" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/papers/four{
 	pixel_y = -3;
 	pixel_x = -8
@@ -41697,9 +41648,6 @@
 /turf/open/openspace,
 /area/vtm/interior)
 "kJz" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/bar,
 /area/vtm/interior/shop)
@@ -42058,9 +42006,6 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "kPd" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/papers/two{
 	pixel_y = -5
 	},
@@ -48381,9 +48326,6 @@
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren)
 "mqJ" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/papers/six{
 	pixel_y = -3
 	},
@@ -48567,16 +48509,6 @@
 /obj/structure/closet/cabinet,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
-"mti" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/effect/decal/wallpaper/grey,
-/turf/closed/wall/vampwall/old,
-/area/vtm/interior/vjanitor)
 "mto" = (
 /obj/effect/decal/wallpaper/grey/low,
 /turf/closed/wall/vampwall/junk,
@@ -50612,9 +50544,6 @@
 	},
 /area/vtm/clinic)
 "mSx" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/brick,
 /area/vtm/interior)
@@ -50989,14 +50918,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
-"mVM" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/obj/effect/decal/wallpaper/grey,
-/obj/effect/decal/wallpaper/grey,
-/turf/closed/wall/vampwall/old,
-/area/vtm/interior/shop)
 "mVP" = (
 /obj/effect/decal/bordur{
 	dir = 6
@@ -51772,6 +51693,15 @@
 /obj/structure/table,
 /turf/closed/wall/vampwall/rich/old/low,
 /area/vtm/interior/tzimisce_manor)
+"nfo" = (
+/obj/effect/decal/wallpaper/papers/three{
+	pixel_y = -4
+	},
+/obj/effect/decal/wallpaper/grey{
+	color = "#6d6d6d"
+	},
+/turf/closed/wall/vampwall/bar,
+/area/vtm/anarch/basement)
 "nfu" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -65127,9 +65057,6 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/apartment)
 "quo" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior/bianchiBank)
@@ -72183,9 +72110,6 @@
 /turf/closed/wall/vampwall/city/low,
 /area/vtm/clinic/haven)
 "slQ" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/old,
 /area/vtm/interior/vjanitor)
@@ -74008,12 +73932,12 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "sMl" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
 /obj/effect/decal/wallpaper/papers/four{
 	pixel_y = -3;
 	pixel_x = -18
+	},
+/obj/effect/decal/wallpaper/grey{
+	color = "#6d6d6d"
 	},
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch/basement)
@@ -74785,9 +74709,6 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "sXi" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/brick,
 /area/vtm/interior/shop)
@@ -77407,9 +77328,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "tFh" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
+/obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/junk/alt,
 /area/vtm/sewer/nosferatu_warren)
 "tFi" = (
@@ -81514,9 +81433,6 @@
 /turf/closed/wall/vampwall/metal/reinforced,
 /area/vtm)
 "uHU" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/papers/one{
 	pixel_y = -4
 	},
@@ -84282,12 +84198,6 @@
 	color = "#b0b0b0"
 	},
 /area/vtm/interior)
-"vwX" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
-/turf/closed/wall/vampwall/brick,
-/area/vtm/interior/shop)
 "vxa" = (
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/stone,
@@ -85940,9 +85850,6 @@
 	},
 /area/vtm/interior/shop)
 "vUv" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/brick,
 /area/vtm)
@@ -94118,9 +94025,6 @@
 /turf/open/floor/plating/dirt,
 /area/vtm/forest/caves)
 "xYU" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#CD5C5C"
-	},
 /obj/effect/decal/wallpaper/papers/five{
 	pixel_x = 18;
 	pixel_y = -3
@@ -131846,12 +131750,12 @@ eAT
 skm
 niE
 eGb
-gnR
+nfo
 alH
 tFd
 tFd
 tFd
-fOK
+akl
 wrh
 opx
 dIY
@@ -132048,7 +131952,7 @@ lKq
 pwS
 mtU
 qOa
-fOK
+akl
 can
 mpA
 tFd
@@ -132250,7 +132154,7 @@ vCC
 ePe
 ojJ
 lGZ
-fOK
+akl
 eCK
 frB
 lzs
@@ -133058,12 +132962,12 @@ dBU
 wZc
 oLQ
 qzL
-fOK
+akl
 bFI
 eNl
 wZc
 wZc
-wQp
+nfo
 qhP
 tFd
 tFd
@@ -133262,7 +133166,7 @@ kun
 lGZ
 lGZ
 lGZ
-akl
+lGZ
 obh
 lGZ
 sMl
@@ -134471,11 +134375,11 @@ fVk
 few
 ncs
 piz
-fOK
+akl
 key
 wZc
 vdw
-fOK
+akl
 acf
 wZc
 vdw
@@ -134673,11 +134577,11 @@ fVk
 skm
 tAl
 eGb
-gnR
+nfo
 iYs
 jgb
 wZc
-fOK
+akl
 qIF
 wZc
 kNi
@@ -161609,7 +161513,7 @@ vTs
 kQM
 pGs
 keR
-vwX
+sXi
 pAj
 weZ
 weZ
@@ -161811,7 +161715,7 @@ vTs
 kQM
 pGs
 keR
-vwX
+sXi
 cOT
 weZ
 weZ
@@ -162013,7 +161917,7 @@ vTs
 kQM
 pGs
 keR
-vwX
+sXi
 cOT
 weZ
 weZ
@@ -162160,7 +162064,7 @@ mEk
 "}
 (133,1,2) = {"
 sxc
-mti
+slQ
 ykl
 jdG
 oCS
@@ -162215,7 +162119,7 @@ vTs
 kQM
 mLc
 keR
-vwX
+sXi
 cOT
 uod
 weZ
@@ -162362,7 +162266,7 @@ mEk
 "}
 (134,1,2) = {"
 pWE
-mti
+slQ
 hBr
 qgJ
 cvM
@@ -162564,7 +162468,7 @@ mEk
 "}
 (135,1,2) = {"
 pWE
-mti
+slQ
 lJD
 efZ
 ppe
@@ -170872,7 +170776,7 @@ afs
 pJF
 jdO
 slr
-hAR
+slr
 tJw
 slr
 slr
@@ -171188,7 +171092,7 @@ lGz
 xep
 xep
 xep
-hpw
+nhF
 cmt
 hpw
 qin
@@ -171390,7 +171294,7 @@ fUZ
 fUZ
 fUZ
 fUZ
-mVM
+hpw
 uvN
 uvN
 uvN
@@ -208199,7 +208103,7 @@ mjT
 mjT
 mjT
 mjT
-aWJ
+lTc
 xHG
 cud
 dcj
