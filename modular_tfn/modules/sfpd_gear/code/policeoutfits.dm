@@ -2,7 +2,7 @@
 
 /obj/item/clothing/under/vampire/police
 	name = "police uniform"
-	desc = "The clothes of the boys in blue. All Cops are Beautiful. "
+	desc = "The clothes of the boys in blue. It smells like starch. "
 	icon_state = "police"
 	icon = 'modular_tfn/modules/sfpd_gear/icons/clothing.dmi'
 	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
@@ -10,7 +10,7 @@
 
 /obj/item/clothing/under/vampire/police/long
 	name = "police uniform"
-	desc = "The clothes of the boys in blue. All Cops are Beautiful."
+	desc = "The clothes of the boys in blue. It smells like starch."
 	icon_state = "policelong"
 	icon = 'modular_tfn/modules/sfpd_gear/icons/clothing.dmi'
 	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
@@ -18,7 +18,7 @@
 
 /obj/item/clothing/under/vampire/police/turtleneck
 	name = "police turtleneck"
-	desc = "The clothes of the boys in blue. All Cops are Beautiful."
+	desc = "The clothes of the boys in blue. It smells like starch."
 	icon_state = "policeturtleneck"
 	icon = 'modular_tfn/modules/sfpd_gear/icons/clothing.dmi'
 	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
@@ -26,7 +26,7 @@
 
 /obj/item/clothing/under/vampire/police/pants
 	name = "police fatigue pants"
-	desc = "The clothes of the boys in blue. All Cops are Beautiful."
+	desc = "The clothes of the boys in blue. It smells like starch."
 	icon_state = "policepants"
 	icon = 'modular_tfn/modules/sfpd_gear/icons/clothing.dmi'
 	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
@@ -34,7 +34,7 @@
 
 /obj/item/clothing/under/vampire/police/utility
 	name = "police fatigues"
-	desc = "The clothes of the boys in blue. All Cops are Beautiful."
+	desc = "The clothes of the boys in blue. It smells like starch."
 	icon_state = "policeutil"
 	icon = 'modular_tfn/modules/sfpd_gear/icons/clothing.dmi'
 	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
