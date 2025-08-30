@@ -35,7 +35,8 @@
 		new /datum/data/mining_equipment("latex gloves", /obj/item/clothing/gloves/vampire/latex, 150),
 		new /datum/data/mining_equipment("iron pill bottle", /obj/item/storage/pill_bottle/iron, 150),
 		new /datum/data/mining_equipment("ephedrine pill bottle", /obj/item/storage/pill_bottle/ephedrine, 200),
-		new /datum/data/mining_equipment("box of syringes", /obj/item/storage/box/syringes, 300)
+		new /datum/data/mining_equipment("box of syringes", /obj/item/storage/box/syringes, 300),
+		new /datum/data/mining_equipment("straight jacket", /obj/item/clothing/suit/straight_jacket, 200)
 	)
 
 

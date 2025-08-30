@@ -1,5 +1,0 @@
-author: "XeonMations"
-delete-after: True
-changes:
-  - refactor: "Refactored MC and ticker SS, report any bugs to coding!"
-  - bugfix: "Fixed all existing roundstart runtimes. Hoo-fucking-ray."
