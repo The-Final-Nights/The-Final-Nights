@@ -1,3 +1,5 @@
+// Uniforms
+
 /obj/item/clothing/under/vampire/police
 	name = "police uniform"
 	desc = "The clothes of the boys in blue. Did you know that 44% of Cops have heard of Pentex? Google 44% of Cops for more information."
@@ -37,3 +39,34 @@
 	icon = 'modular_tfn/modules/sfpd_gear/icons/clothing.dmi'
 	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
 	onflooricon = 'modular_tfn/modules/sfpd_gear/icons/onfloor.dmi'
+
+// Vests
+
+/obj/item/clothing/suit/vampire/coat/police
+	name = "police raincoat"
+	icon_state = "policecoat"
+	desc = "A sturdy and reflective raincoat tailored for wet weather patrols."
+
+/obj/item/clothing/suit/vampire/vest/police
+	name = "police duty vest"
+	icon_state = "pdvest"
+	desc = "Lightweight, bulletproof vest with SFPD markings, tailored for active duty."
+
+/obj/item/clothing/suit/vampire/vest/police/sergeant
+	name = "police sergeant vest"
+	icon_state = "sgtvest"
+	desc = "Lightweight, bulletproof vest with SFPD markings, tailored for active duty. This one has sergeant insignia on it."
+
+/obj/item/clothing/suit/vampire/vest/police/chief
+	name = "police chief duty vest"
+	icon_state = "chiefvest"
+	desc = "Composite bulletproof vest with SFPD markings, tailored for improved protection. This one has captain insignia on it."
+	armor = list(MELEE = 70, BULLET = 70, LASER = 10, ENERGY = 10, BOMB = 60, BIO = 0, RAD = 0, FIRE = 50, ACID = 10, WOUND = 30)
+
+// Hats
+
+/obj/item/clothing/head/vampire/police
+	name = "police hat"
+	desc = "Can look dangerous or sexy despite the circumstances. Provides some kind of protection."
+	icon_state = "law"
+	armor = list(MELEE = 20, BULLET = 20, LASER = 10, ENERGY = 10, BOMB = 10, BIO = 0, RAD = 0, FIRE = 0, ACID = 10, WOUND = 10)
