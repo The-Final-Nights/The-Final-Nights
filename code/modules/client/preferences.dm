@@ -788,8 +788,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
-				switch(clan.name)
-
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
