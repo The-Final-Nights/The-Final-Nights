@@ -416,7 +416,7 @@
 	worn_icon_state = "uzi"
 	mag_type = /obj/item/ammo_box/magazine/vamp9mm
 	burst_size = 5
-	spread = 7
+	spread = 4
 	recoil = 3
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
