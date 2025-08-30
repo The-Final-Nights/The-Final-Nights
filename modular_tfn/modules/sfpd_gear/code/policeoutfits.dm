@@ -75,6 +75,14 @@
 	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
 	onflooricon = 'modular_tfn/modules/sfpd_gear/icons/onfloor.dmi'
 
+/obj/item/clothing/suit/vampire/vest/police/fbivest
+	name = "FBI duty vest"
+	icon_state = "fbivest"
+	desc = "Lightweight, bulletproof vest with yellow FBI markings, tailored for active duty. This one has special agent insignia on it."
+	icon = 'modular_tfn/modules/sfpd_gear/icons/clothing.dmi'
+	worn_icon = 'modular_tfn/modules/sfpd_gear/icons/worn.dmi'
+	onflooricon = 'modular_tfn/modules/sfpd_gear/icons/onfloor.dmi'
+
 // Hats
 
 /obj/item/clothing/head/vampire/police
