@@ -15,11 +15,8 @@
 	. = ..()
 	if(level >= 4)
 		owner.dna?.species.brutemod *= 0.8 // Netresult 0.4 Brute
-		to_chat(world, " Brute Mod: [owner.dna?.species.brutemod]")
 		owner.dna?.species.burnmod *= 0.5 // Net result 1 Burn
-		to_chat(world, "Burn Mod: [owner.dna?.species.burnmod]")
 		owner.physiology.clone_mod *= 0.9 // Net result 0.9 Clone
-		to_chat(world, "Clone Mod: [owner.physiology.clone_mod]")
 		ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
 		ADD_TRAIT(owner, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
 		owner.skin_tone = "albino"
