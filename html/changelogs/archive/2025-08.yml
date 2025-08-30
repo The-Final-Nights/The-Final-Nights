@@ -163,3 +163,6 @@
       and downtrodden, with a horrible secret underneath...
   XeonMations:
   - bugfix: Fixed phone contacts not showing appropriate contacts.
+2025-08-29:
+  Marshmellow105:
+  - map: fixes floors deleted by a recent PR, oopsie!
