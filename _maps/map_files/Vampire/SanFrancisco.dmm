@@ -91708,6 +91708,13 @@
 	},
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/baywalk)
+"xtV" = (
+/obj/structure/table,
+/obj/item/gun/ballistic/automatic/vampire/deagle,
+/obj/item/ammo_box/magazine/m44,
+/obj/item/ammo_box/magazine/m44,
+/turf/open/floor/plating/concrete,
+/area/vtm/supply)
 "xuj" = (
 /obj/structure/chair/plastic{
 	dir = 4
@@ -131820,7 +131827,7 @@ skm
 niE
 eGb
 gnR
-tFd
+aGe
 tFd
 tFd
 tFd
@@ -135855,7 +135862,7 @@ lFj
 bkQ
 azZ
 lUq
-fLI
+xtV
 fLI
 qur
 eku
