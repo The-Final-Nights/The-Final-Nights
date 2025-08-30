@@ -258,7 +258,12 @@
 	)
 	prize_list = list(
 		new /datum/data/mining_equipment("handcuffs", /obj/item/restraints/handcuffs, 1),
-		new /datum/data/mining_equipment("police uniform", /obj/item/clothing/under/vampire/police, 1),
+		new /datum/data/mining_equipment("shortsleeve police uniform", /obj/item/clothing/under/vampire/police, 1),
+		new /datum/data/mining_equipment("longsleeve police uniform", /obj/item/clothing/under/vampire/police/long, 1),
+		new /datum/data/mining_equipment("police turtleneck", /obj/item/clothing/under/vampire/police/turtleneck, 1),
+		new /datum/data/mining_equipment("police fatigue pants", /obj/item/clothing/under/vampire/police/pants, 1),
+		new /datum/data/mining_equipment("police fatigues", /obj/item/clothing/under/vampire/police/utility, 1),
+		new /datum/data/mining_equipment("police raincoat", /obj/item/clothing/suit/vampire/coat/police, 1),
 		new /datum/data/mining_equipment("police hat", /obj/item/clothing/head/vampire/police, 1),
 		new /datum/data/mining_equipment("camera", /obj/item/camera, 1),
 		new /datum/data/mining_equipment("tape recorder", /obj/item/taperecorder, 1),
