@@ -408,16 +408,21 @@
 	. = ..()
 	AddComponent(/datum/component/selling, 175, "uzi", FALSE)
 
-/obj/item/gun/ballistic/vampire/uzi/mac10
+/obj/item/gun/ballistic/vampire/mac10
 	name = "\improper Mac-10 Submachine Gun"
 	desc = "Lorem ipsum sloppen placeholder"
-	icon_state "mac10"
+	icon_state = "mac10"
+	inhand_icon_state = "uzi"
+	worn_icon_state = "uzi"
+	mag_type = /obj/item/ammo_box/magazine/vamp9mm
 	burst_size = 5
 	spread = 7
 	recoil = 3
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
 	mag_display = TRUE
+	rack_sound = 'sound/weapons/gun/pistol/slide_lock.ogg'
+	fire_sound = 'code/modules/wod13/sounds/uzi.ogg'
 
 
 /obj/item/ammo_box/magazine/vamp9mp5
