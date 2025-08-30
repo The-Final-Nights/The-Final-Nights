@@ -408,10 +408,11 @@
 	. = ..()
 	AddComponent(/datum/component/selling, 175, "uzi", FALSE)
 
-/obj/item/gun/ballistic/vampire/mac10
+/obj/item/gun/ballistic/automatic/vampire/mac10
 	name = "\improper Mac-10 Submachine Gun"
 	desc = "Lorem ipsum sloppen placeholder"
 	icon_state = "mac10"
+	icon = 'code/modules/wod13/48x32weapons.dmi'
 	inhand_icon_state = "uzi"
 	worn_icon_state = "uzi"
 	mag_type = /obj/item/ammo_box/magazine/vamp9mm
