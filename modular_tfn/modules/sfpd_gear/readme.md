@@ -22,7 +22,7 @@ This module holds the new/improved police clothes/armour.
 
 ### Included files that are not contained in this module:
 
-- Icons in: worn_fat.dmi / worn_slim_f.dmi / worn_slim_m.dmi named 'police' 'policepants' 'policefatigues' 'policelongsleeve' 'policeturtleneck' 'policecoat' 'pdvest' 'sgtvest' 'chiefvest' 'law'. These need to be in their respective core files so that they function on alt bodysprites.
+- Icons in: code\modules\wod13\worn_fat.dmi / code\modules\wod13\worn_slim_f.dmi / code\modules\wod13\worn_slim_m.dmi named 'police' 'policepants' 'policefatigues' 'policelongsleeve' 'policeturtleneck' 'policecoat' 'pdvest' 'sgtvest' 'chiefvest' 'law'. These need to be in their respective core files so that they function on alt bodysprites.
 
 ### Credits:
 
