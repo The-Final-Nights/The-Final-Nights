@@ -40,6 +40,8 @@
 		Immobilize(30, TRUE)
 	if(isanimal(mob) && HAS_TRAIT(src, TRAIT_ANIMAL_SUCCULENCE))
 		bloodgain += 2
+	if(ishuman(mob) && HAS_TRAIT(src, TRAIT_QUICKEN_MORTAL_BLOOD))
+		bloodgain += 1
 	playsound_local(src, heartbeat, 75, 0, channel = CHANNEL_BLOOD, use_reverb = FALSE)
 	if(isnpc(mob))
 		var/mob/living/carbon/human/npc/NPC = mob
