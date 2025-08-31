@@ -19,6 +19,8 @@
 		owner.physiology.clone_mod *= 0.9 // Net result 0.9 Clone
 		ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
 		ADD_TRAIT(owner, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
+		if(owner.clan?.name != CLAN_GARGOYLE)
+			ADD_TRAIT(owner, TRAIT_MASQUERADE_VIOLATING_FACE, TRAIT_CLAN)
 		owner.skin_tone = "albino"
 		owner.set_body_sprite("gargoyle")
 		owner.update_body_parts()
