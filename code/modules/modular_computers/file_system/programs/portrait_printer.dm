@@ -66,10 +66,11 @@
 /datum/computer_file/program/portrait_printer/proc/print_painting(selected_painting)
 	if(!(computer.hardware_flag & PROGRAM_CONSOLE))
 		return
-	if(computer.stored_paper < CANVAS_PAPER_COST)
+	var/obj/item/computer_hardware/printer/printer_slot = get_modular_computer_part(MC_PRINT)
+	if(printer_slot.stored_paper < CANVAS_PAPER_COST)
 		to_chat(usr, span_notice("Printing error: Your printer needs at least [CANVAS_PAPER_COST] paper to print a canvas."))
 		return
-	computer.stored_paper -= CANVAS_PAPER_COST
+	printer_slot.stored_paper -= CANVAS_PAPER_COST
 
 	//canvas printing!
 	var/datum/painting/chosen_portrait = locate(selected_painting) in SSpersistent_paintings.paintings
