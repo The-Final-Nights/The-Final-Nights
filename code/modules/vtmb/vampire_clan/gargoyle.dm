@@ -8,7 +8,6 @@
 		/datum/discipline/visceratika
 	)
 	clan_traits = list(
-		TRAIT_CANNOT_RESIST_MIND_CONTROL,
 		TRAIT_MASQUERADE_VIOLATING_FACE
 	)
 	alt_sprite = "gargoyle"
