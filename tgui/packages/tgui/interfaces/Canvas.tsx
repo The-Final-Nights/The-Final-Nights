@@ -449,7 +449,7 @@ export const Canvas = (props) => {
                 <Box bold>
                   {data.author}
                   {!!data.date &&
-                    `- ${new Date(data.date).getFullYear() + 540}`}
+                    `- ${new Date(data.date).getFullYear() - 10}`}
                 </Box>
                 <Box italic>{data.medium}</Box>
                 <Box italic>
