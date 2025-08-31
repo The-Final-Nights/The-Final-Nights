@@ -48,6 +48,12 @@
 
 	var/list/idle_threads							// Idle programs on background. They still receive process calls but can't be interacted with.
 	var/obj/physical = null									// Object that represents our computer. It's used for Adjacent() and UI visibility checks.
+
+	///The amount of paper currently stored in the PDA
+	var/stored_paper = 10
+	///The max amount of paper that can be held at once.
+	var/max_paper = 30
+
 	var/has_light = FALSE						//If the computer has a flashlight/LED light/what-have-you installed
 	var/comp_light_luminosity = 3				//The brightness of that light
 	var/comp_light_color			//The color of that light
@@ -475,6 +481,12 @@
 			to_chat(user, span_notice("You repair \the [src]."))
 		return
 
+	if(istype(W, /obj/item/paper))
+		return paper_act(user, W)
+
+	if(istype(W, /obj/item/paper_bin))
+		return paper_bin_act(user, W)
+
 	..()
 
 // Used by processor to relay qdel() to machinery type.
@@ -486,3 +498,32 @@
 	if(physical && physical != src)
 		return physical.Adjacent(neighbor)
 	return ..()
+
+/obj/item/modular_computer/proc/paper_act(mob/user, obj/item/paper/new_paper)
+	if(stored_paper >= max_paper)
+		balloon_alert(user, "no more room!")
+		return ITEM_INTERACT_BLOCKING
+	if(!user.temporarilyRemoveItemFromInventory(new_paper))
+		return ITEM_INTERACT_BLOCKING
+	balloon_alert(user, "inserted paper")
+	qdel(new_paper)
+	playsound(src, 'sound/machines/computer/paper_insert.ogg', 40, vary = TRUE)
+	stored_paper++
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/modular_computer/proc/paper_bin_act(mob/user, obj/item/paper_bin/bin)
+	if(bin.total_paper <= 0)
+		balloon_alert(user, "empty bin!")
+		return ITEM_INTERACT_BLOCKING
+	var/papers_added //just to keep track
+	while((bin.total_paper > 0) && (stored_paper < max_paper))
+		papers_added++
+		stored_paper++
+		bin.remove_paper()
+	if(!papers_added)
+		return ITEM_INTERACT_BLOCKING
+	balloon_alert(user, "inserted paper")
+	to_chat(user, span_notice("Added in [papers_added] new sheets. You now have [stored_paper] / [max_paper] printing paper stored."))
+	playsound(src, 'sound/machines/computer/paper_insert.ogg', 40, vary = TRUE)
+	bin.update_appearance()
+	return ITEM_INTERACT_SUCCESS

@@ -90145,6 +90145,12 @@
 	color = "#919191"
 	},
 /area/vtm/clinic)
+"wWV" = (
+/obj/machinery/modular_computer/console/preset/curator{
+	dir = 1
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/museum)
 "wWX" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 6
@@ -165978,7 +165984,7 @@ jmj
 jdm
 gPL
 eXh
-uAK
+wWV
 jmj
 jdm
 eFH
