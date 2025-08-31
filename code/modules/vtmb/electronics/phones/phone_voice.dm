@@ -4,6 +4,7 @@
 	anchored = FALSE
 	density = FALSE
 	opacity = FALSE
+	var/phone = null
 
 /obj/phonevoice/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	if(message == "" || !message)
@@ -11,7 +12,13 @@
 	spans |= speech_span
 	if(!language)
 		language = get_selected_language()
+	var/rendered = compose_message(src, language, message, , spans)
+	SSmasquerade.log_phone_message(rendered, phone)
 	send_speech(message, 2, src, , spans, message_language=language)
+
+/obj/phonevoice/Destroy(force)
+	phone = null
+	..()
 
 /proc/scramble_lasombra_message(message, mob/living/carbon/human/lasombra)
 	var/static/list/zalgo_letters = list(

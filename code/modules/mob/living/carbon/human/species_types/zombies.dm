@@ -133,7 +133,7 @@
 				if(A.objectives)
 					dat += "[printobjectives(A.objectives)]<BR>"
 		var/masquerade_level = " have been a perfect tool for my Necromancer."
-		switch(host.masquerade)
+		switch(host.masquerade_score)
 			if(4)
 				masquerade_level = " have let my true nature slip once."
 			if(3)
@@ -205,6 +205,13 @@
 
 	//zombies resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_zombie_bitten))
+	ADD_TRAIT(C, TRAIT_MASQUERADE_VIOLATING_FACE, "zombie")
+
+/datum/species/zombie/proc/on_zombie_bitten(datum/source, mob/living/carbon/being_bitten)
+	SIGNAL_HANDLER
+
+	if(iszombie(being_bitten))
+		return COMPONENT_RESIST_VAMPIRE_KISS
 
 /datum/species/ghoul/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
@@ -212,21 +219,5 @@
 	for(var/datum/action/zombieinfo/infor in C.actions)
 		if(infor)
 			infor.Remove(C)
-
-/datum/species/zombie/spec_life(mob/living/carbon/human/H)
-	. = ..()
-	if(HAS_TRAIT(H, TRAIT_UNMASQUERADE))
-		if(H.CheckEyewitness(H, H, 7, FALSE))
-			H.AdjustMasquerade(-1)
-
-	if(H.is_face_visible())
-		if (H.CheckEyewitness(H, H, 5, FALSE)) //it's san fran, there are crackheads everywhere
-			H.AdjustMasquerade(-1)
-
-/datum/species/zombie/proc/on_zombie_bitten(datum/source, mob/living/carbon/being_bitten)
-	SIGNAL_HANDLER
-
-	if(iszombie(being_bitten))
-		return COMPONENT_RESIST_VAMPIRE_KISS
 
 #undef REGENERATION_DELAY
