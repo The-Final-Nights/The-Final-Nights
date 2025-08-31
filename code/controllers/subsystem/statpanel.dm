@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(statpanels)
 			"Round Duration: [DisplayTimeText(world.time - SSticker.round_start_time)]",
 			"---",
 			"Canon: [GLOB.canon_event ? "Yes" : "No"]",
-			"Masquerade: [SSmasquerade.get_description()] [SSmasquerade.total_level]/1000",
+			"Masquerade: [SSmasquerade.get_description()]",
 		)
 
 		if(SSshuttle.emergency)
@@ -181,7 +181,7 @@ SUBSYSTEM_DEF(statpanels)
 			var/turf_content_ref = REF(turf_content)
 			if(!(turf_content_ref in cached_images))
 				cached_images += turf_content_ref
-				turf_content.RegisterSignal(turf_content, COMSIG_PARENT_QDELETING, TYPE_PROC_REF(/atom, remove_from_cache))// we reset cache if anything in it gets deleted
+				turf_content.RegisterSignal(turf_content, COMSIG_QDELETING, TYPE_PROC_REF(/atom, remove_from_cache))// we reset cache if anything in it gets deleted
 
 				if(ismob(turf_content) || length(turf_content.overlays) > 2)
 					turfitems[++turfitems.len] = list("[turf_content.name]", turf_content_ref, costly_icon2html(turf_content, target, sourceonly=TRUE))

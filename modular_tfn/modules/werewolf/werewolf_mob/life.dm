@@ -1,53 +1,42 @@
 /mob/living/proc/check_veil_adjust()
 	if(istype(get_area(src), /area/vtm/interior/penumbra))
-		if((last_veil_restore + UMBRA_VEIL_COOLDOWN) < world.time)
-			adjust_veil(1, random = -1)
-			last_veil_restore = world.time
-			return
+		SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
+		return
 
 	switch(auspice.tribe.name)
 		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers", "Corax")
 			if(istype(get_area(src), /area/vtm/forest))
-				adjust_veil(1, random = -1)
-				last_veil_restore = world.time
+				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
 
 		if("Bone Gnawers", "Children of Gaia", "Shadow Lords", "Corax")
 			if(istype(get_area(src), /area/vtm/interior/cog/caern))
-				adjust_veil(1, random = -1)
-				last_veil_restore = world.time
+				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
 
 		if("Glass Walkers", "Corax")
 			if(istype(get_area(src), /area/vtm/interior/glasswalker))
-				adjust_veil(1, random = -1)
-				last_veil_restore = world.time
+				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
 
 		if("Black Spiral Dancers")
-			if(istype(get_area(src), /area/vtm/interior/endron_facility) && masquerade < 5)
-				adjust_veil(1, random = -1)
-				last_veil_restore = world.time
+			if(istype(get_area(src), /area/vtm/interior/endron_facility))
+				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
+
 
 /datum/species/garou/spec_life(mob/living/carbon/human/H)
 	. = ..()
-	if(HAS_TRAIT(H, TRAIT_UNMASQUERADE))
-		if(H.CheckEyewitness(H, H, 7, FALSE))
-			H.adjust_veil(-1,random = -1)
+	if(HAS_TRAIT(H, TRAIT_UNMASQUERADE) || HAS_TRAIT(src, TRAIT_WYRMTAINTED) || glabro)
+		SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 
-	if((H.last_bloodpool_restore + GAROU_BP_REGEN) <= world.time)
-		H.last_bloodpool_restore = world.time
+	if(COOLDOWN_FINISHED(H, bloodpool_restore))
+		COOLDOWN_START(H, bloodpool_restore, GAROU_BP_REGEN)
 		H.bloodpool = min(H.maxbloodpool, H.bloodpool+1)
-	if(glabro)
-		if(H.CheckEyewitness(H, H, 3, FALSE))
-			H.adjust_veil(-1,random = -1)
 
 /mob/living/carbon/werewolf/crinos/Life()
 	. = ..()
-	if(CheckEyewitness(src, src, 5, FALSE))
-		adjust_veil(-1, honoradj = -1)
+	SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 
 /mob/living/carbon/werewolf/corax/corax_crinos/Life() // realizing I screwed myself over by not making this a subtype, oh well.
 	. = ..()
-	if(CheckEyewitness(src, src, 5, FALSE))
-		adjust_veil(-1, honoradj = -1)
+	SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 
 
 /mob/living/carbon/werewolf/handle_status_effects()
@@ -55,68 +44,6 @@
 	//natural reduction of movement delay due to stun.
 	if(move_delay_add > 0)
 		move_delay_add = max(0, move_delay_add - rand(1, 2))
-
-/mob/living/proc/adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, mob/living/carbon/vessel, forced)
-	if(iswerewolf(src))
-		var/mob/living/player = transformator.human_form.resolve()
-		player.adjust_veil(amount, threshold, random, honoradj, gloryadj, wisdomadj, src)
-	if(!GLOB.canon_event)
-		return
-	if(next_veil_time >= world.time && !forced)
-		return
-	if(amount > 0)
-		if(HAS_TRAIT(src, TRAIT_VIOLATOR))
-			return
-	if(amount < 0)
-		if(!CheckZoneMasquerade(src) && !forced)
-			return
-	next_veil_time = world.time + VEIL_COOLDOWN
-	if(!is_special_character(src))
-		if(!vessel)
-			vessel = src
-		if(amount < 0)
-			if(masquerade > 0 && masquerade > threshold)
-				SEND_SOUND(vessel, sound('code/modules/wod13/sounds/veil_violation.ogg', 0, 0, 75))
-				to_chat(vessel, "<span class='boldnotice'><b>VEIL VIOLATION</b></span>")
-				if(threshold && masquerade+amount < threshold)
-					amount = threshold-masquerade
-				masquerade = max(0, masquerade+amount)
-		if(amount > 0)
-			if(masquerade < 5)
-				SEND_SOUND(vessel, sound('code/modules/wod13/sounds/humanity_gain.ogg', 0, 0, 75))
-				to_chat(vessel, "<span class='boldnotice'><b>VEIL REINFORCEMENT</b></span>")
-				if(threshold && masquerade+amount > threshold)
-					amount = threshold-masquerade
-				masquerade = min(5, masquerade+amount)
-		if(random < 0 || random > 0)
-			var/random_renown = pick("Honor","Wisdom","Glory")
-			switch(random_renown)
-				if("Honor")
-					adjust_renown("honor", random, vessel = vessel)
-				if("Glory")
-					adjust_renown("glory", random, vessel = vessel)
-				if("Wisdom")
-					adjust_renown("wisdom", random, vessel = vessel)
-		else
-			if(honoradj)
-				adjust_renown("honor", honoradj, vessel = vessel)
-			if(gloryadj)
-				adjust_renown("glory", gloryadj, vessel = vessel)
-			if(wisdomadj)
-				adjust_renown("wisdom", wisdomadj, vessel = vessel)
-
-		if(src in GLOB.masquerade_breakers_list)
-			if(masquerade > 2)
-				GLOB.masquerade_breakers_list -= src
-		else if(masquerade < 3)
-			GLOB.masquerade_breakers_list |= src
-
-	var/datum/preferences/P = GLOB.preferences_datums[ckey(key)]
-	if(P)
-		P.masquerade = masquerade
-		P.save_character()
-		P.save_preferences()
-
 
 /mob/living/proc/adjust_renown(attribute, amount, threshold, mob/living/vessel)
 	if(!GLOB.canon_event)
