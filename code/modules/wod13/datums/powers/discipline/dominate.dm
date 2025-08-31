@@ -244,6 +244,7 @@
 		owner.say("Think twice.")
 		target.add_movespeed_modifier(/datum/movespeed_modifier/dominate)
 		SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+		SEND_SIGNAL(target, COMSIG_ALL_MASQUERADE_REINFORCE)
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
 		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))

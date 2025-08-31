@@ -17,7 +17,7 @@
 		return COMPONENT_INCOMPATIBLE
 	src.soil = soil
 
-	RegisterSignal(soil, COMSIG_PARENT_QDELETING, PROC_REF(handle_soil_destroyed))
+	RegisterSignal(soil, COMSIG_QDELETING, PROC_REF(handle_soil_destroyed))
 
 /datum/component/needs_home_soil/RegisterWithParent()
 	if (!isliving(parent))

@@ -109,8 +109,6 @@ SUBSYSTEM_DEF(job)
 			return FALSE
 		if((player.client.prefs.generation > job.minimal_generation) && !bypass)
 			return FALSE
-		if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
-			return FALSE
 		if((player.client.prefs.renownrank < job.minimal_renownrank) && !bypass)
 			return FALSE
 		if(!job.allowed_species.Find(player.client.prefs.pref_species.name) && !bypass)
@@ -162,9 +160,6 @@ SUBSYSTEM_DEF(job)
 			continue
 		if((player.client.prefs.renownrank < job.minimal_renownrank) && !bypass)
 			JobDebug("FOC player not enough renown rank, Player: [player]")
-			continue
-		if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
-			JobDebug("FOC player not enough masquerade, Player: [player]")
 			continue
 		if(!job.allowed_species.Find(player.client.prefs.pref_species.name) && !bypass)
 			JobDebug("FOC player species not allowed, Player: [player]")
@@ -241,10 +236,6 @@ SUBSYSTEM_DEF(job)
 
 		if(player.client.prefs.renownrank < job.minimal_renownrank)
 			JobDebug("GRJ player not enough renown rank, Player: [player]")
-			continue
-
-		if(player.client.prefs.masquerade < job.minimal_masquerade)
-			JobDebug("GRJ player not enough masquerade, Player: [player]")
 			continue
 
 		if(!job.allowed_species.Find(player.client.prefs.pref_species.name))
@@ -440,10 +431,6 @@ SUBSYSTEM_DEF(job)
 
 				if((player.client.prefs.renownrank > job.minimal_renownrank) && !bypass)
 					JobDebug("DO player not enough renown rank, Player: [player]")
-					continue
-
-				if((player.client.prefs.masquerade < job.minimal_masquerade) && !bypass)
-					JobDebug("DO player not enough masquerade, Player: [player]")
 					continue
 
 				if(!job.allowed_species.Find(player.client.prefs.pref_species.name) && !bypass)
@@ -757,8 +744,6 @@ SUBSYSTEM_DEF(job)
 /atom/proc/JoinPlayerHere(mob/M, buckle)
 	// By default, just place the mob on the same turf as the marker or whatever.
 	M.forceMove(get_turf(src))
-	if(M.taxist)
-		new /obj/vampire_car/taxi(M.loc)
 
 /obj/structure/chair/JoinPlayerHere(mob/M, buckle)
 	// Placing a mob in a chair will attempt to buckle it, or else fall back to default.
