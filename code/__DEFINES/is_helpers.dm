@@ -71,6 +71,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ishuman(A) (istype(A, /mob/living/carbon/human))
 
 #define isnpc(A) (istype(A, /mob/living/carbon/human/npc))
+#define issabbat(A) (istype(A, /mob/living/carbon/human/npc/sabbat))
 
 //Human sub-species
 #define isabductor(A) (is_species(A, /datum/species/abductor))
@@ -95,6 +96,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define iscathayan(A) (is_species(A,/datum/species/kuei_jin))
 #define isghoul(A) (is_species(A,/datum/species/ghoul))
 #define isgarou(A) (is_species(A,/datum/species/garou))
+#define issupernatural(A) (isgarou(A) || isghoul(A) || iscathayan(A) || iskindred(A) || iswerewolf(A) || iscrinos(A) || islupus(A) || iscorax(A) || iscorvid(A) || iscoraxcrinos(A))
 
 //more carbon mobs
 
