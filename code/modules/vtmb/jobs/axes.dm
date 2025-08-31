@@ -16,7 +16,10 @@
 	display_order = JOB_DISPLAY_ORDER_AXE_GANGSTER
 	exp_type_department = EXP_TYPE_GANG
 
-	allowed_species = list("Human")
+	allowed_species = list("Human, Ghoul, Garou, Vampire")
+	allowed_bloodlines = list(CLAN_NONE)
+	allowed_tribes = list("Ronin")
+
 
 	duty = "Make money, do drugs, fight law. Your hideout is the laundromat in Chinatown."
 	experience_addition = 10
