@@ -25,7 +25,6 @@
 #define TRAIT_LAZY				"lazy"
 #define TRAIT_HOMOSEXUAL		"homosexual"
 #define TRAIT_HUNTED			"hunted"
-#define TRAIT_VIOLATOR			"violator"
 #define TRAIT_DIABLERIE			"diablerie"
 #define TRAIT_GULLET			"gullet"
 #define TRAIT_CHARMER			"charmer"

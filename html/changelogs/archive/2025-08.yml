@@ -74,3 +74,112 @@
 2025-08-17:
   SoreYew:
   - balance: rebalances prince role
+  XeonMations:
+  - refactor: Refactored MC and ticker SS, report any bugs to coding!
+  - bugfix: Fixed all existing roundstart runtimes. Hoo-fucking-ray.
+  chazzyjazzy:
+  - sound: adds a small sound played whenever a non-whisper non-emote message is sent
+      that can be toggled in preferences
+  - qol: you can change the vocal sound your player makes, or disable hearing them
+      entirely, in the preferences tab of the statpanel
+2025-08-19:
+  chazzyjazzy:
+  - qol: Gargoyles can now enter 'statue form', Gargoyles can now toggle digitigrade
+      legs, Visceratika 2 is now fixed.
+2025-08-20:
+  SoreYew:
+  - balance: Bumps harpy to three active players.
+  TheTrueSilverRat:
+  - rscadd: New Special Sprites for Evil Corvids
+  - rscdel: Removed Man Moans
+  - bugfix: Made the Hungry Dead/KJ's Masquerade Levels less Anglophobic
+2025-08-21:
+  TheTrueSilverRat:
+  - bugfix: Made KJ the Hungry Dead Splat Whitelisted
+2025-08-22:
+  AlmostLikeClockwork:
+  - rscadd: ~~Adds a spas to the Sheriff's closet, with mags and shells~~ Adds a McLusky
+      to the Sheriff's closet, with mags and a box
+  - rscadd: Adds a renamed bitcoin miner to the Prince's office
+  - rscadd: Adds rails to the roof garden
+  - rscadd: Adds silver ammo to the secure camarilla armoury
+  - rscdel: Removed the silver from the anarch base
+  SELFHELL:
+  - bugfix: Typhons Brew is now craftable again with 200 Units of Vampire Vitae in
+      a Beaker
+  Squagg:
+  - rscadd: adds salubri and salubri warrior as playable clans for warehouse
+  XeonMations:
+  - admin: Added the ability to 1984 words or phrases.
+  chazzyjazzy:
+  - qol: Updated bank vault keypad
+2025-08-24:
+  AlmostLikeClockwork:
+  - rscadd: Adds a boxing glove locker behind the anarch bar stage
+  SoreYew:
+  - bugfix: fixed runtimes on map
+  TheTrueSilverRat:
+  - map: Added Sabbat late party land marks
+2025-08-25:
+  AlmostLikeClockwork:
+  - rscadd: Added increasing skill modifiers to potence tackle, making it easier and
+      easier to land better tackles
+  - rscadd: each level of celerity now gives dex, scales
+  Kolibri-B:
+  - rscadd: Added a button for lowering path score.
+  XeonMations:
+  - bugfix: Fixed a couple of TGUI related runtimes.
+  - balance: molotvs now explode after 10s of being lit
+  - refactor: refactored molotov code
+2025-08-26:
+  Kolibri-B:
+  - balance: Torpor timers are now a static 10 minutes.
+  SoreYew:
+  - qol: Updates the DA to an ADA
+  - qol: Commenting out some arcade rewards
+2025-08-27:
+  AlmostLikeClockwork:
+  - balance: nerfs vici's upgraded bone armour from 60 to 40
+  ShadeAware:
+  - rscadd: The biker bar has updated its hiring practices following a discrimination
+      lawsuit. Humans and Ghouls can now be brought on as a smaller 'bartender' role.
+  SoreYew:
+  - rscadd: Added radios to Primogens
+  chazzyjazzy:
+  - bugfix: the character preview screen should no longer stretch for everyone on
+      the server when selecting kiasyd characters
+  - rscadd: adds a couple base ss13 /tg/ clothing to the shop including eyepatches,
+      different types of scarfs, and suits.
+  - rscadd: non Chantry gargoyles now spawn with a mask and robes by default
+  darkincarnate:
+  - rscadd: select vampire clans to La Famiglia role
+2025-08-28:
+  '@chazzyjazzy, @solart3ch, @MiniNewmanAudio, @magicianofwands':
+  - rscadd: Added community center keys, for Ministry vampires
+  - rscadd: Added a Ministry emblazoned brazier, for the temple
+  - sound: added pilotlight.ogg
+  - image: added brazier and brazier_lit
+  - map: Added the 'Community Center', a sort of soup kitchen for the impoverished
+      and downtrodden, with a horrible secret underneath...
+  XeonMations:
+  - bugfix: Fixed phone contacts not showing appropriate contacts.
+2025-08-29:
+  Marshmellow105:
+  - map: fixes floors deleted by a recent PR, oopsie!
+2025-08-30:
+  AlmostLikeClockwork:
+  - rscdel: Removed all mcluskys on the map
+  XeonMations:
+  - bugfix: Fixed a paper related runtime.
+  bomby, thatguythere03:
+  - rscadd: new SFPD outfit variations
+  - bugfix: added bodytype sprites for police fatigues
+2025-08-31:
+  SoreYew:
+  - rscadd: third taxi to the hub
+  - bugfix: taxi spawning with their car
+  TheTrueSilverRat:
+  - code_imp: Re-Enabled Deaf and Blind Trait
+  XeonMations:
+  - refactor: Refactored the way the masquerade system works to be more RP friendly
+      and more brutal.

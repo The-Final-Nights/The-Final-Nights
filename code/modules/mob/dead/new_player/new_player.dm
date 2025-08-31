@@ -342,8 +342,6 @@
 		return JOB_UNAVAILABLE_VAMPIRE_AGE
 	if((client.prefs.generation > job.minimal_generation) && !bypass)
 		return JOB_UNAVAILABLE_GENERATION
-	if((client.prefs.masquerade < job.minimal_masquerade) && !bypass)
-		return JOB_UNAVAILABLE_MASQUERADE
 	if(!job.allowed_species.Find(client.prefs.pref_species.name) && !bypass)
 		return JOB_UNAVAILABLE_SPECIES
 	if ((job.species_slots[client.prefs.pref_species.name] == 0) && !bypass)

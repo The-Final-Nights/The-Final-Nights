@@ -426,7 +426,7 @@
 ///Adds a drone to the swarmer list and keeps track of it in case it's deleted and requires cleanup.
 /mob/living/simple_animal/hostile/swarmer/proc/add_drone(mob/newswarmer)
 	LAZYADD(dronelist, newswarmer)
-	RegisterSignal(newswarmer, COMSIG_PARENT_QDELETING, PROC_REF(remove_drone), newswarmer)
+	RegisterSignal(newswarmer, COMSIG_QDELETING, PROC_REF(remove_drone), newswarmer)
 
 
 /**
@@ -440,7 +440,7 @@
 /mob/living/simple_animal/hostile/swarmer/proc/remove_drone(mob/drone, force)
 	SIGNAL_HANDLER
 
-	UnregisterSignal(drone, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(drone, COMSIG_QDELETING)
 	dronelist -= drone
 
 /**
