@@ -232,7 +232,7 @@
 /datum/discipline_power/quietus/thin_blood/activate(mob/living/target)
 	. = ..()
 	if(iskindred(target) || isghoul(target))
-		ADD_TRAIT(target, TRAIT_THINNED_BLOOD, MAGIC_TRAIT)
+		ADD_TRAIT(target, TRAIT_QUIETUS_CURSED, MAGIC_TRAIT)
 		to_chat(target, span_warning("You feel your blood thin, and healing become impossible!"))
 		addtimer(CALLBACK(src, PROC_REF(deactivate), target), 1 MINUTES)
 	else
@@ -240,5 +240,9 @@
 
 /datum/discipline_power/quietus/thin_blood/deactivate(mob/living/target)
 	. = ..()
-	REMOVE_TRAIT(target, TRAIT_THINNED_BLOOD, MAGIC_TRAIT)
+	REMOVE_TRAIT(target, TRAIT_QUIETUS_CURSED, MAGIC_TRAIT)
 	to_chat(target, span_warning("You feel your blood return to normal, and healing become possible again!"))
+
+/datum/discipline_power/quietus/thin_blood/post_gain()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_QUICKEN_MORTAL_BLOOD, MAGIC_TRAIT)
