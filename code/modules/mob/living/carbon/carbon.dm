@@ -1427,6 +1427,7 @@
 
 /mob/living/carbon/proc/attach_rot(mapload)
 	AddComponent(/datum/component/rot/corpse)
+	SSmasquerade.cryo_masquerade_breacher(src, TRUE)
 
 #undef JUMP_DELAY
 #undef MAX_JUMP_DISTANCE

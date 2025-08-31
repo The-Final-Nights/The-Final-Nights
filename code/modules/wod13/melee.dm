@@ -541,8 +541,7 @@
 			to_chat(user, "This particular wall feels reinforced too harshly by the veil to dissolve.")
 			return
 		twall.dismantle_wall(1,0)
-		if(user.CheckEyewitness(user, user, 7, FALSE))
-			user.adjust_veil(-2)
+		SEND_SIGNAL(user, COMSIG_MASQUERADE_VIOLATION)
 	return ..()
 
 /obj/item/melee/vampirearms/knife/gangrel/Initialize()

@@ -1,0 +1,2 @@
+GLOBAL_LIST_EMPTY(logging_machines)
+GLOBAL_LIST_EMPTY(blood_hunt_announcers)

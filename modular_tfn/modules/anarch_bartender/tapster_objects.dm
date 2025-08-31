@@ -14,8 +14,7 @@
 
 /obj/item/vamp/phone/tapster
 	contact_networks_pre_init = list(
-		list(NETWORK_ID = ANARCH_NETWORK, OUR_ROLE = "Club Bartender")
-		)
+		list(NETWORK_ID = ANARCH_NETWORK, OUR_ROLE = "Club Bartender", USE_JOB_TITLE = FALSE))
 
 /obj/item/vamp/keys/anarch_limited
 	name = "Barkeeper keys"
