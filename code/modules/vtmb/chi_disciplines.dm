@@ -170,8 +170,7 @@
 		caster.playsound_local(caster, activate_sound, 50, FALSE)
 
 	if(violates_masquerade)
-		if(caster.CheckEyewitness(target, caster, 7, TRUE))
-			caster.AdjustMasquerade(-1)
+		SEND_SIGNAL(caster, COMSIG_MASQUERADE_VIOLATION)
 
 	to_chat(caster, "<span class='notice'>You activate [src][(ranged && target) ? " on [target]" : ""].</span>")
 	log_attack("[key_name(caster)] casted level [src.level_casting] of the Discipline [src.name][target == caster ? "." : " on [key_name(target)]"]")
@@ -744,9 +743,7 @@
 	if(firer)
 		chain = firer.Beam(src, icon_state = "arm")
 		if(iscathayan(firer))
-			var/mob/living/carbon/human/H = firer
-			if(H.CheckEyewitness(H, H, 7, FALSE))
-				H.AdjustMasquerade(-1)
+			SEND_SIGNAL(firer, COMSIG_MASQUERADE_VIOLATION)
 	..()
 
 /obj/projectile/flesh_shintai/on_hit(atom/target)
@@ -1556,8 +1553,7 @@
 		..()
 		return
 	human_target.electrocute_act(50, src, siemens_coeff = 1, flags = NONE)
-	if(user.CheckEyewitness(user, user, 7, FALSE))
-		user.AdjustMasquerade(-1)
+	SEND_SIGNAL(user, COMSIG_MASQUERADE_VIOLATION)
 	return ..()
 
 /obj/item/gun/magic/hook/storm_shintai
@@ -1599,9 +1595,7 @@
 	if(firer)
 		chain = firer.Beam(src, icon_state="lightning[rand(1,12)]")
 		if(iscathayan(firer))
-			var/mob/living/carbon/human/H = firer
-			if(H.CheckEyewitness(H, H, 7, FALSE))
-				H.AdjustMasquerade(-1)
+			SEND_SIGNAL(firer, COMSIG_MASQUERADE_VIOLATION)
 	..()
 
 /obj/projectile/storm_shintai/on_hit(atom/target)
@@ -2081,8 +2075,7 @@
 		door_item.throw_at(throw_target, rand(2, 4), 4, src)
 		qdel(target)
 	if(isliving(target))
-		if(user.CheckEyewitness(user, user, 7, FALSE))
-			user.AdjustMasquerade(-1)
+		SEND_SIGNAL(user, COMSIG_MASQUERADE_VIOLATION)
 		var/mob/living/target_mob = target
 		target_mob.adjustCloneLoss(20)
 		target_mob.AdjustKnockdown(2 SECONDS)

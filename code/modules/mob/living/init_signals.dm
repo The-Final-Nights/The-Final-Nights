@@ -54,6 +54,8 @@
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_OBFUSCATED), PROC_REF(make_invisible))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_OBFUSCATED), PROC_REF(make_visible))
 
+	RegisterSignals(src, list(COMSIG_QDELETING, COMSIG_LIVING_GIBBED), PROC_REF(on_qdeletion))
+
 /// Called when [TRAIT_KNOCKEDOUT] is added to the mob.
 /mob/living/proc/on_knockedout_trait_gain(datum/source)
 	SIGNAL_HANDLER
@@ -277,3 +279,8 @@
 	SIGNAL_HANDLER
 	remove_obficon()
 // TFN EDIT END
+
+/// Called when [COMSIG_QDELETING] is called
+/mob/living/proc/on_qdeletion(datum/source)
+	SIGNAL_HANDLER
+	SSmasquerade.cryo_masquerade_breacher(src, TRUE)
