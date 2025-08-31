@@ -1,8 +1,0 @@
-author: "@chazzyjazzy, @solart3ch, @MiniNewmanAudio, @magicianofwands"
-delete-after: True
-changes:
-  - rscadd: "Added community center keys, for Ministry vampires"
-  - rscadd: "Added a Ministry emblazoned brazier, for the temple"
-  - sound: "added pilotlight.ogg"
-  - image: "added brazier and brazier_lit"
-  - map: "Added the 'Community Center', a sort of soup kitchen for the impoverished and downtrodden, with a horrible secret underneath..."
