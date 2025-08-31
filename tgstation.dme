@@ -3796,6 +3796,7 @@
 #include "modular_tfn\modules\redaction\code\subsystem\redaction.dm"
 #include "modular_tfn\modules\saysounds\code\human_say.dm"
 #include "modular_tfn\modules\saysounds\code\preferences_toggles.dm"
+#include "modular_tfn\modules\sfpd_gear\code\policeoutfits.dm"
 #include "modular_tfn\modules\subtle\subtle.dm"
 #include "modular_tfn\modules\taser_tfn13\taser_tfn13.dm"
 #include "modular_tfn\modules\vitae\code\blood_bond.dm"
