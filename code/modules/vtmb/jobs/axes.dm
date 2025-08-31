@@ -16,7 +16,7 @@
 	display_order = JOB_DISPLAY_ORDER_AXE_GANGSTER
 	exp_type_department = EXP_TYPE_GANG
 
-	allowed_species = list("Human", "Ghoul", "Garou", "Vampire")
+	allowed_species = list("Human", "Ghoul", "Werewolf", "Vampire")
 	allowed_bloodlines = list(CLAN_NONE)
 	allowed_tribes = list("Ronin")
 
