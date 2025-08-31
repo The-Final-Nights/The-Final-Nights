@@ -49,7 +49,7 @@
 	lose_text = "<span class='notice'>You miraculously gain back your vision.</span>"
 	medical_record_text = "Patient has permanent blindness."
 	hardcore_value = 15
-	mood_quirk = TRUE
+	mood_quirk = FALSE // TFN EDIT
 
 /datum/quirk/blindness/add()
 	quirk_holder.become_blind(ROUNDSTART_TRAIT)
@@ -100,6 +100,7 @@
 		return
 	quirk_holder.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.2 * delta_time)
 
+
 /datum/quirk/deafness
 	name = "Deaf"
 	desc = "You are incurably deaf."
@@ -109,7 +110,8 @@
 	lose_text = "<span class='notice'>You're able to hear again!</span>"
 	medical_record_text = "Patient's cochlear nerve is incurably damaged."
 	hardcore_value = 12
-	mood_quirk = TRUE
+	mood_quirk = FALSE //TFN EDIT
+
 
 /datum/quirk/depression
 	name = "Depression"

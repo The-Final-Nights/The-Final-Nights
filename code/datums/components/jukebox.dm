@@ -67,7 +67,7 @@
 
 	RegisterSignal(parent, COMSIG_ENTER_AREA, PROC_REF(on_enter_area))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(parent_delete))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(parent_delete))
 
 /datum/jukebox/Destroy()
 	unlisten_all()
@@ -212,7 +212,7 @@
 	PROTECTED_PROC(TRUE)
 
 	listeners[new_listener] = NONE
-	RegisterSignal(new_listener, COMSIG_PARENT_QDELETING, PROC_REF(listener_deleted))
+	RegisterSignal(new_listener, COMSIG_QDELETING, PROC_REF(listener_deleted))
 
 	if(isnull(new_listener.client))
 		RegisterSignal(new_listener, COMSIG_MOB_LOGIN, PROC_REF(listener_login))
@@ -310,7 +310,7 @@
 	no_longer_listening.stop_sound_channel(CHANNEL_JUKEBOX)
 	UnregisterSignal(no_longer_listening, list(
 		COMSIG_MOB_LOGIN,
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 		COMSIG_MOVABLE_MOVED,
 		SIGNAL_ADDTRAIT(TRAIT_DEAF),
 		SIGNAL_REMOVETRAIT(TRAIT_DEAF),

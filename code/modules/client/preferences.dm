@@ -161,9 +161,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/glory = 0
 	var/wisdom = 0
 
-	//Masquerade
-	var/masquerade = 5
-
+	//Masquerade, renamed to clear past masquereade scores
+	var/masquerade_score = 5
 	var/path_score = 7
 	var/is_enlightened = FALSE
 
@@ -272,7 +271,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	lockpicking = 0
 	athletics = 0
 	info_known = INFO_KNOWN_UNKNOWN
-	masquerade = initial(masquerade)
+	masquerade_score = initial(masquerade_score)
 	generation = initial(generation)
 	dharma_level = initial(dharma_level)
 	hun = initial(hun)
@@ -523,7 +522,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Species:</b><BR><a href='byond://?_src_=prefs;preference=species;task=input'>[pref_species.name]</a><BR>"
 			switch(pref_species.name)
 				if("Vampire")
-					dat += "<b>Masquerade:</b> [masquerade]/5<BR>"
+					dat += "<b>Masquerade:</b> [masquerade_score]/5<BR>"
 					dat += "<b>Generation:</b> [generation]"
 					var/generation_allowed = TRUE
 					if(clan?.name == CLAN_NONE)
@@ -553,7 +552,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/dharma_cost = min((dharma_level * 5), 20)
 						dat += " <a href='byond://?_src_=prefs;preference=dharmarise;task=input'>Raise Dharmic Enlightenment ([dharma_cost])</a><BR>"
 					dat += "<b>P'o Personality</b>: [po_type] <a href='byond://?_src_=prefs;preference=potype;task=input'>Switch</a><BR>"
-					dat += "<b>Awareness:</b> [masquerade]/5<BR>"
+					dat += "<b>Awareness:</b> [masquerade_score]/5<BR>"
 					dat += "<b>Yin/Yang</b>: [yin]/[yang] <a href='byond://?_src_=prefs;preference=chibalance;task=input'>Adjust</a><BR>"
 					dat += "<b>Hun/P'o</b>: [hun]/[po] <a href='byond://?_src_=prefs;preference=demonbalance;task=input'>Adjust</a><BR>"
 				if("Werewolf")
@@ -570,7 +569,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/gloryXP = 25
 					var/honorXP = 25
 					var/wisdomXP = 25
-					dat += "<b>Veil:</b> [masquerade]/5<BR>"
+					dat += "<b>Veil:</b> [masquerade_score]/5<BR>"
 					switch(tribe.name)
 						if("Ronin")
 							dat += "Renown matters little to you, now."
@@ -619,7 +618,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					else
 						dat += "<BR>"
 				if("Ghoul")
-					dat += "<b>Masquerade:</b> [masquerade]/5<BR>"
+					dat += "<b>Masquerade:</b> [masquerade_score]/5<BR>"
 
 			dat += "<h2>[make_font_cool("ATTRIBUTES")]</h2>"
 
@@ -1604,7 +1603,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[IN [(available_in_days)] DAYS\]</font></td></tr>"
 	if((generation > job.minimal_generation) && !bypass)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[FROM [job.minimal_generation] GENERATION AND OLDER\]</font></td></tr>"
-	if((masquerade < job.minimal_masquerade) && !bypass)
+	if((masquerade_score < job.minimal_masquerade) && !bypass)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_masquerade] MASQUERADE POINTS REQUIRED\]</font></td></tr>"
 	if(!job.allowed_species.Find(pref_species.name) && !bypass)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[pref_species.name] RESTRICTED\]</font></td></tr>"
@@ -1699,7 +1698,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if((generation > job.minimal_generation) && !bypass)
 				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[FROM [job.minimal_generation] GENERATION AND OLDER\]</font></td></tr>"
 				continue
-			if((masquerade < job.minimal_masquerade) && !bypass)
+			if((masquerade_score < job.minimal_masquerade) && !bypass)
 				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_masquerade] MASQUERADE POINTS REQUIRED\]</font></td></tr>"
 				continue
 			if(!job.allowed_species.Find(pref_species.name) && !bypass)
@@ -3041,7 +3040,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/bonus = generation-generation_bonus
 					slotlocked = 0
 					torpor_count = 0
-					masquerade = initial(masquerade)
+					masquerade_score = initial(masquerade_score)
 					generation = clamp(bonus, LOWEST_GENERATION_LIMIT, HIGHEST_GENERATION_LIMIT)
 					generation_bonus = 0
 					save_character()
@@ -3761,13 +3760,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.additional_athletics = A.archetype_additional_athletics
 	A.special_skill(character)
 
-	character.masquerade = masquerade
-	if(!character_setup)
-		if(character in GLOB.masquerade_breakers_list)
-			if(character.masquerade > 2)
-				GLOB.masquerade_breakers_list -= character
-		else if(character.masquerade < 3)
-			GLOB.masquerade_breakers_list += character
+	if(!character_setup && !istype(character, /mob/living/carbon/human/dummy))
+		for(var/i = 5; i > masquerade_score; i--)
+			SSmasquerade.masquerade_breach(GLOB.blood_hunt_announcers, character, MASQUERADE_REASON_PREFERENCES)
+		SSmasquerade.masquerade_breacher_check(character)
 
 	switch (body_model)
 		if (SLIM_BODY_MODEL_NUMBER)

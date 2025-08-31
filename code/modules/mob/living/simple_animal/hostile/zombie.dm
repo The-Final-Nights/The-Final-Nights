@@ -67,13 +67,10 @@
 						if(!V.density)
 							if(prob(20))
 								for(var/mob/living/carbon/human/L in GLOB.player_list)
-									if(L)
-										if(L.mind)
-											if(L.mind.assigned_role == "Graveyard Keeper")
-												if(L.client)
-													if(istype(get_area(L), /area/vtm/graveyard))
-														L.AdjustMasquerade(-1)
-														SSgraveyard.total_bad += 1
+									if(L.mind?.assigned_role == "Graveyard Keeper")
+										if(istype(get_area(L), /area/vtm/graveyard))
+											L.AdjustMasquerade(-1, "zombies")
+											SSgraveyard.total_bad += 1
 								qdel(src)
 						else
 							V.punched()

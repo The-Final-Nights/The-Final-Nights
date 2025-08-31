@@ -19,11 +19,6 @@
 //Allows the user to examinate regardless of client.eye.
 #define COMPONENT_ALLOW_EXAMINATE (1<<0)
 
-/// before a datum's Destroy() is called: (force), returning a nonzero value will cancel the qdel operation
-#define COMSIG_PARENT_PREQDELETED "parent_preqdeleted"
-/// just before a datum's Destroy() is called: (force), at this point none of the other components chose to interrupt qdel and Destroy will be called
-#define COMSIG_PARENT_QDELETING "parent_qdeleting"
-
 ///called when you send a mood event from anywhere in the code.
 #define COMSIG_ADD_MOOD_EVENT "add_mood"
 ///Mood event that only RnD members listen for

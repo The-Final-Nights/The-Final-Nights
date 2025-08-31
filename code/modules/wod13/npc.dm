@@ -71,6 +71,13 @@
 
 	var/list/drop_on_death_list = null
 
+/mob/living/carbon/human/npc/Initialize()
+	. = ..()
+
+	// NPC humans get the area of effect, player humans dont. This is a fucky way of doing this.
+	qdel(GetComponent(/datum/component/violation_observer))
+	AddComponent(/datum/component/violation_observer, TRUE)
+
 /mob/living/carbon/human/npc/LateInitialize()
 	. = ..()
 	if(role_weapons_chances.Find(type))
