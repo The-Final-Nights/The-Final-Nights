@@ -65862,13 +65862,6 @@
 	},
 /turf/open/floor/plating/roofwalk,
 /area/vtm)
-"qDM" = (
-/obj/structure/table/wood,
-/obj/structure/sign/painting/library{
-	pixel_y = 32
-	},
-/turf/closed/wall/vampwall/rich/old/low,
-/area/vtm/interior/museum)
 "qDR" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -165781,7 +165774,7 @@ yit
 yit
 eLr
 jmj
-qDM
+jRB
 jRB
 jRB
 jdm
