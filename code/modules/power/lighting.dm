@@ -937,7 +937,7 @@
 /obj/item/light/create_reagents(max_vol, flags)
 	. = ..()
 	RegisterSignals(reagents, list(COMSIG_REAGENTS_NEW_REAGENT, COMSIG_REAGENTS_ADD_REAGENT, COMSIG_REAGENTS_DEL_REAGENT, COMSIG_REAGENTS_REM_REAGENT), PROC_REF(on_reagent_change))
-	RegisterSignal(reagents, COMSIG_PARENT_QDELETING, PROC_REF(on_reagents_del))
+	RegisterSignal(reagents, COMSIG_QDELETING, PROC_REF(on_reagents_del))
 
 /**
  * Handles rigging the cell if it contains enough plasma.
@@ -953,7 +953,7 @@
 /obj/item/light/proc/on_reagents_del(datum/reagents/holder)
 	SIGNAL_HANDLER
 	UnregisterSignal(holder, list(
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 		COMSIG_REAGENTS_NEW_REAGENT,
 		COMSIG_REAGENTS_ADD_REAGENT,
 		COMSIG_REAGENTS_REM_REAGENT,

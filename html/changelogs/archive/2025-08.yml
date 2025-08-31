@@ -174,3 +174,10 @@
   bomby, thatguythere03:
   - rscadd: new SFPD outfit variations
   - bugfix: added bodytype sprites for police fatigues
+2025-08-31:
+  SoreYew:
+  - rscadd: third taxi to the hub
+  - bugfix: taxi spawning with their car
+  XeonMations:
+  - refactor: Refactored the way the masquerade system works to be more RP friendly
+      and more brutal.

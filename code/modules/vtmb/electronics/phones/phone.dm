@@ -109,6 +109,8 @@
 	if(important_contact_of && owner && number)
 		GLOB.important_contacts[important_contact_of] = new /datum/phonecontact(owner.real_name, number)
 
+	AddComponent(/datum/component/violation_observer, FALSE)
+
 /obj/item/vamp/phone/Destroy()
 	GLOB.phone_numbers_list -= number
 	GLOB.phones_list -= src
@@ -591,6 +593,7 @@
 				var/obj/phonevoice/VOIC = new(online)
 				VOIC.name = voice_saying
 				VOIC.speech_span = spchspn
+				VOIC.phone = src
 				VOIC.say("[message]")
 				qdel(VOIC)
 
