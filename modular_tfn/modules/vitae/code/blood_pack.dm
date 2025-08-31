@@ -101,6 +101,7 @@
 
 	playsound(M.loc, 'sound/items/drink.ogg', 50, TRUE)
 	update_appearance()
+	SEND_SIGNAL(M, COMSIG_MASQUERADE_VIOLATION)
 	if(ishumanbasic(M) || (isghoul(M) && !reagents.has_reagent(/datum/reagent/blood/vitae)))
 		to_chat(M, span_notice("That didn't taste very good..."))
 		M.adjust_disgust(DISGUST_LEVEL_GROSS)

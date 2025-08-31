@@ -101,8 +101,7 @@
 		frenzy_target.emote("scream")
 		humie.add_bite_animation()
 	var/mob/living/carbon/human/vamp = src
-	if(CheckEyewitness(frenzy_target, vamp, 7, FALSE))
-		vamp.AdjustMasquerade(-1)
+	SEND_SIGNAL(frenzy_target, COMSIG_MASQUERADE_VIOLATION)
 	playsound(src, 'code/modules/wod13/sounds/drinkblood1.ogg', 50, TRUE)
 	frenzy_target?.visible_message(span_warning("<b>[src] bites [frenzy_target]'s neck!</b>"), span_warning("<b>[src] bites your neck!</b></span>"))
 	vamp.drinksomeblood(frenzy_target)
@@ -221,17 +220,14 @@
 	if (H.is_face_visible())
 		// Gargoyles, nosferatu, skeletons, that kind of thing
 		if (HAS_TRAIT(H, TRAIT_MASQUERADE_VIOLATING_FACE))
-			if (H.CheckEyewitness(H, H, 7, FALSE))
-				H.AdjustMasquerade(-1)
+			SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 		// Masquerade breach if eyes are uncovered, short range
 		else if (HAS_TRAIT(H, TRAIT_MASQUERADE_VIOLATING_EYES))
 			if (!H.is_eyes_covered())
-				if (H.CheckEyewitness(H, H, 3, FALSE))
-					H.AdjustMasquerade(-1)
+				SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 
 	if (HAS_TRAIT(H, TRAIT_UNMASQUERADE))
-		if(H.CheckEyewitness(H, H, 7, FALSE))
-			H.AdjustMasquerade(-1)
+		SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 
 	if(H.hearing_ghosts)
 		H.bloodpool = max(0, H.bloodpool-1)
@@ -250,10 +246,6 @@
 		if(P)
 			if(P.path_score != H.morality_path.score)
 				P.path_score = H.morality_path.score
-				P.save_preferences()
-				P.save_character()
-			if(P.masquerade != H.masquerade)
-				P.masquerade = H.masquerade
 				P.save_preferences()
 				P.save_character()
 			if(!H.antifrenzy)

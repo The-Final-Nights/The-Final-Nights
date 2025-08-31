@@ -247,7 +247,7 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 			continue
 
 		atoms.flags_1 |= HOLOGRAM_1
-		RegisterSignal(atoms, COMSIG_PARENT_PREQDELETED, PROC_REF(remove_from_holo_lists))
+		RegisterSignal(atoms, COMSIG_PREQDELETED, PROC_REF(remove_from_holo_lists))
 
 		if (isholoeffect(atoms))//activates holo effects and transfers them from the spawned list into the effects list
 			var/obj/effect/holodeck_effect/holo_effect = atoms
@@ -282,7 +282,7 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 		return
 
 	spawned -= object
-	UnregisterSignal(object, COMSIG_PARENT_PREQDELETED)
+	UnregisterSignal(object, COMSIG_PREQDELETED)
 	var/turf/target_turf = get_turf(object)
 	for(var/c in object) //make sure that things inside of a holoitem are moved outside before destroying it
 		var/atom/movable/object_contents = c
@@ -295,7 +295,7 @@ and clear when youre done! if you dont i will use :newspaper2: on you
 
 /obj/machinery/computer/holodeck/proc/remove_from_holo_lists(datum/to_remove, _forced)
 	spawned -= to_remove
-	UnregisterSignal(to_remove, COMSIG_PARENT_PREQDELETED)
+	UnregisterSignal(to_remove, COMSIG_PREQDELETED)
 
 /obj/machinery/computer/holodeck/process(delta_time)
 	if(damaged && DT_PROB(5, delta_time))
