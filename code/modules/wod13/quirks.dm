@@ -385,7 +385,7 @@ Dancer
 /datum/quirk/dwarf/add()
 	if(iswerewolf(quirk_holder))
 		return
-	quirk_holder.AddElement(/datum/element/dwarfism, COMSIG_PARENT_PREQDELETED, src)
+	quirk_holder.AddElement(/datum/element/dwarfism, COMSIG_PREQDELETED, src)
 
 /datum/quirk/dwarf/remove()
 	if (!quirk_holder)
@@ -604,13 +604,6 @@ Dancer
 	if(!H.equip_to_slot_if_possible(glasses, ITEM_SLOT_EYES, bypass_equip_delay_self = TRUE))
 		H.put_in_hands(glasses)
 
-/datum/quirk/masquerade
-	name = "Masquerade Violator"
-	desc = "You can't recover your masquerade at all."
-	value = -2
-	mob_trait = TRAIT_VIOLATOR
-	allowed_species = list("Vampire", "Ghoul", "Kuei-Jin")
-
 /datum/quirk/irongullet
 	name = "Iron Gullet"
 	desc = "You don't mind sucking up cold blood from corpses. Though there's rarely that much left."
@@ -668,7 +661,7 @@ Dancer
 /datum/quirk/tower/add()
 	if(iswerewolf(quirk_holder))
 		return
-	quirk_holder.AddElement(/datum/element/giantism, COMSIG_PARENT_PREQDELETED, src)
+	quirk_holder.AddElement(/datum/element/giantism, COMSIG_PREQDELETED, src)
 
 /datum/quirk/tower/remove()
 	if (!quirk_holder)
