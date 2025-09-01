@@ -359,8 +359,8 @@
 	maxHealth = 30
 	health = 30
 	harm_intent_damage = 20
-	melee_damage_lower = 15
-	melee_damage_upper = 30
+	melee_damage_lower = 20
+	melee_damage_upper = 20
 	speed = -0.1
 	dodging = TRUE
 

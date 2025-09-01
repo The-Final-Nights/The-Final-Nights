@@ -900,9 +900,9 @@
 	del_on_death = 1
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 10
-	melee_damage_lower = 5
-	melee_damage_upper = 10
+	harm_intent_damage = 8
+	melee_damage_lower = 8
+	melee_damage_upper = 8
 	speed = 0
 	dodging = TRUE
 
@@ -965,9 +965,9 @@
 	maxHealth = 15
 	health = 15
 	melee_damage_type = TOX
-	harm_intent_damage = 8
-	melee_damage_lower = 5
-	melee_damage_upper = 8
+	harm_intent_damage = 7
+	melee_damage_lower = 7
+	melee_damage_upper = 7
 	is_flying_animal = TRUE
 	speed = -0.8
 	dodging = TRUE
@@ -990,9 +990,9 @@
 	density = TRUE
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 15
-	melee_damage_lower = 10
-	melee_damage_upper = 15
+	harm_intent_damage = 16 // Slightly weaker than cats due to being toxin.
+	melee_damage_lower = 16
+	melee_damage_upper = 16
 	speed = -0.4
 
 /mob/living/simple_animal/hostile/beastmaster/largespider
@@ -1023,11 +1023,12 @@
 	bloodpool = 2
 	maxbloodpool = 2
 	del_on_death = 1
-	maxHealth = 45
-	health = 45
+	maxHealth = 50
+	health = 50
 	melee_damage_type = TOX
-	melee_damage_lower = 8
-	melee_damage_upper = 18
+	harm_intent_damage = 14
+	melee_damage_lower = 14
+	melee_damage_upper = 14
 	speed = 0.35
 
 /datum/socialrole/shop
