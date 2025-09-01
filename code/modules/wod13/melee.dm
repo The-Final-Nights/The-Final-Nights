@@ -546,10 +546,7 @@
 /obj/item/melee/vampirearms/knife/gangrel/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		src.attack_speed = CLICK_CD_MELEE * 0.5
-	else
-		src.attack_speed = CLICK_CD_MELEE
+	attack_speed = CLICK_CD_MELEE
 
 /obj/item/melee/vampirearms/chainsaw
 	name = "chainsaw"
@@ -960,10 +957,7 @@
 /obj/item/melee/vampirearms/tzimisce/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		src.attack_speed = CLICK_CD_MELEE * 0.5
-	else
-		src.attack_speed = CLICK_CD_MELEE
+	attack_speed = CLICK_CD_MELEE
 
 /obj/item/melee/vampirearms/tzimisce/shock/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)

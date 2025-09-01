@@ -99,6 +99,8 @@ SUBSYSTEM_DEF(city_time)
 		SSticker.declare_completion()
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
+			if(HAS_TRAIT(H, TRAIT_NO_SUN_ASHING))
+				continue
 			var/area/vtm/V = get_area(H)
 			if(iskindred(H) && V.upper)
 				H.death()

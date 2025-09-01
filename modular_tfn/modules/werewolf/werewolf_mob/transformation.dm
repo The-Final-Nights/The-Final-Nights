@@ -56,8 +56,6 @@
 	transfer_to.setToxLoss(target_toxin_damage)
 	var/target_clone_damage = ceil(transfer_from.getCloneLoss() / division_parameter)
 	transfer_to.setCloneLoss(target_clone_damage)
-	if(HAS_TRAIT(transfer_from, TRAIT_WARRIOR) && !HAS_TRAIT(transfer_to, TRAIT_WARRIOR))
-		ADD_TRAIT(transfer_to, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 	transfer_from.fire_stacks = transfer_to.fire_stacks
 	transfer_from.on_fire = transfer_to.on_fire
