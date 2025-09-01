@@ -24,7 +24,7 @@
 		new /datum/data/mining_equipment("silver .45 ACP ammo",	/obj/item/ammo_box/vampire/c45acp/silver,	6000),
 		new /datum/data/mining_equipment("silver .44 ammo",	/obj/item/ammo_box/vampire/c44/silver,	7000),
 		new /datum/data/mining_equipment("silver 12g slug ammo", /obj/item/ammo_box/vampire/c12g/silver,	7500),
-		new /datum/data/mining_equipment("silver 545 ammo", /obj/item/ammo_box/vampire/c545/silver, 8000),
+		new /datum/data/mining_equipment("silver 5.45 ammo", /obj/item/ammo_box/vampire/c545/silver, 8000),
 		new /datum/data/mining_equipment("silver 5.56 ammo",	/obj/item/ammo_box/vampire/c556/silver,	8000),
 		new /datum/data/mining_equipment("incendiary 5.56 ammo",	/obj/item/ammo_box/vampire/c556/incendiary,	9000)
 	)
