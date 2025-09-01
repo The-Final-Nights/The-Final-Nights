@@ -145,10 +145,7 @@
 			W.melee_attack_chain(src, A, params)
 		else
 			if(ismob(A))
-				if(HAS_TRAIT(src, TRAIT_WARRIOR))
-					changeNext_move(CLICK_CD_MELEE * 0.5)
-				else
-					changeNext_move(CLICK_CD_MELEE)
+				changeNext_move(CLICK_CD_MELEE)
 
 			UnarmedAttack(A, FALSE, modifiers)
 		return
@@ -163,10 +160,7 @@
 			W.melee_attack_chain(src, A, params)
 		else
 			if(ismob(A))
-				if(HAS_TRAIT(src, TRAIT_WARRIOR))
-					changeNext_move(CLICK_CD_MELEE * 0.5)
-				else
-					changeNext_move(CLICK_CD_MELEE)
+				changeNext_move(CLICK_CD_MELEE)
 			UnarmedAttack(A,1,modifiers)
 	else
 		if(W)
@@ -295,11 +289,7 @@
  */
 /mob/proc/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
 	if(ismob(A))
-		var/mob/simple = src
-		if(HAS_TRAIT(simple, TRAIT_WARRIOR))
-			changeNext_move(CLICK_CD_MELEE * 0.5)
-		else
-			changeNext_move(CLICK_CD_MELEE)
+		changeNext_move(CLICK_CD_MELEE)
 	return
 
 /**
@@ -375,7 +365,7 @@
 	grid_width = old_height
 	to_chat(user, span_notice("You flip the item for storage."))
 	return ..()
-	
+
 /mob/living/CtrlClick(mob/living/user)
 	if(!isliving(user) || !user.CanReach(src) || user.incapacitated())
 		return ..()

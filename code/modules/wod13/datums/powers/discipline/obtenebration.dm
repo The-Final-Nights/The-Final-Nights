@@ -211,8 +211,7 @@
 				drawing = FALSE
 				new ritual(H.loc)
 				H.bloodpool = max(H.bloodpool - 2, 0)
-				if(H.CheckEyewitness(H, H, 7, FALSE))
-					H.AdjustMasquerade(-1)
+				SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 			else
 				drawing = FALSE
 	else
@@ -230,8 +229,7 @@
 				var/rune = pick(shit)
 				new rune(H.loc)
 				H.bloodpool = max(H.bloodpool - 2, 0)
-				if(H.CheckEyewitness(H, H, 7, FALSE))
-					H.AdjustMasquerade(-1)
+				SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 			else
 				drawing = FALSE
 

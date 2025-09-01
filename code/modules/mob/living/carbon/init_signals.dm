@@ -4,8 +4,6 @@
 
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOBREATH), PROC_REF(on_nobreath_trait_gain))
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOMETABOLISM), PROC_REF(on_nometabolism_trait_gain))
-	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_WARRIOR), PROC_REF(on_warrior_trait_gain))
-	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_WARRIOR), PROC_REF(on_warrior_trait_loss))
 
 /**
  * On gain of TRAIT_NOBREATH
@@ -44,9 +42,3 @@
 			LAZYREMOVE(reagents.addiction_list, R)
 			qdel(R)
 	reagents.end_metabolization(keep_liverless = TRUE)
-
-/mob/living/carbon/proc/on_warrior_trait_gain(datum/source)
-	next_move_modifier *= 0.5 // "Twice as fast"
-
-/mob/living/carbon/proc/on_warrior_trait_loss(datum/source)
-	next_move_modifier /= 0.5 // "Twice as slow"

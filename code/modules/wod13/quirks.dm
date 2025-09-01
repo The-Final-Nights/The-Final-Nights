@@ -385,7 +385,7 @@ Dancer
 /datum/quirk/dwarf/add()
 	if(iswerewolf(quirk_holder))
 		return
-	quirk_holder.AddElement(/datum/element/dwarfism, COMSIG_PARENT_PREQDELETED, src)
+	quirk_holder.AddElement(/datum/element/dwarfism, COMSIG_PREQDELETED, src)
 
 /datum/quirk/dwarf/remove()
 	if (!quirk_holder)
@@ -604,13 +604,6 @@ Dancer
 	if(!H.equip_to_slot_if_possible(glasses, ITEM_SLOT_EYES, bypass_equip_delay_self = TRUE))
 		H.put_in_hands(glasses)
 
-/datum/quirk/masquerade
-	name = "Masquerade Violator"
-	desc = "You can't recover your masquerade at all."
-	value = -2
-	mob_trait = TRAIT_VIOLATOR
-	allowed_species = list("Vampire", "Ghoul", "Kuei-Jin")
-
 /datum/quirk/irongullet
 	name = "Iron Gullet"
 	desc = "You don't mind sucking up cold blood from corpses. Though there's rarely that much left."
@@ -668,7 +661,7 @@ Dancer
 /datum/quirk/tower/add()
 	if(iswerewolf(quirk_holder))
 		return
-	quirk_holder.AddElement(/datum/element/giantism, COMSIG_PARENT_PREQDELETED, src)
+	quirk_holder.AddElement(/datum/element/giantism, COMSIG_PREQDELETED, src)
 
 /datum/quirk/tower/remove()
 	if (!quirk_holder)
@@ -724,6 +717,28 @@ Dancer
 	desc = "Your feet callouses are so thick, you can walk barefoot across the state if you want to!"
 	mob_trait = TRAIT_HARDENED_SOLES
 	value = 2
+
+/datum/quirk/thinblood
+	name = "Thinblood"
+	desc = "Your blood is a lot thinner than usual. You cannot bond, frenzy, or ash in the sun, and your disciplines take double the vitae cost. (Generations 14 and above only.)"
+	value = 0
+	gain_text = "<span class='notice'>Your blood feels thin.</span>"
+	lose_text = "<span class='notice'>Your blood feels potent again.</span>"
+	allowed_species = list("Vampire")
+	generation_minimum = 14
+
+/datum/quirk/thinblood/on_spawn()
+	ADD_TRAIT(quirk_holder, TRAIT_DEFICIENT_VITAE, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_NO_FRENZY, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_DOUBLE_VITAE_COST, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_NO_SUN_ASHING, THINBLOOD_TRAIT)
+
+/datum/quirk/thinblood/remove()
+	if(quirk_holder)
+		REMOVE_TRAIT(quirk_holder, TRAIT_DEFICIENT_VITAE, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_NO_FRENZY, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_DOUBLE_VITAE_COST, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_NO_SUN_ASHING, THINBLOOD_TRAIT)
 
 #undef SHORT
 #undef TALL

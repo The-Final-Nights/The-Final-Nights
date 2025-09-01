@@ -1,5 +1,0 @@
-author: "SoreYew"
-delete-after: True
-changes:
-  - rscadd: "third taxi to the hub"
-  - bugfix: "taxi spawning with their car"

@@ -21,8 +21,7 @@
 		C.appearance = owner.appearance
 		C.dir = owner.dir
 		animate(C, pixel_x = rand(-16, 16), pixel_y = rand(-16, 16), alpha = 0, time = 0.5 SECONDS)
-		if(owner.CheckEyewitness(owner, owner, 7, FALSE))
-			owner.AdjustMasquerade(-1)
+		SEND_SIGNAL(owner, COMSIG_MASQUERADE_VIOLATION)
 
 /datum/discipline_power/celerity/proc/temporis_explode(datum/source, datum/discipline_power/power, atom/target)
 	SIGNAL_HANDLER
