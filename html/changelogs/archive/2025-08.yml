@@ -178,6 +178,8 @@
   SoreYew:
   - rscadd: third taxi to the hub
   - bugfix: taxi spawning with their car
+  TheTrueSilverRat:
+  - code_imp: Re-Enabled Deaf and Blind Trait
   XeonMations:
   - refactor: Refactored the way the masquerade system works to be more RP friendly
       and more brutal.

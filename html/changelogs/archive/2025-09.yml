@@ -1,0 +1,5 @@
+2025-09-01:
+  Kolibri-B:
+  - rscdel: Removed the ability for Warrior & Healer Salubri to learn the other path
+      upon character creation
+  - balance: Rebalances Warrior & Healer Salubri
