@@ -416,6 +416,20 @@
 		M.apply_damage(20, CLONE)
 		M.apply_status_effect(STATUS_EFFECT_SILVER_SLOWDOWN)
 
+/obj/projectile/beam/beam_rifle/vampire/vamp545mm/silver
+	name = "5.45 silver bullet"
+
+/obj/projectile/beam/beam_rifle/vampire/vamp545mm/silver/on_hit(atom/target, blocked = FALSE)
+	. = ..()
+	if(iswerewolf(target) || isgarou(target))
+		var/mob/living/carbon/M = target
+		if(M.auspice.gnosis)
+			if(prob(50))
+				adjust_gnosis(-1, M)
+
+		M.apply_damage(10, CLONE)
+		M.apply_status_effect(STATUS_EFFECT_SILVER_SLOWDOWN)
+
 /obj/projectile/beam/beam_rifle/vampire/vamp9mm/silver
 	name = "9mm silver bullet"
 
@@ -484,7 +498,7 @@
 			if(prob(50))
 				adjust_gnosis(-1, M)
 
-		M.apply_damage(30, CLONE)
+		M.apply_damage(20, CLONE)
 		M.apply_status_effect(STATUS_EFFECT_SILVER_SLOWDOWN)
 
 /obj/item/ammo_casing/vampire/c9mm/silver
@@ -520,6 +534,12 @@
 	icon_state = "556"
 	base_iconstate = "556"
 
+obj/item/ammo_casing/vampire/c545mm/silver
+	name = "5.45mm silver bullet casing"
+	desc = "a 5.45mm silver bullet casing."
+	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp545mm/silver
+	icon_state = "s545-live"
+
 /obj/item/ammo_casing/vampire/c12g/silver
 	name = "12g silver casing"
 	desc = "A 12g silver casing."
@@ -550,6 +570,13 @@
 	icon_state = "556box-silver"
 	ammo_type = /obj/item/ammo_casing/vampire/c556mm/silver
 	max_ammo = 60
+
+obj/item/ammo_box/vampire/c545/silver
+	name = "ammo box (5.45 silver)"
+	icon_state = "545box_silver"
+	ammo_type = obj/item/ammo_casing/vampire/c545mm/silver
+	max_ammo = 60
+
 
 /obj/item/ammo_box/vampire/c762x51mm/silver
 	name = "ammo box (7.62x51mm silver)"
