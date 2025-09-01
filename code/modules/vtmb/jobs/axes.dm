@@ -18,7 +18,7 @@
 
 	allowed_species = list("Human", "Ghoul", "Werewolf", "Vampire")
 	allowed_bloodlines = list(CLAN_NONE)
-	allowed_tribes = list("Ronin")
+	allowed_tribes = list("Ronin", "Glass Walkers")
 
 
 	duty = "Make money, do drugs, fight law. Your hideout is the laundromat in Chinatown."
