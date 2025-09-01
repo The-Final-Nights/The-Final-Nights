@@ -577,17 +577,6 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/pacificheights)
-"tY" = (
-/obj/item/gun/ballistic/automatic/vampire/mac10,
-/obj/item/ammo_box/magazine/vamp9mm,
-/obj/item/ammo_box/magazine/vamp9mm,
-/obj/item/ammo_box/magazine/vamp9mm,
-/obj/item/ammo_box/magazine/vamp9mm,
-/obj/item/ammo_box/magazine/vamp9mm,
-/obj/item/ammo_box/magazine/vamp9mm,
-/obj/item/ammo_box/magazine/vamp9mm,
-/turf/open/floor/plating/rough,
-/area/vtm/pacificheights)
 "uC" = (
 /obj/structure/table,
 /obj/item/ammo_box/magazine/glock45acp,
@@ -1985,7 +1974,7 @@ eR
 PO
 PO
 PO
-tY
+PO
 PO
 PO
 PO
