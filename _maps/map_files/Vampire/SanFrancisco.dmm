@@ -71802,7 +71802,7 @@
 	light_color = "#6488EA"
 	},
 /obj/item/ammo_box/vampire/c545/silver,
-/obj/item/ammo_box/vampire/c545/silver,
+/obj/item/ammo_box/vampire/c12g/silver,
 /turf/open/floor/plating/grate,
 /area/vtm/anarch/basement)
 "sgk" = (
@@ -93118,7 +93118,6 @@
 /obj/item/ammo_box/vampire/c9mm/silver,
 /obj/item/ammo_box/vampire/c45acp/silver,
 /obj/item/ammo_box/vampire/c556/silver,
-/obj/item/ammo_box/vampire/c12g/silver,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
 "xME" = (
