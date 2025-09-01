@@ -242,8 +242,8 @@
 	if(LAZYLEN(created) != 2)
 		return
 	user.show_message("<span class='notice'>Locked In.</span>", MSG_AUDIBLE)
-	RegisterSignal(created[1], COMSIG_PARENT_QDELETING, PROC_REF(on_portal_destroy)) //Gosh darn it kevinz.
-	RegisterSignal(created[2], COMSIG_PARENT_QDELETING, PROC_REF(on_portal_destroy))
+	RegisterSignal(created[1], COMSIG_QDELETING, PROC_REF(on_portal_destroy)) //Gosh darn it kevinz.
+	RegisterSignal(created[2], COMSIG_QDELETING, PROC_REF(on_portal_destroy))
 	try_move_adjacent(created[1], user.dir)
 	active_portal_pairs[created[1]] = created[2]
 	var/obj/effect/portal/c1 = created[1]

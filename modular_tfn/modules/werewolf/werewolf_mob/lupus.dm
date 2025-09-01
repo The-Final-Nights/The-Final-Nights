@@ -43,12 +43,12 @@
 	var/laid_down = FALSE
 
 	if(stat == UNCONSCIOUS || IsSleeping() || stat == HARD_CRIT || stat == SOFT_CRIT || IsParalyzed() || stat == DEAD || body_position == LYING_DOWN)
-		icon_state = wyrm_tainted ? "spiral[sprite_color]_rest" : "[sprite_color]_rest"
+		icon_state = HAS_TRAIT(src, TRAIT_WYRMTAINTED) ? "spiral[sprite_color]_rest" : "[sprite_color]_rest"
 		laid_down = TRUE
 	else
-		icon_state = wyrm_tainted ? "spiral[sprite_color]" : "[sprite_color]"
+		icon_state = HAS_TRAIT(src, TRAIT_WYRMTAINTED) ? "spiral[sprite_color]" : "[sprite_color]"
 	if(HAS_TRAIT(src, TRAIT_MOVE_FLYING))
-		icon_state = wyrm_tainted ? "spiral[sprite_color]_flying" :"[sprite_color]_flying"
+		icon_state = HAS_TRAIT(src, TRAIT_WYRMTAINTED) ? "spiral[sprite_color]_flying" :"[sprite_color]_flying"
 
 	switch(getFireLoss()+getBruteLoss())
 		if(25 to 75)
@@ -77,13 +77,10 @@
 	update_icons()
 
 /mob/living/carbon/werewolf/lupus/Life()
-	if(hispo)
-		if(CheckEyewitness(src, src, 7, FALSE))
-			adjust_veil(-1,random = -1)
-	else
-		if(!(HAS_TRAIT(src, TRAIT_DOGWOLF) || !iscorax(src))) // ravens don't spook people
-			if(CheckEyewitness(src, src, 4, FALSE))
-				adjust_veil(-1,threshold = 4)
+	if((HAS_TRAIT(src, TRAIT_DOGWOLF) || (iscorvid(src) && !HAS_TRAIT(src, TRAIT_WYRMTAINTED)))) // ravens don't spook people
+		. = ..()
+		return
+	SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 	. = ..()
 
 /mob/living/carbon/werewolf/lupus/corvid // yes, this is a subtype of lupus, god help us all
@@ -116,12 +113,12 @@
 		corvid.set_resting(FALSE, TRUE)
 		ADD_TRAIT(corvid, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT) // sadly, "is flying animal" does not give us flying traits when life() is called, only during VV or upon Init. We're doing this the hard way.
 		ADD_TRAIT(corvid, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT) // the corax sprites already animate up-and-down bobbing, no need to float
-		corvid.icon_state = corvid.wyrm_tainted ?  "spiral[corvid.sprite_color]_flying"  : "[corvid.sprite_color]_flying" // we set this while we wait for the icons to update, otherwise there is latency
+		corvid.icon_state = HAS_TRAIT(corvid, TRAIT_WYRMTAINTED) ?  "spiral[corvid.sprite_color]_flying"  : "[corvid.sprite_color]_flying" // we set this while we wait for the icons to update, otherwise there is latency
 	else
 		to_chat(corvid, span_notice("You settle gently back onto the ground..."))
 		REMOVE_TRAIT(corvid, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT)
 		REMOVE_TRAIT(corvid, TRAIT_NO_FLOATING_ANIM, SPECIES_FLIGHT_TRAIT)
-		corvid.icon_state = corvid.wyrm_tainted ? "spiral[corvid.sprite_color]" : "[corvid.sprite_color]"
+		corvid.icon_state = HAS_TRAIT(corvid, TRAIT_WYRMTAINTED) ? "spiral[corvid.sprite_color]" : "[corvid.sprite_color]"
 
 	corvid.cut_overlays()
 	var/mutable_appearance/flight_overlay = mutable_appearance(corvid.icon, "eyes[HAS_TRAIT(corvid, TRAIT_MOVE_FLYING) ? "_flying" : ""]")

@@ -25,7 +25,6 @@
 #define TRAIT_LAZY				"lazy"
 #define TRAIT_HOMOSEXUAL		"homosexual"
 #define TRAIT_HUNTED			"hunted"
-#define TRAIT_VIOLATOR			"violator"
 #define TRAIT_DIABLERIE			"diablerie"
 #define TRAIT_GULLET			"gullet"
 #define TRAIT_CHARMER			"charmer"
@@ -35,8 +34,6 @@
 #define TRAIT_SALUBRI_EYE		"salubri_eye" //This is for whhen you want to like actually know if you have the eye or not
 #define TRAIT_UNMASQUERADE		"unmasquerade"	//For tzi clothing
 #define TRAIT_NONMASQUERADE		"nonmasquerade"	//For tzi mods
-#define TRAIT_GUNFIGHTER        "gunfighter"    //Halves firing delay and cooldown between burst fire shots
-#define TRAIT_WARRIOR			"warrior"       //Halves attack delay for 'unarmed' weapons - think fists, Crinos claws, Tzimisce/Lasombra whips, etc.
 #define TRAIT_SCENTTRUEFORM		"scenttrueform" // Werewolf ID sniff.
 #define TRAIT_DOGWOLF			"dogwolf"
 #define TRAIT_CORAX				"corax" // this is used to apply the Corax Crinos/Corvid, as well as make being in "corvid" not veil-damaging
@@ -79,3 +76,9 @@
 #define TRAIT_MASQUERADE_VIOLATING_FACE "masquerade_violating_face"
 // If the trait owner knows thaumaturgical rituals.
 #define TRAIT_THAUMATURGY_KNOWLEDGE "thaumaturgy_knowledge"
+/// If the user can't frenzy. Such as thinbloods
+#define TRAIT_NO_FRENZY "no_frenzy"
+/// If the user doesn't burn up in the sun.
+#define TRAIT_NO_SUN_ASHING "no_sun_ashing"
+/// Double vitae cost for abilities. Thinbloods for example
+#define TRAIT_DOUBLE_VITAE_COST "double_vitae"

@@ -142,10 +142,6 @@
 			blood_overlay = "guillotine_" + blood_overlay + "_overlay"
 			cut_overlays()
 			add_overlay(mutable_appearance(icon, blood_overlay))
-
-			SSbloodhunt.hunted -= H
-			H.bloodhunted = FALSE
-			SSbloodhunt.update_shit()
 		else
 			H.apply_damage(15 * blade_sharpness, BRUTE, head)
 			log_combat(user, H, "dropped the blade on", src, " non-fatally")

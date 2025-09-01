@@ -850,24 +850,33 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	w_class = WEIGHT_CLASS_SMALL
+	custom_fire_overlay = "molotov_flamed"
 	var/active = FALSE
-	masquerade_violating = TRUE
 
 /obj/item/molotov/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	for(var/turf/open/floor/F in range(2, hit_atom))
-		if(F)
-			new /obj/effect/decal/cleanable/gasoline(F)
-	if(active)
-		new /obj/effect/fire(get_turf(hit_atom))
-	playsound(get_turf(hit_atom), 'code/modules/wod13/sounds/explode.ogg', 100, TRUE)
-	qdel(src)
+	if(!active)
+		..()
+	explode(hit_atom)
 	..()
 
 /obj/item/molotov/attackby(obj/item/I, mob/user, params)
 	if(I.get_temperature() && !active)
 		active = TRUE
 		log_bomber(user, "has primed a", src, "for detonation")
-		icon_state = "molotov_flamed"
+
+		to_chat(user, "<span class='info'>You light [src] on fire.</span>")
+		icon_state = custom_fire_overlay
+		addtimer(CALLBACK(src, PROC_REF(explode)), 10 SECONDS)
+
+/obj/item/molotov/proc/explode(atom/hit_atom)
+	if(!hit_atom)
+		hit_atom = get_turf(src)
+	for(var/turf/open/floor/F in range(2, hit_atom))
+		new /obj/effect/decal/cleanable/gasoline(F)
+	new /obj/effect/fire(get_turf(hit_atom))
+	hit_atom.fire_act()
+	playsound(get_turf(hit_atom), 'code/modules/wod13/sounds/explode.ogg', 100, TRUE)
+	qdel(src)
 
 /obj/item/vampire_flamethrower
 	name = "flamethrower"

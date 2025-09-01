@@ -121,7 +121,6 @@
 	var/lock_on_by_mannequin = FALSE
 
 	var/diablerist = FALSE
-	var/antifrenzy = FALSE
 	var/fakediablerist = FALSE
 
 	COOLDOWN_DECLARE(bleeding_message_cd)
