@@ -22,6 +22,7 @@
 	AddComponent(/datum/component/personal_crafting)
 	AddComponent(/datum/component/footstep, FOOTSTEP_MOB_HUMAN, 1, -6)
 	AddComponent(/datum/component/bloodysoles/feet)
+	AddComponent(/datum/component/violation_observer, FALSE)
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/human)
 	GLOB.human_list += src
 	phonevoicetag = length(GLOB.human_list)+10
@@ -272,30 +273,40 @@
 
 ///////KARMA//////
 	if(href_list["masquerade"])
-		if(!ishuman(usr))
+		if(!ishumanbasic(usr))
 			return
 		var/mob/living/carbon/human/H = usr
 		if(H.stat > UNCONSCIOUS)
 			return
 		if(usr == src)
 			return
-		if(dna)
-			if (H.voted_for.Find(dna.real_name))
-				to_chat(H, "<span class='warning'>You have already noted their masquerade breach! Wait some time until you do that again.</span>")
+		var/reason = tgui_input_text(H, "Write a description of violation", "Spot a Masquerade violation", null, MAX_MESSAGE_LEN)
+		if(reason)
+			if (H.voted_for.Find(dna.real_name)) //Rudimentary check to avoid queueing a whole bunch of reason texts and then nuking their masquerade to 0.
+				to_chat(H, span_warning("You have already noted their masquerade breach! Wait some time until you do that again."))
 				return
-			var/reason = input(usr, "Write a description of violation:", "Spot a Masquerade violation") as text|null
-			if(reason)
-				if (H.voted_for.Find(dna.real_name)) //Rudimentary check to avoid queueing a whole bunch of reason texts and then nuking their masquerade to 0.
-					to_chat(H, "<span class='warning'>You have already noted their masquerade breach! Wait some time until you do that again.</span>")
-					return
-				reason = trim(copytext_char(sanitize(reason), 1, MAX_MESSAGE_LEN))
-				masquerade_votes++
-				message_admins("[ADMIN_LOOKUPFLW(H)] spotted [ADMIN_LOOKUPFLW(src)]'s Masquerade violation. Description: [reason]")
-				H.voted_for |= dna.real_name
-				if(masquerade_votes > 1)
-					masquerade_votes = 0
-					last_masquerade_violation = 0
-					AdjustMasquerade(-1)
+			reason = sanitize(reason)
+			message_admins("[ADMIN_LOOKUPFLW(H)] spotted [ADMIN_LOOKUPFLW(src)]'s Masquerade violation. Description: [reason]")
+			H.voted_for |= dna.real_name
+			last_masquerade_violation = 0
+			SEND_SIGNAL(H, COMSIG_SEEN_MASQUERADE_VIOLATION, src)
+			to_chat(src, span_danger("You were found to be violating the masquereade for: [reason]"))
+
+	if(href_list["reinforcement"])
+		if(!ishumanbasic(usr))
+			return
+		var/mob/living/carbon/human/H = usr
+		if(H.stat > UNCONSCIOUS)
+			return
+		if(usr == src)
+			return
+		if(H.voted_for.Find(real_name))
+			message_admins("[ADMIN_LOOKUPFLW(H)] repaired [ADMIN_LOOKUPFLW(src)]'s Masquerade violation.")
+			SEND_SIGNAL(H, COMSIG_MASQUERADE_REINFORCE, src)
+			H.voted_for -= real_name
+		else
+			to_chat(H, span_warning("You didin't report a masquerade breach on this person!"))
+
 ///////HUDs///////
 	if(href_list["hud"])
 		if(!ishuman(usr))
