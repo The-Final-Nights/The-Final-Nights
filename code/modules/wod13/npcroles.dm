@@ -978,20 +978,21 @@
 	pixel_z = rand(-8, 8)
 
 /mob/living/simple_animal/hostile/beastmaster/cockroach/spider
-	icon = 'code/modules/wod13/icons.dmi'
-	icon_state = "guard"
-	icon_living = "guard"
+	icon = 'code/modules/wod13/mobs.dmi'
+	icon_state = "spiderling"
+	icon_living = "spiderling"
+	icon_dead = "spiderling_dead"
 	name = "Spiderling"
 	desc = "It's a small skittering spider."
 	emote_hear = list("chitters.")
 	emote_see = list("wriggles its legs.", "clicks its mandibles.")
-	density = TRUE
 	is_flying_animal = FALSE
+	density = TRUE
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 20
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	harm_intent_damage = 15
+	melee_damage_lower = 10
+	melee_damage_upper = 15
 	speed = -0.4
 
 /mob/living/simple_animal/hostile/beastmaster/largespider
@@ -1025,9 +1026,8 @@
 	maxHealth = 45
 	health = 45
 	melee_damage_type = TOX
-	harm_intent_damage = 20
-	melee_damage_lower = 15
-	melee_damage_upper = 20
+	melee_damage_lower = 8
+	melee_damage_upper = 18
 	speed = 0.35
 
 /datum/socialrole/shop
