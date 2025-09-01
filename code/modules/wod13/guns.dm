@@ -418,9 +418,9 @@
 	mag_type = /obj/item/ammo_box/magazine/vamp9mm
 	burst_size = 5
 	spread = 7
-	recoil = 0
-	fire_delay = 0
-	firing_burst = 0
+	recoil = 1
+	fire_delay = 1
+	firing_burst = 1
 	dual_wield_spread = 70
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
