@@ -413,7 +413,7 @@
 	desc = "Lorem ipsum sloppen placeholder"
 	icon_state = "mac10"
 	icon = 'code/modules/wod13/48x32weapons.dmi'
-	inhand_icon_state = "uzi"
+	inhand_icon_state = "mac10"
 	worn_icon_state = "uzi"
 	mag_type = /obj/item/ammo_box/magazine/vampmac10
 	burst_size = 5
