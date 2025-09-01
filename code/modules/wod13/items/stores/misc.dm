@@ -65,3 +65,16 @@
 		new /datum/data/mining_equipment("fountain pen",	/obj/item/pen/fountain,  15),
 		new /datum/data/mining_equipment("folder",	/obj/item/folder,  5)
 	)
+
+/obj/machinery/mineral/equipment_vendor/fastfood/tech
+
+	prize_list = list(
+		new /datum/data/mining_equipment("Phone Book",	/obj/item/phone_book,  20),
+		new /datum/data/mining_equipment("Cellphone",	/obj/item/vamp/phone,  40),
+		//new /datum/data/mining_equipment("Cellphone",	/obj/item/vamp/phone,  40), todo movable static phone
+		new /datum/data/mining_equipment("Camera",	/obj/item/camera,  5),
+		new /datum/data/mining_equipment("Camera Film",	/obj/item/camera_film,  10),
+		new /datum/data/mining_equipment("Flashlight",	/obj/item/flashlight,  10),
+		new /datum/data/mining_equipment("Flashlight",	/obj/item/wire_cutters,  10),
+		new /datum/data/mining_equipment("taser", /obj/item/melee/baton/handtaser, 250)
+	)
