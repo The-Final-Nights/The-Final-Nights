@@ -71801,6 +71801,8 @@
 	dir = 4;
 	light_color = "#6488EA"
 	},
+/obj/item/ammo_box/vampire/c545/silver,
+/obj/item/ammo_box/vampire/c545/silver,
 /turf/open/floor/plating/grate,
 /area/vtm/anarch/basement)
 "sgk" = (
