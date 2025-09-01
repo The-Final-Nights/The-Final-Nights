@@ -14158,6 +14158,7 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
+/obj/item/ammo_box/vampire/c12g/silver,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "dIZ" = (
@@ -56806,6 +56807,7 @@
 	pixel_x = -16;
 	pixel_y = 10
 	},
+/obj/item/ammo_box/vampire/c545/silver,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "opE" = (
@@ -71801,8 +71803,6 @@
 	dir = 4;
 	light_color = "#6488EA"
 	},
-/obj/item/ammo_box/vampire/c545/silver,
-/obj/item/ammo_box/vampire/c12g/silver,
 /turf/open/floor/plating/grate,
 /area/vtm/anarch/basement)
 "sgk" = (
