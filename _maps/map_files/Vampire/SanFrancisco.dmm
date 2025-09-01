@@ -14158,6 +14158,7 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
+/obj/item/gun/ballistic/vampire/mac10,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "dIZ" = (
@@ -56798,6 +56799,10 @@
 	pixel_x = -16;
 	pixel_y = 10
 	},
+/obj/item/ammo_box/magazine/vampmac10,
+/obj/item/ammo_box/magazine/vampmac10,
+/obj/item/ammo_box/magazine/vampmac10,
+/obj/item/ammo_box/magazine/vampmac10,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
 "opE" = (
