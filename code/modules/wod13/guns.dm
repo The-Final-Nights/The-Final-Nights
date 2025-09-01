@@ -410,7 +410,7 @@
 
 /obj/item/gun/ballistic/vampire/mac10
 	name = "\improper Mac-10 Submachine Gun"
-	desc = "Lorem ipsum sloppen placeholder"
+	desc = "A automatic, high rate of fire submachine gun chambered in .45 ACP. Looks expensive."
 	icon_state = "mac10"
 	icon = 'code/modules/wod13/48x32weapons.dmi'
 	inhand_icon_state = "mac10"
