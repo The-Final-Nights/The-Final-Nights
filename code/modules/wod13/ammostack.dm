@@ -50,11 +50,6 @@
 	damage = 23
 	armour_penetration = 10
 
-/obj/projectile/beam/beam_rifle/vampire/vamp9mm/rubber
-	name = "9mm rubber bullet"
-	damage = 3
-	stamina = 16
-
 /obj/projectile/beam/beam_rifle/vampire/vamp45acp
 	name = ".45 ACP bullet"
 	damage = 24
@@ -65,11 +60,6 @@
 	armour_penetration = 0
 	bare_wound_bonus = 5
 	wound_bonus = 5
-
-/obj/projectile/beam/beam_rifle/vampire/vamp45acp/rubber
-	name = "45 acp rubber bullet"
-	damage = 3
-	stamina = 15
 
 /obj/projectile/beam/beam_rifle/vampire/vamp44
 	name = ".44 bullet"
@@ -204,13 +194,6 @@
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp9mm/plus
 	caliber = CALIBER_9MM
 
-/obj/item/ammo_casing/vampire/c9mm/rubber
-	name = "9mm rubber bullet casing"
-	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp9mm/rubber
-	caliber = CALIBER_9MM
-	icon_state = "9r"
-	base_iconstate = "9r"
-
 /obj/item/ammo_casing/vampire/c45acp
 	name = ".45 ACP bullet casing"
 	desc = "A .45 ACP bullet casing."
@@ -221,12 +204,6 @@
 
 /obj/item/ammo_casing/vampire/c45acp/HP
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp45acp/HP
-
-/obj/item/ammo_casing/vampire/c45acp/rubber
-	caliber = CALIBER_45
-	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp45acp/rubber
-	icon_state = "45r"
-	base_iconstate = "45r"
 
 /obj/item/ammo_casing/vampire/c44
 	name = ".44 bullet casing"
@@ -330,12 +307,6 @@
 	desc = "a box of High Velocity (HV) ammo."
 	ammo_type = /obj/item/ammo_casing/vampire/c9mm/plus
 
-/obj/item/ammo_box/vampire/c9mm/rubber
-	name = "ammo box (9mm, rubber-shot"
-	desc = "a box of less lethal ammo."
-	icon_state = "9box_rubber"
-	ammo_type = /obj/item/ammo_casing/vampire/c9mm/rubber
-
 /obj/item/ammo_box/vampire/c9mm/moonclip
 	name = "ammo clip (9mm)"
 	desc = "a 3 round clip to hold 9mm rounds. For once, calling it a clip is accurate."
@@ -343,11 +314,6 @@
 	max_ammo = 3
 	w_class = WEIGHT_CLASS_TINY
 	multiple_sprites = AMMO_BOX_PER_BULLET
-
-/obj/item/ammo_box/vampire/c9mm/moonclip/rubber
-	name = "ammo clip (9mm, Rubber)"
-	desc = "a 3 round clip to hold 9mm rounds. For once, calling it a clip is accurate."
-	icon_state = "9rmoonclip"
 
 //////////////////
 
@@ -366,12 +332,6 @@
 /obj/item/ammo_box/vampire/c45acp/HP
 	name = "ammo box (.45 ACP HP)"
 	ammo_type = /obj/item/ammo_casing/vampire/c45acp/HP
-	max_ammo = 100
-
-/obj/item/ammo_box/vampire/c45acp/rubber
-	name = "ammo box (.45 ACP, rubbershot)"
-	icon_state = "45box_rubber"
-	ammo_type = /obj/item/ammo_casing/vampire/c45acp/rubber
 	max_ammo = 100
 
 /obj/item/ammo_box/vampire/c44
