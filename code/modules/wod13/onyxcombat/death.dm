@@ -1,18 +1,6 @@
 /mob/living/carbon/human/death()
 	. = ..()
 
-	if(iskindred(src))
-		SSmasquerade.dead_level = min(1000, SSmasquerade.dead_level+50)
-	else
-		if(istype(get_area(src), /area/vtm))
-			var/area/vtm/V = get_area(src)
-			if(V.zone_type == "masquerade")
-				SSmasquerade.dead_level = max(0, SSmasquerade.dead_level-25)
-
-	if(bloodhunted)
-		SSbloodhunt.hunted -= src
-		bloodhunted = FALSE
-		SSbloodhunt.update_shit()
 	var/witness_count
 	for(var/mob/living/carbon/human/npc/NEPIC in viewers(7, usr))
 		if(NEPIC && NEPIC.stat != DEAD)
@@ -25,6 +13,7 @@
 					radio.announce_crime("murder", get_turf(src))
 					break
 	GLOB.masquerade_breakers_list -= src
+	GLOB.veil_breakers_list -= src
 	GLOB.sabbatites -= src
 
 	//So upon death the corpse is filled with yin chi

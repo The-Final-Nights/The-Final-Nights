@@ -127,8 +127,7 @@
 		to_chat(user, "<span class='warning'>The spell can't seem to affect [M]!</span>")
 		to_chat(M, "<span class='warning'>You feel your flesh turn to stone for a moment, then revert back!</span>")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
-	if(user.CheckEyewitness(user, user, 7, FALSE))
-		user.adjust_veil(-1)
+	SEND_SIGNAL(user, COMSIG_MASQUERADE_VIOLATION)
 	M.adjustBruteLoss(-100, TRUE)
 	M.adjustFireLoss(-30, TRUE)
 	M.adjustToxLoss(-50, TRUE)
