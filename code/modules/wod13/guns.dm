@@ -418,8 +418,7 @@
 	mag_type = /obj/item/ammo_box/magazine/vampmac10
 	burst_size = 5
 	spread = 7
-	recoil = 1
-	recoil = 1
+	recoil = 0
 	fire_delay = 1
 	dual_wield_spread = 70
 	bolt_type = BOLT_TYPE_OPEN
@@ -436,7 +435,7 @@
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	icon_state = "mac10"
-	ammo_type = /obj/item/ammo_casing/vampire/c9mm
+	ammo_type = /obj/item/ammo_casing/vampire/c45acp
 	caliber = CALIBER_45
 	max_ammo = 30
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
