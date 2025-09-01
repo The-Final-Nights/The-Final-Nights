@@ -30689,15 +30689,11 @@
 /area/vtm/interior/giovanni)
 "hXU" = (
 /obj/structure/table/wood,
-/obj/item/melee/vampirearms/sabre{
-	color = "#00A36C";
-	name = "Dai Lo's Dao";
-	desc = "A curved sword covered in a intricately etched pattern."
-	},
-/obj/item/storage/belt/vampire/sheathe/sabre,
 /obj/machinery/light{
 	pixel_y = 32
 	},
+/obj/item/melee/vampirearms/fireaxe,
+/obj/item/toy/crayon/spraycan,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "hYb" = (
@@ -41720,6 +41716,8 @@
 /area/vtm/interior/littleitaly)
 "kJk" = (
 /obj/structure/table/wood,
+/obj/item/melee/vampirearms/fireaxe,
+/obj/item/toy/crayon/spraycan,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "kJq" = (
@@ -82881,6 +82879,8 @@
 "vaP" = (
 /obj/structure/table/wood,
 /obj/item/storage/fancy/cigarettes/cigars/havana,
+/obj/item/melee/vampirearms/fireaxe,
+/obj/item/toy/crayon/spraycan,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "vaV" = (
