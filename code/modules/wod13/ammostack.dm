@@ -538,7 +538,7 @@ obj/item/ammo_casing/vampire/c545mm/silver
 	name = "5.45mm silver bullet casing"
 	desc = "a 5.45mm silver bullet casing."
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp545mm/silver
-	icon_state = "s545-live"
+	icon_state = "s545"
 
 /obj/item/ammo_casing/vampire/c12g/silver
 	name = "12g silver casing"
@@ -574,7 +574,7 @@ obj/item/ammo_casing/vampire/c545mm/silver
 /obj/item/ammo_box/vampire/c545/silver
 	name = "ammo box (5.45 silver)"
 	icon_state = "545box_silver"
-	ammo_type = obj/item/ammo_casing/vampire/c545mm/silver
+	ammo_type = /obj/item/ammo_casing/vampire/c545mm/silver
 	max_ammo = 60
 
 /obj/item/ammo_box/vampire/c762x51mm/silver
