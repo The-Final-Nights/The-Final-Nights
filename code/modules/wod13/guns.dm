@@ -417,14 +417,16 @@
 	worn_icon_state = "uzi"
 	mag_type = /obj/item/ammo_box/magazine/vamp9mm
 	burst_size = 5
-	spread = 6
+	spread = 7
 	recoil = 0
 	fire_delay = 0
+	firing_burst = 0
+	dual_wield_spread = 70
 	bolt_type = BOLT_TYPE_OPEN
 	show_bolt_icon = FALSE
 	mag_display = TRUE
 	rack_sound = 'sound/weapons/gun/pistol/slide_lock.ogg'
-	fire_sound = 'code/modules/wod13/sounds/uzi.ogg'
+	fire_sound = 'code/modules/wod13/sounds/mac10.ogg'
 
 
 /obj/item/ammo_box/magazine/vamp9mp5
