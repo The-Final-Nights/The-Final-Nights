@@ -718,5 +718,27 @@ Dancer
 	mob_trait = TRAIT_HARDENED_SOLES
 	value = 2
 
+/datum/quirk/thinblood
+	name = "Thinblood"
+	desc = "Your blood is a lot thinner than usual. You cannot bond, frenzy, or ash in the sun, and your disciplines take double the vitae cost. (Generations 14 and above only.)"
+	value = 0
+	gain_text = "<span class='notice'>Your blood feels thin.</span>"
+	lose_text = "<span class='notice'>Your blood feels potent again.</span>"
+	allowed_species = list("Vampire")
+	generation_minimum = 14
+
+/datum/quirk/thinblood/on_spawn()
+	ADD_TRAIT(quirk_holder, TRAIT_DEFICIENT_VITAE, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_NO_FRENZY, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_DOUBLE_VITAE_COST, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_NO_SUN_ASHING, THINBLOOD_TRAIT)
+
+/datum/quirk/thinblood/remove()
+	if(quirk_holder)
+		REMOVE_TRAIT(quirk_holder, TRAIT_DEFICIENT_VITAE, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_NO_FRENZY, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_DOUBLE_VITAE_COST, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_NO_SUN_ASHING, THINBLOOD_TRAIT)
+
 #undef SHORT
 #undef TALL
