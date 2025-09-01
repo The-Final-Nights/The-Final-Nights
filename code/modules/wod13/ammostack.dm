@@ -571,12 +571,11 @@ obj/item/ammo_casing/vampire/c545mm/silver
 	ammo_type = /obj/item/ammo_casing/vampire/c556mm/silver
 	max_ammo = 60
 
-obj/item/ammo_box/vampire/c545/silver
+/obj/item/ammo_box/vampire/c545/silver
 	name = "ammo box (5.45 silver)"
 	icon_state = "545box_silver"
 	ammo_type = obj/item/ammo_casing/vampire/c545mm/silver
 	max_ammo = 60
-
 
 /obj/item/ammo_box/vampire/c762x51mm/silver
 	name = "ammo box (7.62x51mm silver)"
