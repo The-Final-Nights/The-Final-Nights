@@ -449,7 +449,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["lockpicking"], lockpicking)
 	READ_FILE(S["athletics"], athletics)
 	READ_FILE(S["blood"], blood)
-	READ_FILE(S["archetype"], archetype)
 	READ_FILE(S["discipline1level"], discipline1level)
 	READ_FILE(S["discipline2level"], discipline2level)
 	READ_FILE(S["discipline3level"], discipline3level)
@@ -625,8 +624,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		underwear		= sanitize_inlist(underwear, GLOB.underwear_list)
 		undershirt 		= sanitize_inlist(undershirt, GLOB.undershirt_list)
 
-	archetype 		= sanitize_inlist(archetype, subtypesof(/datum/archetype))
-
 	breed			= sanitize_inlist(breed, list(BREED_HOMID, BREED_LUPUS, BREED_METIS, BREED_CORVID))
 	werewolf_color	= sanitize_inlist(werewolf_color, list("black", "gray", "red", "white", "ginger", "brown"))
 	werewolf_scar	= sanitize_integer(werewolf_scar, 0, 7, initial(werewolf_scar))
@@ -800,7 +797,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["lockpicking"]		, lockpicking)
 	WRITE_FILE(S["athletics"]		, athletics)
 	WRITE_FILE(S["blood"]			, blood)
-	WRITE_FILE(S["archetype"]			, archetype)
 	WRITE_FILE(S["discipline1level"]			, discipline1level)
 	WRITE_FILE(S["discipline2level"]			, discipline2level)
 	WRITE_FILE(S["discipline3level"]			, discipline3level)
