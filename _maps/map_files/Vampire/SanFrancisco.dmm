@@ -20374,6 +20374,15 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
+"fns" = (
+/obj/effect/turf_decal/siding/white{
+	color = "#636363";
+	dir = 1
+	},
+/obj/structure/easel,
+/obj/item/canvas/nineteen_nineteen,
+/turf/open/floor/plating/granite/black,
+/area/vtm/interior/museum)
 "fnt" = (
 /obj/machinery/light{
 	dir = 8;
@@ -37558,6 +37567,15 @@
 	color = "#919191"
 	},
 /area/vtm/interior/giovanni)
+"jKY" = (
+/obj/structure/table/wood,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/obj/item/canvas/nineteen_nineteen,
+/turf/open/floor/carpet/blue,
+/area/vtm/interior/museum)
 "jLl" = (
 /obj/structure/table/wood,
 /obj/item/storage/fancy/cigarettes/cigpack_cannabis{
@@ -68360,15 +68378,6 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower)
-"rjw" = (
-/obj/effect/turf_decal/siding/white{
-	color = "#636363";
-	dir = 1
-	},
-/obj/structure/table/wood/fancy/blue,
-/obj/item/vtm_artifact/mummywrap_fetish,
-/turf/open/floor/plating/granite/black,
-/area/vtm/interior/museum)
 "rjx" = (
 /obj/structure/table/wood,
 /obj/structure/closet/mini_fridge{
@@ -73954,7 +73963,11 @@
 	color = "#636363";
 	dir = 9
 	},
-/obj/weapon_showcase,
+/obj/structure/table/wood,
+/obj/item/paint_palette,
+/obj/item/paint_palette,
+/obj/item/paint_palette,
+/obj/item/paint_palette,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/museum)
 "sLi" = (
@@ -165383,7 +165396,7 @@ iTo
 yit
 yit
 yit
-rjw
+ckV
 eFT
 ahU
 iam
@@ -166189,7 +166202,7 @@ iAZ
 uAK
 uAK
 nZi
-yit
+jIZ
 yit
 ijh
 eFT
@@ -166786,7 +166799,7 @@ rzt
 vtC
 jdm
 tKq
-yit
+jIZ
 yit
 qQg
 sLo
@@ -166795,9 +166808,9 @@ iMR
 bZF
 qsI
 apC
+jKY
 yit
-jIZ
-ckV
+fns
 aoD
 cOT
 weZ
@@ -166997,9 +167010,9 @@ iMR
 aUQ
 yek
 apC
+jKY
 yit
-yit
-xAI
+fns
 aoD
 cOT
 sRk
