@@ -278,6 +278,14 @@ Dancer
 	allowed_species = list("Werewolf")
 	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers", "Corax")
 
+/datum/quirk/fair_glabro
+	name = "Fair Glabro"
+	desc = "Your Glabro Form is less bestial than others. Allowing you to use it in public"
+	mob_trait = TRAIT_FAIR_GLABRO
+	value = 4
+	allowed_species = list("Werewolf")
+	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers", "Black Spiral Dancers")
+
 /datum/quirk/illegal_identity
 	name = "Illegal Identity"
 	desc = "Illegal immigrant? Died legally? Born a wolf? The cops aren't happy."
@@ -717,6 +725,28 @@ Dancer
 	desc = "Your feet callouses are so thick, you can walk barefoot across the state if you want to!"
 	mob_trait = TRAIT_HARDENED_SOLES
 	value = 2
+
+/datum/quirk/thinblood
+	name = "Thinblood"
+	desc = "Your blood is a lot thinner than usual. You cannot bond, frenzy, or ash in the sun, and your disciplines take double the vitae cost. (Generations 14 and above only.)"
+	value = 0
+	gain_text = "<span class='notice'>Your blood feels thin.</span>"
+	lose_text = "<span class='notice'>Your blood feels potent again.</span>"
+	allowed_species = list("Vampire")
+	generation_minimum = 14
+
+/datum/quirk/thinblood/on_spawn()
+	ADD_TRAIT(quirk_holder, TRAIT_DEFICIENT_VITAE, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_NO_FRENZY, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_DOUBLE_VITAE_COST, THINBLOOD_TRAIT)
+	ADD_TRAIT(quirk_holder, TRAIT_NO_SUN_ASHING, THINBLOOD_TRAIT)
+
+/datum/quirk/thinblood/remove()
+	if(quirk_holder)
+		REMOVE_TRAIT(quirk_holder, TRAIT_DEFICIENT_VITAE, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_NO_FRENZY, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_DOUBLE_VITAE_COST, THINBLOOD_TRAIT)
+		REMOVE_TRAIT(quirk_holder, TRAIT_NO_SUN_ASHING, THINBLOOD_TRAIT)
 
 #undef SHORT
 #undef TALL

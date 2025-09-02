@@ -194,7 +194,7 @@
 /datum/species/kindred/spec_life(mob/living/carbon/human/H)
 	. = ..()
 	//FIRE FEAR
-	if(H.antifrenzy || HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
+	if(HAS_TRAIT(H, TRAIT_NO_FRENZY) || HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
 		return
 	var/fearstack = 0
 	for(var/obj/effect/fire/F in GLOB.fires_list)
@@ -248,7 +248,7 @@
 				P.path_score = H.morality_path.score
 				P.save_preferences()
 				P.save_character()
-			if(!H.antifrenzy)
+			if(!HAS_TRAIT(H, TRAIT_NO_FRENZY))
 				if(P.path_score < 1)
 					H.enter_frenzymod()
 					to_chat(H, "<span class='userdanger'>You have lost control of the Beast within you, and it has taken your body. Be more [H.client.prefs.is_enlightened ? "Enlightened" : "humane"] next time.</span>")
@@ -256,7 +256,7 @@
 					P.reason_of_death = "Lost control to the Beast ([time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")])."
 
 	// TODO: [Lucia] this needs to be a component
-	if(H.clan && !H.antifrenzy && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
+	if(H.clan && !HAS_TRAIT(H, TRAIT_NO_FRENZY) && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
 		if(HAS_TRAIT(H, TRAIT_VITAE_ADDICTION))
 			if(H.mind)
 				if(H.mind.enslaved_to)
@@ -271,7 +271,7 @@
 			if(H.bloodpool > 1 || H.in_frenzy)
 				H.last_frenzy_check = world.time
 
-	if(!H.antifrenzy && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
+	if(!HAS_TRAIT(H, TRAIT_NO_FRENZY) && !HAS_TRAIT(H, TRAIT_KNOCKEDOUT))
 		if(H.bloodpool <= 1 && !H.in_frenzy)
 			if((H.last_frenzy_check + 40 SECONDS) <= world.time)
 				H.last_frenzy_check = world.time
