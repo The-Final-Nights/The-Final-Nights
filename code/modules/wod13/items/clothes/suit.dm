@@ -357,32 +357,11 @@
 	icon_state = "medieval"
 	armor = list(MELEE = 55, BULLET = 55, LASER = 10, ENERGY = 10, BOMB = 55, BIO = 0, RAD = 0, FIRE = 45, ACID = 10, WOUND = 25)
 
-/obj/item/clothing/suit/vampire/vest/police/fbivest
-	name = "FBI duty vest"
-	icon_state = "fbivest"
-	desc = "Lightweight, bulletproof vest with yellow FBI markings, tailored for active duty. This one has special agent insignia on it."
-
 /obj/item/clothing/suit/vampire/coat/leopard
 	name = "leopard coat"
 	desc = "This'll give PETA something to cry about."
 	icon_state = "leopard_coat"
-//Police + Army
-/obj/item/clothing/suit/vampire/vest/police
-	name = "police duty vest"
-	icon_state = "pdvest"
-	desc = "Lightweight, bulletproof vest with SFPD markings, tailored for active duty."
-
-/obj/item/clothing/suit/vampire/vest/police/sergeant
-	name = "police sergeant vest"
-	icon_state = "sgtvest"
-	desc = "Lightweight, bulletproof vest with SFPD markings, tailored for active duty. This one has sergeant insignia on it."
-
-// They got an Army vest post-PD update. I am just giving them the same, instead coded into their equipment instead of mapped.
-/obj/item/clothing/suit/vampire/vest/police/chief
-	name = "police chief duty vest"
-	icon_state = "chiefvest"
-	desc = "Composite bulletproof vest with SFPD markings, tailored for improved protection. This one has captain insignia on it."
-	armor = list(MELEE = 70, BULLET = 70, LASER = 10, ENERGY = 10, BOMB = 60, BIO = 0, RAD = 0, FIRE = 50, ACID = 10, WOUND = 30)
+//Army
 
 /obj/item/clothing/suit/vampire/vest/army
 	name = "army vest"

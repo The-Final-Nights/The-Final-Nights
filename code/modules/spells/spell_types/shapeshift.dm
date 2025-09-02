@@ -81,8 +81,6 @@
 		var/mob/living/simple_animal/hostile/hostile = shape
 		hostile.my_creator = caster
 	H = new(shape,src,caster)
-	if(HAS_TRAIT(caster, TRAIT_WARRIOR) && !HAS_TRAIT(shape, TRAIT_WARRIOR))
-		ADD_TRAIT(shape, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 	clothes_req = FALSE
 	human_req = FALSE
@@ -134,8 +132,8 @@
 
 		shape.apply_damage(damapply, source.convert_damage_type, forced = TRUE, wound_bonus=CANT_WOUND);
 
-	RegisterSignals(shape, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH), PROC_REF(shape_death))
-	RegisterSignals(stored, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH), PROC_REF(caster_death))
+	RegisterSignals(shape, list(COMSIG_QDELETING, COMSIG_LIVING_DEATH), PROC_REF(shape_death))
+	RegisterSignals(stored, list(COMSIG_QDELETING, COMSIG_LIVING_DEATH), PROC_REF(caster_death))
 
 /obj/shapeshift_holder/Destroy()
 	// Restore manages signal unregistering. If restoring is TRUE, we've already unregistered the signals and we're here
@@ -179,8 +177,8 @@
 /obj/shapeshift_holder/proc/restore(death=FALSE)
 	// Destroy() calls this proc if it hasn't been called. Unregistering here prevents multiple qdel loops
 	// when caster and shape both die at the same time.
-	UnregisterSignal(shape, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH))
-	UnregisterSignal(stored, list(COMSIG_PARENT_QDELETING, COMSIG_LIVING_DEATH))
+	UnregisterSignal(shape, list(COMSIG_QDELETING, COMSIG_LIVING_DEATH))
+	UnregisterSignal(stored, list(COMSIG_QDELETING, COMSIG_LIVING_DEATH))
 	restoring = TRUE
 	stored.forceMove(shape.loc)
 	stored.notransform = FALSE
@@ -208,7 +206,7 @@ Result: you take at least 90 damage when you trasnform back
 //	if(source.convert_damage)
 //		stored.blood_volume = shape.blood_volume;
 
-	// This guard is important because restore() can also be called on COMSIG_PARENT_QDELETING for shape, as well as on death.
+	// This guard is important because restore() can also be called on COMSIG_QDELETING for shape, as well as on death.
 	// This can happen in, for example, [/proc/wabbajack] where the mob hit is qdel'd.
 	if(!QDELETED(shape))
 		QDEL_NULL(shape)

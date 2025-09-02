@@ -202,10 +202,13 @@
 		player_client.give_award(/datum/award/score/hardcore_random, human_mob, round(human_mob.hardcore_survival_score))
 
 
-/datum/controller/subsystem/ticker/proc/declare_completion()
+/datum/controller/subsystem/ticker/proc/declare_completion(forced)
 	set waitfor = FALSE
 
-	to_chat(world, "<BR><BR><BR><span class='big bold'>The dawn is coming.</span>")
+	if(forced)
+		to_chat(world,  span_extremelybig(span_bolddanger("The end is coming.")))
+	else
+		to_chat(world, span_extremelybig(span_bold("A new dawn is coming.")))
 	log_game("The round has ended.")
 
 	for(var/I in round_end_events)

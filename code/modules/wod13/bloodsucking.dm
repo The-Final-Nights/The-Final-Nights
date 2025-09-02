@@ -63,8 +63,7 @@
 			to_chat(src, span_userdanger("YOU TRY TO COMMIT DIABLERIE ON [mob]."))
 
 	if(!HAS_TRAIT(src, TRAIT_BLOODY_LOVER))
-		if(CheckEyewitness(src, src, 7, FALSE))
-			AdjustMasquerade(-1)
+		SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 	if(do_after(src, 30, target = mob, timed_action_flags = NONE, progress = FALSE))
 		mob.bloodpool = max(0, mob.bloodpool-1)
 		suckbar.icon_state = "[round(14*(mob.bloodpool/mob.maxbloodpool))]"
@@ -156,7 +155,7 @@
 					var/confirmation = tgui_alert(src, "Attempt to diablerize [mob]?", "Diablerize", buttons = list("Yes", "No"))
 					if(confirmation == "Yes")
 						SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
-						AdjustMasquerade(-1)
+						SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 						if(do_after(src, 60 SECONDS, mob))
 							if(mob.has_status_effect(/datum/status_effect/blood_of_potency))
 								mob.remove_status_effect(/datum/status_effect/blood_of_potency)
@@ -220,7 +219,7 @@
 							to_chat(src, "<span class='userdanger'><b>POLICE ASSAULT IN PROGRESS</b></span>")
 					SEND_SOUND(src, sound('code/modules/wod13/sounds/feed_failed.ogg', 0, 0, 75))
 					to_chat(src, "<span class='warning'>This sad sacrifice for your own pleasure affects something deep in your mind.</span>")
-					AdjustMasquerade(-1)
+					SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 					SEND_SIGNAL(src, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
 					mob.death()
 			if(!ishuman(mob))
