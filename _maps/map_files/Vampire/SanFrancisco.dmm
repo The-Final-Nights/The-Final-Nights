@@ -907,18 +907,6 @@
 /obj/structure/table/wood/fancy/royalblack,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
-"alH" = (
-/obj/structure/guncase{
-	anchored = 1
-	},
-/obj/item/gun/ballistic/automatic/vampire/deagle/c50{
-	name = "Rebellion";
-	desc = "An extremely powerful, and rare, handcannon. This one seems to bolster silver engravings with anti-authority sentiments."
-	},
-/obj/item/ammo_box/magazine/m50,
-/obj/item/ammo_box/magazine/m50,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/anarch/basement)
 "alM" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
@@ -83411,15 +83399,6 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/tzimisce_sanctum)
-"uKG" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/item/kirbyplants/random,
-/turf/open/space/basic,
-/area/vtm)
 "uKH" = (
 /obj/effect/decal/bordur/corner,
 /obj/effect/decal/litter,
@@ -97551,7 +97530,7 @@ aej
 vFf
 kRM
 oNm
-alH
+aGe
 tFd
 tFd
 tFd
@@ -133975,7 +133954,7 @@ xfw
 xfw
 xfw
 xfw
-uKG
+xfw
 xfw
 xfw
 xfw
