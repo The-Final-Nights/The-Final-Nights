@@ -1,0 +1,5 @@
+author: "darkincarnate"
+delete-after: True
+changes:
+  - rscadd: "tzim ghouled dog room, coffins+surgery room in basement, ballroom third floor, maid/butler uniforms, private meeting room. moved the basement entrance out of sight"
+  - bugfix: "gio bar tables fixed"

@@ -78,6 +78,13 @@
 				else
 					message_admins("[key_name_admin(usr)] tried to create national guard squad. Unfortunately, there were no candidates available.")
 					log_admin("[key_name(usr)] failed to create national guard squad.")
+			if("first_team") //START TFN CHANGE
+				if(src.makeFIRST())
+					message_admins("[key_name(usr)] created FIRST team.")
+					log_admin("[key_name(usr)] created FIRST team.")
+				else
+					message_admins("[key_name_admin(usr)] tried to create FIRST team. Unfortunately, there were no candidates available.")
+					log_admin("[key_name(usr)] failed to create FIRST team.") //END TFN CHANGE
 			if("traitors")
 				if(src.makeTraitors())
 					message_admins("[key_name_admin(usr)] created traitors.")
