@@ -556,8 +556,7 @@
 	new_character = .
 	if(transfer_after)
 		transfer_character()
-//	if(client.prefs.archtype)
-//		H.__archetype = new client.prefs.archtype
+
 /mob/dead/new_player/proc/transfer_character()
 	. = new_character
 	if(.)

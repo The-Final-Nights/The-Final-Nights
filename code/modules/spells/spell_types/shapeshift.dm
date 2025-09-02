@@ -81,8 +81,6 @@
 		var/mob/living/simple_animal/hostile/hostile = shape
 		hostile.my_creator = caster
 	H = new(shape,src,caster)
-	if(HAS_TRAIT(caster, TRAIT_WARRIOR) && !HAS_TRAIT(shape, TRAIT_WARRIOR))
-		ADD_TRAIT(shape, TRAIT_WARRIOR, ROUNDSTART_TRAIT)
 
 	clothes_req = FALSE
 	human_req = FALSE

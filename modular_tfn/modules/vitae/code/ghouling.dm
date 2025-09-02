@@ -26,7 +26,7 @@
 	if(mind.enslaved_to != owner)
 		mind.enslave_mind_to_creator(owner)
 		apply_status_effect(STATUS_EFFECT_INLOVE, owner)
-		to_chat(src, span_userdanger("<b>AS PRECIOUS VITAE ENTER YOUR MOUTH, YOU NOW ARE IN THE BLOODBOND OF [owner]. SERVE YOUR REGNANT CORRECTLY, OR YOUR ACTIONS WILL NOT BE TOLERATED.</b>"))
+		to_chat(src, span_userdanger("<b>From the first sip from the first night, you shall idolize or hate from whom you've drank deep. From the second sip upon the second night, you shall  likewise hold onto their words and seek to curry their favor. Upon the third night and third drink, you are utterly theirs. Acts of defiant will are possible, but they are fleeting.</b>"))
 		return TRUE
 
 
