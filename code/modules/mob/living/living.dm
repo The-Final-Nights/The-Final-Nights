@@ -10,6 +10,7 @@
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
 
+//TFN EDIT
 /mob/living/proc/calculate_max_bloodpool()
 	//recalculates maxbloodpool
 	var/generation_blood_bonus
@@ -32,6 +33,7 @@
 			generation_blood_bonus = INFINITY
 			bloodquality += 100
 	maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
+//TFN EDIT END
 
 /mob/living/ComponentInitialize()
 	. = ..()
