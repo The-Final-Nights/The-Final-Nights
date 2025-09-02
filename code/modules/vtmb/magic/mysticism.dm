@@ -278,7 +278,7 @@
 	RegisterSignal(user, COMSIG_MOB_RESET_PERSPECTIVE, PROC_REF(on_end))
 	addtimer(CALLBACK(src, PROC_REF(on_end),user), 1 SCENES) // 3 minute timer, AKA 1 Scene
 
-/obj/abyssrune/reflections_of_hollow_revelation/proc/shadowview(mob/target, mob/user)
+/obj/abyssrune/reflections_of_hollow_revelation/proc/shadowview(mob/living/target, mob/user)
 	nocturne_user = user
 	user.notransform = TRUE
 
