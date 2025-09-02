@@ -269,7 +269,7 @@
 		var/datum/species/kindred/vampire = target.dna?.species
 		if(vampire && (vampire.get_discipline("Obtenebration") || vampire.get_discipline("Auspex")))
 			var/theirpower = (target.get_total_mentality() + target.get_total_social()) // Mentality + Social in place of Perception + Occult
-			if(SSroll.storyteller_roll(theirpower, 8, FALSE, user) == ROLL_SUCCESS)
+			if(SSroll.storyteller_roll(theirpower, 8, FALSE) == ROLL_SUCCESS)
 				to_chat(target, span_warning("You notice the nearby shadows flicker... something is watching you."))
 
 	shadowview(target, user)
