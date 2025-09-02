@@ -161,9 +161,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/glory = 0
 	var/wisdom = 0
 
-	//Masquerade
-	var/masquerade = 5
-
+	//Masquerade, renamed to clear past masquereade scores
+	var/masquerade_score = 5
 	var/path_score = 7
 	var/is_enlightened = FALSE
 
@@ -224,8 +223,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/reason_of_death = "None"
 
-	var/archetype = /datum/archetype/average
-
 	var/breed = BREED_HOMID
 	var/datum/garou_tribe/tribe = new /datum/garou_tribe/galestalkers()
 	var/datum/auspice/auspice = new /datum/auspice/ahroun()
@@ -272,7 +269,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	lockpicking = 0
 	athletics = 0
 	info_known = INFO_KNOWN_UNKNOWN
-	masquerade = initial(masquerade)
+	masquerade_score = initial(masquerade_score)
 	generation = initial(generation)
 	dharma_level = initial(dharma_level)
 	hun = initial(hun)
@@ -287,15 +284,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	honor = initial(honor)
 	glory = initial(glory)
 	wisdom = initial(wisdom)
-	archetype = pick(subtypesof(/datum/archetype))
-	var/datum/archetype/A = new archetype()
-	physique = A.start_physique
-	dexterity = A.start_dexterity
-	social = A.start_social
-	mentality = A.start_mentality
-	blood = A.start_blood
-	lockpicking = A.start_lockpicking
-	athletics = A.start_athletics
 	clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
 	qdel(morality_path)
 	morality_path = new /datum/morality/humanity()
@@ -523,7 +511,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "<b>Species:</b><BR><a href='byond://?_src_=prefs;preference=species;task=input'>[pref_species.name]</a><BR>"
 			switch(pref_species.name)
 				if("Vampire")
-					dat += "<b>Masquerade:</b> [masquerade]/5<BR>"
+					dat += "<b>Masquerade:</b> [masquerade_score]/5<BR>"
 					dat += "<b>Generation:</b> [generation]"
 					var/generation_allowed = TRUE
 					if(clan?.name == CLAN_NONE)
@@ -553,7 +541,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/dharma_cost = min((dharma_level * 5), 20)
 						dat += " <a href='byond://?_src_=prefs;preference=dharmarise;task=input'>Raise Dharmic Enlightenment ([dharma_cost])</a><BR>"
 					dat += "<b>P'o Personality</b>: [po_type] <a href='byond://?_src_=prefs;preference=potype;task=input'>Switch</a><BR>"
-					dat += "<b>Awareness:</b> [masquerade]/5<BR>"
+					dat += "<b>Awareness:</b> [masquerade_score]/5<BR>"
 					dat += "<b>Yin/Yang</b>: [yin]/[yang] <a href='byond://?_src_=prefs;preference=chibalance;task=input'>Adjust</a><BR>"
 					dat += "<b>Hun/P'o</b>: [hun]/[po] <a href='byond://?_src_=prefs;preference=demonbalance;task=input'>Adjust</a><BR>"
 				if("Werewolf")
@@ -570,7 +558,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/gloryXP = 25
 					var/honorXP = 25
 					var/wisdomXP = 25
-					dat += "<b>Veil:</b> [masquerade]/5<BR>"
+					dat += "<b>Veil:</b> [masquerade_score]/5<BR>"
 					switch(tribe.name)
 						if("Ronin")
 							dat += "Renown matters little to you, now."
@@ -619,13 +607,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					else
 						dat += "<BR>"
 				if("Ghoul")
-					dat += "<b>Masquerade:</b> [masquerade]/5<BR>"
+					dat += "<b>Masquerade:</b> [masquerade_score]/5<BR>"
 
 			dat += "<h2>[make_font_cool("ATTRIBUTES")]</h2>"
-
-			dat += "<b>Archetype</b><BR>"
-			var/datum/archetype/A = new archetype()
-			dat += "<a href='byond://?_src_=prefs;preference=archetype;task=input'>[A.name]</a> [A.specialization]<BR>"
 
 			//Prices for each ability, can be adjusted, multiplied by current attribute level
 			var/physique_price = 4
@@ -637,13 +621,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/lockpicking_price = !lockpicking ? 3 : 2
 			var/athletics_price = !athletics ? 3 : 2
 
-			dat += "<b>Physique:</b> [build_attribute_score(physique, A.archetype_additional_physique, physique_price, "physique")]"
-			dat += "<b>Dexterity:</b> [build_attribute_score(dexterity, A.archetype_additional_dexterity, dexterity_price, "dexterity")]"
-			dat += "<b>Social:</b> [build_attribute_score(social, A.archetype_additional_social, social_price, "social")]"
-			dat += "<b>Mentality:</b> [build_attribute_score(mentality, A.archetype_additional_mentality, mentality_price, "mentality")]"
-			dat += "<b>Cruelty:</b> [build_attribute_score(blood, A.archetype_additional_blood, blood_price, "blood")]"
-			dat += "<b>Lockpicking:</b> [build_attribute_score(lockpicking, A.archetype_additional_lockpicking, lockpicking_price, "lockpicking")]"
-			dat += "<b>Athletics:</b> [build_attribute_score(athletics, A.archetype_additional_athletics, athletics_price, "athletics")]"
+			dat += "<b>Physique:</b> [build_attribute_score(physique, 0, physique_price, "physique")]"
+			dat += "<b>Dexterity:</b> [build_attribute_score(dexterity, 0, dexterity_price, "dexterity")]"
+			dat += "<b>Social:</b> [build_attribute_score(social, 0, social_price, "social")]"
+			dat += "<b>Mentality:</b> [build_attribute_score(mentality, 0, mentality_price, "mentality")]"
+			dat += "<b>Cruelty:</b> [build_attribute_score(blood, 0, blood_price, "blood")]"
+			dat += "<b>Lockpicking:</b> [build_attribute_score(lockpicking, 0, lockpicking_price, "lockpicking")]"
+			dat += "<b>Athletics:</b> [build_attribute_score(athletics, 0, athletics_price, "athletics")]"
 			dat += "Experience rewarded: [player_experience]<BR>"
 			if(pref_species.name == "Werewolf")
 				dat += "<h2>[make_font_cool("TRIBE")]</h2>"
@@ -788,25 +772,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
-				switch(clan.name)
-
-					if(CLAN_SALUBRI)
-
-						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
-						possible_new_valerens -= discipline_types
-
-						if (possible_new_valerens.len && (player_experience >= 10))
-							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
-
-					if(CLAN_SALUBRI_WARRIOR)
-
-						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
-						possible_new_valerens -= discipline_types
-
-						if (possible_new_valerens.len && (player_experience >= 10))
-							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
-
-
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
@@ -877,6 +842,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<b>[morality_path.name]:</b> [path_score]/10"
 				if ((player_experience >= (path_score * 2)) && (path_score < 10))
 					dat += " <a href='byond://?_src_=prefs;preference=path;task=input'>Increase Path ([path_score * 2])</a>"
+				// TFN EDIT START: Adds a button to reduce path score
+				if ((path_score > 1))
+					dat += "<a href='byond://?_src_=prefs;preference=pathminus;task=input'>Lower Path (Free)</a>"
+				// TFN EDIT END
 				if(!slotlocked)
 					dat += "<a href='byond://?_src_=prefs;preference=pathof;task=input'>Switch Path</a>"
 				dat += "<BR><b>Description:</b> [morality_path.desc]<BR>"
@@ -1600,7 +1569,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[IN [(available_in_days)] DAYS\]</font></td></tr>"
 	if((generation > job.minimal_generation) && !bypass)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[FROM [job.minimal_generation] GENERATION AND OLDER\]</font></td></tr>"
-	if((masquerade < job.minimal_masquerade) && !bypass)
+	if((masquerade_score < job.minimal_masquerade) && !bypass)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_masquerade] MASQUERADE POINTS REQUIRED\]</font></td></tr>"
 	if(!job.allowed_species.Find(pref_species.name) && !bypass)
 		return "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[pref_species.name] RESTRICTED\]</font></td></tr>"
@@ -1695,7 +1664,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if((generation > job.minimal_generation) && !bypass)
 				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[FROM [job.minimal_generation] GENERATION AND OLDER\]</font></td></tr>"
 				continue
-			if((masquerade < job.minimal_masquerade) && !bypass)
+			if((masquerade_score < job.minimal_masquerade) && !bypass)
 				HTML += "<font color=#290204>[rank]</font></td><td><font color=#290204> \[[job.minimal_masquerade] MASQUERADE POINTS REQUIRED\]</font></td></tr>"
 				continue
 			if(!job.allowed_species.Find(pref_species.name) && !bypass)
@@ -2755,29 +2724,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if (new_breed)
 						breed = new_breed
 
-				if("archetype")
-					if(slotlocked)
-						return
-
-					if (tgui_alert(user, "Are you sure you want to change Archetype? This will reset your attributes.", "Confirmation", list("Yes", "No")) != "Yes")
-						return
-
-					var/list/archetypes = list()
-					for(var/i in subtypesof(/datum/archetype))
-						var/datum/archetype/the_archetype = i
-						archetypes[initial(the_archetype.name)] = i
-					var/result = tgui_input_list(user, "Select an archetype", "Attributes Selection", sort_list(archetypes))
-					if(result)
-						archetype = archetypes[result]
-						var/datum/archetype/archetip = new archetype()
-						physique = archetip.start_physique
-						dexterity = archetip.start_dexterity
-						mentality = archetip.start_mentality
-						social = archetip.start_social
-						blood = archetip.start_blood
-						lockpicking = archetip.start_lockpicking
-						athletics = archetip.start_athletics
-
 				if("discipline")
 					if(pref_species.id == "kindred")
 						var/i = text2num(href_list["upgradediscipline"])
@@ -2823,6 +2769,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					player_experience -= cost
 					experience_used_on_character += cost
 					path_score = clamp(path_score + 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
+
+				// TFN EDIT ADDITION START: Adding the ability to lower your path score
+				if("pathminus")
+					path_score = clamp(path_score - 1, MIN_PATH_SCORE, MAX_PATH_SCORE)
+				// TFN EDIT ADDITION END
 
 				if("pathof")
 					if(slotlocked || !(pref_species.id == "kindred"))
@@ -3032,7 +2983,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/bonus = generation-generation_bonus
 					slotlocked = 0
 					torpor_count = 0
-					masquerade = initial(masquerade)
+					masquerade_score = initial(masquerade_score)
 					generation = clamp(bonus, LOWEST_GENERATION_LIMIT, HIGHEST_GENERATION_LIMIT)
 					generation_bonus = 0
 					save_character()
@@ -3742,23 +3693,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.lockpicking = lockpicking
 	character.athletics = athletics
 
-	var/datum/archetype/A = new archetype()
-	character.additional_physique = A.archetype_additional_physique
-	character.additional_dexterity = A.archetype_additional_dexterity
-	character.additional_social = A.archetype_additional_social
-	character.additional_mentality = A.archetype_additional_mentality
-	character.additional_blood = A.archetype_additional_blood
-	character.additional_lockpicking = A.archetype_additional_lockpicking
-	character.additional_athletics = A.archetype_additional_athletics
-	A.special_skill(character)
-
-	character.masquerade = masquerade
-	if(!character_setup)
-		if(character in GLOB.masquerade_breakers_list)
-			if(character.masquerade > 2)
-				GLOB.masquerade_breakers_list -= character
-		else if(character.masquerade < 3)
-			GLOB.masquerade_breakers_list += character
+	if(!character_setup && !istype(character, /mob/living/carbon/human/dummy))
+		for(var/i = 5; i > masquerade_score; i--)
+			SSmasquerade.masquerade_breach(GLOB.blood_hunt_announcers, character, MASQUERADE_REASON_PREFERENCES)
+		SSmasquerade.masquerade_breacher_check(character)
 
 	switch (body_model)
 		if (SLIM_BODY_MODEL_NUMBER)

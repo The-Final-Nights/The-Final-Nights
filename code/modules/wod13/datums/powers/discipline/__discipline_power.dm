@@ -75,8 +75,8 @@
 	if(owner == new_owner)
 		return
 	if(owner)
-		UnregisterSignal(owner, list(COMSIG_PARENT_QDELETING, COMSIG_POWER_ACTIVATE))
-	RegisterSignal(new_owner, COMSIG_PARENT_QDELETING, PROC_REF(on_owner_qdel))
+		UnregisterSignal(owner, list(COMSIG_QDELETING, COMSIG_POWER_ACTIVATE))
+	RegisterSignal(new_owner, COMSIG_QDELETING, PROC_REF(on_owner_qdel))
 	owner = new_owner
 	if(power_group != DISCIPLINE_POWER_GROUP_NONE)
 		RegisterSignal(owner, COMSIG_POWER_ACTIVATE, PROC_REF(on_other_power_activate))
@@ -124,7 +124,7 @@
  * this power's vitae cost.
  */
 /datum/discipline_power/proc/can_afford()
-	return (owner.bloodpool >= vitae_cost)
+	return (owner.bloodpool >= (HAS_TRAIT(owner, TRAIT_DOUBLE_VITAE_COST) ? vitae_cost*2 : vitae_cost))
 
 /**
  * Returns if this power can currently be activated
@@ -501,11 +501,7 @@
  */
 /datum/discipline_power/proc/do_masquerade_violation(atom/target)
 	if (violates_masquerade)
-		if (owner.CheckEyewitness(target ? target : owner, owner, 7, TRUE))
-			//TODO: detach this from being a human
-			if (ishuman(owner))
-				var/mob/living/carbon/human/human = owner
-				human.AdjustMasquerade(-1)
+		SEND_SIGNAL(owner, COMSIG_MASQUERADE_VIOLATION)
 
 /**
  * Overridable proc handling the spending of resources (vitae/blood)
@@ -514,7 +510,7 @@
  */
 /datum/discipline_power/proc/spend_resources()
 	if (can_afford())
-		owner.bloodpool = owner.bloodpool - vitae_cost
+		owner.bloodpool = owner.bloodpool - (HAS_TRAIT(owner, TRAIT_DOUBLE_VITAE_COST) ? vitae_cost*2 : vitae_cost)
 		owner.update_action_buttons()
 		return TRUE
 	else
