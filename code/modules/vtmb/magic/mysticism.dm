@@ -198,16 +198,21 @@
 	name = "Reflections of Hollow Revelation"
 	desc = "Use a conjured Nocturne to spy on a target through nearby shadows"
 	icon_state = "teleport"
-	word = "VISION'LEJANA"
+	word = ""
 	mystlevel = 4
 	var/datum/action/close_window/end_action
 	var/mob/living/nocturne_user
 	var/obj/shadow_window/shadow_window
 	var/mob/living/carbon/human/window_target
+	var/isactive = FALSE
 
 /obj/abyssrune/reflections_of_hollow_revelation/complete()
 	var/mob/living/user = usr
 	if(!user)
+		return
+
+	if(isactive)
+		to_chat(user, span_warning("This Nocturne is already in use!"))
 		return
 
 	// Target input
@@ -215,6 +220,8 @@
 	if(!target_name || !user.Adjacent(src))
 		to_chat(user, span_warning("You must specify a target and remain close to the rune!"))
 		return
+
+	user.say("VISTA'DE'SOMBRA")
 
 	// Find the target
 	for(var/mob/living/carbon/human/targ in GLOB.player_list)
@@ -232,6 +239,7 @@
 	if (roll_result == ROLL_SUCCESS)
 		scry_target(window_target, user)
 		playsound(user, 'sound/magic/voidblink.ogg', 50, FALSE)
+		isactive = TRUE
 	else if(roll_result == ROLL_FAILURE)
 		qdel(src)
 		to_chat(user, span_warning("The Nocturne collapses!"))
@@ -268,11 +276,10 @@
 	to_chat(user, span_notice("You peer through the shadows near [target.name]..."))
 
 	RegisterSignal(user, COMSIG_MOB_RESET_PERSPECTIVE, PROC_REF(on_end))
-	addtimer(CALLBACK(src, PROC_REF(on_end),user), 3000) // 5 minute timer, AKA 1 Scene
+	addtimer(CALLBACK(src, PROC_REF(on_end),user), 1 SCENES) // 3 minute timer, AKA 1 Scene
 
 /obj/abyssrune/reflections_of_hollow_revelation/proc/shadowview(mob/target, mob/user)
 	nocturne_user = user
-	user.anchored = TRUE
 	user.notransform = TRUE
 
 	// Create camera
@@ -308,7 +315,6 @@
 	if(!user)
 		return
 
-	user.anchored = FALSE
 	user.notransform = FALSE
 
 	if(user.client?.eye != user)
