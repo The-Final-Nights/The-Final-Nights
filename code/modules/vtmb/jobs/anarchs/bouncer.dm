@@ -21,10 +21,10 @@
 	display_order = JOB_DISPLAY_ORDER_BRUISER
 	known_contacts = list("Baron","Bouncer","Emissary","Sweeper")
 	allowed_species = list("Vampire", "Ghoul")
-	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_TREMERE, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_TZIMISCE, CLAN_NONE, CLAN_VENTRUE, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_SETITES, CLAN_SALUBRI, CLAN_NAGARAJA, CLAN_SALUBRI_WARRIOR)
+	allowed_bloodlines = list(CLAN_BAALI, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_TREMERE, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_TZIMISCE, CLAN_NONE, CLAN_VENTRUE, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_SETITES, CLAN_SALUBRI, CLAN_NAGARAJA, CLAN_SALUBRI_WARRIOR)
 	species_slots = list("Ghoul" = 3, "Vampire" = 50)
 
-	v_duty = "You are the enforcer of the Anarchs. The baron is always in need of muscle power. Enforce the Traditions - in the anarch way."
+	v_duty = "You are the enforcer of the San Francisco Barony. The baron is always in need of skilled hands, like yours. Keep the Free State alive - even while under occupation."
 	minimal_masquerade = 2
 	experience_addition = 15
 
