@@ -80,17 +80,17 @@
 	if(!ishuman(target))
 		return FALSE
 
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clan?.name == CLAN_GARGOYLE)
-			return TRUE
-
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 
 	if(owner == conditioner)
 		return TRUE
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clan?.name == CLAN_GARGOYLE)
+			theirpower -= 2
 
 	if(target.conditioned)
 		theirpower += 3
