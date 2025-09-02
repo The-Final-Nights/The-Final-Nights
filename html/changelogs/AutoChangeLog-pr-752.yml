@@ -1,0 +1,5 @@
+author: "Kolibri-B"
+delete-after: True
+changes:
+  - rscadd: "Adds an indicator visible to obfuscated mobs"
+  - qol: "Obfuscate quality of life via indicator"

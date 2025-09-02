@@ -124,7 +124,7 @@
  * this power's vitae cost.
  */
 /datum/discipline_power/proc/can_afford()
-	return (owner.bloodpool >= vitae_cost)
+	return (owner.bloodpool >= (HAS_TRAIT(owner, TRAIT_DOUBLE_VITAE_COST) ? vitae_cost*2 : vitae_cost))
 
 /**
  * Returns if this power can currently be activated
@@ -510,7 +510,7 @@
  */
 /datum/discipline_power/proc/spend_resources()
 	if (can_afford())
-		owner.bloodpool = owner.bloodpool - vitae_cost
+		owner.bloodpool = owner.bloodpool - (HAS_TRAIT(owner, TRAIT_DOUBLE_VITAE_COST) ? vitae_cost*2 : vitae_cost)
 		owner.update_action_buttons()
 		return TRUE
 	else
