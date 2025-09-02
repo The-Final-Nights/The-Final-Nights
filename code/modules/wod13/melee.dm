@@ -105,7 +105,6 @@
 	. = ..()
 	icon_state = "axetzi0"
 
-
 /obj/item/melee/vampirearms/katana
 	name = "katana"
 	desc = "An elegant weapon, its tiny edge is capable of cutting through flesh and bone with ease."

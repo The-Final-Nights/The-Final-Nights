@@ -479,7 +479,8 @@
 		if (!HAS_TRAIT(owner, TRAIT_CORAX))
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
 		if(G.glabro)
-			H.remove_overlay(PROTEAN_LAYER)
+			if(!HAS_TRAIT(H, TRAIT_FAIR_GLABRO))
+				H.remove_overlay(PROTEAN_LAYER)
 			G.punchdamagelow -= 15
 			G.punchdamagehigh -= 15
 			H.physique = H.physique-2
@@ -495,11 +496,12 @@
 				to_chat(owner,"<span class='warning'>Corax do not have a Glabro form to shift into.</span>")
 				return
 			else
-				H.remove_overlay(PROTEAN_LAYER)
-				var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
-				var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
-				H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
-				H.apply_overlay(PROTEAN_LAYER)
+				if(!HAS_TRAIT(H, TRAIT_FAIR_GLABRO))
+					H.remove_overlay(PROTEAN_LAYER)
+					var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
+					var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
+					H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
+					H.apply_overlay(PROTEAN_LAYER)
 				G.punchdamagelow += 15
 				G.punchdamagehigh += 15
 				H.physique = H.physique+2
