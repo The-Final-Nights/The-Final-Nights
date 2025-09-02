@@ -10,3 +10,8 @@
   - qol: Changes police underclothes flavor text
   XeonMations:
   - rscadd: Added thinblood trait
+2025-09-02:
+  XeonMations:
+  - rscdel: Removed Archetypes from the game.
+  chazzyjazzy:
+  - bugfix: discipline teaching should hopefully now function again

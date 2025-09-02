@@ -1,0 +1,4 @@
+author: "Kolibri-B"
+delete-after: True
+changes:
+  - bugfix: "Fixes Shroudsight's ability to reveal Obfuscated mobs"
