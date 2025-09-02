@@ -3301,6 +3301,12 @@
 	},
 /turf/open/floor/carpet/red,
 /area/vtm/interior/shop)
+"aRU" = (
+/obj/structure/chair/stool/bar,
+/obj/effect/turf_decal/siding/wideplating/dark,
+/obj/effect/landmark/start/liaison,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "aSg" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#503e28";
@@ -15233,16 +15239,9 @@
 /area/vtm/interior/shop)
 "dRt" = (
 /obj/structure/table,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
 	},
-/obj/structure/chair/stool/bar,
-/obj/effect/landmark/start/liaison,
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/shop)
 "dRx" = (
@@ -49727,19 +49726,6 @@
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/old,
 /area/vtm/interior/vjanitor)
-"mtm" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wideplating/dark{
-	dir = 1
-	},
-/obj/structure/chair/stool/bar,
-/obj/effect/landmark/start/liaison,
-/turf/open/floor/carpet/blue,
-/area/vtm/interior/shop)
 "mto" = (
 /obj/effect/decal/wallpaper/grey/low,
 /turf/closed/wall/vampwall/junk,
@@ -140401,7 +140387,7 @@ rrn
 hZi
 jCF
 uSP
-mIx
+aRU
 sGz
 eqY
 igf
@@ -140805,7 +140791,7 @@ mCf
 hZi
 hZi
 psB
-mIx
+aRU
 sGz
 eqY
 igf
@@ -171972,7 +171958,7 @@ jys
 aUD
 xZs
 qii
-mtm
+qii
 lEz
 dJm
 cAe
