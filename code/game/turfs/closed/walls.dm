@@ -147,6 +147,7 @@
 					"<span class='hear'>You hear a booming smash!</span>")
 	return TRUE
 
+//TFN EDIT
 /turf/closed/wall/attack_potence(mob/living/carbon/user)
 	var/obj/item/bodypart/arm = user.hand_bodyparts[user.active_hand_index]
 	if(!arm)
@@ -165,6 +166,7 @@
 			span_userdanger("You smash the [src]"),
 			span_hear("You hear a booming smash!"))
 	return TRUE
+//TFN EDIT END
 
 /**
  *Deals damage back to the hulk's arm.
