@@ -335,7 +335,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
-#define ATTRIBUTE_BASE_LIMIT clamp(13 - generation, 5, 10) //Highest level that a base attribute can be upgraded to. Bonus attributes can increase the actual amount past the limit.
+#define ATTRIBUTE_BASE_LIMIT clamp(13 - generation, 5, 10) //Highest level that a base attribute can be upgraded to. Bonus attributes can increase the actual amount past the limit. //TFN EDIT - Original was 5.
 
 /proc/make_font_cool(text)
 	if(text)
@@ -744,7 +744,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/datum/discipline/discipline = new discipline_type
 					var/discipline_level = discipline_levels[i]
 					///Maximum level the discipline can reach - based on generation.
-					var/max_discipline_level = clamp(13 - generation, 5, 10)
+					var/max_discipline_level = clamp(13 - generation, 5, 10) //TFN EDIT - Original was 5
 
 					var/cost
 					if (discipline_level <= 0)
@@ -2733,7 +2733,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/i = text2num(href_list["upgradediscipline"])
 
 						var/discipline_level = discipline_levels[i]
-						var/max_discipline_level = clamp(13 - generation, 5, 10)
+						var/max_discipline_level = clamp(13 - generation, 5, 10) //TFN EDIT - Original was 5
 
 						var/cost = discipline_level * 7
 						if (discipline_level <= 0)
@@ -2990,7 +2990,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					slotlocked = 0
 					torpor_count = 0
 					masquerade_score = initial(masquerade_score)
-					generation = clamp(bonus, LOWEST_GENERATION_LIMIT, HIGHEST_GENERATION_LIMIT)
+					generation = clamp(bonus, LOWEST_GENERATION_LIMIT, HIGHEST_GENERATION_LIMIT) //TFN EDIT - Previous lower limit 7
 					generation_bonus = 0
 					save_character()
 
