@@ -4,14 +4,18 @@
 
 #define SEE_INVISIBLE_LIVING 25
 
-#define OBFUSCATE_INVISIBILITY 30
-#define SEE_OBFUSCATE_INVISIBLITY 30
-
 #define INVISIBILITY_AVATAR 59
 #define SEE_INVISIBLE_AVATAR 59
 
 #define INVISIBILITY_OBSERVER 60
 #define SEE_INVISIBLE_OBSERVER 60
+
+//TFN EDIT START: Editing values, making Shroudsight no longer reveal Obfuscate
+#define OBFUSCATE_INVISIBILITY 61
+#define SEE_OBFUSCATE_INVISIBLITY 61
+
+#define OBSERVER_SIGHT 70
+//TFN EDIT END
 
 #define INVISIBILITY_MAXIMUM 100 //the maximum allowed for "real" objects
 

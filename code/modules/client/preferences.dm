@@ -223,8 +223,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	var/reason_of_death = "None"
 
-	var/archetype = /datum/archetype/average
-
 	var/breed = BREED_HOMID
 	var/datum/garou_tribe/tribe = new /datum/garou_tribe/galestalkers()
 	var/datum/auspice/auspice = new /datum/auspice/ahroun()
@@ -286,15 +284,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	honor = initial(honor)
 	glory = initial(glory)
 	wisdom = initial(wisdom)
-	archetype = pick(subtypesof(/datum/archetype))
-	var/datum/archetype/A = new archetype()
-	physique = A.start_physique
-	dexterity = A.start_dexterity
-	social = A.start_social
-	mentality = A.start_mentality
-	blood = A.start_blood
-	lockpicking = A.start_lockpicking
-	athletics = A.start_athletics
 	clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
 	qdel(morality_path)
 	morality_path = new /datum/morality/humanity()
@@ -622,10 +611,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			dat += "<h2>[make_font_cool("ATTRIBUTES")]</h2>"
 
-			dat += "<b>Archetype</b><BR>"
-			var/datum/archetype/A = new archetype()
-			dat += "<a href='byond://?_src_=prefs;preference=archetype;task=input'>[A.name]</a> [A.specialization]<BR>"
-
 			//Prices for each ability, can be adjusted, multiplied by current attribute level
 			var/physique_price = 4
 			var/dexterity_price = 4
@@ -636,13 +621,13 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/lockpicking_price = !lockpicking ? 3 : 2
 			var/athletics_price = !athletics ? 3 : 2
 
-			dat += "<b>Physique:</b> [build_attribute_score(physique, A.archetype_additional_physique, physique_price, "physique")]"
-			dat += "<b>Dexterity:</b> [build_attribute_score(dexterity, A.archetype_additional_dexterity, dexterity_price, "dexterity")]"
-			dat += "<b>Social:</b> [build_attribute_score(social, A.archetype_additional_social, social_price, "social")]"
-			dat += "<b>Mentality:</b> [build_attribute_score(mentality, A.archetype_additional_mentality, mentality_price, "mentality")]"
-			dat += "<b>Cruelty:</b> [build_attribute_score(blood, A.archetype_additional_blood, blood_price, "blood")]"
-			dat += "<b>Lockpicking:</b> [build_attribute_score(lockpicking, A.archetype_additional_lockpicking, lockpicking_price, "lockpicking")]"
-			dat += "<b>Athletics:</b> [build_attribute_score(athletics, A.archetype_additional_athletics, athletics_price, "athletics")]"
+			dat += "<b>Physique:</b> [build_attribute_score(physique, 0, physique_price, "physique")]"
+			dat += "<b>Dexterity:</b> [build_attribute_score(dexterity, 0, dexterity_price, "dexterity")]"
+			dat += "<b>Social:</b> [build_attribute_score(social, 0, social_price, "social")]"
+			dat += "<b>Mentality:</b> [build_attribute_score(mentality, 0, mentality_price, "mentality")]"
+			dat += "<b>Cruelty:</b> [build_attribute_score(blood, 0, blood_price, "blood")]"
+			dat += "<b>Lockpicking:</b> [build_attribute_score(lockpicking, 0, lockpicking_price, "lockpicking")]"
+			dat += "<b>Athletics:</b> [build_attribute_score(athletics, 0, athletics_price, "athletics")]"
 			dat += "Experience rewarded: [player_experience]<BR>"
 			if(pref_species.name == "Werewolf")
 				dat += "<h2>[make_font_cool("TRIBE")]</h2>"
@@ -786,25 +771,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						qdel(discipline)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
-
-				switch(clan.name)
-
-					if(CLAN_SALUBRI)
-
-						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
-						possible_new_valerens -= discipline_types
-
-						if (possible_new_valerens.len && (player_experience >= 10))
-							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
-
-					if(CLAN_SALUBRI_WARRIOR)
-
-						var/list/possible_new_valerens = list(/datum/discipline/valeren, /datum/discipline/valeren_warrior)
-						possible_new_valerens -= discipline_types
-
-						if (possible_new_valerens.len && (player_experience >= 10))
-							dat += "<a href='byond://?_src_=prefs;preference=newvaleren;task=input'>Learn a new Valeren Path (10)</a><BR>"
-
 
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
@@ -2758,29 +2724,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if (new_breed)
 						breed = new_breed
 
-				if("archetype")
-					if(slotlocked)
-						return
-
-					if (tgui_alert(user, "Are you sure you want to change Archetype? This will reset your attributes.", "Confirmation", list("Yes", "No")) != "Yes")
-						return
-
-					var/list/archetypes = list()
-					for(var/i in subtypesof(/datum/archetype))
-						var/datum/archetype/the_archetype = i
-						archetypes[initial(the_archetype.name)] = i
-					var/result = tgui_input_list(user, "Select an archetype", "Attributes Selection", sort_list(archetypes))
-					if(result)
-						archetype = archetypes[result]
-						var/datum/archetype/archetip = new archetype()
-						physique = archetip.start_physique
-						dexterity = archetip.start_dexterity
-						mentality = archetip.start_mentality
-						social = archetip.start_social
-						blood = archetip.start_blood
-						lockpicking = archetip.start_lockpicking
-						athletics = archetip.start_athletics
-
 				if("discipline")
 					if(pref_species.id == "kindred")
 						var/i = text2num(href_list["upgradediscipline"])
@@ -3749,16 +3692,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.blood = blood
 	character.lockpicking = lockpicking
 	character.athletics = athletics
-
-	var/datum/archetype/A = new archetype()
-	character.additional_physique = A.archetype_additional_physique
-	character.additional_dexterity = A.archetype_additional_dexterity
-	character.additional_social = A.archetype_additional_social
-	character.additional_mentality = A.archetype_additional_mentality
-	character.additional_blood = A.archetype_additional_blood
-	character.additional_lockpicking = A.archetype_additional_lockpicking
-	character.additional_athletics = A.archetype_additional_athletics
-	A.special_skill(character)
 
 	if(!character_setup && !istype(character, /mob/living/carbon/human/dummy))
 		for(var/i = 5; i > masquerade_score; i--)
