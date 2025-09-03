@@ -359,3 +359,4 @@
 	. = ..()
 	var/mob/living/carbon/human/living = user
 	living.vomit(force = TRUE)
+
