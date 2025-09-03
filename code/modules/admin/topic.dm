@@ -78,6 +78,13 @@
 				else
 					message_admins("[key_name_admin(usr)] tried to create national guard squad. Unfortunately, there were no candidates available.")
 					log_admin("[key_name(usr)] failed to create national guard squad.")
+			if("first_team") //START TFN CHANGE
+				if(src.makeFIRST())
+					message_admins("[key_name(usr)] created FIRST team.")
+					log_admin("[key_name(usr)] created FIRST team.")
+				else
+					message_admins("[key_name_admin(usr)] tried to create FIRST team. Unfortunately, there were no candidates available.")
+					log_admin("[key_name(usr)] failed to create FIRST team.") //END TFN CHANGE
 			if("traitors")
 				if(src.makeTraitors())
 					message_admins("[key_name_admin(usr)] created traitors.")
@@ -1499,24 +1506,6 @@
 		var/mob/M = locate(href_list["subtlemessage"])
 		usr.client.cmd_admin_subtle_message(M)
 
-	else if(href_list["adjustmasquerade"])
-		if(!check_rights(R_ADMIN))
-			return
-		var/mob/living/carbon/human/M = locate(href_list["adjustmasquerade"])
-		if(!M)
-			to_chat(usr, "Error: Could not locate the specified mob.")
-			return
-		usr.client.cmd_admin_adjust_masquerade(M)
-/*
-	else if(href_list["adjusthumanity"])
-		if(!check_rights(R_ADMIN))
-			return
-		var/mob/living/carbon/human/M = locate(href_list["adjusthumanity"])
-		if(!M)
-			to_chat(usr, "Error: Could not locate the specified mob.")
-			return
-		usr.client.cmd_admin_adjust_humanity(M)
-*/
 	else if(href_list["playsoundto"])
 		if(!check_rights(R_SOUND))
 			return
