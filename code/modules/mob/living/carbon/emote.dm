@@ -157,3 +157,4 @@
 	else
 		qdel(noogie)
 		to_chat(user, "<span class='warning'>You're incapable of noogie'ing in your current state.</span>")
+
