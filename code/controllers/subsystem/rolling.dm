@@ -32,6 +32,7 @@ SUBSYSTEM_DEF(roll)
 	for(var/mob/player_mob as anything in mobs_to_show_output)
 		if((player_mob.client?.prefs.chat_toggles & CHAT_ROLL_INFO) || force_chat_result)
 			to_chat(player_mob, jointext(output_text, ""), trailing_newline = FALSE)
+			to_chat(player_mob, span_nicegreen("Successes: [success_count]"))
 	return output
 
 //Roll each ten sided die, see what numbers we get.
@@ -48,6 +49,8 @@ SUBSYSTEM_DEF(roll)
 		if(roll >= difficulty)
 			output_text += span_nicegreen("[get_dice_char(roll)]")
 			success_count++
+			if(roll == 10)
+				success_count++
 		else if(roll == 1)
 			output_text += span_bold(span_danger("[get_dice_char(roll)]"))
 			success_count--
