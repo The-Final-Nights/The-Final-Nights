@@ -339,9 +339,8 @@ Behavior that's still missing from this component that original food items had t
 		var/fraction = min(bite_consumption / owner.reagents.total_volume, 1)
 		owner.reagents.trans_to(eater, bite_consumption, transfered_by = feeder, methods = INGEST)
 		bitecount++
-		if(istype(parent, /obj/item/food/vampire))
-			var/obj/item/food/vampire/V = parent
-			V.got_biten()
+		if((bitecount == 1) && (food_flags & FOOD_BITE_SPRITE))
+			F.icon_state = "[F.icon_state]-biten"
 		if(!owner.reagents.total_volume)
 			on_consume(eater, feeder)
 		checkLiked(fraction, eater)

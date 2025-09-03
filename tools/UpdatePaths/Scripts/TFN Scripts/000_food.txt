@@ -1,0 +1,6 @@
+/obj/item/food/carpmeat : /obj/item/food/fishmeat {@OLD}
+
+/obj/item/food/vampire/burger : /obj/item/food/burger/plain
+/obj/item/food/vampire/donut : /obj/item/food/donut/plain
+/obj/item/food/vampire/pizza : /obj/item/food/pizzaslice/square
+/obj/item/food/vampire/taco : /obj/item/food/taco

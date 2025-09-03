@@ -57,9 +57,9 @@
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/bacotell
-	prize_list = list(new /datum/data/mining_equipment("square pizza",	/obj/item/food/vampire/pizza,	15),
-		new /datum/data/mining_equipment("taco",	/obj/item/food/vampire/taco,	10),
-		new /datum/data/mining_equipment("burger",	/obj/item/food/vampire/burger,	20),
+	prize_list = list(new /datum/data/mining_equipment("square pizza",	/obj/item/food/pizzaslice/square,	15),
+		new /datum/data/mining_equipment("taco",	/obj/item/food/taco,	10),
+		new /datum/data/mining_equipment("burger",	/obj/item/food/burger/plain,	20),
 		new /datum/data/mining_equipment("two liter cola bottle",	/obj/item/reagent_containers/food/drinks/bottle/vampirecola,	10),
 		new /datum/data/mining_equipment("cola can",	/obj/item/reagent_containers/food/drinks/soda_cans/vampirecola,	5),
 		new /datum/data/mining_equipment("summer thaw", /obj/item/reagent_containers/food/drinks/bottle/vampirecola/summer_thaw, 5),
@@ -67,8 +67,8 @@
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/bubway
-	prize_list = list(new /datum/data/mining_equipment("donut",	/obj/item/food/vampire/donut,	5),
-		new /datum/data/mining_equipment("burger",	/obj/item/food/vampire/burger,	10),
+	prize_list = list(new /datum/data/mining_equipment("donut",	/obj/item/food/donut/plain,	5),
+		new /datum/data/mining_equipment("burger",	/obj/item/food/burger/plain,	10),
 		new /datum/data/mining_equipment("coffee",	/obj/item/reagent_containers/food/drinks/coffee/vampire,	5),
 		new /datum/data/mining_equipment("robust coffee",	/obj/item/reagent_containers/food/drinks/coffee/vampire/robust,	10),
 		new /datum/data/mining_equipment("thaw club soda", /obj/item/reagent_containers/food/drinks/bottle/vampirecola/thaw_club, 8)
@@ -76,8 +76,8 @@
 
 /obj/machinery/mineral/equipment_vendor/fastfood/gummaguts
 	prize_list = list(new /datum/data/mining_equipment("five-piece chicken wing box",	/obj/item/storage/fancy/nugget_box,	5),
-		new /datum/data/mining_equipment("burger",	/obj/item/food/vampire/burger,	15),
-		new /datum/data/mining_equipment("square pizza",	/obj/item/food/vampire/pizza,	10),
+		new /datum/data/mining_equipment("burger",	/obj/item/food/burger/plain,	15),
+		new /datum/data/mining_equipment("square pizza",	/obj/item/food/pizzaslice/square,	10),
 		new /datum/data/mining_equipment("two liter cola bottle",	/obj/item/reagent_containers/food/drinks/bottle/vampirecola,	10),
 		new /datum/data/mining_equipment("cola can",	/obj/item/reagent_containers/food/drinks/soda_cans/vampirecola,	5)
 	)
