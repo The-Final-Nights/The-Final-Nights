@@ -32,7 +32,6 @@ SUBSYSTEM_DEF(roll)
 	for(var/mob/player_mob as anything in mobs_to_show_output)
 		if((player_mob.client?.prefs.chat_toggles & CHAT_ROLL_INFO) || force_chat_result)
 			to_chat(player_mob, jointext(output_text, ""), trailing_newline = FALSE)
-			to_chat(player_mob, span_nicegreen("Successes: [success_count]"))
 	return output
 
 //Roll each ten sided die, see what numbers we get.
