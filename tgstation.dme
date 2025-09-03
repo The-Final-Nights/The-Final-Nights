@@ -3516,6 +3516,7 @@
 #include "code\modules\vtmb\jobs\dispatcher.dm"
 #include "code\modules\vtmb\jobs\doctor.dm"
 #include "code\modules\vtmb\jobs\fbi.dm"
+#include "code\modules\vtmb\jobs\first_team.dm"
 #include "code\modules\vtmb\jobs\gargoyle.dm"
 #include "code\modules\vtmb\jobs\giovanni.dm"
 #include "code\modules\vtmb\jobs\graveyard_keeper.dm"
@@ -3539,7 +3540,7 @@
 #include "code\modules\vtmb\jobs\supply_assistant.dm"
 #include "code\modules\vtmb\jobs\swat.dm"
 #include "code\modules\vtmb\jobs\taxi.dm"
-#include "code\modules\vtmb\jobs\triad.dm"
+#include "code\modules\vtmb\jobs\axes.dm"
 #include "code\modules\vtmb\jobs\voivode.dm"
 #include "code\modules\vtmb\jobs\zadruga.dm"
 #include "code\modules\vtmb\jobs\anarchs\baron.dm"
@@ -3834,4 +3835,5 @@
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_interactions.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_update_icons.dm"
 #include "interface\skin.dmf"
+#include "code\modules\vtmb\jobs\anarchs\liaison.dm"
 // END_INCLUDE

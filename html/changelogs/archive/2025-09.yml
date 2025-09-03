@@ -11,5 +11,32 @@
   XeonMations:
   - rscadd: Added thinblood trait
 2025-09-02:
+  Kolibri-B:
+  - bugfix: Fixes Shroudsight's ability to reveal Obfuscated mobs
+  - rscadd: Adds an indicator visible to obfuscated mobs
+  - qol: Obfuscate quality of life via indicator
+  SELFHELL:
+  - rscadd: FIRST Teams + Clothing
+  - sound: Various firearm audio
+  - image: FIRST Icons + Guns
+  - admin: Spawnable FIRST Teams
+  SoreYew:
+  - rscadd: Liaison role for Anarchs
+  - rscadd: bruiser alt role titles
+  - qol: change ID names to not reflect kindred roles
+  - qol: duty flavor text
+  - qol: changes Triads into Axe Gang
+  - balance: Sweeper role size
+  - balance: grants Baali access to other anarch roles
+  TheTrueSilverRat:
+  - rscadd: Added The Fair Glabro Trait
+  - refactor: I made Visceratika 4 lore accurate
   XeonMations:
   - rscdel: Removed Archetypes from the game.
+  chazzyjazzy:
+  - bugfix: discipline teaching should hopefully now function again
+  darkincarnate:
+  - rscadd: tzim ghouled dog room, coffins+surgery room in basement, ballroom third
+      floor, maid/butler uniforms, private meeting room. moved the basement entrance
+      out of sight
+  - bugfix: gio bar tables fixed
