@@ -621,14 +621,14 @@
 	linked_actions.Add(action)
 	action.Grant(M)
 	RegisterSignal(M, COMSIG_LIVING_DEATH , PROC_REF(unlink_mob))
-	RegisterSignal(M, COMSIG_PARENT_QDELETING, PROC_REF(unlink_mob))
+	RegisterSignal(M, COMSIG_QDELETING, PROC_REF(unlink_mob))
 	return TRUE
 
 /datum/species/jelly/stargazer/proc/unlink_mob(mob/living/M)
 	var/link_id = linked_mobs.Find(M)
 	if(!(link_id))
 		return
-	UnregisterSignal(M, list(COMSIG_LIVING_DEATH, COMSIG_PARENT_QDELETING))
+	UnregisterSignal(M, list(COMSIG_LIVING_DEATH, COMSIG_QDELETING))
 	var/datum/action/innate/linked_speech/action = linked_actions[link_id]
 	action.Remove(M)
 	to_chat(M, "<span class='notice'>You are no longer connected to [slimelink_owner.real_name]'s Slime Link.</span>")

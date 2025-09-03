@@ -154,6 +154,13 @@
 		"tmr"
 	)
 
+/obj/item/vamp/keys/ministry
+	name = "community center keys"
+	accesslocks = list(
+		"setite"
+	)
+	color = "#09350cff"
+
 /obj/item/vamp/keys/kiasyd
 	name = "Solitary keys"
 	accesslocks = list(
@@ -402,10 +409,10 @@
 
 //===========================MISC KEYS===========================
 
-/obj/item/vamp/keys/triads
+/obj/item/vamp/keys/axes
 	name = "Rusty keys"
 	accesslocks = list(
-		"triad",
+		"axes",
 		"laundromat"
 	)
 

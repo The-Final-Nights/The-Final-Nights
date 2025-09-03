@@ -17,14 +17,14 @@
 		return
 	new_lift_platform.lift_master_datum = src
 	LAZYADD(lift_platforms, new_lift_platform)
-	RegisterSignal(new_lift_platform, COMSIG_PARENT_QDELETING, PROC_REF(remove_lift_platforms))
+	RegisterSignal(new_lift_platform, COMSIG_QDELETING, PROC_REF(remove_lift_platforms))
 
 /datum/lift_master/proc/remove_lift_platforms(obj/structure/industrial_lift/old_lift_platform)
 	if(!(old_lift_platform in lift_platforms))
 		return
 	old_lift_platform.lift_master_datum = null
 	LAZYREMOVE(lift_platforms, old_lift_platform)
-	UnregisterSignal(old_lift_platform, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(old_lift_platform, COMSIG_QDELETING)
 
 ///Collect all bordered platforms
 /datum/lift_master/proc/Rebuild_lift_plaform(obj/structure/industrial_lift/base_lift_platform)
@@ -171,13 +171,13 @@ GLOBAL_LIST_EMPTY(lifts)
 	if(!(AM in lift_load))
 		return
 	LAZYREMOVE(lift_load, AM)
-	UnregisterSignal(AM, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(AM, COMSIG_QDELETING)
 
 /obj/structure/industrial_lift/proc/AddItemOnLift(datum/source, atom/movable/AM)
 	if(AM in lift_load)
 		return
 	LAZYADD(lift_load, AM)
-	RegisterSignal(AM, COMSIG_PARENT_QDELETING, PROC_REF(RemoveItemFromLift))
+	RegisterSignal(AM, COMSIG_QDELETING, PROC_REF(RemoveItemFromLift))
 
 /obj/structure/industrial_lift/proc/lift_platform_expansion(datum/lift_master/lift_master_datum)
 	. = list()
