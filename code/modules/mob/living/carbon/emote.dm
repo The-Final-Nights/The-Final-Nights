@@ -157,15 +157,3 @@
 	else
 		qdel(noogie)
 		to_chat(user, "<span class='warning'>You're incapable of noogie'ing in your current state.</span>")
-
-/datum/emote/living/vomit
-	key = "vomit"
-	key_third_person = "vomits"
-	message = "vomits!"
-	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
-
-/datum/emote/living/vomit/run_emote(mob/user, params, type_override, intentional)
-	. = ..()
-	if(isliving(user))
-		var/mob/living/carbon/living = user
-		living.vomit()
