@@ -85,7 +85,7 @@
 				if(A.objectives)
 					dat += "[printobjectives(A.objectives)]<BR>"
 		var/masquerade_level = " followed the Masquerade Tradition perfectly."
-		switch(host.masquerade)
+		switch(host.masquerade_score)
 			if(4)
 				masquerade_level = " broke the Masquerade rule once."
 			if(3)
@@ -234,6 +234,8 @@
 		//putting this here for now not sure if elsewhere is better?
 		RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
 
+	GLOB.kindred_list += C
+
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	if(!iskindred(new_species)) //Only remove this if they're shifting to a non-vampire species.
@@ -244,6 +246,8 @@
 		for(var/datum/action/A in C.actions)
 			if(A?.vampiric)
 				A.Remove(C)
+
+	GLOB.kindred_list -= C
 
 /datum/action/blood_power
 	name = "Blood Power"
@@ -365,6 +369,7 @@
 	childe.adjustFireLoss(-25, TRUE)
 	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+2)
 	childe.drunked_of |= "[sire.dna.real_name]"
+	childe.mind?.ingested_blood = sire
 
 	// Sabbatist Embrace Logic
 	if(sire.mind && is_sabbatist(sire))

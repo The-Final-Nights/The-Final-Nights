@@ -542,7 +542,12 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	name = "swat"
 	explanation_text = "Follow the orders of your commander."
 	martyr_compatible = TRUE
-
+//TFN CHANGE
+/datum/objective/first_team
+	name = "first_team"
+	explanation_text = "Follow the orders of your sergeant. Protect ENDRON executives. Liquidate hazards."
+	martyr_compatible = TRUE
+//END TFN CHANGE
 /datum/objective/nuclear/check_completion()
 	if(SSticker && SSticker.mode && SSticker.mode.station_was_nuked)
 		return TRUE

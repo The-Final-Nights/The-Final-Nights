@@ -5,7 +5,7 @@
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Anarchs and the Traditions"
+	supervisors = "the Free State and the Masquerade"
 	selection_color = "#434343"
 
 	outfit = /datum/outfit/job/barkeeper
@@ -28,13 +28,14 @@
 		"Bouncer",
 		"Emissary",
 		"Sweeper",
+		"Liaison",
 		"Voivode"
 	)
 
-	v_duty = "You lead the Anarchs in the City. A Camarilla faction that values freedom and individuality. While not a fan of the traditions, you still respect the Masquerade."
+	v_duty = "You lead the Barony of San Francisco as an independent leader of the Free State. While you do not respect the traditions, you still honor the Masquerade. "
 	minimal_masquerade = 3
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_BAALI, CLAN_BANU_HAQIM, CLAN_NONE, CLAN_TZIMISCE, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_VENTRUE, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_SETITES)
+	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_BANU_HAQIM, CLAN_NONE, CLAN_TZIMISCE, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_VENTRUE, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_SETITES)
 	experience_addition = 20
 
 /datum/outfit/job/barkeeper

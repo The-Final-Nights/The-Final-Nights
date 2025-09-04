@@ -226,10 +226,10 @@
 
 /datum/antagonist/gang/red
 	show_in_antagpanel = TRUE
-	name = "San Fierro Triad"
-	roundend_category = "The San Fierro Triad gangsters"
-	gang_name = "San Fierro Triad"
-	gang_id = "SFT"
+	name = "San Fierro Axe Gang"
+	roundend_category = "The San Francisco gangsters"
+	gang_name = "Axe Gang Surplus"
+	gang_id = "AGS"
 	acceptable_clothes = list(/obj/item/clothing/head/soft/red,
 							/obj/item/clothing/neck/scarf/red,
 							/obj/item/clothing/suit/jacket/letterman_red,
@@ -240,7 +240,7 @@
 						/obj/item/clothing/under/color/red,
 						/obj/item/toy/crayon/spraycan)
 	gang_objective = "The Spinward Stellar Coalition police intend to interfere with our operations, by sending undercover cops. Find them and eliminate them all."
-	antag_hud_name = "Triad"
+	antag_hud_name = "Axe Gang"
 
 /datum/antagonist/gang/red/check_gang_objective()
 	for(var/C in get_antag_minds(/datum/antagonist/ert/families/undercover_cop))

@@ -272,9 +272,6 @@ GLOBAL_LIST_EMPTY(crematoriums)
 						SEND_SIGNAL(HM, COMSIG_PATH_HIT, PATH_SCORE_DOWN, 0)
 			if(user)
 				log_combat(user, M, "cremated")
-				if(!iskindred(M) && isnpc(M) && M.stat == DEAD)
-					var/mob/living/carbon/human/HM = user
-					HM.AdjustMasquerade(1)
 			else
 				M.log_message("was cremated", LOG_ATTACK)
 			if(M.stat != DEAD)		//So it's the bug which causes to loose humanity if burning corpses

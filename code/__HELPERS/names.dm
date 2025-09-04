@@ -124,6 +124,24 @@ GLOBAL_VAR(command_name)
 
 	return name
 
+/proc/first_team_name() //TFN Change Start
+	var/name = ""
+
+	// Prefix
+	name += pick("Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-ray", "Yankee", "Zulu")
+
+	// Suffix
+	if	(prob(80))
+		name += " "
+
+		// Full
+		if(prob(60))
+			name += pick("Squad", "Team", "Unit", "Group", "Section", "Element", "Detachment")
+		// Broken
+		else
+			name += pick("-", "*", "")
+			name += "Ops"
+//TFN Change End
 /proc/national_guard_name()
 	var/name = ""
 

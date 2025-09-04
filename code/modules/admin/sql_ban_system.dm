@@ -240,7 +240,7 @@
 							"Clan Tzimisce" = GLOB.tzimisce_positions,
 							"Law Enforcement" = GLOB.police_positions + GLOB.national_security_positions,
 							"Warehouse" = GLOB.warehouse_positions,
-							"Triad" = GLOB.gang_positions,
+							"Axe Gang" = GLOB.gang_positions,
 							"Unaligned" = GLOB.citizen_positions,
 							"City Services" = GLOB.services_positions,
 							"St Johns" = GLOB.clinic_positions,

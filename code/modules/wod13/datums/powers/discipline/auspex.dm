@@ -54,7 +54,7 @@
 	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 	abductor_hud.add_hud_to(owner)
 
-	owner.see_invisible = OBFUSCATE_INVISIBILITY
+	owner.see_invisible = SEE_OBFUSCATE_INVISIBLITY
 
 	owner.update_sight()
 
