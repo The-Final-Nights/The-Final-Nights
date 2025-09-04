@@ -11,6 +11,22 @@
 
 	activate_sound = 'code/modules/wod13/sounds/visceratika.ogg'
 
+/datum/discipline/visceratika/post_gain()
+	. = ..()
+	if(level >= 4)
+		owner.dna?.species.brutemod *= 0.8 // Netresult 0.4 Brute
+		owner.dna?.species.burnmod *= 0.5 // Net result 1 Burn
+		owner.physiology.clone_mod *= 0.9 // Net result 0.9 Clone
+		ADD_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
+		ADD_TRAIT(owner, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
+		if(owner.clan?.name != CLAN_GARGOYLE)
+			ADD_TRAIT(owner, TRAIT_MASQUERADE_VIOLATING_FACE, TRAIT_CLAN)
+		owner.skin_tone = "albino"
+		owner.set_body_sprite("gargoyle")
+		owner.update_body_parts()
+		owner.update_body()
+
+
 //WHISPERS OF THE CHAMBER
 /datum/discipline_power/visceratika/whispers_of_the_chamber
 	name = "Whispers of the Chamber"
@@ -82,6 +98,8 @@
 	. = ..()
 	owner.alpha = 255
 
+
+
 //ARMOR OF TERRA
 /datum/discipline_power/visceratika/armor_of_terra
 	name = "Armor of Terra"
@@ -90,47 +108,12 @@
 	level = 4
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_LYING
 
-	violates_masquerade = TRUE
-
-	toggled = TRUE
-	cooldown_length = 1 MINUTES
-	duration_length = 1 MINUTES
+	vitae_cost = 0
 
 /datum/discipline_power/visceratika/armor_of_terra/activate()
 	. = ..()
-	addtimer(CALLBACK(src, PROC_REF(try_deactivate), null, TRUE), duration_length * 2) //failsafe (no, you can't stay in statue mode forever, 2 mins is enough)
-	to_chat(owner, span_warning("You harden your skin far more than you're able to take for long!"))
-	ADD_TRAIT(owner, TRAIT_STUNIMMUNE, MAGIC)
-	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC)
-	ADD_TRAIT(owner, TRAIT_NOBLEED, MAGIC_TRAIT)
-	ADD_TRAIT(owner, TRAIT_MUTE, STATUE_MUTE)
-	ADD_TRAIT(owner, TRAIT_IMMOBILIZED, MAGIC_TRAIT)
-	ADD_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
+	to_chat(owner, span_danger("This is a passive ability. The Effects are already active"))
 
-	owner.name_override = "Statue of [owner.real_name]"
-	owner.status_flags |= GODMODE
-	var/newcolor = list(rgb(77,77,77), rgb(150,150,150), rgb(28,28,28), rgb(0,0,0))
-	owner.add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
-
-	for(var/obj/stuff in owner.contents) //no stealing
-		ADD_TRAIT(stuff, TRAIT_NODROP, MAGIC)
-
-/datum/discipline_power/visceratika/armor_of_terra/deactivate()
-	. = ..()
-	to_chat(owner, span_warning("You soften your skin, to your normal hardness."))
-	REMOVE_TRAIT(owner, TRAIT_STUNIMMUNE, MAGIC)
-	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC)
-	REMOVE_TRAIT(owner, TRAIT_NOBLEED, MAGIC_TRAIT)
-	REMOVE_TRAIT(owner, TRAIT_MUTE, STATUE_MUTE)
-	REMOVE_TRAIT(owner, TRAIT_IMMOBILIZED, MAGIC_TRAIT)
-	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
-
-	owner.name_override = null
-	owner.status_flags &= ~GODMODE
-	owner.remove_atom_colour(FIXED_COLOUR_PRIORITY)
-
-	for(var/obj/item/stuff in owner.contents)
-		REMOVE_TRAIT(stuff, TRAIT_NODROP, MAGIC)
 
 //FLOW WITHIN THE MOUNTAIN
 /datum/discipline_power/visceratika/flow_within_the_mountain
