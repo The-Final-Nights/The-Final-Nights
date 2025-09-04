@@ -9,7 +9,7 @@
 		diag_hud.add_to_hud(src)
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
-	src.calculate_max_bloodpool
+	src.calculate_max_bloodpool()
 
 //TFN EDIT
 /mob/living/proc/calculate_max_bloodpool()
