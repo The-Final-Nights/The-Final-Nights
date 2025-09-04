@@ -200,7 +200,7 @@
 		/obj/item/food/cheesewedge = 1
 	)
 	result = /obj/item/food/loaded_baked_potato
-	category = CAT_MISCFOOD
+	subcategory = CAT_MISCFOOD
 */
 
 /datum/crafting_recipe/food/cheesyfries
@@ -382,3 +382,44 @@
 	)
 	result = /obj/item/food/enchiladas
 	subcategory = CAT_MEXICAN
+
+//Sandwiches
+/datum/crafting_recipe/food/sandwich
+	name = "Sandwich"
+	reqs = list(
+		/obj/item/food/breadslice/plain = 2,
+		/obj/item/food/meat/steak = 1,
+		/obj/item/food/cheesewedge = 1
+	)
+	result = /obj/item/food/sandwich
+	subcategory = CAT_SANDWICH
+
+/datum/crafting_recipe/food/grilledcheesesandwich
+	name = "Cheese sandwich"
+	reqs = list(
+		/obj/item/food/breadslice/plain = 2,
+		/obj/item/food/cheesewedge = 2
+	)
+	result = /obj/item/food/grilled_cheese_sandwich
+	subcategory = CAT_SANDWICH
+
+/datum/crafting_recipe/food/blt
+	name = "BLT"
+	reqs = list(
+		/obj/item/food/breadslice/plain = 2,
+		/obj/item/food/meat/bacon = 2,
+		/obj/item/food/grown/cabbage = 1,
+		/obj/item/food/grown/tomato = 1
+	)
+	result = /obj/item/food/blt
+	subcategory = CAT_SANDWICH
+
+/datum/crafting_recipe/food/hotdog
+	name = "Hotdog"
+	reqs = list(
+		/obj/item/food/bun = 1,
+		/obj/item/food/sausage = 1,
+		/datum/reagent/consumable/ketchup = 5
+	)
+	result = /obj/item/food/hotdog
+	subcategory = CAT_SANDWICH

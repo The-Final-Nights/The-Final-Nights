@@ -270,11 +270,11 @@
 /area/vtm/interior/police)
 "adq" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/food/vampire/pizza,
-/obj/item/food/vampire/pizza,
-/obj/item/food/vampire/pizza,
+/obj/item/food/pizzaslice/square,
+/obj/item/food/pizzaslice/square,
+/obj/item/food/pizzaslice/square,
 /obj/item/food/vampire/nugget,
-/obj/item/food/vampire/burger,
+/obj/item/food/burger/plain,
 /obj/item/reagent_containers/blood/random,
 /obj/item/reagent_containers/blood/random,
 /turf/open/floor/plating/parquetry,
@@ -10040,7 +10040,7 @@
 	pixel_y = 7;
 	pixel_x = 11
 	},
-/obj/item/food/vampire/donut{
+/obj/item/food/donut/plain{
 	pixel_y = -7;
 	pixel_x = -2
 	},
@@ -24458,11 +24458,11 @@
 	dir = 1
 	},
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/food/vampire/pizza,
-/obj/item/food/vampire/pizza,
-/obj/item/food/vampire/pizza,
+/obj/item/food/pizzaslice/square,
+/obj/item/food/pizzaslice/square,
+/obj/item/food/pizzaslice/square,
 /obj/item/food/vampire/nugget,
-/obj/item/food/vampire/burger,
+/obj/item/food/burger/plain,
 /obj/effect/turf_decal/siding/white{
 	color = "#636363"
 	},
@@ -34455,7 +34455,7 @@
 /area/vtm/interior/cog/caern)
 "iRg" = (
 /obj/structure/table,
-/obj/item/food/vampire/burger,
+/obj/item/food/burger/plain,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "iRo" = (
@@ -44792,7 +44792,7 @@
 /area/vtm/interior)
 "lrR" = (
 /obj/structure/table,
-/obj/item/food/vampire/pizza,
+/obj/item/food/pizzaslice/square,
 /obj/structure/railing/metal{
 	dir = 4
 	},
@@ -48507,7 +48507,7 @@
 	pixel_y = 30;
 	pixel_x = 7
 	},
-/obj/item/food/vampire/taco{
+/obj/item/food/taco{
 	pixel_y = 4
 	},
 /turf/open/floor/plating/bacotell,
@@ -80346,7 +80346,7 @@
 /area/vtm/forest)
 "ukh" = (
 /obj/structure/table/wood,
-/obj/item/food/vampire/pizza{
+/obj/item/food/pizzaslice/square{
 	pixel_y = 16
 	},
 /obj/item/storage/box/cups,
