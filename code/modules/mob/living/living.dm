@@ -33,7 +33,7 @@
 		if(1 to 3)
 			generation_blood_bonus = INFINITY
 			bloodquality += 100
-	maxbloodpool = 10 + (((13 - generation) * 3) + generation_blood_bonus)
+	maxbloodpool = max(10 + (((13 - generation) * 3) + generation_blood_bonus), 10)
 //TFN EDIT END
 
 /mob/living/ComponentInitialize()
