@@ -357,5 +357,8 @@
 /datum/emote/living/carbon/human/vomit/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
 	var/mob/living/carbon/human/living = user
-	living.vomit(force = TRUE)
+	if(iskindred(user) || iscathayan(user))
+		living.vomit(force = TRUE, blood = TRUE)
+	else
+		living.vomit(force = TRUE)
 
