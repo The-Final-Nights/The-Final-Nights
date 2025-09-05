@@ -654,8 +654,8 @@ Dancer
 	desc = "You have an affinity for bugs, and can summon them with Animalism. They also have an affinity for you, residing on your person and nibbling away at your skin."
 	value = -1
 	mob_trait = TRAIT_UNLIVING_HIVE
-	gain_text = "<span class='notice'>You feel skittering across your skin.</span>"
-	lose_text = "<span class='notice'>You feel an itch fade away.</span>"
+	gain_text = span_danger("You feel skittering across your skin.")
+	lose_text = span_notice("You feel an itch fade away.")
 	allowed_species = list("Vampire")
 
 /datum/quirk/unliving_hive/on_process(delta_time) //don't want it to be TOO annoying, but a few bug bites will happen.

@@ -457,6 +457,8 @@
 					msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
 
 		//examine text for unusual appearances
+		//TFN ADDITION START - https://github.com/The-Final-Nights/The-Final-Nights/pull/759
+		// Just including this whole block since its been here this entire time.
 		if (iskindred(src) && is_face_visible())
 			switch (GET_BODY_SPRITE(src))
 				if (CLAN_NOSFERATU)
@@ -478,6 +480,7 @@
 				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
 			if (HAS_TRAIT(src, TRAIT_UNLIVING_HIVE))
 				msg += span_warning("[p_they(TRUE)] seems to be covered in bugs!<br>")
+		//TFN ADDITION END - https://github.com/The-Final-Nights/The-Final-Nights/pull/759
 
 		if (iszombie(src) && is_face_visible())
 			msg += span_danger("<b>[p_they(TRUE)] [p_are()] a decayed corpse!</b><br>")
