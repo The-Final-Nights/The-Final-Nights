@@ -1,0 +1,4 @@
+author: "Dusk-a"
+delete-after: True
+changes:
+  - rscadd: "Added the standard robes to the character creation loadout"
