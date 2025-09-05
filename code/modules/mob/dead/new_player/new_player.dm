@@ -342,8 +342,6 @@
 		return JOB_UNAVAILABLE_VAMPIRE_AGE
 	if((client.prefs.generation > job.minimal_generation) && !bypass)
 		return JOB_UNAVAILABLE_GENERATION
-	if((client.prefs.masquerade < job.minimal_masquerade) && !bypass)
-		return JOB_UNAVAILABLE_MASQUERADE
 	if(!job.allowed_species.Find(client.prefs.pref_species.name) && !bypass)
 		return JOB_UNAVAILABLE_SPECIES
 	if ((job.species_slots[client.prefs.pref_species.name] == 0) && !bypass)
@@ -558,8 +556,7 @@
 	new_character = .
 	if(transfer_after)
 		transfer_character()
-//	if(client.prefs.archtype)
-//		H.__archetype = new client.prefs.archtype
+
 /mob/dead/new_player/proc/transfer_character()
 	. = new_character
 	if(.)

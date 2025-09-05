@@ -109,6 +109,8 @@
 	if(important_contact_of && owner && number)
 		GLOB.important_contacts[important_contact_of] = new /datum/phonecontact(owner.real_name, number)
 
+	AddComponent(/datum/component/violation_observer, FALSE)
+
 /obj/item/vamp/phone/Destroy()
 	GLOB.phone_numbers_list -= number
 	GLOB.phones_list -= src
@@ -591,6 +593,7 @@
 				var/obj/phonevoice/VOIC = new(online)
 				VOIC.name = voice_saying
 				VOIC.speech_span = spchspn
+				VOIC.phone = src
 				VOIC.say("[message]")
 				qdel(VOIC)
 
@@ -833,6 +836,11 @@
 		list(NETWORK_ID = ANARCH_NETWORK, OUR_ROLE = "Club Bartender", USE_JOB_TITLE = FALSE)
 		)
 
+/obj/item/vamp/phone/liaison
+	contact_networks_pre_init = list(
+		list(NETWORK_ID = ANARCH_NETWORK, OUR_ROLE = "Club Promotor", USE_JOB_TITLE = FALSE)
+		)
+
 // WAREHOUSE
 
 /obj/item/vamp/phone/dealer
@@ -847,11 +855,11 @@
 		list(NETWORK_ID = WAREHOUSE_NETWORK, OUR_ROLE = "Supply Technician", USE_JOB_TITLE = FALSE)
 		)
 
-// TRIADS
+// AXE GANG
 
-/obj/item/vamp/phone/triads_soldier
+/obj/item/vamp/phone/axe_gangster
 	contact_networks_pre_init = list(
-		list(NETWORK_ID = TRIADS_NETWORK, OUR_ROLE = "Chinatown Associate", USE_JOB_TITLE = FALSE)
+		list(NETWORK_ID = AXES_NETWORK, OUR_ROLE = "Chinatown Associate", USE_JOB_TITLE = FALSE)
 		)
 
 // ENDRON

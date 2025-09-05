@@ -916,10 +916,7 @@
 		if(general_record.fields["name"] == mob_occupant.real_name)
 			qdel(general_record)
 
-	if(mob_occupant.bloodhunted)
-		SSbloodhunt.hunted -= mob_occupant
-		mob_occupant.bloodhunted = FALSE
-		SSbloodhunt.update_shit()
+	SSmasquerade.cryo_masquerade_breacher(mob_occupant, FALSE)
 
 	// Ghost and delete the mob.
 	if(!mob_occupant.get_ghost(TRUE))

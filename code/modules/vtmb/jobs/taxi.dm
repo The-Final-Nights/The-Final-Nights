@@ -24,11 +24,6 @@
 	experience_addition = 10
 	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_SALUBRI_WARRIOR, CLAN_NAGARAJA, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE, CLAN_KIASYD, CLAN_CAPPADOCIAN)
 
-
-/datum/job/vamp/taxi/after_spawn(mob/living/H, mob/M, latejoin = FALSE)
-	..()
-	H.taxist = TRUE
-
 /datum/outfit/job/taxi
 	name = "Taxi Driver"
 	jobtype = /datum/job/vamp/taxi

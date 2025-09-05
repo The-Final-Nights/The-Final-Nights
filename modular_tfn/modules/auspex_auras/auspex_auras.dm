@@ -33,9 +33,6 @@
 				holder.color = AURA_UNDEAD_HARM
 			else
 				holder.color = AURA_UNDEAD_HELP
-		//only Baali can get antifrenzy through selling their soul, so this gives them the unholy halo (MAKE THIS BETTER)
-		if (H.antifrenzy)
-			holder.icon = 'icons/effects/32x64.dmi' //I'm not fucking with this until GAGS are done being ported, antifrenzy aura has some weird colorized components.
 		//black aura for diablerists
 		if (H.diablerist || H.fakediablerist)
 			holder.color = AURA_DIAB  //I don't understand why someone made a specific sprite for diab aura that's just blackscaled normal aura, instead of making it a defined color. This is far more elegant.
