@@ -3516,6 +3516,7 @@
 #include "code\modules\vtmb\jobs\dispatcher.dm"
 #include "code\modules\vtmb\jobs\doctor.dm"
 #include "code\modules\vtmb\jobs\fbi.dm"
+#include "code\modules\vtmb\jobs\first_team.dm"
 #include "code\modules\vtmb\jobs\gargoyle.dm"
 #include "code\modules\vtmb\jobs\giovanni.dm"
 #include "code\modules\vtmb\jobs\graveyard_keeper.dm"
