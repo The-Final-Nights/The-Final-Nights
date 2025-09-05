@@ -58,10 +58,6 @@
 #define COMSIG_ATOM_CREATED "atom_created"
 ///from base of atom/attackby(): (/obj/item, /mob/living, params)
 #define COMSIG_PARENT_ATTACKBY "atom_attackby"
-///from base of atom/examine(): (/mob)
-#define COMSIG_PARENT_EXAMINE "atom_examine"
-///from base of atom/get_examine_name(): (/mob, list/overrides)
-#define COMSIG_PARENT_EXAMINE_MORE "atom_examine_more"                    ///from base of atom/examine_more(): (/mob)
 
 ///called when a wrapped up structure is opened by hand
 #define COMSIG_STRUCTURE_UNWRAPPED "structure_unwrapped"

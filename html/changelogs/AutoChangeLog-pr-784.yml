@@ -1,0 +1,5 @@
+author: "Hardly"
+delete-after: True
+changes:
+  - rscadd: "Vomit emote"
+  - balance: "Dominate users can now force others to vomit"

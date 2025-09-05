@@ -1,0 +1,5 @@
+author: "Kolibri-B"
+delete-after: True
+changes:
+  - rscadd: "Added a new Abyss Mysticism ritual: Reflections of Hollow Revelation"
+  - refactor: "Refactors some Abyss Mysticism-related code."

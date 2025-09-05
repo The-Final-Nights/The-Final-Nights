@@ -1,0 +1,5 @@
+author: "XeonMations"
+delete-after: True
+changes:
+  - bugfix: "Fixed painting not working."
+  - qol: "A lot of painting related systems have been refurbished."
