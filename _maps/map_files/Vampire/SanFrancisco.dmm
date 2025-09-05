@@ -25658,6 +25658,7 @@
 /area/vtm/interior/laundromat)
 "gzX" = (
 /obj/structure/rack,
+/obj/item/storage/box/syringes,
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/shop)
 "gAh" = (
@@ -35808,8 +35809,8 @@
 /area/vtm/interior/techshop)
 "iWo" = (
 /obj/structure/rack,
-/obj/item/healthanalyzer,
-/obj/item/healthanalyzer,
+/obj/item/clothing/suit/toggle/labcoat/paramedic,
+/obj/item/clothing/suit/toggle/labcoat/paramedic,
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/shop)
 "iWu" = (
