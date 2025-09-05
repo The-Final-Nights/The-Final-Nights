@@ -149,8 +149,8 @@
 	totaldice = (owner.get_total_physique() + fortitudelevel)
 	var/mypower = SSroll.storyteller_roll(totaldice, difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
 	mypower = clamp(mypower, 1, 5)
-	owner.physiology.armor.melee += (15*mypower)
-	owner.physiology.armor.bullet += (15*mypower)
+	owner.physiology.armor.melee += (10*mypower)
+	owner.physiology.armor.bullet += (10*mypower)
 	animate(owner, color = "#b86262", time = 1 SECONDS, loop = 1)
 	lastmypower = mypower
 
