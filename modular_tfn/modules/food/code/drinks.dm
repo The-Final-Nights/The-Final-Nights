@@ -105,14 +105,13 @@
 	list_reagents = list(/datum/reagent/consumable/sodawater = 50)
 	foodtype = SUGAR
 
-/obj/item/reagent_containers/food/condiment/vampiremilk
+/obj/item/reagent_containers/food/condiment/milk
 	name = "milk"
 	desc = "More milk..."
-	icon_state = "milk"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
 	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	list_reagents = list(/datum/reagent/consumable/milk = 50)
 	fill_icon_thresholds = null
 
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk
+/obj/item/reagent_containers/food/condiment/milk/malk
 	desc = "a carton of fish-brand milk, a subsidary of malk incorporated."

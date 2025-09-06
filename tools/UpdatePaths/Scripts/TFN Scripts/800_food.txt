@@ -4,3 +4,6 @@
 /obj/item/food/vampire/donut : /obj/item/food/donut/plain {@OLD}
 /obj/item/food/vampire/pizza : /obj/item/food/pizzaslice/square {@OLD}
 /obj/item/food/vampire/taco : /obj/item/food/taco {@OLD}
+
+/obj/item/reagent_containers/food/condiment/vampiremilk : /obj/item/reagent_containers/food/condiment/milk {@OLD}
+/obj/item/reagent_containers/food/condiment/vampiremilk/malk : /obj/item/reagent_containers/food/condiment/milk/malk {@OLD}
