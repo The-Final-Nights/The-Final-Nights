@@ -4,7 +4,7 @@
 var/static/regex/stun_words = regex("stop|wait|stand still|hold on|halt|cease")
 var/static/regex/knockdown_words = regex("drop|fall|trip|knockdown")
 var/static/regex/sleep_words = regex("sleep|slumber|rest")
-//var/static/regex/vomit_words = regex("vomit|throw up|sick")
+var/static/regex/vomit_words = regex("vomit|throw up|sick")
 var/static/regex/silence_words = regex("shut up|silence|be silent|ssh|quiet|hush")
 //var/static/regex/hallucinate_words = regex("see the truth|hallucinate")
 var/static/regex/wakeup_words = regex("wake up|awaken")
@@ -63,13 +63,11 @@ var/static/regex/multispin_words = regex("like a record baby|right round")
 		for(var/mob/living/carbon/C in listeners)
 			C.Sleeping(40 * power_multiplier)
 
-	//VOMIT (commented out)
-	/*
+	//VOMIT
 	else if(findtext(message, vomit_words))
 		cooldown = COOLDOWN_STUN
 		for(var/mob/living/carbon/C in listeners)
 			C.vomit(10 * power_multiplier, distance = power_multiplier)
-	*/
 
 	//SILENCE
 	else if(findtext(message, silence_words))

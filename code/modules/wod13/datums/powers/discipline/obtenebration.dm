@@ -165,13 +165,13 @@
 		return
 
 	if(istype(H.get_active_held_item(), /obj/item/mystic_tome))
-		var/list/shit = list()
+		var/list/rituals = list()
 		for(var/i in subtypesof(/obj/abyssrune))
 			var/obj/abyssrune/R = new i(owner)
 			if(R.mystlevel <= level)
-				shit += i
+				rituals += i
 			qdel(R)
-		var/ritual = input(owner, "Choose rune to draw:", "Mysticism") as null|anything in shit
+		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Mysticism", rituals, null)
 		if(ritual)
 			drawing = TRUE
 			if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
@@ -182,18 +182,18 @@
 			else
 				drawing = FALSE
 	else
-		var/list/shit = list()
+		var/list/rituals = list()
 		for(var/i in subtypesof(/obj/abyssrune))
 			var/obj/abyssrune/R = new i(owner)
 			if(R.mystlevel <= level)
-				shit += i
+				rituals += i
 			qdel(R)
-		var/ritual = input(owner, "Choose rune to draw (You need a Mystic Tome to reduce random):", "Mysticism") as null|anything in list("???")
+		var/ritual = tgui_input_list(owner, "Choose rune to draw (You need a Mystic Tome to reduce random):", "Mysticism", list("???"))
 		if(ritual)
 			drawing = TRUE
 			if(do_after(H, 30*max(1, 5-H.mentality), H))
 				drawing = FALSE
-				var/rune = pick(shit)
+				var/rune = pick(rituals)
 				new rune(H.loc)
 				H.bloodpool = max(H.bloodpool - 2, 0)
 				SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)

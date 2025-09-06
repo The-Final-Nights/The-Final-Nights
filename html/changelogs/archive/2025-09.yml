@@ -40,3 +40,40 @@
       floor, maid/butler uniforms, private meeting room. moved the basement entrance
       out of sight
   - bugfix: gio bar tables fixed
+2025-09-04:
+  HanSolo1519:
+  - rscadd: Adds wristwatches to Voivode loadout.
+  Kolibri-B:
+  - rscadd: Added a +1 success bonus to nat 10 rolls
+  - balance: Rebalances the dice rolling system slightly
+2025-09-05:
+  AlmostLikeClockwork:
+  - rscadd: Added some more smokes to the smoke vendor
+  Dusk-a:
+  - rscadd: Added the standard robes to the character creation loadout
+  Hardly:
+  - rscadd: Vomit emote
+  - balance: Dominate users can now force others to vomit
+  Kolibri-B:
+  - rscadd: 'Added a new Abyss Mysticism ritual: Reflections of Hollow Revelation'
+  - refactor: Refactors some Abyss Mysticism-related code.
+  TheTrueSilverRat:
+  - bugfix: Nerfed Val 4. I am the Glorious Maiden of the Firmament. Handcrafted by
+      God
+  XeonMations:
+  - bugfix: Fixed painting not working.
+  - qol: A lot of painting related systems have been refurbished.
+2025-09-06:
+  SoreYew:
+  - rscadd: Adds rubber, "high impact incapacitation," silver 12g rounds, and 5.45
+      silver
+  - map: Adds new less-lethals to the PD, 5.45mm and12g silver to the Anarchs, and
+      illegal vendor
+  - bugfix: Axe Gang can open their doors now
+  - qol: Change up the Malkavian Haven
+  - balance: rebalances Malkavian Haven
+  WhereAmO:
+  - rscadd: Unliving Hive quirk, with some visible text for having bugs on your person
+      and a small amount of damage over time.
+  - rscadd: Some new insect themed summons for Animalism, with the right quirk.
+  - bugfix: WOD13 specific cockroaches now have their sprites back
