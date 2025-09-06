@@ -86,16 +86,6 @@
 	result = /obj/item/food/burger/baconburger
 	subcategory = CAT_BURGER
 
-/datum/crafting_recipe/food/ribburger
-	name = "McRib"
-	reqs = list(
-			/obj/item/food/bbqribs = 1, //The sauce is already included in the ribs
-			/obj/item/food/onion_slice = 1, //feel free to remove if too burdensome.
-			/obj/item/food/bun = 1
-	)
-	result = /obj/item/food/burger/rib
-	subcategory = CAT_BURGER
-
 /datum/crafting_recipe/food/chickenburger
 	name = "Chicken Sandwich"
 	reqs = list(
@@ -171,6 +161,15 @@
 	)
 	result = /obj/item/food/omelette
 	subcategory = CAT_EGG
+
+/datum/crafting_recipe/food/ribs
+	name = "BBQ Ribs"
+	reqs = list(
+		/datum/reagent/consumable/bbqsauce = 5,
+		/obj/item/food/meat/steak = 2,
+	)
+	result = /obj/item/food/bbqribs
+	subcategory = CAT_MEAT
 
 /datum/crafting_recipe/food/fishandchips
 	name = "Fish and chips"

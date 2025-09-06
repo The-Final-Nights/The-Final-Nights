@@ -17630,7 +17630,7 @@
 	pixel_y = 7;
 	pixel_x = 7
 	},
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk{
+/obj/item/reagent_containers/food/condiment/milk/malk{
 	pixel_y = 2;
 	pixel_x = -11
 	},
@@ -19790,8 +19790,8 @@
 /obj/item/food/soup/stew,
 /obj/item/food/soup/stew,
 /obj/item/food/soup/stew,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
 /obj/fusebox,
 /obj/structure/railing/metal{
 	dir = 8
@@ -23614,9 +23614,9 @@
 /area/vtm/sewer/police)
 "geI" = (
 /obj/structure/closet/secure_closet/freezer/meat/open,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
 /turf/open/floor/plating/circled{
 	color = "#95de52"
 	},
@@ -29737,7 +29737,7 @@
 /area/vtm/interior/nosferatu_office)
 "hKu" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
 /obj/item/storage/fancy/egg_box,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior)
@@ -30876,8 +30876,8 @@
 /area/vtm/ghetto)
 "hYw" = (
 /obj/structure/closet/secure_closet/freezer,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
 /obj/item/food/meat/slab/human,
 /obj/item/food/meat/slab/human,
 /obj/item/food/meat/slab/human,
@@ -48629,13 +48629,13 @@
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "moG" = (
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
 /obj/structure/closet/secure_closet/freezer,
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
@@ -55419,7 +55419,7 @@
 "nVr" = (
 /obj/structure/closet/crate/freezer/fridge,
 /obj/item/storage/box/ingredients/carnivore,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/circled,
 /area/vtm/interior)
@@ -57976,7 +57976,7 @@
 /area/vtm/interior/tzimisce_manor)
 "ozZ" = (
 /obj/structure/closet/crate/freezer/fridge,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
 /obj/item/storage/fancy/egg_box,
 /obj/machinery/light/small{
 	dir = 1
@@ -66066,9 +66066,9 @@
 /obj/item/food/cheesewheel,
 /obj/item/food/cheesewheel,
 /obj/item/food/cheesewheel,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /obj/item/reagent_containers/food/condiment/flour,
 /obj/item/reagent_containers/food/condiment/flour,
@@ -83626,11 +83626,11 @@
 	color = "#39537F";
 	dir = 4
 	},
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk{
+/obj/item/reagent_containers/food/condiment/milk/malk{
 	pixel_y = 14;
 	pixel_x = -8
 	},
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk,
+/obj/item/reagent_containers/food/condiment/milk/malk,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/clinic/haven)
 "vcn" = (
@@ -86707,7 +86707,7 @@
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#aa4f25"
 	},
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk,
+/obj/item/reagent_containers/food/condiment/milk/malk,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/clinic/haven)
 "vWy" = (
@@ -94035,7 +94035,7 @@
 	color = "#39537F";
 	dir = 1
 	},
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk{
+/obj/item/reagent_containers/food/condiment/milk/malk{
 	pixel_y = 2;
 	pixel_x = -11
 	},
