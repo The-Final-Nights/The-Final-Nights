@@ -1,0 +1,5 @@
+author: "SoreYew"
+delete-after: True
+changes:
+  - rscadd: "Adds rubber, \"high impact incapacitation,\" silver 12g rounds, and 5.45 silver"
+  - map: "Adds new less-lethals to the PD, 5.45mm and12g silver to the Anarchs, and illegal vendor"

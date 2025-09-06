@@ -23,6 +23,8 @@
 		new /datum/data/mining_equipment("silver 9mm ammo",	/obj/item/ammo_box/vampire/c9mm/silver,	5000),
 		new /datum/data/mining_equipment("silver .45 ACP ammo",	/obj/item/ammo_box/vampire/c45acp/silver,	6000),
 		new /datum/data/mining_equipment("silver .44 ammo",	/obj/item/ammo_box/vampire/c44/silver,	7000),
+		new /datum/data/mining_equipment("silver 12g slug ammo", /obj/item/ammo_box/vampire/c12g/silver,	7500),
+		new /datum/data/mining_equipment("silver 5.45 ammo", /obj/item/ammo_box/vampire/c545/silver, 8000),
 		new /datum/data/mining_equipment("silver 5.56 ammo",	/obj/item/ammo_box/vampire/c556/silver,	8000),
 		new /datum/data/mining_equipment("incendiary 5.56 ammo",	/obj/item/ammo_box/vampire/c556/incendiary,	9000)
 	)
@@ -44,8 +46,13 @@
 	prize_list = list(new /datum/data/mining_equipment("malboro",	/obj/item/storage/fancy/cigarettes/cigpack_robust,	50),
 		new /datum/data/mining_equipment("newport",		/obj/item/storage/fancy/cigarettes/cigpack_xeno,	30),
 		new /datum/data/mining_equipment("camel",	/obj/item/storage/fancy/cigarettes/dromedaryco,	30),
+		new /datum/data/mining_equipment("carp classic",	/obj/item/storage/fancy/cigarettes/cigpack_carp,	30),
 		new /datum/data/mining_equipment("zippo lighter",	/obj/item/lighter,	20),
-		new /datum/data/mining_equipment("lighter",		/obj/item/lighter/greyscale,	10)
+		new /datum/data/mining_equipment("lighter",		/obj/item/lighter/greyscale,	10),
+		new /datum/data/mining_equipment("robust gold", /obj/item/storage/fancy/cigarettes/cigpack_robustgold, 100),
+		new /datum/data/mining_equipment("cigar ", /obj/item/storage/fancy/cigarettes/cigars, 100),
+		new /datum/data/mining_equipment("havana cigar", /obj/item/storage/fancy/cigarettes/cigars/havana, 100),
+		new /datum/data/mining_equipment("cohiba cigar", /obj/item/storage/fancy/cigarettes/cigars/cohiba, 100)
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/gas

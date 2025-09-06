@@ -890,6 +890,10 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 
 	return corrupted_text
 
+/// Checks if the char is lowercase
+#define is_lowercase_character(X) ((text2ascii(X) <= 122) && (text2ascii(X) >= 97))
+/// Checks if the char is uppercase
+#define is_uppercase_character(X) ((text2ascii(X) <= 90) && (text2ascii(X) >= 65))
 #define is_alpha(X) ((text2ascii(X) <= 122) && (text2ascii(X) >= 97))
 #define is_digit(X) ((length(X) == 1) && (length(text2num(X)) == 1))
 

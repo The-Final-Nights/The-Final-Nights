@@ -48,6 +48,8 @@ SUBSYSTEM_DEF(roll)
 		if(roll >= difficulty)
 			output_text += span_nicegreen("[get_dice_char(roll)]")
 			success_count++
+			if(roll == 10)
+				success_count++
 		else if(roll == 1)
 			output_text += span_bold(span_danger("[get_dice_char(roll)]"))
 			success_count--
