@@ -1,0 +1,6 @@
+author: "WhereAmO"
+delete-after: True
+changes:
+  - rscadd: "Unliving Hive quirk, with some visible text for having bugs on your person and a small amount of damage over time."
+  - rscadd: "Some new insect themed summons for Animalism, with the right quirk."
+  - bugfix: "WOD13 specific cockroaches now have their sprites back"
