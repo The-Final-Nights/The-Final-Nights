@@ -59,6 +59,12 @@
 	food_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/nutriment/protein = 3)
 	eat_time = 15
 
+/obj/item/food/hotdog
+	onflooricon = 'modular_zapoc/master_files/icons/onfloor.dmi'
+
+/obj/item/food/butterdog
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
+
 //--------PACKAGED SNACKS-----------//
 
 /obj/item/trash/vampirebar
