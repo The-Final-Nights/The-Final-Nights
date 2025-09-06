@@ -5,7 +5,7 @@
 	desc = "Careful, the beverage you're about to enjoy is extremely hot."
 	icon_state = "coffee"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	list_reagents = list(/datum/reagent/consumable/coffee = 30)
 	spillable = TRUE
 	resistance_flags = FREEZE_PROOF
@@ -21,7 +21,7 @@
 	desc = "Beer."
 	icon_state = "beer"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	list_reagents = list(/datum/reagent/consumable/ethanol/beer = 30)
 	foodtype = GRAIN | ALCOHOL
 	custom_price = PAYCHECK_EASY
@@ -48,7 +48,7 @@
 	desc = "Coca cola espuma..."
 	icon_state = "colared"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	isGlass = FALSE
 	list_reagents = list(/datum/reagent/consumable/space_cola = 100)
 	foodtype = SUGAR
@@ -77,7 +77,7 @@
 	desc = "H2O."
 	icon_state = "water1"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	isGlass = FALSE
 	list_reagents = list(/datum/reagent/water = 100)
 	age_restricted = FALSE
@@ -87,7 +87,7 @@
 	desc = "Coca cola espuma..."
 	icon_state = "colared2"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	list_reagents = list(/datum/reagent/consumable/space_cola = 50)
 	foodtype = SUGAR
 
@@ -101,7 +101,7 @@
 	desc = "More water..."
 	icon_state = "soda"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	list_reagents = list(/datum/reagent/consumable/sodawater = 50)
 	foodtype = SUGAR
 
@@ -110,7 +110,7 @@
 	desc = "More milk..."
 	icon_state = "milk"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	list_reagents = list(/datum/reagent/consumable/milk = 50)
 	fill_icon_thresholds = null
 

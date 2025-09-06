@@ -1,6 +1,6 @@
 /obj/item/food/vampire
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	w_class = WEIGHT_CLASS_SMALL
 	eatsound = 'code/modules/wod13/sounds/eat.ogg'
 	custom_price = 3
@@ -9,19 +9,19 @@
 //----------FAST FOOD--------///
 /obj/item/food/burger/plain
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	custom_price = 3
 	food_flags = FOOD_BITE_SPRITE
 
 /obj/item/food/donut/plain
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	custom_price = 1
 	food_flags = FOOD_BITE_SPRITE
 
 /obj/item/food/donut/choco
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	custom_price = 1
 	food_flags = FOOD_BITE_SPRITE
 
@@ -29,13 +29,13 @@
 	name = "square pizza slice"
 	icon_state = "pizza"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	custom_price = 2
 	food_flags = FOOD_BITE_SPRITE
 
 /obj/item/food/taco
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 	custom_price = 2
 	food_flags = FOOD_BITE_SPRITE
 
@@ -46,7 +46,7 @@
 	name = "chicken wing bone"
 	icon_state = "nugget0"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
 /obj/item/food/vampire/nugget
 	name = "chicken wing"
@@ -65,7 +65,7 @@
 	name = "chocolate bar wrapper"
 	icon_state = "bar0"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
 /obj/item/food/vampire/bar
 	name = "chocolate bar"
@@ -99,7 +99,7 @@
 	name = "chips wrapper"
 	icon_state = "crisps0"
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
-	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
 /obj/item/food/vampire/crisps
 	name = "chips"
