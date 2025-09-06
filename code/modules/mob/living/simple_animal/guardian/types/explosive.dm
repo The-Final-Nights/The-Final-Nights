@@ -1,7 +1,7 @@
 #define UNREGISTER_BOMB_SIGNALS(A) \
 	do { \
 		UnregisterSignal(A, boom_signals); \
-		UnregisterSignal(A, COMSIG_PARENT_EXAMINE); \
+		UnregisterSignal(A, COMSIG_ATOM_EXAMINE); \
 	} while (0)
 
 //Bomb
@@ -47,7 +47,7 @@
 		if(bomb_cooldown <= world.time && !stat)
 			to_chat(src, "<span class='danger'><B>Success! Bomb armed!</B></span>")
 			bomb_cooldown = world.time + 200
-			RegisterSignal(A, COMSIG_PARENT_EXAMINE, PROC_REF(display_examine))
+			RegisterSignal(A, COMSIG_ATOM_EXAMINE, PROC_REF(display_examine))
 			RegisterSignal(A, boom_signals, PROC_REF(kaboom))
 			addtimer(CALLBACK(src, PROC_REF(disable), A), 600, TIMER_UNIQUE|TIMER_OVERRIDE)
 		else

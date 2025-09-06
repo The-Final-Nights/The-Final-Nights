@@ -440,6 +440,8 @@
 			PO = nightshift_light_power
 			if(!color)
 				CO = nightshift_light_color
+		if (cached_color_filter)
+			CO = apply_matrix_to_color(CO, cached_color_filter["color"], cached_color_filter["space"] || COLORSPACE_RGB)
 		var/matching = light && BR == light.light_range && PO == light.light_power && CO == light.light_color
 		if(!matching)
 			switchcount++

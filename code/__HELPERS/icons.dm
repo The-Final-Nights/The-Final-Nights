@@ -1326,3 +1326,44 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
 		stack_trace("State [state] in file [file] does not exist.")
 
 	return FALSE
+
+/**
+ * Returns the size of the sprite in tiles.
+ * Takes the icon size and divides it by the world icon size (default 32).
+ * This gives the size of the sprite in tiles.
+ *
+ * @return size of the sprite in tiles
+ */
+/proc/get_size_in_tiles(obj/target)
+	var/icon/size_check = icon(target.icon, target.icon_state)
+	var/size = size_check.Width() / ICON_SIZE_X
+
+	return size
+
+/**
+ * Updates the bounds of a rotated object
+ * This ensures that the bounds are always correct,
+ * even if the object is rotated after init.
+ */
+/obj/proc/set_bounds()
+	var/size = get_size_in_tiles(src)
+
+	if(dir in list(NORTH, SOUTH))
+		bound_width = size * ICON_SIZE_X
+		bound_height = ICON_SIZE_Y
+	else
+		bound_width = ICON_SIZE_X
+		bound_height = size * ICON_SIZE_Y
+
+/// Returns a list containing the width and height of an icon file
+/proc/get_icon_dimensions(icon_path)
+	// Icons can be a real file(), a rsc backed file(), a dynamic rsc (dyn.rsc) reference (known as a cache reference in byond docs), or an /icon which is pointing to one of those.
+	// Runtime generated dynamic icons are an unbounded concept cache identity wise, the same icon can exist millions of ways and holding them in a list as a key can lead to unbounded memory usage if called often by consumers.
+	// Check distinctly that this is something that has this unspecified concept, and thus that we should not cache.
+	if (!isfile(icon_path) || !length("[icon_path]"))
+		var/icon/my_icon = icon(icon_path)
+		return list("width" = my_icon.Width(), "height" = my_icon.Height())
+	if (isnull(GLOB.icon_dimensions[icon_path]))
+		var/icon/my_icon = icon(icon_path)
+		GLOB.icon_dimensions[icon_path] = list("width" = my_icon.Width(), "height" = my_icon.Height())
+	return GLOB.icon_dimensions[icon_path]
