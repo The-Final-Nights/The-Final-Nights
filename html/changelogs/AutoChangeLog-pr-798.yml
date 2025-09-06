@@ -1,0 +1,4 @@
+author: "SoreYew"
+delete-after: True
+changes:
+  - bugfix: "Axe Gang can open their doors now"
