@@ -650,13 +650,12 @@ Dancer
 	allowed_species = list("Vampire")
 
 /datum/quirk/unliving_hive
-	name = "Unliving Hive"
-	desc = "You have an affinity for bugs, and can summon them with Animalism. They also have an affinity for you, residing on your person and nibbling away at your skin."
+	name = "(Un)living Hive"
+	desc = "You, for one reason or another, have a horrible infestation of insects living on your person. They might be able to help you out in combat, if you're able to command them. Otherwise, they'll just continue to make you itchy."
 	value = -1
 	mob_trait = TRAIT_UNLIVING_HIVE
 	gain_text = span_danger("You feel skittering across your skin.")
 	lose_text = span_notice("You feel an itch fade away.")
-	allowed_species = list("Vampire")
 
 /datum/quirk/unliving_hive/on_process(delta_time) //don't want it to be TOO annoying, but a few bug bites will happen.
 	if(prob(2))

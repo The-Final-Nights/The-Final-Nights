@@ -479,7 +479,7 @@
 			if (HAS_TRAIT(src, TRAIT_PERMAFANGS))
 				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
 			if (HAS_TRAIT(src, TRAIT_UNLIVING_HIVE))
-				msg += span_warning("[p_they(TRUE)] seems to be covered in bugs!<br>")
+				msg += span_warning("[p_their(TRUE)] skin seems to be infested with insects!<br>")
 		//TFN ADDITION END - https://github.com/The-Final-Nights/The-Final-Nights/pull/759
 
 		if (iszombie(src) && is_face_visible())
