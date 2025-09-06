@@ -63,3 +63,17 @@
   XeonMations:
   - bugfix: Fixed painting not working.
   - qol: A lot of painting related systems have been refurbished.
+2025-09-06:
+  SoreYew:
+  - rscadd: Adds rubber, "high impact incapacitation," silver 12g rounds, and 5.45
+      silver
+  - map: Adds new less-lethals to the PD, 5.45mm and12g silver to the Anarchs, and
+      illegal vendor
+  - bugfix: Axe Gang can open their doors now
+  - qol: Change up the Malkavian Haven
+  - balance: rebalances Malkavian Haven
+  WhereAmO:
+  - rscadd: Unliving Hive quirk, with some visible text for having bugs on your person
+      and a small amount of damage over time.
+  - rscadd: Some new insect themed summons for Animalism, with the right quirk.
+  - bugfix: WOD13 specific cockroaches now have their sprites back
