@@ -136,6 +136,7 @@
 		new /datum/data/mining_equipment("candle pack", /obj/item/storage/fancy/candle_box, 12),
 		new /datum/data/mining_equipment("bruise pack", /obj/item/stack/medical/bruise_pack, 100),
 		new /datum/data/mining_equipment("kitchen knife", /obj/item/kitchen/knife, 26),
+		new /datum/data/mining_equipment("rolling pin", /obj/item/kitchen/rollingpin, 8),
 		new /datum/data/mining_equipment("mixing bowl", /obj/item/reagent_containers/glass/mixing_bowl, 15),
 	)
 
@@ -145,6 +146,10 @@
 		new /datum/data/mining_equipment("deli cut beef", /obj/item/food/meat/slab, 4),
 		new /datum/data/mining_equipment("cutlet", /obj/item/food/meat/rawcutlet, 1),
 		new /datum/data/mining_equipment("bacon", /obj/item/food/meat/rawbacon, 1),
+		new /datum/data/mining_equipment("meatball", /obj/item/food/raw_meatball, 1),
+		new /datum/data/mining_equipment("patty", /obj/item/food/raw_patty, 1),
+		new /datum/data/mining_equipment("sausage", /obj/item/food/raw_sausage, 1),
+		new /datum/data/mining_equipment("salami", /obj/item/food/salami, 1),
 		new /datum/data/mining_equipment("chicken breast", /obj/item/food/meat/slab/chicken, 3),
 		new /datum/data/mining_equipment("fish fillet", /obj/item/food/fishmeat, 3),
 		new /datum/data/mining_equipment("cheese wheel", /obj/item/food/cheesewheel, 12),
