@@ -3597,7 +3597,7 @@
 #include "code\modules\vtmb\vampire_clan\kiasyd.dm"
 #include "code\modules\vtmb\vampire_clan\lasombra.dm"
 #include "code\modules\vtmb\vampire_clan\malkavian.dm"
-#include "code\modules\vtmb\vampire_clan\ministry.dm"
+#include "code\modules\vtmb\vampire_clan\setite.dm"
 #include "code\modules\vtmb\vampire_clan\nagaraja.dm"
 #include "code\modules\vtmb\vampire_clan\nosferatu.dm"
 #include "code\modules\vtmb\vampire_clan\old_clan_tzimisce.dm"
