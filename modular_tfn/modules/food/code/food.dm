@@ -60,7 +60,7 @@
 	eat_time = 15
 
 /obj/item/food/hotdog
-	onflooricon = 'modular_zapoc/master_files/icons/onfloor.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
 /obj/item/food/butterdog
 	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'

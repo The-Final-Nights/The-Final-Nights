@@ -393,6 +393,7 @@
 	result = /obj/item/food/sandwich
 	subcategory = CAT_SANDWICH
 
+/*
 /datum/crafting_recipe/food/grilledcheesesandwich
 	name = "Cheese sandwich"
 	reqs = list(
@@ -401,7 +402,8 @@
 	)
 	result = /obj/item/food/grilled_cheese_sandwich
 	subcategory = CAT_SANDWICH
-
+*/
+/*
 /datum/crafting_recipe/food/blt
 	name = "BLT"
 	reqs = list(
@@ -412,6 +414,7 @@
 	)
 	result = /obj/item/food/blt
 	subcategory = CAT_SANDWICH
+*/
 
 /datum/crafting_recipe/food/hotdog
 	name = "Hotdog"

@@ -15631,12 +15631,11 @@
 	},
 /area/vtm/interior/police/upstairs)
 "ect" = (
-/obj/structure/closet/secure_closet/freezer/fridge/open,
-/obj/item/food/cheesewheel,
-/obj/item/food/cheesewheel,
-/turf/open/floor/plating/circled{
-	color = "#95de52"
+/obj/effect/turf_decal/siding/wideplating{
+	color = "#004136"
 	},
+/mob/living/carbon/human/npc/shop,
+/turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
 "ecx" = (
 /obj/structure/lamppost/sidewalk,
@@ -18734,18 +18733,9 @@
 /turf/open/floor/plating/parquetry,
 /area/vtm/clinic)
 "eTd" = (
-/obj/structure/rack,
-/obj/item/food/grown/carrot,
-/obj/item/food/grown/carrot{
-	pixel_y = 3;
-	pixel_x = 6
-	},
-/obj/item/food/grown/carrot{
-	pixel_y = 8
-	},
-/obj/item/food/grown/carrot{
-	pixel_y = 6;
-	pixel_x = -5
+/obj/structure/foodrack{
+	dir = 8;
+	pixel_x = 7
 	},
 /turf/open/floor/plating/circled{
 	color = "#95de52"
@@ -23614,9 +23604,6 @@
 /area/vtm/sewer/police)
 "geI" = (
 /obj/structure/closet/secure_closet/freezer/meat/open,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
 /turf/open/floor/plating/circled{
 	color = "#95de52"
 	},
@@ -26526,9 +26513,6 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/siding/green,
-/obj/item/food/bread/plain,
-/obj/item/food/bread/plain,
-/obj/item/food/bread/plain,
 /turf/open/floor/plating/circled{
 	color = "#95de52"
 	},
@@ -33740,24 +33724,6 @@
 	},
 /area/vtm/sewer)
 "iHA" = (
-/obj/structure/table,
-/obj/item/food/grown/tomato,
-/obj/item/food/grown/tomato,
-/obj/item/food/grown/tomato{
-	pixel_y = 8;
-	pixel_x = -3
-	},
-/obj/item/food/grown/tomato{
-	pixel_y = 4;
-	pixel_x = 7
-	},
-/obj/item/food/grown/tomato{
-	pixel_y = 11;
-	pixel_x = 6
-	},
-/obj/item/food/grown/tomato{
-	pixel_y = 14
-	},
 /turf/open/floor/plating/circled{
 	color = "#95de52"
 	},
@@ -43325,17 +43291,6 @@
 /area/vtm/sabbat_lair)
 "lbK" = (
 /obj/structure/table,
-/obj/item/food/grown/parsnip{
-	pixel_y = 7;
-	pixel_x = 4
-	},
-/obj/item/food/grown/parsnip{
-	pixel_y = 11
-	},
-/obj/item/food/grown/parsnip{
-	pixel_y = 12;
-	pixel_x = -7
-	},
 /turf/open/floor/plating/circled{
 	color = "#95de52"
 	},
@@ -46338,22 +46293,9 @@
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
 "lMT" = (
-/obj/structure/rack,
-/obj/item/food/grown/cabbage,
-/obj/item/food/grown/cabbage{
-	pixel_y = 3;
-	pixel_x = -3
-	},
-/obj/item/food/grown/cabbage{
-	pixel_x = 5
-	},
-/obj/item/food/grown/cabbage{
-	pixel_x = -5;
-	pixel_y = -4
-	},
-/obj/item/food/grown/cabbage{
-	pixel_y = 7;
-	pixel_x = 7
+/obj/structure/foodrack{
+	pixel_x = -1;
+	pixel_y = 6
 	},
 /turf/open/floor/plating/circled{
 	color = "#95de52"
@@ -53785,10 +53727,7 @@
 "nCc" = (
 /obj/structure/table,
 /obj/effect/decal/wallpaper/paper/green/low,
-/obj/item/stack/dollar/five{
-	pixel_y = 5;
-	pixel_x = 3
-	},
+/obj/machinery/mineral/equipment_vendor/fastfood/grocery,
 /turf/closed/wall/vampwall/painted/low,
 /area/vtm/interior/shop)
 "nCm" = (
@@ -65118,8 +65057,6 @@
 /area/vtm/clinic)
 "qmW" = (
 /obj/structure/closet/secure_closet/freezer/fridge/open,
-/obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/reagent_containers/food/condiment/enzyme,
 /turf/open/floor/plating/circled{
 	color = "#95de52"
 	},
@@ -90717,22 +90654,9 @@
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
 "wWK" = (
-/obj/structure/rack,
-/obj/item/food/grown/onion,
-/obj/item/food/grown/onion{
-	pixel_y = 4;
-	pixel_x = 2
-	},
-/obj/item/food/grown/onion{
-	pixel_x = -5;
-	pixel_y = -3
-	},
-/obj/item/food/grown/onion{
-	pixel_x = 8
-	},
-/obj/item/food/grown/onion{
-	pixel_y = 8;
-	pixel_x = -5
+/obj/structure/foodrack{
+	dir = 8;
+	pixel_x = -9
 	},
 /turf/open/floor/plating/circled{
 	color = "#95de52"
@@ -91892,20 +91816,6 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer)
 "xlJ" = (
-/obj/structure/rack,
-/obj/item/food/grown/garlic,
-/obj/item/food/grown/garlic{
-	pixel_x = 7;
-	pixel_y = 6
-	},
-/obj/item/food/grown/garlic{
-	pixel_x = -5;
-	pixel_y = -5
-	},
-/obj/item/food/grown/garlic{
-	pixel_y = 4;
-	pixel_x = -4
-	},
 /obj/machinery/light{
 	pixel_y = 32
 	},
@@ -165990,7 +165900,7 @@ aPn
 tXv
 wUl
 nCc
-hrF
+ect
 wXa
 nka
 lSs
@@ -166592,7 +166502,7 @@ gPC
 lEF
 dPr
 lbK
-ect
+qmW
 qmW
 geI
 lNT
