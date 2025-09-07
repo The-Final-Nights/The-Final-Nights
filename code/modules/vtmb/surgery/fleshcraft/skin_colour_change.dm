@@ -1,9 +1,9 @@
 /datum/surgery/fleshcraft/skin_colour_change
 	name = "Change Skin Colour"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/retract_skin, /datum/surgery_step/modify_eyes, /datum/surgery_step/close)
+	steps = list(/datum/surgery_step/incise, /datum/surgery_step/retract_skin, /datum/surgery_step/modify_skin, /datum/surgery_step/close)
 	possible_locs = list(BODY_ZONE_CHEST)
 
-//reshape_face
+//Modify Skin Tone
 /datum/surgery_step/modify_skin
 	name = "Change Skin Colour"
 	accept_hand = TRUE
@@ -14,7 +14,7 @@
 		span_notice("[user] begins to alter [target]'s skin."),
 		span_notice("[user] begins to press against [target]'s skin."))
 
-/datum/surgery_step/modify_skin/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/modify_skin/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/list/skin_tones = GLOB.skin_tones
 	var/new_s_tone = tgui_input_list(user, "Choose [target]'s skin tone:", "Skin Tone Change", skin_tones)
 	if(new_s_tone)
