@@ -14,15 +14,18 @@
 		span_notice("[user] begins to manipulate [target]'s head in truly horrific ways!"))
 
 /datum/surgery_step/modify_hair/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
-	var/hairchoice = alert(user, "Hairstyle or hair color?", "Change Hair", "Style", "Color")
+	var/list/changes = list("Style", "Colour")
+	var/hairchoice = tgui_input_list(user, "Hairstyle or hair color?", "Change Hair", changes)
 	if(hairchoice == "Style")
-		var/new_style = input(user, "Select a hairstyle", "Grooming")  as null|anything in GLOB.hairstyles_list
+		var/list/style = GLOB.hairstyles_list
+		var/new_style = tgui_input_list(user, "Select a hairstyle", "Grooming", style)
 		if(new_style)
 			target.hairstyle = new_style
 		if(target.gender == "male")
-			var/new_style = input(user, "Select a facial hairstyle", "Grooming")  as null|anything in GLOB.facial_hairstyles_list
-			if(new_style)
-				target.facial_hairstyle = new_style
+			var/list/facial_style = GLOB.facial_hairstyles_list
+			var/new_facial_style = tgui_input_list(user, "Select a facial hairstyle", "Grooming", facial_style)
+			if(new_facial_style)
+				target.facial_hairstyle = new_facial_style
 		else
 			target.facial_hairstyle = "Shaved"
 	else
