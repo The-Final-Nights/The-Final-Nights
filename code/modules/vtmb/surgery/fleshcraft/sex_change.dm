@@ -1,4 +1,4 @@
-/datum/surgery/fleshcraft/cosmetic/sex_change
+/datum/surgery/fleshcraft/sex_change
 	name = "Sex Change"
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
