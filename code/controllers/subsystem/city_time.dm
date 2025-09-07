@@ -46,6 +46,7 @@ SUBSYSTEM_DEF(city_time)
 					if(role in list("Prince", "Sheriff", "Hound", "Seneschal", "Chantry Regent", "Baron", "Dealer", "Primogen Ventrue", "Primogen Lasombra", "Primogen Banu Haqim", "Primogen Nosferatu", "Primogen Malkavian", "Endron Branch Lead", "Endron Internal Affairs Agent", "Endron Executive", "Endron Chief of Security", "Painted City Councillor", "Painted City Keeper", "Painted City Warder", "Painted City Truthcatcher", "Amberlgade Councillor", "Amberglade Keeper", "Amberglade Truthcatcher", "Amberglade Warder"))
 						char_sheet.add_experience(2)
 
+
 					if(!HAS_TRAIT(H, TRAIT_NON_INT))
 						if(H.total_erp > 3000)
 							char_sheet.add_experience(3)
@@ -71,14 +72,35 @@ SUBSYSTEM_DEF(city_time)
 
 	if(hour == 6 && minutes == 0)
 		to_chat(world, "<span class='ghostalert'>THE NIGHT IS OVER.</span>")
+		for(var/mob/living/carbon/human/H in GLOB.human_list)
+			var/datum/preferences/char_sheet = GLOB.preferences_datums[ckey(H.key)]
+			if(char_sheet)
+				var/role = H.mind?.assigned_role
+				if(role in list("Hound", "Street Janitor", "Bruiser", "Graveyard Keeper"))
+					char_sheet.masquerade_score += 2
+					char_sheet.save_character()
+
+		for(var/dead_mob as anything in GLOB.dead_mob_list)
+			for(var/masquerade_breach as anything in SSmasquerade.masquerade_breachers)
+				if(dead_mob in masquerade_breach)
+					var/list/masquerade_breach_list = masquerade_breach
+					if(islist(masquerade_breach_list[2])) //If its the skull list, then its a long term masq breach. Clear it.
+						for(var/atom/list_object as anything in masquerade_breach_list[2])
+							SSmasquerade.masquerade_reinforce(list_object, masquerade_breach_list[1], MASQUERADE_REASON_PREFERENCES)
+					else
+						var/atom/object = masquerade_breach_list[2]
+						SEND_SIGNAL(object, COMSIG_ALL_MASQUERADE_REINFORCE)
+
 		SSticker.force_ending = 1
 		SSticker.current_state = GAME_STATE_FINISHED
 		GLOB.canon_event = FALSE
 		toggle_ooc(TRUE) // Turn it on
 		toggle_dooc(TRUE)
-		SSticker.declare_completion(SSticker.force_ending)
+		SSticker.declare_completion()
 		Master.SetRunLevel(RUNLEVEL_POSTGAME)
 		for(var/mob/living/carbon/human/H in GLOB.human_list)
+			if(HAS_TRAIT(H, TRAIT_NO_SUN_ASHING))
+				continue
 			var/area/vtm/V = get_area(H)
 			if(iskindred(H) && V.upper)
 				H.death()

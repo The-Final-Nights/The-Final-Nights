@@ -54,6 +54,8 @@
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_OBFUSCATED), PROC_REF(make_invisible))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_OBFUSCATED), PROC_REF(make_visible))
 
+	RegisterSignals(src, list(COMSIG_QDELETING, COMSIG_LIVING_GIBBED), PROC_REF(on_qdeletion))
+
 /// Called when [TRAIT_KNOCKEDOUT] is added to the mob.
 /mob/living/proc/on_knockedout_trait_gain(datum/source)
 	SIGNAL_HANDLER
@@ -227,12 +229,58 @@
 	SIGNAL_HANDLER
 	RemoveElement(/datum/element/skittish)
 
+// TFN EDIT START: Adding an icon visible to obfuscated mobs
 /// Called when [TRAIT_OBFUSCATED] is added to the mob.
 /mob/living/proc/make_invisible(datum/source)
 	SIGNAL_HANDLER
 	animate(src, invisibility = OBFUSCATE_INVISIBILITY, time = 0.5 SECONDS)
+	add_obficon()
 
 /// Called when [TRAIT_OBFUSCATED] is removed from the mob.
 /mob/living/proc/make_visible(datum/source)
 	SIGNAL_HANDLER
 	animate(src, invisibility = NONE, time = 0.5 SECONDS)
+	remove_obficon()
+
+/// Creating & Handling obfuscate indicator
+/mob/living/proc/add_obficon()
+	if(!client)
+		return
+	var/image/icon = image('code/modules/wod13/icons.dmi', src, "shadow", FLY_LAYER)
+	icon.alpha = 100
+	icon.pixel_y = -4
+	LAZYINITLIST(obf_icons)
+	obf_icons += icon
+	client.images |= icon
+
+/mob/living/proc/remove_obficon()
+	if(!client || !obf_icons)
+		return
+	for(var/image/I in obf_icons)
+		if(I in client.images)
+			client.images -= I
+	obf_icons.Cut()
+
+/mob/living/Login()
+	. = ..()
+	if(HAS_TRAIT(src, TRAIT_OBFUSCATED))
+		add_obficon()
+
+/mob/living/Logout()
+	. = ..()
+	remove_obficon()
+
+/mob/living/proc/on_client_set(datum/source)
+	SIGNAL_HANDLER
+	if(HAS_TRAIT(src, TRAIT_OBFUSCATED))
+		add_obficon()
+
+/mob/living/proc/on_client_lost(datum/source)
+	SIGNAL_HANDLER
+	remove_obficon()
+// TFN EDIT END
+
+/// Called when [COMSIG_QDELETING] is called
+/mob/living/proc/on_qdeletion(datum/source)
+	SIGNAL_HANDLER
+	SSmasquerade.cryo_masquerade_breacher(src, TRUE)

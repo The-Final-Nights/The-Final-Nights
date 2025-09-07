@@ -1,9 +1,11 @@
 /obj/item/grenade/flashbang
 	name = "flashbang"
+	icon = 'modular_tfn/modules/first_team/icons/ammo.dmi' //TFN Change -- FIRST Response Team
 	icon_state = "flashbang"
 	inhand_icon_state = "flashbang"
-	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
+	lefthand_file = 'modular_tfn/modules/first_team/icons/lefthand.dmi'
+	righthand_file = 'modular_tfn/modules/first_team/icons/righthand.dmi'
+	onflooricon = 'modular_tfn/modules/first_team/icons/onfloor.dmi' //END TFN Change
 	var/flashbang_range = 7 //how many tiles away the mob will be stunned.
 
 /obj/item/grenade/flashbang/detonate(mob/living/lanced_by)

@@ -19,11 +19,6 @@
 //Allows the user to examinate regardless of client.eye.
 #define COMPONENT_ALLOW_EXAMINATE (1<<0)
 
-/// before a datum's Destroy() is called: (force), returning a nonzero value will cancel the qdel operation
-#define COMSIG_PARENT_PREQDELETED "parent_preqdeleted"
-/// just before a datum's Destroy() is called: (force), at this point none of the other components chose to interrupt qdel and Destroy will be called
-#define COMSIG_PARENT_QDELETING "parent_qdeleting"
-
 ///called when you send a mood event from anywhere in the code.
 #define COMSIG_ADD_MOOD_EVENT "add_mood"
 ///Mood event that only RnD members listen for
@@ -63,10 +58,6 @@
 #define COMSIG_ATOM_CREATED "atom_created"
 ///from base of atom/attackby(): (/obj/item, /mob/living, params)
 #define COMSIG_PARENT_ATTACKBY "atom_attackby"
-///from base of atom/examine(): (/mob)
-#define COMSIG_PARENT_EXAMINE "atom_examine"
-///from base of atom/get_examine_name(): (/mob, list/overrides)
-#define COMSIG_PARENT_EXAMINE_MORE "atom_examine_more"                    ///from base of atom/examine_more(): (/mob)
 
 ///called when a wrapped up structure is opened by hand
 #define COMSIG_STRUCTURE_UNWRAPPED "structure_unwrapped"

@@ -55,7 +55,6 @@
 
 	var/step_variable = 0
 
-	var/wyrm_tainted = FALSE
 	var/werewolf_armor = 0
 
 	var/assigned_quirks = FALSE

@@ -29,8 +29,10 @@ GLOBAL_LIST_INIT(camarilla_council_positions, list(
 GLOBAL_LIST_INIT(anarch_positions, list(
 	"Baron",
 	"Emissary",
+	"Liaison",
 	"Sweeper",
-	"Bruiser"
+	"Bruiser",
+	"Bartender"
 	))
 
 GLOBAL_LIST_INIT(citizen_positions, list(
@@ -50,7 +52,7 @@ GLOBAL_LIST_INIT(police_positions, list(
 	"Police Sergeant",
 	"Police Officer",
 	"Emergency Dispatcher",
-	"District Attorney"
+	"Assistant District Attorney"
 ))
 
 GLOBAL_LIST_INIT(national_security_positions, list(
@@ -100,7 +102,7 @@ GLOBAL_LIST_INIT(church_positions, list(
 ))
 
 GLOBAL_LIST_INIT(gang_positions, list(
-	"Triad Soldier",
+	"Axe Gang",
 ))
 
 GLOBAL_LIST_INIT(painted_positions, list(

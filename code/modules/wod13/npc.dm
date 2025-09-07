@@ -71,9 +71,15 @@
 
 	var/list/drop_on_death_list = null
 
+
+
+
 /mob/living/carbon/human/npc/Initialize()
 	. = ..()
 	NPC_wyrm_taint() // Declaring wether this NPC has wyrm taint or not to "Sense Wyrm" users
+	// NPC humans get the area of effect, player humans dont. This is a fucky way of doing this.
+	qdel(GetComponent(/datum/component/violation_observer))
+	AddComponent(/datum/component/violation_observer, TRUE)
 
 /mob/living/carbon/human/npc/LateInitialize()
 	. = ..()
