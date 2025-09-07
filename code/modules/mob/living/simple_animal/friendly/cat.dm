@@ -354,15 +354,17 @@
 	pet_bonus_emote = "purrs!"
 
 	footstep_type = FOOTSTEP_MOB_CLAW
+	//TFN ADDITION START - https://github.com/The-Final-Nights/The-Final-Nights/pull/759
 	bloodpool = 1
 	maxbloodpool = 1
 	maxHealth = 30
 	health = 30
 	harm_intent_damage = 20
-	melee_damage_lower = 15
-	melee_damage_upper = 30
+	melee_damage_lower = 20
+	melee_damage_upper = 20
 	speed = -0.1
 	dodging = TRUE
+	//TFN ADDITION END - https://github.com/The-Final-Nights/The-Final-Nights/pull/759
 
 /mob/living/simple_animal/hostile/beastmaster/cat/Initialize()
 	. = ..()
