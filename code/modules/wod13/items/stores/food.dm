@@ -110,7 +110,8 @@
 		new /datum/data/mining_equipment("cola can", /obj/item/reagent_containers/food/drinks/soda_cans/vampirecola, 5),
 		new /datum/data/mining_equipment("summer thaw", /obj/item/reagent_containers/food/drinks/bottle/vampirecola/summer_thaw, 5),
 		new /datum/data/mining_equipment("milk", /obj/item/reagent_containers/food/condiment/milk, 5),
-		new /datum/data/mining_equipment("bread", /obj/item/food/bread/plain, 10),
+		new /datum/data/mining_equipment("bread", /obj/item/food/bread/plain, 8),
+		new /datum/data/mining_equipment("spaghetti", /obj/item/food/spaghetti, 6),
 		new /datum/data/mining_equipment("tomato", /obj/item/food/grown/tomato, 1),
 		new /datum/data/mining_equipment("cabbage", /obj/item/food/grown/cabbage, 1),
 		new /datum/data/mining_equipment("garlic", /obj/item/food/grown/garlic, 1),
@@ -121,16 +122,12 @@
 		new /datum/data/mining_equipment("apple", /obj/item/food/grown/apple, 1),
 		new /datum/data/mining_equipment("berries", /obj/item/food/grown/berries, 1),
 		new /datum/data/mining_equipment("banana", /obj/item/food/grown/banana, 1),
-		new /datum/data/mining_equipment("fish fillet", /obj/item/food/fishmeat, 3),
-		new /datum/data/mining_equipment("deli cut beef", /obj/item/food/meat/slab, 4),
-		new /datum/data/mining_equipment("chicken breast", /obj/item/food/meat/slab/chicken, 3),
 		new /datum/data/mining_equipment("cooking enzymes", /obj/item/reagent_containers/food/condiment/enzyme, 12),
 		new /datum/data/mining_equipment("salt shaker", /obj/item/reagent_containers/food/condiment/saltshaker, 3),
 		new /datum/data/mining_equipment("pepper mill", /obj/item/reagent_containers/food/condiment/peppermill, 3),
 		new /datum/data/mining_equipment("bbq sauce", /obj/item/reagent_containers/food/condiment/bbq, 3),
 		new /datum/data/mining_equipment("soy sauce", /obj/item/reagent_containers/food/condiment/soysauce, 4),
 		new /datum/data/mining_equipment("mayonnaise", /obj/item/reagent_containers/food/condiment/mayonnaise, 3),
-		new /datum/data/mining_equipment("cheese wheel", /obj/item/food/cheesewheel, 12),
 		new /datum/data/mining_equipment("egg carton", /obj/item/storage/fancy/egg_box, 3),
 		new /datum/data/mining_equipment("flour bag", /obj/item/reagent_containers/food/condiment/flour, 3),
 		new /datum/data/mining_equipment("rice bag", /obj/item/reagent_containers/food/condiment/rice, 3),
@@ -140,4 +137,16 @@
 		new /datum/data/mining_equipment("bruise pack", /obj/item/stack/medical/bruise_pack, 100),
 		new /datum/data/mining_equipment("kitchen knife", /obj/item/kitchen/knife, 26),
 		new /datum/data/mining_equipment("mixing bowl", /obj/item/reagent_containers/glass/mixing_bowl, 15),
+	)
+
+/obj/machinery/mineral/equipment_vendor/fastfood/deli
+	desc = "Meats and cheese!"
+	prize_list = list(
+		new /datum/data/mining_equipment("deli cut beef", /obj/item/food/meat/slab, 4),
+		new /datum/data/mining_equipment("cutlet", /obj/item/food/meat/rawcutlet, 1),
+		new /datum/data/mining_equipment("bacon", /obj/item/food/meat/rawbacon, 1),
+		new /datum/data/mining_equipment("chicken breast", /obj/item/food/meat/slab/chicken, 3),
+		new /datum/data/mining_equipment("fish fillet", /obj/item/food/fishmeat, 3),
+		new /datum/data/mining_equipment("cheese wheel", /obj/item/food/cheesewheel, 12),
+		new /datum/data/mining_equipment("sandwich", /obj/item/food/sandwich, 3),
 	)

@@ -11183,6 +11183,7 @@
 "cUz" = (
 /obj/structure/table,
 /obj/effect/decal/wallpaper/paper/green/low,
+/obj/machinery/mineral/equipment_vendor/fastfood/deli,
 /turf/closed/wall/vampwall/painted/low,
 /area/vtm/interior/shop)
 "cUF" = (
