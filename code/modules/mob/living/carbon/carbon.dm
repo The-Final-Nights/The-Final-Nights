@@ -74,7 +74,11 @@
 	for(var/datum/surgery/S in surgeries)
 		if(body_position == LYING_DOWN || !S.lying_required)
 			var/list/modifiers = params2list(params)
-			if((S.self_operable || user != src || user.clan = CLAN_TZIMISCE) && !user.combat_mode)
+			if((iskindred(user)) && !user.combat_mode)
+				var/mob/living/carbon/human/H = user
+				if((H.clan?.name == CLAN_TZIMISCE) && S.next_step(user, modifiers))
+					return 1	 	
+			if((S.self_operable || user != src) && !user.combat_mode)
 				if(S.next_step(user, modifiers))
 					return 1
 
