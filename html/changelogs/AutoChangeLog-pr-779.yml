@@ -1,0 +1,7 @@
+author: "@magicianofwands for the code, @despong for the sprites, @tehlordoswag420 for the SFX"
+delete-after: True
+changes:
+  - rscadd: "Added the MAC-10! A powerful, Baron exclusive submachine gun chambered in .45 ACP"
+  - sound: "mac10.ogg"
+  - image: "mac10 icon"
+  - map: "The MAC-10 has been placed in the Baron's bedroom"
