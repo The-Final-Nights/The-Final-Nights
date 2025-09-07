@@ -18,11 +18,11 @@
 	implements = list(/obj/item/stack/human_flesh = 100)
 	time = 20
 
-/datum/surgery_step/add_fat/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/add_fat/preop(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to stretch out [target]'s flesh!"),
 		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!"))
 
-/datum/surgery_step/add_fat/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/add_fat/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(target.base_body_mod == SLIM_BODY_MODEL)
 		target.set_body_model(NORMAL_BODY_MODEL)
 		tool.use(3)
