@@ -36,10 +36,14 @@
 		var/datum/action/beastmaster_deaggro/deaggro = new()
 		deaggro.Grant(owner)
 
-	var/mob/living/simple_animal/hostile/beastmaster/rat/rat = new(get_turf(owner))
-	rat.my_creator = owner
-	owner.beastmaster |= rat
-	rat.beastmaster_owner = owner
+	var/summon_option = /mob/living/simple_animal/hostile/beastmaster/rat
+	if(HAS_TRAIT(owner, TRAIT_UNLIVING_HIVE))
+		summon_option = /mob/living/simple_animal/hostile/beastmaster/cockroach
+	var/mob/living/simple_animal/hostile/beastmaster/summon = new summon_option(get_turf(owner))
+	summon.my_creator = owner
+	owner.beastmaster |= summon
+	summon.beastmaster_owner = owner
+
 
 //SUMMON CAT
 /datum/discipline_power/animalism/summon_cat
@@ -67,10 +71,15 @@
 		var/datum/action/beastmaster_deaggro/deaggro = new()
 		deaggro.Grant(owner)
 
-	var/mob/living/simple_animal/hostile/beastmaster/cat/cat = new(get_turf(owner))
-	cat.my_creator = owner
-	owner.beastmaster |= cat
-	cat.beastmaster_owner = owner
+
+	var/summon_option = /mob/living/simple_animal/hostile/beastmaster/cat
+	if(HAS_TRAIT(owner, TRAIT_UNLIVING_HIVE))
+		summon_option = /mob/living/simple_animal/hostile/beastmaster/cockroach/spider
+	var/mob/living/simple_animal/hostile/beastmaster/summon = new summon_option(get_turf(owner))
+	summon.my_creator = owner
+	owner.beastmaster |= summon
+	summon.beastmaster_owner = owner
+
 
 //SUMMON WOLF
 /*
@@ -108,10 +117,13 @@
 		var/datum/action/beastmaster_deaggro/deaggro = new()
 		deaggro.Grant(owner)
 
-	var/mob/living/simple_animal/hostile/beastmaster/dog = new(get_turf(owner))
-	dog.my_creator = owner
-	owner.beastmaster |= dog
-	dog.beastmaster_owner = owner
+	var/summon_option = /mob/living/simple_animal/hostile/beastmaster
+	if(HAS_TRAIT(owner, TRAIT_UNLIVING_HIVE))
+		summon_option = /mob/living/simple_animal/hostile/beastmaster/largespider
+	var/mob/living/simple_animal/hostile/beastmaster/summon = new summon_option(get_turf(owner))
+	summon.my_creator = owner
+	owner.beastmaster |= summon
+	summon.beastmaster_owner = owner
 
 //SUMMON BAT
 /datum/discipline_power/animalism/summon_bat

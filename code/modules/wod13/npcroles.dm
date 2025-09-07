@@ -900,9 +900,9 @@
 	del_on_death = 1
 	maxHealth = 20
 	health = 20
-	harm_intent_damage = 10
-	melee_damage_lower = 5
-	melee_damage_upper = 10
+	harm_intent_damage = 8
+	melee_damage_lower = 8
+	melee_damage_upper = 8
 	speed = 0
 	dodging = TRUE
 
@@ -934,9 +934,9 @@
 				beastmaster_owner.bloodpool = min(beastmaster_owner.maxbloodpool, beastmaster_owner.bloodpool+1)
 
 /mob/living/simple_animal/hostile/beastmaster/cockroach
-	name = "cockroach"
+	name = "Cockroach"
 	desc = "It flutters like the giant, unhealthy skittering thing it is."
-	icon = 'code/modules/wod13/icons.dmi'
+	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "cockroach"
 	icon_living = "cockroach"
 	icon_dead = "cockroach_dead"
@@ -962,12 +962,11 @@
 	bloodpool = 1
 	maxbloodpool = 1
 	del_on_death = 1
-	maxHealth = 5
-	health = 5
-	melee_damage_type = TOX
-	harm_intent_damage = 5
-	melee_damage_lower = 3
-	melee_damage_upper = 7
+	maxHealth = 20
+	health = 20
+	harm_intent_damage = 8
+	melee_damage_lower = 8
+	melee_damage_upper = 8
 	is_flying_animal = TRUE
 	speed = -0.8
 	dodging = TRUE
@@ -976,6 +975,60 @@
 	. = ..()
 	pixel_w = rand(-8, 8)
 	pixel_z = rand(-8, 8)
+
+/mob/living/simple_animal/hostile/beastmaster/cockroach/spider
+	icon = 'code/modules/wod13/mobs.dmi'
+	icon_state = "spiderling"
+	icon_living = "spiderling"
+	icon_dead = "spiderling_dead"
+	name = "Spiderling"
+	desc = "It's a small skittering spider."
+	emote_hear = list("chitters.")
+	emote_see = list("wriggles its legs.", "clicks its mandibles.")
+	is_flying_animal = FALSE
+	density = TRUE
+	maxHealth = 30
+	health = 30
+	harm_intent_damage = 20
+	melee_damage_lower = 20
+	melee_damage_upper = 20
+	speed = -0.1
+	dodging = TRUE
+
+/mob/living/simple_animal/hostile/beastmaster/largespider
+	name = "Spider"
+	desc = "Furry and black, it makes you shudder to look at it. Far too many eyes."
+	icon = 'icons/mob/animal.dmi'
+	icon_state = "guard"
+	icon_living = "guard"
+	icon_dead = "guard_dead"
+	emote_hear = list("chitters.")
+	emote_see = list("skitters about.", "bares its fangs.")
+	attack_verb_continuous = "bites"
+	attack_verb_simple = "bite"
+	attack_sound = 'sound/weapons/bite.ogg'
+	speak_chance = 0
+	see_in_dark = 10
+	response_help_continuous = "pets"
+	response_help_simple = "pet"
+	response_disarm_continuous = "gently sweeps aside"
+	response_disarm_simple = "gently sweep aside"
+	response_harm_continuous = "smashes"
+	response_harm_simple = "smash"
+	can_be_held = FALSE
+	density = TRUE
+	anchored = FALSE
+	footstep_type = FOOTSTEP_MOB_CLAW
+	bloodquality = BLOOD_QUALITY_LOW
+	bloodpool = 2
+	maxbloodpool = 2
+	del_on_death = 1
+	speed = 0.35
+	maxHealth = 55 //Killable in two swings from a proper melee.
+	health = 55
+	harm_intent_damage = 15
+	melee_damage_lower = 15
+	melee_damage_upper = 15
 
 /datum/socialrole/shop
 	s_tones = list("albino",
