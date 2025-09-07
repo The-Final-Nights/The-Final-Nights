@@ -33,5 +33,5 @@
 		display_results(user, target, span_notice("You sucessfully make [target] fat! You can't make them any larger for now!"))
 	else 
 		display_results(user, target, span_notice("You can't find a way to make [target] any larger!"))
-	span_notice("[user] stretches out [target]'s flesh in truly horrific ways!")
+	display_results(user, target, span_notice("[user] stretches out [target]'s flesh in truly horrific ways!"))
 	return TRUE
