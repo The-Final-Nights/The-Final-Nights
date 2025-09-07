@@ -300,6 +300,7 @@
 	result = /obj/item/food/pie/meatpie
 	subcategory = CAT_PIE
 
+/*
 /datum/crafting_recipe/food/pumpkinpie
 	name = "Pumpkin pie"
 	reqs = list(
@@ -321,6 +322,7 @@
 	)
 	result = /obj/item/food/pie/grapetart
 	subcategory = CAT_PIE
+*/
 
 /datum/crafting_recipe/food/berrytart
 	name = "Berry tart"
