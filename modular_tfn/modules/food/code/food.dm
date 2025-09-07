@@ -73,29 +73,27 @@
 	icon = 'modular_tfn/modules/food/icons/items.dmi'
 	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
-/obj/item/food/vampire/bar
-	name = "chocolate bar"
-	desc = "A fast way to reduce hunger."
+/obj/item/food/chocolatebar
 	icon_state = "bar2"
-	food_reagents = list(/datum/reagent/consumable/sugar = 2, /datum/reagent/consumable/nutriment = 1)
-	junkiness = 5
+	icon = 'modular_tfn/modules/food/icons/items.dmi'
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
+	custom_price = 1
 	trash_type = /obj/item/trash/vampirebar
 	tastes = list("chocolate" = 1)
-	food_flags = FOOD_IN_CONTAINER | FOOD_BITE_SPRITE
-	foodtypes = JUNKFOOD | SUGAR
+	food_flags = FOOD_BITE_SPRITE
 
-/obj/item/food/vampire/bar/proc/open_bar(mob/user)
+/obj/item/food/chocolatebar/proc/open_bar(mob/user)
 	to_chat(user, "<span class='notice'>You pull back the wrapper of \the [src].</span>")
 	playsound(user.loc, 'sound/items/foodcanopen.ogg', 50)
 	icon_state = "bar1"
 	reagents.flags |= OPENCONTAINER
 
-/obj/item/food/vampire/bar/attack_self(mob/user)
+/obj/item/food/chocolatebar/attack_self(mob/user)
 	if(!is_drainable())
 		open_bar(user)
 	return ..()
 
-/obj/item/food/vampire/bar/attack(mob/living/M, mob/user, def_zone)
+/obj/item/food/chocolatebar/attack(mob/living/M, mob/user, def_zone)
 	if (!is_drainable())
 		to_chat(user, "<span class='warning'>[src]'s wrapper hasn't been opened!</span>")
 		return FALSE

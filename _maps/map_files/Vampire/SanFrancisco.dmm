@@ -4279,9 +4279,9 @@
 /obj/item/newspaper,
 /obj/item/newspaper,
 /obj/item/newspaper,
-/obj/item/food/vampire/bar,
-/obj/item/food/vampire/bar,
-/obj/item/food/vampire/bar,
+/obj/item/food/chocolatebar,
+/obj/item/food/chocolatebar,
+/obj/item/food/chocolatebar,
 /obj/machinery/light{
 	pixel_y = 32
 	},
@@ -43521,9 +43521,9 @@
 /obj/item/newspaper,
 /obj/item/newspaper,
 /obj/item/newspaper,
-/obj/item/food/vampire/bar,
-/obj/item/food/vampire/bar,
-/obj/item/food/vampire/bar,
+/obj/item/food/chocolatebar,
+/obj/item/food/chocolatebar,
+/obj/item/food/chocolatebar,
 /turf/open/floor/plating/circled,
 /area/vtm/clinic)
 "lej" = (

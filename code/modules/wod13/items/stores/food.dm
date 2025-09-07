@@ -52,7 +52,7 @@
 	anchored = TRUE
 	density = TRUE
 	owner_needed = FALSE
-	prize_list = list(new /datum/data/mining_equipment("chocolate bar", /obj/item/food/vampire/bar, 3),
+	prize_list = list(new /datum/data/mining_equipment("chocolate bar", /obj/item/food/chocolatebar, 3),
 		new /datum/data/mining_equipment("chips", /obj/item/food/vampire/crisps, 5)
 	)
 
@@ -84,7 +84,7 @@
 
 /obj/machinery/mineral/equipment_vendor/fastfood/products
 	desc = "Purchase junkfood and crap."
-	prize_list = list(new /datum/data/mining_equipment("chocolate bar", /obj/item/food/vampire/bar, 3),
+	prize_list = list(new /datum/data/mining_equipment("chocolate bar", /obj/item/food/chocolatebar, 3),
 		new /datum/data/mining_equipment("chips", /obj/item/food/vampire/crisps, 5),
 		new /datum/data/mining_equipment("water bottle", /obj/item/reagent_containers/food/drinks/bottle/vampirewater, 3),
 		new /datum/data/mining_equipment("soda can", /obj/item/reagent_containers/food/drinks/soda_cans/vampiresoda, 3),
@@ -102,7 +102,7 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/grocery
 	desc = "A small grocery store."
 	prize_list = list(
-		new /datum/data/mining_equipment("chocolate bar", /obj/item/food/vampire/bar, 3),
+		new /datum/data/mining_equipment("chocolate bar", /obj/item/food/chocolatebar, 3),
 		new /datum/data/mining_equipment("chips", /obj/item/food/vampire/crisps, 5),
 		new /datum/data/mining_equipment("water bottle", /obj/item/reagent_containers/food/drinks/bottle/vampirewater, 3),
 		new /datum/data/mining_equipment("soda can", /obj/item/reagent_containers/food/drinks/soda_cans/vampiresoda, 3),
@@ -117,11 +117,21 @@
 		new /datum/data/mining_equipment("onion", /obj/item/food/grown/onion, 1),
 		new /datum/data/mining_equipment("parsnip", /obj/item/food/grown/parsnip, 1),
 		new /datum/data/mining_equipment("peas", /obj/item/food/grown/peas, 1),
+		new /datum/data/mining_equipment("corn", /obj/item/food/grown/corn, 1),
+		new /datum/data/mining_equipment("apple", /obj/item/food/grown/apple, 1),
+		new /datum/data/mining_equipment("berries", /obj/item/food/grown/berries, 1),
+		new /datum/data/mining_equipment("banana", /obj/item/food/grown/banana, 1),
 		new /datum/data/mining_equipment("fish fillet", /obj/item/food/fishmeat, 3),
 		new /datum/data/mining_equipment("deli cut beef", /obj/item/food/meat/slab, 4),
 		new /datum/data/mining_equipment("chicken breast", /obj/item/food/meat/slab/chicken, 3),
 		new /datum/data/mining_equipment("cooking enzymes", /obj/item/reagent_containers/food/condiment/enzyme, 12),
+		new /datum/data/mining_equipment("salt shaker", /obj/item/reagent_containers/food/condiment/saltshaker, 3),
+		new /datum/data/mining_equipment("pepper mill", /obj/item/reagent_containers/food/condiment/peppermill, 3),
+		new /datum/data/mining_equipment("bbq sauce", /obj/item/reagent_containers/food/condiment/bbq, 3),
+		new /datum/data/mining_equipment("soy sauce", /obj/item/reagent_containers/food/condiment/soysauce, 4),
+		new /datum/data/mining_equipment("mayonnaise", /obj/item/reagent_containers/food/condiment/mayonnaise, 3),
 		new /datum/data/mining_equipment("cheese wheel", /obj/item/food/cheesewheel, 12),
+		new /datum/data/mining_equipment("egg carton", /obj/item/storage/fancy/egg_box, 3),
 		new /datum/data/mining_equipment("flour bag", /obj/item/reagent_containers/food/condiment/flour, 3),
 		new /datum/data/mining_equipment("rice bag", /obj/item/reagent_containers/food/condiment/rice, 3),
 		new /datum/data/mining_equipment("beer bottle", /obj/item/reagent_containers/food/drinks/beer/vampire, 10),
