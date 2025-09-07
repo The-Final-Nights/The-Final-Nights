@@ -73,7 +73,6 @@
 
 
 
-
 /mob/living/carbon/human/npc/Initialize()
 	. = ..()
 	NPC_wyrm_taint() // Declaring wether this NPC has wyrm taint or not to "Sense Wyrm" users
