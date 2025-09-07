@@ -427,6 +427,10 @@
 	rack_sound = 'sound/weapons/gun/pistol/slide_lock.ogg'
 	fire_sound = 'code/modules/wod13/sounds/mac10.ogg'
 
+/obj/item/gun/ballistic/vampire/mac10/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 3000, "mac10", FALSE)
+
 /obj/item/ammo_box/magazine/vampmac10
 	name = "mac10 magazine (.45 ACP)"
 	icon = 'code/modules/wod13/ammo.dmi'
