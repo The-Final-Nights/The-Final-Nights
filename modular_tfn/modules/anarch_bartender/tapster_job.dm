@@ -19,7 +19,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_TAPSTER
 	known_contacts = list("Baron","Bouncer","Emissary","Sweeper")
-	allowed_species = list("Human", "Ghoul")
+	allowed_species = list("Human", "Ghoul", "Kuei-Jin")
 	species_slots = list("Human" = 2, "Ghoul" = 2)
 
 	v_duty = "You are a bartender of the local biker hangout. Serve the eclectic clients that pass through, and try not to ask too many questions."

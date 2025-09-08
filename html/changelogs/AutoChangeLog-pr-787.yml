@@ -1,0 +1,6 @@
+author: "SoreYew"
+delete-after: True
+changes:
+  - rscadd: "V duty text to Tower Employee"
+  - rscadd: "additional phrasing to doctor v duty text"
+  - balance: "Rebalances kindred (and kj) role availability in Camarilla controlled roles"
