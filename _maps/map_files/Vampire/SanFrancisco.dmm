@@ -934,7 +934,9 @@
 /obj/effect/turf_decal/siding/wideplating/dark/corner{
 	dir = 8
 	},
-/obj/structure/table/wood/fancy/black,
+/obj/structure/bookcase/random{
+	pixel_y = 20
+	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "alr" = (
@@ -22580,16 +22582,15 @@
 /obj/effect/turf_decal/siding/wideplating/corner{
 	color = "#5a2355"
 	},
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
-	},
 /obj/structure/railing{
 	dir = 8;
 	plane = 4;
 	pixel_y = 6
 	},
 /obj/effect/decal/shadow,
+/obj/structure/bookcase/random{
+	pixel_y = 20
+	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "fNb" = (
@@ -36862,11 +36863,10 @@
 	plane = 4;
 	pixel_y = 6
 	},
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
-	},
 /obj/effect/decal/shadow,
+/obj/structure/bookcase/random{
+	pixel_y = 20
+	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "jmU" = (
@@ -49436,9 +49436,8 @@
 /obj/effect/turf_decal/siding/wideplating/corner{
 	color = "#5a2355"
 	},
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
+/obj/structure/bookcase/random{
+	pixel_y = 20
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
@@ -57139,7 +57138,6 @@
 /mob/living/simple_animal/pet/cat/vampiretzi{
 	name = "Ted"
 	},
-/obj/structure/table/wood/fancy/black,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "ogq" = (
@@ -68119,14 +68117,13 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict)
 "qOQ" = (
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
-	},
 /obj/structure/railing{
 	dir = 8;
 	plane = 4;
 	pixel_y = 6
+	},
+/obj/structure/bookcase/random{
+	pixel_y = 20
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
@@ -69342,9 +69339,8 @@
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#5a2355"
 	},
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
+/obj/structure/bookcase/random{
+	pixel_y = 20
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
@@ -88141,11 +88137,10 @@
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#5a2355"
 	},
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
-	},
 /obj/effect/decal/shadow,
+/obj/structure/bookcase/random{
+	pixel_y = 20
+	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "vXS" = (
@@ -92886,9 +92881,8 @@
 /turf/open/floor/plating/woodfancy,
 /area/vtm/clinic/haven)
 "xff" = (
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
+/obj/structure/bookcase/random{
+	pixel_y = 20
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
