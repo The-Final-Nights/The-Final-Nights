@@ -363,8 +363,15 @@
 	if(iskindred(target))
 		if(methods & VAMPIRE)
 			allowed_to_kindred = TRUE
-		if(!allowed_to_kindred)
-			return
+		if(!allowed_to_kindred) // APOC EDIT START
+			var/mob/living/carbon/human/stummy_owner = target
+			var/obj/item/organ/stomach/vampire/stummy = stummy_owner.getorganslot(ORGAN_SLOT_STOMACH)
+			stummy.capacity += amount
+			for(var/reagent in cached_reagents)
+				var/datum/reagent/T = reagent
+				remove_reagent(T.type, amount)
+			return // APOC EDIT END
+
 
 	var/atom/target_atom
 	var/datum/reagents/R
@@ -398,7 +405,7 @@
 			var/transfer_amount = T.volume * part
 			if(preserve_data)
 				trans_data = copy_data(T)
-			R.add_reagent(T.type, transfer_amount * multiplier, trans_data, chem_temp, no_react = 1) //we only handle reaction after every reagent has been transfered.
+			R.add_reagent(T.type, transfer_amount * multiplier, trans_data, chem_temp, no_react = 1) //we only handle reaction after every reagent has been transfered. // APOC EDIT END
 			if(methods)
 				if(istype(target_atom, /obj/item/organ))
 					R.expose_single(T, target, methods, part, show_message)
@@ -1077,5 +1084,5 @@
 /proc/get_chem_id(chem_name)
 	for(var/X in GLOB.chemical_reagents_list)
 		var/datum/reagent/R = GLOB.chemical_reagents_list[X]
-		if(ckey(chem_name) == ckey(lowertext(R.name)))
+		if(ckey(chem_name) == ckey(LOWER_TEXT(R.name)))
 			return X
