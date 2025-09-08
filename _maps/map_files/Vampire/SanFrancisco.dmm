@@ -22587,7 +22587,6 @@
 	plane = 4;
 	pixel_y = 6
 	},
-/obj/effect/decal/shadow,
 /obj/structure/bookcase/random{
 	pixel_y = 20
 	},
@@ -36863,7 +36862,6 @@
 	plane = 4;
 	pixel_y = 6
 	},
-/obj/effect/decal/shadow,
 /obj/structure/bookcase/random{
 	pixel_y = 20
 	},
@@ -88137,7 +88135,6 @@
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#5a2355"
 	},
-/obj/effect/decal/shadow,
 /obj/structure/bookcase/random{
 	pixel_y = 20
 	},
