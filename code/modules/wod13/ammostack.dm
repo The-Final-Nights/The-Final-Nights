@@ -111,12 +111,12 @@
 /obj/projectile/beam/beam_rifle/vampire/rubber
 	name = "12g shotgun rubber shot"
 	damage = 5
-	stamina = 25
+	stamina = 50
 
 /obj/projectile/beam/beam_rifle/vampire/incap
 	name = "12g shotgun incapacitation shot"
 	damage = 15
-	stamina = 60
+	stamina = 80
 
 /obj/projectile/beam/beam_rifle/vampire/vamp12g
 	name = "12g shotgun slug"
@@ -534,7 +534,7 @@
 	icon_state = "556"
 	base_iconstate = "556"
 
-obj/item/ammo_casing/vampire/c545mm/silver
+/obj/item/ammo_casing/vampire/c545mm/silver
 	name = "5.45mm silver bullet casing"
 	desc = "a 5.45mm silver bullet casing."
 	projectile_type = /obj/projectile/beam/beam_rifle/vampire/vamp545mm/silver

@@ -983,6 +983,14 @@ VENTORY!
 	grid_width = 2 GRID_BOXES
 	grid_height = 2 GRID_BOXES
 
+/obj/item/gun/ballistic/vampire/mac10
+	grid_width = 2 GRID_BOXES
+	grid_height = 2 GRID_BOXES
+
+/obj/item/ammo_box/magazine/vampmac10
+	grid_width = 1 GRID_BOXES
+	grid_height = 2 GRID_BOXES
+
 /obj/item/ammo_box/magazine/vamp9mp5
 	grid_width = 1 GRID_BOXES
 	grid_height = 2 GRID_BOXES
