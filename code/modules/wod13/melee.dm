@@ -105,7 +105,6 @@
 	. = ..()
 	icon_state = "axetzi0"
 
-
 /obj/item/melee/vampirearms/katana
 	name = "katana"
 	desc = "An elegant weapon, its tiny edge is capable of cutting through flesh and bone with ease."
@@ -137,6 +136,7 @@
 	name = "burning katana"
 	icon_state = "firetana"
 	pixel_w = -8
+	force = 30
 	damtype = BURN
 	item_flags = DROPDEL
 	is_iron = FALSE
@@ -151,6 +151,7 @@
 	name = "bloody katana"
 	color = "#bb0000"
 	pixel_w = -8
+	force = 30
 	damtype = CLONE
 	item_flags = DROPDEL
 	is_iron = FALSE
@@ -539,17 +540,13 @@
 			to_chat(user, "This particular wall feels reinforced too harshly by the veil to dissolve.")
 			return
 		twall.dismantle_wall(1,0)
-		if(user.CheckEyewitness(user, user, 7, FALSE))
-			user.adjust_veil(-2)
+		SEND_SIGNAL(user, COMSIG_MASQUERADE_VIOLATION)
 	return ..()
 
 /obj/item/melee/vampirearms/knife/gangrel/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		src.attack_speed = CLICK_CD_MELEE * 0.5
-	else
-		src.attack_speed = CLICK_CD_MELEE
+	attack_speed = CLICK_CD_MELEE
 
 /obj/item/melee/vampirearms/chainsaw
 	name = "chainsaw"
@@ -960,10 +957,7 @@
 /obj/item/melee/vampirearms/tzimisce/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-	if(HAS_TRAIT(owner, TRAIT_WARRIOR))
-		src.attack_speed = CLICK_CD_MELEE * 0.5
-	else
-		src.attack_speed = CLICK_CD_MELEE
+	attack_speed = CLICK_CD_MELEE
 
 /obj/item/melee/vampirearms/tzimisce/shock/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity)

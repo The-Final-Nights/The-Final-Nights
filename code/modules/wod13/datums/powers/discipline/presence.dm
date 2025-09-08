@@ -33,6 +33,12 @@
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clan?.name == CLAN_GARGOYLE)
+			theirpower -= 2
+
+
 	return (mypower > theirpower && ((owner.generation - 3) < target.generation))
 
 //AWE

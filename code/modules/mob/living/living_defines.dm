@@ -221,13 +221,11 @@
 
 	var/frenzy_chance_boost = 10
 
-	var/last_bloodpool_restore = 0
+	COOLDOWN_DECLARE(bloodpool_restore)
 
 	var/list/knowscontacts = null
 
 	var/mysticism_knowledge = FALSE
-
-	var/thaumaturgy_knowledge = FALSE
 
 	var/necromancy_knowledge = FALSE
 
@@ -252,7 +250,6 @@
 	var/last_bloodpower_click = 0
 	var/last_drinkblood_click = 0
 	var/harm_focus = SOUTH
-	var/masquerade_votes = 0
 	var/list/voted_for = list()
 	var/true_real_name
 	var/died_already = FALSE
@@ -260,7 +257,7 @@
 	var/bloodpool = 5
 	var/maxbloodpool = 5
 	var/generation = 13
-	var/masquerade = 5
+	var/masquerade_score = 5
 	var/datum/weakref/conditioner
 	var/conditioned = FALSE
 	var/last_masquerade_violation = 0
@@ -301,7 +298,7 @@
 	var/inspired = FALSE
 	var/last_gnosis_buff = 0
 	var/last_rage_gain = 0
-	var/last_veil_restore = 0
+	COOLDOWN_DECLARE(veil_restore)
 
 	var/list/beastmaster = list()
 
@@ -315,3 +312,6 @@
 
 	//If we are currently leaning on something, and what that object is
 	var/atom/leaned_object
+
+	//List for icons created for obfuscated mobs
+	var/list/obf_icons // TFN ADDITION - Adding an Obfuscate Indicator

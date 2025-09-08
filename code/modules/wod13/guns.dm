@@ -408,6 +408,43 @@
 	. = ..()
 	AddComponent(/datum/component/selling, 175, "uzi", FALSE)
 
+/obj/item/gun/ballistic/vampire/mac10
+	name = "\improper Mac-10 Submachine Gun"
+	desc = "A automatic, high rate of fire submachine gun chambered in .45 ACP. Looks expensive."
+	icon_state = "mac10"
+	icon = 'code/modules/wod13/48x32weapons.dmi'
+	inhand_icon_state = "mac10"
+	worn_icon_state = "uzi"
+	mag_type = /obj/item/ammo_box/magazine/vampmac10
+	burst_size = 5
+	spread = 7
+	recoil = 0
+	fire_delay = 1
+	dual_wield_spread = 70
+	bolt_type = BOLT_TYPE_OPEN
+	show_bolt_icon = FALSE
+	mag_display = TRUE
+	rack_sound = 'sound/weapons/gun/pistol/slide_lock.ogg'
+	fire_sound = 'code/modules/wod13/sounds/mac10.ogg'
+
+/obj/item/gun/ballistic/vampire/mac10/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 3000, "mac10", FALSE)
+
+/obj/item/ammo_box/magazine/vampmac10
+	name = "mac10 magazine (.45 ACP)"
+	icon = 'code/modules/wod13/ammo.dmi'
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	icon_state = "mac10"
+	ammo_type = /obj/item/ammo_casing/vampire/c45acp
+	caliber = CALIBER_45
+	max_ammo = 30
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+
+
 /obj/item/ammo_box/magazine/vamp9mp5
 	name = "mp5 magazine (9mm)"
 	icon = 'code/modules/wod13/ammo.dmi'
@@ -850,24 +887,33 @@
 	icon = 'code/modules/wod13/weapons.dmi'
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	w_class = WEIGHT_CLASS_SMALL
+	custom_fire_overlay = "molotov_flamed"
 	var/active = FALSE
-	masquerade_violating = TRUE
 
 /obj/item/molotov/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	for(var/turf/open/floor/F in range(2, hit_atom))
-		if(F)
-			new /obj/effect/decal/cleanable/gasoline(F)
-	if(active)
-		new /obj/effect/fire(get_turf(hit_atom))
-	playsound(get_turf(hit_atom), 'code/modules/wod13/sounds/explode.ogg', 100, TRUE)
-	qdel(src)
+	if(!active)
+		..()
+	explode(hit_atom)
 	..()
 
 /obj/item/molotov/attackby(obj/item/I, mob/user, params)
 	if(I.get_temperature() && !active)
 		active = TRUE
 		log_bomber(user, "has primed a", src, "for detonation")
-		icon_state = "molotov_flamed"
+
+		to_chat(user, "<span class='info'>You light [src] on fire.</span>")
+		icon_state = custom_fire_overlay
+		addtimer(CALLBACK(src, PROC_REF(explode)), 10 SECONDS)
+
+/obj/item/molotov/proc/explode(atom/hit_atom)
+	if(!hit_atom)
+		hit_atom = get_turf(src)
+	for(var/turf/open/floor/F in range(2, hit_atom))
+		new /obj/effect/decal/cleanable/gasoline(F)
+	new /obj/effect/fire(get_turf(hit_atom))
+	hit_atom.fire_act()
+	playsound(get_turf(hit_atom), 'code/modules/wod13/sounds/explode.ogg', 100, TRUE)
+	qdel(src)
 
 /obj/item/vampire_flamethrower
 	name = "flamethrower"

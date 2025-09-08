@@ -30,10 +30,10 @@
 			embracer.attempt_embrace_target(exposed_mob, (usr == data["donor"]) ? null : usr)
 			return
 		else
-			victim.bloodpool = min(victim.maxbloodpool, victim.bloodpool+1) //Otherwise, they just consume vitae normally.
+			victim.bloodpool = min(victim.maxbloodpool, victim.bloodpool + (reac_volume / 50)) //Otherwise, they just consume vitae normally.
 			victim.send_ghoul_vitae_consumption_message(data["donor"])
 	if(iskindred(victim)) //Are we a kindred species?
-		victim.bloodpool = min(victim.maxbloodpool, victim.bloodpool+1)
+		victim.bloodpool = min(victim.maxbloodpool, victim.bloodpool + (reac_volume / 50))
 		if(data["donor"])
 			victim.blood_bond(data["donor"])
 	if(isgarou(victim)) //Are we a garou species?

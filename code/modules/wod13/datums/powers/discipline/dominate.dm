@@ -80,17 +80,17 @@
 	if(!ishuman(target))
 		return FALSE
 
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clan?.name == CLAN_GARGOYLE)
-			return TRUE
-
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 
 	if(owner == conditioner)
 		return TRUE
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clan?.name == CLAN_GARGOYLE)
+			theirpower -= 2
 
 	if(target.conditioned)
 		theirpower += 3
@@ -152,7 +152,7 @@
 	// to use the same proc that voice of god uses we need a list of listeners as well as a power multiplier. just create a list with the target of dom 1 and power multiplier of 1
 	var/list/listeners = list(target)
 	var/power_multiplier = 1
-	apply_voice_of_god_effects(custom_command, owner, listeners, power_multiplier)
+	apply_voice_of_god_effects(lowertext(custom_command), owner, listeners, power_multiplier)
 
 //MESMERIZE
 /datum/discipline_power/dominate/mesmerize
@@ -244,6 +244,7 @@
 		owner.say("Think twice.")
 		target.add_movespeed_modifier(/datum/movespeed_modifier/dominate)
 		SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+		SEND_SIGNAL(target, COMSIG_ALL_MASQUERADE_REINFORCE)
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
 		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))

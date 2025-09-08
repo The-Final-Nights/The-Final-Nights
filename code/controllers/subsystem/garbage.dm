@@ -54,13 +54,7 @@ SUBSYSTEM_DEF(garbage)
 
 
 /datum/controller/subsystem/garbage/PreInit()
-	queues = new(GC_QUEUE_COUNT)
-	pass_counts = new(GC_QUEUE_COUNT)
-	fail_counts = new(GC_QUEUE_COUNT)
-	for(var/i in 1 to GC_QUEUE_COUNT)
-		queues[i] = list()
-		pass_counts[i] = 0
-		fail_counts[i] = 0
+	InitQueues()
 
 /datum/controller/subsystem/garbage/stat_entry(msg)
 	var/list/counts = list()
@@ -126,6 +120,15 @@ SUBSYSTEM_DEF(garbage)
 
 
 
+/datum/controller/subsystem/garbage/proc/InitQueues()
+	if (isnull(queues)) // Only init the queues if they don't already exist, prevents overriding of recovered lists
+		queues = new(GC_QUEUE_COUNT)
+		pass_counts = new(GC_QUEUE_COUNT)
+		fail_counts = new(GC_QUEUE_COUNT)
+		for(var/i in 1 to GC_QUEUE_COUNT)
+			queues[i] = list()
+			pass_counts[i] = 0
+			fail_counts[i] = 0
 
 /datum/controller/subsystem/garbage/proc/HandleQueue(level = GC_QUEUE_FILTER)
 	if (level == GC_QUEUE_FILTER)
@@ -264,6 +267,7 @@ SUBSYSTEM_DEF(garbage)
 		postpone(time)
 
 /datum/controller/subsystem/garbage/Recover()
+	InitQueues() //We first need to create the queues before recovering data
 	if (istype(SSgarbage.queues))
 		for (var/i in 1 to SSgarbage.queues.len)
 			queues[i] |= SSgarbage.queues[i]
@@ -298,12 +302,12 @@ SUBSYSTEM_DEF(garbage)
 	I.qdels++
 
 	if(isnull(D.gc_destroyed))
-		if (SEND_SIGNAL(D, COMSIG_PARENT_PREQDELETED, force)) // Give the components a chance to prevent their parent from being deleted
+		if (SEND_SIGNAL(D, COMSIG_PREQDELETED, force)) // Give the components a chance to prevent their parent from being deleted
 			return
 		D.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
 		var/start_time = world.time
 		var/start_tick = world.tick_usage
-		SEND_SIGNAL(D, COMSIG_PARENT_QDELETING, force) // Let the (remaining) components know about the result of Destroy
+		SEND_SIGNAL(D, COMSIG_QDELETING, force) // Let the (remaining) components know about the result of Destroy
 		var/hint = D.Destroy(arglist(args.Copy(2))) // Let our friend know they're about to get fucked up.
 		if(world.time != start_time)
 			I.slept_destroy++
