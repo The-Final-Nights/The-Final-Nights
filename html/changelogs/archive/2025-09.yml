@@ -77,3 +77,12 @@
       and a small amount of damage over time.
   - rscadd: Some new insect themed summons for Animalism, with the right quirk.
   - bugfix: WOD13 specific cockroaches now have their sprites back
+2025-09-07:
+  '@magicianofwands for the code, @despong for the sprites, @tehlordoswag420 for the SFX':
+  - rscadd: Added the MAC-10! A powerful, Baron exclusive submachine gun chambered
+      in .45 ACP
+  - sound: mac10.ogg
+  - image: mac10 icon
+  - map: The MAC-10 has been placed in the Baron's bedroom
+  SoreYew:
+  - qol: Buffs rubbershot and incapacitation shot
