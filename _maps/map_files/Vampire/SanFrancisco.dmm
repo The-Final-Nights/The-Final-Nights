@@ -4445,12 +4445,12 @@
 /area/vtm/interior/wyrm_corrupted)
 "bjL" = (
 /obj/structure/table/wood/fancy,
-/obj/item/clothing/suit/vampire/trench/alt/armored,
-/obj/item/clothing/suit/vampire/trench/alt/armored,
-/obj/item/clothing/suit/vampire/trench/alt/armored,
 /obj/item/clothing/head/fedora/beige,
 /obj/item/clothing/head/fedora/beige,
 /obj/item/clothing/head/fedora/beige,
+/obj/item/clothing/suit/vampire/trench/alt,
+/obj/item/clothing/suit/vampire/trench/alt,
+/obj/item/clothing/suit/vampire/trench/alt,
 /turf/open/floor/plating/church,
 /area/vtm/interior/giovanni)
 "bjN" = (
@@ -38748,6 +38748,7 @@
 /obj/item/clothing/under/suit/checkered,
 /obj/item/clothing/head/fedora/beige,
 /obj/item/clothing/head/fedora,
+/obj/item/clothing/suit/vampire/trench/alt/armored,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/giovanni)
 "jOZ" = (
