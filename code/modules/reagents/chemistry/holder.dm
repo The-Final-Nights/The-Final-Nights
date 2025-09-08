@@ -405,7 +405,7 @@
 			var/transfer_amount = T.volume * part
 			if(preserve_data)
 				trans_data = copy_data(T)
-			R.add_reagent(T.type, transfer_amount * multiplier, trans_data, chem_temp, no_react = 1) //we only handle reaction after every reagent has been transfered. // APOC EDIT END
+			R.add_reagent(T.type, transfer_amount * multiplier, trans_data, chem_temp, no_react = 1) //we only handle reaction after every reagent has been transfered. // APOC EDIT CHANGE
 			if(methods)
 				if(istype(target_atom, /obj/item/organ))
 					R.expose_single(T, target, methods, part, show_message)
