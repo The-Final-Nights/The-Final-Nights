@@ -934,10 +934,7 @@
 /obj/effect/turf_decal/siding/wideplating/dark/corner{
 	dir = 8
 	},
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
-	},
+/obj/structure/table/wood/fancy/black,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "alr" = (
@@ -1424,7 +1421,6 @@
 "arQ" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#4a3925";
-	pixel_y = 0;
 	dir = 1
 	},
 /obj/machinery/light{
@@ -2215,10 +2211,6 @@
 	},
 /turf/open/floor/plating/dirt,
 /area/vtm/sewer/nosferatu_warren)
-"aBX" = (
-/obj/structure/coclock/grandpa,
-/turf/open/floor/plating/sidewalk/old,
-/area/vtm/interior/tzimisce_manor)
 "aCe" = (
 /turf/closed/wall/vampwall/junk,
 /area/vtm/ghetto)
@@ -2684,9 +2676,6 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/graveyard)
 "aIB" = (
-/obj/structure/chair/comfy/black{
-	dir = 4
-	},
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
 	},
@@ -5085,17 +5074,6 @@
 "brg" = (
 /turf/open/floor/plating/stone,
 /area/vtm/sewer)
-"brl" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355";
-	dir = 4
-	},
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355"
-	},
-/turf/open/floor/carpet/purple,
-/area/vtm/interior/tzimisce_manor)
 "bru" = (
 /obj/structure/curtain/bounty{
 	pixel_y = -27
@@ -5378,12 +5356,11 @@
 /obj/effect/turf_decal/siding/wideplating/corner{
 	color = "#5a2355"
 	},
-/obj/structure/table/wood/fancy/purple,
-/obj/item/flashlight/lantern,
 /obj/machinery/light/prince{
 	dir = 4;
 	pixel_y = 14
 	},
+/obj/structure/chair/sofa/corp/right,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "bvG" = (
@@ -7086,9 +7063,8 @@
 	color = "#5a2355";
 	dir = 4
 	},
-/obj/structure/chair/comfy/black{
-	dir = 4
-	},
+/obj/structure/table/wood/fancy/purple,
+/obj/item/flashlight/lantern,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "bRV" = (
@@ -10816,6 +10792,10 @@
 	dir = 1
 	},
 /obj/item/reagent_containers/blood/random,
+/obj/item/reagent_containers/food/condiment/flour,
+/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/reagent_containers/food/condiment/sugar,
+/obj/item/reagent_containers/food/condiment/flour,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/tzimisce_manor)
 "cMG" = (
@@ -15894,6 +15874,14 @@
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/baywalk)
+"ecD" = (
+/obj/effect/turf_decal/siding/wideplating{
+	color = "#5a2355";
+	dir = 6
+	},
+/obj/structure/table/wood/fancy,
+/turf/open/floor/carpet/purple,
+/area/vtm/interior/tzimisce_manor)
 "ecJ" = (
 /obj/machinery/light/small{
 	dir = 4;
@@ -16241,14 +16229,6 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/financialdistrict)
-"ehB" = (
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355";
-	dir = 4
-	},
-/obj/structure/table/wood/fancy/purple,
-/turf/open/floor/plating/woodfancy,
-/area/vtm/interior/tzimisce_manor)
 "ehH" = (
 /mob/living/simple_animal/pet/cat/vampire,
 /turf/open/floor/plating/rough,
@@ -21338,7 +21318,9 @@
 	color = "#5a2355";
 	dir = 1
 	},
-/obj/structure/table/wood/fancy/purple,
+/obj/structure/dresser{
+	pixel_y = 12
+	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "fvh" = (
@@ -22599,6 +22581,7 @@
 	plane = 4;
 	pixel_y = 6
 	},
+/obj/effect/decal/shadow,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "fNb" = (
@@ -22647,6 +22630,15 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/baywalk)
+"fNJ" = (
+/obj/effect/turf_decal/siding/wideplating{
+	color = "#5a2355";
+	dir = 5
+	},
+/obj/structure/chair/sofa/corp/left,
+/obj/effect/decal/shadow,
+/turf/open/floor/carpet/purple,
+/area/vtm/interior/tzimisce_manor)
 "fNS" = (
 /obj/structure/closet/cabinet,
 /obj/item/clothing/mask/vampire/tragedy,
@@ -22992,7 +22984,6 @@
 	},
 /obj/effect/decal/stock{
 	dir = 4;
-	pixel_y = 0;
 	pixel_x = -16
 	},
 /obj/effect/decal/stock{
@@ -23047,17 +23038,15 @@
 "fRS" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#4a3925";
-	pixel_y = 0;
 	dir = 1
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/clinic/haven)
 "fSg" = (
-/obj/structure/table/wood/fancy/purple,
 /obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355";
-	dir = 4
+	color = "#5a2355"
 	},
+/obj/structure/table/wood/fancy,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/tzimisce_manor)
 "fSh" = (
@@ -31328,7 +31317,6 @@
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/machinery/libraryscanner,
@@ -31804,19 +31792,6 @@
 /obj/structure/flora/ausbushes/grassybush,
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren)
-"ibD" = (
-/obj/structure/chair/sofa/corp/right{
-	dir = 4
-	},
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355"
-	},
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355";
-	dir = 8
-	},
-/turf/open/floor/carpet/purple,
-/area/vtm/interior/tzimisce_manor)
 "ibE" = (
 /obj/structure/chair/plastic{
 	dir = 4
@@ -34561,7 +34536,6 @@
 	pixel_y = 32
 	},
 /obj/item/vamp/keys/clinic{
-	pixel_y = 0;
 	accesslocks = list("fireshelter");
 	name = "Fire Shelter keys";
 	desc = "Keys to the clinic's fire shelter.";
@@ -36547,21 +36521,18 @@
 /obj/structure/table,
 /obj/effect/turf_decal/siding/white,
 /obj/item/vamp/keys/clinic{
-	pixel_y = 0;
 	accesslocks = list("fireshelter");
 	name = "Fire Shelter keys";
 	desc = "Keys to the clinic's fire shelter.";
 	color = "#e06224"
 	},
 /obj/item/vamp/keys/clinic{
-	pixel_y = 0;
 	accesslocks = list("fireshelter");
 	name = "Fire Shelter keys";
 	desc = "Keys to the clinic's fire shelter.";
 	color = "#e06224"
 	},
 /obj/item/vamp/keys/clinic{
-	pixel_y = 0;
 	accesslocks = list("fireshelter");
 	name = "Fire Shelter keys";
 	desc = "Keys to the clinic's fire shelter.";
@@ -36900,6 +36871,7 @@
 	pixel_y = 20;
 	density = 0
 	},
+/obj/effect/decal/shadow,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "jmU" = (
@@ -39956,7 +39928,6 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "kam" = (
-/obj/structure/fluff/hedge,
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
 	},
@@ -39964,6 +39935,8 @@
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
 	},
+/obj/structure/coclock/grandpa,
+/obj/effect/decal/shadow,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "kas" = (
@@ -45190,7 +45163,6 @@
 	},
 /obj/effect/turf_decal/siding/wood{
 	color = "#4a3925";
-	pixel_y = 0;
 	dir = 1
 	},
 /obj/structure/chair/wood/wings,
@@ -47068,11 +47040,11 @@
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#5a2355"
 	},
-/obj/structure/closet/crate/coffin,
 /obj/machinery/button/curtain{
 	id = 993;
 	pixel_y = 30
 	},
+/obj/structure/chair/sofa/corp/left,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "lLv" = (
@@ -49227,15 +49199,15 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch)
 "mmQ" = (
-/obj/effect/decal/shadow,
-/obj/effect/decal/wallpaper/stone/low{
-	pixel_y = 24
+/obj/machinery/light/prince{
+	pixel_y = 32
 	},
-/obj/structure/chair/sofa/corp/left,
+/obj/structure/chair/sofa/corp,
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#5a2355";
-	dir = 4
+	dir = 1
 	},
+/obj/effect/decal/shadow,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/tzimisce_manor)
 "mmR" = (
@@ -49661,6 +49633,14 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/bianchiBank)
+"mqR" = (
+/obj/effect/turf_decal/siding/wideplating{
+	color = "#5a2355";
+	dir = 4
+	},
+/obj/structure/chair/comfy/black,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/tzimisce_manor)
 "mqS" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#574d46"
@@ -49804,7 +49784,6 @@
 "msP" = (
 /obj/effect/decal/stock{
 	dir = 4;
-	pixel_y = 0;
 	pixel_x = -16
 	},
 /obj/effect/decal/stock{
@@ -56788,7 +56767,6 @@
 /area/vtm/interior/millennium_tower/f3)
 "obW" = (
 /obj/structure/extinguisher_cabinet{
-	pixel_y = 0;
 	dir = 4
 	},
 /obj/effect/turf_decal/weather/dirt{
@@ -57167,6 +57145,7 @@
 /mob/living/simple_animal/pet/cat/vampiretzi{
 	name = "Ted"
 	},
+/obj/structure/table/wood/fancy/black,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "ogq" = (
@@ -57359,12 +57338,8 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/supply)
 "oiv" = (
-/obj/structure/chair/comfy/black,
 /obj/effect/turf_decal/siding/wideplating/dark,
-/obj/structure/bookcase/random/nonfiction{
-	pixel_y = 20;
-	density = 0
-	},
+/obj/structure/chair/sofa/corp/left,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "oiE" = (
@@ -58694,7 +58669,6 @@
 "oyx" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#4a3925";
-	pixel_y = 0;
 	dir = 1
 	},
 /obj/structure/chair/wood{
@@ -61941,8 +61915,8 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
 "pnx" = (
-/obj/structure/table/wood/fancy/black,
 /obj/effect/turf_decal/siding/wideplating/dark/corner,
+/obj/structure/chair/sofa/corp/right,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "pny" = (
@@ -62305,7 +62279,6 @@
 	},
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /obj/item/vamp/keys/clinic{
-	pixel_y = 0;
 	accesslocks = list("fireshelter");
 	name = "Fire Shelter keys";
 	desc = "Keys to the clinic's fire shelter.";
@@ -65723,13 +65696,11 @@
 	color = "#5a2355";
 	dir = 1
 	},
-/obj/structure/chair/comfy/black{
-	dir = 8
-	},
 /obj/machinery/light/prince{
 	dir = 8;
 	pixel_y = 13
 	},
+/obj/structure/closet/crate/coffin,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
 "qjB" = (
@@ -72881,16 +72852,6 @@
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
-"saE" = (
-/obj/machinery/light/prince{
-	pixel_y = 32
-	},
-/obj/structure/fluff/hedge,
-/obj/effect/decal/wallpaper/stone/low{
-	pixel_y = 24
-	},
-/turf/open/floor/plating/sidewalk/old,
-/area/vtm/interior/tzimisce_manor)
 "saF" = (
 /obj/structure/vampipe{
 	icon_state = "piping24";
@@ -73520,9 +73481,9 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
 "sgZ" = (
-/obj/structure/fireplace,
 /obj/effect/turf_decal/siding/wideplating/dark,
-/turf/open/floor/plating/woodfancy,
+/obj/structure/fireplace,
+/turf/open/floor/plating/roofwalk/cobblestones,
 /area/vtm/interior/tzimisce_manor)
 "she" = (
 /obj/effect/turf_decal/siding/wood{
@@ -78893,16 +78854,6 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/industrial)
-"tBD" = (
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355";
-	dir = 4
-	},
-/obj/structure/dresser{
-	pixel_y = 12
-	},
-/turf/open/floor/plating/woodfancy,
-/area/vtm/interior/tzimisce_manor)
 "tBI" = (
 /mob/living/simple_animal/hostile/retaliate/frog{
 	name = "Freddo"
@@ -82046,16 +81997,14 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
 "uqh" = (
-/obj/effect/decal/wallpaper/stone/low{
-	pixel_y = 24
+/obj/effect/turf_decal/siding/wideplating{
+	color = "#5a2355";
+	dir = 9
 	},
 /obj/structure/chair/sofa/corp/corner{
 	dir = 4
 	},
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#5a2355";
-	dir = 8
-	},
+/obj/effect/decal/shadow,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/tzimisce_manor)
 "uqm" = (
@@ -83219,7 +83168,6 @@
 	dir = 8
 	},
 /obj/structure/extinguisher_cabinet{
-	pixel_y = 0;
 	dir = 4
 	},
 /obj/effect/turf_decal/weather/dirt{
@@ -83585,12 +83533,12 @@
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/tzimisce_sanctum)
 "uKD" = (
-/obj/structure/chair/sofa/corp{
+/obj/structure/chair/sofa/corp/right{
 	dir = 4
 	},
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#5a2355";
-	dir = 8
+	dir = 10
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/tzimisce_manor)
@@ -88207,6 +88155,7 @@
 	pixel_y = 20;
 	density = 0
 	},
+/obj/effect/decal/shadow,
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
 "vXS" = (
@@ -92942,7 +92891,6 @@
 	},
 /obj/effect/turf_decal/siding/wood{
 	color = "#4a3925";
-	pixel_y = 0;
 	dir = 1
 	},
 /turf/open/floor/plating/woodfancy,
@@ -93166,7 +93114,6 @@
 /obj/fusebox,
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/turf_decal/siding/wood{
@@ -141082,7 +141029,7 @@ lfj
 lfj
 lfj
 lfj
-lfj
+lCZ
 lCZ
 lCZ
 lCZ
@@ -141286,8 +141233,8 @@ qak
 lfj
 uqh
 uKD
-ibD
 cAx
+tst
 aIr
 lfj
 qBj
@@ -141488,7 +141435,7 @@ jGe
 lfj
 mmQ
 fSg
-brl
+cAx
 cAx
 kST
 ogC
@@ -141687,9 +141634,9 @@ gIr
 gIr
 jGe
 jGe
-ogC
-vKF
-cAx
+lfj
+fNJ
+ecD
 cAx
 cAx
 tst
@@ -141889,8 +141836,8 @@ rDI
 rDI
 jGe
 jGe
-lfj
-saE
+ogC
+vKF
 cAx
 cAx
 cAx
@@ -142095,7 +142042,7 @@ lfj
 kam
 cAx
 cAx
-aBX
+tst
 llc
 lfj
 dSI
@@ -181686,9 +181633,9 @@ rpU
 rpU
 lfj
 bvE
-ehB
-tBD
 oLO
+oLO
+mqR
 bRS
 lfj
 rxn
@@ -184097,8 +184044,8 @@ prs
 oYt
 "}
 (30,1,3) = {"
-xfw
 rCB
+lfj
 lfj
 lfj
 lfj
@@ -184299,7 +184246,7 @@ prs
 oYt
 "}
 (31,1,3) = {"
-xfw
+rCB
 rCB
 lfj
 bfK
