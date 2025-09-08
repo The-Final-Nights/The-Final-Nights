@@ -80994,9 +80994,6 @@
 	id = 993;
 	pixel_y = 30
 	},
-/obj/structure/sink{
-	pixel_y = 16
-	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/tzimisce_manor)
 "ucm" = (
