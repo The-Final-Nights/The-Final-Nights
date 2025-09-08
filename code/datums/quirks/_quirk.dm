@@ -15,12 +15,15 @@
 	var/mob/living/quirk_holder
 
 	var/list/allowed_species = list()
+	//TFN EDIT START
 	var/list/excluded_clans = list()
 	var/list/allowed_tribes = list()
+	var/generation_minimum = 0
+	//TFN EDIT END
 
 /datum/quirk/New(mob/living/quirk_mob, spawn_effects)
 	..()
-	if(!quirk_mob || (human_only && !ishuman(quirk_mob)) || quirk_mob.has_quirk(type))
+	if(!quirk_mob || (human_only && !ishuman(quirk_mob)) || quirk_mob.has_quirk(type) || (quirk_mob.generation < generation_minimum)) //TFN EDIT, ORIGINAL: if(!quirk_mob || (human_only && !ishuman(quirk_mob)) || quirk_mob.has_quirk(type))
 		qdel(src)
 		return
 	quirk_holder = quirk_mob

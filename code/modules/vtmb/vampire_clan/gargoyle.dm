@@ -8,7 +8,6 @@
 		/datum/discipline/visceratika
 	)
 	clan_traits = list(
-		TRAIT_CANNOT_RESIST_MIND_CONTROL,
 		TRAIT_MASQUERADE_VIOLATING_FACE
 	)
 	alt_sprite = "gargoyle"
@@ -24,7 +23,6 @@
 /datum/vampire_clan/gargoyle/on_gain(mob/living/carbon/human/gargoyle)
 	..()
 	gargoyle.dna.species.wings_icon = "Gargoyle"
-	gargoyle.physiology.brute_mod = 0.8
 	gargoyle.dna.species.GiveSpeciesFlight(gargoyle)
 	var/datum/action/gargoyle_statue_form/statue_action = new()
 	statue_action.Grant(gargoyle)

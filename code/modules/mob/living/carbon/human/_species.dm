@@ -1459,7 +1459,7 @@ GLOBAL_LIST_EMPTY(selectable_races)
 			//Compare puncher's physique to the greater between the target's physique (robust enough to tank it) or dexterity (rolls with the punches)
 			var/roll = SSroll.storyteller_roll(
 			dice = target.get_total_physique() + round(min(target.get_total_athletics(), target.get_total_dexterity()) / 2),
-			difficulty = clamp(user.get_total_physique(), 1, 4) + (HAS_TRAIT(user, TRAIT_WARRIOR) ? rand(1,4) : 0),
+			difficulty = clamp(user.get_total_physique(), 1, 4),
 			mobs_to_show_output = user)
 
 			if(roll == ROLL_FAILURE)

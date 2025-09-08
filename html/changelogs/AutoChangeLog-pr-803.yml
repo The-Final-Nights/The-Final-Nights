@@ -1,0 +1,4 @@
+author: "chazzyjazzy"
+delete-after: True
+changes:
+  - bugfix: "removes an exploit where injecting a cigarette with vitae allows you to gain alot of blood."

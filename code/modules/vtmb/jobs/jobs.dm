@@ -165,9 +165,9 @@
 	desc = "A badge which shows social qualifications."
 
 /obj/item/card/id/bruiser
-	name = "bruiser badge"
-	id_type_name = "bruiser badge"
-	desc = "A badge which shows grit."
+	name = "member badge"
+	id_type_name = "member's badge"
+	desc = "The badge of a club member. United in purpose, the fists strike out."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "bruiser_badge"
 	inhand_icon_state = "card-id"
@@ -179,9 +179,9 @@
 	registered_name_is_public = FALSE
 
 /obj/item/card/id/sweeper
-	name = "sweeper badge"
-	id_type_name = "sweeper badge"
-	desc = "A badge which shows perspective."
+	name = "member badge"
+	id_type_name = "member's badge"
+	desc = "The badge of a club member. Collecting what is left to the margins, into one neat pile."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "sweeper_badge"
 	inhand_icon_state = "card-id"
@@ -193,9 +193,9 @@
 	registered_name_is_public = FALSE
 
 /obj/item/card/id/emissary
-	name = "emissary badge"
-	id_type_name = "emissary badge"
-	desc = "A badge which shows a favored voice, interlaced with gold thread."
+	name = "gold interwoven badge"
+	id_type_name = "gold interwoven badge"
+	desc = "The gold-interlaced badge of a club member. The pride of a loudmouth, or silver tongued swindler."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "emissary_badge"
 	inhand_icon_state = "card-id"
@@ -204,6 +204,20 @@
 	onflooricon = 'code/modules/wod13/onfloor.dmi'
 	worn_icon = 'code/modules/wod13/worn.dmi'
 	worn_icon_state = "emissary_badge"
+	registered_name_is_public = FALSE
+
+/obj/item/card/id/liaison
+	name = "promoter badge"
+	id_type_name = "promoter badge"
+	desc = "The gold-interlaced badge of a club member. The ties that bind, and unity despite difference."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "liaison_badge"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "liaison_badge"
 	registered_name_is_public = FALSE
 
 /obj/item/card/id/baron
