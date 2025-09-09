@@ -61,7 +61,6 @@
 	real_explosion_block = explosion_block
 	explosion_block = EXPLOSION_BLOCK_PROC
 
-	flags_1 |= ALLOW_DARK_PAINTS_1
 
 	RegisterSignal(src, COMSIG_OBJ_PAINTED, PROC_REF(on_painted))
 	AddComponent(/datum/component/simple_rotation, ROTATION_NEEDS_ROOM)

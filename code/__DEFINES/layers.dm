@@ -143,6 +143,10 @@
 /// Bubble for typing indicators
 #define TYPING_LAYER 23
 
+#define RADIAL_BACKGROUND_LAYER 24
+///25 is an unimportant number, it's just to normalize copied layers
+#define RADIAL_CONTENT_LAYER 25
+
 //HUD layer defines
 
 #define FULLSCREEN_PLANE 31

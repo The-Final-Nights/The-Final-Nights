@@ -24,7 +24,7 @@
 	if(_cleanable)
 		RegisterSignal(target, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(clean_react),TRUE)
 	if(_description)
-		RegisterSignal(target, COMSIG_PARENT_EXAMINE, PROC_REF(examine),TRUE)
+		RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(examine),TRUE)
 
 /datum/element/decal/proc/generate_appearance(_icon, _icon_state, _dir, _layer, _color, _alpha, source)
 	if(!_icon || !_icon_state)
@@ -36,7 +36,7 @@
 	return TRUE
 
 /datum/element/decal/Detach(atom/source, force)
-	UnregisterSignal(source, list(COMSIG_ATOM_DIR_CHANGE, COMSIG_COMPONENT_CLEAN_ACT, COMSIG_PARENT_EXAMINE, COMSIG_ATOM_UPDATE_OVERLAYS))
+	UnregisterSignal(source, list(COMSIG_ATOM_DIR_CHANGE, COMSIG_COMPONENT_CLEAN_ACT, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_UPDATE_OVERLAYS))
 	source.update_appearance()
 	if(isitem(source))
 		INVOKE_ASYNC(source, TYPE_PROC_REF(/obj/item, update_slot_icon))
