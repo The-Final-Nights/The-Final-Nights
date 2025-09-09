@@ -408,6 +408,43 @@
 	. = ..()
 	AddComponent(/datum/component/selling, 175, "uzi", FALSE)
 
+/obj/item/gun/ballistic/vampire/mac10
+	name = "\improper Mac-10 Submachine Gun"
+	desc = "A automatic, high rate of fire submachine gun chambered in .45 ACP. Looks expensive."
+	icon_state = "mac10"
+	icon = 'code/modules/wod13/48x32weapons.dmi'
+	inhand_icon_state = "mac10"
+	worn_icon_state = "uzi"
+	mag_type = /obj/item/ammo_box/magazine/vampmac10
+	burst_size = 5
+	spread = 7
+	recoil = 0
+	fire_delay = 1
+	dual_wield_spread = 70
+	bolt_type = BOLT_TYPE_OPEN
+	show_bolt_icon = FALSE
+	mag_display = TRUE
+	rack_sound = 'sound/weapons/gun/pistol/slide_lock.ogg'
+	fire_sound = 'code/modules/wod13/sounds/mac10.ogg'
+
+/obj/item/gun/ballistic/vampire/mac10/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 3000, "mac10", FALSE)
+
+/obj/item/ammo_box/magazine/vampmac10
+	name = "mac10 magazine (.45 ACP)"
+	icon = 'code/modules/wod13/ammo.dmi'
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	icon_state = "mac10"
+	ammo_type = /obj/item/ammo_casing/vampire/c45acp
+	caliber = CALIBER_45
+	max_ammo = 30
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+
+
 /obj/item/ammo_box/magazine/vamp9mp5
 	name = "mp5 magazine (9mm)"
 	icon = 'code/modules/wod13/ammo.dmi'
