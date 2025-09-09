@@ -37,7 +37,7 @@
 	var/vomit_location
 	for(var/turf/turfs in range(1, L)) // Every nearby turf
 		for(var/obj/O in turfs.contents) // What items are on the turf?
-			if(istype(O, /obj/structure/toilet) || istype(O, /obj/structure/sink) || istype(O, /obj/structure/closet/crate/bin) || /obj/structure/closet/crate/dumpster) // Can we vomit in here?
+			if(istype(O, /obj/structure/toilet) || istype(O, /obj/structure/sink) || istype(O, /obj/structure/closet/crate/bin)) // Can we vomit in here?
 				vomit_targets += O
 
 	if(vomit_targets.len) // Did we find any vomitables?
