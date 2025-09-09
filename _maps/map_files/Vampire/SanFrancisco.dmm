@@ -15430,16 +15430,6 @@
 /obj/structure/chair/pew{
 	dir = 4
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/papers/seven{
-	pixel_y = -4
-	},
-/obj/effect/decal/wallpaper/grey/low{
-	color = "#6d6d6d"
-	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/baywalk)
 "dPG" = (
@@ -50811,23 +50801,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/graveyard)
-"msn" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wideplating/dark{
-	dir = 4
-	},
-/obj/structure/table/wood,
-/obj/machinery/light/small{
-	dir = 4;
-	pixel_x = -16;
-	pixel_y = 10
-	},
-/obj/item/ammo_box/vampire/c545/silver,
-/turf/open/space/basic,
-/area/vtm)
 "msy" = (
 /obj/structure/table/wood,
 /obj/vampire_computer,
@@ -58843,19 +58816,6 @@
 	icon_state = "carpet_black"
 	},
 /area/vtm/sewer/nosferatu_warren)
-"ojY" = (
-/obj/structure/chair/greyscale{
-	dir = 4
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey/low{
-	color = "#6d6d6d"
-	},
-/turf/open/floor/plating/vampplating/stone,
-/area/vtm/interior/shop)
 "okl" = (
 /obj/effect/decal/bordur/corner{
 	dir = 4
@@ -77146,18 +77106,6 @@
 	dir = 4
 	},
 /area/vtm/interior/museum)
-"sLv" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/turf_decal/siding/wideplating/dark/corner{
-	dir = 4
-	},
-/obj/structure/table/wood,
-/obj/item/ammo_box/vampire/c12g/silver,
-/turf/open/space/basic,
-/area/vtm)
 "sLz" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -83344,19 +83292,6 @@
 	},
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren)
-"umk" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/papers/two{
-	pixel_y = -5
-	},
-/obj/effect/decal/wallpaper/grey/low{
-	color = "#6d6d6d"
-	},
-/turf/closed/wall/vampwall,
-/area/vtm/interior/shop)
 "uml" = (
 /obj/structure/rack,
 /obj/item/wheelchair,
@@ -84693,7 +84628,6 @@
 "uDO" = (
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
-	
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/item/gun/ballistic/vampire/mac10,
@@ -87355,13 +87289,6 @@
 "vmm" = (
 /obj/structure/chair/greyscale{
 	dir = 4
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/sign/painting/library{
-	pixel_y = 32
 	},
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/shop)
@@ -95927,15 +95854,8 @@
 /obj/effect/decal/bordur{
 	dir = 4
 	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/turf_decal/siding/wideplating/dark/corner{
 	dir = 8
-	},
-/obj/structure/sign/painting/library{
-	pixel_y = 32
 	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/baywalk)
@@ -96733,19 +96653,6 @@
 	icon_state = "stone8"
 	},
 /area/vtm/sewer/nosferatu_warren)
-"xEy" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/wallpaper/grey/low{
-	color = "#6d6d6d"
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/baywalk)
 "xEA" = (
 /obj/structure/bookcase/random/fiction,
 /turf/open/floor/plating/parquetry/old,
@@ -136224,8 +136131,8 @@ xfw
 xfw
 xfw
 xfw
-msn
-sLv
+xfw
+xfw
 xfw
 "}
 (183,1,1) = {"
@@ -174596,7 +174503,7 @@ eWO
 pQg
 mEk
 mEk
-umk
+mEk
 mEk
 mEk
 mEk
@@ -174798,7 +174705,7 @@ eWO
 iUD
 fmb
 oyv
-ojY
+vmm
 vmm
 idL
 uNU
@@ -176616,7 +176523,7 @@ eWO
 fjk
 gTB
 gTB
-xEy
+gTB
 xsx
 gTB
 ecA
