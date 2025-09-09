@@ -390,3 +390,55 @@
 /datum/discipline_power/dementation/total_insanity/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
+
+//STAIN THE SOUL
+/datum/discipline_power/dementation/stain_the_soul
+	name = "Stain the Soul"
+	desc = "Inflict a permanent derangement upon a victim."
+
+	level = 6
+
+	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_SPEAK
+	target_type = TARGET_HUMAN
+	range = 7
+
+	multi_activate = TRUE
+	duration_length = 3 SECONDS
+	cooldown_length = 1 MINUTES
+	var/dementation_succeeded = FALSE
+
+/datum/discipline_power/dementation/stain_the_soul/pre_activation_checks(mob/living/target)
+
+	dementation_succeeded = dementation_check(owner, target, base_difficulty = 6)
+	if(dementation_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		to_chat(owner, span_warning("[target]'s mind has resisted your corruption!"))
+		to_chat(target, span_warning("You feel unseen whispers crawling through your psyche, clawing for entry. You resist—but a chill remains."))
+		return FALSE
+
+/datum/discipline_power/dementation/stain_the_soul/activate(mob/living/carbon/human/target)
+	. = ..()
+
+	if(dementation_succeeded)
+		target.remove_overlay(MUTATIONS_LAYER)
+		var/mutable_appearance/dementation_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dementation", -MUTATIONS_LAYER)
+		dementation_overlay.pixel_z = 1
+		target.overlays_standing[MUTATIONS_LAYER] = dementation_overlay
+		target.apply_overlay(MUTATIONS_LAYER)
+		switch(rand(1,4))
+			if(1 to 3)
+				target.gain_trauma_type(BRAIN_TRAUMA_MILD, TRAUMA_RESILIENCE_MAGIC)
+				target.gain_trauma_type(BRAIN_TRAUMA_MILD, TRAUMA_RESILIENCE_MAGIC)
+			if(4)
+				target.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_MAGIC)
+		to_chat(owner, span_warning("You permanently shatter a portion of [target]'s mind!"))
+		to_chat(target, span_warning("You feel your psyche jolt in agony."))
+		
+	else
+		return
+
+/datum/discipline_power/dementation/stain_the_soul/deactivate(mob/living/carbon/human/target)
+	. = ..()
+	target.remove_overlay(MUTATIONS_LAYER)

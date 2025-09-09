@@ -411,3 +411,105 @@
 		answerer.remove_movespeed_modifier(/datum/movespeed_modifier/riddle)
 		answerer.say(the_answer)
 		answerer.clear_alert("riddle")
+
+//STEAL THE MIND
+/datum/discipline_power/mytherceria/steal_the_mind
+	name = "Steal the Mind"
+	desc = "Temporarily drain someone's attributes."
+
+	level = 6
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND
+	target_type = TARGET_VAMPIRE
+	range = 1
+
+	cooldown_length = 5 SECONDS
+
+	var/uses = 5
+
+/datum/discipline_power/mytherceria/steal_the_mind/can_activate_untargeted(alert)
+	. = ..()
+
+	if (uses <= 0)
+		if (alert)
+			to_chat(owner, span_warning("You've exhausted yourself too much to steal more traits."))
+		return FALSE
+
+	return .
+
+/datum/discipline_power/mytherceria/steal_the_mind/can_activate(mob/living/carbon/human/target, alert)
+	. = ..()
+
+	if (!target.client)
+		if (alert)
+			to_chat(owner, span_warning("[target] does not have a soul!"))
+		return FALSE
+	return .
+
+/datum/discipline_power/mytherceria/steal_the_mind/activate(mob/living/carbon/human/target)
+	. = ..()
+	var/list/traits = list("Physique", "Dexterity", "Social", "Mentality", "Cruelty", "Lockpicking", "Athletics")
+	var/selected_trait = tgui_input_list(owner,  "Choose trait to damage:", "Traits", traits)
+	if(!selected_trait)
+		return
+	to_chat(owner, span_notice("You focus on damaging the target's self!"))
+	if (!do_after(owner, 10 SECONDS))
+		return
+	switch(selected_trait)
+		if("Physique")
+			if(target.physique <= 2)
+				target.physique = 0
+				to_chat(owner, span_warning("You drain the last of [target]'s strength!"))
+			else 
+				target.physique -= 2
+				to_chat(owner, span_warning("You drain some of [target]'s strength!"))
+			to_chat(target, span_warning("You feel weaker!"))
+		if("Dexterity")
+			if(target.dexterity <= 2)
+				to_chat(owner, span_warning("You drain the last of [target]'s dexterity!"))
+				target.dexterity = 0
+			else 
+				target.dexterity -= 2
+				to_chat(owner, span_warning("You drain some of [target]'s dexterity!"))
+			to_chat(target, span_warning("You feel less dextrous!"))
+		if("Social")
+			if(target.social <= 2)
+				to_chat(owner, span_warning("You drain the last of [target]'s social!"))
+				target.social = 0
+			else 
+				target.social -= 2
+				to_chat(owner, span_warning("You drain some of [target]'s social!"))
+			to_chat(target, span_warning("Your social skilsl feel weaker!"))
+		if("Mentality")
+			if(target.mentality <= 2)
+				to_chat(owner, span_warning("You drain the last of [target]'s mentality!"))
+				target.mentality = 0
+			else
+				target.mentality -= 2
+				to_chat(owner, span_warning("You drain some of [target]'s mentality!"))
+			to_chat(target, span_warning("Your will feels weaker!"))
+		if("Cruelty")
+			if(target.blood <= 2)
+				to_chat(owner, span_warning("You drain the last of [target]'s cruelty!"))
+				target.blood = 0
+			else 
+				target.blood -= 2
+				to_chat(owner, span_warning("You drain some of [target]'s cruelty!"))
+			to_chat(target, span_warning("You feel less cruel!"))
+		if("Lockpicking")
+			if(target.lockpicking <= 2)
+				to_chat(owner, span_warning("You drain the last of [target]'s lockpicking!"))
+				target.lockpicking = 0
+			else 
+				target.lockpicking -= 2
+				to_chat(owner, span_warning("You drain some of [target]'s lockpicking!"))
+			to_chat(target, span_warning("You feel less capable of lockpicking!"))
+		if("Athletics")
+			if(target.athletics <= 2)
+				to_chat(owner, span_warning("You drain the last of [target]'s athletics!"))
+				target.athletics = 0
+			else 
+				target.athletics -= 2
+				to_chat(owner, span_warning("You drain some of [target]'s athletics!"))
+			to_chat(target, span_warning("You feel less athletic!"))
+	uses--
+
