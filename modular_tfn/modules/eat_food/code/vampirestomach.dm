@@ -9,6 +9,8 @@
 			capacity-- // Eat Food vampires eating good
 			return
 
+		if(capacity <= 0)
+			owner.clear_alert("stomach")
 		if(capacity >= 75) // 1.5 glasses of Alexander or whatever people order
 			owner.throw_alert("stomach", /atom/movable/screen/alert/vampire_stomach)
 		if(capacity >= 150) // Too full! Hurl immediately.
@@ -35,18 +37,14 @@
 	var/vomit_location
 	for(var/turf/turfs in range(1, L)) // Every nearby turf
 		for(var/obj/O in turfs.contents) // What items are on the turf?
-			if(istype(O, /obj/structure/toilet) || istype(O, /obj/structure/sink) || istype(O, /obj/structure/closet/crate/bin)) // Can we vomit in here?
+			if(istype(O, /obj/structure/toilet) || istype(O, /obj/structure/sink) || istype(O, /obj/structure/closet/crate/bin) || /obj/structure/closet/crate/dumpster) // Can we vomit in here?
 				vomit_targets += O
 
 	if(vomit_targets.len) // Did we find any vomitables?
 		vomit_location = vomit_targets[1]
 		if(do_after(L, 5 SECONDS, vomit_location)) // We found one! Hurl in here.
-			visible_message(span_danger("[src] throws up in the [L.name]!"), span_danger("You throw up in the[L.name]!"))
-			L.vomit(lost_nutrition = 0, blood = TRUE, stun = FALSE, distance = 0, message = FALSE, harm = FALSE, purge_ratio = 1)
+			L.vomit(lost_nutrition = 0, blood = TRUE, stun = FALSE, distance = 0, harm = FALSE, purge_ratio = 1)
 			stummy.capacity = 0
-			owner.clear_alert("stomach")
 	else if(do_after(L, 5 SECONDS))// Didn't find any. Hurl on the floor.
-		visible_message(span_danger("[src] throws up!"), span_danger("You throw up!"))
-		L.vomit(lost_nutrition = 0, blood = TRUE, stun = FALSE, message = FALSE, harm = FALSE, force = TRUE, purge_ratio = 1)
+		L.vomit(lost_nutrition = 0, blood = TRUE, stun = FALSE, harm = FALSE, force = TRUE, purge_ratio = 1)
 		stummy.capacity = 0
-		owner.clear_alert("stomach")
