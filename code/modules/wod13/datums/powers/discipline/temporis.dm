@@ -275,3 +275,23 @@
 		temporis_visual.dir = owner.dir
 		animate(temporis_visual, pixel_x = rand(-32,32), pixel_y = rand(-32,32), alpha = 155, time = 0.5 SECONDS)
 		SEND_SIGNAL(owner, COMSIG_MASQUERADE_VIOLATION)
+
+//KISS OF LACHESIS
+/datum/discipline_power/temporis/kiss_of_lachesis
+	name = "Kiss of Lachesis"
+	desc = "Change a target's biological age."
+
+	level = 6
+	target_type = TARGET_HUMAN
+	range = 7
+
+	hostile = TRUE
+
+	cooldown_length = 15 SECONDS
+
+/datum/discipline_power/temporis/kiss_of_lachesis/activate(mob/living/carbon/human/target)
+	. = ..()
+	var/new_age = tgui_input_number(owner, "Choose your target's biological age:\n([AGE_MIN]-[AGE_MAX])", "Kiss of Lachesis", target.age, AGE_MAX, AGE_MIN, round_value = TRUE)
+	target.age = clamp(new_age, AGE_MIN, AGE_MAX)
+	target.update_hair()
+	target.update_body()

@@ -1,0 +1,5 @@
+author: "SELFHELL"
+delete-after: True
+changes:
+  - rscadd: "PX249F Machine Gun + Stimulant Autoinjector"
+  - balance: "Grenades no longer explode when shot inhand."

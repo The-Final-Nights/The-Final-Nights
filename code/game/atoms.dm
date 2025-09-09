@@ -421,6 +421,10 @@
 /atom/proc/attack_hulk(mob/living/carbon/human/user)
 	SEND_SIGNAL(src, COMSIG_ATOM_HULK_ATTACK, user)
 
+///This atom has been hit by a mob using Potence (user)
+/atom/proc/attack_potence(mob/living/carbon/human/user)
+	SEND_SIGNAL(src, COMSIG_ATOM_POTENCE_ATTACK, user)
+
 /**
  * Ensure a list of atoms/reagents exists inside this atom
  *

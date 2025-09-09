@@ -38,7 +38,8 @@
 		/datum/discipline_power/potence/two,
 		/datum/discipline_power/potence/three,
 		/datum/discipline_power/potence/four,
-		/datum/discipline_power/potence/five
+		/datum/discipline_power/potence/five,
+		/datum/discipline_power/potence/six
 	)
 
 /datum/discipline_power/potence/one/activate()
@@ -80,7 +81,8 @@
 		/datum/discipline_power/potence/one,
 		/datum/discipline_power/potence/three,
 		/datum/discipline_power/potence/four,
-		/datum/discipline_power/potence/five
+		/datum/discipline_power/potence/five,
+		/datum/discipline_power/potence/six
 	)
 
 /datum/discipline_power/potence/two/activate()
@@ -122,7 +124,8 @@
 		/datum/discipline_power/potence/one,
 		/datum/discipline_power/potence/two,
 		/datum/discipline_power/potence/four,
-		/datum/discipline_power/potence/five
+		/datum/discipline_power/potence/five,
+		/datum/discipline_power/potence/six
 	)
 
 /datum/discipline_power/potence/three/activate()
@@ -166,7 +169,8 @@
 		/datum/discipline_power/potence/one,
 		/datum/discipline_power/potence/two,
 		/datum/discipline_power/potence/three,
-		/datum/discipline_power/potence/five
+		/datum/discipline_power/potence/five,
+		/datum/discipline_power/potence/six
 	)
 
 /datum/discipline_power/potence/four/activate()
@@ -210,7 +214,8 @@
 		/datum/discipline_power/potence/one,
 		/datum/discipline_power/potence/two,
 		/datum/discipline_power/potence/three,
-		/datum/discipline_power/potence/four
+		/datum/discipline_power/potence/four,
+		/datum/discipline_power/potence/six
 	)
 
 /datum/discipline_power/potence/five/activate()
@@ -235,3 +240,50 @@
 	qdel(tackler)
 	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 	REMOVE_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
+
+//POTENCE 5
+/datum/discipline_power/potence/six
+	name = "Potence 6"
+	desc = "Strength enough to shatter walls"
+
+	level = 6
+
+	check_flags = DISC_CHECK_CAPABLE
+
+	toggled = TRUE
+	duration_length = 2 TURNS
+
+	var/datum/component/tackler
+
+	grouped_powers = list(
+		/datum/discipline_power/potence/one,
+		/datum/discipline_power/potence/two,
+		/datum/discipline_power/potence/three,
+		/datum/discipline_power/potence/four,
+		/datum/discipline_power/potence/five
+	)
+
+/datum/discipline_power/potence/six/activate()
+	. = ..()
+	owner.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
+	tackler = owner.AddComponent(/datum/component/tackler, stamina_cost=0, base_knockdown = 2 SECONDS, range = 7, speed = 3, skill_mod = 0, min_distance = 0)
+	owner.dna.species.punchdamagelow += 20
+	owner.dna.species.punchdamagehigh += 20
+	owner.dna.species.meleemod += 1
+	owner.potential = 6
+	ADD_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+	ADD_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
+	ADD_TRAIT(owner, TRAIT_WALLBREAKER, TRAUMA_TRAIT)
+
+/datum/discipline_power/potence/six/deactivate()
+	. = ..()
+	owner.dna.species.attack_sound = initial(owner.dna.species.attack_sound)
+	owner.dna.species.punchdamagelow -= 20
+	owner.dna.species.punchdamagehigh -= 20
+	owner.dna.species.meleemod -= 1
+	owner.remove_overlay(POTENCE_LAYER)
+	owner.potential = 0
+	qdel(tackler)
+	REMOVE_TRAIT(owner, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_CUFFBREAKER, TRAUMA_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_WALLBREAKER, TRAUMA_TRAIT)
