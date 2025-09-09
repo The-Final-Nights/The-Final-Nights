@@ -86,3 +86,9 @@
   - map: The MAC-10 has been placed in the Baron's bedroom
   SoreYew:
   - qol: Buffs rubbershot and incapacitation shot
+2025-09-08:
+  SoreYew:
+  - rscadd: V duty text to Tower Employee
+  - rscadd: additional phrasing to doctor v duty text
+  - balance: Rebalances kindred (and kj) role availability in Camarilla controlled
+      roles
