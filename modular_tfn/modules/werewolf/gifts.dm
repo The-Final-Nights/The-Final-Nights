@@ -335,7 +335,7 @@
 		for(var/obj/structure/vampdoor/V in range(5, owner))
 			if(V)
 				if(V.closed)
-					if(V.lockpick_difficulty < 10)
+					if(V.lockpick_difficulty <= 16)
 						V.locked = FALSE
 						playsound(V, V.open_sound, 75, TRUE)
 						V.icon_state = "[V.baseicon]-0"

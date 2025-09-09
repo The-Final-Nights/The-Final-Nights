@@ -335,7 +335,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 #define APPEARANCE_CATEGORY_COLUMN "<td valign='top' width='14%'>"
 #define MAX_MUTANT_ROWS 4
-#define ATTRIBUTE_BASE_LIMIT 5 //Highest level that a base attribute can be upgraded to. Bonus attributes can increase the actual amount past the limit.
+#define ATTRIBUTE_BASE_LIMIT clamp(13 - generation, 5, 10) //Highest level that a base attribute can be upgraded to. Bonus attributes can increase the actual amount past the limit. //TFN EDIT - Original was 5.
 
 /proc/make_font_cool(text)
 	if(text)
@@ -743,6 +743,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/discipline_type = discipline_types[i]
 					var/datum/discipline/discipline = new discipline_type
 					var/discipline_level = discipline_levels[i]
+					///Maximum level the discipline can reach - based on generation.
+					var/max_discipline_level = clamp(13 - generation, 5, 10) //TFN EDIT - Original was 5
 
 					var/cost
 					if (discipline_level <= 0)
@@ -753,9 +755,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						cost = discipline_level * 5
 					else
 						cost = discipline_level * 7
-
-					dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"]([discipline_level])"
-					if((player_experience >= cost) && (discipline_level != 5))
+					if(generation <= 7)
+						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"][discipline_level > 5 ? "•" : "o"][discipline_level > 6 ? "•" : "o"][discipline_level > 7 ? "•" : "o"][discipline_level > 8 ? "•" : "o"][discipline_level > 9 ? "•" : "o"]([discipline_level])"
+					else
+						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"])"				
+					if((player_experience >= cost) && (discipline_level != max_discipline_level))
 						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
 					else
 						dat += "<BR>"
@@ -1518,7 +1522,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		dat += "•"
 	for(var/b in 1 to bonus_number)
 		dat += "•"
-	var/leftover_circles = 5 - attribute //5 is the default number of blank circles
+	var/leftover_circles = ATTRIBUTE_BASE_LIMIT - attribute //5 is the default number of blank circles
 	for(var/c in 1 to leftover_circles)
 		dat += "o"
 	var/real_price = attribute ? (attribute*price) : price //In case we have an attribute of 0, we don't multiply by 0
@@ -2729,6 +2733,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						var/i = text2num(href_list["upgradediscipline"])
 
 						var/discipline_level = discipline_levels[i]
+						var/max_discipline_level = clamp(13 - generation, 5, 10) //TFN EDIT - Original was 5
+
 						var/cost = discipline_level * 7
 						if (discipline_level <= 0)
 							cost = 10
@@ -2739,12 +2745,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						else if (clan.clan_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 5
 
-						if ((player_experience < cost) || (discipline_level >= 5))
+						if ((player_experience < cost) || (discipline_level >= max_discipline_level))
 							return
 
 						player_experience -= cost
 						experience_used_on_character += cost
-						discipline_levels[i] = min(5, max(1, discipline_levels[i] + 1))
+						discipline_levels[i] = min(max_discipline_level, max(1, discipline_levels[i] + 1))
 
 					if(pref_species.id == "kuei-jin")
 						var/a = text2num(href_list["upgradechidiscipline"])
@@ -2984,7 +2990,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					slotlocked = 0
 					torpor_count = 0
 					masquerade_score = initial(masquerade_score)
-					generation = clamp(bonus, LOWEST_GENERATION_LIMIT, HIGHEST_GENERATION_LIMIT)
+					generation = clamp(bonus, LOWEST_GENERATION_LIMIT, HIGHEST_GENERATION_LIMIT) //TFN EDIT - Previous lower limit 7
 					generation_bonus = 0
 					save_character()
 
@@ -3728,9 +3734,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.morality_path = MOR
 
 		character.generation = generation
-		character.maxbloodpool = 10 + ((13 - generation) * 3)
-		character.bloodpool = rand(2, character.maxbloodpool)
 
+		character.calculate_max_bloodpool()
+		character.bloodpool = rand(2, character.maxbloodpool)
+		if(generation <= 3) //The INFINITY value messes with assignment - This works for a general patch.
+			character.bloodpool = character.maxbloodpool
 		character.set_clan(clan, TRUE)
 
 		character.max_yin_chi = character.maxbloodpool

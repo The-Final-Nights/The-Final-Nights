@@ -36,6 +36,9 @@
 	)
 
 /datum/discipline_power/bloodheal/activate()
+	if HAS_TRAIT(owner, TRAIT_QUIETUS_CURSED)
+		to_chat(owner, span_warning("You feel your thinned blood rush for a moment, then die down!"))
+		return
 	adjust_vitae_cost()
 
 	. = ..()

@@ -242,3 +242,69 @@
 	. = ..()
 	if(own)
 		own.death()
+
+//TYPHONIC BEAST
+/datum/discipline_power/serpentis/typhonic_beast
+	name = "Typhonic Beast"
+	desc = "Transform into the Typhonic Animal."
+
+	level = 6
+	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
+	vitae_cost = 4
+
+	violates_masquerade = TRUE
+
+	duration_length = 30 SECONDS
+	cooldown_length = 1 MINUTES
+
+	var/obj/effect/proc_holder/spell/targeted/shapeshift/typhon/T
+
+/datum/discipline_power/serpentis/typhonic_beast/activate()
+	. = ..()
+	if(!T)
+		T = new(owner)
+	T.Shapeshift(owner)
+
+/datum/discipline_power/serpentis/typhonic_beast/deactivate()
+	. = ..()
+	T.Restore(T.myshape)
+	owner.Stun(1.5 SECONDS)
+	owner.do_jitter_animation(3 SECONDS)
+
+/obj/effect/proc_holder/spell/targeted/shapeshift/typhon
+	name = "Typhon"
+	desc = "Take on the shape of a Typhonic Beast."
+	charge_max = 15 SECONDS
+	cooldown_min = 15 SECONDS
+	convert_damage = FALSE
+	revert_on_death = TRUE
+	die_with_shapeshifted_form = FALSE
+	shapeshift_type = /mob/living/simple_animal/hostile/typhon
+
+/mob/living/simple_animal/hostile/typhon
+	name = "Typhonic Form"
+	desc = "Praise Set!"
+	icon = 'icons/mob/lavaland/64x64megafauna.dmi'
+	icon_state = "shadow"
+	icon_living = "shadow"
+	mob_biotypes = MOB_ORGANIC | MOB_HUMANOID
+	speak_chance = 0
+	speed = -1
+	maxHealth = 1000
+	health = 1000
+	butcher_results = list(/obj/item/stack/human_flesh = 20)
+	harm_intent_damage = 5
+	melee_damage_lower = 80
+	melee_damage_upper = 90
+	attack_verb_continuous = "slashes"
+	attack_verb_simple = "slash"
+	attack_sound = 'sound/weapons/slash.ogg'
+	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	minbodytemp = 0
+	bloodpool = 10
+	maxbloodpool = 10
+	pixel_w = -8
+
+/datum/discipline_power/serpentis/typhonic_beast/post_gain()
+	. = ..()
+	owner.mind.AddSpell(/obj/effect/proc_holder/spell/cone/staggered/entropic_plume)
