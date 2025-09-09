@@ -95,6 +95,9 @@
 2025-09-09:
   AlmostLikeClockwork:
   - rscadd: buffs open seal's max lockpicking difficulty
+  SELFHELL:
+  - rscadd: PX249F Machine Gun + Stimulant Autoinjector
+  - balance: Grenades no longer explode when shot inhand.
   SoreYew:
   - code_imp: removes "Ministry" as a term from the codebase
   - refactor: refactors Setite code to reflect disuse of Ministry as a concept
