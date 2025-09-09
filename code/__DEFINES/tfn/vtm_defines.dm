@@ -48,7 +48,7 @@
 #define CLAN_BAALI "Baali"
 #define CLAN_KIASYD "Kiasyd"
 #define CLAN_LASOMBRA "Lasombra"
-#define CLAN_SETITES "Ministry"
+#define CLAN_SETITES "Setite"
 #define CLAN_BANU_HAQIM "Banu Haqim"
 #define CLAN_GIOVANNI "Giovanni"
 #define CLAN_GARGOYLE "Gargoyle"

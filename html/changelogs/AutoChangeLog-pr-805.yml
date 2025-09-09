@@ -1,0 +1,4 @@
+author: "AlmostLikeClockwork"
+delete-after: True
+changes:
+  - rscadd: "buffs open seal's max lockpicking difficulty"

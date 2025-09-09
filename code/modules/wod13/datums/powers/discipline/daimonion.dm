@@ -135,7 +135,7 @@
 		if(clan.get_discipline("Protean") && vampire.clan?.name != CLAN_GANGREL)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Gangrel's Protean will be known."))
 		if(clan.get_discipline("Serpentis") && vampire.clan?.name != CLAN_SETITES)
-			to_chat(owner, span_notice("[target] fears that the fact they stole Ministry's Serpentis will be known."))
+			to_chat(owner, span_notice("[target] fears that the fact they stole the Setite's Serpentis will be known."))
 		if(clan.get_discipline("Necromancy") && vampire.clan?.name != CLAN_GIOVANNI || clan.get_discipline("Necromancy") && vampire.clan?.name != CLAN_CAPPADOCIAN)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Giovanni's Necromancy will be known."))
 		if(clan.get_discipline("Obtenebration") && vampire.clan?.name != CLAN_LASOMBRA)

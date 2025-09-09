@@ -1,0 +1,5 @@
+author: "SoreYew"
+delete-after: True
+changes:
+  - code_imp: "removes \"Ministry\" as a term from the codebase"
+  - refactor: "refactors Setite code to reflect disuse of Ministry as a concept"
