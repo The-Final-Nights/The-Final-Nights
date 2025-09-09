@@ -7,7 +7,7 @@
 /// Limit for highest generation possible, Based off v20 Beckket's Jyhad Diary
 #define HIGHEST_GENERATION_LIMIT 16
 /// Limit for lowest generation possible
-#define LOWEST_GENERATION_LIMIT 7
+#define LOWEST_GENERATION_LIMIT 1
 /// Limit for public generation bonus
 #define MAX_GENERATION_BONUS 3
 /// Limit for trusted player generation bonus
@@ -48,7 +48,7 @@
 #define CLAN_BAALI "Baali"
 #define CLAN_KIASYD "Kiasyd"
 #define CLAN_LASOMBRA "Lasombra"
-#define CLAN_SETITES "Ministry"
+#define CLAN_SETITES "Setite"
 #define CLAN_BANU_HAQIM "Banu Haqim"
 #define CLAN_GIOVANNI "Giovanni"
 #define CLAN_GARGOYLE "Gargoyle"

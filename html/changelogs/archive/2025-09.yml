@@ -92,3 +92,26 @@
   - rscadd: additional phrasing to doctor v duty text
   - balance: Rebalances kindred (and kj) role availability in Camarilla controlled
       roles
+2025-09-09:
+  AlmostLikeClockwork:
+  - rscadd: buffs open seal's max lockpicking difficulty
+  Magisterium2022:
+  - rscadd: Added 6th dot abilities for all Disciplines except Thaumaturgy, Vicissitude,
+      Obfuscate, and Auspex.
+  - rscadd: Added support for generations below 7th, and mechanical support for generations
+      below 8th with appropriate max ability dots, etc.
+  - bugfix: Fixed existing bugs with blood quantities gained when feeding vitae, and
+      bonuses from blood boosts.
+  - bugfix: Fixed bug with Blood of Potency Duration being in Deciseconds rather than
+      Hours.
+  - balance: Made Blood Buff last one scene instead of ten seconds.
+  - code_imp: misc code changes
+  SELFHELL:
+  - rscadd: PX249F Machine Gun + Stimulant Autoinjector
+  - balance: Grenades no longer explode when shot inhand.
+  SoreYew:
+  - code_imp: removes "Ministry" as a term from the codebase
+  - refactor: refactors Setite code to reflect disuse of Ministry as a concept
+  chazzyjazzy:
+  - bugfix: removes an exploit where injecting a cigarette with vitae allows you to
+      gain alot of blood.
