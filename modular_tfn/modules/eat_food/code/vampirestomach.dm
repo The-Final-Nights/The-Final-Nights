@@ -5,7 +5,7 @@
 	. = ..()
 
 	if(owner)
-		if(HAS_TRAIT(owner, TRAIT_CAN_EAT))
+		if(HAS_TRAIT(owner, TRAIT_CAN_EAT) && capacity >= 0)
 			capacity-- // Eat Food vampires eating good
 			return
 
