@@ -18015,6 +18015,7 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 8
 	},
+/obj/machinery/mineral/equipment_vendor/fastfood/deli,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/littleitaly)
 "eKH" = (
@@ -64608,6 +64609,7 @@
 	pixel_y = 9;
 	pixel_x = 12
 	},
+/mob/living/carbon/human/npc/shop,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/littleitaly)
 "qix" = (
