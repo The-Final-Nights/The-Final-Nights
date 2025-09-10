@@ -31759,9 +31759,6 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 5
 	},
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk,
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk,
-/obj/item/reagent_containers/food/condiment/vampiremilk/malk,
 /turf/open/floor/plating/bacotell,
 /area/vtm/clinic/haven)
 "iam" = (
@@ -54655,23 +54652,6 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/tzimisce_sanctum)
-"nDl" = (
-/obj/effect/turf_decal/siding/wideplating/corner{
-	color = "#39537F";
-	dir = 4
-	},
-/obj/item/reagent_containers/food/condiment/milk/malk{
-	pixel_y = 14;
-	pixel_x = -8
-	},
-/obj/item/reagent_containers/food/condiment/milk/malk,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/rock,
-/area/vtm/sewer)
 "nDs" = (
 /obj/effect/decal/pallet,
 /obj/structure/closet/crate,
@@ -57066,27 +57046,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
-"ofT" = (
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#aa4f25";
-	dir = 8
-	},
-/obj/item/clothing/head/cone{
-	pixel_y = 7;
-	pixel_x = 7
-	},
-/obj/item/reagent_containers/food/condiment/milk/malk{
-	pixel_y = 2;
-	pixel_x = -11
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/matrix,
-/turf/open/space/basic,
-/area/vtm)
 "ofW" = (
 /turf/open/floor/plating/asphalt,
 /area/vtm/cabdepot)
@@ -74108,22 +74067,6 @@
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/interior/tzimisce_manor)
-"sqe" = (
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#39537F";
-	dir = 1
-	},
-/obj/item/reagent_containers/food/condiment/milk/malk{
-	pixel_y = 2;
-	pixel_x = -11
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/rock,
-/area/vtm/sewer)
 "sqf" = (
 /obj/structure/rack/bubway/west,
 /obj/item/wirecutters{
@@ -86138,52 +86081,6 @@
 	color = "#EADDCA"
 	},
 /area/vtm/interior/shop)
-"vvU" = (
-/obj/structure/closet/secure_closet/freezer,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/food/meat/slab/human,
-/obj/item/food/meat/slab/human,
-/obj/item/food/meat/slab/human,
-/obj/item/storage/fancy/egg_box,
-/obj/item/reagent_containers/food/condiment/flour,
-/obj/item/reagent_containers/food/condiment/flour,
-/obj/item/reagent_containers/blood/random,
-/obj/item/reagent_containers/food/condiment/sugar,
-/obj/item/reagent_containers/food/condiment/sugar,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/closet/crate/freezer/fridge,
-/obj/item/storage/box/ingredients/vegetarian,
-/obj/item/storage/box/ingredients/carnivore,
-/obj/item/reagent_containers/food/condiment/milk{
-	name = "full cream milk"
-	},
-/obj/item/storage/box/ingredients/american,
-/obj/item/storage/fancy/egg_box,
-/obj/item/reagent_containers/food/condiment/milk{
-	name = "full cream milk"
-	},
-/obj/item/storage/box/ingredients/vegetarian,
-/obj/item/storage/box/ingredients/exotic,
-/obj/item/food/dough,
-/obj/item/food/dough,
-/obj/item/food/cheesewheel,
-/obj/item/food/grown/tomato,
-/obj/item/food/grown/tomato,
-/obj/machinery/light/prince{
-	dir = 1
-	},
-/obj/item/reagent_containers/blood/random,
-/obj/item/reagent_containers/food/condiment/flour,
-/obj/item/reagent_containers/food/condiment/sugar,
-/obj/item/reagent_containers/food/condiment/sugar,
-/obj/item/reagent_containers/food/condiment/flour,
-/turf/open/floor/plating/toilet,
-/area/vtm/interior/tzimisce_manor)
 "vvY" = (
 /obj/structure/table/wood,
 /turf/open/floor/plating/bacotell,
@@ -88610,18 +88507,6 @@
 /obj/effect/decal/litter,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_bar)
-"wdt" = (
-/obj/effect/turf_decal/siding/wideplating{
-	color = "#aa4f25"
-	},
-/obj/item/reagent_containers/food/condiment/milk/malk,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/rock,
-/area/vtm/sewer)
 "wdB" = (
 /obj/structure/fluff/hedge,
 /turf/closed/wall/vampwall/brick/low,
@@ -129056,7 +128941,7 @@ xyw
 trc
 mDn
 sTP
-nDl
+xyw
 rCB
 pEn
 jjG
@@ -129258,7 +129143,7 @@ afY
 hqh
 hqh
 ttW
-sqe
+xyw
 rCB
 sRI
 uCt
@@ -129656,7 +129541,7 @@ vAM
 vAM
 vAM
 xyw
-wdt
+xyw
 xyw
 xyw
 xyw
@@ -129859,7 +129744,7 @@ eRs
 vAM
 rCB
 rCB
-ofT
+rCB
 rCB
 rCB
 rCB
@@ -144274,7 +144159,7 @@ hCS
 lfj
 hBi
 mtG
-vvU
+yaP
 lfj
 bEh
 uMn
