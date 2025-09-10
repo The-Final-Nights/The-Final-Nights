@@ -252,3 +252,40 @@
 	GA.Restore(GA.myshape)
 	owner.Stun(1 SECONDS)
 	owner.do_jitter_animation(15)
+
+//SHAPE MASTERY
+/datum/discipline_power/protean/shape_mastery
+	name = "Shape Mastery"
+	desc = "Cause shapeshifters to revert to their natural form."
+
+	level = 6
+
+	check_flags = DISC_CHECK_CONSCIOUS
+	target_type = TARGET_LIVING
+	vitae_cost = 1
+	violates_masquerade = FALSE
+
+/datum/discipline_power/protean/shape_mastery/activate(mob/living/target)
+	. = ..()
+	var/obj/shapeshift_holder/shapeshift = locate() in target
+	if(shapeshift)
+		target = shapeshift.stored
+		shapeshift.restore()
+	if(iswerewolf(target) || isgarou(target))
+		switch(target.client.prefs.auspice.breed_form)
+			if("Homid")
+				target.transformator.transform(target, "Homid", TRUE)
+			if("Lupus")
+				target.transformator.transform(target, "Lupus", TRUE)
+			if("Crinos")
+				target.transformator.transform(target, "Crinos", TRUE)
+			if("Corvid")
+				target.transformator.transform(target, "Corvid", TRUE)
+			if("Corax Crinos")
+				target.transformator.transform(target, "Corax Crinos", TRUE)
+/*		addtimer(CALLBACK(target, TYPE_PROC_REF(mob/living, transformation_unblock)), 60 SECONDS)
+		to_chat(target, span_userdanger("You feel your abilities suddenly drain. You can't transform!"))
+		target.transformation_blocked = TRUE*/ //Uncomment when the Hunter PR is merged, since this relies on some additions from that PR.
+/datum/discipline_power/protean/shape_mastery/post_gain()
+	. = ..()
+	owner.physiology.brute_mod *= 0.5 //Flesh of Marble 6th dot trait.

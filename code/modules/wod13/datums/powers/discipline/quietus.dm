@@ -217,3 +217,32 @@
 	. = ..()
 	//should be changed to a ranged attack targeting turfs
 	owner.put_in_active_hand(new /obj/item/gun/magic/quietus(owner), TRUE)
+
+//THIN BLOOD
+/datum/discipline_power/quietus/thin_blood
+	name = "Thin Blood"
+	desc = "Make a vampire unable to heal their wounds with vitae."
+
+	level = 6
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
+	violates_masquerade = TRUE
+
+	cooldown_length = 10 SECONDS
+
+/datum/discipline_power/quietus/thin_blood/activate(mob/living/target)
+	. = ..()
+	if(iskindred(target) || isghoul(target))
+		ADD_TRAIT(target, TRAIT_QUIETUS_CURSED, MAGIC_TRAIT)
+		to_chat(target, span_warning("You feel your blood thin, and healing become impossible!"))
+		addtimer(CALLBACK(src, PROC_REF(deactivate), target), 1 MINUTES)
+	else
+		to_chat(target, span_warning("You dizzy for a moment."))
+
+/datum/discipline_power/quietus/thin_blood/deactivate(mob/living/target)
+	. = ..()
+	REMOVE_TRAIT(target, TRAIT_QUIETUS_CURSED, MAGIC_TRAIT)
+	to_chat(target, span_warning("You feel your blood return to normal, and healing become possible again!"))
+
+/datum/discipline_power/quietus/thin_blood/post_gain()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_QUICKEN_MORTAL_BLOOD, MAGIC_TRAIT)

@@ -166,4 +166,33 @@
 	SEND_SIGNAL(target, COMSIG_PATH_HIT, PATH_SCORE_UP)
 	points_can_restore--
 
+//FATHER'S JUDGEMENT
+/datum/discipline_power/valeren/fathers_judgement
+	name = "Father's Judgement"
+	desc = "Render a portion of a vampire's vitae inert"
+
+	level = 6
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND
+	target_type = TARGET_VAMPIRE
+	range = 1
+
+	cooldown_length = 30 SECONDS
+
+	var/vitae_removed = 5
+
+/datum/discipline_power/valeren/fathers_judgement/can_activate(mob/living/carbon/human/target, alert)
+	. = ..()
+
+	if (!target.client)
+		to_chat(owner, span_warning("[target] does not have a soul!"))
+		return FALSE
+	if(!iskindred(target) && !isghoul(target))
+		to_chat(owner, span_warning("[target] is not a Childe of Caine!"))
+		return FALSE
+	if (target.bloodpool >= vitae_removed)
+		to_chat(owner, span_warning("[target] lacks sufficient vitae!"))
+		return FALSE
+	else
+		to_chat(owner, span_warning("You cast the Father's Judgement onto [target]!"))
+		target.bloodpool -= 5
 
