@@ -76,6 +76,16 @@
 #define TRAIT_MASQUERADE_VIOLATING_EYES "masquerade_violating_eyes"
 /// If face is uncovered, they will be obviously supernatural to everyone nearby
 #define TRAIT_MASQUERADE_VIOLATING_FACE "masquerade_violating_face"
+/// Perfect defence - can't be harmed by any melee or ranged attack or shoved/disarmed, although explosions will still impact them.
+#define TRAIT_PERFECT_DEFENCE "perfect_defence" 
+/// Wallbreaker - Can break (most) walls
+#define TRAIT_WALLBREAKER "wallbreaker" 
+/// Wallbreaker - Gains more Vitae from animals
+#define TRAIT_ANIMAL_SUCCULENCE "animal_succulence"
+/// Is unable to heal via blood heals
+#define TRAIT_QUIETUS_CURSED "quietus_cursed"
+/// Gain an extra BP from humans
+#define TRAIT_QUICKEN_MORTAL_BLOOD "quicken_mortal_blood"
 // If the trait owner knows thaumaturgical rituals.
 #define TRAIT_THAUMATURGY_KNOWLEDGE "thaumaturgy_knowledge"
 /// If the user can't frenzy. Such as thinbloods
