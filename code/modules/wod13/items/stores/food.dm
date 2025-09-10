@@ -125,7 +125,7 @@
 		new /datum/data/mining_equipment("cooking enzymes", /obj/item/reagent_containers/food/condiment/enzyme, 12),
 		new /datum/data/mining_equipment("salt shaker", /obj/item/reagent_containers/food/condiment/saltshaker, 3),
 		new /datum/data/mining_equipment("pepper mill", /obj/item/reagent_containers/food/condiment/peppermill, 3),
-		new /datum/data/mining_equipment("bbq sauce", /obj/item/reagent_containers/food/condiment/bbq, 3),
+		//new /datum/data/mining_equipment("bbq sauce", /obj/item/reagent_containers/food/condiment/bbq, 3),
 		new /datum/data/mining_equipment("soy sauce", /obj/item/reagent_containers/food/condiment/soysauce, 4),
 		new /datum/data/mining_equipment("mayonnaise", /obj/item/reagent_containers/food/condiment/mayonnaise, 3),
 		new /datum/data/mining_equipment("egg carton", /obj/item/storage/fancy/egg_box, 3),
