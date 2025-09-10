@@ -1285,7 +1285,7 @@
 	return
 
 
-/mob/living/carbon/human/proc/revert_to_cursed_form((mob/user, mob/living/carbon/human/target)
+/mob/living/carbon/human/proc/revert_to_cursed_form(mob/user, mob/living/carbon/human/target)
 	owner.set_body_sprite()
 	to_chat(owner, span_warning("Your cursed appearance reasserts itself!"))
 
