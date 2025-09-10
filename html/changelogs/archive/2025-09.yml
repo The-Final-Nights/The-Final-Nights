@@ -95,6 +95,17 @@
 2025-09-09:
   AlmostLikeClockwork:
   - rscadd: buffs open seal's max lockpicking difficulty
+  Magisterium2022:
+  - rscadd: Added 6th dot abilities for all Disciplines except Thaumaturgy, Vicissitude,
+      Obfuscate, and Auspex.
+  - rscadd: Added support for generations below 7th, and mechanical support for generations
+      below 8th with appropriate max ability dots, etc.
+  - bugfix: Fixed existing bugs with blood quantities gained when feeding vitae, and
+      bonuses from blood boosts.
+  - bugfix: Fixed bug with Blood of Potency Duration being in Deciseconds rather than
+      Hours.
+  - balance: Made Blood Buff last one scene instead of ten seconds.
+  - code_imp: misc code changes
   SELFHELL:
   - rscadd: PX249F Machine Gun + Stimulant Autoinjector
   - balance: Grenades no longer explode when shot inhand.
