@@ -154,7 +154,7 @@
 		"tmr"
 	)
 
-/obj/item/vamp/keys/ministry
+/obj/item/vamp/keys/setite
 	name = "community center keys"
 	accesslocks = list(
 		"setite"
@@ -212,7 +212,8 @@
 /obj/item/vamp/keys/malkav
 	name = "Insane keys"
 	accesslocks = list(
-		"malkav"
+		"malkav",
+		"psych"
 	)
 	color = "#8cc4ff"
 
@@ -220,6 +221,7 @@
 	name = "Really insane keys"
 	accesslocks = list(
 		"primMalkav",
+		"psych",
 		"malkav",
 		"primogen",
 		"clinic",
@@ -354,7 +356,8 @@
 /obj/item/vamp/keys/clinic
 	name = "Clinic keys"
 	accesslocks = list(
-		"clinic"
+		"clinic",
+		"psych"
 	)
 
 /obj/item/vamp/keys/clinics_director
@@ -363,7 +366,8 @@
 		"clinic",
 		"clinicsec",
 		"director",
-		"malkav"
+		"malkav",
+		"psych"
 	)
 
 //===========================POLICE KEYS===========================

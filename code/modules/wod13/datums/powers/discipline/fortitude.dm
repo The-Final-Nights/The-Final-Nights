@@ -34,7 +34,8 @@
 		/datum/discipline_power/fortitude/two,
 		/datum/discipline_power/fortitude/three,
 		/datum/discipline_power/fortitude/four,
-		/datum/discipline_power/fortitude/five
+		/datum/discipline_power/fortitude/five,
+		/datum/discipline_power/fortitude/six
 	)
 	fortitude_DR = 10
 
@@ -62,7 +63,8 @@
 		/datum/discipline_power/fortitude/one,
 		/datum/discipline_power/fortitude/three,
 		/datum/discipline_power/fortitude/four,
-		/datum/discipline_power/fortitude/five
+		/datum/discipline_power/fortitude/five,
+		/datum/discipline_power/fortitude/six
 	)
 	fortitude_DR = 15
 
@@ -90,7 +92,8 @@
 		/datum/discipline_power/fortitude/one,
 		/datum/discipline_power/fortitude/two,
 		/datum/discipline_power/fortitude/four,
-		/datum/discipline_power/fortitude/five
+		/datum/discipline_power/fortitude/five,
+		/datum/discipline_power/fortitude/six
 	)
 	fortitude_DR = 20
 
@@ -118,7 +121,8 @@
 		/datum/discipline_power/fortitude/one,
 		/datum/discipline_power/fortitude/two,
 		/datum/discipline_power/fortitude/three,
-		/datum/discipline_power/fortitude/five
+		/datum/discipline_power/fortitude/five,
+		/datum/discipline_power/fortitude/six
 	)
 	fortitude_DR = 25
 
@@ -147,7 +151,8 @@
 		/datum/discipline_power/fortitude/one,
 		/datum/discipline_power/fortitude/two,
 		/datum/discipline_power/fortitude/three,
-		/datum/discipline_power/fortitude/four
+		/datum/discipline_power/fortitude/four,
+		/datum/discipline_power/fortitude/six
 	)
 	fortitude_DR = 30
 
@@ -159,3 +164,36 @@
 	. = ..()
 	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-fortitude_DR) )
 
+//FORTITUDE 6
+/datum/discipline_power/fortitude/six
+	name = "The Knight's Bane"
+	desc = "Your skin is stronger than any steel wrought by mortal hands."
+
+	level = 6
+
+	check_flags = DISC_CHECK_CONSCIOUS
+
+	toggled = TRUE
+	duration_length = 2 TURNS
+
+	grouped_powers = list(
+		/datum/discipline_power/fortitude/one,
+		/datum/discipline_power/fortitude/two,
+		/datum/discipline_power/fortitude/three,
+		/datum/discipline_power/fortitude/four,
+		/datum/discipline_power/fortitude/five
+	)
+	fortitude_DR = 40
+
+/datum/discipline_power/fortitude/six/activate()
+	. = ..()
+	owner.physiology.damage_resistance = min(80, (owner.physiology.damage_resistance+fortitude_DR) )
+
+/datum/discipline_power/fortitude/six/deactivate()
+	. = ..()
+	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-fortitude_DR) )
+
+/datum/discipline_power/fortitude/six/post_gain()
+	. = ..()
+
+	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC_TRAIT) //From "Stand against all Foes"

@@ -63,3 +63,55 @@
   XeonMations:
   - bugfix: Fixed painting not working.
   - qol: A lot of painting related systems have been refurbished.
+2025-09-06:
+  SoreYew:
+  - rscadd: Adds rubber, "high impact incapacitation," silver 12g rounds, and 5.45
+      silver
+  - map: Adds new less-lethals to the PD, 5.45mm and12g silver to the Anarchs, and
+      illegal vendor
+  - bugfix: Axe Gang can open their doors now
+  - qol: Change up the Malkavian Haven
+  - balance: rebalances Malkavian Haven
+  WhereAmO:
+  - rscadd: Unliving Hive quirk, with some visible text for having bugs on your person
+      and a small amount of damage over time.
+  - rscadd: Some new insect themed summons for Animalism, with the right quirk.
+  - bugfix: WOD13 specific cockroaches now have their sprites back
+2025-09-07:
+  '@magicianofwands for the code, @despong for the sprites, @tehlordoswag420 for the SFX':
+  - rscadd: Added the MAC-10! A powerful, Baron exclusive submachine gun chambered
+      in .45 ACP
+  - sound: mac10.ogg
+  - image: mac10 icon
+  - map: The MAC-10 has been placed in the Baron's bedroom
+  SoreYew:
+  - qol: Buffs rubbershot and incapacitation shot
+2025-09-08:
+  SoreYew:
+  - rscadd: V duty text to Tower Employee
+  - rscadd: additional phrasing to doctor v duty text
+  - balance: Rebalances kindred (and kj) role availability in Camarilla controlled
+      roles
+2025-09-09:
+  AlmostLikeClockwork:
+  - rscadd: buffs open seal's max lockpicking difficulty
+  Magisterium2022:
+  - rscadd: Added 6th dot abilities for all Disciplines except Thaumaturgy, Vicissitude,
+      Obfuscate, and Auspex.
+  - rscadd: Added support for generations below 7th, and mechanical support for generations
+      below 8th with appropriate max ability dots, etc.
+  - bugfix: Fixed existing bugs with blood quantities gained when feeding vitae, and
+      bonuses from blood boosts.
+  - bugfix: Fixed bug with Blood of Potency Duration being in Deciseconds rather than
+      Hours.
+  - balance: Made Blood Buff last one scene instead of ten seconds.
+  - code_imp: misc code changes
+  SELFHELL:
+  - rscadd: PX249F Machine Gun + Stimulant Autoinjector
+  - balance: Grenades no longer explode when shot inhand.
+  SoreYew:
+  - code_imp: removes "Ministry" as a term from the codebase
+  - refactor: refactors Setite code to reflect disuse of Ministry as a concept
+  chazzyjazzy:
+  - bugfix: removes an exploit where injecting a cigarette with vitae allows you to
+      gain alot of blood.
