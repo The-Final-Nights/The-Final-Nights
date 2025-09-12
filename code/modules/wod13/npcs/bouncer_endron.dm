@@ -10,3 +10,7 @@
 
 /mob/living/carbon/human/npc/bouncer/endron/endron_lab
 	protected_zone_id = "endron_lab"
+
+/mob/living/carbon/human/npc/bouncer/endron/endron_lab_2
+	protected_zone_id = "endron_lab_2"
+
