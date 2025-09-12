@@ -153,6 +153,15 @@
 	tastes = list("berry" = 2, "ice cream" = 2)
 	food_reagents = list(/datum/reagent/consumable/berryjuice = 4, /datum/reagent/consumable/salt = 1,  /datum/reagent/consumable/cream = 2, /datum/reagent/consumable/vanilla = 1, /datum/reagent/consumable/sugar = 4)
 
+/obj/item/reagent_containers/food/condiment/flour
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
+/obj/item/reagent_containers/food/condiment/sugar
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
+/obj/item/reagent_containers/food/condiment/rice
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
 
+/obj/item/food/meat/slab
+	onflooricon_state = "meat"
+	onflooricon = 'modular_tfn/modules/food/icons/food_onfloor.dmi'
