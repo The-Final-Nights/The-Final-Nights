@@ -145,3 +145,6 @@
   - bugfix: the bloodhunt skull can once again fix breaches from previous rounds
   - qol: toggleable disciplines now automatically untoggle when entering torpor
   - bugfix: Blood of Potency is no longer virtually infinite
+  darkincarnate:
+  - rscdel: old endron lab
+  - map: relocated and expanded endron lab. x4 simplemob gimmick cells.
