@@ -144,3 +144,4 @@
       the round.
   - bugfix: the bloodhunt skull can once again fix breaches from previous rounds
   - qol: toggleable disciplines now automatically untoggle when entering torpor
+  - bugfix: Blood of Potency is no longer virtually infinite

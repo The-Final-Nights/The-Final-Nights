@@ -1,0 +1,5 @@
+author: "darkincarnate"
+delete-after: True
+changes:
+  - rscdel: "old endron lab"
+  - map: "relocated and expanded endron lab. x4 simplemob gimmick cells."
