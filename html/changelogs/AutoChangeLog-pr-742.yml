@@ -1,0 +1,6 @@
+author: "Kolibri-B"
+delete-after: True
+changes:
+  - rscadd: "Changes Temporis to be more TTRPG-accurate"
+  - balance: "Changes Temporis to be more TTRPG-accurate"
+  - refactor: "Refactors part of Temporis code"

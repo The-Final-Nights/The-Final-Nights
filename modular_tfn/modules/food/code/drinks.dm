@@ -114,7 +114,6 @@
 /obj/item/reagent_containers/food/condiment/milk/malk
 	desc = "a carton of fish-brand milk, a subsidary of malk incorporated."
 
-//
 /obj/item/reagent_containers/glass/mixing_bowl
 	name = "mixing bowl"
 	desc = "A mixing bowl. It can hold up to 50 units. Perfect for cooking"
