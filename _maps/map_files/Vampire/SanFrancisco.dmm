@@ -17255,6 +17255,10 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/forest)
+"ejW" = (
+/obj/structure/anarchsign,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "eka" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -69660,6 +69664,16 @@
 	color = "#635d52"
 	},
 /area/vtm/interior/theatre)
+"quL" = (
+/obj/effect/decal/bordur{
+	dir = 4
+	},
+/obj/effect/decal/litter,
+/obj/structure/lamppost/one{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "quO" = (
 /obj/structure/table,
 /obj/item/vamp/keys/nosferatu,
@@ -78472,6 +78486,15 @@
 	color = "#b0b0b0"
 	},
 /area/vtm/interior/endron_facility/restricted)
+"szQ" = (
+/obj/effect/decal/bordur/corner{
+	dir = 1
+	},
+/obj/structure/lamppost/one{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights)
 "szS" = (
 /obj/effect/decal/bordur{
 	dir = 1
@@ -78545,7 +78568,9 @@
 /obj/effect/decal/bordur/corner{
 	dir = 4
 	},
-/obj/structure/lamppost/one,
+/obj/structure/lamppost/one{
+	dir = 4
+	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
 "sAJ" = (
@@ -149394,7 +149419,7 @@ ryh
 pUu
 pUu
 pUu
-pUu
+ejW
 pUu
 pUu
 pUu
@@ -149591,16 +149616,16 @@ dSH
 iQQ
 dSH
 dSH
-sXf
+szQ
 nJu
 lLw
 lLw
 bdh
-dri
+quL
 lLw
 bdh
 oCJ
-lLw
+pOA
 bdh
 lLw
 lLw
