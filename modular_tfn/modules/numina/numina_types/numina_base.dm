@@ -26,13 +26,6 @@
 	/// Keys for this Numina's exclusive hideout. Most will never have one, but the function is preserved for future usecases.
 	var/faction_keys
 
-	/// List of unnatural features that members of this Numina can choose
-	var/list/accessories
-	/// Associative list of layers for unnatural features that members of this Numina can choose
-	var/list/accessories_layers
-	/// Numina accessory that's selected by default
-	var/default_accessory
-
 	/// If this Numina needs a whitelist to select and play. Most of them will be.
 	var/whitelisted
 
@@ -55,27 +48,15 @@
 	for (var/trait in numina_traits)
 		REMOVE_TRAIT(numinauser, trait, CLAN_TRAIT)
 
-	if (numinauser.client?.prefs?.clan_accessory)
-		var/equipped_accessory = accessories_layers[numinauser.client.prefs.clan_accessory]
-		numinauser.remove_overlay(equipped_accessory)
-
 	numinauser.update_body()
 
-/datum/numina_pattern/proc/on_join_round(mob/living/carbon/human/numinauser) //While Numina users should never particularly need this function, I'm preserving it in the off chance someone needs/wants to use it in the future.
+/datum/numina_pattern/proc/on_join_round(mob/living/carbon/human/numinauser)
 	SIGNAL_HANDLER
 
 	SHOULD_CALL_PARENT(TRUE)
 
-	if (HAS_TRAIT(numinauser, TRAIT_MASQUERADE_VIOLATING_FACE))
-		if (length(GLOB.masquerade_latejoin))
-			var/obj/effect/landmark/latejoin_masquerade/LM = pick(GLOB.masquerade_latejoin)
-			if (LM)
-				numinauser.forceMove(LM.loc)
-
 	if (faction_keys)
 		numinauser.put_in_r_hand(new faction_keys(numinauser))
-
-	numinauser.AddComponent(/datum/component/morality)
 
 	UnregisterSignal(numinauser, COMSIG_MOB_LOGIN)
 

@@ -2667,25 +2667,19 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						return
 
 					// Create a list of Numina that can be played by anyone or this user has a whitelist for
-					var/list/available_clans = list()
-					for(var/adding_clan in GLOB.numina_clans)
-						var/datum/vampire_clan/checking_clan = GLOB.numina_clans[adding_clan]
-						if(checking_clan.whitelisted && !SSwhitelists.is_whitelisted(user.ckey, checking_clan.name))
+					var/list/available_numina = list()
+					for(var/adding_numina in GLOB.numina_clans)
+						var/datum/numina_pattern/checking_numina = GLOB.numina_clans[adding_numina]
+						if(checking_numina.whitelisted && !SSwhitelists.is_whitelisted(user.ckey, checking_numina.name))
 							continue
-						available_clans += checking_clan
-					var/result = tgui_input_list(user, "Select a Numina", "Numina Selection", sort_list(available_clans))
+						available_numina += checking_numina
+					var/result = tgui_input_list(user, "Select a Numina", "Numina Selection", sort_list(available_numina))
 					if(!result)
 						return
-					clan = result
+					numina = result
 
 					discipline_types = list()
 					discipline_levels = list()
-
-					if(length(clan.accessories))
-						if("none" in clan.accessories)
-							clan_accessory = null
-						else
-							clan_accessory = pick(clan.accessories)
 
 				if("digitigradelegs")
 					if(clan.name != "Gargoyle")
@@ -3085,8 +3079,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								numina = GLOB.numina_clans[/datum/numina_pattern/mundane]
 								discipline_types.Cut()
 								discipline_levels.Cut()
-								for (var/i in 1 to length(clan.clan_disciplines))
-									discipline_types += clan.clan_disciplines[i]
+								for (var/i in 1 to length(numina.numina_disciplines))
+									discipline_types += numina.numina_disciplines[i]
 									discipline_levels += 1
 							if("kindred")
 								clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
