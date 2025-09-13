@@ -124,6 +124,7 @@ If you make a derivative work from this code, you must include this notification
 /datum/martial_art/wrestling/harm_act(mob/living/A, mob/living/D)
 	if(check_streak(A,D))
 		return 1
+	REMOVE_TRAIT(A, TRAIT_DEAF, EAR_DAMAGE)
 	log_combat(A, D, "punched with wrestling")
 	var/mob/living/carbon/human/attacker_human = A
 	var/datum/species/species = attacker_human.dna.species
@@ -156,7 +157,7 @@ If you make a derivative work from this code, you must include this notification
 	log_combat(A, D, "punched (boxing) ")
 	if(D.getStaminaLoss() > 60 && istype(D.mind?.martial_art, /datum/martial_art/boxing))
 		var/knockout_prob = D.getStaminaLoss()-20
-		if((D.stat != DEAD) && prob(knockout_prob) && !iscathayan(D) && !iskindred(D) && !iscrinos(D) && !iswerewolf(D))
+		if((D.stat != DEAD) && prob(knockout_prob) && !iscathayan(D) && !iskindred(D) && !iscrinos(D) && !iswerewolf(D) && !ishuman(D))
 			D.visible_message("<span class='danger'>[A] knocks [D] out with a haymaker!</span>", \
 							"<span class='userdanger'>You're knocked unconscious by [A]!</span>", "<span class='hear'>You hear a sickening sound of flesh hitting flesh!</span>", COMBAT_MESSAGE_RANGE, A)
 			to_chat(A, "<span class='danger'>You knock [D] out with a haymaker!</span>")
