@@ -4,6 +4,7 @@
 	icon_state = "dominate"
 	power_type = /datum/discipline_power/dominate
 
+
 /datum/discipline/dominate/post_gain()
 	. = ..()
 	if(level >= 5)
@@ -52,6 +53,7 @@
 	desc = "Dominate power description"
 
 	activate_sound = 'code/modules/wod13/sounds/dominate.ogg'
+	var/domination_succeeded = FALSE
 
 /datum/discipline_power/dominate/activate(mob/living/target)
 	. = ..()
@@ -80,17 +82,17 @@
 	if(!ishuman(target))
 		return FALSE
 
-	if(ishuman(target))
-		var/mob/living/carbon/human/human_target = target
-		if(human_target.clan?.name == CLAN_GARGOYLE)
-			return TRUE
-
 	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 
 	if(owner == conditioner)
 		return TRUE
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		if(human_target.clan?.name == CLAN_GARGOYLE)
+			theirpower -= 2
 
 	if(target.conditioned)
 		theirpower += 3
@@ -152,7 +154,7 @@
 	// to use the same proc that voice of god uses we need a list of listeners as well as a power multiplier. just create a list with the target of dom 1 and power multiplier of 1
 	var/list/listeners = list(target)
 	var/power_multiplier = 1
-	apply_voice_of_god_effects(custom_command, owner, listeners, power_multiplier)
+	apply_voice_of_god_effects(lowertext(custom_command), owner, listeners, power_multiplier)
 
 //MESMERIZE
 /datum/discipline_power/dominate/mesmerize
@@ -167,7 +169,6 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
-	var/domination_succeeded = FALSE
 
 /datum/discipline_power/dominate/mesmerize/pre_activation_checks(mob/living/target)
 
@@ -218,7 +219,6 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 3 SECONDS
 	range = 7
-	var/domination_succeeded = FALSE
 
 /datum/discipline_power/dominate/the_forgetful_mind/pre_activation_checks(mob/living/target)
 
@@ -244,6 +244,7 @@
 		owner.say("Think twice.")
 		target.add_movespeed_modifier(/datum/movespeed_modifier/dominate)
 		SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+		SEND_SIGNAL(target, COMSIG_ALL_MASQUERADE_REINFORCE)
 	else
 		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
 		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
@@ -266,7 +267,6 @@
 	cooldown_length = 15 SECONDS
 	duration_length = 6 SECONDS
 	range = 2
-	var/domination_succeeded = FALSE
 
 /datum/discipline_power/dominate/conditioning/pre_activation_checks(mob/living/target)
 
@@ -317,7 +317,6 @@
 	multi_activate = TRUE
 	cooldown_length = 15 SECONDS
 	range = 7
-	var/domination_succeeded = FALSE
 
 
 /datum/discipline_power/dominate/possession/pre_activation_checks(mob/living/target)
@@ -368,3 +367,67 @@
 /mob/living/carbon/human/proc/post_dominate_checks(mob/living/carbon/human/dominate_target)
 	if(dominate_target)
 		dominate_target.remove_overlay(MUTATIONS_LAYER)
+
+//AUTONOMIC MASTERY
+/datum/discipline_power/dominate/autonomic_mastery
+	name = "Autonomic Mastery"
+	desc = "Control the Autonomic Systems of a target."
+
+	level = 6
+
+	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK|DISC_CHECK_SEE
+	target_type = TARGET_HUMAN 
+
+	cooldown_length = 15 SECONDS
+	range = 7
+
+/datum/discipline_power/dominate/autonomic_mastery/pre_activation_checks(mob/living/target)
+
+	if(!dominate_hearing_check(owner, target))
+		return FALSE
+
+	if (HAS_TRAIT(target, TRAIT_CANNOT_RESIST_MIND_CONTROL))
+		return TRUE
+
+	domination_succeeded = dominate_check(owner, target, base_difficulty = 5)
+	if(domination_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		return FALSE
+
+/datum/discipline_power/dominate/autonomic_mastery/activate(mob/living/carbon/human/target)
+	. = ..()
+	if(domination_succeeded)
+		to_chat(owner, span_warning("You've successfully dominated [target]'s bodily functions!"))
+		var/list/orders = list("Sleep", "Wake", "Heart Attack", "Revive")
+		var/order = tgui_input_list(owner, "Select a Command","Command Selection", orders)
+		if(!order)
+			return
+		switch(order)
+			if("Sleep")
+				owner.say("Sleep")
+				target.Sleeping(200)
+				to_chat(target, span_danger("You feel suddenly exhausted"))
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+			if("Wake")
+				owner.say("Wake")
+				target.SetSleeping(0)
+				to_chat(target, span_danger("You feel suddenly energetic"))
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+			if("Heart Attack")
+				owner.say("Die")
+				target.adjustStaminaLoss(60, FALSE)
+				target.set_heartattack(TRUE)
+				to_chat(target, span_danger("You feel a terrible pain in your chest!"))
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+			if("Revive")
+				owner.say("Live")
+				target.set_heartattack(FALSE)
+				to_chat(target, span_danger("You feel your heart pound!"))
+				target.revive(full_heal = FALSE, admin_revive = FALSE)
+				SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
+	else
+		to_chat(owner, span_warning("[target]'s mind has resisted your domination!"))
+		to_chat(target, span_warning("Your thoughts blur—[owner] tries to bend your will. You resist."))
+

@@ -105,7 +105,7 @@
 		GLORY TO !*# $*#^</span>")
 	swarmer.forceMove(get_turf(src))
 	LAZYADD(swarmerlist, swarmer)
-	RegisterSignal(swarmer, COMSIG_PARENT_QDELETING, PROC_REF(remove_swarmer), swarmer)
+	RegisterSignal(swarmer, COMSIG_QDELETING, PROC_REF(remove_swarmer), swarmer)
 	processing_swarmer = FALSE
 
 /**
@@ -120,7 +120,7 @@
 /obj/structure/swarmer_beacon/proc/remove_swarmer(mob/swarmer, force)
 	SIGNAL_HANDLER
 
-	UnregisterSignal(swarmer, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(swarmer, COMSIG_QDELETING)
 	swarmerlist -= swarmer
 
 /obj/structure/swarmer/trap

@@ -54,7 +54,7 @@
 	var/datum/atom_hud/abductor_hud = GLOB.huds[DATA_HUD_ABDUCTOR]
 	abductor_hud.add_hud_to(owner)
 
-	owner.see_invisible = OBFUSCATE_INVISIBILITY
+	owner.see_invisible = SEE_OBFUSCATE_INVISIBLITY
 
 	owner.update_sight()
 
@@ -215,7 +215,7 @@
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
 
-	log_directed_talk(owner, input_message, LOG_SAY, "[name]")
+	log_directed_talk(owner, target, input_message, LOG_SAY, "Telepathy")
 	to_chat(owner, span_notice("You project your thoughts into [target]'s mind: [input_message]"))
 	to_chat(target, span_boldannounce("You hear a voice in your head... [input_message]"))
 

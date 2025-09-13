@@ -79,12 +79,14 @@ VENTORY!
 	screen_max_rows = 4
 
 /datum/component/storage/concrete/vtm/car
+	max_w_class = WEIGHT_CLASS_HUGE
 	screen_max_columns = 7
 	screen_max_rows = 9
 
 /datum/component/storage/concrete/vtm/car/track
-	screen_max_columns = 12
-	screen_max_rows = 12
+	max_w_class = WEIGHT_CLASS_GIGANTIC
+	screen_max_columns = 13
+	screen_max_rows = 9
 
 /datum/component/storage/concrete/vtm/sheathe
 	screen_max_columns = 2
@@ -105,7 +107,7 @@ VENTORY!
 		'sound/effects/rustle5.ogg',
 	)
 	/// Exactly what it sounds like, this makes it use the new RE4-like inventory system
-	var/grid = FALSE
+	var/grid = TRUE
 	var/static/grid_box_size
 	var/static/list/mutable_appearance/underlay_appearances_by_size = list()
 	var/list/grid_coordinates_to_item
@@ -116,11 +118,12 @@ VENTORY!
 /obj/item/storage/ComponentInitialize() //backpacks are smaller but hold larger things
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	// ! THESE SHOULD BE ARGS YOU PASS INTO ADDCOMPONENT
 	STR.max_w_class = WEIGHT_CLASS_HUGE
 	STR.max_items = 40 //max grid
 	STR.max_combined_w_class = 100
 
-/datum/component/storage/Initialize(datum/component/storage/concrete/master)
+/datum/component/storage/Initialize(datum/component/storage/concrete/master, _screen_max_columns, _screen_max_rows)
 	if(!grid_box_size)
 		grid_box_size = world.icon_size
 	. = ..()
@@ -980,6 +983,14 @@ VENTORY!
 	grid_width = 2 GRID_BOXES
 	grid_height = 2 GRID_BOXES
 
+/obj/item/gun/ballistic/vampire/mac10
+	grid_width = 2 GRID_BOXES
+	grid_height = 2 GRID_BOXES
+
+/obj/item/ammo_box/magazine/vampmac10
+	grid_width = 1 GRID_BOXES
+	grid_height = 2 GRID_BOXES
+
 /obj/item/ammo_box/magazine/vamp9mp5
 	grid_width = 1 GRID_BOXES
 	grid_height = 2 GRID_BOXES
@@ -1071,6 +1082,14 @@ VENTORY!
 /obj/item/gun/ballistic/shotgun/toy/crossbow/vampire
 	grid_width = 5 GRID_BOXES
 	grid_height = 2 GRID_BOXES
+
+/obj/item/gun/ballistic/automatic/response/px66f
+	grid_width = 4 GRID_BOXES
+	grid_height = 2 GRID_BOXES
+
+/obj/item/gun/ballistic/automatic/l6_saw/vamp
+	grid_width = 9 GRID_BOXES
+	grid_height = 4 GRID_BOXES
 
 /obj/item/ammo_box/vampire/arrows
 	grid_width = 2 GRID_BOXES

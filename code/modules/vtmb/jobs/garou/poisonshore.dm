@@ -42,7 +42,7 @@
 	id = /obj/item/card/id/garou/spiral/lead
 	ears = /obj/item/p25radio
 	uniform =  /obj/item/clothing/under/pentex/pentex_executive_suit
-	shoes = /obj/item/clothing/shoes/vampire/businessblack
+	shoes = /obj/item/clothing/shoes/vampire/white
 	suit = /obj/item/clothing/suit/pentex/pentex_labcoat_alt
 	l_pocket = /obj/item/vamp/phone/endron_lead
 	r_pocket = /obj/item/vamp/keys/pentex/leader
@@ -57,7 +57,7 @@
 	..()
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/pentex/pentex_executiveskirt
-		shoes = /obj/item/clothing/shoes/vampire/heels
+		shoes = /obj/item/clothing/shoes/vampire/heels/white
 
 /obj/effect/landmark/start/garou/spiral/lead
 	name = "Endron Branch Lead"
@@ -92,9 +92,9 @@
 	display_order = JOB_DISPLAY_ORDER_ENDRON
 
 	minimal_masquerade = 5
-	allowed_species = list("Werewolf", "Vampire", "Human")
+	allowed_species = list("Werewolf", "Vampire", "Human", "Ghoul")
 	allowed_tribes = list("Black Spiral Dancers")
-	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE)
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE)
 
 	known_contacts = null
 
@@ -107,7 +107,7 @@
 	id = /obj/item/card/id/garou/spiral/executive
 	ears = /obj/item/p25radio
 	uniform =  /obj/item/clothing/under/pentex/pentex_executive_suit
-	shoes = /obj/item/clothing/shoes/vampire/businessblack
+	shoes = /obj/item/clothing/shoes/vampire/white
 	l_pocket = /obj/item/vamp/phone/endron_exec
 	r_pocket = /obj/item/vamp/keys/pentex/leader
 	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/seneschal=1)
@@ -121,7 +121,7 @@
 	..()
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/pentex/pentex_executiveskirt
-		shoes = /obj/item/clothing/shoes/vampire/heels
+		shoes = /obj/item/clothing/shoes/vampire/heels/white
 
 /obj/effect/landmark/start/garou/spiral/executive
 	name = "Endron Executive"
@@ -282,9 +282,9 @@
 	display_order = JOB_DISPLAY_ORDER_ENDRON
 
 	minimal_masquerade = 3
-	allowed_species = list("Werewolf", "Vampire", "Human")
+	allowed_species = list("Werewolf", "Vampire", "Human", "Ghoul")
 	allowed_tribes = list("Black Spiral Dancers")
-	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE)
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE)
 
 	known_contacts = null
 
@@ -319,7 +319,7 @@
 	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf")
 	department_head = list("Endron International")
 	allowed_tribes = list("Black Spiral Dancers", "Ronin")
-	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE)
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_BAALI, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_GIOVANNI, CLAN_SETITES, CLAN_TZIMISCE, CLAN_LASOMBRA, CLAN_NONE)
 	faction = "Vampire"
 	selection_color = "#015334"
 

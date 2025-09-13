@@ -70,7 +70,7 @@
 	minimal_masquerade = 0
 	experience_addition = 10
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list(CLAN_GIOVANNI, CLAN_CAPPADOCIAN)
+	allowed_bloodlines = list(CLAN_GIOVANNI)
 
 /datum/outfit/job/giovanni
 	name = "La Squadra"
@@ -100,7 +100,7 @@
 	faction = "Vampire"
 	total_positions = 10
 	spawn_positions = 10
-	supervisors = "the Family"
+	supervisors = "the Family or your Spouse"
 	selection_color = "#cb4aad"
 
 	outfit = /datum/outfit/job/giovannimafia
@@ -114,8 +114,9 @@
 
 //	minimal_generation = 11	//Uncomment when players get exp enough
 
-	allowed_species = list("Ghoul", "Human")
-	duty = "Your family is a strange one. Maybe you are strange too, because sitting next to your great uncles as an equal is something you are greatly interested in."
+	allowed_species = list("Ghoul", "Human", "Vampire")
+	allowed_bloodlines = list(CLAN_BRUJAH, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_LASOMBRA)
+	duty = "Your family is a strange one. You might've married in, or just been given the short straw by God. But remember, family always looks out for each other."
 	minimal_masquerade = 0
 	experience_addition = 10
 

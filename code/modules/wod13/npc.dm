@@ -71,6 +71,13 @@
 
 	var/list/drop_on_death_list = null
 
+/mob/living/carbon/human/npc/Initialize()
+	. = ..()
+
+	// NPC humans get the area of effect, player humans dont. This is a fucky way of doing this.
+	qdel(GetComponent(/datum/component/violation_observer))
+	AddComponent(/datum/component/violation_observer, TRUE)
+
 /mob/living/carbon/human/npc/LateInitialize()
 	. = ..()
 	if(role_weapons_chances.Find(type))
@@ -81,7 +88,8 @@
 	if(!my_weapon && my_weapon_type)
 		my_weapon = new my_weapon_type(src)
 
-
+	if(!socialrole)
+		AssignSocialRole(pick(/datum/socialrole/usualmale, /datum/socialrole/usualfemale))
 
 	if(my_weapon)
 		has_weapon = TRUE
@@ -489,6 +497,10 @@
 		return
 	if(world.time <= last_annoy+50)
 		return
+	if(source && isliving(source))
+		var/mob/living/L = source
+		if(!L.ckey)
+			return
 	if(source)
 		spawn(rand(3, 7))
 			face_atom(source)

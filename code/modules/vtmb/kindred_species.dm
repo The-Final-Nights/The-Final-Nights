@@ -85,7 +85,7 @@
 				if(A.objectives)
 					dat += "[printobjectives(A.objectives)]<BR>"
 		var/masquerade_level = " followed the Masquerade Tradition perfectly."
-		switch(host.masquerade)
+		switch(host.masquerade_score)
 			if(4)
 				masquerade_level = " broke the Masquerade rule once."
 			if(3)
@@ -232,6 +232,8 @@
 	//putting this here for now not sure if elsewhere is better?
 	RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
 
+	GLOB.kindred_list += C
+
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
@@ -241,6 +243,8 @@
 	for(var/datum/action/A in C.actions)
 		if(A?.vampiric)
 			A.Remove(C)
+
+	GLOB.kindred_list -= C
 
 /datum/action/blood_power
 	name = "Blood Power"
@@ -281,9 +285,9 @@
 			BD.dna.species.punchdamagehigh = BD.dna.species.punchdamagehigh+5
 			BD.physiology.armor.melee = BD.physiology.armor.melee+15
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet+15
-			BD.dexterity = BD.dexterity+2
-			BD.athletics = BD.athletics+2
-			BD.lockpicking = BD.lockpicking+2
+			BD.dexterity = BD.dexterity+BD.bloodquality
+			BD.athletics = BD.athletics+BD.bloodquality
+			BD.lockpicking = BD.lockpicking+BD.bloodquality
 			if(!HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				ADD_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 			BD.update_blood_hud()
@@ -303,9 +307,9 @@
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet-15
 			if(HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				REMOVE_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
-		BD.dexterity = BD.dexterity-2
-		BD.athletics = BD.athletics-2
-		BD.lockpicking = BD.lockpicking-2
+		BD.dexterity = BD.dexterity-BD.bloodquality
+		BD.athletics = BD.athletics-BD.bloodquality
+		BD.lockpicking = BD.lockpicking-BD.bloodquality
 
 /datum/action/give_vitae
 	name = "Give Vitae"
@@ -360,8 +364,9 @@
 		var/datum/wound/W = pick(childe.all_wounds)
 		W.remove_wound()
 	childe.adjustFireLoss(-25, TRUE)
-	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+2)
+	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+(2 * sire.bloodquality))
 	childe.drunked_of |= "[sire.dna.real_name]"
+	childe.mind?.ingested_blood = sire
 
 	// Sabbatist Embrace Logic
 	if(sire.mind && is_sabbatist(sire))
@@ -474,13 +479,16 @@
 		action.Grant(src)
 	discipline.post_gain(src)
 
+/datum/species/proc/get_discipline()
+	return
+
 /**
  * Accesses a certain Discipline that a Kindred has. Returns false if they don't.
  *
  * Arguments:
  * * searched_discipline - Name or typepath of the Discipline being searched for.
  */
-/datum/species/kindred/proc/get_discipline(searched_discipline)
+/datum/species/kindred/get_discipline(searched_discipline)
 	for(var/datum/discipline/discipline in disciplines)
 		if (ispath(searched_discipline, /datum/discipline))
 			if (istype(discipline, searched_discipline))

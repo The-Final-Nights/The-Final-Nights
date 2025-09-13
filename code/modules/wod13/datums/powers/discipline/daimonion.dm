@@ -15,7 +15,7 @@
 //SENSE THE SIN
 /datum/discipline_power/daimonion/sense_the_sin
 	name = "Sense the Sin"
-	desc = "Become supernaturally resistant to fire."
+	desc = "Sense the sins and cruelties of your victim."
 
 	target_type = TARGET_HUMAN
 	range = 12
@@ -135,7 +135,7 @@
 		if(clan.get_discipline("Protean") && vampire.clan?.name != CLAN_GANGREL)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Gangrel's Protean will be known."))
 		if(clan.get_discipline("Serpentis") && vampire.clan?.name != CLAN_SETITES)
-			to_chat(owner, span_notice("[target] fears that the fact they stole Ministry's Serpentis will be known."))
+			to_chat(owner, span_notice("[target] fears that the fact they stole the Setite's Serpentis will be known."))
 		if(clan.get_discipline("Necromancy") && vampire.clan?.name != CLAN_GIOVANNI || clan.get_discipline("Necromancy") && vampire.clan?.name != CLAN_CAPPADOCIAN)
 			to_chat(owner, span_notice("[target] fears that the fact they stole Giovanni's Necromancy will be known."))
 		if(clan.get_discipline("Obtenebration") && vampire.clan?.name != CLAN_LASOMBRA)
@@ -259,7 +259,7 @@
 	to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
 	return FALSE
 
-//CONDEMNTATION
+//CONDEMNATION
 /datum/discipline_power/daimonion/condemnation
 	name = "Condemnation"
 	desc = "Condemn a soul to suffering."
@@ -303,3 +303,63 @@
 	else
 		to_chat(owner, span_warning("This one is already cursed!"))
 
+//DIABOLIC LURE
+/datum/discipline_power/daimonion/diabolic_lure
+	name = "Diabolic Lure"
+	desc = "Permanently lower a victim's Road rating."
+
+	level = 6
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
+	target_type = TARGET_VAMPIRE
+	range = 1
+	violates_masquerade = FALSE
+
+	var/points_can_remove = 3
+
+/datum/discipline_power/daimonion/diabolic_lure/can_activate_untargeted(alert)
+	. = ..()
+
+	if (points_can_remove <= 0)
+		if (alert)
+			to_chat(owner, span_warning("You've exhausted yourself too much to damn more souls."))
+		return FALSE
+
+	return .
+
+/datum/discipline_power/daimonion/diabolic_lure/can_activate(mob/living/carbon/human/target, alert)
+	. = ..()
+
+	if (!target.client)
+		if (alert)
+			to_chat(owner, span_warning("[target] does not have a soul to cleanse!"))
+		return FALSE
+
+	if (target.morality_path.score <= 1)
+		if (alert)
+			to_chat(owner, span_warning("[target]'s soul is already completely despoiled."))
+		return FALSE
+
+	if (target.morality_path.score >= 10 && !target.client?.prefs?.is_enlightened)
+		if (alert)
+			to_chat(owner, span_warning("[target]'s soul is too pure to touch."))
+		return FALSE
+
+	return .
+
+/datum/discipline_power/daimonion/diabolic_lure/pre_activation_checks(mob/living/carbon/human/target)
+	to_chat(owner, span_warning("You begin corrupting [target]'s soul..."))
+	if (do_after(owner, target, 10 SECONDS))
+		return TRUE
+
+/datum/discipline_power/daimonion/diabolic_lure/activate(mob/living/carbon/human/target)
+	. = ..()
+	// Resets the path hit cooldown on the target vampire so this power isn't rendered completely time consuming
+	S_TIMER_COOLDOWN_RESET(target.morality_path, COOLDOWN_PATH_HIT)
+
+	to_chat(owner, span_notice("You have damaged [target]'s soul slightly."))
+	SEND_SIGNAL(target, COMSIG_PATH_HIT, PATH_SCORE_DOWN)
+	points_can_remove--
+
+/datum/discipline_power/daimonion/diabolic_lure/post_gain()
+	. = ..()
+	owner.physiology.burn_mod = 0 //Ignore the searing flame 6th dot trait.

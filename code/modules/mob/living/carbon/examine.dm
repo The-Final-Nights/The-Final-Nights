@@ -172,7 +172,7 @@
 					weaver_taint--
 				if(istype(wolf,/mob/living/carbon/werewolf))
 					var/mob/living/carbon/werewolf/werewolf = src
-					if(werewolf.wyrm_tainted)
+					if(HAS_TRAIT(werewolf, TRAIT_WYRMTAINTED))
 						wyrm_taint++
 						wyld_taint--
 						weaver_taint--
@@ -214,7 +214,7 @@
 				. += "[t_He] look[p_s()] ecstatic."
 	. += "</span>"
 
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
 /mob/living/carbon/examine_more(mob/user)
 	if(!all_scars)

@@ -14,7 +14,7 @@
 		else
 			user.apply_damage(10, STAMINA)
 		user.do_attack_animation(src)
-		visible_message("<span class='danger'>[src] parries the attack!</span>", "<span class='danger'>You parry the attack!</span>")
+		visible_message(span_danger("[src] parries the punch!"), span_danger("You parry the punch!"))
 		playsound(src, 'code/modules/wod13/sounds/parried.ogg', 70, TRUE)
 		clear_parrying()
 		return
@@ -22,7 +22,12 @@
 		apply_damage(3, STAMINA)
 		user.do_attack_animation(src)
 		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
-		visible_message("<span class='danger'>[src] dodges the attack!</span>", "<span class='danger'>You dodge the attack!</span>")
+		visible_message(span_danger("[src] dodges the punch!"), span_danger("You dodge the punch!"))
+		return
+	if(HAS_TRAIT(src, TRAIT_PERFECT_DEFENCE))
+		user.do_attack_animation(src)
+		playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
+		visible_message(span_danger("[src] blocks the punch!"), span_danger("You block the punch!"))
 		return
 	if(blocking)
 		if(istype(W, /obj/item/melee))
@@ -34,7 +39,7 @@
 					apply_damage(10, STAMINA)
 					user.do_attack_animation(src)
 					playsound(src, 'sound/weapons/tap.ogg', 70, TRUE)
-					visible_message("<span class='danger'>[src] blocks the attack!</span>", "<span class='danger'>You block the attack!</span>")
+					visible_message(span_danger("[src] blocks the punch!"), span_danger("You block the punch!"))
 					if(incapacitated(TRUE, TRUE) && blocking)
 						SwitchBlocking()
 					return
@@ -44,7 +49,7 @@
 					apply_damage(hand_damage, WEP.damtype, assexing)
 					apply_damage(30, STAMINA)
 					user.do_attack_animation(src)
-					visible_message("<span class='warning'>[src] weakly blocks the attack!</span>", "<span class='warning'>You weakly block the attack!</span>")
+					visible_message(span_danger("[src] weakly blocks the punch!"), span_danger("You weakly block the punch!"))
 					if(incapacitated(TRUE, TRUE) && blocking)
 						SwitchBlocking()
 					return
@@ -53,7 +58,7 @@
 				apply_damage(round(WEP.force/2), WEP.damtype, assexing)
 				apply_damage(30, STAMINA)
 				user.do_attack_animation(src)
-				visible_message("<span class='warning'>[src] blocks the attack with [gender == MALE ? "his" : "her"] bare hands!</span>", "<span class='warning'>You block the attack with your bare hands!</span>")
+				visible_message(span_danger("[src] blocks the attack with [gender == MALE ? "his" : "her"] bare hands!"), span_danger("You block the attack with your bare hands!"))
 				if(incapacitated(TRUE, TRUE) && blocking)
 					SwitchBlocking()
 				return

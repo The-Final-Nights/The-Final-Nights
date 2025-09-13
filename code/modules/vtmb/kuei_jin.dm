@@ -59,7 +59,7 @@
 	heatmod = 1
 	burnmod = 3
 	dust_anim = "dust-k"
-	whitelisted = FALSE
+	whitelisted = TRUE
 	selectable = TRUE
 	var/turf/fool_turf
 	var/fool_fails = 0
@@ -169,19 +169,19 @@
 			for(var/datum/antagonist/A in host.mind.antag_datums)
 				if(A.objectives)
 					dat += "[printobjectives(A.objectives)]<BR>"
-		var/masquerade_level = " is clueless about my presence."
-		switch(host.masquerade)
+		var/masquerade_level = "is ignorant to my true nature."
+		switch(host.masquerade_score)
 			if(4)
-				masquerade_level = " has some thoughts of awareness."
+				masquerade_level = "is starting to notice."
 			if(3)
-				masquerade_level = " is barely spotting the truth."
+				masquerade_level = "is almost uncovering the truth."
 			if(2)
-				masquerade_level = " is starting to know."
+				masquerade_level = "almost certainly knows."
 			if(1)
-				masquerade_level = " knows me and my true nature."
+				masquerade_level = "knows me and my true nature."
 			if(0)
-				masquerade_level = " thinks I'm a monster and is hunting me."
-		dat += "West[masquerade_level]<BR>"
+				masquerade_level = "thinks I'm a monster and is hunting me down."
+		dat += "The Mundane World [masquerade_level]<BR>"
 		var/dharma = "I'm mindless carrion-eater!"
 		switch(host.mind.dharma?.level)
 			if(1)
@@ -306,10 +306,6 @@
 				P.yang = H.max_yang_chi
 				P.save_preferences()
 				P.save_character()
-			if(P.masquerade != H.masquerade)
-				P.masquerade = H.masquerade
-				P.save_preferences()
-				P.save_character()
 
 		H.update_chi_hud()
 		if(!H.in_frenzy)
@@ -366,8 +362,8 @@
 					H.mind.dharma.roll_po(trigger, H)
 					COOLDOWN_START(H.mind.dharma, po_call, 5 SECONDS)
 	H.nutrition = NUTRITION_LEVEL_START_MAX
-	if((H.last_bloodpool_restore + 60 SECONDS) <= world.time)
-		H.last_bloodpool_restore = world.time
+	if(COOLDOWN_FINISHED(H, bloodpool_restore))
+		COOLDOWN_START(H, bloodpool_restore, 1 MINUTES)
 		H.bloodpool = min(H.maxbloodpool, H.bloodpool+1)
 
 /datum/action/breathe_chi

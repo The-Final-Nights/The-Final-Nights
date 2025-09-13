@@ -54,6 +54,7 @@
 		target_body.set_species(/datum/species/zombie)
 		target_body.real_name = old_name // the ritual for some reason is deleting their old name and replacing it with a random name.
 		target_body.name = old_name
+		qdel(target_body.GetComponent(/datum/component/violation_observer))
 		target_body.update_name()
 
 		if(target_body.loc != original_location)
