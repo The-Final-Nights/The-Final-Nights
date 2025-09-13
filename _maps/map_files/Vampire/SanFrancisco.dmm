@@ -11595,11 +11595,6 @@
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/park)
 "cOd" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/kitchen/fork{
 	pixel_x = -9;
@@ -90032,17 +90027,6 @@
 	icon_state = "canal_concrete"
 	},
 /area/vtm/sewer/nosferatu_warren)
-"vwn" = (
-/obj/structure/table/wood,
-/obj/item/kitchen/knife,
-/obj/item/kitchen/rollingpin,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/closed/wall/vampwall/rich,
-/area/vtm/interior/giovanni)
 "vwr" = (
 /obj/effect/turf_decal/siding/wood{
 	color = "#665136";
@@ -155075,7 +155059,7 @@ ijU
 jax
 oCn
 gdx
-vwn
+jjw
 iDh
 wgt
 dcI
