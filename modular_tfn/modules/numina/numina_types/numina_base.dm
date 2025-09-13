@@ -19,15 +19,6 @@
 	/// List of traits that are applied to members of this Numina
 	var/list/numina_traits = list()
 
-	/// The Numina's unique body sprite
-	var/alt_sprite
-	/// If the Numina's unique body sprites need to account for skintone
-	var/alt_sprite_greyscale
-	/// If members of this Numina can't have hair
-	var/no_hair
-	/// If members of this Numina can't have facial hair
-	var/no_facial
-
 	/// Default clothing for male members of this Numina
 	var/male_clothes
 	/// Default clothing for female members of this Numina
@@ -48,19 +39,7 @@
 /datum/numina_pattern/proc/on_gain(mob/living/carbon/human/numinauser, joining_round)
 	SHOULD_CALL_PARENT(TRUE)
 
-	// Apply alternative sprites
-	if (alt_sprite)
-		if (!alt_sprite_greyscale)
-			vampire.skin_tone = "albino"
-		numinauser.set_body_sprite(alt_sprite)
-
-	if (no_hair)
-		numinauser.hairstyle = "Bald"
-
-	if (no_facial)
-		numinauser.facial_hairstyle = "Shaved"
-
-	for (var/trait in clan_traits)
+	for (var/trait in numina_traits)
 		ADD_TRAIT(numinauser, trait, CLAN_TRAIT)
 
 	if (joining_round)
@@ -73,11 +52,8 @@
 /datum/numina_pattern/proc/on_lose(mob/living/carbon/human/numinauser)
 	SHOULD_CALL_PARENT(TRUE)
 
-	for (var/trait in clan_traits)
+	for (var/trait in numina_traits)
 		REMOVE_TRAIT(numinauser, trait, CLAN_TRAIT)
-
-	if (alt_sprite && (GET_BODY_SPRITE(vampire) == alt_sprite))
-		numinauser.set_body_sprite(initial(numinauser.dna.species.limbs_id))
 
 	if (numinauser.client?.prefs?.clan_accessory)
 		var/equipped_accessory = accessories_layers[numinauser.client.prefs.clan_accessory]
@@ -105,11 +81,11 @@
 
 
 /mob/living/carbon/human/proc/set_numina(setting_numina, joining_round)
-	var/datum/numina_type/previous_numina = numina
+	var/datum/numina_pattern/previous_numina = numina
 
-	var/datum/numina_type/new_numina = ispath(setting_numina) ? GLOB.numina_clans[setting_numina] : setting_numina
+	var/datum/numina_pattern/new_numina = ispath(setting_numina) ? GLOB.numina_clans[setting_numina] : setting_numina
 
-	previous_clan?.on_lose(src)
+	previous_numina?.on_lose(src)
 
 	numina = new_numina
 

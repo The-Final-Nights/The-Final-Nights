@@ -39,6 +39,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/see_rc_emotes = TRUE
 	//Клан вампиров
 	var/datum/vampire_clan/clan
+	var/datum/numina_pattern/numina
 	var/datum/morality/morality_path = new /datum/morality/humanity()
 	// Custom Keybindings
 	var/list/key_bindings = list()
@@ -284,10 +285,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	honor = initial(honor)
 	glory = initial(glory)
 	wisdom = initial(wisdom)
-	if(iskindred(src))
-		clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
-	else
-		clan = GLOB.numina_clans[/datum/vampire_clan/numina]
+	clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
+	numina = GLOB.numina_clans[/datum/numina_pattern/mundane]
 	qdel(morality_path)
 	morality_path = new /datum/morality/humanity()
 	discipline_types = list()
@@ -780,26 +779,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 			if(pref_species.name == "Human")
 				dat += "<h2>[make_font_cool("GIFTS")]</h2>"
-				dat += "<b>Numina:</b> <a href='byond://?_src_=prefs;preference=numina;task=input'>[clan.name]</a><BR>"
-				dat += "<b>Description:</b> [clan.desc]<BR>"
-				dat += "<b>Curse:</b> [clan.curse]<BR>"
-				if (length(clan.accessories))
-					// No clan accessory, or unsupported one
-					if (!clan.accessories.Find(clan_accessory))
-						// Set to Clan's default accessory
-						if (clan.default_accessory)
-							clan_accessory = clan.default_accessory
-						// Can be null, so null it
-						else if (clan.accessories.Find("none"))
-							clan_accessory = null
-						// Must have an accessory, set to a random one
-						else
-							clan_accessory = pick(clan.accessories)
-
-					// Display clan accessory and allow selection
-					dat += "<b>Marks:</b> <a href='byond://?_src_=prefs;preference=clan_acc;task=input'>[clan_accessory ? clan_accessory : "none"]</a><BR>"
-				else
-					clan_accessory = null
+				dat += "<b>Numina:</b> <a href='byond://?_src_=prefs;preference=numina;task=input'>[numina.name]</a><BR>"
+				dat += "<b>Description:</b> [numina.desc]<BR>"
+				dat += "<b>Curse:</b> [numina.curse]<BR>"
 				dat += "<h2>[make_font_cool("DISCIPLINES")]</h2>"
 
 				for (var/i in 1 to discipline_types.len)
@@ -810,8 +792,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/cost
 					if (discipline_level <= 0)
 						cost = 10
-					else if (clan.name == NUMINA_BASE)
-						cost = discipline_level * 6
 					else if (clan.clan_disciplines.Find(discipline_type))
 						cost = discipline_level * 5
 					else
@@ -2686,7 +2666,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(tgui_alert(user, "Are you sure you want to change your Numina? This will reset your Powers.", "Confirmation", list("Yes", "No")) != "Yes")
 						return
 
-					// Create a list of Clans that can be played by anyone or this user has a whitelist for
+					// Create a list of Numina that can be played by anyone or this user has a whitelist for
 					var/list/available_clans = list()
 					for(var/adding_clan in GLOB.numina_clans)
 						var/datum/vampire_clan/checking_clan = GLOB.numina_clans[adding_clan]
@@ -2701,10 +2681,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					discipline_types = list()
 					discipline_levels = list()
 
-					if(clan.no_hair)
-						hairstyle = "Bald"
-					if(clan.no_facial)
-						facial_hairstyle = "Shaved"
 					if(length(clan.accessories))
 						if("none" in clan.accessories)
 							clan_accessory = null
@@ -3106,7 +3082,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								discipline_types.Cut()
 								discipline_levels.Cut()
 							if("human")
-								clan = GLOB.numina_clans[/datum/vampire_clan/numina]
+								numina = GLOB.numina_clans[/datum/numina_pattern/mundane]
 								discipline_types.Cut()
 								discipline_levels.Cut()
 								for (var/i in 1 to length(clan.clan_disciplines))

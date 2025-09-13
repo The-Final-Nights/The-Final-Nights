@@ -91,6 +91,10 @@
 	var/datum/vampire_clan/clan
 	var/datum/morality/morality_path
 
+	//TFN EDIT - NUMINA SYS *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+	var/datum/numina_pattern/numina
+	//TFN END *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
 	var/last_repainted_mark
 
 	///Performs CPR on the target after a delay. //[Lucia] what does this mean?

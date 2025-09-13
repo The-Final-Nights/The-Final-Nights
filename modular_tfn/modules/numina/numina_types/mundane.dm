@@ -1,6 +1,6 @@
 /*
-This datum stores a declarative description of numina types, in order to make an instance of the numina component from this implementation in runtime
-And it also helps for the character set panel. Borrowed heavily from how Clans work.
+Baseline "Numina" representing having no Numina to speak of. This also includes things like Vampires and Werewolves,
+who cannot have Numina and thus should never see this.
 */
 /datum/numina_pattern/mundane
 	name = NUMINA_BASE

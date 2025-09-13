@@ -74,7 +74,7 @@
 
 /datum/discipline_power/true_faith/ward/activate(mob/living/target)
 	. = ..()
-	to_chat(owner, span_warning("You've successfully sent away [target]!"))
+	to_chat(owner, span_warning("You repulse [target]!"))
 	to_chat(target,span_warning("The power extruding off of [owner] repulses you viciously!"))
 	SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 
