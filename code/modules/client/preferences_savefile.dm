@@ -406,6 +406,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if (clan_type)
 		clan = GLOB.vampire_clans[clan_type]
 
+	//TFN EDIT - NUMINA
+	var/numina_type
+	READ_FILE(S["numina"], numina_type)
+	if (numina_type)
+		numina = GLOB.numina_clans[numina_type]
+
 	var/path_id
 	READ_FILE(S["path"], path_id)
 	if(path_id)
@@ -826,6 +832,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["glory"]			, glory)
 	WRITE_FILE(S["wisdom"]			, wisdom)
 	WRITE_FILE(S["clan"]			, clan.type)
+//TFN EDIT - NUMINA
+	WRITE_FILE(S["numina"]			, numina.type)
+//TFN EDIT - NUMINA
 	WRITE_FILE(S["generation"]			, generation)
 	WRITE_FILE(S["generation_bonus"]			, generation_bonus)
 	WRITE_FILE(S["masquerade_score"] , masquerade_score)

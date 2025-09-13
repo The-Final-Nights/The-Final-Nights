@@ -792,7 +792,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					var/cost
 					if (discipline_level <= 0)
 						cost = 10
-					else if (clan.clan_disciplines.Find(discipline_type))
+					else if (numina.numina_disciplines.Find(discipline_type))
 						cost = discipline_level * 5
 					else
 						cost = discipline_level * 7
@@ -2681,6 +2681,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					discipline_types = list()
 					discipline_levels = list()
 
+					for(var/i in 1 to length(numina.numina_disciplines))
+						discipline_types += numina.numina_disciplines[i]
+						discipline_levels += 1
+
 				if("digitigradelegs")
 					if(clan.name != "Gargoyle")
 						return
@@ -2779,7 +2783,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						breed = new_breed
 
 				if("discipline")
-					if(pref_species.id == "kindred")
+					if(pref_species.id == "kindred" || pref_species.id == "human")
 						var/i = text2num(href_list["upgradediscipline"])
 
 						var/discipline_level = discipline_levels[i]

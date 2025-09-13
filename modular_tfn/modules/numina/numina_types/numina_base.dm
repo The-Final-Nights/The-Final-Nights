@@ -33,7 +33,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	for (var/trait in numina_traits)
-		ADD_TRAIT(numinauser, trait, CLAN_TRAIT)
+		ADD_TRAIT(numinauser, trait, NUMINA_TRAIT)
 
 	if (joining_round)
 		RegisterSignal(numinauser, COMSIG_MOB_LOGIN, PROC_REF(on_join_round), override = TRUE)
@@ -46,7 +46,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	for (var/trait in numina_traits)
-		REMOVE_TRAIT(numinauser, trait, CLAN_TRAIT)
+		REMOVE_TRAIT(numinauser, trait, NUMINA_TRAIT)
 
 	numinauser.update_body()
 

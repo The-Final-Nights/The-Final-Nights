@@ -1,5 +1,10 @@
 /// Trait given by a vampire's Clan
 #define CLAN_TRAIT "clan"
+
+//TFN EDIT - NUMINA TRAITS (Fixing this stupid fucking len error)
+#define NUMINA_TRAIT "numina"
+//TFN EDIT - END
+
 //salubri stuff
 #define SALUBRI_EYE_TRAIT "Salubri Eye"
 // used by the obfuscate ability
