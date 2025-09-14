@@ -67,7 +67,7 @@
 #define DATA_HUD_SENTIENT_DISEASE		8
 #define DATA_HUD_AI_DETECT				9
 #define DATA_HUD_FAN					10
-#define DATA_HUD_SENSEWYRM 				11 // HUD dedicated to the werewolf Sense Wyrm gift
+#define DATA_HUD_SENSEWYRM 				11 // TFN EDIT ADDITION - Remakes the Theurge's "Sense Wyrm" gift - HUD dedicated to the werewolf Sense Wyrm gift
 
 //antag HUD defines
 #define ANTAG_HUD_CULT			12
