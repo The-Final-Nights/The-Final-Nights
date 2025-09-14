@@ -13,7 +13,7 @@
 	display_results(user, target, span_notice("You begin to reshape [target]'s hair..."),
 		span_notice("[user] begins to manipulate [target]'s head in truly horrific ways!"))
 
-/datum/surgery_step/modify_hair/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/modify_hair/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/list/changes = list("Style", "Colour")
 	var/hairchoice = tgui_input_list(user, "Hairstyle or hair color?", "Change Hair", changes)
 	if(hairchoice == "Style")
