@@ -28,8 +28,7 @@
 	update_shadow()
 	handle_vampire_music()
 	update_auspex_hud()
-	update_sensewyrm_hud()
-	..()
+	if (!isnpc(src))
+		update_sensewyrm_hud()
 
-/mob/living/carbon/human/npc/Life()
-	update_auspex_hud()
+	..()

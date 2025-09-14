@@ -106,6 +106,7 @@
 		equip_to_appropriate_slot(my_backup_weapon)
 		register_sticky_item(my_backup_weapon)
 
+
 //====================Sticky Item Handling====================
 /mob/living/carbon/human/npc/proc/register_sticky_item(obj/item/my_item)
 	ADD_TRAIT(my_item, TRAIT_NODROP, NPC_ITEM_TRAIT)

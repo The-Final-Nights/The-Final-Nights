@@ -46,7 +46,7 @@
 		holder.icon_state = "aura"
 
 
-/mob/living/proc/NPC_wyrm_taint()
+/mob/living/carbon/proc/NPC_wyrm_taint()
 	var/image/holder = hud_list[SENSEWYRM_HUD]
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
