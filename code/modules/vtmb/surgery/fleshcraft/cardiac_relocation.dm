@@ -12,7 +12,7 @@
 		)
 
 	replaced_by = null
-	level_req = 2
+	level_req = 5
 
 /datum/surgery_step/relocate_heart
 	name = "Relocate Heart"
