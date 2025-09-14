@@ -13,7 +13,7 @@
 	display_results(user, target, span_notice("You begin to reshape [target]'s eyes..."),
 		span_notice("[user] begins to manipulate [target]'s eyes in truly horrific ways!"))
 
-/datum/surgery_step/modify_eyes/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/modify_eyes/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	var/new_eye_color = input(user, "Choose [target]'s eye color", "Eye Color", H.eye_color) as color|null
 	if(new_eye_color)
 		target.eye_color = sanitize_hexcolor(new_eye_color)
