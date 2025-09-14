@@ -23,7 +23,7 @@
 /// Borg/Mech/Circutry power meter
 #define DIAG_BATT_HUD	"10"
 /// Theurge Sense Wyrm Gift's auras
-#define SENSEWYRM_HUD	"11"
+#define SENSEWYRM_HUD	"11" // TFN EDIT ADDITION - Remakes the Theurge's "Sense Wyrm" gift
 /// Mech health bar
 #define DIAG_MECH_HUD	"12"
 /// Bot HUDs
