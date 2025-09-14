@@ -14,7 +14,7 @@
 		span_notice("[user] begins to manipulate [target]'s eyes in truly horrific ways!"))
 
 /datum/surgery_step/modify_eyes/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
-	var/new_eye_color = input(user, "Choose [target]'s eye color", "Eye Color", H.eye_color) as color|null
+	var/new_eye_color = input(user, "Choose [target]'s eye color", "Eye Color", target.eye_color) as color|null
 	if(new_eye_color)
 		target.eye_color = sanitize_hexcolor(new_eye_color)
 		target.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
