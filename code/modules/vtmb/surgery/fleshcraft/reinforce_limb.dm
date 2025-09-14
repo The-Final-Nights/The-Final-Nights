@@ -13,7 +13,7 @@
 
 /datum/surgery_step/reinforce_limb
 	name = "reinforce_limb"
-	implements = list(/obj/item/stack/human_flesh = 10) //A stack, made from several bodies, can't quite reinforce one body. 
+	implements = list(/obj/item/stack/human_flesh = 100) //A stack, made from several bodies, can't quite reinforce one body. 
 	time = 125
 
 /datum/surgery_step/reinforce_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -34,4 +34,5 @@
 	if(surgery.operated_bodypart)
 		var/obj/item/bodypart/target_limb = surgery.operated_bodypart
 		target_limb.wound_damage_multiplier = 0.5 //Just sets it once, so you can't stack it infinitely.
+	tool.use(5)
 	return ..()
