@@ -8,9 +8,8 @@
 /datum/status_effect/blood_of_potency/on_creation(mob/living/new_owner, generation, time)
 	. = ..()
 	if(time)
-		duration = (time INGAME_HOURS)
+		duration = time
 	stored_generation = owner.generation
-
 	owner.generation = generation
 	owner.calculate_max_bloodpool()
 

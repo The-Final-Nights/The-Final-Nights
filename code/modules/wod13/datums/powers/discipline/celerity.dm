@@ -26,7 +26,7 @@
 /datum/discipline_power/celerity/proc/temporis_explode(datum/source, datum/discipline_power/power, atom/target)
 	SIGNAL_HANDLER
 
-	if (!istype(power, /datum/discipline_power/temporis/patience_of_the_norns) && !istype(power, /datum/discipline_power/temporis/clothos_gift))
+	if (!istype(power, /datum/discipline_power/temporis/cowalker) && !istype(power, /datum/discipline_power/temporis/clothos_gift))
 		return
 
 	to_chat(owner, "<span class='userdanger'>You try to use Temporis, but your active Celerity accelerates your temporal field out of your control!</span>")

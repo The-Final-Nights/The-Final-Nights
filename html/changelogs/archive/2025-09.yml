@@ -115,3 +115,36 @@
   chazzyjazzy:
   - bugfix: removes an exploit where injecting a cigarette with vitae allows you to
       gain alot of blood.
+2025-09-11:
+  Raptorian1:
+  - rscdel: Removed things
+  - qol: quality of life changes
+  - map: mapping changes
+  TheTrueSilverRat:
+  - rscadd: Added a thing to make Sabbat be incognito in the Crew manifest
+  XeonMations:
+  - map: Fixed a lot of general miscellaneous things on the map.
+  darkincarnate:
+  - rscadd: white heels, different shoes for endron
+  - qol: tower employee timelock removed, garou added to cargo tech
+2025-09-12:
+  FalloutFalcon:
+  - bugfix: grill-able food can now be eaten
+  Knightscholar:
+  - rscadd: Added new emotes that can be done with *Say
+  - rscadd: Added hand kissing to *kiss
+  Kolibri-B:
+  - rscadd: Changes Temporis to be more TTRPG-accurate
+  - balance: Changes Temporis to be more TTRPG-accurate
+  - refactor: Refactors part of Temporis code
+  XeonMations:
+  - bugfix: Fixed paintings not saving at roundend
+  chazzyjazzy:
+  - bugfix: one player can no longer bring the global masquerade from 20 to 0 ending
+      the round.
+  - bugfix: the bloodhunt skull can once again fix breaches from previous rounds
+  - qol: toggleable disciplines now automatically untoggle when entering torpor
+  - bugfix: Blood of Potency is no longer virtually infinite
+  darkincarnate:
+  - rscdel: old endron lab
+  - map: relocated and expanded endron lab. x4 simplemob gimmick cells.

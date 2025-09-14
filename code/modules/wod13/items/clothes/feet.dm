@@ -58,6 +58,9 @@
 /obj/item/clothing/shoes/vampire/heels/red
 	icon_state = "heels_red"
 
+/obj/item/clothing/shoes/vampire/heels/white
+	icon_state = "heels_white"
+
 /obj/item/clothing/shoes/vampire/businessscaly
 	name = "scaly shoes"
 	desc = "Shoes with scales."
