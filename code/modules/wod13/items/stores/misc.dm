@@ -20,7 +20,8 @@
 		new /datum/data/mining_equipment("cannabis package",		/obj/item/weedpack,	700),
 		new /datum/data/mining_equipment("morphine syringe",	/obj/item/reagent_containers/syringe/contraband/morphine,	800),
 		new	/datum/data/mining_equipment("meth package",	/obj/item/reagent_containers/food/drinks/meth,	800),
-		new	/datum/data/mining_equipment("cocaine package",	/obj/item/reagent_containers/food/drinks/meth/cocaine,	800)
+		new	/datum/data/mining_equipment("cocaine package",	/obj/item/reagent_containers/food/drinks/meth/cocaine,	800),
+		new	/datum/data/mining_equipment("box of 9mm Silver ammo", /obj/item/ammo_box/vampire/c9mm/silver, 10000)
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/pharmacy
