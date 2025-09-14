@@ -143,6 +143,7 @@
 		new /datum/data/mining_equipment("red sneakers",	/obj/item/clothing/shoes/vampire/sneakers/red,	10),
 		new /datum/data/mining_equipment("high heels",	/obj/item/clothing/shoes/vampire/heels,	35),
 		new /datum/data/mining_equipment("red high heels",	/obj/item/clothing/shoes/vampire/heels/red,	35),
+		new /datum/data/mining_equipment("white high heels",	/obj/item/clothing/shoes/vampire/heels/white, 35),
 		new /datum/data/mining_equipment("scaly shoes",	/obj/item/clothing/shoes/vampire/businessscaly,	35),
 		new /datum/data/mining_equipment("black shoes",	/obj/item/clothing/shoes/vampire/businessblack,	35),
 		new /datum/data/mining_equipment("black fur boots",	/obj/item/clothing/shoes/vampire/blackfur,	35),

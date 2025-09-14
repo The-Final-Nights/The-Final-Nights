@@ -153,8 +153,6 @@
 	spawn_positions = 4
 	supervisors = "the Seneschal, Sheriff and Prince."
 	selection_color = "#bd3327"
-	minimal_player_age = 7
-	exp_requirements = 300
 	exp_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/towerwork

@@ -205,12 +205,6 @@
 /datum/controller/subsystem/ticker/proc/declare_completion(forced)
 	set waitfor = FALSE
 
-	if(forced)
-		to_chat(world,  span_extremelybig(span_bolddanger("The end is coming.")))
-	else
-		to_chat(world, span_extremelybig(span_bold("A new dawn is coming.")))
-	log_game("The round has ended.")
-
 	for(var/I in round_end_events)
 		var/datum/callback/cb = I
 		cb.InvokeAsync()
@@ -245,6 +239,11 @@
 	//Set news report and mode result
 	mode.set_round_result()
 
+	if(forced)
+		to_chat(world,  span_extremelybig(span_bolddanger("The end is coming.")))
+	else
+		to_chat(world, span_extremelybig(span_bold("A new dawn is coming.")))
+	log_game("The round has ended.")
 	send2adminchat("Server", "Round just ended.")
 
 	if(length(CONFIG_GET(keyed_list/cross_server)))
@@ -278,14 +277,17 @@
 
 	CHECK_TICK
 	SSdbcore.SetRoundEnd()
+
 	//Collects persistence features
-	if(mode.allow_persistence_save)
-		SSpersistence.CollectData()
+	SSpersistence.CollectData()
+	SSpersistent_paintings.save_paintings()
 
 	//stop collecting feedback during grifftime
 	SSblackbox.Seal()
 
-	sleep(50)
+	world.TgsTriggerEvent("tg-Roundend", wait_for_completion = TRUE)
+
+	sleep(5 SECONDS)
 	ready_for_reboot = TRUE
 	standard_reboot()
 

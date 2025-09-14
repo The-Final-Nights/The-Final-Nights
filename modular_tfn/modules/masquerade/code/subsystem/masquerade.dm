@@ -44,11 +44,26 @@ SUBSYSTEM_DEF(masquerade)
  * reason - Optional, the reason for the breach. For example,
  */
 /datum/controller/subsystem/masquerade/proc/masquerade_reinforce(atom/source, mob/living/player_breacher, reason)
+	if(!GLOB.canon_event)
+		return
 	. = FALSE
 	for(var/masquerade_breach as anything in masquerade_breachers)
-		var/list/source_list = list(masquerade_breach[2])
-		if((source in source_list))
-			if(!reason || (reason in masquerade_breach))
+		var/breach_sources = masquerade_breach[2]
+		var/breach_reasons = masquerade_breach[3]
+
+		var/source_matches = FALSE
+		// breach_sources can be a list if there is more than one blood skull, handle for that
+		if(islist(breach_sources))
+			source_matches = (source in breach_sources)
+		else
+			source_matches = (source == breach_sources)
+
+		if(source_matches)
+			if(!reason || (reason in masquerade_breach) || (reason == MASQUERADE_REASON_PREFERENCES))
+				// Only require blood hunt skull for "Preferences" (round-persistent) breaches
+				if(breach_reasons == MASQUERADE_REASON_PREFERENCES && !istype(source, /obj/item/blood_hunt))
+					continue
+
 				masquerade_breachers -= list(masquerade_breach)
 				masquerade_level = min(MASQUERADE_MAX_LEVEL, masquerade_level + 1)
 				player_breacher.masquerade_score = min(5, player_breacher.masquerade_score + 1)
@@ -78,13 +93,20 @@ SUBSYSTEM_DEF(masquerade)
  * reason - The reason for the breach. For example,
  */
 /datum/controller/subsystem/masquerade/proc/masquerade_breach(atom/source, mob/living/player_breacher, reason)
+	if(!GLOB.canon_event)
+		return
+	var/pre_breach_score = player_breacher.masquerade_score
+	if(pre_breach_score == 0)
+		return
 	player_breacher.masquerade_score = max(0, player_breacher.masquerade_score - 1)
 	masquerade_breachers += list(list(player_breacher, source, reason))
 	if(isgarou(player_breacher) || iswerewolf(player_breacher))
 		GLOB.veil_breakers_list |= player_breacher
 	else
 		GLOB.masquerade_breakers_list |= player_breacher
-	masquerade_level = max(0, masquerade_level - 1)
+	//Only lower the global masq if the player's breach score is actually reduced by 1
+	if(pre_breach_score > player_breacher.masquerade_score)
+		masquerade_level = max(0, masquerade_level - 1)
 	save_persistent_masquerade(player_breacher)
 	check_roundend_condition()
 

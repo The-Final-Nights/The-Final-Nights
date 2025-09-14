@@ -434,7 +434,7 @@
 	var/kiss_type = /obj/projectile/kiss
 	/// TRUE if the user was aiming anywhere but the mouth when they offer the kiss, if it's offered
 	var/cheek_kiss
-
+	var/hand_kiss //TFN EDIT - Small Emote Expansion #808 - new var
 /obj/item/hand_item/kisser/afterattack(atom/target, mob/living/carbon/user, proximity)
 	. = ..()
 	var/obj/projectile/blown_kiss = new kiss_type(get_turf(user))
@@ -454,16 +454,25 @@
 	if(!(locate(/mob/living/carbon) in orange(1, offerer)))
 		return TRUE
 
+// TFN EDIT START - Small Emote Expansion #808 - Adds hand_kiss var logic, modifies messages accordingly
+
+	hand_kiss = ((offerer.zone_selected == BODY_ZONE_L_ARM)||(offerer.zone_selected == BODY_ZONE_R_ARM))
+
 	cheek_kiss = (offerer.zone_selected != BODY_ZONE_PRECISE_MOUTH)
-	offerer.visible_message(span_notice("[offerer] leans in slightly, offering a kiss[cheek_kiss ? " on the cheek" : ""]!"),
-		span_notice("You lean in slightly, indicating you'd like to offer a kiss[cheek_kiss ? " on the cheek" : ""]!"), null, 2)
+
+	if(hand_kiss)
+		cheek_kiss = !hand_kiss
+
+	offerer.visible_message(span_notice("[offerer] leans in slightly, offering a kiss[cheek_kiss ? " on the cheek" : ""][hand_kiss ? " on the hand" : ""]!"),
+		span_notice("You lean in slightly, indicating you'd like to offer a kiss[cheek_kiss ? " on the cheek" : ""][hand_kiss ? " on the hand" : ""]!"), null, 2)
 	offerer.apply_status_effect(/datum/status_effect/offering/no_item_received, src)
 	return TRUE
 
 /obj/item/hand_item/kisser/on_offer_taken(mob/living/carbon/offerer, mob/living/carbon/taker)
 	var/obj/projectile/blown_kiss = new kiss_type(get_turf(offerer))
-	offerer.visible_message("<b>[offerer]</b> gives [taker] \a [blown_kiss][cheek_kiss ? " on the cheek" : ""]!!", span_notice("You give [taker] \a [blown_kiss][cheek_kiss ? " on the cheek" : ""]!"), ignored_mobs = taker)
-	to_chat(taker, span_nicegreen("[offerer] gives you \a [blown_kiss][cheek_kiss ? " on the cheek" : ""]!"))
+	offerer.visible_message("<b>[offerer]</b> gives [taker] \a [blown_kiss][cheek_kiss ? " on the cheek" : ""][hand_kiss ? " on the hand" : ""]!!", span_notice("You give [taker] \a [blown_kiss][cheek_kiss ? " on the cheek" : ""][hand_kiss ? " on the hand" : ""]!"), ignored_mobs = taker)
+	to_chat(taker, span_nicegreen("[offerer] gives you \a [blown_kiss][cheek_kiss ? " on the cheek" : ""][hand_kiss ? " on the hand" : ""]!"))
+	// TFN EDIT END - Small Emote Expansion #808
 	offerer.face_atom(taker)
 	taker.face_atom(offerer)
 	offerer.do_item_attack_animation(taker, used_item = src)
