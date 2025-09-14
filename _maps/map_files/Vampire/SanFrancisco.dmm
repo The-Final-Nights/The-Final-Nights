@@ -15444,6 +15444,11 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/jazzclub)
+"dLC" = (
+/obj/structure/bury_pit,
+/obj/item/melee/vampirearms/shovel,
+/turf/open/floor/plating/vampgrass,
+/area/vtm/interior/giovanni/outside)
 "dLE" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	color = "#574d46"
@@ -52970,11 +52975,6 @@
 /obj/elevator_door/start_closed,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower)
-"mEU" = (
-/obj/item/melee/vampirearms/shovel,
-/obj/structure/bury_pit,
-/turf/open/openspace,
-/area/vtm/interior/giovanni/outside)
 "mFa" = (
 /obj/structure/chair/wood/wings{
 	dir = 4
@@ -156781,7 +156781,7 @@ bdM
 bdM
 aQK
 bdM
-aQK
+dLC
 bdM
 vLY
 wJp
@@ -197182,7 +197182,7 @@ bKy
 bKy
 bKy
 bKy
-mEU
+bKy
 bKy
 bKy
 bKy
