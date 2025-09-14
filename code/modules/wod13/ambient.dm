@@ -216,6 +216,12 @@
 	fire_controled = TRUE
 	wall_rating = HIGH_WALL_RATING
 
+/area/vtm/interior/sabbat_lair
+	name = "Interior"
+	zone_type = "elysium"
+	music = /datum/vampiremusic/sewer
+	upper = FALSE
+
 /area/vtm/financialdistrict
 	name = "Financial District"
 	icon_state = "financialdistrict"
@@ -364,11 +370,6 @@
 /area/vtm/clinic/haven
 	name = "Hospital - Psych Ward"
 	zone_type = "elysium"
-
-/area/vtm/sabbat_lair
-	name = "Interior"
-	zone_type = "elysium"
-	music = /datum/vampiremusic/sewer
 
 /area/vtm/supply
 	name = "Supply Depot"

@@ -681,7 +681,6 @@
 		visible_message("<span class='warning'>[user] bonks [src]'s head!</span>", "<span class='warning'>You bonk[target]'s head!</span>")
 		if(user.mind && is_sabbatist(user))
 			target.Stun(3 SECONDS)
-			target.emote("collapse")
 			target.drop_all_held_items()
 
 /obj/item/melee/vampirearms/katana/kosa

@@ -148,3 +148,13 @@
   darkincarnate:
   - rscdel: old endron lab
   - map: relocated and expanded endron lab. x4 simplemob gimmick cells.
+2025-09-14:
+  SoreYew:
+  - refactor: Makes Sabbat Base an Interior Space
+  - qol: Adds to the Diablerist quirk text.
+  chazzyjazzy:
+  - balance: Reduces the effects of concussions as well as allows bloodheal to completely
+      cure the concussive effects.
+  - balance: The Sabbat Shovel no longer causes the emote "collapse" which extended
+      the stun from 3 seconds to about 8 seconds, an unintended effect.
+  - bugfix: Simplemob transformations no longer delete your character's languages
