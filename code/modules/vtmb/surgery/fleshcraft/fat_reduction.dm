@@ -23,7 +23,7 @@
 	display_results(user, target, span_notice("You begin to pull out [target]'s body fat."),
 	span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!"))
 
-/datum/surgery_step/remove_fat/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/remove_fat/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if (target.base_body_mod == FAT_BODY_MODEL)
 		target.set_body_model(NORMAL_BODY_MODEL)
 		var/obj/item/stack/human_flesh/F = new (get_turf(target), 3)
