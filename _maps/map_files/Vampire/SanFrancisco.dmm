@@ -26815,6 +26815,14 @@
 	},
 /turf/open/openspace,
 /area/vtm)
+"gCP" = (
+/obj/effect/decal/trash,
+/obj/elevator_button_down{
+	id = 76;
+	pixel_y = 30
+	},
+/turf/open/floor/plating/vampplating/mono,
+/area/vtm/interior/endron_facility/plant)
 "gCV" = (
 /obj/item/candle/infinite{
 	anchored = 1
@@ -41171,6 +41179,14 @@
 	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/millennium_tower/f3)
+"kcn" = (
+/obj/effect/decal/trash,
+/obj/elevator_button_up{
+	pixel_y = 30;
+	id = 76
+	},
+/turf/open/floor/plating/vampplating/mono,
+/area/vtm/interior/endron_facility/restricted)
 "kco" = (
 /obj/structure/railing{
 	dir = 1;
@@ -41489,10 +41505,6 @@
 	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
-"kfP" = (
-/obj/effect/decal/trash,
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/endron_facility/restricted)
 "kgf" = (
 /obj/effect/decal/litter,
 /obj/item/cigbutt,
@@ -60075,6 +60087,16 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/asphalt,
 /area/vtm/baywalk)
+"otf" = (
+/obj/effect/turf_decal/siding/white/corner{
+	color = "#636363";
+	dir = 1
+	},
+/turf/open/floor/plating/vampcanal{
+	icon_state = "canal2";
+	color = "#b5b5b5"
+	},
+/area/vtm)
 "otm" = (
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/community)
@@ -65497,6 +65519,16 @@
 /turf/open/floor/plating/vampocean{
 	color = "#789156";
 	density = 0
+	},
+/area/vtm)
+"pLB" = (
+/obj/effect/turf_decal/siding/white{
+	color = "#636363";
+	dir = 9
+	},
+/turf/open/floor/plating/vampcanal{
+	icon_state = "canal2";
+	color = "#b5b5b5"
 	},
 /area/vtm)
 "pLC" = (
@@ -83394,13 +83426,6 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren)
-"ucC" = (
-/obj/elevator_button_down{
-	id = 76;
-	pixel_y = 30
-	},
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/endron_facility/plant)
 "ucI" = (
 /obj/item/cigbutt,
 /turf/open/floor/plating/rough/cave,
@@ -88647,12 +88672,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/giovanni)
-"vwC" = (
-/obj/machinery/light/red{
-	dir = 1
-	},
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/endron_facility/restricted)
 "vwL" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -89903,13 +89922,6 @@
 	icon_state = "acid"
 	},
 /area/vtm/interior/endron_facility/plant)
-"vNA" = (
-/obj/effect/decal/pallet,
-/obj/machinery/light/red{
-	dir = 1
-	},
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/endron_facility/restricted)
 "vNH" = (
 /obj/structure/closet/crate/freezer/fridge,
 /obj/item/reagent_containers/blood/random,
@@ -93020,13 +93032,6 @@
 /obj/structure/barrels/rand,
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/industrial)
-"wAn" = (
-/obj/elevator_button_up{
-	pixel_y = 30;
-	id = 76
-	},
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/endron_facility/restricted)
 "wAt" = (
 /obj/item/candle/infinite{
 	anchored = 1
@@ -100420,8 +100425,8 @@ xfw
 xfw
 xfw
 xfw
+xfw
 rCB
-jSx
 jSx
 jSx
 jSx
@@ -100622,11 +100627,11 @@ xfw
 xfw
 xfw
 xfw
+xfw
 rCB
 jSx
 osq
 eSU
-vwC
 jSx
 bBZ
 jxJ
@@ -100824,11 +100829,11 @@ xfw
 xfw
 xfw
 xfw
+xfw
 rCB
 jSx
 eSU
 eSU
-kfP
 wFb
 uKv
 uKv
@@ -101026,10 +101031,10 @@ xfw
 xfw
 xfw
 xfw
+xfw
 rCB
 jSx
-kfP
-eSU
+kcn
 eSU
 wFb
 uKv
@@ -101229,10 +101234,10 @@ xfw
 xfw
 xfw
 rCB
+rCB
 jSx
-wAn
 eSU
-vNA
+eSU
 jSx
 lVU
 jtM
@@ -140818,7 +140823,7 @@ jdz
 jdz
 jdz
 jdz
-goA
+jdz
 goA
 goA
 goA
@@ -141019,10 +141024,10 @@ wiu
 eEj
 fIP
 tvm
-tvm
+eEj
+eEj
 goA
 vgm
-ecQ
 syI
 goA
 xOe
@@ -141222,8 +141227,8 @@ tvm
 tvm
 tvm
 tvm
+eEj
 goA
-ecQ
 ecQ
 sNU
 xgF
@@ -141424,9 +141429,9 @@ tvm
 tvm
 tvm
 tvm
+tvm
 goA
-sNU
-ecQ
+gCP
 ecQ
 xgF
 vcn
@@ -141625,9 +141630,9 @@ qKf
 tvm
 tvm
 tvm
+tvm
 qlZ
 goA
-ucC
 ecQ
 uRm
 goA
@@ -181421,8 +181426,8 @@ mjT
 mjT
 mjT
 mjT
+mjT
 eql
-lUR
 lUR
 lUR
 lUR
@@ -181623,8 +181628,8 @@ mjT
 mjT
 mjT
 mjT
+mjT
 jYW
-lOn
 lOn
 lOn
 lOn
@@ -181825,8 +181830,8 @@ mjT
 mjT
 mjT
 mjT
+mjT
 jYW
-lOn
 lOn
 lOn
 lOn
@@ -182027,8 +182032,8 @@ mjT
 mjT
 mjT
 mjT
+mjT
 jYW
-lOn
 lOn
 lOn
 lOn
@@ -182229,8 +182234,8 @@ mjT
 mjT
 mjT
 mjT
-viL
-bxC
+pLB
+otf
 bxC
 bxC
 bxC
