@@ -3,6 +3,7 @@
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/retract_skin, /datum/surgery_step/modify_hair, /datum/surgery_step/close)
 	possible_locs = list(BODY_ZONE_HEAD)
 	level_req = 2
+	replaced_by = null
 
 //reshape_face
 /datum/surgery_step/modify_hair
