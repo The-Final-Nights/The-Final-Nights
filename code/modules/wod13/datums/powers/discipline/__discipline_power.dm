@@ -49,6 +49,8 @@
 	var/list/grouped_powers
 	/// Group this Discipline belongs to. Only one discipline of a group may be active at a time. No cooldown is shared.
 	var/power_group = DISCIPLINE_POWER_GROUP_NONE
+	/// If the power has custom logging, for example Melpominee.
+	var/custom_logging = FALSE
 
 	/* NOT MEANT TO BE OVERRIDDEN */
 	/// Timer(s) tracking the duration of the power. Can have multiple if multi_activate is true.
@@ -449,7 +451,8 @@
 	INVOKE_ASYNC(src, PROC_REF(do_masquerade_violation), target)
 
 	do_caster_notification(target)
-	do_logging(target)
+	if(!custom_logging)
+		do_logging(target)
 
 	owner.update_action_buttons()
 
