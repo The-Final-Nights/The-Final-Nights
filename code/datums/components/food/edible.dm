@@ -388,6 +388,10 @@ Behavior that's still missing from this component that original food items had t
 		if(HAS_TRAIT(H, TRAIT_ORGANOVORE) && (foodtypes & GORE))
 			SEND_SIGNAL(H, COMSIG_ADD_VITAE, 1, FALSE)
 			return // Skip the rest, I think this is fine?
+	// APOC ADD START
+		if(HAS_TRAIT(H, TRAIT_CAN_EAT))
+			return // Line 390 has the right idea.
+	// APOC ADD END
 		if(HAS_TRAIT(H, TRAIT_AGEUSIA))
 			to_chat(H, "<span class='warning'>You don't feel so good...</span>")
 			H.adjust_disgust(11 + 15 * fraction)
