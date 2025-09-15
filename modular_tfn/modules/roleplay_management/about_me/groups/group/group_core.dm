@@ -20,15 +20,17 @@
 
 /datum/group/New(id = null, load_mode = FALSE)
 	..()
-	if (!id)
-		id = SSroleplay_management.group_id_new(gtype)
-	src.id = id
 
 	if (!created_at_ts)
 		created_at_ts = world.realtime
-		created_at = time2text(created_at_ts, "MMM DD, YYYY hh:mm")
+		created_at = time2text(created_at_ts, "MMM_DD_YYYY")
 	updated_at_ts = created_at_ts
 	updated_at = created_at
+
+	if (!id)
+		id = SSroleplay_management.group_id_new(gtype, lowertext(replacetext(name, " ", "_")))
+		id += "_[created_at]"
+	src.id = id
 
 	if (!load_mode)
 		SSroleplay_management.register_group(src)

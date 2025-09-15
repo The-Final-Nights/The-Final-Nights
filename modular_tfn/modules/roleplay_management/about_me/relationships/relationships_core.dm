@@ -20,7 +20,7 @@
 	src.owner_key = owner_key
 	src.target_key = target_key
 	if (!id)
-		var/pfx = "[owner_key]_[target_key]"
+		var/pfx = "[owner_key]_to_[target_key]"
 		id = SSroleplay_management.about_me_new_id(pfx)
 	if (!created_at_ts)
 		created_at_ts = world.realtime

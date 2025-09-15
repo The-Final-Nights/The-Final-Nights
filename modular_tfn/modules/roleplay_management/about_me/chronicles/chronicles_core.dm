@@ -40,19 +40,21 @@
 	src.group_id  = group_id
 	src.created_by_key = created_by_key
 
-	if (!src.id)
-		var/host = owner_key ? "[owner_key]" : (group_id ? "[group_id]" : "unknown")
-		var/pfx = "chronicle_[src.scope]_[host]"
-		src.id = SSroleplay_management.about_me_new_id(pfx)
-
 	if (!created_at_ts)
 		created_at_ts = world.realtime
-		created_at = time2text(created_at_ts, "MMM DD, YYYY hh:mm")
+		created_at = time2text(created_at_ts, "MMM_DD_2015")
 	updated_at_ts = created_at_ts
 	updated_at = created_at
 
 	start_at_ts = created_at_ts
 	start_at = created_at
+
+	if (!src.id)
+		var/host = owner_key ? "[owner_key]" : (group_id ? "[group_id]" : "unknown")
+		var/pfx = "chronicle_[src.scope]_[host]_[created_at]"
+		src.id = SSroleplay_management.about_me_new_id(pfx)
+
+
 
 	if (!load_mode)
 		SSroleplay_management.register_chronicle(src)

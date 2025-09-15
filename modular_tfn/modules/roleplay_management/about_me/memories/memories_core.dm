@@ -23,17 +23,17 @@
 	if(memory_type == null)
 		memory_type = "generic"
 	if (!date_occurred)
-		date_occurred = time2text(world.realtime, "MMM DD, YYYY")
+		date_occurred = time2text(world.realtime, "MMM_DD_2015")
 
 	if (!id)
-		var/pfx = owner_key ? "memory_[memory_type]_[owner_key]" : "mem"
+		var/pfx = owner_key ? "memory_[memory_type]_[owner_key]_[date_occurred]" : "mem"
 		id = SSroleplay_management.about_me_new_id(pfx)
 
 	if (!created_at_ts)
 		created_at_ts = world.realtime
-		created_at = time2text(created_at_ts, "MMM DD, YYYY hh:mm")
+		created_at = time2text(created_at_ts, "MMM_DD_2015")
 	updated_at_ts = created_at_ts
-	updated_at = created_at
+	updated_at = created_at_ts
 
 	if (!load_mode)
 		SSroleplay_management.register_memory(src)
