@@ -25135,11 +25135,13 @@
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
 "ggB" = (
-/obj/effect/decal/trash,
-/obj/structure/lattice/grate{
-	dir = 4
+/obj/manholeup{
+	pixel_y = 13
 	},
-/turf/open/floor/plating/grate/dirty,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
 "ggN" = (
 /obj/structure/chair/office{

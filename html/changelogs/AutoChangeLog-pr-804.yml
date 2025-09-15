@@ -1,5 +1,0 @@
-author: "dwinters99 & Major00 (Paynt)"
-delete-after: True
-changes:
-  - rscadd: "Eat Food merit"
-  - balance: "Vampires must now vomit to expel excess reagents if they do not have the Eat Food merit."
