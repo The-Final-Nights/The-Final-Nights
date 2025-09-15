@@ -41,4 +41,4 @@
 				target.facial_hair_color = sanitize_hexcolor(new_face_color)
 				target.dna.update_ui_block(DNA_FACIAL_HAIR_COLOR_BLOCK)
 	target.update_hair()
-
+	return TRUE
