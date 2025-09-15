@@ -657,6 +657,7 @@
 	owner.set_species(/datum/species/kindred)
 	owner.Stun(2 SECONDS)
 	owner.do_jitter_animation(50)
+	playsound(get_turf(owner), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
 
 /datum/discipline_power/vicissitude/horrid_form/post_gain()
 	. = ..()
