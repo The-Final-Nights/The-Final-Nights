@@ -18,6 +18,7 @@
 	name = "Remove Fat"
 	accept_hand = TRUE
 	time = 20
+	repeatable = TRUE
 
 /datum/surgery_step/remove_fat/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to pull out [target]'s body fat."),
