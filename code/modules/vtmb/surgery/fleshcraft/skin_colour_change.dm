@@ -24,3 +24,4 @@
 		target.skin_tone = new_s_tone
 		target.dna.update_ui_block(DNA_SKIN_TONE_BLOCK)
 		target.update_body()
+	return TRUE
