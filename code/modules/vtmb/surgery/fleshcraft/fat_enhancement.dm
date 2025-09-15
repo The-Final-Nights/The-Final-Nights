@@ -17,6 +17,7 @@
 	name = "Add Fat"
 	implements = list(/obj/item/stack/human_flesh = 100)
 	time = 20
+	repeatable = TRUE
 
 /datum/surgery_step/add_fat/preop(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to stretch out [target]'s flesh!"),
