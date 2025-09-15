@@ -207,28 +207,30 @@
 
 
 /datum/controller/subsystem/roleplay_management/proc/rpm_get_or_make_canonical_group(group_key, group_typepath)
-	if (!GLOB.canonical_groups)
-		GLOB.canonical_groups = list()
-	if (GLOB.canonical_groups[group_key])
-		return GLOB.canonical_groups[group_key]
+    if (!GLOB.canonical_groups)
+        GLOB.canonical_groups = list()
+    if (GLOB.canonical_groups[group_key])
+        return GLOB.canonical_groups[group_key]
 
-	var/datum/group/group_datum = new group_typepath()
-	if (!group_datum.id)
-		group_datum.id = group_key
+    var/datum/group/group_datum = new group_typepath()
+    if (!group_datum.id)
+        group_datum.id = group_key
 
-	GLOB.canonical_groups[group_key] = group_datum
+    // marked clearly as canonical and keep it OUT of GLOB.groups
+    group_datum.canonical_key = group_key
+    group_datum.is_canonical = TRUE
 
-	if (!GLOB.groups)
-		GLOB.groups = list()
-	if (!GLOB.groups[group_key])
-		GLOB.groups[group_key] = group_datum
+    GLOB.canonical_groups[group_key] = group_datum
+    return group_datum
 
-	return group_datum
 
 /datum/controller/subsystem/roleplay_management/proc/rpm_register_canonical_groups()
-	if (!GLOB.canonical_groups) GLOB.canonical_groups = list()
-	if (!GLOB.groups) GLOB.groups = list()
-	if (!GLOB.canonical_type_to_key) GLOB.canonical_type_to_key = list()
+	if (!GLOB.canonical_groups)
+		GLOB.canonical_groups = list()
+	if (!GLOB.groups)
+		GLOB.groups = list()
+	if (!GLOB.canonical_type_to_key)
+		GLOB.canonical_type_to_key = list()
 	var/list/canonical_map = CANON_GROUPS_MAP
 	for (var/group_key in canonical_map)
 		var/group_typepath = canonical_map[group_key]

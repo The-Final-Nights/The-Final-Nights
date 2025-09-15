@@ -44,7 +44,7 @@
 		created_at_ts = world.realtime
 		created_at = time2text(created_at_ts, "MMM_DD_2015")
 	updated_at_ts = created_at_ts
-	updated_at = created_at
+	updated_at = created_at_ts
 
 	start_at_ts = created_at_ts
 	start_at = created_at

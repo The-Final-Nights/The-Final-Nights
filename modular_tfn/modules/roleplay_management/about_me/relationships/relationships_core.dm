@@ -1,7 +1,7 @@
 /datum/relationships
 	var/id
-	var/owner_key
-	var/target_key
+	var/owner
+	var/target
 	var/kind = "acquaintance"
 	var/label = ""
 	var/notes = ""
@@ -17,14 +17,14 @@
 
 /datum/relationships/New(owner_key, target_key, load_mode = FALSE)
 	..()
-	src.owner_key = owner_key
-	src.target_key = target_key
+	owner = owner_key
+	target = target_key
 	if (!id)
-		var/pfx = "[owner_key]_to_[target_key]"
+		var/pfx = "[owner]_to_[lowertext(replacetext(target_key, " ", "_"))]"
 		id = SSroleplay_management.about_me_new_id(pfx)
 	if (!created_at_ts)
 		created_at_ts = world.realtime
-		created_at = time2text(created_at_ts, "MMM DD, YYYY hh:mm")
+		created_at = time2text(created_at_ts, "MMM_DD_2015")
 	updated_at_ts = created_at_ts
 	updated_at = created_at
 	if (!load_mode)
@@ -75,8 +75,8 @@
 /datum/relationships/proc/GetFormattedUI()
 	return list(
 		"id" = id,
-		"owner_key" = owner_key,
-		"target_key" = target_key,
+		"owner_key" = owner,
+		"target_key" = target,
 		"kind" = kind,
 		"label" = label,
 		"notes" = notes,
@@ -89,21 +89,21 @@
 
 /datum/relationships/proc/is_visible_to(mob/user, character_id)
 	if (!character_id) return FALSE
-	if (character_id == owner_key) return TRUE
-	var/is_group = (!!GLOB.groups && GLOB.groups[target_key]) || (!!GLOB.canonical_groups && GLOB.canonical_groups[target_key])
+	if (character_id == owner) return TRUE
+	var/is_group = (!!GLOB.groups && GLOB.groups[target]) || (!!GLOB.canonical_groups && GLOB.canonical_groups[target])
 
 	if (is_group)
 		var/datum/aboutme_record/rec = SSroleplay_management.get_aboutme_record(character_id)
 		if (!rec) return FALSE
-		return (target_key in rec.group_keys)
+		return (target in rec.group_keys)
 
-	return character_id == target_key
+	return character_id == target
 
 /datum/relationships/proc/to_row()
 	return list(
 		"id" = id,
-		"owner_key" = owner_key,
-		"target_key" = target_key,
+		"owner_key" = owner,
+		"target_key" = target,
 		"kind" = kind,
 		"label" = label,
 		"notes" = notes,
@@ -123,8 +123,8 @@
 /datum/relationships/proc/from_row(list/row)
 	if (!islist(row)) return
 	id = "[row["id"]]"
-	owner_key = row["owner_key"] || owner_key
-	target_key = row["target_key"] || target_key
+	owner = row["owner_key"] || owner
+	target = row["target_key"] || target
 	kind = row["kind"] || kind
 	label = row["label"] || label
 	notes = row["notes"] || notes

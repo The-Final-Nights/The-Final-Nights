@@ -186,7 +186,7 @@
         var/list/rel_groups = list()
         for (var/rid in GLOB.relationships)
             var/datum/relationships/R = GLOB.relationships[rid]
-            var/source = R?.owner_key || "Unknown"
+            var/source = R?.owner || "Unknown"
             (rel_groups[source] ||= list()) += rid
 
         for (var/source in rel_groups)
@@ -194,7 +194,7 @@
             html += "<details><summary><b>[source]</b> ([length(rids)])</summary>"
             for (var/rid in rids)
                 var/datum/relationships/R = GLOB.relationships[rid]
-                var/target_id = R?.target_key
+                var/target_id = R?.target
                 var/datum/group/G = SSroleplay_management.get_group_by_id(target_id)
                 var/tname = NN(G?.name, target_id)
                 html += "<div>• [rid] → [tname] ([R?.kind || "kind?"]) <span style='color:#9aa4b2'>int=[SAFE_NUM(R?.intensity)]</span></div>"
@@ -246,10 +246,10 @@
     for (var/rid in GLOB.relationships)
         var/datum/relationships/R = GLOB.relationships[rid]
         if (!R) continue
-        if (!R.owner_key || !GLOB.aboutme_records[R.owner_key])
-            orphans += "REL [rid]: missing owner_key=[R?.owner_key]"
-        if (R.kind == "group" && (!R.target_key || !GLOB.groups[R.target_key]))
-            orphans += "REL [rid]: missing group target=[R?.target_key]"
+        if (!R.owner || !GLOB.aboutme_records[R.owner])
+            orphans += "REL [rid]: missing owner_key=[R?.owner]"
+        if (R.kind == "group" && (!R.target || !GLOB.groups[R.target]))
+            orphans += "REL [rid]: missing group target=[R?.target]"
     for (var/ck in GLOB.chronicles)
         var/datum/chronicle/C = GLOB.chronicles[ck]
         for (var/eid in (C.entries || list()))
