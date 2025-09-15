@@ -15,10 +15,10 @@ endmap
 
 map sanfrancisco
 	votable
-	default
 endmap
 
 map runtimetown
+	default
 endmap
 
 map multiz_debug

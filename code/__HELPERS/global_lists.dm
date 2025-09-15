@@ -173,3 +173,14 @@ GLOBAL_LIST_INIT(WALLITEMS_EXTERIOR, typecacheof(list(
 	/obj/structure/camera_assembly,
 	/obj/structure/light_construct
 	)))
+
+// TFN EDIT - List of objects considered Holy. For use in True Faith and related things,
+// Because otherwise it would look really silly and dumb.
+
+GLOBAL_LIST_INIT(TFNITEMS_HOLY, typecacheof(list(
+	/obj/item/clothing/neck/vampire/prayerbeads,
+	/obj/item/storage/book/bible,
+	/obj/item/vampirebook/quran,
+	/obj/item/quran,
+	/obj/item/card/id/hunter
+	)))

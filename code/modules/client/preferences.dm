@@ -786,7 +786,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
-					var/datum/discipline/discipline = new discipline_type
+					var/datum/discipline/numina/discipline = new discipline_type
 					var/discipline_level = discipline_levels[i]
 
 					var/cost
@@ -2783,7 +2783,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						breed = new_breed
 
 				if("discipline")
-					if(pref_species.id == "kindred" || pref_species.id == "human")
+					if(pref_species.id == "kindred")
 						var/i = text2num(href_list["upgradediscipline"])
 
 						var/discipline_level = discipline_levels[i]
@@ -2798,6 +2798,22 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							cost = discipline_level * 6
 						else if (clan.clan_disciplines.Find(discipline_types[i]))
 							cost = discipline_level * 5
+
+						if ((player_experience < cost) || (discipline_level >= max_discipline_level))
+							return
+
+						player_experience -= cost
+						experience_used_on_character += cost
+						discipline_levels[i] = min(max_discipline_level, max(1, discipline_levels[i] + 1))
+					if(pref_species.id == "human")
+						var/i = text2num(href_list["upgradediscipline"])
+
+						var/discipline_level = discipline_levels[i]
+						var/max_discipline_level = 5
+
+						var/cost = discipline_level * 100
+						if (discipline_level <= 0)
+							cost = 100
 
 						if ((player_experience < cost) || (discipline_level >= max_discipline_level))
 							return
@@ -3787,6 +3803,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.max_yang_chi = 3
 		character.yin_chi = 2
 		character.max_yin_chi = 2
+
+	if (pref_species.name == "Human")
+		character.set_numina(numina, TRUE)
 
 	if(pref_species.name == "Vampire")
 		character.skin_tone = get_vamp_skin_color(skin_tone)
