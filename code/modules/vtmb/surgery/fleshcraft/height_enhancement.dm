@@ -18,6 +18,7 @@
 	name = "Extend Spine"
 	accept_hand = TRUE
 	time = 100
+	repeatable = TRUE
 
 /datum/surgery_step/extend_spine/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to stretch out [target]'s spine like taffy."),
