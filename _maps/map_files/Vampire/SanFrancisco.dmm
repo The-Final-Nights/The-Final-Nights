@@ -60471,6 +60471,12 @@
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/baywalk)
+"oyW" = (
+/obj/machinery/light/red{
+	dir = 1
+	},
+/turf/open/floor/plating/vampplating/mono,
+/area/vtm/interior/endron_facility/restricted)
 "oyY" = (
 /obj/machinery/light{
 	dir = 8
@@ -100631,7 +100637,7 @@ xfw
 rCB
 jSx
 osq
-eSU
+oyW
 jSx
 bBZ
 jxJ
@@ -101237,7 +101243,7 @@ rCB
 rCB
 jSx
 eSU
-eSU
+oyW
 jSx
 lVU
 jtM
