@@ -22,3 +22,4 @@
 		target.eye_color = sanitize_hexcolor(new_eye_color)
 		target.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
 		target.update_body()
+	return TRUE
