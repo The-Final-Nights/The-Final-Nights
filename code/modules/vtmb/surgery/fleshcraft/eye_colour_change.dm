@@ -10,6 +10,7 @@
 	name = "Change Eye Colour"
 	accept_hand = TRUE
 	time = 20
+	repeatable = TRUE
 
 /datum/surgery_step/modify_eyes/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to reshape [target]'s eyes..."),
