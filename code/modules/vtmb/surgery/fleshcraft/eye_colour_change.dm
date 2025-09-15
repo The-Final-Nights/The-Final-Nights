@@ -2,6 +2,7 @@
 	name = "Change Eye Colour"
 	steps = list(/datum/surgery_step/incise, /datum/surgery_step/retract_skin, /datum/surgery_step/modify_eyes, /datum/surgery_step/close)
 	possible_locs = list(BODY_ZONE_PRECISE_EYES)
+	level_req = 2
 
 //reshape_face
 /datum/surgery_step/modify_eyes
