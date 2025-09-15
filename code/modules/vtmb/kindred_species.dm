@@ -762,8 +762,7 @@
 	H.physiology.armor.melee += 80
 	H.physiology.armor.bullet += 80
 	H.add_movespeed_modifier(/datum/movespeed_modifier/zulo)
-	var/matrix/M = matrix()
-	M.Scale(1.4)
+	H.dna.add_mutation(GIGANTISM)
 
 /datum/species/kindred/zulo/on_species_loss(mob/living/carbon/human/H)
 	..()
@@ -778,8 +777,7 @@
 	H.physiology.armor.melee -= 80
 	H.physiology.armor.bullet -= 80
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/zulo)
-	var/matrix/M = matrix()
-	M.Scale(1)
+	H.dna.remove_mutation(GIGANTISM)
 
 /datum/movespeed_modifier/zulo
 	blacklisted_movetypes = FLOATING|FLYING
