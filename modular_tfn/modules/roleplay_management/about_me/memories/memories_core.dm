@@ -1,19 +1,37 @@
 /datum/memory
 	var/id
+
+	//ID of the master aboutme record 
+	var/about_me_id
+	
+	var/owner_key = ""
 	var/summary = ""
 	var/details = ""
-	var/list/tags = list()
-	var/owner_key = ""
-	var/list/related_keys = list()
-	var/date_occurred = ""
 	var/source = ""
 	var/status = "New"
 
+	/*
+		Flattened these records into their own tables,
+		memory_linked_keys and memory_tags
+		var/list/related_keys = list()
+		var/list/tags = list()
+	*/
+	
+
+	/*
+	Flattened the following into create_time and update_time. 
+	Then, added End_time for tracking ended relationships.
+	var/date_occurred = ""
 	var/created_at = ""
 	var/created_at_ts = 0
 	var/updated_at = ""
 	var/updated_at_ts = 0
+	*/
+	var/create_time
+	var/update_time
+	var/end_time
 
+	//Not tracked by db
 	var/dirty = FALSE
 	var/autosave = TRUE
 

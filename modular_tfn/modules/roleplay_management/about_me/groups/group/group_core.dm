@@ -1,22 +1,45 @@
 /datum/group
 	var/id
+
+	/*
+	Renamed to group_type for the sake of straightforward naming structures
 	var/gtype = "org"
+	*/
+	var/group_type = "org"
+
+
 	var/name = "Unnamed Group"
 	var/desc = ""
-	var/visibility = TRUE
+	
 	var/status = "Active"
+
 	var/created_by_key = ""
+
+	//Do we need both of these?
+	var/visibility = TRUE
+	var/is_public = TRUE
+
+
+	var/canonical_key = ""
+	var/is_canonical = FALSE
+	var/load_mode = FALSE
+
+	/*
+	Flattened to Create_time/Update_time/End_time
 	var/created_at = ""
 	var/created_at_ts = 0
 	var/updated_at = ""
 	var/updated_at_ts = 0
+	*/
+	var/create_time
+	var/update_time
+	var/end_time
+
+
+	//Not tracked by DB
 	var/dirty = FALSE
 	var/autosave = TRUE
-	var/is_public = TRUE
-
-	var/is_canonical = FALSE
-	var/load_mode = FALSE
-	var/canonical_key = ""
+	
 
 /datum/group/New(id = null, load_mode = FALSE)
 	..()

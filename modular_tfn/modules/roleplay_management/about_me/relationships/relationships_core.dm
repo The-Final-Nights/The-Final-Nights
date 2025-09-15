@@ -1,17 +1,35 @@
 /datum/relationships
 	var/id
+	var/about_me_id
 	var/owner_key
 	var/target_key
+
+	/*
+	changed 'kind' to 'relationship_type'
+	sorry its just clearer this way
 	var/kind = "acquaintance"
+	*/
+	var/relationship_type = "acquaintance"
+
+	var/status = "Active"
 	var/label = ""
 	var/notes = ""
-	var/visibility = TRUE
-	var/status = "Active"
 	var/intensity = 0
+	var/visibility = TRUE
+	
+	/*
+	Flattened the into create_time and update_time. 
+	Then, added End_time for tracking ended relationships.
 	var/created_at = ""
 	var/created_at_ts = 0
 	var/updated_at = ""
 	var/updated_at_ts = 0
+	*/
+	var/create_time
+	var/update_time
+	var/end_time
+
+	//Not tracked by database.
 	var/dirty = FALSE
 	var/autosave = TRUE
 

@@ -734,6 +734,160 @@ CREATE TABLE `SS13_tutorial_completions` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ckey_tutorial_unique` (`ckey`, `tutorial_key`));
 
+DROP TABLE IF EXISTS `SS13_about_me_record`;
+CREATE TABLE `SS13_about_me_record` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `character_id` VARCHAR(512),
+  `owner_key` VARCHAR(256),
+  `character_name` VARCHAR(512),
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `character_id_index` (`character_id`),
+  INDEX `owner_key_index` (`owner_key`),
+  INDEX `character_name_index` (`character_name`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `SS13_chronicle`;
+CREATE TABLE `SS13_chronicle` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `about_me_id` INT,
+  `group_id` INT,
+  `created_by_key` datetime NOT NULL,
+  `owner_key` VARCHAR(256),
+  `scope` VARCHAR(64),
+  `status` VARCHAR(64),
+  `title` TEXT,
+  `desc` TEXT,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  CONSTRAINT fk_chronicle_about_me_record FOREIGN KEY (about_me_id) REFERENCES about_me_record(id),
+  CONSTRAINT fk_chronicle_group_id FOREIGN KEY (group_id) REFERENCES about_me_group(id),
+  INDEX `about_me_id_index` (`about_me_id`),
+  INDEX `group_id_index` (`group_id`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `SS13_chronicle_tag`;
+CREATE TABLE `SS13_chronicle_tag` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `chronicle_id` INT NOT NULL,
+  `tag` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `chronicle_id_index` (`chronicle_id`),
+  CONSTRAINT fk_tag_chronicle FOREIGN KEY (chronicle_id) REFERENCES chronicle(id));
+
+DROP TABLE IF EXISTS `SS13_chronicle_entry`;
+CREATE TABLE `SS13_chronicle_entry` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `chronicle_id` INT NOT NULL,
+  `entry` TEXT,
+  `create_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  INDEX `chronicle_id_index` (`chronicle_id`),
+  INDEX `create_time_index` (`create_time`),
+  CONSTRAINT fk_entry_chronicle FOREIGN KEY (chronicle_id) REFERENCES chronicle(id));
+
+
+DROP TABLE IF EXISTS `about_me_group`;
+CREATE TABLE `about_me_group` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `group_type` VARCHAR(64) NOT NULL,
+  `name` TEXT,
+  `desc` TEXT,
+  `status` VARCHAR(64),
+  `created_by_key` VARCHAR(256),
+  `visibility` BOOLEAN DEFAULT TRUE,
+  `is_public` BOOLEAN DEFAULT TRUE,
+  `canonical_key` VARCHAR(256),
+  `is_canonical` BOOLEAN DEFAULT FALSE,
+  `load_mode` BOOLEAN DEFAULT FALSE,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  INDEX `group_type_index` (`group_type`),
+  INDEX `created_by_key_index` (`created_by_key`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `about_me_group_member`;
+CREATE TABLE `about_me_group_member` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `about_me_id` VARCHAR(64) NOT NULL,
+  `group_id` VARCHAR(64) NOT NULL,
+  `status` VARCHAR(64),
+  `member_type` VARCHAR(64),
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `loyalty` INT DEFAULT 50,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  INDEX `about_me_id_index` (`about_me_id`),
+  INDEX `group_id_index` (`group_id`),
+  INDEX `create_time_index` (`create_time`)
+  CONSTRAINT fk_group_member_about_me_record FOREIGN KEY (about_me_id) REFERENCES about_me_record(id),
+  CONSTRAINT fk_group_member_group_id FOREIGN KEY (group_id) REFERENCES about_me_group(id));
+
+DROP TABLE IF EXISTS `SS13_relationship`;
+CREATE TABLE `SS13_relationship` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `about_me_id` INT NOT NULL,
+  `owner_key` VARCHAR(256),
+  `target_key` VARCHAR(256),
+  `relationship_type` VARCHAR(64),
+  `status` VARCHAR(64),
+  `label` TEXT,
+  `notes` TEXT,
+  `visibility` BOOLEAN DEFAULT TRUE,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  CONSTRAINT fk_relationship_about_me_record FOREIGN KEY (about_me_id) REFERENCES about_me_record(id),
+  INDEX `about_me_id_index` (`about_me_id`),
+  INDEX `relationship_type_index` (`relationship_type`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `SS13_memory`;
+CREATE TABLE `SS13_memory` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `about_me_id` INT NOT NULL,
+  `owner_key` VARCHAR(256),
+  `source` VARCHAR(64),
+  `summary` TEXT,
+  `details` TEXT,
+  `status` VARCHAR(64),
+  `visibility` BOOLEAN DEFAULT TRUE,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  CONSTRAINT fk_memory_about_me_record FOREIGN KEY (about_me_id) REFERENCES about_me_record(id),
+  INDEX `about_me_id_index` (`about_me_id`),
+  INDEX `source_index` (`about_me_sourceid`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `SS13_memory_tag`;
+CREATE TABLE `SS13_memory_tag` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `memory_id` INT NOT NULL,
+  `tag` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `memory_id_index` (`memory_id`),
+  CONSTRAINT fk_tag_memory_id FOREIGN KEY (memory_id) REFERENCES memory(id));
+
+DROP TABLE IF EXISTS `SS13_memory_linked_keys`;
+CREATE TABLE `SS13_memory_linked_keys` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `memory_id` INT NOT NULL,
+  `linked_key` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `memory_id_index` (`memory_id`),
+  CONSTRAINT fk_key_memory_id FOREIGN KEY (memory_id) REFERENCES memory(id));
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

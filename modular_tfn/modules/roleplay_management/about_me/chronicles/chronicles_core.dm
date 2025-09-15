@@ -2,30 +2,49 @@
 // CHRONICLE — CORE (chronicles_core.dm)
 // Chronicle = story container with linked entries (memory ids).
 // DB-backed; cache via GLOB.chronicles. Write-through on save().
+// Reflected by the chronicle, chronicle_tags and chronicle_entry table in the db.
 // ============================================================================
 
 /datum/chronicle
 	var/id
+
+	//ID of the master aboutme record 
+	var/about_me_id
+
 	var/scope = "personal"
 	var/title = "Untitled Chronicle"
 	var/desc = ""
-	var/owner_key
+	
+	//not sure what this is but I made it an int in the db
 	var/group_id
+
+	//Flattened the following lists into their own sub-tables.
+	/*
 	var/list/tags = list()
 	var/list/entries = list() // entry ids
+	*/
+
 	var/status = "Ongoing"
 
+
+
+	//Why do we have two fields to track the creator's key?
+	var/owner_key
+	var/created_by_key
+	
+	//Why do we have 2 different records for this? 
+	//We can use the database's timekeeping system instead.
+	//simplified to create_time / update_time / end_time
 	var/start_at = ""
 	var/start_at_ts = 0
 	var/end_at = ""
 	var/end_at_ts = 0
-
-	var/created_by_key
 	var/created_at = ""
 	var/created_at_ts = 0
 	var/updated_at = ""
-	var/updated_at_ts = 0
+	var/updated_at_ts = 0	
 
+	//Not included in the database
 	// Persistence flags
 	var/dirty = FALSE
 	var/autosave = TRUE

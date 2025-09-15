@@ -15,6 +15,123 @@ INSERT INTO `SS13_schema_revision` (`major`, `minor`) VALUES (5, 31);
 In any query remember to add a prefix to the table names if you use one.
 
 -----------------------------------------------------
+Version 5.31, 3 May 2025, by Hex37
+Adds about-me related tables.
+
+DROP TABLE IF EXISTS `about_me_record`;
+CREATE TABLE `about_me_record` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `character_id` VARCHAR(512),
+  `owner_key` VARCHAR(256),
+  `character_name` VARCHAR(512),
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `character_id_index` (`character_id`),
+  INDEX `owner_key_index` (`owner_key`),
+  INDEX `character_name_index` (`character_name`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `chronicle`;
+CREATE TABLE `chronicle` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `about_me_id` INT NOT NULL,
+  `group_id` INT NOT NULL,
+  `created_by_key` datetime NOT NULL,
+  `owner_key` VARCHAR(256),
+  `scope` VARCHAR(64),
+  `status` VARCHAR(64),
+  `title` TEXT,
+  `desc` TEXT,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  CONSTRAINT fk_chronicle_about_me_record FOREIGN KEY (about_me_id) REFERENCES about_me_record(id),
+  INDEX `about_me_id_index` (`about_me_id`),
+  INDEX `group_id_index` (`group_id`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `chronicle_tag`;
+CREATE TABLE `chronicle_tag` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `chronicle_id` INT NOT NULL,
+  `tag` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `chronicle_id_index` (`chronicle_id`),
+  CONSTRAINT fk_tag_chronicle FOREIGN KEY (chronicle_id) REFERENCES chronicle(id));
+
+DROP TABLE IF EXISTS `chronicle_entry`;
+CREATE TABLE `chronicle_entry` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `chronicle_id` INT NOT NULL,
+  `entry` TEXT,
+  `create_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  INDEX `chronicle_id_index` (`chronicle_id`),
+  INDEX `create_time_index` (`create_time`),
+  CONSTRAINT fk_entry_chronicle FOREIGN KEY (chronicle_id) REFERENCES chronicle(id));
+
+DROP TABLE IF EXISTS `relationship`;
+CREATE TABLE `relationship` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `about_me_id` INT NOT NULL,
+  `owner_key` VARCHAR(256),
+  `target_key` VARCHAR(256),
+  `relationship_type` VARCHAR(64),
+  `status` VARCHAR(64),
+  `label` TEXT,
+  `notes` TEXT,
+  `visibility` BOOLEAN DEFAULT TRUE,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  CONSTRAINT fk_relationship_about_me_record FOREIGN KEY (about_me_id) REFERENCES about_me_record(id),
+  INDEX `about_me_id_index` (`about_me_id`),
+  INDEX `relationship_type_index` (`relationship_type`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `memory`;
+CREATE TABLE `memory` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `about_me_id` INT NOT NULL,
+  `owner_key` VARCHAR(256),
+  `source` VARCHAR(64),
+  `summary` TEXT,
+  `details` TEXT,
+  `status` VARCHAR(64),
+  `visibility` BOOLEAN DEFAULT TRUE,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `end_time` datetime,
+  PRIMARY KEY (`id`),
+  CONSTRAINT fk_memory_about_me_record FOREIGN KEY (about_me_id) REFERENCES about_me_record(id),
+  INDEX `about_me_id_index` (`about_me_id`),
+  INDEX `source_index` (`about_me_sourceid`),
+  INDEX `create_time_index` (`create_time`));
+
+DROP TABLE IF EXISTS `memory_tag`;
+CREATE TABLE `memory_tag` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `memory_id` INT NOT NULL,
+  `tag` VARCHAR(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `memory_id_index` (`memory_id`),
+  CONSTRAINT fk_tag_memory_id FOREIGN KEY (memory_id) REFERENCES memory(id));
+
+DROP TABLE IF EXISTS `memory_linked_keys`;
+CREATE TABLE `memory_linked_keys` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `memory_id` INT NOT NULL,
+  `linked_key` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `memory_id_index` (`memory_id`),
+  CONSTRAINT fk_key_memory_id FOREIGN KEY (memory_id) REFERENCES memory(id));
+
+
+-----------------------------------------------------
 Version 5.30, 3 May 2025, by Atlanta-Ned
 Adds a `manifest` table.
 

@@ -1,21 +1,41 @@
 /datum/aboutme_record
+	var/id
+
+	//composite of character_name and owner_key
 	var/character_id
+
+	var/owner_key
+	var/character_name
+
+	//What are these holding? The preferences system should hold this instead.
 	var/edit_display_name
 	var/edit_goals
 	var/edit_personal_quote
 	var/edit_gender
 	var/edit_physical_desc
+
+	/*
+	The below are represented by foreign keys in the database.
 	var/list/group_keys = list()
 	var/list/relationship_keys = list()
 	var/list/chronicle_keys = list()
 	var/list/memory_keys = list()
-	var/has_initialized_personal_chronicle = FALSE
-	var/has_initialized_groups_from_role = FALSE
-	var/has_initialized_entry_memory = FALSE
+	*/
+
+	/*
+	Flattened the into create_time and update_time.
 	var/created_at = ""
 	var/created_at_ts = 0
 	var/updated_at = ""
 	var/updated_at_ts = 0
+	*/
+	var/create_time
+	var/update_time
+
+	//not tracked by the db.
+	var/has_initialized_personal_chronicle = FALSE
+	var/has_initialized_groups_from_role = FALSE
+	var/has_initialized_entry_memory = FALSE
 	var/dirty = FALSE
 	var/autosave = TRUE
 
