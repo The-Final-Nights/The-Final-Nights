@@ -17,12 +17,12 @@
 	repeatable = TRUE//lets the fleshcrafter try out the options, should allow for easier experimenting with how things look
 	time = 120
 
-/datum/surgery_step/add_flesh/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/add_curse/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to reshape [target]..."),
 		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!</span>"),
 		span_notice("[user] begins to manipulate [target]'s flesh in truly horrific ways!</span>"))
 
-/datum/surgery_step/add_flesh/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/add_curse/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
 	if(target.clan?.name == CLAN_NOSFERATU || target.clan?.name == CLAN_KIASYD || target.clan?.name == CLAN_CAPPADOCIAN || target.clan?.name == CLAN_GARGOYLE) //Clan check, since otherwise this would prevent you reverting appearance for those you curse afterwards.
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon/human, revert_to_cursed_form)), 6 INGAME_HOURS)//Won't last all night, but takes a good while to heal, given how it's a pain to perform.
 		display_results(user, target, span_notice("[target]'s curse is already attempting to revert them to their cursed original form, it won't last much more than a few hours!"))
