@@ -2,7 +2,7 @@
 // ABOUT ME COMPONENT (aboutme_core.dm)
 // ------------------------------------------------------------------------------
 /datum/component/about_me
-	var/mob/living/carbon/human/owner = null // quick reference to owning mob
+	var/mob/living/carbon/human/owner = null // quick reference to current owning runtime mob
 	var/character_id = null // unique per-character identifier, (ckey)_(character_real_name)_id
 
 /datum/component/about_me/Initialize()
@@ -20,7 +20,7 @@
 /datum/component/about_me/proc/UpdateCharacterId()
 	var/ckey = owner.client.ckey || "unknown"
 	var/name_part = lowertext(replacetext(owner.true_real_name, " ", "_"))
-	character_id = SSroleplay_management.about_me_new_id("[ckey]_[name_part]_id")
+	character_id = SSroleplay_management.about_me_new_id("[ckey]_[name_part]")
 
 /datum/component/about_me/proc/get_aboutme_record(id_override = null)
 	var/id = id_override ? id_override : character_id

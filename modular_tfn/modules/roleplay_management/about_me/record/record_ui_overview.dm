@@ -42,14 +42,12 @@
 	var/list/species_block = list()
 	if (iskindred(owner))
 		species_block = get_species_ui_kindred(owner)
-	else if (isgarou(owner))
+	if (isgarou(owner))
 		species_block = get_species_ui_garou(owner)
-	else if (isghoul(owner))
+	if (isghoul(owner))
 		species_block = get_species_ui_ghoul(owner)
-	else if (iscathayan(owner))
+	if (iscathayan(owner))
 		species_block = get_species_ui_cathayan(owner)
-	else
-		species_block = list("Human" = "No special species data.")
 	return list("general" = general, "species" = species_block)
 
 /// Kindred
@@ -61,7 +59,7 @@
 		species_block["clan_desc"] = clan.desc
 		species_block["clan_curse"] = clan.curse
 	species_block["generation"] = owner.generation || "Unknown"
-	species_block["masquerade"] = "[owner.masquerade]"
+	species_block["masquerade"] = "[owner.masquerade_score]"
 	species_block["morality_path"] = owner.morality_path?.name || ""
 	species_block["morality_score"] = owner.morality_path?.score || ""
 	species_block["disciplines"] = list()
@@ -77,10 +75,10 @@
 /datum/aboutme_record/proc/get_species_ui_garou(mob/living/carbon/human/owner)
 	var/list/species_block = list()
 	var/datum/auspice/a = owner.auspice
-	species_block["masquerade"] = "[owner.masquerade]"
+	species_block["masquerade"] = "[owner.masquerade_score]"
 	species_block["tribe"] = a?.tribe?.name || "Unknown"
 	species_block["auspice"] = a?.name || "Unknown"
-	species_block["base_breed"] = a?.base_breed || "Unknown"
+	//species_block["base_breed"] = a?.base_breed || "Unknown" //Genetic base form.
 	species_block["gnosis"] = a?.gnosis || a?.start_gnosis || 0
 	species_block["rage"] = a?.rage || a?.start_rage || 0
 	species_block["honor"] = owner.honor || 0
@@ -108,7 +106,7 @@
 	else
 		species_block["regnant"] = ""
 		species_block["regnant_clan"] = ""
-	species_block["masquerade"] = "[owner.masquerade]"
+	species_block["masquerade"] = "[owner.masquerade_score]"
 	species_block["generation"] = owner.generation || 13
 	species_block["disciplines"] = list()
 	if (GS && islist(GS.disciplines))
@@ -139,5 +137,5 @@
 	species_block["yang_chi"] = owner.yang_chi || 0
 	species_block["max_demon_chi"] = owner.max_demon_chi || 0
 	species_block["demon_chi"] = owner.demon_chi || 0
-	species_block["masquerade"] = "[owner.masquerade]"
+	species_block["masquerade"] = "[owner.masquerade_score]"
 	return species_block

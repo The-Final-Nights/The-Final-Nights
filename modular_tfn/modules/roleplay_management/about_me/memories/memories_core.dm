@@ -17,15 +17,16 @@
 	var/dirty = FALSE
 	var/autosave = TRUE
 
-/datum/memory/New(owner_key, load_mode = FALSE)
+/datum/memory/New(owner_key, load_mode = FALSE, memory_type)
 	..()
 	src.owner_key = "[owner_key]"
-
+	if(memory_type == null)
+		memory_type = "generic"
 	if (!date_occurred)
 		date_occurred = time2text(world.realtime, "MMM DD, YYYY")
 
 	if (!id)
-		var/pfx = owner_key ? "memory_[owner_key]" : "mem"
+		var/pfx = owner_key ? "memory_[memory_type]_[owner_key]" : "mem"
 		id = SSroleplay_management.about_me_new_id(pfx)
 
 	if (!created_at_ts)

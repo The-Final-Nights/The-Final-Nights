@@ -310,7 +310,7 @@
             return H
 
     var/datum/group/R = new C.type()
-    R.id            = SSroleplay_management.group_id_new(C.gtype)
+    R.id            = SSroleplay_management.group_id_new(C.gtype, C.name)
     R.gtype         = C.gtype
     R.name          = C.name
     R.desc          = C.desc

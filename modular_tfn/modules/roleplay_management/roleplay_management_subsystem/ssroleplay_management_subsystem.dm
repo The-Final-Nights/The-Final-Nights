@@ -22,10 +22,10 @@ var/list/runtime_by_canon = list()
 	if (!prefix) prefix = "BROKEN_ID"
 	return "[prefix]"
 
-/datum/controller/subsystem/roleplay_management/proc/group_id_new(gtype)
+/datum/controller/subsystem/roleplay_management/proc/group_id_new(gtype, gname)
 	if (!istext(gtype) || !length(gtype)) gtype = "unknown"
 	gtype = lowertext(gtype)
-	var/id = "group_[gtype]_[name]"
+	var/id = "group_[gtype]_[gname]"
 	return id
 
 /datum/controller/subsystem/roleplay_management/proc/is_valid_id(key)
