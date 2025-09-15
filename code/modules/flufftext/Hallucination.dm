@@ -315,6 +315,16 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	image_icon = 'code/modules/wod13/32x48.dmi'
 	image_state = "baali"
 
+/obj/effect/hallucination/simple/spectre
+	name = "Specter"
+	image_icon = 'icons/mob/mob.dmi'
+	image_state = "shade"
+
+/obj/effect/hallucination/simple/fera
+	name = "Wyrmic Avatar"
+	image_icon = 'code/modules/wod13/48x64.dmi'
+	image_state = "bigskeleton"
+
 /datum/hallucination/oh_yeah
 	var/obj/effect/hallucination/simple/bubblegum/bubblegum
 	var/image/fakebroken
@@ -390,11 +400,12 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 
 /datum/hallucination/baali
 	var/obj/effect/hallucination/simple/demon/demon
+	var/demontype
 	var/turf/landing
 	var/charged
 	COOLDOWN_DECLARE(next_cooldown)
 
-/datum/hallucination/baali/New(mob/living/carbon/C, forced = TRUE)
+/datum/hallucination/baali/New(mob/living/carbon/C, forced = TRUE, new_demontype)
 	set waitfor = FALSE
 	. = ..()
 	var/turf/closed/wall/wall
@@ -406,6 +417,21 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	feedback_details += "Source: [wall.x],[wall.y],[wall.z]"
 	target.playsound_local(wall,'sound/effects/meteorimpact.ogg', 150, 1)
 	demon = new(wall, target)
+	demontype = new_demontype
+	if (isnull(new_demontype))
+		demontype = pick("demon", "spectre", "wyrm")
+	switch(demontype)
+		if("demon")
+			demon.image_icon = 'code/modules/wod13/32x48.dmi'
+			demon.image_state = "baali"
+		if("spectre")
+			demon.name = "Specter"
+			demon.image_icon = 'icons/mob/mob.dmi'
+			demon.image_state = "shade"
+		if("wyrm")
+			demon.name = "Wyrmic Avatar"
+			demon.image_icon = 'code/modules/wod13/48x64.dmi'
+			demon.image_state = "bigskeleton"
 	addtimer(CALLBACK(src, PROC_REF(start_processing)), 10)
 
 
@@ -426,10 +452,20 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		QDEL_IN(src, 4 SECONDS)
 		if(demon.Adjacent(target) && !charged)
 			charged = TRUE
-			target.Paralyze(1 SECONDS)
-			target.adjustStaminaLoss(200)
+			switch(demontype)
+				if("demon")
+					target.Paralyze(1 SECONDS)
+					target.adjustStaminaLoss(200)
+					target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
+				if("spectre")
+					target.Paralyze(1 SECONDS)
+					target.adjustStaminaLoss(200)
+					target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
+				if("wyrm")
+					target.Paralyze(1 SECONDS)
+					target.adjustStaminaLoss(200)
+					target.visible_message(span_warning("[target] growls in animalistic fury"), span_cultlarge("The [demon] defiles me"),)
 			step_away(target, demon)
-			target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
 			STOP_PROCESSING(SSfastprocess, src)
 			qdel(src)
 		COOLDOWN_START(src, next_cooldown, 2 SECONDS)
@@ -707,6 +743,9 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			if("repent")
 				A = image('code/modules/wod13/64x64.dmi',H,"cross")
 				A.name = "Our Sins"
+			if("dancer")
+				A = image('code/modules/wod13/werewolf.dmi',H,"spiralblack")
+				A.name = "Wyrmfoe"
 			if("kitty")
 				A = image('code/modules/wod13/mobs.dmi',H,"cattzi")
 				A.name = "A Pretty Kitty"

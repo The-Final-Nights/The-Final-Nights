@@ -104,6 +104,12 @@
 			if(CLAN_SALUBRI)
 				to_chat(owner, span_notice("[target] is ruled by consent."))
 				return
+			if(CLAN_SALUBRI_WARRIOR)
+				to_chat(owner, span_notice("[target] pursues an endless revenge."))
+				return
+			if(CLAN_NAGARAJA)
+				to_chat(owner, span_notice("[target] hungers for flesh"))
+				return
 			if(CLAN_GIOVANNI)
 				to_chat(owner, span_notice("[target] never considers any action too great for their family."))
 				return
@@ -251,13 +257,90 @@
 
 /datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
-	if(SSroll.storyteller_roll(owner.get_total_mentality(), 6, mobs_to_show_output = owner) == ROLL_SUCCESS)
-		to_chat(target, span_boldwarning("You hear an infernal laugh!"))
-		new /datum/hallucination/baali(target, TRUE)
+
+	if(isgarou(target))
+		switch(target.auspice.tribe.name)
+			if ("Black Spiral Dancers")
+				to_chat(owner, span_notice("[target] is obsessive to a fault."))
+				return
+			else
+				new /datum/hallucination/delusion(target,TRUE,"wyrmfoe",200,0)
+				return
+	if(iskindred(target))
+		var/mob/living/carbon/human/vampire = target
+		switch(vampire.clan?.name)
+			if(CLAN_TOREADOR)
+				to_chat(target, span_cultlarge("FLAMES ENGULF MY BEAUTY"))
+				target.Paralyze(12 SECONDS)
+				new /datum/hallucination/fire(target, TRUE)
+				return
+			if(CLAN_LASOMBRA)
+				to_chat(owner, span_notice("[target] fears change itself evermore."))
+				return
+			if(CLAN_TZIMISCE)
+				to_chat(owner, span_notice("[target] is consumed by a singular desire."))
+				return
+			if(CLAN_MALKAVIAN)
+				to_chat(owner, span_notice("[target] frightens people near them."))
+				return
+			if(CLAN_TREMERE)
+				to_chat(owner, span_notice("[target] has a sense of perfectionism by their own actions."))
+				return
+			if(CLAN_BAALI)
+				to_chat(owner, span_notice("[target] is scared of the lord's presence."))
+				return
+			if(CLAN_BANU_HAQIM)
+				to_chat(owner, span_notice("[target] sees themselves as absolute judgement."))
+				return
+			if(CLAN_SALUBRI)
+				to_chat(owner, span_notice("[target] is ruled by consent."))
+				return
+			if(CLAN_SALUBRI_WARRIOR)
+				to_chat(owner, span_notice("[target] is ruled by consent."))
+				return
+			if(CLAN_GIOVANNI)
+				to_chat(owner, span_notice("[target] never considers any action too great for their family."))
+				return
+			if(CLAN_CAPPADOCIAN)
+				to_chat(owner, span_notice("[target] will never escape the appearance of a corpse."))
+				return
+			if(CLAN_KIASYD)
+				to_chat(owner, span_notice("[target] is afraid of cold iron."))
+				return
+			if(CLAN_SETITES)
+				to_chat(owner, span_notice("[target] believes every stain of sin is a virtue."))
+				return
+			else
+				to_chat(owner, span_notice("[target] has been abandoned by the cold ocean of the night with nobody to keep them afloat."))
+				return
+	if(isghoul(target))
+		var/mob/living/carbon/human/ghoul = target
+		if(ghoul.mind.enslaved_to)
+			to_chat(owner, span_notice("Victim is addicted to vampiric vitae and its true master is [ghoul.mind.enslaved_to]"))
+		else
+			to_chat(owner, span_notice("Victim is addicted to vampiric vitae, but is independent and free."))
+	if(iscathayan(target))
+		if(target.mind.dharma?.Po == "Legalist")
+			to_chat(owner, span_notice("[target] hates to be controlled!"))
+		if(target.mind.dharma?.Po == "Rebel")
+			to_chat(owner, span_notice("[target] doesn't like to be touched."))
+		if(target.mind.dharma?.Po == "Monkey")
+			to_chat(owner, span_notice("[target] is too focused on money, toys and other sources of easy pleasure."))
+		if(target.mind.dharma?.Po == "Demon")
+			to_chat(owner, span_notice("[target] is addicted to pain, as well as to inflicting it to others."))
+		if(target.mind.dharma?.Po == "Fool")
+			to_chat(owner, span_notice("[target] doesn't like to be pointed at!"))
+	if(!iskindred(target) && !isghoul(target) && !isgarou(target) && !iscathayan(target))
+		to_chat(owner, span_notice("[target] is a feeble worm with no strengths or visible weaknesses, a mere human."))
+
+//	if(SSroll.storyteller_roll(owner.get_total_mentality(), 6, mobs_to_show_output = owner) == ROLL_SUCCESS)
+//		to_chat(target, span_boldwarning("You hear an infernal laugh!"))
+//	//	new /datum/hallucination/baali(target, TRUE)
 		return TRUE
 
-	to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
-	return FALSE
+	//to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
+	//return FALSE
+
 
 //CONDEMNATION
 /datum/discipline_power/daimonion/condemnation
