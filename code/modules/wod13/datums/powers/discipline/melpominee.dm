@@ -11,6 +11,8 @@
 
 	activate_sound = 'code/modules/wod13/sounds/melpominee.ogg'
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //THE MISSING VOICE
 /datum/discipline_power/melpominee/the_missing_voice
 	name = "The Missing Voice"
@@ -18,22 +20,23 @@
 
 	level = 1
 	vitae_cost = 0
-	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_SPEAK
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_SPEAK | DISC_CHECK_DIRECT_SEE
 	target_type = TARGET_OBJ | TARGET_LIVING
 	range = 7
+	custom_logging = TRUE
 
 	cooldown_length = 5 SECONDS
 
 /datum/discipline_power/melpominee/the_missing_voice/activate(atom/movable/target)
 	. = ..()
-	var/new_say = input(owner, "What will [target] say?") as null|text
+	var/new_say = tgui_input_text(owner, "What will [target] say?")
 	if(!new_say)
 		return
 
 	//prevent forceful emoting and whatnot
 	new_say = trim(copytext_char(sanitize(new_say), 1, MAX_MESSAGE_LEN))
 	if (findtext(new_say, "*"))
-		to_chat(owner, span_danger("You can't force others to perform emotes!"))
+		to_chat(owner, span_danger("You can't perform emotes remotely!"))
 		return
 
 	if (CHAT_FILTER_CHECK(new_say))
@@ -41,11 +44,36 @@
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
 
-	target.say(message = new_say, forced = "melpominee 1")
+	target.melpominee_say(owner, message = new_say)
+	do_logging(target, new_say)
 
 	if (!isliving(target))
 		return
 
+	speaker_mouth_check(target)
+
+/atom/movable/proc/melpominee_say(speaker, message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = TRUE)
+	if(!can_speak())
+		return
+	if(message == "" || !message)
+		return
+	spans |= speech_span
+	if(!language)
+		language = get_selected_language()
+
+	var/range = 7
+	var/list/message_mods = list()
+	var/ending = copytext_char(message, -1)	//Better not to do like that..
+	var/rendered = compose_message(speaker, language, message, , spans, message_mods)
+	if(ending == "!")
+		range = 15
+	for(var/_AM in get_hearers_in_view(range, src))
+		var/atom/movable/AM = _AM
+		if(get_dist(AM, src) > 7)
+			rendered = "<span class='scream_away'>[rendered]</span>" //! Take an attention, this will NOT overlap client font-size, fix it if you can
+		AM.Hear(rendered, src, language, message, , spans, message_mods)
+
+/datum/discipline_power/melpominee/proc/speaker_mouth_check(mob/living/target)
 	//viewers are able to detect if a person's words aren't their own
 	var/base_difficulty = 5
 	var/difficulty_malus = 0
@@ -69,6 +97,12 @@
 				to_chat(hearer, span_warning("[target]'s jaw isn't moving to match [target.p_their()] words."))
 			else
 				to_chat(hearer, span_warning("[target]'s lips aren't moving to match [target.p_their()] words."))
+
+/datum/discipline_power/melpominee/the_missing_voice/do_logging(target, message)
+	. = ..()
+	log_combat(owner, target, "Forced [target] to say [message]")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //PHANTOM SPEAKER
 /datum/discipline_power/melpominee/phantom_speaker
@@ -104,6 +138,8 @@
 	target.Hear(message, target, language, input_message, , , )
 	to_chat(owner, span_notice("You project your voice to [target]'s ears."))
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //MADRIGAL
 /datum/discipline_power/melpominee/madrigal
 	name = "Madrigal"
@@ -137,6 +173,9 @@
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //SIREN'S BECKONING
 /datum/discipline_power/melpominee/sirens_beckoning
 	name = "Siren's Beckoning"
@@ -166,6 +205,9 @@
 /datum/discipline_power/melpominee/sirens_beckoning/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //SHATTERING CRESCENDO
 /datum/discipline_power/melpominee/shattering_crescendo
@@ -197,3 +239,6 @@
 /datum/discipline_power/melpominee/shattering_crescendo/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
