@@ -10,6 +10,7 @@
 				/datum/surgery_step/close)
 	possible_locs = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_R_LEG,BODY_ZONE_L_LEG,BODY_ZONE_CHEST,BODY_ZONE_HEAD)
 	level_req = 4
+	replaced_by = null
 
 /datum/surgery_step/reinforce_limb
 	name = "reinforce_limb"
