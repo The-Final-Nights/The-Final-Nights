@@ -10,6 +10,7 @@
 	name = "Reshape Face"
 	implements = list(TOOL_SCALPEL = 100, /obj/item/kitchen/knife = 50, TOOL_WIRECUTTER = 35)
 	time = 64
+	repeatable = TRUE
 
 /datum/surgery_step/reshape_appearance/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, span_notice("You begin to alter [target]'s appearance..."),
