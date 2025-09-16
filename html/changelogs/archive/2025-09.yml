@@ -158,3 +158,12 @@
   - balance: The Sabbat Shovel no longer causes the emote "collapse" which extended
       the stun from 3 seconds to about 8 seconds, an unintended effect.
   - bugfix: Simplemob transformations no longer delete your character's languages
+2025-09-15:
+  SoreYew:
+  - map: Adds one ladder to the Malk haven
+  XeonMations:
+  - bugfix: Fixed Daughters of Cacophany being able to force people to say things.
+  dwinters99 & Major00 (Paynt):
+  - rscadd: Eat Food merit
+  - balance: Vampires must now vomit to expel excess reagents if they do not have
+      the Eat Food merit.
