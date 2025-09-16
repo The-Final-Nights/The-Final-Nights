@@ -103,7 +103,7 @@
 		new /datum/data/mining_equipment("fishing rod",		/obj/item/fishing_rod,	200),
 		new /datum/data/mining_equipment("hunting rifle magazine, 5.56",/obj/item/ammo_box/magazine/vamp556/hunt,	200),
 		new /datum/data/mining_equipment("pepperspray", /obj/item/reagent_containers/spray/pepper, 200),
-		new /datum/data/mining_equipment("v26 taser", /obj/item/gun/energy/taser/twoshot, 200),
+		new /datum/data/mining_equipment("SNEKTEK Handheld Taser", /obj/item/melee/baton/handtaser, 200),
 		new /datum/data/mining_equipment("binoculars", /obj/item/binoculars, 300),
 		new /datum/data/mining_equipment("camera", /obj/item/camera, 300),
 		new /datum/data/mining_equipment("9mm ammo box", /obj/item/ammo_box/vampire/c9mm, 300),
