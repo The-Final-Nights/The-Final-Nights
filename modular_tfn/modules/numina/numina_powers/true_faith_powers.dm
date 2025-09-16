@@ -180,6 +180,7 @@
 			target.set_confusion(20 SECONDS)
 			target.do_jitter_animation(60 SECONDS)
 			target.adjust_blurriness(60 SECONDS)
+			target.take_overall_damage(burn = 30)
 		else
 			target.emote("scream")
 			target.do_jitter_animation(10 SECONDS)
@@ -419,7 +420,7 @@
 	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK
 
 	multi_activate = TRUE
-	cooldown_length = 4 SECONDS
+	cooldown_length = 4 MINUTES
 	duration_length = 30 SECONDS
 
 	range = 12
@@ -454,14 +455,8 @@
 	if(ishuman(sinner))
 		if(sinner.clan?.name == CLAN_GARGOYLE)
 			theirpower -= 2
-		if(sinner.clan?.name == CLAN_BAALI)
-			sinner.emote("scream")
-			sinner.flash_act()
-			playsound(sinner, 'sound/magic/demon_dies.ogg', 50)
-			sinner.dust()
-			return
 
-	if(mypower <= theirpower)
+	if((mypower <= theirpower) && (sinner.clan?.name != CLAN_BAALI))
 		to_chat(owner, span_warning("[sinner] resists your influence!"))
 		return
 
@@ -478,12 +473,24 @@
 	var/datum/cb = CALLBACK(sinner, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
 	for(var/i in 1 to 30)
 		addtimer(cb, (i - 1) * sinner.total_multiplicative_slowdown())
-	sinner.emote("scream")
-	sinner.set_confusion(30 SECONDS)
-	sinner.do_jitter_animation(60 SECONDS)
-	sinner.adjust_blurriness(30 SECONDS)
-	sinner.adjustFireLoss(70)
-	sinner.flash_act()
+	if(ishuman(sinner))
+		if(sinner.clan?.name == CLAN_BAALI)
+			sinner.emote("scream")
+			sinner.flash_act()
+			sinner.set_confusion(60 SECONDS)
+			sinner.do_jitter_animation(120 SECONDS)
+			sinner.adjust_blurriness(120 SECONDS)
+			sinner.take_overall_damage(burn = 85)
+			sinner.adjust_fire_stacks(10)
+			sinner.IgniteMob()
+			playsound(sinner, 'sound/magic/demon_dies.ogg', 50, TRUE, 5)
+		else
+			sinner.emote("scream")
+			sinner.set_confusion(30 SECONDS)
+			sinner.do_jitter_animation(60 SECONDS)
+			sinner.adjust_blurriness(30 SECONDS)
+			sinner.take_overall_damage(burn = 60)
+			sinner.flash_act()
 	SEND_SOUND(sinner, sound('modular_tfn/modules/numina/sound/perdition_effect.ogg'))
 
 	addtimer(CALLBACK(src, PROC_REF(deactivate), sinner), 30 SECONDS)
