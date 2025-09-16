@@ -267,14 +267,15 @@
 	if(isgarou(target))
 		switch(target.auspice.tribe.name)
 			if ("Black Spiral Dancers")
-				to_chat(target, span_cultlarge("VISIONS OF BRIMSTONE AND FLAME FLASH BEFORE MY EYES"))
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh3.ogg", 50, FALSE)
+				target.visible_message(span_warning("[target] whines in animalistic fear"), span_cultlarge("VISIONS OF BRIMSTONE AND FLAME FLASH BEFORE MY EYES"),)
+				target.Paralyze(5 SECONDS)
 			else
 				if (target.auspice.rage > 4)
 					target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh1.ogg", 50, FALSE)
 					to_chat(target, span_cultlarge("THE WYRMFOE IS ALL AROUND ME"))
 					new /datum/hallucination/delusion(target,TRUE,"wyrmfoe",200,0)
-					target.enter_frenzymod()
+					target.rollfrenzy()
 				else
 					to_chat(target, span_cultitalic("I can feel a overwhelming presence.. I NEED TO RUN!!"))
 					new /datum/hallucination/baali(target,TRUE,"wyrm")
@@ -298,7 +299,7 @@
 				to_chat(target, span_cultitalic("You see visions of an underground stone monument weeping blood."))
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh3.ogg", 50, FALSE)
 				to_chat(target, span_cultlarge("THE BEAST RAGES AGAINST THIS VISION!!"))
-				target.enter_frenzymod()
+				target.rollfrenzy()
 			if(CLAN_TZIMISCE)
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh3.ogg", 50, FALSE)
 				to_chat(target, span_cultlarge("I SEE VISIONS OF FLAME ENGULFING MY DOMAIN"))
@@ -334,7 +335,7 @@
 			if(CLAN_SALUBRI_WARRIOR)
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh2.ogg", 50, FALSE)
 				to_chat(target, span_cultlarge("BRIMSTONE AND FLAME AWAIT ME BEFORE MY REVENGE'S END"))
-				target.enter_frenzymod()
+				target.rollfrenzy()
 				return
 			if(CLAN_GIOVANNI)
 				to_chat(target, span_cultitalic("A sense of profound dread enters you as soundless words enter your mind"))
@@ -356,15 +357,6 @@
 	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
 		to_chat(target, span_cultlarge("MY WORST NIGHTMARES FLASH BEFORE MY EYES"))
 		target.Paralyze(30 SECONDS)
-
-//	if(SSroll.storyteller_roll(owner.get_total_mentality(), 6, mobs_to_show_output = owner) == ROLL_SUCCESS)
-//		to_chat(target, span_boldwarning("You hear an infernal laugh!"))
-//	//	new /datum/hallucination/baali(target, TRUE)
-		return TRUE
-
-	//to_chat(owner, "<span class='warning'>[target] has too much willpower to induce fear into them!</span>")
-	//return FALSE
-
 
 //CONDEMNATION
 /datum/discipline_power/daimonion/condemnation
