@@ -231,7 +231,11 @@
 		else
 			assignment = "Unassigned"
 
-		// TFN EDIT START: alt job titles
+		// TFN EDIT START: alt job titles AND FOR SABBAT TO NOT BE SEEN!!!
+		var/list/sabbat_jobs = GLOB.sabbat_positions
+		if(H.mind.assigned_role in sabbat_jobs)
+			trueassignment = assignment
+			assignment = "Citizen"
 		if(C?.prefs?.alt_titles_preferences[assignment])
 			trueassignment = assignment
 			assignment = C.prefs.alt_titles_preferences[assignment]

@@ -36,6 +36,9 @@
 	)
 
 /datum/discipline_power/bloodheal/activate()
+	if HAS_TRAIT(owner, TRAIT_QUIETUS_CURSED)
+		to_chat(owner, span_warning("You feel your thinned blood rush for a moment, then die down!"))
+		return
 	adjust_vitae_cost()
 
 	. = ..()
@@ -55,6 +58,11 @@
 	if (brain)
 		brain.applyOrganDamage(-HEAL_BASHING_LETHAL * (vitae_cost*5))
 		brain.cure_all_traumas(TRAUMA_RESILIENCE_WOUND)
+
+	//clear confusion and dizziness from head trauma
+	owner.set_confusion(0)
+	owner.dizziness = 0
+	owner.update_eye_blur()
 
 	//miscellaneous organ damage healing
 	var/obj/item/organ/eyes/eyes = owner.getorganslot(ORGAN_SLOT_EYES)

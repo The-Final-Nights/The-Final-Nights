@@ -195,3 +195,31 @@
 		playsound(target.loc, I.hitsound, 100, FALSE)
 		target.attacked_by(I, owner)
 		owner.dna.species.meleemod -= 3
+
+//BLISSFUL AGONY
+/datum/discipline_power/valeren_warrior/blissful_agony
+	name = "Blissful Agony"
+	desc = "Cause a victim to feel continuous pain that can cause damage or drive them to frenzy."
+	level = 6
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
+	vitae_cost = 3
+	target_type = TARGET_LIVING
+	range = 3
+
+	aggravating = TRUE
+	hostile = TRUE
+
+	cooldown_length = 1 MINUTES
+
+/datum/discipline_power/valeren_warrior/blissful_agony/activate(mob/living/target)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act), target), 0)
+	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act), target), 2.5 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(blissful_agony_act), target), 5 SECONDS)
+
+/datum/discipline_power/valeren_warrior/blissful_agony/proc/blissful_agony_act(mob/living/target)
+	target.emote("scream")
+	target.rollfrenzy()
+	target.do_jitter_animation(20)
+	target.Stun(10)
+

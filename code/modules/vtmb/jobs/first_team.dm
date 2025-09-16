@@ -4,13 +4,15 @@
 	uniform = /obj/item/clothing/under/response/firstteam_uniform
 	gloves = /obj/item/clothing/gloves/response/firstteam
 	mask = /obj/item/clothing/mask/vampire/balaclava
-	glasses = /obj/item/clothing/glasses/night
+	glasses = /obj/item/clothing/glasses/night/vamp/thermal
 	r_pocket = /obj/item/flashlight
 	l_pocket = /obj/item/ammo_box/magazine/px66f
 	shoes = /obj/item/clothing/shoes/response/firstteam
 	belt = /obj/item/gun/ballistic/automatic/response/px66f
 	suit = /obj/item/clothing/suit/response/firstteam_armor
 	head = /obj/item/clothing/head/response/firstteam_helmet
+	back = /obj/item/storage/backpack/satchel
+	implants = list(/obj/item/implant/explosive)
 	backpack_contents = list(
 		/obj/item/ammo_box/magazine/px66f = 3,
 		/obj/item/gun/ballistic/automatic/vampire/beretta=1,
@@ -18,7 +20,9 @@
 		/obj/item/vamp/keys/pentex = 1,
 		/obj/item/veil_contract = 1,
 		/obj/item/grenade/frag = 3,
-		/obj/item/storage/firstaid/ifak = 2
+		/obj/item/storage/firstaid/ifak = 1,
+		/obj/item/reagent_containers/hypospray/medipen/first = 1
+
 		)
 
 /datum/antagonist/first_team/proc/equip_first_team()
@@ -29,6 +33,12 @@
 	H.set_species(/datum/species/human)
 	H.set_clan(null)
 	H.generation = 13
+	H.physique = 5 //I want to beat this codebase on the head with a rusty pipe.. apparently ERT's inheret stats from the host's character, necessitating them being manually set.
+	H.dexterity = 5
+	H.blood = 6
+	H.mentality = 7
+	H.lockpicking = 6
+	H.athletics = 5
 	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.physique+13-H.generation))
 	H.health = round((initial(H.health)-initial(H.health)/4)+(initial(H.health)/4)*(H.physique+13-H.generation))
 	for(var/datum/action/A in H.actions)
@@ -54,8 +64,7 @@
 	var/loadout_type = input(owner.current, "Choose your loadout:", "Loadout Selection") in loadouts
 	switch(loadout_type)
 		if("Exterminator")
-			owner.current.put_in_r_hand(new /obj/item/vampire_flamethrower(owner.current))
-			owner.current.put_in_l_hand(new /obj/item/gas_can/full(owner.current))
+			owner.current.put_in_r_hand(new /obj/item/gun/ballistic/automatic/l6_saw/vamp(owner.current))
 		if("Field Medic")
 			owner.current.put_in_r_hand(new /obj/item/storage/firstaid/tactical(owner.current))
 		if("Specialist")
@@ -503,6 +512,13 @@
 	desc = "A completely blacked out uniform with a large '1' symbol sewn onto the shoulder-pad."
 	icon_state = "ftuni"
 
+//------------Glasses------------
+
+/obj/item/clothing/glasses/night/vamp/thermal
+	vision_flags = SEE_MOBS
+
+//------------Weapons------------
+
 /obj/item/gun/ballistic/automatic/response
 	icon = 'code/modules/wod13/weapons.dmi'
 	lefthand_file = 'modular_tfn/modules/first_team/icons/righthand.dmi'
@@ -596,6 +612,19 @@
 	max_ammo = 30
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 
+/obj/item/ammo_box/magazine/px249f
+	name = "PX249F box magazine (5.56mm)"
+	icon = 'modular_tfn/modules/first_team/icons/ammo.dmi'
+	lefthand_file = 'modular_tfn/modules/first_team/icons/righthand.dmi'
+	righthand_file = 'modular_tfn/modules/first_team/icons/lefthand.dmi'
+	worn_icon = 'modular_tfn/modules/first_team/icons/worn.dmi'
+	onflooricon = 'modular_tfn/modules/first_team/icons/onfloor.dmi'
+	icon_state = "px249f"
+	ammo_type = /obj/item/ammo_casing/vampire/c556mm/bale
+	caliber = CALIBER_556
+	max_ammo = 200
+	multiple_sprites = AMMO_BOX_FULL_EMPTY
+
 /obj/item/ammo_box/magazine/internal/px12r
 	name = "shotgun internal magazine"
 	ammo_type = /obj/item/ammo_casing/vampire/c12g
@@ -655,4 +684,92 @@
 	recoil = 4
 	inhand_x_dimension = 32
 	inhand_y_dimension = 32
+
+
+/obj/item/gun/ballistic/automatic/l6_saw/vamp
+	name = "\improper PX249F Light Machine Gun"
+	desc = "A modified M249 Machine Gun with an engraving of a Hydra on the grip"
+	icon = 'modular_tfn/modules/first_team/icons/48x32weapons.dmi'
+	lefthand_file = 'modular_tfn/modules/first_team/icons/righthand.dmi'
+	righthand_file = 'modular_tfn/modules/first_team/icons/lefthand.dmi'
+	onflooricon = 'modular_tfn/modules/first_team/icons/onfloor.dmi'
+	icon_state = "px249f"
+	inhand_icon_state = "px249f"
+	base_icon_state = "px249f"
+	w_class = WEIGHT_CLASS_HUGE
+	bolt_type = BOLT_TYPE_LOCKING
+	show_bolt_icon = FALSE
+	slot_flags = 0
+	mag_type = /obj/item/ammo_box/magazine/px249f
+	weapon_weight = WEAPON_HEAVY
+	burst_size = 5
+	fire_delay = 2
+	spread = 6
+	fire_sound = 'modular_tfn/modules/first_team/audio/m249fire.ogg'
+	rack_sound = 'modular_tfn/modules/first_team/audio/m249rack.ogg'
+	suppressed_sound = 'sound/weapons/gun/general/heavy_shot_suppressed.ogg'
+
+/obj/item/gun/ballistic/automatic/l6_saw/vamp/update_icon_state()
+	. = ..()
+	inhand_icon_state = "[base_icon_state][magazine ? "mag":"nomag"]"
+
+/obj/item/gun/ballistic/automatic/l6_saw/vamp/update_overlays()
+	. = ..()
+	. += "px249f_door_[cover_open ? "open" : "closed"]"
+
+//------------Medical------------
+
+
+/obj/item/reagent_containers/hypospray/medipen/first
+	name = "Stimulant autoinjector"
+	desc = "Contains experimental combat drugs, vastly increasing your movement speed, reducing stuns, and disabling traumatic feedback for around five minutes. DO NOT USE TWICE IN A ROW"
+	icon = 'modular_tfn/modules/first_team/icons/medical.dmi'
+	onflooricon = 'modular_tfn/modules/first_team/icons/onfloor.dmi'
+	icon_state = "fpen"
+	inhand_icon_state = "tbpen"
+	base_icon_state = "fpen"
+	volume = 100
+	amount_per_transfer_from_this = 50
+	list_reagents = list(/datum/reagent/medicine/vamp/ert = 100)
+
+/obj/item/reagent_containers/hypospray/medipen/first/update_icon_state()
+	. = ..()
+	if(reagents.total_volume >= volume)
+		icon_state = base_icon_state
+		return
+	icon_state = "[base_icon_state][(reagents.total_volume > 0) ? 1 : 0]"
+
+/datum/reagent/medicine/vamp/ert
+	name = "Experimental Drugs"
+	description = "Increases stun resistance and movement speed in addition to restoring minor damage and weakness. Overdose causes weakness and toxin damage."
+	color = "#13c563"
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+	overdose_threshold = 75
+
+/datum/reagent/medicine/vamp/ert/on_mob_metabolize(mob/living/L)
+	..()
+	L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulants)
+	ADD_TRAIT(L, TRAIT_STUNRESISTANCE, type)
+	ADD_TRAIT(L, TRAIT_NOHARDCRIT, type)
+	ADD_TRAIT(L, TRAIT_NOSOFTCRIT, type)
+	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
+	ADD_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+
+/datum/reagent/medicine/vamp/ert/on_mob_end_metabolize(mob/living/L)
+	L.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulants)
+	REMOVE_TRAIT(L, TRAIT_STUNRESISTANCE, type)
+	REMOVE_TRAIT(L, TRAIT_NOHARDCRIT, type)
+	REMOVE_TRAIT(L, TRAIT_NOSOFTCRIT, type)
+	REMOVE_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
+	REMOVE_TRAIT(L, TRAIT_IGNOREDAMAGESLOWDOWN, type)
+	..()
+
+/datum/reagent/medicine/vamp/ert/on_mob_life(mob/living/carbon/M)
+	if(M.health < 50 && M.health > 0)
+		M.adjustBruteLoss(-0.5*REM, 0)
+		M.adjustFireLoss(-0.5*REM, 0)
+	M.AdjustAllImmobility(-60)
+	M.adjustStaminaLoss(-5*REM, 0)
+	..()
+	. = 1
 
