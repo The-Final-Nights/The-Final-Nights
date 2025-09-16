@@ -21,6 +21,7 @@
 		new /datum/data/mining_equipment("morphine syringe",	/obj/item/reagent_containers/syringe/contraband/morphine,	800),
 		new	/datum/data/mining_equipment("meth package",	/obj/item/reagent_containers/food/drinks/meth,	800),
 		new	/datum/data/mining_equipment("cocaine package",	/obj/item/reagent_containers/food/drinks/meth/cocaine,	800),
+		new	/datum/data/mining_equipment("beretta handgun", /obj/item/gun/ballistic/automatic/vampire/beretta, 1200),
 		new	/datum/data/mining_equipment("box of 9mm Silver ammo", /obj/item/ammo_box/vampire/c9mm/silver, 10000)
 	)
 
@@ -72,6 +73,11 @@
 		new /datum/data/mining_equipment("box of crayons", /obj/item/storage/crayons, 10),
 		new /datum/data/mining_equipment("fountain pen",	/obj/item/pen/fountain,  15),
 		new /datum/data/mining_equipment("canvas (19x19)", /obj/item/canvas/nineteen_nineteen, 19),
+		new /datum/data/mining_equipment("canvas (23x19)", /obj/item/canvas/twentythree_nineteen, 23),
+		new /datum/data/mining_equipment("canvas (23x23)", /obj/item/canvas/twentythree_twentythree, 23),
+		new /datum/data/mining_equipment("canvas (24x24)", /obj/item/canvas/twentyfour_twentyfour, 24),
+		new /datum/data/mining_equipment("canvas (36x24)", /obj/item/canvas/thirtysix_twentyfour, 36),
+		new /datum/data/mining_equipment("canvas (45x27)", /obj/item/canvas/fortyfive_twentyseven, 45),
 		new /datum/data/mining_equipment("paper bin", /obj/item/paper_bin, 20),
 		new /datum/data/mining_equipment("paint palette", /obj/item/paint_palette, 20),
 		new /datum/data/mining_equipment("Bible",	/obj/item/storage/book/bible,  20),
@@ -101,26 +107,25 @@
 		new /datum/data/mining_equipment("12ga shotgun shells, buckshot",/obj/item/ammo_box/vampire/c12g/buck,	400),
 		new /datum/data/mining_equipment("machete", /obj/item/melee/vampirearms/machete, 500),
 		new /datum/data/mining_equipment("hunting shotgun", /obj/item/gun/ballistic/shotgun/vampire, 1000),
+		new /datum/data/mining_equipment("rescue fireaxe", /obj/item/melee/vampirearms/fireaxe, 1800),
 		new /datum/data/mining_equipment("chainsaw", /obj/item/melee/vampirearms/chainsaw, 2000),
 		new /datum/data/mining_equipment("hunting rifle", /obj/item/gun/ballistic/automatic/vampire/huntrifle, 2000),
 		new /datum/data/mining_equipment("5.56 ammo",	/obj/item/ammo_box/vampire/c556,	2000),
-		new /datum/data/mining_equipment("rescue fireaxe", /obj/item/melee/vampirearms/fireaxe, 3000),
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/music
 	prize_list = list(
-		new /datum/data/mining_equipment("accordian", /datum/instrument/hardcoded/accordion, 200),
-		new /datum/data/mining_equipment("electric guitar", /datum/instrument/hardcoded/eguitar, 200),
-		new /datum/data/mining_equipment("accoustic guitar", /datum/instrument/hardcoded/guitar, 200),
-		new /datum/data/mining_equipment("hands free harmonica", /datum/instrument/hardcoded/harmonica, 200),
-		new /datum/data/mining_equipment("saxophone", /datum/instrument/hardcoded/saxophone, 200),
-		new /datum/data/mining_equipment("trombone", /datum/instrument/hardcoded/trombone, 200),
-		new /datum/data/mining_equipment("violin", /datum/instrument/hardcoded/violin, 200),
-		new /datum/data/mining_equipment("banjo", /datum/instrument/hardcoded/banjo, 200),
-		new /datum/data/mining_equipment("electronic synth", /datum/instrument/hardcoded/piano, 200),
-		new /datum/data/mining_equipment("xylophone", /datum/instrument/hardcoded/xylophone, 200),
-		new /datum/data/mining_equipment("recorder", /datum/instrument/hardcoded/recorder, 200),
-		new /datum/data/mining_equipment("glockeenspiel", /datum/instrument/hardcoded/glockenspiel, 200)
+		new /datum/data/mining_equipment("accordian", /obj/item/instrument/accordion, 200),
+		new /datum/data/mining_equipment("electric guitar", /obj/item/instrument/eguitar, 200),
+		new /datum/data/mining_equipment("accoustic guitar", /obj/item/instrument/guitar, 200),
+		new /datum/data/mining_equipment("hands free harmonica", /obj/item/instrument/harmonica, 200),
+		new /datum/data/mining_equipment("saxophone", /obj/item/instrument/saxophone, 200),
+		new /datum/data/mining_equipment("trombone", /obj/item/instrument/trombone, 200),
+		new /datum/data/mining_equipment("violin", /obj/item/instrument/violin, 200),
+		new /datum/data/mining_equipment("banjo", /obj/item/instrument/banjo, 200),
+		new /datum/data/mining_equipment("electronic synth", /obj/item/instrument/piano_synth, 200),
+		new /datum/data/mining_equipment("recorder", /obj/item/instrument/recorder, 200),
+		new /datum/data/mining_equipment("glockeenspiel", /obj/item/instrument/glockenspiel, 200)
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/general
