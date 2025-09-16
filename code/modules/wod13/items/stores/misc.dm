@@ -82,6 +82,7 @@
 		new /datum/data/mining_equipment("paint palette", /obj/item/paint_palette, 20),
 		new /datum/data/mining_equipment("Bible",	/obj/item/storage/book/bible,  20),
 		new /datum/data/mining_equipment("Quran",	/obj/item/vampirebook/quran,  20),
+		new /datum/data/mining_equipment("Torah", /obj/item/vampirebook/torah, 20),
 		new /datum/data/mining_equipment("spray paint", /obj/item/toy/crayon/spraycan, 25)
 	)
 
@@ -102,6 +103,7 @@
 		new /datum/data/mining_equipment("fishing rod",		/obj/item/fishing_rod,	200),
 		new /datum/data/mining_equipment("hunting rifle magazine, 5.56",/obj/item/ammo_box/magazine/vamp556/hunt,	200),
 		new /datum/data/mining_equipment("pepperspray", /obj/item/reagent_containers/spray/pepper, 200),
+		new /datum/data/mining_equipment("v26 taser", /obj/item/gun/energy/taser/twoshot, 200),
 		new /datum/data/mining_equipment("binoculars", /obj/item/binoculars, 300),
 		new /datum/data/mining_equipment("camera", /obj/item/camera, 300),
 		new /datum/data/mining_equipment("12ga shotgun shells, buckshot",/obj/item/ammo_box/vampire/c12g/buck,	400),
