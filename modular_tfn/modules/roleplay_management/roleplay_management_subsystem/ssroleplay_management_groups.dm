@@ -289,8 +289,12 @@
 	return null
 
 /datum/controller/subsystem/roleplay_management/proc/register_group(datum/group/G)
-	if (G && G.id && is_valid_id(G.id))
-		GLOB.groups[G.id] = G
+    if (!G || !G.id || !is_valid_id(G.id)) return
+    if (G.is_canonical) return
+	// DONT mix canonical into runtime, it's sorted above.
+    GLOB.groups[G.id] = G
+
+
 /datum/controller/subsystem/roleplay_management/proc/unregister_group(datum/group/G)
 	if (G?.id)
 		GLOB.groups -= G.id
@@ -406,7 +410,7 @@
 	if (R && islist(R.group_keys))
 		R.group_keys -= G.id
 	for (var/datum/relationships/rel in GLOB.relationships)
-		if (rel.owner_key == character_key && rel.target_key == G.id)
+		if (rel.owner == character_key && rel.target == G.id)
 			GLOB.relationships -= rel.id
 			if (R?.relationship_keys)
 				R.relationship_keys -= rel.id

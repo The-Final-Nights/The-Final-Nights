@@ -50,7 +50,7 @@
 		for (var/rid in R.relationship_keys)
 			if (rid in this_group.get_relationship_keys_for_owner(character_id))
 				var/datum/relationships/test_rel = SSroleplay_management.get_relationship_by_key(rid)
-				if (test_rel?.target_key == character_id && test_rel?.target_key == this_group.id)
+				if (test_rel?.target == character_id && test_rel?.target == this_group.id)
 					my_rel = test_rel
 					break
 		var/strength = my_rel?.intensity || 0
@@ -140,7 +140,7 @@
 				for (var/rid in all_keys)
 					var/datum/relationships/rel = SSroleplay_management.get_relationship_by_key(rid)
 					if (!rel) continue
-					var/owner = rel.owner_key
+					var/owner = rel.owner
 					var/role = ((owner in this_group.leaders)  ? "Leader" : (owner in this_group.officers) ? "Officer" : (owner in this_group.members)  ? "Member" : "Guest")
 					var/name = this_group.members[owner] || owner
 					loyalty_report += "[name] ([role]) — [rel.intensity]"

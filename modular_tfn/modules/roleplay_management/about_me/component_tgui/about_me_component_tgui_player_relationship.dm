@@ -34,21 +34,21 @@
 	if (!R) return
 	// Build valid targets: no self, no duplicate relationships, only live players.
 	var/list/char_options = list()
-	for (var/target_key in GLOB.aboutme_records)
-		if (target_key == src.character_id) continue
-		if (src.has_relationship_with(target_key)) continue // Prevent duplicates
-		var/datum/component/about_me/C = SSroleplay_management.find_aboutme_component_by_character_id(target_key)
+	for (var/target in GLOB.aboutme_records)
+		if (target == src.character_id) continue
+		if (src.has_relationship_with(target)) continue // Prevent duplicates
+		var/datum/component/about_me/C = SSroleplay_management.find_aboutme_component_by_character_id(target)
 		if (!C?.owner || !ismob(C.owner)) continue
 		var/mob/living/carbon/human/M = C.owner
-		var/display_name = M.true_real_name || M.real_name || target_key
-		char_options[display_name] = target_key
+		var/display_name = M.true_real_name || M.real_name || target
+		char_options[display_name] = target
 	if (!length(char_options))
 		to_chat(user, "<span class='warning'>No valid characters available to form a new relationship with.</span>")
 		return src.prompt_change_relationship(user)
 	// Target selection
 	var/char_choice = tgui_input_list(user, "Choose a character:", "Character", char_options)
 	if (!char_choice || !istext(char_choice)) return src.prompt_change_relationship(user)
-	var/target_key = char_options[char_choice]
+	var/target = char_options[char_choice]
 	// Relationship type selection
 	var/list/type_choices = list()
 	for (var/t in RELATIONSHIP_TYPE_KEYS)
@@ -83,7 +83,7 @@
 	if (taglist.len)
 		summary += "Tag: [jointext(taglist, ", ")]\n"
 	// Find and confirm with target
-	var/datum/component/about_me/TargetC = SSroleplay_management.find_aboutme_component_by_character_id(target_key)
+	var/datum/component/about_me/TargetC = SSroleplay_management.find_aboutme_component_by_character_id(target)
 	if (!TargetC?.owner || !ismob(TargetC.owner))
 		to_chat(user, "<span class='warning'>Could not find target to send request.</span>")
 		return src.prompt_change_relationship(user)
@@ -99,7 +99,7 @@
 		return src.prompt_change_relationship(user)
 	}
 	// Create shared relationship datum
-	src.create_mutual_relationship(target_key, rtype, strength, taglist, user, Target)
+	src.create_mutual_relationship(target, rtype, strength, taglist, user, Target)
 	// Notify both players and log for staff
 	to_chat(user, "<span class='notice'>Mutual relationship created with [Target.name].</span>")
 	to_chat(Target, "<span class='notice'>You accepted a mutual relationship with [user.name].</span>")
@@ -110,10 +110,10 @@
  * Actually creates and registers the shared relationship datum between two characters.
  * Registers to both the owner and the target as valid keys.
  */
-/datum/component/about_me/proc/create_mutual_relationship(target_key, kind, intensity, mob/living/carbon/human/user, mob/living/carbon/human/Target)
+/datum/component/about_me/proc/create_mutual_relationship(target, kind, intensity, mob/living/carbon/human/user, mob/living/carbon/human/Target)
     var/datum/relationships/rel = new
-    rel.owner_key = src.character_id
-    rel.target_key = target_key
+    rel.owner = src.character_id
+    rel.target = target
     rel.kind = kind
     rel.intensity = intensity
     rel.label = "[user.name] ↔ [Target.name]"
@@ -123,7 +123,7 @@
     // rel.mutual = TRUE
 
     var/datum/aboutme_record/R = SSroleplay_management.get_aboutme_record(src.character_id)
-    var/datum/aboutme_record/TargetR = SSroleplay_management.get_aboutme_record(target_key)
+    var/datum/aboutme_record/TargetR = SSroleplay_management.get_aboutme_record(target)
     if (R) R.relationship_keys += rel.id
     if (TargetR) TargetR.relationship_keys += rel.id
 
@@ -134,11 +134,11 @@
  * Used to create the mutual counterpart when forming a new relationship.
  */
 /datum/relationships/proc/ensure_mutual()
-	var/mirror_id = "[target_key]_character_[owner_key]_[rand(1,1000000)]"
+	var/mirror_id = "[target]_character_[owner]_[rand(1,1000000)]"
 	var/datum/relationships/mirror = new
 	mirror.id = mirror_id
-	mirror.owner_key = target_key
-	mirror.target_key = owner_key
+	mirror.owner = target
+	mirror.target = owner
 	mirror.kind = kind
 	mirror.intensity = intensity
 	mirror.label = label
@@ -158,7 +158,7 @@
 	for (var/key in R.relationship_keys)
 		var/datum/relationships/rel = SSroleplay_management.get_relationship_by_key(key)
 		if (!rel || !rel.is_visible_to(user, src.character_id)) continue
-		if (rel.target_key) continue // skip group relationships
+		if (rel.target) continue // skip group relationships
 		var/label = "[rel.label] (Character)"
 		edit_map[label] = rel
 	return edit_map
@@ -181,7 +181,7 @@
 	for (var/key in R.relationship_keys)
 		var/datum/relationships/rel = SSroleplay_management.get_relationship_by_key(key)
 		if (!rel || !rel.is_visible_to(user, src.character_id)) continue
-		if (rel.target_key) continue
+		if (rel.target) continue
 		var/label = "[rel.label] (Character)"
 		edit_map[label] = rel.id
 		rel_by_id[rel.id] = rel
@@ -198,14 +198,14 @@
 		return src.prompt_change_relationship(user)
 	var/datum/relationships/rel = rel_by_id[choice]
 	var/source_key = src.character_id
-	var/target_key = rel.target_key
-	message_admins("Relationship Remove: Attempting removal for rel.id=[rel.id] ([rel.label]) between [source_key] and [target_key]")
+	var/target = rel.target
+	message_admins("Relationship Remove: Attempting removal for rel.id=[rel.id] ([rel.label]) between [source_key] and [target]")
 
 	// Call the core removal logic (removes from both records and GLOB)
-	SSroleplay_management.clear_personal_relationship(source_key, target_key)
+	SSroleplay_management.clear_personal_relationship(source_key, target)
 
 	// Notify both users if possible
-	var/datum/component/about_me/OtherComp = SSroleplay_management.find_aboutme_component_by_character_id(target_key)
+	var/datum/component/about_me/OtherComp = SSroleplay_management.find_aboutme_component_by_character_id(target)
 	if (OtherComp && ismob(OtherComp.parent))
 		to_chat(OtherComp.parent, "<span class='alert'>[user.name] has removed the relationship with you.</span>")
 	to_chat(user, "<span class='alert'>You have removed the relationship with [rel.label].</span>")
@@ -222,6 +222,6 @@
 	for (var/rel_id in R.relationship_keys)
 		var/datum/relationships/rel = SSroleplay_management.get_relationship_by_key(rel_id)
 		if (!rel) continue
-		if ((rel.owner_key == src.character_id && rel.target_key == other_key) || (rel.owner_key == other_key && rel.target_key == src.character_id))
+		if ((rel.owner == src.character_id && rel.target == other_key) || (rel.owner == other_key && rel.target == src.character_id))
 			return TRUE
 	return FALSE

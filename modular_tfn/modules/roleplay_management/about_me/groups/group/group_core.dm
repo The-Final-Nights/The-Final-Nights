@@ -41,7 +41,7 @@
 	var/autosave = TRUE
 	
 
-/datum/group/New(id = null, load_mode = FALSE)
+/datum/group/New(id, load_mode = FALSE)
 	..()
 
 	if (!created_at_ts)
@@ -52,7 +52,6 @@
 
 	if (!id)
 		id = SSroleplay_management.group_id_new(gtype, lowertext(replacetext(name, " ", "_")))
-		id += "_[created_at]"
 	src.id = id
 
 	if (!load_mode)
@@ -182,7 +181,7 @@
 	for (var/rid in GLOB.relationships)
 		var/datum/relationships/Rel = GLOB.relationships[rid]
 		if (!Rel) continue
-		if (Rel.owner_key == owner_key && Rel.target_key == src.id)
+		if (Rel.owner == owner_key && Rel.target == src.id)
 			matching += rid
 	return matching
 
@@ -190,7 +189,7 @@
 	. = list()
 	for (var/rid in GLOB.relationships)
 		var/datum/relationships/R = GLOB.relationships[rid]
-		if (R?.kind == "group" && R.target_key == src.id)
+		if (R?.kind == "group" && R.target == src.id)
 			. += rid
 
 /datum/group/proc/rel_keys_for(owner_key)
@@ -199,5 +198,5 @@
 	for (var/rid in GLOB.relationships)
 		var/datum/relationships/R = GLOB.relationships[rid]
 		if (!R) continue
-		if (R.kind == "group" && R.owner_key == owner_key && R.target_key == src.id)
+		if (R.kind == "group" && R.owner == owner_key && R.target == src.id)
 			. += rid

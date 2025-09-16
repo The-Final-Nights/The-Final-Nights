@@ -46,8 +46,6 @@
 
 	var/list/datum/station_goal/station_goals = list()
 
-	var/allow_persistence_save = TRUE
-
 	var/gamemode_ready = FALSE //Is the gamemode all set up and ready to start checking for ending conditions.
 	var/setup_error		//What stopepd setting up the mode.
 

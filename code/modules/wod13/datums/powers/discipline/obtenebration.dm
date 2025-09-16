@@ -111,24 +111,57 @@
 //TENEBROUS FORM
 /datum/discipline_power/obtenebration/tenebrous_form
 	name = "Tenebrous Form"
-	desc = "Become a shadow and move without your physical form."
+	desc = "Become a shadow and resist all but fire, sunlight, and magic!"
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
-	vitae_cost = 0
+	vitae_cost = 3
+	duration_length = 1 TURNS
+	toggled = TRUE
 
 	violates_masquerade = TRUE
 
 	cooldown_length = 20 SECONDS
-
-	var/obj/effect/proc_holder/spell/targeted/shadowwalk/tenebrous_form_spell
+	var/saved_brute_mod = 1
+	var/saved_clone_mod = 1
+	var/saved_stamina_mod = 1
+	var/saved_brain_mod = 1
 
 /datum/discipline_power/obtenebration/tenebrous_form/activate()
 	. = ..()
-	if (!tenebrous_form_spell)
-		tenebrous_form_spell = new
+	playsound(owner.loc, 'sound/magic/voidblink.ogg', 50, FALSE)
+	saved_brute_mod = owner.physiology.brute_mod
+	owner.physiology.brute_mod = 0
+	saved_clone_mod = owner.physiology.clone_mod
+	owner.physiology.clone_mod = 0
+	saved_stamina_mod = owner.physiology.stamina_mod
+	owner.physiology.stamina_mod = 0
+	saved_brain_mod = owner.physiology.brain_mod
+	owner.physiology.brain_mod = 0
+	animate(owner, color = "#000000", time = 1 SECONDS, loop = 1)
 
-	tenebrous_form_spell.cast(user = owner)
+	ADD_TRAIT(owner, TRAIT_STUNIMMUNE, MAGIC)
+	ADD_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC)
+	ADD_TRAIT(owner, TRAIT_NOBLEED, MAGIC_TRAIT)
+	ADD_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
+	for(var/obj/stuff in owner.contents)
+		ADD_TRAIT(stuff, TRAIT_NODROP, MAGIC)
+
+/datum/discipline_power/obtenebration/tenebrous_form/deactivate()
+	. = ..()
+	playsound(owner.loc, 'sound/magic/voidblink.ogg', 50, FALSE)
+	owner.physiology.brute_mod = saved_brute_mod
+	owner.physiology.clone_mod = saved_brute_mod
+	owner.physiology.stamina_mod = saved_brute_mod
+	owner.physiology.brain_mod = saved_brute_mod
+	animate(owner, color = initial(owner.color), time = 1 SECONDS, loop = 1)
+
+	REMOVE_TRAIT(owner, TRAIT_STUNIMMUNE, MAGIC)
+	REMOVE_TRAIT(owner, TRAIT_PUSHIMMUNE, MAGIC)
+	REMOVE_TRAIT(owner, TRAIT_NOBLEED, MAGIC_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_HANDS_BLOCKED, MAGIC_TRAIT)
+	for(var/obj/item/stuff in owner.contents)
+		REMOVE_TRAIT(stuff, TRAIT_NODROP, MAGIC)
 
 /datum/discipline_power/obtenebration/tenebrous_form/post_gain()
 	. = ..()
@@ -199,3 +232,25 @@
 				SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 			else
 				drawing = FALSE
+
+//SHADOWSTEP
+/datum/discipline_power/obtenebration/shadowstep
+	name = "Shadowstep"
+	desc = "Become one with the shadows and move without your physical form."
+
+	level = 6
+	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
+	vitae_cost = 0
+
+	violates_masquerade = TRUE
+
+	cooldown_length = 20 SECONDS
+
+	var/obj/effect/proc_holder/spell/targeted/shadowwalk/shadowstep
+
+/datum/discipline_power/obtenebration/shadowstep/activate()
+	. = ..()
+	if (!shadowstep)
+		shadowstep = new
+
+	shadowstep.cast(user = owner)

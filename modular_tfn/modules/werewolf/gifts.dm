@@ -335,7 +335,7 @@
 		for(var/obj/structure/vampdoor/V in range(5, owner))
 			if(V)
 				if(V.closed)
-					if(V.lockpick_difficulty < 10)
+					if(V.lockpick_difficulty <= 16)
 						V.locked = FALSE
 						playsound(V, V.open_sound, 75, TRUE)
 						V.icon_state = "[V.baseicon]-0"
@@ -384,6 +384,10 @@
 			C.adjustOxyLoss(-20*C.auspice.level, TRUE)
 			C.bloodpool = min(C.bloodpool + C.auspice.level, C.maxbloodpool)
 			C.blood_volume = min(C.blood_volume + 56 * C.auspice.level, BLOOD_VOLUME_NORMAL)
+			//clear confusion and dizziness from head trauma
+			C.set_confusion(0)
+			C.dizziness = 0
+			C.update_eye_blur()
 			if(ishuman(owner))
 				var/mob/living/carbon/human/BD = owner
 				if(length(BD.all_wounds))
