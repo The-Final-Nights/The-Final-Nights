@@ -199,6 +199,9 @@
 	C.update_body(0)
 
 	if((old_species.id == "kindred") || (old_species.id == "zulo")) //No need to duplicate stuff if they already have it.
+		var/datum/species/kindred/K = old_species
+		for (var/datum/discipline/discipline in K.disciplines)
+			disciplines += discipline
 		return TRUE
 
 	C.last_experience = world.time + 5 MINUTES
