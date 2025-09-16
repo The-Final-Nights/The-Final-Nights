@@ -34,11 +34,9 @@
 	if (!id)
 		var/pfx = "[owner]_to_[lowertext(replacetext(target_key, " ", "_"))]"
 		id = SSroleplay_management.about_me_new_id(pfx)
-	if (!created_at_ts)
-		created_at_ts = world.realtime
-		created_at = time2text(created_at_ts, "MMM_DD_2015")
-	updated_at_ts = created_at_ts
-	updated_at = created_at
+	if (!create_time)
+		create_time = time2text(world.realtime, "MMM DD, YYYY hh:mm")
+	update_time = create_time
 	if (!load_mode)
 		SSroleplay_management.register_relationship(src)
 		save()
@@ -51,8 +49,7 @@
 	dirty = TRUE
 
 /datum/relationships/proc/touch()
-	updated_at_ts = world.realtime
-	updated_at = time2text(updated_at_ts, "MMM DD, YYYY hh:mm")
+	update_time = time2text(world.realtime, "MMM DD, YYYY hh:mm")
 	mark_dirty()
 	if (autosave) save()
 
@@ -95,8 +92,8 @@
 		"visibility" = visibility,
 		"status" = status,
 		"intensity" = intensity,
-		"created_at" = created_at,
-		"updated_at" = updated_at
+		"created_at" = create_time,
+		"updated_at" = update_time
 	)
 
 /datum/relationships/proc/is_visible_to(mob/user, character_id)
@@ -126,10 +123,8 @@
 
 /datum/relationships/proc/to_row_db()
 	var/list/r = to_row()
-	r["created_at"] = created_at
-	r["created_at_ts"] = created_at_ts
-	r["updated_at"] = updated_at
-	r["updated_at_ts"] = updated_at_ts
+	r["created_at"] = create_time
+	r["updated_at"] = update_time
 	return r
 
 /datum/relationships/proc/from_row(list/row)
@@ -143,8 +138,6 @@
 	visibility = (row["visibility"] != null) ? row["visibility"] : visibility
 	status = row["status"] || status
 	intensity = row["intensity"] || intensity
-	if (row["created_at"]) created_at = row["created_at"]
-	if (row["created_at_ts"]) created_at_ts = row["created_at_ts"]
-	if (row["updated_at"]) updated_at = row["updated_at"]
-	if (row["updated_at_ts"]) updated_at_ts = row["updated_at_ts"]
+	if (row["created_at"]) create_time = row["created_at"]
+	if (row["updated_at"]) create_time = row["updated_at"]
 	dirty = FALSE

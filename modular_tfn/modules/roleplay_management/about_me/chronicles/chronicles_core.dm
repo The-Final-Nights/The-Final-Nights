@@ -7,14 +7,11 @@
 
 /datum/chronicle
 	var/id
-
-	//ID of the master aboutme record 
+	//ID of the master aboutme record
 	var/about_me_id
-
 	var/scope = "personal"
 	var/title = "Untitled Chronicle"
 	var/desc = ""
-	
 	//not sure what this is but I made it an int in the db
 	var/group_id
 
@@ -31,8 +28,8 @@
 	//Why do we have two fields to track the creator's key?
 	var/owner_key
 	var/created_by_key
-	
-	//Why do we have 2 different records for this? 
+
+	//Why do we have 2 different records for this?
 	//We can use the database's timekeeping system instead.
 	//simplified to create_time / update_time / end_time
 	var/start_at = ""
@@ -42,7 +39,7 @@
 	var/created_at = ""
 	var/created_at_ts = 0
 	var/updated_at = ""
-	var/updated_at_ts = 0	
+	var/updated_at_ts = 0
 
 	//Not included in the database
 	// Persistence flags

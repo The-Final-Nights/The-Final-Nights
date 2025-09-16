@@ -10,7 +10,7 @@
 
 	var/name = "Unnamed Group"
 	var/desc = ""
-	
+
 	var/status = "Active"
 
 	var/created_by_key = ""
@@ -39,19 +39,15 @@
 	//Not tracked by DB
 	var/dirty = FALSE
 	var/autosave = TRUE
-	
+
 
 /datum/group/New(id, load_mode = FALSE)
 	..()
-
-	if (!created_at_ts)
-		created_at_ts = world.realtime
-		created_at = time2text(created_at_ts, "MMM_DD_YYYY")
-	updated_at_ts = created_at_ts
-	updated_at = created_at
+	create_time = time2text(world.realtime, "MMM_DD_2015")
+	update_time = create_time
 
 	if (!id)
-		id = SSroleplay_management.group_id_new(gtype, lowertext(replacetext(name, " ", "_")))
+		id = SSroleplay_management.group_id_new(lowertext(replacetext(name, " ", "_")))
 	src.id = id
 
 	if (!load_mode)
@@ -68,8 +64,7 @@
 	return dirty
 
 /datum/group/proc/touch()
-	updated_at_ts = world.realtime
-	updated_at = time2text(updated_at_ts, "MMM DD, YYYY hh:mm")
+	update_time = time2text(world.realtime, "MMM DD, YYYY hh:mm")
 	mark_dirty()
 	if (autosave) save()
 
@@ -113,45 +108,39 @@
 /datum/group/proc/GetFormattedUI()
 	return list(
 		"id" = id,
-		"type" = gtype,
 		"name" = name,
 		"desc" = desc,
 		"status" = status,
 		"visibility" = visibility,
 		"members" = islist(members) ? members.Copy() : list(),
-		"created_at" = created_at,
-		"updated_at" = updated_at
+		"created_at" = create_time,
+		"updated_at" = update_time
 	)
 
 /// base row
 /datum/group/proc/to_row_base()
 	return list(
 		"group_key" = id,
-		"type" = gtype,
 		"name" = name,
 		"desc" = desc,
 		"visibility" = visibility,
 		"status" = status,
 		"created_by_key" = created_by_key,
-		"created_at" = created_at,
-		"created_at_ts" = created_at_ts,
-		"updated_at" = updated_at,
-		"updated_at_ts" = updated_at_ts
+		"created_at" = create_time,
+		"updated_at" = update_time
 	)
 
 /datum/group/proc/from_row_db(list/base)
 	if (!islist(base)) return
 	id             = "[base["group_key"] || id]"
-	gtype          = base["type"]           || gtype
+	//gtype          = base["type"]           || gtype
 	name           = base["name"]           || name
 	desc           = base["desc"]           || desc
 	visibility     = isnull(base["visibility"]) ? visibility : !!base["visibility"]
 	status         = base["status"]         || status
 	created_by_key = base["created_by_key"] || created_by_key
-	created_at     = base["created_at"]     || created_at
-	created_at_ts  = isnum(base["created_at_ts"]) ? base["created_at_ts"] : created_at_ts
-	updated_at     = base["updated_at"]     || updated_at
-	updated_at_ts  = isnum(base["updated_at_ts"]) ? base["updated_at_ts"] : updated_at_ts
+	create_time     = base["created_at"]
+	update_time     = base["updated_at"]
 
 /datum/group/proc/to_rows_members()
 	var/list/rows = list()
@@ -160,8 +149,7 @@
 			"group_key" = id,
 			"member_key" = ck,
 			"role" = "", // optional; fill from UI later
-			"joined_at" = created_at,
-			"joined_at_ts" = created_at_ts
+			"joined_at" = create_time,
 		))
 	return rows
 

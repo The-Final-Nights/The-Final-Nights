@@ -27,7 +27,7 @@
 	var/created_at = ""
 	var/created_at_ts = 0
 	var/updated_at = ""
-	var/updated_at_ts = 0
+	var/update_time = 0
 	*/
 	var/create_time
 	var/update_time
@@ -50,8 +50,7 @@
 	return FALSE
 
 /datum/aboutme_record/proc/touch()
-	updated_at_ts = world.realtime
-	updated_at = time2text(updated_at_ts, "MMM DD, YYYY hh:mm")
+	update_time = time2text(world.realtime, "MMM DD, YYYY hh:mm")
 	mark_dirty()
 	if (autosave)
 		save()
@@ -59,11 +58,9 @@
 /datum/aboutme_record/New(character_id)
 	..()
 	src.character_id = "[character_id]"
-	if (!created_at_ts)
-		created_at_ts = world.realtime
-		created_at = time2text(created_at_ts, "MMM DD, YYYY hh:mm")
-	updated_at_ts = created_at_ts
-	updated_at = created_at
+	if (!create_time)
+		create_time = world.realtime
+	update_time = create_time
 	SSroleplay_management.check_register_valid_character_id(src.character_id)
 
 /datum/aboutme_record/proc/GetFormattedUI(mob/living/carbon/human/owner)
@@ -74,8 +71,8 @@
 		"chronicle" = get_ui_chronicles(owner),
 		"memories" = get_ui_memories_by_tag(owner),
 		"character_id" = character_id,
-		"created_at" = created_at,
-		"updated_at" = updated_at
+		"created_at" = create_time,
+		"updated_at" = update_time
 	)
 
 /datum/aboutme_record/proc/get_ui_groups(mob/living/carbon/human/owner)
