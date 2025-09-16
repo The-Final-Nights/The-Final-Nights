@@ -240,6 +240,13 @@
 
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
+	for (var/datum/discipline/discipline in C.dna.species.disciplines)
+		new_species.disciplines += discipline
+		if (!discipline.known_powers)
+			continue
+		for (var/datum/discipline_power/power in discipline.known_powers)
+		new_species.discipline.known_powers += power
+
 	if((new_species.id == "kindred") || (new_species.id == "zulo"))  //Only remove this if they're shifting to a non-vampire species.
 		return TRUE
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
