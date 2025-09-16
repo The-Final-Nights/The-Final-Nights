@@ -14,56 +14,86 @@
 
 /datum/discipline/numina/true_faith/post_gain()
 	. = ..()
-	if(level == 1)
-		var/datum/action/blessing/blessing = new()
+	if(level == 1 || level == 2)
+		var/datum/action/truefaith_action/blessing/blessing = new()
 		blessing.Grant(owner)
 	if(level >= 1)
-		blessing.Grant(owner)
 		owner.mind.holy_role = HOLY_ROLE_PRIEST
 	if(level >= 3)
-		var/datum/action/greater_blessing/greater_blessing = new()
+		var/datum/action/truefaith_action/greater_blessing/greater_blessing = new()
 		greater_blessing.Grant(owner)
 	if(level >= 4)
-		var/datum/action/blessing/miracle = new()
+		var/datum/action/truefaith_action/miracle/miracle = new()
 		miracle.Grant(owner)
 		owner.resistant_to_disciplines = TRUE
 	if(level >= 5)
-		owner.eye_color = "#ffc65b"
+		owner.eye_color = "#fff9d6"
 		owner.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
 		owner.update_body()
 
-/datum/action/blessing
+/datum/action/truefaith_action
+	name = "truefaith action"
+	desc = "truefaith desc."
+
+	icon_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
+	button_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
+
+	var/cool_down = 0
+	var/allowed_to_proceed = FALSE
+
+/datum/action/truefaith_action/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
+	icon_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
+	button_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
+	. = ..()
+
+/datum/action/truefaith_action/Trigger(trigger_flags)
+	. = ..()
+	var/mob/living/H = owner
+	if(H.stat == DEAD)
+		allowed_to_proceed = FALSE
+		return
+	if(cool_down+150 >= world.time)
+		allowed_to_proceed = FALSE
+		to_chat(owner, span_warning("You aren't ready to cast [name] yet!"))
+		return
+	cool_down = world.time
+	allowed_to_proceed = TRUE
+
+/datum/action/truefaith_action/blessing
 	name = "Blessing"
 	desc = "Call upon the powers that be to bless an object of holy significance."
 	button_icon_state = "bloodshield"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
-/datum/action/blessing/Trigger(trigger_flags)
+/datum/action/truefaith_action/blessing/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE) //This is all TODO
 
-/datum/action/greater_blessing
+/datum/action/truefaith_action/greater_blessing
 	name = "Sanctify"
 	desc = "Call upon the powers that be to empower an object of holy significance."
 	button_icon_state = "bloodshield"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
-/datum/action/blessing/Trigger(trigger_flags)
+/datum/action/truefaith_action/greater_blessing/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/carbon/human/H = owner
 	playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE) //This is all TODO
 
-/datum/action/miracle
+/datum/action/truefaith_action/miracle
 	name = "Miracle"
 	desc = "Through faith, give the wounded a push to survive."
-	button_icon_state = "bloodshield"
+	button_icon_state = "faithheal"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
-/datum/action/blessing/Trigger(trigger_flags)
+	cool_down = 60 SECONDS
+
+/datum/action/truefaith_action/miracle/Trigger(trigger_flags)
 	. = ..()
-	var/mob/living/carbon/human/H = owner
-	playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE) //This is all TODO
+	if(allowed_to_proceed && (iscarbon(owner)))
+		var/mob/living/carbon/H = owner
+		H.put_in_active_hand(new /obj/item/melee/touch_attack/truefaith_heal(H))
 
 ////////////
 /// WARD ///
@@ -96,6 +126,10 @@
 	if(!ishuman(target))
 		return FALSE
 
+	if(!iskindred(target) && !iswerewolf(target))
+		to_chat(owner, span_warning("[target] is unaffected by your gesture."))
+		return FALSE
+
 	var/mypower = SSroll.storyteller_roll(owner.get_total_mentality(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
 	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
@@ -109,12 +143,13 @@
 
 /datum/discipline_power/true_faith/ward/pre_activation_checks(mob/living/target)
 
-	if(!iskindred(target) && !iswerewolf(target))
-		return FALSE
-
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire) && (vampire.clan?.name == CLAN_BAALI)) //Per the Baali curse, Ward will always take effect and be much more punishing.
 		return TRUE
+	if(iskindred(target) && (!target.client?.prefs?.is_enlightened) && (vampire.morality_path?.score >= 8))
+		to_chat(owner, span_warning("[target] is unaffected by your gesture."))
+		do_cooldown(cooldown_length)
+		return FALSE
 	banish_succeed = ward_check(owner, target, base_difficulty = 4)
 	if(banish_succeed)
 		return TRUE
@@ -227,7 +262,7 @@
 	if(isghoul(target))
 		to_chat(owner, span_notice("They occasionally twitch and shiver, hungry for something."))
 	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
-		to_chat(owner, span_notice("[target] doesn't seem all that special."))
+		sixth_sense_numina_assessment(target, owner)
 
 /datum/discipline_power/true_faith/sixth_sense/proc/sixth_sense_clan_assessment(target, owner)
 	if(!owner || !target)
@@ -305,20 +340,32 @@
 				to_chat(owner, span_notice("[target] is seemingly always angry."))
 				return
 			if("Galliard")
-				to_chat(owner, span_notice("[target]'s is always listening to the background noise."))
+				to_chat(owner, span_notice("[target] seems to have a knack for detail."))
 				return
 			if("Philodox")
-				to_chat(owner, span_notice("[target] seems to have an eye for detail."))
+				to_chat(owner, span_notice("[target] seems to be silently judging you."))
 				return
 			if("Theurge")
 				to_chat(owner, span_notice("[target] reminds you of your own spiritual persuasion."))
 				return
 			if("Ragabash")
-				to_chat(owner, span_notice("[target] commonly has a dumb grin on their face."))
+				to_chat(owner, span_notice("[target] just seems shifty."))
 				return
 
 			else
 				to_chat(owner, span_notice("[target] seems lonely."))
+
+/datum/discipline_power/true_faith/sixth_sense/proc/sixth_sense_numina_assessment(target, owner)
+	if(!owner || !target)
+		return
+	var/mob/living/carbon/human/human = target
+	if(!iskindred(human)) //Just incase
+		switch(human.numina?.name)
+			if(NUMINA_FAITH)
+				to_chat(owner, span_yellowteamradio("[target] walks in the light."))
+				return
+			else
+				to_chat(owner, span_notice("[target] doesn't seem all that special."))
 
 /////////////
 /// DOGMA ///
@@ -345,17 +392,16 @@
 /datum/discipline_power/true_faith/dogma/activate()
 	. = ..()
 	owner.physiology.damage_resistance = min(60, (owner.physiology.damage_resistance+dogma_DR) )
-	owner.remove_overlay(MUTATIONS_LAYER)
-	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
+	owner.remove_overlay(HALO_LAYER)
+	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -HALO_LAYER)
 	presence_overlay.pixel_z = 1
-	owner.overlays_standing[MUTATIONS_LAYER] = presence_overlay
-	owner.apply_overlay(MUTATIONS_LAYER)
-	addtimer(CALLBACK(src, PROC_REF(clear_halo), owner), 4 SECONDS)
+	owner.overlays_standing[HALO_LAYER] = presence_overlay
+	owner.apply_overlay(HALO_LAYER)
 
 /datum/discipline_power/true_faith/dogma/deactivate()
 	. = ..()
 	owner.physiology.damage_resistance = max(0, (owner.physiology.damage_resistance-dogma_DR) )
-	owner.remove_overlay(MUTATIONS_LAYER)
+	owner.remove_overlay(HALO_LAYER)
 
 /////////////////
 /// PERDITION ///
@@ -373,7 +419,7 @@
 	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK
 
 	multi_activate = TRUE
-	cooldown_length = 60 SECONDS
+	cooldown_length = 4 SECONDS
 	duration_length = 30 SECONDS
 
 	range = 12
@@ -381,54 +427,93 @@
 
 /datum/discipline_power/true_faith/perdition/activate()
 	. = ..()
+	owner.remove_overlay(MUTATIONS_LAYER)
+	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dominate", -MUTATIONS_LAYER)
+	presence_overlay.pixel_z = 1
+	owner.overlays_standing[MUTATIONS_LAYER] = presence_overlay
+	owner.apply_overlay(MUTATIONS_LAYER)
 	for(var/mob/living/carbon/human/target in oviewers(7, owner))
-		if(!iskindred(target) && !iswerewolf(target))
-			to_chat(owner, span_warning("[target] is unaffected by your power."))
-			return
+		punish_sinner(target, owner)
+	addtimer(CALLBACK(src, PROC_REF(clear_halo), owner), 5 SECONDS)
 
-		var/mypower = SSroll.storyteller_roll(owner.get_total_mentality(), difficulty = 2, mobs_to_show_output = owner, numerical = TRUE)
-		var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 3, mobs_to_show_output = target, numerical = TRUE)
+/datum/discipline_power/true_faith/perdition/proc/punish_sinner(mob/living/target)
+	var/mob/living/carbon/human/sinner = target
 
-		if(ishuman(target))
-			var/mob/living/carbon/human/human_target = target
-			if(human_target.clan?.name == CLAN_GARGOYLE)
-				theirpower -= 2
-			if(human_target.clan?.name == CLAN_BAALI)
-				target.emote("scream")
-				playsound(src, 'sound/magic/demon_dies.ogg', 50)
-				target.dust()
-				return
-
-		if(mypower <= theirpower)
-			return
-
-
-		target.remove_overlay(MUTATIONS_LAYER)
-		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
-		presence_overlay.pixel_z = 1
-		target.overlays_standing[MUTATIONS_LAYER] = presence_overlay
-		target.apply_overlay(MUTATIONS_LAYER)
-
-		to_chat(owner, span_warning("[target] is rended asunder!"))
-		to_chat(target, span_cultlarge("OH GOD IT BURNS!"))
-
-		var/datum/cb = CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
-		for(var/i in 1 to 30)
-			addtimer(cb, (i - 1) * target.total_multiplicative_slowdown())
-		target.emote("scream")
-		target.set_confusion(30 SECONDS)
-		target.do_jitter_animation(60 SECONDS)
-		target.adjust_blurriness(30 SECONDS)
-		target.adjustFireLoss(70)
-		SEND_SOUND(target, sound('modular_tfn/modules/numina/sound/perdition_effect.ogg'))
-
+	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dominate", -MUTATIONS_LAYER)
+	presence_overlay.pixel_z = 1
+	if(!iskindred(sinner) && !iswerewolf(sinner))
+		to_chat(owner, span_warning("[sinner] is unaffected by your power."))
 		return
+	if(iskindred(sinner) && (!sinner.client?.prefs?.is_enlightened) && (sinner.morality_path?.score >= 8))
+		to_chat(owner, span_warning("[sinner] is unaffected by your power."))
+		return
+
+	var/mypower = SSroll.storyteller_roll(owner.get_total_mentality(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(sinner.get_total_mentality(), difficulty = 3, mobs_to_show_output = sinner, numerical = TRUE)
+
+	if(ishuman(sinner))
+		if(sinner.clan?.name == CLAN_GARGOYLE)
+			theirpower -= 2
+		if(sinner.clan?.name == CLAN_BAALI)
+			sinner.emote("scream")
+			sinner.flash_act()
+			playsound(sinner, 'sound/magic/demon_dies.ogg', 50)
+			sinner.dust()
+			return
+
+	if(mypower <= theirpower)
+		to_chat(owner, span_warning("[sinner] resists your influence!"))
+		return
+
+
+	sinner.remove_overlay(MUTATIONS_LAYER)
+	presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
+	presence_overlay.pixel_z = 1
+	sinner.overlays_standing[MUTATIONS_LAYER] = presence_overlay
+	sinner.apply_overlay(MUTATIONS_LAYER)
+
+	to_chat(owner, span_warning("[sinner] is rended asunder!"))
+	to_chat(sinner, span_cultlarge("OH GOD IT BURNS!"))
+
+	var/datum/cb = CALLBACK(sinner, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
+	for(var/i in 1 to 30)
+		addtimer(cb, (i - 1) * sinner.total_multiplicative_slowdown())
+	sinner.emote("scream")
+	sinner.set_confusion(30 SECONDS)
+	sinner.do_jitter_animation(60 SECONDS)
+	sinner.adjust_blurriness(30 SECONDS)
+	sinner.adjustFireLoss(70)
+	sinner.flash_act()
+	SEND_SOUND(sinner, sound('modular_tfn/modules/numina/sound/perdition_effect.ogg'))
+
+	addtimer(CALLBACK(src, PROC_REF(deactivate), sinner), 30 SECONDS)
 
 /datum/discipline_power/true_faith/perdition/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-
 //this is a general proc to remove the halo for powers that would otherwise keep it too long
 /datum/discipline_power/true_faith/proc/clear_halo(mob/living/carbon/human/owner)
 	owner.remove_overlay(MUTATIONS_LAYER)
+
+/obj/item/melee/touch_attack/truefaith_heal
+	name = "\improper faithful hand"
+	desc = "Through the LORD, all things are possible."
+	on_use_sound = 'modular_tfn/modules/numina/sound/truefaith_power_small.ogg'
+	catchphrase = null
+	icon_state = "fleshtostone"
+	inhand_icon_state = "fleshtostone"
+
+/obj/item/melee/touch_attack/truefaith_heal/attack(mob/target, mob/living/user)
+	. = ..()
+	if(target == user && isliving(target))
+		return COMPONENT_CANCEL_ATTACK_CHAIN
+	var/mob/living/M = target
+	M.adjustBruteLoss(-10, TRUE)
+	M.adjustFireLoss(-10, TRUE)
+	M.adjustToxLoss(-25, TRUE)
+	M.adjustOxyLoss(-25, TRUE)
+	M.adjustCloneLoss(-25, TRUE)
+	if(ishuman(M))
+		M.reagents.add_reagent(/datum/reagent/determination, 10)
+	return
