@@ -255,83 +255,107 @@
 
 	violates_masquerade = FALSE
 
+/datum/discipline_power/daimonion/psychomania/pre_activation_checks(mob/living/target)
+	if(SSroll.storyteller_roll(owner.get_total_social(), target.get_total_mentality(), mobs_to_show_output = owner) == !ROLL_SUCCESS)
+		to_chat(owner, span_warning("[target] has too much willpower to manifest their fears!"))
+		return FALSE
+	return TRUE
+
 /datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()
 
 	if(isgarou(target))
 		switch(target.auspice.tribe.name)
 			if ("Black Spiral Dancers")
-				to_chat(owner, span_notice("[target] is obsessive to a fault."))
-				return
+				to_chat(target, span_cultlarge("VISIONS OF BRIMSTONE AND FLAME FLASH BEFORE MY EYES"))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh3.ogg", 50, FALSE)
 			else
-				new /datum/hallucination/delusion(target,TRUE,"wyrmfoe",200,0)
-				return
+				if (target.auspice.rage > 4)
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh1.ogg", 50, FALSE)
+					to_chat(target, span_cultlarge("THE WYRMFOE IS ALL AROUND ME"))
+					new /datum/hallucination/delusion(target,TRUE,"wyrmfoe",200,0)
+					target.enter_frenzymod()
+				else
+					to_chat(target, span_cultitalic("I can feel a overwhelming presence.. I NEED TO RUN!!"))
+					new /datum/hallucination/baali(target,TRUE,"wyrm")
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh2.ogg", 50, FALSE)
 	if(iskindred(target))
 		var/mob/living/carbon/human/vampire = target
 		switch(vampire.clan?.name)
 			if(CLAN_TOREADOR)
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh2.ogg", 50, FALSE)
+				new /datum/hallucination/fire(target, TRUE)
 				to_chat(target, span_cultlarge("FLAMES ENGULF MY BEAUTY"))
 				target.Paralyze(12 SECONDS)
-				new /datum/hallucination/fire(target, TRUE)
 				return
 			if(CLAN_LASOMBRA)
-				to_chat(owner, span_notice("[target] fears change itself evermore."))
+				to_chat(target, span_cultlarge("THE SHADOWS BETRAY ME, SEEKING MY LIFE"))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/eldritchlaugh.ogg", 50, FALSE)
+				target.blind_eyes(15 SECONDS)
+				target.Paralyze(10 SECONDS)
 				return
+			if(CLAN_BRUJAH)
+				to_chat(target, span_cultitalic("You see visions of an underground stone monument weeping blood."))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh3.ogg", 50, FALSE)
+				to_chat(target, span_cultlarge("THE BEAST RAGES AGAINST THIS VISION!!"))
+				target.enter_frenzymod()
 			if(CLAN_TZIMISCE)
-				to_chat(owner, span_notice("[target] is consumed by a singular desire."))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh3.ogg", 50, FALSE)
+				to_chat(target, span_cultlarge("I SEE VISIONS OF FLAME ENGULFING MY DOMAIN"))
+				new /datum/hallucination/fire(target, TRUE)
+				target.Paralyze(12 SECONDS)
 				return
 			if(CLAN_MALKAVIAN)
-				to_chat(owner, span_notice("[target] frightens people near them."))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
+				target.Paralyze(12 SECONDS)
+				target.visible_message(span_warning("[target] repeatedly bashes their head against the ground"), span_cultlarge("THE WHISPERS ARE OVERTAKING ME"),)
+				target.apply_damage(50, BRUTE, BODY_ZONE_HEAD)
 				return
 			if(CLAN_TREMERE)
-				to_chat(owner, span_notice("[target] has a sense of perfectionism by their own actions."))
+				to_chat(target, span_cultitalic("Blood pours out from my body, manifesting into a grotesque form"))
+				new /datum/hallucination/baali(target,TRUE,"tremere")
 				return
 			if(CLAN_BAALI)
-				to_chat(owner, span_notice("[target] is scared of the lord's presence."))
+				to_chat(target, span_notice("The sacred icons appearing before you lack the true substance of faith"))
+				new /datum/hallucination/delusion(target,TRUE,"repent",50,0)
+				to_chat(owner, span_notice("Your illusions are easily dispelled by [target]"))
 				return
 			if(CLAN_BANU_HAQIM)
-				to_chat(owner, span_notice("[target] sees themselves as absolute judgement."))
+				to_chat(target, span_cultitalic("An overwhelming presence manifests around me.."))
+				new /datum/hallucination/baali(target,TRUE,"banu")
 				return
 			if(CLAN_SALUBRI)
-				to_chat(owner, span_notice("[target] is ruled by consent."))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh1.ogg", 50, FALSE)
+				to_chat(target, span_cultitalic("My third eye begins to reflexively open.."))
+				target.visible_message(span_warning("[target] tightly grasps their forehead, trying to conceal something"), span_cultlarge("I MUST HIDE MY NATURE"),)
+				target.apply_damage(50, BRUTE, BODY_ZONE_HEAD)
+				target.Paralyze(12 SECONDS)
 				return
 			if(CLAN_SALUBRI_WARRIOR)
-				to_chat(owner, span_notice("[target] is ruled by consent."))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh2.ogg", 50, FALSE)
+				to_chat(target, span_cultlarge("BRIMSTONE AND FLAME AWAIT ME BEFORE MY REVENGE'S END"))
+				target.enter_frenzymod()
 				return
 			if(CLAN_GIOVANNI)
-				to_chat(owner, span_notice("[target] never considers any action too great for their family."))
+				to_chat(target, span_cultitalic("A sense of profound dread enters you as soundless words enter your mind"))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/eldritchlaugh.ogg", 50, FALSE)
+				new /datum/hallucination/baali(target,TRUE,"spectre")
 				return
 			if(CLAN_CAPPADOCIAN)
-				to_chat(owner, span_notice("[target] will never escape the appearance of a corpse."))
-				return
-			if(CLAN_KIASYD)
-				to_chat(owner, span_notice("[target] is afraid of cold iron."))
-				return
-			if(CLAN_SETITES)
-				to_chat(owner, span_notice("[target] believes every stain of sin is a virtue."))
+				to_chat(target, span_cultitalic("Freshly despair enters your decaying flesh as you feel a hauntingly empty presence."))
+				target.playsound_local(target, "modular_tfn/modules/daim/audio/eldritchlaugh.ogg", 50, FALSE)
+				new /datum/hallucination/baali(target,TRUE,"spectre")
 				return
 			else
-				to_chat(owner, span_notice("[target] has been abandoned by the cold ocean of the night with nobody to keep them afloat."))
+				to_chat(target, span_cultboldtalic("THE BEAST SCREAMS IN MY MIND TO RUN"))
+				new /datum/hallucination/baali(target,TRUE,"demon")
 				return
 	if(isghoul(target))
-		var/mob/living/carbon/human/ghoul = target
-		if(ghoul.mind.enslaved_to)
-			to_chat(owner, span_notice("Victim is addicted to vampiric vitae and its true master is [ghoul.mind.enslaved_to]"))
-		else
-			to_chat(owner, span_notice("Victim is addicted to vampiric vitae, but is independent and free."))
-	if(iscathayan(target))
-		if(target.mind.dharma?.Po == "Legalist")
-			to_chat(owner, span_notice("[target] hates to be controlled!"))
-		if(target.mind.dharma?.Po == "Rebel")
-			to_chat(owner, span_notice("[target] doesn't like to be touched."))
-		if(target.mind.dharma?.Po == "Monkey")
-			to_chat(owner, span_notice("[target] is too focused on money, toys and other sources of easy pleasure."))
-		if(target.mind.dharma?.Po == "Demon")
-			to_chat(owner, span_notice("[target] is addicted to pain, as well as to inflicting it to others."))
-		if(target.mind.dharma?.Po == "Fool")
-			to_chat(owner, span_notice("[target] doesn't like to be pointed at!"))
-	if(!iskindred(target) && !isghoul(target) && !isgarou(target) && !iscathayan(target))
-		to_chat(owner, span_notice("[target] is a feeble worm with no strengths or visible weaknesses, a mere human."))
+		to_chat(target, span_cultboldtalic("SOMETHING IS COMING, WHAT IS IT?!!"))
+		new /datum/hallucination/baali(target,TRUE,"demon")
+	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
+		to_chat(target, span_cultlarge("MY WORST NIGHTMARES FLASH BEFORE MY EYES"))
+		target.Paralyze(30 SECONDS)
 
 //	if(SSroll.storyteller_roll(owner.get_total_mentality(), 6, mobs_to_show_output = owner) == ROLL_SUCCESS)
 //		to_chat(target, span_boldwarning("You hear an infernal laugh!"))

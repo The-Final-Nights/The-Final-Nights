@@ -419,7 +419,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	demon = new(wall, target)
 	demontype = new_demontype
 	if (isnull(new_demontype))
-		demontype = pick("demon", "spectre", "wyrm")
+		demontype = pick("demon", "spectre", "wyrm", "banu", "tremere")
 	switch(demontype)
 		if("demon")
 			demon.image_icon = 'code/modules/wod13/32x48.dmi'
@@ -432,6 +432,14 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			demon.name = "Wyrmic Avatar"
 			demon.image_icon = 'code/modules/wod13/48x64.dmi'
 			demon.image_state = "bigskeleton"
+		if("tremere")
+			demon.name = "RECLAIMER"
+			demon.image_icon = 'code/modules/wod13/48x64.dmi'
+			demon.image_state = "4armstzi"
+		if("banu")
+			demon.name = "LOREMASTER"
+			demon.image_icon = 'icons/mob/32x64.dmi'
+			demon.image_state = "eva"
 	addtimer(CALLBACK(src, PROC_REF(start_processing)), 10)
 
 
@@ -454,17 +462,27 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			charged = TRUE
 			switch(demontype)
 				if("demon")
-					target.Paralyze(1 SECONDS)
+					target.visible_message(span_warning("[target] falls on their knees"), span_cultboldtalic("[demon] grasps my head with its hands"),)
+					target.Paralyze(15 SECONDS)
 					target.adjustStaminaLoss(200)
-					target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh1.ogg", 50, FALSE)
+					to_chat(target, span_cultlarge("HELL IS REAL, IT HAS TOUCHED ME"))
 				if("spectre")
-					target.Paralyze(1 SECONDS)
+					target.visible_message(span_warning("[target] collapses onto the ground"), span_cultboldtalic("[demon] touches you with an outstretched hand"),) //Spectres being spooky
+					target.Paralyze(15 SECONDS)
 					target.adjustStaminaLoss(200)
-					target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
+					to_chat(target, span_cultlarge("THE SPIRIT HAS TAKEN SOMETHING FROM ME"))
 				if("wyrm")
-					target.Paralyze(1 SECONDS)
-					target.adjustStaminaLoss(200)
-					target.visible_message(span_warning("[target] growls in animalistic fury"), span_cultlarge("The [demon] defiles me"),)
+					target.visible_message(span_warning("[target] whines in animalistic fear"), span_cultlarge("THE WYRM HAS NOTICED ME"),) //Pick your bane name
+					target.Paralyze(7 SECONDS)
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
+				if("banu")
+					target.visible_message(span_warning("[target] grasps his chest, feeling for a hole"), span_cultlarge("THE [demon] PLUCKS OUT YOUR HEART"),) //Ur-Shulgi doesnt take shit from anyone
+					target.Paralyze(15 SECONDS)
+				if("tremere")
+					target.visible_message(span_warning("[target] collapses onto the ground, convulsing"), span_cultlarge("THE [demon] TAKES YOUR VITAE"),) //saulot/tzimice's repo man
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
+					target.Paralyze(15 SECONDS)
 			step_away(target, demon)
 			STOP_PROCESSING(SSfastprocess, src)
 			qdel(src)
