@@ -138,6 +138,7 @@
 	prize_list = list(
 		new /datum/data/mining_equipment("damp cleaning rag", /obj/item/reagent_containers/glass/rag, 5),
 		new /datum/data/mining_equipment("cassette tapes", /obj/item/tape, 10),
+		new /datum/data/mining_equipment("flashlight", /obj/item/flashlight, 10),
 		new /datum/data/mining_equipment("cleaning mop", /obj/item/mop, 20),
 		new /datum/data/mining_equipment("plastic bucket", /obj/item/reagent_containers/glass/bucket, 20),
 		new /datum/data/mining_equipment("push broom", /obj/item/pushbroom, 20),
