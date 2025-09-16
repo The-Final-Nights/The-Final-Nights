@@ -16,7 +16,8 @@
 	if(!iskindred(user))//So that we're not running a get_discipline check on a species that doesn't have disciplines
 		return FALSE
 	var/mob/living/carbon/human/surgeon = user
-	var/datum/discipline/surgeon_vicissitude = surgeon.client.prefs.discipline_types.Find(/datum/discipline/vicissitude)
+	var/datum/species/kindred/surgeon_species = surgeon?.dna.species
+	var/datum/discipline/surgeon_vicissitude = surgeon_species?.get_discipline(/datum/discipline/vicissitude)
 	if(!surgeon_vicissitude)//If the surgeon doesn't have vicissitude, they don't get to do vicissitude things
 		return FALSE
 	if(surgeon_vicissitude.level >= level_req)//Checks if we have at least 2 vicissitude, the level necessary for fleshcrafting
