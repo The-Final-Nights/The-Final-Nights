@@ -239,7 +239,7 @@
 
 /obj/item/melee/vampirearms/longsword
 	name = "longsword"
-	desc = "A classic weapon of the knight, the longsword is a versatile weapon that can be used for both cutting and thrusting."
+	desc = "A classic weapon of the nobility, the longsword is a versatile weapon that can be used for both cutting and thrusting."
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "longsword"
 	flags_1 = CONDUCT_1
@@ -309,7 +309,7 @@
 	component_type = /datum/component/storage/concrete/vtm/sheathe
 
 /obj/item/storage/belt/vampire/sheathe/longsword
-	desc = "An ornate sheath designed to hold a knight's blade."
+	desc = "An ornate sheath designed to hold a noble's blade."
 	icon_state = "longsword_sheathe-1"
 	worn_icon_state = "longsword_sheathe"
 
