@@ -701,6 +701,12 @@ SUBSYSTEM_DEF(carpool)
 	var/color_blue = FALSE
 	COOLDOWN_DECLARE(last_color_change)
 
+/obj/vampire_car/police/ranger
+	icon_state = "ranger"
+	access = "nps"
+	light_color = "#ffa500"
+	var/color_yellow = FALSE
+
 /obj/vampire_car/police/unmarked
 	icon_state = "unmarked"
 	max_passengers = 3
@@ -730,6 +736,20 @@ SUBSYSTEM_DEF(carpool)
 	else
 		color_blue = TRUE
 		set_light_color("#0000ff")
+	return ..()
+
+/obj/vampire_car/police/ranger/handle_caring()
+	if(!light_on)
+		return ..()
+	if(!COOLDOWN_FINISHED(src, last_color_change))
+		return ..()
+	COOLDOWN_START(src, last_color_change, 1 SECONDS)
+	if(color_yellow)
+		color_yellow = FALSE
+		set_light_color("#ffa500")
+	else
+		color_yellow = TRUE
+		set_light_color("#ff8c00")
 	return ..()
 
 /obj/vampire_car/taxi

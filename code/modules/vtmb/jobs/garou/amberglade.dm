@@ -1,4 +1,4 @@
-#define AMBERGLADE_ALLOWED_TRIBES list("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
+#define AMBERGLADE_ALLOWED_TRIBES list("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers","Glass Walkers", "Bone Gnawers", "Children of Gaia", "Shadow Lords")
 
 /datum/job/vamp/garou/amberglade/council
 	title = "Amberglade Councillor"
