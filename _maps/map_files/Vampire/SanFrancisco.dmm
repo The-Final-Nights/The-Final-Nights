@@ -30158,6 +30158,9 @@
 /obj/item/reagent_containers/glass/bucket,
 /obj/structure/mopbucket,
 /obj/item/mop,
+/obj/structure/extinguisher_cabinet{
+	pixel_y = 32
+	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/chantry)
 "hoJ" = (
@@ -45908,6 +45911,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/cog/pantry)
+"kZr" = (
+/obj/structure/closet/crate/large,
+/obj/structure/extinguisher_cabinet{
+	pixel_y = 32
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/interior/chantry/basement)
 "kZu" = (
 /obj/structure/chair/sofa/old/right{
 	color = "#525252"
@@ -126092,7 +126102,7 @@ xfw
 rCB
 oBr
 nGp
-fhA
+kZr
 vXp
 fhA
 oBr
