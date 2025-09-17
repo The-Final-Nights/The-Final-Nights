@@ -1,3 +1,6 @@
+/datum/action/
+	var/numina = FALSE
+
 /datum/action/discipline/numina
 	check_flags = NONE
 	button_icon = 'modular_tfn/modules/numina/icons/numina.dmi'

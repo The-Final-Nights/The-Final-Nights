@@ -782,7 +782,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				dat += "<b>Numina:</b> <a href='byond://?_src_=prefs;preference=numina;task=input'>[numina.name]</a><BR>"
 				dat += "<b>Description:</b> [numina.desc]<BR>"
 				dat += "<b>Curse:</b> [numina.curse]<BR>"
-				dat += "<h2>[make_font_cool("DISCIPLINES")]</h2>"
+				dat += "<h2>[make_font_cool("POWERS")]</h2>"
 
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
@@ -791,7 +791,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 					var/cost
 					if (discipline_level <= 0)
-						cost = 10
+						cost = 100
 					else if (numina.numina_disciplines.Find(discipline_type))
 						cost = discipline_level * 5
 					else
@@ -2658,7 +2658,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							clan_accessory = null
 						else
 							clan_accessory = pick(clan.accessories)
-
+				//TFN EDIT - NUMINA SYSTEM //////////////////////////////////////////////////////////
 				if("numina")
 					if(slotlocked || !(pref_species.id == "human"))
 						return
@@ -2684,7 +2684,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					for(var/i in 1 to length(numina.numina_disciplines))
 						discipline_types += numina.numina_disciplines[i]
 						discipline_levels += 1
-
+				//TFN EDIT - NUMINA SYSTEM //////////////////////////////////////////////////////////
 				if("digitigradelegs")
 					if(clan.name != "Gargoyle")
 						return
@@ -3095,6 +3095,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							if("ghoul","kuei-jin")
 								discipline_types.Cut()
 								discipline_levels.Cut()
+							// TFN EDIT - NUMINA SYSTEM //////////////////////////////////////////////////////////
 							if("human")
 								numina = GLOB.numina_clans[/datum/numina_pattern/mundane]
 								discipline_types.Cut()
@@ -3102,6 +3103,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 								for (var/i in 1 to length(numina.numina_disciplines))
 									discipline_types += numina.numina_disciplines[i]
 									discipline_levels += 1
+							// TFN EDIT - NUMINA SYSTEM //////////////////////////////////////////////////////////
 							if("kindred")
 								clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
 								discipline_types.Cut()
@@ -3803,9 +3805,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		character.max_yang_chi = 3
 		character.yin_chi = 2
 		character.max_yin_chi = 2
-
+	//TFN EDIT - NUMINA SYSTEM
 	if (pref_species.name == "Human")
 		character.set_numina(numina, TRUE)
+	// TFN EDIT - NUMINA SYSTEM
 
 	if(pref_species.name == "Vampire")
 		character.skin_tone = get_vamp_skin_color(skin_tone)

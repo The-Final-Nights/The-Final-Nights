@@ -1,6 +1,11 @@
 /datum/discipline/numina/true_faith
 	name = "True Faith"
-	desc = "For the LORD is thy Shepard. (PUT DETAILS HERE WHEN POWERS ARE DONE)"
+	desc = "For the LORD is thy Shepard. True Faith provides the user with numerous blessings dependent on how potent it is. \
+	At <b>First Level</b>, you can repel nightcreatures with holy symbols. \
+	At <b>Second Level</b>, you can improve your Mentality score by 4 through meditation. \
+	At <b>Third Level</b>, you can see through appearances and tell what someone truly is. \
+	At <b>Fourth Level</b>, you can soak damage with Faith and are immune to all mental Disciplines. \
+	At <b>Fifth Level</b>, you can repulse and damage all nearby nightcreatures."
 	icon_state = "truefaith"
 	clan_restricted = FALSE
 	power_type = /datum/discipline_power/true_faith
@@ -36,6 +41,7 @@
 
 	var/cool_down = 0
 	var/allowed_to_proceed = FALSE
+	numina = TRUE
 
 /datum/action/truefaith_action/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
 	icon_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
@@ -139,7 +145,7 @@
 	if(!ishuman(target))
 		return FALSE
 
-	if(!iskindred(target) && !iswerewolf(target))
+	if(!iskindred(target) && !isgarou(target))
 		to_chat(owner, span_warning("[target] is unaffected by your gesture."))
 		return FALSE
 
@@ -502,7 +508,7 @@
 
 	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dominate", -MUTATIONS_LAYER)
 	presence_overlay.pixel_z = 1
-	if(!iskindred(sinner) && !iswerewolf(sinner))
+	if(!iskindred(sinner) && !isgarou(sinner))
 		to_chat(owner, span_warning("[sinner] is unaffected by your power."))
 		return
 	if(iskindred(sinner) && (sinner.morality_path?.alignment == MORALITY_HUMANITY) && (sinner.morality_path?.score >= 8))

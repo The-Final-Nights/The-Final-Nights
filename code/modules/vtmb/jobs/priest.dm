@@ -39,7 +39,8 @@
 	back = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/creditcard=1)
 
-/datum/outfit/job/priest/pre_equip(mob/living/carbon/human/H)
+// TFN EDIT - With the addition of the NUMINA system, this is obsolete. Old TF sucked anyway and was unfinished, so nothing of value is lost. //////////////////
+/*/datum/outfit/job/priest/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(!iskindred(H))
 		add_verb(H, /datum/job/vampire/priest/verb/choose_special)
@@ -65,7 +66,7 @@
 					if("True Faith")
 						H.mind.holy_role = HOLY_ROLE_PRIEST
 						H.resistant_to_disciplines = TRUE
-						to_chat(H, "<span class='alertsyndie'>Your faith in God is made of iron. None could shake it, and even in the darkest moments it holds you up.</span>")
+						to_chat(H, "<span class='alertsyndie'>Your faith in God is made of iron. None could shake it, and even in the darkest moments it holds you up.</span>")*/
 
 /obj/effect/landmark/start/priest
 	name = "Priest"
