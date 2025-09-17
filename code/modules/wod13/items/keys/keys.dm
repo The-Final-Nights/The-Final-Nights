@@ -163,7 +163,7 @@
 		"tmr"
 	)
 
-/obj/item/vamp/keys/ministry
+/obj/item/vamp/keys/setite
 	name = "community center keys"
 	accesslocks = list(
 		"setite"

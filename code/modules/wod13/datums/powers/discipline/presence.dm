@@ -330,3 +330,44 @@
 /datum/discipline_power/presence/majesty/deactivate(mob/living/carbon/human/target)
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
+
+//LOVE
+/datum/discipline_power/presence/love
+	name = "Love"
+	desc = "Make someone enamored with you as if in a blood bond."
+
+	level = 6
+
+	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK
+	target_type = TARGET_HUMAN
+	range = 7
+
+	cooldown_length = 15 SECONDS
+	var/presence_succeeded = FALSE
+
+/datum/discipline_power/presence/love/pre_activation_checks(mob/living/target)
+
+	if(!presence_hearing_check(owner, target))
+		return FALSE
+
+	presence_succeeded = presence_check(owner, target, base_difficulty = 7)
+	if(presence_succeeded)
+		return TRUE
+	else
+		do_cooldown(cooldown_length)
+		return FALSE
+
+/datum/discipline_power/presence/love/activate(mob/living/carbon/human/target)
+	. = ..()
+	if(presence_succeeded)
+		target.remove_overlay(MUTATIONS_LAYER)
+		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
+		presence_overlay.pixel_z = 1
+		target.overlays_standing[MUTATIONS_LAYER] = presence_overlay
+		target.apply_overlay(MUTATIONS_LAYER)
+		target.apply_status_effect(STATUS_EFFECT_INLOVE, owner) //No unbonding here, since it's an entirely unrelated effect.
+		to_chat(owner, span_warning("You've enthralled [target] with your presence, and bonded them to you!"))
+		SEND_SOUND(target, sound('code/modules/wod13/sounds/presence_activate.ogg'))
+	else
+		to_chat(owner, span_warning("[target]'s mind has resisted your attempt to sway!"))
+		to_chat(target, span_warning("An overwhelming aura radiates from [owner], compelling your love… but you steel your heart and turn away from their unnatural allure."))

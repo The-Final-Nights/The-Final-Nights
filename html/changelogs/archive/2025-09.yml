@@ -92,3 +92,78 @@
   - rscadd: additional phrasing to doctor v duty text
   - balance: Rebalances kindred (and kj) role availability in Camarilla controlled
       roles
+2025-09-09:
+  AlmostLikeClockwork:
+  - rscadd: buffs open seal's max lockpicking difficulty
+  Magisterium2022:
+  - rscadd: Added 6th dot abilities for all Disciplines except Thaumaturgy, Vicissitude,
+      Obfuscate, and Auspex.
+  - rscadd: Added support for generations below 7th, and mechanical support for generations
+      below 8th with appropriate max ability dots, etc.
+  - bugfix: Fixed existing bugs with blood quantities gained when feeding vitae, and
+      bonuses from blood boosts.
+  - bugfix: Fixed bug with Blood of Potency Duration being in Deciseconds rather than
+      Hours.
+  - balance: Made Blood Buff last one scene instead of ten seconds.
+  - code_imp: misc code changes
+  SELFHELL:
+  - rscadd: PX249F Machine Gun + Stimulant Autoinjector
+  - balance: Grenades no longer explode when shot inhand.
+  SoreYew:
+  - code_imp: removes "Ministry" as a term from the codebase
+  - refactor: refactors Setite code to reflect disuse of Ministry as a concept
+  chazzyjazzy:
+  - bugfix: removes an exploit where injecting a cigarette with vitae allows you to
+      gain alot of blood.
+2025-09-11:
+  Raptorian1:
+  - rscdel: Removed things
+  - qol: quality of life changes
+  - map: mapping changes
+  TheTrueSilverRat:
+  - rscadd: Added a thing to make Sabbat be incognito in the Crew manifest
+  XeonMations:
+  - map: Fixed a lot of general miscellaneous things on the map.
+  darkincarnate:
+  - rscadd: white heels, different shoes for endron
+  - qol: tower employee timelock removed, garou added to cargo tech
+2025-09-12:
+  FalloutFalcon:
+  - bugfix: grill-able food can now be eaten
+  Knightscholar:
+  - rscadd: Added new emotes that can be done with *Say
+  - rscadd: Added hand kissing to *kiss
+  Kolibri-B:
+  - rscadd: Changes Temporis to be more TTRPG-accurate
+  - balance: Changes Temporis to be more TTRPG-accurate
+  - refactor: Refactors part of Temporis code
+  XeonMations:
+  - bugfix: Fixed paintings not saving at roundend
+  chazzyjazzy:
+  - bugfix: one player can no longer bring the global masquerade from 20 to 0 ending
+      the round.
+  - bugfix: the bloodhunt skull can once again fix breaches from previous rounds
+  - qol: toggleable disciplines now automatically untoggle when entering torpor
+  - bugfix: Blood of Potency is no longer virtually infinite
+  darkincarnate:
+  - rscdel: old endron lab
+  - map: relocated and expanded endron lab. x4 simplemob gimmick cells.
+2025-09-14:
+  SoreYew:
+  - refactor: Makes Sabbat Base an Interior Space
+  - qol: Adds to the Diablerist quirk text.
+  chazzyjazzy:
+  - balance: Reduces the effects of concussions as well as allows bloodheal to completely
+      cure the concussive effects.
+  - balance: The Sabbat Shovel no longer causes the emote "collapse" which extended
+      the stun from 3 seconds to about 8 seconds, an unintended effect.
+  - bugfix: Simplemob transformations no longer delete your character's languages
+2025-09-15:
+  SoreYew:
+  - map: Adds one ladder to the Malk haven
+  XeonMations:
+  - bugfix: Fixed Daughters of Cacophany being able to force people to say things.
+  dwinters99 & Major00 (Paynt):
+  - rscadd: Eat Food merit
+  - balance: Vampires must now vomit to expel excess reagents if they do not have
+      the Eat Food merit.

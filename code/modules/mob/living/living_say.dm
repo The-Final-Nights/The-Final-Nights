@@ -292,7 +292,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 					EX.total_erp += length_char(message)
 
 	// Recompose message for AI hrefs, language incomprehension.
-	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
+	//message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods) //TFN EDIT, REMOVAL
 
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlighting = speaker == src)
 	return message

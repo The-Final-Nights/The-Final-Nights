@@ -41,8 +41,7 @@
 	for (var/i in 1 to discipline_number)
 		disciplines_to_give += client?.prefs.discipline_types[i]
 	childe.create_disciplines(FALSE, disciplines_to_give)
-	// TODO: Rework the max blood pool calculations.
-	childe.maxbloodpool = 10+((13-min(13, childe.generation))*3)
+	childe.calculate_max_bloodpool()
 	childe.morality_path = morality_path
 	childe.clan.is_enlightened = clan.is_enlightened
 
