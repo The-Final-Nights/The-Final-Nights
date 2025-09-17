@@ -358,6 +358,8 @@
 	. = ..()
 	var/mob/living/carbon/human/living = user
 	if(iskindred(user) || iscathayan(user))
+		var/obj/item/organ/stomach/vampire/stummy = user.getorganslot(ORGAN_SLOT_STOMACH)
+		stummy.capacity = 0
 		living.vomit(force = TRUE, blood = TRUE)
 	else
 		living.vomit(force = TRUE)
