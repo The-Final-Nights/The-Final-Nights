@@ -63,7 +63,6 @@
 			if("Holy Presence") //Absolute zealots
 				H.equip_to_slot_or_del(new /obj/item/clothing/suit/vampire/vest/army(H), ITEM_SLOT_OCLOTHING)
 				H.put_in_r_hand(new /obj/item/melee/vampirearms/chainsaw(H))
-				H.set_numina(null)
 				var/datum/discipline/discipline = new /datum/discipline/numina/true_faith(4)
 				H.set_numina(NUMINA_FAITH)
 				H.give_discipline(discipline)
