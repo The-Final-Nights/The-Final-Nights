@@ -156,7 +156,7 @@
 	owner.beastmaster |= bat
 	bat.beastmaster_owner = owner
 
-//RAT SHAPESHIFT
+//'FLYING' RAT (BAT) SHAPESHIFT
 /obj/effect/proc_holder/spell/targeted/shapeshift/animalism
 	name = "Animalism Form"
 	desc = "Take on the shape a bat."
@@ -166,10 +166,11 @@
 	die_with_shapeshifted_form = FALSE
 	shapeshift_type = /mob/living/simple_animal/hostile/beastmaster/rat/flying
 
+//SKITTER - Bat Shapeshift
 /datum/discipline_power/animalism/rat_shapeshift
 	name = "Skitter"
 	desc = "Become one of the bats that fly above the city."
-
+	level = 5
 	check_flags = DISC_CHECK_IMMOBILE | DISC_CHECK_CAPABLE | DISC_CHECK_LYING
 
 	violates_masquerade = TRUE

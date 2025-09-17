@@ -56,6 +56,8 @@
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
+	if(iskindred(C))
+		return FALSE
 	. = list()
 	var/turf/T = get_turf(C)
 	C.add_splatter_floor(T)

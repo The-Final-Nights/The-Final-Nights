@@ -27,6 +27,7 @@ GLOBAL_LIST_INIT(megacarp_last_names, world.file2list("strings/names/megacarp2.t
 GLOBAL_LIST_INIT(bahari_quotes, world.file2list("strings/quotes/bahari.txt"))
 GLOBAL_LIST_INIT(noddist_quotes, world.file2list("strings/quotes/noddist.txt"))
 GLOBAL_LIST_INIT(quran_quotes, world.file2list("strings/quotes/islam.txt"))
+GLOBAL_LIST_INIT(torah_quotes, world.file2list("strings/quotes/judaism.txt"))
 
 GLOBAL_LIST_INIT(verbs, world.file2list("strings/names/verbs.txt"))
 GLOBAL_LIST_INIT(ing_verbs, world.file2list("strings/names/ing_verbs.txt"))
