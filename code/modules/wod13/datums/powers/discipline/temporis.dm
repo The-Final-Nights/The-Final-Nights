@@ -34,9 +34,9 @@
 
 /datum/discipline_power/temporis/hourglass_of_the_mind/activate()
 	. = ..()
-	//Display time
-	to_chat(owner, span_notice("<b>[SScity_time.timeofnight]</b>"))
-	//Check range for targets with Temporis and display them, if any exist
+	to_chat(owner, span_notice("<b>[SScity_time.timeofnight]</b>")) // Display time
+
+	// Check range for targets with Temporis and display them, if any exist
 	var/list/targets = list()
 	for(var/mob/living/carbon/human/target in view(range, owner))
 		if(target == owner)
@@ -75,7 +75,7 @@
 
 /datum/discipline_power/temporis/recurring_contemplation/activate(mob/living/target)
 	. = ..()
-	//Roll for degree of success, mentality + social vs mentality in place of manipulation + occult vs willpower
+	// Roll for degree of success, mentality + social vs mentality in place of manipulation + occult vs willpower
 	var/mypower = owner.get_total_mentality() + owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
 	var/rollsuccess = SSroll.storyteller_roll(mypower, difficulty = theirpower, mobs_to_show_output = owner, numerical = TRUE)
@@ -107,14 +107,15 @@
 	// Variables for speed value modifier & dynamic duration
 	var/datum/movespeed_modifier/temporis3/active_mod
 	var/discduration
-	var/mob/living/affected_mob // Track which mob is affected
+	// Variable for affected mob
+	var/mob/living/affected_mob
 
 /datum/discipline_power/temporis/leaden_moment/activate(mob/living/target)
 	. = ..()
 	if(!.)
 		return FALSE
 
-	//Roll for degree of success, mentality + social in place of intelligence + occult
+	// Roll for degree of success, mentality + social in place of intelligence + occult
 	var/dice = owner.get_total_mentality() + owner.get_total_social()
 	var/success = SSroll.storyteller_roll(dice, difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/trueroll = abs(success)
@@ -123,7 +124,7 @@
 	discduration = CEILING(trueroll/2,1) TURNS // Discipline duration, 1 turn per 2 successes, rounded up
 	var/slowdown = 1 + CEILING(trueroll/2,1) // Half movement & action speed at 1 success, scaling per 2 successes after (1/3 at 3, 1/4 at 5, etc)
 
-	//Determine targets, start timers
+	// Determine targets, start timers
 	if(success > 0)
 		affected_mob = target
 		to_chat(target, span_userdanger("<b>Time seems to slow to a crawl around you...</b>"))
@@ -142,7 +143,7 @@
 
 /datum/discipline_power/temporis/leaden_moment/deactivate()
 	. = ..()
-	//Remove modifiers from affected mob
+	// Remove modifiers from affected mob
 	if(active_mod && affected_mob)
 		affected_mob.remove_movespeed_modifier(active_mod, TRUE)
 		affected_mob.next_move_modifier /= active_mod.multiplicative_slowdown
