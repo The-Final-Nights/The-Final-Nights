@@ -6,3 +6,4 @@
 	numina_disciplines = list(
 		/datum/discipline/numina/true_faith,
 	)
+	whitelisted = TRUE
