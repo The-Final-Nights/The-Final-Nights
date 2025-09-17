@@ -5162,14 +5162,6 @@
 	dir = 8;
 	color = "#636363"
 	},
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f3)
 "bpq" = (
@@ -6392,8 +6384,6 @@
 	pixel_x = 32
 	},
 /obj/item/ammo_box/magazine/vampthompson,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
 "bEc" = (
@@ -9592,8 +9582,6 @@
 	pixel_y = 32
 	},
 /obj/structure/closet/crate/coffin,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plasteel/dark,
 /area/vtm/interior/millennium_tower/f3)
 "cto" = (
@@ -14934,12 +14922,6 @@
 /obj/structure/roofstuff/alt2,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
-"dKb" = (
-/obj/structure/table,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/turf/open/floor/carpet/black,
-/area/vtm/interior/nosferatu_office)
 "dKi" = (
 /obj/effect/decal/bordur,
 /obj/effect/decal/graffiti/large,
@@ -17444,8 +17426,6 @@
 	dir = 6;
 	color = "#636363"
 	},
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/millennium_tower/f3)
 "eqR" = (
@@ -18386,8 +18366,6 @@
 /area/vtm/interior/cog/caern)
 "eCK" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 4
 	},
@@ -106179,7 +106157,7 @@ iGp
 nOu
 cnu
 cZn
-dKb
+doU
 gxR
 jad
 wxO

@@ -1212,12 +1212,6 @@
 /obj/structure/closet/crate/freezer/blood{
 	name = "blue blood freezer"
 	},
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
 "Of" = (

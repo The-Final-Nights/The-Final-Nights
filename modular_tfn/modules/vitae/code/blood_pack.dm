@@ -122,16 +122,6 @@
 /obj/item/reagent_containers/blood/ab_minus
 	blood_type = "AB-"
 
-/obj/item/reagent_containers/blood/elite
-	name = "\improper elite blood pack (full)"
-	amount_of_bloodpoints = 4
-	blood_type = null
-
-/obj/item/reagent_containers/blood/elite/Initialize(mapload)
-	if(mapload)
-		blood_type = random_blood_type()
-	return ..()
-
 /obj/item/reagent_containers/blood/vitae
 	name = "\improper vampire vitae pack (full)"
 	amount_of_bloodpoints = 4
