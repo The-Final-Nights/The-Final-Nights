@@ -168,6 +168,9 @@
   - balance: Vampires must now vomit to expel excess reagents if they do not have
       the Eat Food merit.
 2025-09-17:
+  ATGiltspire:
+  - code_imp: Added Painted City tribes to Amberglade Allowed Tribes, added Amberglade
+      tribes to Painted City Tribes
   Marshmellow105:
   - rscadd: a car for the NPS with a yellow lightbar
   SoreYew:
