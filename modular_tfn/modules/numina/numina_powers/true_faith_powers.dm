@@ -14,14 +14,10 @@
 
 /datum/discipline/numina/true_faith/post_gain()
 	. = ..()
-	if(level == 1 || level == 2)
+	if(level >= 1)
 		var/datum/action/truefaith_action/blessing/blessing = new()
 		blessing.Grant(owner)
-	if(level >= 1)
 		owner.mind.holy_role = HOLY_ROLE_PRIEST
-	if(level >= 3)
-		var/datum/action/truefaith_action/greater_blessing/greater_blessing = new()
-		greater_blessing.Grant(owner)
 	if(level >= 4)
 		var/datum/action/truefaith_action/miracle/miracle = new()
 		miracle.Grant(owner)
@@ -60,26 +56,43 @@
 	allowed_to_proceed = TRUE
 
 /datum/action/truefaith_action/blessing
-	name = "Blessing"
-	desc = "Call upon the powers that be to bless an object of holy significance."
-	button_icon_state = "bloodshield"
+	name = "Sanctify"
+	desc = "Call upon the powers that be to temporarily empower an object of holy significance."
+	cool_down = 1 MINUTES
+	button_icon_state = "blessing"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
 /datum/action/truefaith_action/blessing/Trigger(trigger_flags)
 	. = ..()
+	var/hand_object
 	var/mob/living/carbon/human/H = owner
-	playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE) //This is all TODO
+	var/obj/item/owner_held_item = H.get_active_held_item()
+	if(!is_type_in_typecache(owner_held_item, GLOB.TFNITEMS_HOLY))
+		to_chat(owner, span_warning("You require a holy object to channel your prayer!"))
+		return FALSE
+	switch(owner_held_item.type)
+		if(/obj/item/clothing/neck/vampire/prayerbeads)
+			hand_object = new /obj/item/blessed_object/blessed_prayer_beads(H.drop_location())
+			qdel(owner_held_item)
+			H.put_in_active_hand(hand_object)
+		if(/obj/item/storage/book/bible)
+			hand_object = new /obj/item/blessed_object/blessed_bible(H.drop_location())
+			qdel(owner_held_item)
+			H.put_in_active_hand(hand_object)
+		if(/obj/item/vampirebook/quran, /obj/item/quran)
+			hand_object = new /obj/item/blessed_object/blessed_quran(H.drop_location())
+			qdel(owner_held_item)
+			H.put_in_active_hand(hand_object)
+		if(/obj/item/card/id/hunter)
+			hand_object = new /obj/item/blessed_object/blessed_cross_necklace(H.drop_location())
+			qdel(owner_held_item)
+			H.put_in_active_hand(hand_object)
+		else
+			to_chat(owner, span_notice("Nothing happens."))
+			return
 
-/datum/action/truefaith_action/greater_blessing
-	name = "Sanctify"
-	desc = "Call upon the powers that be to empower an object of holy significance."
-	button_icon_state = "bloodshield"
-	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
-
-/datum/action/truefaith_action/greater_blessing/Trigger(trigger_flags)
-	. = ..()
-	var/mob/living/carbon/human/H = owner
-	playsound(H.loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE) //This is all TODO
+	playsound(H.loc, 'modular_tfn/modules/numina/sound/truefaith_power_small.ogg', 50, FALSE)
+	to_chat(owner, span_slime("[owner_held_item] begins to glow softly..."))
 
 /datum/action/truefaith_action/miracle
 	name = "Miracle"
@@ -87,7 +100,7 @@
 	button_icon_state = "faithheal"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
-	cool_down = 60 SECONDS
+	cool_down = 2 MINUTES
 
 /datum/action/truefaith_action/miracle/Trigger(trigger_flags)
 	. = ..()
@@ -137,7 +150,8 @@
 		var/mob/living/carbon/human/human_target = target
 		if(human_target.clan?.name == CLAN_GARGOYLE)
 			theirpower -= 2
-
+		if((human_target.morality_path?.alignment != MORALITY_HUMANITY) && (human_target.morality_path?.score >= 4))
+			theirpower -= round(human_target.morality_path?.score / 2)
 
 	return (mypower > theirpower)
 
@@ -146,7 +160,7 @@
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire) && (vampire.clan?.name == CLAN_BAALI)) //Per the Baali curse, Ward will always take effect and be much more punishing.
 		return TRUE
-	if(iskindred(target) && (!target.client?.prefs?.is_enlightened) && (vampire.morality_path?.score >= 8))
+	if(iskindred(target) && (vampire.morality_path?.alignment == MORALITY_HUMANITY) && (vampire.morality_path?.score >= 8))
 		to_chat(owner, span_warning("[target] is unaffected by your gesture."))
 		do_cooldown(cooldown_length)
 		return FALSE
@@ -260,6 +274,7 @@
 		sixth_sense_auspice_assessment(target, owner)
 	if(iskindred(target))
 		sixth_sense_clan_assessment(target, owner)
+		sixth_sense_humanity_assessment(target, owner)
 	if(isghoul(target))
 		to_chat(owner, span_notice("They occasionally twitch and shiver, hungry for something."))
 	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
@@ -330,6 +345,51 @@
 
 			else
 				to_chat(owner, span_notice("[target] doesn't seem all that special."))
+
+/datum/discipline_power/true_faith/sixth_sense/proc/sixth_sense_humanity_assessment(target, owner)
+	if(!owner || !target)
+		return
+	var/mob/living/carbon/human/vampire = target
+	if(iskindred(vampire))
+		if(vampire.morality_path?.alignment == MORALITY_HUMANITY)
+			switch(vampire.morality_path?.score)
+				if(0)
+					to_chat(owner, span_ghostalert("Whoever they were is no longer here."))
+					return
+				if(1 to 3)
+					to_chat(owner, span_cult("[target] is possessed by something terrible."))
+					return
+				if(4)
+					to_chat(owner, span_warning("[target] has fallen from grace."))
+					return
+				if(5 to 9)
+					return
+				if(10)
+					to_chat(owner, span_greenteamradio("[target] may yet be saved."))
+					return
+				else
+					return
+		if(vampire.morality_path?.alignment != MORALITY_HUMANITY)
+			switch(vampire.morality_path?.score)
+				if(0)
+					to_chat(owner, span_ghostalert("Whoever they were is no longer here."))
+					return
+				if(1 to 3)
+					to_chat(owner, span_alertwarning("[target] teeters on the brink of self destruction."))
+					return
+				if(4)
+					to_chat(owner, span_warning("[target] has lost their way."))
+					return
+				if(5 to 9)
+					to_chat(owner, span_cult("[target] is possessed by something terrible."))
+					return
+				if(10)
+					to_chat(owner, span_phobia("[target] is a shell puppeted by the demonic."))
+					return
+				else
+					return
+		else
+			return
 
 /datum/discipline_power/true_faith/sixth_sense/proc/sixth_sense_auspice_assessment(target, owner)
 	if(!owner || !target)
@@ -445,7 +505,7 @@
 	if(!iskindred(sinner) && !iswerewolf(sinner))
 		to_chat(owner, span_warning("[sinner] is unaffected by your power."))
 		return
-	if(iskindred(sinner) && (!sinner.client?.prefs?.is_enlightened) && (sinner.morality_path?.score >= 8))
+	if(iskindred(sinner) && (sinner.morality_path?.alignment == MORALITY_HUMANITY) && (sinner.morality_path?.score >= 8))
 		to_chat(owner, span_warning("[sinner] is unaffected by your power."))
 		return
 
@@ -455,6 +515,8 @@
 	if(ishuman(sinner))
 		if(sinner.clan?.name == CLAN_GARGOYLE)
 			theirpower -= 2
+		if((sinner.morality_path?.alignment != MORALITY_HUMANITY) && (sinner.morality_path?.score >= 4))
+			theirpower -= round(sinner.morality_path?.score / 2)
 
 	if((mypower <= theirpower) && (sinner.clan?.name != CLAN_BAALI))
 		to_chat(owner, span_warning("[sinner] resists your influence!"))
@@ -515,12 +577,22 @@
 	. = ..()
 	if(target == user && isliving(target))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
-	var/mob/living/M = target
+	var/mob/living/M = target //We still want the healing effects to affect animals and such.
+	var/mob/living/carbon/human/vampire = target
+	if(iskindred(vampire) && ((vampire.morality_path?.alignment != MORALITY_HUMANITY) || (vampire.morality_path?.score <= 8)))
+		vampire.do_jitter_animation(10 SECONDS)
+		vampire.apply_damage(10, BURN, user.zone_selected)
+		vampire.apply_damage(25, CLONE, user.zone_selected)
+		vampire.flash_act()
+		vampire.adjust_fire_stacks(1)
+		vampire.IgniteMob()
+		playsound(M, 'modular_tfn/modules/numina/sound/skin_sizzle.ogg', 25, TRUE, 3)
+		return
 	M.adjustBruteLoss(-10, TRUE)
 	M.adjustFireLoss(-10, TRUE)
 	M.adjustToxLoss(-25, TRUE)
 	M.adjustOxyLoss(-25, TRUE)
 	M.adjustCloneLoss(-25, TRUE)
-	if(ishuman(M))
+	if((ishuman(M)) && (!iskindred(M)))
 		M.reagents.add_reagent(/datum/reagent/determination, 10)
 	return
