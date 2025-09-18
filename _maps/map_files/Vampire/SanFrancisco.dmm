@@ -20305,41 +20305,6 @@
 	},
 /turf/open/floor/plating/industrial,
 /area/vtm/clinic/haven)
-"eUB" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table,
-/obj/item/gun/ballistic/automatic/vampire/ak74{
-	pixel_y = 8
-	},
-/obj/item/gun/ballistic/automatic/vampire/ak74{
-	pixel_y = -1;
-	pixel_x = -8
-	},
-/obj/item/ammo_box/magazine/vamp545{
-	pixel_y = 4;
-	pixel_x = 4
-	},
-/obj/item/ammo_box/magazine/vamp545{
-	pixel_y = 4;
-	pixel_x = 4
-	},
-/obj/item/ammo_box/magazine/vamp545,
-/obj/item/ammo_box/magazine/vamp545,
-/obj/effect/decal/bordur,
-/obj/effect/decal/graffiti,
-/obj/item/gun/ballistic/automatic/vampire/ak74{
-	pixel_y = -1;
-	pixel_x = -8
-	},
-/obj/item/ammo_box/magazine/vamp545,
-/obj/item/ammo_box/magazine/vamp545,
-/obj/item/ammo_box/magazine/vamp545,
-/turf/open/space/basic,
-/area/vtm)
 "eUG" = (
 /obj/effect/decal/wallpaper/paper/low,
 /turf/closed/wall/vampwall/junk/alt,
@@ -59947,32 +59912,6 @@
 /obj/effect/decal/wallpaper/paper/green/low,
 /turf/closed/wall/vampwall/junk,
 /area/vtm/sewer/nosferatu_warren)
-"ocE" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table,
-/obj/item/gun/ballistic/shotgun/vampire,
-/obj/item/ammo_box/vampire/c12g/buck{
-	pixel_y = 16;
-	pixel_x = -7
-	},
-/obj/item/ammo_box/vampire/c12g/buck{
-	pixel_y = 16;
-	pixel_x = 6
-	},
-/obj/item/gun/ballistic/shotgun/vampire{
-	pixel_y = 6
-	},
-/obj/machinery/light{
-	dir = 4;
-	light_color = "#6488EA"
-	},
-/obj/item/gun/ballistic/shotgun/vampire,
-/turf/open/space/basic,
-/area/vtm)
 "ocF" = (
 /obj/machinery/light{
 	dir = 8;
@@ -93607,26 +93546,6 @@
 /obj/item/vamp/keys/taxi,
 /turf/open/floor/plating/asphalt,
 /area/vtm/cabdepot)
-"wjO" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table,
-/obj/item/melee/vampirearms/knife/switchblade,
-/obj/item/melee/vampirearms/knife/switchblade{
-	pixel_y = 1;
-	pixel_x = -5
-	},
-/obj/item/melee/vampirearms/knife/switchblade{
-	pixel_y = 4;
-	pixel_x = 2
-	},
-/obj/item/melee/vampirearms/machete,
-/obj/item/melee/vampirearms/machete,
-/turf/open/space/basic,
-/area/vtm)
 "wjP" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -140847,7 +140766,7 @@ xfw
 xfw
 xfw
 xfw
-eUB
+xfw
 xfw
 xfw
 xfw
@@ -141256,8 +141175,8 @@ xfw
 xfw
 xfw
 xfw
-ocE
-wjO
+xfw
+xfw
 xfw
 xfw
 xfw
