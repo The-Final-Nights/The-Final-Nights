@@ -3818,6 +3818,7 @@
 #include "modular_tfn\modules\morality\morality_component.dm"
 #include "modular_tfn\modules\numina\numina_setup.dm"
 #include "modular_tfn\modules\numina\items\true_faith_items\true_faith_items.dm"
+#include "modular_tfn\modules\numina\numina_powers\__numina_actions.dm"
 #include "modular_tfn\modules\numina\numina_powers\true_faith_powers.dm"
 #include "modular_tfn\modules\numina\numina_types\mundane.dm"
 #include "modular_tfn\modules\numina\numina_types\numina_base.dm"

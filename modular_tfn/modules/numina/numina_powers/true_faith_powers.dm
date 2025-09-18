@@ -20,11 +20,11 @@
 /datum/discipline/numina/true_faith/post_gain()
 	. = ..()
 	if(level >= 1)
-		var/datum/action/truefaith_action/blessing/blessing = new()
+		var/datum/action/numina/truefaith_action/blessing/blessing = new()
 		blessing.Grant(owner)
 		owner.mind.holy_role = HOLY_ROLE_PRIEST
 	if(level >= 4)
-		var/datum/action/truefaith_action/miracle/miracle = new()
+		var/datum/action/numina/truefaith_action/miracle/miracle = new()
 		miracle.Grant(owner)
 		owner.resistant_to_disciplines = TRUE
 	if(level >= 5)
@@ -32,23 +32,11 @@
 		owner.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
 		owner.update_body()
 
-/datum/action/truefaith_action
+/datum/action/numina/truefaith_action
 	name = "truefaith action"
 	desc = "truefaith desc."
 
-	icon_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
-	button_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
-
-	var/cool_down = 0
-	var/allowed_to_proceed = FALSE
-	numina = TRUE
-
-/datum/action/truefaith_action/ApplyIcon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	icon_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
-	button_icon = 'modular_tfn/modules/numina/icons/actions.dmi'
-	. = ..()
-
-/datum/action/truefaith_action/Trigger(trigger_flags)
+/datum/action/numina/truefaith_action/Trigger(trigger_flags)
 	. = ..()
 	var/mob/living/H = owner
 	if(H.stat == DEAD)
@@ -61,14 +49,14 @@
 	cool_down = world.time
 	allowed_to_proceed = TRUE
 
-/datum/action/truefaith_action/blessing
+/datum/action/numina/truefaith_action/blessing
 	name = "Sanctify"
 	desc = "Call upon the powers that be to temporarily empower an object of holy significance."
 	cool_down = 1 MINUTES
 	button_icon_state = "blessing"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
-/datum/action/truefaith_action/blessing/Trigger(trigger_flags)
+/datum/action/numina/truefaith_action/blessing/Trigger(trigger_flags)
 	. = ..()
 	var/hand_object
 	var/mob/living/carbon/human/H = owner
@@ -100,7 +88,7 @@
 	playsound(H.loc, 'modular_tfn/modules/numina/sound/truefaith_power_small.ogg', 50, FALSE)
 	to_chat(owner, span_slime("[owner_held_item] begins to glow softly..."))
 
-/datum/action/truefaith_action/miracle
+/datum/action/numina/truefaith_action/miracle
 	name = "Miracle"
 	desc = "Through faith, give the wounded a push to survive."
 	button_icon_state = "faithheal"
@@ -108,7 +96,7 @@
 
 	cool_down = 2 MINUTES
 
-/datum/action/truefaith_action/miracle/Trigger(trigger_flags)
+/datum/action/numina/truefaith_action/miracle/Trigger(trigger_flags)
 	. = ..()
 	if(allowed_to_proceed && (iscarbon(owner)))
 		var/mob/living/carbon/H = owner
@@ -256,6 +244,7 @@
 /datum/discipline_power/true_faith/sixth_sense
 	name = "Sixth Sense"
 	desc = "Peer past the veneer and see someone for what they truly are."
+	deactivate_sound = null
 
 	target_type = TARGET_HUMAN
 	range = 12
