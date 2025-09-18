@@ -99,7 +99,7 @@
 		// detach from parent chronicle list if present
 		var/datum/chronicle/C = SSroleplay_management.get_chronicle_by_key(chron_key)
 		if (C && islist(C.entries))
-			C.entries -= id
+			//C.entries -= id
 			C.touch()
 		SSroleplay_management.unregister_chronicle_entry(src)
 		qdel(src)

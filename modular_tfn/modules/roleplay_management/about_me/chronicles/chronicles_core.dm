@@ -144,8 +144,6 @@
 		"desc" = desc,
 		"owner_key" = owner_key,
 		"group_id" = group_id,
-		"tags" = islist(tags) ? tags.Copy() : list(),
-		"entries" = islist(entries) ? entries.Copy() : list(),
 		"status" = status,
 		"start_at" = start_at,
 		"end_at" = end_at,

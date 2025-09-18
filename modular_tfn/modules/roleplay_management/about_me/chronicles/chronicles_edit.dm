@@ -17,14 +17,14 @@
 
 /datum/chronicle/proc/add_tag(tag)
 	if (!tag) return
-	if (!(tag in tags)) tags += tag
+	//if (!(tag in tags)) tags += tag
 	touch()
 
 /datum/chronicle/proc/remove_tag(tag)
-	tags -= tag
+	//tags -= tag
 	touch()
 
 /datum/chronicle/proc/remove_entry(memory_id)
 	if (!memory_id) return
-	entries -= memory_id
+	//entries -= memory_id
 	touch()

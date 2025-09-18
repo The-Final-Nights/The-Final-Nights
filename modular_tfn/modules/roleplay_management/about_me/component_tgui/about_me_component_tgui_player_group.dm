@@ -289,7 +289,7 @@
 	for (var/group_id in R.group_keys)
 		var/datum/group/G = GLOB.groups[group_id]
 		if (!G) continue
-		if (G.gtype == GROUP_TYPE_PARTY && (character_id in G.leaders))
+		if (G.istype(/datum/group/party) && (character_id in G.leaders))
 			to_chat(user, "<span class='alert'>You already lead a party group: [G.name]. You cannot create another.</span>")
 			return src.prompt_manage_groups(user)
 	var/group_name = tgui_input_text(user, "Enter a name for your new party group:", "Create Party Group", encode = FALSE)
@@ -300,7 +300,6 @@
 	var/datum/group/party/G = new /datum/group/party()
 	G.is_public = FALSE
 	G.name = group_name
-	G.gtype = GROUP_TYPE_PARTY
 	G.id = safe_id
 	G.leaders += character_id
 	G.members += character_id
