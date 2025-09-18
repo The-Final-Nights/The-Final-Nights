@@ -42,3 +42,10 @@
 
 /obj/item/vampirebook/quran/read_book(mob/living/carbon/human/user)
 	quote = pick(GLOB.quran_quotes)
+
+/obj/item/vampirebook/torah
+	name = "Sefer Torah"
+	icon_state = "torah"
+
+/obj/item/vampirebook/torah/read_book(mob/living/carbon/human/user)
+	quote = pick(GLOB.torah_quotes)

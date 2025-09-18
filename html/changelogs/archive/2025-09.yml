@@ -167,3 +167,31 @@
   - rscadd: Eat Food merit
   - balance: Vampires must now vomit to expel excess reagents if they do not have
       the Eat Food merit.
+2025-09-17:
+  ATGiltspire:
+  - code_imp: Added Painted City tribes to Amberglade Allowed Tribes, added Amberglade
+      tribes to Painted City Tribes
+  Marshmellow105:
+  - rscadd: a car for the NPS with a yellow lightbar
+  SoreYew:
+  - rscadd: rubbershot and incap to police req
+  - rscadd: General store for goods
+  - rscadd: Camping store for outdoorsmen supplies
+  - rscadd: blade store in the museum for antique weapons
+  - rscadd: music store for instruments
+  - rscadd: PI pills to the clinic requisition
+  - rscadd: new vendors and the pump shotgun(oversight?) to Runtimetown
+  - rscdel: Removes EOD, Army armors from Dealers computer, along with misc goods
+      not related to the new niche as a weapons trafficker
+  - qol: expands bloodline options for Supply Tech and Dealer
+  - qol: changes flavor text for some firearms
+  - balance: buff police budget, nerf Chief's specific budget
+  - balance: Turns the AK74 into a "sport" rifle that is single shot, but much faster.
+  - balance: dealers computer starts off locked
+  - balance: raises the price of exotic ammo, and removes the ability to purchase
+      from the NPC black market
+  - balance: adds melee weapons to camarilla armory, anarch armory
+  - balance: removes the AUG with the exception of it being the Prince's personal
+      weapon
+  XeonMations:
+  - balance: Kindred can no longer spill their chest organs.

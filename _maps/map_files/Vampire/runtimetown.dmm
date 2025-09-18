@@ -13,6 +13,11 @@
 /obj/item/gun/ballistic/automatic/vampire/m1911,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
+"aI" = (
+/obj/structure/table,
+/obj/machinery/mineral/equipment_vendor/fastfood/camping,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/pacificheights)
 "aO" = (
 /obj/machinery/fax/admin/camarilla,
 /turf/open/floor/plating/vampbeach,
@@ -406,6 +411,11 @@
 "nY" = (
 /turf/open/floor/plating/vampcanal,
 /area/vtm/pacificheights)
+"od" = (
+/obj/structure/table,
+/obj/machinery/mineral/equipment_vendor/fastfood/general,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/pacificheights)
 "of" = (
 /obj/item/storage/firstaid/regular,
 /obj/item/storage/firstaid/regular,
@@ -673,6 +683,11 @@
 /obj/item/ammo_box/magazine/vampthompson,
 /obj/item/ammo_box/magazine/vampthompson,
 /obj/item/gun/ballistic/automatic/vampire/thompson,
+/turf/open/floor/plating/rough,
+/area/vtm/pacificheights)
+"xV" = (
+/obj/structure/table,
+/obj/item/gun/ballistic/shotgun/vampire,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
 "xZ" = (
@@ -1020,6 +1035,11 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
+"GP" = (
+/obj/structure/table,
+/obj/machinery/mineral/equipment_vendor/fastfood/antique,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/pacificheights)
 "GS" = (
 /obj/structure/vampdoor/police,
 /turf/open/floor/plating/concrete,
@@ -1070,6 +1090,10 @@
 	},
 /turf/open/floor/plating/vampdirt/rails,
 /area/vtm/supply)
+"IH" = (
+/obj/structure/table,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/pacificheights)
 "IO" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -1370,6 +1394,10 @@
 /obj/vampire_computer/prince,
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
+"Ta" = (
+/mob/living/carbon/human/npc/shop,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/pacificheights)
 "Tb" = (
 /obj/machinery/iv_drip,
 /turf/open/floor/plating/rough,
@@ -1527,6 +1555,16 @@
 	pixel_y = 2
 	},
 /turf/open/floor/plating/rough,
+/area/vtm/pacificheights)
+"WC" = (
+/obj/structure/table,
+/obj/machinery/mineral/equipment_vendor/fastfood/library,
+/turf/open/floor/plating/vampbeach,
+/area/vtm/pacificheights)
+"WL" = (
+/obj/structure/table,
+/obj/machinery/mineral/equipment_vendor/fastfood/music,
+/turf/open/floor/plating/vampbeach,
 /area/vtm/pacificheights)
 "Xf" = (
 /obj/structure/table,
@@ -1908,7 +1946,7 @@ Ca
 xU
 OD
 Of
-hu
+xV
 PO
 Xz
 MS
@@ -1941,7 +1979,7 @@ PO
 PO
 PO
 PO
-PO
+hu
 PO
 PO
 PO
@@ -3026,12 +3064,12 @@ kS
 zx
 zx
 kS
-NR
-NR
-NR
-NR
-NR
-NR
+GP
+aI
+od
+WL
+WC
+IH
 NR
 NR
 NR
@@ -3060,12 +3098,12 @@ yt
 nh
 nh
 kS
-NR
-NR
-NR
-NR
-NR
-NR
+Ta
+Ta
+Ta
+Ta
+Ta
+Ta
 NR
 NR
 NR
