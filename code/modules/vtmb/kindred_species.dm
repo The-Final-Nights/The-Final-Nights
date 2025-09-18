@@ -458,7 +458,7 @@
 
 		for (var/datum/chi_discipline/discipline in adding_disciplines)
 			give_chi_discipline(discipline)
-	//TFN EDIT - INITIALIZE NUMINA DISCIPLINES
+//TFN EDIT - INITIALIZE NUMINA DISCIPLINES /////////////////////////////////////
 	if((dna.species.id == "human"))
 		var/list/datum/discipline/adding_disciplines = list()
 
@@ -483,6 +483,7 @@
 
 		for (var/datum/discipline/discipline in adding_disciplines)
 			give_numina(discipline)
+//TFN EDIT - END BLOCK /////////////////////////////////////////////////////////
 
 /**
  * Creates an action button and applies post_gain effects of the given Discipline.
@@ -504,6 +505,7 @@
 		action.Grant(src)
 	discipline.post_gain(src)
 
+//TFN EDIT - INITIALIZE NUMINA DISCIPLINES /////////////////////////////////////
 /mob/living/carbon/human/proc/give_numina(datum/discipline/discipline)
 	if (discipline.level > 0)
 		var/datum/action/discipline/action = new(discipline)
@@ -511,7 +513,7 @@
 	var/datum/species/human/species = dna.species
 	species.disciplines += discipline
 
-//TFN EDIT -- END
+//TFN EDIT - END BLOCK /////////////////////////////////////////////////////////
 
 /datum/species/proc/get_discipline()
 	return

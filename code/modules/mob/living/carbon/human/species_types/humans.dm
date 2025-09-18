@@ -61,12 +61,14 @@
 		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
 		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
 		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
+//TFN EDIT - INITIALIZE NUMINA POWER INFO ///////////////////////////////////////
 		if(host.hud_used)
 			dat += "<b>Known arts:</b><BR>"
 			for(var/datum/action/discipline/D in host.actions)
 				if(D)
 					if(D.discipline)
 						dat += "[D.discipline.name] [D.discipline.level] - [D.discipline.desc]<BR>"
+//TFN EDIT - END BLOCK /////////////////////////////////////////////////////////
 		if(host.Myself?.Friend?.owner)
 			dat += "<b>My friend's name is [host.Myself.Friend.owner.true_real_name].</b><BR>"
 			if(host.Myself.Friend.phone_number)

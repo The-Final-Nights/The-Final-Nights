@@ -832,9 +832,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["glory"]			, glory)
 	WRITE_FILE(S["wisdom"]			, wisdom)
 	WRITE_FILE(S["clan"]			, clan.type)
-//TFN EDIT - NUMINA
-	WRITE_FILE(S["numina"]			, numina.type)
-//TFN EDIT - NUMINA
+	WRITE_FILE(S["numina"]			, numina.type) //TFN EDIT - NUMINA
 	WRITE_FILE(S["generation"]			, generation)
 	WRITE_FILE(S["generation_bonus"]			, generation_bonus)
 	WRITE_FILE(S["masquerade_score"] , masquerade_score)
