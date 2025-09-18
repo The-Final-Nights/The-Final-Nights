@@ -10959,6 +10959,12 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/techshop)
+"cHs" = (
+/obj/vampire_car/police/ranger{
+	dir = 1
+	},
+/turf/open/floor/plating/vampdirt,
+/area/vtm/forest)
 "cHw" = (
 /obj/machinery/washing_machine,
 /turf/open/floor/plating/vampwood,
@@ -147610,7 +147616,7 @@ daD
 mLA
 sWS
 daD
-daD
+cHs
 daD
 yht
 gqJ
