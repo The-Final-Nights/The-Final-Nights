@@ -2805,6 +2805,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						player_experience -= cost
 						experience_used_on_character += cost
 						discipline_levels[i] = min(max_discipline_level, max(1, discipline_levels[i] + 1))
+					//TFN EDIT ADDITION START - Numina System
 					if(pref_species.id == "human")
 						var/i = text2num(href_list["upgradediscipline"])
 
@@ -2821,6 +2822,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						player_experience -= cost
 						experience_used_on_character += cost
 						discipline_levels[i] = min(max_discipline_level, max(1, discipline_levels[i] + 1))
+					//TFN EDIT ADDITION END - Numina System
 
 					if(pref_species.id == "kuei-jin")
 						var/a = text2num(href_list["upgradechidiscipline"])
