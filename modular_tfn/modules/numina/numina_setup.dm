@@ -1,13 +1,3 @@
-/datum/action/
-	var/numina = FALSE
-
-/datum/action/discipline/numina
-	check_flags = NONE
-	button_icon = 'modular_tfn/modules/numina/icons/numina.dmi'
-	background_icon_state = "default"
-	icon_icon = 'modular_tfn/modules/numina/icons/numina.dmi'
-	button_icon_state = "default"
-
 /datum/discipline/numina
 	name = "Test Numina"
 	desc = "Test Numina. If you've seen this something has gone wrong."
@@ -50,6 +40,9 @@
 	background_icon_state = "default"
 	icon_icon = 'modular_tfn/modules/numina/icons/numina.dmi'
 	button_icon_state = "default"
+
+/datum/action/
+	var/numina = FALSE
 
 /datum/action/discipline/numina/New(datum/discipline/discipline)
 	. = ..()

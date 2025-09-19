@@ -479,7 +479,6 @@
 	duration_length = 30 SECONDS
 
 	range = 12
-	var/banish_succeed = FALSE
 
 /datum/discipline_power/true_faith/perdition/activate()
 	. = ..()
@@ -504,8 +503,8 @@
 		to_chat(owner, span_warning("[sinner] is unaffected by your power."))
 		return
 
-	var/mypower = SSroll.storyteller_roll(owner.get_total_mentality(), difficulty = 4, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(sinner.get_total_mentality(), difficulty = 3, mobs_to_show_output = sinner, numerical = TRUE)
+	var/mypower = SSroll.storyteller_roll(owner.get_total_mentality(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(sinner.get_total_mentality(), difficulty = 6, mobs_to_show_output = sinner, numerical = TRUE)
 
 	if(ishuman(sinner))
 		if(sinner.clan?.name == CLAN_GARGOYLE)
