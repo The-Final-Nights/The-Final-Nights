@@ -39,7 +39,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/see_rc_emotes = TRUE
 	//Клан вампиров
 	var/datum/vampire_clan/clan
-	var/datum/numina_pattern/numina
+	var/datum/numina_pattern/numina // TFN EDIT - Numina System
 	var/datum/morality/morality_path = new /datum/morality/humanity()
 	// Custom Keybindings
 	var/list/key_bindings = list()
@@ -286,7 +286,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	glory = initial(glory)
 	wisdom = initial(wisdom)
 	clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
-	numina = GLOB.numina_clans[/datum/numina_pattern/mundane]
+	numina = GLOB.numina_clans[/datum/numina_pattern/mundane] // TFN EDIT - Numina System
 	qdel(morality_path)
 	morality_path = new /datum/morality/humanity()
 	discipline_types = list()
@@ -777,6 +777,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						qdel(discipline)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
+			//TFN EDIT - NUMINA SYSTEM
 			if(pref_species.name == "Human")
 				dat += "<h2>[make_font_cool("GIFTS")]</h2>"
 				dat += "<b>Numina:</b> <a href='byond://?_src_=prefs;preference=numina;task=input'>[numina.name]</a><BR>"
@@ -804,6 +805,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "<BR>"
 					dat += "-[discipline.desc]<BR>"
 					qdel(discipline)
+					//TFN EDIT - NUMINA SYSTEM
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
@@ -2805,6 +2807,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						player_experience -= cost
 						experience_used_on_character += cost
 						discipline_levels[i] = min(max_discipline_level, max(1, discipline_levels[i] + 1))
+					//TFN EDIT ADDITION START - Numina System
 					if(pref_species.id == "human")
 						var/i = text2num(href_list["upgradediscipline"])
 
@@ -2821,6 +2824,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						player_experience -= cost
 						experience_used_on_character += cost
 						discipline_levels[i] = min(max_discipline_level, max(1, discipline_levels[i] + 1))
+					//TFN EDIT ADDITION END - Numina System
 
 					if(pref_species.id == "kuei-jin")
 						var/a = text2num(href_list["upgradechidiscipline"])
