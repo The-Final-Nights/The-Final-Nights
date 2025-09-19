@@ -36,19 +36,6 @@
 	name = "truefaith action"
 	desc = "truefaith desc."
 
-/datum/action/numina/truefaith_action/Trigger(trigger_flags)
-	. = ..()
-	var/mob/living/H = owner
-	if(H.stat == DEAD)
-		allowed_to_proceed = FALSE
-		return
-	if(cool_down+150 >= world.time)
-		allowed_to_proceed = FALSE
-		to_chat(owner, span_warning("You aren't ready to cast [name] yet!"))
-		return
-	cool_down = world.time
-	allowed_to_proceed = TRUE
-
 /datum/action/numina/truefaith_action/blessing
 	name = "Sanctify"
 	desc = "Call upon the powers that be to temporarily empower an object of holy significance."
@@ -56,8 +43,13 @@
 	button_icon_state = "blessing"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
+	COOLDOWN_DECLARE(blessing)
+
 /datum/action/numina/truefaith_action/blessing/Trigger(trigger_flags)
 	. = ..()
+	if (!COOLDOWN_FINISHED(src, blessing))
+		to_chat(owner, "<span class='warning'>You can't empower anything for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, blessing))]!</span>")
+		return
 	var/hand_object
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/owner_held_item = H.get_active_held_item()
@@ -87,6 +79,7 @@
 
 	playsound(H.loc, 'modular_tfn/modules/numina/sound/truefaith_power_small.ogg', 50, FALSE)
 	to_chat(owner, span_slime("[owner_held_item] begins to glow softly..."))
+	COOLDOWN_START(src, blessing, cool_down)
 
 /datum/action/numina/truefaith_action/miracle
 	name = "Miracle"
@@ -95,12 +88,17 @@
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
 	cool_down = 2 MINUTES
+	COOLDOWN_DECLARE(miracle)
 
 /datum/action/numina/truefaith_action/miracle/Trigger(trigger_flags)
 	. = ..()
-	if(allowed_to_proceed && (iscarbon(owner)))
+	if (!COOLDOWN_FINISHED(src, miracle))
+		to_chat(owner, "<span class='warning'>You can't perform a miracle for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, miracle))]!</span>")
+		return
+	if(iscarbon(owner))
 		var/mob/living/carbon/H = owner
 		H.put_in_active_hand(new /obj/item/melee/touch_attack/truefaith_heal(H))
+	COOLDOWN_START(src, miracle, cool_down)
 
 ////////////
 /// WARD ///
@@ -118,12 +116,12 @@
 	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK
 	target_type = TARGET_HUMAN
 
-	cooldown_length = 15 SECONDS
+	cooldown_length = 8 SECONDS
 	duration_length = 7 SECONDS
-	range = 12
+	range = 7
 	var/banish_succeed = FALSE
 
-/datum/discipline_power/true_faith/proc/ward_check(mob/living/carbon/human/owner, mob/living/target, base_difficulty = 4, var/banish_succeed = FALSE)
+/datum/discipline_power/true_faith/ward/proc/ward_check(mob/living/carbon/human/owner, mob/living/target, base_difficulty = 4, banish_succeed = FALSE)
 
 	var/owner_held_item = owner.get_active_held_item()
 	if(!is_type_in_typecache(owner_held_item, GLOB.TFNITEMS_HOLY))
@@ -142,8 +140,6 @@
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target
-		if(human_target.clan?.name == CLAN_GARGOYLE)
-			theirpower -= 2
 		if((human_target.morality_path?.alignment != MORALITY_HUMANITY) && (human_target.morality_path?.score >= 4))
 			theirpower -= round(human_target.morality_path?.score / 2)
 
@@ -178,7 +174,7 @@
 		target.apply_overlay(MUTATIONS_LAYER)
 
 		to_chat(owner, span_warning("You've banished [target]!"))
-		to_chat(target, span_userlove("You feel a searing pain!"))
+		to_chat(target, span_userlove("You feel a searing pain. An all-consuming terror courses through your being. You have to get away from here!"))
 
 		var/datum/cb = CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
 		for(var/i in 1 to 30)
@@ -222,7 +218,7 @@
 
 /datum/discipline_power/true_faith/meditate/activate()
 	. = ..()
-	owner.mentality = max(owner.mentality + 4)
+	owner.mentality = owner.mentality += 4
 	owner.remove_overlay(MUTATIONS_LAYER)
 	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 	presence_overlay.pixel_z = 1
@@ -232,7 +228,7 @@
 
 /datum/discipline_power/true_faith/meditate/deactivate()
 	. = ..()
-	owner.mentality = max(owner.mentality - 4)
+	owner.mentality = owner.mentality -= 4
 	owner.remove_overlay(MUTATIONS_LAYER)
 
 
@@ -296,6 +292,9 @@
 			if(CLAN_TZIMISCE)
 				to_chat(owner, span_warning("[target] gives you a horrific, skin-crawling feeling."))
 				return
+			if(CLAN_OLD_TZIMISCE)
+				to_chat(owner, span_warning("[target] fills you with an unearthly dread."))
+				return
 			if(CLAN_GANGREL)
 				to_chat(owner, span_notice("[target] is particularly twitchy."))
 				return
@@ -322,6 +321,9 @@
 			if(CLAN_SALUBRI)
 				to_chat(owner, span_notice("[target] doesn't seem all that special."))
 				return
+			if(CLAN_SALUBRI_WARRIOR)
+				to_chat(owner, span_notice("[target] looks like they're stewing on something."))
+				return
 			if(CLAN_GIOVANNI)
 				to_chat(owner, span_notice("[target] has a very peculiar last name..."))
 				return
@@ -329,13 +331,16 @@
 				to_chat(owner, span_warning("[target] smells of rot."))
 				return
 			if(CLAN_KIASYD)
-				to_chat(owner, span_notice("[target] is pretty tall."))
+				to_chat(owner, span_notice("[target] has a whimsical air about them."))
 				return
 			if(CLAN_GARGOYLE)
 				to_chat(owner, span_notice("[target] moves with a strangely rigid gait."))
 				return
 			if(CLAN_SETITES)
 				to_chat(owner, span_warning("[target] fills you with disgust."))
+				return
+			if(CLAN_NAGARAJA)
+				to_chat(owner, span_warning("[target] smells of iron and rust."))
 				return
 
 			else
@@ -507,8 +512,6 @@
 	var/theirpower = SSroll.storyteller_roll(sinner.get_total_mentality(), difficulty = 6, mobs_to_show_output = sinner, numerical = TRUE)
 
 	if(ishuman(sinner))
-		if(sinner.clan?.name == CLAN_GARGOYLE)
-			theirpower -= 2
 		if((sinner.morality_path?.alignment != MORALITY_HUMANITY) && (sinner.morality_path?.score >= 4))
 			theirpower -= round(sinner.morality_path?.score / 2)
 
@@ -525,6 +528,7 @@
 
 	to_chat(owner, span_warning("[sinner] is rended asunder!"))
 	to_chat(sinner, span_cultlarge("OH GOD IT BURNS!"))
+	to_chat(sinner, span_userlove("Every part of you shrieks to run! You have to get out of here, <b>now!</b>"))
 
 	var/datum/cb = CALLBACK(sinner, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
 	for(var/i in 1 to 30)
