@@ -39,7 +39,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	var/see_rc_emotes = TRUE
 	//Клан вампиров
 	var/datum/vampire_clan/clan
-	var/datum/numina_pattern/numina
+	var/datum/numina_pattern/numina // TFN EDIT - Numina System
 	var/datum/morality/morality_path = new /datum/morality/humanity()
 	// Custom Keybindings
 	var/list/key_bindings = list()
