@@ -1,5 +1,0 @@
-author: "1HoneyDragon"
-delete-after: True
-changes:
-  - balance: "Changed \"Permanent Fangs\" trait from a neutral quirk to a negative quirk to reflect tabletop"
-  - code_imp: "Changed variable from 0 to -1"
