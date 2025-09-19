@@ -17,6 +17,7 @@ GLOBAL_LIST_EMPTY(alarmdisplay)				        //list of all machines or programs th
 GLOBAL_LIST_EMPTY(mechpad_list)						//list of all /obj/machinery/mechpad
 
 GLOBAL_LIST(chemical_reagents_list) //list of all /datum/chemical_reaction datums indexed by their typepath. Use this for general lookup stuff
+GLOBAL_LIST(chemical_reactions_list)
 GLOBAL_LIST_EMPTY(poi_list)					//list of points of interest for observe/follow
 GLOBAL_LIST(chemical_reactions_results_lookup_list) //List of all reactions with their associated product and result ids. Used for reaction lookups
 GLOBAL_LIST(fake_reagent_blacklist) //List of all reagents that are parent types used to define a bunch of children - but aren't used themselves as anything.
