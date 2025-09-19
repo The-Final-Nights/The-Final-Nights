@@ -254,10 +254,6 @@
 /datum/team/cult/proc/check_size()
 	if(cult_ascendent)
 		return
-
-	// This proc is unnecessary clutter whilst running cult related unit tests
-	// Remove this if, at some point, someone decides to test that halos and eyes are added at expected ratios
-#ifndef UNIT_TESTS
 	var/alive = 0
 	var/cultplayers = 0
 	for(var/I in GLOB.player_list)
@@ -283,8 +279,6 @@
 				to_chat(B.current, "<span class='cultlarge'>Your cult is ascendent and the red harvest approaches - you cannot hide your true nature for much longer!!</span>")
 				addtimer(CALLBACK(src, PROC_REF(ascend), B.current), 200)
 		cult_ascendent = TRUE
-		log_game("The blood cult has ascended with [cultplayers] players.")
-#endif
 
 
 /datum/team/cult/proc/rise(cultist)
