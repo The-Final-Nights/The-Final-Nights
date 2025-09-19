@@ -31578,7 +31578,9 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
 "hDI" = (
-/obj/structure/vampdoor/prison,
+/obj/structure/vampdoor/prison{
+	lock_id = "nosferatu"
+	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer/nosferatu_warren)
 "hDK" = (
@@ -37992,7 +37994,7 @@
 /area/vtm/interior/giovanni)
 "jcu" = (
 /obj/structure/vampdoor/prison{
-	lock_id = "nps";
+	lock_id = "nosferatu";
 	lockpick_difficulty = 16;
 	dir = 8
 	},
@@ -72300,6 +72302,12 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/lower)
+"qXb" = (
+/obj/structure/vampdoor/prison{
+	lock_id = "nosferatu"
+	},
+/turf/open/floor/plating/dirt,
+/area/vtm/sewer)
 "qXd" = (
 /obj/structure/barrels/rand,
 /turf/open/floor/plating/concrete{
@@ -115140,7 +115148,7 @@ rCB
 xyw
 rqZ
 rLP
-dAM
+qXb
 rqY
 dAM
 rqY
