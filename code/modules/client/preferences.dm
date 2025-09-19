@@ -777,6 +777,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						qdel(discipline)
 					if (possible_new_disciplines.len && (player_experience >= 10))
 						dat += "<a href='byond://?_src_=prefs;preference=newdiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
+			//TFN EDIT - NUMINA SYSTEM
 			if(pref_species.name == "Human")
 				dat += "<h2>[make_font_cool("GIFTS")]</h2>"
 				dat += "<b>Numina:</b> <a href='byond://?_src_=prefs;preference=numina;task=input'>[numina.name]</a><BR>"
@@ -804,6 +805,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						dat += "<BR>"
 					dat += "-[discipline.desc]<BR>"
 					qdel(discipline)
+					//TFN EDIT - NUMINA SYSTEM
 			if(pref_species.name == "Ghoul")
 				for (var/i in 1 to discipline_types.len)
 					var/discipline_type = discipline_types[i]
