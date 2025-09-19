@@ -286,7 +286,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	glory = initial(glory)
 	wisdom = initial(wisdom)
 	clan = GLOB.vampire_clans[/datum/vampire_clan/brujah]
-	numina = GLOB.numina_clans[/datum/numina_pattern/mundane]
+	numina = GLOB.numina_clans[/datum/numina_pattern/mundane] // TFN EDIT - Numina System
 	qdel(morality_path)
 	morality_path = new /datum/morality/humanity()
 	discipline_types = list()
