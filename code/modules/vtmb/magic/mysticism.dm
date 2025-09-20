@@ -193,3 +193,188 @@
 	TIMER_COOLDOWN_START(invoker, COOLDOWN_RITUAL_INVOKE, 30 SECONDS)
 	playsound(rune_location, 'sound/magic/voidblink.ogg', 50, FALSE)
 	qdel(src)
+
+/obj/abyssrune/reflections_of_hollow_revelation
+	name = "Reflections of Hollow Revelation"
+	desc = "Use a conjured Nocturne to spy on a target through nearby shadows"
+	icon_state = "teleport"
+	word = ""
+	mystlevel = 4
+	var/datum/action/close_window/end_action
+	var/mob/living/nocturne_user
+	var/obj/shadow_window/shadow_window
+	var/mob/living/carbon/human/window_target
+	var/isactive = FALSE
+
+/obj/abyssrune/reflections_of_hollow_revelation/complete()
+	var/mob/living/user = usr
+	if(!user)
+		return
+
+	if(isactive)
+		to_chat(user, span_warning("This Nocturne is already in use!"))
+		return
+
+	// Target input
+	var/target_name = tgui_input_text(user, "Choose target name:", "Reflections of Hollow Revelation")
+	if(!target_name || !user.Adjacent(src))
+		to_chat(user, span_warning("You must specify a target and remain close to the rune!"))
+		return
+
+	user.say("VISTA'DE'SOMBRA")
+
+	// Find the target
+	for(var/mob/living/carbon/human/targ in GLOB.player_list)
+		if(targ.real_name == target_name)
+			window_target = targ
+			break
+
+	if(!window_target)
+		to_chat(user, span_warning("[target_name] not found."))
+		return
+
+	// Roll for success; Mentality + Social in place of Perception + Occult
+	var/mypower = (user.get_total_mentality() + user.get_total_social())
+	var/roll_result = SSroll.storyteller_roll(mypower, 7, FALSE, user)
+	if (roll_result == ROLL_SUCCESS)
+		scry_target(window_target, user)
+		playsound(user, 'sound/magic/voidblink.ogg', 50, FALSE)
+		isactive = TRUE
+	else if(roll_result == ROLL_FAILURE)
+		qdel(src)
+		to_chat(user, span_warning("The Nocturne collapses!"))
+	else if(roll_result == ROLL_BOTCH)
+		qdel(src)
+		to_chat(user, span_warning("You feel drained..."))
+		user.additional_athletics -= 2
+		user.additional_blood -= 2
+		user.additional_dexterity -= 2
+		user.additional_lockpicking -= 2
+		user.additional_mentality -= 2
+		user.additional_social -=2
+		addtimer(CALLBACK(src, PROC_REF(restore_stats), user), 1 SCENES)
+
+/obj/abyssrune/reflections_of_hollow_revelation/proc/restore_stats(mob/living/user)
+	if(user)
+		user.additional_athletics += 2
+		user.additional_blood += 2
+		user.additional_dexterity += 2
+		user.additional_lockpicking += 2
+		user.additional_mentality += 2
+		user.additional_social +=2
+
+/obj/abyssrune/reflections_of_hollow_revelation/proc/scry_target(mob/living/carbon/human/target, mob/user)
+	// If the target has Obtenebration or Auspex, roll to see if they detect the shadows
+	if(iskindred(target))
+		var/datum/species/kindred/vampire = target.dna?.species
+		if(vampire && (vampire.get_discipline("Obtenebration") || vampire.get_discipline("Auspex")))
+			var/theirpower = (target.get_total_mentality() + target.get_total_social()) // Mentality + Social in place of Perception + Occult
+			if(SSroll.storyteller_roll(theirpower, 8, FALSE) == ROLL_SUCCESS)
+				to_chat(target, span_warning("You notice the nearby shadows flicker... something is watching you."))
+
+	shadowview(target, user)
+	to_chat(user, span_notice("You peer through the shadows near [target.name]..."))
+
+	RegisterSignal(user, COMSIG_MOB_RESET_PERSPECTIVE, PROC_REF(on_end))
+	addtimer(CALLBACK(src, PROC_REF(on_end),user), 1 SCENES) // 3 minute timer, AKA 1 Scene
+
+/obj/abyssrune/reflections_of_hollow_revelation/proc/shadowview(mob/living/target, mob/user)
+	nocturne_user = user
+	user.notransform = TRUE
+
+	// Create camera
+	shadow_window = new(get_turf(target), src)
+	user.reset_perspective(shadow_window)
+
+	// Give button to end viewing
+	end_action = new(src)
+	end_action.Grant(user)
+
+	RegisterSignal(user, COMSIG_MOB_RESET_PERSPECTIVE, PROC_REF(on_end))
+	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(check_target_distance))
+
+	to_chat(user, span_notice("You are now viewing through the shadows. Use the 'End Scrying' action to stop."))
+
+/obj/abyssrune/reflections_of_hollow_revelation/proc/check_target_distance()
+	SIGNAL_HANDLER
+	if(!window_target || !shadow_window)
+		return
+
+	// Window closes when target leaves range
+	if(get_dist(window_target, shadow_window) > 7)
+		if(nocturne_user)
+			to_chat(nocturne_user, span_warning("The window closes as [window_target.name] moves away from the shadows."))
+		on_end(nocturne_user)
+
+/obj/abyssrune/reflections_of_hollow_revelation/proc/on_end(mob/user)
+	SIGNAL_HANDLER
+	if(user == nocturne_user)
+		close_window(user)
+
+/obj/abyssrune/reflections_of_hollow_revelation/proc/close_window(mob/user)
+	if(!user)
+		return
+
+	user.notransform = FALSE
+
+	if(user.client?.eye != user)
+		user.reset_perspective()
+
+	if(end_action)
+		end_action.Remove(user)
+		QDEL_NULL(end_action)
+
+	if(window_target)
+		UnregisterSignal(window_target, COMSIG_MOVABLE_MOVED)
+
+	QDEL_NULL(shadow_window)
+	qdel(src)
+	UnregisterSignal(user, COMSIG_MOB_RESET_PERSPECTIVE)
+
+	nocturne_user = null
+	to_chat(user, span_notice("You stop viewing through your summoned Nocturne."))
+	playsound(user, 'sound/magic/ethereal_exit.ogg', 50, FALSE)
+
+// Camera object
+/obj/shadow_window
+	name = "Shadow"
+	desc = "A shadow..."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "shadow"
+	invisibility = INVISIBILITY_ABSTRACT
+	layer = CAMERA_STATIC_LAYER
+	var/obj/abyssrune/reflections_of_hollow_revelation/parent_rune
+
+/obj/shadow_window/Initialize(mapload, obj/abyssrune/reflections_of_hollow_revelation/rune)
+	. = ..()
+	parent_rune = rune
+
+/obj/shadow_window/Destroy()
+	if(parent_rune && parent_rune.shadow_window == src)
+		parent_rune.shadow_window = null
+	parent_rune = null
+	return ..()
+
+// Action button
+/datum/action/close_window
+	name = "End Scrying"
+	desc = "Stop viewing through the shadows"
+	icon_icon = 'icons/mob/actions/actions_silicon.dmi'
+	button_icon_state = "camera_off"
+	var/obj/abyssrune/reflections_of_hollow_revelation/parent_rune
+
+/datum/action/close_window/New(obj/abyssrune/reflections_of_hollow_revelation/rune)
+	..()
+	parent_rune = rune
+
+/datum/action/close_window/Trigger(trigger_flags)
+	if(!parent_rune || !usr)
+		return
+	parent_rune.close_window(usr)
+
+/datum/action/close_window/Remove(mob/user)
+	if(parent_rune && parent_rune.end_action == src)
+		parent_rune.end_action = null
+	parent_rune = null
+	. = ..()
+	qdel(src)

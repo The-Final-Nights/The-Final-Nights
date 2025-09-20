@@ -236,6 +236,7 @@
 		new /datum/data/mining_equipment("respiratory aid kit", /obj/item/storage/firstaid/o2, 10),
 		new /datum/data/mining_equipment("defib batteries", /obj/item/stock_parts/cell, 10),
 		new /datum/data/mining_equipment("ephedrine pill bottle", /obj/item/storage/pill_bottle/ephedrine, 10),
+		new /datum/data/mining_equipment("potassium iodide pill bottle", /obj/item/storage/pill_bottle/potassiodide, 10),
 		new /datum/data/mining_equipment("Medicated Suture", /obj/item/stack/medical/suture/medicated, 10),
 		new /datum/data/mining_equipment("Regenerative Mesh", /obj/item/stack/medical/mesh/advanced, 10),
 		new /datum/data/mining_equipment("toxins first aid kit", /obj/item/storage/firstaid/toxin, 15),
@@ -251,10 +252,10 @@
 
 /obj/machinery/mineral/equipment_vendor/restricted/police
 	jobs_allowed = list(
-		"Police Officer" = 200,
-		"Federal Investigator" = 300,
-		"Police Sergeant" = 500,
-		"Police Chief" = 15000,	// don't you love the militirization of the police?
+		"Police Officer" = 500,
+		"Federal Investigator" = 500,
+		"Police Sergeant" = 750,
+		"Police Chief" = 5000,	// don't you love the militirization of the police?
 	)
 	prize_list = list(
 		new /datum/data/mining_equipment("handcuffs", /obj/item/restraints/handcuffs, 1),
@@ -284,6 +285,8 @@
 		new /datum/data/mining_equipment("Glock19 magazine", /obj/item/ammo_box/magazine/glock9mm, 10),
 		new /datum/data/mining_equipment("IFAK", /obj/item/storage/firstaid/ifak, 15),
 		new /datum/data/mining_equipment("12ga buckshot", /obj/item/ammo_box/vampire/c12g/buck, 15),
+		new /datum/data/mining_equipment("12g rubber shot", /obj/item/ammo_box/vampire/c12g/rubber, 10),
+		new /datum/data/mining_equipment("12g incapacitation shot", /obj/item/ammo_box/vampire/c12g/incap, 15),
 		new /datum/data/mining_equipment("mp5 magazine", /obj/item/ammo_box/magazine/vamp9mp5, 20),
 		new /datum/data/mining_equipment("4.6mm ammo box", /obj/item/ammo_box/vampire/c46mm, 40),
 		new /datum/data/mining_equipment("mp7 magazine", /obj/item/ammo_box/magazine/vamp46mp7, 20),
@@ -302,7 +305,7 @@
 		new /datum/data/mining_equipment("SPAS15", /obj/item/gun/ballistic/automatic/vampire/autoshotgun, 200),
 		new /datum/data/mining_equipment("sniper rifle", /obj/item/gun/ballistic/automatic/vampire/sniper, 300),
 		new /datum/data/mining_equipment("semi auto sniper rifle", /obj/item/gun/ballistic/automatic/vampire/PSG1, 350),
-	)	//PSEUDO_M todo: add .50 ammo to this list
+	)
 
 /obj/machinery/mineral/equipment_vendor/proc/RedeemVoucher(obj/item/mining_voucher/voucher, mob/redeemer)
 	var/items = list("Survival Capsule and Explorer's Webbing", "Resonator Kit", "Minebot Kit", "Extraction and Rescue Kit", "Crusher Kit", "Mining Conscription Kit")

@@ -97,7 +97,8 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/openTicketManager,
 	/client/proc/redact_word, //TFN ADDITION
 	/client/proc/allow_word, //TFN ADDITION
-	/datum/admins/proc/display_tags
+	/datum/admins/proc/display_tags,
+	/datum/admins/proc/paintings_manager
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/stickybanpanel))
 GLOBAL_PROTECT(admin_verbs_ban)
@@ -548,7 +549,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			return
 		var/giving_discipline = input("What Discipline do you want to give [player]?") as null|anything in (subtypesof(/datum/discipline) - preferences.discipline_types - /datum/discipline/bloodheal)
 		if (giving_discipline)
-			var/giving_discipline_level = input("What rank of this Discipline do you want to give [player]?") as null|anything in list(0, 1, 2, 3, 4, 5)
+			var/giving_discipline_level = input("What rank of this Discipline do you want to give [player]?") as null|anything in list(0, 1, 2, 3, 4, 5, 6)
 			if (!isnull(giving_discipline_level))
 				if ((giving_discipline_level > 1) && (preferences.pref_species.id == "ghoul"))
 					to_chat(usr, "<span class='warning'>Giving Discipline at level 1 because ghouls cannot have Disciplines higher.</span>")

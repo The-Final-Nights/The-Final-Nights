@@ -643,15 +643,27 @@ Dancer
 /datum/quirk/permafangs
 	name = "Permanent Fangs"
 	desc = "Your fangs do not retract, making it impossible for you to hide your true nature. While some mortals may think you’ve had your teeth filed or are wearing prosthetics, sooner or later you’re going to run into someone who knows what you truly are."
-	value = 0
+	value = -1
 	mob_trait = TRAIT_PERMAFANGS
 	gain_text = "<span class='notice'>Your fangs become stuck.</span>"
 	lose_text = "<span class='notice'>You feel your fangs retract again.</span>"
 	allowed_species = list("Vampire")
 
+/datum/quirk/unliving_hive
+	name = "(Un)living Hive"
+	desc = "You, for one reason or another, have a horrible infestation of insects living on your person. They might be able to help you out in combat, if you're able to command them. Otherwise, they'll just continue to make you itchy."
+	value = -1
+	mob_trait = TRAIT_UNLIVING_HIVE
+	gain_text = span_danger("You feel skittering across your skin.")
+	lose_text = span_notice("You feel an itch fade away.")
+
+/datum/quirk/unliving_hive/on_process(delta_time) //don't want it to be TOO annoying, but a few bug bites will happen.
+	if(prob(2))
+		quirk_holder.adjustBruteLoss(2, TRUE)
+
 /datum/quirk/diablerist
 	name = "Diablerist"
-	desc = "For one reason or another, you have committed Diablerie in your past, a great crime within Kindred society. <b>This is not a license to Diablerize without proper reason! If you are found out, you can (and most likely will be) round removed. You have been warned.</b>"
+	desc = "For one reason or another, you have very recently committed Diablerie in your past, a great crime within Kindred society. Your sin of the Amaranth is apparent to many Kindred, and will only fade in a year or two.  <b>This is not a license to Diablerize without proper reason! If you are found out, you can (and most likely will be) round removed. You have been warned.</b>"
 	value = 0
 	allowed_species = list("Vampire")
 
