@@ -287,13 +287,13 @@
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh2.ogg", 50, FALSE)
 				new /datum/hallucination/fire(target, TRUE)
 				to_chat(target, span_cultlarge("FLAMES ENGULF MY BEAUTY"))
-				target.Paralyze(12 SECONDS)
+				target.Paralyze(5 SECONDS)
 				return
 			if(CLAN_LASOMBRA)
 				to_chat(target, span_cultlarge("THE SHADOWS BETRAY ME, SEEKING MY LIFE"))
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/eldritchlaugh.ogg", 50, FALSE)
-				target.blind_eyes(15 SECONDS)
-				target.Paralyze(10 SECONDS)
+				target.blind_eyes(6 SECONDS)
+				target.Paralyze(6 SECONDS)
 				return
 			if(CLAN_BRUJAH)
 				to_chat(target, span_cultitalic("You see visions of an underground stone monument weeping blood."))
@@ -304,11 +304,11 @@
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh3.ogg", 50, FALSE)
 				to_chat(target, span_cultlarge("I SEE VISIONS OF FLAME ENGULFING MY DOMAIN"))
 				new /datum/hallucination/fire(target, TRUE)
-				target.Paralyze(12 SECONDS)
+				target.Paralyze(6 SECONDS)
 				return
 			if(CLAN_MALKAVIAN)
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
-				target.Paralyze(12 SECONDS)
+				target.Paralyze(6 SECONDS)
 				target.visible_message(span_warning("[target] repeatedly bashes their head against the ground"), span_cultlarge("THE WHISPERS ARE OVERTAKING ME"),)
 				target.apply_damage(50, BRUTE, BODY_ZONE_HEAD)
 				return
@@ -330,7 +330,7 @@
 				to_chat(target, span_cultitalic("My third eye begins to reflexively open.."))
 				target.visible_message(span_warning("[target] tightly grasps their forehead, trying to conceal something"), span_cultlarge("I MUST HIDE MY NATURE"),)
 				target.apply_damage(50, BRUTE, BODY_ZONE_HEAD)
-				target.Paralyze(12 SECONDS)
+				target.Paralyze(6 SECONDS)
 				return
 			if(CLAN_SALUBRI_WARRIOR)
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh2.ogg", 50, FALSE)
@@ -343,7 +343,7 @@
 				new /datum/hallucination/baali(target,TRUE,"spectre")
 				return
 			if(CLAN_CAPPADOCIAN)
-				to_chat(target, span_cultitalic("Freshly despair enters your decaying flesh as you feel a hauntingly empty presence."))
+				to_chat(target, span_cultitalic("Freshly manifest despair enters your decaying flesh as you feel a hauntingly empty presence."))
 				target.playsound_local(target, "modular_tfn/modules/daim/audio/eldritchlaugh.ogg", 50, FALSE)
 				new /datum/hallucination/baali(target,TRUE,"spectre")
 				return
@@ -356,7 +356,7 @@
 		new /datum/hallucination/baali(target,TRUE,"demon")
 	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
 		to_chat(target, span_cultlarge("MY WORST NIGHTMARES FLASH BEFORE MY EYES"))
-		target.Paralyze(30 SECONDS)
+		target.Paralyze(7 SECONDS)
 
 //CONDEMNATION
 /datum/discipline_power/daimonion/condemnation
