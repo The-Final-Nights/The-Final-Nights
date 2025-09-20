@@ -112,8 +112,6 @@
 /area/vtm/church/interior/staff)
 "abE" = (
 /obj/structure/closet/secure_closet/freezer,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
 /obj/item/food/meat/slab/human,
 /obj/item/food/meat/slab/human,
 /obj/item/food/meat/slab/human,
@@ -4257,14 +4255,14 @@
 /area/vtm/interior/giovanni/outside)
 "bct" = (
 /obj/structure/table/wood,
-/obj/machinery/computer/libraryconsole/bookmanagement{
-	pixel_y = 10
-	},
 /obj/effect/turf_decal/siding/thinplating/dark/corner{
 	dir = 8
 	},
 /obj/structure/sign/painting/library{
 	pixel_y = 32
+	},
+/obj/machinery/computer/libraryconsole/bookmanagement{
+	pixel_y = 10
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
@@ -15054,11 +15052,11 @@
 /area/vtm)
 "dJU" = (
 /obj/effect/turf_decal/siding/thinplating/dark,
-/obj/structure/table/wood,
 /obj/structure/sign/plaques/kiddie/library{
 	pixel_x = 0;
 	pixel_y = 33
 	},
+/obj/machinery/libraryscanner,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
 "dKb" = (
@@ -168431,8 +168429,8 @@ sgk
 sgk
 sgk
 cKZ
-cKZ
 xcc
+cKZ
 qhD
 cKZ
 sgk
