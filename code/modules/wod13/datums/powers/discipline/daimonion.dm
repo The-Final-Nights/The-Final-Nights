@@ -356,7 +356,7 @@
 		new /datum/hallucination/baali(target,TRUE,"demon")
 	if(!iskindred(target) && !isghoul(target) && !isgarou(target))
 		to_chat(target, span_cultlarge("MY WORST NIGHTMARES FLASH BEFORE MY EYES"))
-		target.Paralyze(30 SECONDS)
+		target.Paralyze(10 SECONDS)
 
 //CONDEMNATION
 /datum/discipline_power/daimonion/condemnation
