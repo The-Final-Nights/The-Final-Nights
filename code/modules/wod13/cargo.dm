@@ -141,7 +141,7 @@
 	contains = list(/obj/item/ammo_box/vampire/c545 = 2)
 	crate_name = "ammo crate"
 
-/datum/supply_pack/vampire/ammo44
+/datum/supply_pack/vampire/ammo45
 	name = "Ammo (.45 ACP)"
 	desc = "Contains a box of .45 ACP ammunition."
 	cost = 400
