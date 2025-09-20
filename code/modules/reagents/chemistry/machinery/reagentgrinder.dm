@@ -18,6 +18,7 @@
 	var/limit = 10
 	var/speed = 1
 	var/list/holdingitems
+	var/beaker_type = /obj/item/reagent_containers/glass/beaker/large // TFN EDIT ADD
 
 	var/static/radial_examine = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_examine")
 	var/static/radial_eject = image(icon = 'icons/hud/radial.dmi', icon_state = "radial_eject")
@@ -28,8 +29,11 @@
 /obj/machinery/reagentgrinder/Initialize()
 	. = ..()
 	holdingitems = list()
-	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
-	beaker.desc += " May contain blended dust. Don't breathe this in!"
+	// TFN EDIT CHANGE START
+	if(beaker_type)
+		beaker = new beaker_type(src)
+		beaker.desc += " May contain blended dust. Don't breathe this in!"
+	// TFN EDIT CHANGE END
 
 /obj/machinery/reagentgrinder/constructed/Initialize()
 	. = ..()

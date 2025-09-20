@@ -28,4 +28,7 @@
 	update_shadow()
 	handle_vampire_music()
 	update_auspex_hud()
+	if (!isnpc(src))
+		update_sensewyrm_hud()
+
 	..()

@@ -275,7 +275,7 @@ Dancer
 	value = -1
 	gain_text = "<span class='warning'>You feel wrongness crawling beneath your skin.</span>"
 	lose_text = "<span class='notice'>You feel relief and warmth.</span>"
-	allowed_species = list("Werewolf")
+	allowed_species = list("Werewolf", "Human")
 	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers", "Corax")
 
 /datum/quirk/fair_glabro
@@ -290,7 +290,7 @@ Dancer
 	name = "Illegal Identity"
 	desc = "Illegal immigrant? Died legally? Born a wolf? The cops aren't happy."
 	mob_trait = TRAIT_ILLEGAL_IDENTITY
-	value = 0
+	value = -1
 	gain_text = "<span class='warning'>You feel legally unprepared.</span>"
 	lose_text = "<span class='notice'>You feel bureaucratically legitimate.</span>"
 
@@ -643,7 +643,7 @@ Dancer
 /datum/quirk/permafangs
 	name = "Permanent Fangs"
 	desc = "Your fangs do not retract, making it impossible for you to hide your true nature. While some mortals may think you’ve had your teeth filed or are wearing prosthetics, sooner or later you’re going to run into someone who knows what you truly are."
-	value = 0
+	value = -1
 	mob_trait = TRAIT_PERMAFANGS
 	gain_text = "<span class='notice'>Your fangs become stuck.</span>"
 	lose_text = "<span class='notice'>You feel your fangs retract again.</span>"
@@ -762,3 +762,15 @@ Dancer
 
 #undef SHORT
 #undef TALL
+
+/datum/quirk/kinfolk
+	name = "Kinfolk"
+	desc = "You are both related to, and possiblly accepted by a pack of werewolves, or other fera. You may know their customs, and are privy to secret signs which can identify you as a friend. Make no mistake, knowledge of this trait is a liability in the wrong hands, and you are open to consequences from enemies of the Fera."
+	value = 2
+	allowed_species = list("Human")
+	mob_trait = TRAIT_KINFOLK
+
+/datum/quirk/kinfolk/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/garou_tongue)
+	H.grant_language(/datum/language/primal_tongue, understood = TRUE, spoken = FALSE)
