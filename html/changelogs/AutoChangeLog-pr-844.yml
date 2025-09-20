@@ -1,6 +1,0 @@
-author: "SoreYew"
-delete-after: True
-changes:
-  - rscadd: "Kinfolk Trait. Kinfolk are identified by Scent of the True Form, and Kinfolk may draw glyphs. This also means they may understand them. Kinfolk can understand Primal Tongue, and may speak High Tongue."
-  - spellcheck: "un-capitalized glyphs so the engine does not assume they are proper nouns."
-  - qol: "Wyrm Taint can be taken by humans"
