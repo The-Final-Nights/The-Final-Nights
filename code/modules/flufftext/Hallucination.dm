@@ -462,25 +462,25 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			charged = TRUE
 			switch(demontype)
 				if("demon")
-					target.visible_message(span_warning("[target] falls on their knees"), span_cultboldtalic("[demon] grasps my head with its hands"),)
+					target.visible_message(span_warning("[target] falls on their knees"), span_warning("[demon] grasps my head with its hands"),)
 					target.Paralyze(7 SECONDS)
 					target.adjustStaminaLoss(200)
 					target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh1.ogg", 50, FALSE)
-					to_chat(target, span_cultlarge("HELL IS REAL, IT HAS TOUCHED ME"))
+					to_chat(target, span_cult("HELL IS REAL, IT HAS TOUCHED ME"))
 				if("spectre")
-					target.visible_message(span_warning("[target] collapses onto the ground"), span_cultboldtalic("[demon] touches you with an outstretched hand"),) //Spectres being spooky
+					target.visible_message(span_warning("[target] collapses onto the ground"), span_warning("[demon] touches you with an outstretched hand"),) //Spectres being spooky
 					target.Paralyze(7 SECONDS)
 					target.adjustStaminaLoss(200)
-					to_chat(target, span_cultlarge("THE SPIRIT HAS TAKEN SOMETHING FROM ME"))
+					to_chat(target, span_cult("THE SPIRIT HAS TAKEN SOMETHING FROM ME"))
 				if("wyrm")
-					target.visible_message(span_warning("[target] whines in animalistic fear"), span_cultlarge("THE WYRM HAS NOTICED ME"),) //Pick your bane name
+					target.visible_message(span_warning("[target] whines in animalistic fear"), span_cult("THE WYRM HAS NOTICED ME"),) //Pick your bane name
 					target.Paralyze(5 SECONDS)
 					target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
 				if("banu")
-					target.visible_message(span_warning("[target] grasps his chest, feeling for a hole"), span_cultlarge("THE [demon] PLUCKS OUT YOUR HEART"),) //Ur-Shulgi doesnt take shit from anyone
+					target.visible_message(span_warning("[target] grasps his chest, feeling for a hole"), span_cult("THE [demon] PLUCKS OUT YOUR HEART"),) //Ur-Shulgi doesnt take shit from anyone
 					target.Paralyze(7 SECONDS)
 				if("tremere")
-					target.visible_message(span_warning("[target] collapses onto the ground, convulsing"), span_cultlarge("THE [demon] TAKES YOUR VITAE"),) //saulot/tzimice's repo man
+					target.visible_message(span_warning("[target] collapses onto the ground, convulsing"), span_cult("THE [demon] TAKES YOUR VITAE"),) //saulot/tzimice's repo man
 					target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
 					target.Paralyze(7 SECONDS)
 			step_away(target, demon)
