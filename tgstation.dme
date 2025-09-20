@@ -3775,6 +3775,7 @@
 #include "modular_tfn\modules\anarch_bartender\tapster_job.dm"
 #include "modular_tfn\modules\anarch_bartender\tapster_objects.dm"
 #include "modular_tfn\modules\auspex_auras\auspex_auras.dm"
+#include "modular_tfn\modules\wyrm_taint_aura\Wyrm_taint_auras.dm"
 #include "modular_tfn\modules\banujacket\banujacket.dm"
 #include "modular_tfn\modules\bitcoinminer\bitcoinminer.dm"
 #include "modular_tfn\modules\catwalk_footstep_overrides\code\footstep_override.dm"

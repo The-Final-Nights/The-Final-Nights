@@ -290,7 +290,7 @@ Dancer
 	name = "Illegal Identity"
 	desc = "Illegal immigrant? Died legally? Born a wolf? The cops aren't happy."
 	mob_trait = TRAIT_ILLEGAL_IDENTITY
-	value = 0
+	value = -1
 	gain_text = "<span class='warning'>You feel legally unprepared.</span>"
 	lose_text = "<span class='notice'>You feel bureaucratically legitimate.</span>"
 

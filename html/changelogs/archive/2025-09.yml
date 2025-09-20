@@ -203,3 +203,13 @@
   - balance: Changed "Permanent Fangs" trait from a neutral quirk to a negative quirk
       to reflect tabletop
   - code_imp: Changed variable from 0 to -1
+2025-09-20:
+  Marshmellow105:
+  - bugfix: fixed fem slim variants for the police longsleeve and SWAT uniform
+  SoreYew:
+  - qol: changes typhons brew to just need 30u of beer instead of a specific beer
+      object
+  - qol: makes it possible to use blood packs like a container for recipes
+  - spellcheck: typo in recipe
+  chazzyjazzy:
+  - bugfix: stacking pancakes no longer causes an error sprite
