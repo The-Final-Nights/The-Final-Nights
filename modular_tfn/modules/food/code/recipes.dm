@@ -1,6 +1,6 @@
 /datum/crafting_recipe/typhon_brew
-	name = "Thyphon's Brew"
-	reqs = list(/obj/item/reagent_containers/food/drinks/beer/vampire = 1, /datum/reagent/blood/vitae = 200)
+	name = "Typhon's Brew"
+	reqs = list(/datum/reagent/consumable/ethanol/beer = 30, /datum/reagent/blood/vitae = 200)
 	result = /obj/item/reagent_containers/food/drinks/beer/vampire/typhon
 	time = 1 SECONDS
 	category = CAT_DRUGS

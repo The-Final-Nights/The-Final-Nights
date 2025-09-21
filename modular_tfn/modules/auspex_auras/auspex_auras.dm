@@ -1,7 +1,7 @@
 /mob/living/carbon/Initialize()
 	. = ..()
-	var/datum/atom_hud/abductor/hud = GLOB.huds[DATA_HUD_ABDUCTOR]
-	hud.add_to_hud(src)
+	var/datum/atom_hud/abductor/auspexhud = GLOB.huds[DATA_HUD_ABDUCTOR]
+	auspexhud.add_to_hud(src)
 
 /mob/living/proc/update_auspex_hud()
 	var/image/holder = hud_list[GLAND_HUD]
@@ -37,7 +37,7 @@
 		if (H.diablerist || H.fakediablerist)
 			holder.color = AURA_DIAB  //I don't understand why someone made a specific sprite for diab aura that's just blackscaled normal aura, instead of making it a defined color. This is far more elegant.
 
-	if(isgarou(src) || iswerewolf(src))
+	if(isgarou(src) || iswerewolf(src) || iscorax(src))
 		//garou have bright auras due to their spiritual potence
 		holder.icon_state = AURA_GAROU
 
@@ -47,3 +47,6 @@
 
 	if(mind?.holy_role >= HOLY_ROLE_PRIEST)
 		holder.color = AURA_TRUE_FAITH
+
+
+
