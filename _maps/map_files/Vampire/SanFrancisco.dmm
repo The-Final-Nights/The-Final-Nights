@@ -13296,17 +13296,16 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/fed)
 "dkB" = (
+/obj/effect/decal/bordur{
+	dir = 4;
+	color = "#a7a499"
+	},
+/obj/effect/decal/rugs,
 /obj/structure/vampdoor/wood/old{
 	dir = 8;
 	lock_id = "nosferatu"
 	},
-/obj/effect/decal/bordur/corner{
-	dir = 1;
-	color = "#a7a499"
-	},
-/turf/open/floor/plating/circled{
-	color = "#EADDCA"
-	},
+/turf/open/floor/plating/concrete,
 /area/vtm/interior/nosferatu_office)
 "dkF" = (
 /obj/effect/turf_decal/siding/wood{
@@ -23015,7 +23014,9 @@
 /area/vtm/interior/shop)
 "fyH" = (
 /obj/effect/decal/wallpaper,
-/obj/structure/sign/painting/large/library,
+/obj/structure/sign/painting/large/library{
+	pixel_y = -7
+	},
 /turf/closed/wall/vampwall/junk/alt,
 /area/vtm/interior/nosferatu_office)
 "fyM" = (
@@ -23279,9 +23280,6 @@
 	},
 /obj/item/reagent_containers/food/drinks/mug{
 	pixel_x = -15;
-	pixel_y = 3
-	},
-/obj/underplate{
 	pixel_y = 3
 	},
 /turf/open/floor/plating/concrete,
@@ -30867,6 +30865,11 @@
 	},
 /area/vtm)
 "hrE" = (
+/obj/effect/decal/wallpaper/stone/low,
+/obj/effect/decal/bordur{
+	pixel_y = 8;
+	color = "#a7a499"
+	},
 /obj/structure/extinguisher_cabinet{
 	dir = 4
 	},
@@ -36045,9 +36048,10 @@
 /obj/structure/closet/masks,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/glasses/sunglasses/gar,
+/obj/item/clothing/under/costume/schoolgirl/red,
+/obj/item/clothing/under/costume/singer/yellow,
+/obj/item/clothing/shoes/singery,
 /obj/structure/coclock,
-/obj/item/clothing/under/costume/jabroni,
-/obj/item/clothing/under/costume/deckers,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
 "iBD" = (
@@ -37666,7 +37670,9 @@
 /obj/item/clothing/head/vampire/blackbag{
 	name = "garbage bag"
 	},
-/turf/open/floor/plating/concrete,
+/turf/open/floor/plating/concrete{
+	color = "#bfbfbf"
+	},
 /area/vtm/interior/nosferatu_office)
 "iTG" = (
 /obj/effect/decal/bordur,
@@ -39558,6 +39564,7 @@
 	pixel_x = -10;
 	pixel_y = -3
 	},
+/obj/effect/decal/rugs,
 /turf/open/floor/plating/industrial,
 /area/vtm/sewer/nosferatu_bar)
 "jsf" = (
@@ -42884,8 +42891,7 @@
 "khE" = (
 /obj/effect/decal/bordur{
 	dir = 10;
-	color = "#a7a499";
-	pixel_y = 8
+	color = "#a7a499"
 	},
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
@@ -46381,6 +46387,10 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "kXK" = (
+/obj/effect/decal/bordur{
+	dir = 10;
+	color = "#a7a499"
+	},
 /obj/structure/closet/crate/large{
 	pixel_y = 43;
 	plane = 3;
@@ -52095,13 +52105,7 @@
 	icon_state = "tv_off";
 	pixel_y = 20
 	},
-/obj/item/vamp/keys/nosferatu{
-	pixel_x = -5
-	},
-/obj/item/detective_scanner{
-	pixel_x = 5;
-	pixel_y = 4
-	},
+/obj/item/vamp/keys/nosferatu,
 /turf/open/floor/plating/rough{
 	icon_state = "carpet_black"
 	},
@@ -56217,9 +56221,6 @@
 /obj/structure/table/wood/poker,
 /obj/effect/decal/rugs,
 /obj/structure/coclock,
-/obj/item/modular_computer/laptop{
-	pixel_y = 4
-	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_bar)
 "ngh" = (
@@ -64307,6 +64308,9 @@
 	pixel_y = 15;
 	pixel_x = 14
 	},
+/obj/structure/chair/wood{
+	dir = 8
+	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren)
 "oYJ" = (
@@ -66338,9 +66342,6 @@
 	pixel_x = 2;
 	density = 0
 	},
-/obj/item/reagent_containers/glass/beaker/jar{
-	pixel_y = 10
-	},
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer/nosferatu_warren)
 "pwQ" = (
@@ -68348,6 +68349,7 @@
 /area/vtm/interior/ghetto)
 "pVy" = (
 /obj/structure/table,
+/obj/item/detective_scanner,
 /turf/open/floor/plating/concrete{
 	icon_state = "canal_concrete"
 	},
@@ -73017,6 +73019,18 @@
 /obj/item/fishing_rod,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/forest)
+"qZL" = (
+/obj/effect/decal/bordur{
+	dir = 8;
+	color = "#a7a499"
+	},
+/obj/effect/decal/bordur{
+	dir = 8;
+	color = "#a7a499";
+	pixel_y = 9
+	},
+/turf/open/floor/plating/concrete,
+/area/vtm/interior/nosferatu_office)
 "qZN" = (
 /obj/effect/turf_decal/stripes{
 	dir = 1
@@ -73148,7 +73162,6 @@
 	dir = 1;
 	lock_id = "nosferatu"
 	},
-/obj/effect/decal/rugs,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
 "rbz" = (
@@ -73191,16 +73204,9 @@
 	},
 /obj/structure/closet,
 /obj/item/clothing/under/costume/schoolgirl,
-/obj/item/clothing/shoes/singerb,
 /obj/item/clothing/suit/hooded/shark_costume,
-/obj/item/clothing/under/costume/referee,
-/obj/item/clothing/under/costume/singer/yellow,
 /obj/item/clothing/under/costume/singer/blue,
-/obj/item/clothing/under/costume/schoolgirl/red,
-/obj/item/clothing/shoes/singery,
-/obj/item/clothing/under/costume/mech_suit/blue,
-/obj/item/clothing/under/costume/mech_suit/white,
-/obj/item/clothing/under/costume/mech_suit,
+/obj/item/clothing/shoes/singerb,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
 "rbP" = (
@@ -94290,6 +94296,11 @@
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/financialdistrict/library)
 "whE" = (
+/obj/effect/decal/bordur{
+	pixel_y = 8;
+	color = "#a7a499"
+	},
+/obj/effect/decal/wallpaper/stone/low,
 /obj/structure/closet/crate/large{
 	pixel_y = 43;
 	plane = 3;
@@ -100723,6 +100734,13 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/supply)
+"xHh" = (
+/obj/structure/table/wood,
+/obj/item/modular_computer/laptop{
+	pixel_y = 4
+	},
+/turf/closed/wall/vampwall/junk/low,
+/area/vtm/sewer/nosferatu_bar)
 "xHi" = (
 /obj/structure/stairs/north,
 /turf/open/floor/plating/sidewalk/old,
@@ -106439,16 +106457,16 @@ eZe
 tXG
 khY
 aQE
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-uAE
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -106650,7 +106668,7 @@ aQE
 aQE
 aQE
 aQE
-rCB
+xfw
 xfw
 xfw
 xfw
@@ -106852,7 +106870,7 @@ hZV
 msD
 ijr
 aQE
-rCB
+xfw
 xfw
 xfw
 xfw
@@ -107054,7 +107072,7 @@ hZV
 hZV
 msD
 aQE
-rCB
+xfw
 xfw
 xfw
 xfw
@@ -107256,7 +107274,7 @@ aQE
 hZV
 hZV
 aQE
-rCB
+xfw
 xfw
 xfw
 xfw
@@ -107458,9 +107476,9 @@ vex
 msD
 lne
 aQE
-uAE
-rCB
-rCB
+xfw
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -107662,8 +107680,6 @@ msD
 aQE
 xRn
 xRn
-rCB
-rCB
 xfw
 xfw
 xfw
@@ -107671,13 +107687,15 @@ xfw
 xfw
 xfw
 xfw
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
 rCB
 rCB
 rCB
@@ -107865,15 +107883,15 @@ aQE
 wJZ
 xRn
 xRn
-rCB
 xfw
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-uAE
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
 aQE
 xRn
 xRn
@@ -107881,9 +107899,9 @@ xRn
 xRn
 xyw
 xyw
-rCB
 xfw
-rCB
+xfw
+xfw
 xyw
 xyw
 cBs
@@ -108067,9 +108085,9 @@ aQE
 wiT
 gZN
 xRn
-uAE
-rCB
-rCB
+xfw
+xfw
+xfw
 aQE
 aQE
 aQE
@@ -108083,10 +108101,10 @@ lrX
 lak
 abL
 xyw
-rCB
-rCB
-rCB
-rCB
+xfw
+xfw
+xfw
+xfw
 xyw
 tFr
 jpE
@@ -108287,8 +108305,8 @@ tbl
 xyw
 xyw
 xyw
-rCB
-rCB
+xfw
+xfw
 xyw
 xyw
 lsS
@@ -109108,7 +109126,7 @@ gws
 doX
 jXO
 whE
-bqZ
+dJe
 uYf
 kOa
 dqW
@@ -109310,7 +109328,7 @@ vDz
 eox
 jXO
 kXK
-bqZ
+qZL
 qoZ
 xmh
 rMg
@@ -110089,7 +110107,7 @@ ihq
 iqK
 ihq
 uOu
-wWP
+xHh
 dvB
 cuL
 lps
@@ -111867,7 +111885,7 @@ aej
 vFf
 kRM
 tuX
-uAE
+rCB
 rCB
 xRn
 xRn
@@ -112069,7 +112087,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 xRn
 lVC
@@ -112271,7 +112289,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 knI
 dVt
@@ -112473,7 +112491,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 tWi
 dwS
@@ -112675,7 +112693,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 ief
 cwA
@@ -112877,7 +112895,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 fCN
 cwA
@@ -113079,7 +113097,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 mnL
 fom
@@ -113281,7 +113299,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 koa
 ppZ
@@ -113483,7 +113501,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 koa
 cwA
@@ -113685,7 +113703,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 boJ
 cwA
@@ -113887,7 +113905,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 dZb
 eCO
@@ -114089,7 +114107,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 bPs
 dZb
@@ -114291,7 +114309,7 @@ aej
 vFf
 kRM
 tuX
-rCB
+xfw
 xRn
 xRn
 ekJ
@@ -114493,8 +114511,8 @@ aej
 vFf
 kRM
 tuX
-rCB
-rCB
+xfw
+xfw
 xRn
 jFX
 mYM
@@ -114695,9 +114713,9 @@ aej
 vFf
 kRM
 tuX
-uAE
 rCB
-rCB
+xfw
+xfw
 xRn
 aUY
 aUY
@@ -114900,7 +114918,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 sxr
 aIS
 iCT
@@ -114917,10 +114935,10 @@ hDI
 koK
 xRn
 xRn
-rCB
-rCB
-rCB
-rCB
+xfw
+xfw
+xfw
+xfw
 rCB
 tuX
 tuX
@@ -115102,7 +115120,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 sxr
 udY
 wPF
@@ -115118,8 +115136,8 @@ xRn
 xRn
 xRn
 xRn
-rCB
-rCB
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -115304,7 +115322,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 icW
 tGG
 wPF
@@ -115316,18 +115334,18 @@ exP
 iJP
 rWf
 aUY
-rCB
-rCB
-rCB
-rCB
-rCB
 xfw
 xfw
 xfw
 xfw
 xfw
-rCB
-rCB
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
 tuX
 kOa
 kOa
@@ -115506,7 +115524,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 nhW
 xoD
 iCT
@@ -115518,7 +115536,6 @@ vDJ
 exP
 iHN
 aUY
-rCB
 xfw
 xfw
 xfw
@@ -115529,7 +115546,8 @@ xfw
 xfw
 xfw
 xfw
-rCB
+xfw
+xfw
 tuX
 tuX
 kOa
@@ -115708,7 +115726,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 aUY
 aUY
 aUY
@@ -115720,7 +115738,6 @@ ybH
 iJP
 fWR
 aUY
-rCB
 xfw
 xfw
 xfw
@@ -115731,8 +115748,9 @@ xfw
 xfw
 xfw
 xfw
-uAE
-rCB
+xfw
+xfw
+xfw
 tuX
 jEx
 kOa
@@ -115910,7 +115928,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 pyo
 wgN
 acR
@@ -115922,19 +115940,19 @@ oja
 hsE
 aUY
 aUY
-rCB
-xfw
-rCB
-rCB
-rCB
-rCB
-rCB
 xfw
 xfw
 xfw
 xfw
 xfw
-rCB
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
 tuX
 tuX
 bIT
@@ -116112,7 +116130,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 pyo
 uos
 leH
@@ -116124,20 +116142,20 @@ nAb
 irX
 obO
 aUY
-rCB
 xfw
-rCB
+xfw
+xfw
 tuX
 tuX
 tuX
-rCB
 xfw
 xfw
 xfw
 xfw
 xfw
-uAE
-rCB
+xfw
+xfw
+xfw
 tuX
 sBB
 nRp
@@ -116314,7 +116332,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 ocC
 ufJ
 wPF
@@ -116326,20 +116344,20 @@ aUY
 gKv
 ihE
 aUY
-rCB
 xfw
-rCB
+xfw
+xfw
 tuX
 xfZ
 tuX
-rCB
 xfw
 xfw
 xfw
 xfw
 xfw
 xfw
-rCB
+xfw
+xfw
 tuX
 tuX
 aej
@@ -116516,7 +116534,7 @@ tuX
 rCB
 xfw
 xfw
-rCB
+xfw
 pyo
 wZB
 bdF
@@ -116528,21 +116546,21 @@ aUY
 tMd
 iCT
 aUY
-rCB
 xfw
-rCB
+xfw
+xfw
 tuX
 xfZ
 tuX
-rCB
 xfw
 xfw
 xfw
 xfw
 xfw
 xfw
-uAE
-rCB
+xfw
+xfw
+xfw
 tuX
 aej
 vFf
@@ -116718,25 +116736,24 @@ tuX
 rCB
 xfw
 xfw
-rCB
-aUY
-aUY
-aUY
-aUY
-aUY
-aUY
-aUY
-aUY
-aUY
-aUY
-aUY
-rCB
 xfw
-rCB
+aUY
+aUY
+aUY
+aUY
+aUY
+aUY
+aUY
+aUY
+aUY
+aUY
+aUY
+xfw
+xfw
+xfw
 tuX
 xfZ
 tuX
-rCB
 xfw
 xfw
 xfw
@@ -116744,7 +116761,8 @@ xfw
 xfw
 xfw
 xfw
-rCB
+xfw
+xfw
 tuX
 aej
 vFf
@@ -116920,33 +116938,33 @@ tuX
 rCB
 rCB
 rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
 tuX
 jjy
 tuX
-uAE
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
-rCB
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
+xfw
 tuX
 aej
 vFf
@@ -116976,7 +116994,7 @@ rCB
 xyw
 rqY
 xyw
-rCB
+xfw
 rCB
 rCB
 rCB
