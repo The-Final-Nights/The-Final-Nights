@@ -417,6 +417,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	feedback_details += "Source: [wall.x],[wall.y],[wall.z]"
 	target.playsound_local(wall,'sound/effects/meteorimpact.ogg', 150, 1)
 	demon = new(wall, target)
+	//TFN EDIT START - Psychomania Rework
 	demontype = new_demontype
 	if (isnull(new_demontype))
 		demontype = pick("demon", "spectre", "wyrm", "banu", "tremere")
@@ -440,6 +441,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			demon.name = "LOREMASTER"
 			demon.image_icon = 'icons/mob/32x64.dmi'
 			demon.image_state = "eva"
+	//TFN EDIT END - Psychomania Rework
 	addtimer(CALLBACK(src, PROC_REF(start_processing)), 10)
 
 
