@@ -765,9 +765,11 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			if("repent")
 				A = image('code/modules/wod13/64x64.dmi',H,"cross")
 				A.name = "Our Sins"
+			// TFN EDIT ADDITION - Psychomania Rework
 			if("dancer")
 				A = image('code/modules/wod13/werewolf.dmi',H,"spiralblack")
 				A.name = "Wyrmfoe"
+			// TFN EDIT ADDITION - Psychomania Rework
 			if("kitty")
 				A = image('code/modules/wod13/mobs.dmi',H,"cattzi")
 				A.name = "A Pretty Kitty"
