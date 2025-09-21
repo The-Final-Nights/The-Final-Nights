@@ -315,6 +315,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	image_icon = 'code/modules/wod13/32x48.dmi'
 	image_state = "baali"
 
+//TFN EDIT START - Psychomania Rework
 /obj/effect/hallucination/simple/spectre
 	name = "Specter"
 	image_icon = 'icons/mob/mob.dmi'
@@ -324,6 +325,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	name = "Wyrmic Avatar"
 	image_icon = 'code/modules/wod13/48x64.dmi'
 	image_state = "bigskeleton"
+//TFN EDIT END - Psychomania Rework
 
 /datum/hallucination/oh_yeah
 	var/obj/effect/hallucination/simple/bubblegum/bubblegum
