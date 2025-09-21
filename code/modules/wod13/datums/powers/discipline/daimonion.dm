@@ -275,7 +275,7 @@
 				if (target.auspice.rage > 4)
 					target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh1.ogg", 50, FALSE)
 					to_chat(target, span_cult("THE WYRMFOE IS ALL AROUND ME"))
-					new /datum/hallucination/delusion(target,TRUE,"wyrmfoe",200,0)
+					new /datum/hallucination/delusion(target, TRUE, "dancer", 200, 0)
 					target.rollfrenzy()
 				else
 					to_chat(target, span_cult("I can feel a overwhelming presence.. I NEED TO RUN!!"))
@@ -319,7 +319,7 @@
 				return
 			if(CLAN_BAALI)
 				to_chat(target, span_notice("The sacred icons appearing before you lack the true substance of faith"))
-				new /datum/hallucination/delusion(target,TRUE,"repent",50,0)
+				new /datum/hallucination/delusion(target, TRUE, "repent", 200, 0)
 				to_chat(owner, span_notice("Your illusions are easily dispelled by [target]"))
 				return
 			if(CLAN_BANU_HAQIM)

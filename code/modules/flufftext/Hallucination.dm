@@ -427,7 +427,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		if("spectre")
 			demon.name = "Specter"
 			demon.image_icon = 'icons/mob/mob.dmi'
-			demon.image_state = "shade"
+			demon.image_state = "shadeh"
 		if("wyrm")
 			demon.name = "Wyrmic Avatar"
 			demon.image_icon = 'code/modules/wod13/48x64.dmi'
