@@ -221,3 +221,6 @@
   - qol: Wyrm Taint can be taken by humans
   chazzyjazzy:
   - bugfix: stacking pancakes no longer causes an error sprite
+2025-09-21:
+  SoreYew:
+  - rscdel: "ss and nazi onfloor sprites \U0001F480"
