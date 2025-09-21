@@ -744,11 +744,11 @@
 	wings_icon = "Dragon"
 	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	mutantbrain = /obj/item/organ/brain/vampire
-	brutemod = 0.25 //Armoured plating and warform - You're going to be the biggest and most obvious target around.
+	brutemod = 0.33 //Armoured plating and warform - You're going to be the biggest and most obvious target around.
 	heatmod = 1
 	burnmod = 2
-	punchdamagelow = 30 //A little more than Glabro, since this is a Crinos equivalent.
-	punchdamagehigh = 40
+	punchdamagelow = 15 //A little more than Glabro, since this is a Crinos equivalent.
+	punchdamagehigh = 25
 	exotic_blood = /datum/reagent/blood/vitae
 	selectable = FALSE
 	var/old_social
@@ -764,8 +764,9 @@
 	H.social = 0
 	H.physique += 3
 	H.dexterity += 3
-	H.physiology.armor.melee += 80
-	H.physiology.armor.bullet += 80
+	H.physiology.armor.melee += 50
+	H.physiology.armor.bullet += 50
+	H.physiology.armor.wound += 10
 	H.add_movespeed_modifier(/datum/movespeed_modifier/zulo)
 	H.dna.add_mutation(GIGANTISM)
 
@@ -779,8 +780,9 @@
 	H.social = old_social
 	H.physique -= 3
 	H.dexterity -= 3
-	H.physiology.armor.melee -= 80
-	H.physiology.armor.bullet -= 80
+	H.physiology.armor.melee -= 50
+	H.physiology.armor.bullet -= 50
+	H.physiology.armor.wound += 10
 	H.remove_movespeed_modifier(/datum/movespeed_modifier/zulo)
 	H.dna.remove_mutation(GIGANTISM)
 
