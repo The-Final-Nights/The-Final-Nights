@@ -1,4 +1,0 @@
-author: "SoreYew"
-delete-after: True
-changes:
-  - bugfix: "fixes pathing for .45acp warehouse buy"
