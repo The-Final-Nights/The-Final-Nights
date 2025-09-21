@@ -27,6 +27,7 @@
 	GLOB.human_list += src
 	phonevoicetag = length(GLOB.human_list)+10
 
+
 /mob/living/carbon/human/proc/setup_human_dna()
 	//initialize dna. for spawned humans; overwritten by other code
 	create_dna(src)

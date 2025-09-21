@@ -66,6 +66,11 @@
 /datum/atom_hud/abductor
 	hud_icons = list(GLAND_HUD)
 
+//TFN ADDITION START - Remakes the Theurge's "Sense Wyrm" gift
+/datum/atom_hud/sense_wyrm
+	hud_icons = list(SENSEWYRM_HUD)
+// TFN ADDITION END - Remakes the Theurge's "Sense Wyrm" gift
+
 /datum/atom_hud/sentient_disease
 	hud_icons = list(SENTIENT_DISEASE_HUD)
 
@@ -211,6 +216,7 @@ Medical HUD! Basic mode needs suit sensors on.
 				holder.icon_state = "hudbuff"
 			if(null)
 				holder.icon_state = "hudhealthy"
+
 
 
 /***********************************************

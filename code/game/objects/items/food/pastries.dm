@@ -121,7 +121,8 @@
 	icon_state = "donut_choc"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 3, /datum/reagent/consumable/sugar = 3, /datum/reagent/consumable/hot_coco = 3, /datum/reagent/consumable/sprinkles = 1) //the coco reagent is just bitter.
 	tastes = list("donut" = 4, "bitterness" = 1)
-	decorated_icon = "donut_choc_sprinkles"
+	//decorated_icon = "donut_choc_sprinkles"
+	is_decorated = TRUE
 
 /obj/item/food/donut/blumpkin
 	name = "blumpkin donut"
@@ -770,6 +771,12 @@
 
 /obj/item/food/pancakes/Initialize()
 	. = ..()
+	update_icon()
+
+/obj/item/food/pancakes/CheckParts(list/parts_list, datum/crafting_recipe/R)
+	if(parts_list && parts_list.len > 0)
+		for(var/atom/movable/part in parts_list)
+			qdel(part)
 	update_icon()
 
 /obj/item/food/pancakes/update_icon()
