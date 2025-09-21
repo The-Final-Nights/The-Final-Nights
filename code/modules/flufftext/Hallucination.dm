@@ -462,6 +462,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		QDEL_IN(src, 4 SECONDS)
 		if(demon.Adjacent(target) && !charged)
 			charged = TRUE
+			//TFN EDIT START - Psychomania Rework
 			switch(demontype)
 				if("demon")
 					target.visible_message(span_warning("[target] falls on their knees"), span_warning("[demon] grasps my head with its hands"),)
@@ -485,6 +486,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 					target.visible_message(span_warning("[target] collapses onto the ground, convulsing"), span_cult("THE [demon] TAKES YOUR VITAE"),) //saulot/tzimice's repo man
 					target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
 					target.Paralyze(7 SECONDS)
+			//TFN EDIT END - Psychomania Rework
 			step_away(target, demon)
 			STOP_PROCESSING(SSfastprocess, src)
 			qdel(src)
