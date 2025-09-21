@@ -48,7 +48,7 @@
 /datum/action/numina/truefaith_action/blessing/Trigger(trigger_flags)
 	. = ..()
 	if (!COOLDOWN_FINISHED(src, blessing))
-		to_chat(owner, "<span class='warning'>You can't empower anything for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, blessing))]!</span>")
+		to_chat(owner, span_warning("You can't empower anything for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, blessing))]!"))
 		return
 	var/hand_object
 	var/mob/living/carbon/human/H = owner
@@ -93,7 +93,7 @@
 /datum/action/numina/truefaith_action/miracle/Trigger(trigger_flags)
 	. = ..()
 	if (!COOLDOWN_FINISHED(src, miracle))
-		to_chat(owner, "<span class='warning'>You can't perform a miracle for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, miracle))]!</span>")
+		to_chat(owner, span_warning("You can't perform a miracle for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, miracle))]!"))
 		return
 	if(iscarbon(owner))
 		var/mob/living/carbon/H = owner
@@ -482,8 +482,6 @@
 	multi_activate = TRUE
 	cooldown_length = 4 MINUTES
 	duration_length = 30 SECONDS
-
-	range = 12
 
 /datum/discipline_power/true_faith/perdition/activate()
 	. = ..()
