@@ -400,7 +400,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 
 /datum/hallucination/baali
 	var/obj/effect/hallucination/simple/demon/demon
-	var/demontype
+	var/demontype // TFN ADDITION - Psychomania Rework
 	var/turf/landing
 	var/charged
 	COOLDOWN_DECLARE(next_cooldown)
