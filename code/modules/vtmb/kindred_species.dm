@@ -788,4 +788,4 @@
 
 /datum/movespeed_modifier/zulo
 	blacklisted_movetypes = FLOATING|FLYING
-	multiplicative_slowdown = -0.5
+	multiplicative_slowdown = -0.25
