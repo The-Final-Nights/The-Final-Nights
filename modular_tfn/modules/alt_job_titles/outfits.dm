@@ -21,7 +21,7 @@
 	gloves = null
 	suit = null
 	belt = /obj/item/gun/ballistic/automatic/vampire/m1911
-	backpack_contents = list(/obj/item/flashlight=1, /obj/item/vamp/creditcard=1,/obj/item/food/vampire/donut=5, /obj/item/cockclock=1)
+	backpack_contents = list(/obj/item/flashlight=1, /obj/item/vamp/creditcard=1,/obj/item/food/donut/plain=5, /obj/item/cockclock=1)
 
 /datum/outfit/job/towerwork/towerpersonaldriver
 	name = "Tower Employee (Tower Personal Driver)"

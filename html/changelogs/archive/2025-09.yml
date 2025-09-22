@@ -161,7 +161,66 @@
 2025-09-15:
   SoreYew:
   - map: Adds one ladder to the Malk haven
+  XeonMations:
+  - bugfix: Fixed Daughters of Cacophany being able to force people to say things.
   dwinters99 & Major00 (Paynt):
   - rscadd: Eat Food merit
   - balance: Vampires must now vomit to expel excess reagents if they do not have
       the Eat Food merit.
+2025-09-17:
+  ATGiltspire:
+  - code_imp: Added Painted City tribes to Amberglade Allowed Tribes, added Amberglade
+      tribes to Painted City Tribes
+  Marshmellow105:
+  - rscadd: a car for the NPS with a yellow lightbar
+  SoreYew:
+  - rscadd: rubbershot and incap to police req
+  - rscadd: General store for goods
+  - rscadd: Camping store for outdoorsmen supplies
+  - rscadd: blade store in the museum for antique weapons
+  - rscadd: music store for instruments
+  - rscadd: PI pills to the clinic requisition
+  - rscadd: new vendors and the pump shotgun(oversight?) to Runtimetown
+  - rscdel: Removes EOD, Army armors from Dealers computer, along with misc goods
+      not related to the new niche as a weapons trafficker
+  - qol: expands bloodline options for Supply Tech and Dealer
+  - qol: changes flavor text for some firearms
+  - balance: buff police budget, nerf Chief's specific budget
+  - balance: Turns the AK74 into a "sport" rifle that is single shot, but much faster.
+  - balance: dealers computer starts off locked
+  - balance: raises the price of exotic ammo, and removes the ability to purchase
+      from the NPC black market
+  - balance: adds melee weapons to camarilla armory, anarch armory
+  - balance: removes the AUG with the exception of it being the Prince's personal
+      weapon
+  XeonMations:
+  - balance: Kindred can no longer spill their chest organs.
+2025-09-18:
+  FalloutFalcon:
+  - rscadd: actual food crafting recipes
+2025-09-19:
+  1HoneyDragon:
+  - balance: Changed "Permanent Fangs" trait from a neutral quirk to a negative quirk
+      to reflect tabletop
+  - code_imp: Changed variable from 0 to -1
+2025-09-20:
+  Marshmellow105:
+  - bugfix: fixed fem slim variants for the police longsleeve and SWAT uniform
+  SoreYew:
+  - qol: changes typhons brew to just need 30u of beer instead of a specific beer
+      object
+  - qol: makes it possible to use blood packs like a container for recipes
+  - spellcheck: typo in recipe
+  - balance: Makes illegal identity a +2 flaw
+  - bugfix: fixes pathing for .45acp warehouse buy
+  - rscadd: Kinfolk Trait. Kinfolk are identified by Scent of the True Form, and Kinfolk
+      may draw glyphs. This also means they may understand them. Kinfolk can understand
+      Primal Tongue, and may speak High Tongue.
+  - spellcheck: un-capitalized glyphs so the engine does not assume they are proper
+      nouns.
+  - qol: Wyrm Taint can be taken by humans
+  chazzyjazzy:
+  - bugfix: stacking pancakes no longer causes an error sprite
+2025-09-21:
+  SoreYew:
+  - rscdel: "ss and nazi onfloor sprites \U0001F480"

@@ -1381,7 +1381,7 @@
 					/obj/item/food/meat/rawbacon,
 					/obj/item/food/meat/slab/penguin,
 					/obj/item/food/spiderleg,
-					/obj/item/food/carpmeat,
+					/obj/item/food/fishmeat,
 					/obj/item/food/meat/slab/human)
 	crate_name = "food crate"
 
