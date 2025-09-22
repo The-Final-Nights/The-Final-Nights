@@ -20254,6 +20254,18 @@
 /obj/effect/decal/trash,
 /turf/open/floor/plating/vampgrass,
 /area/vtm)
+"eTj" = (
+/obj/structure/vampdoor/wood{
+	lockpick_difficulty = 16;
+	locked = 1;
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8;
+	color = "#574d46"
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior)
 "eTl" = (
 /obj/structure/vampfence/corner/rich{
 	dir = 8;
@@ -22589,12 +22601,6 @@
 /obj/effect/decal/shadow,
 /obj/effect/decal/pallet,
 /turf/open/floor/plating/rough,
-/area/vtm/interior)
-"ftN" = (
-/obj/vampire_car/retro/rand{
-	dir = 2
-	},
-/turf/open/floor/plating/asphalt,
 /area/vtm/interior)
 "ftO" = (
 /obj/structure/table/wood/fancy/purple,
@@ -80882,6 +80888,12 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/pacificheights/industrial)
+"tge" = (
+/mob/living/simple_animal/pet/cat/vampire{
+	name = "Caine"
+	},
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/anarch)
 "tgf" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -81214,6 +81226,15 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/interior/littleitaly)
+"tkj" = (
+/obj/effect/decal/asphaltline/alt{
+	pixel_x = -14
+	},
+/obj/vampire_car/retro/rand{
+	dir = 2
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/baywalk)
 "tkp" = (
 /obj/structure/sink{
 	dir = 4;
@@ -97532,12 +97553,6 @@
 /obj/effect/decal/wallpaper/blue,
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior/shop)
-"xeF" = (
-/obj/vampire_car/rand{
-	dir = 1
-	},
-/turf/open/floor/plating/asphalt,
-/area/vtm/interior)
 "xeI" = (
 /obj/structure/table/wood,
 /obj/item/clothing/suit/apron/surgical,
@@ -145482,7 +145497,7 @@ dSH
 dSH
 uHB
 wAM
-hZi
+tge
 jCF
 uSP
 sMn
@@ -181496,7 +181511,7 @@ tFO
 veZ
 veZ
 veZ
-xeF
+veZ
 veZ
 veZ
 veZ
@@ -181910,7 +181925,7 @@ ajj
 ajj
 ajj
 ajj
-pYM
+eTj
 ajj
 ajj
 "}
@@ -182295,7 +182310,7 @@ vWT
 eWO
 eWO
 pFK
-rIQ
+tkj
 rIQ
 adJ
 adJ
@@ -182304,7 +182319,7 @@ dtO
 veZ
 veZ
 veZ
-ftN
+veZ
 veZ
 veZ
 veZ
