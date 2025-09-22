@@ -75,7 +75,9 @@
 #define AURA_GHOUL "aura_ghoul"
 #define AURA_TRUE_FAITH "#ffe12f"
 #define AURA_DIAB "#000000"
-
+#define AURA_WYRM_LIGHT "#a087ce"
+#define AURA_WYRM_HEAVY "#541488"
+#define AURA_NO_WYRM "#d0c6d8"
 /**
  * Morality defines
  */
