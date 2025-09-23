@@ -9558,7 +9558,6 @@
 /obj/structure/showcase/machinery/tv{
 	pixel_y = 29
 	},
-/obj/effect/decal/wallpaper/stone/low,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/nosferatu_office)
 "cpA" = (
@@ -14892,7 +14891,6 @@
 /obj/structure/showcase/machinery/tv{
 	pixel_y = 29
 	},
-/obj/effect/decal/wallpaper/stone/low,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/nosferatu_office)
 "dDt" = (
@@ -59145,7 +59143,6 @@
 /obj/machinery/light/dim{
 	pixel_y = 32
 	},
-/obj/effect/decal/wallpaper/stone/low,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/nosferatu_office)
 "nOz" = (
@@ -66383,6 +66380,10 @@
 /obj/item/phone{
 	pixel_y = 8;
 	pixel_x = 5
+	},
+/obj/item/phone_book{
+	pixel_y = 10;
+	pixel_x = -5
 	},
 /turf/open/floor/carpet/black,
 /area/vtm/interior/nosferatu_office)
@@ -84327,6 +84328,13 @@
 /area/vtm/sewer/nosferatu_warren)
 "tJO" = (
 /obj/structure/closet/crate,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
+/obj/item/reagent_containers/blood/elite,
 /turf/open/floor/plating/concrete{
 	icon_state = "canal_concrete"
 	},
@@ -92267,7 +92275,6 @@
 	pixel_y = 13
 	},
 /obj/structure/table,
-/obj/effect/decal/wallpaper/stone/low,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/nosferatu_office)
 "vHq" = (
@@ -97851,7 +97858,6 @@
 	pixel_y = 12
 	},
 /obj/structure/table,
-/obj/effect/decal/wallpaper/stone/low,
 /turf/open/floor/carpet/black,
 /area/vtm/interior/nosferatu_office)
 "wYd" = (
@@ -101225,19 +101231,10 @@
 /turf/open/floor/plating/circled,
 /area/vtm/interior/shop)
 "xMQ" = (
-/obj/machinery/camera/directional/west,
 /obj/fusebox,
-/obj/structure/closet/crate,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/obj/item/reagent_containers/blood/elite,
-/turf/open/floor/plating/concrete{
-	icon_state = "canal_concrete"
-	},
+/obj/machinery/camera/directional/west,
+/obj/structure/table,
+/turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
 "xMW" = (
 /obj/item/kirbyplants/random,
