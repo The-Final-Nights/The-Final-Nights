@@ -23012,9 +23012,7 @@
 /area/vtm/interior/shop)
 "fyH" = (
 /obj/effect/decal/wallpaper,
-/obj/structure/sign/painting/large/library{
-	pixel_y = -7
-	},
+/obj/structure/sign/painting/large/library,
 /turf/closed/wall/vampwall/junk/alt,
 /area/vtm/interior/nosferatu_office)
 "fyM" = (
@@ -30863,11 +30861,6 @@
 	},
 /area/vtm)
 "hrE" = (
-/obj/effect/decal/wallpaper/stone/low,
-/obj/effect/decal/bordur{
-	pixel_y = 8;
-	color = "#a7a499"
-	},
 /obj/structure/extinguisher_cabinet{
 	dir = 4
 	},
@@ -37667,9 +37660,7 @@
 /obj/item/clothing/head/vampire/blackbag{
 	name = "garbage bag"
 	},
-/turf/open/floor/plating/concrete{
-	color = "#bfbfbf"
-	},
+/turf/open/floor/plating/concrete,
 /area/vtm/interior/nosferatu_office)
 "iTG" = (
 /obj/effect/decal/bordur,
@@ -44675,14 +44666,6 @@
 /obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/park)
-"kCh" = (
-/obj/effect/decal/graffiti,
-/obj/structure/trashbag{
-	pixel_y = 11;
-	pixel_x = 8
-	},
-/turf/open/floor/plating/rough/cave,
-/area/vtm/sewer)
 "kCm" = (
 /obj/effect/decal/bordur,
 /obj/effect/decal/bordur{
@@ -46384,10 +46367,6 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/forest/caves)
 "kXK" = (
-/obj/effect/decal/bordur{
-	dir = 10;
-	color = "#a7a499"
-	},
 /obj/structure/closet/crate/large{
 	pixel_y = 43;
 	plane = 3;
@@ -58427,16 +58406,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/forest)
-"nHE" = (
-/obj/effect/decal/graffiti,
-/obj/structure/trashbag{
-	pixel_y = 11;
-	pixel_x = 8
-	},
-/turf/open/floor/plating/rough/cave{
-	icon_state = "stone8"
-	},
-/area/vtm/sewer)
 "nHI" = (
 /obj/structure/rack/bubway/east,
 /obj/item/hand_labeler,
@@ -58977,22 +58946,6 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
-"nNa" = (
-/obj/structure/trashbag{
-	pixel_x = 10;
-	pixel_y = 3
-	},
-/obj/structure/trashbag,
-/obj/effect/decal/graffiti,
-/obj/item/clothing/head/vampire/blackbag{
-	name = "garbage bag"
-	},
-/obj/structure/trashbag{
-	pixel_y = 11;
-	pixel_x = 8
-	},
-/turf/open/floor/plating/rough/cave,
-/area/vtm/sewer)
 "nNb" = (
 /obj/structure/railing{
 	plane = 4
@@ -65955,7 +65908,6 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
 	},
-/obj/item/vtm_artifact/rand,
 /obj/structure/flora/grass/jungle/b,
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/shit,
@@ -66690,6 +66642,12 @@
 /obj/structure/table/wood,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/forest/caves)
+"pAJ" = (
+/obj/item/vtm_artifact/rand,
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/sewer)
 "pAK" = (
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
@@ -73019,18 +72977,6 @@
 /obj/item/fishing_rod,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/forest)
-"qZL" = (
-/obj/effect/decal/bordur{
-	dir = 8;
-	color = "#a7a499"
-	},
-/obj/effect/decal/bordur{
-	dir = 8;
-	color = "#a7a499";
-	pixel_y = 9
-	},
-/turf/open/floor/plating/concrete,
-/area/vtm/interior/nosferatu_office)
 "qZN" = (
 /obj/effect/turf_decal/stripes{
 	dir = 1
@@ -80851,7 +80797,7 @@
 /obj/effect/decal/pallet,
 /obj/item/flashlight/lantern{
 	light_color = "#013220";
-	pixel_y = 25;
+	pixel_y = 15;
 	pixel_x = -10
 	},
 /obj/item/bailer{
@@ -82856,14 +82802,6 @@
 "trC" = (
 /obj/effect/decal/cleanable/cobweb{
 	color = "#bfbfbf"
-	},
-/obj/structure/trashbag{
-	pixel_x = -12;
-	pixel_y = 4
-	},
-/obj/structure/trashbag{
-	pixel_y = 11;
-	pixel_x = 8
 	},
 /obj/effect/decal/graffiti,
 /turf/open/floor/plating/rough/cave{
@@ -94309,11 +94247,6 @@
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/financialdistrict/library)
 "whE" = (
-/obj/effect/decal/bordur{
-	pixel_y = 8;
-	color = "#a7a499"
-	},
-/obj/effect/decal/wallpaper/stone/low,
 /obj/structure/closet/crate/large{
 	pixel_y = 43;
 	plane = 3;
@@ -109129,7 +109062,7 @@ gws
 doX
 jXO
 whE
-dJe
+bqZ
 uYf
 kOa
 dqW
@@ -109331,7 +109264,7 @@ vDz
 eox
 jXO
 kXK
-qZL
+bqZ
 qoZ
 xmh
 rMg
@@ -113949,7 +113882,7 @@ iuD
 oOv
 bEG
 fFY
-kCh
+bbp
 tZl
 xyw
 cVt
@@ -114354,7 +114287,7 @@ oOv
 tuX
 rCB
 xyw
-nNa
+bbp
 cBs
 xyw
 hlO
@@ -115974,7 +115907,7 @@ xfw
 xfw
 rCB
 xyw
-nHE
+rqZ
 rLP
 qXb
 dQI
@@ -116182,7 +116115,7 @@ xyw
 xyw
 xyw
 ply
-rqY
+pAJ
 fOn
 xyw
 rqY
