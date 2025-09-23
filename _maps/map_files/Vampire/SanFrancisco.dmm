@@ -36048,10 +36048,9 @@
 /obj/structure/closet/masks,
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/glasses/sunglasses/gar,
-/obj/item/clothing/under/costume/schoolgirl/red,
-/obj/item/clothing/under/costume/singer/yellow,
-/obj/item/clothing/shoes/singery,
 /obj/structure/coclock,
+/obj/item/clothing/head/papersack,
+/obj/item/clothing/head/papersack/smiley,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
 "iBD" = (
@@ -73207,6 +73206,12 @@
 /obj/item/clothing/suit/hooded/shark_costume,
 /obj/item/clothing/under/costume/singer/blue,
 /obj/item/clothing/shoes/singerb,
+/obj/item/clothing/under/costume/mech_suit,
+/obj/item/clothing/under/costume/schoolgirl/red,
+/obj/item/clothing/under/costume/mech_suit/white,
+/obj/item/clothing/under/costume/mech_suit/blue,
+/obj/item/clothing/under/costume/singer/yellow,
+/obj/item/clothing/shoes/singery,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
 "rbP" = (
@@ -80945,6 +80950,7 @@
 /obj/item/seeds/sunflower/moonflower,
 /obj/item/seeds/tobacco,
 /obj/structure/closet/crate,
+/obj/item/seeds/amanita,
 /turf/open/floor/plating/rough/cave{
 	icon_state = "stone4"
 	},
