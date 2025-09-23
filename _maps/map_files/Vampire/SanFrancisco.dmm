@@ -60526,6 +60526,22 @@
 "okP" = (
 /turf/open/floor/carpet/green,
 /area/vtm/interior)
+"okT" = (
+/obj/structure/toilet{
+	pixel_y = 16
+	},
+/obj/machinery/light/small/red{
+	pixel_y = 32
+	},
+/obj/transfer_point_vamp{
+	alpha = 0;
+	density = 0;
+	id = 671
+	},
+/turf/open/floor/plating/toilet{
+	color = "#636363"
+	},
+/area/vtm/anarch)
 "okV" = (
 /obj/structure/vampipe{
 	icon_state = "piping35"
@@ -148930,7 +148946,7 @@ iQQ
 dSH
 dSH
 uHB
-bVA
+okT
 gLF
 naa
 naa
