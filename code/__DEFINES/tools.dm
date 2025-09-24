@@ -36,3 +36,7 @@
 
 /// Combination flag for any item interaction that blocks the rest of the attack chain
 #define ITEM_INTERACT_ANY_BLOCKER (ITEM_INTERACT_SUCCESS | ITEM_INTERACT_BLOCKING)
+
+///This is a number I got by quickly searching up the temperature to melt iron/glass, though not really realistic.
+///This is used for places where lighters should not be hot enough to be used as a welding tool on.
+#define HIGH_TEMPERATURE_REQUIRED 1500

@@ -7,6 +7,7 @@
 	item_flags = NOBLUDGEON
 	w_class = WEIGHT_CLASS_SMALL
 	var/amount_of_bloodpoints = 2
+	reagent_flags = OPENCONTAINER
 
 /obj/item/reagent_containers/blood/Initialize(mapload)
 	. = ..()
@@ -101,6 +102,7 @@
 
 	playsound(M.loc, 'sound/items/drink.ogg', 50, TRUE)
 	update_appearance()
+	SEND_SIGNAL(M, COMSIG_MASQUERADE_VIOLATION)
 	if(ishumanbasic(M) || (isghoul(M) && !reagents.has_reagent(/datum/reagent/blood/vitae)))
 		to_chat(M, span_notice("That didn't taste very good..."))
 		M.adjust_disgust(DISGUST_LEVEL_GROSS)

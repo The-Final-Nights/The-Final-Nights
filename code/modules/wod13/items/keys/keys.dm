@@ -89,15 +89,17 @@
 /obj/item/vamp/keys/anarch
 	name = "Anarch keys"
 	accesslocks = list(
-		"anarch"
+		"anarch",
+		"biker_bar"
 	)
 	color = "#434343"
 
 /obj/item/vamp/keys/bar
-	name = "Barkeeper keys"
+	name = "Bar Owner's keys"
 	accesslocks = list(
-		"bar",
+		"baron",
 		"anarch",
+		"biker_bar"
 	)
 	color = "#434343"
 
@@ -152,6 +154,13 @@
 		"tmr"
 	)
 
+/obj/item/vamp/keys/setite
+	name = "community center keys"
+	accesslocks = list(
+		"setite"
+	)
+	color = "#09350cff"
+
 /obj/item/vamp/keys/kiasyd
 	name = "Solitary keys"
 	accesslocks = list(
@@ -203,7 +212,8 @@
 /obj/item/vamp/keys/malkav
 	name = "Insane keys"
 	accesslocks = list(
-		"malkav"
+		"malkav",
+		"psych"
 	)
 	color = "#8cc4ff"
 
@@ -211,6 +221,7 @@
 	name = "Really insane keys"
 	accesslocks = list(
 		"primMalkav",
+		"psych",
 		"malkav",
 		"primogen",
 		"clinic",
@@ -345,7 +356,8 @@
 /obj/item/vamp/keys/clinic
 	name = "Clinic keys"
 	accesslocks = list(
-		"clinic"
+		"clinic",
+		"psych"
 	)
 
 /obj/item/vamp/keys/clinics_director
@@ -354,7 +366,8 @@
 		"clinic",
 		"clinicsec",
 		"director",
-		"malkav"
+		"malkav",
+		"psych"
 	)
 
 //===========================POLICE KEYS===========================
@@ -400,10 +413,10 @@
 
 //===========================MISC KEYS===========================
 
-/obj/item/vamp/keys/triads
+/obj/item/vamp/keys/axes
 	name = "Rusty keys"
 	accesslocks = list(
-		"triad",
+		"axes",
 		"laundromat"
 	)
 

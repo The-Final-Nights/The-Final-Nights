@@ -350,3 +350,17 @@
 	hands_use_check = TRUE
 	emote_type = EMOTE_VISIBLE
 
+/datum/emote/living/carbon/human/vomit
+	key = "vomit"
+	key_third_person = "vomits"
+
+/datum/emote/living/carbon/human/vomit/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	var/mob/living/carbon/human/living = user
+	if(iskindred(user) || iscathayan(user))
+		var/obj/item/organ/stomach/vampire/stummy = user.getorganslot(ORGAN_SLOT_STOMACH)
+		stummy.capacity = 0
+		living.vomit(force = TRUE, blood = TRUE)
+	else
+		living.vomit(force = TRUE)
+

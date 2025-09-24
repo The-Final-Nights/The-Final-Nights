@@ -170,17 +170,7 @@
 		owner.visible_message(span_danger("[owner.name] crackles with static electricity!"), span_danger("You crackle with static electricity, charging up your Gift!"))
 		if(do_after(owner, 3 SECONDS))
 			playsound(owner, 'sound/magic/lightningshock.ogg', 100, TRUE, extrarange = 5)
-			if(CheckZoneMasquerade(owner))
-				var/mob/living/carbon/human/H
-				var/mob/living/carbon/werewolf/W
-				if(ishuman(owner))
-					H = owner
-				else
-					W = owner
-				if(H)
-					H.adjust_veil(-1)
-				if(W)
-					W.adjust_veil(-1)
+			SEND_SIGNAL(owner, COMSIG_MASQUERADE_VIOLATION)
 			for(var/mob/living/L in orange(6, owner))
 				if(L)
 					L.electrocute_act(30, owner, siemens_coeff = 1, flags = NONE)
@@ -346,8 +336,7 @@
 	if(allowed_to_proceed)
 		if(ishuman(owner))
 			var/mob/living/carbon/human/H = owner
-			if(H.CheckEyewitness(H, H, 7, FALSE))
-				H.adjust_veil(-1)
+			SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 			H.drop_all_held_items()
 			H.put_in_r_hand(new /obj/item/melee/vampirearms/knife/gangrel/lasombra(owner))
 			H.put_in_l_hand(new /obj/item/melee/vampirearms/knife/gangrel/lasombra(owner))
@@ -454,8 +443,7 @@
 
 					if(permission == "Yes")
 						if(ishuman(caster)) //listen buddy, hulking ravenmen and ravens can eat those eyes just fine, but a human? DISGUSTING.
-							if(caster.CheckEyewitness(caster, caster, 7, FALSE))
-								caster.adjust_veil(-1)
+							SEND_SIGNAL(caster, COMSIG_MASQUERADE_VIOLATION)
 						playsound(get_turf(owner), 'sound/items/eatfood.ogg', 50, FALSE) //itadakimasu! :D
 						qdel(victim_eyeballs)
 						caster.adjust_nutrition(5) //organ nutriment value is 5

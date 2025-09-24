@@ -457,6 +457,8 @@
 					msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
 
 		//examine text for unusual appearances
+		//TFN ADDITION START - https://github.com/The-Final-Nights/The-Final-Nights/pull/759
+		// Just including this whole block since its been here this entire time.
 		if (iskindred(src) && is_face_visible())
 			switch (GET_BODY_SPRITE(src))
 				if (CLAN_NOSFERATU)
@@ -476,6 +478,9 @@
 					msg += span_boldwarning("[p_they(TRUE)] [p_are()] a skeletonised corpse!</b><br>")
 			if (HAS_TRAIT(src, TRAIT_PERMAFANGS))
 				msg += span_warning("[p_they(TRUE)] [p_have()] visible fangs in [p_their()] mouth.</span><br>")
+			if (HAS_TRAIT(src, TRAIT_UNLIVING_HIVE))
+				msg += span_warning("[p_their(TRUE)] skin seems to be infested with insects!<br>")
+		//TFN ADDITION END - https://github.com/The-Final-Nights/The-Final-Nights/pull/759
 
 		if (iszombie(src) && is_face_visible())
 			msg += span_danger("<b>[p_they(TRUE)] [p_are()] a decayed corpse!</b><br>")
@@ -550,7 +555,7 @@
 					weaver_taint--
 				if(istype(wolf,/mob/living/carbon/werewolf))
 					var/mob/living/carbon/werewolf/werewolf = src
-					if(werewolf.wyrm_tainted)
+					if(HAS_TRAIT(werewolf, TRAIT_WYRMTAINTED))
 						wyrm_taint++
 						wyld_taint--
 						weaver_taint--
@@ -578,6 +583,10 @@
 
 				if (!wyrm_taint && !weaver_taint && !wyld_taint)
 					msg += "<span class='purple'><i>You aren't sensing any of the triat's influence on [p_them()]...</i></span>\n"
+				//TFN EDIT START - Kinfolk Merit
+				if(HAS_TRAIT(src, TRAIT_KINFOLK))
+					msg += "<span class='purple'><i>[p_they(TRUE)] smell[p_s()] of being Kin, in some way."
+				//TFN EDIT END - Kinfolk Merit
 		else
 			msg += "<span class='purple'><i>[p_they(TRUE)] [p_are()] too far away to get a good sniff...</i></span>\n"
 
@@ -607,8 +616,10 @@
 	if(custom_examine_message)
 		. += span_purple(custom_examine_message)
 
-	if(ishuman(user))
-		. += "<a href='byond://?src=[REF(src)];masquerade=1'>Spot a Masquerade violation</a>"
+	if(ishumanbasic(user))
+		. += "<a href='byond://?src=[REF(src)];masquerade=1'>Report a Masquerade violation</a>"
+		. += "---------------"
+		. += "<a href='byond://?src=[REF(src)];reinforcement=1'>Report a Masquerade reinforcement</a>"
 
 	. += flavor_text_creation()
 
@@ -656,7 +667,7 @@
 			. += span_info("<b>Traits:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]")
 	. += "</span>"
 
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
 /mob/living/proc/status_effect_examines(pronoun_replacement) //You can include this in any mob's examine() to show the examine texts of status effects!
 	var/list/dat = list()

@@ -8,7 +8,6 @@
 		/datum/discipline/visceratika
 	)
 	clan_traits = list(
-		TRAIT_CANNOT_RESIST_MIND_CONTROL,
 		TRAIT_MASQUERADE_VIOLATING_FACE
 	)
 	alt_sprite = "gargoyle"
@@ -24,10 +23,22 @@
 /datum/vampire_clan/gargoyle/on_gain(mob/living/carbon/human/gargoyle)
 	..()
 	gargoyle.dna.species.wings_icon = "Gargoyle"
-	gargoyle.physiology.brute_mod = 0.8
 	gargoyle.dna.species.GiveSpeciesFlight(gargoyle)
 	var/datum/action/gargoyle_statue_form/statue_action = new()
 	statue_action.Grant(gargoyle)
+
+/datum/vampire_clan/gargoyle/on_join_round(mob/living/carbon/human/H)
+	. = ..()
+
+	if(H.mind?.assigned_role == "Chantry Gargoyle") // Chantry Gargoyles spawn with unique robes/mask
+		return
+
+	var/obj/item/clothing/suit/hooded/robes/grey/new_robe = new(H.loc)
+	H.equip_to_appropriate_slot(new_robe, FALSE)
+
+	var/obj/item/clothing/mask/vampire/balaclava/balaclava = new(H.loc)
+	H.equip_to_appropriate_slot(balaclava, FALSE)
+
 
 // Gargoyle Statue Form
 /datum/action/gargoyle_statue_form

@@ -68,6 +68,16 @@
 		"Tower Personal Attendant"
 	)
 
+/datum/job/vamp/tapster
+	alt_titles = list(
+		"Barkeeper",
+		"Tapster",
+		"Server",
+		"Soda Jerk", //I always loved this as a title and I am mad it isn't in common use anymore.
+		"Waiter",
+		"Waitress"
+	)
+
 /datum/job/vamp/garou/spiral/employee
 	alt_titles = list(
 		"Endron Janitor",
@@ -76,3 +86,14 @@
 		"Endron Labourer"
 	)
 
+/datum/job/vamp/bruiser
+	alt_titles = list(
+	"Bouncer",
+	"Coyote",
+	"Piper",
+	"Rotten Apple",
+	"Houdini",
+	"Prospect",
+	"Cleaver",
+	"Molotov",
+	)
