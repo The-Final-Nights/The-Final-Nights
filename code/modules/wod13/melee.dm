@@ -1008,13 +1008,6 @@
 	var/aggravate_damage = 20
 	var/parried = FALSE
 
-// I wish there was another way
-// This code listens for a signal that is sent when there is a successful automatic weapon parry
-// It sets a variable to true that will cancel the after_attack of klaives
-/obj/item/melee/vampirearms/klaive/Initialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_BLOCK_SUCCESS, PROC_REF(on_klaive_parried))
-
 /obj/item/melee/vampirearms/klaive/proc/on_klaive_parried(datum/source)
 	SIGNAL_HANDLER
 	parried = TRUE
@@ -1124,7 +1117,7 @@
 	name = "grand klaive"
 	desc = "A legend's supremely deadly blade. Its wielder's deeds weigh heavy in your hand. Its ancient spirit demands you hunt."
 	force = 60
-	throwforce = 20
+	throwforce = 20 // The spirits will be so mad if you do this
 	block_chance = 60
 	armour_penetration = 35
 	awakened_force = 120

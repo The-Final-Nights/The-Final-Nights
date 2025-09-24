@@ -25806,6 +25806,7 @@
 	dir = 4;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "gNf" = (
@@ -42523,6 +42524,11 @@
 	color = "#bfbfbf"
 	},
 /area/vtm/interior/wyrm_corrupted)
+"laN" = (
+/obj/structure/stone_tile/surrounding_tile,
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "laQ" = (
 /obj/structure/roofstuff/alt2,
 /obj/effect/decal/bordur/corner{
@@ -43576,6 +43582,15 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
+"lmG" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/forest/caves)
 "lmH" = (
 /obj/effect/decal/bordur{
 	dir = 9
@@ -60206,6 +60221,7 @@
 	dir = 8;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "prs" = (
@@ -82474,6 +82490,10 @@
 /obj/structure/flora/ausbushes/fullgrass,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/techshop)
+"vhX" = (
+/obj/item/melee/vampirearms/klaive/bsd,
+/turf/open/indestructible/necropolis/air,
+/area/vtm/interior/wyrm_corrupted)
 "vhY" = (
 /obj/structure/bed,
 /turf/open/floor/plating/parquetry/old,
@@ -94988,7 +95008,7 @@ aqb
 ftQ
 bxi
 gGv
-xyD
+lmG
 qqR
 tmG
 oqy
@@ -95392,7 +95412,7 @@ vdp
 cLr
 dGj
 pSU
-upV
+laN
 xdt
 ofv
 aqb
@@ -129380,9 +129400,9 @@ fhB
 xEJ
 jON
 xEJ
+vhX
 xEJ
-xEJ
-xEJ
+vhX
 xEJ
 jON
 xEJ
