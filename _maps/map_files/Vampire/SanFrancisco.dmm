@@ -2170,12 +2170,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/financialdistrict)
-"ayf" = (
-/obj/structure/mirror{
-	pixel_y = 32
-	},
-/turf/open/floor/plating/sidewalkalt,
-/area/vtm/financialdistrict)
 "ayj" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/plating/vampgrass,
@@ -177251,7 +177245,7 @@ eeQ
 vBb
 vXj
 tHY
-ayf
+fXQ
 gLv
 eMF
 sMK
