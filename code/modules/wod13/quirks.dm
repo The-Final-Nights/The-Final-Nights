@@ -275,7 +275,7 @@ Dancer
 	value = -1
 	gain_text = "<span class='warning'>You feel wrongness crawling beneath your skin.</span>"
 	lose_text = "<span class='notice'>You feel relief and warmth.</span>"
-	allowed_species = list("Werewolf")
+	allowed_species = list("Werewolf", "Human")
 	allowed_tribes = list("Galestalkers","Ronin", "Glass Walkers", "Ghost Council", "Hart Wardens", "Children of Gaia", "Bone Gnawers", "Get of Fenris", "Black Furies", "Silver Fangs", "Silent Striders", "Shadow Lords", "Red Talons", "Stargazers", "Corax")
 
 /datum/quirk/fair_glabro
@@ -290,7 +290,7 @@ Dancer
 	name = "Illegal Identity"
 	desc = "Illegal immigrant? Died legally? Born a wolf? The cops aren't happy."
 	mob_trait = TRAIT_ILLEGAL_IDENTITY
-	value = 0
+	value = -1
 	gain_text = "<span class='warning'>You feel legally unprepared.</span>"
 	lose_text = "<span class='notice'>You feel bureaucratically legitimate.</span>"
 
@@ -579,6 +579,68 @@ Dancer
 	var/mob/living/carbon/H = quirk_holder
 	H.grant_language(/datum/language/greek)
 
+/datum/quirk/irish
+	name = "Irish"
+	desc = "You know the Irish language."
+	value = 1
+
+/datum/quirk/irish/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/irish)
+
+/datum/quirk/scottish
+	name = "Scottish"
+	desc = "You know the Scottish language."
+	value = 1
+
+/datum/quirk/scottish/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/scottish)
+
+/datum/quirk/welsh
+	name = "Welsh"
+	desc = "You know the Welsh language."
+	value = 1
+
+/datum/quirk/welsh/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/welsh)
+
+/datum/quirk/armenian
+	name = "Armenian"
+	desc = "You know the Armenian language."
+	value = 1
+
+/datum/quirk/armenian/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/armenian)
+
+/datum/quirk/farsi
+	name = "Farsi"
+	desc = "You know the Persian language."
+	value = 1
+
+/datum/quirk/farsi/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/farsi)
+
+/datum/quirk/korean
+	name = "Korean"
+	desc = "You know the Korean language."
+	value = 1
+
+/datum/quirk/korean/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/korean)
+
+/datum/quirk/tagalog
+	name = "Tagalog"
+	desc = "You know the Filipino language."
+	value = 1
+
+/datum/quirk/tagalog/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/tagalog)
 
 /datum/quirk/consumption
 	name = "Consumption"
@@ -762,3 +824,15 @@ Dancer
 
 #undef SHORT
 #undef TALL
+
+/datum/quirk/kinfolk
+	name = "Kinfolk"
+	desc = "You are both related to, and possiblly accepted by a pack of werewolves, or other fera. You may know their customs, and are privy to secret signs which can identify you as a friend. Make no mistake, knowledge of this trait is a liability in the wrong hands, and you are open to consequences from enemies of the Fera."
+	value = 2
+	allowed_species = list("Human")
+	mob_trait = TRAIT_KINFOLK
+
+/datum/quirk/kinfolk/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/garou_tongue)
+	H.grant_language(/datum/language/primal_tongue, understood = TRUE, spoken = FALSE)
