@@ -23,5 +23,5 @@
 		new /datum/data/mining_equipment("machete", /obj/item/melee/vampirearms/machete, 500),
 		new /datum/data/mining_equipment("taser", /obj/item/melee/baton/handtaser, 250),
 		new /datum/data/mining_equipment("pepperspray", /obj/item/reagent_containers/spray/pepper, 200),
-		new /datum/data/mining_equipment("donut",	/obj/item/food/vampire/donut,	10)
+		new /datum/data/mining_equipment("donut",	/obj/item/food/donut/plain,	10)
 	)

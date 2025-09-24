@@ -1,4 +1,4 @@
-#define PAINTED_CITY_TRIBES list("Glass Walkers", "Bone Gnawers", "Children of Gaia", "Shadow Lords")
+#define PAINTED_CITY_TRIBES list("Glass Walkers", "Bone Gnawers", "Children of Gaia", "Shadow Lords","Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers")
 
 /datum/job/vamp/garou/paintedcity/council
 	title = "Painted City Councillor"
