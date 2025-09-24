@@ -6531,6 +6531,7 @@
 	pixel_y = 12;
 	pixel_x = -9
 	},
+/obj/item/charcoal_stick,
 /turf/open/floor/plating/circled,
 /area/vtm/interior/endron_facility/restricted)
 "bDY" = (
