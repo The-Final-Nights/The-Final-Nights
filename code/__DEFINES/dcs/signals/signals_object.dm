@@ -168,6 +168,8 @@
 ///from base of obj/item/hit_reaction(): (owner, hitby, attack_text, final_block_chance, damage, attack_type, damage_type)
 #define COMSIG_ITEM_HIT_REACT "item_hit_react"
 	#define COMPONENT_HIT_REACTION_BLOCK (1<<0)
+///from base of obj/item/hit_reaction(): (list/args)
+#define COMSIG_BLOCK_SUCCESS "item_block_success"
 ///from base of item/sharpener/attackby(): (amount, max)
 #define COMSIG_ITEM_SHARPEN_ACT "sharpen_act"
 	#define COMPONENT_BLOCK_SHARPEN_APPLIED (1<<0)
@@ -597,3 +599,7 @@
 
 /// Sent from /obj/machinert/console/camera_advanced/attack_hand() : (mob/eye/camera/remote/new_camera)
 #define COMSIG_ADVANCED_CAMERA_EYE_CREATED "advanced_camera_eye_created"
+
+///
+/// Sent from new_player.dm at the end of /mob/dead/new_player/proc/create_character(transfer_after)
+#define COMSIG_CHARACTER_GENERATED "character_generated"

@@ -65,6 +65,28 @@
 	if(tribe.tribe_trait==TRAIT_CORAX)
 		ADD_TRAIT(C,TRAIT_CORAX, tribe)
 
+	RegisterSignal(src, COMSIG_CHARACTER_GENERATED, PROC_REF(add_recipe_klaive))
+
+/**
+ * On gaining crafting recipes for garou klaives
+ *
+ * This grants a specific silver klaive crafting recipe depending on tribe.
+ * Disabled for the time being until a good system to share the craftin recipes is found
+ */
+/datum/auspice/proc/add_recipe_klaive(datum/source, mob/living/user)
+	SIGNAL_HANDLER
+	/*
+	if(tribe.name == "Glass Walkers")
+		user.mind.teach_crafting_recipe(/datum/crafting_recipe/klaive/glasswalker)
+
+	if(tribe.name == "Galestalkers")
+		user.mind.teach_crafting_recipe(/datum/crafting_recipe/klaive/wendigo)
+
+	if(tribe.name == "Black Spiral Dancers")
+		user.mind.teach_crafting_recipe(/datum/crafting_recipe/klaive/bsd)
+	*/
+	UnregisterSignal(src, COMSIG_CHARACTER_GENERATED)
+
 /**
  * Sets the breed of a shapeshifter, or what form
  * they were born in and naturally stay in. If that

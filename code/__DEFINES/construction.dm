@@ -76,6 +76,7 @@
 #define CAT_MISC	"Misc"
 #define CAT_PRIMAL  "Tribal"
 #define CAT_TZIMISCE	"Tzimisce"
+#define CAT_GAROU "Garou"
 #define CAT_CLOTHING	"Clothing"
 #define CAT_DRUGS		"Drugs"
 #define CAT_FOOD	"Foods"

@@ -528,6 +528,13 @@
 	contains = list(/obj/structure/drill)
 	crate_name = "drill crate"
 
+/datum/supply_pack/vampire/silverbars
+	name = "Silver Bars"
+	desc = "Contains 3 pure silver bars."
+	cost = 3000
+	contains = list(/obj/item/silverbar, /obj/item/silverbar, /obj/item/silverbar)
+	crate_name = "silver crate"
+
 /obj/item/stack/dollar
 	name = "dollars"
 	desc = "Wow! With enough of these, you could buy a lot! ...Pssh, yeah right."

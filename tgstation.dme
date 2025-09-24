@@ -3755,6 +3755,7 @@
 #include "interface\interface.dm"
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
+#include "interface\skin.dmf"
 #include "modular_tfn\master_files\code\modules\client\preferences.dm"
 #include "modular_tfn\master_files\code\modules\mob\living\life.dm"
 #include "modular_tfn\master_files\code\modules\mob\living\carbon\human\human_defines.dm"
@@ -3818,5 +3819,4 @@
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_defense.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_interactions.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_update_icons.dm"
-#include "interface\skin.dmf"
 // END_INCLUDE
