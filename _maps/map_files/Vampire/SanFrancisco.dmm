@@ -984,20 +984,6 @@
 /obj/structure/bookcase/random/nonfiction,
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/giovanni)
-"alY" = (
-/obj/effect/decal/wallpaper/papers/two{
-	pixel_y = -5
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "amq" = (
 /obj/structure/vampfence/corner/rich{
 	dir = 8;
@@ -10587,20 +10573,6 @@
 	icon_state = "carpet_black"
 	},
 /area/vtm/sewer/nosferatu_warren)
-"cAr" = (
-/obj/effect/decal/wallpaper/papers/three{
-	pixel_y = -4
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "cAt" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -16713,17 +16685,6 @@
 	color = "#8a8a8a"
 	},
 /area/vtm/interior/tzimisce_manor)
-"eap" = (
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "eat" = (
 /obj/structure/railing{
 	dir = 1;
@@ -26842,20 +26803,6 @@
 "gsf" = (
 /turf/closed/wall/vampwall/city,
 /area/space)
-"gsn" = (
-/obj/effect/decal/wallpaper/papers/four{
-	pixel_y = -3
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "gso" = (
 /turf/open/floor/plasteel/stairs{
 	color = "#9a704a"
@@ -28847,21 +28794,6 @@
 /obj/item/restraints/legcuffs/beartrap,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer/nosferatu_warren)
-"gQU" = (
-/obj/effect/decal/wallpaper/papers/four{
-	pixel_y = -3;
-	pixel_x = -18
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "gQV" = (
 /obj/structure/lattice/grate,
 /turf/open/openspace,
@@ -37324,21 +37256,6 @@
 /obj/manholedown,
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/financialdistrict/library)
-"iOB" = (
-/obj/effect/decal/wallpaper/papers/four{
-	pixel_y = -3;
-	pixel_x = -8
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "iOE" = (
 /obj/structure/railing{
 	dir = 1;
@@ -38347,21 +38264,6 @@
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/littleitaly)
-"jbH" = (
-/obj/effect/decal/wallpaper/papers/five{
-	pixel_x = 18;
-	pixel_y = -3
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "jbU" = (
 /obj/structure/coclock,
 /turf/open/floor/plating/parquetry,
@@ -46409,12 +46311,6 @@
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/community)
 "kXy" = (
-/obj/effect/decal/wallpaper/grey,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/wallpaper/grey/low{
 	color = "#6d6d6d"
 	},
@@ -87602,12 +87498,6 @@
 /turf/open/floor/plating/roofwalk,
 /area/vtm)
 "uJq" = (
-/obj/effect/decal/wallpaper/grey,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/wallpaper/grey/low{
 	color = "#6d6d6d"
 	},
@@ -93625,20 +93515,6 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/music,
 /turf/closed/wall/vampwall/market/low,
 /area/vtm/interior/shop)
-"wjp" = (
-/obj/effect/decal/wallpaper/papers/one{
-	pixel_y = -4
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "wjw" = (
 /obj/structure/vamptree{
 	icon_state = "tree10"
@@ -102046,20 +101922,6 @@
 "yhM" = (
 /turf/closed/wall/vampwall,
 /area/vtm/interior/cog/caern)
-"yhR" = (
-/obj/effect/decal/wallpaper/papers/six{
-	pixel_y = -3
-	},
-/obj/effect/decal/wallpaper/grey{
-	color = "#6d6d6d"
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/turf/open/space/basic,
-/area/vtm)
 "yhU" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -139168,12 +139030,12 @@ rCB
 xfw
 xfw
 xfw
-cAr
 xfw
 xfw
 xfw
 xfw
-eap
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -139370,7 +139232,7 @@ rCB
 xfw
 xfw
 xfw
-eap
+xfw
 xfw
 xfw
 xfw
@@ -139572,12 +139434,12 @@ rCB
 xfw
 xfw
 xfw
-eap
 xfw
 xfw
 xfw
 xfw
-gsn
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -139774,12 +139636,12 @@ rCB
 xfw
 xfw
 xfw
-jbH
 xfw
 xfw
 xfw
 xfw
-wjp
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -139976,7 +139838,7 @@ rCB
 xfw
 xfw
 xfw
-iOB
+xfw
 xfw
 xfw
 xfw
@@ -140178,7 +140040,7 @@ rCB
 xfw
 xfw
 xfw
-wjp
+xfw
 xfw
 xfw
 xfw
@@ -140380,12 +140242,12 @@ rCB
 xfw
 xfw
 xfw
-eap
 xfw
 xfw
 xfw
 xfw
-cAr
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -140587,7 +140449,7 @@ xfw
 xfw
 xfw
 xfw
-gQU
+xfw
 xfw
 xfw
 xfw
@@ -141793,11 +141655,11 @@ xfw
 xfw
 xfw
 xfw
-eap
 xfw
 xfw
 xfw
-eap
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -141995,11 +141857,11 @@ xfw
 xfw
 xfw
 xfw
-cAr
 xfw
 xfw
 xfw
-eap
+xfw
+xfw
 xfw
 xfw
 xfw
@@ -142197,11 +142059,11 @@ xfw
 xfw
 xfw
 xfw
-alY
 xfw
 xfw
 xfw
-yhR
+xfw
+xfw
 xfw
 xfw
 xfw
