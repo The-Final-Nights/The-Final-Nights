@@ -6637,6 +6637,7 @@
 	pixel_y = 12;
 	pixel_x = -9
 	},
+/obj/item/charcoal_stick,
 /turf/open/floor/plating/circled,
 /area/vtm/interior/endron_facility/restricted)
 "bDY" = (
@@ -12131,6 +12132,15 @@
 /mob/living/carbon/human/npc/sabbat/shovelhead/brujah,
 /turf/open/floor/plating/dirt,
 /area/vtm/sewer)
+"cUB" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/forest/caves)
 "cUF" = (
 /obj/structure/flora/rock/pile/largejungle,
 /obj/structure/flora/junglebush/large,
@@ -24584,6 +24594,10 @@
 /obj/structure/table/wood/fancy/royalblack,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/giovanni)
+"fPT" = (
+/obj/item/melee/vampirearms/klaive/bsd,
+/turf/open/indestructible/necropolis/air,
+/area/vtm/interior/wyrm_corrupted)
 "fPW" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1;
@@ -28507,6 +28521,7 @@
 	dir = 4;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "gNf" = (
@@ -65327,6 +65342,7 @@
 	dir = 8;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "prs" = (
@@ -98578,6 +98594,11 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/millennium_tower)
+"xsC" = (
+/obj/structure/stone_tile/surrounding_tile,
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "xsP" = (
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 8
@@ -103146,7 +103167,7 @@ aqb
 ftQ
 bxi
 gGv
-xyD
+cUB
 qqR
 tmG
 oqy
@@ -103550,7 +103571,7 @@ vdp
 cLr
 dGj
 pSU
-upV
+xsC
 xdt
 ofv
 aqb
@@ -108105,9 +108126,9 @@ rCB
 jmr
 jmr
 fhB
-xEJ
+fPT
 uta
-xEJ
+fPT
 fhB
 jmr
 jmr
