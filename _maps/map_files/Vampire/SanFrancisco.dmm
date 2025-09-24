@@ -12513,6 +12513,22 @@
 /obj/effect/turf_decal/siding/white{
 	dir = 1
 	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/vampdoor/glass,
+/obj/effect/turf_decal/siding/white{
+	dir = 1
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/vampdoor/glass,
+/obj/effect/turf_decal/siding/white{
+	dir = 1
+	},
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/shop)
 "cYG" = (
@@ -16275,6 +16291,42 @@
 /obj/structure/sink{
 	pixel_y = 1;
 	dir = 2;
+	icon_state = "basin"
+	},
+/obj/effect/decal/wallpaper/stone/low{
+	pixel_y = 20
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/structure/railing/metal{
+	dir = 9
+	},
+/obj/structure/table,
+/obj/structure/sink{
+	pixel_y = 1;
+	icon_state = "basin"
+	},
+/obj/effect/decal/wallpaper/stone/low{
+	pixel_y = 20
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/obj/structure/railing/metal{
+	dir = 9
+	},
+/obj/structure/table,
+/obj/structure/sink{
+	pixel_y = 1;
 	icon_state = "basin"
 	},
 /obj/effect/decal/wallpaper/stone/low{
@@ -24451,6 +24503,20 @@
 /obj/item/food/chocolatebar,
 /obj/item/food/chocolatebar,
 /obj/item/food/chocolatebar,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
@@ -33549,6 +33615,22 @@
 	color = "#004136";
 	dir = 8
 	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/chair/sofa/old/left{
+	color = "#004136";
+	dir = 8
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/chair/sofa/old/left{
+	color = "#004136";
+	dir = 8
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "hQf" = (
@@ -34229,6 +34311,30 @@
 /obj/structure/sink{
 	pixel_y = 4;
 	dir = 2;
+	icon_state = "basin"
+	},
+/obj/machinery/light/small{
+	pixel_y = 32
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/table/wood,
+/obj/structure/sink{
+	pixel_y = 4;
+	icon_state = "basin"
+	},
+/obj/machinery/light/small{
+	pixel_y = 32
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/table/wood,
+/obj/structure/sink{
+	pixel_y = 4;
 	icon_state = "basin"
 	},
 /obj/machinery/light/small{
@@ -60823,6 +60929,14 @@
 	name = "---Merge Conflict Marker---";
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
 /turf/open/openspace,
 /area/vtm)
 "nXz" = (
@@ -79824,6 +79938,16 @@
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/decal/bordur,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/effect/decal/bordur,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/effect/decal/bordur,
 /turf/open/floor/plating/vampplating,
 /area/vtm/clinic)
 "suh" = (
@@ -85518,6 +85642,50 @@
 	pixel_x = -10
 	},
 /obj/effect/decal/litter,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/table/wood,
+/obj/machinery/vending/boozeomat/all_access{
+	pixel_y = 28;
+	density = 0
+	},
+/obj/structure/sink{
+	pixel_y = 4;
+	icon_state = "basin"
+	},
+/obj/item/reagent_containers/glass/rag{
+	pixel_y = 7;
+	pixel_x = 10
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/pint{
+	pixel_y = 4;
+	pixel_x = -10
+	},
+/obj/effect/decal/litter,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/table/wood,
+/obj/machinery/vending/boozeomat/all_access{
+	pixel_y = 28;
+	density = 0
+	},
+/obj/structure/sink{
+	pixel_y = 4;
+	icon_state = "basin"
+	},
+/obj/item/reagent_containers/glass/rag{
+	pixel_y = 7;
+	pixel_x = 10
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/pint{
+	pixel_y = 4;
+	pixel_x = -10
+	},
+/obj/effect/decal/litter,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "tIX" = (
@@ -87164,6 +87332,14 @@
 /obj/item/food/chocolatebar,
 /obj/machinery/light{
 	pixel_y = 32
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
@@ -104241,6 +104417,22 @@
 /area/vtm/interior/giovanni/outside)
 "ygO" = (
 /obj/structure/table,
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/closet/crate/freezer/blood,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/merge_conflict_marker{
+	name = "---Merge Conflict Marker---";
+	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
+	},
+/obj/structure/closet/crate/freezer/blood,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
 /obj/merge_conflict_marker{
 	name = "---Merge Conflict Marker---";
 	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
