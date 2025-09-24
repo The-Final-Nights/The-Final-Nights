@@ -554,7 +554,6 @@
 	client.init_verbs()
 	. = H
 	new_character = .
-	SEND_SIGNAL(src, COMSIG_CHARACTER_GENERATED, new_character)
 	if(transfer_after)
 		transfer_character()
 
