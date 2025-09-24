@@ -10,31 +10,102 @@
 	clan_restricted = FALSE
 	power_type = /datum/discipline_power/true_faith
 
+//Since disciplines were never designed with a resource other than Vitae in mind, we have to do some fuckery to make it work.
 /datum/discipline_power/true_faith
 	name = "true_faith power name"
 	desc = "true_faith power description"
 
+	vitae_cost = 0
+	var/faith_cost = 0
+
 	activate_sound = 'modular_tfn/modules/numina/sound/truefaith_power_small.ogg'
 	deactivate_sound = 'modular_tfn/modules/numina/sound/truefaith_deactivate_generic.ogg'
 
+/datum/discipline_power/true_faith/proc/can_afford_faith() //Can't overwrite the parent proc because it throws a fit and refuses to work
+	var/mob/living/H = owner
+	if(owner == null)
+		return //Runtime prevention on game startup
+	return (H.faith >= faith_cost)
+
+/datum/discipline_power/true_faith/can_activate_untargeted(alert = FALSE)
+	. = .. ()
+	if(!can_afford_faith())
+		return FALSE
+
+/datum/discipline_power/true_faith/spend_resources()
+	if (can_afford_faith())
+		owner.faith = owner.faith - src.faith_cost
+		owner.update_action_buttons()
+		owner.update_faith_hud()
+		return TRUE
+	else
+		to_chat(owner, span_warning("Your faith is too exhausted to use [src]!"))
+		return FALSE
+
 /datum/discipline/numina/true_faith/post_gain()
 	. = ..()
+	owner.faith = 5
 	if(level >= 1)
+		var/datum/action/numina/truefaith_action/pray/pray = new()
 		var/datum/action/numina/truefaith_action/blessing/blessing = new()
+		pray.Grant(owner)
 		blessing.Grant(owner)
 		owner.mind.holy_role = HOLY_ROLE_PRIEST
 	if(level >= 4)
 		var/datum/action/numina/truefaith_action/miracle/miracle = new()
-		miracle.Grant(owner)
 		owner.resistant_to_disciplines = TRUE
+		miracle.Grant(owner)
 	if(level >= 5)
-		owner.eye_color = "#fff9d6"
+		owner.eye_color = "#ffd900"
 		owner.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
 		owner.update_body()
+	owner.update_faith_hud()
 
 /datum/action/numina/truefaith_action
 	name = "truefaith action"
 	desc = "truefaith desc."
+
+	var/faith_cost = 0
+
+/datum/action/numina/truefaith_action/proc/use_resources()
+	var/mob/living/carbon/human/H = owner
+	if(H.faith < faith_cost)
+		to_chat(H, span_warning("Your <b>FAITH</b> is too exhausted to do that! Needs [faith_cost] points of <b>FAITH.</b>"))
+		return FALSE
+	else
+		H.faith -= faith_cost
+	H.update_faith_hud()
+	return TRUE
+
+
+/datum/action/numina/truefaith_action/pray
+	name = "Prayer"
+	desc = "Pray over a holy object to regain certainty in your belief."
+	cool_down = 10 SECONDS
+	button_icon_state = "prayer"
+	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
+
+	COOLDOWN_DECLARE(prayer)
+
+/datum/action/numina/truefaith_action/pray/Trigger(trigger_flags)
+	. = ..()
+	if (!COOLDOWN_FINISHED(src, prayer))
+		to_chat(owner, span_warning("Praying again will do little for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, prayer))]."))
+		return
+	var/mob/living/carbon/human/H = owner
+	var/obj/item/owner_held_item = H.get_active_held_item()
+	if(!is_type_in_typecache(owner_held_item, GLOB.TFNITEMS_HOLY))
+		to_chat(owner, span_warning("You require a holy object to channel your prayer!"))
+		return FALSE
+	to_chat(owner, span_slime("You look within..."))
+	if(!do_after(owner, 5 SECONDS))
+		to_chat(owner, span_warning("Your prayer is interrupted!"))
+		return
+	if(H.faith < 10)
+		H.faith = clamp(H.faith+2, 0, 10)
+	to_chat(owner, span_slime("You feel your resolve strengthen."))
+	COOLDOWN_START(src, prayer, cool_down)
+	H.update_faith_hud()
 
 /datum/action/numina/truefaith_action/blessing
 	name = "Sanctify"
@@ -43,10 +114,14 @@
 	button_icon_state = "blessing"
 	check_flags = AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 
+	faith_cost = 2
+
 	COOLDOWN_DECLARE(blessing)
 
 /datum/action/numina/truefaith_action/blessing/Trigger(trigger_flags)
 	. = ..()
+	if(!use_resources())
+		return
 	if (!COOLDOWN_FINISHED(src, blessing))
 		to_chat(owner, span_warning("You can't empower anything for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, blessing))]!"))
 		return
@@ -90,8 +165,12 @@
 	cool_down = 2 MINUTES
 	COOLDOWN_DECLARE(miracle)
 
+	faith_cost = 4
+
 /datum/action/numina/truefaith_action/miracle/Trigger(trigger_flags)
 	. = ..()
+	if(!use_resources())
+		return
 	if (!COOLDOWN_FINISHED(src, miracle))
 		to_chat(owner, span_warning("You can't perform a miracle for another [DisplayTimeText(COOLDOWN_TIMELEFT(src, miracle))]!"))
 		return
@@ -111,7 +190,7 @@
 	activate_sound = 'modular_tfn/modules/numina/sound/truefaith_ward.ogg'
 
 	level = 1
-	vitae_cost = 0
+	faith_cost = 1
 
 	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK
 	target_type = TARGET_HUMAN
@@ -122,8 +201,8 @@
 	var/banish_succeed = FALSE
 
 /datum/discipline_power/true_faith/ward/proc/ward_check(mob/living/carbon/human/owner, mob/living/target, base_difficulty = 4, banish_succeed = FALSE)
-
 	var/owner_held_item = owner.get_active_held_item()
+	owner.face_atom(target)
 	if(!is_type_in_typecache(owner_held_item, GLOB.TFNITEMS_HOLY))
 		to_chat(owner, span_warning("You require a holy object to channel your prayer!"))
 		return FALSE
@@ -131,7 +210,7 @@
 	if(!ishuman(target))
 		return FALSE
 
-	if(!iskindred(target) && !isgarou(target))
+	if(!iskindred(target))
 		to_chat(owner, span_warning("[target] is unaffected by your gesture."))
 		return FALSE
 
@@ -146,7 +225,6 @@
 	return (mypower > theirpower)
 
 /datum/discipline_power/true_faith/ward/pre_activation_checks(mob/living/target)
-
 	var/mob/living/carbon/human/vampire = target
 	if(iskindred(vampire) && (vampire.clan?.name == CLAN_BAALI)) //Per the Baali curse, Ward will always take effect and be much more punishing.
 		return TRUE
@@ -165,7 +243,6 @@
 
 /datum/discipline_power/true_faith/ward/activate(mob/living/carbon/human/target) //This is basically the same as the Presence "LEAVE" command.
 	. = ..()
-
 	if(banish_succeed)
 		target.remove_overlay(MUTATIONS_LAYER)
 		var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
@@ -198,40 +275,6 @@
 	. = ..()
 	target.remove_overlay(MUTATIONS_LAYER)
 
-////////////////
-/// MEDITATE ///
-///////////////
-// MEDITATE allows one with True Faith to resist mental domination and coercion.
-
-/datum/discipline_power/true_faith/meditate
-	name = "Fortress of the Mind"
-	desc = "With absolute faith comes absolute certainty. Channel your belief to resist mental influences."
-	activate_sound = 'modular_tfn/modules/numina/sound/truefaith_meditate.ogg'
-
-	level = 2
-	vitae_cost = 0
-
-	check_flags = DISC_CHECK_CONSCIOUS
-
-	toggled = TRUE
-	duration_length = 2 TURNS
-
-/datum/discipline_power/true_faith/meditate/activate()
-	. = ..()
-	owner.mentality = owner.mentality += 4
-	owner.remove_overlay(MUTATIONS_LAYER)
-	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
-	presence_overlay.pixel_z = 1
-	owner.overlays_standing[MUTATIONS_LAYER] = presence_overlay
-	owner.apply_overlay(MUTATIONS_LAYER)
-	addtimer(CALLBACK(src, PROC_REF(clear_halo), owner), 4 SECONDS)
-
-/datum/discipline_power/true_faith/meditate/deactivate()
-	. = ..()
-	owner.mentality = owner.mentality -= 4
-	owner.remove_overlay(MUTATIONS_LAYER)
-
-
 ///////////////////
 /// SIXTH SENSE ///
 //////////////////
@@ -243,15 +286,20 @@
 	deactivate_sound = null
 
 	target_type = TARGET_HUMAN
-	range = 12
-	level = 3
+	faith_cost = 2
 
-	vitae_cost = 0
+	range = 12
+	level = 2
 
 	cancelable = TRUE
 
 /datum/discipline_power/true_faith/sixth_sense/activate(mob/living/carbon/human/target)
 	. = ..()
+	to_chat(owner, span_slime("You start to focus in on [target]..."))
+	owner.face_atom(target)
+	if(!do_after(owner, 7 SECONDS, NONE, NONE))
+		to_chat(owner, span_warning("You have to focus to get a read on [target]."))
+		return
 	if(target.get_total_social() <= 2)
 		to_chat(owner, span_notice("They have trouble speaking clearly."))
 	if(target.get_total_mentality() <= 2)
@@ -428,6 +476,39 @@
 			else
 				to_chat(owner, span_notice("[target] doesn't seem all that special."))
 
+////////////////
+/// MEDITATE ///
+///////////////
+// MEDITATE allows one with True Faith to resist mental domination and coercion.
+
+/datum/discipline_power/true_faith/meditate
+	name = "Fortress of the Mind"
+	desc = "With absolute faith comes absolute certainty. Channel your belief to resist mental influences."
+	activate_sound = 'modular_tfn/modules/numina/sound/truefaith_meditate.ogg'
+
+	level = 3
+
+	check_flags = DISC_CHECK_CONSCIOUS
+	faith_cost = 4
+
+	cooldown_length = 2 MINUTES
+	duration_length = 2 MINUTES
+
+/datum/discipline_power/true_faith/meditate/activate()
+	. = ..()
+	owner.mentality = owner.mentality += 2
+	owner.remove_overlay(MUTATIONS_LAYER)
+	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
+	presence_overlay.pixel_z = 1
+	owner.overlays_standing[MUTATIONS_LAYER] = presence_overlay
+	owner.apply_overlay(MUTATIONS_LAYER)
+	addtimer(CALLBACK(src, PROC_REF(clear_halo), owner), 4 SECONDS)
+
+/datum/discipline_power/true_faith/meditate/deactivate()
+	. = ..()
+	owner.mentality = owner.mentality -= 2
+	owner.remove_overlay(MUTATIONS_LAYER)
+
 /////////////
 /// DOGMA ///
 /////////////
@@ -443,10 +524,10 @@
 	level = 4
 
 	check_flags = DISC_CHECK_CONSCIOUS
-	vitae_cost = 0
+	faith_cost = 5
 
-	toggled = TRUE
-	duration_length = 2 TURNS
+	cooldown_length = 3 MINUTES
+	duration_length = 3 MINUTES
 
 	var/dogma_DR = 25
 
@@ -475,9 +556,8 @@
 	activate_sound = 'modular_tfn/modules/numina/sound/truefaith_power_overwhelming.ogg'
 
 	level = 5
-	vitae_cost = 0
-
 	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK
+	faith_cost = 5
 
 	multi_activate = TRUE
 	cooldown_length = 4 MINUTES
@@ -496,6 +576,11 @@
 
 /datum/discipline_power/true_faith/perdition/proc/punish_sinner(mob/living/target)
 	var/mob/living/carbon/human/sinner = target
+	var/mob/living/carbon/werewolf/fera = sinner
+	var/fera_affected = FALSE
+
+	if(isgarou(sinner))
+		fera_affected = TRUE
 
 	var/mutable_appearance/presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "dominate", -MUTATIONS_LAYER)
 	presence_overlay.pixel_z = 1
@@ -507,7 +592,7 @@
 		return
 
 	var/mypower = SSroll.storyteller_roll(owner.get_total_mentality(), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(sinner.get_total_mentality(), difficulty = 6, mobs_to_show_output = sinner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(sinner.get_total_mentality(), difficulty = (fera_affected ? 7 : 9), mobs_to_show_output = sinner, numerical = TRUE)
 
 	if(ishuman(sinner))
 		if((sinner.morality_path?.alignment != MORALITY_HUMANITY) && (sinner.morality_path?.score >= 4))
@@ -517,16 +602,11 @@
 		to_chat(owner, span_warning("[sinner] resists your influence!"))
 		return
 
-
 	sinner.remove_overlay(MUTATIONS_LAYER)
 	presence_overlay = mutable_appearance('code/modules/wod13/icons.dmi', "presence", -MUTATIONS_LAYER)
 	presence_overlay.pixel_z = 1
 	sinner.overlays_standing[MUTATIONS_LAYER] = presence_overlay
 	sinner.apply_overlay(MUTATIONS_LAYER)
-
-	to_chat(owner, span_warning("[sinner] is rended asunder!"))
-	to_chat(sinner, span_cultlarge("OH GOD IT BURNS!"))
-	to_chat(sinner, span_userlove("Every part of you shrieks to run! You have to get out of here, <b>now!</b>"))
 
 	var/datum/cb = CALLBACK(sinner, TYPE_PROC_REF(/mob/living/carbon/human, step_away_caster), owner)
 	for(var/i in 1 to 30)
@@ -542,6 +622,17 @@
 			sinner.adjust_fire_stacks(10)
 			sinner.IgniteMob()
 			playsound(sinner, 'sound/magic/demon_dies.ogg', 50, TRUE, 5)
+		if(isgarou(sinner)) //verin said to keep it, so im keeping it.
+			fera.flash_act()
+			fera.Paralyze(4 SECONDS)
+			fera.apply_status_effect(STATUS_EFFECT_SILVER_SLOWDOWN)
+			//fera.transformator.transform(fera, fera.auspice?.breed_form, TRUE) Lupus is currently bugged to fuck. Uncomment when transformator is fixed.
+			fera.auspice?.rage = 0
+			fera.auspice?.gnosis = 0
+			SEND_SOUND(sinner, sound('modular_tfn/modules/numina/sound/perdition_effect.ogg'))
+			addtimer(CALLBACK(src, PROC_REF(deactivate), sinner), 30 SECONDS)
+			to_chat(sinner, span_cultlarge("Your body starts to change on its own!"))
+			return
 		else
 			sinner.emote("scream")
 			sinner.set_confusion(30 SECONDS)
@@ -549,6 +640,9 @@
 			sinner.adjust_blurriness(30 SECONDS)
 			sinner.take_overall_damage(burn = 60)
 			sinner.flash_act()
+	to_chat(owner, span_warning("[sinner] is rended asunder!"))
+	to_chat(sinner, span_cultlarge("OH GOD IT BURNS!"))
+	to_chat(sinner, span_userlove("Every part of you shrieks to run! You have to get out of here, <b>now!</b>"))
 	SEND_SOUND(sinner, sound('modular_tfn/modules/numina/sound/perdition_effect.ogg'))
 
 	addtimer(CALLBACK(src, PROC_REF(deactivate), sinner), 30 SECONDS)
@@ -574,14 +668,14 @@
 	if(target == user && isliving(target))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	var/mob/living/M = target //We still want the healing effects to affect animals and such.
-	var/mob/living/carbon/human/vampire = target
-	if(iskindred(vampire) && ((vampire.morality_path?.alignment != MORALITY_HUMANITY) || (vampire.morality_path?.score <= 8)))
-		vampire.do_jitter_animation(10 SECONDS)
-		vampire.apply_damage(10, BURN, user.zone_selected)
-		vampire.apply_damage(25, CLONE, user.zone_selected)
-		vampire.flash_act()
-		vampire.adjust_fire_stacks(1)
-		vampire.IgniteMob()
+	var/mob/living/carbon/human/H = target
+	if(iskindred(H) && ((H.morality_path?.alignment != MORALITY_HUMANITY) || (H.morality_path?.score <= 8)))
+		H.do_jitter_animation(10 SECONDS)
+		H.apply_damage(10, BURN, user.zone_selected)
+		H.apply_damage(25, CLONE, user.zone_selected)
+		H.flash_act()
+		H.adjust_fire_stacks(1)
+		H.IgniteMob()
 		playsound(M, 'modular_tfn/modules/numina/sound/skin_sizzle.ogg', 25, TRUE, 3)
 		return
 	M.adjustBruteLoss(-10, TRUE)
@@ -591,4 +685,6 @@
 	M.adjustCloneLoss(-25, TRUE)
 	if((ishuman(M)) && (!iskindred(M)))
 		M.reagents.add_reagent(/datum/reagent/determination, 10)
+	if(isgarou(H))
+		H.auspice.rage -= 4
 	return

@@ -1,3 +1,6 @@
+/mob/living
+	var/faith = 0
+
 /datum/discipline/numina
 	name = "Test Numina"
 	desc = "Test Numina. If you've seen this something has gone wrong."
