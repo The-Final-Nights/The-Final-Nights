@@ -10460,29 +10460,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/theatre)
-"cwU" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/item/reagent_containers/food/condiment/milk,
-/obj/structure/closet/secure_closet/freezer,
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
-/obj/item/storage/fancy/egg_box,
-/obj/item/reagent_containers/food/condiment/enzyme,
-/obj/item/reagent_containers/food/condiment/enzyme,
-/turf/open/floor/plating/parquetry/rich,
-/area/vtm/jazzclub)
 "cwY" = (
 /obj/structure/table/wood,
 /obj/structure/curtain/bounty{
@@ -52515,13 +52492,6 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/shop)
 "moG" = (
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
-/obj/item/reagent_containers/food/condiment/vampiremilk,
 /obj/structure/closet/secure_closet/freezer,
 /obj/item/storage/fancy/egg_box,
 /obj/item/storage/fancy/egg_box,
@@ -52530,6 +52500,13 @@
 /obj/item/storage/fancy/egg_box,
 /obj/item/reagent_containers/food/condiment/enzyme,
 /obj/item/reagent_containers/food/condiment/enzyme,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
+/obj/item/reagent_containers/food/condiment/milk,
 /turf/open/floor/plating/toilet{
 	color = "#919191"
 	},
@@ -59494,6 +59471,7 @@
 /obj/item/vamp/keys/ventrue,
 /obj/item/ammo_box/vampire/c556/incendiary,
 /obj/item/ammo_box/magazine/vamp556,
+/obj/item/vamp/keys/ventrue,
 /turf/open/floor/carpet/purple,
 /area/vtm/jazzclub)
 "nSC" = (
@@ -178292,7 +178270,7 @@ eMF
 sLU
 mVm
 wIl
-cwU
+lqn
 wIl
 lqn
 wIl
