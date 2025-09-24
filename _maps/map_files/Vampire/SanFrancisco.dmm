@@ -92772,13 +92772,6 @@
 /obj/effect/decal/bordur,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/interior/endron_facility/plant)
-"vXj" = (
-/obj/effect/decal/bordur,
-/obj/structure/fluff/hedge,
-/obj/structure/flora/ausbushes/brflowers,
-/mob/living/carbon/human/npc/bouncer/elysium/theatre_backdoor,
-/turf/open/floor/plating/sidewalk/old,
-/area/vtm/financialdistrict)
 "vXG" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#5a2355";
@@ -177243,7 +177236,7 @@ uTa
 jcZ
 eeQ
 vBb
-vXj
+aOr
 tHY
 fXQ
 gLv
