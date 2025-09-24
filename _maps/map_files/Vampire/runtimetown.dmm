@@ -677,6 +677,11 @@
 /obj/lombard,
 /turf/closed/wall/vampwall/brick/low,
 /area/vtm/interior/shop)
+"xN" = (
+/obj/structure/table,
+/obj/machinery/mineral/equipment_vendor/fastfood/grocery,
+/turf/closed/wall/vampwall/brick/low,
+/area/vtm/interior/shop)
 "xU" = (
 /obj/structure/table,
 /obj/item/ammo_box/magazine/vampthompson,
@@ -932,6 +937,11 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/pacificheights)
+"EE" = (
+/obj/structure/table,
+/obj/machinery/mineral/equipment_vendor/fastfood/deli,
+/turf/closed/wall/vampwall/brick/low,
+/area/vtm/interior/shop)
 "EF" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
@@ -2726,7 +2736,7 @@ NR
 NR
 Fg
 Qv
-YJ
+EE
 Fg
 Va
 GH
@@ -2792,7 +2802,7 @@ Fg
 NR
 NR
 NR
-YJ
+xN
 xC
 TY
 Fg
