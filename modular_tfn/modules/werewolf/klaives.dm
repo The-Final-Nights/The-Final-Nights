@@ -73,7 +73,7 @@
 
 /obj/item/melee/vampirearms/klaive/proc/awaken(mob/living/carbon/wolf)
 	if(wolf.auspice.gnosis > 0)
-		to_chat(wolf, "You beckon [src]'s spirit, you can feel it answer your call.")
+		to_chat(wolf, "As you beckon [src]'s spirit, you can feel it answer your call.")
 		adjust_gnosis(-1, wolf)
 		aggravate = TRUE
 		force = awakened_force
