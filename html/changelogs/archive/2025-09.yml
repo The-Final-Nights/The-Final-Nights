@@ -233,3 +233,8 @@
       processing plant and placed shops/apartments where it used to go
   - map: hopefully fixed suicide by car accident rates around the mall
   - map: added one window to the northwestern gio apartment
+2025-09-24:
+  '@magicianofwands':
+  - bugfix: accidental red walls
+  Kolibri-B:
+  - bugfix: Fixed an issue with Temporis 3, Leaden Moment
