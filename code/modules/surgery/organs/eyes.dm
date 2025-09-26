@@ -447,7 +447,7 @@
 /obj/item/organ/eyes/fly/Remove(mob/living/carbon/M, special = FALSE)
 	REMOVE_TRAIT(M, TRAIT_FLASH_SENSITIVE, ORGAN_TRAIT)
 	return ..()
-
+// TFN ADDITION - Tzimisce Rework part 2
 /obj/item/organ/eyes/thermal
 	name = "thermal eyes"
 	desc = "Augmented eyes capable of seeing thermal signatures."
@@ -456,3 +456,5 @@
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	flash_protect = FLASH_PROTECTION_SENSITIVE
 	see_in_dark = 8
+// TFN ADDITION END - Tzimisce Rework part 2
+
