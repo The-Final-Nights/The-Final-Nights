@@ -2381,7 +2381,6 @@
 /area/vtm/supply)
 "aAj" = (
 /obj/structure/chair/sofa/corp/corner{
-	alpha = 125;
 	dir = 1
 	},
 /turf/open/floor/plating/parquetry,
@@ -36575,7 +36574,6 @@
 /area/vtm/interior)
 "iDj" = (
 /obj/structure/chair/sofa/corp/corner{
-	alpha = 125;
 	dir = 1
 	},
 /turf/open/floor/carpet/black,
