@@ -211,12 +211,7 @@
 
 	refill()
 	if(edible)
-		AddComponentFrom(
-			SOURCE_EDIBLE_INNATE, \
-			/datum/component/edible, \
-			bite_consumption = reagents.total_volume / (charges_left / 5), \
-			after_eat = CALLBACK(src, PROC_REF(after_eat)), \
-		)
+		AddComponent(/datum/component/edible, bite_consumption = reagents.total_volume / (charges_left / 5), after_eat = CALLBACK(src, PROC_REF(after_eat)))
 
 /// Used for edible component to reduce charges_left on bite.
 /obj/item/toy/crayon/proc/after_eat(mob/user)

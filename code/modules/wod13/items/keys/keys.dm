@@ -23,6 +23,7 @@
 		"clerk",
 		"chantry",
 		"theatre",
+		"ventrueGreenroom",
 		"milleniumCommon",
 		"primogen"
 	)
@@ -35,6 +36,7 @@
 		"camarilla",
 		"prince",
 		"theatre",
+		"ventrueGreenroom",
 		"milleniumCommon",
 		"primogen",
 		"clerk"
@@ -48,6 +50,7 @@
 		"prince",
 		"clerk",
 		"theatre",
+		"ventrueGreenroom",
 		"milleniumCommon",
 		"primogen"
 	)
@@ -58,6 +61,8 @@
 	accesslocks = list(
 		"milleniumCommon",
 		"clerk",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#bd3327"
@@ -83,6 +88,8 @@
 		"chantry",
 		"milleniumCommon",
 		"primogen",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 
@@ -143,6 +150,8 @@
 		"primogen",
 		"primLasombra",
 		"milleniumCommon",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#4b039c"
@@ -226,6 +235,8 @@
 		"primogen",
 		"clinic",
 		"milleniumCommon",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#2c92ff"
@@ -257,6 +268,8 @@
 		"primBanu",
 		"police",
 		"milleniumCommon",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#05037e"
@@ -273,6 +286,8 @@
 		"strip",
 		"primogen",
 		"milleniumCommon",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#ff2fc4"
@@ -291,6 +306,8 @@
 		"nosferatu",
 		"primogen",
 		"milleniumCommon",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#367c31"
@@ -309,6 +326,8 @@
 		"brujah",
 		"primogen",
 		"milleniumCommon",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#ec8f3e"
@@ -316,7 +335,8 @@
 /obj/item/vamp/keys/ventrue
 	name = "Businessy keys"
 	accesslocks = list(
-		"ventrue"
+		"ventrue",
+		"ventrueGreenroom"
 	)
 	color = "#f6ffa7"
 
@@ -327,6 +347,8 @@
 		"ventrue",
 		"milleniumCommon",
 		"primogen",
+		"theatre",
+		"ventrueGreenroom",
 		"camarilla"
 	)
 	color = "#e8ff29"

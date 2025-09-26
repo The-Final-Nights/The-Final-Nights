@@ -1,0 +1,7 @@
+author: "Knightscholar"
+delete-after: True
+changes:
+  - rscadd: "Added inverted piano sprite"
+  - qol: "Expanded access to theater"
+  - map: "Redesigned the Jazz Club"
+  - bugfix: "Piano variants turned into discrete structure subtypes"
