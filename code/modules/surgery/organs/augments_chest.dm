@@ -61,7 +61,7 @@
 	var/revive_cost = 0
 	var/reviving = FALSE
 	COOLDOWN_DECLARE(reviver_cooldown)
-	var/emp_vulnerability = 50 //Vulnerability to EMP effects, default is 50. Lower is more resistant.
+	var/emp_vulnerability = 50 // TFN ADDITION - Tzimisce Rework part 2 -- Vulnerability to EMP effects, default is 50. Lower is more resistant.
 
 
 /obj/item/organ/cyberimp/chest/reviver/on_life()
