@@ -242,5 +242,10 @@
   SELFHELL:
   - rscadd: Daim 4 Rework
 2025-09-26:
+  Knightscholar:
+  - rscadd: Added inverted piano sprite
+  - qol: Expanded access to theater
+  - map: Redesigned the Jazz Club
+  - bugfix: Piano variants turned into discrete structure subtypes
   XeonMations:
   - refactor: Refactored the way the game initializes, hopefully works faster.
