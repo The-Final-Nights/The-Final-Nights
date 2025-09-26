@@ -124,12 +124,14 @@
 	if(H.stat == CONSCIOUS)
 		to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
 
+// TFN ADDITION - Tzimisce Rework part 2
 /obj/item/organ/cyberimp/chest/reviver/tzimisce
 	name = "Second Heart"
 	desc = "This organ will automatically restart a cardiac system upon cessation of vital functions, alongside releasing mild regenerative chemicals. Implanted in the chest."
 	icon_state = "heart-tzi"
 	slot = ORGAN_SLOT_HEART_AID
 	emp_vulnerability = 0 //No EMP effects on pure biological material.
+// TFN ADDITION END - Tzimisce Rework part 2
 
 /obj/item/organ/cyberimp/chest/thrusters
 	name = "implantable thrusters set"
