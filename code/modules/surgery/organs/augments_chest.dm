@@ -44,6 +44,7 @@
 	hunger_threshold = NUTRITION_LEVEL_HUNGRY
 	poison_amount = 10
 
+// TFN ADDITION - Tzimisce Rework part 2
 /obj/item/organ/cyberimp/chest/nutriment/tzimisce
 	name = "Secondary Stomach"
 	desc = "This secondary stomach is capable of highly efficient digestion of stored biomatter reserves."
@@ -51,6 +52,7 @@
 	hunger_threshold = NUTRITION_LEVEL_HUNGRY
 	poison_amount = 0
 	slot = ORGAN_SLOT_STOMACH_AID
+// TFN ADDITION - Tzimisce Rework part 2
 
 /obj/item/organ/cyberimp/chest/reviver
 	name = "Reviver implant"
