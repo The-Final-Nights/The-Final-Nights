@@ -1,0 +1,4 @@
+author: "XeonMations"
+delete-after: True
+changes:
+  - refactor: "Refactored the way the game initializes, hopefully works faster."
