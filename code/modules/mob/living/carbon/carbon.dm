@@ -75,6 +75,8 @@
 		if(body_position == LYING_DOWN || !S.lying_required)
 			var/list/modifiers = params2list(params)
 			// TFN ADDITION - Tzimisce Rework part 2
+			var/list/modifiers = params2list(params)
+			// TFN ADDITION - Tzimisce Rework part 2
 			if((iskindred(user)) && !user.combat_mode)
 				var/mob/living/carbon/human/H = user
 				if((H.clan?.name == CLAN_TZIMISCE) && S.next_step(user, modifiers))
