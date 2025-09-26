@@ -45,12 +45,6 @@
 	poison_amount = 10
 
 // TFN ADDITION - Tzimisce Rework part 2
-
-// TFN ADDITION - Tzimisce Rework part 2
-
-// TFN ADDITION - Tzimisce Rework part 2
-
-// TFN ADDITION - Tzimisce Rework part 2
 /obj/item/organ/cyberimp/chest/nutriment/tzimisce
 	name = "Secondary Stomach"
 	desc = "This secondary stomach is capable of highly efficient digestion of stored biomatter reserves."
