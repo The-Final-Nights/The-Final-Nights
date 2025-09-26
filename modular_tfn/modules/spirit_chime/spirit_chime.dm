@@ -1,3 +1,4 @@
+// The spirit chime item itself
 /obj/item/spirit_chime
 	name = "Chime of Unseen Spirits"
 	desc = "A mystical chime that reacts to nearby spirits."
@@ -7,6 +8,8 @@
 	var/isplaced = FALSE
 	var/datum/proximity_monitor/advanced/spirit_chime/chime_field
 	var/ringing = FALSE
+	var/last_ring_time = 0
+	var/ring_delay = 5 SECONDS // 5 second delay between rings
 
 /obj/item/spirit_chime/attackby(obj/item/W, mob/user)
 	return ..()
@@ -50,7 +53,6 @@
 		placed_chime.anchored = TRUE
 		placed_chime.icon = 'modular_tfn/modules/spirit_chime/icons/spirit_chime.dmi'
 		placed_chime.icon_state = "chime"
-		//placed_chime.pixel_y = -8
 
 		// Grabs click parameters for placement. Totally unnecessary, but I thought it was nice.
 		var/list/params = params2list(click_parameters)
@@ -98,8 +100,32 @@
 /obj/item/spirit_chime/Destroy()
 	ringing = FALSE
 	QDEL_NULL(chime_field)
+	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
+/obj/item/spirit_chime/process(delta_time)
+	var/valid_targets = FALSE
+	if(!ringing || !isplaced || !chime_field)
+		ringing = FALSE
+		STOP_PROCESSING(SSprocessing, src)
+		return
+	for(var/mob/dead/observer/ghost in chime_field.tracked_mobs) // Check if there are still valid targets
+		if(valid_target(ghost))
+			valid_targets = TRUE
+			break
+	for(var/mob/dead/observer/ghost in chime_field.tracked_mobs)
+		if(ghost.z != z || !valid_target(ghost) || get_dist(get_turf(src), get_turf(ghost)) > chime_field.current_range) // Check for invalid targets & out of range
+			chime_field.tracked_mobs -= ghost
+	if(!valid_targets) // End if no valid targets
+		ringing = FALSE
+		chime_field.tracked_mobs.Cut()
+		STOP_PROCESSING(SSprocessing, src)
+		return
+	if(world.time >= last_ring_time + ring_delay)
+		ring()
+		last_ring_time = world.time
+
+// The proimity monitor that creates the detection field
 /datum/proximity_monitor/advanced/spirit_chime
 	edge_is_a_field = TRUE
 	var/list/tracked_mobs = list()
@@ -109,43 +135,66 @@
 	. = ..()
 	chime = host
 
-/datum/proximity_monitor/advanced/spirit_chime/field_turf_crossed(atom/movable/entered, turf/old_location, turf/new_location)
+/datum/proximity_monitor/advanced/spirit_chime/field_turf_crossed(atom/movable/entered, turf/old_location, turf/new_location) // Handles when a mob enters the field
 	. = ..()
 	if(!chime.isplaced)
+		return
+	if(entered.z != chime.z)
 		return
 	if(valid_target(entered))
 		if(!(entered in tracked_mobs))
 			tracked_mobs |= entered
-			if(tracked_mobs.len == 1) // Starts the loop on the first target, continues until there are no more targets
+			if(tracked_mobs.len == 1) // Starts ringing on the first target, continues until there are no more targets
 				chime.start_ringing()
+			else if(tracked_mobs.len < 1)
+				chime.stop_ringing()
+	if(!valid_target(entered))
+		if(entered.orbiters)
+			for(var/mob/dead/observer/ghost in entered.get_all_orbiters()) // Check for orbiting ghosts in the field
+				if(valid_target(ghost))
+					if(!(ghost in tracked_mobs))
+						tracked_mobs |= ghost
+						if(tracked_mobs.len == 1)
+							chime.start_ringing()
+						else if(tracked_mobs.len < 1)
+							chime.stop_ringing()
 
-/datum/proximity_monitor/advanced/spirit_chime/field_turf_uncrossed(atom/movable/gone, turf/old_location, turf/new_location)
+/datum/proximity_monitor/advanced/spirit_chime/field_turf_uncrossed(atom/movable/gone, turf/old_location, turf/new_location) // Handles when a mob leaves the field
 	. = ..()
 	if(!chime.isplaced)
 		return
 	if(gone in tracked_mobs)
 		tracked_mobs -= gone
+	if(gone.z != chime.z || !valid_target(gone))
+		if(gone in tracked_mobs)
+			tracked_mobs -= gone
+	if(gone.orbiters)
+		for(var/mob/dead/observer/ghost in gone.get_all_orbiters())
+			if(ghost in tracked_mobs)
+				tracked_mobs -= ghost
 
+// Procs
 /obj/item/spirit_chime/proc/start_ringing()
 	if(ringing || !isplaced || !chime_field)
 		return
 	ringing = TRUE
-	ring_loop()
+	last_ring_time = world.time - ring_delay
+	START_PROCESSING(SSprocessing, src)
 
-/obj/item/spirit_chime/proc/ring_loop()
-	if(!ringing || !isplaced || !chime_field || chime_field.tracked_mobs.len < 1)
-		ringing = FALSE
-		return
-	ring()
-	spawn(50) // 5 second delay, adjust as needed
-		ring_loop()
+/obj/item/spirit_chime/proc/stop_ringing()
+	ringing = FALSE
+	STOP_PROCESSING(SSprocessing, src)
 
 /obj/item/spirit_chime/proc/ring()
 	playsound(src, 'modular_tfn/modules/spirit_chime/sound/spirit_chime_ring.ogg', 50, FALSE)
 	visible_message(span_notice("The chime rings out!"), vision_distance = 10)
+	visible_message(span_notice("Ghosts in range: [chime_field.tracked_mobs.len]"), vision_distance = 100)
 
 /proc/valid_target(atom/movable/target)
 	if(istype(target, /mob/dead/observer))
 		var/mob/dead/observer/ghost = target
-		if(ghost.mind && !ghost.aghosted || isavatar(ghost)) // Checks only for ghosts of the dead & Auspex 5 avatars
+		if((ghost.mind && !ghost.aghosted) || isavatar(ghost)) // Checks only for ghosts of the dead & Auspex 5 avatars
 			return TRUE
+		if(ghost.mind && ghost.orbiting) // Checks for orbiting ghosts
+			return TRUE
+	return FALSE
