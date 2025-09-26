@@ -221,3 +221,20 @@
   - qol: Wyrm Taint can be taken by humans
   chazzyjazzy:
   - bugfix: stacking pancakes no longer causes an error sprite
+2025-09-21:
+  SoreYew:
+  - rscdel: "ss and nazi onfloor sprites \U0001F480"
+2025-09-22:
+  LofiOtter:
+  - rscadd: Added Irish, Scottish, Welsh; ported Korean, Persian, Armenian, and Tagalog
+      as language merits.
+  Marshmellow105:
+  - map: moved the anarch bar to the west side of the map near the graveyard/endron
+      processing plant and placed shops/apartments where it used to go
+  - map: hopefully fixed suicide by car accident rates around the mall
+  - map: added one window to the northwestern gio apartment
+2025-09-24:
+  '@magicianofwands':
+  - bugfix: accidental red walls
+  Kolibri-B:
+  - bugfix: Fixed an issue with Temporis 3, Leaden Moment
