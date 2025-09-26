@@ -96,6 +96,12 @@ LOG_VOTE
 ## log client Whisper
 LOG_WHISPER
 
+## log subtle messages
+LOG_SUBTLE
+
+## log subtler messages
+LOG_SUBTLER
+
 ## log all world.Topic() calls
 # LOG_WORLD_TOPIC
 

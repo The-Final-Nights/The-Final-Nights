@@ -212,7 +212,9 @@ GLOBAL_PROTECT(admin_verbs_debug)
 #endif
 	/client/proc/check_timer_sources,
 	/client/proc/toggle_cdn,
-	/client/proc/allow_browser_inspect
+	/client/proc/allow_browser_inspect,
+	/client/proc/start_tracy,
+	/client/proc/queue_tracy
 	)
 GLOBAL_LIST_INIT(admin_verbs_possess, list(GLOBAL_PROC_REF(possess), GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)
