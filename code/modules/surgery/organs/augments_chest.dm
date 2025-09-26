@@ -125,6 +125,8 @@
 		to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
 
 // TFN ADDITION - Tzimisce Rework part 2
+
+// TFN ADDITION - Tzimisce Rework part 2
 /obj/item/organ/cyberimp/chest/reviver/tzimisce
 	name = "Second Heart"
 	desc = "This organ will automatically restart a cardiac system upon cessation of vital functions, alongside releasing mild regenerative chemicals. Implanted in the chest."
