@@ -1,6 +1,98 @@
 #define RESTART_COUNTER_PATH "data/round_counter.txt"
+/// Load byond-tracy. If USE_BYOND_TRACY is defined, then this is ignored and byond-tracy is always loaded.
+#define USE_TRACY_PARAMETER "tracy"
+/// Force the log directory to be something specific in the data/logs folder
+#define OVERRIDE_LOG_DIRECTORY_PARAMETER "log-directory"
+/// Prevent the master controller from starting automatically
+#define NO_INIT_PARAMETER "no-init"
 
 GLOBAL_VAR(restart_counter)
+
+/**
+ * WORLD INITIALIZATION
+ * THIS IS THE INIT ORDER:
+ *
+ * BYOND =>
+ * - (secret init native) =>
+ *   - world.Genesis() =>
+ *     - world.init_byond_tracy()
+ *     - (Start native profiling)
+ *     - world.init_debugger()
+ *     - Master =>
+ *       - config *unloaded
+ *       - (all subsystems) PreInit()
+ *       - GLOB =>
+ *         - make_datum_reference_lists()
+ *   - (/static variable inits, reverse declaration order)
+ * - (all pre-mapped atoms) /atom/New()
+ * - world.New() =>
+ *   - config.Load()
+ *   - world.InitTgs() =>
+ *     - TgsNew() *may sleep
+ *     - GLOB.rev_data.load_tgs_info()
+ *   - world.ConfigLoaded() =>
+ *     - SSdbcore.InitializeRound()
+ *     - world.SetupLogs()
+ *     - load_admins()
+ *     - ...
+ *   - Master.Initialize() =>
+ *     - (all subsystems) Initialize()
+ *     - Master.StartProcessing() =>
+ *       - Master.Loop() =>
+ *         - Failsafe
+ *   - world.RunUnattendedFunctions()
+ *
+ * Now listen up because I want to make something clear:
+ * If something is not in this list it should almost definitely be handled by a subsystem Initialize()ing
+ * If whatever it is that needs doing doesn't fit in a subsystem you probably aren't trying hard enough tbhfam
+ *
+ * GOT IT MEMORIZED?
+ * - Dominion/Cyberboss
+ */
+
+/**
+ * THIS !!!SINGLE!!! PROC IS WHERE ANY FORM OF INIITIALIZATION THAT CAN'T BE PERFORMED IN MASTER/NEW() IS DONE
+ * NOWHERE THE FUCK ELSE
+ * I DON'T CARE HOW MANY LAYERS OF DEBUG/PROFILE/TRACE WE HAVE, YOU JUST HAVE TO DEAL WITH THIS PROC EXISTING
+ * I'M NOT EVEN GOING TO TELL YOU WHERE IT'S CALLED FROM BECAUSE I'M DECLARING THAT FORBIDDEN KNOWLEDGE
+ * SO HELP ME GOD IF I FIND ABSTRACTION LAYERS OVER THIS!
+ */
+/world/proc/Genesis(tracy_initialized = FALSE)
+	RETURN_TYPE(/datum/controller/master)
+
+	if(!tracy_initialized)
+		Tracy = new
+#ifdef USE_BYOND_TRACY
+		if(Tracy.enable("USE_BYOND_TRACY defined"))
+			Genesis(tracy_initialized = TRUE)
+			return
+#else
+		var/tracy_enable_reason
+		if(USE_TRACY_PARAMETER in params)
+			tracy_enable_reason = "world.params"
+		if(fexists(TRACY_ENABLE_PATH))
+			tracy_enable_reason ||= "enabled for round"
+			SEND_TEXT(world.log, "[TRACY_ENABLE_PATH] exists, initializing byond-tracy!")
+			fdel(TRACY_ENABLE_PATH)
+		if(!isnull(tracy_enable_reason) && Tracy.enable(tracy_enable_reason))
+			Genesis(tracy_initialized = TRUE)
+			return
+#endif
+
+	Profile(PROFILE_RESTART)
+	Profile(PROFILE_RESTART, type = "sendmaps")
+
+	// Write everything to this log file until we get to SetupLogs() later
+	_initialize_log_files("data/logs/config_error.[GUID()].log")
+
+	// Init the debugger first so we can debug Master
+	Debugger = new
+
+	// Create the logger
+	logger = new
+
+	// THAT'S IT, WE'RE DONE, THE. FUCKING. END.
+	Master = new
 
 /**
  * World creation
@@ -29,64 +121,53 @@ GLOBAL_VAR(restart_counter)
  *			All atoms in both compiled and uncompiled maps are initialized()
  */
 /world/New()
-	// Write everything to this log file until we get to SetupLogs() later
-	_initialize_log_files("data/logs/config_error.[GUID()].log")
-
-#ifdef REFERENCE_TRACKING
-	enable_reference_tracking()
-#endif
 	log_world("World loaded at [time_stamp()]!")
+	// From a really fucking old commit (91d7150)
+	// I wanted to move it but I think this needs to be after /world/New is called but before any sleeps?
+	// - Dominion/Cyberboss
+	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
 
-	make_datum_references_lists()	//initialises global lists for referencing frequently used datums (so that we only ever do it once)
-
-	GLOB.revdata = new
-
+	// First possible sleep()
 	InitTgs()
 
 	config.Load(params[OVERRIDE_CONFIG_DIRECTORY_PARAMETER])
 
-	load_admins()
-	load_mentors()
-
-	//SetupLogs depends on the RoundID, so lets check
-	//DB schema and set RoundID if we can
-	SSdbcore.CheckSchemaVersion()
-	SSdbcore.SetRoundID()
-	load_poll_data()
-
-	populate_gear_list() // TFN ADDITION START: loadout
-
-#ifndef USE_CUSTOM_ERROR_HANDLER
-	world.log = file("[GLOB.log_directory]/dd.log")
-#else
-	if (TgsAvailable())
-		world.log = file("[GLOB.log_directory]/dd.log") //not all runtimes trigger world/Error, so this is the only way to ensure we can see all of them.
-#endif
-
-	LoadVerbs(/datum/verbs/menu)
-	if(CONFIG_GET(flag/usewhitelist))
-		load_whitelist()
-
-	GLOB.timezoneOffset = text2num(time2text(0,"hh")) * 36000
-
-	if(fexists(RESTART_COUNTER_PATH))
-		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
-		fdel(RESTART_COUNTER_PATH)
+	ConfigLoaded()
 
 	if(NO_INIT_PARAMETER in params)
 		return
 
-	SetupLogs()
-
 	Master.Initialize(10, FALSE, TRUE)
 
-	#ifdef UNIT_TESTS
-	HandleTestRun()
-	#endif
+	RunUnattendedFunctions()
 
+/// Initializes TGS and loads the returned revising info into GLOB.revdata
 /world/proc/InitTgs()
 	TgsNew(new /datum/tgs_event_handler/impl, TGS_SECURITY_TRUSTED)
 	GLOB.revdata.load_tgs_info()
+
+/// Runs after config is loaded but before Master is initialized
+/world/proc/ConfigLoaded()
+	// Everything in here is prioritized in a very specific way.
+	// If you need to add to it, ask yourself hard if what your adding is in the right spot
+	// (i.e. basically nothing should be added before load_admins() in here)
+	// Try to set round ID
+	SSdbcore.InitializeRound()
+	SetupLogs()
+	load_admins()
+	load_mentors()
+	load_poll_data()
+	LoadVerbs(/datum/verbs/menu)
+	populate_gear_list() // TFN ADDITION START: loadout
+	if(fexists(RESTART_COUNTER_PATH))
+		GLOB.restart_counter = text2num(trim(file2text(RESTART_COUNTER_PATH)))
+		fdel(RESTART_COUNTER_PATH)
+
+/// Runs after the call to Master.Initialize, but before the delay kicks in. Used to turn the world execution into some single function then exit
+/world/proc/RunUnattendedFunctions()
+	#ifdef UNIT_TESTS
+	HandleTestRun()
+	#endif
 
 /world/proc/HandleTestRun()
 	//trigger things to run the whole process
@@ -107,7 +188,7 @@ GLOBAL_VAR(restart_counter)
 	data["tick_usage"] = world.tick_usage
 	data["tick_lag"] = world.tick_lag
 	data["time"] = world.time
-	data["timestamp"] = GLOB.logger.unix_timestamp_string()
+	data["timestamp"] = rustg_unix_timestamp()
 	return data
 
 /world/proc/SetupLogs()
@@ -132,7 +213,10 @@ GLOBAL_VAR(restart_counter)
 		GLOB.picture_logging_prefix = "O_[override_dir]_"
 		GLOB.picture_log_directory = "data/picture_logs/[override_dir]"
 
-	GLOB.logger.init_logging()
+	logger.init_logging()
+
+	if(Tracy.trace_path)
+		rustg_file_write("[Tracy.trace_path]", "[GLOB.log_directory]/tracy.loc")
 
 	var/latest_changelog = file("[global.config.directory]/../html/changelogs/archive/" + time2text(world.timeofday, "YYYY-MM", TIMEZONE_UTC) + ".yml")
 	GLOB.changelog_hash = fexists(latest_changelog) ? md5(latest_changelog) : 0 //for telling if the changelog has changed recently
@@ -208,6 +292,26 @@ GLOBAL_VAR(restart_counter)
 	sleep(0)	//yes, 0, this'll let Reboot finish and prevent byond memes
 	qdel(src)	//shut it down
 
+/// Returns TRUE if the world should do a TGS hard reboot.
+/world/proc/check_hard_reboot()
+	if(!TgsAvailable())
+		return FALSE
+	// byond-tracy can't clean up itself, and thus we should always hard reboot if its enabled, to avoid an infinitely growing trace.
+	if(Tracy?.enabled)
+		return TRUE
+	var/ruhr = CONFIG_GET(number/rounds_until_hard_restart)
+	switch(ruhr)
+		if(-1)
+			return FALSE
+		if(0)
+			return TRUE
+		else
+			if(GLOB.restart_counter >= ruhr)
+				return TRUE
+			else
+				text2file("[++GLOB.restart_counter]", RESTART_COUNTER_PATH)
+				return FALSE
+
 /world/Reboot(reason = 0, fast_track = FALSE)
 	if (reason || fast_track) //special reboot, do none of the normal stuff
 		if (usr)
@@ -221,34 +325,31 @@ GLOBAL_VAR(restart_counter)
 	#ifdef UNIT_TESTS
 	FinishTestRun()
 	return
-	#endif
-
-	if(TgsAvailable())
-		var/do_hard_reboot
-		// check the hard reboot counter
-		var/ruhr = CONFIG_GET(number/rounds_until_hard_restart)
-		switch(ruhr)
-			if(-1)
-				do_hard_reboot = FALSE
-			if(0)
-				do_hard_reboot = TRUE
-			else
-				if(GLOB.restart_counter >= ruhr)
-					do_hard_reboot = TRUE
-				else
-					text2file("[++GLOB.restart_counter]", RESTART_COUNTER_PATH)
-					do_hard_reboot = FALSE
-
-		if(do_hard_reboot)
-			log_world("World hard rebooted at [time_stamp()]")
-			shutdown_logging() // See comment below.
-			TgsEndProcess()
+	#else
+	if(check_hard_reboot())
+		log_world("World hard rebooted at [time_stamp()]")
+		shutdown_logging() // See comment below.
+		QDEL_NULL(Tracy)
+		QDEL_NULL(Debugger)
+		TgsEndProcess()
+		return ..()
 
 	log_world("World rebooted at [time_stamp()]")
 
 	TgsReboot()
 	shutdown_logging() // Past this point, no logging procs can be used, at risk of data loss.
+	QDEL_NULL(Tracy)
+	QDEL_NULL(Debugger)
+
+	TgsReboot() // TGS can decide to kill us right here, so it's important to do it last
+
 	..()
+	#endif
+
+/world/Del()
+	QDEL_NULL(Tracy)
+	QDEL_NULL(Debugger)
+	. = ..()
 
 /world/proc/update_status()
 
@@ -331,37 +432,11 @@ GLOBAL_VAR(restart_counter)
 /world/proc/on_tickrate_change()
 	SStimer?.reset_buckets()
 
-/world/proc/convert_saves_to_json(path_to_save)
-	// Determine the path variables to use based on our host OS
-	var/regex/trimmer
-	var/shell_command
-	var/path_char
-	if(world.system_type == UNIX)
-		trimmer = regex("data/player_saves/.*")
-		shell_command = "find data/player_saves/ -type f"
-		path_char = "/"
-	else // We're on Windows
-		trimmer = regex("data\\\\player_saves\\\\.*")
-		shell_command = "dir /A-D /b /s data\\player_saves\\"
-		path_char = "\\"
-	var/untrimmed_file_list = splittext(world.shelleo("[shell_command]")[2], "\n")
-	// Just in case the whole path gets returned instead of the relative
-	var/list/file_list = list()
-	for(var/file_path in untrimmed_file_list)
-		trimmer.Find(file_path)
-		if(trimmer.match)
-			file_list += trimmer.match
-		trimmer.match = null
-	for(var/trimmed_path in file_list)
-		var/datum/json_savefile/json_son = new
-		var/savefile/S = new(trimmed_path)
-		json_son.import_byond_savefile(S)
-		var/list/split_path = splittext(trimmed_path, path_char)
-		var/dir_name = split_path[split_path.len - 1]
-		var/file_name = replacetext(split_path[split_path.len], ".sav", ".json")
-		// Path to save, first_char as a directory, path separator, file_name
-		// IE: path_to_save/a/apple.json
-		json_son.path = (path_to_save + dir_name[1] + path_char + dir_name + path_char + file_name)
-		json_son.save()
+/world/Profile(command, type, format)
+	if((command & PROFILE_STOP) || !global.config?.loaded || !CONFIG_GET(flag/forbid_all_profiling))
+		. = ..()
 
+#undef NO_INIT_PARAMETER
+#undef OVERRIDE_LOG_DIRECTORY_PARAMETER
+#undef USE_TRACY_PARAMETER
 #undef RESTART_COUNTER_PATH

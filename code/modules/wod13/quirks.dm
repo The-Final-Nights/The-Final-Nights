@@ -579,6 +579,68 @@ Dancer
 	var/mob/living/carbon/H = quirk_holder
 	H.grant_language(/datum/language/greek)
 
+/datum/quirk/irish
+	name = "Irish"
+	desc = "You know the Irish language."
+	value = 1
+
+/datum/quirk/irish/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/irish)
+
+/datum/quirk/scottish
+	name = "Scottish"
+	desc = "You know the Scottish language."
+	value = 1
+
+/datum/quirk/scottish/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/scottish)
+
+/datum/quirk/welsh
+	name = "Welsh"
+	desc = "You know the Welsh language."
+	value = 1
+
+/datum/quirk/welsh/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/welsh)
+
+/datum/quirk/armenian
+	name = "Armenian"
+	desc = "You know the Armenian language."
+	value = 1
+
+/datum/quirk/armenian/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/armenian)
+
+/datum/quirk/farsi
+	name = "Farsi"
+	desc = "You know the Persian language."
+	value = 1
+
+/datum/quirk/farsi/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/farsi)
+
+/datum/quirk/korean
+	name = "Korean"
+	desc = "You know the Korean language."
+	value = 1
+
+/datum/quirk/korean/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/korean)
+
+/datum/quirk/tagalog
+	name = "Tagalog"
+	desc = "You know the Filipino language."
+	value = 1
+
+/datum/quirk/tagalog/add()
+	var/mob/living/carbon/H = quirk_holder
+	H.grant_language(/datum/language/tagalog)
 
 /datum/quirk/consumption
 	name = "Consumption"

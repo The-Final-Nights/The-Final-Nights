@@ -22,7 +22,7 @@
 
 	return POWER_CANCEL_ACTIVATION
 
-//HOURGLASS OF THE MIND
+// **************************************************************** HOURGLASS OF THE MIND *************************************************************
 /datum/discipline_power/temporis/hourglass_of_the_mind
 	name = "Hourglass of the Mind"
 	desc = "Gain a perfect sense of time. Know exactly when you are, and share this knowledge with others."
@@ -34,9 +34,9 @@
 
 /datum/discipline_power/temporis/hourglass_of_the_mind/activate()
 	. = ..()
-	//Display time
-	to_chat(owner, span_notice("<b>[SScity_time.timeofnight]</b>"))
-	//Check range for targets with Temporis and display them, if any exist
+	to_chat(owner, span_notice("<b>[SScity_time.timeofnight]</b>")) // Display time
+
+	// Check range for targets with Temporis and display them, if any exist
 	var/list/targets = list()
 	for(var/mob/living/carbon/human/target in view(range, owner))
 		if(target == owner)
@@ -59,7 +59,7 @@
 		to_chat(owner, span_notice("There are no temporal distortions nearby."))
 	return TRUE
 
-//RECURRING CONTEMPLATION
+// **************************************************************** RECURRING CONTEMPLATION *************************************************************
 /datum/discipline_power/temporis/recurring_contemplation
 	name = "Recurring Contemplation"
 	desc = "Trap your target into repeating the same set of actions."
@@ -75,7 +75,7 @@
 
 /datum/discipline_power/temporis/recurring_contemplation/activate(mob/living/target)
 	. = ..()
-	//Roll for degree of success, mentality + social vs mentality in place of manipulation + occult vs willpower
+	// Roll for degree of success, mentality + social vs mentality in place of manipulation + occult vs willpower
 	var/mypower = owner.get_total_mentality() + owner.get_total_social()
 	var/theirpower = target.get_total_mentality()
 	var/rollsuccess = SSroll.storyteller_roll(mypower, difficulty = theirpower, mobs_to_show_output = owner, numerical = TRUE)
@@ -85,10 +85,9 @@
 		to_chat(owner, span_userdanger("<b>You fail to affect your target!</b>"))
 		return
 
-//LEADEN MOMENT
+// **************************************************************** LEADEN MOMENT *************************************************************
 /datum/movespeed_modifier/temporis3
-	//Modifier applied by Leaden Moment, default value of 1
-	multiplicative_slowdown = 1
+	multiplicative_slowdown = 1 // Modifier applied by Leaden Moment, default value of 1
 
 /datum/discipline_power/temporis/leaden_moment
 	name = "Leaden Moment"
@@ -105,58 +104,54 @@
 	cooldown_length = 1 TURNS
 	duration_override = TRUE
 
-	//Variables for speed value modifier & dynamic duration
+	// Variables for speed value modifier & dynamic duration
 	var/datum/movespeed_modifier/temporis3/active_mod
 	var/discduration
+	// Variable for affected mob
+	var/mob/living/affected_mob
 
 /datum/discipline_power/temporis/leaden_moment/activate(mob/living/target)
 	. = ..()
 	if(!.)
 		return FALSE
 
-	//Roll for degree of success, mentality + social in place of intelligence + occult
+	// Roll for degree of success, mentality + social in place of intelligence + occult
 	var/dice = owner.get_total_mentality() + owner.get_total_social()
 	var/success = SSroll.storyteller_roll(dice, difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/trueroll = abs(success)
 	if(!success)
 		return FALSE
-	//Discipline duration, 1 turn per 2 successes, rounded up
-	var/discduration = CEILING(trueroll/2,1) TURNS
-	//Half movement & action speed at 1 success, scaling per 2 successes after (1/3 at 3, 1/4 at 5, etc)
-	var/slowdown = 1 + CEILING(trueroll/2,1)
-	var/mob/living/affected_mob
+	discduration = CEILING(trueroll/2,1) TURNS // Discipline duration, 1 turn per 2 successes, rounded up
+	var/slowdown = 1 + CEILING(trueroll/2,1) // Half movement & action speed at 1 success, scaling per 2 successes after (1/3 at 3, 1/4 at 5, etc)
 
-	//Determine targets, start timers
+	// Determine targets, start timers
 	if(success > 0)
-		addtimer(CALLBACK(src, PROC_REF(deactivate),target), discduration)
-		to_chat(target, span_userdanger("<b>Time seems to slow to a crawl around you...</b>"))
 		affected_mob = target
+		to_chat(target, span_userdanger("<b>Time seems to slow to a crawl around you...</b>"))
 	else if(success < 0)
-		//Botch causes the owner to be slowed instead
-		addtimer(CALLBACK(src, PROC_REF(deactivate)), discduration)
+		affected_mob = owner // Botch causes the owner to be affected instead
 		to_chat(owner, span_userdanger("<b>Your temporal manipulation backfires!</b>"))
-		affected_mob = owner
 
-	//Apply modifiers to target
+	// Apply modifiers to affected mob
 	active_mod = new
 	active_mod.multiplicative_slowdown = slowdown
 	affected_mob.add_movespeed_modifier(active_mod, TRUE)
 	affected_mob.next_move_modifier *= slowdown
+
+	addtimer(CALLBACK(src, PROC_REF(deactivate)), discduration)
 	return TRUE
 
-/datum/discipline_power/temporis/leaden_moment/deactivate(mob/living/target)
+/datum/discipline_power/temporis/leaden_moment/deactivate()
 	. = ..()
-	if(active_mod)
-		if(target)
-			target.remove_movespeed_modifier(active_mod, TRUE)
-			target.next_move_modifier /= active_mod.multiplicative_slowdown
-		if(owner)
-			owner.remove_movespeed_modifier(active_mod, TRUE)
-			owner.next_move_modifier /= active_mod.multiplicative_slowdown
+	// Remove modifiers from affected mob
+	if(active_mod && affected_mob)
+		affected_mob.remove_movespeed_modifier(active_mod, TRUE)
+		affected_mob.next_move_modifier /= active_mod.multiplicative_slowdown
 		qdel(active_mod)
 		active_mod = null
+		affected_mob = null
 
-//COWALKER
+// **************************************************************** COWALKER *************************************************************
 /datum/discipline_power/temporis/cowalker
 	name = "Cowalker"
 	desc = "Be in multiple places at once, creating several false images."
@@ -209,10 +204,9 @@
 	spawn(0.5 SECONDS)
 		qdel(src)
 
-//CLOTHO'S GIFT
+// **************************************************************** CLOTHO'S GIFT *************************************************************
 /datum/movespeed_modifier/temporis5
-	//Modifier applied by Clotho's Gift
-	var/speed_modifier
+	var/speed_modifier // Modifier applied by Clotho's Gift
 
 /datum/discipline_power/temporis/clothos_gift
 	name = "Clotho's Gift"
@@ -227,14 +221,14 @@
 	duration_length = 3 TURNS
 	cooldown_length = 1 TURNS
 
-	//Speed modifier & active modifier
+	// Speed modifier & active modifier
 	var/speed_modifier
 	var/datum/movespeed_modifier/temporis5/active_modifier
 
 /datum/discipline_power/temporis/clothos_gift/activate()
 	. = ..()
 
-	//Roll for degree of success, mentality + social in place of intelligence + occult
+	// Roll for degree of success, mentality + social in place of intelligence + occult
 	var/dice = owner.get_total_mentality() + owner.get_total_social()
 	var/success = SSroll.storyteller_roll(dice, difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
 	if(success > 0)
@@ -242,7 +236,7 @@
 	else
 		cancelable = FALSE
 
-	//Applying the modifiers
+	// Applying the modifiers
 	active_modifier = new
 	active_modifier.speed_modifier = success
 	active_modifier.multiplicative_slowdown = -success
@@ -255,7 +249,7 @@
 
 /datum/discipline_power/temporis/clothos_gift/deactivate()
 	. = ..()
-	//Removing the modifiers
+	// Removing the modifiers
 	if(active_modifier)
 		if(active_modifier != 0)
 			owner.remove_movespeed_modifier(active_modifier)
@@ -276,7 +270,7 @@
 		animate(temporis_visual, pixel_x = rand(-32,32), pixel_y = rand(-32,32), alpha = 155, time = 0.5 SECONDS)
 		SEND_SIGNAL(owner, COMSIG_MASQUERADE_VIOLATION)
 
-//KISS OF LACHESIS
+// **************************************************************** KISS OF LACHESIS *************************************************************
 /datum/discipline_power/temporis/kiss_of_lachesis
 	name = "Kiss of Lachesis"
 	desc = "Change a target's biological age."

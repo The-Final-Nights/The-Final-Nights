@@ -103,7 +103,7 @@ GLOBAL_LIST_EMPTY(deletion_failures)
 
 #endif
 
-#ifdef LEGACY_REFERENCE_TRACKING
+#ifdef REFERENCE_TRACKING
 
 /datum/verb/legacy_find_refs()
 	set category = "Debug"

@@ -31,7 +31,15 @@
 		/datum/language/cantonese,
 		/datum/language/greek,
 		/datum/language/garou_tongue,
-		/datum/language/primal_tongue
+		/datum/language/primal_tongue,
+	//TFN Languages - Adds Seven Languages, Armenian, Farsi, Korean, and Tagalog ported from Requiem.
+		/datum/language/irish,
+		/datum/language/scottish,
+		/datum/language/welsh,
+		/datum/language/armenian,
+		/datum/language/farsi,
+		/datum/language/korean,
+		/datum/language/tagalog
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)
