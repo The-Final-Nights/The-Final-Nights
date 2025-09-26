@@ -2173,15 +2173,6 @@
 /obj/effect/decal/bordur{
 	dir = 1
 	},
-/obj/structure/lamppost/one{
-	dir = 1
-	},
-/obj/effect/landmark/npcability,
-/obj/effect/landmark/npcbeacon,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/bordur{
 	dir = 1
 	},
@@ -3595,10 +3586,6 @@
 /area/vtm/interior/endron_facility/plant)
 "aSS" = (
 /obj/effect/decal/litter,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/bordur{
 	dir = 4
 	},
@@ -4717,10 +4704,6 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior)
-"bgh" = (
-/obj/effect/decal/asphaltline/alt,
-/turf/open/floor/plating/asphalt,
-/area/vtm/pacificheights)
 "bgq" = (
 /obj/machinery/light/prince{
 	dir = 4;
@@ -6156,17 +6139,6 @@
 /obj/structure/roofstuff/alt2,
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm)
-"byw" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/obj/effect/landmark/npcbeacon,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights)
 "byH" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1;
@@ -15387,12 +15359,9 @@
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/setite)
 "dHK" = (
-/obj/effect/decal/bordur/corner,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/bordur,
+/obj/effect/landmark/npcbeacon,
+/obj/effect/landmark/npcability,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
 "dHO" = (
@@ -17946,11 +17915,6 @@
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
 "enq" = (
-/obj/effect/decal/litter,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/table/wood,
 /obj/machinery/vending/boozeomat/all_access{
 	pixel_y = 28;
@@ -17969,7 +17933,6 @@
 	pixel_y = 4;
 	pixel_x = -10
 	},
-/obj/effect/decal/litter,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch)
 "enu" = (
@@ -18940,13 +18903,6 @@
 "ezr" = (
 /obj/effect/decal/bordur{
 	dir = 8
-	},
-/obj/structure/roadsign/stop,
-/obj/effect/landmark/npcability,
-/obj/effect/landmark/npcbeacon,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
 	},
 /obj/effect/landmark/npcactivity,
 /turf/open/floor/plating/sidewalk,
@@ -26491,10 +26447,6 @@
 /area/vtm)
 "ggK" = (
 /mob/living/carbon/human/npc/walkby,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/trash,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
@@ -31301,16 +31253,6 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
-"hoc" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/landmark/npcbeacon,
-/obj/effect/landmark/npcability,
-/obj/effect/landmark/npcbeacon,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights/industrial)
 "hol" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
@@ -33055,10 +32997,6 @@
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
 "hKC" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/bordur/corner,
 /obj/effect/landmark/npcability,
 /obj/effect/landmark/npcbeacon,
@@ -33167,10 +33105,6 @@
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
 "hLl" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/structure/chair/sofa/old/corner{
 	color = "#525252"
 	},
@@ -34607,10 +34541,6 @@
 /turf/open/floor/plasteel/stairs,
 /area/vtm/anarch/basement)
 "icq" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/graffiti,
 /obj/effect/landmark/npcactivity,
 /turf/open/floor/plating/sidewalk,
@@ -38097,19 +38027,6 @@
 	},
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
-"iPL" = (
-/obj/effect/decal/bordur{
-	dir = 8
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/bordur{
-	dir = 1
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights)
 "iPQ" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 1
@@ -39948,17 +39865,6 @@
 "jmr" = (
 /turf/closed/wall/vampwall/metal/reinforced,
 /area/vtm/interior/wyrm_corrupted)
-"jmu" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/asphaltline/alt{
-	dir = 8;
-	pixel_y = 15
-	},
-/turf/open/floor/plating/asphalt,
-/area/vtm/pacificheights)
 "jmx" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/melee/vampirearms/shovel,
@@ -46353,18 +46259,6 @@
 	},
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility/restricted)
-"kKq" = (
-/mob/living/carbon/human/npc/walkby,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/mob/living/carbon/human/npc/walkby,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights)
 "kKu" = (
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/community)
@@ -50945,23 +50839,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/bianchiBank)
-"lNm" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/mirror{
-	pixel_y = 32;
-	plane = 1
-	},
-/obj/structure/sink{
-	pixel_y = 16;
-	plane = 3
-	},
-/turf/open/floor/plating/toilet{
-	color = "#636363"
-	},
-/area/vtm/anarch)
 "lNp" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#39537F";
@@ -51141,18 +51018,6 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/endron_facility/restricted)
-"lPp" = (
-/obj/effect/decal/bordur,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/bordur,
-/obj/effect/landmark/npcbeacon,
-/obj/effect/landmark/npcability,
-/obj/effect/landmark/npcbeacon,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights/industrial)
 "lPu" = (
 /obj/effect/decal/trash,
 /obj/structure/flora/ausbushes/sparsegrass,
@@ -60455,12 +60320,6 @@
 /obj/effect/decal/bordur{
 	dir = 1
 	},
-/obj/effect/landmark/npcability,
-/obj/effect/landmark/npcbeacon,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/bordur/corner{
 	dir = 1
 	},
@@ -69450,19 +69309,6 @@
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
-"pXd" = (
-/obj/effect/decal/crosswalk{
-	dir = 8
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/bordur/corner{
-	dir = 8
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights)
 "pXh" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -75755,14 +75601,7 @@
 /area/vtm/interior/museum)
 "rvq" = (
 /obj/effect/decal/bordur,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
 /obj/effect/decal/bordur/corner{
-	dir = 4
-	},
-/obj/structure/lamppost/one{
 	dir = 4
 	},
 /turf/open/floor/plating/sidewalk,
@@ -76394,17 +76233,6 @@
 /mob/living/carbon/human/npc/police/static,
 /turf/open/floor/plating/asphalt,
 /area/vtm/interior/police)
-"rCS" = (
-/obj/effect/decal/crosswalk{
-	dir = 8
-	},
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/bordur/corner,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights/industrial)
 "rCZ" = (
 /obj/machinery/light/dim{
 	dir = 8
@@ -78609,18 +78437,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/clinic/haven)
-"sfM" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/bordur{
-	dir = 8
-	},
-/obj/effect/landmark/npcability,
-/obj/effect/landmark/npcbeacon,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights/industrial)
 "sfN" = (
 /obj/effect/decal/bordur{
 	dir = 6
@@ -81070,14 +80886,6 @@
 	color = "#838383"
 	},
 /area/vtm/jazzclub)
-"sLa" = (
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/structure/table/wood,
-/turf/closed/wall/vampwall/bar/low,
-/area/vtm/anarch)
 "sLi" = (
 /obj/structure/chair/green{
 	dir = 1
@@ -82658,12 +82466,6 @@
 /area/vtm/interior/giovanni)
 "tdJ" = (
 /obj/effect/decal/litter,
-/obj/merge_conflict_marker{
-	name = "---Merge Conflict Marker---";
-	desc = "A best-effort merge was performed. You must resolve this conflict yourself (manually) and remove this object once complete."
-	},
-/obj/effect/decal/litter,
-/obj/effect/landmark/npcbeacon,
 /obj/effect/landmark/npcability,
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk,
@@ -148042,7 +147844,7 @@ iQQ
 dSH
 dSH
 kBM
-sLa
+dpa
 dpa
 dpa
 ivd
@@ -149872,7 +149674,7 @@ fuk
 bmG
 rsF
 kBM
-hoc
+oyj
 hdQ
 uDw
 uDw
@@ -150062,7 +149864,7 @@ iQQ
 dSH
 dSH
 tuR
-lNm
+izr
 naa
 naa
 naa
@@ -150075,7 +149877,7 @@ sGz
 eqY
 kBM
 icq
-lPp
+aJL
 uDw
 vGb
 uDw
@@ -151476,16 +151278,16 @@ iQQ
 dSH
 dSH
 nUQ
-nJu
+bdh
 lLw
 lLw
 bdh
 aSS
 lLw
 bdh
-kKq
+oCJ
 pOA
-byw
+bdh
 lLw
 lLw
 tlM
@@ -151677,7 +151479,6 @@ dSH
 iQQ
 dSH
 dSH
-dSH
 mne
 dSH
 dSH
@@ -151690,8 +151491,9 @@ dSH
 dSH
 dSH
 dSH
-jlp
+dSH
 uDw
+jlp
 uDw
 vGb
 uDw
@@ -152082,7 +151884,6 @@ iQQ
 dSH
 dSH
 mne
-bgh
 dSH
 dSH
 dSH
@@ -152094,7 +151895,8 @@ dSH
 dSH
 dSH
 dSH
-woi
+dSH
+uDw
 jlp
 uDw
 vGb
@@ -152283,21 +152085,21 @@ dSH
 iQQ
 dSH
 dSH
-pXd
+jqq
 hKC
 dSH
-dSH
+gGL
+wcI
+lFL
 wcI
 dSH
 wcI
-dSH
-wcI
-dSH
+gGL
 wcI
 dSH
 vlH
-sfM
-rCS
+hry
+rwU
 uDw
 vGb
 uDw
@@ -152488,16 +152290,16 @@ dSH
 fYF
 rti
 dSH
-gGL
-wcI
-lFL
+dSH
 wcI
 dSH
 wcI
-gGL
+dSH
 wcI
 dSH
-iPL
+wcI
+dSH
+rQf
 ezr
 dHK
 uDw
@@ -152691,7 +152493,7 @@ azG
 lsG
 dSH
 dSH
-jmu
+wcI
 dSH
 wcI
 dSH
