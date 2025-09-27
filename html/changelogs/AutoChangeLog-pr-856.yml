@@ -1,0 +1,4 @@
+author: "LofiOtter"
+delete-after: True
+changes:
+  - bugfix: "Ginger Hispo prone sprite now properly displays."
