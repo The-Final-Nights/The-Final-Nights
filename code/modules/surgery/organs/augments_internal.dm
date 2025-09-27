@@ -110,7 +110,7 @@
 	var/stun_cap_amount = 40
 
 /obj/item/organ/cyberimp/brain/anti_stun/tzi
-	name = "Secondary Adrenal Gland"
+	name = "Secondary Adrenal Gland" //TFN Rework - Renamed and changed name, description, and icon.
 	desc = "This organ will secrete a potent cocktail of stimulants when stunned, reducing downtime. Installs to the head."
 	icon_state = "tongueayylmao"
 
