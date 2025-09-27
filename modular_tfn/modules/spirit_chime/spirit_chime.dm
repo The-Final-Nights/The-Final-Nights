@@ -193,8 +193,10 @@
 /proc/valid_target(atom/movable/target)
 	if(istype(target, /mob/dead/observer))
 		var/mob/dead/observer/ghost = target
-		if((ghost.mind && !ghost.aghosted) || isavatar(ghost)) // Checks only for ghosts of the dead & Auspex 5 avatars
+		// if((ghost.mind && !ghost.aghosted) || isavatar(ghost)) // Checks only for ghosts of the dead & Auspex 5 avatars (Commented out to allow observers for now)
+		if(!ghost.aghosted || isavatar(ghost)) // Checks only for ghosts of the dead, observers, & Auspex 5 avatars
 			return TRUE
-		if(ghost.mind && ghost.orbiting) // Checks for orbiting ghosts
+		// if(ghost.mind && ghost.orbiting) // Checks for orbiting ghosts (Commented out to allow observers for now)
+		if(ghost.orbiting) // Checks for orbiting ghosts
 			return TRUE
 	return FALSE
