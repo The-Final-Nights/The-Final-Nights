@@ -6,14 +6,14 @@
 	poison_amount = 0
 	slot = ORGAN_SLOT_STOMACH_AID
 
-  /obj/item/organ/cyberimp/chest/reviver/tzimisce
+/obj/item/organ/cyberimp/chest/reviver/tzimisce
 	name = "Second Heart"
 	desc = "This organ will automatically restart a cardiac system upon cessation of vital functions, alongside releasing mild regenerative chemicals. Implanted in the chest."
 	icon_state = "heart-tzi"
 	slot = ORGAN_SLOT_HEART_AID
 	emp_vulnerability = 0 //No EMP effects on pure biological material.
 
-  /obj/item/organ/eyes/thermal
+/obj/item/organ/eyes/thermal
 	name = "thermal eyes"
 	desc = "Augmented eyes capable of seeing thermal signatures."
 	icon_state = "ling_thermal"
