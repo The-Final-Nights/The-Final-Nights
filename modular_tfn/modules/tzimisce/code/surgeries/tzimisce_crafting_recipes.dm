@@ -14,7 +14,7 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
-  /datum/crafting_recipe/tzi_eyes_thermal
+/datum/crafting_recipe/tzi_eyes_thermal
 	name = "Better Eyes (Thermal)"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 25, /obj/item/organ/eyes = 1)
@@ -22,7 +22,7 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
-  /datum/crafting_recipe/tzi_ears
+/datum/crafting_recipe/tzi_ears
 	name = "Feline Ears"
 	time = 50
 	reqs = list(/obj/item/stack/human_flesh = 10, /obj/item/organ/ears = 1)
