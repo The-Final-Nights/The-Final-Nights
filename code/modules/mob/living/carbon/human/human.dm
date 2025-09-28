@@ -1285,13 +1285,6 @@
 		update_body()
 	return
 
-
-// TFN ADDITION - Tzimisce Rework part 2
-/mob/living/carbon/human/proc/revert_to_cursed_form()
-	src.set_body_sprite()
-	to_chat(src, span_warning("Your cursed appearance reasserts itself!"))
-// TFN ADDITION - Tzimisce Rework part 2
-
 /mob/living/carbon/human/species
 	var/race = null
 	var/use_random_name = TRUE
