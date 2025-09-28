@@ -249,3 +249,6 @@
   - bugfix: Piano variants turned into discrete structure subtypes
   XeonMations:
   - refactor: Refactored the way the game initializes, hopefully works faster.
+2025-09-28:
+  LofiOtter:
+  - bugfix: Ginger Hispo prone sprite now properly displays.

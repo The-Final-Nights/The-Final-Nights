@@ -3372,6 +3372,20 @@
 /obj/effect/decal/trash,
 /turf/open/floor/plating/shit,
 /area/vtm/sewer/nosferatu_warren)
+"aNq" = (
+/obj/structure/railing/metal{
+	dir = 8
+	},
+/obj/structure/chair/green{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 8;
+	color = "#574d46"
+	},
+/obj/effect/landmark/start/axe_gang,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/supply)
 "aNv" = (
 /obj/structure/railing/metal{
 	dir = 4
@@ -14023,6 +14037,12 @@
 /obj/effect/decal/wallpaper/light,
 /turf/closed/wall/vampwall/market,
 /area/vtm/interior/police)
+"dmT" = (
+/obj/structure/chair/wood/wings{
+	dir = 8
+	},
+/turf/open/floor/carpet/red,
+/area/vtm/interior/laundromat)
 "dmV" = (
 /obj/structure/table/wood,
 /obj/machinery/light/small{
@@ -18879,7 +18899,6 @@
 /area/vtm/interior/giovanni)
 "evP" = (
 /obj/structure/chair/office,
-/obj/effect/landmark/start/dealer,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "evZ" = (
@@ -29253,6 +29272,7 @@
 /area/vtm/baywalk)
 "gNf" = (
 /obj/structure/chair/office,
+/obj/effect/landmark/start/axe_leader,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/supply)
 "gNk" = (
@@ -33145,6 +33165,12 @@
 	},
 /turf/open/floor/plating/industrial,
 /area/vtm/interior/nosferatu_office)
+"hKE" = (
+/obj/structure/chair/wood/wings{
+	dir = 4
+	},
+/turf/open/floor/carpet/red,
+/area/vtm/interior/laundromat)
 "hKH" = (
 /obj/effect/turf_decal/siding/white{
 	color = "#636363";
@@ -36926,7 +36952,6 @@
 /obj/machinery/light{
 	pixel_y = 32
 	},
-/obj/effect/landmark/start/supplytechnician,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "iAe" = (
@@ -48326,6 +48351,13 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior)
+"lhq" = (
+/obj/structure/table/wood,
+/obj/item/vamp/keys/supply,
+/obj/item/vamp/keys/supply,
+/obj/item/vamp/keys/supply,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/supply)
 "lht" = (
 /turf/open/floor/plating/shit,
 /area/vtm/sewer)
@@ -53675,6 +53707,13 @@
 	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
+"mrN" = (
+/obj/structure/chair/green{
+	dir = 8
+	},
+/obj/effect/landmark/start/axe_gang,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/supply)
 "mrQ" = (
 /obj/effect/decal/asphaltline/alt{
 	pixel_x = -14
@@ -63779,7 +63818,7 @@
 /obj/structure/chair/sofa/old/right{
 	color = "#525252"
 	},
-/obj/effect/landmark/start/supplytechnician,
+/obj/effect/landmark/start/axe_gang,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "oEH" = (
@@ -79231,6 +79270,9 @@
 "spx" = (
 /obj/structure/table/wood,
 /obj/item/police_radio,
+/obj/item/vamp/keys/axes,
+/obj/item/vamp/keys/axes,
+/obj/item/vamp/keys/axes,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
 "spK" = (
@@ -80348,7 +80390,7 @@
 	color = "#525252";
 	dir = 8
 	},
-/obj/effect/landmark/start/supplytechnician,
+/obj/effect/landmark/start/axe_gang,
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
 "sEk" = (
@@ -152689,7 +152731,7 @@ tao
 aXh
 hWA
 gNf
-oir
+lhq
 sLi
 cXM
 oYt
@@ -169322,7 +169364,7 @@ bXK
 bXK
 bXK
 btp
-gIz
+hKE
 gIz
 kgF
 wqF
@@ -169727,7 +169769,7 @@ bXK
 bXK
 btp
 nPF
-nPF
+dmT
 kgF
 dGJ
 hbb
@@ -191475,7 +191517,7 @@ aXh
 ydS
 mIO
 mIO
-mkC
+aNq
 mkC
 pTC
 tul
@@ -191880,7 +191922,7 @@ one
 lDi
 lDi
 geP
-geP
+mrN
 pTC
 hga
 prs
@@ -211526,7 +211568,7 @@ tiU
 qaL
 aXQ
 wli
-omI
+oon
 oXV
 idF
 fyE
@@ -211932,7 +211974,7 @@ xQB
 wli
 omI
 uLn
-idF
+dNd
 fyE
 mjT
 mjT
