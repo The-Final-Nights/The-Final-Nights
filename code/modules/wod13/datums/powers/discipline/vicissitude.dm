@@ -120,9 +120,7 @@
 	inhand_icon_state = "syndiepaddles"
 	base_icon_state = "plasma_large"
 	req_defib = FALSE
-
-/obj/item/shockpaddles/cyborg/vicissitude/update_icon_state()
-	return
+	no_wielded_icon = TRUE
 
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
