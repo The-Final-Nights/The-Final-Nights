@@ -1,0 +1,4 @@
+author: "chazzyjazzy"
+delete-after: True
+changes:
+  - bugfix: "Necromancy 2 summons fixed"

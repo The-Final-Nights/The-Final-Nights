@@ -1,9 +1,0 @@
-author: "SoreYew"
-delete-after: True
-changes:
-  - rscadd: "Screentender role, a leader of the Axe Gang, with one human and one KJ slot"
-  - rscadd: "Vampire Clan_ Gangrel, Gargoyle, Daughters of Cacophony, Cappadocian, Nagaraja added to Axe Gang"
-  - rscdel: "Remove Dealer and Supply Assistant"
-  - qol: "Make Axe Gang the owners of the warehouse"
-  - map: "spawn points for Axe Gang and adding spare keys"
-  - code_imp: "removing warehouse code in favor of using axe gang code"
