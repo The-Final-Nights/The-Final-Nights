@@ -5747,14 +5747,6 @@
 /obj/structure/chair/sofa/old/left{
 	color = "#525252"
 	},
-/obj/structure/curtain/bounty{
-	pixel_y = 15;
-	pixel_x = 32
-	},
-/obj/structure/curtain/bounty{
-	pixel_x = 0;
-	pixel_y = 40
-	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/chantry)
 "brS" = (
@@ -7515,10 +7507,6 @@
 "bLN" = (
 /obj/structure/table/wood,
 /obj/item/newspaper,
-/obj/structure/curtain/bounty{
-	pixel_y = 15;
-	pixel_x = 32
-	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/chantry)
 "bLV" = (
@@ -39456,10 +39444,6 @@
 /area/vtm/interior/nosferatu_office)
 "jfo" = (
 /obj/structure/table/wood,
-/obj/structure/curtain/bounty{
-	pixel_y = 15;
-	pixel_x = 32
-	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/chantry)
 "jfp" = (
@@ -43013,10 +42997,6 @@
 /obj/structure/chair/sofa/old/corner{
 	color = "#525252";
 	dir = 4
-	},
-/obj/structure/curtain/bounty{
-	pixel_x = 0;
-	pixel_y = 40
 	},
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/interior/chantry)
@@ -73632,6 +73612,13 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights)
+"qUs" = (
+/obj/structure/curtain/bounty{
+	pixel_x = 0;
+	pixel_y = 15
+	},
+/turf/closed/wall/vampwall/rich/old/low/window,
+/area/vtm/interior/chantry)
 "qUt" = (
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/rough/cave{
@@ -93819,6 +93806,14 @@
 /obj/item/food/soup/vegetable,
 /turf/closed/wall/vampwall/junk/low,
 /area/vtm/interior)
+"vPH" = (
+/obj/effect/decal/wallpaper/red/low,
+/obj/structure/curtain/bounty{
+	pixel_x = 0;
+	pixel_y = 8
+	},
+/turf/closed/wall/vampwall/rich/old/low/window,
+/area/vtm/interior/chantry)
 "vPP" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -210614,7 +210609,7 @@ mjT
 mjT
 mjT
 mjT
-wMg
+vPH
 jVv
 sOC
 fAj
@@ -210816,7 +210811,7 @@ mjT
 mjT
 mjT
 mjT
-wMg
+vPH
 brR
 bLN
 jfo
@@ -211019,9 +211014,9 @@ mjT
 mjT
 mjT
 oab
-lzL
-lzL
-lzL
+qUs
+qUs
+qUs
 vTS
 xsa
 sgk
