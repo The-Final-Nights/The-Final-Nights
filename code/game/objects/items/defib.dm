@@ -391,7 +391,7 @@
 	return (OXYLOSS)
 
 /obj/item/shockpaddles/update_icon_state()
-	if(no_wielded_icon = TRUE) //TFN Edit 
+	if(no_wielded_icon == TRUE) //TFN Edit 
 		return FALSE //TFN Edit
 	icon_state = "[base_icon_state][wielded]"
 	inhand_icon_state = icon_state
