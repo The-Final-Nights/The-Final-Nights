@@ -262,3 +262,5 @@
   - qol: Make Axe Gang the owners of the warehouse
   - map: spawn points for Axe Gang and adding spare keys
   - code_imp: removing warehouse code in favor of using axe gang code
+  chazzyjazzy:
+  - bugfix: Necromancy 2 summons fixed
