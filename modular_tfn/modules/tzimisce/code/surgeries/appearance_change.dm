@@ -6,7 +6,7 @@
 	replaced_by = null
 
 //reshape_face
-/datum/surgery_step/reshape_face
+/datum/surgery_step/reshape_appearance
 	name = "Reshape Face"
 	implements = list(TOOL_SCALPEL = 100, /obj/item/kitchen/knife = 50, TOOL_WIRECUTTER = 35)
 	time = 64
