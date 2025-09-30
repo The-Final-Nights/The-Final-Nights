@@ -239,7 +239,6 @@
 							"Giovanni" = GLOB.giovanni_positions,
 							"Clan Tzimisce" = GLOB.tzimisce_positions,
 							"Law Enforcement" = GLOB.police_positions + GLOB.national_security_positions,
-							"Warehouse" = GLOB.warehouse_positions,
 							"Axe Gang" = GLOB.gang_positions,
 							"Unaligned" = GLOB.citizen_positions,
 							"City Services" = GLOB.services_positions,

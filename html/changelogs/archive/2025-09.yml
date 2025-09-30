@@ -241,3 +241,30 @@
 2025-09-25:
   SELFHELL:
   - rscadd: Daim 4 Rework
+2025-09-26:
+  Knightscholar:
+  - rscadd: Added inverted piano sprite
+  - qol: Expanded access to theater
+  - map: Redesigned the Jazz Club
+  - bugfix: Piano variants turned into discrete structure subtypes
+  XeonMations:
+  - refactor: Refactored the way the game initializes, hopefully works faster.
+2025-09-28:
+  LofiOtter:
+  - bugfix: Ginger Hispo prone sprite now properly displays.
+2025-09-29:
+  SoreYew:
+  - rscadd: Screentender role, a leader of the Axe Gang, with one human and one KJ
+      slot
+  - rscadd: Vampire Clan_ Gangrel, Gargoyle, Daughters of Cacophony, Cappadocian,
+      Nagaraja added to Axe Gang
+  - rscdel: Remove Dealer and Supply Assistant
+  - qol: Make Axe Gang the owners of the warehouse
+  - map: spawn points for Axe Gang and adding spare keys
+  - code_imp: removing warehouse code in favor of using axe gang code
+  chazzyjazzy:
+  - bugfix: Necromancy 2 summons fixed
+  killer7luis:
+  - rscadd: 'Spear!
+
+      :cl:'

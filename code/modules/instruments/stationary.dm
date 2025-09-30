@@ -30,23 +30,25 @@
 	default_unfasten_wrench(user, I, 40)
 	return TRUE
 
+//TFN EDIT START - Jazz Club Remap #781 - Renames space minimoog to piano, introduces inverted piano, removes nonfunctional RNG from piano
 /obj/structure/musician/piano
-	name = "space minimoog"
+	name = "piano"
 	icon = 'icons/obj/musician.dmi'
-	icon_state = "minimoog"
+	icon_state = "piano"
+	desc = "This is a piano! A lovely instrument. The keys face east."
 	anchored = TRUE
 	density = TRUE
 
 /obj/structure/musician/piano/unanchored
 	anchored = FALSE
 
-/obj/structure/musician/piano/Initialize(mapload)
-	. = ..()
-	if(prob(50) && icon_state == initial(icon_state))
-		name = "space minimoog"
-		desc = "This is a minimoog, like a space piano, but more spacey!"
-		icon_state = "minimoog"
-	else
-		name = "space piano"
-		desc = "This is a space piano, like a regular piano, but always in tune! Even if the musician isn't."
-		icon_state = "piano"
+/obj/structure/musician/piano/ipiano
+	name = "piano"
+	desc = "This is a piano! A delightful instrument. The keys face west."
+	icon_state = "ipiano"
+
+/obj/structure/musician/minimoog
+	name = "minimoog"
+	icon_state = "minimoog"
+	desc = "This is a minimoog! A cousin of the piano!"
+//TFN EDIT END - Jazz Club Remap #781
