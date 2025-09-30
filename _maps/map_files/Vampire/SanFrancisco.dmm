@@ -26615,6 +26615,15 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
+"gsi" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/machinery/light/prince{
+	light_power = 0.45;
+	name = "dim light fixture";
+	dir = 1
+	},
+/turf/open/floor/carpet/royalblack,
+/area/vtm/interior/strip)
 "gso" = (
 /turf/open/floor/plasteel/stairs{
 	color = "#9a704a"
@@ -61993,6 +62002,14 @@
 	},
 /turf/open/floor/glass,
 /area/vtm)
+"oBB" = (
+/obj/machinery/light{
+	dir = 1;
+	light_color = "#6488EA";
+	bulb_colour = "#9400cf"
+	},
+/turf/open/floor/plating/vampplating,
+/area/vtm/interior/strip)
 "oBD" = (
 /obj/structure/vampdoor/npc{
 	icon_state = "reinf-1";
@@ -174221,7 +174238,7 @@ dhB
 pqb
 mWO
 mWO
-mWO
+oBB
 gnp
 oBK
 mDD
@@ -175226,7 +175243,7 @@ mWO
 uUy
 pqb
 mWO
-mWO
+oBB
 jJR
 bWZ
 xQB
@@ -176235,7 +176252,7 @@ moC
 moC
 gnp
 mWO
-mWO
+nwh
 mWO
 jJR
 fLa
@@ -215834,7 +215851,7 @@ iiZ
 pFU
 moC
 moC
-gmb
+gsi
 gnp
 mjT
 mjT
