@@ -84,17 +84,17 @@
 	icon_state = "steelchoker"
 
 /obj/item/clothing/neck/vampire/choker/collar
-	name = "leather collar"
-	desc = "A leather bondage collar with a steel o-ring."
+	name = "leather choker"
+	desc = "A leather choker with a steel ring pendant."
 	icon_state = "leathercollar"
 
 /obj/item/clothing/neck/vampire/choker/collar/steel
-	name = "silver-plated collar"
-	desc = "A locking metal bondage collar plated in tarnish-resistant, hypoallergenic silver. Hardcore."
+	name = "silver chain choker"
+	desc = "A chain choker in tarnish-resistant, hypoallergenic silver. Hardcore."
 	icon_state = "steelcollar"
 
 
 /obj/item/clothing/neck/vampire/choker/collar/leatherg
-	name = "fancy leather collar"
-	desc = "A leather bondage collar with a gold o-ring. A little classier than the alternatives."
+	name = "fancy leather choker"
+	desc = "A leather choker with a gold ring pendant. A little classier than the alternatives."
 	icon_state = "leathercollar_g"
