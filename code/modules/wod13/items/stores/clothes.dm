@@ -393,7 +393,7 @@
 		new /datum/data/mining_equipment("striped dress", /obj/item/clothing/under/vampire/dress/stripeddress, 35),
 		new /datum/data/mining_equipment("sailor dress", /obj/item/clothing/under/vampire/dress/sailordress, 35),
 		new /datum/data/mining_equipment("frilly black dress", /obj/item/clothing/under/vampire/dress/blackfrilly, 75),
-		new /datum/data/mining_equipment("white lace dress", /obj/item/clothing/under/vampire/dress/wedding_gothic, 1505),
+		new /datum/data/mining_equipment("white lace dress", /obj/item/clothing/under/vampire/dress/wedding_gothic, 150),
 		new /datum/data/mining_equipment("witchy dress", /obj/item/clothing/under/vampire/dress/old_wench_dress, 100),
 		new /datum/data/mining_equipment("countess dress", /obj/item/clothing/under/vampire/dress/countess, 150),
 		new /datum/data/mining_equipment("silk goddess dress", /obj/item/clothing/under/vampire/dress/goddess, 150),
