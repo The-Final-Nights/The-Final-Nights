@@ -506,7 +506,7 @@
 	desc = "Black ripped jeans and a fishnet top. How punk."
 	icon_state = "rippedpunk"
 
-/obj/item/clothing/under/vampire/suit
+/obj/item/clothing/under/vampire/suitslacks
 	name = "grey suit slacks"
 	desc = "A rumpled white dress shirt paired with well-worn grey slacks."
 	icon_state = "greysuit"

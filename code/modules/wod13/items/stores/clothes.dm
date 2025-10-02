@@ -357,7 +357,7 @@
 		new /datum/data/mining_equipment("high-waisted trousers", /obj/item/clothing/under/vampire/hightrousers, 50),
 		new /datum/data/mining_equipment("high-waisted skirt", /obj/item/clothing/under/vampire/highskirt, 50),
 		new /datum/data/mining_equipment("ripped punk jeans", /obj/item/clothing/under/vampire/rippedpunk, 50),
-		new /datum/data/mining_equipment("grey suit slacks", /obj/item/clothing/under/vampire/suit, 35),
+		new /datum/data/mining_equipment("grey suit slacks", /obj/item/clothing/under/vampire/suitslacks, 35),
 		new /datum/data/mining_equipment("white shirt and waistcoat", /obj/item/clothing/under/vampire/suit/waistcoat, 35),
 		new /datum/data/mining_equipment("tan dress shirt", /obj/item/clothing/under/vampire/suit/tanshirt, 35),
 		new /datum/data/mining_equipment("tan shirt and waistcoat", /obj/item/clothing/under/vampire/suit/tanshirtwaistcoat, 35),
