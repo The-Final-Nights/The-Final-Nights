@@ -95,6 +95,6 @@
 
 
 /obj/item/clothing/neck/vampire/choker/collar/leatherg
-	name = "fancy leather choker"
-	desc = "A leather choker with a gold ring pendant. A little classier than the alternatives."
+	name = "fancy choker"
+	desc = "A black choker with a gold ring pendant. A little classier than the alternatives."
 	icon_state = "leathercollar_g"
