@@ -14029,7 +14029,14 @@
 /area/vtm/ghetto)
 "drz" = (
 /obj/structure/table,
-/obj/item/reagent_containers/food/drinks/bottle/vampirewater,
+/obj/item/pizzabox/vegetable{
+	pixel_y = 14
+	},
+/obj/item/kitchen/knife{
+	pixel_y = 3;
+	pixel_x = -7
+	},
+/obj/item/pizzabox/meat,
 /turf/open/floor/plating/toilet{
 	color = "#919191"
 	},
@@ -38611,14 +38618,15 @@
 	},
 /area/vtm/interior/strip)
 "jfz" = (
-/obj/effect/turf_decal/siding/wideplating/dark{
-	dir = 8
-	},
 /obj/structure/vampdoor/wood{
 	dir = 4;
 	lock_id = "primToreador";
 	locked = 1;
 	lockpick_difficulty = 24
+	},
+/obj/effect/turf_decal/siding/wideplating{
+	color = "#39537F";
+	dir = 8
 	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
@@ -50953,11 +50961,23 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer)
 "lWk" = (
-/obj/structure/table/wood/fancy/royalblack,
 /obj/machinery/light/prince{
 	light_power = 0.45;
 	name = "dim light fixture";
 	dir = 1
+	},
+/obj/structure/table/wood/fancy/royalblue,
+/obj/item/paper_bin{
+	pixel_y = 5;
+	pixel_x = 5
+	},
+/obj/item/pen/fourcolor{
+	pixel_y = 9;
+	pixel_x = 7
+	},
+/obj/item/pen/fountain{
+	pixel_y = 8;
+	pixel_x = -10
 	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
@@ -51322,14 +51342,15 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights)
 "mav" = (
-/obj/effect/turf_decal/siding/wideplating/dark{
-	dir = 4
-	},
 /obj/structure/vampdoor/wood{
 	dir = 4;
 	lock_id = "primToreador";
 	locked = 1;
 	lockpick_difficulty = 10
+	},
+/obj/effect/turf_decal/siding/wideplating{
+	color = "#aa4f25";
+	dir = 4
 	},
 /turf/open/floor/carpet/orange,
 /area/vtm/interior/strip)
@@ -56856,7 +56877,9 @@
 /obj/item/toy/crayon/spraycan,
 /obj/item/toy/crayon/spraycan,
 /obj/item/toy/crayon/spraycan,
-/obj/item/chisel,
+/obj/item/storage/crayons,
+/obj/item/storage/crayons,
+/obj/item/storage/crayons,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "noG" = (
@@ -63223,8 +63246,8 @@
 	pixel_y = 5;
 	pixel_x = -5
 	},
-/obj/item/pen{
-	pixel_y = 7;
+/obj/item/pen/fourcolor{
+	pixel_y = 9;
 	pixel_x = -5
 	},
 /turf/open/floor/plating/granite/black,
@@ -72367,6 +72390,7 @@
 /area/vtm/interior/giovanni/basement)
 "qTs" = (
 /obj/structure/easel,
+/obj/item/canvas/twentyfour_twentyfour,
 /turf/open/floor/carpet/orange,
 /area/vtm/interior/strip)
 "qTy" = (
@@ -75242,7 +75266,7 @@
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/anarch/basement)
 "rBY" = (
-/obj/structure/table/wood/fancy/royalblack,
+/obj/structure/table/wood/fancy/orange,
 /turf/open/floor/carpet/orange,
 /area/vtm/interior/strip)
 "rCk" = (
@@ -83736,6 +83760,11 @@
 /obj/item/camera,
 /obj/item/camera_film,
 /obj/item/camera_film,
+/obj/item/chisel,
+/obj/item/camera,
+/obj/item/camera_film,
+/obj/item/paper_bin,
+/obj/item/pen/fourcolor,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "tGX" = (
@@ -84324,6 +84353,8 @@
 /obj/item/food/vampire/icecream,
 /obj/item/food/sandwich,
 /obj/item/food/sandwich,
+/obj/item/food/icecreamsandwich,
+/obj/item/food/icecreamsandwich,
 /turf/open/floor/plating/toilet{
 	color = "#919191"
 	},
@@ -134436,8 +134467,8 @@ gnp
 gnp
 gnp
 gnp
+peW
 bDC
-mWO
 mWO
 sZR
 iEB
@@ -134837,7 +134868,7 @@ gnp
 wLv
 aUA
 peW
-peW
+mWO
 vbO
 mWO
 mWO
