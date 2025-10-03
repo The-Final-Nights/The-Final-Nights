@@ -11,8 +11,6 @@
 	var/datum/component/selling/selling_component = W.GetComponent(/datum/component/selling)
 	if(!selling_component)
 		return
-	if(istype(W, /obj/item/stack))
-		return
 	if(selling_component.illegal == black_market)
 		sell_one_item(W, user)
 	else
@@ -51,22 +49,29 @@
 
 /obj/lombard/proc/generate_money(obj/item/sold, mob/living/user)
 	var/datum/component/selling/sold_sc = sold.GetComponent(/datum/component/selling)
-	var/real_value = (sold_sc.cost / 5) * (user.social + (user.additional_social * 0.1))
+	var/base_cost = sold_sc.cost
+	var/stack_multiplier = 1
+
+	// Handle stacks - multiply by amount for per-unit pricing
+	if(istype(sold, /obj/item/stack))
+		var/obj/item/stack/stack_item = sold
+		stack_multiplier = stack_item.amount
+
+	var/social_multiplier = user.social + (user.additional_social * 0.1)
+	var/real_value = ((base_cost * stack_multiplier) / 5) * social_multiplier
 	var/obj/item/stack/dollar/money_to_spawn = new() //Don't pass off the loc until we add up the money, or else it will merge too early and delete some money entities
 	//In case we ever add items that sell for more than the maximum amount of dollars in a stack and can be mass-sold, we use this code.
 	if(real_value > money_to_spawn.max_amount)
 		money_to_spawn.amount = money_to_spawn.max_amount
-		var/extra_money_stack = real_value/money_to_spawn.max_amount - 1 //The -1 is the money already spawned
-		for(var/i in 1 to ceil(extra_money_stack)) //0.6 extra_money_stack = a new dollar stack, 1.3 extra_money_stack = two new dollar stacks etc.
-			var/obj/item/stack/dollar/extra_money_to_spawn = new()
-			if(extra_money_stack >= 1)
-				extra_money_to_spawn.amount = extra_money_to_spawn.max_amount
-				extra_money_stack -= 1
-			else
-				extra_money_to_spawn.amount = floor(extra_money_to_spawn.max_amount/extra_money_stack)
-			extra_money_to_spawn.icon = extra_money_to_spawn.onflooricon
-			extra_money_to_spawn.update_icon_state()
-			extra_money_to_spawn.forceMove(loc)
+		var/remaining_money = real_value - money_to_spawn.max_amount
+
+		while(remaining_money > 0)
+			var/obj/item/stack/dollar/extra_money = new()
+			extra_money.amount = min(remaining_money, extra_money.max_amount)
+			remaining_money -= extra_money.amount
+			extra_money.icon = extra_money.onflooricon
+			extra_money.update_icon_state()
+			extra_money.forceMove(loc)
 	else
 		money_to_spawn.amount = real_value
 	money_to_spawn.icon = money_to_spawn.onflooricon //The nullspace workaround causes the money to show up in an unintentional way. Manually fix the icon.
