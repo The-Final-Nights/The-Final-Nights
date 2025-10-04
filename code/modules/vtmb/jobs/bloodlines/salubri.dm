@@ -34,6 +34,7 @@
 		/obj/item/passport=1,
 		/obj/item/flashlight=1,
 		/obj/item/vamp/creditcard=1,
+		/obj/item/vamp/keys/salubri,
 	)
 
 /datum/outfit/job/salubri/pre_equip(mob/living/carbon/human/H)
