@@ -64,6 +64,13 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	beauty_modifier = 0.15
 	armor_modifiers = list(MELEE = 1.1, BULLET = 1.1, LASER = 1.15, ENERGY = 1.15, BOMB = 1, BIO = 1, RAD = 1, FIRE = 0.7, ACID = 1.1)
 
+//TFN EDIT ADDITION - Making Heist Loot Sellable
+/obj/item/stack/sheet/mineral/gold/Initialize()
+	. = ..()
+	if(!GetComponent(/datum/component/selling))
+		AddComponent(/datum/component/selling, 100, "precious_metals", FALSE)
+//TFN EDIT END - Making Heist loot Sellable
+
 /datum/material/gold/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(10, BRUTE, BODY_ZONE_HEAD, wound_bonus = 5)
 	return TRUE
@@ -80,6 +87,13 @@ Unless you know what you're doing, only use the first three numbers. They're in 
 	value_per_unit = 0.25
 	beauty_modifier = 0.3
 	armor_modifiers = list(MELEE = 1.3, BULLET = 1.3, LASER = 0.6, ENERGY = 1, BOMB = 1.2, BIO = 1, RAD = 1, FIRE = 1, ACID = 1)
+
+//TFN EDIT ADDITION - Making Heist Loot Sellable
+/obj/item/stack/sheet/mineral/diamond/Initialize()
+	. = ..()
+	// check if it's a named unique diamond
+	AddComponent(/datum/component/selling, 1000, "precious_gems", FALSE)
+//TFN EDIT END - Making Heist loot Sellable
 
 /datum/material/diamond/on_accidental_mat_consumption(mob/living/carbon/victim, obj/item/source_item)
 	victim.apply_damage(15, BRUTE, BODY_ZONE_HEAD, wound_bonus = 7)
