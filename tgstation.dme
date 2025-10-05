@@ -3782,6 +3782,7 @@
 #include "modular_tfn\modules\discord\discord_embed.dm"
 #include "modular_tfn\modules\discord\discord_link_record.dm"
 #include "modular_tfn\modules\discord\tgs_commands.dm"
+#include "modular_tfn\modules\werewolf\klaives.dm"
 #include "modular_tfn\modules\discord\toggle_notify.dm"
 #include "modular_tfn\modules\eat_food\code\eat_food_quirk.dm"
 #include "modular_tfn\modules\eat_food\code\vampirestomach.dm"
