@@ -362,8 +362,8 @@
 							span_danger("[src] is knocked senseless!"),
 							span_userdanger("You're knocked senseless!"),
 						)
-						if(get_confusion() < 20 SECONDS)
-							set_confusion(20 SECONDS)
+						if(get_confusion() < 10 SECONDS) // TFN EDIT CHANGE - Lines 365 and 366 reduced timers from 20 SECONDS to 10 and 5 SECONDS, respectively.
+							set_confusion(5 SECONDS)
 						adjust_blurriness(20 SECONDS)
 					if(prob(10))
 						gain_trauma(/datum/brain_trauma/mild/concussion)

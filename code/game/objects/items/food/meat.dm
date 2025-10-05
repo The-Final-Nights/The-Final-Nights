@@ -14,9 +14,9 @@
 	foodtypes = MEAT
 	w_class = WEIGHT_CLASS_SMALL
 
-/obj/item/food/carpmeat
-	name = "carp fillet"
-	desc = "A fillet of spess carp meat."
+/obj/item/food/fishmeat
+	name = "fish fillet"
+	desc = "A fillet of some fish meat."
 	icon_state = "fishfillet"
 	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 4, /datum/reagent/toxin/carpotoxin = 2, /datum/reagent/consumable/nutriment/vitamin = 2)
 	bite_consumption = 6
@@ -25,16 +25,16 @@
 	eatverbs = list("bite","chew","gnaw","swallow","chomp")
 	w_class = WEIGHT_CLASS_SMALL
 
-/obj/item/food/carpmeat/Initialize()
+/obj/item/food/fishmeat/Initialize()
 	. = ..()
-	if(!istype(src, /obj/item/food/carpmeat/imitation))
+	if(!istype(src, /obj/item/food/fishmeat/imitation))
 		AddElement(/datum/element/swabable, CELL_LINE_TABLE_CARP, CELL_VIRUS_TABLE_GENERIC_MOB)
 
-/obj/item/food/carpmeat/imitation
+/obj/item/food/fishmeat/imitation
 	name = "imitation carp fillet"
 	desc = "Almost just like the real thing, kinda."
 
-/obj/item/food/carpmeat/icantbeliveitsnotcarp
+/obj/item/food/fishmeat/icantbeliveitsnotcarp
 	name = "fish fillet"
 	desc = "A fillet of unspecified fish meat."
 	food_reagents = list(/datum/reagent/consumable/nutriment/protein = 4, /datum/reagent/consumable/nutriment/vitamin = 2) //No carpotoxin

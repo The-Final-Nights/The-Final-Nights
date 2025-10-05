@@ -76,7 +76,7 @@
 #define CAT_MISC	"Misc"
 #define CAT_PRIMAL  "Tribal"
 #define CAT_TZIMISCE	"Tzimisce"
-#define CAT_GAROU "Garou"
+#define CAT_GAROU "Garou" //TFN ADDITION - Adds Klaives
 #define CAT_CLOTHING	"Clothing"
 #define CAT_DRUGS		"Drugs"
 #define CAT_FOOD	"Foods"
@@ -94,6 +94,7 @@
 #define CAT_SOUP	"Soups"
 #define CAT_SPAGHETTI	"Spaghettis"
 #define CAT_ICE	"Frozen"
+#define CAT_MEXICAN "Mexican Food"
 #define CAT_DRINK "Drinks"
 
 //rcd modes

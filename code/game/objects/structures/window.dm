@@ -61,7 +61,6 @@
 	real_explosion_block = explosion_block
 	explosion_block = EXPLOSION_BLOCK_PROC
 
-	flags_1 |= ALLOW_DARK_PAINTS_1
 
 	RegisterSignal(src, COMSIG_OBJ_PAINTED, PROC_REF(on_painted))
 	AddComponent(/datum/component/simple_rotation, ROTATION_NEEDS_ROOM)
@@ -145,6 +144,13 @@
 	if(!can_be_reached(user))
 		return
 	. = ..()
+
+//TFN EDIT
+/obj/structure/window/attack_potence(mob/living/carbon/human/user, does_attack_animation = 0)
+	if(!can_be_reached(user))
+		return
+	. = ..()
+//TFN EDIT END
 
 /obj/structure/window/attack_hand(mob/living/user, list/modifiers)
 	. = ..()

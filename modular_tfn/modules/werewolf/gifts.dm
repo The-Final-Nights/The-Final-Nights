@@ -87,8 +87,7 @@
 		var/mob/living/H = owner
 		playsound(get_turf(owner), 'code/modules/wod13/sounds/inspiration.ogg', 75, FALSE)
 		H.emote("scream")
-		if(H.CheckEyewitness(H, H, 7, FALSE))
-			H.adjust_veil(-1)
+		SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 		for(var/mob/living/C in range(5, owner))
 			if(iswerewolf(C) || isgarou(C))
 				if(C.auspice.tribe == H.auspice.tribe)
@@ -113,8 +112,7 @@
 			H.dna.species.punchdamagehigh = 20
 			H.agg_damage_plus = 5
 			to_chat(owner, "<span class='notice'>You feel your claws sharpening...</span>")
-			if(H.CheckEyewitness(H, H, 7, FALSE))
-				H.adjust_veil(-1)
+			SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
 			spawn(150)
 				H.dna.species.attack_verb = initial(H.dna.species.attack_verb)
 				H.dna.species.attack_sound = initial(H.dna.species.attack_sound)
@@ -270,33 +268,27 @@
 	name = "Sense Wyrm"
 	desc = "This Gift allows the werewolf to trace the location of all wyrm-tainted entities within the area."
 	button_icon_state = "sense_wyrm"
-	rage_req = 1
+	rage_req = 0
 
 /datum/action/gift/sense_wyrm/Trigger(trigger_flags)
 	. = ..()
-	if(allowed_to_proceed)
-		var/list/mobs_in_range = list()
-		for(var/mob/living/target in orange(owner, 30))
-			mobs_in_range += target
-		for(var/mob/living/target in mobs_in_range)
-			var/is_wyrm = 0
-			if(iscathayan(target))
-				var/mob/living/carbon/human/kj = target
-				if(!kj.check_kuei_jin_alive())
-					is_wyrm = 1
-			if (iskindred(target))
-				var/mob/living/carbon/human/vampire = target
-				if ((vampire.morality_path?.score < 7) || vampire.client?.prefs?.is_enlightened)
-					is_wyrm = 1
-				if ((vampire.clan?.name == CLAN_BAALI) || ( (vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score > 7)) || (!vampire.client?.prefs?.is_enlightened && (vampire.morality_path?.score < 4)) ))
-					is_wyrm = 1
-			if (isgarou(target) || iswerewolf(target))
-				var/mob/living/wolf = target
-				if(wolf.auspice.tribe.name == "Black Spiral Dancers")
-					is_wyrm = 1
-			if(is_wyrm)
-				to_chat(owner, "A stain is found at [get_area_name(target)], X:[target.x] Y:[target.y].")
-				is_wyrm = 0
+
+	var/datum/atom_hud/sense_wyrm_hud = GLOB.huds[DATA_HUD_SENSEWYRM]
+	var/mob/living/carbon/werewolf/theurge = owner
+	var/mob/living/carbon/human/homid = theurge.transformator.human_form?.resolve()
+	if (HAS_TRAIT(theurge, TRAIT_CORAX) || iscorvid(theurge)) // we add the aura vision to every used form. Corax don't use werewolf forms, so we don't care.
+		var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = theurge.transformator.corax_form?.resolve()
+		var/mob/living/carbon/werewolf/lupus/corvid/corvid = theurge.transformator.corvid_form?.resolve()
+		sense_wyrm_hud.add_hud_to(corvid)
+		sense_wyrm_hud.add_hud_to(cor_crinos)
+	else
+		var/mob/living/carbon/werewolf/lupus/lupus = theurge.transformator.lupus_form?.resolve()
+		var/mob/living/carbon/werewolf/crinos/crinos = theurge.transformator.crinos_form?.resolve()
+		sense_wyrm_hud.add_hud_to(lupus)
+		sense_wyrm_hud.add_hud_to(crinos)
+	sense_wyrm_hud.add_hud_to(homid)
+	theurge.update_sight()
+	to_chat(owner, span_purple("You open your senses to the wyrm's corruption, it will be impossible to ignore for the remainder of the night.")) // you can't stop seeing wyrm taint once you learn the gift, this is a lazy way of making this work.
 
 /datum/action/gift/spirit_speech
 	name = "Spirit Speech"
@@ -337,7 +329,7 @@
 		for(var/obj/structure/vampdoor/V in range(5, owner))
 			if(V)
 				if(V.closed)
-					if(V.lockpick_difficulty < 10)
+					if(V.lockpick_difficulty <= 16)
 						V.locked = FALSE
 						playsound(V, V.open_sound, 75, TRUE)
 						V.icon_state = "[V.baseicon]-0"
@@ -386,6 +378,10 @@
 			C.adjustOxyLoss(-20*C.auspice.level, TRUE)
 			C.bloodpool = min(C.bloodpool + C.auspice.level, C.maxbloodpool)
 			C.blood_volume = min(C.blood_volume + 56 * C.auspice.level, BLOOD_VOLUME_NORMAL)
+			//clear confusion and dizziness from head trauma
+			C.set_confusion(0)
+			C.dizziness = 0
+			C.update_eye_blur()
 			if(ishuman(owner))
 				var/mob/living/carbon/human/BD = owner
 				if(length(BD.all_wounds))
@@ -481,7 +477,8 @@
 		if (!HAS_TRAIT(owner, TRAIT_CORAX))
 			playsound(get_turf(owner), 'code/modules/wod13/sounds/transform.ogg', 50, FALSE)
 		if(G.glabro)
-			H.remove_overlay(PROTEAN_LAYER)
+			if(!HAS_TRAIT(H, TRAIT_FAIR_GLABRO))
+				H.remove_overlay(PROTEAN_LAYER)
 			G.punchdamagelow -= 15
 			G.punchdamagehigh -= 15
 			H.physique = H.physique-2
@@ -497,11 +494,12 @@
 				to_chat(owner,"<span class='warning'>Corax do not have a Glabro form to shift into.</span>")
 				return
 			else
-				H.remove_overlay(PROTEAN_LAYER)
-				var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
-				var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
-				H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
-				H.apply_overlay(PROTEAN_LAYER)
+				if(!HAS_TRAIT(H, TRAIT_FAIR_GLABRO))
+					H.remove_overlay(PROTEAN_LAYER)
+					var/mob/living/carbon/werewolf/crinos/crinos = H.transformator.crinos_form?.resolve()
+					var/mutable_appearance/glabro_overlay = mutable_appearance('code/modules/wod13/werewolf_abilities.dmi', crinos?.sprite_color, -PROTEAN_LAYER)
+					H.overlays_standing[PROTEAN_LAYER] = glabro_overlay
+					H.apply_overlay(PROTEAN_LAYER)
 				G.punchdamagelow += 15
 				G.punchdamagehigh += 15
 				H.physique = H.physique+2

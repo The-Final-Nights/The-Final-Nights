@@ -95,8 +95,8 @@
 		if(!bloodpool)
 			return
 
-	if(last_bloodpool_restore+timing <= world.time)
-		last_bloodpool_restore = world.time
+	if(COOLDOWN_FINISHED(src, bloodpool_restore))
+		COOLDOWN_START(src, bloodpool_restore, timing)
 		bloodpool = max(0, bloodpool-1)
 
 	//Blood loss still happens in locker, floor stays clean

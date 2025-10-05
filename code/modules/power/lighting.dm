@@ -440,6 +440,8 @@
 			PO = nightshift_light_power
 			if(!color)
 				CO = nightshift_light_color
+		if (cached_color_filter)
+			CO = apply_matrix_to_color(CO, cached_color_filter["color"], cached_color_filter["space"] || COLORSPACE_RGB)
 		var/matching = light && BR == light.light_range && PO == light.light_power && CO == light.light_color
 		if(!matching)
 			switchcount++
@@ -937,7 +939,7 @@
 /obj/item/light/create_reagents(max_vol, flags)
 	. = ..()
 	RegisterSignals(reagents, list(COMSIG_REAGENTS_NEW_REAGENT, COMSIG_REAGENTS_ADD_REAGENT, COMSIG_REAGENTS_DEL_REAGENT, COMSIG_REAGENTS_REM_REAGENT), PROC_REF(on_reagent_change))
-	RegisterSignal(reagents, COMSIG_PARENT_QDELETING, PROC_REF(on_reagents_del))
+	RegisterSignal(reagents, COMSIG_QDELETING, PROC_REF(on_reagents_del))
 
 /**
  * Handles rigging the cell if it contains enough plasma.
@@ -953,7 +955,7 @@
 /obj/item/light/proc/on_reagents_del(datum/reagents/holder)
 	SIGNAL_HANDLER
 	UnregisterSignal(holder, list(
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 		COMSIG_REAGENTS_NEW_REAGENT,
 		COMSIG_REAGENTS_ADD_REAGENT,
 		COMSIG_REAGENTS_REM_REAGENT,

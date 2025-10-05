@@ -11,6 +11,7 @@
 	update_blood_hud()
 	update_rage_hud()
 	update_auspex_hud()
+	update_sensewyrm_hud()
 
 /mob/living/proc/update_rage_hud()
 	if(!client || !hud_used)
@@ -24,3 +25,4 @@
 			hud_used.rage_icon.overlays |= gnosis
 		if(hud_used.auspice_icon && last_moon_look != 0)
 			hud_used.auspice_icon.icon_state = "[GLOB.moon_state]"
+

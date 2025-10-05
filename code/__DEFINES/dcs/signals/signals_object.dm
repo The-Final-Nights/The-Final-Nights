@@ -597,7 +597,3 @@
 
 /// Sent from /obj/machinert/console/camera_advanced/attack_hand() : (mob/eye/camera/remote/new_camera)
 #define COMSIG_ADVANCED_CAMERA_EYE_CREATED "advanced_camera_eye_created"
-
-///
-/// Sent from new_player.dm at the end of /mob/dead/new_player/proc/create_character(transfer_after)
-#define COMSIG_CHARACTER_GENERATED "character_generated"
