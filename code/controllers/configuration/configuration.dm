@@ -59,6 +59,8 @@
 	LoadMOTD()
 	LoadPolicy()
 	LoadChatFilter()
+	if(CONFIG_GET(flag/usewhitelist))
+		load_whitelist()
 
 	loaded = TRUE
 

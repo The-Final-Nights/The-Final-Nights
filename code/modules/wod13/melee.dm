@@ -262,6 +262,33 @@
 	. = ..()
 	AddComponent(/datum/component/selling, 1800, "longsword", FALSE)
 
+/obj/item/melee/vampirearms/spear
+	name = "spear"
+	desc = "A staple of warfare through centuries, the spear is great for poking at things."
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "spearwaw"
+	flags_1 = CONDUCT_1
+	force = 45
+	throwforce = 10
+	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BACK
+	block_chance = 20
+	armour_penetration = 60
+	sharpness = SHARP_POINTY
+	attack_verb_continuous = list("stabs", "pokes")
+	attack_verb_simple = list("stab", "poke")
+	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 5
+	bare_wound_bonus = 20
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = FALSE
+	is_iron = TRUE
+
+/obj/item/melee/vampirearms/sabre/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 200, "spear", FALSE)
+
+
 /obj/item/melee/vampirearms/longsword/keeper
 	name = "The Brother's Keeper"
 	desc = "The ancient yet classic weapon of times gone, this is a longsword. This exemplar is surprisingly well taken care of, despite its age, to the point that whatever blood or vitae it may have drawn in the past is not visible at all, while still functioning as well as it first did however long ago. Upon the flat side of this blade, a simple well-worn inscription is engraved in Latin. 'In Death, I Rise.'"
