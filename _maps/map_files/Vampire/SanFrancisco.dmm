@@ -29323,6 +29323,7 @@
 	dir = 4;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "gNc" = (
@@ -43667,6 +43668,15 @@
 /obj/effect/decal/wallpaper/red,
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/millennium_tower)
+"kcO" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/forest/caves)
 "kcV" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/drinks/shaker{
@@ -61671,6 +61681,10 @@
 	},
 /turf/open/floor/plating/asphalt,
 /area/vtm/pacificheights)
+"ofy" = (
+/obj/item/melee/vampirearms/klaive/bsd,
+/turf/open/indestructible/necropolis/air,
+/area/vtm/interior/wyrm_corrupted)
 "ofG" = (
 /obj/structure/table/wood,
 /turf/open/floor/plating/parquetry,
@@ -67053,6 +67067,7 @@
 	dir = 8;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "prs" = (
@@ -90371,6 +90386,11 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/clinic)
+"uSp" = (
+/obj/structure/stone_tile/surrounding_tile,
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "uSz" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
@@ -105536,7 +105556,7 @@ aqb
 ftQ
 bxi
 gGv
-xyD
+kcO
 qqR
 tmG
 oqy
@@ -105940,7 +105960,7 @@ vdp
 cLr
 dGj
 pSU
-upV
+uSp
 xdt
 ofv
 aqb
@@ -110495,9 +110515,9 @@ rCB
 jmr
 jmr
 fhB
-xEJ
+ofy
 uta
-xEJ
+ofy
 fhB
 jmr
 jmr
