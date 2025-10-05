@@ -28,18 +28,6 @@
 	var/awakened_force = 70
 	var/awakened_penetration = 40
 	var/aggravate_damage = 20
-	var/parried = FALSE
-
-// I wish there was another way
-// This code listens for a signal that is sent when there is a successful automatic weapon parry
-// It sets a variable to true that will cancel the after_attack of klaives
-/obj/item/melee/vampirearms/klaive/Initialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_BLOCK_SUCCESS, PROC_REF(on_klaive_parried))
-
-/obj/item/melee/vampirearms/klaive/proc/on_klaive_parried(datum/source)
-	SIGNAL_HANDLER
-	parried = TRUE
 
 // Klaive descriptions
 /obj/item/melee/vampirearms/klaive/glasswalker
