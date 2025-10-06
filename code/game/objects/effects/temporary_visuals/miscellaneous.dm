@@ -45,7 +45,7 @@
 
 /obj/effect/temp_visual/dir_setting/speedbike_trail
 	name = "speedbike trails"
-	icon_state = "smoke"
+	icon_state = "ion_fade"
 	layer = BELOW_MOB_LAYER
 	duration = 10
 	randomdir = 0
