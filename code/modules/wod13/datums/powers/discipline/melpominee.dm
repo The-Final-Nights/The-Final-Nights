@@ -71,7 +71,7 @@
 		var/atom/movable/AM = _AM
 		if(get_dist(AM, src) > 7)
 			rendered = "<span class='scream_away'>[rendered]</span>" //! Take an attention, this will NOT overlap client font-size, fix it if you can
-		AM.Hear(rendered, src, language, message, , spans, message_mods)
+		AM.Hear(rendered, src, language, message, , spans, message_mods, TRUE)
 
 /datum/discipline_power/melpominee/proc/speaker_mouth_check(mob/living/target)
 	//viewers are able to detect if a person's words aren't their own

@@ -207,10 +207,27 @@ SUBSYSTEM_DEF(statpanels)
 		list("Failsafe Controller:", Failsafe.stat_entry(), "[FAST_REF(Failsafe)]"),
 		list("","")
 	)
-	for(var/ss in Master.subsystems)
-		var/datum/controller/subsystem/sub_system = ss
-		mc_data[++mc_data.len] = list("\[[sub_system.state_letter()]][sub_system.name]", sub_system.stat_entry(), "[FAST_REF(sub_system)]")
-	mc_data[++mc_data.len] = list("Camera Net", "Cameras: [GLOB.cameranet.cameras.len] | Chunks: [GLOB.cameranet.chunks.len]", "[FAST_REF(GLOB.cameranet)]")
+#if defined(MC_TAB_TRACY_INFO) || defined(SPACEMAN_DMM)
+	var/static/tracy_dll
+	var/static/tracy_present
+	if(isnull(tracy_dll))
+		tracy_dll = TRACY_DLL_PATH
+		tracy_present = fexists(tracy_dll)
+	if(tracy_present)
+		if(Tracy.enabled)
+			mc_data.Insert(2, list(list("byond-tracy:", "Active (reason: [Tracy.init_reason || "N/A"])")))
+		else if(Tracy.error)
+			mc_data.Insert(2, list(list("byond-tracy:", "Errored ([Tracy.error])")))
+		else if(fexists(TRACY_ENABLE_PATH))
+			mc_data.Insert(2, list(list("byond-tracy:", "Queued for next round")))
+		else
+			mc_data.Insert(2, list(list("byond-tracy:", "Inactive")))
+	else
+		mc_data.Insert(2, list(list("byond-tracy:", "[tracy_dll] not present")))
+#endif
+	for(var/datum/controller/subsystem/sub_system as anything in Master.subsystems)
+		mc_data[++mc_data.len] = list("\[[sub_system.state_letter()]][sub_system.name]", sub_system.stat_entry(), text_ref(sub_system))
+	mc_data[++mc_data.len] = list("Camera Net", "Cameras: [GLOB.cameranet.cameras.len] | Chunks: [GLOB.cameranet.chunks.len]", text_ref(GLOB.cameranet))
 
 ///immediately update the active statpanel tab of the target client
 /datum/controller/subsystem/statpanels/proc/immediate_send_stat_data(client/target)
