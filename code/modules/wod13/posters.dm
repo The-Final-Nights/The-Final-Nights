@@ -32,3 +32,15 @@
 
 /obj/structure/sign/poster/vampire/blade/old
 	icon_state = "blade old"
+
+/obj/structure/sign/poster/vampire/leaf
+	icon_state = "leaf"
+	desc = "A wise gliding leaf"
+
+/obj/structure/sign/poster/vampire/lettuce
+	icon_state = "lettuce"
+	desc = "A beautiful tree branch with golden wind"
+
+/obj/structure/sign/poster/vampire/duallettuce
+	icon_state = "dual_lettuce"
+	desc = "A dual set of two tree branches with golden wind"
