@@ -1,0 +1,6 @@
+author: "darkincarnate"
+delete-after: True
+changes:
+  - rscadd: "extra guns to certain armouries, req vendor to FBI, add vet keys"
+  - bugfix: "fixes the FBI fax machine"
+  - qol: "nerf bogatyr armour to 65"
