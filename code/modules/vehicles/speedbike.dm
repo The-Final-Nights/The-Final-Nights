@@ -1,6 +1,6 @@
 /obj/vehicle/ridden/speedbike
 	name = "Speedbike"
-	icon = 'modular_tfn/master_files/icons/obj/bike.dmi'
+	icon = 'icons/obj/bike.dmi'
 	icon_state = "speedbike_blue"
 	layer = LYING_MOB_LAYER
 	var/overlay_state = "cover_blue"

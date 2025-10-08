@@ -190,7 +190,7 @@
 	return ..()
 
 /datum/component/riding/vehicle/speedbike
-	vehicle_move_delay = 0.5
+	vehicle_move_delay = 0
 	override_allow_spacemove = TRUE
 	ride_check_flags = RIDER_NEEDS_LEGS | RIDER_NEEDS_ARMS | UNBUCKLE_DISABLED_RIDER
 
@@ -201,10 +201,6 @@
 	set_vehicle_dir_offsets(SOUTH, -16, -16)
 	set_vehicle_dir_offsets(EAST, -18, 0)
 	set_vehicle_dir_offsets(WEST, -18, 0)
-	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
-	set_vehicle_dir_layer(SOUTH, OBJ_LAYER)
-	set_vehicle_dir_layer(EAST, OBJ_LAYER)
-	set_vehicle_dir_layer(WEST, OBJ_LAYER)
 
 /datum/component/riding/vehicle/speedwagon
 	vehicle_move_delay = 0
