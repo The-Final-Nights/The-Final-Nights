@@ -1,7 +1,7 @@
 /obj/vehicle/ridden/motorcycle
 	name = "Motorcycle"
 	desc = "You see a motorcycle; a beautiful and dangerous deathtrap on two wheels. An engineering masterpeice born of equal parts bravery, foolish pride, and a raw desire for thrill. Not meant for faint of heart or cowardly."
-	icon = 'modular_tfn/master_files/icons/obj/bike.dmi'
+	icon = 'modular_tfn/modules/motorcycle/icons/obj/motorcycle.dmi'
 	icon_state = "speedbike_blue"
 	layer = LYING_MOB_LAYER
 	var/overlay_state = "cover_blue"
@@ -19,9 +19,8 @@
 	var/access = "anarch"
 	var/locked = TRUE
 
-	//Half the health pool of cars seems reasonable.
-	var/health = 50
-	var/maxhealth = 50
+	var/health = 100
+	var/maxhealth = 100
 	var/repairing = FALSE
 	var/exploded = FALSE
 
@@ -163,12 +162,12 @@
 /obj/vehicle/ridden/motorcycle/proc/play_idle_loop()
 	if(idle_looping) return
 	idle_looping = TRUE
-	playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_start.ogg', 80, FALSE, 220, 1)
+	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_start.ogg', 80, FALSE, 220, 1)
 	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
 /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat()
 	if(!on || !idle_looping) return
-	playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle.ogg', 80, FALSE, 0, 1, 221)
+	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle.ogg', 80, FALSE, 0, 1, 221)
 	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
 /// Called when engine stops
@@ -177,20 +176,20 @@
 	var/sound/stop_idle = sound(null, repeat=0, channel=221)
 	hearers(src) << stop_idle
 	if(!on)
-		playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_kill.ogg', 80, FALSE, 0, 1, 224)
+		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_kill.ogg', 80, FALSE, 0, 1, 224)
 
 /obj/vehicle/ridden/motorcycle/proc/handle_rev_sound()
 	if((world.time - last_run_sound) >= 3 SECONDS)
 		last_run_sound = world.time
 		stop_idle_loop()
-		playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_rev.ogg', 80, FALSE, 223, 1)
+		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_rev.ogg', 80, FALSE, 223, 1)
 		addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 2 SECONDS)
 
 /obj/vehicle/ridden/motorcycle/proc/handle_run_sound()
 	if((world.time - last_run_sound) >= 3 SECONDS)
 		last_run_sound = world.time
 		stop_idle_loop()
-		playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_run.ogg', 80, FALSE, 222, 1)
+		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_run.ogg', 80, FALSE, 222, 1)
 		addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 2 SECONDS)
 
 //VARIANT, only one bike is in the sprite, this is still the old variant for now. (Gonna give the baron their own bike, after i learn how to rename these.)
