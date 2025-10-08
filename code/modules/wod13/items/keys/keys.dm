@@ -186,7 +186,7 @@
 	)
 
 /obj/item/vamp/keys/salubri
-	name = "Conspiracy keys"
+	name = "Veterinary keys"
 	accesslocks = list(
 		"salubri"
 	)
