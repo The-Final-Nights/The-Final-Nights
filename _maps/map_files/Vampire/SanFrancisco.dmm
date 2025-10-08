@@ -29209,6 +29209,7 @@
 	dir = 4;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "gNc" = (
@@ -55238,6 +55239,15 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/vtm/church/interior/haven)
+"mKh" = (
+/obj/structure/stone_tile/surrounding_tile{
+	dir = 8
+	},
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/rough/cave{
+	icon_state = "stone8"
+	},
+/area/vtm/forest/caves)
 "mKo" = (
 /obj/effect/decal/pallet,
 /obj/structure/closet/crate/large,
@@ -67057,6 +67067,7 @@
 	dir = 8;
 	color = "#636363"
 	},
+/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "prs" = (
@@ -92213,6 +92224,11 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/vtm/interior/millennium_tower/f3)
+"vpD" = (
+/obj/structure/stone_tile/surrounding_tile,
+/obj/item/melee/vampirearms/klaive/wendigo,
+/turf/open/floor/plating/stone,
+/area/vtm/forest/caves)
 "vpH" = (
 /obj/structure/table/wood,
 /obj/vampire_computer,
@@ -101663,6 +101679,10 @@
 /obj/structure/vampdoor/wood/old,
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/apartment)
+"xCi" = (
+/obj/item/melee/vampirearms/klaive/bsd,
+/turf/open/indestructible/necropolis/air,
+/area/vtm/interior/wyrm_corrupted)
 "xCm" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10;
@@ -105589,7 +105609,7 @@ aqb
 ftQ
 bxi
 gGv
-xyD
+mKh
 qqR
 tmG
 oqy
@@ -105993,7 +106013,7 @@ vdp
 cLr
 dGj
 pSU
-upV
+vpD
 xdt
 ofv
 aqb
@@ -110548,9 +110568,9 @@ rCB
 jmr
 jmr
 fhB
-xEJ
+xCi
 uta
-xEJ
+xCi
 fhB
 jmr
 jmr
