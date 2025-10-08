@@ -999,5 +999,66 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 			if(sprite.slot_flags & ITEM_SLOT_SUITSTORE)
 				actual_file_name = 'icons/mob/clothing/belt_mirror.dmi'
 				if(!(sprite.icon_state in icon_states(actual_file_name)))
-					to_chat(src, "<span class='warning'>ERROR sprites for [sprite.type]. Suit Storage slot.</span>", confidential = TRUE)
+					to_chat(src, span_warning("ERROR sprites for [sprite.type]. Suit Storage slot."), confidential = TRUE)
+#endif
+
+#ifndef OPENDREAM
+/client/proc/start_tracy()
+	set category = "Debug"
+	set name = "Run Tracy Now"
+	set desc = "Start running the byond-tracy profiler immediately."
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	if(!CONFIG_GET(flag/allow_tracy_start))
+		to_chat(usr, span_warning("byond-tracy config disabled!"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+		return
+
+	if(!fexists(TRACY_DLL_PATH))
+		to_chat(usr, span_warning("byond-tracy not found!"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+		return
+
+	if(Tracy.enabled)
+		to_chat(usr, span_warning("byond-tracy is already running!"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+		return
+	else if(Tracy.error)
+		to_chat(usr, span_danger("byond-tracy failed to initialize during an earlier attempt: [Tracy.error]"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+		return
+	message_admins(span_adminnotice("[key_name_admin(usr)] is trying to start the byond-tracy profiler."))
+	log_admin("[key_name(usr)] is trying to start the byond-tracy profiler.")
+	if(!Tracy.enable("[usr.ckey]"))
+		var/error = Tracy.error || "N/A"
+		to_chat(usr, span_danger("byond-tracy failed to initialize: [error]"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+		message_admins(span_adminnotice("[key_name_admin(usr)] tried to start the byond-tracy profiler, but it failed to initialize ([error])"))
+		log_admin("[key_name(usr)] tried to start the byond-tracy profiler, but it failed to initialize ([error])")
+		return
+	to_chat(usr, span_notice("byond-tracy successfully started!"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+	message_admins(span_adminnotice("[key_name_admin(usr)] started the byond-tracy profiler."))
+	log_admin("[key_name(usr)] started the byond-tracy profiler.")
+	if(Tracy.trace_path)
+		rustg_file_write("[Tracy.trace_path]", "[GLOB.log_directory]/tracy.loc")
+
+/client/proc/queue_tracy()
+	set category = "Debug"
+	set name = "Toggle Tracy Next Round"
+	set desc = "Toggle running the byond-tracy profiler next round."
+
+	if(!check_rights(R_DEBUG))
+		return
+
+	if(!CONFIG_GET(flag/allow_tracy_queue))
+		to_chat(usr, span_warning("byond-tracy config disabled!"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+		return
+
+	if(!fexists(TRACY_DLL_PATH))
+		to_chat(usr, span_warning("byond-tracy not found!"), avoid_highlighting = TRUE, type = MESSAGE_TYPE_DEBUG, confidential = TRUE)
+		return
+
+	if(fexists(TRACY_ENABLE_PATH))
+		fdel(TRACY_ENABLE_PATH)
+	else
+		rustg_file_write("[usr.ckey]", TRACY_ENABLE_PATH)
+	message_admins(span_adminnotice("[key_name_admin(usr)] [fexists(TRACY_ENABLE_PATH) ? "enabled" : "disabled"] the byond-tracy profiler for next round."))
+	log_admin("[key_name(usr)] [fexists(TRACY_ENABLE_PATH) ? "enabled" : "disabled"] the byond-tracy profiler for next round.")
 #endif

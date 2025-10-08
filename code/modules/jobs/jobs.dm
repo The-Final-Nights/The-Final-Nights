@@ -85,12 +85,6 @@ GLOBAL_LIST_INIT(tzimisce_positions, list(
 	"Zadruga"
 ))
 
-GLOBAL_LIST_INIT(warehouse_positions, list(
-	"Dealer",
-	"Supply Technician"
-))
-
-
 GLOBAL_LIST_INIT(tremere_positions, list(
 	"Chantry Regent",
 	"Chantry Gargoyle",
@@ -103,6 +97,7 @@ GLOBAL_LIST_INIT(church_positions, list(
 
 GLOBAL_LIST_INIT(gang_positions, list(
 	"Axe Gang",
+	"Screentender"
 ))
 
 GLOBAL_LIST_INIT(painted_positions, list(
@@ -150,7 +145,6 @@ GLOBAL_LIST_INIT(position_categories, list(
 	EXP_TYPE_GIOVANNI = list("jobs" = giovanni_positions, "color" = "#3e0c70"),
 	EXP_TYPE_OTHER_CITIZEN = list("jobs" = citizen_positions, "color" = "#7e7e7e"),
 	EXP_TYPE_ANARCH = list("jobs" = anarch_positions, "color" = "#313131"),
-	EXP_TYPE_WAREHOUSE = list("jobs" = warehouse_positions, "color" = "#edc009"),
 	EXP_TYPE_CLINIC = list("jobs" = clinic_positions, "color" = "#80D0F4"),
 	EXP_TYPE_SERVICES = list("jobs" = services_positions, "color" = "#e8e6e6"),
 	EXP_TYPE_CHURCH = list("jobs" = church_positions, "color" = " #fff700"),
@@ -166,7 +160,7 @@ GLOBAL_LIST_INIT(position_categories, list(
 
 
 GLOBAL_LIST_INIT(exp_jobsmap, list(
-	EXP_TYPE_CREW = list("titles" = command_positions | church_positions | camarilla_council_positions | citizen_positions | police_positions | national_security_positions | anarch_positions | services_positions  | giovanni_positions | tzimisce_positions | warehouse_positions | tremere_positions | gang_positions | clinic_positions | painted_positions | amberglade_positions | spiral_positions | sabbat_positions), // crew positions
+	EXP_TYPE_CREW = list("titles" = command_positions | church_positions | camarilla_council_positions | citizen_positions | police_positions | national_security_positions | anarch_positions | services_positions  | giovanni_positions | tzimisce_positions | tremere_positions | gang_positions | clinic_positions | painted_positions | amberglade_positions | spiral_positions | sabbat_positions), // crew positions
 	EXP_TYPE_CAMARILLIA = list("titles" = command_positions),
 	EXP_TYPE_TREMERE = list("titles" = tremere_positions),
 	EXP_TYPE_ANARCH = list("titles" = anarch_positions),
@@ -178,7 +172,6 @@ GLOBAL_LIST_INIT(exp_jobsmap, list(
 	EXP_TYPE_SERVICES = list("titles" = services_positions),
 	EXP_TYPE_GIOVANNI = list("titles" = giovanni_positions),
 	EXP_TYPE_TZIMISCE = list("titles" = tzimisce_positions),
-	EXP_TYPE_WAREHOUSE = list("titles" = warehouse_positions),
 	EXP_TYPE_CHURCH = list("titles" = church_positions),
 	EXP_TYPE_NATIONAL_SECURITY = list("titles" = national_security_positions),
 	EXP_TYPE_PAINTED_CITY = list("titles" = painted_positions),

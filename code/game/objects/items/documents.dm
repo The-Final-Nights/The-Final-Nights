@@ -11,6 +11,12 @@
 	layer = MOB_LAYER
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 
+//TFN EDIT ADDITION - Making Heist Loot Sellable
+/obj/item/documents/Initialize()
+	. = ..()
+	AddComponent(/datum/component/selling, 500, "documents", FALSE)
+//TFN EDIT ADDITION - Making Heist Loot Sellable
+
 /obj/item/documents/nanotrasen
 	desc = "\"Top Secret\" Nanotrasen documents, filled with complex diagrams and lists of names, dates and coordinates."
 	icon_state = "docs_verified"
@@ -35,6 +41,12 @@
 	desc = "A copy of some top-secret documents. Nobody will notice they aren't the originals... right?"
 	var/forgedseal = 0
 	var/copy_type = null
+
+//TFN EDIT ADDITION - Making Heist Loot Sellable
+/obj/item/documents/photocopy/Initialize()
+	.=..()
+	AddComponent(/datum/component/selling, 20, "documents", FALSE)
+//TFN EDIT ADDITION - Making Heist Loot Sellable
 
 /obj/item/documents/photocopy/New(loc, obj/item/documents/copy=null)
 	..()

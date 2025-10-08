@@ -1,0 +1,7 @@
+2025-10-01:
+  SoreYew:
+  - rscdel: Removes cappadocian from Capo
+  chazzyjazzy:
+  - rscadd: heist loot such as gold, diamonds, and secret documents can now be sold
+      at the pawn shop
+  - bugfix: fixes a bug related to everyone being able to understand every language

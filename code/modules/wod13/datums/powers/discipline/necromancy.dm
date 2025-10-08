@@ -92,12 +92,12 @@
 	var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie1 = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level1(owner.loc)
 	zombie1.my_creator = owner
 	owner.beastmaster |= zombie1
-	zombie1.beastmaster = owner
+	zombie1.beastmaster_owner = owner
 	if(diff != 1)
 		var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie2 = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level1(owner.loc)
 		zombie2.my_creator = owner
 		owner.beastmaster |= zombie2
-		zombie2.beastmaster = owner
+		zombie2.beastmaster_owner = owner
 
 
 //ASHES TO ASHES
