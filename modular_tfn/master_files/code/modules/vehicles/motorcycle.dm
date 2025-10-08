@@ -1,9 +1,11 @@
-/obj/vehicle/ridden/speedbike/motorcycle
+/obj/vehicle/ridden/motorcycle
 	name = "Motorcycle"
 	desc = "You see a motorcycle; a beautiful and dangerous deathtrap on two wheels. An engineering masterpeice born of equal parts bravery, foolish pride, and a raw desire for thrill. Not meant for faint of heart or cowardly."
-	icon = 'icons/obj/bike.dmi'
+	icon = 'modular_tfn/master_files/icons/obj/bike.dmi'
 	icon_state = "speedbike_blue"
 	layer = LYING_MOB_LAYER
+	var/overlay_state = "cover_blue"
+	var/mutable_appearance/overlay
 
 	//Almost all of this is taken from vamp/car.dm, and modified to fit a motorcycle, cutting out anything unneeded.
 	var/mob/living/carbon/human/driver
@@ -34,13 +36,13 @@
 	var/datum/action/motorcycle/start_engine/start_eng
 	var/datum/action/motorcycle/rev_engine/rev_eng
 
-/obj/vehicle/ridden/speedbike/motorcycle/Initialize()
+/obj/vehicle/ridden/motorcycle/Initialize()
 	. = ..()
 	//Handles the overlay sprites.
 	overlay = mutable_appearance(icon, overlay_state, ABOVE_MOB_LAYER)
 	add_overlay(overlay)
 	//Basically makes the motorcycle a fancy janitor cart.
-	AddElement(/datum/element/ridable, /datum/component/riding/vehicle/speedbike/motorcycle)
+	AddElement(/datum/element/ridable, /datum/component/riding/vehicle/motorcycle)
 
 	//Actions: Gives the motorcycle it's actions to start and rev the engine.
 	start_eng = new /datum/action/motorcycle/start_engine
@@ -51,8 +53,8 @@
 //Mouse Drop Buckling Override:
 /mob/living/carbon/human/MouseDrop(atom/over_object)
 	. = ..()
-	if(istype(over_object, /obj/vehicle/ridden/speedbike/motorcycle) && get_dist(src, over_object) < 2)
-		var/obj/vehicle/ridden/speedbike/motorcycle/bike = over_object
+	if(istype(over_object, /obj/vehicle/ridden/motorcycle) && get_dist(src, over_object) < 2)
+		var/obj/vehicle/ridden/motorcycle/bike = over_object
 		if(bike.locked)
 			if(bike.on)
 				to_chat(src, "<span class='warning'>The [bike]'s front wheel is locked, but the engine is running! Rev it! I'm sure no one will mind!</span>")
@@ -80,7 +82,7 @@
 			return
 
 //Dismount
-/obj/vehicle/ridden/speedbike/motorcycle/user_unbuckle_mob(mob/living/M, mob/user)
+/obj/vehicle/ridden/motorcycle/user_unbuckle_mob(mob/living/M, mob/user)
 	. = ..()
 	if(. && !has_buckled_mobs())
 		driver = null
@@ -88,7 +90,7 @@
 		rev_eng.Remove(M)
 
 //Movement trail and sound.
-/obj/vehicle/ridden/speedbike/motorcycle/Move(newloc,move_dir)
+/obj/vehicle/ridden/motorcycle/Move(newloc,move_dir)
 	if(!on || gas <= 0 || health <= 0) //If the bike is off, or out of gas, or broken, don't move.
 		if(on && gas <= 0)
 			to_chat(driver, "<span class='warning'>The [src] sputters and dies; it's out of gas!</span>")
@@ -119,7 +121,7 @@
 	name = "Start/Kill the Engine"
 	desc = "Starts or Kills the Engine."
 	button_icon_state = "keys"
-	var/obj/vehicle/ridden/speedbike/motorcycle/this_bike
+	var/obj/vehicle/ridden/motorcycle/this_bike
 
 /datum/action/motorcycle/start_engine/Trigger(trigger_flags)
 	. = ..()
@@ -145,7 +147,7 @@
 	name = "Rev Engine"
 	desc = "Revs the Engine."
 	button_icon_state = "stage"
-	var/obj/vehicle/ridden/speedbike/motorcycle/this_bike
+	var/obj/vehicle/ridden/motorcycle/this_bike
 
 /datum/action/motorcycle/rev_engine/Trigger(trigger_flags)
 	. = ..()
@@ -158,40 +160,40 @@
 	this_bike.last_rev_sound = world.time
 
 //Start Idle sound.
-/obj/vehicle/ridden/speedbike/motorcycle/proc/play_idle_loop()
+/obj/vehicle/ridden/motorcycle/proc/play_idle_loop()
 	if(idle_looping) return
 	idle_looping = TRUE
 	playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_start.ogg', 80, FALSE, 220, 1)
-	addtimer(CALLBACK(src, /obj/vehicle/ridden/speedbike/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
+	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
-/obj/vehicle/ridden/speedbike/motorcycle/proc/play_idle_loop_repeat()
+/obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat()
 	if(!on || !idle_looping) return
 	playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle.ogg', 80, FALSE, 0, 1, 221)
-	addtimer(CALLBACK(src, /obj/vehicle/ridden/speedbike/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
+	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
 /// Called when engine stops
-/obj/vehicle/ridden/speedbike/motorcycle/proc/stop_idle_loop()
+/obj/vehicle/ridden/motorcycle/proc/stop_idle_loop()
 	idle_looping = FALSE
 	var/sound/stop_idle = sound(null, repeat=0, channel=221)
 	hearers(src) << stop_idle
 	if(!on)
 		playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_kill.ogg', 80, FALSE, 0, 1, 224)
 
-/obj/vehicle/ridden/speedbike/motorcycle/proc/handle_rev_sound()
+/obj/vehicle/ridden/motorcycle/proc/handle_rev_sound()
 	if((world.time - last_run_sound) >= 3 SECONDS)
 		last_run_sound = world.time
 		stop_idle_loop()
 		playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_rev.ogg', 80, FALSE, 223, 1)
 		addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 2 SECONDS)
 
-/obj/vehicle/ridden/speedbike/motorcycle/proc/handle_run_sound()
+/obj/vehicle/ridden/motorcycle/proc/handle_run_sound()
 	if((world.time - last_run_sound) >= 3 SECONDS)
 		last_run_sound = world.time
 		stop_idle_loop()
 		playsound(src, 'modular_tfn/master_files/sound/vehicles/motorcycle/bike_idle_run.ogg', 80, FALSE, 222, 1)
 		addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 2 SECONDS)
 
-//VARIANT, only one bike is in the sprite, this is still the old variant speedbike for now. (Gonna give the baron their own bike, after i learn how to rename these.)
+//VARIANT, only one bike is in the sprite, this is still the old variant for now. (Gonna give the baron their own bike, after i learn how to rename these.)
 /* Commented out for now, will finish.
 /obj/vehicle/ridden/motorcycle/baron
 	icon_state = "speedbike_red"
@@ -200,7 +202,7 @@
 */
 
 //Keys/Lockpicking/Repair/Various: All from car.dm, very slightly modified.
-/obj/vehicle/ridden/speedbike/motorcycle/attackby(obj/item/I, mob/living/user, params)
+/obj/vehicle/ridden/motorcycle/attackby(obj/item/I, mob/living/user, params)
 	if(istype(I, /obj/item/gas_can)) //gas
 		var/obj/item/gas_can/G = I
 		if(G.stored_gasoline && gas < 1000 && isturf(user.loc))
@@ -302,7 +304,7 @@
 	..()
 
 //crashing into stuff, direct rip.
-/obj/vehicle/ridden/speedbike/motorcycle/Bump(atom/A)
+/obj/vehicle/ridden/motorcycle/Bump(atom/A)
 	if(!A)
 		return
 	if(istype(A, /mob/living))
@@ -352,7 +354,7 @@
 
 
 //Motorcycle explodes!
-/obj/vehicle/ridden/speedbike/motorcycle/proc/get_damage(cost)
+/obj/vehicle/ridden/motorcycle/proc/get_damage(cost)
 	if(cost > 0)
 		health = max(0, health-cost)
 	if(cost < 0)
@@ -372,7 +374,7 @@
 	return
 
 
-/obj/vehicle/ridden/speedbike/motorcycle/examine(mob/user)
+/obj/vehicle/ridden/motorcycle/examine(mob/user)
 	. = ..()
 	if(user.loc == src)
 		. += "<b>Gas</b>: [gas]/1000"

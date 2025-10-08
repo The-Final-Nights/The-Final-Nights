@@ -1,6 +1,6 @@
 /obj/vehicle/ridden/speedbike
 	name = "Speedbike"
-	icon = 'icons/obj/bike.dmi'
+	icon = 'modular_tfn/master_files/icons/obj/bike.dmi'
 	icon_state = "speedbike_blue"
 	layer = LYING_MOB_LAYER
 	var/overlay_state = "cover_blue"
@@ -13,8 +13,8 @@
 	AddElement(/datum/element/ridable, /datum/component/riding/vehicle/speedbike)
 
 /obj/vehicle/ridden/speedbike/Move(newloc,move_dir)
-	//if(has_buckled_mobs())
-		//new /obj/effect/temp_visual/dir_setting/speedbike_trail(loc,move_dir)
+	if(has_buckled_mobs())
+		new /obj/effect/temp_visual/dir_setting/speedbike_trail(loc,move_dir)
 	return ..()
 
 /obj/vehicle/ridden/speedbike/red
