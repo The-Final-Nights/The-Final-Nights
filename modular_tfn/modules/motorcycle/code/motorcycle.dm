@@ -1,6 +1,6 @@
 /obj/vehicle/ridden/motorcycle
 	name = "Motorcycle"
-	desc = "You see a motorcycle; a beautiful and dangerous deathtrap on two wheels. An engineering masterpeice born of equal parts bravery, foolish pride, and a raw desire for thrill. Not meant for faint of heart or cowardly."
+	desc = "You see a motorcycle; a beautiful and dangerous deathtrap on two wheels. An engineering masterpiece born of equal parts bravery, foolish pride, and a raw desire for thrill. Not meant for faint of heart or cowardly."
 	icon = 'modular_tfn/modules/motorcycle/icons/obj/motorcycle.dmi'
 	icon_state = "motorcycle_basic"
 	layer = LYING_MOB_LAYER
@@ -124,18 +124,18 @@
 	. = ..()
 	if(this_bike.on == FALSE)
 		if(this_bike.gas <= 0)
-			to_chat(this_bike.driver, "<span class='warning'>The [this_bike] is out of gas!</span>")
+			to_chat(this_bike.driver, span_warning("The [this_bike] is out of gas!"))
 			return
 		if(this_bike.health <= 10)
-			to_chat(this_bike.driver, "<span class='warning'>The [this_bike] is too damaged to start!</span>")
+			to_chat(this_bike.driver,span_warning("The [this_bike] is too damaged to start!"))
 			return
 		this_bike.on = TRUE
-		to_chat(this_bike.driver, "<span class='notice'>You start the [this_bike]'s engine.</span>")
+		to_chat(this_bike.driver, span_notice("You start the [this_bike]'s engine."))
 		this_bike.play_idle_loop()
 		return
 	else if(this_bike.on == TRUE)
 		this_bike.on = FALSE
-		to_chat(this_bike.driver, "<span class='notice'>You turn off the [this_bike]'s engine.</span>")
+		to_chat(this_bike.driver, span_notice("You turn off the [this_bike]'s engine."))
 		this_bike.stop_idle_loop()
 		return
 
@@ -149,7 +149,7 @@
 /datum/action/motorcycle/rev_engine/Trigger(trigger_flags)
 	. = ..()
 	if(!this_bike.on)
-		to_chat(this_bike.driver, "<span class='warning'>The [this_bike]'s engine is off!</span>")
+		to_chat(this_bike.driver, span_warning("The [this_bike]'s engine is off!"))
 		return
 	if((world.time - this_bike.last_rev_sound) < 3 SECONDS)
 		return
@@ -207,7 +207,7 @@
 			G.stored_gasoline = max(0, G.stored_gasoline-gas_to_transfer)
 			gas = min(1000, gas+gas_to_transfer)
 			playsound(loc, 'code/modules/wod13/sounds/gas_fill.ogg', 25, TRUE)
-			to_chat(user, "<span class='notice'>You transfer [gas_to_transfer] fuel to [src].</span>")
+			to_chat(user, span_notice("You transfer [gas_to_transfer] fuel to [src]."))
 		return
 	if(istype(I, /obj/item/vamp/keys)) //keys/lockpicking
 		var/obj/item/vamp/keys/K = I
