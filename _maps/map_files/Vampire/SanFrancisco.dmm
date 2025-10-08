@@ -29209,7 +29209,6 @@
 	dir = 4;
 	color = "#636363"
 	},
-/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "gNc" = (
@@ -36208,11 +36207,6 @@
 /obj/item/food/cannoli,
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/giovanni)
-"iqo" = (
-/obj/structure/stone_tile/surrounding_tile,
-/obj/item/melee/vampirearms/klaive/wendigo,
-/turf/open/floor/plating/stone,
-/area/vtm/forest/caves)
 "iqs" = (
 /obj/effect/decal/bordur,
 /obj/structure/railing/metal{
@@ -37639,10 +37633,6 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/industrial)
-"iGF" = (
-/obj/item/melee/vampirearms/klaive/bsd,
-/turf/open/indestructible/necropolis/air,
-/area/vtm/interior/wyrm_corrupted)
 "iGM" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
@@ -67067,7 +67057,6 @@
 	dir = 8;
 	color = "#636363"
 	},
-/obj/item/melee/vampirearms/klaive/glasswalker,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/glasswalker)
 "prs" = (
@@ -75677,15 +75666,6 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer)
-"rse" = (
-/obj/structure/stone_tile/surrounding_tile{
-	dir = 8
-	},
-/obj/item/melee/vampirearms/klaive/wendigo,
-/turf/open/floor/plating/rough/cave{
-	icon_state = "stone8"
-	},
-/area/vtm/forest/caves)
 "rsk" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#004136";
@@ -105609,7 +105589,7 @@ aqb
 ftQ
 bxi
 gGv
-rse
+xyD
 qqR
 tmG
 oqy
@@ -106013,7 +105993,7 @@ vdp
 cLr
 dGj
 pSU
-iqo
+upV
 xdt
 ofv
 aqb
@@ -110568,9 +110548,9 @@ rCB
 jmr
 jmr
 fhB
-iGF
+xEJ
 uta
-iGF
+xEJ
 fhB
 jmr
 jmr
