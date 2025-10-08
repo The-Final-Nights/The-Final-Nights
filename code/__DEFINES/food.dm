@@ -24,6 +24,8 @@
 
 #define FOOD_IN_CONTAINER (1<<0)
 #define FOOD_FINGER_FOOD (1<<1)
+//Food has state to swap to upon first bite
+#define FOOD_BITE_SPRITE (1<<2)
 
 #define STOP_SERVING_BREAKFAST (15 MINUTES)
 

@@ -498,8 +498,6 @@
 					if(!toggle_published_contacts)
 						var/contacts_added_lenght = published_numbers_contacts.len
 						var/list_length = min(length(GLOB.published_numbers), length(GLOB.published_number_names))
-						log_admin(contacts_added_lenght)
-						log_admin(list_length)
 						if(contacts_added_lenght < list_length)
 						// checks the size difference between the GLOB published list and the phone published list
 							var/ADDED_CONTACTS = 0
@@ -841,26 +839,18 @@
 		list(NETWORK_ID = ANARCH_NETWORK, OUR_ROLE = "Club Promotor", USE_JOB_TITLE = FALSE)
 		)
 
-// WAREHOUSE
-
-/obj/item/vamp/phone/dealer
-	exchange_num = 485
-	contact_networks_pre_init = list(
-		list(NETWORK_ID = WAREHOUSE_NETWORK, OUR_ROLE = "Warehouse Manager", USE_JOB_TITLE = FALSE)
-		, list(NETWORK_ID = VAMPIRE_LEADER_NETWORK, OUR_ROLE = "Warehouse Manager", USE_JOB_TITLE = FALSE)
-		)
-
-/obj/item/vamp/phone/supply_tech
-	contact_networks_pre_init = list(
-		list(NETWORK_ID = WAREHOUSE_NETWORK, OUR_ROLE = "Supply Technician", USE_JOB_TITLE = FALSE)
-		)
-
 // AXE GANG
 
 /obj/item/vamp/phone/axe_gangster
 	contact_networks_pre_init = list(
-		list(NETWORK_ID = AXES_NETWORK, OUR_ROLE = "Chinatown Associate", USE_JOB_TITLE = FALSE)
+		list(NETWORK_ID = AXES_NETWORK, OUR_ROLE = "Supply Technician", USE_JOB_TITLE = FALSE)
 		)
+
+/obj/item/vamp/phone/axe_leader
+	contact_networks_pre_init = list(
+		list(NETWORK_ID = AXES_NETWORK, OUR_ROLE = "Supply Manager", USE_JOB_TITLE = FALSE),
+		list(NETWORK_ID = VAMPIRE_LEADER_NETWORK, OUR_ROLE = "Warehouse Manager", USE_JOB_TITLE = FALSE)
+	)
 
 // ENDRON
 

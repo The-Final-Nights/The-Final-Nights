@@ -7,6 +7,7 @@
 	item_flags = NOBLUDGEON
 	w_class = WEIGHT_CLASS_SMALL
 	var/amount_of_bloodpoints = 2
+	reagent_flags = OPENCONTAINER
 
 /obj/item/reagent_containers/blood/Initialize(mapload)
 	. = ..()

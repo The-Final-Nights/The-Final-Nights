@@ -11,6 +11,9 @@
 /// can't see value
 #define CONFIG_ENTRY_HIDDEN 2
 
+/// Force the config directory to be something other than "config"
+#define OVERRIDE_CONFIG_DIRECTORY_PARAMETER "config-directory"
+
 //Migrated from config_entry.dm due to widespread use outside of local file. Used for various config file associated chicanery
 #define VALUE_MODE_NUM 0
 #define VALUE_MODE_TEXT 1

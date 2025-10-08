@@ -315,6 +315,18 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	image_icon = 'code/modules/wod13/32x48.dmi'
 	image_state = "baali"
 
+//TFN EDIT START - Psychomania Rework
+/obj/effect/hallucination/simple/spectre
+	name = "Specter"
+	image_icon = 'icons/mob/mob.dmi'
+	image_state = "shade"
+
+/obj/effect/hallucination/simple/fera
+	name = "Wyrmic Avatar"
+	image_icon = 'code/modules/wod13/48x64.dmi'
+	image_state = "bigskeleton"
+//TFN EDIT END - Psychomania Rework
+
 /datum/hallucination/oh_yeah
 	var/obj/effect/hallucination/simple/bubblegum/bubblegum
 	var/image/fakebroken
@@ -390,11 +402,12 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 
 /datum/hallucination/baali
 	var/obj/effect/hallucination/simple/demon/demon
+	var/demontype // TFN ADDITION - Psychomania Rework
 	var/turf/landing
 	var/charged
 	COOLDOWN_DECLARE(next_cooldown)
 
-/datum/hallucination/baali/New(mob/living/carbon/C, forced = TRUE)
+/datum/hallucination/baali/New(mob/living/carbon/C, forced = TRUE, new_demontype)
 	set waitfor = FALSE
 	. = ..()
 	var/turf/closed/wall/wall
@@ -406,6 +419,31 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 	feedback_details += "Source: [wall.x],[wall.y],[wall.z]"
 	target.playsound_local(wall,'sound/effects/meteorimpact.ogg', 150, 1)
 	demon = new(wall, target)
+	//TFN EDIT START - Psychomania Rework
+	demontype = new_demontype
+	if (isnull(new_demontype))
+		demontype = pick("demon", "spectre", "wyrm", "banu", "tremere")
+	switch(demontype)
+		if("demon")
+			demon.image_icon = 'code/modules/wod13/32x48.dmi'
+			demon.image_state = "baali"
+		if("spectre")
+			demon.name = "Specter"
+			demon.image_icon = 'icons/mob/mob.dmi'
+			demon.image_state = "shadeh"
+		if("wyrm")
+			demon.name = "Wyrmic Avatar"
+			demon.image_icon = 'code/modules/wod13/48x64.dmi'
+			demon.image_state = "bigskeleton"
+		if("tremere")
+			demon.name = "RECLAIMER"
+			demon.image_icon = 'code/modules/wod13/48x64.dmi'
+			demon.image_state = "4armstzi"
+		if("banu")
+			demon.name = "LOREMASTER"
+			demon.image_icon = 'icons/mob/32x64.dmi'
+			demon.image_state = "eva"
+	//TFN EDIT END - Psychomania Rework
 	addtimer(CALLBACK(src, PROC_REF(start_processing)), 10)
 
 
@@ -426,10 +464,32 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		QDEL_IN(src, 4 SECONDS)
 		if(demon.Adjacent(target) && !charged)
 			charged = TRUE
-			target.Paralyze(1 SECONDS)
-			target.adjustStaminaLoss(200)
+			//TFN EDIT START - Psychomania Rework
+			switch(demontype)
+				if("demon")
+					target.visible_message(span_warning("[target] falls on their knees"), span_warning("[demon] grasps my head with its hands"),)
+					target.Paralyze(7 SECONDS)
+					target.adjustStaminaLoss(200)
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/demonlaugh1.ogg", 50, FALSE)
+					to_chat(target, span_cult("HELL IS REAL, IT HAS TOUCHED ME"))
+				if("spectre")
+					target.visible_message(span_warning("[target] collapses onto the ground"), span_warning("[demon] touches you with an outstretched hand"),) //Spectres being spooky
+					target.Paralyze(7 SECONDS)
+					target.adjustStaminaLoss(200)
+					to_chat(target, span_cult("THE SPIRIT HAS TAKEN SOMETHING FROM ME"))
+				if("wyrm")
+					target.visible_message(span_warning("[target] whines in animalistic fear"), span_cult("THE WYRM HAS NOTICED ME"),) //Pick your bane name
+					target.Paralyze(5 SECONDS)
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
+				if("banu")
+					target.visible_message(span_warning("[target] grasps his chest, feeling for a hole"), span_cult("THE [demon] PLUCKS OUT YOUR HEART"),) //Ur-Shulgi doesnt take shit from anyone
+					target.Paralyze(7 SECONDS)
+				if("tremere")
+					target.visible_message(span_warning("[target] collapses onto the ground, convulsing"), span_cult("THE [demon] TAKES YOUR VITAE"),) //saulot/tzimice's repo man
+					target.playsound_local(target, "modular_tfn/modules/daim/audio/malklaugh.ogg", 50, FALSE)
+					target.Paralyze(7 SECONDS)
+			//TFN EDIT END - Psychomania Rework
 			step_away(target, demon)
-			target.visible_message(span_warning("[target] jumps backwards, falling on the ground!"), span_warning("[demon] slams into you!"),)
 			STOP_PROCESSING(SSfastprocess, src)
 			qdel(src)
 		COOLDOWN_START(src, next_cooldown, 2 SECONDS)
@@ -707,6 +767,11 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 			if("repent")
 				A = image('code/modules/wod13/64x64.dmi',H,"cross")
 				A.name = "Our Sins"
+			// TFN EDIT ADDITION - Psychomania Rework
+			if("dancer")
+				A = image('code/modules/wod13/werewolf.dmi',H,"spiralblack")
+				A.name = "Wyrmfoe"
+			// TFN EDIT ADDITION - Psychomania Rework
 			if("kitty")
 				A = image('code/modules/wod13/mobs.dmi',H,"cattzi")
 				A.name = "A Pretty Kitty"
