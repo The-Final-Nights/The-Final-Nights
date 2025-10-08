@@ -50,35 +50,33 @@
 	rev_eng.this_bike = src
 
 //Mouse Drop Buckling Override:
-/mob/living/carbon/human/MouseDrop(atom/over_object)
+/obj/vehicle/ridden/motorcycle/MouseDrop_T(mob/living/new_mounter, atom/user)
 	. = ..()
-	if(istype(over_object, /obj/vehicle/ridden/motorcycle) && get_dist(src, over_object) < 2)
-		var/obj/vehicle/ridden/motorcycle/bike = over_object
-		if(bike.locked)
-			if(bike.on)
-				to_chat(src, "<span class='warning'>The [bike]'s front wheel is locked, but the engine is running! Rev it! I'm sure no one will mind!</span>")
-				return
-			to_chat(src, "<span class='warning'>The [bike]'s front wheel is locked, it has a very comfy seat though.</span>")
+	if(driver && (length(passengers) >= max_passengers))
+		to_chat(new_mounter, "<span class='warning'>There's no room for you on the [src].")
+		return FALSE
+	if(locked)
+		if(on)
+			to_chat(new_mounter, "<span class='warning'>The [src]'s front wheel is locked, but the engine is running! Rev it! I'm sure no one will mind!</span>")
 			return
-		if(bike.driver && (length(bike.passengers) >= bike.max_passengers))
-			to_chat(src, "<span class='warning'>There's no room for you on the [bike].")
-			return
-		visible_message("<span class='notice'>[src] begins getting on the [bike]...</span>", \
-			"<span class='notice'>You begin mounting the [bike]...</span>")
-		if(do_mob(src, over_object, 1 SECONDS))
-			if(!bike.driver)
-				bike.driver = src
-				bike.rev_eng.Grant(src)
-				if(!bike.locked)
-					bike.start_eng.Grant(src)
-			else if(length(bike.passengers) < bike.max_passengers)
-				bike.passengers += src
-			visible_message("<span class='notice'>[src] gets on the [bike].</span>", \
-				"<span class='notice'>You get on the [bike], and put the key your key in the slot.</span>")
-			return
-		else
-			to_chat(src, "<span class='warning'>You fail to get on the [bike].")
-			return
+		to_chat(new_mounter, "<span class='warning'>The [src]'s front wheel is locked, it has a very comfy seat though.</span>")
+		return
+	to_chat(span_notice("[new_mounter] gets on the [src]."))
+	to_chat(new_mounter, "<span class='notice'>You get on the [src].")
+	if(do_mob(user, new_mounter, 1 SECONDS))
+		if(!driver)
+			driver = new_mounter
+			rev_eng.Grant(driver)
+			if(!locked)
+				start_eng.Grant(driver)
+		else if(length(passengers) < max_passengers)
+			passengers += src
+		visible_message("<span class='notice'>[src] gets on the [src].</span>", \
+			"<span class='notice'>You get on the [src], and put the key your key in the slot.</span>")
+		return TRUE
+	else
+		to_chat(src, "<span class='warning'>You fail to get on the [src].")
+		return FALSE
 
 //Dismount
 /obj/vehicle/ridden/motorcycle/user_unbuckle_mob(mob/living/M, mob/user)
@@ -162,12 +160,12 @@
 /obj/vehicle/ridden/motorcycle/proc/play_idle_loop()
 	if(idle_looping) return
 	idle_looping = TRUE
-	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_start.ogg', 100, FALSE, 5, 1.3, 0, 220)
+	playsound(src, 'code/modules/wod13/sounds/start.ogg', 100, FALSE, 5, 1.3, 0, 220)
 	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
 /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat()
 	if(!on || !idle_looping) return
-	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle.ogg', 100, FALSE, 5, 1.3, 0, 221)
+	playsound(src, 'code/modules/wod13/sounds/stop.ogg', 100, FALSE, 5, 1.3, 0, 221)
 	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
 /// Called when engine stops
