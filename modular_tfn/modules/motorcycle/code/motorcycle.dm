@@ -2,12 +2,12 @@
 	name = "Motorcycle"
 	desc = "You see a motorcycle; a beautiful and dangerous deathtrap on two wheels. An engineering masterpeice born of equal parts bravery, foolish pride, and a raw desire for thrill. Not meant for faint of heart or cowardly."
 	icon = 'modular_tfn/modules/motorcycle/icons/obj/motorcycle.dmi'
-	icon_state = "speedbike_blue"
+	icon_state = "motorcycle_basic"
 	layer = LYING_MOB_LAYER
-	var/overlay_state = "cover_blue"
+	var/overlay_state = "motorcycle_overlay"
 	var/mutable_appearance/overlay
 
-	//Almost all of this is taken from vamp/car.dm, and modified to fit a motorcycle, cutting out anything unneeded.
+	//Almost all of this is taken from vamp/car.dm, and speedbike.dm, and modified to fit a motorcycle.
 	var/mob/living/carbon/human/driver
 	var/list/passengers = list()
 	var/max_passengers = 1
@@ -15,7 +15,7 @@
 	var/obj/key = null
 	var/on = FALSE
 	var/idle_looping = FALSE
-	var/gas = 500
+	var/gas = 1000
 	var/access = "anarch"
 	var/locked = TRUE
 
@@ -162,12 +162,12 @@
 /obj/vehicle/ridden/motorcycle/proc/play_idle_loop()
 	if(idle_looping) return
 	idle_looping = TRUE
-	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_start.ogg', 80, FALSE, 220, 1)
+	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_start.ogg', 100, FALSE, 5, 1.3, 0, 220)
 	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
 /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat()
 	if(!on || !idle_looping) return
-	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle.ogg', 80, FALSE, 0, 1, 221)
+	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle.ogg', 100, FALSE, 5, 1.3, 0, 221)
 	addtimer(CALLBACK(src, /obj/vehicle/ridden/motorcycle/proc/play_idle_loop_repeat), 2.5 SECONDS)
 
 /// Called when engine stops
@@ -176,20 +176,20 @@
 	var/sound/stop_idle = sound(null, repeat=0, channel=221)
 	hearers(src) << stop_idle
 	if(!on)
-		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_kill.ogg', 80, FALSE, 0, 1, 224)
+		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_kill.ogg', 100, FALSE, 5, 1.3, 0, 224)
 
 /obj/vehicle/ridden/motorcycle/proc/handle_rev_sound()
 	if((world.time - last_run_sound) >= 3 SECONDS)
 		last_run_sound = world.time
 		stop_idle_loop()
-		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_rev.ogg', 80, FALSE, 223, 1)
+		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_rev.ogg', 100, TRUE, 10, 1.5, 0, 223)
 		addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 2 SECONDS)
 
 /obj/vehicle/ridden/motorcycle/proc/handle_run_sound()
 	if((world.time - last_run_sound) >= 3 SECONDS)
 		last_run_sound = world.time
 		stop_idle_loop()
-		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_run.ogg', 80, FALSE, 222, 1)
+		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_run.ogg', 100, TRUE, 10, 1.5, 0, 222)
 		addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 2 SECONDS)
 
 //VARIANT, only one bike is in the sprite, this is still the old variant for now. (Gonna give the baron their own bike, after i learn how to rename these.)
@@ -256,6 +256,9 @@
 					return
 		return
 	if(istype(I, /obj/item/melee/vampirearms/tire))
+		if(exploded)
+			to_chat(user, "<span class='warning'>The [src] is wrecked beyond repair.</span>")
+			return
 		if(!repairing)
 			if(health >= maxhealth)
 				to_chat(user, "<span class='notice'>[src] is already fully repaired.</span>")
@@ -334,7 +337,7 @@
 				L.client.pixel_x = 0
 				L.client.pixel_y = 0
 	if(istype(A, /mob/living))
-		var/dam = 20
+		var/dam = 30
 		var/mob/living/L = A
 		if(!HAS_TRAIT(L, TRAIT_TOUGH_FLESH))
 			L.apply_damage(dam, BRUTE, BODY_ZONE_CHEST)
@@ -343,7 +346,7 @@
 				dam = round(dam/2)
 		get_damage(dam)
 	else
-		var/dam = 20
+		var/dam = 30
 		if(driver)
 			if(HAS_TRAIT(driver, TRAIT_EXP_DRIVER))
 				dam = round(dam/2)

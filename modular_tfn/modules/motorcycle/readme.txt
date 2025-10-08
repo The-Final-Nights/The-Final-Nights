@@ -4,7 +4,7 @@ Module ID:
 motorcycle
 
 Description:
-This creates motorcycles for TFN, using vamp cars code as its base.
+This creates motorcycles for TFN, by blending vamp cars for logic, and TG speedbike code for display and ridden vehicles.
 
 TG Proc/File Changes:
 Overrides slightly; /mob/living/carbon/human/MouseDrop(atom/over_object)
