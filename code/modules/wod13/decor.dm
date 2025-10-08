@@ -821,7 +821,7 @@
 	anchored = TRUE
 	pixel_w = -16
 
-/obj/gummaguts
+/obj/reddragon
 	name = "The Red Dragon"
 	desc = "Eat some spicy chicken and 'eggroll'!"
 	icon = 'code/modules/wod13/fastfood.dmi'
