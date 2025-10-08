@@ -243,7 +243,7 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 
 	return TRUE
 
-/mob/living/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
+/mob/living/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), thrown = FALSE) // TFN EDIT - added 'thrown' var to handle melpominee_say proc on the discipline Melpominee.
 	SEND_SIGNAL(src, COMSIG_MOVABLE_HEAR, args)
 	if(!client)
 		return
@@ -291,8 +291,13 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 					EX.last_message = message
 					EX.total_erp += length_char(message)
 
+	//TFN EDIT START - Fixes Languages Bug - Line 297 handles language comprehension but we dont want it to run if thrown = TRUE (melpominee_say from melpominee.dm)
+
 	// Recompose message for AI hrefs, language incomprehension.
-	//message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods) //TFN EDIT, REMOVAL
+	if(!thrown)
+		message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)
+
+	//TFN EDIT END - Fixes Languages Bug
 
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type, avoid_highlighting = speaker == src)
 	return message
