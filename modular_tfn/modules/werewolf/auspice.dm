@@ -65,8 +65,6 @@
 	if(tribe.tribe_trait==TRAIT_CORAX)
 		ADD_TRAIT(C,TRAIT_CORAX, tribe)
 
-	//RegisterSignal(src, COMSIG_CHARACTER_GENERATED, PROC_REF(add_recipe_klaive))
-
 /**
  * On gaining crafting recipes for garou klaives
  *
