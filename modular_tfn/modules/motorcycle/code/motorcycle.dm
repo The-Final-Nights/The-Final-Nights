@@ -9,10 +9,7 @@
 
 	//Almost all of this is taken from vamp/car.dm, and speedbike.dm, and modified to fit a motorcycle.
 	var/mob/living/carbon/human/driver
-	var/list/passengers = list()
-	var/max_passengers = 1
 
-	var/obj/key = null
 	var/on = FALSE
 	var/idle_looping = FALSE
 	var/gas = 1000
@@ -52,7 +49,7 @@
 //Mouse Drop Buckling Override:
 /obj/vehicle/ridden/motorcycle/MouseDrop_T(mob/living/new_mounter, atom/user)
 	. = ..()
-	if(driver && (length(passengers) >= max_passengers))
+	if(driver)
 		to_chat(new_mounter, span_warning("There's no room for you on the [src]."))
 		return FALSE
 	if(locked)
@@ -69,8 +66,6 @@
 			rev_eng.Grant(driver)
 			if(!locked)
 				start_eng.Grant(driver)
-		else if(length(passengers) < max_passengers)
-			passengers += src
 		visible_message(span_notice("[src] gets on the [src]."), \
 			span_notice("You get on the [src], and put the key your key in the slot."))
 		return TRUE
@@ -291,7 +286,7 @@
 				if(prob(50))
 					L.apply_damage(round(I.force/2), I.damtype, pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST))
 
-			if(!driver && !length(passengers) && last_beep+70 < world.time && locked)
+			if(!driver && last_beep+70 < world.time && locked)
 				last_beep = world.time
 				playsound(src, 'code/modules/wod13/sounds/signal.ogg', 50, FALSE)
 				for(var/mob/living/carbon/human/npc/police/P in oviewers(7, src))
@@ -302,6 +297,7 @@
 				locked = FALSE
 
 	..()
+
 
 //crashing into stuff, direct rip.
 /obj/vehicle/ridden/motorcycle/Bump(atom/A)
@@ -388,7 +384,6 @@
 		. += span_warning("It appears to be falling apart... ")
 	if(locked)
 		. += span_warning("It's wheel is locked. ")
-	if(driver || length(passengers))
-		. += span_notice("\nYou see the following people on the motorcycle: ")
-		for(var/mob/living/rider in src)
-			. += span_notice("* [rider] ")
+	if(driver)
+		. += span_notice("You see the following people on the motorcycle: ")
+		. += span_notice(" [driver] ")
