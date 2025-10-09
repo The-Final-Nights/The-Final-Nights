@@ -23,12 +23,12 @@
 
 	//car alarm.
 	var/last_beep = 0
-
-	max_buckled_mobs = 1
 	var/last_run_sound = 0
 	var/last_rev_sound = 0
+
 	var/move_threshold = 10
 	var/move_count = 0
+	//Actions
 	var/datum/action/motorcycle/start_engine/start_eng
 	var/datum/action/motorcycle/rev_engine/rev_eng
 
