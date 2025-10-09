@@ -24,7 +24,6 @@
 	//car alarm.
 	var/last_beep = 0
 	var/last_run_sound = 0
-	var/last_rev_sound = 0
 
 	var/move_threshold = 10
 	var/move_count = 0
