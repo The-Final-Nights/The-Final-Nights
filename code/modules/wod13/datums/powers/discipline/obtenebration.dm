@@ -20,6 +20,7 @@
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
 	target_type = TARGET_TURF | TARGET_MOB | TARGET_OBJ | TARGET_SELF
 	range = 7
+	vitae_cost = 1
 
 	multi_activate = TRUE
 	duration_length = 10 SECONDS
@@ -52,6 +53,11 @@
 
 	cooldown_length = 5 SECONDS
 
+/datum/discipline_power/obtenebration/shroud_of_night/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll(owner.st_get_stat(STAT_MANIPULATION) + owner.st_get_stat(STAT_OCCULT), 7, FALSE, owner))
+		return TRUE
+	return FALSE
+
 /datum/discipline_power/obtenebration/shroud_of_night/activate(mob/living/target)
 	. = ..()
 	target.Stun(1 SECONDS)
@@ -65,11 +71,17 @@
 
 	level = 3
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
-
+	vitae_cost = 1
 	violates_masquerade = TRUE
 
 	toggled = TRUE
 	duration_length = 6 TURNS
+
+
+/datum/discipline_power/obtenebration/arms_of_the_abyss/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll(owner.st_get_stat(STAT_MANIPULATION) + owner.st_get_stat(STAT_OCCULT), 7, FALSE, owner))
+		return TRUE
+	return FALSE
 
 /datum/discipline_power/obtenebration/arms_of_the_abyss/activate()
 	. = ..()
@@ -96,6 +108,11 @@
 	cancelable = TRUE
 	duration_length = 15 SECONDS
 	cooldown_length = 10 SECONDS
+
+/datum/discipline_power/obtenebration/black_metamorphosis/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll(owner.st_get_stat(STAT_MANIPULATION) + owner.st_get_stat(STAT_COURAGE), 7, FALSE, owner))
+		return TRUE
+	return FALSE
 
 /datum/discipline_power/obtenebration/black_metamorphosis/activate()
 	. = ..()
@@ -207,7 +224,7 @@
 		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Mysticism", rituals, null)
 		if(ritual)
 			drawing = TRUE
-			if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
+			if(do_after(H, 3 SECONDS * max(1, 5 - H.st_get_stat(STAT_OCCULT)), H))
 				drawing = FALSE
 				new ritual(H.loc)
 				H.bloodpool = max(H.bloodpool - 2, 0)
@@ -224,7 +241,7 @@
 		var/ritual = tgui_input_list(owner, "Choose rune to draw (You need a Mystic Tome to reduce random):", "Mysticism", list("???"))
 		if(ritual)
 			drawing = TRUE
-			if(do_after(H, 30*max(1, 5-H.mentality), H))
+			if(do_after(H, 30*max(1, 5-H.st_get_stat(STAT_OCCULT)), H))
 				drawing = FALSE
 				var/rune = pick(rituals)
 				new rune(H.loc)

@@ -30,8 +30,8 @@
 	if(!ishuman(target))
 		return FALSE
 
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+	var/mypower = SSroll.storyteller_roll(owner.st_get_stat(STAT_CHARISMA), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.st_get_stat(STAT_PERMANENT_WILLPOWER), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 
 	if(ishuman(target))
 		var/mob/living/carbon/human/human_target = target

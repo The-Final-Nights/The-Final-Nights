@@ -82,8 +82,8 @@
 	if(!ishuman(target))
 		return FALSE
 
-	var/mypower = SSroll.storyteller_roll(owner.get_total_social(), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
-	var/theirpower = SSroll.storyteller_roll(target.get_total_mentality(), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
+	var/mypower = SSroll.storyteller_roll(owner.st_get_stat(STAT_CHARISMA), difficulty = base_difficulty, mobs_to_show_output = owner, numerical = TRUE)
+	var/theirpower = SSroll.storyteller_roll(target.st_get_stat(STAT_PERMANENT_WILLPOWER), difficulty = 6, mobs_to_show_output = target, numerical = TRUE)
 	var/mob/living/carbon/human/conditioner = target.conditioner?.resolve()
 
 	if(owner == conditioner)
@@ -294,7 +294,6 @@
 		if(do_mob(owner, target, 20 SECONDS))
 			target.conditioned = TRUE
 			target.conditioner = WEAKREF(owner)
-			target.additional_social -= 3
 			to_chat(target, span_danger("Your mind is filled with thoughts surrounding [owner]. Their every word and gesture carries weight to you."))
 			SEND_SOUND(target, sound('code/modules/wod13/sounds/dominate.ogg'))
 	else

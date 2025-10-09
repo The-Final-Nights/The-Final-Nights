@@ -17,7 +17,7 @@
 		visible_message("<span class='danger'>[user] punches [src]!</span>",\
 						"<span class='userdanger'>[user] punches you!</span>", null, COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, "<span class='danger'>You punch [src]!</span>")
-		apply_damage((rand(user.dna.species.punchdamagelow, user.dna.species.punchdamagehigh) / 3) * user.get_total_physique())
+		apply_damage((rand(user.dna.species.punchdamagelow, user.dna.species.punchdamagehigh) / 3) * user.st_get_stat(STAT_STRENGTH))
 		playsound(loc, user.dna.species.attack_sound, 25, TRUE, -1)
 		log_combat(user, src, "attacked")
 		updatehealth()

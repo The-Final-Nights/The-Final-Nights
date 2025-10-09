@@ -37,8 +37,7 @@
 
 /datum/curse/daimonion/physical_weakness/activate(mob/living/target)
 	. = ..()
-	if(target.physique >= 5)
-		target.physique = 4
+	target.st_add_stat_mod(STAT_STRENGTH, -1, "physical_weakness")
 	var/mob/living/carbon/human/vampire = target
 	for (var/datum/action/blood_power/blood_power in vampire.actions)
 		blood_power.Remove(vampire)
@@ -46,10 +45,8 @@
 
 /datum/curse/daimonion/mental_weakness/activate(mob/living/target)
 	. = ..()
-	if(target.social >= 5)
-		target.social = 4
-	if(target.mentality >= 5)
-		target.mentality = 4
+	target.st_add_stat_mod(STAT_CHARISMA, -1, "mental_weakness")
+	target.st_add_stat_mod(STAT_TEMPORARY_WILLPOWER, -1, "mental_weakness")
 	to_chat(target, span_userdanger(span_bold("You feel like a great curse was placed on you!")))
 
 /datum/curse/daimonion/offspring_weakness/activate(mob/living/target)

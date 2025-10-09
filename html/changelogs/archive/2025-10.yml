@@ -1,0 +1,24 @@
+2025-10-01:
+  SoreYew:
+  - rscdel: Removes cappadocian from Capo
+  chazzyjazzy:
+  - rscadd: heist loot such as gold, diamonds, and secret documents can now be sold
+      at the pawn shop
+  - bugfix: fixes a bug related to everyone being able to understand every language
+2025-10-07:
+  darkincarnate:
+  - rscadd: extra guns to certain armouries, req vendor to FBI, add vet keys
+  - bugfix: fixes the FBI fax machine
+  - qol: nerf bogatyr armour to 65
+2025-10-09:
+  1HoneyDragon:
+  - rscadd: Added over a hundred new articles of clothing (as done by Schnavvy, cerebulon,
+      corpsedoll, and "Polaris SS13" ) from Requiem 13 (ported by Elgeon and Magmaram)
+      to the clothing and costume store
+  - qol: New clothing added, including new masculine and feminine outfits, new hats,
+      new glasses, new shoes, and jackets.
+  - image: Added corresponding sprites (as done by Schnavvy, cerebulon, corpsedoll,
+      and "Polaris SS13" ) for all these new articles of clothing.
+  bomby:
+  - map: umbra connects to the new bar
+  - image: busmap represents new bar properly now

@@ -93,7 +93,7 @@
 	BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus
 	BG.melee_damage_upper = BG.melee_damage_upper+activator_bonus
 	playsound(loc, 'sound/magic/voidblink.ogg', 50, FALSE)
-	if(length(H.beastmaster) > 3+H.mentality)
+	if(length(H.beastmaster) > 3+H.st_get_stat(STAT_LEADERSHIP))
 		var/mob/living/simple_animal/hostile/beastmaster/B = pick(H.beastmaster)
 		B.death()
 	qdel(src)
@@ -233,8 +233,7 @@
 		to_chat(user, span_warning("[target_name] not found."))
 		return
 
-	// Roll for success; Mentality + Social in place of Perception + Occult
-	var/mypower = (user.get_total_mentality() + user.get_total_social())
+	var/mypower = (user.st_get_stat(STAT_PERCEPTION) + user.st_get_stat(STAT_OCCULT))
 	var/roll_result = SSroll.storyteller_roll(mypower, 7, FALSE, user)
 	if (roll_result == ROLL_SUCCESS)
 		scry_target(window_target, user)
@@ -246,29 +245,20 @@
 	else if(roll_result == ROLL_BOTCH)
 		qdel(src)
 		to_chat(user, span_warning("You feel drained..."))
-		user.additional_athletics -= 2
-		user.additional_blood -= 2
-		user.additional_dexterity -= 2
-		user.additional_lockpicking -= 2
-		user.additional_mentality -= 2
-		user.additional_social -=2
+		for(var/datum/st_stat/stat as anything in subtypesof(/datum/st_stat))
+			user.st_add_stat_mod(stat, -2, "reflections_of_hollow_revelation")
 		addtimer(CALLBACK(src, PROC_REF(restore_stats), user), 1 SCENES)
 
 /obj/abyssrune/reflections_of_hollow_revelation/proc/restore_stats(mob/living/user)
-	if(user)
-		user.additional_athletics += 2
-		user.additional_blood += 2
-		user.additional_dexterity += 2
-		user.additional_lockpicking += 2
-		user.additional_mentality += 2
-		user.additional_social +=2
+	for(var/datum/st_stat/stat as anything in subtypesof(/datum/st_stat))
+		user.st_remove_stat_mod(stat, "reflections_of_hollow_revelation")
 
-/obj/abyssrune/reflections_of_hollow_revelation/proc/scry_target(mob/living/carbon/human/target, mob/user)
+/obj/abyssrune/reflections_of_hollow_revelation/proc/scry_target(mob/living/carbon/human/target, mob/living/user)
 	// If the target has Obtenebration or Auspex, roll to see if they detect the shadows
 	if(iskindred(target))
 		var/datum/species/kindred/vampire = target.dna?.species
 		if(vampire && (vampire.get_discipline("Obtenebration") || vampire.get_discipline("Auspex")))
-			var/theirpower = (target.get_total_mentality() + target.get_total_social()) // Mentality + Social in place of Perception + Occult
+			var/theirpower = (user.st_get_stat(STAT_PERCEPTION) + user.st_get_stat(STAT_OCCULT))
 			if(SSroll.storyteller_roll(theirpower, 8, FALSE) == ROLL_SUCCESS)
 				to_chat(target, span_warning("You notice the nearby shadows flicker... something is watching you."))
 

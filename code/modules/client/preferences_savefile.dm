@@ -442,13 +442,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["humanity"], path_score)
 	READ_FILE(S["enlightement"], is_enlightened)
 	READ_FILE(S["true_experience"], true_experience)
-	READ_FILE(S["physique"], physique)
-	READ_FILE(S["dexterity"], dexterity)
-	READ_FILE(S["social"], social)
-	READ_FILE(S["mentality"], mentality)
-	READ_FILE(S["lockpicking"], lockpicking)
-	READ_FILE(S["athletics"], athletics)
-	READ_FILE(S["blood"], blood)
 	READ_FILE(S["discipline1level"], discipline1level)
 	READ_FILE(S["discipline2level"], discipline2level)
 	READ_FILE(S["discipline3level"], discipline3level)
@@ -519,6 +512,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["feature_moth_antennae"], features["moth_antennae"])
 	READ_FILE(S["feature_moth_markings"], features["moth_markings"])
 	READ_FILE(S["persistent_scars"] , persistent_scars)
+
 	READ_FILE(S["experience_used_on_character"], experience_used_on_character)
 	READ_FILE(S["derangement"], derangement)
 	READ_FILE(S["dharma_type"], dharma_type)
@@ -530,6 +524,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	READ_FILE(S["yin"], yin)
 	READ_FILE(S["chi_types"], chi_types)
 	READ_FILE(S["chi_levels"], chi_levels)
+
+	READ_FILE(S["storyteller_stat_holder"], storyteller_stat_holder)
+
+	if(!storyteller_stat_holder)
+		storyteller_stat_holder = new()
+
+	storyteller_stat_holder.recalculate_all_willpower()
+
+
 	if(!CONFIG_GET(flag/join_with_mutant_humans))
 		features["tail_human"] = "none"
 		features["ears"] = "none"
@@ -647,13 +650,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	path_score				= sanitize_integer(path_score, 0, 10, initial(path_score))
 	is_enlightened				= sanitize_integer(is_enlightened, 0, 1, initial(is_enlightened))
 	true_experience				= sanitize_integer(true_experience, 0, 99999999, initial(true_experience))
-	physique				= sanitize_integer(physique, 1, 10, initial(physique))
-	dexterity				= sanitize_integer(dexterity, 1, 10, initial(dexterity))
-	social					= sanitize_integer(social, 1, 10, initial(social))
-	mentality				= sanitize_integer(mentality, 1, 10, initial(mentality))
-	lockpicking				= sanitize_integer(lockpicking, 1, 10, initial(lockpicking))
-	athletics				= sanitize_integer(athletics, 1, 10, initial(athletics))
-	blood					= sanitize_integer(blood, 1, 10, initial(blood))
 	auspice_level			= sanitize_integer(auspice_level, 1, 5, initial(auspice_level))
 	discipline1level				= sanitize_integer(discipline1level, 1, 5, initial(discipline1level))
 	discipline2level				= sanitize_integer(discipline2level, 1, 5, initial(discipline2level))
@@ -689,6 +685,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	renownrank = sanitize_integer(renownrank, 0, 5, initial(renownrank))
 	extra_gnosis = sanitize_integer(extra_gnosis, 0, 5, initial(extra_gnosis))
 	// TFN EDIT END
+
+
 	hair_color			= sanitize_hexcolor(hair_color)
 	facial_hair_color			= sanitize_hexcolor(facial_hair_color)
 	underwear_color			= sanitize_hexcolor(underwear_color)
@@ -790,13 +788,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["humanity"]			, path_score)
 	WRITE_FILE(S["enlightement"]			, is_enlightened)
 	WRITE_FILE(S["auspice_level"]			, auspice_level)
-	WRITE_FILE(S["physique"]		, physique)
-	WRITE_FILE(S["dexterity"]		, dexterity)
-	WRITE_FILE(S["social"]			, social)
-	WRITE_FILE(S["mentality"]		, mentality)
-	WRITE_FILE(S["lockpicking"]		, lockpicking)
-	WRITE_FILE(S["athletics"]		, athletics)
-	WRITE_FILE(S["blood"]			, blood)
 	WRITE_FILE(S["discipline1level"]			, discipline1level)
 	WRITE_FILE(S["discipline2level"]			, discipline2level)
 	WRITE_FILE(S["discipline3level"]			, discipline3level)
@@ -883,6 +874,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["chi_types"], chi_types)
 	WRITE_FILE(S["chi_levels"], chi_levels)
 	WRITE_FILE(S["path"], morality_path.name)
+
+	WRITE_FILE(S["storyteller_stat_holder"], storyteller_stat_holder)
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)

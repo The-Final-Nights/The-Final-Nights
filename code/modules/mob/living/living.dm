@@ -992,8 +992,8 @@
 			altered_grab_state++
 		var/resist_chance = BASE_GRAB_RESIST_CHANCE /// see defines/combat.dm, this should be baseline 60%
 		var/mob/living/G = pulledby
-		var/grabber_physique = (G.get_total_physique()) * 10 // The one who is grabbing physique
-		var/resist_physique = (get_total_physique()) * 10 // The one who is  resisting physique
+		var/grabber_physique = (G.st_get_stat(STAT_STRENGTH)) * 10 // The one who is grabbing physique
+		var/resist_physique = (st_get_stat(STAT_STRENGTH)) * 10 // The one who is  resisting physique
 		resist_chance = ((resist_chance + (resist_physique - grabber_physique))/altered_grab_state)
 		if(prob(resist_chance))
 			visible_message("<span class='danger'>[src] breaks free of [pulledby]'s grip!</span>", \
@@ -2018,38 +2018,13 @@
 
 	return attack_result
 
-//Making a proc for each of these.
-
-/mob/living/proc/get_total_physique()
-	return physique + additional_physique
-
-/mob/living/proc/get_total_dexterity()
-	return dexterity + additional_dexterity
-
-/mob/living/proc/get_total_social()
-	if(iscathayan(src))
-		if(mind?.dharma?.animated == "Yin")
-			return max(0, social + additional_social - 2)
-	return social + additional_social
-
-/mob/living/proc/get_total_mentality()
-	return mentality + additional_mentality
-
-/mob/living/proc/get_total_blood()
-	return blood + additional_blood
-
-/mob/living/proc/get_total_lockpicking()
-	return lockpicking + additional_lockpicking
-
-/mob/living/proc/get_total_athletics()
-	return athletics + additional_athletics
 
 /mob/living/proc/climb_wall(turf/above_turf)
 	if(body_position != STANDING_UP)
 		return
 	if(above_turf && istype(above_turf, /turf/open/openspace))
-		var/total_dexterity = get_total_dexterity()
-		var/total_athletics = get_total_athletics()
+		var/total_dexterity = st_get_stat(STAT_DEXTERITY)
+		var/total_athletics = st_get_stat(STAT_ATHLETICS)
 		to_chat(src, "<span class='notice'>You start climbing up...</span>")
 
 		var/result = do_after(src, 50 - (total_dexterity + total_athletics * 5), src)

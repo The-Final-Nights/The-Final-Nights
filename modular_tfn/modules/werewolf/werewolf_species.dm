@@ -126,13 +126,6 @@
 				masquerade_level = " should beg our totem for forgiveness."
 		dat += "My sect thinks I[masquerade_level]<BR>"
 
-		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
-		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
-		dat += "<b>Social</b>: [host.social] + [host.additional_social]<BR>"
-		dat += "<b>Mentality</b>: [host.mentality] + [host.additional_mentality]<BR>"
-		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
-		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
-		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR><BR>"
 		dat += "<b>Gnosis</b>: [host.auspice.gnosis]<BR>"
 		dat += "<b>Rank</b>: [RankName(host.renownrank)]<BR>"
 		if(host.auspice.tribe.name == "Black Spiral Dancers")
