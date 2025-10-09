@@ -145,10 +145,7 @@
 	if(!this_bike.on)
 		to_chat(this_bike.driver, span_warning("The [this_bike]'s engine is off!"))
 		return
-	if((world.time - this_bike.last_rev_sound) < 3 SECONDS)
-		return
 	this_bike.handle_rev_sound()
-	this_bike.last_rev_sound = world.time
 
 //Start Idle sound.
 /obj/vehicle/ridden/motorcycle/proc/play_idle_loop()
