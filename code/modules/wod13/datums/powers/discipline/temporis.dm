@@ -75,10 +75,7 @@
 
 /datum/discipline_power/temporis/recurring_contemplation/activate(mob/living/target)
 	. = ..()
-	// Roll for degree of success, mentality + social vs mentality in place of manipulation + occult vs willpower
-	var/mypower = owner.get_total_mentality() + owner.get_total_social()
-	var/theirpower = target.get_total_mentality()
-	var/rollsuccess = SSroll.storyteller_roll(mypower, difficulty = theirpower, mobs_to_show_output = owner, numerical = TRUE)
+	var/rollsuccess = SSroll.storyteller_roll(owner.st_get_stat(STAT_MANIPULATION) + owner.st_get_stat(STAT_OCCULT), difficulty = target.st_get_stat(STAT_PERMANENT_WILLPOWER), mobs_to_show_output = owner, numerical = TRUE)
 	if(rollsuccess > 0)
 		target.AddComponent(/datum/component/dejavu, rewinds = rollsuccess, interval = 2 SECONDS)
 	else
@@ -115,9 +112,7 @@
 	if(!.)
 		return FALSE
 
-	// Roll for degree of success, mentality + social in place of intelligence + occult
-	var/dice = owner.get_total_mentality() + owner.get_total_social()
-	var/success = SSroll.storyteller_roll(dice, difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
+	var/success = SSroll.storyteller_roll(owner.st_get_stat(STAT_INTELLIGENCE) + owner.st_get_stat(STAT_OCCULT), difficulty = 6, mobs_to_show_output = owner, numerical = TRUE)
 	var/trueroll = abs(success)
 	if(!success)
 		return FALSE
@@ -228,9 +223,7 @@
 /datum/discipline_power/temporis/clothos_gift/activate()
 	. = ..()
 
-	// Roll for degree of success, mentality + social in place of intelligence + occult
-	var/dice = owner.get_total_mentality() + owner.get_total_social()
-	var/success = SSroll.storyteller_roll(dice, difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
+	var/success = SSroll.storyteller_roll(owner.st_get_stat(STAT_INTELLIGENCE) + owner.st_get_stat(STAT_OCCULT), difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
 	if(success > 0)
 		cancelable = TRUE
 	else

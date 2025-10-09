@@ -28,7 +28,7 @@
 		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Thaumaturgy", rune_names)
 		if(ritual)
 			drawing = TRUE
-			if(do_after(H, 3 SECONDS * max(1, 5 - H.get_total_mentality()), H))
+			if(do_after(H, 3 SECONDS * max(1, 5 - H.st_get_stat(STAT_PERMANENT_WILLPOWER)), H))
 				drawing = FALSE
 				var/ritual_type = rune_names[ritual]
 				new ritual_type(H.loc)
@@ -46,7 +46,7 @@
 		var/ritual = tgui_input_list(owner, "Choose rune to draw (You need an Arcane Tome to reduce random):", "Thaumaturgy", list("???"))
 		if(ritual)
 			drawing = TRUE
-			if(do_after(H, 3 SECONDS * max(1, 5 - H.get_total_mentality()), H))
+			if(do_after(H, 3 SECONDS * max(1, 5 - H.st_get_stat(STAT_PERMANENT_WILLPOWER)), H))
 				drawing = FALSE
 				var/rune = pick(shit)
 				new rune(H.loc)

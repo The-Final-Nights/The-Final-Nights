@@ -16,7 +16,7 @@
 
 /datum/discipline/fortitude/post_gain()
 	. = ..()
-	owner.physiology.damage_resistance += (5+(5*level))
+	owner.st_add_stat_mod(STAT_STAMINA, level, "passive_fortitude")
 
 //FORTITUDE 1
 /datum/discipline_power/fortitude/one

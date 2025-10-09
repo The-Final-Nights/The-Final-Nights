@@ -161,8 +161,8 @@
 			if(user.generation > L.generation && !dominate_me && !HAS_TRAIT(L, TRAIT_CANNOT_RESIST_MIND_CONTROL))
 				continue
 
-			var/mypower = SSroll.storyteller_roll(user.get_total_social(), difficulty = 6, mobs_to_show_output = user, numerical = 1)
-			var/theirpower = SSroll.storyteller_roll(L.get_total_mentality(), difficulty = 6, mobs_to_show_output = L, numerical = 1)
+			var/mypower = SSroll.storyteller_roll(user.st_get_stat(STAT_CHARISMA), difficulty = 6, mobs_to_show_output = user, numerical = 1)
+			var/theirpower = SSroll.storyteller_roll(L.st_get_stat(STAT_PERMANENT_WILLPOWER), difficulty = 6, mobs_to_show_output = L, numerical = 1)
 
 			if(conditioner && user != conditioner)
 				theirpower += 3
