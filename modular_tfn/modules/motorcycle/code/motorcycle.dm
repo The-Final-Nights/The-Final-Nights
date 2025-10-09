@@ -172,11 +172,10 @@
 		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_kill.ogg', 100, FALSE, 5, 1.3, 0, 224)
 
 /obj/vehicle/ridden/motorcycle/proc/handle_rev_sound()
-	if((world.time - last_run_sound) >= 1 SECONDS)
-		last_run_sound = world.time
-		stop_idle_loop()
-		playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_rev.ogg', 100, TRUE, 10, 1.5, 0, 223)
-		addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 1 SECONDS)
+	last_run_sound = world.time
+	stop_idle_loop()
+	playsound(src, 'modular_tfn/modules/motorcycle/sound/bike_idle_rev.ogg', 100, TRUE, 10, 1.5, 0, 223)
+	addtimer(CALLBACK(src, PROC_REF(play_idle_loop)), 1 SECONDS)
 
 /obj/vehicle/ridden/motorcycle/proc/handle_run_sound()
 	if((world.time - last_run_sound) >= 4.5 SECONDS)
@@ -210,14 +209,17 @@
 			if(!repairing)
 				repairing = TRUE
 				if(do_mob(user, src, 20 SECONDS))
-					var/roll = rand(1, 20) + (user.get_total_lockpicking()+user.get_total_dexterity()) - 8
+					var/roll = SSroll.storyteller_roll(
+						dice = (user.st_get_stat(STAT_DEXTERITY) + (user.st_get_stat(STAT_STREETWISE))),
+						difficulty = 8,
+						mobs_to_show_output = list(user))
 					//(<= 1, break lockpick) (2-9, trigger car alarm), (>= 10, unlock car)
-					if (roll <= 1)
+					if (roll == ROLL_BOTCH)
 						to_chat(user, span_warning("Your lockpick broke! "))
 						qdel(K)
 						repairing = FALSE
 						return
-					else if (roll >= 10)
+					else if (roll == ROLL_SUCCESS)
 						locked = FALSE
 						repairing = FALSE
 						to_chat(user, span_notice("You've managed to open [src]'s lock. "))
