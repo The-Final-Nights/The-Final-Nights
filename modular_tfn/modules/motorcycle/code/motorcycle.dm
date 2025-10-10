@@ -12,7 +12,7 @@
 
 	var/on = FALSE
 	var/idle_looping = FALSE
-	var/gas = 1000
+	var/gas = 500
 	var/access = "anarch"
 	var/locked = TRUE
 
@@ -46,8 +46,11 @@
 	rev_eng.this_bike = src
 
 //Mouse Drop Buckling Override:
-/obj/vehicle/ridden/motorcycle/MouseDrop_T(mob/living/new_mounter, atom/user)
+/obj/vehicle/ridden/motorcycle/MouseDrop_T(mob/living/carbon/human/new_mounter, atom/user)
 	. = ..()
+	if(!istype(new_mounter, /mob/living/carbon/human))
+		to_chat(user, span_warning("You can't drive this thing, but you are on it, somehow."))
+		return FALSE
 	if(driver)
 		to_chat(new_mounter, span_warning("There's no room for you on the [src]."))
 		return FALSE
@@ -65,8 +68,8 @@
 			rev_eng.Grant(driver)
 			if(!locked)
 				start_eng.Grant(driver)
-		visible_message(span_notice("[src] gets on the [src]."), \
-			span_notice("You get on the [src], and put the key your key in the slot."))
+		visible_message(span_notice("[src] gets on the [src]."))
+		span_notice("You get on the [src], and put the key your key in the slot.")
 		return TRUE
 	else
 		to_chat(src, span_warning("You fail to get on the [src]."))
@@ -82,6 +85,8 @@
 
 //Movement trail and sound.
 /obj/vehicle/ridden/motorcycle/Move(newloc,move_dir)
+	if(!driver)
+		return FALSE
 	if(!on || gas <= 0 || health <= 0) //If the bike is off, or out of gas, or broken, don't move.
 		if(on && gas <= 0)
 			to_chat(driver, span_warning("The [src] sputters and dies; it's out of gas! "))
@@ -93,7 +98,7 @@
 			stop_idle_loop()
 		return FALSE
 	move_count++
-	gas = max(0, gas-1)
+	gas = max(0, gas-0.25)
 	if(has_buckled_mobs() && move_count >= move_threshold)
 		handle_run_sound()
 		move_count = 0
@@ -192,8 +197,8 @@
 /obj/vehicle/ridden/motorcycle/attackby(obj/item/I, mob/living/user, params)
 	if(istype(I, /obj/item/gas_can)) //gas
 		var/obj/item/gas_can/G = I
-		if(G.stored_gasoline && gas < 1000 && isturf(user.loc))
-			var/gas_to_transfer = min(1000-gas, min(100, max(1, G.stored_gasoline)))
+		if(G.stored_gasoline && gas < 500 && isturf(user.loc))
+			var/gas_to_transfer = min(500-gas, min(100, max(1, G.stored_gasoline)))
 			G.stored_gasoline = max(0, G.stored_gasoline-gas_to_transfer)
 			gas = min(1000, gas+gas_to_transfer)
 			playsound(loc, 'code/modules/wod13/sounds/gas_fill.ogg', 25, TRUE)
