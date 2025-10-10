@@ -24,3 +24,6 @@
   bomby:
   - map: umbra connects to the new bar
   - image: busmap represents new bar properly now
+2025-10-10:
+  Hawk-v3:
+  - bugfix: Mops aren't eaten by the janitor cart now.
