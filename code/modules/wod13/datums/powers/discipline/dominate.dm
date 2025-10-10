@@ -95,7 +95,7 @@
 			theirpower -= 2
 
 	if(target.conditioned)
-		theirpower += 3
+		theirpower -= 3
 
 	return (mypower > theirpower && owner.generation <= target.generation)
 
@@ -375,7 +375,7 @@
 	level = 6
 
 	check_flags = DISC_CHECK_CAPABLE|DISC_CHECK_SPEAK|DISC_CHECK_SEE
-	target_type = TARGET_HUMAN 
+	target_type = TARGET_HUMAN
 
 	cooldown_length = 15 SECONDS
 	range = 7
