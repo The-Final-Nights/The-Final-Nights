@@ -412,6 +412,7 @@
 		answerer.say(the_answer)
 		answerer.clear_alert("riddle")
 
+/* Deprecated due to stats rework. Original author promised to fix this after the attributes rework is done.
 //STEAL THE MIND
 /datum/discipline_power/mytherceria/steal_the_mind
 	name = "Steal the Mind"
@@ -459,7 +460,7 @@
 			if(target.physique <= 2)
 				target.physique = 0
 				to_chat(owner, span_warning("You drain the last of [target]'s strength!"))
-			else 
+			else
 				target.physique -= 2
 				to_chat(owner, span_warning("You drain some of [target]'s strength!"))
 			to_chat(target, span_warning("You feel weaker!"))
@@ -467,7 +468,7 @@
 			if(target.dexterity <= 2)
 				to_chat(owner, span_warning("You drain the last of [target]'s dexterity!"))
 				target.dexterity = 0
-			else 
+			else
 				target.dexterity -= 2
 				to_chat(owner, span_warning("You drain some of [target]'s dexterity!"))
 			to_chat(target, span_warning("You feel less dextrous!"))
@@ -475,7 +476,7 @@
 			if(target.social <= 2)
 				to_chat(owner, span_warning("You drain the last of [target]'s social!"))
 				target.social = 0
-			else 
+			else
 				target.social -= 2
 				to_chat(owner, span_warning("You drain some of [target]'s social!"))
 			to_chat(target, span_warning("Your social skilsl feel weaker!"))
@@ -491,7 +492,7 @@
 			if(target.blood <= 2)
 				to_chat(owner, span_warning("You drain the last of [target]'s cruelty!"))
 				target.blood = 0
-			else 
+			else
 				target.blood -= 2
 				to_chat(owner, span_warning("You drain some of [target]'s cruelty!"))
 			to_chat(target, span_warning("You feel less cruel!"))
@@ -499,7 +500,7 @@
 			if(target.lockpicking <= 2)
 				to_chat(owner, span_warning("You drain the last of [target]'s lockpicking!"))
 				target.lockpicking = 0
-			else 
+			else
 				target.lockpicking -= 2
 				to_chat(owner, span_warning("You drain some of [target]'s lockpicking!"))
 			to_chat(target, span_warning("You feel less capable of lockpicking!"))
@@ -507,9 +508,9 @@
 			if(target.athletics <= 2)
 				to_chat(owner, span_warning("You drain the last of [target]'s athletics!"))
 				target.athletics = 0
-			else 
+			else
 				target.athletics -= 2
 				to_chat(owner, span_warning("You drain some of [target]'s athletics!"))
 			to_chat(target, span_warning("You feel less athletic!"))
 	uses--
-
+*/

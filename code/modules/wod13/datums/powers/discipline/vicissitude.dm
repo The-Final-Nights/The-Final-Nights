@@ -90,7 +90,7 @@
 
 	level = 1
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND | DISC_CHECK_SEE | DISC_CHECK_LYING
-
+	vitae_cost = 1
 	violates_masquerade = TRUE
 
 	cooldown_length = 10 SECONDS
@@ -119,6 +119,11 @@
 	var/impersonating_body_sprite
 
 	var/is_shapeshifted = FALSE
+
+/datum/discipline_power/vicissitude/malleable_visage/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll((owner.st_get_stat(STAT_INTELLIGENCE) + owner.st_get_stat(STAT_MEDICINE)), 6, FALSE, owner))
+		return TRUE
+	return FALSE
 
 /datum/discipline_power/vicissitude/malleable_visage/activate()
 	. = ..()
@@ -244,7 +249,7 @@
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND
 	target_type = TARGET_MOB
 	range = 1
-
+	vitae_cost = 1
 	effect_sound = 'code/modules/wod13/sounds/vicissitude.ogg'
 	aggravating = TRUE
 	hostile = TRUE
@@ -252,6 +257,11 @@
 
 	cooldown_length = 5 SECONDS
 	grouped_powers = list(/datum/discipline_power/vicissitude/bonecrafting)
+
+/datum/discipline_power/vicissitude/fleshcrafting/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll((owner.st_get_stat(STAT_DEXTERITY) + owner.st_get_stat(STAT_MEDICINE)), 6, FALSE, owner))
+		return TRUE
+	return FALSE
 
 /datum/discipline_power/vicissitude/fleshcrafting/activate(mob/living/target)
 	. = ..()
@@ -292,7 +302,7 @@
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_FREE_HAND
 	target_type = TARGET_MOB
 	range = 1
-
+	vitae_cost = 1
 	effect_sound = 'code/modules/wod13/sounds/vicissitude.ogg'
 	aggravating = TRUE
 	hostile = TRUE
@@ -300,6 +310,11 @@
 
 	cooldown_length = 5 SECONDS
 	grouped_powers = list(/datum/discipline_power/vicissitude/fleshcrafting)
+
+/datum/discipline_power/vicissitude/bonecrafting/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll((owner.st_get_stat(STAT_STRENGTH) + owner.st_get_stat(STAT_MEDICINE)), 6, FALSE, owner))
+		return TRUE
+	return FALSE
 
 /datum/discipline_power/vicissitude/bonecrafting/activate(mob/living/target)
 	. = ..()

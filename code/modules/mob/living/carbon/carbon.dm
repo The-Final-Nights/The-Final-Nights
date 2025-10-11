@@ -210,9 +210,9 @@
 
 	var/mob/living/H = src
 	var/mob/living/carbon/carbon_mob = src
-	var/physique = H.get_total_physique()
-	var/dexterity = H.get_total_dexterity()
-	var/athletics = H.get_total_athletics()
+	var/physique = H.st_get_stat(STAT_STRENGTH)
+	var/dexterity = H.st_get_stat(STAT_DEXTERITY)
+	var/athletics = H.st_get_stat(STAT_ATHLETICS)
 
 	if(HAS_TRAIT(H, TRAIT_IMMOBILIZED))
 		return
