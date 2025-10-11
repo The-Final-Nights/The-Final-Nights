@@ -46,7 +46,7 @@
 
 /mob/living/carbon/human/ZImpactDamage(turf/T, levels)
 	if(!HAS_TRAIT(src, TRAIT_FREERUNNING) || levels > 1)
-		if(src.athletics < 5) // falling off one level
+		if(st_get_stat(STAT_ATHLETICS) < 5) // falling off one level
 			return ..()
 	visible_message("<span class='danger'>[src] makes a hard landing on [T] but remains unharmed from the fall.</span>", \
 					"<span class='userdanger'>You brace for the fall. You make a hard landing on [T] but remain unharmed.</span>")

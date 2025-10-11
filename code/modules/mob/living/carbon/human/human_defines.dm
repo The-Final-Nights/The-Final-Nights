@@ -39,6 +39,9 @@
 	///Character's chronological age
 	var/chronological_age = 30
 
+	/// Which body type to use
+	var/physique = MALE
+
 	var/underwear = "Nude"	//Which underwear the player wants
 	var/underwear_color = "#000000"
 	var/undershirt = "Nude" //Which undershirt the player wants

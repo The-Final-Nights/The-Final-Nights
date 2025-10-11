@@ -222,6 +222,7 @@ export const DmTarget = new Juke.Target({
     'interface/**',
     'sound/**',
     'modular_tfn/**',
+    'modular_darkpack/**',
     'tgui/public/tgui.html',
     `${DME_NAME}.dme`,
     NamedVersionFile,
