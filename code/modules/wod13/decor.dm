@@ -34,6 +34,14 @@
 	.=..()
 	RemoveElement(/datum/element/climbable)
 
+// TFN EDIT START: Check for trait to allow phasing through doors
+/obj/structure/vampfence/CanPass(atom/movable/mover, turf/target)
+	. = ..()
+	if(istype(mover, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = mover
+		if(HAS_TRAIT(H, TRAIT_PASSDOOR))
+			return TRUE
+// TFN EDIT END
 
 /obj/structure/gargoyle
 	name = "\improper gargoyle"
