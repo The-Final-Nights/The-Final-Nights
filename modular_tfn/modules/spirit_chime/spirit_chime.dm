@@ -8,8 +8,7 @@
 	var/isplaced = FALSE
 	var/datum/proximity_monitor/advanced/spirit_chime/chime_field
 	var/ringing = FALSE
-	var/last_ring_time = 0
-	var/ring_delay = 5 SECONDS // 5 second delay between rings
+	COOLDOWN_DECLARE(ring_cooldown)
 
 /obj/item/spirit_chime/attackby(obj/item/W, mob/user)
 	return ..()
@@ -18,7 +17,7 @@
 /obj/item/spirit_chime/attack_hand(mob/user)
 	if(!anchored)
 		return ..()
-	if(!do_after(user, 20, target = src))
+	if(!do_after(user, 2 SECONDS, target = src))
 		return
 	user.visible_message(span_notice("[user] retrieves the chime."))
 	anchored = FALSE
@@ -30,7 +29,7 @@
     . = ..()
     var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(src)
     if(table && !anchored)
-        if(!do_after(user, 20))
+        if(!do_after(user, 2 SECONDS))
             return
 
         anchored = TRUE
@@ -46,7 +45,7 @@
 	// Handles wall placement
 	if(istype(target, /turf/closed/wall))
 		var/turf/T = target
-		if(!do_after(user, 20))
+		if(!do_after(user, 2 SECONDS))
 			return
 
 		var/obj/item/spirit_chime/placed_chime = new /obj/item/spirit_chime(T)
@@ -70,7 +69,7 @@
 	// Handles floor placement
 	if(isturf(target))
 		var/turf/T = target
-		if(!do_after(user, 20))
+		if(!do_after(user, 2 SECONDS))
 			return
 
 		var/obj/item/spirit_chime/placed_chime = new /obj/item/spirit_chime(T)
@@ -121,9 +120,9 @@
 		chime_field.tracked_mobs.Cut()
 		STOP_PROCESSING(SSprocessing, src)
 		return
-	if(world.time >= last_ring_time + ring_delay)
+	if(COOLDOWN_FINISHED(src, ring_cooldown))
 		ring()
-		last_ring_time = world.time
+		COOLDOWN_START(src, ring_cooldown, 5 SECONDS)
 
 // The proimity monitor that creates the detection field
 /datum/proximity_monitor/advanced/spirit_chime
@@ -178,7 +177,7 @@
 	if(ringing || !isplaced || !chime_field)
 		return
 	ringing = TRUE
-	last_ring_time = world.time - ring_delay
+	COOLDOWN_START(src, ring_cooldown, 0 SECONDS)
 	START_PROCESSING(SSprocessing, src)
 
 /obj/item/spirit_chime/proc/stop_ringing()
@@ -188,7 +187,6 @@
 /obj/item/spirit_chime/proc/ring()
 	playsound(src, 'modular_tfn/modules/spirit_chime/sound/spirit_chime_ring.ogg', 50, FALSE)
 	visible_message(span_notice("The chime rings out!"), vision_distance = 10)
-	visible_message(span_notice("Ghosts in range: [chime_field.tracked_mobs.len]"), vision_distance = 100)
 
 /proc/valid_target(atom/movable/target)
 	if(istype(target, /mob/dead/observer))
