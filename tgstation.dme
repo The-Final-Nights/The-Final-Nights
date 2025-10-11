@@ -3786,6 +3786,7 @@
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
 #include "interface\skin.dmf"
+#include "modular_tfn\master_files\code\game\objects\items\mop.dm"
 #include "modular_darkpack\master_files\code\modules\mob\living\living.dm"
 #include "modular_darkpack\storyteller_stats\code\_st_stats.dm"
 #include "modular_darkpack\storyteller_stats\code\preferences.dm"
