@@ -1667,14 +1667,9 @@
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/endron_facility/restricted)
 "asF" = (
-/obj/structure/railing/metal{
-	dir = 6
-	},
-/obj/effect/decal/bordur/corner{
-	dir = 4
-	},
 /obj/effect/decal/graffiti,
-/turf/open/floor/plating/concrete,
+/obj/structure/chair/plastic,
+/turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
 "asG" = (
 /obj/effect/turf_decal/siding/wood/corner{
@@ -14854,6 +14849,9 @@
 "dyt" = (
 /obj/effect/decal/bordur,
 /obj/structure/railing/metal/corner,
+/obj/structure/railing/metal/corner{
+	dir = 8
+	},
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch)
 "dyv" = (
@@ -22337,6 +22335,8 @@
 	pixel_y = 24
 	},
 /obj/effect/decal/pallet,
+/obj/item/gas_can/full,
+/obj/item/gas_can/full,
 /turf/open/floor/plating/asphalt,
 /area/vtm/anarch)
 "fik" = (
@@ -41019,9 +41019,8 @@
 /turf/open/floor/plating/church,
 /area/vtm/interior/giovanni/outside)
 "jwv" = (
-/obj/effect/decal/bordur{
-	dir = 6
-	},
+/obj/structure/railing/metal,
+/obj/effect/decal/bordur,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch)
 "jwy" = (
@@ -46529,13 +46528,6 @@
 "kKu" = (
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/community)
-"kKy" = (
-/obj/effect/decal/pallet,
-/obj/item/clothing/under/vampire/mechanic,
-/obj/structure/closet/crate/maint,
-/obj/item/clothing/head/vampire/bandana/red,
-/turf/open/floor/plating/concrete,
-/area/vtm/anarch)
 "kKz" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -48638,7 +48630,8 @@
 	dir = 8;
 	pixel_y = 15
 	},
-/turf/open/floor/plating/concrete,
+/obj/vehicle/ridden/motorcycle,
+/turf/open/floor/plating/asphalt,
 /area/vtm/anarch)
 "lkH" = (
 /obj/machinery/light{
@@ -56007,6 +56000,9 @@
 /obj/structure/railing/metal{
 	dir = 4
 	},
+/obj/structure/railing/metal{
+	dir = 8
+	},
 /turf/open/floor/plasteel/stairs,
 /area/vtm/anarch)
 "mTS" = (
@@ -57332,16 +57328,6 @@
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
-"nis" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/obj/structure/railing/metal{
-	dir = 4
-	},
-/obj/effect/decal/pallet,
-/turf/open/floor/plating/concrete,
-/area/vtm/anarch)
 "niy" = (
 /obj/structure/musician/piano,
 /obj/machinery/light/prince{
@@ -58808,11 +58794,6 @@
 /obj/structure/table/wood/fancy,
 /turf/open/floor/carpet/purple,
 /area/vtm/interior/tzimisce_manor)
-"nAD" = (
-/obj/structure/railing/metal/corner,
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/concrete,
-/area/vtm/pacificheights/industrial)
 "nAE" = (
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
@@ -71833,6 +71814,14 @@
 	pixel_y = 6;
 	pixel_x = -4
 	},
+/obj/item/melee/vampirearms/tire{
+	pixel_y = 6;
+	pixel_x = -4
+	},
+/obj/item/melee/vampirearms/tire{
+	pixel_y = 6;
+	pixel_x = -4
+	},
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch)
 "qyM" = (
@@ -75222,13 +75211,8 @@
 	},
 /area/vtm/interior/endron_facility/restricted)
 "rnr" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/obj/structure/railing/metal{
-	dir = 4
-	},
-/turf/open/floor/plating/concrete,
+/obj/vehicle/ridden/motorcycle,
+/turf/open/floor/plating/grate,
 /area/vtm/anarch)
 "rnw" = (
 /obj/item/reagent_containers/food/drinks/beer/vampire{
@@ -88426,12 +88410,12 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/endron_facility/plant)
 "uvH" = (
-/obj/structure/foodrack{
-	pixel_x = -4;
-	icon_state = "rack1";
-	name = "rack";
-	desc = "Nice rack."
-	},
+/obj/effect/decal/pallet,
+/obj/item/clothing/under/vampire/mechanic,
+/obj/structure/closet/crate/maint,
+/obj/item/clothing/head/vampire/bandana/red,
+/obj/structure/railing/metal,
+/obj/effect/decal/bordur,
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch)
 "uvK" = (
@@ -94354,9 +94338,6 @@
 "vSd" = (
 /obj/effect/decal/bordur,
 /obj/structure/railing/metal,
-/obj/effect/decal/wallpaper/stone/low{
-	pixel_y = 24
-	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
 "vSl" = (
@@ -94476,7 +94457,13 @@
 /area/vtm/unionsquare)
 "vTw" = (
 /obj/effect/decal/trash,
-/turf/open/floor/plating/concrete,
+/obj/structure/foodrack{
+	pixel_x = -4;
+	icon_state = "rack1";
+	name = "rack";
+	desc = "Nice rack."
+	},
+/turf/open/floor/plating/asphalt,
 /area/vtm/anarch)
 "vTz" = (
 /obj/structure/plaque/static_plaque/golden{
@@ -96074,15 +96061,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/chantry/basement)
-"woS" = (
-/obj/structure/railing/metal{
-	dir = 4
-	},
-/obj/structure/railing/metal{
-	dir = 8
-	},
-/turf/open/floor/plasteel/stairs,
-/area/vtm/pacificheights/industrial)
 "woT" = (
 /obj/structure/table/wood,
 /obj/machinery/microwave{
@@ -97071,13 +97049,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/chantry)
 "wzF" = (
-/obj/effect/decal/bordur{
-	dir = 6
-	},
 /obj/structure/railing/metal/corner,
-/obj/effect/decal/wallpaper/stone/low{
-	pixel_y = 24
-	},
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
 "wzJ" = (
@@ -98662,11 +98634,14 @@
 /area/vtm/interior/apartment)
 "wRj" = (
 /obj/structure/vampdoor/wood{
-	lockpick_difficulty = 16;
+	lockpick_difficulty = 10;
 	lock_id = "biker_bar";
 	locked = 1
 	},
-/turf/open/floor/plating/concrete,
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk,
 /area/vtm/anarch)
 "wRl" = (
 /obj/structure/fluff/hedge,
@@ -99021,10 +98996,9 @@
 	},
 /area/vtm/interior/giovanni/outside)
 "wVH" = (
-/obj/structure/railing/metal,
-/obj/effect/decal/bordur,
-/turf/open/floor/plating/concrete,
-/area/vtm/pacificheights/industrial)
+/obj/vehicle/ridden/motorcycle,
+/turf/open/floor/plating/asphalt,
+/area/vtm/anarch)
 "wVI" = (
 /obj/structure/chair/office/blue{
 	dir = 8
@@ -145476,12 +145450,12 @@ hZi
 kBM
 yaE
 uvH
-kKy
+ays
 lkx
 vTw
 kBM
-nAD
-woS
+tao
+tao
 tao
 tao
 tao
@@ -145677,12 +145651,12 @@ eqY
 hZi
 egx
 wSy
-wSy
-wSy
-wSy
-wSy
-wRj
+jwv
+ays
 wVH
+eZL
+wRj
+tao
 wzF
 jAE
 jAE
@@ -145880,9 +145854,9 @@ hZi
 kBM
 aql
 jwv
-rnr
-rnr
-nis
+ays
+eZL
+eZL
 kBM
 asF
 vSd
@@ -146285,7 +146259,7 @@ kBM
 kBM
 kBM
 cdc
-eXD
+rnr
 eHq
 jjW
 uDw
