@@ -13,6 +13,7 @@
 	)
 	male_clothes = /obj/item/clothing/under/vampire/emo
 	female_clothes = /obj/item/clothing/under/vampire/business
+	clan_keys = /obj/item/vamp/keys/lasombra
 	is_enlightened = TRUE
 	whitelisted = FALSE
 

@@ -1,0 +1,4 @@
+author: "WhereAmO"
+delete-after: True
+changes:
+  - bugfix: "Lets the Lasombra enter their own haven, again."
