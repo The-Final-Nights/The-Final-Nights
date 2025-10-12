@@ -34,10 +34,12 @@
 			playsound(src, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 
 /obj/structure/vampdoor/attack_werewolf(mob/living/carbon/werewolf/user, list/modifiers)
-	if (!user.combat_mode || !closed || !iscrinos(user))
+	if (user.combat_mode && closed && (iscrinos(user) || iscoraxcrinos(user)))
+		break_door(user)
+	else
 		return ..()
 
-	break_door(user)
+
 
 /mob/living/attack_werewolf(mob/living/carbon/werewolf/user, list/modifiers)
 	attack_paw(user)
