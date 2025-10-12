@@ -1,5 +1,5 @@
 // Global list to track mobs grabbed by any tentacle
-var/global/list/global_tentacle_list = list()
+var/global/list/global_tentacle_grabs = list()
 
 /mob/living/simple_animal/hostile/abyss_tentacle
 	name = "abyssal tentacle"
@@ -71,7 +71,7 @@ var/global/list/global_tentacle_list = list()
 		return FALSE
 	if(L == grabbed_mob)
 		return FALSE
-	if(L in global.global_tentacle_list)
+	if(L in global.global_tentacle_grabs)
 		return FALSE
 	if(L in recently_released)
 		return FALSE
@@ -97,7 +97,7 @@ var/global/list/global_tentacle_list = list()
 				continue
 			if(istype(L, /mob/living/simple_animal/hostile/abyss_tentacle)) // Not another tentacle
 				continue
-			if(L in global.global_tentacle_list) // Not on The List tm
+			if(L in global.global_tentacle_grabs) // Not on The List tm
 				continue
 			target_to_grab = L
 			break
@@ -108,7 +108,7 @@ var/global/list/global_tentacle_list = list()
 	// Damage grabbed mob occasionally
 	if(aggro_mode == "Aggressive" && COOLDOWN_FINISHED(src, damage_cooldown) && grabbed_mob)
 		COOLDOWN_START(src, damage_cooldown, 5 SECONDS)
-		grabbed_mob.apply_damage(90, BRUTE)
+		grabbed_mob.apply_damage(40, BRUTE)
 		to_chat(grabbed_mob, span_danger("The tentacle tightens its grip, crushing you!"))
 		playsound(/mob/living/simple_animal/hostile/abyss_tentacle, 'sound/creatures/venus_trap_hurt.ogg', 50, FALSE)
 
@@ -116,7 +116,7 @@ var/global/list/global_tentacle_list = list()
 	// More checks
 	if(target == owner || istype(target, /mob/living/simple_animal/hostile/abyss_tentacle)) // Not owner, not another tentacle
 		return
-	if(target in global.global_tentacle_list) // Not grabbed by another tentacle
+	if(target in global.global_tentacle_grabs) // Not grabbed by another tentacle
 		return
 	if(grabbed_mob) // Not already grabbing someone
 		return
@@ -136,14 +136,14 @@ var/global/list/global_tentacle_list = list()
 		to_chat(target, span_userdanger("The tentacle forces you to the ground!"))
 
 	grabbed_mob = target
-	global.global_tentacle_list += target
+	global.global_tentacle_grabs += target
 
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(on_grabbed_mob_move))
 
 /mob/living/simple_animal/hostile/abyss_tentacle/proc/release_mob(mob/living/target, add_cooldown = TRUE)
 	if(target == grabbed_mob)
 		grabbed_mob = null
-		global.global_tentacle_list -= target
+		global.global_tentacle_grabs -= target
 		target.Stun(0)
 		target.clear_tentacle_grab()
 

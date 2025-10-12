@@ -295,4 +295,4 @@
 #define TRAIT_WIELDED "wielded"
 
 // Allows the user to pass through doors
-#define TRAIT_PASSDOOR "trait_passdoor"
+#define TRAIT_PASSDOOR "trait_passdoor" //TFN EDIT ADDITION -- Obtenebration & Mysticism Rework

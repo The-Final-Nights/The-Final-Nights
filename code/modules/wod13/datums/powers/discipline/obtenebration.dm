@@ -39,7 +39,7 @@
 
 /datum/discipline_power/obtenebration/shadow_play/activate(target)
 	. = ..()
-	var/obj/new_shadow = new(target)
+	var/atom/movable/new_shadow = new(target)
 	new_shadow.set_light(discipline.level+2, -10) // Ideally, the shadows would be a special thing impenetrable by anyone but the user, but this works for now
 	shadows += new_shadow
 
@@ -49,7 +49,7 @@
 
 	addtimer(CALLBACK(src, .proc/remove_shadow, new_shadow), duration_length) // 3 minute timer per shadow
 
-/datum/discipline_power/obtenebration/shadow_play/proc/remove_shadow(obj/old_shadow)
+/datum/discipline_power/obtenebration/shadow_play/proc/remove_shadow(atom/movable/old_shadow)
 	if(old_shadow && (old_shadow in shadows)) // Check if shadow still exists
 		shadows -= old_shadow
 		qdel(old_shadow)
@@ -59,7 +59,7 @@
 		QDEL_NULL(cbutton)
 
 /datum/discipline_power/obtenebration/shadow_play/proc/remove_all_shadows()
-	for(var/obj/all_shadows in shadows)
+	for(var/atom/movable/all_shadows in shadows)
 		qdel(all_shadows)
 	shadows.Cut()
 
@@ -138,12 +138,12 @@
 				// For additional tentacles, find nearby valid turfs
 				var/list/open_turfs = list()
 				for(var/turf/T in orange(3, target_turf))
-					if(!T.is_blocked_turf(exclude_mobs = TRUE) && T.get_lumcount() <= 0.2)
+					if(!T.is_blocked_turf(exclude_mobs = TRUE) && T.get_lumcount() <= 0.4)
 						open_turfs += T
 				if(open_turfs.len)
 					new /mob/living/simple_animal/hostile/abyss_tentacle(pick(open_turfs), owner)
 	else
-		to_chat(usr, "<span class='warning'>The area is too bright for the shadows to manifest!</span>")
+		to_chat(usr, span_warning("The area is too bright for the shadows to manifest!"))
 		return FALSE
 
 // **************************************************************** BLACK METAMORPHOSIS *************************************************************

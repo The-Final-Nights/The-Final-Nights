@@ -146,7 +146,7 @@
 
 /obj/abyssrune/heart_that_beats_in_silence/complete()
 	var/mob/living/carbon/human/H = last_activator
-	var/dice = (last_activator.st_get_stat(STAT_INTELLIGENCE) + last_activator.st_get_stat(STAT_OCCULT)) // Mentality + Social in place of Intelligence + Occult
+	var/dice = (last_activator.st_get_stat(STAT_INTELLIGENCE) + last_activator.st_get_stat(STAT_OCCULT))
 
 	var/roll = SSroll.storyteller_roll(dice, 6, FALSE, last_activator)
 	last_activator.apply_damage(30, CLONE)
@@ -199,8 +199,8 @@
 
 	harm_intent_damage = 8
 	obj_damage = 50
-	melee_damage_lower = 90 // Heart of Silence creatures can use Arms of Ahriman for free; strength + 1 brute damage, strength = 2 (they should have more functionality)
-	melee_damage_upper = 90
+	melee_damage_lower = 40 // Heart of Silence creatures can use Arms of Ahriman for free; strength + 1 brute damage, strength = 2 (they should have more functionality)
+	melee_damage_upper = 40
 	attack_verb_continuous = "gouges"
 	attack_verb_simple = "gouge"
 	attack_sound = 'sound/creatures/venus_trap_hit.ogg'
