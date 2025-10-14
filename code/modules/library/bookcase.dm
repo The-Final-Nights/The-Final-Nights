@@ -19,7 +19,7 @@
 	/// The category of books to pick from when populating random books.
 	var/random_category = BOOK_CATEGORY_RANDOM
 	/// Probability that a category will be changed to random regardless of what it was set to.
-	var/category_prob = 25
+	var/category_prob = 0
 	/// How many random books to generate.
 	var/books_to_load = 0
 	// What books we don't want to generate on not their respective bookshelves

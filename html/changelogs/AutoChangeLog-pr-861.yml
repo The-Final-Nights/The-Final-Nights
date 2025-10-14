@@ -1,0 +1,5 @@
+author: "chazzyjazzy"
+delete-after: True
+changes:
+  - rscadd: "Reworked Dominate and Presence to be TTRPG accurate"
+  - rscdel: "Removed Voice of Domination from Dominate since it is not lore accurate at all"

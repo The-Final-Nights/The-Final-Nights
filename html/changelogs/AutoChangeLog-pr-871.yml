@@ -1,4 +1,0 @@
-author: "Hawk-v3"
-delete-after: True
-changes:
-  - bugfix: "Corax corvid form inherits trait correctly."
