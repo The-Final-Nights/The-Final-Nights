@@ -51,6 +51,7 @@
 		list(fax_name = "High Council", fax_id = "camarillaadmin", color = "teal", emag_needed = FALSE),
 		list(fax_name = "Free State Movement", fax_id = "anarchsadmin", color = "red", emag_needed = FALSE),
 		list(fax_name = "Federal Government", fax_id = "policeadmin", color = "blue", emag_needed = FALSE),
+		list(fax_name = "Federal Bureau of Investigation", fax_id = "fbiadmin", color = "blue", emag_needed = FALSE),
 		list(fax_name = "Pentex Corporate", fax_id = "endronadmin", color = "green", emag_needed = FALSE),
 		list(fax_name = "Element Relay", fax_id = "aasimitesadmin", color = "purple", emag_needed = FALSE),
 		list(fax_name = "Nightwolf Corporate", fax_id = "glasswalkeradmin", color = "grey", emag_needed = FALSE),
@@ -72,6 +73,10 @@
 /obj/machinery/fax/admin/police
 	fax_name = "Federal Government"
 	fax_id = "policeadmin"
+
+/obj/machinery/fax/admin/fbi
+	fax_name = "Federal Bureau of Investigation"
+	fax_id = "fbiadmin"
 
 /obj/machinery/fax/admin/endron
 	fax_name = "Pentex Corporate"
@@ -103,6 +108,11 @@
 	fax_name = "San Francisco Police Department"
 	fax_id = "police"
 	special_networks = list(list(fax_name = "Federal Government", fax_id = "policeadmin", color = "blue", emag_needed = FALSE))
+
+/obj/machinery/fax/fbi
+	fax_name = "FBI Field Office"
+	fax_id = "fbi"
+	special_networks = list(list(fax_name = "Federal Bureau of Investigation", fax_id = "fbiadmin", color = "blue", emag_needed = FALSE))
 
 /obj/machinery/fax/endron
 	fax_name = "Endron International HQ"

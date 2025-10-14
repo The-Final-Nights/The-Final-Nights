@@ -351,14 +351,7 @@
 /mob/living/carbon/human/npc/proc/AssignSocialRole(datum/socialrole/S, var/dont_random = FALSE)
 	if(!S)
 		return
-	physique = rand(1, max_stat)
-	social = rand(1, max_stat)
-	mentality = rand(1, max_stat)
-	lockpicking = rand(1, max_stat)
-	blood = rand(1, 2)
-	maxHealth = round(initial(maxHealth)+(initial(maxHealth)/3)*(physique))
-	health = round(initial(health)+(initial(health)/3)*(physique))
-	last_health = health
+
 	socialrole = new S()
 
 	is_criminal = socialrole.is_criminal

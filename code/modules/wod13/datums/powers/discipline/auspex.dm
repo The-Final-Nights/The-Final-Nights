@@ -28,6 +28,8 @@
 	ADD_TRAIT(owner, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
 	ADD_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
 
+	owner.st_add_stat_mod(STAT_PERCEPTION, discipline.level, "heightened_senses")
+
 	owner.update_sight()
 
 /datum/discipline_power/auspex/heightened_senses/deactivate()
@@ -35,6 +37,8 @@
 
 	REMOVE_TRAIT(owner, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
 	REMOVE_TRAIT(owner, TRAIT_NIGHT_VISION, TRAIT_GENERIC)
+
+	owner.st_remove_stat_mod(STAT_PERCEPTION, "heightened_senses")
 
 	owner.update_sight()
 
@@ -225,9 +229,10 @@
 	name = "Psychic Projection"
 	desc = "Leave your body behind and fly across the land."
 
+	willpower_cost = 1
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS
-	vitae_cost = 1
+	vitae_cost = 0
 
 /datum/discipline_power/auspex/psychic_projection/activate()
 	. = ..()

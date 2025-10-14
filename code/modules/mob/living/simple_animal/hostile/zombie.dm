@@ -22,6 +22,7 @@
 	maxbloodpool = 0
 	speed = 1
 	AIStatus = AI_OFF
+	del_on_death = TRUE
 	var/mob/living/target_to_zombebe
 
 /mob/living/simple_animal/hostile/zombie/Destroy()

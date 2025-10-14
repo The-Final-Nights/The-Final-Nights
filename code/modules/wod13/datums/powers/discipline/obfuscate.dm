@@ -204,6 +204,11 @@
 		/datum/discipline_power/obfuscate/cloak_the_gathering
 	)
 
+/datum/discipline_power/obfuscate/vanish_from_the_minds_eye/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll(owner.st_get_stat(STAT_CHARISMA) + owner.st_get_stat(STAT_STEALTH), 6, FALSE, owner))
+		return TRUE
+	return FALSE
+
 /datum/discipline_power/obfuscate/vanish_from_the_minds_eye/activate()
 	. = ..()
 	RegisterSignals(owner, aggressive_signals, PROC_REF(on_combat_signal), override = TRUE)

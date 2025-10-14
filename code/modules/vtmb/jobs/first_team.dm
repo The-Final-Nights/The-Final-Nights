@@ -32,15 +32,16 @@
 	H.equipOutfit(first_team_outfit)
 	H.set_species(/datum/species/human)
 	H.set_clan(null)
-	H.generation = 13
-	H.physique = 5 //I want to beat this codebase on the head with a rusty pipe.. apparently ERT's inheret stats from the host's character, necessitating them being manually set.
-	H.dexterity = 5
-	H.blood = 6
-	H.mentality = 7
-	H.lockpicking = 6
-	H.athletics = 5
-	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.physique+13-H.generation))
-	H.health = round((initial(H.health)-initial(H.health)/4)+(initial(H.health)/4)*(H.physique+13-H.generation))
+	H.generation = HUMAN_GENERATION
+	H.st_set_stat(5, STAT_STAMINA)
+	H.st_set_stat(5, STAT_DEXTERITY)
+	H.st_set_stat(5, STAT_FIREARMS)
+	H.st_set_stat(7, STAT_PERMANENT_WILLPOWER)
+	H.st_set_stat(7, STAT_TEMPORARY_WILLPOWER)
+	H.st_set_stat(5, STAT_LARCENY)
+	H.st_set_stat(5, STAT_ATHLETICS)
+	H.st_recalculate_stats(null, TRUE)
+
 	for(var/datum/action/A in H.actions)
 		if(A.vampiric)
 			A.Remove(H)

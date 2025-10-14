@@ -62,7 +62,7 @@
 	level = 2
 
 	check_flags = DISC_CHECK_IMMOBILE | DISC_CHECK_CAPABLE
-
+	vitae_cost = 1
 	violates_masquerade = TRUE
 
 	toggled = TRUE
@@ -131,7 +131,7 @@
 	level = 3
 
 	check_flags = DISC_CHECK_IMMOBILE | DISC_CHECK_CAPABLE
-
+	vitae_cost = 1
 	violates_masquerade = TRUE
 
 	cancelable = TRUE
@@ -177,7 +177,7 @@
 	level = 4
 
 	check_flags = DISC_CHECK_IMMOBILE | DISC_CHECK_CAPABLE
-
+	vitae_cost = 1
 	violates_masquerade = TRUE
 
 	cancelable = TRUE
@@ -225,7 +225,7 @@
 	level = 5
 
 	check_flags = DISC_CHECK_IMMOBILE | DISC_CHECK_CAPABLE
-
+	vitae_cost = 1
 	violates_masquerade = TRUE
 
 	cancelable = TRUE

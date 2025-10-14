@@ -511,7 +511,7 @@
 
 			if(ishuman(user))
 				var/mob/living/carbon/human/garou = user
-				if((garou.mentality+garou.additional_mentality) > (src.social+src.additional_social))
+				if((garou.st_get_stat(STAT_INVESTIGATION)) > (src.st_get_stat(STAT_SUBTERFUGE)))
 					splat_sense = 1
 
 			if(iscathayan(src))

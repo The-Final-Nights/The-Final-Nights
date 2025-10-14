@@ -18,7 +18,7 @@
 
 	level = 1
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
-
+	vitae_cost = 1
 	duration_length = 10 SECONDS //TT duration is one hour, but this causes dizzyness.
 	cooldown_length = 20 SECONDS
 	duration_override = TRUE
@@ -62,10 +62,15 @@
 
 	level = 2
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING | DISC_CHECK_FREE_HAND
-
+	vitae_cost = 1
 	violates_masquerade = TRUE
 
 	cooldown_length = 5 SECONDS
+
+/datum/discipline_power/quietus/scorpions_touch/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll(owner.st_get_stat(STAT_PERMANENT_WILLPOWER), 6, FALSE, owner))
+		return TRUE
+	return FALSE
 
 /datum/discipline_power/quietus/scorpions_touch/activate()
 	. = ..()
@@ -79,7 +84,8 @@
 
 	level = 3
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
-
+	willpower_cost = 1
+	vitae_cost = 0
 	cooldown_length = 5 SECONDS
 
 /datum/discipline_power/quietus/dagons_call/activate()
@@ -87,8 +93,10 @@
 	if(owner.lastattacked)
 		if(isliving(owner.lastattacked))
 			var/mob/living/L = owner.lastattacked
-			L.adjustStaminaLoss(80)
-			L.adjustFireLoss(10)
+			var/victim_success_count = SSroll.storyteller_roll(owner.st_get_stat(STAT_STAMINA), L.st_get_stat(STAT_PERMANENT_WILLPOWER), TRUE, L)
+			var/attacker_success_count = SSroll.storyteller_roll(L.st_get_stat(STAT_STAMINA), owner.st_get_stat(STAT_PERMANENT_WILLPOWER), TRUE, owner)
+			if(attacker_success_count > victim_success_count)
+				L.adjustFireLoss(30 * attacker_success_count) // The number of successes the vampire with Dagon's call achieves is the amount of lethal damage, in health levels, the victim suffers
 			to_chat(owner, "You send your curse on [L], the last creature you attacked.")
 		else
 			to_chat(owner, "You don't seem to have last attacked soul earlier...")
@@ -212,6 +220,11 @@
 	violates_masquerade = TRUE
 
 	cooldown_length = 5 SECONDS
+
+/datum/discipline_power/quietus/taste_of_death/pre_activation_checks(atom/target)
+	if(SSroll.storyteller_roll((owner.st_get_stat(STAT_STAMINA) + owner.st_get_stat(STAT_ATHLETICS)), 6, FALSE, owner))
+		return TRUE
+	return FALSE
 
 /datum/discipline_power/quietus/taste_of_death/activate()
 	. = ..()
