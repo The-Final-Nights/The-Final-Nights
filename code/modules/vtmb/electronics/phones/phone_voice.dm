@@ -32,7 +32,7 @@
 	var/gibberish_message = ""
 	var/totalsocial = 0
 	if(lasombra)
-		totalsocial = (lasombra.social+lasombra.additional_social) * 3 // +3% chance per social. 15 max, 18 avg, 24 beauty.9
+		totalsocial = (lasombra.st_get_stat(STAT_TECHNOLOGY)) * 3 // +3% chance per social. 15 max, 18 avg, 24 beauty.9
 	for(var/i = 1 to length(message))
 		var/char = message[i]
 		// Randomize or replace characters with gibberish

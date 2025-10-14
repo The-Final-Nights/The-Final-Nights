@@ -38,7 +38,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	///Whether emotes will be displayed on runechat. Requires chat_on_map to have effect. Boolean.
 	var/see_rc_emotes = TRUE
 	//Клан вампиров
-	var/datum/vampire_clan/clan
+	var/datum/vampire_clan/clan = new /datum/vampire_clan/brujah()
 	var/datum/morality/morality_path = new /datum/morality/humanity()
 	// Custom Keybindings
 	var/list/key_bindings = list()
@@ -193,16 +193,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	///Ranks of the Disciplines this character knows, corresponding to discipline_types.
 	var/list/discipline_levels = list()
 
-	var/physique = 1
-	var/dexterity = 1
-	var/social = 1
-	var/mentality = 1
-	var/blood = 1
-
-	//Skills
-	var/lockpicking = 0
-	var/athletics = 0
-
 	var/info_known = INFO_KNOWN_UNKNOWN
 
 	var/friend = FALSE
@@ -261,13 +251,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	diablerist = 0
 	torpor_count = 0
 	generation_bonus = 0
-	physique = 1
-	dexterity = 1
-	mentality = 1
-	social = 1
-	blood = 1
-	lockpicking = 0
-	athletics = 0
 	info_known = INFO_KNOWN_UNKNOWN
 	masquerade_score = initial(masquerade_score)
 	generation = initial(generation)
@@ -301,6 +284,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	real_name = random_unique_name(gender)
 	equipped_gear = list() // TFN ADDITION
 	headshot_link = null // TFN ADDITION
+	storyteller_stat_holder = null
+	storyteller_stat_holder = new()
 	save_character()
 
 /datum/preferences/New(client/C)
@@ -425,10 +410,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	if(istype(user, /mob/dead/new_player))
 		dat += "<a href='byond://?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>[make_font_cool("CHARACTER SETTINGS")]</a>"
-	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>[make_font_cool("GAME PREFERENCES")]</a>"
+		dat += "<a href='byond://?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>[make_font_cool("ATTRIBUTES")]</a>" //TFN ADDITION - attributes
 	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>[make_font_cool("LOADOUT")]</a>" // TFN ADDITION - loadout
-	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=3' [current_tab == 3 ? "class='linkOn'" : ""]>[make_font_cool("OOC PREFERENCES")]</a>"
-	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=4' [current_tab == 4 ? "class='linkOn'" : ""]>[make_font_cool("CUSTOM KEYBINDINGS")]</a>"
+	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=3' [current_tab == 3 ? "class='linkOn'" : ""]>[make_font_cool("GAME PREFERENCES")]</a>"
+	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=4' [current_tab == 4 ? "class='linkOn'" : ""]>[make_font_cool("OOC PREFERENCES")]</a>"
+	dat += "<a href='byond://?_src_=prefs;preference=tab;tab=5' [current_tab == 5 ? "class='linkOn'" : ""]>[make_font_cool("CUSTOM KEYBINDINGS")]</a>"
 
 	if(!path)
 		dat += "<div class='notice'>Please create an account to save your preferences</div>"
@@ -609,25 +595,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if("Ghoul")
 					dat += "<b>Masquerade:</b> [masquerade_score]/5<BR>"
 
-			dat += "<h2>[make_font_cool("ATTRIBUTES")]</h2>"
-
-			//Prices for each ability, can be adjusted, multiplied by current attribute level
-			var/physique_price = 4
-			var/dexterity_price = 4
-			var/social_price = 4
-			var/mentality_price = 4
-			var/blood_price = 6
-			//Lockpicking and Athletics have an initial price of 3
-			var/lockpicking_price = !lockpicking ? 3 : 2
-			var/athletics_price = !athletics ? 3 : 2
-
-			dat += "<b>Physique:</b> [build_attribute_score(physique, 0, physique_price, "physique")]"
-			dat += "<b>Dexterity:</b> [build_attribute_score(dexterity, 0, dexterity_price, "dexterity")]"
-			dat += "<b>Social:</b> [build_attribute_score(social, 0, social_price, "social")]"
-			dat += "<b>Mentality:</b> [build_attribute_score(mentality, 0, mentality_price, "mentality")]"
-			dat += "<b>Cruelty:</b> [build_attribute_score(blood, 0, blood_price, "blood")]"
-			dat += "<b>Lockpicking:</b> [build_attribute_score(lockpicking, 0, lockpicking_price, "lockpicking")]"
-			dat += "<b>Athletics:</b> [build_attribute_score(athletics, 0, athletics_price, "athletics")]"
 			dat += "Experience rewarded: [player_experience]<BR>"
 			if(pref_species.name == "Werewolf")
 				dat += "<h2>[make_font_cool("TRIBE")]</h2>"
@@ -758,7 +725,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(generation <= 7)
 						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"][discipline_level > 5 ? "•" : "o"][discipline_level > 6 ? "•" : "o"][discipline_level > 7 ? "•" : "o"][discipline_level > 8 ? "•" : "o"][discipline_level > 9 ? "•" : "o"]([discipline_level])"
 					else
-						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"])"				
+						dat += "<b>[discipline.name]</b>: [discipline_level > 0 ? "•" : "o"][discipline_level > 1 ? "•" : "o"][discipline_level > 2 ? "•" : "o"][discipline_level > 3 ? "•" : "o"][discipline_level > 4 ? "•" : "o"]"
 					if((player_experience >= cost) && (discipline_level != max_discipline_level))
 						dat += "<a href='byond://?_src_=prefs;preference=discipline;task=input;upgradediscipline=[i]'>Learn ([cost])</a><BR>"
 					else
@@ -1177,8 +1144,162 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				mutant_category = 0
 			dat += "</tr></table>"
 
+		if(1) // Attributes
+			var/datum/st_stat/freebie_stat = storyteller_stat_holder.get_stat_datum(STAT_FREEBIE_POINTS)
+			dat += "<center><h3>Freebie points left: [freebie_stat.points]</h3>"
+			dat += "<a href='byond://?_src_=prefs;preference=attributes;task=reset_stats'>Reset Stats</a><br></center>"
+			dat += "<hr>"
 
-		if (1) // Game Preferences
+			dat += "<table align='center' width='100%'>"
+			dat += "<h1>[make_font_cool("Pooled Stats")]</h1>"
+			dat += "<tr>"
+			for(var/datum/st_stat/pooled/stat as anything in subtypesof(/datum/st_stat/pooled))
+				dat += "<td>"
+				dat += "<div title=\"[stat.description]\">[stat.name]: [storyteller_stat_holder.build_attribute_score(stat, TRUE)] - [storyteller_stat_holder.get_stat(stat)] ([storyteller_stat_holder.get_stat(stat)])</div>"
+				if(stat.type == STAT_PERMANENT_WILLPOWER && !slotlocked)
+					dat += "<a href='byond://?_src_=prefs;preference=attributes;task=increase_stat;stat=[stat]'>+</a>"
+					dat += "<a href='byond://?_src_=prefs;preference=attributes;task=decrease_stat;stat=[stat]'>-</a><br>"
+				dat += "</td>"
+			dat += "</tr>"
+			dat += "</table>"
+
+			dat += "<hr>"
+
+			dat += "<table align='center' width='100%'>"
+			var/datum/st_stat/attribute_stat = storyteller_stat_holder.get_stat_datum(STAT_ATTRIBUTE)
+			dat += "<h1>[make_font_cool("Attributes")] - Points remaining: [attribute_stat.points]</h1>"
+			dat += "<tr>"
+			var/newattributeline = 0 //Purely used just so it doesn't overflow from the amount of abilities we have.
+			for(var/datum/st_stat/attribute/stat as anything in subtypesof(/datum/st_stat/attribute))
+				if(stat.type == stat.base_type)
+					continue
+				dat += "<td>"
+				dat += "<div title=\"[stat.description]\">[stat.name]: [storyteller_stat_holder.build_attribute_score(stat)] - [storyteller_stat_holder.get_stat(stat, FALSE)] ([storyteller_stat_holder.get_stat(stat)])</div>"
+				if(!slotlocked)
+					dat += "<a href='byond://?_src_=prefs;preference=attributes;task=increase_stat;stat=[stat]'>+</a>"
+					dat += "<a href='byond://?_src_=prefs;preference=attributes;task=decrease_stat;stat=[stat]'>-</a><br>"
+				dat += "</td>"
+
+				newattributeline++
+				if(newattributeline == 3)
+					dat += "</tr>"
+					dat += "<tr>"
+					newattributeline = 0
+			dat += "</tr>"
+			dat += "</table>"
+
+			dat += "<hr>"
+
+			dat += "<table align='center' width='100%'>"
+			var/datum/st_stat/ability_stat = storyteller_stat_holder.get_stat_datum(STAT_ABILITY)
+			dat += "<h1>[make_font_cool("Abilities")] - Points remaining: [ability_stat.points]</h1>"
+			dat += "<tr>"
+			var/newstatline = 0 //Purely used just so it doesn't overflow from the amount of abilities we have.
+			for(var/datum/st_stat/ability/stat as anything in subtypesof(/datum/st_stat/ability))
+				dat += "<td>"
+				dat += "<div title=\"[stat.description]\">[stat.name]: [storyteller_stat_holder.build_attribute_score(stat)] - [storyteller_stat_holder.get_stat(stat, FALSE)] ([storyteller_stat_holder.get_stat(stat)])</div>"
+				if(!slotlocked)
+					dat += "<a href='byond://?_src_=prefs;preference=attributes;task=increase_stat;stat=[stat]'>+</a>"
+					dat += "<a href='byond://?_src_=prefs;preference=attributes;task=decrease_stat;stat=[stat]'>-</a><br>"
+				dat += "</td>"
+
+				newstatline++
+				if(newstatline == 5)
+					dat += "</tr>"
+					dat += "<tr>"
+					newstatline = 0
+			dat += "</tr>"
+			dat += "</table>"
+
+			dat += "<hr>"
+
+			dat += add_virtue_stats()
+
+		// TFN ADDITION START: loadout
+		if(2) //Loadout
+			if(path)
+				var/savefile/S = new /savefile(path)
+				if(S)
+					dat += "<center>"
+					var/name
+					var/unspaced_slots = 0
+					for(var/i=1, i<=max_save_slots, i++)
+						unspaced_slots++
+						if(unspaced_slots > 4)
+							dat += "<br>"
+							unspaced_slots = 0
+						S.cd = "/character[i]"
+						S["real_name"] >> name
+						if(!name)
+							name = "Character[i]"
+						dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[i];' [i == default_slot ? "class='linkOn'" : ""]>[name]</a> "
+					dat += "</center>"
+					dat += "<HR>"
+			var/list/type_blacklist = list()
+			var/list/slot_blacklist = list()
+			if(equipped_gear && length(equipped_gear))
+				for(var/i = 1, i <= length(equipped_gear), i++)
+					var/datum/gear/G = GLOB.gear_datums[equipped_gear[i]]
+					if(G)
+						if((G.subtype_path in type_blacklist) || (G.slot in slot_blacklist))
+							continue
+						type_blacklist += G.subtype_path
+						slot_blacklist += G.slot
+					else
+						equipped_gear.Cut(i,i+1)
+
+			dat += "<table align='center' width='100%'>"
+			dat += "<tr><td colspan=4><center><b>Experience: [player_experience]. Current loadout usage: [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)].</b><br>\[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
+			dat += "<tr><td colspan=4><center><b>"
+
+			var/firstcat = 1
+			for(var/category in GLOB.loadout_categories)
+				if(firstcat)
+					firstcat = 0
+				else
+					dat += " |"
+				if(category == gear_tab)
+					dat += " <span class='linkOff'>[category]</span> "
+				else
+					dat += " <a href='?_src_=prefs;preference=gear;select_category=[category]'>[category]</a> "
+			dat += "</b></center></td></tr>"
+
+			var/datum/loadout_category/LC = GLOB.loadout_categories[gear_tab]
+			dat += "<tr><td colspan=4><hr></td></tr>"
+			dat += "<tr><td colspan=4><b><center>[LC.category]</center></b></td></tr>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
+
+			dat += "<tr><td colspan=4><hr></td></tr>"
+			dat += "<tr><td><b>Name</b></td>"
+			dat += "<td><b>Cost</b></td>"
+			dat += "<td><b>Restricted Jobs</b></td>"
+			dat += "<td><b>Description</b></td>"
+			dat += "<tr><td colspan=4><hr></td></tr>"
+			for(var/gear_name in LC.gear)
+				var/datum/gear/G = LC.gear[gear_name]
+				var/ticked = (G.display_name in equipped_gear)
+
+				dat += "<tr style='vertical-align:top;'><td width=35%>[G.display_name] "
+				if(G.display_name in purchased_gear)
+					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Unequip" : "Equip") + "</a></td>"
+				else
+					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a>"
+					if(G.sort_category != "General")
+						dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Stop Preview" : "Preview") + "</a></td>"
+				dat += "<td width = 5% style='vertical-align:top;'>[G.cost]</td><td>"
+
+				if(G.allowed_roles)
+					dat += "<font size=2>"
+					var/list/allowedroles = list()
+					for(var/role in G.allowed_roles)
+						allowedroles += role
+					dat += english_list(allowedroles, null, ", ")
+					dat += "</font>"
+				dat += "</td><td><font size=2><i>[G.description]</i></font></td></tr>"
+			dat += "</table>"
+		// TFN ADDITION END: loadout
+
+		if (3) // Game Preferences
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 			dat += "<h2>[make_font_cool("GENERAL")]</h2>"
 			dat += "<b>UI Style:</b> <a href='byond://?_src_=prefs;task=input;preference=ui'>[UI_style]</a><br>"
@@ -1293,91 +1414,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				if(CONFIG_GET(flag/preference_map_voting))
 					dat += "<b>Preferred Map:</b> <a href='byond://?_src_=prefs;preference=preferred_map;task=input'>[p_map]</a><br>"
 
-		// TFN ADDITION START: loadout
-		if(2) //Loadout
-			if(path)
-				var/savefile/S = new /savefile(path)
-				if(S)
-					dat += "<center>"
-					var/name
-					var/unspaced_slots = 0
-					for(var/i=1, i<=max_save_slots, i++)
-						unspaced_slots++
-						if(unspaced_slots > 4)
-							dat += "<br>"
-							unspaced_slots = 0
-						S.cd = "/character[i]"
-						S["real_name"] >> name
-						if(!name)
-							name = "Character[i]"
-						dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[i];' [i == default_slot ? "class='linkOn'" : ""]>[name]</a> "
-					dat += "</center>"
-					dat += "<HR>"
-			var/list/type_blacklist = list()
-			var/list/slot_blacklist = list()
-			if(equipped_gear && length(equipped_gear))
-				for(var/i = 1, i <= length(equipped_gear), i++)
-					var/datum/gear/G = GLOB.gear_datums[equipped_gear[i]]
-					if(G)
-						if((G.subtype_path in type_blacklist) || (G.slot in slot_blacklist))
-							continue
-						type_blacklist += G.subtype_path
-						slot_blacklist += G.slot
-					else
-						equipped_gear.Cut(i,i+1)
 
-			dat += "<table align='center' width='100%'>"
-			dat += "<tr><td colspan=4><center><b>Experience: [player_experience]. Current loadout usage: [length(equipped_gear)]/[CONFIG_GET(number/max_loadout_items)].</b><br>\[<a href='?_src_=prefs;preference=gear;clear_loadout=1'>Clear Loadout</a>\] | \[<a href='?_src_=prefs;preference=gear;toggle_loadout=1'>Toggle Loadout</a>\]</center></td></tr>"
-			dat += "<tr><td colspan=4><center><b>"
-
-			var/firstcat = 1
-			for(var/category in GLOB.loadout_categories)
-				if(firstcat)
-					firstcat = 0
-				else
-					dat += " |"
-				if(category == gear_tab)
-					dat += " <span class='linkOff'>[category]</span> "
-				else
-					dat += " <a href='?_src_=prefs;preference=gear;select_category=[category]'>[category]</a> "
-			dat += "</b></center></td></tr>"
-
-			var/datum/loadout_category/LC = GLOB.loadout_categories[gear_tab]
-			dat += "<tr><td colspan=4><hr></td></tr>"
-			dat += "<tr><td colspan=4><b><center>[LC.category]</center></b></td></tr>"
-			dat += "<tr><td colspan=4><hr></td></tr>"
-
-			dat += "<tr><td colspan=4><hr></td></tr>"
-			dat += "<tr><td><b>Name</b></td>"
-			dat += "<td><b>Cost</b></td>"
-			dat += "<td><b>Restricted Jobs</b></td>"
-			dat += "<td><b>Description</b></td>"
-			dat += "<tr><td colspan=4><hr></td></tr>"
-			for(var/gear_name in LC.gear)
-				var/datum/gear/G = LC.gear[gear_name]
-				var/ticked = (G.display_name in equipped_gear)
-
-				dat += "<tr style='vertical-align:top;'><td width=35%>[G.display_name] "
-				if(G.display_name in purchased_gear)
-					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Unequip" : "Equip") + "</a></td>"
-				else
-					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a>"
-					if(G.sort_category != "General")
-						dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Stop Preview" : "Preview") + "</a></td>"
-				dat += "<td width = 5% style='vertical-align:top;'>[G.cost]</td><td>"
-
-				if(G.allowed_roles)
-					dat += "<font size=2>"
-					var/list/allowedroles = list()
-					for(var/role in G.allowed_roles)
-						allowedroles += role
-					dat += english_list(allowedroles, null, ", ")
-					dat += "</font>"
-				dat += "</td><td><font size=2><i>[G.description]</i></font></td></tr>"
-			dat += "</table>"
-		// TFN ADDITION END: loadout
-
-		if(3) //OOC Preferences
+		if(4) //OOC Preferences
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 			dat += "<h2>[make_font_cool("OOC")]</h2>"
 			dat += "<b>Window Flashing:</b> <a href='byond://?_src_=prefs;preference=winflash'>[(windowflashing) ? "Enabled":"Disabled"]</a><br>"
@@ -1454,7 +1492,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "</td>"
 			dat += "</tr></table>"
-		if(4) // Custom keybindings
+		if(5) // Custom keybindings
 			// Create an inverted list of keybindings -> key
 			var/list/user_binds = list()
 			for (var/key in key_bindings)
@@ -1497,15 +1535,16 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			dat += "</body>"
 	dat += "<hr><center>"
 
-	if(slotlocked)
-		dat += "Your character is saved. You can't change name and appearance, but your progress will be saved.<br>"
-	if(!IsGuestKey(user.key) && !slotlocked)
-		dat += "<a href='byond://?_src_=prefs;preference=load'>Undo</a> "
-		dat += "<a href='byond://?_src_=prefs;preference=save'>Save Character</a> "
-//	dat += "<a href='byond://?_src_=prefs;preference=save_pref'>Save Preferences</a> "
+	if((current_tab == 0))
+		if(slotlocked)
+			dat += "Your character is saved. You can't change name and appearance, but your progress will be saved.<br>"
+		if(!IsGuestKey(user.key) && !slotlocked)
+			dat += "<a href='byond://?_src_=prefs;preference=load'>Undo</a> "
+			dat += "<a href='byond://?_src_=prefs;preference=save'>Save Character</a> "
+	//	dat += "<a href='byond://?_src_=prefs;preference=save_pref'>Save Preferences</a> "
 
-	if(istype(user, /mob/dead/new_player))
-		dat += "<a href='byond://?_src_=prefs;preference=reset_all'>Reset Setup</a>"
+		if(istype(user, /mob/dead/new_player))
+			dat += "<a href='byond://?_src_=prefs;preference=reset_all'>Reset Setup</a>"
 	dat += "</center>"
 
 	winshow(user, "preferences_window", TRUE)
@@ -1513,23 +1552,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 	onclose(user, "preferences_window", src)
-
-//A proc that creates the score circles based on attribute and the additional bonus for the attribute
-//
-/datum/preferences/proc/build_attribute_score(attribute, bonus_number, price, variable_name)
-	var/dat
-	for(var/a in 1 to attribute)
-		dat += "•"
-	for(var/b in 1 to bonus_number)
-		dat += "•"
-	var/leftover_circles = ATTRIBUTE_BASE_LIMIT - attribute //5 is the default number of blank circles
-	for(var/c in 1 to leftover_circles)
-		dat += "o"
-	var/real_price = attribute ? (attribute*price) : price //In case we have an attribute of 0, we don't multiply by 0
-	if((player_experience >= real_price) && (attribute < ATTRIBUTE_BASE_LIMIT))
-		dat += "<a href='byond://?_src_=prefs;preference=[variable_name];task=input'>Increase ([real_price])</a>"
-	dat += "<br>"
-	return dat
 
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
@@ -1956,7 +1978,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(C)
 			C.clear_character_previews()
 
-/datum/preferences/proc/process_link(mob/user, list/href_list)
+/datum/preferences/proc/process_link(mob/living/user, list/href_list)
 	if(href_list["bancheck"])
 		var/list/ban_details = is_banned_from_with_details(user.ckey, user.client.address, user.client.computer_id, href_list["bancheck"])
 		var/admin = FALSE
@@ -2057,8 +2079,64 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				SetQuirks(user)
 		return TRUE
 
+	// TFN ADDITION START: attributes
+	else if(href_list["preference"] == "attributes")
+		var/datum/st_stat/freebie_stat = storyteller_stat_holder.get_stat_datum(STAT_FREEBIE_POINTS)
+		var/datum/st_stat/chosen_stat = text2path(href_list["stat"])
+		var/freebie_point_usage = 0
+		if(chosen_stat)
+			if(chosen_stat.type == STAT_PERMANENT_WILLPOWER)
+				freebie_point_usage = 1
+			if(chosen_stat.type in subtypesof(STAT_VIRTUE))
+				freebie_point_usage = 2
+			if(chosen_stat.type in subtypesof(STAT_ABILITY))
+				freebie_point_usage = 2
+			if(chosen_stat.type in subtypesof(STAT_ATTRIBUTE))
+				freebie_point_usage = 5
+
+		switch(href_list["task"])
+			if("increase_stat")
+				var/datum/st_stat/increased_stat = storyteller_stat_holder.get_stat_datum(chosen_stat)
+				var/datum/st_stat/increase_base_type_stat = storyteller_stat_holder.get_stat_datum(increased_stat.base_type)
+				if(increased_stat.score < increased_stat.starting_score)
+					increase_base_type_stat.points += 1
+				if(!increase_base_type_stat.points && !freebie_stat.points)
+					return
+				if(storyteller_stat_holder.get_stat(chosen_stat, FALSE) >= increase_base_type_stat.max_score)
+					return
+				if((storyteller_stat_holder.get_stat(chosen_stat) >= increase_base_type_stat.max_score) && increase_base_type_stat.count_bonus_score)
+					return
+				if(!storyteller_stat_holder.set_stat(chosen_stat, increased_stat.score + 1))
+					return
+				if(increase_base_type_stat.points > 0 && (increase_base_type_stat.score < increase_base_type_stat.max_level_before_freebie_points))
+					increase_base_type_stat.points -= 1
+				else
+					if((freebie_stat.points - freebie_point_usage) < 0)
+						storyteller_stat_holder.set_stat(chosen_stat, increased_stat.score - 1)
+						return
+					freebie_stat.points -= freebie_point_usage
+
+			if("decrease_stat")
+				var/datum/st_stat/decreased_stat = storyteller_stat_holder.get_stat_datum(chosen_stat)
+				var/datum/st_stat/decrease_base_type_stat = storyteller_stat_holder.get_stat_datum(decreased_stat.base_type)
+				if(!storyteller_stat_holder.set_stat(chosen_stat, decreased_stat.score - 1))
+					return
+				if(decreased_stat.score < decreased_stat.starting_score)
+					decrease_base_type_stat.points -= 1
+				if(decrease_base_type_stat.points < initial(decrease_base_type_stat.points))
+					decrease_base_type_stat.points += 1
+				else
+					freebie_stat.points += freebie_point_usage
+
+			if("reset_stats")
+				storyteller_stat_holder = null
+				storyteller_stat_holder = new()
+
+
+	// TFN ADDITION END
+
 	// TFN ADDITION START: loadout
-	if(href_list["preference"] == "gear")
+	else if(href_list["preference"] == "gear")
 		if(href_list["purchase_gear"])
 			var/datum/gear/TG = GLOB.gear_datums[href_list["purchase_gear"]]
 			if(TG.cost <= player_experience)
@@ -2659,34 +2737,6 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					experience_used_on_character += cost
 					auspice_level = max(1, auspice_level + 1)
 
-				if("physique")
-					if(handle_upgrade(physique, physique * 4))
-						physique++
-
-				if("dexterity")
-					if(handle_upgrade(dexterity, dexterity * 4))
-						dexterity++
-
-				if("social")
-					if(handle_upgrade(social, social * 4))
-						social++
-
-				if("mentality")
-					if(handle_upgrade(mentality, mentality * 4))
-						mentality++
-
-				if("blood")
-					if(handle_upgrade(blood, blood * 6))
-						blood++
-
-				if("lockpicking")
-					if(handle_upgrade(lockpicking, lockpicking ? lockpicking*2 : 3))
-						lockpicking++
-
-				if("athletics")
-					if(handle_upgrade(athletics, athletics ? athletics*2 : 3))
-						athletics++
-
 				if("tribe")
 					if(slotlocked || !(pref_species.id == "garou"))
 						return
@@ -3021,6 +3071,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						SetQuirks(user)
 						var/newtype = GLOB.species_list[result]
 						pref_species = new newtype()
+						storyteller_stat_holder = null
+						storyteller_stat_holder = new()
 						switch(pref_species.id)
 							if("ghoul","human","kuei-jin")
 								discipline_types.Cut()
@@ -3690,14 +3742,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	character.dna.real_name = character.real_name
 
 	character.diablerist = diablerist
+	character.storyteller_stat_holder = storyteller_stat_holder
 
-	character.physique = physique
-	character.dexterity = dexterity
-	character.social = social
-	character.mentality = mentality
-	character.blood = blood
-	character.lockpicking = lockpicking
-	character.athletics = athletics
 
 	if(!character_setup && !istype(character, /mob/living/carbon/human/dummy))
 		for(var/i = 5; i > masquerade_score; i--)
@@ -3712,8 +3758,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if (FAT_BODY_MODEL_NUMBER)
 			character.set_body_model(FAT_BODY_MODEL)
 
-	character.maxHealth = round((initial(character.maxHealth)+(initial(character.maxHealth)/4)*(character.physique + character.additional_physique)))
-	character.health = character.maxHealth
+	character.st_recalculate_stats(null, TRUE)
 
 	if (pref_species.name == "Kuei-Jin")
 		character.yang_chi = yang
@@ -3848,22 +3893,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				lupus.real_name = real_name
 				lupus.true_real_name = real_name
 				lupus.name = real_name
-			crinos.physique = physique
-			crinos.dexterity = dexterity
-			crinos.mentality = mentality
-			crinos.social = social
-			crinos.blood = blood
 
-			lupus.physique = physique
-			lupus.dexterity = dexterity
-			lupus.mentality = mentality
-			lupus.social = social
-			lupus.blood = blood
-
-			lupus.maxHealth = round((lupus::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
-			lupus.health = lupus.maxHealth
-			crinos.maxHealth = round((crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
-			crinos.health = crinos.maxHealth
+			lupus.st_recalculate_stats(null, TRUE)
+			crinos.st_recalculate_stats(null, TRUE)
 		else if(HAS_TRAIT(character,TRAIT_CORAX)/*character.transformator?.corax_form && character.transformator?.corvid_form*/) // if we have the Corax tribe, use the Corax forms instead..
 			var/mob/living/carbon/werewolf/corax/corax_crinos/cor_crinos = character.transformator.corax_form?.resolve()
 			var/mob/living/carbon/werewolf/lupus/corvid/corvid = character.transformator.corvid_form?.resolve()
@@ -3891,23 +3923,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				cor_crinos.name = real_name
 				corvid.name = real_name
 
-			cor_crinos.physique = physique
-			cor_crinos.dexterity = dexterity
-			cor_crinos.mentality = mentality
-			cor_crinos.social = social
-			cor_crinos.blood = blood
-
-			corvid.physique = physique
-			corvid.dexterity = dexterity
-			corvid.mentality = mentality
-			corvid.social = social
-			corvid.athletics = athletics // corvid also get athletics so that they can jump further, might be absolutely batshit though
-			corvid.blood = blood
-
-			corvid.maxHealth = round((corvid::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
-			corvid.health = corvid.maxHealth
-			cor_crinos.maxHealth = round((cor_crinos::maxHealth + (character::maxHealth / 4) * (character.physique + character.additional_physique))) + (character.auspice.level - 1) * 50
-			cor_crinos.health = cor_crinos.maxHealth
+			corvid.st_recalculate_stats(null, TRUE)
+			cor_crinos.st_recalculate_stats(null, TRUE)
 
 	// TFN ADDITION START: loadout
 	if(loadout)

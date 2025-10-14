@@ -21,10 +21,11 @@
 	H.set_species(/datum/species/human)
 	H.set_clan(null)
 	H.generation = 13
-	H.lockpicking = 5
-	H.physique = 4
-	H.maxHealth = round((initial(H.maxHealth)-initial(H.maxHealth)/4)+(initial(H.maxHealth)/4)*(H.physique+13-H.generation))
-	H.health = round((initial(H.health)-initial(H.health)/4)+(initial(H.health)/4)*(H.physique+13-H.generation))
+	H.st_set_stat(5, STAT_LARCENY)
+	H.st_set_stat(4, STAT_STAMINA)
+	H.st_set_stat(4, STAT_STRENGTH)
+	H.recalculate_max_health(TRUE)
+
 	for(var/datum/action/A in H.actions)
 		if(A.vampiric)
 			A.Remove(H)

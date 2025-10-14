@@ -17,7 +17,6 @@
 	var/locked = FALSE
 	var/lock_id = null
 	var/glass = FALSE
-	var/hacking = FALSE
 	var/lockpick_timer = 17 //[Lucifernix] - Never have the lockpick timer lower than 7. At 7 it will unlock instantly!!
 	var/lockpick_difficulty = 2
 
@@ -95,7 +94,7 @@
 	if(!H.is_holding_item_of_type(/obj/item/vamp/keys/hack))
 		return
 	var/message //So the code isn't flooded with . +=, it's just a visual thing
-	var/difference = (H.lockpicking * 2 + H.dexterity) - lockpick_difficulty //Lower number = higher difficulty
+	var/difference = (H.st_get_stat(STAT_LARCENY) * 2 + H.st_get_stat(STAT_DEXTERITY)) - lockpick_difficulty //Lower number = higher difficulty
 	switch(difference) //Because rand(1,20) always adds a minimum of 1 we take that into consideration for our theoretical roll ranges, which really makes it a random range of 19.
 		if(-INFINITY to -11) //Roll can never go above 10 (-11 + 20 = 9), impossible to lockpick.
 			message = span_warning("You don't have any chance of lockpicking this with your current skills!")
@@ -110,7 +109,7 @@
 		if(5 to INFINITY) //Becomes guaranteed to lockpick at 9.
 			message = span_nicegreen("This door is really simple to you. It should be very easy to lockpick it.")
 	. += message
-	if(H.lockpicking >= 5) //The difference between a 1/19 and a 4/19 is about 4x. An expert in lockpicks is more discerning.
+	if(H.st_get_stat(STAT_LARCENY) >= 5) //The difference between a 1/19 and a 4/19 is about 4x. An expert in lockpicks is more discerning.
 		//Converting the difference into a number that can be divided by the max value of the rand() used in lockpicking calculations.
 		var/max_rand_value = 20
 		var/minimum_lockpickable_difference = -10 //Minimum value, any lower and lockpicking will always fail.
@@ -189,30 +188,22 @@
 /obj/structure/vampdoor/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/vamp/keys/hack))
 		if(locked)
-			hacking = TRUE
 			playsound(src, 'code/modules/wod13/sounds/hack.ogg', 100, TRUE)
 			for(var/mob/living/carbon/human/npc/police/P in oviewers(7, src))
 				P.Aggro(user)
-			var/total_lockpicking = user.get_total_lockpicking()
-			if(do_after(user, (lockpick_timer - total_lockpicking * 2) SECONDS, src))
-				var/roll = rand(1, 20) + (total_lockpicking * 2 + user.get_total_dexterity()) - lockpick_difficulty
-				if(roll <=1)
+			var/total_lockpicking = (user.st_get_stat(STAT_LARCENY) * user.st_get_stat(STAT_DEXTERITY)) / 5
+			if(do_after(user, (lockpick_timer - total_lockpicking*2) SECONDS, src))
+				var/roll = SSroll.storyteller_roll((max(total_lockpicking, 1)*2), (lockpick_difficulty / 3), TRUE, user)
+				if(roll < 0)
 					to_chat(user, span_warning("Your lockpick broke!"))
 					qdel(W)
-					hacking = FALSE
-				if(roll >=10)
+					return
+				if(roll > 1)
 					to_chat(user, span_notice("You pick the lock."))
 					locked = FALSE
-					hacking = FALSE
 					return
-				else
-					to_chat(user, span_warning("You failed to pick the lock."))
-					hacking = FALSE
-					return
-			else
-				to_chat(user, span_warning("You failed to pick the lock."))
-				hacking = FALSE
-				return
+			to_chat(user, span_warning("You failed to pick the lock."))
+			return
 		else
 			if (closed && lock_id) //yes, this is a thing you can extremely easily do in real life... FOR DOORS WITH LOCKS!
 				to_chat(user, span_notice("You re-lock the door with your lockpick."))

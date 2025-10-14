@@ -39,6 +39,9 @@
 	///Character's chronological age
 	var/chronological_age = 30
 
+	/// Which body type to use
+	var/physique = MALE
+
 	var/underwear = "Nude"	//Which underwear the player wants
 	var/underwear_color = "#000000"
 	var/undershirt = "Nude" //Which undershirt the player wants
@@ -97,6 +100,7 @@
 	var/last_cpr_exp = 0
 
 	var/dementia = FALSE
+	var/possessed = FALSE // TFN ADDITION - Dominate and Presence TTRPG Rework
 
 	//[Lucia] I have no clue why this is necessary, TODO: remove
 	var/mob/living/caster

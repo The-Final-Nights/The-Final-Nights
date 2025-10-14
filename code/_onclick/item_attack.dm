@@ -232,9 +232,9 @@
 		CRASH("attacked_by() was called on an object that doesnt use integrity!")
 	if(!attacking_item.force)
 		return
-
+	var/item_force = (attacking_item.force) * (user.st_get_stat(STAT_MELEE) * 0.4)//TFN EDIT ADDITION
 	var/no_damage = TRUE
-	if(take_damage(attacking_item.force, attacking_item.damtype, MELEE, 1))
+	if(take_damage(item_force, attacking_item.damtype, MELEE, 1)) //TFN EDIT, ORGIINAL: if(take_damage(attacking_item.force, attacking_item.damtype, MELEE, 1))
 		no_damage = FALSE
 	//only witnesses close by and the victim see a hit message.
 	log_combat(user, src, "attacked", attacking_item)
