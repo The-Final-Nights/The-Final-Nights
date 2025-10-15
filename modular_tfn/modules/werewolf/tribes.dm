@@ -272,7 +272,7 @@
 		var/limit
 		if(ishuman(owner))
 			var/mob/living/carbon/human/H = owner
-			limit = H.social + H.additional_social + H.more_companions
+			limit = H.st_get_stat(STAT_LEADERSHIP)
 			if(HAS_TRAIT(owner, TRAIT_ANIMAL_REPULSION))
 				limit = max(1,limit-2)
 			if(length(H.beastmaster) >= limit)

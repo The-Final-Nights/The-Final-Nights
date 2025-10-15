@@ -300,11 +300,6 @@
 	prof.undershirt = H.undershirt
 	prof.socks = H.socks
 	prof.age = H.age
-	prof.physique = H.physique
-	prof.dexterity = H.dexterity
-	prof.social = H.social
-	prof.mentality = H.mentality
-	prof.athletics = H.athletics
 	prof.base_body_mod = H.base_body_mod
 	prof.headshot_link = H.headshot_link
 	prof.flavor_text = H.flavor_text

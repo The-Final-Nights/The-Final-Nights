@@ -57,7 +57,7 @@
 		var/obj/item/stack/stack_item = sold
 		stack_multiplier = stack_item.amount
 
-	var/social_multiplier = user.social + (user.additional_social * 0.1)
+	var/social_multiplier = (user.st_get_stat(STAT_CHARISMA))
 	var/real_value = ((base_cost * stack_multiplier) / 5) * social_multiplier
 	var/obj/item/stack/dollar/money_to_spawn = new() //Don't pass off the loc until we add up the money, or else it will merge too early and delete some money entities
 	//In case we ever add items that sell for more than the maximum amount of dollars in a stack and can be mass-sold, we use this code.

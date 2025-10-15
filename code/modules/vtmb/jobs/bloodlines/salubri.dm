@@ -29,6 +29,7 @@
 	name = CLAN_SALUBRI
 	jobtype = /datum/job/vamp/salubri
 	l_pocket = /obj/item/vamp/phone
+	r_pocket = /obj/item/vamp/keys/salubri
 	id = /obj/item/cockclock
 	backpack_contents = list(
 		/obj/item/passport=1,

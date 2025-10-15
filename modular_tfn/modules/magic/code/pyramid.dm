@@ -136,7 +136,7 @@
 	BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus
 	BG.melee_damage_upper = BG.melee_damage_upper+activator_bonus
 	playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
-	if(length(H.beastmaster) > 3+H.mentality)
+	if(length(H.beastmaster) > 3+H.st_get_stat(STAT_LEADERSHIP))
 		var/mob/living/simple_animal/hostile/beastmaster/B = pick(H.beastmaster)
 		B.death()
 	qdel(src)
@@ -259,8 +259,17 @@
 /obj/ritualrune/identification/complete()
 	for(var/obj/item/vtm_artifact/VA in loc)
 		if(VA)
+			var/mob/living/carbon/human/identifier = usr // TFN ADDITION - Paths
+			if(VA.identified)
+				to_chat(identifier, span_warning("You have already identified this artifact."))
+				return
 			VA.identificate()
 			playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
+			// TFN ADDITION - Paths
+			if(ishuman(identifier))
+				identifier.research_points += 5
+				to_chat(identifier, span_notice("You gain 15 research points for identifying the [VA.name]!"))
+			// TFN ADDITION - Paths
 			qdel(src)
 			return
 
@@ -758,7 +767,7 @@
 	word = "Reveal thy bloodline for mine eyes."
 	thaumlevel = 2
 
-/obj/ritualrune/bloodwalk/attack_hand(mob/user)
+/obj/ritualrune/bloodwalk/attack_hand(mob/living/user)
 	for(var/obj/item/reagent_containers/syringe/S in loc)
 		for(var/datum/reagent/blood/B in S.reagents.reagent_list)
 			var/blood_data = B.data
@@ -767,6 +776,11 @@
 				var/clan = blood_data["clan"]
 				var/message = generate_message(generation, clan)
 				to_chat(user, "[message]")
+
+				// Process blood collection for research points
+				if(ishuman(user))
+					SSoccult_research.process_blood_collection(user, B)
+
 			else
 				to_chat(user, "The blood speaks not; it is empty of power!")
 		playsound(loc, 'code/modules/wod13/sounds/thaum.ogg', 50, FALSE)
