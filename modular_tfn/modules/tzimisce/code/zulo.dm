@@ -19,7 +19,7 @@
 	punchdamagehigh = 25
 	exotic_blood = /datum/reagent/blood/vitae
 	selectable = FALSE
-	var/old_social
+	var/old_appearance
 
 /datum/species/kindred/zulo/on_species_gain(mob/living/carbon/human/H)
 	..()
@@ -28,10 +28,11 @@
 	H.undershirt = "Nude"
 	H.underwear = "Nude"
 	H.socks = "Nude"
-	old_social = H.social //Used in case of some future abilities offering social bonuses.
-	H.social = 0
-	H.physique += 3
-	H.dexterity += 3
+	old_appearance = st_get_stat(STAT_APPEARANCE) //Used in case of some future abilities offering social bonuses.
+	H.st_add_stat_mod(STAT_STRENGTH, 3, "Zulo")
+	H.st_add_stat_mod(STAT_STAMINA, 3, "Zulo")
+	H.st_add_stat_mod(STAT_DEXTERITY, 3, "Zulo")
+	H.st_set_stat(0, STAT_APPEARANCE)
 	H.physiology.armor.melee += 50
 	H.physiology.armor.bullet += 50
 	H.physiology.armor.wound += 10
@@ -45,9 +46,10 @@
 	H.undershirt = H.client.prefs.undershirt
 	H.underwear = H.client.prefs.underwear
 	H.socks = H.client.prefs.socks
-	H.social = old_social
-	H.physique -= 3
-	H.dexterity -= 3
+	H.st_remove_stat_mod(STAT_STRENGTH, 3, "Zulo")
+	H.st_remove_stat_mod(STAT_STAMINA, 3, "Zulo")
+	H.st_remove_stat_mod(STAT_DEXTERITY, 3, "Zulo")
+	H.st_set_stat(old_appearance, STAT_APPEARANCE)
 	H.physiology.armor.melee -= 50
 	H.physiology.armor.bullet -= 50
 	H.physiology.armor.wound += 10
