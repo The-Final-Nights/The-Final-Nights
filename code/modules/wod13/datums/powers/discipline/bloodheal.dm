@@ -1,5 +1,6 @@
 #define HEAL_BASHING_LETHAL 30
 #define HEAL_AGGRAVATED 6
+#define HEAL_BLOODLOSS 50
 
 /datum/discipline/bloodheal
 	name = "Bloodheal"
@@ -53,6 +54,11 @@
 	//aggravated damage
 	owner.heal_ordered_damage(HEAL_AGGRAVATED * vitae_cost, list(BURN, CLONE))
 
+	//restore lost blood volume
+	//vitae and blood are not the same thing!
+
+	owner.blood_volume = min(owner.blood_volume + (vitae_cost * HEAL_BLOODLOSS), BLOOD_VOLUME_NORMAL)
+
 	//brain damage and traumas healing
 	var/obj/item/organ/brain/brain = owner.getorganslot(ORGAN_SLOT_BRAIN)
 	if (brain)
@@ -93,12 +99,14 @@
 	//tally up damage
 	var/total_bashing_lethal_damage = owner.getBruteLoss() + owner.getToxLoss() + owner.getOxyLoss()
 	var/total_aggravated_damage = owner.getCloneLoss() + owner.getFireLoss()
+	var/total_bloodloss = BLOOD_VOLUME_NORMAL - owner.blood_volume
 
 	//lower blood expenditure to what's necessary
 	var/vitae_to_heal_bashing_lethal = ceil(total_bashing_lethal_damage / HEAL_BASHING_LETHAL)
 	var/vitae_to_heal_aggravated = ceil(total_aggravated_damage / HEAL_AGGRAVATED)
+	var/vitae_to_heal_bloodloss = ceil(total_bloodloss / HEAL_BLOODLOSS)
 
-	var/vitae_needed = max(vitae_to_heal_bashing_lethal, vitae_to_heal_aggravated)
+	var/vitae_needed = max(vitae_to_heal_bashing_lethal, vitae_to_heal_aggravated, vitae_to_heal_bloodloss)
 
 	//vitae used to heal is the smaller of max vitae expenditure and what's needed to heal the damage
 	vitae_cost = max(min(vitae_cost, vitae_needed), 1)
@@ -211,3 +219,4 @@
 
 #undef HEAL_BASHING_LETHAL
 #undef HEAL_AGGRAVATED
+#undef HEAL_BLOODLOSS

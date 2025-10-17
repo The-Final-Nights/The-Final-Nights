@@ -1,0 +1,6 @@
+author: "TheTrueSilverRat"
+delete-after: True
+changes:
+  - qol: "Ghouls can be fed on without losing BP"
+  - qol: "Paleness is based on Blood volume with modifers instead of blood pool"
+  - code_imp: "Adjusted blood volume levels to make it less likely to die and stuff"

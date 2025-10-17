@@ -484,6 +484,8 @@
 	corvid.bloodpool = trans.bloodpool
 	corvid.masquerade_score = trans.masquerade_score
 	corvid.nutrition = trans.nutrition
+	if(HAS_TRAIT(trans, TRAIT_WYRMTAINTED))
+		ADD_TRAIT(corvid, TRAIT_WYRMTAINTED, "wyrm_tainted")
 	corvid.mind = trans.mind
 	corvid.gender = trans.gender
 	corvid.update_blood_hud()

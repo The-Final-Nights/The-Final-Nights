@@ -335,7 +335,8 @@
 		if(DISGUST_LEVEL_DISGUSTED to INFINITY)
 			msg += "[t_He] look[p_s()] extremely disgusted.\n"
 
-	var/apparent_blood_volume = bloodpool
+
+/* TFN EDIT START -- Blood Sucking Rework
 	if(skin_tone == "albino")
 		apparent_blood_volume -= 3
 	if(HAS_TRAIT(user, TRAIT_COLD_AURA))
@@ -350,6 +351,27 @@
 		msg += "[t_He] look[p_s()] like pale death.\n"
 	else if(bloodpool <= 0)
 		msg += "<span class='deadsay'><b>[t_He] resemble[p_s()] a crushed, empty juice pouch.</b></span>\n"
+TFN EDIT END - Blood Sucking Rework */
+
+
+//TFN EDIT START -- Blood Sucking Rework
+	var/visible_blood_volume = blood_volume
+	if(skin_tone == "albino")
+		visible_blood_volume -= 100
+	if(HAS_TRAIT(user, TRAIT_COLD_AURA))
+		visible_blood_volume -= 50
+	if(HAS_TRAIT(user, TRAIT_BLUSH_OF_HEALTH))
+		visible_blood_volume += 500
+	switch(visible_blood_volume)
+		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+			msg += "[t_He] look[p_s()] a little anemic."
+		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+			msg += "[t_He] look[p_s()] anemic."
+		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+			msg += . += "[t_He] look[p_s()] incredibly anemic."
+		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+			msg += "[t_He] [t_is] deathly pale."
+//TFN EDIT END - Blood Sucking Rework
 
 	if(is_bleeding())
 		var/list/obj/item/bodypart/bleeding_limbs = list()

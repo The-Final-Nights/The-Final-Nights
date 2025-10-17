@@ -1,4 +1,0 @@
-author: "XeonMations"
-delete-after: True
-changes:
-  - rscadd: "Added a new attributes system, allowing for further splat specialization."

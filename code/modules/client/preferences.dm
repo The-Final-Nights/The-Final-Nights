@@ -734,7 +734,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					qdel(discipline)
 
 				if (clan.name == CLAN_NONE)
-					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					for (var/discipline_type in possible_new_disciplines)
 						var/datum/discipline/discipline = new discipline_type
 						if (discipline.clan_restricted)
@@ -751,7 +751,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "-[discipline.desc]<BR>"
 					qdel(discipline)
 
-				var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+				var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 				if (possible_new_disciplines.len && (player_experience >= 10))
 					dat += "<a href='byond://?_src_=prefs;preference=newghouldiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
@@ -2473,7 +2473,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if((player_experience < 10) || !(pref_species.id == "kindred") || !(clan.name == CLAN_NONE))
 						return
 
-					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					for (var/discipline_type in possible_new_disciplines)
 						var/datum/discipline/discipline = new discipline_type
 						if (discipline.clan_restricted)
@@ -2507,7 +2507,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if((player_experience < 10) || !(pref_species.id == "ghoul"))
 						return
 
-					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					var/new_discipline = tgui_input_list(user, "Select your new Discipline", "Discipline Selection", sort_list(possible_new_disciplines))
 					if(new_discipline)
 						discipline_types += new_discipline
@@ -2519,7 +2519,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if((player_experience < 10) || !(pref_species.id == "kuei-jin"))
 						return
 
-					var/list/possible_new_disciplines = subtypesof(/datum/chi_discipline) - discipline_types
+					var/list/possible_new_disciplines = subtypesof(/datum/chi_discipline) - discipline_types - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					var/has_chi_one = FALSE
 					var/has_demon_one = FALSE
 					var/how_much_usual = 0
@@ -2666,7 +2666,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							if (slotlocked)
 								break
 
-							var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+							var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 							for(var/discipline_type in possible_new_disciplines)
 								var/datum/discipline/discipline = new discipline_type
 								if (discipline.clan_restricted)

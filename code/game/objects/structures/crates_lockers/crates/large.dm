@@ -48,3 +48,13 @@
 			to_chat(user, "<span class='warning'>You need a crowbar to pry this open!</span>")
 			return FALSE //Just stop. Do nothing. Don't turn into an invisible sprite. Don't open like a locker.
 					//The large crate has no non-attack interactions other than the crowbar, anyway.
+
+//TFN ADDITION START - Paths
+/obj/structure/closet/crate/large/Destroy()
+	// 10% chance to spawn a random artifact when destroyed (random artifact initialize has 50% chance of spawning nothing)
+	if(prob(20))
+		var/turf/T = get_turf(src)
+		if(T)
+			new /obj/item/vtm_artifact/rand(T)
+	. = ..()
+//TFN ADDITION START - Paths

@@ -821,6 +821,16 @@
 	anchored = TRUE
 	pixel_w = -16
 
+/obj/reddragon
+	name = "The Red Dragon"
+	desc = "Eat some spicy chicken and 'eggroll'!"
+	icon = 'code/modules/wod13/fastfood.dmi'
+	icon_state = "reddragon"
+	plane = GAME_PLANE
+	layer = CAR_LAYER
+	anchored = TRUE
+	pixel_w = -16
+
 /obj/underplate
 	name = "underplate"
 	icon = 'code/modules/wod13/props.dmi'
@@ -1788,3 +1798,10 @@
 			burying = FALSE
 		else
 			burying = FALSE
+
+/obj/structure/shrinebox
+	name = "Box Shrine"
+	desc = "Holds offerings which bring good fortune, while incense burns."
+	icon = 'code/modules/wod13/props.dmi'
+	icon_state = "shrinebox"
+	anchored = TRUE
