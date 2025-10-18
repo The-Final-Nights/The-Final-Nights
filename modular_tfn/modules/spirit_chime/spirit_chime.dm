@@ -8,6 +8,7 @@
 	var/isplaced = FALSE
 	var/datum/proximity_monitor/advanced/spirit_chime/chime_field
 	var/ringing = FALSE
+	var/range = 10
 	COOLDOWN_DECLARE(ring_cooldown)
 
 /obj/item/spirit_chime/attackby(obj/item/W, mob/user)
@@ -26,17 +27,18 @@
 
 // Handles table placement (a bit awkwardly but wcyd)
 /obj/item/spirit_chime/dropped(mob/user)
-    . = ..()
-    var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(src)
-    if(table && !anchored)
-        if(!do_after(user, 2 SECONDS))
-            return
+	. = ..()
+	var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(src)
+	if(table && !anchored)
+		if(!do_after(user, 2 SECONDS))
+			return
 
-        anchored = TRUE
-        icon = 'modular_tfn/modules/spirit_chime/icons/spirit_chime.dmi'
-        icon_state = "bell"
-        isplaced = TRUE
-        user.visible_message(span_notice("[user] places the bell on the table."))
+		anchored = TRUE
+		icon = 'modular_tfn/modules/spirit_chime/icons/spirit_chime.dmi'
+		icon_state = "bell"
+		isplaced = TRUE
+		user.visible_message(span_notice("[user] places the bell on the table."))
+		initial_check()
 
 /obj/item/spirit_chime/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	if(!proximity_flag)
@@ -93,8 +95,10 @@
 /obj/item/spirit_chime/Initialize()
 	. = ..()
 	// Sets up a field with a range of 10
-	chime_field = new /datum/proximity_monitor/advanced/spirit_chime(src, 10)
+	chime_field = new /datum/proximity_monitor/advanced/spirit_chime(src, range)
 	chime_field.recalculate_field(full_recalc = TRUE)
+	if(!ringing)
+		initial_check()
 
 /obj/item/spirit_chime/Destroy()
 	ringing = FALSE
@@ -186,15 +190,22 @@
 
 /obj/item/spirit_chime/proc/ring()
 	playsound(src, 'modular_tfn/modules/spirit_chime/sound/spirit_chime_ring.ogg', 50, FALSE)
-	visible_message(span_notice("The chime rings out!"), vision_distance = 10)
+	visible_message(span_notice("The chime rings out!"), vision_distance = range)
+
+/obj/item/spirit_chime/proc/initial_check()
+	for(var/mob/M in range(range, src))
+		if(valid_target(M) && !(M in chime_field.tracked_mobs))
+			chime_field.tracked_mobs |= M
+		if(chime_field.tracked_mobs.len > 0 && !ringing)
+			ringing = TRUE
+			COOLDOWN_START(src, ring_cooldown, 0 SECONDS)
+			START_PROCESSING(SSprocessing, src)
 
 /proc/valid_target(atom/movable/target)
 	if(istype(target, /mob/dead/observer))
 		var/mob/dead/observer/ghost = target
-		// if((ghost.mind && !ghost.aghosted) || isavatar(ghost)) // Checks only for ghosts of the dead & Auspex 5 avatars (Commented out to allow observers for now)
-		if(!ghost.aghosted || isavatar(ghost)) // Checks only for ghosts of the dead, observers, & Auspex 5 avatars
+		if((ghost.mind && !ghost.aghosted) || isavatar(ghost)) // Checks only for ghosts of the dead & Auspex 5 avatars
 			return TRUE
-		// if(ghost.mind && ghost.orbiting) // Checks for orbiting ghosts (Commented out to allow observers for now)
-		if(ghost.orbiting) // Checks for orbiting ghosts
+		if(ghost.mind && ghost.orbiting) // Checks for orbiting ghosts
 			return TRUE
 	return FALSE
