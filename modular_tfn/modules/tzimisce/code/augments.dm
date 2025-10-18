@@ -7,7 +7,7 @@
 	wound_bonus = 5
 	bare_wound_bonus = 15
 
-  /obj/item/organ/cyberimp/arm/tzimisce/blunt
+/obj/item/organ/cyberimp/arm/tzimisce/blunt
 	name = "blunt armblade implant"
 	desc = "A concealed crude bone blade."
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/blunt)
