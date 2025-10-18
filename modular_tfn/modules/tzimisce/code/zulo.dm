@@ -28,7 +28,7 @@
 	H.undershirt = "Nude"
 	H.underwear = "Nude"
 	H.socks = "Nude"
-	old_appearance = st_get_stat(STAT_APPEARANCE)
+	old_appearance = H.st_get_stat(STAT_APPEARANCE)
 	H.st_add_stat_mod(STAT_STRENGTH, 3, "Zulo")
 	H.st_add_stat_mod(STAT_STAMINA, 3, "Zulo")
 	H.st_add_stat_mod(STAT_DEXTERITY, 3, "Zulo")
