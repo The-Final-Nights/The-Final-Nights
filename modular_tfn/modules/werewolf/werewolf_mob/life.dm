@@ -5,19 +5,19 @@
 
 	switch(auspice.tribe.name)
 		if("Galestalkers", "Ghost Council", "Hart Wardens", "Get of Fenris", "Black Furies", "Silent Striders", "Red Talons", "Silver Fangs", "Stargazers", "Corax")
-			if(istype(get_area(src), /area/vtm/forest))
+			if(istype(get_area(src), /area/vtm/forest/caves) || istype(get_area(src), /area/vtm/forest))
 				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
 
 		if("Bone Gnawers", "Children of Gaia", "Shadow Lords", "Corax")
-			if(istype(get_area(src), /area/vtm/interior/cog/caern))
+			if(istype(get_area(src), /area/vtm/interior/cog/caern) || istype(get_area(src), /area/vtm/interior/cog/pantry))
 				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
 
 		if("Glass Walkers", "Corax")
-			if(istype(get_area(src), /area/vtm/interior/glasswalker))
+			if(istype(get_area(src), /area/vtm/interior/glasswalker) || istype(get_area(src), /area/vtm/interior/techshop))
 				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
 
 		if("Black Spiral Dancers")
-			if(istype(get_area(src), /area/vtm/interior/endron_facility))
+			if(istype(get_area(src), /area/vtm/interior/endron_facility/restricted) || istype(get_area(src), /area/vtm/interior/wyrm_corrupted))
 				SEND_SIGNAL(SSmasquerade, COMSIG_PLAYER_MASQUERADE_REINFORCE, src)
 
 
