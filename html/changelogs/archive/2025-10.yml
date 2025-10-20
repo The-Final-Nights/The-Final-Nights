@@ -70,3 +70,8 @@
   - map: new occult item / spellbook shop added in the Chantry
   darkincarnate:
   - qol: change camarilla badge names
+2025-10-19:
+  TheTrueSilverRat:
+  - qol: Ghouls can be fed on without losing BP
+  - qol: Paleness is based on Blood volume with modifers instead of blood pool
+  - code_imp: Adjusted blood volume levels to make it less likely to die and stuff
