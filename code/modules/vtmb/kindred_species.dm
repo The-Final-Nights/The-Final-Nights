@@ -313,13 +313,13 @@
 	if(!iskindred(owner))
 		return
 	var/mob/living/carbon/human/vampire = owner
-	if(vampire.bloodpool < 2)
+	if(vampire.bloodpool < 1)
 		to_chat(owner, span_warning("You don't have enough <b>BLOOD</b> to do that!"))
 		return
 	if(isanimal(vampire.pulling))
 		var/mob/living/animal = vampire.pulling
 		animal.bloodpool = min(animal.maxbloodpool, animal.bloodpool+2)
-		vampire.bloodpool = max(0, vampire.bloodpool-2)
+		vampire.bloodpool = max(0, vampire.bloodpool-1)
 		animal.adjustBruteLoss(-25)
 		animal.adjustFireLoss(-25)
 		return
@@ -343,7 +343,7 @@
 	message_admins("[ADMIN_LOOKUPFLW(vampire)] has fed [ADMIN_LOOKUPFLW(grabbed_victim)] their blood!")
 	owner.visible_message(span_warning("[owner] feeds [grabbed_victim] with their own blood!"), span_notice("You successfully feed [grabbed_victim] with your own blood."))
 
-	vampire.bloodpool = max(0, vampire.bloodpool-2)
+	vampire.bloodpool = max(0, vampire.bloodpool-1)
 
 	var/mob/living/carbon/human/childe = grabbed_victim
 	var/mob/living/carbon/human/sire = vampire
@@ -355,7 +355,8 @@
 		var/datum/wound/W = pick(childe.all_wounds)
 		W.remove_wound()
 	childe.adjustFireLoss(-25, TRUE)
-	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+(2 * sire.bloodquality))
+	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+(1 * sire.bloodquality))
+	childe.blood_volume = min(BLOOD_VOLUME_NORMAL, childe.blood_volume+50)
 	childe.drunked_of |= "[sire.dna.real_name]"
 	childe.mind?.ingested_blood = sire
 

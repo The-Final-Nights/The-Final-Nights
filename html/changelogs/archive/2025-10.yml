@@ -45,3 +45,33 @@
   - rscadd: Reworked Dominate and Presence to be TTRPG accurate
   - rscdel: Removed Voice of Domination from Dominate since it is not lore accurate
       at all
+2025-10-16:
+  Hawk-v3:
+  - balance: Non-BSD Fera can use any totem that isn't a BSD one.
+  - balance: BSD Garou can only use their own totem.
+  SELFHELL:
+  - admin: Custom OBJ Selection for FIRST + NG Teams
+  TheTrueSilverRat:
+  - refactor: Reworked Temporis 4 to be proper lore-accurate ish Co-Walker
+  chazzyjazzy, blitzarde:
+  - rscadd: Adds Thaumaturgy paths 'Lure of Flames' and 'Path of Levinbolt', unlocked
+      via collecting and accruing research into Blood Magic by collecting spellbooks,
+      identifying artifacts, and turning them into the Chantry Archives
+  - rscadd: Mitigates occult artifact 'stacking' by introducing exponential decay
+      for each subsequent artifact collected
+  - rscadd: Tremeres, when researching blood magic, can gift each other their research
+      if they so wish, or, if they anger the Regent, have their research seized from
+      them
+  - rscadd: Artifacts now spawn in wooden crates found throughout the map, Path Spellbooks
+      can be found in random bookshelves
+  - rscadd: New Artifact 'Bloodstone' has been added, allowing a Thaumaturge to track
+      its location when identified
+  - bugfix: the 'odious chalice' artifact no longer has infinite blood
+  - map: new occult item / spellbook shop added in the Chantry
+  darkincarnate:
+  - qol: change camarilla badge names
+2025-10-19:
+  TheTrueSilverRat:
+  - qol: Ghouls can be fed on without losing BP
+  - qol: Paleness is based on Blood volume with modifers instead of blood pool
+  - code_imp: Adjusted blood volume levels to make it less likely to die and stuff

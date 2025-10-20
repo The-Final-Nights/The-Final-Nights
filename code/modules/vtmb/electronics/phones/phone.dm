@@ -661,14 +661,14 @@
 	exchange_num = 267
 	contact_networks_pre_init = list(
 		list(NETWORK_ID = MILLENIUM_TOWER_NETWORK, OUR_ROLE = "C.E.O.", USE_JOB_TITLE = FALSE)
-		, list(NETWORK_ID = VAMPIRE_LEADER_NETWORK, OUR_ROLE = "Millenium Group C.E.O.", USE_JOB_TITLE = FALSE)
+		, list(NETWORK_ID = VAMPIRE_LEADER_NETWORK, OUR_ROLE = "TransAmerica Corporation C.E.O.", USE_JOB_TITLE = FALSE)
 		)
 
 /obj/item/vamp/phone/seneschal
 	exchange_num = 267
 	contact_networks_pre_init = list(
-		list(NETWORK_ID = MILLENIUM_TOWER_NETWORK, OUR_ROLE = "Vice President", USE_JOB_TITLE = FALSE)
-		, list(NETWORK_ID = VAMPIRE_LEADER_NETWORK, OUR_ROLE = "Millenium Group Vice President", USE_JOB_TITLE = FALSE)
+		list(NETWORK_ID = MILLENIUM_TOWER_NETWORK, OUR_ROLE = "C.O.O.", USE_JOB_TITLE = FALSE)
+		, list(NETWORK_ID = VAMPIRE_LEADER_NETWORK, OUR_ROLE = "TransAmerica Corporation C.O.O", USE_JOB_TITLE = FALSE)
 		)
 
 /obj/item/vamp/phone/sheriff
