@@ -24,7 +24,7 @@
 
 /datum/discipline_power/animalism/summon_rat/activate()
 	. = ..()
-	var/limit = min(2, level) + owner.social + owner.additional_social + owner.more_companions - 1
+	var/limit = min(2, level) + owner.st_get_stat(STAT_LEADERSHIP)
 	if(HAS_TRAIT(owner, TRAIT_ANIMAL_REPULSION))
 		limit = max(1,limit-2)
 	if(length(owner.beastmaster) >= limit)
@@ -59,7 +59,7 @@
 
 /datum/discipline_power/animalism/summon_cat/activate()
 	. = ..()
-	var/limit = min(2, level) + owner.social + owner.additional_social + owner.more_companions - 1
+	var/limit = min(2, level) + owner.st_get_stat(STAT_LEADERSHIP)
 	if(HAS_TRAIT(owner, TRAIT_ANIMAL_REPULSION))
 		limit = max(1,limit-2)
 	if(length(owner.beastmaster) >= limit)
@@ -105,7 +105,7 @@
 
 /datum/discipline_power/animalism/summon_wolf/activate()
 	. = ..()
-	var/limit = min(2, level) + owner.social + owner.additional_social + owner.more_companions - 1
+	var/limit = min(2, level) + owner.st_get_stat(STAT_LEADERSHIP)
 	if(HAS_TRAIT(owner, TRAIT_ANIMAL_REPULSION))
 		limit = max(1,limit-2)
 	if(length(owner.beastmaster) >= limit)
@@ -139,7 +139,7 @@
 
 /datum/discipline_power/animalism/summon_bat/activate()
 	. = ..()
-	var/limit = min(2, level) + owner.social + owner.additional_social + owner.more_companions - 1
+	var/limit = min(2, level) + owner.st_get_stat(STAT_LEADERSHIP)
 	if(HAS_TRAIT(owner, TRAIT_ANIMAL_REPULSION))
 		limit = max(1,limit-2)
 	if(length(owner.beastmaster) >= limit)

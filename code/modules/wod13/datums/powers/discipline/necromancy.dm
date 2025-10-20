@@ -76,7 +76,7 @@
 /datum/discipline_power/necromancy/ethereal_horde/activate()
 	. = ..()
 
-	var/limit = 2 + owner.social + owner.more_companions - 1
+	var/limit = 2 + owner.st_get_stat(STAT_LEADERSHIP)
 	var/diff = limit - length(owner.beastmaster)
 	if(diff <= 0)
 		to_chat(owner, span_warning("The vitae cools - you cannot extend your will to any more followers."))
@@ -121,22 +121,39 @@
 	. = ..()
 
 	if(isavatar(target))
-		to_chat(owner, span_warning("This spirit is yet linked to a corporeal form.")) //can't suck from non-ghosts
+		to_chat(owner, span_warning("This spirit is yet linked to a corporeal form.")) // cant absorb auspex ghosts
 		return
+
 	if (isobserver(target))
+		var/mob/dead/observer/ghost = target
 		to_chat(target, span_notice("[owner] siphons your plasm; [owner.p_they()] steal from your being to sustain [owner.p_their()] own."))
-		to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b>."))
-		owner.bloodpool = min(owner.bloodpool + 1, owner.maxbloodpool) //1 point per ghost sip.
+
+		if(!ghost.soul_taken)
+			to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b> and <b>A SOUL</b>."))
+			owner.bloodpool = min(owner.bloodpool + 1, owner.maxbloodpool)
+			if(isliving(owner))
+				owner.collected_souls += 1
+				to_chat(owner, span_cult("You absorb the soul of the departed into your necromantic grimoire. It's essence can now assist you in your studies from beyond the Shroud..."))
+
+			ghost.soul_taken = TRUE
+		else
+			to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b>, but its soul has already slipped away."))
+			owner.bloodpool = min(owner.bloodpool + 1, owner.maxbloodpool)
 		return
+
 	if (isliving(target) && target.stat == DEAD)
 		var/mob/living/dusted = target
 		owner.visible_message(span_warning("[owner] motions towards [target]."))
 		dusted.visible_message(span_danger("[target]'s body dissolves into dust before your very eyes!"))
-		to_chat(owner, span_warning("You've absorbed the body's residual lifeforce. You gain <b>BLOOD</b>."))
+		to_chat(owner, span_warning("You've absorbed the body's residual lifeforce. You gain <b>BLOOD</b> and <b>A SOUL</b>."))
 		dusted.dust()
-		owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool) //2 points per body. works on simplemobs for now.
-	else
-		to_chat(owner, span_warning("Death has not yet claimed this one - there is nothing to pillage."))
+		owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool) // corpses = 2 blood
+		if(isliving(owner))
+			owner.collected_souls += 1
+			to_chat(owner, span_cult("You absorb the soul of the departed into your necromantic grimoire. It's essence can now assist you in your studies from beyond the Shroud..."))
+		return
+
+	to_chat(owner, span_warning("Death has not yet claimed this one - there is nothing to pillage."))
 
 
 //COLD OF THE GRAVE
@@ -231,7 +248,7 @@
 
 /datum/discipline_power/necromancy/shambling_horde/activate(mob/living/target)
 	. = ..()
-	var/limit = 2 + owner.social + owner.more_companions - 1
+	var/limit = 2 + owner.st_get_stat(STAT_LEADERSHIP)
 	var/diff = limit - length(owner.beastmaster)
 	if (target.stat == DEAD)
 		if(diff <= 0)
@@ -322,7 +339,7 @@
 		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "Necromancy", rune_names)
 		if(!ritual)
 			return
-		if(do_after(H, 3 SECONDS * max(1, 5 - H.mentality), H))
+		if(do_after(H, 3 SECONDS * max(1, 5 - H.st_get_stat(STAT_OCCULT)), H))
 			var/ritual_type = rune_names[ritual]
 			new ritual_type(H.loc)
 			H.bloodpool = max(H.bloodpool - 2, 0)
@@ -338,7 +355,7 @@
 		var/ritual = tgui_input_list(owner, "Choose rune to draw:", "necroritualism", list("???"))
 		if(!ritual)
 			return
-		if(do_after(H, 30*max(1, 5-H.mentality), H))
+		if(do_after(H, 30*max(1, 5-H.st_get_stat(STAT_OCCULT)), H))
 			var/rune = pick(rune_names)
 			new rune(H.loc)
 			H.bloodpool = max(H.bloodpool - 2, 0)

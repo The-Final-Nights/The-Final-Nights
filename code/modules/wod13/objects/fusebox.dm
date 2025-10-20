@@ -21,7 +21,7 @@
 	else
 		icon_state = "fusebox"
 
-/obj/fusebox/proc/check_damage(mob/living/user)
+/obj/fusebox/proc/check_damage(mob/living/user, owner_immune = FALSE)
 	if(damaged > 100 && !open)
 		open = TRUE
 		var/area/power_area = get_area(src)
@@ -33,7 +33,8 @@
 		for(var/obj/machinery/light/L in power_area)
 			L.update(FALSE)
 		playsound(loc, 'code/modules/wod13/sounds/explode.ogg', 100, TRUE)
-		user?.electrocute_act(50, src, siemens_coeff = 1, flags = NONE)
+		if(!owner_immune)
+			user?.electrocute_act(50, src, siemens_coeff = 1, flags = NONE)
 	update_icon()
 
 /obj/fusebox/attackby(obj/item/I, mob/living/user, params)

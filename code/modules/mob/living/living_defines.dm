@@ -181,23 +181,6 @@
 
 	var/total_cleaned = 0
 
-	var/physique = 1
-	var/dexterity = 1
-	var/social = 1
-	var/mentality = 1
-	var/lockpicking = 0
-	var/athletics = 0
-	var/blood = 1
-
-	var/additional_physique = 0
-	var/additional_dexterity = 0
-	var/additional_mentality = 0
-	var/additional_social = 0
-	var/additional_blood = 0
-	var/additional_lockpicking = 0
-	var/additional_athletics = 0
-	var/more_companions = 0
-
 	var/info_known = INFO_KNOWN_UNKNOWN
 
 	var/last_message
@@ -228,6 +211,12 @@
 	var/mysticism_knowledge = FALSE
 
 	var/necromancy_knowledge = FALSE
+
+// TFN ADDITION START - Paths
+	var/research_points = 0
+	var/list/artifact_owned_amounts = list()// allows for the tracking of multiple artifacts to prevent linear 'stacking', instead introducing exponential decay
+	var/collected_souls = 0
+// TFN ADDITION END - Paths
 
 	var/elysium_checks = 0
 	var/bloodhunted = FALSE
@@ -315,3 +304,5 @@
 
 	//List for icons created for obfuscated mobs
 	var/list/obf_icons // TFN ADDITION - Adding an Obfuscate Indicator
+
+	var/datum/storyteller_stats/storyteller_stat_holder

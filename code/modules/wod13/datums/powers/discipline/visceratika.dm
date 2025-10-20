@@ -35,6 +35,7 @@
 	level = 1
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE
 	cooldown_length = 1 SECONDS
+	vitae_cost = 1
 
 /datum/discipline_power/visceratika/whispers_of_the_chamber/activate()
 	. = ..()
@@ -50,10 +51,10 @@
 /datum/discipline_power/visceratika/scry_the_hearthstone
 	name = "Scry the Hearthstone"
 	desc = "Sense the exact locations of individuals around you."
+	willpower_cost = 1
 
 	level = 2
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_SEE
-	vitae_cost = 1
 	toggled = TRUE
 	var/area/starting_area
 
@@ -85,7 +86,7 @@
 
 	level = 3
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE | DISC_CHECK_LYING
-
+	vitae_cost = 2
 	cancelable = TRUE
 	duration_length = 15 SECONDS
 	cooldown_length = 10 SECONDS
@@ -122,7 +123,7 @@
 
 	level = 5
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_CAPABLE | DISC_CHECK_IMMOBILE
-
+	vitae_cost = 2
 	violates_masquerade = TRUE
 
 	cancelable = TRUE

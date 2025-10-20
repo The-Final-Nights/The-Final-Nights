@@ -98,7 +98,6 @@
 				masquerade_level = "'m danger to the Masquerade and my own kind."
 		dat += "The Camarilla thinks I[masquerade_level]<BR>"
 		var/humanity = "I'm out of my mind."
-
 		if(!host.clan.is_enlightened)
 			switch(host.morality_path.score)
 				if(8 to 10)
@@ -136,13 +135,6 @@
 			var/clan_leader_number = isnull(clan_leader_contact.number) ? "unknown" : clan_leader_contact.number
 			dat += " My clan leader is [clan_leader_contact.name]. Their phone number is [clan_leader_number].<BR>"
 
-		dat += "<b>Physique</b>: [host.physique] + [host.additional_physique]<BR>"
-		dat += "<b>Dexterity</b>: [host.dexterity] + [host.additional_dexterity]<BR>"
-		dat += "<b>Social</b>: [host.social] + [host.additional_social]<BR>"
-		dat += "<b>Mentality</b>: [host.mentality] + [host.additional_mentality]<BR>"
-		dat += "<b>Cruelty</b>: [host.blood] + [host.additional_blood]<BR>"
-		dat += "<b>Lockpicking</b>: [host.lockpicking] + [host.additional_lockpicking]<BR>"
-		dat += "<b>Athletics</b>: [host.athletics] + [host.additional_athletics]<BR>"
 		if(host.hud_used)
 			dat += "<b>Known disciplines:</b><BR>"
 			for(var/datum/action/discipline/D in host.actions)
@@ -285,14 +277,13 @@
 			BD.dna.species.punchdamagehigh = BD.dna.species.punchdamagehigh+5
 			BD.physiology.armor.melee = BD.physiology.armor.melee+15
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet+15
-			BD.dexterity = BD.dexterity+BD.bloodquality
-			BD.athletics = BD.athletics+BD.bloodquality
-			BD.lockpicking = BD.lockpicking+BD.bloodquality
+			BD.st_add_stat_mod(STAT_DEXTERITY, BD.bloodquality, "blood_power")
+			BD.st_add_stat_mod(STAT_ATHLETICS, BD.bloodquality, "blood_power")
+			BD.st_add_stat_mod(STAT_LARCENY, BD.bloodquality, "blood_power")
 			if(!HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				ADD_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
 			BD.update_blood_hud()
-			spawn(100+BD.discipline_time_plus+BD.bloodpower_time_plus)
-				end_bloodpower()
+			addtimer(CALLBACK(src, PROC_REF(end_bloodpower)), (1 SCENES + BD.discipline_time_plus + BD.bloodpower_time_plus))
 		else
 			SEND_SOUND(BD, sound('code/modules/wod13/sounds/need_blood.ogg', 0, 0, 75))
 			to_chat(BD, span_warning("You don't have enough <b>BLOOD</b> to become more powerful."))
@@ -307,9 +298,9 @@
 			BD.physiology.armor.bullet = BD.physiology.armor.bullet-15
 			if(HAS_TRAIT(BD, TRAIT_IGNORESLOWDOWN))
 				REMOVE_TRAIT(BD, TRAIT_IGNORESLOWDOWN, SPECIES_TRAIT)
-		BD.dexterity = BD.dexterity-BD.bloodquality
-		BD.athletics = BD.athletics-BD.bloodquality
-		BD.lockpicking = BD.lockpicking-BD.bloodquality
+		BD.st_remove_stat_mod(STAT_DEXTERITY, "blood_power")
+		BD.st_remove_stat_mod(STAT_ATHLETICS, "blood_power")
+		BD.st_remove_stat_mod(STAT_LARCENY, "blood_power")
 
 /datum/action/give_vitae
 	name = "Give Vitae"
@@ -322,13 +313,13 @@
 	if(!iskindred(owner))
 		return
 	var/mob/living/carbon/human/vampire = owner
-	if(vampire.bloodpool < 2)
+	if(vampire.bloodpool < 1)
 		to_chat(owner, span_warning("You don't have enough <b>BLOOD</b> to do that!"))
 		return
 	if(isanimal(vampire.pulling))
 		var/mob/living/animal = vampire.pulling
 		animal.bloodpool = min(animal.maxbloodpool, animal.bloodpool+2)
-		vampire.bloodpool = max(0, vampire.bloodpool-2)
+		vampire.bloodpool = max(0, vampire.bloodpool-1)
 		animal.adjustBruteLoss(-25)
 		animal.adjustFireLoss(-25)
 		return
@@ -352,7 +343,7 @@
 	message_admins("[ADMIN_LOOKUPFLW(vampire)] has fed [ADMIN_LOOKUPFLW(grabbed_victim)] their blood!")
 	owner.visible_message(span_warning("[owner] feeds [grabbed_victim] with their own blood!"), span_notice("You successfully feed [grabbed_victim] with your own blood."))
 
-	vampire.bloodpool = max(0, vampire.bloodpool-2)
+	vampire.bloodpool = max(0, vampire.bloodpool-1)
 
 	var/mob/living/carbon/human/childe = grabbed_victim
 	var/mob/living/carbon/human/sire = vampire
@@ -364,7 +355,8 @@
 		var/datum/wound/W = pick(childe.all_wounds)
 		W.remove_wound()
 	childe.adjustFireLoss(-25, TRUE)
-	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+(2 * sire.bloodquality))
+	childe.bloodpool = min(childe.maxbloodpool, childe.bloodpool+(1 * sire.bloodquality))
+	childe.blood_volume = min(BLOOD_VOLUME_NORMAL, childe.blood_volume+50)
 	childe.drunked_of |= "[sire.dna.real_name]"
 	childe.mind?.ingested_blood = sire
 
@@ -572,7 +564,15 @@
 		return
 
 	var/possible_disciplines = teacher_prefs.discipline_types - student_prefs.discipline_types
-	var/teaching_discipline = input(teacher, "What Discipline do you want to teach [student.name]?", "Discipline Selection") as null|anything in possible_disciplines
+
+	// remove path and its subtypes
+	var/list/filtered_disciplines = list()
+	for (var/D in possible_disciplines)
+		if (!ispath(D, /datum/discipline/path))
+			filtered_disciplines += D
+
+
+	var/teaching_discipline = input(teacher, "What Discipline do you want to teach [student.name]?", "Discipline Selection") as null|anything in filtered_disciplines
 
 	if (teaching_discipline)
 		var/datum/discipline/teacher_discipline = teacher_species.get_discipline(teaching_discipline)

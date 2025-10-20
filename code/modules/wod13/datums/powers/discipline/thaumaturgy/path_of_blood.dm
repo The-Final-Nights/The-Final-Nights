@@ -31,7 +31,7 @@
 /datum/discipline_power/thaumaturgy/activate(atom/target)
 	. = ..()
 	//Thaumaturgy powers have different effects based off the amount of successes. I dont want to copy paste the code, so this is being put here.
-	success_count = SSroll.storyteller_roll(dice = owner.get_total_mentality(), difficulty = (level + 3), numerical = TRUE, mobs_to_show_output = owner, force_chat_result = TRUE)
+	success_count = SSroll.storyteller_roll(dice = owner.st_get_stat(STAT_PERMANENT_WILLPOWER), difficulty = (level + 3), numerical = TRUE, mobs_to_show_output = owner, force_chat_result = TRUE)
 	if(success_count < 0)
 		thaumaturgy_botch_effect()
 		return TRUE
@@ -54,7 +54,7 @@
 			owner.IgniteMob()
 		if(3)
 			to_chat(owner, span_userdanger("You feel slightly less competent!"))
-			owner.mentality = max(owner.mentality - 1, 1)
+			owner.st_add_stat_mod(STAT_TEMPORARY_WILLPOWER, -1, "thaummaturgy_failure")
 
 //------------------------------------------------------------------------------------------------
 
@@ -214,7 +214,7 @@
 	if(!set_time)
 		set_time = 1
 
-	chosen_generation = max(4, chosen_generation) //Lowest im gonna let you go is 4 bucko
+	chosen_generation = max(BLOOD_POTENCY_GENERATION, chosen_generation) //Lowest im gonna let you go is BLOOD_POTENCY_GENERATION bucko
 	owner.apply_status_effect(/datum/status_effect/blood_of_potency, chosen_generation, set_time INGAME_HOURS)
 	activated = TRUE
 
@@ -251,11 +251,21 @@
 
 	owner.Beam(BeamTarget = target, icon_state = "drainbeam", time = 1 SECONDS)
 	target.visible_message(span_danger("[target]'s blood streams out in a torrent towards [owner]!"), span_userdanger("Your blood streams out in a torrent towards [owner]!"))
-	var/blood_taken = clamp(success_count, 0, target.bloodpool)
-	target.bloodpool = max(target.bloodpool - blood_taken, 0)
+	if(iskindred(target) || isghoul(target))
+		var/blood_taken = clamp(success_count, 0, target.bloodpool)
+		target.bloodpool = max(target.bloodpool - blood_taken, 0)
 
-	var/blood_gained = blood_taken * max(1, target.bloodquality-1)
-	owner.bloodpool = min(owner.bloodpool + blood_gained, owner.maxbloodpool)
+		var/blood_gained = blood_taken * max(1, target.bloodquality-1)
+		owner.bloodpool = min(owner.bloodpool + blood_gained, owner.maxbloodpool)
+	else
+		var/blood_coefficient = (5 / target.bloodpool)
+		if(HAS_TRAIT(target, TRAIT_POTENT_BLOOD))
+			blood_coefficient *= 0.5
+		var/blood_taken = clamp(success_count, 0, target.bloodpool)
+		target.blood_volume = max (0, (target.blood_volume - (blood_taken * (70*blood_coefficient))))
+
+		var/blood_gained = blood_taken * max(1, target.bloodquality - 1)
+		owner.bloodpool = min(owner.bloodpool + blood_gained, owner.maxbloodpool)
 
 //------------------------------------------------------------------------------------------------
 
