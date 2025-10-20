@@ -15739,11 +15739,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/baali)
-"dJJ" = (
-/obj/structure/table/wood/fancy/orange,
-/obj/structure/table/wood/fancy/orange,
-/turf/open/floor/plating/granite/black,
-/area/vtm/interior/strip)
 "dJL" = (
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 5
@@ -43665,7 +43660,8 @@
 /obj/structure/railing/metal,
 /obj/structure/chair/comfy{
 	color = "#5aa2fa";
-	dir = 4
+	dir = 4;
+	plane = -2
 	},
 /turf/open/floor/glass/reinforced,
 /area/vtm/interior/strip)
@@ -57743,7 +57739,7 @@
 /turf/open/floor/carpet/blue,
 /area/vtm/clinic/haven)
 "nkr" = (
-/obj/structure/table/wood/fancy/orange,
+/obj/structure/table/wood/fancy/royalblack,
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
 "nky" = (
@@ -136032,7 +136028,7 @@ usX
 sZR
 mWO
 wpD
-dJJ
+rzz
 crl
 mWO
 mWO
