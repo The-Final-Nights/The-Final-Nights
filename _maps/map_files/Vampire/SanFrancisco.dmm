@@ -1755,6 +1755,13 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior/cog/pantry)
+"auk" = (
+/obj/effect/turf_decal/siding/white/corner{
+	color = "#636363";
+	dir = 1
+	},
+/turf/open/floor/plating/vampplating,
+/area/vtm/interior/strip)
 "aul" = (
 /obj/structure/vampfence/corner/rich{
 	dir = 8;
@@ -19986,6 +19993,10 @@
 /obj/structure/railing/metal{
 	dir = 1
 	},
+/obj/effect/turf_decal/siding/white{
+	dir = 1;
+	color = "#636363"
+	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/strip)
 "eJu" = (
@@ -28521,19 +28532,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
-"gDF" = (
-/obj/effect/turf_decal/siding/white{
-	color = "#6e635a"
-	},
-/obj/structure/vampdoor{
-	lock_id = "strip";
-	locked = 1;
-	lockpick_difficulty = 4
-	},
-/turf/open/floor/plating/toilet{
-	color = "#919191"
-	},
-/area/vtm/interior/strip)
 "gDP" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/dirt,
@@ -60047,15 +60045,15 @@
 /turf/open/floor/plating/circled,
 /area/vtm/clinic)
 "nKW" = (
-/obj/effect/turf_decal/siding/white{
-	color = "#6e635a";
-	dir = 4
-	},
 /obj/structure/vampdoor{
 	dir = 4;
 	lock_id = "strip";
 	locked = 1;
 	lockpick_difficulty = 4
+	},
+/obj/effect/turf_decal/siding/white{
+	color = "#636363";
+	dir = 4
 	},
 /turf/open/floor/plating/toilet{
 	color = "#919191"
@@ -68798,6 +68796,10 @@
 	dir = 4;
 	lock_id = "strip"
 	},
+/obj/effect/turf_decal/siding/white{
+	color = "#636363";
+	dir = 8
+	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/strip)
 "pLw" = (
@@ -70033,6 +70035,15 @@
 	icon_state = "stone4"
 	},
 /area/vtm/sewer/nosferatu_warren)
+"pZR" = (
+/obj/machinery/light/prince{
+	pixel_y = 32;
+	light_power = 0.45;
+	name = "dim light fixture"
+	},
+/obj/structure/fluff/hedge,
+/turf/open/floor/plating/granite/black,
+/area/vtm/interior/strip)
 "pZS" = (
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
@@ -72434,6 +72445,13 @@
 	},
 /turf/open/floor/plating/roofwalk,
 /area/vtm/interior/bianchiBank)
+"qCH" = (
+/obj/effect/turf_decal/siding/white{
+	color = "#636363";
+	dir = 8
+	},
+/turf/open/floor/plating/vampplating,
+/area/vtm/interior/strip)
 "qCM" = (
 /obj/effect/turf_decal/siding/white/corner{
 	color = "#636363";
@@ -103481,7 +103499,9 @@
 /obj/structure/railing/metal{
 	dir = 6
 	},
-/obj/machinery/jukebox,
+/obj/machinery/jukebox{
+	plane = -2
+	},
 /turf/open/floor/pod/light,
 /area/vtm/interior/strip)
 "xQA" = (
@@ -135103,10 +135123,10 @@ kxu
 uJO
 buN
 sZR
-wTM
-mWO
-mWO
-mWO
+pZR
+yfB
+yfB
+yfB
 sZR
 vPx
 mWO
@@ -135510,7 +135530,7 @@ hQE
 xJT
 nzY
 wBJ
-gGF
+mWO
 sZR
 mWO
 mWO
@@ -135712,7 +135732,7 @@ hQE
 qxD
 llg
 uJO
-crl
+gGF
 sZR
 wTM
 mWO
@@ -135914,7 +135934,7 @@ hQE
 qxD
 wAh
 uJO
-gnp
+crl
 sZR
 psZ
 rzz
@@ -136116,8 +136136,8 @@ hQE
 pZq
 kxu
 usX
+gnp
 sZR
-mWO
 wpD
 rzz
 crl
@@ -175089,13 +175109,13 @@ kQM
 qln
 xIi
 fyE
-fyE
-fyE
+uLX
+uLX
 fyE
 gyv
 fyE
-fyE
-fyE
+uLX
+uLX
 gnp
 gnp
 gnp
@@ -177114,8 +177134,8 @@ trP
 rQS
 sCs
 gnp
-smL
-smL
+qCH
+auk
 smL
 gTl
 xQz
@@ -177315,7 +177335,7 @@ ike
 ike
 lQb
 ike
-gDF
+uhT
 smL
 smL
 smL
