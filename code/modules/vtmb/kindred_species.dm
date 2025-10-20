@@ -168,13 +168,8 @@
 		if(panic && (host.mind.assigned_role == "Prince" || host.mind.assigned_role == "Sheriff" || host.mind.assigned_role == "Seneschal"))
 			dat += "The pincode for the panic room keypad is<b>: [panic.pincode]</b><BR>"
 		var/obj/structure/vaultdoor/pincode/bank/bankdoor = find_door_pin(/obj/structure/vaultdoor/pincode/bank)
-		if(bankdoor && (host.mind.assigned_role == "Capo"))
-			dat += "The pincode for the bank vault is <b>: [bankdoor.pincode]</b><BR>"
-		if(bankdoor && (host.mind.assigned_role == "La Squadra"))
-			if(prob(50))
-				dat += "<b>The pincode for the bank vault is: [bankdoor.pincode]</b><BR>"
-			else
-				dat += "<b>Unfortunately you don't know the vault code.</b><BR>"
+		if(bankdoor && ((host.mind.assigned_role == "Capo") || (host.mind.assigned_role == "La Squadra") || (host.mind.assigned_role == "La Famiglia")))
+			dat += "<b>The pincode for the bank vault is: [bankdoor.pincode]</b><BR>"
 
 		if(LAZYLEN(host.knowscontacts) > 0)
 			dat += "<b>I know some other of my kind in this city. Need to check my phone, there definetely should be:</b><BR>"
