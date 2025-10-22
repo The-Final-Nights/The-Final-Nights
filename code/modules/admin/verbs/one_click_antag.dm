@@ -182,44 +182,66 @@
 	return FALSE
 
 /datum/admins/proc/makeNationalGuard()
-	var/list/mob/dead/observer/candidates = pollGhostCandidates("Do you wish to be considered for a squad of National Guard soldiers?", ROLE_NATIONAL_GUARD, null)
-	var/list/mob/dead/observer/chosen = list()
-	var/mob/dead/observer/theghost = null
+	var/list/settings = list(
+		"mainsettings" = list(
+			"objective" = list("desc" = "Objective", "type" = "string", "value" = "Default Objective")
+		)
+	)
 
-	if(candidates.len)
-		var/numagents = 8
-		var/agentcount = 0
+	var/list/prefreturn = presentpreflikepicker(usr, "Customize National Guard", "Customize National Guard", Button1="Ok", width = 400, StealFocus = 1, Timeout = 0, settings=settings)
 
-		for(var/i = 0, i<numagents,i++)
-			shuffle_inplace(candidates) //More shuffles means more randoms
-			for(var/mob/j in candidates)
-				if(!j || !j.client)
-					candidates.Remove(j)
-					continue
-
-				theghost = j
-				candidates.Remove(theghost)
-				chosen += theghost
-				agentcount++
-				break
-		//Making sure we have atleast 3 National Guard agents, because less than that is kinda bad
-		if(agentcount < 1)
-			return FALSE
-
-		//Let's find the spawn locations
-		var/leader_chosen = FALSE
-		var/datum/team/national_guard/national_guard_team
-		for(var/mob/c in chosen)
-			var/mob/living/carbon/human/new_character=makeBody(c)
-			if(!leader_chosen)
-				leader_chosen = TRUE
-				var/datum/antagonist/national_guard/A = new_character.mind.add_antag_datum(/datum/antagonist/national_guard/sergeant)
-				national_guard_team = A.national_guard_team
-			else
-				new_character.mind.add_antag_datum(/datum/antagonist/national_guard,national_guard_team)
-		return TRUE
-	else
+	if (isnull(prefreturn))
 		return FALSE
+
+	if (prefreturn["button"] == 1)
+		var/list/prefs = settings["mainsettings"]
+		var/selected_objective = prefs["objective"]["value"]
+
+		var/list/mob/dead/observer/candidates = pollGhostCandidates("Do you wish to be considered for a squad of National Guard soldiers?", ROLE_NATIONAL_GUARD, null)
+		var/list/mob/dead/observer/chosen = list()
+		var/mob/dead/observer/theghost = null
+
+		if(candidates.len)
+			var/numagents = 8
+			var/agentcount = 0
+
+			for(var/i = 0, i<numagents,i++)
+				shuffle_inplace(candidates) //More shuffles means more randoms
+				for(var/mob/j in candidates)
+					if(!j || !j.client)
+						candidates.Remove(j)
+						continue
+
+					theghost = j
+					candidates.Remove(theghost)
+					chosen += theghost
+					agentcount++
+					break
+			//Making sure we have atleast 3 National Guard agents, because less than that is kinda bad
+			if(agentcount < 1)
+				return FALSE
+
+			//Let's find the spawn locations
+			var/leader_chosen = FALSE
+			var/datum/team/national_guard/national_guard_team
+			for(var/mob/c in chosen)
+				var/mob/living/carbon/human/new_character=makeBody(c)
+				if(!leader_chosen)
+					leader_chosen = TRUE
+					var/datum/antagonist/national_guard/A = new_character.mind.add_antag_datum(/datum/antagonist/national_guard/sergeant)
+					national_guard_team = A.national_guard_team
+				else
+					new_character.mind.add_antag_datum(/datum/antagonist/national_guard,national_guard_team)
+
+			var/datum/objective/missionobj = new
+			missionobj.team = selected_objective
+			missionobj.explanation_text = selected_objective
+			missionobj.completed = TRUE
+			national_guard_team.objectives += missionobj
+				// Assign the selected objective to the new team
+			return TRUE
+		else
+			return FALSE
 
 
 /datum/admins/proc/makeSwat()
@@ -291,42 +313,63 @@
 			return FALSE
 //START TFN CHANGE
 /datum/admins/proc/makeFIRST()
-	var/list/mob/dead/observer/candidates = pollGhostCandidates("Do you wish to be considered for a squad of FIRST Operators?", ROLE_FIRST_TEAM, null)
-	var/list/mob/dead/observer/chosen = list()
-	var/mob/dead/observer/theghost = null
+	var/list/settings = list(
+		"mainsettings" = list(
+			"objective" = list("desc" = "Objective", "type" = "string", "value" = "Default Objective")
+		)
+	)
 
-	if(candidates.len)
-		var/numagents = 8
-		var/agentcount = 0
+	var/list/prefreturn = presentpreflikepicker(usr, "Customize FIRST", "Customize FIRST", Button1="Ok", width = 400, StealFocus = 1, Timeout = 0, settings=settings)
 
-		for(var/i = 0, i<numagents,i++)
-			shuffle_inplace(candidates) //More shuffles means more randoms
-			for(var/mob/j in candidates)
-				if(!j || !j.client)
-					candidates.Remove(j)
-					continue
-
-				theghost = j
-				candidates.Remove(theghost)
-				chosen += theghost
-				agentcount++
-				break
-		if(agentcount < 1)
-			return FALSE
-
-		var/leader_chosen = FALSE
-		var/datum/antagonist/first_team/first_team_team
-		for(var/mob/c in chosen)
-			var/mob/living/carbon/human/new_character=makeBody(c)
-			if(!leader_chosen)
-				leader_chosen = TRUE
-				var/datum/antagonist/first_team/A = new_character.mind.add_antag_datum(/datum/antagonist/first_team/sergeant)
-				first_team_team = A.first_team_team
-			else
-				new_character.mind.add_antag_datum(/datum/antagonist/first_team,first_team_team)
-		return TRUE
-	else
+	if (isnull(prefreturn))
 		return FALSE
+
+	if (prefreturn["button"] == 1)
+		var/list/prefs = settings["mainsettings"]
+		var/selected_objective = prefs["objective"]["value"]
+
+		var/list/mob/dead/observer/candidates = pollGhostCandidates("Do you wish to be considered for a squad of FIRST Operators?", ROLE_FIRST_TEAM, null)
+		var/list/mob/dead/observer/chosen = list()
+		var/mob/dead/observer/theghost = null
+
+		if(candidates.len)
+			var/numagents = 8
+			var/agentcount = 0
+
+			for(var/i = 0, i<numagents,i++)
+				shuffle_inplace(candidates) //More shuffles means more randoms
+				for(var/mob/j in candidates)
+					if(!j || !j.client)
+						candidates.Remove(j)
+						continue
+
+					theghost = j
+					candidates.Remove(theghost)
+					chosen += theghost
+					agentcount++
+					break
+			if(agentcount < 1)
+				return FALSE
+
+			var/leader_chosen = FALSE
+			var/datum/team/first_team
+			for(var/mob/c in chosen)
+				var/mob/living/carbon/human/new_character=makeBody(c)
+				if(!leader_chosen)
+					leader_chosen = TRUE
+					var/datum/antagonist/first_team/A = new_character.mind.add_antag_datum(/datum/antagonist/first_team/sergeant)
+					first_team = A.first_team_team
+				else
+					new_character.mind.add_antag_datum(/datum/antagonist/first_team, first_team)
+
+			var/datum/objective/missionobj = new
+			missionobj.team = selected_objective
+			missionobj.explanation_text = selected_objective
+			missionobj.completed = TRUE
+			first_team.objectives += missionobj
+			return TRUE
+		else
+			return FALSE
 //END TFN CHANGE
 /datum/admins/proc/makeNukeTeam()
 	var/datum/game_mode/nuclear/temp = new

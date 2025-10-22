@@ -135,7 +135,7 @@
 		if(infor)
 			infor.Remove(C)
 
-/datum/action/take_vitae
+/datum/action/take_vitae //currently unused
 	name = "Take Vitae"
 	desc = "Take vitae from a Vampire by force."
 	button_icon_state = "ghoul"
@@ -222,7 +222,7 @@
 		H.adjustFireLoss(-2.5*level, TRUE)
 		H.adjustOxyLoss(-20*level, TRUE)
 		H.adjustToxLoss(-20*level, TRUE)
-		H.blood_volume = min(H.blood_volume + 56, 560)
+		H.blood_volume = min(H.blood_volume + 50, BLOOD_VOLUME_NORMAL)
 		button.color = "#970000"
 		animate(button, color = "#ffffff", time = 20, loop = 1)
 		if(length(H.all_wounds))

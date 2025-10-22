@@ -28,7 +28,10 @@
 		client.images -= suckbar
 	qdel(suckbar)
 	suckbar_loc = mob
-	suckbar = image('code/modules/wod13/bloodcounter.dmi', suckbar_loc, "[round(14*(mob.bloodpool/mob.maxbloodpool))]", HUD_LAYER)
+	if(iskindred(mob))
+		suckbar = image('code/modules/wod13/bloodcounter.dmi', suckbar_loc, "[round(14*(mob.bloodpool/mob.maxbloodpool))]", HUD_LAYER)
+	else if(mob.blood_volume)
+		suckbar = image('code/modules/wod13/bloodcounter.dmi', suckbar_loc, "[round(14*(mob.blood_volume/BLOOD_VOLUME_NORMAL))]", HUD_LAYER)
 	suckbar.pixel_z = 40
 	suckbar.plane = ABOVE_HUD_PLANE
 	suckbar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
@@ -49,8 +52,19 @@
 		var/mob/living/carbon/human/npc/NPC = mob
 		NPC.danger_source = null
 		mob.Stun(40) //NPCs don't get to resist
-	if(mob.bloodpool <= 1 && mob.maxbloodpool > 1)
+
+	if(mob.blood_volume <= BLOOD_VOLUME_SAFE && !combat_mode)
+		to_chat(src, span_boldwarning("[mob.name] is at the limit of how much blood they can safely take."))
+		stop_sound_channel(CHANNEL_BLOOD)
+		if(client)
+			client.images -= suckbar
+		qdel(suckbar)
+		return
+
+	if(mob.blood_volume <= BLOOD_VOLUME_BAD)
 		to_chat(src, span_warning("You feel only a sliver of <b>BLOOD</b> in your victim."))
+
+	if(mob.bloodpool <= 0)
 		if(iskindred(mob) && iskindred(src))
 			if(!mob.client || !mob.key)
 				to_chat(src, "<span class='warning'>You need [mob]'s attention to do that...</span>")
@@ -70,16 +84,24 @@
 	if(!HAS_TRAIT(src, TRAIT_BLOODY_LOVER))
 		SEND_SIGNAL(src, COMSIG_MASQUERADE_VIOLATION)
 	if(do_after(src, 30, target = mob, timed_action_flags = NONE, progress = FALSE))
-		mob.bloodpool = max(0, mob.bloodpool-1)
-		suckbar.icon_state = "[round(14*(mob.bloodpool/mob.maxbloodpool))]"
+		if(!iskindred(mob))
+			if(mob.maxbloodpool < 2 ) //small animals die instantly
+				mob.blood_volume = 0
+			else
+				var/blood_coefficient = (5 / mob.bloodpool) //most animals give less blood; very large animals/misc supernaturals/unusual humans give more
+				if(!isnpc(mob))
+					blood_coefficient *= 0.5 //Inherently Players get drained less. This is gameplay abstractions to incentivize Blooddolls.
+				if(HAS_TRAIT(mob, TRAIT_POTENT_BLOOD))
+					blood_coefficient *= 0.5 //Potent Blood is twice as valuable
+				mob.blood_volume = max(0, (mob.blood_volume - (70*blood_coefficient)))
+		else
+			mob.bloodpool = max(0, mob.bloodpool-1)
+		suckbar.icon_state = "[round(14*(mob.blood_volume/BLOOD_VOLUME_NORMAL))]"
+
+
 		if(ishuman(mob))
 			var/mob/living/carbon/human/H = mob
 			drunked_of |= "[H.dna.real_name]"
-			if(!iskindred(mob))
-				if(isnpc(src))
-					H.blood_volume = max(H.blood_volume-50, 150)
-				else // players die less from being succed
-					H.blood_volume = max(H.blood_volume-20, 150)
 			if(iscathayan(src))
 				if(mob.yang_chi > 0 || mob.yin_chi > 0)
 					if(mob.yang_chi > mob.yin_chi)
@@ -130,10 +152,11 @@
 					client.images -= suckbar
 				qdel(suckbar)
 				return
+
 		if(iskindred(mob))
 			to_chat(src, "<span class='userlove'>[mob]'s blood tastes HEAVENLY...</span>")
 			adjustBruteLoss(-25, TRUE)
-			adjustFireLoss(-6, TRUE)
+			adjustFireLoss(-10, TRUE)
 		else
 			to_chat(src, "<span class='warning'>You sip some <b>BLOOD</b> from your victim. It feels good.</span>")
 		if(HAS_TRAIT(src, TRAIT_MESSY_EATER))
@@ -151,7 +174,8 @@
 			update_damage_overlays()
 			update_health_hud()
 			update_blood_hud()
-		if(mob.bloodpool <= 0)
+
+		if(mob.bloodpool <= 0 || mob.blood_volume <= 50)
 			if(ishuman(mob))
 				var/mob/living/carbon/human/K = mob
 				if(iskindred(mob) && iskindred(src))

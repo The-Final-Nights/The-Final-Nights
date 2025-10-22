@@ -1,3 +1,5 @@
+#define COMSIG_MOB_RETURNED_TO_FORM "mob_returned_to_form" // TFN EDIT ADDITION - Reworking protean
+
 /obj/effect/proc_holder/spell/targeted/shapeshift
 	name = "Shapechange"
 	desc = "Take on the shape of another for a time to use their natural abilities. Once you've made your choice it cannot be changed."
@@ -49,7 +51,6 @@
 			if(!shapeshift_type) //If you aren't gonna decide I am!
 				shapeshift_type = pick(animal_list)
 			shapeshift_type = animal_list[shapeshift_type]
-
 		var/obj/shapeshift_holder/S = locate() in M
 		if(S)
 			M = Restore(M)
@@ -81,6 +82,12 @@
 		var/mob/living/simple_animal/hostile/hostile = shape
 		hostile.my_creator = caster
 	H = new(shape,src,caster)
+//TFN MODIFIED STUFF!!!! PR: Reworking Protean a b̶i̶t̶ lot as well as Transformations boogaloo 2.0
+	var/newgen = caster.generation
+	shape.generation = newgen
+	var/datum/action/transform_back/restore = new()
+	restore.Grant(shape)
+//END OF TFN MODIFIED STUFF!!!!
 
 	clothes_req = FALSE
 	human_req = FALSE
@@ -96,6 +103,33 @@
 
 	clothes_req = initial(clothes_req)
 	human_req = initial(human_req)
+
+///TFN MODIFIED STUFF!! Reworking Protean a b̶i̶t̶ lot as well as Transformations boogaloo 2.0
+
+//Abilities for Vampire related Shapeshifting
+
+
+/datum/action/transform_back
+	name = "Return to Form"
+	desc = "Transform back to your original form."
+	button_icon_state = "protean"
+	button_icon = 'code/modules/wod13/UI/actions.dmi'
+	background_icon_state = "gift"
+	icon_icon = 'code/modules/wod13/UI/actions.dmi'
+	check_flags = AB_CHECK_CONSCIOUS
+
+/datum/action/transform_back/Trigger(trigger_flags)
+	. = ..()
+	var/obj/shapeshift_holder/Shape = locate() in owner
+	if(Shape)
+		. =  Shape.stored
+		SEND_SIGNAL(Shape.stored, COMSIG_MOB_RETURNED_TO_FORM)
+		Shape.restore()
+	else
+		to_chat(owner, span_warning("You cannot transform back to your original form as you are already in your original form. Unless you believe it is not?"))
+
+///END OF TFN MODIFIED STUFF!!!
+
 
 /obj/effect/proc_holder/spell/targeted/shapeshift/dragon
 	name = "Dragon Form"

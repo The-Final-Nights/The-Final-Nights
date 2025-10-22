@@ -28,12 +28,20 @@
 	var/gaining_rage = TRUE
 	for(var/obj/structure/werewolf_totem/W in GLOB.totems)
 		if(W.totem_health)
-			if(W.tribe == H.auspice.tribe.name)
-				if(get_area(W) == get_area(H) && H.client)
-					gaining_rage = FALSE
-					if(H.last_gnosis_buff+300 < world.time)
-						H.last_gnosis_buff = world.time
-						adjust_gnosis(1, H, TRUE)
+			if(H.auspice.tribe.name == "Black Spiral Dancers")
+				if(W.tribe == "Black Spiral Dancers")
+					if(get_area(W) == get_area(H) && H.client)
+						gaining_rage = FALSE
+						if(H.last_gnosis_buff+300 < world.time)
+							H.last_gnosis_buff = world.time
+							adjust_gnosis(1, H, TRUE)
+			if(H.auspice.tribe.name != "Black Spiral Dancers")
+				if(W.tribe != "Black Spiral Dancers")
+					if(get_area(W) == get_area(H) && H.client)
+						gaining_rage = FALSE
+						if(H.last_gnosis_buff+300 < world.time)
+							H.last_gnosis_buff = world.time
+							adjust_gnosis(1, H, TRUE)
 	if(iscrinos(H))
 		if(H.auspice.breed_form == FORM_CRINOS)
 			gaining_rage = FALSE
