@@ -189,7 +189,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 
 /obj/item/spirit_chime/proc/ring()
-	playsound(src, 'modular_tfn/modules/spirit_chime/sound/spirit_chime_ring.ogg', 50, FALSE)
+	playsound(src, 'modular_tfn/modules/spirit_chime/sound/spirit_chime_ring.ogg', 25, FALSE)
 	visible_message(span_notice("The chime rings out!"), vision_distance = range)
 
 /obj/item/spirit_chime/proc/initial_check()
