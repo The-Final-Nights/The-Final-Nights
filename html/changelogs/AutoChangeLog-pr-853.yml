@@ -1,0 +1,5 @@
+author: "darkincarnate"
+delete-after: True
+changes:
+  - rscadd: "remove non-BSD from security, add human/kindred to other roles, larp titles, new npcs, endron car"
+  - qol: "fax machine moved"

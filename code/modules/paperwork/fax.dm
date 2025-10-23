@@ -117,7 +117,7 @@
 /obj/machinery/fax/endron
 	fax_name = "Endron International HQ"
 	fax_id = "endron"
-	special_networks = list(list(fax_name = "Pentex Corporate", fax_id = "endronadmin", color = "green", emag_needed = FALSE))
+	special_networks = list(list(fax_name = "Endron Executive Board", fax_id = "endronadmin", color = "green", emag_needed = FALSE))
 
 /obj/machinery/fax/aasimites
 	fax_name = "Chubby Lion Coffee Shop"

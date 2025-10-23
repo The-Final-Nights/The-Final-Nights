@@ -131,6 +131,7 @@
 	owner.current.fully_replace_character_name(null,"[selected_rank] [my_name] [my_surname]")
 
 /datum/antagonist/first_team/proc/forge_objectives()
+	spawn(2 SECONDS)
 	if(first_team_team)
 		objectives |= first_team_team.objectives
 

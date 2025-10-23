@@ -27,3 +27,62 @@
 2025-10-10:
   Hawk-v3:
   - bugfix: Mops aren't eaten by the janitor cart now.
+2025-10-11:
+  Hawk-v3:
+  - bugfix: Corax Crinos mirror Crinos in that both can now remove doors.
+  WhereAmO:
+  - bugfix: Lets the Lasombra enter their own haven, again.
+2025-10-14:
+  Hawk-v3:
+  - bugfix: Corax corvid form inherits trait correctly.
+  - balance: Veil healing timer now 15 minutes not 40.
+  XeonMations:
+  - bugfix: fixed kindred books appearing in the adult bookshelves
+  chazzyjazzy:
+  - bugfix: deletes graveyard zombies upon death
+2025-10-15:
+  chazzyjazzy:
+  - rscadd: Reworked Dominate and Presence to be TTRPG accurate
+  - rscdel: Removed Voice of Domination from Dominate since it is not lore accurate
+      at all
+2025-10-16:
+  Hawk-v3:
+  - balance: Non-BSD Fera can use any totem that isn't a BSD one.
+  - balance: BSD Garou can only use their own totem.
+  SELFHELL:
+  - admin: Custom OBJ Selection for FIRST + NG Teams
+  TheTrueSilverRat:
+  - refactor: Reworked Temporis 4 to be proper lore-accurate ish Co-Walker
+  chazzyjazzy, blitzarde:
+  - rscadd: Adds Thaumaturgy paths 'Lure of Flames' and 'Path of Levinbolt', unlocked
+      via collecting and accruing research into Blood Magic by collecting spellbooks,
+      identifying artifacts, and turning them into the Chantry Archives
+  - rscadd: Mitigates occult artifact 'stacking' by introducing exponential decay
+      for each subsequent artifact collected
+  - rscadd: Tremeres, when researching blood magic, can gift each other their research
+      if they so wish, or, if they anger the Regent, have their research seized from
+      them
+  - rscadd: Artifacts now spawn in wooden crates found throughout the map, Path Spellbooks
+      can be found in random bookshelves
+  - rscadd: New Artifact 'Bloodstone' has been added, allowing a Thaumaturge to track
+      its location when identified
+  - bugfix: the 'odious chalice' artifact no longer has infinite blood
+  - map: new occult item / spellbook shop added in the Chantry
+  darkincarnate:
+  - qol: change camarilla badge names
+2025-10-19:
+  TheTrueSilverRat:
+  - qol: Ghouls can be fed on without losing BP
+  - qol: Paleness is based on Blood volume with modifers instead of blood pool
+  - code_imp: Adjusted blood volume levels to make it less likely to die and stuff
+2025-10-22:
+  Hawk-v3:
+  - balance: All Garou now regain Veils around the areas their totems are, rather
+      than areas their totems used to be.
+  TheTrueSilverRat:
+  - rscadd: New gangrel protean 3 and 5
+  - rscdel: Some of the other gangrel warforms
+  - qol: Added a button to transform back in the shapeshift proc
+  - sound: added or removed sounds
+  - code_imp: Made Mist form fly
+  - rscadd: Custom Skin Color stuff alongside skin types

@@ -121,22 +121,39 @@
 	. = ..()
 
 	if(isavatar(target))
-		to_chat(owner, span_warning("This spirit is yet linked to a corporeal form.")) //can't suck from non-ghosts
+		to_chat(owner, span_warning("This spirit is yet linked to a corporeal form.")) // cant absorb auspex ghosts
 		return
+
 	if (isobserver(target))
+		var/mob/dead/observer/ghost = target
 		to_chat(target, span_notice("[owner] siphons your plasm; [owner.p_they()] steal from your being to sustain [owner.p_their()] own."))
-		to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b>."))
-		owner.bloodpool = min(owner.bloodpool + 1, owner.maxbloodpool) //1 point per ghost sip.
+
+		if(!ghost.soul_taken)
+			to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b> and <b>A SOUL</b>."))
+			owner.bloodpool = min(owner.bloodpool + 1, owner.maxbloodpool)
+			if(isliving(owner))
+				owner.collected_souls += 1
+				to_chat(owner, span_cult("You absorb the soul of the departed into your necromantic grimoire. It's essence can now assist you in your studies from beyond the Shroud..."))
+
+			ghost.soul_taken = TRUE
+		else
+			to_chat(owner, span_warning("You've slaked your Hunger on a wraith's passion. You gain <b>BLOOD</b>, but its soul has already slipped away."))
+			owner.bloodpool = min(owner.bloodpool + 1, owner.maxbloodpool)
 		return
+
 	if (isliving(target) && target.stat == DEAD)
 		var/mob/living/dusted = target
 		owner.visible_message(span_warning("[owner] motions towards [target]."))
 		dusted.visible_message(span_danger("[target]'s body dissolves into dust before your very eyes!"))
-		to_chat(owner, span_warning("You've absorbed the body's residual lifeforce. You gain <b>BLOOD</b>."))
+		to_chat(owner, span_warning("You've absorbed the body's residual lifeforce. You gain <b>BLOOD</b> and <b>A SOUL</b>."))
 		dusted.dust()
-		owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool) //2 points per body. works on simplemobs for now.
-	else
-		to_chat(owner, span_warning("Death has not yet claimed this one - there is nothing to pillage."))
+		owner.bloodpool = min(owner.bloodpool + 2, owner.maxbloodpool) // corpses = 2 blood
+		if(isliving(owner))
+			owner.collected_souls += 1
+			to_chat(owner, span_cult("You absorb the soul of the departed into your necromantic grimoire. It's essence can now assist you in your studies from beyond the Shroud..."))
+		return
+
+	to_chat(owner, span_warning("Death has not yet claimed this one - there is nothing to pillage."))
 
 
 //COLD OF THE GRAVE

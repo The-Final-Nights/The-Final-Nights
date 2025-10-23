@@ -734,7 +734,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					qdel(discipline)
 
 				if (clan.name == CLAN_NONE)
-					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					for (var/discipline_type in possible_new_disciplines)
 						var/datum/discipline/discipline = new discipline_type
 						if (discipline.clan_restricted)
@@ -751,7 +751,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "-[discipline.desc]<BR>"
 					qdel(discipline)
 
-				var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+				var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 				if (possible_new_disciplines.len && (player_experience >= 10))
 					dat += "<a href='byond://?_src_=prefs;preference=newghouldiscipline;task=input'>Learn a new Discipline (10)</a><BR>"
 
@@ -895,8 +895,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 				dat += "<h3>[make_font_cool("SKIN")]</h3>"
 
-				dat += "<a href='byond://?_src_=prefs;preference=s_tone;task=input'>[skin_tone]</a>"
-//				dat += "<a href='byond://?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SKIN_TONE]'>[(randomise[RANDOM_SKIN_TONE]) ? "Lock" : "Unlock"]</A>"
+				dat += "<span style='border: 1px solid #161616; background-color: [skin_tone];'>&nbsp;&nbsp;&nbsp;</span> <a href='byond://?_src_=prefs;preference=s_tone;task=input'>Change</a>"
 				dat += "<br>"
 
 			var/mutant_colors
@@ -2473,7 +2472,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if((player_experience < 10) || !(pref_species.id == "kindred") || !(clan.name == CLAN_NONE))
 						return
 
-					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					for (var/discipline_type in possible_new_disciplines)
 						var/datum/discipline/discipline = new discipline_type
 						if (discipline.clan_restricted)
@@ -2507,7 +2506,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if((player_experience < 10) || !(pref_species.id == "ghoul"))
 						return
 
-					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+					var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					var/new_discipline = tgui_input_list(user, "Select your new Discipline", "Discipline Selection", sort_list(possible_new_disciplines))
 					if(new_discipline)
 						discipline_types += new_discipline
@@ -2519,7 +2518,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if((player_experience < 10) || !(pref_species.id == "kuei-jin"))
 						return
 
-					var/list/possible_new_disciplines = subtypesof(/datum/chi_discipline) - discipline_types
+					var/list/possible_new_disciplines = subtypesof(/datum/chi_discipline) - discipline_types - /datum/discipline/path - subtypesof(/datum/discipline/path)
 					var/has_chi_one = FALSE
 					var/has_demon_one = FALSE
 					var/how_much_usual = 0
@@ -2666,7 +2665,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 							if (slotlocked)
 								break
 
-							var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal
+							var/list/possible_new_disciplines = subtypesof(/datum/discipline) - discipline_types - /datum/discipline/bloodheal - /datum/discipline/path - subtypesof(/datum/discipline/path)
 							for(var/discipline_type in possible_new_disciplines)
 								var/datum/discipline/discipline = new discipline_type
 								if (discipline.clan_restricted)
@@ -3193,9 +3192,43 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					if(slotlocked)
 						return
 
-					var/new_s_tone = tgui_input_list(user, "Choose your character's skin-tone:", "Character Preference", GLOB.skin_tones)
+
+					var/new_s_tone = tgui_input_list(user, "Choose your Character's Skin Tone archetype or Customize it:", "Character Preference", GLOB.skin_tones)
+
 					if(new_s_tone)
-						skin_tone = new_s_tone
+
+						if(new_s_tone == "custom")
+
+							var/new_mutantcolor = input(user, "Customize your character's skin color (OUTLANDISH COLORS WILL GET YOU BANNED):", "Character Preference", skin_tone) as color|null
+							if(new_mutantcolor)
+								if(new_mutantcolor == "#000000")
+									skin_tone = "#471c18"
+								else
+									var/colorization  = sanitize_hexcolor(new_mutantcolor)
+									var/list/existing_color = rgb2num(colorization, COLORSPACE_HSV)
+									existing_color += 255 //FOR SOME REASON THERE ISNT AN ALPHA WHEN YOU DO THE REGULAR rg2num.
+									var/hue = existing_color[1]
+
+									if(hue < 0)
+										to_chat(user, span_notice("Hue too low in degree, defaulting to 0"))
+										hue = 0
+
+									else if(hue > 60)
+										to_chat(user, span_notice("Hue too high in degree, defaulting to 60"))
+										hue = 60
+
+									var/sat = existing_color[2]
+
+									var/val = existing_color[3]
+
+									var/list/conv_color = list(hue, sat, val, 255)
+
+									var/hsv_color = rgb(hue = conv_color[1], saturation = conv_color[2], value = conv_color[3], alpha = conv_color[4], space = COLORSPACE_HSV)
+
+									skin_tone = hsv_color
+
+						else
+							skin_tone = new_s_tone
 
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference",ooccolor) as color|null

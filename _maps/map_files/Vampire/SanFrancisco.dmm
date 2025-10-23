@@ -4237,6 +4237,13 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/sodavendor,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
+"aYh" = (
+/obj/effect/decal/bordur,
+/obj/vampire_car/endrontruck{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights/industrial)
 "aYu" = (
 /obj/structure/curtain/bounty{
 	pixel_y = 15
@@ -4280,6 +4287,23 @@
 	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/setite/basement)
+"aYQ" = (
+/obj/structure/table,
+/obj/machinery/button/door{
+	pixel_y = 32;
+	pixel_x = -8;
+	id = 133
+	},
+/obj/item/paper_bin{
+	pixel_y = 6
+	},
+/obj/item/pen{
+	pixel_y = 8
+	},
+/turf/open/floor/plating/circled{
+	color = "#b0b0b0"
+	},
+/area/vtm/interior/endron_facility/restricted)
 "aYS" = (
 /obj/structure/flora/ausbushes/sparsegrass{
 	pixel_y = 4
@@ -7322,6 +7346,10 @@
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/chantry)
+"bKi" = (
+/obj/vampire_car/endrontruck,
+/turf/open/floor/plating/asphalt,
+/area/vtm/interior/endron_facility)
 "bKk" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -15338,10 +15366,6 @@
 	},
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
-"dFs" = (
-/mob/living/carbon/human/npc/endronsecurity,
-/turf/open/floor/plating/vampplating,
-/area/vtm/interior/endron_facility/restricted)
 "dFB" = (
 /obj/structure/clothinghanger,
 /obj/machinery/light/small{
@@ -39890,10 +39914,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/cog/caern)
-"jjS" = (
-/mob/living/carbon/human/npc/endronsecurity,
-/turf/open/floor/plating/circled,
-/area/vtm/interior/endron_facility/restricted)
 "jjV" = (
 /obj/machinery/light/small{
 	pixel_y = 28
@@ -43205,6 +43225,12 @@
 /obj/structure/barrels/rand,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
+"jYj" = (
+/obj/item/charcoal_stick,
+/turf/open/floor/plating/circled{
+	color = "#b0b0b0"
+	},
+/area/vtm/interior/wyrm_corrupted)
 "jYk" = (
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/tzimisce_sanctum)
@@ -49692,12 +49718,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/park)
-"lxy" = (
-/obj/vampire_car/track{
-	access = "pentex"
-	},
-/turf/open/floor/plating/asphalt,
-/area/vtm/interior/endron_facility)
 "lxz" = (
 /obj/effect/decal/litter,
 /turf/open/floor/plating/sidewalk,
@@ -53644,6 +53664,16 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/graveyard)
+"msq" = (
+/obj/structure/table/wood/fancy/red,
+/obj/item/melee/vampirearms/knife,
+/obj/item/melee/vampirearms/knife{
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/machinery/mineral/equipment_vendor/fastfood/occult,
+/turf/open/floor/carpet,
+/area/vtm/interior/chantry/basement)
 "mss" = (
 /obj/item/storage/pill_bottle,
 /turf/open/floor/plating/rough,
@@ -55340,14 +55370,6 @@
 /obj/item/cigbutt,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
-"mNy" = (
-/obj/effect/decal/bordur,
-/obj/vampire_car/track{
-	access = "pentex";
-	dir = 4
-	},
-/turf/open/floor/plating/sidewalk,
-/area/vtm/pacificheights/industrial)
 "mNz" = (
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/financialdistrict)
@@ -56718,6 +56740,10 @@
 	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/endron_facility/restricted)
+"nav" = (
+/mob/living/carbon/human/npc/endronexecsecurity,
+/turf/open/floor/plating/vampplating,
+/area/vtm/interior/endron_facility/restricted)
 "naz" = (
 /obj/fusebox/transformer{
 	name = "baywalk district transformer"
@@ -57544,6 +57570,10 @@
 /obj/structure/roadsign/busstop,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/unionsquare)
+"nlc" = (
+/mob/living/carbon/human/npc/endronlabsecurity,
+/turf/open/floor/plating/circled,
+/area/vtm/interior/endron_facility/restricted)
 "nlj" = (
 /obj/effect/landmark/npcwall,
 /turf/open/floor/plating/stone,
@@ -59668,19 +59698,6 @@
 /obj/fusebox,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/strip)
-"nJC" = (
-/obj/structure/table,
-/obj/item/paper_bin,
-/obj/item/pen,
-/obj/machinery/button/door{
-	pixel_y = 32;
-	pixel_x = -8;
-	id = 133
-	},
-/turf/open/floor/plating/circled{
-	color = "#b0b0b0"
-	},
-/area/vtm/interior/endron_facility/restricted)
 "nJG" = (
 /obj/structure/barrels{
 	icon_state = "barrels3"
@@ -67270,6 +67287,12 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalkalt,
 /area/vtm/chinatown)
+"pud" = (
+/obj/vampire_car/endroncar{
+	dir = 8
+	},
+/turf/open/floor/plating/asphalt,
+/area/vtm/interior/endron_facility)
 "pug" = (
 /obj/effect/turf_decal/siding/wideplating/dark/corner{
 	dir = 1
@@ -71918,6 +71941,11 @@
 	icon_state = "carpet_black"
 	},
 /area/vtm/interior/nosferatu_office)
+"qzM" = (
+/obj/structure/table/wood,
+/obj/machinery/fax/endron,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/endron_facility/restricted)
 "qzT" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -82389,6 +82417,13 @@
 	},
 /turf/open/openspace,
 /area/vtm/interior/giovanni/outside)
+"taG" = (
+/obj/effect/decal/bordur,
+/obj/vampire_car/endroncar{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/pacificheights/industrial)
 "taT" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1;
@@ -87312,11 +87347,6 @@
 /obj/effect/decal/rugs,
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer/nosferatu_warren)
-"ugC" = (
-/obj/structure/table,
-/obj/machinery/fax/endron,
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/endron_facility)
 "ugD" = (
 /obj/structure/table/wood,
 /obj/machinery/fax/anarch{
@@ -96065,15 +96095,6 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
-"woM" = (
-/obj/structure/table/wood/fancy/red,
-/obj/item/melee/vampirearms/knife,
-/obj/item/melee/vampirearms/knife{
-	pixel_x = -3;
-	pixel_y = 8
-	},
-/turf/open/floor/carpet,
-/area/vtm/interior/chantry/basement)
 "woS" = (
 /obj/structure/railing/metal{
 	dir = 4
@@ -103276,10 +103297,6 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/banu/haven)
-"xVv" = (
-/mob/living/carbon/human/npc/bouncer/endron/endron_lab,
-/turf/open/floor/plating/circled,
-/area/vtm/interior/endron_facility/restricted)
 "xVx" = (
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
@@ -105110,7 +105127,7 @@ vwC
 jSx
 bBZ
 jxJ
-xVv
+nlc
 msX
 msX
 nIe
@@ -105928,7 +105945,7 @@ nIe
 jSx
 jSx
 jSx
-jjS
+nlc
 kbc
 jSx
 hQS
@@ -108348,11 +108365,11 @@ nBd
 fBd
 hYI
 jSx
-nJC
+aYQ
 ijn
 rPr
 jSx
-jjS
+nlc
 kbc
 jSx
 hQS
@@ -109150,7 +109167,7 @@ rCB
 jmr
 jmr
 jmr
-sto
+jYj
 xEJ
 aop
 jmr
@@ -109354,7 +109371,7 @@ uGf
 xEJ
 pYN
 xEJ
-sto
+jYj
 xEJ
 uGf
 jmr
@@ -129938,7 +129955,7 @@ oBr
 oBr
 rCB
 dOf
-woM
+msq
 bLE
 cii
 tRi
@@ -147328,7 +147345,7 @@ soR
 goA
 goA
 ruB
-mNy
+aYh
 uDw
 vGb
 uDw
@@ -149146,7 +149163,7 @@ cTJ
 tvm
 xBY
 tao
-hdQ
+taG
 uDw
 vGb
 uDw
@@ -176564,9 +176581,9 @@ kIU
 ijP
 dNC
 opE
+bKi
 pvg
-lxy
-pvg
+pud
 kIU
 vBb
 jBa
@@ -176758,7 +176775,7 @@ pij
 pij
 iss
 lSs
-ugC
+dRQ
 xiN
 dRQ
 uDh
@@ -256954,7 +256971,7 @@ mSI
 wwN
 wwN
 wwN
-dFs
+nav
 yjk
 uwo
 wbJ
@@ -257957,7 +257974,7 @@ mjT
 mjT
 mjT
 dRb
-xOa
+qzM
 pzx
 qdj
 hZx

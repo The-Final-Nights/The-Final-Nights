@@ -100,6 +100,7 @@
 	var/last_cpr_exp = 0
 
 	var/dementia = FALSE
+	var/possessed = FALSE // TFN ADDITION - Dominate and Presence TTRPG Rework
 
 	//[Lucia] I have no clue why this is necessary, TODO: remove
 	var/mob/living/caster

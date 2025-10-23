@@ -35,7 +35,7 @@
 		target.bloodpool = max(0, target.bloodpool - 4)
 		return
 
-	if(target.bloodpool < 2)
+	if(target.blood_volume < BLOOD_VOLUME_BAD)
 		to_chat(user, span_warning("The [src] can't find enough blood in [target]'s body!"))
 		return
 	if(HAS_TRAIT(target, TRAIT_POTENT_BLOOD))
@@ -44,7 +44,7 @@
 	else
 		var/obj/item/reagent_containers/blood/empty/bloodpack = new /obj/item/reagent_containers/blood/empty(get_turf(src))
 		generate_blood_pack(target, bloodpack)
-	target.bloodpool = max(0, target.bloodpool - 2)
+	target.blood_volume = max(0, target.blood_volume - 100)
 
 /obj/structure/bloodextractor/proc/generate_blood_pack(mob/living/target, obj/item/reagent_containers/blood/blood_pack)
 	var/blood_id = target.get_blood_id()

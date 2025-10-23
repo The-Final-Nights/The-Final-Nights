@@ -86,6 +86,25 @@
 		"Endron Labourer"
 	)
 
+/datum/job/vamp/garou/spiral/lead
+	alt_titles = list(
+		"Endron Branch Director",
+		"Endron Regional Director",
+		"Endron Operations Director"
+	)
+
+/datum/job/vamp/garou/spiral/executive
+	alt_titles = list(
+		"Endron Regional Manager",
+		"Endron Manager",
+		"Endron Marketing Director",
+		"Endron Public Relations Manager",
+		"Endron Deputy Branch Director",
+		"Endron Chief Innovation Officer",
+		"Endron Chief Science Officer",
+		"Endron Chief Financial Officer"
+	)
+
 /datum/job/vamp/bruiser
 	alt_titles = list(
 	"Bouncer",
