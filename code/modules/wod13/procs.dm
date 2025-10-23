@@ -46,4 +46,22 @@
 		if("african2")
 			return "vamp11"
 		else
-			return value
+			var/list/existing_color = rgb2num(value, COLORSPACE_HSV)
+			existing_color += 255 //FOR SOME REASON THERE ISNT AN ALPHA WHEN YOU DO THE REGULAR rg2num.
+
+			var/hue = existing_color[1]
+			if(hue < 0)
+				hue = 0
+			else if(hue > 60)
+				hue = 60
+
+			var/sat = max(existing_color[2] - 20, 0)
+
+			var/val = min(existing_color[3], 100)
+
+
+			var/list/conv_color = list(hue, sat, val, 255)
+
+			var/hsv_color = rgb(hue = conv_color[1], saturation = conv_color[2], value = conv_color[3], alpha = conv_color[4], space = COLORSPACE_HSV)
+
+			return hsv_color

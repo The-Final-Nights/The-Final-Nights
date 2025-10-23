@@ -3600,6 +3600,7 @@
 #include "code\modules\vtmb\magic\necromancy\necrorune\truth.dm"
 #include "code\modules\vtmb\magic\necromancy\necrorune\zombie.dm"
 #include "code\modules\vtmb\npc\beastmaster.dm"
+#include "code\modules\vtmb\npc\shapeshift.dm"
 #include "code\modules\vtmb\setites\counterfeit.dm"
 #include "code\modules\vtmb\surgery\fleshcraft.dm"
 #include "code\modules\vtmb\surgery\fleshcraft\cosmetic_fleshcrafting.dm"
@@ -3895,4 +3896,5 @@
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_defense.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_interactions.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_update_icons.dm"
+#include "modular_tfn\modules\spirit_chime\spirit_chime.dm"
 // END_INCLUDE

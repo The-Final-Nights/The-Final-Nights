@@ -1,0 +1,6 @@
+author: "Kolibri-B"
+delete-after: True
+changes:
+  - rscadd: "Added new Thaumaturgy ritual: Chime of Unseen Spirits"
+  - sound: "Added spirit_chime_ring.ogg"
+  - image: "Added spirit_chime.dmi, with icons \"bell\" and \"chime\""
