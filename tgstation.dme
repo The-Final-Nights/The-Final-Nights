@@ -3600,6 +3600,7 @@
 #include "code\modules\vtmb\magic\necromancy\necrorune\truth.dm"
 #include "code\modules\vtmb\magic\necromancy\necrorune\zombie.dm"
 #include "code\modules\vtmb\npc\beastmaster.dm"
+#include "code\modules\vtmb\npc\shapeshift.dm"
 #include "code\modules\vtmb\setites\counterfeit.dm"
 #include "code\modules\vtmb\surgery\fleshcraft.dm"
 #include "code\modules\vtmb\surgery\fleshcraft\cosmetic_fleshcrafting.dm"

@@ -75,3 +75,14 @@
   - qol: Ghouls can be fed on without losing BP
   - qol: Paleness is based on Blood volume with modifers instead of blood pool
   - code_imp: Adjusted blood volume levels to make it less likely to die and stuff
+2025-10-22:
+  Hawk-v3:
+  - balance: All Garou now regain Veils around the areas their totems are, rather
+      than areas their totems used to be.
+  TheTrueSilverRat:
+  - rscadd: New gangrel protean 3 and 5
+  - rscdel: Some of the other gangrel warforms
+  - qol: Added a button to transform back in the shapeshift proc
+  - sound: added or removed sounds
+  - code_imp: Made Mist form fly
+  - rscadd: Custom Skin Color stuff alongside skin types
