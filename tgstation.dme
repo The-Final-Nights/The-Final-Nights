@@ -3897,4 +3897,5 @@
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_interactions.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_update_icons.dm"
 #include "modular_tfn\modules\mob\abyss_tentacle.dm"
+#include "modular_tfn\modules\spirit_chime\spirit_chime.dm"
 // END_INCLUDE

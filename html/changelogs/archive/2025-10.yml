@@ -86,3 +86,8 @@
   - sound: added or removed sounds
   - code_imp: Made Mist form fly
   - rscadd: Custom Skin Color stuff alongside skin types
+2025-10-23:
+  darkincarnate:
+  - rscadd: remove non-BSD from security, add human/kindred to other roles, larp titles,
+      new npcs, endron car
+  - qol: fax machine moved
