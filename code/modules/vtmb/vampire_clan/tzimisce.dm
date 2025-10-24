@@ -46,6 +46,7 @@
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
+/* //TFN Edit: Removed on request of Xeon
 /datum/crafting_recipe/tzi_med
 	name = "Medical Hand (Healing)"
 	time = 100
@@ -53,6 +54,7 @@
 	result = /obj/item/organ/cyberimp/arm/medibeam
 	always_available = FALSE
 	category = CAT_TZIMISCE
+*/
 
 /datum/crafting_recipe/tzi_adrenal
 	name = "Second Adrenal Gland (Antistun)"
