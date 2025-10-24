@@ -742,7 +742,7 @@
 /datum/discipline_power/vicissitude/bloodform/post_gain()
 	. = ..()
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_heart)
-	//owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_med)
+	//owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_med) //TFN Edit: Removed on request of Xeon.
 
 	for(var/datum/action/basic_vicissitude/vicissitude_upgrade in owner.actions)
 		vicissitude_upgrade.Remove(owner)
