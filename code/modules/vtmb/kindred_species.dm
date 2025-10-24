@@ -36,6 +36,7 @@
 	var/list/datum/discipline/disciplines = list()
 	selectable = TRUE
 	COOLDOWN_DECLARE(torpor_timer)
+	keeps_languages_on_transform = TRUE
 
 /datum/action/vampireinfo
 	name = "About Me"
