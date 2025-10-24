@@ -1,5 +1,4 @@
 /mob/living/carbon/human/proc/blood_bond(mob/living/carbon/human/regnant)
-	src.mind.ingested_blood = regnant
 	if(HAS_TRAIT(src, TRAIT_UNBONDABLE) || HAS_TRAIT(regnant, TRAIT_DEFICIENT_VITAE))
 		regnant.visible_message("[regnant] is pouring blood into [src]'s mouth!", "You successfuly fed [src] with vitae.")
 		to_chat(src, span_warning("You feel good when you drink this <b>BLOOD</b>... but you feel no connection to its source."))
