@@ -77,7 +77,8 @@
 			// TFN ADDITION - Tzimisce Rework part 2
 			if((iskindred(user)) && !user.combat_mode)
 				var/mob/living/carbon/human/H = user
-				if((H.clan?.get_discipline("Vicissitude")) && S.next_step(user, modifiers))
+				var/datum/species/kindred/H_species = H?.dna.species
+				if((H_species?.get_discipline(/datum/discipline/vicissitude)) && S.next_step(user, modifiers))
 					return 1
 			// TFN ADDITION END - Tzimisce Rework part 2	 	
 			if((S.self_operable || user != src) && !user.combat_mode)
