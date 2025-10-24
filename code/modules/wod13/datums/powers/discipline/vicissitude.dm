@@ -8,6 +8,12 @@
 /datum/discipline/vicissitude/post_gain()
 	. = ..()
 	owner.faction |= CLAN_TZIMISCE
+	if(level >= 2 && level < 5)
+		var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant = new()
+		surgery_implant.Insert(owner)
+	else if(level == 5)
+		var/obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced/surgery_implant_advanced = new()
+		surgery_implant_advanced.Insert(owner)
 
 /datum/discipline_power/vicissitude
 	name = "Vicissitude power name"
@@ -316,9 +322,6 @@
 
 /datum/discipline_power/vicissitude/fleshcrafting/post_gain()
 	. = ..()
-	var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant = new()
-	surgery_implant.Insert(owner)
-
 	if (!owner.mind)
 		return
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_wall)
@@ -752,9 +755,6 @@
 
 	for(var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant in owner)
 		qdel(surgery_implant)
-
-	var/obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced/surgery_implant_advanced = new()
-	surgery_implant_advanced.Insert(owner)
 
 // REWORK ABILITIES AND VERBS
 /*
