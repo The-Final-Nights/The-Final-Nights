@@ -144,4 +144,4 @@
 	var/datum/examine_panel/tgui = new() //create the datum
 
  	//Does this species keep their languages when they transform, but not gain other languages as a result?
-	var/keeps_languages_on_transform = FALSE
+	var/keeps_languages_on_transform = TRUE
