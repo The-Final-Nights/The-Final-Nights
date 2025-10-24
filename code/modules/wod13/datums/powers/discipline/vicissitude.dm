@@ -667,13 +667,13 @@
 	for(var/datum/action/basic_vicissitude/V in owner.actions)
 		if ((V.selected_upgrade == "Skin armor") || (V.selected_upgrade == "Leather wings"))
 			to_chat(owner, span_warning("You cannot transform into Zulo form with that upgrade!"))
-			src.deactivate()
+			deactivate()
 			return
 
 	for(var/datum/action/advanced_vicissitude/V in owner.actions)
 		if ((V.selected_advanced_upgrade == "Bone armour") || (V.selected_advanced_upgrade == "Membrane wings"))
 			to_chat(owner, span_warning("You cannot transform into Zulo form with that advanced upgrade!"))
-			src.deactivate()
+			deactivate()
 			return
 
 	owner.set_species(/datum/species/kindred/zulo)
