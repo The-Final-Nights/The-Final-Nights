@@ -269,6 +269,15 @@
 	D.throw_at(throw_target, rand(2, 4), 4, user)
 	qdel(src)
 
+// TFN EDIT START: Check for trait to allow phasing through doors
+/obj/structure/vampdoor/CanPass(atom/movable/mover, turf/target)
+	. = ..()
+	if(istype(mover, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = mover
+		if(HAS_TRAIT(H, TRAIT_PASSDOOR))
+			return TRUE
+// TFN EDIT END
+
 /// SUBTYPES
 
 /obj/structure/vampdoor/wood/apartment

@@ -91,3 +91,30 @@
   - rscadd: remove non-BSD from security, add human/kindred to other roles, larp titles,
       new npcs, endron car
   - qol: fax machine moved
+2025-10-24:
+  1HoneyDragon:
+  - rscadd: Cappadocians get access to the "Mortuary Attendant" role
+  - rscadd: New Mortuary Attendant flavor text when joining as a Vampire to reflect
+      the permitted clans.
+  - rscadd: La Familgia gets Bank Vault Pincode Access
+  - bugfix: La Squadra now always gets the Bank Vault Pincode when opening their About
+      Me.
+  - qol: La Familgia gets a Rich Credit Card (min $1000, max $4000) to reflect their
+      banking association.
+  - qol: Kiasyd playing the "Church Curator" role no longer spawns with a flashlight
+      in their bag.
+  Kolibri-B:
+  - rscadd: 'Added new Thaumaturgy ritual: Chime of Unseen Spirits'
+  - sound: Added spirit_chime_ring.ogg
+  - image: Added spirit_chime.dmi, with icons "bell" and "chime"
+  - rscadd: 'Added new mechanics to Obtenebration powers: Shadow Play, Arms of the
+      Abyss, Black Metamorphosis, Tenebrous Form'
+  - rscadd: 'Added new mob type: Abyss Tentacle'
+  - rscadd: 'Added new mechanics to Abyss Mysticism rituals: Heart That Beats in Silence,
+      Comforting Darkness'
+  - qol: 'Added quality of life features to Obtenebration power: Shadow Play'
+  - balance: 'Rebalances Obtenebration powers: Black Metamorphosis, Tenebrous Form'
+  - balance: 'Rebalances Abyss Mysticism rituals: Heart That Beats in Silence, Comforting
+      Darkness'
+  - refactor: Refactors a large portion of Obtenebration & Abyss Mysticism code. Modernizes
+      Abyss Mysticism code.

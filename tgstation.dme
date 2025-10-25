@@ -2365,6 +2365,7 @@
 #include "modular_darkpack\storyteller_stats\code\st_stats\_freebie.dm"
 #include "modular_darkpack\storyteller_stats\code\st_stats\_path.dm"
 #include "modular_darkpack\storyteller_stats\code\st_stats\_virtue.dm"
+#include "modular_tfn\modules\battering_ram\code\battering_ram.dm"
 #include "modular_tfn\modules\language\irish.dm"
 #include "modular_tfn\modules\language\scottish.dm"
 #include "modular_tfn\modules\language\welsh.dm"
@@ -3912,5 +3913,6 @@
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_defense.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_interactions.dm"
 #include "modular_tfn\modules\werewolf\werewolf_mob\werewolf_update_icons.dm"
+#include "modular_tfn\modules\mob\abyss_tentacle.dm"
 #include "modular_tfn\modules\spirit_chime\spirit_chime.dm"
 // END_INCLUDE
