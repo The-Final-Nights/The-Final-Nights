@@ -266,6 +266,12 @@
 	desc = "A set of surgical tools hidden behind a concealed flesh on the user's arm."
 	contents = newlist(/obj/item/retractor/augment, /obj/item/hemostat/augment, /obj/item/cautery/augment, /obj/item/surgicaldrill/augment, /obj/item/scalpel/augment, /obj/item/circular_saw/augment, /obj/item/surgical_drapes)
 
+//TFN Edit - Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
+/obj/item/organ/cyberimp/arm/surgery/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
+//TFN Edit End
+
 /obj/item/organ/cyberimp/arm/tzimisce
 	name = "armblade implant"
 	desc = "A concealed serrated bone blade."
@@ -274,14 +280,32 @@
 	zone = BODY_ZONE_L_ARM
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce)
 
+//TFN Edit - Tzimisce Rework part 1 - Adds Armblades. Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
+/obj/item/organ/cyberimp/arm/tzimisce/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
+//TFN Edit End
+
 /obj/item/organ/cyberimp/arm/tzimisce/venom
 	name = "nematocyst whip implant"
 	desc = "A concealed venomous whip."
 	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/venom)
 
+//TFN Edit - Tzimisce Rework part 1 - Adds Nematocyst Whip Implant. Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
+/obj/item/organ/cyberimp/arm/tzimisce/venom/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
+//TFN Edit End
+
 /obj/item/organ/cyberimp/arm/tzimisce/shock
 	name = "electrocyte whip implant"
 	desc = "A concealed electrical whip."
 	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/shock)
+
+//TFN Edit - Tzimisce Rework part 1 - Adds Electrocyte Whip Implant. Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
+/obj/item/organ/cyberimp/arm/tzimisce/shock/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
+//TFN Edit End
