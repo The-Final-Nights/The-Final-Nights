@@ -292,20 +292,8 @@
 	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/venom)
 
-//TFN Edit - Tzimisce Rework part 1 - Adds Nematocyst Whip Implant. Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
-/obj/item/organ/cyberimp/arm/tzimisce/venom/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
-//TFN Edit End
-
 /obj/item/organ/cyberimp/arm/tzimisce/shock
 	name = "electrocyte whip implant"
 	desc = "A concealed electrical whip."
 	icon_state = "lasombra"
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce/shock)
-
-//TFN Edit - Tzimisce Rework part 1 - Adds Electrocyte Whip Implant. Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
-/obj/item/organ/cyberimp/arm/tzimisce/shock/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
-//TFN Edit End
