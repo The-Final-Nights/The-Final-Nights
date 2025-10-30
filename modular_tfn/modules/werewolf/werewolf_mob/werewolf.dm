@@ -167,8 +167,8 @@
 	mob_size = MOB_SIZE_HUGE
 	butcher_results = list(/obj/item/food/meat/slab = 5)
 	limb_destroyer = 1
-	melee_damage_lower = 65
-	melee_damage_upper = 65
+	melee_damage_lower = 70
+	melee_damage_upper = 70
 	health = 450
 	maxHealth = 450
 	bodyparts = list(
