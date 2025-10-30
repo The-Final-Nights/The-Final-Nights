@@ -25,6 +25,12 @@
 	icon_state = "toolkit_implant_vic"
 	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude)
 
+//TFN Edit - Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
+/obj/item/organ/cyberimp/arm/surgery/vicissitude/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
+//TFN Edit End
+
 /obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced
 	icon_state = "toolkit_implant_vic"
 	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude, /obj/item/bonesetter/augment/vicissitude, /obj/item/blood_filter/augment/vicissitude, /obj/item/healthanalyzer/vicissitude, /obj/item/shockpaddles/cyborg/vicissitude)
