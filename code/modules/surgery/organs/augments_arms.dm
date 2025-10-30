@@ -266,12 +266,6 @@
 	desc = "A set of surgical tools hidden behind a concealed flesh on the user's arm."
 	contents = newlist(/obj/item/retractor/augment, /obj/item/hemostat/augment, /obj/item/cautery/augment, /obj/item/surgicaldrill/augment, /obj/item/scalpel/augment, /obj/item/circular_saw/augment, /obj/item/surgical_drapes)
 
-//TFN Edit - Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
-/obj/item/organ/cyberimp/arm/surgery/ComponentInitialize()
-	. = ..()
-	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
-//TFN Edit End
-
 /obj/item/organ/cyberimp/arm/tzimisce
 	name = "armblade implant"
 	desc = "A concealed serrated bone blade."
