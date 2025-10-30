@@ -377,7 +377,11 @@
 	crinos.mind = trans.mind
 	crinos.gender = trans.gender
 	crinos.update_blood_hud()
-	crinos.st_add_stat_mod(STAT_STRENGTH, 3, "crinos_form")
+	crinos.st_add_stat_mod(STAT_STRENGTH, 4, "crinos_form")
+	crinos.st_add_stat_mod(STAT_DEXTERITY, 1, "crinos_form")
+	crinos.st_add_stat_mod(STAT_STAMINA, 3, "crinos_form")
+	crinos.st_add_stat_mod(STAT_MANIPULATION, -10, "crinos_form")
+	crinos.st_add_stat_mod(STAT_APPEARANCE, -10, "crinos_form")
 	transfer_damage_and_traits(trans, crinos)
 	crinos.add_movespeed_modifier(/datum/movespeed_modifier/crinosform)
 	crinos.update_sight()

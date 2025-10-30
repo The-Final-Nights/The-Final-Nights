@@ -95,3 +95,5 @@
 #define TRAIT_NO_SUN_ASHING "no_sun_ashing"
 /// Double vitae cost for abilities. Thinbloods for example
 #define TRAIT_DOUBLE_VITAE_COST "double_vitae"
+/// Shitty trait done to help with easier checks for transforming with vampire discs
+#define TRAIT_CURRENTLY_TRANSFORMING "currently_transforming"

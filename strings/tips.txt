@@ -11,7 +11,7 @@ You can jump around by clicking MMB. You can even jump over railings while stand
 You can send announcements as the Prince by using your computer. Other kindred can see it on other computers too.
 Malkavian hivemind allows to send any message, including images. To send one - write <img src="image link">.
 You can find and publish your phone number on your phone.
-To use Thaumaturgy properly you should get an Arcane Tome. Some of them spawn in Chantry. Lasombra can also learn Abyss Mysticism by crafting a tome after reaching Obtenebration at level 5.
+To use Thaumaturgy properly you should get an Arcane Tome. Some of them spawn in Chantry. Lasombra can also use Abyss Mysticism by crafting a tome.
 Followers of Set, can avoid diablerie and staking by moving their heart to an urn.
 Diablerie lowers your generation by one, if your victim's is lower than yours. You should only ever attempt diablerie if you believe it has sufficient RP justification. Diablerie is one of the vilest deeds imaginable, and any kindred who learn of this will seek your permanent death.
 Blood quality depends on the power or lifestyle of a creature. Vampire blood satisfies the most, after that lupine blood, then the wealthy, then the poor, then animals, and so on.

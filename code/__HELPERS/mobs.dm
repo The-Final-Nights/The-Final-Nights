@@ -151,7 +151,8 @@ GLOBAL_LIST_INIT(skin_tones, sort_list(list(
 	"arab",
 	"indian",
 	"african1",
-	"african2"
+	"african2",
+	"custom"
 	)))
 
 GLOBAL_LIST_EMPTY(species_list)
