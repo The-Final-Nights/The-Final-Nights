@@ -141,12 +141,8 @@
 
 /datum/discipline_power/valeren_warrior/armor_of_caines_fury/activate()
 	. = ..()
-	var/fortitudelevel
 	var/totaldice
-	for(var/datum/action/discipline/Disc in owner.actions)
-		if(Disc.discipline.name == "Fortitude")
-			fortitudelevel = Disc.discipline.level
-	totaldice = (owner.st_get_stat(STAT_STRENGTH) + fortitudelevel)
+	totaldice = (owner.st_get_stat(STAT_MELEE) + owner.st_get_stat(STAT_STAMINA))
 	var/mypower = SSroll.storyteller_roll(totaldice, difficulty = 7, mobs_to_show_output = owner, numerical = TRUE)
 	mypower = clamp(mypower, 1, 5)
 	owner.physiology.armor.melee += (10*mypower)

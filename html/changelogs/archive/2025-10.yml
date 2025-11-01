@@ -70,3 +70,61 @@
   - map: new occult item / spellbook shop added in the Chantry
   darkincarnate:
   - qol: change camarilla badge names
+2025-10-19:
+  TheTrueSilverRat:
+  - qol: Ghouls can be fed on without losing BP
+  - qol: Paleness is based on Blood volume with modifers instead of blood pool
+  - code_imp: Adjusted blood volume levels to make it less likely to die and stuff
+2025-10-22:
+  Hawk-v3:
+  - balance: All Garou now regain Veils around the areas their totems are, rather
+      than areas their totems used to be.
+  TheTrueSilverRat:
+  - rscadd: New gangrel protean 3 and 5
+  - rscdel: Some of the other gangrel warforms
+  - qol: Added a button to transform back in the shapeshift proc
+  - sound: added or removed sounds
+  - code_imp: Made Mist form fly
+  - rscadd: Custom Skin Color stuff alongside skin types
+2025-10-23:
+  darkincarnate:
+  - rscadd: remove non-BSD from security, add human/kindred to other roles, larp titles,
+      new npcs, endron car
+  - qol: fax machine moved
+2025-10-24:
+  1HoneyDragon:
+  - rscadd: Cappadocians get access to the "Mortuary Attendant" role
+  - rscadd: New Mortuary Attendant flavor text when joining as a Vampire to reflect
+      the permitted clans.
+  - rscadd: La Familgia gets Bank Vault Pincode Access
+  - bugfix: La Squadra now always gets the Bank Vault Pincode when opening their About
+      Me.
+  - qol: La Familgia gets a Rich Credit Card (min $1000, max $4000) to reflect their
+      banking association.
+  - qol: Kiasyd playing the "Church Curator" role no longer spawns with a flashlight
+      in their bag.
+  Kolibri-B:
+  - rscadd: 'Added new Thaumaturgy ritual: Chime of Unseen Spirits'
+  - sound: Added spirit_chime_ring.ogg
+  - image: Added spirit_chime.dmi, with icons "bell" and "chime"
+  - rscadd: 'Added new mechanics to Obtenebration powers: Shadow Play, Arms of the
+      Abyss, Black Metamorphosis, Tenebrous Form'
+  - rscadd: 'Added new mob type: Abyss Tentacle'
+  - rscadd: 'Added new mechanics to Abyss Mysticism rituals: Heart That Beats in Silence,
+      Comforting Darkness'
+  - qol: 'Added quality of life features to Obtenebration power: Shadow Play'
+  - balance: 'Rebalances Obtenebration powers: Black Metamorphosis, Tenebrous Form'
+  - balance: 'Rebalances Abyss Mysticism rituals: Heart That Beats in Silence, Comforting
+      Darkness'
+  - refactor: Refactors a large portion of Obtenebration & Abyss Mysticism code. Modernizes
+      Abyss Mysticism code.
+2025-10-29:
+  bomby, XeonMations:
+  - rscadd: Added a battering ram for the police department.
+2025-10-31:
+  AlmostLikeClockwork:
+  - bugfix: fixes val 4 to be mechanically accurate
+  Zeus-succs:
+  - bugfix: Melpominee 2 can now be used on people with masks
+  killer7luis:
+  - balance: Crinos gets attribute boosts to better reflect their tabletop counterparts!

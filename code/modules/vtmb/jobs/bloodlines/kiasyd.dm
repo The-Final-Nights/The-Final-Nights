@@ -31,7 +31,6 @@
 	id = /obj/item/cockclock
 	backpack_contents = list(
 		/obj/item/passport=1,
-		/obj/item/flashlight=1,
 		/obj/item/vamp/creditcard=1,
 	)
 

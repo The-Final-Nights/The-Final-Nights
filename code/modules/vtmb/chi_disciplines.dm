@@ -1403,7 +1403,6 @@
 	revert_on_death = TRUE
 	die_with_shapeshifted_form = FALSE
 	shapeshift_type = /mob/living/simple_animal/hostile/smokecrawler
-
 /obj/effect/proc_holder/spell/targeted/shapeshift/hidden_smoke_form
 	name = "Smoke Form"
 	desc = "Take on the shape a Smoke."
@@ -1439,6 +1438,8 @@
 	minbodytemp = 0
 	bloodpool = 0
 	maxbloodpool = 0
+	is_flying_animal = TRUE
+	damage_coeff = list(BRUTE = 0, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
 
 /mob/living/simple_animal/hostile/smokecrawler/hidden
 	alpha = 10

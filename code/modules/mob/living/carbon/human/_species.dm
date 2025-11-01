@@ -206,6 +206,9 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	///If this species can be selected for characters at all.
 	var/selectable = FALSE
 
+ 	//TFN EDIT: Does this species keep their languages when they transform, but not gain other languages as a result?
+	var/keeps_languages_on_transform = FALSE
+
 ///////////
 // PROCS //
 ///////////
