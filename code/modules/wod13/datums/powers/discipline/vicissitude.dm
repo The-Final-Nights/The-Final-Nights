@@ -8,6 +8,12 @@
 /datum/discipline/vicissitude/post_gain()
 	. = ..()
 	owner.faction |= CLAN_TZIMISCE
+	if(level >= 2 && level < 5)
+		var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant = new()
+		surgery_implant.Insert(owner)
+	else if(level == 5)
+		var/obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced/surgery_implant_advanced = new()
+		surgery_implant_advanced.Insert(owner)
 
 /datum/discipline_power/vicissitude
 	name = "Vicissitude power name"
@@ -18,6 +24,16 @@
 /obj/item/organ/cyberimp/arm/surgery/vicissitude
 	icon_state = "toolkit_implant_vic"
 	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude)
+
+//TFN Edit - Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
+/obj/item/organ/cyberimp/arm/surgery/vicissitude/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
+//TFN Edit End
+
+/obj/item/organ/cyberimp/arm/surgery/vicissitude/advanced
+	icon_state = "toolkit_implant_vic"
+	contents = newlist(/obj/item/retractor/augment/vicissitude, /obj/item/hemostat/augment/vicissitude, /obj/item/cautery/augment/vicissitude, /obj/item/surgicaldrill/augment/vicissitude, /obj/item/scalpel/augment/vicissitude, /obj/item/circular_saw/augment/vicissitude, /obj/item/surgical_drapes/vicissitude, /obj/item/bonesetter/augment/vicissitude, /obj/item/blood_filter/augment/vicissitude, /obj/item/healthanalyzer/vicissitude, /obj/item/shockpaddles/cyborg/vicissitude)
 
 /obj/item/retractor/augment/vicissitude
 	name = "retracting appendage"
@@ -82,6 +98,41 @@
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 	masquerade_violating = TRUE
+
+/obj/item/bonesetter/augment/vicissitude
+	name = "bonesetting appendage"
+	desc = "A pair of organic clamps for setting bones."
+	icon_state = "bone setter_vic"
+	inhand_icon_state = "clamps_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/blood_filter/augment/vicissitude
+	name = "filtering organ"
+	desc = "A specialised set of organs capable of filtering blood non-harmfully."
+	icon_state = "bone-gel_vic"
+	inhand_icon_state = "clamps_vic"
+	lefthand_file = 'code/modules/wod13/righthand.dmi'
+	righthand_file = 'code/modules/wod13/lefthand.dmi'
+	masquerade_violating = TRUE
+
+/obj/item/healthanalyzer/vicissitude
+	name = "synaptic tendrils"
+	desc = "A set of sensory tendrils that swiftly assess the health conditions of a patient"
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "hivenode"
+	advanced = TRUE
+
+/obj/item/shockpaddles/cyborg/vicissitude
+	name = "electrocyte stack"
+	desc = "A stack of electrocyte cells - they take too long to recharge for combat uses, but are able to produce powerful shocks."
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "plasma_large"
+	inhand_icon_state = "syndiepaddles"
+	base_icon_state = "plasma_large"
+	req_defib = FALSE
+	no_wielded_icon = TRUE
 
 //MALLEABLE VISAGE
 /datum/discipline_power/vicissitude/malleable_visage
@@ -277,9 +328,6 @@
 
 /datum/discipline_power/vicissitude/fleshcrafting/post_gain()
 	. = ..()
-	var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant = new()
-	surgery_implant.Insert(owner)
-
 	if (!owner.mind)
 		return
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_wall)
@@ -289,6 +337,7 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_implant)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_venom)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_stun)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_stomach)
 
 	// owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_floor_living) (Commented out because crafting it resulted in the crafting icon in tgui to go infinitely and stop the crafting menu from working)
 
@@ -360,6 +409,8 @@
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzijelly)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzicreature)
 	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/cattzi)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_ears)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_armblade)
 
 /datum/action/basic_vicissitude
 	name = "Vicissitude Upgrade"
@@ -367,7 +418,7 @@
 	button_icon_state = "basic"
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
 	vampiric = TRUE
-	var/selected_upgrade
+	var/selected_upgrade = null
 	var/mutable_appearance/upgrade_overlay
 	var/original_skin_tone
 	var/original_hairstyle
@@ -396,6 +447,10 @@
 	ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 	switch (upgrade)
 		if ("Skin armor")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot add further armour to this form without preventing your movement!"))
+				selected_upgrade = null
+				return
 			user.set_body_sprite("tziarmor")
 			original_skin_tone = user.skin_tone
 			user.skin_tone = "albino"
@@ -422,6 +477,10 @@
 			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
 			user.apply_overlay(PROTEAN_LAYER)
 		if ("Leather wings")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot make wings strong enough to allow flight in this form!"))
+				selected_upgrade = null
+				return
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
 
@@ -497,6 +556,10 @@
 	selected_advanced_upgrade = advancedupgrade
 	switch (advancedupgrade)
 		if ("Bone armour")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot add further armour to this form without preventing your movement!"))
+				selected_advanced_upgrade = null
+				return
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.set_body_sprite("tziarmor")
 			advanced_original_skin_tone = user.skin_tone
@@ -526,6 +589,10 @@
 			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
 			user.apply_overlay(PROTEAN_LAYER)
 		if ("Membrane wings")
+			if (iszulo(owner))
+				to_chat(user, span_notice("You realise you cannot make wings strong enough to allow flight in this form!"))
+				selected_advanced_upgrade = null
+				return
 			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/membranewings)
@@ -587,7 +654,8 @@
 
 	violates_masquerade = TRUE
 
-	cooldown_length = 20 SECONDS
+	toggled = TRUE
+	duration_override = TRUE //It actually lasts forever, as per RAW.
 
 	var/obj/effect/proc_holder/spell/targeted/shapeshift/tzimisce/horrid_form_shapeshift
 
@@ -605,16 +673,34 @@
 
 /datum/discipline_power/vicissitude/horrid_form/activate()
 	. = ..()
-	if (!horrid_form_shapeshift)
-		horrid_form_shapeshift = new(owner)
+	for(var/datum/action/basic_vicissitude/V in owner.actions)
+		if ((V.selected_upgrade == "Skin armor") || (V.selected_upgrade == "Leather wings"))
+			to_chat(owner, span_warning("You cannot transform into Zulo form with that upgrade!"))
+			deactivate()
+			return
 
-	horrid_form_shapeshift.Shapeshift(owner)
+	for(var/datum/action/advanced_vicissitude/V in owner.actions)
+		if ((V.selected_advanced_upgrade == "Bone armour") || (V.selected_advanced_upgrade == "Membrane wings"))
+			to_chat(owner, span_warning("You cannot transform into Zulo form with that advanced upgrade!"))
+			deactivate()
+			return
+
+	owner.set_species(/datum/species/kindred/zulo)
+
+/datum/discipline_power/vicissitude/horrid_form/deactivate()
+	. = ..()
+	owner.set_species(/datum/species/kindred)
+	owner.Stun(2 SECONDS)
+	owner.do_jitter_animation(50)
+	playsound(get_turf(owner), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
 
 /datum/discipline_power/vicissitude/horrid_form/post_gain()
 	. = ..()
 	if (!owner.mind)
 		return
-	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_heart)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_adrenal)
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_eyes_thermal)
+	ADD_TRAIT(owner, TRAIT_SURGEON, MAGIC)
 
 //BLOODFORM
 /datum/discipline_power/vicissitude/bloodform
@@ -664,11 +750,16 @@
 
 /datum/discipline_power/vicissitude/bloodform/post_gain()
 	. = ..()
+	owner.mind.teach_crafting_recipe(/datum/crafting_recipe/tzi_heart)
+
 	for(var/datum/action/basic_vicissitude/vicissitude_upgrade in owner.actions)
 		vicissitude_upgrade.Remove(owner)
 
 	var/datum/action/advanced_vicissitude/vicissitude_upgrade_advanced = new()
 	vicissitude_upgrade_advanced.Grant(owner)
+
+	for(var/obj/item/organ/cyberimp/arm/surgery/vicissitude/surgery_implant in owner)
+		qdel(surgery_implant)
 
 // REWORK ABILITIES AND VERBS
 /*

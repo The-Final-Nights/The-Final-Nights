@@ -112,16 +112,25 @@
 	level = 2
 	vitae_cost = 0
 	check_flags = DISC_CHECK_CONSCIOUS | DISC_CHECK_SPEAK
-
+	custom_logging = TRUE
 	cooldown_length = 5 SECONDS
 
 /datum/discipline_power/melpominee/phantom_speaker/activate()
 	. = ..()
-	var/mob/living/target = input(owner, "Who will you project your voice to?") as null|mob in (GLOB.player_list - owner)
-	if(!target)
-		return
+	var/melpominee_target = tgui_input_text(owner, "Phantom Speaker Target:", "Phantom Speaker Target")
+	if(!melpominee_target)
+		return FALSE
+	melpominee_target = sanitize_name(melpominee_target)
+	var/mob/living/carbon/human/targeted_human
+	for(var/mob/living/carbon/human/H in GLOB.player_list)
+		if(H.real_name == melpominee_target)
+			targeted_human = H
+			break
 
-	var/input_message = input(owner, "What message will you project to them?") as null|text
+	if(!targeted_human)
+		to_chat(owner, span_warning("You cannot sense anyone by that name."))
+		return FALSE
+	var/input_message = tgui_input_text(owner, "Message", "What message will you project to them?")
 	if (!input_message)
 		return
 
@@ -131,13 +140,16 @@
 		to_chat(owner, span_warning("That message contained a word prohibited in IC chat! Consider reviewing the server rules.\n<span replaceRegex='show_filtered_ic_chat'>\"[input_message]\"</span>"))
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
-
+	do_logging(targeted_human, input_message)
 	var/language = owner.get_selected_language()
 	var/message = owner.compose_message(owner, language, input_message, , list())
-	to_chat(target, "<span class='purple'><i>You hear someone's voice in your head...</i></span>")
-	target.Hear(message, target, language, input_message, , , )
-	to_chat(owner, span_notice("You project your voice to [target]'s ears."))
+	to_chat(targeted_human, "<span class='purple'><i>You hear someone's voice in your head...</i></span>")
+	targeted_human.Hear(message, targeted_human, language, input_message, , , )
+	to_chat(owner, span_notice("You project your voice to [targeted_human]'s ears."))
 
+/datum/discipline_power/melpominee/phantom_speaker/do_logging(target, message)
+    . = ..()
+    log_combat(owner, target, "Told [target] the folllowing message: [message]")
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //MADRIGAL

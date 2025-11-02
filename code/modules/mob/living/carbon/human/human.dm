@@ -1285,8 +1285,6 @@
 		update_body()
 	return
 
-
-
 /mob/living/carbon/human/species
 	var/race = null
 	var/use_random_name = TRUE

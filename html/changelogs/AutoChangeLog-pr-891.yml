@@ -1,0 +1,10 @@
+author: "Magisterium2022"
+delete-after: True
+changes:
+  - rscadd: "Added new surgeries - Appearance Change, Cardiac Relocation, False Clan Curse, Eye Colour Change, Fat Enhancement, Fat Reduction, Hair Colour Change, Height Enhancement, Height Reduction, Reinforce Limb, Sex Change, Skin Colour Change"
+  - rscadd: "Added new Organs - Second Stomach, Second Heart, Thermal Eyes"
+  - rscadd: "Added new Augments to Vicissitude 5 Surgical Implant - Bonesetting Augment, Filtering Organ, Synaptic Tendrils, Electrocyte Stack"
+  - rscadd: "Added new Zulo species with Vicissitude 4."
+  - balance: "Gave Tzimisce Surgeon trait, and all owners of Vicissitude the ability to operate on themselves surgically."
+  - balance: "EMP resistance to all Tzimisce (Biological) implants."
+  - rscdel: "Removes Healing Arm from Tzimisce on request of XeonMations."
