@@ -274,6 +274,12 @@
 	zone = BODY_ZONE_L_ARM
 	contents = newlist(/obj/item/melee/vampirearms/tzimisce)
 
+//TFN Edit - Tzimisce Rework part 1 - Adds Armblades. Tzimisce Rework Part 2: Organic components, shouldn't be vulnerable to EMP effects.
+/obj/item/organ/cyberimp/arm/tzimisce/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
+//TFN Edit End
+
 /obj/item/organ/cyberimp/arm/tzimisce/venom
 	name = "nematocyst whip implant"
 	desc = "A concealed venomous whip."

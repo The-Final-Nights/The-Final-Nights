@@ -307,6 +307,7 @@
 	var/req_defib = TRUE
 	var/combat = FALSE //If it penetrates armor and gives additional functionality
 	var/wielded = FALSE // track wielded status on item
+	var/no_wielded_icon = FALSE //Does the Defib not have a specific wielded icon? TFN Edit, Tzimisce Rework Part 2
 
 /obj/item/shockpaddles/ComponentInitialize()
 	. = ..()
@@ -390,6 +391,8 @@
 	return (OXYLOSS)
 
 /obj/item/shockpaddles/update_icon_state()
+	if(no_wielded_icon == TRUE) //TFN Edit 
+		return FALSE //TFN Edit
 	icon_state = "[base_icon_state][wielded]"
 	inhand_icon_state = icon_state
 	if(cooldown)

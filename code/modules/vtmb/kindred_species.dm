@@ -36,6 +36,7 @@
 	var/list/datum/discipline/disciplines = list()
 	selectable = TRUE
 	COOLDOWN_DECLARE(torpor_timer)
+	keeps_languages_on_transform = TRUE
 
 /datum/action/vampireinfo
 	name = "About Me"
@@ -181,9 +182,16 @@
 		host << browse(HTML_SKELETON(dat), "window=vampire;size=400x450;border=1;can_resize=1;can_minimize=0")
 		onclose(host, "vampire", src)
 
-/datum/species/kindred/on_species_gain(mob/living/carbon/human/C)
+/datum/species/kindred/on_species_gain(mob/living/carbon/human/C, datum/species/old_species)
 	. = ..()
 	C.update_body(0)
+
+	if((old_species.id == "kindred") || (old_species.id == "zulo")) //No need to duplicate stuff if they already have it.
+		var/datum/species/kindred/K = old_species
+		for (var/datum/discipline/discipline in K.disciplines)
+			disciplines += discipline
+		return TRUE
+
 	C.last_experience = world.time + 5 MINUTES
 
 	var/datum/action/vampireinfo/infor = new()
@@ -223,6 +231,8 @@
 
 /datum/species/kindred/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
+	if((new_species.id == "kindred") || (new_species.id == "zulo"))  //Only remove this if they're shifting to a non-vampire species.
+		return TRUE
 	UnregisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED)
 	UnregisterSignal(C, COMSIG_ADD_VITAE)
 	for(var/datum/action/vampireinfo/VI in C.actions)
@@ -230,7 +240,6 @@
 	for(var/datum/action/A in C.actions)
 		if(A?.vampiric)
 			A.Remove(C)
-
 	GLOB.kindred_list -= C
 
 /datum/action/blood_power

@@ -63,7 +63,7 @@
 			else
 				COOLDOWN_START(src, reviver_cooldown, revive_cost)
 				reviving = FALSE
-				to_chat(owner, "<span class='notice'>Your reviver implant shuts down and starts recharging. It will be ready again in [DisplayTimeText(revive_cost)].</span>")
+				to_chat(owner, "<span class='notice'>Your [name] shuts down and starts recharging. It will be ready again in [DisplayTimeText(revive_cost)].</span>")
 		return
 
 	if(!COOLDOWN_FINISHED(src, reviver_cooldown) || owner.suiciding)
@@ -114,7 +114,6 @@
 	H.set_heartattack(FALSE)
 	if(H.stat == CONSCIOUS)
 		to_chat(H, "<span class='notice'>You feel your heart beating again!</span>")
-
 
 /obj/item/organ/cyberimp/chest/thrusters
 	name = "implantable thrusters set"
