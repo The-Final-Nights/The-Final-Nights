@@ -110,9 +110,9 @@
 	var/stun_cap_amount = 40
 
 /obj/item/organ/cyberimp/brain/anti_stun/tzi
-	name = "Second Heart"
-	desc = "This organ will automatically give you back control over your central nervous system, reducing downtime when stunned. Installs to the head."
-	icon_state = "heart-tzi"
+	name = "Secondary Adrenal Gland" //TFN Rework - Renamed and changed name, description, and icon.
+	desc = "This organ will secrete a potent cocktail of stimulants when stunned, reducing downtime. Installs to the head."
+	icon_state = "tongueayylmao"
 
 /obj/item/organ/cyberimp/brain/anti_stun/Remove(mob/living/carbon/M, special = FALSE)
 	. = ..()

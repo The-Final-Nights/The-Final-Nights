@@ -240,6 +240,8 @@
 			. = "#4c4136"
 		if("vamp11")
 			. = "#2b2722"
+		else
+			. = skin_tone
 
 /mob/living/carbon/proc/Digitigrade_Leg_Swap(swap_back)
 	var/body_plan_changed = FALSE

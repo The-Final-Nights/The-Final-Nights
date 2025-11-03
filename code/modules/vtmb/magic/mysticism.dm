@@ -25,6 +25,14 @@
 			else
 				to_chat(user, "[R.mystlevel] [R.name] - [R.desc]")
 
+/datum/crafting_recipe/mystome
+	name = "Abyss Mysticism Tome"
+	time = 10 SECONDS
+	reqs = list(/obj/item/paper = 3, /obj/item/reagent_containers/blood = 1)
+	result = /obj/item/mystic_tome
+	always_available = FALSE
+	category = CAT_MISC
+
 /obj/abyssrune
 	name = "Lasombra Rune"
 	desc = "Learn the secrets of the Abyss, neonate..."
@@ -38,6 +46,59 @@
 	var/mob/living/last_activator
 	var/mystlevel = 1
 	var/sacrifice
+	var/cost = 0
+
+/datum/action/mysticism
+	name = "Mysticism"
+	desc = "Abyss Mysticism rune drawing."
+	button_icon_state = "mysticism"
+	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS
+	vampiric = TRUE
+	var/drawing = FALSE
+	var/level = 1
+
+/datum/action/mysticism/Trigger(trigger_flags)
+	. = ..()
+	var/mob/living/carbon/human/H = owner
+	if(drawing)
+		return
+
+	var/list/rituals = list()
+	for(var/i in subtypesof(/obj/abyssrune))
+		var/obj/abyssrune/R = new i(owner)
+		if(R.mystlevel <= level)
+			rituals[R.name] = list("name" = i, "cost" = R.cost)
+		qdel(R)
+
+	var/ritual
+
+	if(istype(H.get_active_held_item(), /obj/item/mystic_tome))
+		ritual = tgui_input_list(owner, "Choose rune to draw:", "Mysticism", rituals, null)
+	else
+		ritual = tgui_input_list(owner, "Choose rune to draw (You need a Mystic Tome to reduce random):", "Mysticism", list("???"))
+		if(ritual)
+			ritual = pick(rituals)
+
+	if(!ritual)
+		return
+
+	var/rtype = rituals[ritual]
+	var/rname = rtype["name"]
+	var/rcost = rtype["cost"]
+
+	if(H.bloodpool >= rcost)
+		drawing = TRUE
+		if(do_after(H, 3 SECONDS * max(1, 5 - H.st_get_stat(STAT_OCCULT)), H))
+			drawing = FALSE
+			new rname(H.loc)
+			H.bloodpool = max(H.bloodpool - rcost, 0)
+			SEND_SIGNAL(H, COMSIG_MASQUERADE_VIOLATION)
+	else
+		to_chat(H, span_warning("You need more <b>BLOOD</b> to do that!"))
+		drawing = FALSE
+		return
+
+	drawing = FALSE
 
 /obj/abyssrune/proc/complete()
 	return
@@ -63,43 +124,61 @@
 	..()
 	qdel(src)
 
+// **************************************************************** SELFGIB *************************************************************
 /obj/abyssrune/selfgib
 	name = "Self Destruction"
 	desc = "Meet the Final Death."
 	icon_state = "rune2"
 	word = "YNT FRM MCHGN FYNV DN THS B'FO"
+	cost = 1
 
 /obj/abyssrune/selfgib/complete()
 	last_activator.death()
 
-/obj/abyssrune/silent_heart
-	name = "Silently-Beating Heart"
+// **************************************************************** HEART THAT BEATS IN SILENCE *************************************************************
+/obj/abyssrune/heart_that_beats_in_silence
+	name = "The Heart That Beats in Silence"
 	desc = "Creates a shadowy abomination to protect the Lasombra and his domain."
 	icon_state = "rune1"
 	word = "ANI UMRA"
-	mystlevel = 3
+	mystlevel = 2
+	cost = 1
 
-/obj/abyssrune/silent_heart/complete()
+/obj/abyssrune/heart_that_beats_in_silence/complete()
 	var/mob/living/carbon/human/H = last_activator
-	if(!length(H.beastmaster))
-		var/datum/action/beastmaster_stay/E1 = new()
-		E1.Grant(last_activator)
-		var/datum/action/beastmaster_deaggro/E2 = new()
-		E2.Grant(last_activator)
-	var/mob/living/simple_animal/hostile/beastmaster/shadow_guard/BG = new(loc)
-	BG.beastmaster_owner = last_activator
-	H.beastmaster |= BG
-	BG.my_creator = last_activator
-	BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus
-	BG.melee_damage_upper = BG.melee_damage_upper+activator_bonus
-	playsound(loc, 'sound/magic/voidblink.ogg', 50, FALSE)
-	if(length(H.beastmaster) > 3+H.st_get_stat(STAT_LEADERSHIP))
-		var/mob/living/simple_animal/hostile/beastmaster/B = pick(H.beastmaster)
-		B.death()
-	qdel(src)
+	var/dice = (last_activator.st_get_stat(STAT_INTELLIGENCE) + last_activator.st_get_stat(STAT_OCCULT))
+
+	var/roll = SSroll.storyteller_roll(dice, 6, FALSE, last_activator)
+	last_activator.apply_damage(30, CLONE)
+
+	if(roll == ROLL_SUCCESS)
+		if(!length(H.beastmaster))
+			var/datum/action/beastmaster_stay/E1 = new()
+			E1.Grant(last_activator)
+			var/datum/action/beastmaster_deaggro/E2 = new()
+			E2.Grant(last_activator)
+		var/mob/living/simple_animal/hostile/beastmaster/shadow_guard/BG = new(loc)
+		BG.beastmaster_owner = last_activator
+		H.beastmaster |= BG
+		BG.my_creator = last_activator
+		BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus
+		BG.melee_damage_upper = BG.melee_damage_upper+activator_bonus
+		playsound(loc, 'sound/magic/voidblink.ogg', 50, FALSE)
+		if(length(H.beastmaster) > H.st_get_stat(STAT_OCCULT))
+			var/mob/living/simple_animal/hostile/beastmaster/B = pick(H.beastmaster)
+			B.death()
+		qdel(src)
+
+	else if(roll == ROLL_FAILURE)
+		qdel(src)
+
+	else if(roll == ROLL_BOTCH)
+		to_chat(last_activator, span_warning("You lose control over the ritual!"))
+		last_activator.apply_damage(30, CLONE)
+		qdel(src)
 
 /mob/living/simple_animal/hostile/beastmaster/shadow_guard
-	name = "shadow abomination"
+	name = "Heart of Silence"
 	desc = "A shadow given life, creature of fathomless..."
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "shadow2"
@@ -115,13 +194,13 @@
 	response_disarm_simple = "gently push aside"
 	emote_taunt = list("gnashes")
 	speed = 0
-	maxHealth = 150
+	maxHealth = 150 // 5 Willpower, Health Levels = Willpower, 5*30 = 150
 	health = 150
 
 	harm_intent_damage = 8
 	obj_damage = 50
-	melee_damage_lower = 20
-	melee_damage_upper = 20
+	melee_damage_lower = 40 // Heart of Silence creatures can use Arms of Ahriman for free; strength + 1 brute damage, strength = 2 (they should have more functionality)
+	melee_damage_upper = 40
 	attack_verb_continuous = "gouges"
 	attack_verb_simple = "gouge"
 	attack_sound = 'sound/creatures/venus_trap_hit.ogg'
@@ -134,11 +213,13 @@
 	bloodpool = 1
 	maxbloodpool = 1
 
+// **************************************************************** IDENTIFICATION *************************************************************
 /obj/abyssrune/identification
 	name = "Occult Items Identification"
 	desc = "Identifies a single occult item"
 	icon_state = "rune4"
 	word = "WUS'ZAT"
+	cost = 1
 
 /obj/abyssrune/identification/complete()
 	for(var/obj/item/vtm_artifact/VA in loc)
@@ -148,12 +229,14 @@
 			qdel(src)
 			return
 
+// **************************************************************** BLACKOUT *************************************************************
 /obj/abyssrune/blackout //not canon wod material, seemed a cool idea.
 	name = "Blackout"
 	desc = "Destroys every wall light in range of the rune."
 	icon_state = "rune7"
 	word = "FYU'SES BLO'OUN"
 	mystlevel = 2
+	cost = 1
 
 //actual function of the rune
 /obj/abyssrune/blackout/complete()
@@ -163,43 +246,90 @@
 	playsound(get_turf(src), 'sound/magic/voidblink.ogg', 50, FALSE) //make the funny void sound
 	qdel(src) //delete the rune
 
+// **************************************************************** COMFORTING DARKNESS *************************************************************
 /obj/abyssrune/comforting_darkness
 	name = "Comforting Darkness"
 	desc = "Use the power of the abyss to mend the wounds of yourself and others."
 	icon_state = "rune8"
 	word = "KEYUR'AGA"
-	mystlevel = 3
+	mystlevel = 2
+	cost = 0
+
+/obj/abyssrune/comforting_darkness
+	name = "Comforting Darkness"
+	desc = "Use the power of the abyss to mend the wounds of yourself and others."
+	icon_state = "rune8"
+	word = ""
+	mystlevel = 2
+	cost = 0
+	var/static/list/roll_cache = list()
 
 /obj/abyssrune/comforting_darkness/complete()
 	var/list/heal_targets = list()
 	var/turf/rune_location = get_turf(src)
 	var/mob/living/carbon/human/invoker = last_activator
+	var/dice = (invoker.st_get_stat(STAT_STAMINA) + invoker.st_get_stat(STAT_OCCULT))
+	var/ckey = invoker.ckey
 
-	if(TIMER_COOLDOWN_CHECK(invoker, COOLDOWN_RITUAL_INVOKE))
-		to_chat(invoker, span_notice("The abyssal energies in the area must settle first!"))
+	// Can't use the ritual again until the debt is paid
+	if(invoker.has_status_effect(/datum/status_effect/blood_debt))
+		to_chat(invoker, span_notice("The Abyss demands payment before you can draw on its power again!"))
 		return
 
-	for(var/mob/living/carbon/human/target in rune_location) //for every living mob in the same space as the rune
+	for(var/mob/living/carbon/human/target in rune_location)
 		if(iskindred(target))
 			heal_targets |= target
 
-	// Include the invoker in the heal whether they were on the rune or not
 	heal_targets |= invoker
 
-	for(var/mob/living/carbon/human/target in heal_targets)
-		target.heal_ordered_damage(90, list(BRUTE, TOX, OXY, STAMINA))
-		target.heal_ordered_damage(30, list(BURN, CLONE))
+	var/roll
+	var/spent_points
+	var/list/bpoptions = list()
 
-	TIMER_COOLDOWN_START(invoker, COOLDOWN_RITUAL_INVOKE, 30 SECONDS)
+	// Prevents the player from rerolling for free; initial roll is stored until the ritual is invoked
+	if(ckey in roll_cache)
+		roll = roll_cache[ckey]
+	else
+		roll = SSroll.storyteller_roll(dice, 8, TRUE, invoker)
+		roll_cache[ckey] = roll
+
+	if(roll >= 1)
+		for(var/i in 1 to roll)
+			if(i <= invoker.bloodpool)
+				bpoptions += i
+		spent_points = tgui_input_list(invoker, "How many blood points would you like to spend? (60 healing per)", "Blood Points", bpoptions, null)
+		if(!spent_points)
+			return
+		invoker.bloodpool = max(invoker.bloodpool - spent_points, 0)
+		invoker.apply_status_effect(/datum/status_effect/blood_debt, 2 * spent_points) // Apply debuff with debt amount
+		for(var/mob/living/carbon/human/target in heal_targets)
+			target.heal_ordered_damage(60 * spent_points, list(BRUTE, TOX, OXY, STAMINA)) // Heals 2 levels of lethal/bashing per point spent
+			target.heal_ordered_damage(30 * spent_points, list(BURN, CLONE)) // Heals aggravated at half effectiveness, TTRPG-inaccurate implementation but necessary
+
+	else if(roll == 0)
+		invoker.bloodpool = max(invoker.bloodpool - 1, 0)
+		qdel(src)
+
+	else if(roll <= -1)
+		to_chat(invoker, span_warning("You lose focus, failing to control the darkness as it burns you!"))
+		invoker.bloodpool = max(invoker.bloodpool - 1, 0)
+		invoker.apply_damage(30, CLONE)
+		qdel(src)
+
 	playsound(rune_location, 'sound/magic/voidblink.ogg', 50, FALSE)
+	invoker.say("SANA'OSCURA") // Spanish for something along the lines of 'healing dark', spoken upon actual invocation of the rune.
+
+	roll_cache -= ckey
 	qdel(src)
 
+// **************************************************************** REFLECTIONS OF HOLLOW REVELATION *************************************************************
 /obj/abyssrune/reflections_of_hollow_revelation
 	name = "Reflections of Hollow Revelation"
 	desc = "Use a conjured Nocturne to spy on a target through nearby shadows"
 	icon_state = "teleport"
 	word = ""
 	mystlevel = 4
+	cost = 1
 	var/datum/action/close_window/end_action
 	var/mob/living/nocturne_user
 	var/obj/shadow_window/shadow_window

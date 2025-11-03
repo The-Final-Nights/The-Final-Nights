@@ -16,16 +16,6 @@
 	accessories = list("spines", "spines_slim", "animal_skull", "none")
 	accessories_layers = list("spines" = UNICORN_LAYER, "spines_slim" = UNICORN_LAYER, "animal_skull" = UNICORN_LAYER, "none" = UNICORN_LAYER)
 
-
-/obj/effect/proc_holder/spell/targeted/shapeshift/tzimisce
-	name = "Tzimisce Form"
-	desc = "Take on the shape a beast."
-	charge_max = 10 SECONDS
-	cooldown_min = 10 SECONDS
-	revert_on_death = TRUE
-	die_with_shapeshifted_form = FALSE
-	shapeshift_type = /mob/living/simple_animal/hostile/tzimisce_beast
-
 /obj/effect/proc_holder/spell/targeted/shapeshift/bloodcrawler
 	name = "Blood Crawler"
 	desc = "Take on the shape a beast."
@@ -51,23 +41,17 @@
 /datum/crafting_recipe/tzi_trench
 	name = "Leather-Bone Trenchcoat (Armor)"
 	time = 50
-	reqs = list(/obj/item/stack/human_flesh = 50, /obj/item/spine = 1)
+	reqs = list(/obj/item/stack/human_flesh = 30, /obj/item/spine = 1)
 	result = /obj/item/clothing/suit/vampire/trench/tzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
 
-/datum/crafting_recipe/tzi_med
-	name = "Medical Hand (Healing)"
-	time = 50
-	reqs = list(/obj/item/stack/human_flesh = 35, /obj/item/bodypart/r_arm = 1, /obj/item/organ/heart = 1, /obj/item/organ/tongue = 1)
-	result = /obj/item/organ/cyberimp/arm/medibeam
-	always_available = FALSE
-	category = CAT_TZIMISCE
+//TFN Edit: Medical Hand Removed on request of Xeon
 
-/datum/crafting_recipe/tzi_heart
-	name = "Second Heart (Antistun)"
+/datum/crafting_recipe/tzi_adrenal
+	name = "Second Adrenal Gland (Antistun)"
 	time = 50
-	reqs = list(/obj/item/stack/human_flesh = 25, /obj/item/organ/heart = 1)
+	reqs = list(/obj/item/stack/human_flesh = 15, /obj/item/organ/heart = 1)
 	result = /obj/item/organ/cyberimp/brain/anti_stun/tzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
@@ -124,7 +108,7 @@
 /datum/crafting_recipe/tziregenerativecore
 	name = "Pulsating Heart"
 	time = 50
-	reqs = list(/obj/item/organ/heart = 1, /obj/item/reagent_containers/blood/elite = 1)
+	reqs = list(/obj/item/organ/heart = 1,  /obj/item/stack/human_flesh = 10)
 	result = /obj/item/organ/regenerative_core/legion/tzi
 	always_available = FALSE
 	category = CAT_TZIMISCE
