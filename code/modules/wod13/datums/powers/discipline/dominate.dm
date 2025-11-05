@@ -476,9 +476,6 @@
 		return
 	UnregisterSignal(owner, COMSIG_ATOM_ATTACKBY)
 
-	target.anchored = TRUE
-	ADD_TRAIT(target, TRAIT_IMMOBILIZED, TRAIT_GENERIC)
-	ADD_TRAIT(target, TRAIT_RESTRAINED, TRAIT_GENERIC)
 	target.dir = get_dir(target, owner)
 	to_chat(target, span_danger("LOOK AT ME"))
 
