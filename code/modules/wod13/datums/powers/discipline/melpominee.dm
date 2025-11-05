@@ -117,7 +117,7 @@
 
 /datum/discipline_power/melpominee/phantom_speaker/activate()
 	. = ..()
-	var/melpominee_target = tgui_input_text(owner, "Phantom Speaker Target:", "Phantom Speaker Target")
+	var/melpominee_target = tgui_input_text(owner, "Phantom Speaker Target:", "Phantom Speaker Target", null)
 	if(!melpominee_target)
 		return FALSE
 	melpominee_target = sanitize_name(melpominee_target)
@@ -130,9 +130,9 @@
 	if(!targeted_human)
 		to_chat(owner, span_warning("You cannot sense anyone by that name."))
 		return FALSE
-	var/input_message = tgui_input_text(owner, "Message", "What message will you project to them?")
+	var/input_message = tgui_input_text(owner, "Message", "What message will you project to them?", null)
 	if (!input_message)
-		return
+		return FALSE
 
 	//sanitisation!
 	input_message = trim(copytext_char(sanitize(input_message), 1, MAX_MESSAGE_LEN))

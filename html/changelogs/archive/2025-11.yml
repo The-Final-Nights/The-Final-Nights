@@ -12,3 +12,9 @@
       to operate on themselves surgically.
   - balance: EMP resistance to all Tzimisce (Biological) implants.
   - rscdel: Removes Healing Arm from Tzimisce on request of XeonMations.
+2025-11-04:
+  AlmostLikeClockwork:
+  - bugfix: gave NG/FT/SWAT proper stats
+  - bugfix: fixed quietus 3
+  Zeus-succs:
+  - bugfix: Should fix Melp 2 not sending proper messages.

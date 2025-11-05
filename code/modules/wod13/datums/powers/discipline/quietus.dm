@@ -93,8 +93,8 @@
 	if(owner.lastattacked)
 		if(isliving(owner.lastattacked))
 			var/mob/living/L = owner.lastattacked
-			var/victim_success_count = SSroll.storyteller_roll(owner.st_get_stat(STAT_STAMINA), L.st_get_stat(STAT_PERMANENT_WILLPOWER), TRUE, L)
-			var/attacker_success_count = SSroll.storyteller_roll(L.st_get_stat(STAT_STAMINA), owner.st_get_stat(STAT_PERMANENT_WILLPOWER), TRUE, owner)
+			var/victim_success_count = SSroll.storyteller_roll(L.st_get_stat(STAT_STAMINA), owner.st_get_stat(STAT_PERMANENT_WILLPOWER), TRUE, L)
+			var/attacker_success_count = SSroll.storyteller_roll(owner.st_get_stat(STAT_STAMINA), L.st_get_stat(STAT_PERMANENT_WILLPOWER), TRUE, owner)
 			if(attacker_success_count > victim_success_count)
 				L.adjustFireLoss(30 * attacker_success_count) // The number of successes the vampire with Dagon's call achieves is the amount of lethal damage, in health levels, the victim suffers
 			to_chat(owner, "You send your curse on [L], the last creature you attacked.")
