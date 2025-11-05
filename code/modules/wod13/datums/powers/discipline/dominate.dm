@@ -542,10 +542,6 @@
 
 	to_chat(owner, span_warning("You begin weaving your consciousness into [target]'s mind..."))
 
-	if(!immobilize_target(target, 30 SECONDS))
-		to_chat(owner, span_warning("Your concentration was broken! The possession preparation failed."))
-		to_chat(target, span_notice("The oppressive mental presence suddenly withdraws."))
-		return
 	UnregisterSignal(owner, COMSIG_ATOM_ATTACKBY)
 	active_possession = new /datum/possession_controller(owner, target, src)
 	to_chat(owner, span_warning("You have seized control of [target]'s body!"))
