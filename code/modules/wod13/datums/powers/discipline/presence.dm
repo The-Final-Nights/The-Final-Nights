@@ -33,8 +33,8 @@
 		to_chat(owner, span_warning("A presence attempt has botched against this person and they may no longer have Presence used on them for the rest of the night."))
 		return 0
 
-	//is the difficulty pre-defined? if not, its probably their total willpower.
-	var/theirpower = difficulty || target.st_get_stat(STAT_PERMANENT_WILLPOWER)
+	//is the difficulty pre-defined? if not, its probably their current willpower.
+	var/theirpower = difficulty || target.st_get_stat(STAT_TEMPORARY_WILLPOWER)
 
 	var/successes = SSroll.storyteller_roll(owner_stat, difficulty = theirpower, mobs_to_show_output = owner, numerical = TRUE)
 
