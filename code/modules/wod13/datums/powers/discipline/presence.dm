@@ -173,7 +173,7 @@
 	for(var/i = 1; i <= min(targets_to_affect, length(potential_targets)); i++)
 		var/mob/living/carbon/target = potential_targets[i]
 		apply_presence_overlay(target)
-		to_chat(target, span_yellowteamradio("You feel extremely attracted to and persuaded by [owner]'s words, no matter what they're saying!"))
+		to_chat(target, span_yellowteamradio("You feel extremely attracted to and persuaded by [owner]'s words, no matter what they're saying! You are not aware of any supernatural influence."))
 		affected_targets += target
 
 	var/affected_count = length(affected_targets)
@@ -221,7 +221,7 @@
 	apply_presence_overlay(target)
 
 	if(successes <= 3) // already checked for above 0 in pre_activation
-		to_chat(target, span_userdanger("You are consumed with terror toward [owner]!"))
+		to_chat(target, span_userdanger("You are consumed with terror toward [owner]! You are not aware of any supernatural influence."))
 		to_chat(owner, span_warning("You've struck terror into [target]'s heart with your dreadful gaze!"))
 	else
 		to_chat(target, span_userdanger("Overwhelming dread fills you! You must get away from [owner]!"))
@@ -270,7 +270,7 @@
 	log_combat(owner, target, "Used Presence Entrancement")
 
 	apply_presence_overlay(target, successes * 1 INGAME_HOURS)
-	to_chat(target, span_hypnophrase("You find yourself becoming completely entraced by [owner]. You are now their willing servant."))
+	to_chat(target, span_hypnophrase("You find yourself becoming completely entraced by [owner]. You are now their willing servant. You are not aware of any supernatural influence."))
 	to_chat(target, span_info("You are now the willing servant of [owner]. You will seek to please them and fulfill their every desire, but this desire will fade soon."))
 	addtimer(CALLBACK(src, PROC_REF(end_entrancement), target), successes * 1 INGAME_HOURS) // might be alot considering 5 successes is 5 ingame hours which is... most of a round.
 
@@ -343,7 +343,7 @@
 
 	var/flavor_index = clamp(successes, 1, 5)
 	to_chat(summon_target, span_yellowteamradio(flavor_texts[flavor_index]))
-	to_chat(summon_target, span_info("Summon only affects targets who have reasonably met the summoner. If you believe your character would reasonably have never met the summoner, this power is ineffective."))
+	to_chat(summon_target, span_info("Summon only affects targets who have reasonably met the summoner. If you believe your character would reasonably have never met the summoner, this power is ineffective. You are not aware of any supernatural influence."))
 	to_chat(owner, span_warning("You've successfully summoned [summon_target.real_name] to your presence! ([successes] success\s)"))
 	summon_target.do_jitter_animation(3 SECONDS)
 
@@ -381,7 +381,7 @@
 		apply_presence_overlay(hearer, 3 MINUTES)
 		affected_targets[hearer] = hearer_successes
 
-		to_chat(hearer, span_hypnophrase("You find yourself completely submitting to the Majesty of [owner]. Their every word is your utmost priority, every frown of displeasure crushing your soul. You find yourself humbling yourself entirely in their overwhelming presence."))
+		to_chat(hearer, span_hypnophrase("You find yourself completely submitting to the Majesty of [owner]. Their every word is your utmost priority, every frown of displeasure crushing your soul. You find yourself humbling yourself entirely in their overwhelming presence. You are not aware of any supernatural influence."))
 
 		if(hearer_successes > 0)
 			to_chat(hearer, span_info("Despite the overwhelming presence, your will allows you to make [hearer_successes] contradictory action\s until youre allowed to leave [owner]'s company."))
