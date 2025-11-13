@@ -218,10 +218,6 @@
 	owner.apply_status_effect(/datum/status_effect/blood_of_potency, chosen_generation, set_time INGAME_HOURS)
 	activated = TRUE
 
-/datum/discipline_power/thaumaturgy/blood_of_potency/deactivate()
-	. = ..()
-	owner.remove_status_effect(/datum/status_effect/blood_of_potency)
-
 //------------------------------------------------------------------------------------------------
 
 /datum/discipline_power/thaumaturgy/theft_of_vitae
