@@ -167,7 +167,6 @@
 
 	level = 3
 
-	duration_length = 0 // This power's length depends on the amount chosen by the user.
 	cooldown_override = TRUE // This power can only be used once per night.
 
 	target_type = NONE
