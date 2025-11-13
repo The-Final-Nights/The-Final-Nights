@@ -3,8 +3,8 @@
 #define TURNS * 5 SECONDS
 ///Duration of one "scene", which is 3 minutes according to us
 #define SCENES * 3 MINUTES
-//Duration of one ingame hour. Apparently this is 22.5 minutes.
-#define INGAME_HOURS * 22.5 MINUTES
+//Duration of one ingame hour. This is 20 minutes.
+#define INGAME_HOURS * 20 MINUTES
 
 //targeting bitflags, NONE or 0 if targeting self exclusively
 ///Allows for self to also be selected in ranged targeting, SET TO 0 IF NOT TARGETED OR RANGED
