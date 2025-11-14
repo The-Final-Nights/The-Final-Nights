@@ -119,8 +119,8 @@
 		user.remove_overlay(MUTATIONS_LAYER)
 		user.clear_alert("entrancement")
 		to_chat(user, span_notice("You have succeeded in resisting the effects of Presence."))
-		Remove(user)
 		user.visible_message(span_notice("[user] blinks and shakes their head slightly as their eyes clear."))
+		Remove(user)
 		return TRUE
 	else
 		to_chat(user, span_warning("Despite your efforts, the supernatural influence remains too strong!"))
