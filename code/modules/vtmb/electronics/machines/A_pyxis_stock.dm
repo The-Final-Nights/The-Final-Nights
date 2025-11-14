@@ -31,6 +31,7 @@ GLOBAL_LIST_INIT(CLINIC_job_access, list(
 	"Nurse" = CLINIC_ACCESS_MEDICAL,
 	"Paramedic" = CLINIC_ACCESS_MEDICAL,
 	"EMT" = CLINIC_ACCESS_MEDICAL,
+	"Mortuary Attendant" = CLINIC_ACCESS_MEDICAL,
 
 	"Resident" = CLINIC_ACCESS_FULL,
 	"General Practitioner" = CLINIC_ACCESS_FULL,
