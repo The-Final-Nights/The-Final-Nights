@@ -18,3 +18,7 @@
   - bugfix: fixed quietus 3
   Zeus-succs:
   - bugfix: Should fix Melp 2 not sending proper messages.
+2025-11-14:
+  XeonMations:
+  - server: Server now checks for age verified members, and kicks anyone out who isn't
+      verified.

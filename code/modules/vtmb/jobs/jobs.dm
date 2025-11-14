@@ -252,6 +252,10 @@
 	name = "clinic director's badge"
 	desc = "A badge which shows not only medical qualification, but also an authority over the clinic."
 
+/obj/item/card/id/clinic/mortattendant
+	name = "morgue badge"
+	desc = "A badge which shows the wearer is certified in forensic pathology or mortuary science, and is responsible for the morgue."
+
 /obj/item/card/id/archive
 	name = "scholar badge"
 	id_type_name = "scholar badge"

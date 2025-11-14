@@ -1,0 +1,7 @@
+author: "Mnemeory"
+delete-after: True
+changes:
+  - bugfix: "fixes mort attendant not spawning w/ID"
+  - bugfix: "fixes mort attendant not spawning w/P25"
+  - bugfix: "moves mort attendant to clinic roles since it's a clinic job"
+  - bugfix: "adds mort attendant to the pyxis"
