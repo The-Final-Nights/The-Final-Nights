@@ -26,7 +26,7 @@
 
 	minimal_generation = 10
 //	minimum_character_age = 150 //Uncomment if age-restriction wanted
-	minimum_vampire_age = 75
+	minimum_vampire_age = 200
 
 	minimal_masquerade = 5
 	allowed_species = list("Vampire")

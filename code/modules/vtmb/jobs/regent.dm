@@ -19,9 +19,9 @@
 	display_order = JOB_DISPLAY_ORDER_REGENT
 	v_duty = "Lead the Chantry. You serve as both the Regent and Tremere Primogen. You report to the Tremere Lord of this region first, Prince second."
 	minimal_masquerade = 4
-	minimal_generation = 10
+	minimal_generation = 12
 //	minimum_character_age = 150 //Uncomment if age-restriction wanted
-	minimum_vampire_age = 60
+	minimum_vampire_age = 150
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list(CLAN_TREMERE)
 	experience_addition = 20

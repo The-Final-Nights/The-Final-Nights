@@ -17,9 +17,9 @@
 	display_order = JOB_DISPLAY_ORDER_BARKEEPER
 	bounty_types = CIV_JOB_DRINK
 
-//	minimal_generation = 13
+	minimal_generation = 12
 //	minimum_character_age = 70 //Uncomment if age-restriction wanted.
-	minimum_vampire_age = 1
+	minimum_vampire_age = 75
 
 	known_contacts = list(
 		"Prince",

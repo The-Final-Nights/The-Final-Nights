@@ -3,8 +3,8 @@
 	title = "Chantry Archivist"
 	department_head = list("Prince")
 	faction = "Vampire"
-	total_positions = 6
-	spawn_positions = 6
+	total_positions = 3
+	spawn_positions = 3
 	supervisors = "the Traditions and the Regent"
 	selection_color = "#ab2508"
 

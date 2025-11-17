@@ -113,7 +113,8 @@
 
 	display_order = JOB_DISPLAY_ORDER_HARPY
 
-//	minimal_generation = 12	//Uncomment when players get exp enough
+	minimal_generation = 12	//Uncomment when players get exp enough
+	minimum_vampire_age = 100
 	minimal_masquerade = 5
 
 	known_contacts = list("Prince","Sheriff","Tremere Regent","Dealer","Emissary","Baron","Primogens")

@@ -1,8 +1,8 @@
 /datum/job/vamp/lasombra
 	title = "Church Caretaker"
 	faction = "Vampire"
-	total_positions = 12
-	spawn_positions = 12
+	total_positions = 6
+	spawn_positions = 6
 	supervisors = "Your Primogen."
 	selection_color = "#df7058"
 	access = list()			//See /datum/job/assistant/get_access()

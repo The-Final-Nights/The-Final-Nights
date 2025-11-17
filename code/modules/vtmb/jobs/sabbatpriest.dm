@@ -1,8 +1,8 @@
 /datum/job/vamp/sabbatpriest
 	title = "Sabbat Priest"
 	faction = "Vampire"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	supervisors = "Caine"
 	selection_color = "#7B0000"
 	access = list()

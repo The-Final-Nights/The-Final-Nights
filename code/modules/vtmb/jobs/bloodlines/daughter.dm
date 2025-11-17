@@ -1,8 +1,8 @@
 /datum/job/vamp/daughterof
 	title = "Cabaret Worker"
 	faction = "Vampire"
-	total_positions = 10
-	spawn_positions = 10
+	total_positions = 6
+	spawn_positions = 6
 	supervisors = "the Traditions"
 	selection_color = "#df7058"
 	access = list()			//See /datum/job/assistant/get_access()

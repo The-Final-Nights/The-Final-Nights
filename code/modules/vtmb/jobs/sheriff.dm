@@ -35,7 +35,7 @@
 
 	minimal_generation = 12
 //	minimum_character_age = 70 //Uncomment if age-restriction wanted
-	minimum_vampire_age = 30
+	minimum_vampire_age = 100
 	minimal_masquerade = 5
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_LASOMBRA)

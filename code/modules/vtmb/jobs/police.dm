@@ -3,8 +3,8 @@
 	title = "Police Officer"
 	department_head = list("Police Department")
 	faction = "Vampire"
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 14
+	spawn_positions = 14
 	supervisors = " the SFPD Chief and your Sergeant."
 	selection_color = "#7e7e7e"
 
@@ -43,8 +43,8 @@
 	title = "Police Sergeant"
 	department_head = list("Police Department")
 	faction = "Vampire"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = " the SFPD Chief"
 	selection_color = "#7e7e7e"
 
@@ -96,6 +96,7 @@
 	paycheck_department = ACCOUNT_SRV
 	display_order = JOB_DISPLAY_ORDER_POLICE_CHIEF
 	exp_type_department = EXP_TYPE_POLICE
+	whitelisted = TRUE
 
 	allowed_species = list("Human")
 
