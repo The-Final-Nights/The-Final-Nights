@@ -81932,6 +81932,10 @@
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/tzimisce_manor)
+"sUa" = (
+/obj/effect/landmark/start/mortattendant,
+/turf/open/floor/plating/vampplating/mono,
+/area/vtm/clinic)
 "sUi" = (
 /obj/structure/trashcan,
 /turf/open/floor/plating/concrete,
@@ -84543,7 +84547,6 @@
 /obj/machinery/light/dim{
 	pixel_y = 32
 	},
-/obj/effect/landmark/start/nagaraja,
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/clinic)
 "tAl" = (
@@ -97908,7 +97911,7 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police)
 "wKo" = (
-/obj/effect/landmark/start/nagaraja,
+/obj/effect/landmark/start/mortattendant,
 /turf/open/floor/plating/circled{
 	color = "#b0b0b0"
 	},
@@ -178711,7 +178714,7 @@ jsq
 nfu
 nBC
 tAk
-kaD
+sUa
 kaD
 cVd
 nBC
@@ -179116,7 +179119,7 @@ uIK
 nBC
 dpI
 kaD
-kaD
+sUa
 nPN
 joX
 joX
@@ -180127,7 +180130,7 @@ nBC
 mSt
 gMd
 gMd
-wKo
+gMd
 kmk
 nBC
 xUa
@@ -180329,7 +180332,7 @@ nBC
 qTC
 wKo
 gMd
-gMd
+wKo
 gMd
 sXr
 kaD

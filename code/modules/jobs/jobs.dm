@@ -38,7 +38,6 @@ GLOBAL_LIST_INIT(anarch_positions, list(
 GLOBAL_LIST_INIT(citizen_positions, list(
 	"Citizen",
 	"Barista",
-	"Mortuary Attendant",
 	"Counselor",
 	"Cabaret Worker",
 	"Church Curator",
@@ -68,7 +67,8 @@ GLOBAL_LIST_INIT(services_positions, list(
 
 GLOBAL_LIST_INIT(clinic_positions, list(
 	"Clinic Director",
-	"Doctor"
+	"Doctor",
+	"Mortuary Attendant"
 ))
 
 GLOBAL_LIST_INIT(neutral_positions, list())

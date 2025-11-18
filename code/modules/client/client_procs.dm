@@ -620,9 +620,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		new_player = 1
 		account_join_date = findJoinDate()
 		var/datum/db_query/query_add_player = SSdbcore.NewQuery({"
-			INSERT INTO [format_table_name("player")] (`ckey`, `byond_key`, `firstseen`, `firstseen_round_id`, `lastseen`, `lastseen_round_id`, `ip`, `computerid`, `lastadminrank`, `accountjoindate`)
-			VALUES (:ckey, :key, Now(), :round_id, Now(), :round_id, INET_ATON(:ip), :computerid, :adminrank, :account_join_date)
-		"}, list("ckey" = ckey, "key" = key, "round_id" = GLOB.round_id, "ip" = address, "computerid" = computer_id, "adminrank" = admin_rank, "account_join_date" = account_join_date || null))
+			INSERT INTO [format_table_name("player")] (`ckey`, `byond_key`, `firstseen`, `firstseen_round_id`, `lastseen`, `lastseen_round_id`, `ip`, `computerid`, `lastadminrank`, `accountjoindate`, `age_verified`)
+			VALUES (:ckey, :key, Now(), :round_id, Now(), :round_id, INET_ATON(:ip), :computerid, :adminrank, :account_join_date, :age_verified)
+		"}, list("ckey" = ckey, "key" = key, "round_id" = GLOB.round_id, "ip" = address, "computerid" = computer_id, "adminrank" = admin_rank, "account_join_date" = account_join_date || null, "age_verified" = TRUE))
 		if(!query_add_player.Execute())
 			qdel(query_client_in_db)
 			qdel(query_add_player)
@@ -677,6 +677,26 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		INSERT INTO `[format_table_name("connection_log")]` (`id`,`datetime`,`server_ip`,`server_port`,`round_id`,`ckey`,`ip`,`computerid`)
 		VALUES(null,Now(),INET_ATON(:internet_address),:port,:round_id,:ckey,INET_ATON(:ip),:computerid)
 	"}, list("internet_address" = world.internet_address || "0", "port" = world.port, "round_id" = GLOB.round_id, "ckey" = ckey, "ip" = address, "computerid" = computer_id))
+
+	//TFN EDIT START
+	var/datum/db_query/query_get_player_age_verified = SSdbcore.NewQuery(
+		"SELECT age_verified FROM [format_table_name("player")] WHERE ckey = :ckey AND age_verified = 1",
+		list("ckey" = ckey)
+	)
+	if(!query_get_player_age_verified.Execute())
+		qdel(query_get_player_age_verified)
+		return
+	if(!query_get_player_age_verified.NextRow())
+		log_access("Failed Login: [key] - [address] - Age unverified account attempting connection.")
+		message_admins(span_adminnotice("Failed Login: [key] - [address] - Age unverified account attempting connection."))
+		var/forumurl = CONFIG_GET(string/forumurl)
+		to_chat_immediate(src, span_reallybig(span_danger(("Hi! This server requires age verification. <br><br>To join our community, apply through the Discord: [forumurl]"))))
+		qdel(query_get_player_age_verified)
+		sleep(3 SECONDS)
+		qdel(src)
+		return
+	qdel(query_get_player_age_verified)
+	//TFN EDIT END
 
 	SSserver_maint.UpdateHubStatus()
 
