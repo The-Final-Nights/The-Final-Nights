@@ -119,7 +119,7 @@
 		to_chat(owner, span_warning("Your Dominate attempt has botched! [target] is now resistant to your Dominate for the rest of the night."))
 		return FALSE
 
-	if(owner.generation >= target.generation)
+	if(owner.generation > target.generation)
 		to_chat(owner, span_warning("Your Dominate attempt slides off of [target]! They must be a lower generation, or otherwise resistant!"))
 		return FALSE
 
