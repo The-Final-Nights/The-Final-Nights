@@ -167,7 +167,6 @@
 
 	level = 3
 
-	duration_length = 0 // This power's length depends on the amount chosen by the user.
 	cooldown_override = TRUE // This power can only be used once per night.
 
 	target_type = NONE
@@ -217,10 +216,6 @@
 	chosen_generation = max(BLOOD_POTENCY_GENERATION, chosen_generation) //Lowest im gonna let you go is BLOOD_POTENCY_GENERATION bucko
 	owner.apply_status_effect(/datum/status_effect/blood_of_potency, chosen_generation, set_time INGAME_HOURS)
 	activated = TRUE
-
-/datum/discipline_power/thaumaturgy/blood_of_potency/deactivate()
-	. = ..()
-	owner.remove_status_effect(/datum/status_effect/blood_of_potency)
 
 //------------------------------------------------------------------------------------------------
 

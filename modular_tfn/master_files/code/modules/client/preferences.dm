@@ -14,7 +14,7 @@
 	var/disable_vocal_sounds = FALSE // Disable all vocal sounds preference
 
 /proc/valid_headshot_link(mob/user, value, silent = FALSE)
-	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe") //gyazo, lensdump, imgbox, catbox
+	var/static/link_regex = regex("i.gyazo.com|a.l3n.co|b.l3n.co|c.l3n.co|images2.imgbox.com|thumbs2.imgbox.com|files.catbox.moe|img.thefinalnights.com") //gyazo, lensdump, imgbox, catbox, thefinalnights via buffybox.thefinalnights.com
 	var/static/list/valid_extensions = list("jpg", "png", "jpeg") // Regex works fine, if you know how it works
 
 	if(!length(value))
@@ -42,6 +42,6 @@
 	find_index = findtext(value, link_regex)
 	if(find_index != 9)
 		if(!silent)
-			to_chat(usr, span_warning("The image must be hosted on one of the following sites: 'Gyazo, Lensdump, Imgbox, Catbox'"))
+			to_chat(usr, span_warning("The image must be hosted on one of the following sites: 'Gyazo, Lensdump, Imgbox, Catbox, Buffybox'"))
 		return FALSE
 	return TRUE

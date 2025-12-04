@@ -119,11 +119,15 @@
 		to_chat(owner, span_warning("Your Dominate attempt has botched! [target] is now resistant to your Dominate for the rest of the night."))
 		return FALSE
 
+	if(owner.generation > target.generation)
+		to_chat(owner, span_warning("Your Dominate attempt slides off of [target]! They must be a lower generation, or otherwise resistant!"))
+		return FALSE
+
 	if(numerical)
 		return mypower
 
 	//did we succeed or fail the roll
-	return ((mypower > 0) && owner.generation <= target.generation)
+	return (mypower > 0)
 
 //dominate involves capturing the victim's gaze, leaving them completely helpless as you hypnotically invade their mind.
 /datum/discipline_power/dominate/proc/immobilize_target(mob/living/carbon/human/target, duration = 5 SECONDS)

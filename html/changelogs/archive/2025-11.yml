@@ -22,3 +22,24 @@
   XeonMations:
   - server: Server now checks for age verified members, and kicks anyone out who isn't
       verified.
+2025-11-17:
+  Magisterium2022:
+  - bugfix: Fixed duration bug with Blood of Potency (Thaumaturgy 3)
+  - code_imp: Cleaned up Blood of Potency Code.
+  Mnemeory:
+  - bugfix: fixes mort attendant not spawning w/ID
+  - bugfix: fixes mort attendant not spawning w/P25
+  - bugfix: moves mort attendant to clinic roles since it's a clinic job
+  - bugfix: adds mort attendant to the pyxis
+  XeonMations:
+  - bugfix: Fixed the logging machine not clearing logs.
+2025-11-20:
+  AlmostLikeClockwork:
+  - rscdel: Removed unbonding quirk
+  Drakeven:
+  - bugfix: Wyrm tainted hispo and dog forms now have sprites
+  - image: Added sprites for those two things.
+2025-11-24:
+  Magisterium2022:
+  - rscadd: Added feedback when Dominate fails due to gen difference.
+  - bugfix: Fixed error allowing higher gens to dominate lower gens vampires.
