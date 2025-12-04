@@ -12,7 +12,7 @@
 	wings_icon = "Dragon"
 	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	mutantbrain = /obj/item/organ/brain/vampire
-	brutemod = 0.33 //Armoured plating and warform - You're going to be the biggest and most obvious target around.
+	brutemod = 0.5
 	heatmod = 1
 	burnmod = 2
 	punchdamagelow = 15 //A little more than Glabro, since this is a Crinos equivalent.
@@ -33,10 +33,6 @@
 	H.st_add_stat_mod(STAT_STAMINA, 3, "Zulo")
 	H.st_add_stat_mod(STAT_DEXTERITY, 3, "Zulo")
 	H.st_set_stat(0, STAT_APPEARANCE)
-	H.physiology.armor.melee += 50
-	H.physiology.armor.bullet += 50
-	H.physiology.armor.wound += 10
-	H.add_movespeed_modifier(/datum/movespeed_modifier/zulo)
 	H.dna.add_mutation(GIGANTISM)
 
 /datum/species/kindred/zulo/on_species_loss(mob/living/carbon/human/H)
@@ -50,12 +46,6 @@
 	H.st_remove_stat_mod(STAT_STAMINA, 3, "Zulo")
 	H.st_remove_stat_mod(STAT_DEXTERITY, 3, "Zulo")
 	H.st_set_stat(old_appearance, STAT_APPEARANCE)
-	H.physiology.armor.melee -= 50
-	H.physiology.armor.bullet -= 50
-	H.physiology.armor.wound += 10
-	H.remove_movespeed_modifier(/datum/movespeed_modifier/zulo)
 	H.dna.remove_mutation(GIGANTISM)
 
-/datum/movespeed_modifier/zulo
-	blacklisted_movetypes = FLOATING|FLYING
-	multiplicative_slowdown = -0.25
+
