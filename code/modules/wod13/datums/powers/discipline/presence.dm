@@ -159,7 +159,7 @@
 
 	var/list/potential_targets = list()
 	for(var/mob/living/carbon/target in hearers(range, owner))
-		if((target != owner) && (!(owner.generation - 3) >= target.generation) && (!HAS_TRAIT(target, TRAIT_PRESENCE_IMMUNE))) //Doesn't add them to the list if they're not eligible.
+		if((target != owner) && (owner.generation - 3) < target.generation && (!HAS_TRAIT(target, TRAIT_PRESENCE_IMMUNE))) //Doesn't add them to the list if they're not eligible.
 			potential_targets += target
 
 	if(!length(potential_targets))
