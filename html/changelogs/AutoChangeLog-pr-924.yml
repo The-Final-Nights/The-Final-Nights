@@ -1,5 +1,0 @@
-author: "IceyTracks"
-delete-after: True
-changes:
-  - rscdel: "Removed Horrid Form armor and movement speed buff."
-  - balance: "Resets brute mod from .33 to .5"

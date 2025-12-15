@@ -1,3 +1,12 @@
 2025-12-01:
   SELFHELL:
   - bugfix: Psychomachia 4 Rolling Logic
+2025-12-11:
+  IceyTracks:
+  - rscdel: Removed Horrid Form armor and movement speed buff.
+  - balance: Resets brute mod from .33 to .5
+  buffyuwu:
+  - qol: you can now upload images to buffybox.thefinalnights.com for use in your
+      character examines
+  faaaay:
+  - image: removed erroneous pixels from "jacket, dutch"
