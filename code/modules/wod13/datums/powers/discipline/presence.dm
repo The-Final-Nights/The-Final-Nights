@@ -34,7 +34,7 @@
 		return 0
 
 	if((owner.generation - 3) >= target.generation)
-		to_chat(owner, span_warning("Your supernatural allure seemd to simply slide off of [target], they must be too low generation to influence!")) //Adds feedback for if the roll fails due to lower generation.
+		to_chat(owner, span_warning("Your supernatural allure seems to simply slide off of [target], they must be too low generation to influence!")) //Adds feedback for if the roll fails due to lower generation.
 		return 0
 
 	//is the difficulty pre-defined? if not, its probably their current willpower.
