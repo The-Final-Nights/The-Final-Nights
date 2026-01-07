@@ -2365,6 +2365,7 @@
 #include "modular_darkpack\storyteller_stats\code\st_stats\_freebie.dm"
 #include "modular_darkpack\storyteller_stats\code\st_stats\_path.dm"
 #include "modular_darkpack\storyteller_stats\code\st_stats\_virtue.dm"
+#include "modular_tfn\code\modules\newspaper\web_newspaper.dm"
 #include "modular_tfn\modules\battering_ram\code\battering_ram.dm"
 #include "modular_tfn\modules\language\irish.dm"
 #include "modular_tfn\modules\language\scottish.dm"

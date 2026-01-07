@@ -64,7 +64,7 @@
 	icon_state = "Prince"
 
 /datum/job/vamp/garou/spiral/executive
-	title = "Endron Regional Executive"
+	title = "Endron Executive"
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
 	department_head = list("Endron International")
 	faction = "Vampire"
@@ -100,7 +100,7 @@
 	v_duty = "You are an Executive for Endron International, operating out of San Francisco. With discretion to the Branch Leader, a position you may aim for, your job is to fuel production, aid in bringing forth banes, and sate the heads of the Wyrm. Expand!"
 
 /datum/outfit/job/garou/endronexec
-	name = "Endron Regional Executive"
+	name = "Endron Executive"
 	jobtype = /datum/job/vamp/garou/spiral/executive
 
 	id = /obj/item/card/id/garou/spiral/executive
@@ -164,7 +164,7 @@
 
 /datum/outfit/job/garou/endronaffairs
 	name = "Endron Internal Affairs"
-	jobtype = /datum/job/vamp/garou/spiral/executive
+	jobtype = /datum/job/vamp/garou/spiral/affairs
 
 	id = /obj/item/card/id/garou/spiral/affairs
 	ears = /obj/item/p25radio

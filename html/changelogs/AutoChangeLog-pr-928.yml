@@ -1,0 +1,4 @@
+author: "faaaay"
+delete-after: True
+changes:
+  - bugfix: "the Endron Executive role is selectable again"
