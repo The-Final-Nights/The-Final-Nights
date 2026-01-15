@@ -171,11 +171,10 @@
 	blacklisted_movetypes = (FLYING|FLOATING)
 
 /datum/movespeed_modifier/leatherwings
-	multiplicative_slowdown = -0.5
+	multiplicative_slowdown = 0.25
 	movetypes = FLOATING|FLYING
 
 /datum/movespeed_modifier/membranewings
-	multiplicative_slowdown = -0.8
 	movetypes = FLOATING|FLYING
 
 /mob/living/simple_animal/hostile/bloodcrawler

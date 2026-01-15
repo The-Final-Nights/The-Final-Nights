@@ -436,8 +436,7 @@
 	if(!whispered)
 		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
 
-/mob/living/verb/untorpor()
-	set hidden = TRUE
+/mob/living/proc/untorpor()
 	if(HAS_TRAIT(src, TRAIT_TORPOR))
 		if(iskindred(src))
 			if (bloodpool > 0)
