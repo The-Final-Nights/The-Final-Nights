@@ -7,6 +7,8 @@ SUBSYSTEM_DEF(overwatch)
 		return
 
 	var/webhook = CONFIG_GET(string/discord_overwatch_webhook)
+	if(!source) //no source? this is probably from log_admin
+		webhook = CONFIG_GET(string/admin_overwatch_webhook)
 
 	var/list/webhook_info = list()
 
@@ -30,8 +32,8 @@ SUBSYSTEM_DEF(overwatch)
 	embed.description = "OVERWATCH"
 	embed.author = key_name(source)
 
-	var/client/client = CLIENT_FROM_VAR(source)
-	if(client.holder)
+	var/client/client = source ? CLIENT_FROM_VAR(source) : "ADMIN LOG" //use the source if it exists, otherwise its a log_admin
+	if(client == "ADMIN LOG" || (istype(client, /client) && client.holder))
 		embed.description += " - Admin Action"
 	else
 		embed.description += " - Player Action"
@@ -52,7 +54,7 @@ SUBSYSTEM_DEF(overwatch)
 	admin_text += "**Lacks +BAN**: [english_list(other_admins, "N/A")]."
 
 	embed.fields = list(
-		"CKEY" = key_name(source, include_link = FALSE),
+		"CKEY" = embed.author,
 		"PLAYERS" = player_count,
 		"ROUND ID" = GLOB.round_id,
 		"ROUND TIME" = ROUND_TIME(),
