@@ -96,7 +96,8 @@
 		new /datum/data/mining_equipment("blue stripe", /obj/item/reagent_containers/food/drinks/beer/vampire/blue_stripe, 8),
 		new /datum/data/mining_equipment("candle pack", /obj/item/storage/fancy/candle_box, 12),
 		new /datum/data/mining_equipment("bruise pack", /obj/item/stack/medical/bruise_pack, 100),
-		new /datum/data/mining_equipment("respirator", /obj/item/clothing/mask/vampire, 35)
+		new /datum/data/mining_equipment("respirator", /obj/item/clothing/mask/vampire, 35),
+		new /datum/data/mining_equipment("newspaper", /obj/item/newspaper, 5)
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/grocery
@@ -140,6 +141,7 @@
 		new /datum/data/mining_equipment("kitchen knife", /obj/item/kitchen/knife, 26),
 		new /datum/data/mining_equipment("rolling pin", /obj/item/kitchen/rollingpin, 8),
 		new /datum/data/mining_equipment("mixing bowl", /obj/item/reagent_containers/glass/mixing_bowl, 15),
+		new /datum/data/mining_equipment("newspaper", /obj/item/newspaper, 5)
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/deli

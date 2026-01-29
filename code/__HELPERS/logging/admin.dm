@@ -8,6 +8,7 @@
 	GLOB.admin_activities.Add(text)
 	logger.Log(LOG_CATEGORY_ADMIN, text, data)
 	logger.Log(LOG_CATEGORY_COMPAT_GAME, "ADMIN: [text]")
+	SSoverwatch.record_action(source = null, message = "[text]")
 
 /// Logging for admin actions on or with circuits
 /proc/log_admin_circuit(text, list/data)

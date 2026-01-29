@@ -897,6 +897,12 @@
 			var/mob/living/silicon/robot/cyborg = U
 			if(cyborg.combat_mode)
 				M.show_inv(cyborg)
+		if(ishuman(U))
+			var/mob/living/carbon/human = U
+			if(!human.combat_mode || human.client.prefs.toggles & CMODE_STRIPPING)
+				M.show_inv(U)
+			else
+				return FALSE
 		else
 			M.show_inv(U)
 

@@ -40,7 +40,8 @@
 		new /datum/data/mining_equipment("ephedrine pill bottle", /obj/item/storage/pill_bottle/ephedrine, 200),
 		new /datum/data/mining_equipment("straight jacket", /obj/item/clothing/suit/straight_jacket, 200),
 		new /datum/data/mining_equipment("box of syringes", /obj/item/storage/box/syringes, 300),
-		new /datum/data/mining_equipment("organ transport container", /obj/item/storage/organbox, 500)
+		new /datum/data/mining_equipment("organ transport container", /obj/item/storage/organbox, 500),
+		new /datum/data/mining_equipment("newspaper", /obj/item/newspaper, 5)
 	)
 
 
@@ -55,7 +56,8 @@
 		new /datum/data/mining_equipment("robust gold", /obj/item/storage/fancy/cigarettes/cigpack_robustgold, 100),
 		new /datum/data/mining_equipment("cigar ", /obj/item/storage/fancy/cigarettes/cigars, 100),
 		new /datum/data/mining_equipment("havana cigar", /obj/item/storage/fancy/cigarettes/cigars/havana, 100),
-		new /datum/data/mining_equipment("cohiba cigar", /obj/item/storage/fancy/cigarettes/cigars/cohiba, 100)
+		new /datum/data/mining_equipment("cohiba cigar", /obj/item/storage/fancy/cigarettes/cigars/cohiba, 100),
+		new /datum/data/mining_equipment("newspaper", /obj/item/newspaper, 5)
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/gas
@@ -84,7 +86,8 @@
 		new /datum/data/mining_equipment("Bible",	/obj/item/storage/book/bible,  20),
 		new /datum/data/mining_equipment("Quran",	/obj/item/vampirebook/quran,  20),
 		new /datum/data/mining_equipment("Torah", /obj/item/vampirebook/torah, 20),
-		new /datum/data/mining_equipment("spray paint", /obj/item/toy/crayon/spraycan, 25)
+		new /datum/data/mining_equipment("spray paint", /obj/item/toy/crayon/spraycan, 25),
+		new /datum/data/mining_equipment("newspaper", /obj/item/newspaper, 5)
 	)
 
 /obj/machinery/mineral/equipment_vendor/fastfood/antique
@@ -157,4 +160,5 @@
 		new /datum/data/mining_equipment("prepaid cell phone", /obj/item/vamp/phone, 100),
 		new /datum/data/mining_equipment("box of light bulbs", /obj/item/wirecutters, 100),
 		new /datum/data/mining_equipment("insulated gloves", /obj/item/clothing/gloves/color/yellow, 200),
+		new /datum/data/mining_equipment("newspaper", /obj/item/newspaper, 5)
 	)

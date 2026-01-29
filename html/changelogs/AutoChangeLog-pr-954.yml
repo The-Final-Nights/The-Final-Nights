@@ -1,0 +1,4 @@
+author: "Somniworld"
+delete-after: True
+changes:
+  - image: "New sprites for the \"corvid form\" UI element."

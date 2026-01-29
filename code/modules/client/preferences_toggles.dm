@@ -412,6 +412,14 @@ GLOBAL_LIST_INIT(ghost_orbits, list(GHOST_ORBIT_CIRCLE,GHOST_ORBIT_TRIANGLE,GHOS
 			var/mob/dead/observer/O = mob
 			O.update_sight()
 
+/client/verb/toggle_combat_stripping()
+	set name = "Toggle Combat Mode Stripping"
+	set category = "Preferences"
+	set desc = "Toggle between being able to strip/access people's inventory while combat mode is active."
+	prefs.toggles ^= CMODE_STRIPPING
+	prefs.save_preferences()
+	to_chat(src, "You [prefs.toggles & CMODE_STRIPPING ? "will" : "will not"] be able to open the strip menu in combat mode.")
+
 /client/verb/toggle_intent_style()
 	set name = "Toggle Intent Selection Style"
 	set category = "Preferences"

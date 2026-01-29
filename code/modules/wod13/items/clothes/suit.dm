@@ -274,6 +274,11 @@
 		/obj/item/flashlight,
 	)
 
+/obj/item/clothing/suit/vampire/jacket/cut
+	name = "cropped black leather jacket"
+	desc = "True clothing for any punk, this one cut to expose one's midrift. Provides some kind of proteciton."
+	icon_state = "jacket1_cut"
+
 /obj/item/clothing/suit/vampire/jacket/fbi
 	name = "Federal Bureau of Investigation jacket"
 	desc = "\"FBI OPEN UP!!\""
@@ -293,6 +298,21 @@
 	name = "brown leather jacket"
 	icon_state = "jacket2"
 	armor = list(MELEE = 35, BULLET = 35, LASER = 10, ENERGY = 10, BOMB = 35, BIO = 0, RAD = 0, FIRE = 35, ACID = 10, WOUND = 35)
+
+/obj/item/clothing/suit/vampire/jacket/better/cut
+	name = "cropped brown leather jacket"
+	desc = "True clothing for any punk, this one cut to expose one's midrift. Provides some kind of proteciton."
+	icon_state = "jacket2_cut"
+
+/obj/item/clothing/suit/vampire/jacket/red
+	name = "red leather jacket"
+	icon_state = "jacket3"
+	armor = list(MELEE = 35, BULLET = 35, LASER = 10, ENERGY = 10, BOMB = 35, BIO = 0, RAD = 0, FIRE = 35, ACID = 10, WOUND = 35)
+
+/obj/item/clothing/suit/vampire/jacket/red/cut
+	name = "cropped red leather jacket"
+	desc = "True clothing for any punk, this one cut to expose one's midrift. Provides some kind of proteciton."
+	icon_state = "jacket3_cut"
 
 /obj/item/clothing/suit/vampire/jacket/better/armored
 	name = "armored leather jacket"
