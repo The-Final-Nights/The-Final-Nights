@@ -14796,7 +14796,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/start{
-	name = "Police Chief"
+	name = "Police Captain"
 	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/police/upstairs)
