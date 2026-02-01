@@ -412,6 +412,12 @@
 	icon_state = "gothcoat"
 	inhand_icon_state = null
 
+/obj/item/clothing/suit/costume/gothcoat_alt
+	name = "gothic coat"
+	desc = "Perfect for those who want to stalk around a corner of a bar."
+	icon_state = "gothcoat_alt"
+	inhand_icon_state = null
+
 /obj/item/clothing/suit/costume/xenos
 	name = "xenos suit"
 	desc = "A suit made out of chitinous alien hide."
