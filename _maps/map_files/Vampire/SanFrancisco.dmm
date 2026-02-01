@@ -22514,7 +22514,7 @@
 /turf/closed/wall/vampwall/junk/low,
 /area/vtm/interior)
 "fkY" = (
-/obj/structure/vampdoor/glass/police_chief,
+/obj/structure/vampdoor/glass/police_captain,
 /obj/effect/turf_decal/siding/wood{
 	color = "#574d46"
 	},

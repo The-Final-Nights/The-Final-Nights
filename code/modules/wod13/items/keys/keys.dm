@@ -430,7 +430,7 @@
 		"dispatch",
 		"police",
 		"police_secure",
-		"police_chief"
+		"police_captain"
 	)
 
 //===========================MISC KEYS===========================
