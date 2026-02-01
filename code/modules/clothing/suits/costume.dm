@@ -412,7 +412,7 @@
 	icon_state = "gothcoat"
 	inhand_icon_state = null
 
-/obj/item/clothing/suit/costume/gothcoat_alt
+/obj/item/clothing/suit/costume/gothcoat/alt
 	name = "gothic coat"
 	desc = "Perfect for those who want to stalk around a corner of a bar."
 	icon_state = "gothcoat_alt"
