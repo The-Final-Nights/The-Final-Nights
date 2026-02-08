@@ -11028,6 +11028,9 @@
 /obj/structure/chair/sofa/corp/right{
 	dir = 1
 	},
+/obj/effect/landmark/start/citizen{
+	name = "Primogen Toreador"
+	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
 "cDu" = (
@@ -60873,6 +60876,9 @@
 	bulb_colour = "#9400cf";
 	pixel_y = 16
 	},
+/obj/effect/landmark/start/citizen{
+	name = "Primogen Toreador"
+	},
 /turf/open/floor/glass/reinforced,
 /area/vtm/interior/strip)
 "nRJ" = (
@@ -103355,6 +103361,9 @@
 /obj/structure/chair/comfy/black,
 /obj/structure/sign/painting/library{
 	pixel_y = 32
+	},
+/obj/effect/landmark/start/citizen{
+	name = "Primogen Toreador"
 	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
