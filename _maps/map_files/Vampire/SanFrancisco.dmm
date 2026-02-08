@@ -18786,6 +18786,27 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
+"euI" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/under/vampire/primogen_toreador/female,
+/obj/item/clothing/under/vampire/business,
+/obj/item/clothing/under/vampire/maid,
+/obj/item/clothing/under/vampire/fancy_red,
+/obj/item/clothing/suit/vampire/vest/medieval,
+/obj/item/clothing/suit/vampire/coat/winter/alt,
+/obj/item/clothing/suit/vampire/fancy_gray,
+/obj/item/clothing/suit/vampire/fancy_red,
+/obj/item/clothing/under/vampire/dress/blacktango,
+/obj/item/clothing/under/vampire/dress/countess,
+/obj/item/clothing/suit/dracula,
+/obj/item/clothing/mask/vampire/venetian_mask/scary,
+/obj/item/clothing/mask/vampire/comedy,
+/obj/item/clothing/mask/vampire/tragedy,
+/obj/item/clothing/mask/vampire/venetian_mask/jester,
+/obj/item/clothing/mask/vampire/venetian_mask,
+/obj/item/clothing/mask/vampire/venetian_mask,
+/turf/open/floor/plating/granite/black,
+/area/vtm/interior/strip)
 "euX" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/drinks/bottle/sake{
@@ -40545,6 +40566,9 @@
 /area/vtm/interior/apartment)
 "joh" = (
 /obj/structure/toilet,
+/obj/machinery/light{
+	pixel_y = 32
+	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip)
 "jok" = (
@@ -53545,6 +53569,12 @@
 /obj/matrix,
 /turf/open/floor/plating/umbra,
 /area/vtm/baywalk)
+"mmg" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/strip)
 "mmj" = (
 /obj/effect/turf_decal/siding/white,
 /turf/open/floor/plating/toilet,
@@ -53811,6 +53841,11 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"moP" = (
+/obj/structure/table/wood/poker,
+/obj/item/toy/cards/deck,
+/turf/open/floor/plating/granite/black,
+/area/vtm/interior/strip)
 "moY" = (
 /obj/vampire_car/rand{
 	dir = 1
@@ -85300,6 +85335,10 @@
 /obj/effect/spawner/lootdrop/minor/kittyears_or_rabbitears,
 /obj/effect/spawner/lootdrop/minor/kittyears_or_rabbitears,
 /obj/effect/spawner/lootdrop/minor/kittyears_or_rabbitears,
+/obj/item/melee/vampirearms/eguitar{
+	name = "replica guitar";
+	desc = "A classic guitar, of some noteworthy rocker, seemingly signed by them - Likely a fake, to the point even the signature is far too smudged to make out the letters."
+	},
 /turf/open/floor/plating/toilet{
 	color = "#919191"
 	},
@@ -87552,12 +87591,8 @@
 	color = "#aa4f25";
 	dir = 1
 	},
-/obj/effect/decal/wallpaper/red/low,
-/obj/structure/vampstatue/angel{
-	pixel_x = 0;
-	pixel_y = 12
-	},
-/turf/closed/wall/vampwall/bar/low,
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "ucG" = (
 /obj/effect/decal/bordur,
@@ -136906,7 +136941,7 @@ uYH
 wTM
 kxu
 drt
-kzp
+moP
 ooR
 buN
 giH
@@ -137300,7 +137335,7 @@ giH
 jEV
 sZR
 lWX
-qjZ
+euI
 qjZ
 gnp
 vPx
@@ -179114,7 +179149,7 @@ kea
 gnp
 joh
 vFG
-cHO
+mmg
 tes
 gnp
 ptC
