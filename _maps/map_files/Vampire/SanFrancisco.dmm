@@ -86510,8 +86510,7 @@
 /area/vtm/sewer)
 "tOI" = (
 /obj/structure/sign/painting/library{
-	pixel_y = 32;
-	wallframe_type = /obj/item/wallframe/paintings
+	pixel_y = 32
 	},
 /obj/structure/chair/wood/wings{
 	dir = 4
