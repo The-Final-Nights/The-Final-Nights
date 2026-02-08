@@ -9511,13 +9511,6 @@
 	color = "#8a8a8a"
 	},
 /area/vtm)
-"cly" = (
-/obj/effect/decal/wallpaper/red,
-/obj/structure/sign/painting/large/library{
-	pixel_y = 27
-	},
-/turf/closed/wall/vampwall/bar,
-/area/vtm/interior/strip)
 "clE" = (
 /obj/structure/vampdoor/old{
 	dir = 8;
@@ -9823,6 +9816,9 @@
 /obj/structure/chair/sofa/corp/left{
 	alpha = 225;
 	dir = 4
+	},
+/obj/structure/sign/painting/large/library{
+	dir = 1
 	},
 /turf/open/floor/carpet/orange,
 /area/vtm/interior/strip)
@@ -62415,6 +62411,15 @@
 /obj/structure/closet/crate/large,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
+"ojF" = (
+/obj/machinery/light/floor{
+	alpha = 80
+	},
+/obj/structure/sign/painting/large/library{
+	dir = 1
+	},
+/turf/open/water,
+/area/vtm/interior/strip)
 "ojI" = (
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
@@ -92188,14 +92193,6 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/shop)
-"vhK" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/red,
-/obj/structure/sign/painting/large/library{
-	pixel_y = 27
-	},
-/turf/closed/wall/vampwall/bar,
-/area/vtm/sewer)
 "vhO" = (
 /mob/living/simple_animal/pet/cat/vampire{
 	name = "Autun"
@@ -93850,6 +93847,12 @@
 	},
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/shop)
+"vDl" = (
+/obj/structure/sign/painting/large/library{
+	dir = 1
+	},
+/turf/open/floor/carpet/orange,
+/area/vtm/interior/strip)
 "vDn" = (
 /obj/structure/rack,
 /obj/item/storage/firstaid/regular,
@@ -99825,6 +99828,13 @@
 	color = "#636363"
 	},
 /area/vtm/church/interior/staff)
+"wWS" = (
+/obj/structure/table/wood/fancy/orange,
+/obj/structure/sign/painting/large/library{
+	dir = 1
+	},
+/turf/open/floor/carpet/orange,
+/area/vtm/interior/strip)
 "wWU" = (
 /obj/effect/decal/rugs,
 /obj/effect/turf_decal/siding/white{
@@ -104007,7 +104017,8 @@
 /area/vtm/interior/millennium_tower/f3)
 "xUD" = (
 /obj/structure/sign/painting/library{
-	pixel_y = 32
+	pixel_y = 32;
+	wallframe_type = /obj/item/wallframe/paintings
 	},
 /obj/structure/chair/wood/wings{
 	dir = 4
@@ -135330,7 +135341,7 @@ sZR
 cym
 wpD
 kxu
-cly
+sZR
 coN
 usX
 ucE
@@ -135522,8 +135533,8 @@ tuX
 aej
 vFf
 kRM
-vhK
-kxu
+gAv
+vDl
 sui
 fWw
 uJO
@@ -136946,8 +136957,8 @@ gnp
 pMn
 pMn
 mWO
-cly
-wTM
+sZR
+wWS
 kxu
 drt
 moP
@@ -219371,8 +219382,8 @@ qqa
 dhH
 dhH
 dhH
-cly
-wzV
+sZR
+ojF
 azc
 iSH
 cDo
