@@ -24367,6 +24367,7 @@
 "fGa" = (
 /obj/item/canvas/twentyfour_twentyfour,
 /obj/structure/easel,
+/obj/item/paint_palette,
 /turf/open/floor/carpet/orange,
 /area/vtm/interior/strip)
 "fGe" = (
@@ -69216,6 +69217,7 @@
 	},
 /obj/item/multitool,
 /obj/item/crowbar,
+/obj/item/wirecutters,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "pNa" = (
