@@ -82,6 +82,7 @@
 
 	ADD_TRAIT(src, TRAIT_NEVER_WOUNDED, SPECIES_TRAIT)
 	ADD_TRAIT(src, TRAIT_NIGHT_VISION, SPECIES_TRAIT)
+	ADD_TRAIT(src, TRAIT_PERFECT_ATTACKER, SPECIES_TRAIT)
 
 	RegisterSignal(src, COMSIG_MOB_ATTACK_RANGED, PROC_REF(swing_attack))
 
@@ -167,8 +168,8 @@
 	mob_size = MOB_SIZE_HUGE
 	butcher_results = list(/obj/item/food/meat/slab = 5)
 	limb_destroyer = 1
-	melee_damage_lower = 65
-	melee_damage_upper = 65
+	melee_damage_lower = 70
+	melee_damage_upper = 70
 	health = 450
 	maxHealth = 450
 	bodyparts = list(

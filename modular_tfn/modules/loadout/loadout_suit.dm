@@ -53,8 +53,24 @@
 
 /datum/gear/suit/jacket/black_leather
 	display_name = "jacket, black leather"
-	description = "	True clothing for any punk."
+	description = "True clothing for any punk."
 	path = /obj/item/clothing/suit/vampire/jacket
+
+/datum/gear/suit/jacket/black_leather_cut
+	display_name = "jacket, cropped black leather"
+	description = "True clothing for any punk; this one being a high-crop."
+	path = /obj/item/clothing/suit/vampire/jacket/cut
+
+/datum/gear/suit/jacket/red_leather
+	display_name = "jacket, red leather"
+	description = "True clothing for any punk."
+	path = /obj/item/clothing/suit/vampire/jacket/red
+
+/datum/gear/suit/jacket/red_leather_cut
+	display_name = "jacket, cropped red leather"
+	description = "True clothing for any punk; this one being a high-crop."
+	path = /obj/item/clothing/suit/vampire/jacket/red/cut
+
 
 /datum/gear/suit/jacket/dutch
 	display_name = "jacket, dutch"
@@ -86,51 +102,51 @@
 /datum/gear/suit/trenchcoat/burgundy
 	display_name = "trenchcoat, burgundy"
 	path = /obj/item/clothing/suit/vampire/trench/archive
-	
+
 //Robes
 /datum/gear/suit/hooded/robes
 	subtype_path = /datum/gear/suit/hooded/robes
-	
+
 /datum/gear/suit/hooded/robes/white
 	display_name = "robe, white"
 	description = "Some angelic-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes
-	
+
 /datum/gear/suit/hooded/robes/black
 	display_name = "robe, black"
 	description = "Some creepy-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes/black
-	
+
 /datum/gear/suit/hooded/robes/grey
 	display_name = "robe, grey"
 	description = "Some somber-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes/grey
-	
+
 /datum/gear/suit/hooded/robes/darkred
 	display_name = "robe, dark red"
 	description = "Some zealous-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes/darkred
-	
+
 /datum/gear/suit/hooded/robes/yellow
 	display_name = "robe, yellow"
 	description = "Some happy-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes/yellow
-	
+
 /datum/gear/suit/hooded/robes/green
 	display_name = "robe, green"
 	description = "Some earthy-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes/green
-	
+
 /datum/gear/suit/hooded/robes/red
 	display_name = "robe, red"
 	description = "Some furious-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes/red
-	
+
 /datum/gear/suit/hooded/robes/purple
 	display_name = "robe, purple"
 	description = "Some elegant-looking robes."
 	path = /obj/item/clothing/suit/hooded/robes/purple
-	
+
 /datum/gear/suit/hooded/robes/blue
 	display_name = "robe, blue"
 	description = "Some watery-looking robes."

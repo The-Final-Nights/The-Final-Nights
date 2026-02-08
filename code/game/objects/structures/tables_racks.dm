@@ -114,6 +114,13 @@
 		if(vw.low)
 			return TRUE
 
+	// TFN EDIT START - Obtenebration & Mysticism Rework: Check for trait to allow phasing through tables
+	if(istype(mover, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = mover
+		if(HAS_TRAIT(H, TRAIT_PASSTABLE))
+			return TRUE
+	// TFN EDIT END
+
 /obj/structure/table/CanAStarPass(ID, dir, pathfinding_atom)
 	. = !density
 	if(ismovable(pathfinding_atom))

@@ -1,0 +1,35 @@
+2026-01-07:
+  buffyuwu:
+  - refactor: overhauled newspaper system for lore team. use a newspaper item ingame
+      to check it out!
+  faaaay:
+  - bugfix: the Endron Executive role is selectable again
+2026-01-09:
+  Dusk-a:
+  - bugfix: Changed 2015 to 2016 in NPC dialogue
+2026-01-13:
+  buffyuwu:
+  - bugfix: you can now buy newspapers at stores where it makes sense
+2026-01-15:
+  Dusk-a:
+  - balance: Nerfs Tzimisce wing speed
+  Stutternov:
+  - rscadd: Adds new game preference toggle to turn on/off combat mode open inventory/stripping.
+2026-01-23:
+  buffyuwu:
+  - bugfix: '1984'
+2026-01-27:
+  theselfish:
+  - spellcheck: Interior no longer appears on Bloodhunt-o-vision or Scrolls.
+2026-01-28:
+  Stutternov:
+  - rscadd: Adds new cropped leather jackets, one for each color
+  - rscadd: Adds new red leather jacket with a cropped variant
+  - rscadd: Adds all new cropped leather jackets to the loadout screen.
+2026-01-30:
+  Dusk-a:
+  - bugfix: Fixed Crinos, Lupus, and Hispo from missing half their attacks.
+  Somniworld:
+  - image: New sprites for the "corvid form" UI element.
+  buffyuwu:
+  - qol: you can now craft doors and windows via the craft menu

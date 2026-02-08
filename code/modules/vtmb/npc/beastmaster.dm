@@ -261,7 +261,7 @@ SUBSYSTEM_DEF(beastmastering)
 				B.follow = FALSE
 
 /datum/action/beastmaster_deaggro
-	name = "Loose Aggression"
+	name = "Drop Aggression"
 	desc = "Command to stop any aggressive moves."
 	button_icon_state = "deaggro"
 	check_flags = AB_CHECK_HANDS_BLOCKED|AB_CHECK_IMMOBILE|AB_CHECK_LYING|AB_CHECK_CONSCIOUS

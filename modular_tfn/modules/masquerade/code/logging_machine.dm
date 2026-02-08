@@ -78,7 +78,8 @@
 			stop_sound()
 			break
 		var/obj/phone = saved_logs[1][2]
-		SEND_SIGNAL(phone, COMSIG_ALL_MASQUERADE_REINFORCE)
+		if(phone)
+			SEND_SIGNAL(phone, COMSIG_ALL_MASQUERADE_REINFORCE)
 		saved_logs -= list(saved_logs[1]) //Clear the oldest logs first.
 	stop_sound()
 

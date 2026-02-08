@@ -217,7 +217,7 @@
 	wall_rating = HIGH_WALL_RATING
 
 /area/vtm/interior/sabbat_lair
-	name = "Interior"
+	name = "Sewer"
 	zone_type = "elysium"
 	music = /datum/vampiremusic/sewer
 	upper = FALSE

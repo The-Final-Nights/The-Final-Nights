@@ -598,6 +598,10 @@
 /datum/config_entry/string/discord_overwatch_webhook
 	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
 
+/datum/config_entry/string/admin_overwatch_webhook
+	protection = CONFIG_ENTRY_LOCKED | CONFIG_ENTRY_HIDDEN
+
+
 /datum/config_entry/flag/forbid_all_profiling
 
 /datum/config_entry/flag/forbid_admin_profiling

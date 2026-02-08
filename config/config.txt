@@ -514,6 +514,10 @@ TGUI_MAX_CHUNK_COUNT 32
 ## Sets the webhook URL for the Overwatch System
 #DISCORD_OVERWATCH_WEBHOOK https://discord.com/api/webhooks/XXX/XXX
 
+## For Admin related overwatch. All log_admin entries are sent to this webhook. Probably make this a private channel.
+#ADMIN_OVERWATCH_WEBHOOK https://discord.com/api/webhooks/XXX/XXX
+
+
 ## Uncomment to block all attempts to profile, for performance reasons
 #FORBID_ALL_PROFILING
 

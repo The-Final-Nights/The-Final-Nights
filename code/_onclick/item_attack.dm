@@ -269,9 +269,8 @@
 	var/meleemod = 1
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		if(H.dna?.species)
-			meleemod = H.dna.species.meleemod
-	damage = damage * meleemod
+		meleemod = (meleemod * (((H.st_get_stat(STAT_MELEE))) + ((H.st_get_stat(STAT_STRENGTH)))))
+	damage = damage + meleemod
 	//TFN EDIT END -- Fixes Meleemods for Weapons
 
 	var/wounding = attacking_item.wound_bonus

@@ -206,6 +206,9 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	///If this species can be selected for characters at all.
 	var/selectable = FALSE
 
+ 	//TFN EDIT: Does this species keep their languages when they transform, but not gain other languages as a result?
+	var/keeps_languages_on_transform = FALSE
+
 ///////////
 // PROCS //
 ///////////
@@ -399,6 +402,15 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	C.mob_biotypes = inherent_biotypes
 
 	regenerate_organs(C,old_species)
+
+	if(ishuman(C))
+		var/mob/living/carbon/human/H = C
+		if(H.physiology)
+			H.physiology.brute_mod = brutemod
+			H.physiology.burn_mod = burnmod
+			H.physiology.cold_mod = coldmod
+			H.physiology.heat_mod = heatmod
+			H.physiology.stun_mod = stunmod
 
 	if(exotic_bloodtype && C.dna.blood_type != exotic_bloodtype)
 		C.dna.blood_type = exotic_bloodtype

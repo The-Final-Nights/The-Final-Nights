@@ -22,8 +22,14 @@
 	H.set_clan(null)
 	H.generation = 13
 	H.st_set_stat(5, STAT_LARCENY)
+	H.st_get_stat(4, STAT_STRENGTH)
 	H.st_set_stat(4, STAT_STAMINA)
 	H.st_set_stat(4, STAT_STRENGTH)
+	H.st_get_stat(4, STAT_FIREARMS)
+	H.st_set_stat(4, STAT_COURAGE)
+	H.st_get_stat(4, STAT_WITS)
+	H.st_get_stat(6, STAT_PERMANENT_WILLPOWER)
+	H.st_get_stat(6, STAT_TEMPORARY_WILLPOWER)
 	H.recalculate_max_health(TRUE)
 
 	for(var/datum/action/A in H.actions)

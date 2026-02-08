@@ -268,11 +268,11 @@
 		if(!lowest_virtue || target_stat < lowest_virtue.score)
 			lowest_virtue = target.st_get_stat_datum(virtue)
 
-	if(SSroll.storyteller_roll(target.st_get_stat(lowest_virtue), 6, mobs_to_show_output = list(owner, target)) == !ROLL_SUCCESS)
-		to_chat(owner, span_warning("[target] is too pure to manifest their fears!"))
-		return FALSE
-	to_chat(owner, span_cult("[target] will suffer greatly."))
-	return TRUE
+	if(SSroll.storyteller_roll(target.st_get_stat(lowest_virtue), 6, mobs_to_show_output = list(target)) == !ROLL_SUCCESS)
+		to_chat(owner, span_cult("[target] will suffer greatly."))
+		return TRUE
+	to_chat(owner, span_warning("[target] is too pure to manifest their fears!"))
+	return FALSE
 
 /datum/discipline_power/daimonion/psychomachia/activate(mob/living/target)
 	. = ..()

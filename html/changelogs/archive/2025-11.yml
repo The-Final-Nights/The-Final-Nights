@@ -1,0 +1,45 @@
+2025-11-02:
+  Magisterium2022:
+  - rscadd: Added new surgeries - Appearance Change, Cardiac Relocation, False Clan
+      Curse, Eye Colour Change, Fat Enhancement, Fat Reduction, Hair Colour Change,
+      Height Enhancement, Height Reduction, Reinforce Limb, Sex Change, Skin Colour
+      Change
+  - rscadd: Added new Organs - Second Stomach, Second Heart, Thermal Eyes
+  - rscadd: Added new Augments to Vicissitude 5 Surgical Implant - Bonesetting Augment,
+      Filtering Organ, Synaptic Tendrils, Electrocyte Stack
+  - rscadd: Added new Zulo species with Vicissitude 4.
+  - balance: Gave Tzimisce Surgeon trait, and all owners of Vicissitude the ability
+      to operate on themselves surgically.
+  - balance: EMP resistance to all Tzimisce (Biological) implants.
+  - rscdel: Removes Healing Arm from Tzimisce on request of XeonMations.
+2025-11-04:
+  AlmostLikeClockwork:
+  - bugfix: gave NG/FT/SWAT proper stats
+  - bugfix: fixed quietus 3
+  Zeus-succs:
+  - bugfix: Should fix Melp 2 not sending proper messages.
+2025-11-14:
+  XeonMations:
+  - server: Server now checks for age verified members, and kicks anyone out who isn't
+      verified.
+2025-11-17:
+  Magisterium2022:
+  - bugfix: Fixed duration bug with Blood of Potency (Thaumaturgy 3)
+  - code_imp: Cleaned up Blood of Potency Code.
+  Mnemeory:
+  - bugfix: fixes mort attendant not spawning w/ID
+  - bugfix: fixes mort attendant not spawning w/P25
+  - bugfix: moves mort attendant to clinic roles since it's a clinic job
+  - bugfix: adds mort attendant to the pyxis
+  XeonMations:
+  - bugfix: Fixed the logging machine not clearing logs.
+2025-11-20:
+  AlmostLikeClockwork:
+  - rscdel: Removed unbonding quirk
+  Drakeven:
+  - bugfix: Wyrm tainted hispo and dog forms now have sprites
+  - image: Added sprites for those two things.
+2025-11-24:
+  Magisterium2022:
+  - rscadd: Added feedback when Dominate fails due to gen difference.
+  - bugfix: Fixed error allowing higher gens to dominate lower gens vampires.
