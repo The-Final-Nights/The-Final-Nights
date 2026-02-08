@@ -82870,7 +82870,6 @@
 /area/vtm/sewer/nosferatu_warren)
 "sXE" = (
 /obj/structure/table/wood/poker,
-/obj/structure/table/wood/poker,
 /obj/item/toy/cards/deck,
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
