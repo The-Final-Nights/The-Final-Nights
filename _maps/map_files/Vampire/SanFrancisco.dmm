@@ -27660,6 +27660,9 @@
 /obj/item/instrument/violin/golden,
 /obj/structure/closet/cabinet,
 /obj/item/toy/crayon/spraycan/infinite,
+/obj/item/vamp/keys/toreador,
+/obj/item/vamp/keys/toreador,
+/obj/item/vamp/keys/toreador,
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
 "gti" = (
