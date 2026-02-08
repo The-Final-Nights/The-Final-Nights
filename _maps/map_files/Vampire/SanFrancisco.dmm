@@ -9817,6 +9817,9 @@
 	alpha = 225;
 	dir = 4
 	},
+/obj/structure/sign/painting/large/library{
+	pixel_y = 27
+	},
 /turf/open/floor/carpet/orange,
 /area/vtm/interior/strip)
 "coW" = (
@@ -10802,6 +10805,12 @@
 	icon_state = "carpet_black"
 	},
 /area/vtm/sewer/nosferatu_warren)
+"cAo" = (
+/obj/structure/sign/painting/large/library{
+	pixel_y = 27
+	},
+/turf/open/floor/carpet/orange,
+/area/vtm/interior/strip)
 "cAt" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -38578,6 +38587,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/apartment)
+"iPF" = (
+/obj/structure/table/wood/fancy/orange,
+/obj/structure/sign/painting/large/library{
+	pixel_y = 27
+	},
+/turf/open/floor/carpet/orange,
+/area/vtm/interior/strip)
 "iPJ" = (
 /obj/structure/railing/metal{
 	dir = 4
@@ -89798,14 +89814,6 @@
 	},
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/shop)
-"uDy" = (
-/obj/effect/decal/wallpaper/red,
-/obj/effect/decal/wallpaper/red,
-/obj/structure/sign/painting/large/library{
-	pixel_y = -5
-	},
-/turf/closed/wall/vampwall/bar,
-/area/vtm/sewer)
 "uDz" = (
 /obj/effect/decal/litter,
 /obj/machinery/light/small/red{
@@ -91464,13 +91472,6 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/techshop)
-"uYH" = (
-/obj/effect/decal/wallpaper/red,
-/obj/structure/sign/painting/large/library{
-	pixel_y = -5
-	},
-/turf/closed/wall/vampwall/bar,
-/area/vtm/interior/strip)
 "uYL" = (
 /obj/structure/rack,
 /obj/item/healthanalyzer,
@@ -98606,6 +98607,15 @@
 	dir = 4
 	},
 /turf/open/floor/carpet/royalblue,
+/area/vtm/interior/strip)
+"wHY" = (
+/obj/machinery/light/floor{
+	alpha = 80
+	},
+/obj/structure/sign/painting/large/library{
+	pixel_y = 27
+	},
+/turf/open/water,
 /area/vtm/interior/strip)
 "wIf" = (
 /obj/structure/table/wood,
@@ -135321,7 +135331,7 @@ sZR
 cym
 wpD
 kxu
-uYH
+sZR
 coN
 usX
 ucE
@@ -135513,8 +135523,8 @@ tuX
 aej
 vFf
 kRM
-uDy
-kxu
+gAv
+cAo
 sui
 fWw
 uJO
@@ -136937,8 +136947,8 @@ gnp
 pMn
 pMn
 mWO
-uYH
-wTM
+sZR
+iPF
 kxu
 drt
 moP
@@ -219362,8 +219372,8 @@ qqa
 dhH
 dhH
 dhH
-uYH
-wzV
+sZR
+wHY
 azc
 iSH
 cDo
