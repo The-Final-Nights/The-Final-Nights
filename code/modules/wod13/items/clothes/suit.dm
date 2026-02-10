@@ -891,3 +891,8 @@
 	name = "vintage parka hood"
 	desc = "A heavy fur-lined hood, for all the snow in LA."
 	icon_state = "vintagepark_hood"
+
+/obj/item/clothing/suit/vampire/shawl_black
+	name = "black shawl"
+	desc = "A long silk shawl, to be draped over the arms."
+	icon_state = "shawl_black"
