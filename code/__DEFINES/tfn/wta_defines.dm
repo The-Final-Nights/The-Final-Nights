@@ -20,7 +20,7 @@
 /// Shapeshifters born in human form
 #define BREED_HOMID "Homid"
 /// Werewolves born in Crinos or war form
-#define BREED_METIS "Metis"
+#define BREED_METIS "Crinos"
 /// Werewolves born in wolf form
 #define BREED_LUPUS "Lupus"
 
