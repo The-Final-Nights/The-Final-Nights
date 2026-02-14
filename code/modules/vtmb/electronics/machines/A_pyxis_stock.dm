@@ -116,7 +116,6 @@ GLOBAL_LIST_INIT(CLINIC_category_access, list(
 		list("name" = "Scrubs, Pink", "path" = /obj/item/clothing/under/vampire/nurse/nursep, "stock" = 4, "cost" = 30),
 		list("name" = "Latex Gloves", "path" = /obj/item/clothing/gloves/vampire/latex, "stock" = 10, "cost" = 10),
 		list("name" = "Defib Batteries", "path" = /obj/item/stock_parts/cell, "stock" = 6, "cost" = 35),
-		list("name" = "Radio, Hospital", "path" = /obj/item/p25radio, "stock" = 4, "cost" = 40),
 		list("name" = "Syringe", "path" = /obj/item/reagent_containers/syringe, "stock" = 10, "cost" = 5),
 		list("name" = "Stethoscope", "path" = /obj/item/clothing/neck/stethoscope, "stock" = 10, "cost" = 20),
 		list("name" = "Defibrillator, Compact", "path" = /obj/item/defibrillator/compact, "stock" = 6, "cost" = 90),

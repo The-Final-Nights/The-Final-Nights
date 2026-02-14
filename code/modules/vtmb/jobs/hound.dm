@@ -35,7 +35,6 @@
 	name = "Hound"
 	jobtype = /datum/job/vamp/hound
 
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/camarilla
 	uniform = /obj/item/clothing/under/vampire/hound
 	gloves = /obj/item/clothing/gloves/vampire/work

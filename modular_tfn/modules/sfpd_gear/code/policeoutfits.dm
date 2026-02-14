@@ -43,13 +43,13 @@
 	onflooricon = 'modular_tfn/modules/sfpd_gear/icons/onfloor.dmi'
 
 /obj/item/clothing/suit/vampire/vest/police/sergeant
-	name = "police sergeant vest"
+	name = "police sergeant duty vest"
 	icon_state = "sgtvest"
 	desc = "Lightweight, bulletproof vest with SFPD markings, tailored for active duty. This one has sergeant insignia on it."
 
-/obj/item/clothing/suit/vampire/vest/police/chief
-	name = "police chief duty vest"
-	icon_state = "chiefvest"
+/obj/item/clothing/suit/vampire/vest/police/captain
+	name = "police captain duty vest"
+	icon_state = "cptvest"
 	desc = "Composite bulletproof vest with SFPD markings, tailored for improved protection. This one has captain insignia on it."
 	armor = list(MELEE = 70, BULLET = 70, LASER = 10, ENERGY = 10, BOMB = 60, BIO = 0, RAD = 0, FIRE = 50, ACID = 10, WOUND = 30)
 

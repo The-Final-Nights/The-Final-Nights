@@ -60,9 +60,9 @@
 	lock_id = "primToreador"
 	lockpick_difficulty = 14
 
-/obj/structure/vampdoor/glass/police_chief
+/obj/structure/vampdoor/glass/police_captain
 	locked = TRUE
-	lock_id = "police_chief"
+	lock_id = "police_captain"
 	lockpick_difficulty = 21
 
 /obj/structure/vampdoor/glass/jazz_club

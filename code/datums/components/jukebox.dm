@@ -341,9 +341,11 @@
 
 		else if(listeners[listener] & SOUND_MUTE)
 			unmute_listener(listener, MUTE_RANGE)
-
-		active_song_sound.x = new_x
-		active_song_sound.z = new_z
+		// 0 means we dont adjust the sound source from the listener, so it always plays in stereo for the listener. using new_x and new_y will play positional audio from the jukebox location
+		//active_song_sound.x = new_x
+		//active_song_sound.z = new_z
+		active_song_sound.x = 0
+		active_song_sound.z = 0
 
 	SEND_SOUND(listener, active_song_sound)
 

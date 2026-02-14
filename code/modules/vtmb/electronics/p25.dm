@@ -199,30 +199,6 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	return TRUE
 
 // ==============================
-// Clinic/Tower/Anarch Transceivers
-// ==============================
-
-/obj/machinery/p25transceiver/clinic
-	name = "clinic P25 transceiver"
-	desc = "A P25 radio transceiver configured for clinic communications."
-	p25_network = "clinic"
-
-/obj/machinery/p25transceiver/tower
-	name = "tower P25 transceiver"
-	desc = "A P25 radio transceiver configured for general communications."
-	p25_network = "tower"
-
-/obj/machinery/p25transceiver/anarch
-	name = "bar staff P25 transceiver"
-	desc = "A P25 radio transceiver configured for ... some waitresses and a barback?"
-	p25_network = "bar"
-
-/obj/machinery/p25transceiver/endron
-	name = "endron P25 transceiver"
-	desc = "A P25 radio transceiver configured for general communications."
-	p25_network = "endron"
-
-// ==============================
 // Police Transceiver
 // ==============================
 
@@ -717,7 +693,6 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 	var/list/choices = list(
 		"Toggle Radio Power" = "power",
 		"Toggle Dispatch Monitoring" = "dispatch",
-		"Press Panic Button" = "emergency"
 	)
 
 	var/choice = input(user, "Select an option:", "[src]") as null|anything in choices
@@ -730,8 +705,6 @@ GLOBAL_LIST_EMPTY(p25_tranceivers)
 			to_chat(user, "<span class='notice'>You turn the radio [powered ? "ON" : "OFF"].</span>")
 		if("dispatch")
 			toggle_dispatch(user)
-		if("emergency")
-			trigger_emergency(user)
 
 	playsound(src, 'sound/effects/radioonn.ogg', 100, FALSE)
 
