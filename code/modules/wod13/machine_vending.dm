@@ -255,7 +255,7 @@
 		"Police Officer" = 500,
 		"Federal Investigator" = 500,
 		"Police Sergeant" = 750,
-		"Police Chief" = 5000,	// don't you love the militirization of the police?
+		"Police Captain" = 5000,	// don't you love the militirization of the police?
 	)
 	prize_list = list(
 		new /datum/data/mining_equipment("handcuffs", /obj/item/restraints/handcuffs, 1),

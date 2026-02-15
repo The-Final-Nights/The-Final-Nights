@@ -33,6 +33,7 @@
 	alt_titles = list(
 		"Police Cadet",
 		"Senior Police Officer",
+		"Constable"
 	)
 
 /datum/job/vamp/police_sergeant

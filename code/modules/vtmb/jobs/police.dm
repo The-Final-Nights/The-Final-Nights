@@ -5,7 +5,7 @@
 	faction = "Vampire"
 	total_positions = 5
 	spawn_positions = 5
-	supervisors = " the SFPD Chief and your Sergeant."
+	supervisors = " the SFPD Captain and your Sergeant."
 	selection_color = "#7e7e7e"
 
 	outfit = /datum/outfit/job/police_officer
@@ -20,9 +20,9 @@
 	allowed_species = list("Ghoul", "Human")
 	species_slots = list("Ghoul" = 1, "Human" = 50)
 
-	duty = "Enforce the Law."
+	duty = "Enforce the Law. Listen to what the Captain and Sergeant say."
 	minimal_masquerade = 0
-	known_contacts = list("Police Chief")
+	known_contacts = list("Police Captain")
 
 /datum/outfit/job/police_officer
 	name = "Police Officer"
@@ -45,7 +45,7 @@
 	faction = "Vampire"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = " the SFPD Chief"
+	supervisors = " the SFPD Captain"
 	selection_color = "#7e7e7e"
 
 	outfit = /datum/outfit/job/police_sergeant
@@ -60,9 +60,9 @@
 	allowed_species = list("Ghoul", "Human")
 	species_slots = list("Ghoul" = 1, "Human" = 50)
 
-	duty = "Enforce the law. Keep the officers in line. Follow what the Chief says."
+	duty = "Enforce the law. Keep the officers in line. Follow what the Captain says."
 	minimal_masquerade = 0
-	known_contacts = list("Police Chief")
+	known_contacts = list("Police Captain")
 
 /datum/outfit/job/police_sergeant
 	name = "Police Sergeant"
@@ -79,22 +79,22 @@
 	r_pocket = /obj/item/vamp/keys/police/secure
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/creditcard=1, /obj/item/restraints/handcuffs = 1,/obj/item/melee/classic_baton/vampire = 1, /obj/item/storage/firstaid/ifak = 1, /obj/item/reagent_containers/spray/pepper = 1, /obj/item/ammo_box/magazine/vamp45acp = 2)
 
-/datum/job/vamp/police_chief
-	title = "Police Chief"
+/datum/job/vamp/police_captain
+	title = "Police Captain"
 	department_head = list("Police Department")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the SFPD"
+	supervisors = " the SFPD Chief"
 	selection_color = "#7e7e7e"
 
-	outfit = /datum/outfit/job/police_chief
+	outfit = /datum/outfit/job/police_captain
 
 	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_ARMORY, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
 	paycheck = PAYCHECK_COMMAND
 	paycheck_department = ACCOUNT_SRV
-	display_order = JOB_DISPLAY_ORDER_POLICE_CHIEF
+	display_order = JOB_DISPLAY_ORDER_POLICE_CAPTAIN
 	exp_type_department = EXP_TYPE_POLICE
 
 	allowed_species = list("Human")
@@ -102,23 +102,23 @@
 	duty = "Underpaid, overworked, and understrength. Do your best to keep the order in San Francisco. Keep the officers in line."
 	minimal_masquerade = 0
 
-/datum/outfit/job/police_chief
-	name = "Police Chief"
-	jobtype = /datum/job/vamp/police_chief
+/datum/outfit/job/police_captain
+	name = "Police Captain"
+	jobtype = /datum/job/vamp/police_captain
 
 	ears = /obj/item/p25radio/police/command
 	uniform = /obj/item/clothing/under/vampire/police
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
-	suit = /obj/item/clothing/suit/vampire/vest/police/chief
+	suit = /obj/item/clothing/suit/vampire/vest/police/captain
 	belt = /obj/item/storage/belt/police/full
 	gloves = /obj/item/cockclock
-	id = /obj/item/card/id/police/chief
+	id = /obj/item/card/id/police/captain
 	l_pocket = /obj/item/vamp/phone
-	r_pocket = /obj/item/vamp/keys/police/secure/chief
+	r_pocket = /obj/item/vamp/keys/police/secure/captain
 	backpack_contents = list(/obj/item/passport=1, /obj/item/vamp/creditcard=1, /obj/item/restraints/handcuffs = 1,/obj/item/melee/classic_baton/vampire = 1, /obj/item/storage/firstaid/ifak = 1, /obj/item/reagent_containers/spray/pepper = 1, /obj/item/ammo_box/magazine/vamp45acp = 2)
 
 
-/datum/outfit/job/police_chief/post_equip(mob/living/carbon/human/H)
+/datum/outfit/job/police_captain/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/martial_art/martial_art = new /datum/martial_art/cqc
 	martial_art.teach(H)
@@ -144,7 +144,7 @@
 	allowed_species = list("Human")
 	duty = "You are an assistant district attorney, a lawyer working directly with the State of California to process criminals. Help maintain law and order in the city, using the infinite power of bureaucracy to make people's lives easier!"
 	minimal_masquerade = 0
-	known_contacts = list("Police Chief")
+	known_contacts = list("Police Captain")
 
 /datum/outfit/job/assistantdistrictattorney
 	name = "Assistant District Attorney"

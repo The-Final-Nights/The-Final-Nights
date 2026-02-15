@@ -366,7 +366,7 @@
 /obj/item/card/id/police
 	name = "police officer badge"
 	id_type_name = "police officer badge"
-	desc = "Sponsored by the Government."
+	desc = "A silver star made of smooth polished metal, indicating the wearer to be a police officer of the San Francisco Police Department."
 	icon = 'code/modules/wod13/items.dmi'
 	icon_state = "id13"
 	inhand_icon_state = "card-id"
@@ -390,20 +390,20 @@
 	worn_icon_state = "id1"
 
 /obj/item/card/id/government/assistantdistrictattorney
-	name = "SFPD ADA Badge"
-	desc = "Sponsored by the Government. Assistant District Attorney. Watermarked with the seal of the District Attorney's Office."
+	name = "assistant district attorney badge"
+	desc = "A leather patrch marked with the seal of the District Attorney's Office."
 
 /obj/item/card/id/police/sergeant
 	name = "police sergeant badge"
-	desc = "Sponsored by the Government. This one seems slightly more worn down than all the others."
+	desc = "A silver star with intricate silver engravings, indicating the wearer to be a sergeant of the San Francisco Police Department."
 
-/obj/item/card/id/police/chief
-	name = "police chief badge"
-	desc = "Sponsored by the Government. This one has a chrome plated finish."
+/obj/item/card/id/police/captain
+	name = "police captain badge"
+	desc = "A gold star with intricate 10k gold-filled engravings, indicating the wearer to be a captain of the San Francisco Police Department."
 
 /obj/item/card/id/police/fbi
 	name = "fbi special agent badge"
-	desc = "Sponsored by the Government. This one has all the bells and whistles."
+	desc = "A rather ornate badge made of polished gold-like metal. It has the words \"Federal Bureau of Investigation\" engraved on it."
 
 /obj/item/card/id/bahari
 	name = "cultist badge"
