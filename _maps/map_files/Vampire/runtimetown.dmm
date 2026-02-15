@@ -832,7 +832,7 @@
 /turf/closed/wall/vampwall/painted/low,
 /area/vtm/interior/shop)
 "Cr" = (
-/obj/structure/vampdoor/glass/police_chief,
+/obj/structure/vampdoor/glass/police_captain,
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/shop)
 "Cz" = (

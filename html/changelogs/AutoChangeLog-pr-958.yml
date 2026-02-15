@@ -1,0 +1,8 @@
+author: "buffyuwu"
+delete-after: True
+changes:
+  - bugfix: "gargoyles can no longer use statue form while passing through walls simultaneously. this should address the 'perma invisibility' exploit"
+  - bugfix: "shops now correctly sell light bulbs and light tubes"
+  - bugfix: "painted city now correctly get tech store keys as well as gaia keys"
+  - refactor: "refactors door and window construction"
+  - rscadd: "adds craftable road barriers so you hooligans wont use craftable doors for them instead"
