@@ -183,10 +183,8 @@
 /turf/open/floor/plating/shit/border,
 /area/vtm/sewer)
 "abV" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
-/turf/open/floor/plating/vampgrass,
+/obj/matrix,
+/turf/closed/wall/vampwall/rock,
 /area/vtm/pacificheights/community)
 "abW" = (
 /obj/effect/turf_decal/siding/white{
@@ -2820,6 +2818,12 @@
 /obj/item/reagent_containers/blood/random,
 /turf/open/floor/plating/concrete,
 /area/vtm/sewer/police)
+"aFN" = (
+/obj/effect/decal/bordur{
+	dir = 1
+	},
+/turf/closed/wall/vampwall/rock,
+/area/vtm/forest)
 "aFQ" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8;
@@ -3741,6 +3745,10 @@
 /obj/structure/small_vamprocks,
 /turf/open/floor/plating/vampcrossableocean,
 /area/vtm/pacificheights/forest)
+"aQQ" = (
+/obj/effect/portal/wormhole,
+/turf/open/floor/plating/asphalt,
+/area/vtm/pacificheights/community)
 "aQV" = (
 /obj/structure/closet/cardboard,
 /obj/item/flashlight,
@@ -11555,12 +11563,9 @@
 /turf/open/floor/plating/vampwood,
 /area/vtm)
 "cHy" = (
-/obj/effect/decal/bordur{
-	dir = 4
-	},
 /obj/structure/flora/ausbushes/sparsegrass,
-/turf/open/floor/plating/vampgrass,
-/area/vtm/pacificheights/community)
+/turf/closed/wall/vampwall/rock,
+/area/vtm/forest)
 "cHC" = (
 /obj/effect/decal/bordur,
 /obj/effect/landmark/npcability,
@@ -16969,6 +16974,10 @@
 	},
 /turf/open/floor/carpet/green,
 /area/vtm/interior/banu)
+"dUJ" = (
+/obj/effect/decal/bordur,
+/turf/closed/wall/vampwall/rock,
+/area/vtm/pacificheights/community)
 "dUU" = (
 /obj/effect/decal/bordur{
 	dir = 4
@@ -71723,6 +71732,13 @@
 	footstep = "carpet"
 	},
 /area/vtm/clinic/haven)
+"qiu" = (
+/obj/effect/decal/asphaltline/alt{
+	dir = 8
+	},
+/obj/effect/portal/wormhole,
+/turf/open/floor/plating/asphalt,
+/area/vtm)
 "qix" = (
 /obj/structure/table/wood,
 /obj/item/newspaper{
@@ -80585,8 +80601,7 @@
 /obj/effect/decal/bordur{
 	dir = 6
 	},
-/obj/structure/flora/ausbushes/sparsegrass,
-/turf/open/floor/plating/vampgrass,
+/turf/closed/wall/vampwall/rock,
 /area/vtm/pacificheights/community)
 "smA" = (
 /obj/structure/vampdoor/glass{
@@ -97977,7 +97992,7 @@
 /obj/effect/decal/bordur{
 	dir = 5
 	},
-/turf/open/floor/plating/vampgrass,
+/turf/closed/wall/vampwall/rock,
 /area/vtm/forest)
 "wsn" = (
 /obj/machinery/light/prince{
@@ -147080,7 +147095,7 @@ hiF
 otm
 otm
 otm
-mPm
+bal
 tcy
 bal
 bal
@@ -147278,11 +147293,11 @@ bal
 bal
 bal
 hvP
-otm
+hiF
 ckC
 ckC
 ckC
-cJF
+bal
 yap
 fZK
 pDA
@@ -147480,11 +147495,11 @@ cJF
 cJF
 cJF
 ckC
-otm
-nVE
+hiF
+ckC
 otm
 uRa
-pDA
+cHy
 pDA
 bSf
 pDA
@@ -147682,11 +147697,11 @@ cJF
 cJF
 pDA
 otm
-ckC
-ckC
-ckC
-ckC
-cJF
+hiF
+abV
+abV
+abV
+bal
 pDA
 bSf
 cJF
@@ -147885,13 +147900,13 @@ bqB
 pDA
 ckC
 smx
-cHy
-cHy
-abV
+cbn
+cbn
+cbn
 wsm
 pDA
 fZK
-bqB
+pDA
 pDA
 pDA
 pDA
@@ -148086,11 +148101,11 @@ pDA
 cJF
 pDA
 nVE
-orJ
+dUJ
 cbn
+aQQ
 cbn
-cbn
-oMC
+aFN
 pDA
 fZK
 cJF
@@ -308142,7 +308157,7 @@ rCB
 eGA
 ylv
 rdo
-oGD
+qiu
 rdo
 dTE
 eGA
