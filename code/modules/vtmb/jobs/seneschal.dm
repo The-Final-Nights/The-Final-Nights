@@ -52,7 +52,6 @@
 	name = "Seneschal"
 	jobtype = /datum/job/vamp/clerk
 
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/clerk
 	uniform = /obj/item/clothing/under/vampire/clerk
 	shoes = /obj/item/clothing/shoes/vampire/brown
@@ -125,7 +124,6 @@
 	name = "Harpy"
 	jobtype = /datum/job/vamp/harpy
 
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/clerk/harpy
 	uniform = /obj/item/clothing/under/vampire/clerk
 	shoes = /obj/item/clothing/shoes/vampire/brown
@@ -180,7 +178,6 @@
 	name = "Tower Employee"
 	jobtype = /datum/job/vamp/towerwork
 
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/chunk/ghoul
 	uniform = /obj/item/clothing/under/vampire/hound
 	gloves = /obj/item/clothing/gloves/vampire/work

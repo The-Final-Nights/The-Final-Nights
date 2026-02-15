@@ -14796,7 +14796,7 @@
 	dir = 1
 	},
 /obj/effect/landmark/start{
-	name = "Police Chief"
+	name = "Police Captain"
 	},
 /turf/open/floor/plating/parquetry/rich,
 /area/vtm/interior/police/upstairs)
@@ -22514,7 +22514,7 @@
 /turf/closed/wall/vampwall/junk/low,
 /area/vtm/interior)
 "fkY" = (
-/obj/structure/vampdoor/glass/police_chief,
+/obj/structure/vampdoor/glass/police_captain,
 /obj/effect/turf_decal/siding/wood{
 	color = "#574d46"
 	},
