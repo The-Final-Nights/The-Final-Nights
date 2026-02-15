@@ -2432,10 +2432,6 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/interior/millennium_tower/f3)
-"azA" = (
-/obj/structure/fluff/hedge,
-/turf/open/floor/plating/vampplating/mono,
-/area/vtm/interior/strip)
 "azJ" = (
 /obj/structure/railing/metal/corner{
 	dir = 1
@@ -4112,10 +4108,10 @@
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
 "aVw" = (
-/obj/structure/railing/metal{
-	dir = 4
+/obj/machinery/light{
+	dir = 8
 	},
-/turf/open/floor/light,
+/turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "aVx" = (
 /obj/effect/turf_decal/siding/wood{
@@ -12586,10 +12582,12 @@
 /area/vtm/financialdistrict)
 "cUQ" = (
 /obj/structure/railing/metal{
-	dir = 10;
-	plane = 3
+	dir = 8;
+	plane = 3.2
 	},
-/turf/open/floor/light,
+/turf/open/floor/plasteel/stairs{
+	dir = 1
+	},
 /area/vtm/interior/strip)
 "cUS" = (
 /obj/structure/table,
@@ -15030,15 +15028,6 @@
 /obj/structure/table/wood,
 /turf/closed/wall/vampwall/brick/low,
 /area/vtm/interior/setite)
-"dyj" = (
-/obj/machinery/light/prince{
-	light_power = 0.45;
-	name = "dim light fixture";
-	dir = 1
-	},
-/obj/structure/closet/crate/bin,
-/turf/open/floor/plating/granite/black,
-/area/vtm/interior/strip)
 "dyq" = (
 /obj/effect/decal/bordur{
 	dir = 8
@@ -19397,12 +19386,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/giovanni)
-"eBc" = (
-/obj/structure/railing/metal{
-	dir = 5
-	},
-/turf/open/floor/light,
-/area/vtm/interior/strip)
 "eBe" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1;
@@ -24624,16 +24607,16 @@
 /turf/open/floor/plating/vampcarpet,
 /area/vtm/anarch/basement)
 "fIW" = (
-/obj/structure/table,
-/obj/machinery/p25transceiver/clinic{
-	pixel_y = 9;
-	pixel_x = 1
-	},
-/obj/effect/turf_decal/siding/white{
+/obj/structure/railing/metal{
 	dir = 1
 	},
-/turf/open/floor/plating/circled,
-/area/vtm/clinic)
+/obj/machinery/light{
+	dir = 8;
+	light_color = "#6488EA";
+	bulb_colour = "#9400cf"
+	},
+/turf/open/floor/light,
+/area/vtm/interior/strip)
 "fIY" = (
 /obj/structure/railing/metal{
 	dir = 4
@@ -29137,9 +29120,6 @@
 /obj/item/reagent_containers/spray/cleaner,
 /obj/item/reagent_containers/glass/bucket,
 /obj/structure/janitorialcart,
-/obj/machinery/light{
-	dir = 8
-	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "gLj" = (
@@ -29838,7 +29818,7 @@
 /obj/effect/landmark/start/citizen{
 	name = "Primogen Toreador"
 	},
-/turf/open/floor/carpet/royalblue,
+/turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/strip)
 "gVB" = (
 /obj/item/kirbyplants/random,
@@ -32141,9 +32121,6 @@
 	dir = 4
 	},
 /obj/structure/table/wood,
-/obj/machinery/p25transceiver/tower{
-	pixel_y = 10
-	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower/f2)
 "hwc" = (
@@ -34576,12 +34553,6 @@
 /obj/machinery/camera/directional/east,
 /turf/open/floor/plating/rough,
 /area/vtm/sewer/nosferatu_warren)
-"hYH" = (
-/obj/structure/chair/sofa/corp/right{
-	dir = 8
-	},
-/turf/open/floor/plating/vampplating,
-/area/vtm/interior/strip)
 "hYI" = (
 /obj/effect/turf_decal/stripes{
 	dir = 8
@@ -38360,9 +38331,6 @@
 	pixel_x = 16;
 	pixel_y = 40
 	},
-/obj/machinery/light{
-	pixel_y = 32
-	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/shop)
 "iPJ" = (
@@ -42062,11 +42030,9 @@
 /turf/open/floor/plating/circled,
 /area/vtm/interior/laundromat)
 "jFH" = (
-/obj/structure/chair/sofa/corp/right{
-	dir = 1
-	},
-/turf/open/floor/plating/vampplating,
-/area/vtm/interior/strip)
+/obj/effect/decal/wallpaper/red,
+/turf/open/floor/plating/parquetry/old,
+/area/vtm/interior/shop)
 "jFS" = (
 /obj/item/toy/cards/deck/tarot,
 /obj/structure/table/wood/fancy/orange,
@@ -44357,12 +44323,6 @@
 	color = "#bfbfbf"
 	},
 /area/vtm/interior/endron_facility)
-"khR" = (
-/obj/structure/chair/sofa/corp/corner{
-	dir = 8
-	},
-/turf/open/floor/plating/vampplating,
-/area/vtm/interior/strip)
 "khV" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/plating/vampplating/stone,
@@ -44958,7 +44918,6 @@
 /area/vtm/interior)
 "koB" = (
 /obj/structure/table/wood,
-/obj/machinery/p25transceiver/clinic,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/police/upstairs)
 "koC" = (
@@ -57536,11 +57495,6 @@
 /turf/open/floor/plating/vampdirt,
 /area/vtm/forest)
 "nfA" = (
-/obj/machinery/light/prince{
-	light_power = 0.45;
-	name = "dim light fixture";
-	dir = 1
-	},
 /obj/structure/chair/wood/wings{
 	dir = 8;
 	pixel_x = 0;
@@ -59142,8 +59096,7 @@
 /area/vtm/interior/millennium_tower/f3)
 "nzZ" = (
 /obj/structure/railing/metal{
-	dir = 8;
-	plane = 3.2
+	dir = 1
 	},
 /turf/open/floor/light,
 /area/vtm/interior/strip)
@@ -60749,6 +60702,9 @@
 /area/vtm/interior/police)
 "nQR" = (
 /obj/structure/dresser,
+/obj/effect/turf_decal/siding/white{
+	dir = 4
+	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
 "nQV" = (
@@ -64499,7 +64455,7 @@
 /obj/effect/decal/bordur{
 	pixel_y = 32
 	},
-/turf/open/floor/carpet/royalblue,
+/turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/strip)
 "oHG" = (
 /obj/effect/turf_decal/siding/white{
@@ -69847,7 +69803,9 @@
 /area/vtm/interior/giovanni)
 "pTR" = (
 /obj/structure/stairs/south,
-/turf/open/floor/plating/granite/black,
+/turf/open/floor/plating/toilet{
+	color = "#919191"
+	},
 /area/vtm/interior/strip)
 "pTT" = (
 /obj/structure/table/wood/fancy/purple,
@@ -75419,7 +75377,7 @@
 /obj/structure/chair/sofa/corp/left{
 	dir = 1
 	},
-/turf/open/floor/carpet/royalblue,
+/turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/strip)
 "rhc" = (
 /obj/effect/decal/litter,
@@ -77516,8 +77474,13 @@
 /turf/open/floor/eighties,
 /area/vtm/interior/techshop)
 "rIe" = (
-/obj/structure/railing/metal{
-	dir = 6
+/obj/machinery/light{
+	dir = 4;
+	light_color = "#6488EA";
+	bulb_colour = "#9400cf"
+	},
+/obj/structure/railing/metal/corner{
+	dir = 1
 	},
 /turf/open/floor/light,
 /area/vtm/interior/strip)
@@ -78491,9 +78454,6 @@
 	anchored = 1;
 	id = 22;
 	pixel_y = 30
-	},
-/obj/machinery/p25transceiver/endron{
-	pixel_y = 8
 	},
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/endron_facility/restricted)
@@ -89248,7 +89208,11 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/anarch)
 "uvJ" = (
-/obj/structure/railing/metal,
+/obj/machinery/light{
+	dir = 1;
+	light_color = "#6488EA";
+	bulb_colour = "#9400cf"
+	},
 /turf/open/floor/light,
 /area/vtm/interior/strip)
 "uvK" = (
@@ -93385,6 +93349,9 @@
 	light_power = 0.45;
 	name = "dim light fixture"
 	},
+/obj/effect/turf_decal/siding/white{
+	dir = 4
+	},
 /turf/open/floor/carpet/royalblue,
 /area/vtm/interior/strip)
 "vvH" = (
@@ -93687,10 +93654,6 @@
 /area/vtm/clinic)
 "vAE" = (
 /obj/structure/table/wood,
-/obj/machinery/p25transceiver/anarch{
-	pixel_y = 11;
-	pixel_x = -5
-	},
 /obj/item/p25radio{
 	pixel_y = 16;
 	pixel_x = 10
@@ -135039,7 +135002,7 @@ mpX
 mpX
 mpX
 mpX
-mpX
+tuX
 tHM
 vFf
 hMN
@@ -135241,7 +135204,7 @@ nNo
 pFA
 pqP
 aGm
-mpX
+tuX
 aej
 vFf
 kRM
@@ -135443,7 +135406,7 @@ wXP
 mti
 iae
 nfA
-mpX
+tuX
 aej
 vFf
 kRM
@@ -135634,7 +135597,7 @@ iae
 iae
 wXP
 mWO
-eMg
+sZR
 mti
 fGa
 vNt
@@ -135645,7 +135608,7 @@ wXP
 pFA
 iae
 lRV
-mpX
+tuX
 aej
 vFf
 kRM
@@ -135847,7 +135810,7 @@ wXP
 pFA
 iae
 aGm
-mpX
+tuX
 aej
 vFf
 kRM
@@ -136049,7 +136012,7 @@ wXP
 pFA
 koF
 wTp
-mpX
+tuX
 aej
 vFf
 kRM
@@ -136251,7 +136214,7 @@ eTk
 gnp
 gnp
 gnp
-mpX
+tuX
 aej
 vFf
 kRM
@@ -136452,8 +136415,8 @@ hQE
 lbP
 mWO
 ooR
-dyj
-mpX
+vPx
+tuX
 aej
 vFf
 kRM
@@ -136655,7 +136618,7 @@ lKH
 kzp
 kzp
 mWO
-mpX
+tuX
 aej
 vFf
 kRM
@@ -136857,7 +136820,7 @@ lKH
 efC
 ooR
 nqM
-mpX
+tuX
 aej
 vFf
 kRM
@@ -137043,7 +137006,7 @@ aej
 vFf
 kRM
 mpX
-mWO
+aVw
 vdb
 mWO
 mWO
@@ -137059,7 +137022,7 @@ lKH
 kzp
 ojr
 mWO
-mpX
+tuX
 cXk
 lNI
 kpY
@@ -137261,7 +137224,7 @@ eME
 mWO
 ooR
 mWO
-mpX
+tuX
 cXk
 vFf
 gxA
@@ -137463,7 +137426,7 @@ sZR
 bTk
 mWO
 mWO
-mpX
+tuX
 kBP
 lht
 qaV
@@ -137665,7 +137628,7 @@ gnp
 gnp
 gnp
 gnp
-mpX
+tuX
 cXk
 vFf
 skK
@@ -175219,7 +175182,7 @@ xIi
 fyE
 uLX
 uLX
-fyE
+tiU
 qKi
 fyE
 uLX
@@ -175826,7 +175789,7 @@ fyE
 tiU
 jWZ
 tiU
-xQB
+vAS
 xQB
 oCz
 oCz
@@ -176028,7 +175991,7 @@ tiU
 oUl
 qzF
 vUt
-xQB
+jFH
 xQB
 xQB
 xQB
@@ -176650,13 +176613,13 @@ nlY
 nlY
 lnp
 lnp
-mlj
-nzZ
-cUQ
+lnp
+lnp
+lnp
 kBU
-lnp
-lnp
-ugI
+fIW
+nlY
+nlY
 gnp
 vtC
 mDD
@@ -176852,13 +176815,13 @@ nlY
 nlY
 lnp
 lnp
-nlY
-bwY
-uvJ
+lnp
+lnp
+lnp
 kBU
-lnp
-lnp
-lnp
+nzZ
+nlY
+nlY
 gnp
 vtC
 mDD
@@ -177054,13 +177017,13 @@ nlY
 nlY
 lnp
 lnp
-eBc
-aVw
-rIe
+lnp
+lnp
+lnp
 kBU
-lnp
-lnp
-fsT
+nzZ
+bwY
+uvJ
 gnp
 oBK
 mDD
@@ -177256,13 +177219,13 @@ nlY
 nlY
 lnp
 lnp
-kBU
-kBU
-kBU
 lnp
 lnp
-mHI
-jFH
+lnp
+kBU
+nzZ
+nlY
+nlY
 gnp
 vtC
 mDD
@@ -177461,10 +177424,10 @@ lnp
 lnp
 lnp
 lnp
-lnp
-sYT
-hYH
-khR
+cUQ
+rIe
+nlY
+nlY
 gnp
 oBK
 eww
@@ -179968,7 +179931,7 @@ joX
 nBC
 jIO
 kaD
-fIW
+wBb
 joX
 joX
 joX
@@ -216434,13 +216397,13 @@ xEp
 jlV
 xEp
 gnp
+cVG
+cVG
+cVG
+cVG
+cVG
+cVG
 noh
-cVG
-cVG
-cVG
-cVG
-cVG
-cVG
 sZR
 arO
 beg
@@ -216636,7 +216599,7 @@ xEp
 xEp
 xEp
 gnp
-azA
+cVG
 cVG
 cVG
 cVG
@@ -259676,12 +259639,12 @@ xEp
 xEp
 xEp
 xEp
-aIM
-rfu
-rfu
-rfu
-rfu
-vcO
+xEp
+vdU
+xEp
+xEp
+xEp
+wmS
 mjT
 mjT
 mjT
@@ -259878,12 +259841,12 @@ xEp
 xEp
 xEp
 xEp
+xEp
+oZO
+xEp
+xEp
+xEp
 wmS
-mjT
-mjT
-mjT
-mjT
-mjT
 mjT
 mjT
 mjT
@@ -260080,12 +260043,12 @@ rfu
 rfu
 rfu
 rfu
+rfu
+rfu
+rfu
+rfu
+rfu
 vcO
-mjT
-mjT
-mjT
-mjT
-mjT
 mjT
 mjT
 mjT
