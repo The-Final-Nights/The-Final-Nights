@@ -33,7 +33,6 @@
 	name = "Doctor"
 	jobtype = /datum/job/vamp/vdoctor
 
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/clinic
 	uniform = /obj/item/clothing/under/vampire/nurse
 	shoes = /obj/item/clothing/shoes/vampire/white
@@ -41,7 +40,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/latex
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/clinic
-	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1, /obj/item/storage/firstaid/medical=1)
+	backpack_contents = list(/obj/item/passport=1, /obj/item/pager=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1, /obj/item/storage/firstaid/medical=1)
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel
@@ -88,7 +87,6 @@
 	name = "Clinic Director"
 	jobtype = /datum/job/vamp/vdirector
 
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/clinic/director
 	uniform = /obj/item/clothing/under/vampire/nurse
 	shoes = /obj/item/clothing/shoes/vampire/white
@@ -96,7 +94,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/latex
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/clinics_director
-	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1, /obj/item/storage/firstaid/medical=1)
+	backpack_contents = list(/obj/item/passport=1, /obj/item/pager=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1, /obj/item/storage/firstaid/medical=1)
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel
@@ -136,7 +134,6 @@
 /datum/outfit/job/mortattendant
 	name = "Mortuary Attendant"
 	jobtype = /datum/job/vamp/mortattendant
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/clinic/mortattendant
 	uniform = /obj/item/clothing/under/vampire/nurse/nurseb
 	shoes = /obj/item/clothing/shoes/vampire/white
@@ -147,7 +144,8 @@
 		/obj/item/passport=1,
 		/obj/item/flashlight=1,
 		/obj/item/vamp/creditcard=1,
-		/obj/item/cockclock=1
+		/obj/item/cockclock=1,
+		/obj/item/pager=1,
 	)
 
 	skillchips = list(/obj/item/skillchip/entrails_reader, /obj/item/skillchip/quickcarry)

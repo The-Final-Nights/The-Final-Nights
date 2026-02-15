@@ -406,7 +406,7 @@
 		"glowie"
 	)
 /obj/item/vamp/keys/police/assistantdistrictattorney
-	name = "assistant District Attorney keys"
+	name = "Assistant district attorney keys"
 	accesslocks = list(
 		"police"
 	)
@@ -418,19 +418,19 @@
 	)
 
 /obj/item/vamp/keys/police/secure
-	name = "Sergeant Police keys"
+	name = "Police sergeant keys"
 	accesslocks = list(
 		"police",
 		"police_secure"
 	)
 
-/obj/item/vamp/keys/police/secure/chief
-	name = "Chief of Police keys"
+/obj/item/vamp/keys/police/secure/captain
+	name = "Police captain keys"
 	accesslocks = list(
 		"dispatch",
 		"police",
 		"police_secure",
-		"police_chief"
+		"police_captain"
 	)
 
 //===========================MISC KEYS===========================

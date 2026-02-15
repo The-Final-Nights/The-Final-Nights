@@ -29,7 +29,6 @@
 	name = "Tapster"
 	jobtype = /datum/job/vamp/tapster
 
-	ears = /obj/item/p25radio
 	id = /obj/item/card/id/tapster
 	uniform = /obj/item/clothing/under/vampire/bouncer
 	suit = /obj/item/clothing/suit/vampire/jacket

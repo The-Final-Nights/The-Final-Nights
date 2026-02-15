@@ -201,6 +201,7 @@
 		new /datum/data/mining_equipment("letterman jacket",	 /obj/item/clothing/suit/jacket/letterman, 100),
 		new /datum/data/mining_equipment("red letterman jacket",	 /obj/item/clothing/suit/jacket/letterman_red, 100),
 		new /datum/data/mining_equipment("gothic coat",	 /obj/item/clothing/suit/gothcoat, 200),
+		new /datum/data/mining_equipment("alternate gothic coat",	 /obj/item/clothing/suit/gothcoat/alt, 200),
 		new /datum/data/mining_equipment("yellow aviators",	/obj/item/clothing/glasses/vampire/yellow,	20),
 		new /datum/data/mining_equipment("red aviators",	/obj/item/clothing/glasses/vampire/red,	20),
 		new /datum/data/mining_equipment("sunglasses",	/obj/item/clothing/glasses/vampire/sun,	20),
