@@ -19613,6 +19613,12 @@
 /obj/item/food/piedough,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/shop)
+"eDm" = (
+/obj/machinery/vamp/atm{
+	pixel_y = 25
+	},
+/turf/open/floor/plating/sidewalk,
+/area/vtm/interior/strip)
 "eDt" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#004136";
@@ -29534,6 +29540,16 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/sabbat_lair)
+"gRe" = (
+/obj/structure/railing/metal{
+	dir = 1
+	},
+/obj/structure/chair/comfy{
+	color = "#5aa2fa";
+	dir = 4
+	},
+/turf/open/floor/glass/reinforced,
+/area/vtm/interior/strip)
 "gRl" = (
 /obj/effect/landmark/start{
 	name = "Police Officer"
@@ -30304,6 +30320,10 @@
 	},
 /turf/open/floor/plating/dirt,
 /area/vtm/forest)
+"gZZ" = (
+/obj/structure/strip_club,
+/turf/open/floor/plating/sidewalk,
+/area/vtm/interior/strip)
 "hae" = (
 /turf/closed/wall/vampwall/brick/low/window,
 /area/vtm/interior/littleitaly)
@@ -55423,18 +55443,11 @@
 /obj/structure/railing/metal{
 	dir = 1
 	},
-/obj/structure/chair/comfy{
-	color = "#5aa2fa";
-	dir = 8
-	},
 /obj/machinery/light{
 	dir = 4;
 	light_color = "#6488EA";
 	bulb_colour = "#9400cf";
 	pixel_y = 16
-	},
-/obj/effect/landmark/start/citizen{
-	name = "Primogen Toreador"
 	},
 /turf/open/floor/glass/reinforced,
 /area/vtm/interior/strip)
@@ -57899,11 +57912,6 @@
 	},
 /turf/open/floor/plating/sidewalk/poor,
 /area/vtm/pacificheights/industrial)
-"nkJ" = (
-/obj/structure/strip_club,
-/obj/structure/strip_club,
-/turf/open/floor/plating/sidewalk,
-/area/vtm/interior/strip)
 "nkX" = (
 /obj/effect/decal/pallet,
 /obj/structure/closet/crate/large,
@@ -75870,6 +75878,19 @@
 	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
+"rnz" = (
+/obj/structure/railing/metal{
+	dir = 1
+	},
+/obj/effect/landmark/start/citizen{
+	name = "Primogen Toreador"
+	},
+/obj/structure/chair/comfy{
+	color = "#5aa2fa";
+	dir = 8
+	},
+/turf/open/floor/glass/reinforced,
+/area/vtm/interior/strip)
 "rnB" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 1;
@@ -76350,13 +76371,6 @@
 	},
 /area/vtm/interior/endron_facility)
 "rtA" = (
-/obj/structure/railing/metal{
-	dir = 1
-	},
-/obj/structure/chair/comfy{
-	color = "#5aa2fa";
-	dir = 4
-	},
 /obj/machinery/light{
 	dir = 8;
 	light_color = "#6488EA";
@@ -175192,7 +175206,7 @@ gnp
 gnp
 gnp
 gnp
-hmH
+eDm
 hmH
 hmH
 gnp
@@ -175394,7 +175408,7 @@ xOl
 qfs
 itn
 gnp
-nkJ
+hmH
 hmH
 hmH
 gnp
@@ -175596,7 +175610,7 @@ vMt
 hgx
 dEh
 gnp
-hmH
+gZZ
 cjD
 hmH
 gnp
@@ -217219,7 +217233,7 @@ dhH
 dhH
 dhH
 dhH
-dhH
+gRe
 rtA
 ocU
 nsD
@@ -217421,8 +217435,8 @@ dhH
 dhH
 dhH
 dhH
-dhH
 sbI
+ocU
 ocU
 wyd
 fDO
@@ -217623,8 +217637,8 @@ dhH
 dhH
 dhH
 dhH
-dhH
 sbI
+ocU
 ocU
 ofX
 fDO
@@ -217825,7 +217839,7 @@ dhH
 dhH
 dhH
 dhH
-dhH
+rnz
 mJG
 ocU
 nsD
