@@ -42049,6 +42049,10 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/laundromat)
+"jFH" = (
+/obj/item/kirbyplants/random,
+/turf/open/floor/plating/granite/black,
+/area/vtm/interior/strip)
 "jFS" = (
 /obj/item/toy/cards/deck/tarot,
 /obj/structure/table/wood/fancy/orange,
@@ -80559,7 +80563,6 @@
 /turf/open/floor/plating/sidewalk,
 /area/vtm/pacificheights/industrial)
 "svs" = (
-/obj/item/kirbyplants/random,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
 	},
@@ -80567,6 +80570,7 @@
 	color = "#aa4f25";
 	dir = 8
 	},
+/obj/structure/closet/crate/bin,
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/strip)
 "svA" = (
@@ -136427,7 +136431,7 @@ hQE
 lbP
 mWO
 ooR
-vPx
+jFH
 tuX
 aej
 vFf
