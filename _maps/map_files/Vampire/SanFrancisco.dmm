@@ -42049,10 +42049,6 @@
 	},
 /turf/open/floor/plating/circled,
 /area/vtm/interior/laundromat)
-"jFH" = (
-/obj/effect/decal/wallpaper/red,
-/turf/open/floor/plating/parquetry/old,
-/area/vtm/interior/shop)
 "jFS" = (
 /obj/item/toy/cards/deck/tarot,
 /obj/structure/table/wood/fancy/orange,
@@ -89643,9 +89639,11 @@
 /turf/open/space/basic,
 /area/vtm)
 "uAJ" = (
-/obj/structure/toilet,
 /obj/machinery/light{
 	pixel_y = 32
+	},
+/obj/structure/toilet{
+	pixel_y = 16
 	},
 /turf/open/floor/plating/toilet,
 /area/vtm/interior/strip)
@@ -176005,7 +176003,7 @@ tiU
 oUl
 qzF
 vUt
-jFH
+xQB
 xQB
 xQB
 xQB
