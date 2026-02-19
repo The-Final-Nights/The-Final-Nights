@@ -47394,6 +47394,20 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior)
+"kSE" = (
+/obj/machinery/light{
+	pixel_y = 32
+	},
+/obj/structure/toilet{
+	pixel_y = 16
+	},
+/obj/transfer_point_vamp{
+	alpha = 0;
+	density = 0;
+	id = 672
+	},
+/turf/open/floor/plating/toilet,
+/area/vtm/interior/strip)
 "kSF" = (
 /obj/structure/clothinghanger,
 /obj/machinery/light/small{
@@ -179036,7 +179050,7 @@ fEh
 rcJ
 kea
 gnp
-uAJ
+kSE
 rLK
 gwF
 bfd
