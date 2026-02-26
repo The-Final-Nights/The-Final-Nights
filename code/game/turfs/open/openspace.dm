@@ -16,7 +16,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 /turf/open/openspace
 	name = "open space"
 	desc = "Watch your step!"
-	icon_state = "open space"
+	icon_state = "invisible"
 	baseturfs = /turf/open/openspace
 	baseturfs = /turf/open/openspace
 	intact = FALSE //this means wires go on top
