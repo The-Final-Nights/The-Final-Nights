@@ -193,3 +193,7 @@
 /datum/gear/suit/leopardcoat
 	display_name = "leopard coat"
 	path = /obj/item/clothing/suit/vampire/coat/leopard
+
+/datum/gear/suit/blackshawl
+	display_name = "black shawl"
+	path = /obj/item/clothing/suit/vampire/shawl_black

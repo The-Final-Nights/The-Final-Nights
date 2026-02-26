@@ -39,21 +39,40 @@
 /datum/crafting_recipe/proc/on_craft_items(atom/movable/result, list/ingredient_items)
 	return
 
-/datum/crafting_recipe/fulltilewindow
-	name = "Build Full Window"
+// for repairing broken windows
+/datum/crafting_recipe/repairwindow
+	name = "Repair Full Window"
 	result = /obj/structure/window/fulltile
 	reqs = list(/obj/item/shard = 2)
 	time = 15
 	category = CAT_CONSTRUCTION
-	subcategory = CAT_WINDOWS
+
+// for creating new windows if you dont have the shards
+/datum/crafting_recipe/buildwindow
+	name = "Build Full Window"
+	result = /obj/structure/window/fulltile
+	reqs = list(/obj/item/vamp/crafting/windowkit = 1)
+	time = 60
+	category = CAT_CONSTRUCTION
 
 /datum/crafting_recipe/door
 	name = "Build Wooden Door"
 	result = /obj/structure/vampdoor/wood
-	reqs = list(/obj/item/stack/sheet/mineral/wood = 10)
-	time = 30
+	reqs = list(/obj/item/vamp/crafting/doorkit = 1)
+	time = 60
 	category = CAT_CONSTRUCTION
-	subcategory = CAT_DOORS
+
+
+// so that people stop building doors in the street to act as barricades
+/datum/crafting_recipe/barricade
+	name = "Build Road Barricade"
+	result = /obj/structure/roadblock
+	reqs = list(/obj/item/vamp/crafting/roadbarrierkit = 1)
+	time = 60
+	category = CAT_CONSTRUCTION
+
+/datum/crafting_recipe/barricade/on_craft_items(atom/movable/result, list/ingredient_items)
+	result.anchored = FALSE
 
 // TFN EDIT ADD END
 /*

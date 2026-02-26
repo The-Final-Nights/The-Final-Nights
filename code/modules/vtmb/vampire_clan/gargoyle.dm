@@ -52,6 +52,10 @@
 	if(!owner || !isliving(owner))
 		return
 
+	if(HAS_TRAIT(owner, TRAIT_PASS_THROUGH_WALLS))
+		to_chat(owner, span_warning("You cannot activate Statue Form while Flow Within the Mountain is active!"))
+		return FALSE
+
 	if(active)
 		deactivate_statue()
 	else

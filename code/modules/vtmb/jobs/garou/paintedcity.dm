@@ -46,8 +46,8 @@
 	uniform =  /obj/item/clothing/under/vampire/office
 	shoes = /obj/item/clothing/shoes/vampire
 	l_pocket = /obj/item/vamp/phone
-	r_pocket = /obj/item/vamp/keys/children_of_gaia
-	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	r_pocket = /obj/item/vamp/keys/techstore
+	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1, /obj/item/vamp/keys/children_of_gaia)
 
 
 	backpack = /obj/item/storage/backpack
@@ -104,8 +104,8 @@
 	suit = /obj/item/clothing/suit/vampire/jacket
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone
-	r_pocket = /obj/item/vamp/keys/children_of_gaia
-	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	r_pocket = /obj/item/vamp/keys/techstore
+	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1, /obj/item/vamp/keys/children_of_gaia)
 
 
 	backpack = /obj/item/storage/backpack
@@ -161,8 +161,8 @@
 	uniform =  /obj/item/clothing/under/vampire/office
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone
-	r_pocket = /obj/item/vamp/keys/children_of_gaia
-	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/veil_contract, /obj/item/vamp/creditcard/rich=1)
+	r_pocket = /obj/item/vamp/keys/techstore
+	backpack_contents = list(/obj/item/phone_book=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/veil_contract, /obj/item/vamp/creditcard/rich=1, /obj/item/vamp/keys/children_of_gaia)
 
 
 	backpack = /obj/item/storage/backpack
@@ -223,8 +223,8 @@
 	suit = /obj/item/clothing/suit/vampire/vest
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	l_pocket = /obj/item/vamp/phone
-	r_pocket = /obj/item/vamp/keys/children_of_gaia
-	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/veil_contract, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	r_pocket = /obj/item/vamp/keys/techstore
+	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/veil_contract, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1, /obj/item/vamp/keys/children_of_gaia)
 
 
 	backpack = /obj/item/storage/backpack
@@ -283,8 +283,8 @@
 	gloves = /obj/item/clothing/gloves/vampire/leather
 	suit = /obj/item/clothing/suit/vampire/jacket
 	l_pocket = /obj/item/vamp/phone
-	r_pocket = /obj/item/vamp/keys/children_of_gaia
-	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
+	r_pocket = /obj/item/vamp/keys/techstore
+	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1, /obj/item/vamp/keys/children_of_gaia)
 
 
 	backpack = /obj/item/storage/backpack

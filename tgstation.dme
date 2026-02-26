@@ -3709,6 +3709,7 @@
 #include "code\modules\wod13\effects\vip_barrier.dm"
 #include "code\modules\wod13\events\pirates.dm"
 #include "code\modules\wod13\items\argemia.dm"
+#include "code\modules\wod13\items\misc_items.dm"
 #include "code\modules\wod13\items\phone_book.dm"
 #include "code\modules\wod13\items\quran.dm"
 #include "code\modules\wod13\items\ravnos.dm"
