@@ -1868,6 +1868,15 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/baywalk)
+"auL" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/eight{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "auO" = (
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/millennium_tower/f3)
@@ -1986,6 +1995,13 @@
 /obj/item/storage/fancy/candle_box,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/church/interior)
+"avE" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	color = "#503e28";
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "awd" = (
 /obj/structure/chair/greyscale{
 	dir = 4
@@ -4836,6 +4852,11 @@
 	color = "#b0b0b0"
 	},
 /area/vtm/interior/endron_facility/restricted)
+"bfy" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/h,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "bfC" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/drinks/bottle/sake{
@@ -12843,6 +12864,10 @@
 /obj/item/food/meat/slab,
 /turf/open/floor/plating/stone,
 /area/vtm/forest/caves)
+"cZQ" = (
+/obj/effect/turf_decal/siding/wood/corner,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "cZR" = (
 /obj/structure/chair/old/tzimisce{
 	dir = 8
@@ -13165,6 +13190,16 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/interior/tzimisce_manor)
+"ddO" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/five{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "ddP" = (
 /obj/structure/vampipe{
 	icon_state = "piping31"
@@ -15060,6 +15095,16 @@
 /obj/item/storage/book/bible,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/giovanni)
+"dBs" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/one{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "dBA" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 1;
@@ -15689,6 +15734,16 @@
 /obj/structure/flora/rock/jungle,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
+"dJb" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/six{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "dJe" = (
 /obj/structure/roadsign/stop{
 	desc = "What is a stop sign doing down here? Is it mocking you?"
@@ -32937,6 +32992,16 @@
 	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/jazzclub)
+"hKT" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/three{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "hKU" = (
 /obj/structure/flora/ausbushes/reedbush,
 /turf/open/floor/plating/vampcrossableocean,
@@ -33769,6 +33834,13 @@
 /obj/structure/flora/ausbushes/sparsegrass,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/pacificheights/forest)
+"hST" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	color = "#503e28";
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "hSU" = (
 /obj/effect/decal/asphaltline/alt{
 	dir = 8;
@@ -36728,6 +36800,15 @@
 	},
 /turf/open/floor/plating/concrete,
 /area/vtm/supply)
+"iAa" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/five{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "iAe" = (
 /obj/machinery/light/prince{
 	dir = 4;
@@ -38812,6 +38893,11 @@
 	icon_state = "blood"
 	},
 /area/vtm/interior/endron_facility/restricted)
+"iZZ" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/d,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "jad" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 1;
@@ -50759,6 +50845,16 @@
 	},
 /turf/open/floor/carpet/purple,
 /area/vtm)
+"lMu" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/eight{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "lMC" = (
 /obj/structure/fluff/hedge,
 /obj/effect/turf_decal/siding/wood{
@@ -50987,6 +51083,11 @@
 "lOE" = (
 /turf/open/floor/plating/asteroid/basalt,
 /area/vtm/interior/endron_facility/restricted)
+"lOF" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/c,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "lOG" = (
 /obj/effect/turf_decal/siding/white/corner{
 	color = "#636363"
@@ -55609,6 +55710,15 @@
 	},
 /turf/open/floor/plating/vampwood,
 /area/vtm/fishermanswharf/ghetto)
+"mRw" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/a{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "mRC" = (
 /obj/effect/turf_decal/siding/wideplating/dark{
 	dir = 8
@@ -56213,6 +56323,11 @@
 	},
 /turf/open/floor/plating/woodfancy,
 /area/vtm/clinic/haven)
+"mXt" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/f,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "mXB" = (
 /obj/fusebox/transformer{
 	name = "manor transformer"
@@ -58780,6 +58895,16 @@
 	},
 /turf/open/floor/plating/sidewalk/old,
 /area/vtm/sewer/tzimisce_sanctum)
+"nDf" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/two{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "nDm" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/machinery/button/curtain{
@@ -60247,6 +60372,11 @@
 	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/millennium_tower)
+"nSo" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/g,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "nSp" = (
 /obj/effect/decal/bordur,
 /obj/structure/vampdoor/glass,
@@ -62776,6 +62906,11 @@
 /obj/effect/decal/rugs,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren)
+"ovd" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/a,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "ove" = (
 /obj/structure/chair{
 	dir = 8
@@ -67258,6 +67393,16 @@
 /obj/effect/decal/wallpaper/stone,
 /turf/closed/wall/vampwall/rich/old,
 /area/vtm/interior/giovanni/basement)
+"pwk" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/four{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "pwm" = (
 /obj/effect/decal/wallpaper/light,
 /turf/closed/wall/vampwall/market,
@@ -67504,6 +67649,15 @@
 	},
 /turf/open/floor/plating/rough,
 /area/vtm/sewer)
+"pyJ" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/four{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "pyM" = (
 /obj/structure/vampdoor/reinf{
 	lock_id = "wolftech";
@@ -68455,6 +68609,12 @@
 	},
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/cog/pantry)
+"pMh" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "pMl" = (
 /obj/structure/railing/metal{
 	dir = 4
@@ -69404,13 +69564,6 @@
 /obj/machinery/griddle,
 /turf/open/floor/plating/woodrough,
 /area/vtm/interior/ranger)
-"pWj" = (
-/obj/effect/decal/bordur{
-	dir = 6
-	},
-/obj/structure/chess/whitepawn,
-/turf/open/floor/holofloor/chess_black,
-/area/vtm/park)
 "pWu" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/reagent_containers/food/drinks/drinkingglass/wine_glass,
@@ -73895,6 +74048,15 @@
 	},
 /turf/open/floor/plating/church,
 /area/vtm/jazzclub)
+"qWD" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/c{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "qWE" = (
 /obj/item/candle/infinite{
 	anchored = 1;
@@ -79760,6 +79922,15 @@
 /mob/living/simple_animal/pet/cat/vampire,
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/millennium_tower/f3)
+"suF" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/one{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "suI" = (
 /obj/structure/vampipe{
 	icon_state = "piping31"
@@ -83534,6 +83705,15 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/baali)
+"tnv" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/six{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "tnM" = (
 /obj/effect/turf_decal/siding/thinplating/dark,
 /obj/structure/table/wood/fancy/red,
@@ -84680,7 +84860,12 @@
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
 "tDk" = (
-/obj/effect/decal/litter,
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/h{
+	dir = 1
+	},
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/park)
 "tDp" = (
@@ -86094,6 +86279,16 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/vtm/interior/millennium_tower/f3)
+"tTF" = (
+/obj/effect/turf_decal/siding/wood{
+	color = "#665136";
+	dir = 8
+	},
+/obj/effect/turf_decal/board_number/seven{
+	dir = 8
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "tTI" = (
 /obj/structure/table/wood,
 /obj/item/kitchen/knife/butcher{
@@ -86568,6 +86763,11 @@
 /obj/effect/decal/wallpaper/red,
 /turf/closed/wall/vampwall/market,
 /area/vtm/interior)
+"tYS" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/b,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "tYY" = (
 /obj/effect/decal/wallpaper/grey,
 /turf/closed/wall/vampwall/old,
@@ -91508,6 +91708,15 @@
 /obj/effect/mob_spawn/human/corpse/ciz4,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/giovanni/basement)
+"vjt" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/d{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "vjA" = (
 /obj/structure/table/wood,
 /obj/machinery/microwave{
@@ -91741,6 +91950,15 @@
 /obj/effect/landmark/start/sweeper,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/anarch/basement)
+"vmj" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/three{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "vmp" = (
 /obj/structure/chair/office{
 	dir = 1
@@ -92368,6 +92586,15 @@
 /obj/structure/flora/ausbushes/tallgrass/dry,
 /turf/open/floor/plating/sandy_dirt,
 /area/vtm)
+"vvE" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/g{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "vvH" = (
 /obj/structure/chair/sofa/corp/corner{
 	dir = 1;
@@ -92534,6 +92761,15 @@
 "vyA" = (
 /turf/open/floor/plating/vampplating/mono,
 /area/vtm/interior/endron_facility)
+"vyM" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/b{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "vzb" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 4
@@ -92939,6 +93175,15 @@
 	icon_state = "stone8"
 	},
 /area/vtm/sewer)
+"vDC" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/e{
+	dir = 1
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "vDJ" = (
 /obj/structure/chair/comfy/black{
 	dir = 8
@@ -97540,6 +97785,15 @@
 /obj/item/phone,
 /turf/open/floor/plating/parquetry,
 /area/vtm/jazzclub)
+"wIh" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/seven{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "wIj" = (
 /obj/effect/decal/cleanable/oil/streak,
 /obj/item/restraints/handcuffs/cable,
@@ -98727,6 +98981,11 @@
 /obj/structure/chair/plastic,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/sewer/nosferatu_warren)
+"wWq" = (
+/obj/effect/turf_decal/siding/wood,
+/obj/effect/turf_decal/board_letter/e,
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "wWs" = (
 /obj/effect/decal/wallpaper/stone/low{
 	pixel_y = 24
@@ -103244,8 +103503,11 @@
 /turf/open/floor/plating/rough,
 /area/vtm/interior/ghetto)
 "xXN" = (
-/obj/effect/decal/bordur{
-	dir = 10
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/effect/turf_decal/board_letter/f{
+	dir = 1
 	},
 /turf/open/floor/plating/sidewalk/rich,
 /area/vtm/park)
@@ -103912,6 +104174,15 @@
 /obj/structure/table,
 /turf/open/floor/plating/bacotell,
 /area/vtm/interior/apartment)
+"ygw" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 4
+	},
+/obj/effect/turf_decal/board_number/two{
+	dir = 4
+	},
+/turf/open/floor/plating/sidewalk/rich,
+/area/vtm/park)
 "ygz" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
@@ -169270,16 +169541,16 @@ guM
 uCU
 cka
 mYj
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-ciA
+cZQ
+auL
+wIh
+tnv
+iAa
+pyJ
+vmj
+ygw
+suF
+pMh
 hhw
 hhw
 hhw
@@ -169472,7 +169743,7 @@ guM
 uCU
 hhw
 hhw
-kkO
+ovd
 dCR
 mVK
 rrd
@@ -169481,7 +169752,7 @@ rrd
 ckX
 oNQ
 qLc
-ciA
+mRw
 cka
 mYj
 hhw
@@ -169674,16 +169945,16 @@ guM
 aKE
 hhw
 hhw
-kkO
+tYS
 tyb
 avk
 ckX
 rrd
 ckX
 rrd
-pWj
+vic
 vsn
-ciA
+vyM
 xre
 hhw
 hhw
@@ -169876,7 +170147,7 @@ guM
 bUV
 hhw
 hhw
-kkO
+lOF
 rVl
 mVK
 rrd
@@ -169885,7 +170156,7 @@ rrd
 ckX
 oNQ
 wUU
-ciA
+qWD
 hhw
 cka
 cka
@@ -170078,7 +170349,7 @@ guM
 uCU
 hhw
 lyy
-kkO
+iZZ
 lyC
 avk
 ckX
@@ -170087,7 +170358,7 @@ ckX
 rrd
 vic
 hoG
-ciA
+vjt
 hhw
 hhw
 hhw
@@ -170280,7 +170551,7 @@ guM
 aKE
 cka
 hhw
-kkO
+wWq
 jtK
 mVK
 rrd
@@ -170289,7 +170560,7 @@ rrd
 ckX
 oNQ
 oQk
-ciA
+vDC
 cka
 hhw
 hhw
@@ -170482,7 +170753,7 @@ guM
 uCU
 hhw
 hhw
-kkO
+mXt
 noy
 avk
 ckX
@@ -170684,7 +170955,7 @@ gEt
 bUV
 mvi
 hhw
-kkO
+nSo
 aAo
 mVK
 rrd
@@ -170693,7 +170964,7 @@ rrd
 ckX
 oNQ
 oIi
-kkO
+vvE
 kkO
 kkO
 kkO
@@ -170886,7 +171157,7 @@ xju
 uCU
 fBp
 hhw
-kkO
+bfy
 rCW
 avk
 ckX
@@ -171088,16 +171359,16 @@ uux
 aKE
 hhw
 hhw
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
-kkO
+avE
+lMu
+tTF
+dJb
+ddO
+pwk
+hKT
+nDf
+dBs
+hST
 hhw
 fBp
 hhw
