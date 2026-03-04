@@ -3778,6 +3778,8 @@
 #include "interface\menu.dm"
 #include "interface\stylesheet.dm"
 #include "interface\skin.dmf"
+#include "modular_darkpack\donation_perks\donator.dm"
+#include "modular_darkpack\donation_perks\pets.dm"
 #include "modular_darkpack\master_files\code\modules\mob\living\living.dm"
 #include "modular_darkpack\storyteller_stats\code\_st_stats.dm"
 #include "modular_darkpack\storyteller_stats\code\preferences.dm"
