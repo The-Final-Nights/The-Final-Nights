@@ -181,7 +181,7 @@
 	var/list/cats = list()
 	cats += list(list(
 		"type" = "/mob/living/simple_animal/pet/cat",
-		"name" = "Black & White Cat",
+		"name" = "B&W Cat",
 		"desc" = initial(/mob/living/simple_animal/pet/cat::desc),
 		"icon" = icon2html(icon('icons/mob/pets.dmi', "cat"), user, sourceonly = TRUE)
 	))
