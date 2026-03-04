@@ -4,7 +4,7 @@
 //Comes with a handy lock to prevent them from running off.
 /obj/item/pet_carrier
 	name = "pet carrier"
-	desc = "A big white-and-blue pet carrier. Good for carrying <s>meat to the chef</s> cute animals around."
+	desc = "A big white-and-blue pet carrier. Good for carrying <s>meat to the chef</s> cute animals around. Drag onto another tile to take out the pet inside."
 	icon = 'icons/obj/pet_carrier.dmi'
 	icon_state = "pet_carrier_open"
 	inhand_icon_state = "pet_carrier"
