@@ -3834,6 +3834,7 @@
 #include "modular_tfn\modules\language\tagalog.dm"
 #include "modular_tfn\modules\language\welsh.dm"
 #include "modular_tfn\modules\loadout\_loadout.dm"
+#include "modular_tfn\modules\loadout\loadout_donator.dm"
 #include "modular_tfn\modules\loadout\loadout_eyewear.dm"
 #include "modular_tfn\modules\loadout\loadout_footwear.dm"
 #include "modular_tfn\modules\loadout\loadout_general.dm"
