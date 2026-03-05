@@ -293,4 +293,4 @@
 	if(isnpc(target))
 		target.apply_damage(success_count * 200 + owner.thaum_damage_plus, CLONE) //A single success kills any mortal
 	else
-		target.apply_damage(success_count * 40 + owner.thaum_damage_plus, CLONE) //8 successes = 320 aggravated damage, however this is diffulty 8 so more than 2 successes is rare.
+		target.apply_damage(success_count * 20 + owner.thaum_damage_plus, CLONE) //8 successes = 320 aggravated damage, however this is diffulty 8 so more than 2 successes is rare.
