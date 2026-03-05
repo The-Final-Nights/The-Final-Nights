@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	43
+#define SAVEFILE_VERSION_MAX	44
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -96,6 +96,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 40)
 		player_experience += true_experience
 		true_experience = 0
+
 	if (current_version < 43)
 		// Translate from misspelled clane name save to new clan typepath save
 		var/clan_name
@@ -110,6 +111,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 		// Translate from misspelled clane_accessory to new clan_accessory
 		READ_FILE(S["clane_accessory"], clan_accessory)
+
+	if(current_version < 44)
+		if(breed == "Metis")
+			breed = BREED_METIS
 
 /// checks through keybindings for outdated unbound keys and updates them
 /datum/preferences/proc/check_keybindings()

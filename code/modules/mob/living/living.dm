@@ -141,22 +141,7 @@
 		return TRUE
 
 	if(!M.buckled && !M.has_buckled_mobs())
-		var/mob_swap = FALSE
-		var/too_strong = (M.move_resist > move_force) //can't swap with immovable objects unless they help us
-		if(!they_can_move) //we have to physically move them
-			if(!too_strong)
-				mob_swap = TRUE
-		else
-			//You can swap with the person you are dragging on grab intent, and restrained people in most cases
-			if(M.pulledby == src && !too_strong)
-				mob_swap = TRUE
-			else if(
-				!(HAS_TRAIT(M, TRAIT_NOMOBSWAP) || HAS_TRAIT(src, TRAIT_NOMOBSWAP))&&\
-				((HAS_TRAIT(M, TRAIT_RESTRAINED) && !too_strong) || !combat_mode) &&\
-				(HAS_TRAIT(src, TRAIT_RESTRAINED) || !combat_mode)
-			)
-				mob_swap = TRUE
-		if(mob_swap)
+		if(can_mobswap_with(M))
 			//switch our position with M
 			if(loc && !loc.Adjacent(M.loc))
 				return TRUE
@@ -203,6 +188,43 @@
 		if(!istype(M, /obj/item/clothing))
 			if(prob(I.block_chance*2))
 				return
+
+/mob/living/proc/can_mobswap_with(mob/other)
+	if (HAS_TRAIT(other, TRAIT_NOMOBSWAP) || HAS_TRAIT(src, TRAIT_NOMOBSWAP))
+		return FALSE
+
+	var/they_can_move = TRUE
+	var/their_combat_mode = FALSE
+
+	if(isliving(other))
+		var/mob/living/other_living = other
+		their_combat_mode = other_living.combat_mode
+		they_can_move = other_living.mobility_flags & MOBILITY_MOVE
+
+	var/too_strong = other.move_resist > move_force
+
+	// They cannot move, see if we can push through them
+	if(!they_can_move)
+		return !too_strong
+
+	// We are pulling them and can move through
+	if(other.pulledby == src && !too_strong)
+		return TRUE
+
+	// If we're in combat mode and not restrained we don't try to pass through people
+	if(combat_mode && !HAS_TRAIT(src, TRAIT_RESTRAINED))
+		return FALSE
+
+	// Nor can we pass through non-restrained people in combat mode (or if they're restrained but still too strong for us)
+	if(their_combat_mode && (!HAS_TRAIT(other, TRAIT_RESTRAINED) || too_strong))
+		return FALSE
+
+	// If there is no ckey on the mob, and you did not return false from prior checks, you can move through
+	if(isnull(other.client) || isnull(client))
+		return TRUE
+
+	// Else, sure, let us pass
+	return TRUE
 
 /mob/living/get_photo_description(obj/item/camera/camera)
 	var/list/mob_details = list()
