@@ -53,10 +53,10 @@
 	pet_bonus_emote = "chirps!"
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/mob/living/simple_anima/pet/bird/Initialize()
+/mob/living/simple_animal/pet/bird/Initialize()
 	. = ..()
-	var/matrix/M = new
-	transform = M.Scale(0.5,0.5)//so theyre distinguishable from corax despite using the sprite
+	resize = 0.75 //so theyre distinguishable from corax despite using the sprite
+	update_transform()
 
 /mob/living/simple_animal/pet/bird/white
 	name = "\improper white bird"
