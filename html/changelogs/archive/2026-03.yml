@@ -1,0 +1,5 @@
+2026-03-05:
+  Stutternov:
+  - qol: MobBump/'swap place' movement now accounts for both user's combat mode, not
+      only the initiating user.
+  - qol: Tidied up code a little bit with MobBump
