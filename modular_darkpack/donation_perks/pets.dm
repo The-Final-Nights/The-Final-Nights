@@ -249,7 +249,7 @@
 
 	var/list/birds = list()
 	birds += list(list(
-		"type" = "/mob/living/simple_animal/pet/bird/black",
+		"type" = "/mob/living/simple_animal/pet/bird",
 		"name" = "Black Bird",
 		"desc" = initial(/mob/living/simple_animal/pet/bird::desc),
 		"icon" = icon2html(icon('code/modules/wod13/corax_corvid.dmi', "black"), user, sourceonly = TRUE)
