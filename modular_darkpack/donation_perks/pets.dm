@@ -137,6 +137,13 @@
 	mob_size = MOB_SIZE_SMALL
 	icon_state = "cat5"
 
+/mob/living/simple_animal/pet/cat/vampire/bw
+	icon = 'icons/mob/pets.dmi'
+	bloodpool = 2
+	maxbloodpool = 2
+	mob_size = MOB_SIZE_SMALL
+	icon_state = "cat"
+
 /obj/item/donator/pet_crate
 	name = "pet crate"
 	desc = "Unveil your favorite pet!"
@@ -177,12 +184,24 @@
 		"desc" = initial(/mob/living/simple_animal/pet/dog/bullterrier::desc),
 		"icon" = icon2html(icon('icons/mob/pets.dmi', "bullterrier"), user, sourceonly = TRUE)
 	))
+	dogs += list(list(
+		"type" = "/mob/living/simple_animal/pet/dog/pug",
+		"name" = "Pug",
+		"desc" = initial(/mob/living/simple_animal/pet/dog/pug::desc),
+		"icon" = icon2html(icon('icons/mob/pets.dmi', "pug"), user, sourceonly = TRUE)
+	))
+	dogs += list(list(
+		"type" = "/mob/living/simple_animal/pet/dog/corgi/puppy",
+		"name" = "Corgi Puppy",
+		"desc" = initial(/mob/living/simple_animal/pet/dog/corgi/puppy::desc),
+		"icon" = icon2html(icon('icons/mob/pets.dmi', "puppy"), user, sourceonly = TRUE)
+	))
 
 	var/list/cats = list()
 	cats += list(list(
-		"type" = "/mob/living/simple_animal/pet/cat",
+		"type" = "/mob/living/simple_animal/pet/cat/vampire/bw",
 		"name" = "B&W Cat",
-		"desc" = initial(/mob/living/simple_animal/pet/cat::desc),
+		"desc" = initial(/mob/living/simple_animal/pet/cat/vampire/bw::desc),
 		"icon" = icon2html(icon('icons/mob/pets.dmi', "cat"), user, sourceonly = TRUE)
 	))
 	cats += list(list(
@@ -214,6 +233,18 @@
 		"name" = "Tabby Cat",
 		"desc" = initial(/mob/living/simple_animal/pet/cat/vampire/tabby::desc),
 		"icon" = icon2html(icon('code/modules/wod13/mobs.dmi', "cat5"), user, sourceonly = TRUE)
+	))
+	cats += list(list(
+		"type" = "/mob/living/simple_animal/pet/cat",
+		"name" = "Calico Cat",
+		"desc" = initial(/mob/living/simple_animal/pet/cat::desc),
+		"icon" = icon2html(icon('icons/mob/pets.dmi', "cat2"), user, sourceonly = TRUE)
+	))
+	cats += list(list(
+		"type" = "/mob/living/simple_animal/pet/cat/kitten",
+		"name" = "Calico Kitten",
+		"desc" = initial(/mob/living/simple_animal/pet/cat/kitten::desc),
+		"icon" = icon2html(icon('icons/mob/pets.dmi', "kitten"), user, sourceonly = TRUE)
 	))
 
 	var/list/birds = list()
