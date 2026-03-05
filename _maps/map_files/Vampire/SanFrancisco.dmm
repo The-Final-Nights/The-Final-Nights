@@ -29637,6 +29637,29 @@
 	pixel_y = 3;
 	pixel_x = -6
 	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/pint{
+	pixel_y = 11;
+	pixel_x = 11
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass{
+	pixel_x = -11
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass{
+	pixel_y = 11;
+	pixel_x = -11
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/pint{
+	pixel_y = 5;
+	pixel_x = 11
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/wine_glass{
+	pixel_x = 3;
+	pixel_y = 17
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/wine_glass{
+	pixel_x = 3;
+	pixel_y = 12
+	},
 /obj/item/storage/box/drinkingglasses,
 /turf/closed/wall/vampwall/bar/low,
 /area/vtm/interior/strip)
@@ -101915,7 +101938,29 @@
 	pixel_x = -11
 	},
 /obj/structure/table,
-/obj/item/storage/box/drinkingglasses,
+/obj/item/reagent_containers/food/drinks/drinkingglass/whiskey_shot{
+	pixel_y = 14
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/martini_glass{
+	pixel_y = 13;
+	pixel_x = 12
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/martini_glass{
+	pixel_y = 5;
+	pixel_x = 12
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/martini_glass{
+	pixel_y = 13;
+	pixel_x = 8
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/martini_glass{
+	pixel_y = 5;
+	pixel_x = 8
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/whiskey_shot{
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/food/drinks/drinkingglass/whiskey_shot,
 /turf/closed/wall/vampwall/bar/low,
 /area/vtm/interior/strip)
 "xxD" = (
