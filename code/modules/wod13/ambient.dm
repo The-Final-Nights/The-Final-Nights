@@ -801,6 +801,41 @@
 	yang_chi = 0
 	yin_chi = 2
 
+/area/vtm/interior/setite/casino
+	name = "Casino"
+	icon_state = "hotel"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/setite/casino/upper
+	name = "Casino Upper Floors"
+	icon_state = "hotel"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/setite/casino/lower
+	name = "Casino Lower Floors"
+	icon_state = "hotel"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/setite/casino/garage
+	name = "Casino Garage"
+	icon_state = "hotel"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
+/area/vtm/interior/setite/casino/office
+	name = "Casino Office"
+	icon_state = "hotel"
+	upper = FALSE
+	fire_controled = TRUE
+	wall_rating = HIGH_WALL_RATING
+
 //MUSIC
 
 /datum/vampiremusic
