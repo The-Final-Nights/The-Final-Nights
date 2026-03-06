@@ -131,7 +131,7 @@
 				return FALSE
 			icon_state = "slots2"
 			credits -= bet_size
-			playsound(loc, 'modular_darkpack/casino/sounds/reelspin.ogg', 75, TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/reelspin.ogg', 75, FALSE, use_reverb = TRUE)
 			last_reels = list("", "", "")
 			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 1), reel_delay_1)
 			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 2), reel_delay_2)
@@ -141,7 +141,7 @@
 		if("set_bet")
 			var/new_bet = text2num(params["bet"])
 			bet_size = new_bet
-			playsound(loc, 'sound/machines/terminal_button01.ogg', 75, TRUE)
+			playsound(loc, 'sound/machines/terminal_button01.ogg', 75, TRUE, use_reverb = TRUE)
 			return TRUE
 		if("cashout")
 			if(credits <= 0)
@@ -160,7 +160,7 @@
 			credits = 0
 			last_result = "Thanks for playing!"
 			icon_state = "slots0"
-			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE, use_reverb = TRUE)
 			return TRUE
 
 /obj/structure/casino/slotmachine/proc/reveal_reel(index)
@@ -169,7 +169,7 @@
 	addtimer(CALLBACK(src, PROC_REF(play_reel_click)), 2)
 
 /obj/structure/casino/slotmachine/proc/play_reel_click()
-	playsound(loc, 'modular_darkpack/casino/sounds/reelclick.ogg', 75, TRUE)
+	playsound(loc, 'modular_darkpack/casino/sounds/reelclick.ogg', 75, TRUE, use_reverb = TRUE)
 
 /obj/structure/casino/slotmachine/proc/finish_spin()
 	var/base_payout = calculate_payout(last_reels)
@@ -180,10 +180,10 @@
 			last_result = "JACKPOT! +$[last_payout]!"
 			visible_message(span_warning("JACKPOT!!!"))
 			balloon_alert_to_viewers("JACKPOT!!!")
-			playsound(loc, 'modular_darkpack/casino/sounds/jackpotpayout.ogg', 50, TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/jackpotpayout.ogg', 50, TRUE, use_reverb = TRUE)
 		else
 			last_result = "+$[last_payout]!"
-			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE, use_reverb = TRUE)
 	else
 		last_result = " "
 	icon_state = "slots1"
