@@ -3,12 +3,12 @@
 /obj/structure/casino/slotmachine
 	name = "slot machine"
 	desc = "Wheel... of money!"
-	icon = 'icons/obj/economy.dmi'
+	icon = 'modular_darkpack/casino/icons/casino.dmi'
 	icon_state = "slots0"
 	anchored = TRUE
 	density = TRUE
 	var/win_prob = 5
-	var/spinning = FALSE //track if the machine is currently spinning to update the sprite
+	var/spinning = FALSE
 	var/list/last_reels = list("seven", "seven", "seven")
 	var/last_payout = 0
 	var/last_result = "Insert chips and pull the lever!"
@@ -27,11 +27,15 @@
 	var/bar_payout = 5
 	var/cherry_payout = 3
 
-	// reel stop delays in deciseconds. SlotMachine.jsx runs at 100ms (1 ds = 100ms).
+	// reel stop delays in deciseconds. SlotMachine.jsx runs at 100ms (1 ds = 100ms)
 	var/reel_delay_1 = 50
 	var/reel_delay_2 = 65
 	var/reel_delay_3 = 70
 	var/finish_delay = 75
+
+	// bet sizes
+	var/bet_size = 1
+	var/list/bet_sizes = list(1, 5, 10, 25)
 
 /obj/structure/casino/slotmachine/attack_hand(mob/user)
 	ui_interact(user)
@@ -41,7 +45,7 @@
 		var/obj/item/stack/casino/chip/chip = used_item
 		credits += chip.value
 		balloon_alert_to_viewers("inserted a chip!", "You insert a [chip] into [src].")
-		playsound(loc, 'modular_darkpack/casino/sound/coininsert.ogg', 25, TRUE)
+		playsound(loc, 'modular_darkpack/casino/sounds/coininsert.ogg', 25, TRUE)
 		if(chip.amount > 1)
 			chip.amount -= 1
 		else
@@ -64,6 +68,8 @@
 	data["credits"] = credits
 	data["reel_delays"] = list(reel_delay_1, reel_delay_2, reel_delay_3)
 	data["finish_delay"] = finish_delay
+	data["bet_size"] = bet_size
+	data["bet_sizes"] = bet_sizes
 	data["paytable"] = list(
 	list("symbols" = list("seven",   "seven",   "seven"),  "payout" = seven_payout,   "jackpot" = TRUE),
 	list("symbols" = list("diamond", "diamond", "diamond"), "payout" = diamond_payout),
@@ -76,7 +82,6 @@
 	return data
 
 /obj/structure/casino/slotmachine/proc/spin_reel()
-	playsound(loc, 'modular_darkpack/casino/sound/reelclick.ogg', 50, TRUE)
 	var/roll = rand(1, 100)
 	if(roll <= sevenroll)
 		return "seven"
@@ -109,7 +114,7 @@
 	var/cherries = 0
 	for(var/s in reels)
 		if(s == "cherry") cherries++
-	if(cherries >= 2) return cherry_payout * cherries
+	if(cherries >= 2) return 1 // two cherries pay 1x the bet
 
 	return 0
 
@@ -119,19 +124,24 @@
 		return
 	switch(action)
 		if("spin")
-			balloon_alert_to_viewers("pulls the lever!", "You pull the lever!")
-			playsound(loc, pick('modular_darkpack/casino/sound/slotmusic1.ogg','modular_darkpack/casino/sound/slotmusic2.ogg','modular_darkpack/casino/sound/slotmusic3.ogg'), 25)
-			if(credits < 1)
-				balloon_alert_to_viewers("Insert chips first!")
+			balloon_alert_to_viewers("Lever pulled!", "You pull the lever!")
+			playsound(loc, pick('modular_darkpack/casino/sounds/slotmusic1.ogg','modular_darkpack/casino/sounds/slotmusic2.ogg','modular_darkpack/casino/sounds/slotmusic3.ogg'), 25)
+			if(credits < bet_size)
+				balloon_alert_to_viewers("Not enough credits!")
 				return FALSE
 			icon_state = "slots2"
-			credits -= 1
-			playsound(loc, 'modular_darkpack/casino/sound/reelspin.ogg', 50, TRUE)
+			credits -= bet_size
+			playsound(loc, 'modular_darkpack/casino/sounds/reelspin.ogg', 75, TRUE)
 			last_reels = list("", "", "")
 			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 1), reel_delay_1)
 			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 2), reel_delay_2)
 			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 3), reel_delay_3)
 			addtimer(CALLBACK(src, PROC_REF(finish_spin)), finish_delay)
+			return TRUE
+		if("set_bet")
+			var/new_bet = text2num(params["bet"])
+			bet_size = new_bet
+			playsound(loc, 'sound/machines/terminal_button01.ogg', 75, TRUE)
 			return TRUE
 		if("cashout")
 			if(credits <= 0)
@@ -150,39 +160,48 @@
 			credits = 0
 			last_result = "Thanks for playing!"
 			icon_state = "slots0"
-			playsound(loc, 'modular_darkpack/casino/sound/shortpayout.ogg', 25, TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE)
 			return TRUE
 
 /obj/structure/casino/slotmachine/proc/reveal_reel(index)
 	last_reels[index] = spin_reel()
+	SStgui.update_uis(src) // without this the click sound will play before the reel updates, and it looks like the symbol changed last second. woe
+	addtimer(CALLBACK(src, PROC_REF(play_reel_click)), 2)
+
+/obj/structure/casino/slotmachine/proc/play_reel_click()
+	playsound(loc, 'modular_darkpack/casino/sounds/reelclick.ogg', 75, TRUE)
 
 /obj/structure/casino/slotmachine/proc/finish_spin()
-	last_payout = calculate_payout(last_reels)
+	var/base_payout = calculate_payout(last_reels)
+	last_payout = base_payout * bet_size
 	if(last_payout > 0)
 		credits += last_payout
-		if(last_payout >= seven_payout)
+		if(base_payout >= seven_payout)
 			last_result = "JACKPOT! +$[last_payout]!"
-			visible_message(span_warning("Someone hits the JACKPOT on [src]! $[last_payout] won!"))
-			playsound(loc, 'modular_darkpack/casino/sound/jackpotpayout.ogg', 50, TRUE)
+			visible_message(span_warning("JACKPOT!!!"))
+			balloon_alert_to_viewers("JACKPOT!!!")
+			playsound(loc, 'modular_darkpack/casino/sounds/jackpotpayout.ogg', 50, TRUE)
 		else
 			last_result = "+$[last_payout]!"
-			playsound(loc, 'modular_darkpack/casino/sound/shortpayout.ogg', 25, TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE)
 	else
-		last_result = pick("Wheel... of money!","Wheel. Of. Money!", "Wheel of money!")
+		last_result = " "
 	icon_state = "slots1"
 
 /obj/item/stack/casino/chip
-	icon = 'icons/obj/economy.dmi'
-	name = "$1 casino chip"
+	icon = 'modular_darkpack/casino/icons/casino.dmi'
+	name = "casino chip"
+	singular_name = "$1 casino chip"
 	desc = "A heavy casino chip. Made from real metals!"
 	icon_state = "coin_heads"
 	flags_1 = CONDUCT_1
 	amount = 1
-	force = 1
-	throwforce = 2
+	max_amount = 100
+	force = 0
+	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
 	custom_materials = list(/datum/material/bronze = 1)
-	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_GREYSCALE | MATERIAL_AFFECT_STATISTICS
+	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 	var/string_attached
 	var/list/sideslist = list("heads","tails")
 	var/cooldown = 0
@@ -193,7 +212,6 @@
 /obj/item/stack/casino/chip/Initialize()
 	. = ..()
 	coinflip = pick(sideslist)
-	icon_state = "coin_[coinflip]"
 	pixel_x = base_pixel_x + rand(0, 16) - 8
 	pixel_y = base_pixel_y + rand(0, 8) - 8
 
@@ -202,21 +220,20 @@
 	var/amount = get_amount()
 	switch(amount)
 		if(100 to INFINITY)
-			icon_state = "coin"
+			icon_state = "coin3"
 		if(50 to 100)
-			icon_state = "coin"
-		if(2 to 50)
-			icon_state = "coin"
-			name = "stack of [name]s"
+			icon_state = "coin2"
+		if(25 to 50)
+			icon_state = "coin1"
 		else
-			icon_state = "coin"
+			icon_state = "coin_heads"
 
 /obj/item/stack/casino/chip/examine(mob/user)
 	. = ..()
 	. += span_info("Total worth: $[value * amount] dollars.")
 
 /obj/item/stack/casino/chip/attack_self(mob/user)
-	if(cooldown < world.time)
+	if(cooldown < world.time && amount == 1)
 		cooldown = world.time + 15
 		flick("coin_[coinflip]_flip", src)
 		coinflip = pick(sideslist)
@@ -231,10 +248,12 @@
 
 /obj/item/stack/casino/chip/onehundred
 	name = "$100 casino chip"
+	singular_name = "$100 casino chip"
 	custom_materials = list(/datum/material/gold = 1)
 	value = 100
 
 /obj/item/stack/casino/chip/onethousand
 	name = "$1,000 casino chip"
+	singular_name = "$1,000 casino chip"
 	custom_materials = list(/datum/material/diamond = 1)
 	value = 1000

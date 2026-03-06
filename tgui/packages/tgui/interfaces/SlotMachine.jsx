@@ -112,7 +112,7 @@ const Paysymbols = ({ entry }) => (
 
 export const SlotMachine = () => {
   const { data, act } = useBackend();
-  const { reels = ['seven', 'seven', 'seven'], payout = 0, result, credits = 0, reel_delays, finish_delay, paytable = [] } = data;
+  const { reels = ['seven', 'seven', 'seven'], payout = 0, result, credits = 0, reel_delays, finish_delay, paytable = [], bet_size = 1, bet_sizes = [] } = data;
 
   const [animating, setAnimating] = useLocalState('animating', false);
   const [reelStates, setReelStates] = useLocalState('reelStates', ['stopped', 'stopped', 'stopped']); //yey sprite updates
@@ -120,13 +120,14 @@ export const SlotMachine = () => {
   const [reelKeys, setReelKeys] = useLocalState('reelKeys', [0, 0, 0]);
 
   const handleSpin = () => {
-    if (animating || credits < 1) return;
+    if (animating || credits < bet_size) return;
     setAnimating(true);
     act('spin');
 
     const localStates = ['spinning', 'spinning', 'spinning']; //SPIN THE CHAMBER
     const localKeys = [0, 0, 0];
     const localSymbols = [randSymbol(), randSymbol(), randSymbol()];
+    const stopCounters = [0, 0, 0];
 
     setReelStates([...localStates]);
     setReelKeys([...localKeys]);
@@ -146,7 +147,10 @@ export const SlotMachine = () => {
             localKeys[i]++;
           }
         } else if (localStates[i] === 'stopping') {
-          localStates[i] = 'stopped'; //WE'RE RICH!
+          stopCounters[i]++;
+          if (stopCounters[i] >= 1) {
+            localStates[i] = 'stopped'; //WE'RE RICH!
+          }
         }
       }
 
@@ -160,15 +164,14 @@ export const SlotMachine = () => {
       }
     }, 100);
   };
-  // random stuff until we have our final result. what you see is a LIE. the house always wins.
-  const getSymbol = (i) => animating ? displaySymbols[i] : reels[i];
+  const getSymbol = (i) => (reelStates[i] === 'stopped' && reels[i]) ? reels[i] : displaySymbols[i];
 
   const winner = !animating && payout > 0;
-  const jackpot = !animating && payout >= 77; // todo: remove magic numbers and pull values from the back end
-  const canSpin = !animating && credits >= 1;
+  const jackpot = !animating && payout >= 77;
+  const canSpin = !animating && credits >= bet_size;
 
   return (
-    <Window title="Slot Machine" width={520} height={375}>
+    <Window title="Slot Machine" width={520} height={420}>
       <Window.Content
         style={{
           background: 'linear-gradient(180deg, #2a0a00 0%, #150300 100%)',
@@ -229,7 +232,9 @@ export const SlotMachine = () => {
                 marginTop: '3px',
               }}
             >
-              Cost: $1 per spin
+              Payouts are bet x multiplier
+              <br></br>
+              Currently betting ${bet_size} per spin
             </Box>
           </Stack.Item>
           <Stack.Item grow style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
@@ -284,12 +289,16 @@ export const SlotMachine = () => {
                 border: `2px solid ${canSpin ? '#8b6914' : '#444'}`,
                 borderRadius: '6px',
                 textShadow: canSpin ? '0 0 8px #ff8800' : 'none',
+                boxShadow: canSpin ? '0 0 10px #cc2200, 0 0 22px #880000' : 'none',
                 cursor: canSpin ? 'pointer' : 'not-allowed',
-                textAlign: 'center',
+                padding: '0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               {animating
-                ? '> > >'
+                ? ''
                 : credits < 1
                   ? '- INSERT CHIPS -'
                   : 'PUSH TO SPIN'}
@@ -299,6 +308,36 @@ export const SlotMachine = () => {
               <Box as="span" bold style={{ color: credits > 0 ? '#ffd700' : '#666', fontSize: '1.1em' }}>
                 ${credits}
               </Box>
+            </Box>
+            <Box style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
+              {bet_sizes.map((amount) => {
+                const isSelected = amount === bet_size;
+                const canAfford = credits >= amount;
+                return (
+                  <Button
+                    key={amount}
+                    onClick={() => act('set_bet', { bet: amount })}
+                    disabled={animating}
+                    style={{
+                      width: '44px',
+                      height: '32px',
+                      fontSize: '0.85em',
+                      fontWeight: 'bold',
+                      background: isSelected ? '#880000' : '#1a0800',
+                      color: isSelected ? '#ffd700' : canAfford ? '#aa7733' : '#333',
+                      border: `1px solid ${isSelected ? '#cc2200' : '#3a1a08'}`,
+                      borderRadius: '4px',
+                      boxShadow: isSelected ? '0 0 8px #ff2200, 0 0 18px #aa1100' : 'none',
+                      cursor: animating ? 'not-allowed' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    ${amount}
+                  </Button>
+                );
+              })}
             </Box>
             <Button
               onClick={() => act('cashout')}
@@ -313,8 +352,12 @@ export const SlotMachine = () => {
                 color: credits > 0 && !animating ? '#88ff88' : '#444',
                 border: `1px solid ${credits > 0 && !animating ? '#336633' : '#333'}`,
                 borderRadius: '4px',
+                boxShadow: credits > 0 && !animating ? '0 0 8px #006600, 0 0 16px #003300' : 'none',
                 cursor: credits > 0 && !animating ? 'pointer' : 'not-allowed',
-                textAlign: 'center',
+                padding: '0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               CASH OUT
