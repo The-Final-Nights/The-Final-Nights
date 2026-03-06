@@ -20,8 +20,10 @@
 	pcollar = P
 	regenerate_icons()
 	to_chat(user, span_notice("You put the [P] around [src]'s neck."))
-	if(P.tagname && !unique_pet)
+	if(P.tagname)
 		fully_replace_character_name(null, "\proper [P.tagname]")
+	if(P.tagdesc)
+		desc = "[P.tagdesc]"
 
 /mob/living/simple_animal/pet/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/clothing/neck/petcollar) && !pcollar)

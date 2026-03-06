@@ -18,6 +18,23 @@
 	emote_hear = list("woofs.")
 	emote_see = list("wags its tail happily.","looks up at you with adoring eyes.","hops around excitedly.","lets out a happy bark.","rolls over playfully.")
 
+/mob/living/simple_animal/pet/dog/fox
+	name = "\improper fox"
+	desc = "A sly little fox! They can be a bit mischievous, but they sure are cute."
+	icon = 'icons/mob/pets.dmi'
+	icon_state = "fox"
+	icon_living = "fox"
+	icon_dead = "fox_dead"
+	speak = list("Yip!","Yip?","Yip.","Yip yip!","Arf!","Grrr!","Yip yip?","Arf?","Grrr?")
+	speak_emote = list("yips")
+	emote_hear = list("yips.")
+	emote_see = list("wags its tail happily.","looks up with adoring eyes.","hops around excitedly.","lets out a happy bark!","rolls over playfully.")
+
+/mob/living/simple_animal/pet/dog/fox/Initialize()
+	. = ..()
+	resize = 0.85 //slightly smaller than wild foxes
+	update_transform()
+
 // Birds
 /mob/living/simple_animal/pet/bird
 	name = "\improper black bird"
@@ -175,26 +192,32 @@
 	dogs += list(list(
 		"type" = "/mob/living/simple_animal/pet/dog/corgi",
 		"name" = "Corgi",
-		"desc" = initial(/mob/living/simple_animal/pet/dog/corgi::desc),
+		"desc" = "A small herding dog breed known for its short legs and long body. Friendly and intelligent.",
 		"icon" = icon2html(icon('icons/mob/pets.dmi', "corgi"), user, sourceonly = TRUE)
 	))
 	dogs += list(list(
 		"type" = "/mob/living/simple_animal/pet/dog/bullterrier",
 		"name" = "Bull Terrier",
-		"desc" = initial(/mob/living/simple_animal/pet/dog/bullterrier::desc),
+		"desc" = "A strong and sturdy dog breed. Loyal and protective.",
 		"icon" = icon2html(icon('icons/mob/pets.dmi', "bullterrier"), user, sourceonly = TRUE)
 	))
 	dogs += list(list(
 		"type" = "/mob/living/simple_animal/pet/dog/pug",
 		"name" = "Pug",
-		"desc" = initial(/mob/living/simple_animal/pet/dog/pug::desc),
+		"desc" = "An affront to God and her creations. Still cute though.",
 		"icon" = icon2html(icon('icons/mob/pets.dmi', "pug"), user, sourceonly = TRUE)
 	))
 	dogs += list(list(
 		"type" = "/mob/living/simple_animal/pet/dog/corgi/puppy",
 		"name" = "Corgi Puppy",
-		"desc" = initial(/mob/living/simple_animal/pet/dog/corgi/puppy::desc),
+		"desc" = "Tiny corgi! So much fluff! Such little legs!",
 		"icon" = icon2html(icon('icons/mob/pets.dmi', "puppy"), user, sourceonly = TRUE)
+	))
+	dogs += list(list(
+		"type" = "/mob/living/simple_animal/pet/dog/fox",
+		"name" = "Fox",
+		"desc" = "Foxes are dogs... Right?",
+		"icon" = icon2html(icon('icons/mob/pets.dmi', "fox"), user, sourceonly = TRUE)
 	))
 
 	var/list/cats = list()
