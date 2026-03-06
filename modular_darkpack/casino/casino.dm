@@ -158,7 +158,7 @@
 			if(remaining > 0)
 				new /obj/item/stack/casino/chip(get_turf(src), remaining)
 			credits = 0
-			last_result = "Thanks for playing!"
+			last_result = " "
 			icon_state = "slots0"
 			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE, use_reverb = TRUE)
 			return TRUE
