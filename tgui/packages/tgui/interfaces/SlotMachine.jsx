@@ -11,14 +11,6 @@ const SYMBOL = {
   seven:   { glyph: '7', color: '#ff2222', fontSize: '2.6em', fontWeight: 'bold' },
 };
 
-const paysymbolstuff = [
-  { symbols: ['seven',   'seven',   'seven'],  payout: 77, jackpot: true }, // TODO: remove magic numbers here
-  { symbols: ['diamond', 'diamond', 'diamond'], payout: 25 },
-  { symbols: ['bell',    'bell',    'bell'],    payout: 10 },
-  { symbols: ['bar',     'bar',     'bar'],     payout: 5 },
-  { symbols: ['cherry',  'cherry',  'cherry'],  payout: 3 },
-  { symbols: ['cherry',  'cherry',  null],      payout: 1 },
-];
 
 const REEL_CSS = `
 @keyframes reel-drop {
@@ -27,7 +19,6 @@ const REEL_CSS = `
   100% { transform: translateY(0px);   opacity: 1;   }
 }
 `;
-const STOP_TICKS = [50, 65, 70];
 
 const randSymbol = () => ALL_SYMBOLS[Math.floor(Math.random() * ALL_SYMBOLS.length)];
 
@@ -121,7 +112,7 @@ const Paysymbols = ({ entry }) => (
 
 export const SlotMachine = () => {
   const { data, act } = useBackend();
-  const { reels = ['seven', 'seven', 'seven'], payout = 0, result, credits = 0 } = data;
+  const { reels = ['seven', 'seven', 'seven'], payout = 0, result, credits = 0, reel_delays, finish_delay, paytable = [] } = data;
 
   const [animating, setAnimating] = useLocalState('animating', false);
   const [reelStates, setReelStates] = useLocalState('reelStates', ['stopped', 'stopped', 'stopped']); //yey sprite updates
@@ -147,7 +138,7 @@ export const SlotMachine = () => {
 
       for (let i = 0; i < 3; i++) {
         if (localStates[i] === 'spinning') {
-          if (tick === STOP_TICKS[i]) {
+          if (tick === reel_delays[i]) {
             localStates[i] = 'stopping';
             localKeys[i]++;
           } else {
@@ -163,17 +154,14 @@ export const SlotMachine = () => {
       setReelKeys([...localKeys]);
       setDisplaySymbols([...localSymbols]);
 
-      if (tick > STOP_TICKS[2]) {
+      if (tick > finish_delay) {
         clearInterval(interval);
         setAnimating(false);
       }
     }, 100);
   };
   // random stuff until we have our final result. what you see is a LIE. the house always wins.
-  const getSymbol = (i) => {
-    if (reelStates[i] === 'stopped' || reelStates[i] === 'stopping') return reels[i];
-    return displaySymbols[i];
-  };
+  const getSymbol = (i) => animating ? displaySymbols[i] : reels[i];
 
   const winner = !animating && payout > 0;
   const jackpot = !animating && payout >= 77; // todo: remove magic numbers and pull values from the back end
@@ -200,7 +188,7 @@ export const SlotMachine = () => {
             padding: '4px 0',
           }}
         >
-          🎰 WHEEL OF MONEY 🎰
+          WHEEL OF MONEY
         </Box>
 
         <Stack fill spacing={1} style={{ alignItems: 'flex-start' }}>
@@ -229,7 +217,7 @@ export const SlotMachine = () => {
             >
               ★ PAYS ★
             </Box>
-            {paysymbolstuff.map((entry, i) => ( //the list of payouts. should probably define this on the back end
+            {paytable.map((entry, i) => (
               <Paysymbols key={i} entry={entry} />
             ))}
             <Box
@@ -297,13 +285,14 @@ export const SlotMachine = () => {
                 borderRadius: '6px',
                 textShadow: canSpin ? '0 0 8px #ff8800' : 'none',
                 cursor: canSpin ? 'pointer' : 'not-allowed',
+                textAlign: 'center',
               }}
             >
               {animating
-                ? '> > >  SPINNING...'
+                ? '> > >'
                 : credits < 1
                   ? '- INSERT CHIPS -'
-                  : '🎰  PULL LEVER'}
+                  : 'PUSH TO SPIN'}
             </Button>
             <Box style={{ fontSize: '0.95em', color: '#c8a84b', textAlign: 'center' }}>
               Credits:{' '}
@@ -325,6 +314,7 @@ export const SlotMachine = () => {
                 border: `1px solid ${credits > 0 && !animating ? '#336633' : '#333'}`,
                 borderRadius: '4px',
                 cursor: credits > 0 && !animating ? 'pointer' : 'not-allowed',
+                textAlign: 'center',
               }}
             >
               CASH OUT

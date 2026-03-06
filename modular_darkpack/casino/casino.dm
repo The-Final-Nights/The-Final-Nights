@@ -27,6 +27,12 @@
 	var/bar_payout = 5
 	var/cherry_payout = 3
 
+	// reel stop delays in deciseconds. SlotMachine.jsx runs at 100ms (1 ds = 100ms).
+	var/reel_delay_1 = 50
+	var/reel_delay_2 = 65
+	var/reel_delay_3 = 70
+	var/finish_delay = 75
+
 /obj/structure/casino/slotmachine/attack_hand(mob/user)
 	ui_interact(user)
 
@@ -35,6 +41,7 @@
 		var/obj/item/stack/casino/chip/chip = used_item
 		credits += chip.value
 		balloon_alert_to_viewers("inserted a chip!", "You insert a [chip] into [src].")
+		playsound(loc, 'modular_darkpack/casino/sound/coininsert.ogg', 25, TRUE)
 		if(chip.amount > 1)
 			chip.amount -= 1
 		else
@@ -55,10 +62,21 @@
 	data["payout"] = last_payout
 	data["result"] = last_result
 	data["credits"] = credits
+	data["reel_delays"] = list(reel_delay_1, reel_delay_2, reel_delay_3)
+	data["finish_delay"] = finish_delay
+	data["paytable"] = list(
+	list("symbols" = list("seven",   "seven",   "seven"),  "payout" = seven_payout,   "jackpot" = TRUE),
+	list("symbols" = list("diamond", "diamond", "diamond"), "payout" = diamond_payout),
+	list("symbols" = list("bell",    "bell",    "bell"),    "payout" = bell_payout),
+	list("symbols" = list("bar",     "bar",     "bar"),     "payout" = bar_payout),
+	list("symbols" = list("cherry",  "cherry",  "cherry"),  "payout" = cherry_payout),
+	list("symbols" = list("cherry",  "cherry",  null),      "payout" = 1)
+	)
 
 	return data
 
 /obj/structure/casino/slotmachine/proc/spin_reel()
+	playsound(loc, 'modular_darkpack/casino/sound/reelclick.ogg', 50, TRUE)
 	var/roll = rand(1, 100)
 	if(roll <= sevenroll)
 		return "seven"
@@ -102,26 +120,18 @@
 	switch(action)
 		if("spin")
 			balloon_alert_to_viewers("pulls the lever!", "You pull the lever!")
-			var/mob/user = ui.user
+			playsound(loc, pick('modular_darkpack/casino/sound/slotmusic1.ogg','modular_darkpack/casino/sound/slotmusic2.ogg','modular_darkpack/casino/sound/slotmusic3.ogg'), 25)
 			if(credits < 1)
 				balloon_alert_to_viewers("Insert chips first!")
 				return FALSE
 			icon_state = "slots2"
 			credits -= 1
-			last_reels = list(spin_reel(), spin_reel(), spin_reel())
-			last_payout = calculate_payout(last_reels)
-			if(last_payout > 0)
-				credits += last_payout
-				if(last_payout >= 77)
-					last_result = "JACKPOT! +$[last_payout]!"
-					visible_message(span_warning("[user] hits the JACKPOT on [src]! $[last_payout] won!"))
-					balloon_alert_to_viewers("hits the JACKPOT!", "You hit the JACKPOT! $[last_payout] won!")
-				else
-					last_result = "+$[last_payout]!"
-					balloon_alert_to_viewers("+$[last_payout]!")
-			else
-				last_result = pick("Wheel... of money!","Wheel. Of. Money!", "Wheel of money!")
-			addtimer(CALLBACK(src, PROC_REF(finish_spin)), 75)
+			playsound(loc, 'modular_darkpack/casino/sound/reelspin.ogg', 50, TRUE)
+			last_reels = list("", "", "")
+			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 1), reel_delay_1)
+			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 2), reel_delay_2)
+			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 3), reel_delay_3)
+			addtimer(CALLBACK(src, PROC_REF(finish_spin)), finish_delay)
 			return TRUE
 		if("cashout")
 			if(credits <= 0)
@@ -140,9 +150,25 @@
 			credits = 0
 			last_result = "Thanks for playing!"
 			icon_state = "slots0"
+			playsound(loc, 'modular_darkpack/casino/sound/shortpayout.ogg', 25, TRUE)
 			return TRUE
 
-/obj/structure/casino/slotmachine/proc/finish_spin() // todo: add sounds
+/obj/structure/casino/slotmachine/proc/reveal_reel(index)
+	last_reels[index] = spin_reel()
+
+/obj/structure/casino/slotmachine/proc/finish_spin()
+	last_payout = calculate_payout(last_reels)
+	if(last_payout > 0)
+		credits += last_payout
+		if(last_payout >= seven_payout)
+			last_result = "JACKPOT! +$[last_payout]!"
+			visible_message(span_warning("Someone hits the JACKPOT on [src]! $[last_payout] won!"))
+			playsound(loc, 'modular_darkpack/casino/sound/jackpotpayout.ogg', 50, TRUE)
+		else
+			last_result = "+$[last_payout]!"
+			playsound(loc, 'modular_darkpack/casino/sound/shortpayout.ogg', 25, TRUE)
+	else
+		last_result = pick("Wheel... of money!","Wheel. Of. Money!", "Wheel of money!")
 	icon_state = "slots1"
 
 /obj/item/stack/casino/chip
