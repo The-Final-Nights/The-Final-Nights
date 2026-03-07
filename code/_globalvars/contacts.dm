@@ -14,6 +14,7 @@ GLOBAL_LIST_EMPTY(warehouse_network)
 GLOBAL_LIST_EMPTY(axes_network)
 GLOBAL_LIST_EMPTY(vampire_leader_network)
 GLOBAL_LIST_EMPTY(endron_network)
+GLOBAL_LIST_EMPTY(casino_network)
 
 
 #define MILLENIUM_TOWER_NETWORK 1
@@ -26,6 +27,7 @@ GLOBAL_LIST_EMPTY(endron_network)
 #define AXES_NETWORK 8
 #define VAMPIRE_LEADER_NETWORK 9
 #define ENDRON_NETWORK 10
+#define CASINO_NETWORK 11
 
 
 /proc/contact_network_from_define(network_id)
@@ -50,4 +52,6 @@ GLOBAL_LIST_EMPTY(endron_network)
             return GLOB.vampire_leader_network
         if(ENDRON_NETWORK)
             return GLOB.endron_network
-    CRASH("contact_network_from_define() called with invalid network_id: [isnull(network_id) ? "(null)" : network_id]")
+        if(CASINO_NETWORK)
+            return GLOB.casino_network
+    CRASH("contact_network_from_define() called with invalid network_id: [isnull(network_id) ? "(null)" : network_id]()")

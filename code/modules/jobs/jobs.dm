@@ -131,6 +131,11 @@ GLOBAL_LIST_INIT(sabbat_positions, list(
 	"Sabbat Priest"
 ))
 
+GLOBAL_LIST_INIT(casino_positions, list(
+	"Casino Manager",
+	"Casino Employee"
+))
+
 GLOBAL_LIST_INIT(ss13, list(
 	"SS13",
 ))
@@ -155,12 +160,13 @@ GLOBAL_LIST_INIT(position_categories, list(
 	EXP_TYPE_PAINTED_CITY = list("jobs" = painted_positions, "color" = "#7195ad"),
 	EXP_TYPE_AMBERGLADE = list("jobs" = amberglade_positions, "color" = "#69e430"),
 	EXP_TYPE_SPIRAL = list("jobs" = spiral_positions, "color" = "#015334"),
-	EXP_TYPE_SABBAT = list("jobs" = sabbat_positions, "color" = "#7B0000")
+	EXP_TYPE_SABBAT = list("jobs" = sabbat_positions, "color" = "#7B0000"),
+	EXP_TYPE_CASINO = list("jobs" = casino_positions, "color" = "#ffd153")
 ))
 
 
 GLOBAL_LIST_INIT(exp_jobsmap, list(
-	EXP_TYPE_CREW = list("titles" = command_positions | church_positions | camarilla_council_positions | citizen_positions | police_positions | national_security_positions | anarch_positions | services_positions  | giovanni_positions | tzimisce_positions | tremere_positions | gang_positions | clinic_positions | painted_positions | amberglade_positions | spiral_positions | sabbat_positions), // crew positions
+	EXP_TYPE_CREW = list("titles" = command_positions | church_positions | camarilla_council_positions | citizen_positions | police_positions | national_security_positions | anarch_positions | services_positions  | giovanni_positions | tzimisce_positions | tremere_positions | gang_positions | clinic_positions | painted_positions | amberglade_positions | spiral_positions | sabbat_positions | casino_positions), // crew positions
 	EXP_TYPE_CAMARILLIA = list("titles" = command_positions),
 	EXP_TYPE_TREMERE = list("titles" = tremere_positions),
 	EXP_TYPE_ANARCH = list("titles" = anarch_positions),

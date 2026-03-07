@@ -5,7 +5,7 @@ import { Window } from '../layouts';
 const ALL_SYMBOLS = ['cherry', 'bar', 'bell', 'diamond', 'seven'];
 const SYMBOL = {
   cherry:  { glyph: '🍒', color: '#ff5555', fontSize: '1.8em' },
-  bar:     { glyph: 'BAR', color: '#f5e642', fontSize: '1.1em', fontFamily: 'serif', fontWeight: 'bold', letterSpacing: '3px' },
+  bar:     { glyph: 'BAR', color: '#f5e642', fontSize: '1.1em', fontFamily: 'serif', fontWeight: 'bold', letterSpacing: '3px', WebkitTextStroke: '2px black', paintOrder: 'stroke fill' },
   bell:    { glyph: '🔔', color: '#ffdd00', fontSize: '1.8em' },
   diamond: { glyph: '💎', color: '#88eeff', fontSize: '1.8em' },
   seven:   { glyph: '7', color: '#ff2222', fontSize: '2.6em', fontWeight: 'bold' },
@@ -32,6 +32,8 @@ const Glyph = ({ symbol, size }) => {
         fontFamily: s.fontFamily || 'inherit',
         fontWeight: s.fontWeight || 'normal',
         letterSpacing: s.letterSpacing || 'normal',
+        WebkitTextStroke: s.WebkitTextStroke || '0px transparent',
+        paintOrder: s.paintOrder || 'normal',
         lineHeight: 1,
       }}
     >
@@ -87,13 +89,16 @@ const Paysymbols = ({ entry }) => (
     }}
   >
     <Box style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
-      {entry.symbols.map((s, i) =>
-        s ? (
-          <Glyph key={i} symbol={s} size="small" />
-        ) : (
-          <Box key={i} style={{ color: '#9a7a40', fontSize: '0.75em' }}>any</Box>
-        )
-      )}
+      {entry.pair
+        ? <Box style={{ color: '#9a7a40', fontSize: '0.75em' }}>Any pair</Box>
+        : entry.symbols.map((s, i) =>
+            s ? (
+              <Glyph key={i} symbol={s} size="small" />
+            ) : (
+              <Box key={i} style={{ color: '#9a7a40', fontSize: '0.75em' }}>Any</Box>
+            )
+          )
+      }
     </Box>
     <Box
       style={{
@@ -105,7 +110,7 @@ const Paysymbols = ({ entry }) => (
         textAlign: 'right',
       }}
     >
-      {entry.jackpot ? '77 🎉' : `${entry.payout}`}
+      {entry.jackpot ? '77' : `${entry.payout}`}
     </Box>
   </Box>
 );
@@ -223,6 +228,15 @@ export const SlotMachine = () => {
             {paytable.map((entry, i) => (
               <Paysymbols key={i} entry={entry} />
             ))}
+            {[
+              ['💎', 'x2 per'],
+              ['Payouts are bet x multiplier', ''],
+            ].map(([label, value], i) => (
+              <Box key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '3px 6px', borderBottom: '1px solid #2e1a04', fontSize: '0.72em', color: '#9a7040' }}>
+                <Box>{label}</Box>
+                <Box style={{ fontWeight: 'bold', marginLeft: '8px', minWidth: '32px', textAlign: 'right' }}>{value}</Box>
+              </Box>
+            ))}
             <Box
               style={{
                 padding: '5px 8px 2px',
@@ -232,9 +246,43 @@ export const SlotMachine = () => {
                 marginTop: '3px',
               }}
             >
-              Payouts are bet x multiplier
-              <br></br>
               Currently betting ${bet_size} per spin
+            </Box>
+            <Box style={{ fontSize: '0.95em', color: '#c8a84b', textAlign: 'center', padding: '4px 8px 2px' }}>
+              Balance:{' '}
+              <Box as="span" bold style={{ color: credits > 0 ? '#ffd700' : '#666', fontSize: '1.1em' }}>
+                ${credits}
+              </Box>
+            </Box>
+            <Box style={{ display: 'flex', gap: '6px', justifyContent: 'center', padding: '4px 6px 4px' }}>
+              {bet_sizes.map((amount) => {
+                const isSelected = amount === bet_size;
+                const canAfford = credits >= amount;
+                return (
+                  <Button
+                    key={amount}
+                    onClick={() => act('set_bet', { bet: amount })}
+                    disabled={animating}
+                    style={{
+                      width: '44px',
+                      height: '32px',
+                      fontSize: '0.85em',
+                      fontWeight: 'bold',
+                      background: isSelected ? '#880000' : '#1a0800',
+                      color: isSelected ? '#ffd700' : canAfford ? '#aa7733' : '#333',
+                      border: `1px solid ${isSelected ? '#cc2200' : '#3a1a08'}`,
+                      borderRadius: '4px',
+                      boxShadow: isSelected ? '0 0 8px #ff2200, 0 0 18px #aa1100' : 'none',
+                      cursor: animating ? 'not-allowed' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    ${amount}
+                  </Button>
+                );
+              })}
             </Box>
           </Stack.Item>
           <Stack.Item grow style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
@@ -303,42 +351,6 @@ export const SlotMachine = () => {
                   ? '- INSERT CHIPS -'
                   : 'PUSH TO SPIN'}
             </Button>
-            <Box style={{ fontSize: '0.95em', color: '#c8a84b', textAlign: 'center' }}>
-              Credits:{' '}
-              <Box as="span" bold style={{ color: credits > 0 ? '#ffd700' : '#666', fontSize: '1.1em' }}>
-                ${credits}
-              </Box>
-            </Box>
-            <Box style={{ display: 'flex', gap: '6px', justifyContent: 'center' }}>
-              {bet_sizes.map((amount) => {
-                const isSelected = amount === bet_size;
-                const canAfford = credits >= amount;
-                return (
-                  <Button
-                    key={amount}
-                    onClick={() => act('set_bet', { bet: amount })}
-                    disabled={animating}
-                    style={{
-                      width: '44px',
-                      height: '32px',
-                      fontSize: '0.85em',
-                      fontWeight: 'bold',
-                      background: isSelected ? '#880000' : '#1a0800',
-                      color: isSelected ? '#ffd700' : canAfford ? '#aa7733' : '#333',
-                      border: `1px solid ${isSelected ? '#cc2200' : '#3a1a08'}`,
-                      borderRadius: '4px',
-                      boxShadow: isSelected ? '0 0 8px #ff2200, 0 0 18px #aa1100' : 'none',
-                      cursor: animating ? 'not-allowed' : 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    ${amount}
-                  </Button>
-                );
-              })}
-            </Box>
             <Button
               onClick={() => act('cashout')}
               disabled={animating || credits <= 0}

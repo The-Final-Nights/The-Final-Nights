@@ -7,12 +7,16 @@
 	icon_state = "slots0"
 	anchored = TRUE
 	density = TRUE
-	var/win_prob = 5
 	var/spinning = FALSE
 	var/list/last_reels = list("seven", "seven", "seven")
 	var/last_payout = 0
 	var/last_result = "Insert chips and pull the lever!"
 	var/credits = 0
+	var/force_jackpot = FALSE
+	var/hacked = FALSE
+	var/symbol_glyphs = list("seven" = " 7 ", "diamond" = " 💎 ", "bell" = " 🔔 ", "bar" = " BAR ", "cherry" = " 🍒 ")
+	var/alert = ""
+	var/payout_multiplier = 0
 
 	// dice rolls for each symbol
 	var/sevenroll = 5
@@ -27,15 +31,42 @@
 	var/bar_payout = 5
 	var/cherry_payout = 3
 
-	// reel stop delays in deciseconds. SlotMachine.jsx runs at 100ms (1 ds = 100ms)
-	var/reel_delay_1 = 50
-	var/reel_delay_2 = 65
-	var/reel_delay_3 = 70
-	var/finish_delay = 75
+	// reel stop delays set at init
+	var/reel_delay_1 = 1
+	var/reel_delay_2 = 1
+	var/reel_delay_3 = 1
+	var/finish_delay = 9 SECONDS
 
 	// bet sizes
 	var/bet_size = 1
 	var/list/bet_sizes = list(1, 5, 10, 25)
+
+/obj/structure/casino/slotmachine/Initialize()
+	. = ..()
+	reel_delay_1 = pick(3 SECONDS, 4 SECONDS)
+	reel_delay_2 = pick(5 SECONDS, 6 SECONDS)
+	reel_delay_3 = pick(7 SECONDS, 8 SECONDS) //the reelspin.ogg sound is 7 seconds long, so probably dont go any higher than 8
+
+// a more expensive slot machine
+/obj/structure/casino/slotmachine/deluxe
+	name = "deluxe slot machine"
+	desc = "Higher stakes, higher rewards!"
+	// dice rolls for each symbol
+	sevenroll = 8
+	diamondroll = 20
+	bellroll = 40
+	barroll = 55
+
+	// payouts for each symbol based on the result
+	seven_payout = 77
+	diamond_payout = 30
+	bell_payout = 15
+	bar_payout = 10
+	cherry_payout = 6
+
+	// bet sizes
+	bet_size = 25
+	bet_sizes = list(25, 50, 100, 250)
 
 /obj/structure/casino/slotmachine/attack_hand(mob/user)
 	ui_interact(user)
@@ -76,13 +107,15 @@
 	list("symbols" = list("bell",    "bell",    "bell"),    "payout" = bell_payout),
 	list("symbols" = list("bar",     "bar",     "bar"),     "payout" = bar_payout),
 	list("symbols" = list("cherry",  "cherry",  "cherry"),  "payout" = cherry_payout),
-	list("symbols" = list("cherry",  "cherry",  null),      "payout" = 1)
+	list("symbols" = list(null,      null,      null),      "payout" = 2, "pair" = TRUE)
 	)
 
 	return data
 
-/obj/structure/casino/slotmachine/proc/spin_reel()
-	var/roll = rand(1, 100)
+/obj/structure/casino/slotmachine/proc/spin_reel(mob/living/user)
+	if(force_jackpot)
+		return "seven"
+	var/roll = rand(1, 100) //+ user.mind.prefs.donator * 10 // donators are a tiny bit luckier
 	if(roll <= sevenroll)
 		return "seven"
 	if(roll <= diamondroll)
@@ -94,6 +127,7 @@
 	return "cherry"
 
 /obj/structure/casino/slotmachine/proc/calculate_payout(list/reels)
+	payout_multiplier = 0
 	var/reelone = reels[1]
 	var/reeltwo = reels[2]
 	var/reelthree = reels[3]
@@ -101,22 +135,23 @@
 	if(reelone == reeltwo && reeltwo == reelthree)
 		switch(reelone)
 			if("seven")
-				return seven_payout
+				payout_multiplier = seven_payout
 			if("diamond")
-				return diamond_payout
+				payout_multiplier = diamond_payout
 			if("bell")
-				return bell_payout
+				payout_multiplier = bell_payout
 			if("bar")
-				return bar_payout
+				payout_multiplier = bar_payout
 			if("cherry")
-				return cherry_payout
+				payout_multiplier = cherry_payout
+	else if(reelone == reeltwo || reelone == reelthree || reeltwo == reelthree)
+		payout_multiplier = 2 // any pair pays 2x the bet
 
-	var/cherries = 0
-	for(var/s in reels)
-		if(s == "cherry") cherries++
-	if(cherries >= 2) return 1 // two cherries pay 1x the bet
+	for(var/symbol in reels)
+		if(symbol == "diamond")
+			payout_multiplier *= 2 // each diamond multiplies payout by 2
 
-	return 0
+	return CEILING(payout_multiplier, 1) // round up just incase
 
 /obj/structure/casino/slotmachine/ui_act(action, list/params, datum/tgui/ui)
 	. = ..()
@@ -124,8 +159,11 @@
 		return
 	switch(action)
 		if("spin")
+			if(hacked && prob(50))
+				do_sparks(5, prob(50), src)
+				playsound(loc, get_sfx("sparks"), 25, TRUE, -3)
 			balloon_alert_to_viewers("Lever pulled!", "You pull the lever!")
-			playsound(loc, pick('modular_darkpack/casino/sounds/slotmusic1.ogg','modular_darkpack/casino/sounds/slotmusic2.ogg','modular_darkpack/casino/sounds/slotmusic3.ogg'), 25)
+			playsound(loc, pick('modular_darkpack/casino/sounds/slotmusic1.ogg','modular_darkpack/casino/sounds/slotmusic2.ogg','modular_darkpack/casino/sounds/slotmusic3.ogg'), 25, hacked)
 			if(credits < bet_size)
 				balloon_alert_to_viewers("Not enough credits!")
 				return FALSE
@@ -133,9 +171,10 @@
 			credits -= bet_size
 			playsound(loc, 'modular_darkpack/casino/sounds/reelspin.ogg', 75, FALSE, use_reverb = TRUE)
 			last_reels = list("", "", "")
-			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 1), reel_delay_1)
-			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 2), reel_delay_2)
-			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 3), reel_delay_3)
+			alert = ""
+			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 1, usr), reel_delay_1)
+			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 2, usr), reel_delay_2)
+			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 3, usr), reel_delay_3)
 			addtimer(CALLBACK(src, PROC_REF(finish_spin)), finish_delay)
 			return TRUE
 		if("set_bet")
@@ -163,8 +202,10 @@
 			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE, use_reverb = TRUE)
 			return TRUE
 
-/obj/structure/casino/slotmachine/proc/reveal_reel(index)
-	last_reels[index] = spin_reel()
+/obj/structure/casino/slotmachine/proc/reveal_reel(index, mob/living/user)
+	last_reels[index] = spin_reel(user)
+	alert += symbol_glyphs[last_reels[index]]
+	balloon_alert_to_viewers(alert)
 	SStgui.update_uis(src) // without this the click sound will play before the reel updates, and it looks like the symbol changed last second. woe
 	addtimer(CALLBACK(src, PROC_REF(play_reel_click)), 2)
 
@@ -181,6 +222,7 @@
 			visible_message(span_warning("JACKPOT!!!"))
 			balloon_alert_to_viewers("JACKPOT!!!")
 			playsound(loc, 'modular_darkpack/casino/sounds/jackpotpayout.ogg', 50, TRUE, use_reverb = TRUE)
+			force_jackpot = FALSE
 		else
 			last_result = "+$[last_payout]!"
 			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE, use_reverb = TRUE)
@@ -214,6 +256,9 @@
 	coinflip = pick(sideslist)
 	pixel_x = base_pixel_x + rand(0, 16) - 8
 	pixel_y = base_pixel_y + rand(0, 8) - 8
+	var/datum/component/selling/casino/values = GetComponent(/datum/component/selling/casino)
+	values.cost = value
+	values.object_category = "casino_chips"
 
 /obj/item/stack/casino/chip/update_icon_state()
 	. = ..()
@@ -257,3 +302,171 @@
 	singular_name = "$1,000 casino chip"
 	custom_materials = list(/datum/material/diamond = 1)
 	value = 1000
+
+// job stuff
+/datum/job/vamp/casino/casinoemployee
+	title = "Casino Employee"
+	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
+	department_head = list("Casino Manager")
+	faction = "Vampire"
+	total_positions = 4
+	spawn_positions = 4
+	supervisors = "the casino."
+	selection_color = "#bd3327"
+	exp_type = EXP_TYPE_CASINO
+
+	outfit = /datum/outfit/job/casino
+
+	access = list(ACCESS_MAINT_TUNNELS, ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MECH_SECURITY, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_FORENSICS_LOCKERS, ACCESS_MINERAL_STOREROOM)
+	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_WEAPONS, ACCESS_MECH_SECURITY, ACCESS_MINERAL_STOREROOM) // See /datum/job/officer/get_access()
+	paycheck = PAYCHECK_HARD
+	paycheck_department = ACCOUNT_SEC
+
+	display_order = JOB_DISPLAY_ORDER_CASINO
+	bounty_types = CIV_JOB_SEC
+	known_contacts = list("Casino Employee", "Casino Manager")
+	allowed_species = list("Ghoul", "Human", "Vampire")
+	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_TZIMISCE)
+	v_duty = "You work for the local casino run by the elusive Setites, who you know as 'management'. Ensure your mortal coworkers stay in the dark of any supernatural happenings, and keep up the facade to the outside world while ensuring the casino stays profitable. The casino is one of many fronts for their operations, so you might find yourself doing some tasks that are a bit more... unconventional, but as long as you keep your head down and do your job, you should be fine. Just remember, the casino is a business, and you are an employee, so act like it and everything will be fine."
+	duty = "You work directly for the casino and its administrative staff in a variety of ways, you may even be a personal retainer of one of the managers, to the point that any oddities that you may see over night or hear are either things you are already aware or you simply laugh them off and try not to think about it. This job pays great, so why ask questions? Just do your job and collect your paycheck. You may even get some perks if you are a good employee, like getting to keep some of the chips you find on the floor or maybe even a small cut of the profits if you really impress the higher ups. Just remember, the casino is a business, and you are an employee, so act like it and everything will be fine."
+	minimal_masquerade = 4
+	experience_addition = 10
+
+/datum/outfit/job/casino
+	name = "Casino Employee"
+	jobtype = /datum/job/vamp/casino/casinoemployee
+	id = /obj/item/card/id/chunk/casino/employee
+	uniform = /obj/item/clothing/under/vampire/suit
+	shoes = /obj/item/clothing/shoes/vampire
+	r_pocket = /obj/item/vamp/keys/setite
+	l_pocket = /obj/item/vamp/phone/casino_employee
+	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/rich=1)
+	backpack = /obj/item/storage/backpack
+	satchel = /obj/item/storage/backpack/satchel
+	duffelbag = /obj/item/storage/backpack/duffelbag
+
+/datum/outfit/job/casino/manager
+	name = "Casino Manager"
+	id = /obj/item/card/id/chunk/casino/manager
+
+
+/datum/outfit/job/casinoemployee/pre_equip(mob/living/carbon/human/H)
+	..()
+
+/obj/effect/landmark/start/casinoemployee
+	name = "Casino Employee"
+	icon_state = "Bartender"
+
+/obj/effect/landmark/start/casinomanager
+	name = "Casino Manager"
+	icon_state = "Bartender"
+
+/obj/item/card/id/chunk/casino/employee
+	name = "Casino Employee ID"
+	id_type_name = "Security ID"
+	desc = "An ID showing employment with the Casino."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id2"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id2"
+
+/obj/item/card/id/chunk/casino/manager
+	name = "Casino Manager ID"
+	id_type_name = "Security ID"
+	desc = "An ID showing employment with the Casino."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id2"
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "id2"
+
+/obj/item/vamp/phone/casino_employee
+	exchange_num = 485
+	contact_networks_pre_init = list(
+		list(NETWORK_ID = CASINO_NETWORK, OUR_ROLE = "Casino Employee", USE_JOB_TITLE = TRUE)
+		)
+
+/datum/job/vamp/casino/casinomanager
+	title = "Casino Manager"
+	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
+	department_head = list("Casino Manager")
+	faction = "Vampire"
+	total_positions = 4
+	spawn_positions = 4
+	exp_requirements = 500
+	supervisors = "the clan."
+	selection_color = "#bd3327"
+	exp_type = EXP_TYPE_CASINO
+
+	outfit = /datum/outfit/job/casino/manager
+
+	access = list(ACCESS_MAINT_TUNNELS, ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_MECH_SECURITY, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_FORENSICS_LOCKERS, ACCESS_MINERAL_STOREROOM)
+	minimal_access = list(ACCESS_SECURITY, ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_WEAPONS, ACCESS_MECH_SECURITY, ACCESS_MINERAL_STOREROOM) // See /datum/job/officer/get_access()
+	paycheck = PAYCHECK_HARD
+	paycheck_department = ACCOUNT_SEC
+
+	display_order = JOB_DISPLAY_ORDER_CASINO
+	bounty_types = CIV_JOB_SEC
+	known_contacts = list("Casino Employee", "Casino Manager")
+	allowed_species = list("Vampire")
+	allowed_bloodlines = list(CLAN_SETITES)
+	v_duty = "You help run the local casino owned by your clan, which serves as a front for your operations. You may have various responsibilities, from managing the mortal employees to overseeing the more... sensitive aspects of the business. The casino is a lucrative venture, and as long as you keep it running smoothly and profitably, you should have no issues. Just remember, the casino is a business, and while you are a manager, you are also expected to be an employee where needed. Ensure noone gets too curious about the inner workings of the place, and if any problems arise, deal with them quickly and quietly. The less unwanted attention drawn to the casino, the better."
+	minimal_masquerade = 4
+	experience_addition = 10
+
+
+// NPC Cashier
+/obj/machinery/mineral/equipment_vendor/fastfood/casino/cashier
+	owner_needed = 0
+	prize_list = list(
+		new /datum/data/mining_equipment("$1 casino chip", /obj/item/stack/casino/chip, 1),
+		new /datum/data/mining_equipment("$100 casino chip", /obj/item/stack/casino/chip/onehundred, 100),
+		new /datum/data/mining_equipment("$1,000 casino chip", /obj/item/stack/casino/chip/onethousand, 1000),
+	)
+
+/datum/component/selling/casino
+	object_category = "casino_chips"
+
+/obj/lombard/casino
+	name = "casino chip exchange"
+	desc = "Exchange casino chips for money"
+	var/active = TRUE // whether or not this sell point is available. allows casino employees to disable the sell point and man the counter manually by using the sell point in the back
+
+/obj/lombard/casino/attackby(obj/item/W, mob/living/user, params)
+	if(istype(W, /obj/item/card/id/chunk/casino))
+		active = !active
+		if(active)
+			icon_state = "sell"
+			to_chat(user, span_notice("The casino chip exchange is now open."))
+		else
+			icon_state = "sell_d"
+			to_chat(user, span_notice("The casino chip exchange is now closed."))
+		return
+	var/datum/component/selling/selling_component = W.GetComponent(/datum/component/selling/casino)
+	if(!selling_component)
+		to_chat(user, span_notice("The casino won't exchange cash for that."))
+		return
+	if(active)
+		sell_one_item(W, user)
+	else
+		to_chat(user, span_notice("The automated casino chip exchange is currently closed. Please see a casino employee to exchange your chips."))
+
+/obj/lombard/casino/sell_one_item(obj/item/sold, mob/living/user)
+	var/datum/component/selling/sold_sc = sold.GetComponent(/datum/component/selling)
+	// var/fee = (user.client.prefs.donator) ? 0 : round(sold_sc.cost * 0.07) // 7% fee for non-donators, 0% fee for donators. the donator check isnt on this branch as its a diff testmerge rn but it will be added in later
+	var/fee = round(sold_sc.cost * 0.07)
+	if(fee)
+		sold_sc.cost -= fee
+		to_chat(user, span_notice("The casino deducts a $[fee] fee. You receive $[sold_sc.cost]."))
+	else
+		to_chat(user, span_notice("The casino waives the $[fee] fee. You receive $[sold_sc.cost]."))
+	generate_money(sold, user)
+	playsound(loc, 'modular_darkpack/casino/sounds/singlepayout.ogg', 50, TRUE)
+	qdel(sold)
