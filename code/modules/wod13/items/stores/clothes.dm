@@ -148,6 +148,18 @@
 		new /datum/data/mining_equipment("gladiator costume",	 /obj/item/clothing/under/costume/gladiator, 50),
 		new /datum/data/mining_equipment("deckers costume",	 /obj/item/clothing/under/costume/deckers, 40),
 		new /datum/data/mining_equipment("draculas costume",	 /obj/item/clothing/under/costume/draculass, 100),
+		new /datum/data/mining_equipment("clown mask",	 /obj/item/clothing/mask/gas/clown_hat, 50),
+		new /datum/data/mining_equipment("clown suit",	 /obj/item/clothing/under/rank/civilian/clown, 50),
+		new /datum/data/mining_equipment("clown shoes",	 /obj/item/clothing/shoes/clown_shoes, 50),
+		new /datum/data/mining_equipment("jester cap",	 /obj/item/clothing/head/jester, 50),
+		new /datum/data/mining_equipment("jester hat",	 /obj/item/clothing/head/jester/alt, 50),
+		new /datum/data/mining_equipment("jester suit",	 /obj/item/clothing/under/rank/civilian/clown/jester/alt, 50),
+		new /datum/data/mining_equipment("jester shoes",	 /obj/item/clothing/shoes/clown_shoes/jester, 50),
+		new /datum/data/mining_equipment("roman helmet",	 /obj/item/clothing/head/helmet/roman/fake, 75),
+		new /datum/data/mining_equipment("roman legionnaire helmet",	 /obj/item/clothing/head/helmet/roman/legionnaire/fake, 100),
+		new /datum/data/mining_equipment("pirate bandana",	 /obj/item/clothing/head/helmet/space/pirate/bandana, 25),
+		new /datum/data/mining_equipment("pirate tricorn",	 /obj/item/clothing/head/collectable/pirate, 75),
+		new /datum/data/mining_equipment("plastic beads",	 /obj/item/clothing/neck/beads, 20),
 	)
 
 
