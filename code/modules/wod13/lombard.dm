@@ -59,6 +59,8 @@
 
 	var/social_multiplier = (user.st_get_stat(STAT_CHARISMA))
 	var/real_value = ((base_cost * stack_multiplier) / 5) * social_multiplier
+	if(istype(sold, /obj/item/stack/casino/chip))
+		real_value = base_cost * stack_multiplier // Casino chips have a flat sell price
 	var/obj/item/stack/dollar/money_to_spawn = new() //Don't pass off the loc until we add up the money, or else it will merge too early and delete some money entities
 	//In case we ever add items that sell for more than the maximum amount of dollars in a stack and can be mass-sold, we use this code.
 	if(real_value > money_to_spawn.max_amount)

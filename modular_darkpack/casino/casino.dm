@@ -76,7 +76,7 @@
 		var/obj/item/stack/casino/chip/chip = used_item
 		credits += chip.value
 		balloon_alert_to_viewers("inserted a chip!", "You insert a [chip] into [src].")
-		playsound(loc, 'modular_darkpack/casino/sounds/coininsert.ogg', 25, TRUE)
+		playsound(loc, 'modular_darkpack/casino/sounds/coininsert.ogg', pick(30, 40), TRUE)
 		if(chip.amount > 1)
 			chip.amount -= 1
 		else
@@ -163,13 +163,13 @@
 				do_sparks(5, prob(50), src)
 				playsound(loc, get_sfx("sparks"), 25, TRUE, -3)
 			balloon_alert_to_viewers("Lever pulled!", "You pull the lever!")
-			playsound(loc, pick('modular_darkpack/casino/sounds/slotmusic1.ogg','modular_darkpack/casino/sounds/slotmusic2.ogg','modular_darkpack/casino/sounds/slotmusic3.ogg'), 25, hacked)
+			playsound(loc, pick('modular_darkpack/casino/sounds/slotmusic1.ogg','modular_darkpack/casino/sounds/slotmusic2.ogg','modular_darkpack/casino/sounds/slotmusic3.ogg'), pick(30, 40), hacked)
 			if(credits < bet_size)
 				balloon_alert_to_viewers("Not enough credits!")
 				return FALSE
 			icon_state = "slots2"
 			credits -= bet_size
-			playsound(loc, 'modular_darkpack/casino/sounds/reelspin.ogg', 75, FALSE, use_reverb = TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/reelspin.ogg', pick(75, 85), FALSE, use_reverb = TRUE)
 			last_reels = list("", "", "")
 			alert = ""
 			addtimer(CALLBACK(src, PROC_REF(reveal_reel), 1, usr), reel_delay_1)
@@ -180,7 +180,7 @@
 		if("set_bet")
 			var/new_bet = text2num(params["bet"])
 			bet_size = new_bet
-			playsound(loc, 'sound/machines/terminal_button01.ogg', 75, TRUE, use_reverb = TRUE)
+			playsound(loc, 'sound/machines/terminal_button01.ogg', pick(75, 85), TRUE, use_reverb = TRUE)
 			return TRUE
 		if("cashout")
 			if(credits <= 0)
@@ -199,7 +199,7 @@
 			credits = 0
 			last_result = " "
 			icon_state = "slots0"
-			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE, use_reverb = TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', pick(25, 35), TRUE, use_reverb = TRUE)
 			return TRUE
 
 /obj/structure/casino/slotmachine/proc/reveal_reel(index, mob/living/user)
@@ -210,7 +210,7 @@
 	addtimer(CALLBACK(src, PROC_REF(play_reel_click)), 2)
 
 /obj/structure/casino/slotmachine/proc/play_reel_click()
-	playsound(loc, 'modular_darkpack/casino/sounds/reelclick.ogg', 75, TRUE, use_reverb = TRUE)
+	playsound(loc, 'modular_darkpack/casino/sounds/reelclick.ogg', pick(75, 85), TRUE, use_reverb = TRUE)
 
 /obj/structure/casino/slotmachine/proc/finish_spin()
 	var/base_payout = calculate_payout(last_reels)
@@ -225,7 +225,7 @@
 			force_jackpot = FALSE
 		else
 			last_result = "+$[last_payout]!"
-			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', 25, TRUE, use_reverb = TRUE)
+			playsound(loc, 'modular_darkpack/casino/sounds/shortpayout.ogg', pick(25, 35), TRUE, use_reverb = TRUE)
 	else
 		last_result = " "
 	icon_state = "slots1"
@@ -256,9 +256,9 @@
 	coinflip = pick(sideslist)
 	pixel_x = base_pixel_x + rand(0, 16) - 8
 	pixel_y = base_pixel_y + rand(0, 8) - 8
-	var/datum/component/selling/casino/values = GetComponent(/datum/component/selling/casino)
-	values.cost = value
-	values.object_category = "casino_chips"
+	if(!QDELETED(src) && type == /obj/item/stack/casino/chip)
+		AddComponent(/datum/component/selling/casino, 1, "casino_chips")
+
 
 /obj/item/stack/casino/chip/update_icon_state()
 	. = ..()
@@ -283,7 +283,7 @@
 		flick("coin_[coinflip]_flip", src)
 		coinflip = pick(sideslist)
 		icon_state = "coin_[coinflip]"
-		playsound(user.loc, 'sound/items/coinflip.ogg', 50, TRUE)
+		playsound(user.loc, 'sound/items/coinflip.ogg', pick(50, 60), TRUE)
 		var/oldloc = loc
 		if(loc == oldloc && user && !user.incapacitated())
 			user.visible_message(span_notice("[user] flips [src]. It lands on [coinflip]"), \
@@ -297,11 +297,21 @@
 	custom_materials = list(/datum/material/gold = 1)
 	value = 100
 
+/obj/item/stack/casino/chip/onehundred/Initialize()
+	. = ..()
+	if(!QDELETED(src))
+		AddComponent(/datum/component/selling/casino, 100, "casino_chips")
+
 /obj/item/stack/casino/chip/onethousand
 	name = "$1,000 casino chip"
 	singular_name = "$1,000 casino chip"
 	custom_materials = list(/datum/material/diamond = 1)
 	value = 1000
+
+/obj/item/stack/casino/chip/onethousand/Initialize()
+	. = ..()
+	if(!QDELETED(src))
+		AddComponent(/datum/component/selling/casino, 1000, "casino_chips")
 
 // job stuff
 /datum/job/vamp/casino/casinoemployee
@@ -390,7 +400,7 @@
 /obj/item/vamp/phone/casino_employee
 	exchange_num = 485
 	contact_networks_pre_init = list(
-		list(NETWORK_ID = CASINO_NETWORK, OUR_ROLE = "Casino Employee", USE_JOB_TITLE = TRUE)
+		list(CASINO_NETWORK, "Casino Employee", TRUE)
 		)
 
 /datum/job/vamp/casino/casinomanager
@@ -432,6 +442,7 @@
 	)
 
 /datum/component/selling/casino
+	cost = 1
 	object_category = "casino_chips"
 
 /obj/lombard/casino
@@ -458,15 +469,17 @@
 	else
 		to_chat(user, span_notice("The automated casino chip exchange is currently closed. Please see a casino employee to exchange your chips."))
 
-/obj/lombard/casino/sell_one_item(obj/item/sold, mob/living/user)
+/obj/lombard/casino/sell_one_item(obj/item/stack/sold, mob/living/user)
 	var/datum/component/selling/sold_sc = sold.GetComponent(/datum/component/selling)
 	// var/fee = (user.client.prefs.donator) ? 0 : round(sold_sc.cost * 0.07) // 7% fee for non-donators, 0% fee for donators. the donator check isnt on this branch as its a diff testmerge rn but it will be added in later
 	var/fee = round(sold_sc.cost * 0.07)
+	var/amount = (sold_sc.cost - fee) * sold.amount
+	var/chip_amount = sold.amount > 1 ? " for [sold.amount] chips" : ""
 	if(fee)
 		sold_sc.cost -= fee
-		to_chat(user, span_notice("The casino deducts a $[fee] fee. You receive $[sold_sc.cost]."))
+		to_chat(user, span_notice("The casino deducts a $[fee] fee per chip. You receive $[amount][chip_amount]."))
 	else
-		to_chat(user, span_notice("The casino waives the $[fee] fee. You receive $[sold_sc.cost]."))
+		to_chat(user, span_notice("The casino waives the $[fee] fee. You receive $[amount][chip_amount]."))
 	generate_money(sold, user)
-	playsound(loc, 'modular_darkpack/casino/sounds/singlepayout.ogg', 50, TRUE)
+	playsound(loc, 'modular_darkpack/casino/sounds/singlepayout.ogg', pick(50, 60), TRUE)
 	qdel(sold)

@@ -160,7 +160,7 @@
 				flick(icon_deny, src)
 				return
 			points -= prize.cost
-			to_chat(usr, "<span class='notice'>[src] clanks to life briefly before vending [prize.equipment_name]!</span>")
+			to_chat(usr, span_notice("You receive: [prize.equipment_name]."))
 			new prize.equipment_path(loc)
 			SSblackbox.record_feedback("nested tally", "mining_equipment_bought", 1, list("[type]", "[prize.equipment_path]"))
 			. = TRUE
