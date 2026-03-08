@@ -147,7 +147,7 @@
 		new /datum/data/mining_equipment("geisha costume",	 /obj/item/clothing/under/costume/geisha, 50),
 		new /datum/data/mining_equipment("gladiator costume",	 /obj/item/clothing/under/costume/gladiator, 50),
 		new /datum/data/mining_equipment("deckers costume",	 /obj/item/clothing/under/costume/deckers, 40),
-		new /datum/data/mining_equipment("draculass costume",	 /obj/item/clothing/under/costume/draculass, 100),
+		new /datum/data/mining_equipment("draculas costume",	 /obj/item/clothing/under/costume/draculass, 100),
 	)
 
 
@@ -286,6 +286,7 @@
 		new /datum/data/mining_equipment("rubber gloves", /obj/item/clothing/gloves/vampire/cleaning,	15),
 		new /datum/data/mining_equipment("latex gloves", /obj/item/clothing/gloves/vampire/latex,	5),
 		new /datum/data/mining_equipment("black work gloves", /obj/item/clothing/gloves/vampire/work,	45),
+		new /datum/data/mining_equipment("fingerless gloves", /obj/item/clothing/gloves/fingerless,	45),
 		new /datum/data/mining_equipment("bandana",	/obj/item/clothing/head/vampire/bandana,	10),
 		new /datum/data/mining_equipment("red bandana",	/obj/item/clothing/head/vampire/bandana/red,	10),
 		new /datum/data/mining_equipment("black bandana",	/obj/item/clothing/head/vampire/bandana/black,	10),
@@ -427,6 +428,7 @@
 		new /datum/data/mining_equipment("black canvas jacket", /obj/item/clothing/suit/vampire/military_black, 45),
 		new /datum/data/mining_equipment("M.C. jacket", /obj/item/clothing/suit/costume/tmc, 45),
 		new /datum/data/mining_equipment("P.G. jacket", /obj/item/clothing/suit/costume/pg, 45),
+		new /datum/data/mining_equipment("winter jacket", /obj/item/clothing/suit/hooded/wintercoat, 45),
 		new /datum/data/mining_equipment("comedian coat", /obj/item/clothing/suit/costume/joker, 45),
 		new /datum/data/mining_equipment("yellow parka", /obj/item/clothing/suit/hooded/hoodie/parka_yellow, 45),
 		new /datum/data/mining_equipment("red parka", /obj/item/clothing/suit/hooded/hoodie/parka_red, 45),
