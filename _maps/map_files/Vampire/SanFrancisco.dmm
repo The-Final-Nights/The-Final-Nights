@@ -40455,6 +40455,10 @@
 	},
 /turf/open/floor/plating/woodrough,
 /area/vtm/sewer/nosferatu_warren)
+"jnG" = (
+/obj/machinery/camera/directional/east,
+/turf/open/floor/plating/vampplating,
+/area/vtm/interior/setite/casino/lower)
 "jnH" = (
 /turf/open/floor/plasteel/stairs/medium{
 	color = "#919191";
@@ -56155,6 +56159,12 @@
 	dir = 1
 	},
 /obj/structure/vampdoor/glass/setite/high_sec,
+/obj/structure/curtain/bounty{
+	pixel_y = 6;
+	icon_state = "bounty-closed";
+	open = 0;
+	opacity = 1
+	},
 /turf/open/floor/plating/roofwalk,
 /area/vtm/interior/setite/casino/office)
 "mOw" = (
@@ -61558,6 +61568,16 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior)
+"nWa" = (
+/obj/effect/decal/wallpaper/gold/low,
+/obj/structure/curtain/bounty{
+	pixel_y = 6;
+	icon_state = "bounty-closed";
+	open = 0;
+	opacity = 1
+	},
+/turf/closed/wall/vampwall/painted/low/window,
+/area/vtm/interior/setite/casino/upper)
 "nWf" = (
 /obj/effect/turf_decal/siding/white{
 	dir = 8;
@@ -75289,6 +75309,7 @@
 	},
 /obj/structure/table,
 /obj/vampire_computer,
+/obj/machinery/camera/directional/west,
 /turf/open/floor/plating/vampplating,
 /area/vtm/interior/setite/casino/upper)
 "qYR" = (
@@ -75971,6 +75992,10 @@
 	},
 /turf/open/floor/carpet,
 /area/vtm/interior/bianchiBank)
+"rif" = (
+/mob/living/carbon/human/npc/guard,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/setite/casino/upper)
 "rih" = (
 /obj/structure/punching_bag,
 /obj/structure/stone_tile/surrounding/burnt,
@@ -227061,7 +227086,7 @@ mjT
 mjT
 sEG
 qKd
-wGz
+jnG
 jVj
 mrg
 kJq
@@ -266857,7 +266882,7 @@ mjT
 eno
 ack
 rDq
-rDq
+rif
 ciz
 xQW
 xQW
@@ -267056,7 +267081,7 @@ mjT
 mjT
 mjT
 mjT
-dPv
+nWa
 qLv
 rDq
 rDq
@@ -267258,7 +267283,7 @@ mjT
 mjT
 mjT
 mjT
-dPv
+nWa
 iyh
 rDq
 rDq
