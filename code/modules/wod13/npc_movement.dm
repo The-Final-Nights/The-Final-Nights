@@ -224,7 +224,7 @@
 		if(B)
 			less_danger = B
 			blood_danger = TRUE
-	if(!fire_danger)
+	if(!fire_danger && !blood_danger)
 		less_danger = null
 	if(!staying)
 		lifespan = lifespan+1
