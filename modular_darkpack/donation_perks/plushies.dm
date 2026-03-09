@@ -18,8 +18,8 @@
 	lefthand_file = 'code/modules/wod13/righthand.dmi'
 	righthand_file = 'code/modules/wod13/lefthand.dmi'
 	w_class = WEIGHT_CLASS_NORMAL
-	grid_width = 3 GRID_BOXES
-	grid_height = 3 GRID_BOXES
+	grid_width = 1 GRID_BOXES
+	grid_height = 1 GRID_BOXES
 	var/amount_left = 3 // amount of plushies that can be taken before it becomes an empty box
 
 /obj/item/donator/plushie_box/examine(mob/user)
