@@ -193,7 +193,7 @@
 			M = user
 		if(eyestab(M,user))
 			return
-	if(!force)
+	if(!force || !user.combat_mode)
 		playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), TRUE, -1)
 	else if(hitsound)
 		playsound(loc, hitsound, get_clamped_volume(), TRUE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
@@ -255,6 +255,9 @@
 	var/targeting_human_readable = parse_zone(targeting)
 
 	send_item_attack_message(attacking_item, user, targeting_human_readable, targeting)
+
+	if(!user.combat_mode)
+		return FALSE
 
 	var/armor_block = min(run_armor_check(
 			def_zone = targeting,
@@ -432,6 +435,8 @@
 			return clamp(w_class * 6, 10, 100) // Multiply the item's weight class by 6, then clamp the value between 10 and 100
 
 /mob/living/proc/send_item_attack_message(obj/item/I, mob/living/user, hit_area, def_zone)
+	if(!user.combat_mode)
+		return
 	if(!I.force && !length(I.attack_verb_simple) && !length(I.attack_verb_continuous))
 		return
 	var/message_verb_continuous = length(I.attack_verb_continuous) ? "[pick(I.attack_verb_continuous)]" : "attacks"
