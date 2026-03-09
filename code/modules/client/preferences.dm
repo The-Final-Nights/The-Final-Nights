@@ -2164,7 +2164,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if(G.subtype_path in type_blacklist)
 							continue
 						type_blacklist += G.subtype_path
-				if(!(TG.subtype_path in type_blacklist) && !(TG.slot in slot_blacklist) || TG.sort_category == "General")
+				if(!(TG.subtype_path in type_blacklist) && !(TG.slot in slot_blacklist) || TG.sort_category == "General" || TG.sort_category == "Donator")
 					equipped_gear += TG.display_name
 				else
 					tgui_alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")
