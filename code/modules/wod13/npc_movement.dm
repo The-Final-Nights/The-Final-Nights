@@ -88,7 +88,7 @@
 				face_atom(T)
 				step_to(src,T,0)
 				if(walktarget && !old_movement)
-					if(route_optimisation())
+					if(route_optimisation() && !less_danger)
 						forceMove(get_turf(walktarget))
 
 /mob/living/carbon/human/npc/proc/CreateWay(direction)
@@ -216,13 +216,17 @@
 		return
 	var/fire_danger = FALSE
 	var/blood_danger = FALSE
-	for(var/obj/effect/fire/F in range(7, src))
+	for(var/obj/effect/fire/F in range(fire_danger_vision_distance, src))
 		if(F)
 			less_danger = F
 			fire_danger = TRUE
-	for(var/obj/effect/decal/cleanable/blood/B in range(4, src)) // npcs should avoid blood pools if they see them
+	for(var/obj/effect/decal/cleanable/blood/B in range(blood_danger_vision_distance, src)) // npcs should avoid blood pools if they see them
 		if(B)
 			less_danger = B
+			blood_danger = TRUE
+	for(var/obj/item/organ/O in range(blood_danger_vision_distance, src)) // npcs should avoid human organs if they see them, too
+		if(O)
+			less_danger = O
 			blood_danger = TRUE
 	if(!fire_danger && !blood_danger)
 		less_danger = null
