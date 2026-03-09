@@ -284,6 +284,8 @@
 				walktarget = ChoosePath()
 				set_combat_mode(FALSE)
 		else if(less_danger)
+			if(prob(25) && blood_danger)
+				RealisticSay(pick(socialrole.blood_danger_phrases))
 			var/reqsteps = round((SShumannpcpool.next_fire-world.time)/total_multiplicative_slowdown())
 			set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 			walk_away(src, less_danger, reqsteps, total_multiplicative_slowdown())

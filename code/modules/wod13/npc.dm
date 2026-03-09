@@ -347,6 +347,16 @@
 		"You almost ran me over!",
 		"What the fuck?!"
 	)
+	var/list/blood_danger_phrases = list(
+		"Is that blood?!",
+		"Oh my god, is that...?",
+		"Gross!",
+		"What the fuck?",
+		"Man, that's gross.",
+		"Is that...?",
+		"Nope. I'm out of here!",
+		"Someone call an ambulance!"
+	)
 
 	var/is_criminal = FALSE
 
