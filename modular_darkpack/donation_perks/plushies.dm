@@ -225,7 +225,7 @@
 			new plushie_type(location)
 			if(amount_left > 1)
 				amount_left -= 1
-				visible_message(span_notice("You remove a [plushie_type] from the box. [amount_left] plushies left in the box."))
+				visible_message(span_notice("You remove a plushie from the box. There are [amount_left] plushies left in the box."))
 			else
 				visible_message(span_warning("The box is now empty."))
 				qdel(src)
