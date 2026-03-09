@@ -7,3 +7,6 @@
 	display_name = "Pet Crate"
 	path = /obj/item/donator/pet_crate
 
+/datum/gear/donator/plushie_box
+	display_name = "Plushie 3-pack"
+	path = /obj/item/donator/plushie_box
