@@ -193,7 +193,7 @@
 			M = user
 		if(eyestab(M,user))
 			return
-	if(!force || !user.combat_mode)
+	if(!force || !user.combat_mode) // tap tap tap
 		playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), TRUE, -1)
 	else if(hitsound && user.combat_mode)
 		playsound(loc, hitsound, get_clamped_volume(), TRUE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
