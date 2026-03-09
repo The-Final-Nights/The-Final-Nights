@@ -61,6 +61,13 @@
 	sparks.set_up(1, 0, src)
 	sparks.attach(src)
 
+/obj/vehicle/ridden/scooter/skateboard/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)
+	if(M.client && !M.client.prefs?.donator)
+		to_chat(M, span_notice("You must be a verified donator to use this item! If you have just donated, please run the ?verifydonator command in Discord and try again."))
+		balloon_alert_to_viewers("[M] doesn't seem to know how to ride a skateboard...")
+		return FALSE
+	..()
+
 /obj/vehicle/ridden/scooter/skateboard/make_ridable()
 	AddElement(/datum/element/ridable, /datum/component/riding/vehicle/scooter/skateboard)
 
