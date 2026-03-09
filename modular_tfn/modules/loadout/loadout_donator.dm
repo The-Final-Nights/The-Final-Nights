@@ -10,3 +10,7 @@
 /datum/gear/donator/plushie_box
 	display_name = "Plushie 3-pack"
 	path = /obj/item/donator/plushie_box
+
+/datum/gear/donator/infinite_spraycan
+	display_name = "Infinite Spray Can"
+	path = /obj/item/toy/crayon/spraycan/infinite
