@@ -215,10 +215,15 @@
 	if(CheckMove())
 		return
 	var/fire_danger = FALSE
+	var/blood_danger = FALSE
 	for(var/obj/effect/fire/F in range(7, src))
 		if(F)
 			less_danger = F
 			fire_danger = TRUE
+	for(var/obj/effect/decal/cleanable/blood/B in range(4, src)) // npcs should avoid blood pools if they see them
+		if(B)
+			less_danger = B
+			blood_danger = TRUE
 	if(!fire_danger)
 		less_danger = null
 	if(!staying)
@@ -278,7 +283,7 @@
 			var/reqsteps = round((SShumannpcpool.next_fire-world.time)/total_multiplicative_slowdown())
 			set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 			walk_away(src, less_danger, reqsteps, total_multiplicative_slowdown())
-			if(prob(25))
+			if(prob(25) && !blood_danger) // only scream if theres a fire, not if you just see blood
 				emote("scream")
 		else if(walktarget && !staying)
 			if(prob(25))
