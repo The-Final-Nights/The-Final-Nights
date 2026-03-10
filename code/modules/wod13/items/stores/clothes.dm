@@ -140,6 +140,7 @@
 		new /datum/data/mining_equipment("russian officer costume",	 /obj/item/clothing/under/costume/russian_officer,	50),
 		new /datum/data/mining_equipment("roman costume",	 /obj/item/clothing/under/costume/roman,	75),
 		new /datum/data/mining_equipment("referee costume",	 /obj/item/clothing/under/costume/referee,	25),
+		new /datum/data/mining_equipment("red mech pilot suit",	 /obj/item/clothing/under/costume/mech_suit,	100),
 		new /datum/data/mining_equipment("white mech pilot suit",	 /obj/item/clothing/under/costume/mech_suit/white,	100),
 		new /datum/data/mining_equipment("blue mech pilot suit",	 /obj/item/clothing/under/costume/mech_suit/blue,	100),
 		new /datum/data/mining_equipment("kilt",	 /obj/item/clothing/under/costume/kilt,	25),
@@ -546,4 +547,5 @@
 		new /datum/data/mining_equipment("pinup skirt", /obj/item/clothing/under/vampire/pinup, 150),
 		new /datum/data/mining_equipment("white shawl", /obj/item/clothing/suit/vampire/shawl_white, 50),
         new /datum/data/mining_equipment("black shawl", /obj/item/clothing/suit/vampire/shawl_black, 50),
+		new /datum/data/mining_equipment("bdsm suit", /obj/item/clothing/under/costume/jabroni, 50),
 	)
