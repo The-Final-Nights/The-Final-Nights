@@ -50,7 +50,7 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				animate(src, alpha = 0, time = 10 MINUTES)
+				animate(src, alpha = 150, time = 5 MINUTES)
 				addtimer(CALLBACK(src, PROC_REF(blood_cleanup), src), 10 MINUTES)
 
 /obj/effect/decal/cleanable/blood/proc/blood_cleanup(obj/effect/decal/cleanable/blood/B)
