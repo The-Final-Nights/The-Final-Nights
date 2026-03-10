@@ -109,6 +109,7 @@
 		new /datum/data/mining_equipment("shork suit",	 /obj/item/clothing/suit/hooded/shork_costume,	30),
 		new /datum/data/mining_equipment("bee suit",	 /obj/item/clothing/suit/hooded/bee_costume,	25),
 		new /datum/data/mining_equipment("alien suit",	 /obj/item/clothing/suit/costume/xenos,	50),
+		new /datum/data/mining_equipment("alien head",	 /obj/item/clothing/head/xenos,	50),
 		new /datum/data/mining_equipment("shrine maiden",	 /obj/item/clothing/suit/costume/shrine_maiden,	50),
 		new /datum/data/mining_equipment("pharaoh tunic",	 /obj/item/clothing/suit/costume/nemes,	50),
 		new /datum/data/mining_equipment("red poncho",	 /obj/item/clothing/suit/costume/poncho/red,	25),
