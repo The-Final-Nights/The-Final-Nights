@@ -51,6 +51,7 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
+				alpha = 255
 				animate(src, alpha = 100, time = fade_time)
 				addtimer(CALLBACK(src, PROC_REF(blood_cleanup), src), auto_cleanup_time)
 
