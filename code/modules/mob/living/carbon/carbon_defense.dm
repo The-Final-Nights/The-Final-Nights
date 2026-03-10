@@ -453,10 +453,10 @@
 
 	else if(check_zone(M.zone_selected) == BODY_ZONE_HEAD) //Headpats!
 		SEND_SIGNAL(src, COMSIG_CARBON_HEADPAT, M)
-		M.visible_message("<span class='notice'>[M] gives [src] a pat on the head to make [p_them()] feel better!</span>", \
+		M.visible_message("<span class='notice'>[M] gives [src] a pat on the head.</span>", \
 					null, "<span class='hear'>You hear a soft patter.</span>", DEFAULT_MESSAGE_RANGE, list(M, src))
-		to_chat(M, "<span class='notice'>You give [src] a pat on the head to make [p_them()] feel better!</span>")
-		to_chat(src, "<span class='notice'>[M] gives you a pat on the head to make you feel better! </span>")
+		to_chat(M, "<span class='notice'>You give [src] a pat on the head.</span>")
+		to_chat(src, "<span class='notice'>[M] gives you a pat on the head.</span>")
 
 		if(HAS_TRAIT(src, TRAIT_BADTOUCH))
 			to_chat(M, "<span class='warning'>[src] looks visibly upset as you pat [p_them()] on the head.</span>")
@@ -464,10 +464,10 @@
 	else
 		SEND_SIGNAL(src, COMSIG_CARBON_HUGGED, M)
 		SEND_SIGNAL(M, COMSIG_CARBON_HUG, M, src)
-		M.visible_message("<span class='notice'>[M] hugs [src] to make [p_them()] feel better!</span>", \
+		M.visible_message("<span class='notice'>[M] hugs [src].</span>", \
 					null, "<span class='hear'>You hear the rustling of clothes.</span>", DEFAULT_MESSAGE_RANGE, list(M, src))
-		to_chat(M, "<span class='notice'>You hug [src] to make [p_them()] feel better!</span>")
-		to_chat(src, "<span class='notice'>[M] hugs you to make you feel better!</span>")
+		to_chat(M, "<span class='notice'>You hug [src].</span>")
+		to_chat(src, "<span class='notice'>[M] hugs you.</span>")
 
 		// Warm them up with hugs
 		share_bodytemperature(M)

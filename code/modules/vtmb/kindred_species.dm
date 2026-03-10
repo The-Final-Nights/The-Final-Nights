@@ -372,8 +372,19 @@
 			temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", childe)
 			qdel(temp_antag)
 			log_game("[key_name(sire)] has spread Sabbatism to [key_name(childe)] via vitae.")
+		if(isnpc(childe))
+			var/mob/living/carbon/human/npc/shovelhead = childe
+			var/list/shovel_messages = list(
+			"You force your blood down [shovelhead]'s throat and drive them to wassail.",
+			"Your blood seeps into [shovelhead]'s veins. As you force wassail to take hold, the Beast claims what remains.",
+			"You perform the Embrace and push [shovelhead] into wassail. They are yours... For now.",
+			"[shovelhead] dies and rises again as a shovelhead born from your blood.")
+			to_chat(sire, span_cult(pick(shovel_messages)))
+			shovelhead.make_shovelhead(sire.clan.type)
+			shovelhead.revive(full_heal = TRUE, admin_revive = TRUE)
+			log_game("[key_name(sire)] has created an NPC shovelhead via vitae.")
 
-	if(iskindred(childe)) //Cant do much to kindred other than try and  bond them.
+	if(iskindred(childe)) //Cant do much to kindred other than try and bond them.
 		var/datum/species/kindred/species = childe.dna.species
 		if(HAS_TRAIT(childe, TRAIT_TORPOR) && COOLDOWN_FINISHED(species, torpor_timer))
 			childe.untorpor()
@@ -389,7 +400,7 @@
 		ghoul.master = sire
 		return
 
-	if(isnpc(childe))
+	if(isnpc(childe) && !is_sabbatist(sire))
 		var/mob/living/carbon/human/npc/NPC = childe
 		NPC.npc_ghoulificate(sire)
 		return

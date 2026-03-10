@@ -156,18 +156,19 @@
 	/mob/living/simple_animal/hostile
 	)
 	var/list/targets = list()
-	for(var/mob/living/L in oviewers(7, src))
+	for(var/mob/living/L in oview(7, src))
 		if(is_type_in_list(L, ignore_list))
 			continue
 		if(L.stat == DEAD || HAS_TRAIT(L, TRAIT_DEATHCOMA))
 			continue
+		if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+			if(HAS_TRAIT(L, TRAIT_SHOVELHEAD) || is_sabbatist(L)) // dont eat your friends
+				continue
 		targets += L
 
 	if(length(targets) > 0)
 		if(frenzy_target)
-			if(get_dist(src, frenzy_target) > 7)
-				targets -= frenzy_target
-				frenzy_target = null
+			if(!(frenzy_target in targets))
 				return pick(targets)
 			else
 				return frenzy_target
@@ -180,6 +181,8 @@
 	for(var/mob/living/carbon/human/npc/NPC in oviewers(5, src))
 		NPC.Aggro(src)
 	if(frenzy_target)
+		if(!can_see(src, frenzy_target, 5))
+			frenzy_target = null
 		var/datum/cb = CALLBACK(src, PROC_REF(frenzystep))
 		var/reqsteps = SSfrenzypool.wait/total_multiplicative_slowdown()
 		for(var/i in 1 to reqsteps)

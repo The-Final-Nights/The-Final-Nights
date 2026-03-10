@@ -33,7 +33,8 @@
 		if(!mob_parent.incapacitated(ignore_restraints = 1))
 			mob_parent.face_atom(player_breacher)
 	source.observe_masquerade_violation(player_breacher)
-	source.AddComponent(/datum/component/masquerade_hud, player_breacher)
+	if(player_breacher.client)
+		source.AddComponent(/datum/component/masquerade_hud, player_breacher)
 
 	breached_players |= player_breacher
 	SSmasquerade.masquerade_breach(source, player_breacher, (isliving(source) ? MASQUERADE_REASON_NPC : MASQUERADE_REASON_OBJECT))
