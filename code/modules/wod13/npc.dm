@@ -72,6 +72,7 @@
 	var/list/drop_on_death_list = null
 	var/fire_danger_vision_distance = 7 // how far this NPC can see dangers like fire
 	var/blood_danger_vision_distance = 4 // how far this npc can see and avoid blood
+	var/can_be_spooked = TRUE // can this NPC be spooked by blood?
 
 
 

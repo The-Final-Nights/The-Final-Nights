@@ -220,14 +220,15 @@
 		if(F)
 			less_danger = F
 			fire_danger = TRUE
-	for(var/obj/effect/decal/cleanable/blood/B in range(blood_danger_vision_distance, src)) // npcs should avoid blood pools if they see them
-		if(B)
-			less_danger = B
-			blood_danger = TRUE
-	for(var/obj/item/organ/O in range(blood_danger_vision_distance, src)) // npcs should avoid human organs if they see them, too
-		if(O)
-			less_danger = O
-			blood_danger = TRUE
+	if(can_be_spooked && !staying) // can this npc be spooked by blood or guts? false for cops, guards, and anyone else who has staying set to TRUE like shopkeepers
+		for(var/obj/effect/decal/cleanable/blood/B in range(blood_danger_vision_distance, src)) // npcs should avoid blood pools if they see them
+			if(B)
+				less_danger = B
+				blood_danger = TRUE
+		for(var/obj/item/organ/O in range(blood_danger_vision_distance, src)) // npcs should avoid human organs if they see them, too
+			if(O)
+				less_danger = O
+				blood_danger = TRUE
 	if(!fire_danger && !blood_danger)
 		less_danger = null
 	if(!staying)
