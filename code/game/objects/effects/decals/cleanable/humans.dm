@@ -11,7 +11,8 @@
 	var/dryname = "dried blood"
 	var/drydesc = "Looks like it's been here a while. Eew."
 	var/drytime = 0
-	var/auto_cleanup_time = 5 MINUTES
+	var/fade_time = 5 MINUTES
+	var/auto_cleanup_time = 10 MINUTES // this should be greater than the fade time
 
 /obj/effect/decal/cleanable/blood/Initialize(mapload, list/datum/disease/diseases)
 	. = ..()
@@ -50,8 +51,8 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				animate(src, alpha = 150, time = 5 MINUTES)
-				addtimer(CALLBACK(src, PROC_REF(blood_cleanup), src), 10 MINUTES)
+				animate(src, alpha = 100, time = fade_time)
+				addtimer(CALLBACK(src, PROC_REF(blood_cleanup), src), auto_cleanup_time)
 
 /obj/effect/decal/cleanable/blood/proc/blood_cleanup(obj/effect/decal/cleanable/blood/B)
 	qdel(src)
