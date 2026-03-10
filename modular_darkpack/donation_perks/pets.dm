@@ -161,6 +161,17 @@
 	mob_size = MOB_SIZE_SMALL
 	icon_state = "cat"
 
+/mob/living/simple_animal/pet/cat/vampire/bw/Initialize()
+	. = ..()
+	icon_state = "cat" // because the parent sets a random cat sprite
+	icon_living = "cat"
+	icon_dead = "cat_dead"
+
+/mob/living/simple_animal/pet/cat/vampire/bw/Life()
+	. = ..()
+	if(prob(5))
+		set_resting(!resting, FALSE)
+
 /obj/item/donator/pet_crate
 	name = "pet crate"
 	desc = "Unveil your favorite pet!"
