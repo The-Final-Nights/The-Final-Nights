@@ -161,8 +161,8 @@
 			continue
 		if(L.stat == DEAD || HAS_TRAIT(L, TRAIT_DEATHCOMA))
 			continue
-		if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
-			if(HAS_TRAIT(L, TRAIT_SHOVELHEAD) || is_sabbatist(L)) // dont eat your friends
+		if(HAS_TRAIT(src, TRAIT_SABBATIST))
+			if(HAS_TRAIT(L, TRAIT_SABBATIST) || is_sabbatist(L)) // dont eat your friends
 				continue
 		targets += L
 

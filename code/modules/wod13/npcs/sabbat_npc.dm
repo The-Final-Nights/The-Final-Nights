@@ -61,11 +61,11 @@
 
 /mob/living/carbon/human/npc/death(gibbed)
 	. = ..()
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		dust(TRUE)
 
 /mob/living/carbon/human/npc/torpor(source)
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		dust(TRUE)
 		return
 	return ..()
@@ -84,7 +84,7 @@
 	create_disciplines(FALSE, random_clan.clan_disciplines)
 	generation = 12
 	ADD_TRAIT(src, TRAIT_MESSY_EATER, "sabbat_shovelhead")
-	ADD_TRAIT(src, TRAIT_SHOVELHEAD, "sabbat_shovelhead")
+	ADD_TRAIT(src, TRAIT_SABBATIST, "sabbat_shovelhead")
 	is_criminal = TRUE
 	storyteller_stat_holder.randomize_abilities()
 	st_set_stat(STAT_STAMINA, pick(5,10))
@@ -99,30 +99,30 @@
 	update_shadow()
 
 /mob/living/carbon/human/npc/attack_hand(mob/living/attacker)
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return ..()
 	if(!attacker || is_sabbatist(attacker))
 		return ..()
 	for(var/mob/living/carbon/human/npc/nearby_npc in oviewers(7, src))
-		if(HAS_TRAIT(nearby_npc, TRAIT_SHOVELHEAD))
+		if(HAS_TRAIT(nearby_npc, TRAIT_SABBATIST))
 			nearby_npc.Aggro(attacker) // GET EM BOYS
 	Aggro(attacker, TRUE)
 	..()
 
 /mob/living/carbon/human/npc/on_hit(obj/projectile/P)
 	. = ..()
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	if(!P || !P.firer || is_sabbatist(P.firer))
 		return
 	for(var/mob/living/carbon/human/npc/nearby_npc in oviewers(7, src))
-		if(HAS_TRAIT(nearby_npc, TRAIT_SHOVELHEAD))
+		if(HAS_TRAIT(nearby_npc, TRAIT_SABBATIST))
 			nearby_npc.Aggro(P.firer)
 	Aggro(P.firer, TRUE)
 
 /mob/living/carbon/human/npc/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
 	. = ..()
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	if(is_sabbatist(throwingdatum?.thrower))
 		return
@@ -131,33 +131,33 @@
 
 /mob/living/carbon/human/npc/attackby(obj/item/W, mob/living/attacker, params)
 	. = ..()
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	if(!attacker && !is_sabbatist(attacker))
 		return
 	if(W.force > 5 || (W.force && src.health < src.maxHealth))
 		for(var/mob/living/carbon/human/npc/nearby_npc in oviewers(7, src))
-			if(HAS_TRAIT(nearby_npc, TRAIT_SHOVELHEAD))
+			if(HAS_TRAIT(nearby_npc, TRAIT_SABBATIST))
 				nearby_npc.Aggro(attacker)
 		Aggro(attacker, TRUE)
 
 /mob/living/carbon/human/npc/EmoteAction()
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	return ..()
 
 /mob/living/carbon/human/npc/StareAction()
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	return ..()
 
 /mob/living/carbon/human/npc/SpeechAction()
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	return ..()
 
 /mob/living/carbon/human/npc/ghoulificate(mob/owner)
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		return FALSE
 	return ..()
 
@@ -206,16 +206,16 @@ var/list/shovelhead_attack_phrases = list(
 )
 
 /mob/living/carbon/human/npc/Annoy(atom/source)
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	return ..()
 
 /mob/living/carbon/human/npc/Aggro(mob/victim, attacked = FALSE)
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return ..()
 	if(CheckMove())
 		return
-	if(HAS_TRAIT(victim, TRAIT_SHOVELHEAD) || is_sabbatist(victim))
+	if(HAS_TRAIT(victim, TRAIT_SABBATIST) || is_sabbatist(victim))
 		return
 	if(frenzy_target != victim)
 		frenzy_target = victim
@@ -241,7 +241,7 @@ var/list/shovelhead_attack_phrases = list(
 				visible_message(span_warning("[src] uses [activated_action.discipline.name]!"))
 
 /mob/living/carbon/human/npc/handle_automated_movement()
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return ..()
 	if(CheckMove())
 		return
@@ -261,12 +261,12 @@ var/list/shovelhead_attack_phrases = list(
 		try_use_discipline(frenzy_target)
 
 /mob/living/carbon/human/npc/ChoosePath()
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return ..()
 	return
 
 /mob/living/carbon/human/npc/canBeHandcuffed()
-	if(HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(HAS_TRAIT(src, TRAIT_SABBATIST))
 		return FALSE
 	return ..()
 
@@ -274,7 +274,7 @@ var/list/shovelhead_attack_phrases = list(
 	if(stat == DEAD)
 		return
 	..()
-	if(!HAS_TRAIT(src, TRAIT_SHOVELHEAD))
+	if(!HAS_TRAIT(src, TRAIT_SABBATIST))
 		return
 	if(CheckMove())
 		return

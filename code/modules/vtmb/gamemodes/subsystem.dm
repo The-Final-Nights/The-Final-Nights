@@ -97,6 +97,7 @@ SUBSYSTEM_DEF(bad_guys_party)
 
 	SSticker.minds += character.mind
 	character.client.init_verbs() // init verbs for the late join
+	ADD_TRAIT(character, TRAIT_SABBATIST, "late_party")
 
 /datum/controller/subsystem/bad_guys_party/fire()
 	switch(SSmasquerade.masquerade_level)

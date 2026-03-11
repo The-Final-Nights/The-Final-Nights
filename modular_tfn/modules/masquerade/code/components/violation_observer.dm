@@ -25,7 +25,7 @@
 /datum/component/violation_observer/proc/on_observed_violation(atom/source, mob/living/player_breacher)
 	SIGNAL_HANDLER
 
-	if(!source || !player_breacher || ishumanbasic(player_breacher) || HAS_TRAIT(player_breacher, TRAIT_SHOVELHEAD)) // so shovelheads cant tank the masq
+	if(!source || !player_breacher || ishumanbasic(player_breacher) || HAS_TRAIT(player_breacher, TRAIT_SABBATIST)) // so shovelheads cant tank the masq
 		return
 
 	if(isliving(source))
