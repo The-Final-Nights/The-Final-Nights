@@ -92,6 +92,7 @@
 	st_set_stat(STAT_DEXTERITY, pick(3,5))
 	st_set_stat(STAT_BRAWL, pick(3,5))
 	can_be_spooked = FALSE // not afraid of blood anymore, are we fledgeling?
+	qdel(GetComponent(/datum/component/violation_observer)) // so they wont masq violate people
 
 /mob/living/carbon/human/toggle_resting()
 	..()
