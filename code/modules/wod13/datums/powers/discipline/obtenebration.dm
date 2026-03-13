@@ -192,7 +192,8 @@
 	var/roll = SSroll.storyteller_roll(owner.st_get_stat(STAT_MANIPULATION) + owner.st_get_stat(STAT_COURAGE), 7, FALSE, owner)
 	if(roll == ROLL_SUCCESS)
 		successful = TRUE
-		owner.physiology.damage_resistance += 60
+		//Gives you 60 damage resistence if you have 0, if you have other forms of resistence (i.e amulet) it caps at 75
+		owner.physiology.damage_resistance = min(75, owner.physiology.damage_resistance + 60)
 		animate(owner, color = "#000000", time = 1 SECONDS, loop = 1)
 		to_chat(owner, span_green("You successfully fuse with the shadows!"))
 	else if(roll == ROLL_FAILURE)

@@ -77,6 +77,7 @@
 	//put this out of its misery
 	owner.celerity_visual = TRUE
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity)
+	owner.apply_status_effect(/datum/status_effect/celerity/one)
 	owner.st_add_stat_mod(STAT_DEXTERITY, 1, "celerity")
 
 /datum/discipline_power/celerity/one/deactivate()
@@ -86,6 +87,7 @@
 
 	owner.celerity_visual = FALSE
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity)
+	owner.remove_status_effect(/datum/status_effect/celerity/one)
 	owner.st_remove_stat_mod(STAT_DEXTERITY, "celerity")
 
 //CELERITY 2
@@ -116,6 +118,7 @@
 
 	owner.celerity_visual = TRUE
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity2)
+	owner.apply_status_effect(/datum/status_effect/celerity/two)
 	owner.st_add_stat_mod(STAT_DEXTERITY, 2, "celerity")
 
 /datum/discipline_power/celerity/two/deactivate()
@@ -125,6 +128,7 @@
 
 	owner.celerity_visual = FALSE
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity2)
+	owner.remove_status_effect(/datum/status_effect/celerity/two)
 	owner.st_remove_stat_mod(STAT_DEXTERITY, "celerity")
 
 //CELERITY 3
@@ -155,6 +159,7 @@
 
 	owner.celerity_visual = TRUE
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity3)
+	owner.apply_status_effect(/datum/status_effect/celerity/three)
 	owner.st_add_stat_mod(STAT_DEXTERITY, 3, "celerity")
 
 /datum/discipline_power/celerity/three/deactivate()
@@ -164,6 +169,7 @@
 
 	owner.celerity_visual = FALSE
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity3)
+	owner.remove_status_effect(/datum/status_effect/celerity/three)
 	owner.st_remove_stat_mod(STAT_DEXTERITY, "celerity")
 
 //CELERITY 4
@@ -194,6 +200,7 @@
 
 	owner.celerity_visual = TRUE
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity4)
+	owner.apply_status_effect(/datum/status_effect/celerity/four)
 	owner.st_add_stat_mod(STAT_DEXTERITY, 4, "celerity")
 
 /datum/discipline_power/celerity/four/deactivate()
@@ -203,6 +210,7 @@
 
 	owner.celerity_visual = FALSE
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity4)
+	owner.remove_status_effect(/datum/status_effect/celerity/four)
 	owner.st_remove_stat_mod(STAT_DEXTERITY, "celerity")
 
 //CELERITY 5
@@ -233,6 +241,7 @@
 
 	owner.celerity_visual = TRUE
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/celerity5)
+	owner.apply_status_effect(/datum/status_effect/celerity/five)
 	owner.st_add_stat_mod(STAT_DEXTERITY, 5, "celerity")
 
 /datum/discipline_power/celerity/five/deactivate()
@@ -242,6 +251,7 @@
 
 	owner.celerity_visual = FALSE
 	owner.remove_movespeed_modifier(/datum/movespeed_modifier/celerity5)
+	owner.remove_status_effect(/datum/status_effect/celerity/five)
 	owner.st_remove_stat_mod(STAT_DEXTERITY, "celerity")
 
 /datum/discipline_power/celerity/six
