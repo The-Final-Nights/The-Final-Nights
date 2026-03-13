@@ -154,7 +154,6 @@
 
 	var/mob/living/carbon/target = hit
 	var/mob/living/carbon/human/T = target
-	var/mob/living/carbon/human/S = user
 	var/tackle_word = isfelinid(user) ? "pounce" : "tackle" //If cat, "pounce" instead of "tackle".
 
 	var/roll = rollTackle(target)
@@ -211,7 +210,7 @@
 			target.Knockdown(30)
 			if(ishuman(target) && ishuman(user))
 				INVOKE_ASYNC(user, TYPE_PROC_REF(/mob/living, grab), user, target)
-				S.setGrabState(GRAB_PASSIVE)
+				do_grab(user, target, GRAB_PASSIVE)
 
 		if(5 to INFINITY) // absolutely BODIED
 			user.visible_message("<span class='warning'>[user] lands a monster [tackle_word] on [target], knocking [target.p_them()] senseless and applying an aggressive pin!</span>", "<span class='userdanger'>You land a monster [tackle_word] on [target], knocking [target.p_them()] senseless and applying an aggressive pin!</span>", ignored_mobs = target)
@@ -225,10 +224,19 @@
 			target.Knockdown(30)
 			if(ishuman(target) && ishuman(user))
 				INVOKE_ASYNC(user, TYPE_PROC_REF(/mob/living, grab), user, target)
-				S.setGrabState(GRAB_AGGRESSIVE)
+				do_grab(user, target, GRAB_AGGRESSIVE)
 
 
 	return COMPONENT_MOVABLE_IMPACT_FLIP_HITPUSH
+
+/// Helper to do a grab and then adjust the grab state if necessary
+/datum/component/tackler/proc/do_grab(mob/living/carbon/tackler, mob/living/carbon/tackled, skip_to_state = GRAB_PASSIVE)
+	set waitfor = FALSE
+
+	if(!tackler.grab(tackled) || tackler.pulling != tackled)
+		return
+	if(tackler.grab_state != skip_to_state)
+		tackler.setGrabState(skip_to_state)
 
 /**
  * This handles all of the modifiers for the actual carbon-on-carbon tackling, and gets its own proc because of how many there are (with plenty more in mind!)

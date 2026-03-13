@@ -376,31 +376,26 @@
 /obj/item/vtm_artifact/key_of_alamut/get_powers()
 	..()
 	var/mob/living/carbon/human/H = owner
-	if(H.dna)
-		// Base damage reduction of 0.2, with diminishing returns
-		var/damage_reduction = calculate_stacked_value(0.2)
-
-		// Ensure we don't go below minimum damage taken
-		var/new_brutemod = max(0.1, H.dna.species.brutemod - damage_reduction)
-		var/new_burnmod = max(0.1, H.dna.species.burnmod - damage_reduction)
-
-		var/actual_brute_reduction = H.dna.species.brutemod - new_brutemod
-		var/actual_burn_reduction = H.dna.species.burnmod - new_burnmod
-
-		H.dna.species.brutemod = new_brutemod
-		H.dna.species.burnmod = new_burnmod
-
-		to_chat(owner, span_notice("Your damage resistance increases by [actual_brute_reduction] brute/[actual_burn_reduction] burn (you own [get_owned_amount()] keys of alamut)."))
+	//If you have over 40 damage resistence already, do nothing
+	if(H.physiology.damage_resistance >= 40)
+		to_chat(owner, span_notice("You feel the artifact's effects lessen; your body being now as protected as it can be!"))
+		return
+	//If under 40, it will increase it up 20 a max of 40.
+	if(H.physiology.damage_resistance < 40)
+		var/new_damage_resistence = min(40, H.physiology.damage_resistance + 20)
+		var/actual_damage_resistence_change = new_damage_resistence - H.physiology.damage_resistance
+		H.physiology.damage_resistance = new_damage_resistence
+		to_chat(owner, span_notice("Your damage resistance increases by [actual_damage_resistence_change] (you own [get_owned_amount()] keys of alamut)"))
 
 /obj/item/vtm_artifact/key_of_alamut/remove_powers()
 	..()
 	var/mob/living/carbon/human/H = owner
-	if(H.dna)
-		var/damage_reduction = calculate_stacked_value(0.2)
-
+	if(H.physiology)
 		// Restore damage values, capped at reasonable maximums
-		H.dna.species.brutemod = min(2.0, H.dna.species.brutemod + damage_reduction)
-		H.dna.species.burnmod = min(2.0, H.dna.species.burnmod + damage_reduction)
+		var/new_damage_resistence = max(0, H.physiology.damage_resistance - 20)
+		var/actual_damage_resistence_change = new_damage_resistence - H.physiology.damage_resistance
+		H.physiology.damage_resistance = new_damage_resistence
+		to_chat(owner, span_notice("Your damage resistance decreases by [actual_damage_resistence_change] (you own [get_owned_amount() - 1] keys of alamut)"))
 
 // ---------------------------------------------ODIOUS CHALICE-----------------------------------------------------------
 /obj/item/vtm_artifact/odious_chalice

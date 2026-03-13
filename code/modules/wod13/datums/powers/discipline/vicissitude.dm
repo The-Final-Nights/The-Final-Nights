@@ -444,7 +444,6 @@
 	if(selected_upgrade)
 		return
 	selected_upgrade = upgrade
-	ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 	switch (upgrade)
 		if ("Skin armor")
 			if (iszulo(owner))
@@ -458,8 +457,9 @@
 			user.hairstyle = "Bald"
 			original_body_mod = user.base_body_mod
 			user.set_body_model(NORMAL_BODY_MODEL)
-			user.physiology.armor.melee += 20
-			user.physiology.armor.bullet += 20
+			user.physiology.armor.melee += 10
+			user.physiology.armor.bullet += 10
+			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 		if ("Centipede legs")
 			user.remove_overlay(PROTEAN_LAYER)
 			upgrade_overlay = mutable_appearance('code/modules/wod13/64x64.dmi', "centipede", -PROTEAN_LAYER)
@@ -468,6 +468,7 @@
 			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
 			user.apply_overlay(PROTEAN_LAYER)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/centipede)
+			ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 		if ("Second pair of arms")
 			var/limbs = user.held_items.len
 			user.change_number_of_hands(limbs + 2)
@@ -476,6 +477,7 @@
 			upgrade_overlay.color = skintone2hex(user.skin_tone)
 			user.overlays_standing[PROTEAN_LAYER] = upgrade_overlay
 			user.apply_overlay(PROTEAN_LAYER)
+			ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 		if ("Leather wings")
 			if (iszulo(owner))
 				to_chat(user, span_notice("You realise you cannot make wings strong enough to allow flight in this form!"))
@@ -483,6 +485,7 @@
 				return
 			user.dna.species.GiveSpeciesFlight(user)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
+			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -494,28 +497,31 @@
 	to_chat(user, span_notice("You begin surgically removing your enhancements..."))
 	if (!do_after(user, 10 SECONDS))
 		return
-	REMOVE_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 	switch (selected_upgrade)
 		if ("Skin armor")
 			user.set_body_sprite()
 			user.skin_tone = original_skin_tone
 			user.hairstyle = original_hairstyle
 			user.set_body_model(original_body_mod)
-			user.physiology.armor.melee -= 20
-			user.physiology.armor.bullet -= 20
+			user.physiology.armor.melee -= 10
+			user.physiology.armor.bullet -= 10
+			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 		if ("Centipede legs")
 			user.remove_overlay(PROTEAN_LAYER)
 			QDEL_NULL(upgrade_overlay)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/centipede)
+			REMOVE_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 		if ("Second pair of arms")
 			var/limbs = user.held_items.len
 			user.active_hand_index = 1
 			user.change_number_of_hands(limbs - 2)
 			user.remove_overlay(PROTEAN_LAYER)
 			QDEL_NULL(upgrade_overlay)
+			REMOVE_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 		if ("Leather wings")
 			user.dna.species.RemoveSpeciesFlight(user)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/leatherwings)
+			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
 
 	user.do_jitter_animation(10)
 	playsound(get_turf(user), 'code/modules/wod13/sounds/vicissitude.ogg', 100, TRUE, -6)
@@ -560,7 +566,7 @@
 				to_chat(user, span_notice("You realise you cannot add further armour to this form without preventing your movement!"))
 				selected_advanced_upgrade = null
 				return
-			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 			user.set_body_sprite("tziarmor")
 			advanced_original_skin_tone = user.skin_tone
 			user.skin_tone = "albino"
@@ -568,10 +574,10 @@
 			user.hairstyle = "Bald"
 			advanced_original_body_mod = user.base_body_mod
 			user.set_body_model(NORMAL_BODY_MODEL)
-			user.physiology.armor.melee += 40
-			user.physiology.armor.bullet += 40
+			user.physiology.armor.melee += 20
+			user.physiology.armor.bullet += 20
 		if ("Centipede legs")
-			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 			user.remove_overlay(PROTEAN_LAYER)
 			upgrade_overlay = mutable_appearance('code/modules/wod13/64x64.dmi', "centipede", -PROTEAN_LAYER)
 			upgrade_overlay.pixel_z = -16
@@ -580,7 +586,7 @@
 			user.apply_overlay(PROTEAN_LAYER)
 			user.add_movespeed_modifier(/datum/movespeed_modifier/centipede)
 		if ("Second pair of arms")
-			ADD_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			ADD_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 			var/limbs = user.held_items.len
 			user.change_number_of_hands(limbs + 2)
 			user.remove_overlay(PROTEAN_LAYER)
@@ -609,20 +615,20 @@
 		return
 	switch (selected_advanced_upgrade)
 		if ("Bone armour")
-			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			REMOVE_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 			user.set_body_sprite()
 			user.skin_tone = advanced_original_skin_tone
 			user.hairstyle = advanced_original_hairstyle
 			user.set_body_model(advanced_original_body_mod)
-			user.physiology.armor.melee -= 40
-			user.physiology.armor.bullet -= 40
+			user.physiology.armor.melee -= 20
+			user.physiology.armor.bullet -= 20
 		if ("Centipede legs")
-			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			REMOVE_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 			user.remove_overlay(PROTEAN_LAYER)
 			QDEL_NULL(upgrade_overlay)
 			user.remove_movespeed_modifier(/datum/movespeed_modifier/centipede)
 		if ("Second pair of arms")
-			REMOVE_TRAIT(user, TRAIT_NONMASQUERADE, TRAUMA_TRAIT)
+			REMOVE_TRAIT(user, TRAIT_UNMASQUERADE, TRAUMA_TRAIT)
 			var/limbs = user.held_items.len
 			user.change_number_of_hands(limbs - 2)
 			user.remove_overlay(PROTEAN_LAYER)

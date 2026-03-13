@@ -55,7 +55,7 @@
 	use_skintones = TRUE
 	limbs_id = "human"
 	wings_icon = "None"
-	brutemod = 0.5
+	brutemod = 1	//Same as kindred - see unique damage_resistence check
 	heatmod = 1
 	burnmod = 3
 	dust_anim = "dust-k"
@@ -245,6 +245,9 @@
 
 	//Kuei-jin resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_kuei_jin_bitten))
+
+	//apply blunt damage resistance
+	RegisterSignal(C, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_resistance))
 
 /datum/species/kuei_jin/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
@@ -637,3 +640,10 @@
 
 	if(iscathayan(being_bitten))
 		return COMPONENT_RESIST_VAMPIRE_KISS
+
+//Kuei-Jin take half "bashing" damage, which is normally blunt damage but also includes pointy things like bullets because they're undead
+/datum/species/kuei_jin/proc/damage_resistance(datum/source, list/damage_mods, damage_amount, damagetype, def_zone, sharpness, attack_direction, obj/item/attacking_item)
+	SIGNAL_HANDLER
+
+	if((damagetype == BRUTE) && (sharpness != SHARP_EDGED))
+		damage_mods += 0.5
