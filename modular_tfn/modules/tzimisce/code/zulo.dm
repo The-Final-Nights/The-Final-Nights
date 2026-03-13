@@ -12,7 +12,6 @@
 	wings_icon = "Dragon"
 	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	mutantbrain = /obj/item/organ/brain/vampire
-	brutemod = 0.5
 	heatmod = 1
 	burnmod = 2
 	punchdamagelow = 15 //A little more than Glabro, since this is a Crinos equivalent.

@@ -3759,6 +3759,7 @@
 #include "code\modules\wod13\onyxcombat\parry.dm"
 #include "code\modules\wod13\onyxcombat\rage.dm"
 #include "code\modules\wod13\onyxcombat\zone.dm"
+#include "code\modules\wod13\status_effects\buffs.dm"
 #include "code\modules\wod13\status_effects\debuffs.dm"
 #include "code\modules\wod13\structures\hydroponics.dm"
 #include "code\modules\wod13\structures\methlab.dm"
