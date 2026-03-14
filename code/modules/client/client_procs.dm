@@ -559,6 +559,7 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		return
 	if(!SSdbcore.Connect())
 		return
+	var/list/connectiontopic_a = params2list(connectiontopic)
 	var/datum/db_query/query_get_related_ip = SSdbcore.NewQuery(
 		"SELECT ckey FROM [format_table_name("player")] WHERE ip = INET_ATON(:address) AND ckey != :ckey",
 		list("address" = address, "ckey" = ckey)
@@ -696,7 +697,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		return
 	qdel(query_get_player_age_verified)
 	var/redirecturl = CONFIG_GET(string/redirecturl)
-	var/list/connectiontopic_a = params2list(connectiontopic)
 	if(redirecturl && !connectiontopic_a["redirect"])
 		var/list/direct_address = redirecturl
 		var/rebase_playtest = "The Rebase Playtest"
