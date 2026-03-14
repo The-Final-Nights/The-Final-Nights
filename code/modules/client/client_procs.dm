@@ -557,6 +557,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/set_client_age_from_db(connectiontopic)
 	if (IsGuestKey(src.key))
 		return
+	var/redirecturl = CONFIG_GET(string/redirecturl)
+	var/list/connectiontopic_a = params2list(connectiontopic)
+	if(redirecturl && !connectiontopic_a["redirect"])
+		var/list/direct_address = redirecturl
+		var/rebase_playtest = "The Rebase Playtest"
+		to_chat(src, "<span class='notice'>Sending you to [rebase_playtest ? rebase_playtest : direct_address].</span>")
+		winset(src, null, "command=.options")
+		src << link("[direct_address]?redirect=1")
 	if(!SSdbcore.Connect())
 		return
 	var/datum/db_query/query_get_related_ip = SSdbcore.NewQuery(
@@ -604,7 +612,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			message_admins("<span class='adminnotice'>Failed Login: [key] - [address] - New account attempting to connect during panic bunker</span>")
 			var/forumurl = CONFIG_GET(string/forumurl)
 			to_chat_immediate(src, {"<span class='notice'>Hi! This server is whitelist-enabled. <br> <br> To join our community, apply through the Discord: <a href=' [forumurl] '>[forumurl]</a></span>"})
-			var/list/connectiontopic_a = params2list(connectiontopic)
 			var/list/panic_addr = CONFIG_GET(string/panic_server_address)
 			if(panic_addr && !connectiontopic_a["redirect"])
 				var/panic_name = CONFIG_GET(string/panic_server_name)

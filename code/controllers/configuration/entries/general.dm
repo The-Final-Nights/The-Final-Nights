@@ -261,6 +261,9 @@
 /datum/config_entry/string/wikiurl
 	config_entry_value = "https://wiki.wod13.org"
 
+/datum/config_entry/string/redirecturl
+	config_entry_value = "byond://gehenna.thefinalnights.com:1338"
+
 /datum/config_entry/string/forumurl
 	config_entry_value = "https://discord.com/invite/hQHAK67Drd"
 
