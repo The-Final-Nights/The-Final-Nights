@@ -100,7 +100,7 @@
 	faction = "Vampire"
 	total_positions = 10
 	spawn_positions = 10
-	supervisors = "the Family or your Spouse"
+	supervisors = "the Family"
 	selection_color = "#cb4aad"
 
 	outfit = /datum/outfit/job/giovannimafia
@@ -115,7 +115,7 @@
 //	minimal_generation = 11	//Uncomment when players get exp enough
 
 	allowed_species = list("Ghoul", "Human", "Vampire")
-	allowed_bloodlines = list(CLAN_BRUJAH, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_LASOMBRA)
+	allowed_bloodlines = list(CLAN_NONE)
 	duty = "Your family is a strange one. You might've married in, or just been given the short straw by God. But remember, family always looks out for each other."
 	minimal_masquerade = 0
 	experience_addition = 10
