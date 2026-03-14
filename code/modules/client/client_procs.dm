@@ -557,14 +557,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 /client/proc/set_client_age_from_db(connectiontopic)
 	if (IsGuestKey(src.key))
 		return
-	var/redirecturl = CONFIG_GET(string/redirecturl)
-	var/list/connectiontopic_a = params2list(connectiontopic)
-	if(redirecturl && !connectiontopic_a["redirect"])
-		var/list/direct_address = redirecturl
-		var/rebase_playtest = "The Rebase Playtest"
-		to_chat(src, "<span class='notice'>Sending you to [rebase_playtest ? rebase_playtest : direct_address].</span>")
-		winset(src, null, "command=.options")
-		src << link("[direct_address]?redirect=1")
 	if(!SSdbcore.Connect())
 		return
 	var/datum/db_query/query_get_related_ip = SSdbcore.NewQuery(
@@ -703,7 +695,14 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		qdel(src)
 		return
 	qdel(query_get_player_age_verified)
-
+	var/redirecturl = CONFIG_GET(string/redirecturl)
+	var/list/connectiontopic_a = params2list(connectiontopic)
+	if(redirecturl && !connectiontopic_a["redirect"])
+		var/list/direct_address = redirecturl
+		var/rebase_playtest = "The Rebase Playtest"
+		to_chat(src, "<span class='notice'>Sending you to [rebase_playtest ? rebase_playtest : direct_address].</span>")
+		winset(src, null, "command=.options")
+		src << link("[direct_address]?redirect=1")
 	var/datum/db_query/query_get_player_donator = SSdbcore.NewQuery(
 		"SELECT donator FROM [format_table_name("player")] WHERE ckey = :ckey AND donator = 1",
 		list("ckey" = src.ckey)
