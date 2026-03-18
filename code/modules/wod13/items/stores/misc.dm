@@ -158,6 +158,7 @@
 		new /datum/data/mining_equipment("handheld welder", /obj/item/weldingtool, 20),
 		new /datum/data/mining_equipment("toner cartridge", /obj/item/toner/large, 30),
 		new /datum/data/mining_equipment("construction hard hat", /obj/item/clothing/head/vampire/hardhat, 50),
+		new /datum/data/mining_equipment("red brick", /obj/item/melee/vampirearms/brick, 25),
 		new /datum/data/mining_equipment("shaving razor", /obj/item/razor, 50),
 		new /datum/data/mining_equipment("tape recorder", /obj/item/taperecorder, 50),
 		new /datum/data/mining_equipment("baseball bat", /obj/item/melee/vampirearms/baseball, 50),
