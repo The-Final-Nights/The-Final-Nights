@@ -36,3 +36,7 @@
   - bugfix: shovelheads now have combat stats
   - bugfix: shovelheads will no longer jump at walls forever or track players through
       walls
+2026-03-18:
+  buffyuwu:
+  - rscadd: Donators can now have a loadout menu with several donator exclusive items
+      to spawn. including a pet crate, plushie pack, skateboards, and more!
