@@ -22,8 +22,8 @@
 	minimum_vampire_age = 1
 
 	known_contacts = list(
-		"Prince",
-		"Sheriff",
+		"Archbishop",
+		"Inquisitor",
 		"Dealer",
 		"Bouncer",
 		"Emissary",
@@ -32,7 +32,7 @@
 		"Voivode"
 	)
 
-	v_duty = "You lead the Barony of San Francisco as an independent leader of the Free State. While you do not respect the traditions, you still honor the Masquerade. "
+	v_duty = "You lead the Barony of San Francisco as an independent leader of the Free State. While you do not respect the traditions, you still honor the Masquerade. Ever since the Sabbat takeover of the city, the Archbishop has tolerated your presence."
 	minimal_masquerade = 3
 	allowed_species = list("Vampire")
 	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_BANU_HAQIM, CLAN_NONE, CLAN_TZIMISCE, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_VENTRUE, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_SETITES)

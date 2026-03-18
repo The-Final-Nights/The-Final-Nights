@@ -1,9 +1,9 @@
 /datum/job/vamp/sabbatpriest
-	title = "Sabbat Priest"
+	title = "Camarilla Alastor"
 	faction = "Vampire"
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "Caine"
+	total_positions = 4
+	spawn_positions = 4
+	supervisors = "The Traditions and the Inner Council"
 	selection_color = "#7B0000"
 	access = list()
 	minimal_access = list()
@@ -16,10 +16,10 @@
 	access = list(ACCESS_MAINT_TUNNELS)
 	liver_traits = list(TRAIT_GREYTIDE_METABOLISM)
 
-	v_duty = "You are the Sabbat Priest. You are charged with the supervision of the ritae of your pack. You also serve as the second-in-command to the Ductus. Consecrate the Vaulderie for new Sabbat, consult your tome for rites to aid your pack, and ensure the Sabbat live on in Caine's favor.  <br> <b> NOTE: BY PLAYING THIS ROLE YOU AGREE TO AND HAVE READ THE SERVER'S RULES ON ESCALATION FOR ANTAGS. KEEP THINGS INTERESTING AND ENGAGING FOR BOTH SIDES. KILLING PLAYERS JUST BECAUSE YOU CAN MAY RESULT IN A ROLEBAN. "
+	v_duty = "Ever since the Sabbat has taken over the city, you found your duties quickly change to become a ranking Alastor of the Camarilla - an agent charged with hunting down those vampires deemed as Anathema by Camarilla Leadership, blood hunted and sentenced to death or diablerie by the Lextalionis. Ancient Kindred law demands an eye for an eye - and the fall of the city to the Sabbat demands yet another fall back into our hands! "
 	duty = "Down with the Camarilla. Down with the Elders. Down with the Jyhad! The Kindred are the true rulers of Earth, blessed by Caine, the Dark Father."
 	minimal_masquerade = 0
-	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Setite", "Lasombra", "Gargoyle", "Tzimisce", "Baali", "Cappadocian", "Kiasyd", "Salubri", "Salubri Warrior", "Daughters of Cacophany", "True Brujah", "Nagaraja", "Caitiff")
+	allowed_bloodlines = list(CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_TOREADOR, CLAN_GANGREL, CLAN_MALKAVIAN, CLAN_LASOMBRA, CLAN_BANU_HAQIM, CLAN_LASOMBRA)
 	display_order = JOB_DISPLAY_ORDER_SABBATPRIEST
 	whitelisted = TRUE
 
@@ -28,7 +28,7 @@
 	jobtype = /datum/job/vamp/sabbatpriest
 	l_pocket = /obj/item/vamp/phone
 	id = /obj/item/cockclock
-	r_pocket = /obj/item/vamp/keys/sabbat
+	r_pocket = /obj/item/vamp/keys/camarilla
 
 /datum/outfit/job/sabbatpriest/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -54,13 +54,10 @@
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 	if(H.clan && H.clan.name != "Lasombra")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
-	if(H.mind)
-		var/datum/antagonist/temp_antag = new()
-		temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev_head", H)
-		qdel(temp_antag)
+
 
 /obj/effect/landmark/start/sabbatpriest
-	name = "Sabbat Priest"
+	name = "Camarilla Alastor"
 	icon_state = "Assistant"
 
 /proc/is_sabbatist(mob/living/user)
@@ -85,6 +82,10 @@
 /datum/sabbat_ritae/ritae_description/pack_credo
 	name = "Pack Credo"
 	desc = "We are the Sword of Caine. We do not bow to the Masquerade. We are not slaves to the Elders, nor tools of the Antediluvians. Through blood and fire, we prepare for Gehenna. We act not in secrecy, but in strength, united as one Pack. Death to traitors. Death to tyrants. Caine wills it.\n"
+
+/datum/sabbat_ritae/ritae_description/code_of_milan
+	name = "Code of Milan"
+	desc = "The Sabbat shall remain united in its support of the sect's Regent. If necessary, a new Regent shall be elected. The Regent shall support relief from tyranny, granting all Sabbat freedom.\n\n1. All Sabbat shall do their best to serve their leaders as long as said leaders serve the will of the Regent.\n2. All Sabbat shall faithfully observe all the Auctoritas Ritae.\n3. All Sabbat shall keep their word of honor to one another.\n4. All Sabbat shall treat their peers fairly and equally, upholding the strength and unity of the Sabbat. If necessary, they shall provide for the needs of their brethren.\n5. All Sabbat must put the good of the sect and the race of Cainites before their own personal needs, despite all costs.\n6. Those who are not honorable under this code will be considered less than equal and therefore unworthy of assistance.\n7. As it has always been, so it shall always be. The Lextalionis shall be the model for undying justice by which all Sabbat shall abide.\n8. All Sabbat shall protect one another from the enemies of the Sect. Personal enemies shall remain personal responsibility, unless they undermine Sect security.\n9. All sect members shall protect Sabbat territory from all other powers.\n10. The spirit of freedom shall be the fundamental principle of the Sect. All Sabbat shall expect and demand freedom from their leaders.\n11. The Ritus of Monomacy shall be used to settle disputes among all Sabbat.\n12. All Sabbat shall support the Black Hand.\n13. All Sabbat have the right to monitor the behavior and activities of their fellow Sect members in order to maintain freedom and security.\n14. All Sabbat possess the right to call a council of their peers and immediate leaders.\n15. All Sabbat shall act against Sect members who use the powers and authority the Sabbat has given them for personal gain at the expense of the Sabbat. Action shall be taken only through accepted means, approved by a quorum of Prisci."
 
 /datum/sabbat_ritae/ritae_description/vaulderie_info
 	name = "The Vaulderie"
@@ -115,9 +116,9 @@
 	desc = "None may defy Caine - especially not those who have undertaken the Vaulderie! Traitors and defectors to Caine and the Sabbat shall be struck down with a rightful war party, along with any who know of their treachery. Diablerie, burning them atop our ritual fire with a stake still in their putrid heart, or mutilation may take place, before they are sentenced to death. None may defy Caine, and none may escape Caine's vengeance, not the Elders of the Camarilla or traitors to the pack.\n "
 
 /obj/item/sabbat_priest_tome/attack_self(mob/living/carbon/human/user)
-	if(!user.mind || !is_sabbatist(user))
-		to_chat(user, "You feel nothing when you touch this tome.")
-		return
+	//if(!user.mind || !is_sabbatist(user))
+		//to_chat(user, "You feel nothing when you touch this tome.")
+		//return
 
 	var/is_priest = is_sabbat_priest(user)
 
@@ -136,7 +137,8 @@
 		"Blood Bath" = new /datum/sabbat_ritae/ritae_description/bloodbath_info(),
 		"War Party" = new /datum/sabbat_ritae/ritae_description/war_party_hunt_info(),
 		"Blood Feast" = new /datum/sabbat_ritae/ritae_description/blood_feast_info(),
-		"Wild Hunt" = new /datum/sabbat_ritae/ritae_description/wild_hunt_info()
+		"Wild Hunt" = new /datum/sabbat_ritae/ritae_description/wild_hunt_info(),
+		"Code of Milan" = new /datum/sabbat_ritae/ritae_description/code_of_milan(),
 	)
 
 	var/list/ritae_options = list()
@@ -146,11 +148,12 @@
 		ritae_options += "Pack Credo (Edit)"
 	else
 		ritae_options += "Pack Credo"
+		ritae_options += "Code of Milan"
 
 	// Only Priests can see other ritae
 	if(is_priest)
 		for(var/name in ritae_datums)
-			if(name != "Pack Credo")
+			if(name != "Pack Credo" || name != "Code of Milan")
 				ritae_options += name
 
 	var/choice = tgui_input_list(user, "Select a Rite to learn about:", "Sabbat Ritae", ritae_options)

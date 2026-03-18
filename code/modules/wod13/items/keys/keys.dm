@@ -363,7 +363,21 @@
 /obj/item/vamp/keys/sabbat
 	name = "Dirty keys"
 	accesslocks = list(
-		"sabbat"
+		"sabbat",
+		"chantry",
+		"nosferatu",
+		"toreador",
+		"toreador1",
+		"toreador2",
+		"toreador3",
+		"toreador4",
+		"strip",
+		"malkav",
+		"psych",
+		"milleniumCommon",
+		"clerk",
+		"theatre",
+		"ventrueGreenroom",
 	)
 	color = "#6a2e1d"
 

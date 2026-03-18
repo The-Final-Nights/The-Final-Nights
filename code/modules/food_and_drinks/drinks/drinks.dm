@@ -347,33 +347,20 @@
 	// Handle vaulderie
 	// First check if there are multiple donors for the vaulderie effect
 	if(length(blood_donors) > 1)
-		// Multiple donors case - Creates sabbat pack if the drinker doesn't already have a sabbat datum
-		if(!is_sabbatist(M))
-			to_chat(M, span_cult("You feel your previous blood bonds vanishing as you take part in the Vaulderie and join the Sabbat..."))
-			M.mind.assigned_role = "Sabbat Pack"
+		to_chat(M, span_cult("You feel your previous blood bonds vanishing as you take part in the Vaulderie and join the Sabbat..."))
+		var/datum/antagonist/temp_antag = new()
+		temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", M)
+		qdel(temp_antag)
+	else
+		// Single donor case - Transfer sabbat status from donor if they have it
+
+		for(var/mob/living/carbon/human/donor in blood_donors)
+			to_chat(M, span_warning("You feel a strange connection to [donor] as you drink their blood..."))
 			var/datum/antagonist/temp_antag = new()
 			temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", M)
 			qdel(temp_antag)
-	else
-		// Single donor case - Transfer sabbat status from donor if they have it
-		var/antag_transferred = FALSE
+			break
 
-		for(var/mob/living/carbon/human/donor in blood_donors)
-			// Check if donor has any sabbat datum
-			if(donor.mind && is_sabbatist(donor))
-				// Only add the antag datum if the drinker doesn't already have any sabbat datum
-				if(M.mind && !is_sabbatist(M))
-					to_chat(M, span_warning("You feel a strange connection to [donor] as you drink their blood..."))
-					M.mind.assigned_role = "Sabbat Pack"
-					var/datum/antagonist/temp_antag = new()
-					temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", M)
-					qdel(temp_antag)
-					antag_transferred = TRUE
-					break
-
-				if(antag_transferred)
-					to_chat(M, span_cult("Your mind floods with alien thoughts and philosophies. You now serve the Sabbat!"))
-					break  // Only need to transfer one antag datum type
 	. = ..()
 
 //on_reagant_change so if all blood is emptied from the cup it empties the blood donors list

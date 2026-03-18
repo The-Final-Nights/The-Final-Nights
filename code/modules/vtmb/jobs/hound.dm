@@ -1,12 +1,12 @@
 
 /datum/job/vamp/hound
-	title = "Hound"
+	title = "Templar"
 	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
-	department_head = list("Prince")
+	department_head = list("Archbishop")
 	faction = "Vampire"
 	total_positions = 7
 	spawn_positions = 7
-	supervisors = "the Sheriff"
+	supervisors = "the Inquisitor"
 	selection_color = "#bd3327"
 	minimal_player_age = 7
 	exp_requirements = 300
@@ -24,12 +24,12 @@
 
 	display_order = JOB_DISPLAY_ORDER_HOUND
 	bounty_types = CIV_JOB_SEC
-	known_contacts = list("Prince", "Sheriff")
+	known_contacts = list("Archbishop", "Inquisitor")
 
-	v_duty = "You are the Prince's enforcer. You report to the Sheriff and uphold the Traditions."
+	v_duty = "You are the Archbishop's enforcer. Enforce the Code of Milan, and begrudgingly maintain the Masquerade so that Caine's children may continue to thrive."
 	minimal_masquerade = 4
 	experience_addition = 10
-	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_SETITES, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_TZIMISCE)
+	allowed_bloodlines = CLAN_ALL
 
 /datum/outfit/job/hound
 	name = "Hound"
@@ -38,9 +38,9 @@
 	id = /obj/item/card/id/camarilla
 	uniform = /obj/item/clothing/under/vampire/hound
 	gloves = /obj/item/clothing/gloves/vampire/work
-	suit = /obj/item/clothing/suit/vampire/trench
+	suit = /obj/item/clothing/suit/vampire/trench/alt
 	shoes = /obj/item/clothing/shoes/vampire
-	r_pocket = /obj/item/vamp/keys/camarilla
+	r_pocket = /obj/item/vamp/keys/sabbat
 	l_pocket = /obj/item/vamp/phone/hound
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/vampire_stake=3, /obj/item/flashlight=1, /obj/item/masquerade_contract=1, /obj/item/vamp/keys/hack=1, /obj/item/vamp/creditcard/rich=1)
 
@@ -51,8 +51,9 @@
 	implants = list(/obj/item/implant/mindshield)
 
 /datum/outfit/job/hound/pre_equip(mob/living/carbon/human/H)
-	..()
+	.=..()
+	ADD_TRAIT(H, TRAIT_SABBATIST, "late_party")
 
 /obj/effect/landmark/start/hound
-	name = "Hound"
+	name = "Templar"
 	icon_state = "Hound"

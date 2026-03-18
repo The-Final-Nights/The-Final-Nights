@@ -63,7 +63,7 @@
 	visible_to_network = FALSE
 
 /obj/machinery/fax/admin/camarilla
-	fax_name = "High Council"
+	fax_name = "Black Hand"
 	fax_id = "camarillaadmin"
 
 /obj/machinery/fax/admin/anarch
@@ -97,7 +97,7 @@
 /obj/machinery/fax/camarilla
 	fax_name = "Millenium Tower"
 	fax_id = "camarilla"
-	special_networks = list(list(fax_name = "High Council", fax_id = "camarillaadmin", color = "teal", emag_needed = FALSE))
+	special_networks = list(list(fax_name = "Black Hand", fax_id = "camarillaadmin", color = "teal", emag_needed = FALSE))
 
 /obj/machinery/fax/anarch
 	fax_name = "Anarchy Rose Bar"

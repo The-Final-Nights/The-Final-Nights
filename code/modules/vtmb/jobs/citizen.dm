@@ -20,7 +20,7 @@
 
 	allowed_species = list("Vampire", "Ghoul", "Human", "Werewolf", "Kuei-Jin")
 
-	v_duty = "Follow the traditions of the Camarilla. Obey the Prince and their authority. The city belongs to him. Aligning yourself with your clan members would be of benefit."
+	v_duty = "Ever since the fall of this city into the hands of the Sabbat, you find yourself with a newfound freedom under the Code of Milan, though you must respect the local rule of the Archbishop and the tenets of the Code, as well as the worship of Caine if you wish to receive such freedoms..."
 	duty = "Obey the authorities... Or don't. You are up late tonight for one reason or another."
 	minimal_masquerade = 0
 	allowed_bloodlines = list(CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_SETITES, CLAN_NONE, CLAN_CAPPADOCIAN, CLAN_GARGOYLE, CLAN_LASOMBRA, CLAN_TZIMISCE, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_SALUBRI, CLAN_NAGARAJA, CLAN_BAALI, CLAN_KIASYD, CLAN_BANU_HAQIM, CLAN_GIOVANNI, CLAN_OLD_TZIMISCE, CLAN_TRUE_BRUJAH)

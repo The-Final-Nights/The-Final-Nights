@@ -1,7 +1,7 @@
 GLOBAL_LIST_INIT(leader_positions, list(
-	"Prince",
+	"Archbishop",
 	"Baron",
-	"Chantry Regent",
+	"Sabbat Tremere Bishop",
 	"Police Captain",
 	"Dealer",
 	"Capo",
@@ -9,20 +9,15 @@ GLOBAL_LIST_INIT(leader_positions, list(
 	))
 
 GLOBAL_LIST_INIT(command_positions, list(
-	"Prince",
-	"Seneschal",
-	"Sheriff",
-	"Harpy",
-	"Hound",
+	"Archbishop",
+	"Priscus",
+	"Inquisitor",
+	"Sabbat Priest",
+	"Templar",
 	"Tower Employee"))
 
 GLOBAL_LIST_INIT(camarilla_council_positions, list(
-	"Primogen Malkavian",
-	"Primogen Nosferatu",
-	"Primogen Toreador",
-	"Primogen Ventrue",
-	"Primogen Lasombra",
-	"Primogen Banu Haqim"
+	"Sabbat Bishop",
 ))
 
 
@@ -86,9 +81,9 @@ GLOBAL_LIST_INIT(tzimisce_positions, list(
 ))
 
 GLOBAL_LIST_INIT(tremere_positions, list(
-	"Chantry Regent",
+	"Tremere Bishop",
 	"Chantry Gargoyle",
-	"Chantry Archivist"
+	"Sabbat Chantry Archivist"
 ))
 
 GLOBAL_LIST_INIT(church_positions, list(
@@ -126,9 +121,9 @@ GLOBAL_LIST_INIT(spiral_positions, list(
 ))
 
 GLOBAL_LIST_INIT(sabbat_positions, list(
-	"Sabbat Ductus",
-	"Sabbat Pack",
-	"Sabbat Priest"
+	"Camarilla Praetor",
+	"Camarilla Archon",
+	"Camarilla Alastor"
 ))
 
 GLOBAL_LIST_INIT(ss13, list(

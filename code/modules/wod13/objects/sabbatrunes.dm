@@ -15,11 +15,6 @@
 /obj/sabbatrune/attack_hand(mob/living/user)
 	. = ..()
 
-	// Check if user is a sabbatist, ductus, or priest
-	if(!is_sabbatist(user))
-		to_chat(user, span_warning("You do not understand the power of this rune."))
-		return
-
 	if(!COOLDOWN_FINISHED(src, MONOMACY_CHALLENGE_COOLDOWN))
 		to_chat(user, span_warning("The rune is still cooling down from the last challenge."))
 		return
@@ -37,20 +32,20 @@
 	var/mob/living/target = null
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		// if the target is not dead, is the challenger isnt targeting themselves, if the target is a sabbatist, and if one of the name datums match the name input
-		if(H.stat != DEAD && H != challenger && is_sabbatist(H) && (findtext(H.real_name, challenged_name) || findtext(H.name, challenged_name)))
+		if(H.stat != DEAD && H != challenger && (findtext(H.real_name, challenged_name) || findtext(H.name, challenged_name)))
 			target = H
 
 	if(!target)
-		to_chat(challenger, span_cult("Could not find anyone with that name to challenge! Only members of the Sabbat may engage in Monomacy."))
+		to_chat(challenger, span_cult("Could not find anyone with that name to challenge!"))
 		return
 
 
 	// Notify the challenger
-	to_chat(challenger, span_cult("You have challenged [target.real_name] to a duel of Monomacy!"))
+	to_chat(challenger, span_cult("You have challenged [target.real_name] to a duel of Monomacy! As the challenging Cainite, you determine the time and location of the duel, while your rival determines nearly all other factors. The Priest has the right to alter anything about the duel at any point - but the Priest who favors their own candidate is heavily looked down upon."))
 	SEND_SOUND(challenger, sound('code/modules/wod13/sounds/announce.ogg'))
 
 	// Notify the target
-	to_chat(target, span_cult("[challenger.real_name] challenges you to a duel of Monomacy! Return to the lair at once!"))
+	to_chat(target, span_cult("[challenger.real_name] challenges you to a duel of Monomacy! Answer the call or lose favor. As the challenged Cainite, you have the right to determine when the duel ends, what weapons shall be used, whether or not disciplines are permitted, as well as any other factors such as both duelists wearing blindfolds. Your Priest has the right to modify these terms at any time, but the Priest who favors their own candidate is looked down upon."))
 	SEND_SOUND(target, sound('code/modules/wod13/sounds/announce.ogg'))
 
 	// Announce the challenge to everyone nearby
@@ -62,7 +57,7 @@
 	// Notify the priest
 	for(var/mob/living/carbon/human/priest in GLOB.player_list)
 		if(is_sabbat_priest(priest))
-			to_chat(priest, span_cult("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy! Return to the lair at once to ensure Caine's will is done."))
+			to_chat(priest, span_cult("[challenger.real_name] has challenged [target.real_name] to a duel of Monomacy! Seek them out and ensure the duel is performed honorably. As Priest, you have the right to adjust any of the terms of the duel - you even have the right to declare a monomacy as null and void after the fact, but beware, the Priest who tips the scales in favor of their own candidate is heavily disfavored."))
 			SEND_SOUND(priest, sound('code/modules/wod13/sounds/announce.ogg'))
 
 	// Visual and audio effects for the rune itself

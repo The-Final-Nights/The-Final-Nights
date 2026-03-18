@@ -1,10 +1,11 @@
-/datum/job/vamp/primogen_malkavian
-	title = "Primogen Malkavian"
-	department_head = list("Justicar")
+/*
+/datum/job/vamp/bishop_malkavian
+	title = "Malkavian Bishop"
+	department_head = list("Archbishop")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions"
+	supervisors = " the Code of Milan"
 	selection_color = "#4f0404"
 
 	outfit = /datum/outfit/job/malkav
@@ -28,18 +29,18 @@
 	known_contacts = list("Prince")
 
 /datum/outfit/job/malkav
-	name = "Primogen Malkavian"
+	name = "Malkavian Bishop"
 	jobtype = /datum/job/vamp/primogen_malkavian
 
-	id = /obj/item/card/id/primogen
+	id = /obj/item/card/id/Bishop
 	glasses = /obj/item/clothing/glasses/vampire/sun
-	uniform = /obj/item/clothing/under/vampire/primogen_malkavian
+	uniform = /obj/item/clothing/under/vampire/Bishop_malkavian
 	suit = /obj/item/clothing/suit/vampire/trench/malkav
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	head = /obj/item/clothing/head/vampire/malkav
 	l_pocket = /obj/item/vamp/phone/malkavian_primo
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/malkav/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	backpack_contents = list(/obj/item/vamp/keys/malkav/Bishop=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
 /datum/outfit/job/malkav/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -49,13 +50,13 @@
 		uniform = /obj/item/clothing/under/vampire/primogen_malkavian/female
 		shoes = /obj/item/clothing/shoes/vampire/heels
 
-/datum/job/vamp/primogen_nosferatu
-	title = "Primogen Nosferatu"
-	department_head = list("Justicar")
+/datum/job/vamp/bishop_nosferatu
+	title = "Nosferatu Bishop"
+	department_head = list("Archbishop")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions"
+	supervisors = " the Code of Milan"
 	selection_color = "#4f0404"
 
 	outfit = /datum/outfit/job/nosferatu
@@ -79,10 +80,10 @@
 	known_contacts = list("Prince")
 
 /datum/outfit/job/nosferatu
-	name = "Primogen Nosferatu"
-	jobtype = /datum/job/vamp/primogen_nosferatu
+	name = "Bishop Nosferatu"
+	jobtype = /datum/job/vamp/Bishop_nosferatu
 
-	id = /obj/item/card/id/primogen
+	id = /obj/item/card/id/Bishop
 	mask = /obj/item/clothing/mask/vampire/shemagh
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	uniform = /obj/item/clothing/under/vampire/suit
@@ -90,20 +91,20 @@
 	shoes = /obj/item/clothing/shoes/vampire
 	l_pocket = /obj/item/vamp/phone/nosferatu_primo
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/nosferatu/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	backpack_contents = list(/obj/item/vamp/keys/nosferatu/Bishop=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
 /datum/outfit/job/nosferatu/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.gender == FEMALE)
 		shoes = /obj/item/clothing/shoes/vampire/heels
 
-/datum/job/vamp/primogen_ventrue
-	title = "Primogen Ventrue"
-	department_head = list("Justicar")
+/datum/job/vamp/bishop_ventrue
+	title = "Ventrue Bishop"
+	department_head = list("Archbishop")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions"
+	supervisors = " the Code of Milan"
 	selection_color = "#4f0404"
 
 	outfit = /datum/outfit/job/ventrue
@@ -127,30 +128,30 @@
 	known_contacts = list("Prince")
 
 /datum/outfit/job/ventrue
-	name = "Primogen Ventrue"
-	jobtype = /datum/job/vamp/primogen_ventrue
+	name = "Bishop Ventrue"
+	jobtype = /datum/job/vamp/Bishop_ventrue
 
-	id = /obj/item/card/id/primogen
+	id = /obj/item/card/id/Bishop
 	glasses = /obj/item/clothing/glasses/vampire/sun
 	uniform = /obj/item/clothing/under/vampire/suit
 	suit = /obj/item/clothing/suit/vampire/trench
 	shoes = /obj/item/clothing/shoes/vampire
 	l_pocket = /obj/item/vamp/phone/ventrue_primo
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/ventrue/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	backpack_contents = list(/obj/item/vamp/keys/ventrue/Bishop=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
 /datum/outfit/job/ventrue/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.gender == FEMALE)
 		shoes = /obj/item/clothing/shoes/vampire/heels
 
-/datum/job/vamp/primogen_toreador
-	title = "Primogen Toreador"
-	department_head = list("Justicar")
+/datum/job/vamp/bishop_toreador
+	title = "Toreador Bishop"
+	department_head = list("Archbishop")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions"
+	supervisors = " the Code of Milan"
 	selection_color = "#4f0404"
 
 	outfit = /datum/outfit/job/toreador
@@ -174,17 +175,17 @@
 	known_contacts = list("Prince")
 
 /datum/outfit/job/toreador
-	name = "Primogen Toreador"
-	jobtype = /datum/job/vamp/primogen_toreador
+	name = "Toreador Bishop"
+	jobtype = /datum/job/vamp/Bishop_toreador
 
-	id = /obj/item/card/id/primogen
+	id = /obj/item/card/id/Bishop
 	glasses = /obj/item/clothing/glasses/vampire/sun
-	uniform = /obj/item/clothing/under/vampire/primogen_toreador
+	uniform = /obj/item/clothing/under/vampire/Bishop_toreador
 	suit = /obj/item/clothing/suit/vampire/trench/alt
 	shoes = /obj/item/clothing/shoes/vampire
 	l_pocket = /obj/item/vamp/phone/toreador_primo
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/toreador/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon, /obj/item/gun/ballistic/automatic/vampire/beretta/toreador=1, /obj/item/ammo_box/magazine/semi9mm/toreador=1)
+	backpack_contents = list(/obj/item/vamp/keys/toreador/Bishop=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon, /obj/item/gun/ballistic/automatic/vampire/beretta/toreador=1, /obj/item/ammo_box/magazine/semi9mm/toreador=1)
 
 /datum/outfit/job/toreador/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -192,13 +193,13 @@
 		uniform = /obj/item/clothing/under/vampire/primogen_toreador/female
 		shoes = /obj/item/clothing/shoes/vampire/heels/red
 
-/datum/job/vamp/primogen_banu
-	title = "Primogen Banu Haqim"
-	department_head = list("Justicar")
+/datum/job/vamp/bishop_banu
+	title = "Banu Haqim Bishop"
+	department_head = list("Archbishop")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions and the Laws of Haqim"
+	supervisors = " the Code of Milan and the Laws of Haqim"
 	selection_color = "#4f0404"
 
 	outfit = /datum/outfit/job/banuprim
@@ -222,30 +223,30 @@
 	known_contacts = list("Prince")
 
 /datum/outfit/job/banuprim
-	name = "Primogen Banu Haqim"
-	jobtype = /datum/job/vamp/primogen_banu
+	name = "Bishop Banu Haqim"
+	jobtype = /datum/job/vamp/Bishop_banu
 
 	ears = /obj/item/p25radio
-	id = /obj/item/card/id/primogen
+	id = /obj/item/card/id/Bishop
 	glasses = /obj/item/clothing/glasses/vampire/yellow
 	uniform = /obj/item/clothing/under/vampire/turtleneck_navy
 	suit = /obj/item/clothing/suit/vampire/jacket/banu
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone/banu_primo
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/banuhaqim/primogen=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	backpack_contents = list(/obj/item/vamp/keys/banuhaqim/Bishop=1, /obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
-/obj/effect/landmark/start/primogen_banu
-	name = "Primogen Banu Haqim"
+/obj/effect/landmark/start/bishop_banu
+	name = "Bishop Banu Haqim"
 	icon_state = "Assistant"
 
-/datum/job/vamp/primogen_lasombra
-	title = "Primogen Lasombra"
-	department_head = list("Justicar")
+/datum/job/vamp/bishop_lasombra
+	title = "Lasombra Bishop"
+	department_head = list("Archbishop")
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = " the Traditions and the Friends of the Night"
+	supervisors = " the Code of Milan and the Friends of the Night"
 	selection_color = "#4f0404"
 
 	outfit = /datum/outfit/job/lasombraprim
@@ -269,8 +270,61 @@
 	known_contacts = list("Prince")
 
 /datum/outfit/job/lasombraprim
-	name = "Primogen Lasombra"
-	jobtype = /datum/job/vamp/primogen_lasombra
+	name = "Lasombra Bishop"
+	jobtype = /datum/job/vamp/Bishop_lasombra
+
+	id = /obj/item/card/id/Bishop
+	glasses = /obj/item/clothing/glasses/vampire/sun
+	uniform = /obj/item/clothing/under/vampire/turtleneck_black
+	suit = /obj/item/clothing/suit/vampire/trench
+	shoes = /obj/item/clothing/shoes/vampire/jackboots
+	l_pocket = /obj/item/vamp/phone/lasombra_primo
+	r_pocket = /obj/item/cockclock
+	backpack_contents = list(/obj/item/vamp/keys/lasombra/Bishop=1,/obj/item/passport=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+
+/datum/outfit/job/Bishop_lasombra/pre_equip(mob/living/carbon/human/H)
+	..()
+	if(H.gender == FEMALE)
+		uniform = /obj/item/clothing/under/vampire/business
+		shoes = /obj/item/clothing/shoes/vampire/heels/red
+
+/obj/effect/landmark/start/Bishop_lasombra
+	name = "Bishop Lasombra"
+	icon_state = "Assistant"
+*/
+
+/datum/job/vamp/bishop
+	title = "Sabbat Bishop"
+	department_head = list("Archbishop")
+	faction = "Vampire"
+	total_positions = 6
+	spawn_positions = 6
+	supervisors = " the Code of Milan and Caine."
+	selection_color = "#4f0404"
+
+	outfit = /datum/outfit/job/bishop
+
+	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MORGUE, ACCESS_WEAPONS, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
+	minimal_access = list(ACCESS_BAR, ACCESS_MINERAL_STOREROOM, ACCESS_THEATRE)
+	paycheck = PAYCHECK_EASY
+	paycheck_department = ACCOUNT_SRV
+	display_order = JOB_DISPLAY_ORDER_LASOMBRAPRIM
+	exp_type_department = EXP_TYPE_COUNCIL
+
+	allowed_species = list("Vampire")
+	allowed_bloodlines = CLAN_ALL
+	minimal_generation = 12
+//	minimum_character_age = 100
+	minimum_vampire_age = 5 // Heavily meritocratic and new to the Camarilla, plus, Julia Sowinski *shrug
+
+	v_duty = "You serve as a Bishop of the Sabbat in this city, overseeing the enforcement of the Code of Milan. As Bishop you may have a particular focus - rooting out any sign of Diabolism, overseeing the affairs of the clans, assisting in the philosophical and religious studies of Caine and the Book of Nod, or merely advising the Archbishop."
+	experience_addition = 20
+	minimal_masquerade = 5
+	known_contacts = list("Archbishop")
+
+/datum/outfit/job/bishop
+	name = "Sabbat Bishop"
+	jobtype = /datum/job/vamp/bishop
 
 	id = /obj/item/card/id/primogen
 	glasses = /obj/item/clothing/glasses/vampire/sun
@@ -279,14 +333,12 @@
 	shoes = /obj/item/clothing/shoes/vampire/jackboots
 	l_pocket = /obj/item/vamp/phone/lasombra_primo
 	r_pocket = /obj/item/cockclock
-	backpack_contents = list(/obj/item/vamp/keys/lasombra/primogen=1,/obj/item/passport=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
+	backpack_contents = list(/obj/item/vamp/keys/sabbat=1,/obj/item/passport=1, /obj/item/vamp/creditcard/elder=1, /obj/item/card/id/whip, /obj/item/card/id/steward, /obj/item/card/id/myrmidon)
 
-/datum/outfit/job/primogen_lasombra/pre_equip(mob/living/carbon/human/H)
-	..()
-	if(H.gender == FEMALE)
-		uniform = /obj/item/clothing/under/vampire/business
-		shoes = /obj/item/clothing/shoes/vampire/heels/red
+/datum/outfit/job/bishop/pre_equip(mob/living/carbon/human/H)
+	.=..()
+	ADD_TRAIT(H, TRAIT_SABBATIST, "late_party")
 
-/obj/effect/landmark/start/primogen_lasombra
-	name = "Primogen Lasombra"
+/obj/effect/landmark/start/sabbat_bishop
+	name = "Sabbat Bishop"
 	icon_state = "Assistant"

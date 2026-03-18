@@ -4,7 +4,7 @@
 	burnable = TRUE
 
 /obj/structure/vampdoor/wood/strip
-	lock_id = "strip"
+	lock_id = "sabbat"
 	lockpick_difficulty = 8
 
 /obj/structure/vampdoor/wood/giovanni
@@ -28,7 +28,7 @@
 /obj/structure/vampdoor/wood/theatre
 	name = "Theatre"
 	locked = TRUE
-	lock_id = "theatre"
+	lock_id = "sabbat"
 	lockpick_difficulty = 15
 
 /obj/structure/vampdoor/wood/theatre/unlocked
@@ -36,7 +36,7 @@
 
 /obj/structure/vampdoor/wood/jazz_club
 	name = "Jazz Club"
-	lock_id = "milleniumCommon"
+	lock_id = "sabbat"
 	lockpick_difficulty = 8
 
 /obj/structure/vampdoor/wood/cappadocian
@@ -52,5 +52,5 @@
 
 /obj/structure/vampdoor/wood/millennium_common
 	locked = TRUE
-	lock_id = "milleniumCommon"
+	lock_id = "sabbat"
 	lockpick_difficulty = 12

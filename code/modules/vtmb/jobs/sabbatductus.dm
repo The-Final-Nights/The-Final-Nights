@@ -1,9 +1,9 @@
 /datum/job/vamp/sabbatductus
-	title = "Sabbat Ductus"
+	title = "Camarilla Praetor"
 	faction = "Vampire"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "Caine"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Inner Council"
 	selection_color = "#7B0000"
 	access = list()
 	minimal_access = list()
@@ -13,10 +13,11 @@
 	access = list(ACCESS_MAINT_TUNNELS)
 	liver_traits = list(TRAIT_GREYTIDE_METABOLISM)
 
-	v_duty = "You are a Ductus and Pack Leader of your Sabbat pack. You are charged with rebellion against the Elders and the Camarilla, against the Jyhad, against the Masquerade and the Traditions, and the recognition of Caine as the true Dark Father of all Kindred kind.  <br> <b> NOTE: BY PLAYING THIS ROLE YOU AGREE TO AND HAVE READ THE SERVER'S RULES ON ESCALATION FOR ANTAGS. KEEP THINGS INTERESTING AND ENGAGING FOR BOTH SIDES. KILLING PLAYERS JUST BECAUSE YOU CAN MAY RESULT IN A ROLEBAN.</b>"
-	duty = "Down with the Camarilla. Down with the Elders. Down with the Jyhad! The Kindred are the true rulers of Earth, blessed by Caine, the Dark Father."
+	v_duty = "Ever since the recent Sabbat takeover of the City, you, a prominent Primogen or Elder of the Camarilla, have been forced to gather up any essentials and flee the Millenium Tower for a hidden base in the sewers. It was then that you were contacted by a notable Justicar of your Clan, who tasked you as their Praetor to oversee a group of Archons to retake the Clan's entrenched position in the city. Work strategically to win back the city, or be doomed to report to your sire with failure."
+	duty = ""
 	minimal_masquerade = 0
-	allowed_bloodlines = list("Brujah", "Tremere", "Ventrue", "Nosferatu", "Gangrel", "Toreador", "Malkavian", "Banu Haqim", "Setite", "Lasombra", "Gargoyle", "Tzimisce", "Baali", "Cappadocian", "Kiasyd", "Salubri", "Salubri Warrior", "Daughters of Cacophany", "True Brujah", "Nagaraja", "Caitiff")
+	minimal_generation = 11
+	allowed_bloodlines = list(CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_TOREADOR, CLAN_GANGREL, CLAN_MALKAVIAN, CLAN_LASOMBRA, CLAN_BANU_HAQIM, CLAN_LASOMBRA)
 	display_order = JOB_DISPLAY_ORDER_SABBATDUCTUS
 	whitelisted = TRUE
 
@@ -25,7 +26,7 @@
 	jobtype = /datum/job/vamp/sabbatductus
 	l_pocket = /obj/item/vamp/phone
 	id = /obj/item/cockclock
-	r_pocket = /obj/item/vamp/keys/sabbat
+	r_pocket = /obj/item/vamp/keys/camarilla
 
 /datum/outfit/job/sabbatductus/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -51,13 +52,10 @@
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 	if(H.clan && H.clan.name != "Lasombra")
 		backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
-	if(H.mind)
-		var/datum/antagonist/temp_antag = new()
-		temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev_head", H)
-		qdel(temp_antag)
+
 
 /obj/effect/landmark/start/sabbatductus
-	name = "Sabbat Ductus"
+	name = "Camarilla Praetor"
 	icon_state = "Assistant"
 
 /datum/antagonist/sabbatist/sabbatductus/on_gain()

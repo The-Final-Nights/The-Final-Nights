@@ -1,13 +1,13 @@
 
 /datum/job/vamp/clerk
-	title = "Seneschal"
+	title = "Priscus"
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
-	department_head = list("Prince")
+	department_head = list("Archbishop")
 	head_announce = list(RADIO_CHANNEL_SUPPLY, RADIO_CHANNEL_SERVICE)
 	faction = "Vampire"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the prince"
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Archbishop and Caine."
 	selection_color = "#bd3327"
 	req_admin_notify = 1
 	minimal_player_age = 10
@@ -43,10 +43,10 @@
 
 	known_contacts = list("Prince","Sheriff","Tremere Regent","Dealer","Primogens")
 
-	v_duty = "You are the right hand man or woman of the most powerful vampire in the city. The Camarilla trusts you to run the city, even in their stead."
-	duty = "You are the right hand man or woman of the most powerful vampire in the city. The Camarilla trusts you to run the city, even in their stead."
+	v_duty = "You are the right hand man or woman of the most powerful vampire in the city. The Archbishop and Regent trust you to maintain the affairs of the domain, overseeing the worship of Caine, and the Code of Milan."
+	duty = "You are the right hand man or woman of the most powerful vampire in the city. The Archbishop and Regent trust you to maintain the affairs of the domain, overseeing the worship of Caine, and the Code of Milan."
 	experience_addition = 15
-	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_LASOMBRA, CLAN_KIASYD, CLAN_BRUJAH, CLAN_TRUE_BRUJAH)
+	allowed_bloodlines = CLAN_ALL
 
 /datum/outfit/job/clerk
 	name = "Seneschal"
@@ -56,7 +56,7 @@
 	uniform = /obj/item/clothing/under/vampire/clerk
 	shoes = /obj/item/clothing/shoes/vampire/brown
 	l_pocket = /obj/item/vamp/phone/seneschal
-	r_pocket = /obj/item/vamp/keys/clerk
+	r_pocket = /obj/item/vamp/keys/sabbat
 	backpack_contents = list(/obj/item/passport=1, /obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/seneschal=1)
 
 /datum/outfit/job/clerk/pre_equip(mob/living/carbon/human/H)
@@ -64,6 +64,7 @@
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/vampire/clerk/female
 		shoes = /obj/item/clothing/shoes/vampire/heels
+	ADD_TRAIT(H, TRAIT_SABBATIST, "late_party")
 
 /obj/effect/landmark/start/clerk
 	name = "Seneschal"
@@ -73,14 +74,14 @@
 //ROLES UNDER THE PURVIEW OF THE SENESCHAL
 //THE HARPY
 /datum/job/vamp/harpy
-	title = "Harpy"
+	title = "Sabbat Priest"
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
-	department_head = list("Prince")
+	department_head = list("Archbishop")
 	head_announce = list(RADIO_CHANNEL_SUPPLY, RADIO_CHANNEL_SERVICE)
 	faction = "Vampire"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "The Prince and Seneschal"
+	supervisors = "The Archbishop and the Priscus"
 	selection_color = "#bd3327"
 	req_admin_notify = 1
 	minimal_player_age = 10
@@ -117,8 +118,8 @@
 
 	known_contacts = list("Prince","Sheriff","Tremere Regent","Dealer","Emissary","Baron","Primogens")
 
-	v_duty = "You are an expert on the nightlife of Cainite society. Acting as one of the chief advisors on all things related to boons and diplomacy, the Prince defers quite the amount of judgement to you. Don't squander it."
-	allowed_bloodlines = list(CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_TZIMISCE, CLAN_SETITES, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD)
+	v_duty = "You are a studious childe of Caine, and have extensively studied the Book of Nod and the history of Cainite society, as well as the treachery of the antediluvians. Study and learn from those lessons, and ensure that the blood of Caine is respected, across all clans, across all of his childer, and that everyone knows the story of our kind."
+	allowed_bloodlines = CLAN_ALL
 
 /datum/outfit/job/harpy
 	name = "Harpy"
@@ -128,7 +129,7 @@
 	uniform = /obj/item/clothing/under/vampire/clerk
 	shoes = /obj/item/clothing/shoes/vampire/brown
 	l_pocket = /obj/item/vamp/phone/harpy
-	r_pocket = /obj/item/vamp/keys/clerk
+	r_pocket = /obj/item/vamp/keys/sabbat
 	backpack_contents = list(/obj/item/passport=1, /obj/item/phone_book=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard/seneschal=1)
 
 /datum/outfit/job/harpy/pre_equip(mob/living/carbon/human/H)
@@ -136,6 +137,7 @@
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/vampire/clerk/female
 		shoes = /obj/item/clothing/shoes/vampire/heels
+	ADD_TRAIT(H, TRAIT_SABBATIST, "late_party")
 
 /obj/effect/landmark/start/harpy
 	name = "Harpy"
@@ -149,7 +151,7 @@
 	faction = "Vampire"
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Seneschal, Sheriff and Prince."
+	supervisors = "the Priscus, Inquisitor and Archbishop."
 	selection_color = "#bd3327"
 	exp_type = EXP_TYPE_CREW
 
@@ -167,8 +169,8 @@
 	bounty_types = CIV_JOB_SEC
 	known_contacts = list("Prince", "Sheriff", "Seneschal")
 	allowed_species = list("Ghoul", "Human", "Vampire")
-	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_SETITES, CLAN_LASOMBRA, CLAN_GARGOYLE, CLAN_KIASYD, CLAN_CAPPADOCIAN, CLAN_TZIMISCE)
-	v_duty = "You work directly for the Prince, and by extension the Seneschal, Sheriff, and Camarilla as a whole. Ensure your mortal coworkers stay in the dark of any supernatural happenings, and keep up the facade to the outside world."
+	allowed_bloodlines = CLAN_ALL
+	v_duty = "You work directly for the Archbishop, and by extension the Priscus, Inquisitor, and Sabbat as a whole, though you may or may not know it. Ensure your mortal coworkers stay in the dark of any supernatural happenings, and keep up the facade to the outside world."
 	duty = "You work directly for the Millenium Tower and its administrative staff in a variety of ways, you may even be a personal retainer of one of the top three, to the point that any oddities that you may see over night or hear are either things you are already aware or you simply laugh them off and try not to think about it."
 	minimal_masquerade = 4
 	experience_addition = 10
@@ -183,7 +185,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/work
 	suit = /obj/item/clothing/suit/vampire/trench
 	shoes = /obj/item/clothing/shoes/vampire
-	r_pocket = /obj/item/vamp/keys/camarilla/ghoul
+	r_pocket = /obj/item/vamp/keys/sabbat
 	l_pocket = /obj/item/vamp/phone/tower_employee
 	backpack_contents = list(/obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
@@ -193,6 +195,7 @@
 
 /datum/outfit/job/towerwork/pre_equip(mob/living/carbon/human/H)
 	..()
+	ADD_TRAIT(H, TRAIT_SABBATIST, "late_party")
 
 /obj/effect/landmark/start/towerwork
 	name = "Tower Employee"

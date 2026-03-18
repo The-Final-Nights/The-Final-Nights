@@ -1,12 +1,12 @@
 /datum/job/vamp/sheriff
-	title = "Sheriff"
+	title = "Inquisitor"
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
-	department_head = list("Prince")
+	department_head = list("Archbishop")
 	head_announce = list(RADIO_CHANNEL_SECURITY)
 	faction = "Vampire"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the prince"
+	supervisors = "the Archbishop, Caine, and the Code of Milan"
 	selection_color = "#bd3327"
 	req_admin_notify = 1
 	minimal_player_age = 14
@@ -38,11 +38,11 @@
 	minimum_vampire_age = 30
 	minimal_masquerade = 5
 	allowed_species = list("Vampire")
-	allowed_bloodlines = list(CLAN_TRUE_BRUJAH, CLAN_BRUJAH, CLAN_TREMERE, CLAN_VENTRUE, CLAN_NOSFERATU, CLAN_GANGREL, CLAN_TOREADOR, CLAN_MALKAVIAN, CLAN_BANU_HAQIM, CLAN_LASOMBRA)
+	allowed_bloodlines = list(CLAN_NONE, CLAN_BRUJAH, CLAN_TOREADOR, CLAN_NOSFERATU, CLAN_TREMERE, CLAN_GANGREL, CLAN_VENTRUE, CLAN_MALKAVIAN, CLAN_TZIMISCE, CLAN_TRUE_BRUJAH, CLAN_OLD_TZIMISCE, CLAN_SALUBRI, CLAN_KIASYD, CLAN_LASOMBRA, CLAN_SETITES, CLAN_BANU_HAQIM, CLAN_GARGOYLE, CLAN_DAUGHTERS_OF_CACOPHONY, CLAN_CAPPADOCIAN, CLAN_NAGARAJA, CLAN_SALUBRI_WARRIOR,CLAN_GARGOYLE, CLAN_TZIMISCE)
 
-	known_contacts = list("Prince","Seneschal","Tremere Regent","Dealer","Primogens","Voivode")
+	known_contacts = list("Archbishop","Priscus","Sabbat Tremere Bishop","Dealer","Bishops","Voivode")
 
-	v_duty = "Protect the Prince and the Masquerade. You are their sword."
+	v_duty = "Protect the Archbishop, the Code of Milan, Caine's childer, and begrudgingly uphold the Masquerade"
 	experience_addition = 20
 
 /datum/outfit/job/sheriff
@@ -57,7 +57,7 @@
 	gloves = /obj/item/clothing/gloves/vampire/leather
 	head = /obj/item/clothing/head/hos/beret
 	glasses = /obj/item/clothing/glasses/vampire/sun
-	r_pocket = /obj/item/vamp/keys/sheriff
+	r_pocket = /obj/item/vamp/keys/sabbat
 	l_pocket = /obj/item/vamp/phone/sheriff
 	backpack_contents = list(/obj/item/gun/ballistic/automatic/vampire/deagle=1, /obj/item/vampire_stake=3, /obj/item/passport=1, /obj/item/cockclock=1, /obj/item/flashlight=1, /obj/item/masquerade_contract=1, /obj/item/vamp/creditcard/elder=1)
 
@@ -71,7 +71,8 @@
 	..()
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/vampire/sheriff/female
+	ADD_TRAIT(H, TRAIT_SABBATIST, "late_party")
 
 /obj/effect/landmark/start/sheriff
-	name = "Sheriff"
+	name = "Inquisitor"
 	icon_state = "Sheriff"

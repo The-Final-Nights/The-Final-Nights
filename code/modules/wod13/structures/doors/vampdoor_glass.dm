@@ -6,7 +6,7 @@
 	burnable = TRUE
 
 /obj/structure/vampdoor/glass/clerk
-	lock_id = "clerk"
+	lock_id = "sabbat"
 	lockpick_difficulty = 12
 	locked = TRUE
 
@@ -14,11 +14,11 @@
 	icon_state = "glass-1"
 	baseicon = "glass"
 	locked = TRUE
-	lock_id = "prince"
+	lock_id = "sabbat"
 	lockpick_difficulty = 12
 
 /obj/structure/vampdoor/glass/banu_haqim
-	lock_id = "banuhaqim"
+	lock_id = "sabbat"
 	locked = TRUE
 
 /obj/structure/vampdoor/glass/bianchi_bank
@@ -79,3 +79,10 @@
 	lock_id = "setite"
 	locked = TRUE
 	lockpick_difficulty = 15
+
+/obj/structure/vampdoor/glass/sabbat
+	icon_state = "glass-1"
+	baseicon = "glass"
+	locked = TRUE
+	lock_id = "sabbat"
+	lockpick_difficulty = 12
