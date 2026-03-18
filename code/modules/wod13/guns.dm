@@ -603,7 +603,7 @@
 	recoil = 3
 	burst_size = 1
 	fire_delay = 1
-	spread = 5
+	spread = 3
 	bolt_type = BOLT_TYPE_LOCKING
 	show_bolt_icon = FALSE
 	mag_display = TRUE
