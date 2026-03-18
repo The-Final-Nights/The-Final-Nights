@@ -68,3 +68,49 @@
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_TEMP_PROTECT
 	resistance_flags = NONE
+
+/obj/item/clothing/gloves/vampire/brassknuckles
+	name = "brass knuckles"
+	desc = "A set of tarnished brass rings fused together to create a cruel weapon for back-alley brawls. Illegal in most places."
+	icon_state = "brassknuckles"
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 70)
+
+/obj/item/clothing/gloves/vampire/brassknuckles/equipped(mob/living/carbon/human/user, slot)
+	..()
+	if(ishuman(user) && slot == ITEM_SLOT_GLOVES)
+		user.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
+		user.dna.species.punchdamagelow += 10		//low of ~20 (base human/kindred/etc)
+		user.dna.species.punchdamagehigh += 10		//high of ~30 (base human/kindred/etc)
+		to_chat(user, span_notice("You fit your fingers into the brass knuckle's loops.."))
+
+/obj/item/clothing/gloves/vampire/brassknuckles/dropped(mob/living/carbon/human/user, slot)
+	..()
+	if(user.get_item_by_slot(ITEM_SLOT_GLOVES) == src)
+		user.dna.species.attack_sound = initial(user.dna.species.attack_sound)
+		user.dna.species.punchdamagelow -= 10
+		user.dna.species.punchdamagehigh -= 10
+		to_chat(user, span_notice("You take off the bass knuckles."))
+
+/obj/item/clothing/gloves/vampire/spikedknuckles
+	name = "spiked steel knuckles"
+	desc = "A set of tarnished steel rings fused together and topped with piercing metal spikes. Illegal in most places."
+	icon_state = "spikedknuckles"
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 70)
+
+/obj/item/clothing/gloves/vampire/spikedknuckles/equipped(mob/living/carbon/human/user, slot)
+	..()
+	if(ishuman(user) && slot == ITEM_SLOT_GLOVES)
+		user.dna.species.attack_sound = 'code/modules/wod13/sounds/heavypunch.ogg'
+		user.dna.species.sharpness = SHARP_POINTY
+		user.dna.species.punchdamagelow += 10		//low of ~20 (base human/kindred/etc)
+		user.dna.species.punchdamagehigh += 10		//high of ~30 (base human/kindred/etc)
+		to_chat(user, span_notice("You fit your fingers into the spiked knuckle's loops.."))
+
+/obj/item/clothing/gloves/vampire/spikedknuckles/dropped(mob/living/carbon/human/user, slot)
+	..()
+	if(user.get_item_by_slot(ITEM_SLOT_GLOVES) == src)
+		user.dna.species.attack_sound = initial(user.dna.species.attack_sound)
+		user.dna.species.sharpness = initial(user.dna.species.sharpness)
+		user.dna.species.punchdamagelow -= 10
+		user.dna.species.punchdamagehigh -= 10
+		to_chat(user, span_notice("You take off the spiked knuckles."))
