@@ -29,7 +29,7 @@
 	qdel(src)
 
 /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/flamingskull
-	name = "flaming skull"
+	name = "floating skull"
 	desc = "A skull with burning red eyes and rotting flesh draping its cranium."
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "legion_head"
@@ -48,13 +48,13 @@
 	density = FALSE
 	anchored = FALSE
 	speed = 0
-	maxHealth = 40
-	health = 40
+	maxHealth = 30
+	health = 30
 
 	harm_intent_damage = 5
 	obj_damage = 10
 	melee_damage_lower = 10
-	melee_damage_upper = 12
+	melee_damage_upper = 15
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "chomps"
 	attack_sound = 'sound/weapons/pierce.ogg'

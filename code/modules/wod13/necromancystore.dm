@@ -26,7 +26,7 @@
 	name = "bone pile"
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "skeleton_dead"
-	maxHealth = 149
+	maxHealth = 99
 	health = 1
 	stat = DEAD
 

@@ -3179,10 +3179,6 @@
 	},
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/shop)
-"aKt" = (
-/mob/living/simple_animal/corpsestore/corpse2,
-/turf/open/floor/plating/rough/cave,
-/area/vtm/interior/giovanni/basement)
 "aKv" = (
 /obj/structure/vampdoor/graveyard{
 	dir = 1;
@@ -5217,13 +5213,6 @@
 	},
 /turf/open/floor/plating/granite/black,
 /area/vtm/interior/chantry/basement)
-"bic" = (
-/obj/effect/turf_decal/weather/dirt{
-	plane = -2
-	},
-/mob/living/simple_animal/corpsestore/corpse2,
-/turf/open/floor/plating/rough/cave,
-/area/vtm/interior/giovanni/basement)
 "bip" = (
 /obj/effect/turf_decal/siding/white{
 	color = "#636363";
@@ -9861,14 +9850,6 @@
 /obj/structure/stairs/east,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/apartment)
-"cne" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 1;
-	plane = -2
-	},
-/mob/living/simple_animal/corpsestore/corpse2,
-/turf/open/floor/plating/rough/cave,
-/area/vtm/interior/giovanni/basement)
 "cnp" = (
 /obj/structure/curtain/cloth/fancy{
 	pixel_y = 15
@@ -16999,11 +16980,6 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/tzimisce_manor)
-"dXd" = (
-/obj/effect/turf_decal/weather/dirt,
-/mob/living/simple_animal/corpsestore/corpse2,
-/turf/open/floor/plating/rough/cave,
-/area/vtm/interior/giovanni/basement)
 "dXm" = (
 /obj/effect/decal/trash,
 /obj/machinery/light/red{
@@ -67380,7 +67356,6 @@
 /obj/effect/turf_decal/weather/dirt{
 	plane = -2
 	},
-/mob/living/simple_animal/corpsestore/corpse2,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/giovanni/basement)
 "pqg" = (
@@ -75780,13 +75755,6 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f2)
-"rlG" = (
-/obj/effect/turf_decal/weather/dirt{
-	dir = 6
-	},
-/mob/living/simple_animal/corpsestore/corpse2,
-/turf/open/floor/plating/rough/cave,
-/area/vtm/interior/giovanni/basement)
 "rlI" = (
 /obj/structure/railing/metal{
 	dir = 1
@@ -117079,7 +117047,7 @@ gwJ
 hZj
 sfa
 qMX
-dXd
+onW
 gPK
 bnb
 bnb
@@ -117281,7 +117249,7 @@ qTq
 qku
 taX
 wTo
-cne
+qku
 xPk
 nep
 bnb
@@ -117483,7 +117451,7 @@ dGB
 qku
 uaT
 wHE
-aKt
+uaT
 qMX
 vNn
 bnb
@@ -117685,7 +117653,7 @@ ahB
 qku
 uaT
 uaT
-bic
+taX
 sJz
 kgO
 bnb
@@ -117887,7 +117855,7 @@ iLV
 jJY
 uaT
 uaT
-rlG
+vNn
 kgO
 egn
 bnb

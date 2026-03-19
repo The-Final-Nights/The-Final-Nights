@@ -15,16 +15,23 @@
 	qdel(src)
 
 /obj/item/melee/vampirearms/katana/kosa/possessed
-	icon = 'code/modules/wod13/weapons.dmi'
-	icon_state = "kosa"
-	lefthand_file = 'code/modules/wod13/righthand.dmi'
-	righthand_file = 'code/modules/wod13/lefthand.dmi'
-	worn_icon_state = 'code/modules/wod13/worn.dmi'
 	name = "possessed scythe"
 	desc = "A scythe turned into a prison, the item capable of binding a wraith into the item and locking it away from the rest of the world."
-	attack_verb_continuous = list("slashes","cuts")
-	attack_verb_simple= list("slash","cut")
+	icon = 'code/modules/wod13/weapons.dmi'
+	icon_state = "kosa"
+	force = 45
+	w_class = WEIGHT_CLASS_NORMAL
+	slot_flags = null
+	block_chance = 12
+	armour_penetration = 25
+	sharpness = SHARP_EDGED
+	attack_verb_continuous = list("slashes", "cuts")
+	attack_verb_simple = list("slash", "cut")
 	hitsound = 'sound/weapons/rapierhit.ogg'
+	wound_bonus = 5
+	bare_wound_bonus = 10
+	resistance_flags = FIRE_PROOF
+	masquerade_violating = TRUE
 	var/possessed = FALSE
 
 /obj/item/melee/vampirearms/katana/kosa/possessed/relaymove(mob/living/user, direction)

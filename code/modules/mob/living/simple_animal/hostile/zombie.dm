@@ -216,8 +216,8 @@
 	response_harm_simple = "punch"
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 	speed = 0 //made of bones, they should be fast but weak to hit
-	maxHealth = 100 //two to three attacks with a dedicated melee weapon or 6 9mm bullets
-	health = 100
+	maxHealth = 80 //two attacks with a dedicated melee weapon or 6 9mm bullets
+	health = 80
 	harm_intent_damage = 15
 	melee_damage_lower = 25
 	melee_damage_upper = 35

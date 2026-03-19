@@ -282,13 +282,13 @@
 					owner.beastmaster |= zombie
 					zombie.beastmaster_owner = owner
 					qdel(target)
-				if (70 to 150) //humans and whatnot
+				if (70 to 99) //humans and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
 					zombie.beastmaster_owner = owner
 					qdel(target)
-				if (150 to 300) //dogs/biters and whatnot
+				if (100 to 300) //dogs/biters and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
