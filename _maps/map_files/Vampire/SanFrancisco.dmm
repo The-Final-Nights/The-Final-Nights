@@ -3179,6 +3179,10 @@
 	},
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/shop)
+"aKt" = (
+/mob/living/simple_animal/corpsestore/corpse2,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "aKv" = (
 /obj/structure/vampdoor/graveyard{
 	dir = 1;
@@ -5217,6 +5221,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	plane = -2
 	},
+/mob/living/simple_animal/corpsestore/corpse2,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/giovanni/basement)
 "bip" = (
@@ -9856,6 +9861,14 @@
 /obj/structure/stairs/east,
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/apartment)
+"cne" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1;
+	plane = -2
+	},
+/mob/living/simple_animal/corpsestore/corpse2,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "cnp" = (
 /obj/structure/curtain/cloth/fancy{
 	pixel_y = 15
@@ -16986,6 +16999,11 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/tzimisce_manor)
+"dXd" = (
+/obj/effect/turf_decal/weather/dirt,
+/mob/living/simple_animal/corpsestore/corpse2,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "dXm" = (
 /obj/effect/decal/trash,
 /obj/machinery/light/red{
@@ -34624,6 +34642,7 @@
 	dir = 1;
 	plane = -2
 	},
+/mob/living/simple_animal/corpsestore/corpse2,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/giovanni/basement)
 "hZl" = (
@@ -37789,6 +37808,10 @@
 	},
 /turf/open/floor/plating/vampplating/stone,
 /area/vtm/interior/bianchiBank)
+"iIC" = (
+/mob/living/simple_animal/corpsestore/corpse3,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "iID" = (
 /obj/structure/chair/sofa/old/left{
 	color = "#525252"
@@ -41677,6 +41700,10 @@
 	color = "#d6b390"
 	},
 /area/vtm/interior/shop)
+"jBs" = (
+/mob/living/simple_animal/corpsestore/corpse4,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "jBF" = (
 /obj/structure/closet,
 /obj/item/clothing/mask/vampire/balaclava,
@@ -47813,6 +47840,10 @@
 	},
 /turf/open/floor/plating/rough/cave,
 /area/vtm/sewer)
+"kWE" = (
+/mob/living/simple_animal/corpsestore/corpse5,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "kWG" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 8
@@ -67355,6 +67386,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	plane = -2
 	},
+/mob/living/simple_animal/corpsestore/corpse2,
 /turf/open/floor/plating/rough/cave,
 /area/vtm/interior/giovanni/basement)
 "pqg" = (
@@ -75747,6 +75779,13 @@
 /obj/structure/fluff/hedge,
 /turf/open/floor/plating/parquetry,
 /area/vtm/interior/millennium_tower/f2)
+"rlG" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
+/mob/living/simple_animal/corpsestore/corpse2,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "rlI" = (
 /obj/structure/railing/metal{
 	dir = 1
@@ -81937,6 +81976,13 @@
 	},
 /turf/closed/wall/vampwall/bar,
 /area/vtm/anarch/basement)
+"sMo" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 5
+	},
+/mob/living/simple_animal/corpsestore/corpse2,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "sMq" = (
 /obj/item/reagent_containers/food/drinks/beer/vampire{
 	pixel_y = 11;
@@ -83162,6 +83208,13 @@
 /obj/machinery/hydroponics/soil,
 /turf/open/floor/plating/vampdirt,
 /area/vtm/interior/cog/caern)
+"taX" = (
+/obj/effect/turf_decal/weather/dirt{
+	plane = -2
+	},
+/mob/living/simple_animal/corpsestore/corpse1,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "tbb" = (
 /turf/open/floor/plasteel/stairs{
 	dir = 1
@@ -99495,6 +99548,14 @@
 	},
 /turf/open/floor/plating/vampgrass,
 /area/vtm/interior/giovanni/outside)
+"wTo" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4;
+	plane = -2
+	},
+/obj/machinery/mineral/equipment_vendor/fastfood/necromancy,
+/turf/open/floor/plating/rough/cave,
+/area/vtm/interior/giovanni/basement)
 "wTp" = (
 /obj/structure/chair/wood/wings{
 	dir = 8
@@ -117024,8 +117085,8 @@ bnb
 gwJ
 hZj
 sfa
-qMX
-onW
+wTo
+dXd
 gPK
 bnb
 bnb
@@ -117224,10 +117285,10 @@ rCB
 bnb
 jAJ
 qTq
-qku
-bic
+cne
+taX
 sJz
-qku
+cne
 xPk
 nep
 bnb
@@ -117426,10 +117487,10 @@ rCB
 bnb
 lIF
 dGB
-qku
-uaT
+cne
+aKt
 wHE
-uaT
+aKt
 qMX
 vNn
 bnb
@@ -117628,8 +117689,8 @@ rCB
 bnb
 wqz
 ahB
-qku
-uaT
+cne
+iIC
 uaT
 bic
 sJz
@@ -117830,10 +117891,10 @@ rCB
 bnb
 egn
 iLV
-jJY
-uaT
-uaT
-vNn
+sMo
+jBs
+kWE
+rlG
 kgO
 egn
 bnb

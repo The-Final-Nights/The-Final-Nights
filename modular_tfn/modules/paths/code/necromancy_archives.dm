@@ -34,11 +34,16 @@
 /obj/machinery/mineral/equipment_vendor/fastfood/necromancy
 	name = "Necromantic Grimoire"
 	desc = "A sinister grimoire that trades necromantic knowledge and artifacts for the souls of the departed."
-	icon_state = "mining"
+	icon = 'code/modules/wod13/props.dmi'
+	icon_state = "grave1"
 	owner_needed = FALSE
 	dispenses_dollars = FALSE
 	prize_list = list(
-		// Empty for now
+	new /datum/data/mining_equipment("bat corpse",	/mob/living/simple_animal/corpsestore/corpse1,	1),
+	new /datum/data/mining_equipment("dog corpse",	/mob/living/simple_animal/corpsestore/corpse2,	2),
+	new /datum/data/mining_equipment("pile of bones",	/mob/living/simple_animal/corpsestore/corpse3,	3),
+	new /datum/data/mining_equipment("rotting corpse",	/mob/living/simple_animal/corpsestore/corpse4,	4),
+	new /datum/data/mining_equipment("bear corpse",	/mob/living/simple_animal/corpsestore/corpse5,	5),
 	)
 
 // NecromancyVendor.jsx in tgui/interfaces

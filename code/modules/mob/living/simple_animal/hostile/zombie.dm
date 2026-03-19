@@ -200,7 +200,35 @@
 	speak_emote = list("borks")
 	deathmessage = "falls apart in a pile of fur and bones!"
 
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4 //Tanky, but slowed bruiser. Maxhealth to summon: 70 to 150
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4 //weaker health and fast skeleton. Maxhealth to summon: 70 to 150
+	name = "Osso"
+	desc = "Bones puppeted by the forces of necrotic energies."
+	icon = 'code/modules/wod13/mobs.dmi'
+	icon_state = "skeleton"
+	icon_living = "skeleton"
+	speak_chance = 1
+	turns_per_move = 5
+	response_help_continuous = "shakes hands with"
+	response_help_simple = "shake hands with"
+	response_disarm_continuous = "pushes away"
+	response_disarm_simple = "push away"
+	response_harm_continuous = "punches"
+	response_harm_simple = "punch"
+	footstep_type = FOOTSTEP_MOB_BAREFOOT
+	speed = 0 //made of bones, they should be fast but weak to hit
+	maxHealth = 100 //two to three attacks with a dedicated melee weapon or 6 9mm bullets
+	health = 100
+	harm_intent_damage = 15
+	melee_damage_lower = 25
+	melee_damage_upper = 35
+	emote_see = list("shambles", "rattles")
+	attack_verb_continuous = "slashes"
+	attack_verb_simple = "slash"
+	attack_sound = 'code/modules/wod13/sounds/zombuzi.ogg'
+	speak_emote = list("rattle")
+	deathmessage = "bones turn into a pile of dust!"
+
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5 //Tanky, but slowed bruiser. Maxhealth to summon: 150 to 300
 	name = "verme"
 	desc = "Husk of a man, puppeteered by some sadistic force."
 	icon = 'code/modules/wod13/mobs.dmi'
@@ -228,7 +256,7 @@
 	speak_emote = list("rasps")
 	deathmessage = "decays away into fine paste!"
 
-/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5  //Chonkmaster, only really Tzimisce mobs can provide material for this. Maxhealth to summon: 150 and onward
+/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level6  //Chonkmaster, only really Tzimisce mobs can provide material for this. Maxhealth to summon: 150 and onward
 	name = "patrigno"
 	desc = "A nauseauting mountain of putrid flesh. On its face - a jolly smirk immortalized with rigor mortis."
 	icon = 'code/modules/wod13/mobs.dmi'
