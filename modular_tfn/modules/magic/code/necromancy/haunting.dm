@@ -41,10 +41,10 @@
 	if(possessed)
 		return
 	if(!(GLOB.ghost_role_flags & GHOSTROLE_STATION_SENTIENCE))
-		to_chat(user, "<span class='notice'>Anomalous otherworldly energies block you from capturing a wraith!</span>")
+		to_chat(user, span_notice("Anomalous otherworldly energies block you from capturing a wraith!"))
 		return
 
-	to_chat(user, "<span class='notice'>You attempt to trap a wraith into the scythe...</span>")
+	to_chat(user, span_notice("You attempt to trap a wraith into the scythe..."))
 
 	possessed = TRUE
 
@@ -65,11 +65,11 @@
 			name = input
 			S.fully_replace_character_name(null, "The spirit of [input]")
 	else
-		to_chat(user, "<span class='warning'>The scythe is dormant. Maybe you can try again later.</span>")
+		to_chat(user, span_notice("The scythe is dormant. Maybe you can try again later."))
 		possessed = FALSE
 
 /obj/item/melee/vampirearms/katana/kosa/possessed/Destroy()
 	for(var/mob/living/simple_animal/shade/S in contents)
-		to_chat(S, "<span class='userdanger'>You were destroyed!</span>")
+		to_chat(S, span_notice("You were destroyed!"))
 		qdel(S)
 	return ..()

@@ -219,8 +219,8 @@
 	maxHealth = 80 //two attacks with a dedicated melee weapon or 6 9mm bullets
 	health = 80
 	harm_intent_damage = 15
-	melee_damage_lower = 25
-	melee_damage_upper = 35
+	melee_damage_lower = 20
+	melee_damage_upper = 30
 	emote_see = list("shambles", "rattles")
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
