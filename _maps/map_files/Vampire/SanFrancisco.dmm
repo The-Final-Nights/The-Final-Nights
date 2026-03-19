@@ -5703,6 +5703,10 @@
 	},
 /turf/open/floor/plating/roofwalk,
 /area/vtm)
+"bpO" = (
+/obj/item/crusher_trophy/legion_skull,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "bpP" = (
 /obj/structure/toilet{
 	pixel_y = 16
@@ -11332,6 +11336,13 @@
 /obj/structure/vampdoor/wood,
 /turf/open/floor/plating/industrial,
 /area/vtm/interior)
+"cEF" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 4
+	},
+/obj/item/melee/vampirearms/katana/kosa,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "cEH" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -14496,6 +14507,13 @@
 	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm)
+"drP" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 4
+	},
+/obj/item/clothing/head/vampire/skull,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "drQ" = (
 /obj/structure/vampstatue/angel{
 	pixel_y = 11
@@ -25162,6 +25180,9 @@
 /area/vtm/interior/strip)
 "fPS" = (
 /obj/structure/table/wood/fancy/royalblack,
+/obj/item/corspestore/skull,
+/obj/item/corspestore/skull,
+/obj/item/corspestore/skull,
 /turf/open/floor/plating/woodfancy,
 /area/vtm/interior/giovanni)
 "fPU" = (
@@ -49591,6 +49612,13 @@
 "lqx" = (
 /turf/closed/wall/vampwall/painted,
 /area/vtm/interior/banu)
+"lqz" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 4
+	},
+/obj/item/shovel/serrated,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "lqJ" = (
 /obj/effect/landmark/start/citizen,
 /turf/open/floor/plating/toilet{
@@ -58856,6 +58884,13 @@
 /obj/effect/gibspawner/human,
 /turf/open/floor/plating/vampcanalplating,
 /area/vtm/sewer)
+"nvO" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 8
+	},
+/obj/item/corspestore/skull,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "nvQ" = (
 /obj/structure/table/wood,
 /obj/structure/bookcase/random/religion{
@@ -68906,6 +68941,13 @@
 	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/interior/laundromat)
+"pIg" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 4
+	},
+/obj/item/melee/vampirearms/baseball/hand,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "pIA" = (
 /obj/structure/vampdoor/wood/giovanni/high_security,
 /turf/open/floor/plating/woodfancy,
@@ -71611,6 +71653,13 @@
 /obj/effect/landmark/npcbeacon,
 /turf/open/floor/plating/sidewalk,
 /area/vtm/financialdistrict/library)
+"qoG" = (
+/obj/effect/turf_decal/siding/wideplating/dark{
+	dir = 4
+	},
+/obj/item/nullrod/scythe/talking,
+/turf/open/floor/plating/woodfancy,
+/area/vtm/interior/giovanni)
 "qoI" = (
 /obj/structure/table,
 /obj/item/paper_bin{
@@ -158296,7 +158345,7 @@ ydi
 baO
 nIQ
 boi
-nIQ
+bpO
 vhO
 nIQ
 baO
@@ -158496,11 +158545,11 @@ ijU
 gti
 dkv
 cKf
-cKf
-cKf
-cKf
-cKf
-cKf
+qoG
+pIg
+cEF
+lqz
+drP
 cKf
 dTH
 pgE
@@ -159304,7 +159353,7 @@ ijU
 ntp
 dIi
 mSY
-mSY
+nvO
 mSY
 mSY
 mSY

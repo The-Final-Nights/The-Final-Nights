@@ -39,11 +39,14 @@
 	owner_needed = FALSE
 	dispenses_dollars = FALSE
 	prize_list = list(
-	new /datum/data/mining_equipment("bat corpse",	/mob/living/simple_animal/corpsestore/corpse1,	1),
+	new /datum/data/mining_equipment("bat corpse",	/mob/living/simple_animal/corpsestore/corpse1,	1,),
 	new /datum/data/mining_equipment("dog corpse",	/mob/living/simple_animal/corpsestore/corpse2,	2),
 	new /datum/data/mining_equipment("pile of bones",	/mob/living/simple_animal/corpsestore/corpse3,	3),
 	new /datum/data/mining_equipment("rotting corpse",	/mob/living/simple_animal/corpsestore/corpse4,	4),
 	new /datum/data/mining_equipment("bear corpse",	/mob/living/simple_animal/corpsestore/corpse5,	5),
+	new /datum/data/mining_equipment("skull",	/obj/item/corspestore/skull,	2,),
+	new /datum/data/mining_equipment("ripped arm",	/obj/item/melee/vampirearms/baseball/hand,	2,),
+	new /datum/data/mining_equipment("scythe",	/obj/item/melee/vampirearms/katana/kosa,	3,),
 	)
 
 // NecromancyVendor.jsx in tgui/interfaces

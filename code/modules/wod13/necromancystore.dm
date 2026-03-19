@@ -45,3 +45,13 @@
 	maxHealth = 500
 	health = 1
 	stat = DEAD
+
+/obj/item/corpsestore
+	name = "corpsestore"
+	icon_state = "legion_skull"
+
+/obj/item/corspestore/skull
+	name = "empty skull"
+	desc = "A skull, empty and void of life."
+	icon = 'icons/obj/lavaland/artefacts.dmi'
+	icon_state = "legion_skull"
