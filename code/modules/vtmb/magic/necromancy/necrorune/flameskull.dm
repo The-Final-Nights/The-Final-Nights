@@ -7,38 +7,26 @@
 	word = "OR-IRI O FLAM-MEUM CERE-BRUM"
 	necrolevel = 3
 	sacrifices = list(/obj/item/corspestore/skull)
+	var/duration_length = 10 SECONDS
 
 /obj/necrorune/flameskull/complete()
 	var/mob/living/carbon/human/H = last_activator
-	var/dice = (last_activator.st_get_stat(STAT_WITS) + last_activator.st_get_stat(STAT_OCCULT))
-
-	var/roll = SSroll.storyteller_roll(dice, 6, FALSE, last_activator)
-
-	if(roll == ROLL_SUCCESS)
-		if(!length(H.beastmaster))
-			var/datum/action/beastmaster_stay/E1 = new()
-			E1.Grant(last_activator)
-			var/datum/action/beastmaster_deaggro/E2 = new()
-			E2.Grant(last_activator)
-		var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/flamingskull/BG = new(loc)
-		BG.beastmaster_owner = last_activator
-		H.beastmaster |= BG
-		BG.my_creator = last_activator
-		BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus
-		BG.melee_damage_upper = BG.melee_damage_upper+activator_bonus
-		playsound(loc, 'code/modules/wod13/sounds/necromancy1on.ogg', 50, FALSE)
-		if(length(H.beastmaster) > H.st_get_stat(STAT_OCCULT))
-			var/mob/living/simple_animal/hostile/beastmaster/B = pick(H.beastmaster)
-			B.death()
-		qdel(src)
-
-	else if(roll == ROLL_FAILURE)
-		qdel(src)
-
-	else if(roll == ROLL_BOTCH)
-		to_chat(last_activator, span_warning("You lose control over the ritual!"))
-		last_activator.apply_damage(30, CLONE)
-		qdel(src)
+	if(!length(H.beastmaster))
+		var/datum/action/beastmaster_stay/E1 = new()
+		E1.Grant(last_activator)
+		var/datum/action/beastmaster_deaggro/E2 = new()
+		E2.Grant(last_activator)
+	var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/flamingskull/BG = new(loc)
+	BG.beastmaster_owner = last_activator
+	H.beastmaster |= BG
+	BG.my_creator = last_activator
+	BG.melee_damage_lower = BG.melee_damage_lower+activator_bonus
+	BG.melee_damage_upper = BG.melee_damage_upper+activator_bonus
+	playsound(loc, 'code/modules/wod13/sounds/necromancy1on.ogg', 50, FALSE)
+	if(length(H.beastmaster) > H.st_get_stat(STAT_OCCULT))
+		var/mob/living/simple_animal/hostile/beastmaster/B = pick(H.beastmaster)
+		B.death()
+	qdel(src)
 
 /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/flamingskull
 	name = "flaming skull"

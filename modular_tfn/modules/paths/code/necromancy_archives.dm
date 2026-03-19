@@ -32,8 +32,8 @@
 
 
 /obj/machinery/mineral/equipment_vendor/fastfood/necromancy
-	name = "Necromantic Grimoire"
-	desc = "A sinister grimoire that trades necromantic knowledge and artifacts for the souls of the departed."
+	name = "Ominous Grave Stone"
+	desc = "A sinister looking gravestone, the air around it is cold to the touch."
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "grave1"
 	owner_needed = FALSE

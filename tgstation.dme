@@ -3585,6 +3585,7 @@
 #include "code\modules\vtmb\magic\necromancy\necrorune\death.dm"
 #include "code\modules\vtmb\magic\necromancy\necrorune\fireprotection.dm"
 #include "code\modules\vtmb\magic\necromancy\necrorune\flameskull.dm"
+#include "code\modules\vtmb\magic\necromancy\necrorune\haunting.dm"
 #include "code\modules\vtmb\magic\necromancy\necrorune\insight.dm"
 #include "code\modules\vtmb\magic\necromancy\necrorune\locate.dm"
 #include "code\modules\vtmb\magic\necromancy\necrorune\truth.dm"
