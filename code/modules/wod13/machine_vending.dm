@@ -274,7 +274,6 @@
 		new /datum/data/mining_equipment("flashlight", /obj/item/flashlight, 1),
 		new /datum/data/mining_equipment("magnifier", /obj/item/detective_scanner, 2),
 		new /datum/data/mining_equipment("body bags", /obj/item/storage/box/bodybags, 5),
-		new /datum/data/mining_equipment("sandbag box", /obj/item/storage/box/emptysandbags, 25),
 		new /datum/data/mining_equipment("police vest", /obj/item/clothing/suit/vampire/vest/police, 5),
 		new /datum/data/mining_equipment("leather holster", /obj/item/storage/belt/holster/detective/vampire, 5),
 		new /datum/data/mining_equipment("duty belt", /obj/item/storage/belt/police, 5),
