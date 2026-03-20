@@ -48,7 +48,7 @@
 	new /datum/data/mining_equipment("ripped arm",	/obj/item/melee/vampirearms/baseball/hand,	2,),
 	new /datum/data/mining_equipment("soulsteel dagger",	/obj/item/melee/vampirearms/knife/soulsteel,	2,),
 	new /datum/data/mining_equipment("scythe",	/obj/item/melee/vampirearms/katana/kosa,	3,),
-	new /datum/data/mining_equipment("oboli",	/obj/item/oboli,	1,),
+	new /datum/data/mining_equipment("oboli",	/obj/item/coin/oboli,	1,),
 	)
 
 // NecromancyVendor.jsx in tgui/interfaces
