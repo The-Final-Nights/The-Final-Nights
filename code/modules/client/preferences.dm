@@ -1266,6 +1266,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/datum/loadout_category/LC = GLOB.loadout_categories[gear_tab]
 			dat += "<tr><td colspan=4><hr></td></tr>"
 			dat += "<tr><td colspan=4><b><center>[LC.category]</center></b></td></tr>"
+			if(LC.category == "Donator" && !user.client?.prefs?.donator)
+				dat += "<tr><td colspan=4><i><center>You must be a donator (https://thefinalnights.com/donate) to use these items.</center></i></td></tr>"
+				dat += "<tr><td colspan=4><i><center>If you have already donated, use the ?verifydonator command in Discord followed by your ckey and rejoin for it to update your status.</center></i></td></tr>"
+			else if(LC.category == "Donator" && user.client?.prefs?.donator)
+				dat += "<tr><td colspan=4><i><center><span>Thank you for donating! \<3</span></center></i></td></tr>"
 			dat += "<tr><td colspan=4><hr></td></tr>"
 
 			dat += "<tr><td colspan=4><hr></td></tr>"
@@ -1283,7 +1288,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 					dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Unequip" : "Equip") + "</a></td>"
 				else
 					dat += "<a style='white-space:normal;' href='?_src_=prefs;preference=gear;purchase_gear=[G.display_name]'>Purchase</a>"
-					if(G.sort_category != "General")
+					if(G.sort_category != "General" && G.sort_category != "Donator")
 						dat += "<a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?_src_=prefs;preference=gear;toggle_gear=[G.display_name]'>" + (ticked ? "Stop Preview" : "Preview") + "</a></td>"
 				dat += "<td width = 5% style='vertical-align:top;'>[G.cost]</td><td>"
 
@@ -2164,7 +2169,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 						if(G.subtype_path in type_blacklist)
 							continue
 						type_blacklist += G.subtype_path
-				if(!(TG.subtype_path in type_blacklist) && !(TG.slot in slot_blacklist) || TG.sort_category == "General")
+				if(!(TG.subtype_path in type_blacklist) && !(TG.slot in slot_blacklist) || TG.sort_category == "General" || TG.sort_category == "Donator")
 					equipped_gear += TG.display_name
 				else
 					tgui_alert(user, "Can't equip [TG.display_name]. It conflicts with an already-equipped item.")

@@ -25,7 +25,7 @@
 	wings_icon = "Dragon"
 	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "wings" = "None")
 	mutantbrain = /obj/item/organ/brain/vampire
-	brutemod = 0.5	// or change to 0.8
+	brutemod = 1	//Base damage - see damage_resistance check for when brute damage gets reduced
 	heatmod = 1		//Sucking due to overheating	///THEY DON'T SUCK FROM FIRE ANYMORE
 	burnmod = 2
 	punchdamagelow = 10
@@ -224,6 +224,9 @@
 	//vampires resist vampire bites better than mortals
 	RegisterSignal(C, COMSIG_MOB_VAMPIRE_SUCKED, PROC_REF(on_vampire_bitten))
 
+	//apply blunt damage resistance
+	RegisterSignal(C, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_resistance))
+
 	//putting this here for now not sure if elsewhere is better?
 	RegisterSignal(C, COMSIG_ADD_VITAE, PROC_REF(add_vitae_from_item))
 
@@ -372,8 +375,19 @@
 			temp_antag.add_antag_hud(ANTAG_HUD_REV, "rev", childe)
 			qdel(temp_antag)
 			log_game("[key_name(sire)] has spread Sabbatism to [key_name(childe)] via vitae.")
+		if(isnpc(childe))
+			var/mob/living/carbon/human/npc/shovelhead = childe
+			var/list/shovel_messages = list(
+			"You force your blood down [shovelhead]'s throat and drive them to wassail.",
+			"Your blood seeps into [shovelhead]'s veins. As you force wassail to take hold, the Beast claims what remains.",
+			"You perform the Embrace and push [shovelhead] into wassail. They are yours... For now.",
+			"[shovelhead] dies and rises again as a shovelhead born from your blood.")
+			to_chat(sire, span_cult(pick(shovel_messages)))
+			shovelhead.make_shovelhead(sire.clan.type)
+			shovelhead.revive(full_heal = TRUE, admin_revive = TRUE)
+			log_game("[key_name(sire)] has created an NPC shovelhead via vitae.")
 
-	if(iskindred(childe)) //Cant do much to kindred other than try and  bond them.
+	if(iskindred(childe)) //Cant do much to kindred other than try and bond them.
 		var/datum/species/kindred/species = childe.dna.species
 		if(HAS_TRAIT(childe, TRAIT_TORPOR) && COOLDOWN_FINISHED(species, torpor_timer))
 			childe.untorpor()
@@ -389,7 +403,7 @@
 		ghoul.master = sire
 		return
 
-	if(isnpc(childe))
+	if(isnpc(childe) && !is_sabbatist(sire))
 		var/mob/living/carbon/human/npc/NPC = childe
 		NPC.npc_ghoulificate(sire)
 		return
@@ -725,3 +739,10 @@
 		H.update_blood_hud()
 	if(plays_sound)
 		playsound(H.loc,'sound/items/drink.ogg', 50, TRUE)
+
+//Kindred take half "bashing" damage, which is normally blunt damage but also includes pointy things like bullets because they're undead
+/datum/species/kindred/proc/damage_resistance(datum/source, list/damage_mods, damage_amount, damagetype, def_zone, sharpness, attack_direction, obj/item/attacking_item)
+	SIGNAL_HANDLER
+
+	if((damagetype == BRUTE) && (sharpness != SHARP_EDGED))
+		damage_mods += 0.5

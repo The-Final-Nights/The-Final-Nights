@@ -1,0 +1,42 @@
+2026-03-05:
+  Stutternov:
+  - qol: MobBump/'swap place' movement now accounts for both user's combat mode, not
+      only the initiating user.
+  - qol: Tidied up code a little bit with MobBump
+2026-03-06:
+  Knightscholar:
+  - map: Fully remapped the Toreador Domain.
+2026-03-12:
+  lobotomypilled:
+  - balance: 'halved the damage of Thaumaturgy''s fifth dot power, cauldron of blood
+
+      :cl:'
+2026-03-13:
+  Stutternov:
+  - balance: Redid Artifact's Brute/burn mods into DR, changed the way it caps
+  - balance: Changed Fortitude a bit to make sure you don't go over a certain cap
+  - balance: Viss now has masq breeches on cenipede legs and bone armor
+  - balance: Viss armors have been halved
+  buffyuwu:
+  - qol: bloody footprints no longer create bloody footprints. only blood pools do
+      now
+  - qol: npcs will now path away from blood pools. because normal people dont go near
+      corpses/blood
+  - refactor: blood pools now expire overtime, and slowly fade over the course of
+      10 minutes rather than lasting forever. This is to avoid the city looking like
+      a blood bath because a janitor isnt on, while still giving the janitor plenty
+      of time to find and clean the blood
+  - refactor: blood now 'dries' by changing to the dark sprite in 1 minute instead
+      of 15 seconds, giving players a better understanding if blood is actually fresh
+      or not
+  - qol: you will only do damage or get bloody if you are attacking people in combat
+      mode. meaning you can now annoy your friends by spamming them with plushies!
+  - refactor: refined sabbat shovelheads. now sabbat players can embrace any npc to
+      create shovelheads
+  - bugfix: shovelheads now have combat stats
+  - bugfix: shovelheads will no longer jump at walls forever or track players through
+      walls
+2026-03-18:
+  buffyuwu:
+  - rscadd: Donators can now have a loadout menu with several donator exclusive items
+      to spawn. including a pet crate, plushie pack, skateboards, and more!

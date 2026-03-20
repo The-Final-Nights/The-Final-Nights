@@ -188,14 +188,15 @@
 	if(QDELETED(wielder) || is_obscured())
 		return
 
-	if(istype(pool, /obj/effect/decal/cleanable/blood/footprints) && pool.blood_state == last_blood_state)
-		// The pool we stepped in was actually footprints with the same type
-		var/obj/effect/decal/cleanable/blood/footprints/pool_FP = pool
-		add_parent_to_footprint(pool_FP)
-		if((bloody_shoes[last_blood_state] / 2) >= BLOOD_FOOTPRINTS_MIN && !(pool_FP.entered_dirs & wielder.dir))
-			// If our feet are bloody enough, add an entered dir
-			pool_FP.entered_dirs |= wielder.dir
-			pool_FP.update_appearance()
+	if(istype(pool, /obj/effect/decal/cleanable/blood/footprints))
+		if(pool.blood_state == last_blood_state && prob(50))
+			var/obj/effect/decal/cleanable/blood/footprints/bloodyfeets = pool
+			add_parent_to_footprint(bloodyfeets)
+			if((bloody_shoes[last_blood_state] / 2) >= BLOOD_FOOTPRINTS_MIN && !(bloodyfeets.entered_dirs & wielder.dir))
+				bloodyfeets.entered_dirs |= wielder.dir
+				bloodyfeets.update_appearance()
+		last_pickup = world.time
+		return
 
 	share_blood(pool)
 

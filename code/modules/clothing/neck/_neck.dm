@@ -249,6 +249,7 @@
 	desc = "It's for pets."
 	icon_state = "petcollar"
 	var/tagname = null
+	var/tagdesc = null
 
 /obj/item/clothing/neck/petcollar/mob_can_equip(mob/M, mob/equipper, slot, disable_warning = 0)
 	if(ishuman(M))
@@ -256,8 +257,9 @@
 	return ..()
 
 /obj/item/clothing/neck/petcollar/attack_self(mob/user)
-	tagname = sanitize_name(stripped_input(user, "Would you like to change the name on the tag?", "Name your new pet", "Spot", MAX_NAME_LEN))
-	name = "[initial(name)] - [tagname]"
+	tagname = sanitize_name(tgui_input_text(user, "Would you like to change the name on the tag?", "Name your new pet", "Spot", MAX_NAME_LEN))
+	tagdesc = sanitize_name(tgui_input_text(user, "Would you like to change the pet's examine description?", "Set custom examine text", "A fluffy little guy with a wet nose.", MAX_FLAVOR_LEN))
+	to_chat(user, span_notice("You change the name on the collar to '[tagname]' which will also apply the examine description: \n '[tagdesc]'."))
 
 //////////////
 //DOPE BLING//

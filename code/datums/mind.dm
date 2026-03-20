@@ -257,6 +257,7 @@
 	if(!A.can_be_owned(src))
 		qdel(A)
 		return
+	A.was_assigned = TRUE // its always faster to switch to your antag datum than it is to reload
 	A.owner = src
 	LAZYADD(antag_datums, A)
 	A.create_team(team)

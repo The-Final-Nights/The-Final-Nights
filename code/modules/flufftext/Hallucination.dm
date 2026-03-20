@@ -70,7 +70,7 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		if(!malk)
 			halpick = pickweight(GLOB.malk_hallucinations)
 
-		if(malk.derangement)
+		if(malk?.derangement)
 			halpick = pickweight(GLOB.malk_hallucinations_extreme)
 		else
 			halpick = pickweight(GLOB.malk_hallucinations)

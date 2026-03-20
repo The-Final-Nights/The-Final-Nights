@@ -6,6 +6,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/show_in_roundend = TRUE								//Set to false to hide the antagonists from roundend report
 	var/prevent_roundtype_conversion = TRUE		//If false, the roundtype will still convert with this antag active
 	var/datum/mind/owner						//Mind that owns this datum
+	var/was_assigned = FALSE					//Set to TRUE once owner is assigned, so Destroy() can shut the frog up
 	var/silent = FALSE							//Silent will prevent the gain/lose texts to show
 	var/can_coexist_with_others = TRUE			//Whether or not the person will be able to have more than one datum
 	var/list/typecache_datum_blacklist = list()	//List of datums this type can't coexist with
@@ -33,7 +34,8 @@ GLOBAL_LIST_EMPTY(antagonists)
 /datum/antagonist/Destroy()
 	GLOB.antagonists -= src
 	if(!owner)
-		stack_trace("Destroy()ing antagonist datum when it has no owner.")
+		if(was_assigned)
+			stack_trace("Destroy()ing antagonist datum when it has no owner!")
 	else
 		LAZYREMOVE(owner.antag_datums, src)
 	owner = null

@@ -88,6 +88,7 @@
 	name = "\improper corgi"
 	real_name = "corgi"
 	desc = "It's a corgi."
+	icon = 'icons/mob/pets.dmi'
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
