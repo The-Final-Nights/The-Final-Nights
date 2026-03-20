@@ -73,7 +73,7 @@
 	name = "brass knuckles"
 	desc = "A set of tarnished brass rings fused together to create a cruel weapon for back-alley brawls. Illegal in most places."
 	icon_state = "brassknuckles"
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 70)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 0)
 
 /obj/item/clothing/gloves/vampire/brassknuckles/equipped(mob/living/carbon/human/user, slot)
 	..()
@@ -95,7 +95,7 @@
 	name = "spiked steel knuckles"
 	desc = "A set of tarnished steel rings fused together and topped with piercing metal spikes. Illegal in most places."
 	icon_state = "spikedknuckles"
-	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 70)
+	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 0, ACID = 0)
 
 /obj/item/clothing/gloves/vampire/spikedknuckles/equipped(mob/living/carbon/human/user, slot)
 	..()
