@@ -263,7 +263,7 @@
 		owner.visible_message(span_warning("[owner] gestures over [target]'s carcass."))
 		target.visible_message(span_danger("[target] twitches and rises, puppeteered by an invisible force."))
 		if(iscarbon(target))
-			var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
+			var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5(owner.loc)
 			zombie.my_creator = owner
 			owner.beastmaster |= zombie
 			zombie.beastmaster_owner = owner
@@ -276,25 +276,25 @@
 					owner.beastmaster |= zombie
 					zombie.beastmaster_owner = owner
 					qdel(target)
-				if (20 to 70) //cats and whatnot
+				if (20 to 40) //cats and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level3(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
 					zombie.beastmaster_owner = owner
 					qdel(target)
-				if (70 to 99) //humans and whatnot
+				if (40 to 60) //piles of bones
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level4(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
 					zombie.beastmaster_owner = owner
 					qdel(target)
-				if (100 to 300) //dogs/biters and whatnot
+				if (60 to 150) //humans and what not
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level5(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie
 					zombie.beastmaster_owner = owner
 					qdel(target)
-				if (300 to INFINITY) //szlachta and whatnot
+				if (150 to INFINITY) //szlachta and whatnot
 					var/mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/zombie = new /mob/living/simple_animal/hostile/beastmaster/giovanni_zombie/level6(owner.loc)
 					zombie.my_creator = owner
 					owner.beastmaster |= zombie

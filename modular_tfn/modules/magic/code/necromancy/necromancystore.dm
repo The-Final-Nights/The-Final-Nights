@@ -10,7 +10,7 @@
 	name = "bat corpse"
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "bat_dead"
-	maxHealth = 19
+	maxHealth = 15
 	health = 1
 	stat = DEAD
 
@@ -18,7 +18,7 @@
 	name = "dog corpse"
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "dog_dead"
-	maxHealth = 69
+	maxHealth = 30
 	health = 1
 	stat = DEAD
 
@@ -26,7 +26,7 @@
 	name = "bone pile"
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "skeleton_dead"
-	maxHealth = 99
+	maxHealth = 60
 	health = 1
 	stat = DEAD
 
@@ -34,7 +34,7 @@
 	name = "rotting corpse"
 	icon = 'code/modules/wod13/mobs.dmi'
 	icon_state = "zombieup_dead"
-	maxHealth = 299
+	maxHealth = 120
 	health = 1
 	stat = DEAD
 

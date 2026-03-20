@@ -32,7 +32,7 @@
 
 
 /obj/machinery/mineral/equipment_vendor/fastfood/necromancy
-	name = "Ominous Grave Stone"
+	name = "Ominous Gravestone"
 	desc = "A sinister looking gravestone, the air around it is cold to the touch."
 	icon = 'code/modules/wod13/props.dmi'
 	icon_state = "grave1"

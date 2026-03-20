@@ -15,10 +15,11 @@
 	qdel(src)
 
 /obj/item/melee/vampirearms/katana/kosa/possessed
-	name = "possessed scythe"
-	desc = "A scythe turned into a prison, the item capable of binding a wraith into the item and locking it away from the rest of the world."
+	name = "soulsteel scythe"
+	desc = "A scythe turned into a prison, this weapon has bound a Wraith within and locked it away from the rest of the world."
 	icon = 'code/modules/wod13/weapons.dmi'
 	icon_state = "kosa"
+	color = "#808080"
 	force = 45
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = null
