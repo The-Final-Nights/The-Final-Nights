@@ -59904,6 +59904,9 @@
 /obj/item/kirbyplants{
 	icon_state = "plant-18"
 	},
+/obj/structure/sign/painting/library{
+	pixel_y = 32
+	},
 /turf/open/floor/plating/parquetry/old,
 /area/vtm/graveyard/interior)
 "nFW" = (
@@ -91772,6 +91775,10 @@
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/floor/plating/industrial,
 /area/vtm/clinic/haven)
+"uUE" = (
+/obj/effect/decal/wallpaper/paper/green,
+/turf/closed/wall/vampwall/rich/old,
+/area/vtm/graveyard/interior)
 "uUF" = (
 /obj/structure/chair/sofa/old/left{
 	color = "#004136";
@@ -151274,7 +151281,7 @@ oWx
 lzS
 hSv
 whz
-whz
+uUE
 ujo
 whz
 whz
@@ -151677,7 +151684,7 @@ kKV
 lzS
 daY
 daY
-whz
+uUE
 hPa
 sBq
 sBq
@@ -152082,7 +152089,7 @@ fVY
 xyn
 sps
 whz
-whz
+uUE
 gVH
 whz
 whz
