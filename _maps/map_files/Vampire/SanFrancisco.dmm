@@ -2833,7 +2833,7 @@
 /area/vtm/interior/cog/caern)
 "aFj" = (
 /turf/closed/wall/vampwall/rich/old/low/window,
-/area/vtm/graveyard)
+/area/vtm/graveyard/interior)
 "aFo" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/food/drinks/coffee/vampire{
@@ -17462,7 +17462,7 @@
 	pixel_x = -32
 	},
 /turf/open/floor/plating/bacotell,
-/area/vtm/graveyard)
+/area/vtm/graveyard/interior)
 "ecK" = (
 /obj/effect/turf_decal/siding/wideplating{
 	color = "#802d29";
@@ -35686,8 +35686,7 @@
 /turf/open/floor/plating/concrete,
 /area/vtm/interior/police/court)
 "ijk" = (
-/obj/effect/decal/wallpaper/paper/stripe,
-/turf/closed/wall/vampwall/rich/old,
+/turf/closed/wall/vampwall/rock,
 /area/vtm/graveyard)
 "ijn" = (
 /obj/structure/table,
@@ -59906,7 +59905,7 @@
 	icon_state = "plant-18"
 	},
 /turf/open/floor/plating/parquetry/old,
-/area/vtm/graveyard)
+/area/vtm/graveyard/interior)
 "nFW" = (
 /obj/structure/fire_barrel,
 /turf/open/floor/plating/stone,
@@ -60479,9 +60478,6 @@
 /area/vtm/clinic/haven)
 "nLW" = (
 /obj/machinery/mineral/equipment_vendor/fastfood/necromancy,
-/obj/effect/decal/wallpaper/stone/low{
-	pixel_y = 24
-	},
 /turf/open/floor/plating/vampdirt,
 /area/vtm/graveyard)
 "nLY" = (
@@ -78086,7 +78082,7 @@
 	pixel_y = 9
 	},
 /turf/open/floor/plating/bacotell,
-/area/vtm/graveyard)
+/area/vtm/graveyard/interior)
 "rLK" = (
 /obj/structure/vampdoor/simple,
 /turf/open/floor/plating/toilet,
@@ -90058,7 +90054,7 @@
 	pixel_x = -32
 	},
 /turf/open/floor/plating/bacotell,
-/area/vtm/graveyard)
+/area/vtm/graveyard/interior)
 "uAJ" = (
 /obj/machinery/light{
 	pixel_y = 32
@@ -147839,7 +147835,7 @@ vIp
 rCB
 uvs
 uvs
-msi
+ijk
 oWx
 jeD
 uvs
@@ -150277,12 +150273,12 @@ jeD
 puz
 ryD
 oWx
-dNg
-dNg
+whz
+whz
 aFj
 aFj
-dNg
-dNg
+whz
+whz
 pUu
 qYl
 dSH
@@ -150479,12 +150475,12 @@ iUX
 oWx
 oWx
 iUX
-ijk
+gmh
 nFQ
 uAI
 ecG
 rLG
-dNg
+whz
 lLR
 qYl
 dSH

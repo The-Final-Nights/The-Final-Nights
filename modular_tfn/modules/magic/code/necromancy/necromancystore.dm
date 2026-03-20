@@ -76,7 +76,7 @@
 
 /obj/item/coin/oboli/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/selling, 500, "Oboli", TRUE, -1, 4)
+	AddComponent(/datum/component/selling, 300, "Oboli", TRUE, -1, 4)
 
 /obj/item/melee/vampirearms/knife/soulsteel
 	name = "soulsteel dagger"
