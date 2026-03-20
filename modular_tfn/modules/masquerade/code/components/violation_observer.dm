@@ -25,7 +25,7 @@
 /datum/component/violation_observer/proc/on_observed_violation(atom/source, mob/living/player_breacher)
 	SIGNAL_HANDLER
 
-	if(!source || !player_breacher || ishumanbasic(player_breacher)) //Humans cant break the masquerade. Because reasons.
+	if(!source || !player_breacher || ishumanbasic(player_breacher) || HAS_TRAIT(player_breacher, TRAIT_SABBATIST)) // so shovelheads cant tank the masq
 		return
 
 	if(isliving(source))
@@ -33,7 +33,8 @@
 		if(!mob_parent.incapacitated(ignore_restraints = 1))
 			mob_parent.face_atom(player_breacher)
 	source.observe_masquerade_violation(player_breacher)
-	source.AddComponent(/datum/component/masquerade_hud, player_breacher)
+	if(player_breacher.client)
+		source.AddComponent(/datum/component/masquerade_hud, player_breacher)
 
 	breached_players |= player_breacher
 	SSmasquerade.masquerade_breach(source, player_breacher, (isliving(source) ? MASQUERADE_REASON_NPC : MASQUERADE_REASON_OBJECT))

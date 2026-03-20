@@ -297,6 +297,7 @@
 	var/frenzy_hardness = 6
 	var/last_frenzy_check = 0
 	var/mob/living/frenzy_target = null
+	var/they_can_move = FALSE // for mob bumps
 
 
 	//If we are currently leaning on something, and what that object is

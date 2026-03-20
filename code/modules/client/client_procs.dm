@@ -696,6 +696,21 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		qdel(src)
 		return
 	qdel(query_get_player_age_verified)
+
+	var/datum/db_query/query_get_player_donator = SSdbcore.NewQuery(
+		"SELECT donator FROM [format_table_name("player")] WHERE ckey = :ckey AND donator = 1",
+		list("ckey" = src.ckey)
+	)
+	if(!query_get_player_donator.Execute())
+		qdel(query_get_player_donator)
+		return
+	if(!query_get_player_donator.NextRow())
+		qdel(query_get_player_donator)
+		return
+	to_chat(src, span_hypnophrase("Donator status verified. Thank you for your support!"))
+	prefs.donator = TRUE
+	prefs.save_preferences()
+	qdel(query_get_player_donator)
 	//TFN EDIT END
 
 	SSserver_maint.UpdateHubStatus()

@@ -108,7 +108,7 @@
 	if(now_pushing)
 		return TRUE
 
-	var/they_can_move = TRUE
+	they_can_move = TRUE
 	if(isliving(M))
 		var/mob/living/L = M
 		they_can_move = L.mobility_flags & MOBILITY_MOVE
@@ -193,7 +193,7 @@
 	if (HAS_TRAIT(other, TRAIT_NOMOBSWAP) || HAS_TRAIT(src, TRAIT_NOMOBSWAP))
 		return FALSE
 
-	var/they_can_move = TRUE
+	they_can_move = TRUE
 	var/their_combat_mode = FALSE
 
 	if(isliving(other))

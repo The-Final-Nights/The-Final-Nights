@@ -1273,6 +1273,7 @@
 	if(prob(66))
 		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/police)
+	can_be_spooked = FALSE
 
 /datum/socialrole/endronsecurity
 	s_tones = list(
@@ -1382,6 +1383,7 @@
 	if(prob(66))
 		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/endronsecurity)
+	can_be_spooked = FALSE
 
 /datum/socialrole/endronlabsecurity
 	s_tones = list(
@@ -1489,6 +1491,7 @@
 /mob/living/carbon/human/npc/endronlabsecurity/Initialize()
 	. = ..()
 	AssignSocialRole(/datum/socialrole/endronlabsecurity)
+	can_be_spooked = FALSE
 
 /datum/socialrole/endronexecsecurity
 	s_tones = list(
@@ -1596,6 +1599,7 @@
 /mob/living/carbon/human/npc/endronexecsecurity/Initialize()
 	. = ..()
 	AssignSocialRole(/datum/socialrole/endronexecsecurity)
+	can_be_spooked = FALSE
 
 /datum/socialrole/guard
 	s_tones = list(
@@ -1700,6 +1704,7 @@
 	if(prob(66))
 		set_body_model(FAT_BODY_MODEL)
 	AssignSocialRole(/datum/socialrole/guard)
+	can_be_spooked = FALSE
 
 /mob/living/carbon/human/npc/walkby/club/Life()
 	. = ..()
@@ -1896,3 +1901,4 @@
 /mob/living/carbon/human/npc/illegal/Initialize()
 	. = ..()
 	AssignSocialRole(/datum/socialrole/shop/illegal)
+	can_be_spooked = FALSE

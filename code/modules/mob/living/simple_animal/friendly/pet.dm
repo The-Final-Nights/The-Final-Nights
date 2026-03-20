@@ -19,18 +19,24 @@
 		return
 	pcollar = P
 	regenerate_icons()
-	to_chat(user, "<span class='notice'>You put the [P] around [src]'s neck.</span>")
-	if(P.tagname && !unique_pet)
+	to_chat(user, span_notice("You put the [P] around [src]'s neck."))
+	if(P.tagname)
 		fully_replace_character_name(null, "\proper [P.tagname]")
+	if(P.tagdesc)
+		desc = "[P.tagdesc]"
 
 /mob/living/simple_animal/pet/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/clothing/neck/petcollar) && !pcollar)
+		var/obj/item/clothing/neck/petcollar/collar = O
+		if(!collar.tagname)
+			to_chat(user, span_notice("Use the collar in-hand to give your pet a name!"))
+			return
 		add_collar(O, user)
 		return
 
 	if(istype(O, /obj/item/newspaper))
 		if(!stat)
-			user.visible_message("<span class='notice'>[user] baps [name] on the nose with the rolled up [O].</span>")
+			user.visible_message(span_notice("[user] baps [name] on the nose with the rolled up [O]."))
 			dance_rotate(src)
 	else
 		..()

@@ -75,5 +75,7 @@
 		return
 	if(!COOLDOWN_FINISHED(source, masquerade_timer))
 		return
+	if(HAS_TRAIT(host_mob, TRAIT_SABBATIST))
+		return
 	COOLDOWN_START(source, masquerade_timer, 10 SECONDS)
 	SEND_SIGNAL(host_mob, COMSIG_SEEN_MASQUERADE_VIOLATION, source)
