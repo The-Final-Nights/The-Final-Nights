@@ -15,25 +15,35 @@
 /mob/living/proc/calculate_max_bloodpool()
 	//recalculates maxbloodpool
 	var/generation_blood_bonus
-	switch(generation) //7th gen and lower scale in a manner that's hard to make an effective formula for. These probably won't get used much, if at all, but who knows?
-		if(8 to HIGHEST_GENERATION_LIMIT)
+	switch(generation)
+		if(13 to HIGHEST_GENERATION_LIMIT)	//Gen 13-16 get BP of only 10.
 			generation_blood_bonus = 0
+		if(12)
+			generation_blood_bonus = 1
+		if(11)
+			generation_blood_bonus = 2
+		if(10)
+			generation_blood_bonus = 3
+		if(9)
+			generation_blood_bonus = 4
+		if(8)
+			generation_blood_bonus = 5
 		if(7)
-			generation_blood_bonus = 12
+			generation_blood_bonus = 10
 			bloodquality += 1
 		if(6)
-			generation_blood_bonus = 39
+			generation_blood_bonus = 20
 			bloodquality += 2
 		if(5)
-			generation_blood_bonus = 56
+			generation_blood_bonus = 40
 			bloodquality += 3
 		if(4)
-			generation_blood_bonus = 93
+			generation_blood_bonus = 50
 			bloodquality += 4
 		if(1 to 3)
-			generation_blood_bonus = INFINITY
+			generation_blood_bonus = INFINITY	//Should be 100 but fuck it, includes gen 1 and 2.
 			bloodquality += 100
-	maxbloodpool = max(10 + (((13 - generation) * 3) + generation_blood_bonus), 10)
+	maxbloodpool = max(10 + generation_blood_bonus, 10)
 //TFN EDIT END
 
 /mob/living/ComponentInitialize()

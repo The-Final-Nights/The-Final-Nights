@@ -1,0 +1,5 @@
+author: "Stutternov"
+delete-after: True
+changes:
+  - balance: "Redid generations to be akin to their TT max-bloodpool counter parts."
+  - balance: "Chalice artifact now works on ghouls and kindred both."
