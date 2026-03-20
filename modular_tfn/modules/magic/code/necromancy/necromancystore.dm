@@ -118,4 +118,4 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_BELT
 	resistance_flags = FIRE_PROOF
-	is_iron = TRUE
+	is_iron = FALSE
