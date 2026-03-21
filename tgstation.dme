@@ -3848,7 +3848,6 @@
 #include "modular_tfn\modules\magic\code\_ritual.dm"
 #include "modular_tfn\modules\magic\code\pyramid.dm"
 #include "modular_tfn\modules\magic\code\necromancy\flameskull.dm"
-#include "modular_tfn\modules\magic\code\necromancy\haunting.dm"
 #include "modular_tfn\modules\magic\code\necromancy\necromancystore.dm"
 #include "modular_tfn\modules\magic\code\thaumaturgy\arcane_tome.dm"
 #include "modular_tfn\modules\magic\code\thaumaturgy\blood_of_potency_effect.dm"

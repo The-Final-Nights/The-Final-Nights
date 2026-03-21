@@ -7,7 +7,6 @@
 	word = "OR-IRI O FLAM-MEUM CERE-BRUM"
 	necrolevel = 3
 	sacrifices = list(/obj/item/corspestore/skull)
-	var/duration_length = 10 SECONDS
 
 /obj/necrorune/flameskull/complete()
 	new /obj/item/restraints/legcuffs/skull(loc)
@@ -21,6 +20,10 @@
 	throw_range = 5
 	icon = 'icons/obj/lavaland/artefacts.dmi'
 	icon_state = "legion_skull"
+	inhand_icon_state = "skull_helmet"
+	lefthand_file = 'icons/mob/inhands/clothing/hats_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/clothing/hats_righthand.dmi'
+	lefthand
 	force = 40
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = null
