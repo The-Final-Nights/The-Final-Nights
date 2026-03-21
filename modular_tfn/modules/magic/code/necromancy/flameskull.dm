@@ -24,7 +24,7 @@
 	lefthand_file = 'icons/mob/inhands/clothing/hats_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/clothing/hats_righthand.dmi'
 	lefthand
-	force = 35
+	force = 30
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = null
 	block_chance = 20
