@@ -109,8 +109,10 @@ GLOBAL_LIST_EMPTY(selectable_races)
 	var/punchdamagehigh = 10
 	///Base electrocution coefficient.  Basically a multiplier for damage from electrocutions.
 	var/meleemod = 1
+	// TFN EDIT START
 	///Base type of damage a mob does, this can range from sharp, pointy, to edged. (Claws? Edged. Spiked knuckles? Pointy. Etc.)
 	var/sharpness = SHARP_NONE
+	// TFN EDIT END
 	//For melee damage
 	var/siemens_coeff = 1
 	///What kind of damage overlays (if any) appear on our species when wounded? If this is "", does not add an overlay.
