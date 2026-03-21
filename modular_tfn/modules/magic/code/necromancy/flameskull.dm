@@ -18,7 +18,7 @@
 	desc = "Animated skull which activates once one steps within its range."
 	throw_speed = 1
 	throw_range = 5
-	icon = 'icons/obj/lavaland/artefacts.dmi'
+	icon = 'modular_tfn/modules/magic/code/necromancy/flameskull.dmi'
 	icon_state = "legion_skull"
 	inhand_icon_state = "skull_helmet"
 	lefthand_file = 'icons/mob/inhands/clothing/hats_lefthand.dmi'
@@ -37,9 +37,6 @@
 	bare_wound_bonus = 10
 	masquerade_violating = TRUE
 	damtype = CLONE
-
-/obj/item/restraints/legcuffs/beartrap/skull/update_icon_state()
-	return
 
 /obj/item/restraints/legcuffs/beartrap/skull/close_trap()
 	armed = FALSE
