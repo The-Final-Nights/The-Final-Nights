@@ -73,9 +73,6 @@
 	icon_state = "coin_[coinflip]"
 	pixel_x = base_pixel_x + rand(0, 16) - 8
 	pixel_y = base_pixel_y + rand(0, 8) - 8
-
-/obj/item/coin/oboli/Initialize(mapload)
-	. = ..()
 	AddComponent(/datum/component/selling, 300, "Oboli", TRUE, -1, 4)
 
 /obj/item/melee/vampirearms/knife/soulsteel
