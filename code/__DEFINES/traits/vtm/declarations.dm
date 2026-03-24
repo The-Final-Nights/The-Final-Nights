@@ -18,6 +18,7 @@
 #define TRAIT_POTENT_BLOOD		"potent_blood"
 #define TRAIT_CAN_EAT			"can_eat" // this is for kindred. not normal people. normal people do not need this flag.
 #define TRAIT_MESSY_EATER		"messy_eater"
+#define TRAIT_SABBATIST			"sabbatist"
 #define TRAIT_DEBTOR			"debtor"
 #define TRAIT_ANIMAL_REPULSION	"animal_repulsion"
 #define TRAIT_WYRMTAINTED		"wyrm_tainted"

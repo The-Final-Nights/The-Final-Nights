@@ -11,6 +11,8 @@
 	var/dryname = "dried blood"
 	var/drydesc = "Looks like it's been here a while. Eew."
 	var/drytime = 0
+	var/fade_time = 5 MINUTES
+	var/auto_cleanup_time = 10 MINUTES // this should be greater than the fade time
 
 /obj/effect/decal/cleanable/blood/Initialize(mapload, list/datum/disease/diseases)
 	. = ..()
@@ -30,7 +32,7 @@
 	return ..()
 
 /obj/effect/decal/cleanable/blood/proc/get_timer()
-	drytime = world.time + 15 SECONDS
+	drytime = world.time + 1 MINUTES // time before fresh blood becomes stale blood and changes color
 
 /obj/effect/decal/cleanable/blood/proc/start_drying()
 	get_timer()
@@ -49,9 +51,12 @@
 		if(istype(get_area(src), /area/vtm))
 			var/area/vtm/V = get_area(src)
 			if(V.upper)
-				animate(src, alpha = 0, time = 1200)
-				spawn(1200)
-					qdel(src)
+				alpha = 255
+				animate(src, alpha = 100, time = fade_time)
+				addtimer(CALLBACK(src, PROC_REF(blood_cleanup), src), auto_cleanup_time)
+
+/obj/effect/decal/cleanable/blood/proc/blood_cleanup(obj/effect/decal/cleanable/blood/B)
+	qdel(src)
 
 /obj/effect/decal/cleanable/blood/replace_decal(obj/effect/decal/cleanable/blood/C)
 	if(C)

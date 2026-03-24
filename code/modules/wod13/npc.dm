@@ -70,6 +70,9 @@
 	var/is_criminal = FALSE
 
 	var/list/drop_on_death_list = null
+	var/fire_danger_vision_distance = 7 // how far this NPC can see dangers like fire
+	var/blood_danger_vision_distance = 4 // how far this npc can see and avoid blood
+	var/can_be_spooked = TRUE // can this NPC be spooked by blood?
 
 
 
@@ -344,6 +347,40 @@
 		"Learn to drive!",
 		"You almost ran me over!",
 		"What the fuck?!"
+	)
+	var/list/blood_danger_phrases = list(
+		"Is that blood?!",
+		"Oh my god, is that...?",
+		"Gross!",
+		"What the fuck?",
+		"Man, that's gross.",
+		"Is that...?",
+		"Nope. I'm out of here!",
+		"Blood...? What the heck?",
+		"...What is that?",
+		"Oh. Oh no.",
+		"That's... a lot of blood.",
+		"I don't want to know.",
+		"Something bad happened here.",
+		"We should go.",
+		"Don't touch it.",
+		"That can't be good.",
+		"Hm. That's not right.",
+		"Wait...",
+		"That looks serious.",
+		"Just... keep moving.",
+		"...Did someone get hurt?",
+		"I'll pretend I didn't see that.",
+		"That's not my problem.",
+		"Maybe I should say something.",
+		"I'm just going to walk away.",
+		"That's... unsettling.",
+		"I don't feel well.",
+		"Someone should really clean that up.",
+		"I'm not looking... I'm not looking...",
+		"That's going to stain.",
+		"Oh god, the smell!",
+		"Let's not do this today.",
 	)
 
 	var/is_criminal = FALSE

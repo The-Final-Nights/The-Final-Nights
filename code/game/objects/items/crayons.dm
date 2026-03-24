@@ -1014,7 +1014,13 @@
 /obj/item/toy/crayon/spraycan/infinite
 	name = "infinite spraycan"
 	charges = INFINITE_CHARGES
-	desc = "Now with 30% more bluespace technology."
+	desc = "Now with 30% more can!"
+
+/obj/item/toy/crayon/spraycan/infinite/use_on(atom/target, mob/user, list/modifiers)
+	if(!user.client.prefs?.donator)
+		to_chat(user, span_notice("You must be a verified donator to use this item! If you have just donated, please run the ?verifydonator command in Discord and try again."))
+		return
+	. = ..()
 
 /obj/item/toy/crayon/spraycan/roboticist
 	name = "roboticist spraycan"

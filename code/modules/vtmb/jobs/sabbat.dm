@@ -38,8 +38,11 @@
 	for(var/obj/effect/landmark/start/S in GLOB.start_landmarks_list)
 		if(S.name == name)
 			landmarkslist += S
-	var/obj/effect/landmark/start/D = pick(landmarkslist)
-	H.forceMove(D.loc)
+	if(length(landmarkslist))
+		var/obj/effect/landmark/start/D = pick(landmarkslist)
+		H.forceMove(D.loc)
+	else
+		CRASH("Sabbat late party tried to place a sabbatist but no spawn landmarks exist!")
 
 /obj/effect/landmark/start/sabbatist
 	name = "Sabbatist"
@@ -62,6 +65,7 @@
 		add_antag_hud(ANTAG_HUD_REV, "rev", owner.current)
 	owner.special_role = src
 	owner.current.playsound_local(get_turf(owner.current), 'code/modules/wod13/sounds/evil_start.ogg', 100, FALSE, use_reverb = FALSE)
+	ADD_TRAIT(owner.current, TRAIT_SABBATIST, "late_party")
 	return ..()
 
 /datum/antagonist/sabbatist/on_removal()

@@ -88,7 +88,7 @@
 				face_atom(T)
 				step_to(src,T,0)
 				if(walktarget && !old_movement)
-					if(route_optimisation())
+					if(route_optimisation() && !less_danger)
 						forceMove(get_turf(walktarget))
 
 /mob/living/carbon/human/npc/proc/CreateWay(direction)
@@ -215,11 +215,21 @@
 	if(CheckMove())
 		return
 	var/fire_danger = FALSE
-	for(var/obj/effect/fire/F in range(7, src))
+	var/blood_danger = FALSE
+	for(var/obj/effect/fire/F in range(fire_danger_vision_distance, src))
 		if(F)
 			less_danger = F
 			fire_danger = TRUE
-	if(!fire_danger)
+	if(can_be_spooked && !staying) // can this npc be spooked by blood or guts? false for cops, guards, and anyone else who has staying set to TRUE like shopkeepers
+		for(var/obj/effect/decal/cleanable/blood/B in range(blood_danger_vision_distance, src)) // npcs should avoid blood pools if they see them
+			if(B)
+				less_danger = B
+				blood_danger = TRUE
+		for(var/obj/item/organ/O in range(blood_danger_vision_distance, src)) // npcs should avoid human organs if they see them, too
+			if(O)
+				less_danger = O
+				blood_danger = TRUE
+	if(!fire_danger && !blood_danger)
 		less_danger = null
 	if(!staying)
 		lifespan = lifespan+1
@@ -275,10 +285,13 @@
 				walktarget = ChoosePath()
 				set_combat_mode(FALSE)
 		else if(less_danger)
+			if(prob(5) && blood_danger)
+				RealisticSay(pick(socialrole.blood_danger_phrases))
+				point_at(less_danger)
 			var/reqsteps = round((SShumannpcpool.next_fire-world.time)/total_multiplicative_slowdown())
 			set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 			walk_away(src, less_danger, reqsteps, total_multiplicative_slowdown())
-			if(prob(25))
+			if(prob(25) && !blood_danger) // only scream if theres a fire, not if you just see blood
 				emote("scream")
 		else if(walktarget && !staying)
 			if(prob(25))
