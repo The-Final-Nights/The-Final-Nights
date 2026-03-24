@@ -1475,11 +1475,11 @@ GLOBAL_LIST_INIT(malk_hallucinations, list(
 		else
 			fakemob = target //ever been so lonely you had to haunt yourself?
 		if(fakemob)
-			delay += 1 SECONDS //tfn edit
+			delay += 1 SECONDS //TFN EDIT CHANGE - Original: delay = rand(20, 50)
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(to_chat), target, "<span class='deadsay'><b>DEAD: [fakemob.name]</b> says, \"[pick("rip","why did i just drop dead?","hey [target.first_name()]","git gud","you too?","is the AI rogue?",\
 				"i[prob(50)?" fucking":""] hate [pick("blood cult", "clock cult", "revenants", "this round","this","myself","admins","you")]")]\"</span>"), delay)
 
-	addtimer(CALLBACK(src, PROC_REF(cleanup)), delay + 2 SECONDS) //tfn edit
+	addtimer(CALLBACK(src, PROC_REF(cleanup)), delay + 2 SECONDS) //TFN EDIT CHANGE - Original: addtimer(CALLBACK(src, PROC_REF(cleanup)), delay + rand(70, 90))
 
 /datum/hallucination/death/proc/cleanup()
 	if (target)
