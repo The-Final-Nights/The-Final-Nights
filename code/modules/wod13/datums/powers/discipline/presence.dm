@@ -134,8 +134,8 @@
 	check_flags = DISC_CHECK_CAPABLE | DISC_CHECK_SPEAK
 	range = 7
 	multi_activate = FALSE
-	cooldown_length = 15 SECONDS
-	duration_length = 10 SECONDS
+	cooldown_length = 3 MINUTES
+	duration_length = 3 MINUTES
 	vitae_cost = 1
 	var/successes = 0
 	var/list/affected_targets = list()
@@ -173,7 +173,7 @@
 	for(var/i = 1; i <= min(targets_to_affect, length(potential_targets)); i++)
 		var/mob/living/carbon/target = potential_targets[i]
 		apply_presence_overlay(target)
-		to_chat(target, span_yellowteamradio("You feel extremely attracted to and persuaded by [owner]'s words, no matter what they're saying!"))
+		to_chat(target, span_yellowteamradio("[owner]'s words and bearing seem to have more weight, no matter what they are; whatever merit they have seems magnified."))
 		affected_targets += target
 
 	var/affected_count = length(affected_targets)
@@ -249,14 +249,20 @@
 	duration_length = 5 SECONDS
 	vitae_cost = 1
 	var/successes = 0
+	var/list/botched_entrancement = list()
 
 /datum/discipline_power/presence/entrancement/pre_activation_checks(mob/living/target)
 	if(!presence_hearing_check(owner, target))
 		return FALSE
-
+	if (target in botched_entrancement)
+		to_chat(owner, span_warning("Your previous failed attempt has made [target] resistant to your Entrancement for the rest of the night."))
+		return FALSE
 	successes = presence_check(owner, target, owner.st_get_stat(STAT_APPEARANCE) + owner.st_get_stat(STAT_EMPATHY))
 	if(successes > 0)
 		return TRUE
+	else
+		botched_entrancement += target
+		to_chat(owner, span_warning("Your Entrancement attempt has failed. [target] is now resistant to your Entrancement for the rest of the night."))
 
 	do_cooldown(cooldown_length)
 	return FALSE
@@ -270,8 +276,8 @@
 	log_combat(owner, target, "Used Presence Entrancement")
 
 	apply_presence_overlay(target, successes * 1 INGAME_HOURS)
-	to_chat(target, span_hypnophrase("You find yourself becoming completely entraced by [owner]. You are now their willing servant."))
-	to_chat(target, span_info("You are now the willing servant of [owner]. You will seek to please them and fulfill their every desire, but this desire will fade soon."))
+	to_chat(target, span_hypnophrase("You find yourself becoming completely entranced by [owner]. They are closely dear to you."))
+	to_chat(target, span_info("[owner] is earnestly dear to you suddenly and their needs and desires are something to be fulfilled. Though you remain fully yourself, you would take reasonable risks to your wellbeing to do so."))
 	addtimer(CALLBACK(src, PROC_REF(end_entrancement), target), successes * 1 INGAME_HOURS) // might be alot considering 5 successes is 5 ingame hours which is... most of a round.
 
 /datum/discipline_power/presence/entrancement/proc/end_entrancement(mob/living/carbon/human/target)
@@ -295,6 +301,7 @@
 	vitae_cost = 1
 	var/successes = 0
 	var/mob/living/carbon/human/summon_target
+	var/list/botched_summon = list()
 
 /datum/discipline_power/presence/summon/pre_activation_checks(mob/living/target)
 	var/summon_target_name = tgui_input_text(owner, "Summon Target:", "Summon Target")
@@ -310,12 +317,17 @@
 	if(!summon_target)
 		to_chat(owner, span_warning("You cannot sense anyone by that name."))
 		return FALSE
-
+	if (target in botched_summon)
+		to_chat(owner, span_warning("Your previous failed attempt has made [target] resistant to your Summon for the rest of the night."))
+		return FALSE
 	//this ability has a difficulty of 4 or 5 or something for people the summoner has met, and 8 for those they've only met briefly.
 	//i thought that was too low and the ability for the misuse of this disc caused me to raise it to 7 difficulty
 	successes = presence_check(owner, summon_target, owner.st_get_stat(STAT_CHARISMA) + owner.st_get_stat(STAT_SUBTERFUGE), 7)
 	if(successes > 0)
 		return TRUE
+	else
+		botched_summon += target
+		to_chat(owner, span_warning("Your Summon attempt has failed. [target] is now resistant to your Summon for the rest of the night."))
 
 	do_cooldown(cooldown_length)
 	return FALSE
@@ -330,7 +342,9 @@
 
 	var/turf/owner_turf = get_turf(owner)
 	var/location_info = "[get_area_name(owner_turf)], X:[owner_turf.x] Y:[owner_turf.y] Z:[owner_turf.z]"
-	to_chat(summon_target, span_yellowteamradio("[owner] is summoning you to their location. [owner] is currently at [location_info]"))
+	var/turf/target_turf = get_turf(target)
+	var/start_location = "[get_area_name(target_turf)], X:[target_turf.x] Y:[target_turf.y] Z:[target_turf.z]"
+	to_chat(summon_target, span_yellowteamradio("[owner] is summoning you to their location. [owner] is currently at [location_info]. You are at [start_location]."))
 
 	//v20 presence -> 'summon' section for this flavortext
 	var/list/flavor_texts = list(
@@ -381,11 +395,9 @@
 		apply_presence_overlay(hearer, 3 MINUTES)
 		affected_targets[hearer] = hearer_successes
 
-		to_chat(hearer, span_hypnophrase("You find yourself completely submitting to the Majesty of [owner]. Their every word is your utmost priority, every frown of displeasure crushing your soul. You find yourself humbling yourself entirely in their overwhelming presence."))
-
+		to_chat(hearer, span_hypnophrase("The weight of [owner]'s Majesty descends upon you. Whatever their decree, it must be done. Do not allow yourself - or any who would dare - to defy them."))
 		if(hearer_successes > 0)
-			to_chat(hearer, span_info("Despite the overwhelming presence, your will allows you to make [hearer_successes] contradictory action\s until youre allowed to leave [owner]'s company."))
-
+			to_chat(hearer, span_info("Though you could never hurt [owner], you find it in yourself to speak against them, even though each word brings shame"))
 	var/total_affected = length(affected_targets)
 	to_chat(owner, span_warning(total_affected > 0 ? "Your Majesty overwhelms [total_affected] individual\s in your presence!" : "No one is present to witness your Majesty."))
 
