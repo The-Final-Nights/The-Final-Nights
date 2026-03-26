@@ -28,7 +28,7 @@
 	jobtype = /datum/job/vamp/citizen
 	l_pocket = /obj/item/vamp/phone
 	r_pocket = /obj/item/vamp/keys/strip
-	id = /obj/item/cockclock
+	id = /obj/item/card/id/club
 	backpack_contents = list(/obj/item/passport=1, /obj/item/flashlight=1, /obj/item/vamp/creditcard=1)
 
 /datum/outfit/job/strip/pre_equip(mob/living/carbon/human/H)
@@ -43,3 +43,33 @@
 /obj/effect/landmark/start/strip
 	name = "Strip"
 	icon_state = "Assistant"
+
+/obj/item/card/id/club
+	name = "employee ID"
+	id_type_name = "employee badge"
+	desc = "An employee ID card. This one is for the local strip club."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id7_regent" // got dat gold outline
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon_state = "id10"
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "liaison_badge"
+	registered_name_is_public = FALSE
+
+/obj/item/card/id/club/manager
+	name = "employee ID"
+	id_type_name = "employee badge"
+	desc = "An employee ID card. This one is for the manager of the strip club."
+	icon = 'code/modules/wod13/items.dmi'
+	icon_state = "id7_regent" // got dat gold outline
+	inhand_icon_state = "card-id"
+	lefthand_file = 'icons/mob/inhands/equipment/idcards_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/equipment/idcards_righthand.dmi'
+	onflooricon = 'code/modules/wod13/onfloor.dmi'
+	onflooricon_state = "id10"
+	worn_icon = 'code/modules/wod13/worn.dmi'
+	worn_icon_state = "liaison_badge"
+	registered_name_is_public = FALSE
