@@ -28,25 +28,9 @@
 /datum/discipline_power/presence/proc/presence_check(mob/living/carbon/human/owner, mob/living/target, owner_stat, difficulty)
 	if(!ishuman(target))
 		return 0
-
-	if(HAS_TRAIT(target, TRAIT_PRESENCE_IMMUNE))
-		to_chat(owner, span_warning("A presence attempt has botched against this person and they may no longer have Presence used on them for the rest of the night."))
-		return 0
-
 	//is the difficulty pre-defined? if not, its probably their total willpower.
 	var/theirpower = difficulty || target.st_get_stat(STAT_PERMANENT_WILLPOWER)
-
 	var/successes = SSroll.storyteller_roll(owner_stat, difficulty = theirpower, mobs_to_show_output = owner, numerical = TRUE)
-
-	if((owner.generation - 3) >= target.generation)
-		return 0
-
-	//botch
-	if(successes < 0)
-		ADD_TRAIT(target, TRAIT_PRESENCE_IMMUNE, TRAIT_GENERIC)
-		to_chat(owner, span_warning("A presence attempt has botched against this person and they may no longer have Presence used on them for the rest of the night."))
-		return 0
-
 	//number of successes is rather critical for the efficacy of the power
 	return successes
 
