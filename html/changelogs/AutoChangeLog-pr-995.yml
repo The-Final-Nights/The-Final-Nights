@@ -1,5 +1,0 @@
-author: "LucifersCoils"
-delete-after: True
-changes:
-  - rscadd: "Caitiff may now access the La Famiglia role"
-  - rscdel: "Removed all clans' access to La Famiglia"

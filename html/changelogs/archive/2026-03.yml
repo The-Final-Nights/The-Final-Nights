@@ -48,3 +48,7 @@
   Stutternov:
   - balance: Redid generations to be akin to their TT max-bloodpool counter parts.
   - balance: Chalice artifact now works on ghouls and kindred both.
+2026-03-30:
+  LucifersCoils:
+  - rscadd: Caitiff may now access the La Famiglia role
+  - rscdel: Removed all clans' access to La Famiglia
