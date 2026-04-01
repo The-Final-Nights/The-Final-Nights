@@ -696,13 +696,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		qdel(src)
 		return
 	qdel(query_get_player_age_verified)
-	var/redirecturl = CONFIG_GET(string/redirecturl)
-	if(redirecturl && !connectiontopic_a["redirect"])
-		var/list/direct_address = redirecturl
-		var/rebase_playtest = "The Rebase Playtest"
-		to_chat(src, "<span class='notice'>Sending you to [rebase_playtest ? rebase_playtest : direct_address].</span>")
-		winset(src, null, "command=.options")
-		src << link("[direct_address]?redirect=1")
 	var/datum/db_query/query_get_player_donator = SSdbcore.NewQuery(
 		"SELECT donator FROM [format_table_name("player")] WHERE ckey = :ckey AND donator = 1",
 		list("ckey" = src.ckey)
@@ -724,6 +717,12 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(new_player)
 		player_age = -1
 	. = player_age
+	// TFN EDIT START
+	var/redirecturl = CONFIG_GET(string/redirecturl)
+	if(redirecturl && !connectiontopic_a["redirect"])
+		var/direct_address = redirecturl
+		to_chat(src, "<span class='notice'>The Rebase awaits, vampire... <a href=\"[direct_address]?redirect=1\">Click Here to connect!</a></span>")
+	// TFN EDIT END
 
 /client/proc/findJoinDate()
 	var/list/http = world.Export("http://byond.com/members/[ckey]?format=text")
